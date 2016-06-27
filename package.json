@@ -1,7 +1,7 @@
 {
-  "name": "angularframeworkfrontend",
+  "name": "travelibro",
   "version": "0.0.1",
-  "description": "AngularFrameworkFrontend",
+  "description": "TraveLibro",
   "main": "gulpfile.js",
   "dependencies": {
     "crypto-js": "^3.1.6",
