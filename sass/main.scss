@@ -5,14 +5,30 @@
 @import "../bower_components/font-awesome/css/font-awesome.min.css";
 @import "../bower_components/fancyBox/source/jquery.fancybox.css";
 /* Bootstrap Variables Goes Here */
-$brand-primary: #0d9dff !default;
-$brand-success: #84ce3c !default;
-$brand-warning: #ffec39 !default;
-$brand-danger: #fc483f !default;
-$brand-info: #000072 !default;
+$brand-dark-blue: #2c3757;
+$brand-blue: #2d3655;
+$brand-dark-pink: #f2675b;
+$brand-pink: #ff6759;
+$brand-dark-cyan: #57d3c7;
+$brand-cyan: #11d3cb;
+$brand-light-cyan: #91e2d6;
+$brand-grey: #b2b2b2;
+$brand-light-grey: #e3e3e3;
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
-body {
-  padding-top: 70px;
+@mixin placeholder {
+  $placeholders: ":-webkit-input" ":-moz" "-moz" "-ms-input";
+  @each $placeholder in $placeholders {
+    &:#{$placeholder}-placeholder {
+      @content;
+    }
+  }
+}
+// body {
+//   padding-top: 70px;
+// }
+// over-ride
+h1,h2,h3,h4,h5,h6,button,img,a,span,p,ul,ol,figure,input,select,textarea,label:focus {
+  outline: none;
 }
 img.loading {
   text-align: center;
@@ -34,6 +50,9 @@ a, .btn {
   cursor: pointer;
   @include transition(all ease 300ms);
 }
+a:hover {
+  text-decoration: none;
+}
 //bootstrap forms
 .input-lg,
 .input-group-lg > .form-control,
@@ -50,5 +69,208 @@ a, .btn {
   @include box-shadow(none);
 }
 //bootstrap forms
+// classes
+textarea {
+  resize: none;
+}
+.pointer {
+  cursor: pointer;
+}
+.block {
+  display: block;
+}
+.inline-block {
+  display: inline-block;
+}
+.m-center {
+  margin: 0 auto;
+}
+.m-clear {
+  margin: 0;
+}
+.relate {
+  position: relative;
+}
+.get-center {
+  @include position(absolute, 50% null null 50%);
+  @include transform(translate(-50%,-50%));
+}
+.full-width {
+  width: 100%;
+}
+.row-flex {
+  @include display(flex);
+}
+.col-flex {
+  @include flex(1);
+}
+.font-lighter {
+  font-weight: 100;
+}
+.font-light {
+  font-weight: 300;
+}
+.font-medium {
+  font-weight: 500;
+}
+.font-bold {
+  font-weight: 700;
+}
+.v-top {
+  vertical-align: top;
+}
+.v-mid {
+  vertical-align: middle;
+}
+.mt5 {
+  margin-top: 5px;
+}
+.mr5 {
+  margin-right: 5px;
+}
+.mb5 {
+  margin-bottom: 5px;
+}
+.ml5 {
+  margin-left: 5px;
+}
+.mt10 {
+  margin-top: 10px;
+}
+.mr10 {
+  margin-right: 10px;
+}
+.mb10 {
+  margin-bottom: 10px;
+}
+.ml10 {
+  margin-left: 10px;
+}
+.mt20 {
+  margin-top: 20px;
+}
+.mr20 {
+  margin-right: 20px;
+}
+.mb20 {
+  margin-bottom: 20px;
+}
+.ml20 {
+  margin-left: 10px;
+}
+.pad-zero {
+  padding: 0;
+}
+.col-pad-zero {
+  padding: 0;
+}
+.pt10 {
+  padding-top: 10px;
+}
+.pr10 {
+  padding-right: 10px;
+}
+.pb10 {
+  padding-bottom: 10px;
+}
+.pl10 {
+  padding-left: 10px;
+}
+.color-white {
+  color: #fff;
+}
+.fz12 {
+  font-size: 12px;
+}
+.fz13 {
+  font-size: 13px;
+}
+// end classes
+// btn classes
+// end btn classes
+// bg classes
+.bg-white {
+  background-color: #fff;
+}
+.bg-dark-blue {
+  background-color: $brand-dark-blue;
+}
+.bg-blue {
+  background-color: $brand-blue;
+}
+.bg-dark-pink {
+  background-color: $brand-dark-pink;
+}
+.bg-pink {
+  background-color: $brand-pink;
+}
+.bg-dark-cyan {
+  background-color: $brand-dark-cyan;
+}
+.bg-cyan {
+  background-color: $brand-cyan;
+}
+.bg-light-cyan {
+  background-color: $brand-light-cyan;
+}
+// end bg classes
+// btn classes
+.btn-dark-pink {
+  @include button-variant( white, $brand-dark-pink, $brand-dark-blue);
+}
+.btn-blue-outline {
+  @include button-variant( $brand-blue, white, $brand-blue);
+}
+// end btn classes
 /* Start writing sass here */
+.content {
+  min-height: 550px;
+  background: url('../img/back-content.jpg') no-repeat;
+}
+// header
+header {
+  padding: 15px 0px 5px;
+}
+.navbar {
+  border: none;
+  border-radius: 0;
+  margin: 0;
+}
+.hamburger {
+  margin: 17px 0;
+  span {
+    @include size(30px,4px);
+    margin-bottom: 4px;
+    display: block;
+    background-color: $brand-pink;
+  }
+}
+.search {
+  margin: 10px;
+  input {
+    width: 355px;
+    border-top: none;
+    border-right: none;
+    border-bottom: 2px solid #17213e;
+    border-left: none;
+    background-color: transparent;
+    color: #fff;
+    font-size: 13px;
+    &:focus {
+      outline: none;
+      border-color: #17213e;
+    }
+  }
+}
+.user-detail {
+  .list-inline {
+    margin: 8px 0px 0px;
+  }
+  .list-inline > li {
+    padding: 0 15px;
+    font-size: 16px;
+  }
+  a { color: #80879a; }
+}
+// end header
 @import "fancybox-override";

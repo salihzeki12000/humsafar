@@ -1,19 +1,66 @@
-<header>
-   <nav class="navbar navbar-default navbar-fixed-top">
+<header class="bg-dark-blue">
+  <nav class="navbar">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" ui-sref="home"><img src="img/logo.png" alt="logo" width="20"> </a>
+      <!-- <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button> -->
+      <div class="row">
+        <div class="col-md-5 col-sm-1">
+          <div class="header-left">
+            <div class="hamburger pointer inline-block">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </div>
+            <div class="search inline-block v-top">
+              <form action="">
+                <input type="text" class="form-control" placeholder="Search people, destinations, itineraries, agents and tags">
+              </form>
+            </div>
+          </div>
         </div>
-
-        <div class="collapse navbar-collapse" id="nav-collapse">
-               <div ng-include="template.menu" class="template menu"></div>
+        <div class="col-md-2 col-sm-6">
+          <h1 class="text-center logo m-clear"><a href=""><img src="img/logo.png" alt="" class="img-responsive m-center"></a></h1>
         </div>
+        <div class="col-md-5 col-sm-5">
+          <div class="user-detail text-right">
+            <ul class="list-inline">
+              <li>
+                <a href="">
+                  <div class="user-img inline-block v-mid">
+                  <img src="img/profile.jpg" alt="" width="40" class="img-responsive">
+                </div>
+                <span class="color-white ml10 fz13">Activity</span>
+              </a>
+              </li>
+              <li>
+                <a href="">
+                  <i class="fa fa-envelope"></i>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <i class="fa fa-bell"></i>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <i class="fa fa-cog"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- <a class="navbar-brand" ui-sref="home"><img src="img/logo.png" alt="logo" width="20"> </a> -->
     </div>
-</nav>
+    </div>
+    <!-- <div class="collapse navbar-collapse" id="nav-collapse">
+           <div ng-include="template.menu" class="template menu"></div>
+    </div> -->
+  </nav>
 </header>
