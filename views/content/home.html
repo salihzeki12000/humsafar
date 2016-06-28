@@ -2,9 +2,9 @@
   <div class="login-process">
     <div class="row">
       <div class="col-md-offset-3 col-md-6">
-        <div class="verification">
+        <!-- <div class="verification">
           <div class="text-center">
-            <h3 class="">Verification</h3>
+            <h3 class="color-blue">Verification</h3>
             <p>A 4-digit Verification code has been sent to your registered email address.</p>
             <div class="put-code">
               <form action="">
@@ -17,95 +17,105 @@
             <p>If you haven’t received a verification code yet, <span>Click here to <a href="">Re-send</a></span></p>
             <button class="btn btn-blue-outline">Submit</button>
           </div>
-        </div>
-        <div class="verification-complete">
-          <div class="text-center">
-            <h3 class="">Verification</h3>
-            <!-- <img src="img/verified.png" alt="" class="img-responsive"> -->
-            <p>Your account has been successfully verified</p>
-            <div class="button-panel clearfix">
-              <button class="btn btn-blue-outline pull-right">Next</button>
-            </div>
-          </div>
-        </div>
-        <div class="nationality">
-          <div class="text-center">
-            <h3 class="">Nationality</h3>
-            <div class="custom-select">
-              <input type="Search" placeholder="Search">
-              <ul>
-                <li>
-                  <a href="">
-                    <div class="">
-                      <img src="" alt="" class="img-responsive">
-                      <span>Afghanistan</span>
-                      <div class="nation-select">
-                        <input type="checkbox">
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="button-panel clearfix">
-              <button class="bth btn-blue-outline pull-left">Previous</button>
-              <button class="btn btn-blue-outline pull-right">Next</button>
-            </div>
-          </div>
-        </div>
-        <div class="city">
-          <div class="text-center">
-            <h3 class="">Where Do You Live?</h3>
-            <div class="custom-select">
-              <input type="text" placeholder="City">
-              <ul>
-                <li>
-                  <a href="">
-                    <div class="">
-                      <img src="" alt="" class="img-responsive">
-                      <span>Afghanistan</span>
-                      <div class="nation-select">
-                        <input type="checkbox">
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="button-panel clearfix">
-              <button class="bth btn-blue-outline pull-left">Previous</button>
-              <button class="btn btn-blue-outline pull-right">Next</button>
-            </div>
-          </div>
-        </div>
-        <div class="gender">
-          <div class="text-center">
-            <h3 class="">Gender</h3>
-            <div class="male">
-              <!-- <img src="" alt="" class="img-responsive"> -->
-            </div>
-            <div class="female">
-              <!-- <img src="" alt="" class="img-responsive"> -->
-            </div>
-            <div class="button-panel clearfix">
-              <button class="bth btn-blue-outline pull-left">Previous</button>
-              <button class="btn btn-blue-outline pull-right">Next</button>
-            </div>
-          </div>
-        </div>
-        <div class="upload-profile">
-          <div class="text-center">
-            <h3 class="">Upload Profile Photo</h3>
-            <div class="">
-              <img src="" alt="" class="img-responsive">
-              <div class="upload-btn">
-                <button class="btn btn-primary">Select a photo from your computer</button>
-                <button class="btn btn-primary">Web Camera</button>
+        </div> -->
+        <div class="bg-white" ng-init="goNext=1">
+          <div class="verification-complete" ng-show="goNext==1">
+            <div class="text-center">
+              <h3 class="color-blue avenir-black">Verification</h3>
+              <img src="img/verified.png" alt="Verified" class="mt20 mb20 img-responsive m-center">
+              <p class="color-blue avenir-roman">Your account has been <span class="block">successfully verified</span></p>
+              <div class="button-panel clearfix">
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=2">Next</button>
               </div>
             </div>
-            <div class="button-panel clearfix">
-              <button class="bth btn-blue-outline pull-left">Previous</button>
-              <button class="btn btn-blue-outline pull-right">Done</button>
+          </div>
+          <div class="nationality" ng-show="goNext==2">
+            <div class="text-center">
+              <h3 class="color-blue avenir-black">Nationality</h3>
+              <div class="select-your-nation">
+                <input type="Search" class="form-control avenir-roman" placeholder="Search" ng-click="showNation = (showNation == true)?false:true;">
+                <ul class="avenir-roman bg-dark-blue" ng-show="showNation">
+                  <li ng-repeat="nation in nationality track by $index">
+                      <div class="nation-select relate">
+                      <input type="checkbox" id="{{nation.name}}" ng-model="nation[$index]" />
+                      <label for="{{nation.name}}">
+                        <img ng-src="{{nation.img}}" alt="" class="img-responsive inline-block mr10">
+                        <span class="color-white">{{nation.name}}</span>
+                      </label>
+                      </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="button-panel clearfix">
+                <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=1">Previous</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=3">Next</button>
+              </div>
+            </div>
+          </div>
+          <div class="city" ng-show="goNext==3">
+            <div class="text-center">
+              <h3 class="color-blue">Where Do You Live?</h3>
+              <div class="custom-select">
+                <input type="text" placeholder="City">
+                <ul>
+                  <li>
+                    <a href="">
+                      <div class="">
+                        <img src="" alt="" class="img-responsive">
+                        <span>Afghanistan</span>
+                        <div class="nation-select">
+                          <input type="checkbox">
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="button-panel clearfix">
+                <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=2">Previous</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=4">Next</button>
+              </div>
+            </div>
+          </div>
+          <div class="gender" ng-show="goNext==4">
+            <div class="text-center">
+              <h3 class="color-blue">Gender</h3>
+              <div class="male">
+                <!-- <img src="" alt="" class="img-responsive"> -->
+              </div>
+              <div class="female">
+                <!-- <img src="" alt="" class="img-responsive"> -->
+              </div>
+              <div class="button-panel clearfix">
+                <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext = 3">Previous</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext = 5">Next</button>
+              </div>
+            </div>
+          </div>
+          <div class="upload-profile" ng-show="goNext==5">
+            <div class="text-center">
+              <h3 class="color-blue avenir-black">Upload Profile Photo</h3>
+              <div class="cropArea" ng-show="showImage">
+                <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+              </div>
+              <div class="upload-section" ng-hide="showImage">
+                <img src="img/upload-icon.jpg" alt="" class="m-center img-responsive">
+                <p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
+                <span class="block mt10 color-grey avenir-roman">-or-</span>
+                <div class="upload-btn">
+                  <div class="relate inline-block mr10" >
+                    <button class="btn btn-dark-blue pointer" >Select a photo from your computer input</button>
+                    <input type="file" id="fileInput" class="getfile pointer" />
+                  </div>
+                  <div class="relate inline-block ml10">
+                    <button class="btn btn-dark-blue pointer">Web Camera</button>
+                  </div>
+                </div>
+              </div>
+              <div class="button-panel clearfix">
+                <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
+                <button class="btn btn-blue-outline btn-more pull-right">Done</button>
+              </div>
             </div>
           </div>
         </div>

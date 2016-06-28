@@ -4,6 +4,7 @@
 @import "../bower_components/flexslider/flexslider.css";
 @import "../bower_components/font-awesome/css/font-awesome.min.css";
 @import "../bower_components/fancyBox/source/jquery.fancybox.css";
+@import "../bower_components/ng-img-crop/compile/minified/ng-img-crop.css";
 /* Bootstrap Variables Goes Here */
 $brand-dark-blue: #2c3757;
 $brand-blue: #2d3655;
@@ -28,7 +29,7 @@ $brand-light-grey: #e3e3e3;
 // }
 // over-ride
 h1,h2,h3,h4,h5,h6,button,img,a,span,p,ul,ol,figure,input,select,textarea,label:focus {
-  outline: none;
+  outline: none !important;
 }
 img.loading {
   text-align: center;
@@ -69,7 +70,55 @@ a:hover {
   @include box-shadow(none);
 }
 //bootstrap forms
+// fonts
+@font-face {
+  font-family: "AvenirLTStd-Black";
+  src: url('../fonts/AvenirLTStd-Black.otf');
+}
+@font-face {
+  font-family: "AvenirLTStd-Heavy";
+  src: url('../fonts/AvenirLTStd-Heavy.otf');
+}
+@font-face {
+  font-family: "AvenirLTStd-Light";
+  src: url('../fonts/AvenirLTStd-Light.otf');
+}
+@font-face {
+  font-family: "AvenirLTStd-Medium";
+  src: url('../fonts/AvenirLTStd-Medium.otf');
+}
+@font-face {
+  font-family: "AvenirLTStd-Roman";
+  src: url('../fonts/AvenirLTStd-Roman.otf');
+}
+@font-face {
+  font-family: "djb";
+  src: url('../fonts/djb.ttf');
+}
+@font-face {
+  font-family: "JennaSue";
+  src: url('../fonts/JennaSue.ttf');
+}
+// end fonts
 // classes
+.avenir-black {
+  font-family: "AvenirLTStd-Black";
+}
+.avenir-heavy {
+  font-family: "AvenirLTStd-Heavy";
+}
+.avenir-heavy {
+  font-family: "AvenirLTStd-Heavy";
+}
+.avenir-light {
+  font-family: "AvenirLTStd-Light";
+}
+.avenir-medium {
+  font-family: "AvenirLTStd-Medium";
+}
+.avenir-roman {
+  font-family: "AvenirLTStd-Roman";
+}
 textarea {
   resize: none;
 }
@@ -186,6 +235,36 @@ textarea {
   font-size: 13px;
 }
 // end classes
+.color-dark-blue {
+  color: $brand-dark-blue;
+}
+.color-blue {
+  color: $brand-blue;
+}
+.color-dark-pink {
+  color: $brand-dark-pink;
+}
+.color-pink {
+  color: $brand-pink;
+}
+.color-dark-cyan {
+  color: $brand-dark-cyan;
+}
+.color-cyan {
+  color: $brand-cyan;
+}
+.color-light-cyan {
+  color: $brand-light-cyan;
+}
+.color-grey {
+  color: $brand-grey;
+}
+.color-light-grey {
+  color: $brand-light-grey;
+}
+.btn-more {
+  padding: 8px 34px;
+}
 // btn classes
 // end btn classes
 // bg classes
@@ -215,11 +294,24 @@ textarea {
 }
 // end bg classes
 // btn classes
+.btn {
+  border-radius: 6px;
+  @include transition(all 300ms linear);
+  &:hover {
+    @include transition(all 300ms linear);
+  }
+}
 .btn-dark-pink {
   @include button-variant( white, $brand-dark-pink, $brand-dark-blue);
 }
+.btn-dark-blue {
+  @include button-variant( white, $brand-dark-blue, $brand-dark-blue);
+}
 .btn-blue-outline {
   @include button-variant( $brand-blue, white, $brand-blue);
+  &:hover {
+    @include button-variant ( white, $brand-dark-pink, $brand-blue);
+  }
 }
 // end btn classes
 /* Start writing sass here */
@@ -273,4 +365,97 @@ header {
   a { color: #80879a; }
 }
 // end header
+// Set Profile process
+.verification-complete, .nationality, .city, .gender, .upload-profile {
+  padding: 20px;
+}
+.button-panel {
+  margin-top: 80px;
+}
+// nation tab
+.nation-select {
+  [type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  width: 100%;
+  position: relative;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: '';
+  @include square(20px);
+  position: absolute;
+  right: 0;
+  top: 2px;
+  background-color: #d1d1d1;
+  color: #f6f6f6;
+  @include transition(all 300ms linear);
+}
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: '\f00c';
+  font: normal normal normal 14px/1 FontAwesome;
+  position: absolute;
+  top: 6px;
+  right: 2px;
+  font-size: 15px;
+  line-height: 0.8;
+  @include transition(all 300ms linear);
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+[type="checkbox"]:checked + label:before {
+  background-color: $brand-pink;
+  color: #fff;
+  @include transition(all 300ms linear);
+}
+}
+.select-your-nation {
+  ul {
+    padding: 10px 0 0;
+    list-style-type: none;
+    text-align: left;
+    li {
+      padding: 10px;
+      border-bottom: 2px solid $brand-dark-blue;
+      color: #fff;
+      span { font-size: 16px; }
+      &:nth-child(even){
+        background-color: #969bab;
+      }
+      &:nth-child(odd) {
+        background-color: #565f79;
+      }
+    }
+  }
+}
+// nation tab end
+.cropArea {
+  @include size(100%,350px);
+  overflow: hidden;
+}
+.getfile {
+  @include square(100%);
+  position: absolute;
+  top: 0;
+  opacity: 0;
+}
+.upload-btn {
+  margin: 15px 0;
+}
+
+// end set Profile process
+
 @import "fancybox-override";
