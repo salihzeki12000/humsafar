@@ -25,10 +25,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   }, {
     img: "img/flag.png",
     name: "Angola"
-  }, {
+  },
+   {
     img: "img/flag.png",
     name: "Antigua and Barbuda"
-  }];
+  },
+   {
+    img: "img/flag.png",
+    name: "Argentina"
+  },
+   {
+    img: "img/flag.png",
+    name: "Armenia"
+  },
+   {
+    img: "img/flag.png",
+    name: "Australia"
+  },
+   {
+    img: "img/flag.png",
+    name: "Austria"
+  }
+];
   $scope.myImage = '';
   $scope.myCroppedImage = '';
   $scope.showImage = false;

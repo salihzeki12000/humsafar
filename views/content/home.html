@@ -33,11 +33,13 @@
             <div class="text-center">
               <h3 class="color-blue avenir-black">Nationality</h3>
               <div class="select-your-nation">
-                <input type="Search" class="form-control avenir-roman" placeholder="Search" ng-click="showNation = (showNation == true)?false:true;">
+                <div class="search-nation">
+                  <input type="text" class="form-control avenir-roman" placeholder="Search" ng-click="showNation = (showNation == true)?false:true;" ng-model="searchNation">
+                </div>
                 <ul class="avenir-roman bg-dark-blue" ng-show="showNation">
-                  <li ng-repeat="nation in nationality track by $index">
+                  <li ng-repeat="nation in nationality | filter:searchNation track by $index ">
                       <div class="nation-select relate">
-                      <input type="checkbox" id="{{nation.name}}" ng-model="nation[$index]" />
+                      <input type="radio" id="{{nation.name}}" name="nation" />
                       <label for="{{nation.name}}">
                         <img ng-src="{{nation.img}}" alt="" class="img-responsive inline-block mr10">
                         <span class="color-white">{{nation.name}}</span>
@@ -54,20 +56,19 @@
           </div>
           <div class="city" ng-show="goNext==3">
             <div class="text-center">
-              <h3 class="color-blue">Where Do You Live?</h3>
-              <div class="custom-select">
-                <input type="text" placeholder="City">
-                <ul>
-                  <li>
-                    <a href="">
-                      <div class="">
-                        <img src="" alt="" class="img-responsive">
-                        <span>Afghanistan</span>
-                        <div class="nation-select">
-                          <input type="checkbox">
-                        </div>
+              <h3 class="color-blue avenir-black">Where Do You Live?</h3>
+              <div class="select-your-nation select-your-city">
+                <div class="search-nation select-city">
+                  <input type="text" class="form-control avenir-roman" placeholder="City" ng-click="showCity = (showCity == true)?false:true;" ng-model="searchCity">
+                </div>
+                <ul class="avenir-roman bg-dark-blue" ng-show="showCity">
+                  <li ng-repeat="nation in nationality | filter:searchCity track by $index ">
+                      <div class="nation-select relate">
+                      <input type="radio" id="city{{nation.name}}" name="nation" />
+                      <label for="city{{nation.name}}">
+                        <span class="color-white">{{nation.name}}</span>
+                      </label>
                       </div>
-                    </a>
                   </li>
                 </ul>
               </div>
@@ -78,13 +79,15 @@
             </div>
           </div>
           <div class="gender" ng-show="goNext==4">
-            <div class="text-center">
-              <h3 class="color-blue">Gender</h3>
-              <div class="male">
-                <!-- <img src="" alt="" class="img-responsive"> -->
+            <div class="text-center" ng-init="gender=''">
+              <h3 class="color-blue avenir-black">Gender</h3>
+              <div class="male inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==1}" ng-click="gender=1">
+                <img src="img/male.png" alt="Gender" class="img-responsive">
+                <span class="color-blue avenir-black">He</span>
               </div>
-              <div class="female">
-                <!-- <img src="" alt="" class="img-responsive"> -->
+              <div class="female inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==2}" ng-click="gender=2">
+                <img src="img/female.png" alt="Gender" class="img-responsive">
+                <span class="color-blue avenir-black">She</span>
               </div>
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext = 3">Previous</button>

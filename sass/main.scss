@@ -321,7 +321,7 @@ textarea {
 }
 // header
 header {
-  padding: 15px 0px 5px;
+  padding: 10px 0px 0px;
 }
 .navbar {
   border: none;
@@ -329,16 +329,16 @@ header {
   margin: 0;
 }
 .hamburger {
-  margin: 17px 0;
+  margin: 10px 0;
   span {
-    @include size(30px,4px);
+    @include size(22px,3px);
     margin-bottom: 4px;
     display: block;
     background-color: $brand-pink;
   }
 }
 .search {
-  margin: 10px;
+  margin: 2px 10px;
   input {
     width: 355px;
     border-top: none;
@@ -356,7 +356,7 @@ header {
 }
 .user-detail {
   .list-inline {
-    margin: 8px 0px 0px;
+    margin: 0;
   }
   .list-inline > li {
     padding: 0 15px;
@@ -367,29 +367,34 @@ header {
 // end header
 // Set Profile process
 .verification-complete, .nationality, .city, .gender, .upload-profile {
-  padding: 20px;
+  padding: 30px 20px;
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.7);
+  h3 {
+    margin: 0 0 25px;
+    font-size: 20px;
+  }
 }
 .button-panel {
   margin-top: 80px;
 }
 // nation tab
 .nation-select {
-  [type="checkbox"]:not(:checked),
-[type="checkbox"]:checked {
+  [type="radio"]:not(:checked),
+[type="radio"]:checked {
   position: absolute;
   left: -9999px;
 }
-[type="checkbox"]:not(:checked) + label,
-[type="checkbox"]:checked + label {
+[type="radio"]:not(:checked) + label,
+[type="radio"]:checked + label {
   width: 100%;
   position: relative;
   margin: 0;
   cursor: pointer;
 }
 
-/* checkbox aspect */
-[type="checkbox"]:not(:checked) + label:before,
-[type="checkbox"]:checked + label:before {
+/* radio aspect */
+[type="radio"]:not(:checked) + label:before,
+[type="radio"]:checked + label:before {
   content: '';
   @include square(20px);
   position: absolute;
@@ -400,8 +405,8 @@ header {
   @include transition(all 300ms linear);
 }
 /* checked mark aspect */
-[type="checkbox"]:not(:checked) + label:after,
-[type="checkbox"]:checked + label:after {
+[type="radio"]:not(:checked) + label:after,
+[type="radio"]:checked + label:after {
   content: '\f00c';
   font: normal normal normal 14px/1 FontAwesome;
   position: absolute;
@@ -412,19 +417,60 @@ header {
   @include transition(all 300ms linear);
 }
 /* checked mark aspect changes */
-[type="checkbox"]:not(:checked) + label:after {
+[type="radio"]:not(:checked) + label:after {
   opacity: 1;
   transform: scale(1);
 }
-[type="checkbox"]:checked + label:before {
+[type="radio"]:checked + label:before {
   background-color: $brand-pink;
   color: #fff;
   @include transition(all 300ms linear);
 }
 }
 .select-your-nation {
+  min-height: 200px;
+  position: relative;
+  .search-nation {
+    position: relative;
+    &:before,&:after {
+      content: "";
+      @include size(1px,15px);
+      position: absolute;
+      bottom: 0;
+      background-color: $brand-pink;
+    }
+    &:before { left: 0; }
+    &:after { right: 0; }
+  }
+  input {
+    border-top: none;
+    border-right: none;
+    border-bottom: 1px solid $brand-pink;
+    border-left: none;
+    &:focus {
+      border-color: $brand-pink;
+    }
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+    padding: 2px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #fff;
+}
   ul {
+    width: 100%;
+    height: 220px;
     padding: 10px 0 0;
+    position: absolute;
+    overflow-x: hidden;
+    overflow-y: scroll;
     list-style-type: none;
     text-align: left;
     li {
@@ -442,6 +488,22 @@ header {
   }
 }
 // nation tab end
+// gender
+.male, .female {
+  @include square(120px);
+  border-radius: 100%;
+  background-color: #c2c2c2;
+  overflow: hidden;
+  @include transition(all 300ms linear);
+  img {
+    height: 100px;
+    margin: 20px auto 0;
+  }
+  span {
+    @include position(relative, -17px null null 2px);
+  }
+}
+// gender end
 .cropArea {
   @include size(100%,350px);
   overflow: hidden;
@@ -454,6 +516,17 @@ header {
 }
 .upload-btn {
   margin: 15px 0;
+  button {
+    padding: 6px 20px;
+  }
+}
+.active-gender.male {
+  background-color: $brand-pink;
+  @include transition(all 300ms linear);
+}
+.active-gender.female {
+  background-color: $brand-cyan;
+  @include transition(all 300ms linear);
 }
 
 // end set Profile process
