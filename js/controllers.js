@@ -1,4 +1,4 @@
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop'])
+angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop','mappy'])
 
 .controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
   //Used to name the .html file
@@ -99,6 +99,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.menutitle = NavigationService.makeactive("Profile");
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
+
+  $scope.data = {
+          'GB': {metric: 4},
+          'US': {metric: 40},
+          // 'CN': {metric: 50},
+          // 'DE': {metric: 13},
+          // 'BE': {metric: 32},
+          // 'ES': {metric: 23},
+          // 'IR': {metric: 1},
+          // 'AF': {metric: 13},
+          // 'MR': {metric: 14},
+          'FR': {metric: 29},
+          'IN': {metric: 500}
+          // 'FI': {metric: 15}
+        };
+        $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
+        $scope.mapDataHumanizeFn = function(val) { return val + " units"; };
+        $scope.heatmapColors = ['#ff6759','#2c3757'];
 
 })
 
