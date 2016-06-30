@@ -90,6 +90,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.navigation = NavigationService.getnav();
 
 })
+.controller('ProfileCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+  //Used to name the .html file
+
+  // console.log("Testing Consoles");
+
+  $scope.template = TemplateService.changecontent("profile");
+  $scope.menutitle = NavigationService.makeactive("Profile");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+
+})
 
 .controller('headerctrl', function($scope, TemplateService) {
   $scope.template = TemplateService;
