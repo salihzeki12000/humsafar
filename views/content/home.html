@@ -38,13 +38,13 @@
                 </div>
                 <ul class="avenir-roman bg-dark-blue" ng-show="showNation">
                   <li ng-repeat="nation in nationality | filter:searchNation track by $index ">
-                      <div class="nation-select relate">
+                    <div class="nation-select relate">
                       <input type="radio" id="{{nation.name}}" name="nation" />
                       <label for="{{nation.name}}">
                         <img ng-src="{{nation.img}}" alt="" class="img-responsive inline-block mr10">
                         <span class="color-white">{{nation.name}}</span>
                       </label>
-                      </div>
+                    </div>
                   </li>
                 </ul>
               </div>
@@ -63,12 +63,12 @@
                 </div>
                 <ul class="avenir-roman bg-dark-blue" ng-show="showCity">
                   <li ng-repeat="nation in nationality | filter:searchCity track by $index ">
-                      <div class="nation-select relate">
+                    <div class="nation-select relate">
                       <input type="radio" id="city{{nation.name}}" name="nation" />
                       <label for="city{{nation.name}}">
                         <span class="color-white">{{nation.name}}</span>
                       </label>
-                      </div>
+                    </div>
                   </li>
                 </ul>
               </div>
@@ -106,8 +106,8 @@
                 <p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
                 <span class="block mt10 color-grey avenir-roman">-or-</span>
                 <div class="upload-btn">
-                  <div class="relate inline-block mr10" >
-                    <button class="btn btn-dark-blue pointer" >Select a photo from your computer input</button>
+                  <div class="relate inline-block mr10">
+                    <button class="btn btn-dark-blue pointer">Select a photo from your computer input</button>
                     <input type="file" id="fileInput" class="getfile pointer" />
                   </div>
                   <div class="relate inline-block ml10">
@@ -117,7 +117,7 @@
               </div>
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
-                <button class="btn btn-blue-outline btn-more pull-right">Done</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday">Done</button>
               </div>
             </div>
           </div>

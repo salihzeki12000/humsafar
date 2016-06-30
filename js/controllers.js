@@ -3,7 +3,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 .controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
   //Used to name the .html file
 
-  console.log("Testing Consoles");
+  // console.log("Testing Consoles");
 
   $scope.template = TemplateService.changecontent("home");
   $scope.menutitle = NavigationService.makeactive("Home");
@@ -77,6 +77,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   //     $scope.showImage = false;
   //   }
   // };
+
+})
+.controller('HolidayCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+  //Used to name the .html file
+
+  // console.log("Testing Consoles");
+
+  $scope.template = TemplateService.changecontent("holiday");
+  $scope.menutitle = NavigationService.makeactive("Holiday");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
 
 })
 

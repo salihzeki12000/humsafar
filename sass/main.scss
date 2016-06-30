@@ -530,5 +530,62 @@ header {
 }
 
 // end set Profile process
+// holiday step
+.holiday-indicators {
+  ul {
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+    li {
+      padding: 0px 3px;
+      display: inline-block;
+    }
+    a {
+      @include square(10px);
+      border: 1px solid $brand-blue;
+      border-radius: 100%;
+      display: inline-block;
+      @include transition(all 300ms linear);
+    }
+  }
+  .one, .two, .three, .four {
+    background-color: $brand-blue;
+    @include transition(all 300ms linear);
+  }
+}
+.select-holiday {
+  background: url('../img/grey-half.png') no-repeat 50% 0;
+  cursor: pointer;
+  @include transition(background 300ms linear);
+  &:hover {
+    background: url('../img/green-half.png') no-repeat 50% 0;
+    @include transition(background 300ms linear);
+  }
+  figcaption { font-size: 16px; }
+}
+.active-holiday {
+  background: url('../img/green-half.png') no-repeat 50% 0;
+  @include transition(background 300ms linear);
+}
+.holiday-imgholder {
+  min-height: 83px;
+}
+.holiday-row {
+  margin: 25px 0px 40px;
+}
+.holiday-step1, .holiday-step2, .holiday-step3, .holiday-step4 {
+  padding: 13px 20px;
+  h3 {
+    margin: 15px 0 10px;
+    font-size: 20px;
+  }
+}
+.usually-go {
+  margin-bottom: 35%;
+}
+.travel-row {
+  margin: 20px 0 30px;
+}
+// holiday step end
 
 @import "fancybox-override";

@@ -17,6 +17,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
     url: "/",
     templateUrl: "views/template.html",
     controller: 'HomeCtrl'
+  })
+    .state('holiday', {
+    url: "/holiday",
+    templateUrl: "views/template.html",
+    controller: 'HolidayCtrl'
   });
   $urlRouterProvider.otherwise("/");
   $locationProvider.html5Mode(isproduction);

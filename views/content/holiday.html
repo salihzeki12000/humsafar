@@ -1,0 +1,441 @@
+<!-- holiday plan -->
+<div class="holiday-step">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+        <div class="bg-white" ng-init="showHoliday=1">
+          <div class="holiday-step1" ng-show="showHoliday==1">
+            <div class="holiday-indicators">
+              <ul>
+                <li>
+                  <a href="" class="one"></a>
+                </li>
+                <li>
+                  <a href="" class="" ng-click="showHoliday=2"></a>
+                </li>
+                <li>
+                  <a href="" class="" ></a>
+                </li>
+                <li>
+                  <a href="" class="" ></a>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center avenir-roman">
+              <h3 class="color-blue avenir-black">Your kind of a holiday</h3>
+              <p class="color-blue avenir-roman">Lorem Ipsum is simply dummy text of<span class="block">the printing and typesetting industry.</span> </p>
+              <div class="row">
+                <div class="col-md-offset-1 col-md-10">
+                  <div class="holiday-row">
+                    <div class="row-flex" ng-init="selectHoliday=''">
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=1" ng-class="{'active-holiday': selectHoliday == 1}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/beach.png" alt="" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">Island &amp; Beach</figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=2" ng-class="{'active-holiday': selectHoliday == 2}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/city.png" alt="" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">City</figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=3" ng-class="{'active-holiday': selectHoliday == 3}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/safari.png" alt="" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">Safari</figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="holiday-row">
+                    <div class="row-flex">
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=4" ng-class="{'active-holiday': selectHoliday == 4}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/mountain.png" alt="" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">Mountains</figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=5" ng-class="{'active-holiday': selectHoliday == 5}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/cruise.png" alt="" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">Cruise</figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=6" ng-class="{'active-holiday': selectHoliday == 6}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/countryside.png" alt="" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">Countryside</figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="button-pane clearfix">
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="showHoliday=2">Next</button>
+              </div>
+            </div>
+          </div>
+          <div class="holiday-step2" ng-show="showHoliday==2">
+            <div class="holiday-indicators">
+              <ul>
+                <li>
+                  <a href="" class="one" ng-click="showHoliday=1"></a>
+                </li>
+                <li>
+                  <a href="" class="two"></a>
+                </li>
+                <li>
+                  <a href="" class="" ng-click="showHoliday=3"></a>
+                </li>
+                <li>
+                  <a href="" class=""></a>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center avenir-roman">
+              <h3 class="color-blue avenir-black">You usually go</h3>
+              <p class="color-blue avenir-roman">Lorem Ipsum is simply dummy text of<span class="block">the printing and typesetting industry.</span> </p>
+              <div class="usually-go">
+                <div class="row">
+                  <div class="col-md-offset-1 col-md-10">
+                    <div class="row-flex" ng-init="selectHoliday=''">
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=11" ng-class="{'active-holiday' : selectHoliday == 11}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/map.png" alt="" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">By the map</figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=12" ng-class="{'active-holiday' : selectHoliday == 12}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/road.png" alt="" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">Where the <span class="block">road takes you</span></figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=13" ng-class="{'active-holiday' : selectHoliday == 13}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/both.png" alt="" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">A little bit <span class="block">of both</span></figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="button-pane clearfix">
+              <button class="btn btn-blue-outline btn-more pull-left" ng-click="showHoliday=1">Previous</button>
+              <button class="btn btn-blue-outline btn-more pull-right" ng-click="showHoliday=3">Next</button>
+            </div>
+          </div>
+          <div class="holiday-step3" ng-show="showHoliday==3">
+            <div class="holiday-indicators">
+              <ul>
+                <li>
+                  <a href="" class="one" ng-click="showHoliday=1"></a>
+                </li>
+                <li>
+                  <a href="" class="two" ng-click="showHoliday=2"></a>
+                </li>
+                <li>
+                  <a href="" class="three"></a>
+                </li>
+                <li>
+                  <a href="" class="" ng-click="showHoliday=4"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center avenir-roman">
+              <h3 class="color-blue avenir-black">Prefer to travel</h3>
+              <p class="color-blue avenir-roman">Lorem Ipsum is simply dummy text of<span class="block">the printing and typesetting industry.</span> </p>
+              <div class="row">
+                <div class="col-md-offset-1 col-md-10">
+                  <div class="travel-row">
+                    <div class="row-flex" ng-init="selectHoliday=''">
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=21" ng-class="{'active-holiday' : selectHoliday == 21}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/family.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Family</figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=22" ng-class="{'active-holiday' : selectHoliday == 22}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/friends.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Friends</figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=23" ng-class="{'active-holiday' : selectHoliday == 23}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/spouse.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Partner/Spouse</figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="travel-row">
+                    <div class="row-flex">
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=24" ng-class="{'active-holiday' : selectHoliday == 24}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/solo.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Solo</figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=25" ng-class="{'active-holiday' : selectHoliday == 25}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/business.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Business</figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=26" ng-class="{'active-holiday' : selectHoliday == 26}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/blogger.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Blogger</figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="travel-row">
+                    <div class="row-flex">
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=27" ng-class="{'active-holiday' : selectHoliday == 27}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/grouptour.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Group Tour</figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=28" ng-class="{'active-holiday' : selectHoliday == 28}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/photographer.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Photographer</figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="button-pane clearfix">
+                <button class="btn btn-blue-outline btn-more pull-left" ng-click="showHoliday=2">Previous</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="showHoliday=4">Next</button>
+              </div>
+            </div>
+          </div>
+          <div class="holiday-step4" ng-show="showHoliday==4">
+            <div class="holiday-indicators">
+              <ul>
+                <li>
+                  <a href="" class="one" ng-click="showHoliday=1"></a>
+                </li>
+                <li>
+                  <a href="" class="two" ng-click="showHoliday=2"></a>
+                </li>
+                <li>
+                  <a href="" class="three" ng-click="showHoliday=3"></a>
+                </li>
+                <li>
+                  <a href="" class="four"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center avenir-roman">
+              <h3 class="color-blue avenir-black">Your ideal holiday type</h3>
+              <p class="color-blue avenir-roman">Lorem Ipsum is simply dummy text of<span class="block">the printing and typesetting industry.</span> </p>
+              <div class="row">
+                <div class="col-md-offset-1 col-md-10">
+                  <div class="travel-row">
+                    <div class="row-flex" ng-init="selectHoliday=''">
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=31" ng-class="{'active-holiday' : selectHoliday == 31}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/luxury.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Luxury</figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=32" ng-class="{'active-holiday' : selectHoliday == 32}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/backpacking.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Backpacking</figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=33" ng-class="{'active-holiday' : selectHoliday == 33}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/greentravelling.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Green <span class="block">travelling</span></figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="travel-row">
+                    <div class="row-flex">
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=34" ng-class="{'active-holiday' : selectHoliday == 34}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/pocketfriendly.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Pocket <span class="block">friendly</span></figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=35" ng-class="{'active-holiday' : selectHoliday == 35}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/romance.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Romance</figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=36" ng-class="{'active-holiday' : selectHoliday == 36}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/sportandadventure.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Sports &amp; Adventure</figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="travel-row">
+                    <div class="row-flex">
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=37" ng-class="{'active-holiday' : selectHoliday == 37}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/historyandculture.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">History &amp; <span class="block">Culture</span></figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=38" ng-class="{'active-holiday' : selectHoliday == 38}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/spirituality.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Spirituality &amp; Wellness</figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=39" ng-class="{'active-holiday' : selectHoliday == 39}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/shopping.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Shopping</figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="travel-row">
+                    <div class="row-flex">
+                      <div class="col-flex">
+                        <div class="select-holiday" ng-click="selectHoliday=40" ng-class="{'active-holiday' : selectHoliday == 40}">
+                          <figure>
+                            <div class="holiday-imgholder">
+                              <img src="img/foodandwine.png" alt="" class="img-responsive m-center">
+                              <figcaption class="color-blue font-bold">Food &amp; Wine</figcaption>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="button-pane clearfix">
+                <button class="btn btn-blue-outline btn-more pull-left" ng-click="showHoliday=3">Previous</button>
+                <button class="btn btn-blue-outline btn-more pull-right">Done</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- holiday plan end -->
