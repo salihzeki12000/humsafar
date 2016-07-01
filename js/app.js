@@ -23,6 +23,26 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
     templateUrl: "views/template.html",
     controller: 'ProfileCtrl'
   })
+    .state('journey', {
+    url: "/journey",
+    templateUrl: "views/template.html",
+    controller: 'JourneyCtrl'
+  })
+    .state('moments', {
+    url: "/moments",
+    templateUrl: "views/template.html",
+    controller: 'MomentsCtrl'
+  })
+    .state('reviews', {
+    url: "/reviews",
+    templateUrl: "views/template.html",
+    controller: 'ReviewsCtrl'
+  })
+    .state('holidayplanner', {
+    url: "/holidayplanner",
+    templateUrl: "views/template.html",
+    controller: 'HolidayPlannerCtrl'
+  })
     .state('holiday', {
     url: "/holiday",
     templateUrl: "views/template.html",

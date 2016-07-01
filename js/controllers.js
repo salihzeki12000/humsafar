@@ -90,6 +90,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   $scope.navigation = NavigationService.getnav();
 
 })
+.controller('JourneyCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+  //Used to name the .html file
+
+  $scope.template = TemplateService.changecontent("journey");
+  $scope.menutitle = NavigationService.makeactive("Journey");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+
+})
+.controller('MomentsCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+  //Used to name the .html file
+
+  $scope.template = TemplateService.changecontent("moments");
+  $scope.menutitle = NavigationService.makeactive("Moments");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+
+})
+.controller('ReviewsCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+  //Used to name the .html file
+
+  $scope.template = TemplateService.changecontent("reviews");
+  $scope.menutitle = NavigationService.makeactive("Reviews");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+
+})
+.controller('HolidayPlannerCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+  //Used to name the .html file
+
+  $scope.template = TemplateService.changecontent("holidayplanner");
+  $scope.menutitle = NavigationService.makeactive("HolidayPlanner");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+
+})
 .controller('ProfileCtrl', function($scope, TemplateService, NavigationService, $timeout) {
   //Used to name the .html file
 

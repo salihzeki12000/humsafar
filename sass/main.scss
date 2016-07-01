@@ -120,6 +120,12 @@ a:hover {
 .avenir-roman {
   font-family: "AvenirLTStd-Roman";
 }
+.djb-font {
+  font-family: "djb";
+}
+.jenna-font {
+  font-family: "JennaSue";
+}
 textarea {
   resize: none;
 }
@@ -319,6 +325,7 @@ textarea {
 .content {
   min-height: 550px;
   background: url('../img/back-content.jpg') no-repeat;
+  background-size: cover;
 }
 // header
 header {
@@ -588,5 +595,78 @@ header {
   margin: 20px 0 30px;
 }
 // holiday step end
+
+// profile
+  .profile-main {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .profile-photo-section {
+    width: 300px;
+    margin: 0 auto -12px;
+  }
+  .profile-more-detail {
+    padding: 30px 30px 20px;
+    border-radius: 6px;
+    background-color: rgba(255,255,255,0.8);
+  }
+  .profile-imgholder {
+    @include size(135px,145px);
+    border: 3px solid #fff;
+    border-radius: 55px;
+    margin: 0 auto -15px;
+    background: url('../img/profile-main.png') no-repeat 50% 50%;
+  }
+  .flag {
+    position: absolute;
+    right: -15px;
+    bottom: 0;
+  }
+  .wave {
+    position: absolute;
+    top: 50%;
+    left: -40px;
+    @include transform(translateY(-50%));
+  }
+  .user-travel-detail {
+    padding: 20px 40px;
+    background: url('../img/travel-detail-bg.png') no-repeat;
+    background-size: 100% 100%;
+    text-align: center;
+    ul {
+      padding: 0;
+      margin: 0;
+      li {
+        padding: 0px 25px;
+        display: inline-block;
+        list-style-type: none;
+        border-right: 1px solid $brand-dark-blue;
+        &:last-child { border-right: none; }
+      }
+    }
+  }
+  .travel-inside {
+    font-size: 16px;
+  }
+  .all-profile-detail {
+    padding: 0px 25px;
+  }
+  .more-about-me {
+    padding: 25px 20px 20px;
+    margin-top: -5px;
+    background-color: rgba(255,255,255,0.8);
+    p { font-size: 18px; }
+    .get-more {
+      font-size: 20px;
+    }
+    .more-detail {
+      margin-bottom: 30px;
+    }
+  }
+  .vector-map {
+    padding: 30px;
+    max-height: 600px;
+  }
+// profile end
 
 @import "fancybox-override";

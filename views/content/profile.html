@@ -1,8 +1,167 @@
 <div class="profile-main">
-  <div class="profile-photo-section">
-    <div class="map">
-      <mappy data="data" map-data="mapPathData" key="metric" colors="heatmapColors"
-            min="0" max="50" humanize-fn="mapDataHumanizeFn(val)"></mappy>
+  <div class="container-fluid">
+    <div class="profile-photo-section relate">
+      <div class="profile-pic">
+        <div class="profile-imgholder relate">
+          <!-- <img src="img/profile-main.png" alt="" class="img-responsive"> -->
+          <img src="img/flag.png" alt="" class="flag img-responsive">
+          <img src="img/wave-profile.png" alt="" width="40" class="wave img-responsive">
+        </div>
+      </div>
+      <div class="profile-more-detail text-center">
+        <h3 class="color-blue m-clear font-bold avenir-medium ">Amit Duxctronn</h3>
+        <h5 class="color-pink avenir-roman">Lives In: <i class="fa fa-map-marker mr5"></i><span>Mumbai</span></h5>
+      </div>
+    </div>
+    <div class="user-travel-detail relate">
+      <ul>
+        <li class="text-center">
+          <div class="travel-inside">
+            <span class="avenir-heavy color-blue">302</span>
+            <span class="block avenir-roman color-blue mt5">Following</span>
+          </div>
+        </li>
+        <li class="text-center">
+          <div class="travel-inside">
+            <span class="avenir-heavy color-blue">302</span>
+            <span class="block avenir-roman color-blue mt5">Followers</span>
+          </div>
+        </li>
+        <li class="text-center">
+          <div class="travel-inside">
+            <span class="avenir-heavy color-blue">28</span>
+            <span class="block avenir-roman color-blue mt5">Countries Visited</span>
+          </div>
+        </li>
+        <li class="text-center">
+          <div class="travel-inside">
+            <span class="avenir-heavy color-blue">4</span>
+            <span class="block avenir-roman color-blue mt5">Bucket List</span>
+          </div>
+        </li>
+        <li class="text-center">
+          <div class="travel-inside">
+            <span class="avenir-heavy color-blue">302</span>
+            <span class="block avenir-roman color-blue mt5">Journeys Created</span>
+          </div>
+        </li>
+        <li class="text-center">
+          <div class="travel-inside">
+            <span class="avenir-heavy color-blue">302</span>
+            <span class="block avenir-roman color-blue mt5">Check-Ins</span>
+          </div>
+        </li>
+        <li class="text-center">
+          <div class="travel-inside">
+            <span class="avenir-heavy color-blue">1302</span>
+            <span class="block avenir-roman color-blue mt5">Photos</span>
+          </div>
+        </li>
+        <li class="text-center">
+          <div class="travel-inside">
+            <span class="avenir-heavy color-blue">32</span>
+            <span class="block avenir-roman color-blue mt5">Reviews</span>
+          </div>
+        </li>
+        <li class="text-center">
+          <div class="travel-inside">
+            <span class="avenir-heavy color-blue">302</span>
+            <span class="block avenir-roman color-blue mt5">Itineraries</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="all-profile-detail">
+      <div class="more-about-me">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+              <div class="text-center">
+                <div class="more-detail" ng-show="getMore">
+                  <p class="avenir-roman">Amit loves to travel and explore the <img src="img/island.png" alt="" width="30" /> <b>Island &amp; Beach</b>. He usually goes <img src="img/more-road.png" alt="" width="30" /> <b>Where the road takes</b> him, tagging his <img src="img/bus.png"
+                      alt="" width="30" /> <b>Family</b> along. His idea of a holiday is to go out of his way to see his favourite artist perform at a <img src="img/dj.png" alt="" width="30" /> <b>Music Festival</b>.</p>
+                </div>
+                <span class="djb-font get-more" ng-click="getMore = (getMore == true)?false:true;">more about me...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white">
+        <div class="vector-section ">
+          <div class="row">
+            <div class="col-md-9">
+              <div class="vector-map">
+                <mappy data="data" map-data="mapPathData" key="metric" colors="heatmapColors" min="0" max="0" humanize-fn="mapDataHumanizeFn(val)"></mappy>
+              </div>
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+        </div>
+        <div class="travel-life-level">
+          <div class="container">
+            <div class="travel-progress-bar">
+              <div class="progress">
+                <div class="level1">
+                  <span class="block">Newbie</span>
+                  <div class="progress-bar" role="progressbar"></div>
+                  <span>1-3</span>
+                </div>
+                <div class="level2">
+                  <span class="block">Just Got Wings</span>
+                  <div class="progress-bar" role="progressbar"></div>
+                  <span>4-7</span>
+                </div>
+                <div class="level3">
+                  <span class="block">Globe Trotter</span>
+                  <div class="progress-bar" role="progressbar"></div>
+                  <span>8-15</span>
+                </div>
+                <div class="level4">
+                  <span class="block">Wayfarer</span>
+                  <div class="progress-bar" role="progressbar"></div>
+                  <span>16-24</span>
+                </div>
+                <div class="level5">
+                  <span class="block">Nomad</span>
+                  <div class="progress-bar" role="progressbar"></div>
+                  <span>25 above</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- tabs -->
+        <!-- end tabs -->
+        <!-- journey travel-life -->
+        <div class="journey-tabs">
+          <div class="clearfix">
+            <div class="pull-left">
+              <div class="travel-life-btn">
+                <span></span>
+                <span>Travel Life</span>
+              </div>
+              <div class="travel-life-btn">
+                <span></span>
+                <span>Local Life</span>
+              </div>
+            </div>
+            <div class="pull-right">
+              <div class="add-journey">
+                <span><i class="fa fa-plus"></i></span>
+                <div class="add-more-journey">
+                  <ul>
+                    <li><a href="">On The Go Journeys</a></li>
+                    <li><a href="">Upload An Itinerary</a></li>
+                    <li><a href="">Holiday Planner</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end journey travel-life -->
+      </div>
     </div>
   </div>
 </div>
