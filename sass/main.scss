@@ -667,6 +667,93 @@ header {
     padding: 30px;
     max-height: 600px;
   }
+
+// travel life
+  // .travel-life-part ~ img { display: none; }
+  // .travel-life-part ~ img + span { display: none; }
+  .travelled-imgholder {
+    @include size(420px,500px);
+    overflow: hidden;
+  }
+  .onway-imgholder {
+    @include size(420px,380px);
+  }
+  .travel-life-part {
+    ul {
+      padding: 0;
+      margin: 0;
+      li {
+        display: inline-block;
+        list-style-type: none;
+      }
+    }
+  }
+  .journey-tag-holder {
+    width: 100%;
+    padding: 0 10px;
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+    color: #fff;
+    a { color: #fff; }
+    h4,h3 {
+      padding: 15px 0;
+    }
+  }
+  .masonry-detail {
+    .masonry-brick:nth-child(even) {
+      .travelled-journey { display: none; }
+    }
+    .masonry-brick:nth-child(odd) {
+      .onway-journey { display: none; }
+    }
+  }
+  .days-spent {
+    @include size(45px,48px);
+    border-radius: 18px;
+    background-color: $brand-dark-blue;
+    p {
+      padding-top: 8px;
+      font-size: 10px;
+      text-align: center;
+      span {
+        font-size: 18px;
+        line-height: 18px;
+      }
+    }
+  }
+  .journey-collection {
+    li {
+      padding: 0px 10px;
+      border-right: 1px solid #fff;
+      line-height: 12px;
+      &:first-child {
+        padding: 0 10px 0 0;
+      }
+    }
+  }
+  .social-field-types {
+    padding: 0px 10px;
+  }
+  .user-social-item {
+    padding: 12px 0px 15px;
+    border-bottom: 1px solid $brand-grey;
+   li {
+     padding: 0px 10px;
+     &:first-child {
+       padding: 0px 10px 0 0;
+       i {
+         font-size: 18px;
+         vertical-align: bottom;
+       }
+     }
+   }
+  }
+  .social-likes-reviews {
+    padding: 15px 0;
+    font-size: 12px;
+  }
+// travel life end
 // profile end
 
 @import "fancybox-override";
