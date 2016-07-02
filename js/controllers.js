@@ -1,4 +1,4 @@
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop','mappy'])
+angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop','mappy','wu.masonry'])
 
 .controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
   //Used to name the .html file
@@ -153,6 +153,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
         $scope.mapDataHumanizeFn = function(val) { return val + " units"; };
         $scope.heatmapColors = ['#ff6759','#2c3757'];
+
+  // $scope.travelLife = [
+  //
+  // ];
 
 })
 

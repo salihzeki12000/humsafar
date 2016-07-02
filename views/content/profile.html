@@ -159,6 +159,126 @@
               </div>
             </div>
           </div>
+          <div class="masonry-detail">
+            <div masonry>
+              <div class="masonry-brick" ng-repeat="life in travelLife">
+                <div class="travel-life-part">
+                  <div class="travel-journey-heading">
+                    <p>{{life.heading}}</p>
+                    <p><i class="fa fa-calendar"></i><span>{{life.timestampDate}}</span> | <i class=
+                      "fa fa-clock-o"></i> <span>{{life.timestampClock}}</span></p>
+                  </div>
+                  <div class="travelled-journey">
+                    <div class="travelled-imgholder">
+                      <img ng-src="{{life.imgTravelled}}" alt="" class="img-responsive">
+                    </div>
+                      <div class="journey-tag-holder">
+                        <h4 class="">{{life.Travelledtag}}</h4>
+                        <div class="clearfix">
+                          <div class="pull-left">
+                            <div class="journey-collection">
+                              <ul>
+                                <li>
+                                  <a href="">
+                                    <div class="">
+                                      <img src="img/camera.png" alt="Camera">
+                                      <span>{{life.photoCount}}</span>
+                                    </div>
+                                  </a>
+                              </li>
+                                <li>
+                                  <a href="">
+                                    <div class="">
+                                      <img src="img/video.png" alt="Video">
+                                      <span>{{life.videoCount}}</span>
+                                    </div>
+                                  </a>
+                                </li>
+                                <li><a href="">
+                                  <div class="">
+                                    <img src="img/location.png" alt="Location">
+                                    <span>{{life.locationVisited}}</span>
+                                  </div>
+                                </a></li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="pull-right">
+                            <div class="journey-type">
+                              <ul>
+                                <li><a href=""><img src="img/sunset.png" alt=""></a></li>
+                                <li><a href=""><img src="img/bag-journey.png" alt=""></a></li>
+                                <li><a href=""><img src="img/luxury-journey.png" alt=""></a></li>
+                              </ul>
+                            </div>
+                            <div class="days-spent">
+                              <p><span>{{life.daySpent}}</span> days</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="onway-journey">
+                    <div class="onway-imgholder">
+                      <img ng-src="{{life.imgOnway}}" alt="" class="img-responsive">
+                    </div>
+                    <div class="journey-tag-holder">
+                      <h3 class="">{{life.onwayTag}}</h3>
+                      <div class="clearfix">
+                        <div class="pull-left">
+                          <div class="journey-type">
+                            <ul>
+                              <li><a href=""><img src="img/sunset.png" alt=""></a></li>
+                              <li><a href=""><img src="img/bag-journey.png" alt=""></a></li>
+                              <li><a href=""><img src="img/luxury-journey.png" alt=""></a></li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="pull-right">
+                          <div class="journey-cost">
+                            <span>{{life.cost}}</span>
+                          </div>
+                          <div class="days-spent">
+                            <p><span class="block">{{life.spendingDay}} days</span></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="social-field-types">
+                    <div class="user-social-item clearfix">
+                      <div class="pull-left">
+                        <ul>
+                          <li><a href=""><i class="fa fa-heart-o"></i></a></li>
+                          <li><a href=""><img src="img/comments.png" alt=""></a></li>
+                          <li><a href=""><img src="img/reviews.png" alt=""></a></li>
+                          <li><a href=""><img src="img/share.png" alt=""></a></li>
+                        </ul>
+                      </div>
+                      <div class="pull-right">
+                        <div class="">
+                          <span><img src="img/options.png" alt=""></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="social-likes-reviews">
+                      <div class="clearfix">
+                        <div class="pull-left">
+                          <span><i class="fa fa-heart"></i><b>{{life.likes}}</b>Likes</span>
+                          <span><i class="fa fa-heart"></i>{{life.reviews}} ({{life.pointReview}}/5)</span>
+                        </div>
+                        <div class="pull-right">
+                          <img src="img/travel.png" alt="">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <img ng-src="{{ life.img }}" alt="A masonry brick">
+                <span>{{life.likes}}</span>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- end journey travel-life -->
       </div>
