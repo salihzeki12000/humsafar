@@ -890,6 +890,17 @@ header {
     }
   }
   // end journey tabs
+  // masonry tab
+  .masonry-brick {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin: 10px;
+  }
+  .travel-journey-heading {
+    padding: 10px;
+    color: $brand-grey;
+  }
+  // masonry end
 // travel life end
 // profile end
 
