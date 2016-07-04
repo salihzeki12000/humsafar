@@ -70,6 +70,11 @@ a:hover {
   outline: 0;
   @include box-shadow(none);
 }
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
 //bootstrap forms
 // fonts
 @font-face {
@@ -232,6 +237,18 @@ textarea {
 .pl10 {
   padding-left: 10px;
 }
+.pt20 {
+  padding-top: 20px;
+}
+.pr20 {
+  padding-right: 20px;
+}
+.pb20 {
+  padding-bottom: 20px;
+}
+.pl20 {
+  padding-left: 20px;
+}
 .color-white {
   color: #fff;
 }
@@ -310,6 +327,9 @@ textarea {
 }
 .btn-dark-pink {
   @include button-variant( white, $brand-dark-pink, $brand-dark-blue);
+}
+.btn-pink {
+  @include button-variant( white, $brand-dark-pink, $brand-dark-pink);
 }
 .btn-dark-blue {
   @include button-variant( white, $brand-dark-blue, $brand-dark-blue);
@@ -434,6 +454,60 @@ header {
   color: #fff;
   @include transition(all 300ms linear);
 }
+}
+.custom-checkbox {
+  [type="checkbox"]:not(:checked),
+  [type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+  }
+  [type="checkbox"]:not(:checked) + label,
+  [type="checkbox"]:checked + label {
+    width: 100%;
+    position: relative;
+    margin: 0;
+    cursor: pointer;
+  }
+  /* checkbox aspect */
+  [type="checkbox"]:not(:checked) + label:before,
+  [type="checkbox"]:checked + label:before {
+    content: '';
+    @include square(20px);
+    border: 1px solid $brand-cyan;
+    border-radius: 4px;
+    display: block;
+    background-color: transparent;
+    @include transition(all 300ms linear);
+  }
+  /* checked mark aspect */
+  [type="checkbox"]:not(:checked) + label:after,
+  [type="checkbox"]:checked + label:after {
+    content: '\f00c';
+    font: normal normal normal 14px/1 FontAwesome;
+    @include square(20px);
+    color: #b7b7b7;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 20px;
+    text-align: center;
+    @include transition(all 300ms linear);
+  }
+  [type="checkbox"]:checked + label:after {
+    color: $brand-pink;
+    @include transition(all 300ms linear);
+  }
+}
+.custom-checkbox-heart {
+  @extend .custom-checkbox;
+  [type="checkbox"]:not(:checked) + label:after,
+  [type="checkbox"]:checked + label:after {
+    content: "\f004";
+    color: #b7b7b7;
+  }
+  [type="checkbox"]:checked + label:after {
+    color: $brand-blue;
+  }
 }
 .select-your-nation {
   min-height: 200px;
@@ -666,17 +740,41 @@ header {
   .vector-map {
     padding: 30px;
     max-height: 600px;
+    mappy svg { max-height: 550px; }
   }
-
+ // visited list
+ .wish-country-visit {
+  padding: 20px 15px 0 0;
+ }
+ .visited-country-list {
+   li {
+     padding: 10px 0;
+     border-top: 1px solid #ebebeb;
+   }
+   .get-right {
+     display: inline-block;
+   }
+ }
+ .visit-input {
+   padding: 8px 18px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   margin: 15px 15px 10px 0;
+ }
+ .country-list {
+   .country-name {
+     width: 220px;
+     font-size: 16px;
+     vertical-align: top;
+   }
+ }
 // travel life
-  // .travel-life-part ~ img { display: none; }
-  // .travel-life-part ~ img + span { display: none; }
   .travelled-imgholder {
-    @include size(420px,500px);
+    @include size(400px,500px);
     overflow: hidden;
   }
   .onway-imgholder {
-    @include size(420px,380px);
+    @include size(400px,350px);
   }
   .travel-life-part {
     ul {
@@ -753,6 +851,45 @@ header {
     padding: 15px 0;
     font-size: 12px;
   }
+  // progress bar
+  .progress-bar-strip {
+    width: 100%;
+    height: 8px;
+    position: relative;
+    background-color: $brand-pink;
+    &:after {
+      content: "";
+      @include size(8px,15px);
+      border-radius: 20px;
+      @include position(absolute, -5px null null 0);
+      background-color: $brand-pink;
+    }
+  }
+  // journey tabs
+  .journey-tabs {
+    padding: 0px 20px;
+    .btn-tab {
+      @include square(18px);
+      display: inline-block;
+      border: 1px solid #ebebeb;
+      margin-right: 5px;
+      border-radius: 100px;
+      background-color: #ebebeb;
+      vertical-align: top;
+    }
+    .active-btn-travel {
+      background-color: $brand-pink;
+    }
+    .active-btn-local {
+      background-color: $brand-cyan;
+    }
+  }
+  .travel-life-btn {
+    span {
+      font-size: 16px;
+    }
+  }
+  // end journey tabs
 // travel life end
 // profile end
 

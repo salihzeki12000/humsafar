@@ -91,44 +91,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Journey");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.profile = {
+      profileMain : "views/content/profile.html"
+    }
 
-  })
-  .controller('MomentsCtrl', function($scope, TemplateService, NavigationService, $timeout) {
-    //Used to name the .html file
-
-    $scope.template = TemplateService.changecontent("moments");
-    $scope.menutitle = NavigationService.makeactive("Moments");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-
-  })
-  .controller('ReviewsCtrl', function($scope, TemplateService, NavigationService, $timeout) {
-    //Used to name the .html file
-
-    $scope.template = TemplateService.changecontent("reviews");
-    $scope.menutitle = NavigationService.makeactive("Reviews");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-
-  })
-  .controller('HolidayPlannerCtrl', function($scope, TemplateService, NavigationService, $timeout) {
-    //Used to name the .html file
-
-    $scope.template = TemplateService.changecontent("holidayplanner");
-    $scope.menutitle = NavigationService.makeactive("HolidayPlanner");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-
-  })
-  .controller('ProfileCtrl', function($scope, TemplateService, NavigationService, $timeout) {
-    //Used to name the .html file
-
-    // console.log("Testing Consoles");
-
-    $scope.template = TemplateService.changecontent("profile");
-    $scope.menutitle = NavigationService.makeactive("Profile");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
+    $scope.bucketList = [
+      {
+        countryName : "United States Of America"
+      },
+      {
+        countryName : "Germany"
+      },
+      {
+        countryName : "United Kingdom"
+      },
+      {
+        countryName : "Switzerland"
+      },
+      {
+        countryName : "Australia"
+      },
+      {
+        countryName : "India"
+      },
+      {
+        countryName : "Italy"
+      },
+      {
+        countryName : "Canada"
+      },
+    ];
 
     $scope.data = {
       'GB': {
@@ -137,13 +129,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       'US': {
         metric: 40
       },
-      // 'CN': {metric: 50},
-      // 'DE': {metric: 13},
-      // 'BE': {metric: 32},
-      // 'ES': {metric: 23},
-      // 'IR': {metric: 1},
-      // 'AF': {metric: 13},
-      // 'MR': {metric: 14},
       'FR': {
         metric: 29
       },
@@ -156,21 +141,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.mapDataHumanizeFn = function(val) {
       return val + " units";
     };
-    $scope.heatmapColors = ['#ff6759', '#2c3757'];
-
-    // $('.abc').masonry({
-    //   itemSelector: '.masonry-brick',
-    //   isFitWidth: true
-    // });
-    //
-    // var foundInterval = setInterval(function() {
-    //   if (document.getElementById("md")) {
-    //     console.log(document.getElementById("md").offsetWidth);
-    //     clearInterval(foundInterval);
-    //     $scope.fitWidth = document.getElementById("md").offsetWidth / 3;
-    //   }
-    // }, 100);
-
+    $scope.heatmapColors = [ '#2c3757','#ff6759'];
 
     $scope.travelLife = [{
       heading: "Manan Vora has ended his London Journey",
@@ -293,6 +264,113 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       reviews: "354",
       pointReview: "4.5"
     }];
+
+  })
+  .controller('MomentsCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+
+    $scope.template = TemplateService.changecontent("moments");
+    $scope.menutitle = NavigationService.makeactive("Moments");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.profile = {
+      profileMain : "views/content/profile.html"
+    }
+
+    $scope.data = {
+      'GB': {
+        metric: 4
+      },
+      'US': {
+        metric: 40
+      },
+      'FR': {
+        metric: 29
+      },
+      'IN': {
+        metric: 500
+      }
+      // 'FI': {metric: 15}
+    };
+    $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
+    $scope.mapDataHumanizeFn = function(val) {
+      return val + " units";
+    };
+    $scope.heatmapColors = [ '#2c3757','#ff6759'];
+
+  })
+  .controller('ReviewsCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+
+    $scope.template = TemplateService.changecontent("reviews");
+    $scope.menutitle = NavigationService.makeactive("Reviews");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+  })
+  .controller('HolidayPlannerCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+
+    $scope.template = TemplateService.changecontent("holidayplanner");
+    $scope.menutitle = NavigationService.makeactive("HolidayPlanner");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+  })
+  .controller('ProfileCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+
+    // console.log("Testing Consoles");
+
+    $scope.template = TemplateService.changecontent("profile");
+    $scope.menutitle = NavigationService.makeactive("Profile");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+    $scope.data = {
+      'GB': {
+        metric: 4
+      },
+      'US': {
+        metric: 40
+      },
+      'FR': {
+        metric: 29
+      },
+      'IN': {
+        metric: 500
+      }
+    };
+    $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
+    $scope.mapDataHumanizeFn = function(val) {
+      return val + " units";
+    };
+    $scope.heatmapColors = ['#2c3757','#ff6759'];
+
+    // $('.abc').masonry({
+    //   itemSelector: '.masonry-brick',
+    //   isFitWidth: true
+    // });
+    //
+    // var foundInterval = setInterval(function() {
+    //   if (document.getElementById("md")) {
+    //     console.log(document.getElementById("md").offsetWidth);
+    //     clearInterval(foundInterval);
+    //     $scope.fitWidth = document.getElementById("md").offsetWidth / 3;
+    //   }
+    // }, 100);
+
+
+    $scope.hoveringOver = function(value) {
+    $scope.overStar = value;
+  };
+    $scope.ratingStates = [
+   {stateOn: 'fa fa-star-o', stateOff: 'fa fa-star'},
+   {stateOn: 'fa fa-star-o', stateOff: 'fa fa-star'},
+   {stateOn: 'fa fa-star-o', stateOff: 'fa fa-star'},
+   {stateOn: 'fa fa-star-o', stateOff: 'fa fa-star'},
+   {stateOn: 'fa fa-star-o', stateOff: 'fa fa-star'}
+ ];
 
   })
 

@@ -1,0 +1,49 @@
+<div class="profile-main">
+  <div class="" ng-include="profile.profileMain"></div>
+  <div class="moments-main">
+    <div class="container-fluid">
+      <div class="all-profile-detail">
+        <div class="bg-white">
+          <!-- tabs -->
+          <!-- end tabs -->
+          <div class="moments-tab">
+            <div class="btn-view-moments">
+              <span></span>
+              <span>All</span>
+            </div>
+            <div class="btn-view-moments">
+              <span></span>
+              <span>Travel Life</span>
+            </div>
+            <div class="btn-view-moments">
+              <span></span>
+              <span>Local Life</span>
+            </div>
+          </div>
+          <div class="moment-all-view">
+            <div class="month-collage" ng-repeat="getImage in monthMoments">
+              <h4 class="month-name" ng-click="viewMonth();">{{getImage.monthName}}</h4>
+              <div class="collage-month-view">
+                <div class="flex-wrap-container">
+                  <div class="moment-imgholder" ng-repeat="monthMoments in momentPic">
+                    <img ng-src="{{monthMoments}}" alt="" class="img-responsive">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="month-view-moments">
+            <h4 class="">November 2015</h4>
+            <div class="month-view-pic">
+              <div class="flex-wrap-container">
+                <div class="singleMonth-imgholder" ng-repeat="monthMoments in momentPic">
+                  <img ng-src="{{monthMoments}}" alt="" class="img-responsive">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
