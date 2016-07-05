@@ -15,7 +15,8 @@ $brand-dark-cyan: #57d3c7;
 $brand-cyan: #11d3cb;
 $brand-light-cyan: #91e2d6;
 $brand-grey: #b2b2b2;
-$brand-light-grey: #e3e3e3;
+$brand-light-grey: #a0a0a0;
+$brand-lighter-grey: #e3e3e3;
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 @mixin placeholder {
   $placeholders: ":-webkit-input" ":-moz" "-moz" "-ms-input";
@@ -29,7 +30,24 @@ $brand-light-grey: #e3e3e3;
 //   padding-top: 70px;
 // }
 // over-ride
-h1,h2,h3,h4,h5,h6,button,img,a,span,p,ul,ol,figure,input,select,textarea,label:focus {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+img,
+a,
+span,
+p,
+ul,
+ol,
+figure,
+input,
+select,
+textarea,
+label:focus {
   outline: none !important;
 }
 img.loading {
@@ -48,7 +66,8 @@ img.doneLoading {
 nav li:hover .dropdown-menu {
   display: block;
 }
-a, .btn {
+a,
+.btn {
   cursor: pointer;
   @include transition(all ease 300ms);
 }
@@ -286,6 +305,9 @@ textarea {
 .color-light-grey {
   color: $brand-light-grey;
 }
+.color-lighter-grey {
+  color: $brand-lighter-grey;
+}
 .btn-more {
   padding: 8px 34px;
 }
@@ -349,7 +371,7 @@ textarea {
 }
 // header
 header {
-  padding: 10px 0px 0px;
+  padding: 10px 0 0;
 }
 .navbar {
   border: none;
@@ -390,13 +412,19 @@ header {
     padding: 0 15px;
     font-size: 16px;
   }
-  a { color: #80879a; }
+  a {
+    color: #80879a;
+  }
 }
 // end header
 // Set Profile process
-.verification-complete, .nationality, .city, .gender, .upload-profile {
+.verification-complete,
+.nationality,
+.city,
+.gender,
+.upload-profile {
   padding: 30px 20px;
-  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.7);
   h3 {
     margin: 0 0 25px;
     font-size: 20px;
@@ -408,52 +436,51 @@ header {
 // nation tab
 .nation-select {
   [type="radio"]:not(:checked),
-[type="radio"]:checked {
-  position: absolute;
-  left: -9999px;
-}
-[type="radio"]:not(:checked) + label,
-[type="radio"]:checked + label {
-  width: 100%;
-  position: relative;
-  margin: 0;
-  cursor: pointer;
-}
-
-/* radio aspect */
-[type="radio"]:not(:checked) + label:before,
-[type="radio"]:checked + label:before {
-  content: '';
-  @include square(20px);
-  position: absolute;
-  right: 0;
-  top: 2px;
-  background-color: #d1d1d1;
-  color: #f6f6f6;
-  @include transition(all 300ms linear);
-}
-/* checked mark aspect */
-[type="radio"]:not(:checked) + label:after,
-[type="radio"]:checked + label:after {
-  content: '\f00c';
-  font: normal normal normal 14px/1 FontAwesome;
-  position: absolute;
-  top: 6px;
-  right: 2px;
-  font-size: 15px;
-  line-height: 0.8;
-  @include transition(all 300ms linear);
-}
-/* checked mark aspect changes */
-[type="radio"]:not(:checked) + label:after {
-  opacity: 1;
-  transform: scale(1);
-}
-[type="radio"]:checked + label:before {
-  background-color: $brand-pink;
-  color: #fff;
-  @include transition(all 300ms linear);
-}
+  [type="radio"]:checked {
+    position: absolute;
+    left: -9999px;
+  }
+  [type="radio"]:not(:checked) + label,
+  [type="radio"]:checked + label {
+    width: 100%;
+    position: relative;
+    margin: 0;
+    cursor: pointer;
+  }
+  /* radio aspect */
+  [type="radio"]:not(:checked) + label:before,
+  [type="radio"]:checked + label:before {
+    content: '';
+    @include square(20px);
+    position: absolute;
+    right: 0;
+    top: 2px;
+    background-color: #d1d1d1;
+    color: #f6f6f6;
+    @include transition(all 300ms linear);
+  }
+  /* checked mark aspect */
+  [type="radio"]:not(:checked) + label:after,
+  [type="radio"]:checked + label:after {
+    content: '\f00c';
+    font: normal normal normal 14px/1 FontAwesome;
+    position: absolute;
+    top: 6px;
+    right: 2px;
+    font-size: 15px;
+    line-height: 0.8;
+    @include transition(all 300ms linear);
+  }
+  /* checked mark aspect changes */
+  [type="radio"]:not(:checked) + label:after {
+    opacity: 1;
+    transform: scale(1);
+  }
+  [type="radio"]:checked + label:before {
+    background-color: $brand-pink;
+    color: #fff;
+    @include transition(all 300ms linear);
+  }
 }
 .custom-checkbox {
   [type="checkbox"]:not(:checked),
@@ -475,7 +502,7 @@ header {
     @include square(20px);
     border: 1px solid $brand-cyan;
     border-radius: 4px;
-    display: block;
+    display: inline-block;
     background-color: transparent;
     @include transition(all 300ms linear);
   }
@@ -514,15 +541,20 @@ header {
   position: relative;
   .search-nation {
     position: relative;
-    &:before,&:after {
+    &:before,
+    &:after {
       content: "";
       @include size(1px,15px);
       position: absolute;
       bottom: 0;
       background-color: $brand-pink;
     }
-    &:before { left: 0; }
-    &:after { right: 0; }
+    &:before {
+      left: 0;
+    }
+    &:after {
+      right: 0;
+    }
   }
   input {
     border-top: none;
@@ -533,19 +565,17 @@ header {
       border-color: $brand-pink;
     }
   }
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 6px;
     padding: 2px;
-}
-
-::-webkit-scrollbar-track {
+  }
+   ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-}
-
-::-webkit-scrollbar-thumb {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  }
+   ::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     background-color: #fff;
-}
+  }
   ul {
     width: 100%;
     height: 220px;
@@ -559,8 +589,10 @@ header {
       padding: 10px;
       border-bottom: 2px solid $brand-dark-blue;
       color: #fff;
-      span { font-size: 16px; }
-      &:nth-child(even){
+      span {
+        font-size: 16px;
+      }
+      &:nth-child(even) {
         background-color: #969bab;
       }
       &:nth-child(odd) {
@@ -571,7 +603,8 @@ header {
 }
 // nation tab end
 // gender
-.male, .female {
+.male,
+.female {
   @include square(120px);
   border-radius: 100%;
   background-color: #c2c2c2;
@@ -610,7 +643,6 @@ header {
   background-color: $brand-cyan;
   @include transition(all 300ms linear);
 }
-
 // end set Profile process
 // holiday step
 .holiday-indicators {
@@ -619,7 +651,7 @@ header {
     list-style-type: none;
     text-align: center;
     li {
-      padding: 0px 3px;
+      padding: 0 3px;
       display: inline-block;
     }
     a {
@@ -630,7 +662,10 @@ header {
       @include transition(all 300ms linear);
     }
   }
-  .one, .two, .three, .four {
+  .one,
+  .two,
+  .three,
+  .four {
     background-color: $brand-blue;
     @include transition(all 300ms linear);
   }
@@ -643,7 +678,9 @@ header {
     background: url('../img/green-half.png') no-repeat 50% 0;
     @include transition(background 300ms linear);
   }
-  figcaption { font-size: 16px; }
+  figcaption {
+    font-size: 16px;
+  }
 }
 .active-holiday {
   background: url('../img/green-half.png') no-repeat 50% 0;
@@ -653,9 +690,12 @@ header {
   min-height: 83px;
 }
 .holiday-row {
-  margin: 25px 0px 40px;
+  margin: 25px 0 40px;
 }
-.holiday-step1, .holiday-step2, .holiday-step3, .holiday-step4 {
+.holiday-step1,
+.holiday-step2,
+.holiday-step3,
+.holiday-step4 {
   padding: 13px 20px;
   h3 {
     margin: 15px 0 10px;
@@ -669,239 +709,436 @@ header {
   margin: 20px 0 30px;
 }
 // holiday step end
-
 // profile
-  .profile-main {
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-  .profile-photo-section {
-    width: 300px;
-    margin: 0 auto -12px;
-  }
-  .profile-more-detail {
-    padding: 30px 30px 20px;
-    border-radius: 6px;
-    background-color: rgba(255,255,255,0.8);
-  }
-  .profile-imgholder {
-    @include size(135px,145px);
-    border: 3px solid #fff;
-    border-radius: 55px;
-    margin: 0 auto -15px;
-    background: url('../img/profile-main.png') no-repeat 50% 50%;
-  }
-  .flag {
-    position: absolute;
-    right: -15px;
-    bottom: 0;
-  }
-  .wave {
-    position: absolute;
-    top: 50%;
-    left: -40px;
-    @include transform(translateY(-50%));
-  }
-  .user-travel-detail {
-    padding: 20px 40px;
-    background: url('../img/travel-detail-bg.png') no-repeat;
-    background-size: 100% 100%;
-    text-align: center;
-    ul {
-      padding: 0;
-      margin: 0;
-      li {
-        padding: 0px 25px;
-        display: inline-block;
-        list-style-type: none;
-        border-right: 1px solid $brand-dark-blue;
-        &:last-child { border-right: none; }
+.profile-main {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.profile-photo-section {
+  width: 300px;
+  margin: 0 auto -12px;
+}
+.profile-more-detail {
+  padding: 30px 30px 20px;
+  border-radius: 6px;
+  background-color: rgba(255,255,255,0.8);
+}
+.profile-imgholder {
+  @include size(135px,145px);
+  border: 3px solid #fff;
+  border-radius: 55px;
+  margin: 0 auto -15px;
+  background: url('../img/profile-main.png') no-repeat 50% 50%;
+}
+.flag {
+  position: absolute;
+  right: -15px;
+  bottom: 0;
+}
+.wave {
+  position: absolute;
+  top: 50%;
+  left: -40px;
+  @include transform(translateY(-50%));
+}
+.user-travel-detail {
+  padding: 20px 40px;
+  background: url('../img/travel-detail-bg.png') no-repeat;
+  background-size: 100% 100%;
+  text-align: center;
+  ul {
+    padding: 0;
+    margin: 0;
+    li {
+      padding: 0 25px;
+      display: inline-block;
+      list-style-type: none;
+      border-right: 1px solid $brand-dark-blue;
+      &:last-child {
+        border-right: none;
       }
     }
   }
-  .travel-inside {
+}
+.travel-inside {
+  font-size: 16px;
+}
+.all-profile-detail {
+  padding: 0 25px;
+}
+.more-about-me {
+  padding: 25px 20px 20px;
+  margin-top: -5px;
+  background-color: rgba(255,255,255,0.8);
+  p {
+    font-size: 18px;
+  }
+  .get-more {
+    font-size: 20px;
+  }
+  .more-detail {
+    margin-bottom: 30px;
+  }
+}
+.vector-map {
+  padding: 30px;
+  max-height: 600px;
+  mappy svg {
+    max-height: 550px;
+  }
+}
+// visited list
+.wish-country-visit {
+  padding: 20px 15px 0 0;
+}
+.visited-country-list {
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #ebebeb;
+  }
+  .get-right {
+    display: inline-block;
+  }
+}
+.visit-input {
+  padding: 8px 18px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 15px 15px 10px 0;
+}
+.country-list {
+  .country-name {
+    width: 220px;
+    font-size: 16px;
+    vertical-align: top;
+  }
+}
+// travel life
+.travelled-imgholder {
+  @include size(394px,440px);
+  overflow: hidden;
+}
+.onway-imgholder {
+  @include size(394px,330px);
+  overflow: hidden;
+  img {
+    min-height: 100%;
+  }
+}
+.travel-life-part {
+  ul {
+    padding: 0;
+    margin: 0;
+    li {
+      display: inline-block;
+      list-style-type: none;
+    }
+  }
+}
+// tabs
+.profile-tabs {
+  padding: 0 10px;
+  ul {
+    @include display(flex);
+    li {
+      @include flex(1);
+      &:nth-child(1) {
+        z-index: 4;
+      }
+      &:nth-child(2) {
+        .tab-heading {
+          padding: 15px 20px;
+          margin: 5px 0 0 -18px;
+          background: -webkit-linear-gradient(left, #b8544b, #e85a4d, #f05b4d);
+          background: -o-linear-gradient(left, #b8544b, #e85a4d, #f05b4d);
+          background: linear-gradient(to right, #b8544b, #e85a4d, #f05b4d);
+          z-index: 3;
+        }
+      }
+      &:nth-child(3) {
+        .tab-heading {
+          padding: 11px 20px;
+          margin: 9px 0 0 -18px;
+          background: -webkit-linear-gradient(left, #b8544b, #e85a4d, #f05b4d);
+          background: -o-linear-gradient(left, #b8544b, #e85a4d, #f05b4d);
+          background: linear-gradient(to right, #b8544b, #e85a4d, #f05b4d);
+          z-index: 2;
+        }
+      }
+      &:nth-child(4) {
+        .tab-heading {
+          padding: 6px 20px;
+          margin: 15px 0 0 -30px;
+          background: -webkit-linear-gradient(left, #b8544b, #e85a4d, #f05b4d);
+          background: -o-linear-gradient(left, #b8544b, #e85a4d, #f05b4d);
+          background: linear-gradient(to right, #b8544b, #e85a4d, #f05b4d);
+          z-index: 1;
+        }
+      }
+    }
+  }
+  .tab-heading {
+    padding: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: block;
+    background-color: $brand-pink;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+}
+// tabs end
+.add-journey {
+  position: relative;
+  span {
+  @include square(30px);
+  display: inline-block;
+  border-radius: 100%;
+  line-height: 30px;
+  background-color: $brand-pink;
+  color: #fff;
+  text-align: center;
+    @include transition(all 300ms linear);
+    i {
+      @include transition(all 300ms linear);
+    }
+  }
+  .close-more {
+    background-color: $brand-grey;
+      @include transition(all 300ms linear);
+    i {
+      @include transform(rotate(45deg));
+      @include transition(all 300ms linear);
+    }
+  }
+}
+.add-more-journey {
+  width: 210px;
+  padding: 15px 20px;
+  border-radius: 12px;
+  border: 1px solid $brand-blue;
+  background-color: $brand-pink;
+  @include position(absolute,-15px 35px null null);
+  z-index: 10;
+  &:after {
+    content: "";
+    border-top: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    border-left: 9px solid $brand-pink;
+    @include position(absolute, 22px -18px null null);
+  }
+  &:before {
+    content: "";
+    border-top: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid $brand-blue;
+    @include position(absolute, 21px -20px null null);
+  }
+  li {
+    padding: 8px 0;
+    &:nth-child(2) {
+      border-top: 1px solid $brand-blue;
+      border-bottom: 1px solid $brand-blue;
+    }
+    a { color: #fff; }
+  }
+}
+.travel-local-life {
+  padding: 20px;
+}
+.country-visited {
+  @include position(absolute, -10px 10px null null);
+  img {
+    margin-left: -10px;
+  }
+  span {
+    margin-left: -18px;
+    display: inline-block;
+    font-size: 19px;
+    color: #fcfcfc;
+    text-shadow: 1px 1px 1px #000;
+    vertical-align: middle;
+  }
+}
+.journey-tag-holder {
+  width: 100%;
+  padding: 0 10px;
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.7);
+  color: #fff;
+  a {
+    color: #fff;
+  }
+  h4,
+  h3 {
+    padding: 15px 0;
+  }
+}
+.journey-type {
+  vertical-align: top;
+  li {
+    padding: 0px 5px;
+  }
+}
+.journey-cost {
+  display: inline-block;
+  vertical-align: top;
+  span {
+    margin: 0 20px;
+    font-size: 15px;
+  }
+}
+.days-spent {
+  @include size(45px,48px);
+  border-radius: 18px;
+  margin-bottom: -15px;
+  display: inline-block;
+  background-color: $brand-dark-blue;
+  p {
+    padding-top: 8px;
+    font-size: 10px;
+    text-align: center;
+    span {
+      font-size: 18px;
+      line-height: 18px;
+    }
+  }
+}
+.journey-collection {
+  li {
+    padding: 0 10px;
+    border-right: 1px solid #fff;
+    line-height: 12px;
+    &:first-child {
+      padding: 0 10px 0 0;
+    }
+  }
+}
+.social-field-types {
+  padding: 0 10px;
+}
+.user-social-item {
+  padding: 12px 0 20px;
+  border-bottom: 1px solid $brand-grey;
+  li {
+    padding: 0 10px;
+    &:first-child {
+      padding: 0 10px 0 0;
+      i {
+        font-size: 18px;
+        vertical-align: bottom;
+      }
+    }
+  }
+}
+.social-likes-reviews {
+  padding: 15px 0;
+  font-size: 12px;
+}
+// progress bar
+.progress-bar-strip {
+  width: 100%;
+  height: 8px;
+  position: relative;
+  background-color: $brand-pink;
+  &:after {
+    content: "";
+    @include size(8px,15px);
+    border-radius: 20px;
+    @include position(absolute, -5px null null 0);
+    background-color: $brand-pink;
+  }
+}
+// journey tabs
+.journey-tabs {
+  .btn-tab {
+    @include square(18px);
+    display: inline-block;
+    border: 1px solid #ebebeb;
+    margin-right: 5px;
+    border-radius: 100px;
+    background-color: #ebebeb;
+    vertical-align: top;
+  }
+  .active-btn-travel {
+    background-color: $brand-pink;
+  }
+  .active-btn-local {
+    background-color: $brand-cyan;
+  }
+}
+.travel-life-btn {
+  span {
     font-size: 16px;
   }
-  .all-profile-detail {
-    padding: 0px 25px;
-  }
-  .more-about-me {
-    padding: 25px 20px 20px;
-    margin-top: -5px;
-    background-color: rgba(255,255,255,0.8);
-    p { font-size: 18px; }
-    .get-more {
-      font-size: 20px;
-    }
-    .more-detail {
-      margin-bottom: 30px;
-    }
-  }
-  .vector-map {
-    padding: 30px;
-    max-height: 600px;
-    mappy svg { max-height: 550px; }
-  }
- // visited list
- .wish-country-visit {
-  padding: 20px 15px 0 0;
- }
- .visited-country-list {
-   li {
-     padding: 10px 0;
-     border-top: 1px solid #ebebeb;
-   }
-   .get-right {
-     display: inline-block;
-   }
- }
- .visit-input {
-   padding: 8px 18px;
-   border: 1px solid #ccc;
-   border-radius: 4px;
-   margin: 15px 15px 10px 0;
- }
- .country-list {
-   .country-name {
-     width: 220px;
-     font-size: 16px;
-     vertical-align: top;
-   }
- }
-// travel life
-  .travelled-imgholder {
-    @include size(400px,500px);
-    overflow: hidden;
-  }
-  .onway-imgholder {
-    @include size(400px,350px);
-  }
-  .travel-life-part {
-    ul {
-      padding: 0;
-      margin: 0;
-      li {
-        display: inline-block;
-        list-style-type: none;
-      }
-    }
-  }
-  .journey-tag-holder {
-    width: 100%;
-    padding: 0 10px;
-    position: absolute;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.7);
-    color: #fff;
-    a { color: #fff; }
-    h4,h3 {
-      padding: 15px 0;
-    }
-  }
-  .masonry-detail {
-    .masonry-brick:nth-child(even) {
-      .travelled-journey { display: none; }
-    }
-    .masonry-brick:nth-child(odd) {
-      .onway-journey { display: none; }
-    }
-  }
-  .days-spent {
-    @include size(45px,48px);
-    border-radius: 18px;
-    background-color: $brand-dark-blue;
-    p {
-      padding-top: 8px;
-      font-size: 10px;
-      text-align: center;
-      span {
-        font-size: 18px;
-        line-height: 18px;
-      }
-    }
-  }
-  .journey-collection {
-    li {
-      padding: 0px 10px;
-      border-right: 1px solid #fff;
-      line-height: 12px;
-      &:first-child {
-        padding: 0 10px 0 0;
-      }
-    }
-  }
-  .social-field-types {
-    padding: 0px 10px;
-  }
-  .user-social-item {
-    padding: 12px 0px 15px;
-    border-bottom: 1px solid $brand-grey;
-   li {
-     padding: 0px 10px;
-     &:first-child {
-       padding: 0px 10px 0 0;
-       i {
-         font-size: 18px;
-         vertical-align: bottom;
-       }
-     }
-   }
-  }
-  .social-likes-reviews {
-    padding: 15px 0;
-    font-size: 12px;
-  }
-  // progress bar
-  .progress-bar-strip {
-    width: 100%;
-    height: 8px;
-    position: relative;
-    background-color: $brand-pink;
-    &:after {
-      content: "";
-      @include size(8px,15px);
-      border-radius: 20px;
-      @include position(absolute, -5px null null 0);
-      background-color: $brand-pink;
-    }
-  }
-  // journey tabs
-  .journey-tabs {
-    padding: 0px 20px;
-    .btn-tab {
-      @include square(18px);
-      display: inline-block;
-      border: 1px solid #ebebeb;
-      margin-right: 5px;
-      border-radius: 100px;
-      background-color: #ebebeb;
-      vertical-align: top;
-    }
-    .active-btn-travel {
-      background-color: $brand-pink;
-    }
-    .active-btn-local {
-      background-color: $brand-cyan;
-    }
-  }
-  .travel-life-btn {
-    span {
-      font-size: 16px;
-    }
-  }
-  // end journey tabs
-  // masonry tab
+}
+// end journey tabs
+// masonry tab
+.masonry-detail {
+  padding: 0 10px;
   .masonry-brick {
     border: 1px solid #ccc;
     border-radius: 6px;
     margin: 10px;
   }
-  .travel-journey-heading {
-    padding: 10px;
-    color: $brand-grey;
-  }
-  // masonry end
+}
+.travel-journey-heading {
+  padding: 10px;
+  color: $brand-grey;
+}
+// masonry end
 // travel life end
+// local life
+  .local-life-main {
+    padding: 0 20px;
+  }
+  .filter-local-life {
+    width: 24%;
+    vertical-align: top;
+    span {
+      font-size: 17px;
+      color: $brand-light-grey;
+    }
+  }
+  .checkin-filter, .rating-filter, .more-filter, .filter-month {
+    padding: 15px 0;
+    border-bottom: 1px solid $brand-lighter-grey;
+    .custom-checkbox {
+      [type="checkbox"]:not(:checked) + label:before,
+      [type="checkbox"]:checked + label:before {
+        margin-right: 10px;
+        vertical-align: top;
+      }
+      [type="checkbox"]:checked + label:after  {
+        color: $brand-cyan;
+      }
+    }
+    .local-filter-checkbox {
+      margin: 12px 0;
+      label {
+        color: $brand-blue;
+        font-size: 16px;
+        font-weight: 400;
+        text-transform: capitalize;
+      }
+      i {
+        color: $brand-blue;
+      }
+    }
+  }
+  .post-local-life {
+    width: 75%;
+    vertical-align: top;
+    .post-header-view {
+      padding: 15px 30px;
+    }
+  }
+// local life end
 // profile end
-
 @import "fancybox-override";

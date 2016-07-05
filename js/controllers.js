@@ -92,35 +92,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.profile = {
-      profileMain : "views/content/profile.html"
+      profileMain: "views/content/profile.html"
     }
 
-    $scope.bucketList = [
-      {
-        countryName : "United States Of America"
-      },
-      {
-        countryName : "Germany"
-      },
-      {
-        countryName : "United Kingdom"
-      },
-      {
-        countryName : "Switzerland"
-      },
-      {
-        countryName : "Australia"
-      },
-      {
-        countryName : "India"
-      },
-      {
-        countryName : "Italy"
-      },
-      {
-        countryName : "Canada"
-      },
-    ];
+    $scope.bucketList = [{
+      countryName: "United States Of America"
+    }, {
+      countryName: "Germany"
+    }, {
+      countryName: "United Kingdom"
+    }, {
+      countryName: "Switzerland"
+    }, {
+      countryName: "Australia"
+    }, {
+      countryName: "India"
+    }, {
+      countryName: "Italy"
+    }, {
+      countryName: "Canada"
+    }, ];
 
     $scope.data = {
       'GB': {
@@ -141,7 +132,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.mapDataHumanizeFn = function(val) {
       return val + " units";
     };
-    $scope.heatmapColors = [ '#2c3757','#ff6759'];
+    $scope.heatmapColors = ['#2c3757', '#ff6759'];
 
     $scope.travelLife = [{
       heading: "Manan Vora has ended his London Journey",
@@ -162,7 +153,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       spendingDay: "75",
       likes: "15660",
       reviews: "354",
-      pointReview: "4.5"
+      pointReview: "4.5",
+      onJourney: false,
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
     }, {
       heading: "Manan Vora has ended his London Journey",
       timestampDate: "14 Jan, 2014",
@@ -182,7 +181,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       spendingDay: "75",
       likes: "15660",
       reviews: "354",
-      pointReview: "4.5"
+      pointReview: "4.5",
+      onJourney: true,
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
     }, {
       heading: "Manan Vora has ended his London Journey",
       timestampDate: "14 Jan, 2014",
@@ -202,7 +209,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       spendingDay: "75",
       likes: "15660",
       reviews: "354",
-      pointReview: "4.5"
+      pointReview: "4.5",
+      onJourney: false,
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
     }, {
       heading: "Manan Vora has ended his London Journey",
       timestampDate: "14 Jan, 2014",
@@ -222,7 +237,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       spendingDay: "75",
       likes: "15660",
       reviews: "354",
-      pointReview: "4.5"
+      pointReview: "4.5",
+      onJourney: false,
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
     }, {
       heading: "Manan Vora has ended his London Journey",
       timestampDate: "14 Jan, 2014",
@@ -242,7 +265,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       spendingDay: "75",
       likes: "15660",
       reviews: "354",
-      pointReview: "4.5"
+      pointReview: "4.5",
+      onJourney: true,
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
     }, {
       heading: "Manan Vora has ended his London Journey",
       timestampDate: "14 Jan, 2014",
@@ -262,7 +293,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       spendingDay: "75",
       likes: "15660",
       reviews: "354",
-      pointReview: "4.5"
+      pointReview: "4.5",
+      onJourney: true,
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
     }];
 
   })
@@ -274,7 +313,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.profile = {
-      profileMain : "views/content/profile.html"
+      profileMain: "views/content/profile.html"
     }
 
     $scope.data = {
@@ -296,7 +335,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.mapDataHumanizeFn = function(val) {
       return val + " units";
     };
-    $scope.heatmapColors = [ '#2c3757','#ff6759'];
+    $scope.heatmapColors = ['#2c3757', '#ff6759'];
 
   })
   .controller('ReviewsCtrl', function($scope, TemplateService, NavigationService, $timeout) {
@@ -345,7 +384,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.mapDataHumanizeFn = function(val) {
       return val + " units";
     };
-    $scope.heatmapColors = ['#2c3757','#ff6759'];
+    $scope.heatmapColors = ['#2c3757', '#ff6759'];
 
     // $('.abc').masonry({
     //   itemSelector: '.masonry-brick',
@@ -362,15 +401,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
     $scope.hoveringOver = function(value) {
-    $scope.overStar = value;
-  };
-    $scope.ratingStates = [
-   {stateOn: 'fa fa-star-o', stateOff: 'fa fa-star'},
-   {stateOn: 'fa fa-star-o', stateOff: 'fa fa-star'},
-   {stateOn: 'fa fa-star-o', stateOff: 'fa fa-star'},
-   {stateOn: 'fa fa-star-o', stateOff: 'fa fa-star'},
-   {stateOn: 'fa fa-star-o', stateOff: 'fa fa-star'}
- ];
+      $scope.overStar = value;
+    };
+    $scope.ratingStates = [{
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }];
 
   })
 
