@@ -1,4 +1,4 @@
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop', 'mappy', 'wu.masonry'])
+angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar'])
 
 .controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -94,6 +94,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.profile = {
       profileMain: "views/content/profile.html"
     }
+    $scope.buildNow = function() {
+      $scope.$broadcast('rebuild:me');
+    }
+    $scope.$on('scrollbar.hide', function() {
+      // console.log('Scrollbar hide');
+    });
+    $scope.$on('scrollbar.show', function() {
+      // console.log('Scrollbar show');
+    });
 
     $scope.bucketList = [{
       countryName: "United States Of America"
@@ -304,6 +313,118 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }, ]
     }];
 
+    $scope.localLife = [{
+      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgWall: "img/local-life-post.jpg",
+      likes: "15660",
+      travelledIcon: "img/cycle-cyan.png",
+      postSlider: [{
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }]
+    }, {
+      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgWall: "img/local-life-post.jpg",
+      likes: "15660",
+      travelledIcon: "img/cycle-cyan.png",
+      postSlider: [{
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }]
+    }, {
+      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgWall: "img/local-life-post.jpg",
+      likes: "15660",
+      travelledIcon: "img/cycle-cyan.png",
+      postSlider: [{
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }]
+    }, {
+      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgWall: "img/local-life-post.jpg",
+      likes: "15660",
+      travelledIcon: "img/cycle-cyan.png",
+      postSlider: [{
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }]
+    }, {
+      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgWall: "img/local-life-post.jpg",
+      likes: "15660",
+      travelledIcon: "img/cycle-cyan.png",
+      postSlider: [{
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }]
+    }];
+
   })
   .controller('MomentsCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -315,6 +436,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.profile = {
       profileMain: "views/content/profile.html"
     }
+
+    $scope.bucketList = [{
+      countryName: "United States Of America"
+    }, {
+      countryName: "Germany"
+    }, {
+      countryName: "United Kingdom"
+    }, {
+      countryName: "Switzerland"
+    }, {
+      countryName: "Australia"
+    }, {
+      countryName: "India"
+    }, {
+      countryName: "Italy"
+    }, {
+      countryName: "Canada"
+    }, ];
 
     $scope.data = {
       'GB': {
@@ -336,6 +475,118 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       return val + " units";
     };
     $scope.heatmapColors = ['#2c3757', '#ff6759'];
+
+    $scope.monthMoments = [{
+      monthName: "November 2015",
+      momentPic: [
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg'
+      ]
+    }, {
+      monthName: "October 2015",
+      momentPic: [
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg'
+      ]
+    }, {
+      monthName: "September 2015",
+      momentPic: [
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg'
+      ]
+    }, ];
+    $scope.momentPic = [
+      'img/slider1.jpg',
+      'img/slider2.jpg',
+      'img/slider1.jpg',
+      'img/slider2.jpg',
+      'img/slider1.jpg',
+      'img/slider2.jpg',
+      'img/slider1.jpg',
+      'img/slider2.jpg',
+      'img/slider1.jpg',
+      'img/slider2.jpg',
+      'img/slider1.jpg',
+      'img/slider2.jpg',
+      'img/slider1.jpg',
+      'img/slider2.jpg',
+      'img/slider1.jpg',
+      'img/slider2.jpg',
+      'img/slider1.jpg',
+      'img/slider2.jpg',
+      'img/slider1.jpg',
+      'img/slider2.jpg',
+      'img/slider1.jpg',
+      'img/slider2.jpg',
+      'img/slider1.jpg',
+      'img/slider2.jpg'
+    ];
 
   })
   .controller('ReviewsCtrl', function($scope, TemplateService, NavigationService, $timeout) {

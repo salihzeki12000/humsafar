@@ -5,6 +5,18 @@
       <div class="all-profile-detail">
         <div class="bg-white">
           <!-- tabs -->
+          <div class="profile-tabs moments-active">
+            <span class="first-strip"></span>
+            <span class="sec-strip"></span>
+            <span class="third-strip"></span>
+            <span class="fourth-strip"></span>
+            <ul>
+              <li><a href="" class="tab-heading" ui-sref="journey">Journey</a></li>
+              <li><a href="" class="tab-heading">Moments</a></li>
+              <li><a href="" class="tab-heading" ui-sref="review">Reviews</a></li>
+              <li><a href="" class="tab-heading" ui-sref="holiday">Holiday Planner</a></li>
+            </ul>
+          </div>
           <!-- end tabs -->
           <div class="moments-tab">
             <div class="btn-view-moments">
@@ -25,7 +37,7 @@
               <h4 class="month-name" ng-click="viewMonth();">{{getImage.monthName}}</h4>
               <div class="collage-month-view">
                 <div class="flex-wrap-container">
-                  <div class="moment-imgholder" ng-repeat="monthMoments in momentPic">
+                  <div class="moment-imgholder" ng-repeat="monthMoments in getImage.momentPic track by $index">
                     <img ng-src="{{monthMoments}}" alt="" class="img-responsive">
                   </div>
                 </div>
@@ -36,7 +48,7 @@
             <h4 class="">November 2015</h4>
             <div class="month-view-pic">
               <div class="flex-wrap-container">
-                <div class="singleMonth-imgholder" ng-repeat="monthMoments in momentPic">
+                <div class="singleMonth-imgholder" ng-repeat="monthMoments in momentPic track by $index">
                   <img ng-src="{{monthMoments}}" alt="" class="img-responsive">
                 </div>
               </div>

@@ -6,6 +6,7 @@
 @import "../bower_components/fancyBox/source/jquery.fancybox.css";
 @import "../bower_components/ng-img-crop/compile/minified/ng-img-crop.css";
 @import "../bower_components/angular-mappy/build/angular-mappy.css";
+@import "../bower_components/ng-scrollbar/dist/ng-scrollbar.min.css";
 /* Bootstrap Variables Goes Here */
 $brand-dark-blue: #2c3757;
 $brand-blue: #2d3655;
@@ -93,6 +94,17 @@ ul {
   padding: 0;
   margin: 0;
   list-style-type: none;
+}
+.circle-rounded {
+  @include size(45px,48px);
+  border-radius: 18px;
+  display: inline-block;
+  line-height: 45px;
+  text-align: center;
+}
+.flexslider {
+  border: none;
+  margin: 0;
 }
 //bootstrap forms
 // fonts
@@ -838,6 +850,24 @@ header {
 // tabs
 .profile-tabs {
   padding: 0 10px;
+  position: relative;
+  .first-strip,
+  .sec-strip,
+  .third-strip,
+  .fourth-strip {
+    width: 98%;
+    height: 1px;
+    position: absolute;
+    left: 16px;
+    bottom: 0;
+    background-color: $brand-grey;
+  }
+  .sec-strip {
+    bottom: 4px;
+  }
+  .third-strip {
+    bottom: 8px;
+  }
   ul {
     @include display(flex);
     li {
@@ -894,13 +924,13 @@ header {
 .add-journey {
   position: relative;
   span {
-  @include square(30px);
-  display: inline-block;
-  border-radius: 100%;
-  line-height: 30px;
-  background-color: $brand-pink;
-  color: #fff;
-  text-align: center;
+    @include square(30px);
+    display: inline-block;
+    border-radius: 100%;
+    line-height: 30px;
+    background-color: $brand-pink;
+    color: #fff;
+    text-align: center;
     @include transition(all 300ms linear);
     i {
       @include transition(all 300ms linear);
@@ -908,7 +938,7 @@ header {
   }
   .close-more {
     background-color: $brand-grey;
-      @include transition(all 300ms linear);
+    @include transition(all 300ms linear);
     i {
       @include transform(rotate(45deg));
       @include transition(all 300ms linear);
@@ -941,11 +971,13 @@ header {
   }
   li {
     padding: 8px 0;
-    &:nth-child(2) {
-      border-top: 1px solid $brand-blue;
-      border-bottom: 1px solid $brand-blue;
+    border-bottom: 1px solid $brand-blue;
+    &:last-child {
+      border: none;
     }
-    a { color: #fff; }
+    a {
+      color: #fff;
+    }
   }
 }
 .travel-local-life {
@@ -983,7 +1015,7 @@ header {
 .journey-type {
   vertical-align: top;
   li {
-    padding: 0px 5px;
+    padding: 0 5px;
   }
 }
 .journey-cost {
@@ -1095,50 +1127,271 @@ header {
 // masonry end
 // travel life end
 // local life
-  .local-life-main {
-    padding: 0 20px;
+.add-more-life {
+  @extend .add-journey;
+  span {
+    background-color: $brand-dark-cyan;
+    color: $brand-blue;
   }
-  .filter-local-life {
-    width: 24%;
-    vertical-align: top;
-    span {
-      font-size: 17px;
+  .add-more-journey {
+    background-color: $brand-dark-cyan;
+    &:after {
+      border-left: 9px solid $brand-dark-cyan;
+    }
+  }
+  .close-more {
+    background-color: $brand-blue;
+    color: #fff;
+  }
+}
+.local-life-main {
+  padding: 0 20px;
+}
+.filter-local-life {
+  width: 24%;
+  border-top: 1px solid $brand-lighter-grey;
+  vertical-align: top;
+  span {
+    font-size: 17px;
+    color: $brand-light-grey;
+  }
+  .clear-all {
+    font-size: 15px;
+    text-decoration: underline;
+  }
+  .checkin-more {
+    color: $brand-blue;
+    text-decoration: underline;
+  }
+}
+.checkin-filter,
+.rating-filter,
+.more-filter,
+.filter-month {
+  padding: 15px 0;
+  border-bottom: 1px solid $brand-lighter-grey;
+  .custom-checkbox {
+    [type="checkbox"]:not(:checked) + label:before,
+    [type="checkbox"]:checked + label:before {
+      margin-right: 10px;
+      vertical-align: top;
+    }
+    [type="checkbox"]:checked + label:after {
+      color: $brand-cyan;
+    }
+  }
+  .local-filter-checkbox {
+    margin: 12px 0;
+    label {
+      color: $brand-blue;
+      font-size: 16px;
+      font-weight: 400;
+      text-transform: capitalize;
+    }
+    i {
+      color: $brand-blue;
+    }
+  }
+}
+.more-filter {
+  border-bottom: none;
+}
+.post-local-life {
+  width: 76%;
+  margin-left: -4px;
+  vertical-align: top;
+  .post-header-view {
+    padding: 15px 30px;
+  }
+}
+.post-list-view {
+  .list-inline > li {
+    padding: 0 13px;
+    border-right: 2px solid $brand-blue;
+    line-height: 16px;
+    font-size: 16px;
+    img {
+      margin-right: 8px;
+    }
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+.total-post {
+  font-size: 16px;
+}
+.local-post {
+  padding: 30px 60px;
+  border-right: 1px solid $brand-lighter-grey;
+}
+.scrollme {
+  max-height: 890px;
+}
+.scroll-local-life {
+  .ngsb-wrap {
+    height: auto !important;
+  }
+  .ngsb-wrap .ngsb-scrollbar .ngsb-track {
+    width: 4px;
+    background: $brand-dark-cyan;
+    box-shadow: none;
+  }
+  .ngsb-wrap .ngsb-scrollbar .ngsb-thumb-pos .ngsb-thumb {
+    @include square(16px);
+    background: #fff;
+    border: 3px solid $brand-dark-blue;
+  }
+  .ngsb-wrap .ngsb-scrollbar .ngsb-thumb-pos:active {
+    background-color: transparent;
+  }
+  .ngsb-wrap .ngsb-scrollbar {
+    left: 17px;
+  }
+}
+.post-main {
+  border: 1px solid $brand-lighter-grey;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  .heading-local-life {
+    padding: 10px;
+    position: relative;
+    font-size: 15px;
+    .location {
+      @include position(absolute, 10px 10px null null);
+    }
+  }
+  .post-imgholder {
+    height: 500px;
+    overflow: hidden;
+  }
+  .post-social-type {
+    padding: 0 10px;
+  }
+  .post-social-item {
+    padding: 15px 0 25px;
+    border-bottom: 1px solid $brand-lighter-grey;
+    li {
+      padding: 0 15px;
+      display: inline-block;
+      vertical-align: middle;
+      i {
+        font-size: 20px;
+      }
+      &:first-child {
+        padding: 0 15px 0 0;
+      }
+    }
+  }
+  .post-socail-reviews {
+    padding: 10px 0 15px;
+    font-size: 15px;
+  }
+  .rating-localpost {
+    i.glyphicon {
+      margin-right: 5px;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: 15px;
+    }
+    .glyphicon-star-empty:before {
+      content: "\f006";
       color: $brand-light-grey;
     }
-  }
-  .checkin-filter, .rating-filter, .more-filter, .filter-month {
-    padding: 15px 0;
-    border-bottom: 1px solid $brand-lighter-grey;
-    .custom-checkbox {
-      [type="checkbox"]:not(:checked) + label:before,
-      [type="checkbox"]:checked + label:before {
-        margin-right: 10px;
-        vertical-align: top;
-      }
-      [type="checkbox"]:checked + label:after  {
-        color: $brand-cyan;
-      }
-    }
-    .local-filter-checkbox {
-      margin: 12px 0;
-      label {
-        color: $brand-blue;
-        font-size: 16px;
-        font-weight: 400;
-        text-transform: capitalize;
-      }
-      i {
-        color: $brand-blue;
-      }
+    .glyphicon-star:before {
+      content: "\f005";
+      color: $brand-cyan;
     }
   }
-  .post-local-life {
-    width: 75%;
-    vertical-align: top;
-    .post-header-view {
-      padding: 15px 30px;
+}
+.local-post-slider {
+  padding: 10px;
+  .carousel {
+    width: 96%;
+  }
+  .flex-direction-nav a {
+    @include square(20px);
+    color: transparent;
+    text-shadow: none;
+    &:before {
+      color: $brand-blue;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: 18px;
     }
   }
+  .flex-direction-nav .flex-prev:before {
+    content: '\f053';
+  }
+  .flex-direction-nav .flex-next:before {
+    content: '\f054';
+  }
+  .flex-direction-nav .flex-prev {
+    left: auto;
+    right: -27px;
+    opacity: 1;
+    top: 45%;
+  }
+  .flex-direction-nav .flex-next {
+    left: auto;
+    right: -27px;
+    opacity: 1;
+    top: 65%;
+  }
+  .flexslider:hover {
+    .flex-direction-nav .flex-prev {
+      left: auto;
+      right: -27px;
+      opacity: 1;
+      top: 45%;
+    }
+    .flex-direction-nav .flex-next {
+      left: auto;
+      right: -27px;
+      opacity: 1;
+      top: 65%;
+    }
+  }
+  .related-postholder {
+    @include size(135px,135px);
+    border: 1px solid $brand-cyan;
+  }
+}
 // local life end
 // profile end
+// moment tab
+.moments-active {
+  .first-strip,
+  .sec-strip,
+  .third-strip,
+  .fourth-strip {
+    left: 14px;
+  }
+  ul {
+    li {
+      &:first-child .tab-heading {
+        padding: 15px 20px;
+        margin: 6px 0 0;
+        background: -webkit-linear-gradient(right, #e85a4d, #f05b4d);
+        background: -o-linear-gradient(right, #e85a4d, #f05b4d);
+        background: linear-gradient(to left, #e85a4d, #f05b4d);
+      }
+      &:nth-child(2) .tab-heading {
+        padding: 20px;
+        margin: 0 0 0 -18px;
+        background: $brand-pink;
+        z-index: 4;
+      }
+    }
+  }
+}
+.collage-month-view {
+  .moment-imgholder {
+    @include square(80px);
+    display: inline-block;
+  }
+}
+.singleMonth-imgholder {
+  @include square(150px);
+  display: inline-block;
+}
+// moment tab end
 @import "fancybox-override";
