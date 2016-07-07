@@ -3,7 +3,7 @@
   <div class="moments-main">
     <div class="container-fluid">
       <div class="all-profile-detail">
-        <div class="bg-white">
+        <div class="bg-white" ng-init="momentView =1">
           <!-- tabs -->
           <div class="profile-tabs moments-active">
             <span class="first-strip"></span>
@@ -18,42 +18,83 @@
             </ul>
           </div>
           <!-- end tabs -->
+          <!-- moments view tab -->
           <div class="moments-tab">
-            <div class="btn-view-moments">
-              <span></span>
+            <div class="btn-view-moments pointer" ng-click="momentView = 1">
+              <span class="btn-tab" ng-class="{'active-btn-all': momentView ==1}"></span>
               <span>All</span>
             </div>
-            <div class="btn-view-moments">
-              <span></span>
+            <div class="btn-view-moments pointer" ng-click="momentView = 2">
+              <span class="btn-tab" ng-class="{'active-btn-travel': momentView ==2}"></span>
               <span>Travel Life</span>
             </div>
-            <div class="btn-view-moments">
-              <span></span>
+            <div class="btn-view-moments pointer" ng-click="momentView = 3">
+              <span class="btn-tab" ng-class="{'active-btn-local': momentView ==3}"></span>
               <span>Local Life</span>
             </div>
           </div>
-          <div class="moment-all-view">
-            <div class="month-collage" ng-repeat="getImage in monthMoments">
-              <h4 class="month-name" ng-click="viewMonth();">{{getImage.monthName}}</h4>
-              <div class="collage-month-view">
-                <div class="flex-wrap-container">
-                  <div class="moment-imgholder" ng-repeat="monthMoments in getImage.momentPic track by $index">
-                    <img ng-src="{{monthMoments}}" alt="" class="img-responsive">
+          <!-- moments view tab end -->
+          <!-- moment all view -->
+          <div class="moment-view">
+            <div class="moment-all-view" ng-show="momentView == 1" >
+              <div class="month-collage" ng-repeat="getImage in monthMoments">
+                <h4 class="month-name">{{getImage.monthName}}</h4>
+                <div class="collage-month-view">
+                  <div class="flex-wrap-container">
+                    <div class="moment-imgholder" ng-repeat="monthMoments in getImage.momentPic track by $index">
+                      <img ng-src="{{monthMoments}}" alt="" class="img-responsive">
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="month-view-moments">
-            <h4 class="">November 2015</h4>
-            <div class="month-view-pic">
-              <div class="flex-wrap-container">
-                <div class="singleMonth-imgholder" ng-repeat="monthMoments in momentPic track by $index">
-                  <img ng-src="{{monthMoments}}" alt="" class="img-responsive">
+            <!-- <div class="month-view-moments">
+              <h4 class="">November 2015</h4>
+              <div class="month-view-pic">
+                <div class="flex-wrap-container">
+                  <div class="singleMonth-imgholder" ng-repeat="monthMoments in momentPic track by $index">
+                    <img ng-src="{{monthMoments}}" alt="" class="img-responsive">
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <!-- moment all view end -->
+            <!-- moment travel view  -->
+            <div class="moment-travel-main" ng-show="momentView == 2">
+              <div class="moment-travel-view" ng-repeat="view in travelMoment">
+                <div class="moment-travelimgholder pointer">
+                  <div class="img-backholder">
+                    <img ng-src="{{view.imgBack}}" alt="" class="img-responsive">
+                  </div>
+                  <div class="img-frontholder">
+                    <img ng-src="{{view.imgFront}}" alt="" class="img-responsive">
+                  </div>
+                </div>
+                <div class="travel-info text-center avenir-roman">
+                  <h4>{{view.placeName}} <span>({{view.totalPhoto}})</span></h4>
+                  <span class="color-light-grey">{{view.timestampMonth}}</span>
+                </div>
+              </div>
+            </div>
+            <!-- moment travel view end  -->
+            <!-- moment local view  -->
+            <div class="moment-local-main" ng-show="momentView == 3">
+              <div class="moment-local-view" ng-repeat="moment in localMoment">
+                <div class="moment-localimgholder pointer">
+                  <div class="img-backholder">
+                    <img ng-src="{{moment.imgBack}}" alt="" class="img-responsive">
+                  </div>
+                  <div class="img-frontholder">
+                    <img ng-src="{{moment.imgFront}}" alt="" class="img-responsive">
+                  </div>
+                </div>
+                <div class="local-info text-center avenir-roman">
+                  <h4>{{moment.timestampDate}} <span>({{moment.totalPhoto}})</span></h4>
                 </div>
               </div>
             </div>
           </div>
+          <!-- moment local view end -->
         </div>
       </div>
     </div>

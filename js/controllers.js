@@ -588,6 +588,84 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       'img/slider2.jpg'
     ];
 
+    $scope.travelMoment = [
+      {
+        imgBack: "img/moment-travel1.jpg",
+        imgFront: "img/moment-travel.png",
+        placeName: "London Journey",
+        totalPhoto: "50",
+        timestampMonth: "14 Jan, 2014"
+      },
+      {
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-travel.png",
+        placeName: "London Journey",
+        totalPhoto: "50",
+        timestampMonth: "14 Jan, 2014"
+      },
+      {
+        imgBack: "img/moment-travel1.jpg",
+        imgFront: "img/moment-travel.png",
+        placeName: "London Journey",
+        totalPhoto: "50",
+        timestampMonth: "14 Jan, 2014"
+      },
+      {
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-travel.png",
+        placeName: "London Journey",
+        totalPhoto: "50",
+        timestampMonth: "14 Jan, 2014"
+      },
+      {
+        imgBack: "img/moment-travel1.jpg",
+        imgFront: "img/moment-travel.png",
+        placeName: "London Journey",
+        totalPhoto: "50",
+        timestampMonth: "14 Jan, 2014"
+      },
+      {
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-travel.png",
+        placeName: "London Journey",
+        totalPhoto: "50",
+        timestampMonth: "14 Jan, 2014"
+      },
+    ];
+
+    $scope.localMoment = [
+      {
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-local.png",
+        timestampDate: "August, 2014",
+        totalPhoto: "50"
+      },
+      {
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-local.png",
+        timestampDate: "October, 2014",
+        totalPhoto: "50"
+      },
+      {
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-local.png",
+        timestampDate: "August, 2014",
+        totalPhoto: "50"
+      },
+      {
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-local.png",
+        timestampDate: "October, 2014",
+        totalPhoto: "50"
+      },
+      {
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-local.png",
+        timestampDate: "August, 2014",
+        totalPhoto: "50"
+      }
+    ];
+
   })
   .controller('ReviewsCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file

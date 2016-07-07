@@ -1092,7 +1092,7 @@ header {
   .btn-tab {
     @include square(18px);
     display: inline-block;
-    border: 1px solid #ebebeb;
+    border: 2px solid #ebebeb;
     margin-right: 5px;
     border-radius: 100px;
     background-color: #ebebeb;
@@ -1100,9 +1100,11 @@ header {
   }
   .active-btn-travel {
     background-color: $brand-pink;
+    @include transition(all 300ms linear);
   }
   .active-btn-local {
     background-color: $brand-cyan;
+    @include transition(all 300ms linear);
   }
 }
 .travel-life-btn {
@@ -1146,6 +1148,7 @@ header {
 }
 .local-life-main {
   padding: 0 20px;
+  margin-top: 10px;
 }
 .filter-local-life {
   width: 24%;
@@ -1306,7 +1309,10 @@ header {
 .local-post-slider {
   padding: 10px;
   .carousel {
-    width: 96%;
+    width: 95%;
+  }
+  .flexslider .slides > li {
+    width: 136px !important;
   }
   .flex-direction-nav a {
     @include square(20px);
@@ -1351,7 +1357,7 @@ header {
     }
   }
   .related-postholder {
-    @include size(135px,135px);
+    @include square(136px);
     border: 1px solid $brand-cyan;
   }
 }
@@ -1383,15 +1389,117 @@ header {
     }
   }
 }
+.moment-view {
+  padding: 0px 40px;
+}
+.month-collage {
+  margin-bottom: 30px;
+}
 .collage-month-view {
   .moment-imgholder {
-    @include square(80px);
+    @include square(79px);
+    margin-top: -2px;
     display: inline-block;
+    cursor: pointer;
+    img {
+      max-height: 100%;
+    }
   }
 }
 .singleMonth-imgholder {
-  @include square(150px);
+  @include square(169px);
+  display: inline-block;
+  cursor: pointer;
+  img {
+    max-height: 100%;
+    margin: 0 auto;
+  }
+}
+.moments-tab {
+  padding: 20px;
+  @extend .journey-tabs;
+  .btn-view-moments {
+    margin: 0px 20px;
+    display: inline-block;
+    span {
+      color: $brand-dark-blue;
+      font-size: 16px;
+    }
+  }
+  .active-btn-all {
+    background-color: $brand-dark-blue;
+    @include transition(all 300ms linear);
+  }
+}
+// travel moment imgholder
+.moment-travel-main {
+  .moment-travel-view:nth-child(5n+1) {
+    margin: 15px 22px 15px 0;
+  }
+  .moment-travel-view:nth-child(5n+5) {
+    margin: 15px 0 15px 22px;
+  }
+}
+.moment-travel-view {
+  margin: 15px 22px;
   display: inline-block;
 }
+.moment-travelimgholder {
+  @include square(200px);
+  position: relative;
+  .img-backholder {
+    @include square(190px);
+    @include position(absolute,15px null null 15px);
+    @include transform(rotate(1deg));
+    img {
+      min-height: 100%;
+      border: 3px solid #fff;
+      border-radius: 6px;
+      box-shadow: 1px 1px 5px $brand-light-grey;
+    }
+  }
+  .img-frontholder {
+    @include square(200px);
+    @include position(absolute, 0 null null 0);
+  }
+}
+.travel-info {
+  margin: 20px 0 0;
+  h4 {
+    margin: 0 0 5px;
+    font-size: 17px;
+    span {
+      font-size: 13px;
+    }
+  }
+}
+// travel moment imgholder end
+// local moment imgholder
+.moment-local-main {
+   .moment-local-view:nth-child(5n+1) {
+      margin: 15px 22px 15px 0;
+   }
+   .moment-local-view:nth-child(5n+5) {
+     margin: 15px 0 15px 22px;
+   }
+}
+.moment-local-view {
+  margin: 15px 22px;
+  display: inline-block;
+}
+.moment-localimgholder {
+  @include square(200px);
+  position: relative;
+  .img-backholder {
+    @include square(150px);
+    @include position(absolute,30px null null 15px);
+  }
+  .img-frontholder {
+    @include square(200px);
+    @include position(absolute, 0 null null 0);
+  }
+}
+
+// local moment imgholder end
 // moment tab end
 @import "fancybox-override";
