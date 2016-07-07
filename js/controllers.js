@@ -674,6 +674,48 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Reviews");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.profile = {
+      profileMain: "views/content/profile.html"
+    }
+
+    $scope.bucketList = [{
+      countryName: "United States Of America"
+    }, {
+      countryName: "Germany"
+    }, {
+      countryName: "United Kingdom"
+    }, {
+      countryName: "Switzerland"
+    }, {
+      countryName: "Australia"
+    }, {
+      countryName: "India"
+    }, {
+      countryName: "Italy"
+    }, {
+      countryName: "Canada"
+    }, ];
+
+    $scope.data = {
+      'GB': {
+        metric: 4
+      },
+      'US': {
+        metric: 40
+      },
+      'FR': {
+        metric: 29
+      },
+      'IN': {
+        metric: 500
+      }
+      // 'FI': {metric: 15}
+    };
+    $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
+    $scope.mapDataHumanizeFn = function(val) {
+      return val + " units";
+    };
+    $scope.heatmapColors = ['#2c3757', '#ff6759'];
 
   })
   .controller('HolidayPlannerCtrl', function($scope, TemplateService, NavigationService, $timeout) {

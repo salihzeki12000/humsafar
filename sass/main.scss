@@ -1502,4 +1502,43 @@ header {
 
 // local moment imgholder end
 // moment tab end
+// revies tab
+.reviews-active {
+  .first-strip,
+  .sec-strip,
+  .third-strip,
+  .fourth-strip {
+    left: 14px;
+  }
+  ul {
+    li {
+      &:first-child .tab-heading {
+        padding: 11px 20px;
+        margin: 10px 0 0 2px;
+        background: -webkit-linear-gradient(right, #e85a4d, #f05b4d);
+        background: -o-linear-gradient(right, #e85a4d, #f05b4d);
+        background: linear-gradient(to left, #e85a4d, #f05b4d);
+      }
+      &:nth-child(2) .tab-heading {
+        padding: 15px 20px;
+        margin: 6px 0 0 -18px;
+        background: -webkit-linear-gradient(right, #e85a4d, #f05b4d);
+        background: -o-linear-gradient(right, #e85a4d, #f05b4d);
+        background: linear-gradient(to left, #e85a4d, #f05b4d);
+        z-index: 4;
+      }
+      &:nth-child(3) .tab-heading {
+        padding: 20px;
+        margin: 0 0 0 -18px;
+        z-index: 4;
+        background: #ff6759;
+      }
+      &:nth-child(4) .tab-heading {
+        padding: 10px 20px;
+        margin: 12px 0 0 -30px;
+      }
+    }
+  }
+}
+// revies tab end
 @import "fancybox-override";
