@@ -728,7 +728,7 @@ header {
 }
 .profile-photo-section {
   width: 300px;
-  margin: 0 auto -12px;
+  margin: 50px auto -12px;
 }
 .profile-more-detail {
   padding: 30px 30px 20px;
@@ -790,13 +790,20 @@ header {
   }
   .more-detail {
     margin-bottom: 30px;
+    img {
+      @include transition(all 300ms linear);
+    }
+  }
+  .abt-me {
+    @include transition(all 300ms linear);
+    @include transform(rotate(180deg));
   }
 }
 .vector-map {
   padding: 30px;
-  max-height: 600px;
+  max-height: 550px;
   mappy svg {
-    max-height: 550px;
+    max-height: 500px;
   }
 }
 // visited list
@@ -1074,6 +1081,72 @@ header {
   font-size: 12px;
 }
 // progress bar
+.level1, .level2, .level3, .level4, .level5 {
+  span {
+    display: block;
+    color: $brand-light-grey;
+    font-size: 15px;
+  }
+  .progress-range {
+    margin: 5px 0 0 -8px;
+  }
+}
+.level1 {
+  .name {
+    margin: 0 0 10px -13px;
+  }
+}
+.level2 {
+  .name {
+    margin: 0 0 10px -40px;
+  }
+}
+.level3 {
+  .name {
+    margin: 0 0 10px -42px;
+  }
+  .progress-range {
+    margin: 5px 0 0 -10px;
+  }
+  .progress-bar-strip {
+    background-color: #bfbfbf;
+  }
+}
+.level4 {
+  .name {
+    margin: 0 0 10px -25px;
+  }
+  .progress-range {
+    margin: 5px 0 0 -15px;
+  }
+  .progress-bar-strip {
+    background-color: #bfbfbf;
+    &:after {
+      background-color: $brand-light-grey;
+    }
+  }
+}
+.last-level5 {
+  position: absolute;
+  top: 0;
+  right: -15px;
+  .progress-range {
+    margin: 25px -15px 0 0;
+  }
+}
+.active-bar {
+  .name { color: $brand-pink; }
+}
+.last-progress-strip {
+  position: relative;
+  &:after {
+    content: "";
+    @include size(8px,17px);
+    border-radius: 20px;
+    @include position(absolute, 5px 10px null null);
+    background-color: $brand-light-grey;
+  }
+}
 .progress-bar-strip {
   width: 100%;
   height: 8px;
@@ -1081,11 +1154,14 @@ header {
   background-color: $brand-pink;
   &:after {
     content: "";
-    @include size(8px,15px);
+    @include size(8px,17px);
     border-radius: 20px;
     @include position(absolute, -5px null null 0);
     background-color: $brand-pink;
   }
+}
+.travel-progress-bar {
+  margin-bottom: 60px;
 }
 // journey tabs
 .journey-tabs {

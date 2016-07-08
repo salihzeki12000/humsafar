@@ -717,6 +717,63 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
     $scope.heatmapColors = ['#2c3757', '#ff6759'];
 
+    $scope.reviewAll = [
+      {
+        locationName: "Girgaon Beach",
+        travelType: "img/beach.png",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+        city: "Mumbai",
+        country: "India"
+      },
+      {
+        locationName: "Girgaon Beach",
+        travelType: "img/beach.png",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+        city: "Mumbai",
+        country: "India"
+      },
+      {
+        locationName: "Girgaon Beach",
+        travelType: "img/beach.png",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+        city: "Mumbai",
+        country: "India"
+      },
+      {
+        locationName: "Girgaon Beach",
+        travelType: "img/beach.png",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+        city: "Mumbai",
+        country: "India"
+      }
+    ];
+    $scope.travelReview = [
+      {
+        img: "img/moment-travel2.jpg",
+        countryName: "India"
+      },
+      {
+        img: "img/moment-travel2.jpg",
+        countryName: "India"
+      },
+      {
+        img: "img/moment-travel2.jpg",
+        countryName: "India"
+      },
+      {
+        img: "img/moment-travel2.jpg",
+        countryName: "India"
+      },
+      {
+        img: "img/moment-travel2.jpg",
+        countryName: "India"
+      }
+    ];
+
   })
   .controller('HolidayPlannerCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file

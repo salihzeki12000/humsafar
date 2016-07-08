@@ -18,6 +18,86 @@
             </ul>
           </div>
           <!-- end tabs -->
+          <!-- reviews view tab -->
+          <div class="moments-tab review-tab" ng-init="reviewView=1">
+            <div class="btn-view-moments btn-view-review pointer" ng-click="reviewView = 1">
+              <span class="btn-tab" ng-class="{'active-btn-all': reviewView ==1}"></span>
+              <span>All</span>
+            </div>
+            <div class="btn-view-moments btn-view-review pointer" ng-click="reviewView = 2">
+              <span class="btn-tab" ng-class="{'active-btn-travel': reviewView ==2}"></span>
+              <span>Travel Life</span>
+            </div>
+            <div class="btn-view-moments btn-view-review pointer" ng-click="reviewView = 3">
+              <span class="btn-tab" ng-class="{'active-btn-local': reviewView ==3}"></span>
+              <span>Local Life</span>
+            </div>
+          </div>
+          <!-- reviews view tab end -->
+          <div class="moment-view review-main">
+            <!-- review all view -->
+            <div class="see-review" ng-show="reviewView ==1 ">
+              <div class="" ng-repeat="view in reviewAll">
+                <div class="review-travel-life">
+                  <div class="heading-review">
+                    <h3 class="place-name">{{view.locationName}}</h3>
+                    <img ng-src="{{view.travelType}}" alt="" height="30">
+                  </div>
+                  <div class="rate-location">
+                    <p class="color-cyan">Rate this now</p>
+                    <div class="travel-life-rating">
+                      <uib-rating ng-model="rate" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></uib-rating>
+                    </div>
+                  </div>
+                  <p class="m-clear color-light-grey"><i class="fa fa-calendar"></i><span>{{view.timestampDate}}</span> | <i class="fa fa-clock-o"></i> <span>{{view.timestampHour}}</span>, <span>{{view.city}}</span>, <span>{{view.country}}</span></p>
+                </div>
+                <div class="review-local-life">
+                  <div class="heading-review">
+                    <h3 class="place-name">{{view.locationName}}</h3>
+                    <img ng-src="{{view.travelType}}" alt="" height="30">
+                  </div>
+                  <div class="rate-location">
+                    <p class="color-cyan">Rate this now</p>
+                    <div class="local-life-rating">
+                      <uib-rating ng-model="rate" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></uib-rating>
+                    </div>
+                  </div>
+                  <p class="m-clear color-lighter-grey"><i class="fa fa-calendar"></i><span>{{view.timestampDate}}</span> | <i class="fa fa-clock-o"></i> <span>{{view.timestampHour}}</span> <span>{{life.city}}</span>, <span>{{view.country}}</span></p>
+                </div>
+              </div>
+            </div>
+            <!-- review all view end -->
+            <!-- review travel-life-->
+            <div class="review-travel-view" ng-show="reviewView == 2">
+              <div class="" ng-repeat="review in travelReview">
+                <div class="review-travel-main relate">
+                  <div class="review-backimgholder">
+                    <img ng-src="{{review.img}}" alt="" class="img-responsive">
+                  </div>
+                  <div class="review-frontimgholder">
+                    <img ng-src="img/review-travel.png" alt="" class="img-responsive">
+                  </div>
+                  <h3 class="country-name">{{review.countryName}}</h3>
+                </div>
+              </div>
+            </div>
+            <!-- review travel-life end-->
+            <!-- review local-life-->
+            <div class="review-travel-view review-local-view" ng-show="reviewView == 3">
+              <div class="" ng-repeat="review in travelReview">
+                <div class="review-travel-main relate">
+                  <div class="review-backimgholder">
+                    <img ng-src="{{review.img}}" alt="" class="img-responsive">
+                  </div>
+                  <div class="review-frontimgholder">
+                    <img ng-src="img/review-local.png" alt="" class="img-responsive">
+                  </div>
+                  <h3 class="country-name">{{review.countryName}}</h3>
+                </div>
+              </div>
+            </div>
+            <!-- review local-life end-->
+          </div>
         </div>
       </div>
     </div>
