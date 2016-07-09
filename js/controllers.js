@@ -936,6 +936,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }];
 
   })
+  .controller('SettingCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+
+    // console.log("Testing Consoles");
+
+    $scope.template = TemplateService.changecontent("setting");
+    $scope.menutitle = NavigationService.makeactive("Setting");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+  })
 
 .controller('headerctrl', function($scope, TemplateService) {
   $scope.template = TemplateService;
