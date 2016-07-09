@@ -5,7 +5,7 @@
       <div class="all-profile-detail">
         <div class="bg-white">
           <!-- tabs -->
-          <div class="profile-tabs reviews-active">
+          <div class="profile-tabs reviews-active" id="tabs">
             <span class="first-strip"></span>
             <span class="sec-strip"></span>
             <span class="third-strip"></span>
@@ -14,7 +14,7 @@
               <li><a href="" class="tab-heading" ui-sref="journey">Journey</a></li>
               <li><a href="" class="tab-heading" ui-sref="moments">Moments</a></li>
               <li><a href="" class="tab-heading">Reviews</a></li>
-              <li><a href="" class="tab-heading" ui-sref="holiday">Holiday Planner</a></li>
+              <li><a href="" class="tab-heading" ui-sref="holidayplanner">Holiday Planner</a></li>
             </ul>
           </div>
           <!-- end tabs -->
@@ -34,65 +34,112 @@
             </div>
           </div>
           <!-- reviews view tab end -->
-          <div class="moment-view review-main">
+          <div class="moment-view review-main avenir-roman">
             <!-- review all view -->
             <div class="see-review" ng-show="reviewView ==1 ">
-              <div class="" ng-repeat="view in reviewAll">
-                <div class="review-travel-life">
-                  <div class="heading-review">
-                    <h3 class="place-name">{{view.locationName}}</h3>
-                    <img ng-src="{{view.travelType}}" alt="" height="30">
+              <div class="review-all-life" ng-repeat="view in reviewAll">
+                <div class="review-travel-life" ng-show="view.reviewLocation">
+                  <div class="heading-review clearfix">
+                    <h3 class="place-name pull-left m-clear color-blue">{{view.locationName}}</h3>
+                    <img ng-src="{{view.travelType}}" alt="" height="30" class="pull-right">
                   </div>
                   <div class="rate-location">
-                    <p class="color-cyan">Rate this now</p>
+                    <p class="color-cyan m-clear inline-block">Rate this now</p>
                     <div class="travel-life-rating">
-                      <uib-rating ng-model="rate" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></uib-rating>
+                      <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
+                      <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
+                      <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
+                      <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
                     </div>
                   </div>
-                  <p class="m-clear color-light-grey"><i class="fa fa-calendar"></i><span>{{view.timestampDate}}</span> | <i class="fa fa-clock-o"></i> <span>{{view.timestampHour}}</span>, <span>{{view.city}}</span>, <span>{{view.country}}</span></p>
+                  <div class="mt10">
+                    <p class="m-clear color-light-grey"><i class="fa fa-calendar mr5"></i><span>{{view.timestampDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span>{{view.timestampHour}}</span>, <span>{{view.city}}</span>, <span>{{view.country}}</span></p>
+                  </div>
                 </div>
-                <div class="review-local-life">
-                  <div class="heading-review">
-                    <h3 class="place-name">{{view.locationName}}</h3>
-                    <img ng-src="{{view.travelType}}" alt="" height="30">
+                <div class="review-local-life" ng-hide="view.reviewLocation">
+                  <div class="heading-review clearfix">
+                    <h3 class="place-name pull-left m-clear color-blue">{{view.locationName}}</h3>
+                    <img ng-src="{{view.travelType}}" alt="" height="30" class="pull-right">
                   </div>
                   <div class="rate-location">
-                    <p class="color-cyan">Rate this now</p>
-                    <div class="local-life-rating">
-                      <uib-rating ng-model="rate" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></uib-rating>
+                    <p class="color-pink m-clear inline-block">Rate this now</p>
+                    <div class="travel-life-rating local-life-rating">
+                      <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
+                      <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
+                      <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
+                      <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
                     </div>
                   </div>
-                  <p class="m-clear color-lighter-grey"><i class="fa fa-calendar"></i><span>{{view.timestampDate}}</span> | <i class="fa fa-clock-o"></i> <span>{{view.timestampHour}}</span> <span>{{life.city}}</span>, <span>{{view.country}}</span></p>
+                  <div class="mt10">
+                    <p class="m-clear color-light-grey"><i class="fa fa-calendar"></i><span>{{view.timestampDate}}</span> | <i class="fa fa-clock-o"></i> <span>{{view.timestampHour}}</span> <span>{{view.city}}</span>, <span>{{view.country}}</span></p>
+                  </div>
                 </div>
               </div>
             </div>
             <!-- review all view end -->
             <!-- review travel-life-->
             <div class="review-travel-view" ng-show="reviewView == 2">
-              <div class="" ng-repeat="review in travelReview">
-                <div class="review-travel-main relate">
+              <div class="list-travel-view" ng-repeat="review in travelReview">
+                <div class="review-travel-main relate pointer">
                   <div class="review-backimgholder">
                     <img ng-src="{{review.img}}" alt="" class="img-responsive">
                   </div>
-                  <div class="review-frontimgholder">
-                    <img ng-src="img/review-travel.png" alt="" class="img-responsive">
+                  <div class="review-frontimgholder relate">
+                    <img ng-src="img/review-travel.png" alt="" class="pointer img-responsive">
+                    <h3 class="country-name">{{review.countryName}}</h3>
                   </div>
-                  <h3 class="country-name">{{review.countryName}}</h3>
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <div class="travel-single-view">
+                <div class="heading-single-view">
+                  <h3 class="color-pink font-bold">India</h3>
+                </div>
+                <div class="city-accordion">
+                  <uib-accordion close-others="oneAtATime">
+                    <uib-accordion-group ng-repeat="city in travelCity" is-open="status.open">
+                      <uib-accordion-heading class="clearfix">
+                        <h3 class="color-blue">{{city.cityName}}</h3>
+                        <i class="pull-right fa" ng-class="{'fa-plus': status.open, 'fa-minus' : status.open}"></i>
+                      </uib-accordion-heading>
+                      <div class="accordion-detail">
+                        <div class="review-local-life">
+                          <div class="heading-review clearfix">
+                            <h3 class="place-name pull-left m-clear color-blue">{{city.locationName}}</h3>
+                            <img ng-src="{{view.travelType}}" alt="" height="30" class="pull-right">
+                          </div>
+                          <div class="rate-location">
+                            <p class="color-pink m-clear inline-block">Rate this now</p>
+                            <div class="travel-life-rating local-life-rating">
+                              <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
+                              <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
+                              <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
+                              <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
+                            </div>
+                          </div>
+                          <div class="mt10">
+                            <p class="m-clear color-light-grey"><i class="fa fa-calendar"></i><span>{{city.timestampDate}}</span> | <i class="fa fa-clock-o"></i> <span>{{city.timestampHour}}</span></p>
+                          </div>
+                        </div>
+                      </div>
+                    </uib-accordion-group>
+                  </uib-accordion>
                 </div>
               </div>
             </div>
             <!-- review travel-life end-->
             <!-- review local-life-->
             <div class="review-travel-view review-local-view" ng-show="reviewView == 3">
-              <div class="" ng-repeat="review in travelReview">
-                <div class="review-travel-main relate">
+              <div class="list-travel-view list-local-view" ng-repeat="review in travelReview">
+                <div class="review-travel-main pointer relate">
                   <div class="review-backimgholder">
                     <img ng-src="{{review.img}}" alt="" class="img-responsive">
                   </div>
-                  <div class="review-frontimgholder">
+                  <div class="review-frontimgholder relate">
                     <img ng-src="img/review-local.png" alt="" class="img-responsive">
+                    <h3 class="country-name">{{review.countryName}}</h3>
                   </div>
-                  <h3 class="country-name">{{review.countryName}}</h3>
                 </div>
               </div>
             </div>

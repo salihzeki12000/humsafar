@@ -1452,9 +1452,7 @@ header {
       &:first-child .tab-heading {
         padding: 15px 20px;
         margin: 6px 0 0;
-        background: -webkit-linear-gradient(right, #e85a4d, #f05b4d);
-        background: -o-linear-gradient(right, #e85a4d, #f05b4d);
-        background: linear-gradient(to left, #e85a4d, #f05b4d);
+        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
       }
       &:nth-child(2) .tab-heading {
         padding: 20px;
@@ -1466,7 +1464,8 @@ header {
   }
 }
 .moment-view {
-  padding: 0px 40px;
+  padding: 0px 40px 60px;
+  min-height: 500px;
 }
 .month-collage {
   margin-bottom: 30px;
@@ -1579,6 +1578,28 @@ header {
 // local moment imgholder end
 // moment tab end
 // revies tab
+.review-travel-view {
+  margin-top: 20px;
+}
+.review-all-life {
+  padding: 15px 10px 25px;
+  border-bottom: 1px solid $brand-lighter-grey;
+  .place-name {
+    font-size: 22px;
+  }
+}
+.rate-location {
+  p {
+    font-style: italic;
+    font-size: 17px;
+  }
+  .travel-life-rating {
+    .star-rating {
+      font-size: 20px;
+      margin-right: 7px;
+    }
+  }
+}
 .reviews-active {
   .first-strip,
   .sec-strip,
@@ -1591,16 +1612,12 @@ header {
       &:first-child .tab-heading {
         padding: 11px 20px;
         margin: 10px 0 0 2px;
-        background: -webkit-linear-gradient(right, #e85a4d, #f05b4d);
-        background: -o-linear-gradient(right, #e85a4d, #f05b4d);
-        background: linear-gradient(to left, #e85a4d, #f05b4d);
+        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
       }
       &:nth-child(2) .tab-heading {
         padding: 15px 20px;
         margin: 6px 0 0 -18px;
-        background: -webkit-linear-gradient(right, #e85a4d, #f05b4d);
-        background: -o-linear-gradient(right, #e85a4d, #f05b4d);
-        background: linear-gradient(to left, #e85a4d, #f05b4d);
+        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
         z-index: 4;
       }
       &:nth-child(3) .tab-heading {
@@ -1616,5 +1633,62 @@ header {
     }
   }
 }
-// revies tab end
+.list-travel-view {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 37px;
+  margin-bottom: 15px;
+  &:nth-child(4n+4) {
+    margin-right: 0;
+  }
+  .review-backimgholder {
+    @include square(120px);
+    @include position(absolute, 10px 20px null null);
+    border-radius: 100%;
+    overflow: hidden;
+  }
+  .review-frontimgholder {
+    h3 {
+      @include position(absolute, null null 25px 25px);
+    }
+  }
+}
+// reviews tab end
+// holiday planner tab
+.holidayplanner-active {
+  .first-strip,
+  .sec-strip,
+  .third-strip,
+  .fourth-strip {
+    left: 14px;
+  }
+  ul {
+    li {
+      &:nth-child(1) .tab-heading {
+        padding: 9px 20px;
+        margin: 11px 0 0 2px;
+        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+      }
+      &:nth-child(2) .tab-heading {
+        padding: 12px 20px;
+        margin: 8px 0 0 -17px;
+        z-index: 4;
+        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+      }
+      &:nth-child(3) .tab-heading {
+        padding: 15px 20px;
+        margin: 6px 0 0 -18px;
+        z-index: 4;
+        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+      }
+      &:last-child .tab-heading {
+        padding: 20px;
+        margin: 0 0 0 -18px;
+        background: #ff6759;
+        z-index: 4;
+      }
+    }
+  }
+}
+// holiday planner tab end
 @import "fancybox-override";

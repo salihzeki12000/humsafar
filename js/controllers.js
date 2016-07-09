@@ -94,6 +94,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.profile = {
       profileMain: "views/content/profile.html"
     }
+
+    $(document).ready(function() {
+      setTimeout(function() {
+        $('html, body').animate({
+          scrollTop: $("#tabs").offset().top
+        }, 1000);
+      }, 100);
+    });
     $scope.buildNow = function() {
       $scope.$broadcast('rebuild:me');
     }
@@ -437,6 +445,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       profileMain: "views/content/profile.html"
     }
 
+    $(document).ready(function() {
+      setTimeout(function() {
+        $('html, body').animate({
+          scrollTop: $("#tabs").offset().top
+        }, 1000);
+      }, 100);
+    });
     $scope.bucketList = [{
       countryName: "United States Of America"
     }, {
@@ -588,83 +603,75 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       'img/slider2.jpg'
     ];
 
-    $scope.travelMoment = [
-      {
-        imgBack: "img/moment-travel1.jpg",
-        imgFront: "img/moment-travel.png",
-        placeName: "London Journey",
-        totalPhoto: "50",
-        timestampMonth: "14 Jan, 2014"
-      },
-      {
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-travel.png",
-        placeName: "London Journey",
-        totalPhoto: "50",
-        timestampMonth: "14 Jan, 2014"
-      },
-      {
-        imgBack: "img/moment-travel1.jpg",
-        imgFront: "img/moment-travel.png",
-        placeName: "London Journey",
-        totalPhoto: "50",
-        timestampMonth: "14 Jan, 2014"
-      },
-      {
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-travel.png",
-        placeName: "London Journey",
-        totalPhoto: "50",
-        timestampMonth: "14 Jan, 2014"
-      },
-      {
-        imgBack: "img/moment-travel1.jpg",
-        imgFront: "img/moment-travel.png",
-        placeName: "London Journey",
-        totalPhoto: "50",
-        timestampMonth: "14 Jan, 2014"
-      },
-      {
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-travel.png",
-        placeName: "London Journey",
-        totalPhoto: "50",
-        timestampMonth: "14 Jan, 2014"
-      },
-    ];
+    $scope.travelMoment = [{
+      imgBack: "img/moment-travel1.jpg",
+      imgFront: "img/moment-travel.png",
+      placeName: "London Journey",
+      totalPhoto: "50",
+      timestampMonth: "14 Jan, 2014"
+    }, {
+      imgBack: "img/moment-travel2.jpg",
+      imgFront: "img/moment-travel.png",
+      placeName: "London Journey",
+      totalPhoto: "50",
+      timestampMonth: "14 Jan, 2014"
+    }, {
+      imgBack: "img/moment-travel1.jpg",
+      imgFront: "img/moment-travel.png",
+      placeName: "London Journey",
+      totalPhoto: "50",
+      timestampMonth: "14 Jan, 2014"
+    }, {
+      imgBack: "img/moment-travel2.jpg",
+      imgFront: "img/moment-travel.png",
+      placeName: "London Journey",
+      totalPhoto: "50",
+      timestampMonth: "14 Jan, 2014"
+    }, {
+      imgBack: "img/moment-travel1.jpg",
+      imgFront: "img/moment-travel.png",
+      placeName: "London Journey",
+      totalPhoto: "50",
+      timestampMonth: "14 Jan, 2014"
+    }, {
+      imgBack: "img/moment-travel2.jpg",
+      imgFront: "img/moment-travel.png",
+      placeName: "London Journey",
+      totalPhoto: "50",
+      timestampMonth: "14 Jan, 2014"
+    }, ];
 
-    $scope.localMoment = [
-      {
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-local.png",
-        timestampDate: "August, 2014",
-        totalPhoto: "50"
-      },
-      {
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-local.png",
-        timestampDate: "October, 2014",
-        totalPhoto: "50"
-      },
-      {
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-local.png",
-        timestampDate: "August, 2014",
-        totalPhoto: "50"
-      },
-      {
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-local.png",
-        timestampDate: "October, 2014",
-        totalPhoto: "50"
-      },
-      {
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-local.png",
-        timestampDate: "August, 2014",
-        totalPhoto: "50"
-      }
-    ];
+    $scope.localMoment = [{
+      imgBack: "img/moment-travel2.jpg",
+      imgFront: "img/moment-local.png",
+      timestampDate: "August, 2014",
+      totalPhoto: "50"
+    }, {
+      imgBack: "img/moment-travel2.jpg",
+      imgFront: "img/moment-local.png",
+      timestampDate: "October, 2014",
+      totalPhoto: "50"
+    }, {
+      imgBack: "img/moment-travel2.jpg",
+      imgFront: "img/moment-local.png",
+      timestampDate: "August, 2014",
+      totalPhoto: "50"
+    }, {
+      imgBack: "img/moment-travel2.jpg",
+      imgFront: "img/moment-local.png",
+      timestampDate: "October, 2014",
+      totalPhoto: "50"
+    }, {
+      imgBack: "img/moment-travel2.jpg",
+      imgFront: "img/moment-local.png",
+      timestampDate: "October, 2014",
+      totalPhoto: "50"
+    }, {
+      imgBack: "img/moment-travel2.jpg",
+      imgFront: "img/moment-local.png",
+      timestampDate: "August, 2014",
+      totalPhoto: "50"
+    }];
 
   })
   .controller('ReviewsCtrl', function($scope, TemplateService, NavigationService, $timeout) {
@@ -674,6 +681,152 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Reviews");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.profile = {
+      profileMain: "views/content/profile.html"
+    }
+    $scope.oneAtATime = true;
+
+    $(document).ready(function() {
+      setTimeout(function() {
+        $('html, body').animate({
+          scrollTop: $("#tabs").offset().top
+        }, 1000);
+      }, 100);
+    });
+
+    $scope.bucketList = [{
+      countryName: "United States Of America"
+    }, {
+      countryName: "Germany"
+    }, {
+      countryName: "United Kingdom"
+    }, {
+      countryName: "Switzerland"
+    }, {
+      countryName: "Australia"
+    }, {
+      countryName: "India"
+    }, {
+      countryName: "Italy"
+    }, {
+      countryName: "Canada"
+    }, ];
+
+    $scope.data = {
+      'GB': {
+        metric: 4
+      },
+      'US': {
+        metric: 40
+      },
+      'FR': {
+        metric: 29
+      },
+      'IN': {
+        metric: 500
+      }
+      // 'FI': {metric: 15}
+    };
+    $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
+    $scope.mapDataHumanizeFn = function(val) {
+      return val + " units";
+    };
+    $scope.heatmapColors = ['#2c3757', '#ff6759'];
+
+    $scope.reviewAll = [{
+      locationName: "Girgaon Beach",
+      travelType: "img/beach.png",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "1:20 pm",
+      city: "Mumbai",
+      country: "India",
+      reviewLocation: true
+    }, {
+      locationName: "Girgaon Beach",
+      travelType: "img/beach.png",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "1:20 pm",
+      city: "Mumbai",
+      country: "India",
+      reviewLocation: false
+    }, {
+      locationName: "Girgaon Beach",
+      travelType: "img/beach.png",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "1:20 pm",
+      city: "Mumbai",
+      country: "India",
+      reviewLocation: true
+    }, {
+      locationName: "Girgaon Beach",
+      travelType: "img/beach.png",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "1:20 pm",
+      city: "Mumbai",
+      country: "India",
+      reviewLocation: false
+    }];
+    $scope.travelReview = [{
+      img: "img/moment-travel2.jpg",
+      countryName: "India"
+    }, {
+      img: "img/moment-travel2.jpg",
+      countryName: "India"
+    }, {
+      img: "img/moment-travel2.jpg",
+      countryName: "India"
+    }, {
+      img: "img/moment-travel2.jpg",
+      countryName: "India"
+    }, {
+      img: "img/moment-travel2.jpg",
+      countryName: "India"
+    }];
+
+    $scope.travelCity = [{
+      cityName: "Mumbai",
+      locationName: "Girgaon Beach",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "1:20 pm"
+    }, {
+      cityName: "Mumbai",
+      locationName: "Girgaon Beach",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "1:20 pm"
+    }, {
+      cityName: "Mumbai",
+      locationName: "Girgaon Beach",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "1:20 pm"
+    }, {
+      cityName: "Mumbai",
+      locationName: "Girgaon Beach",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "1:20 pm"
+    }, {
+      cityName: "Mumbai",
+      locationName: "Girgaon Beach",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "1:20 pm"
+    }];
+
+
+  })
+  .controller('HolidayPlannerCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+
+    $scope.template = TemplateService.changecontent("holidayplanner");
+    $scope.menutitle = NavigationService.makeactive("HolidayPlanner");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+    $(document).ready(function() {
+      setTimeout(function() {
+        $('html, body').animate({
+          scrollTop: $("#tabs").offset().top
+        }, 1000);
+      }, 100);
+    });
     $scope.profile = {
       profileMain: "views/content/profile.html"
     }
@@ -716,72 +869,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       return val + " units";
     };
     $scope.heatmapColors = ['#2c3757', '#ff6759'];
-
-    $scope.reviewAll = [
-      {
-        locationName: "Girgaon Beach",
-        travelType: "img/beach.png",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-        city: "Mumbai",
-        country: "India"
-      },
-      {
-        locationName: "Girgaon Beach",
-        travelType: "img/beach.png",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-        city: "Mumbai",
-        country: "India"
-      },
-      {
-        locationName: "Girgaon Beach",
-        travelType: "img/beach.png",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-        city: "Mumbai",
-        country: "India"
-      },
-      {
-        locationName: "Girgaon Beach",
-        travelType: "img/beach.png",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-        city: "Mumbai",
-        country: "India"
-      }
-    ];
-    $scope.travelReview = [
-      {
-        img: "img/moment-travel2.jpg",
-        countryName: "India"
-      },
-      {
-        img: "img/moment-travel2.jpg",
-        countryName: "India"
-      },
-      {
-        img: "img/moment-travel2.jpg",
-        countryName: "India"
-      },
-      {
-        img: "img/moment-travel2.jpg",
-        countryName: "India"
-      },
-      {
-        img: "img/moment-travel2.jpg",
-        countryName: "India"
-      }
-    ];
-
-  })
-  .controller('HolidayPlannerCtrl', function($scope, TemplateService, NavigationService, $timeout) {
-    //Used to name the .html file
-
-    $scope.template = TemplateService.changecontent("holidayplanner");
-    $scope.menutitle = NavigationService.makeactive("HolidayPlanner");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
 
   })
   .controller('ProfileCtrl', function($scope, TemplateService, NavigationService, $timeout) {
