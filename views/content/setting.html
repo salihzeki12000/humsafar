@@ -2,6 +2,206 @@
   <div class="container">
     <div class="setting">
       <h3 class="color-blue font-bold text-center m-clear">Settings</h3>
+      <div class="setting-user-detail">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="setting-list">
+              <ul>
+                <li>
+                  <div class="profile-heading clearfix">
+                    <div class="profile-imgholder">
+                      <!-- <img src="" alt="" class="img-responsive"> -->
+                    </div>
+                    <div class="profile-detail">
+                      <h4>Amit Duxctronn</h4>
+                      <span>16 Jan 1988</span>
+                    </div>
+                    <i class="fa fa-chevron-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="edit-profile-heading">
+                    <!-- <img src="" alt=""> -->
+                    <h5 class="color-blue">Edit Profile - <span>A little more about me</span></h5>
+                    <i class="fa fa-chevron-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="password-heading">
+                    <!-- <img src="" alt=""> -->
+                    <h5 class="color-blue">Change Password</h5>
+                    <i class="fa fa-chevron-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="upload-heading">
+                    <!-- <img src="" alt=""> -->
+                    <h5 class="color-blue">Data Upload</h5>
+                    <i class="fa fa-chevron-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="privacy-heading">
+                    <!-- <img src="" alt=""> -->
+                    <h5 class="color-blue">Privacy</h5>
+                    <i class="fa fa-chevron-right"></i>
+                  </div>
+                </li>
+                <li>
+                  <div class="report-problem-heading">
+                    <!-- <img src="" alt=""> -->
+                    <h5 class="color-blue">Report A Problem</h5>
+                    <i class="fa fa-chevron-right"></i>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="setting-main-detail">
+              <div class="profile-detail-main">
+                <form action="">
+                  <div class="profile-photo-sec upload-profile">
+                    <div class="cropArea" >
+                      <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+                    </div>
+                    <div class="upload-section text-center">
+                      <img src="img/upload-icon.jpg" alt="" class="m-center img-responsive">
+                      <p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
+                      <span class="block mt10 color-grey avenir-roman">-or-</span>
+                      <div class="upload-btn">
+                        <div class="relate inline-block mr10">
+                          <button class="btn btn-dark-blue pointer">Select a photo from your computer input</button>
+                          <input type="file" id="fileInput" class="getfile pointer" />
+                        </div>
+                        <div class="relate inline-block">
+                          <button class="btn btn-dark-blue pointer">Your Photos</button>
+                        </div>
+                        <div class="relate inline-block ml10">
+                          <button class="btn btn-dark-blue pointer">Web Camera</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="text" class="form-control" value="Amit">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="text" class="form-control" value="Duxctronn">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="dob">DOB</label>
+                        <input type="date" class="form-control" id="dob">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" value="amit-duxctronn">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <div class="text-center" ng-init="gender=''">
+                          <div class="male inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==1}" ng-click="gender=1">
+                            <img src="img/male.png" alt="Gender" class="img-responsive">
+                            <span class="color-blue avenir-black">He</span>
+                          </div>
+                          <div class="female inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==2}" ng-click="gender=2">
+                            <img src="img/female.png" alt="Gender" class="img-responsive">
+                            <span class="color-blue avenir-black">She</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="Nationality">Nationality</label>
+                        <div class="custom-select">
+                          <select name="" id="Nationality">
+                            <option value="India">India</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="Live">Where Do You Live ?</label>
+                        <div class="custom-select">
+                          <select name="" id="Live">
+                            <option value="Mumbai">Mumbai</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="travel-blogger">
+                        <div class="button-group">
+                          <button class="btn btn-grey-pink">
+                            <!-- <img src="" alt=""> -->
+                            travel Photographer
+                          </button>
+                          <button class="btn btn-grey-pink">
+                            <!-- <img src="" alt=""> -->
+                            travel blogger
+                          </button>
+                          <button class="btn btn-grey-pink">
+                            None
+                          </button>
+                        </div>
+                      </div>
+                      <div class="blog-link">
+                        <div class="form-group">
+                          <input type="text" class="form-control" placeholder="Blog Link">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h4>Personal Details</h4>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Favourite City">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Dream Destination">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix">
+                    <div class="pull-right">
+                      <button type="submit" class="btn btn-pink">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

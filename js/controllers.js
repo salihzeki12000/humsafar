@@ -785,31 +785,151 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.travelCity = [{
       cityName: "Mumbai",
-      locationName: "Girgaon Beach",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "1:20 pm"
+      visitedCity: [{
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }]
     }, {
       cityName: "Mumbai",
-      locationName: "Girgaon Beach",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "1:20 pm"
+      visitedCity: [{
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }]
     }, {
       cityName: "Mumbai",
-      locationName: "Girgaon Beach",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "1:20 pm"
+      visitedCity: [{
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }]
     }, {
       cityName: "Mumbai",
-      locationName: "Girgaon Beach",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "1:20 pm"
+      visitedCity: [{
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }]
     }, {
       cityName: "Mumbai",
-      locationName: "Girgaon Beach",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "1:20 pm"
-    }];
-
+      visitedCity: [{
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }]
+    }, {
+      cityName: "Mumbai",
+      visitedCity: [{
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }]
+    }, ];
+    $scope.viewtravelCountry = false;
+    $scope.showtravelCountry = function() {
+      $scope.viewtravelCountry = true;
+    };
+    $scope.viewlocalCountry = false;
+    $scope.showlocalCountry = function() {
+      $scope.viewlocalCountry = true;
+    };
 
   })
   .controller('HolidayPlannerCtrl', function($scope, TemplateService, NavigationService, $timeout) {
@@ -945,6 +1065,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Setting");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    $scope.myImage = '';
+    $scope.myCroppedImage = '';
+    $scope.showImage = false;
+    var got = setInterval(function() {
+      if (document.getElementById('fileInput')) {
+        console.log("got");
+        document.getElementById('fileInput').onchange = function(evt) {
+          var file = evt.currentTarget.files[0];
+          var reader = new FileReader();
+          reader.onload = function(evt) {
+            $scope.$apply(function($scope) {
+              console.log(evt);
+              $scope.showImage = true;
+              $scope.myImage = evt.target.result;
+            });
+          };
+          reader.readAsDataURL(file);
+        };
+        clearInterval(got);
+      }
+    }, 1000);
 
   })
 

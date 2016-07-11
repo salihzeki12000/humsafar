@@ -380,6 +380,7 @@ textarea {
   min-height: 550px;
   background: url('../img/back-content.jpg') no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 // header
 header {
@@ -537,6 +538,39 @@ header {
     @include transition(all 300ms linear);
   }
 }
+// custom select
+.custom-select {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 999;
+    select {
+        @include appearance(none);
+        border: none;
+        width: 100%;
+        background-color: transparent;
+        outline: 0;
+        color: white;
+        cursor: pointer;
+        height: 40px;
+        position: relative;
+        z-index: 9999;
+    }
+    &:after {
+        font: normal normal normal 14px/1 FontAwesome;
+        content: "\f0d7";
+        height: 40px;
+        width: 28px;
+        color: white;
+        position: absolute;
+        top: 0;
+        right: 0;
+        text-align: center;
+        line-height: 40px;
+        font-size: 20px;
+    }
+}
+// custom select end
 .custom-checkbox-heart {
   @extend .custom-checkbox;
   [type="checkbox"]:not(:checked) + label:after,
@@ -1272,6 +1306,22 @@ header {
     }
   }
 }
+.custom-select-local {
+  margin: 5px 0px;
+  select {
+    width: 93%;
+    padding: 0px 10px;
+    border: 1px solid $brand-dark-cyan;
+    border-radius: 4px;
+    color: $brand-dark-blue;
+    font-size: 15px;
+  }
+  &.custom-select:after {
+    content: "\f078";
+    right: 25px;
+    color: $brand-dark-cyan;
+  }
+}
 .more-filter {
   border-bottom: none;
 }
@@ -1653,6 +1703,53 @@ header {
     }
   }
 }
+// accordion review
+.city-accordion {
+  margin-top: 10px;
+  .panel-default > .panel-heading {
+    padding: 10px 30px;
+    border-radius: 0;
+    border-bottom: 4px solid $brand-dark-pink;
+    background-color: transparent;
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+  }
+  .panel-title a:focus {
+    outline: none;
+    text-decoration: none;
+  }
+  .panel {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .panel-body {
+    border: none;
+  }
+  .panel-default > .panel-heading + .panel-collapse > .panel-body {
+    padding: 0px 30px;
+    border: none;
+  }
+  .review-local-life {
+    padding: 20px 0;
+    border-bottom: 1px solid $brand-grey;
+    .place-name {
+      font-size: 20px;
+    }
+  }
+  .accordion-detail:last-child .review-local-life {
+    border: none;
+  }
+}
+.heading-single-view {
+  padding: 15px;
+  background-color: #f3f3f3;
+  text-align: center;
+}
+// accordion review end
 // reviews tab end
 // holiday planner tab
 .holidayplanner-active {
