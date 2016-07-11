@@ -14,45 +14,65 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
   $httpProvider.defaults.withCredentials = true;
   $stateProvider
     .state('home', {
-    url: "/",
-    templateUrl: "views/template.html",
-    controller: 'HomeCtrl'
-  })
+      url: "/",
+      templateUrl: "views/template.html",
+      controller: 'HomeCtrl'
+    })
     .state('profile', {
-    url: "/profile",
-    templateUrl: "views/template.html",
-    controller: 'ProfileCtrl'
-  })
+      url: "/profile",
+      templateUrl: "views/template.html",
+      controller: 'ProfileCtrl'
+    })
     .state('journey', {
-    url: "/journey",
-    templateUrl: "views/template.html",
-    controller: 'JourneyCtrl'
-  })
+      url: "/journey",
+      templateUrl: "views/template.html",
+      controller: 'JourneyCtrl'
+    })
     .state('moments', {
-    url: "/moments",
-    templateUrl: "views/template.html",
-    controller: 'MomentsCtrl'
-  })
+      url: "/moments",
+      templateUrl: "views/template.html",
+      controller: 'MomentsCtrl'
+    })
     .state('reviews', {
-    url: "/reviews",
-    templateUrl: "views/template.html",
-    controller: 'ReviewsCtrl'
-  })
+      url: "/reviews",
+      templateUrl: "views/template.html",
+      controller: 'ReviewsCtrl'
+    })
     .state('holidayplanner', {
-    url: "/holidayplanner",
-    templateUrl: "views/template.html",
-    controller: 'HolidayPlannerCtrl'
-  })
+      url: "/holidayplanner",
+      templateUrl: "views/template.html",
+      controller: 'HolidayPlannerCtrl'
+    })
+    .state('otherprofile', {
+      url: "/otherprofile",
+      templateUrl: "views/template.html",
+      controller: 'OtherProfileCtrl'
+    })
+    .state('otherjourney', {
+      url: "/otherjourney",
+      templateUrl: "views/template.html",
+      controller: 'OtherJourneyCtrl'
+    })
+    .state('othermoments', {
+      url: "/othermoments",
+      templateUrl: "views/template.html",
+      controller: 'OtherMomentsCtrl'
+    })
+    .state('otherreviews', {
+      url: "/otherreviews",
+      templateUrl: "views/template.html",
+      controller: 'OtherReviewsCtrl'
+    })
     .state('setting', {
-    url: "/setting",
-    templateUrl: "views/template.html",
-    controller: 'SettingCtrl'
-  })
+      url: "/setting",
+      templateUrl: "views/template.html",
+      controller: 'SettingCtrl'
+    })
     .state('holiday', {
-    url: "/holiday",
-    templateUrl: "views/template.html",
-    controller: 'HolidayCtrl'
-  });
+      url: "/holiday",
+      templateUrl: "views/template.html",
+      controller: 'HolidayCtrl'
+    });
   $urlRouterProvider.otherwise("/");
   $locationProvider.html5Mode(isproduction);
 });
@@ -79,32 +99,32 @@ firstapp.directive('img', function($compile, $parse) {
 });
 
 firstapp.directive('fancyboxBox', function($document) {
-    return {
-        restrict: 'EA',
-        replace: false,
-        link: function(scope, element, attr) {
-            var $element = $(element);
-            var target;
-            if (attr.rel) {
-               target = $("[rel='" + attr.rel + "']");
-            } else {
-                target = element;
-            }
+  return {
+    restrict: 'EA',
+    replace: false,
+    link: function(scope, element, attr) {
+      var $element = $(element);
+      var target;
+      if (attr.rel) {
+        target = $("[rel='" + attr.rel + "']");
+      } else {
+        target = element;
+      }
 
-            target.fancybox({
-                openEffect: 'fade',
-                closeEffect: 'fade',
-                closeBtn: true,
-                helpers: {
-                    media: {}
-                }
-            });
+      target.fancybox({
+        openEffect: 'fade',
+        closeEffect: 'fade',
+        closeBtn: true,
+        helpers: {
+          media: {}
         }
-    };
+      });
+    }
+  };
 });
 
 
-firstapp.config(function ($translateProvider) {
+firstapp.config(function($translateProvider) {
   $translateProvider.translations('en', LanguageEnglish);
   $translateProvider.translations('hi', LanguageHindi);
   $translateProvider.preferredLanguage('en');

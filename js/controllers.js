@@ -1021,19 +1021,56 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
     $scope.heatmapColors = ['#2c3757', '#ff6759'];
 
-    // $('.abc').masonry({
-    //   itemSelector: '.masonry-brick',
-    //   isFitWidth: true
-    // });
-    //
-    // var foundInterval = setInterval(function() {
-    //   if (document.getElementById("md")) {
-    //     console.log(document.getElementById("md").offsetWidth);
-    //     clearInterval(foundInterval);
-    //     $scope.fitWidth = document.getElementById("md").offsetWidth / 3;
-    //   }
-    // }, 100);
+    $scope.hoveringOver = function(value) {
+      $scope.overStar = value;
+    };
+    $scope.ratingStates = [{
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }];
 
+  })
+  .controller('OtherProfileCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+
+    // console.log("Testing Consoles");
+
+    $scope.template = TemplateService.changecontent("otherprofile");
+    $scope.menutitle = NavigationService.makeactive("OtherProfile");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+    $scope.data = {
+      'GB': {
+        metric: 4
+      },
+      'US': {
+        metric: 40
+      },
+      'FR': {
+        metric: 29
+      },
+      'IN': {
+        metric: 500
+      }
+    };
+    $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
+    $scope.mapDataHumanizeFn = function(val) {
+      return val + " units";
+    };
+    $scope.heatmapColors = ['#2c3757', '#ff6759'];
 
     $scope.hoveringOver = function(value) {
       $scope.overStar = value;
@@ -1053,6 +1090,356 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }, {
       stateOn: 'fa fa-star-o',
       stateOff: 'fa fa-star'
+    }];
+
+  })
+  .controller('OtherJourneyCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+
+    $scope.template = TemplateService.changecontent("otherjourney");
+    $scope.menutitle = NavigationService.makeactive("OtherJourney");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.otherprofile = {
+      profileMain: "views/content/otherprofile.html"
+    }
+
+    $(document).ready(function() {
+      setTimeout(function() {
+        $('html, body').animate({
+          scrollTop: $("#tabs").offset().top
+        }, 1000);
+      }, 100);
+    });
+    $scope.buildNow = function() {
+      $scope.$broadcast('rebuild:me');
+    }
+    $scope.$on('scrollbar.hide', function() {
+      // console.log('Scrollbar hide');
+    });
+    $scope.$on('scrollbar.show', function() {
+      // console.log('Scrollbar show');
+    });
+
+    $scope.bucketList = [{
+      countryName: "United States Of America"
+    }, {
+      countryName: "Germany"
+    }, {
+      countryName: "United Kingdom"
+    }, {
+      countryName: "Switzerland"
+    }, {
+      countryName: "Australia"
+    }, {
+      countryName: "India"
+    }, {
+      countryName: "Italy"
+    }, {
+      countryName: "Canada"
+    }, ];
+
+    $scope.data = {
+      'GB': {
+        metric: 4
+      },
+      'US': {
+        metric: 40
+      },
+      'FR': {
+        metric: 29
+      },
+      'IN': {
+        metric: 500
+      }
+      // 'FI': {metric: 15}
+    };
+    $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
+    $scope.mapDataHumanizeFn = function(val) {
+      return val + " units";
+    };
+    $scope.heatmapColors = ['#2c3757', '#ff6759'];
+
+    $scope.travelLife = [{
+      heading: "Manan Vora has ended his London Journey",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      onJourney: false,
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    }, {
+      heading: "Manan Vora has ended his London Journey",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      onJourney: true,
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    }, {
+      heading: "Manan Vora has ended his London Journey",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      onJourney: false,
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    }, {
+      heading: "Manan Vora has ended his London Journey",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      onJourney: false,
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    }, {
+      heading: "Manan Vora has ended his London Journey",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      onJourney: true,
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    }, {
+      heading: "Manan Vora has ended his London Journey",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      onJourney: true,
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    }];
+
+    $scope.localLife = [{
+      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgWall: "img/local-life-post.jpg",
+      likes: "15660",
+      travelledIcon: "img/cycle-cyan.png",
+      postSlider: [{
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }]
+    }, {
+      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgWall: "img/local-life-post.jpg",
+      likes: "15660",
+      travelledIcon: "img/cycle-cyan.png",
+      postSlider: [{
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }]
+    }, {
+      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgWall: "img/local-life-post.jpg",
+      likes: "15660",
+      travelledIcon: "img/cycle-cyan.png",
+      postSlider: [{
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }]
+    }, {
+      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgWall: "img/local-life-post.jpg",
+      likes: "15660",
+      travelledIcon: "img/cycle-cyan.png",
+      postSlider: [{
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }]
+    }, {
+      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgWall: "img/local-life-post.jpg",
+      likes: "15660",
+      travelledIcon: "img/cycle-cyan.png",
+      postSlider: [{
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }, {
+        imgRelated: "img/slider1.jpg"
+      }, {
+        imgRelated: "img/slider2.jpg"
+      }]
     }];
 
   })

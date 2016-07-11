@@ -840,6 +840,12 @@ header {
     max-height: 500px;
   }
 }
+.vector-map-full {
+  max-height: 750px;
+  mappy svg {
+    max-height: 750px;
+  }
+}
 // visited list
 .wish-country-visit {
   padding: 20px 15px 0 0;
