@@ -58,11 +58,12 @@
             </div>
           </div>
           <div class="col-md-8">
-            <div class="setting-main-detail">
+            <div class="setting-main-detail bg-white">
+              <!-- profile detail -->
               <div class="profile-detail-main">
                 <form action="">
                   <div class="profile-photo-sec upload-profile">
-                    <div class="cropArea" >
+                    <div class="cropArea">
                       <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
                     </div>
                     <div class="upload-section text-center">
@@ -157,16 +158,14 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="travel-blogger">
-                        <div class="button-group">
-                          <button class="btn btn-grey-pink">
-                            <!-- <img src="" alt=""> -->
-                            travel Photographer
+                        <div class="button-group djb-font">
+                          <button class="btn btn-grey-pink ">
+                            <img src="img/travel-photographer.png" alt=""> travel Photographer
                           </button>
                           <button class="btn btn-grey-pink">
-                            <!-- <img src="" alt=""> -->
-                            travel blogger
+                            <img src="img/travel-blogger.png" alt=""> travel blogger
                           </button>
-                          <button class="btn btn-grey-pink">
+                          <button class="btn btn-grey-pink avenir-roman">
                             None
                           </button>
                         </div>
@@ -178,16 +177,18 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <h4>Personal Details</h4>
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Favourite City">
+                  <div class="">
+                    <h4>Personal Details</h4>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <input type="text" class="form-control" placeholder="Favourite City">
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Dream Destination">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <input type="text" class="form-control" placeholder="Dream Destination">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -198,6 +199,428 @@
                   </div>
                 </form>
               </div>
+              <!-- profile detail -->
+              <!-- more profile detail -->
+              <div class="more-profile-detail avenir-roman">
+                <!-- holiday -->
+                <div class="holiday-section">
+                  <h4 class="color-blue">Your kind of a holiday</h4>
+                  <ul>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=1" ng-class="{'active-holiday': selectHoliday == 1}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/beach.png" alt="" class="img-responsive m-center">
+                          </div>
+                          <figcaption class="color-blue font-bold">Island &amp; Beach</figcaption>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=2" ng-class="{'active-holiday': selectHoliday == 2}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/city.png" alt="" class="img-responsive m-center">
+                          </div>
+                          <figcaption class="color-blue font-bold">City</figcaption>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=3" ng-class="{'active-holiday': selectHoliday == 3}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/safari.png" alt="" class="img-responsive m-center">
+                          </div>
+                          <figcaption class="color-blue font-bold">Safari</figcaption>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=4" ng-class="{'active-holiday': selectHoliday == 4}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/mountain.png" alt="" class="img-responsive m-center">
+                          </div>
+                          <figcaption class="color-blue font-bold">Mountains</figcaption>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=5" ng-class="{'active-holiday': selectHoliday == 5}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/cruise.png" alt="" class="img-responsive m-center">
+                          </div>
+                          <figcaption class="color-blue font-bold">Cruise</figcaption>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=6" ng-class="{'active-holiday': selectHoliday == 6}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/countryside.png" alt="" class="img-responsive m-center">
+                          </div>
+                          <figcaption class="color-blue font-bold">Countryside</figcaption>
+                        </figure>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <!-- holiday -->
+                <!-- usually go -->
+                <div class="setting-usually-go">
+                  <h4 class="color-blue">You usually go</h4>
+                  <ul>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=11" ng-class="{'active-holiday' : selectHoliday == 11}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/map.png" alt="" class="img-responsive m-center">
+                          </div>
+                          <figcaption class="color-blue font-bold">By the map</figcaption>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=12" ng-class="{'active-holiday' : selectHoliday == 12}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/road.png" alt="" class="img-responsive m-center">
+                          </div>
+                          <figcaption class="color-blue font-bold">Where the <span class="block">road takes you</span></figcaption>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=13" ng-class="{'active-holiday' : selectHoliday == 13}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/both.png" alt="" class="img-responsive m-center">
+                          </div>
+                          <figcaption class="color-blue font-bold">A little bit <span class="block">of both</span></figcaption>
+                        </figure>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <!-- usually go -->
+                <!-- prefer travel -->
+                <div class="setting-prefer-travel">
+                  <ul>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=21" ng-class="{'active-holiday' : selectHoliday == 21}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/family.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Family</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=22" ng-class="{'active-holiday' : selectHoliday == 22}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/friends.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Friends</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=23" ng-class="{'active-holiday' : selectHoliday == 23}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/spouse.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Partner/Spouse</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=24" ng-class="{'active-holiday' : selectHoliday == 24}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/solo.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Solo</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=25" ng-class="{'active-holiday' : selectHoliday == 25}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/business.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Business</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=26" ng-class="{'active-holiday' : selectHoliday == 26}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/blogger.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Blogger</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=27" ng-class="{'active-holiday' : selectHoliday == 27}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/grouptour.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Group Tour</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=28" ng-class="{'active-holiday' : selectHoliday == 28}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/photographer.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Photographer</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <!-- prefer travel end-->
+                <!-- ideal holiday type -->
+                <div class="setting-ideal-holiday">
+                  <ul>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=31" ng-class="{'active-holiday' : selectHoliday == 31}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/luxury.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Luxury</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=32" ng-class="{'active-holiday' : selectHoliday == 32}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/backpacking.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Backpacking</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=33" ng-class="{'active-holiday' : selectHoliday == 33}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/greentravelling.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Green <span class="block">travelling</span></figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=34" ng-class="{'active-holiday' : selectHoliday == 34}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/pocketfriendly.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Pocket <span class="block">friendly</span></figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=35" ng-class="{'active-holiday' : selectHoliday == 35}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/romance.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Romance</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=36" ng-class="{'active-holiday' : selectHoliday == 36}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/sportandadventure.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Sports &amp; Adventure</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=37" ng-class="{'active-holiday' : selectHoliday == 37}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/historyandculture.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">History &amp; <span class="block">Culture</span></figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=38" ng-class="{'active-holiday' : selectHoliday == 38}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/spirituality.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Spirituality &amp; Wellness</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=39" ng-class="{'active-holiday' : selectHoliday == 39}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/shopping.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Shopping</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday" ng-click="selectHoliday=40" ng-class="{'active-holiday' : selectHoliday == 40}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/foodandwine.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Food &amp; Wine</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="select-holiday">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="img/foodandwine.png" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">Festivals</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <!-- ideal holiday type end -->
+                <div class="clearfix">
+                  <div class="pull-right">
+                    <button class="btn btn-pink">Save</button>
+                  </div>
+                </div>
+              </div>
+              <!-- more profile detail end -->
+              <!-- change password -->
+              <div class="change-password-detail">
+                <form>
+                  <h4 class="color-blue">Password</h4>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Current Password">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="New Password">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Confirm Password">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix">
+                    <div class="pull-right">
+                      <button class="btn btn-pink">Save</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- change password -->
+              <!-- data upload -->
+              <div class="data-upload-detail">
+                <h4 class="color-blue">Data Upload</h4>
+                <form>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="custom-checkbox-setting">
+                        <input type="text" id="cellular-wifi">
+                        <label for="cellular-wifi">
+                          Cellular and Wi-Fi
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="custom-checkbox-setting">
+                        <input type="text" id="wifi">
+                        <label for="wifi">
+                          Wi-Fi
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="custom-checkbox-setting">
+                        <input type="text" id="Cellular">
+                        <label for="Cellular">
+                          Cellular
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix">
+                    <div class="pull-right">
+                      <button class="btn btn-pink">Save</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- data upload end-->
+              <!-- privacy policy  -->
+              <div class="privacy-detail">
+                <form>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="custom-checkbox-setting">
+                        <input type="text" id="public">
+                        <label for="public">Public - Everyone</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="custom-checkbox-setting">
+                        <input type="text" id="private">
+                        <label for="private">Private - My Followers</label>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="avenir-medium color-grey fz12">When you select your account to be private only, your followers can view your My Life - Journeys, Moments and Reviews.</p>
+                  <div class="clearfix">
+                    <div class="pull-right">
+                      <button class="btn btn-pink">Save</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- privacy policy end -->
+              <!-- report a problem -->
+              <div class="problem-detail">
+                <form>
+                  <label for="problem">Report A Problem</label>
+                  <textarea name="" id="problem" class="form-control"></textarea>
+                  <div class="clearfix">
+                    <div class="pull-right">
+                      <button class="btn btn-pink">Save</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- report a problem end -->
             </div>
           </div>
         </div>

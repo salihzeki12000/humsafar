@@ -673,6 +673,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       totalPhoto: "50"
     }];
 
+    $scope.viewMonth = false;
+    $scope.showMonthView = function() {
+      $scope.viewMonth = true;
+    };
+
   })
   .controller('ReviewsCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file

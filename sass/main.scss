@@ -429,6 +429,13 @@ header {
     color: #80879a;
   }
 }
+.user-img {
+  width: 40px;
+  height: 42px;
+  border: 2px solid #fff;
+  border-radius: 15px;
+  overflow: hidden;
+}
 // end header
 // Set Profile process
 .verification-complete,
@@ -540,35 +547,35 @@ header {
 }
 // custom select
 .custom-select {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 999;
+  select {
+    @include appearance(none);
+    border: none;
+    width: 100%;
+    background-color: transparent;
+    outline: 0;
+    color: white;
+    cursor: pointer;
+    height: 40px;
     position: relative;
-    border-radius: 4px;
-    overflow: hidden;
-    z-index: 999;
-    select {
-        @include appearance(none);
-        border: none;
-        width: 100%;
-        background-color: transparent;
-        outline: 0;
-        color: white;
-        cursor: pointer;
-        height: 40px;
-        position: relative;
-        z-index: 9999;
-    }
-    &:after {
-        font: normal normal normal 14px/1 FontAwesome;
-        content: "\f0d7";
-        height: 40px;
-        width: 28px;
-        color: white;
-        position: absolute;
-        top: 0;
-        right: 0;
-        text-align: center;
-        line-height: 40px;
-        font-size: 20px;
-    }
+    z-index: 9999;
+  }
+  &:after {
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f0d7";
+    height: 40px;
+    width: 28px;
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+  }
 }
 // custom select end
 .custom-checkbox-heart {
@@ -774,17 +781,19 @@ header {
   border: 3px solid #fff;
   border-radius: 55px;
   margin: 0 auto -15px;
-  background: url('../img/profile-main.png') no-repeat 50% 50%;
+  overflow: hidden;
+  box-shadow: 0 2px 3px #636363;
+  // background: url('../img/profile-main.png') no-repeat 50% 50%;
 }
 .flag {
   position: absolute;
-  right: -15px;
+  right: 65px;
   bottom: 0;
 }
 .wave {
   position: absolute;
   top: 50%;
-  left: -40px;
+  left: 42px;
   @include transform(translateY(-50%));
 }
 .user-travel-detail {
@@ -1121,7 +1130,11 @@ header {
   font-size: 12px;
 }
 // progress bar
-.level1, .level2, .level3, .level4, .level5 {
+.level1,
+.level2,
+.level3,
+.level4,
+.level5 {
   span {
     display: block;
     color: $brand-light-grey;
@@ -1175,7 +1188,9 @@ header {
   }
 }
 .active-bar {
-  .name { color: $brand-pink; }
+  .name {
+    color: $brand-pink;
+  }
 }
 .last-progress-strip {
   position: relative;
@@ -1313,10 +1328,10 @@ header {
   }
 }
 .custom-select-local {
-  margin: 5px 0px;
+  margin: 5px 0;
   select {
     width: 93%;
-    padding: 0px 10px;
+    padding: 0 10px;
     border: 1px solid $brand-dark-cyan;
     border-radius: 4px;
     color: $brand-dark-blue;
@@ -1520,7 +1535,7 @@ header {
   }
 }
 .moment-view {
-  padding: 0px 40px 60px;
+  padding: 0 40px 60px;
   min-height: 500px;
 }
 .month-collage {
@@ -1550,7 +1565,7 @@ header {
   padding: 20px;
   @extend .journey-tabs;
   .btn-view-moments {
-    margin: 0px 20px;
+    margin: 0 20px;
     display: inline-block;
     span {
       color: $brand-dark-blue;
@@ -1607,12 +1622,12 @@ header {
 // travel moment imgholder end
 // local moment imgholder
 .moment-local-main {
-   .moment-local-view:nth-child(5n+1) {
-      margin: 15px 22px 15px 0;
-   }
-   .moment-local-view:nth-child(5n+5) {
-     margin: 15px 0 15px 22px;
-   }
+  .moment-local-view:nth-child(5n+1) {
+    margin: 15px 22px 15px 0;
+  }
+  .moment-local-view:nth-child(5n+5) {
+    margin: 15px 0 15px 22px;
+  }
 }
 .moment-local-view {
   margin: 15px 22px;
@@ -1630,7 +1645,6 @@ header {
     @include position(absolute, 0 null null 0);
   }
 }
-
 // local moment imgholder end
 // moment tab end
 // revies tab
@@ -1736,7 +1750,7 @@ header {
     border: none;
   }
   .panel-default > .panel-heading + .panel-collapse > .panel-body {
-    padding: 0px 30px;
+    padding: 0 30px;
     border: none;
   }
   .review-local-life {
@@ -1798,6 +1812,14 @@ header {
 .setting {
   padding: 20px 40px;
   background-color: #f1f2f2;
+}
+.profile-detail-main {
+  .profile-photo-sec {
+    box-shadow: none;
+  }
+}
+.setting-main-detail {
+  padding: 20px 30px;
 }
 // setting tab end
 @import "fancybox-override";
