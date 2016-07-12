@@ -1,0 +1,62 @@
+<div class="review-post-main avenir-roman">
+  <div class="post-heading clearfix">
+    <div class="pull-left"><span class="color-white popup-title">Review Countries Visited</span></div>
+    <div class="pull-right"><span class="close" ng-click="$dismiss();"><i class="fa fa-times color-white"></i></span></div>
+  </div>
+  <div class="post-content-main bg-white">
+    <form>
+      <div class="post-emojis">
+        <div class="text-center">
+          <div class="disappoint" ng-if="showRating == 1">
+            <figure>
+              <img src="img/disappoint-post.png" alt="" class="img-responsive m-center">
+              <figcaption class="color-blue font-bold">Disappointed</figcaption>
+            </figure>
+          </div>
+          <div class="sad" ng-if="showRating == 2">
+            <figure>
+            <img src="img/sad-post.png" alt="" class="img-responsive m-center">
+              <figcaption class="color-blue font-bold">Sad</figcaption>
+            </figure>
+          </div>
+          <div class="good" ng-if="showRating == 3">
+            <figure>
+            <img src="img/good-post.png" alt="" class="img-responsive m-center">
+              <figcaption class="color-blue font-bold">Good</figcaption>
+            </figure>
+          </div>
+          <div class="super" ng-if="showRating == 4">
+            <figure>
+            <img src="img/super-post.png" alt="" class="img-responsive m-center">
+              <figcaption class="color-blue font-bold">Super</figcaption>
+            </figure>
+          </div>
+          <div class="love" ng-if="showRating == 5">
+            <figure>
+            <img src="img/love-post.png" alt="" class="img-responsive m-center">
+              <figcaption class="color-blue font-bold">In Love</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+      <div class="star-post-rating text-center">
+        <ul class="list-inline">
+          <li><a href="" ng-click="starRating(1);"><i class="fa fa-star fa-2x color-pink"></i></a></li>
+          <li><a href="" ng-click="starRating(2);"><i class="fa fa-star-o fa-2x color-grey {{fillColor2}}"></i></a></li>
+          <li><a href="" ng-click="starRating(3);"><i class="fa fa-star-o fa-2x color-grey {{fillColor3}}"></i></a></li>
+          <li><a href="" ng-click="starRating(4);"><i class="fa fa-star-o fa-2x color-grey {{fillColor4}}"></i></a></li>
+          <li><a href="" ng-click="starRating(5);"><i class="fa fa-star-o fa-2x color-grey {{fillColor5}}"></i></a></li>
+        </ul>
+      </div>
+      <div class="text-center">
+        <span class="color-blue add-review inline-block font-bold">Add your Review</span>
+      </div>
+      <div class="fill-post">
+        <textarea name="" id=""  placeholder="Fill me in..."></textarea>
+      </div>
+      <div class="submit-post">
+        <button type="button" class="btn btn-dark-blue">POST</button>
+      </div>
+    </form>
+  </div>
+</div>

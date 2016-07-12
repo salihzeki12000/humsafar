@@ -679,7 +679,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
 
   })
-  .controller('ReviewsCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+  .controller('ReviewsCtrl', function($scope, TemplateService, NavigationService, $timeout,$uibModal) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("reviews");
@@ -690,6 +690,53 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       profileMain: "views/content/profile.html"
     }
     $scope.oneAtATime = true;
+
+    $scope.getReview = function() {
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/review-post.html",
+        scope: $scope
+      })
+    };
+    $scope.showRating = 1;
+    $scope.fillColor = "";
+    $scope.starRating = function(val){
+      if(val == 1) {
+        $scope.showRating = 1;
+        $scope.fillColor2 = "";
+        $scope.fillColor3 = "";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      }
+      else if(val == 2) {
+        $scope.showRating = 2;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 3){
+        $scope.showRating = 3;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 4){
+        $scope.showRating = 4;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "fa-star";
+        $scope.fillColor5 = "";
+      } else if (val == 5){
+        $scope.showRating = 5;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "fa-star";
+        $scope.fillColor5 = "fa-star";
+      }
+      else {
+        $scope.showRating = 1;
+      }
+    };
 
     $(document).ready(function() {
       setTimeout(function() {
