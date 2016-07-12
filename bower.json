@@ -34,7 +34,8 @@
     "ng-img-crop": "ngImgCrop#^0.3.2",
     "angular-mappy": "https://github.com/mattosborn/angular-mappy.git",
     "angular-masonry": "^0.16.0",
-    "ng-scrollbar": "^0.0.8"
+    "ng-scrollbar": "^0.0.8",
+    "angular-swiper": "^0.4.0"
   },
   "devDependencies": {
     "angular-translate": "^2.11.0"

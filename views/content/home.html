@@ -1,8 +1,138 @@
-<div class="container">
+<div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide  {{getClass}}">
+              <div class="bg-white get-width m-center">
+                <div class="verification-complete" ng-show="viewNext==1">
+                  <div class="text-center">
+                    <h3 class="color-blue avenir-black">Verification</h3>
+                    <img src="img/verified.png" alt="Verified" class="mt20 mb20 img-responsive m-center">
+                    <p class="color-blue avenir-roman">Your account has been <span class="block">successfully verified</span></p>
+                    <div class="button-panel clearfix">
+                      <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext(2)" >Next</button>
+                      <div class="swiper-button-next">Next</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide {{getClass2}} {{getClass}}">
+              <div class="bg-white get-width m-center">
+                <div class="nationality">
+                   <!-- ng-show="viewNext==2" -->
+                  <div class="text-center">
+                    <h3 class="color-blue avenir-black">Nationality</h3>
+                    <div class="select-your-nation">
+                      <div class="search-nation">
+                        <input type="text" class="form-control avenir-roman" placeholder="Search" ng-click="showNation = (showNation == true)?false:true;" ng-model="searchNation">
+                      </div>
+                      <ul class="avenir-roman bg-dark-blue" ng-show="showNation">
+                        <li ng-repeat="nation in nationality | filter:searchNation track by $index ">
+                          <div class="nation-select relate">
+                            <input type="radio" id="{{nation.name}}" name="nation" />
+                            <label for="{{nation.name}}">
+                              <img ng-src="{{nation.img}}" alt="" class="img-responsive inline-block mr10">
+                              <span class="color-white">{{nation.name}}</span>
+                            </label>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="button-panel clearfix">
+                      <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext(1)">Previous</button>
+                      <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext(3)">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="bg-white get-width m-center">
+                <div class="city">
+                   <!-- ng-show="viewNext==3" -->
+                  <div class="text-center">
+                    <h3 class="color-blue avenir-black">Where Do You Live?</h3>
+                    <div class="select-your-nation select-your-city">
+                      <div class="search-nation select-city">
+                        <input type="text" class="form-control avenir-roman" placeholder="City" ng-click="showCity = (showCity == true)?false:true;" ng-model="searchCity">
+                      </div>
+                      <ul class="avenir-roman bg-dark-blue" ng-show="showCity">
+                        <li ng-repeat="nation in nationality | filter:searchCity track by $index ">
+                          <div class="nation-select relate">
+                            <input type="radio" id="city{{nation.name}}" name="nation" />
+                            <label for="city{{nation.name}}">
+                              <span class="color-white">{{nation.name}}</span>
+                            </label>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="button-panel clearfix">
+                      <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext(2)">Previous</button>
+                      <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext(4)">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="swiper-slide bg-white">
+              <div class="gender" ng-show="goNext==4">
+                <div class="text-center" ng-init="gender=''">
+                  <h3 class="color-blue avenir-black">Gender</h3>
+                  <div class="male inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==1}" ng-click="gender=1">
+                    <img src="img/male.png" alt="Gender" class="img-responsive">
+                    <span class="color-blue avenir-black">He</span>
+                  </div>
+                  <div class="female inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==2}" ng-click="gender=2">
+                    <img src="img/female.png" alt="Gender" class="img-responsive">
+                    <span class="color-blue avenir-black">She</span>
+                  </div>
+                  <div class="button-panel clearfix">
+                    <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext = 3">Previous</button>
+                    <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext = 5">Next</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide bg-white">
+              <div class="upload-profile" ng-show="goNext==5">
+                <div class="text-center">
+                  <h3 class="color-blue avenir-black">Upload Profile Photo</h3>
+                  <div class="cropArea" ng-show="showImage">
+                    <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+                  </div>
+                  <div class="upload-section" ng-hide="showImage">
+                    <img src="img/upload-icon.jpg" alt="" class="m-center img-responsive">
+                    <p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
+                    <span class="block mt10 color-grey avenir-roman">-or-</span>
+                    <div class="upload-btn">
+                      <div class="relate inline-block mr10">
+                        <button class="btn btn-dark-blue pointer">Select a photo from your computer input</button>
+                        <input type="file" id="fileInput" class="getfile pointer" />
+                      </div>
+                      <div class="relate inline-block ml10">
+                        <button class="btn btn-dark-blue pointer">Web Camera</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="button-panel clearfix">
+                    <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
+                    <button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday">Done</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+
+        <!-- upar wala bus check karne k liye hai asliii wala code neeche hai -->
+
+<!-- <div class="container">
   <div class="login-process">
     <div class="row">
       <div class="col-md-offset-3 col-md-6">
-        <!-- <div class="verification">
+        <div class="verification">
           <div class="text-center">
             <h3 class="color-blue">Verification</h3>
             <p>A 4-digit Verification code has been sent to your registered email address.</p>
@@ -17,7 +147,7 @@
             <p>If you haven’t received a verification code yet, <span>Click here to <a href="">Re-send</a></span></p>
             <button class="btn btn-blue-outline">Submit</button>
           </div>
-        </div> -->
+        </div>
         <div class="bg-white" ng-init="goNext=1">
           <div class="verification-complete" ng-show="goNext==1">
             <div class="text-center">
@@ -125,4 +255,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

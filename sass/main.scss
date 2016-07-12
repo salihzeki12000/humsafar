@@ -1,12 +1,13 @@
-@import "../bower_components/bourbon/app/assets/stylesheets/bourbon";
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
 @import "../bower_components/flexslider/flexslider.css";
 @import "../bower_components/font-awesome/css/font-awesome.min.css";
 @import "../bower_components/fancyBox/source/jquery.fancybox.css";
+@import "../bower_components/swiper/dist/css/swiper.min.css";
 @import "../bower_components/ng-img-crop/compile/minified/ng-img-crop.css";
 @import "../bower_components/angular-mappy/build/angular-mappy.css";
 @import "../bower_components/ng-scrollbar/dist/ng-scrollbar.min.css";
+@import "../bower_components/bourbon/app/assets/stylesheets/bourbon";
 /* Bootstrap Variables Goes Here */
 $brand-dark-blue: #2c3757;
 $brand-blue: #2d3655;
@@ -1876,5 +1877,24 @@ header {
 .setting-main-detail {
   padding: 20px 30px;
 }
+.setting-list {
+  i {
+    font-size: 20px;
+  }
+}
 // setting tab end
+
+.swiper-container {
+    width: 100%;
+    padding-bottom: 50px;
+}
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 95%;
+    min-height: 432px;
+}
+.get-width {
+  width: 555px;
+}
 @import "fancybox-override";

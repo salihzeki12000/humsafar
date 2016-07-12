@@ -1,4 +1,4 @@
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar'])
+angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper'])
 
 .controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -9,6 +9,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Home");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    setTimeout(function() {
+      var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        coverflow: {
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true
+        }
+      });
+    }, 10);
+
+    $scope.getClass = "";
+    $scope.viewNext = 1;
+    $scope.goNext = function(val){
+      if(val == 1) {
+        $scope.viewNext = 1;
+        $scope.getClass = "swiper-slide-active"
+      }else if(val == 2) {
+        $scope.viewNext = 2;
+        $scope.getClass2 = "swiper-slide-active"
+      }
+
+    };
 
     $scope.nationality = [{
       img: "img/flag.png",
@@ -679,7 +709,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
 
   })
-  .controller('ReviewsCtrl', function($scope, TemplateService, NavigationService, $timeout,$uibModal) {
+  .controller('ReviewsCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("reviews");
@@ -700,40 +730,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
     $scope.showRating = 1;
     $scope.fillColor = "";
-    $scope.starRating = function(val){
-      if(val == 1) {
+    $scope.starRating = function(val) {
+      if (val == 1) {
         $scope.showRating = 1;
         $scope.fillColor2 = "";
         $scope.fillColor3 = "";
         $scope.fillColor4 = "";
         $scope.fillColor5 = "";
-      }
-      else if(val == 2) {
+      } else if (val == 2) {
         $scope.showRating = 2;
         $scope.fillColor2 = "fa-star";
         $scope.fillColor3 = "";
         $scope.fillColor4 = "";
         $scope.fillColor5 = "";
-      } else if (val == 3){
+      } else if (val == 3) {
         $scope.showRating = 3;
         $scope.fillColor2 = "fa-star";
         $scope.fillColor3 = "fa-star";
         $scope.fillColor4 = "";
         $scope.fillColor5 = "";
-      } else if (val == 4){
+      } else if (val == 4) {
         $scope.showRating = 4;
         $scope.fillColor2 = "fa-star";
         $scope.fillColor3 = "fa-star";
         $scope.fillColor4 = "fa-star";
         $scope.fillColor5 = "";
-      } else if (val == 5){
+      } else if (val == 5) {
         $scope.showRating = 5;
         $scope.fillColor2 = "fa-star";
         $scope.fillColor3 = "fa-star";
         $scope.fillColor4 = "fa-star";
         $scope.fillColor5 = "fa-star";
-      }
-      else {
+      } else {
         $scope.showRating = 1;
       }
     };
@@ -1557,6 +1585,4 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   };
 
 
-})
-
-;
+});
