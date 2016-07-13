@@ -10,11 +10,11 @@
                 <li>
                   <div class="profile-heading clearfix">
                     <i class="fa fa-chevron-right pull-right"></i>
-                    <div class="profile-imgholder">
-                      <!-- <img src="img/edit-profile.png" alt="" class="img-responsive"> -->
+                    <div class="setting-prof-imgholder">
+                      <img src="img/profile-main.png" alt="" class="img-responsive">
                     </div>
-                    <div class="profile-detail">
-                      <h4>Amit Duxctronn</h4>
+                    <div class="profile-detail inline-block v-top">
+                      <h4 class="color-blue m-clear">Amit Duxctronn</h4>
                       <span>16 Jan 1988</span>
                     </div>
                   </div>
@@ -58,15 +58,20 @@
             </div>
           </div>
           <div class="col-md-8">
-            <div class="setting-main-detail bg-white">
+            <div class="setting-main-detail bg-white avenir-roman">
               <!-- profile detail -->
               <div class="profile-detail-main">
                 <form action="">
                   <div class="profile-photo-sec upload-profile">
-                    <div class="cropArea">
-                      <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+                    <div class="cropArea relate" ng-show="showImage">
+                      <div class="cancel"><span>Cancel</span></div>
+                      <img-crop image="myImage" result-image="myCroppedImage">
+                      </img-crop>
+                      <div class="btn-upload">
+                        <button class="btn btn-pink btn-more">Upload</button>
+                      </div>
                     </div>
-                    <div class="upload-section text-center">
+                    <div class="upload-section text-center" ng-hide="showImage">
                       <img src="img/upload-icon.jpg" alt="" class="m-center img-responsive">
                       <p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
                       <span class="block mt10 color-grey avenir-roman">-or-</span>
@@ -87,12 +92,12 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <input type="text" class="form-control" value="Amit">
+                        <input type="text" class="form-control" placeholder="Amit">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <input type="text" class="form-control" value="Duxctronn">
+                        <input type="text" class="form-control" placeholder="Duxctronn">
                       </div>
                     </div>
                   </div>
@@ -100,7 +105,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" id="email">
+                        <input type="text" class="form-control" id="email" placeholder="amit@travelibro.com">
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -114,7 +119,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" value="amit-duxctronn">
+                        <input type="text" class="form-control" placeholder="amit-duxctronn">
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -194,7 +199,7 @@
                   </div>
                   <div class="clearfix">
                     <div class="pull-right">
-                      <button type="submit" class="btn btn-pink">Submit</button>
+                      <button type="submit" class="btn btn-dark-pink">Submit</button>
                     </div>
                   </div>
                 </form>
@@ -450,7 +455,7 @@
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/sportandadventure.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Sports &amp; Adventure</figcaption>
+                            <figcaption class="color-blue font-bold">Sports &amp; <span class="block">Adventure</span></figcaption>
                           </div>
                         </figure>
                       </div>
@@ -470,7 +475,7 @@
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/spirituality.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Spirituality &amp; Wellness</figcaption>
+                            <figcaption class="color-blue font-bold">Spirituality &amp; <span class="block">Wellness</span></figcaption>
                           </div>
                         </figure>
                       </div>
@@ -510,7 +515,7 @@
                 <!-- ideal holiday type end -->
                 <div class="clearfix">
                   <div class="pull-right">
-                    <button class="btn btn-pink">Save</button>
+                    <button class="btn btn-dark-pink">Save</button>
                   </div>
                 </div>
               </div>
@@ -538,7 +543,7 @@
                   </div>
                   <div class="clearfix">
                     <div class="pull-right">
-                      <button class="btn btn-pink">Save</button>
+                      <button class="btn btn-dark-pink">Save</button>
                     </div>
                   </div>
                 </form>
@@ -576,7 +581,7 @@
                   </div>
                   <div class="clearfix">
                     <div class="pull-right">
-                      <button class="btn btn-pink">Save</button>
+                      <button class="btn btn-dark-pink">Save</button>
                     </div>
                   </div>
                 </form>
@@ -602,7 +607,7 @@
                   <p class="avenir-medium color-grey fz12">When you select your account to be private only, your followers can view your My Life - Journeys, Moments and Reviews.</p>
                   <div class="clearfix">
                     <div class="pull-right">
-                      <button class="btn btn-pink">Save</button>
+                      <button class="btn btn-dark-pink">Save</button>
                     </div>
                   </div>
                 </form>
@@ -612,10 +617,10 @@
               <div class="problem-detail">
                 <form>
                   <label for="problem">Report A Problem</label>
-                  <textarea name="" id="problem" class="form-control"></textarea>
+                  <textarea name="" id="problem" class="form-control" placeholder="Comment"></textarea>
                   <div class="clearfix">
                     <div class="pull-right">
-                      <button class="btn btn-pink">Save</button>
+                      <button class="btn btn-dark-pink">Save</button>
                     </div>
                   </div>
                 </form>

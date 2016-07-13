@@ -145,9 +145,6 @@ ul {
 .avenir-heavy {
   font-family: "AvenirLTStd-Heavy";
 }
-.avenir-heavy {
-  font-family: "AvenirLTStd-Heavy";
-}
 .avenir-light {
   font-family: "AvenirLTStd-Light";
 }
@@ -1880,6 +1877,61 @@ header {
 .setting-list {
   i {
     font-size: 20px;
+    color: $brand-lighter-grey;
+  }
+}
+.setting-prof-imgholder {
+  width: 63px;
+  height: 65px;
+  border: 2px solid $brand-grey;
+  border-radius: 25px;
+  box-shadow: 0px 3px 1px #e3e3e3;
+  display: inline-block;
+  overflow: hidden;
+}
+.profile-detail {
+  margin: 12px;
+}
+.setting-main-detail {
+  .form-control {
+    height: 40px;
+    border: 1px solid $brand-dark-blue;
+    color: $brand-blue;
+    border-radius: 6px;
+    // @include placeholder {
+    //   color: $brand-blue;
+    // };
+  }
+  .select-holiday {
+    background: url("../img/setting/grey-half.png") no-repeat 50% 0;
+    &:hover {
+      background: url("../img/setting/green-half.png") no-repeat 50% 0;
+    }
+    img {
+      height: 45px;
+    }
+    figcaption {
+      font-size: 13px;
+      text-align: center;
+    }
+  }
+  .holiday-imgholder { min-height: 55px; }
+  .holiday-section, .setting-usually-go, .setting-prefer-travel, .setting-ideal-holiday {
+    li {
+      margin: 10px 15px;
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+  .profile-photo-sec {
+    padding: 10px 0px 20px;
+  }
+  img-crop {
+    background-color: $brand-dark-blue;
+    border-radius: 7px;
+  }
+  .cropArea {
+    height: 300px;
   }
 }
 // setting tab end
