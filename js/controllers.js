@@ -1555,6 +1555,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }
     }, 1000);
 
+    $scope.selectHoliday = 1;
+    $scope.selectHoliday = 11;
+    $scope.selectHoliday = 21;
+    $scope.selectHoliday = 31;
+
+    $scope.showSetting = 1;
+    $scope.setting = function(val){
+      if(val == 1) {
+        $scope.showSetting = 1;
+      }else if(val == 2) {
+        $scope.showSetting = 2;
+      }else if(val == 3) {
+        $scope.showSetting = 3;
+      }else if(val == 4) {
+        $scope.showSetting = 4;
+      }else if(val == 5) {
+        $scope.showSetting = 5;
+      }else if(val == 6) {
+        $scope.showSetting = 6;
+      }else {
+        $scope.showSetting = 1;
+      }
+    };
+
   })
 
 .controller('headerctrl', function($scope, TemplateService) {

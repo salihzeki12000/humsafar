@@ -1,13 +1,13 @@
 <div class="setting-main">
   <div class="container">
     <div class="setting">
-      <h3 class="color-blue font-bold text-center m-clear">Settings</h3>
+      <h3 class="color-blue font-bold text-center m-clear mb20">Settings</h3>
       <div class="setting-user-detail">
         <div class="row">
           <div class="col-md-4">
-            <div class="setting-list">
+            <div class="setting-list avenir-roman">
               <ul>
-                <li>
+                <li ng-click="setting(1)" ng-class="{'bg-white' : showSetting == 1}">
                   <div class="profile-heading clearfix">
                     <i class="fa fa-chevron-right pull-right"></i>
                     <div class="setting-prof-imgholder">
@@ -19,35 +19,35 @@
                     </div>
                   </div>
                 </li>
-                <li>
+                <li ng-click="setting(2)" ng-class="{'bg-white' : showSetting == 2}">
                   <div class="edit-profile-heading clearfix">
                     <i class="fa fa-chevron-right pull-right"></i>
                     <img src="img/edit-profile.png" alt="">
                     <h5 class="color-blue inline-block m-clear">Edit Profile - <span>A little more about me</span></h5>
                   </div>
                 </li>
-                <li>
+                <li ng-click="setting(3)" ng-class="{'bg-white' : showSetting == 3}">
                   <div class="password-heading clearfix">
                     <i class="fa fa-chevron-right pull-right"></i>
                     <img src="img/setting.png" alt="">
                     <h5 class="color-blue inline-block m-clear">Change Password</h5>
                   </div>
                 </li>
-                <li>
+                <li ng-click="setting(4)" ng-class="{'bg-white' : showSetting == 4}">
                   <div class="upload-heading clearfix">
                     <i class="fa fa-chevron-right pull-right"></i>
                     <img src="img/data-upload.png" alt="">
                     <h5 class="color-blue inline-block m-clear">Data Upload</h5>
                   </div>
                 </li>
-                <li>
+                <li ng-click="setting(5)" ng-class="{'bg-white' : showSetting == 5}">
                   <div class="privacy-heading clearfix">
                     <i class="fa fa-chevron-right pull-right"></i>
                     <img src="img/privacy.png" alt="">
                     <h5 class="color-blue inline-block m-clear">Privacy</h5>
                   </div>
                 </li>
-                <li>
+                <li ng-click="setting(6)" ng-class="{'bg-white' : showSetting == 6}">
                   <div class="report-problem-heading clearfix">
                     <i class="fa fa-chevron-right pull-right"></i>
                     <img src="img/report-problem.png" alt="">
@@ -60,11 +60,11 @@
           <div class="col-md-8">
             <div class="setting-main-detail bg-white avenir-roman">
               <!-- profile detail -->
-              <div class="profile-detail-main">
+              <div class="profile-detail-main" ng-if="showSetting == 1">
                 <form action="">
                   <div class="profile-photo-sec upload-profile">
                     <div class="cropArea relate" ng-show="showImage">
-                      <div class="cancel"><span>Cancel</span></div>
+                      <div class="cancel" ng-click="showImage"><span class="color-white pointer">Cancel</span></div>
                       <img-crop image="myImage" result-image="myCroppedImage">
                       </img-crop>
                       <div class="btn-upload">
@@ -104,13 +104,13 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email" class="color-blue">Email</label>
                         <input type="text" class="form-control" id="email" placeholder="amit@travelibro.com">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="dob">DOB</label>
+                        <label for="dob" class="color-blue">DOB</label>
                         <input type="date" class="form-control" id="dob">
                       </div>
                     </div>
@@ -125,12 +125,12 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="gender">Gender</label>
-                        <div class="text-center" ng-init="gender=''">
-                          <div class="male inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==1}" ng-click="gender=1">
+                        <div class="setting-tab-gender" ng-init="gender=''">
+                          <div class="male text-center inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==1}" ng-click="gender=1">
                             <img src="img/male.png" alt="Gender" class="img-responsive">
                             <span class="color-blue avenir-black">He</span>
                           </div>
-                          <div class="female inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==2}" ng-click="gender=2">
+                          <div class="female text-center inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==2}" ng-click="gender=2">
                             <img src="img/female.png" alt="Gender" class="img-responsive">
                             <span class="color-blue avenir-black">She</span>
                           </div>
@@ -138,24 +138,26 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="Nationality">Nationality</label>
-                        <div class="custom-select">
-                          <select name="" id="Nationality">
-                            <option value="India">India</option>
-                          </select>
+                  <div class="setting-nationality">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="Nationality">Nationality</label>
+                          <div class="custom-select">
+                            <select name="" id="Nationality">
+                              <option value="India">India</option>
+                            </select>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="Live">Where Do You Live ?</label>
-                        <div class="custom-select">
-                          <select name="" id="Live">
-                            <option value="Mumbai">Mumbai</option>
-                          </select>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="Live">Where Do You Live ?</label>
+                          <div class="custom-select">
+                            <select name="" id="Live">
+                              <option value="Mumbai">Mumbai</option>
+                            </select>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -163,14 +165,15 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="travel-blogger">
+                        <h4 class="color-blue setting-tab-heading">Are You A Travel Blogger?</h4>
                         <div class="button-group djb-font">
                           <button class="btn btn-grey-pink ">
-                            <img src="img/travel-photographer.png" alt=""> travel Photographer
+                            <img src="img/travel-photographer.png" alt="" height="25"> travel Photographer
                           </button>
                           <button class="btn btn-grey-pink">
-                            <img src="img/travel-blogger.png" alt=""> travel blogger
+                            <img src="img/travel-blogger.png" alt="" height="25"> travel blogger
                           </button>
-                          <button class="btn btn-grey-pink avenir-roman">
+                          <button class="btn btn-grey-pink avenir-roman btn-more">
                             None
                           </button>
                         </div>
@@ -183,7 +186,7 @@
                     </div>
                   </div>
                   <div class="">
-                    <h4>Personal Details</h4>
+                    <h4 class="color-blue setting-tab-heading">Personal Details</h4>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
@@ -197,20 +200,20 @@
                       </div>
                     </div>
                   </div>
-                  <div class="clearfix">
+                  <div class="clearfix mt20">
                     <div class="pull-right">
-                      <button type="submit" class="btn btn-dark-pink">Submit</button>
+                      <button type="submit" class="btn btn-dark-pink btn-more">Save</button>
                     </div>
                   </div>
                 </form>
               </div>
               <!-- profile detail -->
               <!-- more profile detail -->
-              <div class="more-profile-detail avenir-roman">
+              <div class="more-profile-detail avenir-roman" ng-if="showSetting == 2">
                 <!-- holiday -->
                 <div class="holiday-section">
-                  <h4 class="color-blue">Your kind of a holiday</h4>
-                  <ul>
+                  <h4 class="color-blue setting-tab-heading">Your kind of a holiday</h4>
+                  <ul  ng-init="selectHoliday = 1">
                     <li>
                       <div class="select-holiday" ng-click="selectHoliday=1" ng-class="{'active-holiday': selectHoliday == 1}">
                         <figure>
@@ -276,10 +279,10 @@
                 <!-- holiday -->
                 <!-- usually go -->
                 <div class="setting-usually-go">
-                  <h4 class="color-blue">You usually go</h4>
-                  <ul>
+                  <h4 class="color-blue setting-tab-heading">You usually go</h4>
+                  <ul ng-init="selectUsually = 11">
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=11" ng-class="{'active-holiday' : selectHoliday == 11}">
+                      <div class="select-holiday" ng-click="selectUsually=11" ng-class="{'active-holiday' : selectUsually == 11}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/map.png" alt="" class="img-responsive m-center">
@@ -289,7 +292,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=12" ng-class="{'active-holiday' : selectHoliday == 12}">
+                      <div class="select-holiday" ng-click="selectUsually=12" ng-class="{'active-holiday' : selectUsually == 12}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/road.png" alt="" class="img-responsive m-center">
@@ -299,7 +302,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=13" ng-class="{'active-holiday' : selectHoliday == 13}">
+                      <div class="select-holiday" ng-click="selectUsually=13" ng-class="{'active-holiday' : selectUsually == 13}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/both.png" alt="" class="img-responsive m-center">
@@ -313,9 +316,10 @@
                 <!-- usually go -->
                 <!-- prefer travel -->
                 <div class="setting-prefer-travel">
-                  <ul>
+                  <h4 class="color-blue setting-tab-heading">Prefer to travel</h4>
+                  <ul ng-init="selectTravel = 21">
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=21" ng-class="{'active-holiday' : selectHoliday == 21}">
+                      <div class="select-holiday" ng-click="selectTravel=21" ng-class="{'active-holiday' : selectTravel == 21}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/family.png" alt="" class="img-responsive m-center">
@@ -325,7 +329,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=22" ng-class="{'active-holiday' : selectHoliday == 22}">
+                      <div class="select-holiday" ng-click="selectTravel=22" ng-class="{'active-holiday' : selectTravel == 22}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/friends.png" alt="" class="img-responsive m-center">
@@ -335,7 +339,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=23" ng-class="{'active-holiday' : selectHoliday == 23}">
+                      <div class="select-holiday" ng-click="selectTravel=23" ng-class="{'active-holiday' : selectTravel == 23}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/spouse.png" alt="" class="img-responsive m-center">
@@ -345,7 +349,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=24" ng-class="{'active-holiday' : selectHoliday == 24}">
+                      <div class="select-holiday" ng-click="selectTravel=24" ng-class="{'active-holiday' : selectTravel == 24}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/solo.png" alt="" class="img-responsive m-center">
@@ -355,7 +359,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=25" ng-class="{'active-holiday' : selectHoliday == 25}">
+                      <div class="select-holiday" ng-click="selectTravel=25" ng-class="{'active-holiday' : selectTravel == 25}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/business.png" alt="" class="img-responsive m-center">
@@ -365,7 +369,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=26" ng-class="{'active-holiday' : selectHoliday == 26}">
+                      <div class="select-holiday" ng-click="selectTravel=26" ng-class="{'active-holiday' : selectTravel == 26}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/blogger.png" alt="" class="img-responsive m-center">
@@ -375,7 +379,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=27" ng-class="{'active-holiday' : selectHoliday == 27}">
+                      <div class="select-holiday" ng-click="selectTravel=27" ng-class="{'active-holiday' : selectTravel == 27}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/grouptour.png" alt="" class="img-responsive m-center">
@@ -385,7 +389,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=28" ng-class="{'active-holiday' : selectHoliday == 28}">
+                      <div class="select-holiday" ng-click="selectTravel=28" ng-class="{'active-holiday' : selectTravel == 28}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/photographer.png" alt="" class="img-responsive m-center">
@@ -399,9 +403,10 @@
                 <!-- prefer travel end-->
                 <!-- ideal holiday type -->
                 <div class="setting-ideal-holiday">
-                  <ul>
+                  <h4 class="color-blue setting-tab-heading">Your ideal holiday type</h4>
+                  <ul ng-init="selectIdeal = 31">
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=31" ng-class="{'active-holiday' : selectHoliday == 31}">
+                      <div class="select-holiday" ng-click="selectIdeal=31" ng-class="{'active-holiday' : selectIdeal == 31}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/luxury.png" alt="" class="img-responsive m-center">
@@ -411,7 +416,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=32" ng-class="{'active-holiday' : selectHoliday == 32}">
+                      <div class="select-holiday" ng-click="selectIdeal=32" ng-class="{'active-holiday' : selectIdeal == 32}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/backpacking.png" alt="" class="img-responsive m-center">
@@ -421,7 +426,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=33" ng-class="{'active-holiday' : selectHoliday == 33}">
+                      <div class="select-holiday" ng-click="selectIdeal=33" ng-class="{'active-holiday' : selectIdeal == 33}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/greentravelling.png" alt="" class="img-responsive m-center">
@@ -431,7 +436,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=34" ng-class="{'active-holiday' : selectHoliday == 34}">
+                      <div class="select-holiday" ng-click="selectIdeal=34" ng-class="{'active-holiday' : selectIdeal == 34}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/pocketfriendly.png" alt="" class="img-responsive m-center">
@@ -441,7 +446,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=35" ng-class="{'active-holiday' : selectHoliday == 35}">
+                      <div class="select-holiday" ng-click="selectIdeal=35" ng-class="{'active-holiday' : selectIdeal == 35}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/romance.png" alt="" class="img-responsive m-center">
@@ -451,7 +456,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=36" ng-class="{'active-holiday' : selectHoliday == 36}">
+                      <div class="select-holiday" ng-click="selectIdeal=36" ng-class="{'active-holiday' : selectIdeal == 36}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/sportandadventure.png" alt="" class="img-responsive m-center">
@@ -461,7 +466,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=37" ng-class="{'active-holiday' : selectHoliday == 37}">
+                      <div class="select-holiday" ng-click="selectIdeal=37" ng-class="{'active-holiday' : selectIdeal == 37}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/historyandculture.png" alt="" class="img-responsive m-center">
@@ -471,7 +476,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=38" ng-class="{'active-holiday' : selectHoliday == 38}">
+                      <div class="select-holiday" ng-click="selectIdeal=38" ng-class="{'active-holiday' : selectIdeal == 38}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/spirituality.png" alt="" class="img-responsive m-center">
@@ -481,7 +486,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=39" ng-class="{'active-holiday' : selectHoliday == 39}">
+                      <div class="select-holiday" ng-click="selectIdeal=39" ng-class="{'active-holiday' : selectIdeal == 39}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/shopping.png" alt="" class="img-responsive m-center">
@@ -491,7 +496,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=40" ng-class="{'active-holiday' : selectHoliday == 40}">
+                      <div class="select-holiday" ng-click="selectIdeal=40" ng-class="{'active-holiday' : selectIdeal == 40}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/foodandwine.png" alt="" class="img-responsive m-center">
@@ -501,10 +506,10 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday">
+                      <div class="select-holiday" ng-click="selectIdeal=41" ng-class="{'active-holiday' : selectIdeal == 41}">
                         <figure>
                           <div class="holiday-imgholder">
-                            <img src="img/foodandwine.png" alt="" class="img-responsive m-center">
+                            <img src="img/festival.png" alt="" class="img-responsive m-center">
                             <figcaption class="color-blue font-bold">Festivals</figcaption>
                           </div>
                         </figure>
@@ -513,17 +518,17 @@
                   </ul>
                 </div>
                 <!-- ideal holiday type end -->
-                <div class="clearfix">
+                <div class="clearfix mt20">
                   <div class="pull-right">
-                    <button class="btn btn-dark-pink">Save</button>
+                    <button class="btn btn-dark-pink btn-more">Save</button>
                   </div>
                 </div>
               </div>
               <!-- more profile detail end -->
               <!-- change password -->
-              <div class="change-password-detail">
+              <div class="change-password-detail" ng-if="showSetting == 3">
                 <form>
-                  <h4 class="color-blue">Password</h4>
+                  <h4 class="color-blue setting-tab-heading">Password</h4>
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
@@ -541,86 +546,87 @@
                       </div>
                     </div>
                   </div>
-                  <div class="clearfix">
+                  <div class="clearfix mt20">
                     <div class="pull-right">
-                      <button class="btn btn-dark-pink">Save</button>
+                      <button class="btn btn-dark-pink btn-more">Save</button>
                     </div>
                   </div>
                 </form>
               </div>
               <!-- change password -->
               <!-- data upload -->
-              <div class="data-upload-detail">
-                <h4 class="color-blue">Data Upload</h4>
+              <div class="data-upload-detail" ng-if="showSetting == 4">
+                <h4 class="color-blue setting-tab-heading">Data Upload</h4>
                 <form>
                   <div class="row">
                     <div class="col-md-4">
-                      <div class="custom-checkbox-setting">
-                        <input type="text" id="cellular-wifi">
+                      <div class="custom-checkbox-setting checkbox-select">
+                        <input type="checkbox" id="cellular-wifi">
                         <label for="cellular-wifi">
                           Cellular and Wi-Fi
                         </label>
                       </div>
                     </div>
                     <div class="col-md-4">
-                      <div class="custom-checkbox-setting">
-                        <input type="text" id="wifi">
+                      <div class="custom-checkbox-setting checkbox-select">
+                        <input type="checkbox" id="wifi">
                         <label for="wifi">
                           Wi-Fi
                         </label>
                       </div>
                     </div>
                     <div class="col-md-4">
-                      <div class="custom-checkbox-setting">
-                        <input type="text" id="Cellular">
+                      <div class="custom-checkbox-setting checkbox-select">
+                        <input type="checkbox" id="Cellular">
                         <label for="Cellular">
                           Cellular
                         </label>
                       </div>
                     </div>
                   </div>
-                  <div class="clearfix">
+                  <div class="clearfix mt20">
                     <div class="pull-right">
-                      <button class="btn btn-dark-pink">Save</button>
+                      <button class="btn btn-dark-pink btn-more">Save</button>
                     </div>
                   </div>
                 </form>
               </div>
               <!-- data upload end-->
               <!-- privacy policy  -->
-              <div class="privacy-detail">
+              <div class="privacy-detail" ng-if="showSetting == 5">
+                <h4 class="color-blue setting-tab-heading">Privacy Policy</h4>
                 <form>
                   <div class="row">
                     <div class="col-md-6">
-                      <div class="custom-checkbox-setting">
-                        <input type="text" id="public">
+                      <div class="radio-select">
+                        <input type="radio" id="public" name="privacy">
                         <label for="public">Public - Everyone</label>
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <div class="custom-checkbox-setting">
-                        <input type="text" id="private">
+                      <div class="radio-select">
+                        <input type="radio" id="private" name="privacy">
                         <label for="private">Private - My Followers</label>
                       </div>
                     </div>
                   </div>
-                  <p class="avenir-medium color-grey fz12">When you select your account to be private only, your followers can view your My Life - Journeys, Moments and Reviews.</p>
-                  <div class="clearfix">
+                  <p class="avenir-medium color-grey fz12 mt20">When you select your account to be private only, your followers can view your My Life - Journeys, Moments and Reviews.</p>
+                  <div class="clearfix mt20">
                     <div class="pull-right">
-                      <button class="btn btn-dark-pink">Save</button>
+                      <button class="btn btn-dark-pink btn-more">Save</button>
                     </div>
                   </div>
                 </form>
               </div>
               <!-- privacy policy end -->
               <!-- report a problem -->
-              <div class="problem-detail">
+              <div class="problem-detail" ng-if="showSetting == 6">
                 <form>
                   <label for="problem">Report A Problem</label>
                   <textarea name="" id="problem" class="form-control" placeholder="Comment"></textarea>
-                  <div class="clearfix">
+                  <div class="clearfix mt20">
                     <div class="pull-right">
-                      <button class="btn btn-dark-pink">Save</button>
+                      <button class="btn btn-dark-pink btn-more">Submit</button>
                     </div>
                   </div>
                 </form>

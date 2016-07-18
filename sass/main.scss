@@ -363,6 +363,12 @@ textarea {
 .btn-pink {
   @include button-variant( white, $brand-dark-pink, $brand-dark-pink);
 }
+.btn-grey-pink {
+  @include button-variant( white, $brand-grey, $brand-dark-blue);
+  &:hover {
+    @include button-variant( white, $brand-dark-pink, $brand-dark-blue);
+  }
+}
 .btn-dark-blue {
   @include button-variant( white, $brand-dark-blue, $brand-dark-blue);
 }
@@ -430,7 +436,7 @@ header {
 .user-img {
   width: 40px;
   height: 42px;
-  border: 2px solid #fff; 
+  border: 2px solid #fff;
   border-radius: 15px;
   overflow: hidden;
 }
@@ -767,7 +773,7 @@ header {
 }
 .profile-photo-section {
   width: 300px;
-  margin: 50px auto -12px;
+  margin: 45px auto -12px;
 }
 .profile-more-detail {
   padding: 30px 30px 20px;
@@ -1139,7 +1145,7 @@ header {
     font-size: 15px;
   }
   .progress-range {
-    margin: 5px 0 0 -8px;
+    margin: 10px 0 0 -8px;
   }
 }
 .level1 {
@@ -1214,7 +1220,7 @@ header {
   }
 }
 .travel-progress-bar {
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 // journey tabs
 .journey-tabs {
@@ -1245,6 +1251,7 @@ header {
 // masonry tab
 .masonry-detail {
   padding: 0 10px;
+  margin-top: -10px;
   .masonry-brick {
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -1277,7 +1284,6 @@ header {
 }
 .local-life-main {
   padding: 0 20px;
-  margin-top: 10px;
 }
 .filter-local-life {
   width: 24%;
@@ -1372,6 +1378,7 @@ header {
 .local-post {
   padding: 30px 60px;
   border-right: 1px solid $brand-lighter-grey;
+  border-left: 1px solid $brand-lighter-grey;
 }
 .scrollme {
   max-height: 890px;
@@ -1870,14 +1877,16 @@ header {
   .profile-photo-sec {
     box-shadow: none;
   }
+  label { margin-bottom: 10px; }
 }
-.setting-main-detail {
-  padding: 20px 30px;
-}
+
 .setting-list {
   i {
     font-size: 20px;
     color: $brand-lighter-grey;
+  }
+  li {
+    padding: 10px 15px;
   }
 }
 .setting-prof-imgholder {
@@ -1893,6 +1902,7 @@ header {
   margin: 12px;
 }
 .setting-main-detail {
+    padding: 20px 30px;
   .form-control {
     height: 40px;
     border: 1px solid $brand-dark-blue;
@@ -1911,20 +1921,34 @@ header {
       height: 45px;
     }
     figcaption {
+      margin-top: 10px;
       font-size: 13px;
       text-align: center;
     }
   }
+  .active-holiday {
+    background: url("../img/setting/green-half.png") no-repeat 50% 0;
+  }
   .holiday-imgholder { min-height: 55px; }
   .holiday-section, .setting-usually-go, .setting-prefer-travel, .setting-ideal-holiday {
+    margin-bottom: 20px;
+    ul { margin: 0 -10px; }
     li {
-      margin: 10px 15px;
+      width: 90px;
+      margin: 15px 0px;
       display: inline-block;
       vertical-align: top;
     }
   }
+  .holiday-section ul { margin: 0; }
   .profile-photo-sec {
-    padding: 10px 0px 20px;
+    padding: 0;
+    margin-bottom: 25px;
+    .upload-section {
+      padding: 40px 0 30px;
+      border: 1px solid $brand-dark-blue;
+      border-radius: 7px;
+    }
   }
   img-crop {
     background-color: $brand-dark-blue;
@@ -1933,7 +1957,158 @@ header {
   .cropArea {
     height: 300px;
   }
+  .cancel {
+    @include position(absolute, 3px 7px null null);
+    z-index: 1;
+  }
+  .btn-upload {
+    @include position(absolute, null 5px 7px null);
+  }
 }
+.setting-tab-gender {
+  .male, .female {
+    @include square(100px);
+    margin: 0 15px 0 0;
+    img { height: 80px; }
+  }
+}
+.setting-tab-heading {
+  margin: 0px 0px 15px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.setting-nationality {
+  margin-top: 25px;
+  .custom-select {
+    select {
+      border: 1px solid $brand-dark-blue;
+      border-radius: 7px;
+    }
+    &:after {
+      content: "\f078";
+      color: $brand-dark-blue;
+      right: 8px;
+    }
+  }
+}
+.travel-blogger {
+  .button-group {
+    margin-bottom: 20px;
+    .btn {
+      font-size: 18px;
+    }
+    .btn:first-child{
+      padding: 8px 28px;
+    }
+    .btn:nth-child(2){
+      padding: 8px 30px;
+      margin: 0 20px;
+    }
+    .btn:last-child{
+      padding: 8px 60px;
+    }
+  }
+}
+// select with checkbox
+.checkbox-select {
+  [type="checkbox"]:not(:checked),
+  [type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+  }
+  [type="checkbox"]:not(:checked) + label,
+  [type="checkbox"]:checked + label {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #3f4966;
+    border-radius: 6px;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+  }
+  /* checkbox aspect */
+  [type="checkbox"]:not(:checked) + label:before,
+  [type="checkbox"]:checked + label:before {
+    content: '';
+    @include square(20px);
+    @include position(absolute, 50% 8px null null);
+    @include transform(translateY(-50%));
+    @include transition(all 300ms linear);
+  }
+  /* checked mark aspect */
+  [type="checkbox"]:not(:checked) + label:after,
+  [type="checkbox"]:checked + label:after {
+    content: '\f00c';
+    font: normal normal normal 14px/1 FontAwesome;
+    @include square(20px);
+    color: #b7b7b7;
+    @include position(absolute, 50% 8px null null);
+    @include transform(translateY(-50%));
+    line-height: 20px;
+    text-align: center;
+    @include transition(all 300ms linear);
+  }
+  [type="checkbox"]:checked + label:after {
+    color: $brand-pink;
+    @include transition(all 300ms linear);
+  }
+}
+.radio-select {
+  [type="radio"]:not(:checked),
+  [type="radio"]:checked {
+    position: absolute;
+    left: -9999px;
+  }
+  [type="radio"]:not(:checked) + label,
+  [type="radio"]:checked + label {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #3f4966;
+    border-radius: 6px;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+  }
+  /* radio aspect */
+  [type="radio"]:not(:checked) + label:before,
+  [type="radio"]:checked + label:before {
+    content: '';
+    @include square(20px);
+    @include position(absolute, 50% 8px null null);
+    @include transform(translateY(-50%));
+    @include transition(all 300ms linear);
+  }
+  /* checked mark aspect */
+  [type="radio"]:not(:checked) + label:after,
+  [type="radio"]:checked + label:after {
+    content: '\f00c';
+    font: normal normal normal 14px/1 FontAwesome;
+    @include square(20px);
+    color: #b7b7b7;
+    @include position(absolute, 50% 8px null null);
+    @include transform(translateY(-50%));
+    line-height: 20px;
+    text-align: center;
+    @include transition(all 300ms linear);
+  }
+  [type="radio"]:checked + label:after {
+    color: $brand-pink;
+    @include transition(all 300ms linear);
+  }
+}
+// privacy policy tab end
+// report problem tab
+.problem-detail {
+  label {
+    margin-bottom: 10px;
+  }
+  textarea {
+    min-height: 200px;
+  }
+}
+// report problem tab end
 // setting tab end
 
 .swiper-container {
