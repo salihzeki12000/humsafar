@@ -1981,8 +1981,10 @@ header {
   margin-top: 25px;
   .custom-select {
     select {
+      padding: 10px;
       border: 1px solid $brand-dark-blue;
       border-radius: 7px;
+      color: $brand-dark-blue;
     }
     &:after {
       content: "\f078";
@@ -1992,8 +1994,9 @@ header {
   }
 }
 .travel-blogger {
+  margin-top: 10px;
+  margin-bottom: 20px;
   .button-group {
-    margin-bottom: 20px;
     .btn {
       font-size: 18px;
     }
