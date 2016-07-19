@@ -1580,6 +1580,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
 
   })
+  .controller('BlogCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+    $scope.template = TemplateService.changecontent("blog");
+    $scope.menutitle = NavigationService.makeactive("Blog");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+  })
+  .controller('BlogDetailCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+    $scope.template = TemplateService.changecontent("blogdetail");
+    $scope.menutitle = NavigationService.makeactive("BlogDetail");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+  })
 
 .controller('headerctrl', function($scope, TemplateService) {
   $scope.template = TemplateService;
