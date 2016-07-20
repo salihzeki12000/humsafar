@@ -1586,6 +1586,142 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Blog");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    $scope.blogPost = [
+      {
+        img: "img/blog/blog-post.jpg",
+        postType: "Luxury",
+        title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
+        timestampDate: "14 Jan,2014",
+        timestampHour: "1:20 pm",
+        likes: "15660"
+      },
+      {
+        img: "img/blog/blog-post2.jpg",
+        postType: "Luxury",
+        title: "Best cycling tours in the world",
+        timestampDate: "14 Jan,2014",
+        timestampHour: "1:20 pm",
+        likes: "15660"
+      },
+      {
+        img: "img/blog/blog-post3.jpg",
+        postType: "Road Trip",
+        title: "Ten Gorgeous European Summer Island Holidays",
+        timestampDate: "14 Jan,2014",
+        timestampHour: "1:20 pm",
+        likes: "15660"
+      },
+      {
+        img: "img/blog/blog-post4.jpg",
+        postType: "Adventure",
+        title: "Museums And Cathedrals To Cover In Eastern Europe",
+        timestampDate: "14 Jan,2014",
+        timestampHour: "1:20 pm",
+        likes: "15660"
+      },
+      {
+        img: "img/blog/blog-post.jpg",
+        postType: "Luxury",
+        title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
+        timestampDate: "14 Jan,2014",
+        timestampHour: "1:20 pm",
+        likes: "15660"
+      },
+      {
+        img: "img/blog/blog-post2.jpg",
+        postType: "Luxury",
+        title: "Best cycling tours in the world",
+        timestampDate: "14 Jan,2014",
+        timestampHour: "1:20 pm",
+        likes: "15660"
+      },
+      {
+        img: "img/blog/blog-post3.jpg",
+        postType: "Road Trip",
+        title: "Ten Gorgeous European Summer Island Holidays",
+        timestampDate: "14 Jan,2014",
+        timestampHour: "1:20 pm",
+        likes: "15660"
+      },
+      {
+        img: "img/blog/blog-post4.jpg",
+        postType: "Adventure",
+        title: "Museums And Cathedrals To Cover In Eastern Europe",
+        timestampDate: "14 Jan,2014",
+        timestampHour: "1:20 pm",
+        likes: "15660"
+      },
+      {
+        img: "img/blog/blog-post.jpg",
+        postType: "Luxury",
+        title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
+        timestampDate: "14 Jan,2014",
+        timestampHour: "1:20 pm",
+        likes: "15660"
+      },
+      {
+        img: "img/blog/blog-post2.jpg",
+        postType: "Luxury",
+        title: "Best cycling tours in the world",
+        timestampDate: "14 Jan,2014",
+        timestampHour: "1:20 pm",
+        likes: "15660"
+      },
+      {
+        img: "img/blog/blog-post3.jpg",
+        postType: "Road Trip",
+        title: "Ten Gorgeous European Summer Island Holidays",
+        timestampDate: "14 Jan,2014",
+        timestampHour: "1:20 pm",
+        likes: "15660"
+      },
+      {
+        img: "img/blog/blog-post4.jpg",
+        postType: "Adventure",
+        title: "Museums And Cathedrals To Cover In Eastern Europe",
+        timestampDate: "14 Jan,2014",
+        timestampHour: "1:20 pm",
+        likes: "15660"
+      },
+      {
+        img: "img/blog/blog-post4.jpg",
+        postType: "Romance",
+        title: "Museums And Cathedrals To Cover In Eastern Europe",
+        timestampDate: "14 Jan,2014",
+        timestampHour: "1:20 pm",
+        likes: "15660"
+      }
+    ];
+
+    $scope.popularBlog = [
+      {
+        img: "img/blog/popular-blog.jpg",
+        descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO",
+        postType: "Luxury",
+        postPink: true
+      },
+      {
+        img: "img/blog/popular-blog1.jpg",
+        descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO",
+        postType: "Luxury",
+        postPink: false
+      },
+      {
+        img: "img/blog/popular-blog2.jpg",
+        descp: "CHIC AND CHEERFUL: 10 OFFICEHOLIDAY PARTY OUTFIT IDEAS",
+        postType: "Luxury",
+        postPink: true
+      },
+      {
+        img: "img/blog/popular-blog1.jpg",
+        descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO"
+      },
+      {
+        img: "img/blog/popular-blog2.jpg",
+        descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO"
+      },
+    ];
   })
   .controller('BlogDetailCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file

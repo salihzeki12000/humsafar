@@ -2127,4 +2127,119 @@ header {
 .get-width {
   width: 555px;
 }
+// blog
+.blog-page-content {
+  padding-top: 30px;
+}
+.box-imgholder {
+  width: 395px;
+  overflow: hidden;
+}
+.blog-post {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+.post-descp {
+  width: 100%;
+  padding: 10px;
+  @include position(absolute,null null 0 0);
+  background-color: rgba(0,0,0,0.7);
+  .post-title {
+    margin: 8px 0;
+    font-size: 17px;
+  }
+  .post-journey-type {
+    span {
+    padding: 5px 20px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    margin-left: -10px;
+    background-color: $brand-dark-blue;
+    }
+  }
+  .post-date { font-size: 11px; }
+}
+.popular-blog-section {
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ebebeb;
+  h4 {
+    margin: 10px 0 20px;
+  }
+}
+.aside-heading {
+  margin: 0px 0px 20px;
+}
+.popular-blog {
+  border-radius: 6px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.popular-post-desc {
+  padding: 10px 15px;
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.7);
+  h4 {
+    height: 34px;
+    margin: 0;
+    color: #fff;
+    font-size: 13px;
+    line-height: 18px;
+    overflow: hidden;
+  }
+}
+.popular-post-type {
+  position: absolute;
+  top: 20px;
+  span {
+    padding: 4px 15px;
+  }
+}
+.post-left span {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.post-right {
+  right: 0;
+  span {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+}
+.categories, .pinterest, .facebook, .twitter, .instagram, .social-media {
+  padding: 25px 0;
+  border-bottom: 2px solid #ebebeb;
+}
+.advertise-section {
+  padding: 25px 0;
+}
+.social-media {
+  text-align: center;
+  li {
+    margin: 15px;
+    display: inline-block;
+    font-size: 17px;
+    a { color: #424242; }
+  }
+}
+.blog-filter-checkbox {
+  margin: 12px 0;
+  label { font-size: 15px; }
+  [type="checkbox"]:not(:checked) + label:before,
+  [type="checkbox"]:checked + label:before {
+    border: 1px solid $brand-dark-blue;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+  [type="checkbox"]:not(:checked) + label:after,
+  [type="checkbox"]:checked + label:after {
+    top: 2px;
+  }
+  [type="checkbox"]:checked + label:after {
+    color: $brand-dark-blue;
+  }
+}
+// blog end
 @import "fancybox-override";
