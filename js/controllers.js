@@ -1757,6 +1757,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO"
       },
     ];
+
+    $scope.blogPost = [
+      {
+        heading : "Best Holiday Destinations For Girl - Gangs",
+        timestampDate: "14 Jan,2014",
+        timestampHour: "1:20 pm",
+        journeyType: "Luxury",
+        journeyList:[
+          {
+            journeyImg : "img/blog/journey-post.jpg",
+            cityName: "Dublin",
+            countryName: "Ireland",
+            journeyDescp: "Going on a holiday with family is always fun. But sometimes you need to get way from all that family drama and have a girls-only weekend. Going on a shopping spree, enjoying spas together, drinking & partying all night or just lazing on the beach – nothing can beat that when you are with your girl-gang. So ladies, grab your lipstick and heels and get ready for some seriously sassy getaway with our list of 10 best holiday destinations for girl-gangs:"
+          },
+          {
+            journeyImg : "img/blog/journey-post2.jpg",
+            cityName: "Dublin",
+            countryName: "Ireland",
+            journeyDescp: "Going on a holiday with family is always fun. But sometimes you need to get way from all that family drama and have a girls-only weekend. Going on a shopping spree, enjoying spas together, drinking & partying all night or just lazing on the beach – nothing can beat that when you are with your girl-gang. So ladies, grab your lipstick and heels and get ready for some seriously sassy getaway with our list of 10 best holiday destinations for girl-gangs:"
+          },
+          {
+            journeyImg : "img/blog/journey-post3.jpg",
+            cityName: "Dublin",
+            countryName: "Ireland",
+            journeyDescp: "Going on a holiday with family is always fun. But sometimes you need to get way from all that family drama and have a girls-only weekend. Going on a shopping spree, enjoying spas together, drinking & partying all night or just lazing on the beach – nothing can beat that when you are with your girl-gang. So ladies, grab your lipstick and heels and get ready for some seriously sassy getaway with our list of 10 best holiday destinations for girl-gangs:"
+          },
+          {
+            journeyImg : "img/blog/journey-post4.jpg",
+            cityName: "Dublin",
+            countryName: "Ireland",
+            journeyDescp: "Going on a holiday with family is always fun. But sometimes you need to get way from all that family drama and have a girls-only weekend. Going on a shopping spree, enjoying spas together, drinking & partying all night or just lazing on the beach – nothing can beat that when you are with your girl-gang. So ladies, grab your lipstick and heels and get ready for some seriously sassy getaway with our list of 10 best holiday destinations for girl-gangs:"
+          },
+        ]
+      }
+    ];
   })
 
 .controller('headerctrl', function($scope, TemplateService) {
