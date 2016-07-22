@@ -1729,6 +1729,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("BlogDetail");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.popularBlog = [
+      {
+        img: "img/blog/popular-blog.jpg",
+        descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO",
+        postType: "Luxury",
+        postPink: true
+      },
+      {
+        img: "img/blog/popular-blog1.jpg",
+        descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO",
+        postType: "Luxury",
+        postPink: false
+      },
+      {
+        img: "img/blog/popular-blog2.jpg",
+        descp: "CHIC AND CHEERFUL: 10 OFFICEHOLIDAY PARTY OUTFIT IDEAS",
+        postType: "Luxury",
+        postPink: true
+      },
+      {
+        img: "img/blog/popular-blog1.jpg",
+        descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO"
+      },
+      {
+        img: "img/blog/popular-blog2.jpg",
+        descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO"
+      },
+    ];
   })
 
 .controller('headerctrl', function($scope, TemplateService) {

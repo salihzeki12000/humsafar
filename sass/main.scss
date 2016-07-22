@@ -2226,7 +2226,10 @@ header {
 }
 .blog-filter-checkbox {
   margin: 12px 0;
-  label { font-size: 15px; }
+  label {
+    color: $brand-dark-blue;
+    font-size: 15px;
+  }
   [type="checkbox"]:not(:checked) + label:before,
   [type="checkbox"]:checked + label:before {
     border: 1px solid $brand-dark-blue;
@@ -2241,5 +2244,20 @@ header {
     color: $brand-dark-blue;
   }
 }
+.categories .more {
+  color: $brand-dark-blue;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: underline;
+}
 // blog end
+// blog detail
+.blog-detail-heading {
+  .post-date {
+    margin: 10px 0;
+    font-size: 12px;
+  }
+}
+// blog detail end
 @import "fancybox-override";
