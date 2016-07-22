@@ -1758,7 +1758,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       },
     ];
 
-    $scope.blogPost = [
+    $scope.blogPostDetail = [
       {
         heading : "Best Holiday Destinations For Girl - Gangs",
         timestampDate: "14 Jan,2014",
