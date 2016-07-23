@@ -1580,7 +1580,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
 
   })
-  .controller('BlogCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    .controller('BlogCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("blog");
     $scope.menutitle = NavigationService.makeactive("Blog");
@@ -1939,6 +1939,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           }, ]
         }
       ];
+  })
+  .controller('ActivityCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+    $scope.template = TemplateService.changecontent("activity");
+    $scope.menutitle = NavigationService.makeactive("Activity");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+    $scope.activityPost = [
+      {
+        profilePic: "img/profile-main.png",
+        userName: "John Doe",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm"
+      },
+    ];
+
   })
 
 .controller('headerctrl', function($scope, TemplateService) {

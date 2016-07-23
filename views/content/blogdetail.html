@@ -17,14 +17,17 @@
                 <div class="pull-right">
                   <ul class="list-inline social-share">
                     <li>
-                      <a href="" class="inline-block"><img src="img/blog/travelibro-icon-grey.png" alt="" ></a>
+                      <a href="" class="inline-block travel-icon relate">
+                        <img src="img/blog/travelibro-icon-grey.png" alt="" class="icon-grey">
+                        <img src="img/blog/travelibro-icon.png" alt="" class="icon-pink">
+                      </a>
                     </li>
-                    <li><a href="" class="inline-block"><i class="fa fa-facebook-square"></i></a></li>
-                    <li><a href="" class="inline-block"><i class="fa fa-twitter-square"></i></a></li>
-                    <li><a href="" class="inline-block"><i class="fa fa-google-plus-square"></i></a></li>
-                    <li><a href="" class="inline-block"><i class="fa fa-pinterest-square"></i></a></li>
-                    <li><a href="" class="inline-block"><i class="fa fa-instagram"></i></a></li>
-                    <li><a href="" class="inline-block"><i class="fa fa-envelope-square"></i></a></li>
+                    <li><a href="" class="inline-block"><i class="fa fa-facebook-square fa-2x"></i></a></li>
+                    <li><a href="" class="inline-block"><i class="fa fa-twitter-square fa-2x"></i></a></li>
+                    <li><a href="" class="inline-block"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
+                    <li><a href="" class="inline-block"><i class="fa fa-pinterest-square fa-2x"></i></a></li>
+                    <li><a href="" class="inline-block"><i class="fa fa-instagram fa-2x"></i></a></li>
+                    <li><a href="" class="inline-block"><i class="fa fa-envelope-square fa-2x"></i></a></li>
                   </ul>
                 </div>
               </div>
@@ -58,8 +61,10 @@
                 <div class="inline-block">
                   <ul class="list-inline social-share">
                     <li>
-                      <a href="" class="inline-block icon"><img src="img/blog/travelibro-icon-grey.png" alt="" class="grey-icon" >
-                      <img src="img/blog/travelibro-icon.png" alt="" class="pink-icon" ></a>
+                      <a href="" class="inline-block travel-icon relate">
+                        <img src="img/blog/travelibro-icon-grey.png" alt="" class="icon-grey">
+                        <img src="img/blog/travelibro-icon.png" alt="" class="icon-pink">
+                      </a>
                     </li>
                     <li><a href="" class="inline-block"><i class="fa fa-facebook-square fa-2x"></i></a></li>
                     <li><a href="" class="inline-block"><i class="fa fa-twitter-square fa-2x"></i></a></li>
@@ -69,8 +74,8 @@
                     <li><a href="" class="inline-block"><i class="fa fa-envelope-square fa-2x"></i></a></li>
                   </ul>
                 </div>
-                <div class="inline-block ml10">
-                  <span><img src="img/options.png" alt="" height="18"></span>
+                <div class="inline-block ml10 v-top">
+                  <span><img src="img/options.png" alt="" height="18" class="mt10"></span>
                 </div>
               </div>
             </div>
@@ -84,27 +89,43 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="previous-blog">
-                  <span><i class="fa fa-chevron-left"></i></span>
-                  <span>Previous Blog</span>
-                  <div class="recent-blog-imgholder">
-                    <!-- <img src="" alt="" class="img-responsive"> -->
+                  <div class="blog-view">
+                    <span class="icon mr5 pointer"><i class="fa fa-chevron-left"></i></span>
+                    <span class=" pointer">Previous Blog</span>
                   </div>
-                  <div class="recent-blog-detail">
-                    <span class="color-pink">Luxury</span>
-                    <h4 class="blog-heading">PLACES TO SHOP FORKIDS THAT YOU’LL WISH...</h4>
+                  <div class="row-flex">
+                    <div class="col-flex">
+                      <div class="recent-blog-imgholder pointer">
+                      <img src="img/blog/popular-blog.jpg" alt="" class="img-responsive">
+                    </div>
+                  </div>
+                    <div class="col-flex">
+                      <div class="recent-blog-detail pointer">
+                        <span class="color-pink">Luxury</span>
+                        <h4 class="blog-heading">PLACES TO SHOP FOR KIDS THAT YOU’LL WISH...</h4>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="next-blog text-right">
-                  <span>Next Blog</span>
-                  <span><i class="fa fa-chevron-right"></i></span>
-                  <div class="recent-blog-detail">
-                    <span class="color-pink">Luxury</span>
-                    <h4 class="blog-heading">PLACES TO SHOP FORKIDS THAT YOU’LL WISH...</h4>
+                  <div class="blog-view">
+                    <span class="pointer">Next Blog</span>
+                    <span class="icon ml5 pointer"><i class="fa fa-chevron-right"></i></span>
                   </div>
-                  <div class="recent-blog-imgholder">
-                    <!-- <img src="" alt="" class="img-responsive"> -->
+                  <div class="row-flex">
+                    <div class="col-flex">
+                      <div class="recent-blog-detail pointer">
+                        <span class="color-pink">Luxury</span>
+                        <h4 class="blog-heading">PLACES TO SHOP FOR KIDS THAT YOU’LL WISH...</h4>
+                      </div>
+                    </div>
+                    <div class="col-flex">
+                      <div class="recent-blog-imgholder pointer">
+                        <img src="img/blog/popular-blog1.jpg" alt="" class="img-responsive">
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -113,7 +134,7 @@
           <!-- recent blog end-->
           <!-- you may also like -->
           <div class="you-may-like">
-            <h4 class="color-light-grey">You May Also Like</h4>
+            <h3 class="color-light-grey avenir-roman">You May Also Like</h3>
             <div masonry class="">
               <div class="row">
                 <div class=" masonry-brick col-md-6" ng-repeat="post in blogPost">
@@ -171,7 +192,7 @@
           <div class="blog-popular-itineraries">
             <div class="">
               <h3 class="color-grey avenir-roman">Popular Itineraries</h3>
-              <div masonry class="abc">
+              <div masonry class="blog-itineraries-main">
                 <div class="row">
                   <div class="masonry-brick col-md-6" ng-repeat="life in travelLife" >
                     <div class="travel-life-part blog-post avenir-roman">

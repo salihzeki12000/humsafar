@@ -2129,6 +2129,10 @@ header {
   width: 555px;
 }
 // blog
+.heading-blog {
+  color: #fff;
+  text-shadow: 2px 2px 2px #6b6b6b;
+}
 .blog-page-content {
   padding-top: 30px;
 }
@@ -2255,7 +2259,7 @@ header {
 // blog end
 // blog detail
 .blog-main-detail {
-  padding: 25px 0;
+  padding: 30px 0;
 }
 .blog-detail-heading {
   .post-date {
@@ -2294,6 +2298,24 @@ header {
     }
   }
 }
+.social-share {
+  .travel-icon {
+    .icon-pink {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+    }
+    &:hover {
+      .icon-pink {
+       opacity: 1;
+     }
+     .icon-grey {
+       opacity: 0;
+     }
+    }
+  }
+}
 .blog-chat li {
   display: inline-block;
   padding: 0 10px;
@@ -2307,6 +2329,56 @@ header {
 .blog-social-field {
   padding: 0px 50px;
 }
-
+.editor-logo {
+  margin-top: -30px;
+  margin-right: 15px;
+  display: inline-block;
+}
+.recent-blog {
+  padding: 30px 0;
+  border-top: 2px solid #dcdcdc;
+  border-bottom: 2px solid #dcdcdc;
+  margin: 30px 0;
+  .recent-blog-imgholder {
+    width: 200px;
+    height: 130px;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  h4 {
+    font-size: 14px;
+  }
+}
+.previous-blog {
+  .recent-blog-detail {
+    margin: 40px 0 0 15px;
+  }
+}
+.next-blog {
+  .recent-blog-detail {
+    margin: 40px 15px 0 0;
+  }
+}
+.blog-view {
+  margin-bottom: 10px;
+  span {
+    font-size: 18px;
+  }
+  .icon { font-size: 19px; }
+}
+.you-may-like{
+  h3 {
+    margin: 0px 0px 25px;
+  }
+}
+.blog-itineraries-main {
+  margin-top: 40px;
+  .blog-post {
+    overflow: visible;
+  }
+  .masonry-brick {
+    margin-bottom: 15px;
+  }
+}
 // blog detail end
 @import "fancybox-override";

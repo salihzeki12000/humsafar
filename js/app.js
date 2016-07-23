@@ -78,6 +78,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       templateUrl: "views/template.html",
       controller: 'BlogDetailCtrl'
     })
+    .state('activity', {
+      url: "/activity",
+      templateUrl: "views/template.html",
+      controller: 'ActivityCtrl'
+    })
     .state('holiday', {
       url: "/holiday",
       templateUrl: "views/template.html",
