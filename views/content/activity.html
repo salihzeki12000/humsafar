@@ -8,10 +8,10 @@
               <!-- post header -->
               <div class="post-header relate">
                 <div class="inline-block picture-section">
-                  <div class="editor-logo">
+                  <div class="editor-logo" ng-if="post.editor==true">
                     <img src="img/blog/editor-logo.png" alt="" class="img-responsive">
                   </div>
-                  <div class="user-pic">
+                  <div class="user-pic" ng-if="post.editor == false">
                     <img ng-src="{{post.profilePic}}" alt="" class="img-responsive">
                   </div>
                 </div>
@@ -31,7 +31,7 @@
                 </div>
                 <!-- post status -->
                 <div class="post-your-status">
-                  <p class="your-post">Has started his London Journey</p>
+                  <p class="your-post">{{post.status}}</p>
                 </div>
                 <!-- post status end -->
                 <!-- post type icon -->

@@ -7,19 +7,51 @@
           <h2 class="heading-blog avenir-heavy m-clear">TraveLibro - Blog</h2>
           <div class="row">
             <div class="col-md-offset-3 col-md-6">
-              <form>
-                <div class="category blog-select">
-                  <select name="" id="">
-                    <option selected>Categories</option>
-                  </select>
+              <form class="text-left">
+                <div class="category-blog-select">
+                  <div class="view-blog-category" ng-click="showCategory = !showCategory">
+                    <span class="blog-icon"><img src="img/blog-category.png" alt="Blog-Category" width="20"></span>
+                    <span class="blog-name avenir-roman">Categories</span>
+                    <span class="pull-right" ng-init="showCategory = false"><i class="fa" ng-class="{'fa-chevron-up' : showCategory == true , 'fa-chevron-down' : showCategory == false}"></i></span>
+                  </div>
+                  <div class="blog-category-list" ng-show="showCategory">
+                    <ul class="avenir-roman">
+                      <li><a href="">Beach &amp; Party</a></li>
+                      <li><a href="">Adventure</a></li>
+                      <li><a href="">Romance</a></li>
+                      <li><a href="">Food</a></li>
+                      <li><a href="">Festivals</a></li>
+                      <li><a href="">Shopping</a></li>
+                      <li><a href="">Hotels</a></li>
+                      <li><a href="">Countries &amp; Cities</a></li>
+                      <li><a href="">Road Trips</a></li>
+                      <li><a href="">Vacation</a></li>
+                    </ul>
+                  </div>
                 </div>
                 <div class="go-button">
-                  <button class="btn btn-dark-blue">Go</button>
+                  <button class="btn btn-dark-blue avenir-roman">Go</button>
                 </div>
-                <div class="archives blog-select">
-                  <select name="" id="">
-                    <option selected>Archives</option>
-                  </select>
+                <div class="archives-blog-select">
+                  <div class="view-blog-archives" ng-click="showArchives = !showArchives">
+                    <span class="blog-icon"><img src="img/blog-archives.png" alt="Blog-Category" height="17"></span>
+                    <span class="blog-name avenir-roman">Archives</span>
+                    <span class="pull-right" ng-init="showArchives = false"><i class="fa" ng-class="{'fa-chevron-up' : showArchives == true , 'fa-chevron-down' : showArchives == false}"></i></span>
+                  </div>
+                  <div class="blog-archives-list" ng-show="showArchives">
+                    <ul class="avenir-roman">
+                      <li><a href="">Beach &amp; Party</a></li>
+                      <li><a href="">Adventure</a></li>
+                      <li><a href="">Romance</a></li>
+                      <li><a href="">Food</a></li>
+                      <li><a href="">Festivals</a></li>
+                      <li><a href="">Shopping</a></li>
+                      <li><a href="">Hotels</a></li>
+                      <li><a href="">Countries &amp; Cities</a></li>
+                      <li><a href="">Road Trips</a></li>
+                      <li><a href="">Vacation</a></li>
+                    </ul>
+                  </div>
                 </div>
               </form>
             </div>

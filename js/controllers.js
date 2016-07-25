@@ -1952,8 +1952,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         profilePic: "img/profile-main.png",
         userName: "John Doe",
         timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm"
+        timestampHour: "01:20 pm",
+        status: "Has started his London Journey",
+        editor:false,
+        video : true,
+        photo: false,
       },
+      {
+        profilePic: "img/profile-main.png",
+        userName: "John Doe",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        status: "Has started his London Journey",
+        editor:true,
+        video : false,
+        photo: false,
+      },
+      {
+        profilePic: "img/profile-main.png",
+        userName: "John Doe",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        status: "Has started his London Journey",
+        editor:false,
+        video: false,
+        photo: false,
+      },
+      {
+        profilePic: "img/profile-main.png",
+        userName: "John Doe",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        status: "Has started his London Journey",
+        editor:false,
+        video: false,
+        photo: true,
+      }
+
     ];
 
   })
