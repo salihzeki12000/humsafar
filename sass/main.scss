@@ -2435,4 +2435,90 @@ header {
   }
 }
 // blog detail end
+// activity
+// post profile pic
+.activity-main {
+  .col-md-4 {
+    padding: 0;
+  }
+}
+.activity-post-main {
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  li { display: inline-block; }
+}
+.post-header {
+  padding: 10px;
+}
+.picture-section {
+  width: 24%;
+}
+.user-detail {
+  width: 74%;
+  vertical-align: top;
+}
+.user-more-detail {
+  color: $brand-light-grey;
+  font-size: 12px;
+}
+.user-pic {
+  margin-top: -25px;
+  img {
+    @include size(66px,67px);
+    border-radius: 20px;
+  }
+}
+.post-your-status {
+  padding: 5px 5px 0;
+  border-top: 1px solid #ccc;
+  margin-top: 10px;
+  color: #727272;
+}
+.post-icon {
+  position: absolute;
+  top: -25px;
+  right: 10px;
+}
+.post-main-section {
+  .journey-collection {
+    li {
+      display: inline-block;
+      padding: 0px 7px;
+      &:first-child { padding: 0 7px 0 0; }
+    }
+  }
+}
+.tag-ongo-journey {
+  padding: 5px 15px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  position: absolute;
+  top: -10px;
+  right: 0;
+  background-color: $brand-pink;
+  z-index: 1;
+}
+.flag-section {
+  .country-visited {
+    left: 20px;
+  }
+}
+.post-img {
+  height: 250px;
+  overflow: hidden;
+  img { width: 100%; }
+}
+.imgpost-relatedslider {
+  padding: 10px 10px 0;
+  .related-postimgholder {
+    @include square(80px);
+  }
+}
+.post-rating {
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+// post profile pic end
+// activity end
 @import "fancybox-override";
