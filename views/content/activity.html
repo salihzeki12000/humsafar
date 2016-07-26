@@ -3,8 +3,9 @@
     <div class="" masonry>
       <div class="row">
         <div class="col-md-4 masonry-brick" ng-repeat="post in activityPost">
-          <div class="activity-post">
-            <div class="activity-post-main">
+          <!-- activity-post -->
+          <div class="activity-post" ng-if="post.postActivity">
+            <div class="activity-post-main {{post.class}}">
               <!-- post header -->
               <div class="post-header relate">
                 <div class="inline-block picture-section">
@@ -19,7 +20,7 @@
                   <h4 class="font-bold color-dark-blue m-clear mb5">{{post.userName}}</h4>
                   <div class="clearfix user-more-detail">
                     <div class="pull-left">
-                      <p class="m-clear"><i class="fa fa-calendar"></i><span class="ml5 mr5">{{post.timestampDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span >{{post.timestampHour}}</span></p>
+                      <p class="m-clear"><i class="fa fa-calendar"></i><span class="ml5 mr5">{{post.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span >{{post.timestampHour}}</span></p>
                     </div>
                     <div class="pull-right">
                       <div class="follow-or-following">
@@ -36,7 +37,7 @@
                 <!-- post status end -->
                 <!-- post type icon -->
                 <div class="post-icon" ng-if="post.postIcon">
-                  <div class="location circle-rounded bg-dark-cyan pointer">
+                  <div class="location circle-rounded pointer">
                     <img src="img/location-blue.png" alt="" height="18" class="">
                     <!-- <img src="img/camera.png" alt="" height="18" class=""> -->
                     <!-- <img src="img/video.png" alt="" height="18" class=""> -->
@@ -84,11 +85,11 @@
                       </li>
                     </flex-slider>
                     <div class="post-rating">
-                      <span>Rating : <i class="fa fa-star color-pink"></i>
-                        <i class="fa fa-star color-pink"></i>
-                        <i class="fa fa-star color-pink"></i>
-                        <i class="fa fa-star color-pink"></i>
-                        <i class="fa fa-star color-pink"></i></span>
+                      <span class="avenir-heavy color-blue">Rating : <i class="fa fa-star color-pink"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i></span>
                     </div>
                   </div>
                   <!-- img post slider end -->
@@ -158,7 +159,7 @@
                       <img ng-src="{{post.imgOnway}}" alt="" class="img-responsive m-center">
                     </div>
                     <div class="journey-tag-holder">
-                      <h3 class="m-clear text-capitalize">{{life.onwayTag}}</h3>
+                      <h3 class="m-clear text-capitalize">{{post.onwayTag}}</h3>
                       <div class="clearfix">
                         <div class="pull-left">
                           <div class="journey-type">
@@ -198,19 +199,31 @@
                       <ul>
                         <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
                         <li>
-                          <a href=""><img src="img/comments.png" alt="" height="18"></a>
+                          <a href="">
+                            <img src="img/comments.png" alt="" height="18" class="if-noeditor">
+                            <img src="img/comments-white.png" alt="" height="18" class="if-editor">
+                          </a>
                         </li>
                         <li>
-                          <a href=""><img src="img/reviews.png" alt="" height="18"></a>
+                          <a href="">
+                            <img src="img/reviews.png" alt="" height="18" class="if-noeditor">
+                            <img src="img/reviews-white.png" alt="" height="18" class="if-editor">
+                          </a>
                         </li>
                         <li>
-                          <a href=""><img src="img/share.png" alt="" height="18"></a>
+                          <a href="">
+                            <img src="img/share.png" alt="" height="18" class="if-noeditor">
+                            <img src="img/share-white.png" alt="" height="18" class="if-editor">
+                          </a>
                         </li>
                       </ul>
                     </div>
                     <div class="pull-right">
                       <div class="">
-                        <span><img src="img/options.png" alt="" width="3"></span>
+                        <span>
+                          <img src="img/options.png" alt="" width="3" class="if-noeditor">
+                          <img src="img/options-white.png" alt="" width="3" class="if-editor">
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -218,12 +231,15 @@
                     <div class="clearfix">
                       <div class="pull-left">
                         <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">15660</b>Likes</span>
-                        <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">354 Reviews (4.5/5)</span>
+                        <span class="color-blue">
+                          <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-noeditor">
+                          <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-editor">
+                          354 Reviews (4.5/5)</span>
                       </div>
                       <div class="pull-right">
                         <div class="post-travel-icon">
-                          <img src="img/travel.png" alt="">
-                          <img src="img/cycle-cyan.png" alt="" height="20">
+                          <img src="img/travel.png" alt="" class="activity-travel-icon">
+                          <img src="img/cycle-cyan.png" alt="" height="20" class="activity-local-icon">
                         </div>
                       </div>
                     </div>
@@ -233,6 +249,32 @@
               <!-- post footer end -->
             </div>
           </div>
+          <!-- popular travellers and agents -->
+          <div class="activity-popular-main" ng-if="post.getpopularPost" ng-repeat="view in post.postPopular">
+            <div class="heading-popular">
+              <h4 class="m-clear">{{view.heading}}</h4>
+            </div>
+            <div class="popular-main">
+              <ul>
+                <li ng-repeat="list in view.listPopular | limitTo : 6 track by $index">
+                  <div class="view-list-popular">
+                    <div class="pic-imgholder">
+                      <img ng-src="{{list.profile}}" alt="" class="img-responsive">
+                    </div>
+                    <div class="list-user-detail">
+                      <h4 class="color-blue">{{list.name}}</h4>
+                      <p class="color-light-grey fz12 m-clear"><i class="fa fa-map-marker mr5"></i> <span class="mr5">{{list.location}}</span> | <span class="ml5">Follower : {{list.follower}}</span></p>
+                    </div>
+                    <div class="btn-follow">
+                      <button type="button" class="btn">Follow</button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- popular travellers and agents end -->
+          <!-- activity-post end-->
         </div>
       </div>
     </div>

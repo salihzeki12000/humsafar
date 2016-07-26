@@ -2443,7 +2443,7 @@ header {
   }
 }
 .activity-post-main {
-  margin: 10px;
+  margin: 10px 10px 20px;
   border: 1px solid #ccc;
   border-radius: 6px;
   li { display: inline-block; }
@@ -2494,7 +2494,7 @@ header {
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
   position: absolute;
-  top: -10px;
+  top: -15px;
   right: 0;
   background-color: $brand-pink;
   z-index: 1;
@@ -2504,7 +2504,7 @@ header {
     left: 20px;
   }
 }
-.post-img {
+.post-img, .video-post {
   height: 250px;
   overflow: hidden;
   img { width: 100%; }
@@ -2518,6 +2518,109 @@ header {
 .post-rating {
   padding: 10px 0;
   border-bottom: 1px solid #ccc;
+}
+.post-footer {
+  .user-social-item {
+    li {
+        padding: 0px 7px;
+      &:first-child {
+        padding: 0px 7px 0px 0;
+      }
+    }
+  }
+}
+// traveller post
+.activity-popular-main {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin: 10px;
+  .heading-popular {
+    padding: 15px;
+    background-color: #e5e5e5;
+    color: #8a8a8a;
+  }
+}
+.view-list-popular {
+  padding: 10px;
+  border-bottom: 2px solid #e5e5e5;
+  .pic-imgholder {
+    width: 55px;
+    border-radius: 15px;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+  .list-user-detail {
+    margin: 0px 38px 0px 10px;
+    display: inline-block;
+    vertical-align: middle;
+    h4 { margin: 5px 0; }
+  }
+  .btn-follow {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+// traveller post end
+// get class by post like travel local life and editor
+.travel-life {
+  .activity-local-icon {
+    display: none;
+  }
+  .youtube-icon {
+    color: $brand-pink;
+  }
+  .location {
+    background-color: $brand-pink;
+  }
+  .post-rating {
+    i {
+      color: $brand-pink;
+    }
+  }
+  .if-editor { display: none; }
+}
+.local-life {
+  .tag-ongo-journey {
+    background-color: $brand-cyan;
+  }
+  .activity-travel-icon {
+    display: none;
+  }
+  .youtube-icon {
+    color: $brand-cyan;
+  }
+  .location {
+    background-color: $brand-cyan;
+  }
+  .post-rating {
+    i {
+      color: $brand-cyan;
+    }
+  }
+  .if-editor { display: none; }
+}
+.editor {
+  background-color: $brand-dark-blue;
+  .post-travel-icon {
+    display: none;
+  }
+  .user-detail h4 { color: #fff; }
+  .user-more-detail { color: #fff; }
+  .post-your-status {
+    border-top: 1px solid #fff;
+    color: #fff;
+  }
+  .days-spent {
+    margin-top: -15px;
+    margin-bottom: 5px;
+  }
+  .social-likes-reviews {
+    span { color: #fff; }
+    i { color: #fff; }
+  }
+  .user-social-item li:first-child i { color: #fff; }
+  .if-noeditor { display: none; }
 }
 // post profile pic end
 // activity end
