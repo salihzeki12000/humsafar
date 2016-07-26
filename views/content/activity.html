@@ -4,8 +4,8 @@
       <div class="row">
         <div class="col-md-4 masonry-brick" ng-repeat="post in activityPost">
           <!-- activity-post -->
-          <div class="activity-post" ng-if="post.postActivity">
-            <div class="activity-post-main {{post.class}}">
+          <div class="activity-post {{post.class}}">
+            <div class="activity-post-main">
               <!-- post header -->
               <div class="post-header relate">
                 <div class="inline-block picture-section">
@@ -262,11 +262,11 @@
                       <img ng-src="{{list.profile}}" alt="" class="img-responsive">
                     </div>
                     <div class="list-user-detail">
-                      <h4 class="color-blue">{{list.name}}</h4>
+                      <h4 class="color-blue avenir-heavy">{{list.name}}</h4>
                       <p class="color-light-grey fz12 m-clear"><i class="fa fa-map-marker mr5"></i> <span class="mr5">{{list.location}}</span> | <span class="ml5">Follower : {{list.follower}}</span></p>
                     </div>
                     <div class="btn-follow">
-                      <button type="button" class="btn">Follow</button>
+                      <button type="button" class="btn btn-pink-outline">Follow</button>
                     </div>
                   </div>
                 </li>

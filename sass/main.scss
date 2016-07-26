@@ -363,6 +363,12 @@ textarea {
 .btn-pink {
   @include button-variant( white, $brand-dark-pink, $brand-dark-pink);
 }
+.btn-pink-outline {
+  @include button-variant( $brand-pink, transparent, $brand-pink);
+  &:hover {
+    @include button-variant( white, $brand-pink, $brand-pink);
+  }
+}
 .btn-grey-pink {
   @include button-variant( white, $brand-grey, $brand-dark-blue);
   &:hover {
@@ -2438,6 +2444,7 @@ header {
 // activity
 // post profile pic
 .activity-main {
+  padding: 30px 0px 0px;
   .col-md-4 {
     padding: 0;
   }
@@ -2481,6 +2488,7 @@ header {
   right: 10px;
 }
 .post-main-section {
+  min-height: 20px;
   .journey-collection {
     li {
       display: inline-block;
@@ -2542,7 +2550,7 @@ header {
 }
 .view-list-popular {
   padding: 10px;
-  border-bottom: 2px solid #e5e5e5;
+  border-bottom: 3px solid #e5e5e5;
   .pic-imgholder {
     width: 55px;
     border-radius: 15px;
@@ -2601,7 +2609,9 @@ header {
   .if-editor { display: none; }
 }
 .editor {
-  background-color: $brand-dark-blue;
+  .activity-post-main {
+    background-color: $brand-dark-blue;
+  }
   .post-travel-icon {
     display: none;
   }
@@ -2621,6 +2631,9 @@ header {
   }
   .user-social-item li:first-child i { color: #fff; }
   .if-noeditor { display: none; }
+}
+.popular-activity {
+  display: none;
 }
 // post profile pic end
 // activity end
