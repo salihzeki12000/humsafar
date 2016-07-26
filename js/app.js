@@ -88,7 +88,7 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       templateUrl: "views/template.html",
       controller: 'HolidayCtrl'
     });
-  $urlRouterProvider.otherwise("/home");
+  $urlRouterProvider.otherwise("/");
   $locationProvider.html5Mode(isproduction);
 });
 
