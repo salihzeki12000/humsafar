@@ -1892,9 +1892,26 @@ header {
     font-size: 20px;
     color: $brand-lighter-grey;
   }
-  li {
-    padding: 10px 15px;
+  ul {
+    border: 1px solid #ebebeb;
   }
+  li {
+    padding: 8px 15px 0;
+  }
+  .col-md-2, .col-md-10 { padding: 0; }
+  .tab-list {
+    padding: 10px 10px 15px;
+    border-bottom: 1px solid #ebebeb;
+  }
+}
+.active-setting .tab-list {
+  border-bottom: 1px solid transparent;
+}
+.setting-profile-list {
+  padding: 10px;
+  border: 1px solid #ebebeb;
+  margin-bottom: 5px;
+  i { margin-top: 25px; }
 }
 .setting-prof-imgholder {
   width: 63px;
@@ -1909,6 +1926,7 @@ header {
   margin: 12px;
 }
 .setting-main-detail {
+  min-height: 364px;
     padding: 20px 30px;
   .form-control {
     height: 40px;

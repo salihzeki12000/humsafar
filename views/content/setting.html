@@ -6,52 +6,102 @@
         <div class="row">
           <div class="col-md-4">
             <div class="setting-list avenir-roman">
+              <div class="setting-profile-list" ng-click="setting(1)" ng-class="{'bg-white active-setting' : showSetting == 1}">
+                <div class="profile-heading clearfix">
+                  <i class="fa fa-chevron-right pull-right"></i>
+                  <div class="setting-prof-imgholder">
+                    <img src="img/profile-main.png" alt="" class="img-responsive">
+                  </div>
+                  <div class="profile-detail inline-block v-top">
+                    <h4 class="color-blue m-clear">Amit Duxctronn</h4>
+                    <span>16 Jan 1988</span>
+                  </div>
+                </div>
+              </div>
               <ul>
-                <li ng-click="setting(1)" ng-class="{'bg-white' : showSetting == 1}">
-                  <div class="profile-heading clearfix">
-                    <i class="fa fa-chevron-right pull-right"></i>
-                    <div class="setting-prof-imgholder">
-                      <img src="img/profile-main.png" alt="" class="img-responsive">
-                    </div>
-                    <div class="profile-detail inline-block v-top">
-                      <h4 class="color-blue m-clear">Amit Duxctronn</h4>
-                      <span>16 Jan 1988</span>
-                    </div>
-                  </div>
-                </li>
-                <li ng-click="setting(2)" ng-class="{'bg-white' : showSetting == 2}">
+                <li ng-click="setting(2)" ng-class="{'bg-white active-setting' : showSetting == 2}">
                   <div class="edit-profile-heading clearfix">
-                    <i class="fa fa-chevron-right pull-right"></i>
-                    <img src="img/edit-profile.png" alt="">
-                    <h5 class="color-blue inline-block m-clear">Edit Profile - <span>A little more about me</span></h5>
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="text-center">
+                          <img src="img/edit-profile.png" alt="">
+                        </div>
+                      </div>
+                      <div class="col-md-10">
+                        <div class="tab-list">
+                          <h5 class="color-blue inline-block m-clear">Edit Profile - <span>A little more about me</span></h5>
+                          <i class="fa fa-chevron-right pull-right"></i>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </li>
-                <li ng-click="setting(3)" ng-class="{'bg-white' : showSetting == 3}">
+                <li ng-click="setting(3)" ng-class="{'bg-white active-setting' : showSetting == 3}">
                   <div class="password-heading clearfix">
-                    <i class="fa fa-chevron-right pull-right"></i>
-                    <img src="img/setting.png" alt="">
-                    <h5 class="color-blue inline-block m-clear">Change Password</h5>
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="text-center">
+                          <img src="img/setting.png" alt="">
+                        </div>
+                      </div>
+                      <div class="col-md-10">
+                        <div class="tab-list">
+                          <h5 class="color-blue inline-block m-clear">Change Password</h5>
+                          <i class="fa fa-chevron-right pull-right"></i>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </li>
-                <li ng-click="setting(4)" ng-class="{'bg-white' : showSetting == 4}">
+                <li ng-click="setting(4)" ng-class="{'bg-white active-setting' : showSetting == 4}">
                   <div class="upload-heading clearfix">
-                    <i class="fa fa-chevron-right pull-right"></i>
-                    <img src="img/data-upload.png" alt="">
-                    <h5 class="color-blue inline-block m-clear">Data Upload</h5>
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="text-center">
+                          <img src="img/data-upload.png" alt="">
+                        </div>
+                      </div>
+                      <div class="col-md-10">
+                        <div class="tab-list">
+                          <h5 class="color-blue inline-block m-clear">Data Upload</h5>
+                          <i class="fa fa-chevron-right pull-right"></i>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </li>
-                <li ng-click="setting(5)" ng-class="{'bg-white' : showSetting == 5}">
+                <li ng-click="setting(5)" ng-class="{'bg-white active-setting' : showSetting == 5}">
                   <div class="privacy-heading clearfix">
-                    <i class="fa fa-chevron-right pull-right"></i>
-                    <img src="img/privacy.png" alt="">
-                    <h5 class="color-blue inline-block m-clear">Privacy</h5>
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="text-center">
+                          <img src="img/privacy.png" alt="">
+                        </div>
+                      </div>
+                      <div class="col-md-10">
+                        <div class="tab-list">
+                          <h5 class="color-blue inline-block m-clear">Privacy</h5>
+                          <i class="fa fa-chevron-right pull-right"></i>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </li>
-                <li ng-click="setting(6)" ng-class="{'bg-white' : showSetting == 6}">
+                <li ng-click="setting(6)" ng-class="{'bg-white active-setting' : showSetting == 6}">
                   <div class="report-problem-heading clearfix">
-                    <i class="fa fa-chevron-right pull-right"></i>
-                    <img src="img/report-problem.png" alt="">
-                    <h5 class="color-blue inline-block m-clear">Report A Problem</h5>
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="text-center">
+                          <img src="img/report-problem.png" alt="">
+                        </div>
+                      </div>
+                      <div class="col-md-10">
+                        <div class="tab-list">
+                          <h5 class="color-blue inline-block m-clear">Report A Problem</h5>
+                          <i class="fa fa-chevron-right pull-right"></i>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </li>
               </ul>
@@ -213,7 +263,7 @@
                 <!-- holiday -->
                 <div class="holiday-section">
                   <h4 class="color-blue setting-tab-heading">Your kind of a holiday</h4>
-                  <ul  ng-init="selectHoliday = 1">
+                  <ul ng-init="selectHoliday = 1">
                     <li>
                       <div class="select-holiday" ng-click="selectHoliday=1" ng-class="{'active-holiday': selectHoliday == 1}">
                         <figure>
