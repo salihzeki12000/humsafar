@@ -386,7 +386,7 @@ textarea {
 }
 // end btn classes
 /* Start writing sass here */
-.content {
+.travel-bg {
   min-height: 550px;
   background: url('../img/back-content.jpg') no-repeat;
   background-size: cover;
@@ -1897,6 +1897,7 @@ header {
   }
   li {
     padding: 8px 15px 0;
+    cursor: pointer;
   }
   .col-md-2, .col-md-10 { padding: 0; }
   .tab-list {
@@ -2133,7 +2134,7 @@ header {
     margin-bottom: 10px;
   }
   textarea {
-    min-height: 200px;
+    min-height: 230px;
   }
 }
 // report problem tab end
@@ -2649,9 +2650,6 @@ header {
   }
   .user-social-item li:first-child i { color: #fff; }
   .if-noeditor { display: none; }
-}
-.popular-activity {
-  display: none;
 }
 // post profile pic end
 // activity end

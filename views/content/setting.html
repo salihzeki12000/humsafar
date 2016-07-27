@@ -1,12 +1,12 @@
 <div class="setting-main">
   <div class="container">
-    <div class="setting">
+    <div class="setting" auto-height>
       <h3 class="color-blue font-bold text-center m-clear mb20">Settings</h3>
       <div class="setting-user-detail">
         <div class="row">
           <div class="col-md-4">
             <div class="setting-list avenir-roman">
-              <div class="setting-profile-list" ng-click="setting(1)" ng-class="{'bg-white active-setting' : showSetting == 1}">
+              <div class="setting-profile-list pointer" ng-click="setting(1)" ng-class="{'bg-white active-setting' : showSetting == 1}">
                 <div class="profile-heading clearfix">
                   <i class="fa fa-chevron-right pull-right"></i>
                   <div class="setting-prof-imgholder">
@@ -107,7 +107,7 @@
               </ul>
             </div>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-8 col-pad-zero">
             <div class="setting-main-detail bg-white avenir-roman">
               <!-- profile detail -->
               <div class="profile-detail-main" ng-if="showSetting == 1">
@@ -582,17 +582,17 @@
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Current Password">
+                        <input type="password" class="form-control" placeholder="Current Password">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="New Password">
+                        <input type="password" class="form-control" placeholder="New Password">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Confirm Password">
+                        <input type="password" class="form-control" placeholder="Confirm Password">
                       </div>
                     </div>
                   </div>
