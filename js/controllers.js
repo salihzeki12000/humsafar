@@ -1971,7 +1971,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         likes: "15660",
         reviews: "354",
         pointReview: "4.5",
-        onJourney: false,
         countryVisit: [{
           imgFlag: "img/india-visit.png"
         }, {
@@ -1981,13 +1980,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }, ],
         editor:false,
         userPic: true,
+        follow: true,
+        following: false,
         postIcon: false,
         video : false,
         photo: false,
-        follow: true,
-        following: false,
+        photoSlider: false,
         travelledJourney : true,
+        onJourney: false,
         getpopularPost: false,
+        activitySec: true,
+        visitPost: false
       },
       {
         class: "travel-life",
@@ -1995,7 +1998,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         userName: "John Doe",
         timestampDate: "14 Jan, 2014",
         timestampHour: "01:20 pm",
-        status : "Has started his London Journey",
+        status : "Has started his London Journey photo slider",
         relatedPhoto: [
           'img/blog/blog-post.jpg',
           'img/blog/blog-post2.jpg',
@@ -2008,13 +2011,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         ],
         editor : false,
         userPic: true,
+        follow : false,
+        following: true,
         postIcon: true,
         video : false,
         photo : true,
-        follow : false,
-        following: true,
         photoSlider: true,
+        travelledJourney : false,
+        onJourney: false,
         getpopularPost: false,
+        activitySec: true,
+        visitPost: false
       },
       {
         class: "travel-life",
@@ -2025,9 +2032,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         status: "Has started his London Journey",
         editor:false,
         userPic: true,
-        video: false,
-        photo: false,
+        follow : false,
+        following: false,
+        postIcon: true,
+        video : false,
+        photo : false,
+        photoSlider: false,
+        travelledJourney : false,
+        onJourney: false,
         getpopularPost: false,
+        visitPost: false,
+        getpopularPost: false,
+        activitySec: true
       },
       {
         class: "travel-life",
@@ -2038,9 +2054,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         status: "Has started his London Journey",
         editor:false,
         userPic: true,
-        video: false,
-        photo: true,
+        follow : false,
+        following: false,
+        postIcon: true,
+        video : false,
+        photo : true,
+        photoSlider: false,
+        travelledJourney : false,
+        onJourney: false,
         getpopularPost: false,
+        visitPost: false,
+        getpopularPost: false,
+        activitySec: true
       },
       {
         class: "travel-life",
@@ -2051,8 +2076,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         status: "Has started his London Journey",
         editor:false,
         userPic: true,
-        video: true,
+        follow : false,
+        following: false,
+        postIcon: false,
+        video : true,
+        photo : false,
+        photoSlider: false,
+        travelledJourney : false,
+        onJourney: false,
         getpopularPost: false,
+        visitPost: false,
+        getpopularPost: false,
+        activitySec: true
       },
       {
         class: "travel-life",
@@ -2077,8 +2112,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         pointReview: "4.5",
         editor:false,
         userPic: true,
+        follow : false,
+        following: false,
+        postIcon: false,
+        video : false,
+        photo : false,
+        photoSlider: false,
+        travelledJourney : false,
         onJourney: true,
         getpopularPost: false,
+        visitPost: false,
+        getpopularPost: false,
+        activitySec: true
       },
       {
         class: "editor",
@@ -2098,9 +2143,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         travelledDay: "75",
         editor:true,
         userPic: false,
+        follow : false,
+        following: false,
+        postIcon: false,
+        video : false,
+        photo : false,
+        photoSlider: false,
+        travelledJourney : true,
         onJourney: false,
-        travelledJourney: true,
         getpopularPost: false,
+        visitPost: false,
+        getpopularPost: false,
+        activitySec: true
       },
       {
         class: "editor",
@@ -2124,8 +2178,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         spendingDay: "75",
         editor:true,
         userPic: false,
+        follow : false,
+        following: false,
+        postIcon: false,
+        video : false,
+        photo : false,
+        photoSlider: false,
+        travelledJourney : false,
         onJourney: true,
         getpopularPost: false,
+        visitPost: false,
+        getpopularPost: false,
+        activitySec: true
       },
       {
         class: "local-life",
@@ -2150,7 +2214,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         likes: "15660",
         reviews: "354",
         pointReview: "4.5",
-        onJourney: false,
         countryVisit: [{
           imgFlag: "img/india-visit.png"
         }, {
@@ -2160,13 +2223,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         }, ],
         editor:false,
         userPic: true,
+        follow : false,
+        following: false,
         postIcon: false,
         video : false,
-        photo: false,
-        follow: true,
-        following: false,
+        photo : false,
+        photoSlider: false,
         travelledJourney : true,
+        onJourney: false,
         getpopularPost: false,
+        visitPost: false,
+        getpopularPost: false,
+        activitySec: true
       },
       {
         class: "local-life",
@@ -2174,7 +2242,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         userName: "John Doe",
         timestampDate: "14 Jan, 2014",
         timestampHour: "01:20 pm",
-        status : "Has started his London Journey",
+        status : "Has started his London Journey local photoslider",
         relatedPhoto: [
           'img/blog/blog-post.jpg',
           'img/blog/blog-post2.jpg',
@@ -2185,15 +2253,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           'img/blog/blog-post3.jpg',
           'img/blog/blog-post4.jpg',
         ],
-        editor : false,
+        editor:false,
         userPic: true,
+        follow : false,
+        following: true,
         postIcon: true,
         video : false,
         photo : true,
-        follow : false,
-        following: true,
         photoSlider: true,
+        travelledJourney : false,
+        onJourney: false,
         getpopularPost: false,
+        visitPost: false,
+        getpopularPost: false,
+        activitySec: true
       },
       {
         class:"local-life",
@@ -2204,9 +2277,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         status: "Has started his London Journey",
         editor:false,
         userPic: true,
-        video: false,
-        photo: false,
+        follow : false,
+        following: false,
+        postIcon: false,
+        video : false,
+        photo : false,
+        photoSlider: false,
+        travelledJourney : false,
+        onJourney: false,
         getpopularPost: false,
+        visitPost: false,
+        getpopularPost: false,
+        activitySec: true
       },
       {
         class: "local-life",
@@ -2217,9 +2299,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         status: "Has started his London Journey",
         editor:false,
         userPic: true,
-        video: false,
-        photo: true,
+        follow : false,
+        following: false,
+        postIcon: false,
+        video : false,
+        photo : true,
+        photoSlider: false,
+        travelledJourney : false,
+        onJourney: false,
         getpopularPost: false,
+        visitPost: false,
+        getpopularPost: false,
+        activitySec: true
       },
       {
         class: "local-life",
@@ -2230,8 +2321,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         status: "Has started his London Journey",
         editor:false,
         userPic: true,
-        video: true,
+        follow : false,
+        following: false,
+        postIcon: false,
+        video : true,
+        photo : false,
+        photoSlider: false,
+        travelledJourney : false,
+        onJourney: false,
         getpopularPost: false,
+        visitPost: false,
+        getpopularPost: false,
+        activitySec: true
       },
       {
         class: "local-life",
@@ -2256,11 +2357,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         pointReview: "4.5",
         editor:false,
         userPic: true,
+        follow : false,
+        following: false,
+        postIcon: false,
+        video : false,
+        photo : false,
+        photoSlider: false,
+        travelledJourney : false,
         onJourney: true,
+        getpopularPost: false,
+        visitPost: false,
+        getpopularPost: false,
+        activitySec: true
       },
       {
         class: "popular-activity",
+        visitPost: false,
         getpopularPost: true,
+        activitySec: false,
         postPopular: [
           {
             heading: "Popular Travelers",
@@ -2313,7 +2427,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       },
       {
         class: "popular-activity",
+        visitPost: false,
         getpopularPost: true,
+        activitySec: false,
         postPopular: [
           {
             heading: "Popular Agents",
@@ -2364,6 +2480,45 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           }
         ],
       },
+      {
+        class: "visit-post",
+        visitPost: true,
+        getpopularPost: false,
+        activitySec: false,
+        getvisitPost : [
+          {
+            imgVisit: "img/india-gate.jpg",
+            locationLocal: "Mumbai",
+            tag: "Must Do's in Mumbai,India",
+            visitedPost : [
+              {
+                imgSlider: "img/india-gate.jpg",
+                name: "#1 Shree Siddhivinayak",
+              },
+              {
+                imgSlider: "img/india-gate.jpg",
+                name: "#1 Shree Siddhivinayak",
+              },
+              {
+                imgSlider: "img/india-gate.jpg",
+                name: "#1 Shree Siddhivinayak",
+              },
+              {
+                imgSlider: "img/india-gate.jpg",
+                name: "#1 Shree Siddhivinayak",
+              },
+              {
+                imgSlider: "img/india-gate.jpg",
+                name: "#1 Shree Siddhivinayak",
+              },
+              {
+                imgSlider: "img/india-gate.jpg",
+                name: "#1 Shree Siddhivinayak",
+              },
+            ],
+          }
+        ],
+      }
     ];
   })
 

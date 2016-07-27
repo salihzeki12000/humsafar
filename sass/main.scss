@@ -2541,6 +2541,9 @@ header {
   .related-postimgholder {
     @include square(80px);
   }
+  .carousel {
+    min-height: 80px;  
+  }
 }
 .post-rating {
   padding: 10px 0;
