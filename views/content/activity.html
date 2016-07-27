@@ -201,20 +201,20 @@
                         <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
                         <li>
                           <a href="">
-                            <img src="img/comments.png" alt="" height="18" class="if-noeditor">
-                            <img src="img/comments-white.png" alt="" height="18" class="if-editor">
+                            <img src="img/comments.png" alt="" height="18" class="if-blue">
+                            <img src="img/comments-white.png" alt="" height="18" class="if-white">
                           </a>
                         </li>
                         <li>
                           <a href="">
-                            <img src="img/reviews.png" alt="" height="18" class="if-noeditor">
-                            <img src="img/reviews-white.png" alt="" height="18" class="if-editor">
+                            <img src="img/reviews.png" alt="" height="18" class="if-blue">
+                            <img src="img/reviews-white.png" alt="" height="18" class="if-white">
                           </a>
                         </li>
                         <li>
                           <a href="">
-                            <img src="img/share.png" alt="" height="18" class="if-noeditor">
-                            <img src="img/share-white.png" alt="" height="18" class="if-editor">
+                            <img src="img/share.png" alt="" height="18" class="if-blue">
+                            <img src="img/share-white.png" alt="" height="18" class="if-white">
                           </a>
                         </li>
                       </ul>
@@ -222,8 +222,8 @@
                     <div class="pull-right">
                       <div class="">
                         <span>
-                          <img src="img/options.png" alt="" width="3" class="if-noeditor">
-                          <img src="img/options-white.png" alt="" width="3" class="if-editor">
+                          <img src="img/options.png" alt="" width="3" class="if-blue">
+                          <img src="img/options-white.png" alt="" width="3" class="if-white">
                         </span>
                       </div>
                     </div>
@@ -233,8 +233,8 @@
                       <div class="pull-left">
                         <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">15660</b>Likes</span>
                         <span class="color-blue">
-                          <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-noeditor">
-                          <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-editor">
+                          <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue">
+                          <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white">
                           354 Reviews (4.5/5)</span>
                       </div>
                       <div class="pull-right">
@@ -276,48 +276,48 @@
           </div>
           <!-- popular travellers and agents end -->
           <!-- visit local and travel post -->
-          <div class="visit-post" ng-if="post.visitPost">
+          <div class="visit-post {{post.class}}" ng-if="post.visitPost">
             <div class="visit-post-main" ng-repeat="visit in post.getvisitPost track by $index">
               <div class="relate">
                 <div class="visit-view-imgholder">
                   <img ng-src="{{visit.imgVisit}}" alt="" class="img-responsive">
                 </div>
                 <!-- local visit post -->
-                <div class="local-visit-detail">
+                <div class="local-visit-post">
                   <div class="local-visit-header clearfix">
                     <div class="pull-left">
-                      <h4 class="color-white">{{visit.locationLocal}}</h4>
+                      <h4 class="color-white avenir-heavy">{{visit.locationLocal}}</h4>
                     </div>
                     <div class="pull-right">
                       <div class="tag-ongo-journey-local bg-dark-cyan">
-                        <span class="inline-block color-blue">Explore Destinations</span>
+                        <span class="inline-block color-blue avenir-heavy">Explore Destinations</span>
                       </div>
                     </div>
                   </div>
-                  <div class="local-visit-detail">
+                  <div class="local-visit-detail" ng-if="visit.localVisit">
                     <div class="clearfix">
-                      <div class="pull-left">
-                        <p class="color-white">{{visit.tag}}</p>
+                      <div class="pull-left" ng-if="visit.cityTag">
+                        <p class="color-white avenir-roman">{{visit.tag}}</p>
                       </div>
-                      <div class="pull-left">
-                        <p>People Been Here : {{visit.peopleBeen}} | Rating : <span><i class="fa fa-star"></i>
+                      <div class="pull-left" ng-if="visit.rating">
+                        <p class="avenir-roman">People Been Here : {{visit.peopleBeen}} | Rating : <span><i class="fa fa-star"></i>
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star"></i></span></p>
                       </div>
                       <div class="pull-right">
-                        <button class="btn btn-white-outline">View</button>
+                        <button class="btn btn-white-outline avenir-roman">View</button>
                       </div>
                     </div>
                   </div>
                 </div>
                 <!-- local visit post end-->
                 <!-- travel visit post -->
-                <div class="travel-visit">
+                <div class="travel-visit" ng-if="visitPost.travelVisit">
                   <div class="clearfix">
                     <div class="pull-left">
-                      <h4 class="color-white">{{visit.tagTravel}}</h4>
+                      <h4 class="color-white avenir-heavy">{{visit.tagTravel}}</h4>
                     </div>
                     <div class="pull-right">
                       <button class="btn btn-white-outline">Book Now</button>
@@ -328,9 +328,9 @@
               </div>
               <div class="travelocal-visit-foot">
                 <div class="visit-slider">
-                  <flex-slider class="carousel" flex-slide="slide in visit.visitedPost track by $index">
+                  <flex-slider class="carousel travelocal-slider" flex-slide="slide in visit.visitedPost track by $index">
                     <li>
-                      <div class="postslider-imholder">
+                      <div class="postslider-imgholder">
                         <img ng-src="{{slide.imgSlider}}" alt="" class="img-responsive">
                         <span>{{slide.visitName}}</span>
                       </div>
@@ -344,20 +344,20 @@
                         <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
                         <li>
                           <a href="">
-                            <img src="img/comments.png" alt="" height="18" class="if-noeditor">
-                            <img src="img/comments-white.png" alt="" height="18" class="if-editor">
+                            <img src="img/comments.png" alt="" height="18" class="if-blue">
+                            <img src="img/comments-white.png" alt="" height="18" class="if-white">
                           </a>
                         </li>
                         <li>
                           <a href="">
-                            <img src="img/reviews.png" alt="" height="18" class="if-noeditor">
-                            <img src="img/reviews-white.png" alt="" height="18" class="if-editor">
+                            <img src="img/reviews.png" alt="" height="18" class="if-blue">
+                            <img src="img/reviews-white.png" alt="" height="18" class="if-white">
                           </a>
                         </li>
                         <li>
                           <a href="">
-                            <img src="img/share.png" alt="" height="18" class="if-noeditor">
-                            <img src="img/share-white.png" alt="" height="18" class="if-editor">
+                            <img src="img/share.png" alt="" height="18" class="if-blue">
+                            <img src="img/share-white.png" alt="" height="18" class="if-white">
                           </a>
                         </li>
                       </ul>
@@ -365,8 +365,8 @@
                     <div class="pull-right">
                       <div class="">
                         <span>
-                          <img src="img/options.png" alt="" width="3" class="if-noeditor">
-                          <img src="img/options-white.png" alt="" width="3" class="if-editor">
+                          <img src="img/options.png" alt="" width="3" class="if-blue">
+                          <img src="img/options-white.png" alt="" width="3" class="if-white">
                         </span>
                       </div>
                     </div>
@@ -375,14 +375,7 @@
                     <div class="clearfix">
                       <div class="pull-left">
                         <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">15660</b>Likes</span>
-                        <span class="color-blue">
-                          <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-noeditor">                                           </div>
-                      <!-- <div class="pull-right">
-                        <div class="post-travel-icon">
-                          <img src="img/travel.png" alt="" class="activity-travel-icon">
-                          <img src="img/cycle-cyan.png" alt="" height="20" class="activity-local-icon">
-                        </div>
-                      </div> -->
+                     </div>
                     </div>
                   </div>
                 </div>

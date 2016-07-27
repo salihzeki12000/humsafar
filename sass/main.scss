@@ -369,6 +369,9 @@ textarea {
     @include button-variant( white, $brand-pink, $brand-pink);
   }
 }
+.btn-white-outline {
+  @include button-variant( white, transparent, white);
+}
 .btn-grey-pink {
   @include button-variant( white, $brand-grey, $brand-dark-blue);
   &:hover {
@@ -1125,6 +1128,7 @@ header {
   padding: 12px 0 20px;
   border-bottom: 1px solid $brand-grey;
   li {
+    display: inline-block;
     padding: 0 10px;
     &:first-child {
       padding: 0 10px 0 0;
@@ -2542,7 +2546,7 @@ header {
     @include square(80px);
   }
   .carousel {
-    min-height: 80px;  
+    min-height: 80px;
   }
 }
 .post-rating {
@@ -2608,7 +2612,7 @@ header {
       color: $brand-pink;
     }
   }
-  .if-editor { display: none; }
+  .if-white { display: none; }
 }
 .local-life {
   .tag-ongo-journey {
@@ -2628,7 +2632,7 @@ header {
       color: $brand-cyan;
     }
   }
-  .if-editor { display: none; }
+  .if-white { display: none; }
 }
 .editor {
   .activity-post-main {
@@ -2652,8 +2656,82 @@ header {
     i { color: #fff; }
   }
   .user-social-item li:first-child i { color: #fff; }
-  .if-noeditor { display: none; }
+  .if-blue { display: none; }
 }
+// visit-post
+.visit-post {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin: 10px;
+  overflow: hidden;
+  .social-field-types {
+    padding: 10px 10px 0;
+  }
+}
+.local-visit-header {
+  width: 100%;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  h4 {
+    margin: 5px 0 0 10px;
+  }
+}
+.tag-ongo-journey-local {
+  padding: 5px 10px 5px 15px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.visit-view-imgholder {
+  height: 400px;
+  overflow: hidden;
+  img { border-radius: 6px; }
+}
+.local-visit-detail {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  background-color: rgba(0,0,0,0.5);
+}
+// visit-post end
+// visiting
+.visiting-post.local-visit {
+  .if-white{
+    display: none;
+  }
+  .travelocal-visit-foot {
+    background-color: $brand-cyan;
+  }
+  .user-social-item {
+    padding: 15px 0;
+    border-top: 1px solid $brand-dark-blue;
+    border-bottom: 1px solid $brand-dark-blue;
+  }
+}
+.visiting-post.travel-visit {
+  .if-blue {
+    display: none;
+  }
+  .travelocal-visit-foot {
+    background-color: $brand-pink;
+  }
+  .user-social-item {
+    padding: 15px 0;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+  }
+  .fa.fa-heart-o {
+    color: #fff;
+  }
+  .fa.fa-heart {
+    color: #fff;
+  }
+  .social-likes-reviews span { color: #fff; }
+}
+
+// visiting
 // post profile pic end
 // activity end
 @import "fancybox-override";

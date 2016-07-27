@@ -2481,7 +2481,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         ],
       },
       {
-        class: "visit-post",
+        class: "visiting-post local-visit",
         visitPost: true,
         getpopularPost: false,
         activitySec: false,
@@ -2490,36 +2490,138 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             imgVisit: "img/india-gate.jpg",
             locationLocal: "Mumbai",
             tag: "Must Do's in Mumbai,India",
+            travelVisit: false,
+            localVisit: true,
+            cityTag: true,
+            rating: false,
             visitedPost : [
               {
                 imgSlider: "img/india-gate.jpg",
-                name: "#1 Shree Siddhivinayak",
+                visitName: "#1 Shree Siddhivinayak",
               },
               {
                 imgSlider: "img/india-gate.jpg",
-                name: "#1 Shree Siddhivinayak",
+                visitName: "#1 Shree Siddhivinayak",
               },
               {
                 imgSlider: "img/india-gate.jpg",
-                name: "#1 Shree Siddhivinayak",
+                visitName: "#1 Shree Siddhivinayak",
               },
               {
                 imgSlider: "img/india-gate.jpg",
-                name: "#1 Shree Siddhivinayak",
+                visitName: "#1 Shree Siddhivinayak",
               },
               {
                 imgSlider: "img/india-gate.jpg",
-                name: "#1 Shree Siddhivinayak",
+                visitName: "#1 Shree Siddhivinayak",
               },
               {
                 imgSlider: "img/india-gate.jpg",
-                name: "#1 Shree Siddhivinayak",
+                visitName: "#1 Shree Siddhivinayak",
               },
             ],
-          }
+          },
         ],
-      }
+      },
+      {
+        class: "visiting-post local-visit",
+        visitPost: true,
+        getpopularPost: false,
+        activitySec: false,
+        getvisitPost : [
+          {
+            imgVisit: "img/india-gate.jpg",
+            locationLocal: "Mumbai",
+            tag: "Must Do's in Mumbai,India",
+            travelVisit: false,
+            localVisit: true,
+            cityTag: false,
+            rating: true,
+            visitedPost : [
+              {
+                imgSlider: "img/india-gate.jpg",
+                visitName: "#1 Shree Siddhivinayak",
+              },
+              {
+                imgSlider: "img/india-gate.jpg",
+                visitName: "#1 Shree Siddhivinayak",
+              },
+              {
+                imgSlider: "img/india-gate.jpg",
+                visitName: "#1 Shree Siddhivinayak",
+              },
+              {
+                imgSlider: "img/india-gate.jpg",
+                visitName: "#1 Shree Siddhivinayak",
+              },
+              {
+                imgSlider: "img/india-gate.jpg",
+                visitName: "#1 Shree Siddhivinayak",
+              },
+              {
+                imgSlider: "img/india-gate.jpg",
+                visitName: "#1 Shree Siddhivinayak",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        class: "visiting-post travel-visit",
+        visitPost: true,
+        getpopularPost: false,
+        activitySec: false,
+        getvisitPost : [
+          {
+            imgVisit: "img/india-gate.jpg",
+            locationLocal: "Mumbai",
+            tag: "Book Your Travel form take off to touchdown!",
+            travelVisit: true,
+            localVisit: false,
+            tagTravel: true,
+            visitedPost : [
+              {
+                imgSlider: "img/india-gate.jpg",
+                visitName: "#1 Shree Siddhivinayak",
+              },
+              {
+                imgSlider: "img/india-gate.jpg",
+                visitName: "#1 Shree Siddhivinayak",
+              },
+              {
+                imgSlider: "img/india-gate.jpg",
+                visitName: "#1 Shree Siddhivinayak",
+              },
+              {
+                imgSlider: "img/india-gate.jpg",
+                visitName: "#1 Shree Siddhivinayak",
+              },
+              {
+                imgSlider: "img/india-gate.jpg",
+                visitName: "#1 Shree Siddhivinayak",
+              },
+              {
+                imgSlider: "img/india-gate.jpg",
+                visitName: "#1 Shree Siddhivinayak",
+              },
+            ],
+          },
+        ],
+      },
     ];
+
+    setTimeout(function(){
+      $('.travelocal-slider').flexslider({
+        animation: "slide",
+        animationLoop: false,
+        itemWidth: 150,
+        itemMargin: 5,
+        mousewheel: true,
+        directionNav: false,
+        controlNav: false,
+      });
+    },100);
+
   })
 
 .controller('headerctrl', function($scope, TemplateService) {
