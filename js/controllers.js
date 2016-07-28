@@ -114,7 +114,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 
   })
-  .controller('JourneyCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+  .controller('JourneyCtrl', function($scope, TemplateService, NavigationService, $timeout,$uibModal) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("journey");
@@ -180,6 +180,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       return val + " units";
     };
     $scope.heatmapColors = ['#2c3757', '#ff6759'];
+
+    $scope.openLocalimg = function(getVal) {
+      // $scope.showimgData = $scope.localLife[getVal];
+      $scope.showimgData = getVal;
+      // console.log(getVal);
+      $uibModal.open({
+        animation: true,
+        templateUrl : "views/modal/local-imgview.html",
+        scope: $scope,
+        windowTopClass  : "local-imgview-pop"
+      })
+    };
 
     $scope.travelLife = [{
       heading: "Manan Vora has ended his London Journey",
@@ -2494,29 +2506,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             localVisit: true,
             cityTag: true,
             rating: false,
+            flag: false,
+            visitSlider : true,
+            visitImg : false,
+            localLifeMain: true,
             visitedPost : [
               {
-                imgSlider: "img/india-gate.jpg",
+                imgSlider: "img/small-activity-slider.jpg",
                 visitName: "#1 Shree Siddhivinayak",
               },
               {
-                imgSlider: "img/india-gate.jpg",
+                imgSlider: "img/small-activity-slider.jpg",
                 visitName: "#1 Shree Siddhivinayak",
               },
               {
-                imgSlider: "img/india-gate.jpg",
+                imgSlider: "img/small-activity-slider.jpg",
                 visitName: "#1 Shree Siddhivinayak",
               },
               {
-                imgSlider: "img/india-gate.jpg",
+                imgSlider: "img/small-activity-slider.jpg",
                 visitName: "#1 Shree Siddhivinayak",
               },
               {
-                imgSlider: "img/india-gate.jpg",
+                imgSlider: "img/small-activity-slider.jpg",
                 visitName: "#1 Shree Siddhivinayak",
               },
               {
-                imgSlider: "img/india-gate.jpg",
+                imgSlider: "img/small-activity-slider.jpg",
                 visitName: "#1 Shree Siddhivinayak",
               },
             ],
@@ -2531,35 +2547,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         getvisitPost : [
           {
             imgVisit: "img/india-gate.jpg",
-            locationLocal: "Mumbai",
-            tag: "Must Do's in Mumbai,India",
+            locationLocal: "India",
             travelVisit: false,
             localVisit: true,
             cityTag: false,
             rating: true,
+            peopleBeen: 33,
+            flag: true,
+            visitSlider : true,
+            visitImg : false,
+            localLifeMain: true,
             visitedPost : [
               {
-                imgSlider: "img/india-gate.jpg",
+                imgSlider: "img/small-activity-slider.jpg",
                 visitName: "#1 Shree Siddhivinayak",
               },
               {
-                imgSlider: "img/india-gate.jpg",
+                imgSlider: "img/small-activity-slider.jpg",
                 visitName: "#1 Shree Siddhivinayak",
               },
               {
-                imgSlider: "img/india-gate.jpg",
+                imgSlider: "img/small-activity-slider.jpg",
                 visitName: "#1 Shree Siddhivinayak",
               },
               {
-                imgSlider: "img/india-gate.jpg",
+                imgSlider: "img/small-activity-slider.jpg",
                 visitName: "#1 Shree Siddhivinayak",
               },
               {
-                imgSlider: "img/india-gate.jpg",
+                imgSlider: "img/small-activity-slider.jpg",
                 visitName: "#1 Shree Siddhivinayak",
               },
               {
-                imgSlider: "img/india-gate.jpg",
+                imgSlider: "img/small-activity-slider.jpg",
                 visitName: "#1 Shree Siddhivinayak",
               },
             ],
@@ -2575,36 +2595,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           {
             imgVisit: "img/india-gate.jpg",
             locationLocal: "Mumbai",
-            tag: "Book Your Travel form take off to touchdown!",
+            tagTravel: "Book Your Travel form take off to touchdown!",
             travelVisit: true,
             localVisit: false,
-            tagTravel: true,
-            visitedPost : [
-              {
-                imgSlider: "img/india-gate.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-              {
-                imgSlider: "img/india-gate.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-              {
-                imgSlider: "img/india-gate.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-              {
-                imgSlider: "img/india-gate.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-              {
-                imgSlider: "img/india-gate.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-              {
-                imgSlider: "img/india-gate.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-            ],
+            visitSlider : false,
+            visitImg : true,
+            localLifeMain: false,
           },
         ],
       },
@@ -2615,7 +2611,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         animation: "slide",
         animationLoop: false,
         itemWidth: 150,
-        itemMargin: 5,
+        itemMargin: 3,
         mousewheel: true,
         directionNav: false,
         controlNav: false,

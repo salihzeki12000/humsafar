@@ -419,11 +419,11 @@
                           <img src="img/location-blue.png" alt="" height="18">
                         </div>
                       </div>
-                      <div class="post-imgholder">
+                      <div class="post-imgholder" ng-click="openLocalimg(post);">
                         <img ng-src="{{post.imgWall}}" alt="" class="img-responsive">
                       </div>
                       <div class="local-post-slider">
-                        <flex-slider class="carousel" flex-slide="related in post.postSlider track by $index" item-width="136" animation="slide" item-margin="15" control-nav="false">
+                        <flex-slider class="carousel" flex-slide="related in post.postSlider track by $index" item-width="136" animation="slide" item-margin="15" control-nav="false" mousewheel = "true">
                           <li>
                             <div class="related-postholder">
                               <img ng-src="{{related.imgRelated}}" alt="" class="img-responsive">

@@ -283,10 +283,10 @@
                   <img ng-src="{{visit.imgVisit}}" alt="" class="img-responsive">
                 </div>
                 <!-- local visit post -->
-                <div class="local-visit-post">
+                <div class="local-visit-post" ng-if="visit.localLifeMain">
                   <div class="local-visit-header clearfix">
                     <div class="pull-left">
-                      <h4 class="color-white avenir-heavy">{{visit.locationLocal}}</h4>
+                      <h4 class="color-white avenir-heavy"><img src="img/flag.png" alt="Journey Flag" ng-if="visit.flag" width="30" class="mr5">{{visit.locationLocal}}</h4>
                     </div>
                     <div class="pull-right">
                       <div class="tag-ongo-journey-local bg-dark-cyan">
@@ -297,14 +297,14 @@
                   <div class="local-visit-detail" ng-if="visit.localVisit">
                     <div class="clearfix">
                       <div class="pull-left" ng-if="visit.cityTag">
-                        <p class="color-white avenir-roman">{{visit.tag}}</p>
+                        <p class="color-white avenir-roman m-clear mt5">{{visit.tag}}</p>
                       </div>
                       <div class="pull-left" ng-if="visit.rating">
-                        <p class="avenir-roman">People Been Here : {{visit.peopleBeen}} | Rating : <span><i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i></span></p>
+                        <p class="avenir-roman color-white m-clear mt5 been-here">People Been Here : {{visit.peopleBeen}} | Rating : <span><i class="fa fa-star color-pink"></i>
+                          <i class="fa fa-star color-pink"></i>
+                          <i class="fa fa-star color-pink"></i>
+                          <i class="fa fa-star color-pink"></i>
+                          <i class="fa fa-star-o"></i></span></p>
                       </div>
                       <div class="pull-right">
                         <button class="btn btn-white-outline avenir-roman">View</button>
@@ -314,20 +314,23 @@
                 </div>
                 <!-- local visit post end-->
                 <!-- travel visit post -->
-                <div class="travel-visit" ng-if="visitPost.travelVisit">
-                  <div class="clearfix">
-                    <div class="pull-left">
-                      <h4 class="color-white avenir-heavy">{{visit.tagTravel}}</h4>
+                <div class="travelvisit" ng-if="visit.travelVisit">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <h4 class="color-white avenir-heavy m-clear">{{visit.tagTravel}}</h4>
                     </div>
-                    <div class="pull-right">
+                    <div class="col-md-4 text-center">
                       <button class="btn btn-white-outline">Book Now</button>
                     </div>
                   </div>
                 </div>
+                <div class="travelvisit-img" ng-if="visit.visitImg">
+                  <img src="img/skyscanner.jpg" alt="" class="img-responsive" width="80">
+                </div>
                 <!-- travel visit post end -->
               </div>
               <div class="travelocal-visit-foot">
-                <div class="visit-slider">
+                <div class="visit-slider" ng-if="visit.visitSlider">
                   <flex-slider class="carousel travelocal-slider" flex-slide="slide in visit.visitedPost track by $index">
                     <li>
                       <div class="postslider-imgholder">

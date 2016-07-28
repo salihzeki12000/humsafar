@@ -769,6 +769,7 @@ header {
   }
 }
 .usually-go {
+  margin-top: 30px;
   margin-bottom: 35%;
 }
 .travel-row {
@@ -1524,6 +1525,45 @@ header {
     border: 1px solid $brand-cyan;
   }
 }
+.local-imgview-pop {
+  .modal-dialog {
+    width: auto;
+  }
+  .imgviewpop-holder {
+    position: relative;
+    border: 2px solid $brand-dark-blue;
+  }
+  .view-heading {
+    width: 100%;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.3);
+    font-size: 18px;
+  }
+  .close { opacity: 1; }
+  .view-imgdown {
+    width: 100%;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    li {
+      padding-right: 25px;
+      display: inline-block;
+      vertical-align: top;
+      i { font-size: 25px; }
+    }
+  }
+  .likes-img {
+    padding: 5px 25px;
+    border-left: 1px solid #fff;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
 // local life end
 // profile end
 // moment tab
@@ -1837,6 +1877,13 @@ header {
   button {
     padding: 6px 16px;
     font-size: 17px;
+  }
+}
+.modal-open {
+  .modal-backdrop {
+    background: url('../img/bg-blur.jpg') no-repeat;
+    background-size: cover;
+    opacity: 1;
   }
 }
 // pop-up rate end
@@ -2685,15 +2732,56 @@ header {
 .visit-view-imgholder {
   height: 380px;
   overflow: hidden;
-  img { border-radius: 6px; }
+  img {
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+  }
 }
 .local-visit-detail {
   width: 100%;
+  padding: 10px 10px 20px;
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 10px;
   background-color: rgba(0,0,0,0.5);
+  .btn {
+    padding: 4px 14px;
+  }
+  .been-here {
+    font-size: 13px;
+  }
+}
+.travelvisit {
+  width: 100%;
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+}
+.travelvisit-img {
+  position: absolute;
+  top: 1px;
+  right: 30px;
+}
+.visit-slider {
+  padding: 0px 10px;
+  margin-top: -10px;
+  .flexslider-container {
+    border: 2px solid #fff;
+    background-color: #fff;
+  }
+}
+.postslider-imgholder {
+  height: 120px;
+  position: relative;
+  span {
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    color: #fff;
+    font-size: 12px;
+  }
 }
 // visit-post end
 // visiting

@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="imgviewpop-holder">
+    <img ng-src={{showimgData.imgWall}} alt="" class="img-responsive">
+    <div class="view-heading">
+      <div class="close color-white" ng-click="$close();">
+        <i class="fa fa-times"></i>
+      </div>
+      <p class="color-white m-clear">{{showimgData.heading}}</p>
+    </div>
+    <div class="view-imgdown">
+      <ul class="inline-block">
+        <li><a href="" class="inline-block"><i class="fa fa-heart-o color-white"></i></a></li>
+        <li><a href="" class="inline-block"><img src="img/comments-white.png" alt="" height="25"></a></li>
+        <li><a href="" class="inline-block"><img src="img/share-white.png" alt="" height="27"></a></li>
+      </ul>
+      <span class="color-white avernir-roman likes-img"><i class="fa fa-heart color-white mr5"></i>{{showimgData.likes}} Likes</span>
+    </div>
+  </div>
+</div>
