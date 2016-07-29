@@ -53,140 +53,144 @@
           <!-- user logged for first time end -->
           <div class="masonry-detail">
             <div masonry class="abc">
-              <div class="masonry-brick" ng-repeat="life in travelLife" >
-                <div class="travel-life-part avenir-roman">
-                  <div class="travel-journey-heading">
-                    <p ng-hide="life.onJourney">{{life.heading}}</p>
-                    <p class="m-clear"><i class="fa fa-calendar"></i><span>{{life.timestampDate}}</span> | <i class="fa fa-clock-o"></i> <span>{{life.timestampHour}}</span></p>
-                  </div>
-                  <div class="travelled-journey relate" ng-hide="life.onJourney">
-                    <div class="travelled-imgholder">
-                      <img ng-src="{{life.imgTravelled}}" alt="" class="img-responsive m-center">
-                    </div>
-                    <div class="country-visited">
-                      <img ng-src="{{visit.imgFlag}}" alt="" height="30" ng-repeat="visit in life.countryVisit track by $index">
-                    </div>
-                    <div class="journey-tag-holder">
-                      <h4 class="m-clear text-capitalize">{{life.Travelledtag}}</h4>
-                      <div class="clearfix">
-                        <div class="pull-left">
-                          <div class="journey-collection">
+              <div class="row">
+                <div class="masonry-brick col-md-4" ng-repeat="life in travelLife" >
+                  <div class="journey-masonry-brick">
+                    <div class="travel-life-part avenir-roman">
+                      <div class="travel-journey-heading">
+                        <p ng-hide="life.onJourney">{{life.heading}}</p>
+                        <p class="m-clear"><i class="fa fa-calendar"></i><span>{{life.timestampDate}}</span> | <i class="fa fa-clock-o"></i> <span>{{life.timestampHour}}</span></p>
+                      </div>
+                      <div class="travelled-journey relate" ng-hide="life.onJourney">
+                        <div class="travelled-imgholder">
+                          <img ng-src="{{life.imgTravelled}}" alt="" class="img-responsive m-center">
+                        </div>
+                        <div class="country-visited">
+                          <img ng-src="{{visit.imgFlag}}" alt="" height="30" ng-repeat="visit in life.countryVisit track by $index">
+                        </div>
+                        <div class="journey-tag-holder">
+                          <h4 class="m-clear text-capitalize">{{life.Travelledtag}}</h4>
+                          <div class="clearfix">
+                            <div class="pull-left">
+                              <div class="journey-collection">
+                                <ul>
+                                  <li>
+                                    <a href="">
+                                      <div class="">
+                                        <img src="img/camera.png" alt="Camera" width="18" class="mr5">
+                                        <span class="inline-block v-mid">{{life.photoCount}}</span>
+                                      </div>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="">
+                                      <div class="">
+                                        <img src="img/video.png" alt="Video" width="18" class="mr5">
+                                        <span class="inline-block v-mid">{{life.videoCount}}</span>
+                                      </div>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="">
+                                      <div class="">
+                                        <img src="img/location.png" alt="Location" width="18" class="mr5">
+                                        <span class="inline-block v-mid">{{life.locationVisited}}</span>
+                                      </div>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="pull-right">
+                              <div class="journey-type inline-block">
+                                <ul>
+                                  <li>
+                                    <a href=""><img ng-src="{{life.itineraryType1}}" alt="" height="20"></a>
+                                  </li>
+                                  <li>
+                                    <a href=""><img ng-src="{{life.itineraryType2}}" alt="" height="20"></a>
+                                  </li>
+                                  <li>
+                                    <a href=""><img ng-src="{{life.itineraryType3}}" alt="" height="20"></a>
+                                  </li>
+                                </ul>
+                              </div>
+                              <div class="days-spent inline-block">
+                                <p><span class="block">{{life.travelledDay}}</span> Days</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="onway-journey relate" ng-show="life.onJourney">
+                        <div class="onway-imgholder">
+                          <img ng-src="{{life.imgOnway}}" alt="" class="img-responsive m-center">
+                        </div>
+                        <div class="country-visited">
+                          <img ng-src="{{visit.imgFlag}}" alt="" height="30" ng-repeat="visit in life.countryVisit track by $index">
+                          <span class="" ng-show="life.onJourney">+4</span>
+                        </div>
+                        <div class="journey-tag-holder">
+                          <h3 class="m-clear text-capitalize">{{life.onwayTag}}</h3>
+                          <div class="clearfix">
+                            <div class="pull-left">
+                              <div class="journey-type">
+                                <ul>
+                                  <li>
+                                    <a href=""><img ng-src="{{life.itineraryType1}}" alt="" height="20"></a>
+                                  </li>
+                                  <li>
+                                    <a href=""><img ng-src="{{life.itineraryType2}}" alt="" height="20"></a>
+                                  </li>
+                                  <li>
+                                    <a href=""><img ng-src="{{life.itineraryType3}}" alt="" height="20"></a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="pull-right">
+                              <div class="journey-cost">
+                                <span>{{life.cost}}</span>
+                              </div>
+                              <div class="days-spent">
+                                <p><span class="block">{{life.spendingDay}}</span>Days</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="social-field-types">
+                        <div class="user-social-item clearfix">
+                          <div class="pull-left">
                             <ul>
+                              <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
                               <li>
-                                <a href="">
-                                  <div class="">
-                                    <img src="img/camera.png" alt="Camera" width="18" class="mr5">
-                                    <span class="inline-block v-mid">{{life.photoCount}}</span>
-                                  </div>
-                                </a>
+                                <a href=""><img src="img/comments.png" alt="" height="18"></a>
                               </li>
                               <li>
-                                <a href="">
-                                  <div class="">
-                                    <img src="img/video.png" alt="Video" width="18" class="mr5">
-                                    <span class="inline-block v-mid">{{life.videoCount}}</span>
-                                  </div>
-                                </a>
+                                <a href=""><img src="img/reviews.png" alt="" height="18"></a>
                               </li>
                               <li>
-                                <a href="">
-                                  <div class="">
-                                    <img src="img/location.png" alt="Location" width="18" class="mr5">
-                                    <span class="inline-block v-mid">{{life.locationVisited}}</span>
-                                  </div>
-                                </a>
+                                <a href=""><img src="img/share.png" alt="" height="18"></a>
                               </li>
                             </ul>
                           </div>
-                        </div>
-                        <div class="pull-right">
-                          <div class="journey-type inline-block">
-                            <ul>
-                              <li>
-                                <a href=""><img ng-src="{{life.itineraryType1}}" alt="" height="20"></a>
-                              </li>
-                              <li>
-                                <a href=""><img ng-src="{{life.itineraryType2}}" alt="" height="20"></a>
-                              </li>
-                              <li>
-                                <a href=""><img ng-src="{{life.itineraryType3}}" alt="" height="20"></a>
-                              </li>
-                            </ul>
-                          </div>
-                          <div class="days-spent inline-block">
-                            <p><span class="block">{{life.travelledDay}}</span> Days</p>
+                          <div class="pull-right">
+                            <div class="">
+                              <span><img src="img/options.png" alt="" height="18"></span>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="onway-journey relate" ng-show="life.onJourney">
-                    <div class="onway-imgholder">
-                      <img ng-src="{{life.imgOnway}}" alt="" class="img-responsive m-center">
-                    </div>
-                    <div class="country-visited">
-                      <img ng-src="{{visit.imgFlag}}" alt="" height="30" ng-repeat="visit in life.countryVisit track by $index">
-                      <span class="" ng-show="life.onJourney">+4</span>
-                    </div>
-                    <div class="journey-tag-holder">
-                      <h3 class="m-clear text-capitalize">{{life.onwayTag}}</h3>
-                      <div class="clearfix">
-                        <div class="pull-left">
-                          <div class="journey-type">
-                            <ul>
-                              <li>
-                                <a href=""><img ng-src="{{life.itineraryType1}}" alt="" height="20"></a>
-                              </li>
-                              <li>
-                                <a href=""><img ng-src="{{life.itineraryType2}}" alt="" height="20"></a>
-                              </li>
-                              <li>
-                                <a href=""><img ng-src="{{life.itineraryType3}}" alt="" height="20"></a>
-                              </li>
-                            </ul>
+                        <div class="social-likes-reviews">
+                          <div class="clearfix">
+                            <div class="pull-left">
+                              <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{life.likes}}</b>Likes</span>
+                              <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} ({{life.pointReview}}/5)</span>
+                            </div>
+                            <div class="pull-right">
+                              <img src="img/travel.png" alt="">
+                            </div>
                           </div>
-                        </div>
-                        <div class="pull-right">
-                          <div class="journey-cost">
-                            <span>{{life.cost}}</span>
-                          </div>
-                          <div class="days-spent">
-                            <p><span class="block">{{life.spendingDay}}</span>Days</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="social-field-types">
-                    <div class="user-social-item clearfix">
-                      <div class="pull-left">
-                        <ul>
-                          <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
-                          <li>
-                            <a href=""><img src="img/comments.png" alt="" height="18"></a>
-                          </li>
-                          <li>
-                            <a href=""><img src="img/reviews.png" alt="" height="18"></a>
-                          </li>
-                          <li>
-                            <a href=""><img src="img/share.png" alt="" height="18"></a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="pull-right">
-                        <div class="">
-                          <span><img src="img/options.png" alt="" height="18"></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="social-likes-reviews">
-                      <div class="clearfix">
-                        <div class="pull-left">
-                          <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{life.likes}}</b>Likes</span>
-                          <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} ({{life.pointReview}}/5)</span>
-                        </div>
-                        <div class="pull-right">
-                          <img src="img/travel.png" alt="">
                         </div>
                       </div>
                     </div>

@@ -737,7 +737,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $uibModal.open({
         animation: true,
         templateUrl: "views/modal/review-post.html",
-        scope: $scope
+        scope: $scope,
+        backdropClass: "review-backdrop"
       })
     };
     $scope.showRating = 1;

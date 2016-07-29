@@ -1879,12 +1879,10 @@ header {
     font-size: 17px;
   }
 }
-.modal-open {
-  .modal-backdrop {
+.review-backdrop.modal-backdrop {
     background: url('../img/bg-blur.jpg') no-repeat;
     background-size: cover;
     opacity: 1;
-  }
 }
 // pop-up rate end
 // accordion review end
