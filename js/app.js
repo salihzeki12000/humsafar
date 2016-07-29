@@ -87,6 +87,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       url: "/holiday",
       templateUrl: "views/template.html",
       controller: 'HolidayCtrl'
+    })
+    .state('itinerary', {
+      url: "/itinerary",
+      templateUrl: "views/template.html",
+      controller: 'ItineraryCtrl'
     });
   $urlRouterProvider.otherwise("/home");
   $locationProvider.html5Mode(isproduction);

@@ -2620,6 +2620,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     },100);
 
   })
+  .controller('ItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+
+    // console.log("Testing Consoles");
+
+    $scope.template = TemplateService.changecontent("itinerary");
+    $scope.menutitle = NavigationService.makeactive("Itinerary");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+  })
 
 .controller('headerctrl', function($scope, TemplateService) {
   $scope.template = TemplateService;

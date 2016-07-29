@@ -414,9 +414,10 @@ header {
   }
 }
 .search {
-  margin: 2px 10px;
+  margin: 2px 10px 2px 13px;
   input {
-    width: 355px;
+    width: 360px;
+    padding: 6px 10px 6px 25px;
     border-top: none;
     border-right: none;
     border-bottom: 2px solid #17213e;
@@ -424,6 +425,7 @@ header {
     background-color: transparent;
     color: #fff;
     font-size: 13px;
+    background: url('../img/search-icon.png') no-repeat 0 50%;
     &:focus {
       outline: none;
       border-color: #17213e;
@@ -2820,4 +2822,30 @@ header {
 // visiting
 // post profile pic end
 // activity end
+// itinerary
+.itinerary-holder {
+  padding: 0px 40px;
+}
+.itinerary-imgholder {
+  margin-bottom: 30px;
+  &:before {
+    content: '';
+    @include position(absolute,0 0 0 0);
+    background-color: rgba(0,0,0,0.6);
+  }
+}
+.itinerary-detail {
+  h3 {
+    margin: 0;
+    font-size: 28px;
+  }
+  p {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+}
+.itinerary-detail-first {
+  p { font-size: 18px; }
+}
+// itinerary end
 @import "fancybox-override";
