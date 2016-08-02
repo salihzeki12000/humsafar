@@ -471,7 +471,7 @@ header {
 .city,
 .gender,
 .upload-profile {
-  padding: 30px 20px;
+  padding: 30px 20px 15px;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.7);
   h3 {
     margin: 0 0 25px;
@@ -642,6 +642,7 @@ header {
     border-right: none;
     border-bottom: 1px solid $brand-pink;
     border-left: none;
+    background: url('../img/dropdown-icon.png') no-repeat 98% 50%;
     &:focus {
       border-color: $brand-pink;
     }
@@ -674,10 +675,10 @@ header {
         font-size: 16px;
       }
       &:nth-child(even) {
-        background-color: #969bab;
+        background-color: #979aab;
       }
       &:nth-child(odd) {
-        background-color: #565f79;
+        background-color: #555f7a;
       }
     }
   }
@@ -768,7 +769,8 @@ header {
   @include transition(background 300ms linear);
 }
 .holiday-imgholder {
-  min-height: 83px;
+  min-height: 60px;
+  img { height: 55px; }
 }
 .holiday-row {
   margin: 25px 0 40px;
@@ -788,7 +790,7 @@ header {
   margin-bottom: 35%;
 }
 .travel-row {
-  margin: 20px 0 30px;
+  margin: 18px 25px;
 }
 // holiday step end
 // profile
@@ -1087,7 +1089,7 @@ header {
   padding: 0 10px;
   position: absolute;
   bottom: 0;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.5);
   color: #fff;
   a {
     color: #fff;
@@ -1095,6 +1097,9 @@ header {
   h4,
   h3 {
     padding: 15px 0;
+  }
+  .journey-travelling-type {
+    margin-bottom: -20px;
   }
 }
 .journey-type {
@@ -1114,8 +1119,9 @@ header {
 .days-spent {
   @include size(45px,48px);
   border-radius: 18px;
-  margin-bottom: -15px;
   display: inline-block;
+  position: relative;
+  bottom: 10px;
   background-color: $brand-dark-blue;
   p {
     padding-top: 8px;
@@ -1543,10 +1549,14 @@ header {
 .local-imgview-pop {
   .modal-dialog {
     width: auto;
+    @include position(absolute, 50% null null 50%);
+    @include transform(translate(-50%,-50%)!important);
   }
   .imgviewpop-holder {
-    position: relative;
+    height: 550px;
     border: 2px solid $brand-dark-blue;
+    position: relative;
+    overflow: hidden;
   }
   .view-heading {
     width: 100%;
@@ -2553,7 +2563,7 @@ header {
   width: 24%;
 }
 .user-detail {
-  width: 74%;
+  // width: 74%;
   vertical-align: top;
 }
 .user-more-detail {
