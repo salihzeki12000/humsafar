@@ -264,7 +264,7 @@
                 <!-- holiday -->
                 <div class="holiday-section">
                   <h4 class="color-blue setting-tab-heading">Your kind of a holiday</h4>
-                  <ul ng-init="selectHoliday = 1">
+                  <ul>
                     <li ng-repeat="holiday in chooseHoliday">
                       <div class="select-holiday {{holiday.class}}" ng-click="holidayType($index)">
                         <figure>
@@ -275,74 +275,13 @@
                         </figure>
                       </div>
                     </li>
-                    <br>
-                    <li>
-                      <div class="select-holiday" ng-click="selectHoliday=1" ng-class="{'active-holiday': selectHoliday == 1, 'no-active' : selectHoliday != 1}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/beach.png" alt="" class="img-responsive m-center">
-                          </div>
-                          <figcaption class="color-blue font-bold">Island &amp; Beach</figcaption>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectHoliday=2" ng-class="{'active-holiday': selectHoliday == 2 , 'no-active' : selectHoliday !=2 }">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/city.png" alt="" class="img-responsive m-center">
-                          </div>
-                          <figcaption class="color-blue font-bold">City</figcaption>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectHoliday=3" ng-class="{'active-holiday': selectHoliday == 3}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/safari.png" alt="" class="img-responsive m-center">
-                          </div>
-                          <figcaption class="color-blue font-bold">Safari</figcaption>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectHoliday=4" ng-class="{'active-holiday': selectHoliday == 4}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/mountain.png" alt="" class="img-responsive m-center">
-                          </div>
-                          <figcaption class="color-blue font-bold">Mountains</figcaption>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectHoliday=5" ng-class="{'active-holiday': selectHoliday == 5}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/cruise.png" alt="" class="img-responsive m-center">
-                          </div>
-                          <figcaption class="color-blue font-bold">Cruise</figcaption>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectHoliday=6" ng-class="{'active-holiday': selectHoliday == 6}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/countryside.png" alt="" class="img-responsive m-center">
-                          </div>
-                          <figcaption class="color-blue font-bold">Countryside</figcaption>
-                        </figure>
-                      </div>
-                    </li>
                   </ul>
                 </div>
                 <!-- holiday -->
                 <!-- usually go -->
                 <div class="setting-usually-go">
                   <h4 class="color-blue setting-tab-heading">You usually go</h4>
-                  <ul ng-init="selectUsually = 11">
+                  <ul>
                     <li ng-repeat="holiday in usuallyGo">
                       <div class="select-holiday {{holiday.class}}" ng-click="usuallyType($index)">
                         <figure>
@@ -353,44 +292,13 @@
                         </figure>
                       </div>
                     </li>
-                    <br>
-                    <li>
-                      <div class="select-holiday" ng-click="selectUsually=11" ng-class="{'active-holiday' : selectUsually == 11}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/map.png" alt="" class="img-responsive m-center">
-                          </div>
-                          <figcaption class="color-blue font-bold">By the map</figcaption>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectUsually=12" ng-class="{'active-holiday' : selectUsually == 12}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/road.png" alt="" class="img-responsive m-center">
-                          </div>
-                          <figcaption class="color-blue font-bold">Where the <span class="block">road takes you</span></figcaption>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectUsually=13" ng-class="{'active-holiday' : selectUsually == 13}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/both.png" alt="" class="img-responsive m-center">
-                          </div>
-                          <figcaption class="color-blue font-bold">A little bit <span class="block">of both</span></figcaption>
-                        </figure>
-                      </div>
-                    </li>
                   </ul>
                 </div>
                 <!-- usually go -->
                 <!-- prefer travel -->
                 <div class="setting-prefer-travel">
                   <h4 class="color-blue setting-tab-heading">Prefer to travel</h4>
-                  <ul ng-init="selectTravel = 21">
+                  <ul>
                     <li ng-repeat="holiday in preferTravel" ng-click="travelType($index)">
                       <div class="select-holiday {{holiday.class}}">
                         <figure>
@@ -401,211 +309,19 @@
                         </figure>
                       </div>
                     </li>
-                    <br>
-                    <li>
-                      <div class="select-holiday" ng-click="selectTravel=21" ng-class="{'active-holiday' : selectTravel == 21}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/family.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Family</figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectTravel=22" ng-class="{'active-holiday' : selectTravel == 22}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/friends.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Friends</figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectTravel=23" ng-class="{'active-holiday' : selectTravel == 23}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/spouse.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Partner/Spouse</figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectTravel=24" ng-class="{'active-holiday' : selectTravel == 24}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/solo.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Solo</figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectTravel=25" ng-class="{'active-holiday' : selectTravel == 25}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/business.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Business</figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectTravel=26" ng-class="{'active-holiday' : selectTravel == 26}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/blogger.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Blogger</figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectTravel=27" ng-class="{'active-holiday' : selectTravel == 27}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/grouptour.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Group Tour</figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectTravel=28" ng-class="{'active-holiday' : selectTravel == 28}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/photographer.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Photographer</figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
                   </ul>
                 </div>
                 <!-- prefer travel end-->
                 <!-- ideal holiday type -->
                 <div class="setting-ideal-holiday">
                   <h4 class="color-blue setting-tab-heading">Your ideal holiday type</h4>
-                  <ul ng-init="selectIdeal = 31">
+                  <ul>
                     <li ng-repeat="holiday in idealSelect" ng-click="idealType($index)">
                       <div class="select-holiday {{holiday.class}}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="{{holiday.img}}" alt="" class="img-responsive m-center">
                             <figcaption class="color-blue font-bold">{{holiday.caption1}} <span class="block">{{holiday.caption2}}</span></figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <br>
-                    <li>
-                      <div class="select-holiday" ng-click="selectIdeal=31" ng-class="{'active-holiday' : selectIdeal == 31}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/luxury.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Luxury</figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectIdeal=32" ng-class="{'active-holiday' : selectIdeal == 32}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/backpacking.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Backpacking</figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectIdeal=33" ng-class="{'active-holiday' : selectIdeal == 33}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/greentravelling.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Green <span class="block">travelling</span></figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectIdeal=34" ng-class="{'active-holiday' : selectIdeal == 34}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/pocketfriendly.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Pocket <span class="block">friendly</span></figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectIdeal=35" ng-class="{'active-holiday' : selectIdeal == 35}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/romance.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Romance</figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectIdeal=36" ng-class="{'active-holiday' : selectIdeal == 36}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/sportandadventure.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Sports &amp; <span class="block">Adventure</span></figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectIdeal=37" ng-class="{'active-holiday' : selectIdeal == 37}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/historyandculture.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">History &amp; <span class="block">Culture</span></figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectIdeal=38" ng-class="{'active-holiday' : selectIdeal == 38}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/spirituality.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Spirituality &amp; <span class="block">Wellness</span></figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectIdeal=39" ng-class="{'active-holiday' : selectIdeal == 39}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/shopping.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Shopping</figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectIdeal=40" ng-class="{'active-holiday' : selectIdeal == 40}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/foodandwine.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Food &amp; Wine</figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="select-holiday" ng-click="selectIdeal=41" ng-class="{'active-holiday' : selectIdeal == 41}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="img/festival.png" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">Festivals</figcaption>
                           </div>
                         </figure>
                       </div>

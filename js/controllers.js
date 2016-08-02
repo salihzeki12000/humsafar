@@ -1574,10 +1574,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }
     }, 1000);
 
-    $scope.selectHoliday = 1;
-    $scope.selectHoliday = 11;
-    $scope.selectHoliday = 21;
-    $scope.selectHoliday = 31;
 
     $scope.showSetting = 1;
     $scope.setting = function(val){
@@ -1626,11 +1622,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.idealSelect[val].class = "active-holiday";
       }
     };
-
     $scope.chooseHoliday = [
       {
         img: "img/beach.png",
-        caption: "Island & Beach"
+        caption: "Island & Beach",
+        class: "active-holiday"
       },
       {
         img: "img/city.png",
@@ -1658,6 +1654,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       {
         img: "img/map.png",
         caption1: "By the map",
+        class: "active-holiday"
       },
       {
         img: "img/road.png",
@@ -1674,7 +1671,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.preferTravel = [
       {
         img: "img/family.png",
-        caption: "Family"
+        caption: "Family",
+        class: "active-holiday"
       },
       {
         img: "img/friends.png",
@@ -1709,7 +1707,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.idealSelect = [
       {
         img: "img/luxury.png",
-        caption1: "luxury"
+        caption1: "luxury",
+        class: "active-holiday"
       },
       {
         img: "img/backpacking.png",
