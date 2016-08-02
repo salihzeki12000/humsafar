@@ -125,13 +125,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       profileMain: "views/content/profile.html"
     }
 
-    $(document).ready(function() {
-      setTimeout(function() {
-        $('html, body').animate({
-          scrollTop: $("#tabs").offset().top
-        }, 1000);
-      }, 100);
-    });
+    // $(document).ready(function() {
+    //   setTimeout(function() {
+    //     $('html, body').animate({
+    //       scrollTop: $("#tabs").offset().top
+    //     }, 1000);
+    //   }, 100);
+    // });
     $scope.buildNow = function() {
       $scope.$broadcast('rebuild:me');
     }
@@ -476,7 +476,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }];
 
   })
-  .controller('MomentsCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+  .controller('MomentsCtrl', function($scope, TemplateService, NavigationService, $timeout,$location, $anchorScroll) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("moments");
@@ -487,13 +487,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       profileMain: "views/content/profile.html"
     }
 
-    $(document).ready(function() {
-      setTimeout(function() {
-        $('html, body').animate({
-          scrollTop: $("#tabs").offset().top
-        }, 1000);
-      }, 100);
-    });
+    // $(document).ready(function() {
+    //   setTimeout(function() {
+    //     $('html, body').animate({
+    //       scrollTop: $("#tabs").offset().top
+    //     }, 1000);
+    //   }, 100);
+    // });
+
+    $scope.goOnTabs = function() {
+      $location.hash('tabs')
+      $anchorScroll;
+    };
+
     $scope.bucketList = [{
       countryName: "United States Of America"
     }, {
@@ -1591,6 +1597,166 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.showSetting = 1;
       }
     };
+
+    $scope.holidayType = function(val){
+      if ($scope.chooseHoliday[val].class == "active-holiday") {
+        $scope.chooseHoliday[val].class = "";
+      }else {
+        $scope.chooseHoliday[val].class = "active-holiday";
+      }
+    };
+    $scope.usuallyType = function(val){
+      if ($scope.usuallyGo[val].class == "active-holiday") {
+        $scope.usuallyGo[val].class = "";
+      }else {
+        $scope.usuallyGo[val].class = "active-holiday";
+      }
+    };
+    $scope.travelType = function(val){
+      if ($scope.preferTravel[val].class == "active-holiday") {
+        $scope.preferTravel[val].class = "";
+      }else {
+        $scope.preferTravel[val].class = "active-holiday";
+      }
+    };
+    $scope.idealType = function(val){
+      if ($scope.idealSelect[val].class == "active-holiday") {
+        $scope.idealSelect[val].class = "";
+      }else {
+        $scope.idealSelect[val].class = "active-holiday";
+      }
+    };
+
+    $scope.chooseHoliday = [
+      {
+        img: "img/beach.png",
+        caption: "Island & Beach"
+      },
+      {
+        img: "img/city.png",
+        caption: "City"
+      },
+      {
+        img: "img/safari.png",
+        caption: "Safari"
+      },
+      {
+        img: "img/mountain.png",
+        caption: "Mountains"
+      },
+      {
+        img: "img/cruise.png",
+        caption: "Cruise"
+      },
+      {
+        img: "img/countryside.png",
+        caption: "Countryside"
+      }
+    ];
+
+    $scope.usuallyGo = [
+      {
+        img: "img/map.png",
+        caption1: "By the map",
+      },
+      {
+        img: "img/road.png",
+        caption1: "Where the",
+        caption2: "road takes you"
+      },
+      {
+        img: "img/both.png",
+        caption1: "A little bit",
+        caption2: "of both"
+      },
+    ];
+
+    $scope.preferTravel = [
+      {
+        img: "img/family.png",
+        caption: "Family"
+      },
+      {
+        img: "img/friends.png",
+        caption: "Friends"
+      },
+      {
+        img: "img/spouse.png",
+        caption: "Partner/Spouse"
+      },
+      {
+        img: "img/solo.png",
+        caption: "Solo"
+      },
+      {
+        img: "img/business.png",
+        caption: "Business"
+      },
+      {
+        img: "img/blogger.png",
+        caption: "Blogger"
+      },
+      {
+        img: "img/grouptour.png",
+        caption: "Group Tour"
+      },
+      {
+        img: "img/photographer.png",
+        caption: "Photographer"
+      },
+    ];
+
+    $scope.idealSelect = [
+      {
+        img: "img/luxury.png",
+        caption1: "luxury"
+      },
+      {
+        img: "img/backpacking.png",
+        caption1: "Backpacking"
+      },
+      {
+        img: "img/greentravelling.png",
+        caption1: "Green",
+        caption2 : "travelling"
+      },
+      {
+        img: "img/pocketfriendly.png",
+        caption1: "Pocket",
+        caption2 : "friendly"
+      },
+      {
+        img: "img/romance.png",
+        caption1: "Romance"
+      },
+      {
+        img: "img/sportandadventure.png",
+        caption1: "Sports &",
+        caption2 : "Adventure"
+      },
+      {
+        img: "img/historyandculture.png",
+        caption1: "History &",
+        caption2 : "Culture"
+      },
+      {
+        img: "img/spirituality.png",
+        caption1: "Spirituality &",
+        caption2 : "Wellness"
+      },
+      {
+        img: "img/shopping.png",
+        caption1: "Shopping"
+      },
+      {
+        img: "img/foodandwine.png",
+        caption1: "Food & Wine"
+      },
+      {
+        img: "img/festival.png",
+        caption1: "Festivals"
+      }
+    ];
 
   })
     .controller('BlogCtrl', function($scope, TemplateService, NavigationService, $timeout) {

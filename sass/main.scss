@@ -2022,9 +2022,9 @@ header {
   }
   .select-holiday {
     background: url("../img/setting/grey-half.png") no-repeat 50% 0;
-    &:hover {
-      background: url("../img/setting/green-half.png") no-repeat 50% 0;
-    }
+    // &:hover {
+    //   background: url("../img/setting/green-half.png") no-repeat 50% 0;
+    // }
     img {
       height: 45px;
     }
@@ -2043,7 +2043,7 @@ header {
     ul { margin: 0 -10px; }
     li {
       width: 90px;
-      margin: 15px 0px;
+      margin: 15px 3px;
       display: inline-block;
       vertical-align: top;
     }

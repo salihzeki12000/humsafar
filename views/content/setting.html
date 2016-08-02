@@ -265,6 +265,17 @@
                 <div class="holiday-section">
                   <h4 class="color-blue setting-tab-heading">Your kind of a holiday</h4>
                   <ul ng-init="selectHoliday = 1">
+                    <li ng-repeat="holiday in chooseHoliday">
+                      <div class="select-holiday {{holiday.class}}" ng-click="holidayType($index)">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="{{holiday.img}}" alt="" class="img-responsive m-center">
+                          </div>
+                          <figcaption class="color-blue font-bold">{{holiday.caption}}</figcaption>
+                        </figure>
+                      </div>
+                    </li>
+                    <br>
                     <li>
                       <div class="select-holiday" ng-click="selectHoliday=1" ng-class="{'active-holiday': selectHoliday == 1, 'no-active' : selectHoliday != 1}">
                         <figure>
@@ -332,6 +343,17 @@
                 <div class="setting-usually-go">
                   <h4 class="color-blue setting-tab-heading">You usually go</h4>
                   <ul ng-init="selectUsually = 11">
+                    <li ng-repeat="holiday in usuallyGo">
+                      <div class="select-holiday {{holiday.class}}" ng-click="usuallyType($index)">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="{{holiday.img}}" alt="" class="img-responsive m-center">
+                          </div>
+                          <figcaption class="color-blue font-bold">{{holiday.caption1}} <span>{{holiday.caption2}}</span></figcaption>
+                        </figure>
+                      </div>
+                    </li>
+                    <br>
                     <li>
                       <div class="select-holiday" ng-click="selectUsually=11" ng-class="{'active-holiday' : selectUsually == 11}">
                         <figure>
@@ -369,6 +391,17 @@
                 <div class="setting-prefer-travel">
                   <h4 class="color-blue setting-tab-heading">Prefer to travel</h4>
                   <ul ng-init="selectTravel = 21">
+                    <li ng-repeat="holiday in preferTravel" ng-click="travelType($index)">
+                      <div class="select-holiday {{holiday.class}}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="{{holiday.img}}" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">{{holiday.caption}}</figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <br>
                     <li>
                       <div class="select-holiday" ng-click="selectTravel=21" ng-class="{'active-holiday' : selectTravel == 21}">
                         <figure>
@@ -456,6 +489,17 @@
                 <div class="setting-ideal-holiday">
                   <h4 class="color-blue setting-tab-heading">Your ideal holiday type</h4>
                   <ul ng-init="selectIdeal = 31">
+                    <li ng-repeat="holiday in idealSelect" ng-click="idealType($index)">
+                      <div class="select-holiday {{holiday.class}}">
+                        <figure>
+                          <div class="holiday-imgholder">
+                            <img src="{{holiday.img}}" alt="" class="img-responsive m-center">
+                            <figcaption class="color-blue font-bold">{{holiday.caption1}} <span class="block">{{holiday.caption2}}</span></figcaption>
+                          </div>
+                        </figure>
+                      </div>
+                    </li>
+                    <br>
                     <li>
                       <div class="select-holiday" ng-click="selectIdeal=31" ng-class="{'active-holiday' : selectIdeal == 31}">
                         <figure>
