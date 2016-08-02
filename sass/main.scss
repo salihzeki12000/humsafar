@@ -828,7 +828,7 @@ header {
   @include transform(translateY(-50%));
 }
 .user-travel-detail {
-  padding: 20px 40px;
+  padding: 25px 0px;
   background: url('../img/travel-detail-bg.png') no-repeat;
   background-size: 100% 100%;
   text-align: center;
@@ -836,7 +836,7 @@ header {
     padding: 0;
     margin: 0;
     li {
-      padding: 0 25px;
+      padding: 0 30px;
       display: inline-block;
       list-style-type: none;
       border-right: 1px solid $brand-dark-blue;
@@ -2319,14 +2319,14 @@ header {
   width: 100%;
   padding: 10px;
   @include position(absolute,null null 0 0);
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.6);
   .post-title {
     margin: 8px 0;
     font-size: 17px;
   }
   .post-journey-type {
     span {
-    padding: 5px 20px;
+    padding: 3px 10px;
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
     margin-left: -10px;
@@ -2368,7 +2368,7 @@ header {
   position: absolute;
   top: 20px;
   span {
-    padding: 4px 15px;
+    padding: 3px 15px;
   }
 }
 .post-left span {

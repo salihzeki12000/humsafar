@@ -179,11 +179,11 @@
                         <div class="setting-tab-gender" ng-init="gender=''">
                           <div class="male text-center inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==1}" ng-click="gender=1">
                             <img src="img/male.png" alt="Gender" class="img-responsive">
-                            <span class="color-blue avenir-black">He</span>
+                            <span class="color-blue avenir-medium">He</span>
                           </div>
                           <div class="female text-center inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==2}" ng-click="gender=2">
                             <img src="img/female.png" alt="Gender" class="img-responsive">
-                            <span class="color-blue avenir-black">She</span>
+                            <span class="color-blue avenir-medium">She</span>
                           </div>
                         </div>
                       </div>
@@ -222,7 +222,7 @@
                             <img src="img/travel-photographer.png" alt="" height="25" class="mr5"> travel Photographer
                           </button>
                           <button class="btn btn-grey-pink">
-                            <img src="img/travel-blogger.png" alt="" height="25" class="mr5"> travel blogger
+                            <img src="img/travel-blogger.png" alt="" height="25" class="mr5"> travel Blogger
                           </button>
                           <button class="btn btn-grey-pink avenir-roman btn-more">
                             None
@@ -266,7 +266,7 @@
                   <h4 class="color-blue setting-tab-heading">Your kind of a holiday</h4>
                   <ul ng-init="selectHoliday = 1">
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=1" ng-class="{'active-holiday': selectHoliday == 1}">
+                      <div class="select-holiday" ng-click="selectHoliday=1" ng-class="{'active-holiday': selectHoliday == 1, 'no-active' : selectHoliday != 1}">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/beach.png" alt="" class="img-responsive m-center">
@@ -276,7 +276,7 @@
                       </div>
                     </li>
                     <li>
-                      <div class="select-holiday" ng-click="selectHoliday=2" ng-class="{'active-holiday': selectHoliday == 2}">
+                      <div class="select-holiday" ng-click="selectHoliday=2" ng-class="{'active-holiday': selectHoliday == 2 , 'no-active' : selectHoliday !=2 }">
                         <figure>
                           <div class="holiday-imgholder">
                             <img src="img/city.png" alt="" class="img-responsive m-center">
