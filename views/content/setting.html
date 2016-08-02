@@ -1,11 +1,11 @@
 <div class="setting-main">
   <div class="container">
     <div class="setting" auto-height>
-      <h3 class="color-blue font-bold text-center m-clear mb20">Settings</h3>
+      <h3 class="color-blue font-bold text-center m-clear mb20 setting-heading">Settings</h3>
       <div class="setting-user-detail">
         <div class="row">
           <div class="col-md-4">
-            <div class="setting-list avenir-roman">
+            <div class="setting-list avenir-medium">
               <div class="setting-profile-list pointer" ng-click="setting(1)" ng-class="{'bg-white active-setting' : showSetting == 1}">
                 <div class="profile-heading clearfix">
                   <i class="fa fa-chevron-right pull-right"></i>
@@ -14,7 +14,7 @@
                   </div>
                   <div class="profile-detail inline-block v-top">
                     <h4 class="color-blue m-clear">Amit Duxctronn</h4>
-                    <span>16 Jan 1988</span>
+                    <span class="color-blue">16 Jan 1988</span>
                   </div>
                 </div>
               </div>
@@ -29,7 +29,7 @@
                       </div>
                       <div class="col-md-10">
                         <div class="tab-list">
-                          <h5 class="color-blue inline-block m-clear">Edit Profile - <span>A little more about me</span></h5>
+                          <h5 class="color-blue inline-block m-clear">Edit Profile - <span class="fz10">A little more about me</span></h5>
                           <i class="fa fa-chevron-right pull-right"></i>
                         </div>
                       </div>
@@ -113,7 +113,8 @@
               <div class="profile-detail-main" ng-if="showSetting == 1">
                 <form action="">
                   <div class="profile-photo-sec upload-profile">
-                    <div class="cropArea relate" ng-show="showImage">
+                    <label for="profile" class="color-blue">Profile Photo</label>
+                    <div class="cropArea relate" ng-show="showImage" id="profile">
                       <div class="cancel" ng-click="showImage"><span class="color-white pointer">Cancel</span></div>
                       <img-crop image="myImage" result-image="myCroppedImage">
                       </img-crop>

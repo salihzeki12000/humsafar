@@ -1096,7 +1096,7 @@ header {
   }
   h4,
   h3 {
-    padding: 15px 0;
+    padding: 12px 0;
   }
   .journey-travelling-type {
     margin-bottom: -20px;
@@ -1953,12 +1953,16 @@ header {
 .setting {
   padding: 20px 40px;
   background-color: #f1f2f2;
+   .setting-heading { font-size: 20px; }
 }
 .profile-detail-main {
   .profile-photo-sec {
     box-shadow: none;
   }
-  label { margin-bottom: 10px; }
+  label {
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
 }
 
 .setting-list {
@@ -1977,6 +1981,10 @@ header {
   .tab-list {
     padding: 10px 10px 15px;
     border-bottom: 1px solid #ebebeb;
+    h5 {
+      font-size: 15px;
+      span { font-size: 13px; }
+    }
   }
 }
 .active-setting .tab-list {
@@ -2074,7 +2082,7 @@ header {
 }
 .setting-tab-heading {
   margin: 0px 0px 15px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
 }
 .setting-nationality {
@@ -2544,7 +2552,11 @@ header {
 // blog detail end
 // activity
 // post profile pic
-.activity-main {
+.heading-activity {
+  margin: 0 0 25px;
+  font-size: 30px;
+}
+.activity-container {
   padding: 30px 0px 0px;
   .col-md-4 {
     padding: 0;
@@ -2735,6 +2747,7 @@ header {
   }
   .user-social-item li:first-child i { color: #fff; }
   .if-blue { display: none; }
+  .journey-travelling-type { margin-bottom: -10px; }
 }
 // visit-post
 .visit-post {
