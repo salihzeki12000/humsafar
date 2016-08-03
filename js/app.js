@@ -93,6 +93,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       templateUrl: "views/template.html",
       controller: 'HolidayCtrl'
     })
+    .state('ongojourney', {
+      url: "/ongojourney",
+      templateUrl: "views/template.html",
+      controller: 'OnGoJourneyCtrl'
+    })
     .state('itinerary', {
       url: "/itinerary",
       templateUrl: "views/template.html",

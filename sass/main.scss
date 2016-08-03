@@ -410,7 +410,7 @@ textarea {
 }
 // header
 header {
-  padding: 10px 0 0;
+  padding: 10px 20px 0;
 }
 .navbar {
   border: none;
@@ -1844,6 +1844,9 @@ header {
   .accordion-detail:last-child .review-local-life {
     border: none;
   }
+  .panel-collapse {
+    @include transition(all 0.20s ease);
+  }
 }
 .heading-single-view {
   padding: 15px;
@@ -2892,4 +2895,11 @@ header {
   p { font-size: 18px; }
 }
 // itinerary end
+
+// on go journey
+.journey-info-strip {
+  background: url('../img/ongo-strip.png') no-repeat;
+  background-size: 100% auto;
+}
+// on go journey end
 @import "fancybox-override";

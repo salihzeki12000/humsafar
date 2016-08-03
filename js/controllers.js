@@ -29,11 +29,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.getClass = "";
     $scope.viewNext = 1;
-    $scope.goNext = function(val){
-      if(val == 1) {
+    $scope.goNext = function(val) {
+      if (val == 1) {
         $scope.viewNext = 1;
         $scope.getClass = "swiper-slide-active"
-      }else if(val == 2) {
+      } else if (val == 2) {
         $scope.viewNext = 2;
         $scope.getClass2 = "swiper-slide-active"
       }
@@ -114,7 +114,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 
   })
-  .controller('MylifeCtrl', function($scope, TemplateService, NavigationService, $timeout,$uibModal) {
+  .controller('OnGoJourneyCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+
+    // console.log("Testing Consoles");
+
+    $scope.template = TemplateService.changecontent("ongojourney");
+    $scope.menutitle = NavigationService.makeactive("OnGoJourney");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+  })
+  .controller('MylifeCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -132,18 +143,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       holidayplanner: "views/content/holidayplanner.html"
     };
 
+    // change url
     $scope.viewTab = 1;
     $scope.getTab = function(view) {
-      if(view == 1) {
+      if (view == 1) {
         $scope.viewTab = 1;
-      }else if(view == 2) {
+      } else if (view == 2) {
         $scope.viewTab = 2;
-      }else if(view == 3) {
+      } else if (view == 3) {
         $scope.viewTab = 3;
-      }else if(view == 4) {
+      } else if (view == 4) {
         $scope.viewTab = 4;
-      }
-      else {
+      } else {
         $scope.viewTab = 1;
       }
     }
@@ -220,9 +231,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       // console.log(getVal);
       $uibModal.open({
         animation: true,
-        templateUrl : "views/modal/local-imgview.html",
+        templateUrl: "views/modal/local-imgview.html",
         scope: $scope,
-        windowTopClass  : "local-imgview-pop"
+        windowTopClass: "local-imgview-pop"
       })
     };
 
@@ -944,7 +955,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
   })
-  .controller('JourneyCtrl', function($scope, TemplateService, NavigationService, $timeout,$uibModal) {
+  .controller('JourneyCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("journey");
@@ -1015,14 +1026,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       // console.log(getVal);
       $uibModal.open({
         animation: true,
-        templateUrl : "views/modal/local-imgview.html",
+        templateUrl: "views/modal/local-imgview.html",
         scope: $scope,
-        windowTopClass  : "local-imgview-pop"
+        windowTopClass: "local-imgview-pop"
       })
     };
 
   })
-  .controller('MomentsCtrl', function($scope, TemplateService, NavigationService, $timeout,$location, $anchorScroll) {
+  .controller('MomentsCtrl', function($scope, TemplateService, NavigationService, $timeout, $location, $anchorScroll) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("moments");
@@ -1455,330 +1466,282 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
     $scope.showSetting = 1;
-    $scope.setting = function(val){
-      if(val == 1) {
+    $scope.setting = function(val) {
+      if (val == 1) {
         $scope.showSetting = 1;
-      }else if(val == 2) {
+      } else if (val == 2) {
         $scope.showSetting = 2;
-      }else if(val == 3) {
+      } else if (val == 3) {
         $scope.showSetting = 3;
-      }else if(val == 4) {
+      } else if (val == 4) {
         $scope.showSetting = 4;
-      }else if(val == 5) {
+      } else if (val == 5) {
         $scope.showSetting = 5;
-      }else if(val == 6) {
+      } else if (val == 6) {
         $scope.showSetting = 6;
-      }else {
+      } else {
         $scope.showSetting = 1;
       }
     };
+    // datepicker
 
-    $scope.holidayType = function(val){
+
+    // datepicker end
+
+    $scope.holidayType = function(val) {
       if ($scope.chooseHoliday[val].class == "active-holiday") {
         $scope.chooseHoliday[val].class = "";
-      }else {
+      } else {
         $scope.chooseHoliday[val].class = "active-holiday";
       }
     };
-    $scope.usuallyType = function(val){
+    $scope.usuallyType = function(val) {
       if ($scope.usuallyGo[val].class == "active-holiday") {
         $scope.usuallyGo[val].class = "";
-      }else {
+      } else {
         $scope.usuallyGo[val].class = "active-holiday";
       }
     };
-    $scope.travelType = function(val){
+    $scope.travelType = function(val) {
       if ($scope.preferTravel[val].class == "active-holiday") {
         $scope.preferTravel[val].class = "";
-      }else {
+      } else {
         $scope.preferTravel[val].class = "active-holiday";
       }
     };
-    $scope.idealType = function(val){
+    $scope.idealType = function(val) {
       if ($scope.idealSelect[val].class == "active-holiday") {
         $scope.idealSelect[val].class = "";
-      }else {
+      } else {
         $scope.idealSelect[val].class = "active-holiday";
       }
     };
-    $scope.chooseHoliday = [
-      {
-        img: "img/beach.png",
-        caption: "Island & Beach",
-        class: "active-holiday"
-      },
-      {
-        img: "img/city.png",
-        caption: "City"
-      },
-      {
-        img: "img/safari.png",
-        caption: "Safari"
-      },
-      {
-        img: "img/mountain.png",
-        caption: "Mountains"
-      },
-      {
-        img: "img/cruise.png",
-        caption: "Cruise"
-      },
-      {
-        img: "img/countryside.png",
-        caption: "Countryside"
-      }
-    ];
+    $scope.chooseHoliday = [{
+      img: "img/beach.png",
+      caption: "Island & Beach",
+      class: "active-holiday"
+    }, {
+      img: "img/city.png",
+      caption: "City"
+    }, {
+      img: "img/safari.png",
+      caption: "Safari"
+    }, {
+      img: "img/mountain.png",
+      caption: "Mountains"
+    }, {
+      img: "img/cruise.png",
+      caption: "Cruise"
+    }, {
+      img: "img/countryside.png",
+      caption: "Countryside"
+    }];
 
-    $scope.usuallyGo = [
-      {
-        img: "img/map.png",
-        caption1: "By the map",
-        class: "active-holiday"
-      },
-      {
-        img: "img/road.png",
-        caption1: "Where the",
-        caption2: "road takes you"
-      },
-      {
-        img: "img/both.png",
-        caption1: "A little bit",
-        caption2: "of both"
-      },
-    ];
+    $scope.usuallyGo = [{
+      img: "img/map.png",
+      caption1: "By the map",
+      class: "active-holiday"
+    }, {
+      img: "img/road.png",
+      caption1: "Where the",
+      caption2: "road takes you"
+    }, {
+      img: "img/both.png",
+      caption1: "A little bit",
+      caption2: "of both"
+    }, ];
 
-    $scope.preferTravel = [
-      {
-        img: "img/family.png",
-        caption: "Family",
-        class: "active-holiday"
-      },
-      {
-        img: "img/friends.png",
-        caption: "Friends"
-      },
-      {
-        img: "img/spouse.png",
-        caption: "Partner/Spouse"
-      },
-      {
-        img: "img/solo.png",
-        caption: "Solo"
-      },
-      {
-        img: "img/business.png",
-        caption: "Business"
-      },
-      {
-        img: "img/blogger.png",
-        caption: "Blogger"
-      },
-      {
-        img: "img/grouptour.png",
-        caption: "Group Tour"
-      },
-      {
-        img: "img/photographer.png",
-        caption: "Photographer"
-      },
-    ];
+    $scope.preferTravel = [{
+      img: "img/family.png",
+      caption: "Family",
+      class: "active-holiday"
+    }, {
+      img: "img/friends.png",
+      caption: "Friends"
+    }, {
+      img: "img/spouse.png",
+      caption: "Partner/Spouse"
+    }, {
+      img: "img/solo.png",
+      caption: "Solo"
+    }, {
+      img: "img/business.png",
+      caption: "Business"
+    }, {
+      img: "img/blogger.png",
+      caption: "Blogger"
+    }, {
+      img: "img/grouptour.png",
+      caption: "Group Tour"
+    }, {
+      img: "img/photographer.png",
+      caption: "Photographer"
+    }, ];
 
-    $scope.idealSelect = [
-      {
-        img: "img/luxury.png",
-        caption1: "luxury",
-        class: "active-holiday"
-      },
-      {
-        img: "img/backpacking.png",
-        caption1: "Backpacking"
-      },
-      {
-        img: "img/greentravelling.png",
-        caption1: "Green",
-        caption2 : "travelling"
-      },
-      {
-        img: "img/pocketfriendly.png",
-        caption1: "Pocket",
-        caption2 : "friendly"
-      },
-      {
-        img: "img/romance.png",
-        caption1: "Romance"
-      },
-      {
-        img: "img/sportandadventure.png",
-        caption1: "Sports &",
-        caption2 : "Adventure"
-      },
-      {
-        img: "img/historyandculture.png",
-        caption1: "History &",
-        caption2 : "Culture"
-      },
-      {
-        img: "img/spirituality.png",
-        caption1: "Spirituality &",
-        caption2 : "Wellness"
-      },
-      {
-        img: "img/shopping.png",
-        caption1: "Shopping"
-      },
-      {
-        img: "img/foodandwine.png",
-        caption1: "Food & Wine"
-      },
-      {
-        img: "img/festival.png",
-        caption1: "Festivals"
-      }
-    ];
+    $scope.idealSelect = [{
+      img: "img/luxury.png",
+      caption1: "luxury",
+      class: "active-holiday"
+    }, {
+      img: "img/backpacking.png",
+      caption1: "Backpacking"
+    }, {
+      img: "img/greentravelling.png",
+      caption1: "Green",
+      caption2: "travelling"
+    }, {
+      img: "img/pocketfriendly.png",
+      caption1: "Pocket",
+      caption2: "friendly"
+    }, {
+      img: "img/romance.png",
+      caption1: "Romance"
+    }, {
+      img: "img/sportandadventure.png",
+      caption1: "Sports &",
+      caption2: "Adventure"
+    }, {
+      img: "img/historyandculture.png",
+      caption1: "History &",
+      caption2: "Culture"
+    }, {
+      img: "img/spirituality.png",
+      caption1: "Spirituality &",
+      caption2: "Wellness"
+    }, {
+      img: "img/shopping.png",
+      caption1: "Shopping"
+    }, {
+      img: "img/foodandwine.png",
+      caption1: "Food & Wine"
+    }, {
+      img: "img/festival.png",
+      caption1: "Festivals"
+    }];
 
   })
-    .controller('BlogCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+  .controller('BlogCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("blog");
     $scope.menutitle = NavigationService.makeactive("Blog");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.blogPost = [
-      {
-        img: "img/blog/blog-post.jpg",
-        postType: "Luxury",
-        title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
-        timestampDate: "14 Jan,2014",
-        timestampHour: "1:20 pm",
-        likes: "15660"
-      },
-      {
-        img: "img/blog/blog-post2.jpg",
-        postType: "Luxury",
-        title: "Best cycling tours in the world",
-        timestampDate: "14 Jan,2014",
-        timestampHour: "1:20 pm",
-        likes: "15660"
-      },
-      {
-        img: "img/blog/blog-post3.jpg",
-        postType: "Road Trip",
-        title: "Ten Gorgeous European Summer Island Holidays",
-        timestampDate: "14 Jan,2014",
-        timestampHour: "1:20 pm",
-        likes: "15660"
-      },
-      {
-        img: "img/blog/blog-post4.jpg",
-        postType: "Adventure",
-        title: "Museums And Cathedrals To Cover In Eastern Europe",
-        timestampDate: "14 Jan,2014",
-        timestampHour: "1:20 pm",
-        likes: "15660"
-      },
-      {
-        img: "img/blog/blog-post.jpg",
-        postType: "Luxury",
-        title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
-        timestampDate: "14 Jan,2014",
-        timestampHour: "1:20 pm",
-        likes: "15660"
-      },
-      {
-        img: "img/blog/blog-post2.jpg",
-        postType: "Luxury",
-        title: "Best cycling tours in the world",
-        timestampDate: "14 Jan,2014",
-        timestampHour: "1:20 pm",
-        likes: "15660"
-      },
-      {
-        img: "img/blog/blog-post3.jpg",
-        postType: "Road Trip",
-        title: "Ten Gorgeous European Summer Island Holidays",
-        timestampDate: "14 Jan,2014",
-        timestampHour: "1:20 pm",
-        likes: "15660"
-      },
-      {
-        img: "img/blog/blog-post4.jpg",
-        postType: "Adventure",
-        title: "Museums And Cathedrals To Cover In Eastern Europe",
-        timestampDate: "14 Jan,2014",
-        timestampHour: "1:20 pm",
-        likes: "15660"
-      },
-      {
-        img: "img/blog/blog-post.jpg",
-        postType: "Luxury",
-        title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
-        timestampDate: "14 Jan,2014",
-        timestampHour: "1:20 pm",
-        likes: "15660"
-      },
-      {
-        img: "img/blog/blog-post2.jpg",
-        postType: "Luxury",
-        title: "Best cycling tours in the world",
-        timestampDate: "14 Jan,2014",
-        timestampHour: "1:20 pm",
-        likes: "15660"
-      },
-      {
-        img: "img/blog/blog-post3.jpg",
-        postType: "Road Trip",
-        title: "Ten Gorgeous European Summer Island Holidays",
-        timestampDate: "14 Jan,2014",
-        timestampHour: "1:20 pm",
-        likes: "15660"
-      },
-      {
-        img: "img/blog/blog-post4.jpg",
-        postType: "Adventure",
-        title: "Museums And Cathedrals To Cover In Eastern Europe",
-        timestampDate: "14 Jan,2014",
-        timestampHour: "1:20 pm",
-        likes: "15660"
-      },
-      {
-        img: "img/blog/blog-post4.jpg",
-        postType: "Romance",
-        title: "Museums And Cathedrals To Cover In Eastern Europe",
-        timestampDate: "14 Jan,2014",
-        timestampHour: "1:20 pm",
-        likes: "15660"
-      }
-    ];
+    $scope.blogPost = [{
+      img: "img/blog/blog-post.jpg",
+      postType: "Luxury",
+      title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }, {
+      img: "img/blog/blog-post2.jpg",
+      postType: "Luxury",
+      title: "Best cycling tours in the world",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }, {
+      img: "img/blog/blog-post3.jpg",
+      postType: "Road Trip",
+      title: "Ten Gorgeous European Summer Island Holidays",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }, {
+      img: "img/blog/blog-post4.jpg",
+      postType: "Adventure",
+      title: "Museums And Cathedrals To Cover In Eastern Europe",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }, {
+      img: "img/blog/blog-post.jpg",
+      postType: "Luxury",
+      title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }, {
+      img: "img/blog/blog-post2.jpg",
+      postType: "Luxury",
+      title: "Best cycling tours in the world",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }, {
+      img: "img/blog/blog-post3.jpg",
+      postType: "Road Trip",
+      title: "Ten Gorgeous European Summer Island Holidays",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }, {
+      img: "img/blog/blog-post4.jpg",
+      postType: "Adventure",
+      title: "Museums And Cathedrals To Cover In Eastern Europe",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }, {
+      img: "img/blog/blog-post.jpg",
+      postType: "Luxury",
+      title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }, {
+      img: "img/blog/blog-post2.jpg",
+      postType: "Luxury",
+      title: "Best cycling tours in the world",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }, {
+      img: "img/blog/blog-post3.jpg",
+      postType: "Road Trip",
+      title: "Ten Gorgeous European Summer Island Holidays",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }, {
+      img: "img/blog/blog-post4.jpg",
+      postType: "Adventure",
+      title: "Museums And Cathedrals To Cover In Eastern Europe",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }, {
+      img: "img/blog/blog-post4.jpg",
+      postType: "Romance",
+      title: "Museums And Cathedrals To Cover In Eastern Europe",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }];
 
-    $scope.popularBlog = [
-      {
-        img: "img/blog/popular-blog.jpg",
-        descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO",
-        postType: "Luxury",
-        postPink: true
-      },
-      {
-        img: "img/blog/popular-blog1.jpg",
-        descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO",
-        postType: "Luxury",
-        postPink: false
-      },
-      {
-        img: "img/blog/popular-blog2.jpg",
-        descp: "CHIC AND CHEERFUL: 10 OFFICEHOLIDAY PARTY OUTFIT IDEAS",
-        postType: "Luxury",
-        postPink: true
-      },
-      {
-        img: "img/blog/popular-blog1.jpg",
-        descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO"
-      },
-      {
-        img: "img/blog/popular-blog2.jpg",
-        descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO"
-      },
-    ];
+    $scope.popularBlog = [{
+      img: "img/blog/popular-blog.jpg",
+      descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO",
+      postType: "Luxury",
+      postPink: true
+    }, {
+      img: "img/blog/popular-blog1.jpg",
+      descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO",
+      postType: "Luxury",
+      postPink: false
+    }, {
+      img: "img/blog/popular-blog2.jpg",
+      descp: "CHIC AND CHEERFUL: 10 OFFICEHOLIDAY PARTY OUTFIT IDEAS",
+      postType: "Luxury",
+      postPink: true
+    }, {
+      img: "img/blog/popular-blog1.jpg",
+      descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO"
+    }, {
+      img: "img/blog/popular-blog2.jpg",
+      descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO"
+    }, ];
   })
   .controller('BlogDetailCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -1786,216 +1749,195 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("BlogDetail");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    $scope.popularBlog = [
-      {
-        img: "img/blog/popular-blog.jpg",
-        descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO",
-        postType: "Luxury",
-        postPink: true
-      },
-      {
-        img: "img/blog/popular-blog1.jpg",
-        descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO",
-        postType: "Luxury",
-        postPink: false
-      },
-      {
-        img: "img/blog/popular-blog2.jpg",
-        descp: "CHIC AND CHEERFUL: 10 OFFICEHOLIDAY PARTY OUTFIT IDEAS",
-        postType: "Luxury",
-        postPink: true
-      },
-      {
-        img: "img/blog/popular-blog1.jpg",
-        descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO"
-      },
-      {
-        img: "img/blog/popular-blog2.jpg",
-        descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO"
-      },
-    ];
+    $scope.popularBlog = [{
+      img: "img/blog/popular-blog.jpg",
+      descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO",
+      postType: "Luxury",
+      postPink: true
+    }, {
+      img: "img/blog/popular-blog1.jpg",
+      descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO",
+      postType: "Luxury",
+      postPink: false
+    }, {
+      img: "img/blog/popular-blog2.jpg",
+      descp: "CHIC AND CHEERFUL: 10 OFFICEHOLIDAY PARTY OUTFIT IDEAS",
+      postType: "Luxury",
+      postPink: true
+    }, {
+      img: "img/blog/popular-blog1.jpg",
+      descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO"
+    }, {
+      img: "img/blog/popular-blog2.jpg",
+      descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO"
+    }, ];
 
-    $scope.blogPostDetail = [
-      {
-        heading : "Best Holiday Destinations For Girl - Gangs",
-        timestampDate: "14 Jan,2014",
-        timestampHour: "1:20 pm",
-        journeyType: "Luxury",
-        journeyList:[
-          {
-            journeyImg : "img/blog/journey-post.jpg",
-            cityName: "Dublin",
-            countryName: "Ireland",
-            journeyDescp: "Going on a holiday with family is always fun. But sometimes you need to get way from all that family drama and have a girls-only weekend. Going on a shopping spree, enjoying spas together, drinking & partying all night or just lazing on the beach – nothing can beat that when you are with your girl-gang. So ladies, grab your lipstick and heels and get ready for some seriously sassy getaway with our list of 10 best holiday destinations for girl-gangs:"
-          },
-          {
-            journeyImg : "img/blog/journey-post2.jpg",
-            cityName: "Dublin",
-            countryName: "Ireland",
-            journeyDescp: "Going on a holiday with family is always fun. But sometimes you need to get way from all that family drama and have a girls-only weekend. Going on a shopping spree, enjoying spas together, drinking & partying all night or just lazing on the beach – nothing can beat that when you are with your girl-gang. So ladies, grab your lipstick and heels and get ready for some seriously sassy getaway with our list of 10 best holiday destinations for girl-gangs:"
-          },
-          {
-            journeyImg : "img/blog/journey-post3.jpg",
-            cityName: "Dublin",
-            countryName: "Ireland",
-            journeyDescp: "Going on a holiday with family is always fun. But sometimes you need to get way from all that family drama and have a girls-only weekend. Going on a shopping spree, enjoying spas together, drinking & partying all night or just lazing on the beach – nothing can beat that when you are with your girl-gang. So ladies, grab your lipstick and heels and get ready for some seriously sassy getaway with our list of 10 best holiday destinations for girl-gangs:"
-          },
-          {
-            journeyImg : "img/blog/journey-post4.jpg",
-            cityName: "Dublin",
-            countryName: "Ireland",
-            journeyDescp: "Going on a holiday with family is always fun. But sometimes you need to get way from all that family drama and have a girls-only weekend. Going on a shopping spree, enjoying spas together, drinking & partying all night or just lazing on the beach – nothing can beat that when you are with your girl-gang. So ladies, grab your lipstick and heels and get ready for some seriously sassy getaway with our list of 10 best holiday destinations for girl-gangs:"
-          },
-        ]
-      }
-    ];
+    $scope.blogPostDetail = [{
+      heading: "Best Holiday Destinations For Girl - Gangs",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      journeyType: "Luxury",
+      journeyList: [{
+        journeyImg: "img/blog/journey-post.jpg",
+        cityName: "Dublin",
+        countryName: "Ireland",
+        journeyDescp: "Going on a holiday with family is always fun. But sometimes you need to get way from all that family drama and have a girls-only weekend. Going on a shopping spree, enjoying spas together, drinking & partying all night or just lazing on the beach – nothing can beat that when you are with your girl-gang. So ladies, grab your lipstick and heels and get ready for some seriously sassy getaway with our list of 10 best holiday destinations for girl-gangs:"
+      }, {
+        journeyImg: "img/blog/journey-post2.jpg",
+        cityName: "Dublin",
+        countryName: "Ireland",
+        journeyDescp: "Going on a holiday with family is always fun. But sometimes you need to get way from all that family drama and have a girls-only weekend. Going on a shopping spree, enjoying spas together, drinking & partying all night or just lazing on the beach – nothing can beat that when you are with your girl-gang. So ladies, grab your lipstick and heels and get ready for some seriously sassy getaway with our list of 10 best holiday destinations for girl-gangs:"
+      }, {
+        journeyImg: "img/blog/journey-post3.jpg",
+        cityName: "Dublin",
+        countryName: "Ireland",
+        journeyDescp: "Going on a holiday with family is always fun. But sometimes you need to get way from all that family drama and have a girls-only weekend. Going on a shopping spree, enjoying spas together, drinking & partying all night or just lazing on the beach – nothing can beat that when you are with your girl-gang. So ladies, grab your lipstick and heels and get ready for some seriously sassy getaway with our list of 10 best holiday destinations for girl-gangs:"
+      }, {
+        journeyImg: "img/blog/journey-post4.jpg",
+        cityName: "Dublin",
+        countryName: "Ireland",
+        journeyDescp: "Going on a holiday with family is always fun. But sometimes you need to get way from all that family drama and have a girls-only weekend. Going on a shopping spree, enjoying spas together, drinking & partying all night or just lazing on the beach – nothing can beat that when you are with your girl-gang. So ladies, grab your lipstick and heels and get ready for some seriously sassy getaway with our list of 10 best holiday destinations for girl-gangs:"
+      }, ]
+    }];
 
-        $scope.blogPost = [
-          {
-            img: "img/blog/blog-post.jpg",
-            postType: "Luxury",
-            title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
-            timestampDate: "14 Jan,2014",
-            timestampHour: "1:20 pm",
-            likes: "15660"
-          },
-          {
-            img: "img/blog/blog-post2.jpg",
-            postType: "Luxury",
-            title: "Best cycling tours in the world",
-            timestampDate: "14 Jan,2014",
-            timestampHour: "1:20 pm",
-            likes: "15660"
-          },
-          {
-            img: "img/blog/blog-post3.jpg",
-            postType: "Road Trip",
-            title: "Ten Gorgeous European Summer Island Holidays",
-            timestampDate: "14 Jan,2014",
-            timestampHour: "1:20 pm",
-            likes: "15660"
-          },
-          {
-            img: "img/blog/blog-post4.jpg",
-            postType: "Adventure",
-            title: "Museums And Cathedrals To Cover In Eastern Europe",
-            timestampDate: "14 Jan,2014",
-            timestampHour: "1:20 pm",
-            likes: "15660"
-          }
-        ];
-        $scope.travelLife = [{
-          heading: "Editor",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "01:20 pm",
-          imgTravelled: "img/london.jpg",
-          Travelledtag: "London Eye",
-          photoCount: "28",
-          videoCount: "5",
-          locationVisited: "9",
-          itineraryType1: "img/sunset.png",
-          itineraryType2: "img/bag-journey.png",
-          itineraryType3: "img/luxury-journey.png",
-          travelledDay: "75",
-          onwayTag: "love in paris",
-          imgOnway: "img/paris.jpg",
-          cost: "$10,000",
-          spendingDay: "75",
-          likes: "15660",
-          reviews: "354",
-          pointReview: "4.5",
-          countryVisit: [{
-            imgFlag: "img/india-visit.png"
-          }, {
-            imgFlag: "img/england-visit.png"
-          }, {
-            imgFlag: "img/canada-visit.png",
-          }, ]
-        },  {
-          heading: "Editor",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "01:20 pm",
-          imgTravelled: "img/london.jpg",
-          Travelledtag: "London Eye",
-          photoCount: "28",
-          videoCount: "5",
-          locationVisited: "9",
-          itineraryType1: "img/sunset.png",
-          itineraryType2: "img/bag-journey.png",
-          itineraryType3: "img/luxury-journey.png",
-          travelledDay: "75",
-          onwayTag: "love in paris",
-          imgOnway: "img/paris.jpg",
-          cost: "$10,000",
-          spendingDay: "75",
-          likes: "15660",
-          reviews: "354",
-          pointReview: "4.5",
-          countryVisit: [{
-            imgFlag: "img/india-visit.png"
-          }, {
-            imgFlag: "img/england-visit.png"
-          }, {
-            imgFlag: "img/canada-visit.png",
-          }, ]
-        },
-         {
-          heading: "Editor",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "01:20 pm",
-          imgTravelled: "img/london.jpg",
-          Travelledtag: "London Eye",
-          photoCount: "28",
-          videoCount: "5",
-          locationVisited: "9",
-          itineraryType1: "img/sunset.png",
-          itineraryType2: "img/bag-journey.png",
-          itineraryType3: "img/luxury-journey.png",
-          travelledDay: "75",
-          onwayTag: "love in paris",
-          imgOnway: "img/paris.jpg",
-          cost: "$10,000",
-          spendingDay: "75",
-          likes: "15660",
-          reviews: "354",
-          pointReview: "4.5",
-          countryVisit: [{
-            imgFlag: "img/india-visit.png"
-          }, {
-            imgFlag: "img/england-visit.png"
-          }, {
-            imgFlag: "img/canada-visit.png",
-          }, ]
-        },
-         {
-          heading: "Editor",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "01:20 pm",
-          imgTravelled: "img/london.jpg",
-          Travelledtag: "London Eye",
-          photoCount: "28",
-          videoCount: "5",
-          locationVisited: "9",
-          itineraryType1: "img/sunset.png",
-          itineraryType2: "img/bag-journey.png",
-          itineraryType3: "img/luxury-journey.png",
-          travelledDay: "75",
-          onwayTag: "love in paris",
-          imgOnway: "img/paris.jpg",
-          cost: "$10,000",
-          spendingDay: "75",
-          likes: "15660",
-          reviews: "354",
-          pointReview: "4.5",
-          countryVisit: [{
-            imgFlag: "img/india-visit.png"
-          }, {
-            imgFlag: "img/england-visit.png"
-          }, {
-            imgFlag: "img/canada-visit.png",
-          }, ]
-        }
-      ];
+    $scope.blogPost = [{
+      img: "img/blog/blog-post.jpg",
+      postType: "Luxury",
+      title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }, {
+      img: "img/blog/blog-post2.jpg",
+      postType: "Luxury",
+      title: "Best cycling tours in the world",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }, {
+      img: "img/blog/blog-post3.jpg",
+      postType: "Road Trip",
+      title: "Ten Gorgeous European Summer Island Holidays",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }, {
+      img: "img/blog/blog-post4.jpg",
+      postType: "Adventure",
+      title: "Museums And Cathedrals To Cover In Eastern Europe",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "1:20 pm",
+      likes: "15660"
+    }];
+    $scope.travelLife = [{
+      heading: "Editor",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    }, {
+      heading: "Editor",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    }, {
+      heading: "Editor",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    }, {
+      heading: "Editor",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    }];
   })
   .controller('ActivityCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -2004,654 +1946,594 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.activityPost = [
-      {
-        class: "travel-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        countryVisit: [{
-          imgFlag: "img/india-visit.png"
+    $scope.activityPost = [{
+      class: "travel-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ],
+      editor: false,
+      userPic: true,
+      follow: true,
+      following: false,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: true,
+      onJourney: false,
+      getpopularPost: false,
+      activitySec: true,
+      visitPost: false
+    }, {
+      class: "travel-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey photo slider",
+      relatedPhoto: [
+        'img/blog/blog-post.jpg',
+        'img/blog/blog-post2.jpg',
+        'img/blog/blog-post3.jpg',
+        'img/blog/blog-post4.jpg',
+        'img/blog/blog-post.jpg',
+        'img/blog/blog-post2.jpg',
+        'img/blog/blog-post3.jpg',
+        'img/blog/blog-post4.jpg',
+      ],
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: true,
+      video: false,
+      photo: true,
+      photoSlider: true,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      activitySec: true,
+      visitPost: false
+    }, {
+      class: "travel-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: false,
+      postIcon: true,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "travel-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: false,
+      postIcon: true,
+      video: false,
+      photo: true,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "travel-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: false,
+      postIcon: false,
+      video: true,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "travel-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: false,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: true,
+      getpopularPost: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "editor",
+      profilePic: "img/profile-main.png",
+      userName: "Editor",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      editor: true,
+      userPic: false,
+      follow: false,
+      following: false,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: true,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "editor",
+      profilePic: "img/profile-main.png",
+      userName: "Editor",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      editor: true,
+      userPic: false,
+      follow: false,
+      following: false,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: true,
+      getpopularPost: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "local-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ],
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: false,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: true,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "local-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey local photoslider",
+      relatedPhoto: [
+        'img/blog/blog-post.jpg',
+        'img/blog/blog-post2.jpg',
+        'img/blog/blog-post3.jpg',
+        'img/blog/blog-post4.jpg',
+        'img/blog/blog-post.jpg',
+        'img/blog/blog-post2.jpg',
+        'img/blog/blog-post3.jpg',
+        'img/blog/blog-post4.jpg',
+      ],
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: true,
+      video: false,
+      photo: true,
+      photoSlider: true,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "local-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: false,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "local-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: false,
+      postIcon: false,
+      video: false,
+      photo: true,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "local-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: false,
+      postIcon: false,
+      video: true,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "local-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: false,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: true,
+      getpopularPost: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "popular-activity",
+      visitPost: false,
+      getpopularPost: true,
+      activitySec: false,
+      postPopular: [{
+        heading: "Popular Travelers",
+        listPopular: [{
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
         }, {
-          imgFlag: "img/england-visit.png"
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
         }, {
-          imgFlag: "img/canada-visit.png",
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }],
+      }],
+    }, {
+      class: "popular-activity",
+      visitPost: false,
+      getpopularPost: true,
+      activitySec: false,
+      postPopular: [{
+        heading: "Popular Agents",
+        listPopular: [{
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }],
+      }],
+    }, {
+      class: "visiting-post local-visit",
+      visitPost: true,
+      getpopularPost: false,
+      activitySec: false,
+      getvisitPost: [{
+        imgVisit: "img/india-gate.jpg",
+        locationLocal: "Mumbai",
+        tag: "Must Do's in Mumbai,India",
+        travelVisit: false,
+        localVisit: true,
+        cityTag: true,
+        rating: false,
+        flag: false,
+        visitSlider: true,
+        visitImg: false,
+        localLifeMain: true,
+        visitedPost: [{
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
         }, ],
-        editor:false,
-        userPic: true,
-        follow: true,
-        following: false,
-        postIcon: false,
-        video : false,
-        photo: false,
-        photoSlider: false,
-        travelledJourney : true,
-        onJourney: false,
-        getpopularPost: false,
-        activitySec: true,
-        visitPost: false
-      },
-      {
-        class: "travel-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status : "Has started his London Journey photo slider",
-        relatedPhoto: [
-          'img/blog/blog-post.jpg',
-          'img/blog/blog-post2.jpg',
-          'img/blog/blog-post3.jpg',
-          'img/blog/blog-post4.jpg',
-          'img/blog/blog-post.jpg',
-          'img/blog/blog-post2.jpg',
-          'img/blog/blog-post3.jpg',
-          'img/blog/blog-post4.jpg',
-        ],
-        editor : false,
-        userPic: true,
-        follow : false,
-        following: true,
-        postIcon: true,
-        video : false,
-        photo : true,
-        photoSlider: true,
-        travelledJourney : false,
-        onJourney: false,
-        getpopularPost: false,
-        activitySec: true,
-        visitPost: false
-      },
-      {
-        class: "travel-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        editor:false,
-        userPic: true,
-        follow : false,
-        following: false,
-        postIcon: true,
-        video : false,
-        photo : false,
-        photoSlider: false,
-        travelledJourney : false,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      },
-      {
-        class: "travel-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        editor:false,
-        userPic: true,
-        follow : false,
-        following: false,
-        postIcon: true,
-        video : false,
-        photo : true,
-        photoSlider: false,
-        travelledJourney : false,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      },
-      {
-        class: "travel-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        editor:false,
-        userPic: true,
-        follow : false,
-        following: false,
-        postIcon: false,
-        video : true,
-        photo : false,
-        photoSlider: false,
-        travelledJourney : false,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      },
-      {
-        class: "travel-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        editor:false,
-        userPic: true,
-        follow : false,
-        following: false,
-        postIcon: false,
-        video : false,
-        photo : false,
-        photoSlider: false,
-        travelledJourney : false,
-        onJourney: true,
-        getpopularPost: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      },
-      {
-        class: "editor",
-        profilePic: "img/profile-main.png",
-        userName: "Editor",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        editor:true,
-        userPic: false,
-        follow : false,
-        following: false,
-        postIcon: false,
-        video : false,
-        photo : false,
-        photoSlider: false,
-        travelledJourney : true,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      },
-      {
-        class: "editor",
-        profilePic: "img/profile-main.png",
-        userName: "Editor",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        editor:true,
-        userPic: false,
-        follow : false,
-        following: false,
-        postIcon: false,
-        video : false,
-        photo : false,
-        photoSlider: false,
-        travelledJourney : false,
-        onJourney: true,
-        getpopularPost: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      },
-      {
-        class: "local-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        countryVisit: [{
-          imgFlag: "img/india-visit.png"
+      }, ],
+    }, {
+      class: "visiting-post local-visit",
+      visitPost: true,
+      getpopularPost: false,
+      activitySec: false,
+      getvisitPost: [{
+        imgVisit: "img/india-gate.jpg",
+        locationLocal: "India",
+        travelVisit: false,
+        localVisit: true,
+        cityTag: false,
+        rating: true,
+        peopleBeen: 33,
+        flag: true,
+        visitSlider: true,
+        visitImg: false,
+        localLifeMain: true,
+        visitedPost: [{
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
         }, {
-          imgFlag: "img/england-visit.png"
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
         }, {
-          imgFlag: "img/canada-visit.png",
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
         }, ],
-        editor:false,
-        userPic: true,
-        follow : false,
-        following: false,
-        postIcon: false,
-        video : false,
-        photo : false,
-        photoSlider: false,
-        travelledJourney : true,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      },
-      {
-        class: "local-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status : "Has started his London Journey local photoslider",
-        relatedPhoto: [
-          'img/blog/blog-post.jpg',
-          'img/blog/blog-post2.jpg',
-          'img/blog/blog-post3.jpg',
-          'img/blog/blog-post4.jpg',
-          'img/blog/blog-post.jpg',
-          'img/blog/blog-post2.jpg',
-          'img/blog/blog-post3.jpg',
-          'img/blog/blog-post4.jpg',
-        ],
-        editor:false,
-        userPic: true,
-        follow : false,
-        following: true,
-        postIcon: true,
-        video : false,
-        photo : true,
-        photoSlider: true,
-        travelledJourney : false,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      },
-      {
-        class:"local-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        editor:false,
-        userPic: true,
-        follow : false,
-        following: false,
-        postIcon: false,
-        video : false,
-        photo : false,
-        photoSlider: false,
-        travelledJourney : false,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      },
-      {
-        class: "local-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        editor:false,
-        userPic: true,
-        follow : false,
-        following: false,
-        postIcon: false,
-        video : false,
-        photo : true,
-        photoSlider: false,
-        travelledJourney : false,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      },
-      {
-        class: "local-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        editor:false,
-        userPic: true,
-        follow : false,
-        following: false,
-        postIcon: false,
-        video : true,
-        photo : false,
-        photoSlider: false,
-        travelledJourney : false,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      },
-      {
-        class: "local-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        editor:false,
-        userPic: true,
-        follow : false,
-        following: false,
-        postIcon: false,
-        video : false,
-        photo : false,
-        photoSlider: false,
-        travelledJourney : false,
-        onJourney: true,
-        getpopularPost: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      },
-      {
-        class: "popular-activity",
-        visitPost: false,
-        getpopularPost: true,
-        activitySec: false,
-        postPopular: [
-          {
-            heading: "Popular Travelers",
-            listPopular: [
-              {
-                profile: "img/profile-main.png",
-                name: "Rolandia Travel",
-                location: "London",
-                follower: "1994",
-              },
-              {
-                profile: "img/profile-main.png",
-                name: "Rolandia Travel",
-                location: "London",
-                follower: "1994",
-              },
-              {
-                profile: "img/profile-main.png",
-                name: "Rolandia Travel",
-                location: "London",
-                follower: "1994",
-              },
-              {
-                profile: "img/profile-main.png",
-                name: "Rolandia Travel",
-                location: "London",
-                follower: "1994",
-              },
-              {
-                profile: "img/profile-main.png",
-                name: "Rolandia Travel",
-                location: "London",
-                follower: "1994",
-              },
-              {
-                profile: "img/profile-main.png",
-                name: "Rolandia Travel",
-                location: "London",
-                follower: "1994",
-              },
-              {
-                profile: "img/profile-main.png",
-                name: "Rolandia Travel",
-                location: "London",
-                follower: "1994",
-              }
-            ],
-          }
-        ],
-      },
-      {
-        class: "popular-activity",
-        visitPost: false,
-        getpopularPost: true,
-        activitySec: false,
-        postPopular: [
-          {
-            heading: "Popular Agents",
-            listPopular: [
-              {
-                profile: "img/profile-main.png",
-                name: "Rolandia Travel",
-                location: "London",
-                follower: "1994",
-              },
-              {
-                profile: "img/profile-main.png",
-                name: "Rolandia Travel",
-                location: "London",
-                follower: "1994",
-              },
-              {
-                profile: "img/profile-main.png",
-                name: "Rolandia Travel",
-                location: "London",
-                follower: "1994",
-              },
-              {
-                profile: "img/profile-main.png",
-                name: "Rolandia Travel",
-                location: "London",
-                follower: "1994",
-              },
-              {
-                profile: "img/profile-main.png",
-                name: "Rolandia Travel",
-                location: "London",
-                follower: "1994",
-              },
-              {
-                profile: "img/profile-main.png",
-                name: "Rolandia Travel",
-                location: "London",
-                follower: "1994",
-              },
-              {
-                profile: "img/profile-main.png",
-                name: "Rolandia Travel",
-                location: "London",
-                follower: "1994",
-              }
-            ],
-          }
-        ],
-      },
-      {
-        class: "visiting-post local-visit",
-        visitPost: true,
-        getpopularPost: false,
-        activitySec: false,
-        getvisitPost : [
-          {
-            imgVisit: "img/india-gate.jpg",
-            locationLocal: "Mumbai",
-            tag: "Must Do's in Mumbai,India",
-            travelVisit: false,
-            localVisit: true,
-            cityTag: true,
-            rating: false,
-            flag: false,
-            visitSlider : true,
-            visitImg : false,
-            localLifeMain: true,
-            visitedPost : [
-              {
-                imgSlider: "img/small-activity-slider.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-              {
-                imgSlider: "img/small-activity-slider.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-              {
-                imgSlider: "img/small-activity-slider.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-              {
-                imgSlider: "img/small-activity-slider.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-              {
-                imgSlider: "img/small-activity-slider.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-              {
-                imgSlider: "img/small-activity-slider.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        class: "visiting-post local-visit",
-        visitPost: true,
-        getpopularPost: false,
-        activitySec: false,
-        getvisitPost : [
-          {
-            imgVisit: "img/india-gate.jpg",
-            locationLocal: "India",
-            travelVisit: false,
-            localVisit: true,
-            cityTag: false,
-            rating: true,
-            peopleBeen: 33,
-            flag: true,
-            visitSlider : true,
-            visitImg : false,
-            localLifeMain: true,
-            visitedPost : [
-              {
-                imgSlider: "img/small-activity-slider.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-              {
-                imgSlider: "img/small-activity-slider.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-              {
-                imgSlider: "img/small-activity-slider.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-              {
-                imgSlider: "img/small-activity-slider.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-              {
-                imgSlider: "img/small-activity-slider.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-              {
-                imgSlider: "img/small-activity-slider.jpg",
-                visitName: "#1 Shree Siddhivinayak",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        class: "visiting-post travel-visit",
-        visitPost: true,
-        getpopularPost: false,
-        activitySec: false,
-        getvisitPost : [
-          {
-            imgVisit: "img/india-gate.jpg",
-            locationLocal: "Mumbai",
-            tagTravel: "Book Your Travel form take off to touchdown!",
-            travelVisit: true,
-            localVisit: false,
-            visitSlider : false,
-            visitImg : true,
-            localLifeMain: false,
-          },
-        ],
-      },
-    ];
+      }, ],
+    }, {
+      class: "visiting-post travel-visit",
+      visitPost: true,
+      getpopularPost: false,
+      activitySec: false,
+      getvisitPost: [{
+        imgVisit: "img/india-gate.jpg",
+        locationLocal: "Mumbai",
+        tagTravel: "Book Your Travel form take off to touchdown!",
+        travelVisit: true,
+        localVisit: false,
+        visitSlider: false,
+        visitImg: true,
+        localLifeMain: false,
+      }, ],
+    }, ];
 
-    setTimeout(function(){
+    setTimeout(function() {
       $('.travelocal-slider').flexslider({
         animation: "slide",
         animationLoop: false,
@@ -2661,7 +2543,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         directionNav: false,
         controlNav: false,
       });
-    },100);
+    }, 100);
 
   })
   .controller('ItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
