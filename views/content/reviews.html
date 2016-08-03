@@ -1,5 +1,5 @@
 <div class="profile-main">
-  <div class="" ng-include="profile.profileMain"></div>
+  <!-- <div class="" ng-include="profile.profileMain"></div> -->
   <div class="review-main">
     <div class="container-fluid">
       <div class="all-profile-detail">
@@ -11,10 +11,10 @@
             <span class="third-strip"></span>
             <span class="fourth-strip"></span>
             <ul>
-              <li><a href="" class="tab-heading" ui-sref="journey">Journey</a></li>
-              <li><a href="" class="tab-heading" ui-sref="moments">Moments</a></li>
-              <li><a href="" class="tab-heading">Reviews</a></li>
-              <li><a href="" class="tab-heading" ui-sref="holidayplanner">Holiday Planner</a></li>
+              <li><a href="" class="tab-heading" ng-click="getTab(1)">Journey</a></li>
+              <li><a href="" class="tab-heading" ng-click="getTab(2)">Moments</a></li>
+              <li><a href="" class="tab-heading" ng-click="getTab(3)">Reviews</a></li>
+              <li><a href="" class="tab-heading" ng-click="getTab(4)">Holiday Planner</a></li>
             </ul>
           </div>
           <!-- end tabs -->

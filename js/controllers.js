@@ -114,34 +114,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 
   })
-  .controller('JourneyCtrl', function($scope, TemplateService, NavigationService, $timeout,$uibModal) {
+  .controller('MylifeCtrl', function($scope, TemplateService, NavigationService, $timeout,$uibModal) {
     //Used to name the .html file
 
-    $scope.template = TemplateService.changecontent("journey");
-    $scope.menutitle = NavigationService.makeactive("Journey");
+    // console.log("Testing Consoles");
+
+    $scope.template = TemplateService.changecontent("mylife");
+    $scope.menutitle = NavigationService.makeactive("Mylife");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    $scope.profile = {
-      profileMain: "views/content/profile.html"
-    }
 
-    // $(document).ready(function() {
-    //   setTimeout(function() {
-    //     $('html, body').animate({
-    //       scrollTop: $("#tabs").offset().top
-    //     }, 1000);
-    //   }, 100);
-    // });
-    $scope.buildNow = function() {
-      $scope.$broadcast('rebuild:me');
-    }
-    $scope.$on('scrollbar.hide', function() {
-      // console.log('Scrollbar hide');
-    });
-    $scope.$on('scrollbar.show', function() {
-      // console.log('Scrollbar show');
-    });
+    $scope.myLife = {
+      profileMain: "views/content/profile.html",
+      journey: "views/content/journey.html",
+      moments: "views/content/moments.html",
+      reviews: "views/content/reviews.html",
+      holidayplanner: "views/content/holidayplanner.html"
+    };
 
+    $scope.viewTab = 1;
+    $scope.getTab = function(view) {
+      if(view == 1) {
+        $scope.viewTab = 1;
+      }else if(view == 2) {
+        $scope.viewTab = 2;
+      }else if(view == 3) {
+        $scope.viewTab = 3;
+      }else if(view == 4) {
+        $scope.viewTab = 4;
+      }
+      else {
+        $scope.viewTab = 1;
+      }
+    }
     $scope.bucketList = [{
       countryName: "United States Of America"
     }, {
@@ -159,7 +164,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }, {
       countryName: "Canada"
     }, ];
-
     $scope.data = {
       'GB': {
         metric: 4
@@ -173,13 +177,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       'IN': {
         metric: 500
       }
-      // 'FI': {metric: 15}
     };
     $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
     $scope.mapDataHumanizeFn = function(val) {
       return val + " units";
     };
     $scope.heatmapColors = ['#2c3757', '#ff6759'];
+
+    $scope.hoveringOver = function(value) {
+      $scope.overStar = value;
+    };
+    $scope.ratingStates = [{
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }];
+    // journey json
+    $scope.buildNow = function() {
+      $scope.$broadcast('rebuild:me');
+    }
+    $scope.$on('scrollbar.hide', function() {
+      // console.log('Scrollbar hide');
+    });
+    $scope.$on('scrollbar.show', function() {
+      // console.log('Scrollbar show');
+    });
 
     $scope.openLocalimg = function(getVal) {
       // $scope.showimgData = $scope.localLife[getVal];
@@ -475,70 +508,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }]
     }];
 
-  })
-  .controller('MomentsCtrl', function($scope, TemplateService, NavigationService, $timeout,$location, $anchorScroll) {
-    //Used to name the .html file
-
-    $scope.template = TemplateService.changecontent("moments");
-    $scope.menutitle = NavigationService.makeactive("Moments");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-    $scope.profile = {
-      profileMain: "views/content/profile.html"
-    }
-
-    // $(document).ready(function() {
-    //   setTimeout(function() {
-    //     $('html, body').animate({
-    //       scrollTop: $("#tabs").offset().top
-    //     }, 1000);
-    //   }, 100);
-    // });
-
-    $scope.goOnTabs = function() {
-      $location.hash('tabs')
-      $anchorScroll;
-    };
-
-    $scope.bucketList = [{
-      countryName: "United States Of America"
-    }, {
-      countryName: "Germany"
-    }, {
-      countryName: "United Kingdom"
-    }, {
-      countryName: "Switzerland"
-    }, {
-      countryName: "Australia"
-    }, {
-      countryName: "India"
-    }, {
-      countryName: "Italy"
-    }, {
-      countryName: "Canada"
-    }, ];
-
-    $scope.data = {
-      'GB': {
-        metric: 4
-      },
-      'US': {
-        metric: 40
-      },
-      'FR': {
-        metric: 29
-      },
-      'IN': {
-        metric: 500
-      }
-      // 'FI': {metric: 15}
-    };
-    $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
-    $scope.mapDataHumanizeFn = function(val) {
-      return val + " units";
-    };
-    $scope.heatmapColors = ['#2c3757', '#ff6759'];
-
+    // moments json
     $scope.monthMoments = [{
       monthName: "November 2015",
       momentPic: [
@@ -725,18 +695,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.showMonthView = function() {
       $scope.viewMonth = true;
     };
-
-  })
-  .controller('ReviewsCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
-    //Used to name the .html file
-
-    $scope.template = TemplateService.changecontent("reviews");
-    $scope.menutitle = NavigationService.makeactive("Reviews");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-    $scope.profile = {
-      profileMain: "views/content/profile.html"
-    }
+    // reviews json
     $scope.oneAtATime = true;
 
     $scope.getReview = function() {
@@ -784,54 +743,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.showRating = 1;
       }
     };
-
-    $(document).ready(function() {
-      setTimeout(function() {
-        $('html, body').animate({
-          scrollTop: $("#tabs").offset().top
-        }, 1000);
-      }, 100);
-    });
-
-    $scope.bucketList = [{
-      countryName: "United States Of America"
-    }, {
-      countryName: "Germany"
-    }, {
-      countryName: "United Kingdom"
-    }, {
-      countryName: "Switzerland"
-    }, {
-      countryName: "Australia"
-    }, {
-      countryName: "India"
-    }, {
-      countryName: "Italy"
-    }, {
-      countryName: "Canada"
-    }, ];
-
-    $scope.data = {
-      'GB': {
-        metric: 4
-      },
-      'US': {
-        metric: 40
-      },
-      'FR': {
-        metric: 29
-      },
-      'IN': {
-        metric: 500
-      }
-      // 'FI': {metric: 15}
-    };
-    $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
-    $scope.mapDataHumanizeFn = function(val) {
-      return val + " units";
-    };
-    $scope.heatmapColors = ['#2c3757', '#ff6759'];
-
     $scope.reviewAll = [{
       locationName: "Girgaon Beach",
       travelType: "img/beach.png",
@@ -1029,26 +940,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.showlocalCountry = function() {
       $scope.viewlocalCountry = true;
     };
+    // holidayplanner json
+
 
   })
-  .controller('HolidayPlannerCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+  .controller('JourneyCtrl', function($scope, TemplateService, NavigationService, $timeout,$uibModal) {
     //Used to name the .html file
 
-    $scope.template = TemplateService.changecontent("holidayplanner");
-    $scope.menutitle = NavigationService.makeactive("HolidayPlanner");
+    $scope.template = TemplateService.changecontent("journey");
+    $scope.menutitle = NavigationService.makeactive("Journey");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $(document).ready(function() {
-      setTimeout(function() {
-        $('html, body').animate({
-          scrollTop: $("#tabs").offset().top
-        }, 1000);
-      }, 100);
-    });
-    $scope.profile = {
-      profileMain: "views/content/profile.html"
+
+    // $(document).ready(function() {
+    //   setTimeout(function() {
+    //     $('html, body').animate({
+    //       scrollTop: $("#tabs").offset().top
+    //     }, 1000);
+    //   }, 100);
+    // });
+    $scope.buildNow = function() {
+      $scope.$broadcast('rebuild:me');
     }
+    $scope.$on('scrollbar.hide', function() {
+      // console.log('Scrollbar hide');
+    });
+    $scope.$on('scrollbar.show', function() {
+      // console.log('Scrollbar show');
+    });
 
     $scope.bucketList = [{
       countryName: "United States Of America"
@@ -1089,6 +1009,47 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
     $scope.heatmapColors = ['#2c3757', '#ff6759'];
 
+    $scope.openLocalimg = function(getVal) {
+      // $scope.showimgData = $scope.localLife[getVal];
+      $scope.showimgData = getVal;
+      // console.log(getVal);
+      $uibModal.open({
+        animation: true,
+        templateUrl : "views/modal/local-imgview.html",
+        scope: $scope,
+        windowTopClass  : "local-imgview-pop"
+      })
+    };
+
+  })
+  .controller('MomentsCtrl', function($scope, TemplateService, NavigationService, $timeout,$location, $anchorScroll) {
+    //Used to name the .html file
+
+    $scope.template = TemplateService.changecontent("moments");
+    $scope.menutitle = NavigationService.makeactive("Moments");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+
+  })
+  .controller('ReviewsCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+    //Used to name the .html file
+
+    $scope.template = TemplateService.changecontent("reviews");
+    $scope.menutitle = NavigationService.makeactive("Reviews");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+
+  })
+  .controller('HolidayPlannerCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+
+    $scope.template = TemplateService.changecontent("holidayplanner");
+    $scope.menutitle = NavigationService.makeactive("HolidayPlanner");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
   })
   .controller('ProfileCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -1100,45 +1061,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.data = {
-      'GB': {
-        metric: 4
-      },
-      'US': {
-        metric: 40
-      },
-      'FR': {
-        metric: 29
-      },
-      'IN': {
-        metric: 500
-      }
-    };
-    $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
-    $scope.mapDataHumanizeFn = function(val) {
-      return val + " units";
-    };
-    $scope.heatmapColors = ['#2c3757', '#ff6759'];
-
-    $scope.hoveringOver = function(value) {
-      $scope.overStar = value;
-    };
-    $scope.ratingStates = [{
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }, {
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }, {
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }, {
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }, {
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }];
 
   })
   .controller('OtherProfileCtrl', function($scope, TemplateService, NavigationService, $timeout) {
@@ -1151,46 +1073,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.data = {
-      'GB': {
-        metric: 4
-      },
-      'US': {
-        metric: 40
-      },
-      'FR': {
-        metric: 29
-      },
-      'IN': {
-        metric: 500
-      }
-    };
-    $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
-    $scope.mapDataHumanizeFn = function(val) {
-      return val + " units";
-    };
-    $scope.heatmapColors = ['#2c3757', '#ff6759'];
-
-    $scope.hoveringOver = function(value) {
-      $scope.overStar = value;
-    };
-    $scope.ratingStates = [{
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }, {
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }, {
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }, {
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }, {
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }];
-
   })
   .controller('OtherJourneyCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -1199,9 +1081,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("OtherJourney");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    $scope.otherprofile = {
-      profileMain: "views/content/otherprofile.html"
-    }
 
     $(document).ready(function() {
       setTimeout(function() {
