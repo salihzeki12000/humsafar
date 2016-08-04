@@ -145,17 +145,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     // change url
     $scope.viewTab = 1;
+    if($state.params.name){
+      // $scope.changeURL()
+    }
+    $scope.changeURL = function (urlState) {
+      // console.log("Idhar hi jaa raha hai",urlState);
+      // $state.transitionTo('mylife',{
+      //   name : urlState
+      // },{
+      //   notify:false
+      // });
+      // var position = $location.path().lastIndexOf('/');
+      // $location.path($location.path().substring(0,position) + '/'+urlState);
+      // console.log($location.path());
+      // $location.replace();
+      $location.hash(urlState);
+    }
     $scope.getTab = function(view) {
       if (view == 1) {
         $scope.viewTab = 1;
+        $scope.changeURL("journey");
+
       } else if (view == 2) {
         $scope.viewTab = 2;
+        $scope.changeURL("moments");
+
       } else if (view == 3) {
         $scope.viewTab = 3;
+        $scope.changeURL("reviews");
+
       } else if (view == 4) {
         $scope.viewTab = 4;
+        $scope.changeURL("holiday");
+
       } else {
         $scope.viewTab = 1;
+        $scope.changeURL("journey");
+
       }
     }
     $scope.bucketList = [{

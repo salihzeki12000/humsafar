@@ -26,7 +26,8 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
     .state('mylife', {
       url: "/mylife",
       templateUrl: "views/template.html",
-      controller: 'MylifeCtrl'
+      controller: 'MylifeCtrl',
+      reloadOnSearch: false
     })
     .state('journey', {
       url: "/journey",
