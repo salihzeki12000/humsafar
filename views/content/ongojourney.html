@@ -8,10 +8,10 @@
           <!-- own journey -->
           <div class="own-journey">
             <div class="profile-info">
-              <div class="user-img">
-                <!-- <img src="" alt="" class="img-responsive"> -->
+              <div class="user-img-ongo">
+                <img src="img/adrena.jpg" alt="" class="img-responsive">
               </div>
-              <h4>Andrea Christina</h4>
+              <h4 class="avenir-heavy color-blue">Andrea Christina</h4>
             </div>
           </div>
           <!-- own journey end -->
@@ -21,40 +21,40 @@
               <li>
                 <a href="">
                   <div class="trip-info">
-                    <span>Trip Travellers :</span>
-                    <span>302</span>
+                    <span class="avenir-roman">Trip Travellers :</span>
+                    <span class="avenir-heavy">302</span>
                   </div>
                 </a>
               </li>
               <li>
                 <a href="">
                   <div class="trip-info">
-                    <img src="img/camera-blue.png" alt="camera" class="img-responsive">
-                    <span>302</span>
+                    <img src="img/camera-blue.png" alt="camera">
+                    <span class="avenir-heavy">302</span>
                   </div>
                 </a>
               </li>
               <li>
                 <a href="">
                   <div class="trip-info">
-                    <img src="img/video-blue.png" alt="camera" class="img-responsive">
-                    <span>302</span>
+                    <img src="img/video-blue.png" alt="camera">
+                    <span class="avenir-heavy">302</span>
                   </div>
                 </a>
               </li>
               <li>
                 <a href="">
                   <div class="trip-info">
-                    <img src="img/location-blue.png" alt="camera" class="img-responsive">
-                    <span>302</span>
+                    <img src="img/location-blue.png" alt="camera">
+                    <span class="avenir-heavy">302</span>
                   </div>
                 </a>
               </li>
               <li>
                 <a href="">
                   <div class="trip-info">
-                    <img src="img/thought.png" alt="camera" class="img-responsive">
-                    <span>302</span>
+                    <img src="img/thought.png" alt="camera">
+                    <span class="avenir-heavy">302</span>
                   </div>
                 </a>
               </li>
@@ -62,16 +62,16 @@
           </div>
           <!-- trip list end-->
           <div class="btn-summary">
-            <div class="btn btn-outline-blue">Trip Summary</div>
+            <div class="btn btn-outline-blue avenir-heavy">Trip Summary</div>
           </div>
         </div>
         <div class="pull-right">
           <div class="following">
             <span>Following</span>
           </div>
-          <div class="edit-journey">
+          <div class="edit-journey hide">
             <span>Edit This Journey</span>
-            <div class="edit-journey-dropdown">
+            <div class="edit-journey-dropdown ">
               <ul>
                 <li><a href="">Journey Cover Photo</a></li>
                 <li><a href="">Journey Name</a></li>
@@ -82,221 +82,225 @@
         </div>
       </div>
       <!-- strip journey end-->
-      <!-- journey tab view -->
-      <div class="journey-tab-view">
-        <!-- journey started -->
-        <div class="started-journey-card">
-          <!-- header started -->
-          <div class="started-heading text-center">
-            <h4 class="color-white">London</h4>
-            <p><i class="fa fa-calendar"></i><span>12 Sept 2014</span><i class="fa fa-clock-o"></i><span>9:20 PM</span></p>
-          </div>
-          <!-- header started end-->
-          <div class="journey-imgholder">
-            <!-- <img src="" alt="" class="img-responsive"> -->
-          </div>
-          <div class="travelling-journey-type">
-            <div class="clearfix">
-              <div class="pull-left">
-                <ul>
-                  <li>
-                    <a href="">
-                      <!-- <img src="" alt=""> -->
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      <!-- <img src="" alt=""> -->
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      <!-- <img src="" alt=""> -->
-                    </a>
-                  </li>
-                </ul>
+      <div class="row">
+        <div class="col-md-5">
+          <!-- journey tab view -->
+          <div class="journey-tab-view">
+            <!-- journey started -->
+            <div class="started-journey-card">
+              <!-- header started -->
+              <div class="started-heading text-center">
+                <h4 class="color-white">London</h4>
+                <p><i class="fa fa-calendar"></i><span>12 Sept 2014</span><i class="fa fa-clock-o"></i><span>9:20 PM</span></p>
               </div>
-              <div class="pull-right">
-                <div class="journey-travelling-buddies">
-                  <div class="user-img">
-                    <!-- <img src="" alt="" class="img-responsive"> -->
+              <!-- header started end-->
+              <div class="journey-imgholder">
+                <!-- <img src="" alt="" class="img-responsive"> -->
+              </div>
+              <div class="travelling-journey-type">
+                <div class="clearfix">
+                  <div class="pull-left">
+                    <ul>
+                      <li>
+                        <a href="">
+                          <!-- <img src="" alt=""> -->
+                        </a>
+                      </li>
+                      <li>
+                        <a href="">
+                          <!-- <img src="" alt=""> -->
+                        </a>
+                      </li>
+                      <li>
+                        <a href="">
+                          <!-- <img src="" alt=""> -->
+                        </a>
+                      </li>
+                    </ul>
                   </div>
-                  <!-- <span>4+</span> -->
+                  <div class="pull-right">
+                    <div class="journey-travelling-buddies">
+                      <div class="user-img">
+                        <!-- <img src="" alt="" class="img-responsive"> -->
+                      </div>
+                      <!-- <span>4+</span> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="journey-with">
+                <p>London 2014 Andrea Christina with Monish Shah, Malhar Gala &amp; Nida Kapadia</p>
+              </div>
+            </div>
+            <!-- journey started end-->
+          </div>
+          <!-- journey tab view end -->
+          <!-- card-ongo-main -->
+          <div class="ongo-card-main" ng-repeat="ongo in ongoJourney track by $index">
+            <!-- card header -->
+            <div class="ongo-card-header">
+              <div class="clearfix">
+                <div class="pull-left">
+                  <div class="journey-userimg">
+                    <img ng-src="{{ongo.profilepic}}" alt="" class="img-responsive">
+                  </div>
+                </div>
+                <div class="pull-left">
+                  <div class="journey-post">
+                    <p>{{ongo.post}}</p>
+                    <!-- <p>First time together in London... A trip after ages!! at 27 You with Monish Shah,Malhar Gala &amp; Nida Kapadia</p> -->
+                    <p><span>{{ongo.day}}</span><i class="fa fa-calender"></i><span>{{ongo.journeyDate}}</span> | <i class="fa fa-clock-o"></i><span>{{ongo.journeyTime}}</span></p>
+                  </div>
+                </div>
+                <div class="pull-right">
+                  <div class="ongo-journey-icon">
+                    <img ng-src="{{ongo.journeyTypeicon}}" alt="" class="img-responsive">
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="journey-with">
-            <p>London 2014 Andrea Christina with Monish Shah, Malhar Gala &amp; Nida Kapadia</p>
-          </div>
-        </div>
-        <!-- journey started end-->
-      </div>
-      <!-- journey tab view end -->
-      <!-- card-ongo-main -->
-      <div class="ongo-card-main" ng-repeat="ongo in ongoJourney track by $index">
-        <!-- card header -->
-        <div class="ongo-card-header">
-          <div class="clearfix">
-            <div class="pull-left">
-              <div class="journey-userimg">
-                <img ng-src="{{ongo.profilepic}}" alt="" class="img-responsive">
+            <!-- card header end -->
+            <!-- card main -->
+            <div class="ongo-card-main">
+              <!-- ongo img -->
+              <div class="card-imgholder">
+                <img ng-src="{{ongo.journeyPhoto}}" alt="" class="img-responsive">
               </div>
-            </div>
-            <div class="pull-left">
-              <div class="journey-post">
-                <p>{{ongo.post}}</p>
-                <!-- <p>First time together in London... A trip after ages!! at 27 You with Monish Shah,Malhar Gala &amp; Nida Kapadia</p> -->
-                <p><span>{{ongo.day}}</span><i class="fa fa-calender"></i><span>{{ongo.journeyDate}}</span> | <i class="fa fa-clock-o"></i><span>{{ongo.journeyTime}}</span></p>
+              <!-- ongo img end-->
+              <!-- related img if less then 5-->
+              <div class="">
+                <div class="related-ongo-slider">
+                  <img ng-src="{{ongo.relatedPic}}" alt="" class="img-responsive">
+                </div>
               </div>
-            </div>
-            <div class="pull-right">
-              <div class="ongo-journey-icon">
-                <img ng-src="{{ongo.journeyTypeicon}}" alt="" class="img-responsive">
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- card header end -->
-        <!-- card main -->
-        <div class="ongo-card-main">
-          <!-- ongo img -->
-          <div class="card-imgholder">
-            <img ng-src="{{ongo.journeyPhoto}}" alt="" class="img-responsive">
-          </div>
-          <!-- ongo img end-->
-           <!-- related img if less then 5-->
-             <div class="">
-               <div class="related-ongo-slider">
-                 <img ng-src="{{ongo.relatedPic}}" alt="" class="img-responsive">
-               </div>
-             </div>
-           <!-- related img end if less then 5-->
-           <!-- related img if more then 5 then slider-->
-             <div class="related-imgslider">
-               <flex-slider flex-slide="slide in ongo.relatedPhoto track by $index">
-                 <li>
-                   <div class="related-ongo-slider">
-                     <img ng-src="{{slider}}" alt="" class="img-responsive">
-                   </div>
-                 </li>
-               </flex-slider>
-             </div>
-           <!-- related img end if more then 5 then slider-->
-           <!-- ongo journey video -->
-           <div class="">
-             <div class="video-ongo-journey">
-               <img ng-src="{{ongo.video}}" alt="" class="img-responsive">
-               <div class="youtube-icon get-center">
-                 <span><i class="fa fa-youtube-play fa-4x"></i></span>
-               </div>
-             </div>
-           </div>
-           <!-- ongo journey video end-->
-        </div>
-        <!-- card main end-->
-        <!-- card footer -->
-        <div class="ongo-card-footer">
-          <div class="social-field-types">
-            <div class="user-social-item clearfix">
-              <div class="pull-left">
-                <ul>
-                  <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
+              <!-- related img end if less then 5-->
+              <!-- related img if more then 5 then slider-->
+              <div class="related-imgslider">
+                <flex-slider flex-slide="slide in ongo.relatedPhoto track by $index">
                   <li>
-                    <a href="">
-                      <img src="img/comments.png" alt="" height="18">
-                    </a>
+                    <div class="related-ongo-slider">
+                      <img ng-src="{{slider}}" alt="" class="img-responsive">
+                    </div>
                   </li>
-                  <li>
-                    <a href="">
-                      <img src="img/share.png" alt="" height="18">
-                    </a>
-                  </li>
-                </ul>
+                </flex-slider>
               </div>
-              <div class="pull-right">
-                <div class="">
-                  <span>
+              <!-- related img end if more then 5 then slider-->
+              <!-- ongo journey video -->
+              <div class="">
+                <div class="video-ongo-journey">
+                  <img ng-src="{{ongo.video}}" alt="" class="img-responsive">
+                  <div class="youtube-icon get-center">
+                    <span><i class="fa fa-youtube-play fa-4x"></i></span>
+                  </div>
+                </div>
+              </div>
+              <!-- ongo journey video end-->
+            </div>
+            <!-- card main end-->
+            <!-- card footer -->
+            <div class="ongo-card-footer">
+              <div class="social-field-types">
+                <div class="user-social-item clearfix">
+                  <div class="pull-left">
+                    <ul>
+                      <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
+                      <li>
+                        <a href="">
+                          <img src="img/comments.png" alt="" height="18">
+                        </a>
+                      </li>
+                      <li>
+                        <a href="">
+                          <img src="img/share.png" alt="" height="18">
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="pull-right">
+                    <div class="">
+                      <span>
                     <img src="img/options.png" alt="" width="3">
                   </span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="social-likes-reviews">
-            <div class="clearfix">
-              <div class="pull-left">
-                <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">15660</b>Likes</span>
-                <p>Rating: <span><i class="fa fa-star color-pink"></i>
+              <div class="social-likes-reviews">
+                <div class="clearfix">
+                  <div class="pull-left">
+                    <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">15660</b>Likes</span>
+                    <p>Rating: <span><i class="fa fa-star color-pink"></i>
                   <i class="fa fa-star color-pink"></i>
                   <i class="fa fa-star color-pink"></i>
                   <i class="fa fa-star color-pink"></i>
                   <i class="fa fa-star-o"></i></span></p>
-              </div>
-              <div class="pull-right">
-                <div class="ongo-travel-icon">
-                  <img src="img/travel.png" alt="">
+                  </div>
+                  <div class="pull-right">
+                    <div class="ongo-travel-icon">
+                      <img src="img/travel.png" alt="">
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+            <!-- card footer end-->
           </div>
-        </div>
-        <!-- card footer end-->
-      </div>
-      <!-- card-ongo-main -->
-      <!-- ongo journey join -->
-      <div class="ongo-journey-join">
-        <div class="relate">
-          <div class="journey-pic-imgholder">
-            <!-- <img src="" alt="" class="img-responsive"> -->
+          <!-- card-ongo-main -->
+          <!-- ongo journey join -->
+          <div class="ongo-journey-join">
+            <div class="relate">
+              <div class="journey-pic-imgholder">
+                <!-- <img src="" alt="" class="img-responsive"> -->
+              </div>
+              <div class="join-tag">
+                <!-- <img src="" alt="" class="img-responsive"> -->
+              </div>
+            </div>
+            <div class="join-card text-center">
+              <h4>Vignesh Kasturi <span class="block">has joined this journey</span></h4>
+              <p><i class="fa fa-calendar"></i><span>14 Jan, 2014</span> | <i class="fa fa-clock-o"></i><span>01:20 PM</span></p>
+            </div>
           </div>
-          <div class="join-tag">
-            <!-- <img src="" alt="" class="img-responsive"> -->
+          <!-- ongo journey join end-->
+          <!-- ongo journey left -->
+          <div class="ongo-journey-left">
+            <div class="relate">
+              <div class="journey-pic-imgholder">
+                <!-- <img src="" alt="" class="img-responsive"> -->
+              </div>
+              <div class="left-tag">
+                <!-- <img src="" alt="Bye Bye" class="img-responsive"> -->
+              </div>
+            </div>
+            <div class="journey-left text-center">
+              <h4>Pooja Thakare</h4>
+              <p><i class="fa fa-calendar"></i><span>14 Jan, 2014</span> | <i class="fa fa-clock-o"></i><span>01:20 PM</span></p>
+            </div>
           </div>
-        </div>
-        <div class="join-card text-center">
-          <h4>Vignesh Kasturi <span class="block">has joined this journey</span></h4>
-          <p><i class="fa fa-calendar"></i><span>14 Jan, 2014</span> | <i class="fa fa-clock-o"></i><span>01:20 PM</span></p>
-        </div>
-      </div>
-      <!-- ongo journey join end-->
-      <!-- ongo journey left -->
-      <div class="ongo-journey-left">
-        <div class="relate">
-          <div class="journey-pic-imgholder">
-            <!-- <img src="" alt="" class="img-responsive"> -->
+          <!-- ongo journey left end-->
+          <!-- on go journey-change -->
+          <div class="ongo-journey-change">
+            <div class="journey-change">
+              <h4 class="color-white">Paris</h4>
+            </div>
+            <p><i class="fa fa-calendar"></i><span>9 May, 2016</span> | <i class="fa fa-clock-o"></i><span>09: 20 AM</span></p>
           </div>
-          <div class="left-tag">
-            <!-- <img src="" alt="Bye Bye" class="img-responsive"> -->
+          <!-- on go journey-change end -->
+          <!-- ongo journey-end -->
+          <div class="ongo-journey-end">
+            <div class="journey-end text-center">
+              <h4 class="color-white">Mumbai</h4>
+              <p><i class="fa fa-calendar"></i><span>1 Jan, 2014</span> | <i class="fa fa-clock-o"></i><span>01:20 PM</span></p>
+            </div>
+            <div class="end-journey-flag text-center">
+              <!-- <img src="" alt="" class="img-responsive m-center"> -->
+              <span class="color-blue djb-font">until we meet again!</span>
+            </div>
           </div>
-        </div>
-        <div class="journey-left text-center">
-          <h4>Pooja Thakare</h4>
-          <p><i class="fa fa-calendar"></i><span>14 Jan, 2014</span> | <i class="fa fa-clock-o"></i><span>01:20 PM</span></p>
+          <!-- ongo journey end -->
+          <!-- on go journey main end-->
         </div>
       </div>
-      <!-- ongo journey left end-->
-      <!-- on go journey-change -->
-      <div class="ongo-journey-change">
-        <div class="journey-change">
-          <h4 class="color-white">Paris</h4>
-        </div>
-        <p><i class="fa fa-calendar"></i><span>9 May, 2016</span> | <i class="fa fa-clock-o"></i><span>09: 20 AM</span></p>
-      </div>
-      <!-- on go journey-change end -->
-      <!-- ongo journey-end -->
-      <div class="ongo-journey-end">
-        <div class="journey-end text-center">
-          <h4 class="color-white">Mumbai</h4>
-          <p><i class="fa fa-calendar"></i><span>1 Jan, 2014</span> | <i class="fa fa-clock-o"></i><span>01:20 PM</span></p>
-        </div>
-        <div class="end-journey-flag text-center">
-          <!-- <img src="" alt="" class="img-responsive m-center"> -->
-          <span class="color-blue djb-font">until we meet again!</span>
-        </div>
-      </div>
-      <!-- ongo journey end -->
-      <!-- on go journey main end-->
     </div>
     <!-- map -->
     <!-- map end -->
