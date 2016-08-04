@@ -456,6 +456,9 @@ header {
   .list-inline > li {
     padding: 0 15px;
     font-size: 16px;
+    &:last-child {
+      padding: 0px 0px 0px 15px;
+    }
   }
   a {
     color: #80879a;
@@ -2916,6 +2919,9 @@ header {
       padding: 0px 20px;
       display: inline-block;
       line-height: 20px;
+      &:first-child {
+        padding: 0px 20px 0px 0;
+      }
       &:last-child {
         border-right: none;
       }
@@ -2936,7 +2942,7 @@ header {
   }
 }
 .own-journey {
-  margin-right: 30px;
+  margin-right: 40px;
 }
 .profile-info h4 {
   margin: 0 0 0 15px;

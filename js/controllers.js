@@ -135,54 +135,53 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    var allMyLife = ["views/content/myLife/journey.html", "views/content/myLife/moments.html", "views/content/myLife/reviews.html", "views/content/myLife/holidayplanner.html"];
     $scope.myLife = {
-      profileMain: "views/content/profile.html",
-      journey: "views/content/journey.html",
-      moments: "views/content/moments.html",
-      reviews: "views/content/reviews.html",
-      holidayplanner: "views/content/holidayplanner.html"
+      profileMain: "views/content/myLife/profile.html",
+      innerView: allMyLife[0]
     };
-
     // change url
     $scope.viewTab = 1;
-    if($state.params.name){
-      // $scope.changeURL()
-    }
-    $scope.changeURL = function (urlState) {
-      // console.log("Idhar hi jaa raha hai",urlState);
-      // $state.transitionTo('mylife',{
-      //   name : urlState
-      // },{
-      //   notify:false
-      // });
-      // var position = $location.path().lastIndexOf('/');
-      // $location.path($location.path().substring(0,position) + '/'+urlState);
-      // console.log($location.path());
-      // $location.replace();
-      $location.hash(urlState);
+    switch ($state.params.name) {
+      case "journey":
+        $scope.myLife.innerView = allMyLife[0];
+        break;
+      case "moments":
+        $scope.myLife.innerView = allMyLife[1];
+        break;
+      case "reviews":
+        $scope.myLife.innerView = allMyLife[2];
+        break;
+      case "holidayplanner":
+        $scope.myLife.innerView = allMyLife[3];
+        break;
+      default:
+        $scope.myLife.innerView = allMyLife[0];
     }
     $scope.getTab = function(view) {
-      if (view == 1) {
-        $scope.viewTab = 1;
-        $scope.changeURL("journey");
-
-      } else if (view == 2) {
-        $scope.viewTab = 2;
-        $scope.changeURL("moments");
-
-      } else if (view == 3) {
-        $scope.viewTab = 3;
-        $scope.changeURL("reviews");
-
-      } else if (view == 4) {
-        $scope.viewTab = 4;
-        $scope.changeURL("holiday");
-
-      } else {
-        $scope.viewTab = 1;
-        $scope.changeURL("journey");
+      $scope.myLife.innerView = allMyLife[view];
+      var url = "journey";
+      switch (view) {
+        case 0:
+          url = "journey";
+          break;
+        case 1:
+          url = "moments";
+          break;
+        case 2:
+          url = "reviews";
+          break;
+        case 3:
+          url = "holidayplanner";
+          break;
 
       }
+      console.log(url);
+      $state.go("mylife", {
+        name: url
+      }, {
+        notify: false
+      });
     }
     $scope.bucketList = [{
       countryName: "United States Of America"
