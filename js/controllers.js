@@ -124,6 +124,57 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    $scope.ongoJourney = [
+      {
+        profilepic: "img/adrena.jpg",
+        post: "First time together in London... A trip after ages!! at 27 You with <b>Monish Shah</b>, <b>Malhar Gala</b> & <b>Nida Kapadia</b>",
+        journeyDay: "01",
+        journeyDate: "14 Jan, 2014",
+        journeyTime : "01:20 pm",
+        journeyTypeicon : "img/ongojourney/location.png",
+        journeyPhoto : "img/ongojourney/ongopic.jpg",
+        relatedPhoto : [
+          'img/ongojourney/slider1.jpg',
+          'img/ongojourney/slider2.jpg',
+          'img/ongojourney/slider3.jpg',
+          'img/ongojourney/slider4.jpg',
+          'img/ongojourney/slider5.jpg',
+          'img/ongojourney/slider1.jpg',
+          'img/ongojourney/slider2.jpg',
+        ],
+      },
+      {
+        profilepic: "img/adrena.jpg",
+        post: "First time together in London... A trip after ages!! at 27 You with Monish Shah,Malhar Gala &amp; Nida Kapadia",
+        journeyDay: "01",
+        journeyDate: "14 Jan, 2014",
+        journeyTime : "01:20 pm",
+        journeyTypeicon : "img/ongojourney/camera.png",
+        journeyPhoto : "img/ongojourney/video-journey.jpg",
+        viewRelatepic : [
+          'img/ongojourney/related1.jpg',
+          'img/ongojourney/related2.jpg'
+        ],
+      },
+      {
+        profilepic: "img/adrena.jpg",
+        post: "First time together in London... A trip after ages!! at 27 You with Monish Shah,Malhar Gala &amp; Nida Kapadia",
+        journeyDay: "01",
+        journeyDate: "14 Jan, 2014",
+        journeyTime : "01:20 pm",
+        journeyTypeicon : "img/ongojourney/thought.png",
+      },
+      {
+        profilepic: "img/adrena.jpg",
+        post: "First time together in London... A trip after ages!! at 27 You with Monish Shah,Malhar Gala &amp; Nida Kapadia",
+        journeyDay: "01",
+        journeyDate: "14 Jan, 2014",
+        journeyTime : "01:20 pm",
+        journeyTypeicon : "img/ongojourney/video.png",
+        video: "img/ongojourney/video-journey.jpg",
+      },
+    ];
+
   })
   .controller('MylifeCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file

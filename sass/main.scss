@@ -2965,5 +2965,35 @@ header {
   font-family: "AvenirLTStd-Heavy";
 }
 
+// card
+.ongo-card-holder {
+  width: 550px;
+  margin-left: 30px;
+}
+.ongo-journey-card {
+  margin-bottom: 40px;
+  border-radius: 8px;
+  box-shadow: 1px 4px 5px #ccc;
+  background-color: #fff;
+}
+// card header
+.ongo-card-header {
+  padding: 10px;
+}
+.journey-post {
+  .post {
+    color: #6d6e71;
+    @extend .avenir-roman;
+    b {
+      @extend .avenir-heavy;
+    }
+  }
+}
+.journey-date {
+  color: #6d6e71;
+  font-size: 13px;
+}
+// card header end
+// card end
 // on go journey end
 @import "fancybox-override";
