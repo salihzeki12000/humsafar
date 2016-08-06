@@ -133,6 +133,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         journeyTime : "01:20 pm",
         journeyTypeicon : "img/ongojourney/location.png",
         journeyPhoto : "img/ongojourney/ongopic.jpg",
+        like: "1550",
         relatedPhoto : [
           'img/ongojourney/slider1.jpg',
           'img/ongojourney/slider2.jpg',
@@ -150,19 +151,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         journeyDate: "14 Jan, 2014",
         journeyTime : "01:20 pm",
         journeyTypeicon : "img/ongojourney/camera.png",
-        journeyPhoto : "img/ongojourney/video-journey.jpg",
+        journeyPhoto : "img/ongojourney/ongopic2.jpg",
+        like: "1550",
         viewRelatepic : [
           'img/ongojourney/related1.jpg',
           'img/ongojourney/related2.jpg'
         ],
       },
       {
+        class: "only-post",
         profilepic: "img/adrena.jpg",
         post: "First time together in London... A trip after ages!! at 27 You with Monish Shah,Malhar Gala &amp; Nida Kapadia",
         journeyDay: "01",
         journeyDate: "14 Jan, 2014",
         journeyTime : "01:20 pm",
         journeyTypeicon : "img/ongojourney/thought.png",
+        like: "1550",
       },
       {
         profilepic: "img/adrena.jpg",
@@ -172,9 +176,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         journeyTime : "01:20 pm",
         journeyTypeicon : "img/ongojourney/video.png",
         video: "img/ongojourney/video-journey.jpg",
+        like: "1550",
       },
     ];
 
+   setTimeout(function(){
+     $('.flexslider').flexslider({
+       itemMargin: 10,
+       itemWidth: 95,
+       animation: "slide",
+       mousewheel: true,
+       controlNav: false,
+     });
+   },100);
   })
   .controller('MylifeCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file

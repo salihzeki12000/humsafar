@@ -2973,12 +2973,36 @@ header {
 .ongo-journey-card {
   margin-bottom: 40px;
   border-radius: 8px;
-  box-shadow: 1px 4px 5px #ccc;
+  // box-shadow: 1px 4px 5px #ccc;
+  box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.19);
   background-color: #fff;
+  .user-social-item {
+    padding: 12px 0px 15px;
+  }
+}
+.only-post {
+  .user-social-item {
+    border-top: 1px solid #bababa;
+  }
 }
 // card header
 .ongo-card-header {
   padding: 10px;
+}
+.card-user-imgholder {
+  width: 8%;
+  display: inline-block;
+  vertical-align: top;
+}
+.card-journeypost {
+  width: 83%;
+  display: inline-block;
+  vertical-align: top;
+}
+.card-iconholder {
+  width: 7%;
+  display: inline-block;
+  vertical-align: top;
 }
 .journey-post {
   .post {
@@ -2991,9 +3015,174 @@ header {
 }
 .journey-date {
   color: #6d6e71;
-  font-size: 13px;
+  font-size: 12px;
 }
 // card header end
+.card-imgholder {
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  .blur-img {
+    width: 100%;
+    @extend .get-center;
+    @include filter(blur(6px));
+    img { width: 100%; }
+    &:after {
+      content: '';
+      @include square(100%);
+      @include position(absolute, 0 0 0 0);
+      background-color: rgba(0,0,0,0.5);
+    }
+  }
+  .card-img {
+    height: 100%;
+    @extend .get-center;
+  }
+}
+.related-imgslider {
+  padding: 10px 23px 10px 10px;
+  .flex-direction-nav a {
+    @include square(15px);
+    color: transparent;
+    text-shadow: none;
+    &:before {
+      color: $brand-blue;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: 16px;
+    }
+  }
+  .flex-direction-nav .flex-prev:before {
+    content: '\f053';
+  }
+  .flex-direction-nav .flex-next:before {
+    content: '\f054';
+  }
+  .flex-direction-nav .flex-prev {
+    left: auto;
+    right: -18px;
+    opacity: 1;
+    top: 50%;
+  }
+  .flex-direction-nav .flex-next {
+    left: auto;
+    right: -18px;
+    opacity: 1;
+    top: 70%;
+  }
+  .flexslider:hover {
+    .flex-direction-nav .flex-prev {
+      left: auto;
+      right: -18px;
+      opacity: 1;
+      top: 50%;
+    }
+    .flex-direction-nav .flex-next {
+      left: auto;
+      right: -18px;
+      opacity: 1;
+      top: 70%;
+    }
+  }
+}
+.related-ongo-slider {
+  width: 95px;
+  height: 95px;
+  border: 1px solid $brand-dark-blue;
+  img {
+    min-height: 100%;
+  }
+}
+.ongo-card-main {
+  min-height: 10px;
+  .relate-pic {
+    padding: 10px 10px 0;
+    .related-ongo-slider {
+      margin-right: 10px;
+      display: inline-block;
+      overflow: hidden;
+    }
+  }
+}
+.video-ongo-journey {
+  position: relative;
+  &:after {
+    content: '';
+    @include square(100%);
+    @include position(absolute,0 0 0 0);
+    background-color: rgba(0,0,0,0.4);
+  }
+  .youtube-icon { z-index: 1; }
+}
+// join card
+.ongo-journey-join {
+  width: 350px;
+  margin: 0 auto;
+  .join-card {
+    padding: 15px 10px;
+    border-radius: 6px;
+    background-color: $brand-dark-pink;
+  }
+  h4 {
+    margin: 0 0 5px;
+    color: #fff;
+    font-size: 22px;
+    @extend .avenir-light;
+  }
+  .join-tag {
+    position: absolute;
+    top: 80px;
+    right: 10px;
+  }
+  .journey-pic-imgholder {
+    margin: 0 auto -10px;
+    box-shadow: none;
+  }
+}
+// join card end
+// left card
+.ongo-journey-left {
+  width: 350px;
+  margin: 0 auto;
+  .journey-left {
+    padding: 20px 10px;
+    border-radius: 6px;
+    background-color: $brand-dark-blue;
+    color: #fff;
+    h4 {
+      margin: 0 0 5px;
+      color: #fff;
+      font-size: 22px;
+      @extend .avenir-light;
+    }
+  }
+  .left-tag {
+    position: absolute;
+    left: 10px;
+    bottom: -5px;
+  }
+}
+// left card end
+// change journey card
+.ongo-journey-change {
+  width: 350px;
+  margin: 0 auto;
+  .journey-change {
+    padding: 20px 10px;
+    border-radius: 6px;
+    @include transform(rotate(-2deg));
+    background-color: $brand-dark-pink;
+  }
+  h4 {
+    margin: 0;
+    font-size: 22px;
+  }
+  p {
+    margin: 15px 0;
+  }
+}
+
+// change journey card end
+
 // card end
 // on go journey end
 @import "fancybox-override";
