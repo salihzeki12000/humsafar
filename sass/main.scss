@@ -3225,12 +3225,20 @@ header {
 // ongo-journey-end
 // started-journey-card
 .started-journey-card {
+  margin-bottom: 20px;
+  .box-start-journey {
+    border-radius: 6px;
+    box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.19);
+  }
   .journey-start {
     background: url('../img/ongojourney/bg-start.png') no-repeat 50% 50%;
     h4 {
       margin: 35px 0px 20px;
       font-size: 30px;
     }
+  }
+  .you-in {
+    margin-bottom: -5px;
   }
   .started-heading {
     padding: 10px;
@@ -3250,6 +3258,7 @@ header {
   }
   .travelling-journey-type {
     padding: 10px;
+    background-color: #fff;
     li {
       margin-right: 10px;
       display: inline-block;
@@ -3271,6 +3280,15 @@ header {
       img {
         min-height: 100%;
       }
+    }
+  }
+  .journey-with {
+    padding: 10px;
+    background-color: #fff;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    p {
+      color: #6d6e71;
     }
   }
 }
