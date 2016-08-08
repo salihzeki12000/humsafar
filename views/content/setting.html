@@ -160,9 +160,10 @@
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <div class="form-group">
+                      <div class="form-group date-pick">
                         <label for="dob" class="color-blue">DOB</label>
-                        <input type="date" class="form-control" id="dob">
+                        <!-- <input type="date" class="form-control" id="dob"> -->
+                        <input type="text" class="form-control" ng-click="open1();" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
                       </div>
                     </div>
                   </div>

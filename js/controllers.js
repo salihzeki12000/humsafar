@@ -124,6 +124,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    $scope.travelBuddy = [
+      'img/ongojourney/adrena.jpg',
+      'img/ongojourney/monish.jpg',
+      'img/ongojourney/malhar.jpg'
+    ];
+
     $scope.ongoJourney = [
       {
         profilepic: "img/adrena.jpg",
@@ -1531,6 +1537,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Setting");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    $scope.open1 = function() {
+    $scope.popup1.opened = true;
+    showWeeks: false;
+  };
+  $scope.popup1 = {
+    opened: false
+  };
 
     $scope.myImage = '';
     $scope.myCroppedImage = '';

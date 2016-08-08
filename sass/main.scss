@@ -1973,6 +1973,24 @@ header {
     margin-bottom: 10px;
     font-size: 15px;
   }
+  .date-pick {
+    input {
+      background: url('../img/dropdown-icon.png') no-repeat 98% 50%;
+    }
+    .uib-daypicker:focus { outline: none; }
+    .uib-left {
+      .glyphicon-chevron-left:before {
+        content: "\f053";
+        font: normal normal normal 14px/1 FontAwesome;
+      }
+    }
+    .uib-right {
+      .glyphicon-chevron-right:before {
+        content: "\f054";
+        font: normal normal normal 14px/1 FontAwesome;
+      }
+    }
+  }
 }
 
 .setting-list {
@@ -3131,7 +3149,7 @@ header {
   .join-tag {
     position: absolute;
     top: 80px;
-    right: 10px;
+    right: 20px;
   }
   .journey-pic-imgholder {
     margin: 0 auto -10px;
@@ -3157,7 +3175,7 @@ header {
   }
   .left-tag {
     position: absolute;
-    left: 10px;
+    left: 30px;
     bottom: -5px;
   }
 }
@@ -3180,9 +3198,83 @@ header {
     margin: 15px 0;
   }
 }
-
 // change journey card end
+// ongo-journey-end
+.ongo-journey-end {
+  width: 350px;
+  margin: 0 auto;
+  .journey-end {
+    padding: 20px 10px;
+    border-radius: 6px;
+    background-color: $brand-dark-pink;
+  }
+  h4 {
+    margin: 0px 0px 5px;
+    font-size: 22px;
+  }
+  .end-journey-flag {
+    margin: 25px 0;
+    span {
+      margin-top: 10px;
+      display: inline-block;
+      font-size: 45px;
+    }
+  }
+}
 
+// ongo-journey-end
+// started-journey-card
+.started-journey-card {
+  .journey-start {
+    background: url('../img/ongojourney/bg-start.png') no-repeat 50% 50%;
+    h4 {
+      margin: 35px 0px 20px;
+      font-size: 30px;
+    }
+  }
+  .started-heading {
+    padding: 10px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-color: $brand-dark-pink;
+    h4 {
+      margin: 0 0 5px;
+      font-size: 25px;
+    }
+  }
+  .journey-imgholder {
+    width: 100%;
+    height: 260px;
+    margin-top: -2px;
+    overflow: hidden;
+  }
+  .travelling-journey-type {
+    padding: 10px;
+    li {
+      margin-right: 10px;
+      display: inline-block;
+    }
+  }
+  .journey-travelling-buddies {
+    position: absolute;
+    right: 0;
+    bottom: -10px;
+    .img-buddies {
+      width: 55px;
+      height: 57px;
+      border-radius: 20px;
+      border: 2px solid #fff;
+      margin-left: 5px;
+      display: inline-block;
+      overflow: hidden;
+      box-shadow: 0px 2px 5px #ccc;
+      img {
+        min-height: 100%;
+      }
+    }
+  }
+}
+// started-journey-card end
 // card end
 // on go journey end
 @import "fancybox-override";
