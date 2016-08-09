@@ -28,6 +28,10 @@ $brand-lighter-grey: #e3e3e3;
     }
   }
 }
+* {
+  -webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
 // body {
 //   padding-top: 70px;
 // }
@@ -2989,7 +2993,7 @@ header {
   margin-left: 30px;
 }
 .ongo-journey-card {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   border-radius: 8px;
   // box-shadow: 1px 4px 5px #ccc;
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.19);
@@ -3034,6 +3038,53 @@ header {
 .journey-date {
   color: #6d6e71;
   font-size: 12px;
+}
+.options {
+  position: relative;
+  .own-trip, .other-trip {
+    width: 205px;
+    position: absolute;
+    bottom: 37px;
+    right: -25px;
+    padding: 20px 25px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    box-shadow: -1px 1px 10px 0px rgba(0, 0, 0, 0.35),inset 0px 0px 250px 0px rgba(0, 113, 184, 0.15);
+    background-color: #f6fafc;
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      bottom: -23px;
+      right: 15px;
+      border-top: 12px solid #e7f1f7;
+      border-right: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      border-left: 12px solid transparent;
+      z-index: 2;
+    }
+    &:after {
+      z-index: 1;
+      right: 14px;
+      bottom: -26px;
+      border-top: 13px solid #bababa;
+      border-right: 13px solid transparent;
+      border-bottom: 13px solid transparent;
+      border-left: 13px solid transparent;
+    }
+    li {
+      padding: 7px 5px;
+      display: block;
+      border-bottom: 1px solid #b1b3b6;
+      &:last-child {
+        border-bottom: none;
+      }
+      a {
+        color: #6d6e71;
+        font-size: 15px;
+        @extend .avenir-roman;
+      }
+    }
+  }
 }
 // card header end
 .card-imgholder {
@@ -3225,7 +3276,7 @@ header {
 // ongo-journey-end
 // started-journey-card
 .started-journey-card {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   .box-start-journey {
     border-radius: 6px;
     box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.19);
@@ -3241,13 +3292,19 @@ header {
     margin-bottom: -5px;
   }
   .started-heading {
-    padding: 10px;
+    padding: 5px 10px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     background-color: $brand-dark-pink;
     h4 {
-      margin: 0 0 5px;
+      display: inline-block;
+      margin: 0 0 0 30%;
       font-size: 25px;
+    }
+    p {
+      margin-top: 10px;
+      float: right;
+      font-size: 12px;
     }
   }
   .journey-imgholder {
