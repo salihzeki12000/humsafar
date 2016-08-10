@@ -2926,6 +2926,11 @@ header {
 // itinerary end
 
 // on go journey
+.on-go-journey {
+  background: url('../img/ongojourney/ongo-bg.jpg') no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
 .journey-info-strip {
   padding: 30px 30px 15px;
   margin-top: -20px;
@@ -2991,6 +2996,7 @@ header {
 .ongo-card-holder {
   width: 550px;
   margin-left: 30px;
+  position: relative;
 }
 .ongo-journey-card {
   margin-bottom: 30px;
@@ -3051,6 +3057,7 @@ header {
     border-top-right-radius: 15px;
     box-shadow: -1px 1px 10px 0px rgba(0, 0, 0, 0.35),inset 0px 0px 250px 0px rgba(0, 113, 184, 0.15);
     background-color: #f6fafc;
+    z-index: 10;
     &:before, &:after {
       content: '';
       position: absolute;
@@ -3185,7 +3192,7 @@ header {
 // join card
 .ongo-journey-join {
   width: 350px;
-  margin: 0 auto;
+  margin: 30px auto;
   .join-card {
     padding: 15px 10px;
     border-radius: 6px;
@@ -3211,7 +3218,7 @@ header {
 // left card
 .ongo-journey-left {
   width: 350px;
-  margin: 0 auto;
+  margin: 30px auto;
   .journey-left {
     padding: 20px 10px;
     border-radius: 6px;
@@ -3234,7 +3241,7 @@ header {
 // change journey card
 .ongo-journey-change {
   width: 350px;
-  margin: 0 auto;
+  margin: 30px auto;
   .journey-change {
     padding: 20px 10px;
     border-radius: 6px;
@@ -3280,12 +3287,35 @@ header {
   .box-start-journey {
     border-radius: 6px;
     box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.19);
+    position: relative;
+    z-index: 2;
   }
   .journey-start {
     background: url('../img/ongojourney/bg-start.png') no-repeat 50% 50%;
     h4 {
       margin: 35px 0px 20px;
       font-size: 30px;
+      position: relative;
+      &:before {
+        content: "";
+        width: 1px;
+        height: 55%;
+        border-right: 2px dashed $brand-dark-pink;
+        position: absolute;
+        bottom: 66px;
+        left: 50%;
+        @include transform(translateX(-50%));
+      }
+      &:after {
+        content: '';
+        width: 1px;
+        height: 30%;
+        border-right: 2px dashed $brand-dark-pink;
+        position: absolute;
+        bottom: -18px;
+        left: 50%;
+        @include transform(translateX(-50%));
+      }
     }
   }
   .you-in {
@@ -3349,7 +3379,27 @@ header {
     }
   }
 }
+.dot-line {
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  border-right: 2px dashed $brand-dark-pink;
+  left: 50%;
+  bottom: 80px;
+  @include transform(translateX(-50%));
+  z-index: 1;
+}
+.card-relate-holder {
+  position: relative;
+  z-index: 2;
+}
 // started-journey-card end
 // card end
 // on go journey end
 @import "fancybox-override";
+// #map {
+//   height: 100%;
+// }
+.get-map-height {
+  height: 500px;
+}

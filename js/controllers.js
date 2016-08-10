@@ -1120,6 +1120,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       // $scope.showimgData = $scope.localLife[getVal];
       $scope.showimgData = getVal;
       // console.log(getVal);
+      console.log("localImg");
       $uibModal.open({
         animation: true,
         templateUrl: "views/modal/local-imgview.html",
