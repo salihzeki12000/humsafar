@@ -28,10 +28,7 @@ $brand-lighter-grey: #e3e3e3;
     }
   }
 }
-* {
-  -webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-}
+
 // body {
 //   padding-top: 70px;
 // }
@@ -158,24 +155,38 @@ ul {
 // classes
 .avenir-black {
   font-family: "AvenirLTStd-Black";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .avenir-heavy {
   font-family: "AvenirLTStd-Heavy";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .avenir-light {
   font-family: "AvenirLTStd-Light";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .avenir-medium {
   font-family: "AvenirLTStd-Medium";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .avenir-roman {
   font-family: "AvenirLTStd-Roman";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .djb-font {
   font-family: "djb";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .jenna-font {
   font-family: "JennaSue";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 textarea {
   resize: none;
@@ -417,8 +428,9 @@ textarea {
 }
 // header
 header {
-  position: relative;
   padding: 10px 20px 0;
+  position: relative;
+  z-index: 10;
 }
 .navbar {
   border: none;
@@ -2932,7 +2944,7 @@ header {
   background-size: cover;
 }
 .journey-info-strip {
-  padding: 30px 30px 15px;
+  padding: 30px 30px 10px;
   margin-top: -20px;
   background: url('../img/ongo-strip.png') no-repeat;
   background-size: 100% 100%;
@@ -2945,7 +2957,7 @@ header {
       border-right: 2px solid $brand-dark-blue;
       padding: 0px 20px;
       display: inline-block;
-      line-height: 20px;
+      line-height: 100%;
       &:first-child {
         padding: 0px 20px 0px 0;
       }
@@ -3396,10 +3408,137 @@ header {
 // started-journey-card end
 // card end
 // on go journey end
-@import "fancybox-override";
-// #map {
-//   height: 100%;
-// }
-.get-map-height {
-  height: 500px;
+
+
+// trip summary
+.trip-summary-strip {
+  position: relative;
+  background: url('../img/ongojourney/trip-summary-bg.png');
+  background-size: 100% 100%;
+  .trip-info {
+    span {
+      color: #fff;
+    }
+  }
+  .trip-list li {
+    border-right: 2px solid #fff;
+  }
 }
+.trip-summary-detail {
+  .heading {
+    h4 {
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+  }
+}
+.trip-days-count, .trip-type, .trip-country {
+  padding: 15px 0;
+  li {
+    padding: 0px 35px 0 0 ;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+.trip-type {
+  border-top: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
+  .icon-type {
+    img {
+      height: 45px;
+      margin-bottom: 5px;
+    }
+  }
+}
+.trip-country {
+  img {
+    height: 25px;
+    margin-right: 5px;
+  }
+  figcaption {
+    display: inline-block;
+  }
+}
+.trip-summary-detail {
+  padding: 20px;
+  margin-top: -10px;
+}
+.trip-visited-detail {
+  margin-top: 40px;
+  img {
+    opacity: 1;
+  }
+}
+.trip-day-detail {
+  height: 100px;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  margin-bottom: 35px;
+  position: relative;
+  .day {
+    width: 12%;
+    height: 100%;
+    padding: 23px 0;
+    margin-left: 15px;
+    display: inline-block;
+    background-color: #f4f4f4;
+    vertical-align: top;
+  }
+  .watch-day {
+    font-size: 16px;
+    color: $brand-dark-pink;
+    display: block;
+  }
+  .travel-day {
+    margin-top: -5px;
+    display: block;
+    color: #868686;
+    font-size: 30px;
+  }
+  .trip-type-icon {
+    position: absolute;
+    top: -20px;
+    right: 15px;
+    img {
+      width: 40px;
+    }
+  }
+  .trip-status {
+    width: 78%;
+    padding: 13px 10px;
+    display: inline-block;
+    vertical-align: top;
+    .status {
+      font-size: 16px;
+    }
+    img {
+      width: 25px;
+    }
+  }
+  .trip-time-day {
+    margin: 5px 0px 0px;
+    color: #868686;
+    font-size: 12px;
+  }
+  .trip-photo-added {
+    color: #868686;
+    font-size: 13px;
+    text-decoration: underline;
+  }
+}
+
+
+// trip summary end
+
+
+@import "fancybox-override";
+#map {
+  width: 100%;
+  height: 300px;
+  img {
+    opacity:1;
+  };
+}
+// .get-map-height {
+//   height: 500px;
+// }

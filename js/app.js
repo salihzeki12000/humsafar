@@ -105,6 +105,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       templateUrl: "views/template.html",
       controller: 'OnGoJourneyCtrl'
     })
+    .state('tripsummary', {
+      url: "/tripsummary",
+      templateUrl: "views/template.html",
+      controller: 'TripSummaryCtrl'
+    })
     .state('itinerary', {
       url: "/itinerary",
       templateUrl: "views/template.html",

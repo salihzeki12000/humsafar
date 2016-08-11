@@ -1,3 +1,4 @@
+var initMap = {};
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper'])
 
 .controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
@@ -114,8 +115,156 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 
   })
+  .controller('TripSummaryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+
+    // console.log("Testing Consoles");
+
+    $scope.template = TemplateService.changecontent("tripsummary");
+    $scope.menutitle = NavigationService.makeactive("TripSummary");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+    $scope.trip = {
+      date: "12 Feb, 2016",
+      dayNo: "8",
+      mileage: "14700",
+      tripJourneyType : [
+        {
+          imgTrip: "img/trip-summary/bar.png",
+          tripType: "Restaurants <br> & Bars",
+          tripTypeCount : 8
+        },
+        {
+          imgTrip: "img/trip-summary/park.png",
+          tripType: "Nature <br> & Parks",
+          tripTypeCount : 8
+        },
+        {
+          imgTrip: "img/trip-summary/beaches.png",
+          tripType: "Beaches",
+          tripTypeCount : 8
+        },
+      ],
+      countryVisited: [
+        {
+          countryImg: "img/trip-summary/korea.png",
+          countryName: "Korea"
+        },
+        {
+          countryImg: "img/flag.png",
+          countryName: "India"
+        },
+      ],
+      visitedCountry : "2"
+    }
+
+    $scope.visitedCountry = [
+      {
+        day: "01",
+        status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
+        timestampDate: "14 Jan,2014",
+        timestampHour: "01:20 pm",
+        travelTypeIcon: "img/ongojourney/location.png"
+      },
+      {
+        day: "02",
+        status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
+        photoAdd: "Added 20+ Photos",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        travelTypeIcon: "img/ongojourney/location.png"
+      },
+      {
+        day: "01",
+        status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
+        // photoAdd: "Added 20+ Photos",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        travelTypeIcon: "img/ongojourney/location.png"
+      },
+      {
+        day: "02",
+        status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
+        photoAdd: "Added 20+ Photos",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        travelTypeIcon: "img/ongojourney/location.png"
+      }
+    ];
+
+  })
   .controller('OnGoJourneyCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
+    initMap = function() {
+      var tardeo = {
+        lat: 18.97050,
+        lng: 131.044
+      };
+      // Create a new StyledMapType object, passing it an array of styles,
+        // and the name to be displayed on the map type control.
+        var styledMapType = new google.maps.StyledMapType(
+          [
+            {
+              stylers: [
+                { hue: '#b3d2fe' },
+                // { hue: '#000' },
+              ]
+            }
+          ],
+          {name: 'Styled Map'});
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4,
+        center: uluru
+      });
+
+      var contentString = '<div id="content">' +
+        '<div id="siteNotice">' +
+        '</div>' +
+        '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
+        '<div id="bodyContent">' +
+        '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+        'sandstone rock formation in the southern part of the ' +
+        'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) ' +
+        'south west of the nearest large town, Alice Springs; 450&#160;km ' +
+        '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major ' +
+        'features of the Uluru - Kata Tjuta National Park. Uluru is ' +
+        'sacred to the Pitjantjatjara and Yankunytjatjara, the ' +
+        'Aboriginal people of the area. It has many springs, waterholes, ' +
+        'rock caves and ancient paintings. Uluru is listed as a World ' +
+        'Heritage Site.</p>' +
+        '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
+        'https://en.wikipedia.org/w/index.php?title=Uluru</a> ' +
+        '(last visited June 22, 2009).</p>' +
+        '</div>' +
+        '</div>';
+
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString,
+        maxWidth: 200
+      });
+
+      var marker = new google.maps.Marker({
+        position: uluru,
+        map: map,
+        title: 'Uluru (Ayers Rock)'
+      });
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+       map.mapTypes.set('styled_map', styledMapType);
+       map.setMapTypeId('styled_map');
+    }
+
+    // $scope.$on('$viewContentLoaded', function(){
+    //   $timeout(function() {
+    //     initMap();
+    //   },100);
+    //  });
+
+    setTimeout(function(){
+      initMap();
+    },100);
 
     // console.log("Testing Consoles");
 
