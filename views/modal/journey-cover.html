@@ -1,0 +1,29 @@
+<div class="choose-cover-photo avenir-roman">
+  <div class="cover-photo-main">
+    <div class="cover-heading clearfix">
+      <div class="pull-left">
+        <span class="color-white popup-title avenir-light" ng-hide="cropImage">Choose From London 2015 Photos</span>
+        <span class="color-white popup-title avenir-light" ng-show="cropImage">Drag and Move London 2015 Cover Photos</span>
+      </div>
+      <div class="pull-right">
+        <span class="close color-white full-opacity" ng-click="$dismiss();"><i class="fa fa-times color-white"></i></span>
+      </div>
+    </div>
+    <div class="cover-content">
+      <div class="cover-gallery-grid  bg-white" ng-hide="cropImage">
+        <div class="choose-cover-pic inline-block" ng-repeat="img in galleryCover track by $index">
+          <img ng-src="{{img}}" alt="Gallery" class="img-responsive" id="fileGallery" ng-click="cropCover(img);">
+        </div>
+      </div>
+      <div class="crop-cover-container">
+        <div class="selected-img-gallery" ng-show="cropImage">
+          <div class="cropped-Image">
+            <!-- <img-crop image="myImage" result-image="myCroppedImage"></img-crop> -->
+            <img ng-src="{{showCover}}" alt="" class="img-responsive">
+          </div>
+          <span ng-click="viewPrev();">Cancel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

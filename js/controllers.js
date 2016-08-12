@@ -129,93 +129,81 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       date: "12 Feb, 2016",
       dayNo: "8",
       mileage: "14700",
-      tripJourneyType : [
-        {
-          imgTrip: "img/trip-summary/bar.png",
-          tripType: "Restaurants <br> & Bars",
-          tripTypeCount : 8
-        },
-        {
-          imgTrip: "img/trip-summary/park.png",
-          tripType: "Nature <br> & Parks",
-          tripTypeCount : 8
-        },
-        {
-          imgTrip: "img/trip-summary/beaches.png",
-          tripType: "Beaches",
-          tripTypeCount : 8
-        },
-      ],
-      countryVisited: [
-        {
-          countryImg: "img/trip-summary/korea.png",
-          countryName: "Korea"
-        },
-        {
-          countryImg: "img/flag.png",
-          countryName: "India"
-        },
-      ],
-      visitedCountry : "2"
+      tripJourneyType: [{
+        imgTrip: "img/trip-summary/bar.png",
+        tripType: "Restaurants <br> & Bars",
+        tripTypeCount: 8
+      }, {
+        imgTrip: "img/trip-summary/park.png",
+        tripType: "Nature <br> & Parks",
+        tripTypeCount: 8
+      }, {
+        imgTrip: "img/trip-summary/beaches.png",
+        tripType: "Beaches",
+        tripTypeCount: 8
+      }, ],
+      countryVisited: [{
+        countryImg: "img/trip-summary/korea.png",
+        countryName: "Korea"
+      }, {
+        countryImg: "img/flag.png",
+        countryName: "India"
+      }, ],
+      visitedCountry: "2"
     }
 
-    $scope.visitedCountry = [
-      {
-        day: "01",
-        status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
-        timestampDate: "14 Jan,2014",
-        timestampHour: "01:20 pm",
-        travelTypeIcon: "img/ongojourney/location.png"
-      },
-      {
-        day: "02",
-        status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
-        photoAdd: "Added 20+ Photos",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        travelTypeIcon: "img/ongojourney/location.png"
-      },
-      {
-        day: "01",
-        status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
-        // photoAdd: "Added 20+ Photos",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        travelTypeIcon: "img/ongojourney/location.png"
-      },
-      {
-        day: "02",
-        status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
-        photoAdd: "Added 20+ Photos",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        travelTypeIcon: "img/ongojourney/location.png"
-      }
-    ];
+    $scope.visitedCountry = [{
+      day: "01",
+      status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
+      timestampDate: "14 Jan,2014",
+      timestampHour: "01:20 pm",
+      travelTypeIcon: "img/ongojourney/location.png"
+    }, {
+      day: "02",
+      status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
+      photoAdd: "Added 20+ Photos",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      travelTypeIcon: "img/ongojourney/location.png"
+    }, {
+      day: "01",
+      status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
+      // photoAdd: "Added 20+ Photos",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      travelTypeIcon: "img/ongojourney/location.png"
+    }, {
+      day: "02",
+      status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
+      photoAdd: "Added 20+ Photos",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      travelTypeIcon: "img/ongojourney/location.png"
+    }];
 
   })
-  .controller('OnGoJourneyCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+  .controller('OnGoJourneyCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
     initMap = function() {
       var tardeo = {
-        lat: 18.97050,
-        lng: 131.044
+        lat: 18.96458,
+        lng: 72.78397
       };
       // Create a new StyledMapType object, passing it an array of styles,
-        // and the name to be displayed on the map type control.
-        var styledMapType = new google.maps.StyledMapType(
-          [
-            {
-              stylers: [
-                { hue: '#b3d2fe' },
-                // { hue: '#000' },
-              ]
-            }
-          ],
-          {name: 'Styled Map'});
+      // and the name to be displayed on the map type control.
+      var styledMapType = new google.maps.StyledMapType(
+        [{
+          stylers: [{
+              hue: '#b3d2fe'
+            },
+            // { hue: '#000' },
+          ]
+        }], {
+          name: 'Styled Map'
+        });
       var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
-        center: uluru
+        zoom: 12,
+        center: tardeo
       });
 
       var contentString = '<div id="content">' +
@@ -245,15 +233,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       });
 
       var marker = new google.maps.Marker({
-        position: uluru,
+        position: tardeo,
         map: map,
-        title: 'Uluru (Ayers Rock)'
+        title: 'Tardeo (Ayers Rock)'
       });
       marker.addListener('click', function() {
         infowindow.open(map, marker);
       });
-       map.mapTypes.set('styled_map', styledMapType);
-       map.setMapTypeId('styled_map');
+      map.mapTypes.set('styled_map', styledMapType);
+      map.setMapTypeId('styled_map');
     }
 
     // $scope.$on('$viewContentLoaded', function(){
@@ -262,9 +250,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     //   },100);
     //  });
 
-    setTimeout(function(){
+    setTimeout(function() {
       initMap();
-    },100);
+    }, 100);
 
     // console.log("Testing Consoles");
 
@@ -273,77 +261,169 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    // review country visited pop up
+    $scope.giveReview = function() {
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/review-post.html",
+        scope: $scope,
+        backdropClass: "review-backdrop"
+      })
+    };
+    $scope.showRating = 1;
+    $scope.fillColor = "";
+    $scope.starRating = function(val) {
+      if (val == 1) {
+        $scope.showRating = 1;
+        $scope.fillColor2 = "";
+        $scope.fillColor3 = "";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 2) {
+        $scope.showRating = 2;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 3) {
+        $scope.showRating = 3;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 4) {
+        $scope.showRating = 4;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "fa-star";
+        $scope.fillColor5 = "";
+      } else if (val == 5) {
+        $scope.showRating = 5;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "fa-star";
+        $scope.fillColor5 = "fa-star";
+      } else {
+        $scope.showRating = 1;
+      }
+    };
+    // review country visited pop up end
+    // edit journey name
+    $scope.nameJourney = function() {
+        $uibModal.open({
+          animation: true,
+          templateUrl: "views/modal/journey-name.html",
+          scope: $scope,
+          backdropClass: "review-backdrop"
+        });
+      }
+      // edit journey name end
+      // cover photo
+    $scope.coverPhoto = function() {
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/journey-cover.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+        windowClass: "cover-modal"
+      });
+    };
+    $scope.galleryCover = [
+      'img/london.jpg',
+      'img/paris.jpg',
+      'img/india-gate.jpg',
+      'img/slider1.jpg',
+      'img/slider2.jpg',
+      'img/blog/blog-post.jpg',
+      'img/blog/blog-post2.jpg',
+      'img/blog/blog-post3.jpg',
+      'img/london.jpg',
+      'img/paris.jpg',
+      'img/india-gate.jpg',
+      'img/slider1.jpg',
+      'img/slider2.jpg',
+      'img/blog/blog-post.jpg',
+      'img/blog/blog-post2.jpg',
+      'img/blog/blog-post3.jpg',
+    ];
+
+
+    // cover photo end
+    $scope.cropCover = function(imgCrop) {
+      $scope.showCover = imgCrop;
+      $scope.cropImage = true;
+    };
+    $scope.viewPrev = function() {
+      // $scope.showCover = imgCrop;
+      $scope.cropImage = false;
+    };
+
     $scope.travelBuddy = [
       'img/ongojourney/adrena.jpg',
       'img/ongojourney/monish.jpg',
       'img/ongojourney/malhar.jpg'
     ];
 
-    $scope.ongoJourney = [
-      {
-        profilepic: "img/adrena.jpg",
-        post: "First time together in London... A trip after ages!! at 27 You with <b>Monish Shah</b>, <b>Malhar Gala</b> & <b>Nida Kapadia</b>",
-        journeyDay: "01",
-        journeyDate: "14 Jan, 2014",
-        journeyTime : "01:20 pm",
-        journeyTypeicon : "img/ongojourney/location.png",
-        journeyPhoto : "img/ongojourney/ongopic.jpg",
-        like: "1550",
-        relatedPhoto : [
-          'img/ongojourney/slider1.jpg',
-          'img/ongojourney/slider2.jpg',
-          'img/ongojourney/slider3.jpg',
-          'img/ongojourney/slider4.jpg',
-          'img/ongojourney/slider5.jpg',
-          'img/ongojourney/slider1.jpg',
-          'img/ongojourney/slider2.jpg',
-        ],
-      },
-      {
-        profilepic: "img/adrena.jpg",
-        post: "First time together in London... A trip after ages!! at 27 You with Monish Shah,Malhar Gala &amp; Nida Kapadia",
-        journeyDay: "01",
-        journeyDate: "14 Jan, 2014",
-        journeyTime : "01:20 pm",
-        journeyTypeicon : "img/ongojourney/camera.png",
-        journeyPhoto : "img/ongojourney/ongopic2.jpg",
-        like: "1550",
-        viewRelatepic : [
-          'img/ongojourney/related1.jpg',
-          'img/ongojourney/related2.jpg'
-        ],
-      },
-      {
-        class: "only-post",
-        profilepic: "img/adrena.jpg",
-        post: "First time together in London... A trip after ages!! at 27 You with Monish Shah,Malhar Gala &amp; Nida Kapadia",
-        journeyDay: "01",
-        journeyDate: "14 Jan, 2014",
-        journeyTime : "01:20 pm",
-        journeyTypeicon : "img/ongojourney/thought.png",
-        like: "1550",
-      },
-      {
-        profilepic: "img/adrena.jpg",
-        post: "First time together in London... A trip after ages!! at 27 You with Monish Shah,Malhar Gala &amp; Nida Kapadia",
-        journeyDay: "01",
-        journeyDate: "14 Jan, 2014",
-        journeyTime : "01:20 pm",
-        journeyTypeicon : "img/ongojourney/video.png",
-        video: "img/ongojourney/video-journey.jpg",
-        like: "1550",
-      },
-    ];
+    $scope.ongoJourney = [{
+      profilepic: "img/adrena.jpg",
+      post: "First time together in London... A trip after ages!! at 27 You with <b>Monish Shah</b>, <b>Malhar Gala</b> & <b>Nida Kapadia</b>",
+      journeyDay: "01",
+      journeyDate: "14 Jan, 2014",
+      journeyTime: "01:20 pm",
+      journeyTypeicon: "img/ongojourney/location.png",
+      journeyPhoto: "img/ongojourney/ongopic.jpg",
+      like: "1550",
+      relatedPhoto: [
+        'img/ongojourney/slider1.jpg',
+        'img/ongojourney/slider2.jpg',
+        'img/ongojourney/slider3.jpg',
+        'img/ongojourney/slider4.jpg',
+        'img/ongojourney/slider5.jpg',
+        'img/ongojourney/slider1.jpg',
+        'img/ongojourney/slider2.jpg',
+      ],
+    }, {
+      profilepic: "img/adrena.jpg",
+      post: "First time together in London... A trip after ages!! at 27 You with Monish Shah,Malhar Gala &amp; Nida Kapadia",
+      journeyDay: "01",
+      journeyDate: "14 Jan, 2014",
+      journeyTime: "01:20 pm",
+      journeyTypeicon: "img/ongojourney/camera.png",
+      journeyPhoto: "img/ongojourney/ongopic2.jpg",
+      like: "1550",
+      viewRelatepic: [
+        'img/ongojourney/related1.jpg',
+        'img/ongojourney/related2.jpg'
+      ],
+    }, {
+      class: "only-post",
+      profilepic: "img/adrena.jpg",
+      post: "First time together in London... A trip after ages!! at 27 You with Monish Shah,Malhar Gala &amp; Nida Kapadia",
+      journeyDay: "01",
+      journeyDate: "14 Jan, 2014",
+      journeyTime: "01:20 pm",
+      journeyTypeicon: "img/ongojourney/thought.png",
+      like: "1550",
+    }, {
+      profilepic: "img/adrena.jpg",
+      post: "First time together in London... A trip after ages!! at 27 You with Monish Shah,Malhar Gala &amp; Nida Kapadia",
+      journeyDay: "01",
+      journeyDate: "14 Jan, 2014",
+      journeyTime: "01:20 pm",
+      journeyTypeicon: "img/ongojourney/video.png",
+      video: "img/ongojourney/video-journey.jpg",
+      like: "1550",
+    }, ];
 
-   setTimeout(function(){
-     $('.flexslider').flexslider({
-       itemMargin: 10,
-       itemWidth: 95,
-       animation: "slide",
-       mousewheel: true,
-       controlNav: false,
-     });
-   },100);
+    setTimeout(function() {
+      $('.flexslider').flexslider({
+        itemMargin: 10,
+        itemWidth: 95,
+        animation: "slide",
+        mousewheel: true,
+        controlNav: false,
+      });
+    }, 100);
   })
   .controller('MylifeCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
@@ -1689,12 +1769,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 
     $scope.open1 = function() {
-    $scope.popup1.opened = true;
-    showWeeks: false;
-  };
-  $scope.popup1 = {
-    opened: false
-  };
+      $scope.popup1.opened = true;
+      showWeeks: false;
+    };
+    $scope.popup1 = {
+      opened: false
+    };
 
     $scope.myImage = '';
     $scope.myCroppedImage = '';
