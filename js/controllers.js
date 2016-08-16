@@ -262,6 +262,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 
 
+    // checkin
+    $scope.editCheckIn = function() {
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/checkin.html",
+        backdropClass: "review-backdrop",
+      });
+    };
+    // checkin end
+
     $scope.showDropdown = -1;
     $scope.editOption = function(byIndex) {
       if ($scope.showDropdown == byIndex) {

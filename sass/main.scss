@@ -3544,6 +3544,31 @@ header {
   }
 }
 // date and time
+.date-holder {
+  display: inline-block;
+  position: relative;
+  margin: 0px 5px;
+  &:before, &:after {
+    content: '';
+    width: 1px;
+    height: 15px;
+    position: absolute;
+    bottom: 0;
+    background-color: #fff;
+  }
+  &:before { left: 0; }
+  &:after { right: 0; }
+  input {
+    width: 75px;
+    padding: 0px 10px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    background-color: transparent;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+  }
+}
 .date-time-heading {
   p {
     color: #fff;
