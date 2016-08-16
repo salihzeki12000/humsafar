@@ -77,6 +77,15 @@ a,
 a:hover, a:focus {
   text-decoration: none;
 }
+.pop-close-btn {
+  opacity: 1;
+  color: #fff;
+  font-size: 15px;
+  &:hover {
+    color: #fff;
+    opacity: 1;
+  }
+}
 
 // scroll
 .scroll-side {
@@ -1591,7 +1600,6 @@ header {
     background-color: rgba(0,0,0,0.3);
     font-size: 18px;
   }
-  .close { opacity: 1; }
   .view-imgdown {
     width: 100%;
     padding: 10px;
@@ -1899,10 +1907,6 @@ header {
 .post-heading {
   padding: 20px 0;
   .popup-title {
-    font-size: 15px;
-  }
-  .close {
-    opacity: 1;
     font-size: 15px;
   }
 }
@@ -3146,6 +3150,9 @@ header {
         color: #6d6e71;
         font-size: 15px;
         @extend .avenir-roman;
+        &:hover {
+          color: #363636;
+        }
       }
     }
   }
@@ -3455,10 +3462,6 @@ header {
 // pop up journey used
 .journey-name-heading, .cover-heading {
   padding: 15px 0;
-  .close {
-    font-size: 15px;
-    opacity: 1;
-  }
 }
 .journey-content-main {
   .popup-journey-img {
@@ -3540,6 +3543,49 @@ header {
     margin-left: 35px;
   }
 }
+// date and time
+.date-time-heading {
+  p {
+    color: #fff;
+    font-size: 18px;
+  }
+}
+.date-time-picker {
+  .uib-daypicker, .uib-monthpicker, .uib-yearpicker {
+    width: 100%;
+    &:focus {
+      outline: none;
+    }
+    .btn {
+      padding: 12px;
+      border: none;
+      border-radius: 0;
+    }
+    th {
+      font-size: 16px;
+    }
+    thead:first-child tr button {
+      margin-bottom: 10px;
+      font-size: 16px;
+      padding: 8px;
+      &.uib-title {
+        padding: 12px;
+      }
+    }
+    .glyphicon {
+      font: normal normal normal normal 14px/1 FontAwesome;
+    }
+    .glyphicon-chevron-left:before {
+      content: "\f104";
+      font-size: 29px;
+    }
+    .glyphicon-chevron-right:before {
+      content: "\f105";
+      font-size: 29px;
+    }
+  }
+}
+// date and time end
 // pop up journey used end
 // on go journey end
 

@@ -261,6 +261,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+
+    $scope.showDropdown = -1;
+    $scope.editOption = function(byIndex) {
+      if ($scope.showDropdown == byIndex) {
+        $scope.showDropdown = -1;
+      } else {
+        $scope.showDropdown = byIndex;
+      }
+    };
+
+    $scope.options = {
+      minDate: new Date(),
+      showWeeks: false
+    };
+
+
     // review country visited pop up
     $scope.giveReview = function() {
       $uibModal.open({
@@ -357,6 +373,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       // $scope.showCover = imgCrop;
       $scope.cropImage = false;
     };
+
+    // edit date and time
+    $scope.changeDate = function() {
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/date-time.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+      })
+    };
+    // edit date and time end
 
     $scope.travelBuddy = [
       'img/ongojourney/adrena.jpg',
