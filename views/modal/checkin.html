@@ -10,7 +10,106 @@
   <div class="checkin-main">
     <form>
       <div class="checkin-input-holder">
-        <input type="text">
+        <div class="form-group">
+          <input type="text" class="form-control">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="checkin-input-holder">
+            <div class="form-group">
+              <input type="text" class="form-control" ng-click="showJourneyIcon = !showJourneyIcon">
+              <i class="fa fa-angle-down color-white"></i>
+            </div>
+            <div class="journeytype-dropdown" ng-show="showJourneyIcon">
+              <ul>
+                <li><a href="" title=""><img src="img/island.png" alt="" class="img-responsive" width="25"></a></li>
+                <li><a href="" title=""><img src="img/more-road.png" alt="" class="img-responsive" width="25"></a></li>
+                <li><a href="" title=""><img src="img/bus.png" alt="" class="img-responsive" width="25"></a></li>
+                <li><a href="" title=""><img src="img/dj.png" alt="" class="img-responsive" width="25"></a></li>
+                <li><a href="" title=""><img src="img/island.png" alt="" class="img-responsive" width="25"></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="checkin-input-holder">
+            <div class="form-group">
+              <input type="text" class="form-control" ng-click="showLocation = !showLocation">
+              <i class="fa fa-angle-down color-white"></i>
+            </div>
+            <div class="location-dropdown" ng-show="showLocation">
+              <ul>
+                <li><a href="" title="Gujarat">at Gujarat</a></li>
+                <li><a href="" title="Mumbai">at Mumbai</a></li>
+                <li><a href="" title="Delhi">at Delhi</a></li>
+                <li><a href="" title="West Bengal">at West Bengal</a></li>
+                <li><a href="" title="Ladakh">at Ladakh</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="file-input">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="upload-file-main">
+              <div class="upload-file">
+                <input type="file">
+              </div>
+              <div class="show-uploaded-image">
+                <div class="uploaded-imgholder">
+                  <img src="img/moment-travel1.jpg" alt="" class="img-responsive get-center scale-onhover">
+                </div>
+                <div class="onhover-uploaded-img">
+                  <i class="fa fa-trash-o remove-img color-white pointer"></i>
+                  <div class="get-center full-width text-center">
+                    <img src="img/add-friend.png" alt="" class=" m-center">
+                    <p class="m-clear avenir-roman color-white">Click Anywhere <span class="block">To Tag Your Friend</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="upload-file-main">
+              <div class="upload-file">
+                <input type="file" id="imgInp">
+              </div>
+              <div class="show-uploaded-image">
+                <div class="uploaded-imgholder">
+                  <img src="img/moment-travel2.jpg" alt="" class="img-responsive get-center scale-onhover" >
+                </div>
+                <div class="onhover-uploaded-img">
+                    <i class="fa fa-trash-o remove-img color-white pointer"></i>
+                  <div class="get-center full-width text-center">
+                    <img src="img/add-friend.png" alt="" class=" m-center">
+                    <p class="m-clear avenir-roman color-white">Click Anywhere <span class="block">To Tag Your Friend</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="upload-file-main">
+              <div class="upload-file">
+                <input type="file">
+              </div>
+              <div class="show-uploaded-image">
+                <div class="uploaded-imgholder">
+                  <img src="img/moment-travel1.jpg" alt="" class="img-responsive get-center scale-onhover" >
+                </div>
+                <div class="onhover-uploaded-img">
+                    <i class="fa fa-trash-o remove-img color-white pointer"></i>
+                  <div class="get-center full-width text-center">
+                    <img src="img/add-friend.png" alt="" class=" m-center">
+                    <p class="m-clear avenir-roman color-white">Click Anywhere <span class="block">To Tag Your Friend</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </form>
   </div>

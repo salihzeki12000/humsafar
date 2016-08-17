@@ -270,6 +270,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         backdropClass: "review-backdrop",
       });
     };
+
+    // $scope.$on('$viewContentLoaded', function(event) {
+    //   $timeout(function(){
+    //       var loadFile = function(event) {
+    //       var output = document.getElementById('output');
+    //       output.src = URL.createObjectURL(event.target.files[0]);
+    //     };
+    //     },100);
+    // });
+
     // checkin end
 
     $scope.showDropdown = -1;

@@ -3611,6 +3611,97 @@ header {
   }
 }
 // date and time end
+// check in
+.checkin-input-holder {
+  position: relative;
+  &:after, &:before {
+    width: 1px;
+    height: 15px;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    background-color: #fff;
+  }
+  &:before { left: 0; }
+  &:after { right: 0; }
+  input {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid #fff;
+    &:focus { border-color: #fff; }
+  }
+  i {
+    position: absolute;
+    right: 7px;
+    bottom: 1px;
+    font-size: 20px;
+  }
+  .journeytype-dropdown, .location-dropdown {
+    width: 100%;
+    border: 1px solid #fff;
+    border-top: 1px solid transparent;
+    position: absolute;
+    top: 40px;
+    li {
+      padding: 5px 10px;
+      border-bottom: 1px solid #fff;
+      &:last-child { border-bottom: none; }
+    }
+    a {
+       color: #fff;
+    }
+  }
+}
+.file-input {
+  .upload-file {
+    border: 2px dashed #fff;
+    height: 200px;
+  }
+}
+// view uploaded file
+.show-uploaded-image {
+  @include square(179px);
+  border: 2px solid #fff;
+  position: relative;
+  overflow: hidden;
+  &:before {
+    content: '';
+    @include square(100%);
+    @include position(absolute, 0 0 0 0);
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+    display: none;
+  }
+  &:hover {
+    .scale-onhover {
+      @include transform(translate(-50%, -50%)scale(1.2));
+      @include transition(all 300ms linear);
+    }
+    .onhover-uploaded-img {
+      display: block;
+      cursor: crosshair;
+      @include transition(all 300ms linear);
+    }
+    &:before { display: block; }
+  }
+}
+.scale-onhover {
+  @include transition(all 300ms linear);
+}
+.onhover-uploaded-img {
+  @include square(100%);
+  position: absolute;
+  z-index: 2;
+  display: none;
+  @include transition(all 300ms linear);
+  .remove-img {
+    @include position(absolute, 5px 5px null null);
+    font-size: 18px;
+    z-index: 1;
+  }
+}
+// check in end
 // pop up journey used end
 // on go journey end
 
