@@ -53,17 +53,20 @@
       <!-- uploaded file -->
       <div class="file-input">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4" ng-repeat="files in checkinUpload">
             <div class="upload-file-main">
-              <div class="upload-file">
-                <input type="file">
+              <div class="upload-file" ng-show="uploadImage">
+                <!-- <input type="file"> -->
+                <input id="upload{{$index}}" type="file" ng-click="previewFile($index)" ><br>
+                <!-- <img id="img1" src="" height="200" alt="Image preview..."> -->
                 <div class="get-center"><i class="fa fa-plus fa-4x color-white"></i></div>
               </div>
-              <div class="show-uploaded-image">
+              <div class="show-uploaded-image" ng-show="viewUploadedImg">
                 <div class="uploaded-imgholder">
-                  <img src="img/moment-travel1.jpg" alt="" class="img-responsive get-center scale-onhover">
+                  <!-- <img src="img/moment-travel1.jpg" alt="" class="img-responsive get-center scale-onhover"> -->
+                  <img id="img{{$index}}" src="" alt="Image preview..." class="img-responsive get-center scale-onhover">
                   <div class="onhover-uploaded-img">
-                    <i class="fa fa-trash-o remove-img color-white pointer"></i>
+                    <i class="fa fa-trash-o remove-img color-white pointer" ng-click="returnUpload();"></i>
                     <div class="get-center full-width text-center">
                       <img src="img/add-friend.png" alt="" class=" m-center">
                       <p class="m-clear avenir-roman color-white">Click Anywhere <span class="block">To Tag Your Friend</span></p>
@@ -80,7 +83,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <div class="upload-file-main">
               <div class="upload-file">
                 <input type="file">
@@ -106,8 +109,8 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-4">
+          </div> -->
+          <!-- <div class="col-md-4">
             <div class="upload-file-main">
               <div class="upload-file">
                 <input type="file">
@@ -133,7 +136,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- uploaded file end -->

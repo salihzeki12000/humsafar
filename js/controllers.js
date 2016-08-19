@@ -182,7 +182,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }];
 
   })
-  .controller('OnGoJourneyCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+  .controller('OnGoJourneyCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal,$interval) {
     //Used to name the .html file
     initMap = function() {
       var tardeo = {
@@ -281,32 +281,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     //     },100);
     // });
 
-    $scope.listFriend = [
-      {
-        img: "img/profile.jpg",
-        name: "Amit Verma"
-      },
-      {
-        img: "img/profile.jpg",
-        name: "Vignesh Kasturi"
-      },
-      {
-        img: "img/profile.jpg",
-        name: "Dhavel Gala"
-      },
-      {
-        img: "img/profile.jpg",
-        name: "Pooja Thakre"
-      },
-      {
-        img: "img/profile.jpg",
-        name: "Vinod Bhelose"
-      },
-      {
-        img: "img/profile.jpg",
-        name: "Rishabh Katoch"
-      },
-    ];
+    $scope.listFriend = [{
+      img: "img/profile.jpg",
+      name: "Amit Verma"
+    }, {
+      img: "img/profile.jpg",
+      name: "Vignesh Kasturi"
+    }, {
+      img: "img/profile.jpg",
+      name: "Dhavel Gala"
+    }, {
+      img: "img/profile.jpg",
+      name: "Pooja Thakre"
+    }, {
+      img: "img/profile.jpg",
+      name: "Vinod Bhelose"
+    }, {
+      img: "img/profile.jpg",
+      name: "Rishabh Katoch"
+    }, ];
     // $scope.myImage = '';
     // $scope.myCroppedImage = '';
     // $scope.viewImage = false;
@@ -329,16 +322,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     //   }
     // }, 1000);
 
-    $scope.tagButton = [
-      {
-        img: "img/profile.jpg",
-        name: "Yash Chadasama (Me)"
-      },
-      {
-        img: "img/profile.jpg",
-        name: "Amit Verma"
-      },
-    ];
+    $scope.tagButton = [{
+      img: "img/profile.jpg",
+      name: "Yash Chadasama (Me)"
+    }, {
+      img: "img/profile.jpg",
+      name: "Amit Verma"
+    }, ];
     // checkin end
 
     $scope.showDropdown = -1;
@@ -530,6 +520,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         controlNav: false,
       });
     }, 100);
+
+
+    $scope.uploadImage = true;
+    $scope.viewUploadedImg = false;
+    $scope.previewFile = function(val) {
+      var interval=$interval(function () {
+        var preview = document.getElementById('img'+(val));
+        console.log('img'+(val)); 
+        var file   = document.getElementById('upload'+(val)).files[0];
+        console.log(preview);
+        console.log(file);
+        var reader  = new FileReader();
+        reader.addEventListener("load", function() {  
+          preview.src = reader.result; 
+        }, false);
+        if (file) {  
+          $scope.uploadImage = false;
+          $scope.viewUploadedImg = true;
+          reader.readAsDataURL(file);
+          $interval.cancel(interval);
+        }
+      }, 1000);
+    };
+    $scope.returnUpload = function() {
+      $scope.viewUploadedImg = false;
+      $scope.uploadImage = true;
+    };
+    $scope.checkinUpload = [{},{},{}];
   })
   .controller('MylifeCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
