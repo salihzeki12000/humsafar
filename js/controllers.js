@@ -268,6 +268,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         animation: true,
         templateUrl: "views/modal/checkin.html",
         backdropClass: "review-backdrop",
+        scope: $scope
       });
     };
 
@@ -279,6 +280,55 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     //     };
     //     },100);
     // });
+
+    $scope.listFriend = [
+      {
+        img: "img/profile.jpg",
+        name: "Amit Verma"
+      },
+      {
+        img: "img/profile.jpg",
+        name: "Vignesh Kasturi"
+      },
+      {
+        img: "img/profile.jpg",
+        name: "Dhavel Gala"
+      },
+      {
+        img: "img/profile.jpg",
+        name: "Pooja Thakre"
+      },
+      {
+        img: "img/profile.jpg",
+        name: "Vinod Bhelose"
+      },
+      {
+        img: "img/profile.jpg",
+        name: "Rishabh Katoch"
+      },
+    ];
+    // $scope.myImage = '';
+    // $scope.myCroppedImage = '';
+    // $scope.viewImage = false;
+    // var got = setInterval(function() {
+    //   if (document.getElementById('fileInput')) {
+    //     console.log("got");
+    //     document.getElementById('fileInput').onchange = function(evt) {
+    //       var file = evt.currentTarget.files[0];
+    //       var reader = new FileReader();
+    //       reader.onload = function(evt) {
+    //         $scope.$apply(function($scope) {
+    //           console.log(evt);
+    //           $scope.viewImage = true;
+    //           $scope.myImage = evt.target.result;
+    //         });
+    //       };
+    //       reader.readAsDataURL(file);
+    //     };
+    //     clearInterval(got);
+    //   }
+    // }, 1000);
+
 
     // checkin end
 
@@ -1844,7 +1894,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         clearInterval(got);
       }
     }, 1000);
-
 
     $scope.showSetting = 1;
     $scope.setting = function(val) {
