@@ -139,18 +139,21 @@
       <!-- uploaded file end -->
       <!-- upload photo or video -->
       <div class="upload-checkin-sec">
-        <!-- <div class="cropArea relate">
-          <div class="cancel"><span class="color-white pointer">Cancel</span></div>
-          <img-crop image="myImage" result-image="myCroppedImage">
-          </img-crop>
-          <div class="btn-upload">
-            <button class="btn btn-pink btn-more">Upload</button>
+        <div class="checkin-uploaded-pic">
+          <div class="uploaded-photo-imgholder">
+            <img src="img/uploaded-pic.jpg" alt="" class="img-responsive">
+            <span class="video-icon"><i class="fa fa-youtube-play fa-2x color-white"></i></span>
           </div>
-        </div> -->
+          <div class="add-caption">
+            <div class="checkin-input-holder">
+              <input type="text" class="form-control" placeholder="Add Caption">
+            </div>
+          </div>
+        </div>
         <div class="upload-section text-center">
           <img src="img/upload-icon-white.png" alt="" class="m-center img-responsive">
-          <p class="text-center color-grey avenir-roman">Drag a Photo here</p>
-          <span class="block mt10 color-grey avenir-roman">-or-</span>
+          <p class="text-center color-white avenir-roman mt10">Drag a Photo here</p>
+          <span class="block mt10 color-white avenir-roman">-or-</span>
           <div class="upload-btn">
             <div class="relate">
               <button class="btn btn-pink pointer file-btn">Select a photo from your computer input</button>
@@ -180,7 +183,7 @@
                 <ul>
                   <li ng-repeat="friend in listFriend | filter:searchFriend">
                     <div class="friend-listholder select-friend">
-                      <input type="radio" name="tag-list" id="{{friend.name}}">
+                      <input type="checkbox" name="tag-list" id="{{friend.name}}">
                       <label for="{{friend.name}}">
                         <div class="friend-imgholder">
                           <img ng-src="{{friend.img}}" alt="{{friend.name}}" class="img-responsive">
@@ -201,6 +204,17 @@
         </div>
       </div>
       <!-- tag friends end -->
+      <!-- tag deleted btn -->
+      <div class="tagged-delete-list">
+        <a href="" ng-repeat="list in tagButton">
+          <span class="img-friend"><img ng-src="{{list.img}}" alt="img-responsive"></span>
+          <span class="color-white avenir-roman inline-block v-mid">{{list.name}}</span>
+          <span class="hover-tag-btn">
+            <i class="fa fa-trash-o color-white get-center"></i>
+          </span>
+        </a>
+      </div>
+      <!-- tag deleted btn end-->
     </form>
   </div>
 </div>

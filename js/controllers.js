@@ -329,7 +329,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     //   }
     // }, 1000);
 
-
+    $scope.tagButton = [
+      {
+        img: "img/profile.jpg",
+        name: "Yash Chadasama (Me)"
+      },
+      {
+        img: "img/profile.jpg",
+        name: "Amit Verma"
+      },
+    ];
     // checkin end
 
     $scope.showDropdown = -1;
