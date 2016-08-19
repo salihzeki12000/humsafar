@@ -2986,34 +2986,6 @@ header {
 // visiting
 // post profile pic end
 // activity end
-// itinerary
-.itinerary-holder {
-  padding: 0 40px;
-}
-.itinerary-imgholder {
-  margin-bottom: 30px;
-  &:before {
-    content: '';
-    @include position(absolute,0 0 0 0);
-    background-color: rgba(0,0,0,0.6);
-  }
-}
-.itinerary-detail {
-  h3 {
-    margin: 0;
-    font-size: 28px;
-  }
-  p {
-    margin: 10px 0;
-    font-size: 16px;
-  }
-}
-.itinerary-detail-first {
-  p {
-    font-size: 18px;
-  }
-}
-// itinerary end
 // on go journey
 .on-go-journey {
   position: relative;
@@ -4078,6 +4050,39 @@ header {
   }
 }
 // trip summary end
+// itinerary
+.itinerary-holder {
+  padding: 0 40px;
+}
+.itinerary-imgholder {
+  margin-bottom: 30px;
+  &:before {
+    content: '';
+    @include position(absolute,0 0 0 0);
+    background-color: rgba(0,0,0,0.6);
+  }
+}
+.itinerary-detail {
+  h3 {
+    margin: 0;
+    font-size: 28px;
+  }
+  p {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+}
+.itinerary-detail-first {
+  p {
+    font-size: 18px;
+  }
+}
+// itinerary end
+// detail itinerary detail
+.detail-itinerary-page {
+  padding: 0px 20px;
+}
+// detail itinerary detail end
 @import "fancybox-override";
 #map {
   width: 100%;

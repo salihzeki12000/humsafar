@@ -1,0 +1,125 @@
+<div class="detail-itinerary-page avenir-roman">
+  <div class="container-fluid">
+    <div class="bg-white">
+      <div class="container">
+        <div class="fill-itinerary">
+          <h4 class="color-blue avenir-roman">Fill Up The Itinerary</h4>
+          <div class="fill-itinerary-detail">
+            <form action="">
+              <div class="itinerary-title">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="itinerary-inputholder">
+                      <input type="text" class="form-control" placeholder="Trip Title">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="itinerary-inputholder">
+                      <input type="text" class="form-control" placeholder="Travelled With">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- itinerary type -->
+              <div class="fill-itinerary-type">
+                <div class="select-itinerary-type" ng-repeat="itinerary in itineraryType">
+                  <figure>
+                    <!-- <img src="{{itinerary.img}}" alt="" class="img-responsive"> -->
+                    <figcaption>{{itinerary.caption}}</figcaption>
+                  </figure>
+                </div>
+              </div>
+              <!-- itinerary type end -->
+              <!-- country Visited -->
+              <div class="itinerary-country-visited">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="itinerary-inputholder">
+                      <input type="text" class="form-control" placeholder="Country You Visited">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="itinerary-country-detail">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label for="From">From</label>
+                          <div class="itinerary-inputholder">
+                            <input type="text" class="form-control" id="From">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="to">To</label>
+                          <div class="itinerary-inputholder">
+                            <input type="text" class="form-control" id="to">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="Duration">Duration</label>
+                          <div class="itinerary-inputholder">
+                            <input type="text" class="form-control" id="Duration">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="add-country">
+                      <button class="btn btn-dark-pink">Add Country</button>
+                      <span>If you have visited any other country on the same trip</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- country Visited end-->
+              <!-- city visited  -->
+              <div class="itinerary-country-visited itinerary-city-visited" >
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="itinerary-inputholder">
+                      <input type="text" class="form-control" placeholder="Country You Visited">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="itinerary-country-detail">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label for="From">From</label>
+                          <div class="itinerary-inputholder">
+                            <input type="text" class="form-control" id="From">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="to">To</label>
+                          <div class="itinerary-inputholder">
+                            <input type="text" class="form-control" id="to">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="Duration">Duration</label>
+                          <div class="itinerary-inputholder">
+                            <input type="text" class="form-control" id="Duration">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="add-country">
+                      <button class="btn btn-dark-pink">Add City</button>
+                      <span>If you have visited any other cities on the same trip</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- city visited end -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3014,6 +3014,56 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 
   })
+  .controller('DetailedItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+
+    // console.log("Testing Consoles");
+
+    $scope.template = TemplateService.changecontent("detail-itinerary");
+    $scope.menutitle = NavigationService.makeactive("DetailedItinerary");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+    $scope.itineraryType = [
+      {
+        // img: "",
+        caption: "Adventure"
+      },
+      {
+        // img: "",
+        caption: "Business"
+      },
+      {
+        // img: "",
+        caption: "Family"
+      },
+      {
+        // img: "",
+        caption: "Romance"
+      },
+      {
+        // img: "",
+        caption: "Backpacking"
+      },
+      {
+        // img: "",
+        caption: "Budget"
+      },
+      {
+        // img: "",
+        caption: "Luxury"
+      },
+      {
+        // img: "",
+        caption: "Religious"
+      },
+      {
+        // img: "",
+        caption: "Friends"
+      },
+    ];
+
+  })
 
 .controller('headerctrl', function($scope, TemplateService) {
   $scope.template = TemplateService;
