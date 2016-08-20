@@ -4084,6 +4084,98 @@ header {
   padding: 0px 20px;
 }
 // detail itinerary detail end
+
+// quick itinerary detail
+.fill-quick-itinerary {
+  margin: 30px 0;
+}
+.itinerary-inputholder {
+  position: relative;
+  input {
+    border: none;
+    border-bottom: 1px solid $brand-blue;
+    &:focus { border-color: $brand-blue; }
+  }
+  &:before, &:after {
+    content: '';
+    width: 1px;
+    height: 15px;
+    position: absolute;
+    bottom: 0;
+    background-color: $brand-blue;
+  }
+  &:before { left: 0; }
+  &:after { right: 0; }
+}
+.quick-itinerary-detail {
+  padding: 30px 60px;
+  border: 1px solid $brand-blue;
+  border-radius: 6px;
+}
+.itinerary-fill-info {
+  label {
+    font-size: 15px;
+    @extend .avenir-light;
+    font-weight: 500;
+    color: $brand-dark-blue;
+  }
+  .itinerary-inputholder {
+    width: 90px;
+    margin-left: 10px;
+    display: inline-block;
+  }
+  .itinerary-month, .itinerary-year {
+    display: inline-block;
+    margin-right: 22px;
+  }
+  .itinerary-duration { display: inline-block; }
+}
+.fill-itinerary-type {
+  margin: 30px 0;
+  .select-itinerary-type {
+    min-width: 80px;
+    display: inline-block;
+    text-align: center;
+  }
+  .itinerary-iconholder {
+    @include square(40px);
+    background: url('../img/itinerary/bluebox.png');
+    background-size: 100% 100%;
+    display: inline-block;
+    position: relative;
+    img {
+      @extend .get-center;
+    }
+  }
+}
+.itinerary-country-visited {
+  .add-country {
+    margin: 25px 0;
+  }
+}
+.trip-descp-itinerary {
+  label[for="descp"] {
+    margin-bottom: 10px;
+    color: $brand-pink;
+    font-size: 17px;
+    font-weight: 500;
+  }
+}
+.upload-trip-photo-sec {
+  margin: 30px 0px 10px;
+  label {
+    margin-bottom: 10px;
+    color: $brand-pink;
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .trip-photo-holder {
+    padding: 40px 0;
+    border: 1px solid $brand-dark-blue;
+    border-radius: 6px;
+  }
+}
+// quick itinerary detail end
 @import "fancybox-override";
 #map {
   width: 100%;

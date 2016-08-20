@@ -4,7 +4,7 @@
       <div class="container">
         <div class="fill-quick-itinerary">
           <form>
-            <h4 class="color-blue">Quick Itinerary</h4>
+            <h4 class="color-blue mb20">Quick Itinerary</h4>
             <div class="quick-itinerary-detail">
               <div class="itinerary-title">
                 <div class="row">
@@ -14,25 +14,23 @@
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <div class="itinerary-year">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <label for="month">Month</label>
-                          <div class="itinerary-inputholder">
-                            <input type="text" class="form-control" id="month">
-                          </div>
+                    <div class="itinerary-fill-info">
+                      <div class="itinerary-month">
+                        <label for="month">Month</label>
+                        <div class="itinerary-inputholder">
+                          <input type="text" class="form-control" id="month">
                         </div>
-                        <div class="col-md-4">
-                          <label for="year">Year</label>
-                          <div class="itinerary-inputholder">
-                            <input type="text" class="form-control" id="year">
-                          </div>
+                      </div>
+                      <div class="itinerary-year">
+                        <label for="year">Year</label>
+                        <div class="itinerary-inputholder">
+                          <input type="text" class="form-control" id="year">
                         </div>
-                        <div class="col-md-4">
-                          <label for="duration">Duration</label>
-                          <div class="itinerary-inputholder">
-                            <input type="text" class="form-control" id="duration">
-                          </div>
+                      </div>
+                      <div class="itinerary-duration">
+                        <label for="duration">Duration</label>
+                        <div class="itinerary-inputholder duration-input">
+                          <input type="text" class="form-control" id="duration">
                         </div>
                       </div>
                     </div>
@@ -41,10 +39,13 @@
               </div>
               <!-- itinerary type -->
               <div class="fill-itinerary-type">
+                <h4 class="color-light-grey mt20">Itineraries Type</h4>
                 <div class="select-itinerary-type" ng-repeat="itinerary in itineraryType">
                   <figure>
-                    <!-- <img src="{{itinerary.img}}" alt="" class="img-responsive"> -->
-                    <figcaption>{{itinerary.caption}}</figcaption>
+                    <div class="itinerary-iconholder">
+                      <img ng-src="{{itinerary.img}}" alt="" class="img-responsive">
+                    </div>
+                    <figcaption class="color-dark-blue avenir-roman">{{itinerary.caption}}</figcaption>
                   </figure>
                 </div>
               </div>
@@ -56,9 +57,9 @@
                     <div class="itinerary-inputholder">
                       <input type="text" class="form-control" placeholder="Country You Visited">
                     </div>
-                    <div class="add-country">
-                      <button class="btn btn-dark-pink">Add Country</button>
-                      <span>If you have visited any other country on the same trip</span>
+                    <div class="add-country clearfix">
+                      <button class="btn btn-dark-pink pull-left">Add Country</button>
+                      <span class="color-dark-blue pull-right mt5">If you have visited any other country on the same trip</span>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -72,9 +73,9 @@
                         </ui-select-choices>
                       </ui-select> -->
                     </div>
-                    <div class="add-country">
-                      <button class="btn btn-dark-pink">Add City</button>
-                      <span>If you have visited any other cities on the same trip</span>
+                    <div class="add-country clearfix">
+                      <button class="btn btn-dark-pink pull-left">Add City</button>
+                      <span class="color-dark-blue pull-right mt5">If you have visited any other cities on the same trip</span>
                     </div>
                   </div>
                 </div>
@@ -109,9 +110,9 @@
               </div>
               <!-- upload trip photo end-->
             </div>
-            <div class="save-quick-itinerary text-right">
-              <button class="btn btn-dark-pink">Save</button>
-              <button class="btn btn-dark-pink">Publish</button>
+            <div class="save-quick-itinerary mt20 text-right">
+              <button class="btn btn-dark-pink btn-more mr10">Save</button>
+              <button class="btn btn-dark-pink btn-more">Publish</button>
             </div>
         </div>
         </form>

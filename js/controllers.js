@@ -3025,31 +3025,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 
     $scope.itineraryType = [{
-      // img: "",
+      img: "img/itinerary/adventure.png",
       caption: "Adventure"
     }, {
-      // img: "",
+      img: "img/itinerary/business.png",
       caption: "Business"
     }, {
-      // img: "",
+      img: "img/itinerary/family.png",
       caption: "Family"
     }, {
-      // img: "",
+      img: "img/itinerary/romance.png",
       caption: "Romance"
     }, {
-      // img: "",
+      img: "img/itinerary/backpacking.png",
       caption: "Backpacking"
     }, {
-      // img: "",
+      img: "img/itinerary/budget.png",
       caption: "Budget"
     }, {
-      // img: "",
+      img: "img/itinerary/luxury.png",
       caption: "Luxury"
     }, {
-      // img: "",
+      img: "img/itinerary/religious.png",
       caption: "Religious"
     }, {
-      // img: "",
+      img: "img/itinerary/friend.png",
       caption: "Friends"
     }, ];
     // tinymce
@@ -3089,31 +3089,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.navigation = NavigationService.getnav();
 
     $scope.itineraryType = [{
-      // img: "",
+      img: "img/itinerary/adventure.png",
       caption: "Adventure"
     }, {
-      // img: "",
+      img: "img/itinerary/business.png",
       caption: "Business"
     }, {
-      // img: "",
+      img: "img/itinerary/family.png",
       caption: "Family"
     }, {
-      // img: "",
+      img: "img/itinerary/romance.png",
       caption: "Romance"
     }, {
-      // img: "",
+      img: "img/itinerary/backpacking.png",
       caption: "Backpacking"
     }, {
-      // img: "",
+      img: "img/itinerary/budget.png",
       caption: "Budget"
     }, {
-      // img: "",
+      img: "img/itinerary/luxury.png",
       caption: "Luxury"
     }, {
-      // img: "",
+      img: "img/itinerary/religious.png",
       caption: "Religious"
     }, {
-      // img: "",
+      img: "img/itinerary/friend.png",
       caption: "Friends"
     }, ];
 
