@@ -1,5 +1,5 @@
 var initMap = {};
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper'])
+angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
 .controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -182,7 +182,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     }];
 
   })
-  .controller('OnGoJourneyCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal,$interval) {
+  .controller('OnGoJourneyCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval) {
     //Used to name the .html file
     initMap = function() {
       var tardeo = {
@@ -525,10 +525,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.uploadImage = true;
     $scope.viewUploadedImg = false;
     $scope.previewFile = function(val) {
-      var interval=$interval(function () {
-        var preview = document.getElementById('img'+(val));
-        console.log('img'+(val)); 
-        var file   = document.getElementById('upload'+(val)).files[0];
+      var interval = $interval(function() {
+        var preview = document.getElementById('img' + (val));
+        console.log('img' + (val)); 
+        var file   = document.getElementById('upload' + (val)).files[0];
         console.log(preview);
         console.log(file);
         var reader  = new FileReader();
@@ -547,7 +547,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $scope.viewUploadedImg = false;
       $scope.uploadImage = true;
     };
-    $scope.checkinUpload = [{},{},{}];
+    $scope.checkinUpload = [{}, {}, {}];
   })
   .controller('MylifeCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
@@ -3024,44 +3024,98 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.itineraryType = [
-      {
-        // img: "",
-        caption: "Adventure"
+    $scope.itineraryType = [{
+      // img: "",
+      caption: "Adventure"
+    }, {
+      // img: "",
+      caption: "Business"
+    }, {
+      // img: "",
+      caption: "Family"
+    }, {
+      // img: "",
+      caption: "Romance"
+    }, {
+      // img: "",
+      caption: "Backpacking"
+    }, {
+      // img: "",
+      caption: "Budget"
+    }, {
+      // img: "",
+      caption: "Luxury"
+    }, {
+      // img: "",
+      caption: "Religious"
+    }, {
+      // img: "",
+      caption: "Friends"
+    }, ];
+    // tinymce
+    $scope.tinymce = {
+      menu: {
+        file: false,
+        edit: false,
+        insert: false,
+        view: false,
+        format: {
+          items: 'bold italic'
+        },
+        table: false,
+        tools: false
+      }
+    };
+    $scope.tinymceOptions = {
+      onChange: function(e) {
+        // put logic here for keypress and cut/paste changes
       },
-      {
-        // img: "",
-        caption: "Business"
-      },
-      {
-        // img: "",
-        caption: "Family"
-      },
-      {
-        // img: "",
-        caption: "Romance"
-      },
-      {
-        // img: "",
-        caption: "Backpacking"
-      },
-      {
-        // img: "",
-        caption: "Budget"
-      },
-      {
-        // img: "",
-        caption: "Luxury"
-      },
-      {
-        // img: "",
-        caption: "Religious"
-      },
-      {
-        // img: "",
-        caption: "Friends"
-      },
-    ];
+      inline: false,
+      plugins: 'advlist autolink link image lists charmap print preview',
+      skin: 'lightgray',
+      theme: 'modern'
+    };
+    // tinymce end
+
+  })
+  .controller('QuickItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+
+    // console.log("Testing Consoles");
+
+    $scope.template = TemplateService.changecontent("quick-itinerary");
+    $scope.menutitle = NavigationService.makeactive("QuickItinerary");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+    $scope.itineraryType = [{
+      // img: "",
+      caption: "Adventure"
+    }, {
+      // img: "",
+      caption: "Business"
+    }, {
+      // img: "",
+      caption: "Family"
+    }, {
+      // img: "",
+      caption: "Romance"
+    }, {
+      // img: "",
+      caption: "Backpacking"
+    }, {
+      // img: "",
+      caption: "Budget"
+    }, {
+      // img: "",
+      caption: "Luxury"
+    }, {
+      // img: "",
+      caption: "Religious"
+    }, {
+      // img: "",
+      caption: "Friends"
+    }, ];
 
   })
 

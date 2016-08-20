@@ -115,6 +115,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       templateUrl: "views/template.html",
       controller: 'DetailedItineraryCtrl'
     })
+    .state('quickitinerary', {
+      url: "/quick-itinerary",
+      templateUrl: "views/template.html",
+      controller: 'QuickItineraryCtrl'
+    })
     .state('itinerary', {
       url: "/itinerary",
       templateUrl: "views/template.html",

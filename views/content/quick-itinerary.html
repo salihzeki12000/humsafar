@@ -1,0 +1,121 @@
+<div class="quick-itinerary-page avenir-roman">
+  <div class="container-fluid">
+    <div class="bg-white">
+      <div class="container">
+        <div class="fill-quick-itinerary">
+          <form>
+            <h4 class="color-blue">Quick Itinerary</h4>
+            <div class="quick-itinerary-detail">
+              <div class="itinerary-title">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="itinerary-inputholder">
+                      <input type="text" class="form-control" placeholder="Trip Title">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="itinerary-year">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label for="month">Month</label>
+                          <div class="itinerary-inputholder">
+                            <input type="text" class="form-control" id="month">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="year">Year</label>
+                          <div class="itinerary-inputholder">
+                            <input type="text" class="form-control" id="year">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="duration">Duration</label>
+                          <div class="itinerary-inputholder">
+                            <input type="text" class="form-control" id="duration">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- itinerary type -->
+              <div class="fill-itinerary-type">
+                <div class="select-itinerary-type" ng-repeat="itinerary in itineraryType">
+                  <figure>
+                    <!-- <img src="{{itinerary.img}}" alt="" class="img-responsive"> -->
+                    <figcaption>{{itinerary.caption}}</figcaption>
+                  </figure>
+                </div>
+              </div>
+              <!-- itinerary type end -->
+              <!-- country and city visited -->
+              <div class="itinerary-country-visited">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="itinerary-inputholder">
+                      <input type="text" class="form-control" placeholder="Country You Visited">
+                    </div>
+                    <div class="add-country">
+                      <button class="btn btn-dark-pink">Add Country</button>
+                      <span>If you have visited any other country on the same trip</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="itinerary-inputholder">
+                      <input type="text" class="form-control" placeholder="City You Visited">
+                      <!-- <ui-select multiple ng-model="ctrl.multipleDemo.selectedPeopleWithGroupBy" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" title="Choose a person">
+                        <ui-select-match placeholder="Select person...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match>
+                        <ui-select-choices group-by="someGroupFn" repeat="person in ctrl.people | propsFilter: {name: $select.search, age: $select.search}">
+                          <div ng-bind-html="person.name | highlight: $select.search"></div>
+                          <small>  email: {{person.email}}   age: <span ng-bind-html="''+person.age | highlight: $select.search"></span> </small>
+                        </ui-select-choices>
+                      </ui-select> -->
+                    </div>
+                    <div class="add-country">
+                      <button class="btn btn-dark-pink">Add City</button>
+                      <span>If you have visited any other cities on the same trip</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- country and city visited end-->
+              <!-- trip descp -->
+              <div class="trip-descp-itinerary">
+                <label for="descp">A Little More About This Trip</label>
+                <textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel" id="descp"></textarea>
+              </div>
+              <!-- trip descp end -->
+              <!-- upload trip photo -->
+              <div class="upload-trip-photo-sec">
+                <label for="trip-photo">Upload Trip Photo</label>
+                <div class="trip-photo-holder text-center">
+                  <div class="trip-view-photo">
+                    <!-- <img src="" alt="" class="img-responsive"> -->
+                  </div>
+                  <div class="trip-upload">
+                    <div class="upload-section">
+                      <img src="img/upload-icon.jpg" alt="" class="m-center img-responsive">
+                      <p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
+                      <span class="block color-grey avenir-roman">- or -</span>
+                      <div class="upload-btn">
+                        <div class="inline-block">
+                          <button class="btn btn-dark-blue pointer avenir-roman">Select a photo from your computer input</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- upload trip photo end-->
+            </div>
+            <div class="save-quick-itinerary text-right">
+              <button class="btn btn-dark-pink">Save</button>
+              <button class="btn btn-dark-pink">Publish</button>
+            </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

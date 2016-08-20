@@ -36,7 +36,9 @@
     "angular-masonry": "^0.16.0",
     "ng-scrollbar": "^0.0.8",
     "angular-swiper": "^0.4.0",
-    "angularjs-imageupload-directive": "https://github.com/Mischi/angularjs-imageupload-directive.git"
+    "angularjs-imageupload-directive": "https://github.com/Mischi/angularjs-imageupload-directive.git",
+    "angular-ui-select": "^0.19.4",
+    "angular-ui-tinymce": "^0.0.16"
   },
   "devDependencies": {
     "angular-translate": "^2.11.0"
