@@ -114,6 +114,165 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    $scope.holidayKindType = [
+      {
+        img: "img/beach.png",
+        caption: "Island & Beach"
+      },
+      {
+        img: "img/city.png",
+        caption: "City"
+      },
+      {
+        img: "img/safari.png",
+        caption: "Safari"
+      },
+      {
+        img: "img/mountain.png",
+        caption: "Mountains"
+      },
+      {
+        img: "img/cruise.png",
+        caption: "Cruise"
+      },
+      {
+        img: "img/countryside.png",
+        caption: "Countryside"
+      },
+    ];
+    $scope.usuallygoHoliday = [
+      {
+        img: "img/map.png",
+        caption: "By the map",
+        caption1: ""
+      },
+      {
+        img: "img/road.png",
+        caption: "Where the",
+        caption1: "road takes you"
+      },
+      {
+        img: "img/both.png",
+        caption: "A little bit",
+        caption1: "of both"
+      },
+    ];
+
+    $scope.travelPrefer = [
+      {
+        img: "img/family.png",
+        caption: "Family"
+      },
+      {
+        img: "img/friends.png",
+        caption: "Friends"
+      },
+      {
+        img: "img/spouse.png",
+        caption: "Partner/Spouse"
+      },
+      {
+        img: "img/solo.png",
+        caption: "Solo"
+      },
+      {
+        img: "img/business.png",
+        caption: "Business"
+      },
+      {
+        img: "img/blogger.png",
+        caption: "Blogger"
+      },
+      {
+        img: "img/grouptour.png",
+        caption: "Group Tour"
+      },
+      {
+        img: "img/photographer.png",
+        caption: "Photographer"
+      }
+    ];
+    $scope.idealHoliday = [
+      {
+        img: "img/luxury.png",
+        caption: "Luxury",
+        caption1: ""
+      },
+      {
+        img: "img/backpacking.png",
+        caption: "Backpacking",
+        caption1: ""
+      },
+      {
+        img: "img/greentravelling.png",
+        caption: "Green",
+        caption1: "travelling"
+      },
+      {
+        img: "img/pocketfriendly.png",
+        caption: "Pocket",
+        caption1: "friendly"
+      },
+      {
+        img: "img/romance.png",
+        caption: "Romance",
+        caption1: ""
+      },
+      {
+        img: "img/sportandadventure.png",
+        caption: "Sports & Adventure",
+        caption1: ""
+      },
+      {
+        img: "img/historyandculture.png",
+        caption: "History &",
+        caption1: "Culture"
+      },
+      {
+        img: "img/spirituality.png",
+        caption: "Spirituality & Wellness",
+        caption1: ""
+      },
+      {
+        img: "img/shopping.png",
+        caption: "Shopping",
+        caption1: ""
+      },
+      {
+        img: "img/foodandwine.png",
+        caption: "Food & Wine",
+        caption1: ""
+      }
+    ];
+    $scope.getHoliday = function(val){
+      if($scope.holidayKindType[val].class == "active-holiday" ) {
+        $scope.holidayKindType[val].class = "";
+      }else {
+        $scope.holidayKindType[val].class = "active-holiday";
+      }
+    };
+    $scope.getPreference = function(val){
+      if($scope.travelPrefer[val].class == "active-holiday") {
+        $scope.travelPrefer[val].class = "";
+      }else {
+        $scope.travelPrefer[val].class = "active-holiday"
+      }
+    };
+    $scope.getideal = function(val) {
+      if($scope.idealHoliday[val].class == "active-holiday"){
+        $scope.idealHoliday[val].class = "";
+      }else {
+        $scope.idealHoliday[val].class = "active-holiday";
+      }
+    };
+
+    $scope.getUsually = function(val) {
+      _.each($scope.usuallygoHoliday,function(n){
+        n.class="n";
+      });
+      $scope.usuallygoHoliday[val].class = "active-holiday";
+    }
+
   })
   .controller('TripSummaryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -1953,11 +2112,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }
     };
     $scope.usuallyType = function(val) {
-      if ($scope.usuallyGo[val].class == "active-holiday") {
-        $scope.usuallyGo[val].class = "";
-      } else {
-        $scope.usuallyGo[val].class = "active-holiday";
-      }
+      _.each($scope.usuallyGo, function(abc) {
+        abc.class = "";
+      });
+      $scope.usuallyGo[val].class = "active-holiday";
     };
     $scope.travelType = function(val) {
       if ($scope.preferTravel[val].class == "active-holiday") {
@@ -3053,29 +3211,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       caption: "Friends"
     }, ];
     // tinymce
-    $scope.tinymce = {
-      menu: {
-        file: false,
-        edit: false,
-        insert: false,
-        view: false,
-        format: {
-          items: 'bold italic'
-        },
-        table: false,
-        tools: false
-      }
-    };
     $scope.tinymceOptions = {
       onChange: function(e) {
         // put logic here for keypress and cut/paste changes
       },
       inline: false,
-      plugins: 'advlist autolink link image lists charmap print preview',
+      // plugins: 'advlist autolink link image lists charmap print preview',
       skin: 'lightgray',
-      theme: 'modern'
+      theme: 'modern',
+      menubar: false,
+      toolbar: 'bold italic',
+      statusbar: false
     };
     // tinymce end
+    $scope.hoveringOver = function(value) {
+      $scope.overStar = value;
+    };
+    $scope.ratingStates = [{
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }];
 
   })
   .controller('QuickItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
@@ -3116,6 +3283,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       img: "img/itinerary/friend.png",
       caption: "Friends"
     }, ];
+
+    $scope.tinymceOptions = {
+      onChange: function(e) {
+        // put logic here for keypress and cut/paste changes
+      },
+      inline: false,
+      // plugins: 'advlist autolink link image lists charmap print preview',
+      skin: 'lightgray',
+      theme: 'modern',
+      menubar: false,
+      toolbar: 'bold italic',
+      statusbar: false
+    };
 
   })
 

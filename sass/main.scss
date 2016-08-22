@@ -422,7 +422,9 @@ textarea {
 .btn-blue-outline {
   @include button-variant( $brand-blue, white, $brand-blue);
   &:hover {
-    @include button-variant ( white, $brand-dark-pink, $brand-blue);
+    border-color: $brand-blue;
+    background-color: $brand-pink;
+    color: #fff;
   }
 }
 .btn-outline-blue {
@@ -733,6 +735,12 @@ header {
     @include position(relative, -17px null null 2px);
   }
 }
+.male:hover {
+  background-color: $brand-pink;
+}
+.female:hover {
+  background-color: $brand-cyan;
+}
 // gender end
 .cropArea {
   @include size(100%,350px);
@@ -815,6 +823,7 @@ header {
 .holiday-step3,
 .holiday-step4 {
   padding: 13px 20px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.7);
   h3 {
     margin: 15px 0 10px;
     font-size: 20px;
@@ -827,6 +836,35 @@ header {
 .travel-row {
   margin: 18px 25px;
 }
+.travel-row-main {
+  .kind-holiday {
+    width: 140px;
+    margin: 20px 0 0px;
+    display: inline-block;
+    &:nth-child(4), &:nth-child(5), &:nth-child(6) {
+      margin: 20px 0px 40px;
+    }
+  }
+  .preference-travel {
+    width: 130px;
+    margin: 10px 0;
+    display: inline-block;
+    &:last-child { width: 180px; }
+    &:nth-last-of-type(2) { width: 180px; }
+  }
+  .ideal-holiday {
+    width: 124px;
+    display: inline-block;
+    margin: 10px 0;
+    vertical-align: top;
+  }
+}
+.usually-go-holiday {
+  width: 140px;
+  display: inline-block;
+  vertical-align: top;
+}
+// .travel-row-main .preference-travel:last-child { width: 180px; }
 // holiday step end
 // profile
 .profile-main {
@@ -3758,7 +3796,9 @@ header {
     display: none;
   }
   &:hover {
-    &:before { display: block; }
+    &:before {
+      display: block;
+    }
     .scale-onhover {
       @include transform(translate(-50%, -50%)scale(1.2));
       @include transition(all 300ms linear);
@@ -3786,7 +3826,9 @@ header {
 }
 .tag-friend {
   .input-tag-friend {
-    input { padding: 6px 42px; }
+    input {
+      padding: 6px 42px;
+    }
   }
   .tag-search-icon {
     position: absolute;
@@ -3879,7 +3921,9 @@ header {
   }
 }
 .upload-checkin-sec {
-  .upload-section { padding: 20px 0; }
+  .upload-section {
+    padding: 20px 0;
+  }
   .upload-btn button {
     padding: 6px 34px;
   }
@@ -3910,7 +3954,9 @@ header {
     display: inline-block;
     background-color: #9fa6ab;
     &:hover {
-      .hover-tag-btn { display: block; }
+      .hover-tag-btn {
+        display: block;
+      }
     }
   }
   .img-friend {
@@ -3920,13 +3966,17 @@ header {
     display: inline-block;
     overflow: hidden;
     vertical-align: middle;
-    img { width: 100%; }
+    img {
+      width: 100%;
+    }
   }
   .hover-tag-btn {
     @include position(absolute, 0 0 0 0);
     background-color: rgba(0,0,0,0.6);
     display: none;
-    i { font-size: 16px; }
+    i {
+      font-size: 16px;
+    }
   }
 }
 // check in end
@@ -4079,13 +4129,8 @@ header {
   }
 }
 // itinerary end
-// detail itinerary detail
-.detail-itinerary-page {
-  padding: 0px 20px;
-}
-// detail itinerary detail end
-
 // quick itinerary detail
+.fill-detail-itinerary,
 .fill-quick-itinerary {
   margin: 30px 0;
 }
@@ -4094,9 +4139,12 @@ header {
   input {
     border: none;
     border-bottom: 1px solid $brand-blue;
-    &:focus { border-color: $brand-blue; }
+    &:focus {
+      border-color: $brand-blue;
+    }
   }
-  &:before, &:after {
+  &:after,
+  &:before {
     content: '';
     width: 1px;
     height: 15px;
@@ -4104,9 +4152,14 @@ header {
     bottom: 0;
     background-color: $brand-blue;
   }
-  &:before { left: 0; }
-  &:after { right: 0; }
+  &:before {
+    left: 0;
+  }
+  &:after {
+    right: 0;
+  }
 }
+.fill-itinerary-detail,
 .quick-itinerary-detail {
   padding: 30px 60px;
   border: 1px solid $brand-blue;
@@ -4124,11 +4177,14 @@ header {
     margin-left: 10px;
     display: inline-block;
   }
-  .itinerary-month, .itinerary-year {
+  .itinerary-month,
+  .itinerary-year {
     display: inline-block;
     margin-right: 22px;
   }
-  .itinerary-duration { display: inline-block; }
+  .itinerary-duration {
+    display: inline-block;
+  }
 }
 .fill-itinerary-type {
   margin: 30px 0;
@@ -4143,8 +4199,14 @@ header {
     background-size: 100% 100%;
     display: inline-block;
     position: relative;
+    @include transition(all 300ms linear);
     img {
       @extend .get-center;
+    }
+    &:hover {
+      background: url('../img/itinerary/orangebox.png');
+      background-size: 100% 100%;
+      @include transition(all 300ms linear);
     }
   }
 }
@@ -4160,9 +4222,30 @@ header {
     font-size: 17px;
     font-weight: 500;
   }
+  .mce-edit-area {
+    height: 250px;
+  }
+  #mceu_2 {
+    padding: 5px 15px;
+    border: 1px solid $brand-dark-blue;
+    background-color: transparent;
+  }
+  #mceu_3 {
+    background-color: transparent;
+  }
+  .mce-btn {
+    border: none;
+    background-color: transparent;
+    .mce-ico {
+      color: #707070;
+    }
+    &:hover {
+      background-color: transparent;
+    }
+  }
 }
 .upload-trip-photo-sec {
-  margin: 30px 0px 10px;
+  margin: 30px 0 10px;
   label {
     margin-bottom: 10px;
     color: $brand-pink;
@@ -4176,6 +4259,32 @@ header {
   }
 }
 // quick itinerary detail end
+// detail itinerary detail
+.detail-itinerary-page {
+  padding: 0 20px;
+}
+.itinerary-country-detail {
+  @extend .itinerary-fill-info;
+}
+.trip-heading-accordion {
+  .rate-trip {
+    i.glyphicon {
+      margin-right: 5px;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: 25px;
+      cursor: pointer;
+    }
+    .glyphicon-star-empty:before {
+      content: "\f006";
+      color: $brand-lighter-grey;
+    }
+    .glyphicon-star:before {
+      content: "\f005";
+      color: $brand-lighter-grey;
+    }
+  }
+}
+// detail itinerary detail end
 @import "fancybox-override";
 #map {
   width: 100%;

@@ -3,7 +3,7 @@
     <div class="bg-white">
       <div class="container">
         <div class="fill-detail-itinerary">
-          <h4 class="color-blue avenir-roman">Fill Up The Itinerary</h4>
+          <h4 class="color-blue avenir-roman mb20">Fill Up The Itinerary</h4>
           <div class="fill-itinerary-detail">
             <form action="">
               <div class="itinerary-title">
@@ -22,10 +22,13 @@
               </div>
               <!-- itinerary type -->
               <div class="fill-itinerary-type">
+                <h4 class="color-light-grey mt20 mb20">Itineraries Type</h4>
                 <div class="select-itinerary-type" ng-repeat="itinerary in itineraryType">
-                  <figure>
-                    <!-- <img src="{{itinerary.img}}" alt="" class="img-responsive"> -->
-                    <figcaption>{{itinerary.caption}}</figcaption>
+                  <figure class="pointer">
+                    <div class="itinerary-iconholder">
+                      <img ng-src="{{itinerary.img}}" alt="" class="img-responsive">
+                    </div>
+                    <figcaption class="color-dark-blue avenir-roman">{{itinerary.caption}}</figcaption>
                   </figure>
                 </div>
               </div>
@@ -40,24 +43,22 @@
                   </div>
                   <div class="col-md-6">
                     <div class="itinerary-country-detail">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <label for="From">From</label>
-                          <div class="itinerary-inputholder">
-                            <input type="text" class="form-control" id="From">
-                          </div>
+                      <div class="itinerary-from itinerary-month">
+                        <label for="From">From</label>
+                        <div class="itinerary-inputholder">
+                          <input type="text" class="form-control" id="From">
                         </div>
-                        <div class="col-md-4">
-                          <label for="to">To</label>
-                          <div class="itinerary-inputholder">
-                            <input type="text" class="form-control" id="to">
-                          </div>
+                      </div>
+                      <div class="itinerary-to itinerary-year">
+                        <label for="to">To</label>
+                        <div class="itinerary-inputholder">
+                          <input type="text" class="form-control" id="to">
                         </div>
-                        <div class="col-md-4">
-                          <label for="Duration">Duration</label>
-                          <div class="itinerary-inputholder">
-                            <input type="text" class="form-control" id="Duration">
-                          </div>
+                      </div>
+                      <div class="itinerary-duration">
+                        <label for="Duration">Duration</label>
+                        <div class="itinerary-inputholder">
+                          <input type="text" class="form-control" id="Duration">
                         </div>
                       </div>
                     </div>
@@ -65,9 +66,9 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="add-country">
-                      <button class="btn btn-dark-pink">Add Country</button>
-                      <span>If you have visited any other country on the same trip</span>
+                    <div class="add-country clearfix">
+                      <button class="btn btn-dark-pink pull-left">Add City</button>
+                      <span class="color-dark-blue pull-right mt5">If you have visited any other cities on the same trip</span>
                     </div>
                   </div>
                 </div>
@@ -83,24 +84,22 @@
                   </div>
                   <div class="col-md-6">
                     <div class="itinerary-country-detail">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <label for="From">From</label>
-                          <div class="itinerary-inputholder">
-                            <input type="text" class="form-control" id="From">
-                          </div>
+                      <div class="itinerary-from itinerary-month">
+                        <label for="From">From</label>
+                        <div class="itinerary-inputholder">
+                          <input type="text" class="form-control" id="From">
                         </div>
-                        <div class="col-md-4">
-                          <label for="to">To</label>
-                          <div class="itinerary-inputholder">
-                            <input type="text" class="form-control" id="to">
-                          </div>
+                      </div>
+                      <div class="itinerary-to itinerary-year">
+                        <label for="to">To</label>
+                        <div class="itinerary-inputholder">
+                          <input type="text" class="form-control" id="to">
                         </div>
-                        <div class="col-md-4">
-                          <label for="Duration">Duration</label>
-                          <div class="itinerary-inputholder">
-                            <input type="text" class="form-control" id="Duration">
-                          </div>
+                      </div>
+                      <div class="itinerary-duration">
+                        <label for="Duration">Duration</label>
+                        <div class="itinerary-inputholder">
+                          <input type="text" class="form-control" id="Duration">
                         </div>
                       </div>
                     </div>
@@ -108,15 +107,37 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="add-country">
-                      <button class="btn btn-dark-pink">Add City</button>
-                      <span>If you have visited any other cities on the same trip</span>
+                    <div class="add-country clearfix">
+                      <button class="btn btn-dark-pink pull-left">Add City</button>
+                      <span class="color-dark-blue pull-right mt5">If you have visited any other cities on the same trip</span>
                     </div>
                   </div>
                 </div>
               </div>
               <!-- city visited end -->
-              
+              <div class="accordion-trip-detail">
+                <div class="trip-heading-accordion">
+                  <div class="clearfix">
+                    <div class="pull-left">
+                      <!-- <img src="" alt=""> -->
+                      <h4 class="color-dark-blue">Singapore</h4>
+                    </div>
+                    <div class="pull-right">
+                      <div class="rate-trip">
+                        <h4>Rate This Now</h4>
+                        <uib-rating ng-model="rate" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></uib-rating>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <uib-accordion close-others="oneAtATime">
+                  <div class="" uib-accordion-group>
+                    <uib-accordion-heading>
+
+                    </uib-accordion-heading>
+                  </div>
+                </uib-accordion>
+              </div>
             </form>
           </div>
         </div>
