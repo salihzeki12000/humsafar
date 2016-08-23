@@ -362,7 +362,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         });
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
-        center: tardeo
+        center: tardeo,
+        disableDefaultUI : true
       });
 
       var contentString = '<div id="content">' +
@@ -672,10 +673,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     setTimeout(function() {
       $('.flexslider').flexslider({
-        itemMargin: 10,
-        itemWidth: 95,
+        itemMargin: 5,
+        itemWidth: 99,
         animation: "slide",
-        mousewheel: true,
         controlNav: false,
       });
     }, 100);

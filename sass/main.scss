@@ -2297,6 +2297,7 @@ header {
     margin: 0;
     position: relative;
     cursor: pointer;
+    color: $brand-grey;
   }
   /* radio aspect */
   [type="radio"]:checked + label:before,
@@ -2322,6 +2323,10 @@ header {
   }
   [type="radio"]:checked + label:after {
     color: $brand-pink;
+    @include transition(all 300ms linear);
+  }
+  [type="radio"]:checked + label {
+    color: $brand-blue;
     @include transition(all 300ms linear);
   }
 }
@@ -3314,8 +3319,8 @@ header {
   }
 }
 .related-ongo-slider {
-  width: 95px;
-  height: 95px;
+  width: 99px;
+  height: 99px;
   border: 1px solid $brand-dark-blue;
   img {
     min-height: 100%;
@@ -3326,7 +3331,7 @@ header {
   .relate-pic {
     padding: 10px 10px 0;
     .related-ongo-slider {
-      margin-right: 10px;
+      margin-right: 3px;
       display: inline-block;
       overflow: hidden;
     }
@@ -4103,15 +4108,21 @@ header {
 // trip summary end
 // itinerary
 .itinerary-holder {
-  padding: 0 40px;
+  padding: 0 40px 20px;
 }
 .itinerary-imgholder {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   &:before {
     content: '';
     @include position(absolute,0 0 0 0);
     background-color: rgba(0,0,0,0.6);
   }
+}
+.itinerary-imgholder.itinerary-detailed {
+  margin-right: 5px;
+}
+.itinerary-imgholder.itinerary-quick {
+  margin-left: 5px;
 }
 .itinerary-detail {
   h3 {
@@ -4173,7 +4184,7 @@ header {
     color: $brand-dark-blue;
   }
   .itinerary-inputholder {
-    width: 90px;
+    width: 100px;
     margin-left: 10px;
     display: inline-block;
   }
@@ -4299,6 +4310,7 @@ header {
 .map-journey {
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: fixed;
+  top: 0;
   z-index: 2;
 }
