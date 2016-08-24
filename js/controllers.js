@@ -77,7 +77,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.showImage = false;
     var got = setInterval(function() {
       if (document.getElementById('fileInput')) {
-        console.log("got");
+        // console.log("got");
         document.getElementById('fileInput').onchange = function(evt) {
           var file = evt.currentTarget.files[0];
           var reader = new FileReader();
@@ -114,161 +114,130 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.holidayKindType = [
-      {
-        img: "img/beach.png",
-        caption: "Island & Beach"
-      },
-      {
-        img: "img/city.png",
-        caption: "City"
-      },
-      {
-        img: "img/safari.png",
-        caption: "Safari"
-      },
-      {
-        img: "img/mountain.png",
-        caption: "Mountains"
-      },
-      {
-        img: "img/cruise.png",
-        caption: "Cruise"
-      },
-      {
-        img: "img/countryside.png",
-        caption: "Countryside"
-      },
-    ];
-    $scope.usuallygoHoliday = [
-      {
-        img: "img/map.png",
-        caption: "By the map",
-        caption1: ""
-      },
-      {
-        img: "img/road.png",
-        caption: "Where the",
-        caption1: "road takes you"
-      },
-      {
-        img: "img/both.png",
-        caption: "A little bit",
-        caption1: "of both"
-      },
-    ];
+    $scope.holidayKindType = [{
+      img: "img/beach.png",
+      caption: "Island & Beach"
+    }, {
+      img: "img/city.png",
+      caption: "City"
+    }, {
+      img: "img/safari.png",
+      caption: "Safari"
+    }, {
+      img: "img/mountain.png",
+      caption: "Mountains"
+    }, {
+      img: "img/cruise.png",
+      caption: "Cruise"
+    }, {
+      img: "img/countryside.png",
+      caption: "Countryside"
+    }, ];
+    $scope.usuallygoHoliday = [{
+      img: "img/map.png",
+      caption: "By the map",
+      caption1: ""
+    }, {
+      img: "img/road.png",
+      caption: "Where the",
+      caption1: "road takes you"
+    }, {
+      img: "img/both.png",
+      caption: "A little bit",
+      caption1: "of both"
+    }, ];
 
-    $scope.travelPrefer = [
-      {
-        img: "img/family.png",
-        caption: "Family"
-      },
-      {
-        img: "img/friends.png",
-        caption: "Friends"
-      },
-      {
-        img: "img/spouse.png",
-        caption: "Partner/Spouse"
-      },
-      {
-        img: "img/solo.png",
-        caption: "Solo"
-      },
-      {
-        img: "img/business.png",
-        caption: "Business"
-      },
-      {
-        img: "img/blogger.png",
-        caption: "Blogger"
-      },
-      {
-        img: "img/grouptour.png",
-        caption: "Group Tour"
-      },
-      {
-        img: "img/photographer.png",
-        caption: "Photographer"
-      }
-    ];
-    $scope.idealHoliday = [
-      {
-        img: "img/luxury.png",
-        caption: "Luxury",
-        caption1: ""
-      },
-      {
-        img: "img/backpacking.png",
-        caption: "Backpacking",
-        caption1: ""
-      },
-      {
-        img: "img/greentravelling.png",
-        caption: "Green",
-        caption1: "travelling"
-      },
-      {
-        img: "img/pocketfriendly.png",
-        caption: "Pocket",
-        caption1: "friendly"
-      },
-      {
-        img: "img/romance.png",
-        caption: "Romance",
-        caption1: ""
-      },
-      {
-        img: "img/sportandadventure.png",
-        caption: "Sports & Adventure",
-        caption1: ""
-      },
-      {
-        img: "img/historyandculture.png",
-        caption: "History &",
-        caption1: "Culture"
-      },
-      {
-        img: "img/spirituality.png",
-        caption: "Spirituality & Wellness",
-        caption1: ""
-      },
-      {
-        img: "img/shopping.png",
-        caption: "Shopping",
-        caption1: ""
-      },
-      {
-        img: "img/foodandwine.png",
-        caption: "Food & Wine",
-        caption1: ""
-      }
-    ];
-    $scope.getHoliday = function(val){
-      if($scope.holidayKindType[val].class == "active-holiday" ) {
+    $scope.travelPrefer = [{
+      img: "img/family.png",
+      caption: "Family"
+    }, {
+      img: "img/friends.png",
+      caption: "Friends"
+    }, {
+      img: "img/spouse.png",
+      caption: "Partner/Spouse"
+    }, {
+      img: "img/solo.png",
+      caption: "Solo"
+    }, {
+      img: "img/business.png",
+      caption: "Business"
+    }, {
+      img: "img/blogger.png",
+      caption: "Blogger"
+    }, {
+      img: "img/grouptour.png",
+      caption: "Group Tour"
+    }, {
+      img: "img/photographer.png",
+      caption: "Photographer"
+    }];
+    $scope.idealHoliday = [{
+      img: "img/luxury.png",
+      caption: "Luxury",
+      caption1: ""
+    }, {
+      img: "img/backpacking.png",
+      caption: "Backpacking",
+      caption1: ""
+    }, {
+      img: "img/greentravelling.png",
+      caption: "Green",
+      caption1: "travelling"
+    }, {
+      img: "img/pocketfriendly.png",
+      caption: "Pocket",
+      caption1: "friendly"
+    }, {
+      img: "img/romance.png",
+      caption: "Romance",
+      caption1: ""
+    }, {
+      img: "img/sportandadventure.png",
+      caption: "Sports & Adventure",
+      caption1: ""
+    }, {
+      img: "img/historyandculture.png",
+      caption: "History &",
+      caption1: "Culture"
+    }, {
+      img: "img/spirituality.png",
+      caption: "Spirituality & Wellness",
+      caption1: ""
+    }, {
+      img: "img/shopping.png",
+      caption: "Shopping",
+      caption1: ""
+    }, {
+      img: "img/foodandwine.png",
+      caption: "Food & Wine",
+      caption1: ""
+    }];
+    $scope.getHoliday = function(val) {
+      if ($scope.holidayKindType[val].class == "active-holiday") {
         $scope.holidayKindType[val].class = "";
-      }else {
+      } else {
         $scope.holidayKindType[val].class = "active-holiday";
       }
     };
-    $scope.getPreference = function(val){
-      if($scope.travelPrefer[val].class == "active-holiday") {
+    $scope.getPreference = function(val) {
+      if ($scope.travelPrefer[val].class == "active-holiday") {
         $scope.travelPrefer[val].class = "";
-      }else {
+      } else {
         $scope.travelPrefer[val].class = "active-holiday"
       }
     };
     $scope.getideal = function(val) {
-      if($scope.idealHoliday[val].class == "active-holiday"){
+      if ($scope.idealHoliday[val].class == "active-holiday") {
         $scope.idealHoliday[val].class = "";
-      }else {
+      } else {
         $scope.idealHoliday[val].class = "active-holiday";
       }
     };
 
     $scope.getUsually = function(val) {
-      _.each($scope.usuallygoHoliday,function(n){
-        n.class="n";
+      _.each($scope.usuallygoHoliday, function(n) {
+        n.class = "n";
       });
       $scope.usuallygoHoliday[val].class = "active-holiday";
     }
@@ -363,7 +332,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: tardeo,
-        disableDefaultUI : true
+        disableDefaultUI: true
       });
 
       var contentString = '<div id="content">' +
@@ -3327,12 +3296,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       statusbar: false
     };
 
-    $scope.selectItinerary = function(val){
-      console.log("amit");
-      if($scope.itineraryType[val].activeClass == "active-itinerary" ){
+    $scope.selectItinerary = function(val) {
+      if ($scope.itineraryType[val].activeClass == "active-itinerary") {
         $scope.itineraryType[val].activeClass = "";
-      }else {
+      } else {
         $scope.itineraryType[val].activeClass = "active-itinerary";
+      }
+    };
+
+
+    $scope.getYear  = [];
+    $scope.viewYear = function() {
+      if($scope.getYear.length > 0) {
+        $scope.getYear = [];
+      }else {
+        var d = new Date();
+        var n = d.getFullYear();
+        $scope.getYear = _.rangeRight(1900, n+1);
       }
     };
   })

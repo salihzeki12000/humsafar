@@ -37,10 +37,17 @@
                           </ul>
                         </div>
                       </div>
-                      <div class="itinerary-year">
+                      <div class="itinerary-year relate">
                         <label for="year">Year</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control" id="year">
+                          <input type="text" class="form-control" id="year" ng-click="viewYear();">
+                        </div>
+                        <div class="year-dropdown"  ng-if="getYear.length > 0">
+                          <ul>
+                            <li ng-repeat="list in getYear track by $index" ng-click="callYear();">
+                              <a href="" title="{{list}}">{{list}}</a>
+                            </li>
+                          </ul>
                         </div>
                       </div>
                       <div class="itinerary-duration">
