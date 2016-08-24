@@ -3609,9 +3609,9 @@ header {
 .cover-gallery-grid {
   padding: 10px;
   .choose-cover-pic {
-    width: 140px;
-    height: 140px;
-    margin: 0 7px 5px;
+    width: 148px;
+    height: 148px;
+    margin: 0 3px 0px;
     display: inline-block;
     overflow: hidden;
     img {
@@ -3634,7 +3634,8 @@ header {
   vertical-align: bottom;
   span {
     color: #fff;
-    text-decoration: underline;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #fff;
   }
   .btn-cover-save {
     margin-left: 35px;
@@ -4196,6 +4197,13 @@ header {
   .itinerary-duration {
     display: inline-block;
   }
+  .month-dropdown {
+    width: 100px;
+    height: 130px;
+    position: absolute;
+    top: 35px;
+    left: 57px;
+  }
 }
 .fill-itinerary-type {
   margin: 30px 0;
@@ -4219,6 +4227,11 @@ header {
       background-size: 100% 100%;
       @include transition(all 300ms linear);
     }
+  }
+  .active-itinerary {
+    background: url('../img/itinerary/orangebox.png');
+    background-size: 100% 100%;
+    @include transition(all 300ms linear);
   }
 }
 .itinerary-country-visited {
@@ -4296,6 +4309,7 @@ header {
   }
 }
 // detail itinerary detail end
+@import "sohan.scss";
 @import "fancybox-override";
 #map {
   width: 100%;

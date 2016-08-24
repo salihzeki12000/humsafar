@@ -363,7 +363,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: tardeo,
-        disableDefaultUI : true
+        // disableDefaultUI : true
       });
 
       var contentString = '<div id="content">' +
@@ -3297,6 +3297,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       statusbar: false
     };
 
+    $scope.selectItinerary = function(val){
+      console.log("amit");
+      if($scope.itineraryType[val].activeClass == "active-itinerary" ){
+        $scope.itineraryType[val].activeClass = "";
+      }else {
+        $scope.itineraryType[val].activeClass = "active-itinerary";
+      }
+    };
   })
 
 .controller('headerctrl', function($scope, TemplateService) {
