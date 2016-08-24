@@ -4215,7 +4215,7 @@ header {
     color: $brand-dark-blue;
   }
   .itinerary-inputholder {
-    width: 100px;
+    width: 98px;
     margin-left: 10px;
     display: inline-block;
   }
@@ -4299,6 +4299,12 @@ header {
 .itinerary-country-visited {
   .add-country {
     margin: 25px 0;
+  }
+  .itinerary-dropdown-icon {
+    position: absolute;
+    right: 8px;
+    bottom: 5px;
+    i { color: #707070; }
   }
 }
 .trip-descp-itinerary {
