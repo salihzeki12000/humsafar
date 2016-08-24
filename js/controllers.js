@@ -707,7 +707,70 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       stateOff: 'fa fa-star'
     }];
   })
-  .controller('MylifeCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+  .controller('DestinationCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+    //Used to name the .html file
+
+    // console.log("Testing Consoles");
+
+    $scope.template = TemplateService.changecontent("destination");
+    $scope.menutitle = NavigationService.makeactive("Destination");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+    var alldestination = ["views/content/destination/featured.html", "views/content/destination/mustdo.html", "views/content/destination/itinerary.html", "views/content/destination/booking.html", "views/content/destination/visit.html"];
+    $scope.destination = {
+      innerView: alldestination[0]
+    };
+    // change url
+    $scope.viewTab = 1;
+    switch ($state.params.name) {
+      case "featured":
+        $scope.destination.innerView = alldestination[0];
+        break;
+      case "mustdo":
+        $scope.destination.innerView = alldestination[1];
+        break;
+      case "itinerary":
+        $scope.destination.innerView = alldestination[2];
+        break;
+      case "booking":
+        $scope.destination.innerView = alldestination[3];
+        break;
+      case "visit":
+        $scope.destination.innerView = alldestination[4];
+        break;
+      default:
+        $scope.destination.innerView = alldestination[0];
+    }
+    $scope.getTab = function(view) {
+      $scope.destination.innerView = alldestination[view];
+      var url = "featured";
+      switch (view) {
+        case 0:
+          url = "featured";
+          break;
+        case 1:
+          url = "mustdo";
+          break;
+        case 2:
+          url = "itinerary";
+          break;
+        case 3:
+          url = "booking";
+          break;
+        case 4:
+          url = "visit";
+          break;
+      }
+      console.log(url);
+      $state.go("destination", {
+        name: url
+      }, {
+        notify: false
+      });
+    }
+  });
+.controller('MylifeCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -3305,14 +3368,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
 
 
-    $scope.getYear  = [];
+    $scope.getYear = [];
     $scope.viewYear = function() {
-      if($scope.getYear.length > 0) {
+      if ($scope.getYear.length > 0) {
         $scope.getYear = [];
-      }else {
+      } else {
         var d = new Date();
         var n = d.getFullYear();
-        $scope.getYear = _.rangeRight(1900, n+1);
+        $scope.getYear = _.rangeRight(1900, n + 1);
       }
     };
   })

@@ -35,6 +35,12 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       controller: 'MylifeCtrl',
       reloadOnSearch: false
     })
+    .state('destination', {
+      url: "/destination/:name",
+      templateUrl: "views/template.html",
+      controller: 'DestinationCtrl',
+      reloadOnSearch: false
+    })
     .state('journey', {
       url: "/journey",
       templateUrl: "views/template.html",
@@ -151,19 +157,19 @@ firstapp.directive('img', function($compile, $parse) {
 });
 
 firstapp.directive('autoHeight', function($compile, $parse) {
-    return {
-        restrict: 'EA',
-        replace: false,
-        link: function($scope, element, attrs) {
-            var $element = $(element);
-            var windowHeight = $(window).height();
+  return {
+    restrict: 'EA',
+    replace: false,
+    link: function($scope, element, attrs) {
+      var $element = $(element);
+      var windowHeight = $(window).height();
 
-            $element.css("min-height", windowHeight);
-            setTimeout(function() {
-                $element.css("min-height", windowHeight);
-            });
-        }
-    };
+      $element.css("min-height", windowHeight);
+      setTimeout(function() {
+        $element.css("min-height", windowHeight);
+      });
+    }
+  };
 });
 
 firstapp.directive('fancyboxBox', function($document) {
