@@ -363,7 +363,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: tardeo,
-        // disableDefaultUI : true
+        disableDefaultUI : true
       });
 
       var contentString = '<div id="content">' +
@@ -707,6 +707,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $scope.uploadImage = true;
     };
     $scope.checkinUpload = [{}, {}, {}];
+
+    // country modal
+    $scope.countryReview = function() {
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/review-country.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+      })
+    };
+    // Rating country
+    $scope.hoveringOver = function(value) {
+      $scope.overStar = value;
+    };
+    $scope.ratingStates = [{
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }];
   })
   .controller('MylifeCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file

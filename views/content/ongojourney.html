@@ -79,7 +79,7 @@
                 <ul>
                   <li><a href="" title="Journey Cover Photo" ng-click="coverPhoto();">Journey Cover Photo</a></li>
                   <li><a href="" title="Journey Name" ng-click="nameJourney();">Journey Name</a></li>
-                  <li><a href="" title="Reviews Countries Visited" ng-click="giveReview();">Reviews Countries Visited</a></li>
+                  <li><a href="" title="Reviews Countries Visited" ng-click="countryReview();">Reviews Countries Visited</a></li>
                 </ul>
               </div>
             </div>
@@ -242,7 +242,14 @@
                       </span>
                           <div class="own-trip" ng-if="$index== showDropdown">
                             <ul>
+                              <!-- ng if for checkin -->
                               <li><a href="" title="Edit Check In" ng-click="editCheckIn();">Edit Check In</a></li>
+                              <!-- ng if for Photos -->
+                              <li class="hide"><a href="" title="Edit Photos" ng-click="editCheckIn();">Edit Photos</a></li>
+                              <!-- ng-if for Videos -->
+                              <li class="hide"><a href="" title="Edit Videos" ng-click="editCheckIn();">Edit Videos</a></li>
+                              <!-- ng if for Thoughts -->
+                              <li class="hide"><a href="" title="Edit Thoughts" ng-click="editCheckIn();">Edit Thoughts</a></li>
                               <li><a href="" title="Change Date &amp; Time" ng-click="changeDate();">Change Date &amp; Time</a></li>
                               <li><a href="" title="Delete">Delete</a></li>
                               <li><a href="" title="Copy URL">Copy URL</a></li>

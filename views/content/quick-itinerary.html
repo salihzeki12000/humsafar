@@ -18,9 +18,9 @@
                       <div class="itinerary-month relate">
                         <label for="month">Month</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control" id="month">
+                          <input type="text" class="form-control" id="month" ng-click="viewMonths = !viewMonths">
                         </div>
-                        <div class="month-dropdown">
+                        <div class="month-dropdown" ng-show="viewMonths">
                           <ul>
                             <li><a href="" title="January">January</a></li>
                             <li><a href="" title="February">February</a></li>
@@ -117,7 +117,7 @@
                       <span class="block color-grey avenir-roman">- or -</span>
                       <div class="upload-btn">
                         <div class="inline-block">
-                          <button class="btn btn-dark-blue pointer avenir-light">Select a photo from your computer input</button>
+                          <button class="btn btn-dark-blue pointer avenir-light">Select a photo from your computer</button>
                         </div>
                       </div>
                     </div>

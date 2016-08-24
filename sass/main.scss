@@ -839,18 +839,24 @@ header {
 .travel-row-main {
   .kind-holiday {
     width: 140px;
-    margin: 20px 0 0px;
+    margin: 20px 0 0;
     display: inline-block;
-    &:nth-child(4), &:nth-child(5), &:nth-child(6) {
-      margin: 20px 0px 40px;
+    &:nth-child(4),
+    &:nth-child(5),
+    &:nth-child(6) {
+      margin: 20px 0 40px;
     }
   }
   .preference-travel {
     width: 130px;
     margin: 10px 0;
     display: inline-block;
-    &:last-child { width: 180px; }
-    &:nth-last-of-type(2) { width: 180px; }
+    &:last-child {
+      width: 180px;
+    }
+    &:nth-last-of-type(2) {
+      width: 180px;
+    }
   }
   .ideal-holiday {
     width: 124px;
@@ -1984,6 +1990,29 @@ header {
   background: url('../img/bg-blur.jpg') no-repeat;
   background-size: cover;
   opacity: 1;
+}
+// country
+.review-country-main {
+  .country-flag {
+    margin: 20px 10px;
+    img { width: 70px; }
+  }
+  .country-rating {
+    i.glyphicon {
+      margin: 0 15px;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    .glyphicon-star-empty:before {
+      content: "\f006";
+      color: $brand-light-grey;
+    }
+    .glyphicon-star:before {
+      content: "\f005";
+      color: $brand-pink;
+    }
+  }
 }
 // pop-up rate end
 // accordion review end
@@ -3611,7 +3640,7 @@ header {
   .choose-cover-pic {
     width: 148px;
     height: 148px;
-    margin: 0 3px 0px;
+    margin: 0 3px;
     display: inline-block;
     overflow: hidden;
     img {
@@ -3620,10 +3649,10 @@ header {
   }
 }
 .crop-cover-container {
-  width: 700px;
-  margin: 0 auto;
+  // width: 700px;
+  // margin: 0 auto;
   .cropped-Image {
-    width: 450px;
+    width: 550px;
     display: inline-block;
     vertical-align: bottom;
   }
@@ -3634,7 +3663,7 @@ header {
   vertical-align: bottom;
   span {
     color: #fff;
-    padding-bottom: 3px;
+    padding-bottom: 2px;
     border-bottom: 1px solid #fff;
   }
   .btn-cover-save {
@@ -4193,16 +4222,44 @@ header {
   .itinerary-year {
     display: inline-block;
     margin-right: 22px;
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background-color: $brand-lighter-grey;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: $brand-pink;
+    }
   }
   .itinerary-duration {
     display: inline-block;
   }
   .month-dropdown {
     width: 100px;
-    height: 130px;
+    height: 150px;
     position: absolute;
     top: 35px;
     left: 57px;
+    background-color: #fff;
+    z-index: 1;
+    border: 1px solid $brand-blue;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    li {
+      padding: 5px;
+      border-bottom: 1px solid $brand-blue;
+      text-align: center;
+      &:last-child {
+        border-bottom: none;
+      }
+      a {
+        color: $brand-blue;
+        &:hover {
+          color: $brand-light-grey;
+        }
+      }
+    }
   }
 }
 .fill-itinerary-type {
