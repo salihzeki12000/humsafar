@@ -769,7 +769,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         notify: false
       });
     }
-  });
+  })
 .controller('MylifeCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
