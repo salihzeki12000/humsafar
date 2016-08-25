@@ -314,8 +314,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     //Used to name the .html file
     initMap = function() {
       var tardeo = {
-        lat: 18.96458,
-        lng: 72.78397
+        lat: 18.9692098,
+        lng: 72.81516999
       };
       // Create a new StyledMapType object, passing it an array of styles,
       // and the name to be displayed on the map type control.
@@ -468,6 +468,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.showDropdown = byIndex;
       }
     };
+
+    // share whole trip social
+    $scope.viewSocialShare = false;
+    $scope.shareSocial = function(){
+      if($scope.viewSocialShare == false) {
+        $scope.viewSocialShare = true;
+      }else {
+        $scope.viewSocialShare = false;
+      }
+    };
+    // share whole trip social end
+
+    // share single trip / card
+    $scope.viewSingleTrip = -1;
+    $scope.shareTrip  = function(index){
+      console.log($scope.viewSingleTrip);
+      if($scope.viewSingleTrip == index) {
+        $scope.viewSingleTrip = -1;
+      }else {
+        $scope.viewSingleTrip = index;
+      }
+    }; 
+    // share single trip / card  end
 
     $scope.options = {
       minDate: new Date(),

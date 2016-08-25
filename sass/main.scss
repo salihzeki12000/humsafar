@@ -1233,7 +1233,7 @@ header {
     padding: 0 10px;
     &:first-child {
       padding: 0 10px 0 0;
-      i {
+       i {
         font-size: 18px;
         vertical-align: bottom;
       }
@@ -3079,11 +3079,11 @@ header {
   .trip-list {
     li {
       border-right: 2px solid $brand-dark-blue;
-      padding: 0 20px;
+      padding: 0 15px;
       display: inline-block;
       line-height: 100%;
       &:first-child {
-        padding: 0 20px 0 0;
+        padding: 0 15px 0 0;
       }
       &:last-child {
         border-right: none;
@@ -3150,7 +3150,7 @@ header {
   }
 }
 .own-journey {
-  margin-right: 40px;
+  margin-right: 35px;
 }
 .profile-info h4 {
   margin: 0 0 0 15px;
@@ -3170,9 +3170,75 @@ header {
 .edit-journey,
 .following {
   margin-top: 7px;
+  display: inline-block;
   font-size: 16px;
   font-family: "AvenirLTStd-Heavy";
 }
+.share-trip-journey {
+  margin-right: 20px;
+  display: inline-block;
+  cursor: pointer;
+  img,span {
+    display: inline-block;
+    vertical-align: top;
+  }
+  img { margin-right: 3px; }
+  span {
+    font-size: 16px;
+    line-height: 100%;
+  }
+}
+.share-dropdown {
+  width: 275px;
+  padding: 12px 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  position: absolute;
+  top: 43px;
+  right: -30px;
+  background-color: #daeafa;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.6), inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
+  text-align: center;
+  &:after,
+  &:before {
+    content: "";
+    position: absolute;
+    top: -34px;
+    right: 25px;
+    border-top: 17px solid transparent;
+    border-bottom: 17px solid #c6def3;
+    border-left: 17px solid transparent;
+    border-right: 17px solid transparent;
+  }
+  &:before {
+    top: -38px;
+    right: 23px;
+    border-top: 19px solid transparent;
+    border-bottom: 19px solid #fff;
+    border-left: 19px solid transparent;
+    border-right: 19px solid transparent;
+  }
+  ul li {
+    display: inline-block;
+    margin-right: 15px;
+    &:last-child { margin-right: 0; }
+  }
+  a {
+    color: #999;
+    @include transition(all 300ms linear);
+    &:hover {
+      @include transition(all 300ms linear);
+    }
+  }
+  a.fb-icon:hover { color: #3b5998; }
+  a.twi-icon:hover { color: #55acee; }
+  a.google-icon:hover { color: #d34836; }
+  a.pin-icon:hover { color: #cb2027; }
+  a.linkedin-icon:hover { color: #007bb5; }
+  a.mail-icon:hover { color: $brand-pink; }
+}
+
 // card
 .ongo-card-holder {
   width: 550px;
@@ -3279,6 +3345,55 @@ header {
     }
   }
 }
+// share single trip
+.share-single-trip {
+  width: 300px;
+  padding: 20px 15px;
+  border-bottom: 2px solid #bababa;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  box-shadow: -1px 1px 10px 0 rgba(0, 0, 0, 0.35),inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
+  position: absolute;
+  bottom: 37px;
+  left: -6px;
+  background-color: #f6fafc;
+  text-align: center;
+  &:after,
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: -23px;
+    left: 13px;
+    border-top: 12px solid #e7f1f7;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 12px solid transparent;
+    z-index: 2;
+  }
+  &:after {
+    z-index: 1;
+    left: 12px;
+    bottom: -26px;
+    border-top: 13px solid #bababa;
+    border-right: 13px solid transparent;
+    border-bottom: 13px solid transparent;
+    border-left: 13px solid transparent;
+  }
+  li:first-child i { font-size: 2em; }
+  li:last-child { padding: 0px 0px 0px 10px; }
+  a {
+    color: #999;
+    @include transition(all 300ms linear);
+    &:hover { @include transition(all 300ms linear); }
+  }
+  a.fb-icon:hover { color: #3b5998; }
+  a.twi-icon:hover { color: #55acee; }
+  a.google-icon:hover { color: #d34836; }
+  a.pin-icon:hover { color: #cb2027; }
+  a.linkedin-icon:hover { color: #007bb5; }
+  a.mail-icon:hover { color: $brand-pink; }
+}
+// share single trip cancel
 // card header end
 .card-imgholder {
   height: 400px;
@@ -4395,4 +4510,7 @@ header {
   position: fixed;
   top: 0;
   z-index: 2;
+  img[src="https://maps.gstatic.com/mapfiles/api-3/images/google_white5.png"] {
+    display: none !important;
+  }
 }

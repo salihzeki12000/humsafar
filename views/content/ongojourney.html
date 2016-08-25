@@ -70,6 +70,20 @@
             </div>
           </div>
           <div class="pull-right">
+            <div class="share-trip-journey relate" ng-click="shareSocial();">
+              <img src="img/share.png" alt="Share" width="11">
+              <span class="color-blue avenir-heavy">Share</span>
+              <div class="share-dropdown" ng-show="viewSocialShare">
+                <ul>
+                  <li><a href="" class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>
+                  <li><a href="" class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>
+                  <li><a href="" class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
+                  <li><a href="" class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a></li>
+                  <li><a href="" class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
+                  <li><a href="" class="mail-icon"><i class="fa fa-envelope-square fa-2x"></i></a></li>
+                </ul>
+              </div>
+            </div>
             <div class="following hide">
               <span class="color-blue avenir-medium">Following</span>
             </div>
@@ -228,10 +242,20 @@
                               <img src="img/comments.png" alt="" height="18">
                             </a>
                           </li>
-                          <li>
+                          <li class="relate">
                             <a href="">
-                              <img src="img/share.png" alt="" height="18">
+                              <img src="img/share.png" alt="" height="18" ng-click="shareTrip($index)">
                             </a>
+                            <div class="share-single-trip" ng-if="$index == viewSingleTrip">
+                              <ul>
+                                <li><a href="" class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>
+                                <li><a href="" class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>
+                                <li><a href="" class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
+                                <li><a href="" class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a></li>
+                                <li><a href="" class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
+                                <li><a href="" class="mail-icon"><i class="fa fa-envelope-square fa-2x"></i></a></li>
+                              </ul>
+                            </div>
                           </li>
                         </ul>
                       </div>
@@ -277,7 +301,7 @@
                             <i class="fa fa-star-o"></i>
                           </span>
                           </p> -->
-                          <p class="inline-block pointer" ng-click="giveReview();"><span class="color-blue">Rate This Now</span></p>
+                          <p class="inline-block pointer" ng-click="giveReview();"><i class="color-blue">Rate This Now</i></p>
                         </div>
                         <div class="pull-right">
                           <div class="ongo-travel-icon">
