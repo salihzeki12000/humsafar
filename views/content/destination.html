@@ -1,11 +1,12 @@
 <div class="destinaiton">
   <div class="img-holder-destination relate">
-    <img src="img/info.jpg" alt="travel-libro" class="full-width">
+    <!-- <img src="img/destination/info.jpg" alt="travel-libro" class="full-width"> -->
+    <div class="overlay"></div>
     <div class="get-center country-title">
-      <h4>India</h4>
+      <h4 class="color-white title-head">India</h4>
     </div>
     <div class="list-horizontal">
-      <ul class="dest-right">
+      <ul class="dest-right color-white">
         <li>
           <div class="right-label">
             <label for="">
@@ -58,7 +59,7 @@
         </li>
         <li>
           <div class="right-label">
-            <a href="#">Read</a>
+            <a class="color-white" href="#">Read</a>
           </div>
         </li>
       </ul>
@@ -67,16 +68,26 @@
 </div>
 
 <div class="destination-nav">
-  <ul class="inline-block">
-    <li>Featured Cities</li>
-    <li>Must Do’s</li>
-    <li>Itineraries</li>
-    <li>Bookings</li>
-    <li>Best Time To Visit</li>
-  </ul>
-  <div class="inline-block">
-    <form action="">
-      <input type="text" class="form-control" placeholder="Search Destination">
-    </form>
+  <div class="container-fluid">
+    <div class="col-md-8">
+      <ul class="list-inline">
+        <li>Featured Cities</li>
+        <li>Must Do’s</li>
+        <li>Itineraries</li>
+        <li>Bookings</li>
+        <li>Best Time To Visit</li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <form action="">
+        <div class="input-search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search Destination">
+            <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i>
+</span>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
