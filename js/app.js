@@ -41,6 +41,12 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       controller: 'DestinationCtrl',
       reloadOnSearch: false
     })
+    .state('destinationWithOut', {
+      url: "/destination",
+      templateUrl: "views/template.html",
+      controller: 'DestinationCtrl',
+      reloadOnSearch: false
+    })
     .state('journey', {
       url: "/journey",
       templateUrl: "views/template.html",
