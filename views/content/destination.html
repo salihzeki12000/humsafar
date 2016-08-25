@@ -71,11 +71,11 @@
   <div class="container-fluid">
     <div class="col-md-8">
       <ul class="list-inline">
-        <li>Featured Cities</li>
-        <li>Must Do’s</li>
-        <li>Itineraries</li>
-        <li>Bookings</li>
-        <li>Best Time To Visit</li>
+        <li ng-click="getTab(0)" ng-class="{'active': url='featured'}">Featured Cities</li>
+        <li ng-click="getTab(1)" ng-class="{'active': url='mustdo'}">Must Do’s</li>
+        <li ng-click="getTab(2)" ng-class="{'active': url='featured'}">Itineraries</li>
+        <li ng-click="getTab(3)" ng-class="{'active': url='featured'}">Bookings</li>
+        <li ng-click="getTab(4)" ng-class="{'active': url='featured'}">Best Time To Visit</li>
       </ul>
     </div>
     <div class="col-md-4">
@@ -83,11 +83,13 @@
         <div class="input-search">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search Destination">
-            <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i>
-</span>
+            <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
           </div>
         </div>
       </form>
     </div>
   </div>
+</div>
+<div class="container-fluid bg-white">
+  <div class="destination-content" ng-include="destination.innerView"></div>
 </div>

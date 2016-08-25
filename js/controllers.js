@@ -489,7 +489,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }else {
         $scope.viewSingleTrip = index;
       }
-    }; 
+    };
     // share single trip / card  end
 
     $scope.options = {
@@ -740,7 +740,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    var alldestination = ["views/content/destination/featured.html", "views/content/destination/mustdo.html", "views/content/destination/itinerary.html", "views/content/destination/booking.html", "views/content/destination/visit.html"];
+    var alldestination = ["views/content/destination/featured.html", "views/content/destination/mustdo.html", "views/content/destination/itineraries.html", "views/content/destination/booking.html", "views/content/destination/visit.html"];
     $scope.destination = {
       innerView: alldestination[0]
     };
@@ -753,7 +753,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       case "mustdo":
         $scope.destination.innerView = alldestination[1];
         break;
-      case "itinerary":
+      case "itineraries":
         $scope.destination.innerView = alldestination[2];
         break;
       case "booking":
@@ -768,15 +768,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.getTab = function(view) {
       $scope.destination.innerView = alldestination[view];
       var url = "featured";
+      var active="";
+      console.log(view);
       switch (view) {
         case 0:
           url = "featured";
+          // class = "active-destination";
           break;
         case 1:
           url = "mustdo";
           break;
         case 2:
-          url = "itinerary";
+          url = "itineraries";
           break;
         case 3:
           url = "booking";

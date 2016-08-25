@@ -1,3 +1,11 @@
+.overlay {
+  background: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 .destinaiton {
   .img-holder-destination {
     height: 100vh;
@@ -5,14 +13,6 @@
     background: url('../img/destination/info.jpg') no-repeat;
     background-size: cover;
     background-position: center center;
-  }
-  .overlay {
-    background: rgba(0, 0, 0, 0.2);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
   }
   .list-horizontal {
     position: absolute;
@@ -42,8 +42,9 @@
       margin: 0 20px;
       @extend .avenir-medium;
       cursor: pointer;
-      @include transition(all ease 300ms);
       border-bottom: 3px solid transparent;
+      @include transition(all ease 300ms);
+      &.active,
       &:hover {
         border-color: $brand-dark-pink;
         color: lighten(#000,20%);
@@ -54,10 +55,12 @@
     .form-control {
       background: transparent;
       border: 0;
-      height: 30px;
+      height: 25px;
+      font-size: 12px;
+      margin-top: 2px;
     }
     .input-group {
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #1e5974;
       margin: 3px 0;
     }
   }
@@ -67,5 +70,44 @@
     border-radius: 0;
     color: #232d4a;
     cursor: pointer;
+  }
+}
+.destination-content {
+  .head-title-all{
+    h4{
+      color: #ff6759;
+    }
+  }
+  .img-holder {
+    margin-bottom: 20px;
+    .title-head-left {
+      font-size: 30px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 8px 15px;
+      background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0));
+      width: 100%;
+      @extend .avenir-heavy;
+    }
+    .right-bottom {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 8px 15px;
+      background: linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.65));
+      text-align: right;
+      width: 100%;
+      @extend .avenir-roman;
+    }
+    .left-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 8px 15px;
+      background: linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.65));
+      width: 100%;
+      @extend .avenir-roman;
+    }
   }
 }
