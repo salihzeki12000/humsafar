@@ -4291,6 +4291,9 @@ header {
 .fill-quick-itinerary {
   margin: 30px 0;
 }
+.fill-quick-itinerary .itinerary-country-visited .itinerary-inputholder {
+  margin-bottom: 15px;
+}
 .itinerary-inputholder {
   position: relative;
   input {
@@ -4487,8 +4490,25 @@ header {
     }
     .glyphicon-star:before {
       content: "\f005";
-      color: $brand-lighter-grey;
+      color: $brand-pink;
     }
+  }
+}
+.trip-info-container {
+  label {
+    min-width: 75px;
+  }
+  .stayed-inputholder, .ate-inputholder, .must-inputholder {
+    width: 150px;
+    margin: 0px 10px;
+    display: inline-block;
+    input {
+      width: 100%;
+      padding: 2px 5px;
+    }
+  }
+  .added-btn {
+    display: inline-block;
   }
 }
 // detail itinerary detail end
