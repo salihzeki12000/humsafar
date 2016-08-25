@@ -3832,6 +3832,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       stateOff: 'fa fa-star'
     }];
 
+    $scope.stayedAt = [{}];
+    $scope.addedStayed = function(){
+      $scope.stayedAt.push({});
+    };
+    $scope.removeStayed = function(index){
+      console.log(index);
+      $scope.stayedAt.splice(index, 1);
+      console.log($scope.stayedAt);
+    }
+
   })
   .controller('QuickItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file

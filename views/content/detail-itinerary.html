@@ -144,19 +144,26 @@
                         <ul>
                           <li>
                             <div class="stayed-at">
-                              <label for="stayed-at" class="color-pink">Stayed At :</label>
-                              <div class="stayed-inputholder">
-                                <div class="itinerary-inputholder">
-                                  <input type="text">
+                                <div class="label-holder">
+                                  <label for="stayed-at" class="color-pink">Stayed At :</label>
                                 </div>
-                              </div>
-                              <div class="added-btn">
-                                <button class="btn btn-pink"><i class="fa fa-plus"></i></button>
-                              </div>
-                            </div>
-                            <div class="">
-                              <button class="btn btn-pink">Listed Hotels</button>
-                            </div>
+                                <div class="city-info-holder">
+                                  <div class="stayed-inputholder" ng-repeat="field in stayedAt track by $index">
+                                    <div class="itinerary-inputholder">
+                                      <input type="text">
+                                      <span class="cross pointer" ng-click="removeStayed($index);"><i class="fa fa-times"></i></span>
+                                    </div>
+                                  </div>
+                                  <div class="added-btn" ng-click="addedStayed();">
+                                    <a class="btn btn-pink"><i class="fa fa-plus"></i></a>
+                                  </div>
+                                  <div class="listed-hotels ">
+                                    <button class="btn btn-pink">Listed Hotels</button>
+                                  </div>
+                                </div>
+                                </div>
+                              <label for="stayed-at" class="color-pink">Stayed At :</label>
+
                           </li>
                           <li>
                             <div class="stayed-at ate-at">

@@ -4495,8 +4495,21 @@ header {
   }
 }
 .trip-info-container {
-  label {
-    min-width: 75px;
+  .label-holder {
+    width: 8%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .city-info-holder {
+    width: 92%;
+    margin-left: -4px;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .cross {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
   }
   .stayed-inputholder, .ate-inputholder, .must-inputholder {
     width: 150px;
