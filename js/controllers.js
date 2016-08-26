@@ -795,6 +795,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         notify: false
       });
     };
+    $scope.isopencont = false;
+    $scope.openCont = function() {
+        $scope.isopencont = !$scope.isopencont;
+    };
 
     $scope.activityPost = [{
         class: "travel-life",
