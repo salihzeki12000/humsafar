@@ -3840,7 +3840,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       console.log(index);
       $scope.stayedAt.splice(index, 1);
       console.log($scope.stayedAt);
-    }
+    };
+    // select detail itinerary type
+        $scope.selectItinerary = function(val) {
+          console.log(val);
+          if ($scope.itineraryType[val].activeClass == "active-itinerary") {
+            $scope.itineraryType[val].activeClass = "";
+          } else {
+            $scope.itineraryType[val].activeClass = "active-itinerary";
+          }
+        };
+    // select detail itinerary type end
 
   })
   .controller('QuickItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
@@ -3918,6 +3928,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     // month array
     $scope.monthDrop = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     // month array end
+
   })
 
 .controller('headerctrl', function($scope, TemplateService) {

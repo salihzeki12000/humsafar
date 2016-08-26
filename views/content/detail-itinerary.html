@@ -27,8 +27,8 @@
               <div class="fill-itinerary-type">
                 <h4 class="color-light-grey mt20 mb20">Itineraries Type</h4>
                 <div class="select-itinerary-type" ng-repeat="itinerary in itineraryType">
-                  <figure class="pointer">
-                    <div class="itinerary-iconholder">
+                  <figure class="pointer"  ng-click="selectItinerary($index)">
+                    <div class="itinerary-iconholder {{itinerary.activeClass}}" >
                       <img ng-src="{{itinerary.img}}" alt="" class="img-responsive">
                     </div>
                     <figcaption class="color-dark-blue avenir-roman">{{itinerary.caption}}</figcaption>
