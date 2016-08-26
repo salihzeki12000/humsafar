@@ -148,7 +148,7 @@
                     <div class="pull-right relate full-width">
                       <div class="journey-travelling-buddies">
                         <div class="img-buddies" ng-repeat="img in travelBuddy">
-                          <img src="{{img}}" alt="" class="img-responsive">
+                          <img ng-src="{{img}}" alt="" class="img-responsive">
                         </div>
                         <!-- <span>4+</span> -->
                       </div>
@@ -244,9 +244,9 @@
                           </li>
                           <li class="relate">
                             <a href="">
-                              <img src="img/share.png" alt="" height="18" ng-click="shareTrip($index)">
+                              <img src="img/share.png" alt="" height="18"  ng-init="ongo.share={};"  ng-click="editOption(ongo.share)">
                             </a>
-                            <div class="share-single-trip" ng-if="$index == viewSingleTrip">
+                            <div class="share-single-trip" ng-show="ongo.share.backgroundClick">
                               <ul>
                                 <li><a href="" class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>
                                 <li><a href="" class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>
@@ -261,10 +261,10 @@
                       </div>
                       <div class="pull-right">
                         <div class="options">
-                          <span class="inline-block pl10 pointer" ng-click="editOption($index);" class="pointer">
+                          <span class="inline-block pl10 pointer"  ng-init="ongo.edit={};"  ng-click="editOption(ongo.edit);" class="pointer">
                         <img src="img/options.png" alt="" width="3">
                       </span>
-                          <div class="own-trip" ng-if="$index== showDropdown">
+                          <div class="own-trip" ng-show="ongo.edit.backgroundClick">
                             <ul>
                               <!-- ng if for checkin -->
                               <li><a href="" title="Edit Check In" ng-click="editCheckIn();">Edit Check In</a></li>

@@ -1,4 +1,21 @@
 // JavaScript Document
+var initMap = {};
+var backgroundClick = {
+  object: undefined,
+  close: function() {
+    backgroundClick.object.backgroundClick = false;
+    backgroundClick.scope.$apply();
+  }
+};
+$(document).ready(function() {
+  $("body").click(function() {
+    if (backgroundClick.object) {
+      backgroundClick.close();
+    }
+  });
+
+});
+
 var firstapp = angular.module('firstapp', [
   'ui.router',
   'phonecatControllers',
