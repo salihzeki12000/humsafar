@@ -1,0 +1,4 @@
+$scope.isopencont = false;
+$scope.openCont = function() {
+    $scope.isopencont = !$scope.isopencont;
+};

@@ -6,13 +6,17 @@
   left: 0;
   right: 0;
 }
-.destinaiton {
+.text-shadow {
+  text-shadow: 1px 1px 2px #444444;
+}
+.destination {
   .img-holder-destination {
     height: 100vh;
     width: 100%;
     background: url('../img/destination/info.jpg') no-repeat;
     background-size: cover;
     background-position: center center;
+    overflow: hidden;
   }
   .list-horizontal {
     position: absolute;
@@ -24,6 +28,21 @@
       li {
         height: 16vh;
         @extend .avenir-roman;
+        span {
+          @extend .avenir-heavy;
+          @extend .text-shadow;
+        }
+        label {
+          font-weight: normal;
+          @extend .text-shadow;
+        }
+        a {
+          text-decoration: underline;
+          @extend .text-shadow;
+          &:hover {
+            color: darken(#fff,10%);
+          }
+        }
       }
     }
   }
@@ -32,6 +51,30 @@
     margin: 0;
     @extend .avenir-heavy;
     @extend .heading-blog;
+  }
+  .slide-cont-dest {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(100%);
+    padding: 30px 50px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    @include transition(all ease 300ms);
+    p {
+      @extend .avenir-roman;
+      margin-bottom: 15px;
+    }
+    a{
+      text-decoration: underline;
+      @extend .text-shadow;
+      @extend .avenir-roman;
+      &:hover {
+        color: darken(#fff,10%);
+      }
+    }
+    &.open-cont {
+      transform: translateY(0);
+    }
   }
 }
 .destination-nav {
@@ -73,13 +116,15 @@
   }
 }
 .destination-content {
-  .head-title-all{
-    h4{
+  .head-title-all {
+    h4 {
       color: #ff6759;
     }
   }
   .img-holder {
     margin-bottom: 20px;
+    border-radius: 5px;
+    overflow: hidden;
     .title-head-left {
       font-size: 30px;
       position: absolute;
@@ -110,4 +155,7 @@
       @extend .avenir-roman;
     }
   }
+}
+.plr30 {
+  padding: 0 30px;
 }
