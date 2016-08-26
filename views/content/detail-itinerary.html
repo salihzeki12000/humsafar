@@ -4,8 +4,8 @@
       <div class="container">
         <div class="fill-detail-itinerary">
           <h4 class="color-blue avenir-roman mb20">Fill Up The Itinerary</h4>
-          <div class="fill-itinerary-detail">
-            <form action="">
+          <form>
+            <div class="fill-itinerary-detail">
               <div class="itinerary-title">
                 <div class="row">
                   <div class="col-md-6">
@@ -14,8 +14,11 @@
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <div class="itinerary-inputholder">
+                    <div class="itinerary-inputholder relate">
                       <input type="text" class="form-control" placeholder="Travelled With">
+                      <span class="itinerary-dropdown-icon">
+                        <i class="fa fa-chevron-down"></i>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -39,6 +42,9 @@
                   <div class="col-md-6">
                     <div class="itinerary-inputholder">
                       <input type="text" class="form-control" placeholder="Country You Visited">
+                      <span class="itinerary-dropdown-icon">
+                        <i class="fa fa-chevron-down"></i>
+                      </span>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -46,19 +52,19 @@
                       <div class="itinerary-from itinerary-month">
                         <label for="From">From</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control" id="From">
+                          <input type="text" class="form-control text-center" id="From">
                         </div>
                       </div>
                       <div class="itinerary-to itinerary-year">
                         <label for="to">To</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control" id="to">
+                          <input type="text" class="form-control text-center" id="to">
                         </div>
                       </div>
                       <div class="itinerary-duration">
                         <label for="Duration">Days</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control" id="Duration">
+                          <input type="text" class="form-control text-center" id="Duration">
                         </div>
                       </div>
                     </div>
@@ -80,6 +86,9 @@
                   <div class="col-md-6">
                     <div class="itinerary-inputholder">
                       <input type="text" class="form-control" placeholder="Country You Visited">
+                      <span class="itinerary-dropdown-icon">
+                        <i class="fa fa-chevron-down"></i>
+                      </span>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -87,19 +96,19 @@
                       <div class="itinerary-from itinerary-month">
                         <label for="From">From</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control" id="From">
+                          <input type="text" class="form-control text-center" id="From">
                         </div>
                       </div>
                       <div class="itinerary-to itinerary-year">
                         <label for="to">To</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control" id="to">
+                          <input type="text" class="form-control text-center" id="to">
                         </div>
                       </div>
                       <div class="itinerary-duration">
                         <label for="Duration">Days</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control" id="Duration">
+                          <input type="text" class="form-control text-center" id="Duration">
                         </div>
                       </div>
                     </div>
@@ -115,125 +124,161 @@
                 </div>
               </div>
               <!-- city visited end -->
-              <div class="accordion-trip-detail">
-                <div class="trip-heading-accordion">
-                  <div class="clearfix">
-                    <div class="pull-left">
-                      <!-- <img src="" alt=""> -->
-                      <h4 class="color-dark-blue">Singapore</h4>
-                    </div>
-                    <div class="pull-right">
-                      <div class="rate-trip">
-                        <h4>Rate This Now</h4>
-                        <uib-rating ng-model="rate" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></uib-rating>
-                      </div>
+            </div>
+            <!-- accordion -->
+            <div class="accordion-trip-detail">
+              <div class="trip-heading-accordion">
+                <div class="clearfix">
+                  <div class="pull-left">
+                    <img src="img/singapore.png" alt="" width="35" class="mr5">
+                    <h4 class="color-dark-blue avenir-heavy trip-country-name">Singapore</h4>
+                  </div>
+                  <div class="pull-right">
+                    <div class="rate-trip">
+                      <h4>Rate This Now</h4>
+                      <uib-rating ng-model="rate" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></uib-rating>
                     </div>
                   </div>
                 </div>
-                <uib-accordion close-others="oneAtATime">
-                  <div class="panel-default" uib-accordion-group is-open="status.open">
-                    <uib-accordion-heading>
-                      <div class="clearfix">
-                        <p class="city-heading pull-left">Day <span>1</span> Day <span>2</span> in <span class="trip-city-name color-pink">Singapore</span></p>
-                        <span class="pull-right"><i class="fa" ng-class="{'fa-minus' : status.open , 'fa-plus' : !status.open}"></i></span>
-                      </div>
-                    </uib-accordion-heading>
-                    <div class="accordion-main">
-                      <!-- trip info container -->
-                      <div class="trip-info-container">
-                        <ul>
-                          <li>
-                            <div class="stayed-at">
-                                <div class="label-holder">
-                                  <label for="stayed-at" class="color-pink">Stayed At :</label>
-                                </div>
-                                <div class="city-info-holder">
-                                  <div class="stayed-inputholder" ng-repeat="field in stayedAt track by $index">
-                                    <div class="itinerary-inputholder">
-                                      <input type="text">
-                                      <span class="cross pointer" ng-click="removeStayed($index);"><i class="fa fa-times"></i></span>
-                                    </div>
-                                  </div>
-                                  <div class="added-btn" ng-click="addedStayed();">
-                                    <a class="btn btn-pink"><i class="fa fa-plus"></i></a>
-                                  </div>
-                                  <div class="listed-hotels ">
-                                    <button class="btn btn-pink">Listed Hotels</button>
-                                  </div>
-                                </div>
-                                </div>
+              </div>
+              <uib-accordion close-others="oneAtATime">
+                <div class="panel-default" uib-accordion-group is-open="status.open">
+                  <uib-accordion-heading>
+                    <div class="clearfix">
+                      <p class="city-heading pull-left">Day <span>1</span> to Day <span>2</span> In <span class="trip-city-name color-pink">Singapore</span></p>
+                      <span class="pull-right"><i class="fa" ng-class="{'fa-minus' : status.open , 'fa-plus' : !status.open}"></i></span>
+                    </div>
+                  </uib-accordion-heading>
+                  <div class="accordion-main">
+                    <!-- trip info container -->
+                    <div class="trip-info-container">
+                      <ul>
+                        <li>
+                          <div class="stayed-at">
+                            <div class="label-holder">
                               <label for="stayed-at" class="color-pink">Stayed At :</label>
-
-                          </li>
-                          <li>
-                            <div class="stayed-at ate-at">
+                            </div>
+                            <div class="city-info-holder">
+                              <div class="stayed-inputholder" ng-repeat="field in stayedAt track by $index">
+                                <div class="itinerary-inputholder">
+                                  <input type="text">
+                                  <span class="cross pointer" ng-click="removeStayed($index);"><i class="fa fa-times"></i></span>
+                                </div>
+                              </div>
+                              <div class="added-btn" ng-click="addedStayed();">
+                                <a class="btn btn-pink"><i class="fa fa-plus"></i></a>
+                              </div>
+                              <div class="listed-button">
+                                <button class="btn btn-pink">Listed Hotels</button>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="stayed-at ate-at">
+                            <div class="label-holder">
                               <label for="stayed-at" class="color-pink">Ate At :</label>
+                            </div>
+                            <div class="city-info-holder">
                               <div class="ate-inputholder">
                                 <div class="itinerary-inputholder">
                                   <input type="text">
                                 </div>
                               </div>
                               <div class="added-btn">
-                                <button class="btn btn-pink"><i class="fa fa-plus"></i></button>
+                                <a class="btn btn-pink"><i class="fa fa-plus"></i></a>
+                              </div>
+                              <div class="listed-button">
+                                <button class="btn btn-pink">Listed Restaurants</button>
                               </div>
                             </div>
-                            <div class="">
-                              <button class="btn btn-pink">Listed Restaurants</button>
-                            </div>
-                          </li>
-                          <li>
-                            <div class="stayed-at ate-at">
+                          </div>
+                        </li>
+                        <li>
+                          <div class="stayed-at ate-at">
+                            <div class="label-holder">
                               <label for="stayed-at" class="color-pink">Must Do's :</label>
+                            </div>
+                            <div class="city-info-holder">
                               <div class="must-inputholder">
                                 <div class="itinerary-inputholder">
                                   <input type="text">
                                 </div>
                               </div>
                               <div class="added-btn">
-                                <button class="btn btn-pink"><i class="fa fa-plus"></i></button>
+                                <a class="btn btn-pink"><i class="fa fa-plus"></i></a>
+                              </div>
+                              <div class="listed-button">
+                                <button class="btn btn-pink">Listed Must Do's</button>
                               </div>
                             </div>
-                            <div class="">
-                              <button class="btn btn-pink">Listed Must Do's</button>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                      <!-- trip info container end-->
-                      <!-- trip descp -->
-                      <div class="trip-descp-itinerary">
-                        <label for="descp">A Little More About This Trip</label>
-                        <textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel" id="descp"></textarea>
-                      </div>
-                      <!-- trip descp end -->
-                      <!-- upload trip photo -->
-                      <div class="upload-trip-photo-sec">
-                        <label for="trip-photo">Upload Trip Photo</label>
-                        <div class="trip-photo-holder text-center">
-                          <div class="trip-view-photo">
-                            <!-- <img src="" alt="" class="img-responsive"> -->
                           </div>
-                          <div class="trip-upload">
-                            <div class="upload-section">
-                              <img src="img/upload-icon.jpg" alt="" class="m-center img-responsive">
-                              <p class="text-center color-grey avenir-roman">Drag a your itinerary photos here</p>
-                              <span class="block color-grey avenir-roman">- or -</span>
-                              <div class="upload-btn">
-                                <div class="inline-block">
-                                  <button class="btn btn-dark-blue pointer avenir-light">Select a photo from your computer</button>
-                                </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- trip info container end-->
+                    <!-- trip descp -->
+                    <div class="trip-descp-itinerary">
+                      <label for="descp">A Little More About This Trip</label>
+                      <textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel" id="descp"></textarea>
+                    </div>
+                    <!-- trip descp end -->
+                    <!-- upload trip photo -->
+                    <div class="upload-trip-photo-sec">
+                      <label for="trip-photo">Upload Trip Photo</label>
+                      <div class="trip-photo-holder text-center">
+                        <div class="trip-view-photo">
+                          <!-- <img src="" alt="" class="img-responsive"> -->
+                        </div>
+                        <div class="trip-upload">
+                          <div class="upload-section">
+                            <img src="img/upload-icon.jpg" alt="" class="m-center img-responsive">
+                            <p class="text-center color-grey avenir-roman">Drag a your itinerary photos here</p>
+                            <span class="block color-grey avenir-roman">- or -</span>
+                            <div class="upload-btn">
+                              <div class="inline-block">
+                                <button class="btn btn-dark-blue pointer avenir-light">Select a photo from your computer</button>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <!-- upload trip photo end-->
+                    </div>
+                    <!-- upload trip photo end-->
+                  </div>
+                </div>
+              </uib-accordion>
+            </div>
+            <!-- accordion end -->
+            <div class="trip-budget">
+              <div class="clearfix">
+                <div class="pull-left">
+                  <label for="budget">Trip Budget</label>
+                  <div class="select-currency-holder">
+                    <div class="currency-holder">
+                      <div class="itinerary-inputholder relate">
+                        <input type="text" placeholder="Select Currency">
+                        <span class="itinerary-dropdown-icon">
+                          <i class="fa fa-chevron-down"></i>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="currency-amount">
+                      <div class="itinerary-inputholder">
+                        <input type="text" class="text-center">
+                      </div>
                     </div>
                   </div>
-                </uib-accordion>
+                </div>
+                <div class="pull-right">
+                  <div class="save-publish-detail">
+                    <button class="btn btn-pink btn-more mr5">Save</button>
+                    <button class="btn btn-pink btn-more">Publish</button>
+                  </div>
+                </div>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

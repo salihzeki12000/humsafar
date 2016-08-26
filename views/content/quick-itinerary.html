@@ -18,12 +18,12 @@
                       <div class="itinerary-month relate">
                         <label for="month">Month</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control" id="month" ng-click="viewMonths = !viewMonths">
+                          <input type="text" class="form-control text-center" id="month" ng-model="month" ng-click="viewMonths = !viewMonths">
                         </div>
                         <div class="month-dropdown" ng-show="viewMonths">
                           <ul>
-                            <li><a href="" title="January">January</a></li>
-                            <li><a href="" title="February">February</a></li>
+                            <li ng-repeat="month in monthDrop | filter:month "><a href="" title="{{month}}">{{month}}</a></li>
+                            <!-- <li><a href="" title="February">February</a></li>
                             <li><a href="" title="March">March</a></li>
                             <li><a href="" title="April">April</a></li>
                             <li><a href="" title="May">May</a></li>
@@ -33,18 +33,18 @@
                             <li><a href="" title="September">September</a></li>
                             <li><a href="" title="October">October</a></li>
                             <li><a href="" title="November">November</a></li>
-                            <li><a href="" title="December">December</a></li>
+                            <li><a href="" title="December">December</a></li> -->
                           </ul>
                         </div>
                       </div>
                       <div class="itinerary-year relate">
                         <label for="year">Year</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control" id="year" ng-click="viewYear();">
+                          <input type="text" class="form-control text-center" id="year" ng-click="viewYear();" ng-model="year">
                         </div>
                         <div class="year-dropdown"  ng-if="getYear.length > 0">
                           <ul>
-                            <li ng-repeat="list in getYear track by $index" ng-click="callYear();">
+                            <li ng-repeat="list in getYear | filter:year track by $index" ng-click="callYear();">
                               <a href="" title="{{list}}">{{list}}</a>
                             </li>
                           </ul>
@@ -53,7 +53,7 @@
                       <div class="itinerary-duration">
                         <label for="Day">Days</label>
                         <div class="itinerary-inputholder duration-input">
-                          <input type="text" class="form-control" id="Day" placeholder="e.g. 20">
+                          <input type="text" class="form-control text-center" id="Day" placeholder="e.g. 20">
                         </div>
                       </div>
                     </div>
