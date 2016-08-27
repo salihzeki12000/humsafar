@@ -1,3 +1,33 @@
 <div class="mustdo-modal">
-  <p>city</p>
+  <div class="bg-white pl20 pr20 pt20 pb20">
+    <!-- <div class="img-holder-made">
+      <img src="img/destination/taj.jpg" alt="">
+    </div> -->
+    <div class="row">
+      <div class="col-md-9">
+        <div class="holder-places" ng-repeat="place in places track by $index">
+          <div class="img-holder-place">
+            <img ng-src="{{place.img}}" alt="Travelibro" class="full-width">
+          </div>
+          <div class="destination-desc">
+            <h4 class="title-head">
+                {{place.title}}
+              </h4>
+            <p class="cont-place" ng-bind-html="place.description"></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="musto-thumbnail">
+          <flex-slider flex-slide="placeimage in placesimage track by $index" class="carousel" animation="slide" item-width="200" item-margin="5">
+            <li>
+              <div class="img-holder-place">
+                <img ng-src="{{placeimage}}" alt="Travelibro">
+              </div>
+            </li>
+          </flex-slider>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
