@@ -4635,6 +4635,54 @@ header {
   .save-publish-detail { margin-top: 25px; }
 }
 // trip budget end
+// trip status right side
+.trip-itinerary-status {
+  position: relative;
+  .trip-status-main {
+    padding: 20px 12px 10px;
+    position: absolute;
+    right: -69px;
+    background-color: #626262;
+    &:after {
+      content: '';
+      border-top: 18px solid #626262;
+      border-right: 27px solid transparent;
+      border-bottom: 27px solid transparent;
+      border-left: 27px solid transparent;
+      position: absolute;
+      bottom: -45px;
+      left: 0;
+    }
+  }
+  .status-country-holder {
+    img {
+      width: 30px;
+      border: 1px solid #fff;
+    }
+  }
+  .status-country-holder {
+    li {
+      text-align: center;
+      &:first-child .last-dot {
+        display: block;
+      }
+    }
+    .status-indot {
+      @include square(12px);
+      border-radius: 100%;
+      display: inline-block;
+      background-color: #ccc;
+    }
+    .small-dot {
+      @include square(4px);
+      margin: 8px auto;
+      border-radius: 100%;
+      display: block;
+      background-color: #ccc;
+    }
+  }
+}
+// trip status right side end
 // detail itinerary detail end
 @import "sohan.scss";
 @import "fancybox-override";

@@ -4457,6 +4457,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
     // select detail itinerary type end
 
+    // country list
+    $scope.countryList = [
+      {
+        img: "img/singapore.png",
+        cityList: [
+          {
+            cityName: "Bukit Timah"
+          },
+          {
+            cityName: "Sin Ming"
+          },
+          {
+            cityName: "Bartley"
+          }
+        ]
+      },
+      {
+        img: "img/singapore.png",
+        cityList: [
+          {
+            cityName: "Bukit Timah"
+          },
+          {
+            cityName: "Sin Ming"
+          }
+        ]
+      },
+    ];
+    // country list end
+
   })
   .controller('QuickItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
