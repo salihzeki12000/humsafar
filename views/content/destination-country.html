@@ -1,8 +1,11 @@
-<div class="destination">
+<div class="destination" scrolldown>
   <div class="img-holder-destination relate">
     <div class="overlay"></div>
     <div class="get-center country-title">
       <h4 class="color-white title-head">India</h4>
+      <div class="scrolldown color-white" ng-click="scrollDown();">
+      scrollDown
+      </div>
     </div>
     <div class="list-horizontal">
       <ul class="dest-right color-white">
@@ -64,6 +67,7 @@
       </ul>
     </div>
     <div class="slide-cont-dest color-white" ng-class="{'open-cont': isopencont}">
+      <div class="hght-destination-scroll">
       <p class="text-center">India promises to be nothing short of an all encompassing poetry reveling in striking oxymoron's like serene temples amidst manic bazaars; eternal personification of lost love in form of the Taj Mahal & beautifully juxtaposed, alliterative range
         of snow topped mountains and sun-kissed beaches!</p>
       <p class="text-center">Bristling with intricately woven phenomenal spectrum of cultures, India for first-timers can be a soul-stirring experience. Being the birthplace of ancient religions, She also provides the seeker with an enriching spiritual life and thought provoking
@@ -76,10 +80,11 @@
             <a class="color-white"  ng-click="openCont();">Close</a>
           </div>
     </div>
+    </div>
   </div>
 </div>
 
-<div class="destination-nav">
+<div class="destination-nav second">
   <div class="container-fluid">
     <div class="col-md-8">
       <ul class="list-inline">

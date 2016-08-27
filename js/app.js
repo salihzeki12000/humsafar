@@ -232,3 +232,19 @@ firstapp.config(function($translateProvider) {
   $translateProvider.translations('hi', LanguageHindi);
   $translateProvider.preferredLanguage('en');
 });
+
+firstapp.directive('scrolldown', function($compile, $parse) {
+  return {
+    restrict: 'EA',
+    replace: false,
+    link: function($scope, element, attrs) {
+      var $element = $(element);
+      $scope.scrollDown = function() {
+        $('html,body').animate({
+            scrollTop: $(".second").offset().top
+          },
+          'slow');
+      };
+    }
+  };
+});
