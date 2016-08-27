@@ -206,7 +206,7 @@ a.color-white {
   width: 500px;
   @include transform(rotate(90deg) translate(0,0));
   position: absolute;
-  top: 141px;
+  top: 110px;
   left: -130px;
   .img-holder-place {
     height: 265px;
@@ -219,4 +219,19 @@ a.color-white {
       @include transform(translate(-50%,-50%) rotate(-90deg));
     }
   }
+}
+.img-holder-place {
+  position: relative;
+  .destination-desc {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    background: rgba(0, 0, 0, 0.66);
+    color: #fff;
+    padding: 20px;
+    margin: 0 20px;
+  }
+}
+.fnt-12{
+  font-size: 12px;
 }
