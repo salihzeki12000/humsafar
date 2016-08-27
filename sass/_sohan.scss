@@ -207,12 +207,16 @@ a.color-white {
   @include transform(rotate(90deg) translate(0,0));
   position: absolute;
   top: 141px;
-  left: -40px;
+  left: -130px;
   .img-holder-place {
-    height: 150px;
+    height: 265px;
     overflow: hidden;
+    position: relative;
     img {
-      @include transform(rotate(-90deg));
+      width: 265px;
+      @include position(absolute, 50% null null 50%);
+      // @include transform(rotate(-90deg));
+      @include transform(translate(-50%,-50%) rotate(-90deg));
     }
   }
 }

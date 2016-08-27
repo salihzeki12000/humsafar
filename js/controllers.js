@@ -802,14 +802,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
 
     // country popup
-    $scope.openCountry = function() {
-      $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/country-mustdo.html",
-        windowClass: "cover-modal",
-        scope: $scope
-      });
-    };
+       $scope.openCountry = function() {
+         $uibModal.open({
+           animation: true,
+           templateUrl: "views/modal/country-mustdo.html",
+           windowClass: "cover-modal",
+           controller: 'DestinationCountryCtrl',
+           scope: $scope
+         });
+       };
+       $scope.places=[
+         {
+         img:"img/destination/taj.jpg",
+         title:"Taj Mahal",
+         description:"<p>A symbol of an eternal love story etched out in the world’s most marvellous structures in the world, the Taj Mahal epitomises one of the greatest romances in the history of mankind. Designated as a UNESCO World Heritage Site and one of the Seven Wonders of the World, this ‘tear-drop on the cheek of time’, as Rabindranath Tagore described it, is regarded as the best example of Mughal architecture and the country’s rich history. Marvel at the great marble monument ornamented with 28 types of precious and semi-precious stones for the inlay work. With its four minarets and the red sandstone mosque, this fascinating monument is a sight to behold.</p>"
+       }
+     ];
+     $scope.placesimage=[
+       'img/destination/taj.jpg',
+       'img/destination/taj.jpg',
+       'img/destination/taj.jpg',
+       'img/destination/taj.jpg',
+     ];
     //itineraries
     $scope.activityPost = [{
         class: "travel-life",
@@ -4377,31 +4391,40 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.itineraryType = [{
       img: "img/itinerary/adventure.png",
-      caption: "Adventure"
+      caption: "Adventure",
+      width: "25"
     }, {
       img: "img/itinerary/business.png",
-      caption: "Business"
+      caption: "Business",
+      width: "24"
     }, {
       img: "img/itinerary/family.png",
-      caption: "Family"
+      caption: "Family",
+      width: "30"
     }, {
       img: "img/itinerary/romance.png",
-      caption: "Romance"
+      caption: "Romance",
+      width: "26"
     }, {
       img: "img/itinerary/backpacking.png",
-      caption: "Backpacking"
+      caption: "Backpacking",
+      width: "23"
     }, {
       img: "img/itinerary/budget.png",
-      caption: "Budget"
+      caption: "Budget",
+      width: "22"
     }, {
       img: "img/itinerary/luxury.png",
-      caption: "Luxury"
+      caption: "Luxury",
+      width: "21"
     }, {
       img: "img/itinerary/religious.png",
-      caption: "Religious"
+      caption: "Religious",
+      width: "26"
     }, {
       img: "img/itinerary/friend.png",
-      caption: "Friends"
+      caption: "Friends",
+      width: "24"
     }, ];
     // tinymce
     $scope.tinymceOptions = {
@@ -4469,7 +4492,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             cityName: "Sin Ming"
           },
           {
-            cityName: "Bartley"
+            cityName: "czechoslovakia"
           }
         ]
       },
@@ -4486,6 +4509,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       },
     ];
     // country list end
+    $scope.addClass = "";
+    $scope.addCountryCity = [{}];
+    $scope.addPanel = function() {
+      $scope.addCountryCity.push({});
+      $scope.addClass = "added-panel"
+    }
 
   })
   .controller('QuickItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
@@ -4500,31 +4529,40 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.itineraryType = [{
       img: "img/itinerary/adventure.png",
-      caption: "Adventure"
+      caption: "Adventure",
+      width: "25"
     }, {
       img: "img/itinerary/business.png",
-      caption: "Business"
+      caption: "Business",
+      width: "24"
     }, {
       img: "img/itinerary/family.png",
-      caption: "Family"
+      caption: "Family",
+      width: "30"
     }, {
       img: "img/itinerary/romance.png",
-      caption: "Romance"
+      caption: "Romance",
+      width: "26"
     }, {
       img: "img/itinerary/backpacking.png",
-      caption: "Backpacking"
+      caption: "Backpacking",
+      width: "23"
     }, {
       img: "img/itinerary/budget.png",
-      caption: "Budget"
+      caption: "Budget",
+      width: "22"
     }, {
       img: "img/itinerary/luxury.png",
-      caption: "Luxury"
+      caption: "Luxury",
+      width: "21"
     }, {
       img: "img/itinerary/religious.png",
-      caption: "Religious"
+      caption: "Religious",
+      width: "26"
     }, {
       img: "img/itinerary/friend.png",
-      caption: "Friends"
+      caption: "Friends",
+      width: "24"
     }, ];
 
     $scope.tinymceOptions = {

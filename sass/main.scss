@@ -1233,7 +1233,7 @@ header {
     padding: 0 10px;
     &:first-child {
       padding: 0 10px 0 0;
-       i {
+      i {
         font-size: 18px;
         vertical-align: bottom;
       }
@@ -1967,7 +1967,9 @@ header {
     margin: 10px 0 15px;
     font-size: 18px;
   }
-  .post-emojis { min-height: 150px; }
+  .post-emojis {
+    min-height: 150px;
+  }
 }
 .fill-post {
   text-align: center;
@@ -1996,7 +1998,9 @@ header {
 .review-country-main {
   .country-flag {
     margin: 20px 10px;
-    img { width: 70px; }
+    img {
+      width: 70px;
+    }
   }
   .country-rating {
     i.glyphicon {
@@ -3178,11 +3182,14 @@ header {
   margin-right: 20px;
   display: inline-block;
   cursor: pointer;
-  img,span {
+  img,
+  span {
     display: inline-block;
     vertical-align: top;
   }
-  img { margin-right: 3px; }
+  img {
+    margin-right: 3px;
+  }
   span {
     font-size: 16px;
     line-height: 100%;
@@ -3222,7 +3229,9 @@ header {
   ul li {
     display: inline-block;
     margin-right: 15px;
-    &:last-child { margin-right: 0; }
+    &:last-child {
+      margin-right: 0;
+    }
   }
   a {
     color: #999;
@@ -3231,14 +3240,25 @@ header {
       @include transition(all 300ms linear);
     }
   }
-  a.fb-icon:hover { color: #3b5998; }
-  a.twi-icon:hover { color: #55acee; }
-  a.google-icon:hover { color: #d34836; }
-  a.pin-icon:hover { color: #cb2027; }
-  a.linkedin-icon:hover { color: #007bb5; }
-  a.mail-icon:hover { color: $brand-pink; }
+  a.fb-icon:hover {
+    color: #3b5998;
+  }
+  a.twi-icon:hover {
+    color: #55acee;
+  }
+  a.google-icon:hover {
+    color: #d34836;
+  }
+  a.pin-icon:hover {
+    color: #cb2027;
+  }
+  a.linkedin-icon:hover {
+    color: #007bb5;
+  }
+  a.mail-icon:hover {
+    color: $brand-pink;
+  }
 }
-
 // card
 .ongo-card-holder {
   width: 550px;
@@ -3379,19 +3399,37 @@ header {
     border-bottom: 13px solid transparent;
     border-left: 13px solid transparent;
   }
-  li:first-child i { font-size: 2em; }
-  li:last-child { padding: 0px 0px 0px 10px; }
+  li:first-child i {
+    font-size: 2em;
+  }
+  li:last-child {
+    padding: 0 0 0 10px;
+  }
   a {
     color: #999;
     @include transition(all 300ms linear);
-    &:hover { @include transition(all 300ms linear); }
+    &:hover {
+      @include transition(all 300ms linear);
+    }
   }
-  a.fb-icon:hover { color: #3b5998; }
-  a.twi-icon:hover { color: #55acee; }
-  a.google-icon:hover { color: #d34836; }
-  a.pin-icon:hover { color: #cb2027; }
-  a.linkedin-icon:hover { color: #007bb5; }
-  a.mail-icon:hover { color: $brand-pink; }
+  a.fb-icon:hover {
+    color: #3b5998;
+  }
+  a.twi-icon:hover {
+    color: #55acee;
+  }
+  a.google-icon:hover {
+    color: #d34836;
+  }
+  a.pin-icon:hover {
+    color: #cb2027;
+  }
+  a.linkedin-icon:hover {
+    color: #007bb5;
+  }
+  a.mail-icon:hover {
+    color: $brand-pink;
+  }
 }
 // share single trip cancel
 // card header end
@@ -4422,7 +4460,9 @@ header {
     position: absolute;
     right: 8px;
     bottom: 5px;
-    i { color: #707070; }
+    i {
+      color: #707070;
+    }
   }
 }
 .trip-descp-itinerary {
@@ -4453,7 +4493,9 @@ header {
       background-color: $brand-lighter-grey;
     }
   }
-  .mce-btn.mce-active { background-color: $brand-lighter-grey; }
+  .mce-btn.mce-active {
+    background-color: $brand-lighter-grey;
+  }
 }
 .upload-trip-photo-sec {
   margin: 30px 0 10px;
@@ -4475,14 +4517,28 @@ header {
   padding-right: 10%;
 }
 .fill-itinerary-detail {
-  .itinerary-from, .itinerary-to, .itinerary-duration {
-    .itinerary-inputholder { width: 86px; }
+  .itinerary-duration,
+  .itinerary-from,
+  .itinerary-to {
+    .itinerary-inputholder {
+      width: 86px;
+    }
+  }
+  .added-panel {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
   }
   .itinerary-inputholder .itinerary-dropdown-icon {
     position: absolute;
     right: 8px;
     bottom: 5px;
-    i { color: #707070; }
+    i {
+      color: #707070;
+    }
   }
 }
 .detail-itinerary-page {
@@ -4498,13 +4554,16 @@ header {
     border-color: $brand-dark-blue;
     overflow: hidden;
   }
-   .panel-body {
+  .panel-body {
     padding: 15px 20px 25px;
   }
-  .panel-group .panel-heading + .panel-collapse > .panel-body, .panel-group .panel-heading + .panel-collapse > .list-group {
+  .panel-group .panel-heading + .panel-collapse > .list-group,
+  .panel-group .panel-heading + .panel-collapse > .panel-body {
     border-top: 1px solid transparent;
   }
-  .panel-heading { padding: 0; }
+  .panel-heading {
+    padding: 0;
+  }
   .panel-title {
     a {
       padding: 15px 20px;
@@ -4518,8 +4577,12 @@ header {
     color: $brand-dark-blue;
     font-size: 13px;
   }
-  .accordion-icon { color: #626262; }
-  .trip-city-name { font-size: 18px; }
+  .accordion-icon {
+    color: #626262;
+  }
+  .trip-city-name {
+    font-size: 18px;
+  }
 }
 .trip-heading-accordion {
   margin-bottom: 15px;
@@ -4530,7 +4593,7 @@ header {
   }
   .rate-trip {
     h4 {
-      margin: 0px 10px 0px 0px;
+      margin: 0 10px 0 0;
       display: inline-block;
       color: $brand-pink;
       font-size: 15px;
@@ -4582,11 +4645,15 @@ header {
     position: absolute;
     right: 5px;
     bottom: 5px;
-    i { color: #707070; }
+    i {
+      color: #707070;
+    }
   }
-  .stayed-inputholder, .ate-inputholder, .must-inputholder {
+  .ate-inputholder,
+  .must-inputholder,
+  .stayed-inputholder {
     width: 200px;
-    margin: 0px 10px 15px;
+    margin: 0 10px 15px;
     display: inline-block;
     input {
       width: 100%;
@@ -4594,7 +4661,7 @@ header {
     }
   }
   .added-btn {
-    margin: 0px 10px;
+    margin: 0 10px;
     display: inline-block;
   }
 }
@@ -4619,20 +4686,28 @@ header {
     display: inline-block;
     input {
       width: 170px;
-      @include placeholder { font-size: 16px; };
+      @include placeholder {
+        font-size: 16px;
+      };
     }
   }
   .currency-amount {
     display: inline-block;
-    input { width: 60px; }
+    input {
+      width: 60px;
+    }
   }
   .itinerary-dropdown-icon {
     position: absolute;
     bottom: 5px;
     right: 5px;
-    i { color: #707070; }
+    i {
+      color: #707070;
+    }
   }
-  .save-publish-detail { margin-top: 25px; }
+  .save-publish-detail {
+    margin-top: 25px;
+  }
 }
 // trip budget end
 // trip status right side
@@ -4666,19 +4741,65 @@ header {
       &:first-child .last-dot {
         display: block;
       }
+      &:last-child .last-dotted-line { display: block; }
     }
-    .status-indot {
-      @include square(12px);
-      border-radius: 100%;
+    &:last-child li .last-dotted-line { display: none; }
+  }
+  .last-dotted-line { display: none; }
+  .status-indot {
+    @include square(12px);
+    border-radius: 100%;
+    display: inline-block;
+    background-color: #ccc;
+    cursor: pointer;
+    &:hover .status-city-name {
+      opacity: 1;
+      @include transition(all 300ms linear);
+    }
+  }
+  .small-dot {
+    @include square(4px);
+    margin: 8px auto;
+    border-radius: 100%;
+    display: block;
+    background-color: #ccc;
+    &.last-dot {
+      display: none;
+    }
+  }
+  .status-city-name {
+    opacity: 0;
+    position: absolute;
+    top: -11px;
+    right: 33px;
+    @include transition(all 300ms linear);
+    &:before {
+      content: "";
+      border-top: 21px solid transparent;
+      border-right: 21px solid transparent;
+      border-left: 14px solid #fff;
+      border-bottom: 21px solid transparent;
+      position: absolute;
+      top: -3px;
+      right: -35px;
+    }
+    &:after {
+      content: "";
+      border-top: 18px solid transparent;
+      border-right: 18px solid transparent;
+      border-left: 12px solid $brand-dark-blue;
+      border-bottom: 18px solid transparent;
+      position: absolute;
+      top: 0;
+      right: -30px;
+    }
+    span {
+      width: 120px;
+      padding: 8px 5px;
       display: inline-block;
-      background-color: #ccc;
-    }
-    .small-dot {
-      @include square(4px);
-      margin: 8px auto;
-      border-radius: 100%;
-      display: block;
-      background-color: #ccc;
+      font-size: 15px;
+      background-color: $brand-dark-blue;
+      color: #fff;
     }
   }
 }
