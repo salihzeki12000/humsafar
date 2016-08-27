@@ -795,11 +795,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         notify: false
       });
     };
+    //contentopen
     $scope.isopencont = false;
     $scope.openCont = function() {
       $scope.isopencont = !$scope.isopencont;
     };
 
+    // country popup
+    $scope.openCountry = function() {
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/country-mustdo.html",
+        backdropClass: "review-backdrop",
+        scope: $scope
+      });
+    };
+    //itineraries
     $scope.activityPost = [{
         class: "travel-life",
         profilePic: "img/profile-main.png",
