@@ -4450,9 +4450,10 @@ header {
       color: #707070;
     }
     &:hover {
-      background-color: transparent;
+      background-color: $brand-light-grey;
     }
   }
+  .mce-btn.mce-active { background-color: $brand-light-grey; }
 }
 .upload-trip-photo-sec {
   margin: 30px 0 10px;
@@ -4470,7 +4471,13 @@ header {
 }
 // quick itinerary detail end
 // detail itinerary detail
+.fill-detail-itinerary {
+  padding-right: 10%;
+}
 .fill-itinerary-detail {
+  .itinerary-from, .itinerary-to, .itinerary-duration {
+    .itinerary-inputholder { width: 86px; }
+  }
   .itinerary-inputholder .itinerary-dropdown-icon {
     position: absolute;
     right: 8px;
@@ -4557,7 +4564,7 @@ header {
     border-bottom: 1px solid $brand-lighter-grey;
   }
   .label-holder {
-    width: 8%;
+    width: 10%;
     display: inline-block;
     vertical-align: top;
     label {
@@ -4566,7 +4573,7 @@ header {
     }
   }
   .city-info-holder {
-    width: 92%;
+    width: 90%;
     margin-left: -4px;
     display: inline-block;
     vertical-align: top;
@@ -4578,7 +4585,7 @@ header {
     i { color: #707070; }
   }
   .stayed-inputholder, .ate-inputholder, .must-inputholder {
-    width: 180px;
+    width: 200px;
     margin: 0px 10px 15px;
     display: inline-block;
     input {
