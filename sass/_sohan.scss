@@ -176,8 +176,8 @@ a.color-white {
   left: 50%;
   cursor: pointer;
   @include transform(translate(-50%, -0%));
-  .@extend .avenir-roman;
-  .@extend .text-shadow;
+  @extend .avenir-roman;
+  @extend .text-shadow ;
   font-size: 12px;
   img{
     width: 15px;
