@@ -806,7 +806,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $uibModal.open({
         animation: true,
         templateUrl: "views/modal/country-mustdo.html",
-        backdropClass: "review-backdrop",
+        windowClass: "cover-modal",
         scope: $scope
       });
     };
@@ -1384,11 +1384,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         notify: false
       });
     };
+    //openCont
     $scope.isopencont = false;
     $scope.openCont = function() {
       $scope.isopencont = !$scope.isopencont;
     };
-
+    // country popup
+    $scope.openCity = function() {
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/city-mustdo.html",
+        windowClass: "cover-modal",
+        scope: $scope
+      });
+    };
+    //itineraries
     $scope.activityPost = [{
         class: "travel-life",
         profilePic: "img/profile-main.png",
