@@ -5,26 +5,29 @@
     </div> -->
     <div class="row">
       <div class="col-md-9">
-        <div class="holder-places">
-          <div class="img-holder-place">
-            <flex-slider flex-slide="item in place.images track by $index" animation="slide" animation-loop="false" as-nav-for="#sliders" slideshow="false">
-              <img ng-src="{{item.imgurl}}" alt="Travelibro" class="full-width">
-            </flex-slider>
-            <div class="destination-desc">
-              <h4 class="title-head">
+        <div class="flex-slider">
+          <div class="holder-places">
+            <div class="img-holder-place">
+              <flex-slider flex-slide="item in place.images track by $index" slider-id="slider" prev-text="" next-text="" sync="#carousel" slideshow="false" animation="slide">
+                <li> <img ng-src="{{item.imgurl}}" alt="Travelibro" class="full-width"></li>
+              </flex-slider>
+              <div class="destination-desc">
+                <h4 class="title-head">
                 {{place.title}}
               </h4>
-              <p class="cont-place" ng-bind-html="place.description"></p>
-              <p class="cont-place text-right fnt-12 m-clear">
-                Image Courtesy: <a href="{{place.link}}" class="color-white" target="_blank">{{place.link}}</a >
+                <p class="cont-place" ng-bind-html="place.description"></p>
+                <p class="cont-place text-right fnt-12 m-clear">
+                  Image Courtesy: <a href="{{place.link}}" class="color-white" target="_blank">{{place.link}}</a >
             </p>
           </div>
       </div>
     </div>
   </div>
+  </div>
       <div class="col-md-3">
         <div class="musto-thumbnail">
-          <flex-slider flex-slide="item in place.images track by $index" class="carousel" animation="slide" item-width="170" as-nav-for="#sliders" control-nav="false">
+          <flex-slider flex-slide="item in place.images track by $index" animation="slide" animation-loop="false" item-width="170" item-margin="5" as-nav-for="#slider" slideshow="false" control-nav="false" prev-text="" next-text="" slider-id="carousel"
+  animation-loop="false">
             <li>
               <div class="img-holder-place">
                 <img ng-src="{{item.imgurl}}" alt="Travelibro">

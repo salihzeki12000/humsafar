@@ -214,6 +214,7 @@ a.color-white {
     height: 265px;
     overflow: hidden;
     position: relative;
+    cursor: pointer;
     img {
       width: 265px;
       @include position(absolute, 50% null null 50%);
