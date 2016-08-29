@@ -409,6 +409,7 @@ textarea {
 }
 .btn-white-outline {
   @include button-variant( white, transparent, white);
+  &:hover { border-color: #fff; }
 }
 .btn-grey-pink {
   @include button-variant( white, $brand-grey, $brand-dark-blue);
@@ -4772,6 +4773,7 @@ header {
     position: absolute;
     top: -11px;
     right: 33px;
+    z-index: 5;
     @include transition(all 300ms linear);
     &:before {
       content: "";
@@ -4837,6 +4839,43 @@ header {
       margin-bottom: -4px;
       font-size: 42px;
     }
+  }
+  .accordion-holder {
+    padding: 20px 0;
+  }
+}
+.listing-accordion {
+  .panel-title a {
+    display: block;
+    padding: 24px 20px;
+  }
+  .panel-heading {
+    height: 67px;
+    padding: 0;
+    position: relative;
+    background-image: url('../img/itinerary/singapore.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    @include transition(all 300ms linear);
+  }
+  .panel-title {
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+  }
+  .panel-open .panel-heading {
+    height: 300px;
+    @include transition(all 300ms linear);
+  }
+  .panel-open .panel-title {
+    bottom: 0;
+    background-color: rgba(0,0,0,0.6);
+    a { padding: 15px 20px; }
+  }
+  .city-heading {
+    font-size: 13px;
+    .trip-city-name { font-size: 18px; }
   }
 }
 // editor itinerary end

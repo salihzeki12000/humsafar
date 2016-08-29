@@ -1,7 +1,7 @@
 <div class="editor-itinerary-page">
   <div class="editor-banner-holder relate">
     <div class="overlay"></div>
-    <div class="editor-banner-detail get-center text-center">
+    <div class="editor-banner-detail get-center full-width text-center">
       <div class="editor-tag color-white">
         <h4 class="m-clear avenir-medium">TraveLibro - Editor</h4>
       </div>
@@ -17,7 +17,7 @@
       <div class="journey-type-icon">
         <ul class="list-inline">
           <li ng-repeat="icon in getItineraryType track by $index">
-            <img src="{{icon.img}}" alt="" width="{{icon.width}}" class="img-responsive">
+            <img ng-src="{{icon.img}}" alt="" width="{{icon.width}}" class="img-responsive">
             <!-- Note :  use width size in backend -->
           </li>
           <!-- <li><img src="img/itinerary/adventure.png" alt="" width="45" class="img-responsive"></li>
@@ -25,9 +25,12 @@
           <li><img src="img/itinerary/budget.png" alt="" width="45" class="img-responsive"></li> -->
         </ul>
       </div>
+      <div class="button-holder mt20">
+        <button class="btn btn-white-outline btn-more">Follow</button>
+      </div>
     </div>
   </div>
-  <!-- list of editor journey  i.e ccoirdion list -->
+  <!-- list of editor journey -->
   <div class="bg-white">
     <div class="container">
       <!-- trip status -->
@@ -78,14 +81,51 @@
         </div>
       </div>
       <!-- trip status end -->
-      <div class="accordion-list">
+      <!-- accordion main -->
+      <div class="accordion-holder">
         <div class="row">
           <div class="col-md-offset-1 col-md-10">
-
+            <div class="accordion-list">
+              <!-- trip accordion heading -->
+              <div class="trip-heading-accordion">
+                <div class="clearfix">
+                  <div class="pull-left">
+                    <img src="img/singapore.png" alt="" width="35" class="mr5">
+                    <h4 class="color-dark-blue avenir-heavy trip-country-name">Singapore</h4>
+                  </div>
+                  <div class="pull-right">
+                    <span>Expand</span>
+                  </div>
+                </div>
+              </div>
+              <!-- trip accordion heading end-->
+              <div class="listing-accordion">
+                <uib-accordion close-other="oneAtATime">
+                  <uib-accordion-group  is-open="status.open">
+                    <uib-accordion-heading class="relate">
+                      <div class="journey-accordion-heading color-white">
+                        <div class="clearfix">
+                          <p class="city-heading avenir-heavy m-clear pull-left">Day <span>1</span> to Day <span>2</span> In <span class="trip-city-name">Singapore</span></p>
+                          <span class="pull-right"><i class="fa accordion-icon" ng-class="{'fa-minus' : status.open , 'fa-plus' : !status.open}"></i></span>
+                        </div>
+                      </div>
+                    </uib-accordion-heading>
+                    <div class="journey-accordion-detail">
+                      <!-- <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                      </ul> -->
+                    </div>
+                  </uib-accordion-group>
+                </uib-accordion>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      <!-- accordion main end-->
     </div>
   </div>
-  <!-- list of editor journey end  i.e ccoirdion list end -->
+  <!-- list of editor journey end  -->
 </div>
