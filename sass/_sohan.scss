@@ -81,7 +81,7 @@ a.color-white {
       }
     }
     &.open-cont {
-      transform: translateY(0);
+      @include transform(translateY(0));
     }
   }
 }
@@ -141,7 +141,7 @@ a.color-white {
       top: 0;
       left: 0;
       padding: 8px 15px;
-      background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0));
+      @include background(linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0)));
       width: 100%;
       @extend .avenir-heavy;
     }
@@ -150,7 +150,7 @@ a.color-white {
       bottom: 0;
       right: 0;
       padding: 8px 15px;
-      background: linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.65));
+      @include background(linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.65)));
       text-align: right;
       width: 100%;
       @extend .avenir-roman;
@@ -160,7 +160,7 @@ a.color-white {
       bottom: 0;
       left: 0;
       padding: 8px 15px;
-      background: linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.65));
+      @include background(linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.65)));
       width: 100%;
       @extend .avenir-roman;
     }
@@ -218,7 +218,6 @@ a.color-white {
     img {
       width: 265px;
       @include position(absolute, 50% null null 50%);
-      // @include transform(rotate(-90deg));
       @include transform(translate(-50%,-50%) rotate(-90deg));
     }
   }
