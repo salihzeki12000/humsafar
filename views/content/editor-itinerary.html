@@ -1,1 +1,91 @@
-<h5>Editor</h5>
+<div class="editor-itinerary-page">
+  <div class="editor-banner-holder relate">
+    <div class="overlay"></div>
+    <div class="editor-banner-detail get-center text-center">
+      <div class="editor-tag color-white">
+        <h4 class="m-clear avenir-medium">TraveLibro - Editor</h4>
+      </div>
+      <div class="journey-date">
+        <span class="color-white avenir-roman">Jan 2013</span>
+      </div>
+      <div class="journey-travel-heading color-white">
+        <h3 class="avenir-heavy m-clear">Family Holiday 2013</h3>
+      </div>
+      <div class="trip-day-count">
+        <p><span class="days block avenir-heavy">20</span> <span class="block avenir-roman">Days Trip</span></p>
+      </div>
+      <div class="journey-type-icon">
+        <ul class="list-inline">
+          <li ng-repeat="icon in getItineraryType track by $index">
+            <img src="{{icon.img}}" alt="" width="{{icon.width}}" class="img-responsive">
+            <!-- Note :  use width size in backend -->
+          </li>
+          <!-- <li><img src="img/itinerary/adventure.png" alt="" width="45" class="img-responsive"></li>
+          <li><img src="img/itinerary/backpacking.png" alt="" width="45" class="img-responsive"></li>
+          <li><img src="img/itinerary/budget.png" alt="" width="45" class="img-responsive"></li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- list of editor journey  i.e ccoirdion list -->
+  <div class="bg-white">
+    <div class="container">
+      <!-- trip status -->
+      <div class="trip-itinerary-status">
+        <div class="trip-status-main">
+          <div class="status-country-holder" ng-repeat="country in countryList track by $index">
+            <img ng-src="{{country.img}}" alt="Country">
+            <ul>
+              <!-- <li ng-repeat="country in countryList track by $index"> -->
+              <li ng-repeat="city in country.cityList track by $index">
+                <div class="status-city-holder">
+                  <!-- dotted line -->
+                  <span class="small-dot"></span>
+                  <span class="small-dot"></span>
+                  <span class="small-dot"></span>
+                  <span class="small-dot last-dot"></span>
+                  <!-- dotted line end -->
+                  <!-- dot status -->
+                  <div class="status-indot relate">
+                    <!-- city name of dot and img -->
+                    <div class="status-city-name ">
+                      <span>{{city.cityName}}</span>
+                    </div>
+                    <!-- city name of dot and img end-->
+                  </div>
+                  <!-- dot status end -->
+                  <!-- img on dot  -->
+                  <div class="status-imgholder relate hide">
+                    <!-- <img src="" alt="" class="img-responsive"> -->
+                    <!-- city name of dot and img -->
+                    <div class="status-city-name">
+                      <!-- <span>{{city.cityName}}</span> -->
+                    </div>
+                    <!-- city name of dot and img end-->
+                  </div>
+                  <!-- img on dot end-->
+                  <!-- only last dotted lines -->
+                  <div class="last-dotted-line">
+                    <span class="small-dot"></span>
+                    <span class="small-dot"></span>
+                    <span class="small-dot"></span>
+                  </div>
+                  <!-- only last dotted lines end-->
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- trip status end -->
+      <div class="accordion-list">
+        <div class="row">
+          <div class="col-md-offset-1 col-md-10">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- list of editor journey end  i.e ccoirdion list end -->
+</div>

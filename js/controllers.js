@@ -4611,9 +4611,77 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     // console.log("Testing Consoles");
 
     $scope.template = TemplateService.changecontent("editor-itinerary");
-    $scope.menutitle = NavigationService.makeactive("EditorItinerary");
+    $scope.menutitle = NavigationService.makeactive("Editor-Itinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    $scope.getItineraryType = [
+      {
+        img: "img/itinerary/family.png",
+        width: "40",
+      },
+      {
+        img: "img/itinerary/adventure.png",
+        width: "26",
+      },
+      {
+        img: "img/itinerary/backpacking.png",
+        width: "22",
+      },
+      {
+        img: "img/itinerary/budget.png",
+        width: "20",
+      },
+      // {
+      //   img: "img/itinerary/friend.png",
+      //   width: "22",
+      // },
+      // {
+      //   img: "img/itinerary/luxury.png",
+      //   width: "20",
+      // },
+      // {
+      //   img: "img/itinerary/romance.png",
+      //   width: "27",
+      // },
+      // {
+      //   img: "img/itinerary/business.png",
+      //   width: "26",
+      // },
+      // {
+      //   img: "img/itinerary/religious.png",
+      //   width: "25",
+      // },
+    ];
+    // country list
+    $scope.countryList = [
+      {
+        img: "img/singapore.png",
+        cityList: [
+          {
+            cityName: "Bukit Timah"
+          },
+          {
+            cityName: "Sin Ming"
+          },
+          {
+            cityName: "czechoslovakia"
+          }
+        ]
+      },
+      {
+        img: "img/singapore.png",
+        cityList: [
+          {
+            cityName: "Bukit Timah"
+          },
+          {
+            cityName: "Sin Ming"
+          }
+        ]
+      },
+    ];
+    // country list end
 
   })
   .controller('UserItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
@@ -4622,7 +4690,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     // console.log("Testing Consoles");
 
     $scope.template = TemplateService.changecontent("user-itinerary");
-    $scope.menutitle = NavigationService.makeactive("UserItinerary");
+    $scope.menutitle = NavigationService.makeactive("User-Itinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
@@ -4633,7 +4701,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     // console.log("Testing Consoles");
 
     $scope.template = TemplateService.changecontent("agent-itinerary");
-    $scope.menutitle = NavigationService.makeactive("AgentItinerary");
+    $scope.menutitle = NavigationService.makeactive("Agent-Itinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
