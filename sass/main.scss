@@ -4877,6 +4877,40 @@ header {
     font-size: 13px;
     .trip-city-name { font-size: 18px; }
   }
+  .user-trip-detail {
+    li {
+      padding: 10px 0;
+      border-bottom: 1px solid #ccc;
+      display: block;
+    }
+  }
+  .journey-accordion-detail {
+    .user-trip-heading {
+      width: 10%;
+      display: inline-block;
+      color: $brand-pink;
+      font-size: 16px;
+      vertical-align: top;
+    }
+    .user-trip-descp {
+      width: 89%;
+      display: inline-block;
+      color: #787878;
+      vertical-align: top;
+    }
+  }
+  .trip-descp {
+    padding: 10px 0;
+    h4 {
+      margin: 0 0 10px;
+      color: $brand-pink;
+      font-size: 16px;
+    }
+    .user-about-trip {
+      width: 100%;
+      color: #787878;
+    }
+  }
 }
 // editor itinerary end
 

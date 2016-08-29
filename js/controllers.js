@@ -4672,6 +4672,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }]
     }, ];
     // country list end
+    // accordion
+    $scope.countryTripList = [
+      {
+        countryImg : "img/singapore.png",
+        countryName: "Singapore",
+        cityList: [
+          {
+            dayInput1: "1",
+            dayInput2: "2",
+            cityName: "Singapore",
+            stayedAt: "Friends House",
+            ateAt : "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
+            mustDo: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
+            aboutTrip: "Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening",
+          },
+          {
+            dayInput1: "1",
+            dayInput2: "2",
+            cityName: "Singapore",
+            stayedAt: "Friends House",
+            ateAt : "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
+            mustDo: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
+            aboutTrip: "Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening",
+          },
+        ],
+      },
+      {
+        countryImg : "img/singapore.png",
+        countryName: "Singapore",
+        cityList: [
+          {
+            dayInput1: "1",
+            dayInput2: "2",
+            cityName: "Singapore",
+            stayedAt: "Friends House",
+            ateAt : "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
+            mustDo: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
+            aboutTrip: "Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.                           Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening",
+          },
+        ],
+      },
+    ];
+    // accordion end
 
   })
   .controller('UserItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {

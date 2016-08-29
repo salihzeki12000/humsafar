@@ -85,13 +85,13 @@
       <div class="accordion-holder">
         <div class="row">
           <div class="col-md-offset-1 col-md-10">
-            <div class="accordion-list">
+            <div class="accordion-list" ng-repeat="list in countryTripList">
               <!-- trip accordion heading -->
               <div class="trip-heading-accordion">
                 <div class="clearfix">
                   <div class="pull-left">
-                    <img src="img/singapore.png" alt="" width="35" class="mr5">
-                    <h4 class="color-dark-blue avenir-heavy trip-country-name">Singapore</h4>
+                    <img ng-src="{{list.countryImg}}" alt="" width="35" class="mr5">
+                    <h4 class="color-dark-blue avenir-heavy trip-country-name">{{list.countryName}}</h4>
                   </div>
                   <div class="pull-right">
                     <span>Expand</span>
@@ -101,21 +101,46 @@
               <!-- trip accordion heading end-->
               <div class="listing-accordion">
                 <uib-accordion close-other="oneAtATime">
-                  <uib-accordion-group  is-open="status.open">
+                  <uib-accordion-group  is-open="status.open"  ng-repeat="detail in list.cityList">
                     <uib-accordion-heading class="relate">
                       <div class="journey-accordion-heading color-white">
                         <div class="clearfix">
-                          <p class="city-heading avenir-heavy m-clear pull-left">Day <span>1</span> to Day <span>2</span> In <span class="trip-city-name">Singapore</span></p>
+                          <p class="city-heading avenir-heavy m-clear pull-left">Day <span>{{detail.dayInput1}}</span> to Day <span>{{detail.dayInput2}}</span> In <span class="trip-city-name">{{detail.cityName}}</span></p>
                           <span class="pull-right"><i class="fa accordion-icon" ng-class="{'fa-minus' : status.open , 'fa-plus' : !status.open}"></i></span>
                         </div>
                       </div>
                     </uib-accordion-heading>
-                    <div class="journey-accordion-detail">
-                      <!-- <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                      </ul> -->
+                    <div class="journey-accordion-detail avenir-roman">
+                      <ul class="user-trip-detail">
+                        <li>
+                          <div class="user-stayed-at">
+                            <span class="user-trip-heading">
+                              Stayed At
+                            </span>
+                            <div class="avenir-roman user-trip-descp" ng-bind-html="detail.stayedAt"></div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="user-ate-at">
+                            <span class="user-trip-heading">
+                              Ate At
+                            </span>
+                            <div class="avenir-roman user-trip-descp" ng-bind-html="detail.ateAt"></div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="user-must-do">
+                            <span class="user-trip-heading">
+                              Must Do's
+                            </span>
+                            <div class="avenir-roman user-trip-descp" ng-bind-html="detail.mustDo"></div>
+                          </div>
+                        </li>
+                      </ul>
+                      <div class="trip-descp">
+                        <h4>A Little More About This Trip ...</h4>
+                        <div class="user-about-trip" ng-bind-html="detail.aboutTrip"></div>
+                      </div>
                     </div>
                   </uib-accordion-group>
                 </uib-accordion>
