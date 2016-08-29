@@ -4911,6 +4911,42 @@ header {
       color: #787878;
     }
   }
+  .view-trip-photo {
+    padding: 0px 40px;
+    margin-top: 25px;
+    position: relative;
+    &:before, {
+      content: '';
+      width: 96%;
+      height: 14px;
+      border: 1px solid #ccc;
+      border-bottom: none;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      @include position(absolute, 35px null null 17px);
+      background-color: #fff;
+      box-shadow: 1px 0 4px #ccc , -2px 0 4px #ccc;
+    }
+    &:after {
+      content: '';
+      width: 98%;
+      height: 20px;
+      border: 1px solid #ccc;
+      border-bottom: none;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      @include position(absolute, null null -15px 10px);
+      background-color: #fff;
+      box-shadow: 1px 0 4px #ccc ;
+    }
+    .photos {
+      padding: 15px 0;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      position: relative;
+      text-align: center;
+    }
+  }
 }
 // editor itinerary end
 
