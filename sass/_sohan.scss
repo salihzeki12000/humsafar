@@ -204,34 +204,125 @@ a.color-white {
     }
   }
 }
+.holder-places {
+  .flexslider {
+    .flex-control-nav {
+      display: none;
+    }
+    .flex-direction-nav {
+      a {
+        opacity: 1;
+        &:before {
+          font-size: 24px;
+          color: #fff;
+        }
+      }
+      .flex-prev {
+        left: 10px;
+      }
+      .flex-next {
+        right: 10px;
+      }
+    }
+    &:hover .flex-direction-nav {
+      .flex-next {
+        opacity: 1;
+        right: 10px;
+      }
+      .flex-prev {
+        opacity: 1;
+        left: 10px;
+      }
+    }
+  }
+  .overlay-slider {
+    background: rgba(0,0,0,0.02);
+    position: absolute;
+    top: 0;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+  }
+}
+.destination-desc-modal {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  background: rgba(0, 0, 0, 0.66);
+  color: #fff;
+  padding: 20px;
+  margin: 0 40px;
+}
 .musto-thumbnail {
   width: 500px;
   @include transform(rotate(90deg) translate(0,0));
   position: absolute;
-  top: 110px;
-  left: -130px;
+  top: 120px;
+  left: -125px;
   .img-holder-place {
     height: 265px;
     overflow: hidden;
     position: relative;
     cursor: pointer;
+    position: relative;
     img {
       width: 265px;
       @include position(absolute, 50% null null 50%);
       @include transform(translate(-50%,-50%) rotate(-90deg));
+      @include filter(grayscale(100%));
+      @include transition(all ease 300ms);
+    }
+    &:hover {
+      img {
+        @include filter(grayscale(0%));
+      }
     }
   }
-}
-.img-holder-place {
-  position: relative;
-  .destination-desc {
-    position: absolute;
-    bottom: -20px;
-    left: 0;
-    background: rgba(0, 0, 0, 0.66);
-    color: #fff;
-    padding: 20px;
-    margin: 0 20px;
+  .flexslider {
+    .flex-direction-nav {
+      a {
+        opacity: 1;
+        width: 50px;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        top: 0;
+        text-align: center;
+        margin: 0;
+        &:before {
+          color: #fff;
+          display: block;
+          text-align: center;
+          width: 100%;
+          font-size: 24px;
+          height: 100%;
+          text-shadow: none;
+          position: absolute;
+          top: 50%;
+          @include transform(translateY(-7%));
+        }
+      }
+      .flex-next {
+        right: -29px;
+      }
+      .flex-prev {
+        left: -23px;
+      }
+    }
+    &:hover .flex-direction-nav {
+      .flex-next {
+        opacity: 1;
+        right: -29px;
+      }
+      .flex-prev {
+        opacity: 1;
+        left: -23px;
+      }
+    }
+  }
+  .flex-active-slide {
+    img {
+      @include filter(grayscale(0%));
+    }
   }
 }
 .fnt-12 {
