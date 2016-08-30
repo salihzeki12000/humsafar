@@ -160,10 +160,10 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       templateUrl: "views/template.html",
       controller: 'EditorItineraryCtrl'
     })
-    .state('useritinerary', {
-      url: "/user-itinerary",
+    .state('userquickitinerary', {
+      url: "/user-quickitinerary",
       templateUrl: "views/template.html",
-      controller: 'UserItineraryCtrl'
+      controller: 'UserQuickItineraryCtrl'
     })
     .state('agentitinerary', {
       url: "/agent-itinerary",

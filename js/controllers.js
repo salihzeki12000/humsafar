@@ -4717,13 +4717,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     // accordion end
 
   })
-  .controller('UserItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+  .controller('UserQuickItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
 
-    $scope.template = TemplateService.changecontent("user-itinerary");
-    $scope.menutitle = NavigationService.makeactive("User-Itinerary");
+    $scope.template = TemplateService.changecontent("user-quickitinerary");
+    $scope.menutitle = NavigationService.makeactive("User-Quick-Itinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
