@@ -108,7 +108,7 @@ a:hover {
     50% {
       @include transform(translate(0%, 20%));
     }
-    100%  {
+    100% {
       @include transform(translate(0%, 0%));
     }
   };
@@ -436,7 +436,9 @@ textarea {
 }
 .btn-white-outline {
   @include button-variant( white, transparent, white);
-  &:hover { border-color: #fff; }
+  &:hover {
+    border-color: #fff;
+  }
 }
 .btn-grey-pink {
   @include button-variant( white, $brand-grey, $brand-dark-blue);
@@ -4769,11 +4771,17 @@ header {
       &:first-child .last-dot {
         display: block;
       }
-      &:last-child .last-dotted-line { display: block; }
+      &:last-child .last-dotted-line {
+        display: block;
+      }
     }
-    &:last-child li .last-dotted-line { display: none; }
+    &:last-child li .last-dotted-line {
+      display: none;
+    }
   }
-  .last-dotted-line { display: none; }
+  .last-dotted-line {
+    display: none;
+  }
   .status-indot {
     @include square(12px);
     border-radius: 100%;
@@ -4834,7 +4842,6 @@ header {
 }
 // trip status right side end
 // detail itinerary detail end
-
 // editor itinerary
 .editor-itinerary-page {
   .editor-banner-holder {
@@ -4844,18 +4851,24 @@ header {
     // background-size: 100% auto;
     background-size: cover;
   }
-  .journey-type-icon li { padding: 0px 8px; }
+  .journey-type-icon li {
+    padding: 0 8px;
+  }
   .editor-tag {
     margin-bottom: 30px;
-    h4 { font-size: 20px; }
+    h4 {
+      font-size: 20px;
+    }
   }
   .journey-travel-heading {
-    margin: 5px 0px 20px;
+    margin: 5px 0 20px;
     h3 {
       font-size: 40px;
     }
   }
-  .journey-date span { font-size: 15px; }
+  .journey-date span {
+    font-size: 15px;
+  }
   .trip-day-count {
     color: $brand-light-cyan;
     span {
@@ -4898,11 +4911,15 @@ header {
   .panel-open .panel-title {
     bottom: 0;
     background-color: rgba(0,0,0,0.6);
-    a { padding: 15px 20px; }
+    a {
+      padding: 15px 20px;
+    }
   }
   .city-heading {
     font-size: 13px;
-    .trip-city-name { font-size: 18px; }
+    .trip-city-name {
+      font-size: 18px;
+    }
   }
   .user-trip-detail {
     li {
@@ -4939,10 +4956,11 @@ header {
     }
   }
   .view-trip-photo {
-    padding: 0px 40px;
+    padding: 0 40px;
     margin-top: 25px;
     position: relative;
-    &:before, {
+    ,
+    &:before {
       content: '';
       width: 96%;
       height: 14px;
@@ -4964,7 +4982,7 @@ header {
       border-top-right-radius: 4px;
       @include position(absolute, null null -15px 10px);
       background-color: #fff;
-      box-shadow: 1px 0 4px #ccc ;
+      box-shadow: 1px 0 4px #ccc;
     }
     .photos {
       padding: 15px 0;
@@ -4981,7 +4999,7 @@ header {
   .user-banner-holder {
     width: 100%;
     height: 95vh;
-    background-image: url('../img/itinerary/family-whole-bg.jpg') ;
+    background-image: url('../img/itinerary/family-whole-bg.jpg');
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: 100%;
@@ -5001,15 +5019,19 @@ header {
       margin: 0 auto;
       overflow: hidden;
     }
-    .user-name { font-size: 20px; }
+    .user-name {
+      font-size: 20px;
+    }
   }
   .journey-travel-heading {
-    margin: 5px 0px 15px;
+    margin: 5px 0 15px;
     h3 {
       font-size: 40px;
     }
   }
-  .journey-day span { font-size: 15px; }
+  .journey-day span {
+    font-size: 15px;
+  }
   .itinerary-trip-day {
     display: inline-block;
     color: $brand-light-cyan;
@@ -5038,40 +5060,88 @@ header {
     }
   }
 }
-  // .trip-pic-view {
-  //   position: absolute;
-  //   left: -26%;
-  //   top: 250px;
-  //   @include transform(rotate(90deg));
-  //   .photos {
-  //     width: 450px;
-  //     padding: 15px;
-  //     border-top-left-radius: 6px;
-  //     border-top-right-radius: 6px;
-  //     display: inline-block;
-  //     text-align: center;
-  //   }
-  //   &:before, &:after {
-  //     content: '';
-  //     position: absolute;
-  //     border: 1px solid #ccc;
-  //     border-bottom: none;
-  //   }
-  // }
-  .trip-pic-view {
+
+.trip-pic-view {
+  width: 100%;
+  padding: 20px 0;
+  position: absolute;
+  top: -40px;
+  z-index: 1;
+  background-color: #fff;
+  .heading-gallery-name {
+    font-size: 18px;
+  }
+  .masonry-main {
     border: 1px solid #ccc;
-    .gallery-imgholder {
-      max-width: 200px;
-      // width: 300px;
-      max-height: 500px;
-      margin: 5px;
-      img {
-        max-width: 100%;
-        max-height: 100%;
-      }
+    height: 650px !important;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    &:before {
+      content: '';
     }
   }
-.user-quick-itinerary { padding: 40px 0px 0; }
+  .side-scroll-direction {
+    direction: rtl;
+  }
+  .gallery-imgholder {
+    width: 220px;
+    max-width: 220px;
+    max-height: 500px;
+    margin: 3px;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+  .photos {
+    width: 450px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 15px;
+    display: block;
+    position: absolute;
+    top: 45%;
+    right: -248px;
+    @include transform(translateY(-45%)rotate(90deg));
+    text-align: center;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: $brand-lighter-grey;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: $brand-dark-pink;
+  }
+}
+.close-gallery {
+  left: -108%;
+  @include transition(all 300ms linear);
+  .close-button {
+    opacity: 0;
+    @include transition(all 300ms linear);
+  }
+  .photo-button {
+    opacity: 1;
+    @include transition(all 300ms linear);
+  }
+}
+.open-gallery {
+  left: -2%;
+  @include transition(all 300ms linear);
+  .close-button {
+    opacity: 1;
+    @include transition(all 300ms linear);
+  }
+  .photo-button {
+    opacity: 0;
+    @include transition(all 300ms linear);
+  }
+}
+.user-quick-itinerary {
+  padding: 40px 0 0;
+}
 .view-quick-itinerary {
   border: 1px solid $brand-dark-blue;
   border-radius: 6px;
@@ -5095,12 +5165,16 @@ header {
     p {
       font-size: 16px;
     }
-    .country-visited-name { font-size: 19px; }
+    .country-visited-name {
+      font-size: 19px;
+    }
   }
 }
 .view-itinerary-descp {
   padding: 25px;
-  .view-quick-descp { color: #787878; }
+  .view-quick-descp {
+    color: #787878;
+  }
 }
 .itinerary-type-head {
   position: absolute;
@@ -5117,7 +5191,6 @@ header {
   }
 }
 // user itinerary end
-
 @import "sohan.scss";
 @import "fancybox-override";
 #map {
