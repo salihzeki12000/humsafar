@@ -87,6 +87,33 @@ a:hover {
     opacity: 1;
   }
 }
+// scroll down
+.mouse-scrolldown {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  @include transform(translateX(-50%));
+  @extend .avenir-roman;
+  @extend .text-shadow;
+  font-size: 12px;
+  img {
+    width: 15px;
+    margin-bottom: 5px;
+    @include animation(bounce 2s infinite);
+  }
+  @include keyframes(bounce) {
+    0% {
+      @include transform(translate(0%, 0%));
+    }
+    50% {
+      @include transform(translate(0%, 20%));
+    }
+    100%  {
+      @include transform(translate(0%, 0%));
+    }
+  };
+}
+// scroll down end
 // scroll
 .scroll-side {
   ::-webkit-scrollbar {
@@ -4949,6 +4976,134 @@ header {
   }
 }
 // editor itinerary end
+// user itinerary
+.user-itinerary-page {
+  .user-banner-holder {
+    width: 100%;
+    height: 95vh;
+    background-image: url('../img/itinerary/family-whole-bg.jpg') ;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 100%;
+  }
+  .user-banner-detail {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    @include transform(translate(-50%,-35%));
+  }
+  .user-tag {
+    .user-imgholder {
+      width: 105px;
+      height: 110px;
+      border: 2px solid #fff;
+      border-radius: 37px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .user-name { font-size: 20px; }
+  }
+  .journey-travel-heading {
+    margin: 5px 0px 15px;
+    h3 {
+      font-size: 40px;
+    }
+  }
+  .journey-day span { font-size: 15px; }
+  .itinerary-trip-day {
+    display: inline-block;
+    color: $brand-light-cyan;
+    vertical-align: middle;
+    span {
+      font-size: 13px;
+      line-height: 100%;
+    }
+    .days {
+      margin-bottom: -4px;
+      font-size: 42px;
+    }
+  }
+  .itinerary-name {
+    margin-left: 15px;
+    display: inline-block;
+    color: $brand-light-cyan;
+    vertical-align: middle;
+    span {
+      font-size: 17px;
+      line-height: 100%;
+    }
+    span:first-child {
+      margin-bottom: -3px;
+      font-size: 27px;
+    }
+  }
+}
+  .trip-pic-view {
+    position: absolute;
+    left: -26%;
+    top: 250px;
+    @include transform(rotate(90deg));
+    .photos {
+      width: 450px;
+      padding: 15px;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      display: inline-block;
+      text-align: center;
+    }
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      border: 1px solid #ccc;
+      border-bottom: none;
+    }
+  }
+.user-quick-itinerary { padding: 40px 0px 0; }
+.view-quick-itinerary {
+  border: 1px solid $brand-dark-blue;
+  border-radius: 6px;
+  overflow: hidden;
+  .itinerary-quick-imgholder {
+    height: 350px;
+    position: relative;
+    overflow: hidden;
+    img {
+      width: 100%;
+      min-height: 100%;
+    }
+  }
+  .itinerary-heading-detail {
+    width: 100%;
+    padding: 8px 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.6);
+    p {
+      font-size: 16px;
+    }
+    .country-visited-name { font-size: 19px; }
+  }
+}
+.view-itinerary-descp {
+  padding: 25px;
+  .view-quick-descp { color: #787878; }
+}
+.itinerary-type-head {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  span {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 6px;
+    padding: 6px 12px;
+    display: inline-block;
+    background-color: $brand-pink;
+    color: #fff;
+    @extend .avenir-roman;
+  }
+}
+// user itinerary end
 
 @import "sohan.scss";
 @import "fancybox-override";

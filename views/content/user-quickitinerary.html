@@ -1,1 +1,91 @@
-<h5>User</h5>
+<div class="user-itinerary-page">
+  <div class="user-banner-holder relate" scrolldown>
+    <div class="overlay"></div>
+    <div class="user-banner-detail full-width text-center">
+      <div class="user-tag color-white">
+        <div class="user-imgholder">
+          <img src="img/profile-main.png" alt="" class="img-responsive">
+        </div>
+        <h4 class="user-name avenir-medium">Andrea Christina</h4>
+      </div>
+      <div class="journey-day">
+        <span class="color-white avenir-roman">Jan 2016</span>
+      </div>
+      <div class="journey-travel-heading color-white">
+        <h3 class="avenir-heavy m-clear">Family Holiday 2016</h3>
+      </div>
+      <div class="itinerary-trip-day">
+        <p><span class="days block avenir-heavy">20</span> <span class="block avenir-roman">Days Trip</span></p>
+      </div>
+      <div class="itinerary-name">
+        <span class="block ">Quick</span><span class="block">Itinerary</span>
+      </div>
+      <div class="journey-type-icon">
+        <ul class="list-inline">
+          <li ng-repeat="icon in getItineraryType track by $index">
+            <img ng-src="{{icon.img}}" alt="" width="{{icon.width}}" class="img-responsive">
+            <!-- Note :  use width size in backend -->
+          </li>
+        </ul>
+      </div>
+      <div class="button-holder mt20">
+        <button class="btn btn-white-outline btn-more">Follow</button>
+      </div>
+    </div>
+    <div class="mouse-scrolldown color-white text-center pointer" ng-click="scrollDown();">
+      <img src="img/mouse-scroll.png" alt="Travelibro" class="doneLoading">
+      <p>Scroll Down</p>
+    </div>
+  </div>
+  <div class="user-quick-itinerary second bg-white">
+    <div class="container">
+      <div class="trip-pic-holder relate">
+        <div class="trip-pic-view">
+          <div masonry>
+            <div class="masonry-brick" ng-repeat="pic in photoGallery track by $index">
+              <div class="row">
+                <div class="col-md-2">
+                  <img ng-src="{{pic}}" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="photos btn-pink"><i class="fa fa-picture-o mr5"></i>Family Holiday 2013 Photos</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+          <div class="view-quick-itinerary">
+            <div class="itinerary-header">
+              <div class="itinerary-quick-imgholder">
+                <img src="img/itinerary/family-whole-bg.jpg" alt="" class="img-responsive">
+                <div class="itinerary-heading-detail">
+                  <p class="m-clear mb5"><span class="avenir-roman color-pink">Country Visited : </span><span class="color-white country-visited-name avenir-heavy">Singapore | India</span></p>
+                  <p class="m-clear"><span class="avenir-roman color-pink">Cities Visited : </span><span class="color-white avenir-roman">Singapore | Mumbai</span></p>
+                </div>
+                <div class="itinerary-type-head"><span>Quick Itinerary</span></div>
+              </div>
+            </div>
+            <div class="view-itinerary-descp">
+              <h4 class="color-pink avenir-roman">A Little More About This Trip...</h4>
+              <div class="view-quick-descp avenir-roman text-justify"><!--ng-bind-html put in this class -->
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+                  book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
+                  recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+                  <p>Why do we use it? <br>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its
+                  layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page
+                  editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected
+                  humour and the like). </p>
+                  <p>Where does it come from? <br>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a
+                  Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable
+                  source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance.
+                  The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
