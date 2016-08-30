@@ -5038,24 +5038,37 @@ header {
     }
   }
 }
+  // .trip-pic-view {
+  //   position: absolute;
+  //   left: -26%;
+  //   top: 250px;
+  //   @include transform(rotate(90deg));
+  //   .photos {
+  //     width: 450px;
+  //     padding: 15px;
+  //     border-top-left-radius: 6px;
+  //     border-top-right-radius: 6px;
+  //     display: inline-block;
+  //     text-align: center;
+  //   }
+  //   &:before, &:after {
+  //     content: '';
+  //     position: absolute;
+  //     border: 1px solid #ccc;
+  //     border-bottom: none;
+  //   }
+  // }
   .trip-pic-view {
-    position: absolute;
-    left: -26%;
-    top: 250px;
-    @include transform(rotate(90deg));
-    .photos {
-      width: 450px;
-      padding: 15px;
-      border-top-left-radius: 6px;
-      border-top-right-radius: 6px;
-      display: inline-block;
-      text-align: center;
-    }
-    &:before, &:after {
-      content: '';
-      position: absolute;
-      border: 1px solid #ccc;
-      border-bottom: none;
+    border: 1px solid #ccc;
+    .gallery-imgholder {
+      max-width: 200px;
+      // width: 300px;
+      max-height: 500px;
+      margin: 5px;
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
     }
   }
 .user-quick-itinerary { padding: 40px 0px 0; }

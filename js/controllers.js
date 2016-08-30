@@ -4727,6 +4727,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    $scope.photoGallery = [
+      '../img/uploaded-pic.jpg',
+      '../img/slider1.jpg',
+      '../img/slider2.jpg',
+      '../img/moment-travel1.jpg',
+      '../img/moment-travel2.jpg',
+      '../img/local-life-post.jpg',
+      '../img/destination/goldentemple.jpg',
+      '../img/destination/list1.jpg',
+      '../img/destination/list2.jpg',
+      '../img/destination/info.jpg',
+      '../img/destination/taj-featured.jpg',
+      '../img/itinerary/itinerary.jpg',
+    ];
+
   })
   .controller('AgentItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
