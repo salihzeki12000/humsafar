@@ -52,6 +52,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       controller: 'MylifeCtrl',
       reloadOnSearch: false
     })
+    .state('destination', {
+      url: "/destination",
+      templateUrl: "views/template.html",
+      controller: 'DestinationCtrl'
+    })
     .state('destinationcountry', {
       url: "/destination-country/:name",
       templateUrl: "views/template.html",

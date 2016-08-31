@@ -24,6 +24,11 @@ a.color-white {
     background-size: cover;
     background-position: center center;
     overflow: hidden;
+    .btm-right {
+      position: absolute;
+      bottom: 20px;
+      right: 10px;
+    }
   }
   .list-horizontal {
     position: absolute;
@@ -85,6 +90,18 @@ a.color-white {
     }
   }
 }
+.alphabhates {
+  .right-end {
+    position: fixed;
+    right: 5px;
+    top: 150px;
+  }
+  ul {
+    li {
+      list-style: none;
+    }
+  }
+}
 .destination-nav {
   background: #ebebeb;
   ul {
@@ -143,6 +160,14 @@ a.color-white {
       padding: 8px 15px;
       @include background(linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0)));
       width: 100%;
+      @extend .avenir-heavy;
+    }
+    .title-head-right {
+      font-size: 16px;
+      position: absolute;
+      top: 0;
+      right: 20px;
+      padding: 8px 15px;
       @extend .avenir-heavy;
     }
     .right-bottom {
