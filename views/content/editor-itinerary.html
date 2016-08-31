@@ -13,7 +13,7 @@
       </div>
       <div class="trip-day-count ">
         <p><span class="days block avenir-heavy">20</span> <span class="block avenir-roman">Days Trip</span></p>
-      </div>      
+      </div>
       <div class="journey-type-icon">
         <ul class="list-inline">
           <li ng-repeat="icon in getItineraryType track by $index">
@@ -25,62 +25,62 @@
           <li><img src="img/itinerary/budget.png" alt="" width="45" class="img-responsive"></li> -->
         </ul>
       </div>
-      <div class="button-holder mt20">
+      <!-- <div class="button-holder mt20">
         <button class="btn btn-white-outline btn-more">Follow</button>
-      </div>
+      </div> -->
     </div>
   </div>
   <!-- list of editor journey -->
   <div class="bg-white">
-    <div class="container">
-      <!-- trip status -->
-      <div class="trip-itinerary-status">
-        <div class="trip-status-main">
-          <div class="status-country-holder" ng-repeat="country in countryList track by $index">
-            <img ng-src="{{country.img}}" alt="Country">
-            <ul>
-              <!-- <li ng-repeat="country in countryList track by $index"> -->
-              <li ng-repeat="city in country.cityList track by $index">
-                <div class="status-city-holder">
-                  <!-- dotted line -->
-                  <span class="small-dot"></span>
-                  <span class="small-dot"></span>
-                  <span class="small-dot"></span>
-                  <span class="small-dot last-dot"></span>
-                  <!-- dotted line end -->
-                  <!-- dot status -->
-                  <div class="status-indot relate">
-                    <!-- city name of dot and img -->
-                    <div class="status-city-name ">
-                      <span>{{city.cityName}}</span>
-                    </div>
-                    <!-- city name of dot and img end-->
+    <!-- trip status -->
+    <div class="trip-itinerary-status">
+      <div class="trip-status-main">
+        <div class="status-country-holder" ng-repeat="country in countryList track by $index">
+          <img ng-src="{{country.img}}" alt="Country">
+          <ul>
+            <!-- <li ng-repeat="country in countryList track by $index"> -->
+            <li ng-repeat="city in country.cityList track by $index">
+              <div class="status-city-holder">
+                <!-- dotted line -->
+                <span class="small-dot"></span>
+                <span class="small-dot"></span>
+                <span class="small-dot"></span>
+                <span class="small-dot last-dot"></span>
+                <!-- dotted line end -->
+                <!-- dot status -->
+                <div class="status-indot relate">
+                  <!-- city name of dot and img -->
+                  <div class="status-city-name ">
+                    <span>{{city.cityName}}</span>
                   </div>
-                  <!-- dot status end -->
-                  <!-- img on dot  -->
-                  <div class="status-imgholder relate hide">
-                    <img src="img/adrena.jpg" alt="" class="img-responsive">
-                    <!-- city name of dot and img -->
-                    <div class="status-city-name">
-                      <!-- <span>{{city.cityName}}</span> -->
-                    </div>
-                    <!-- city name of dot and img end-->
-                  </div>
-                  <!-- img on dot end-->
-                  <!-- only last dotted lines -->
-                  <div class="last-dotted-line">
-                    <span class="small-dot"></span>
-                    <span class="small-dot"></span>
-                    <span class="small-dot"></span>
-                  </div>
-                  <!-- only last dotted lines end-->
+                  <!-- city name of dot and img end-->
                 </div>
-              </li>
-            </ul>
-          </div>
+                <!-- dot status end -->
+                <!-- img on dot  -->
+                <div class="status-imgholder relate hide">
+                  <img src="img/adrena.jpg" alt="" class="img-responsive">
+                  <!-- city name of dot and img -->
+                  <div class="status-city-name">
+                    <!-- <span>{{city.cityName}}</span> -->
+                  </div>
+                  <!-- city name of dot and img end-->
+                </div>
+                <!-- img on dot end-->
+                <!-- only last dotted lines -->
+                <div class="last-dotted-line">
+                  <span class="small-dot"></span>
+                  <span class="small-dot"></span>
+                  <span class="small-dot"></span>
+                </div>
+                <!-- only last dotted lines end-->
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
-      <!-- trip status end -->
+    </div>
+    <!-- trip status end -->
+    <div class="container">
       <!-- accordion main -->
       <div class="accordion-holder">
         <div class="row">
@@ -141,9 +141,25 @@
                         <h4>A Little More About This Trip ...</h4>
                         <div class="user-about-trip" ng-bind-html="detail.aboutTrip"></div>
                       </div>
-                      <div class="view-trip-photo">
-                        <a class="full-width block photos btn-pink"><i class="fa fa-picture-o mr5"></i>Photos</a>
+                      <!-- gallery photo -->
+                      <div class="view-trip-photo {{editGallery}}">
+                        <div class="photo-button-holder">
+                          <a class="full-width block editor-photos btn-view btn-pink" ng-click="showGallery($index);"><i class="fa fa-picture-o mr5"></i>Photos</a>
+                          <a class="full-width block editor-photos btn-close btn-dark-blue" ng-click="showGallery($index);"><i class="fa fa-chevron-down mr5"></i>Close</a>
+                        </div>
+                        <div class="masonry-holder">
+                          <div class="masonry-editor-pic" masonry>
+                            <div class="masonry-brick" ng-repeat="img in editorGallery track by $index">
+                              <div class="editor-gallery">
+                                <div class="gallery-image-holder">
+                                  <img ng-src="{{img}}" alt="" class="img-responsive">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
+                      <!-- gallery photo end -->
                     </div>
                   </uib-accordion-group>
                 </uib-accordion>
