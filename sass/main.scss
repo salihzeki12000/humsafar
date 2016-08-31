@@ -4914,14 +4914,18 @@ header {
     left: 0;
     bottom: 0;
     position: absolute;
+    background-color: rgba(0,0,0,0.6);
   }
   .panel-open .panel-heading {
     height: 300px;
     @include transition(all 300ms linear);
+    &:before {
+      background-color: transparent;
+      @include transition(all 300ms linear);
+    }
   }
   .panel-open .panel-title {
     bottom: 0;
-    background-color: rgba(0,0,0,0.6);
     a {
       padding: 15px 20px;
     }
