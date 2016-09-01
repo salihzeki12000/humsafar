@@ -4955,6 +4955,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }
     };
 
+    // connect agent
+    $scope.agentClass = "";
+    $scope.agentbox = "agentbox-in";
+    $scope.viewAgent = function() {
+      if($scope.agentbox == "agentbox-in") {
+        $scope.agentbox = "agentbox-out";
+        $scope.agentClass = "backdrop-agent";
+      }else {
+        $scope.agentClass = "";
+        $scope.agentbox = "agentbox-in";
+      }
+    };
+    // connect agent end
+
   })
 
 .controller('headerctrl', function($scope, TemplateService) {

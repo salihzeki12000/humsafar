@@ -5323,9 +5323,9 @@ header {
     padding: 20px;
     position: absolute;
     top: 50px;
-    left: 0;
     z-index: 2;
     background-color: #fff;
+    @include transition(all 300ms linear);
     input {
       padding: 6px 12px 6px 26px;
     }
@@ -5350,7 +5350,7 @@ header {
         width: 100%;
         height: 20px;
         position: absolute;
-        top: 0;
+        bottom: 0;
         left: 0;
         background-color: #fff;
       }
@@ -5359,6 +5359,21 @@ header {
         padding: 15px 0;
         margin: 0px 15px;
       }
+    }
+  }
+  .agentbox-in {
+    left: -460px;
+    z-index: 8;
+  }
+  .agentbox-out {
+    left: -5px;
+  }
+  .backdrop-agent {
+    &:after {
+      @include square(100%);
+      @include position(fixed, 0);
+      background-color: rgba(0,0,0,0.6);
+      z-index: 7;
     }
   }
 // agent itinerary end
