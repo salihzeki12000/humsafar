@@ -32,10 +32,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.goNext = function(val) {
       if (val == 1) {
         $scope.viewNext = 1;
-        $scope.getClass = "swiper-slide-active"
+        $scope.getClass = "swiper-slide-active";
       } else if (val == 2) {
         $scope.viewNext = 2;
-        $scope.getClass2 = "swiper-slide-active"
+        $scope.getClass2 = "swiper-slide-active";
       }
 
     };
@@ -729,6 +729,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       stateOn: 'fa fa-star-o',
       stateOff: 'fa fa-star'
     }];
+  })
+
+  .controller('PopularBloggerCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+    //Used to name the .html file
+
+    // console.log("Testing Consoles");
+
+    $scope.template = TemplateService.changecontent("popular-blogger");
+    $scope.menutitle = NavigationService.makeactive("Popular Blogger");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+  })
+  .controller('PopularAgentCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+    //Used to name the .html file
+
+    // console.log("Testing Consoles");
+
+    $scope.template = TemplateService.changecontent("popular-agent");
+    $scope.menutitle = NavigationService.makeactive("Popular Agent");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
   })
   .controller('DestinationCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file

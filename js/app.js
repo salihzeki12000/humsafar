@@ -52,6 +52,16 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       controller: 'MylifeCtrl',
       reloadOnSearch: false
     })
+    .state('popularblogger', {
+      url: "/popular-blogger",
+      templateUrl: "views/template.html",
+      controller: 'PopularBloggerCtrl'
+    })
+    .state('popularagent', {
+      url: "/popular-agent",
+      templateUrl: "views/template.html",
+      controller: 'PopularAgentCtrl'
+    })
     .state('destination', {
       url: "/destination",
       templateUrl: "views/template.html",
@@ -271,5 +281,19 @@ firstapp.directive('scrolldown', function($compile, $parse) {
           'slow');
       };
     }
+  };
+});
+
+firstapp.directive("scrolladdclass", function($window) {
+  return function(scope, element, attrs) {
+    angular.element($window).bind("scroll", function() {
+      var windowHeight = $(window).height();
+      if (this.pageYOffset >= windowHeight) {
+        // console.log(windowHeight);
+        element.addClass('addfixed');
+      } else {
+        element.removeClass('addfixed');
+      }
+    });
   };
 });

@@ -20,6 +20,18 @@ a.color-white {
   .bg-destination-cc-img {
     background: url('../img/destination/info.jpg') no-repeat;
   }
+  .bg-destination {
+    background: url('../img/destination/bg-destination.jpg') no-repeat;
+    z-index: 2;
+  }
+  .bg-bloggers {
+    background: url('../img/popularblogger/bg-blogger.jpg') no-repeat;
+    z-index: 2;
+  }
+  .bg-agents  {
+    background: url('../img/popularagent/bg-agent.jpg') no-repeat;
+    z-index: 2;
+  }
   .img-holder-destination {
     height: 100vh;
     width: 100%;
@@ -112,7 +124,15 @@ a.color-white {
   &.right-end {
     position: fixed;
     right: 20px;
-    top: 150px;
+    top: 50px;
+    z-index: 0;
+    opacity: 0;
+    @include transition(all ease 300ms);
+  }
+  &.addfixed{
+    z-index: 1;
+    opacity: 1;
+    position: fixed;
   }
   ul {
     li {
