@@ -374,3 +374,11 @@ a.color-white {
 .fnt-12 {
   font-size: 12px;
 }
+
+.brdbtm{
+  border-bottom: 1px solid #ddd;
+}
+.fnt-42 {
+    font-size: 42px;
+    @extend .avenir-heavy;
+}
