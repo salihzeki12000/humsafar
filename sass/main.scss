@@ -4852,8 +4852,11 @@ header {
     // background-size: 100% auto;
     background-size: cover;
   }
-  .journey-type-icon li {
-    padding: 0 8px;
+  .journey-type-icon {
+    margin-top: 10px;
+    li {
+      padding: 0 8px;
+    }
   }
   .editor-tag {
     margin-bottom: 30px;

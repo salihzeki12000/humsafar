@@ -170,6 +170,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       templateUrl: "views/template.html",
       controller: 'UserQuickItineraryCtrl'
     })
+    .state('userdetailitinerary', {
+      url: "/user-detailitinerary",
+      templateUrl: "views/template.html",
+      controller: 'UserDetailItineraryCtrl'
+    })
     .state('agentitinerary', {
       url: "/agent-itinerary",
       templateUrl: "views/template.html",

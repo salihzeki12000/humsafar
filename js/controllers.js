@@ -4759,7 +4759,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     // console.log("Testing Consoles");
 
     $scope.template = TemplateService.changecontent("user-quickitinerary");
-    $scope.menutitle = NavigationService.makeactive("User-Quick-Itinerary");
+    $scope.menutitle = NavigationService.makeactive("User-QuickItinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
@@ -4809,6 +4809,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       '../img/destination/taj-featured.jpg',
       '../img/itinerary/itinerary.jpg',
     ];
+
+  })
+  .controller('UserDetailItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+
+    // console.log("Testing Consoles");
+
+    $scope.template = TemplateService.changecontent("user-detailitinerary");
+    $scope.menutitle = NavigationService.makeactive("User-DetailItinerary");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
 
   })
   .controller('AgentItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
