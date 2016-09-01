@@ -4771,6 +4771,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.showClass = "close-gallery";
       }
     };
+    $scope.getItineraryType = [{
+        img: "img/itinerary/family.png",
+        width: "40",
+      }, {
+        img: "img/itinerary/adventure.png",
+        width: "26",
+      }, {
+        img: "img/itinerary/backpacking.png",
+        width: "22",
+      }, {
+        img: "img/itinerary/budget.png",
+        width: "20",
+      },];
 
     $scope.photoGallery = [
       '../img/uploaded-pic.jpg',
