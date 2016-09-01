@@ -17,10 +17,15 @@ a.color-white {
   text-shadow: 1px 1px 2px #444444;
 }
 .destination {
+  .bg-destination-cc-img {
+    background: url('../img/destination/info.jpg') no-repeat;
+  }
+  .bg-destination-img {
+    background: url('../img/destination/info.jpg') no-repeat;
+  }
   .img-holder-destination {
     height: 100vh;
     width: 100%;
-    background: url('../img/destination/info.jpg') no-repeat;
     background-size: cover;
     background-position: center center;
     overflow: hidden;
@@ -28,6 +33,11 @@ a.color-white {
       position: absolute;
       bottom: 20px;
       right: 10px;
+    }
+    .download-app {
+      i {
+        padding: 0 5px;
+      }
     }
   }
   .list-horizontal {
@@ -91,9 +101,9 @@ a.color-white {
   }
 }
 .alphabhates {
-  .right-end {
+  &.right-end {
     position: fixed;
-    right: 5px;
+    right: 20px;
     top: 150px;
   }
   ul {
@@ -163,12 +173,15 @@ a.color-white {
       @extend .avenir-heavy;
     }
     .title-head-right {
-      font-size: 16px;
+      font-size: 12px;
       position: absolute;
       top: 0;
-      right: 20px;
+      right: 0;
       padding: 8px 15px;
       @extend .avenir-heavy;
+      img {
+        margin: 0 0 0 10px;
+      }
     }
     .right-bottom {
       position: absolute;
