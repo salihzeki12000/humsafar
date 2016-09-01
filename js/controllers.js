@@ -822,12 +822,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         scope: $scope
       });
     };
-    $scope.places = [{
-      img: "img/destination/taj.jpg",
-      title: "Taj Mahal",
-      description: "<p>A symbol of an eternal love story etched out in the world’s most marvellous structures in the world, the Taj Mahal epitomises one of the greatest romances in the history of mankind. Designated as a UNESCO World Heritage Site and one of the Seven Wonders of the World, this ‘tear-drop on the cheek of time’, as Rabindranath Tagore described it, is regarded as the best example of Mughal architecture and the country’s rich history. Marvel at the great marble monument ornamented with 28 types of precious and semi-precious stones for the inlay work. With its four minarets and the red sandstone mosque, this fascinating monument is a sight to behold.</p>",
-      link: "http://www.india-tajmahal.com/"
-    }];
     $scope.place = {
       description: "<p>A symbol of an eternal love story etched out in the world’s most marvellous structures in the world, the Taj Mahal epitomises one of the greatest romances in the history of mankind. Designated as a UNESCO World Heritage Site and one of the Seven Wonders of the World, this ‘tear-drop on the cheek of time’, as Rabindranath Tagore described it, is regarded as the best example of Mughal architecture and the country’s rich history. Marvel at the great marble monument ornamented with 28 types of precious and semi-precious stones for the inlay work. With its four minarets and the red sandstone mosque, this fascinating monument is a sight to behold.</p>",
       link: "http://www.india-tajmahal.com/",
@@ -845,12 +839,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }]
 
     };
-    $scope.placesimage = [
-      'img/destination/taj.jpg',
-      'img/destination/taj.jpg',
-      'img/destination/taj.jpg',
-      'img/destination/taj.jpg',
-    ];
     //itineraries
     $scope.activityPost = [{
         class: "travel-life",
@@ -1439,6 +1427,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         scope: $scope
       });
     };
+    $scope.place = {
+      description: "<p>A symbol of an eternal love story etched out in the world’s most marvellous structures in the world, the Taj Mahal epitomises one of the greatest romances in the history of mankind. Designated as a UNESCO World Heritage Site and one of the Seven Wonders of the World, this ‘tear-drop on the cheek of time’, as Rabindranath Tagore described it, is regarded as the best example of Mughal architecture and the country’s rich history. Marvel at the great marble monument ornamented with 28 types of precious and semi-precious stones for the inlay work. With its four minarets and the red sandstone mosque, this fascinating monument is a sight to behold.</p>",
+      link: "http://www.india-tajmahal.com/",
+      images: [{
+        imgurl: "img/destination/taj.jpg"
+      }, {
+        imgurl: "img/destination/taj.jpg"
+
+      }, {
+        imgurl: "img/destination/taj.jpg"
+
+      }, {
+        imgurl: "img/destination/taj.jpg"
+
+      }]
+
+    };
+
+    $scope.hoveringOver = function(value) {
+      $scope.overStar = value;
+    };
+    $scope.ratingStates = [{
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }];
     //itineraries
     $scope.activityPost = [{
         class: "travel-life",

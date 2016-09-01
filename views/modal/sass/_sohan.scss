@@ -20,17 +20,15 @@ a.color-white {
   .bg-destination-cc-img {
     background: url('../img/destination/info.jpg') no-repeat;
   }
+  .bg-destination-img {
+    background: url('../img/destination/info.jpg') no-repeat;
+  }
   .img-holder-destination {
     height: 100vh;
     width: 100%;
-    background-size: cover!important;
-    background-position: center center!important;
+    background-size: cover;
+    background-position: center center;
     overflow: hidden;
-    .right-label {
-      a {
-        text-decoration: underline;
-      }
-    }
     .btm-right {
       position: absolute;
       bottom: 20px;
@@ -41,10 +39,6 @@ a.color-white {
         padding: 0 5px;
       }
     }
-  }
-  .bg-destination-city-img {
-    background: url('../img/destination/bg-city.jpg') no-repeat;
-    height: 350px;
   }
   .list-horizontal {
     position: absolute;
@@ -89,8 +83,6 @@ a.color-white {
     background: rgba(0, 0, 0, 0.7);
     @include transition(all ease 300ms);
     z-index: 1;
-    height: 350px;
-    overflow: auto;
     p {
       @extend .avenir-roman;
       margin-bottom: 15px;
