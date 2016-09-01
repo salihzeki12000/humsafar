@@ -4771,7 +4771,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.showClass = "close-gallery";
       }
     };
-    $scope.getItineraryType = [{
+    $scope.getItineraryType = [
+      {
         img: "img/itinerary/family.png",
         width: "40",
       }, {
@@ -4783,7 +4784,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }, {
         img: "img/itinerary/budget.png",
         width: "20",
-      },];
+      }
+    ];
 
     $scope.photoGallery = [
       '../img/uploaded-pic.jpg',
@@ -4799,6 +4801,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       '../img/itinerary/itinerary.jpg',
       '../img/uploaded-pic.jpg',
       '../img/slider2.jpg',
+      '../img/moment-travel1.jpg',
+      '../img/moment-travel2.jpg',
+      '../img/local-life-post.jpg',
+      '../img/destination/goldentemple.jpg',
+      '../img/destination/list1.jpg',
+      '../img/destination/list2.jpg',
+      '../img/destination/info.jpg',
+      '../img/destination/taj-featured.jpg',
+      '../img/itinerary/itinerary.jpg',
       '../img/moment-travel1.jpg',
       '../img/moment-travel2.jpg',
       '../img/local-life-post.jpg',
@@ -4831,6 +4842,118 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Agent-Itinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    $scope.getItineraryType = [
+      {
+        img: "img/itinerary/family.png",
+        width: "40",
+      }, {
+        img: "img/itinerary/adventure.png",
+        width: "26",
+      }, {
+        img: "img/itinerary/backpacking.png",
+        width: "22",
+      }, {
+        img: "img/itinerary/budget.png",
+        width: "20",
+      }
+    ];
+    // country list
+    $scope.countryList = [{
+      img: "img/singapore.png",
+      cityList: [{
+        cityName: "Bukit Timah"
+      }, {
+        cityName: "Sin Ming"
+      }, {
+        cityName: "czechoslovakia"
+      }]
+    }, {
+      img: "img/singapore.png",
+      cityList: [{
+        cityName: "Bukit Timah"
+      }, {
+        cityName: "Sin Ming"
+      }]
+    }, ];
+    // country list end
+    // accordion
+    $scope.countryTripList = [{
+      countryImg: "img/singapore.png",
+      countryName: "Singapore",
+      cityList: [{
+        dayInput1: "1",
+        dayInput2: "2",
+        cityName: "Singapore",
+        stayedAt: "Friends House",
+        ateAt: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
+        mustDo: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
+        aboutTrip: "<p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. <br><br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p><br><p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.<br> <br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p>",
+      }, {
+        dayInput1: "1",
+        dayInput2: "2",
+        cityName: "Singapore",
+        stayedAt: "Friends House",
+        ateAt: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
+        mustDo: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
+        aboutTrip: "<p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. <br><br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p><br><p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.<br> <br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p>",
+      }, ],
+    }, {
+      countryImg: "img/singapore.png",
+      countryName: "Singapore",
+      cityList: [{
+        dayInput1: "1",
+        dayInput2: "2",
+        cityName: "Singapore",
+        stayedAt: "Friends House",
+        ateAt: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
+        mustDo: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
+        aboutTrip: "<p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. <br><br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p><br><p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.<br> <br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p>",
+      }, ],
+    }, ];
+    // accordion end
+
+    $scope.photoGallery = [
+      '../img/uploaded-pic.jpg',
+      '../img/slider2.jpg',
+      '../img/moment-travel1.jpg',
+      '../img/moment-travel2.jpg',
+      '../img/local-life-post.jpg',
+      '../img/destination/goldentemple.jpg',
+      '../img/destination/list1.jpg',
+      '../img/destination/list2.jpg',
+      '../img/destination/info.jpg',
+      '../img/destination/taj-featured.jpg',
+      '../img/itinerary/itinerary.jpg',
+      '../img/uploaded-pic.jpg',
+      '../img/slider2.jpg',
+      '../img/moment-travel1.jpg',
+      '../img/moment-travel2.jpg',
+      '../img/local-life-post.jpg',
+      '../img/destination/goldentemple.jpg',
+      '../img/destination/list1.jpg',
+      '../img/destination/list2.jpg',
+      '../img/destination/info.jpg',
+      '../img/destination/taj-featured.jpg',
+      '../img/itinerary/itinerary.jpg',
+      '../img/moment-travel1.jpg',
+      '../img/moment-travel2.jpg',
+      '../img/local-life-post.jpg',
+      '../img/destination/goldentemple.jpg',
+      '../img/destination/list1.jpg',
+      '../img/destination/list2.jpg',
+      '../img/destination/info.jpg',
+      '../img/destination/taj-featured.jpg',
+      '../img/itinerary/itinerary.jpg',
+    ];
+    $scope.showClass = "close-gallery";
+    $scope.viewGallery = function() {
+      if ($scope.showClass == "close-gallery") {
+        $scope.showClass = "open-gallery";
+      } else {
+        $scope.showClass = "close-gallery";
+      }
+    };
 
   })
 

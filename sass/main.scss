@@ -5081,6 +5081,12 @@ header {
       font-size: 20px;
     }
   }
+  .journey-type-icon {
+    margin-top: 10px;
+    li {
+      padding: 0 8px;
+    }
+  }
   .journey-travel-heading {
     margin: 5px 0 15px;
     h3 {
@@ -5123,8 +5129,8 @@ header {
   width: 1000px;
   padding: 20px;
   position: absolute;
-  top: -40px;
-  z-index: 1;
+  top: 0px;
+  z-index: 6;
   background-color: #fff;
   .heading-gallery-name {
     font-size: 18px;
@@ -5152,36 +5158,6 @@ header {
       max-height: 100%;
     }
   }
-  .user-button-holder {
-    padding: 0px 20px;
-    position: absolute;
-    top: 50%;
-    right: -240px;
-    @include transform(translateY(-50%)rotate(90deg));
-    &:after {
-      content: '';
-      width: 100%;
-      height: 25px;
-      border: 1px solid #ccc;
-      border-bottom: none;
-      border-top-left-radius: 6px;
-      border-top-right-radius: 6px;
-      @include box-shadow(0px -2px 4px #ccc);
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      background-color: #fff;
-      z-index: -1;
-    }
-  }
-  .photos {
-    width: 450px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    padding: 15px;
-    display: block;
-    text-align: center;
-  }
   ::-webkit-scrollbar {
     width: 6px;
   }
@@ -5191,6 +5167,36 @@ header {
   ::-webkit-scrollbar-thumb {
     background-color: $brand-dark-pink;
   }
+}
+.user-button-holder {
+  padding: 0px 20px;
+  position: absolute;
+  top: 50%;
+  right: -240px;
+  @include transform(translateY(-50%)rotate(90deg));
+  &:after {
+    content: '';
+    width: 100%;
+    height: 25px;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    @include box-shadow(0px -2px 4px #ccc);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: -1;
+  }
+}
+.photos {
+  width: 450px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 15px;
+  display: block;
+  text-align: center;
 }
 .close-gallery {
   left: -960px;
@@ -5204,10 +5210,10 @@ header {
   left: 50%;
   @include transition(all 300ms linear);
   @include transform(translateX(-50%));
+  .close-button { display: block; }
   .photo-button {
-    display: block;
+    display: none;
   }
-  .close-button { display: none; }
 }
 .user-quick-itinerary {
   padding: 40px 0;
@@ -5261,6 +5267,101 @@ header {
   }
 }
 // user itinerary end
+// agent itinerary
+.agent-itinerary-page {
+  @extend .user-itinerary-page;
+  .agent-banner-holder {
+    width: 100%;
+    height: 95vh;
+    background-image: url('../img/itinerary/religious.jpg');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 100%;
+  }
+  .agent-banner-detail {
+    width: 100%;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    @include transform(translate(-50%,-30%));
+  }
+  .agent-imgholder {
+    width: 160px;
+    max-width: 160px;
+    margin: 0px auto 20px;
+  }
+  .journey-type-icon {
+    margin-top: 10px;
+    li {
+      padding: 0 8px;
+    }
+  }
+  .journey-start-end p { font-size: 15px; }
+  // main section
+  .accordion-holder {
+    padding: 20px 0;
+  }
+  .trip-status-main { right: 15px; }
+  // main section end
+  // side section of agent
+  .connect-agent, .itinerary-photo-btn {
+    display: inline-block;
+    .photos {
+      width: 250px;
+      margin: 0px 10px;
+    }
+  }
+  .user-button-holder {
+    top: 53%;
+    right: -290px;
+    @include transform(translateY(-53%) rotate(90deg));
+  }
+}
+  // side section of agent end
+  .connect-agentbox-holder {
+    width: 450px;
+    padding: 20px;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    z-index: 2;
+    background-color: #fff;
+    input {
+      padding: 6px 12px 6px 26px;
+    }
+    .agent-input-icon {
+      position: absolute;
+      bottom: 7px;
+      left: 8px;
+    }
+    .contact-tag {
+      padding: 10px 0;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      font-size: 15px;
+    }
+    .button-connect-box {
+      position: absolute;
+      top: 110px;
+      right: -145px;
+      @include transform(rotate(90deg));
+      &:before {
+        content: '';
+        width: 100%;
+        height: 20px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #fff;
+      }
+      a {
+        width: 220px;
+        padding: 15px 0;
+        margin: 0px 15px;
+      }
+    }
+  }
+// agent itinerary end
 @import "sohan.scss";
 @import "fancybox-override";
 #map {
