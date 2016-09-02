@@ -4713,6 +4713,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     // country list
     $scope.countryList = [{
       img: "img/singapore.png",
+      countryName: "Singapore",
       cityList: [{
         cityName: "Bukit Timah"
       }, {
@@ -4722,6 +4723,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }]
     }, {
       img: "img/singapore.png",
+      countryName: "Singapore",
       cityList: [{
         cityName: "Bukit Timah"
       }, {
@@ -5030,7 +5032,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     // country list
     $scope.countryList = [{
       img: "img/singapore.png",
-      country: "Singapore",
+      countryName: "Singapore",
       cityList: [{
         cityName: "Bukit Timah"
       }, {
@@ -5040,7 +5042,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }]
     }, {
       img: "img/singapore.png",
-      country: "Singapore",
+      countryName: "Singapore",
       cityList: [{
         cityName: "Bukit Timah"
       }, {
