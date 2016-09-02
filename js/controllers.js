@@ -4880,6 +4880,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    $scope.journeyItinerary = [
+      {
+        img: "img/ongojourney/monish.jpg",
+        name: "Monish"
+      },
+      {
+        img: "img/ongojourney/malhar.jpg",
+        name: "Malhar"
+      },
+    ];
+    $scope.getItineraryType = [
+      {
+        img: "img/itinerary/family.png",
+        width: "40",
+      }, {
+        img: "img/itinerary/adventure.png",
+        width: "26",
+      }, {
+        img: "img/itinerary/backpacking.png",
+        width: "22",
+      }, {
+        img: "img/itinerary/budget.png",
+        width: "20",
+      }
+    ];
+
     $scope.photoGallery = [
       '../img/uploaded-pic.jpg',
       '../img/slider2.jpg',

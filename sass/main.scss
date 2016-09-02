@@ -192,13 +192,13 @@ ul {
 // classes
 .avenir-black {
   font-family: "AvenirLTStd-Black";
-  // -webkit-font-smoothing: antialiased;
-  // -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .avenir-heavy {
   font-family: "AvenirLTStd-Heavy";
-  // -webkit-font-smoothing: antialiased;
-  // -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .avenir-light {
   font-family: "AvenirLTStd-Light";
@@ -4916,7 +4916,7 @@ header {
     background-image: url('../img/itinerary/singapore.jpg');
     background-repeat: no-repeat;
     background-size: 100%;
-    @include transition(all 300ms linear);
+    @include transition(all 200ms linear);
   }
   .panel-body {
     // position: relative;
@@ -4932,7 +4932,7 @@ header {
   }
   .panel-open .panel-heading {
     height: 300px;
-    @include transition(all 300ms linear);
+    @include transition(all 200ms linear);
     &:before {
       background-color: transparent;
       @include transition(all 300ms linear);
@@ -5079,9 +5079,9 @@ header {
   }
   .user-banner-detail {
     position: absolute;
-    top: 35%;
+    top: 30%;
     left: 50%;
-    @include transform(translate(-50%,-35%));
+    @include transform(translate(-50%,-30%));
   }
   .user-tag {
     .user-imgholder {
@@ -5283,6 +5283,39 @@ header {
 // user detail itinerary
 .user-detailitinerary-page {
   .trip-status-main { right: 15px; }
+  .journey-start-end {
+    margin: 12px 0px;
+    p { font-size: 15px; }
+  }
+}
+.journey-travelled-with {
+  margin-left: 15px;
+  display: inline-block;
+  vertical-align: middle;
+  .with {
+    display: inline-block;
+    font-size: 13px;
+  }
+  .traveller-list {
+    min-width: 60px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .journey-travelled-holder {
+    width: 34px;
+    height: 37px;
+    border-radius: 13px;
+    border: 2px solid #fff;
+    display: inline-block;
+    overflow: hidden;
+    text-align: center;
+    color: #fff;
+    img { min-height: 100%; }
+  }
+  .traveller-name {
+    margin-top: 3px;
+    font-size: 13px;
+  }
 }
 // user detail itinerary end
 // agent itinerary
@@ -5339,7 +5372,7 @@ header {
   .connect-agentbox-holder {
     width: 450px;
     position: absolute;
-    top: 103px;
+    top: 107px;
     z-index: 3;
     @include transition(all 300ms linear);
     input {
