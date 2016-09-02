@@ -60,7 +60,12 @@
     <div class="trip-itinerary-status">
       <div class="trip-status-main">
         <div class="status-country-holder" ng-repeat="country in countryList track by $index">
-          <img ng-src="{{country.img}}" alt="Country">
+          <div class="country-flag-holder relate">
+            <img ng-src="{{country.img}}" alt="Country">
+            <div class="status-country-name text-center">
+              <span>{{country.countryName}}</span>
+            </div>
+          </div>
           <ul>
             <!-- <li ng-repeat="country in countryList track by $index"> -->
             <li ng-repeat="city in country.cityList track by $index">
