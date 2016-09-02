@@ -4885,7 +4885,7 @@ header {
     font-size: 15px;
   }
   .trip-day-count {
-    color: $brand-light-cyan;
+    color: $brand-cyan;
     span {
       font-size: 12px;
       line-height: 100%;
@@ -5062,6 +5062,10 @@ header {
     }
   }
 }
+.overlay-itinerary-bg {
+  @include position(absolute, 0);
+  background-color: rgba(0,0,0,0.5);
+}
 // editor itinerary end
 // user itinerary
 .user-itinerary-page {
@@ -5109,7 +5113,7 @@ header {
   }
   .itinerary-trip-day {
     display: inline-block;
-    color: $brand-light-cyan;
+    color: $brand-cyan;
     vertical-align: middle;
     span {
       font-size: 12px;
@@ -5210,7 +5214,7 @@ header {
   text-align: center;
 }
 .close-gallery {
-  left: -960px;
+  left: -972px;
   @include transition(all 300ms linear);
   .close-button {
     display: none;
@@ -5229,6 +5233,7 @@ header {
 .view-quick-itinerary {
   border: 1px solid $brand-dark-blue;
   border-radius: 6px;
+  margin: 40px 0;
   overflow: hidden;
   .itinerary-quick-imgholder {
     height: 350px;
@@ -5334,7 +5339,7 @@ header {
   .connect-agentbox-holder {
     width: 450px;
     position: absolute;
-    top: 50px;
+    top: 103px;
     z-index: 3;
     @include transition(all 300ms linear);
     input {
