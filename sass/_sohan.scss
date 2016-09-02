@@ -30,6 +30,7 @@
   left: 0;
   right: 0;
 }
+
 .overlay-landing {
   background: rgba(0, 0, 0, 0.2);
   position: absolute;
@@ -73,7 +74,7 @@ a.color-white {
   }
 
   .img-holder-destination {
-    height: 100vh;
+    height: calc(100vh - 60px);
     width: 100%;
     background-size: cover!important;
     background-position: center center!important;
@@ -105,14 +106,18 @@ a.color-white {
 
   .list-horizontal {
     position: absolute;
-    top: 10%;
-    width: 150px;
-    right: 30px;
+    top: 0;
+    height: 100vh;
+    width: 220px;
+    right: 0;
     text-align: center;
+    @include background(linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.20),rgba(0, 0, 0, 0.30)));
 
     ul {
+      padding: 70px 30px 0 35px;
+
       li {
-        height: 16vh;
+        height: 14vh;
         @extend .avenir-roman;
 
         span {
@@ -138,10 +143,11 @@ a.color-white {
   }
 
   .country-title h4 {
-    font-size: 55px;
+    font-size: 50px;
     margin: 0;
     @extend .avenir-heavy;
     @extend .heading-blog;
+    text-shadow: 2px 1px 2px rgba(0, 0, 0, 0.7);
   }
 
   .slide-cont-dest {
@@ -150,11 +156,25 @@ a.color-white {
     transform: translateY(100%);
     padding: 30px 50px;
     width: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    // background: rgba(0, 0, 0, 0.7);
     @include transition(all ease 300ms);
     z-index: 1;
     height: 350px;
     overflow: auto;
+
+    .hght-destination-scroll {
+      position: relative;
+    }
+
+    .blur-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: url('../img/blur.png');
+      height: 340px;
+      width: 100%;
+      @include filter(blur(10px));
+    }
 
     p {
       @extend .avenir-roman;
@@ -202,10 +222,12 @@ a.color-white {
 
 .destination-nav {
   background: #ebebeb;
+  padding: 10px 0 0;
 
   ul {
     li {
-      padding: 8px 0;
+      line-height: 150%;
+      padding: 5px 0 4px;
       margin: 0 20px;
       @extend .avenir-medium;
       cursor: pointer;
@@ -231,7 +253,7 @@ a.color-white {
 
     .input-group {
       border-bottom: 1px solid #1e5974;
-      margin: 3px 0;
+      margin: -2px 0;
     }
   }
 
@@ -250,6 +272,7 @@ a.color-white {
       color: #ff6759;
       margin: 0;
       padding: 15px 0;
+      @extend .avenir-heavy;
     }
   }
 
@@ -258,13 +281,19 @@ a.color-white {
     border-radius: 5px;
     overflow: hidden;
 
+    &:hover {
+      img {
+        @include transform(scale(1.1));
+      }
+    }
+
     .title-head-left {
       font-size: 30px;
       position: absolute;
       top: 0;
       left: 0;
       padding: 8px 15px;
-      @include background(linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0)));
+      @include background(linear-gradient(rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0)));
       width: 100%;
       @extend .avenir-heavy;
     }
@@ -287,7 +316,7 @@ a.color-white {
       bottom: 0;
       right: 0;
       padding: 8px 15px;
-      @include background(linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.65)));
+      @include background(linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 90)));
       text-align: right;
       width: 100%;
       @extend .avenir-roman;
@@ -298,9 +327,15 @@ a.color-white {
       bottom: 0;
       left: 0;
       padding: 8px 15px;
-      @include background(linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.65)));
+      @include background(linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 90)));
       width: 100%;
       @extend .avenir-roman;
+
+      ul {
+        li {
+          font-size: 16px;
+        }
+      }
     }
   }
 }
@@ -399,12 +434,12 @@ a.color-white {
 
 .destination-desc-modal {
   position: absolute;
-  bottom: -52px;
+  bottom: -42px;
   left: 0;
   background: rgba(0, 0, 0, 0.66);
   color: #fff;
   padding: 30px;
-  margin: 0 40px;
+  margin: 20px 40px;
 }
 
 .pb52 {
@@ -415,7 +450,7 @@ a.color-white {
   width: 500px;
   @include transform(rotate(90deg) translate(0,0));
   position: absolute;
-  top: 120px;
+  top: 140px;
   left: -125px;
 
   .img-holder-place {
@@ -511,8 +546,9 @@ a.color-white {
   .common-box {
     margin: 20px 0;
     box-shadow: 2px 5px 1px 0 rgba(0,0,0,0.4);
-    border-radius:6px;
-     .head-btv {
+    border-radius: 6px;
+
+    .head-btv {
       border-top-left-radius: 6px;
       border-top-right-radius: 6px;
       padding: 15px;
