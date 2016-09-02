@@ -1,84 +1,134 @@
+.fnt-32 {
+  font-size: 32px;
+}
+
+.fnt-22 {
+  font-size: 22px;
+}
+
+.fnt-20 {
+  font-size: 20px;
+}
+
+.fnt-16 {
+  font-size: 16px;
+}
+
+.fnt-60 {
+  font-size: 60px;
+}
+
+.mt-clear {
+  margin-top: 0;
+}
+
 .overlay {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
 }
+.overlay-landing {
+  background: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 a.color-white {
   color: white;
   @include transition(all ease 300ms);
+
   &:hover {
     color: darken(#fff,20%);
   }
 }
+
 .text-shadow {
   text-shadow: 1px 1px 2px #444444;
 }
+
 .destination {
   .bg-destination-cc-img {
     background: url('../img/destination/info.jpg') no-repeat;
   }
+
   .bg-destination {
     background: url('../img/destination/bg-destination.jpg') no-repeat;
     z-index: 2;
   }
+
   .bg-bloggers {
     background: url('../img/popularblogger/bg-blogger.jpg') no-repeat;
     z-index: 2;
   }
-  .bg-agents  {
+
+  .bg-agents {
     background: url('../img/popularagent/bg-agent.jpg') no-repeat;
     z-index: 2;
   }
+
   .img-holder-destination {
     height: 100vh;
     width: 100%;
     background-size: cover!important;
     background-position: center center!important;
     overflow: hidden;
+
     .right-label {
       a {
         text-decoration: underline;
       }
     }
+
     .btm-right {
       position: absolute;
       bottom: 20px;
       right: 10px;
     }
+
     .download-app {
       i {
         padding: 0 5px;
       }
     }
   }
+
   .bg-destination-city-img {
     background: url('../img/destination/bg-city.jpg') no-repeat;
     height: 350px;
   }
+
   .list-horizontal {
     position: absolute;
     top: 10%;
     width: 150px;
     right: 30px;
     text-align: center;
+
     ul {
       li {
         height: 16vh;
         @extend .avenir-roman;
+
         span {
           @extend .avenir-heavy;
           @extend .text-shadow;
         }
+
         label {
           font-weight: normal;
           @extend .text-shadow;
         }
+
         a {
           text-decoration: underline;
           @extend .text-shadow;
+
           &:hover {
             color: darken(#fff,10%);
           }
@@ -86,12 +136,14 @@ a.color-white {
       }
     }
   }
+
   .country-title h4 {
-    font-size: 40px;
+    font-size: 55px;
     margin: 0;
     @extend .avenir-heavy;
     @extend .heading-blog;
   }
+
   .slide-cont-dest {
     position: absolute;
     bottom: 0;
@@ -103,23 +155,28 @@ a.color-white {
     z-index: 1;
     height: 350px;
     overflow: auto;
+
     p {
       @extend .avenir-roman;
       margin-bottom: 15px;
     }
+
     a {
       text-decoration: underline;
       @extend .text-shadow;
       @extend .avenir-roman;
+
       &:hover {
         color: darken(#fff,10%);
       }
     }
+
     &.open-cont {
       @include transform(translateY(0));
     }
   }
 }
+
 .alphabhates {
   &.right-end {
     position: fixed;
@@ -129,19 +186,23 @@ a.color-white {
     opacity: 0;
     @include transition(all ease 300ms);
   }
-  &.addfixed{
+
+  &.addfixed {
     z-index: 1;
     opacity: 1;
     position: fixed;
   }
+
   ul {
     li {
       list-style: none;
     }
   }
 }
+
 .destination-nav {
   background: #ebebeb;
+
   ul {
     li {
       padding: 8px 0;
@@ -150,6 +211,7 @@ a.color-white {
       cursor: pointer;
       border-bottom: 3px solid transparent;
       @include transition(all ease 300ms);
+
       &.active,
       &:hover {
         border-color: $brand-dark-pink;
@@ -157,6 +219,7 @@ a.color-white {
       }
     }
   }
+
   .input-search {
     .form-control {
       background: transparent;
@@ -165,11 +228,13 @@ a.color-white {
       font-size: 12px;
       margin-top: 2px;
     }
+
     .input-group {
       border-bottom: 1px solid #1e5974;
       margin: 3px 0;
     }
   }
+
   .input-group-addon {
     background-color: transparent;
     border: 0;
@@ -178,6 +243,7 @@ a.color-white {
     cursor: pointer;
   }
 }
+
 .destination-content {
   .head-title-all {
     h4 {
@@ -186,10 +252,12 @@ a.color-white {
       padding: 15px 0;
     }
   }
+
   .img-holder {
     margin-bottom: 20px;
     border-radius: 5px;
     overflow: hidden;
+
     .title-head-left {
       font-size: 30px;
       position: absolute;
@@ -200,6 +268,7 @@ a.color-white {
       width: 100%;
       @extend .avenir-heavy;
     }
+
     .title-head-right {
       font-size: 12px;
       position: absolute;
@@ -207,10 +276,12 @@ a.color-white {
       right: 0;
       padding: 8px 15px;
       @extend .avenir-heavy;
+
       img {
         margin: 0 0 0 10px;
       }
     }
+
     .right-bottom {
       position: absolute;
       bottom: 0;
@@ -221,6 +292,7 @@ a.color-white {
       width: 100%;
       @extend .avenir-roman;
     }
+
     .left-bottom {
       position: absolute;
       bottom: 0;
@@ -232,9 +304,11 @@ a.color-white {
     }
   }
 }
+
 .plr30 {
   padding: 0 30px;
 }
+
 .scrolldown {
   position: absolute;
   bottom: 20px;
@@ -247,10 +321,12 @@ a.color-white {
   @extend .text-shadow;
   font-size: 12px;
   z-index: 0;
+
   img {
     width: 15px;
     margin-bottom: 5px;
   }
+
   &:hover img {
     @include animation(bounce 2s infinite);
   }
@@ -262,45 +338,55 @@ a.color-white {
     80% {
       @include transform(translate(-0%, -0%));
     }
+
     40% {
       @include transform(translate(-0%, -20%));
     }
+
     60% {
       @include transform(translate(-0%, -10%));
     }
   }
 }
+
 .holder-places {
   .flexslider {
     .flex-control-nav {
       display: none;
     }
+
     .flex-direction-nav {
       a {
         opacity: 1;
+
         &:before {
           font-size: 24px;
           color: #fff;
         }
       }
+
       .flex-prev {
         left: 10px;
       }
+
       .flex-next {
         right: 10px;
       }
     }
+
     &:hover .flex-direction-nav {
       .flex-next {
         opacity: 1;
         right: 10px;
       }
+
       .flex-prev {
         opacity: 1;
         left: 10px;
       }
     }
   }
+
   .overlay-slider {
     background: rgba(0,0,0,0.02);
     position: absolute;
@@ -310,27 +396,35 @@ a.color-white {
     right: 0;
   }
 }
+
 .destination-desc-modal {
   position: absolute;
-  bottom: -20px;
+  bottom: -52px;
   left: 0;
   background: rgba(0, 0, 0, 0.66);
   color: #fff;
-  padding: 20px;
+  padding: 30px;
   margin: 0 40px;
 }
+
+.pb52 {
+  padding-bottom: 52px;
+}
+
 .musto-thumbnail {
   width: 500px;
   @include transform(rotate(90deg) translate(0,0));
   position: absolute;
   top: 120px;
   left: -125px;
+
   .img-holder-place {
     height: 265px;
     overflow: hidden;
     position: relative;
     cursor: pointer;
     position: relative;
+
     img {
       width: 265px;
       @include position(absolute, 50% null null 50%);
@@ -338,12 +432,14 @@ a.color-white {
       @include filter(grayscale(100%));
       @include transition(all ease 300ms);
     }
+
     &:hover {
       img {
         @include filter(grayscale(0%));
       }
     }
   }
+
   .flexslider {
     .flex-direction-nav {
       a {
@@ -354,6 +450,7 @@ a.color-white {
         top: 0;
         text-align: center;
         margin: 0;
+
         &:before {
           color: #fff;
           display: block;
@@ -367,38 +464,112 @@ a.color-white {
           @include transform(translateY(-7%));
         }
       }
+
       .flex-next {
         right: -29px;
       }
+
       .flex-prev {
         left: -23px;
       }
     }
+
     &:hover .flex-direction-nav {
       .flex-next {
         opacity: 1;
         right: -29px;
       }
+
       .flex-prev {
         opacity: 1;
         left: -23px;
       }
     }
   }
+
   .flex-active-slide {
     img {
       @include filter(grayscale(0%));
     }
   }
 }
+
 .fnt-12 {
   font-size: 12px;
 }
 
-.brdbtm{
+.brdbtm {
   border-bottom: 1px solid #ddd;
 }
+
 .fnt-42 {
-    font-size: 42px;
-    @extend .avenir-heavy;
+  font-size: 42px;
+  @extend .avenir-heavy;
+}
+
+.dest-btv {
+  .common-box {
+    margin: 20px 0;
+    box-shadow: 2px 5px 1px 0 rgba(0,0,0,0.4);
+    border-radius:6px;
+     .head-btv {
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      padding: 15px;
+      @extend .avenir-roman;
+    }
+
+    .brd {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+    }
+
+    .right-circle {
+      position: absolute;
+      right: 20px;
+      bottom: -12px;
+    }
+
+    .left-circle {
+      position: absolute;
+      left: 20px;
+      bottom: -12px;
+    }
+  }
+
+  .red-box {
+    .head-btv {
+      background: #f88076;
+    }
+
+    .brd {
+      border: 2px solid #da4734;
+    }
+  }
+
+  .green-box {
+    .head-btv {
+      background: #3ad6d1;
+    }
+
+    .brd {
+      border: 2px solid #1fa39c;
+    }
+  }
+
+  .cont-btv-white {
+    background: rgba(210, 216, 225, 0.85);
+    padding: 20px 10px;
+    height: 140px;
+    @extend .avenir-roman;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+
+  .img-holder-btv {
+    height: 65px;
+    overflow: hidden;
+  }
 }

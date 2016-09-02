@@ -67,6 +67,12 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       templateUrl: "views/template.html",
       controller: 'DestinationCtrl'
     })
+    .state('destinationcountryWithOut', {
+      url: "/destination-country",
+      templateUrl: "views/template.html",
+      controller: 'DestinationCountryCtrl',
+      reloadOnSearch: false
+    })
     .state('destinationcountry', {
       url: "/destination-country/:name",
       templateUrl: "views/template.html",
@@ -79,11 +85,10 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       controller: 'DestinationCityCtrl',
       reloadOnSearch: false
     })
-    .state('destinationWithOut', {
-      url: "/destination",
+    .state('destinationcityWithOut', {
+      url: "/destination-city",
       templateUrl: "views/template.html",
-      controller: 'DestinationCtrl',
-      reloadOnSearch: false
+      controller: 'DestinationCityCtrl',
     })
     .state('journey', {
       url: "/journey",
