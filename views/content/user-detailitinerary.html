@@ -1,0 +1,199 @@
+<div class="user-itinerary-page user-detailitinerary-page">
+  <div class="user-banner-holder relate" scrolldown>
+    <div class="overlay"></div>
+    <div class="user-banner-detail full-width text-center">
+      <div class="user-tag color-white">
+        <div class="user-imgholder">
+          <img src="img/profile-main.png" alt="" class="img-responsive">
+        </div>
+        <h4 class="user-name avenir-medium">Andrea Christina</h4>
+      </div>
+      <div class="journey-day">
+        <span class="color-white avenir-roman">Jan 2016</span>
+      </div>
+      <div class="journey-travel-heading color-white">
+        <h3 class="avenir-heavy m-clear">Family Holiday 2016</h3>
+      </div>
+      <div class="itinerary-trip-day">
+        <p><span class="days block avenir-heavy">20</span> <span class="block avenir-roman">Days Trip</span></p>
+      </div>
+      <div class="itinerary-name">
+        <span class="block ">Quick</span><span class="block">Itinerary</span>
+      </div>
+      <div class="journey-type-icon">
+        <ul class="list-inline">
+          <li ng-repeat="icon in getItineraryType track by $index">
+            <img ng-src="{{icon.img}}" alt="" width="{{icon.width}}" class="img-responsive">
+            <!-- Note :  use width size in backend -->
+          </li>
+        </ul>
+      </div>
+      <div class="button-holder mt20">
+        <button class="btn btn-white-outline btn-more">Follow</button>
+      </div>
+    </div>
+    <div class="mouse-scrolldown color-white text-center pointer" ng-click="scrollDown();">
+      <img src="img/mouse-scroll.png" alt="Travelibro" class="doneLoading">
+      <p>Scroll Down</p>
+    </div>
+  </div>
+  <div class="user-quick-itinerary second bg-white">
+    <!-- trip side pic holder -->
+      <div class="trip-pic-holder relate">
+        <div class="trip-pic-view {{showClass}}">
+          <p class="color-pink heading-gallery-name"><i class="fa fa-picture-o mr5"></i>Family Holiday 2013 Photos</p>
+          <div masonry class="masonry-main side-scroll-direction">
+            <div class="masonry-brick" ng-repeat="pic in photoGallery track by $index">
+              <div class="gallery-imgholder">
+                <img ng-src="{{pic}}" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="user-button-holder">
+            <a class="photos btn-pink photo-button" ng-click="viewGallery();"><i class="fa fa-picture-o mr5"></i>Family Holiday 2013 Photos</a>
+            <a class="photos btn-dark-blue close-button" ng-click="viewGallery();"><i class="fa fa-chevron-down mr5"></i>Close</a>
+          </div>
+        </div>
+      </div>
+    <!-- trip side pic holder end -->
+    <!-- trip status -->
+    <div class="trip-itinerary-status">
+      <div class="trip-status-main">
+        <div class="status-country-holder" ng-repeat="country in countryList track by $index">
+          <img ng-src="{{country.img}}" alt="Country">
+          <ul>
+            <!-- <li ng-repeat="country in countryList track by $index"> -->
+            <li ng-repeat="city in country.cityList track by $index">
+              <div class="status-city-holder">
+                <!-- dotted line -->
+                <span class="small-dot"></span>
+                <span class="small-dot"></span>
+                <span class="small-dot"></span>
+                <span class="small-dot last-dot"></span>
+                <!-- dotted line end -->
+                <!-- dot status -->
+                <div class="status-indot relate">
+                  <!-- city name of dot and img -->
+                  <div class="status-city-name ">
+                    <span>{{city.cityName}}</span>
+                  </div>
+                  <!-- city name of dot and img end-->
+                </div>
+                <!-- dot status end -->
+                <!-- img on dot  -->
+                <div class="status-imgholder relate hide">
+                  <img src="img/adrena.jpg" alt="" class="img-responsive">
+                  <!-- city name of dot and img -->
+                  <div class="status-city-name">
+                    <!-- <span>{{city.cityName}}</span> -->
+                  </div>
+                  <!-- city name of dot and img end-->
+                </div>
+                <!-- img on dot end-->
+                <!-- only last dotted lines -->
+                <div class="last-dotted-line">
+                  <span class="small-dot"></span>
+                  <span class="small-dot"></span>
+                  <span class="small-dot"></span>
+                </div>
+                <!-- only last dotted lines end-->
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- trip status end -->
+    <div class="container">
+      <!-- accordion main -->
+      <div class="accordion-holder">
+        <div class="row">
+          <div class="col-md-offset-1 col-md-10">
+            <div class="accordion-list" ng-repeat="list in countryTripList">
+              <!-- trip accordion heading -->
+              <div class="trip-heading-accordion">
+                <div class="clearfix">
+                  <div class="pull-left">
+                    <img ng-src="{{list.countryImg}}" alt="" width="35" class="mr5">
+                    <h4 class="color-dark-blue avenir-heavy trip-country-name">{{list.countryName}}</h4>
+                  </div>
+                  <div class="pull-right">
+                    <!-- <span>Expand</span> -->
+                  </div>
+                </div>
+              </div>
+              <!-- trip accordion heading end-->
+              <div class="listing-accordion">
+                <uib-accordion close-other="oneAtATime">
+                  <uib-accordion-group  is-open="status.open"  ng-repeat="detail in list.cityList">
+                    <uib-accordion-heading class="relate">
+                      <div class="journey-accordion-heading color-white">
+                        <div class="clearfix">
+                          <p class="city-heading avenir-heavy m-clear pull-left">Day <span>{{detail.dayInput1}}</span> to Day <span>{{detail.dayInput2}}</span> In <span class="trip-city-name">{{detail.cityName}}</span></p>
+                          <span class="pull-right"><i class="fa accordion-icon" ng-class="{'fa-minus' : status.open , 'fa-plus' : !status.open}"></i></span>
+                        </div>
+                      </div>
+                    </uib-accordion-heading>
+                    <div class="journey-accordion-detail avenir-roman">
+                      <ul class="user-trip-detail">
+                        <li>
+                          <div class="user-stayed-at">
+                            <span class="user-trip-heading">
+                              Stayed At
+                            </span>
+                            <div class="avenir-roman user-trip-descp" ng-bind-html="detail.stayedAt"></div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="user-ate-at">
+                            <span class="user-trip-heading">
+                              Ate At
+                            </span>
+                            <div class="avenir-roman user-trip-descp" ng-bind-html="detail.ateAt"></div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="user-must-do">
+                            <span class="user-trip-heading">
+                              Must Do's
+                            </span>
+                            <div class="avenir-roman user-trip-descp" ng-bind-html="detail.mustDo"></div>
+                          </div>
+                        </li>
+                      </ul>
+                      <div class="trip-descp">
+                        <h4>A Little More About This Trip ...</h4>
+                        <div class="user-about-trip" ng-bind-html="detail.aboutTrip"></div>
+                      </div>
+                      <!-- gallery photo -->
+                      <!-- <div class="view-trip-photo {{editGallery}}">
+                        <div class="photo-button-holder">
+                          <a class="full-width block editor-photos btn-view btn-pink" ng-click="showGallery($index);"><i class="fa fa-picture-o mr5"></i>Photos</a>
+                          <a class="full-width block editor-photos btn-close btn-dark-blue" ng-click="showGallery($index);"><i class="fa fa-chevron-down mr5"></i>Close</a>
+                        </div>
+                        <div class="masonry-holder">
+                          <div class="masonry-editor-pic" masonry>
+                            <div class="masonry-brick" ng-repeat="img in editorGallery track by $index">
+                              <div class="editor-gallery">
+                                <div class="gallery-image-holder">
+                                  <img ng-src="{{img}}" alt="" class="img-responsive">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div> -->
+                      <!-- un comment if needed the photo's from down -->
+                      <!-- gallery photo end -->
+                    </div>
+                  </uib-accordion-group>
+                </uib-accordion>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- accordion main end-->
+    </div>
+  </div>
+</div>

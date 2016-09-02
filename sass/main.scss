@@ -90,7 +90,7 @@ a:hover {
 // scroll down
 .mouse-scrolldown {
   position: absolute;
-  bottom: 30px;
+  bottom: 15px;
   left: 50%;
   @include transform(translateX(-50%));
   @extend .avenir-roman;
@@ -242,9 +242,6 @@ textarea {
 }
 .m-clear {
   margin: 0;
-}
-.mt-clear {
-  margin-top: 0;
 }
 .relate {
   position: relative;
@@ -4862,15 +4859,15 @@ header {
     }
   }
   .editor-tag {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     h4 {
       font-size: 20px;
     }
   }
   .journey-travel-heading {
-    margin: 5px 0 20px;
+    margin: 5px 0 12px;
     h3 {
-      font-size: 40px;
+      font-size: 35px;
     }
   }
   .journey-date span {
@@ -4879,12 +4876,12 @@ header {
   .trip-day-count {
     color: $brand-light-cyan;
     span {
-      font-size: 13px;
+      font-size: 12px;
       line-height: 100%;
     }
     .days {
       margin-bottom: -4px;
-      font-size: 42px;
+      font-size: 37px;
     }
   }
   .accordion-holder {
@@ -5091,9 +5088,9 @@ header {
     }
   }
   .journey-travel-heading {
-    margin: 5px 0 15px;
+    margin: 5px 0 12px;
     h3 {
-      font-size: 40px;
+      font-size: 35px;
     }
   }
   .journey-day span {
@@ -5104,12 +5101,12 @@ header {
     color: $brand-light-cyan;
     vertical-align: middle;
     span {
-      font-size: 13px;
+      font-size: 12px;
       line-height: 100%;
     }
     .days {
       margin-bottom: -4px;
-      font-size: 42px;
+      font-size: 37px;
     }
   }
   .itinerary-name {
@@ -5118,12 +5115,12 @@ header {
     color: $brand-light-cyan;
     vertical-align: middle;
     span {
-      font-size: 17px;
+      font-size: 16px;
       line-height: 100%;
     }
     span:first-child {
       margin-bottom: -3px;
-      font-size: 27px;
+      font-size: 25px;
     }
   }
 }
@@ -5270,12 +5267,17 @@ header {
   }
 }
 // user itinerary end
+// user detail itinerary
+.user-detailitinerary-page {
+  .trip-status-main { right: 15px; }
+}
+// user detail itinerary end
 // agent itinerary
 .agent-itinerary-page {
   @extend .user-itinerary-page;
   .agent-banner-holder {
     width: 100%;
-    height: 95vh;
+    height: 92vh;
     background-image: url('../img/itinerary/religious.jpg');
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -5289,9 +5291,9 @@ header {
     @include transform(translate(-50%,-30%));
   }
   .agent-imgholder {
-    width: 160px;
-    max-width: 160px;
-    margin: 0px auto 20px;
+    width: 150px;
+    max-width: 150px;
+    margin: 0px auto 15px;
   }
   .journey-type-icon {
     margin-top: 10px;
@@ -5323,11 +5325,9 @@ header {
   // side section of agent end
   .connect-agentbox-holder {
     width: 450px;
-    padding: 20px;
     position: absolute;
     top: 50px;
-    z-index: 2;
-    background-color: #fff;
+    z-index: 3;
     @include transition(all 300ms linear);
     input {
       padding: 6px 12px 6px 26px;
@@ -5343,19 +5343,27 @@ header {
       border-bottom: 1px solid #ccc;
       font-size: 15px;
     }
+    .agentbox-detail {
+      padding: 25px;
+      position: relative;
+      z-index: 2;
+      background-color: #fff;
+    }
     .button-connect-box {
       position: absolute;
       top: 110px;
       right: -145px;
+      z-index: 1;
       @include transform(rotate(90deg));
       &:before {
         content: '';
-        width: 100%;
+        width: 98%;
         height: 20px;
         position: absolute;
         bottom: 0;
-        left: 0;
+        left: 5px;
         background-color: #fff;
+        z-index: -1;
       }
       a {
         width: 220px;
@@ -5365,21 +5373,27 @@ header {
     }
   }
   .agentbox-in {
-    left: -460px;
-    z-index: 8;
+    left: -520px;
   }
   .agentbox-out {
     left: -5px;
+    z-index: 8;
   }
   .backdrop-agent {
-    &:after {
+    &:before {
+      content: '';
       @include square(100%);
       @include position(fixed, 0);
       background-color: rgba(0,0,0,0.6);
       z-index: 7;
     }
+    .close-gallery {
+      left: -1025px;
+      @include transition(all 300ms linear);
+    }
   }
 // agent itinerary end
+
 @import "sohan.scss";
 @import "fancybox-override";
 #map {
