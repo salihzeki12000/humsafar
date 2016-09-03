@@ -5440,6 +5440,13 @@ header {
     }
   }
 // agent itinerary end
+// itinerary comment like and share
+.share-comment-main  {
+  .task-holder {
+    .like-button-icon { font-size: 22px; }
+  }
+}
+// itinerary comment like and share end
 
 @import "sohan.scss";
 @import "fancybox-override";
