@@ -838,16 +838,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $uibModal.open({
         animation: true,
         templateUrl: "views/modal/country-mustdo.html",
-        windowClass: "cover-modal",
+        windowClass: "cover-modal1",
         controller: 'DestinationCountryCtrl',
         scope: $scope
       });
     };
     $scope.place = {
+      title:"Taj Mahal",
       description: "<p>A symbol of an eternal love story etched out in the world’s most marvellous structures in the world, the Taj Mahal epitomises one of the greatest romances in the history of mankind. Designated as a UNESCO World Heritage Site and one of the Seven Wonders of the World, this ‘tear-drop on the cheek of time’, as Rabindranath Tagore described it, is regarded as the best example of Mughal architecture and the country’s rich history. Marvel at the great marble monument ornamented with 28 types of precious and semi-precious stones for the inlay work. With its four minarets and the red sandstone mosque, this fascinating monument is a sight to behold.</p>",
       link: "http://www.india-tajmahal.com/",
       images: [{
         imgurl: "img/destination/taj.jpg"
+      }, {
+        imgurl: "img/destination/taj.jpg"
+
+      }, {
+        imgurl: "img/destination/taj.jpg"
+
+      }, {
+        imgurl: "img/destination/taj.jpg"
+
       }, {
         imgurl: "img/destination/taj.jpg"
 
@@ -1444,15 +1454,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $uibModal.open({
         animation: true,
         templateUrl: "views/modal/city-mustdo.html",
-        windowClass: "cover-modal",
+        windowClass: "cover-modal1",
+        controller: 'DestinationCountryCtrl',
         scope: $scope
       });
     };
     $scope.place = {
+      title:"Taj Mahal",
       description: "<p>A symbol of an eternal love story etched out in the world’s most marvellous structures in the world, the Taj Mahal epitomises one of the greatest romances in the history of mankind. Designated as a UNESCO World Heritage Site and one of the Seven Wonders of the World, this ‘tear-drop on the cheek of time’, as Rabindranath Tagore described it, is regarded as the best example of Mughal architecture and the country’s rich history. Marvel at the great marble monument ornamented with 28 types of precious and semi-precious stones for the inlay work. With its four minarets and the red sandstone mosque, this fascinating monument is a sight to behold.</p>",
       link: "http://www.india-tajmahal.com/",
       images: [{
         imgurl: "img/destination/taj.jpg"
+      }, {
+        imgurl: "img/destination/taj.jpg"
+
+      }, {
+        imgurl: "img/destination/taj.jpg"
+
+      }, {
+        imgurl: "img/destination/taj.jpg"
+
       }, {
         imgurl: "img/destination/taj.jpg"
 

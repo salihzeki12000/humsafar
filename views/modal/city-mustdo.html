@@ -1,18 +1,18 @@
 <div class="mustdo-modal">
-  <div class="bg-white pl20 pr20 pt20 pb52">
+  <div class="bg-white pb22">
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-10">
         <div class="flex-slider">
           <div class="holder-places">
             <div class="img-holder-place">
-              <flex-slider flex-slide="item in place.images track by $index" slider-id="slider" prev-text="" next-text="" sync="#carousel" slideshow="false" animation="slide">
+              <flex-slider flex-slide="item in place.images track by $index" slider-id="slider" prev-text="" next-text="" sync="#carousel" slideshow="true" animation="slide">
                 <li>
                   <img ng-src="{{item.imgurl}}" alt="Travelibro" class="full-width">
                   <div class="overlay-slider"></div>
                 </li>
               </flex-slider>
               <div class="destination-desc-modal">
-                <h4 class="title-head">
+                <h4 class="title-head mt-clear">
                 {{place.title}}
               </h4>
                 <p class="cont-place" ng-bind-html="place.description"></p>
@@ -24,9 +24,9 @@
     </div>
   </div>
   </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
         <div class="musto-thumbnail">
-          <flex-slider flex-slide="item in place.images track by $index" animation="slide" animation-loop="false" item-width="170" item-margin="5" as-nav-for="#slider" slideshow="false" control-nav="false" prev-text="" next-text="" slider-id="carousel"
+          <flex-slider flex-slide="item in place.images track by $index" animation="slide" animation-loop="false" item-width="120" item-margin="5" as-nav-for="#slider" slideshow="true" control-nav="false" prev-text="" next-text="" slider-id="carousel"
   animation-loop="false">
             <li>
               <div class="img-holder-place">
