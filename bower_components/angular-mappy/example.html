@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+  <head>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script data-require="angular.js@1.1.5" data-semver="1.1.5" src="http://code.angularjs.org/1.1.5/angular.min.js"></script>
+
+    <script src="build/angular-mappy.js"></script>
+    <link rel="stylesheet" href="build/angular-mappy.css"/>
+
+    <script src="_mapdata.js"></script>
+
+    <script>
+      app = angular.module('demo',["mappy"]);
+
+      app.controller("TestController", function ($scope) {
+
+        $scope.data = {
+          'GB': {metric: 4},
+          'US': {metric: 40},
+          'CN': {metric: 50},
+          'DE': {metric: 13},
+          'BE': {metric: 32},
+          'ES': {metric: 23},
+          'IR': {metric: 1},
+          'AF': {metric: 13},
+          'MR': {metric: 14},
+          'FR': {metric: 29},
+          'IN': {metric: 3},
+          'FI': {metric: 15}
+        };
+
+        $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
+
+        $scope.mapDataHumanizeFn = function(val) { return val + " units"; };
+
+        $scope.heatmapColors = ['#FFFF00','#FF0000'];
+
+      });
+
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+
+  <body ng-controller="TestController" >
+    <div style="margin: 10%;" >
+      <mappy data="data" map-data="mapPathData" key="metric" colors="heatmapColors"
+             min="0" max="50" humanize-fn="mapDataHumanizeFn(val)"></mappy>
+    </div>
+    {{year}}
+  </body>
+
+</html>

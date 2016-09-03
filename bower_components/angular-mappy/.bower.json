@@ -1,0 +1,14 @@
+{
+  "name": "angular-mappy",
+  "homepage": "https://github.com/mattosborn/angular-mappy",
+  "_release": "52c2110858",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "52c2110858ce8b2a414ae32c7919dafac8efc1e5"
+  },
+  "_source": "https://github.com/mattosborn/angular-mappy.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/mattosborn/angular-mappy.git",
+  "_direct": true
+}
