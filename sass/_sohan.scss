@@ -447,7 +447,9 @@ a.color-white {
     right: 0;
   }
 }
-
+.modal-backdrop.in {
+    @include opacity(0.7);
+}
 .destination-desc-modal {
   position: absolute;
   bottom: -20px;
