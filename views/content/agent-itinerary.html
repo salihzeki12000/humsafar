@@ -49,7 +49,7 @@
           <div masonry class="masonry-main side-scroll-direction">
             <div class="masonry-brick" ng-repeat="pic in photoGallery track by $index">
               <div class="gallery-imgholder">
-                <img ng-src="{{pic}}" alt="">
+                <a href="{{pic}}"  fancybox-box rel="photoGallery"><img ng-src="{{pic}}" alt=""></a>
               </div>
             </div>
           </div>
