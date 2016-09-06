@@ -1888,7 +1888,7 @@ header {
         padding: 20px;
         margin: 0 0 0 -18px;
         z-index: 4;
-        background: #ff6759;
+        background: $brand-pink;
       }
       &:nth-child(4) .tab-heading {
         padding: 10px 20px;
@@ -2083,7 +2083,7 @@ header {
       &:last-child .tab-heading {
         padding: 20px;
         margin: 0 0 0 -18px;
-        background: #ff6759;
+        background: $brand-pink;
         z-index: 4;
       }
     }
