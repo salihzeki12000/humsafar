@@ -78,6 +78,24 @@ a:focus,
 a:hover {
   text-decoration: none;
 }
+a.fb-icon:hover {
+  color: #3b5998;
+}
+a.twi-icon:hover {
+  color: #55acee;
+}
+a.google-icon:hover {
+  color: #d34836;
+}
+a.pin-icon:hover {
+  color: #cb2027;
+}
+a.linkedin-icon:hover {
+  color: #007bb5;
+}
+a.mail-icon:hover {
+  color: $brand-pink;
+}
 .pop-close-btn {
   opacity: 1;
   color: #fff;
@@ -2702,6 +2720,10 @@ header {
   margin-right: 15px;
   display: inline-block;
 }
+.editor-subdetail {
+  width: 70%;
+  font-size: 12px;
+}
 .recent-blog {
   padding: 30px 0;
   border-top: 2px solid #dcdcdc;
@@ -3002,7 +3024,7 @@ header {
   border-bottom-left-radius: 6px;
 }
 .visit-view-imgholder {
-  height: 380px;
+  height: 370px;
   overflow: hidden;
   img {
     border-top-left-radius: 6px;
@@ -5444,10 +5466,115 @@ header {
 .share-comment-main  {
   .task-holder {
     .like-button-icon { font-size: 22px; }
-    li { vertical-align: top; }
+    li {
+      &:first-child { padding: 0 15px 0 5px; }
+      padding: 0px 15px;
+      vertical-align: top;
+    }
+  }
+  .view-comment-list {
+    margin-bottom: 20px;
+  }
+  .share-option-main {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+  }
+  .like-review-main {
+    padding: 15px 0;
+    border-bottom: 1px solid #ccc;
+  }
+  .like-review-holder {
+    margin-top: 7px;
+  }
+  .like-holder, .review-holder {
+    margin-right: 30px;
+    display: inline-block;
+  }
+  .commenter-imgholder {
+    width: 34px;
+    height: 37px;
+    border: 2px solid #fff;
+    border-radius: 13px;
+    box-shadow: 0px 2px 3px #ccc;
+    overflow: hidden;
+    img { min-height: 100%; }
+  }
+  .comment-list-holder {
+    padding: 15px 0px 0px;
+  }
+  .commenter-img {
+    width: 5%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .comment-container {
+    width: 95%;
+    margin-left: -4px;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .write-comment-text { margin-bottom: 10px; }
+  .comment-ur-text {
+    width: 95%;
+    margin-left: -4px;
+    display: inline-block;
+    vertical-align: bottom;
+    textarea {
+      border: none;
+      border-bottom: 2px solid $brand-dark-blue;
+      padding: 0 10px;
+      color: $brand-dark-blue;
+      line-height: 100%;
+    }
+  }
+  .commenter-text {
+    color: #787878;
+    @extend .avenir-roman;
+  }
+  .like-reply-line {
+    font-size: 13px;
+  }
+  .share-social-holder {
+    .list-inline > li:last-child { padding-right: 0; }
   }
 }
+
 // itinerary comment like and share end
+// other itineraries main of agent, user and editor
+.other-itineraries-main {
+  .visit-post {
+    margin: 0;
+  }
+  .view-other-profile {
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    .profile-pic-follower {
+      @include filter(blur(4px));
+      height: 200px;
+      overflow: hidden;
+      img { width: 100%; }
+    }
+    .other-profile-detail {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      @include transform(translateX(-50%));
+    }
+  }
+  .other-profile-holder {
+    width: 80px;
+    height: 85px;
+    border-radius: 32px;
+    border: 3px solid #fff;
+    margin: -20px auto 0;
+    overflow: hidden;
+  }
+  .name-follower { margin: 5px 0; }
+  .follow-detail { font-size: 16px; }
+}
+// other itineraries main of agent, user and editor end
 
 @import "sohan.scss";
 @import "fancybox-override";

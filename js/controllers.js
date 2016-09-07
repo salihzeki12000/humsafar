@@ -4456,7 +4456,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
           visitName: "#1 Shree Siddhivinayak",
         }, ],
       }, ],
-    }, {
+    },
+    {
       class: "visiting-post travel-visit",
       visitPost: true,
       getpopularPost: false,
@@ -4471,7 +4472,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         visitImg: true,
         localLifeMain: false,
       }, ],
-    }, ];
+    },
+   ];
 
     setTimeout(function() {
       $('.travelocal-slider').flexslider({
@@ -4844,6 +4846,212 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.editGallery = "close-editor-gallery";
       }
     };
+    // other itineraries main
+    $scope.travelLife = [
+      {
+        otherProfile: true,
+        viewProfile: [
+          {
+            imgBg: "img/itinerary/religious.jpg",
+            profileImg : "img/profile-main.png",
+            name: "Andrea Christina",
+            location: "London",
+            follower: "2090"
+          }
+        ],
+      },
+      {
+        class: "visiting-post travel-visit",
+        popItinerary : false,
+        visitPost: true,
+        getvisitPost: [{
+          travelVisit: true,
+          imgVisit: "img/india-gate.jpg",
+          locationLocal: "Mumbai",
+          tagTravel: "Book Your Travel form take off to touchdown!",
+          visitImg: true,
+        }, ],
+      },
+      {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "follow",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    }, {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "following",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    }, {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "follow",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    },
+     {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "following",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    },
+     {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "following",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    },
+     {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "following",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ],
+    },
+  ];
+    // other itineraries main end
 
   })
   .controller('UserQuickItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
@@ -4913,6 +5121,212 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       '../img/destination/taj-featured.jpg',
       '../img/itinerary/itinerary.jpg',
     ];
+    // other itineraries main
+    $scope.travelLife = [
+      {
+        otherProfile: true,
+        viewProfile: [
+          {
+            imgBg: "img/itinerary/religious.jpg",
+            profileImg : "img/profile-main.png",
+            name: "Andrea Christina",
+            location: "London",
+            follower: "2090"
+          }
+        ],
+      },
+      {
+        class: "visiting-post travel-visit",
+        popItinerary : false,
+        visitPost: true,
+        getvisitPost: [{
+          travelVisit: true,
+          imgVisit: "img/india-gate.jpg",
+          locationLocal: "Mumbai",
+          tagTravel: "Book Your Travel form take off to touchdown!",
+          visitImg: true,
+        }, ],
+      },
+      {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "follow",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    }, {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "following",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    }, {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "follow",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    },
+     {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "following",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    },
+     {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "following",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    },
+     {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "following",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ],
+    },
+  ];
+    // other itineraries main end
 
   })
   .controller('UserDetailItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
@@ -5073,6 +5487,212 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
             $scope.showClass = "close-gallery";
           }
         };
+        // other itineraries main
+        $scope.travelLife = [
+          {
+            otherProfile: true,
+            viewProfile: [
+              {
+                imgBg: "img/itinerary/religious.jpg",
+                profileImg : "img/profile-main.png",
+                name: "Andrea Christina",
+                location: "London",
+                follower: "2090"
+              }
+            ],
+          },
+          {
+            class: "visiting-post travel-visit",
+            popItinerary : false,
+            visitPost: true,
+            getvisitPost: [{
+              travelVisit: true,
+              imgVisit: "img/india-gate.jpg",
+              locationLocal: "Mumbai",
+              tagTravel: "Book Your Travel form take off to touchdown!",
+              visitImg: true,
+            }, ],
+          },
+          {
+          popItinerary : true,
+          heading: "Editor",
+          follower: "follow",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "01:20 pm",
+          imgTravelled: "img/london.jpg",
+          Travelledtag: "London Eye",
+          photoCount: "28",
+          videoCount: "5",
+          locationVisited: "9",
+          itineraryType1: "img/sunset.png",
+          itineraryType2: "img/bag-journey.png",
+          itineraryType3: "img/luxury-journey.png",
+          travelledDay: "75",
+          onwayTag: "love in paris",
+          imgOnway: "img/paris.jpg",
+          cost: "$10,000",
+          spendingDay: "75",
+          likes: "15660",
+          reviews: "354",
+          pointReview: "4.5",
+          countryVisit: [{
+            imgFlag: "img/india-visit.png"
+          }, {
+            imgFlag: "img/england-visit.png"
+          }, {
+            imgFlag: "img/canada-visit.png",
+          }, ]
+        }, {
+          popItinerary : true,
+          heading: "Editor",
+          follower: "following",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "01:20 pm",
+          imgTravelled: "img/london.jpg",
+          Travelledtag: "London Eye",
+          photoCount: "28",
+          videoCount: "5",
+          locationVisited: "9",
+          itineraryType1: "img/sunset.png",
+          itineraryType2: "img/bag-journey.png",
+          itineraryType3: "img/luxury-journey.png",
+          travelledDay: "75",
+          onwayTag: "love in paris",
+          imgOnway: "img/paris.jpg",
+          cost: "$10,000",
+          spendingDay: "75",
+          likes: "15660",
+          reviews: "354",
+          pointReview: "4.5",
+          countryVisit: [{
+            imgFlag: "img/india-visit.png"
+          }, {
+            imgFlag: "img/england-visit.png"
+          }, {
+            imgFlag: "img/canada-visit.png",
+          }, ]
+        }, {
+          popItinerary : true,
+          heading: "Editor",
+          follower: "follow",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "01:20 pm",
+          imgTravelled: "img/london.jpg",
+          Travelledtag: "London Eye",
+          photoCount: "28",
+          videoCount: "5",
+          locationVisited: "9",
+          itineraryType1: "img/sunset.png",
+          itineraryType2: "img/bag-journey.png",
+          itineraryType3: "img/luxury-journey.png",
+          travelledDay: "75",
+          onwayTag: "love in paris",
+          imgOnway: "img/paris.jpg",
+          cost: "$10,000",
+          spendingDay: "75",
+          likes: "15660",
+          reviews: "354",
+          pointReview: "4.5",
+          countryVisit: [{
+            imgFlag: "img/india-visit.png"
+          }, {
+            imgFlag: "img/england-visit.png"
+          }, {
+            imgFlag: "img/canada-visit.png",
+          }, ]
+        },
+         {
+          popItinerary : true,
+          heading: "Editor",
+          follower: "following",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "01:20 pm",
+          imgTravelled: "img/london.jpg",
+          Travelledtag: "London Eye",
+          photoCount: "28",
+          videoCount: "5",
+          locationVisited: "9",
+          itineraryType1: "img/sunset.png",
+          itineraryType2: "img/bag-journey.png",
+          itineraryType3: "img/luxury-journey.png",
+          travelledDay: "75",
+          onwayTag: "love in paris",
+          imgOnway: "img/paris.jpg",
+          cost: "$10,000",
+          spendingDay: "75",
+          likes: "15660",
+          reviews: "354",
+          pointReview: "4.5",
+          countryVisit: [{
+            imgFlag: "img/india-visit.png"
+          }, {
+            imgFlag: "img/england-visit.png"
+          }, {
+            imgFlag: "img/canada-visit.png",
+          }, ]
+        },
+         {
+          popItinerary : true,
+          heading: "Editor",
+          follower: "following",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "01:20 pm",
+          imgTravelled: "img/london.jpg",
+          Travelledtag: "London Eye",
+          photoCount: "28",
+          videoCount: "5",
+          locationVisited: "9",
+          itineraryType1: "img/sunset.png",
+          itineraryType2: "img/bag-journey.png",
+          itineraryType3: "img/luxury-journey.png",
+          travelledDay: "75",
+          onwayTag: "love in paris",
+          imgOnway: "img/paris.jpg",
+          cost: "$10,000",
+          spendingDay: "75",
+          likes: "15660",
+          reviews: "354",
+          pointReview: "4.5",
+          countryVisit: [{
+            imgFlag: "img/india-visit.png"
+          }, {
+            imgFlag: "img/england-visit.png"
+          }, {
+            imgFlag: "img/canada-visit.png",
+          }, ]
+        },
+         {
+          popItinerary : true,
+          heading: "Editor",
+          follower: "following",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "01:20 pm",
+          imgTravelled: "img/london.jpg",
+          Travelledtag: "London Eye",
+          photoCount: "28",
+          videoCount: "5",
+          locationVisited: "9",
+          itineraryType1: "img/sunset.png",
+          itineraryType2: "img/bag-journey.png",
+          itineraryType3: "img/luxury-journey.png",
+          travelledDay: "75",
+          onwayTag: "love in paris",
+          imgOnway: "img/paris.jpg",
+          cost: "$10,000",
+          spendingDay: "75",
+          likes: "15660",
+          reviews: "354",
+          pointReview: "4.5",
+          countryVisit: [{
+            imgFlag: "img/india-visit.png"
+          }, {
+            imgFlag: "img/england-visit.png"
+          }, {
+            imgFlag: "img/canada-visit.png",
+          }, ],
+        },
+      ];
+        // other itineraries main end
 
   })
   .controller('AgentItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
@@ -5211,7 +5831,212 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.agentbox = "agentbox-in";
       }
     };
-    // connect agent end
+    // other itineraries main
+    $scope.travelLife = [
+      {
+        otherProfile: true,
+        viewProfile: [
+          {
+            imgBg: "img/itinerary/religious.jpg",
+            profileImg : "img/profile-main.png",
+            name: "Andrea Christina",
+            location: "London",
+            follower: "2090"
+          }
+        ],
+      },
+      {
+        class: "visiting-post travel-visit",
+        popItinerary : false,
+        visitPost: true,
+        getvisitPost: [{
+          travelVisit: true,
+          imgVisit: "img/india-gate.jpg",
+          locationLocal: "Mumbai",
+          tagTravel: "Book Your Travel form take off to touchdown!",
+          visitImg: true,
+        }, ],
+      },
+      {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "follow",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    }, {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "following",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    }, {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "follow",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    },
+     {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "following",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    },
+     {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "following",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ]
+    },
+     {
+      popItinerary : true,
+      heading: "Editor",
+      follower: "following",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ],
+    },
+  ];
+    // other itineraries main end
 
   })
 
