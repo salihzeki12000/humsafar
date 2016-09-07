@@ -740,6 +740,40 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Popular Blogger");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    $scope.photoGallery = [
+      '../img/uploaded-pic.jpg',
+      '../img/slider2.jpg',
+      '../img/moment-travel1.jpg',
+      '../img/moment-travel2.jpg',
+      '../img/local-life-post.jpg',
+      '../img/destination/goldentemple.jpg',
+      '../img/destination/list1.jpg',
+      '../img/destination/list2.jpg',
+      '../img/destination/info.jpg',
+      '../img/destination/taj-featured.jpg',
+      '../img/itinerary/itinerary.jpg',
+      '../img/uploaded-pic.jpg',
+      '../img/slider2.jpg',
+      '../img/moment-travel1.jpg',
+      '../img/moment-travel2.jpg',
+      '../img/local-life-post.jpg',
+      '../img/destination/goldentemple.jpg',
+      '../img/destination/list1.jpg',
+      '../img/destination/list2.jpg',
+      '../img/destination/info.jpg',
+      '../img/destination/taj-featured.jpg',
+      '../img/itinerary/itinerary.jpg',
+      '../img/moment-travel1.jpg',
+      '../img/moment-travel2.jpg',
+      '../img/local-life-post.jpg',
+      '../img/destination/goldentemple.jpg',
+      '../img/destination/list1.jpg',
+      '../img/destination/list2.jpg',
+      '../img/destination/info.jpg',
+      '../img/destination/taj-featured.jpg',
+      '../img/itinerary/itinerary.jpg',
+    ];
   })
   .controller('PopularAgentCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
@@ -5058,7 +5092,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         templateUrl: "views/modal/itinerary-slide.html",
         scope: $scope,
       });
-    }
+  }
+
+  $scope.itinerarySlide = [
+    {
+      img: "img/itinerary/itinerary1.jpg",
+    },
+    {
+      img: "img/itinerary/itinerary2.jpg",
+    },
+    {
+      img: "img/itinerary/itinerary.jpg",
+    },
+    {
+      img: "img/itinerary/itinerary1.jpg",
+    },
+  ];
 
   })
   .controller('UserQuickItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
