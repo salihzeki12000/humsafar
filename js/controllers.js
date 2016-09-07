@@ -5052,6 +5052,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     },
   ];
     // other itineraries main end
+    $scope.getPopup = function() {
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/itinerary-slide.html",
+        scope: $scope,
+      });
+    }
 
   })
   .controller('UserQuickItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
