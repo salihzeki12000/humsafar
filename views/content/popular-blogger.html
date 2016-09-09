@@ -17,10 +17,75 @@
 </div>
 <div class="container">
   <div class="popular-blogger second">
-    <div masonry class="masonry-main side-scroll-direction">
-      <div class="masonry-brick" ng-repeat="pic in photoGallery track by $index">
-        <div class="gallery-imgholder">
-          <img ng-src="{{pic}}" alt="">
+    <div masonry class="masonry-main pt20 side-scroll-direction">
+      <div class="masonry-brick" ng-repeat="photoblogger in photobloggers track by $index">
+        <div class="blogger-cover">
+          <div class="gallery-imgholder">
+            <img ng-src="{{photoblogger.img}}" alt="Travelibro">
+          </div>
+          <div class="blogger-cont-holder relate">
+            <div class="overlay-imgholder">
+              <!-- <img ng-src="{{photoblogger.img}}" alt="Travelibro"> -->
+            </div>
+            <div class="flag-holder">
+              <img ng-src="{{photoblogger.flagimg}}" alt="Travelibro" />
+            </div>
+            <div class="bloggerholder-made">
+              <div class="country-holder color-white">
+                <span class="pull-right">Lives in : <i class="fa fa-map-marker" aria-hidden="true"></i> {{photoblogger.city}}</span>
+                <span class="pl40">{{photoblogger.country}}</span>
+              </div>
+              <div class="name-holder brd-btm">
+                <h4 class="color-white text-center fnt-20">{{photoblogger.name}}</h4>
+              </div>
+              <div class="socialize-holder brd-btm pbt-15">
+                <ul class="list-unstyled list-inline">
+                  <li class="color-white">
+                    <img src="img/popularblogger/camera.png" alt="Travelibro">
+                    <span>{{photoblogger.nophoto}}</span>
+                  </li>
+                  <li class="color-white pad-zero">
+                    |
+                  </li>
+                  <li class="color-white">
+                    <img src="img/popularblogger/videocamera.png" alt="Travelibro">
+                    <span>{{photoblogger.novideo}}</span>
+                  </li>
+                  <li class="color-white pad-zero">
+                    |
+                  </li>
+                  <li class="color-white">
+                    <img src="img/popularblogger/location.png" alt="Travelibro">
+                    <span>{{photoblogger.nolocation}}</span>
+                  </li>
+                  <li class="pull-right" ng-if="photoblogger.followingbtn">
+                    <button class="btn btn-pink btn-follow">
+           {{photoblogger.followingbtn}}</button>
+                  </li>
+                  <li class="pull-right" ng-if="photoblogger.followbtn">
+                    <button class="btn btn-pink btn-follow-outline">
+           {{photoblogger.followbtn}}</button>
+                  </li>
+                </ul>
+              </div>
+              <div class="cfj-holder pbt-15">
+                <ul class="list-unstyled list-inline">
+                  <li class="color-white">
+                    <h5 class="text-center fnt-16">{{photoblogger.countryvisit}}</h5>
+                    <p class="text-center">Countries Visited</p>
+                  </li>
+                  <li class="color-white">
+                    <h5 class="text-center fnt-16">{{photoblogger.followers}}m</h5>
+                    <p class="text-center">Followers</p>
+                  </li>
+                  <li class="color-white">
+                    <h5 class="text-center fnt-16">{{photoblogger.journey}}</h5>
+                    <p class="text-center">Journeys</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
