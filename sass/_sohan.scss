@@ -22,6 +22,10 @@
   font-size: 60px;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .mt-clear {
   margin-top: 0;
 }
@@ -51,7 +55,9 @@
   left: 0;
   right: 0;
 }
-
+.p-clear{
+  padding: 0;
+}
 a.color-white {
   color: white;
   @include transition(all ease 300ms);
@@ -312,6 +318,7 @@ a.color-white {
     margin-bottom: 20px;
     border-radius: 5px;
     overflow: hidden;
+    cursor: pointer;
 
     .read-more {
       text-decoration: underline;
@@ -996,4 +1003,12 @@ a.color-white {
   .brd-btm {
     border-bottom: 1px solid #cecece;
   }
+}
+
+.overflow {
+  overflow: visible;
+}
+
+.width74 {
+  width: 74%;
 }
