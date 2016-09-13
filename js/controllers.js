@@ -977,6 +977,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $scope.isopencont = !$scope.isopencont;
     };
 
+
+    $scope.flip = function() {
+    $('.card').toggleClass('flipped');
+};
     // country popup
     $scope.openCountry = function() {
       $uibModal.open({
