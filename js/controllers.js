@@ -977,6 +977,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $scope.isopencont = !$scope.isopencont;
     };
 
+
+    $scope.flip = function() {
+    $('.card').toggleClass('flipped');
+};
     // country popup
     $scope.openCountry = function() {
       $uibModal.open({
@@ -1186,6 +1190,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         visitPost: false,
         getpopularPost: false,
         activitySec: true
+      },{
+        popItinerary: true,
+        heading: "Editor",
+        follower: "follow",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        imgTravelled: "img/london.jpg",
+        Travelledtag: "London Eye",
+        photoCount: "28",
+        videoCount: "5",
+        locationVisited: "9",
+        itineraryType1: "img/sunset.png",
+        itineraryType2: "img/bag-journey.png",
+        itineraryType3: "img/luxury-journey.png",
+        travelledDay: "75",
+        onwayTag: "love in paris",
+        imgOnway: "img/paris.jpg",
+        cost: "$10,000",
+        spendingDay: "75",
+        likes: "15660",
+        reviews: "354",
+        pointReview: "4.5",
+        countryVisit: [{
+          imgFlag: "img/india-visit.png"
+        }, {
+          imgFlag: "img/england-visit.png"
+        }, {
+          imgFlag: "img/canada-visit.png",
+        }, ]
       },
       //  {
       //   class: "editor",
@@ -1835,6 +1868,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         visitPost: false,
         getpopularPost: false,
         activitySec: true
+      },
+      {
+        popItinerary: true,
+        heading: "Editor",
+        follower: "follow",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        imgTravelled: "img/london.jpg",
+        Travelledtag: "London Eye",
+        photoCount: "28",
+        videoCount: "5",
+        locationVisited: "9",
+        itineraryType1: "img/sunset.png",
+        itineraryType2: "img/bag-journey.png",
+        itineraryType3: "img/luxury-journey.png",
+        travelledDay: "75",
+        onwayTag: "love in paris",
+        imgOnway: "img/paris.jpg",
+        cost: "$10,000",
+        spendingDay: "75",
+        likes: "15660",
+        reviews: "354",
+        pointReview: "4.5",
+        countryVisit: [{
+          imgFlag: "img/india-visit.png"
+        }, {
+          imgFlag: "img/england-visit.png"
+        }, {
+          imgFlag: "img/canada-visit.png",
+        }, ]
       },
       //  {
       //   class: "editor",
