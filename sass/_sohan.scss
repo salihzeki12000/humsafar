@@ -299,10 +299,13 @@ a.color-white {
     border-radius: 5px;
     overflow: hidden;
     cursor: pointer;
+    @include perspective(800px);
     &.card {
       position: absolute;
+       @include transform-style(preserve-3d);
       @include transition(all ease 300ms);
       @include backface-visibility(hidden);
+       @include transform-origin(50% 50%);
       .flipdown {
         display: none;
       }
@@ -326,8 +329,9 @@ a.color-white {
           @include transform(rotateY( 180deg));
         }
       }
+
       &.flipped {
-        @include transform(rotateY( 180deg));
+        // @include transform(rotateY( 180deg));
         .back {
           z-index: 1;
         }
@@ -354,14 +358,7 @@ a.color-white {
       top: 0;
       left: 0;
       padding: 8px 15px;
-      @include background(linear-gradient(rgba(0,
-      0,
-      0,
-      0.80),
-      rgba(0,
-      0,
-      0,
-      0)));
+      @include background(linear-gradient(rgba(0,0,0,0.80), rgba(0,0,0,0)));
       width: 100%;
       @extend .avenir-heavy;
       border-radius: 5px;
@@ -401,14 +398,7 @@ a.color-white {
       bottom: 0;
       left: 0;
       padding: 8px 15px;
-      @include background(linear-gradient(rgba(0,
-      0,
-      0,
-      0),
-      rgba(0,
-      0,
-      0,
-      90)));
+      @include background(linear-gradient(rgba(0,0,0,0), rgba(0,0,0,90)));
       width: 100%;
       @extend .avenir-roman;
       border-radius: 5px;
@@ -420,7 +410,9 @@ a.color-white {
     }
   }
 }
-
+.bg-grey{
+  background: #ebebeb;
+}
 .plr30 {
   padding: 0 30px;
 }
@@ -432,8 +424,7 @@ a.color-white {
   margin: 0 auto;
   left: 50%;
   cursor: pointer;
-  @include transform(translate(-50%,
-  -0%));
+  @include transform(translate(-50%,-0%));
   @extend .avenir-roman;
   @extend .text-shadow;
   font-size: 12px;
@@ -451,16 +442,13 @@ a.color-white {
     20%,
     50%,
     80% {
-      @include transform(translate(-0%,
-      -0%));
+      @include transform(translate(-0%,-0%));
     }
     40% {
-      @include transform(translate(-0%,
-      -20%));
+      @include transform(translate(-0%,-20%));
     }
     60% {
-      @include transform(translate(-0%,
-      -10%));
+      @include transform(translate(-0%,-10%));
     }
   }
 }
