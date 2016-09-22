@@ -753,7 +753,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       countryvisit: '30',
       followers: '200',
       journey: '20',
-      followbtn:'follow',
+      followbtn: 'follow',
     }, {
       img: '../img/popularblogger/blogger2.jpg',
       name: 'Yash Chudasama',
@@ -766,8 +766,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       countryvisit: '30',
       followers: '200',
       journey: '20',
-      followingbtn:'following',
-    },{
+      followingbtn: 'following',
+    }, {
       img: '../img/popularblogger/blogger1.jpg',
       name: 'Andrea Christina',
       flagimg: '../img/popularblogger/flag.jpg',
@@ -779,7 +779,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       countryvisit: '30',
       followers: '200',
       journey: '20',
-      followingbtn:'following',
+      followingbtn: 'following',
     }, {
       img: '../img/popularblogger/blogger2.jpg',
       name: 'Yash Chudasama',
@@ -792,8 +792,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       countryvisit: '30',
       followers: '200',
       journey: '20',
-      followbtn:'follow',
-    },{
+      followbtn: 'follow',
+    }, {
       img: '../img/popularblogger/blogger1.jpg',
       name: 'Andrea Christina',
       flagimg: '../img/popularblogger/flag.jpg',
@@ -805,7 +805,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       countryvisit: '30',
       followers: '200',
       journey: '20',
-      followingbtn:'following',
+      followingbtn: 'following',
     }, {
       img: '../img/popularblogger/blogger2.jpg',
       name: 'Yash Chudasama',
@@ -818,8 +818,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       countryvisit: '30',
       followers: '200',
       journey: '20',
-      followbtn:'follow',
-    },{
+      followbtn: 'follow',
+    }, {
       img: '../img/popularblogger/blogger1.jpg',
       name: 'Andrea Christina',
       flagimg: '../img/popularblogger/flag.jpg',
@@ -831,7 +831,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       countryvisit: '30',
       followers: '200',
       journey: '20',
-      followingbtn:'following',
+      followingbtn: 'following',
     }, {
       img: '../img/popularblogger/blogger2.jpg',
       name: 'Yash Chudasama',
@@ -844,8 +844,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       countryvisit: '30',
       followers: '200',
       journey: '20',
-      followbtn:'follow',
-    },{
+      followbtn: 'follow',
+    }, {
       img: '../img/popularblogger/blogger1.jpg',
       name: 'Andrea Christina',
       flagimg: '../img/popularblogger/flag.jpg',
@@ -857,7 +857,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       countryvisit: '30',
       followers: '200',
       journey: '20',
-      followingbtn:'following',
+      followingbtn: 'following',
     }, {
       img: '../img/popularblogger/blogger2.jpg',
       name: 'Yash Chudasama',
@@ -870,9 +870,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       countryvisit: '30',
       followers: '200',
       journey: '20',
-      followbtn:'follow',
-    }
-  ];
+      followbtn: 'follow',
+    }];
   })
   .controller('PopularAgentCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
@@ -978,9 +977,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     };
 
 
+    // $scope.flip = function() {
+    // // $('.card').toggleClass('flipped');
+    // $(".card").addClass("flipped");
+
+
+    $scope.cardClass = "";
     $scope.flip = function() {
-    $('.card').toggleClass('flipped');
-};
+      if ($scope.cardClass == "") {
+        $scope.cardClass = "flipped";
+      } else {
+        $scope.cardClass = "";
+      }
+    };
     // country popup
     $scope.openCountry = function() {
       $uibModal.open({
@@ -1190,7 +1199,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         visitPost: false,
         getpopularPost: false,
         activitySec: true
-      },{
+      }, {
         popItinerary: true,
         heading: "Editor",
         follower: "follow",
@@ -1868,8 +1877,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         visitPost: false,
         getpopularPost: false,
         activitySec: true
-      },
-      {
+      }, {
         popItinerary: true,
         heading: "Editor",
         follower: "follow",
