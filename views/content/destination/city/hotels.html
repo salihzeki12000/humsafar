@@ -1,9 +1,10 @@
 <div class="min-hght">
+    <div class="relate" ng-class="{'openfilter': isopenfilter}">
   <div class="pt10 pb10 head-title-all bg-white mb20">
     <div class="row m-clear">
       <div class="col-md-3">
         <div class="pad-btn">
-          <button class="btn btn-pink"><i class="fa fa-filter" aria-hidden="true"></i> Filter
+          <button class="btn btn-pink" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i> Filter
           </button>
         </div>
       </div>
@@ -13,6 +14,56 @@
       </div>
     </div>
   </div>
+      <div class="libro-filter filterclose">
+        <div class="pt20 pb10 head-title-all bg-white">
+              <div class="container-fluid">
+                      <div class="pad-btn">
+                <div class="row">
+                  <div class="col-md-2 col-sm-3">
+         <div class="select-all-made">
+   <ui-select ng-model="selectedItem">
+    <ui-select-match placeholder="Category">
+        <span ng-bind="$select.selected.name"></span>
+    </ui-select-match>
+    <ui-select-choices repeat="item in (countries | filter: $select.search) track by $index">
+        <span ng-bind="item.name"></span>
+    </ui-select-choices>
+  </ui-select>
+    </div> 
+                  </div>                
+                    <div class="col-md-2 col-sm-3">
+      <div class="select-all-made">
+   <ui-select ng-model="selectedItem">
+    <ui-select-match placeholder="Budget">
+        <span ng-bind="$select.selected.name"></span>
+    </ui-select-match>
+    <ui-select-choices repeat="item in (countries | filter: $select.search) track by $index">
+        <span ng-bind="item.name"></span>
+    </ui-select-choices>
+  </ui-select>
+    </div> 
+                  </div>
+                  <div class="col-md-offset-3 col-md-5 col-sm-offset-3 col-sm-3">
+   <div class="txt-clear text-right">
+            <a>Clear All</a>
+          </div>
+                  </div>
+                </div>
+                </div>
+  </div>   
+</div>
+    <div class="pt10 pb10 head-title-all bg-grey mb20">
+        <div class="container-fluid">
+          <div class="plr30">
+          <div class="close-all">
+            <a class="btn btn-pink avenir-roman" ng-click="openFilter()">X Close</a>
+            <span class="tags avenir-roman">Mumbai <span>X</span></span>
+          </div>
+          </div>
+        </div>   
+    </div>
+    </div>
+        </div>
   <div class="container-fluid">
     <div class="destination-featured plr30">
       <div class="hotels">

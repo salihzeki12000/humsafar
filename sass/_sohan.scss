@@ -79,6 +79,8 @@ a.color-white {
 .destination {
   .bg-destination-cc-img {
     background: url('../img/destination/info.jpg') no-repeat;
+     z-index: 3;
+     position: relative;
   }
   .bg-destination {
     background: url('../img/destination/bg-destination.jpg') no-repeat;
@@ -119,6 +121,8 @@ a.color-white {
   .bg-destination-city-img {
     background: url('../img/destination/bg-city.jpg') no-repeat;
     height: 350px;
+    position: relative;
+    z-index: 3;
   }
   .list-horizontal {
     position: absolute;
@@ -235,6 +239,8 @@ a.color-white {
 .destination-nav {
   background: #ebebeb;
   padding: 10px 0 0;
+  position:relative;
+  z-index: 3;
   ul {
     li {
       line-height: 150%;
@@ -962,4 +968,170 @@ a.color-white {
 
 .width74 {
   width: 74%;
+}
+.libro-filter{
+    position: absolute;
+    width: 100%;
+    top: -300px;
+        z-index: -2;
+        @include transition (all ease 300ms);
+.select-all-made{
+  .form-control{
+        border-radius: 4px;
+        text-align: left;
+         i {
+    font-size: 20px;
+    color: #ddd;
+}
+  }
+  .btn-default {
+    border-color: #ebebeb;
+ @extend .avenir-medium;
+}
+.text-muted {
+     @extend .avenir-medium;
+}
+.btn-default:hover {
+    background-color: #ffffff;
+}
+}
+span.tags {
+      background: #b7b7b7;
+    color: #fff;
+    padding: 5px 10px 4px;
+    font-size: 12px;
+    margin-left: 10px;
+    border-radius: 4px;
+    span{
+          cursor: pointer;
+          padding-left: 5px;
+    }
+}
+.txt-clear {
+    padding-right: 20px;
+    a{
+    text-decoration: underline;
+     color: #424242;
+     
+}
+
+}
+.ui-select-bootstrap .ui-select-toggle > .caret{
+  display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #fff;
+    &:before{
+    content: "\f107";
+    color: #000;
+    position: absolute;
+    top: -9px;
+    left: -5px;
+    }
+}
+}
+
+.openfilter{
+  .filterclose{
+      top: 00px;
+        z-index: 2;
+  }
+}
+
+.check-box-panel{
+         width: 90%;
+    position: absolute;
+    background: #fff;
+    padding: 10px;
+    height: 242px;
+    overflow: auto;
+  p{
+        margin: 0;
+    border-bottom: 1px solid #eee;
+  }
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  left:0; top: 2px;
+  width: 15px; height: 15px;
+  border: 1px solid #11d3cb;
+  border-radius: 3px;
+}
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: '\f00c';
+  position: absolute;
+    top: 4px;
+    left: 2px;
+  line-height: 0.8;
+  color: #11d3cb;
+  transition: all .2s;
+      display: inline-block;
+    font: normal normal normal 12px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+  content: '\f00c';
+  position: absolute;
+    top: 4px;
+    left: 2px;
+  line-height: 0.8;
+  color: #ddd ;
+  transition: all .2s;
+      display: inline-block;
+    font: normal normal normal 12px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  box-shadow: none;
+  border-color: #11d3cb;
+}
+[type="checkbox"]:disabled:checked + label:after {
+  color: #999;
+}
+[type="checkbox"]:disabled + label {
+  color: #aaa;
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+  border: 1px dotted #11d3cb;
+}
+
+/* hover style just for information */
+label:hover:before {
+  border: 1px solid #11d3cb!important;
+}
 }

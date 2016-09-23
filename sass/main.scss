@@ -157,6 +157,11 @@ a.mail-icon:hover {
   border-radius: 0;
   @include box-shadow(none);
 }
+.btn-default-focus,.btn.active {
+  outline: 0px auto -webkit-focus-ring-color;
+  outline-offset: -0px;
+ @include box-shadow(none);
+}
 .form-control:focus {
   border-color: $brand-primary;
   outline: 0;
