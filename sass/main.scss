@@ -9,7 +9,9 @@
 @import "../bower_components/ng-scrollbar/dist/ng-scrollbar.min.css";
 @import "../bower_components/bourbon/app/assets/stylesheets/bourbon";
 @import "../bower_components/angular-ui-select/dist/select.css";
+
 /* Bootstrap Variables Goes Here */
+
 $brand-dark-blue: #2c3757;
 $brand-blue: #2d3655;
 $brand-dark-pink: #f2675b;
@@ -29,6 +31,7 @@ $brand-lighter-grey: #e3e3e3;
     }
   }
 }
+
 // body {
 //   padding-top: 70px;
 // }
@@ -53,49 +56,62 @@ textarea,
 ul {
   outline: none !important;
 }
+
 img.loading {
   text-align: center;
   opacity: 1;
   width: 32px !important;
   height: auto;
 }
+
 img {
   opacity: 0;
   @include transition(all 300ms ease);
 }
+
 img.doneLoading {
   opacity: 1;
 }
+
 nav li:hover .dropdown-menu {
   display: block;
 }
+
 .btn,
 a {
   cursor: pointer;
   @include transition(all ease 300ms);
 }
+
 a:focus,
 a:hover {
   text-decoration: none;
 }
+
 a.fb-icon:hover {
   color: #3b5998;
 }
+
 a.twi-icon:hover {
   color: #55acee;
 }
+
 a.google-icon:hover {
   color: #d34836;
 }
+
 a.pin-icon:hover {
   color: #cb2027;
 }
+
 a.linkedin-icon:hover {
   color: #007bb5;
 }
+
 a.mail-icon:hover {
   color: $brand-pink;
 }
+
 .pop-close-btn {
   opacity: 1;
   color: #fff;
@@ -105,6 +121,7 @@ a.mail-icon:hover {
     opacity: 1;
   }
 }
+
 // scroll down
 .mouse-scrolldown {
   position: absolute;
@@ -130,19 +147,21 @@ a.mail-icon:hover {
     100% {
       @include transform(translate(0%, 0%));
     }
-  };
+  }
+  ;
 }
+
 // scroll down end
 // scroll
 .scroll-side {
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 6px;
   }
-  ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+   ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   }
-  ::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+   ::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -150,69 +169,83 @@ a.mail-icon:hover {
 //bootstrap forms
 .btn,
 .form-control,
-.input-group-lg > .form-control,
-.input-group-lg > .input-group-addon,
-.input-group-lg > .input-group-btn > .btn,
+.input-group-lg>.form-control,
+.input-group-lg>.input-group-addon,
+.input-group-lg>.input-group-btn>.btn,
 .input-lg {
   border-radius: 0;
   @include box-shadow(none);
 }
-.btn-default-focus,.btn.active {
+
+.btn-default-focus,
+.btn.active {
   outline: 0px auto -webkit-focus-ring-color;
   outline-offset: -0px;
- @include box-shadow(none);
+  @include box-shadow(none);
 }
+
 .form-control:focus {
   border-color: $brand-primary;
   outline: 0;
   @include box-shadow(none);
 }
+
 ul {
   padding: 0;
   margin: 0;
   list-style-type: none;
 }
+
 .circle-rounded {
-  @include size(45px,48px);
+  @include size(45px, 48px);
   border-radius: 18px;
   display: inline-block;
   line-height: 45px;
   text-align: center;
 }
+
 .flexslider {
   border: none;
   margin: 0;
 }
+
 //bootstrap forms
 // fonts
 @font-face {
   font-family: "AvenirLTStd-Black";
   src: url('../fonts/AvenirLTStd-Black.otf');
 }
+
 @font-face {
   font-family: "AvenirLTStd-Heavy";
   src: url('../fonts/AvenirLTStd-Heavy.otf');
 }
+
 @font-face {
   font-family: "AvenirLTStd-Light";
   src: url('../fonts/AvenirLTStd-Light.otf');
 }
+
 @font-face {
   font-family: "AvenirLTStd-Medium";
   src: url('../fonts/AvenirLTStd-Medium.otf');
 }
+
 @font-face {
   font-family: "AvenirLTStd-Roman";
   src: url('../fonts/AvenirLTStd-Roman.otf');
 }
+
 @font-face {
   font-family: "djb";
   src: url('../fonts/djb.ttf');
 }
+
 @font-face {
   font-family: "JennaSue";
   src: url('../fonts/JennaSue.ttf');
 }
+
 // end fonts
 // classes
 .avenir-black {
@@ -220,224 +253,294 @@ ul {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .avenir-heavy {
   font-family: "AvenirLTStd-Heavy";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .avenir-light {
   font-family: "AvenirLTStd-Light";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .avenir-medium {
   font-family: "AvenirLTStd-Medium";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .avenir-roman {
   font-family: "AvenirLTStd-Roman";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .djb-font {
   font-family: "djb";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .jenna-font {
   font-family: "JennaSue";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 textarea {
   resize: none;
 }
+
 .pointer {
   cursor: pointer;
 }
+
 .block {
   display: block;
 }
+
 .inline-block {
   display: inline-block;
 }
+
 .m-center {
   margin: 0 auto;
 }
+
 .m-clear {
   margin: 0;
 }
+
 .relate {
   position: relative;
 }
+
 .get-center {
-  @include position(absolute, 50% null null 50%);
-  @include transform(translate(-50%,-50%));
+  @include position(absolute,
+  50% null null 50%);
+  @include transform(translate(-50%,
+  -50%));
 }
+
 .full-width {
   width: 100%;
 }
+
 .row-flex {
   @include display(flex);
 }
+
 .col-flex {
   @include flex(1);
 }
+
 .font-lighter {
   font-weight: 100;
 }
+
 .font-light {
   font-weight: 300;
 }
+
 .font-medium {
   font-weight: 500;
 }
+
 .font-bold {
   font-weight: 700;
 }
+
 .v-top {
   vertical-align: top;
 }
+
 .v-mid {
   vertical-align: middle;
 }
+
 .mt5 {
   margin-top: 5px;
 }
+
 .mr5 {
   margin-right: 5px;
 }
+
 .mb5 {
   margin-bottom: 5px;
 }
+
 .ml5 {
   margin-left: 5px;
 }
+
 .mt10 {
   margin-top: 10px;
 }
+
 .mr10 {
   margin-right: 10px;
 }
+
 .mb10 {
   margin-bottom: 10px;
 }
+
 .ml10 {
   margin-left: 10px;
 }
+
 .mt20 {
   margin-top: 20px;
 }
+
 .mr20 {
   margin-right: 20px;
 }
+
 .mb20 {
   margin-bottom: 20px;
 }
+
 .ml20 {
   margin-left: 20px;
 }
+
 .pad-zero {
   padding: 0 !important;
 }
+
 .col-pad-zero {
   padding: 0;
 }
+
 .pt10 {
   padding-top: 10px;
 }
+
 .pr10 {
   padding-right: 10px;
 }
+
 .pb10 {
   padding-bottom: 10px;
 }
+
 .pl10 {
   padding-left: 10px;
 }
+
 .pt20 {
   padding-top: 20px;
 }
+
 .pr20 {
   padding-right: 20px;
 }
+
 .pb20 {
   padding-bottom: 20px;
 }
+
 .pl20 {
   padding-left: 20px;
 }
+
 .color-white {
   color: #fff;
 }
+
 .fz12 {
   font-size: 12px;
 }
+
 .fz13 {
   font-size: 13px;
 }
+
 // end classes
 .color-dark-blue {
   color: $brand-dark-blue;
 }
+
 .color-blue {
   color: $brand-blue;
 }
+
 .color-dark-pink {
   color: $brand-dark-pink;
 }
+
 .color-pink {
   color: $brand-pink;
 }
+
 .color-dark-cyan {
   color: $brand-dark-cyan;
 }
+
 .color-cyan {
   color: $brand-cyan;
 }
+
 .color-light-cyan {
   color: $brand-light-cyan;
 }
+
 .color-grey {
   color: $brand-grey;
 }
+
 .color-light-grey {
   color: $brand-light-grey;
 }
+
 .color-lighter-grey {
   color: $brand-lighter-grey;
 }
+
 .btn-more {
   padding: 8px 34px;
 }
+
 // btn classes
 // end btn classes
 // bg classes
 .bg-white {
   background-color: #fff;
 }
+
 .bg-dark-blue {
   background-color: $brand-dark-blue;
 }
+
 .bg-blue {
   background-color: $brand-blue;
 }
+
 .bg-dark-pink {
   background-color: $brand-dark-pink;
 }
+
 .bg-pink {
   background-color: $brand-pink;
 }
+
 .bg-dark-cyan {
   background-color: $brand-dark-cyan;
 }
+
 .bg-cyan {
   background-color: $brand-cyan;
 }
+
 .bg-light-cyan {
   background-color: $brand-light-cyan;
 }
+
 // end bg classes
 // btn classes
 .btn {
@@ -447,72 +550,108 @@ textarea {
     @include transition(all 300ms linear);
   }
 }
+
 .btn-dark-pink {
-  @include button-variant( white, $brand-dark-pink, $brand-dark-blue);
+  @include button-variant( white,
+  $brand-dark-pink,
+  $brand-dark-blue);
 }
+
 .btn-pink {
-  @include button-variant( white, $brand-dark-pink, $brand-dark-pink);
+  @include button-variant( white,
+  $brand-dark-pink,
+  $brand-dark-pink);
 }
+
 .btn-pink-outline {
-  @include button-variant( $brand-pink, transparent, $brand-pink);
+  @include button-variant( $brand-pink,
+  transparent,
+  $brand-pink);
   &:hover {
-    @include button-variant( white, $brand-pink, $brand-pink);
+    @include button-variant( white,
+    $brand-pink,
+    $brand-pink);
   }
 }
+
 .btn-white-outline {
-  @include button-variant( white, transparent, white);
+  @include button-variant( white,
+  transparent,
+  white);
   &:hover {
     border-color: #fff;
   }
 }
+
 .btn-grey-pink {
-  @include button-variant( white, $brand-grey, $brand-dark-blue);
+  @include button-variant( white,
+  $brand-grey,
+  $brand-dark-blue);
   &:hover {
-    @include button-variant( white, $brand-dark-pink, $brand-dark-blue);
+    @include button-variant( white,
+    $brand-dark-pink,
+    $brand-dark-blue);
   }
 }
+
 .btn-dark-blue {
-  @include button-variant( white, $brand-dark-blue, $brand-dark-blue);
+  @include button-variant( white,
+  $brand-dark-blue,
+  $brand-dark-blue);
 }
+
 .btn-blue-outline {
-  @include button-variant( $brand-blue, white, $brand-blue);
+  @include button-variant( $brand-blue,
+  white,
+  $brand-blue);
   &:hover {
     border-color: $brand-blue;
     background-color: $brand-pink;
     color: #fff;
   }
 }
+
 .btn-outline-blue {
-  @include button-variant( $brand-blue, transparent, $brand-blue);
+  @include button-variant( $brand-blue,
+  transparent,
+  $brand-blue);
 }
+
 // end btn classes
+
 /* Start writing sass here */
+
 .travel-bg {
   min-height: 550px;
   background: url('../img/back-content.jpg') no-repeat;
   background-size: cover;
   background-attachment: fixed;
 }
+
 // header
 header {
   padding: 10px 20px 0;
   position: relative;
   z-index: 10;
 }
+
 .navbar {
   border: none;
   border-radius: 0;
   margin: 0;
 }
+
 .hamburger {
   margin: 10px 0;
   span {
-    @include size(22px,3px);
+    @include size(22px,
+    3px);
     margin-bottom: 4px;
     display: block;
     background-color: $brand-pink;
   }
 }
+
 .search {
   margin: 2px 10px 2px 13px;
   input {
@@ -532,11 +671,12 @@ header {
     }
   }
 }
+
 .user-detail {
   .list-inline {
     margin: 0;
   }
-  .list-inline > li {
+  .list-inline>li {
     padding: 0 15px;
     font-size: 16px;
     &:last-child {
@@ -547,6 +687,7 @@ header {
     color: #80879a;
   }
 }
+
 .user-img {
   width: 40px;
   height: 42px;
@@ -554,6 +695,7 @@ header {
   border-radius: 15px;
   overflow: hidden;
 }
+
 // end header
 // Set Profile process
 .city,
@@ -568,9 +710,11 @@ header {
     font-size: 20px;
   }
 }
+
 .button-panel {
   margin-top: 80px;
 }
+
 // nation tab
 .nation-select {
   [type="radio"]:checked,
@@ -578,16 +722,16 @@ header {
     position: absolute;
     left: -9999px;
   }
-  [type="radio"]:checked + label,
-  [type="radio"]:not(:checked) + label {
+  [type="radio"]:checked+label,
+  [type="radio"]:not(:checked)+label {
     width: 100%;
     position: relative;
     margin: 0;
     cursor: pointer;
   }
   /* radio aspect */
-  [type="radio"]:checked + label:before,
-  [type="radio"]:not(:checked) + label:before {
+  [type="radio"]:checked+label:before,
+  [type="radio"]:not(:checked)+label:before {
     content: '';
     @include square(20px);
     position: absolute;
@@ -598,8 +742,8 @@ header {
     @include transition(all 300ms linear);
   }
   /* checked mark aspect */
-  [type="radio"]:checked + label:after,
-  [type="radio"]:not(:checked) + label:after {
+  [type="radio"]:checked+label:after,
+  [type="radio"]:not(:checked)+label:after {
     content: '\f00c';
     font: normal normal normal 14px/1 FontAwesome;
     position: absolute;
@@ -610,32 +754,33 @@ header {
     @include transition(all 300ms linear);
   }
   /* checked mark aspect changes */
-  [type="radio"]:not(:checked) + label:after {
+  [type="radio"]:not(:checked)+label:after {
     opacity: 1;
     transform: scale(1);
   }
-  [type="radio"]:checked + label:before {
+  [type="radio"]:checked+label:before {
     background-color: $brand-pink;
     color: #fff;
     @include transition(all 300ms linear);
   }
 }
+
 .custom-checkbox {
   [type="checkbox"]:checked,
   [type="checkbox"]:not(:checked) {
     position: absolute;
     left: -9999px;
   }
-  [type="checkbox"]:checked + label,
-  [type="checkbox"]:not(:checked) + label {
+  [type="checkbox"]:checked+label,
+  [type="checkbox"]:not(:checked)+label {
     width: 100%;
     position: relative;
     margin: 0;
     cursor: pointer;
   }
   /* checkbox aspect */
-  [type="checkbox"]:checked + label:before,
-  [type="checkbox"]:not(:checked) + label:before {
+  [type="checkbox"]:checked+label:before,
+  [type="checkbox"]:not(:checked)+label:before {
     content: '';
     @include square(20px);
     border: 1px solid $brand-cyan;
@@ -645,8 +790,8 @@ header {
     @include transition(all 300ms linear);
   }
   /* checked mark aspect */
-  [type="checkbox"]:checked + label:after,
-  [type="checkbox"]:not(:checked) + label:after {
+  [type="checkbox"]:checked+label:after,
+  [type="checkbox"]:not(:checked)+label:after {
     content: '\f00c';
     font: normal normal normal 14px/1 FontAwesome;
     @include square(20px);
@@ -658,11 +803,12 @@ header {
     text-align: center;
     @include transition(all 300ms linear);
   }
-  [type="checkbox"]:checked + label:after {
+  [type="checkbox"]:checked+label:after {
     color: $brand-pink;
     @include transition(all 300ms linear);
   }
 }
+
 // custom select
 .custom-select {
   position: relative;
@@ -695,18 +841,20 @@ header {
     font-size: 20px;
   }
 }
+
 // custom select end
 .custom-checkbox-heart {
   @extend .custom-checkbox;
-  [type="checkbox"]:checked + label:after,
-  [type="checkbox"]:not(:checked) + label:after {
+  [type="checkbox"]:checked+label:after,
+  [type="checkbox"]:not(:checked)+label:after {
     content: "\f004";
     color: #b7b7b7;
   }
-  [type="checkbox"]:checked + label:after {
+  [type="checkbox"]:checked+label:after {
     color: $brand-blue;
   }
 }
+
 .select-your-nation {
   min-height: 200px;
   position: relative;
@@ -715,7 +863,8 @@ header {
     &:after,
     &:before {
       content: "";
-      @include size(1px,15px);
+      @include size(1px,
+      15px);
       position: absolute;
       bottom: 0;
       background-color: $brand-pink;
@@ -737,15 +886,15 @@ header {
       border-color: $brand-pink;
     }
   }
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 6px;
     padding: 2px;
   }
-  ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+   ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   }
-  ::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+   ::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #fff;
   }
   ul {
@@ -773,6 +922,7 @@ header {
     }
   }
 }
+
 // nation tab end
 // gender
 .female,
@@ -787,40 +937,50 @@ header {
     margin: 20px auto 0;
   }
   span {
-    @include position(relative, -17px null null 2px);
+    @include position(relative,
+    -17px null null 2px);
   }
 }
+
 .male:hover {
   background-color: $brand-pink;
 }
+
 .female:hover {
   background-color: $brand-cyan;
 }
+
 // gender end
 .cropArea {
-  @include size(100%,350px);
+  @include size(100%,
+  350px);
   overflow: hidden;
 }
+
 .getfile {
   @include square(100%);
   position: absolute;
   top: 0;
   opacity: 0;
 }
+
 .upload-btn {
   margin: 15px 0;
   button {
     padding: 6px 20px;
   }
 }
+
 .active-gender.male {
   background-color: $brand-pink;
   @include transition(all 300ms linear);
 }
+
 .active-gender.female {
   background-color: $brand-cyan;
   @include transition(all 300ms linear);
 }
+
 // end set Profile process
 // holiday step
 .holiday-indicators {
@@ -848,6 +1008,7 @@ header {
     @include transition(all 300ms linear);
   }
 }
+
 .select-holiday {
   background: url('../img/grey-half.png') no-repeat 50% 0;
   cursor: pointer;
@@ -860,19 +1021,23 @@ header {
     font-size: 16px;
   }
 }
+
 .active-holiday {
   background: url('../img/green-half.png') no-repeat 50% 0;
   @include transition(background 300ms linear);
 }
+
 .holiday-imgholder {
   min-height: 60px;
   img {
     height: 55px;
   }
 }
+
 .holiday-row {
   margin: 25px 0 40px;
 }
+
 .holiday-step1,
 .holiday-step2,
 .holiday-step3,
@@ -884,13 +1049,16 @@ header {
     font-size: 20px;
   }
 }
+
 .usually-go {
   margin-top: 30px;
   margin-bottom: 35%;
 }
+
 .travel-row {
   margin: 18px 25px;
 }
+
 .travel-row-main {
   .kind-holiday {
     width: 140px;
@@ -920,11 +1088,13 @@ header {
     vertical-align: top;
   }
 }
+
 .usually-go-holiday {
   width: 140px;
   display: inline-block;
   vertical-align: top;
 }
+
 // .travel-row-main .preference-travel:last-child { width: 180px; }
 // holiday step end
 // profile
@@ -932,17 +1102,21 @@ header {
   max-width: 1400px;
   margin: 0 auto;
 }
+
 .profile-photo-section {
   width: 300px;
   margin: 45px auto -12px;
 }
+
 .profile-more-detail {
   padding: 30px 30px 20px;
   border-radius: 6px;
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255, 255, 255, 0.8);
 }
+
 .profile-imgholder {
-  @include size(135px,145px);
+  @include size(135px,
+  145px);
   border: 3px solid #fff;
   border-radius: 55px;
   margin: 0 auto -15px;
@@ -950,17 +1124,20 @@ header {
   box-shadow: 0 2px 3px #636363;
   // background: url('../img/profile-main.png') no-repeat 50% 50%;
 }
+
 .flag {
   position: absolute;
   right: 65px;
   bottom: 0;
 }
+
 .wave {
   position: absolute;
   top: 50%;
   left: 42px;
   @include transform(translateY(-50%));
 }
+
 .user-travel-detail {
   padding: 25px 0;
   background: url('../img/travel-detail-bg.png') no-repeat;
@@ -980,16 +1157,19 @@ header {
     }
   }
 }
+
 .travel-inside {
   font-size: 16px;
 }
+
 .all-profile-detail {
   padding: 0 25px;
 }
+
 .more-about-me {
   padding: 25px 20px 20px;
   margin-top: -5px;
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   p {
     font-size: 18px;
   }
@@ -1007,6 +1187,7 @@ header {
     @include transform(rotate(180deg));
   }
 }
+
 .vector-map {
   padding: 30px;
   max-height: 550px;
@@ -1014,16 +1195,19 @@ header {
     max-height: 500px;
   }
 }
+
 .vector-map-full {
   max-height: 750px;
   mappy svg {
     max-height: 750px;
   }
 }
+
 // visited list
 .wish-country-visit {
   padding: 20px 15px 0 0;
 }
+
 .visited-country-list {
   li {
     padding: 10px 0;
@@ -1033,12 +1217,14 @@ header {
     display: inline-block;
   }
 }
+
 .visit-input {
   padding: 8px 18px;
   border: 1px solid #ccc;
   border-radius: 4px;
   margin: 15px 15px 10px 0;
 }
+
 .country-list {
   .country-name {
     width: 220px;
@@ -1046,11 +1232,13 @@ header {
     vertical-align: top;
   }
 }
+
 // travel life
 .travelled-imgholder {
   height: 440px;
   overflow: hidden;
 }
+
 .onway-imgholder {
   height: 330px;
   overflow: hidden;
@@ -1058,6 +1246,7 @@ header {
     min-height: 100%;
   }
 }
+
 .travel-life-part {
   ul {
     padding: 0;
@@ -1068,6 +1257,7 @@ header {
     }
   }
 }
+
 // tabs
 .profile-tabs {
   padding: 0 10px;
@@ -1141,6 +1331,7 @@ header {
     z-index: 1;
   }
 }
+
 // tabs end
 .add-journey {
   position: relative;
@@ -1166,13 +1357,15 @@ header {
     }
   }
 }
+
 .add-more-journey {
   width: 210px;
   padding: 15px 20px;
   border-radius: 12px;
   border: 1px solid $brand-blue;
   background-color: $brand-pink;
-  @include position(absolute,-15px 35px null null);
+  @include position(absolute,
+  -15px 35px null null);
   z-index: 10;
   &:after {
     content: "";
@@ -1180,7 +1373,8 @@ header {
     border-right: 9px solid transparent;
     border-bottom: 9px solid transparent;
     border-left: 9px solid $brand-pink;
-    @include position(absolute, 22px -18px null null);
+    @include position(absolute,
+    22px -18px null null);
   }
   &:before {
     content: "";
@@ -1188,7 +1382,8 @@ header {
     border-right: 10px solid transparent;
     border-bottom: 10px solid transparent;
     border-left: 10px solid $brand-blue;
-    @include position(absolute, 21px -20px null null);
+    @include position(absolute,
+    21px -20px null null);
   }
   li {
     padding: 8px 0;
@@ -1201,11 +1396,14 @@ header {
     }
   }
 }
+
 .travel-local-life {
   padding: 20px;
 }
+
 .country-visited {
-  @include position(absolute, -10px 10px null null);
+  @include position(absolute,
+  -10px 10px null null);
   img {
     margin-left: -10px;
   }
@@ -1218,12 +1416,13 @@ header {
     vertical-align: middle;
   }
 }
+
 .journey-tag-holder {
   width: 100%;
   padding: 0 10px;
   position: absolute;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
   a {
     color: #fff;
@@ -1236,12 +1435,14 @@ header {
     margin-bottom: -20px;
   }
 }
+
 .journey-type {
   vertical-align: top;
   li {
     padding: 0 5px;
   }
 }
+
 .journey-cost {
   display: inline-block;
   vertical-align: top;
@@ -1250,8 +1451,10 @@ header {
     font-size: 15px;
   }
 }
+
 .days-spent {
-  @include size(45px,48px);
+  @include size(45px,
+  48px);
   border-radius: 18px;
   display: inline-block;
   position: relative;
@@ -1267,6 +1470,7 @@ header {
     }
   }
 }
+
 .journey-collection {
   li {
     padding: 0 10px;
@@ -1277,9 +1481,11 @@ header {
     }
   }
 }
+
 .social-field-types {
   padding: 0 10px;
 }
+
 .user-social-item {
   padding: 12px 0 20px;
   border-bottom: 1px solid $brand-grey;
@@ -1295,10 +1501,12 @@ header {
     }
   }
 }
+
 .social-likes-reviews {
   padding: 15px 0;
   font-size: 12px;
 }
+
 // progress bar
 .level1,
 .level2,
@@ -1314,16 +1522,19 @@ header {
     margin: 10px 0 0 -8px;
   }
 }
+
 .level1 {
   .name {
     margin: 0 0 10px -13px;
   }
 }
+
 .level2 {
   .name {
     margin: 0 0 10px -40px;
   }
 }
+
 .level3 {
   .name {
     margin: 0 0 10px -42px;
@@ -1335,6 +1546,7 @@ header {
     background-color: #bfbfbf;
   }
 }
+
 .level4 {
   .name {
     margin: 0 0 10px -25px;
@@ -1349,6 +1561,7 @@ header {
     }
   }
 }
+
 .last-level5 {
   position: absolute;
   top: 0;
@@ -1357,21 +1570,26 @@ header {
     margin: 25px -15px 0 0;
   }
 }
+
 .active-bar {
   .name {
     color: $brand-pink;
   }
 }
+
 .last-progress-strip {
   position: relative;
   &:after {
     content: "";
-    @include size(8px,17px);
+    @include size(8px,
+    17px);
     border-radius: 20px;
-    @include position(absolute, 5px 10px null null);
+    @include position(absolute,
+    5px 10px null null);
     background-color: $brand-light-grey;
   }
 }
+
 .progress-bar-strip {
   width: 100%;
   height: 8px;
@@ -1379,15 +1597,19 @@ header {
   background-color: $brand-pink;
   &:after {
     content: "";
-    @include size(8px,17px);
+    @include size(8px,
+    17px);
     border-radius: 20px;
-    @include position(absolute, -5px null null 0);
+    @include position(absolute,
+    -5px null null 0);
     background-color: $brand-pink;
   }
 }
+
 .travel-progress-bar {
   margin-bottom: 30px;
 }
+
 // journey tabs
 .journey-tabs {
   .btn-tab {
@@ -1408,11 +1630,13 @@ header {
     @include transition(all 300ms linear);
   }
 }
+
 .travel-life-btn {
   span {
     font-size: 16px;
   }
 }
+
 // end journey tabs
 // masonry tab
 .masonry-detail {
@@ -1427,10 +1651,12 @@ header {
     margin: 10px;
   }
 }
+
 .travel-journey-heading {
   padding: 10px;
   color: $brand-grey;
 }
+
 // masonry end
 // travel life end
 // local life
@@ -1451,9 +1677,11 @@ header {
     color: #fff;
   }
 }
+
 .local-life-main {
   padding: 0 20px;
 }
+
 .filter-local-life {
   width: 24%;
   border-top: 1px solid $brand-lighter-grey;
@@ -1471,6 +1699,7 @@ header {
     text-decoration: underline;
   }
 }
+
 .checkin-filter,
 .filter-month,
 .more-filter,
@@ -1478,12 +1707,12 @@ header {
   padding: 15px 0;
   border-bottom: 1px solid $brand-lighter-grey;
   .custom-checkbox {
-    [type="checkbox"]:checked + label:before,
-    [type="checkbox"]:not(:checked) + label:before {
+    [type="checkbox"]:checked+label:before,
+    [type="checkbox"]:not(:checked)+label:before {
       margin-right: 10px;
       vertical-align: top;
     }
-    [type="checkbox"]:checked + label:after {
+    [type="checkbox"]:checked+label:after {
       color: $brand-cyan;
     }
   }
@@ -1500,6 +1729,7 @@ header {
     }
   }
 }
+
 .custom-select-local {
   margin: 5px 0;
   select {
@@ -1516,9 +1746,11 @@ header {
     color: $brand-dark-cyan;
   }
 }
+
 .more-filter {
   border-bottom: none;
 }
+
 .post-local-life {
   width: 76%;
   margin-left: -4px;
@@ -1527,8 +1759,9 @@ header {
     padding: 15px 30px;
   }
 }
+
 .post-list-view {
-  .list-inline > li {
+  .list-inline>li {
     padding: 0 13px;
     border-right: 2px solid $brand-blue;
     line-height: 16px;
@@ -1541,17 +1774,21 @@ header {
     }
   }
 }
+
 .total-post {
   font-size: 16px;
 }
+
 .local-post {
   padding: 30px 60px;
   border-right: 1px solid $brand-lighter-grey;
   border-left: 1px solid $brand-lighter-grey;
 }
+
 .scrollme {
   max-height: 890px;
 }
+
 .scroll-local-life {
   .ngsb-wrap {
     height: auto !important;
@@ -1573,6 +1810,7 @@ header {
     left: 17px;
   }
 }
+
 .post-main {
   border: 1px solid $brand-lighter-grey;
   border-radius: 6px;
@@ -1582,7 +1820,8 @@ header {
     position: relative;
     font-size: 15px;
     .location {
-      @include position(absolute, 10px 10px null null);
+      @include position(absolute,
+      10px 10px null null);
     }
   }
   .post-imgholder {
@@ -1627,12 +1866,13 @@ header {
     }
   }
 }
+
 .local-post-slider {
   padding: 10px;
   .carousel {
     width: 95%;
   }
-  .flexslider .slides > li {
+  .flexslider .slides>li {
     width: 136px !important;
   }
   .flex-direction-nav a {
@@ -1682,11 +1922,14 @@ header {
     border: 1px solid $brand-cyan;
   }
 }
+
 .local-imgview-pop {
   .modal-dialog {
     width: auto;
-    @include position(absolute, 50% null null 50%);
-    @include transform(translate(-50%,-50%)!important);
+    @include position(absolute,
+    50% null null 50%);
+    @include transform(translate(-50%,
+    -50%)!important);
   }
   .imgviewpop-holder {
     height: 550px;
@@ -1700,7 +1943,7 @@ header {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     font-size: 18px;
   }
   .view-imgdown {
@@ -1709,7 +1952,7 @@ header {
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     li {
       padding-right: 25px;
       display: inline-block;
@@ -1726,6 +1969,7 @@ header {
     vertical-align: top;
   }
 }
+
 // local life end
 // profile end
 // moment tab
@@ -1741,7 +1985,9 @@ header {
       &:first-child .tab-heading {
         padding: 15px 20px;
         margin: 6px 0 0;
-        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+        @include background(linear-gradient(to left,
+        #e85a4d,
+        #f05b4d));
       }
       &:nth-child(2) .tab-heading {
         padding: 20px;
@@ -1752,13 +1998,16 @@ header {
     }
   }
 }
+
 .moment-view {
   padding: 0 40px 60px;
   min-height: 500px;
 }
+
 .month-collage {
   margin-bottom: 30px;
 }
+
 .collage-month-view {
   .moment-imgholder {
     @include square(79px);
@@ -1770,6 +2019,7 @@ header {
     }
   }
 }
+
 .singleMonth-imgholder {
   @include square(169px);
   display: inline-block;
@@ -1779,6 +2029,7 @@ header {
     margin: 0 auto;
   }
 }
+
 .moments-tab {
   padding: 20px;
   @extend .journey-tabs;
@@ -1795,6 +2046,7 @@ header {
     @include transition(all 300ms linear);
   }
 }
+
 // travel moment imgholder
 .moment-travel-main {
   .moment-travel-view:nth-child(5n+1) {
@@ -1804,16 +2056,19 @@ header {
     margin: 15px 0 15px 22px;
   }
 }
+
 .moment-travel-view {
   margin: 15px 22px;
   display: inline-block;
 }
+
 .moment-travelimgholder {
   @include square(200px);
   position: relative;
   .img-backholder {
     @include square(190px);
-    @include position(absolute,15px null null 15px);
+    @include position(absolute,
+    15px null null 15px);
     @include transform(rotate(1deg));
     img {
       min-height: 100%;
@@ -1824,9 +2079,11 @@ header {
   }
   .img-frontholder {
     @include square(200px);
-    @include position(absolute, 0 null null 0);
+    @include position(absolute,
+    0 null null 0);
   }
 }
+
 .travel-info {
   margin: 20px 0 0;
   h4 {
@@ -1837,6 +2094,7 @@ header {
     }
   }
 }
+
 // travel moment imgholder end
 // local moment imgholder
 .moment-local-main {
@@ -1847,28 +2105,34 @@ header {
     margin: 15px 0 15px 22px;
   }
 }
+
 .moment-local-view {
   margin: 15px 22px;
   display: inline-block;
 }
+
 .moment-localimgholder {
   @include square(200px);
   position: relative;
   .img-backholder {
     @include square(150px);
-    @include position(absolute,30px null null 15px);
+    @include position(absolute,
+    30px null null 15px);
   }
   .img-frontholder {
     @include square(200px);
-    @include position(absolute, 0 null null 0);
+    @include position(absolute,
+    0 null null 0);
   }
 }
+
 // local moment imgholder end
 // moment tab end
 // revies tab
 .review-travel-view {
   margin-top: 20px;
 }
+
 .review-all-life {
   padding: 15px 10px 25px;
   border-bottom: 1px solid $brand-lighter-grey;
@@ -1876,6 +2140,7 @@ header {
     font-size: 22px;
   }
 }
+
 .rate-location {
   p {
     font-style: italic;
@@ -1888,6 +2153,7 @@ header {
     }
   }
 }
+
 .reviews-active {
   .first-strip,
   .fourth-strip,
@@ -1900,12 +2166,16 @@ header {
       &:first-child .tab-heading {
         padding: 11px 20px;
         margin: 10px 0 0 2px;
-        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+        @include background(linear-gradient(to left,
+        #e85a4d,
+        #f05b4d));
       }
       &:nth-child(2) .tab-heading {
         padding: 15px 20px;
         margin: 6px 0 0 -18px;
-        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+        @include background(linear-gradient(to left,
+        #e85a4d,
+        #f05b4d));
         z-index: 4;
       }
       &:nth-child(3) .tab-heading {
@@ -1921,6 +2191,7 @@ header {
     }
   }
 }
+
 .list-travel-view {
   display: inline-block;
   vertical-align: top;
@@ -1931,20 +2202,23 @@ header {
   }
   .review-backimgholder {
     @include square(120px);
-    @include position(absolute, 10px 20px null null);
+    @include position(absolute,
+    10px 20px null null);
     border-radius: 100%;
     overflow: hidden;
   }
   .review-frontimgholder {
     h3 {
-      @include position(absolute, null null 25px 25px);
+      @include position(absolute,
+      null null 25px 25px);
     }
   }
 }
+
 // accordion review
 .city-accordion {
   margin-top: 10px;
-  .panel-default > .panel-heading {
+  .panel-default>.panel-heading {
     padding: 10px 30px;
     border-radius: 0;
     border-bottom: 4px solid $brand-dark-pink;
@@ -1967,7 +2241,7 @@ header {
   .panel-body {
     border: none;
   }
-  .panel-default > .panel-heading + .panel-collapse > .panel-body {
+  .panel-default>.panel-heading+.panel-collapse>.panel-body {
     padding: 0 30px;
     border: none;
   }
@@ -1985,36 +2259,42 @@ header {
     @include transition(all 0.20s ease);
   }
 }
+
 .heading-single-view {
   padding: 15px;
   background-color: #f3f3f3;
   text-align: center;
 }
+
 // pop-up rate
 .star-post-rating {
   .fa-star:before {
     content: "\f005";
     color: $brand-pink;
   }
-  .list-inline > li {
+  .list-inline>li {
     padding: 0 15px;
   }
 }
+
 .add-review {
   margin: 15px 0 0;
   font-size: 16px;
 }
+
 .modal-content {
   border: none;
   box-shadow: none;
   background-color: transparent;
 }
+
 .post-heading {
   padding: 20px 0;
   .popup-title {
     font-size: 15px;
   }
 }
+
 .post-content-main {
   padding: 20px 20px 0;
   border-radius: 8px;
@@ -2026,6 +2306,7 @@ header {
     min-height: 150px;
   }
 }
+
 .fill-post {
   text-align: center;
   textarea {
@@ -2035,6 +2316,7 @@ header {
     font-size: 16px;
   }
 }
+
 .submit-post {
   text-align: center;
   position: relative;
@@ -2044,11 +2326,13 @@ header {
     font-size: 17px;
   }
 }
+
 .review-backdrop.modal-backdrop {
   background: url('../img/bg-blur.jpg') no-repeat;
   background-size: cover;
   opacity: 1;
 }
+
 // country
 .review-country-main {
   .country-flag {
@@ -2074,6 +2358,7 @@ header {
     }
   }
 }
+
 // pop-up rate end
 // accordion review end
 // reviews tab end
@@ -2090,19 +2375,25 @@ header {
       &:nth-child(1) .tab-heading {
         padding: 9px 20px;
         margin: 11px 0 0 2px;
-        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+        @include background(linear-gradient(to left,
+        #e85a4d,
+        #f05b4d));
       }
       &:nth-child(2) .tab-heading {
         padding: 12px 20px;
         margin: 8px 0 0 -17px;
         z-index: 4;
-        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+        @include background(linear-gradient(to left,
+        #e85a4d,
+        #f05b4d));
       }
       &:nth-child(3) .tab-heading {
         padding: 15px 20px;
         margin: 6px 0 0 -18px;
         z-index: 4;
-        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+        @include background(linear-gradient(to left,
+        #e85a4d,
+        #f05b4d));
       }
       &:last-child .tab-heading {
         padding: 20px;
@@ -2113,6 +2404,7 @@ header {
     }
   }
 }
+
 // holiday planner tab end
 // setting tab
 .setting {
@@ -2122,6 +2414,7 @@ header {
     font-size: 20px;
   }
 }
+
 .profile-detail-main {
   .profile-photo-sec {
     box-shadow: none;
@@ -2151,6 +2444,7 @@ header {
     }
   }
 }
+
 .setting-list {
   i {
     font-size: 20px;
@@ -2178,9 +2472,11 @@ header {
     }
   }
 }
+
 .active-setting .tab-list {
   border-bottom: 1px solid transparent;
 }
+
 .setting-profile-list {
   padding: 10px;
   border: 1px solid #ebebeb;
@@ -2189,6 +2485,7 @@ header {
     margin-top: 25px;
   }
 }
+
 .setting-prof-imgholder {
   width: 63px;
   height: 65px;
@@ -2198,9 +2495,11 @@ header {
   display: inline-block;
   overflow: hidden;
 }
+
 .profile-detail {
   margin: 12px;
 }
+
 .setting-main-detail {
   min-height: 364px;
   padding: 20px 30px;
@@ -2268,13 +2567,16 @@ header {
     height: 300px;
   }
   .cancel {
-    @include position(absolute, 3px 7px null null);
+    @include position(absolute,
+    3px 7px null null);
     z-index: 1;
   }
   .btn-upload {
-    @include position(absolute, null 5px 7px null);
+    @include position(absolute,
+    null 5px 7px null);
   }
 }
+
 .setting-tab-gender {
   .female,
   .male {
@@ -2285,11 +2587,13 @@ header {
     }
   }
 }
+
 .setting-tab-heading {
   margin: 0 0 15px;
   font-size: 15px;
   font-weight: 700;
 }
+
 .setting-nationality {
   margin-top: 25px;
   .custom-select {
@@ -2306,6 +2610,7 @@ header {
     }
   }
 }
+
 .travel-blogger {
   margin-top: 10px;
   margin-bottom: 20px;
@@ -2325,6 +2630,7 @@ header {
     }
   }
 }
+
 // select with checkbox
 .checkbox-select {
   [type="checkbox"]:checked,
@@ -2332,8 +2638,8 @@ header {
     position: absolute;
     left: -9999px;
   }
-  [type="checkbox"]:checked + label,
-  [type="checkbox"]:not(:checked) + label {
+  [type="checkbox"]:checked+label,
+  [type="checkbox"]:not(:checked)+label {
     width: 100%;
     height: 40px;
     padding: 10px;
@@ -2344,40 +2650,43 @@ header {
     cursor: pointer;
   }
   /* checkbox aspect */
-  [type="checkbox"]:checked + label:before,
-  [type="checkbox"]:not(:checked) + label:before {
+  [type="checkbox"]:checked+label:before,
+  [type="checkbox"]:not(:checked)+label:before {
     content: '';
     @include square(20px);
-    @include position(absolute, 50% 8px null null);
+    @include position(absolute,
+    50% 8px null null);
     @include transform(translateY(-50%));
     @include transition(all 300ms linear);
   }
   /* checked mark aspect */
-  [type="checkbox"]:checked + label:after,
-  [type="checkbox"]:not(:checked) + label:after {
+  [type="checkbox"]:checked+label:after,
+  [type="checkbox"]:not(:checked)+label:after {
     content: '\f00c';
     font: normal normal normal 14px/1 FontAwesome;
     @include square(20px);
     color: #b7b7b7;
-    @include position(absolute, 50% 8px null null);
+    @include position(absolute,
+    50% 8px null null);
     @include transform(translateY(-50%));
     line-height: 20px;
     text-align: center;
     @include transition(all 300ms linear);
   }
-  [type="checkbox"]:checked + label:after {
+  [type="checkbox"]:checked+label:after {
     color: $brand-pink;
     @include transition(all 300ms linear);
   }
 }
+
 .radio-select {
   [type="radio"]:checked,
   [type="radio"]:not(:checked) {
     position: absolute;
     left: -9999px;
   }
-  [type="radio"]:checked + label,
-  [type="radio"]:not(:checked) + label {
+  [type="radio"]:checked+label,
+  [type="radio"]:not(:checked)+label {
     width: 100%;
     height: 40px;
     padding: 10px;
@@ -2389,36 +2698,39 @@ header {
     color: $brand-grey;
   }
   /* radio aspect */
-  [type="radio"]:checked + label:before,
-  [type="radio"]:not(:checked) + label:before {
+  [type="radio"]:checked+label:before,
+  [type="radio"]:not(:checked)+label:before {
     content: '';
     @include square(20px);
-    @include position(absolute, 50% 8px null null);
+    @include position(absolute,
+    50% 8px null null);
     @include transform(translateY(-50%));
     @include transition(all 300ms linear);
   }
   /* checked mark aspect */
-  [type="radio"]:checked + label:after,
-  [type="radio"]:not(:checked) + label:after {
+  [type="radio"]:checked+label:after,
+  [type="radio"]:not(:checked)+label:after {
     content: '\f00c';
     font: normal normal normal 14px/1 FontAwesome;
     @include square(20px);
     color: #b7b7b7;
-    @include position(absolute, 50% 8px null null);
+    @include position(absolute,
+    50% 8px null null);
     @include transform(translateY(-50%));
     line-height: 20px;
     text-align: center;
     @include transition(all 300ms linear);
   }
-  [type="radio"]:checked + label:after {
+  [type="radio"]:checked+label:after {
     color: $brand-pink;
     @include transition(all 300ms linear);
   }
-  [type="radio"]:checked + label {
+  [type="radio"]:checked+label {
     color: $brand-blue;
     @include transition(all 300ms linear);
   }
 }
+
 // privacy policy tab end
 // report problem tab
 .problem-detail {
@@ -2429,30 +2741,36 @@ header {
     min-height: 230px;
   }
 }
+
 // report problem tab end
 // setting tab end
 .swiper-container {
   width: 100%;
   padding-bottom: 50px;
 }
+
 .swiper-slide {
   background-position: center;
   background-size: cover;
   width: 95%;
   min-height: 432px;
 }
+
 .get-width {
   width: 555px;
 }
+
 // blog
 .blog-banner-header {
   z-index: 1;
 }
+
 .heading-blog {
   margin-bottom: 20px;
   color: #fff;
   text-shadow: 2px 2px 2px #6b6b6b;
 }
+
 .archives-blog-select,
 .category-blog-select {
   display: inline-block;
@@ -2460,12 +2778,13 @@ header {
   cursor: pointer;
   font-family: "avenir-roman";
 }
+
 .view-blog-category {
   width: 290px;
   min-height: 40px;
   padding: 10px 20px;
   display: inline-block;
-  background-color: rgba(252,245,230,0.9);
+  background-color: rgba(252, 245, 230, 0.9);
   .blog-icon {
     padding-right: 10px;
     border-right: 1px solid #424242;
@@ -2473,12 +2792,13 @@ header {
     line-height: 13px;
   }
 }
+
 .blog-category-list {
   width: 100%;
   position: absolute;
   top: 40px;
   left: 0;
-  background-color: rgba(252,245,230,0.9);
+  background-color: rgba(252, 245, 230, 0.9);
   ul {
     height: 320px;
     overflow-x: hidden;
@@ -2495,13 +2815,15 @@ header {
       display: block;
     }
   }
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: #424242;
   }
 }
+
 .blog-archives-list {
   @extend .blog-category-list;
 }
+
 .go-button {
   display: inline-block;
   button {
@@ -2510,28 +2832,34 @@ header {
     border-radius: 0;
   }
 }
+
 .view-blog-archives {
   width: 210px;
   @extend .view-blog-category;
 }
+
 .blog-page-content {
   padding-top: 30px;
 }
+
 .box-imgholder {
   width: 395px;
   overflow: hidden;
 }
+
 .blog-post {
   border: 1px solid #ccc;
   border-radius: 6px;
   margin: 10px 0;
   overflow: hidden;
 }
+
 .post-descp {
   width: 100%;
   padding: 10px;
-  @include position(absolute,null null 0 0);
-  background-color: rgba(0,0,0,0.6);
+  @include position(absolute,
+  null null 0 0);
+  background-color: rgba(0, 0, 0, 0.6);
   .post-title {
     margin: 8px 0;
     font-size: 17px;
@@ -2549,6 +2877,7 @@ header {
     font-size: 11px;
   }
 }
+
 .popular-blog-section {
   padding-bottom: 10px;
   border-bottom: 2px solid #ebebeb;
@@ -2556,19 +2885,22 @@ header {
     margin: 10px 0 20px;
   }
 }
+
 .aside-heading {
   margin: 0 0 20px;
 }
+
 .popular-blog {
   border-radius: 6px;
   margin-bottom: 20px;
   overflow: hidden;
 }
+
 .popular-post-desc {
   padding: 10px 15px;
   position: absolute;
   bottom: 0;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   h4 {
     height: 34px;
     margin: 0;
@@ -2578,6 +2910,7 @@ header {
     overflow: hidden;
   }
 }
+
 .popular-post-type {
   position: absolute;
   top: 20px;
@@ -2585,10 +2918,12 @@ header {
     padding: 3px 15px;
   }
 }
+
 .post-left span {
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
 }
+
 .post-right {
   right: 0;
   span {
@@ -2596,6 +2931,7 @@ header {
     border-bottom-left-radius: 6px;
   }
 }
+
 .categories,
 .facebook,
 .instagram,
@@ -2605,9 +2941,11 @@ header {
   padding: 25px 0;
   border-bottom: 2px solid #ebebeb;
 }
+
 .advertise-section {
   padding: 25px 0;
 }
+
 .social-media {
   text-align: center;
   li {
@@ -2619,26 +2957,28 @@ header {
     }
   }
 }
+
 .blog-filter-checkbox {
   margin: 12px 0;
   label {
     color: $brand-dark-blue;
     font-size: 15px;
   }
-  [type="checkbox"]:checked + label:before,
-  [type="checkbox"]:not(:checked) + label:before {
+  [type="checkbox"]:checked+label:before,
+  [type="checkbox"]:not(:checked)+label:before {
     border: 1px solid $brand-dark-blue;
     vertical-align: middle;
     margin-right: 10px;
   }
-  [type="checkbox"]:checked + label:after,
-  [type="checkbox"]:not(:checked) + label:after {
+  [type="checkbox"]:checked+label:after,
+  [type="checkbox"]:not(:checked)+label:after {
     top: 2px;
   }
-  [type="checkbox"]:checked + label:after {
+  [type="checkbox"]:checked+label:after {
     color: $brand-dark-blue;
   }
 }
+
 .categories .more {
   color: $brand-dark-blue;
   cursor: pointer;
@@ -2646,29 +2986,35 @@ header {
   font-weight: 700;
   text-decoration: underline;
 }
+
 // blog end
 // blog detail
 .blog-main-detail {
   padding: 30px 0;
 }
+
 .blog-detail-heading {
   .post-date {
     margin: 10px 0;
     font-size: 12px;
   }
 }
+
 .blog-journey-type {
   padding: 0 25px 5px 0;
   border-bottom: 1px solid $brand-pink;
   color: $brand-pink;
   font-size: 15px;
 }
+
 .journey-social {
   margin: 20px 0;
 }
+
 .blog-detail-descp {
   margin-bottom: 30px;
 }
+
 .blog-journey-detail {
   padding: 30px 50px;
   p {
@@ -2677,6 +3023,7 @@ header {
     text-align: justify;
   }
 }
+
 .social-share li {
   vertical-align: top;
   i {
@@ -2688,6 +3035,7 @@ header {
     }
   }
 }
+
 .social-share {
   .travel-icon {
     .icon-pink {
@@ -2706,6 +3054,7 @@ header {
     }
   }
 }
+
 .blog-chat li {
   display: inline-block;
   padding: 0 10px;
@@ -2718,18 +3067,22 @@ header {
     display: inline-block;
   }
 }
+
 .blog-social-field {
   padding: 0 50px;
 }
+
 .editor-logo {
   margin-top: -30px;
   margin-right: 15px;
   display: inline-block;
 }
+
 .editor-subdetail {
   width: 70%;
   font-size: 12px;
 }
+
 .recent-blog {
   padding: 30px 0;
   border-top: 2px solid #dcdcdc;
@@ -2745,16 +3098,19 @@ header {
     font-size: 14px;
   }
 }
+
 .previous-blog {
   .recent-blog-detail {
     margin: 40px 0 0 15px;
   }
 }
+
 .next-blog {
   .recent-blog-detail {
     margin: 40px 15px 0 0;
   }
 }
+
 .blog-view {
   margin-bottom: 10px;
   span {
@@ -2764,11 +3120,13 @@ header {
     font-size: 19px;
   }
 }
+
 .you-may-like {
   h3 {
     margin: 0 0 25px;
   }
 }
+
 .blog-itineraries-main {
   margin-top: 40px;
   .blog-post {
@@ -2778,6 +3136,7 @@ header {
     margin-bottom: 15px;
   }
 }
+
 // blog detail end
 // activity
 // post profile pic
@@ -2785,12 +3144,14 @@ header {
   margin: 0 0 25px;
   font-size: 30px;
 }
+
 .activity-container {
   padding: 30px 0 0;
   .col-md-4 {
     padding: 0;
   }
 }
+
 .activity-post-main {
   margin: 10px 10px 20px;
   border: 1px solid #ccc;
@@ -2799,38 +3160,47 @@ header {
     display: inline-block;
   }
 }
+
 .post-header {
   padding: 10px;
 }
+
 .picture-section {
   width: 24%;
 }
+
 .user-detail {
   // width: 74%;
   vertical-align: top;
 }
+
 .user-more-detail {
   color: $brand-light-grey;
   font-size: 12px;
 }
+
 .user-pic {
   margin-top: -25px;
   img {
-    @include size(66px,67px);
+    @include size(66px,
+    67px);
     border-radius: 20px;
   }
 }
+
 .post-your-status {
   padding: 5px 5px 0;
   border-top: 1px solid #ccc;
   margin-top: 10px;
   color: #727272;
 }
+
 .post-icon {
   position: absolute;
   top: -25px;
   right: 10px;
 }
+
 .post-main-section {
   min-height: 20px;
   .journey-collection {
@@ -2843,6 +3213,7 @@ header {
     }
   }
 }
+
 .tag-ongo-journey {
   padding: 5px 15px;
   border-top-left-radius: 6px;
@@ -2853,11 +3224,13 @@ header {
   background-color: $brand-pink;
   z-index: 1;
 }
+
 .flag-section {
   .country-visited {
     left: 20px;
   }
 }
+
 .post-img,
 .video-post {
   height: 250px;
@@ -2866,6 +3239,7 @@ header {
     width: 100%;
   }
 }
+
 .imgpost-relatedslider {
   padding: 10px 10px 0;
   .related-postimgholder {
@@ -2875,10 +3249,12 @@ header {
     min-height: 80px;
   }
 }
+
 .post-rating {
   padding: 10px 0;
   border-bottom: 1px solid #ccc;
 }
+
 .post-footer {
   .user-social-item {
     li {
@@ -2889,6 +3265,7 @@ header {
     }
   }
 }
+
 // traveller post
 .activity-popular-main {
   border: 1px solid #ccc;
@@ -2900,6 +3277,7 @@ header {
     color: #8a8a8a;
   }
 }
+
 .view-list-popular {
   padding: 10px;
   border-bottom: 3px solid #e5e5e5;
@@ -2923,6 +3301,7 @@ header {
     vertical-align: middle;
   }
 }
+
 // traveller post end
 // get class by post like travel local life and editor
 .travel-life {
@@ -2944,6 +3323,7 @@ header {
     display: none;
   }
 }
+
 .local-life {
   .tag-ongo-journey {
     background-color: $brand-cyan;
@@ -2966,6 +3346,7 @@ header {
     display: none;
   }
 }
+
 .editor {
   .activity-post-main {
     background-color: $brand-dark-blue;
@@ -3005,6 +3386,7 @@ header {
     margin-bottom: -10px;
   }
 }
+
 // visit-post
 .visit-post {
   border: 1px solid #ccc;
@@ -3015,6 +3397,7 @@ header {
     padding: 10px 10px 0;
   }
 }
+
 .local-visit-header {
   width: 100%;
   position: absolute;
@@ -3024,11 +3407,13 @@ header {
     margin: 5px 0 0 10px;
   }
 }
+
 .tag-ongo-journey-local {
   padding: 5px 10px 5px 15px;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
 }
+
 .visit-view-imgholder {
   height: 370px;
   overflow: hidden;
@@ -3037,13 +3422,14 @@ header {
     border-top-right-radius: 6px;
   }
 }
+
 .local-visit-detail {
   width: 100%;
   padding: 10px 10px 20px;
   position: absolute;
   bottom: 0;
   left: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   .btn {
     padding: 4px 14px;
   }
@@ -3051,19 +3437,22 @@ header {
     font-size: 13px;
   }
 }
+
 .travelvisit {
   width: 100%;
   padding: 10px;
   position: absolute;
   left: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
+
 .travelvisit-img {
   position: absolute;
   top: 1px;
   right: 30px;
 }
+
 .visit-slider {
   padding: 0 10px;
   margin-top: -10px;
@@ -3072,6 +3461,7 @@ header {
     background-color: #fff;
   }
 }
+
 .postslider-imgholder {
   height: 120px;
   position: relative;
@@ -3083,6 +3473,7 @@ header {
     font-size: 12px;
   }
 }
+
 // visit-post end
 // visiting
 .visiting-post.local-visit {
@@ -3098,6 +3489,7 @@ header {
     border-bottom: 1px solid $brand-dark-blue;
   }
 }
+
 .visiting-post.travel-visit {
   .if-blue {
     display: none;
@@ -3120,6 +3512,7 @@ header {
     color: #fff;
   }
 }
+
 // visiting
 // post profile pic end
 // activity end
@@ -3128,6 +3521,7 @@ header {
   position: relative;
   z-index: 3;
 }
+
 .journey-info-strip {
   padding: 30px 30px 10px;
   margin-top: -20px;
@@ -3167,16 +3561,17 @@ header {
     }
   }
 }
+
 .edit-journey-dropdown {
   width: 240px;
   padding: 20px 25px;
-  border: 2px solid rgba(255,255,255,0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   position: absolute;
   top: 50px;
   right: -20px;
-  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.60), inset 0 0 250px 0 rgba(0, 113, 184,0.15);
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.60), inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
   background-color: #daeafa;
   @extend .avenir-roman;
   &:after,
@@ -3212,14 +3607,17 @@ header {
     }
   }
 }
+
 .own-journey {
   margin-right: 35px;
 }
+
 .profile-info h4 {
   margin: 0 0 0 15px;
   display: inline-block;
   vertical-align: middle;
 }
+
 .user-img-ongo {
   width: 35px;
   height: 37px;
@@ -3230,6 +3628,7 @@ header {
   vertical-align: middle;
   overflow: hidden;
 }
+
 .edit-journey,
 .following {
   margin-top: 7px;
@@ -3237,6 +3636,7 @@ header {
   font-size: 16px;
   font-family: "AvenirLTStd-Heavy";
 }
+
 .share-trip-journey {
   margin-right: 20px;
   display: inline-block;
@@ -3254,6 +3654,7 @@ header {
     line-height: 100%;
   }
 }
+
 .share-dropdown {
   width: 275px;
   padding: 12px 16px;
@@ -3318,12 +3719,14 @@ header {
     color: $brand-pink;
   }
 }
+
 // card
 .ongo-card-holder {
   width: 550px;
   margin-left: 30px;
   position: relative;
 }
+
 .ongo-journey-card {
   margin-bottom: 30px;
   border-radius: 8px;
@@ -3334,30 +3737,36 @@ header {
     padding: 12px 0 15px;
   }
 }
+
 .only-post {
   .user-social-item {
     border-top: 1px solid #bababa;
   }
 }
+
 // card header
 .ongo-card-header {
   padding: 10px;
 }
+
 .card-user-imgholder {
   width: 8%;
   display: inline-block;
   vertical-align: top;
 }
+
 .card-journeypost {
   width: 83%;
   display: inline-block;
   vertical-align: top;
 }
+
 .card-iconholder {
   width: 7%;
   display: inline-block;
   vertical-align: top;
 }
+
 .journey-post {
   .post {
     color: #6d6e71;
@@ -3367,10 +3776,12 @@ header {
     }
   }
 }
+
 .journey-date {
   color: #6d6e71;
   font-size: 12px;
 }
+
 .options {
   position: relative;
   .other-trip,
@@ -3382,7 +3793,7 @@ header {
     padding: 20px 25px;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    box-shadow: -1px 1px 10px 0 rgba(0, 0, 0, 0.35),inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
+    box-shadow: -1px 1px 10px 0 rgba(0, 0, 0, 0.35), inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
     background-color: #f6fafc;
     z-index: 10;
     &:after,
@@ -3424,6 +3835,7 @@ header {
     }
   }
 }
+
 // share single trip
 .share-single-trip {
   width: 300px;
@@ -3431,7 +3843,7 @@ header {
   border-bottom: 2px solid #bababa;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  box-shadow: -1px 1px 10px 0 rgba(0, 0, 0, 0.35),inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
+  box-shadow: -1px 1px 10px 0 rgba(0, 0, 0, 0.35), inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
   position: absolute;
   bottom: 37px;
   left: -6px;
@@ -3490,6 +3902,7 @@ header {
     color: $brand-pink;
   }
 }
+
 // share single trip cancel
 // card header end
 .card-imgholder {
@@ -3506,8 +3919,9 @@ header {
     &:after {
       content: '';
       @include square(100%);
-      @include position(absolute, 0 0 0 0);
-      background-color: rgba(0,0,0,0.5);
+      @include position(absolute,
+      0 0 0 0);
+      background-color: rgba(0, 0, 0, 0.5);
     }
   }
   .card-img {
@@ -3515,6 +3929,7 @@ header {
     @extend .get-center;
   }
 }
+
 .related-imgslider {
   padding: 10px 23px 10px 10px;
   .flex-direction-nav a {
@@ -3560,6 +3975,7 @@ header {
     }
   }
 }
+
 .related-ongo-slider {
   width: 99px;
   height: 99px;
@@ -3568,6 +3984,7 @@ header {
     min-height: 100%;
   }
 }
+
 .ongo-card-main {
   min-height: 10px;
   .relate-pic {
@@ -3579,18 +3996,21 @@ header {
     }
   }
 }
+
 .video-ongo-journey {
   position: relative;
   &:after {
     content: '';
     @include square(100%);
-    @include position(absolute,0 0 0 0);
-    background-color: rgba(0,0,0,0.4);
+    @include position(absolute,
+    0 0 0 0);
+    background-color: rgba(0, 0, 0, 0.4);
   }
   .youtube-icon {
     z-index: 1;
   }
 }
+
 // join card
 .ongo-journey-join {
   width: 350px;
@@ -3616,6 +4036,7 @@ header {
     box-shadow: none;
   }
 }
+
 // join card end
 // left card
 .ongo-journey-left {
@@ -3639,6 +4060,7 @@ header {
     bottom: -5px;
   }
 }
+
 // left card end
 // change journey card
 .ongo-journey-change {
@@ -3658,6 +4080,7 @@ header {
     margin: 15px 0;
   }
 }
+
 // change journey card end
 // ongo-journey-end
 .ongo-journey-end {
@@ -3681,6 +4104,7 @@ header {
     }
   }
 }
+
 // ongo-journey-end
 // started-journey-card
 .started-journey-card {
@@ -3780,6 +4204,7 @@ header {
     }
   }
 }
+
 .dot-line {
   position: absolute;
   width: 1px;
@@ -3790,10 +4215,12 @@ header {
   @include transform(translateX(-50%));
   z-index: 1;
 }
+
 .card-relate-holder {
   position: relative;
   z-index: 2;
 }
+
 // started-journey-card end
 // card end
 // pop up journey used
@@ -3801,6 +4228,7 @@ header {
 .journey-name-heading {
   padding: 15px 0;
 }
+
 .journey-content-main {
   .popup-journey-img {
     width: 100%;
@@ -3828,8 +4256,9 @@ header {
   .put-journey-name {
     width: 100%;
     padding: 20px;
-    @include position(absolute, null null 0 0);
-    background-color: rgba(0,0,0,0.6);
+    @include position(absolute,
+    null null 0 0);
+    background-color: rgba(0, 0, 0, 0.6);
   }
   input {
     background-color: transparent;
@@ -3843,11 +4272,13 @@ header {
     }
   }
 }
+
 .cover-modal {
   .modal-dialog {
     width: 1100px;
   }
 }
+
 .cover-gallery-grid {
   padding: 10px;
   .choose-cover-pic {
@@ -3861,6 +4292,7 @@ header {
     }
   }
 }
+
 .crop-cover-container {
   // width: 700px;
   // margin: 0 auto;
@@ -3870,6 +4302,7 @@ header {
     vertical-align: bottom;
   }
 }
+
 .cropped-save {
   margin: 0 0 25px 40px;
   display: inline-block;
@@ -3883,6 +4316,7 @@ header {
     margin-left: 35px;
   }
 }
+
 // date and time
 .date-holder {
   display: inline-block;
@@ -3914,12 +4348,14 @@ header {
     text-align: center;
   }
 }
+
 .date-time-heading {
   p {
     color: #fff;
     font-size: 18px;
   }
 }
+
 .date-time-picker {
   .uib-daypicker,
   .uib-monthpicker,
@@ -3957,6 +4393,7 @@ header {
     }
   }
 }
+
 // date and time end
 // check in
 .checkin-input-holder {
@@ -3983,7 +4420,8 @@ header {
     border-bottom: 1px solid #fff;
     @include placeholder {
       color: #fff;
-    };
+    }
+    ;
     &:focus {
       border-color: #fff;
     }
@@ -4030,6 +4468,7 @@ header {
     }
   }
 }
+
 // view uploaded file
 .uploaded-imgholder {
   @include square(179px);
@@ -4039,8 +4478,9 @@ header {
   overflow: hidden;
   &:before {
     content: '';
-    @include position(absolute, 0 0 0 0);
-    background-color: rgba(0,0,0,0.5);
+    @include position(absolute,
+    0 0 0 0);
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 2;
     display: none;
   }
@@ -4049,7 +4489,8 @@ header {
       display: block;
     }
     .scale-onhover {
-      @include transform(translate(-50%, -50%)scale(1.2));
+      @include transform(translate(-50%,
+      -50%)scale(1.2));
       @include transition(all 300ms linear);
     }
     .onhover-uploaded-img {
@@ -4059,9 +4500,11 @@ header {
     }
   }
 }
+
 .scale-onhover {
   @include transition(all 300ms linear);
 }
+
 .onhover-uploaded-img {
   @include square(100%);
   position: absolute;
@@ -4069,10 +4512,12 @@ header {
   display: none;
   @include transition(all 300ms linear);
   .remove-img {
-    @include position(absolute, 5px 5px null null);
+    @include position(absolute,
+    5px 5px null null);
     font-size: 18px;
   }
 }
+
 .tag-friend {
   .input-tag-friend {
     input {
@@ -4093,6 +4538,7 @@ header {
     left: 10px;
   }
 }
+
 .tagfriend-list {
   width: 100%;
   position: absolute;
@@ -4109,6 +4555,7 @@ header {
     }
   }
 }
+
 .friend-listholder {
   .friend-imgholder {
     width: 34px;
@@ -4120,22 +4567,23 @@ header {
     vertical-align: middle;
   }
 }
+
 .select-friend {
   [type="checkbox"]:checked,
   [type="checkbox"]:not(:checked) {
     position: absolute;
     left: -9999px;
   }
-  [type="checkbox"]:checked + label,
-  [type="checkbox"]:not(:checked) + label {
+  [type="checkbox"]:checked+label,
+  [type="checkbox"]:not(:checked)+label {
     width: 100%;
     position: relative;
     margin: 0;
     cursor: pointer;
   }
   /* radio aspect */
-  [type="checkbox"]:checked + label:before,
-  [type="checkbox"]:not(:checked) + label:before {
+  [type="checkbox"]:checked+label:before,
+  [type="checkbox"]:not(:checked)+label:before {
     content: '';
     @include square(20px);
     position: absolute;
@@ -4146,8 +4594,8 @@ header {
     @include transition(all 300ms linear);
   }
   /* checked mark aspect */
-  [type="checkbox"]:checked + label:after,
-  [type="checkbox"]:not(:checked) + label:after {
+  [type="checkbox"]:checked+label:after,
+  [type="checkbox"]:not(:checked)+label:after {
     content: '\f00c';
     font: normal normal normal 14px/1 FontAwesome;
     position: absolute;
@@ -4159,16 +4607,17 @@ header {
     @include transition(all 300ms linear);
   }
   /* checked mark aspect changes */
-  [type="checkbox"]:not(:checked) + label:after {
+  [type="checkbox"]:not(:checked)+label:after {
     opacity: 1;
     transform: scale(1);
   }
-  [type="checkbox"]:checked + label:before {
+  [type="checkbox"]:checked+label:before {
     background-color: $brand-blue;
     color: #fff;
     @include transition(all 300ms linear);
   }
 }
+
 .upload-checkin-sec {
   .upload-section {
     padding: 20px 0;
@@ -4180,6 +4629,7 @@ header {
     padding: 6px 30px;
   }
 }
+
 .uploaded-photo-imgholder {
   height: 350px;
   margin-bottom: 10px;
@@ -4192,6 +4642,7 @@ header {
     bottom: 10px;
   }
 }
+
 .tagged-delete-list {
   margin-top: 20px;
   a {
@@ -4209,7 +4660,8 @@ header {
     }
   }
   .img-friend {
-    @include size(25px, 27px);
+    @include size(25px,
+    27px);
     border-radius: 10px;
     border: 1px solid #fff;
     display: inline-block;
@@ -4220,14 +4672,16 @@ header {
     }
   }
   .hover-tag-btn {
-    @include position(absolute, 0 0 0 0);
-    background-color: rgba(0,0,0,0.6);
+    @include position(absolute,
+    0 0 0 0);
+    background-color: rgba(0, 0, 0, 0.6);
     display: none;
     i {
       font-size: 16px;
     }
   }
 }
+
 // check in end
 // pop up journey used end
 // on go journey end
@@ -4245,6 +4699,7 @@ header {
     border-right: 2px solid #fff;
   }
 }
+
 .trip-summary-detail {
   .heading {
     h4 {
@@ -4253,6 +4708,7 @@ header {
     }
   }
 }
+
 .trip-country,
 .trip-days-count,
 .trip-type {
@@ -4263,6 +4719,7 @@ header {
     vertical-align: top;
   }
 }
+
 .trip-type {
   border-top: 1px solid #dbdbdb;
   border-bottom: 1px solid #dbdbdb;
@@ -4273,6 +4730,7 @@ header {
     }
   }
 }
+
 .trip-country {
   img {
     height: 25px;
@@ -4282,16 +4740,19 @@ header {
     display: inline-block;
   }
 }
+
 .trip-summary-detail {
   padding: 20px;
   margin-top: -10px;
 }
+
 .trip-visited-detail {
   margin-top: 40px;
   img {
     opacity: 1;
   }
 }
+
 .trip-day-detail {
   height: 100px;
   border: 1px solid #dbdbdb;
@@ -4349,25 +4810,31 @@ header {
     text-decoration: underline;
   }
 }
+
 // trip summary end
 // itinerary
 .itinerary-holder {
   padding: 0 40px 20px;
 }
+
 .itinerary-imgholder {
   margin-bottom: 10px;
   &:before {
     content: '';
-    @include position(absolute,0 0 0 0);
-    background-color: rgba(0,0,0,0.6);
+    @include position(absolute,
+    0 0 0 0);
+    background-color: rgba(0, 0, 0, 0.6);
   }
 }
+
 .itinerary-imgholder.itinerary-detailed {
   margin-right: 5px;
 }
+
 .itinerary-imgholder.itinerary-quick {
   margin-left: 5px;
 }
+
 .itinerary-detail {
   h3 {
     margin: 0;
@@ -4378,20 +4845,24 @@ header {
     font-size: 16px;
   }
 }
+
 .itinerary-detail-first {
   p {
     font-size: 18px;
   }
 }
+
 // itinerary end
 // quick itinerary detail
 .fill-detail-itinerary,
 .fill-quick-itinerary {
   margin: 30px 0;
 }
+
 .fill-quick-itinerary .itinerary-country-visited .itinerary-inputholder {
   margin-bottom: 15px;
 }
+
 .itinerary-inputholder {
   position: relative;
   input {
@@ -4417,12 +4888,14 @@ header {
     right: 0;
   }
 }
+
 .fill-itinerary-detail,
 .quick-itinerary-detail {
   padding: 30px 60px;
   border: 1px solid $brand-blue;
   border-radius: 6px;
 }
+
 .itinerary-fill-info {
   label {
     font-size: 15px;
@@ -4439,13 +4912,13 @@ header {
   .itinerary-year {
     display: inline-block;
     margin-right: 22px;
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 4px;
     }
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: $brand-lighter-grey;
     }
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       background-color: $brand-pink;
     }
   }
@@ -4483,6 +4956,7 @@ header {
     left: 42px;
   }
 }
+
 .fill-itinerary-type {
   margin: 30px 0;
   .select-itinerary-type {
@@ -4512,6 +4986,7 @@ header {
     @include transition(all 300ms linear);
   }
 }
+
 .itinerary-country-visited {
   .add-country {
     margin: 25px 0;
@@ -4525,6 +5000,7 @@ header {
     }
   }
 }
+
 .trip-descp-itinerary {
   label[for="descp"] {
     margin-bottom: 10px;
@@ -4557,6 +5033,7 @@ header {
     background-color: $brand-lighter-grey;
   }
 }
+
 .upload-trip-photo-sec {
   margin: 30px 0 10px;
   label {
@@ -4571,11 +5048,13 @@ header {
     border-radius: 6px;
   }
 }
+
 // quick itinerary detail end
 // detail itinerary detail
 .fill-detail-itinerary {
   padding-right: 10%;
 }
+
 .fill-itinerary-detail {
   .itinerary-duration,
   .itinerary-from,
@@ -4601,12 +5080,15 @@ header {
     }
   }
 }
+
 .detail-itinerary-page {
   padding: 0 20px;
 }
+
 .itinerary-country-detail {
   @extend .itinerary-fill-info;
 }
+
 .accordion-trip-detail {
   margin: 50px 0;
   .panel-default {
@@ -4617,8 +5099,8 @@ header {
   .panel-body {
     padding: 15px 20px 25px;
   }
-  .panel-group .panel-heading + .panel-collapse > .list-group,
-  .panel-group .panel-heading + .panel-collapse > .panel-body {
+  .panel-group .panel-heading+.panel-collapse>.list-group,
+  .panel-group .panel-heading+.panel-collapse>.panel-body {
     border-top: 1px solid transparent;
   }
   .panel-heading {
@@ -4644,6 +5126,7 @@ header {
     font-size: 18px;
   }
 }
+
 .trip-heading-accordion {
   margin-bottom: 15px;
   .trip-country-name {
@@ -4680,6 +5163,7 @@ header {
     }
   }
 }
+
 .trip-info-container {
   margin-bottom: 25px;
   li {
@@ -4725,9 +5209,11 @@ header {
     display: inline-block;
   }
 }
+
 .listed-button {
   margin: 10px 10px 0;
 }
+
 // trip budget
 .trip-budget {
   label {
@@ -4748,7 +5234,8 @@ header {
       width: 170px;
       @include placeholder {
         font-size: 16px;
-      };
+      }
+      ;
     }
   }
   .currency-amount {
@@ -4769,6 +5256,7 @@ header {
     margin-top: 25px;
   }
 }
+
 // trip budget end
 // trip status right side
 .trip-itinerary-status {
@@ -4882,6 +5370,7 @@ header {
     }
   }
 }
+
 // trip status right side end
 // detail itinerary detail end
 // editor itinerary
@@ -4928,8 +5417,11 @@ header {
   .accordion-holder {
     padding: 20px 0;
   }
-  .trip-status-main { right: 15px; }
+  .trip-status-main {
+    right: 15px;
+  }
 }
+
 .listing-accordion {
   .panel-default {
     position: relative;
@@ -4958,7 +5450,7 @@ header {
     left: 0;
     bottom: 0;
     position: absolute;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0, 0, 0, 0.6);
   }
   .panel-open .panel-heading {
     height: 300px;
@@ -5024,12 +5516,16 @@ header {
     @include transition(all 300ms linear);
   }
   .close-editor-gallery {
-     bottom: -500px;
-    .btn-close { display: none; }
+    bottom: -500px;
+    .btn-close {
+      display: none;
+    }
   }
   .view-editor-gallery {
     bottom: -2px;
-    .btn-view { display: none; }
+    .btn-view {
+      display: none;
+    }
   }
   .photo-button-holder {
     padding: 0 30px;
@@ -5067,13 +5563,13 @@ header {
     position: relative;
     z-index: 2;
     background-color: #fff;
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 6px;
     }
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: $brand-light-grey;
     }
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       background-color: $brand-dark-pink;
     }
   }
@@ -5092,10 +5588,13 @@ header {
     }
   }
 }
+
 .overlay-itinerary-bg {
-  @include position(absolute, 0);
-  background-color: rgba(0,0,0,0.5);
+  @include position(absolute,
+  0);
+  background-color: rgba(0, 0, 0, 0.5);
 }
+
 // editor itinerary end
 // user itinerary
 .user-itinerary-page {
@@ -5111,7 +5610,8 @@ header {
     position: absolute;
     top: 30%;
     left: 50%;
-    @include transform(translate(-50%,-30%));
+    @include transform(translate(-50%,
+    -30%));
   }
   .user-tag {
     .user-imgholder {
@@ -5168,8 +5668,11 @@ header {
       font-size: 25px;
     }
   }
-  .accordion-holder { padding: 30px 0; }
+  .accordion-holder {
+    padding: 30px 0;
+  }
 }
+
 .trip-pic-view {
   width: 1000px;
   padding: 20px;
@@ -5203,16 +5706,17 @@ header {
       max-height: 100%;
     }
   }
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 6px;
   }
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: $brand-lighter-grey;
   }
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-dark-pink;
   }
 }
+
 .user-button-holder {
   padding: 0px 20px;
   position: absolute;
@@ -5235,6 +5739,7 @@ header {
     z-index: -1;
   }
 }
+
 .photos {
   width: 450px;
   border-top-left-radius: 8px;
@@ -5243,23 +5748,30 @@ header {
   display: block;
   text-align: center;
 }
+
 .close-gallery {
   left: -972px;
   @include transition(all 300ms linear);
   .close-button {
     display: none;
   }
-  .photo-button { display: block; }
+  .photo-button {
+    display: block;
+  }
 }
+
 .open-gallery {
   left: 50%;
   @include transition(all 300ms linear);
   @include transform(translateX(-50%));
-  .close-button { display: block; }
+  .close-button {
+    display: block;
+  }
   .photo-button {
     display: none;
   }
 }
+
 .view-quick-itinerary {
   border: 1px solid $brand-dark-blue;
   border-radius: 6px;
@@ -5280,7 +5792,7 @@ header {
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0, 0, 0, 0.6);
     p {
       font-size: 16px;
     }
@@ -5289,12 +5801,14 @@ header {
     }
   }
 }
+
 .view-itinerary-descp {
   padding: 25px;
   .view-quick-descp {
     color: #787878;
   }
 }
+
 .itinerary-type-head {
   position: absolute;
   top: 0;
@@ -5309,15 +5823,21 @@ header {
     @extend .avenir-roman;
   }
 }
+
 // user itinerary end
 // user detail itinerary
 .user-detailitinerary-page {
-  .trip-status-main { right: 15px; }
+  .trip-status-main {
+    right: 15px;
+  }
   .journey-start-end {
     margin: 12px 0px;
-    p { font-size: 15px; }
+    p {
+      font-size: 15px;
+    }
   }
 }
+
 .journey-travelled-with {
   margin-left: 15px;
   display: inline-block;
@@ -5340,13 +5860,16 @@ header {
     overflow: hidden;
     text-align: center;
     color: #fff;
-    img { min-height: 100%; }
+    img {
+      min-height: 100%;
+    }
   }
   .traveller-name {
     margin-top: 3px;
     font-size: 13px;
   }
 }
+
 // user detail itinerary end
 // agent itinerary
 .agent-itinerary-page {
@@ -5364,7 +5887,8 @@ header {
     position: absolute;
     top: 30%;
     left: 50%;
-    @include transform(translate(-50%,-30%));
+    @include transform(translate(-50%,
+    -30%));
   }
   .agent-imgholder {
     width: 150px;
@@ -5377,15 +5901,20 @@ header {
       padding: 0 8px;
     }
   }
-  .journey-start-end p { font-size: 15px; }
+  .journey-start-end p {
+    font-size: 15px;
+  }
   // main section
   .accordion-holder {
     padding: 20px 0;
   }
-  .trip-status-main { right: 15px; }
+  .trip-status-main {
+    right: 15px;
+  }
   // main section end
   // side section of agent
-  .connect-agent, .itinerary-photo-btn {
+  .connect-agent,
+  .itinerary-photo-btn {
     display: inline-block;
     .photos {
       width: 250px;
@@ -5398,83 +5927,93 @@ header {
     @include transform(translateY(-53%) rotate(90deg));
   }
 }
-  // side section of agent end
-  .connect-agentbox-holder {
-    width: 450px;
+
+// side section of agent end
+.connect-agentbox-holder {
+  width: 450px;
+  position: absolute;
+  top: 107px;
+  z-index: 3;
+  @include transition(all 300ms linear);
+  input {
+    padding: 6px 12px 6px 26px;
+  }
+  .agent-input-icon {
     position: absolute;
-    top: 107px;
-    z-index: 3;
-    @include transition(all 300ms linear);
-    input {
-      padding: 6px 12px 6px 26px;
-    }
-    .agent-input-icon {
-      position: absolute;
-      bottom: 7px;
-      left: 8px;
-    }
-    .contact-tag {
-      padding: 10px 0;
-      border-top: 1px solid #ccc;
-      border-bottom: 1px solid #ccc;
-      font-size: 15px;
-    }
-    .agentbox-detail {
-      padding: 25px;
-      position: relative;
-      z-index: 2;
-      background-color: #fff;
-    }
-    .button-connect-box {
-      position: absolute;
-      top: 110px;
-      right: -145px;
-      z-index: 1;
-      @include transform(rotate(90deg));
-      &:before {
-        content: '';
-        width: 98%;
-        height: 20px;
-        position: absolute;
-        bottom: 0;
-        left: 5px;
-        background-color: #fff;
-        z-index: -1;
-      }
-      a {
-        width: 220px;
-        padding: 15px 0;
-        margin: 0px 15px;
-      }
-    }
+    bottom: 7px;
+    left: 8px;
   }
-  .agentbox-in {
-    left: -520px;
+  .contact-tag {
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    font-size: 15px;
   }
-  .agentbox-out {
-    left: -5px;
-    z-index: 8;
+  .agentbox-detail {
+    padding: 25px;
+    position: relative;
+    z-index: 2;
+    background-color: #fff;
   }
-  .backdrop-agent {
+  .button-connect-box {
+    position: absolute;
+    top: 110px;
+    right: -145px;
+    z-index: 1;
+    @include transform(rotate(90deg));
     &:before {
       content: '';
-      @include square(100%);
-      @include position(fixed, 0);
-      background-color: rgba(0,0,0,0.6);
-      z-index: 7;
+      width: 98%;
+      height: 20px;
+      position: absolute;
+      bottom: 0;
+      left: 5px;
+      background-color: #fff;
+      z-index: -1;
     }
-    .close-gallery {
-      left: -1025px;
-      @include transition(all 300ms linear);
+    a {
+      width: 220px;
+      padding: 15px 0;
+      margin: 0px 15px;
     }
   }
+}
+
+.agentbox-in {
+  left: -520px;
+}
+
+.agentbox-out {
+  left: -5px;
+  z-index: 8;
+}
+
+.backdrop-agent {
+  &:before {
+    content: '';
+    @include square(100%);
+    @include position(fixed,
+    0);
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 7;
+  }
+  .close-gallery {
+    left: -1025px;
+    @include transition(all 300ms linear);
+  }
+}
+
 // agent itinerary end
 // itinerary comment like and share
-.share-comment-main  {
+.share-comment-main {
   .task-holder {
-    .like-button-icon { font-size: 22px; }
+    .like-button-icon {
+      font-size: 22px;
+    }
     li {
-      &:first-child { padding: 0 15px 0 5px; }
+      &:first-child {
+        padding: 0 15px 0 5px;
+      }
       padding: 0px 15px;
       vertical-align: top;
     }
@@ -5493,7 +6032,8 @@ header {
   .like-review-holder {
     margin-top: 7px;
   }
-  .like-holder, .review-holder {
+  .like-holder,
+  .review-holder {
     margin-right: 30px;
     display: inline-block;
   }
@@ -5504,7 +6044,9 @@ header {
     border-radius: 13px;
     box-shadow: 0px 2px 3px #ccc;
     overflow: hidden;
-    img { min-height: 100%; }
+    img {
+      min-height: 100%;
+    }
   }
   .comment-list-holder {
     padding: 15px 0px 0px;
@@ -5520,7 +6062,9 @@ header {
     display: inline-block;
     vertical-align: top;
   }
-  .write-comment-text { margin-bottom: 10px; }
+  .write-comment-text {
+    margin-bottom: 10px;
+  }
   .comment-ur-text {
     width: 95%;
     margin-left: -4px;
@@ -5542,7 +6086,9 @@ header {
     font-size: 13px;
   }
   .share-social-holder {
-    .list-inline > li:last-child { padding-right: 0; }
+    .list-inline>li:last-child {
+      padding-right: 0;
+    }
   }
 }
 
@@ -5559,7 +6105,9 @@ header {
       @include filter(blur(4px));
       height: 200px;
       overflow: hidden;
-      img { width: 100%; }
+      img {
+        width: 100%;
+      }
     }
     .other-profile-detail {
       width: 100%;
@@ -5578,11 +6126,15 @@ header {
     margin: -20px auto 0;
     overflow: hidden;
   }
-  .name-follower { margin: 5px 0; }
-  .follow-detail { font-size: 16px; }
+  .name-follower {
+    margin: 5px 0;
+  }
+  .follow-detail {
+    font-size: 16px;
+  }
 }
-// other itineraries main of agent, user and editor end
 
+// other itineraries main of agent, user and editor end
 @import "sohan.scss";
 @import "fancybox-override";
 #map {
@@ -5590,8 +6142,10 @@ header {
   height: 100%;
   img {
     opacity: 1;
-  };
+  }
+  ;
 }
+
 // .get-map-height {
 //   height: 500px;
 // }

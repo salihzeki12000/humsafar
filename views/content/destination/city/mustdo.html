@@ -2,20 +2,49 @@
   <div class="bg-white pt20 min-hght">
     <div class="destination-featured plr30">
       <div class="row">
-       <div class="col-md-6 col-sm-6">
-        <div class="img-holder card relate {{cardClass}}">
-          <div class="pop-hover-css front" ng-click="openCountry();">
-            <img src="img/destination/taj-featured.jpg" alt="travel-libro" class="full-width">
-            <div class="title-head-left color-white">
-              Taj Mahal
-            </div>
+        <div class="col-md-6 col-sm-6">
+          <div class="img-holder card relate {{cardClass}}">
+            <div class="pop-hover-css front" ng-click="openCountry();">
+              <img src="img/destination/taj-featured.jpg" alt="travel-libro" class="full-width">
+              <div class="title-head-left color-white">
+                Taj Mahal
+              </div>
 
+            </div>
+            <div class="read-more right-bottom filpup">
+              <a class="color-white" ng-click="flip();">Read</a>
+            </div>
+            <div class="back relate">
+              <!-- <div class="img-holder relate">-->
+              <img src="img/destination/taj-featured.jpg" alt="travel-libro" class="full-width">
+              <div class="flipped-cont">
+                <p>A symbol of an eternal love story etched out in the world’s most marvellous structures in the world, the Taj Mahal epitomises one of the greatest romances in the history of mankind. Designated as a UNESCO World Heritage Site and one of
+                  the Seven Wonders of the World, this ‘tear-drop on the cheek of time’, as Rabindranath Tagore described it, is regarded as the best example of Mughal architecture and the country’s rich history. Marvel at the great marble monument ornamented
+                  with 28 types of precious and semi-precious stones for the inlay work. With its four minarets and the red sandstone mosque, this fascinating monument is a sight to behold.</p>
+              </div>
+              <div class="read-more right-bottom flipdown">
+                <a class="color-white" ng-click="flip();">Close</a>
+              </div>
+              <!-- </div> -->
+            </div>
           </div>
-          <div class="read-more right-bottom filpup">
-            <a class="color-white" ng-click="flip();">Read</a>
+
+        </div>
+        <!--flip-->
+        <!--<div class="flip-card-holder img-holder card relate {{cardClass}}">
+          <div class="flipper">
+            <div class="flip-front">
+              div class="pop-hover-css front" ng-click="openCountry();">
+              <img src="img/destination/taj-featured.jpg" alt="travel-libro" class="full-width">
+              <div class="title-head-left color-white">
+                Taj Mahal
+              </div>
+              <div class="read-more right-bottom filpup">
+                <a class="color-white" ng-click="flip();">Read</a>
+              </div>
+            </div>
           </div>
-          <div class="back relate">
-            <!-- <div class="img-holder relate">-->
+          <div class="flip-back">
             <img src="img/destination/taj-featured.jpg" alt="travel-libro" class="full-width">
             <div class="flipped-cont">
               <p>A symbol of an eternal love story etched out in the world’s most marvellous structures in the world, the Taj Mahal epitomises one of the greatest romances in the history of mankind. Designated as a UNESCO World Heritage Site and one of the
@@ -25,12 +54,10 @@
             <div class="read-more right-bottom flipdown">
               <a class="color-white" ng-click="flip();">Close</a>
             </div>
-            <!-- </div> -->
           </div>
-        </div>
-
-      </div>
+        </div>-->
       </div>
     </div>
   </div>
+</div>
 </div>

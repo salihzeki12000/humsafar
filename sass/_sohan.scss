@@ -79,8 +79,8 @@ a.color-white {
 .destination {
   .bg-destination-cc-img {
     background: url('../img/destination/info.jpg') no-repeat;
-     z-index: 3;
-     position: relative;
+    z-index: 3;
+    position: relative;
   }
   .bg-destination {
     background: url('../img/destination/bg-destination.jpg') no-repeat;
@@ -239,7 +239,7 @@ a.color-white {
 .destination-nav {
   background: #ebebeb;
   padding: 10px 0 0;
-  position:relative;
+  position: relative;
   z-index: 3;
   ul {
     li {
@@ -308,10 +308,10 @@ a.color-white {
     @include perspective(800px);
     &.card {
       position: absolute;
-       @include transform-style(preserve-3d);
+      @include transform-style(preserve-3d);
       @include transition(all ease 300ms);
       @include backface-visibility(hidden);
-       @include transform-origin(50% 50%);
+      @include transform-origin(50% 50%);
       .flipdown {
         display: none;
       }
@@ -335,7 +335,6 @@ a.color-white {
           @include transform(rotateY( 180deg));
         }
       }
-
       &.flipped {
         // @include transform(rotateY( 180deg));
         .back {
@@ -364,7 +363,14 @@ a.color-white {
       top: 0;
       left: 0;
       padding: 8px 15px;
-      @include background(linear-gradient(rgba(0,0,0,0.80), rgba(0,0,0,0)));
+      @include background(linear-gradient(rgba(0,
+      0,
+      0,
+      0.80),
+      rgba(0,
+      0,
+      0,
+      0)));
       width: 100%;
       @extend .avenir-heavy;
       border-radius: 5px;
@@ -404,7 +410,14 @@ a.color-white {
       bottom: 0;
       left: 0;
       padding: 8px 15px;
-      @include background(linear-gradient(rgba(0,0,0,0), rgba(0,0,0,90)));
+      @include background(linear-gradient(rgba(0,
+      0,
+      0,
+      0),
+      rgba(0,
+      0,
+      0,
+      90)));
       width: 100%;
       @extend .avenir-roman;
       border-radius: 5px;
@@ -416,9 +429,11 @@ a.color-white {
     }
   }
 }
-.bg-grey{
+
+.bg-grey {
   background: #ebebeb;
 }
+
 .plr30 {
   padding: 0 30px;
 }
@@ -430,7 +445,8 @@ a.color-white {
   margin: 0 auto;
   left: 50%;
   cursor: pointer;
-  @include transform(translate(-50%,-0%));
+  @include transform(translate(-50%,
+  -0%));
   @extend .avenir-roman;
   @extend .text-shadow;
   font-size: 12px;
@@ -448,13 +464,16 @@ a.color-white {
     20%,
     50%,
     80% {
-      @include transform(translate(-0%,-0%));
+      @include transform(translate(-0%,
+      -0%));
     }
     40% {
-      @include transform(translate(-0%,-20%));
+      @include transform(translate(-0%,
+      -20%));
     }
     60% {
-      @include transform(translate(-0%,-10%));
+      @include transform(translate(-0%,
+      -10%));
     }
   }
 }
@@ -969,169 +988,178 @@ a.color-white {
 .width74 {
   width: 74%;
 }
-.libro-filter{
-    position: absolute;
-    width: 100%;
-    top: -300px;
-        z-index: -2;
-        @include transition (all ease 300ms);
-.select-all-made{
-  .form-control{
-        border-radius: 4px;
-        text-align: left;
-         i {
-    font-size: 20px;
-    color: #ddd;
-}
+
+.libro-filter {
+  position: absolute;
+  width: 100%;
+  top: -300px;
+  z-index: -2;
+  @include transition (all ease 300ms);
+  .select-all-made {
+    .input-tab {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      @include transform(translateX(-50%));
+      width: 90%;
+    }
+    .form-control {
+      border-radius: 4px;
+      text-align: left;
+      i {
+        font-size: 20px;
+        color: #ddd;
+      }
+    }
+    .btn-default {
+      border-color: #ebebeb;
+      color: #868686;
+      @extend .avenir-medium;
+    }
+    .text-muted {
+      @extend .avenir-medium;
+    }
+    .btn-default:hover {
+      background-color: #ffffff;
+    }
   }
-  .btn-default {
-    border-color: #ebebeb;
- @extend .avenir-medium;
-}
-.text-muted {
-     @extend .avenir-medium;
-}
-.btn-default:hover {
-    background-color: #ffffff;
-}
-}
-span.tags {
-      background: #b7b7b7;
+  span.tags {
+    background: #b7b7b7;
     color: #fff;
     padding: 5px 10px 4px;
     font-size: 12px;
     margin-left: 10px;
     border-radius: 4px;
-    span{
-          cursor: pointer;
-          padding-left: 5px;
+    span {
+      cursor: pointer;
+      padding-left: 5px;
     }
-}
-.txt-clear {
+  }
+  .txt-clear {
     padding-right: 20px;
-    a{
-    text-decoration: underline;
-     color: #424242;
-     
-}
-
-}
-.ui-select-bootstrap .ui-select-toggle > .caret{
-  display: inline-block;
+    a {
+      text-decoration: underline;
+      color: #424242;
+    }
+  }
+  .ui-select-bootstrap .ui-select-toggle>.caret {
+    display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
     font-size: inherit;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #fff;
-    &:before{
-    content: "\f107";
-    color: #000;
-    position: absolute;
-    top: -9px;
-    left: -5px;
+    &:before {
+      content: "\f107";
+      color: #000;
+      position: absolute;
+      top: -9px;
+      left: -5px;
     }
-}
-}
-
-.openfilter{
-  .filterclose{
-      top: 00px;
-        z-index: 2;
   }
 }
 
-.check-box-panel{
-         width: 90%;
-    position: absolute;
-    background: #fff;
-    padding: 10px;
-    height: 242px;
-    overflow: auto;
-  p{
-        margin: 0;
+.openfilter {
+  .filterclose {
+    top: 00px;
+    z-index: 2;
+  }
+}
+
+.check-box-panel {
+  width: 91%;
+  position: absolute;
+  background: #fff;
+  padding: 10px;
+  height: 242px;
+  overflow: auto;
+  top: 33px;
+  li {
+    margin: 5px 0 0;
     border-bottom: 1px solid #eee;
   }
-[type="checkbox"]:not(:checked),
-[type="checkbox"]:checked {
-  position: absolute;
-  left: -9999px;
-}
-[type="checkbox"]:not(:checked) + label,
-[type="checkbox"]:checked + label {
-  position: relative;
-  padding-left: 25px;
-  cursor: pointer;
-}
-
-/* checkbox aspect */
-[type="checkbox"]:not(:checked) + label:before,
-[type="checkbox"]:checked + label:before {
-  content: '';
-  position: absolute;
-  left:0; top: 2px;
-  width: 15px; height: 15px;
-  border: 1px solid #11d3cb;
-  border-radius: 3px;
-}
-/* checked mark aspect */
-[type="checkbox"]:not(:checked) + label:after,
-[type="checkbox"]:checked + label:after {
-  content: '\f00c';
-  position: absolute;
+  [type="checkbox"]:not(:checked),
+  [type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+  }
+  [type="checkbox"]:not(:checked)+label,
+  [type="checkbox"]:checked+label {
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    font-weight: normal;
+  }
+  /* checkbox aspect */
+  [type="checkbox"]:not(:checked)+label:before,
+  [type="checkbox"]:checked+label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #11d3cb;
+    border-radius: 3px;
+  }
+  /* checked mark aspect */
+  [type="checkbox"]:not(:checked)+label:after,
+  [type="checkbox"]:checked+label:after {
+    content: '\f00c';
+    position: absolute;
     top: 4px;
     left: 2px;
-  line-height: 0.8;
-  color: #11d3cb;
-  transition: all .2s;
-      display: inline-block;
+    line-height: 0.8;
+    color: #11d3cb;
+    transition: all .2s;
+    display: inline-block;
     font: normal normal normal 12px/1 FontAwesome;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-/* checked mark aspect changes */
-[type="checkbox"]:not(:checked) + label:after {
-  content: '\f00c';
-  position: absolute;
+  }
+  /* checked mark aspect changes */
+  [type="checkbox"]:not(:checked)+label:after {
+    content: '\f00c';
+    position: absolute;
     top: 4px;
     left: 2px;
-  line-height: 0.8;
-  color: #ddd ;
-  transition: all .2s;
-      display: inline-block;
+    line-height: 0.8;
+    color: #ddd;
+    transition: all .2s;
+    display: inline-block;
     font: normal normal normal 12px/1 FontAwesome;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-[type="checkbox"]:checked + label:after {
-  opacity: 1;
-  transform: scale(1);
+  }
+  [type="checkbox"]:checked+label:after {
+    opacity: 1;
+    transform: scale(1);
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-/* disabled checkbox */
-[type="checkbox"]:disabled:not(:checked) + label:before,
-[type="checkbox"]:disabled:checked + label:before {
-  box-shadow: none;
-  border-color: #11d3cb;
-}
-[type="checkbox"]:disabled:checked + label:after {
-  color: #999;
-}
-[type="checkbox"]:disabled + label {
-  color: #aaa;
-}
-/* accessibility */
-[type="checkbox"]:checked:focus + label:before,
-[type="checkbox"]:not(:checked):focus + label:before {
-  border: 1px dotted #11d3cb;
-}
-
-/* hover style just for information */
-label:hover:before {
-  border: 1px solid #11d3cb!important;
-}
+  }
+  /* disabled checkbox */
+  [type="checkbox"]:disabled:not(:checked)+label:before,
+  [type="checkbox"]:disabled:checked+label:before {
+    box-shadow: none;
+    border-color: #11d3cb;
+  }
+  [type="checkbox"]:disabled:checked+label:after {
+    color: #999;
+  }
+  [type="checkbox"]:disabled+label {
+    color: #aaa;
+  }
+  /* accessibility */
+  [type="checkbox"]:checked:focus+label:before,
+  [type="checkbox"]:not(:checked):focus+label:before {
+    border: 1px dotted #11d3cb;
+  }
+  /* hover style just for information */
+  label:hover:before {
+    border: 1px solid #11d3cb!important;
+  }
 }
