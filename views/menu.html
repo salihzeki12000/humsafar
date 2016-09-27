@@ -1,12 +1,68 @@
-<ul class="nav navbar-nav">
-  <li ng-repeat="menu in navigation" class="{{menu.classis}}">
-    <a ui-sref="{{menu.anchor}}" ng-if="menu.anchor">{{menu.name}}</a>
-    <a href="{{menu.link}}" ng-if="menu.link">{{menu.name}}</a>
-    <ul class="dropdown-menu" ng-if="menu.subnav!='';">
-      <li ng-repeat="submenu in menu.subnav">
-        <a ui-serf="{{submenu.anchor}}" ng-if="submenu.anchor">{{submenu.name}}</a>
-        <a herf="{{submenu.link}}" ng-if="submenu.link">{{submenu.name}}</a>
+<div class="accordion-custom">
+  <uib-accordion close-others="oneAtATime">
+    <uib-accordion-group>
+      <uib-accordion-heading>
+        <a class="color-white main-menu-anchor" ng-click="getnav();">
+          <i class="fa fa-close"></i>
+        </a>
+      </uib-accordion-heading>
+    </uib-accordion-group>
+    <uib-accordion-group is-open="status.open" ng-repeat="menu in navigation track by $index" class="{{menu.classis}}" is-disabled="menu.disabled">
+      <uib-accordion-heading>
+        <a ui-sref="{{menu.anchor}}" class="color-white main-menu-anchor">{{menu.name}}
+                    <i class="pull-right fa icon color-white" ng-class="{'fa-caret-up':( status.open && !menu.disabled), 'fa-caret-down': (!status.open && !menu.disabled)}"></i>
+                </a>
+      </uib-accordion-heading>
+      <ul class="nav-submenu list-unstyled">
+        <li ng-repeat="submenu in menu.subnav">
+          <a href="" ui-sref="{{submenu.anchor}}" class="color-white">{{submenu.name}}</a>
+        </li>
+      </ul>
+    </uib-accordion-group>
+  </uib-accordion>
+</div>
+
+<div class="social-icon-menu mlr20">
+  <h4>Follow Us</h4>
+  <div class="social-icons">
+    <ul class="list-unstyled list-inline color-white">
+      <li>
+        <a href="#" target="_blank" class="color-white">
+          <i class="fa fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" target="_blank" class="color-white">
+          <i class="fa fa-twitter-square" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" target="_blank" class="color-white">
+          <i class="fa fa-google-plus-square" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" target="_blank" class="color-white">
+          <i class="fa fa-pinterest-square" aria-hidden="true"></i>
+        </a>
       </li>
     </ul>
-  </li>
-</ul>
+    <ul class="list-unstyled list-inline color-white">
+      <li>
+        <a href="#" target="_blank" class="color-white">
+          <i class="fa fa-instagram"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" target="_blank" class="color-white">
+          <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" target="_blank" class="color-white">
+          <i class="fa fa-youtube-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

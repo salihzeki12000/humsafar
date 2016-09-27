@@ -31,9 +31,44 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
   $httpProvider.defaults.withCredentials = true;
   $stateProvider
     .state('home', {
-      url: "/home",
+      url: "/",
       templateUrl: "views/template.html",
       controller: 'HomeCtrl'
+    })
+    .state('forgot-password', {
+      url: "/forgot-password",
+      templateUrl: "views/template.html",
+      controller: 'ForgotPasswordCtrl'
+    })
+    .state('forgot-password-email', {
+      url: "/forgot-password-email",
+      templateUrl: "views/template.html",
+      controller: 'ForgotPasswordEmailCtrl'
+    })
+    .state('contact', {
+      url: "/contact",
+      templateUrl: "views/template.html",
+      controller: 'ContactCtrl'
+    })
+    .state('booking', {
+      url: "/booking",
+      templateUrl: "views/template.html",
+      controller: 'BookingCtrl'
+    })
+    .state('advertise', {
+      url: "/advertise",
+      templateUrl: "views/template.html",
+      controller: 'AdvertiseCtrl'
+    })
+    .state('login', {
+      url: "/login",
+      templateUrl: "views/template.html",
+      controller: 'LoginCtrl'
+    })
+    .state('mainpage', {
+      url: "/mainpage",
+      templateUrl: "views/template.html",
+      controller: 'MainPageCtrl'
     })
     .state('profile', {
       url: "/profile",
@@ -200,7 +235,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'ItineraryCtrl'
     });
-  $urlRouterProvider.otherwise("/home");
+  $urlRouterProvider.otherwise("/");
   $locationProvider.html5Mode(isproduction);
 });
 

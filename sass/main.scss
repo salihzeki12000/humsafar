@@ -23,6 +23,8 @@ $brand-grey: #b2b2b2;
 $brand-light-grey: #a0a0a0;
 $brand-lighter-grey: #e3e3e3;
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "libro-home";
+@import "animation";
 @mixin placeholder {
   $placeholders: ":-webkit-input" ":-moz" "-moz" "-ms-input";
   @each $placeholder in $placeholders {
