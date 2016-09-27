@@ -1,4 +1,4 @@
-<header class="bg-dark-blue" ng-controller="headerctrl">
+<header class="bg-dark-blue" ng-controller="headerctrl" ng-if="isLoggedIn">
   <nav class="navbar">
     <div class="container-fluid">
       <!-- <div class="navbar-header">
@@ -76,20 +76,21 @@
 
 
 
-<header class="libro-header" ng-controller="headerctrl">
-  <section class="bg-black custom-search pd20" ng-class="{'open': isopen}">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-          <form action="">
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon">
-                                    <a class="color-white fnt-22">
-                                        <i class="fa fa-search"></i>
+<header class="libro-header" ng-controller="headerctrl" ng-if="!isLoggedIn">
+  <section class="bg-black custom-search pd20 " ng-class="{ 'open': isopen} ">
+    <div class="container-fluid ">
+      <div class="row ">
+        <div class="col-md-offset-3 col-md-6 ">
+          <form action=" ">
+            <div class="form-group ">
+              <div class="input-group ">
+                <span class="input-group-addon ">
+                                    <a class="color-white fnt-22 ">
+                                        <i class="fa fa-search "></i>
                                     </a>
                                 </span>
-                <input type="text" class="form-control color-white avenir-light" id="search" aria-describedby="Search" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags">
+                <input type="text " class="form-control color-white avenir-light " id="search " aria-describedby="Search
+  " placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags ">
               </div>
             </div>
           </form>
@@ -97,39 +98,39 @@
       </div>
     </div>
   </section>
-  <div class="nav-onhead">
-    <div class="container-fluid">
-      <nav class="navbar navbar-default">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="headerp hamburger">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed {{buttonpos}}" ng-click="getnav();">
-                                    <span class="icon-bar box-shadow {{onebar}}"></span>
-                                    <span class="icon-bar box-shadow {{secondbar}}"></span>
-                                    <span class="icon-bar box-shadow {{thirdbar}}"></span>
+  <div class="nav-onhead ">
+    <div class="container-fluid ">
+      <nav class="navbar navbar-default ">
+        <div class="row ">
+          <div class="col-md-4 ">
+            <div class="headerp hamburger ">
+              <div class="navbar-header ">
+                <button type="button " class="navbar-toggle collapsed {{buttonpos}} " ng-click="getnav(); ">
+                                    <span class="icon-bar box-shadow {{onebar}} "></span>
+                                    <span class="icon-bar box-shadow {{secondbar}} "></span>
+                                    <span class="icon-bar box-shadow {{thirdbar}} "></span>
                                 </button>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="text-center">
-              <a ui-sref="home">
-                <img src="img/libro-home/logo.png" alt="TravelLibro" class="logo-size">
+          <div class="col-md-4 ">
+            <div class="text-center ">
+              <a ui-sref="home ">
+                <img src="img/libro-home/logo.png " alt="TravelLibro " class="logo-size ">
               </a>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 ">
             <div class="login-signup ">
-              <ul class="list-unstyled list-inline text-right color-white">
+              <ul class="list-unstyled list-inline text-right color-white ">
                 <li>
-                  <a ui-sref="login" class="color-white">Login</a> /
-                  <a ui-sref="login" class="color-white">Sign Up</a>
+                  <a ui-sref="login " class="color-white ">Login</a> /
+                  <a ui-sref="login " class="color-white ">Sign Up</a>
                 </li>
                 <li>|</li>
                 <li>
-                  <a class="color-white" ng-click="opensearch();">
-                    <i class="fa fa-search"></i>
+                  <a class="color-white " ng-click="opensearch(); ">
+                    <i class="fa fa-search "></i>
                   </a>
                 </li>
               </ul>
@@ -137,10 +138,10 @@
           </div>
         </div>
       </nav>
-      <div class="sidemenu menu-common {{getslide}}">
-        <div class="nav-list">
-          <div class="custscroll">
-            <div ng-include="template.menu" class="template menu"></div>
+      <div class="sidemenu menu-common {{getslide}} ">
+        <div class="nav-list ">
+          <div class="custscroll ">
+            <div ng-include="template.menu " class="template menu "></div>
           </div>
         </div>
       </div>

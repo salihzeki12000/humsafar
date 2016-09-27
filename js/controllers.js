@@ -96,11 +96,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   });
 })
 
-.controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+.controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, $state) {
     //Used to name the .html file
-
-    console.log("Testing Consoles");
-
+    $scope.isLoggedIn = "";
+    $scope.userData = $.jStorage.get("profile");
     $scope.template = TemplateService.changecontent("login");
     $scope.menutitle = NavigationService.makeactive("Login");
     TemplateService.title = $scope.menutitle;
@@ -122,12 +121,61 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       });
     };
 
+    var checktwitter = function (data, status) {
+      var repdata = {};
+      // console.log(data);
+      if (data._id) {
+        $interval.cancel(stopinterval);
+        ref.close();
+        $.jStorage.set("isLoggedIn", true);
+        $.jStorage.set("profile", data);
+        $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+        var alreadyLoggedIn = data.alreadyLoggedIn;
+
+        console.log(alreadyLoggedIn);
+        if (alreadyLoggedIn) {
+          $state.go('mylife');
+        } else {
+          $state.go('mainpage');
+        }
+
+      } else {
+
+      }
+    };
+
+    var callAtIntervaltwitter = function () {
+      NavigationService.getProfile(checktwitter, function (err) {
+        $scope.template.getProfile();
+        console.log(err);
+      });
+    };
+
+    var authenticatesuccess = function (data, status) {
+      console.log("authenticate successful");
+      $ionicLoading.hide();
+      if (data._id) {
+
+      }
+    };
+
+    $scope.socialLogin = function (loginTo) {
+      // console.log(loginTo);
+      ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
+      stopinterval = $interval(callAtIntervaltwitter, 2000);
+
+      ref.addEventListener('closed', function (event) {
+        NavigationService.getProfile(authenticatesuccess, function (err) {
+          console.log(err);
+        });
+        $interval.cancel(stopinterval);
+      });
+    };
+
   })
   .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
-
     console.log("Testing Consoles");
-
     $scope.template = TemplateService.changecontent("forgot-password");
     $scope.menutitle = NavigationService.makeactive("Login");
     TemplateService.title = $scope.menutitle;
@@ -1343,7 +1391,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       photoSlider: false,
       travelledJourney: false,
       onJourney: false,
-      getpopularPost: false,
       visitPost: false,
       getpopularPost: false,
       activitySec: true
@@ -1364,7 +1411,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       photoSlider: false,
       travelledJourney: false,
       onJourney: false,
-      getpopularPost: false,
       visitPost: false,
       getpopularPost: false,
       activitySec: true
@@ -1385,7 +1431,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       photoSlider: false,
       travelledJourney: false,
       onJourney: false,
-      getpopularPost: false,
       visitPost: false,
       getpopularPost: false,
       activitySec: true
@@ -1420,7 +1465,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       photoSlider: false,
       travelledJourney: false,
       onJourney: true,
-      getpopularPost: false,
       visitPost: false,
       getpopularPost: false,
       activitySec: true
@@ -1702,7 +1746,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       photoSlider: false,
       travelledJourney: false,
       onJourney: false,
-      getpopularPost: false,
       visitPost: false,
       getpopularPost: false,
       activitySec: true
@@ -1725,7 +1768,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       onJourney: false,
       getpopularPost: false,
       visitPost: false,
-      getpopularPost: false,
       activitySec: true
     }, {
       class: "travel-life",
@@ -1744,7 +1786,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       photoSlider: false,
       travelledJourney: false,
       onJourney: false,
-      getpopularPost: false,
       visitPost: false,
       getpopularPost: false,
       activitySec: true
@@ -1781,7 +1822,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       onJourney: true,
       getpopularPost: false,
       visitPost: false,
-      getpopularPost: false,
       activitySec: true
     }, {
       popItinerary: true,
@@ -2573,7 +2613,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     //Used to name the .html file
 
     // console.log("Testing Consoles");
-
+    $scope.userData = $.jStorage.get("profile");
+    console.log($scope.userData);
     $scope.template = TemplateService.changecontent("mylife");
     $scope.menutitle = NavigationService.makeactive("Mylife");
     TemplateService.title = $scope.menutitle;
@@ -3914,7 +3955,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     $scope.open1 = function () {
       $scope.popup1.opened = true;
-      showWeeks: false;
+      showWeeks = false;
     };
     $scope.popup1 = {
       opened: false
@@ -4512,7 +4553,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       photoSlider: false,
       travelledJourney: false,
       onJourney: false,
-      getpopularPost: false,
       visitPost: false,
       getpopularPost: false,
       activitySec: true
@@ -4535,7 +4575,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       onJourney: false,
       getpopularPost: false,
       visitPost: false,
-      getpopularPost: false,
       activitySec: true
     }, {
       class: "travel-life",
@@ -4556,7 +4595,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       onJourney: false,
       getpopularPost: false,
       visitPost: false,
-      getpopularPost: false,
       activitySec: true
     }, {
       class: "travel-life",
@@ -4591,7 +4629,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       onJourney: true,
       getpopularPost: false,
       visitPost: false,
-      getpopularPost: false,
       activitySec: true
     }, {
       class: "editor",
@@ -4619,7 +4656,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       photoSlider: false,
       travelledJourney: true,
       onJourney: false,
-      getpopularPost: false,
       visitPost: false,
       getpopularPost: false,
       activitySec: true
@@ -4655,7 +4691,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       onJourney: true,
       getpopularPost: false,
       visitPost: false,
-      getpopularPost: false,
       activitySec: true
     }, {
       class: "local-life",
@@ -4697,7 +4732,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       photoSlider: false,
       travelledJourney: true,
       onJourney: false,
-      getpopularPost: false,
       visitPost: false,
       getpopularPost: false,
       activitySec: true
@@ -4730,7 +4764,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       onJourney: false,
       getpopularPost: false,
       visitPost: false,
-      getpopularPost: false,
       activitySec: true
     }, {
       class: "local-life",
@@ -4749,7 +4782,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       photoSlider: false,
       travelledJourney: false,
       onJourney: false,
-      getpopularPost: false,
       visitPost: false,
       getpopularPost: false,
       activitySec: true
@@ -4770,7 +4802,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       photoSlider: false,
       travelledJourney: false,
       onJourney: false,
-      getpopularPost: false,
       visitPost: false,
       getpopularPost: false,
       activitySec: true
@@ -4793,7 +4824,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       onJourney: false,
       getpopularPost: false,
       visitPost: false,
-      getpopularPost: false,
       activitySec: true
     }, {
       class: "local-life",
@@ -4826,7 +4856,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       photoSlider: false,
       travelledJourney: false,
       onJourney: true,
-      getpopularPost: false,
       visitPost: false,
       getpopularPost: false,
       activitySec: true
@@ -6577,20 +6606,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $.fn.fullpage.destroy('all');
   }
 
-  // $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
-
-  // $scope.logout = function () {
-  //   NavigationService.logout(function () {
-  //       $.jStorage.flush();
-  //       $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
-  //       $state.go('home');
-  //     },
-  //     function (err) {
-  //       console.log(err);
-  //     });
-  // };
-  // $scope.data = userData;
-
+  $scope.logout = function () {
+    NavigationService.logout(function () {
+        $.jStorage.flush();
+        $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+        $state.go('home');
+      },
+      function (err) {
+        console.log(err);
+      });
+  };
+  $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+  console.log($scope.isLoggedIn);
 })
 
 .controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {
@@ -6614,4 +6641,4 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   };
 
 
-});
+})

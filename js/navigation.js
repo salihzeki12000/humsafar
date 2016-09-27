@@ -117,11 +117,9 @@ var navigationservice = angular.module('navigationservice', [])
       return $http({
         url: adminURL + "/user/profile",
         method: "POST"
-      }).success(function () {
-        $.jStorage.set("profile", data.data);
-        callback(data);
-      }).error(errCallback);
+      }).success(callback).error(errCallback);
     },
+
     logout: function (callback, errCallback) {
       return $http({
         url: adminURL + "/user/logout",
