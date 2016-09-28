@@ -290,6 +290,9 @@ a.color-white {
     padding: 0 0 10px 30px;
   }
   .head-title-all {
+    &.fliter-min-hght {
+      min-height: 74px;
+    }
     h4 {
       color: $brand-pink;
       margin: 0;
@@ -333,6 +336,9 @@ a.color-white {
           text-align: justify;
           border-radius: 5px;
           @include transform(rotateY( 180deg));
+          p {
+            @extend .avenir-roman;
+          }
         }
       }
       &.flipped {

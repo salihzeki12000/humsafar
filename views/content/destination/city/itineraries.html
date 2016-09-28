@@ -1,5 +1,5 @@
 <div class="activity-main min-hght">
-  <div class="relate" ng-class="{'openfilter': isopenfilter}">
+  <div class="relate  destin-fixednav1" ng-class="{'openfilter': isopenfilter}">
     <div class="pt20 pb10 head-title-all bg-white mb20">
       <div class="row m-clear">
         <div class="col-md-3">
@@ -15,7 +15,7 @@
     </div>
     <div class="libro-filter filterclose">
       <form>
-        <div class="pt20 pb10 head-title-all bg-white">
+        <div class="pt20 pb10 head-title-all fliter-min-hght bg-white">
           <div class="container-fluid">
             <div class="pad-btn">
               <div class="row">
@@ -126,7 +126,7 @@
                       <h4 class="font-bold color-dark-blue m-clear mb5">{{post.userName}}</h4>
                       <div class="clearfix user-more-detail">
                         <div class="pull-left">
-                          <p class="m-clear"><i class="fa fa-calendar"></i><span class="ml5 ">{{post.timestampDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span>{{post.timestampHour}}</span></p>
+                          <p class="m-clear"><i class="fa fa-calendar"></i><span class="ml5 ">{{post.timestampDate}}</span> | <i class="fa fa-clock-o mr5"></i>                            <span>{{post.timestampHour}}</span></p>
                         </div>
                         <div class="pull-right">
                           <div class="follow-or-following pull-right">
@@ -183,7 +183,8 @@
                       <!-- img post end -->
                       <!-- img post slider -->
                       <div class="imgpost-relatedslider" ng-if="post.photoSlider">
-                        <flex-slider class="carousel" flex-slide="slider in post.relatedPhoto track by $index" item-width="80" animation="slide" item-margin="5" direction-nav="false" control-nav="false" mousewheel="true">
+                        <flex-slider class="carousel" flex-slide="slider in post.relatedPhoto track by $index" item-width="80" animation="slide"
+                          item-margin="5" direction-nav="false" control-nav="false" mousewheel="true">
                           <li>
                             <div class="related-postimgholder">
                               <img ng-src="{{slider}}" alt="" class="img-responsive">
@@ -372,7 +373,7 @@
                         <span class="follow-following color-blue text-capitalize">{{post.follower}}</span>
                       </div>
                     </div>
-                    <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.timestampHour}}</span></p>
+                    <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i>                      <span>{{post.timestampHour}}</span></p>
                   </div>
                 </div>
                 <div class="onway-journey relate">
