@@ -149,6 +149,13 @@ var navigationservice = angular.module('navigationservice', [])
 
     travelCount: function (callback, errorCallback) {
       $http.post(adminURL + "/user/getOneDataWeb").success(callback).error(errorCallback);
-    }
+    },
+
+    updateWishCountry: function (formData, callback, errCallback) {
+      $http.post(adminURL + "/user/updateBucketListWeb", formData).success(callback).error(errCallback);
+    },
+
+
+
   };
 });

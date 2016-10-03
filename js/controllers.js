@@ -2744,15 +2744,76 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    // modal for country visite start
+    $scope.countryVisited = function () {
+        $uibModal.open({
+          scope: $scope,
+          animation: true,
+          templateUrl: "views/modal/country-visited.html"
+        })
+      }
+      // modal for country visited end
+
     //Integration Section Starts here
     $scope.userData = $.jStorage.get("profile");
     var travelCount = function (data, status) {
       $scope.count = data.data;
-      console.log($scope.count)
     };
-    NavigationService.travelCount(travelCount, function (err) {
-      console.log(err);
-    });
+    var reloadCount = function () {
+      NavigationService.travelCount(travelCount, function (err) {
+        console.log(err);
+      });
+    };
+    reloadCount();
+
+    $scope.updateWishCountry = function (flag, _id) {
+      if (flag == true) {
+        console.log("selected");
+        console.log(flag + "-" + _id);
+        var data = {
+          "bucketList": [_id]
+        };
+        console.log(data);
+        NavigationService.updateWishCountry(data, function (data, status) {
+          if (data.value == true) {
+            console.log(data);
+            reloadCount();
+          } else {
+            console.log("Error Updating bucketList");
+          }
+        }, function (err) {
+          console.log(err);
+        });
+
+      } else {
+        console.log("not selected");
+        console.log(flag + "-" + _id);
+        var data = {
+          "bucketList": _id,
+          delete: true
+        };
+        console.log(data);
+        NavigationService.updateWishCountry(data, function (data, status) {
+          if (data.value == true) {
+            console.log(data);
+            reloadCount();
+          } else {
+            console.log("Error Updating bucketList");
+            console.log(data);
+          }
+        }, function (err) {
+          console.log(err);
+        });
+
+      }
+
+    };
+
+    var getOneBucketList = function () {
+
+    }
+
+
     //Integration Section Ends here
 
     var allMyLife = ["views/content/myLife/journey.html", "views/content/myLife/moments.html", "views/content/myLife/reviews.html", "views/content/myLife/holidayplanner.html"];
@@ -6726,6 +6787,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   $scope.template = TemplateService;
   $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+  $scope.userData = $.jStorage.get("profile");
   NavigationService.getProfile(globalGetProfile, function (err) {
     console.log(err);
   });
