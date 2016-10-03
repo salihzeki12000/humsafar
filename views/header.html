@@ -1,4 +1,4 @@
-<header class="bg-dark-blue" ng-controller="headerctrl" ng-if="isLoggedIn">
+<header class="bg-dark-blue {{isLoggedIn}}" ng-controller="headerctrl" ng-show="isLoggedIn">
   <nav class="navbar">
     <div class="container-fluid">
       <!-- <div class="navbar-header">
@@ -31,12 +31,18 @@
         <div class="col-md-5 col-sm-5">
           <div class="user-detail text-right">
             <ul class="list-inline">
+              <!--logout BUTTON -->
+              <li>
+                <a ng-click="logout()">Logout</a>
+              </li>
+              <!--End OF logout BUTTON -->
+
               <li>
                 <a href="">
                   <div class="user-img inline-block v-mid">
                     <img src="img/profile.jpg" alt="" width="40" class="img-responsive">
                   </div>
-                  <span class="color-white ml10 fz13">Activity</span>
+                  <span class="color-white ml10 fz13">{{userData.name}}</span>
                 </a>
               </li>
               <li>
@@ -76,7 +82,7 @@
 
 
 
-<header class="libro-header" ng-controller="headerctrl" ng-if="!isLoggedIn">
+<header class="libro-header {{isLoggedIn}}" ng-controller="headerctrl" ng-show="!isLoggedIn">
   <section class="bg-black custom-search pd20 " ng-class="{ 'open': isopen} ">
     <div class="container-fluid ">
       <div class="row ">
@@ -85,10 +91,10 @@
             <div class="form-group ">
               <div class="input-group ">
                 <span class="input-group-addon ">
-                                    <a class="color-white fnt-22 ">
-                                        <i class="fa fa-search "></i>
-                                    </a>
-                                </span>
+                  <a class="color-white fnt-22 ">
+                      <i class="fa fa-search "></i>
+                  </a>
+                </span>
                 <input type="text " class="form-control color-white avenir-light " id="search " aria-describedby="Search
   " placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags ">
               </div>
@@ -106,10 +112,10 @@
             <div class="headerp hamburger ">
               <div class="navbar-header ">
                 <button type="button " class="navbar-toggle collapsed {{buttonpos}} " ng-click="getnav(); ">
-                                    <span class="icon-bar box-shadow {{onebar}} "></span>
-                                    <span class="icon-bar box-shadow {{secondbar}} "></span>
-                                    <span class="icon-bar box-shadow {{thirdbar}} "></span>
-                                </button>
+                  <span class="icon-bar box-shadow {{onebar}} "></span>
+                  <span class="icon-bar box-shadow {{secondbar}} "></span>
+                  <span class="icon-bar box-shadow {{thirdbar}} "></span>
+                </button>
               </div>
             </div>
           </div>

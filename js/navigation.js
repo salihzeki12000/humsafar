@@ -1,10 +1,14 @@
 var adminURL = "";
+
 if (isproduction) {
   adminURL = "http://www.wohlig.co.in/demo/index.php";
 } else {
   adminURL = "http://travelibro.com/api";
 }
+var imgurl = adminURL + "/upload/";
 
+var imgpath = imgurl + "readFile?=";
+var uploadurl = imgurl;
 var navigationservice = angular.module('navigationservice', [])
 
 .factory('NavigationService', function ($http) {
@@ -127,6 +131,24 @@ var navigationservice = angular.module('navigationservice', [])
       }).success(callback).error(errCallback);
     },
 
+    getAllCountries: function (callback, errCallback) {
+      return $http({
+        url: adminURL + "/country/getAll",
+        method: "POST"
+      }).success(callback).error(errCallback);
+    },
 
+    getAllCities: function (formData, callback, errCallback) {
+      $http.post(adminURL + "/city/locationSearch", formData).success(callback).error(errCallback);
+    },
+
+    saveUserData: function (formData, callback, errorCallback) {
+      console.log(formData);
+      $http.post(adminURL + "/user/editUserWeb", formData).success(callback).error(errorCallback);
+    },
+
+    travelCount: function (callback, errorCallback) {
+      $http.post(adminURL + "/user/getOneDataWeb").success(callback).error(errorCallback);
+    }
   };
 });

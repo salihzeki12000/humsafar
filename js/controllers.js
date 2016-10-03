@@ -1,3 +1,11 @@
+var globalGetProfile = function (data, status) {
+  if (data._id) {
+    $.jStorage.set("isLoggedIn", true);
+    $.jStorage.set("profile", data);
+  } else {
+    $.jStorage.flush();
+  }
+};
 angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
 .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
@@ -18,14 +26,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     five: "views/section/share.html",
   };
   $scope.changePage = function (text) {
-    console.log(text);
+    // console.log(text);
     var length = $(".fp-section").length;
-    console.log(length);
-    console.log($(".fp-section"));
+    // console.log(length);
+    // console.log($(".fp-section"));
     if (length === 0) {
       $('.fullpage').fullpage();
     }
-    console.log(text);
+    // console.log(text);
     $scope.homeval = text;
     switch (text) {
       case "share":
@@ -98,7 +106,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, $state) {
     //Used to name the .html file
-    $scope.isLoggedIn = "";
     $scope.userData = $.jStorage.get("profile");
     $scope.template = TemplateService.changecontent("login");
     $scope.menutitle = NavigationService.makeactive("Login");
@@ -108,7 +115,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
     }
-
 
     $scope.openalreadyexist = function (size) {
       $uibModal.open({
@@ -129,16 +135,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         ref.close();
         $.jStorage.set("isLoggedIn", true);
         $.jStorage.set("profile", data);
-        $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
         var alreadyLoggedIn = data.alreadyLoggedIn;
-
         console.log(alreadyLoggedIn);
-        if (alreadyLoggedIn) {
-          $state.go('mylife');
-        } else {
+        if (alreadyLoggedIn == false) {
           $state.go('mainpage');
+        } else {
+          $state.go('mylife');
         }
-
       } else {
 
       }
@@ -146,7 +149,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
     var callAtIntervaltwitter = function () {
       NavigationService.getProfile(checktwitter, function (err) {
-        $scope.template.getProfile();
         console.log(err);
       });
     };
@@ -154,24 +156,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     var authenticatesuccess = function (data, status) {
       console.log("authenticate successful");
       $ionicLoading.hide();
-      if (data._id) {
-
-      }
+      $interval.cancel(stopinterval);
     };
 
     $scope.socialLogin = function (loginTo) {
       // console.log(loginTo);
       ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
       stopinterval = $interval(callAtIntervaltwitter, 2000);
-
-      ref.addEventListener('closed', function (event) {
+      ref.addEventListener('exit', function (event) {
         NavigationService.getProfile(authenticatesuccess, function (err) {
           console.log(err);
         });
-        $interval.cancel(stopinterval);
       });
     };
-
   })
   .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
@@ -273,7 +270,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
   })
 
-.controller('MainPageCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+.controller('MainPageCtrl', function ($scope, TemplateService, NavigationService, $timeout, $http) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -282,7 +279,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Home");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
+    $scope.userData = {};
     setTimeout(function () {
       var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
@@ -312,38 +309,123 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       }
 
     };
+    $scope.profile = $.jStorage.get("profile");
+    if ($scope.profile.gender != "") {
+      $scope.userData.gender = $scope.profile.gender;
+      if ($scope.profile.gender == "male") {
+        $scope.gender = 1;
+      } else {
+        $scope.gender = 2;
+      }
+    }
+    if ($scope.profile.profilePicture != null) {
+      $scope.userData.profilePicture = $scope.profile.profilePicture;
+    }
+    $scope.changeGender = function (id, name) {
+      $scope.gender = id;
+      $scope.userData.gender = name;
+    };
 
-    $scope.nationality = [{
-      img: "img/flag.png",
-      name: "Afghanistan"
-    }, {
-      img: "img/flag.png",
-      name: "Albania"
-    }, {
-      img: "img/flag.png",
-      name: "Algeria"
-    }, {
-      img: "img/flag.png",
-      name: "Andorra"
-    }, {
-      img: "img/flag.png",
-      name: "Angola"
-    }, {
-      img: "img/flag.png",
-      name: "Antigua and Barbuda"
-    }, {
-      img: "img/flag.png",
-      name: "Argentina"
-    }, {
-      img: "img/flag.png",
-      name: "Armenia"
-    }, {
-      img: "img/flag.png",
-      name: "Australia"
-    }, {
-      img: "img/flag.png",
-      name: "Austria"
-    }];
+    // $scope.nationality = [{
+    //   img: "img/flag.png",
+    //   name: "Afghanistan"
+    // }, {
+    //   img: "img/flag.png",
+    //   name: "Albania"
+    // }, {
+    //   img: "img/flag.png",
+    //   name: "Algeria"
+    // }, {
+    //   img: "img/flag.png",
+    //   name: "Andorra"
+    // }, {
+    //   img: "img/flag.png",
+    //   name: "Angola"
+    // }, {
+    //   img: "img/flag.png",
+    //   name: "Antigua and Barbuda"
+    // }, {
+    //   img: "img/flag.png",
+    //   name: "Argentina"
+    // }, {
+    //   img: "img/flag.png",
+    //   name: "Armenia"
+    // }, {
+    //   img: "img/flag.png",
+    //   name: "Australia"
+    // }, {
+    //   img: "img/flag.png",
+    //   name: "Austria"
+    // }];
+    //self-invoking getAllCountries Function
+    // (function () {
+    //   return $http({
+    //       url: adminURL + "/country/getAll",
+    //       method: "POST"
+    //     })
+    //     .success(function (data, status) {
+    //       if (data.value) {
+    //         $scope.nationality = data.data;
+    //         console.log($scope.nationality);
+    //       } else {
+    //         console.log("Error Fetching Data");
+    //       }
+    //     })
+    //     .error(function () {
+    //       console.log(err);
+    //     });
+    // })();
+
+
+    //gets all the countries from database
+    var getAllCountries = function (data, status) {
+      if (data.value) {
+        $scope.nationality = data.data;
+      } else {
+        console.log("Error Fetching Data");
+      }
+    };
+
+    NavigationService.getAllCountries(getAllCountries, function (err) {
+      console.log(err);
+    });
+    //End-Of get all the countries from database
+
+    //gets all the cities from database
+    var getAllCities = function (data, status) {
+      if (data.value) {
+        $scope.cities = data.data.predictions;
+        console.log($scope.cities);
+      } else {
+        console.log("Eroor Fetching Data");
+      }
+    };
+
+    $scope.searchByKey = function (searchCity) {
+      NavigationService.getAllCities({
+        "search": searchCity
+      }, getAllCities, function (err) {
+        console.log(err);
+      });
+    };
+    //End-Of get all the cities from database
+    var saveDataCallback = function (data, status) {
+      if (data.value == "true") {
+        console.log(data);
+        NavigationService.getProfile(globalGetProfile, function (err) {
+          console.log(err);
+        });
+      } else {
+        console.log(data);
+      }
+    }
+
+    $scope.saveUserData = function (userData) {
+      NavigationService.saveUserData(userData, saveDataCallback, function (err) {
+        console.log(err);
+      });
+    }
+
     $scope.myImage = '';
     $scope.myCroppedImage = '';
     $scope.showImage = false;
@@ -380,7 +462,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     //Used to name the .html file
 
     // console.log("Testing Consoles");
-
+    $scope.listOfCategories = {
+      'travelConfig': {
+        'holidayType': [],
+        'preferToTravel': [],
+        'usuallyGo': [],
+        'kindOfHoliday': []
+      }
+    };
     $scope.template = TemplateService.changecontent("holiday");
     $scope.menutitle = NavigationService.makeactive("Holiday");
     TemplateService.title = $scope.menutitle;
@@ -488,10 +577,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.getHoliday = function (val) {
       if ($scope.holidayKindType[val].class == "active-holiday") {
         $scope.holidayKindType[val].class = "";
+        // console.log(_.filter($scope.holidayKindType, ['class', "active-holiday"]));
       } else {
         $scope.holidayKindType[val].class = "active-holiday";
+        // console.log(_.filter($scope.holidayKindType, ['class', "active-holiday"]));
       }
     };
+
     $scope.getPreference = function (val) {
       if ($scope.travelPrefer[val].class == "active-holiday") {
         $scope.travelPrefer[val].class = "";
@@ -506,13 +598,46 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.idealHoliday[val].class = "active-holiday";
       }
     };
-
     $scope.getUsually = function (val) {
-      _.each($scope.usuallygoHoliday, function (n) {
-        n.class = "n";
+        _.each($scope.usuallygoHoliday, function (n) {
+          n.class = "n";
+        });
+        $scope.usuallygoHoliday[val].class = "active-holiday";
+      }
+      // Integration Section starts here
+    $scope.selectedCategory = function (category, arrType) {
+      holidayList = _.filter($scope[category], ['class', "active-holiday"]);
+      _.forEach(holidayList, function (element) {
+        var caption = null;
+        _.forEach(element, function (value, key) {
+          if (key == "caption1") {
+            caption = element.caption + " " + element.caption1;
+          }
+        });
+        if (caption != null) {
+          $scope.listOfCategories.travelConfig[arrType].push(caption);
+        } else {
+          $scope.listOfCategories.travelConfig[arrType].push(element.caption);
+        }
       });
-      $scope.usuallygoHoliday[val].class = "active-holiday";
     }
+    var saveDataCallback = function (data, status) {
+      if (data.value == "true") {
+        console.log(data);
+        NavigationService.getProfile(globalGetProfile, function (err) {
+          console.log(err);
+        });
+      } else {
+        console.log(data);
+      }
+    }
+    $scope.saveUserData = function (userData) {
+      NavigationService.saveUserData(userData, saveDataCallback, function (err) {
+        console.log(err);
+      });
+    }
+
+    // Integration Section Ends here
 
   })
   .controller('TripSummaryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -2613,12 +2738,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     //Used to name the .html file
 
     // console.log("Testing Consoles");
-    $scope.userData = $.jStorage.get("profile");
-    console.log($scope.userData);
+
     $scope.template = TemplateService.changecontent("mylife");
     $scope.menutitle = NavigationService.makeactive("Mylife");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    //Integration Section Starts here
+    $scope.userData = $.jStorage.get("profile");
+    var travelCount = function (data, status) {
+      $scope.count = data.data;
+      console.log($scope.count)
+    };
+    NavigationService.travelCount(travelCount, function (err) {
+      console.log(err);
+    });
+    //Integration Section Ends here
 
     var allMyLife = ["views/content/myLife/journey.html", "views/content/myLife/moments.html", "views/content/myLife/reviews.html", "views/content/myLife/holidayplanner.html"];
     $scope.myLife = {
@@ -2644,47 +2779,47 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         $scope.myLife.innerView = allMyLife[0];
     }
     $scope.getTab = function (view) {
-      $scope.myLife.innerView = allMyLife[view];
-      var url = "journey";
-      switch (view) {
-        case 0:
-          url = "journey";
-          break;
-        case 1:
-          url = "moments";
-          break;
-        case 2:
-          url = "reviews";
-          break;
-        case 3:
-          url = "holidayplanner";
-          break;
+        $scope.myLife.innerView = allMyLife[view];
+        var url = "journey";
+        switch (view) {
+          case 0:
+            url = "journey";
+            break;
+          case 1:
+            url = "moments";
+            break;
+          case 2:
+            url = "reviews";
+            break;
+          case 3:
+            url = "holidayplanner";
+            break;
 
+        }
+        console.log(url);
+        $state.go("mylife", {
+          name: url
+        }, {
+          notify: false
+        });
       }
-      console.log(url);
-      $state.go("mylife", {
-        name: url
-      }, {
-        notify: false
-      });
-    }
-    $scope.bucketList = [{
-      countryName: "United States Of America"
-    }, {
-      countryName: "Germany"
-    }, {
-      countryName: "United Kingdom"
-    }, {
-      countryName: "Switzerland"
-    }, {
-      countryName: "Australia"
-    }, {
-      countryName: "India"
-    }, {
-      countryName: "Italy"
-    }, {
-      countryName: "Canada"
-    }, ];
+      // $scope.bucketList = [{
+      //   countryName: "United States Of America"
+      // }, {
+      //   countryName: "Germany"
+      // }, {
+      //   countryName: "United Kingdom"
+      // }, {
+      //   countryName: "Switzerland"
+      // }, {
+      //   countryName: "Australia"
+      // }, {
+      //   countryName: "India"
+      // }, {
+      //   countryName: "Italy"
+      // }, {
+      //   countryName: "Canada"
+      // }, ];
     $scope.data = {
       'GB': {
         metric: 4
@@ -2735,6 +2870,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       // console.log('Scrollbar show');
     });
 
+
     $scope.openLocalimg = function (getVal) {
       // $scope.showimgData = $scope.localLife[getVal];
       $scope.showimgData = getVal;
@@ -2746,6 +2882,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         windowTopClass: "local-imgview-pop"
       })
     };
+
+    // Integration part starts here
+
+    var getAllCountries = function (data, status) {
+      if (data.value) {
+        $scope.nationality = data.data;
+      } else {
+        console.log("Error Fetching Data");
+      }
+    };
+
+    NavigationService.getAllCountries(getAllCountries, function (err) {
+      console.log(err);
+    });
+    // Integration part ends here
+
 
     $scope.travelLife = [{
       heading: "Manan Vora has ended his London Journey",
@@ -3462,8 +3614,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       $scope.viewlocalCountry = true;
     };
     // holidayplanner json
-
-
   })
   .controller('JourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
@@ -3577,13 +3727,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     //Used to name the .html file
 
     // console.log("Testing Consoles");
-
     $scope.template = TemplateService.changecontent("profile");
     $scope.menutitle = NavigationService.makeactive("Profile");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
-
   })
   .controller('OtherProfileCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -6576,7 +6723,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
   })
 
 .controller('headerctrl', function ($scope, TemplateService, NavigationService, $state, $interval) {
+
   $scope.template = TemplateService;
+  $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+  NavigationService.getProfile(globalGetProfile, function (err) {
+    console.log(err);
+  });
+  $scope.userData$ = $.jStorage.get("profile");
   $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
     $(window).scrollTop(0);
   });
@@ -6616,8 +6769,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         console.log(err);
       });
   };
-  $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
-  console.log($scope.isLoggedIn);
+
 })
 
 .controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {
