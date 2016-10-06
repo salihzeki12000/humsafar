@@ -155,6 +155,13 @@ var navigationservice = angular.module('navigationservice', [])
       $http.post(adminURL + "/user/updateBucketListWeb", formData).success(callback).error(errCallback);
     },
 
+    getBucketListWeb: function (callback, errorCallback) {
+      $http.post(adminURL + "/user/getBucketListWeb").success(callback).error(errorCallback);
+    },
+
+    updateCountriesVisitedWeb: function (formData, callback, errCallback) {
+      $http.post(adminURL + "/user/updateCountriesVisitedWeb", formData).success(callback).error(errCallback);
+    },
 
 
   };

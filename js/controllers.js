@@ -2743,19 +2743,55 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Mylife");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
+    $scope.formData = {};
+    $scope.visited = [];
     // modal for country visite start
-    $scope.countryVisited = function () {
-        $uibModal.open({
-          scope: $scope,
-          animation: true,
-          templateUrl: "views/modal/country-visited.html"
-        })
-      }
-      // modal for country visited end
+    $scope.countryVisited = function (id) {
+      $uibModal.open({
+        scope: $scope,
+        animation: true,
+        templateUrl: "views/modal/country-visited.html"
+      });
+      $scope.formData.countryId = id;
+    };
+    // modal for country visited end
 
     //Integration Section Starts here
+
+    $scope.wishCountry = "";
     $scope.userData = $.jStorage.get("profile");
+    $scope.updateVisitedCountry = function (visited) {
+      var arr = _.pull(visited, undefined);
+      var arrNew = _.reject(arr, {
+        'year': false
+      });
+      $scope.formData.visited = arrNew;
+      console.log($scope.formData);
+
+
+      // NavigationService.updateCountriesVisitedWeb($scope.formData, function (data, status) {
+      //   if (data.value == true) {
+
+      //     reloadCount();
+      //   } else {
+      //     console.log(data);
+      //   }
+      // }, function (err) {
+      //   console.log(err);
+      // });
+    };
+
+    var getAllCountries = function (data, status) {
+      if (data.value) {
+        $scope.nationality = data.data;
+      } else {
+        console.log("Error Fetching Data");
+      }
+    };
+
+    NavigationService.getAllCountries(getAllCountries, function (err) {
+      console.log(err);
+    });
     var travelCount = function (data, status) {
       $scope.count = data.data;
     };
@@ -2773,10 +2809,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         var data = {
           "bucketList": [_id]
         };
-        console.log(data);
         NavigationService.updateWishCountry(data, function (data, status) {
           if (data.value == true) {
-            console.log(data);
             reloadCount();
           } else {
             console.log("Error Updating bucketList");
@@ -2806,12 +2840,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         });
 
       }
-
     };
 
-    var getOneBucketList = function () {
 
+    var getBucketListWeb = function (data, status) {
+      $scope.bucketList = data.data.bucketList;
+      var a = _.map($scope.bucketList, '_id');
+      // checkCheckboxesByIds(a);
+    };
+
+    NavigationService.getBucketListWeb(getBucketListWeb, function (err) {
+      console.log(err);
+    });
+
+    // $(document).ready(function () {
+    //   $(':checkbox').removeAttr('checked');
+    //   $('#wish57ea6b53b38e8c4b9da4203b').attr('checked', 'checked');
+    //   $('#wish57ea6b53b38e8c4b9da4203b').addClass("ng-not-empty");
+    // });
+
+
+    function checkCheckboxesByIds(ids) {
+      $(':checkbox').removeAttr('checked');
+      $.each(ids, function (i, id) {
+        $('#wish' + id).attr('checked', 'checked');
+      });
     }
+
+    var years = function (startYear) {
+      var currentYear = new Date().getFullYear(),
+        years = [];
+      startYear = startYear || 1980;
+      while (startYear <= currentYear) {
+        years.push(currentYear--);
+      }
+      return years;
+    }
+    $scope.listOfYears = years(1950);
 
 
     //Integration Section Ends here
@@ -2943,22 +3008,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
         windowTopClass: "local-imgview-pop"
       })
     };
-
-    // Integration part starts here
-
-    var getAllCountries = function (data, status) {
-      if (data.value) {
-        $scope.nationality = data.data;
-      } else {
-        console.log("Error Fetching Data");
-      }
-    };
-
-    NavigationService.getAllCountries(getAllCountries, function (err) {
-      console.log(err);
-    });
-    // Integration part ends here
-
 
     $scope.travelLife = [{
       heading: "Manan Vora has ended his London Journey",

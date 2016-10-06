@@ -9,18 +9,18 @@
     </div>
     <div class="update-dropdown">
       <ul>
-        <li>
+        <li ng-repeat="list in listOfYears">
           <div class="year-checkbox custom-checkbox">
-            <input type="checkbox" id="year2016">
-            <label for="year2016">2016</label>
+            <input type="checkbox" id="year{{list}}" ng-model="visited[list].year" ng-true-value="{{list}}">
+            <label for="year{{list}}">{{list}}</label>
           </div>
           <div class="count-visited">
-            <span><i class="fa fa-minus-circle minus"></i></span>
-            <input type="text" id="rooms" placeholder="00">
-            <span><i class="fa fa-plus-circle plus"></i></span>
+            <span><i class="fa fa-minus-circle minus" ng-click="visited[list].times=visited[list].times-1"></i></span>
+            <input type="text" id="rooms" placeholder="0" ng-model="visited[list].times">
+            <span><i class="fa fa-plus-circle plus" ng-click="visited[list].times=visited[list].times+1"></i></span>
           </div>
         </li>
-        <li>
+        <!--<li>
           <div class="year-checkbox custom-checkbox">
             <input type="checkbox" id="year2015">
             <label for="year2015">2015</label>
@@ -55,11 +55,11 @@
             <input type="checkbox" id="year2010">
             <label for="year2010">2010</label>
           </div>
-        </li>
+        </li>-->
       </ul>
     </div>
     <div class="update-btn text-right">
-      <button class="btn btn-pink">Update</button>
+      <button class="btn btn-pink" ng-click=updateVisitedCountry(visited)>Update</button>
     </div>
   </div>
 </div>
