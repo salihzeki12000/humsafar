@@ -10,7 +10,7 @@
             </div>
             <div class="profile-more-detail text-center">
                 <h3 class="color-blue m-clear font-bold avenir-medium ">{{userData.name}}</h3>
-                <h5 class="color-pink avenir-roman">Lives In: <i class="fa fa-map-marker mr5"></i><span>{{userData.homeCity}}</span></h5>
+                <h5 class="color-pink avenir-roman">Lives In:<i class="fa fa-map-marker mr5"></i><span>{{userData.homeCity}}</span></h5>
             </div>
         </div>
         <div class="user-travel-detail relate">
@@ -114,15 +114,13 @@
                                                     <div class="get-right">
                                                         <div class="relate inline-block mr10">
                                                             <div class="custom-checkbox">
-                                                                <input type="checkbox" id="{{list._id}}" ng-model="visitedCountry">
-                                                                <label for=" {{list._id}} " ng-click="countryVisited(list._id);"></label>
+                                                                <input type="checkbox" id="{{list._id}}" ng-model="list.countryVisited">
+                                                                <label for=" {{list._id}} " ng-click="updateCountryVisited(list);"></label>
                                                             </div>
                                                         </div>
                                                         <div class="relate inline-block ">
                                                             <div class="bucket-list custom-checkbox-heart ">
-                                                                <!-- <input type="checkbox " id="wish{{list._id}} " ng-model="wishCountry " ng-click="updateWishCountry(wishCountry,list._id) ">
-                                                                <label for="wish{{list._id}} "></label> -->
-                                                                <input type="checkbox" id="wish{{list._id}}" ng-model="wishCountry" ng-click="updateWishCountry(wishCountry,list._id) ">
+                                                                <input type="checkbox" id="wish{{list._id}}" ng-model="list.bucketList" ng-click="updateBucketList(list) ">
                                                                 <label for="wish{{list._id}}"></label>
                                                             </div>
                                                         </div>

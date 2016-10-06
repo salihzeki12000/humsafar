@@ -6,7 +6,7 @@ var globalGetProfile = function (data, status) {
     $.jStorage.flush();
   }
 };
-angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
 .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
   //Used to name the .html file
@@ -2734,7 +2734,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       code: 'ZW'
     }];
   })
-  .controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+
+
+.controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -2743,55 +2745,55 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
     $scope.menutitle = NavigationService.makeactive("Mylife");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    $scope.formData = {};
+    $scope.obj = {};
     $scope.visited = [];
-    // modal for country visite start
-    $scope.countryVisited = function (id) {
-      $uibModal.open({
-        scope: $scope,
-        animation: true,
-        templateUrl: "views/modal/country-visited.html"
-      });
-      $scope.formData.countryId = id;
-    };
-    // modal for country visited end
 
     //Integration Section Starts here
 
-    $scope.wishCountry = "";
     $scope.userData = $.jStorage.get("profile");
-    $scope.updateVisitedCountry = function (visited) {
+
+
+    var getAllCountries = function (countries) {
+      $scope.nationality = countries;
+      console.log(countries);
+    };
+
+    MyLife.getAllCountries(getAllCountries, function (err) {
+      console.log(err);
+    });
+
+    $scope.updateBucketList = function (country) {
+      MyLife.updateBucketList(country, function () {}, function () {});
+    };
+
+    $scope.updateCountryVisited = function (country) {
+      $scope.obj.countryId = country._id;
+      if (country.countryVisited == false) {
+        $uibModal.open({
+          scope: $scope,
+          animation: true,
+          templateUrl: "views/modal/country-visited.html"
+        });
+      } else {
+        Mylife.updateCountriesVisited($scope.obj.countryId)
+      }
+    };
+
+    $scope.updateNumOfTimes = function (visited) {
       var arr = _.pull(visited, undefined);
       var arrNew = _.reject(arr, {
         'year': false
       });
-      $scope.formData.visited = arrNew;
-      console.log($scope.formData);
-
-
-      // NavigationService.updateCountriesVisitedWeb($scope.formData, function (data, status) {
-      //   if (data.value == true) {
-
-      //     reloadCount();
-      //   } else {
-      //     console.log(data);
-      //   }
-      // }, function (err) {
-      //   console.log(err);
-      // });
+      $scope.obj.visited = arrNew;
+      MyLife.updateCountriesVisited($scope.obj, function () {}, function () {});
     };
 
-    var getAllCountries = function (data, status) {
-      if (data.value) {
-        $scope.nationality = data.data;
-      } else {
-        console.log("Error Fetching Data");
-      }
-    };
 
-    NavigationService.getAllCountries(getAllCountries, function (err) {
-      console.log(err);
-    });
+
+
+
+
+
     var travelCount = function (data, status) {
       $scope.count = data.data;
     };
@@ -2801,71 +2803,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
       });
     };
     reloadCount();
-
-    $scope.updateWishCountry = function (flag, _id) {
-      if (flag == true) {
-        console.log("selected");
-        console.log(flag + "-" + _id);
-        var data = {
-          "bucketList": [_id]
-        };
-        NavigationService.updateWishCountry(data, function (data, status) {
-          if (data.value == true) {
-            reloadCount();
-          } else {
-            console.log("Error Updating bucketList");
-          }
-        }, function (err) {
-          console.log(err);
-        });
-
-      } else {
-        console.log("not selected");
-        console.log(flag + "-" + _id);
-        var data = {
-          "bucketList": _id,
-          delete: true
-        };
-        console.log(data);
-        NavigationService.updateWishCountry(data, function (data, status) {
-          if (data.value == true) {
-            console.log(data);
-            reloadCount();
-          } else {
-            console.log("Error Updating bucketList");
-            console.log(data);
-          }
-        }, function (err) {
-          console.log(err);
-        });
-
-      }
-    };
-
-
-    var getBucketListWeb = function (data, status) {
-      $scope.bucketList = data.data.bucketList;
-      var a = _.map($scope.bucketList, '_id');
-      // checkCheckboxesByIds(a);
-    };
-
-    NavigationService.getBucketListWeb(getBucketListWeb, function (err) {
-      console.log(err);
-    });
-
-    // $(document).ready(function () {
-    //   $(':checkbox').removeAttr('checked');
-    //   $('#wish57ea6b53b38e8c4b9da4203b').attr('checked', 'checked');
-    //   $('#wish57ea6b53b38e8c4b9da4203b').addClass("ng-not-empty");
-    // });
-
-
-    function checkCheckboxesByIds(ids) {
-      $(':checkbox').removeAttr('checked');
-      $.each(ids, function (i, id) {
-        $('#wish' + id).attr('checked', 'checked');
-      });
-    }
 
     var years = function (startYear) {
       var currentYear = new Date().getFullYear(),
@@ -2880,849 +2817,852 @@ angular.module('phonecatControllers', ['templateservicemod', 'navigationservice'
 
 
     //Integration Section Ends here
+    {
+      var allMyLife = ["views/content/myLife/journey.html", "views/content/myLife/moments.html", "views/content/myLife/reviews.html", "views/content/myLife/holidayplanner.html"];
+      $scope.myLife = {
+        profileMain: "views/content/myLife/profile.html",
+        innerView: allMyLife[0]
+      };
+      // change url
+      $scope.viewTab = 1;
+      switch ($state.params.name) {
+        case "journey":
+          $scope.myLife.innerView = allMyLife[0];
+          break;
+        case "moments":
+          $scope.myLife.innerView = allMyLife[1];
+          break;
+        case "reviews":
+          $scope.myLife.innerView = allMyLife[2];
+          break;
+        case "holidayplanner":
+          $scope.myLife.innerView = allMyLife[3];
+          break;
+        default:
+          $scope.myLife.innerView = allMyLife[0];
+      }
+      $scope.getTab = function (view) {
+          $scope.myLife.innerView = allMyLife[view];
+          var url = "journey";
+          switch (view) {
+            case 0:
+              url = "journey";
+              break;
+            case 1:
+              url = "moments";
+              break;
+            case 2:
+              url = "reviews";
+              break;
+            case 3:
+              url = "holidayplanner";
+              break;
 
-    var allMyLife = ["views/content/myLife/journey.html", "views/content/myLife/moments.html", "views/content/myLife/reviews.html", "views/content/myLife/holidayplanner.html"];
-    $scope.myLife = {
-      profileMain: "views/content/myLife/profile.html",
-      innerView: allMyLife[0]
-    };
-    // change url
-    $scope.viewTab = 1;
-    switch ($state.params.name) {
-      case "journey":
-        $scope.myLife.innerView = allMyLife[0];
-        break;
-      case "moments":
-        $scope.myLife.innerView = allMyLife[1];
-        break;
-      case "reviews":
-        $scope.myLife.innerView = allMyLife[2];
-        break;
-      case "holidayplanner":
-        $scope.myLife.innerView = allMyLife[3];
-        break;
-      default:
-        $scope.myLife.innerView = allMyLife[0];
-    }
-    $scope.getTab = function (view) {
-        $scope.myLife.innerView = allMyLife[view];
-        var url = "journey";
-        switch (view) {
-          case 0:
-            url = "journey";
-            break;
-          case 1:
-            url = "moments";
-            break;
-          case 2:
-            url = "reviews";
-            break;
-          case 3:
-            url = "holidayplanner";
-            break;
-
+          }
+          console.log(url);
+          $state.go("mylife", {
+            name: url
+          }, {
+            notify: false
+          });
         }
-        console.log(url);
-        $state.go("mylife", {
-          name: url
+        // $scope.bucketList = [{
+        //   countryName: "United States Of America"
+        // }, {
+        //   countryName: "Germany"
+        // }, {
+        //   countryName: "United Kingdom"
+        // }, {
+        //   countryName: "Switzerland"
+        // }, {
+        //   countryName: "Australia"
+        // }, {
+        //   countryName: "India"
+        // }, {
+        //   countryName: "Italy"
+        // }, {
+        //   countryName: "Canada"
+        // }, ];
+      $scope.data = {
+        'GB': {
+          metric: 4
+        },
+        'US': {
+          metric: 40
+        },
+        'FR': {
+          metric: 29
+        },
+        'IN': {
+          metric: 500
+        }
+      };
+      $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
+      $scope.mapDataHumanizeFn = function (val) {
+        return val + " units";
+      };
+      $scope.heatmapColors = ['#2c3757', '#ff6759'];
+
+      $scope.hoveringOver = function (value) {
+        $scope.overStar = value;
+      };
+      $scope.ratingStates = [{
+        stateOn: 'fa fa-star-o',
+        stateOff: 'fa fa-star'
+      }, {
+        stateOn: 'fa fa-star-o',
+        stateOff: 'fa fa-star'
+      }, {
+        stateOn: 'fa fa-star-o',
+        stateOff: 'fa fa-star'
+      }, {
+        stateOn: 'fa fa-star-o',
+        stateOff: 'fa fa-star'
+      }, {
+        stateOn: 'fa fa-star-o',
+        stateOff: 'fa fa-star'
+      }];
+      // journey json
+      $scope.buildNow = function () {
+        $scope.$broadcast('rebuild:me');
+      }
+      $scope.$on('scrollbar.hide', function () {
+        // console.log('Scrollbar hide');
+      });
+      $scope.$on('scrollbar.show', function () {
+        // console.log('Scrollbar show');
+      });
+
+
+      $scope.openLocalimg = function (getVal) {
+        // $scope.showimgData = $scope.localLife[getVal];
+        $scope.showimgData = getVal;
+        // console.log(getVal);
+        $uibModal.open({
+          animation: true,
+          templateUrl: "views/modal/local-imgview.html",
+          scope: $scope,
+          windowTopClass: "local-imgview-pop"
+        })
+      };
+
+      $scope.travelLife = [{
+        heading: "Manan Vora has ended his London Journey",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        imgTravelled: "img/london.jpg",
+        Travelledtag: "London Eye",
+        photoCount: "28",
+        videoCount: "5",
+        locationVisited: "9",
+        itineraryType1: "img/sunset.png",
+        itineraryType2: "img/bag-journey.png",
+        itineraryType3: "img/luxury-journey.png",
+        travelledDay: "75",
+        onwayTag: "love in paris",
+        imgOnway: "img/paris.jpg",
+        cost: "$10,000",
+        spendingDay: "75",
+        likes: "15660",
+        reviews: "354",
+        pointReview: "4.5",
+        onJourney: false,
+        countryVisit: [{
+          imgFlag: "img/india-visit.png"
         }, {
-          notify: false
-        });
-      }
-      // $scope.bucketList = [{
-      //   countryName: "United States Of America"
-      // }, {
-      //   countryName: "Germany"
-      // }, {
-      //   countryName: "United Kingdom"
-      // }, {
-      //   countryName: "Switzerland"
-      // }, {
-      //   countryName: "Australia"
-      // }, {
-      //   countryName: "India"
-      // }, {
-      //   countryName: "Italy"
-      // }, {
-      //   countryName: "Canada"
-      // }, ];
-    $scope.data = {
-      'GB': {
-        metric: 4
-      },
-      'US': {
-        metric: 40
-      },
-      'FR': {
-        metric: 29
-      },
-      'IN': {
-        metric: 500
-      }
-    };
-    $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
-    $scope.mapDataHumanizeFn = function (val) {
-      return val + " units";
-    };
-    $scope.heatmapColors = ['#2c3757', '#ff6759'];
+          imgFlag: "img/england-visit.png"
+        }, {
+          imgFlag: "img/canada-visit.png",
+        }, ]
+      }, {
+        heading: "Manan Vora has ended his London Journey",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        imgTravelled: "img/london.jpg",
+        Travelledtag: "London Eye",
+        photoCount: "28",
+        videoCount: "5",
+        locationVisited: "9",
+        itineraryType1: "img/sunset.png",
+        itineraryType2: "img/bag-journey.png",
+        itineraryType3: "img/luxury-journey.png",
+        travelledDay: "75",
+        onwayTag: "love in paris",
+        imgOnway: "img/paris.jpg",
+        cost: "$10,000",
+        spendingDay: "75",
+        likes: "15660",
+        reviews: "354",
+        pointReview: "4.5",
+        onJourney: true,
+        countryVisit: [{
+          imgFlag: "img/india-visit.png"
+        }, {
+          imgFlag: "img/england-visit.png"
+        }, {
+          imgFlag: "img/canada-visit.png",
+        }, ]
+      }, {
+        heading: "Manan Vora has ended his London Journey",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        imgTravelled: "img/london.jpg",
+        Travelledtag: "London Eye",
+        photoCount: "28",
+        videoCount: "5",
+        locationVisited: "9",
+        itineraryType1: "img/sunset.png",
+        itineraryType2: "img/bag-journey.png",
+        itineraryType3: "img/luxury-journey.png",
+        travelledDay: "75",
+        onwayTag: "love in paris",
+        imgOnway: "img/paris.jpg",
+        cost: "$10,000",
+        spendingDay: "75",
+        likes: "15660",
+        reviews: "354",
+        pointReview: "4.5",
+        onJourney: false,
+        countryVisit: [{
+          imgFlag: "img/india-visit.png"
+        }, {
+          imgFlag: "img/england-visit.png"
+        }, {
+          imgFlag: "img/canada-visit.png",
+        }, ]
+      }, {
+        heading: "Manan Vora has ended his London Journey",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        imgTravelled: "img/london.jpg",
+        Travelledtag: "London Eye",
+        photoCount: "28",
+        videoCount: "5",
+        locationVisited: "9",
+        itineraryType1: "img/sunset.png",
+        itineraryType2: "img/bag-journey.png",
+        itineraryType3: "img/luxury-journey.png",
+        travelledDay: "75",
+        onwayTag: "love in paris",
+        imgOnway: "img/paris.jpg",
+        cost: "$10,000",
+        spendingDay: "75",
+        likes: "15660",
+        reviews: "354",
+        pointReview: "4.5",
+        onJourney: false,
+        countryVisit: [{
+          imgFlag: "img/india-visit.png"
+        }, {
+          imgFlag: "img/england-visit.png"
+        }, {
+          imgFlag: "img/canada-visit.png",
+        }, ]
+      }, {
+        heading: "Manan Vora has ended his London Journey",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        imgTravelled: "img/london.jpg",
+        Travelledtag: "London Eye",
+        photoCount: "28",
+        videoCount: "5",
+        locationVisited: "9",
+        itineraryType1: "img/sunset.png",
+        itineraryType2: "img/bag-journey.png",
+        itineraryType3: "img/luxury-journey.png",
+        travelledDay: "75",
+        onwayTag: "love in paris",
+        imgOnway: "img/paris.jpg",
+        cost: "$10,000",
+        spendingDay: "75",
+        likes: "15660",
+        reviews: "354",
+        pointReview: "4.5",
+        onJourney: true,
+        countryVisit: [{
+          imgFlag: "img/india-visit.png"
+        }, {
+          imgFlag: "img/england-visit.png"
+        }, {
+          imgFlag: "img/canada-visit.png",
+        }, ]
+      }, {
+        heading: "Manan Vora has ended his London Journey",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        imgTravelled: "img/london.jpg",
+        Travelledtag: "London Eye",
+        photoCount: "28",
+        videoCount: "5",
+        locationVisited: "9",
+        itineraryType1: "img/sunset.png",
+        itineraryType2: "img/bag-journey.png",
+        itineraryType3: "img/luxury-journey.png",
+        travelledDay: "75",
+        onwayTag: "love in paris",
+        imgOnway: "img/paris.jpg",
+        cost: "$10,000",
+        spendingDay: "75",
+        likes: "15660",
+        reviews: "354",
+        pointReview: "4.5",
+        onJourney: true,
+        countryVisit: [{
+          imgFlag: "img/india-visit.png"
+        }, {
+          imgFlag: "img/england-visit.png"
+        }, {
+          imgFlag: "img/canada-visit.png",
+        }, ]
+      }];
 
-    $scope.hoveringOver = function (value) {
-      $scope.overStar = value;
-    };
-    $scope.ratingStates = [{
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }, {
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }, {
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }, {
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }, {
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }];
-    // journey json
-    $scope.buildNow = function () {
-      $scope.$broadcast('rebuild:me');
+      $scope.localLife = [{
+        heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        imgWall: "img/local-life-post.jpg",
+        likes: "15660",
+        travelledIcon: "img/cycle-cyan.png",
+        postSlider: [{
+          imgRelated: "img/slider1.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }, {
+          imgRelated: "img/slider1.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }, {
+          imgRelated: "img/slider1.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }]
+      }, {
+        heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        imgWall: "img/local-life-post.jpg",
+        likes: "15660",
+        travelledIcon: "img/cycle-cyan.png",
+        postSlider: [{
+          imgRelated: "img/slider1.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }, {
+          imgRelated: "img/slider1.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }, {
+          imgRelated: "img/slider1.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }]
+      }, {
+        heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        imgWall: "img/local-life-post.jpg",
+        likes: "15660",
+        travelledIcon: "img/cycle-cyan.png",
+        postSlider: [{
+          imgRelated: "img/slider1.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }, {
+          imgRelated: "img/slider1.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }, {
+          imgRelated: "img/slider1.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }]
+      }, {
+        heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        imgWall: "img/local-life-post.jpg",
+        likes: "15660",
+        travelledIcon: "img/cycle-cyan.png",
+        postSlider: [{
+          imgRelated: "img/slider1.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }, {
+          imgRelated: "img/slider1.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }, {
+          imgRelated: "img/slider1.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }]
+      }, {
+        heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        imgWall: "img/local-life-post.jpg",
+        likes: "15660",
+        travelledIcon: "img/cycle-cyan.png",
+        postSlider: [{
+          imgRelated: "img/slider1.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }, {
+          imgRelated: "img/slider1.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }, {
+          imgRelated: "img/slider1.jpg"
+        }, {
+          imgRelated: "img/slider2.jpg"
+        }]
+      }];
+
+      // moments json
+      $scope.monthMoments = [{
+        monthName: "November 2015",
+        momentPic: [
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg'
+        ]
+      }, {
+        monthName: "October 2015",
+        momentPic: [
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg'
+        ]
+      }, {
+        monthName: "September 2015",
+        momentPic: [
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg',
+          'img/slider1.jpg',
+          'img/slider2.jpg'
+        ]
+      }, ];
+      $scope.momentPic = [
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg',
+        'img/slider1.jpg',
+        'img/slider2.jpg'
+      ];
+
+      $scope.travelMoment = [{
+        imgBack: "img/moment-travel1.jpg",
+        imgFront: "img/moment-travel.png",
+        placeName: "London Journey",
+        totalPhoto: "50",
+        timestampMonth: "14 Jan, 2014"
+      }, {
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-travel.png",
+        placeName: "London Journey",
+        totalPhoto: "50",
+        timestampMonth: "14 Jan, 2014"
+      }, {
+        imgBack: "img/moment-travel1.jpg",
+        imgFront: "img/moment-travel.png",
+        placeName: "London Journey",
+        totalPhoto: "50",
+        timestampMonth: "14 Jan, 2014"
+      }, {
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-travel.png",
+        placeName: "London Journey",
+        totalPhoto: "50",
+        timestampMonth: "14 Jan, 2014"
+      }, {
+        imgBack: "img/moment-travel1.jpg",
+        imgFront: "img/moment-travel.png",
+        placeName: "London Journey",
+        totalPhoto: "50",
+        timestampMonth: "14 Jan, 2014"
+      }, {
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-travel.png",
+        placeName: "London Journey",
+        totalPhoto: "50",
+        timestampMonth: "14 Jan, 2014"
+      }, ];
+
+      $scope.localMoment = [{
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-local.png",
+        timestampDate: "August, 2014",
+        totalPhoto: "50"
+      }, {
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-local.png",
+        timestampDate: "October, 2014",
+        totalPhoto: "50"
+      }, {
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-local.png",
+        timestampDate: "August, 2014",
+        totalPhoto: "50"
+      }, {
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-local.png",
+        timestampDate: "October, 2014",
+        totalPhoto: "50"
+      }, {
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-local.png",
+        timestampDate: "October, 2014",
+        totalPhoto: "50"
+      }, {
+        imgBack: "img/moment-travel2.jpg",
+        imgFront: "img/moment-local.png",
+        timestampDate: "August, 2014",
+        totalPhoto: "50"
+      }];
+
+      $scope.viewMonth = false;
+      $scope.showMonthView = function () {
+        $scope.viewMonth = true;
+      };
+      // reviews json
+      $scope.oneAtATime = true;
+
+      $scope.getReview = function () {
+        $uibModal.open({
+          animation: true,
+          templateUrl: "views/modal/review-post.html",
+          scope: $scope,
+          backdropClass: "review-backdrop"
+        })
+      };
+      $scope.showRating = 1;
+      $scope.fillColor = "";
+      $scope.starRating = function (val) {
+        if (val == 1) {
+          $scope.showRating = 1;
+          $scope.fillColor2 = "";
+          $scope.fillColor3 = "";
+          $scope.fillColor4 = "";
+          $scope.fillColor5 = "";
+        } else if (val == 2) {
+          $scope.showRating = 2;
+          $scope.fillColor2 = "fa-star";
+          $scope.fillColor3 = "";
+          $scope.fillColor4 = "";
+          $scope.fillColor5 = "";
+        } else if (val == 3) {
+          $scope.showRating = 3;
+          $scope.fillColor2 = "fa-star";
+          $scope.fillColor3 = "fa-star";
+          $scope.fillColor4 = "";
+          $scope.fillColor5 = "";
+        } else if (val == 4) {
+          $scope.showRating = 4;
+          $scope.fillColor2 = "fa-star";
+          $scope.fillColor3 = "fa-star";
+          $scope.fillColor4 = "fa-star";
+          $scope.fillColor5 = "";
+        } else if (val == 5) {
+          $scope.showRating = 5;
+          $scope.fillColor2 = "fa-star";
+          $scope.fillColor3 = "fa-star";
+          $scope.fillColor4 = "fa-star";
+          $scope.fillColor5 = "fa-star";
+        } else {
+          $scope.showRating = 1;
+        }
+      };
+      $scope.reviewAll = [{
+        locationName: "Girgaon Beach",
+        travelType: "img/beach.png",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+        city: "Mumbai",
+        country: "India",
+        reviewLocation: true
+      }, {
+        locationName: "Girgaon Beach",
+        travelType: "img/beach.png",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+        city: "Mumbai",
+        country: "India",
+        reviewLocation: false
+      }, {
+        locationName: "Girgaon Beach",
+        travelType: "img/beach.png",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+        city: "Mumbai",
+        country: "India",
+        reviewLocation: true
+      }, {
+        locationName: "Girgaon Beach",
+        travelType: "img/beach.png",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+        city: "Mumbai",
+        country: "India",
+        reviewLocation: false
+      }];
+      $scope.travelReview = [{
+        img: "img/moment-travel2.jpg",
+        countryName: "India"
+      }, {
+        img: "img/moment-travel2.jpg",
+        countryName: "India"
+      }, {
+        img: "img/moment-travel2.jpg",
+        countryName: "India"
+      }, {
+        img: "img/moment-travel2.jpg",
+        countryName: "India"
+      }, {
+        img: "img/moment-travel2.jpg",
+        countryName: "India"
+      }];
+
+      $scope.travelCity = [{
+        cityName: "Mumbai",
+        visitedCity: [{
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }]
+      }, {
+        cityName: "Mumbai",
+        visitedCity: [{
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }]
+      }, {
+        cityName: "Mumbai",
+        visitedCity: [{
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }]
+      }, {
+        cityName: "Mumbai",
+        visitedCity: [{
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }]
+      }, {
+        cityName: "Mumbai",
+        visitedCity: [{
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }]
+      }, {
+        cityName: "Mumbai",
+        visitedCity: [{
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }, {
+          travelType: "img/beach.png",
+          locationName: "Girgaon Beach",
+          timestampDate: "14 Jan, 2014",
+          timestampHour: "1:20 pm",
+        }]
+      }, ];
+      $scope.viewtravelCountry = false;
+      $scope.showtravelCountry = function () {
+        $scope.viewtravelCountry = true;
+      };
+      $scope.viewlocalCountry = false;
+      $scope.showlocalCountry = function () {
+        $scope.viewlocalCountry = true;
+      };
+
+
     }
-    $scope.$on('scrollbar.hide', function () {
-      // console.log('Scrollbar hide');
-    });
-    $scope.$on('scrollbar.show', function () {
-      // console.log('Scrollbar show');
-    });
-
-
-    $scope.openLocalimg = function (getVal) {
-      // $scope.showimgData = $scope.localLife[getVal];
-      $scope.showimgData = getVal;
-      // console.log(getVal);
-      $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/local-imgview.html",
-        scope: $scope,
-        windowTopClass: "local-imgview-pop"
-      })
-    };
-
-    $scope.travelLife = [{
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: false,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: true,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: false,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: false,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: true,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: true,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }];
-
-    $scope.localLife = [{
-      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgWall: "img/local-life-post.jpg",
-      likes: "15660",
-      travelledIcon: "img/cycle-cyan.png",
-      postSlider: [{
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }]
-    }, {
-      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgWall: "img/local-life-post.jpg",
-      likes: "15660",
-      travelledIcon: "img/cycle-cyan.png",
-      postSlider: [{
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }]
-    }, {
-      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgWall: "img/local-life-post.jpg",
-      likes: "15660",
-      travelledIcon: "img/cycle-cyan.png",
-      postSlider: [{
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }]
-    }, {
-      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgWall: "img/local-life-post.jpg",
-      likes: "15660",
-      travelledIcon: "img/cycle-cyan.png",
-      postSlider: [{
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }]
-    }, {
-      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgWall: "img/local-life-post.jpg",
-      likes: "15660",
-      travelledIcon: "img/cycle-cyan.png",
-      postSlider: [{
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }]
-    }];
-
-    // moments json
-    $scope.monthMoments = [{
-      monthName: "November 2015",
-      momentPic: [
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg'
-      ]
-    }, {
-      monthName: "October 2015",
-      momentPic: [
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg'
-      ]
-    }, {
-      monthName: "September 2015",
-      momentPic: [
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg'
-      ]
-    }, ];
-    $scope.momentPic = [
-      'img/slider1.jpg',
-      'img/slider2.jpg',
-      'img/slider1.jpg',
-      'img/slider2.jpg',
-      'img/slider1.jpg',
-      'img/slider2.jpg',
-      'img/slider1.jpg',
-      'img/slider2.jpg',
-      'img/slider1.jpg',
-      'img/slider2.jpg',
-      'img/slider1.jpg',
-      'img/slider2.jpg',
-      'img/slider1.jpg',
-      'img/slider2.jpg',
-      'img/slider1.jpg',
-      'img/slider2.jpg',
-      'img/slider1.jpg',
-      'img/slider2.jpg',
-      'img/slider1.jpg',
-      'img/slider2.jpg',
-      'img/slider1.jpg',
-      'img/slider2.jpg',
-      'img/slider1.jpg',
-      'img/slider2.jpg'
-    ];
-
-    $scope.travelMoment = [{
-      imgBack: "img/moment-travel1.jpg",
-      imgFront: "img/moment-travel.png",
-      placeName: "London Journey",
-      totalPhoto: "50",
-      timestampMonth: "14 Jan, 2014"
-    }, {
-      imgBack: "img/moment-travel2.jpg",
-      imgFront: "img/moment-travel.png",
-      placeName: "London Journey",
-      totalPhoto: "50",
-      timestampMonth: "14 Jan, 2014"
-    }, {
-      imgBack: "img/moment-travel1.jpg",
-      imgFront: "img/moment-travel.png",
-      placeName: "London Journey",
-      totalPhoto: "50",
-      timestampMonth: "14 Jan, 2014"
-    }, {
-      imgBack: "img/moment-travel2.jpg",
-      imgFront: "img/moment-travel.png",
-      placeName: "London Journey",
-      totalPhoto: "50",
-      timestampMonth: "14 Jan, 2014"
-    }, {
-      imgBack: "img/moment-travel1.jpg",
-      imgFront: "img/moment-travel.png",
-      placeName: "London Journey",
-      totalPhoto: "50",
-      timestampMonth: "14 Jan, 2014"
-    }, {
-      imgBack: "img/moment-travel2.jpg",
-      imgFront: "img/moment-travel.png",
-      placeName: "London Journey",
-      totalPhoto: "50",
-      timestampMonth: "14 Jan, 2014"
-    }, ];
-
-    $scope.localMoment = [{
-      imgBack: "img/moment-travel2.jpg",
-      imgFront: "img/moment-local.png",
-      timestampDate: "August, 2014",
-      totalPhoto: "50"
-    }, {
-      imgBack: "img/moment-travel2.jpg",
-      imgFront: "img/moment-local.png",
-      timestampDate: "October, 2014",
-      totalPhoto: "50"
-    }, {
-      imgBack: "img/moment-travel2.jpg",
-      imgFront: "img/moment-local.png",
-      timestampDate: "August, 2014",
-      totalPhoto: "50"
-    }, {
-      imgBack: "img/moment-travel2.jpg",
-      imgFront: "img/moment-local.png",
-      timestampDate: "October, 2014",
-      totalPhoto: "50"
-    }, {
-      imgBack: "img/moment-travel2.jpg",
-      imgFront: "img/moment-local.png",
-      timestampDate: "October, 2014",
-      totalPhoto: "50"
-    }, {
-      imgBack: "img/moment-travel2.jpg",
-      imgFront: "img/moment-local.png",
-      timestampDate: "August, 2014",
-      totalPhoto: "50"
-    }];
-
-    $scope.viewMonth = false;
-    $scope.showMonthView = function () {
-      $scope.viewMonth = true;
-    };
-    // reviews json
-    $scope.oneAtATime = true;
-
-    $scope.getReview = function () {
-      $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/review-post.html",
-        scope: $scope,
-        backdropClass: "review-backdrop"
-      })
-    };
-    $scope.showRating = 1;
-    $scope.fillColor = "";
-    $scope.starRating = function (val) {
-      if (val == 1) {
-        $scope.showRating = 1;
-        $scope.fillColor2 = "";
-        $scope.fillColor3 = "";
-        $scope.fillColor4 = "";
-        $scope.fillColor5 = "";
-      } else if (val == 2) {
-        $scope.showRating = 2;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "";
-        $scope.fillColor4 = "";
-        $scope.fillColor5 = "";
-      } else if (val == 3) {
-        $scope.showRating = 3;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "fa-star";
-        $scope.fillColor4 = "";
-        $scope.fillColor5 = "";
-      } else if (val == 4) {
-        $scope.showRating = 4;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "fa-star";
-        $scope.fillColor4 = "fa-star";
-        $scope.fillColor5 = "";
-      } else if (val == 5) {
-        $scope.showRating = 5;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "fa-star";
-        $scope.fillColor4 = "fa-star";
-        $scope.fillColor5 = "fa-star";
-      } else {
-        $scope.showRating = 1;
-      }
-    };
-    $scope.reviewAll = [{
-      locationName: "Girgaon Beach",
-      travelType: "img/beach.png",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "1:20 pm",
-      city: "Mumbai",
-      country: "India",
-      reviewLocation: true
-    }, {
-      locationName: "Girgaon Beach",
-      travelType: "img/beach.png",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "1:20 pm",
-      city: "Mumbai",
-      country: "India",
-      reviewLocation: false
-    }, {
-      locationName: "Girgaon Beach",
-      travelType: "img/beach.png",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "1:20 pm",
-      city: "Mumbai",
-      country: "India",
-      reviewLocation: true
-    }, {
-      locationName: "Girgaon Beach",
-      travelType: "img/beach.png",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "1:20 pm",
-      city: "Mumbai",
-      country: "India",
-      reviewLocation: false
-    }];
-    $scope.travelReview = [{
-      img: "img/moment-travel2.jpg",
-      countryName: "India"
-    }, {
-      img: "img/moment-travel2.jpg",
-      countryName: "India"
-    }, {
-      img: "img/moment-travel2.jpg",
-      countryName: "India"
-    }, {
-      img: "img/moment-travel2.jpg",
-      countryName: "India"
-    }, {
-      img: "img/moment-travel2.jpg",
-      countryName: "India"
-    }];
-
-    $scope.travelCity = [{
-      cityName: "Mumbai",
-      visitedCity: [{
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }]
-    }, {
-      cityName: "Mumbai",
-      visitedCity: [{
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }]
-    }, {
-      cityName: "Mumbai",
-      visitedCity: [{
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }]
-    }, {
-      cityName: "Mumbai",
-      visitedCity: [{
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }]
-    }, {
-      cityName: "Mumbai",
-      visitedCity: [{
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }]
-    }, {
-      cityName: "Mumbai",
-      visitedCity: [{
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }]
-    }, ];
-    $scope.viewtravelCountry = false;
-    $scope.showtravelCountry = function () {
-      $scope.viewtravelCountry = true;
-    };
-    $scope.viewlocalCountry = false;
-    $scope.showlocalCountry = function () {
-      $scope.viewlocalCountry = true;
-    };
     // holidayplanner json
   })
   .controller('JourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
