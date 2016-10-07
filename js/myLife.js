@@ -1,3 +1,4 @@
+var bl = [];
 var navigationservice = angular.module('mylife', [])
 
 .factory('MyLife', function ($http) {
@@ -13,12 +14,20 @@ var navigationservice = angular.module('mylife', [])
                     $http.post(adminURL + "/user/getCountryVisitedListWeb").success(function (data3) {
                         var countries = data.data;
                         var bucketList = data2.data.bucketList;
+
+                        console.log(bucketList);
                         var countryVisited = data3.data.countriesVisited;
+                        // var mapBucketList = {};
                         _.each(bucketList, function (n) {
                             var index = _.findIndex(countries, function (country) {
                                 return country._id == n._id;
                             });
                             countries[index].bucketList = true;
+                            // _.forEach(window._mapPathData.paths, function (value, key) {
+                            //     if (value.name == n.name) {
+                            //         mapBucketList.key.metric
+                            //     }
+                            // });
                         });
                         _.each(countryVisited, function (n) {
                             var index = _.findIndex(countries, function (country) {
@@ -26,7 +35,7 @@ var navigationservice = angular.module('mylife', [])
                             });
                             countries[index].countryVisited = true;
                         });
-                        callback(countries);
+                        callback(countries, mapBucketList);
                     }).error(errCallback);
                 }).error(errCallback);
             }).error(errCallback);

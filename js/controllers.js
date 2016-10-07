@@ -160,7 +160,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     };
 
     $scope.socialLogin = function (loginTo) {
-      // console.log(loginTo);
       ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
       stopinterval = $interval(callAtIntervaltwitter, 2000);
       ref.addEventListener('exit', function (event) {
@@ -2753,9 +2752,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     $scope.userData = $.jStorage.get("profile");
 
 
-    var getAllCountries = function (countries) {
+    var getAllCountries = function (countries, mapBucketList) {
       $scope.nationality = countries;
+      $scope.data = mapBucketList;
       console.log(countries);
+      console.log(mapBucketList);
     };
 
     MyLife.getAllCountries(getAllCountries, function (err) {
@@ -2891,10 +2892,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
           metric: 40
         },
         'FR': {
-          metric: 29
+          metric: 400
         },
         'IN': {
-          metric: 500
+          metric: 4000
         }
       };
       $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
