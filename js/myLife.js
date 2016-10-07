@@ -14,8 +14,6 @@ var navigationservice = angular.module('mylife', [])
                     $http.post(adminURL + "/user/getCountryVisitedListWeb").success(function (data3) {
                         var countries = data.data;
                         var bucketList = data2.data.bucketList;
-
-                        console.log(bucketList);
                         var countryVisited = data3.data.countriesVisited;
                         // var mapBucketList = {};
                         _.each(bucketList, function (n) {
@@ -35,7 +33,7 @@ var navigationservice = angular.module('mylife', [])
                             });
                             countries[index].countryVisited = true;
                         });
-                        callback(countries, mapBucketList);
+                        callback(countries);
                     }).error(errCallback);
                 }).error(errCallback);
             }).error(errCallback);
@@ -53,9 +51,6 @@ var navigationservice = angular.module('mylife', [])
         updateCountriesVisited: function (obj, callback, errCallback) {
             console.log(obj);
             $http.post(adminURL + "/user/updateCountriesVisitedWeb", obj).success(callback).error(errCallback);
-            if (country.bucketList === false) {
-                $http.post(adminURL + "/user/removeCountriesVisitedWeb", obj).success(callback).error(errCallback);
-            }
         },
     };
 });

@@ -406,7 +406,7 @@ firstapp.directive('uploadImage', function ($http, $filter) {
         image.hide = true;
         var formData = new FormData();
         formData.append('file', image.file, image.name);
-        $http.post(uploadURL, formData, {
+        $http.post(uploadurl, formData, {
           headers: {
             'Content-Type': undefined
           },

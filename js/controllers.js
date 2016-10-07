@@ -106,6 +106,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
 
 .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, $state) {
     //Used to name the .html file
+    var stopinterval;
     $scope.userData = $.jStorage.get("profile");
     $scope.template = TemplateService.changecontent("login");
     $scope.menutitle = NavigationService.makeactive("Login");
@@ -137,10 +138,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
         $.jStorage.set("profile", data);
         var alreadyLoggedIn = data.alreadyLoggedIn;
         console.log(alreadyLoggedIn);
-        if (alreadyLoggedIn == false) {
-          $state.go('mainpage');
-        } else {
+        if (alreadyLoggedIn === true) {
           $state.go('mylife');
+        } else if (alreadyLoggedIn === false) {
+          $state.go('mainpage');
         }
       } else {
 
@@ -269,7 +270,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
 
   })
 
-.controller('MainPageCtrl', function ($scope, TemplateService, NavigationService, $timeout, $http) {
+.controller('MainPageCtrl', function ($scope, TemplateService, NavigationService, $timeout, $http, $state) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -394,7 +395,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     var getAllCities = function (data, status) {
       if (data.value) {
         $scope.cities = data.data.predictions;
-        console.log($scope.cities);
       } else {
         console.log("Eroor Fetching Data");
       }
@@ -409,7 +409,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     };
     //End-Of get all the cities from database
     var saveDataCallback = function (data, status) {
-      if (data.value == "true") {
+      if (data.value == true) {
         console.log(data);
         NavigationService.getProfile(globalGetProfile, function (err) {
           console.log(err);
@@ -420,6 +420,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     }
 
     $scope.saveUserData = function (userData) {
+      $state.go('holiday');
       NavigationService.saveUserData(userData, saveDataCallback, function (err) {
         console.log(err);
       });
@@ -2752,11 +2753,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     $scope.userData = $.jStorage.get("profile");
 
 
-    var getAllCountries = function (countries, mapBucketList) {
+    var getAllCountries = function (countries) {
       $scope.nationality = countries;
-      $scope.data = mapBucketList;
-      console.log(countries);
-      console.log(mapBucketList);
+      // $scope.data = mapBucketList;
     };
 
     MyLife.getAllCountries(getAllCountries, function (err) {
@@ -2764,19 +2763,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     });
 
     $scope.updateBucketList = function (country) {
-      MyLife.updateBucketList(country, function () {}, function () {});
+      MyLife.updateBucketList(country, function (data, status) {
+        reloadCount();
+      }, function () {});
     };
 
     $scope.updateCountryVisited = function (country) {
       $scope.obj.countryId = country._id;
-      if (country.countryVisited == false) {
+      if (country.countryVisited == true) {
+        $scope.visited = [];
+      } else {
+        $scope.visited = [];
         $uibModal.open({
           scope: $scope,
           animation: true,
           templateUrl: "views/modal/country-visited.html"
         });
-      } else {
-        Mylife.updateCountriesVisited($scope.obj.countryId)
       }
     };
 
@@ -2786,7 +2788,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
         'year': false
       });
       $scope.obj.visited = arrNew;
-      MyLife.updateCountriesVisited($scope.obj, function () {}, function () {});
+      MyLife.updateCountriesVisited($scope.obj, function (data, status) {
+        reloadCount();
+      }, function () {});
     };
 
 
