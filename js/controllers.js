@@ -2751,10 +2751,59 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     //Integration Section Starts here
 
     $scope.userData = $.jStorage.get("profile");
+    $scope.data = {
+      'bucketList': {
+        metric: 0
+      },
+      'countryVisited': {
+        metric: 1
+      }
+    };
 
+    $scope.getMap = function () {
+      console.log("GET MAP CALLED");
+      var bucket = _.filter($scope.nationality, "bucketList");
+      var otherData = {
+        'bucketList': {
+          metric: 0
+        },
+        'countryVisited': {
+          metric: 1
+        }
+      };
+      _.each(bucket, function (country) {
+        _.each(window._mapPathData.paths, function (map, key) {
+          if (country.name == map.name) {
+            otherData[key] = {
+              metric: 0
+            };
+            return;
+          }
+        });
+
+      });
+      var countryVisited = _.filter($scope.nationality, "countryVisited");
+      _.each(countryVisited, function (country) {
+        _.each(window._mapPathData.paths, function (map, key) {
+          if (country.name == map.name) {
+            otherData[key] = {
+              metric: 1
+            };
+            return;
+          }
+        });
+
+      });
+      $timeout(function () {
+        console.log(otherData);
+        $scope.data = otherData;
+      }, 100);
+    };
 
     var getAllCountries = function (countries) {
       $scope.nationality = countries;
+
+      $scope.getMap();
       // $scope.data = mapBucketList;
     };
 
@@ -2766,11 +2815,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
       MyLife.updateBucketList(country, function (data, status) {
         reloadCount();
       }, function () {});
+      $scope.getMap();
     };
 
     $scope.updateCountryVisited = function (country) {
       $scope.obj.countryId = country._id;
-      if (country.countryVisited == true) {
+      if (country.countryVisited === true) {
         $scope.visited = [];
       } else {
         $scope.visited = [];
@@ -2780,6 +2830,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
           templateUrl: "views/modal/country-visited.html"
         });
       }
+      $scope.getMap();
     };
 
     $scope.updateNumOfTimes = function (visited) {
@@ -2791,6 +2842,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
       MyLife.updateCountriesVisited($scope.obj, function (data, status) {
         reloadCount();
       }, function () {});
+      $scope.getMap();
     };
 
     var travelCount = function (data, status) {
@@ -2936,20 +2988,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
         // }, {
         //   countryName: "Canada"
         // }, ];
-      $scope.data = {
-        'GB': {
-          metric: 1
-        },
-        'US': {
-          metric: 2
-        },
-        'FR': {
-          metric: 3
-        },
-        'IN': {
-          metric: 4000
-        }
-      };
+
+
+
+
+
       $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
       $scope.mapDataHumanizeFn = function (val) {
         return val + " units";
@@ -3902,12 +3945,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
       'IN': {
         metric: 500
       }
-      // 'FI': {metric: 15}
     };
     $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
-    $scope.mapDataHumanizeFn = function (val) {
-      return val + " units";
-    };
+
     $scope.heatmapColors = ['#2c3757', '#ff6759'];
 
     $scope.travelLife = [{
