@@ -2817,7 +2817,59 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     // Little more about me starts here
     $scope.pronoun; //for he and she
     $scope.pronoun1; //for him and here
-    if (userData.gender)
+    $scope.userName = $scope.userData.firstName;
+    $scope.kindOfHoliday = $scope.userData.travelConfig.kindOfHoliday[0];
+    $scope.usuallyGo = $scope.userData.travelConfig.usuallyGo[0];
+    $scope.preferToTravel = $scope.userData.travelConfig.preferToTravel[0];
+    $scope.idealHoliday = $scope.userData.travelConfig.preferToTravel[0]
+
+    console.log($scope.kindOfHoliday + "-" + $scope.usuallyGo + "-" + $scope.preferToTravel + "-" + $scope.idealHoliday);
+    if ($scope.userData.gender == "male") {
+      $scope.pronoun = "he";
+      $scope.pronoun1 = "him";
+      console.log($scope.pronoun + "-" + $scope.pronoun1);
+    } else {
+      $scope.pronoun = "she";
+      $scope.pronoun1 = "her";
+      console.log($scope.pronoun + "-" + $scope.pronoun1);
+    }
+
+    if ($scope.usuallyGo == "By the map") {
+      $scope.usuallyGo = "by the map";
+      console.log($scope.usuallyGo);
+    } else if ($scope.usuallyGo == "Where the road takes you") {
+      $scope.usuallyGO = "where the road takes";
+      console.log($scope.usuallyGo);
+    } else if ($scope.usuallyGo == "A little bit of both") {
+      $scope.usuallyGO = "by the map or where the road takes";
+      console.log($scope.usuallyGo);
+    }
+
+    if (($scope.preferToTravel == "Blogger") || ($scope.preferToTravel == "Photographer")) {
+      $scope.intermediate = "is a";
+      console.log($scope.intermediate + "-" + $scope.preferToTravel);
+    } else {
+      $scope.intermediate = "prefers to travel";
+      if (($scope.preferToTravel == "Family") || ($scope.preferToTravel == "Friends")) {
+        $scope.preferToTravel = "with " + $scope.preferToTravel;
+        console.log($scope.intermediate + "-" + $scope.preferToTravel);
+      } else if ($scope.preferToTravel == "Business") {
+        $scope.preferToTravel = "on " + $scope.preferToTravel;
+        console.log($scope.intermediate + "-" + $scope.preferToTravel);
+      } else if ($scope.preferToTravel == "Group Tour") {
+        $scope.preferToTravel = "on a " + $scope.preferToTravel;
+        console.log($scope.intermediate + "-" + $scope.preferToTravel);
+      } else if ($scope.preferToTravel == "Partner/Spouse") {
+        $scope.preferToTravel = "with their partner";
+        console.log($scope.intermediate + "-" + $scope.preferToTravel);
+      }
+    }
+
+
+
+
+
+
 
     // Little more about me ends here
 
