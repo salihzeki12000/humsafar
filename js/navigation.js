@@ -7,7 +7,7 @@ if (isproduction) {
 }
 var imgurl = adminURL + "/upload/";
 
-var imgpath = imgurl + "readFile?=";
+var imgpath = imgurl + "readFile";
 var uploadurl = imgurl;
 var navigationservice = angular.module('navigationservice', [])
 

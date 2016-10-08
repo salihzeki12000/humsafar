@@ -40,7 +40,7 @@
               <li>
                 <a href="">
                   <div class="user-img inline-block v-mid">
-                    <img src="http://travelibro.com/api/upload/readFile?file={{userData.profilePicture}}" alt="" width="40" class="img-responsive">
+                    <img src="{{userData.profilePicture|uploadpath}}" alt="" width="40" class="img-responsive">
                   </div>
                   <span class="color-white ml10 fz13">{{userData.name}}</span>
                 </a>

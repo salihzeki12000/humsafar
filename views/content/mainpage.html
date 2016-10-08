@@ -105,7 +105,7 @@
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=2">Next</button>
               </div>
-            </div>
+            </div> 
           </div>-->
         <div class="bg-white" ng-init="goNext=2">
           <div class="nationality" ng-show="goNext==2">
@@ -120,7 +120,7 @@
                     <div class="nation-select relate">
                       <input type="radio" id="{{nation._id}}" name="nation" ng-model="userData.homeCountry" ng-value="nation.name" />
                       <label for="{{nation._id}}">
-                        <img ng-src="{{nation.img}}" alt="" class="img-responsive inline-block mr10">
+                        <img ng-src="{{nation.flag|uploadpath}}" alt="" class="img-responsive inline-block mr10" width="30px">
                         <span class="color-white">{{nation.name}}</span>
                       </label>
                     </div>
@@ -183,8 +183,7 @@
                 <img-crop image="myImage " result-image="myCroppedImage "></img-crop>
               </div>
               <div class="upload-section " ng-hide="showImage ">
-                <img src="http://travelibro.com/api/upload/readFile?file={{profile.profilePicture}} " alt=" " class="m-center
-                img-responsive ">
+                <img src="{{profile.profilePicture|uploadpath}} " alt=" " class="m-center img-responsive ">
                 <p class="text-center color-grey avenir-roman ">Drag a profile photo here</p>
                 <span class="block mt10 color-grey avenir-roman ">- or -</span>
                 <div class="upload-btn ">

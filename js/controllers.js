@@ -389,6 +389,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     NavigationService.getAllCountries(getAllCountries, function (err) {
       console.log(err);
     });
+
+
     //End-Of get all the countries from database
 
     //gets all the cities from database
@@ -2867,56 +2869,109 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     $scope.listOfYears = years(1950);
 
     // Little more about me starts here
+    function titleCase(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
     if ($scope.userData) {
       $scope.pronoun; //for he and she
       $scope.pronoun1; //for him and here
-      $scope.userName = $scope.userData.firstName;
+      $scope.userName = titleCase($scope.userData.firstName);
       $scope.kindOfHoliday = $scope.userData.travelConfig.kindOfHoliday[0];
       $scope.usuallyGo = $scope.userData.travelConfig.usuallyGo[0];
+      $scope.flag = false;
+      $scope.usuallyGoIcon1 = "";
       $scope.preferToTravel = $scope.userData.travelConfig.preferToTravel[0];
-      $scope.idealHoliday = $scope.userData.travelConfig.holidayType[0]
+      $scope.idealHoliday = $scope.userData.travelConfig.holidayType[0];
 
-      console.log($scope.kindOfHoliday + "-" + $scope.usuallyGo + "-" + $scope.preferToTravel + "-" + $scope.idealHoliday);
       if ($scope.userData.gender == "male") {
         $scope.pronoun = "he";
-        $scope.pronoun1 = "him";
-        console.log($scope.pronoun + "-" + $scope.pronoun1);
+        $scope.pronoun1 = " him";
       } else {
         $scope.pronoun = "she";
         $scope.pronoun1 = "her";
-        console.log($scope.pronoun + "-" + $scope.pronoun1);
       }
 
-      if ($scope.usuallyGo == "By the map") {
+      if ($scope.usuallyGo == "By the map ") {
         $scope.usuallyGo = "by the map";
-        console.log($scope.usuallyGo);
+        $scope.usuallyGoIcon = "img1/bythemapfull.png";
+        console.log($scope.usuallyGoIcon);
       } else if ($scope.usuallyGo == "Where the road takes you") {
-        $scope.usuallyGo = "where the road takes " + $scope.pronoun1;
-        console.log($scope.usuallyGo);
+        $scope.usuallyGo = "where the road takes" + $scope.pronoun1;
+        $scope.usuallyGoIcon = "img1/wheretheroadtakesyoufull.png";
+        console.log($scope.usuallyGoIcon);
       } else if ($scope.usuallyGo == "A little bit of both") {
-        $scope.usuallyGO = "by the map or where the road takes" + $scope.pronoun1;
-        console.log($scope.usuallyGo);
+        $scope.flag = true;
+        $scope.usuallyGo = "by the map or ";
+        $scope.usuallyGo1 = "where the road takes" + $scope.pronoun1;
+        $scope.usuallyGoIcon = "img1/bythemapfull.png";
+        $scope.usuallyGoIcon1 = "img1/wheretheroadtakesyoufull.png";
       }
 
       if (($scope.preferToTravel == "Blogger") || ($scope.preferToTravel == "Photographer")) {
         $scope.intermediate = "is a";
-        console.log($scope.intermediate + "-" + $scope.preferToTravel);
+        if ($scope.preferToTravel == "Blogger") {
+          $scope.preferToTravelIcon = "img1/bloggerfull.png";
+        } else {
+          $scope.preferToTravelIcon = "img1/photographerfull.png";
+        }
       } else {
-        $scope.intermediate = "prefers to travel";
         if (($scope.preferToTravel == "Family") || ($scope.preferToTravel == "Friends")) {
-          $scope.preferToTravel = "with " + $scope.preferToTravel;
-          console.log($scope.intermediate + "-" + $scope.preferToTravel);
+          $scope.intermediate = "prefers to travel with "
+          $scope.preferToTravelIcon = "img1/bus.png";
         } else if ($scope.preferToTravel == "Business") {
-          $scope.preferToTravel = "on " + $scope.preferToTravel;
-          console.log($scope.intermediate + "-" + $scope.preferToTravel);
+          $scope.intermediate = "prefers to travel on ";
+          $scope.preferToTravelIcon = "img1/businessfull.png";
         } else if ($scope.preferToTravel == "Group Tour") {
-          $scope.preferToTravel = "on a " + $scope.preferToTravel;
-          console.log($scope.intermediate + "-" + $scope.preferToTravel);
+          $scope.intermediate = "prefers to travel on a ";
+          $scope.preferToTravelIcon = "img1/grouptourfull.png";
         } else if ($scope.preferToTravel == "Partner/Spouse") {
-          $scope.preferToTravel = "with their partner";
-          console.log($scope.intermediate + "-" + $scope.preferToTravel);
+          $scope.intermediate = "prefers to travel with their";
+          $scope.preferToTravel = "Partner";
+          $scope.preferToTravelIcon = "img1/partnerfull.png";
+        } else if ($scope.preferToTravel == "Solo") {
+          $scope.intermediate = "prefers to travel ";
+          $scope.preferToTravelIcon = "img1/solofull.png";
         }
       }
+
+      if ($scope.kindOfHoliday == "Island & Beach") {
+        $scope.kindOfHolidayIcon = "img1/beachfull.png";
+      } else if ($scope.kindOfHoliday == "City") {
+        $scope.kindOfHolidayIcon = "img1/cityfull.png";
+      } else if ($scope.kindOfHoliday == "Safari") {
+        $scope.kindOfHolidayIcon = "img1/safarifull.png"
+      } else if ($scope.kindOfHoliday == "Mountains") {
+        $scope.kindOfHolidayIcon = "img1/mountainsfull.png"
+      } else if ($scope.kindOfHoliday == "Cruise") {
+        $scope.kindOfHolidayIcon = "img1/cruisefull.png"
+      } else if ($scope.kindOfHoliday == "Countryside") {
+        $scope.kindOfHolidayIcon = "img1/countrysidefull.png"
+      }
+
+
+      if ($scope.idealHoliday == "Luxury ") {
+        $scope.idealHolidayIcon = "img1/luxuryfull.png";
+      } else if ($scope.idealHoliday == "Backpacking ") {
+        $scope.idealHolidayIcon = "img1/backpackingfull.png ";
+      } else if ($scope.idealHoliday == "Green travelling") {
+        $scope.idealHolidayIcon = "img1/greentravellingfull.png"
+      } else if ($scope.idealHoliday == "Pocket friendly") {
+        $scope.idealHolidayIcon = "img1/pocketfriendlyfull.png"
+      } else if ($scope.idealHoliday == "Romance ") {
+        $scope.idealHolidayIcon = "img1/romancefull.png"
+      } else if ($scope.idealHoliday == "Sports & Adventure ") {
+        $scope.idealHolidayIcon = "img1/sportandadventurefull.png"
+      } else if ($scope.idealHoliday == "History & Culture") {
+        $scope.idealHolidayIcon = "img1/historyandculturefull.png"
+      } else if ($scope.idealHoliday == "Spirituality & \u0003Wellness ") {
+        $scope.idealHoliday = "Spirituality & Wellness"
+        $scope.idealHolidayIcon = "img1/spiritualityfull.png"
+      } else if ($scope.idealHoliday == "Shopping ") {
+        $scope.idealHolidayIcon = "img1/shoppingfull.png"
+      } else if ($scope.idealHoliday == "Food & Wine ") {
+        $scope.idealHolidayIcon = "img1/foodandwinefull.png"
+      }
+
     }
     // Little more about me ends here
 

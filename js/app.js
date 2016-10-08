@@ -433,3 +433,24 @@ firstapp.directive('uploadImage', function ($http, $filter) {
     }
   };
 });
+firstapp.filter('uploadpath', function () {
+  return function (input, width, height, style) {
+    var other = "";
+    if (width && width !== "") {
+      other += "&width=" + width;
+    }
+    if (height && height !== "") {
+      other += "&height=" + height;
+    }
+    if (style && style !== "") {
+      other += "&style=" + style;
+    }
+    if (input) {
+      if (input.indexOf('https://') == -1) {
+        return imgpath + "?file=" + input + other;
+      } else {
+        return input;
+      }
+    }
+  };
+});
