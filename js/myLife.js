@@ -15,6 +15,8 @@ var navigationservice = angular.module('mylife', [])
                         var countries = data.data;
                         var bucketList = data2.data.bucketList;
                         var countryVisited = data3.data.countriesVisited;
+                        // console.log(bucketList);
+                        // console.log(countryVisited);
                         // var mapBucketList = {};
                         _.each(bucketList, function (n) {
                             var index = _.findIndex(countries, function (country) {

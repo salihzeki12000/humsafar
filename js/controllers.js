@@ -2793,12 +2793,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
       }, function () {});
     };
 
-
-
-
-
-
-
     var travelCount = function (data, status) {
       $scope.count = data.data;
     };
@@ -2819,6 +2813,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
       return years;
     }
     $scope.listOfYears = years(1950);
+
+    // Little more about me starts here
+    $scope.pronoun; //for he and she
+    $scope.pronoun1; //for him and here
+    if (userData.gender)
+
+    // Little more about me ends here
 
 
     //Integration Section Ends here
@@ -2890,13 +2891,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
         // }, ];
       $scope.data = {
         'GB': {
-          metric: 4
+          metric: 1
         },
         'US': {
-          metric: 40
+          metric: 2
         },
         'FR': {
-          metric: 400
+          metric: 3
         },
         'IN': {
           metric: 4000

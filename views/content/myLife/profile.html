@@ -78,10 +78,15 @@
                         <div class="col-md-offset-2 col-md-8">
                             <div class="text-center">
                                 <div class="more-detail" ng-show="getMore">
-                                    <p class="avenir-roman">Amit loves to travel and explore the <img src="img/island.png" alt="" width="30" /> <b>Island &amp; Beach</b>.
-                                        He usually goes <img src="img/more-road.png" alt="" width="30" /> <b>Where the road takes</b>                                        him, tagging his <img src="img/bus.png" alt="" width="30" /> <b>Family</b> along.
-                                        His idea of a holiday is to go out of his way to see his favourite artist perform
-                                        at a <img src="img/dj.png" alt="" width="30" /> <b>Music Festival</b>.</p>
+                                    <!--<p class="avenir-roman">{{userData.firstName}} loves to travel and explore the <img src="img/island.png" alt=""
+                                            width="30" /> <b>{{userData.travelConfig.kindOfHoliday[0]}}</b>. He usually goes
+                                        <img src="img/more-road.png" alt="" width="30" /> <b>{{userData.travelConfig.usuallyGo[0]}}</b>him,
+                                       He prefers to travel<img src="img/bus.png" alt="" width="30" /> <b>{{userData.travelConfig.preferToTravel[0]}}</b>along. His idea of a holiday is to go out of his way to see his favourite artist
+                                        perform at a <img src="img/dj.png" alt="" width="30" /> <b>Music Festival</b>.</p>-->
+                                    <p class="avenir-roman">{{userData.firstName}} loves to travel and explore the<b>{{userData.travelConfig.kindOfHoliday[0]}}</b>.
+                                        He usually goes
+                                        <b>{{userData.travelConfig.usuallyGo[0]}}</b>,He prefers to travel<b>{{userData.travelConfig.preferToTravel[0]}}</b>.<b>{{userData.firstName}}'s</b>'
+                                        Ideal holiday type is {{}}</p>
                                 </div>
                                 <span class="djb-font get-more pointer" ng-click="getMore = !getMore">more about me... <img src="img/more-about-me.png" alt="" height="35" class="" ng-class="{'abt-me': getMore == true}"></span>
                             </div>
