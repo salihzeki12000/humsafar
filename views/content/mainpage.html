@@ -183,13 +183,13 @@
                 <img-crop image="myImage " result-image="myCroppedImage "></img-crop>
               </div>
               <div class="upload-section " ng-hide="showImage ">
-                <img src="{{profile.profilePicture|uploadpath}} " alt=" " class="m-center img-responsive ">
+                <img src="{{userData.profilePicture|uploadpath}} " alt=" " class="m-center img-responsive ">
                 <p class="text-center color-grey avenir-roman ">Drag a profile photo here</p>
                 <span class="block mt10 color-grey avenir-roman ">- or -</span>
                 <div class="upload-btn ">
                   <div class="relate inline-block mr10 ">
-                    <button class="btn btn-dark-blue pointer avenir-light ">Select a photo from your computer input</button>
-                    <input type="file " id="fileInput " class="getfile pointer " />
+                    <!--<button class="btn btn-dark-blue pointer avenir-light ">Select a photo from your computer input</button>-->
+                    <!--<input type="file " id="fileInput " class="getfile pointer " />-->
                     <!--image directive used-->
                      <upload-image ng-model="userData.profilePicture "></upload-image>
                   </div>

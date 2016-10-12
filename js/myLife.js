@@ -54,5 +54,9 @@ var navigationservice = angular.module('mylife', [])
             console.log(obj);
             $http.post(adminURL + "/user/updateCountriesVisitedWeb", obj).success(callback).error(errCallback);
         },
+        getCountryVisitedListWeb: function (years, callback, errCallback) {
+            console.log(years);
+            // $http.post(adminURL + "/user/getCountryVisitedListWeb", id).success(callback).error(errCallback);
+        }
     };
 });

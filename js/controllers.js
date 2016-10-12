@@ -280,6 +280,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.userData = {};
+    $scope.profile = $.jStorage.get("profile");
     setTimeout(function () {
       var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
@@ -325,57 +326,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
       $scope.gender = id;
       $scope.userData.gender = name;
     };
-
-    // $scope.nationality = [{
-    //   img: "img/flag.png",
-    //   name: "Afghanistan"
-    // }, {
-    //   img: "img/flag.png",
-    //   name: "Albania"
-    // }, {
-    //   img: "img/flag.png",
-    //   name: "Algeria"
-    // }, {
-    //   img: "img/flag.png",
-    //   name: "Andorra"
-    // }, {
-    //   img: "img/flag.png",
-    //   name: "Angola"
-    // }, {
-    //   img: "img/flag.png",
-    //   name: "Antigua and Barbuda"
-    // }, {
-    //   img: "img/flag.png",
-    //   name: "Argentina"
-    // }, {
-    //   img: "img/flag.png",
-    //   name: "Armenia"
-    // }, {
-    //   img: "img/flag.png",
-    //   name: "Australia"
-    // }, {
-    //   img: "img/flag.png",
-    //   name: "Austria"
-    // }];
-    //self-invoking getAllCountries Function
-    // (function () {
-    //   return $http({
-    //       url: adminURL + "/country/getAll",
-    //       method: "POST"
-    //     })
-    //     .success(function (data, status) {
-    //       if (data.value) {
-    //         $scope.nationality = data.data;
-    //         console.log($scope.nationality);
-    //       } else {
-    //         console.log("Error Fetching Data");
-    //       }
-    //     })
-    //     .error(function () {
-    //       console.log(err);
-    //     });
-    // })();
-
 
     //gets all the countries from database
     var getAllCountries = function (data, status) {
@@ -2797,7 +2747,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
 
       });
       $timeout(function () {
-        console.log(otherData);
         $scope.data = otherData;
       }, 100);
     };
@@ -2821,9 +2770,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     };
 
     $scope.updateCountryVisited = function (country) {
+      console.log(country);
       $scope.obj.countryId = country._id;
       if (country.countryVisited === true) {
         $scope.visited = [];
+        $uibModal.open({
+          scope: $scope,
+          animation: true,
+          templateUrl: "views/modal/country-visited.html"
+        });
+        var id = {
+          '_id': country._id
+        };
+        // var qwerty = function (id) {
+        //   _.each(data.data.countriesVisited, function (n) {
+        //     $scope.visited[n.countryId].year = true;
+        //     $scope.visited[n.countryId].times =
+        //       $scope.visited[n.countryId].
+        //   });
+        // };
+        MyLife.getCountryVisitedListWeb($scope.listOfYears, qwerty, function () {});
+
       } else {
         $scope.visited = [];
         $uibModal.open({
@@ -2842,6 +2809,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
       });
       $scope.obj.visited = arrNew;
       MyLife.updateCountriesVisited($scope.obj, function (data, status) {
+        $uibModal.close();
         reloadCount();
       }, function () {});
       $scope.getMap();
@@ -2894,11 +2862,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
       if ($scope.usuallyGo == "By the map ") {
         $scope.usuallyGo = "by the map";
         $scope.usuallyGoIcon = "img1/bythemapfull.png";
-        console.log($scope.usuallyGoIcon);
       } else if ($scope.usuallyGo == "Where the road takes you") {
         $scope.usuallyGo = "where the road takes" + $scope.pronoun1;
         $scope.usuallyGoIcon = "img1/wheretheroadtakesyoufull.png";
-        console.log($scope.usuallyGoIcon);
       } else if ($scope.usuallyGo == "A little bit of both") {
         $scope.flag = true;
         $scope.usuallyGo = "by the map or ";

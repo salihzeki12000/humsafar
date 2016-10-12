@@ -351,21 +351,33 @@ firstapp.directive("scrolladd1class", function ($window) {
     });
   };
 });
-
+firstapp.directive('imageonload', function () {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      element.bind('load', function () {
+        scope.$apply(attrs.imageonload);
+      });
+    }
+  };
+});
 firstapp.directive('uploadImage', function ($http, $filter) {
   return {
-    templateUrl: '/views/directive/uploadFile.html',
+    templateUrl: 'views/directive/uploadFile.html',
     scope: {
       model: '=ngModel',
-      callback: "=ngCallback"
+      callback: "=ngCallback",
+      uploadurl: "=uploadhere",
+      state: "=currentState"
     },
     link: function ($scope, element, attrs) {
 
       $scope.showImage = function () {
         console.log($scope.image);
       };
-
-
+      if ($scope.uploadurl) {
+        uploadurl = $scope.uploadurl;
+      }
       $scope.isMultiple = false;
       $scope.inObject = false;
       if (attrs.multiple || attrs.multiple === "") {
@@ -381,7 +393,6 @@ firstapp.directive('uploadImage', function ($http, $filter) {
           $scope.uploadNow(newVal);
         }
       });
-
       if ($scope.model) {
         if (_.isArray($scope.model)) {
           $scope.image = [];
@@ -391,11 +402,11 @@ firstapp.directive('uploadImage', function ($http, $filter) {
             });
           });
         }
-
       }
       if (attrs.inobj || attrs.inobj === "") {
         $scope.inObject = true;
       }
+      $scope.name = "pratik";
       $scope.clearOld = function () {
         $scope.model = [];
       };
@@ -427,12 +438,16 @@ firstapp.directive('uploadImage', function ($http, $filter) {
             } else {
               $scope.model = data.data[0];
             }
+            if ($scope.state) {
+              $scope.state.reload();
+            }
           }
         });
       };
     }
   };
 });
+
 firstapp.filter('uploadpath', function () {
   return function (input, width, height, style) {
     var other = "";
