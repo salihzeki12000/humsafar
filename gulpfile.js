@@ -37,6 +37,7 @@ var jsArray = [
     './js/templateservice.js',
     './js/navigation.js',
     './js/myLife.js',
+    './js/fileuploadservice.js',
     //please do not change it
     './w/js/templates.js',
 ];

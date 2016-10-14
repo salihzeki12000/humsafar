@@ -1201,7 +1201,9 @@ header {
     position: absolute;
     top: 15px;
     left: 15px;
-    img { height: 80px; }
+    img {
+      height: 80px;
+    }
   }
 }
 
@@ -1674,11 +1676,18 @@ header {
   }
 }
 
+.progress-grey-bg {
+  @include position(absolute,
+  0);
+  background-color: #bfbfbf;
+}
+
 .progress-bar-strip {
   width: 100%;
   height: 8px;
   position: relative;
-  background-color: $brand-pink;
+  // background-color: $brand-pink; 
+  background-color: #bfbfbf;
   &:after {
     content: "";
     @include size(8px,
@@ -1686,8 +1695,13 @@ header {
     border-radius: 20px;
     @include position(absolute,
     -5px null null 0);
-    background-color: $brand-pink;
+    // background-color: $brand-pink;
+    background-color: $brand-light-grey;
   }
+}
+
+.completed-step:after {
+  background-color: $brand-pink !important;
 }
 
 .travel-progress-bar {

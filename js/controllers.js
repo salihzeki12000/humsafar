@@ -233,7 +233,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
 
   })
 
-.controller('BookingCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+.controller('BookingCtrl', ['fileUpload', "$scope", function ($scope, TemplateService, NavigationService, $timeout, $uibModal, fileUpload) {
     //Used to name the .html file
 
     console.log("Testing Consoles");
@@ -250,7 +250,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     }
 
 
-  })
+  }])
   .controller('AdvertiseCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
@@ -270,7 +270,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
 
   })
 
-.controller('MainPageCtrl', function ($scope, TemplateService, NavigationService, $timeout, $http, $state) {
+.controller('MainPageCtrl', ['$scope', 'TemplateService', 'NavigationService', '$timeout', '$http', '$state', 'FileUploadService', function ($scope, TemplateService, NavigationService, $timeout, $http, $state, FileUploadService) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -372,6 +372,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     }
 
     $scope.saveUserData = function (userData) {
+      console.log(userData.profilePicture);
       $state.go('holiday');
       NavigationService.saveUserData(userData, saveDataCallback, function (err) {
         console.log(err);
@@ -392,6 +393,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
               console.log(evt);
               $scope.showImage = true;
               $scope.myImage = evt.target.result;
+              console.log($scope.myCroppedImage);
+              var blob = dataURItoBlob($scope.myImage);
+              var file1 = new File([blob], 'brad pitt.jpg');
+              console.log(file1);
+              FileUploadService.uploadFileToUrl(file1, uploadurl);
             });
           };
           reader.readAsDataURL(file);
@@ -400,6 +406,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
       }
     }, 1000);
 
+    function dataURItoBlob(dataURI) {
+      // convert base64/URLEncoded data component to raw binary data held in a string
+      var byteString;
+      if (dataURI.split(',')[0].indexOf('base64') >= 0)
+        byteString = atob(dataURI.split(',')[1]);
+      else
+        byteString = unescape(dataURI.split(',')[1]);
+
+      // separate out the mime component
+      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+      // write the bytes of the string to a typed array
+      var ia = new Uint8Array(byteString.length);
+      for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+
+      return new Blob([ia], {
+        type: mimeString
+      });
+    }
+    //Angular-file-upload starts here
+
+    $scope.file = {
+      myFile: "Chintan"
+    };
+    $scope.uploadFile = function () {
+      var file = $scope.file.myFile;
+
+      console.log('file is ');
+      console.dir($scope.file.myFile);
+
+      FileUploadService.uploadFileToUrl(file, uploadurl);
+    };
+    //angular file upload ends here
 
     // $scope.getImage = function(){
     //   if() {
@@ -409,7 +450,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     //   }
     // };
 
-  })
+  }])
   .controller('HolidayCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
 
@@ -2699,10 +2740,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     $scope.navigation = NavigationService.getnav();
     $scope.obj = {};
     $scope.visited = [];
+    var len = "";
 
     //Integration Section Starts here
 
     $scope.userData = $.jStorage.get("profile");
+
+    var travelCount = function (data, status) {
+      $scope.count = data.data;
+      len = $scope.count.countriesVisited_count;
+      updateBadge();
+      updateBadgeBar();
+    };
+
+    var reloadCount = function () {
+      NavigationService.travelCount(travelCount, function (err) {
+        console.log(err);
+      });
+    };
+    reloadCount();
+
     $scope.data = {
       'bucketList': {
         metric: 0
@@ -2713,7 +2770,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     };
 
     $scope.getMap = function () {
-      console.log("GET MAP CALLED");
+      // console.log("GET MAP CALLED");
       var bucket = _.filter($scope.nationality, "bucketList");
       var otherData = {
         'bucketList': {
@@ -2753,7 +2810,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
 
     var getAllCountries = function (countries) {
       $scope.nationality = countries;
-
       $scope.getMap();
       // $scope.data = mapBucketList;
     };
@@ -2789,7 +2845,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
         //       $scope.visited[n.countryId].
         //   });
         // };
-        MyLife.getCountryVisitedListWeb($scope.listOfYears, qwerty, function () {});
+        // MyLife.getCountryVisitedListWeb($scope.listOfYears, qwerty, function () {});
 
       } else {
         $scope.visited = [];
@@ -2809,21 +2865,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
       });
       $scope.obj.visited = arrNew;
       MyLife.updateCountriesVisited($scope.obj, function (data, status) {
-        $uibModal.close();
         reloadCount();
       }, function () {});
       $scope.getMap();
     };
-
-    var travelCount = function (data, status) {
-      $scope.count = data.data;
-    };
-    var reloadCount = function () {
-      NavigationService.travelCount(travelCount, function (err) {
-        console.log(err);
-      });
-    };
-    reloadCount();
 
     var years = function (startYear) {
       var currentYear = new Date().getFullYear(),
@@ -2842,7 +2887,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     }
     if ($scope.userData) {
       $scope.pronoun; //for he and she
-      $scope.pronoun1; //for him and here
+      $scope.pronoun1; //for him and her
       $scope.userName = titleCase($scope.userData.firstName);
       $scope.kindOfHoliday = $scope.userData.travelConfig.kindOfHoliday[0];
       $scope.usuallyGo = $scope.userData.travelConfig.usuallyGo[0];
@@ -2941,6 +2986,126 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     }
     // Little more about me ends here
 
+    //userBadge starts here
+    var updateBadge = function () {
+        if (len < 4) {
+          $scope.userBadgeName = "img/newbie.png";
+        } else if ((len > 3) && (len < 8)) {
+          $scope.userBadgeName = "img/Just-got-wings.png";
+        } else if ((len > 8) && (len < 16)) {
+          $scope.userBadgeName = "img/Globe-Trotter.png";
+        } else if ((len > 16) && (len < 25)) {
+          $scope.userBadgeName = "img/wayfarer.png";
+        } else if (len >= 25) {
+          $scope.userBadgeName = "img/nomad.png";
+        }
+      }
+      //userBadge ends here
+
+    //badge-bar starts here
+    $scope.tik1 = false;
+    $scope.tik2 = false;
+    $scope.tik3 = false;
+    $scope.tik4 = false;
+    $scope.tik5 = false;
+    $scope.newbie = false;
+    $scope.justgotwings = false;
+    $scope.globetrotter = false;
+    $scope.wayfarer = false;
+    $scope.nomad = false;
+
+
+    var updateBadgeBar = function () {
+      if (len < 4) {
+        $scope.newbie = true;
+        $scope.tik1 = true;
+        $scope.mystyle1 = {
+          "width": (len / 3) * 100 + '%',
+          "background-color": "#ff6759",
+        }
+      } else if (len < 8) {
+        $scope.justgotwings = true;
+        $scope.tik1 = true;
+        $scope.tik2 = true;
+        $scope.mystyle1 = {
+          "width": "100%",
+          "background-color": "#ff6759",
+        };
+        $scope.mystyle2 = {
+          "width": ((len - 3) / 4) * 100 + '%',
+          "background-color": "#ff6759",
+        };
+      } else if (len < 16) {
+        $scope.globetrotter = true;
+        $scope.tik1 = true;
+        $scope.tik2 = true;
+        $scope.tik3 = true;
+        $scope.mystyle1 = {
+          "width": "100%",
+          "background-color": "#ff6759",
+        };
+        $scope.mystyle2 = {
+          "width": "100%",
+          "background-color": "#ff6759",
+        };
+        $scope.mystyle3 = {
+          "width": ((len - 7) / 8) * 100 + '%',
+          "background-color": "#ff6759",
+        };
+      } else if (len < 25) {
+        $scope.wayfarer = true;
+        $scope.tik1 = true;
+        $scope.tik2 = true;
+        $scope.tik3 = true;
+        $scope.tik4 = true;
+        $scope.mystyle1 = {
+          "width": "100%",
+          "background-color": "#ff6759",
+        };
+        $scope.mystyle2 = {
+          "width": "100%",
+          "background-color": "#ff6759",
+        };
+        $scope.mystyle3 = {
+          "width": "100%",
+          "background-color": "#ff6759",
+        };
+        $scope.mystyle4 = {
+          "width": ((len - 15) / 9) * 100 + '%',
+          "background-color": "#ff6759",
+        };
+      } else if (len > 24) {
+        $scope.nomad = true;
+        $scope.tik1 = true;
+        $scope.tik2 = true;
+        $scope.tik3 = true;
+        $scope.tik4 = true;
+        $scope.tik5 = true;
+        $scope.mystyle1 = {
+          "width": "100%",
+          "background-color": "#ff6759",
+        };
+        $scope.mystyle2 = {
+          "width": "100%",
+          "background-color": "#ff6759",
+        };
+        $scope.mystyle3 = {
+          "width": "100%",
+          "background-color": "#ff6759",
+        };
+        $scope.mystyle4 = {
+          "width": "100%",
+          "background-color": "#ff6759",
+        };
+        $scope.mystyle5 = {
+          "width": "100%",
+          "background-color": "#ff6759",
+        };
+      }
+    }
+
+
+    //badge-bar ends here
 
     //Integration Section Ends here
     {

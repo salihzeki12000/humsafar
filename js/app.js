@@ -23,7 +23,8 @@ var firstapp = angular.module('firstapp', [
   'navigationservice',
   'pascalprecht.translate',
   'angulartics',
-  'angulartics.google.analytics'
+  'angulartics.google.analytics',
+  'fileuploadservicemod'
 ]);
 
 firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
@@ -469,3 +470,21 @@ firstapp.filter('uploadpath', function () {
     }
   };
 });
+
+firstapp.directive('fileModel', ['$parse', function ($parse) {
+  return {
+    restrict: 'A',
+    scope: {
+      fileModel: '=fileModel',
+    },
+    link: function (scope, element, attrs) {
+      console.log(scope.fileModel);
+      console.log(scope);
+      element.bind('change', function () {
+        console.log(element[0].files[0]);
+        scope.fileModel = element[0].files[0];
+        scope.$apply();
+      });
+    }
+  };
+}]);
