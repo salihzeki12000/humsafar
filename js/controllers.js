@@ -5527,6 +5527,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     }, 100);
 
   })
+  .controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    //Used to name the .html file
+
+    // console.log("Testing Consoles");
+
+    $scope.template = TemplateService.changecontent("profile-list");
+    $scope.menutitle = NavigationService.makeactive("ProfileList");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+  })
   .controller('ItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
 

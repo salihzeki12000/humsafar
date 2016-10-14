@@ -235,6 +235,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       url: "/itinerary",
       templateUrl: "views/template.html",
       controller: 'ItineraryCtrl'
+    })
+    .state('ProfileList', {
+      url: "/profile-list",
+      templateUrl: "views/template.html",
+      controller: 'ProfileListCtrl'
     });
   $urlRouterProvider.otherwise("/");
   $locationProvider.html5Mode(isproduction);
