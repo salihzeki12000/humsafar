@@ -6,7 +6,7 @@ var globalGetProfile = function (data, status) {
     $.jStorage.flush();
   }
 };
-angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
 .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
   //Used to name the .html file
@@ -137,7 +137,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
         $.jStorage.set("isLoggedIn", true);
         $.jStorage.set("profile", data);
         var alreadyLoggedIn = data.alreadyLoggedIn;
-        console.log(alreadyLoggedIn);
+        // console.log(alreadyLoggedIn);
         if (alreadyLoggedIn === true) {
           $state.go('mylife');
         } else if (alreadyLoggedIn === false) {
@@ -155,6 +155,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     };
 
     var authenticatesuccess = function (data, status) {
+      $interval.cancel(stopinterval);
       console.log("authenticate successful");
       $ionicLoading.hide();
       $interval.cancel(stopinterval);
@@ -163,11 +164,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     $scope.socialLogin = function (loginTo) {
       ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
       stopinterval = $interval(callAtIntervaltwitter, 2000);
-      ref.addEventListener('exit', function (event) {
-        NavigationService.getProfile(authenticatesuccess, function (err) {
-          console.log(err);
-        });
-      });
+      // ref.addEventListener('exit', function (event) {
+      //   console.log("Window closed");
+      //   NavigationService.getProfile(authenticatesuccess, function (err) {
+      //     console.log(err);
+      //   });
+
+      // });
+      ref.onbeforeunload = function (e) {
+        console.log("close call");
+        authenticatesuccess();
+      }
+
+
     };
   })
   .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
@@ -451,7 +460,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     // };
 
   }])
-  .controller('HolidayCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('HolidayCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -617,6 +626,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     var saveDataCallback = function (data, status) {
       if (data.value == "true") {
         console.log(data);
+        console.log("holiday");
         NavigationService.getProfile(globalGetProfile, function (err) {
           console.log(err);
         });
@@ -700,8 +710,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     }];
 
   })
-  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval) {
+  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney) {
     //Used to name the .html file
+    $scope.userData = $.jStorage.get("profile");
+    var getAllJourney = function (journeys) {
+      $scope.journey = journeys;
+      console.log($scope.journey.photos);
+    };
+    OnGoJourney.getAllJourney(getAllJourney, function (err) {
+      console.log(err);
+    });
     initMap = function () {
       var tardeo = {
         lat: 18.9692098,
@@ -2729,7 +2747,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
   })
 
 
-.controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife) {
+.controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife, OnGoJourney) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -2743,9 +2761,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     var len = "";
 
     //Integration Section Starts here
-
     $scope.userData = $.jStorage.get("profile");
-
+    var arr = ($scope.userData.homeCity).split(",");
+    $scope.homeCity = arr[0];
     var travelCount = function (data, status) {
       $scope.count = data.data;
       len = $scope.count.countriesVisited_count;
@@ -2885,6 +2903,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
     function titleCase(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
+    NavigationService.getProfile(globalGetProfile, function (err) {
+      console.log(err);
+    });
     if ($scope.userData) {
       $scope.pronoun; //for he and she
       $scope.pronoun1; //for him and her
@@ -2895,6 +2916,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
       $scope.usuallyGoIcon1 = "";
       $scope.preferToTravel = $scope.userData.travelConfig.preferToTravel[0];
       $scope.idealHoliday = $scope.userData.travelConfig.holidayType[0];
+
+      // console.log($scope.kindOfHoliday + "," + $scope.usuallyGo + "," + $scope.preferToTravel + "," + $scope.idealHoliday);
 
       if ($scope.userData.gender == "male") {
         $scope.pronoun = "he";
@@ -3003,19 +3026,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
       //userBadge ends here
 
     //badge-bar starts here
-    $scope.tik1 = false;
-    $scope.tik2 = false;
-    $scope.tik3 = false;
-    $scope.tik4 = false;
-    $scope.tik5 = false;
-    $scope.newbie = false;
-    $scope.justgotwings = false;
-    $scope.globetrotter = false;
-    $scope.wayfarer = false;
-    $scope.nomad = false;
+
 
 
     var updateBadgeBar = function () {
+      $scope.tik1 = true;
+      $scope.tik2 = false;
+      $scope.tik3 = false;
+      $scope.tik4 = false;
+      $scope.tik5 = false;
+      $scope.newbie = false;
+      $scope.justgotwings = false;
+      $scope.globetrotter = false;
+      $scope.wayfarer = false;
+      $scope.nomad = false;
       if (len < 4) {
         $scope.newbie = true;
         $scope.tik1 = true;
@@ -3227,6 +3251,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
           windowTopClass: "local-imgview-pop"
         })
       };
+
+      var getAllJourney = function (journeys) {
+        $scope.journey = journeys;
+        console.log($scope.journey.photos);
+      };
+      OnGoJourney.getAllJourney(getAllJourney, function (err) {
+        console.log(err);
+      });
 
       $scope.travelLife = [{
         heading: "Manan Vora has ended his London Journey",
@@ -7063,14 +7095,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'navigati
   })
 
 .controller('headerctrl', function ($scope, TemplateService, NavigationService, $state, $interval) {
-
   $scope.template = TemplateService;
-  $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
-  $scope.userData = $.jStorage.get("profile");
   NavigationService.getProfile(globalGetProfile, function (err) {
     console.log(err);
   });
-  $scope.userData$ = $.jStorage.get("profile");
+  $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+  $scope.userData = $.jStorage.get("profile");
   $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
     $(window).scrollTop(0);
   });

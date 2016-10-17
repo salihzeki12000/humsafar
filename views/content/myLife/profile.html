@@ -5,12 +5,12 @@
                 <div class="profile-imgholder ">
                     <img src="{{userData.profilePicture|uploadpath}}" alt="" class="img-responsive">
                 </div>
-                <img src="img/flag.png" alt="" class="flag img-responsive">
+                <img src="{{userData.homeCountry.flag|uploadpath:40}}" alt="" class="flag img-responsive">
                 <img src="img/wave-profile.png" alt="" width="40" class="wave img-responsive">
             </div>
             <div class="profile-more-detail text-center">
                 <h3 class="color-blue m-clear font-bold avenir-medium ">{{userData.name}}</h3>
-                <h5 class="color-pink avenir-roman">Lives In:<i class="fa fa-map-marker mr5"></i><span>{{userData.homeCity}}</span></h5>
+                <h5 class="color-pink avenir-roman">Lives In:<i class="fa fa-map-marker mr5"></i><span>{{homeCity}}</span></h5>
             </div>
         </div>
         <div class="user-travel-detail relate">
@@ -83,12 +83,12 @@
                                         <img src="img/more-road.png" alt="" width="30" /> <b>{{userData.travelConfig.usuallyGo[0]}}</b>him,
                                        He prefers to travel<img src="img/bus.png" alt="" width="30" /> <b>{{userData.travelConfig.preferToTravel[0]}}</b>along. His idea of a holiday is to go out of his way to see his favourite artist
                                         perform at a <img src="img/dj.png" alt="" width="30" /> <b>Music Festival</b>.</p>-->
-                                    <p class="avenir-roman">{{userName}} loves to travel and explore the<img src="{{kindOfHolidayIcon}}" alt="" width="30"
-                                        /><b>{{kindOfHoliday}}</b>.{{pronoun}} usually goes<img src="{{usuallyGoIcon}}" alt=""
-                                            width="30" /><b>{{usuallyGo}}</b><img ng-if=flag src="{{usuallyGoIcon1}}" alt=""
-                                            width="30" /><b>{{usuallyGo1}}</b>,{{pronoun}} {{intermediate}}<img src="{{preferToTravelIcon}}"
+                                    <p class="avenir-roman">{{userName}} loves to travel and explore the<img ng-src="{{kindOfHolidayIcon}}" alt=""
+                                            width="30" /><b>{{kindOfHoliday}}</b>.{{pronoun}} usually goes<img ng-src="{{usuallyGoIcon}}"
+                                            alt="" width="30" /><b>{{usuallyGo}}</b><img ng-if=flag src="{{usuallyGoIcon1}}"
+                                            alt="" width="30" /><b>{{usuallyGo1}}</b>,{{pronoun}} {{intermediate}}<img ng-src="{{preferToTravelIcon}}"
                                             alt="" width="30" /><b>{{preferToTravel}}</b>.<b> {{userName}}'s</b>' Ideal holiday
-                                        type is <img src="{{idealHolidayIcon}}" alt="" width="30" />{{idealHoliday}}.</p>
+                                        type is <img ng-src="{{idealHolidayIcon}}" alt="" width="30" />{{idealHoliday}}.</p>
                                 </div>
                                 <span class="djb-font get-more pointer" ng-click="getMore = !getMore">more about me... <img src="img/more-about-me.png" alt="" height="35" class="" ng-class="{'abt-me': getMore == true}"></span>
                             </div>
@@ -153,12 +153,14 @@
                                 <div class="travel-progress-bar avenir-roman relate ">
                                     <div class="row-flex ">
                                         <div class="col-flex ">
-                                            <div class="level1" ng-class="{{newbie}} ? 'active-bar' : ''">
+                                            <!--<div class="level1" ng-class="{{newbie}} ? ''active-bar'' : ''">-->
+                                            <div class="level1" [ng-class]="'active-bar' : newbie">
+
                                                 <span class=" name ">Newbie</span>
                                                 <div class="relate">
                                                     <div class="progress-grey-bg"></div>
-                                                    <!--<div class="progress-bar-strip" ng-style="mystyle1" ng-class="{{tik1}}?'completed-step':''"></div>-->
-                                                    <div class="progress-bar-strip" ng-style="mystyle1" ng-class="'{{tik1}}' ? 'completed-step' : ''">
+                                                    <!--<div class="progress-bar-strip" ng-style="mystyle1" ng-class="{{tik1}}==true ? 'completed-step' : ''">-->
+                                                    <div class="progress-bar-strip" ng-style="mystyle1" [ng-class]="{'completed-step': tik1}">
                                                     </div>
                                                 </div>
 
@@ -166,36 +168,36 @@
                                             </div>
                                         </div>
                                         <div class="col-flex ">
-                                            <div class="level2" ng-class="{{justgotwings}} ? 'active-bar' : ''">
+                                            <div class="level2" [ng-class]="'active-bar' : {{newbie}}">
                                                 <span class=" name ">Just Got Wings</span>
                                                 <div class="relate">
                                                     <div class="progress-grey-bg"></div>
-                                                    <div class="progress-bar-strip" ng-style="mystyle2" ng-class="'{{tik2}}' ? 'completed-step' : ''"></div>
+                                                    <div class="progress-bar-strip" ng-style="mystyle2" [ng-class]="{completed-step: {{tik2}}}"></div>
                                                 </div>
                                                 <span class="progress-range ">4-7</span>
                                             </div>
                                         </div>
                                         <div class="col-flex ">
-                                            <div class="level3" ng-class="{{globetrotter}} ? 'active-bar' : ''">
+                                            <div class="level3" [ng-class]="'active-bar' : {{newbie}}">
                                                 <span class="name ">Globe Trotter</span>
                                                 <div class="relate">
                                                     <div class="progress-grey-bg"></div>
-                                                    <div class="progress-bar-strip" ng-style="mystyle3" ng-class="'{{tik3}}' ? 'completed-step' : ''"></div>
+                                                    <div class="progress-bar-strip" ng-style="mystyle3" [ng-class]="{completed-step: {{tik3}}}"></div>
                                                 </div>
                                                 <span class="progress-range ">8-15</span>
                                             </div>
                                         </div>
                                         <div class="col-flex ">
-                                            <div class="level4" ng-class="{{wayfarer}} ? 'active-bar' : ''">
+                                            <div class="level4" [ng-class]="'active-bar' : {{newbie}}">
                                                 <span class="name ">Wayfarer</span>
                                                 <div class="relate">
                                                     <div class="progress-grey-bg"></div>
-                                                    <div class="progress-bar-strip" ng-style="mystyle4" ng-class="'{{tik4}}' ? 'completed-step' : ''"></div>
+                                                    <div class="progress-bar-strip" ng-style="mystyle4" [ng-class]="{completed-step: {{tik4}}}"></div>
                                                 </div>
                                                 <span class="progress-range ">16-24</span>
-                                                <div class="last-level5 " ng-class="{{nomad}} ? 'active-bar' : ''">
+                                                <div class="last-level5 " [ng-class]="'active-bar' : {{newbie}}">
                                                     <span class=" ">Nomad</span>
-                                                    <div class="last-progress-strip" ng-style="mystyle5" ng-class="'{{tik5}}' ? 'completed-step' : ''"></div>
+                                                    <div class="last-progress-strip" ng-style="mystyle5" [ng-class]="{completed-step: {{tik5}}}"></div>
                                                     <span class="progress-range ">25 above</span>
                                                 </div>
                                             </div>

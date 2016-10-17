@@ -143,15 +143,12 @@ var navigationservice = angular.module('navigationservice', [])
     },
 
     saveUserData: function (formData, callback, errorCallback) {
-      console.log(formData);
       $http.post(adminURL + "/user/editUserWeb", formData).success(callback).error(errorCallback);
     },
 
     travelCount: function (callback, errorCallback) {
       $http.post(adminURL + "/user/getOneDataWeb").success(callback).error(errorCallback);
     },
-
-
 
     getBucketListWeb: function (callback, errorCallback) {
       $http.post(adminURL + "/user/getBucketListWeb").success(callback).error(errorCallback);

@@ -483,8 +483,6 @@ firstapp.directive('fileModel', ['$parse', function ($parse) {
       fileModel: '=fileModel',
     },
     link: function (scope, element, attrs) {
-      console.log(scope.fileModel);
-      console.log(scope);
       element.bind('change', function () {
         console.log(element[0].files[0]);
         scope.fileModel = element[0].files[0];

@@ -19,6 +19,7 @@
             </ul>
           </div>
           <!-- end tabs -->
+          <!--switch Travel life and local life-->
           <div class="travel-local-life">
             <div class="clearfix">
               <div class="pull-left">
@@ -49,17 +50,23 @@
               </div>
             </div>
           </div>
+          <!--End of switch Travel life and local life-->
+
           <!-- user logged for first time -->
           <!-- user logged for first time end -->
+
           <div class="masonry-detail">
             <div masonry class="abc">
+
+
               <div class="row">
-                <div class="masonry-brick col-md-4" ng-repeat="life in travelLife" >
+                <!--1st card-->
+                <div class="masonry-brick col-md-4" ng-repeat="life in travelLife">
                   <div class="journey-masonry-brick">
                     <div class="travel-life-part avenir-roman">
                       <div class="travel-journey-heading">
                         <p ng-hide="life.onJourney">{{life.heading}}</p>
-                        <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{life.timestampHour}}</span></p>
+                        <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i>                          <span>{{life.timestampHour}}</span></p>
                       </div>
                       <div class="travelled-journey relate" ng-hide="life.onJourney">
                         <div class="travelled-imgholder">
@@ -197,6 +204,10 @@
                   </div>
                 </div>
               </div>
+
+
+
+
             </div>
           </div>
         </div>
@@ -409,12 +420,12 @@
                     </div>
                   </div>
                 </div>
-                <div class="scroll-local-life scrollme"  ng-scrollbar rebuild-on="rebuild:me">
+                <div class="scroll-local-life scrollme" ng-scrollbar rebuild-on="rebuild:me">
                   <div class="local-post">
                     <div class="post-main" ng-repeat="post in localLife">
                       <div class="heading-local-life avenir-roman">
                         <p class="color-light-grey">{{post.heading}}</p>
-                        <p class="color-light-grey m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span class="mr5">{{post.timestampHour}}</span></p>
+                        <p class="color-light-grey m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i>                          <span class="mr5">{{post.timestampHour}}</span></p>
                         <div class="location circle-rounded bg-dark-cyan pointer">
                           <img src="img/location-blue.png" alt="" height="18">
                         </div>
@@ -423,7 +434,8 @@
                         <img ng-src="{{post.imgWall}}" alt="" class="img-responsive">
                       </div>
                       <div class="local-post-slider">
-                        <flex-slider class="carousel" flex-slide="related in post.postSlider track by $index" item-width="136" animation="slide" item-margin="15" control-nav="false" mousewheel = "true">
+                        <flex-slider class="carousel" flex-slide="related in post.postSlider track by $index" item-width="136" animation="slide"
+                          item-margin="15" control-nav="false" mousewheel="true">
                           <li>
                             <div class="related-postholder">
                               <img ng-src="{{related.imgRelated}}" alt="" class="img-responsive">

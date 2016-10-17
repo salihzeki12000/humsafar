@@ -118,7 +118,7 @@
                 <ul class="avenir-roman bg-dark-blue">
                   <li ng-repeat="nation in nationality | filter:searchNation track by $index">
                     <div class="nation-select relate">
-                      <input type="radio" id="{{nation._id}}" name="nation" ng-model="userData.homeCountry" ng-value="nation.name" />
+                      <input type="radio" id="{{nation._id}}" name="nation" ng-model="userData.homeCountry" ng-value="nation._id" />
                       <label for="{{nation._id}}">
                         <img ng-src="{{nation.flag|uploadpath}}" alt="" class="img-responsive inline-block mr10" width="30px">
                         <span class="color-white">{{nation.name}}</span>
@@ -128,7 +128,7 @@
                 </ul>
               </div>
               <div class="button-panel clearfix">
-                <button class="btn btn-blue-outline btn-more pull-left" ui-sref="mylife">Skip</button>
+                <!--<button class="btn btn-blue-outline btn-more pull-left" ui-sref="mylife">Skip</button>-->
                 <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=3" ng-disabled="!userData.homeCountry">Next</button>
               </div>
             </div>
@@ -201,7 +201,7 @@
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
                 <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile()">Done</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)">Done</button>
               </div>
             </div>
           </div>

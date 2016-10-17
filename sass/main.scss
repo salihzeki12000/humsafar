@@ -6257,3 +6257,7 @@ header {
     display: none !important;
   }
 }
+
+.disabled {
+  cursor: not-allowed;
+}
