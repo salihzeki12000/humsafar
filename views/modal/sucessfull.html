@@ -2,13 +2,13 @@
     <div class="full-height full-width">
         <div class="alreadyexist ab">
             <div class="profile-imgholder">
-                <img src="img/person.jpg" alt="">
+                <img src="{{userData.profilePicture|uploadpath}}" alt="">
             </div>
             <h4 class="color-white avenir-heavy text-center fnt-16 no-margin ptb20">
-                Hi Yash your password has been changed successfully.
+                Hi {{userData.name}} your password has been changed successfully.
             </h4>
             <div class="btn-login text-center">
-                <button class="btn btn-outline color-white avenir-roman">
+                <button class="btn btn-outline color-white avenir-roman" ui-sref="home">
                     Continue
                 </button>
             </div>
