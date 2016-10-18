@@ -3252,183 +3252,183 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         })
       };
 
-      var getAllJourney = function (journeys) {
-        $scope.journey = journeys;
-        console.log($scope.journey.photos);
-      };
-      OnGoJourney.getAllJourney(getAllJourney, function (err) {
-        console.log(err);
-      });
+      // var getAllJourney = function (journeys) {
+      //   $scope.travelLife = journeys;
+      //   console.dir($scope.travelLife);
+      // };
+      // OnGoJourney.getAllJourney(getAllJourney, function (err) {
+      //   console.log(err);
+      // });
 
-      $scope.travelLife = [{
-        heading: "Manan Vora has ended his London Journey",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        onJourney: false,
-        countryVisit: [{
-          imgFlag: "img/india-visit.png"
-        }, {
-          imgFlag: "img/england-visit.png"
-        }, {
-          imgFlag: "img/canada-visit.png",
-        }, ]
-      }, {
-        heading: "Manan Vora has ended his London Journey",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        onJourney: true,
-        countryVisit: [{
-          imgFlag: "img/india-visit.png"
-        }, {
-          imgFlag: "img/england-visit.png"
-        }, {
-          imgFlag: "img/canada-visit.png",
-        }, ]
-      }, {
-        heading: "Manan Vora has ended his London Journey",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        onJourney: false,
-        countryVisit: [{
-          imgFlag: "img/india-visit.png"
-        }, {
-          imgFlag: "img/england-visit.png"
-        }, {
-          imgFlag: "img/canada-visit.png",
-        }, ]
-      }, {
-        heading: "Manan Vora has ended his London Journey",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        onJourney: false,
-        countryVisit: [{
-          imgFlag: "img/india-visit.png"
-        }, {
-          imgFlag: "img/england-visit.png"
-        }, {
-          imgFlag: "img/canada-visit.png",
-        }, ]
-      }, {
-        heading: "Manan Vora has ended his London Journey",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        onJourney: true,
-        countryVisit: [{
-          imgFlag: "img/india-visit.png"
-        }, {
-          imgFlag: "img/england-visit.png"
-        }, {
-          imgFlag: "img/canada-visit.png",
-        }, ]
-      }, {
-        heading: "Manan Vora has ended his London Journey",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        onJourney: true,
-        countryVisit: [{
-          imgFlag: "img/india-visit.png"
-        }, {
-          imgFlag: "img/england-visit.png"
-        }, {
-          imgFlag: "img/canada-visit.png",
-        }, ]
-      }];
+      // $scope.travelLife = [{
+      //   heading: "Manan Vora has ended his London Journey",
+      //   timestampDate: "14 Jan, 2014",
+      //   timestampHour: "01:20 pm",
+      //   imgTravelled: "img/london.jpg",
+      //   Travelledtag: "London Eye",
+      //   photoCount: "28",
+      //   videoCount: "5",
+      //   locationVisited: "9",
+      //   itineraryType1: "img/sunset.png",
+      //   itineraryType2: "img/bag-journey.png",
+      //   itineraryType3: "img/luxury-journey.png",
+      //   travelledDay: "75",
+      //   onwayTag: "love in paris",
+      //   imgOnway: "img/paris.jpg",
+      //   cost: "$10,000",
+      //   spendingDay: "75",
+      //   likes: "15660",
+      //   reviews: "354",
+      //   pointReview: "4.5",
+      //   onJourney: false,
+      //   countryVisit: [{
+      //     imgFlag: "img/india-visit.png"
+      //   }, {
+      //     imgFlag: "img/england-visit.png"
+      //   }, {
+      //     imgFlag: "img/canada-visit.png",
+      //   }, ]
+      // }, {
+      //   heading: "Manan Vora has ended his London Journey",
+      //   timestampDate: "14 Jan, 2014",
+      //   timestampHour: "01:20 pm",
+      //   imgTravelled: "img/london.jpg",
+      //   Travelledtag: "London Eye",
+      //   photoCount: "28",
+      //   videoCount: "5",
+      //   locationVisited: "9",
+      //   itineraryType1: "img/sunset.png",
+      //   itineraryType2: "img/bag-journey.png",
+      //   itineraryType3: "img/luxury-journey.png",
+      //   travelledDay: "75",
+      //   onwayTag: "love in paris",
+      //   imgOnway: "img/paris.jpg",
+      //   cost: "$10,000",
+      //   spendingDay: "75",
+      //   likes: "15660",
+      //   reviews: "354",
+      //   pointReview: "4.5",
+      //   onJourney: true,
+      //   countryVisit: [{
+      //     imgFlag: "img/india-visit.png"
+      //   }, {
+      //     imgFlag: "img/england-visit.png"
+      //   }, {
+      //     imgFlag: "img/canada-visit.png",
+      //   }, ]
+      // }, {
+      //   heading: "Manan Vora has ended his London Journey",
+      //   timestampDate: "14 Jan, 2014",
+      //   timestampHour: "01:20 pm",
+      //   imgTravelled: "img/london.jpg",
+      //   Travelledtag: "London Eye",
+      //   photoCount: "28",
+      //   videoCount: "5",
+      //   locationVisited: "9",
+      //   itineraryType1: "img/sunset.png",
+      //   itineraryType2: "img/bag-journey.png",
+      //   itineraryType3: "img/luxury-journey.png",
+      //   travelledDay: "75",
+      //   onwayTag: "love in paris",
+      //   imgOnway: "img/paris.jpg",
+      //   cost: "$10,000",
+      //   spendingDay: "75",
+      //   likes: "15660",
+      //   reviews: "354",
+      //   pointReview: "4.5",
+      //   onJourney: false,
+      //   countryVisit: [{
+      //     imgFlag: "img/india-visit.png"
+      //   }, {
+      //     imgFlag: "img/england-visit.png"
+      //   }, {
+      //     imgFlag: "img/canada-visit.png",
+      //   }, ]
+      // }, {
+      //   heading: "Manan Vora has ended his London Journey",
+      //   timestampDate: "14 Jan, 2014",
+      //   timestampHour: "01:20 pm",
+      //   imgTravelled: "img/london.jpg",
+      //   Travelledtag: "London Eye",
+      //   photoCount: "28",
+      //   videoCount: "5",
+      //   locationVisited: "9",
+      //   itineraryType1: "img/sunset.png",
+      //   itineraryType2: "img/bag-journey.png",
+      //   itineraryType3: "img/luxury-journey.png",
+      //   travelledDay: "75",
+      //   onwayTag: "love in paris",
+      //   imgOnway: "img/paris.jpg",
+      //   cost: "$10,000",
+      //   spendingDay: "75",
+      //   likes: "15660",
+      //   reviews: "354",
+      //   pointReview: "4.5",
+      //   onJourney: false,
+      //   countryVisit: [{
+      //     imgFlag: "img/india-visit.png"
+      //   }, {
+      //     imgFlag: "img/england-visit.png"
+      //   }, {
+      //     imgFlag: "img/canada-visit.png",
+      //   }, ]
+      // }, {
+      //   heading: "Manan Vora has ended his London Journey",
+      //   timestampDate: "14 Jan, 2014",
+      //   timestampHour: "01:20 pm",
+      //   imgTravelled: "img/london.jpg",
+      //   Travelledtag: "London Eye",
+      //   photoCount: "28",
+      //   videoCount: "5",
+      //   locationVisited: "9",
+      //   itineraryType1: "img/sunset.png",
+      //   itineraryType2: "img/bag-journey.png",
+      //   itineraryType3: "img/luxury-journey.png",
+      //   travelledDay: "75",
+      //   onwayTag: "love in paris",
+      //   imgOnway: "img/paris.jpg",
+      //   cost: "$10,000",
+      //   spendingDay: "75",
+      //   likes: "15660",
+      //   reviews: "354",
+      //   pointReview: "4.5",
+      //   onJourney: true,
+      //   countryVisit: [{
+      //     imgFlag: "img/india-visit.png"
+      //   }, {
+      //     imgFlag: "img/england-visit.png"
+      //   }, {
+      //     imgFlag: "img/canada-visit.png",
+      //   }, ]
+      // }, {
+      //   heading: "Manan Vora has ended his London Journey",
+      //   timestampDate: "14 Jan, 2014",
+      //   timestampHour: "01:20 pm",
+      //   imgTravelled: "img/london.jpg",
+      //   Travelledtag: "London Eye",
+      //   photoCount: "28",
+      //   videoCount: "5",
+      //   locationVisited: "9",
+      //   itineraryType1: "img/sunset.png",
+      //   itineraryType2: "img/bag-journey.png",
+      //   itineraryType3: "img/luxury-journey.png",
+      //   travelledDay: "75",
+      //   onwayTag: "love in paris",
+      //   imgOnway: "img/paris.jpg",
+      //   cost: "$10,000",
+      //   spendingDay: "75",
+      //   likes: "15660",
+      //   reviews: "354",
+      //   pointReview: "4.5",
+      //   onJourney: true,
+      //   countryVisit: [{
+      //     imgFlag: "img/india-visit.png"
+      //   }, {
+      //     imgFlag: "img/england-visit.png"
+      //   }, {
+      //     imgFlag: "img/canada-visit.png",
+      //   }, ]
+      // }];
 
       $scope.localLife = [{
         heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
@@ -5568,6 +5568,140 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("ProfileList");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    // countryList and bucketList
+    $scope.countryList = [{
+      countryImage: "img/india-gate.jpg",
+      countryName: "India",
+      countryYear: "2016",
+      countryFlag: "img/flag.png"
+    }, {
+      countryImage: "img/india-gate.jpg",
+      countryName: "India",
+      countryYear: "2016",
+      countryFlag: "img/flag.png"
+    }, {
+      countryImage: "img/india-gate.jpg",
+      countryName: "India",
+      countryYear: "2016",
+      countryFlag: "img/flag.png"
+    }, {
+      countryImage: "img/india-gate.jpg",
+      countryName: "India",
+      countryYear: "2016",
+      countryFlag: "img/flag.png"
+    }, {
+      countryImage: "img/india-gate.jpg",
+      countryName: "India",
+      countryYear: "2016",
+      countryFlag: "img/flag.png"
+    }, {
+      countryImage: "img/india-gate.jpg",
+      countryName: "India",
+      countryYear: "2016",
+      countryFlag: "img/flag.png"
+    }, {
+      countryImage: "img/india-gate.jpg",
+      countryName: "India",
+      countryYear: "2016",
+      countryFlag: "img/flag.png"
+    }, ];
+    $scope.bucketList = [{
+      countryImage: "img/india-gate.jpg",
+      countryName: "India",
+      countryYear: "2016",
+      countryFlag: "img/flag.png"
+    }, {
+      countryImage: "img/india-gate.jpg",
+      countryName: "India",
+      countryYear: "2016",
+      countryFlag: "img/flag.png"
+    }, {
+      countryImage: "img/india-gate.jpg",
+      countryName: "India",
+      countryYear: "2016",
+      countryFlag: "img/flag.png"
+    }, {
+      countryImage: "img/india-gate.jpg",
+      countryName: "India",
+      countryYear: "2016",
+      countryFlag: "img/flag.png"
+    }, {
+      countryImage: "img/india-gate.jpg",
+      countryName: "India",
+      countryYear: "2016",
+      countryFlag: "img/flag.png"
+    }, ];
+    // countrylist and bucketlist end
+    // following and followers
+    $scope.following = [{
+      imgFollowing: "img/follower.jpg",
+      nameFollow: "Andrea Christina",
+      cityName: "Mumbai",
+      countryName: "India",
+      photos: "208",
+      location: "345",
+      followType: "Follow",
+      countryVisited: "300",
+      followersUser: "2.8M",
+      journey: "315"
+    }, {
+      imgFollowing: "img/follower.jpg",
+      nameFollow: "Andrea Christina",
+      cityName: "Mumbai",
+      countryName: "India",
+      photos: "208",
+      location: "345",
+      followType: "Following",
+      countryVisited: "300",
+      followersUser: "2.8M",
+      journey: "315"
+    }, {
+      imgFollowing: "img/follower.jpg",
+      nameFollow: "Andrea Christina",
+      cityName: "Mumbai",
+      countryName: "India",
+      photos: "208",
+      location: "345",
+      followType: "Follow",
+      countryVisited: "300",
+      followersUser: "2.8M",
+      journey: "315"
+    }, {
+      imgFollowing: "img/follower.jpg",
+      nameFollow: "Andrea Christina",
+      cityName: "Mumbai",
+      countryName: "India",
+      photos: "208",
+      location: "345",
+      followType: "Following",
+      countryVisited: "300",
+      followersUser: "2.8M",
+      journey: "315"
+    }, {
+      imgFollowing: "img/follower.jpg",
+      nameFollow: "Andrea Christina",
+      cityName: "Mumbai",
+      countryName: "India",
+      photos: "208",
+      location: "345",
+      followType: "Follow",
+      countryVisited: "300",
+      followersUser: "2.8M",
+      journey: "315"
+    }, {
+      imgFollowing: "img/follower.jpg",
+      nameFollow: "Andrea Christina",
+      cityName: "Mumbai",
+      countryName: "India",
+      photos: "208",
+      location: "345",
+      followType: "Following",
+      countryVisited: "300",
+      followersUser: "2.8M",
+      journey: "315"
+    }, ];
+    // following and followers end
 
   })
   .controller('ItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
