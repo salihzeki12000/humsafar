@@ -6417,13 +6417,16 @@ header {
 .following-user-info {
   padding: 10px 0;
   border-bottom: 1px solid #c2c8cf;
+  ul { @include display (flex); }
   li {
-    display: inline-block;
+    // display: inline-block;
+    @include flex(1);
     margin-right: 10px;
     text-align: center;
     &:last-child {
       margin-right: 0;
     }
+    &:first-child { @include flex(2); }
   }
   .user-count {
     color: $brand-pink;
