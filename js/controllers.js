@@ -179,7 +179,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     };
   })
-  .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+  .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $stateParams) {
     //Used to name the .html file
     console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("forgot-password");
@@ -189,10 +189,63 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.animationsEnabled = true;
     $scope.template.header = "";
     $scope.template.footer = "";
+    $scope.showErr = false;
+    $scope.showErr1 = false;
+    $scope.formData = {};
+    $scope.formData.password = "";
+    $scope.formData.confirmPassword = "";
+    $scope.userData = {};
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
     }
-
+    if ($stateParams.token && $stateParams.email) {
+      NavigationService.checkToken({
+        token: decodeURIComponent($stateParams.token),
+        email: $stateParams.email
+      }, function (data) {
+        if (data.value) {
+          $scope.showErr = false;
+        } else {
+          $scope.showErr = true;
+        }
+      });
+    } else {
+      $scope.showErr = true;
+    }
+    $scope.type = function () {
+      if ($scope.formData.password === "" && $scope.formData.confirmPassword === "") {
+        $scope.showErr1 = false;
+      } else {
+        if ($scope.formData.password !== "" && $scope.formData.confirmPassword === "") {
+          $scope.showErr1 = false;
+        } else if ($scope.formData.password === $scope.formData.confirmPassword) {
+          $scope.showErr1 = false;
+        } else {
+          $scope.showErr1 = true;
+        }
+      }
+    }
+    $scope.change = function () {
+      if ($scope.formData.password === $scope.formData.confirmPassword && $scope.showErr === false && $scope.showErr1 === false) {
+        $scope.formData.token = decodeURIComponent($stateParams.token);
+        $scope.formData.email = $stateParams.email;
+        NavigationService.changePasswordEmail($scope.formData, function (data) {
+          if (data.value) {
+            $scope.opensucessfull();
+            NavigationService.getProfile(globalGetProfile, function (err) {
+              $.jStorage.set("profile", data);
+            });
+          } else {
+            $scope.showErr = true;
+          }
+        });
+      } else {
+        $scope.showErr1 = true;
+      }
+    }
+    if (!_.isEmpty($.jStorage.get("profile"))) {
+      $scope.userData = $.jStorage.get("profile");
+    }
     $scope.opensucessfull = function (size) {
       $uibModal.open({
         animation: true,
@@ -710,76 +763,78 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
 
   })
-  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney) {
+  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, $state, $stateParams) {
     //Used to name the .html file
+    var id = $stateParams.id;
     $scope.userData = $.jStorage.get("profile");
-    var getAllJourney = function (journeys) {
+    var getOneJourney = function (journeys) {
       $scope.journey = journeys;
-      console.log($scope.journey.photos);
     };
-    OnGoJourney.getAllJourney(getAllJourney, function (err) {
+    OnGoJourney.getOneJourney({
+      "_id": id
+    }, getOneJourney, function (err) {
       console.log(err);
     });
-    initMap = function () {
-      var tardeo = {
-        lat: 18.9692098,
-        lng: 72.81516999
-      };
-      // Create a new StyledMapType object, passing it an array of styles,
-      // and the name to be displayed on the map type control.
-      var styledMapType = new google.maps.StyledMapType(
-        [{
-          stylers: [{
-              hue: '#b3d2fe'
-            },
-            // { hue: '#000' },
-          ]
-        }], {
-          name: 'Styled Map'
-        });
-      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
-        center: tardeo,
-        disableDefaultUI: true
-      });
+    // initMap = function () {
+    //   var tardeo = {
+    //     lat: 18.9692098,
+    //     lng: 72.81516999
+    //   };
+    //   // Create a new StyledMapType object, passing it an array of styles,
+    //   // and the name to be displayed on the map type control.
+    //   var map = new google.maps.Map(document.getElementById('map'), {
+    //     zoom: 12,
+    //     center: tardeo,
+    //     disableDefaultUI: true
+    //   });
+    //   var styledMapType = new google.maps.StyledMapType(
+    //     [{
+    //       stylers: [{
+    //           hue: '#b3d2fe'
+    //         },
+    //         // { hue: '#000' },
+    //       ]
+    //     }], {
+    //       name: 'Styled Map'
+    //     });
 
-      var contentString = '<div id="content">' +
-        '<div id="siteNotice">' +
-        '</div>' +
-        '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
-        '<div id="bodyContent">' +
-        '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-        'sandstone rock formation in the southern part of the ' +
-        'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) ' +
-        'south west of the nearest large town, Alice Springs; 450&#160;km ' +
-        '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major ' +
-        'features of the Uluru - Kata Tjuta National Park. Uluru is ' +
-        'sacred to the Pitjantjatjara and Yankunytjatjara, the ' +
-        'Aboriginal people of the area. It has many springs, waterholes, ' +
-        'rock caves and ancient paintings. Uluru is listed as a World ' +
-        'Heritage Site.</p>' +
-        '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
-        'https://en.wikipedia.org/w/index.php?title=Uluru</a> ' +
-        '(last visited June 22, 2009).</p>' +
-        '</div>' +
-        '</div>';
+    //   var contentString = '<div id="content">' +
+    //     '<div id="siteNotice">' +
+    //     '</div>' +
+    //     '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
+    //     '<div id="bodyContent">' +
+    //     '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+    //     'sandstone rock formation in the southern part of the ' +
+    //     'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) ' +
+    //     'south west of the nearest large town, Alice Springs; 450&#160;km ' +
+    //     '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major ' +
+    //     'features of the Uluru - Kata Tjuta National Park. Uluru is ' +
+    //     'sacred to the Pitjantjatjara and Yankunytjatjara, the ' +
+    //     'Aboriginal people of the area. It has many springs, waterholes, ' +
+    //     'rock caves and ancient paintings. Uluru is listed as a World ' +
+    //     'Heritage Site.</p>' +
+    //     '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
+    //     'https://en.wikipedia.org/w/index.php?title=Uluru</a> ' +
+    //     '(last visited June 22, 2009).</p>' +
+    //     '</div>' +
+    //     '</div>';
 
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString,
-        maxWidth: 200
-      });
+    //   var infowindow = new google.maps.InfoWindow({
+    //     content: contentString,
+    //     maxWidth: 200
+    //   });
 
-      var marker = new google.maps.Marker({
-        position: tardeo,
-        map: map,
-        title: 'Tardeo (Ayers Rock)'
-      });
-      marker.addListener('click', function () {
-        infowindow.open(map, marker);
-      });
-      map.mapTypes.set('styled_map', styledMapType);
-      map.setMapTypeId('styled_map');
-    }
+    //   var marker = new google.maps.Marker({
+    //     position: tardeo,
+    //     map: map,
+    //     title: 'Tardeo (Ayers Rock)'
+    //   });
+    //   marker.addListener('click', function () {
+    //     infowindow.open(map, marker);
+    //   });
+    //   map.mapTypes.set('styled_map', styledMapType);
+    //   map.setMapTypeId('styled_map');
+    // }
 
     // $scope.$on('$viewContentLoaded', function(){
     //   $timeout(function() {
@@ -787,9 +842,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   },100);
     //  });
 
-    setTimeout(function () {
-      initMap();
-    }, 100);
+    // setTimeout(function () {
+    //   initMap();
+    // }, 100);
 
     // console.log("Testing Consoles");
 
@@ -3252,13 +3307,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         })
       };
 
-      // var getAllJourney = function (journeys) {
-      //   $scope.travelLife = journeys;
-      //   console.dir($scope.travelLife);
-      // };
-      // OnGoJourney.getAllJourney(getAllJourney, function (err) {
-      //   console.log(err);
-      // });
+      var getAllJourney = function (journeys) {
+        $scope.travelLife = journeys;
+      };
+      OnGoJourney.getAllJourney(getAllJourney, function (err) {
+        console.log(err);
+      });
+
+      $scope.redirectTo = function (id) {
+        console.log(id);
+        $.jStorage.set('travelId', id);
+        $state.go('ongojourney');
+      }
 
       // $scope.travelLife = [{
       //   heading: "Manan Vora has ended his London Journey",

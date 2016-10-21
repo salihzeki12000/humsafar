@@ -65,17 +65,19 @@
                     <div class="travel-life-part avenir-roman">
                       <div class="travel-journey-heading">
                         <p ng-hide="life.onJourney">{{life.heading}}</p>
-                        <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i>                          <span>{{life.timestampHour}}</span></p>
+                        <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>                          | <i class="fa fa-clock-o mr5 ml5">{{life.startTime|formatDate: 'time'}}</i> <span>{{life.timestampHour}}</span></p>
                       </div>
-                      <div class="travelled-journey relate" ng-hide="life.onJourney">
+                      <div class="travelled-journey relate" ng-hide="life.onJourney" ui-sref="ongojourney({id:life._id})">
                         <div class="travelled-imgholder">
-                          <img ng-src="{{life.imgTravelled}}" alt="" class="img-responsive m-center">
+                          <img ng-src="{{life.startLocationPic|uploadpath}}" alt="" class="img-responsive m-center">
                         </div>
                         <div class="country-visited">
-                          <img ng-src="{{visit.imgFlag}}" alt="" height="30" ng-repeat="visit in life.countryVisit track by $index">
+                          <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30" ng-repeat="visit in life.countryVisited | limitTo : 3">
+                          <span ng-show="life.showRemainingCount" class="">+{{life.remainingCount}}</span>
                         </div>
+
                         <div class="journey-tag-holder">
-                          <h4 class="m-clear text-capitalize">{{life.Travelledtag}}</h4>
+                          <h4 class="m-clear text-capitalize">{{life.name}}</h4>
                           <div class="clearfix journey-travelling-type">
                             <div class="pull-left">
                               <div class="journey-collection">
@@ -100,7 +102,7 @@
                                     <a href="">
                                       <div class="">
                                         <img src="img/location.png" alt="Location" width="18" class="mr5">
-                                        <span class="inline-block v-mid">{{life.locationVisited}}</span>
+                                        <span class="inline-block v-mid">{{life.checkIn}}</span>
                                       </div>
                                     </a>
                                   </li>
@@ -111,13 +113,13 @@
                               <div class="journey-type inline-block">
                                 <ul>
                                   <li>
-                                    <a href=""><img ng-src="{{life.itineraryType1}}" alt="" height="20"></a>
+                                    <a href=""><img ng-src="{{life.kindOfJourney[0]|kindOfJourney}}" alt="" height="20"></a>
                                   </li>
                                   <li>
-                                    <a href=""><img ng-src="{{life.itineraryType2}}" alt="" height="20"></a>
+                                    <a href=""><img ng-src="{{life.kindOfJourney[1]|kindOfJourney}}" alt="" height="20"></a>
                                   </li>
                                   <li>
-                                    <a href=""><img ng-src="{{life.itineraryType3}}" alt="" height="20"></a>
+                                    <a href=""><img ng-src="{{life.kindOfJourney[2]|kindOfJourney}}" alt="" height="20"></a>
                                   </li>
                                 </ul>
                               </div>

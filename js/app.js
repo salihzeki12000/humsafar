@@ -2,13 +2,13 @@
 var initMap = {};
 var backgroundClick = {
     object: undefined,
-    close: function() {
+    close: function () {
         backgroundClick.object.backgroundClick = false;
         backgroundClick.scope.$apply();
     }
 };
-$(document).ready(function() {
-    $("body").click(function() {
+$(document).ready(function () {
+    $("body").click(function () {
         if (backgroundClick.object) {
             backgroundClick.close();
         }
@@ -27,7 +27,7 @@ var firstapp = angular.module('firstapp', [
     'fileuploadservicemod'
 ]);
 
-firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
+firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
     // for http request with session
     $httpProvider.defaults.withCredentials = true;
     $stateProvider
@@ -192,7 +192,7 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
             controller: 'HolidayCtrl'
         })
         .state('ongojourney', {
-            url: "/ongojourney",
+            url: "/ongojourney/id:id",
             templateUrl: "views/template.html",
             controller: 'OnGoJourneyCtrl'
         })
@@ -246,16 +246,16 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
 });
 
 
-firstapp.directive('img', function($compile, $parse) {
+firstapp.directive('img', function ($compile, $parse) {
     return {
         restrict: 'E',
         replace: false,
-        link: function($scope, element, attrs) {
+        link: function ($scope, element, attrs) {
             var $element = $(element);
             if (!attrs.noloading) {
                 $element.after("<img src='img/loading.gif' class='loading' />");
                 var $loading = $element.next(".loading");
-                $element.load(function() {
+                $element.load(function () {
                     $loading.remove();
                     $(this).addClass("doneLoading");
                 });
@@ -266,27 +266,27 @@ firstapp.directive('img', function($compile, $parse) {
     };
 });
 
-firstapp.directive('autoHeight', function($compile, $parse) {
+firstapp.directive('autoHeight', function ($compile, $parse) {
     return {
         restrict: 'EA',
         replace: false,
-        link: function($scope, element, attrs) {
+        link: function ($scope, element, attrs) {
             var $element = $(element);
             var windowHeight = $(window).height();
 
             $element.css("min-height", windowHeight);
-            setTimeout(function() {
+            setTimeout(function () {
                 $element.css("min-height", windowHeight);
             });
         }
     };
 });
 
-firstapp.directive('fancyboxBox', function($document) {
+firstapp.directive('fancyboxBox', function ($document) {
     return {
         restrict: 'EA',
         replace: false,
-        link: function(scope, element, attr) {
+        link: function (scope, element, attr) {
             var $element = $(element);
             var target;
             if (attr.rel) {
@@ -308,19 +308,19 @@ firstapp.directive('fancyboxBox', function($document) {
 });
 
 
-firstapp.config(function($translateProvider) {
+firstapp.config(function ($translateProvider) {
     $translateProvider.translations('en', LanguageEnglish);
     $translateProvider.translations('hi', LanguageHindi);
     $translateProvider.preferredLanguage('en');
 });
 
-firstapp.directive('scrolldown', function($compile, $parse) {
+firstapp.directive('scrolldown', function ($compile, $parse) {
     return {
         restrict: 'EA',
         replace: false,
-        link: function($scope, element, attrs) {
+        link: function ($scope, element, attrs) {
             var $element = $(element);
-            $scope.scrollDown = function() {
+            $scope.scrollDown = function () {
                 $('html,body').animate({
                         scrollTop: $(".second").offset().top
                     },
@@ -330,9 +330,9 @@ firstapp.directive('scrolldown', function($compile, $parse) {
     };
 });
 
-firstapp.directive("scrolladdclass", function($window) {
-    return function(scope, element, attrs) {
-        angular.element($window).bind("scroll", function() {
+firstapp.directive("scrolladdclass", function ($window) {
+    return function (scope, element, attrs) {
+        angular.element($window).bind("scroll", function () {
             var windowHeight = $(window).height();
             if (this.pageYOffset >= windowHeight) {
                 // console.log(windowHeight);
@@ -344,9 +344,9 @@ firstapp.directive("scrolladdclass", function($window) {
     };
 });
 
-firstapp.directive("scrolladd1class", function($window) {
-    return function(scope, element, attrs) {
-        angular.element($window).bind("scroll", function() {
+firstapp.directive("scrolladd1class", function ($window) {
+    return function (scope, element, attrs) {
+        angular.element($window).bind("scroll", function () {
             var windowHeight = $(window).height();
             if (this.pageYOffset >= 450) {
                 // console.log(windowHeight);
@@ -357,17 +357,17 @@ firstapp.directive("scrolladd1class", function($window) {
         });
     };
 });
-firstapp.directive('imageonload', function() {
+firstapp.directive('imageonload', function () {
     return {
         restrict: 'A',
-        link: function(scope, element, attrs) {
-            element.bind('load', function() {
+        link: function (scope, element, attrs) {
+            element.bind('load', function () {
                 scope.$apply(attrs.imageonload);
             });
         }
     };
 });
-firstapp.directive('uploadImage', function($http, $filter) {
+firstapp.directive('uploadImage', function ($http, $filter) {
     return {
         templateUrl: 'views/directive/uploadFile.html',
         scope: {
@@ -376,9 +376,9 @@ firstapp.directive('uploadImage', function($http, $filter) {
             uploadurl: "=uploadhere",
             state: "=currentState"
         },
-        link: function($scope, element, attrs) {
+        link: function ($scope, element, attrs) {
 
-            $scope.showImage = function() {
+            $scope.showImage = function () {
                 console.log($scope.image);
             };
             if ($scope.uploadurl) {
@@ -394,7 +394,7 @@ firstapp.directive('uploadImage', function($http, $filter) {
                 $scope.noShow = true;
             }
 
-            $scope.$watch("image", function(newVal, oldVal) {
+            $scope.$watch("image", function (newVal, oldVal) {
                 if (newVal && newVal.file) {
                     $scope.uploadNow(newVal);
                 }
@@ -402,7 +402,7 @@ firstapp.directive('uploadImage', function($http, $filter) {
             if ($scope.model) {
                 if (_.isArray($scope.model)) {
                     $scope.image = [];
-                    _.each($scope.model, function(n) {
+                    _.each($scope.model, function (n) {
                         $scope.image.push({
                             url: n
                         });
@@ -413,10 +413,10 @@ firstapp.directive('uploadImage', function($http, $filter) {
                 $scope.inObject = true;
             }
             $scope.name = "pratik";
-            $scope.clearOld = function() {
+            $scope.clearOld = function () {
                 $scope.model = [];
             };
-            $scope.uploadNow = function(image) {
+            $scope.uploadNow = function (image) {
                 $scope.uploadStatus = "uploading";
 
                 var Template = this;
@@ -428,7 +428,7 @@ firstapp.directive('uploadImage', function($http, $filter) {
                         'Content-Type': undefined
                     },
                     transformRequest: angular.identity
-                }).success(function(data) {
+                }).success(function (data) {
                     if ($scope.callback) {
                         $scope.callback(data);
                     } else {
@@ -454,8 +454,8 @@ firstapp.directive('uploadImage', function($http, $filter) {
     };
 });
 
-firstapp.filter('uploadpath', function() {
-    return function(input, width, height, style) {
+firstapp.filter('uploadpath', function () {
+    return function (input, width, height, style) {
         var other = "";
         if (width && width !== "") {
             other += "&width=" + width;
@@ -476,14 +476,59 @@ firstapp.filter('uploadpath', function() {
     };
 });
 
-firstapp.directive('fileModel', ['$parse', function($parse) {
+firstapp.filter('kindOfJourney', function () {
+    return function (input) {
+        var returnVal = "";
+        switch (input) {
+            case "friends":
+                returnVal = "img/friends.png";
+                break;
+            case "backpacking":
+                returnVal = "img/backpacking.png";
+                break;
+            case "business":
+                returnVal = "img/business.png";
+                break;
+            case "religious":
+                returnVal = "img/religious.png";
+                break;
+            case "romance":
+                returnVal = "img/romance.png";
+                break;
+            case "budget":
+                returnVal = "img/budget.png";
+                break;
+            case "luxury":
+                returnVal = "img/luxury.png";
+                break;
+            case "family":
+                returnVal = "img/family.png";
+                break;
+            case "sole":
+                returnVal = "img/sole.png";
+                break;
+            case "betterhalf":
+                returnVal = "img/betterhalf.png";
+                break;
+            case "colleague":
+                returnVal = "img/colleague.png";
+                break;
+            case "adventure":
+                returnVal = "img/adventure.png";
+                break;
+        }
+        return returnVal;
+    };
+});
+
+firstapp.directive('fileModel', ['$parse', function ($parse) {
     return {
         restrict: 'A',
         scope: {
             fileModel: '=fileModel',
         },
-        link: function(scope, element, attrs) {
-            element.bind('change', function() {
+        link: function (scope, element, attrs) {
+            element.bind('change', function () {
                 console.log(element[0].files[0]);
                 scope.fileModel = element[0].files[0];
                 scope.$apply();

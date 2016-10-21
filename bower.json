@@ -42,7 +42,9 @@
     "angularjs-imageupload-directive": "*",
     "angular-ui-select": "^0.19.4",
     "angular-ui-tinymce": "^0.0.16",
-    "jStorage": "jstorage#^0.4.12"
+    "jStorage": "jstorage#^0.4.12",
+    "moment": "^2.15.1",
+    "angular-google-maps": "^2.4.0"
   },
   "devDependencies": {
     "angular-translate": "^2.11.0"
