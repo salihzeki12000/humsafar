@@ -987,7 +987,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   marker[i] = new google.maps.Marker({
     //     position: centers[i],
     //     map: map
-    //   });  
+    //   });
     // }
     // var center = {
     //   lat: 19.237188,
@@ -1012,7 +1012,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       lng: 73.318634
     }];
 
-    // {   
+    // {
     //   lat: 19.238368,
     //   lng: 73.129807
     // }, {
@@ -1113,7 +1113,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           strokeWeight: 2
         });
         travelPath.setMap(map);
-        // scrollPath.setMap(map); 
+        // scrollPath.setMap(map);
 
 
 
@@ -3099,6 +3099,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.obj = {};
     $scope.visited = [];
     var len = "";
+
+    // notify
+    $scope.notify = function(){
+      $uibModal.open({
+        templateUrl: "views/modal/notify.html",
+        animation: true,
+        scope: $scope,
+        windowClass : "notify-popup"
+      })
+    };
+    // notify end
 
     //Integration Section Starts here
     $scope.userData = $.jStorage.get("profile");

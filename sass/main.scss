@@ -6493,6 +6493,46 @@ header {
 // follow and following end
 // profile list (follow following countryVisited BucketList) end
 // other itineraries main of agent, user and editor end
+// Notify
+.notify-popup {
+  .modal-dialog {
+    width: 100%;
+  }
+  .notify-imgsec {
+    width: 65%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .comment-like-notify {
+    width: 35%;
+    margin-left: -4px;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .notify-imgholder {
+    height: 550px;
+    position: relative;
+    overflow: hidden;
+    img {  @extend .get-center;}
+  }
+}
+.like-comment-mainsec {
+  padding: 10px 20px;
+}
+.notify-like {
+  li {
+    margin-right: 20px;
+    display: inline-block;
+  }
+  a {
+  font-size: 20px;
+  vertical-align: middle;
+ }
+}
+.comment-tag {
+  padding: 15px;
+}
+// Notify end
 @import "sohan.scss";
 @import "fancybox-override";
 #map {
