@@ -11,13 +11,13 @@
       </div>
       <div class="fill-date mb20">
         <div class="inline-block">
-          <label for="hour" class="color-white">hh</label>
+          <label for="hour" class="color-white" ng-model="hour">hh</label>
           <div class="date-holder">
             <input type="text" id="hour">
           </div>
         </div>
         <div class="inline-block">
-          <label for="min" class="color-white">mm</label>
+          <label for="min" class="color-white" ng-model="time">mm</label>
           <div class="date-holder">
             <input type="text" id="min">
           </div>
@@ -31,7 +31,7 @@
     </div>
     <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options"></div>
     <div class="text-right">
-      <button class="btn btn-pink btn-more">Save</button>
+      <button class="btn btn-pink btn-more" ng-click=updateDateTime()>Save</button>
     </div>
   </div>
 </div>
