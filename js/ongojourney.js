@@ -164,7 +164,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
                 backgroundClick.scope = $scope;
             };
 
-            $scope.updateDateTime = function () {
+            $scope.updateDateTime = function (fromData) {
 
             }
 
