@@ -29,8 +29,10 @@ var ongojourney = angular.module('ongojourney', [])
         },
         getOneJourney: function (formData, callback, errorCallback) {
             $http({
-                url: adminURL + "/journey/getOneWeb",
-                method: "POST",
+                // url: adminURL + "/journey/getOneWeb",
+                url: "/demo.json",
+                // method: "POST",
+                method: "GET",
                 data: formData
             }).success(function (data) {
                 var journey = data.data;

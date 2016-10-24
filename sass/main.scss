@@ -6231,11 +6231,13 @@ header {
     font-size: 16px;
   }
 }
+
 // profile list (follow following countryVisited BucketList)
 .profile-tab-strip {
   padding: 0px 20px;
   background-color: #ebebeb;
 }
+
 .list-profile-tab {
   li {
     margin-right: 40px;
@@ -6253,9 +6255,11 @@ header {
     border-bottom: 3px solid $brand-pink;
   }
 }
+
 .follow-followers-holder {
   position: relative;
-  &:after,&:before {
+  &:after,
+  &:before {
     content: '';
     width: 1px;
     height: 10px;
@@ -6263,8 +6267,12 @@ header {
     position: absolute;
     bottom: 0;
   }
-  &:after { left: 0; }
-  &:before { right: 0; }
+  &:after {
+    left: 0;
+  }
+  &:before {
+    right: 0;
+  }
   input {
     width: 400px;
     padding: 5px 5px 5px 30px;
@@ -6274,39 +6282,49 @@ header {
     background-color: transparent;
     color: #979ba7;
     font-family: "AvenirLTStd-Medium";
-    @include placeholder { color: #979ba7; };
+    @include placeholder {
+      color: #979ba7;
+    }
+    ;
   }
   .search-follow {
-    @include position(absolute, 10px null null 10px);
+    @include position(absolute,
+    10px null null 10px);
     color: #979ba7;
   }
 }
-.list-add-country { margin-top: 7px; }
+
+.list-add-country {
+  margin-top: 7px;
+}
+
 .bucket-visited-holder {
   position: relative;
   display: inline-block;
-   input {
-     padding: 5px 20px 5px 10px;
-     border: 1px solid #c9cbd0;
-     border-radius: 4px;
-     background-color: transparent;
-     color: #979ba7;
-     font-family: "AvenirLTStd-Medium";
-   }
-   & + button {
-     display: inline-block;
-     vertical-align: top;
-   }
-   span {
-     position: absolute;
-     top: 5px;
-     right: 10px;
-     color: #979ba7;
-   }
+  input {
+    padding: 5px 20px 5px 10px;
+    border: 1px solid #c9cbd0;
+    border-radius: 4px;
+    background-color: transparent;
+    color: #979ba7;
+    font-family: "AvenirLTStd-Medium";
+  }
+  &+button {
+    display: inline-block;
+    vertical-align: top;
+  }
+  span {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    color: #979ba7;
+  }
 }
+
 .profile-tab-main {
   padding: 60px 20px 0;
 }
+
 // country visited start
 .country-visited-tab {
   .country-list-holder {
@@ -6332,12 +6350,15 @@ header {
       margin: 0;
       color: #fff;
       font-size: 20px;
-      span { font-size: 14px; }
+      span {
+        font-size: 14px;
+      }
     }
   }
-  .country-list  {
-    @include position(absolute, 0);
-    background-color: rgba(0,0,0,0.6);
+  .country-list {
+    @include position(absolute,
+    0);
+    background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
     @include transition(all 300ms linear);
   }
@@ -6351,7 +6372,9 @@ header {
     i.fa-calendar {
       font-size: 20px;
     }
-    i.fa-trash-o { font-size: 25px; }
+    i.fa-trash-o {
+      font-size: 25px;
+    }
   }
   .country-list-holder:hover {
     .country-list {
@@ -6359,11 +6382,13 @@ header {
       @include transition(all 300ms linear);
     }
     .country-img {
-      @include transform(translate(-50%,-50%) scale(1.1));
+      @include transform(translate(-50%,
+      -50%) scale(1.1));
       @include transition(all 300ms linear);
     }
   }
 }
+
 // country visited end
 .bucket-tab-main {
   @extend .country-visited-tab;
@@ -6378,26 +6403,32 @@ header {
         @include transition(all 300ms linear);
       }
       .country-img {
-        @include transform(translate(-50%,-50%) scale(1.1));
+        @include transform(translate(-50%,
+        -50%) scale(1.1));
         @include transition(all 300ms linear);
       }
     }
   }
 }
+
 // follow and following start
 .following-holder {
   padding: 10px;
   border-radius: 6px;
   box-shadow: 2px 2px 3px #888;
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255, 255, 255, 0.8);
 }
+
 .following-container {
   width: 19.33%;
   float: left;
   margin-right: 10px;
   margin-bottom: 50px;
-  &:nth-child(5n) { margin-right: 0; }
+  &:nth-child(5n) {
+    margin-right: 0;
+  }
 }
+
 .following-detail {
   h4 {
     margin: 15px 0 5px;
@@ -6407,17 +6438,25 @@ header {
     font-family: "AvenirLTStd-Medium";
   }
 }
+
 .photos-location-sec {
   padding: 8px 0;
   border-top: 1px solid #c2c8cf;
   border-bottom: 1px solid #c2c8cf;
-  button { font-size: 13px; }
-  .photo-loc { margin-top: 5px; }
+  button {
+    font-size: 13px;
+  }
+  .photo-loc {
+    margin-top: 5px;
+  }
 }
+
 .following-user-info {
   padding: 10px 0;
   border-bottom: 1px solid #c2c8cf;
-  ul { @include display (flex); }
+  ul {
+    @include display (flex);
+  }
   li {
     // display: inline-block;
     @include flex(1);
@@ -6426,7 +6465,9 @@ header {
     &:last-child {
       margin-right: 0;
     }
-    &:first-child { @include flex(2); }
+    &:first-child {
+      @include flex(2);
+    }
   }
   .user-count {
     color: $brand-pink;
@@ -6438,6 +6479,7 @@ header {
     color: #868686;
   }
 }
+
 .follow-imgholder {
   width: 90px;
   height: 95px;
@@ -6447,9 +6489,9 @@ header {
   margin: -40px auto 0;
   overflow: hidden;
 }
+
 // follow and following end
 // profile list (follow following countryVisited BucketList) end
-
 // other itineraries main of agent, user and editor end
 @import "sohan.scss";
 @import "fancybox-override";
@@ -6473,4 +6515,12 @@ header {
   img[src="https://maps.gstatic.com/mapfiles/api-3/images/google_white5.png"] {
     display: none !important;
   }
+}
+
+.ngMaps img {
+  opacity: 1 !important;
+}
+
+ng-map {
+  height: 1000px
 }

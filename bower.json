@@ -44,7 +44,8 @@
     "angular-ui-tinymce": "^0.0.16",
     "jStorage": "jstorage#^0.4.12",
     "moment": "^2.15.1",
-    "angular-google-maps": "^2.4.0"
+    "angular-google-maps": "^2.4.0",
+    "ngmap": "^1.17.8"
   },
   "devDependencies": {
     "angular-translate": "^2.11.0"

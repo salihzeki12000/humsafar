@@ -31,7 +31,6 @@ var jsArray = [
     './bower_components/ng-scrollbar/dist/ng-scrollbar.min.js',
     './bower_components/angular-swiper/dist/angular-swiper.js',
     './bower_components/angularjs-imageupload-directive',
-    './bower_components/angular-google-maps/dist/angular-google-maps.js',
     './js/app.js',
     './js/language.js',
     './js/controllers.js',
