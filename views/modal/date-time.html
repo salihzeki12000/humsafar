@@ -13,18 +13,52 @@
         <div class="inline-block">
           <label for="hour" class="color-white" ng-model="hour">hh</label>
           <div class="date-holder">
-            <input type="text" id="hour">
+            <input type="text" id="hour" ng-click="getDate = 1">
+            <div class="time-format-dropdown" ng-if="getDate == 1">
+              <ul>
+                <li><a href="">01</a></li>
+                <li><a href="">02</a></li>
+                <li><a href="">03</a></li>
+                <li><a href="">04</a></li>
+                <li><a href="">05</a></li>
+                <li><a href="">06</a></li>
+                <li><a href="">07</a></li>
+                <li><a href="">08</a></li>
+                <li><a href="">09</a></li>
+                <li><a href="">10</a></li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="inline-block">
           <label for="min" class="color-white" ng-model="time">mm</label>
           <div class="date-holder">
-            <input type="text" id="min">
+            <input type="text" id="min" ng-click="getDate=2">
+            <div class="time-format-dropdown" ng-if="getDate == 2">
+              <ul>
+                <li><a href="">01</a></li>
+                <li><a href="">02</a></li>
+                <li><a href="">03</a></li>
+                <li><a href="">04</a></li>
+                <li><a href="">05</a></li>
+                <li><a href="">06</a></li>
+                <li><a href="">07</a></li>
+                <li><a href="">08</a></li>
+                <li><a href="">09</a></li>
+                <li><a href="">10</a></li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="inline-block">
           <div class="date-holder">
-            <input type="text">
+            <input type="text" ng-click="getDate=3">
+            <div class="time-format-dropdown" ng-if="getDate == 3">
+              <ul class="timer">
+                <li><a href="">AM</a></li>
+                <li><a href="">PM</a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

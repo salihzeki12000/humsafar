@@ -4446,6 +4446,34 @@ header {
     text-align: center;
   }
 }
+.time-format-dropdown {
+  width: 100%;
+  position: absolute;
+  top: 30;
+  left: 0;
+  background-color: rgba(0,0,0,0.7);
+  ul {
+    height: 120px;
+    overflow-y: auto;
+  }
+  ul.timer {
+    height: auto;
+  }
+  li {
+    padding: 5px 0;
+    border-bottom: 1px solid #fff;
+  }
+  a { color: #fff; }
+  ::-webkit-scrollbar {
+   width: 1px;
+ }
+  ::-webkit-scrollbar-track {
+   background-color: $brand-lighter-grey;
+ }
+  ::-webkit-scrollbar-thumb {
+   background-color: $brand-pink;
+ }
+}
 
 .date-time-heading {
   p {
