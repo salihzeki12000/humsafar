@@ -15,8 +15,7 @@
                 <div class="journey-post">
                     <p class="post mb5" ng-bind-html="ongo.postString"></p>
                     <p class="journey-date avenir-roman m-clear"><span>Day {{ongo.UTCModified|dateDifference: json.startTime}}</span><i class="fa fa-calendar mr5 ml5"></i>
-                        <span
-                            class="mr5">{{ongo.UTCModified|formatDate:'date'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i><span>{{ongo.UTCModified|formatDate:'time'}}</span></p>
+                        <span class="mr5">{{ongo.UTCModified|formatDate:'date'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i><span>{{ongo.UTCModified|formatDate:'time'}}</span></p>
                 </div>
             </div>
             <div class="card-iconholder">
@@ -100,12 +99,12 @@
                 <div class="pull-right">
                     <div class="options">
                         <span class="inline-block pl10 pointer" ng-init="ongo.edit={};" ng-click="editOption(ongo.edit);" class="pointer">
-                        <img src="img/options.png" alt="" width="3">
-                      </span>
+                            <img src="img/options.png" alt="" width="3">
+                        </span>
                         <div class="own-trip" ng-show="ongo.edit.backgroundClick">
                             <ul>
                                 <!-- ng if for checkin -->
-                                <li><a href="" title="Edit Check In" ng-click="editCheckIn();">Edit Check In</a></li>
+                                <li><a href="" title="Edit Check In" ng-click="editCheckIn();">Edit <span>Check In</span></a></li>
                                 <!-- ng if for Photos -->
                                 <li class="hide"><a href="" title="Edit Photos" ng-click="editCheckIn();">Edit Photos</a></li>
                                 <!-- ng-if for Videos -->
@@ -113,7 +112,7 @@
                                 <!-- ng if for Thoughts -->
                                 <li class="hide"><a href="" title="Edit Thoughts" ng-click="editCheckIn();">Edit Thoughts</a></li>
                                 <li><a href="" title="Change Date &amp; Time" ng-click="changeDate();">Change Date &amp; Time</a></li>
-                                <li><a href="" title="Delete">Delete</a></li>
+                                <li><a href="" title="Delete" ng-click="deletePost(ongo.user._id)">Delete</a></li>
                                 <li><a href="" title="Copy URL">Copy URL</a></li>
                             </ul>
                         </div>

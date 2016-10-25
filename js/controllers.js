@@ -1245,7 +1245,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       minDate: new Date(),
       showWeeks: false
     };
-
+    $scope.format = "yyyy/MM/dd";
 
     // review country visited pop up
     $scope.giveReview = function () {
@@ -3101,12 +3101,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var len = "";
 
     // notify
-    $scope.notify = function(){
+    $scope.notify = function () {
       $uibModal.open({
         templateUrl: "views/modal/notify.html",
         animation: true,
         scope: $scope,
-        windowClass : "notify-popup"
+        windowClass: "notify-popup"
       })
     };
     // notify end

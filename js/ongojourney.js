@@ -164,9 +164,66 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
                 backgroundClick.scope = $scope;
             };
 
-            $scope.updateDateTime = function (fromData) {
+            $scope.formData = {};
 
+            $scope.updateDateTime = function (id, formData, dt) {
+                var date = formatDate(dt);
+                var time = formatTime(formData);
+                var result = {};
+                result.type = "changeDateTime";
+                result.date = new Date(date + " " + time);
+                result.uniqueId = id;
+                console.log(result);
+                $http({
+                    url: adminURL + "/post/editData/",
+                    method: "POST",
+                    data: result
+                })
             }
+
+            $scope.hours = _.range(1, 13, 1);
+            $scope.mins = _.range(1, 60, 1);
+
+            $scope.change = function (id, val) {
+                if (id == 'hour') {
+                    $scope.formData.nhour = val;
+                } else if (id == 'min') {
+                    $scope.formData.nmins = val;
+                } else {
+                    $scope.formData.dayNight = val;
+                }
+            }
+
+            var formatDate = function (date) {
+                var d = new Date(date),
+                    month = '' + (d.getMonth() + 1),
+                    day = '' + d.getDate(),
+                    year = d.getFullYear();
+
+                if (month.length < 2) month = '0' + month;
+                if (day.length < 2) day = '0' + day;
+
+                return [year, month, day].join('/');
+            }
+
+            var formatTime = function (formData) {
+                var hour = formData.nhour,
+                    mins = formData.nmins,
+                    sec = 00;
+                if (formData.dayNight == "AM") {
+                    if (hour == 12) {
+                        hour = 0;
+                    }
+                } else if (formData.dayNight == "PM") {
+                    if (hour == 12) {
+                        hour = 12;
+                    } else {
+                        hour = parseInt(hour) + 12;
+                    }
+                }
+                return [hour, mins, sec].join(':');
+            }
+
 
         }
 

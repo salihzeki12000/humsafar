@@ -11,21 +11,15 @@
       </div>
       <div class="fill-date mb20">
         <div class="inline-block">
-          <label for="hour" class="color-white" ng-model="hour">hh</label>
+          <label for="hour" class="color-white">hh</label>
           <div class="date-holder">
-            <input type="text" id="hour" ng-click="getDate = 1">
+            <input type="text" id="hour" ng-click="getDate = 1" ng-model="formData.nhour">
             <div class="time-format-dropdown" ng-if="getDate == 1">
               <ul>
-                <li><a href="">01</a></li>
-                <li><a href="">02</a></li>
-                <li><a href="">03</a></li>
-                <li><a href="">04</a></li>
-                <li><a href="">05</a></li>
-                <li><a href="">06</a></li>
-                <li><a href="">07</a></li>
-                <li><a href="">08</a></li>
-                <li><a href="">09</a></li>
-                <li><a href="">10</a></li>
+                <a href="">
+                  <li ng-repeat="hh in hours | filter: formData.nhour" ng-click="change('hour',hh)">{{hh}}</li>
+                </a>
+
               </ul>
             </div>
           </div>
@@ -33,39 +27,30 @@
         <div class="inline-block">
           <label for="min" class="color-white" ng-model="time">mm</label>
           <div class="date-holder">
-            <input type="text" id="min" ng-click="getDate=2">
+            <input type="text" id="min" ng-click="getDate=2" ng-model="formData.nmins">
             <div class="time-format-dropdown" ng-if="getDate == 2">
               <ul>
-                <li><a href="">01</a></li>
-                <li><a href="">02</a></li>
-                <li><a href="">03</a></li>
-                <li><a href="">04</a></li>
-                <li><a href="">05</a></li>
-                <li><a href="">06</a></li>
-                <li><a href="">07</a></li>
-                <li><a href="">08</a></li>
-                <li><a href="">09</a></li>
-                <li><a href="">10</a></li>
+                <li ng-repeat="mm in mins|filter: formData.nmins" ng-click="change('min',mm)"><a href="">{{mm}}</a></li>
               </ul>
             </div>
           </div>
         </div>
         <div class="inline-block">
           <div class="date-holder">
-            <input type="text" ng-click="getDate=3">
+            <input type="text" id="dayNight" ng-click="getDate=3" ng-model="formData.dayNight">
             <div class="time-format-dropdown" ng-if="getDate == 3">
               <ul class="timer">
-                <li><a href="">AM</a></li>
-                <li><a href="">PM</a></li>
+                <li ng-click="change('dayNight','AM')"><a href="">AM</a></li>
+                <li ng-click="change('dayNight','PM')"><a href="">PM</a></li>
               </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options"></div>
+    <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options" datepicker-mode="year|month|day"></div>
     <div class="text-right">
-      <button class="btn btn-pink btn-more" ng-click=updateDateTime()>Save</button>
+      <button class="btn btn-pink btn-more" ng-click=updateDateTime(ongo.uniqueId,formData,dt)>Save</button>
     </div>
   </div>
 </div>
