@@ -6533,7 +6533,8 @@ header {
   }
   .comment-like-notify {
     width: 35%;
-    margin-left: -4px;
+    padding: 10px 20px;
+    margin-left: -5px;
     display: inline-block;
     vertical-align: top;
   }
@@ -6541,24 +6542,121 @@ header {
     height: 550px;
     position: relative;
     overflow: hidden;
-    img {  @extend .get-center;}
+    img {
+      width: 100%;
+      @extend .get-center;
+     }
   }
-}
-.like-comment-mainsec {
-  padding: 10px 20px;
 }
 .notify-like {
   li {
     margin-right: 20px;
     display: inline-block;
+    vertical-align: middle;
   }
   a {
   font-size: 20px;
-  vertical-align: middle;
+  vertical-align: top;
  }
+}
+.notify-like-holder {
+  margin-top: 2px;
+  position: relative;
+  display: block;
+  .view-like {
+    position: relative;
+    &:after {
+      content: '';
+      @include position(absolute, 10px null null 0);
+      border-top: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid $brand-blue;
+      border-left: 8px solid transparent;
+    }
+  }
+}
+.like-dropdown {
+  width: 155px;
+  padding: 10px;
+  position: absolute;
+  top: 28px;
+  right: -5px;
+  background-color: $brand-blue;
+  ::-webkit-scrollbar {
+   width: 2px;
+ }
+  ::-webkit-scrollbar-track {
+   background-color: #fff;
+ }
+  ::-webkit-scrollbar-thumb {
+   background-color: $brand-pink;
+ }
+ ul {
+   height: 230px;
+   overflow-y: auto;
+ }
+  a {
+    padding: 8px 10px;
+    display: block;
+    color: #fff;
+  }
 }
 .comment-tag {
   padding: 15px;
+}
+.comment-sec {
+  padding-top: 20px;
+  border-top : 1px solid #ccc;
+  margin-top: 10px;
+    .view-comment-list {
+      margin-bottom: 20px;
+    }
+    .commenter-imgholder {
+      width: 34px;
+      height: 37px;
+      border: 2px solid #fff;
+      border-radius: 13px;
+      box-shadow: 0px 2px 3px #ccc;
+      overflow: hidden;
+      img { min-height: 100%; }
+    }
+    .comment-list-holder {
+      padding: 15px 0px 0px;
+    }
+    .commenter-img {
+      width: 10%;
+      display: inline-block;
+      vertical-align: top;
+    }
+    .comment-container {
+      width: 90%;
+      margin-left: -5px;
+      display: inline-block;
+      vertical-align: top;
+    }
+    .write-comment-text { margin-bottom: 10px; }
+    .comment-ur-text {
+      width: 90%;
+      margin-left: -5px;
+      display: inline-block;
+      vertical-align: bottom;
+      textarea {
+        border: none;
+        border-bottom: 2px solid $brand-dark-blue;
+        padding: 0 10px;
+        color: #787878;
+        line-height: 100%;
+        @extend .avenir-roman;
+      }
+    }
+    .commenter-text {
+      color: #787878;
+      @extend .avenir-roman;
+    }
+    .like-reply-line {
+      margin-top: 5px;
+      font-size: 13px;
+    }
 }
 // Notify end
 @import "sohan.scss";
