@@ -1092,10 +1092,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           var obj = {
             position: position,
             map: map,
-            icon: "img/maps/grey-pin.png"
+            icon: "img/maps/small-marker.png"
           };
           if (status) {
-            obj.icon = "img/maps/marker-64.png";
+            obj.icon = "img/maps/marker.png";
           }
           marker = new google.maps.Marker(obj);
         }

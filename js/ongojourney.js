@@ -60,7 +60,7 @@ var ongojourney = angular.module('ongojourney', [])
     };
 });
 
-ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal', function ($http, $filter, $timeout, $uibModal) {
+ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal', 'OnGoJourney', function ($http, $filter, $timeout, $uibModal, OnGoJourney) {
     return {
         restrict: 'E',
         scope: {
@@ -145,14 +145,13 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
                     data: formData
                 })
             };
-            $scope.comments = function (id) {
+            $scope.getComments = function (id) {
                 $uibModal.open({
                     templateUrl: "views/modal/notify.html",
                     animation: true,
                     scope: $scope,
                     windowClass: "notify-popup"
                 });
-                console.log(id);
                 var formData = {
                     "_id": id
                 };
@@ -162,8 +161,31 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
                     data: formData
                 }).success(function (data) {
                     $scope.listOfComments = data.data;
-                    console.log($scope.listOfComments)
                 });
+            };
+            $scope.postComment = function (id, comment) {
+                var formData = {
+                    "uniqueId": id,
+                    "text": comment
+                };
+                $http({
+                    url: adminURL + "/post/addCommentWeb",
+                    method: "POST",
+                    data: formData
+                }).success(function (data) {
+                    formData = {
+                        "_id": $scope.ongo._id
+                    }
+                    $http({
+                        url: adminURL + "/post/getPostComment",
+                        method: "POST",
+                        data: formData
+                    }).success(function (data) {
+                        $scope.listOfComments = data.data;
+                        document.getElementById('enterComment').value = "";
+                    });
+                });
+
             };
             $scope.changeDate = function () {
                 $uibModal.open({
@@ -197,7 +219,26 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
                     url: adminURL + "/post/editData/",
                     method: "POST",
                     data: result
-                })
+                }).success(function (data) {
+                    console.log(data);
+                    formData = {
+                        "_id": $scope.json._id
+                    }
+                    OnGoJourney.getOneJourney(formData, function (journeys) {
+                        $scope.json.post = journeys.post;
+                        console.log("journey updated");
+                    }, function (err) {
+                        console.log(err);
+                    });
+                    // $http({
+                    //     url: adminURL + "/journey/getOneWeb",
+                    //     method: "POST",
+                    //     data: formData
+                    // }).success(function (data) {
+                    //     console.log(data);
+                    // });
+
+                });
             }
 
             $scope.hours = _.range(1, 13, 1);
