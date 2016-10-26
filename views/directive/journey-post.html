@@ -128,8 +128,24 @@
             <div class="social-likes-reviews">
                 <div class="clearfix">
                     <div class="pull-left">
-                        <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b>{{ongo.likeCount}}</b> Like</span>
-                        <span class="color-blue mr10"><img src="img/comments.png" alt="" class="mr5" height="18"><b>{{ongo.commentCount}}</b> Comments</span>
+                        <span class="color-blue mr10 card-like" ng-click="cardLikeList = !cardLikeList"><i class="fa fa-heart color-blue mr5"></i><b>{{ongo.likeCount}}</b> Like
+                        <div class="card-like-dropdown" ng-show="cardLikeList">
+                          <ul>
+                            <li><a href="">Skrillex</a></li>
+                            <li><a href="">Diplo</a></li>
+                            <li><a href="">Major Lazer</a></li>
+                          </ul>
+                        </div>
+                        </span>
+                        <span class="color-blue mr10 card-comment" ng-click="cardCommentList = !cardCommentList"><img src="img/comments.png" alt="" class="mr5" height="18"><b>{{ongo.commentCount}}</b> Comments
+                        <div class="card-comment-dropdown" ng-show="cardCommentList">
+                          <ul>
+                            <li><a href="">Andrea Christina</a></li>
+                            <li><a href="">Sara Bivens</a></li>
+                            <li><a href="">Bebe Rexha</a></li>
+                          </ul>
+                        </div>
+                      </span>
                         <!-- <p class="inline-block"><span class="color-blue mr5">Rating :</span>
                             <span>
                               <i class="fa fa-star color-pink"></i>
