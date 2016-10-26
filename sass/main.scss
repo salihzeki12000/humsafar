@@ -4136,6 +4136,58 @@ header {
 }
 
 // join card end
+// card footer
+// card like and comment start
+.card-like, .card-comment {
+  position: relative;
+  .card-like-dropdown, .card-comment-dropdown {
+    width: 155px;
+    padding: 10px;
+    position: absolute;
+    left: -10px;
+    z-index: 2;
+    background-color: $brand-blue;
+    ul {
+      max-height: 230px;
+      overflow-y: auto;
+    }
+    a {
+      padding: 8px 10px;
+      display: block;
+      color: #fff;
+      font-size: 13px;
+      @extend .avenir-roman;
+    }
+  }
+  .card-like-dropdown {
+    top: 25px;
+    &:after {
+      content: "";
+      position: absolute;
+      top: -16px;
+      left: 8px;
+      border-top: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid $brand-blue;
+      border-left: 8px solid transparent;
+    }
+  }
+  .card-comment-dropdown {
+    bottom: 28px;
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: -16px;
+      left: 10px;
+      border-top: 8px solid $brand-blue;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-left: 8px solid transparent;
+    }
+  }
+}
+// card like and comment end
+// card footer end
 // left card
 .ongo-journey-left {
   width: 350px;
@@ -6592,7 +6644,7 @@ header {
    background-color: $brand-pink;
  }
  ul {
-   height: 230px;
+   max-height: 230px;
    overflow-y: auto;
  }
   a {
