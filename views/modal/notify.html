@@ -22,19 +22,12 @@
             </div>
             <div class="pull-right">
               <div class="notification-like">
-                <span class="notify-like-holder pointer avenir-roman" ng-click="showLikes = !showLikes">
+                <span class="notify-like-holder pointer avenir-roman" ng-click="showLikes=!showLikes;getLikes(ongo._id)">
                   <i class="fa fa-heart color-blue" ng-class="{'view-like' : showLikes == true , '' : showLikes == false}" ></i>
                  <span>{{ongo.likeCount}}   </span>Like
                 <div class="like-dropdown" ng-show="showLikes">
                   <ul>
-                    <li><a href="">Monish Shah</a></li>
-                    <li><a href="">Malhar Gala</a></li>
-                    <li><a href="">Raman</a></li>
-                    <li><a href="">Saket Dave</a></li>
-                    <li><a href="">Vigensh Kasturi</a></li>
-                    <li><a href="">Amit Verma</a></li>
-                    <li><a href="">Akshay Mayekar</a></li>
-                    <li><a href="">Jitu Tawde</a></li>
+                    <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
                   </ul>
                 </div>
                 </span>

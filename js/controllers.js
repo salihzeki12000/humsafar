@@ -852,124 +852,97 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     //mapStyle
-    {
-      var mapStyle = [{
-        "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#e9e9e9"
-        }, {
-          "lightness": 17
-        }]
-      }, {
-        "featureType": "landscape",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#f5f5f5"
-        }, {
-          "lightness": 20
-        }]
-      }, {
-        "featureType": "road.highway",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "#ffffff"
-        }, {
-          "lightness": 17
-        }]
-      }, {
-        "featureType": "road.highway",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-          "color": "#ffffff"
-        }, {
-          "lightness": 29
-        }, {
-          "weight": 0.2
-        }]
-      }, {
-        "featureType": "road.arterial",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#ffffff"
-        }, {
-          "lightness": 18
-        }]
-      }, {
-        "featureType": "road.local",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#ffffff"
-        }, {
-          "lightness": 16
-        }]
-      }, {
-        "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#f5f5f5"
-        }, {
-          "lightness": 21
-        }]
-      }, {
-        "featureType": "poi.park",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#dedede"
-        }, {
-          "lightness": 21
-        }]
-      }, {
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "visibility": "on"
-        }, {
-          "color": "#ffffff"
-        }, {
-          "lightness": 16
-        }]
-      }, {
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "saturation": 36
-        }, {
-          "color": "#333333"
-        }, {
-          "lightness": 40
-        }]
-      }, {
-        "elementType": "labels.icon",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "transit",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#f2f2f2"
-        }, {
-          "lightness": 19
-        }]
-      }, {
-        "featureType": "administrative",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "#fefefe"
-        }, {
-          "lightness": 20
-        }]
-      }, {
-        "featureType": "administrative",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-          "color": "#fefefe"
-        }, {
-          "lightness": 17
-        }, {
-          "weight": 1.2
-        }]
-      }];
-    }
+    var mapStyle = [{
+      "featureType": "landscape.man_made",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#f7f1df"
+      }]
+    }, {
+      "featureType": "landscape.natural",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#d0e3b4"
+      }]
+    }, {
+      "featureType": "landscape.natural.terrain",
+      "elementType": "geometry",
+      "stylers": [{
+        "visibility": "off"
+      }]
+    }, {
+      "featureType": "poi",
+      "elementType": "labels",
+      "stylers": [{
+        "visibility": "off"
+      }]
+    }, {
+      "featureType": "poi.business",
+      "elementType": "all",
+      "stylers": [{
+        "visibility": "off"
+      }]
+    }, {
+      "featureType": "poi.medical",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#fbd3da"
+      }]
+    }, {
+      "featureType": "poi.park",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#bde6ab"
+      }]
+    }, {
+      "featureType": "road",
+      "elementType": "geometry.stroke",
+      "stylers": [{
+        "visibility": "off"
+      }]
+    }, {
+      "featureType": "road",
+      "elementType": "labels",
+      "stylers": [{
+        "visibility": "off"
+      }]
+    }, {
+      "featureType": "road.highway",
+      "elementType": "geometry.fill",
+      "stylers": [{
+        "color": "#ffe15f"
+      }]
+    }, {
+      "featureType": "road.highway",
+      "elementType": "geometry.stroke",
+      "stylers": [{
+        "color": "#efd151"
+      }]
+    }, {
+      "featureType": "road.arterial",
+      "elementType": "geometry.fill",
+      "stylers": [{
+        "color": "#ffffff"
+      }]
+    }, {
+      "featureType": "road.local",
+      "elementType": "geometry.fill",
+      "stylers": [{
+        "color": "black"
+      }]
+    }, {
+      "featureType": "transit.station.airport",
+      "elementType": "geometry.fill",
+      "stylers": [{
+        "color": "#cfb2db"
+      }]
+    }, {
+      "featureType": "water",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#a2daf2"
+      }]
+    }]
 
     // var center = {
     //   lat: centers[0].lat,
@@ -1079,11 +1052,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 10,
+          zoom: 15,
           draggable: true,
           animation: google.maps.Animation.DROP,
           center: center,
-          styles: mapStyle
+          // styles: mapStyle
         });
 
         function setMarker(status, n) {

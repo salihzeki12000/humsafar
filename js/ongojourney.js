@@ -145,13 +145,20 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
                     data: formData
                 })
             };
-            $scope.getComments = function (id) {
-                $uibModal.open({
-                    templateUrl: "views/modal/notify.html",
-                    animation: true,
-                    scope: $scope,
-                    windowClass: "notify-popup"
+            $scope.getLikes = function (id) {
+                console.log(id);
+                var formData = {
+                    "_id": id
+                }
+                $http({
+                    url: adminURL + "/post/getPostLikes",
+                    method: "POST",
+                    data: formData
+                }).success(function (data) {
+                    $scope.listOfLikes = data.data;
                 });
+            }
+            $scope.getComments = function (id) {
                 var formData = {
                     "_id": id
                 };
@@ -160,7 +167,10 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
                     method: "POST",
                     data: formData
                 }).success(function (data) {
+                    $scope.uniqueArr = [];
                     $scope.listOfComments = data.data;
+                    $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+                    console.log($scope.uniqueArr);
                 });
             };
             $scope.postComment = function (id, comment) {
@@ -204,7 +214,14 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
 
                 backgroundClick.scope = $scope;
             };
-
+            $scope.notify = function () {
+                $uibModal.open({
+                    templateUrl: "views/modal/notify.html",
+                    animation: true,
+                    scope: $scope,
+                    windowClass: "notify-popup"
+                });
+            }
             $scope.formData = {};
 
             $scope.updateDateTime = function (id, formData, dt) {

@@ -76,7 +76,7 @@
                         <li><a href=""><i class="fa color-blue" ng-class="ongo.likeDone ? 'fa-heart' : 'fa-heart-o'" ng-click="likes(ongo.uniqueId)"></i></a></li>
                         <li>
                             <a href="">
-                                <img src="img/comments.png" alt="" height="18" ng-click="comments(ongo._id);">
+                                <img src="img/comments.png" alt="" height="18" ng-click="notify();getComments(ongo._id);">
                             </a>
                         </li>
                         <li class="relate">
@@ -128,23 +128,19 @@
             <div class="social-likes-reviews">
                 <div class="clearfix">
                     <div class="pull-left">
-                        <span class="color-blue mr10 card-like" ng-click="cardLikeList = !cardLikeList"><i class="fa fa-heart color-blue mr5"></i><b>{{ongo.likeCount}}</b> Like
+                        <span class="color-blue mr10 card-like" ng-click="cardLikeList = !cardLikeList;getLikes(ongo._id)"><i class="fa fa-heart color-blue mr5"></i><b>{{ongo.likeCount}}</b> Like
                         <div class="card-like-dropdown" ng-show="cardLikeList">
                           <ul>
-                            <li><a href="">Skrillex</a></li>
-                            <li><a href="">Diplo</a></li>
-                            <li><a href="">Major Lazer</a></li>
+                            <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
                           </ul>
                         </div>
                         </span>
-                        <span class="color-blue mr10 card-comment" ng-click="cardCommentList = !cardCommentList"><img src="img/comments.png" alt="" class="mr5" height="18"><b>{{ongo.commentCount}}</b> Comments
-                        <div class="card-comment-dropdown" ng-show="cardCommentList">
+                        <span class="color-blue mr10 card-comment" ng-click="cardCommentList = !cardCommentList;getComments(ongo._id)"><img src="img/comments.png" alt="" class="mr5" height="18"><b>{{ongo.commentCount}}</b> Comments
+                        <!--<div class="card-comment-dropdown" ng-show="cardCommentList">
                           <ul>
-                            <li><a href="">Andrea Christina</a></li>
-                            <li><a href="">Sara Bivens</a></li>
-                            <li><a href="">Bebe Rexha</a></li>
+                            <li ng-repeat="listComments in uniqueArr"><a href="">{{listComments.user.name}}</a></li>
                           </ul>
-                        </div>
+                        </div>-->
                       </span>
                         <!-- <p class="inline-block"><span class="color-blue mr5">Rating :</span>
                             <span>
