@@ -66,6 +66,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         scope: {
             ongo: "=post",
             json: "=json",
+            profile: "=profile"
         },
         templateUrl: 'views/directive/journey-post.html',
         link: function ($scope, element, attrs) {
@@ -122,11 +123,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
             } else {
                 $scope.ongo.postString = $scope.ongo.user.name.bold() + " with " + $scope.ongo.buddiesString;
             }
-            $scope.likes = function () {
+            $scope.likes = function (id) {
                 $scope.ongo.likeDone = !$scope.ongo.likeDone;
-                console.log($scope.ongo.likeDone);
-                var id = $scope.ongo.uniqueId;
-
+                // var id = $scope.ongo.uniqueId;
                 if ($scope.ongo.likeDone) {
                     $scope.ongo.likeCount = $scope.ongo.likeCount + 1;
                     var formData = {
@@ -145,6 +144,26 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
                     method: "POST",
                     data: formData
                 })
+            };
+            $scope.comments = function (id) {
+                $uibModal.open({
+                    templateUrl: "views/modal/notify.html",
+                    animation: true,
+                    scope: $scope,
+                    windowClass: "notify-popup"
+                });
+                console.log(id);
+                var formData = {
+                    "_id": id
+                };
+                $http({
+                    url: adminURL + "/post/getPostComment",
+                    method: "POST",
+                    data: formData
+                }).success(function (data) {
+                    $scope.listOfComments = data.data;
+                    console.log($scope.listOfComments)
+                });
             };
             $scope.changeDate = function () {
                 $uibModal.open({
@@ -223,7 +242,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
                 }
                 return [hour, mins, sec].join(':');
             }
-
 
         }
 

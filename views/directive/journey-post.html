@@ -73,10 +73,10 @@
             <div class="user-social-item clearfix">
                 <div class="pull-left">
                     <ul>
-                        <li><a href=""><i class="fa color-blue" ng-class="ongo.likeDone ? 'fa-heart' : 'fa-heart-o'" ng-click="likes()"></i></a></li>
+                        <li><a href=""><i class="fa color-blue" ng-class="ongo.likeDone ? 'fa-heart' : 'fa-heart-o'" ng-click="likes(ongo.uniqueId)"></i></a></li>
                         <li>
                             <a href="">
-                                <img src="img/comments.png" alt="" height="18">
+                                <img src="img/comments.png" alt="" height="18" ng-click="comments(ongo._id);">
                             </a>
                         </li>
                         <li class="relate">
@@ -129,6 +129,7 @@
                 <div class="clearfix">
                     <div class="pull-left">
                         <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b>{{ongo.likeCount}}</b> Like</span>
+                        <span class="color-blue mr10"><img src="img/comments.png" alt="" class="mr5" height="18"><b>{{ongo.commentCount}}</b> Comments</span>
                         <!-- <p class="inline-block"><span class="color-blue mr5">Rating :</span>
                             <span>
                               <i class="fa fa-star color-pink"></i>

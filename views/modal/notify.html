@@ -11,7 +11,7 @@
           <div class="clearfix">
             <div class="pull-left">
               <ul class="notify-like">
-                <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
+                <li><a href=""><i class="fa color-blue" ng-class="ongo.likeDone ? 'fa-heart' : 'fa-heart-o'" ng-click="likes(ongo.uniqueId)"></i></a></li>
                 <li>
                   <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve"></a>
                 </li>
@@ -22,7 +22,9 @@
             </div>
             <div class="pull-right">
               <div class="notification-like">
-                <span class="notify-like-holder pointer avenir-roman" ng-click="showLikes = !showLikes"><i class="fa fa-heart color-blue" ng-class="{'view-like' : showLikes == true , '' : showLikes == false}"></i> <span>15600 </span>Likes
+                <span class="notify-like-holder pointer avenir-roman" ng-click="showLikes = !showLikes">
+                  <i class="fa fa-heart color-blue" ng-class="{'view-like' : showLikes == true , '' : showLikes == false}" ></i>
+                 <span>{{ongo.likeCount}}   </span>Like
                 <div class="like-dropdown" ng-show="showLikes">
                   <ul>
                     <li><a href="">Monish Shah</a></li>
@@ -42,20 +44,22 @@
         </div>
         <!-- comment section -->
         <div class="comment-sec">
-          <div class="view-comment-list">
+          <div class="view-comment-list" ng-repeat="list in listOfComments.comment">
             <div class="commenter-img">
               <div class="commenter-imgholder">
-                <img src="img/adrena.jpg" alt="" class="img-responsive">
+                <img ng-src="{{list.user.profilePicture|uploadpath}}" alt="" class="img-responsive">
               </div>
             </div>
             <div class="comment-container">
               <div class="commenter-text">
-                <p class="avenir-roman"><span class="commenter-name color-blue avenir-heavy mr5">Andreas Christina</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui consectetur, iste asperiores similique et veniam tempora nisi. Dignissimos vel, nesciunt
-                  fugit odio nobis modi earum nisi iste soluta deserunt at.</p>
+                <!--<p class="avenir-roman"><span class="commenter-name color-blue avenir-heavy mr5">Andreas Christina</span>Lorem ipsum dolor sit amet,
+                  consectetur adipisicing elit. Qui consectetur, iste asperiores similique et veniam tempora nisi. Dignissimos
+                  vel, nesciunt fugit odio nobis modi earum nisi iste soluta deserunt at.</p>-->
+                <p class="avenir-roman"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name}}</span>{{list.text}}</p>
                 <div class="like-reply-line">
                   <span class="color-blue avenir-roman mr5 pointer">Like</span>
                   <span class="color-blue avenir-roman mr5 pointer">Reply</span>
-                  <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>14 Jan, 2016</span> | <i class="fa fa-clock-o mr5 color-grey"></i><span>01:20 pm</span></span>
+                  <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>14 Jan, 2016</span>                  | <i class="fa fa-clock-o mr5 color-grey"></i><span>01:20 pm</span></span>
                 </div>
               </div>
             </div>
@@ -63,7 +67,7 @@
           <div class="write-comment-text">
             <div class="commenter-img">
               <div class="commenter-imgholder">
-                <img src="img/adrena.jpg" alt="" class="img-responsive">
+                <img ng-src="{{profile.profilePicture|uploadpath}}" alt="" class="img-responsive">
               </div>
             </div>
             <div class="comment-ur-text">

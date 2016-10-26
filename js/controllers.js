@@ -3100,16 +3100,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.visited = [];
     var len = "";
 
-    // notify
-    $scope.notify = function () {
-      $uibModal.open({
-        templateUrl: "views/modal/notify.html",
-        animation: true,
-        scope: $scope,
-        windowClass: "notify-popup"
-      })
-    };
-    // notify end
 
     //Integration Section Starts here
     $scope.userData = $.jStorage.get("profile");
