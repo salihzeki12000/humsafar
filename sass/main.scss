@@ -1,5 +1,6 @@
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
+@import "../bower_components/bourbon/app/assets/stylesheets/bourbon";
 @import "../bower_components/flexslider/flexslider.css";
 @import "../bower_components/font-awesome/css/font-awesome.min.css";
 @import "../bower_components/fancyBox/source/jquery.fancybox.css";
@@ -7,7 +8,6 @@
 @import "../bower_components/ng-img-crop/compile/minified/ng-img-crop.css";
 @import "../bower_components/angular-mappy/build/angular-mappy.css";
 @import "../bower_components/ng-scrollbar/dist/ng-scrollbar.min.css";
-@import "../bower_components/bourbon/app/assets/stylesheets/bourbon";
 @import "../bower_components/angular-ui-select/dist/select.css";
 
 /* Bootstrap Variables Goes Here */
@@ -70,7 +70,6 @@ img {
   opacity: 0;
   @include transition(all 300ms ease);
 }
-
 img.doneLoading {
   opacity: 1;
 }
@@ -618,13 +617,19 @@ textarea {
   transparent,
   $brand-blue);
 }
-
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+  &:hover {
+    background-color: initial;
+    color: initial;
+  }
+}
 // end btn classes
 
 /* Start writing sass here */
 
 .travel-bg {
-  min-height: 550px;
+  // min-height: 550px;
+  height: 100%;
   background: url('../img/back-content.jpg') no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -1090,7 +1095,6 @@ header {
     vertical-align: top;
   }
 }
-
 .usually-go-holiday {
   width: 140px;
   display: inline-block;
@@ -1189,7 +1193,6 @@ header {
     @include transform(rotate(180deg));
   }
 }
-
 .vector-map {
   max-height: 550px;
   padding: 40px 30px 30px 40px;
@@ -6740,5 +6743,9 @@ header {
 }
 
 ng-map {
-  height: 1000px
+  height: 1000px;
 }
+
+
+@import "mobile.scss";
+// header { display: none; }

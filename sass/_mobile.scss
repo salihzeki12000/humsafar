@@ -1,0 +1,125 @@
+@media screen and (max-width: 1200px) {
+  // holiday page
+  .usually-go {
+    margin-bottom: 20%;
+  }
+  // holiday page end
+}
+// media query for 991px to 768px
+@media screen and (max-width: 991px) {
+}
+// media query for 991px to 768px end
+// media query for 767px to 480px
+@media screen and (max-width: 767px) {
+  // main page
+  .upload-section {
+    img { width: 80px; }
+  }
+  .upload-profile {
+    .cropArea { height: 200px; }
+  }
+  .upload-btn {
+    margin: 0;
+    .web-camera { margin: 10px 0 0; }
+    .select-photo {
+      margin: 10px 0px 0px;
+    }
+  }
+  // main page end
+  // holiday
+  .button-pane {
+    margin-top: 30px;
+    button { padding: 6px 20px; }
+  }
+  .travel-row-main {
+    .kind-holiday {
+      width: 120px;
+      margin: 10px 0 20px;
+      &:nth-child(4), &:nth-child(5), &:nth-child(6) { margin: 10px 0 20px; }
+    }
+  }
+  .select-holiday {
+    background-size: 35% auto;
+    &:hover { background-size: 35% auto; }
+  }
+  .holiday-imgholder {
+    min-height: 50px;
+    img { height: 45px; }
+  }
+  .usually-go-holiday { width: 120px; }
+  .travel-row-main {
+    .preference-travel {
+      width: 120px;
+      margin: 10px 0px 20px;
+    }
+    .preference-travel:nth-last-of-type(2) { width: 120px; }
+    .preference-travel:last-child { width: 120px; }
+  }
+  .travel-row-main .ideal-holiday { width: 120px; }
+  // holiday end
+}
+// media query for 767px to 480px end
+// media query for 480px to 320px
+@media screen and (max-width: 480px) {
+  // main page
+  .city,
+  .gender,
+  .nationality,
+  .upload-profile,
+  .verification-complete {
+    h3 { margin: 0px 0px 20px; }
+  }
+  .select-your-nation ul li {
+    padding: 10px 5px;
+    span { font-size: 13px; }
+  }
+  .female, .male {
+    @include square(100px);
+    margin: 0px 10px;
+    img { height: 80px; }
+  }
+  .upload-section img { width: 60px; }
+  .upload-btn {
+    button {
+      padding: 6px 14px;
+      font-size: 12px;
+    }
+  }
+  .web-camera {
+    margin: 10px 0 0;
+    display: block;
+  }
+  // main page end
+  // holiday
+  .holiday-step {
+    height: 100%;
+    background: url(../img/back-content.jpg) no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  .travel-row-main {
+    .kind-holiday { width: 100px; }
+  }
+  .select-holiday {
+    background-size: 45% auto;
+    figcaption { font-size: 14px; }
+    &:hover { background-size: 45% auto; }
+    figcaption { font-size: 14px; }
+  }
+  .holiday-imgholder {
+    min-height: 50px;
+    img { height: 45px; }
+  }
+  .usually-go-holiday {
+    width: 100px;
+    margin: 10px 5px;
+  }
+  .travel-row-main {
+    .preference-travel { width: 100px; }
+    .preference-travel:nth-last-of-type(2) { width: 100px; }
+    .preference-travel:last-child { width: 100px; }
+  }
+  .travel-row-main .ideal-holiday { width: 100px; }
+  // holiday end
+}
+// media query for 480px to 320px end
