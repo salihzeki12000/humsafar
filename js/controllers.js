@@ -698,71 +698,80 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // Integration Section Ends here
 
   })
-  .controller('TripSummaryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('TripSummaryCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, OnGoJourney) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
+    var id = $stateParams.id;
+    var formData = {
+      "_id": id,
+      "type": "tripSummary"
+    };
+    var callback = function (summary) {
+      $scope.trip = summary;
+    }
+    OnGoJourney.getTripSummary(formData, callback)
 
     $scope.template = TemplateService.changecontent("tripsummary");
     $scope.menutitle = NavigationService.makeactive("TripSummary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.trip = {
-      date: "12 Feb, 2016",
-      dayNo: "8",
-      mileage: "14700",
-      tripJourneyType: [{
-        imgTrip: "img/trip-summary/bar.png",
-        tripType: "Restaurants <br> & Bars",
-        tripTypeCount: 8
-      }, {
-        imgTrip: "img/trip-summary/park.png",
-        tripType: "Nature <br> & Parks",
-        tripTypeCount: 8
-      }, {
-        imgTrip: "img/trip-summary/beaches.png",
-        tripType: "Beaches",
-        tripTypeCount: 8
-      }, ],
-      countryVisited: [{
-        countryImg: "img/trip-summary/korea.png",
-        countryName: "Korea"
-      }, {
-        countryImg: "img/flag.png",
-        countryName: "India"
-      }, ],
-      visitedCountry: "2"
-    }
+    // $scope.trip = {
+    //   date: "12 Feb, 2016",
+    //   dayNo: "8",
+    //   mileage: "14700",
+    //   tripJourneyType: [{
+    //     imgTrip: "img/trip-summary/bar.png",
+    //     tripType: "Restaurants <br> & Bars",
+    //     tripTypeCount: 8
+    //   }, {
+    //     imgTrip: "img/trip-summary/park.png",
+    //     tripType: "Nature <br> & Parks",
+    //     tripTypeCount: 8
+    //   }, {
+    //     imgTrip: "img/trip-summary/beaches.png",
+    //     tripType: "Beaches",
+    //     tripTypeCount: 8
+    //   }, ],
+    //   countryVisited: [{
+    //     countryImg: "img/trip-summary/korea.png",
+    //     countryName: "Korea"
+    //   }, {
+    //     countryImg: "img/flag.png",
+    //     countryName: "India"
+    //   }, ],
+    //   visitedCountry: "2"
+    // }
 
-    $scope.visitedCountry = [{
-      day: "01",
-      status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "01:20 pm",
-      travelTypeIcon: "img/ongojourney/location.png"
-    }, {
-      day: "02",
-      status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
-      photoAdd: "Added 20+ Photos",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      travelTypeIcon: "img/ongojourney/location.png"
-    }, {
-      day: "01",
-      status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
-      // photoAdd: "Added 20+ Photos",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      travelTypeIcon: "img/ongojourney/location.png"
-    }, {
-      day: "02",
-      status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
-      photoAdd: "Added 20+ Photos",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      travelTypeIcon: "img/ongojourney/location.png"
-    }];
+    //   $scope.visitedCountry = [{
+    //     day: "01",
+    //     status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
+    //     timestampDate: "14 Jan,2014",
+    //     timestampHour: "01:20 pm",
+    //     travelTypeIcon: "img/ongojourney/location.png"
+    //   }, {
+    //     day: "02",
+    //     status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
+    //     photoAdd: "Added 20+ Photos",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "01:20 pm",
+    //     travelTypeIcon: "img/ongojourney/location.png"
+    //   }, {
+    //     day: "01",
+    //     status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
+    //     // photoAdd: "Added 20+ Photos",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "01:20 pm",
+    //     travelTypeIcon: "img/ongojourney/location.png"
+    //   }, {
+    //     day: "02",
+    //     status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
+    //     photoAdd: "Added 20+ Photos",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "01:20 pm",
+    //     travelTypeIcon: "img/ongojourney/location.png"
+    //   }];
 
   })
   .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, $state, $stateParams) {
@@ -1048,9 +1057,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           }, timePerStep);
         };
 
-
-
-
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 15,
           draggable: true,
@@ -1267,17 +1273,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     // review country visited pop up end
+
     // edit journey name
+    //edit journey name modal
     $scope.nameJourney = function () {
-        $uibModal.open({
-          animation: true,
-          templateUrl: "views/modal/journey-name.html",
-          scope: $scope,
-          backdropClass: "review-backdrop"
-        });
-      }
-      // edit journey name end
-      // cover photo
+      modal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/journey-name.html",
+        scope: $scope,
+        backdropClass: "review-backdrop"
+      });
+    };
+    //edit journey name modal ends
+    $scope.editJourneyName = function (id, name) {
+      var formData = {
+        "_id": id,
+        "name": name
+      };
+      var callback = function (name) {
+        $scope.journey.name = name;
+        modal.close();
+      };
+      OnGoJourney.editJourneyName(formData, callback);
+    };
+    // edit journey name end
+
+    //edit journey cover photo
+    // cover photo modal
     $scope.coverPhoto = function () {
       $uibModal.open({
         animation: true,
@@ -1287,6 +1309,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         windowClass: "cover-modal"
       });
     };
+    // cover photo modal ends
+    //edit journey cover photo ends
     $scope.galleryCover = [
       'img/london.jpg',
       'img/paris.jpg',
@@ -1421,17 +1445,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.uploadImage = true;
     };
     $scope.checkinUpload = [{}, {}, {}];
-
+    //rating country
     // country modal
+    var modal = "";
     $scope.countryReview = function () {
-      $uibModal.open({
+      $scope.reviewCountryCount = 0;
+      modal = $uibModal.open({
         animation: true,
         templateUrl: "views/modal/review-country.html",
         scope: $scope,
         backdropClass: "review-backdrop",
       })
     };
-    // Rating country
+    // country modal ends
+    $scope.rateThisCountry = function (journeyId, countryId, formData) {
+        var result = {
+          journey: journeyId,
+          country: countryId,
+          review: formData.fillMeIn,
+          rating: formData.rate
+        };
+        OnGoJourney.rateThisCountry(result);
+        console.log(result);
+        $scope.reviewCountryCount = $scope.reviewCountryCount + 1;
+        var len = $scope.journey.countryVisited.length;
+        if ($scope.reviewCountryCount > len - 1) {
+          modal.close();
+        }
+      }
+      // Rating country ends
     $scope.hoveringOver = function (value) {
       $scope.overStar = value;
     };

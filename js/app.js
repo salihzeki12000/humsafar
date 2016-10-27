@@ -197,7 +197,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             controller: 'OnGoJourneyCtrl'
         })
         .state('tripsummary', {
-            url: "/tripsummary",
+            url: "/tripsummary/id:id",
             templateUrl: "views/template.html",
             controller: 'TripSummaryCtrl'
         })

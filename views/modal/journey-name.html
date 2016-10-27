@@ -9,17 +9,17 @@
   </div>
   <div class="journey-content-main">
     <div class="popup-journey-img relate">
-      <img src="img/london.jpg" alt="Journey Image" class="img-responsive get-center">
+      <img ng-src="{{journey.coverPhoto|uploadpath}}" alt="Journey Image" class="img-responsive get-center">
       <div class="put-journey-name">
         <form>
           <div class="input-holder">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" ng-model="formData.name">
           </div>
         </form>
       </div>
     </div>
   </div>
   <div class="text-right mt20">
-    <button class="btn btn-pink btn-more" type="submit">Save</button>
+    <button class="btn btn-pink btn-more" type="submit" ng-click="editJourneyName(journey._id,formData.name)">Save</button>
   </div>
 </div>

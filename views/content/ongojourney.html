@@ -35,7 +35,7 @@
                   <a href="">
                     <div class="trip-info">
                       <img src="img/camera-blue.png" alt="camera">
-                      <span class="avenir-heavy">{{journey.photos.length}}</span>
+                      <span class="avenir-heavy">{{journey.count.photos}}</span>
                     </div>
                   </a>
                 </li>
@@ -43,7 +43,7 @@
                   <a href="">
                     <div class="trip-info">
                       <img src="img/video-blue.png" alt="camera">
-                      <span class="avenir-heavy">{{journey.videos.length}}</span>
+                      <span class="avenir-heavy">{{journey.count.videos}}</span>
                     </div>
                   </a>
                 </li>
@@ -51,7 +51,7 @@
                   <a href="">
                     <div class="trip-info">
                       <img src="img/location-blue.png" alt="camera">
-                      <span class="avenir-heavy">{{journey.checkIn.length}}</span>
+                      <span class="avenir-heavy">{{journey.count.checkIns}}</span>
                     </div>
                   </a>
                 </li>
@@ -59,7 +59,7 @@
                   <a href="">
                     <div class="trip-info">
                       <img src="img/thought.png" alt="camera">
-                      <span class="avenir-heavy">302</span>
+                      <span class="avenir-heavy">{{journey.count.thoughts}}</span>
                     </div>
                   </a>
                 </li>
@@ -67,7 +67,7 @@
             </div>
             <!-- trip list end-->
             <div class="btn-summary">
-              <button class="btn btn-outline-blue avenir-heavy" ui-sref="tripsummary">Trip Summary</button>
+              <button class="btn btn-outline-blue avenir-heavy" ui-sref="tripsummary({id:journey._id})">Trip Summary</button>
             </div>
           </div>
           <div class="pull-right">

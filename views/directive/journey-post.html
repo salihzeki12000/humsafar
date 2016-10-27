@@ -111,7 +111,7 @@
                                 <li class="hide"><a href="" title="Edit Videos" ng-click="editCheckIn();">Edit Videos</a></li>
                                 <!-- ng if for Thoughts -->
                                 <li class="hide"><a href="" title="Edit Thoughts" ng-click="editCheckIn();">Edit Thoughts</a></li>
-                                <li><a href="" title="Change Date &amp; Time" ng-click="changeDate();">Change Date &amp; Time</a></li>
+                                <li><a href="" title="Change Date &amp; Time" ng-click="changeDate(ongo.UTCModified);">Change Date &amp; Time</a></li>
                                 <li><a href="" title="Delete" ng-click="deletePost(ongo.user._id)">Delete</a></li>
                                 <li><a href="" title="Copy URL">Copy URL</a></li>
                             </ul>
@@ -129,18 +129,18 @@
                 <div class="clearfix">
                     <div class="pull-left">
                         <span class="color-blue mr10 card-like" ng-click="cardLikeList = !cardLikeList;getLikes(ongo._id)"><i class="fa fa-heart color-blue mr5"></i><b>{{ongo.likeCount}}</b> Like
-                        <div class="card-like-dropdown" ng-show="cardLikeList">
+                        <div class="card-like-dropdown" ng-show="cardLikeList && ongo.likeDone">
                           <ul>
                             <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
                           </ul>
                         </div>
                         </span>
                         <span class="color-blue mr10 card-comment" ng-click="cardCommentList = !cardCommentList;getComments(ongo._id)"><img src="img/comments.png" alt="" class="mr5" height="18"><b>{{ongo.commentCount}}</b> Comments
-                        <!--<div class="card-comment-dropdown" ng-show="cardCommentList">
+                        <div class="card-comment-dropdown" ng-show="cardCommentList">
                           <ul>
                             <li ng-repeat="listComments in uniqueArr"><a href="">{{listComments.user.name}}</a></li>
                           </ul>
-                        </div>-->
+                        </div>
                       </span>
                         <!-- <p class="inline-block"><span class="color-blue mr5">Rating :</span>
                             <span>

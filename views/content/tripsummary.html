@@ -60,7 +60,7 @@
         </div>
         <!-- trip list end-->
         <div class="btn-summary">
-          <button class="btn btn-white-outline avenir-heavy" ui-sref="ongojourney">Back To Journey</button>
+          <button class="btn btn-white-outline avenir-heavy" ui-sref="ongojourney({id:trip._id})">Back To Journey</button>
         </div>
       </div>
       <div class="pull-right">
@@ -93,8 +93,8 @@
           <ul>
             <li>
               <div class="days-count">
-                <span class="color-blue avenir-roman block">{{trip.date}}</span>
-                <p class="m-clear"><span class="color-blue avenir-black">{{trip.dayNo}}</span> <span>days</span></p>
+                <span class="color-blue avenir-roman block">{{trip.startTime|formatDate:'date'}}</span>
+                <p class="m-clear"><span class="color-blue avenir-black">{{Date()|dateDifference: trip.startTime}}</span> <span>days</span></p>
               </div>
             </li>
             <li>
@@ -112,7 +112,7 @@
           </ul>
         </div>
       </div>
-        <!-- trip day like end-->
+      <!-- trip day like end-->
       <!-- trip type icon  -->
       <div class="trip-type text-center">
         <ul>

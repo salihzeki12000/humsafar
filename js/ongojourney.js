@@ -27,6 +27,7 @@ var ongojourney = angular.module('ongojourney', [])
                 callback(journeys);
             });
         },
+
         getOneJourney: function (formData, callback, errorCallback) {
             $http({
                 url: adminURL + "/journey/getOneWeb",
@@ -53,9 +54,35 @@ var ongojourney = angular.module('ongojourney', [])
                 }
                 journey.startJourneyString = journey.startLocation + " " + $filter('formatDate')(journey.startTime, 'year') + " " + journey.user.name.bold() + " with " + journey.buddiesString;
                 // header integration ends
-                // console.log(journey.post.length);
                 callback(journey);
             })
+        },
+        editJourneyName: function (formData, callback) {
+            $http({
+                url: adminURL + "/journey/editData",
+                method: "POST",
+                data: formData
+            }).success(function (data) {
+                callback(formData.name)
+            });
+        },
+        rateThisCountry: function (formData) {
+            $http({
+                url: adminURL + "/review/saveWeb",
+                method: "POST",
+                data: formData
+            }).success(function (data) {
+                console.log(data);
+            });
+        },
+        getTripSummary: function (formData, callback) {
+            $http({
+                url: adminURL + "/journey/getCountData",
+                method: "POST",
+                data: formData
+            }).success(function (data) {
+                callback(data.data);
+            });
         }
     };
 });
@@ -138,7 +165,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
                         'unlike': 'true'
                     };
                 }
-                console.log(formData);
                 $http({
                     url: adminURL + "/post/updateLikePostWeb",
                     method: "POST",
@@ -146,7 +172,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
                 })
             };
             $scope.getLikes = function (id) {
-                console.log(id);
                 var formData = {
                     "_id": id
                 }
@@ -170,7 +195,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
                     $scope.uniqueArr = [];
                     $scope.listOfComments = data.data;
                     $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
-                    console.log($scope.uniqueArr);
                 });
             };
             $scope.postComment = function (id, comment) {
