@@ -79,7 +79,7 @@
 <div class="container">
   <div class="login-process">
     <div class="row">
-      <div class="col-md-offset-3 col-md-6">
+      <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8">
         <!-- <div class="verification">
           <div class="text-center">
             <h3 class="color-blue">Verification</h3>
@@ -105,7 +105,7 @@
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=2">Next</button>
               </div>
-            </div> 
+            </div>
           </div>-->
         <div class="bg-white" ng-init="goNext=2">
           <div class="nationality" ng-show="goNext==2">
@@ -181,19 +181,20 @@
               <div class="cropArea" ng-show="showImage">
                 <img-crop image="myImage" result-image="myCroppedImage" /></img-crop>
               </div>
-              <div>
+              <div class="hide">
                 <img ng-src="{{myCroppedImage}}" />
               </div>
               <div class="upload-section" ng-hide="showImage">
-                <img src="{{userData.profilePicture|uploadpath}}" class="m-center img-responsive doneLoading">
+                <!-- <img src="{{userData.profilePicture|uploadpath}}" class="m-center img-responsive doneLoading"> -->
+                <img src="img/upload-icon.jpg" class="m-center img-responsive doneLoading">
                 <p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
                 <span class="block mt10 color-grey avenir-roman">- or -</span>
                 <div class="upload-btn">
-                  <div class="relate inline-block mr10">
+                  <div class="relate inline-block mr10 select-photo">
                     <button class="btn btn-dark-blue pointer avenir-roman">Select a photo from your computer input</button>
                     <input type="file" class="getfile pointer" id="fileInput" class="getfile pointer" file-model="file.myFile" /></div>
                   <!--id=fileInput class="getfile pointer" for above code-->
-                  <div class="relate inline-block ml10">
+                  <div class="relate inline-block ml10 web-camera">
                     <button class="btn btn-dark-blue pointer avenir-roman">Web Camera</button>
                   </div>
                 </div>
