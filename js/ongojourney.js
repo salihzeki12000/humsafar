@@ -83,6 +83,24 @@ var ongojourney = angular.module('ongojourney', [])
             }).success(function (data) {
                 callback(data.data);
             });
+        },
+        getJourneyCoverPhoto: function (formData, callback) {
+            $http({
+                url: adminURL + "/journey/getCountDataWeb",
+                method: "POST",
+                data: formData
+            }).success(function (data) {
+                callback(data.data);
+            });
+        },
+        setJourneyCoverPhoto: function (formData) {
+            $http({
+                url: adminURL + "/journey/editData",
+                method: "POST",
+                data: formData
+            }).success(function (data) {
+                console.log(data);
+            });
         }
     };
 });
@@ -351,6 +369,20 @@ ongojourney.filter('dateDifference', function () {
 
         return returnVal;
     };
+});
+
+ongojourney.filter('small', function () {
+    return function (str) {
+        if (str != undefined) {
+            var n = str.indexOf("/");
+            if (n != -1) {
+                str = str.split("size=600x400").join("size=800x600");
+                return str;
+            } else {
+                return str;
+            }
+        }
+    }
 });
 
 firstapp.filter('category', function () {

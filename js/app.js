@@ -22,9 +22,11 @@ var firstapp = angular.module('firstapp', [
     'templateservicemod',
     'navigationservice',
     'pascalprecht.translate',
+    'imageupload',
     'angulartics',
     'angulartics.google.analytics',
-    'fileuploadservicemod'
+    'fileuploadservicemod',
+    'angularFileUpload'
 ]);
 
 firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
@@ -367,23 +369,21 @@ firstapp.directive('imageonload', function () {
         }
     };
 });
+
 firstapp.directive('uploadImage', function ($http, $filter) {
     return {
         templateUrl: 'views/directive/uploadFile.html',
         scope: {
             model: '=ngModel',
-            callback: "=ngCallback",
-            uploadurl: "=uploadhere",
-            state: "=currentState"
+            callback: "=ngCallback"
         },
         link: function ($scope, element, attrs) {
 
             $scope.showImage = function () {
                 console.log($scope.image);
             };
-            if ($scope.uploadurl) {
-                uploadurl = $scope.uploadurl;
-            }
+
+            $scope.type = "img";
             $scope.isMultiple = false;
             $scope.inObject = false;
             if (attrs.multiple || attrs.multiple === "") {
@@ -395,10 +395,12 @@ firstapp.directive('uploadImage', function ($http, $filter) {
             }
 
             $scope.$watch("image", function (newVal, oldVal) {
+                console.log(newVal);
                 if (newVal && newVal.file) {
                     $scope.uploadNow(newVal);
                 }
             });
+
             if ($scope.model) {
                 if (_.isArray($scope.model)) {
                     $scope.image = [];
@@ -407,28 +409,34 @@ firstapp.directive('uploadImage', function ($http, $filter) {
                             url: n
                         });
                     });
+                } else {
+                    if (_.endsWith($scope.model, ".pdf")) {
+                        $scope.type = "pdf";
+                    }
                 }
+
             }
             if (attrs.inobj || attrs.inobj === "") {
                 $scope.inObject = true;
             }
-            $scope.name = "pratik";
             $scope.clearOld = function () {
                 $scope.model = [];
             };
             $scope.uploadNow = function (image) {
-                $scope.uploadStatus = "uploading";
 
+                $scope.uploadStatus = "uploading";
                 var Template = this;
                 image.hide = true;
                 var formData = new FormData();
                 formData.append('file', image.file, image.name);
+                console.log(formData);
                 $http.post(uploadurl, formData, {
                     headers: {
                         'Content-Type': undefined
                     },
                     transformRequest: angular.identity
                 }).success(function (data) {
+
                     if ($scope.callback) {
                         $scope.callback(data);
                     } else {
@@ -442,10 +450,12 @@ firstapp.directive('uploadImage', function ($http, $filter) {
                                 $scope.model.push(data.data[0]);
                             }
                         } else {
+                            if (_.endsWith(data.data[0], ".pdf")) {
+                                $scope.type = "pdf";
+                            } else {
+                                $scope.type = "img";
+                            }
                             $scope.model = data.data[0];
-                        }
-                        if ($scope.state) {
-                            $scope.state.reload();
                         }
                     }
                 });
@@ -529,8 +539,7 @@ firstapp.directive('fileModel', ['$parse', function ($parse) {
         },
         link: function (scope, element, attrs) {
             element.bind('change', function () {
-                console.log(element[0].files[0]);
-                scope.fileModel = element[0].files[0];
+                scope.fileModel = element[0].files;
                 scope.$apply();
             });
         }

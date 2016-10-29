@@ -8,7 +8,7 @@ var globalGetProfile = function (data, status) {
 };
 var initMap = function () {};
 var map;
-angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
 .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
   //Used to name the .html file
@@ -114,6 +114,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Login");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.headerfixed = "fixed-header";
     $scope.animationsEnabled = true;
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
@@ -334,11 +335,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-.controller('MainPageCtrl', ['$scope', 'TemplateService', 'NavigationService', '$timeout', '$http', '$state', 'FileUploadService', function ($scope, TemplateService, NavigationService, $timeout, $http, $state, FileUploadService) {
+.controller('MainPageCtrl', ['$scope', 'TemplateService', 'NavigationService', '$timeout', '$http', '$state', 'FileUploadService', 'FileUploader', function ($scope, TemplateService, NavigationService, $timeout, $http, $state, FileUploadService, FileUploader) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
-
+    $scope.form = {};
     $scope.template = TemplateService.changecontent("mainpage");
     $scope.menutitle = NavigationService.makeactive("Home");
     TemplateService.title = $scope.menutitle;
@@ -443,25 +444,73 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
 
+    //upload cropped image  Starts
+
+    var uploader = $scope.uploader = new FileUploader({
+      url: '/api/users/photo'
+    });
+
+    // FILTERS
+
+    uploader.filters.push({
+      name: 'imageFilter',
+      fn: function (item /*{File|FileLikeObject}*/ , options) {
+        var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+        return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+      }
+    });
+
+    /**
+     * Upload Blob (cropped image) instead of file.
+     * @see
+     *   https://developer.mozilla.org/en-US/docs/Web/API/FormData
+     *   https://github.com/nervgh/angular-file-upload/issues/208
+     */
+    uploader.onBeforeUploadItem = function (item) {
+      var blob = dataURItoBlob($scope.croppedImage);
+      console.log(blob);
+      item._file = blob;
+    };
+
+    /**
+     * Converts data uri to Blob. Necessary for uploading.
+     * @see
+     *   http://stackoverflow.com/questions/4998908/convert-data-uri-to-file-then-append-to-formdata
+     * @param  {String} dataURI
+     * @return {Blob}
+     */
+    var dataURItoBlob = function (dataURI) {
+      var binary = atob(dataURI.split(',')[1]);
+      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+      var array = [];
+      for (var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      return new Blob([new Uint8Array(array)], {
+        type: mimeString
+      });
+    };
+
+    //upload cropped image  ENDS
+
+
+
+
+
+
+
     $scope.myImage = '';
     $scope.myCroppedImage = '';
     $scope.showImage = false;
     var got = setInterval(function () {
       if (document.getElementById('fileInput')) {
-        // console.log("got");
         document.getElementById('fileInput').onchange = function (evt) {
           var file = evt.currentTarget.files[0];
           var reader = new FileReader();
           reader.onload = function (evt) {
             $scope.$apply(function ($scope) {
-              console.log(evt);
               $scope.showImage = true;
               $scope.myImage = evt.target.result;
-              console.log($scope.myCroppedImage);
-              var blob = dataURItoBlob($scope.myImage);
-              var file1 = new File([blob], 'brad pitt.jpg');
-              console.log(file1);
-              FileUploadService.uploadFileToUrl(file1, uploadurl);
             });
           };
           reader.readAsDataURL(file);
@@ -470,28 +519,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }, 1000);
 
-    function dataURItoBlob(dataURI) {
-      // convert base64/URLEncoded data component to raw binary data held in a string
-      var byteString;
-      if (dataURI.split(',')[0].indexOf('base64') >= 0)
-        byteString = atob(dataURI.split(',')[1]);
-      else
-        byteString = unescape(dataURI.split(',')[1]);
 
-      // separate out the mime component
-      var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
 
-      // write the bytes of the string to a typed array
-      var ia = new Uint8Array(byteString.length);
-      for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-      }
 
-      return new Blob([ia], {
-        type: mimeString
-      });
-    }
-    //Angular-file-upload starts here
+
+
+    // var dataURItoBlob = function (dataURI) {
+    //     // convert base64/URLEncoded data component to raw binary data held in a string
+    //     var byteString;
+    //     if (dataURI.split(',')[0].indexOf('base64') >= 0)
+    //       byteString = atob(dataURI.split(',')[1]);
+    //     else
+    //       byteString = unescape(dataURI.split(',')[1]);
+
+    //     // separate out the mime component
+    //     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    //     // write the bytes of the string to a typed array
+    //     var ia = new Uint8Array(byteString.length);
+    //     for (var i = 0; i < byteString.length; i++) {
+    //       ia[i] = byteString.charCodeAt(i);
+    //     }
+
+    //     return new Blob([ia], {
+    //       type: mimeString
+    //     });
+    //   }
+    //   //Angular-file-upload starts here
 
     $scope.file = {
       myFile: "Chintan"
@@ -1300,7 +1354,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //edit journey cover photo
     // cover photo modal
-    $scope.coverPhoto = function () {
+    $scope.coverPhoto = function (id) {
       $uibModal.open({
         animation: true,
         templateUrl: "views/modal/journey-cover.html",
@@ -1308,27 +1362,45 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         backdropClass: "review-backdrop",
         windowClass: "cover-modal"
       });
+
+      var formData = {
+        "_id": id,
+        "type": "photos"
+      };
+      var callback = function (photos) {
+        $scope.journeyCoverPhotos = photos;
+        console.log($scope.journeyCoverPhotos);
+      };
+      OnGoJourney.getJourneyCoverPhoto(formData, callback);
     };
-    // cover photo modal ends
-    //edit journey cover photo ends
-    $scope.galleryCover = [
-      'img/london.jpg',
-      'img/paris.jpg',
-      'img/india-gate.jpg',
-      'img/slider1.jpg',
-      'img/slider2.jpg',
-      'img/blog/blog-post.jpg',
-      'img/blog/blog-post2.jpg',
-      'img/blog/blog-post3.jpg',
-      'img/london.jpg',
-      'img/paris.jpg',
-      'img/india-gate.jpg',
-      'img/slider1.jpg',
-      'img/slider2.jpg',
-      'img/blog/blog-post.jpg',
-      'img/blog/blog-post2.jpg',
-      'img/blog/blog-post3.jpg',
-    ];
+
+    $scope.setJourneyCoverPhoto = function (id, coverPhoto) {
+        var formData = {
+          "_id": id,
+          "coverPhoto": coverPhoto
+        };
+        OnGoJourney.setJourneyCoverPhoto(formData);
+      }
+      // cover photo modal ends
+      //edit journey cover photo ends
+      // $scope.galleryCover = [
+      //   'img/london.jpg',
+      //   'img/paris.jpg',
+      //   'img/india-gate.jpg',
+      //   'img/slider1.jpg',
+      //   'img/slider2.jpg',
+      //   'img/blog/blog-post.jpg',
+      //   'img/blog/blog-post2.jpg',
+      //   'img/blog/blog-post3.jpg',
+      //   'img/london.jpg',
+      //   'img/paris.jpg',
+      //   'img/india-gate.jpg',
+      //   'img/slider1.jpg',
+      //   'img/slider2.jpg',
+      //   'img/blog/blog-post.jpg',
+      //   'img/blog/blog-post2.jpg',
+      //   'img/blog/blog-post3.jpg',
+      // ];
 
 
     // cover photo end

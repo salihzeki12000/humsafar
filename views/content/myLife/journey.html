@@ -70,7 +70,8 @@
                       </div>
                       <div class="travelled-journey relate" ng-hide="life.onJourney" ui-sref="ongojourney({id:life._id})">
                         <div class="travelled-imgholder">
-                          <img ng-src="{{life.startLocationPic|uploadpath}}" alt="" class="img-responsive m-center">
+                          <img ng-src="{{life.coverPhoto|uploadpath}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto!=null">
+                          <img ng-src="{{life.startLocationPic|small|uploadpath}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto==null">
                         </div>
                         <div class="country-visited">
                           <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30" ng-repeat="visit in life.countryVisited | limitTo : 3">
