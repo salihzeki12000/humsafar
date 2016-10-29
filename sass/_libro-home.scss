@@ -126,6 +126,7 @@ a {
 .pt10 {
     padding-top: 10px;
 }
+.pt30 { padding-top: 30px; }
 
 .navbar-default {
     background-color: rgba(0, 0, 0, 0.34);
@@ -199,9 +200,14 @@ a:focus {
 }
 
 .nav-header {
-    padding: 20px 0;
+  padding: 20px 0;
 }
-
+.fixed-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 .swiper-container {
     width: 100%;
     height: 100%;
@@ -221,8 +227,10 @@ a:focus {
 }
 
 .login-bg {
-    background: url('../img/libro-home/login-bg.jpg');
-    height: 100vh;
+  padding-top: 6%;
+  background: url('../img/libro-home/login-bg.jpg');
+  // height: 100vh;
+  overflow-y: hidden;
 }
 
 .loginforgot-bg {
@@ -1014,13 +1022,13 @@ a.color-white {
 }
 
 .app-icons {
-    bottom: 0;
+    bottom: 20px;
     right: 0;
 }
 
 .menu-contact {
     bottom: 20px;
-    left: 0px;
+    left: 20px;
     ul li a {
         font-size: 14px;
     }

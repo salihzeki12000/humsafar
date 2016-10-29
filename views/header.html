@@ -82,7 +82,7 @@
 
 
 
-<header class="libro-header {{isLoggedIn}}" ng-controller="headerctrl" ng-show="!isLoggedIn">
+<header class="libro-header {{isLoggedIn}} {{headerfixed}}" ng-controller="headerctrl" ng-show="!isLoggedIn">
   <section class="bg-black custom-search pd20 " ng-class="{ 'open': isopen} ">
     <div class="container-fluid ">
       <div class="row ">
@@ -108,7 +108,7 @@
     <div class="container-fluid ">
       <nav class="navbar navbar-default ">
         <div class="row ">
-          <div class="col-md-4 ">
+          <div class="col-md-4 col-xs-4">
             <div class="headerp hamburger ">
               <div class="navbar-header ">
                 <button type="button " class="navbar-toggle collapsed {{buttonpos}} " ng-click="getnav(); ">
@@ -119,23 +119,26 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 ">
+          <div class="col-md-4 col-xs-4">
             <div class="text-center ">
-              <a ui-sref="home ">
+              <a ui-sref="home " class="hidden-xs">
                 <img src="img/libro-home/logo.png " alt="TravelLibro " class="logo-size ">
+              </a>
+              <a ui-sref="home " class="visible-xs">
+                <img src="img/mobile-logo.png " alt="TravelLibro " class="logo-size ">
               </a>
             </div>
           </div>
-          <div class="col-md-4 ">
+          <div class="col-md-4 col-xs-4">
             <div class="login-signup ">
               <ul class="list-unstyled list-inline text-right color-white ">
-                <li>
+                <li class="hidden-xs">
                   <a ui-sref="login " class="color-white ">Login</a> /
                   <a ui-sref="login " class="color-white ">Sign Up</a>
                 </li>
-                <li>|</li>
+                <li class="hidden-xs">|</li>
                 <li>
-                  <a class="color-white " ng-click="opensearch(); ">
+                  <a class="color-white search-icon-header " ng-click="opensearch(); ">
                     <i class="fa fa-search "></i>
                   </a>
                 </li>
