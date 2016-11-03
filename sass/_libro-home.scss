@@ -16,6 +16,14 @@ $brand-danger: #fc483f !default;
 $brand-info: #000072 !default;
 $brand-menu: #2b2d2f !default;
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+@mixin placeholder {
+  $placeholders: ":-webkit-input" ":-moz" "-moz" "-ms-input";
+  @each $placeholder in $placeholders {
+    &:#{$placeholder}-placeholder {
+      @content;
+    }
+  }
+}
 @font-face {
     font-family: "Facile Sans";
     src: url("../fonts/.otf");

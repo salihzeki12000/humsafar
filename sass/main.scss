@@ -1042,9 +1042,13 @@ header {
 }
 
 .holiday-row {
-  margin: 25px 0 40px;
+  margin: 25px 0 40px; 
 }
-
+.holiday-step {
+  min-height: auto;
+  @extend .travel-bg;
+  background-attachment: fixed;
+}
 .holiday-step1,
 .holiday-step2,
 .holiday-step3,

@@ -66,6 +66,16 @@
   .search-icon-header {
     font-size: 20px;
   }
+  .custom-search {
+    padding: 65px 0 0;
+    .input-group-addon { padding: 3px 0; }
+    .fa-search { font-size: 16px; }
+    .form-control {
+      @include placeholder {
+        font-size: 13px;
+      };
+    }
+  }
   // login end
   // footer
   .menu-contact {
@@ -114,14 +124,20 @@
     margin: 10px 0 0;
     display: block;
   }
+  .login-process {
+    button {
+      padding: 6px 20px;
+      font-size: 13px;
+    }
+  }
   // main page end
   // holiday
-  .holiday-step {
-    height: 100%;
-    background: url(../img/back-content.jpg) no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-  }
+  // .holiday-step {
+  //   height: 100%;
+  //   background: url(../img/back-content.jpg) no-repeat;
+  //   background-size: cover;
+  //   background-attachment: fixed;
+  // }
   .travel-row-main {
     .kind-holiday { width: 100px; }
   }
@@ -149,7 +165,10 @@
   // login
   .libro-header {
     padding: 0;
-    .navbar-default .navbar-toggle { left: 20px; }
+    .navbar-default .navbar-toggle {
+      margin-top: 2px;
+      left: 20px;
+    }
   }
   .login-bg {
     padding-top: 20%;
