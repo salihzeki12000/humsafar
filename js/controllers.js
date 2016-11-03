@@ -6,6 +6,8 @@ var globalGetProfile = function (data, status) {
     $.jStorage.flush();
   }
 };
+var pointsForLine;
+var line;
 var initMap = function () {};
 var map;
 angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
@@ -342,7 +344,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.template = TemplateService.changecontent("mainpage");
     $scope.menutitle = NavigationService.makeactive("Home");
     TemplateService.title = $scope.menutitle;
-    TemplateService.footer="";
+    TemplateService.footer = "";
     $scope.navigation = NavigationService.getnav();
     $scope.userData = {};
     $scope.profile = $.jStorage.get("profile");
@@ -784,13 +786,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Used to name the .html file
     var id = $stateParams.id;
     // var centers = [];
-    var centers=[];
+    var centers = [];
+    var checkinCount = "";
     $scope.userData = $.jStorage.get("profile");
 
     var getOneJourney = function (journeys) {
       $scope.journey = journeys;
-      // centers=_.map($scope.journey.post, 'location');
-      // console.log(centers);
+      // centers1=_.map($scope.journey.post, 'location');
+      // checkinCount=centers1.length;
+      // _.each(centers1,function(n){
+      //   n.divHeight=$()
+      // })
     };
 
     OnGoJourney.getOneJourney({
@@ -982,7 +988,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // }
     // var center = {
     //   lat: 19.113645,
-     // lng: 72.869734
+    // lng: 72.869734
     // };
     var center = {
       lat: 19.089560,
@@ -995,7 +1001,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       lat: 51.470022,
       lng: -0.454295
-    },
+    }
+    ,
      {
       lat: 29.276052,
       lng: -81.034910
@@ -1028,83 +1035,98 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // }
 
     initMap = function () {
+
+      var firstTime = true;
+
+
       if (google) {
         var map;
         var bounds = new google.maps.LatLngBounds();
         var step = 0;
         var numSteps = 100; //Change this to set animation resolution
 
-        function redLineDraw(i, departure, arrival) {
-          var xdiff=(centers[i].lat - centers[i - 1].lat);
-          var ydiff=(centers[i].lng - centers[i - 1].lng);
-          if(Math.abs(xdiff)<4){
-            // map.setZoom(8);
+        function redLineDraw(i, departure, arrival, percentComplete) {
+          var xdiff = (centers[i].lat - centers[i - 1].lat);
+          var ydiff = (centers[i].lng - centers[i - 1].lng);
+          if (Math.abs(xdiff) < 4) {
             smoothZoom(map, 8, map.getZoom());
-          }else{
-            // map.setZoom(4);
+          } else {
             smoothZoom(map, 4, map.getZoom());
           }
-          var frac1 =  xdiff/ 100;
-          var frac2 =  ydiff/ 100;
+          var frac1 = xdiff / 100;
+          var frac2 = ydiff / 100;
           var iniLat = centers[i - 1].lat;
           var iniLng = centers[i - 1].lng;
           var timePerStep = frac1; //Change this to alter animation speed
           var lineSymbol = {
-          path: 'M 0,-1 0,1',
-          strokeOpacity: 1,
-          scale: 4
-        };
+            path: 'M 0,-1 0,1',
+            strokeOpacity: 1,
+            scale: 4
+          };
           setMarker(true, centers[i - 1]);
-          var line = new google.maps.Polyline({
-            path: [departure, departure],
-            strokeColor: "#FF0000",
-            strokeOpacity: 0,
-            icons: [{
-            icon: lineSymbol,
-            offset: '0',
-            repeat: '25px'
-          }],
-            strokeWeight: 2,
-            geodesic: true, //set to false if you want straight line instead of arc
-            map: map,
-          });
-          var interval = setInterval(function () {
-            step += 1;
-            if (step > numSteps) {
-              clearInterval(interval);
-              i++;
-              if (i < centers.length) {
+          if (firstTime) {
+            line = new google.maps.Polyline({
+              path: [departure, departure],
+              strokeColor: "#FF0000",
+              strokeOpacity: 0,
+              icons: [{
+                icon: lineSymbol,
+                offset: '0',
+                repeat: '25px'
+              }],
+              strokeWeight: 3,
+              geodesic: true, //set to false if you want straight line instead of arc
+              map: map,
+            });
+            firstTime = false;
+          }
 
-                pointsForLine(i);
-              } else {
-                setMarker(true, centers[i - 1]);
-              }
-            } else {
-              var progressed = step / numSteps;
-              
-              center = {
-                "lat": iniLat + frac1,
-                "lng": iniLng + frac2
-              }
-              iniLat = iniLat + frac1;
-              iniLng = iniLng + frac2;
-              map.setCenter(center);
-              var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, progressed);
-              // console.log(progressed+"------->>>>"+are_we_there_yet);
-              line.setPath([departure, are_we_there_yet]);
-            }
-          }, 1);
+          // var interval = setInterval(function () {
+          //   step += 1;
+          //   if (step > numSteps) {
+          //     clearInterval(interval);
+          //     i++;
+          //     if (i < centers.length) {
 
+          //       pointsForLine(i);
+          //     } else {
+          //       setMarker(true, centers[i - 1]);
+          //     }
+          //   } else {
+          //     var progressed = step / numSteps;
 
-          // drawLine(departure, arrival,0.74);
-          // var drawLine=function(departure, arrival,percent){
-          //   console.log("sadsadsa");
-          //   console.log(departure, arrival,percent);
-          //    var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percent);
+          //     center = {
+          //       "lat": iniLat + frac1,
+          //       "lng": iniLng + frac2
+          //     }
+          //     iniLat = iniLat + frac1;
+          //     iniLng = iniLng + frac2;
+          //     map.setCenter(center);
+          //     var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, progressed);
+          //     // console.log(progressed+"------->>>>"+are_we_there_yet);
           //     line.setPath([departure, are_we_there_yet]);
-          // }
+          //   }
+          // }, 1);
+          var drawLine = function (departure, arrival, percent) {
+            percentFrac = percent / 100;
+            var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
+            line.setPath([departure, are_we_there_yet]);
+            console.log(are_we_there_yet);
 
+            //moving center starts here
+            center = {
+              "lat": iniLat + (frac1 * percent),
+              "lng": iniLng + (frac2 * percent)
+            }
+            console.log(center);
+            map.setCenter(center);
+            //moving center ends here
 
+            if (percent >= 100) {
+              setMarker(true, center);
+            }
+          };
+          drawLine(departure, arrival, percentComplete);
         };
 
         map = new google.maps.Map(document.getElementById('map'), {
@@ -1139,39 +1161,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           geodesic: true,
           strokeColor: 'grey',
           strokeOpacity: 1.0,
-          strokeWeight: 2
+          strokeWeight: 1
         });
         travelPath.setMap(map);
         // scrollPath.setMap(map);
 
-        function smoothZoom (map, max, cnt) {
+        function smoothZoom(map, max, cnt) {
           if (cnt > max) {
-              z = google.maps.event.addListener(map, 'zoom_changed', function(event){
-                google.maps.event.removeListener(z);
-                smoothZoom(map, max, cnt - 1);
+            z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
+              google.maps.event.removeListener(z);
+              smoothZoom(map, max, cnt - 1);
             });
-            setTimeout(function(){map.setZoom(cnt)}, 10); // 80ms is what I found to work well on my system -- it might not work well on all systems
+            setTimeout(function () {
+              map.setZoom(cnt)
+            }, 10); // 80ms is what I found to work well on my system -- it might not work well on all systems
+          } else if (cnt < max) {
+            z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
+              google.maps.event.removeListener(z);
+              smoothZoom(map, max, cnt + 1);
+            });
+            setTimeout(function () {
+              map.setZoom(cnt)
+            }, 80); // 80ms is what I found to work well on my system -- it might not work well on all systems
+          } else if (cnt == max) {
+            return;
           }
-          else if(cnt<max){
-            z = google.maps.event.addListener(map, 'zoom_changed', function(event){
-                google.maps.event.removeListener(z);
-                smoothZoom(map, max, cnt + 1);
-            });
-            setTimeout(function(){map.setZoom(cnt)}, 80); // 80ms is what I found to work well on my system -- it might not work well on all systems
-         }else if(cnt==max){
-           return;
-         }
-        }  
+        }
 
-        function pointsForLine(i) {
-          console.log(i);
-
+        pointsForLine = function (i, percentComplete) {
           var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
           var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
           step = 0;
-          redLineDraw(i, departure, arrival);
-        }
-        pointsForLine(1);
+          redLineDraw(i, departure, arrival, percentComplete);
+        };
+
+        pointsForLine(1, 10);
       }
     };
 
@@ -1344,10 +1368,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // edit journey name
     //edit journey name modal
-    $scope.editName={};
+    $scope.editName = {};
     $scope.nameJourney = function (name) {
       console.log(name);
-      $scope.editName.name=name;
+      $scope.editName.name = name;
       modal = $uibModal.open({
         animation: true,
         templateUrl: "views/modal/journey-name.html",
@@ -1372,7 +1396,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //edit journey cover photo
     // cover photo modal
     $scope.coverPhoto = function (id) {
-      modal=$uibModal.open({
+      modal = $uibModal.open({
         animation: true,
         templateUrl: "views/modal/journey-cover.html",
         scope: $scope,
@@ -1395,10 +1419,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           "_id": id,
           "coverPhoto": coverPhoto
         };
-        var callback=function(){
+        var callback = function () {
           modal.close();
         }
-        OnGoJourney.setJourneyCoverPhoto(formData,callback);
+        OnGoJourney.setJourneyCoverPhoto(formData, callback);
       }
       // cover photo modal ends
       //edit journey cover photo ends
