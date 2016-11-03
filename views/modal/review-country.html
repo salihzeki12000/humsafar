@@ -12,16 +12,16 @@
         </figure>
       </div>
       <div class="country-rating text-center">
-        <uib-rating ng-model="formData.rate" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></uib-rating>
+        <uib-rating ng-model="review.rate" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></uib-rating>
       </div>
       <div class="text-center">
         <span class="color-blue add-review inline-block font-bold">Add your Review</span>
       </div>
       <div class="fill-post">
-        <textarea name="" id="" placeholder="Fill me in..." ng-model="formData.fillMeIn"></textarea>
+        <textarea name="" id="" placeholder="Fill me in..." ng-model="review.fillMeIn"></textarea>
       </div>
       <div class="submit-post">
-        <button type="button" class="btn btn-dark-blue" ng-click="rateThisCountry(journey._id,list.country._id,formData)">DONE</button>
+        <button type="button" class="btn btn-dark-blue" ng-click="rateThisCountry(journey._id,list.country._id,review)">DONE</button>
       </div>
     </form>
   </div>

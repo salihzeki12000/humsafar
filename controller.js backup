@@ -342,7 +342,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.template = TemplateService.changecontent("mainpage");
     $scope.menutitle = NavigationService.makeactive("Home");
     TemplateService.title = $scope.menutitle;
-    TemplateService.footer="";
     $scope.navigation = NavigationService.getnav();
     $scope.userData = {};
     $scope.profile = $.jStorage.get("profile");
@@ -995,26 +994,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       lat: 51.470022,
       lng: -0.454295
-    },
-     {
-      lat: 29.276052,
-      lng: -81.034910
-    }, {
-      lat: 51.512072,
-      lng: -0.144223
-    },{
-      lat: 52.923608,
-      lng: -1.482560
-    },{
-      lat: 51.899603,
-      lng: -1.153590
-    },{
-      lat: 51.470022,
-      lng: -0.454295
-    },{
-      lat: 25.253175,
-      lng: 55.365673
     }];
+    //  {
+    //   lat: 29.276052,
+    //   lng: -81.034910
+    // }, {
+    //   lat: 51.512072,
+    //   lng: -0.144223
+    // },{
+    //   lat: 52.923608,
+    //   lng: -1.482560
+    // },{
+    //   lat: 51.899603,
+    //   lng: -1.153590
+    // },{
+    //   lat: 51.470022,
+    //   lng: -0.454295
+    // },{
+    //   lat: 25.253175,
+    //   lng: 55.365673
+    // }];
 
     // {
     //   lat: 19.238368,
@@ -1032,7 +1031,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         var map;
         var bounds = new google.maps.LatLngBounds();
         var step = 0;
-        var numSteps = 100; //Change this to set animation resolution
+        var numSteps = 500; //Change this to set animation resolution
 
         function redLineDraw(i, departure, arrival) {
           var xdiff=(centers[i].lat - centers[i - 1].lat);
@@ -1044,8 +1043,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             // map.setZoom(4);
             smoothZoom(map, 4, map.getZoom());
           }
-          var frac1 =  xdiff/ 100;
-          var frac2 =  ydiff/ 100;
+          var frac1 =  xdiff/ 500;
+          var frac2 =  ydiff/ 500;
           var iniLat = centers[i - 1].lat;
           var iniLng = centers[i - 1].lng;
           var timePerStep = frac1; //Change this to alter animation speed
@@ -1081,7 +1080,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               }
             } else {
               var progressed = step / numSteps;
-              
               center = {
                 "lat": iniLat + frac1,
                 "lng": iniLng + frac2
@@ -1090,21 +1088,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               iniLng = iniLng + frac2;
               map.setCenter(center);
               var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, progressed);
-              // console.log(progressed+"------->>>>"+are_we_there_yet);
               line.setPath([departure, are_we_there_yet]);
             }
-          }, 1);
-
-
-          // drawLine(departure, arrival,0.74);
-          // var drawLine=function(departure, arrival,percent){
-          //   console.log("sadsadsa");
-          //   console.log(departure, arrival,percent);
-          //    var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percent);
-          //     line.setPath([departure, are_we_there_yet]);
-          // }
-
-
+          }, timePerStep);
         };
 
         map = new google.maps.Map(document.getElementById('map'), {
@@ -1164,8 +1150,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }  
 
         function pointsForLine(i) {
-          console.log(i);
-
           var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
           var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
           step = 0;

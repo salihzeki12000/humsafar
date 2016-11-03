@@ -82,7 +82,7 @@
 
 
 
-<header class="libro-header {{isLoggedIn}} {{headerfixed}}" ng-controller="headerctrl" ng-show="!isLoggedIn">
+<header class="libro-header {{isLoggedIn}}" ng-controller="headerctrl" ng-hide="isLoggedIn">
   <section class="bg-black custom-search pd20 " ng-class="{ 'open': isopen} ">
     <div class="container-fluid ">
       <div class="row ">

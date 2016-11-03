@@ -177,7 +177,7 @@
           </div>
           <div class="upload-profile" ng-show="goNext==5">
             <div class="text-center">
-              <h3 class="color-blue avenir-black">Upload Profile Photo</h3>
+              <h3 class="color-blue avenir-black">Upload Profile Photo{{myCroppedImage}}</h3>
               <div class="cropArea" ng-show="showImage">
                 <img-crop image="myImage" result-image="myCroppedImage" /></img-crop>
               </div>
@@ -199,7 +199,7 @@
 
                     <!--Using image upload directive ends-->
 
-                    <input type="file" class="getfile pointer" id="fileInput" class="getfile pointer" file-model="file.myFile" />
+                    <input type="file" class="getfile pointer" id="fileInput" class="getfile pointer" ng-model="myCroppedImage" />
                   </div>
                   <!--id=fileInput class="getfile pointer" for above code-->
                   <div class="relate inline-block ml10 web-camera">

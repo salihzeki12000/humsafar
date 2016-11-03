@@ -30,10 +30,10 @@ var ongojourney = angular.module('ongojourney', [])
 
         getOneJourney: function (formData, callback, errorCallback) {
             $http({
-                url: adminURL + "/journey/getOneWeb",
-                // url: "/demo.json",
-                method: "POST",
-                // method: "GET",
+                // url: adminURL + "/journey/getOneWeb",
+                url: "/demo.json",
+                // method: "POST",
+                method: "GET",
                 data: formData
             }).success(function (data) {
                 var journey = data.data;
@@ -93,13 +93,14 @@ var ongojourney = angular.module('ongojourney', [])
                 callback(data.data);
             });
         },
-        setJourneyCoverPhoto: function (formData) {
+        setJourneyCoverPhoto: function (formData,callback) {
             $http({
                 url: adminURL + "/journey/editData",
                 method: "POST",
                 data: formData
             }).success(function (data) {
                 console.log(data);
+                callback();
             });
         }
     };
@@ -239,7 +240,21 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
                 });
 
             };
-            $scope.changeDate = function () {
+             $scope.time={};
+             $scope.datetime={};
+            $scope.changeDate = function (date) {
+                console.log(date);
+                var d = new Date(date);
+                var hh = d.getHours();
+                if(hh>12){
+                    hh=hh-12;
+                    $scope.time.am_pm ="PM";
+                }else{
+                    $scope.time.am_pm="AM";
+                }
+                $scope.time.hour = hh;
+                $scope.time.min = d.getMinutes();
+                $scope.datetime.dt=d;
                 $uibModal.open({
                     animation: true,
                     templateUrl: "views/modal/date-time.html",
@@ -267,25 +282,23 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
             $scope.formData = {};
 
             $scope.updateDateTime = function (id, formData, dt) {
+                console.log(dt);
                 var date = formatDate(dt);
                 var time = formatTime(formData);
                 var result = {};
                 result.type = "changeDateTime";
                 result.date = new Date(date + " " + time);
                 result.uniqueId = id;
-                console.log(result);
                 $http({
-                    url: adminURL + "/post/editData/",
+                    url: adminURL + "/post/editDataWeb/",
                     method: "POST",
                     data: result
                 }).success(function (data) {
-                    console.log(data);
                     formData = {
                         "_id": $scope.json._id
                     }
                     OnGoJourney.getOneJourney(formData, function (journeys) {
                         $scope.json.post = journeys.post;
-                        console.log("journey updated");
                     }, function (err) {
                         console.log(err);
                     });
@@ -302,14 +315,13 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
 
             $scope.hours = _.range(1, 13, 1);
             $scope.mins = _.range(1, 60, 1);
-
             $scope.change = function (id, val) {
                 if (id == 'hour') {
-                    $scope.formData.nhour = val;
+                    $scope.time.hour = val;
                 } else if (id == 'min') {
-                    $scope.formData.nmins = val;
+                    $scope.time.min = val;
                 } else {
-                    $scope.formData.dayNight = val;
+                    $scope.time.am_pm = val;
                 }
             }
 
@@ -326,14 +338,14 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
             }
 
             var formatTime = function (formData) {
-                var hour = formData.nhour,
-                    mins = formData.nmins,
+                var hour = formData.hour,
+                    mins = formData.min,
                     sec = 00;
-                if (formData.dayNight == "AM") {
+                if (formData.am_pm == "AM") {
                     if (hour == 12) {
                         hour = 0;
                     }
-                } else if (formData.dayNight == "PM") {
+                } else if (formData.am_pm == "PM") {
                     if (hour == 12) {
                         hour = 12;
                     } else {

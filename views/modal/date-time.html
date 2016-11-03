@@ -13,11 +13,11 @@
         <div class="inline-block">
           <label for="hour" class="color-white">hh</label>
           <div class="date-holder">
-            <input type="text" id="hour" ng-click="getDate = 1" ng-model="formData.nhour">
+            <input type="text" id="hour" ng-click="getDate = 1" ng-model="time.hour">
             <div class="time-format-dropdown" ng-if="getDate == 1">
               <ul>
                 <a href="">
-                  <li ng-repeat="hh in hours | filter: formData.nhour" ng-click="change('hour',hh)">{{hh}}</li>
+                  <li ng-repeat="hh in hours | filter: time.hour" ng-click="change('hour',hh)">{{hh}}</li>
                 </a>
 
               </ul>
@@ -27,17 +27,17 @@
         <div class="inline-block">
           <label for="min" class="color-white" ng-model="time">mm</label>
           <div class="date-holder">
-            <input type="text" id="min" ng-click="getDate=2" ng-model="formData.nmins">
+            <input type="text" id="min" ng-click="getDate=2" ng-model="time.min">
             <div class="time-format-dropdown" ng-if="getDate == 2">
               <ul>
-                <li ng-repeat="mm in mins|filter: formData.nmins" ng-click="change('min',mm)"><a href="">{{mm}}</a></li>
+                <li ng-repeat="mm in mins|filter: time.min" ng-click="change('min',mm)"><a href="">{{mm}}</a></li>
               </ul>
             </div>
           </div>
         </div>
         <div class="inline-block">
           <div class="date-holder">
-            <input type="text" id="dayNight" ng-click="getDate=3" ng-model="formData.dayNight">
+            <input type="text" id="dayNight" ng-click="getDate=3" ng-model="time.am_pm">
             <div class="time-format-dropdown" ng-if="getDate == 3">
               <ul class="timer">
                 <li ng-click="change('dayNight','AM')"><a href="">AM</a></li>
@@ -48,9 +48,9 @@
         </div>
       </div>
     </div>
-    <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options" datepicker-mode="year|month|day"></div>
+    <div uib-datepicker ng-model="datetime.dt" class="well well-sm" datepicker-options="options" datepicker-mode="year|month|day"></div>
     <div class="text-right">
-      <button class="btn btn-pink btn-more" ng-click=updateDateTime(ongo.uniqueId,formData,dt)>Save</button>
+      <button class="btn btn-pink btn-more" ng-click=updateDateTime(ongo.uniqueId,time,datetime.dt)>Save</button>
     </div>
   </div>
 </div>
