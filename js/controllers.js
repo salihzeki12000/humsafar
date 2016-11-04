@@ -7,7 +7,7 @@ var globalGetProfile = function (data, status) {
   }
 };
 var pointsForLine;
-var line;
+var line = [];
 var initMap = function () {};
 var map;
 angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
@@ -785,8 +785,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, $state, $stateParams) {
     //Used to name the .html file
     var id = $stateParams.id;
-    // var centers = [];
-    var centers = [];
     var checkinCount = "";
     $scope.userData = $.jStorage.get("profile");
 
@@ -1001,27 +999,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       lat: 51.470022,
       lng: -0.454295
-    }
-    ,
-     {
+    }, {
       lat: 29.276052,
       lng: -81.034910
     }, {
       lat: 51.512072,
       lng: -0.144223
-    },{
+    }, {
       lat: 52.923608,
       lng: -1.482560
-    },{
+    }, {
       lat: 51.899603,
       lng: -1.153590
-    },{
+    }, {
       lat: 51.470022,
       lng: -0.454295
-    },{
+    }, {
       lat: 25.253175,
       lng: 55.365673
     }];
+
+    line = _.map(centers, function () {
+      return {};
+    });
+    console.log(line);
 
     // {
     //   lat: 19.238368,
@@ -1045,7 +1046,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         var step = 0;
         var numSteps = 100; //Change this to set animation resolution
 
-        function redLineDraw(i, departure, arrival, percentComplete) {
+        function redLineDraw(i, departure, arrival, percentComplete, value) {
           var xdiff = (centers[i].lat - centers[i - 1].lat);
           var ydiff = (centers[i].lng - centers[i - 1].lng);
           if (Math.abs(xdiff) < 4) {
@@ -1064,8 +1065,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             scale: 4
           };
           setMarker(true, centers[i - 1]);
-          if (firstTime) {
-            line = new google.maps.Polyline({
+          if (_.isEmpty(line[i])) {
+            line[i] = new google.maps.Polyline({
               path: [departure, departure],
               strokeColor: "#FF0000",
               strokeOpacity: 0,
@@ -1107,17 +1108,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           //     line.setPath([departure, are_we_there_yet]);
           //   }
           // }, 1);
-          var drawLine = function (departure, arrival, percent) {
+          var drawLine = function (departure, arrival, percent, i, value) {
             percentFrac = percent / 100;
             var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
-            line.setPath([departure, are_we_there_yet]);
+            line[i].setPath([departure, are_we_there_yet]);
             console.log(are_we_there_yet);
 
             //moving center starts here
-            center = {
-              "lat": iniLat + (frac1 * percent),
-              "lng": iniLng + (frac2 * percent)
+            if (value) {
+              center = {
+                "lat": iniLat + (frac1 * percent),
+                "lng": iniLng + (frac2 * percent)
+              }
             }
+
             console.log(center);
             map.setCenter(center);
             //moving center ends here
@@ -1126,7 +1130,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               setMarker(true, center);
             }
           };
-          drawLine(departure, arrival, percentComplete);
+          drawLine(departure, arrival, percentComplete, i, value);
         };
 
         map = new google.maps.Map(document.getElementById('map'), {
@@ -1152,7 +1156,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
 
         _.each(centers, function (n) {
-
           setMarker(false, n);
         });
         //static polylines starts here
@@ -1188,14 +1191,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           }
         }
 
-        pointsForLine = function (i, percentComplete) {
+        pointsForLine = function (i, percentComplete, value) {
           var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
           var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
           step = 0;
-          redLineDraw(i, departure, arrival, percentComplete);
+          redLineDraw(i, departure, arrival, percentComplete, value);
+          if (i > 1) {
+            pointsForLine(i - 1, 100);
+          }
         };
 
-        pointsForLine(1, 10);
+        pointsForLine(1, 10, true);
       }
     };
 
