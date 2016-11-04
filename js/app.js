@@ -554,21 +554,28 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
       setTimeout(function () {
         var check = $(".hasLatLng").length;
         $(window).scroll(function () {
-          var currentScroll = $(window).scrollTop() + $(window).height();
+          var currentScroll = $(window).scrollTop();
           var divPositions = _.map($(".hasLatLng"), function (n) {
             return $(n).offset().top;
           });
           var ith = 1;
+          var percentage = 0;
           _.each(divPositions, function (n, index) {
-            if (n <= currentScroll) {
+            if (n <= currentScroll && divPositions[index + 1] > currentScroll) {
               ith = index;
-              return 0;
+              if (n > 0) {
+                var dif = n - divPositions[index - 1];
+                console.log(dif);
+                percentage = (currentScroll - n) / dif * 100;
+                console.log(ith, percentage, true);
+                if (ith > 0) {
+                  pointsForLine(ith, percentage, true);
+                }
+
+              }
+              return false;
             }
           });
-          console.log(ith);
-          pointsForLine(ith, 100, true);
-
-
         });
         console.log(check);
       }, 500);
