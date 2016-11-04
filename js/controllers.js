@@ -1039,7 +1039,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       var firstTime = true;
 
-
       if (google) {
         var map;
         var bounds = new google.maps.LatLngBounds();
@@ -1047,10 +1046,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         var numSteps = 100; //Change this to set animation resolution
 
         function redLineDraw(i, departure, arrival, percentComplete, value) {
+          setMarker(true,centers[0]);
           var xdiff = (centers[i].lat - centers[i - 1].lat);
           var ydiff = (centers[i].lng - centers[i - 1].lng);
           if (Math.abs(xdiff) < 4) {
-            smoothZoom(map, 8, map.getZoom());
+            smoothZoom(map, 10, map.getZoom());
           } else {
             smoothZoom(map, 4, map.getZoom());
           }
@@ -1064,7 +1064,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             strokeOpacity: 1,
             scale: 4
           };
-          setMarker(true, centers[i - 1]);
+          
+          if(percentComplete>=100){
+            setMarker(true, centers[i]);
+          }
           if (_.isEmpty(line[i])) {
             line[i] = new google.maps.Polyline({
               path: [departure, departure],
@@ -1081,39 +1084,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             });
             firstTime = false;
           }
-
-          // var interval = setInterval(function () {
-          //   step += 1;
-          //   if (step > numSteps) {
-          //     clearInterval(interval);
-          //     i++;
-          //     if (i < centers.length) {
-
-          //       pointsForLine(i);
-          //     } else {
-          //       setMarker(true, centers[i - 1]);
-          //     }
-          //   } else {
-          //     var progressed = step / numSteps;
-
-          //     center = {
-          //       "lat": iniLat + frac1,
-          //       "lng": iniLng + frac2
-          //     }
-          //     iniLat = iniLat + frac1;
-          //     iniLng = iniLng + frac2;
-          //     map.setCenter(center);
-          //     var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, progressed);
-          //     // console.log(progressed+"------->>>>"+are_we_there_yet);
-          //     line.setPath([departure, are_we_there_yet]);
-          //   }
-          // }, 1);
           var drawLine = function (departure, arrival, percent, i, value) {
             percentFrac = percent / 100;
             var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
             line[i].setPath([departure, are_we_there_yet]);
-            console.log(are_we_there_yet);
-
             //moving center starts here
             if (value) {
               center = {
@@ -1121,14 +1095,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 "lng": iniLng + (frac2 * percent)
               }
             }
-
-            console.log(center);
             map.setCenter(center);
             //moving center ends here
 
-            if (percent >= 100) {
-              setMarker(true, center);
-            }
+            // if (percent >= 100) {
+            //   setMarker(true, center);
+            // }
           };
           drawLine(departure, arrival, percentComplete, i, value);
         };
@@ -1198,10 +1170,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           redLineDraw(i, departure, arrival, percentComplete, value);
           if (i > 1) {
             pointsForLine(i - 1, 100);
-          }
+            count=centers.length;
+           while(count!=i){
+             console.log("inside WHile loop");
+           }  
+          };  
         };
-
-        pointsForLine(1, 10, true);
       }
     };
 
