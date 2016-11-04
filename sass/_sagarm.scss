@@ -1,0 +1,134 @@
+.font-sz10 {
+  font-size: 10px;
+}
+
+.bg-agent{
+  background-color: rgba(255,255,255,0.8);
+}
+
+.bg-agent{
+  .btn-blue-outline{
+    background-color: rgba(255,255,255,0.8);
+    &:hover{
+      background-color: $brand-pink;
+    }
+  }
+}
+.agent-about,
+.agent-category,
+.agent-cmpny-det,
+.agent-logoupload {
+  padding: 30px 30px 15px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.7);
+
+  h3 {
+    margin: 0 0 25px;
+    font-size: 20px;
+  }
+}
+
+.agent-cmpny-inputholder {
+  position: relative;
+
+  input {
+    border: none;
+    border-bottom: 1px solid $brand-blue;
+    padding: 6px 12px 6px 26px;
+
+    &:focus {
+      border-color: $brand-blue;
+    }
+  }
+
+  &:after,
+  &:before {
+    content: '';
+    width: 1px;
+    height: 15px;
+    position: absolute;
+    bottom: 0;
+    background-color: $brand-blue;
+  }
+
+  &:before {
+    left: 0;
+  }
+
+  &:after {
+    right: 0;
+  }
+}
+
+.agent-input-icon {
+  position: absolute;
+  bottom: 7px;
+  left: 8px;
+}
+
+.agent-about-inputholder {
+  textarea {
+    border: 1px solid $brand-blue;
+    min-height: 150px;
+  }
+}
+
+.agt-cat-indicators {
+  margin-bottom: 10px;
+
+  ul {
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+
+    li {
+      padding: 0 3px;
+      display: inline-block;
+    }
+
+    a {
+      @include square(10px);
+      border: 1px solid $brand-blue;
+      border-radius: 100%;
+      display: inline-block;
+      @include transition(all 300ms linear);
+    }
+  }
+
+  .one,
+  .three,
+  .two {
+    background-color: $brand-blue;
+    @include transition(all 300ms linear);
+  }
+}
+
+
+.agtbg-holder {
+    margin-bottom: 15px;
+}
+
+.agt-imgholder {
+  // margin: 10px;
+  // padding: 20px;
+  // background: url('../img/agt-bg-blue.png') no-repeat 50% 50%;
+  background-image: url('../img/agt-bg-blue.png');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  cursor: pointer;
+  @include transition(background 300ms linear);
+  background-size: contain;
+  // background-position-x: 8px;
+  min-height: 60px;
+  position: relative;
+  img {
+    @extend .get-center;
+  }
+  &:hover {
+    background-image: url('../img/agt-bg-red.png');
+    @include transition(background 300ms linear);
+  }
+
+  figcaption {
+    font-size: 16px;
+  }
+}

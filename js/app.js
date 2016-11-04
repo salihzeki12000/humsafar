@@ -238,6 +238,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'ItineraryCtrl'
     })
+    .state('agent-login', {
+        url: "/agent-login",
+        templateUrl: "views/template.html",
+        controller: 'AgentloginCtrl'
+    })
     .state('ProfileList', {
       url: "/profile-list",
       templateUrl: "views/template.html",
@@ -607,11 +612,11 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
             if (n <= currentScroll && divPositions[index + 1] > currentScroll) {
               ith = index;
               if (n > 0) {
-                // var dif = n - divPositions[index - 1];   
+                // var dif = n - divPositions[index - 1];
                 percentage = ((currentScroll - n) / divHeights[index]) * 100;
                 // console.log(currentScroll);
                 // console.log(percentage);
-                
+
                 if (ith > 0) {
                   if(percentage<=100){
                      pointsForLine(ith, percentage, true);

@@ -1,0 +1,352 @@
+<div class="agent-login">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8">
+        <div class="bg-agent">
+
+
+          <!-- SELECT CITY START -->
+          <div class="city" hidden>
+            <div class="text-center">
+              <h3 class="color-blue avenir-black">Head Office Location</h3>
+              <div class="select-your-nation select-your-city">
+                <div class="search-nation select-city">
+                  <input type="text" class="form-control avenir-roman" placeholder="Search City" ng-model="searchCity" ng-value="userData.homeCity" ng-change="searchByKey(searchCity)">
+                </div>
+                <ul class="avenir-roman bg-dark-blue">
+                  <li ng-repeat="city in cities | filter:searchCity track by $index">
+                    <div class="nation-select relate">
+                      <input type="radio" id="{{city.id}}" name="city" ng-value="city.description" ng-model="userData.homeCity" />
+                      <label for="{{city.id}}">
+                        <span class="color-white">{{city.description}}</span>
+                      </label>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="button-panel clearfix">
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=4" ng-disabled="userData.homeCity">Next</button>
+              </div>
+            </div>
+          </div>
+          <!-- SELECT CITY SEND -->
+
+
+          <!-- COMPANY DETAILS START -->
+          <div class="agent-cmpny-det" hidden>
+            <div class="text-center">
+              <h3 class="color-blue avenir-black">Company Details</h3>
+              <div class="company-details">
+                <form>
+                  <div class="form-group">
+                    <div class="agent-cmpny-inputholder">
+                      <input type="text" class="form-control color-blue" placeholder="Company Name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="agent-cmpny-inputholder">
+                      <input type="textarea" class="form-control color-blue" placeholder="Address">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <div class="agent-cmpny-inputholder">
+                          <input type="number" class="form-control color-blue" placeholder="Contact No">
+                          <div class="agent-input-icon">
+                            <i class="fa fa-phone color-grey"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-7">
+                      <div class="form-group">
+                        <div class="agent-cmpny-inputholder">
+                          <input type="number" class="form-control color-blue" placeholder="Mobile No">
+                          <div class="agent-input-icon">
+                            <i class="fa fa-phone color-grey"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="agent-cmpny-inputholder">
+                      <input type="email" class="form-control color-blue" placeholder="Email">
+                      <div class="agent-input-icon">
+                        <i class="fa fa-envelope color-grey"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="agent-cmpny-inputholder">
+                      <input type="text" class="form-control color-blue" placeholder="Website">
+                      <div class="agent-input-icon">
+                        <i class="fa fa-globe color-grey"></i>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="button-panel clearfix">
+                <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=2">Previous</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=4" ng-disabled="userData.homeCity">Next</button>
+              </div>
+            </div>
+          </div>
+          <!-- COMPANY DETAILS END -->
+
+          <!-- AGENT LOGO UPLOAD START-->
+          <div class="agent-logoupload text-center" hidden>
+            <h3 class="color-blue avenir-black">Upload Company Logo</h3>
+            <div class="text-center">
+              <div class="cropArea" ng-show="showImage">
+                <img-crop image="myCompLogo" result-image="myCroppedCompLogo" /></img-crop>
+              </div>
+              <div class="show">
+                <img ng-src="{{myCroppedCompLogo}}" />
+              </div>
+              <div class="upload-section" ng-hide="showImage">
+                <!-- <img src="{{userData.profilePicture|uploadpath}}" class="m-center img-responsive doneLoading"> -->
+                <img src="img/upload-icon.jpg" class="m-center img-responsive doneLoading">
+                <p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
+                <span class="block mt10 color-grey avenir-roman">- or -</span>
+                <div class="upload-btn">
+                  <div class="relate inline-block mr10 select-photo">
+
+                    <button class="btn btn-dark-blue pointer avenir-roman">Select a photo from your computer</button>
+                    <!--Using image upload directive-->
+
+                    <!--<upload-image ng-model="formData.photo"></upload-image>-->
+
+                    <!--Using image upload directive ends-->
+
+                    <input type="file" class="getfile pointer" id="fileInput" class="getfile pointer" ng-model="myCroppedImage" />
+                  </div>
+                  <!--id=fileInput class="getfile pointer" for above code-->
+                </div>
+              </div>
+              <div class="button-panel clearfix">
+                <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
+                <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)">Done</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- AGENT LOGO UPLOAD END -->
+
+          <!-- ABOUT AGENT -->
+          <div class="agent-about" hidden>
+            <div class="text-center">
+              <h3 class="color-blue avenir-black">About Sai Travels</h3>
+              <div class="form-group">
+                <div class="agent-about-inputholder">
+                  <textarea name="" id="" placeholder="Fill me in ..." class="form-control color-blue"></textarea>
+                  <!-- <input type="textarea" class="form-control color-blue" placeholder="Fill me in ..."> -->
+                </div>
+                <span class="pull-right font-sz10 mt10"><i>00/500</i></span>
+              </div>
+              <div class="button-panel clearfix">
+                <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
+                <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)">Done</button>
+              </div>
+            </div>
+          </div>
+          <!-- ABOUT AGENT END -->
+
+
+          <!-- CATEGORY START -->
+          <div class="agent-category">
+
+            <!-- category page1 -->
+            <div class="cat-special">
+              <div class="agt-cat-indicators">
+                <ul>
+                  <li>
+                    <a href="" class="one"></a>
+                  </li>
+                  <li>
+                    <a href="" class=""></a>
+                  </li>
+                  <li>
+                    <a href="" class=""></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="text-center">
+                <h3 class="color-blue avenir-black">Category Of Specialization</h3>
+                <div class="row">
+                  <div class="col-md-offset-1 col-md-10">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="agtbg-holder">
+                          <figure>
+                            <div class="agt-imgholder">
+                              <img src="img/agt-cat1.png" alt="Adventure" width="35px" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">Adventure</figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="agtbg-holder">
+                          <figure>
+                            <div class="agt-imgholder">
+                              <img src="img/agt-cat2.png" alt="Business" width="33px" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">Business</figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="agtbg-holder">
+                          <figure>
+                            <div class="agt-imgholder">
+                              <img src="img/agt-cat3.png" alt="Family" width="48px" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">Family</figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="agtbg-holder">
+                          <figure>
+                            <div class="agt-imgholder">
+                              <img src="img/agt-cat4.png" alt="Romance" width="35px" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">Romance</figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="agtbg-holder">
+                          <figure>
+                            <div class="agt-imgholder">
+                              <img src="img/agt-cat5.png" alt="Backpacking" width="35px" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">Backpacking</figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="agtbg-holder">
+                          <figure>
+                            <div class="agt-imgholder">
+                              <img src="img/agt-cat6.png" alt="Budget" width="33px" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">Budget</figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="agtbg-holder">
+                          <figure>
+                            <div class="agt-imgholder">
+                              <img src="img/agt-cat7.png" alt="Luxury" width="33px" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">Luxury</figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="agtbg-holder">
+                          <figure>
+                            <div class="agt-imgholder">
+                              <img src="img/agt-cat8.png" alt="Religious" width="38px" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">Religious</figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="agtbg-holder">
+                          <figure>
+                            <div class="agt-imgholder">
+                              <img src="img/agt-cat9.png" alt="Friends" width="35px" class="img-responsive m-center">
+                            </div>
+                            <figcaption class="color-blue font-bold">Friends</figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="button-panel clearfix">
+                  <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
+                  <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
+                  <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)">Done</button>
+                </div>
+              </div>
+            </div>
+            <!-- category page1 end -->
+
+            <!-- category page2 -->
+            <div class="cat-special" hidden>
+              <div class="agt-cat-indicators">
+                <ul>
+                  <li>
+                    <a href="" class="one"></a>
+                  </li>
+                  <li>
+                    <a href="" class=""></a>
+                  </li>
+                  <li>
+                    <a href="" class=""></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="text-center">
+                <h3 class="color-blue avenir-black">Category Of Specialization</h3>
+
+                <div class="button-panel clearfix">
+                  <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
+                  <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
+                  <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)">Done</button>
+                </div>
+              </div>
+            </div>
+            <!-- category page2 end -->
+
+            <!-- category page3 -->
+            <div class="cat-special" hidden>
+              <div class="agt-cat-indicators">
+                <ul>
+                  <li>
+                    <a href="" class="one"></a>
+                  </li>
+                  <li>
+                    <a href="" class=""></a>
+                  </li>
+                  <li>
+                    <a href="" class=""></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="text-center">
+                <h3 class="color-blue avenir-black">Category Of Specialization</h3>
+
+                <div class="button-panel clearfix">
+                  <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
+                  <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
+                  <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)">Done</button>
+                </div>
+              </div>
+            </div>
+            <!-- category page3 end -->
+          </div>
+          <!-- CATEGORY END -->
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

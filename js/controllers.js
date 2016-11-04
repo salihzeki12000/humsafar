@@ -1064,7 +1064,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             strokeOpacity: 1,
             scale: 4
           };
-          
+
           if(percentComplete>=100){
             setMarker(true, centers[i]);
           }
@@ -1173,8 +1173,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             count=centers.length;
            while(count!=i){
              console.log("inside WHile loop");
-           }  
-          };  
+           }
+          };
         };
       }
     };
@@ -7730,6 +7730,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log(err);
       });
   };
+
+})
+
+.controller('AgentloginCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+    $scope.template = TemplateService.changecontent("agent-login"); //Use same name of .html file
+    $scope.menutitle = NavigationService.makeactive("Agent Login"); //This is the Title of the Website
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
 
 })
 
