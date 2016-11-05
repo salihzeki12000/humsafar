@@ -11,6 +11,7 @@ var line = [];
 var travelPath;
 var initMap = function () {};
 var map;
+var markers = [];
 angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
 .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
@@ -971,13 +972,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
 
         function redLineDraw(i, departure, arrival, percentComplete, value) {
-          setMarker(true, centers[0]);
           var xdiff = (centers[i].lat - centers[i - 1].lat);
           var ydiff = (centers[i].lng - centers[i - 1].lng);
           if (Math.abs(xdiff) < 4) {
             smoothZoom(map, 10, map.getZoom());
+            // map.setZoom(10);
           } else {
             smoothZoom(map, 4, map.getZoom());
+            // map.setZoom(4)
           }
           var frac1 = xdiff / 100;
           var frac2 = ydiff / 100;
@@ -1014,9 +1016,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             line[i].setPath([departure, are_we_there_yet]);
             //moving center starts here
             if (value) {
+
+              // center = {
+              //   "lat": iniLat + (frac1 * percent),
+              //   "lng": iniLng + (frac2 * percent)
+              // }
               center = {
-                "lat": iniLat + (frac1 * percent),
-                "lng": iniLng + (frac2 * percent)
+                "lat": iniLat + (centers[i].lat - centers[i - 1].lat) / 2,
+                "lng": iniLng + (centers[i].lng - centers[i - 1].lng) / 2
               }
             }
             map.setCenter(center);
@@ -1041,13 +1048,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             obj.icon = "img/maps/marker.png";
           }
           marker = new google.maps.Marker(obj);
+          markers.push(marker);
+          // console.log(markers);
         }
+
 
         _.each(centers, function (n) {
           setMarker(false, n);
         });
+        setMarker(true, centers[0]);
 
-        //static polylines starts here
+        //Grey static polylines starts here
         travelPath = new google.maps.Polyline({
           path: centers,
           geodesic: true,
@@ -1056,25 +1067,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           strokeWeight: 1
         });
         travelPath.setMap(map);
+        //Grey static polylines starts here
 
-        function smoothZoom(map, max, cnt) {
-          if (cnt > max) {
+        function smoothZoom(map, zoomToBeDone, alreadyZoomed) {
+          if (zoomToBeDone < alreadyZoomed) { //for zooming out
             z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
               google.maps.event.removeListener(z);
-              smoothZoom(map, max, cnt - 1);
+              smoothZoom(map, zoomToBeDone, alreadyZoomed - 1);
             });
             setTimeout(function () {
-              map.setZoom(cnt)
-            }, 10); // 80ms is what I found to work well on my system -- it might not work well on all systems
-          } else if (cnt < max) {
+              map.setZoom(alreadyZoomed)
+            }, 500); // 80ms is what I found to work well on my system -- it might not work well on all systems
+          } else if (zoomToBeDone > alreadyZoomed) { //for zooming in
             z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
               google.maps.event.removeListener(z);
-              smoothZoom(map, max, cnt + 1);
+              smoothZoom(map, zoomToBeDone, alreadyZoomed + 1);
             });
             setTimeout(function () {
-              map.setZoom(cnt)
-            }, 80); // 80ms is what I found to work well on my system -- it might not work well on all systems
-          } else if (cnt == max) {
+              map.setZoom(alreadyZoomed)
+            }, 500); // 80ms is what I found to work well on my system -- it might not work well on all systems
+          } else if (alreadyZoomed == zoomToBeDone) {
             return;
           }
         }
@@ -1085,25 +1097,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           step = 0;
           redLineDraw(i, departure, arrival, percentComplete, value);
           var linesCount = line.length - 1;
+
           //clearPolyLines starts
-          while ((linesCount >= (i + 1))&&(value)) {
+          while ((linesCount >= (i + 1)) && (value)) {
             console.log(i);
-            console.log(linesCount+"--->"+line[linesCount]);
+            console.log(linesCount + "--->" + line[linesCount]);
             if (!_.isEmpty(line[linesCount])) {
               console.log("inside clearing lines");
-               line[linesCount].setMap(null);
-              line[linesCount]={};
+              line[linesCount].setMap(null);
+              line[linesCount] = {};
               console.log("line  " + linesCount + "  cleared");
               console.log(line);
+
+              if (percentComplete < 100) {
+                //  setMarker(false, centers[linesCount]);
+                centers[linesCount].setMap(null);
+              }
             };
             linesCount--;
           };
           //clearPolyLines ends
-          //draw succeeding polyLines
+
+          //draw succeeding polyLines starts
           if (i > 1) {
             pointsForLine(i - 1, 100);
             count = centers.length;
           };
+          //draw succeeding polyLines ends
 
 
         };

@@ -609,37 +609,38 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
           var ith = 1;
           var percentage = 0;
           _.each(divPositions, function (n, index) {
-            if (n <= currentScroll && divPositions[index + 1] > currentScroll) { //would work for  1st checkIn till second last checkin coz divPositions[index + 1] would return false
+            if (n <= currentScroll && divPositions[index + 1] > currentScroll) {
               console.log("inside 1st if");
               ith = index;
               if (n > 0) {
-                percentage = ((currentScroll - n) / divHeights[index]) * 100;     //percentage based on size of div
+                // var dif = n - divPositions[index - 1];
+                percentage = ((currentScroll - n) / divHeights[index]) * 100;
+                // console.log(currentScroll);
+                // console.log(percentage);
+
                 if (ith > 0) {
                   if (percentage <= 100) {
                     pointsForLine(ith, percentage, true);
-                } else {                                                          //else condion is given coz polyline should exceed beyond 100%
+                  } else {
                     pointsForLine(ith, 100, true);
                   }
-                } else if (!_.isEmpty(line[1])) {         //clearing 1st polyLine
+                } else if(i==0 && !_.isEmpty(line[1])){
                   line[1].setMap(null);
                   line[1] = {};
                 }
               }
               return false;
-            } else if ((n <= currentScroll) && (index == (divPositions.length - 1))) {      //for last checkIn
-              console.log("last div Reached");
-              ith = index;
-              percentage = ((currentScroll - n) / divHeights[index]) * 100;   //percentage based on size of div
-              if (percentage <= 100) {                
-                pointsForLine(ith, percentage, true);
-              } else {                                //else condion is given coz polyline should exceed beyond 100%
-                pointsForLine(ith, 100, true);
-              }
-            } else if (n > currentScroll) {           //clearing 1st polyLine if none of the checkin is diplayed on the initial window page
-              if (!_.isEmpty(line[1])) {
-                line[1].setMap(null);
-                line[1] = {};
-              }
+            }
+              
+
+            else if((n <= currentScroll) && (index==(divPositions.length-1))){
+              ith=index;
+              percentage = ((currentScroll - n) / divHeights[index]) * 100;
+              if (percentage <= 100) {
+                    pointsForLine(ith, percentage, true);
+                  } else {
+                    pointsForLine(ith, 100, true);
+                  }
             }
           });
         });
