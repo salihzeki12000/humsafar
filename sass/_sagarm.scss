@@ -2,18 +2,22 @@
   font-size: 10px;
 }
 
-.bg-agent{
+.bg-agent {
   background-color: rgba(255,255,255,0.8);
 }
 
-.bg-agent{
-  .btn-blue-outline{
-    background-color: rgba(255,255,255,0.8);
-    &:hover{
+.bg-agent {
+  .btn-blue-outline {
+    @include button-variant( $brand-blue, rgba(255,255,255,0.5), $brand-blue);
+
+    &:active,
+    &:hover {
       background-color: $brand-pink;
+      color: #fff;
     }
   }
 }
+
 .agent-about,
 .agent-category,
 .agent-cmpny-det,
@@ -102,9 +106,8 @@
   }
 }
 
-
 .agtbg-holder {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .agt-imgholder {
@@ -120,9 +123,11 @@
   // background-position-x: 8px;
   min-height: 60px;
   position: relative;
+
   img {
     @extend .get-center;
   }
+
   &:hover {
     background-image: url('../img/agt-bg-red.png');
     @include transition(background 300ms linear);
@@ -131,4 +136,59 @@
   figcaption {
     font-size: 16px;
   }
+}
+
+.btn-zerorad{
+    border-radius: 0;
+}
+
+.btn-catcountry {
+  font-weight: 700;
+  padding: 8px 30px;
+
+  &:active,
+  &:hover {
+    background-color: $brand-blue !important;
+  }
+}
+
+.cat-special {
+  .country-tabs {
+    max-height: 250px;
+    overflow-y: auto;
+  }
+}
+/*
+ *  scroll style start
+ */
+
+  .country-tabs::-webkit-scrollbar {
+    //height: 10px;
+    //padding: 5px;
+  }
+
+  .country-tabs::-webkit-scrollbar-track {
+    -webkit-box-shadow: none;
+    border: none;
+    background-color: #fff;
+  }
+
+  .country-tabs::-webkit-scrollbar {
+    width: 6px;
+    background-color: transparent;
+  }
+
+  .country-tabs::-webkit-scrollbar-thumb {
+    background-color: rgba(128,128,128,0.6);
+    border-radius: 10px;
+  }
+
+/*
+ *  scroll style start
+ */
+
+
+.service-box{
+  text-align: justify;
+  display: block;
 }
