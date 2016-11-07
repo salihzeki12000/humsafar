@@ -4,6 +4,41 @@
       <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8">
         <div class="bg-agent">
 
+          <!-- VERIFICATION CODE START -->
+          <div class="agt-verification-code" hidden>
+            <div class="text-center">
+              <h3 class="color-blue avenir-black">Verification</h3>
+              <p>A 4-digit Verification code has been sent <br> to your registered email address</p>
+              <div class="veri-box">
+                <form>
+                  <input type="number" max="1" class="veri-code-box form-control">
+                  <input type="number" max="1" class="veri-code-box form-control">
+                  <input type="number" max="1" class="veri-code-box form-control">
+                  <input type="number" max="1" class="veri-code-box form-control">
+              </div>
+              </form>
+              <p>If you haven't recieved a verification code yet,<br> Click here to <a class="color-blue"><u>Re-send</u></a></p>
+              <div class="marg-tp30 clearfix">
+                <button class="btn btn-blue-outline btn-more" ng-disabled="userData.homeCity">Submit</button>
+              </div>
+            </div>
+          </div>
+          <!-- VERIFICATION CODE END -->
+
+
+          <!-- VERIFIED START -->
+          <div class="verification-complete" hidden>
+            <div class="text-center">
+              <h3 class="color-blue avenir-black">Verification</h3>
+              <img src="img/verified.png" alt="Verified" class="mt20 mb20 img-responsive m-center">
+              <p class="color-blue avenir-roman">Your account has been <span class="block">successfully verified</span></p>
+              <div class="button-panel clearfix">
+                <button class="btn btn-blue-outline btn-more pull-right">Next</button>
+              </div>
+            </div>
+          </div>
+          <!-- VERIFIED END -->
+
 
           <!-- SELECT CITY START -->
           <div class="city" hidden>
@@ -139,12 +174,12 @@
           <!-- AGENT LOGO UPLOAD END -->
 
           <!-- ABOUT AGENT -->
-          <div class="agent-about" hidden>
+          <div class="agent-about" >
             <div class="text-center">
               <h3 class="color-blue avenir-black">About Sai Travels</h3>
               <div class="form-group">
                 <div class="agent-about-inputholder">
-                  <textarea name="" id="" placeholder="Fill me in ..." class="form-control color-blue"></textarea>
+                  <textarea name="" id="" maxlength="500" placeholder="Fill me in ..." class="form-control color-blue"></textarea>
                   <!-- <input type="textarea" class="form-control color-blue" placeholder="Fill me in ..."> -->
                 </div>
                 <span class="pull-right font-sz10 mt10"><i>00/500</i></span>
@@ -160,7 +195,7 @@
 
 
           <!-- CATEGORY START -->
-          <div class="agent-category">
+          <div class="agent-category" hidden>
 
             <!-- category page1 -->
             <div class="cat-special" hidden>
@@ -308,173 +343,173 @@
                 <div class="row">
                   <div class="col-md-12">
                     <uib-accordion close-others="oneAtATime">
-                        <div uib-accordion-group class="panel-default" is-open="status.open1">
-                            <uib-accordion-heading>
-                                <div class="agtaccord-title color-blue avenir-medium">Africa
-                                  <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open1, 'fa fa-chevron-down': !status.open1}"></i>
-                                </div>
-                            </uib-accordion-heading>
-                            <div class="country-tabs">
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                      <div uib-accordion-group class="panel-default" is-open="status.open1">
+                        <uib-accordion-heading>
+                          <div class="agtaccord-title color-blue avenir-medium">Africa
+                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open1, 'fa fa-chevron-down': !status.open1}"></i>
+                          </div>
+                        </uib-accordion-heading>
+                        <div class="country-tabs">
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
 
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
 
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
 
-                            </div>
                         </div>
+                      </div>
 
-                        <div uib-accordion-group class="panel-default" is-open="status.open2">
-                            <uib-accordion-heading>
-                                <div class="agtaccord-title color-blue avenir-medium">Asia
-                                  <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open2, 'fa fa-chevron-down': !status.open2}"></i>
-                                </div>
-                            </uib-accordion-heading>
-                            <div class="country-tabs">
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                            </div>
+                      <div uib-accordion-group class="panel-default" is-open="status.open2">
+                        <uib-accordion-heading>
+                          <div class="agtaccord-title color-blue avenir-medium">Asia
+                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open2, 'fa fa-chevron-down': !status.open2}"></i>
+                          </div>
+                        </uib-accordion-heading>
+                        <div class="country-tabs">
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
                         </div>
+                      </div>
 
-                        <div uib-accordion-group class="panel-default" is-open="status.open3">
-                            <uib-accordion-heading>
-                                <div class="agtaccord-title color-blue avenir-medium">Europe
-                                  <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open3, 'fa fa-chevron-down': !status.open3}"></i>
-                                </div>
-                            </uib-accordion-heading>
-                            <div class="country-tabs">
+                      <div uib-accordion-group class="panel-default" is-open="status.open3">
+                        <uib-accordion-heading>
+                          <div class="agtaccord-title color-blue avenir-medium">Europe
+                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open3, 'fa fa-chevron-down': !status.open3}"></i>
+                          </div>
+                        </uib-accordion-heading>
+                        <div class="country-tabs">
 
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
 
 
-                            </div>
                         </div>
+                      </div>
 
-                        <div uib-accordion-group class="panel-default" is-open="status.open4">
-                            <uib-accordion-heading>
-                                <div class="agtaccord-title color-blue avenir-medium">North America
-                                  <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open4, 'fa fa-chevron-down': !status.open4}"></i>
-                                </div>
-                            </uib-accordion-heading>
-                            <div class="country-tabs">
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                      <div uib-accordion-group class="panel-default" is-open="status.open4">
+                        <uib-accordion-heading>
+                          <div class="agtaccord-title color-blue avenir-medium">North America
+                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open4, 'fa fa-chevron-down': !status.open4}"></i>
+                          </div>
+                        </uib-accordion-heading>
+                        <div class="country-tabs">
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
 
-                            </div>
                         </div>
+                      </div>
 
-                        <div uib-accordion-group class="panel-default" is-open="status.open5">
-                            <uib-accordion-heading>
-                                <div class="agtaccord-title color-blue avenir-medium">Ocenia
-                                  <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open5, 'fa fa-chevron-down': !status.open5}"></i>
-                                </div>
-                            </uib-accordion-heading>
-                            <div class="country-tabs">
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                            </div>
+                      <div uib-accordion-group class="panel-default" is-open="status.open5">
+                        <uib-accordion-heading>
+                          <div class="agtaccord-title color-blue avenir-medium">Ocenia
+                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open5, 'fa fa-chevron-down': !status.open5}"></i>
+                          </div>
+                        </uib-accordion-heading>
+                        <div class="country-tabs">
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
                         </div>
+                      </div>
 
-                        <div uib-accordion-group class="panel-default" is-open="status.open6">
-                            <uib-accordion-heading>
-                                <div class="agtaccord-title color-blue avenir-medium">South America
-                                  <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open6, 'fa fa-chevron-down': !status.open6}"></i>
-                                </div>
-                            </uib-accordion-heading>
-                            <div class="country-tabs">
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                              <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                      <div uib-accordion-group class="panel-default" is-open="status.open6">
+                        <uib-accordion-heading>
+                          <div class="agtaccord-title color-blue avenir-medium">South America
+                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open6, 'fa fa-chevron-down': !status.open6}"></i>
+                          </div>
+                        </uib-accordion-heading>
+                        <div class="country-tabs">
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
 
-                            </div>
                         </div>
+                      </div>
 
                     </uib-accordion>
                   </div>
@@ -490,7 +525,7 @@
             <!-- category page2 end -->
 
             <!-- category page3 -->
-            <div class="agt-services">
+            <div class="agt-services" hidden>
               <div class="agt-cat-indicators">
                 <ul>
                   <li>
@@ -509,22 +544,22 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="service-box">
-                      <button class="btn btn-blue-outline btn-more btn-catcountry  mr5 mb5">Flights</button>
-                      <button class="btn btn-blue-outline btn-more btn-catcountry  mr5 mb5">Cruise</button>
-                      <button class="btn btn-blue-outline btn-more btn-catcountry  mr5 mb5">MICE</button>
-                      <button class="btn btn-blue-outline btn-more btn-catcountry  mr5 mb5">Personal</button>
-                      <button class="btn btn-blue-outline btn-more btn-catcountry  mr5 mb5">Business Travel</button>
-                      <button class="btn btn-blue-outline btn-more btn-catcountry  mr5 mb5">Car Rentals</button>
-                      <button class="btn btn-blue-outline btn-more btn-catcountry  mr5 mb5">Visas</button>
-                      <button class="btn btn-blue-outline btn-more btn-catcountry  mr5 mb5">Fully Independent Traveller</button>
-                      <button class="btn btn-blue-outline btn-more btn-catcountry  mr5 mb5">Accomodation</button>
-                      <button class="btn btn-blue-outline btn-more btn-catcountry  mr5 mb5">Travel Insurance</button>
-                      <button class="btn btn-blue-outline btn-more btn-catcountry  mr5 mb5">Sports & Events</button>
-                      <button class="btn btn-blue-outline btn-more btn-catcountry  mr5 mb5">Tours And Packages</button>
-                      <button class="btn btn-blue-outline btn-more btn-catcountry  mr5 mb5">Forex</button>
-                      <button class="btn btn-blue-outline btn-more btn-catcountry  mr5 mb5">Holidays</button>
-                      <button class="btn btn-blue-outline btn-more btn-catcountry  mr5 mb5">Festival & Concerts</button>
-                      <button class="btn btn-blue-outline btn-more btn-catcountry  mr5 mb5">Transportation</button>
+                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Flights</button>
+                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Cruise</button>
+                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">MICE</button>
+                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Personal</button>
+                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Business Travel</button>
+                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Car Rentals</button>
+                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Visas</button>
+                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Fully Independent Traveller</button>
+                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Accomodation</button>
+                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Travel Insurance</button>
+                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Sports & Events</button>
+                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Tours And Packages</button>
+                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Forex</button>
+                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Holidays</button>
+                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Festival & Concerts</button>
+                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Transportation</button>
                     </div>
                   </div>
                 </div>

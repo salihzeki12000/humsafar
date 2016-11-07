@@ -6,6 +6,23 @@
   background-color: rgba(255,255,255,0.8);
 }
 
+.marg-tp30 {
+  margin-top: 30px;
+}
+
+.agent-login {
+  input,
+  textarea {
+    background-color: transparent;
+  }
+
+  input[type=number]::-webkit-inner-spin-button ,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
 .bg-agent {
   .btn-blue-outline {
     @include button-variant( $brand-blue, rgba(255,255,255,0.5), $brand-blue);
@@ -21,7 +38,8 @@
 .agent-about,
 .agent-category,
 .agent-cmpny-det,
-.agent-logoupload {
+.agent-logoupload,
+.agt-verification-code {
   padding: 30px 30px 15px;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.7);
 
@@ -37,7 +55,7 @@
   input {
     border: none;
     border-bottom: 1px solid $brand-blue;
-    padding: 6px 12px 6px 26px;
+    padding: 6px 12px 6px 30px;
 
     &:focus {
       border-color: $brand-blue;
@@ -138,13 +156,22 @@
   }
 }
 
-.btn-zerorad{
-    border-radius: 0;
+.btn-zerorad {
+  border-radius: 0;
 }
 
 .btn-catcountry {
   font-weight: 700;
   padding: 8px 30px;
+
+  &:active,
+  &:hover {
+    background-color: $brand-blue !important;
+  }
+}
+
+.btn-bluehover {
+  background-color: transparent;
 
   &:active,
   &:hover {
@@ -161,34 +188,61 @@
 /*
  *  scroll style start
  */
+.country-tabs::-webkit-scrollbar {
+  //height: 10px;
+  //padding: 5px;
+}
 
-  .country-tabs::-webkit-scrollbar {
-    //height: 10px;
-    //padding: 5px;
-  }
+.country-tabs::-webkit-scrollbar-track {
+  -webkit-box-shadow: none;
+  border: none;
+  background-color: #fff;
+}
 
-  .country-tabs::-webkit-scrollbar-track {
-    -webkit-box-shadow: none;
-    border: none;
-    background-color: #fff;
-  }
+.country-tabs::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
 
-  .country-tabs::-webkit-scrollbar {
-    width: 6px;
-    background-color: transparent;
-  }
-
-  .country-tabs::-webkit-scrollbar-thumb {
-    background-color: rgba(128,128,128,0.6);
-    border-radius: 10px;
-  }
-
+.country-tabs::-webkit-scrollbar-thumb {
+  background-color: rgba(128,128,128,0.6);
+  border-radius: 10px;
+}
 /*
  *  scroll style start
  */
-
-
-.service-box{
+.service-box {
   text-align: justify;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-auto {
+  flex: auto;
+}
+
+.service-box {
+  .btn-more {
+    padding: 12px 30px;
+  }
+}
+
+.veri-box {
   display: block;
+
+  input[type="number"] {
+    background-color: #e3e3e3;
+  }
+}
+
+.veri-code-box {
+  display: inline-block;
+  border: 1px solid #000;
+  height: 60px;
+  width: 60px;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 10px;
+  text-align: center;
+  margin: 20px 10px 20px 0;
 }
