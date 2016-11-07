@@ -598,6 +598,7 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
 
       setTimeout(function () {
         var check = $(".hasLatLng").length;
+        var flag;
         $(window).scroll(function () {
           var currentScroll = $(window).scrollTop() + $(window).height();
           var divPositions = _.map($(".hasLatLng"), function (n) {
@@ -610,32 +611,45 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
           var percentage = 0;
           _.each(divPositions, function (n, index) {
             if (n <= currentScroll && divPositions[index + 1] > currentScroll) { //would work for  1st checkIn till second last checkin coz divPositions[index + 1] would return false
-              console.log("inside 1st if");
+              // console.log("inside 1st if");
               ith = index;
               if (n > 0) {
-                percentage = ((currentScroll - n) / divHeights[index]) * 100;     //percentage based on size of div
+                percentage = ((currentScroll - n) / divHeights[index]) * 100; //percentage based on size of div
                 if (ith > 0) {
                   if (percentage <= 100) {
+                    // console.log("<=100");
+                    flag = true;
+                    // console.log(flag);
                     pointsForLine(ith, percentage, true);
-                } else {                                                          //else condion is given coz polyline should exceed beyond 100%
-                    pointsForLine(ith, 100, true);
+                  } else {
+                    // console.log(">100");
+                    // console.log(flag); //else condion is given coz polyline should exceed beyond 100%
+                    pointsForLine(ith, 100, true, flag);
+                    flag = false;
                   }
-                } else if (!_.isEmpty(line[1])) {         //clearing 1st polyLine
+                } else if (!_.isEmpty(line[1])) { //clearing 1st polyLine
                   line[1].setMap(null);
                   line[1] = {};
                 }
               }
               return false;
-            } else if ((n <= currentScroll) && (index == (divPositions.length - 1))) {      //for last checkIn
-              console.log("last div Reached");
+            } else if ((n <= currentScroll) && (index == (divPositions.length - 1))) { //for last checkIn
+              // console.log("last div Reached");
               ith = index;
-              percentage = ((currentScroll - n) / divHeights[index]) * 100;   //percentage based on size of div
-              if (percentage <= 100) {                
-                pointsForLine(ith, percentage, true);
-              } else {                                //else condion is given coz polyline should exceed beyond 100%
+              percentage = ((currentScroll - n) / divHeights[index]) * 100; //percentage based on size of div
+              if (percentage <= 100) {
+                // console.log("<=100");
+                flag = true;
+                // console.log(flag);
+                pointsForLine(ith, percentage, true, true);
+
+              } else {
+                // console.log(">100"); //else condion is given coz polyline should exceed beyond 100%
+                // console.log(flag);
                 pointsForLine(ith, 100, true);
+                flag = false;
               }
-            } else if (n > currentScroll) {           //clearing 1st polyLine if none of the checkin is diplayed on the initial window page
+            } else if (n > currentScroll) { //clearing 1st polyLine if none of the checkin is diplayed on the initial window page
               if (!_.isEmpty(line[1])) {
                 line[1].setMap(null);
                 line[1] = {};

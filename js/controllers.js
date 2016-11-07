@@ -8,10 +8,11 @@ var globalGetProfile = function (data, status) {
 };
 var pointsForLine;
 var line = [];
+var markers = [];
 var travelPath;
 var initMap = function () {};
 var map;
-var markers = [];
+markers[0] = {};
 angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
 .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
@@ -955,6 +956,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       return {};
     });
 
+    _.map(centers, function () {
+      markers.push({});
+    });
+
     initMap = function () {
 
 
@@ -971,16 +976,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // styles: mapStyle
         });
 
-        function redLineDraw(i, departure, arrival, percentComplete, value) {
+        function redLineDraw(i, departure, arrival, percentComplete, value, flag) {
+          // console.log(percentComplete, flag);
           var xdiff = (centers[i].lat - centers[i - 1].lat);
           var ydiff = (centers[i].lng - centers[i - 1].lng);
-          if (Math.abs(xdiff) < 4) {
-            smoothZoom(map, 10, map.getZoom());
-            // map.setZoom(10);
-          } else {
-            smoothZoom(map, 4, map.getZoom());
-            // map.setZoom(4)
+          // console.log(xdiff);
+
+          if (Math.abs(xdiff) < 4 && value) {
+            smoothZoom(map, 9, map.getZoom(), true); //for zooming in
+          } else if (Math.abs(xdiff) > 4 && value) {
+            smoothZoom(map, 4, map.getZoom(), false); //for zooming out
           }
+
           var frac1 = xdiff / 100;
           var frac2 = ydiff / 100;
           var iniLat = centers[i - 1].lat;
@@ -991,8 +998,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             strokeOpacity: 1,
             scale: 4
           };
-          if (percentComplete >= 100) {
-            setMarker(true, centers[i]);
+          if (percentComplete == 100 && flag) {
+            // console.log(i+1);
+            setMarker(true, centers[i], i + 1);
           }
           if (_.isEmpty(line[i])) {
             line[i] = new google.maps.Polyline({
@@ -1036,27 +1044,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           drawLine(departure, arrival, percentComplete, i, value);
         };
 
-        function setMarker(status, n) {
-          var position = new google.maps.LatLng(n.lat, n.lng);
-          bounds.extend(position);
-          var obj = {
-            position: position,
-            map: map,
-            icon: "img/maps/small-marker.png"
-          };
-          if (status) {
-            obj.icon = "img/maps/marker.png";
+        function setMarker(status, n, i) {
+          var jump = centers.length;
+          // console.log(i);
+          if (_.isEmpty(markers[i])) {
+            // console.log("newly created");
+            var position = new google.maps.LatLng(n.lat, n.lng);
+            bounds.extend(position);
+            var obj = {
+              position: position,
+              map: map,
+              icon: "img/maps/small-marker.png"
+            };
+            if (status) {
+              obj.icon = "img/maps/marker.png";
+            }
+            marker = new google.maps.Marker(obj);
+            markers[i] = marker;
+            // console.log(markers);
+          } else {
+            // console.log("old");
+            markers[i].setIcon("img/maps/marker.png");
           }
-          marker = new google.maps.Marker(obj);
-          markers.push(marker);
-          // console.log(markers);
         }
 
-
-        _.each(centers, function (n) {
-          setMarker(false, n);
+        _.each(centers, function (n, index) {
+          setMarker(false, n, index + 1);
         });
-        setMarker(true, centers[0]);
+        setMarker(true, centers[0], 1);
 
         //Grey static polylines starts here
         travelPath = new google.maps.Polyline({
@@ -1067,55 +1082,65 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           strokeWeight: 1
         });
         travelPath.setMap(map);
-        //Grey static polylines starts here
+        //Grey static polylines ends here
 
-        function smoothZoom(map, zoomToBeDone, alreadyZoomed) {
-          if (zoomToBeDone < alreadyZoomed) { //for zooming out
-            z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
-              google.maps.event.removeListener(z);
-              smoothZoom(map, zoomToBeDone, alreadyZoomed - 1);
-            });
-            setTimeout(function () {
-              map.setZoom(alreadyZoomed)
-            }, 500); // 80ms is what I found to work well on my system -- it might not work well on all systems
-          } else if (zoomToBeDone > alreadyZoomed) { //for zooming in
-            z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
-              google.maps.event.removeListener(z);
-              smoothZoom(map, zoomToBeDone, alreadyZoomed + 1);
-            });
-            setTimeout(function () {
-              map.setZoom(alreadyZoomed)
-            }, 500); // 80ms is what I found to work well on my system -- it might not work well on all systems
-          } else if (alreadyZoomed == zoomToBeDone) {
-            return;
+        function smoothZoom(map, level, cnt, mode) {
+          if (mode == true) {
+            if (cnt > level) {      //zooming in
+              return;
+            } else {
+              var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
+                google.maps.event.removeListener(z);
+                smoothZoom(map, level, cnt + 1, true);
+              });
+              setTimeout(function () {
+                map.setZoom(cnt)
+              }, 1);
+            }
+          } else {
+            if (cnt <= (level-1)) {   //zooming out
+              return;
+            } else {
+              var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
+                google.maps.event.removeListener(z);
+                smoothZoom(map, level, cnt - 1, false);
+              });
+              setTimeout(function () {
+                map.setZoom(cnt)
+              }, 1);
+            }
           }
         }
 
-        pointsForLine = function (i, percentComplete, value) {
+        pointsForLine = function (i, percentComplete, value, flag) {
+          // console.log(percentComplete, flag)
           var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
           var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
           step = 0;
-          redLineDraw(i, departure, arrival, percentComplete, value);
+          redLineDraw(i, departure, arrival, percentComplete, value, flag);
           var linesCount = line.length - 1;
-
+          var markerCount = markers.length - 1;
           //clearPolyLines starts
           while ((linesCount >= (i + 1)) && (value)) {
-            console.log(i);
-            console.log(linesCount + "--->" + line[linesCount]);
+            // console.log(i);
+            // console.log(linesCount + "--->" + line[linesCount]);
             if (!_.isEmpty(line[linesCount])) {
-              console.log("inside clearing lines");
+              // console.log("inside clearing lines");
               line[linesCount].setMap(null);
               line[linesCount] = {};
-              console.log("line  " + linesCount + "  cleared");
-              console.log(line);
-
-              if (percentComplete < 100) {
-                //  setMarker(false, centers[linesCount]);
-                centers[linesCount].setMap(null);
-              }
+              // console.log("line  " + linesCount + "  cleared");
+              // console.log(line);
             };
+            // markers[linesCount].setIcon("img/maps/small-marker.png");
             linesCount--;
           };
+
+          while ((i < markerCount) && (value == true) && (percentComplete < 100)) {
+            console.log(markerCount);
+            console.log(percentComplete);
+            markers[markerCount].setIcon("img/maps/small-marker.png");
+            markerCount--;
+          }
           //clearPolyLines ends
 
           //draw succeeding polyLines starts
