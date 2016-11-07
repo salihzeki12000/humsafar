@@ -1018,7 +1018,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             });
           }
 
-          
+          // function offsetCenter(latlng, offsetx, offsety) {
+
+          //   // latlng is the apparent centre-point
+          //   // offsetx is the distance you want that point to move to the right, in pixels
+          //   // offsety is the distance you want that point to move upwards, in pixels
+          //   // offset can be negative
+          //   // offsetx and offsety are both optional
+
+          //   var scale = Math.pow(2, map.getZoom());
+
+          //   var worldCoordinateCenter = map.getProjection().fromLatLngToPoint(latlng);
+          //   var pixelOffset = new google.maps.Point((offsetx / scale) || 0, (offsety / scale) || 0);
+
+          //   var worldCoordinateNewCenter = new google.maps.Point(
+          //     worldCoordinateCenter.x - pixelOffset.x,
+          //     worldCoordinateCenter.y + pixelOffset.y
+          //   );
+
+          //   var newCenter = map.getProjection().fromPointToLatLng(worldCoordinateNewCenter);
+
+          //   map.setCenter(newCenter);
+
+          // }
 
 
 
@@ -1042,7 +1064,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 "lng": iniLng + (centers[i].lng - centers[i - 1].lng) / 2
               }
             }
+            // offsetCenter(center, 100, 0);
+
             map.setCenter(center);
+            
+            var h = setInterval(function() {
+              
+            map.panBy(-1.5,0);
+            },100);
             //moving center ends here
 
             // if (percent >= 100) {
@@ -1094,7 +1123,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
         function smoothZoom(map, level, cnt, mode) {
           if (mode == true) {
-            if (cnt > level) {      //zooming in
+            if (cnt > level) { //zooming in
               return;
             } else {
               var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
@@ -1106,7 +1135,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               }, 1);
             }
           } else {
-            if (cnt <= (level-1)) {   //zooming out
+            if (cnt <= (level - 1)) { //zooming out
               return;
             } else {
               var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
