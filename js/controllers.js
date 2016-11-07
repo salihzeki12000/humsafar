@@ -1068,10 +1068,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
             map.setCenter(center);
             
-            var h = setInterval(function() {
-              
-            map.panBy(-1.5,0);
-            },100);
+           
+            map.panBy(-150,0);
+          
             //moving center ends here
 
             // if (percent >= 100) {
