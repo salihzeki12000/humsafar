@@ -713,15 +713,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Used to name the .html file
 
     // console.log("Testing Consoles");
-    var id = $stateParams.id;
+    $scope.userData = $.jStorage.get("profile");
+    var slug = $stateParams.id;
     var formData = {
-      "_id": id,
+      "urlSlug": slug,
       "type": "tripSummary"
     };
     var callback = function (summary) {
       $scope.trip = summary;
     }
-    OnGoJourney.getTripSummary(formData, callback)
+    OnGoJourney.getTripSummary(formData, callback);
 
     $scope.template = TemplateService.changecontent("tripsummary");
     $scope.menutitle = NavigationService.makeactive("TripSummary");
@@ -784,13 +785,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //     travelTypeIcon: "img/ongojourney/location.png"
     //   }];
 
+
+
+
+
+
   })
   .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, $state, $stateParams) {
     //Used to name the .html file
-    var id = $stateParams.id;
+    var slug = $stateParams.id;
     var checkinCount = "";
     $scope.userData = $.jStorage.get("profile");
-
+    $scope.review = "";
     var getOneJourney = function (journeys) {
       $scope.journey = journeys;
       // centers1=_.map($scope.journey.post, 'location');
@@ -801,7 +807,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     OnGoJourney.getOneJourney({
-      "_id": id
+      "urlSlug": slug
     }, getOneJourney, function (err) {
       console.log(err);
     });
@@ -1067,10 +1073,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             // offsetCenter(center, 100, 0);
 
             map.setCenter(center);
-            
-           
-            map.panBy(-150,0);
-          
+
+
+            map.panBy(-150, 0);
+
             //moving center ends here
 
             // if (percent >= 100) {
@@ -1555,30 +1561,58 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //rating country
     // country modal
     var modal = "";
+
+    $scope.review = {};
     $scope.countryReview = function () {
       $scope.reviewCountryCount = 0;
+      $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
+      $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
+
       modal = $uibModal.open({
         animation: true,
         templateUrl: "views/modal/review-country.html",
         scope: $scope,
         backdropClass: "review-backdrop",
-      })
+      }).closed.then(function(){
+        OnGoJourney.getOneJourney({
+      "urlSlug": slug
+    }, getOneJourney, function (err) {
+      console.log(err);
+    });
+});
     };
+
     // country modal ends
+
     $scope.rateThisCountry = function (journeyId, countryId, formData) {
+
         var result = {
           journey: journeyId,
           country: countryId,
           review: formData.fillMeIn,
           rating: formData.rate
         };
-        OnGoJourney.rateThisCountry(result);
-        console.log(result);
-        $scope.reviewCountryCount = $scope.reviewCountryCount + 1;
+        var callback = function () {
+          $scope.reviewCountryCount = $scope.reviewCountryCount + 1;
+          $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
+          $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
+          console.log($scope.journey.review[$scope.reviewCountryCount].review, $scope.journey.review[$scope.reviewCountryCount].rating);
+          console.log($scope.review.fillMeIn, $scope.review.rate);
+        }
+        OnGoJourney.rateThisCountry(result, callback);
+
+        //  test=$scope.journey.review[$scope.reviewCountryCount].review
+        // $scope.review.fillM=test;
+        // console.log($scope.review.fil);
+        // $scope.review.fillMeIn=$scope.journey.review[$scope.reviewCountryCount].review;
+
         var len = $scope.journey.countryVisited.length;
         if ($scope.reviewCountryCount > len - 1) {
           modal.close();
         }
+        modal.closed.then(function () {
+          console.log("adasdas");
+        });
       }
       // Rating country ends
     $scope.hoveringOver = function (value) {

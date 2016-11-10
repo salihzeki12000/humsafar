@@ -68,7 +68,7 @@
                         <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
                           <i class="fa fa-clock-o mr5 ml5">{{life.startTime|formatDate: 'time'}}</i> <span>{{life.timestampHour}}</span></p>
                       </div>
-                      <div class="travelled-journey relate" ng-hide="life.onJourney" ui-sref="ongojourney({id:life._id})">
+                      <div class="travelled-journey relate" ng-hide="life.onJourney" ui-sref="ongojourney({id:life.urlSlug})">
                         <div class="travelled-imgholder">
                           <img ng-src="{{life.coverPhoto|uploadpath}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto!=null">
                           <img ng-src="{{life.startLocationPic|small|uploadpath}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto==null">
@@ -126,7 +126,7 @@
                                 </ul>
                               </div>
                               <div class="days-spent inline-block">
-                                <p><span class="block">{{life.travelledDay}}</span> Days</p>
+                                <p><span class="block">{{"current"|dateDifference: life.startTime}}</span> Days</p>                                
                               </div>
                             </div>
                           </div>
@@ -163,7 +163,9 @@
                                 <span>{{life.cost}}</span>
                               </div>
                               <div class="days-spent">
-                                <p><span class="block">{{life.spendingDay}}</span>Days</p>
+                                
+                                <p><span class="block"></span>Days</p>
+                               
                               </div>
                             </div>
                           </div>

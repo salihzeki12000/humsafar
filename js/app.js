@@ -194,12 +194,12 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'HolidayCtrl'
     })
     .state('ongojourney', {
-      url: "/ongojourney/id:id",
+      url: "/ongojourney/:id",
       templateUrl: "views/template.html",
       controller: 'OnGoJourneyCtrl'
     })
     .state('tripsummary', {
-      url: "/tripsummary/id:id",
+      url: "/tripsummary/:id",
       templateUrl: "views/template.html",
       controller: 'TripSummaryCtrl'
     })
@@ -536,6 +536,55 @@ firstapp.filter('kindOfJourney', function () {
   };
 });
 
+firstapp.filter('kindOfCheckIn', function () {
+  return function (input) {
+    var returnVal = "";
+    switch (input) {
+      case "Cinema & Theatre":
+        returnVal = "img/icons/smallcinema.png";
+        break;
+      case "Restaurants & Bars":
+        returnVal = "img/icons/resto.png";
+        break;
+      case "Shopping":
+        returnVal = "img/icons/smallshopping.png";
+        break;
+      case "Transportation":
+        returnVal = "img/icons/smallairport.png";
+        break;
+      case "Nature and Parks":
+        returnVal = "img/icons/smallnature.png";
+        break;
+      case "Sights and Landmarks":
+        returnVal = "img/icons/smallsight.png";
+        break;
+      case "Museums and Galleries":
+        returnVal = "img/icons/smallmuseums.png";
+        break;
+      case "Zoo and Aquariums":
+        returnVal = "img/icons/smallzoos.png";
+        break;
+      case "Religious":
+        returnVal = "img/icons/smallreligious.png";
+        break;
+      case "Hotels and Accomodations":
+        returnVal = "img/icons/smallhotels.png";
+        break;
+      case "Others":
+        returnVal = "img/icons/smallothers.png";
+        break;
+      case "Other":
+        returnVal = "img/smallothers.png";
+        break;
+      case "City":
+        returnVal = "img/city.png";
+        break;
+    }
+    console.log(input, returnVal);
+    return returnVal;
+  };
+});
+
 firstapp.directive('fileModel', ['$parse', function ($parse) {
   return {
     restrict: 'A',
@@ -661,3 +710,46 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
     }
   };
 }]);
+
+firstapp.filter('postString', function () {
+  return function (checkIn) {
+    var postString = "";
+    var buddiesString="";
+    var buddiesCount=checkIn.buddies.length;
+    
+            if (buddiesCount == 1) {
+                buddiesString = checkIn.buddies[0].name.bold();
+            } else if (buddiesCount == 2) {
+                buddiesString = checkIn.buddies[0].name.bold() + " and " + checkIn.buddies[1].name.bold();
+            } else if (buddiesCount >= 2) {
+                buddiesString = checkIn.buddies[0].name.bold() + " and " + (buddiesCount - 1) + "others ";
+            }
+            var postString = "";
+            // $filter('category')(checkIn.category) +
+            if(buddiesString!=""){
+                if (checkIn.thoughts && checkIn.location) {
+                  postString = checkIn.thoughts.bold() + " with " + buddiesString + " at " + checkIn.location.bold();
+              } else if (checkIn.thoughts) {
+                  postString = checkIn.thoughts.bold() + " with " + buddiesString;
+              } else if (checkIn && checkIn.location) {
+                  postString = checkIn.postCreator.name.bold() + " with " + buddiesString + " at " + checkIn.location.bold();
+              } else {
+                  postString = checkIn.postCreator.name.bold() + " with " + buddiesString;
+              }
+            }else{
+                  if (checkIn.thoughts && checkIn.location) {
+                  postString = checkIn.thoughts.bold()  +" at " + checkIn.location.bold();
+              } else if (checkIn.thoughts) {
+                  postString = checkIn.thoughts.bold();
+              } else if (checkIn && checkIn.location) {
+                  postString = checkIn.postCreator.name.bold() + " at " + checkIn.location.bold();
+              } else {
+                  postString = checkIn.postCreator.name.bold() ;
+              }
+            }
+            
+            
+            return postString;
+  }
+  
+});
