@@ -380,7 +380,7 @@ firstapp.directive('uploadImage', function ($http, $filter) {
     templateUrl: 'views/directive/uploadFile.html',
     scope: {
       model: '=ngModel',
-      callback: "=ngCallback"
+      callback: "=ngCallback",
     },
     link: function ($scope, element, attrs) {
 
@@ -443,7 +443,9 @@ firstapp.directive('uploadImage', function ($http, $filter) {
         }).success(function (data) {
 
           if ($scope.callback) {
+            console.log("inside callback");
             $scope.callback(data);
+            
           } else {
             $scope.uploadStatus = "uploaded";
             if ($scope.isMultiple) {

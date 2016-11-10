@@ -1208,15 +1208,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
 
-    // checkin
-    $scope.editCheckIn = function () {
-      $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/checkin.html",
-        backdropClass: "review-backdrop",
-        scope: $scope
-      });
-    };
+
 
     // $scope.$on('$viewContentLoaded', function(event) {
     //   $timeout(function(){
@@ -1227,25 +1219,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //     },100);
     // });
 
-    $scope.listFriend = [{
-      img: "img/profile.jpg",
-      name: "Amit Verma"
-    }, {
-      img: "img/profile.jpg",
-      name: "Vignesh Kasturi"
-    }, {
-      img: "img/profile.jpg",
-      name: "Dhavel Gala"
-    }, {
-      img: "img/profile.jpg",
-      name: "Pooja Thakre"
-    }, {
-      img: "img/profile.jpg",
-      name: "Vinod Bhelose"
-    }, {
-      img: "img/profile.jpg",
-      name: "Rishabh Katoch"
-    }, ];
+   
     // $scope.myImage = '';
     // $scope.myCroppedImage = '';
     // $scope.viewImage = false;
@@ -1532,32 +1506,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, 100);
 
 
-    $scope.uploadImage = true;
-    $scope.viewUploadedImg = false;
-    $scope.previewFile = function (val) {
-      var interval = $interval(function () {
-        var preview = document.getElementById('img' + (val));
-        console.log('img' + (val)); 
-        var file   = document.getElementById('upload' + (val)).files[0];
-        console.log(preview);
-        console.log(file);
-        var reader  = new FileReader();
-        reader.addEventListener("load", function () {  
-          preview.src = reader.result; 
-        }, false);
-        if (file) {  
-          $scope.uploadImage = false;
-          $scope.viewUploadedImg = true;
-          reader.readAsDataURL(file);
-          $interval.cancel(interval);
-        }
-      }, 1000);
-    };
-    $scope.returnUpload = function () {
-      $scope.viewUploadedImg = false;
-      $scope.uploadImage = true;
-    };
-    $scope.checkinUpload = [{}, {}, {}];
+//place for checkin upload
+
+
+
+
+   
     //rating country
     // country modal
     var modal = "";
@@ -1573,13 +1527,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         templateUrl: "views/modal/review-country.html",
         scope: $scope,
         backdropClass: "review-backdrop",
-      }).closed.then(function(){
+      }).closed.then(function () {
         OnGoJourney.getOneJourney({
-      "urlSlug": slug
-    }, getOneJourney, function (err) {
-      console.log(err);
-    });
-});
+          "urlSlug": slug
+        }, getOneJourney, function (err) {
+          console.log(err);
+        });
+      });
     };
 
     // country modal ends
@@ -7786,6 +7740,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.oneAtATime = true;
+  $scope.$on('$viewContentLoaded', function () {
+    $timeout(function () {
+      $("#remainingC").html("00 / 500");
+      $('textarea').keypress(function () {
+
+        if (this.value.length > 500) {
+          return false;
+        }
+        $("#remainingC").html((this.value.length) + " / 500");
+      });
+    });
+  });
 })
 
 .controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {

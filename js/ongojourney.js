@@ -115,6 +115,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
     templateUrl: 'views/directive/journey-post.html',
     link: function ($scope, element, attrs) {
       // console.log($scope.ongo);
+      var modal="";
       $scope.ongo.journeyTypeicon = "";
       // type of post starts
       $scope.ongo.typeOfPost = "";
@@ -278,6 +279,125 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           backdropClass: "review-backdrop",
         })
       };
+
+      // checkin
+    $scope.editCheckIn = function () {
+      
+      console.log("inside edit checkin of controlller");
+      console.log($scope.ongo._id,$scope.ongo.uniqueId);
+      $scope.editPost={};
+      $scope.callback=function(data){
+        console.log(data);
+        var obj={
+          "name":data.data[0],
+              "caption":""
+        }
+        $scope.editPost.photosArr.push(obj);
+      };
+     $scope.editPost.photosArr=[];
+     $scope.editPost.videosArr=[];
+     $scope.editPost.newPhotosArr=[];
+     $scope.editPost.newVideosArr=[];
+      //$scope.editPost.buddiesArr=
+    
+      
+     _.each($scope.ongo.photos,function(n,index){
+       $scope.editPost.photosArr[index]=_.pick(n, ['_id', 'name','caption']);
+     
+     })
+      console.log($scope.editPost); 
+       $scope.listFriend = [{
+      img: "img/profile.jpg",
+      name: "Amit Verma"
+    }, {
+      img: "img/profile.jpg",
+      name: "Vignesh Kasturi"
+    }, {
+      img: "img/profile.jpg",
+      name: "Dhavel Gala"
+    }, {
+      img: "img/profile.jpg",
+      name: "Pooja Thakre"
+    }, {
+      img: "img/profile.jpg",
+      name: "Vinod Bhelose"
+    }, {
+      img: "img/profile.jpg",
+      name: "Rishabh Katoch"
+    }, ];     
+      modal=$uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/checkin.html",
+        backdropClass: "review-backdrop",
+        scope: $scope
+      }).closed.then(function () {
+        OnGoJourney.getOneJourney({
+          "urlSlug": slug
+        }, getOneJourney, function (err) {
+          console.log(err);
+        });
+      });
+    };
+
+    $scope.saveEditedPost=function(){
+      console.log($scope.editPost);
+      var concatedArray=_.partition($scope.editPost.photosArr, '_id');
+      var formData={
+        "_id":$scope.ongo._id,
+        "uniqueId":$scope.ongo.uniqueId,
+        "buddiesArr":[],
+        "photosArr":concatedArray[0],
+        "videosArr":[],
+        "newPhotosArr":concatedArray[1],
+        "newVideosArr":[],
+        "thoughts":$scope.ongo.thoughts,
+        "type":"editPost"
+      }
+      console.log(formData);
+      $http({
+        url: adminURL + "/post/editDataWeb",
+          method: "POST",
+          data: formData
+      }).success(function(){
+        modal.close();
+      });
+    }
+
+    $scope.deleteFromPhotoArr=function(name){
+      console.log(name);
+     $scope.editPost.photosArr= _.reject($scope.editPost.photosArr, ['name', name]);
+     console.log($scope.editPost.photosArr);
+    }
+
+
+//////////////////////////////////
+     $scope.uploadImage = true;
+    $scope.viewUploadedImg = false;
+    $scope.previewFile = function (val) {
+      var interval = $interval(function () {
+        var preview = document.getElementById('img' + (val));
+        console.log('img' + (val)); 
+        var file   = document.getElementById('upload' + (val)).files[0];
+        console.log(preview);
+        console.log(file);
+        var reader  = new FileReader();
+        reader.addEventListener("load", function () {  
+          preview.src = reader.result; 
+        }, false);
+        if (file) {  
+          $scope.uploadImage = false;
+          $scope.viewUploadedImg = true;
+          reader.readAsDataURL(file);
+          $interval.cancel(interval);
+        }
+      }, 1000);
+    };
+    $scope.returnUpload = function () {
+      $scope.viewUploadedImg = false;
+      $scope.uploadImage = true;
+    };
+    $scope.checkinUpload = [{}, {}, {}];
+////////////////////////////
       $scope.editOption = function (model) {
 
         $timeout(function () {
