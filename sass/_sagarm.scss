@@ -320,7 +320,7 @@
 }
 
 .agent-user-content {
-  background-color: #fff;
+  // background-color: #fff;
 
   .pad-btn {
     padding: 0 0 10px 30px;
@@ -505,9 +505,17 @@
 
 .agt-usr-itinerary,
 .agt-usr-tourpackages,
-.agt-usr-photosvideos {
+.agt-usr-photosvideos,
+.agt-usr-testimonialreviews{
   margin-bottom: 10px;
   padding: 40px 0;
+}
+
+.agt-usr-itinerary,
+.agt-usr-tourpackages,
+.agt-usr-photosvideos,
+.agt-usr-aboutus{
+  background-color: #fff;
 }
 
 .itinerary-cardhead {
@@ -594,5 +602,76 @@
     max-width: 100%;
     max-height: 100%;
     width: 100%;
+  }
+}
+
+.testimonial-card{
+  background-color:rgba(255,255,255,0.7);
+  border-radius: 5px;
+  padding:20px  15px;
+    margin: 10px;
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+  }
+}
+.testimonal-agent {
+  background-color: transparent;
+}
+
+.testimonial-comment{
+  border-bottom: 1px solid #fff;
+  margin: 10px 0;
+  font-size: 18px;
+    text-align: center;
+    color: $brand-blue;
+    font-style: italic;
+}
+
+.testimonial-details{
+  margin:10px 0;
+}
+.testprofile-holder{
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.testprofile-name{
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 10px;
+  p{
+    margin: 0;
+  }
+}
+
+.testimonial-rate{
+  p{
+    font-size: 24px;
+    line-height: 1;
+    color: $brand-pink;
+    margin: 0;
+  }
+  span{
+    font-size: 14px;
+    line-height: 1;
+    color: $brand-blue;
+  }
+}
+
+.testimonial-quote{
+  &:after{}
+}
+q {
+    quotes: """ """;
+}
+
+.agt-usr-testimonialreviews{
+  .col-md-4{
+    padding: 0;
   }
 }

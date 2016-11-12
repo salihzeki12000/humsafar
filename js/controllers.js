@@ -383,17 +383,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     };
     $scope.profile = $.jStorage.get("profile");
-    if ($scope.profile.gender != "") {
-      $scope.userData.gender = $scope.profile.gender;
-      if ($scope.profile.gender == "male") {
-        $scope.gender = 1;
-      } else {
-        $scope.gender = 2;
-      }
-    }
-    if ($scope.profile.profilePicture != null) {
-      $scope.userData.profilePicture = $scope.profile.profilePicture;
-    }
+    // if ($scope.profile.gender != "") {
+    //   $scope.userData.gender = $scope.profile.gender;
+    //   if ($scope.profile.gender == "male") {
+    //     $scope.gender = 1;
+    //   } else {
+    //     $scope.gender = 2;
+    //   }
+    // }
+    // if ($scope.profile.profilePicture != null) {
+    //   $scope.userData.profilePicture = $scope.profile.profilePicture;
+    // }
     $scope.changeGender = function (id, name) {
       $scope.gender = id;
       $scope.userData.gender = name;
@@ -7818,7 +7818,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         break;
       case 2:
         url = "usr-photovideos";
-        $scope.agtuseroptions.active = "usr-photovideos";
+        $scope.agtuseroptions.active = "usr-photovideos";;
         break;
       case 3:
         url = "usr-testimonialreviews";
@@ -7860,6 +7860,64 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     '../img/bg-blur.jpg',
     '../img/blog-banner.jpg',
     '../img/follower.jpg'
+  ];
+
+  $scope.testimonialreview = [
+    {
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    },{
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    },{
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, text ever since the 1500s,',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    },{
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text evers,',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    },{
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    },{
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    },{
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    },{
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    },{
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    }
   ];
 })
 
