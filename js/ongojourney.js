@@ -66,7 +66,7 @@ var ongojourney = angular.module('ongojourney', [])
         callback(formData.name)
       });
     },
-    rateThisCountry: function (formData,callback) {
+    rateThisCountry: function (formData, callback) {
       $http({
         url: adminURL + "/review/saveWeb",
         method: "POST",
@@ -115,7 +115,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
     templateUrl: 'views/directive/journey-post.html',
     link: function ($scope, element, attrs) {
       // console.log($scope.ongo);
-      var modal="";
+
       $scope.ongo.journeyTypeicon = "";
       // type of post starts
       $scope.ongo.typeOfPost = "";
@@ -257,10 +257,149 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         });
 
       };
+
+      // checkin
+      var modal = "";
+      $scope.editCheckIn = function () {
+        $scope.editPost = {};
+        $scope.callback = function (data) {
+          console.log(data);
+          var obj = {
+            "name": data.data[0],
+            "caption": ""
+          }
+          $scope.editPost.photosArr.push(obj);
+        };
+        $scope.editPost.photosArr = [];
+        $scope.editPost.videosArr = [];
+        $scope.editPost.newPhotosArr = [];
+        $scope.editPost.newVideosArr = [];
+        _.each($scope.ongo.photos, function (n, index) {
+          $scope.editPost.photosArr[index] = _.pick(n, ['_id', 'name', 'caption']);
+
+        });
+        //    $scope.listFriend = [{
+        //   img: "img/profile.jpg",
+        //   name: "Amit Verma"
+        // }, {
+        //   img: "img/profile.jpg",
+        //   name: "Vignesh Kasturi"
+        // }, {
+        //   img: "img/profile.jpg",
+        //   name: "Dhavel Gala"
+        // }, {
+        //   img: "img/profile.jpg",
+        //   name: "Pooja Thakre"
+        // }, {
+        //   img: "img/profile.jpg",
+        //   name: "Vinod Bhelose"
+        // }, {
+        //   img: "img/profile.jpg",
+        //   name: "Rishabh Katoch"
+        // }, ];     
+        console.log(modal);
+        modal = $uibModal.open({
+          animation: true,
+          templateUrl: "views/modal/checkin.html",
+          backdropClass: "review-backdrop",
+          scope: $scope
+        });
+        modal.closed.then(function () {
+
+        });
+
+      };
+
+      $scope.saveEditedPost = function () {
+        console.log($scope.editPost);
+        var concatedArray = _.partition($scope.editPost.photosArr, '_id');
+        var callback=function () {
+          console.log(modal);
+          OnGoJourney.getOneJourney({
+            "urlSlug": $scope.json.urlSlug
+          }, function (journeys) {
+            var post=_.find(journeys.post,['_id',$scope.ongo._id]);
+            $scope.ongo.photos=post.photos;
+            console.log("photos of this post updated successfully");
+          }, function (err) {
+            console.log(err);
+          });
+          modal.close();
+        }
+        var formData = {
+          "_id": $scope.ongo._id,
+          "uniqueId": $scope.ongo.uniqueId,
+          "buddiesArr": [],
+          "photosArr": concatedArray[0],
+          "videosArr": [],
+          "newPhotosArr": concatedArray[1],
+          "newVideosArr": [],
+          "thoughts": $scope.ongo.thoughts,
+          "type": "editPost"
+        }
+        console.log(formData);
+        $http({
+          url: adminURL + "/post/editDataWeb",
+          method: "POST",
+          data: formData
+        }).success(callback);
+      }
+
+      $scope.deleteFromPhotoArr = function (name) {  
+        $scope.editPost.photosArr = _.reject($scope.editPost.photosArr, ['name', name]);     
+      };
+
+
+      //////////////////////////////////
+      $scope.uploadImage = true;
+      $scope.viewUploadedImg = false;
+      $scope.previewFile = function (val) {
+        var interval = $interval(function () {
+          var preview = document.getElementById('img' + (val));
+          console.log('img' + (val)); 
+          var file   = document.getElementById('upload' + (val)).files[0];
+          console.log(preview);
+          console.log(file);
+          var reader  = new FileReader();
+          reader.addEventListener("load", function () {  
+            preview.src = reader.result; 
+          }, false);
+          if (file) {  
+            $scope.uploadImage = false;
+            $scope.viewUploadedImg = true;
+            reader.readAsDataURL(file);
+            $interval.cancel(interval);
+          }
+        }, 1000);
+      };
+      $scope.returnUpload = function () {
+        $scope.viewUploadedImg = false;
+        $scope.uploadImage = true;
+      };
+      $scope.checkinUpload = [{}, {}, {}];
+      ////////////////////////////
+      $scope.editOption = function (model) {
+
+        $timeout(function () {
+          model.backgroundClick = true;
+          backgroundClick.object = model;
+        }, 200);
+
+        backgroundClick.scope = $scope;
+      };
+      $scope.notify = function () {
+        $uibModal.open({
+          templateUrl: "views/modal/notify.html",
+          animation: true,
+          scope: $scope,
+          windowClass: "notify-popup"
+        });
+      }
+
       $scope.time = {};
       $scope.datetime = {};
-      $scope.changeDate = function (date) {
-        console.log(date);
+      $scope.changeDate = function () {
+        date = $scope.ongo.UTCModified
         var d = new Date(date);
         var hh = d.getHours();
         if (hh > 12) {
@@ -280,142 +419,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         })
       };
 
-      // checkin
-    $scope.editCheckIn = function () {
-      
-      console.log("inside edit checkin of controlller");
-      console.log($scope.ongo._id,$scope.ongo.uniqueId);
-      $scope.editPost={};
-      $scope.callback=function(data){
-        console.log(data);
-        var obj={
-          "name":data.data[0],
-              "caption":""
-        }
-        $scope.editPost.photosArr.push(obj);
-      };
-     $scope.editPost.photosArr=[];
-     $scope.editPost.videosArr=[];
-     $scope.editPost.newPhotosArr=[];
-     $scope.editPost.newVideosArr=[];
-      //$scope.editPost.buddiesArr=
-    
-      
-     _.each($scope.ongo.photos,function(n,index){
-       $scope.editPost.photosArr[index]=_.pick(n, ['_id', 'name','caption']);
-     
-     })
-      console.log($scope.editPost); 
-       $scope.listFriend = [{
-      img: "img/profile.jpg",
-      name: "Amit Verma"
-    }, {
-      img: "img/profile.jpg",
-      name: "Vignesh Kasturi"
-    }, {
-      img: "img/profile.jpg",
-      name: "Dhavel Gala"
-    }, {
-      img: "img/profile.jpg",
-      name: "Pooja Thakre"
-    }, {
-      img: "img/profile.jpg",
-      name: "Vinod Bhelose"
-    }, {
-      img: "img/profile.jpg",
-      name: "Rishabh Katoch"
-    }, ];     
-      modal=$uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/checkin.html",
-        backdropClass: "review-backdrop",
-        scope: $scope
-      }).closed.then(function () {
-        OnGoJourney.getOneJourney({
-          "urlSlug": slug
-        }, getOneJourney, function (err) {
-          console.log(err);
-        });
-      });
-    };
 
-    $scope.saveEditedPost=function(){
-      console.log($scope.editPost);
-      var concatedArray=_.partition($scope.editPost.photosArr, '_id');
-      var formData={
-        "_id":$scope.ongo._id,
-        "uniqueId":$scope.ongo.uniqueId,
-        "buddiesArr":[],
-        "photosArr":concatedArray[0],
-        "videosArr":[],
-        "newPhotosArr":concatedArray[1],
-        "newVideosArr":[],
-        "thoughts":$scope.ongo.thoughts,
-        "type":"editPost"
-      }
-      console.log(formData);
-      $http({
-        url: adminURL + "/post/editDataWeb",
-          method: "POST",
-          data: formData
-      }).success(function(){
-        modal.close();
-      });
-    }
-
-    $scope.deleteFromPhotoArr=function(name){
-      console.log(name);
-     $scope.editPost.photosArr= _.reject($scope.editPost.photosArr, ['name', name]);
-     console.log($scope.editPost.photosArr);
-    }
-
-
-//////////////////////////////////
-     $scope.uploadImage = true;
-    $scope.viewUploadedImg = false;
-    $scope.previewFile = function (val) {
-      var interval = $interval(function () {
-        var preview = document.getElementById('img' + (val));
-        console.log('img' + (val)); 
-        var file   = document.getElementById('upload' + (val)).files[0];
-        console.log(preview);
-        console.log(file);
-        var reader  = new FileReader();
-        reader.addEventListener("load", function () {  
-          preview.src = reader.result; 
-        }, false);
-        if (file) {  
-          $scope.uploadImage = false;
-          $scope.viewUploadedImg = true;
-          reader.readAsDataURL(file);
-          $interval.cancel(interval);
-        }
-      }, 1000);
-    };
-    $scope.returnUpload = function () {
-      $scope.viewUploadedImg = false;
-      $scope.uploadImage = true;
-    };
-    $scope.checkinUpload = [{}, {}, {}];
-////////////////////////////
-      $scope.editOption = function (model) {
-
-        $timeout(function () {
-          model.backgroundClick = true;
-          backgroundClick.object = model;
-        }, 200);
-
-        backgroundClick.scope = $scope;
-      };
-      $scope.notify = function () {
-        $uibModal.open({
-          templateUrl: "views/modal/notify.html",
-          animation: true,
-          scope: $scope,
-          windowClass: "notify-popup"
-        });
-      }
-      $scope.formData = {};
 
       $scope.updateDateTime = function (id, formData, dt) {
         console.log(dt);
@@ -430,21 +434,15 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           method: "POST",
           data: result
         }).success(function (data) {
-          formData = {
-            "_id": $scope.json._id
+          var formData = {
+            "urlSlug": $scope.json.urlSlug
           }
           OnGoJourney.getOneJourney(formData, function (journeys) {
             $scope.json.post = journeys.post;
           }, function (err) {
             console.log(err);
           });
-          // $http({
-          //     url: adminURL + "/journey/getOneWeb",
-          //     method: "POST",
-          //     data: formData
-          // }).success(function (data) {
-          //     console.log(data);
-          // });
+
 
         });
       }
@@ -476,8 +474,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         }).success(function () {
           console.log("deleted successfully");
           document.getElementById(postId).remove();
-        }).error(function(){
-             console.log("failed to delete");
+        }).error(function () {
+          console.log("failed to delete");
         })
       }
 

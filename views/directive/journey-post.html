@@ -1,5 +1,5 @@
 <!--{{ongo.class}}--Add this as class if any problem comes in in velow div-->
-<div id="{{ongo._id}}" class="ongo-journey-card" ng-if="ongo.type=='travel-life'" ng-class="{'hasLatLng':ongo.location}">
+<div id="{{ongo._id}}" class="ongo-journey-card" ng-if="ongo.type=='travel-life'" ng-class="{'hasLatLng':ongo.latlong}">
     <!-- card header -->
     <div class="ongo-card-header">
         <div class="clearfix">
@@ -123,7 +123,7 @@
                                 <li class="hide"><a href="" title="Edit Videos" ng-click="editCheckIn();">Edit Videos</a></li>
                                 <!-- ng if for Thoughts -->
                                 <li class="hide"><a href="" title="Edit Thoughts" ng-click="editCheckIn();">Edit Thoughts</a></li>
-                                <li><a href="" title="Change Date &amp; Time" ng-click="changeDate(ongo.UTCModified);">Change Date &amp; Time</a></li>
+                                <li><a href="" title="Change Date &amp; Time" ng-click="changeDate();">Change Date &amp; Time</a></li>
                                 <li><a href="" title="Delete" ng-click="deletePost(ongo._id,json.uniqueId)">Delete</a></li>
                                 <li><a href="" title="Copy URL">Copy URL</a></li>
                             </ul>
