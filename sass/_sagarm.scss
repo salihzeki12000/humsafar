@@ -4,6 +4,10 @@
   font-size: 10px;
 }
 
+.font-sz18 {
+  font-size: 18px;
+}
+
 .bg-agent {
   background-color: rgba(255,255,255,0.8);
 }
@@ -131,16 +135,12 @@
 }
 
 .agt-imgholder {
-  // margin: 10px;
-  // padding: 20px;
-  // background: url('../img/agt-bg-blue.png') no-repeat 50% 50%;
   background-image: url('../img/agt-bg-blue.png');
   background-repeat: no-repeat;
   background-position: 50% 50%;
   cursor: pointer;
   @include transition(background 300ms linear);
   background-size: contain;
-  // background-position-x: 8px;
   min-height: 60px;
   position: relative;
 
@@ -250,6 +250,7 @@
 }
 // AGENT LOGIN END
 //AGENT USER ITENERARY START
+
 .agent-user-nav {
   background: $brand-pink;
   padding: 5px 0;
@@ -268,9 +269,10 @@
       cursor: pointer;
       @include transition(all ease 300ms);
       border-right: 1px solid #fff;
-      li:last-child{
-        border-right: none !important;
-      }
+    }
+
+    li:last-child {
+      border-right: none !important;
     }
   }
 }
@@ -318,6 +320,8 @@
 }
 
 .agent-user-content {
+  background-color: #fff;
+
   .pad-btn {
     padding: 0 0 10px 30px;
   }
@@ -467,19 +471,19 @@
   }
 }
 
-.agt-card-posi{
-    position: absolute;
-    bottom: 35%;
-    left: 50%;
-    width: 50%;
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-    transform: translateX(-50%);
+.agt-card-posi {
+  position: absolute;
+  bottom: 35%;
+  left: 50%;
+  width: 50%;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  transform: translateX(-50%);
 }
 
 .agt-title-card {
-  padding: 40px 40px;
+  padding: 40px;
   text-align: center;
   color: #fff;
   // background-color: #323719;
@@ -498,3 +502,97 @@
 }
 //AGENT USER ITENERARY END
 //AGENT USER ITENERARY END
+
+.agt-usr-itinerary,
+.agt-usr-tourpackages,
+.agt-usr-photosvideos {
+  margin-bottom: 10px;
+  padding: 40px 0;
+}
+
+.itinerary-cardhead {
+  padding: 5px;
+}
+
+.agt-itinerarycard {
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+}
+
+.rt-foot-marg {
+  margin-bottom: -30px;
+}
+
+.itinerary-img {
+  position: relative;
+}
+
+.itinerary-imgfoot {
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.imgfoot-top {
+  padding: 10px;
+  background-color: rgba(0,0,0,.8);
+
+  p {
+    margin: 0;
+  }
+}
+
+.imgfoot-bottom {
+  background-color: rgba(0,0,0,0.5);
+  padding: 10px 5px;
+  position: relative;
+
+  ul {
+    margin-left: 5px;
+  }
+}
+
+.country-badges {
+  position: absolute;
+  top: -15px;
+  right: 0;
+}
+
+.country-count {
+  color: #fff;
+  font-size: 24px;
+  margin-left: -20px;
+}
+
+.country-holder {
+  width: 30px;
+  margin-left: -10px;
+  display: inline-block;
+}
+
+.cost-posi {
+  position: relative;
+  top: 0;
+}
+
+.btn-book {
+  padding: 5px 30px;
+  position: absolute;
+  right: 5px;
+  bottom: -15px;
+}
+.agent-photogallery {
+  width: 270px;
+  max-width: 270px;
+  max-height: 370px;
+  margin: 3px;
+  padding: 5px;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+  }
+}

@@ -1,37 +1,36 @@
 <div class="agent-user relate" scrolladd1class>
   <div scrolldown>
     <div class="img-holder-agent bg-agent-user-img">
-      <di class="agt-card-posi">
-      <div class="agt-title-card get-center">
-        <div class="circ-agtimg">
-          <img src="img/adrena.jpg" alt="" class="img-responsive">
+      <div class="agt-card-posi">
+        <div class="agt-title-card get-center">
+          <div class="circ-agtimg">
+            <img src="img/adrena.jpg" alt="" class="img-responsive">
+          </div>
+          <h4 class="font-bold">Lifestyle Holidays</h4>
+          <p>Mumbai, India</p>
+          <button class="btn btn-white-outline">Following</button>
+          <span><span class="font-bold"> 255 </span> Followers </span>
         </div>
-        <h4 class="font-bold">Lifestyle Holidays</h4>
-        <p>Mumbai, India</p>
-        <button class="btn btn-white-outline btn-more">Follow</button>
-        <span><span class="font-bold"> 255 </span> Followers </span>
-      </div>
     </div>
-      <!-- agent-user-fixednav -->
-      <div class="agent-user-nav ">
-        <div class="container-fluid">
-          <div class="col-md-8">
-            <ul class="list-inline">
-              <li ng-click="getTab(0)" ng-class="{'active': cityoptions.active=='usr-itinerary'}">Itineraries </li>
-              <li ng-click="getTab(1)" ng-class="{'active': cityoptions.active=='usr-tourpackages'}">Tours &amp; Packages</li>
-              <li ng-click="getTab(2)" ng-class="{'active': cityoptions.active=='usr-photovideos'}"> Photos &amp; Videos</li>
-              <li ng-click="getTab(3)" ng-class="{'active': cityoptions.active=='usr-testimonialreviews'}">Testimonials &amp; Reviews</li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <ul class="list-inline pull-right">
-              <li ng-click="getTab(4)" ng-class="{'active': cityoptions.active=='usr-aboutus'}">About Us</li>
-              <li ng-click="getTab(5)" ng-class="{'active': cityoptions.active=='usr-aboutus'}">Speciality</li>
-            </ul>
-          </div>
+    <!-- agent-user-fixednav -->
+    <div class="agent-user-nav">
+      <div class="container-fluid">
+        <div class="col-md-8">
+          <ul class="list-inline">
+            <li ng-click="getTab(0)" ng-class="{'active': agtuseroptions.active=='usr-itinerary'}">Itineraries </li>
+            <li ng-click="getTab(1)" ng-class="{'active': agtuseroptions.active=='usr-tourpackages'}">Tours &amp; Packages</li>
+            <li ng-click="getTab(2)" ng-class="{'active': agtuseroptions.active=='usr-photovideos'}"> Photos &amp; Videos</li>
+            <li ng-click="getTab(3)" ng-class="{'active': agtuseroptions.active=='usr-testimonialreviews'}">Testimonials &amp; Reviews</li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline pull-right">
+            <li ng-click="getTab(4)" ng-class="{'active': agtuseroptions.active=='usr-aboutus'}">About Us</li>
+            <li ng-click="getTab(4)" ng-class="{'active': agtuseroptions.active=='usr-aboutus'}">Speciality</li>
+          </ul>
         </div>
       </div>
-      <div class="agent-user-content" ng-include="agtuser.innerView"></div>
     </div>
   </div>
+  <div class="agent-user-content" ng-include="agtuser.innerView"></div>
 </div>
