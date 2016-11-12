@@ -383,17 +383,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     };
     $scope.profile = $.jStorage.get("profile");
-    // if ($scope.profile.gender != "") {
-    //   $scope.userData.gender = $scope.profile.gender;
-    //   if ($scope.profile.gender == "male") {
-    //     $scope.gender = 1;
-    //   } else {
-    //     $scope.gender = 2;
-    //   }
-    // }
-    // if ($scope.profile.profilePicture != null) {
-    //   $scope.userData.profilePicture = $scope.profile.profilePicture;
-    // }
+    if ($scope.profile.gender != "") {
+      $scope.userData.gender = $scope.profile.gender;
+      if ($scope.profile.gender == "male") {
+        $scope.gender = 1;
+      } else {
+        $scope.gender = 2;
+      }
+    }
+    if ($scope.profile.profilePicture != null) {
+      $scope.userData.profilePicture = $scope.profile.profilePicture;
+    }
     $scope.changeGender = function (id, name) {
       $scope.gender = id;
       $scope.userData.gender = name;
