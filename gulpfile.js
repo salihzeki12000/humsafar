@@ -30,6 +30,7 @@ var jsArray = [
     './bower_components/angular-masonry/angular-masonry.js',
     './bower_components/ng-scrollbar/dist/ng-scrollbar.min.js',
     './bower_components/angular-swiper/dist/angular-swiper.js',
+    './bower_components/angular-rangeslider/angular.rangeSlider.css',
     "./js/imageUpload.js",
     './js/app.js',
     './js/language.js',
