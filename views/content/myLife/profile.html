@@ -10,7 +10,7 @@
             </div>
             <div class="profile-more-detail text-center">
                 <h3 class="color-blue m-clear font-bold avenir-medium ">{{userData.name}}</h3>
-                <h5 class="color-pink avenir-roman">Lives In:<i class="fa fa-map-marker mr5"></i><span>{{homeCity}}</span></h5>
+                <h5 class="color-pink avenir-roman">Lives In : <i class="fa fa-map-marker mr5"></i><span>{{homeCity}}</span></h5>
             </div>
         </div>
         <div class="user-travel-detail relate">
@@ -116,7 +116,7 @@
                                 <form>
                                     <input type="text" class="visit-input" placeholder="Add Country Visited" ng-model="input">
                                     <button class="btn btn-pink">Add</button>
-                                    <div class="visited-country-list avenir-roman" style="OVERFLOW-Y:scroll;  HEIGHT:550px">
+                                    <div class="visited-country-list avenir-roman">
                                         <ul>
                                             <li ng-repeat="list in  nationality | filter:input">
                                                 <div class="country-list">

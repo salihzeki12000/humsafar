@@ -15,9 +15,9 @@
             <label for="year{{list}}">{{list}}</label>
           </div>
           <div class="count-visited">
-            <span><i class="fa fa-minus-circle minus" ng-click="visited[list].times=visited[list].times-1" ng-class="{'disabled':!visited[list].year}"></i></span>
-            <input type="text" id="rooms" ng-model="visited[list].times" ng-disabled="!visited[list].year" ng-attr-placeholder="visited[list].year||1">
-            <span><i class="fa fa-plus-circle plus" ng-click="visited[list].times=visited[list].times+1"></i></span>
+            <span class="pointer"><i class="fa fa-minus-circle minus" ng-click="visited[list].times=visited[list].times-1" ng-class="{'disabled':!visited[list].year}"></i></span>
+            <input type="text" id="rooms" ng-model="visited[list].times" ng-disabled="!visited[list].year" ng-attr-placeholder="visited[list].year||1" placeholder="0">
+            <span class="pointer"><i class="fa fa-plus-circle plus" ng-click="visited[list].times=visited[list].times+1"></i></span>
           </div>
         </li>
       </ul>

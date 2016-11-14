@@ -53,7 +53,7 @@
 
         <!-- related img if more then 5 then slider-->
         <div class="related-imgslider" ng-if="ongo.relatedPhoto">
-            <flex-slider flex-slide="slide in ongo.photos track by $index" class="related-slide">
+            <flex-slider flex-slide="slide in ongo.photos track by $index" class="related-slide" item-width="99">
                 <!---- put item width 99 if needed -->
                 <li>
                     <div class="related-ongo-slider">
@@ -64,8 +64,8 @@
         </div>
         <!-- related img end if more then 5 then slider-->
 
-       
-        
+
+
 
         <!-- ongo journey video -->
         <div class="" ng-if="ongo.video">
@@ -164,7 +164,7 @@
                           </span>
                           </p> -->
                         <p class="inline-block pointer" ng-click="giveReview();"><i class="color-blue">Rate This Now</i></p>
-                        
+
                     </div>
                     <div class="pull-right">
                         <div class="ongo-travel-icon">
