@@ -233,13 +233,15 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
         });
       };
-      $scope.postComment = function (id, comment) {
+      $scope.postComment = function (uniqueId, comment,id) {
         var formData = {
-          "uniqueId": id,
-          "text": comment
+          "uniqueId": uniqueId,
+          "text": comment,
+          "type":"post",
+          "post":id
         };
         $http({
-          url: adminURL + "/post/addCommentWeb",
+          url: adminURL + "/comment/addCommentWeb",
           method: "POST",
           data: formData
         }).success(function (data) {

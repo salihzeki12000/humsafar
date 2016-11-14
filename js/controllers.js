@@ -435,17 +435,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var saveDataCallback = function (data, status) {
       if (data.value == true) {
         console.log(data);
-        NavigationService.getProfile(globalGetProfile, function (err) {
-          console.log(err);
-        });
+         $state.go('holiday');
+        // NavigationService.getProfile(globalGetProfile, function (err) {
+        //   console.log(err);
+        // });
       } else {
         console.log(data);
       }
     }
 
     $scope.saveUserData = function (userData) {
-      console.log(userData.profilePicture);
-      $state.go('holiday');
+      console.log(userData.profilePicture);  
       NavigationService.saveUserData(userData, saveDataCallback, function (err) {
         console.log(err);
       });
@@ -506,17 +506,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   }
     //   //Angular-file-upload starts here
 
-    $scope.file = {
-      myFile: "Chintan"
-    };
-    $scope.uploadFile = function () {
-      var file = $scope.file.myFile;
+    // $scope.file = {
+    //   myFile: "Chintan"
+    // };
+    // $scope.uploadFile = function () {
+    //   var file = $scope.file.myFile;
 
-      console.log('file is ');
-      console.dir($scope.file.myFile);
+    //   console.log('file is ');
+    //   console.dir($scope.file.myFile);
 
-      FileUploadService.uploadFileToUrl(file, uploadurl);
-    };
+    //   FileUploadService.uploadFileToUrl(file, uploadurl);
+    // };
     //angular file upload ends here
 
     // $scope.getImage = function(){
@@ -3715,15 +3715,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       var getAllJourney = function (journeys) {
         $scope.travelLife = journeys;
       };
+
       OnGoJourney.getAllJourney(getAllJourney, function (err) {
         console.log(err);
       });
 
-      $scope.redirectTo = function (id) {
-        console.log(id);
-        $.jStorage.set('travelId', id);
-        $state.go('ongojourney');
-      }
+      // $scope.redirectTo = function (id) {
+      //   console.log(id);
+      //   $.jStorage.set('travelId', id);
+      //   $state.go('ongojourney');
+      // }
 
       // $scope.travelLife = [{
       //   heading: "Manan Vora has ended his London Journey",

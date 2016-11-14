@@ -129,7 +129,7 @@
               </div>
               <div class="button-panel clearfix">
                 <!--<button class="btn btn-blue-outline btn-more pull-left" ui-sref="mylife">Skip</button>-->
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=3" ng-disabled="userData.homeCountry">Next</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=3" ng-disabled="!userData.homeCountry">Next</button>
               </div>
             </div>
           </div>
@@ -154,7 +154,7 @@
               </div>
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=2">Previous</button>
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=4" ng-disabled="userData.homeCity">Next</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=4" ng-disabled="!userData.homeCity">Next</button>
               </div>
             </div>
           </div>
@@ -177,11 +177,11 @@
           </div>
           <div class="upload-profile" ng-show="goNext==5">
             <div class="text-center">
-              <h3 class="color-blue avenir-black">Upload Profile Photo{{myCroppedImage}}</h3>
+              <h3 class="color-blue avenir-black">Upload Profile Photo</h3>
               <div class="cropArea" ng-show="showImage">
                 <img-crop image="myImage" result-image="myCroppedImage" /></img-crop>
               </div>
-              <div class="show">
+              <div class="hide">
                 <img ng-src="{{myCroppedImage}}" />
               </div>
               <div class="upload-section" ng-hide="showImage">
@@ -210,7 +210,7 @@
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
                 <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)">Done</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="saveUserData(userData)">Done</button>
               </div>
             </div>
           </div>
