@@ -802,7 +802,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.journey = journeys;
       console.log("$scope.journey updated successfully");
       var posts=[];
-      
+
       posts=_.filter($scope.journey.post, 'latlong');
       console.log(posts);
       _.each(posts, function (n, $index) {
@@ -814,7 +814,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           "lat": centers[0].lat,
           "lng": centers[0].lng
         };
-        
+
       });
     };
     OnGoJourney.getOneJourney({
@@ -992,8 +992,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // }
 
           var markerBounds = new google.maps.LatLngBounds();
-          markerBounds.extend(departure); 
-          markerBounds.extend(arrival); 
+          markerBounds.extend(departure);
+          markerBounds.extend(arrival);
 
           map.fitBounds(markerBounds);
 
@@ -1741,7 +1741,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       followbtn: 'follow',
     }];
   })
-  .controller('PopularAgentCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+  .controller('Populartrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -7483,12 +7483,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     // connect agent
-    $scope.agentClass = "";
+    $scope.lass = "";
     $scope.agentbox = "agentbox-in";
     $scope.viewAgent = function () {
       if ($scope.agentbox == "agentbox-in") {
         $scope.agentbox = "agentbox-out";
-        $scope.agentClass = "backdrop-agent";
+        $scope.lass = "backdrop-agent";
       } else {
         $scope.agentClass = "";
         $scope.agentbox = "agentbox-in";
@@ -7764,15 +7764,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   });
 })
 
-.controller('AgentuserCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+.controller('AgentuserCtrl', function($scope, TemplateService, NavigationService, $timeout, $state) {
   $scope.template = TemplateService.changecontent("agent-user"); //Use same name of .html file
-  $scope.menutitle = NavigationService.makeactive("Agent User Itinerary"); //This is the Title of the Website
+  $scope.menutitle = NavigationService.makeactive("Agent User"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.oneAtATime = true;
 
-  var allagtuser = ["views/content/agent/agt-usr/usr-itinerary.html", "views/content/agent/agt-user/usr-tourpackages.html", "views/content/agent/agt-user/usr-photovideos.html", "views/content/agent/agt-user/usr-testimonialreviews.html", "views/content/agent/agt-user/usr-aboutus.html"];
-  $scope.destination = {
+  var allagtuser = ["views/content/agent/agt-user/usr-itinerary.html", "views/content/agent/agt-user/usr-tourpackages.html", "views/content/agent/agt-user/usr-photovideos.html", "views/content/agent/agt-user/usr-testimonialreviews.html", "views/content/agent/agt-user/usr-aboutus.html"];
+  $scope.agtuser = {
     innerView: allagtuser[0]
   };
   // change url
@@ -7781,31 +7781,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.viewTab = 1;
   switch ($state.params.name) {
     case "usr-itinerary":
-      $scope.destination.innerView = allagtuser[0];
-      $scope.cityoptions.active = "usr-itinerary";
+      $scope.agtuser.innerView = allagtuser[0];
+      $scope.agtuseroptions.active = "usr-itinerary";
       break;
     case "usr-tourpackages":
-      $scope.destination.innerView = allagtuser[1];
-      $scope.cityoptions.active = "usr-tourpackages";
+      $scope.agtuser.innerView = allagtuser[1];
+      $scope.agtuseroptions.active = "usr-tourpackages";
       break;
     case "usr-photovideos":
-      $scope.destination.innerView = allagtuser[2];
-      $scope.cityoptions.active = "usr-photovideos";
+      $scope.agtuser.innerView = allagtuser[2];
+      $scope.agtuseroptions.active = "usr-photovideos";
       break;
     case "usr-testimonialreviews":
-      $scope.destination.innerView = allagtuser[3];
-      $scope.cityoptions.active = "usr-testimonialreviews";
+      $scope.agtuser.innerView = allagtuser[3];
+      $scope.agtuseroptions.active = "usr-testimonialreviews";
       break;
     case "usr-aboutus":
-      $scope.destination.innerView = allagtuser[4];
-      $scope.cityoptions.active = "usr-aboutus";
+      $scope.agtuser.innerView = allagtuser[4];
+      $scope.agtuseroptions.active = "usr-aboutus";
       break;
     default:
-      $scope.destination.innerView = allagtuser[0];
+      $scope.agtuser.innerView = allagtuser[0];
   }
-  $scope.getTab = function (view) {
-    $scope.user.innerView = allagtuser[view];
-    var url = "featured";
+  $scope.getTab = function(view) {
+    $scope.agtuser.innerView = allagtuser[view];
+    var url = "usr-itinerary";
     var active = "";
     console.log(view);
     switch (view) {
@@ -7819,7 +7819,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         break;
       case 2:
         url = "usr-photovideos";
-        $scope.agtuseroptions.active = "usr-photovideos";
+        $scope.agtuseroptions.active = "usr-photovideos";;
         break;
       case 3:
         url = "usr-testimonialreviews";
@@ -7835,13 +7835,93 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         break;
     }
     console.log(url);
-    $state.go("destinationcity", {
+    $state.go("agent-user", {
       name: url
     }, {
       notify: false
     });
   };
+
+  $scope.agenPhotogallery = [
+    '../img/uploaded-pic.jpg',
+    '../img/slider2.jpg',
+    '../img/moment-travel1.jpg',
+    '../img/moment-travel2.jpg',
+    '../img/local-life-post.jpg',
+    '../img/destination/goldentemple.jpg',
+    '../img/destination/list1.jpg',
+    '../img/destination/list2.jpg',
+    '../img/destination/info.jpg',
+    '../img/destination/taj-featured.jpg',
+    '../img/itinerary/itinerary.jpg',
+    '../img/india-gate.jpg',
+    '../img/notify-adrena.jpg',
+    '../img/paris.jpg',
+    '../img/bg-popular.jpg',
+    '../img/bg-blur.jpg',
+    '../img/blog-banner.jpg',
+    '../img/follower.jpg'
+  ];
+
+  $scope.testimonialreview = [
+    {
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    },{
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    },{
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, text ever since the 1500s,',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    },{
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text evers,',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    },{
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    },{
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    },{
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    },{
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    },{
+      testimonialQuote:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder:'../img/adrena.jpg',
+      usrName:'Randy & Victoria',
+      usrLoc:'New-York, USA',
+      usrRating:'9'
+    }
+  ];
 })
+
 
 .controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {
 

@@ -1,0 +1,107 @@
+<div class="agt-usr-testimonialreviews">
+  <div class="container">
+    <div masonry class="masonry-main">
+      <div class=" col-md-4 masonry-brick" ng-repeat="review in testimonialreview track by $index">
+        <div class="testimonial-card">
+          <div class="testimonial-comment">
+            <p class="testimonial-quote"><q>{{review.testimonialQuote}}</q></p>
+          </div>
+          <div class="testimonial-details clearfix">
+            <div class="pull-left">
+              <div class="testprofile-holder">
+                <img ng-src="{{review.usrprofileImgholder}}" alt="" class="img-responsive">
+              </div>
+              <div class="testprofile-name">
+                <p>{{review.usrName}}</p>
+                <span>{{review.usrLoc}}</span>
+              </div>
+            </div>
+            <div class="pull-right">
+              <div class="testimonial-rate">
+                <p>{{review.usrRating}}/10</p>
+                <span>Rated</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- <div class=" col-md-4 masonry-brick">
+        <div class="testimonial-card">
+          <div class="testimonial-comment">
+            <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
+          </div>
+          <div class="testimonial-details clearfix">
+            <div class="pull-left">
+              <div class="testprofile-holder">
+                <img src="img/adrena.jpg" alt="" class="img-responsive">
+              </div>
+              <div class="testprofile-name">
+                <p>Randy & Victoria</p>
+                <span>New-York, USA</span>
+              </div>
+            </div>
+            <div class="pull-right">
+              <div class="testimonial-rate">
+                <p>9/10</p>
+                <span>Rated</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class=" col-md-4 masonry-brick">
+        <div class="testimonial-card">
+          <div class="testimonial-comment">
+            <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
+          </div>
+          <div class="testimonial-details clearfix">
+            <div class="pull-left">
+              <div class="testprofile-holder">
+                <img src="img/adrena.jpg" alt="" class="img-responsive">
+              </div>
+              <div class="testprofile-name">
+                <p>Randy & Victoria</p>
+                <span>New-York, USA</span>
+              </div>
+            </div>
+            <div class="pull-right">
+              <div class="testimonial-rate">
+                <p>9/10</p>
+                <span>Rated</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class=" col-md-4 masonry-brick">
+        <div class="testimonial-card">
+          <div class="testimonial-comment">
+            <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard </p>
+          </div>
+          <div class="testimonial-details clearfix">
+            <div class="pull-left">
+              <div class="testprofile-holder">
+                <img src="img/adrena.jpg" alt="" class="img-responsive">
+              </div>
+              <div class="testprofile-name">
+                <p>Randy & Victoria</p>
+                <span>New-York, USA</span>
+              </div>
+            </div>
+            <div class="pull-right">
+              <div class="testimonial-rate">
+                <p>9/10</p>
+                <span>Rated</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+</div>
