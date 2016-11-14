@@ -4,23 +4,23 @@
   font-size: 10px;
 }
 
-.posi-relative{
+.posi-relative {
   position: relative;
 }
 
-.posi-absolute{
+.posi-absolute {
   position: absolute;
 }
 
-.right0{
-   right: 0;
+.right0 {
+  right: 0;
 }
 
 .font-sz18 {
   font-size: 18px;
 }
 
-.font-sz24{
+.font-sz24 {
   font-size: 24px;
 }
 
@@ -521,15 +521,17 @@
 .agt-usr-itinerary,
 .agt-usr-photosvideos,
 .agt-usr-testimonialreviews,
-.agt-usr-tourpackages {
-  margin-bottom: 10px;
+.agt-usr-tourpackages,
+.agt-usr-aboutus {
+  margin-bottom: 0px;
   padding: 40px 0;
 }
 
 .agt-usr-aboutus,
 .agt-usr-itinerary,
 .agt-usr-photosvideos,
-.agt-usr-tourpackages {
+.agt-usr-tourpackages,
+.agt-usr-aboutus {
   background-color: #fff;
 }
 
@@ -705,53 +707,54 @@ q {
   }
 }
 
-.writetestimonial-card{
+.writetestimonial-card {
   background-color: $brand-blue;
   position: relative;
   width: 300px;
-  border-radius:4px;
+  border-radius: 4px;
   cursor: pointer;
   z-index: 4;
 }
 
-.testimonial-rating{
-  p{
+.testimonial-rating {
+  p {
     margin: 0;
   }
 }
 
-.testimonial-closed{
+.testimonial-closed {
   background-color: $brand-pink;
-  border-radius:4px;
-    padding:10px 20px 5px;
+  border-radius: 4px;
+  padding: 10px 20px;
 }
 
-.view-testimonial{
+.view-testimonial {
   background-color: $brand-blue;
-  p{
+
+  p {
     padding-bottom: 5px;
     border-bottom: 1px solid $brand-grey;
   }
 }
 
-.testimonial-open{
-    padding: 0px 20px 40px;
-    position: absolute;
-    width: 100%;
-    background-color: #2d3655;
+.testimonial-open {
+  padding: 0 20px 40px;
+  position: absolute;
+  width: 100%;
+  background-color: #2d3655;
 }
 
-.review-text{
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #fff;
-    color: #fff;
-    line-height: 1;
-    padding: 6px 0;
-    resize: none;
+.review-text {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  line-height: 1;
+  padding: 6px 0;
+  resize: none;
 }
 
-.post-review{
+.post-review {
   position: absolute;
   bottom: -20px;
   left: 50%;
@@ -759,19 +762,88 @@ q {
   z-index: 30;
 }
 
-.review-count{
+.review-count {
   font-style: italic;
   color: #fff;
   margin-top: 10px;
 }
 
 .backdrop-testimonial:after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.7);
-    z-index: 3;
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 3;
+}
+// slider CSS
+.agt-usr-testimonialreviews {
+  .ngrs-range-slider {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    margin: 10px 0 0;
+
+     .ngrs-handle-max{
+       border-radius: 100%;
+       background-color: $brand-pink;
+       border: none;
+       i {
+         background: none;
+       }
+     }
+
+     .ngrs-runner {
+       margin: 0;
+     }
+
+    .ngrs-join {
+      background-color: #fff;
+      background-image: none;
+      margin: -1px 0 0 0;
+      height: 2px;
+      width: 100%;
+    }
+  }
+}
+// slider CSS end
+
+.agtcategory-type {
+  margin: 30px 0;
+  .select-category-type {
+    min-width: 80px;
+    display: inline-block;
+    text-align: center;
+  }
+  .category-iconholder {
+    @include square(40px);
+    background: url('../img/itinerary/bluebox.png');
+    background-size: 100% 100%;
+    display: inline-block;
+    position: relative;
+    @include transition(all 300ms linear);
+    img {
+      @extend .get-center;
+    }
+  }
+}
+
+.country-textholder{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 10px;
+}
+
+.spclcountry-name{
+  font-size: 18px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.spclcountry-stamp{
+  height: 15px;
+  width: 25px;
 }
