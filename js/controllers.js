@@ -3316,15 +3316,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         var id = {
           '_id': country._id
         };
-        // var qwerty = function (id) {
-        //   _.each(data.data.countriesVisited, function (n) {
-        //     $scope.visited[n.countryId].year = true;
-        //     $scope.visited[n.countryId].times =
-        //       $scope.visited[n.countryId].
-        //   });
-        // };
-        // MyLife.getCountryVisitedListWeb($scope.listOfYears, qwerty, function () {});
-
       } else {
         $scope.visited = [];
         $uibModal.open({
@@ -3342,6 +3333,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         'year': false
       });
       $scope.obj.visited = arrNew;
+      console.log($scope.obj);
       MyLife.updateCountriesVisited($scope.obj, function (data, status) {
         reloadCount();
       }, function () {});
@@ -7695,13 +7687,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   })
 
 .controller('headerctrl', function ($scope, TemplateService, NavigationService, $state, $interval) {
+  console.log("header loaded");
   $scope.template = TemplateService;
-
   NavigationService.getProfile(globalGetProfile, function (err) {
     console.log(err);
+    console.log("error getting profile");
   });
   $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
   $scope.userData = $.jStorage.get("profile");
+
+  // if(!$scope.isLoggedIn){
+  //   $state.go('login');
+  // }
   $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
     $(window).scrollTop(0);
   });
@@ -7734,7 +7731,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.logout = function () {
     NavigationService.logout(function () {
         $.jStorage.flush();
-        $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+        $scope.isLoggedIn = false;
         $state.go('home');
       },
       function (err) {
