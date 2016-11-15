@@ -3267,7 +3267,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             return;
           }
         });
-
       });
       var countryVisited = _.filter($scope.nationality, "countryVisited");
       _.each(countryVisited, function(country) {
@@ -3289,7 +3288,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var getAllCountries = function(countries) {
       $scope.nationality = countries;
       $scope.getMap();
-      // $scope.data = mapBucketList;
     };
 
     MyLife.getAllCountries(getAllCountries, function(err) {
@@ -3302,13 +3300,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, function() {});
       $scope.getMap();
     };
-
+    var modal="";
     $scope.updateCountryVisited = function(country) {
       console.log(country);
       $scope.obj.countryId = country._id;
       if (country.countryVisited === true) {
         $scope.visited = [];
-        $uibModal.open({
+        var callback=function(data){
+          $scope.visited=data;
+      };
+        MyLife.getCountryVisitedListWeb(country._id,callback);
+        modal=$uibModal.open({
           scope: $scope,
           animation: true,
           templateUrl: "views/modal/country-visited.html"
@@ -3316,18 +3318,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         var id = {
           '_id': country._id
         };
-        // var qwerty = function (id) {
-        //   _.each(data.data.countriesVisited, function (n) {
-        //     $scope.visited[n.countryId].year = true;
-        //     $scope.visited[n.countryId].times =
-        //       $scope.visited[n.countryId].
-        //   });
-        // };
-        // MyLife.getCountryVisitedListWeb($scope.listOfYears, qwerty, function () {});
-
       } else {
         $scope.visited = [];
-        $uibModal.open({
+        modal=$uibModal.open({
           scope: $scope,
           animation: true,
           templateUrl: "views/modal/country-visited.html"
@@ -3337,10 +3330,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.updateNumOfTimes = function(visited) {
+      modal.close();
+      console.log(visited);
+
+      //applying validations and filters starts
       var arr = _.pull(visited, undefined);
+      console.log(arr);
       var arrNew = _.reject(arr, {
         'year': false
       });
+     arrNew = _.filter(arrNew, 'times');
+     console.log(arrNew);
+      arrNew = _.reject(arrNew, {
+        'times': 0
+      });
+      //applying validations and filters ends
+
+      console.log(arrNew);
       $scope.obj.visited = arrNew;
       MyLife.updateCountriesVisited($scope.obj, function(data, status) {
         reloadCount();
@@ -7939,6 +7945,58 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
   });
   // review textarea counter end
+
+   //rating slider
+ $scope.ratingSlide = {
+   range: {
+       min: 0,
+       max: 10
+   },
+   step: 1,
+   minRating: 0,
+   maxRating: 10
+};
+ //rating slider end
+
+ // category type
+ $scope.categoryType = [{
+   img: "img/itinerary/adventure.png",
+   caption: "Adventure",
+   width: "25"
+ }, {
+   img: "img/itinerary/business.png",
+   caption: "Business",
+   width: "24"
+ }, {
+   img: "img/itinerary/family.png",
+   caption: "Family",
+   width: "30"
+ }, {
+   img: "img/itinerary/romance.png",
+   caption: "Romance",
+   width: "26"
+ }, {
+   img: "img/itinerary/backpacking.png",
+   caption: "Backpacking",
+   width: "23"
+ }, {
+   img: "img/itinerary/budget.png",
+   caption: "Budget",
+   width: "22"
+ }, {
+   img: "img/itinerary/luxury.png",
+   caption: "Luxury",
+   width: "21"
+ }, {
+   img: "img/itinerary/religious.png",
+   caption: "Religious",
+   width: "26"
+ }, {
+   img: "img/itinerary/friend.png",
+   caption: "Friends",
+   width: "24"
+ }, ];
+ // category type end
 })
 
 .controller('languageCtrl', function($scope, TemplateService, $translate, $rootScope) {

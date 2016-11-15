@@ -15,19 +15,11 @@ var navigationservice = angular.module('mylife', [])
                         var countries = data.data;
                         var bucketList = data2.data.bucketList;
                         var countryVisited = data3.data.countriesVisited;
-                        // console.log(bucketList);
-                        // console.log(countryVisited);
-                        // var mapBucketList = {};
                         _.each(bucketList, function (n) {
                             var index = _.findIndex(countries, function (country) {
                                 return country._id == n._id;
                             });
-                            countries[index].bucketList = true;
-                            // _.forEach(window._mapPathData.paths, function (value, key) {
-                            //     if (value.name == n.name) {
-                            //         mapBucketList.key.metric
-                            //     }
-                            // });
+                            countries[index].bucketList = true;                         
                         });
                         _.each(countryVisited, function (n) {
                             var index = _.findIndex(countries, function (country) {
@@ -54,9 +46,24 @@ var navigationservice = angular.module('mylife', [])
             console.log(obj);
             $http.post(adminURL + "/user/updateCountriesVisitedWeb", obj).success(callback).error(errCallback);
         },
-        getCountryVisitedListWeb: function (years, callback, errCallback) {
-            console.log(years);
-            // $http.post(adminURL + "/user/getCountryVisitedListWeb", id).success(callback).error(errCallback);
+        getCountryVisitedListWeb: function (id,callback) {
+            $http({
+                url:adminURL + "/user/getCountryVisitedListWeb",
+                method:"POST"
+            }).success(function(data){
+                console.log(data.data.countriesVisited);
+                var a=_.filter(data.data.countriesVisited,["countryId",id]);
+                console.log(a[0].visited);
+               var visitedArr=[];
+                _.each(a[0].visited,function(n,index){
+                     visitedArr[n.year]={
+                        "times":n.times,
+                        "year":n.year
+                    };
+                });
+                console.log(visitedArr);
+                callback(visitedArr);
+            });
         }
     };
 });
