@@ -203,13 +203,9 @@
     overflow-y: auto;
   }
 }
-/*
- *  scroll style start
- */
-.country-tabs::-webkit-scrollbar {
-  //height: 10px;
-  //padding: 5px;
-}
+// scroll style start
+
+.country-tabs::-webkit-scrollbar {}
 
 .country-tabs::-webkit-scrollbar-track {
   -webkit-box-shadow: none;
@@ -226,9 +222,8 @@
   background-color: rgba(128,128,128,0.6);
   border-radius: 10px;
 }
-/*
- *  scroll style start
- */
+// scroll style start
+
 .service-box {
   text-align: justify;
   display: flex;
@@ -267,6 +262,7 @@
 // AGENT LOGIN END
 //AGENT USER ITENERARY START
 
+.agent-home-nav,
 .agent-user-nav {
   background: $brand-pink;
   padding: 5px 0;
@@ -328,6 +324,7 @@
   }
 }
 
+.bg-agent-home-img,
 .bg-agent-user-img {
   background: url('../img/agent/bg-user.jpg') no-repeat;
   height: 350px;
@@ -335,8 +332,8 @@
   z-index: 3;
 }
 
+.agent-home-content,
 .agent-user-content {
-  // background-color: #fff;
   .pad-btn {
     padding: 0 0 10px 30px;
   }
@@ -518,24 +515,36 @@
 //AGENT USER ITENERARY END
 //AGENT USER ITENERARY END
 
-.agt-usr-itinerary,
-.agt-usr-photosvideos,
-.agt-usr-testimonialreviews,
-.agt-usr-tourpackages,
-.agt-usr-aboutus {
-  margin-bottom: 0px;
-  padding: 40px 0;
-}
-
+.agt-home-aboutus,
+.agt-home-itinerary,
+.agt-home-leadmonitor,
+.agt-home-photovideos,
+.agt-home-testimonialreviews,
+.agt-home-tourpackage,
+.agt-home-travelactivity,
 .agt-usr-aboutus,
 .agt-usr-itinerary,
 .agt-usr-photosvideos,
-.agt-usr-tourpackages,
-.agt-usr-aboutus {
+.agt-usr-testimonialreviews,
+.agt-usr-tourpackages {
+  margin-bottom: 0;
+  padding: 40px 0;
+}
+
+.agt-home-aboutus,
+.agt-home-itinerary,
+.agt-home-leadmonitor,
+.agt-home-photovideos,
+.agt-home-tourpackage,
+.agt-usr-aboutus,
+.agt-usr-aboutus,
+.agt-usr-itinerary,
+.agt-usr-photosvideos,
+.agt-usr-tourpackages {
   background-color: #fff;
 }
 
-.itinerary-cardhead {
+.itinerary-cardhea {
   padding: 5px;
 }
 
@@ -548,6 +557,7 @@
   margin-bottom: -30px;
 }
 
+.activity-img,
 .itinerary-img {
   position: relative;
 }
@@ -693,10 +703,6 @@
   }
 }
 
-.testimonial-quote {
-  &:after {}
-}
-
 q {
   quotes: """ """;
 }
@@ -779,6 +785,7 @@ q {
   z-index: 3;
 }
 // slider CSS
+
 .agt-usr-testimonialreviews {
   .ngrs-range-slider {
     border: none;
@@ -786,23 +793,24 @@ q {
     box-shadow: none;
     margin: 10px 0 0;
 
-     .ngrs-handle-max{
-       border-radius: 100%;
-       background-color: $brand-pink;
-       border: none;
-       i {
-         background: none;
-       }
-     }
+    .ngrs-handle-max {
+      border-radius: 100%;
+      background-color: $brand-pink;
+      border: none;
 
-     .ngrs-runner {
-       margin: 0;
-     }
+      i {
+        background: none;
+      }
+    }
+
+    .ngrs-runner {
+      margin: 0;
+    }
 
     .ngrs-join {
       background-color: #fff;
       background-image: none;
-      margin: -1px 0 0 0;
+      margin: -1px 0 0;
       height: 2px;
       width: 100%;
     }
@@ -812,11 +820,13 @@ q {
 
 .agtcategory-type {
   margin: 30px 0;
+
   .select-category-type {
     min-width: 80px;
     display: inline-block;
     text-align: center;
   }
+
   .category-iconholder {
     @include square(40px);
     background: url('../img/itinerary/bluebox.png');
@@ -824,26 +834,167 @@ q {
     display: inline-block;
     position: relative;
     @include transition(all 300ms linear);
+
     img {
       @extend .get-center;
     }
   }
 }
 
-.country-textholder{
+.country-textholder {
   position: absolute;
   top: 0;
   width: 100%;
   padding: 10px;
 }
 
-.spclcountry-name{
+.spclcountry-name {
   font-size: 18px;
   color: #fff;
   font-weight: 700;
 }
 
-.spclcountry-stamp{
+.spclcountry-stamp {
   height: 15px;
   width: 25px;
+}
+
+.agthome-itinerary-youtube,
+.agthome-tourpackage-youtube,
+.youtube-placeholder {
+  width: 550px;
+  height: 360px;
+
+  img {
+    max-height: 100%;
+  }
+}
+
+.add-agtitinerary {
+  position: relative;
+
+  span {
+    @include square(30px);
+    display: inline-block;
+    border-radius: 100%;
+    line-height: 30px;
+    background-color: $brand-blue;
+    color: #fff;
+    text-align: center;
+    @include transition(all 300ms linear);
+
+    i {
+      @include transition(all 300ms linear);
+    }
+  }
+
+  .close-more {
+    background-color: $brand-grey;
+    @include transition(all 300ms linear);
+
+    i {
+      @include transform(rotate(45deg));
+      @include transition(all 300ms linear);
+    }
+  }
+}
+
+.add-more-itinerary {
+  width: 210px;
+  padding: 15px 20px;
+  border-radius: 12px;
+  border: 1px solid $brand-blue;
+  background-color: $brand-blue;
+  @include position(absolute, -15px 35px null null);
+  z-index: 10;
+
+  &:before {
+    content: "";
+    border-top: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid $brand-blue;
+    @include position(absolute, 21px -20px null null);
+  }
+
+  li {
+    padding: 8px 0;
+    border-bottom: 1px solid $brand-blue;
+
+    &:last-child {
+      border: none;
+    }
+
+    a {
+      color: #fff;
+    }
+  }
+}
+
+.agthome-activitycard {
+  border-radius: 4px;
+  background-color: $brand-blue;
+  @extend .color-white;
+
+  .journey-cost span {
+    margin: 0 5px;
+    font-size: 15px;
+  }
+}
+
+.activity-cardhead {
+  padding: 10px;
+}
+
+.activity-img {
+  .country-badges {
+    top: -5px;
+    left: 5px;
+  }
+
+  .country-holder {
+    margin-left: 0;
+    margin-right: -15px;
+  }
+}
+
+.head-timestamp {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #fff;
+}
+
+.agttravel-activity {
+  padding-top: 5px;
+  p {
+    margin: 0;
+  }
+}
+
+.activity-imgfoot {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 0 10px;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.marg-actbt {
+  margin-bottom: -20px;
+}
+
+.agtdays-spent {
+  width: 45px;
+  height: 48px;
+  border-radius: 18px;
+  display: inline-block;
+  position: relative;
+  bottom: 25px;
+  background-color: #2c3757;
+
+  p {
+    padding-top: 5px;
+    font-size: 10px;
+    text-align: center;
+    margin: 0;
+  }
 }

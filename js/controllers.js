@@ -164,7 +164,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     var authenticatesuccess = function (data, status) {
-      
+
       console.log("authenticate successful");
       $ionicLoading.hide();
       $interval.cancel(stopinterval);
@@ -186,7 +186,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         authenticatesuccess();
       }
      };
-      
+
   })
   .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $stateParams) {
     //Used to name the .html file
@@ -7776,7 +7776,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   });
 })
 
-.controller('AgentuserCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state, $timeout) {
+.controller('AgentuserCtrl', function($scope, TemplateService, NavigationService, $timeout, $state) {
   $scope.template = TemplateService.changecontent("agent-user"); //Use same name of .html file
   $scope.menutitle = NavigationService.makeactive("Agent User"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
@@ -7816,7 +7816,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     default:
       $scope.agtuser.innerView = allagtuser[0];
   }
-  $scope.getTab = function (view) {
+  $scope.getTab = function(view) {
     $scope.agtuser.innerView = allagtuser[view];
     var url = "usr-itinerary";
     var active = "";
@@ -7939,10 +7939,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
   // review textarea counter
-  $scope.$on('$viewContentLoaded', function () {
-    $timeout(function () {
+  $scope.$on('$viewContentLoaded', function() {
+    $timeout(function() {
       $("#reviewremainingC").html("00 / 300");
-      $('textarea').keypress(function () {
+      $('textarea').keypress(function() {
 
         if (this.value.length > 500) {
           return false;
@@ -7953,17 +7953,161 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   });
   // review textarea counter end
 
-  //rating slider
-  $scope.ratingSlide = {
-    range: {
-      min: 0,
-      max: 10
-    },
-    step: 1,
-    minRating: 0,
-    maxRating: 10
+   //rating slider
+ $scope.ratingSlide = {
+   range: {
+       min: 0,
+       max: 10
+   },
+   step: 1,
+   minRating: 0,
+   maxRating: 10
+};
+ //rating slider end
+
+ // category type
+ $scope.categoryType = [{
+   img: "img/itinerary/adventure.png",
+   caption: "Adventure",
+   width: "25"
+ }, {
+   img: "img/itinerary/business.png",
+   caption: "Business",
+   width: "24"
+ }, {
+   img: "img/itinerary/family.png",
+   caption: "Family",
+   width: "30"
+ }, {
+   img: "img/itinerary/romance.png",
+   caption: "Romance",
+   width: "26"
+ }, {
+   img: "img/itinerary/backpacking.png",
+   caption: "Backpacking",
+   width: "23"
+ }, {
+   img: "img/itinerary/budget.png",
+   caption: "Budget",
+   width: "22"
+ }, {
+   img: "img/itinerary/luxury.png",
+   caption: "Luxury",
+   width: "21"
+ }, {
+   img: "img/itinerary/religious.png",
+   caption: "Religious",
+   width: "26"
+ }, {
+   img: "img/itinerary/friend.png",
+   caption: "Friends",
+   width: "24"
+ }, ];
+ // category type end
+})
+
+.controller('AgenthomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $state) {
+  $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
+  $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+  $scope.oneAtATime = true;
+
+  // tab change
+  var allagthome = ["views/content/agent/agt-home/agthome-itinerary.html", "views/content/agent/agt-home/agthome-tourpackages.html", "views/content/agent/agt-home/agthome-photovideos.html", "views/content/agent/agt-home/agthome-testimonialreviews.html",
+  "views/content/agent/agt-home/agthome-travelactivity.html",
+  "views/content/agent/agt-home/agthome-leadmonitor.html", "views/content/agent/agt-home/agthome-analytics.html",
+  "views/content/agent/agt-home/agthome-aboutus.html"];
+  $scope.agthome = {
+    innerView: allagthome[0]
   };
-  //rating slider end
+  // change url
+  $scope.agthomeoptions = {};
+  $scope.agthomeoptions.active = "";
+  $scope.viewTab = 1;
+  switch ($state.params.name) {
+    case "agthome-itinerary":
+      $scope.agthome.innerView = allagthome[0];
+      $scope.agthomeoptions.active = "agthome-itinerary";
+      break;
+    case "agthome-tourpackages":
+      $scope.agthome.innerView = allagthome[1];
+      $scope.agthomeoptions.active = "agthome-tourpackages";
+      break;
+    case "agthome-photovideos":
+      $scope.agthome.innerView = allagthome[2];
+      $scope.agthomeoptions.active = "agthome-photovideos";
+      break;
+    case "agthome-testimonialreviews":
+      $scope.agthome.innerView = allagthome[3];
+      $scope.agthomeoptions.active = "agthome-testimonialreviews";
+      break;
+    case "agthome-travelactivity":
+      $scope.agthome.innerView = allagthome[4];
+      $scope.agthomeoptions.active = "agthome-travelactivity";
+      break;
+    case "agthome-leadmonitor":
+      $scope.agthome.innerView = allagthome[5];
+      $scope.agthomeoptions.active = "agthome-leadmonitor";
+      break;
+    case "agthome-analytics":
+      $scope.agthome.innerView = allagthome[6];
+      $scope.agthomeoptions.active = "agthome-analytics";
+      break;
+    case "agthome-aboutus":
+      $scope.agthome.innerView = allagthome[7];
+      $scope.agthomeoptions.active = "agthome-aboutus";
+      break;
+    default:
+      $scope.agthome.innerView = allagthome[0];
+  }
+  $scope.getTab = function(view) {
+    $scope.agthome.innerView = allagthome[view];
+    var url = "agthome-itinerary";
+    var active = "";
+    console.log(view);
+    switch (view) {
+      case 0:
+        url = "agthome-itinerary";
+        $scope.agthomeoptions.active = "agthome-itinerary";
+        break;
+      case 1:
+        url = "agthome-tourpackages";
+        $scope.agthomeoptions.active = "agthome-tourpackages";
+        break;
+      case 2:
+        url = "agthome-photovideos";
+        $scope.agthomeoptions.active = "agthome-photovideos";;
+        break;
+      case 3:
+        url = "agthome-testimonialreviews";
+        $scope.agthomeoptions.active = "agthome-testimonialreviews";
+        break;
+      case 4:
+        url = "agthome-travelactivity";
+        $scope.agthomeoptions.active = "agthome-travelactivity";
+        break;
+      case 5:
+        url = "agthome-leadmonitor";
+        $scope.agthomeoptions.active = "agthome-leadmonitor";
+        break;
+      case 6:
+        url = "agthome-analytics";
+        $scope.agthomeoptions.active = "agthome-analytics";
+        break;
+      case 7:
+        url = "agthome-aboutus";
+        $scope.agthomeoptions.active = "agthome-aboutus";
+        break;
+    }
+    console.log(url);
+    $state.go("agent-home", {
+      name: url
+    }, {
+      notify: false
+    });
+  };
+  // tab change end
 
   // category type
   $scope.categoryType = [{
@@ -8004,6 +8148,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     width: "24"
   }, ];
   // category type end
+
 })
 
 .controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {
