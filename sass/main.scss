@@ -1362,7 +1362,8 @@ header {
 
 // travel life
 .travelled-imgholder {
-  height: 440px;
+  min-height: 200px;
+  max-height: 440px;
   overflow: hidden;
 }
 
@@ -4119,9 +4120,7 @@ header {
   width: 99px;
   height: 99px;
   border: 1px solid $brand-dark-blue;
-  img {
-    min-height: 100%;
-  }
+  overflow: hidden;
 }
 
 .ongo-card-main {

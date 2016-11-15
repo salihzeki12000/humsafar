@@ -134,7 +134,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       }
       // type of post ends
 
-      //photos uploaded or not- starts 
+      //photos uploaded or not- starts
       var lenOfPhotos = $scope.ongo.photos.length;
       $scope.ongo.journeyPhoto = false;
       $scope.ongo.viewRelatepic = false;
@@ -298,7 +298,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         // }, {
         //   img: "img/profile.jpg",
         //   name: "Rishabh Katoch"
-        // }, ];     
+        // }, ];
         console.log(modal);
         modal = $uibModal.open({
           animation: true,
@@ -311,6 +311,14 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         });
 
       };
+      setTimeout(function() {
+        $('.flexslider').flexslider({
+          itemMargin: 5,
+          itemWidth: 99,
+          animation: "slide",
+          controlNav: false,
+        });
+      }, 100);
 
       $scope.saveEditedPost = function () {
         console.log($scope.editPost);
@@ -347,8 +355,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         }).success(callback);
       }
 
-      $scope.deleteFromPhotoArr = function (name) {  
-        $scope.editPost.photosArr = _.reject($scope.editPost.photosArr, ['name', name]);     
+      $scope.deleteFromPhotoArr = function (name) {
+        $scope.editPost.photosArr = _.reject($scope.editPost.photosArr, ['name', name]);
       };
 
 
