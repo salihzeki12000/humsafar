@@ -12,6 +12,18 @@
     padding-top: 13%;
   }
   // login page end
+  // on the go journey page
+  .map-journey {
+    display: none;
+  }
+  .on-go-journey { background-color: rgba(0,0,0,0.4); }
+  .ongo-card-holder {
+    margin: 0 auto;
+  }
+  .card-imgholder {
+    height: 300px;
+  }
+  // on the go journey page end
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -92,6 +104,33 @@
   }
   .login-ht { height: 100%; }
   // footer end
+
+  // on the go journey page
+  .on-go-journey .container-fluid { padding: 0; }
+  .ongo-card-holder {
+    width: 100%;
+  }
+  .ongo-journey-change {
+    width: 250px;
+  }
+  .journey-start > img { width: 45px; }
+  .you-in img { width: 150px; }
+  .started-journey-card {
+     .journey-start h4 { font-size: 25px; }
+     .journey-travelling-buddies {
+       bottom: 2px;
+       .img-buddies {
+         width: 42px;
+         height: 45px;
+         border-radius: 16px;
+       }
+     }
+  }
+  .related-imgslider {
+    .flexslider .slides > li { width: 70px !important; }
+  }
+  .related-ongo-slider { @include square(70px); }
+  // on the go journey page end
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -187,5 +226,21 @@
       }
     }
   // login end
+  // on the go journey page
+  .journey-start > img { width: 40px; }
+  .you-in img { width: 130px; }
+  .card-imgholder {
+    height: 250px;
+  }
+  .started-journey-card {
+    .journey-travelling-buddies {
+      .img-buddies {
+        width: 37px;
+        height: 40px;
+        border-radius: 13px;
+      }
+    }
+  }
+  // on the go journey page end
 }
 // media query for 480px to 320px end
