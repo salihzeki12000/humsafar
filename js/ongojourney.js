@@ -134,21 +134,22 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       }
       // type of post ends
 
-      //photos uploaded or not- starts
-      var lenOfPhotos = $scope.ongo.photos.length;
-      $scope.ongo.journeyPhoto = false;
-      $scope.ongo.viewRelatepic = false;
-      $scope.ongo.relatedPhoto = false;
-      if (lenOfPhotos == 1) {
-        $scope.ongo.journeyPhoto = true;
-      } else if ((lenOfPhotos > 0) && (lenOfPhotos <= 6)) {
-        $scope.ongo.journeyPhoto = true;
-        $scope.ongo.viewRelatepic = true;
-      } else if (lenOfPhotos > 6) {
-        $scope.ongo.journeyPhoto = true;
-        $scope.ongo.relatedPhoto = true;
-      }
-      //photos uploaded or not- ends
+      // //photos uploaded or not- starts
+      // var lenOfPhotos = $scope.ongo.photos.length;
+      // console.log(lenOfPhotos);
+      // $scope.ongo.journeyPhoto = false;
+      // $scope.ongo.viewRelatepic = false;
+      // $scope.ongo.relatedPhoto = false;
+      // if (lenOfPhotos == 1) {
+      //   $scope.ongo.journeyPhoto = true;
+      // } else if ((lenOfPhotos > 1) && (lenOfPhotos <= 6)) {
+      //   $scope.ongo.journeyPhoto = true;
+      //   $scope.ongo.viewRelatepic = true;
+      // } else if (lenOfPhotos > 6) {
+      //   $scope.ongo.journeyPhoto = true;
+      //   $scope.ongo.relatedPhoto = true;
+      // }
+      // //photos uploaded or not- ends
       $scope.ongo.buddiesCount = $scope.ongo.buddies.length;
       $scope.ongo.buddiesString = "";
       if ($scope.ongo.buddiesCount == undefined) {
@@ -311,14 +312,14 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         });
 
       };
-      setTimeout(function() {
-        $('.flexslider').flexslider({
-          itemMargin: 5,
-          itemWidth: 99,
-          animation: "slide",
-          controlNav: false,
-        });
-      }, 100);
+      // setTimeout(function() {
+      //   $('.flexslider').flexslider({
+      //     itemMargin: 5,
+      //     itemWidth: 99,
+      //     animation: "slide",
+      //     controlNav: false,
+      //   });
+      // }, 100);
 
       $scope.saveEditedPost = function () {
         console.log($scope.editPost);
@@ -330,6 +331,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           }, function (journeys) {
             var post=_.find(journeys.post,['_id',$scope.ongo._id]);
             $scope.ongo.photos=post.photos;
+            // $scope.ongo=post;
             console.log("photos of this post updated successfully");
           }, function (err) {
             console.log(err);
