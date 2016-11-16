@@ -5,9 +5,87 @@
         <div class="add-agtitinerary">
           <span class="pointer" ng-click="showItinerary = !showItinerary" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
           <div class="add-more-itinerary" ng-show="showItinerary">
-            <ul>
-              <li><a href="">Upload A Tour Package</a></li>
-            </ul>
+            <p class="color-cyan">Enter Details - Tours &amp; Packages</p>
+            <div class="add-tourpackage">
+              <form>
+                <div class="form-group">
+                  <div class="a">
+                    <input type="text" class="form-control color-white" placeholder="Tour Title">
+                  </div>
+                </div>￼
+                <div class="form-group">
+                  <div class="a select-div">
+                    <select class="form-control color-white" id="">
+                       <option disabled selected hidden>Type of Holiday</option>
+                       <option>1</option>
+                       <option>2</option>
+                       <option>3</option>
+                    </select>
+                    <p><i class="fa fa-angle-down" aria-hidden="true"></i></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="a select-div">
+                        <select class="form-control color-white" id="">
+                           <option disabled selected hidden>Currency</option>
+                           <option>1</option>
+                           <option>2</option>
+                           <option>3</option>
+                        </select>
+                        <p><i class="fa fa-angle-down" aria-hidden="true"></i></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="a">
+                        <input type="text" class="form-control color-white" placeholder="Price">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="a">
+                        <input type="text" class="form-control color-white" placeholder="Nights">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="a">
+                        <input type="text" class="form-control color-white" placeholder="Days">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="a select-div">
+                    <select class="form-control color-white" id="">
+                       <option disabled selected hidden>Select Country</option>
+                       <option>1</option>
+                       <option>2</option>
+                       <option>3</option>
+                    </select>
+                    <p><i class="fa fa-angle-down" aria-hidden="true"></i></p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="a">
+                    <input type="text" class="form-control color-white" placeholder="Your Website Booking Link URL">
+                  </div>
+                </div>
+                <p class="font-sz10 color-pink">Please Enter Missing Details</p>
+                <div class="button-touruploads">
+                    <button class="btn btn-white-outline">Upload Pdf</button>
+                    <button class="btn btn-white-outline">Upload Display Picture</button>
+                    <button class="btn btn-pink btn-more tourupload-position">UPLOAD</button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -17,16 +95,16 @@
         <div class="agthome-tourpackage-youtube">
           <!-- <iframe width="550" height="360" src="https://www.youtube.com/embed/IUNM1AeHOv4" frameborder="0" allowfullscreen></iframe> -->
 
-        <div class="youtube-placeholder">
+          <div class="youtube-placeholder">
             <img src="img/paris.jpg" alt="" class="img-responsive">
-        </div>
+          </div>
         </div>
       </div>
       <div class="col-md-6">
         <div class="agt-home-tourpackageintro">
           <h3 class="color-blue">
             Fill in this space to give travel lovers a better sense of what your aggency has to offer.</h3>
-            <p class="color-blue">Regularly updating your itinerary with new itineraries, keeps travellers interedted and informed about how travelling with your agency can make a good trip, great!</p>
+          <p class="color-blue">Regularly updating your itinerary with new itineraries, keeps travellers interedted and informed about how travelling with your agency can make a good trip, great!</p>
         </div>
       </div>
     </div>

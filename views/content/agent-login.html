@@ -68,7 +68,7 @@
 
 
           <!-- COMPANY DETAILS START -->
-          <div class="agent-cmpny-det" hidden>
+          <div class="agent-cmpny-det" >
             <div class="text-center">
               <h3 class="color-blue avenir-black">Company Details</h3>
               <div class="company-details">
@@ -145,7 +145,7 @@
               </div>
               <div class="upload-section" ng-hide="showImage">
                 <!-- <img src="{{userData.profilePicture|uploadpath}}" class="m-center img-responsive doneLoading"> -->
-                <img src="img/upload-icon.jpg" class="m-center img-responsive doneLoading">
+                <img src="img/upload-transparent.png" class="m-center img-responsive doneLoading">
                 <p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
                 <span class="block mt10 color-grey avenir-roman">- or -</span>
                 <div class="upload-btn">
@@ -165,7 +165,6 @@
               </div>
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
-                <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
                 <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)">Done</button>
               </div>
             </div>
@@ -174,7 +173,7 @@
           <!-- AGENT LOGO UPLOAD END -->
 
           <!-- ABOUT AGENT -->
-          <div class="agent-about">
+          <div class="agent-about" hidden>
             <div class="text-center">
               <h3 class="color-blue avenir-black">About Sai Travels</h3>
               <div class="form-group">
@@ -185,7 +184,7 @@
               </div>
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
-                
+
                 <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)">Done</button>
               </div>
             </div>
@@ -315,7 +314,7 @@
                 </div>
                 <div class="button-panel clearfix">
                   <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
-                  <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
+
                   <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)">Done</button>
                 </div>
               </div>

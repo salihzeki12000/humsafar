@@ -266,6 +266,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       controller: 'AgenthomeCtrl',
       reloadOnSearch: false
     })
+    .state('agent-upgrade', {
+      url: "/agent-upgrade",
+      templateUrl: "views/template.html",
+      controller: 'AgentupgradeCtrl'
+    })
     .state('ProfileList', {
       url: "/profile-list/:active",
       templateUrl: "views/template.html",

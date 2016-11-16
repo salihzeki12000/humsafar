@@ -1,4 +1,9 @@
 // AGENT LOGIN START
+.btn-cyan {
+  @include button-variant( white,
+  $brand-cyan,
+  $brand-cyan);
+}
 
 .font-sz10 {
   font-size: 10px;
@@ -931,6 +936,11 @@ q {
   }
 }
 
+.agt-home-tourpackage .add-more-itinerary {
+  width: 290px;
+  padding-bottom: 40px;
+}
+
 .agthome-activitycard {
   border-radius: 4px;
   background-color: $brand-blue;
@@ -965,6 +975,7 @@ q {
 
 .agttravel-activity {
   padding-top: 5px;
+
   p {
     margin: 0;
   }
@@ -997,4 +1008,116 @@ q {
     text-align: center;
     margin: 0;
   }
+}
+
+.a {
+  input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    padding: 0;
+  }
+
+  select {
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    padding: 0;
+
+    option {
+      background-color: $brand-blue;
+      border: none;
+    }
+  }
+}
+
+.select-div {
+  position: relative;
+
+  p {
+    font-size: 30px;
+    color: white;
+    position: absolute;
+    right: 0;
+    top: -5px;
+  }
+}
+
+.button-touruploads {
+  .btn {
+    font-size: 12px;
+  }
+}
+
+.tourupload-position {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.upgrade-card {
+  background-color: rgba(255,255,255,0.8);
+  border: none;
+  border-radius: 5px;
+  padding: 40px 30px;
+  margin: 40px 0;
+}
+
+.package-holder {
+  text-align: center;
+  @extend .color-blue;
+  @extend .font-sz18;
+}
+
+.upgrade-list, .upgradetable-head {
+  border-bottom: 1px solid $brand-grey;
+  padding: 10px 0;
+
+  i.fa.fa-check {
+    border: 1px solid red;
+    border-radius: 100%;
+    padding: 6px;
+  }
+  p{
+    margin: 0;
+  }
+}
+
+.badge {
+  margin: 0 10px;
+  padding: 4px 7px;
+  background-color: $brand-cyan;
+  border-radius: 100%;
+  color: #fff;
+  @extend .pointer;
+}
+
+.hover-tip{
+  position: absolute;
+  height: 30px;
+  width: 50px;
+  top: 0;
+  left: 0;
+  background-color: $brand-blue;
+}
+
+.package-img {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.upgrade-title {
+  @extend .color-blue;
+  @extend .font-sz18;
+  @extend .avenir-medium;
+}
+
+.upgrade-feature {
+  @extend .color-pink;
+  @extend .font-sz18;
+  @extend .text-center;
+  @extend .avenir-heavy;
 }

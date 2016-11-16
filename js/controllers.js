@@ -184,13 +184,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $interval.cancel(stopinterval);
         console.log("close call");
         authenticatesuccess();
-      }
-<<<<<<< HEAD
-    };
-=======
+      };
      };
->>>>>>> d66ddc9eb31137198e1b99dce285e3fb141e9020
-
   })
   .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $stateParams) {
     //Used to name the .html file
@@ -7781,6 +7776,103 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
   });
 })
+
+.controller('AgentupgradeCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  $scope.template = TemplateService.changecontent("agent-upgrade"); //Use same name of .html file
+  $scope.menutitle = NavigationService.makeactive("Agent Upgrade"); //This is the Title of the Website
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+
+  // // upgrade feature end
+  $scope.agentUpgradeFeature = [
+    {
+      upgradeFeature: "Itineraries",
+      basicValue: "5",
+      advValue: "25",
+      premValue: "Unlimited"
+    },
+    {
+      upgradeFeature: "Tours & Packages",
+      basicValue: "1",
+      advValue: "5",
+      premValue: "Unlimited"
+    },
+    {
+      upgradeFeature: "Featured Tours & Packages on Popular Agents",
+      basicValue: '<i class="fa fa-minus"></i>',
+      advValue: '<i class="fa fa-minus"></i>',
+      premValue: '<i class="fa fa-check"></i>'
+    },
+    {
+      upgradeFeature: "Featured Tours & Packages on Destination Agents",
+      basicValue: '<i class="fa fa-minus"></i>',
+      advValue: '<i class="fa fa-check"></i>',
+      premValue: '<i class="fa fa-check"></i>'
+    },
+    {
+      upgradeFeature: "Lead Monitor - Access to TraveLibro Audience",
+      basicValue: '<i class="fa fa-minus"></i>',
+      advValue: '<i class="fa fa-minus"></i>',
+      premValue: '<i class="fa fa-check"></i>'
+    },
+    {
+      upgradeFeature: "Analyse Profile Views",
+      basicValue: "3",
+      advValue: "3",
+      premValue: "3"
+    },
+    {
+      upgradeFeature: "Connect With Followers",
+      basicValue: "3",
+      advValue: '<i class="fa fa-check"></i>',
+      premValue: "3"
+    },
+    {
+      upgradeFeature: "Lead Analytics",
+      basicValue: '<i class="fa fa-minus"></i>',
+      advValue: '<i class="fa fa-minus"></i>',
+      premValue: '<i class="fa fa-check"></i>'
+    },
+    {
+      upgradeFeature: "Analyse Views &amp; Downloads",
+      basicValue: '<i class="fa fa-minus"></i>',
+      advValue: '<i class="fa fa-minus"></i>',
+      premValue: '<i class="fa fa-check"></i>'
+    },
+    {
+      upgradeFeature: "List on Popular Agents",
+      basicValue: '<i class="fa fa-minus"></i>',
+      advValue: '<i class="fa fa-minus"></i>',
+      premValue: '<i class="fa fa-check"></i>'
+    },
+    {
+      upgradeFeature: "Upload Photos & Videos",
+      basicValue: '<i class="fa fa-check"></i>',
+      advValue: '<i class="fa fa-check"></i>',
+      premValue: '<i class="fa fa-check"></i>'
+    },
+    {
+      upgradeFeature: "About Us",
+      basicValue: '<i class="fa fa-check"></i>',
+      advValue: '<i class="fa fa-check"></i>',
+      premValue: '<i class="fa fa-check"></i>'
+    },
+    {
+      upgradeFeature: "Select Specialisation",
+      basicValue: '<i class="fa fa-check"></i>',
+      advValue: '<i class="fa fa-check"></i>',
+      premValue: '<i class="fa fa-check"></i>'
+    },
+    {
+      upgradeFeature: "Popular Agents Adverts to TraveLibro Audience",
+      basicValue: '<i class="fa fa-check"></i>',
+      advValue: '<i class="fa fa-check"></i>',
+      premValue: '<i class="fa fa-check"></i>'
+    }
+  ];
+  // // upgrade feature end
+})
+
 
 .controller('AgentuserCtrl', function($scope, TemplateService, NavigationService, $timeout, $state) {
   $scope.template = TemplateService.changecontent("agent-user"); //Use same name of .html file
