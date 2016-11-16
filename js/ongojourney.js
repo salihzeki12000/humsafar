@@ -220,7 +220,17 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           $scope.listOfLikes = data.data;
         });
       }
+      
       $scope.getComments = function (id) {
+        //open modal starts
+         $uibModal.open({
+          templateUrl: "views/modal/notify.html",
+          animation: true,
+          scope: $scope,
+          windowClass: "notify-popup"
+        });
+        //open model ends
+
         var formData = {
           "_id": id
         };
@@ -234,6 +244,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
         });
       };
+
       $scope.postComment = function (uniqueId, comment,id) {
         var formData = {
           "uniqueId": uniqueId,
@@ -331,6 +342,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           }, function (journeys) {
             var post=_.find(journeys.post,['_id',$scope.ongo._id]);
             $scope.ongo.photos=post.photos;
+             $scope.ongo.showMap=post.showMap;
             // $scope.ongo=post;
             console.log("photos of this post updated successfully");
           }, function (err) {
@@ -399,14 +411,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
 
         backgroundClick.scope = $scope;
       };
-      $scope.notify = function () {
-        $uibModal.open({
-          templateUrl: "views/modal/notify.html",
-          animation: true,
-          scope: $scope,
-          windowClass: "notify-popup"
-        });
-      }
 
       $scope.time = {};
       $scope.datetime = {};
@@ -490,6 +494,54 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           console.log("failed to delete");
         })
       }
+
+       // review country visited pop up
+    $scope.giveReview = function () {
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/review-post.html",
+        scope: $scope,
+        backdropClass: "review-backdrop"
+      })
+    };
+    $scope.showRating = 1;
+    $scope.fillColor = "";
+    $scope.starRating = function (val) {
+      if (val == 1) {
+        $scope.showRating = 1;
+        $scope.fillColor2 = "";
+        $scope.fillColor3 = "";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 2) {
+        $scope.showRating = 2;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 3) {
+        $scope.showRating = 3;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 4) {
+        $scope.showRating = 4;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "fa-star";
+        $scope.fillColor5 = "";
+      } else if (val == 5) {
+        $scope.showRating = 5;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "fa-star";
+        $scope.fillColor5 = "fa-star";
+      } else {
+        $scope.showRating = 1;
+      }
+    };
+    // review country visited pop up end
 
       var formatDate = function (date) {
         var d = new Date(date),

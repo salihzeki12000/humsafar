@@ -1,4 +1,4 @@
-var globalGetProfile = function(data, status) {
+var globalGetProfile = function (data, status) {
   if (data._id) {
     $.jStorage.set("isLoggedIn", true);
     $.jStorage.set("profile", data);
@@ -164,7 +164,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     var authenticatesuccess = function (data, status) {
-      
+
       console.log("authenticate successful");
       $ionicLoading.hide();
       $interval.cancel(stopinterval);
@@ -185,8 +185,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log("close call");
         authenticatesuccess();
       }
-     };
-      
+    };
+
   })
   .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $stateParams) {
     //Used to name the .html file
@@ -804,7 +804,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       var posts = [];
 
       posts = _.filter($scope.journey.post,  'latlong');
-      console.log(posts);
       _.each(posts, function (n, $index) {
         centers[$index] = {
           "lat": parseFloat(n.latlong.lat),
@@ -966,7 +965,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     initMap = function () {
 
-      console.log(google);
+
       if (typeof google === 'object' && typeof google.maps === 'object') {
         var bounds = new google.maps.LatLngBounds();
         var step = 0;
@@ -1293,53 +1292,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     $scope.format = "yyyy/MM/dd";
 
-    // review country visited pop up
-    $scope.giveReview = function () {
-      $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/review-post.html",
-        scope: $scope,
-        backdropClass: "review-backdrop"
-      })
-    };
-    $scope.showRating = 1;
-    $scope.fillColor = "";
-    $scope.starRating = function (val) {
-      if (val == 1) {
-        $scope.showRating = 1;
-        $scope.fillColor2 = "";
-        $scope.fillColor3 = "";
-        $scope.fillColor4 = "";
-        $scope.fillColor5 = "";
-      } else if (val == 2) {
-        $scope.showRating = 2;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "";
-        $scope.fillColor4 = "";
-        $scope.fillColor5 = "";
-      } else if (val == 3) {
-        $scope.showRating = 3;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "fa-star";
-        $scope.fillColor4 = "";
-        $scope.fillColor5 = "";
-      } else if (val == 4) {
-        $scope.showRating = 4;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "fa-star";
-        $scope.fillColor4 = "fa-star";
-        $scope.fillColor5 = "";
-      } else if (val == 5) {
-        $scope.showRating = 5;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "fa-star";
-        $scope.fillColor4 = "fa-star";
-        $scope.fillColor5 = "fa-star";
-      } else {
-        $scope.showRating = 1;
-      }
-    };
-    // review country visited pop up end
+
 
     // edit journey name
     //edit journey name modal
@@ -1520,11 +1473,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var modal = "";
 
     $scope.review = {};
+
     $scope.countryReview = function () {
       $scope.reviewCountryCount = 0;
-      $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
-      $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
+      if ($scope.journey.review[$scope.reviewCountryCount] != undefined) {
 
+
+        $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
+        $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
+      }
       modal = $uibModal.open({
         animation: true,
         templateUrl: "views/modal/review-country.html",
@@ -3293,7 +3250,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
 
     $scope.updateBucketList = function (country) {
-      MyLife.updateBucketList(country, function (data, status) {
+      MyLife.updateBucketList(country,function (data, status) {
         reloadCount();
       }, function () {});
       $scope.getMap();
@@ -3305,9 +3262,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       if (country.countryVisited === true) {
         $scope.visited = [];
         var callback = function (data) {
-          $scope.visited = data;
+          var a = _.filter(data.data.countriesVisited, ["countryId", country._id,]);
+          var visitedArr = [];
+          _.each(a[0].visited, function (n, index) {
+            visitedArr[n.year] = {
+              "times": n.times,
+              "year": n.year
+            };
+          });
+          console.log(visitedArr);
+          $scope.visited = visitedArr;
         };
-        MyLife.getCountryVisitedListWeb(country._id, callback);
+        MyLife.getCountryVisitedListWeb(callback);
         modal = $uibModal.open({
           scope: $scope,
           animation: true,
@@ -6037,11 +6003,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, 100);
 
   })
-  .controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, MyLife) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
-
+    $scope.activeMenu = $stateParams.active;
+    console.log($scope.activeMenu);
     $scope.template = TemplateService.changecontent("profile-list");
     $scope.menutitle = NavigationService.makeactive("ProfileList");
     TemplateService.title = $scope.menutitle;
@@ -6112,73 +6079,108 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, ];
     // countrylist and bucketlist end
     // following and followers
-    $scope.following = [{
-      imgFollowing: "img/follower.jpg",
-      nameFollow: "Andrea Christina",
-      cityName: "Mumbai",
-      countryName: "India",
-      photos: "208",
-      location: "345",
-      followType: "Follow",
-      countryVisited: "300",
-      followersUser: "2.8M",
-      journey: "315"
-    }, {
-      imgFollowing: "img/follower.jpg",
-      nameFollow: "Andrea Christina",
-      cityName: "Mumbai",
-      countryName: "India",
-      photos: "208",
-      location: "345",
-      followType: "Following",
-      countryVisited: "300",
-      followersUser: "2.8M",
-      journey: "315"
-    }, {
-      imgFollowing: "img/follower.jpg",
-      nameFollow: "Andrea Christina",
-      cityName: "Mumbai",
-      countryName: "India",
-      photos: "208",
-      location: "345",
-      followType: "Follow",
-      countryVisited: "300",
-      followersUser: "2.8M",
-      journey: "315"
-    }, {
-      imgFollowing: "img/follower.jpg",
-      nameFollow: "Andrea Christina",
-      cityName: "Mumbai",
-      countryName: "India",
-      photos: "208",
-      location: "345",
-      followType: "Following",
-      countryVisited: "300",
-      followersUser: "2.8M",
-      journey: "315"
-    }, {
-      imgFollowing: "img/follower.jpg",
-      nameFollow: "Andrea Christina",
-      cityName: "Mumbai",
-      countryName: "India",
-      photos: "208",
-      location: "345",
-      followType: "Follow",
-      countryVisited: "300",
-      followersUser: "2.8M",
-      journey: "315"
-    }, {
-      imgFollowing: "img/follower.jpg",
-      nameFollow: "Andrea Christina",
-      cityName: "Mumbai",
-      countryName: "India",
-      photos: "208",
-      location: "345",
-      followType: "Following",
-      countryVisited: "300",
-      followersUser: "2.8M",
-      journey: "315"
-    }, ];
+    // $scope.following = [{
+    //   imgFollowing: "img/follower.jpg",
+    //   nameFollow: "Andrea Christina",
+    //   cityName: "Mumbai",
+    //   countryName: "India",
+    //   photos: "208",
+    //   location: "345",
+    //   followType: "Follow",
+    //   countryVisited: "300",
+    //   followersUser: "2.8M",
+    //   journey: "315"
+    // }, {
+    //   imgFollowing: "img/follower.jpg",
+    //   nameFollow: "Andrea Christina",
+    //   cityName: "Mumbai",
+    //   countryName: "India",
+    //   photos: "208",
+    //   location: "345",
+    //   followType: "Following",
+    //   countryVisited: "300",
+    //   followersUser: "2.8M",
+    //   journey: "315"
+    // }, {
+    //   imgFollowing: "img/follower.jpg",
+    //   nameFollow: "Andrea Christina",
+    //   cityName: "Mumbai",
+    //   countryName: "India",
+    //   photos: "208",
+    //   location: "345",
+    //   followType: "Follow",
+    //   countryVisited: "300",
+    //   followersUser: "2.8M",
+    //   journey: "315"
+    // }, {
+    //   imgFollowing: "img/follower.jpg",
+    //   nameFollow: "Andrea Christina",
+    //   cityName: "Mumbai",
+    //   countryName: "India",
+    //   photos: "208",
+    //   location: "345",
+    //   followType: "Following",
+    //   countryVisited: "300",
+    //   followersUser: "2.8M",
+    //   journey: "315"
+    // }, {
+    //   imgFollowing: "img/follower.jpg",
+    //   nameFollow: "Andrea Christina",
+    //   cityName: "Mumbai",
+    //   countryName: "India",
+    //   photos: "208",
+    //   location: "345",
+    //   followType: "Follow",
+    //   countryVisited: "300",
+    //   followersUser: "2.8M",
+    //   journey: "315"
+    // }, {
+    //   imgFollowing: "img/follower.jpg",
+    //   nameFollow: "Andrea Christina",
+    //   cityName: "Mumbai",
+    //   countryName: "India",
+    //   photos: "208",
+    //   location: "345",
+    //   followType: "Following",
+    //   countryVisited: "300",
+    //   followersUser: "2.8M",
+    //   journey: "315"
+    // }, ];
+
+    var callbackFollowers = function (data) {
+      $scope.followersList = data.data.followers;
+      console.log($scope.followersList);
+    };
+
+    var callbackFollowings = function (data) {
+      $scope.followingList = data.data.followers;
+      console.log($scope.followingList);
+
+    };
+
+    var callbackGetCountriesVisited=function(data){
+      $scope.countryVisitedList=data;
+    };
+
+    var callbackBucketList=function(data){
+      $scope.bucketList=data;
+    };
+
+    var callbackRemoveFromBucketList=function(countryId){
+      document.getElementById(countryId).remove();
+    };
+    $scope.removeFromBucketList=function(id){
+      MyLife.updateBucketListWeb(id,callbackRemoveFromBucketList);
+    }
+
+    MyLife.getFollowersWeb(callbackFollowings);
+    MyLife.getFollowersWeb(callbackFollowers);
+    MyLife.getCountryVisitedListWeb(callbackGetCountriesVisited);
+    MyLife.getOneBucketList(callbackBucketList);
+
+    MyLife.getOneBucketList(callbackBucketList);
+
+
     // following and followers end
 
   })

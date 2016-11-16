@@ -256,7 +256,7 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       reloadOnSearch: false
     })
     .state('ProfileList', {
-      url: "/profile-list",
+      url: "/profile-list/:active",
       templateUrl: "views/template.html",
       controller: 'ProfileListCtrl'
     });

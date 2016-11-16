@@ -46,24 +46,47 @@ var navigationservice = angular.module('mylife', [])
       console.log(obj);
       $http.post(adminURL + "/user/updateCountriesVisitedWeb", obj).success(callback).error(errCallback);
     },
-    getCountryVisitedListWeb: function (id, callback) {
+    getCountryVisitedListWeb: function (callback) {
       $http({
         url: adminURL + "/user/getCountryVisitedListWeb",
         method: "POST"
       }).success(function (data) {
-
-        var a = _.filter(data.data.countriesVisited, ["countryId", id]);
-
-        var visitedArr = [];
-        _.each(a[0].visited, function (n, index) {
-          visitedArr[n.year] = {
-            "times": n.times,
-            "year": n.year
-          };
-        });
-        console.log(visitedArr);
-        callback(visitedArr);
+        console.log(data.data.countriesVisited);
+        callback(data.data.countriesVisited);
       });
+    },
+    getOneBucketList: function (callback) {
+      $http({
+        url: adminURL + "/user/getBucketListWeb",///////////////////use getOneBucketList
+        method: "POST"
+      }).success(function (data) {
+        console.log(data.data.bucketList);
+        callback(data.data.bucketList);
+      });
+    },
+    updateBucketListWeb:function(countryId,callback){
+      var obj={
+        "bucketList":countryId,
+        "delete":true
+      };
+      console.log(obj);
+      $http({
+        url:adminURL + "/user/updateBucketListWeb",
+        method:"POST",
+        data:obj
+      }).success(callback(countryId));
+    },
+    getFollowingWeb: function (callback) {
+      $http({
+        url: adminURL + "/user/getFollowingWeb",
+        method: "POST"
+      }).success(callback);
+    },
+    getFollowersWeb: function (callback) {
+      $http({
+        url: adminURL + "/user/getFollowersWeb",
+        method: "POST"
+      }).success(callback);
     }
   };
 });

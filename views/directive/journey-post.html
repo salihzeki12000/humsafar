@@ -54,7 +54,7 @@
 
         <!-- related img if more then 5 then slider-->
         <div class="related-imgslider" ng-if="ongo.photos.length>5">
-            <flex-slider flex-slide="slide in ongo.photos track by $index" item-width="99" class="related-slide carousel" animation="true" item-margin="5">
+            <flex-slider flex-slide="slide in ongo.photos track by $index" item-width="99" class="related-slide carousel" animation="true" item-margin="5" control-nav="false">
                 <!---- put item width 99 if needed -->
                 <li>
                     <div class="related-ongo-slider">
@@ -89,7 +89,7 @@
                         <li><a href=""><i class="fa color-blue" ng-class="ongo.likeDone ? 'fa-heart' : 'fa-heart-o'" ng-click="likes(ongo.uniqueId)"></i></a></li>
                         <li>
                             <a href="">
-                                <img src="img/comments.png" alt="" height="18" ng-click="notify();getComments(ongo._id);">
+                                <img src="img/comments.png" alt="" height="18" ng-click="getComments(ongo._id);">
                             </a>
                         </li>
                         <li class="relate">

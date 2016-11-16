@@ -9,6 +9,12 @@
   </div>
   <div class="checkin-main">
     <form>
+       <div class="checkin-input-holder">
+      <div class="form-group">
+        <input type="text" class="form-control" ng-click="showJourneyIcon = !showJourneyIcon" ng>
+        <i class="fa fa-angle-down color-white"></i>
+      </div>
+       </div>
       <!-- uploaded file -->
       <div class="file-input">
         <div class="row">
@@ -49,7 +55,7 @@
       </div>
       <!-- uploaded file end -->
       <!-- upload photo or video -->
-          <!--<div class="upload-checkin-sec">
+      <!--<div class="upload-checkin-sec">
             <div class="checkin-uploaded-pic">
               <div class="uploaded-photo-imgholder">
                 <img src="img/uploaded-pic.jpg" alt="" class="img-responsive">
@@ -81,51 +87,51 @@
           </div>-->
       <!-- upload photo or video end -->
       <!-- tag friends -->
-      <d></d>iv class="tag-friend">
-        <div class="row">
-          <div class="col-md-8">
-            <div class="checkin-input-holder input-tag-friend">
-              <input type="text" class="form-control" ng-model="searchFriend" placeholder="Tag Friends" ng-click="viewFriend = !viewFriend">
-              <span class="tag-add-imgholder">
+      <!--<d></d>iv class="tag-friend">-->
+      <div class="row">
+        <div class="col-md-8">
+          <div class="checkin-input-holder input-tag-friend">
+            <input type="text" class="form-control" ng-model="searchFriend" placeholder="Tag Friends" ng-click="viewFriend = !viewFriend">
+            <span class="tag-add-imgholder">
                 <img src="img/add-friend.png" alt="" width="25">
               </span>
-              <span class="tag-search-icon"><i class="fa fa-search color-white"></i></span>
-              <div class="tagfriend-list" ng-show="viewFriend">
-                <ul>
-                  <li ng-repeat="friend in listFriend | filter:searchFriend">
-                    <div class="friend-listholder select-friend">
-                      <input type="checkbox" name="tag-list" id="{{friend.name}}">
-                      <label for="{{friend.name}}">
+            <span class="tag-search-icon"><i class="fa fa-search color-white"></i></span>
+            <div class="tagfriend-list" ng-show="viewFriend">
+              <ul>
+                <li ng-repeat="friend in listFriend | filter:searchFriend">
+                  <div class="friend-listholder select-friend">
+                    <input type="checkbox" name="tag-list" id="{{friend.name}}">
+                    <label for="{{friend.name}}">
                         <div class="friend-imgholder">
                           <img ng-src="{{friend.img}}" alt="{{friend.name}}" class="img-responsive">
                         </div>
                         <span class="color-blue avenir-roman">{{friend.name}}</span>
                       </label>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="savebtn-checkin">
-              <button class="btn btn-pink btn-more full-width" ng-click="saveEditedPost()">Save</button>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
+        <div class="col-md-4">
+          <div class="savebtn-checkin">
+            <button class="btn btn-pink btn-more full-width" ng-click="saveEditedPost()">Save</button>
+          </div>
+        </div>
       </div>
-      <!-- tag friends end -->
-      <!-- tag deleted btn -->
-      <div class="tagged-delete-list">
-        <a href="" ng-repeat="list in tagButton">
-          <span class="img-friend"><img ng-src="{{list.img}}" alt="img-responsive"></span>
-          <span class="color-white avenir-roman inline-block v-mid">{{list.name}}</span>
-          <span class="hover-tag-btn">
+  </div>
+  <!-- tag friends end -->
+  <!-- tag deleted btn -->
+  <div class="tagged-delete-list">
+    <a href="" ng-repeat="list in tagButton">
+      <span class="img-friend"><img ng-src="{{list.img}}" alt="img-responsive"></span>
+      <span class="color-white avenir-roman inline-block v-mid">{{list.name}}</span>
+      <span class="hover-tag-btn">
             <i class="fa fa-trash-o color-white get-center"></i>
           </span>
-        </a>
-      </div>
-      <!-- tag deleted btn end-->
-    </form>
+    </a>
   </div>
+  <!-- tag deleted btn end-->
+  </form>
+</div>
 </div>
