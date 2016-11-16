@@ -248,11 +248,22 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       templateUrl: "views/template.html",
       controller: 'AgentuserCtrl'
     })
+    .state('agent-home-without', {
+      url: "/agent-home",
+      templateUrl: "views/template.html",
+      controller: 'AgenthomeCtrl'
+    })
 
   .state('agent-user', {
       url: "/agent-user/:name",
       templateUrl: "views/template.html",
       controller: 'AgentuserCtrl',
+      reloadOnSearch: false
+    })
+  .state('agent-home', {
+      url: "/agent-home/:name",
+      templateUrl: "views/template.html",
+      controller: 'AgenthomeCtrl',
       reloadOnSearch: false
     })
     .state('ProfileList', {

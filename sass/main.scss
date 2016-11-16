@@ -4342,13 +4342,11 @@ header {
     border-top-right-radius: 6px;
     background-color: $brand-dark-pink;
     h4 {
-      display: inline-block;
-      margin: 0 0 0 30%;
+      margin: 0;
       font-size: 25px;
     }
     p {
-      margin-top: 10px;
-      float: right;
+      margin-top: 5px;
       font-size: 12px;
     }
   }
@@ -4357,6 +4355,7 @@ header {
     height: 260px;
     margin-top: -2px;
     overflow: hidden;
+    img { width: 100%; }
   }
   .travelling-journey-type {
     padding: 10px;
@@ -6772,6 +6771,9 @@ header {
   top: 0;
   z-index: 2;
   img[src="https://maps.gstatic.com/mapfiles/api-3/images/google_white5.png"] {
+    display: none !important;
+  }
+  img[src="https://maps.gstatic.com/mapfiles/api-3/images/google4.png"] {
     display: none !important;
   }
 }
