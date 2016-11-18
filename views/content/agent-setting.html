@@ -1,15 +1,15 @@
 <div class="agent-setting">
   <div class="container">
-    <div class="setting-card"  auto-height>
+    <div class="setting-card" auto-height>
       <h3 class="color-blue font-bold text-center m-clear mb20 setting-heading">Settings</h3>
       <div class="setting-agent-detail">
         <div class="row">
           <div class="col-md-4">
             <div class="agt-setting-list avenir-medium">
-              <div class="agt-setting-profile clearfix">
+              <div class="agt-setting-profile clearfix pointer" ng-click="agtsetting(1)" ng-class="{'bg-white active-agtsetting' : showAgtSetting == 1}">
                 <i class="fa fa-chevron-right pull-right"></i>
                 <div class="agt-setting-profimg">
-                <img src="img/profile-main.png" alt="" class="img-responsive">
+                  <img src="img/profile-main.png" alt="" class="img-responsive">
                 </div>
                 <div class="agtprofile-detail inline-block v-top">
                   <h4 class="color-blue m-clear">Amit Duxctronn</h4>
@@ -18,7 +18,7 @@
               </div>
               <ul>
                 <!-- edit profile -->
-                <li>
+                <li class="pointer" ng-click="agtsetting(2)" ng-class="{'bg-white active-agtsetting' : showAgtSetting == 2}">
                   <div class="edit-profile-heading clearfix">
                     <div class="row">
                       <div class="col-md-2">
@@ -37,7 +37,7 @@
                 </li>
                 <!-- edit profile end -->
                 <!-- change password  -->
-                <li>
+                <li class="pointer" ng-click="agtsetting(3)" ng-class="{'bg-white active-agtsetting' : showAgtSetting == 3}">
                   <div class="password-heading clearfix">
                     <div class="row">
                       <div class="col-md-2">
@@ -56,7 +56,7 @@
                 </li>
                 <!-- change password end -->
                 <!-- privacy  -->
-                <li>
+                <li class="pointer" ng-click="agtsetting(4)" ng-class="{'bg-white active-agtsetting' : showAgtSetting == 4}">
                   <div class="privacy-heading clearfix">
                     <div class="row">
                       <div class="col-md-2">
@@ -75,7 +75,7 @@
                 </li>
                 <!-- privacy end -->
                 <!-- plans  -->
-                <li>
+                <li class="pointer" ng-click="agtsetting(5)" ng-class="{'bg-white active-agtsetting' : showAgtSetting == 5}">
                   <div class="upload-heading clearfix">
                     <div class="row">
                       <div class="col-md-2">
@@ -94,7 +94,7 @@
                 </li>
                 <!-- plans end -->
                 <!-- billing -->
-                <li>
+                <li class="pointer" ng-click="agtsetting(6)" ng-class="{'bg-white active-agtsetting' : showAgtSetting == 6}">
                   <div class="upload-heading clearfix">
                     <div class="row">
                       <div class="col-md-2">
@@ -113,7 +113,7 @@
                 </li>
                 <!-- billing end -->
                 <!-- purchase history -->
-                <li>
+                <li class="pointer" ng-click="agtsetting(7)" ng-class="{'bg-white active-agtsetting' : showAgtSetting == 7}">
                   <div class="upload-heading clearfix">
                     <div class="row">
                       <div class="col-md-2">
@@ -123,7 +123,7 @@
                       </div>
                       <div class="col-md-10">
                         <div class="tab-list">
-                          <h5 class="color-blue inline-block m-clear">Data Upload</h5>
+                          <h5 class="color-blue inline-block m-clear">Purchase History</h5>
                           <i class="fa fa-chevron-right pull-right"></i>
                         </div>
                       </div>
@@ -132,8 +132,8 @@
                 </li>
                 <!-- purchase history end -->
                 <!-- Report problem -->
-                <li>
-                  <div class="report-problem-heading clearfix">
+                <li class="pointer" ng-click="agtsetting(8)" ng-class="{'bg-white active-agtsetting' : showAgtSetting == 8}">
+                  <div class="agtreport-problem-heading clearfix">
                     <div class="row">
                       <div class="col-md-2">
                         <div class="text-center">
@@ -153,10 +153,10 @@
               </ul>
             </div>
           </div>
-          <div class="col-md-8">
-            <div class="">
+          <div class="col-md-8 col-pad-zero">
+            <div class="agtsetting-white">
               <!-- profile detail -->
-              <div class="profile-detail-main">
+              <div class="profile-detail-main" ng-if="showAgtSetting == 1">
                 <form action="">
                   <div class="profile-agtphoto-sec upload-profile">
                     <label for="profile" class="color-blue">Profile Photo</label>
@@ -214,23 +214,23 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                          <label for="office-location" class="color-blue">Head Office Location</label>
-                          <div class="custom-select">
-                            <select name="" id="Nationality">
+                        <label for="office-location" class="color-blue">Head Office Location</label>
+                        <div class="custom-select">
+                          <select name="" id="Nationality">
                               <option value="India" class="color-blue">India</option>
                             </select>
-                          </div>
+                        </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="agt-settingcity">
                         <div class="form-group">
-                            <label for="" class="color-blue"></label>
-                            <div class="custom-select">
-                              <select name="" id="city">
+                          <label for="" class="color-blue"></label>
+                          <div class="custom-select">
+                            <select name="" id="city">
                                 <option value="India" class="color-blue">Mumbai</option>
                               </select>
-                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -239,8 +239,8 @@
                     <div class="col-md-6">
                       <div class="agt-settingaddr">
                         <div class="form-group">
-                            <label for="" class="color-blue">Address</label>
-                            <textarea name="name"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse</textarea>
+                          <label for="" class="color-blue">Address</label>
+                          <textarea name="name"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse</textarea>
                         </div>
                       </div>
 
@@ -256,9 +256,9 @@
                     <div class="col-md-12">
                       <div class="agtsetting-abt">
                         <div class="form-group">
-                            <label for="" class="color-blue">About</label>
-                            <textarea name="name"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse </textarea>
-                            <span class="pull-right font-sz10 mt10" id="remainAbt"></span>
+                          <label for="" class="color-blue">About</label>
+                          <textarea name="name"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse </textarea>
+                          <span class="pull-right font-sz10 mt10" id="remainAbt"></span>
                         </div>
                       </div>
                     </div>
@@ -270,7 +270,399 @@
                   </div>
                 </form>
               </div>
-              <!-- profile detail -->
+              <!-- profile detail end -->
+
+              <!-- Edit Details  -->
+              <div class="agtsetting-edit" ng-if="showAgtSetting == 2">
+                <!-- category of specialization -->
+                <div class="agtcategory-setting">
+                  <h4 class="color-blue setting-tab-heading">Category of Specialization</h4>
+                  <ul>
+                    <li ng-repeat="categgoryspcl in chooseCategorySpcl">
+                      <div class="select-categoryspcl">
+                        <figure>
+                          <div class="categoryspcl-imgholder">
+                            <img src="{{categgoryspcl.img}}" alt="" class="img-responsive m-center">
+                          </div>
+                          <figcaption class="color-blue font-bold">{{categgoryspcl.caption}}</figcaption>
+                        </figure>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <!-- category of specialization -->
+                <!-- country Specialisation -->
+                <div class="agtcountry-setting">
+                  <h4 class="color-blue setting-tab-heading">Countries Of Specialization</h4>
+                  <div class="country-acordian">
+                    <uib-accordion close-others="oneAtATime">
+                      <div uib-accordion-group class="panel-default" is-open="status.open1">
+                        <uib-accordion-heading>
+                          <div class="agtaccord-title color-blue avenir-medium">Africa
+                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open1, 'fa fa-chevron-down': !status.open1}"></i>
+                          </div>
+                        </uib-accordion-heading>
+                        <div class="country-tabs">
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+
+                        </div>
+                      </div>
+
+                      <div uib-accordion-group class="panel-default" is-open="status.open2">
+                        <uib-accordion-heading>
+                          <div class="agtaccord-title color-blue avenir-medium">Asia
+                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open2, 'fa fa-chevron-down': !status.open2}"></i>
+                          </div>
+                        </uib-accordion-heading>
+                        <div class="country-tabs">
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                        </div>
+                      </div>
+
+                      <div uib-accordion-group class="panel-default" is-open="status.open3">
+                        <uib-accordion-heading>
+                          <div class="agtaccord-title color-blue avenir-medium">Europe
+                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open3, 'fa fa-chevron-down': !status.open3}"></i>
+                          </div>
+                        </uib-accordion-heading>
+                        <div class="country-tabs">
+
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+
+                        </div>
+                      </div>
+
+                      <div uib-accordion-group class="panel-default" is-open="status.open4">
+                        <uib-accordion-heading>
+                          <div class="agtaccord-title color-blue avenir-medium">North America
+                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open4, 'fa fa-chevron-down': !status.open4}"></i>
+                          </div>
+                        </uib-accordion-heading>
+                        <div class="country-tabs">
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+
+                        </div>
+                      </div>
+
+                      <div uib-accordion-group class="panel-default" is-open="status.open5">
+                        <uib-accordion-heading>
+                          <div class="agtaccord-title color-blue avenir-medium">Ocenia
+                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open5, 'fa fa-chevron-down': !status.open5}"></i>
+                          </div>
+                        </uib-accordion-heading>
+                        <div class="country-tabs">
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                        </div>
+                      </div>
+
+                      <div uib-accordion-group class="panel-default" is-open="status.open6">
+                        <uib-accordion-heading>
+                          <div class="agtaccord-title color-blue avenir-medium">South America
+                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open6, 'fa fa-chevron-down': !status.open6}"></i>
+                          </div>
+                        </uib-accordion-heading>
+                        <div class="country-tabs">
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
+                        </div>
+                      </div>
+
+                    </uib-accordion>
+                  </div>
+                </div>
+                <!-- country Specialisation end -->
+                <div class="clearfix mt20">
+                  <div class="pull-right">
+                    <button type="submit" class="btn btn-pink btn-more">Save</button>
+                  </div>
+                </div>
+              </div>
+              <!-- Edit Details end -->
+              <!-- change password -->
+              <div class="change-password-detail" ng-if="showAgtSetting == 3">
+                <form>
+                  <h4 class="color-blue setting-tab-heading">Password</h4>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Current Password">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="password" class="form-control" placeholder="New Password">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Confirm Password">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix mt20">
+                    <div class="pull-right">
+                      <button class="btn btn-pink btn-more">Save</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- change password end -->
+              <!-- privacy policy  -->
+              <div class="privacy-detail" ng-if="showAgtSetting == 4">
+                <h4 class="color-blue setting-tab-heading">Privacy Policy</h4>
+                <form>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="radio-select">
+                        <input type="radio" id="public" name="privacy">
+                        <label for="public" class="color-blue">Public - Everyone</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="radio-select">
+                        <input type="radio" id="private" name="privacy">
+                        <label for="private" class="color-blue">Private - My Followers</label>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="avenir-medium color-grey fz12 mt20">When you select your account to be private only, your followers can view your My Life - Journeys, Moments and Reviews.</p>
+                  <div class="clearfix mt20">
+                    <div class="pull-right">
+                      <button class="btn btn-pink btn-more">Save</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- privacy policy end -->
+              <!-- plans -->
+              <div class="agtsetting-plans" ng-if="showAgtSetting == 5">
+                <h4 class="color-blue setting-tab-heading">Plans</h4>
+                <div class="upgradetable-head">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="package-holder">
+                        <div class="package-img">
+                          <img src="img/basic-icon.png" alt="" class="img-responsive m-center">
+                        </div>
+                        <p class="avenir-heavy">Basic</p>
+                        <p class="avenir-medium">Free</p>
+                        <a class="font-sz10 color-grey bord-bot">Details</a>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="package-holder">
+                        <div class="package-img">
+                          <img src="img/advanced-icon.png" alt="" class="img-responsive m-center">
+                        </div>
+                        <p class="avenir-heavy">Advanced</p>
+                        <p class="avenir-heavy">$149</p>
+                        <p class="avenir-medium">for 3 Months</p>
+                        <a class="font-sz10 color-grey bord-bot">Details</a>
+                        <div class="text-center mt10 mb10">
+                          <button class="btn btn-cyan btn-more">Upgrade</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="package-holder">
+                        <div class="package-img">
+                          <img src="img/premium-icon.png" alt="" class="img-responsive m-center">
+                        </div>
+                        <p class="avenir-heavy">Premium</p>
+                        <p class="avenir-heavy">$249</p>
+                        <p class="avenir-medium">for 3 Months</p>
+                        <a class="font-sz10 color-grey bord-bot">Details</a>
+                        <div class="text-center mt10 mb10">
+                          <button class="btn btn-cyan btn-more">Upgrade</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- plans end -->
+              <!-- billing -->
+              <!-- billing end -->
+              <!-- purchase history -->
+              <div class="agtsetting-purchasehistory" ng-if="showAgtSetting == 7">
+                <h4 class="color-blue setting-tab-heading">Purchase History</h4>
+                <div class="purchasehistory-table">
+                  <table class="purchase-table">
+                    <thead>
+                      <tr>
+                        <th >Date</th>
+                        <th >Plan</th>
+                        <th>Reciept</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td colspan="3">
+                      <div class="table-scroll">
+                        <table>
+                        <tr>
+                          <td width="33.33%">
+                            <p>16 Jan 2016</p>
+                          </td>
+                          <td width="45%">
+                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                          </td>
+                          <td >
+                            <a class="reciept-link">TL-3464910</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p>16 Jan 2016</p>
+                          </td>
+                          <td>
+                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                          </td>
+                          <td>
+                            <a class="reciept-link">TL-3464910</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p>16 Jan 2016</p>
+                          </td>
+                          <td>
+                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                          </td>
+                          <td>
+                            <a class="reciept-link">TL-3464910</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p>16 Jan 2016</p>
+                          </td>
+                          <td>
+                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                          </td>
+                          <td>
+                            <a class="reciept-link">TL-3464910</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p>16 Jan 2016</p>
+                          </td>
+                          <td>
+                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                          </td>
+                          <td>
+                            <a class="reciept-link">TL-3464910</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p>16 Jan 2016</p>
+                          </td>
+                          <td>
+                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                          </td>
+                          <td>
+                            <a class="reciept-link">TL-3464910</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p>16 Jan 2016</p>
+                          </td>
+                          <td>
+                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                          </td>
+                          <td>
+                            <a class="reciept-link">TL-3464910</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p>16 Jan 2016</p>
+                          </td>
+                          <td>
+                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                          </td>
+                          <td>
+                            <a class="reciept-link">TL-3464910</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p>16 Jan 2016</p>
+                          </td>
+                          <td>
+                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                          </td>
+                          <td>
+                            <a class="reciept-link">TL-3464910</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p>16 Jan 2016</p>
+                          </td>
+                          <td>
+                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                          </td>
+                          <td>
+                            <a class="reciept-link">TL-3464910</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p>16 Jan 2016</p>
+                          </td>
+                          <td>
+                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                          </td>
+                          <td>
+                            <a class="reciept-link">TL-3464910</a>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                      </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- purchase history end -->
+              <!-- report a problem -->
+              <div class="problem-detail" ng-if="showAgtSetting == 8">
+                <form>
+                  <label for="problem">Report A Problem</label>
+                  <textarea name="" id="problem" class="form-control" placeholder="Comment"></textarea>
+                  <div class="clearfix mt20">
+                    <div class="pull-right">
+                      <button class="btn btn-pink btn-more">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- report a problem end -->
             </div>
           </div>
         </div>
