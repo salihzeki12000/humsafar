@@ -1178,12 +1178,58 @@ q {
   overflow: hidden;
 }
 
-.agtsetting-abt {
+.agtsetting-abt, .agt-settingaddr {
   label{
     display: block;
   }
   textarea {
     width: 100%;
+    overflow: hidden;
+  }
+}
+
+.agtsetting-abt{
+  textarea{
     height: 100px;
+  }
+}
+
+.setting-card{
+  input, textarea{
+    background-color: transparent;
+    border: 1px solid $brand-blue;
+    border-radius: 4px;
+  }
+  .custom-select {
+    select {
+      padding: 10px;
+      border: 1px solid $brand-dark-blue;
+      border-radius: 7px;
+      color: $brand-dark-blue;
+    }
+    &:after {
+      content: "\f078";
+      color: $brand-dark-blue;
+      right: 8px;
+    }
+  }
+}
+
+.agtupload-section{
+  border: 1px solid $brand-blue;
+  border-radius: 4px;
+  padding: 15px;
+}
+
+.agent-setting{
+  .upload-profile{
+    padding:0 0 20px;
+    box-shadow: none;
+  }
+}
+
+.agt-settingcity{
+  .custom-select{
+    margin-top: 12px;
   }
 }

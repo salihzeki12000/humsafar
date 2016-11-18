@@ -158,7 +158,7 @@
               <!-- profile detail -->
               <div class="profile-detail-main">
                 <form action="">
-                  <div class="profile-photo-sec upload-profile">
+                  <div class="profile-agtphoto-sec upload-profile">
                     <label for="profile" class="color-blue">Profile Photo</label>
                     <div class="cropArea relate" ng-show="showImage" id="profile">
                       <div class="cancel" ng-click="showImage"><span class="color-white pointer">Cancel</span></div>
@@ -168,9 +168,9 @@
                         <button class="btn btn-pink btn-more">Upload</button>
                       </div>
                     </div>
-                    <div class="upload-section text-center" ng-hide="showImage">
+                    <div class="agtupload-section text-center" ng-hide="showImage">
                       <img src="img/upload-transparent.png" alt="" class="m-center img-responsive">
-                      <p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
+                      <p class="text-center color-grey avenir-roman">Drag Your Company Logo here</p>
                       <span class="block mt10 color-grey avenir-roman">-or-</span>
                       <div class="upload-btn">
                         <div class="relate inline-block mr10">
@@ -223,13 +223,15 @@
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <div class="form-group">
-                          <label for="" class="color-blue"></label>
-                          <div class="custom-select">
-                            <select name="" id="Nationality">
-                              <option value="India" class="color-blue">Mumbai</option>
-                            </select>
-                          </div>
+                      <div class="agt-settingcity">
+                        <div class="form-group">
+                            <label for="" class="color-blue"></label>
+                            <div class="custom-select">
+                              <select name="" id="city">
+                                <option value="India" class="color-blue">Mumbai</option>
+                              </select>
+                            </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -256,6 +258,7 @@
                         <div class="form-group">
                             <label for="" class="color-blue">About</label>
                             <textarea name="name"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse </textarea>
+                            <span class="pull-right font-sz10 mt10" id="remainAbt"></span>
                         </div>
                       </div>
                     </div>

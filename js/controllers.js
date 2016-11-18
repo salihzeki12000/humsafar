@@ -7782,6 +7782,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.menutitle = NavigationService.makeactive("Agent Settings"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
+  // Textarea counter
+  $scope.$on('$viewContentLoaded', function () {
+    $timeout(function () {
+      $("#remainAbt").html("00 / 500");
+      $('textarea').keypress(function () {
+
+        if (this.value.length > 500) {
+          return false;
+        }
+        $("#remainAbt").html((this.value.length) + " / 500");
+      });
+    });
+  });
+  // Textarea counter end
 })
 
 
