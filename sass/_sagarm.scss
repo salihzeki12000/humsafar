@@ -1,8 +1,7 @@
 // AGENT LOGIN START
+
 .btn-cyan {
-  @include button-variant( white,
-  $brand-cyan,
-  $brand-cyan);
+  @include button-variant( white, $brand-cyan, $brand-cyan);
 }
 
 .font-sz10 {
@@ -1071,7 +1070,8 @@ q {
   @extend .font-sz18;
 }
 
-.upgrade-list, .upgradetable-head {
+.upgrade-list,
+.upgradetable-head {
   border-bottom: 1px solid $brand-grey;
   padding: 10px 0;
 
@@ -1080,7 +1080,8 @@ q {
     border-radius: 100%;
     padding: 6px;
   }
-  p{
+
+  p {
     margin: 0;
   }
 }
@@ -1091,22 +1092,57 @@ q {
   background-color: $brand-cyan;
   border-radius: 100%;
   color: #fff;
+  position: relative;
+  display: inline-block;
   @extend .pointer;
+
+  &:hover {
+    .hover-tip {
+      display: block;
+    }
+  }
 }
 
-.hover-tip{
+.hover-tip {
+  // display: none;
   position: absolute;
-  height: 30px;
-  width: 50px;
-  top: 0;
-  left: 0;
+  width: 200px;
+  bottom: 30px;
+  left: 50%;
+  padding: 10px;
+  white-space: pre-line;
+  text-align: left;
   background-color: $brand-blue;
+  @include transform(translateX(-50%));
+  border-radius: 4px;
+
+  &::before {
+    border-color: #2d3655 transparent transparent;
+    transform: translateX(-50%);
+    width: 0;
+    border-style: solid;
+    border-width: 10px 10px 0;
+    margin-right: 5px;
+    position: absolute;
+    height: 0;
+    content: '';
+    left: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    bottom: -10px;
+  }
+
+  p {
+    @extend .mb10;
+    line-height: 1.4;
+    @extend .avenir-light;
+  }
 }
 
 .package-img {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
 }
 
 .upgrade-title {
@@ -1120,4 +1156,34 @@ q {
   @extend .font-sz18;
   @extend .text-center;
   @extend .avenir-heavy;
+}
+
+.setting-card {
+  background-color: #F1F2F2;
+  padding: 20px 40px;
+  background-color: #f1f2f2;
+
+  .setting-heading {
+    font-size: 20px;
+  }
+}
+
+.agt-setting-profimg {
+  width: 63px;
+  height: 65px;
+  border: 2px solid $brand-grey;
+  border-radius: 25px;
+  box-shadow: 0 3px 1px #e3e3e3;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.agtsetting-abt {
+  label{
+    display: block;
+  }
+  textarea {
+    width: 100%;
+    height: 100px;
+  }
 }

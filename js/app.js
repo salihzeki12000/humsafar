@@ -243,6 +243,11 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       templateUrl: "views/template.html",
       controller: 'AgentloginCtrl'
     })
+    .state('agent-setting', {
+      url: "/agent-setting",
+      templateUrl: "views/template.html",
+      controller: 'AgentsettingCtrl'
+    })
     .state('agent-user-without', {
       url: "/agent-user",
       templateUrl: "views/template.html",

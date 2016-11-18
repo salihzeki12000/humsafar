@@ -7777,11 +7777,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   });
 })
 
+.controller('AgentsettingCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  $scope.template = TemplateService.changecontent("agent-setting"); //Use same name of .html file
+  $scope.menutitle = NavigationService.makeactive("Agent Settings"); //This is the Title of the Website
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+})
+
+
 .controller('AgentupgradeCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
   $scope.template = TemplateService.changecontent("agent-upgrade"); //Use same name of .html file
   $scope.menutitle = NavigationService.makeactive("Agent Upgrade"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
+  $scope.variables = {};
+  $scope.variables.tooltips = {};
+  $scope.showTip = false;
+  $scope.showTip = function(index){
+    // if($scope.showTip == false){
+    //   $scope.showTip = true;
+    // }else{
+    //   $scope.showTip = false;
+    // }
+    _.each($scope.variables.tooltips,function (value,property) {
+      $scope.variables.tooltips[property]=false;
+      })
+    $scope.variables.tooltips[index]=$scope.variables.tooltips[index]?false:true;
+  };
 
   // // upgrade feature end
   $scope.agentUpgradeFeature = [
@@ -7789,85 +7811,99 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       upgradeFeature: "Itineraries",
       basicValue: "5",
       advValue: "25",
-      premValue: "Unlimited"
+      premValue: "Unlimited",
+      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
     },
     {
       upgradeFeature: "Tours & Packages",
       basicValue: "1",
       advValue: "5",
-      premValue: "Unlimited"
+      premValue: "Unlimited",
+      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
     },
     {
       upgradeFeature: "Featured Tours & Packages on Popular Agents",
       basicValue: '<i class="fa fa-minus"></i>',
       advValue: '<i class="fa fa-minus"></i>',
-      premValue: '<i class="fa fa-check"></i>'
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool:"Lorem ipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
     },
     {
       upgradeFeature: "Featured Tours & Packages on Destination Agents",
       basicValue: '<i class="fa fa-minus"></i>',
       advValue: '<i class="fa fa-check"></i>',
-      premValue: '<i class="fa fa-check"></i>'
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool:"t. Est praesentium modi cum odit reprehenderit cupiditate"
     },
     {
       upgradeFeature: "Lead Monitor - Access to TraveLibro Audience",
       basicValue: '<i class="fa fa-minus"></i>',
       advValue: '<i class="fa fa-minus"></i>',
-      premValue: '<i class="fa fa-check"></i>'
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
     },
     {
       upgradeFeature: "Analyse Profile Views",
       basicValue: "3",
       advValue: "3",
-      premValue: "3"
+      premValue: "3",
+      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum t cupiditate"
     },
     {
       upgradeFeature: "Connect With Followers",
       basicValue: "3",
       advValue: '<i class="fa fa-check"></i>',
-      premValue: "3"
+      premValue: "3",
+      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentiumnderit cupiditate"
     },
     {
       upgradeFeature: "Lead Analytics",
       basicValue: '<i class="fa fa-minus"></i>',
       advValue: '<i class="fa fa-minus"></i>',
-      premValue: '<i class="fa fa-check"></i>'
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentiumreprehenderit cupiditate"
     },
     {
       upgradeFeature: "Analyse Views &amp; Downloads",
       basicValue: '<i class="fa fa-minus"></i>',
       advValue: '<i class="fa fa-minus"></i>',
-      premValue: '<i class="fa fa-check"></i>'
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium  cum odit reprehenderit cupiditate"
     },
     {
       upgradeFeature: "List on Popular Agents",
       basicValue: '<i class="fa fa-minus"></i>',
       advValue: '<i class="fa fa-minus"></i>',
-      premValue: '<i class="fa fa-check"></i>'
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool:" ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
     },
     {
       upgradeFeature: "Upload Photos & Videos",
       basicValue: '<i class="fa fa-check"></i>',
       advValue: '<i class="fa fa-check"></i>',
-      premValue: '<i class="fa fa-check"></i>'
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. dit reprehenderit cupiditate"
     },
     {
       upgradeFeature: "About Us",
       basicValue: '<i class="fa fa-check"></i>',
       advValue: '<i class="fa fa-check"></i>',
-      premValue: '<i class="fa fa-check"></i>'
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditateLorem Est praesentium modi cum odit reprehen"
     },
     {
       upgradeFeature: "Select Specialisation",
       basicValue: '<i class="fa fa-check"></i>',
       advValue: '<i class="fa fa-check"></i>',
-      premValue: '<i class="fa fa-check"></i>'
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool:"Lorem Est praesentium modi cum odit reprehenderit cupiditate"
     },
     {
       upgradeFeature: "Popular Agents Adverts to TraveLibro Audience",
       basicValue: '<i class="fa fa-check"></i>',
       advValue: '<i class="fa fa-check"></i>',
-      premValue: '<i class="fa fa-check"></i>'
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cupiditate"
     }
   ];
   // // upgrade feature end

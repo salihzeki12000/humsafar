@@ -1,0 +1,277 @@
+<div class="agent-setting">
+  <div class="container">
+    <div class="setting-card"  auto-height>
+      <h3 class="color-blue font-bold text-center m-clear mb20 setting-heading">Settings</h3>
+      <div class="setting-agent-detail">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="agt-setting-list avenir-medium">
+              <div class="agt-setting-profile clearfix">
+                <i class="fa fa-chevron-right pull-right"></i>
+                <div class="agt-setting-profimg">
+                <img src="img/profile-main.png" alt="" class="img-responsive">
+                </div>
+                <div class="agtprofile-detail inline-block v-top">
+                  <h4 class="color-blue m-clear">Amit Duxctronn</h4>
+                  <span class="color-blue">16 Jan 1988</span>
+                </div>
+              </div>
+              <ul>
+                <!-- edit profile -->
+                <li>
+                  <div class="edit-profile-heading clearfix">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="text-center">
+                          <img src="img/edit-profile.png" alt="">
+                        </div>
+                      </div>
+                      <div class="col-md-10">
+                        <div class="tab-list">
+                          <h5 class="color-blue inline-block m-clear">Edit Profile - <span class="fz10">A little more about me</span></h5>
+                          <i class="fa fa-chevron-right pull-right"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <!-- edit profile end -->
+                <!-- change password  -->
+                <li>
+                  <div class="password-heading clearfix">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="text-center">
+                          <img src="img/setting.png" alt="">
+                        </div>
+                      </div>
+                      <div class="col-md-10">
+                        <div class="tab-list">
+                          <h5 class="color-blue inline-block m-clear">Change Password</h5>
+                          <i class="fa fa-chevron-right pull-right"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <!-- change password end -->
+                <!-- privacy  -->
+                <li>
+                  <div class="privacy-heading clearfix">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="text-center">
+                          <img src="img/privacy.png" alt="">
+                        </div>
+                      </div>
+                      <div class="col-md-10">
+                        <div class="tab-list">
+                          <h5 class="color-blue inline-block m-clear">Privacy</h5>
+                          <i class="fa fa-chevron-right pull-right"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <!-- privacy end -->
+                <!-- plans  -->
+                <li>
+                  <div class="upload-heading clearfix">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="text-center">
+                          <img src="img/data-upload.png" alt="">
+                        </div>
+                      </div>
+                      <div class="col-md-10">
+                        <div class="tab-list">
+                          <h5 class="color-blue inline-block m-clear">Plans</h5>
+                          <i class="fa fa-chevron-right pull-right"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <!-- plans end -->
+                <!-- billing -->
+                <li>
+                  <div class="upload-heading clearfix">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="text-center">
+                          <img src="img/data-upload.png" alt="">
+                        </div>
+                      </div>
+                      <div class="col-md-10">
+                        <div class="tab-list">
+                          <h5 class="color-blue inline-block m-clear">Billing</h5>
+                          <i class="fa fa-chevron-right pull-right"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <!-- billing end -->
+                <!-- purchase history -->
+                <li>
+                  <div class="upload-heading clearfix">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="text-center">
+                          <img src="img/data-upload.png" alt="">
+                        </div>
+                      </div>
+                      <div class="col-md-10">
+                        <div class="tab-list">
+                          <h5 class="color-blue inline-block m-clear">Data Upload</h5>
+                          <i class="fa fa-chevron-right pull-right"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <!-- purchase history end -->
+                <!-- Report problem -->
+                <li>
+                  <div class="report-problem-heading clearfix">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div class="text-center">
+                          <img src="img/report-problem.png" alt="">
+                        </div>
+                      </div>
+                      <div class="col-md-10">
+                        <div class="tab-list">
+                          <h5 class="color-blue inline-block m-clear">Report A Problem</h5>
+                          <i class="fa fa-chevron-right pull-right"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <!-- Report problem end -->
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="">
+              <!-- profile detail -->
+              <div class="profile-detail-main">
+                <form action="">
+                  <div class="profile-photo-sec upload-profile">
+                    <label for="profile" class="color-blue">Profile Photo</label>
+                    <div class="cropArea relate" ng-show="showImage" id="profile">
+                      <div class="cancel" ng-click="showImage"><span class="color-white pointer">Cancel</span></div>
+                      <img-crop image="myImage" result-image="myCroppedImage">
+                      </img-crop>
+                      <div class="btn-upload">
+                        <button class="btn btn-pink btn-more">Upload</button>
+                      </div>
+                    </div>
+                    <div class="upload-section text-center" ng-hide="showImage">
+                      <img src="img/upload-transparent.png" alt="" class="m-center img-responsive">
+                      <p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
+                      <span class="block mt10 color-grey avenir-roman">-or-</span>
+                      <div class="upload-btn">
+                        <div class="relate inline-block mr10">
+                          <button class="btn btn-dark-blue pointer avenir-light">Select a Company Logo from your computer</button>
+                          <input type="file" id="fileInput" class="getfile pointer" />
+                        </div>
+                        <div class="inline-block">
+                          <button class="btn btn-dark-blue pointer avenir-light">Your Photos</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="name" class="color-blue">Name</label>
+                        <input type="text" class="form-control" placeholder="Sai Travels">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="contact-no" class="color-blue">Contact No</label>
+                        <input type="text" class="form-control" placeholder="02226565801">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="email" class="color-blue">Email</label>
+                        <input type="text" class="form-control" id="email" placeholder="amit@travelibro.com">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="mobile-no" class="color-blue">Mobile No</label>
+                        <input type="text" class="form-control" placeholder="9619222222">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="office-location" class="color-blue">Head Office Location</label>
+                          <div class="custom-select">
+                            <select name="" id="Nationality">
+                              <option value="India" class="color-blue">India</option>
+                            </select>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="" class="color-blue"></label>
+                          <div class="custom-select">
+                            <select name="" id="Nationality">
+                              <option value="India" class="color-blue">Mumbai</option>
+                            </select>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="agt-settingaddr">
+                        <div class="form-group">
+                            <label for="" class="color-blue">Address</label>
+                            <textarea name="name"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse</textarea>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="name" class="color-blue">Website</label>
+                        <input type="text" class="form-control" placeholder="www.travelibro.com">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="agtsetting-abt">
+                        <div class="form-group">
+                            <label for="" class="color-blue">About</label>
+                            <textarea name="name"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse </textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix mt20">
+                    <div class="pull-right">
+                      <button type="submit" class="btn btn-pink btn-more">Save</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- profile detail -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

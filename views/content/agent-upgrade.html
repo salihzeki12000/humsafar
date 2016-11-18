@@ -37,12 +37,16 @@
       </div>
       <!-- table head row end -->
 
+
       <!-- upgrade list on ng-repeat -->
       <div class="upgrade-list" ng-repeat="plan in agentUpgradeFeature track by $index">
         <div class="row">
           <div class="col-md-6">
             <div class="upgrade-title">
-              <p> {{plan.upgradeFeature}} <span class="badge"> ? </span> </p>
+              <span> {{plan.upgradeFeature}} </span>
+              <div class="badge" ng-click="showTip($index)"> ?
+                <div class="hover-tip" ng-if="variables.tooltips[$index]" ng-mouseleave='variables.tooltips[$index] = false'><p>{{plan.upgradetool}}</p></div>
+              </div>
             </div>
           </div>
           <div class="col-md-2">
@@ -68,11 +72,13 @@
       <!-- <div class="upgrade-list">
         <div class="row">
           <div class="col-md-6">
-          <div class="upgrade-title">
-              <p> Itineraries
-                <span class="badge"> ? </span> </p>
-                <div class="hover-tip"></div>
-          </div>
+            <div class="upgrade-title">
+              <span> Itineraries </span>
+                <div class="badge"> ?
+                  <div class="hover-tip"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate</p></div>
+                </div>
+
+            </div>
           </div>
           <div class="col-md-2">
             <div class="upgrade-feature">
@@ -80,9 +86,9 @@
             </div>
           </div>
           <div class="col-md-2">
-          <div class="upgrade-feature">
+            <div class="upgrade-feature">
               <p> <i class="fa fa-check-circle-o" aria-hidden="true"></i> </p>
-          </div>
+            </div>
           </div>
           <div class="col-md-2">
             <div class="upgrade-feature">
