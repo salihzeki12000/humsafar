@@ -80,6 +80,11 @@
   }
   // journey info strip end
   // on the go journey page end
+  // trip summary
+  .trip-day-detail {
+    max-height: 150px;
+  }
+  // trip summary end
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -348,6 +353,11 @@
   }
   // jounrey info strip end
   // on the go journey page end
+  // trip summary
+  .tripsummary-main {
+    .container-fluid, .container { padding: 0; }
+  }
+  // trip summary end
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -612,5 +622,15 @@
   }
   .edit-journey-dropdown { width: 185px; }
   // on the go journey page end
+  // trip summary
+  .trip-day-detail  {
+    .day { width: 14%; }
+    .trip-status {
+      width: 76%;
+      .status { font-size: 14px; }
+      .trip-time-day { margin: 10px 0px 0px; }
+    }
+  }
+  // trip summary end
 }
 // media query for 480px to 320px end
