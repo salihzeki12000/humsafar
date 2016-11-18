@@ -1,9 +1,9 @@
 <div class="notify-main">
-  <div class="container-fluid">
+  <div class="container-fluid" ng-repeat="photos in ongo.photos">
     <div class="bg-white">
       <div class="notify-imgsec">
         <div class="notify-imgholder">
-          <img src="img/notify-adrena.jpg" alt="Andrea" class="img-reponsive">
+          <img ng-src="{{photos.name|uploadpath}}" alt="Andrea" class="img-reponsive">
         </div>
       </div>
       <div class="comment-like-notify">

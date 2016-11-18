@@ -164,7 +164,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     var authenticatesuccess = function (data, status) {
-
       console.log("authenticate successful");
       $ionicLoading.hide();
       $interval.cancel(stopinterval);
@@ -422,7 +421,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log("Eroor Fetching Data");
       }
     };
-
     $scope.searchByKey = function (searchCity) {
       NavigationService.getAllCities({
         "search": searchCity
@@ -7782,6 +7780,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.menutitle = NavigationService.makeactive("Agent Settings"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
+  $scope.oneAtATime = true;
   // Textarea counter
   $scope.$on('$viewContentLoaded', function () {
     $timeout(function () {
@@ -7796,6 +7795,62 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
   });
   // Textarea counter end
+
+  //setting tab navigation
+  $scope.showAgtSetting = 1;
+  $scope.agtsetting = function (val) {
+    if (val == 1) {
+      $scope.showAgtSetting = 1;
+    } else if (val == 2) {
+      $scope.showAgtSetting = 2;
+    } else if (val == 3) {
+      $scope.showAgtSetting = 3;
+    } else if (val == 4) {
+      $scope.showAgtSetting = 4;
+    } else if (val == 5) {
+      $scope.showAgtSetting = 5;
+    } else if (val == 6) {
+      $scope.showAgtSetting = 6;
+    } else if (val == 7){
+      $scope.showAgtSetting = 7;
+    } else if (val == 8) {
+      $scope.showAgtSetting = 8;
+    } else {
+      $scope.showAgtSetting = 1;
+    }
+  };
+  //setting tab navigation end
+
+  // choose category Specialisation
+  $scope.chooseCategorySpcl = [{
+    img: "img/agt-cat1.png",
+    caption: "Adventure",
+  }, {
+    img: "img/agt-cat2.png",
+    caption: "Business"
+  }, {
+    img: "img/agt-cat3.png",
+    caption: "Family"
+  }, {
+    img: "img/agt-cat4.png",
+    caption: "Romance"
+  }, {
+    img: "img/agt-cat5.png",
+    caption: "Backpacking"
+  }, {
+    img: "img/agt-cat6.png",
+    caption: "Budget"
+  },{
+    img: "img/agt-cat7.png",
+    caption: "Luxury"
+  },{
+    img: "img/agt-cat8.png",
+    caption: "Religious"
+  },{
+    img: "img/agt-cat9.png",
+    caption: "Friends"
+  }];
+  // choose category Specialisation end
 })
 
 

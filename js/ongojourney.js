@@ -114,9 +114,19 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
     },
     templateUrl: 'views/directive/journey-post.html',
     link: function ($scope, element, attrs) {
-      // console.log($scope.ongo);
-
+      var counter = 0
+      $scope.getTimes = function (n, type) {
+        if (type == "marked") {
+          n = parseInt(n);
+          return new Array(n);
+        } else if (type == "unmarked") {
+          n = parseInt(n);
+          var remainCount = 5 - n;
+          return new Array(remainCount);
+        }
+      };
       $scope.ongo.journeyTypeicon = "";
+
       // type of post starts
       $scope.ongo.typeOfPost = "";
       if ($scope.ongo && $scope.ongo.checkIn && $scope.ongo.checkIn.location) {
@@ -134,22 +144,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       }
       // type of post ends
 
-      // //photos uploaded or not- starts
-      // var lenOfPhotos = $scope.ongo.photos.length;
-      // console.log(lenOfPhotos);
-      // $scope.ongo.journeyPhoto = false;
-      // $scope.ongo.viewRelatepic = false;
-      // $scope.ongo.relatedPhoto = false;
-      // if (lenOfPhotos == 1) {
-      //   $scope.ongo.journeyPhoto = true;
-      // } else if ((lenOfPhotos > 1) && (lenOfPhotos <= 6)) {
-      //   $scope.ongo.journeyPhoto = true;
-      //   $scope.ongo.viewRelatepic = true;
-      // } else if (lenOfPhotos > 6) {
-      //   $scope.ongo.journeyPhoto = true;
-      //   $scope.ongo.relatedPhoto = true;
-      // }
-      // //photos uploaded or not- ends
       $scope.ongo.buddiesCount = $scope.ongo.buddies.length;
       $scope.ongo.buddiesString = "";
       if ($scope.ongo.buddiesCount == undefined) {
@@ -220,10 +214,10 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           $scope.listOfLikes = data.data;
         });
       }
-      
+
       $scope.getComments = function (id) {
         //open modal starts
-         $uibModal.open({
+        $uibModal.open({
           templateUrl: "views/modal/notify.html",
           animation: true,
           scope: $scope,
@@ -245,12 +239,12 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         });
       };
 
-      $scope.postComment = function (uniqueId, comment,id) {
+      $scope.postComment = function (uniqueId, comment, id) {
         var formData = {
           "uniqueId": uniqueId,
           "text": comment,
-          "type":"post",
-          "post":id
+          "type": "post",
+          "post": id
         };
         $http({
           url: adminURL + "/comment/addCommentWeb",
@@ -292,35 +286,47 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           $scope.editPost.photosArr[index] = _.pick(n, ['_id', 'name', 'caption']);
 
         });
-        //    $scope.listFriend = [{
-        //   img: "img/profile.jpg",
-        //   name: "Amit Verma"
-        // }, {
-        //   img: "img/profile.jpg",
-        //   name: "Vignesh Kasturi"
-        // }, {
-        //   img: "img/profile.jpg",
-        //   name: "Dhavel Gala"
-        // }, {
-        //   img: "img/profile.jpg",
-        //   name: "Pooja Thakre"
-        // }, {
-        //   img: "img/profile.jpg",
-        //   name: "Vinod Bhelose"
-        // }, {
-        //   img: "img/profile.jpg",
-        //   name: "Rishabh Katoch"
-        // }, ];
-        console.log(modal);
+           $scope.listFriend = [{
+          img: "img/profile.jpg",
+          name: "Amit Verma"
+        }, {
+          img: "img/profile.jpg",
+          name: "Vignesh Kasturi"
+        }, {
+          img: "img/profile.jpg",
+          name: "Dhavel Gala"
+        }, {
+          img: "img/profile.jpg",
+          name: "Pooja Thakre"
+        }, {
+          img: "img/profile.jpg",
+          name: "Vinod Bhelose"
+        }, {
+          img: "img/profile.jpg",
+          name: "Rishabh Katoch"
+        }, ];
         modal = $uibModal.open({
           animation: true,
           templateUrl: "views/modal/checkin.html",
           backdropClass: "review-backdrop",
           scope: $scope
         });
-        modal.closed.then(function () {
 
-        });
+        $scope.searchBuddy = function (key) {
+          // if(parseFloat(key.length)%3==0){
+          $http({
+            url:adminURL + "/user/searchBuddyWeb",
+            method:"POST",
+            data:{
+              "search":key,
+            }
+          }).success(function(data){
+            console.log(data);
+            $scope.buddiesList=data.data;
+            console.log($scope.selectedBuddiesList);
+          });
+        }
+        // }
 
       };
       // setTimeout(function() {
@@ -335,14 +341,17 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       $scope.saveEditedPost = function () {
         console.log($scope.editPost);
         var concatedArray = _.partition($scope.editPost.photosArr, '_id');
-        var callback=function () {
+
+        //callback starts
+        var callback = function () {
           console.log(modal);
           OnGoJourney.getOneJourney({
             "urlSlug": $scope.json.urlSlug
           }, function (journeys) {
-            var post=_.find(journeys.post,['_id',$scope.ongo._id]);
-            $scope.ongo.photos=post.photos;
-             $scope.ongo.showMap=post.showMap;
+            var post = _.find(journeys.post, ['_id', $scope.ongo._id]);
+            $scope.ongo.photos = post.photos;
+            $scope.ongo.showMap = post.showMap;
+           
             // $scope.ongo=post;
             console.log("photos of this post updated successfully");
           }, function (err) {
@@ -350,6 +359,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           });
           modal.close();
         }
+        //callback ends
+
         var formData = {
           "_id": $scope.ongo._id,
           "uniqueId": $scope.ongo.uniqueId,
@@ -495,53 +506,85 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         })
       }
 
-       // review country visited pop up
-    $scope.giveReview = function () {
-      $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/review-post.html",
-        scope: $scope,
-        backdropClass: "review-backdrop"
-      })
-    };
-    $scope.showRating = 1;
-    $scope.fillColor = "";
-    $scope.starRating = function (val) {
-      if (val == 1) {
-        $scope.showRating = 1;
-        $scope.fillColor2 = "";
-        $scope.fillColor3 = "";
-        $scope.fillColor4 = "";
-        $scope.fillColor5 = "";
-      } else if (val == 2) {
-        $scope.showRating = 2;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "";
-        $scope.fillColor4 = "";
-        $scope.fillColor5 = "";
-      } else if (val == 3) {
-        $scope.showRating = 3;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "fa-star";
-        $scope.fillColor4 = "";
-        $scope.fillColor5 = "";
-      } else if (val == 4) {
-        $scope.showRating = 4;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "fa-star";
-        $scope.fillColor4 = "fa-star";
-        $scope.fillColor5 = "";
-      } else if (val == 5) {
-        $scope.showRating = 5;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "fa-star";
-        $scope.fillColor4 = "fa-star";
-        $scope.fillColor5 = "fa-star";
-      } else {
-        $scope.showRating = 1;
-      }
-    };
-    // review country visited pop up end
+      // review post visited pop up
+      $scope.giveReview = function () {
+        modal = $uibModal.open({
+          animation: true,
+          templateUrl: "views/modal/review-post.html",
+          scope: $scope,
+          backdropClass: "review-backdrop"
+        });
+      };
+
+      $scope.savePostReview = function (values) {
+        var userData = $.jStorage.get("profile");
+        var formData = {
+          "post": $scope.ongo._id,
+          "user": userData._id,
+          "review": values.review,
+          "rating": values.rating
+        }
+        $http({
+          url: adminURL + "/review/save",
+          method: "POST",
+          data: formData
+        }).success(function (data) {
+          console.log(data);
+          OnGoJourney.getOneJourney({
+            "urlSlug": $scope.json.urlSlug
+          }, function (journeys) {
+            var post = _.find(journeys.post, ['_id', $scope.ongo._id]);
+            $scope.ongo.review = post.review;
+          }, function (err) {
+            console.log(err);
+          });
+
+          modal.close();
+        });
+      };
+
+      $scope.showRating = 1;
+      $scope.fillColor = "";
+      $scope.postReview = {};
+      $scope.postReview.rating=1;
+      $scope.starRating = function (val) {
+        $scope.postReview.rating = val;
+        if (val == 1) {
+          $scope.showRating = 1;
+          $scope.fillColor2 = "";
+          $scope.fillColor3 = "";
+          $scope.fillColor4 = "";
+          $scope.fillColor5 = "";
+        } else if (val == 2) {
+          $scope.showRating = 2;
+          $scope.fillColor2 = "fa-star";
+          $scope.fillColor3 = "";
+          $scope.fillColor4 = "";
+          $scope.fillColor5 = "";
+        } else if (val == 3) {
+          $scope.showRating = 3;
+          $scope.fillColor2 = "fa-star";
+          $scope.fillColor3 = "fa-star";
+          $scope.fillColor4 = "";
+          $scope.fillColor5 = "";
+        } else if (val == 4) {
+          $scope.showRating = 4;
+          $scope.fillColor2 = "fa-star";
+          $scope.fillColor3 = "fa-star";
+          $scope.fillColor4 = "fa-star";
+          $scope.fillColor5 = "";
+        } else if (val == 5) {
+          $scope.showRating = 5;
+          $scope.fillColor2 = "fa-star";
+          $scope.fillColor3 = "fa-star";
+          $scope.fillColor4 = "fa-star";
+          $scope.fillColor5 = "fa-star";
+        } else {
+          $scope.showRating = 1;
+        }
+      };
+
+      // review post visited pop up end
 
       var formatDate = function (date) {
         var d = new Date(date),
@@ -581,6 +624,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
 
 ongojourney.filter('formatDate', function () {
   return function (input, type) {
+
     if (type == 'date') {
       var returnVal = moment(input).format('D MMM,YYYY');
     } else if (type == 'time') {

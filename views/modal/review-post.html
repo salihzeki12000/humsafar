@@ -52,10 +52,10 @@
         <span class="color-blue add-review inline-block font-bold">Add your Review</span>
       </div>
       <div class="fill-post">
-        <textarea name="" id=""  placeholder="Fill me in..."></textarea>
+        <textarea name="" id=""  placeholder="Fill me in..." ng-model="postReview.review"></textarea>
       </div>
       <div class="submit-post">
-        <button type="button" class="btn btn-dark-blue">POST</button>
+        <button type="button" class="btn btn-dark-blue" ng-click="savePostReview(postReview)">POST</button>
       </div>
     </form>
   </div>
