@@ -37,6 +37,16 @@
           <!-- moment all view -->
           <div class="moment-view">
             <div class="moment-all-view" ng-show="momentView == 1" >
+              <!-- empty all view profile user login for first time  -->
+              <div class="empty-moment-all empty-profile-moment text-center">
+                <div class="row">
+                  <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
+                    <h3 class="color-pink empty-title">Unwind​ B​y Rewinding</h3>
+                    <p class="empty-descp">Revisit and reminisce the days gone by through brilliant pictures and videos of your travel and local life.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- empty all view profile user login for first time -->
               <div class="month-collage" ng-repeat="getImage in monthMoments" ng-click="showMonthView();" ng-hide="viewMonth">
                 <h4 class="month-name">{{getImage.monthName}}</h4>
                 <div class="collage-month-view">
@@ -61,6 +71,16 @@
             <!-- moment all view end -->
             <!-- moment travel view  -->
             <div class="moment-travel-main" ng-show="momentView == 2">
+              <!-- empty travel view profile user login for first time  -->
+              <div class="empty-moment-travel empty-profile-moment text-center">
+                <div class="row">
+                  <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
+                    <h3 class="color-pink empty-title">Travel Becomes A Reason To Take Pictures And Store Them</h3>
+                    <p class="empty-descp">Some memories are worth sharing, travel surely tops the list. Your travels will not only inspire you to explore more of the world, you may just move another soul or two!</p>
+                  </div>
+                </div>
+              </div>
+              <!-- empty travel view profile user login for first time-->
               <div class="moment-travel-view" ng-repeat="view in travelMoment">
                 <div class="moment-travelimgholder pointer">
                   <div class="img-backholder">
@@ -79,6 +99,16 @@
             <!-- moment travel view end  -->
             <!-- moment local view  -->
             <div class="moment-local-main" ng-show="momentView == 3">
+              <!-- empty local view profile user login for first time  -->
+              <div class="empty-moment-local empty-profile-moment text-center">
+                <div class="row">
+                  <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
+                    <h3 class="color-pink empty-title">Suspended In Time</h3>
+                    <p class="empty-descp">Beautiful memories created through fabulous pictures and videos of those precious moments shared with family, friends and yourself.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- empty local view profile user login for first time-->
               <div class="moment-local-view" ng-repeat="moment in localMoment">
                 <div class="moment-localimgholder pointer">
                   <div class="img-backholder">

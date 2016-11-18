@@ -1224,7 +1224,34 @@ header {
     max-height: 750px;
   }
 }
+// Empty profile
+  .empty-title {
+    font-family: "AvenirLTStd-Medium";
+  }
+  .empty-descp {
+    color: #6b6b6b;
+    font-size: 16px;
+    font-family: "AvenirLTStd-Roman";
+  }
+  // journey emptytab
+  .journey-parachute, .journey-cycle {
+    margin-bottom: -50px;
+    text-align: right;
+  }
+  .journey-parachute img { width: 140px; }
 
+  .journey-cycle img { width: 200px; }
+
+  .empty-profile-journey, .empty-profile-moment, .empty-profile-review { margin: 5% 0; }
+  .empty-ongo,.empty-chronicling {
+    margin: 15px 0px 0px;
+    h4 {
+      color: #555;
+      font-family: "AvenirLTStd-Medium";
+    }
+  }
+  // journey emptytab end
+// Empty profile end
 // visited list
 .wish-country-visit {
   padding: 20px 15px 0 0;

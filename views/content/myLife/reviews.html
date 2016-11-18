@@ -42,7 +42,17 @@
           <!-- reviews view tab end -->
           <div class="moment-view review-main avenir-roman">
             <!-- review all view -->
-            <div class="see-review" ng-show="reviewView ==1 ">
+            <div class="see-review" ng-show="reviewView == 1 ">
+              <!-- review empty all view profile user login for first time  -->
+              <div class="empty-review-all empty-profile-review text-center">
+                <div class="row">
+                  <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
+                    <h3 class="color-pink empty-title">Relive Y​our Storyline</h3>
+                    <p class="empty-descp">Rate the places, restaurants, cuisines, theatres, parks, museums, and more, when you check-in. Jot down your thoughts and feelings about them.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- review empty all view profile user login for first time -->
               <div class="review-all-life" ng-repeat="view in reviewAll">
                 <div class="review-travel-life" ng-show="view.reviewLocation">
                   <div class="heading-review clearfix">
@@ -85,6 +95,16 @@
             <!-- review all view end -->
             <!-- review travel-life-->
             <div class="review-travel-view" ng-show="reviewView == 2">
+              <!-- review empty travel view profile user login for first time  -->
+              <div class="empty-review-travel empty-profile-review text-center">
+                <div class="row">
+                  <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
+                    <h3 class="color-pink empty-title">The World I​s Your Oyster</h3>
+                    <p class="empty-descp">A five star or a four star? What does that historical monument qualify for? Rate it and write a review. Help others with your rating and review.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- review empty travel view profile user login for first time -->
               <div class="list-travel-view" ng-repeat="review in travelReview" ng-hide="viewtravelCountry">
                 <div class="review-travel-main relate pointer" ng-click="showtravelCountry();">
                   <div class="review-backimgholder">
@@ -138,6 +158,16 @@
             <!-- review travel-life end-->
             <!-- review local-life-->
             <div class="review-travel-view review-local-view" ng-show="reviewView == 3">
+              <!-- review empty local view profile user login for first time  -->
+              <div class="empty-review-local empty-profile-review text-center">
+                <div class="row">
+                  <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
+                    <h3 class="color-pink empty-title">A Touch Of Your Daily Dose</h3>
+                    <p class="empty-descp">Now how about rating and writing a super review for that newly-opened restaurant in your town? Wherever you go, click on a star and pen down your experiences. </p>
+                  </div>
+                </div>
+              </div>
+              <!-- review empty local view profile user login for first time -->
               <div class="list-travel-view list-local-view" ng-repeat="review in travelReview" ng-hide="viewlocalCountry">
                 <div class="review-travel-main pointer relate" ng-click="showlocalCountry();">
                   <div class="review-backimgholder">
