@@ -3663,9 +3663,10 @@ header {
 }
 
 .journey-info-strip {
-  padding: 30px 30px 10px;
+  padding: 15px 30px 10px;
   margin-top: -20px;
-  background: url('../img/ongo-strip.png') no-repeat;
+  // background: url('../img/ongo-strip.png') no-repeat;
+  background-color: rgba(0,0,0,0.7);
   background-size: 100% 100%;
   .btn-summary,
   .own-journey,
@@ -3675,7 +3676,8 @@ header {
   }
   .trip-list {
     li {
-      border-right: 2px solid $brand-dark-blue;
+      // border-right: 2px solid $brand-dark-blue;
+      border-right: 2px solid #fff;
       padding: 0 15px;
       display: inline-block;
       line-height: 100%;
@@ -3691,7 +3693,8 @@ header {
     span {
       margin: 3px 2px 0;
       display: inline-block;
-      color: $brand-dark-blue;
+      // color: $brand-dark-blue;
+      color: #fff;
       font-size: 16px;
     }
     img {
@@ -4348,6 +4351,56 @@ header {
     p {
       margin-top: 5px;
       font-size: 12px;
+    }
+  }
+  .start-card-options {
+    padding: 0px 5px;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    cursor: pointer;
+  }
+  .edit-kind-journey {
+    width: 200px;
+    padding: 20px 25px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.35), inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
+    position: absolute;
+    top: 35px;
+    right: -25px;
+    background-color: #f6fafc;
+    &:before {
+      content: '';
+      border-top: 13px solid transparent;
+      border-right: 13px solid transparent;
+      border-bottom: 13px solid #bababa;
+      border-left: 13px solid transparent;
+      position: absolute;
+      right: 19px;
+      top: -26px;
+      z-index: 1;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      top: -23px;
+      right: 20px;
+      border-top: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-bottom: 12px solid #e7f1f7;
+      border-left: 12px solid transparent;
+      z-index: 2;
+    }
+    li {
+      padding: 7px 5px;
+      border-bottom: 1px solid #b1b3b6;
+      display: block;
+      &:last-child { border: none; }
+    }
+    a {
+      color: #6d6e71;
+      font-size: 15px
     }
   }
   .journey-imgholder {

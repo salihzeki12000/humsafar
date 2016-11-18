@@ -16,7 +16,7 @@
                 <div class="user-img-ongo">
                   <img src="{{userData.profilePicture|uploadpath}}" alt="" class="img-responsive">
                 </div>
-                <h4 class="avenir-heavy color-blue">{{userData.name}}</h4>
+                <h4 class="avenir-heavy color-white">{{userData.name}}</h4>
               </div>
             </div>
             <!-- own journey end -->
@@ -34,7 +34,7 @@
                 <li>
                   <a href="">
                     <div class="trip-info">
-                      <img src="img/camera-blue.png" alt="camera">
+                      <img src="img/camera.png" alt="camera">
                       <span class="avenir-heavy">{{journey.count.photos}}</span>
                     </div>
                   </a>
@@ -42,7 +42,7 @@
                 <li>
                   <a href="">
                     <div class="trip-info">
-                      <img src="img/video-blue.png" alt="camera">
+                      <img src="img/video.png" alt="camera">
                       <span class="avenir-heavy">{{journey.count.videos}}</span>
                     </div>
                   </a>
@@ -50,7 +50,7 @@
                 <li>
                   <a href="">
                     <div class="trip-info">
-                      <img src="img/location-blue.png" alt="camera">
+                      <img src="img/location.png" alt="camera">
                       <span class="avenir-heavy">{{journey.count.checkIns}}</span>
                     </div>
                   </a>
@@ -58,7 +58,7 @@
                 <li>
                   <a href="">
                     <div class="trip-info">
-                      <img src="img/thought.png" alt="camera">
+                      <img src="img/thought-white.png" alt="camera">
                       <span class="avenir-heavy">{{journey.count.thoughts}}</span>
                     </div>
                   </a>
@@ -67,13 +67,13 @@
             </div>
             <!-- trip list end-->
             <div class="btn-summary">
-              <button class="btn btn-outline-blue avenir-heavy" ui-sref="tripsummary({id:journey.urlSlug})">Trip Summary</button>
+              <button class="btn btn-white-outline avenir-heavy" ui-sref="tripsummary({id:journey.urlSlug})">Trip Summary</button>
             </div>
           </div>
           <div class="pull-right">
             <div class="share-trip-journey relate" ng-click="shareSocial();">
-              <img src="img/share.png" alt="Share" width="11">
-              <span class="color-blue avenir-heavy">Share</span>
+              <img src="img/share-white.png" alt="Share" width="11">
+              <span class="color-white avenir-heavy">Share</span>
               <div class="share-dropdown" ng-show="viewSocialShare">
                 <ul>
                   <li><a href="" class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>
@@ -86,10 +86,10 @@
               </div>
             </div>
             <div class="following hide">
-              <span class="color-blue avenir-medium">Following</span>
+              <span class="color-white avenir-medium">Following</span>
             </div>
             <div class="edit-journey relate">
-              <span class="color-blue pointer" ng-click="editJourney = !editJourney">Edit This Journey</span>
+              <span class="color-white pointer" ng-click="editJourney = !editJourney">Edit This Journey</span>
               <div class="edit-journey-dropdown" ng-show="editJourney">
                 <ul>
                   <li><a href="" title="Journey Cover Photo" ng-click="coverPhoto(journey._id);">Journey Cover Photo</a></li>
@@ -118,6 +118,15 @@
               <div class="box-start-journey">
                 <!-- header started -->
                 <div class="started-heading relate text-center clearfix">
+                  <div class="start-card-options">
+                    <img src="img/options-white.png" alt="Edit Journey" width="3" class="img-responsive">
+                    <div class="edit-kind-journey">
+                      <ul>
+                        <li><a href="">Edit Kind of Journey</a></li>
+                        <li><a href="">Change Date &amp; Time</a></li>
+                      </ul>
+                    </div>
+                  </div>
                   <h4 class="color-white avenir-light">{{journey.startLocation}}</h4>
                   <p class="color-white m-clear"><i class="fa fa-calendar mr5"></i><span>{{journey.startTime|formatDate: 'date'}}</span> | <i class="fa fa-clock-o mr5"></i><span>{{journey.startTime|formatDate: 'time'}}</span></p>
                 </div>
@@ -178,7 +187,7 @@
               <div class="ongo-journey-end" ng-if="journey.onGoing==false">
                 <div class="journey-end text-center">
                   <h4 class="color-white">{{ongo.location}}</h4>
-                  <p class="m-clear color-blue"><i class="fa fa-calendar mr5"></i><span>{{journey.endTime|formatDate: 'date'}}</span> | <i class="fa fa-clock-o mr5"></i><span>{{journey.endTime|formatDate: 'time'}}</span></p>
+                  <p class="m-clear color-white"><i class="fa fa-calendar mr5"></i><span>{{journey.endTime|formatDate: 'date'}}</span> | <i class="fa fa-clock-o mr5"></i><span>{{journey.endTime|formatDate: 'time'}}</span></p>
                 </div>
                 <div class="end-journey-flag text-center">
                   <img src="img/ongojourney/end-flag.png" alt="" class="img-responsive m-center" width="50">

@@ -4,6 +4,15 @@
     margin-bottom: 20%;
   }
   // holiday page end
+  // ongo journey page
+  .journey-info-strip {
+    .own-journey {
+      margin: 0;
+      display: block;
+    }
+    .trip-list, .btn-summary { margin-top: 10px; }
+  }
+  // ongo journey page end
 }
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
@@ -45,12 +54,31 @@
   }
   .ongo-journey-join .join-card { background-color: rgba(242,103,91,0.75); }
   .ongo-journey-left .journey-left { background-color: rgba(44,55,87,0.75); }
+  .ongo-journey-end {
+    .journey-end { background-color: rgba(242,103,91,0.75); }
+    .end-journey-flag {
+      span { color: #fff; }
+    }
+  }
   .ongo-card-holder {
     margin: 0 auto;
   }
   .card-imgholder {
     height: 300px;
   }
+  // journey info strip
+  .journey-info-strip {
+    padding: 10px 15px 10px;
+    position: relative;
+    .pull-left { float: none !important; }
+    .pull-right {
+      position: absolute;
+      right: 30px;
+      top: 10px;
+      float: none !important;
+    }
+  }
+  // journey info strip end
   // on the go journey page end
 }
 // media query for 991px to 768px end
@@ -137,6 +165,7 @@
   .on-go-journey .container-fluid { padding: 0; }
   .ongo-card-holder {
     width: 100%;
+    margin-top: 20px;
   }
   .journey-start > img { width: 45px; }
   .you-in img { width: 150px; }
@@ -156,6 +185,13 @@
          height: 45px;
          border-radius: 16px;
        }
+     }
+     .edit-kind-journey {
+       width: 190px;
+       padding: 15px;
+       right: -8px;
+       &:before { right: 2px; }
+       &:after { right: 3px; }
      }
   }
   .related-imgslider {
@@ -207,6 +243,12 @@
   }
   .left-tag img { width: 85px; }
   // journey left
+  // journey end
+  .ongo-journey-end {
+    width: 250px;
+    .end-journey-flag span { font-size: 40px; }
+  }
+  // journey end
   // edit options
   .options {
     .own-trip, .other-trip {
@@ -228,6 +270,83 @@
       &:last-child { padding: 0 0 0 5px; }
     }
   }
+  // jounrey info strip
+  .journey-info-strip {
+    padding: 10px;
+    .pull-right { right: 15px; }
+    .trip-list {
+      li {
+        &:first-child { padding: 0 10px 0 0; }
+        padding: 0px 10px;
+      }
+    }
+    .trip-info {
+      span { font-size: 15px; }
+      img { height: 17px; }
+    }
+  }
+  .btn-summary {
+    button {
+      padding: 6px 8px;
+      font-size: 14px;
+    }
+  }
+  .profile-info h4 { margin: 0 0 0 10px; }
+  .share-trip-journey {
+    margin-right: 15px;
+    vertical-align: middle;
+    span { font-size: 15px; }
+  }
+  .edit-journey, .following {
+    font-size: 15px;
+  }
+  .share-dropdown {
+    width: 235px;
+    padding: 7px;
+    top: 27px;
+    z-index: 1;
+    &:before {
+      border-top: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid #fff;
+      border-left: 10px solid transparent;
+      top: -22px;
+      right: 30px;
+    }
+    &:after {
+      border-top: 13px solid transparent;
+      border-right: 13px solid transparent;
+      border-bottom: 13px solid #c6def3;
+      border-left: 13px solid transparent;
+      top: -23px;
+      right: 27px;
+    }
+    ul li { margin-right: 9px; }
+  }
+  .edit-journey-dropdown {
+    width: 210px;
+    padding: 10px 15px;
+    right: 0;
+    top: 30px;
+    z-index: 1;
+    &:before {
+      border-top: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid #fff;
+      border-left: 10px solid transparent;
+      top: -22px;
+      right: 30px;
+    }
+    &:after {
+      border-top: 13px solid transparent;
+      border-right: 13px solid transparent;
+      border-bottom: 13px solid #c6def3;
+      border-left: 13px solid transparent;
+      top: -23px;
+      right: 27px;
+    }
+  }
+  // jounrey info strip end
   // on the go journey page end
 }
 // media query for 767px to 480px end
@@ -338,9 +457,14 @@
         border-radius: 13px;
       }
     }
+    .edit-kind-journey {
+      width: 165px;
+      padding: 10px;
+      a { font-size: 13px; }
+    }
   }
   .ongo-journey-change {
-    width: 170px;
+    width: 200px;
     h4 { font-size: 17px; }
     p {
       margin: 10px 0;
@@ -349,6 +473,7 @@
   }
   // journey join
   .ongo-journey-join {
+    width: 200px;
     h4 { font-size: 17px; }
     p { font-size: 13px; }
     .profile-imgholder {
@@ -381,6 +506,19 @@
   }
   .left-tag img { width: 65px; }
   // journey left end
+  // journey end
+  .ongo-journey-end {
+    width: 200px;
+    padding: 15px 5px;
+    .journey-end {
+      p { font-size: 13px; }
+    }
+    .end-journey-flag {
+      img { width: 40px; }
+      span { font-size: 33px; }
+    }
+  }
+  // journey end
   .card-imgholder {
     height: 230px;
   }
@@ -439,6 +577,40 @@
       i { font-size: 22px; }
     }
   }
+  .share-trip-journey {
+    margin-right: 5px;
+    img { width: 10px; }
+    span {
+      font-size: 13px;
+      margin-top: 2px;
+    }
+  }
+  .edit-journey, .following { font-size: 13px; }
+  .journey-info-strip {
+    .pull-right {
+      top: auto;
+      bottom: 14px;
+    }
+    .trip-list {
+      display: block;
+      li:first-child {
+        border: none;
+        margin-bottom: 10px;
+        display: block;
+      }
+      li:nth-child(2){ padding: 0 10px 0 0; }
+    }
+  }
+  .btn-summary {
+    button {
+      font-size: 13px;
+    }
+  }
+  .share-dropdown {
+    width: 190px;
+    i { font-size: 20px; }
+  }
+  .edit-journey-dropdown { width: 185px; }
   // on the go journey page end
 }
 // media query for 480px to 320px end
