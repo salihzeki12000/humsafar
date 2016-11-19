@@ -114,7 +114,53 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
     },
     templateUrl: 'views/directive/journey-post.html',
     link: function ($scope, element, attrs) {
-      var counter = 0
+      // var counter = 0
+      $scope.index=0;
+      $scope.changeImage=function(index){
+        console.log(index);
+        $scope.index=index;
+      }
+
+      var makePostString = function () {
+        $scope.ongo.buddiesCount = $scope.ongo.buddies.length;
+        $scope.ongo.buddiesString = "";
+        if ($scope.ongo.buddiesCount == undefined) {
+
+        } else if ($scope.ongo.buddiesCount == 1) {
+          $scope.ongo.buddiesString = $scope.ongo.buddies[0].name.bold();
+        } else if ($scope.ongo.buddiesCount == 2) {
+          $scope.ongo.buddiesString = $scope.ongo.buddies[0].name.bold() + " and " + $scope.ongo.buddies[1].name.bold();
+        } else if ($scope.ongo.buddiesCount >= 2) {
+          $scope.ongo.buddiesString = $scope.ongo.buddies[0].name.bold() + " and " + ($scope.ongo.buddiesCount - 1) + "others ";
+        }
+        var postString = "";
+
+        // $filter('category')($scope.ongo.checkIn.category) +
+        if ($scope.ongo.buddiesString != "") {
+          if ($scope.ongo.thoughts && $scope.ongo.checkIn.location) {
+            $scope.ongo.postString = $scope.ongo.thoughts.bold() + " with " + $scope.ongo.buddiesString + " at " + $scope.ongo.checkIn.location.bold();
+          } else if ($scope.ongo.thoughts) {
+            $scope.ongo.postString = $scope.ongo.thoughts.bold() + " with " + $scope.ongo.buddiesString;
+          } else if ($scope.ongo.checkIn && $scope.ongo.checkIn.location) {
+            $scope.ongo.postString = $scope.ongo.user.name.bold() + " with " + $scope.ongo.buddiesString + " at " + $scope.ongo.checkIn.location.bold();
+          } else {
+            $scope.ongo.postString = $scope.ongo.user.name.bold() + " with " + $scope.ongo.buddiesString;
+          }
+        } else {
+          if ($scope.ongo.thoughts && $scope.ongo.checkIn.location) {
+            $scope.ongo.postString = $scope.ongo.thoughts.bold() + " at " + $scope.ongo.checkIn.location.bold();
+          } else if ($scope.ongo.thoughts) {
+            $scope.ongo.postString = $scope.ongo.thoughts.bold();
+          } else if ($scope.ongo.checkIn && $scope.ongo.checkIn.location) {
+            $scope.ongo.postString = $scope.ongo.user.name.bold() + " at " + $scope.ongo.checkIn.location.bold();
+          } else {
+            $scope.ongo.postString = $scope.ongo.user.name.bold() + " with " + $scope.ongo.buddiesString;
+          }
+        }
+      }
+
+
+
       $scope.getTimes = function (n, type) {
         if (type == "marked") {
           n = parseInt(n);
@@ -143,43 +189,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         $scope.ongo.typeOfPost = 'thought';
       }
       // type of post ends
-
-      $scope.ongo.buddiesCount = $scope.ongo.buddies.length;
-      $scope.ongo.buddiesString = "";
-      if ($scope.ongo.buddiesCount == undefined) {
-
-      } else if ($scope.ongo.buddiesCount == 1) {
-        $scope.ongo.buddiesString = $scope.ongo.buddies[0].name.bold();
-      } else if ($scope.ongo.buddiesCount == 2) {
-        $scope.ongo.buddiesString = $scope.ongo.buddies[0].name.bold() + " and " + $scope.ongo.buddies[1].name.bold();
-      } else if ($scope.ongo.buddiesCount >= 2) {
-        $scope.ongo.buddiesString = $scope.ongo.buddies[0].name.bold() + " and " + ($scope.ongo.buddiesCount - 1) + "others ";
-      }
-      var postString = "";
-
-      // $filter('category')($scope.ongo.checkIn.category) +
-      if ($scope.ongo.buddiesString != "") {
-        if ($scope.ongo.thoughts && $scope.ongo.checkIn.location) {
-          $scope.ongo.postString = $scope.ongo.thoughts.bold() + " with " + $scope.ongo.buddiesString + " at " + $scope.ongo.checkIn.location.bold();
-        } else if ($scope.ongo.thoughts) {
-          $scope.ongo.postString = $scope.ongo.thoughts.bold() + " with " + $scope.ongo.buddiesString;
-        } else if ($scope.ongo.checkIn && $scope.ongo.checkIn.location) {
-          $scope.ongo.postString = $scope.ongo.user.name.bold() + " with " + $scope.ongo.buddiesString + " at " + $scope.ongo.checkIn.location.bold();
-        } else {
-          $scope.ongo.postString = $scope.ongo.user.name.bold() + " with " + $scope.ongo.buddiesString;
-        }
-      } else {
-
-        if ($scope.ongo.thoughts && $scope.ongo.checkIn.location) {
-          $scope.ongo.postString = $scope.ongo.thoughts.bold() + " at " + $scope.ongo.checkIn.location.bold();
-        } else if ($scope.ongo.thoughts) {
-          $scope.ongo.postString = $scope.ongo.thoughts.bold();
-        } else if ($scope.ongo.checkIn && $scope.ongo.checkIn.location) {
-          $scope.ongo.postString = $scope.ongo.user.name.bold() + " at " + $scope.ongo.checkIn.location.bold();
-        } else {
-          $scope.ongo.postString = $scope.ongo.user.name.bold() + " with " + $scope.ongo.buddiesString;
-        }
-      }
+      makePostString();
 
       $scope.likes = function (id) {
         $scope.ongo.likeDone = !$scope.ongo.likeDone;
@@ -286,25 +296,25 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           $scope.editPost.photosArr[index] = _.pick(n, ['_id', 'name', 'caption']);
 
         });
-           $scope.listFriend = [{
-          img: "img/profile.jpg",
-          name: "Amit Verma"
-        }, {
-          img: "img/profile.jpg",
-          name: "Vignesh Kasturi"
-        }, {
-          img: "img/profile.jpg",
-          name: "Dhavel Gala"
-        }, {
-          img: "img/profile.jpg",
-          name: "Pooja Thakre"
-        }, {
-          img: "img/profile.jpg",
-          name: "Vinod Bhelose"
-        }, {
-          img: "img/profile.jpg",
-          name: "Rishabh Katoch"
-        }, ];
+        // $scope.listFriend = [{
+        //   img: "img/profile.jpg",
+        //   name: "Amit Verma"
+        // }, {
+        //   img: "img/profile.jpg",
+        //   name: "Vignesh Kasturi"
+        // }, {
+        //   img: "img/profile.jpg",
+        //   name: "Dhavel Gala"
+        // }, {
+        //   img: "img/profile.jpg",
+        //   name: "Pooja Thakre"
+        // }, {
+        //   img: "img/profile.jpg",
+        //   name: "Vinod Bhelose"
+        // }, {
+        //   img: "img/profile.jpg",
+        //   name: "Rishabh Katoch"
+        // }, ];
         modal = $uibModal.open({
           animation: true,
           templateUrl: "views/modal/checkin.html",
@@ -313,21 +323,42 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         });
 
         $scope.searchBuddy = function (key) {
-          // if(parseFloat(key.length)%3==0){
-          $http({
-            url:adminURL + "/user/searchBuddyWeb",
-            method:"POST",
-            data:{
-              "search":key,
-            }
-          }).success(function(data){
-            console.log(data);
-            $scope.buddiesList=data.data;
-            console.log($scope.selectedBuddiesList);
-          });
-        }
-        // }
+            // if(parseFloat(key.length)%3==0){
+            $http({
+              url: adminURL + "/user/searchBuddyWeb",
+              method: "POST",
+              data: {
+                "search": key,
+              }
+            }).success(function (data) {
 
+              $scope.buddiesList = data.data;
+              $scope.alreadyAddedBuddies = $scope.ongo.buddies;
+              _.each($scope.buddiesList, function (n) {
+                n.selectedBuddiesList = false;
+              });
+              _.each($scope.alreadyAddedBuddies, function (n) {
+                var a = _.findIndex($scope.buddiesList, ['_id', n._id]);
+                if (a >= 0) {
+                  $scope.buddiesList[a].selectedBuddiesList = true;
+                  $scope.buddiesList[a].alreadyAdded = true;
+                }
+              });
+              $scope.newBuddies = [];
+              $scope.toggle = function (flag, buddy) {
+                var obj = {};
+                if (flag) {
+                  obj._id = buddy._id;
+                  obj.name = buddy.name;
+                  obj.email = buddy.email;
+                  $scope.newBuddies.push(obj);
+                } else {
+                  $scope.newBuddies = _.reject($scope.newBuddies,   ['._id', buddy._id]);
+                }
+              };
+            });
+          }
+          // }
       };
       // setTimeout(function() {
       //   $('.flexslider').flexslider({
@@ -341,30 +372,32 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       $scope.saveEditedPost = function () {
         console.log($scope.editPost);
         var concatedArray = _.partition($scope.editPost.photosArr, '_id');
-
         //callback starts
         var callback = function () {
-          console.log(modal);
-          OnGoJourney.getOneJourney({
-            "urlSlug": $scope.json.urlSlug
-          }, function (journeys) {
-            var post = _.find(journeys.post, ['_id', $scope.ongo._id]);
-            $scope.ongo.photos = post.photos;
-            $scope.ongo.showMap = post.showMap;
-           
-            // $scope.ongo=post;
-            console.log("photos of this post updated successfully");
-          }, function (err) {
-            console.log(err);
-          });
-          modal.close();
-        }
-        //callback ends
+            console.log(modal);
+            OnGoJourney.getOneJourney({
+              "urlSlug": $scope.json.urlSlug
+            }, function (journeys) {
+              var post = _.find(journeys.post, ['_id', $scope.ongo._id]);
+              $scope.ongo.photos = post.photos;
+              $scope.ongo.showMap = post.showMap;
+              $scope.ongo.buddies = post.buddies;
+              // $scope.ongo=post;
+
+              makePostString();
+
+              console.log("photos of this post updated successfully");
+            }, function (err) {
+              console.log(err);
+            });
+            modal.close();
+          }
+          //callback ends
 
         var formData = {
           "_id": $scope.ongo._id,
           "uniqueId": $scope.ongo.uniqueId,
-          "buddiesArr": [],
+          "buddiesArr": $scope.newBuddies,
           "photosArr": concatedArray[0],
           "videosArr": [],
           "newPhotosArr": concatedArray[1],
@@ -546,7 +579,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       $scope.showRating = 1;
       $scope.fillColor = "";
       $scope.postReview = {};
-      $scope.postReview.rating=1;
+      $scope.postReview.rating = 1;
       $scope.starRating = function (val) {
         $scope.postReview.rating = val;
         if (val == 1) {

@@ -531,40 +531,40 @@ firstapp.filter('kindOfJourney', function() {
     var returnVal = "";
     switch (input) {
       case "friends":
-        returnVal = "img/friends.png";
+        returnVal = "img/icons/friends.png";
         break;
       case "backpacking":
-        returnVal = "img/backpacking.png";
+        returnVal = "img/icons/backpacking.png";
         break;
       case "business":
-        returnVal = "img/business.png";
+        returnVal = "img/icons/business.png";
         break;
       case "religious":
-        returnVal = "img/religious.png";
+        returnVal = "img/icons/religious.png";
         break;
       case "romance":
-        returnVal = "img/romance.png";
+        returnVal = "img/icons/romance.png";
         break;
       case "budget":
-        returnVal = "img/budget.png";
+        returnVal = "img/icons/budget.png";
         break;
       case "luxury":
-        returnVal = "img/luxury.png";
+        returnVal = "img/icons/luxury.png";
         break;
       case "family":
-        returnVal = "img/family.png";
+        returnVal = "img/icons/family.png";
         break;
       case "sole":
-        returnVal = "img/sole.png";
+        returnVal = "img/icons/sole.png";
         break;
       case "betterhalf":
-        returnVal = "img/betterhalf.png";
+        returnVal = "img/icons/betterhalf.png";
         break;
       case "colleague":
-        returnVal = "img/colleague.png";
+        returnVal = "img/icons/colleague.png";
         break;
       case "adventure":
-        returnVal = "img/adventure.png";
+        returnVal = "img/icons/adventure.png";
         break;
     }
     return returnVal;

@@ -1,5 +1,5 @@
 <div class="notify-main">
-  <div class="container-fluid" ng-repeat="photos in ongo.photos">
+  <div class="container-fluid" ng-repeat="photos in ongo.photos track by $index" ng-if="index==$index">{{index}}
     <div class="bg-white">
       <div class="notify-imgsec">
         <div class="notify-imgholder">

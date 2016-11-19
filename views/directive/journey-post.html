@@ -38,14 +38,14 @@
     <!-- ongo img -->
     <div class="card-imgholder" ng-if="ongo.photos.length>0">
       <div class="blur-img">
-        <img ng-src="{{ongo.photos[0].name|uploadpath}}" alt="" class="img-responsive">
+        <img ng-src="{{ongo.photos[index].name|uploadpath}}" alt="" class="img-responsive" >
       </div>
-      <img ng-src="{{ongo.photos[0].name|uploadpath}}" alt="" class="img-responsive card-img">
+      <img ng-src="{{ongo.photos[index].name|uploadpath}}" alt="" class="img-responsive card-img">
     </div>
     <!-- ongo img end-->
     <!-- related img if less then 5-->
     <div class="relate-pic" ng-if="(ongo.photos.length>1)&&(ongo.photos.length<=5)">
-      <div class="related-ongo-slider" ng-repeat="relatePic in ongo.photos ">
+      <div class="related-ongo-slider" ng-repeat="relatePic in ongo.photos track by $index" ng-click="changeImage($index)">
         <img ng-src="{{relatePic.name|uploadpath}}" alt="" class="img-responsive">
       </div>
     </div>
@@ -56,7 +56,7 @@
         item-margin="5" control-nav="false">
         <!---- put item width 99 if needed -->
         <li>
-          <div class="related-ongo-slider">
+          <div class="related-ongo-slider" ng-click="changeImage($index)">
             <img ng-src="{{slide.name|uploadpath}}" alt="" class="img-responsive">
           </div>
         </li>
@@ -121,7 +121,7 @@
                 <li class="hide"><a href="" title="Edit Thoughts" ng-click="editCheckIn();">Edit Thoughts</a></li>
                 <li><a href="" title="Change Date &amp; Time" ng-click="changeDate();">Change Date &amp; Time</a></li>
                 <li><a href="" title="Delete" ng-click="deletePost(ongo._id,json.uniqueId)">Delete</a></li>
-                <li><a href="" title="Copy URL">Copy URL</a></li>
+                <li class="hide" ><a href="" title="Copy URL">Copy URL</a></li>
               </ul>
             </div>
             <div class="other-trip hide">
