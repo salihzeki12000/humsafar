@@ -81,7 +81,7 @@
       <div class="user-social-item clearfix">
         <div class="pull-left">
           <ul>
-            <li><a href=""><i class="fa color-blue" ng-class="ongo.likeDone ? 'fa-heart' : 'fa-heart-o'" ng-click="likes(ongo.uniqueId)"></i></a></li>
+            <li><a href=""><i class="fa color-blue" ng-class="ongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likes(ongo.uniqueId)"></i></a></li>
             <li>
               <a href="">
                 <img src="img/comments.png" alt="" height="18" ng-click="getComments(ongo._id);">
@@ -152,17 +152,17 @@
             </span>
             <span ng-if="ongo.checkIn && ongo.checkIn.location!='' && ongo.review && ongo.review!=''">
                 <p class="inline-block"><span class="color-blue mr5">Rating :</span>
-           
+
                     <!--ng-repeat="a in getTimes(ongo.review[0].rating,'marked') track by $index"     -->
-                    
+
                     <i class="fa fa-star color-pink" ng-repeat="a in getTimes(ongo.review[0].rating,'marked') track by $index"></i>
-                
+
                     <!--ng-repeat="b in getTimes(ongo.review[0].rating,'unmarked') track by $index"-->
-                    <i class="fa fa-star-o" ng-repeat="b in getTimes(ongo.review[0].rating,'unmarked') track by $index"></i>                                                                                                                                                                                                                                                   
-                                                  
-                <!--<i class="fa fa-star-o" ></i>                                                                                                                                                                                                                                                                                                           
-                <i class="fa fa-star-o" ></i>                                                                                                                                                                                                                                                                                                           
-                <i class="fa fa-star-o" ></i>                                                                                                                                                                                                                                                                                                           
+                    <i class="fa fa-star-o" ng-repeat="b in getTimes(ongo.review[0].rating,'unmarked') track by $index"></i>
+
+                <!--<i class="fa fa-star-o" ></i>
+                <i class="fa fa-star-o" ></i>
+                <i class="fa fa-star-o" ></i>
                 <i class="fa fa-star-o" ></i>                                                                                                                                                                                                                                                               -->
             </p>
             </span>
