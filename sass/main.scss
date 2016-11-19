@@ -1113,7 +1113,8 @@ header {
 // holiday step end
 // profile
 .profile-main {
-  max-width: 1400px;
+  // max-width: 1400px;
+  max-width: 2000px;
   margin: 0 auto;
 }
 
@@ -1161,7 +1162,7 @@ header {
     padding: 0;
     margin: 0;
     li {
-      padding: 0 30px;
+      padding: 0 23px;
       display: inline-block;
       list-style-type: none;
       border-right: 1px solid $brand-dark-blue;
