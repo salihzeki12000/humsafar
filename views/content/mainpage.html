@@ -129,7 +129,7 @@
               </div>
               <div class="button-panel clearfix">
                 <!--<button class="btn btn-blue-outline btn-more pull-left" ui-sref="mylife">Skip</button>-->
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=3" ng-disabled="!userData.homeCountry">Next</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=3" ng-disabled="userData.homeCountry">Next</button>
               </div>
             </div>
           </div>
@@ -154,7 +154,7 @@
               </div>
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=2">Previous</button>
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=4" ng-disabled="!userData.homeCity">Next</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=4" ng-disabled="userData.homeCity">Next</button>
               </div>
             </div>
           </div>
@@ -171,13 +171,13 @@
               </div>
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=3">Previous</button>
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=5" ng-disabled="!userData.gender">Next</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=5" ng-disabled="userData.gender">Next</button>
               </div>
             </div>
           </div>
           <div class="upload-profile" ng-show="goNext==5">
             <div class="text-center">
-              <h3 class="color-blue avenir-black">Upload Profile Photo</h3>
+              <h3 class="color-blue avenir-black">Upload Profile Photo</h3>{{myCroppedImage}}
               <div class="cropArea" ng-show="showImage">
                 <img-crop image="myImage" result-image="myCroppedImage" /></img-crop>
               </div>

@@ -117,7 +117,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       // var counter = 0
       $scope.index=0;
       $scope.changeImage=function(index){
-        console.log(index);
         $scope.index=index;
       }
 
@@ -281,7 +280,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       $scope.editCheckIn = function () {
         $scope.editPost = {};
         $scope.callback = function (data) {
-          console.log(data);
           var obj = {
             "name": data.data[0],
             "caption": ""

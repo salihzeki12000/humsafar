@@ -102,7 +102,7 @@
                   <li ng-repeat="friend in buddiesList | filter:searchFriend">
                     <div class="friend-listholder select-friend">
                       <input type="checkbox" name="tag-list" id="{{friend.name}}" ng-model="friend.selectedBuddiesList" ng-disabled="friend.alreadyAdded"
-                        ng-click="toggle(friend.selectedBuddiesList,friend)">{{friend.selectedBuddiesList}},{{friend.alreadyAdded}}
+                        ng-click="toggle(friend.selectedBuddiesList,friend)">
                       <label for="{{friend.name}}">
                         <div class="friend-imgholder">
                           <img ng-src="{{friend.profilePicture|uploadpath}}" alt="{{friend.name}}" class="img-responsive">

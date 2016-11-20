@@ -438,7 +438,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       } else {
         console.log(data);
       }
-    }
+    };
 
     $scope.saveUserData = function (userData) {
       console.log(userData.profilePicture);
@@ -446,18 +446,54 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       NavigationService.saveUserData(userData, saveDataCallback, function (err) {
         console.log(err);
       });
-    }
+    };
 
-    $scope.myImage = '';
+    // $scope.myImage = '';
+    // $scope.myCroppedImage = '';
+    // $scope.showImage = false;
+    // var i = 1;
+    // var got = setInterval(function () {
+    //   console.log(i);
+    //   if (document.getElementById('fileInput')) {
+    //     document.getElementById('fileInput').onchange = function (evt) {
+    //       console.log($scope.myCroppedImage);
+    //       var file = evt.currentTarget.files[0];
+        
+    //       var reader = new FileReader();
+    //       reader.onload = function (evt) {
+    //         $scope.$apply(function ($scope) {
+    //           $scope.showImage = true;
+    //           $scope.myImage = evt.target.result;
+    //         });
+    //       };
+    //       reader.readAsDataURL(file);
+    //     };
+    //     clearInterval(got);
+    //   }
+    //   i++;
+    // }, 1000);
+ $scope.myImage = '';
     $scope.myCroppedImage = '';
     $scope.showImage = false;
     var i = 1;
     var got = setInterval(function () {
-      console.log(i);
       if (document.getElementById('fileInput')) {
         document.getElementById('fileInput').onchange = function (evt) {
-          console.log($scope.myCroppedImage);
           var file = evt.currentTarget.files[0];
+          var formData = new FormData();
+          console.log(file);
+        formData.append('file', file, "file.jpg");
+        $http.post(uploadurl, formData, {
+          headers: {
+            'Content-Type': undefined
+          },
+          transformRequest: angular.identity
+        }).success(function(data) {
+          console.log(data);
+          if ($scope.callback) {         
+            $scope.callback(data);
+          }
+        });
           var reader = new FileReader();
           reader.onload = function (evt) {
             $scope.$apply(function ($scope) {
@@ -471,14 +507,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
       i++;
     }, 1000);
-
-
-
-
-
-
-
-
 
     // var dataURItoBlob = function (dataURI) {
     //     // convert base64/URLEncoded data component to raw binary data held in a string

@@ -1,5 +1,5 @@
 <div class="notify-main">
-  <div class="container-fluid" ng-repeat="photos in ongo.photos track by $index" ng-if="index==$index">{{index}}
+  <div class="container-fluid" ng-repeat="photos in ongo.photos track by $index" ng-if="index==$index">{{photos}}
     <div class="bg-white">
       <div class="notify-imgsec">
         <div class="notify-imgholder">
@@ -24,7 +24,7 @@
               <div class="notification-like">
                 <span class="notify-like-holder pointer avenir-roman" ng-click="showLikes=!showLikes;getLikes(ongo._id)">
                   <i class="fa fa-heart color-blue" ng-class="{'view-like' : showLikes == true , '' : showLikes == false}" ></i>
-                 <span>{{ongo.likeCount}}   </span>Like
+                 <span>{{photos.like.length}}   </span>Like
                 <div class="like-dropdown" ng-show="showLikes">
                   <ul>
                     <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>

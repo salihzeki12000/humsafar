@@ -466,6 +466,7 @@ firstapp.directive('uploadImage', function($http, $filter) {
         var Template = this;
         image.hide = true;
         var formData = new FormData();
+        console.log(image.file,image.name);
         formData.append('file', image.file, image.name);
         console.log(formData);
         $http.post(uploadurl, formData, {
@@ -474,11 +475,8 @@ firstapp.directive('uploadImage', function($http, $filter) {
           },
           transformRequest: angular.identity
         }).success(function(data) {
-
-          if ($scope.callback) {
-            console.log("inside callback");
-            $scope.callback(data);
-
+          if ($scope.callback) {         
+         $scope.callback(data);
           } else {
             $scope.uploadStatus = "uploaded";
             if ($scope.isMultiple) {

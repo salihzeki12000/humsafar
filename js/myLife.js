@@ -36,9 +36,9 @@ var navigationservice = angular.module('mylife', [])
       console.log(country);
       var obj = {
         bucketList: country._id
-      };
+      }; 
       if (country.bucketList === false) {
-        obj.delete = true;
+        obj.delete = true; 
       }
       $http.post(adminURL + "/user/updateBucketListWeb", obj).success(callback).error(errCallback);
     },
