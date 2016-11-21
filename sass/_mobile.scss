@@ -117,6 +117,32 @@
       width: 950px;
     }
   }
+  .travel-life-level {
+    padding: 20px 30px 0 15px;
+  }
+  .profile-tabs {
+    .first-strip, .sec-strip, .third-strip, .fourth-strip {
+      width: 96%;
+      left: 20px;
+    }
+  }
+  .all-profile-detail {
+    padding: 0;
+    .row { margin: 0; }
+  }
+  // journey empty screen first user
+  .mobile-gif {
+    text-align: right;
+    img {
+      height: 450px;
+      display: inline-block;
+    }
+  }
+  .journey-parachute {
+    img { width: 110px; }
+  }
+  .empty-descp { font-size: 15px; }
+  // journey empty screen first user end
   // My Life end
 }
 // media query for 991px to 768px end
@@ -385,6 +411,31 @@
     }
   }
   // jounrey info strip end
+  .profile-tabs {
+    .first-strip, .sec-strip, .third-strip, .fourth-strip { width: 93%; }
+  }
+  .travel-life-level {
+    ::-webkit-scrollbar { height: 0px; }
+    ::-webkit-scrollbar-track {
+     background-color: $brand-lighter-grey;
+   }
+    ::-webkit-scrollbar-thumb {
+     background-color: $brand-pink;
+   }
+   overflow-x: auto;
+  }
+  .travel-progress-bar { width: 700px; }
+  // journey empty screen first user
+  .empty-travel-journey {
+    text-align: center;
+  }
+  .journey-parachute {
+    margin-bottom: -80px;
+    img { width: 90px; }
+  }
+  .empty-title { font-size: 16px; }
+  .empty-descp { font-size: 14px; }
+  // journey empty screen first user end
   // on the go journey page end
   // trip summary
   .tripsummary-main {

@@ -1282,15 +1282,16 @@ header {
 }
 
 .visit-input {
-  padding: 8px 18px;
+  width: 180px;
+  padding: 8px 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin: 15px 15px 10px 0;
+  margin: 15px 5px 10px 0;
 }
 
 .country-list {
   .country-name {
-    width: 210px;
+    max-width: 210px;
     font-size: 16px;
     vertical-align: top;
   }
@@ -1810,7 +1811,7 @@ header {
 .masonry-detail {
   padding: 0 10px;
   margin-top: -10px;
-  .col-md-4 {
+  .masonry-brick {
     padding: 0;
   }
   .journey-masonry-brick {
