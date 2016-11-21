@@ -1451,3 +1451,38 @@ q {
     border-radius: 50%;
   }
 }
+
+.enquiry-sidetab{
+  width: 600px;
+    height: 500px;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    z-index: 3;
+    background-color: #fff;
+    padding: 20px 30px;
+}
+.enquirytab-head{
+  border-bottom: 1px solid #ebebeb;
+}
+
+.enquirytab-accordionbox{
+  height: 410px;
+  margin: 10px 0;
+  overflow-y: auto;
+  background-color: yellow;
+}
+.enquirytab-accordionbox::-webkit-scrollbar {
+  display: none;
+}
+
+.enquiretab-profileholder{
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.enquiretab-msg{
+  font-size: 12px;
+  font-style: italic;
+}

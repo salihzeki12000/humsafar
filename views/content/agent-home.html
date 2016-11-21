@@ -37,4 +37,50 @@
     </div>
   </div>
   <div class="agent-home-content" ng-include="agthome.innerView"></div>
+
+
+  <!-- Enquiry side tab -->
+  <div class="enquiry-sidetab">
+    <div class="enquirytab-head">
+      <h4 class="avenir-roman color-blue">Enquires</h4>
+    </div>
+    <div class="enquirytab-accordionbox">
+      <uib-accordion close-others="oneAtATime">
+        <div uib-accordion-group class="panel-default" is-open="status.open1">
+          <uib-accordion-heading>
+            <div class="enquires-tab-title color-blue avenir-medium clearfix">
+              <div class="enquiretab-profileholder  pull-left">
+                <img src="img/adrena.jpg" alt="" class="img-responsive">
+              </div>
+              <label class="color-pink avenir-medium pull-left">Yash Chudasama</label>
+              <p class="pull-left enquiretab-msg">Hi! Lorem ipsum dolor sit amet, consectetur adipisicing elit. At eos repellendus, voluptatum.</p>
+              <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open1, 'fa fa-chevron-down': !status.open1}"></i>
+            </div>
+          </uib-accordion-heading>
+          <div class="enquirestab-mail">
+          </div>
+        </div>
+        <div uib-accordion-group class="panel-default" is-open="status.open2">
+          <uib-accordion-heading>
+            <div class="agtaccord-title color-blue avenir-medium">USA
+              <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open2, 'fa fa-chevron-down': !status.open2}"></i>
+            </div>
+          </uib-accordion-heading>
+          <div class="country-tabs">
+          </div>
+        </div>
+        <div uib-accordion-group class="panel-default" is-open="status.open3">
+          <uib-accordion-heading>
+            <div class="agtaccord-title color-blue avenir-medium">asia
+              <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open3, 'fa fa-chevron-down': !status.open3}"></i>
+            </div>
+          </uib-accordion-heading>
+          <div class="country-tabs">
+          </div>
+        </div>
+      </uib-accordion>
+    </div>
+
+  </div>
+  <!-- Enquiry side tab enD-->
 </div>
