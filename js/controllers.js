@@ -847,6 +847,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log(err);
     });
 
+    //change banner date and time starts
+       $scope.time = {};
+      $scope.datetime = {};
+      $scope.changeBannerDate = function () {
+        $scope.isPostDate=false;
+        $scope.isJourneyDate=true;
+        $scope.editKindJourney = !$scope.editKindJourney
+        date = $scope.journey.startTime;
+        var d = new Date(date);
+        var hh = d.getHours();
+        if (hh > 12) {
+          hh = hh - 12;
+          $scope.time.am_pm = "PM";
+        } else {
+          $scope.time.am_pm = "AM";
+        }
+        $scope.time.hour = hh;
+        $scope.time.min = d.getMinutes();
+        $scope.datetime.dt = d;
+        $uibModal.open({
+          animation: true,
+          templateUrl: "views/modal/date-time.html",
+          scope: $scope,
+          backdropClass: "review-backdrop",
+        })
+      };
+
+    //change banner date and time ends
+    
+
     //mapStyle
     var mapStyle = [{
       "featureType": "landscape.man_made",
@@ -3716,8 +3746,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         })
       };
 
-      var getAllJourney = function (journeys) {
+      var getAllJourney = function (journeys,flag) {
         $scope.travelLife = journeys;
+        $scope.hasJourney=flag;
       };
       OnGoJourney.getAllJourney(getAllJourney, function (err) {
         console.log(err);
@@ -4455,6 +4486,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Journey");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+     $scope.$watch('masonryContainer', function() {
+    $timeout(function () {
+      console.log("reload");
+    $rootScope.$broadcast('masonry.reload');
+    }, 200);
+    });
 
 
     // $(document).ready(function() {

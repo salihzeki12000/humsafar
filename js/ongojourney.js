@@ -8,6 +8,14 @@ var ongojourney = angular.module('ongojourney', [])
         url: adminURL + "/journey/getAll",
         method: "POST"
       }).success(function (data) {
+        var hasJourney="";
+        if(_.isEmpty(data.data)){
+          hasJourney=false;
+          console.log(hasJourney);
+        }else{
+          hasJourney=true;
+          console.log(hasJourney);
+        }
         var journeys = data.data;
 
         var i = 0;
@@ -24,7 +32,7 @@ var ongojourney = angular.module('ongojourney', [])
           journeys[i].remainingCount = n.countryVisited.length - 3;
           i++;
         });
-        callback(journeys);
+        callback(journeys,hasJourney);
       });
     },
 
@@ -457,6 +465,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       $scope.time = {};
       $scope.datetime = {};
       $scope.changeDate = function () {
+        $scope.isPostDate=true;
+        $scope.isJourneyDate=false;
         date = $scope.ongo.UTCModified
         var d = new Date(date);
         var hh = d.getHours();
