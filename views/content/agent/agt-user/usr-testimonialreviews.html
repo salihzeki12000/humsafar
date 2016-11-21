@@ -39,25 +39,27 @@
       </div>
     </div>
     <div masonry class="masonry-main">
-      <div class=" col-md-4 masonry-brick" ng-repeat="review in testimonialreview track by $index">
-        <div class="testimonial-card">
-          <div class="testimonial-comment">
-            <p class="testimonial-quote"><q>{{review.testimonialQuote}}</q></p>
-          </div>
-          <div class="testimonial-details clearfix">
-            <div class="pull-left">
-              <div class="testprofile-holder">
-                <img ng-src="{{review.usrprofileImgholder}}" alt="" class="img-responsive">
-              </div>
-              <div class="testprofile-name">
-                <p>{{review.usrName}}</p>
-                <span>{{review.usrLoc}}</span>
-              </div>
+      <div class="row">
+        <div class="col-md-4 masonry-brick" ng-repeat="review in testimonialreview track by $index">
+          <div class="testimonial-card">
+            <div class="testimonial-comment">
+              <p class="testimonial-quote"><q>{{review.testimonialQuote}}</q></p>
             </div>
-            <div class="pull-right">
-              <div class="testimonial-rate">
-                <p class="avenir-light">{{review.usrRating}}/10</p>
-                <span>Rated</span>
+            <div class="testimonial-details clearfix">
+              <div class="pull-left">
+                <div class="testprofile-holder">
+                  <img ng-src="{{review.usrprofileImgholder}}" alt="" class="img-responsive">
+                </div>
+                <div class="testprofile-name">
+                  <p>{{review.usrName}}</p>
+                  <span>{{review.usrLoc}}</span>
+                </div>
+              </div>
+              <div class="pull-right">
+                <div class="testimonial-rate">
+                  <p class="avenir-light">{{review.usrRating}}/10</p>
+                  <span>Rated</span>
+                </div>
               </div>
             </div>
           </div>

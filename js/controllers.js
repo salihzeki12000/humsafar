@@ -458,7 +458,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //     document.getElementById('fileInput').onchange = function (evt) {
     //       console.log($scope.myCroppedImage);
     //       var file = evt.currentTarget.files[0];
-        
+
     //       var reader = new FileReader();
     //       reader.onload = function (evt) {
     //         $scope.$apply(function ($scope) {
@@ -490,7 +490,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           transformRequest: angular.identity
         }).success(function(data) {
           console.log(data);
-          if ($scope.callback) {         
+          if ($scope.callback) {
             $scope.callback(data);
           }
         });
@@ -875,7 +875,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       };
 
     //change banner date and time ends
-    
+
 
     //mapStyle
     var mapStyle = [{
@@ -6854,37 +6854,37 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
 
     $scope.photoGallery = [
-      '../img/uploaded-pic.jpg',
-      '../img/slider2.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-      '../img/uploaded-pic.jpg',
-      '../img/slider2.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
+      'img/uploaded-pic.jpg',
+      'img/slider2.jpg',
+      'img/moment-travel1.jpg',
+      'img/moment-travel2.jpg',
+      'img/local-life-post.jpg',
+      'img/destination/goldentemple.jpg',
+      'img/destination/list1.jpg',
+      'img/destination/list2.jpg',
+      'img/destination/info.jpg',
+      'img/destination/taj-featured.jpg',
+      'img/itinerary/itinerary.jpg',
+      'img/uploaded-pic.jpg',
+      'img/slider2.jpg',
+      'img/moment-travel1.jpg',
+      'img/moment-travel2.jpg',
+      'img/local-life-post.jpg',
+      'img/destination/goldentemple.jpg',
+      'img/destination/list1.jpg',
+      'img/destination/list2.jpg',
+      'img/destination/info.jpg',
+      'img/destination/taj-featured.jpg',
+      'img/itinerary/itinerary.jpg',
+      'img/moment-travel1.jpg',
+      'img/moment-travel2.jpg',
+      'img/local-life-post.jpg',
+      'img/destination/goldentemple.jpg',
+      'img/destination/list1.jpg',
+      'img/destination/list2.jpg',
+      'img/destination/info.jpg',
+      'img/destination/taj-featured.jpg',
+      'img/itinerary/itinerary.jpg',
     ];
     // other itineraries main
     $scope.travelLife = [{
@@ -8127,24 +8127,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   // gallery card end
   $scope.agenPhotogallery = [
-    '../img/uploaded-pic.jpg',
-    '../img/slider2.jpg',
-    '../img/moment-travel1.jpg',
-    '../img/moment-travel2.jpg',
-    '../img/local-life-post.jpg',
-    '../img/destination/goldentemple.jpg',
-    '../img/destination/list1.jpg',
-    '../img/destination/list2.jpg',
-    '../img/destination/info.jpg',
-    '../img/destination/taj-featured.jpg',
-    '../img/itinerary/itinerary.jpg',
-    '../img/india-gate.jpg',
-    '../img/notify-adrena.jpg',
-    '../img/paris.jpg',
-    '../img/bg-popular.jpg',
-    '../img/bg-blur.jpg',
-    '../img/blog-banner.jpg',
-    '../img/follower.jpg'
+    'img/uploaded-pic.jpg',
+    'img/slider2.jpg',
+    'img/moment-travel1.jpg',
+    'img/moment-travel2.jpg',
+    'img/local-life-post.jpg',
+    'img/destination/goldentemple.jpg',
+    'img/destination/list1.jpg',
+    'img/destination/list2.jpg',
+    'img/destination/info.jpg',
+    'img/destination/taj-featured.jpg',
+    'img/itinerary/itinerary.jpg',
+    'img/india-gate.jpg',
+    'img/notify-adrena.jpg',
+    'img/paris.jpg',
+    'img/bg-popular.jpg',
+    'img/bg-blur.jpg',
+    'img/blog-banner.jpg',
+    'img/follower.jpg'
   ];
   // gallery card end
 
