@@ -502,6 +502,18 @@
               </div>
               <!-- plans end -->
               <!-- billing -->
+              <div class="agt-setting-billing" ng-if="showAgtSetting == 6">
+                <div class="agtbill-head clearfix">
+                  <h4 class="color-blue setting-tab-heading pull-left">Billing</h4>
+                  <div class="pull-right toggle">
+                    <span class="italic">Auto Renewal</span>
+                    <label class="switch">
+  <input type="checkbox" checked>
+  <div class="slider round"></div>
+</label>
+                  </div>
+                </div>
+              </div>
               <!-- billing end -->
               <!-- purchase history -->
               <div class="agtsetting-purchasehistory" ng-if="showAgtSetting == 7">
@@ -510,140 +522,140 @@
                   <table class="purchase-table">
                     <thead>
                       <tr>
-                        <th >Date</th>
-                        <th >Plan</th>
+                        <th>Date</th>
+                        <th>Plan</th>
                         <th>Reciept</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td colspan="3">
-                      <div class="table-scroll">
-                        <table>
-                        <tr>
-                          <td width="33.33%">
-                            <p>16 Jan 2016</p>
-                          </td>
-                          <td width="45%">
-                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
-                          </td>
-                          <td >
-                            <a class="reciept-link">TL-3464910</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p>16 Jan 2016</p>
-                          </td>
-                          <td>
-                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
-                          </td>
-                          <td>
-                            <a class="reciept-link">TL-3464910</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p>16 Jan 2016</p>
-                          </td>
-                          <td>
-                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
-                          </td>
-                          <td>
-                            <a class="reciept-link">TL-3464910</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p>16 Jan 2016</p>
-                          </td>
-                          <td>
-                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
-                          </td>
-                          <td>
-                            <a class="reciept-link">TL-3464910</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p>16 Jan 2016</p>
-                          </td>
-                          <td>
-                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
-                          </td>
-                          <td>
-                            <a class="reciept-link">TL-3464910</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p>16 Jan 2016</p>
-                          </td>
-                          <td>
-                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
-                          </td>
-                          <td>
-                            <a class="reciept-link">TL-3464910</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p>16 Jan 2016</p>
-                          </td>
-                          <td>
-                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
-                          </td>
-                          <td>
-                            <a class="reciept-link">TL-3464910</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p>16 Jan 2016</p>
-                          </td>
-                          <td>
-                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
-                          </td>
-                          <td>
-                            <a class="reciept-link">TL-3464910</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p>16 Jan 2016</p>
-                          </td>
-                          <td>
-                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
-                          </td>
-                          <td>
-                            <a class="reciept-link">TL-3464910</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p>16 Jan 2016</p>
-                          </td>
-                          <td>
-                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
-                          </td>
-                          <td>
-                            <a class="reciept-link">TL-3464910</a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p>16 Jan 2016</p>
-                          </td>
-                          <td>
-                            <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
-                          </td>
-                          <td>
-                            <a class="reciept-link">TL-3464910</a>
-                          </td>
-                        </tr>
-                      </table>
-                    </div>
-                      </td>
+                          <div class="table-scroll">
+                            <table>
+                              <tr>
+                                <td width="33.33%">
+                                  <p>16 Jan 2016</p>
+                                </td>
+                                <td width="45%">
+                                  <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                                </td>
+                                <td>
+                                  <a class="reciept-link">TL-3464910</a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <p>16 Jan 2016</p>
+                                </td>
+                                <td>
+                                  <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                                </td>
+                                <td>
+                                  <a class="reciept-link">TL-3464910</a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <p>16 Jan 2016</p>
+                                </td>
+                                <td>
+                                  <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                                </td>
+                                <td>
+                                  <a class="reciept-link">TL-3464910</a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <p>16 Jan 2016</p>
+                                </td>
+                                <td>
+                                  <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                                </td>
+                                <td>
+                                  <a class="reciept-link">TL-3464910</a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <p>16 Jan 2016</p>
+                                </td>
+                                <td>
+                                  <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                                </td>
+                                <td>
+                                  <a class="reciept-link">TL-3464910</a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <p>16 Jan 2016</p>
+                                </td>
+                                <td>
+                                  <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                                </td>
+                                <td>
+                                  <a class="reciept-link">TL-3464910</a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <p>16 Jan 2016</p>
+                                </td>
+                                <td>
+                                  <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                                </td>
+                                <td>
+                                  <a class="reciept-link">TL-3464910</a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <p>16 Jan 2016</p>
+                                </td>
+                                <td>
+                                  <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                                </td>
+                                <td>
+                                  <a class="reciept-link">TL-3464910</a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <p>16 Jan 2016</p>
+                                </td>
+                                <td>
+                                  <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                                </td>
+                                <td>
+                                  <a class="reciept-link">TL-3464910</a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <p>16 Jan 2016</p>
+                                </td>
+                                <td>
+                                  <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                                </td>
+                                <td>
+                                  <a class="reciept-link">TL-3464910</a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <p>16 Jan 2016</p>
+                                </td>
+                                <td>
+                                  <p>Advanced <span class="avenir-heavy">$149</span><span class="italic">(3 months)</span></p>
+                                </td>
+                                <td>
+                                  <a class="reciept-link">TL-3464910</a>
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                        </td>
                       </tr>
                     </tbody>
                   </table>

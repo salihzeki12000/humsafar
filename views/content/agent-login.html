@@ -1,11 +1,11 @@
-<div class="agent-login">
+<div class="agent-login" ng-init="goAgtNext=2">
   <div class="container">
     <div class="row">
       <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8">
         <div class="bg-agent">
 
           <!-- VERIFICATION CODE START -->
-          <div class="agt-verification-code" hidden>
+          <div class="agt-verification-code" ng-show="goAgtNext==2">
             <div class="text-center">
               <h3 class="color-blue avenir-black">Verification</h3>
               <p>A 4-digit Verification code has been sent <br> to your registered email address</p>
@@ -19,7 +19,7 @@
               </form>
               <p>If you haven't recieved a verification code yet,<br> Click here to <a class="color-blue"><u>Re-send</u></a></p>
               <div class="marg-tp30 clearfix">
-                <button class="btn btn-blue-outline btn-more" ng-disabled="userData.homeCity">Submit</button>
+                <button class="btn btn-blue-outline btn-more" ng-disabled="userData.homeCity" ng-click="goAgtNext=3">Submit</button>
               </div>
             </div>
           </div>
@@ -27,13 +27,13 @@
 
 
           <!-- VERIFIED START -->
-          <div class="verification-complete" hidden>
+          <div class="verification-complete"  ng-show="goAgtNext==3">
             <div class="text-center">
               <h3 class="color-blue avenir-black">Verification</h3>
               <img src="img/verified.png" alt="Verified" class="mt20 mb20 img-responsive m-center">
               <p class="color-blue avenir-roman">Your account has been <span class="block">successfully verified</span></p>
               <div class="button-panel clearfix">
-                <button class="btn btn-blue-outline btn-more pull-right">Next</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goAgtNext=4">Next</button>
               </div>
             </div>
           </div>
@@ -41,7 +41,7 @@
 
 
           <!-- SELECT CITY START -->
-          <div class="city" hidden>
+          <div class="city"  ng-show="goAgtNext==4">
             <div class="text-center">
               <h3 class="color-blue avenir-black">Head Office Location</h3>
               <div class="select-your-nation select-your-city">
@@ -60,7 +60,7 @@
                 </ul>
               </div>
               <div class="button-panel clearfix">
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=4" ng-disabled="userData.homeCity">Next</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goAgtNext=5" ng-disabled="userData.homeCity">Next</button>
               </div>
             </div>
           </div>
@@ -68,7 +68,7 @@
 
 
           <!-- COMPANY DETAILS START -->
-          <div class="agent-cmpny-det" >
+          <div class="agent-cmpny-det"  ng-show="goAgtNext==5">
             <div class="text-center">
               <h3 class="color-blue avenir-black">Company Details</h3>
               <div class="company-details">
@@ -126,15 +126,15 @@
                 </form>
               </div>
               <div class="button-panel clearfix">
-                <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=2">Previous</button>
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=4" ng-disabled="userData.homeCity">Next</button>
+                <button class="btn btn-blue-outline btn-more pull-left" ng-click="goAgtNext=4">Previous</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goAgtNext=6" ng-disabled="userData.homeCity">Next</button>
               </div>
             </div>
           </div>
           <!-- COMPANY DETAILS END -->
 
           <!-- AGENT LOGO UPLOAD START-->
-          <div class="agent-logoupload text-center" hidden>
+          <div class="agent-logoupload text-center"  ng-show="goAgtNext==6">
             <h3 class="color-blue avenir-black">Upload Company Logo</h3>
             <div class="text-center">
               <div class="cropArea" ng-show="showImage">
@@ -164,8 +164,10 @@
                 </div>
               </div>
               <div class="button-panel clearfix">
-                <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)">Done</button>
+                <button class="btn btn-blue-outline btn-more pull-left" ng-click="goAgtNext=5">Previous</button>
+                <!-- put in download btn -->
+                <!-- ng-click="uploadFile();saveUserData(userData)" -->
+                <button class="btn btn-blue-outline btn-more pull-right"  ng-click="goAgtNext=7">Done</button>
               </div>
             </div>
           </div>
@@ -173,7 +175,7 @@
           <!-- AGENT LOGO UPLOAD END -->
 
           <!-- ABOUT AGENT -->
-          <div class="agent-about" hidden>
+          <div class="agent-about" ng-show="goAgtNext==7">
             <div class="text-center">
               <h3 class="color-blue avenir-black">About Sai Travels</h3>
               <div class="form-group">
@@ -183,24 +185,25 @@
                 <span class="pull-right font-sz10 mt10" id="remainingC"></span>
               </div>
               <div class="button-panel clearfix">
-                <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
+                <button class="btn btn-blue-outline btn-more pull-left" ng-click="goAgtNext=6">Previous</button>
 
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)">Done</button>
+                <button class="btn btn-blue-outline btn-more pull-right"  ng-click="goAgtNext=8">Done</button>
+                <!-- put in DOne btn -->
+                <!-- ng-click="uploadFile();saveUserData(userData)" -->
               </div>
             </div>
           </div>
           <!-- ABOUT AGENT END -->
 
 
-          <!-- CATEGORY START -->
-          <div class="agent-category" hidden>
-
+          <!-- CATEGORY START 1-->
+          <div class="agent-category" ng-show="goAgtNext==8" >
             <!-- category page1 -->
-            <div class="cat-special" hidden>
+            <div class="cat-special" >
               <div class="agt-cat-indicators">
                 <ul>
                   <li>
-                    <a href="" class="one"></a>
+                    <a href="" class="one" ng-click="goAgtNext=8"></a>
                   </li>
                   <li>
                     <a href="" class=""></a>
@@ -313,30 +316,36 @@
                   </div>
                 </div>
                 <div class="button-panel clearfix">
-                  <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
+                  <button class="btn btn-blue-outline btn-more pull-left" ng-click="goAgtNext=7">Previous</button>
 
-                  <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)">Done</button>
+                  <button class="btn btn-blue-outline btn-more pull-right" ng-click="goAgtNext=9">Done</button>
+                  <!-- put in done btn -->
+                  <!-- ng-click="uploadFile();saveUserData(userData)" -->
                 </div>
               </div>
             </div>
             <!-- category page1 end -->
+          </div>
+          <!-- CATEGORY END 1-->
 
+          <!-- CATEGORY START 2-->
+          <div class="agent-category" ng-show="goAgtNext==9" >
             <!-- category page2 -->
-            <div class="cat-special" hidden>
+            <div class="cat-special" >
               <div class="agt-cat-indicators">
                 <ul>
                   <li>
-                    <a href="" class="one"></a>
+                    <a href="" class="one" ng-click="goAgtNext=8"></a>
                   </li>
                   <li>
-                    <a href="" class="two"></a>
+                    <a href="" class="two" ng-click="goAgtNext=9"></a>
                   </li>
                   <li>
                     <a href="" class=""></a>
                   </li>
                 </ul>
               </div>
-              <div class="">
+              <div class="category-countrylist">
                 <h3 class="color-blue avenir-black text-center">Countries Of Specialization</h3>
                 <div class="row">
                   <div class="col-md-12">
@@ -514,26 +523,32 @@
                 </div>
 
                 <div class="button-panel clearfix">
-                  <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
-                  <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
-                  <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)">Done</button>
+                  <button class="btn btn-blue-outline btn-more pull-left" ng-click="goAgtNext=8">Previous</button>
+
+                  <button class="btn btn-blue-outline btn-more pull-right" ng-click="goAgtNext=10">Done</button>
+                  <!-- add to Done btn  -->
+                  <!-- ng-click="uploadFile();saveUserData(userData)" -->
                 </div>
               </div>
             </div>
             <!-- category page2 end -->
+          </div>
+          <!-- CATEGORY END 2-->
 
+          <!-- CATEGORY START 3-->
+          <div class="agent-category" ng-show="goAgtNext==10" >
             <!-- category page3 -->
-            <div class="agt-services" hidden>
+            <div class="agt-services">
               <div class="agt-cat-indicators">
                 <ul>
                   <li>
-                    <a href="" class="one"></a>
+                    <a href="" class="one" ng-click="goAgtNext=8"></a>
                   </li>
                   <li>
-                    <a href="" class="two"></a>
+                    <a href="" class="two" ng-click="goAgtNext=9"></a>
                   </li>
                   <li>
-                    <a href="" class="three"></a>
+                    <a href="" class="three" ng-click="goAgtNext=10"></a>
                   </li>
                 </ul>
               </div>
@@ -563,15 +578,15 @@
                 </div>
 
                 <div class="button-panel clearfix">
-                  <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
-                  <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
+                  <button class="btn btn-blue-outline btn-more pull-left" ng-click="goAgtNext=9">Previous</button>
+
                   <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)">Done</button>
                 </div>
               </div>
             </div>
             <!-- category page3 end -->
           </div>
-          <!-- CATEGORY END -->
+          <!-- CATEGORY END 3-->
 
 
         </div>
