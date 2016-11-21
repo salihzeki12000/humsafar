@@ -1,14 +1,21 @@
 var jsArray = [
     './bower_components/jquery/dist/jquery.min.js',
+    './bower_components/jquery/dist/jquery.js',
+    './js/jquery.parallax.js',
+    './bower_components/fullpage.js/dist/jquery.fullpage.min.js',
     './bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
     './bower_components/flexslider/jquery.flexslider-min.js',
     './bower_components/fancyBox/source/jquery.fancybox.js',
     './bower_components/swiper/dist/js/swiper.js',
+    './bower_components/tinymce-dist/tinymce.js',
     './bower_components/angular/angular.min.js',
+    './bower_components/angular-ui-tinymce/src/tinymce.js',
+    './bower_components/angular-animate/angular-animate.js',
     './bower_components/angular-sanitize/angular-sanitize.min.js',
     './bower_components/angular-animate/angular-animate.min.js',
     './bower_components/angular-bootstrap/ui-bootstrap.min.js',
     './bower_components/ng-img-crop/compile/minified/ng-img-crop.js',
+    './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
     './bower_components/ui-router/release/angular-ui-router.min.js',
     './bower_components/angular-flexslider/angular-flexslider.js',
     './bower_components/angular-translate/angular-translate.js',
@@ -26,11 +33,14 @@ var jsArray = [
     './bower_components/outlayer/outlayer.js',
     './bower_components/masonry/masonry.js',
     './bower_components/imagesloaded/imagesloaded.js',
-    './bower_components/imagesloaded/imagesloaded.js',
     './bower_components/angular-masonry/angular-masonry.js',
+    './bower_components/angular-ui-select/dist/select.js',
     './bower_components/ng-scrollbar/dist/ng-scrollbar.min.js',
+    './bower_components/moment/moment.js',
+    './bower_components/jStorage/jstorage.js',
+    './bower_components/angular-rangeslider/angular.rangeSlider.js',
+    './bower_components/angular-file-upload/dist/angular-file-upload.js',
     './bower_components/angular-swiper/dist/angular-swiper.js',
-    './bower_components/angular-rangeslider/angular.rangeSlider.css',
     "./js/imageUpload.js",
     './js/app.js',
     './js/language.js',
@@ -39,6 +49,7 @@ var jsArray = [
     './js/navigation.js',
     './js/myLife.js',
     './js/fileuploadservice.js',
+    './js/ongojourney.js',
     //please do not change it
     './w/js/templates.js',
 ];
@@ -217,7 +228,7 @@ gulp.task('uglify:js', function () {
     var uglify = require('gulp-uglify');
     var stripDebug = require('gulp-strip-debug');
     return gulp.src('./w/w.js')
-        .pipe(stripDebug())
+        // .pipe(stripDebug())
         .pipe(uglify({
             mangle: false
         }))
