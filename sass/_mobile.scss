@@ -120,12 +120,6 @@
   .travel-life-level {
     padding: 20px 30px 0 15px;
   }
-  .profile-tabs {
-    .first-strip, .sec-strip, .third-strip, .fourth-strip {
-      width: 96%;
-      left: 20px;
-    }
-  }
   .all-profile-detail {
     padding: 0;
     .row { margin: 0; }
@@ -411,10 +405,21 @@
     }
   }
   // jounrey info strip end
-  .profile-tabs {
-    .first-strip, .sec-strip, .third-strip, .fourth-strip { width: 93%; }
+  // on the go journey page end
+  // trip summary
+  .tripsummary-main {
+    .container-fluid, .container { padding: 0; }
+  }
+  // trip summary end
+  .wish-country-visit { padding: 20px 0px 0; }
+  .masonry-detail {
+    .masonry-brick { width: 100%; }
+    .journey-masonry-brick {
+      margin: 10px 0;
+    }
   }
   .travel-life-level {
+    padding: 30px 30px 0;
     ::-webkit-scrollbar { height: 0px; }
     ::-webkit-scrollbar-track {
      background-color: $brand-lighter-grey;
@@ -422,8 +427,8 @@
     ::-webkit-scrollbar-thumb {
      background-color: $brand-pink;
    }
-   overflow-x: auto;
   }
+  .scroll-travel-level { overflow-x: auto; }
   .travel-progress-bar { width: 700px; }
   // journey empty screen first user
   .empty-travel-journey {
@@ -436,12 +441,32 @@
   .empty-title { font-size: 16px; }
   .empty-descp { font-size: 14px; }
   // journey empty screen first user end
-  // on the go journey page end
-  // trip summary
-  .tripsummary-main {
-    .container-fluid, .container { padding: 0; }
+  .profile-tabs {
+    .tab-heading {
+      font-size: 15px;
+    }
+    ul {
+      li {
+        &:nth-child(1) .tab-heading {  padding: 17px 20px; }
+        &:nth-child(2) .tab-heading { padding: 13px 20px;  }
+        &:nth-child(3) .tab-heading { padding: 9px 20px; }
+      }
+    }
   }
-  // trip summary end
+  .moments-active {
+    ul li {
+      &:nth-child(1) .tab-heading { padding: 12px 20px;  }
+      &:nth-child(2) .tab-heading {  padding: 17px 20px; }
+      &:nth-child(3) .tab-heading { padding: 9px 20px; }
+    }
+  }
+  .reviews-active {
+    ul li {
+      &:nth-child(1) .tab-heading { padding: 9px 20px; }
+      &:nth-child(2) .tab-heading { padding: 12px 20px;  }
+      &:nth-child(3) .tab-heading {  padding: 17px 20px; }
+    }
+  }
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -716,5 +741,50 @@
     }
   }
   // trip summary end
+  .profile-photo-section {
+    width: 250px;
+  }
+  .profile-more-detail {
+    h3 { font-size: 18px; }
+  }
+  .profile-imgholder {
+    width: 100px;
+    height: 105px;
+    border-radius: 35px;
+  }
+  .wave {
+    width: 30px;
+    left: 45px;
+  }
+  .flag {
+    width: 35px;
+    right: 55px;
+  }
+  // my life
+  .profile-tabs {
+    margin: 0px 5px;
+    .sec-strip { bottom: 3px; }
+    .tab-heading { font-size: 14px; }
+    ul li {
+      &:nth-child(1) .tab-heading {  padding: 15px 20px; }
+      &:nth-child(2) .tab-heading {  padding: 11px 20px; }
+      &:nth-child(3) .tab-heading {  padding: 8px 20px; }
+    }
+  }
+  .moments-active {
+    ul li {
+      &:nth-child(1) .tab-heading {  padding: 11px 20px; }
+      &:nth-child(2) .tab-heading {  padding: 15px 20px; }
+      &:nth-child(3) .tab-heading {  padding: 8px 20px; }
+    }
+  }
+  .reviews-active {
+    ul li {
+      &:nth-child(1) .tab-heading {  padding: 8px 20px; }
+      &:nth-child(2) .tab-heading {  padding: 11px 20px; }
+      &:nth-child(3) .tab-heading {  padding: 15px 20px; }
+    }
+  }
+  // my life
 }
 // media query for 480px to 320px end

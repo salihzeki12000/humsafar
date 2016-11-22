@@ -1417,16 +1417,16 @@ header {
 
 // tabs
 .profile-tabs {
-  padding: 0 10px;
+  margin: 0 10px;
   position: relative;
   .first-strip,
   .fourth-strip,
   .sec-strip,
   .third-strip {
-    width: 98%;
+    width: 100%;
     height: 1px;
     position: absolute;
-    left: 16px;
+    left: 0px;
     bottom: 0;
     background-color: $brand-grey;
   }
@@ -2143,12 +2143,6 @@ header {
 // profile end
 // moment tab
 .moments-active {
-  .first-strip,
-  .fourth-strip,
-  .sec-strip,
-  .third-strip {
-    left: 14px;
-  }
   ul {
     li {
       &:first-child .tab-heading {
@@ -2324,12 +2318,6 @@ header {
 }
 
 .reviews-active {
-  .first-strip,
-  .fourth-strip,
-  .sec-strip,
-  .third-strip {
-    left: 14px;
-  }
   ul {
     li {
       &:first-child .tab-heading {
@@ -2533,12 +2521,6 @@ header {
 // reviews tab end
 // holiday planner tab
 .holidayplanner-active {
-  .first-strip,
-  .fourth-strip,
-  .sec-strip,
-  .third-strip {
-    left: 14px;
-  }
   ul {
     li {
       &:nth-child(1) .tab-heading {
