@@ -4,6 +4,12 @@
   @include button-variant( white, $brand-cyan, $brand-cyan);
 }
 
+.btn-transparent-dark-blue {
+  @include button-variant( white,
+  rgba(44, 55, 87, 0.8),
+  rgba(44, 55, 87, 0.8));
+}
+
 .font-sz10 {
   font-size: 10px;
 }
@@ -1258,6 +1264,9 @@ q {
     padding: 10px;
     border: 1px solid #ebebeb;
     margin-bottom: 5px;
+    i{
+      margin-top: 20px;
+    }
   }
 
   .agtprofile-detail {
@@ -1389,12 +1398,13 @@ q {
 }
 
 .agt-setting-billing {
-  .agtbill-head{
-    label{
-      margin-bottom: 0px;
+  .agtbill-head {
+    label {
+      margin-bottom: 0;
       margin-left: 5px;
     }
   }
+
   .switch {
     position: relative;
     display: inline-block;
@@ -1414,7 +1424,6 @@ q {
     right: 0;
     bottom: 0;
     background-color: #ccc;
-    // -webkit-transition: 0.4s;
     @include transition(0.4s);
   }
 
@@ -1426,8 +1435,6 @@ q {
     left: 3px;
     bottom: 3px;
     background-color: white;
-    // -webkit-transition: 0.4s;
-    // transition: 0.4s;
     @include transition(0.4s);
   }
 
@@ -1452,37 +1459,142 @@ q {
   }
 }
 
-.enquiry-sidetab{
+.enquiry-sidetab {
   width: 600px;
-    height: 500px;
-    position: absolute;
-    top: 30px;
-    right: 0;
-    z-index: 3;
-    background-color: #fff;
-    padding: 20px 30px;
+  height: 500px;
+  position: absolute;
+  top: 30px;
+  right: -600px;
+  z-index: 3;
+  background-color: #fff;
+  padding: 20px 30px;
+  @include transition(all 300ms linear);
 }
-.enquirytab-head{
+
+.enquirytab-head {
   border-bottom: 1px solid #ebebeb;
 }
 
-.enquirytab-accordionbox{
+.enquirytab-accordionbox {
   height: 410px;
   margin: 10px 0;
   overflow-y: auto;
-  background-color: yellow;
+
+  .panel {
+    background-color: $brand-lighter-grey;
+    border: none;
+  }
+
+  .panel-default > .panel-heading {
+    background-color: #ebebeb;
+    border: none;
+  }
+
+  .panel-group .panel {
+    border-radius: 0;
+  }
 }
+
 .enquirytab-accordionbox::-webkit-scrollbar {
   display: none;
 }
 
-.enquiretab-profileholder{
-  width: 40px;
-  height: 40px;
+.enquiretab-profileholder {
+  width: 30px;
+  height: 30px;
   overflow: hidden;
+  display: inline-block;
+  border-radius: 10px;
 }
 
-.enquiretab-msg{
-  font-size: 12px;
-  font-style: italic;
+.enquiretab-msgdiv,
+.enquiretab-title {
+  display: inline-block;
+  margin: 0 5px 0 10px;
+  padding: 5px 0;
+
+  p {
+    margin: 0;
+    font-size: 12px;
+  }
+}
+
+.enquiretab-msgdiv {
+  width: 275px;
+  @include transition(all 300ms linear);
+
+  p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-style: italic;
+  }
+}
+
+.disp-none {
+  display: none;
+  @include transition(all 300ms linear);
+}
+
+.enquirestab-mail {
+  @extend .avenir-light;
+  padding: 10px 30px;
+}
+
+.btn-replyenquiry {
+  margin: 10px 0;
+}
+
+.enquirytab-btn {
+  position: absolute;
+  top: 60px;
+  right: -34px;
+  z-index: 4;
+  @include transform(rotate(-90deg));
+  @include transition(all 300ms linear);
+  // &:before {
+  //   content: '';
+  //   width: 98%;
+  //   height: 20px;
+  //   position: absolute;
+  //   bottom: 0;
+  //   left: 5px;
+  //   background-color: #fff;
+  //   z-index: -1;
+  // }
+  a {
+    width: 120px;
+    padding: 15px 0;
+    margin: 0;
+    border-radius: 6px 6px 0px 0px;
+  }
+}
+.rt0{
+  right: 0;
+}
+.view-enquiry-list {
+  right: 0;
+  @include transition(all 300ms linear);
+  + .enquirytab-btn {
+    right: 565px;
+    top: 80px;
+    @include transition(all 300ms linear);
+  }
+}
+.side-enquiry {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 4;
+}
+
+.backdrop-enquiry:after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 3;
 }

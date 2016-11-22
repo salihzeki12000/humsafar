@@ -1,4 +1,8 @@
-<div class="agent-home relate" scrolladd1class>
+<div class="agent-home relate" scrolladd1class ng-init="showEnquiry = false;" ng-class="{'backdrop-enquiry' : showEnquiry, '' : !showEnquiry}">
+  <!-- <div class="enquirytab-btn rt0" ng-click="showEnquiry = !showEnquiry">
+    <a class="btn-dark-blue btn" ng-class="{'hide' : showEnquiry}"><i class="fa fa-chevron-down mr5"></i> Enquiry</a>
+    <a class="btn-dark-blue btn" ng-class="{'hide': !showEnquiry}"><i class="fa fa-chevron-down mr5"></i> Close</a>
+  </div> -->
   <div scrolldown>
     <div class="img-holder-agent bg-agent-home-img">
       <div class="agt-card-posi">
@@ -40,47 +44,42 @@
 
 
   <!-- Enquiry side tab -->
-  <div class="enquiry-sidetab">
+  <div class="side-enquiry">
+  <div class="enquiry-sidetab" ng-show="showEnquiry" ng-class="{'view-enquiry-list' : showEnquiry ,  ' ' : !showEnquiry}">
     <div class="enquirytab-head">
       <h4 class="avenir-roman color-blue">Enquires</h4>
     </div>
     <div class="enquirytab-accordionbox">
       <uib-accordion close-others="oneAtATime">
-        <div uib-accordion-group class="panel-default" is-open="status.open1">
+        <uib-accordion-group  ng-repeat="agtenquiry in enquiryAgent track by $index" is-open="status.open">
           <uib-accordion-heading>
             <div class="enquires-tab-title color-blue avenir-medium clearfix">
               <div class="enquiretab-profileholder  pull-left">
-                <img src="img/adrena.jpg" alt="" class="img-responsive">
+                <img ng-src="{{agtenquiry.enquireimgProfile}}" alt="" class="img-responsive">
               </div>
-              <label class="color-pink avenir-medium pull-left">Yash Chudasama</label>
-              <p class="pull-left enquiretab-msg">Hi! Lorem ipsum dolor sit amet, consectetur adipisicing elit. At eos repellendus, voluptatum.</p>
-              <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open1, 'fa fa-chevron-down': !status.open1}"></i>
+              <div class="enquiretab-title">
+                <p class="color-pink avenir-heavy">{{agtenquiry.profileName}}</p>
+              </div>
+              <div class="enquiretab-msgdiv"  ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
+                <p class="enquiretab-msg">{{agtenquiry.enquirymsghead}}</p>
+              </div>
+              <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open, 'fa fa-chevron-down': !status.open}"></i>
             </div>
           </uib-accordion-heading>
           <div class="enquirestab-mail">
-          </div>
-        </div>
-        <div uib-accordion-group class="panel-default" is-open="status.open2">
-          <uib-accordion-heading>
-            <div class="agtaccord-title color-blue avenir-medium">USA
-              <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open2, 'fa fa-chevron-down': !status.open2}"></i>
+            <p ng-bind-html="agtenquiry.enquirymsg"></p>
+            <div class="btn-replyenquiry">
+              <button type="button" class="btn btn-pink"><i class="fa fa-share" aria-hidden="true"></i> Reply </button>
             </div>
-          </uib-accordion-heading>
-          <div class="country-tabs">
           </div>
-        </div>
-        <div uib-accordion-group class="panel-default" is-open="status.open3">
-          <uib-accordion-heading>
-            <div class="agtaccord-title color-blue avenir-medium">asia
-              <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open3, 'fa fa-chevron-down': !status.open3}"></i>
-            </div>
-          </uib-accordion-heading>
-          <div class="country-tabs">
-          </div>
-        </div>
-      </uib-accordion>
+        </uib-accordion-group>
+    </uib-accordion>
     </div>
-
+  </div>
+  <div class="enquirytab-btn" ng-click="showEnquiry = !showEnquiry">
+    <a class="btn-transparent-dark-blue btn" ng-class="{'hide' : showEnquiry}">Your Enquires</a>
+    <a class="btn-dark-blue btn" ng-class="{'hide': !showEnquiry}"><i class="fa fa-chevron-down mr5"></i> Close</a>
+  </div>
   </div>
   <!-- Enquiry side tab enD-->
 </div>
