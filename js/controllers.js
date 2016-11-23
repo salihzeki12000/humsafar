@@ -825,11 +825,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.userData = $.jStorage.get("profile");
     var getOneJourneyCallback = function (journeys) {
       $scope.journey = journeys;
-      console.log("$scope.journey updated successfully");
-      var posts = [];
-
-      posts = _.filter($scope.journey.post,  'latlong');
-      _.each(posts, function (n, $index) {
+      var postsWithLatLng = [];
+      postsWithLatLng = _.filter($scope.journey.post,  'latlong');
+      console.log(postsWithLatLng);
+      _.each(postsWithLatLng, function (n, $index) {
         centers[$index] = {
           "lat": parseFloat(n.latlong.lat),
           "lng": parseFloat(n.latlong.long)
@@ -838,8 +837,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           "lat": centers[0].lat,
           "lng": centers[0].lng
         };
-
       });
+      console.log("centers="+centers);
+      console.log(center);
+      
     };
     OnGoJourney.getOneJourney({
       "urlSlug": slug
@@ -1041,13 +1042,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
 
     initMap = function () {
-
-
       if (typeof google === 'object' && typeof google.maps === 'object') {
         var bounds = new google.maps.LatLngBounds();
         var step = 0;
         var numSteps = 100; //Change this to set animation resolution
-
         map = new google.maps.Map(document.getElementById('map'), {
           draggable: true,
           animation: google.maps.Animation.DROP,
@@ -8059,6 +8057,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.navigation = NavigationService.getnav();
   $scope.oneAtATime = true;
 
+
+ //scroll change
+$(window).scroll(function() {
+ //  var navHeight = $('.img-holder-agent').height($(window).height() - 41);
+  var scroll = $(window).scrollTop();
+   //console.log(scroll);
+  if (scroll >= 225) {
+      //console.log('a');
+      $(".agent-user-nav").addClass("change");
+  } else {
+      //console.log('a');
+      $(".agent-user-nav").removeClass("change");
+  }
+});
+//scroll change end
+
   // tab change
   var allagtuser = ["views/content/agent/agt-user/usr-itinerary.html", "views/content/agent/agt-user/usr-tourpackages.html", "views/content/agent/agt-user/usr-photovideos.html", "views/content/agent/agt-user/usr-testimonialreviews.html", "views/content/agent/agt-user/usr-aboutus.html"];
   $scope.agtuser = {
@@ -8288,6 +8302,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.oneAtATime = true;
+
+  //scroll change
+ $(window).scroll(function() {
+   var scroll = $(window).scrollTop();
+    //console.log(scroll);
+   if (scroll >= 225) {
+       //console.log('a');
+       $(".agent-home-nav").addClass("change");
+   } else {
+       //console.log('a');
+       $(".agent-home-nav").removeClass("change");
+   }
+});
+ //scroll change end
 
   // tab change
   var allagthome = ["views/content/agent/agt-home/agthome-itinerary.html", "views/content/agent/agt-home/agthome-tourpackages.html", "views/content/agent/agt-home/agthome-photovideos.html", "views/content/agent/agt-home/agthome-testimonialreviews.html",
