@@ -51,8 +51,7 @@
     <div uib-datepicker ng-model="datetime.dt" class="well well-sm" datepicker-options="options" datepicker-mode="year|month|day"></div>
     <div class="text-right">
       <button class="btn btn-pink btn-more" ng-click="updateDateTime(ongo.uniqueId,time,datetime.dt)" ng-if="isPostDate">Save</button>
-      <button class="btn btn-pink btn-more" ng-click="updateDateTime(journey.startTime,time,datetime.dt)" ng-if="isBannerDate">Save</button>
-      
+      <button class="btn btn-pink btn-more" ng-click="updateBannerDateTime(journey._id,time,datetime.dt)" ng-if="isBannerDate">Save</button>     
     </div>
   </div>
 </div>

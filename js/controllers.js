@@ -184,7 +184,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log("close call");
         authenticatesuccess();
       };
-     };
+    };
   })
   .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $stateParams) {
     //Used to name the .html file
@@ -472,7 +472,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   }
     //   i++;
     // }, 1000);
- $scope.myImage = '';
+    $scope.myImage = '';
     $scope.myCroppedImage = '';
     $scope.showImage = false;
     var i = 1;
@@ -482,18 +482,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           var file = evt.currentTarget.files[0];
           var formData = new FormData();
           console.log(file);
-        formData.append('file', file, "file.jpg");
-        $http.post(uploadurl, formData, {
-          headers: {
-            'Content-Type': undefined
-          },
-          transformRequest: angular.identity
-        }).success(function(data) {
-          console.log(data);
-          if ($scope.callback) {
-            $scope.callback(data);
-          }
-        });
+          formData.append('file', file, "file.jpg");
+          $http.post(uploadurl, formData, {
+            headers: {
+              'Content-Type': undefined
+            },
+            transformRequest: angular.identity
+          }).success(function(data) {
+            console.log(data);
+            if ($scope.callback) {
+              $scope.callback(data);
+            }
+          });
           var reader = new FileReader();
           reader.onload = function (evt) {
             $scope.$apply(function ($scope) {
@@ -818,7 +818,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
   })
-  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, $state, $stateParams) {
+  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, $state, $stateParams,$filter) {
     //Used to name the .html file
     var slug = $stateParams.id;
     var checkinCount = "";
@@ -848,32 +848,54 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
 
     //change banner date and time starts
-       $scope.time = {};
-      $scope.datetime = {};
-      $scope.changeBannerDate = function () {
-        $scope.isPostDate=false;
-        $scope.isJourneyDate=true;
-        $scope.editKindJourney = !$scope.editKindJourney
-        date = $scope.journey.startTime;
-        var d = new Date(date);
-        var hh = d.getHours();
-        if (hh > 12) {
-          hh = hh - 12;
-          $scope.time.am_pm = "PM";
-        } else {
-          $scope.time.am_pm = "AM";
-        }
-        $scope.time.hour = hh;
-        $scope.time.min = d.getMinutes();
-        $scope.datetime.dt = d;
-        $uibModal.open({
-          animation: true,
-          templateUrl: "views/modal/date-time.html",
-          scope: $scope,
-          backdropClass: "review-backdrop",
-        })
-      };
+    $scope.time = {};
+    $scope.datetime = {};
+    $scope.changeBannerDate = function () {
+      $scope.isPostDate = false;
+      $scope.isBannerDate = true;
+      date = $scope.journey.startTime;
+      var d = new Date(date);
+      var hh = d.getHours();
+      if (hh > 12) {
+        hh = hh - 12;
+        $scope.time.am_pm = "PM";
+      } else {
+        $scope.time.am_pm = "AM";
+      }
+      $scope.time.hour = hh;
+      $scope.time.min = d.getMinutes();
+      $scope.datetime.dt = d;
+      modal=$uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/date-time.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+      })
+    };
 
+    $scope.updateBannerDateTime = function (id, formData, dt) {
+      console.log(dt);
+       var date = $filter('formatDateCalender')(dt);
+        var time = $filter('formatTimeCalender')(formData);
+      var result = {};
+      var callback=function (data) {
+        var formData = {
+          "urlSlug": $scope.journey.urlSlug
+        }
+        OnGoJourney.getOneJourney(formData, function (journeys) {
+         $scope.journey.startTime = journeys.startTime;
+         modal.close();
+          console.log(journeys);
+        }, function (err) {
+          console.log(err);
+        });
+      }
+      result._id = id;
+      result.startTime = new Date(date + " " + time);
+      OnGoJourney.updateBannerDateTime(result,callback);
+    };
+
+    
     //change banner date and time ends
 
 
@@ -1037,19 +1059,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // console.log(percentComplete, flag);
           var xdiff = (centers[i].lat - centers[i - 1].lat);
           var ydiff = (centers[i].lng - centers[i - 1].lng);
-          // console.log(xdiff);
-          // console.log(xdiff);
-          // if (Math.abs(xdiff) < 4 && value) {
-          //   smoothZoom(map, 9, map.getZoom(), true); //for zooming in
-          // } else if (Math.abs(xdiff) > 4 && value) {
-          //   smoothZoom(map, 4, map.getZoom(), false); //for zooming out
-          // }
+          console.log(xdiff);
+          console.log(xdiff);
+          if (Math.abs(xdiff) < 4 && value) {
+            smoothZoom(map, 9, map.getZoom(), true); //for zooming in
+          } else if (Math.abs(xdiff) > 4 && value) {
+            smoothZoom(map, 4, map.getZoom(), false); //for zooming out
+          }
 
-          var markerBounds = new google.maps.LatLngBounds();
-          markerBounds.extend(departure);
-          markerBounds.extend(arrival);
+          // var markerBounds = new google.maps.LatLngBounds();
+          // markerBounds.extend(departure);
+          // markerBounds.extend(arrival);
 
-          map.fitBounds(markerBounds);
+          // map.fitBounds(markerBounds);
 
           var frac1 = xdiff / 100;
           var frac2 = ydiff / 100;
@@ -3305,7 +3327,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
 
     $scope.updateBucketList = function (country) {
-      MyLife.updateBucketList(country,function (data, status) {
+      MyLife.updateBucketList(country, function (data, status) {
         reloadCount();
       }, function () {});
       $scope.getMap();
@@ -3317,7 +3339,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       if (country.countryVisited === true) {
         $scope.visited = [];
         var callback = function (data) {
-          var a = _.filter(data.data.countriesVisited, ["countryId", country._id,]);
+          var a = _.filter(data.data.countriesVisited, ["countryId", country._id, ]);
           var visitedArr = [];
           _.each(a[0].visited, function (n, index) {
             visitedArr[n.year] = {
@@ -3746,9 +3768,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         })
       };
 
-      var getAllJourney = function (journeys,flag) {
+      var getAllJourney = function (journeys, flag) {
         $scope.travelLife = journeys;
-        $scope.hasJourney=flag;
+        $scope.hasJourney = flag;
       };
       OnGoJourney.getAllJourney(getAllJourney, function (err) {
         console.log(err);
@@ -4487,11 +4509,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-     $scope.$watch('masonryContainer', function() {
-    $timeout(function () {
-      console.log("reload");
-    $rootScope.$broadcast('masonry.reload');
-    }, 200);
+    $scope.$watch('masonryContainer', function () {
+      $timeout(function () {
+        console.log("reload");
+        $rootScope.$broadcast('masonry.reload');
+      }, 200);
     });
 
 
@@ -6221,19 +6243,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     };
 
-    var callbackGetCountriesVisited=function(data){
-      $scope.countryVisitedList=data;
+    var callbackGetCountriesVisited = function (data) {
+      $scope.countryVisitedList = data;
     };
 
-    var callbackBucketList=function(data){
-      $scope.bucketList=data;
+    var callbackBucketList = function (data) {
+      $scope.bucketList = data;
     };
 
-    var callbackRemoveFromBucketList=function(countryId){
+    var callbackRemoveFromBucketList = function (countryId) {
       document.getElementById(countryId).remove();
     };
-    $scope.removeFromBucketList=function(id){
-      MyLife.updateBucketListWeb(id,callbackRemoveFromBucketList);
+    $scope.removeFromBucketList = function (id) {
+      MyLife.updateBucketListWeb(id, callbackRemoveFromBucketList);
     }
 
     MyLife.getFollowersWeb(callbackFollowings);
@@ -6854,37 +6876,37 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
 
     $scope.photoGallery = [
-      'img/uploaded-pic.jpg',
-      'img/slider2.jpg',
-      'img/moment-travel1.jpg',
-      'img/moment-travel2.jpg',
-      'img/local-life-post.jpg',
-      'img/destination/goldentemple.jpg',
-      'img/destination/list1.jpg',
-      'img/destination/list2.jpg',
-      'img/destination/info.jpg',
-      'img/destination/taj-featured.jpg',
-      'img/itinerary/itinerary.jpg',
-      'img/uploaded-pic.jpg',
-      'img/slider2.jpg',
-      'img/moment-travel1.jpg',
-      'img/moment-travel2.jpg',
-      'img/local-life-post.jpg',
-      'img/destination/goldentemple.jpg',
-      'img/destination/list1.jpg',
-      'img/destination/list2.jpg',
-      'img/destination/info.jpg',
-      'img/destination/taj-featured.jpg',
-      'img/itinerary/itinerary.jpg',
-      'img/moment-travel1.jpg',
-      'img/moment-travel2.jpg',
-      'img/local-life-post.jpg',
-      'img/destination/goldentemple.jpg',
-      'img/destination/list1.jpg',
-      'img/destination/list2.jpg',
-      'img/destination/info.jpg',
-      'img/destination/taj-featured.jpg',
-      'img/itinerary/itinerary.jpg',
+      '../img/uploaded-pic.jpg',
+      '../img/slider2.jpg',
+      '../img/moment-travel1.jpg',
+      '../img/moment-travel2.jpg',
+      '../img/local-life-post.jpg',
+      '../img/destination/goldentemple.jpg',
+      '../img/destination/list1.jpg',
+      '../img/destination/list2.jpg',
+      '../img/destination/info.jpg',
+      '../img/destination/taj-featured.jpg',
+      '../img/itinerary/itinerary.jpg',
+      '../img/uploaded-pic.jpg',
+      '../img/slider2.jpg',
+      '../img/moment-travel1.jpg',
+      '../img/moment-travel2.jpg',
+      '../img/local-life-post.jpg',
+      '../img/destination/goldentemple.jpg',
+      '../img/destination/list1.jpg',
+      '../img/destination/list2.jpg',
+      '../img/destination/info.jpg',
+      '../img/destination/taj-featured.jpg',
+      '../img/itinerary/itinerary.jpg',
+      '../img/moment-travel1.jpg',
+      '../img/moment-travel2.jpg',
+      '../img/local-life-post.jpg',
+      '../img/destination/goldentemple.jpg',
+      '../img/destination/list1.jpg',
+      '../img/destination/list2.jpg',
+      '../img/destination/info.jpg',
+      '../img/destination/taj-featured.jpg',
+      '../img/itinerary/itinerary.jpg',
     ];
     // other itineraries main
     $scope.travelLife = [{
@@ -7877,7 +7899,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.showAgtSetting = 5;
     } else if (val == 6) {
       $scope.showAgtSetting = 6;
-    } else if (val == 7){
+    } else if (val == 7) {
       $scope.showAgtSetting = 7;
     } else if (val == 8) {
       $scope.showAgtSetting = 8;
@@ -7906,13 +7928,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   }, {
     img: "img/agt-cat6.png",
     caption: "Budget"
-  },{
+  }, {
     img: "img/agt-cat7.png",
     caption: "Luxury"
-  },{
+  }, {
     img: "img/agt-cat8.png",
     caption: "Religious"
-  },{
+  }, {
     img: "img/agt-cat9.png",
     caption: "Friends"
   }];
@@ -7928,124 +7950,109 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.variables = {};
   $scope.variables.tooltips = {};
   $scope.showTip = false;
-  $scope.showTip = function(index){
+  $scope.showTip = function (index) {
     // if($scope.showTip == false){
     //   $scope.showTip = true;
     // }else{
     //   $scope.showTip = false;
     // }
-    _.each($scope.variables.tooltips,function (value,property) {
-      $scope.variables.tooltips[property]=false;
-      })
-    $scope.variables.tooltips[index]=$scope.variables.tooltips[index]?false:true;
+    _.each($scope.variables.tooltips, function (value, property) {
+      $scope.variables.tooltips[property] = false;
+    })
+    $scope.variables.tooltips[index] = $scope.variables.tooltips[index] ? false : true;
   };
 
   // // upgrade feature end
-  $scope.agentUpgradeFeature = [
-    {
-      upgradeFeature: "Itineraries",
-      basicValue: "5",
-      advValue: "25",
-      premValue: "Unlimited",
-      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
-    },
-    {
-      upgradeFeature: "Tours & Packages",
-      basicValue: "1",
-      advValue: "5",
-      premValue: "Unlimited",
-      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
-    },
-    {
-      upgradeFeature: "Featured Tours & Packages on Popular Agents",
-      basicValue: '<i class="fa fa-minus"></i>',
-      advValue: '<i class="fa fa-minus"></i>',
-      premValue: '<i class="fa fa-check"></i>',
-      upgradetool:"Lorem ipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
-    },
-    {
-      upgradeFeature: "Featured Tours & Packages on Destination Agents",
-      basicValue: '<i class="fa fa-minus"></i>',
-      advValue: '<i class="fa fa-check"></i>',
-      premValue: '<i class="fa fa-check"></i>',
-      upgradetool:"t. Est praesentium modi cum odit reprehenderit cupiditate"
-    },
-    {
-      upgradeFeature: "Lead Monitor - Access to TraveLibro Audience",
-      basicValue: '<i class="fa fa-minus"></i>',
-      advValue: '<i class="fa fa-minus"></i>',
-      premValue: '<i class="fa fa-check"></i>',
-      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
-    },
-    {
-      upgradeFeature: "Analyse Profile Views",
-      basicValue: "3",
-      advValue: "3",
-      premValue: "3",
-      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum t cupiditate"
-    },
-    {
-      upgradeFeature: "Connect With Followers",
-      basicValue: "3",
-      advValue: '<i class="fa fa-check"></i>',
-      premValue: "3",
-      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentiumnderit cupiditate"
-    },
-    {
-      upgradeFeature: "Lead Analytics",
-      basicValue: '<i class="fa fa-minus"></i>',
-      advValue: '<i class="fa fa-minus"></i>',
-      premValue: '<i class="fa fa-check"></i>',
-      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentiumreprehenderit cupiditate"
-    },
-    {
-      upgradeFeature: "Analyse Views &amp; Downloads",
-      basicValue: '<i class="fa fa-minus"></i>',
-      advValue: '<i class="fa fa-minus"></i>',
-      premValue: '<i class="fa fa-check"></i>',
-      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium  cum odit reprehenderit cupiditate"
-    },
-    {
-      upgradeFeature: "List on Popular Agents",
-      basicValue: '<i class="fa fa-minus"></i>',
-      advValue: '<i class="fa fa-minus"></i>',
-      premValue: '<i class="fa fa-check"></i>',
-      upgradetool:" ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
-    },
-    {
-      upgradeFeature: "Upload Photos & Videos",
-      basicValue: '<i class="fa fa-check"></i>',
-      advValue: '<i class="fa fa-check"></i>',
-      premValue: '<i class="fa fa-check"></i>',
-      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. dit reprehenderit cupiditate"
-    },
-    {
-      upgradeFeature: "About Us",
-      basicValue: '<i class="fa fa-check"></i>',
-      advValue: '<i class="fa fa-check"></i>',
-      premValue: '<i class="fa fa-check"></i>',
-      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditateLorem Est praesentium modi cum odit reprehen"
-    },
-    {
-      upgradeFeature: "Select Specialisation",
-      basicValue: '<i class="fa fa-check"></i>',
-      advValue: '<i class="fa fa-check"></i>',
-      premValue: '<i class="fa fa-check"></i>',
-      upgradetool:"Lorem Est praesentium modi cum odit reprehenderit cupiditate"
-    },
-    {
-      upgradeFeature: "Popular Agents Adverts to TraveLibro Audience",
-      basicValue: '<i class="fa fa-check"></i>',
-      advValue: '<i class="fa fa-check"></i>',
-      premValue: '<i class="fa fa-check"></i>',
-      upgradetool:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cupiditate"
-    }
-  ];
+  $scope.agentUpgradeFeature = [{
+    upgradeFeature: "Itineraries",
+    basicValue: "5",
+    advValue: "25",
+    premValue: "Unlimited",
+    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
+  }, {
+    upgradeFeature: "Tours & Packages",
+    basicValue: "1",
+    advValue: "5",
+    premValue: "Unlimited",
+    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
+  }, {
+    upgradeFeature: "Featured Tours & Packages on Popular Agents",
+    basicValue: '<i class="fa fa-minus"></i>',
+    advValue: '<i class="fa fa-minus"></i>',
+    premValue: '<i class="fa fa-check"></i>',
+    upgradetool: "Lorem ipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
+  }, {
+    upgradeFeature: "Featured Tours & Packages on Destination Agents",
+    basicValue: '<i class="fa fa-minus"></i>',
+    advValue: '<i class="fa fa-check"></i>',
+    premValue: '<i class="fa fa-check"></i>',
+    upgradetool: "t. Est praesentium modi cum odit reprehenderit cupiditate"
+  }, {
+    upgradeFeature: "Lead Monitor - Access to TraveLibro Audience",
+    basicValue: '<i class="fa fa-minus"></i>',
+    advValue: '<i class="fa fa-minus"></i>',
+    premValue: '<i class="fa fa-check"></i>',
+    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
+  }, {
+    upgradeFeature: "Analyse Profile Views",
+    basicValue: "3",
+    advValue: "3",
+    premValue: "3",
+    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum t cupiditate"
+  }, {
+    upgradeFeature: "Connect With Followers",
+    basicValue: "3",
+    advValue: '<i class="fa fa-check"></i>',
+    premValue: "3",
+    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentiumnderit cupiditate"
+  }, {
+    upgradeFeature: "Lead Analytics",
+    basicValue: '<i class="fa fa-minus"></i>',
+    advValue: '<i class="fa fa-minus"></i>',
+    premValue: '<i class="fa fa-check"></i>',
+    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentiumreprehenderit cupiditate"
+  }, {
+    upgradeFeature: "Analyse Views &amp; Downloads",
+    basicValue: '<i class="fa fa-minus"></i>',
+    advValue: '<i class="fa fa-minus"></i>',
+    premValue: '<i class="fa fa-check"></i>',
+    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium  cum odit reprehenderit cupiditate"
+  }, {
+    upgradeFeature: "List on Popular Agents",
+    basicValue: '<i class="fa fa-minus"></i>',
+    advValue: '<i class="fa fa-minus"></i>',
+    premValue: '<i class="fa fa-check"></i>',
+    upgradetool: " ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
+  }, {
+    upgradeFeature: "Upload Photos & Videos",
+    basicValue: '<i class="fa fa-check"></i>',
+    advValue: '<i class="fa fa-check"></i>',
+    premValue: '<i class="fa fa-check"></i>',
+    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. dit reprehenderit cupiditate"
+  }, {
+    upgradeFeature: "About Us",
+    basicValue: '<i class="fa fa-check"></i>',
+    advValue: '<i class="fa fa-check"></i>',
+    premValue: '<i class="fa fa-check"></i>',
+    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditateLorem Est praesentium modi cum odit reprehen"
+  }, {
+    upgradeFeature: "Select Specialisation",
+    basicValue: '<i class="fa fa-check"></i>',
+    advValue: '<i class="fa fa-check"></i>',
+    premValue: '<i class="fa fa-check"></i>',
+    upgradetool: "Lorem Est praesentium modi cum odit reprehenderit cupiditate"
+  }, {
+    upgradeFeature: "Popular Agents Adverts to TraveLibro Audience",
+    basicValue: '<i class="fa fa-check"></i>',
+    advValue: '<i class="fa fa-check"></i>',
+    premValue: '<i class="fa fa-check"></i>',
+    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cupiditate"
+  }];
   // // upgrade feature end
 })
 
 
-.controller('AgentuserCtrl', function($scope, TemplateService, NavigationService, $timeout, $state) {
+.controller('AgentuserCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
   $scope.template = TemplateService.changecontent("agent-user"); //Use same name of .html file
   $scope.menutitle = NavigationService.makeactive("Agent User"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
@@ -8085,7 +8092,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     default:
       $scope.agtuser.innerView = allagtuser[0];
   }
-  $scope.getTab = function(view) {
+  $scope.getTab = function (view) {
     $scope.agtuser.innerView = allagtuser[view];
     var url = "usr-itinerary";
     var active = "";
@@ -8127,79 +8134,79 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   // gallery card end
   $scope.agenPhotogallery = [
-    'img/uploaded-pic.jpg',
-    'img/slider2.jpg',
-    'img/moment-travel1.jpg',
-    'img/moment-travel2.jpg',
-    'img/local-life-post.jpg',
-    'img/destination/goldentemple.jpg',
-    'img/destination/list1.jpg',
-    'img/destination/list2.jpg',
-    'img/destination/info.jpg',
-    'img/destination/taj-featured.jpg',
-    'img/itinerary/itinerary.jpg',
-    'img/india-gate.jpg',
-    'img/notify-adrena.jpg',
-    'img/paris.jpg',
-    'img/bg-popular.jpg',
-    'img/bg-blur.jpg',
-    'img/blog-banner.jpg',
-    'img/follower.jpg'
+    '../img/uploaded-pic.jpg',
+    '../img/slider2.jpg',
+    '../img/moment-travel1.jpg',
+    '../img/moment-travel2.jpg',
+    '../img/local-life-post.jpg',
+    '../img/destination/goldentemple.jpg',
+    '../img/destination/list1.jpg',
+    '../img/destination/list2.jpg',
+    '../img/destination/info.jpg',
+    '../img/destination/taj-featured.jpg',
+    '../img/itinerary/itinerary.jpg',
+    '../img/india-gate.jpg',
+    '../img/notify-adrena.jpg',
+    '../img/paris.jpg',
+    '../img/bg-popular.jpg',
+    '../img/bg-blur.jpg',
+    '../img/blog-banner.jpg',
+    '../img/follower.jpg'
   ];
   // gallery card end
 
   // testimonial card
   $scope.testimonialreview = [{
     testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    usrprofileImgholder: 'img/adrena.jpg',
+    usrprofileImgholder: '../img/adrena.jpg',
     usrName: 'Randy & Victoria',
     usrLoc: 'New-York, USA',
     usrRating: '9'
   }, {
     testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and',
-    usrprofileImgholder: 'img/adrena.jpg',
+    usrprofileImgholder: '../img/adrena.jpg',
     usrName: 'Randy & Victoria',
     usrLoc: 'New-York, USA',
     usrRating: '9'
   }, {
     testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, text ever since the 1500s,',
-    usrprofileImgholder: 'img/adrena.jpg',
+    usrprofileImgholder: '../img/adrena.jpg',
     usrName: 'Randy & Victoria',
     usrLoc: 'New-York, USA',
     usrRating: '9'
   }, {
     testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text evers,',
-    usrprofileImgholder: 'img/adrena.jpg',
+    usrprofileImgholder: '../img/adrena.jpg',
     usrName: 'Randy & Victoria',
     usrLoc: 'New-York, USA',
     usrRating: '9'
   }, {
     testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy',
-    usrprofileImgholder: 'img/adrena.jpg',
+    usrprofileImgholder: '../img/adrena.jpg',
     usrName: 'Randy & Victoria',
     usrLoc: 'New-York, USA',
     usrRating: '9'
   }, {
     testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    usrprofileImgholder: 'img/adrena.jpg',
+    usrprofileImgholder: '../img/adrena.jpg',
     usrName: 'Randy & Victoria',
     usrLoc: 'New-York, USA',
     usrRating: '9'
   }, {
     testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    usrprofileImgholder: 'img/adrena.jpg',
+    usrprofileImgholder: '../img/adrena.jpg',
     usrName: 'Randy & Victoria',
     usrLoc: 'New-York, USA',
     usrRating: '9'
   }, {
     testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    usrprofileImgholder: 'img/adrena.jpg',
+    usrprofileImgholder: '../img/adrena.jpg',
     usrName: 'Randy & Victoria',
     usrLoc: 'New-York, USA',
     usrRating: '9'
   }, {
     testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    usrprofileImgholder: 'img/adrena.jpg',
+    usrprofileImgholder: '../img/adrena.jpg',
     usrName: 'Randy & Victoria',
     usrLoc: 'New-York, USA',
     usrRating: '9'
@@ -8208,10 +8215,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
   // review textarea counter
-  $scope.$on('$viewContentLoaded', function() {
-    $timeout(function() {
+  $scope.$on('$viewContentLoaded', function () {
+    $timeout(function () {
       $("#reviewremainingC").html("00 / 300");
-      $('textarea').keypress(function() {
+      $('textarea').keypress(function () {
 
         if (this.value.length > 500) {
           return false;
@@ -8222,60 +8229,60 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   });
   // review textarea counter end
 
-   //rating slider
- $scope.ratingSlide = {
-   range: {
-       min: 0,
-       max: 10
-   },
-   step: 1,
-   minRating: 0,
-   maxRating: 10
-};
- //rating slider end
+  //rating slider
+  $scope.ratingSlide = {
+    range: {
+      min: 0,
+      max: 10
+    },
+    step: 1,
+    minRating: 0,
+    maxRating: 10
+  };
+  //rating slider end
 
- // category type
- $scope.categoryType = [{
-   img: "img/itinerary/adventure.png",
-   caption: "Adventure",
-   width: "25"
- }, {
-   img: "img/itinerary/business.png",
-   caption: "Business",
-   width: "24"
- }, {
-   img: "img/itinerary/family.png",
-   caption: "Family",
-   width: "30"
- }, {
-   img: "img/itinerary/romance.png",
-   caption: "Romance",
-   width: "26"
- }, {
-   img: "img/itinerary/backpacking.png",
-   caption: "Backpacking",
-   width: "23"
- }, {
-   img: "img/itinerary/budget.png",
-   caption: "Budget",
-   width: "22"
- }, {
-   img: "img/itinerary/luxury.png",
-   caption: "Luxury",
-   width: "21"
- }, {
-   img: "img/itinerary/religious.png",
-   caption: "Religious",
-   width: "26"
- }, {
-   img: "img/itinerary/friend.png",
-   caption: "Friends",
-   width: "24"
- }, ];
- // category type end
+  // category type
+  $scope.categoryType = [{
+    img: "img/itinerary/adventure.png",
+    caption: "Adventure",
+    width: "25"
+  }, {
+    img: "img/itinerary/business.png",
+    caption: "Business",
+    width: "24"
+  }, {
+    img: "img/itinerary/family.png",
+    caption: "Family",
+    width: "30"
+  }, {
+    img: "img/itinerary/romance.png",
+    caption: "Romance",
+    width: "26"
+  }, {
+    img: "img/itinerary/backpacking.png",
+    caption: "Backpacking",
+    width: "23"
+  }, {
+    img: "img/itinerary/budget.png",
+    caption: "Budget",
+    width: "22"
+  }, {
+    img: "img/itinerary/luxury.png",
+    caption: "Luxury",
+    width: "21"
+  }, {
+    img: "img/itinerary/religious.png",
+    caption: "Religious",
+    width: "26"
+  }, {
+    img: "img/itinerary/friend.png",
+    caption: "Friends",
+    width: "24"
+  }, ];
+  // category type end
 })
 
-.controller('AgenthomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $state) {
+.controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
   $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
   $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
@@ -8284,9 +8291,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   // tab change
   var allagthome = ["views/content/agent/agt-home/agthome-itinerary.html", "views/content/agent/agt-home/agthome-tourpackages.html", "views/content/agent/agt-home/agthome-photovideos.html", "views/content/agent/agt-home/agthome-testimonialreviews.html",
-  "views/content/agent/agt-home/agthome-travelactivity.html",
-  "views/content/agent/agt-home/agthome-leadmonitor.html", "views/content/agent/agt-home/agthome-analytics.html",
-  "views/content/agent/agt-home/agthome-aboutus.html"];
+    "views/content/agent/agt-home/agthome-travelactivity.html",
+    "views/content/agent/agt-home/agthome-leadmonitor.html", "views/content/agent/agt-home/agthome-analytics.html",
+    "views/content/agent/agt-home/agthome-aboutus.html"
+  ];
   $scope.agthome = {
     innerView: allagthome[0]
   };
@@ -8330,7 +8338,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     default:
       $scope.agthome.innerView = allagthome[0];
   }
-  $scope.getTab = function(view) {
+  $scope.getTab = function (view) {
     $scope.agthome.innerView = allagthome[view];
     var url = "agthome-itinerary";
     var active = "";
@@ -8415,8 +8423,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     img: "img/itinerary/friend.png",
     caption: "Friends",
     width: "24"
-  }];
+  } ];
   // category type end
+
 
 
       // Enquiry accordion

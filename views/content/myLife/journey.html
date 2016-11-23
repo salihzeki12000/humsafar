@@ -53,7 +53,7 @@
           <!--End of switch Travel life and local life-->
 
           <!-- user logged for first time -->
-          <div class="empty-profile-journey">
+          <div class="empty-profile-journey" ng-hide="hasJourney">
             <div class="row">
               <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10">
                 <div class="row">
@@ -84,7 +84,7 @@
           </div>
           <!-- user logged for first time end -->
 
-          <div class="masonry-detail">
+          <div class="masonry-detail ng-show="hasJourney">
             <div masonry>
               <div class="row">
                 <!--1st card-->

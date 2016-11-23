@@ -8,12 +8,12 @@ var ongojourney = angular.module('ongojourney', [])
         url: adminURL + "/journey/getAll",
         method: "POST"
       }).success(function (data) {
-        var hasJourney="";
-        if(_.isEmpty(data.data)){
-          hasJourney=false;
+        var hasJourney = "";
+        if (_.isEmpty(data.data)) {
+          hasJourney = false;
           console.log(hasJourney);
-        }else{
-          hasJourney=true;
+        } else {
+          hasJourney = true;
           console.log(hasJourney);
         }
         var journeys = data.data;
@@ -32,7 +32,7 @@ var ongojourney = angular.module('ongojourney', [])
           journeys[i].remainingCount = n.countryVisited.length - 3;
           i++;
         });
-        callback(journeys,hasJourney);
+        callback(journeys, hasJourney);
       });
     },
 
@@ -108,6 +108,15 @@ var ongojourney = angular.module('ongojourney', [])
         console.log(data);
         callback();
       });
+    },
+    updateBannerDateTime:function(formData,callback){
+      $http({
+        url: adminURL + "/journey/editData/",
+        method: "POST",
+        data: formData
+      }).success(function(data){
+        callback();
+      });
     }
   };
 });
@@ -123,9 +132,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
     templateUrl: 'views/directive/journey-post.html',
     link: function ($scope, element, attrs) {
       // var counter = 0
-      $scope.index=0;
-      $scope.changeImage=function(index){
-        $scope.index=index;
+      $scope.index = 0;
+      $scope.changeImage = function (index) {
+        $scope.index = index;
       }
 
       var makePostString = function () {
@@ -465,9 +474,10 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       $scope.time = {};
       $scope.datetime = {};
       $scope.changeDate = function () {
-        $scope.isPostDate=true;
-        $scope.isJourneyDate=false;
-        date = $scope.ongo.UTCModified
+        $scope.isPostDate = true;
+        $scope.isBannerDate = false;
+        console.log($scope.isPostDate, $scope.isBannerDate);
+        date = $scope.ongo.UTCModified;
         var d = new Date(date);
         var hh = d.getHours();
         if (hh > 12) {
@@ -491,9 +501,12 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
 
       $scope.updateDateTime = function (id, formData, dt) {
         console.log(dt);
-        var date = formatDate(dt);
-        var time = formatTime(formData);
+        console.log(formData,dt);
+        var date = $filter('formatDateCalender')(dt);
+        var time = $filter('formatTimeCalender')(formData);
         var result = {};
+        console.log(date);
+        console.log(time);
         result.type = "changeDateTime";
         result.date = new Date(date + " " + time);
         result.uniqueId = id;
@@ -510,10 +523,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           }, function (err) {
             console.log(err);
           });
-
-
         });
-      }
+      };
 
       $scope.hours = _.range(1, 13, 1);
       $scope.mins = _.range(1, 60, 1);
@@ -627,20 +638,60 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
 
       // review post visited pop up end
 
-      var formatDate = function (date) {
-        var d = new Date(date),
-          month = '' + (d.getMonth() + 1),
-          day = '' + d.getDate(),
-          year = d.getFullYear();
+      // var formatDate = function (date) {
+      //   var d = new Date(date),
+      //     month = '' + (d.getMonth() + 1),
+      //     day = '' + d.getDate(),
+      //     year = d.getFullYear();
 
-        if (month.length < 2) month = '0' + month;
-        if (day.length < 2) day = '0' + day;
+      //   if (month.length < 2) month = '0' + month;
+      //   if (day.length < 2) day = '0' + day;
 
-        return [year, month, day].join('/');
-      }
+      //   return [year, month, day].join('/');
+      // }
 
-      var formatTime = function (formData) {
-        var hour = formData.hour,
+      // var formatTime = function (formData) {
+      //   var hour = formData.hour,
+      //     mins = formData.min,
+      //     sec = 00;
+      //   if (formData.am_pm == "AM") {
+      //     if (hour == 12) {
+      //       hour = 0;
+      //     }
+      //   } else if (formData.am_pm == "PM") {
+      //     if (hour == 12) {
+      //       hour = 12;
+      //     } else {
+      //       hour = parseInt(hour) + 12;
+      //     }
+      //   }
+      //   return [hour, mins, sec].join(':');
+      // }
+
+    }
+  }
+}]);
+
+ongojourney.filter('formatDateCalender', function () {
+  return function (date) {
+
+    var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('/');
+  };
+});
+
+
+ongojourney.filter('formatTimeCalender', function () {
+  return function (formData) {
+
+     var hour = formData.hour,
           mins = formData.min,
           sec = 00;
         if (formData.am_pm == "AM") {
@@ -655,13 +706,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           }
         }
         return [hour, mins, sec].join(':');
-      }
+  };
+});
 
-    }
-
-
-  }
-}]);
 
 ongojourney.filter('formatDate', function () {
   return function (input, type) {
