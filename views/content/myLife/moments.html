@@ -32,6 +32,11 @@
               <span class="btn-tab" ng-class="{'active-btn-local': momentView ==3}"></span>
               <span>Local Life</span>
             </div>
+            <!-- back button -->
+            <div class="pull-right" ng-show="viewMonth" ng-click="showMonthView();">
+              <button class="btn btn-blue-outline btn-more">Back</button>
+            </div>
+            <!-- back button end -->
           </div>
           <!-- moments view tab end -->
           <!-- moment all view -->
@@ -57,7 +62,7 @@
                   </div>
                 </div>
               </div>
-              <div class="month-view-moments">
+              <div class="month-view-moments" ng-show="viewMonth">
                 <h4 class="">November 2015</h4>
                 <div class="month-view-pic">
                   <div class="flex-wrap-container">

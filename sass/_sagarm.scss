@@ -291,9 +291,9 @@
   background: $brand-pink;
   padding: 5px 0;
   z-index: 3;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+  // position: absolute;
+  // bottom: 0;
+  // width: 100%;
 
   ul {
     li {
@@ -311,12 +311,6 @@
       border-right: none !important;
     }
   }
-}
-
-.agent-user-fixednav {
-  position: fixed;
-  top: 0;
-  z-index: 9;
 }
 
 .img-holder-agent {
@@ -509,9 +503,9 @@
 
 .agt-card-posi {
   position: absolute;
-  bottom: 35%;
+  bottom: 20%;
   left: 50%;
-  width: 50%;
+  width: 100%;
   display: inline-block;
   padding: 0;
   margin: 0;
@@ -1597,4 +1591,14 @@ q {
   bottom: 0;
   background-color: rgba(0,0,0,0.7);
   z-index: 3;
+}
+
+.change{
+  background: $brand-grey;
+  color: #fff;
+  position: fixed;
+    width: 100%;
+    /* top: 0; */
+    bottom: auto;
+    top: 80px;
 }

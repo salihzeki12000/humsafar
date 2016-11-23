@@ -120,6 +120,7 @@
   .travel-life-level {
     padding: 20px 30px 0 15px;
   }
+  .travel-life-btn { margin-left: 0; }
   .all-profile-detail {
     padding: 0;
     .row { margin: 0; }
@@ -783,6 +784,14 @@
       &:nth-child(1) .tab-heading {  padding: 8px 20px; }
       &:nth-child(2) .tab-heading {  padding: 11px 20px; }
       &:nth-child(3) .tab-heading {  padding: 15px 20px; }
+    }
+  }
+  .travel-life-btn span { font-size: 14px; }
+  .add-journey, .add-more-life {
+    span {
+      width: 25px;
+      height: 25px;
+      i { font-size: 13px; }
     }
   }
   // my life
