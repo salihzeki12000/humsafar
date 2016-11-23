@@ -139,21 +139,11 @@
                   <div class="clearfix">
                     <div class="pull-left">
                       <ul>
-                        <li ng-repeat="list in journey.kindOfJourney">
+                        <li ng-repeat="list in journey.kindOfJourney|limitTo:3">
                           <a href="">
                             <img ng-src="{{list|kindOfJourney}}" alt="" height="25">
                           </a>
                         </li>
-                        <!--<li>
-                          <a href="">
-                            <img ng-src="{{journey.kindOfJourney[1]|kindOfJourney}}" alt="" height="25">
-                          </a>
-                        </li>
-                        <li>
-                          <a href="">
-                            <img ng-src="{{journey.kindOfJourney[2]|kindOfJourney}}" alt="" height="25">
-                          </a>
-                        </li>-->
                       </ul>
                     </div>
                     <div class="pull-right relate full-width">

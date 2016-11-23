@@ -633,46 +633,6 @@ firstapp.directive('fileModel', ['$parse', function($parse) {
   };
 }]);
 
-// firstapp.directive('functionmap', ['$parse', function ($parse) {
-//   return {
-//     restrict: 'C',
-//     link: function (scope, element, attrs) {
-
-//       setTimeout(function () {
-//         var check = $(".hasLatLng").length;
-//         $(window).scroll(function () {
-//           var currentScroll = $(window).scrollTop()+$(window).height();;
-//           console.log(currentScroll);
-//           var divPositions = _.map($(".hasLatLng"), function (n) {
-//             return $(n).offset().top;
-//           });
-//           console.log(divPositions);
-//           var ith = 1;
-//           var percentage = 0;
-//           _.each(divPositions, function (n, index) {
-//             if (n <= currentScroll && divPositions[index + 1] > currentScroll) {
-//               ith = index;
-//               if (n > 0) {
-//                 var dif = n - divPositions[index - 1];
-//                 console.log(dif);
-//                 percentage = (currentScroll - n) / dif * 100;
-//                 console.log(ith, percentage, true);
-//                 if (ith > 0) {
-//                   pointsForLine(ith, percentage, true);
-//                 }
-
-//               }
-//               return false;
-//             }
-//           });
-//         });
-//         console.log(check);
-//       }, 500);
-//     }
-//   };
-// }]);
-
-
 firstapp.directive('functionmap', ['$parse', function($parse) {
   return {
     restrict: 'C',
@@ -701,11 +661,12 @@ firstapp.directive('functionmap', ['$parse', function($parse) {
                   if (percentage <= 100) {
                     // console.log("<=100");
                     flag = true;
-                    // console.log(flag);
+                    console.log("points for line called");                    
                     pointsForLine(ith, percentage, true);
                   } else {
                     // console.log(">100");
-                    // console.log(flag); //else condion is given coz polyline should exceed beyond 100%
+                    // console.log(flag); //else condion is given coz polyline should not exceed beyond 100%
+                    sconsole.log("points for line called");                    
                     pointsForLine(ith, 100, true, flag);
                     flag = false;
                   }
@@ -722,12 +683,13 @@ firstapp.directive('functionmap', ['$parse', function($parse) {
               if (percentage <= 100) {
                 // console.log("<=100");
                 flag = true;
-                // console.log(flag);
+                console.log("points for line called");
                 pointsForLine(ith, percentage, true, true);
 
               } else {
-                // console.log(">100"); //else condion is given coz polyline should exceed beyond 100%
+                // console.log(">100"); //else condion is given coz polyline should not exceed beyond 100%
                 // console.log(flag);
+                console.log("points for line called");                
                 pointsForLine(ith, 100, true);
                 flag = false;
               }

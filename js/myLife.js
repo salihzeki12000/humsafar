@@ -69,12 +69,13 @@ var navigationservice = angular.module('mylife', [])
         "bucketList":countryId,
         "delete":true
       };
-      console.log(obj);
       $http({
         url:adminURL + "/user/updateBucketListWeb",
         method:"POST",
         data:obj
-      }).success(callback(countryId));
+      }).success(function(){
+        callback(countryId);
+      });
     },
     getFollowingWeb: function (callback) {
       $http({

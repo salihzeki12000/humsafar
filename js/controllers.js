@@ -6,7 +6,7 @@ var globalGetProfile = function (data, status) {
     $.jStorage.flush();
   }
 };
-var pointsForLine;
+var pointsForLine=function(){};
 var line = [];
 var markers = [];
 var travelPath;
@@ -823,25 +823,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var slug = $stateParams.id;
     var checkinCount = "";
     $scope.userData = $.jStorage.get("profile");
+
     var getOneJourneyCallback = function (journeys) {
+      console.log(journeys);
       $scope.journey = journeys;
       var postsWithLatLng = [];
       postsWithLatLng = _.filter($scope.journey.post,  'latlong');
-      console.log(postsWithLatLng);
+    
       _.each(postsWithLatLng, function (n, $index) {
         centers[$index] = {
           "lat": parseFloat(n.latlong.lat),
           "lng": parseFloat(n.latlong.long)
         };
-        center = {
-          "lat": centers[0].lat,
-          "lng": centers[0].lng
-        };
       });
-      console.log("centers="+centers);
-      console.log(center);
+      var obj={
+        "lat":parseFloat(journeys.location.lat),
+        "lng":parseFloat(journeys.location.long)
+      }
+      centers.unshift(obj);
+      console.log(centers);
+      // center = {
+      //     "lat": centers[0].lat,
+      //     "lng": centers[0].lng
+      //   };  
+     
+      initMap();
       
     };
+
     OnGoJourney.getOneJourney({
       "urlSlug": slug
     }, getOneJourneyCallback, function (err) {
@@ -899,7 +908,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     
     //change banner date and time ends
 
-
+{
     //mapStyle
     var mapStyle = [{
       "featureType": "landscape.man_made",
@@ -993,15 +1002,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }]
     }]
 
-
-
-
-
-
-    // var center = {
-    //   lat: 19.113645,
-    // lng: 72.869734
-    // };
+   //latlongs format
     // var center = {
     //   lat: 19.089560,
     //   lng: 72.865614
@@ -1032,8 +1033,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   lat: 25.253175,
     //   lng: 55.365673
     // }];
-
-    line = _.map(centers, function () {
+}
+    
+    initMap = function () {
+      line = _.map(centers, function () {
       return {};
     });
 
@@ -1041,7 +1044,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       markers.push({});
     });
 
-    initMap = function () {
+       center=new google.maps.LatLng(centers[0].lat,centers[0].lng);
+      console.log(center);
       if (typeof google === 'object' && typeof google.maps === 'object') {
         var bounds = new google.maps.LatLngBounds();
         var step = 0;
@@ -1050,6 +1054,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           draggable: true,
           animation: google.maps.Animation.DROP,
           center: center,
+          zoom:10
           // styles: mapStyle
         });
 
@@ -1057,19 +1062,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // console.log(percentComplete, flag);
           var xdiff = (centers[i].lat - centers[i - 1].lat);
           var ydiff = (centers[i].lng - centers[i - 1].lng);
-          console.log(xdiff);
-          console.log(xdiff);
-          if (Math.abs(xdiff) < 4 && value) {
-            smoothZoom(map, 9, map.getZoom(), true); //for zooming in
-          } else if (Math.abs(xdiff) > 4 && value) {
-            smoothZoom(map, 4, map.getZoom(), false); //for zooming out
-          }
+          // if (Math.abs(xdiff) < 4 && value) {
+          //   smoothZoom(map, 9, map.getZoom(), true); //for zooming in
+          // } else if (Math.abs(xdiff) > 4 && value) {
+          //   smoothZoom(map, 4, map.getZoom(), false); //for zooming out
+          // }
 
-          // var markerBounds = new google.maps.LatLngBounds();
-          // markerBounds.extend(departure);
-          // markerBounds.extend(arrival);
+          var markerBounds = new google.maps.LatLngBounds();
+          markerBounds.extend(departure);
+          markerBounds.extend(arrival);
 
-          // map.fitBounds(markerBounds);
+          map.fitBounds(markerBounds);
 
           var frac1 = xdiff / 100;
           var frac2 = ydiff / 100;
@@ -1148,12 +1151,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               }
             }
             // offsetCenter(center, 100, 0);
-
             map.setCenter(center);
-
-
             map.panBy(-150, 0);
-
             //moving center ends here
 
             // if (percent >= 100) {
@@ -1232,7 +1231,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
 
         pointsForLine = function (i, percentComplete, value, flag) {
-          // console.log(percentComplete, flag)
+          console.log(i+"inside points for line");
+          
+          console.log(centers[i - 1].lat, centers[i - 1].lng);
+          console.log(centers[i].lat, centers[i].lng);
+
           var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
           var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
           step = 0;
@@ -1273,7 +1276,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         };
       }
     };
-
     setTimeout(function () {
       initMap();
     }, 1000);
@@ -3249,12 +3251,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.visited = [];
     var len = "";
 
-
     //Integration Section Starts here
     $scope.userData = $.jStorage.get("profile");
     var arr = ($scope.userData.homeCity).split(",");
     $scope.homeCity = arr[0];
-    var travelCount = function (data, status) {
+    var travelCountCallback = function (data, status) {
       $scope.count = data.data;
       len = $scope.count.countriesVisited_count;
       updateBadge();
@@ -3262,7 +3263,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     var reloadCount = function () {
-      NavigationService.travelCount(travelCount, function (err) {
+      NavigationService.travelCount(travelCountCallback, function (err) {
         console.log(err);
       });
     };
@@ -6097,69 +6098,82 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    $scope.userData= $.jStorage.get("profile");
+    console.log($scope.userData);
+     var travelCountCallback = function (data, status) {
+      $scope.count = data.data;
+    };
+
+    var reloadCount = function () {
+      NavigationService.travelCount(travelCountCallback, function (err) {
+        console.log(err);
+      });
+    };
+    reloadCount();
+
     // countryList and bucketList
-    $scope.countryList = [{
-      countryImage: "img/india-gate.jpg",
-      countryName: "India",
-      countryYear: "2016",
-      countryFlag: "img/flag.png"
-    }, {
-      countryImage: "img/india-gate.jpg",
-      countryName: "India",
-      countryYear: "2016",
-      countryFlag: "img/flag.png"
-    }, {
-      countryImage: "img/india-gate.jpg",
-      countryName: "India",
-      countryYear: "2016",
-      countryFlag: "img/flag.png"
-    }, {
-      countryImage: "img/india-gate.jpg",
-      countryName: "India",
-      countryYear: "2016",
-      countryFlag: "img/flag.png"
-    }, {
-      countryImage: "img/india-gate.jpg",
-      countryName: "India",
-      countryYear: "2016",
-      countryFlag: "img/flag.png"
-    }, {
-      countryImage: "img/india-gate.jpg",
-      countryName: "India",
-      countryYear: "2016",
-      countryFlag: "img/flag.png"
-    }, {
-      countryImage: "img/india-gate.jpg",
-      countryName: "India",
-      countryYear: "2016",
-      countryFlag: "img/flag.png"
-    }, ];
-    $scope.bucketList = [{
-      countryImage: "img/india-gate.jpg",
-      countryName: "India",
-      countryYear: "2016",
-      countryFlag: "img/flag.png"
-    }, {
-      countryImage: "img/india-gate.jpg",
-      countryName: "India",
-      countryYear: "2016",
-      countryFlag: "img/flag.png"
-    }, {
-      countryImage: "img/india-gate.jpg",
-      countryName: "India",
-      countryYear: "2016",
-      countryFlag: "img/flag.png"
-    }, {
-      countryImage: "img/india-gate.jpg",
-      countryName: "India",
-      countryYear: "2016",
-      countryFlag: "img/flag.png"
-    }, {
-      countryImage: "img/india-gate.jpg",
-      countryName: "India",
-      countryYear: "2016",
-      countryFlag: "img/flag.png"
-    }, ];
+    // $scope.countryList = [{
+    //   countryImage: "img/india-gate.jpg",
+    //   countryName: "India",
+    //   countryYear: "2016",
+    //   countryFlag: "img/flag.png"
+    // }, {
+    //   countryImage: "img/india-gate.jpg",
+    //   countryName: "India",
+    //   countryYear: "2016",
+    //   countryFlag: "img/flag.png"
+    // }, {
+    //   countryImage: "img/india-gate.jpg",
+    //   countryName: "India",
+    //   countryYear: "2016",
+    //   countryFlag: "img/flag.png"
+    // }, {
+    //   countryImage: "img/india-gate.jpg",
+    //   countryName: "India",
+    //   countryYear: "2016",
+    //   countryFlag: "img/flag.png"
+    // }, {
+    //   countryImage: "img/india-gate.jpg",
+    //   countryName: "India",
+    //   countryYear: "2016",
+    //   countryFlag: "img/flag.png"
+    // }, {
+    //   countryImage: "img/india-gate.jpg",
+    //   countryName: "India",
+    //   countryYear: "2016",
+    //   countryFlag: "img/flag.png"
+    // }, {
+    //   countryImage: "img/india-gate.jpg",
+    //   countryName: "India",
+    //   countryYear: "2016",
+    //   countryFlag: "img/flag.png"
+    // }, ];
+    // $scope.bucketList = [{
+    //   countryImage: "img/india-gate.jpg",
+    //   countryName: "India",
+    //   countryYear: "2016",
+    //   countryFlag: "img/flag.png"
+    // }, {
+    //   countryImage: "img/india-gate.jpg",
+    //   countryName: "India",
+    //   countryYear: "2016",
+    //   countryFlag: "img/flag.png"
+    // }, {
+    //   countryImage: "img/india-gate.jpg",
+    //   countryName: "India",
+    //   countryYear: "2016",
+    //   countryFlag: "img/flag.png"
+    // }, {
+    //   countryImage: "img/india-gate.jpg",
+    //   countryName: "India",
+    //   countryYear: "2016",
+    //   countryFlag: "img/flag.png"
+    // }, {
+    //   countryImage: "img/india-gate.jpg",
+    //   countryName: "India",
+    //   countryYear: "2016",
+    //   countryFlag: "img/flag.png"
+    // }, ];
     // countrylist and bucketlist end
     // following and followers
     // $scope.following = [{
@@ -6232,31 +6246,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var callbackFollowers = function (data) {
       $scope.followersList = data.data.followers;
+      reloadCount();
       console.log($scope.followersList);
     };
 
     var callbackFollowings = function (data) {
-      $scope.followingList = data.data.followers;
+      $scope.followingList = data.data.following;
+      reloadCount();      
       console.log($scope.followingList);
 
     };
 
     var callbackGetCountriesVisited = function (data) {
       $scope.countryVisitedList = data;
+      reloadCount();
     };
 
     var callbackBucketList = function (data) {
       $scope.bucketList = data;
+      reloadCount();    
     };
 
     var callbackRemoveFromBucketList = function (countryId) {
-      document.getElementById(countryId).remove();
+       reloadCount(); 
+      document.getElementById(countryId).remove();      
     };
     $scope.removeFromBucketList = function (id) {
       MyLife.updateBucketListWeb(id, callbackRemoveFromBucketList);
     }
 
-    MyLife.getFollowersWeb(callbackFollowings);
+    MyLife.getFollowingWeb(callbackFollowings);
     MyLife.getFollowersWeb(callbackFollowers);
     MyLife.getCountryVisitedListWeb(callbackGetCountriesVisited);
     MyLife.getOneBucketList(callbackBucketList);
@@ -8557,6 +8576,4 @@ enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit,
     }
     //  $rootScope.$apply();
   };
-
-
 })
