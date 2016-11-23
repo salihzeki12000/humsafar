@@ -1,0 +1,112 @@
+@media screen and (max-width: 1200px) {}
+
+// media query for 991px to 768px
+@media screen and (max-width: 991px) {
+  // agent upgrade page
+  .agt-upgradebtn {
+    .btn-more {
+      padding: 6px 12px;
+    }
+  }
+
+  .upgradetable-head {
+    p {
+      font-size: 15px;
+    }
+  }
+
+  .package-img {
+    width: 80px;
+    height: 80px;
+  }
+  // agent upgrade page end
+  // agent user page
+  .agt-itinerarycard {
+    margin: 20px 0;
+  }
+  .agent-user-nav{
+    font-size: 12px;
+  }
+  .agent-photogallery {
+    width: 170px;
+    max-width: 170px;
+    max-height: 250px;
+}
+  // agent user page end
+
+  // agent user page
+  .agthome-activitycard {
+    margin: 10px 0;
+}
+  // agent user page end
+}
+// media query for 991px to 768px end
+
+// media query for 767px to 480px
+@media screen and (max-width: 767px) {
+  // agent upgrade page
+  .package-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .upgradetable-head {
+    p {
+      font-size: 12px;
+    }
+  }
+
+  .upgrade-title {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .upgrade-list p {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .agt-upgradebtn .btn-more {
+    // padding: 3px 6px;
+    font-size: 12px;
+  }
+
+  .upgrade-feature {
+    margin: 0 auto;
+  }
+  // agent upgrade page end
+
+  // agent user page
+  .agt-title-card {
+      width: 100%;
+  }
+  // agent user page end
+}
+// media query for 767px to 480px end
+
+// media query for 480px to 320px
+@media screen and (max-width: 480px) {
+  // AGENT LOGIN PAGE
+  .agt-verification-code {
+    padding: 30px 20px 15px;
+  }
+
+  .veri-code-box {
+    height: 45px;
+    width: 45px;
+    padding: 5px 10px;
+    font-size: 18px;
+  }
+
+  .loginbtn-panel {
+    .btn-more {
+      padding: 10px 20px;
+    }
+  }
+
+  .service-box .btn-more {
+    padding: 10px 20px;
+  }
+  // AGENT LOGIN PAGE END
+}
+// media query for 480px to 320px end

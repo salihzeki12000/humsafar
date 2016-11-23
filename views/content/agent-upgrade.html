@@ -4,7 +4,7 @@
       <!-- table head row -->
       <div class="upgradetable-head">
         <div class="row">
-          <div class="col-md-offset-6 col-md-2">
+          <div class="col-md-offset-6 col-md-2 col-sm-offset-6 col-sm-2 col-xs-4">
             <div class="package-holder">
               <div class="package-img">
                 <img src="img/basic-icon.png" alt="" class="img-responsive m-center">
@@ -13,7 +13,7 @@
               <p class="avenir-medium">Free</p>
             </div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-2 col-sm-2 col-xs-4">
             <div class="package-holder">
               <div class="package-img">
                 <img src="img/advanced-icon.png" alt="" class="img-responsive m-center">
@@ -23,7 +23,7 @@
               <p class="avenir-medium">for 3 Months</p>
             </div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-2 col-sm-2 col-xs-4">
             <div class="package-holder">
               <div class="package-img">
                 <img src="img/premium-icon.png" alt="" class="img-responsive m-center">
@@ -41,7 +41,7 @@
       <!-- upgrade list on ng-repeat -->
       <div class="upgrade-list" ng-repeat="plan in agentUpgradeFeature track by $index">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="upgrade-title">
               <span> {{plan.upgradeFeature}} </span>
               <div class="badge" ng-click="showTip($index)"> ?
@@ -49,17 +49,17 @@
               </div>
             </div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-2 col-sm-2 col-xs-4">
             <div class="upgrade-feature">
               <p ng-bind-html="plan.basicValue"></p>
             </div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-2 col-sm-2 col-xs-4">
             <div class="upgrade-feature">
               <p ng-bind-html="plan.advValue"> </p>
             </div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-2 col-sm-2 col-xs-4">
             <div class="upgrade-feature">
               <p ng-bind-html="plan.premValue">Unlimited </p>
             </div>
@@ -100,17 +100,17 @@
       <!-- upgrade list on ng-repeat end -->
 
       <!-- upgrade buy buttons -->
-      <div class="">
+      <div class="agt-upgradebtn">
         <div class="row">
-          <div class="col-md-offset-6 col-md-2">
+          <div class="col-md-offset-6 col-md-2 col-sm-offset-6 col-sm-2 col-xs-4">
             <div class="text-center mt10 mb10"></div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-2 col-sm-2 col-xs-4">
             <div class="text-center mt10 mb10">
               <button class="btn btn-cyan btn-more">Buy Now</button>
             </div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-2 col-sm-2 col-xs-4">
             <div class="text-center mt10 mb10">
               <button class="btn btn-cyan btn-more">Buy Now</button>
             </div>
