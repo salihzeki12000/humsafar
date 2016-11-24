@@ -1,30 +1,24 @@
 <div class="agt-usr-tourpackages">
   <div class="container">
     <div class="row">
-      <div class="col-md-4 col-sm-6">
+      <div class="col-md-4 col-sm-6" ng-repeat = "tourcard in usrTourPackageCard track by $index">
         <div class="agt-itinerarycard">
           <div class="itinerary-img">
             <div class="country-badges">
-              <div class="country-holder">
-                <img src="img/india-visit.png" alt="" class="img-responsive">
-              </div>
-              <div class="country-holder">
-                <img src="img/england-visit.png" alt="" class="img-responsive">
-              </div>
-              <div class="country-holder">
-                <img src="img/canada-visit.png" alt="" class="img-responsive">
+              <div class="country-holder"  ng-repeat = "tourcountryflagbadge in tourcard.tourcountryBadgesFlag track by $index">
+                <img ng-src="{{tourcountryflagbadge}}" alt="" class="img-responsive">
               </div>
               <span class="country-count">+4</span>
             </div>
-            <img src="img/paris.jpg" alt="" class="img-responsive">
+            <img ng-src="{{tourcard.tourImg}}" alt="" class="img-responsive">
             <div class="itinerary-imgfoot ">
               <div class="imgfoot-top clearfix">
                 <div class="pull-left">
-                  <p class="font-sz18">Love In Paris</p>
-                  <p class="font-sz10"><span>3 Nights</span> | <span>4 Days</span></p>
+                  <p class="font-sz18">{{tourcard.agttourTitle}}</p>
+                  <p class="font-sz10"><span>{{tourcard.tourNightC}} Nights</span> | <span>{{tourcard.tourDayC}} Days</span></p>
                 </div>
                 <div class="pull-right">
-                  <p class="font-sz18 cost-posi">$10000</p>
+                  <p class="font-sz18 cost-posi">${{tourcard.agttourCost}}</p>
                 </div>
                 <button class="btn btn-pink btn-book">Book</button>
               </div>
@@ -32,71 +26,6 @@
           </div>
         </div>
       </div>
-
-      <div class="col-md-4 col-sm-6">
-        <div class="agt-itinerarycard">
-          <div class="itinerary-img">
-            <div class="country-badges">
-              <div class="country-holder">
-                <img src="img/india-visit.png" alt="" class="img-responsive">
-              </div>
-              <div class="country-holder">
-                <img src="img/england-visit.png" alt="" class="img-responsive">
-              </div>
-              <div class="country-holder">
-                <img src="img/canada-visit.png" alt="" class="img-responsive">
-              </div>
-              <span class="country-count">+4</span>
-            </div>
-            <img src="img/paris.jpg" alt="" class="img-responsive">
-            <div class="itinerary-imgfoot ">
-              <div class="imgfoot-top clearfix">
-                <div class="pull-left">
-                  <p class="font-sz18">Love In Paris</p>
-                  <p class="font-sz10"><span>3 Nights</span> | <span>4 Days</span></p>
-                </div>
-                <div class="pull-right">
-                  <p class="font-sz18 cost-posi">$10000</p>
-                </div>
-                <button class="btn btn-pink btn-book">Book</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4 col-sm-6">
-        <div class="agt-itinerarycard">
-          <div class="itinerary-img">
-            <div class="country-badges">
-              <div class="country-holder">
-                <img src="img/india-visit.png" alt="" class="img-responsive">
-              </div>
-              <div class="country-holder">
-                <img src="img/england-visit.png" alt="" class="img-responsive">
-              </div>
-              <div class="country-holder">
-                <img src="img/canada-visit.png" alt="" class="img-responsive">
-              </div>
-              <span class="country-count">+4</span>
-            </div>
-            <img src="img/paris.jpg" alt="" class="img-responsive">
-            <div class="itinerary-imgfoot ">
-              <div class="imgfoot-top clearfix">
-                <div class="pull-left">
-                  <p class="font-sz18">Love In Paris</p>
-                  <p class="font-sz10"><span>3 Nights</span> | <span>4 Days</span></p>
-                </div>
-                <div class="pull-right">
-                  <p class="font-sz18 cost-posi">$10000</p>
-                </div>
-                <button class="btn btn-pink btn-book">Book</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </div>

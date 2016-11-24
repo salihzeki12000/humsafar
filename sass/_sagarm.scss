@@ -569,6 +569,7 @@
 .agt-itinerarycard {
   border: 1px solid #e3e3e3;
   border-radius: 4px;
+  margin: 20px 0;
 }
 
 .rt-foot-marg {
@@ -637,8 +638,8 @@
 }
 
 .agent-photogallery {
-  width: 280px;
-  max-width: 280px;
+  width: 250px;
+  max-width: 250px;
   max-height: 350px;
   margin: 3px;
   padding: 5px;
@@ -881,17 +882,21 @@ q {
 .agthome-tourpackage-youtube,
 .youtube-placeholder {
   width: 550px;
-  height: 360px;
+  height: 380px;
+  margin: 0 auto;
+    padding: 10px 0;
 
   iframe{
     width:550px;
-    height: 360;
+    height: 360px;
   }
 
   img {
     max-height: 100%;
   }
 }
+
+
 
 .add-agtitinerary {
   position: relative;
@@ -963,6 +968,7 @@ q {
   border-radius: 4px;
   background-color: $brand-blue;
   @extend .color-white;
+  margin: 20px 0;
 
   .journey-cost span {
     margin: 0 5px;
@@ -1511,6 +1517,7 @@ q {
   display: inline-block;
   margin: 0 5px 0 10px;
   padding: 5px 0;
+  vertical-align: top;
 
   p {
     margin: 0;

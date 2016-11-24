@@ -15,43 +15,31 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4 col-sm-6">
+      <div class="col-md-4 col-sm-6" ng-repeat = "travelactivity in agtTravelCard track by $index">
         <div class="agthome-activitycard">
           <div class="activity-cardhead">
             <div class="head-timestamp">
-              <p class="m-clear"><i class="fa fa-calendar"></i><span class="ml5 "> 14 Jan, 2014 </span> | <i class="fa fa-clock-o mr5"></i> <span> 1:20 pm </span></p>
+              <p class="m-clear"><i class="fa fa-calendar"></i><span class="ml5 ">{{travelactivity.traveltimestampDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span>{{travelactivity.traveltimestampHour}}</span></p>
             </div>
 
             <div class="agttravel-activity">
-              <p>Has uploaded a new itinerary</p>
+              <p>{{travelactivity.travelPost}}</p>
             </div>
           </div>
           <div class="activity-img">
             <div class="country-badges">
-              <div class="country-holder">
-                <img src="img/india-visit.png" alt="" class="img-responsive">
-              </div>
-              <div class="country-holder">
-                <img src="img/england-visit.png" alt="" class="img-responsive">
-              </div>
-              <div class="country-holder">
-                <img src="img/canada-visit.png" alt="" class="img-responsive">
+              <div class="country-holder" ng-repeat = "countryflagtravel in travelactivity.travelcountryBadgesFlag track by $index">
+                <img ng-src="{{countryflagtravel}}" alt="" class="img-responsive">
               </div>
             </div>
-            <img src="img/paris.jpg" alt="" class="img-responsive">
+            <img ng-src="{{travelactivity.travelImg}}" alt="" class="img-responsive">
             <div class="activity-imgfoot">
-              <p class="font-sz18">Love In Paris</p>
+              <p class="font-sz18">{{travelactivity.travelTitle}}</p>
               <div class="pull-left">
                 <div class="journey-type">
                   <ul class="list-inline">
-                    <li>
-                      <a href=""><img src="img/sunset.png" alt="" height="20"></a>
-                    </li>
-                    <li>
-                      <a href=""><img src="img/bag-journey.png" alt="" height="20"></a>
-                    </li>
-                    <li>
-                      <a href=""><img src="img/luxury-journey.png" alt="" height="20"></a>
+                    <li ng-repeat = "travelCategory in travelactivity.travelCat">
+                      <a href=""><img ng-src="{{travelCategory}}" alt="" height="20"></a>
                     </li>
                   </ul>
                 </div>
@@ -59,10 +47,10 @@
               <div class="pull-right">
                 <div class="marg-actbt">
                   <div class="journey-cost">
-                    <span>$25000</span>
+                    <span>${{travelactivity.travelCost}}</span>
                   </div>
                   <div class="agtdays-spent">
-                    <p><span class="block font-sz18">75</span>Days</p>
+                    <p><span class="block font-sz18">{{travelactivity.travelnoDays}}</span>Days</p>
                   </div>
                 </div>
               </div>
@@ -102,208 +90,10 @@
               <div class="social-likes-reviews">
                 <div class="clearfix">
                   <div class="pull-left">
-                    <span class="color-white mr10"><i class="fa fa-heart color-white mr5"></i><b class="mr5">15660</b>Likes</span>
+                    <span class="color-white mr10"><i class="fa fa-heart color-white mr5"></i><b class="mr5">{{travelactivity.travelLikesCount}}</b>Likes</span>
                     <span class="color-white">
                     <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white">
-                    354 Reviews (4.5/5)</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4 col-sm-6">
-        <div class="agthome-activitycard">
-          <div class="activity-cardhead">
-            <div class="head-timestamp">
-              <p class="m-clear"><i class="fa fa-calendar"></i><span class="ml5 "> 14 Jan, 2014 </span> | <i class="fa fa-clock-o mr5"></i> <span> 1:20 pm </span></p>
-            </div>
-
-            <div class="agttravel-activity">
-              <p>Has uploaded a new itinerary</p>
-            </div>
-          </div>
-          <div class="activity-img">
-            <div class="country-badges">
-              <div class="country-holder">
-                <img src="img/india-visit.png" alt="" class="img-responsive">
-              </div>
-              <div class="country-holder">
-                <img src="img/england-visit.png" alt="" class="img-responsive">
-              </div>
-              <div class="country-holder">
-                <img src="img/canada-visit.png" alt="" class="img-responsive">
-              </div>
-            </div>
-            <img src="img/paris.jpg" alt="" class="img-responsive">
-            <div class="activity-imgfoot">
-              <p class="font-sz18">Love In Paris</p>
-              <div class="pull-left">
-                <div class="journey-type">
-                  <ul class="list-inline">
-                    <li>
-                      <a href=""><img src="img/sunset.png" alt="" height="20"></a>
-                    </li>
-                    <li>
-                      <a href=""><img src="img/bag-journey.png" alt="" height="20"></a>
-                    </li>
-                    <li>
-                      <a href=""><img src="img/luxury-journey.png" alt="" height="20"></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="pull-right">
-                <div class="marg-actbt">
-                  <div class="journey-cost">
-                    <span>$25000</span>
-                  </div>
-                  <div class="agtdays-spent">
-                    <p><span class="block font-sz18">75</span>Days</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="itinerary-cardfoot">
-            <div class="social-field-types">
-              <div class="user-social-item clearfix">
-                <div class="pull-left">
-                  <ul>
-                    <li><a href=""><i class="fa fa-heart-o color-white"></i></a></li>
-                    <li>
-                      <a href="">
-                        <img src="img/comments-white.png" alt="" height="18" class="if-blue">
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">
-                        <img src="img/reviews-white.png" alt="" height="18" class="if-blue">
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">
-                        <img src="img/share-white.png" alt="" height="18" class="if-blue">
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="pull-right">
-                  <div class="">
-                    <span>
-                    <img src="img/options-white.png" alt="" width="3" class="if-white">
-                  </span>
-                  </div>
-                </div>
-              </div>
-              <div class="social-likes-reviews">
-                <div class="clearfix">
-                  <div class="pull-left">
-                    <span class="color-white mr10"><i class="fa fa-heart color-white mr5"></i><b class="mr5">15660</b>Likes</span>
-                    <span class="color-white">
-                    <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white">
-                    354 Reviews (4.5/5)</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4 col-sm-6">
-        <div class="agthome-activitycard">
-          <div class="activity-cardhead">
-            <div class="head-timestamp">
-              <p class="m-clear"><i class="fa fa-calendar"></i><span class="ml5 "> 14 Jan, 2014 </span> | <i class="fa fa-clock-o mr5"></i> <span> 1:20 pm </span></p>
-            </div>
-
-            <div class="agttravel-activity">
-              <p>Has uploaded a new itinerary</p>
-            </div>
-          </div>
-          <div class="activity-img">
-            <div class="country-badges">
-              <div class="country-holder">
-                <img src="img/india-visit.png" alt="" class="img-responsive">
-              </div>
-              <div class="country-holder">
-                <img src="img/england-visit.png" alt="" class="img-responsive">
-              </div>
-              <div class="country-holder">
-                <img src="img/canada-visit.png" alt="" class="img-responsive">
-              </div>
-            </div>
-            <img src="img/paris.jpg" alt="" class="img-responsive">
-            <div class="activity-imgfoot">
-              <p class="font-sz18">Love In Paris</p>
-              <div class="pull-left">
-                <div class="journey-type">
-                  <ul class="list-inline">
-                    <li>
-                      <a href=""><img src="img/sunset.png" alt="" height="20"></a>
-                    </li>
-                    <li>
-                      <a href=""><img src="img/bag-journey.png" alt="" height="20"></a>
-                    </li>
-                    <li>
-                      <a href=""><img src="img/luxury-journey.png" alt="" height="20"></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="pull-right">
-                <div class="marg-actbt">
-                  <div class="journey-cost">
-                    <span>$25000</span>
-                  </div>
-                  <div class="agtdays-spent">
-                    <p><span class="block font-sz18">75</span>Days</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="itinerary-cardfoot">
-            <div class="social-field-types">
-              <div class="user-social-item clearfix">
-                <div class="pull-left">
-                  <ul>
-                    <li><a href=""><i class="fa fa-heart-o color-white"></i></a></li>
-                    <li>
-                      <a href="">
-                        <img src="img/comments-white.png" alt="" height="18" class="if-blue">
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">
-                        <img src="img/reviews-white.png" alt="" height="18" class="if-blue">
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">
-                        <img src="img/share-white.png" alt="" height="18" class="if-blue">
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="pull-right">
-                  <div class="">
-                    <span>
-                    <img src="img/options-white.png" alt="" width="3" class="if-white">
-                  </span>
-                  </div>
-                </div>
-              </div>
-              <div class="social-likes-reviews">
-                <div class="clearfix">
-                  <div class="pull-left">
-                    <span class="color-white mr10"><i class="fa fa-heart color-white mr5"></i><b class="mr5">15660</b>Likes</span>
-                    <span class="color-white">
-                    <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white">
-                    354 Reviews (4.5/5)</span>
+                    {{travelactivity.travelReviewCount}} Reviews ({{travelactivity.travelRating}}/5)</span>
                   </div>
                 </div>
               </div>

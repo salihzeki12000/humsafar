@@ -861,7 +861,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // center = {
       //     "lat": centers[0].lat,
       //     "lng": centers[0].lng
-      //   };  
+      //   };
 
       initMap();
     };
@@ -1059,17 +1059,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     initMap = function () {
 
-     
+
       center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
-     
+
       if (typeof google === 'object' && typeof google.maps === 'object') {
         var bounds = new google.maps.LatLngBounds();
-        
+
         setMarker=function(status, n, i) {
-           
+
           var jump = centers.length;
           if (_.isEmpty(markers[i])) {
-            
+
             var position = new google.maps.LatLng(n.lat, n.lng);
             // bounds.extend(position);
             var obj = {
@@ -1097,7 +1097,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
         var step = 0;
         var numSteps = 100; //Change this to set animation resolution
-       
+
 
          //Grey static polylines starts here
         travelPath = new google.maps.Polyline({
@@ -1112,9 +1112,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
          _.each(centers, function (n, index) {
           setMarker(false, n, index + 1);
         });
-       
+
         setMarker(true, centers[0], 1);
-      
+
         function redLineDraw(i, departure, arrival, percentComplete, value, flag) {
           // console.log(percentComplete, flag);
           var xdiff = (centers[i].lat - centers[i - 1].lat);
@@ -1213,7 +1213,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           drawLine(departure, arrival, percentComplete, i, value);
         };
 
-        
+
         function smoothZoom(map, level, cnt, mode) {
           if (mode == true) {
             if (cnt > level) { //zooming in
@@ -3366,7 +3366,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.visited = visitedArr;
           arr=visitedArr;
         };
-        
+
         MyLife.getCountryVisitedListWeb(callback);
         modal = $uibModal.open({
           scope: $scope,
@@ -3420,7 +3420,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.getMap();
     };
 
-   
+
 //update countries visited ends
 
 
@@ -7876,18 +7876,102 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.oneAtATime = true;
+  //about textarea counter
   $scope.$on('$viewContentLoaded', function () {
-    $timeout(function () {
-      $("#remainingC").html("00 / 500");
-      $('textarea').keypress(function () {
-
-        if (this.value.length > 500) {
-          return false;
-        }
-        $("#remainingC").html((this.value.length) + " / 500");
-      });
-    });
+    // $timeout(function () {
+    //   $("#remainingC").html("00 / 500");
+    //   $('textarea').keypress(function () {
+    //
+    //     if (this.value.length > 500) {
+    //       return false;
+    //     }
+    //     $("#remainingC").html((this.value.length) + " / 500");
+    //   });
+    // });
+    $timeout(function(){
+      $('#textareaChars').keyup(updateCount);
+      $('#textareaChars').keydown(updateCount);
+      $('#remainingC').text(0 + '/ 500');
+      function updateCount(){
+        var count = $('#textareaChars').val().length;
+        $('#remainingC').text(count + '/ 500');
+      }
+    },100);
   });
+
+  //about textarea counter end
+  // category of Specialisation array
+  $scope.categoriesSpecial=[{
+    agtcatImg:"img/agt-cat1.png",
+    catwidth:"35px",
+    agtcatCap:"Adventure"
+  },{
+    agtcatImg:"img/agt-cat2.png",
+    catwidth:"33px",
+    agtcatCap:"Business"
+  },{
+    agtcatImg:"img/agt-cat3.png",
+    catwidth:"48px",
+    agtcatCap:"Family"
+  },{
+    agtcatImg:"img/agt-cat4.png",
+    catwidth:"35px",
+    agtcatCap:"Romance"
+  },{
+    agtcatImg:"img/agt-cat5.png",
+    catwidth:"35px",
+    agtcatCap:"Backpacking"
+  },{
+    agtcatImg:"img/agt-cat6.png",
+    catwidth:"33px",
+    agtcatCap:"Budget"
+  },{
+    agtcatImg:"img/agt-cat7.png",
+    catwidth:"33px",
+    agtcatCap:"Luxury"
+  },{
+    agtcatImg:"img/agt-cat8.png",
+    catwidth:"38px",
+    agtcatCap:"Religious"
+  },{
+    agtcatImg:"img/agt-cat9.png",
+    catwidth:"35px",
+    agtcatCap:"Friends"
+  }];
+  // category of Specialisation array end
+  //country of Specialisation accordion
+  $scope.agtRegionSpcl = [
+    {
+    regionName: "Africa",
+    countryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
+  },
+    {
+    regionName: "Asia",
+    countryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
+  },
+    {
+    regionName: "Europe",
+    countryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
+  },
+    {
+    regionName: "North America",
+    countryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
+  },
+    {
+    regionName: "Ocenia",
+    countryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
+  },
+    {
+    regionName: "South America",
+    countryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait",]
+  }
+];
+  //country of Specialisation accordion end
+
+  //Services
+  $scope.agtServicesSpcl = [
+    'Flights','Cruise','MICE','Personal','Business Travel','Car Rentals','Visas','Fully Independent Traveller','Accomodation','Travel Insurance','Sports & Events','Tours And Packages','Forex','Holidays','Festival & Concerts','Transportation'];
+  //Services end
 })
 
 .controller('AgentsettingCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -7898,17 +7982,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.oneAtATime = true;
   // Textarea counter
   $scope.$on('$viewContentLoaded', function () {
-    $timeout(function () {
-      $("#remainAbt").html("00 / 500");
-      $('textarea').keypress(function () {
-
-        if (this.value.length > 500) {
-          return false;
-        }
-        $("#remainAbt").html((this.value.length) + " / 500");
-      });
-    });
-  });
+     // $timeout(function () {
+     //   $("#remainingC").html("00 / 500");
+     //   $('textarea').keypress(function () {
+     //
+     //     if (this.value.length > 500) {
+     //       return false;
+     //     }
+     //     $("#remainingC").html((this.value.length) + " / 500");
+     //   });
+     // });
+     $timeout(function(){
+       $('#textareaChars').keyup(updateCount);
+       $('#textareaChars').keydown(updateCount);
+       $('#remainAbt').text(0 + '/ 500');
+       function updateCount(){
+         var count = $('#textareaChars').val().length;
+         $('#remainAbt').text(count + '/ 500');
+       }
+     },100);
+   });
   // Textarea counter end
 
   //setting tab navigation
@@ -8087,20 +8180,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.oneAtATime = true;
 
 
-  //scroll change
-  $(window).scroll(function () {
-    //  var navHeight = $('.img-holder-agent').height($(window).height() - 41);
-    var scroll = $(window).scrollTop();
-    //console.log(scroll);
-    if (scroll >= 225) {
+ //scroll change
+$(window).scroll(function() {
+ //  var navHeight = $('.img-holder-agent').height($(window).height() - 41);
+  var scroll = $(window).scrollTop();
+   //console.log(scroll);
+  if (scroll >= 225) {
       //console.log('a');
       $(".agent-user-nav").addClass("change");
-    } else {
+  } else {
       //console.log('a');
       $(".agent-user-nav").removeClass("change");
-    }
-  });
-  //scroll change end
+  }
+});
+//scroll change end
 
   // tab change
   var allagtuser = ["views/content/agent/agt-user/usr-itinerary.html", "views/content/agent/agt-user/usr-tourpackages.html", "views/content/agent/agt-user/usr-photovideos.html", "views/content/agent/agt-user/usr-testimonialreviews.html", "views/content/agent/agt-user/usr-aboutus.html"];
@@ -8175,26 +8268,189 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   };
   // tab change end
 
+  //user itinerary cards
+  $scope.usrItineraryCard=[
+    {
+      timestampDate:'26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg : 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      agtReviewCount:'352',
+      agtRating:'4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      timestampDate:'26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg : 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '35000',
+      noDays: '55',
+      tripCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      agtReviewCount:'1505',
+      agtRating:'3.5',
+      agtLikesCount: '99',
+      countryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      timestampDate:'15 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg : 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '75000',
+      noDays: '15',
+      tripCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      agtReviewCount:'342',
+      agtRating:'4.0',
+      agtLikesCount: '199',
+      countryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      timestampDate:'26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg : 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      agtReviewCount:'352',
+      agtRating:'4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      timestampDate:'26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg : 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      agtReviewCount:'352',
+      agtRating:'4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      timestampDate:'26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg : 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      agtReviewCount:'352',
+      agtRating:'4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      timestampDate:'26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg : 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      agtReviewCount:'352',
+      agtRating:'4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      timestampDate:'26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg : 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      agtReviewCount:'352',
+      agtRating:'4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    }
+  ];
+  //user itinerary cards end
+
+  // tour packages card
+  $scope.usrTourPackageCard=[
+    {
+      tourImg : 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC:'3',
+      tourcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      tourImg : 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC:'3',
+      tourcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      tourImg : 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC:'3',
+      tourcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      tourImg : 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC:'3',
+      tourcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      tourImg : 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC:'3',
+      tourcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      tourImg : 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC:'3',
+      tourcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      tourImg : 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC:'3',
+      tourcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      tourImg : 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC:'3',
+      tourcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    }];
+  // tour packages card end
+
   // gallery card end
   $scope.agenPhotogallery = [
-    '../img/uploaded-pic.jpg',
-    '../img/slider2.jpg',
-    '../img/moment-travel1.jpg',
-    '../img/moment-travel2.jpg',
-    '../img/local-life-post.jpg',
-    '../img/destination/goldentemple.jpg',
-    '../img/destination/list1.jpg',
-    '../img/destination/list2.jpg',
-    '../img/destination/info.jpg',
-    '../img/destination/taj-featured.jpg',
-    '../img/itinerary/itinerary.jpg',
-    '../img/india-gate.jpg',
-    '../img/notify-adrena.jpg',
-    '../img/paris.jpg',
-    '../img/bg-popular.jpg',
-    '../img/bg-blur.jpg',
-    '../img/blog-banner.jpg',
-    '../img/follower.jpg'
+    'img/uploaded-pic.jpg',
+    'img/slider2.jpg',
+    'img/moment-travel1.jpg',
+    'img/moment-travel2.jpg',
+    'img/local-life-post.jpg',
+    'img/destination/goldentemple.jpg',
+    'img/destination/list1.jpg',
+    'img/destination/list2.jpg',
+    'img/destination/info.jpg',
+    'img/destination/taj-featured.jpg',
+    'img/itinerary/itinerary.jpg',
+    'img/india-gate.jpg',
+    'img/notify-adrena.jpg',
+    'img/paris.jpg',
+    'img/bg-popular.jpg',
+    'img/bg-blur.jpg',
+    'img/blog-banner.jpg',
+    'img/follower.jpg'
   ];
   // gallery card end
 
@@ -8259,17 +8515,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   // review textarea counter
   $scope.$on('$viewContentLoaded', function () {
-    $timeout(function () {
-      $("#reviewremainingC").html("00 / 300");
-      $('textarea').keypress(function () {
-
-        if (this.value.length > 500) {
-          return false;
-        }
-        $("#reviewremainingC").html((this.value.length) + " / 300");
-      });
-    });
+    // $timeout(function () {
+    //   $("#remainingC").html("00 / 500");
+    //   $('textarea').keypress(function () {
+    //
+    //     if (this.value.length > 500) {
+    //       return false;
+    //     }
+    //     $("#remainingC").html((this.value.length) + " / 500");
+    //   });
+    // });
+    $timeout(function(){
+      $('#textareaChars').keyup(updateCount);
+      $('#textareaChars').keydown(updateCount);
+      $('#reviewremainingC').text(0 + '/ 300');
+      function updateCount(){
+        var count = $('#textareaChars').val().length;
+        $('#reviewremainingC').text(count + '/ 300');
+      }
+    },100);
   });
+
   // review textarea counter end
 
   //rating slider
@@ -8333,18 +8599,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.oneAtATime = true;
 
   //scroll change
-  $(window).scroll(function () {
-    var scroll = $(window).scrollTop();
+ $(window).scroll(function() {
+   var scroll = $(window).scrollTop();
     //console.log(scroll);
-    if (scroll >= 225) {
-      //console.log('a');
-      $(".agent-home-nav").addClass("change");
-    } else {
-      //console.log('a');
-      $(".agent-home-nav").removeClass("change");
-    }
-  });
-  //scroll change end
+   if (scroll >= 225) {
+       //console.log('a');
+       $(".agent-home-nav").addClass("change");
+   } else {
+       //console.log('a');
+       $(".agent-home-nav").removeClass("change");
+   }
+});
+ //scroll change end
 
   // tab change
   var allagthome = ["views/content/agent/agt-home/agthome-itinerary.html", "views/content/agent/agt-home/agthome-tourpackages.html", "views/content/agent/agt-home/agthome-photovideos.html", "views/content/agent/agt-home/agthome-testimonialreviews.html",
@@ -8480,90 +8746,236 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     img: "img/itinerary/friend.png",
     caption: "Friends",
     width: "24"
-  }];
+  } ];
   // category type end
 
+  // travel activity card ng-repeat
+  $scope.agtTravelCard=[
+    {
+      traveltimestampDate:'26 Jan, 2015',
+      traveltimestampHour: '1:20 pm',
+      travelImg : 'img/paris.jpg',
+      travelTitle: 'Love In Paris',
+      travelCost: '25000',
+      travelnoDays: '75',
+      travelCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      travelPost:'Has uploaded a new itinerary',
+      travelReviewCount:'352',
+      travelRating:'4.5',
+      travelLikesCount: '99',
+      travelcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      traveltimestampDate:'26 Jan, 2015',
+      traveltimestampHour: '1:20 pm',
+      travelImg : 'img/paris.jpg',
+      travelTitle: 'Love In Paris',
+      travelCost: '25000',
+      travelnoDays: '75',
+      travelCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      travelPost:'Has uploaded a new itinerary',
+      travelReviewCount:'352',
+      travelRating:'4.5',
+      travelLikesCount: '99',
+      travelcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      traveltimestampDate:'26 Jan, 2015',
+      traveltimestampHour: '1:20 pm',
+      travelImg : 'img/paris.jpg',
+      travelTitle: 'Love In Paris',
+      travelCost: '25000',
+      travelnoDays: '75',
+      travelCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      travelPost:'Has uploaded a new itinerary',
+      travelReviewCount:'352',
+      travelRating:'4.5',
+      travelLikesCount: '99',
+      travelcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      traveltimestampDate:'26 Jan, 2015',
+      traveltimestampHour: '1:20 pm',
+      travelImg : 'img/paris.jpg',
+      travelTitle: 'Love In Paris',
+      travelCost: '25000',
+      travelnoDays: '75',
+      travelCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      travelPost:'Has uploaded a new itinerary',
+      travelReviewCount:'352',
+      travelRating:'4.5',
+      travelLikesCount: '99',
+      travelcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      traveltimestampDate:'26 Jan, 2015',
+      traveltimestampHour: '1:20 pm',
+      travelImg : 'img/paris.jpg',
+      travelTitle: 'Love In Paris',
+      travelCost: '25000',
+      travelnoDays: '75',
+      travelCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      travelPost:'Has uploaded a new itinerary',
+      travelReviewCount:'352',
+      travelRating:'4.5',
+      travelLikesCount: '99',
+      travelcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      traveltimestampDate:'26 Jan, 2015',
+      traveltimestampHour: '1:20 pm',
+      travelImg : 'img/paris.jpg',
+      travelTitle: 'Love In Paris',
+      travelCost: '25000',
+      travelnoDays: '75',
+      travelCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      travelPost:'Has uploaded a new itinerary',
+      travelReviewCount:'352',
+      travelRating:'4.5',
+      travelLikesCount: '99',
+      travelcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      traveltimestampDate:'26 Jan, 2015',
+      traveltimestampHour: '1:20 pm',
+      travelImg : 'img/paris.jpg',
+      travelTitle: 'Love In Paris',
+      travelCost: '25000',
+      travelnoDays: '75',
+      travelCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      travelPost:'Has uploaded a new itinerary',
+      travelReviewCount:'352',
+      travelRating:'4.5',
+      travelLikesCount: '99',
+      travelcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      traveltimestampDate:'26 Jan, 2015',
+      traveltimestampHour: '1:20 pm',
+      travelImg : 'img/paris.jpg',
+      travelTitle: 'Love In Paris',
+      travelCost: '25000',
+      travelnoDays: '75',
+      travelCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      travelPost:'Has uploaded a new itinerary',
+      travelReviewCount:'352',
+      travelRating:'4.5',
+      travelLikesCount: '99',
+      travelcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      traveltimestampDate:'26 Jan, 2015',
+      traveltimestampHour: '1:20 pm',
+      travelImg : 'img/paris.jpg',
+      travelTitle: 'Love In Paris',
+      travelCost: '25000',
+      travelnoDays: '75',
+      travelCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      travelPost:'Has uploaded a new itinerary',
+      travelReviewCount:'352',
+      travelRating:'4.5',
+      travelLikesCount: '99',
+      travelcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      traveltimestampDate:'26 Jan, 2015',
+      traveltimestampHour: '1:20 pm',
+      travelImg : 'img/paris.jpg',
+      travelTitle: 'Love In Paris',
+      travelCost: '25000',
+      travelnoDays: '75',
+      travelCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      travelPost:'Has uploaded a new itinerary',
+      travelReviewCount:'352',
+      travelRating:'4.5',
+      travelLikesCount: '99',
+      travelcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    },{
+      traveltimestampDate:'26 Jan, 2015',
+      traveltimestampHour: '1:20 pm',
+      travelImg : 'img/paris.jpg',
+      travelTitle: 'Love In Paris',
+      travelCost: '25000',
+      travelnoDays: '75',
+      travelCat:['img/sunset.png','img/bag-journey.png','img/luxury-journey.png'],
+      travelPost:'Has uploaded a new itinerary',
+      travelReviewCount:'352',
+      travelRating:'4.5',
+      travelLikesCount: '99',
+      travelcountryBadgesFlag:['img/england-visit.png','img/canada-visit.png','img/india-visit.png']
+    }];
+  // travel activity card ng-repeat end
 
+      // Enquiry accordion
+      $scope.enquiryAgent = [{
+        profileName: "Yash Chudasma",
+        enquireimgProfile: "img/adrena.jpg",
+        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+  enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+      },{
+        profileName: "Yash Chudasma",
+        enquireimgProfile: "img/adrena.jpg",
+        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+      },{
+        profileName: "Yash Chudasma",
+        enquireimgProfile: "img/adrena.jpg",
+        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+      },{
+        profileName: "Yash Chudasma",
+        enquireimgProfile: "img/adrena.jpg",
+        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+      },{
+        profileName: "Yash Chudasma",
+        enquireimgProfile: "img/adrena.jpg",
+        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+      },{
+        profileName: "Yash Chudasma",
+        enquireimgProfile: "img/adrena.jpg",
+        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+      },{
+        profileName: "Yash Chudasma",
+        enquireimgProfile: "img/adrena.jpg",
+        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+      },{
+        profileName: "Yash Chudasma",
+        enquireimgProfile: "img/adrena.jpg",
+        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+      },{
+        profileName: "Yash Chudasma",
+        enquireimgProfile: "img/adrena.jpg",
+        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+      },{
+        profileName: "Yash Chudasma",
+        enquireimgProfile: "img/adrena.jpg",
+        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+      },{
+        profileName: "Yash Chudasma",
+        enquireimgProfile: "img/adrena.jpg",
+        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+      },{
+        profileName: "Yash Chudasma",
+        enquireimgProfile: "img/adrena.jpg",
+        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+      },{
+        profileName: "Yash Chudasma",
+        enquireimgProfile: "img/adrena.jpg",
+        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+      },{
+        profileName: "Yash Chudasma",
+        enquireimgProfile: "img/adrena.jpg",
+        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+      },{
+        profileName: "Yash Chudasma",
+        enquireimgProfile: "img/adrena.jpg",
+        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+      }];
 
-  // Enquiry accordion
-  $scope.enquiryAgent = [{
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }];
-
-  // Enquiry accordion end
+      // Enquiry accordion end
 
 })
 

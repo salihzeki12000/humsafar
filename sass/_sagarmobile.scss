@@ -4,15 +4,15 @@
   .agthome-tourpackage-youtube,
   .youtube-placeholder {
     width: 450px;
-    height: 300px;
-    iframe{
-      width:450px;
+    height: 320px;
+
+    iframe {
+      width: 450px;
       height: 300px;
     }
   }
   //agent home page end
 }
-
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
   // agent upgrade page
@@ -37,24 +37,39 @@
   .agt-itinerarycard {
     margin: 20px 0;
   }
-  .agent-user-nav{
+
+  .agent-user-nav {
     font-size: 12px;
   }
+
   .agent-photogallery {
     width: 170px;
     max-width: 170px;
     max-height: 250px;
-}
+  }
   // agent user page end
-
-  // agent user page
+  // agent home page
   .agthome-activitycard {
-    margin: 10px 0;
-}
-  // agent user page end
+    margin: 20px 0;
+  }
+
+  .agthome-itinerary-youtube,
+  .agthome-tourpackage-youtube,
+  .youtube-placeholder {
+    width: 680px;
+    height: 360px;
+
+    iframe {
+      width: 680px;
+      height: 340px;
+    }
+  }
+  .agt-home-itineraryintro{
+    margin: 20px 0;
+  }
+  // agent home page end
 }
 // media query for 991px to 768px end
-
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
   // agent upgrade page
@@ -88,15 +103,45 @@
     margin: 0 auto;
   }
   // agent upgrade page end
-
   // agent user page
   .agt-title-card {
-      width: 100%;
+    width: 100%;
   }
   // agent user page end
+  // agent home page
+  .agthome-itinerary-youtube,
+  .agthome-tourpackage-youtube,
+  .youtube-placeholder {
+    width: 440px;
+    height: 320px;
+
+    iframe {
+      width: 440px;
+      height: 300px;
+    }
+  }
+
+  .enquiry-sidetab {
+    width: 395px;
+    top: 65px;
+    padding: 10px 15px;
+  }
+  .enquirestab-mail {
+    padding: 10px 10px;
+}
+  .enquirytab-btn {
+    top: 100px;
+  }
+  .view-enquiry-list + .enquirytab-btn {
+    right: 360px;
+    top: 110px;
+  }
+  .enquiretab-msgdiv {
+    width: 130px;
+  }
+  // agent home page end
 }
 // media query for 767px to 480px end
-
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
   // AGENT LOGIN PAGE
@@ -121,5 +166,33 @@
     padding: 10px 20px;
   }
   // AGENT LOGIN PAGE END
+
+  //agent home page
+  .agthome-itinerary-youtube,
+  .agthome-tourpackage-youtube,
+  .youtube-placeholder {
+    width: 290px;
+    height: 170px;
+
+    iframe {
+      width: 290px;
+      height: 150px;
+    }
+  }
+  .enquiry-sidetab {
+    width: 245px;
+      padding: 10px;
+}
+.view-enquiry-list + .enquirytab-btn {
+    right: 210px;
+}
+.enquiretab-msgdiv {
+    width: 90px;
+    margin: 0 5px 0 5px;
+}
+.enquirestab-mail {
+    padding: 0px;
+}
+  //agent home page end
 }
 // media query for 480px to 320px end

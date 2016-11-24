@@ -167,7 +167,7 @@
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goAgtNext=5">Previous</button>
                 <!-- put in download btn -->
                 <!-- ng-click="uploadFile();saveUserData(userData)" -->
-                <button class="btn btn-blue-outline btn-more pull-right"  ng-click="goAgtNext=7">Done</button>
+                <button class="btn btn-blue-outline btn-more pull-right"  ng-click="goAgtNext=7">Next</button>
               </div>
             </div>
           </div>
@@ -186,7 +186,7 @@
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goAgtNext=6">Previous</button>
 
-                <button class="btn btn-blue-outline btn-more pull-right"  ng-click="goAgtNext=8">Done</button>
+                <button class="btn btn-blue-outline btn-more pull-right"  ng-click="goAgtNext=8">Next</button>
                 <!-- put in DOne btn -->
                 <!-- ng-click="uploadFile();saveUserData(userData)" -->
               </div>
@@ -217,97 +217,13 @@
                 <div class="row">
                   <div class="col-md-offset-1 col-md-10">
                     <div class="row">
-                      <div class="col-md-4 col-sm-4 col-xs-4">
+                      <div class="col-md-4 col-sm-4 col-xs-4"  ng-repeat="agtcat in categoriesSpecial track by $index">
                         <div class="agtbg-holder">
                           <figure>
                             <div class="agt-imgholder">
-                              <img src="img/agt-cat1.png" alt="Adventure" width="35px" class="img-responsive m-center">
+                              <img ng-src="{{agtcat.agtcatImg}}" alt="Adventure" width="{{agtcat.catwidth}}" class="img-responsive m-center">
                             </div>
-                            <figcaption class="color-blue font-bold">Adventure</figcaption>
-                          </figure>
-                        </div>
-                      </div>
-                      <div class="col-md-4 col-sm-4  col-xs-4">
-                        <div class="agtbg-holder">
-                          <figure>
-                            <div class="agt-imgholder">
-                              <img src="img/agt-cat2.png" alt="Business" width="33px" class="img-responsive m-center">
-                            </div>
-                            <figcaption class="color-blue font-bold">Business</figcaption>
-                          </figure>
-                        </div>
-                      </div>
-                      <div class="col-md-4 col-sm-4 col-xs-4">
-                        <div class="agtbg-holder">
-                          <figure>
-                            <div class="agt-imgholder">
-                              <img src="img/agt-cat3.png" alt="Family" width="48px" class="img-responsive m-center">
-                            </div>
-                            <figcaption class="color-blue font-bold">Family</figcaption>
-                          </figure>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-4 col-sm-4 col-xs-4">
-                        <div class="agtbg-holder">
-                          <figure>
-                            <div class="agt-imgholder">
-                              <img src="img/agt-cat4.png" alt="Romance" width="35px" class="img-responsive m-center">
-                            </div>
-                            <figcaption class="color-blue font-bold">Romance</figcaption>
-                          </figure>
-                        </div>
-                      </div>
-                      <div class="col-md-4 col-sm-4 col-xs-4">
-                        <div class="agtbg-holder">
-                          <figure>
-                            <div class="agt-imgholder">
-                              <img src="img/agt-cat5.png" alt="Backpacking" width="35px" class="img-responsive m-center">
-                            </div>
-                            <figcaption class="color-blue font-bold">Backpacking</figcaption>
-                          </figure>
-                        </div>
-                      </div>
-                      <div class="col-md-4 col-sm-4 col-xs-4">
-                        <div class="agtbg-holder">
-                          <figure>
-                            <div class="agt-imgholder">
-                              <img src="img/agt-cat6.png" alt="Budget" width="33px" class="img-responsive m-center">
-                            </div>
-                            <figcaption class="color-blue font-bold">Budget</figcaption>
-                          </figure>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-4 col-sm-4 col-xs-4">
-                        <div class="agtbg-holder">
-                          <figure>
-                            <div class="agt-imgholder">
-                              <img src="img/agt-cat7.png" alt="Luxury" width="33px" class="img-responsive m-center">
-                            </div>
-                            <figcaption class="color-blue font-bold">Luxury</figcaption>
-                          </figure>
-                        </div>
-                      </div>
-                      <div class="col-md-4 col-sm-4 col-xs-4">
-                        <div class="agtbg-holder">
-                          <figure>
-                            <div class="agt-imgholder">
-                              <img src="img/agt-cat8.png" alt="Religious" width="38px" class="img-responsive m-center">
-                            </div>
-                            <figcaption class="color-blue font-bold">Religious</figcaption>
-                          </figure>
-                        </div>
-                      </div>
-                      <div class="col-md-4 col-sm-4 col-xs-4">
-                        <div class="agtbg-holder">
-                          <figure>
-                            <div class="agt-imgholder">
-                              <img src="img/agt-cat9.png" alt="Friends" width="35px" class="img-responsive m-center">
-                            </div>
-                            <figcaption class="color-blue font-bold">Friends</figcaption>
+                            <figcaption class="color-blue font-bold">{{agtcat.agtcatCap}}</figcaption>
                           </figure>
                         </div>
                       </div>
@@ -317,7 +233,7 @@
                 <div class="button-panel loginbtn-panel clearfix">
                   <button class="btn btn-blue-outline btn-more pull-left" ng-click="goAgtNext=7">Previous</button>
 
-                  <button class="btn btn-blue-outline btn-more pull-right" ng-click="goAgtNext=9">Done</button>
+                  <button class="btn btn-blue-outline btn-more pull-right" ng-click="goAgtNext=9">Next</button>
                   <!-- put in done btn -->
                   <!-- ng-click="uploadFile();saveUserData(userData)" -->
                 </div>
@@ -349,174 +265,16 @@
                 <div class="row">
                   <div class="col-md-12">
                     <uib-accordion close-others="oneAtATime">
-                      <div uib-accordion-group class="panel-default" is-open="status.open1">
+                      <uib-accordion-group class="panel-default" is-open="status.open" ng-repeat="agtcregion in agtRegionSpcl track by $index">
                         <uib-accordion-heading>
-                          <div class="agtaccord-title color-blue avenir-medium">Africa
-                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open1, 'fa fa-chevron-down': !status.open1}"></i>
+                          <div class="agtaccord-title color-blue avenir-medium">{{ agtcregion.regionName }}
+                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open, 'fa fa-chevron-down': !status.open}"></i>
                           </div>
                         </uib-accordion-heading>
                         <div class="country-tabs">
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-
+                          <button ng-repeat="country in agtcregion.countryName track by $index" class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">{{country}}</button>
                         </div>
-                      </div>
-
-                      <div uib-accordion-group class="panel-default" is-open="status.open2">
-                        <uib-accordion-heading>
-                          <div class="agtaccord-title color-blue avenir-medium">Asia
-                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open2, 'fa fa-chevron-down': !status.open2}"></i>
-                          </div>
-                        </uib-accordion-heading>
-                        <div class="country-tabs">
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                        </div>
-                      </div>
-
-                      <div uib-accordion-group class="panel-default" is-open="status.open3">
-                        <uib-accordion-heading>
-                          <div class="agtaccord-title color-blue avenir-medium">Europe
-                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open3, 'fa fa-chevron-down': !status.open3}"></i>
-                          </div>
-                        </uib-accordion-heading>
-                        <div class="country-tabs">
-
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-
-
-                        </div>
-                      </div>
-
-                      <div uib-accordion-group class="panel-default" is-open="status.open4">
-                        <uib-accordion-heading>
-                          <div class="agtaccord-title color-blue avenir-medium">North America
-                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open4, 'fa fa-chevron-down': !status.open4}"></i>
-                          </div>
-                        </uib-accordion-heading>
-                        <div class="country-tabs">
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-
-                        </div>
-                      </div>
-
-                      <div uib-accordion-group class="panel-default" is-open="status.open5">
-                        <uib-accordion-heading>
-                          <div class="agtaccord-title color-blue avenir-medium">Ocenia
-                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open5, 'fa fa-chevron-down': !status.open5}"></i>
-                          </div>
-                        </uib-accordion-heading>
-                        <div class="country-tabs">
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                        </div>
-                      </div>
-
-                      <div uib-accordion-group class="panel-default" is-open="status.open6">
-                        <uib-accordion-heading>
-                          <div class="agtaccord-title color-blue avenir-medium">South America
-                            <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open6, 'fa fa-chevron-down': !status.open6}"></i>
-                          </div>
-                        </uib-accordion-heading>
-                        <div class="country-tabs">
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-                          <button class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">Afghanistan</button>
-
-                        </div>
-                      </div>
-
+                      </uib-accordion-group>
                     </uib-accordion>
                   </div>
                 </div>
@@ -524,7 +282,7 @@
                 <div class="button-panel loginbtn-panel clearfix">
                   <button class="btn btn-blue-outline btn-more pull-left" ng-click="goAgtNext=8">Previous</button>
 
-                  <button class="btn btn-blue-outline btn-more pull-right" ng-click="goAgtNext=10">Done</button>
+                  <button class="btn btn-blue-outline btn-more pull-right" ng-click="goAgtNext=10">Next</button>
                   <!-- add to Done btn  -->
                   <!-- ng-click="uploadFile();saveUserData(userData)" -->
                 </div>
@@ -556,22 +314,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="service-box">
-                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Flights</button>
-                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Cruise</button>
-                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">MICE</button>
-                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Personal</button>
-                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Business Travel</button>
-                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Car Rentals</button>
-                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Visas</button>
-                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Fully Independent Traveller</button>
-                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Accomodation</button>
-                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Travel Insurance</button>
-                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Sports & Events</button>
-                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Tours And Packages</button>
-                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Forex</button>
-                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Holidays</button>
-                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Festival & Concerts</button>
-                      <button class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">Transportation</button>
+                      <button ng-repeat = "agtServices in agtServicesSpcl track by $index" class="btn btn-blue-outline btn-more btn-bluehover flex-auto mr10 mb10">{{agtServices}}</button>
                     </div>
                   </div>
                 </div>
