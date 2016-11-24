@@ -1,4 +1,17 @@
-@media screen and (max-width: 1200px) {}
+@media screen and (max-width: 1200px) {
+  //agent home page
+  .agthome-itinerary-youtube,
+  .agthome-tourpackage-youtube,
+  .youtube-placeholder {
+    width: 450px;
+    height: 300px;
+    iframe{
+      width:450px;
+      height: 300px;
+    }
+  }
+  //agent home page end
+}
 
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
