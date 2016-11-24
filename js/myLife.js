@@ -23,7 +23,7 @@ var navigationservice = angular.module('mylife', [])
             });
             _.each(countryVisited, function (n) {
               var index = _.findIndex(countries, function (country) {
-                return country._id == n.countryId;
+                return country._id == n.countryId._id;
               });
               countries[index].countryVisited = true;
             });
@@ -51,7 +51,6 @@ var navigationservice = angular.module('mylife', [])
         url: adminURL + "/user/getCountryVisitedListWeb",
         method: "POST"
       }).success(function (data) {
-        console.log(data.data.countriesVisited);
         callback(data.data.countriesVisited);
       });
     },

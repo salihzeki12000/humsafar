@@ -11,6 +11,8 @@ var line = [];
 var markers = [];
 var travelPath;
 var initMap = function () {};
+var setMarker = function () {};
+
 var map;
 var center = {};
 var centers = [];
@@ -557,6 +559,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Used to name the .html file
 
     // console.log("Testing Consoles");
+
     $scope.listOfCategories = {
       'travelConfig': {
         'holidayType': [],
@@ -569,6 +572,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Holiday");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    $scope.viewHoliday = 1;
+   $scope.showHoliday = function(val){
+     if(val == 1) {
+       $scope.viewHoliday = 1;
+     }else if(val == 2) {
+       $scope.viewHoliday = 2;
+     }else if(val == 3) {
+       $scope.viewHoliday = 3;
+     }else if(val == 4) {
+       $scope.viewHoliday = 4;
+     }else {
+       $scope.viewHoliday = 1;
+     }
+   }
 
     $scope.holidayKindType = [{
       img: "img/beach.png",
@@ -825,7 +843,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.userData = $.jStorage.get("profile");
 
     var getOneJourneyCallback = function (journeys) {
-      console.log(journeys);
       $scope.journey = journeys;
       var postsWithLatLng = [];
       postsWithLatLng = _.filter($scope.journey.post,  'latlong');
@@ -841,14 +858,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         "lng": parseFloat(journeys.location.long)
       }
       centers.unshift(obj);
-      console.log(centers);
       // center = {
       //     "lat": centers[0].lat,
       //     "lng": centers[0].lng
       //   };  
 
       initMap();
-
     };
 
     OnGoJourney.getOneJourney({
@@ -1034,30 +1049,72 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       //   lng: 55.365673
       // }];
     }
-
-    initMap = function () {
-
-      line = _.map(centers, function () {
+     line = _.map(centers, function () {
         return {};
       });
       _.map(centers, function () {
         markers.push({});
       });
 
+
+    initMap = function () {
+
+     
       center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
-      console.log(center);
+     
       if (typeof google === 'object' && typeof google.maps === 'object') {
         var bounds = new google.maps.LatLngBounds();
-        var step = 0;
-        var numSteps = 100; //Change this to set animation resolution
-        map = new google.maps.Map(document.getElementById('map'), {
+        
+        setMarker=function(status, n, i) {
+           
+          var jump = centers.length;
+          if (_.isEmpty(markers[i])) {
+            
+            var position = new google.maps.LatLng(n.lat, n.lng);
+            // bounds.extend(position);
+            var obj = {
+              position: position,
+              map: map,
+              icon: "img/maps/small-marker.png"
+            };
+            if (status) {
+              obj.icon = "img/maps/marker.png";
+              console.log("big marker icon set");
+            }
+            marker = new google.maps.Marker(obj);
+            markers[i] = marker;
+          } else {
+            markers[i].setIcon("img/maps/marker.png");
+          }
+        };
+
+         map = new google.maps.Map(document.getElementById('map'), {
           draggable: true,
           animation: google.maps.Animation.DROP,
           center: center,
-          zoom: 10
-            // styles: mapStyle
+          zoom: 4
+          // styles: mapStyle
         });
+        var step = 0;
+        var numSteps = 100; //Change this to set animation resolution
+       
 
+         //Grey static polylines starts here
+        travelPath = new google.maps.Polyline({
+          path: centers,
+          geodesic: true,
+          strokeColor: 'grey',
+          strokeOpacity: 1.0,
+          strokeWeight: 1
+        });
+        travelPath.setMap(map);
+        //Grey static polylines ends here
+         _.each(centers, function (n, index) {
+          setMarker(false, n, index + 1);
+        });
+       
+        setMarker(true, centers[0], 1);
+      
         function redLineDraw(i, departure, arrival, percentComplete, value, flag) {
           // console.log(percentComplete, flag);
           var xdiff = (centers[i].lat - centers[i - 1].lat);
@@ -1085,7 +1142,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             scale: 4
           };
           if (percentComplete == 100 && flag) {
-            // console.log(i+1);
             setMarker(true, centers[i], i + 1);
           }
           if (_.isEmpty(line[i])) {
@@ -1128,12 +1184,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
           // }
 
-
-
-
-
-
-
           var drawLine = function (departure, arrival, percent, i, value) {
             percentFrac = percent / 100;
             var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
@@ -1163,46 +1213,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           drawLine(departure, arrival, percentComplete, i, value);
         };
 
-        function setMarker(status, n, i) {
-          var jump = centers.length;
-          // console.log(i);
-          if (_.isEmpty(markers[i])) {
-            // console.log("newly created");
-            var position = new google.maps.LatLng(n.lat, n.lng);
-            bounds.extend(position);
-            var obj = {
-              position: position,
-              map: map,
-              icon: "img/maps/small-marker.png"
-            };
-            if (status) {
-              obj.icon = "img/maps/marker.png";
-            }
-            marker = new google.maps.Marker(obj);
-            markers[i] = marker;
-            // console.log(markers);
-          } else {
-            // console.log("old");
-            markers[i].setIcon("img/maps/marker.png");
-          }
-        }
-
-        _.each(centers, function (n, index) {
-          setMarker(false, n, index + 1);
-        });
-        setMarker(true, centers[0], 1);
-
-        //Grey static polylines starts here
-        travelPath = new google.maps.Polyline({
-          path: centers,
-          geodesic: true,
-          strokeColor: 'grey',
-          strokeOpacity: 1.0,
-          strokeWeight: 1
-        });
-        travelPath.setMap(map);
-        //Grey static polylines ends here
-
+        
         function smoothZoom(map, level, cnt, mode) {
           if (mode == true) {
             if (cnt > level) { //zooming in
@@ -1232,35 +1243,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
 
         pointsForLine = function (i, percentComplete, value, flag) {
-          console.log(i + "inside points for line");
-
-          console.log(centers[i - 1].lat, centers[i - 1].lng);
-          console.log(centers[i].lat, centers[i].lng);
-
           var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
           var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
           step = 0;
           redLineDraw(i, departure, arrival, percentComplete, value, flag);
           var linesCount = line.length - 1;
           var markerCount = markers.length - 1;
+
           //clearPolyLines starts
           while ((linesCount >= (i + 1)) && (value)) {
-            // console.log(i);
-            // console.log(linesCount + "--->" + line[linesCount]);
             if (!_.isEmpty(line[linesCount])) {
-              // console.log("inside clearing lines");
               line[linesCount].setMap(null);
               line[linesCount] = {};
-              // console.log("line  " + linesCount + "  cleared");
-              // console.log(line);
             };
             // markers[linesCount].setIcon("img/maps/small-marker.png");
             linesCount--;
           };
 
           while ((i < markerCount) && (value == true) && (percentComplete < 100)) {
-            // console.log(markerCount);
-            // console.log(percentComplete);
             markers[markerCount].setIcon("img/maps/small-marker.png");
             markerCount--;
           }
@@ -1271,9 +1271,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             pointsForLine(i - 1, 100);
             count = centers.length;
           };
-          //draw succeeding polyLines ends
-
-
+          //draw succeeding polyLines end
         };
       }
     };
@@ -3333,13 +3331,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.getMap();
     };
     var modal = "";
+    var arr = [];
     $scope.updateCountryVisited = function (country) {
-      console.log(country);
       $scope.obj.countryId = country._id;
       if (country.countryVisited === true) {
         $scope.visited = [];
+
         var callback = function (data) {
-          var a = _.filter(data.data.countriesVisited, ["countryId", country._id, ]);
+          var a = _.filter(data, ["countryId._id", country._id]);
           var visitedArr = [];
           _.each(a[0].visited, function (n, index) {
             visitedArr[n.year] = {
@@ -3349,7 +3348,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           });
           console.log(visitedArr);
           $scope.visited = visitedArr;
+          arr=visitedArr;
         };
+        
         MyLife.getCountryVisitedListWeb(callback);
         modal = $uibModal.open({
           scope: $scope,
@@ -3380,7 +3381,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
 
-    var arr = [];
     $scope.updateNumOfTimes = function (visited) {
       modal.close();
 

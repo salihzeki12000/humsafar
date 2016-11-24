@@ -660,13 +660,11 @@ firstapp.directive('functionmap', ['$parse', function($parse) {
                 if (ith > 0) {
                   if (percentage <= 100) {
                     // console.log("<=100");
-                    flag = true;
-                    console.log("points for line called");                    
+                    flag = true;                 
                     pointsForLine(ith, percentage, true);
                   } else {
                     // console.log(">100");
-                    // console.log(flag); //else condion is given coz polyline should not exceed beyond 100%
-                    console.log("points for line called");                    
+                    // console.log(flag); //else condion is given coz polyline should not exceed beyond 100%            
                     pointsForLine(ith, 100, true, flag);
                     flag = false;
                   }
@@ -683,13 +681,10 @@ firstapp.directive('functionmap', ['$parse', function($parse) {
               if (percentage <= 100) {
                 // console.log("<=100");
                 flag = true;
-                console.log("points for line called");
                 pointsForLine(ith, percentage, true, true);
-
               } else {
                 // console.log(">100"); //else condion is given coz polyline should not exceed beyond 100%
-                // console.log(flag);
-                console.log("points for line called");                
+                // console.log(flag);                
                 pointsForLine(ith, 100, true);
                 flag = false;
               }

@@ -11,10 +11,8 @@ var ongojourney = angular.module('ongojourney', [])
         var hasJourney = "";
         if (_.isEmpty(data.data)) {
           hasJourney = false;
-          console.log(hasJourney);
         } else {
           hasJourney = true;
-          console.log(hasJourney);
         }
         var journeys = data.data;
 
