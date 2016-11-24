@@ -6,7 +6,7 @@ var globalGetProfile = function (data, status) {
     $.jStorage.flush();
   }
 };
-var pointsForLine=function(){};
+var pointsForLine = function () {};
 var line = [];
 var markers = [];
 var travelPath;
@@ -488,7 +488,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               'Content-Type': undefined
             },
             transformRequest: angular.identity
-          }).success(function(data) {
+          }).success(function (data) {
             console.log(data);
             if ($scope.callback) {
               $scope.callback(data);
@@ -818,7 +818,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
   })
-  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, $state, $stateParams,$filter) {
+  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, $state, $stateParams, $filter) {
     //Used to name the .html file
     var slug = $stateParams.id;
     var checkinCount = "";
@@ -829,16 +829,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.journey = journeys;
       var postsWithLatLng = [];
       postsWithLatLng = _.filter($scope.journey.post,  'latlong');
-    
+
       _.each(postsWithLatLng, function (n, $index) {
         centers[$index] = {
           "lat": parseFloat(n.latlong.lat),
           "lng": parseFloat(n.latlong.long)
         };
       });
-      var obj={
-        "lat":parseFloat(journeys.location.lat),
-        "lng":parseFloat(journeys.location.long)
+      var obj = {
+        "lat": parseFloat(journeys.location.lat),
+        "lng": parseFloat(journeys.location.long)
       }
       centers.unshift(obj);
       console.log(centers);
@@ -846,9 +846,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       //     "lat": centers[0].lat,
       //     "lng": centers[0].lng
       //   };  
-     
+
       initMap();
-      
+
     };
 
     OnGoJourney.getOneJourney({
@@ -875,7 +875,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.time.hour = hh;
       $scope.time.min = d.getMinutes();
       $scope.datetime.dt = d;
-      modal=$uibModal.open({
+      modal = $uibModal.open({
         animation: true,
         templateUrl: "views/modal/date-time.html",
         scope: $scope,
@@ -885,16 +885,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.updateBannerDateTime = function (id, formData, dt) {
       console.log(dt);
-       var date = $filter('formatDateCalender')(dt);
-        var time = $filter('formatTimeCalender')(formData);
+      var date = $filter('formatDateCalender')(dt);
+      var time = $filter('formatTimeCalender')(formData);
       var result = {};
-      var callback=function (data) {
+      var callback = function (data) {
         var formData = {
           "urlSlug": $scope.journey.urlSlug
         }
         OnGoJourney.getOneJourney(formData, function (journeys) {
-         $scope.journey.startTime = journeys.startTime;
-         modal.close();
+          $scope.journey.startTime = journeys.startTime;
+          modal.close();
           console.log(journeys);
         }, function (err) {
           console.log(err);
@@ -902,149 +902,149 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
       result._id = id;
       result.startTime = new Date(date + " " + time);
-      OnGoJourney.updateBannerDateTime(result,callback);
+      OnGoJourney.updateBannerDateTime(result, callback);
     };
 
-    
+
     //change banner date and time ends
 
-{
-    //mapStyle
-    var mapStyle = [{
-      "featureType": "landscape.man_made",
-      "elementType": "geometry",
-      "stylers": [{
-        "color": "#f7f1df"
+    {
+      //mapStyle
+      var mapStyle = [{
+        "featureType": "landscape.man_made",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#f7f1df"
+        }]
+      }, {
+        "featureType": "landscape.natural",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#d0e3b4"
+        }]
+      }, {
+        "featureType": "landscape.natural.terrain",
+        "elementType": "geometry",
+        "stylers": [{
+          "visibility": "off"
+        }]
+      }, {
+        "featureType": "poi",
+        "elementType": "labels",
+        "stylers": [{
+          "visibility": "off"
+        }]
+      }, {
+        "featureType": "poi.business",
+        "elementType": "all",
+        "stylers": [{
+          "visibility": "off"
+        }]
+      }, {
+        "featureType": "poi.medical",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#fbd3da"
+        }]
+      }, {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#bde6ab"
+        }]
+      }, {
+        "featureType": "road",
+        "elementType": "geometry.stroke",
+        "stylers": [{
+          "visibility": "off"
+        }]
+      }, {
+        "featureType": "road",
+        "elementType": "labels",
+        "stylers": [{
+          "visibility": "off"
+        }]
+      }, {
+        "featureType": "road.highway",
+        "elementType": "geometry.fill",
+        "stylers": [{
+          "color": "#ffe15f"
+        }]
+      }, {
+        "featureType": "road.highway",
+        "elementType": "geometry.stroke",
+        "stylers": [{
+          "color": "#efd151"
+        }]
+      }, {
+        "featureType": "road.arterial",
+        "elementType": "geometry.fill",
+        "stylers": [{
+          "color": "#ffffff"
+        }]
+      }, {
+        "featureType": "road.local",
+        "elementType": "geometry.fill",
+        "stylers": [{
+          "color": "black"
+        }]
+      }, {
+        "featureType": "transit.station.airport",
+        "elementType": "geometry.fill",
+        "stylers": [{
+          "color": "#cfb2db"
+        }]
+      }, {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#a2daf2"
+        }]
       }]
-    }, {
-      "featureType": "landscape.natural",
-      "elementType": "geometry",
-      "stylers": [{
-        "color": "#d0e3b4"
-      }]
-    }, {
-      "featureType": "landscape.natural.terrain",
-      "elementType": "geometry",
-      "stylers": [{
-        "visibility": "off"
-      }]
-    }, {
-      "featureType": "poi",
-      "elementType": "labels",
-      "stylers": [{
-        "visibility": "off"
-      }]
-    }, {
-      "featureType": "poi.business",
-      "elementType": "all",
-      "stylers": [{
-        "visibility": "off"
-      }]
-    }, {
-      "featureType": "poi.medical",
-      "elementType": "geometry",
-      "stylers": [{
-        "color": "#fbd3da"
-      }]
-    }, {
-      "featureType": "poi.park",
-      "elementType": "geometry",
-      "stylers": [{
-        "color": "#bde6ab"
-      }]
-    }, {
-      "featureType": "road",
-      "elementType": "geometry.stroke",
-      "stylers": [{
-        "visibility": "off"
-      }]
-    }, {
-      "featureType": "road",
-      "elementType": "labels",
-      "stylers": [{
-        "visibility": "off"
-      }]
-    }, {
-      "featureType": "road.highway",
-      "elementType": "geometry.fill",
-      "stylers": [{
-        "color": "#ffe15f"
-      }]
-    }, {
-      "featureType": "road.highway",
-      "elementType": "geometry.stroke",
-      "stylers": [{
-        "color": "#efd151"
-      }]
-    }, {
-      "featureType": "road.arterial",
-      "elementType": "geometry.fill",
-      "stylers": [{
-        "color": "#ffffff"
-      }]
-    }, {
-      "featureType": "road.local",
-      "elementType": "geometry.fill",
-      "stylers": [{
-        "color": "black"
-      }]
-    }, {
-      "featureType": "transit.station.airport",
-      "elementType": "geometry.fill",
-      "stylers": [{
-        "color": "#cfb2db"
-      }]
-    }, {
-      "featureType": "water",
-      "elementType": "geometry",
-      "stylers": [{
-        "color": "#a2daf2"
-      }]
-    }]
 
-   //latlongs format
-    // var center = {
-    //   lat: 19.089560,
-    //   lng: 72.865614
-    // };
+      //latlongs format
+      // var center = {
+      //   lat: 19.089560,
+      //   lng: 72.865614
+      // };
 
-    // var centers = [{
-    //   lat: 19.089560,
-    //   lng: 72.865614
-    // }, {
-    //   lat: 51.470022,
-    //   lng: -0.454295
-    // }, {
-    //   lat: 29.276052,
-    //   lng: -81.034910
-    // }, {
-    //   lat: 51.512072,
-    //   lng: -0.144223
-    // }, {
-    //   lat: 52.923608,
-    //   lng: -1.482560
-    // }, {
-    //   lat: 51.899603,
-    //   lng: -1.153590
-    // }, {
-    //   lat: 51.470022,
-    //   lng: -0.454295
-    // }, {
-    //   lat: 25.253175,
-    //   lng: 55.365673
-    // }];
-}
-    
+      // var centers = [{
+      //   lat: 19.089560,
+      //   lng: 72.865614
+      // }, {
+      //   lat: 51.470022,
+      //   lng: -0.454295
+      // }, {
+      //   lat: 29.276052,
+      //   lng: -81.034910
+      // }, {
+      //   lat: 51.512072,
+      //   lng: -0.144223
+      // }, {
+      //   lat: 52.923608,
+      //   lng: -1.482560
+      // }, {
+      //   lat: 51.899603,
+      //   lng: -1.153590
+      // }, {
+      //   lat: 51.470022,
+      //   lng: -0.454295
+      // }, {
+      //   lat: 25.253175,
+      //   lng: 55.365673
+      // }];
+    }
+
     initMap = function () {
+
       line = _.map(centers, function () {
-      return {};
-    });
+        return {};
+      });
+      _.map(centers, function () {
+        markers.push({});
+      });
 
-    _.map(centers, function () {
-      markers.push({});
-    });
-
-       center=new google.maps.LatLng(centers[0].lat,centers[0].lng);
+      center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
       console.log(center);
       if (typeof google === 'object' && typeof google.maps === 'object') {
         var bounds = new google.maps.LatLngBounds();
@@ -1054,25 +1054,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           draggable: true,
           animation: google.maps.Animation.DROP,
           center: center,
-          zoom:10
-          // styles: mapStyle
+          zoom: 10
+            // styles: mapStyle
         });
 
         function redLineDraw(i, departure, arrival, percentComplete, value, flag) {
           // console.log(percentComplete, flag);
           var xdiff = (centers[i].lat - centers[i - 1].lat);
           var ydiff = (centers[i].lng - centers[i - 1].lng);
-          // if (Math.abs(xdiff) < 4 && value) {
-          //   smoothZoom(map, 9, map.getZoom(), true); //for zooming in
-          // } else if (Math.abs(xdiff) > 4 && value) {
-          //   smoothZoom(map, 4, map.getZoom(), false); //for zooming out
-          // }
+          if (Math.abs(xdiff) < 4 && value) {
+            smoothZoom(map, 9, map.getZoom(), true); //for zooming in
+          } else if (Math.abs(xdiff) > 4 && value) {
+            smoothZoom(map, 4, map.getZoom(), false); //for zooming out
+          }
 
-          var markerBounds = new google.maps.LatLngBounds();
-          markerBounds.extend(departure);
-          markerBounds.extend(arrival);
+          // var markerBounds = new google.maps.LatLngBounds();
+          // markerBounds.extend(departure);
+          // markerBounds.extend(arrival);
 
-          map.fitBounds(markerBounds);
+          // map.fitBounds(markerBounds);
 
           var frac1 = xdiff / 100;
           var frac2 = ydiff / 100;
@@ -1149,6 +1149,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 "lat": iniLat + (centers[i].lat - centers[i - 1].lat) / 2,
                 "lng": iniLng + (centers[i].lng - centers[i - 1].lng) / 2
               }
+               center = new google.maps.LatLng(center.lat, center.lng);
             }
             // offsetCenter(center, 100, 0);
             map.setCenter(center);
@@ -1231,8 +1232,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
 
         pointsForLine = function (i, percentComplete, value, flag) {
-          console.log(i+"inside points for line");
-          
+          console.log(i + "inside points for line");
+
           console.log(centers[i - 1].lat, centers[i - 1].lng);
           console.log(centers[i].lat, centers[i].lng);
 
@@ -6098,9 +6099,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.userData= $.jStorage.get("profile");
+    $scope.userData = $.jStorage.get("profile");
     console.log($scope.userData);
-     var travelCountCallback = function (data, status) {
+    var travelCountCallback = function (data, status) {
       $scope.count = data.data;
     };
 
@@ -6252,7 +6253,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var callbackFollowings = function (data) {
       $scope.followingList = data.data.following;
-      reloadCount();      
+      reloadCount();
       console.log($scope.followingList);
 
     };
@@ -6264,12 +6265,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var callbackBucketList = function (data) {
       $scope.bucketList = data;
-      reloadCount();    
+      reloadCount();
     };
 
     var callbackRemoveFromBucketList = function (countryId) {
-       reloadCount(); 
-      document.getElementById(countryId).remove();      
+      reloadCount();
+      document.getElementById(countryId).remove();
     };
     $scope.removeFromBucketList = function (id) {
       MyLife.updateBucketListWeb(id, callbackRemoveFromBucketList);
@@ -8077,20 +8078,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.oneAtATime = true;
 
 
- //scroll change
-$(window).scroll(function() {
- //  var navHeight = $('.img-holder-agent').height($(window).height() - 41);
-  var scroll = $(window).scrollTop();
-   //console.log(scroll);
-  if (scroll >= 225) {
+  //scroll change
+  $(window).scroll(function () {
+    //  var navHeight = $('.img-holder-agent').height($(window).height() - 41);
+    var scroll = $(window).scrollTop();
+    //console.log(scroll);
+    if (scroll >= 225) {
       //console.log('a');
       $(".agent-user-nav").addClass("change");
-  } else {
+    } else {
       //console.log('a');
       $(".agent-user-nav").removeClass("change");
-  }
-});
-//scroll change end
+    }
+  });
+  //scroll change end
 
   // tab change
   var allagtuser = ["views/content/agent/agt-user/usr-itinerary.html", "views/content/agent/agt-user/usr-tourpackages.html", "views/content/agent/agt-user/usr-photovideos.html", "views/content/agent/agt-user/usr-testimonialreviews.html", "views/content/agent/agt-user/usr-aboutus.html"];
@@ -8323,18 +8324,18 @@ $(window).scroll(function() {
   $scope.oneAtATime = true;
 
   //scroll change
- $(window).scroll(function() {
-   var scroll = $(window).scrollTop();
+  $(window).scroll(function () {
+    var scroll = $(window).scrollTop();
     //console.log(scroll);
-   if (scroll >= 225) {
-       //console.log('a');
-       $(".agent-home-nav").addClass("change");
-   } else {
-       //console.log('a');
-       $(".agent-home-nav").removeClass("change");
-   }
-});
- //scroll change end
+    if (scroll >= 225) {
+      //console.log('a');
+      $(".agent-home-nav").addClass("change");
+    } else {
+      //console.log('a');
+      $(".agent-home-nav").removeClass("change");
+    }
+  });
+  //scroll change end
 
   // tab change
   var allagthome = ["views/content/agent/agt-home/agthome-itinerary.html", "views/content/agent/agt-home/agthome-tourpackages.html", "views/content/agent/agt-home/agthome-photovideos.html", "views/content/agent/agt-home/agthome-testimonialreviews.html",
@@ -8470,90 +8471,90 @@ $(window).scroll(function() {
     img: "img/itinerary/friend.png",
     caption: "Friends",
     width: "24"
-  } ];
+  }];
   // category type end
 
 
 
-      // Enquiry accordion
-      $scope.enquiryAgent = [{
-        profileName: "Yash Chudasma",
-        enquireimgProfile: "img/adrena.jpg",
-        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-  enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-      },{
-        profileName: "Yash Chudasma",
-        enquireimgProfile: "img/adrena.jpg",
-        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-      },{
-        profileName: "Yash Chudasma",
-        enquireimgProfile: "img/adrena.jpg",
-        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-      },{
-        profileName: "Yash Chudasma",
-        enquireimgProfile: "img/adrena.jpg",
-        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-      },{
-        profileName: "Yash Chudasma",
-        enquireimgProfile: "img/adrena.jpg",
-        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-      },{
-        profileName: "Yash Chudasma",
-        enquireimgProfile: "img/adrena.jpg",
-        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-      },{
-        profileName: "Yash Chudasma",
-        enquireimgProfile: "img/adrena.jpg",
-        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-      },{
-        profileName: "Yash Chudasma",
-        enquireimgProfile: "img/adrena.jpg",
-        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-      },{
-        profileName: "Yash Chudasma",
-        enquireimgProfile: "img/adrena.jpg",
-        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-      },{
-        profileName: "Yash Chudasma",
-        enquireimgProfile: "img/adrena.jpg",
-        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-      },{
-        profileName: "Yash Chudasma",
-        enquireimgProfile: "img/adrena.jpg",
-        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-      },{
-        profileName: "Yash Chudasma",
-        enquireimgProfile: "img/adrena.jpg",
-        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-      },{
-        profileName: "Yash Chudasma",
-        enquireimgProfile: "img/adrena.jpg",
-        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-      },{
-        profileName: "Yash Chudasma",
-        enquireimgProfile: "img/adrena.jpg",
-        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-      },{
-        profileName: "Yash Chudasma",
-        enquireimgProfile: "img/adrena.jpg",
-        enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-enquirymsghead:"Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-      }];
+  // Enquiry accordion
+  $scope.enquiryAgent = [{
+    profileName: "Yash Chudasma",
+    enquireimgProfile: "img/adrena.jpg",
+    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+  }, {
+    profileName: "Yash Chudasma",
+    enquireimgProfile: "img/adrena.jpg",
+    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+  }, {
+    profileName: "Yash Chudasma",
+    enquireimgProfile: "img/adrena.jpg",
+    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+  }, {
+    profileName: "Yash Chudasma",
+    enquireimgProfile: "img/adrena.jpg",
+    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+  }, {
+    profileName: "Yash Chudasma",
+    enquireimgProfile: "img/adrena.jpg",
+    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+  }, {
+    profileName: "Yash Chudasma",
+    enquireimgProfile: "img/adrena.jpg",
+    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+  }, {
+    profileName: "Yash Chudasma",
+    enquireimgProfile: "img/adrena.jpg",
+    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+  }, {
+    profileName: "Yash Chudasma",
+    enquireimgProfile: "img/adrena.jpg",
+    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+  }, {
+    profileName: "Yash Chudasma",
+    enquireimgProfile: "img/adrena.jpg",
+    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+  }, {
+    profileName: "Yash Chudasma",
+    enquireimgProfile: "img/adrena.jpg",
+    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+  }, {
+    profileName: "Yash Chudasma",
+    enquireimgProfile: "img/adrena.jpg",
+    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+  }, {
+    profileName: "Yash Chudasma",
+    enquireimgProfile: "img/adrena.jpg",
+    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+  }, {
+    profileName: "Yash Chudasma",
+    enquireimgProfile: "img/adrena.jpg",
+    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+  }, {
+    profileName: "Yash Chudasma",
+    enquireimgProfile: "img/adrena.jpg",
+    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+  }, {
+    profileName: "Yash Chudasma",
+    enquireimgProfile: "img/adrena.jpg",
+    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+  }];
 
-      // Enquiry accordion end
+  // Enquiry accordion end
 
 })
 

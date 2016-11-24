@@ -666,7 +666,7 @@ firstapp.directive('functionmap', ['$parse', function($parse) {
                   } else {
                     // console.log(">100");
                     // console.log(flag); //else condion is given coz polyline should not exceed beyond 100%
-                    sconsole.log("points for line called");                    
+                    console.log("points for line called");                    
                     pointsForLine(ith, 100, true, flag);
                     flag = false;
                   }
