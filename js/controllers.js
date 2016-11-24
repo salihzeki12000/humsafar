@@ -3330,6 +3330,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, function () {});
       $scope.getMap();
     };
+
+    //update countries visited starts
+     var years = function (startYear) {
+      var currentYear = new Date().getFullYear(),
+        years = [];
+      startYear = startYear || 1980;
+      while (startYear <= currentYear) {
+        years.push(currentYear--);
+      }
+      return years;
+    }
+    $scope.listOfYears = years(1950);
+    $scope.checkIfSelected=function(list){
+      console.log($scope.visited[list].times);
+      console.log($scope.visited);
+    };
     var modal = "";
     var arr = [];
     $scope.updateCountryVisited = function (country) {
@@ -3404,16 +3420,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.getMap();
     };
 
-    var years = function (startYear) {
-      var currentYear = new Date().getFullYear(),
-        years = [];
-      startYear = startYear || 1980;
-      while (startYear <= currentYear) {
-        years.push(currentYear--);
-      }
-      return years;
-    }
-    $scope.listOfYears = years(1950);
+   
+//update countries visited ends
+
 
     // Little more about me starts here
     function titleCase(string) {

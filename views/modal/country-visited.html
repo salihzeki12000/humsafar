@@ -11,7 +11,7 @@
       <ul>
         <li ng-repeat="list in listOfYears">
           <div class="year-checkbox custom-checkbox">
-            <input type="checkbox" id="year{{list}}" ng-model="visited[list].year" ng-true-value="{{list}};">
+            <input type="checkbox" id="year{{list}}" ng-model="visited[list].year" ng-true-value="{{list}}" ng-click="checkIfSelected(list)">
             <label for="year{{list}}">{{list}}</label>
           </div>
           <div class="count-visited">
