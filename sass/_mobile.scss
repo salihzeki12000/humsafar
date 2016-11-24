@@ -21,6 +21,47 @@
   }
   .travel-inside { font-size: 14px; }
   // my life end
+  // setting
+  .setting-menu-tab { padding: 0; }
+  .setting-typeholder {
+    margin-top: 3px;
+    img { width: 30px; }
+  }
+  .setting-list {
+    .tab-list { padding: 10px 5px 15px 0; }
+    i {
+      margin-top: 2px;
+      font-size: 16px;
+     }
+  }
+  .setting-prof-imgholder {
+    width: 55px;
+    height: 58px;
+    border-radius: 22px;
+  }
+  .profile-detail h4 { font-size: 17px; }
+  .setting-main-detail {
+    margin-left: 10px;
+  }
+  .setting-profile-list i { margin-top: 8%; }
+  .form-file, .from-photogallery, .from-webcamera {
+    margin: 5px;
+  }
+  .travel-blogger {
+    .button-group {
+      img { height: 20px; }
+      .btn {
+        font-size: 15px;
+        &:first-child { padding: 8px 20px; }
+        &:nth-child(2) {
+          padding: 8px 20px;
+          margin: 0px 15px;
+        }
+        &:last-child { padding: 8px 60px; }
+      }
+    }
+  }
+  // setting end
 }
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
@@ -139,6 +180,24 @@
   .empty-descp { font-size: 15px; }
   // journey empty screen first user end
   // My Life end
+  // setting
+  .setting {
+    padding: 20px;
+  }
+  .setting-menu-tab { padding: 0px 15px; }
+  .setting-tab-info { padding: 0px 15px; }
+  .setting-main-detail {
+    margin-left: 0;
+    margin-top: 15px;
+    .holiday-section,
+    .setting-ideal-holiday,
+    .setting-prefer-travel,
+    .setting-usually-go {
+      ul { text-align: center; }
+    }
+  }
+  .setting-list i { display: none; }
+  // setting end
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -469,6 +528,12 @@
     }
   }
 }
+// setting page
+.setting-main {
+  .container { padding: 0; }
+}
+.travel-blogger .button-group .btn { margin: 5px; }
+// setting page end
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
@@ -794,6 +859,28 @@
       i { font-size: 13px; }
     }
   }
-  // my life
+  // my life\
+  // setting
+  .setting { padding: 20px 10px; }
+  .setting-main-detail { padding: 20px 15px; }
+  .setting-user-detail {
+    > .row { margin: 0; }
+    .setting-menu-tab, .setting-tab-info { padding: 0; }
+  }
+  .setting-tab-gender { text-align: center; }
+  .travel-blogger {
+    .button-group {
+      text-align: center;
+      .btn {
+        margin: 5px;
+        &:nth-child(2) {
+          padding: 8px 39px;
+          margin: 5px;
+        }
+        &:last-child { padding: 8px 76px; }
+      }
+    }
+  }
+  // setting end
 }
 // media query for 480px to 320px end

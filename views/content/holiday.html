@@ -3,15 +3,15 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-        <div class="bg-white" ng-init="showHoliday=1">
-          <div class="holiday-step1" ng-show="showHoliday==1">
+        <div class="bg-white">
+          <div class="holiday-step1" ng-if="viewHoliday==1">
             <div class="holiday-indicators">
               <ul>
                 <li>
                   <a href="" class="one"></a>
                 </li>
                 <li>
-                  <a href="" class="" ng-click="showHoliday=2"></a>
+                  <a href="" class="" ng-click="showHoliday(2)"></a>
                 </li>
                 <li>
                   <a href="" class=""></a>
@@ -39,23 +39,23 @@
                     </div>
                   </div>
                 </div>
-              </div> 
+              </div>
               <div class="button-pane clearfix">
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="showHoliday=2;selectedCategory('holidayKindType','kindOfHoliday')">Next</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="showHoliday(2);selectedCategory('holidayKindType','kindOfHoliday')">Next</button>
               </div>
             </div>
           </div>
-          <div class="holiday-step2" ng-show="showHoliday==2">
+          <div class="holiday-step2" ng-if="viewHoliday==2">
             <div class="holiday-indicators">
               <ul>
                 <li>
-                  <a href="" class="one" ng-click="showHoliday=1"></a>
+                  <a href="" class="one" ng-click="showHoliday(1)"></a>
                 </li>
                 <li>
                   <a href="" class="two"></a>
                 </li>
                 <li>
-                  <a href="" class="" ng-click="showHoliday=3"></a>
+                  <a href="" class="" ng-click="showHoliday(3)"></a>
                 </li>
                 <li>
                   <a href="" class=""></a>
@@ -83,24 +83,24 @@
               </div>
             </div>
             <div class="button-pane clearfix">
-              <button class="btn btn-blue-outline btn-more pull-left" ng-click="showHoliday=1">Previous</button>
-              <button class="btn btn-blue-outline btn-more pull-right" ng-click="showHoliday=3;selectedCategory('usuallygoHoliday','usuallyGo')">Next</button>
+              <button class="btn btn-blue-outline btn-more pull-left" ng-click="showHoliday(1)">Previous</button>
+              <button class="btn btn-blue-outline btn-more pull-right" ng-click="showHoliday(3);selectedCategory('usuallygoHoliday','usuallyGo')">Next</button>
             </div>
           </div>
-          <div class="holiday-step3" ng-show="showHoliday==3">
+          <div class="holiday-step3" ng-if="viewHoliday==3">
             <div class="holiday-indicators">
               <ul>
                 <li>
-                  <a href="" class="one" ng-click="showHoliday=1"></a>
+                  <a href="" class="one" ng-click="showHoliday(1)"></a>
                 </li>
                 <li>
-                  <a href="" class="two" ng-click="showHoliday=2"></a>
+                  <a href="" class="two" ng-click="showHoliday(2)"></a>
                 </li>
                 <li>
                   <a href="" class="three"></a>
                 </li>
                 <li>
-                  <a href="" class="" ng-click="showHoliday=4"></a>
+                  <a href="" class="" ng-click="showHoliday(4)"></a>
                 </li>
               </ul>
             </div>
@@ -124,22 +124,22 @@
                 </div>
               </div>
               <div class="button-pane clearfix">
-                <button class="btn btn-blue-outline btn-more pull-left" ng-click="showHoliday=2">Previous</button>
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="showHoliday=4;selectedCategory('travelPrefer','preferToTravel')">Next</button>
+                <button class="btn btn-blue-outline btn-more pull-left" ng-click="showHoliday(2)">Previous</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="showHoliday(4);selectedCategory('travelPrefer','preferToTravel')">Next</button>
               </div>
             </div>
           </div>
-          <div class="holiday-step4" ng-show="showHoliday==4">
+          <div class="holiday-step4" ng-if="viewHoliday==4">
             <div class="holiday-indicators">
               <ul>
                 <li>
-                  <a href="" class="one" ng-click="showHoliday=1"></a>
+                  <a href="" class="one" ng-click="showHoliday(1)"></a>
                 </li>
                 <li>
-                  <a href="" class="two" ng-click="showHoliday=2"></a>
+                  <a href="" class="two" ng-click="showHoliday(2)"></a>
                 </li>
                 <li>
-                  <a href="" class="three" ng-click="showHoliday=3"></a>
+                  <a href="" class="three" ng-click="showHoliday(3)"></a>
                 </li>
                 <li>
                   <a href="" class="four"></a>
@@ -166,7 +166,7 @@
                 </div>
               </div>
               <div class="button-pane clearfix">
-                <button class="btn btn-blue-outline btn-more pull-left" ng-click="showHoliday=3">Previous</button>
+                <button class="btn btn-blue-outline btn-more pull-left" ng-click="showHoliday(3)">Previous</button>
                 <button class="btn btn-blue-outline btn-more pull-right" ui-sref='mylife' ng-click="selectedCategory('idealHoliday','holidayType');saveUserData(listOfCategories);"
                   ;>Done</button>
               </div>

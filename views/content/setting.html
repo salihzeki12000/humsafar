@@ -1,10 +1,10 @@
 <div class="setting-main">
   <div class="container">
-    <div class="setting">
+    <div class="setting" auto-height> <!-- remove auto height of not needed -->
       <h3 class="color-blue font-bold text-center m-clear mb20 setting-heading">Settings</h3>
       <div class="setting-user-detail">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 setting-menu-tab">
             <div class="setting-list avenir-medium">
               <div class="setting-profile-list pointer" ng-click="setting(1)" ng-class="{'bg-white active-setting' : showSetting == 1}">
                 <div class="profile-heading clearfix">
@@ -22,12 +22,12 @@
                 <li ng-click="setting(2)" ng-class="{'bg-white active-setting' : showSetting == 2}">
                   <div class="edit-profile-heading clearfix">
                     <div class="row">
-                      <div class="col-md-2">
-                        <div class="text-center">
+                      <div class="col-md-2 col-sm-1 col-xs-2">
+                        <div class="text-center setting-typeholder">
                           <img src="img/edit-profile.png" alt="">
                         </div>
                       </div>
-                      <div class="col-md-10">
+                      <div class="col-md-10 col-sm-11 col-xs-10">
                         <div class="tab-list">
                           <h5 class="color-blue inline-block m-clear">Edit Profile - <span class="fz10">A little more about me</span></h5>
                           <i class="fa fa-chevron-right pull-right"></i>
@@ -39,12 +39,12 @@
                 <li ng-click="setting(3)" ng-class="{'bg-white active-setting' : showSetting == 3}">
                   <div class="password-heading clearfix">
                     <div class="row">
-                      <div class="col-md-2">
-                        <div class="text-center">
+                      <div class="col-md-2 col-sm-1 col-xs-2">
+                        <div class="text-center setting-typeholder">
                           <img src="img/setting.png" alt="">
                         </div>
                       </div>
-                      <div class="col-md-10">
+                      <div class="col-md-10 col-sm-11 col-xs-10">
                         <div class="tab-list">
                           <h5 class="color-blue inline-block m-clear">Change Password</h5>
                           <i class="fa fa-chevron-right pull-right"></i>
@@ -56,12 +56,12 @@
                 <li ng-click="setting(4)" ng-class="{'bg-white active-setting' : showSetting == 4}">
                   <div class="upload-heading clearfix">
                     <div class="row">
-                      <div class="col-md-2">
-                        <div class="text-center">
+                      <div class="col-md-2 col-sm-1 col-xs-2">
+                        <div class="text-center setting-typeholder">
                           <img src="img/data-upload.png" alt="">
                         </div>
                       </div>
-                      <div class="col-md-10">
+                      <div class="col-md-10 col-sm-11 col-xs-10">
                         <div class="tab-list">
                           <h5 class="color-blue inline-block m-clear">Data Upload</h5>
                           <i class="fa fa-chevron-right pull-right"></i>
@@ -73,12 +73,12 @@
                 <li ng-click="setting(5)" ng-class="{'bg-white active-setting' : showSetting == 5}">
                   <div class="privacy-heading clearfix">
                     <div class="row">
-                      <div class="col-md-2">
-                        <div class="text-center">
+                      <div class="col-md-2 col-sm-1 col-xs-2">
+                        <div class="text-center setting-typeholder">
                           <img src="img/privacy.png" alt="">
                         </div>
                       </div>
-                      <div class="col-md-10">
+                      <div class="col-md-10 col-sm-11 col-xs-10">
                         <div class="tab-list">
                           <h5 class="color-blue inline-block m-clear">Privacy</h5>
                           <i class="fa fa-chevron-right pull-right"></i>
@@ -90,12 +90,12 @@
                 <li ng-click="setting(6)" ng-class="{'bg-white active-setting' : showSetting == 6}">
                   <div class="report-problem-heading clearfix">
                     <div class="row">
-                      <div class="col-md-2">
-                        <div class="text-center">
+                      <div class="col-md-2 col-sm-1 col-xs-2">
+                        <div class="text-center setting-typeholder">
                           <img src="img/report-problem.png" alt="">
                         </div>
                       </div>
-                      <div class="col-md-10">
+                      <div class="col-md-10 col-sm-11 col-xs-10">
                         <div class="tab-list">
                           <h5 class="color-blue inline-block m-clear">Report A Problem</h5>
                           <i class="fa fa-chevron-right pull-right"></i>
@@ -107,7 +107,7 @@
               </ul>
             </div>
           </div>
-          <div class="col-md-8 col-pad-zero">
+          <div class="col-md-8 col-pad-zero setting-tab-info">
             <div class="setting-main-detail bg-white avenir-roman">
               <!-- profile detail -->
               <div class="profile-detail-main" ng-if="showSetting == 1">
@@ -127,14 +127,14 @@
                       <p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
                       <span class="block mt10 color-grey avenir-roman">-or-</span>
                       <div class="upload-btn">
-                        <div class="relate inline-block mr10">
-                          <button class="btn btn-dark-blue pointer avenir-light">Select a photo from your computer input</button>
+                        <div class="relate inline-block mr10 form-file">
+                          <button class="btn btn-dark-blue pointer avenir-light ">Select a photo from your computer input</button>
                           <input type="file" id="fileInput" class="getfile pointer" />
                         </div>
-                        <div class="inline-block">
+                        <div class="inline-block from-photogallery">
                           <button class="btn btn-dark-blue pointer avenir-light">Your Photos</button>
                         </div>
-                        <div class="inline-block ml10">
+                        <div class="inline-block ml10 from-webcamera">
                           <button class="btn btn-dark-blue pointer avenir-light">Web Camera</button>
                         </div>
                       </div>
@@ -372,27 +372,33 @@
                 <form>
                   <div class="row">
                     <div class="col-md-4">
-                      <div class="radio-select">
-                        <input type="radio" id="cellular-wifi" name="data-upload">
-                        <label for="cellular-wifi" class="color-blue">
-                          Cellular and Wi-Fi
-                        </label>
+                      <div class="form-group">
+                        <div class="radio-select">
+                          <input type="radio" id="cellular-wifi" name="data-upload">
+                          <label for="cellular-wifi" class="color-blue">
+                            Cellular and Wi-Fi
+                          </label>
+                        </div>
                       </div>
                     </div>
                     <div class="col-md-4">
-                      <div class="radio-select">
-                        <input type="radio" id="wifi" name="data-upload">
-                        <label for="wifi" class="color-blue">
-                          Wi-Fi
-                        </label>
+                      <div class="form-group">
+                        <div class="radio-select">
+                          <input type="radio" id="wifi" name="data-upload">
+                          <label for="wifi" class="color-blue">
+                            Wi-Fi
+                          </label>
+                        </div>
                       </div>
                     </div>
                     <div class="col-md-4">
-                      <div class="radio-select">
-                        <input type="radio" id="Cellular" name="data-upload">
-                        <label for="Cellular" class="color-blue">
-                          Cellular
-                        </label>
+                      <div class="form-group">
+                        <div class="radio-select">
+                          <input type="radio" id="Cellular" name="data-upload">
+                          <label for="Cellular" class="color-blue">
+                            Cellular
+                          </label>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -410,15 +416,19 @@
                 <form>
                   <div class="row">
                     <div class="col-md-6">
-                      <div class="radio-select">
-                        <input type="radio" id="public" name="privacy">
-                        <label for="public" class="color-blue">Public - Everyone</label>
+                      <div class="form-group">
+                        <div class="radio-select">
+                          <input type="radio" id="public" name="privacy">
+                          <label for="public" class="color-blue">Public - Everyone</label>
+                        </div>
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <div class="radio-select">
-                        <input type="radio" id="private" name="privacy">
-                        <label for="private" class="color-blue">Private - My Followers</label>
+                      <div class="form-group">
+                        <div class="radio-select">
+                          <input type="radio" id="private" name="privacy">
+                          <label for="private" class="color-blue">Private - My Followers</label>
+                        </div>
                       </div>
                     </div>
                   </div>
