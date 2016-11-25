@@ -12,6 +12,53 @@
     }
   }
   //agent home page end
+  // agent setting page
+  .agtsetting-menu-tab {
+    padding: 0;
+  }
+
+  .agtsetting-typeholder {
+    margin-top: 3px;
+
+    img {
+      width: 30px;
+    }
+  }
+
+  .agtform-file,
+  .agtfrom-photogallery {
+    margin: 5px;
+  }
+
+  .agtprofile-detail h4 {
+    font-size: 17px;
+  }
+
+  .agtsetting-white {
+    margin-left: 10px;
+  }
+
+  .agt-profile-list i {
+    margin-top: 8%;
+  }
+
+  .agt-setting-list {
+    .tab-list {
+      padding: 10px 5px 15px 0;
+    }
+
+    i {
+      margin-top: 2px;
+      font-size: 16px;
+    }
+  }
+
+  .agt-setting-profimg {
+    width: 55px;
+    height: 58px;
+    border-radius: 22px;
+  }
+  // agent setting page end
 }
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
@@ -64,10 +111,39 @@
       height: 340px;
     }
   }
-  .agt-home-itineraryintro{
+
+  .agt-home-itineraryintro {
     margin: 20px 0;
   }
   // agent home page end
+  // agent setting page
+  .setting-card {
+    padding: 20px;
+  }
+
+  .agtsetting-menu-tab {
+    padding: 0 15px;
+  }
+
+  .agtsetting-tab-info {
+    padding: 0 15px;
+  }
+
+  .agtsetting-white {
+    margin-left: 0;
+    margin-top: 15px;
+
+    .agtcategory-setting {
+      ul {
+        text-align: center;
+      }
+    }
+  }
+
+  .agt-setting-list i {
+    display: none;
+  }
+  // agent setting page end
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -126,20 +202,39 @@
     top: 65px;
     padding: 10px 15px;
   }
+
   .enquirestab-mail {
-    padding: 10px 10px;
-}
+    padding: 10px;
+  }
+
   .enquirytab-btn {
     top: 100px;
   }
+
   .view-enquiry-list + .enquirytab-btn {
     right: 360px;
     top: 110px;
   }
+
   .enquiretab-msgdiv {
     width: 130px;
   }
   // agent home page end
+  // agent setting page
+  .agent-setting {
+    .container {
+      padding: 0;
+    }
+  }
+
+  .mob-paddupload {
+    padding: 6px 5px;
+  }
+
+  .upload-btn {
+    margin: 0;
+  }
+  // agent setting page end
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -166,7 +261,6 @@
     padding: 10px 20px;
   }
   // AGENT LOGIN PAGE END
-
   //agent home page
   .agthome-itinerary-youtube,
   .agthome-tourpackage-youtube,
@@ -179,20 +273,67 @@
       height: 150px;
     }
   }
+
   .enquiry-sidetab {
     width: 245px;
-      padding: 10px;
-}
-.view-enquiry-list + .enquirytab-btn {
+    padding: 10px;
+  }
+
+  .view-enquiry-list + .enquirytab-btn {
     right: 210px;
-}
-.enquiretab-msgdiv {
+  }
+
+  .enquiretab-msgdiv {
     width: 90px;
-    margin: 0 5px 0 5px;
-}
-.enquirestab-mail {
-    padding: 0px;
-}
+    margin: 0 5px;
+  }
+
+  .enquirestab-mail {
+    padding: 0;
+  }
   //agent home page end
+  // agent setting page
+  .setting-card {
+    padding: 20px 10px;
+
+    .upload-btn {
+      margin: 0;
+    }
+  }
+
+  .agtsetting-white {
+    padding: 20px 15px;
+  }
+
+  .setting-agent-detail {
+    > .row {
+      margin: 0;
+    }
+
+    .agtsetting-menu-tab,
+    .agtsetting-tab-info {
+      padding: 0;
+    }
+  }
+
+  .agtform-file,
+  .agtfrom-photogallery {
+    margin: 5px 0;
+  }
+
+  .agtupload-section {
+    padding: 15px 0;
+  }
+
+  .mob-paddupload {
+    padding: 6px 5px !important;
+  }
+
+  .package-holder {
+    min-height: auto;
+    box-shadow: 0 0 5px #ebebeb;
+    margin: 10px;
+  }
+  // agent setting page end
 }
 // media query for 480px to 320px end

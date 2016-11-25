@@ -1091,6 +1091,8 @@ q {
 
 .package-holder {
   text-align: center;
+  padding: 20px 10px;
+    min-height: 300px;
   @extend .color-blue;
   @extend .font-sz18;
 }
@@ -1319,6 +1321,12 @@ q {
   background-color: #fff;
   padding: 20px 30px;
   min-height: 365px;
+  .form-control {
+    height: 40px;
+    border: 1px solid $brand-dark-blue;
+    color: $brand-blue;
+    border-radius: 6px;
+  }
 }
 
 .agtcategory-setting {
