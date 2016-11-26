@@ -28,10 +28,10 @@
     <!--if checkin is done and no photos is uploaded then add map i.e.  if showMap is true  STARTS-->
     <div class="card-imgholder" ng-if="ongo.showMap">
       <div class="blur-img">
-        <img ng-src="https://maps.googleapis.com/maps/api/staticmap?zoom=12&size=600x400&maptype=roadmap&markers=color:red|{{ongo.latlong.lat}},{{ongo.latlong.long}}&key=AIzaSyDPH6EYKMW97XMTJzqYqA0CR4fk5l2gzE4"
+        <img ng-src="{{ongo.imgageUrl}}"
           alt="" class="img-responsive">
       </div>
-      <img ng-src="https://maps.googleapis.com/maps/api/staticmap?zoom=12&size=600x400&maptype=roadmap&markers=color:red|{{ongo.latlong.lat}},{{ongo.latlong.long}}&key=AIzaSyDPH6EYKMW97XMTJzqYqA0CR4fk5l2gzE4"
+      <img ng-src="{{ongo.imageUrl}}"
         alt="" class="img-responsive card-img">
     </div>
     <!--if checkin is done and no photos is uploaded then add map i.e.  if showMap is true  ENDS-->
