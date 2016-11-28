@@ -1,5 +1,13 @@
 @media screen and (max-width: 1200px) {
   //agent home page
+  .agent-home-nav{
+    .col-md-10{
+      overflow: auto;
+      ul{
+        width: 928px;
+      }
+    }
+  }
   .agthome-itinerary-youtube,
   .agthome-tourpackage-youtube,
   .youtube-placeholder {
@@ -85,6 +93,7 @@
     margin: 20px 0;
   }
 
+  .agent-home-nav,
   .agent-user-nav {
     font-size: 12px;
   }
@@ -182,6 +191,17 @@
   // agent user page
   .agt-title-card {
     width: 100%;
+  }
+  .agent-user-nav{
+    .col-md-8{
+      overflow: scroll;
+      ul{
+        width: 768px;
+        li{
+          padding-bottom: 5px;
+        }
+      }
+    }
   }
   // agent user page end
   // agent home page
@@ -290,6 +310,15 @@
 
   .enquirestab-mail {
     padding: 0;
+  }
+
+  .agt-home-aboutus  , .agt-usr-aboutus{
+    .row-flex{
+      flex-wrap: wrap;
+    }
+    .col-flex{
+      flex: 0 0 100%;
+    }
   }
   //agent home page end
   // agent setting page

@@ -10,14 +10,16 @@
             <p class="posi-relative m-clear">Write A Testimonial<i class="font-sz18 posi-absolute right0 fa fa-angle-down" ng-class="{'fa-angle-up' : showTestimonial, 'fa-angle-down': !showTestimonial }"  aria-hidden="true"></i></p>
           </div>
 
-          <div class="testimonial-open" ng-show="showTestimonial" >
+          <div class="testimonial-open range-custom" ng-show="showTestimonial" >
             <div class="give-rating text-center clearfix">
               <span class="font-sz10 color-cyan">Rate This Agent</span>
+              <input type="range">
               <div range-slider min="0" max="10000" model-max="ratingSlide.maxRating" pin-handle="min"></div>
-              <span class="pull-left color-grey">0</span>
+              <span class="pull-left color-grey">1</span>
               <span class="pull-right color-grey">10</span>
             </div>
             <!-- model-max="ratingSlide.maxRating" -->
+
             <div class="testimonial-rating text-center">
               <p class="avenir-light color-pink font-sz24">1/10</p>
             </div>
