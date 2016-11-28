@@ -10,7 +10,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="itinerary-inputholder">
-                      <input type="text" class="form-control" placeholder="Trip Title">
+                      <input type="text" class="form-control" placeholder="Trip Title" ng-model="qItinerary.tripTitle">
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -18,11 +18,11 @@
                       <div class="itinerary-month relate">
                         <label for="month">Month</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control text-center" id="month" ng-model="month" ng-click="viewMonths = !viewMonths">
+                          <input type="text" class="form-control text-center" id="month" ng-model="qItinerary.month" ng-click="viewMonths = !viewMonths" ng-change="viewMonths=true">
                         </div>
                         <div class="month-dropdown" ng-show="viewMonths">
                           <ul>
-                            <li ng-repeat="month in monthDrop | filter:month "><a href="" title="{{month}}">{{month}}</a></li>
+                            <li ng-repeat="month in monthDrop | filter:qItinerary.month"><a href="" title="{{month}}" ng-click="qItinerary.month=month">{{month}}</a></li>
                             <!-- <li><a href="" title="February">February</a></li>
                             <li><a href="" title="March">March</a></li>
                             <li><a href="" title="April">April</a></li>
@@ -40,11 +40,11 @@
                       <div class="itinerary-year relate">
                         <label for="year">Year</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control text-center" id="year" ng-click="viewYear();" ng-model="year">
+                          <input type="text" class="form-control text-center" id="year" ng-click="viewYear();" ng-model="qItinerary.year">
                         </div>
                         <div class="year-dropdown"  ng-if="getYear.length > 0">
                           <ul>
-                            <li ng-repeat="list in getYear | filter:year track by $index" ng-click="callYear();">
+                            <li ng-repeat="list in getYear | filter:qItinerary.year track by $index" ng-click="qItinerary.year=list">
                               <a href="" title="{{list}}">{{list}}</a>
                             </li>
                           </ul>
@@ -53,7 +53,7 @@
                       <div class="itinerary-duration">
                         <label for="Day">Days</label>
                         <div class="itinerary-inputholder duration-input">
-                          <input type="text" class="form-control text-center" id="Day" placeholder="e.g. 20">
+                          <input type="text" class="form-control text-center" id="Day" placeholder="e.g. 20" ng-model="qItinerary.days">
                         </div>
                       </div>
                     </div>
@@ -63,7 +63,7 @@
               <!-- itinerary type -->
               <div class="fill-itinerary-type">
                 <h4 class="color-light-grey mt20 mb20">Itineraries Type</h4>
-                <div class="select-itinerary-type" ng-repeat="itinerary in itineraryType">
+                <div class="select-itinerary-type" ng-repeat="itinerary in qItineraryType">
                   <figure class="pointer" ng-click="selectItinerary($index);">
                     <div class="itinerary-iconholder  {{itinerary.activeClass}}">
                       <img ng-src="{{itinerary.img}}" alt="{{itinerary.caption}}" class="img-responsive" width="{{itinerary.width}}">
@@ -114,6 +114,7 @@
               <div class="trip-descp-itinerary">
                 <label for="descp">A Little More About This Trip</label>
                 <textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel" id="descp"></textarea>
+                <!--<textarea ui-tinymce="tinymceOptions" ng-model="qItineraryTripDesc" id="descp"></textarea>                -->
               </div>
               <!-- trip descp end -->
               <!-- upload trip photo -->

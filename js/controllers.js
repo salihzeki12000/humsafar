@@ -5019,34 +5019,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    //country setting accordion
- $scope.agtRegionSetting = [
-   {
-   settRegion: "Africa",
-   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
- },
-   {
-   settRegion: "Asia",
-   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
- },
-   {
-   settRegion: "Europe",
-   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
- },
-   {
-   settRegion: "North America",
-   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
- },
-   {
-   settRegion: "Ocenia",
-   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
- },
-   {
-   settRegion: "South America",
-   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait",]
- }
-];
- //country setting accordion end
+   
 
     $scope.open1 = function () {
       $scope.popup1.opened = true;
@@ -6494,7 +6467,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.itineraryType = [{
+    $scope.qItinerary={};
+    $scope.qItinerary.type=[];
+
+    $scope.qItineraryType = [{
       img: "img/itinerary/adventure.png",
       caption: "Adventure",
       width: "25"
@@ -6544,15 +6520,37 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       toolbar: 'bold italic',
       statusbar: false
     };
-
+    var arrType=[];
+    var str="";
     $scope.selectItinerary = function (val) {
-      if ($scope.itineraryType[val].activeClass == "active-itinerary") {
-        $scope.itineraryType[val].activeClass = "";
+      if ($scope.qItineraryType[val].activeClass == "active-itinerary") {
+        $scope.qItineraryType[val].activeClass = "";
+        str=$scope.qItineraryType[val].caption;
+        str=str.toLowerCase();
+        _.pull(arrType,str);  //removing values from array
+        
       } else {
-        $scope.itineraryType[val].activeClass = "active-itinerary";
+        $scope.qItineraryType[val].activeClass = "active-itinerary";
+        str=$scope.qItineraryType[val].caption;
+        str=str.toLowerCase();
+        if(_.indexOf(arrType, str)==-1){
+          arrType.push(str);    //adding values to array only if its not present already
+        }   
       }
+      $scope.qItinerary.type=arrType;
     };
 
+    var countriesCallback=function(data){
+      // $scope.countries=
+      console.log(data);
+    };
+
+    
+
+
+    NavigationService.getAllCountries(countriesCallback,function(){
+      console.log("error getting data");
+    });    
 
     $scope.getYear = [];
     $scope.viewYear = function () {
@@ -8024,6 +8022,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.oneAtATime = true;
+
+   //country setting accordion
+ $scope.agtRegionSetting = [
+   {
+   settRegion: "Africa",
+   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
+ },
+   {
+   settRegion: "Asia",
+   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
+ },
+   {
+   settRegion: "Europe",
+   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
+ },
+   {
+   settRegion: "North America",
+   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
+ },
+   {
+   settRegion: "Ocenia",
+   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
+ },
+   {
+   settRegion: "South America",
+   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait",]
+ }
+];
+ //country setting accordion end
+
   // Textarea counter
   $scope.$on('$viewContentLoaded', function () {
     // $timeout(function () {
