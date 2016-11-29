@@ -541,11 +541,11 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         var formData = {
           type: "deletePost",
           _id: postId,
-          journey: journeyId
+          uniqueId: journeyId
         }
         console.log(formData);
         $http({
-          url: adminURL + "/post/editData/",
+          url: adminURL + "/post/editDataWeb/",
           method: "POST",
           data: formData
         }).success(function () {

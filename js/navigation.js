@@ -141,7 +141,20 @@ var navigationservice = angular.module('navigationservice', [])
         getAllCities: function(formData, callback, errCallback) {
             $http.post(adminURL + "/city/locationSearch", formData).success(callback).error(errCallback);
         },
-
+        searchCityByCountry:function(formData,callback){
+            var arr={};
+            console.log(formData);
+            var arr=_.omit(formData,['cityVisited']);
+            console.log(arr);
+            
+            $http({
+                url:adminURL+"/city/searchCity",
+                data:formData,
+                method:"POST"
+            }).success(function(data){
+                callback(data);
+            });
+        },
         saveUserData: function(formData, callback, errorCallback) {
             $http.post(adminURL + "/user/editUserWeb", formData).success(callback).error(errorCallback);
         },
@@ -163,5 +176,6 @@ var navigationservice = angular.module('navigationservice', [])
         changePasswordEmail: function(formData, callback) {
             $http.post(adminURL + "/user/changePasswordEmail", formData).success(callback);
         },
+
     };
 });

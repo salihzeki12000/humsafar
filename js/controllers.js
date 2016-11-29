@@ -304,24 +304,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-.controller('BookingCtrl', ['fileUpload', "$scope", function ($scope, TemplateService, NavigationService, $timeout, $uibModal, fileUpload) {
-    //Used to name the .html file
+.controller('BookingCtrl',function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+   //Used to name the .html file
 
-    console.log("Testing Consoles");
+   console.log("Testing Consoles");
 
-    $scope.template = TemplateService.changecontent("booking");
-    $scope.menutitle = NavigationService.makeactive("Booking");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-    $scope.animationsEnabled = true;
-    $scope.template.header = "";
-    $scope.template.footer = "";
-    if (typeof $.fn.fullpage.destroy == 'function') {
-      $.fn.fullpage.destroy('all');
-    }
+   $scope.template = TemplateService.changecontent("booking");
+   $scope.menutitle = NavigationService.makeactive("Booking");
+   TemplateService.title = $scope.menutitle;
+   $scope.navigation = NavigationService.getnav();
+   $scope.animationsEnabled = true;
+   $scope.template.header = "";
+   $scope.template.footer = "";
+   if (typeof $.fn.fullpage.destroy == 'function') {
+     $.fn.fullpage.destroy('all');
+   }
 
 
-  }])
+ })
   .controller('AdvertiseCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
@@ -1142,7 +1142,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             map.fitBounds(markerBounds);
           }
 
-            
+
           var frac1 = xdiff / 100;
           var frac2 = ydiff / 100;
           var iniLat = centers[i - 1].lat;
@@ -5019,7 +5019,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-   
+
 
     $scope.open1 = function () {
       $scope.popup1.opened = true;
@@ -6467,8 +6467,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.qItinerary={};
-    $scope.qItinerary.type=[];
+    $scope.qItinerary = {};
+    $scope.qItinerary.type = [];
+    $scope.qItinerary.countryVisited=[];
+    $scope.qItinerary.countryVisitedArray = [];
+    $scope.showCountries=[];
+    $scope.searchNation=[];
+    $scope.countries=[];
+    var countries=[];
 
     $scope.qItineraryType = [{
       img: "img/itinerary/adventure.png",
@@ -6520,37 +6526,120 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       toolbar: 'bold italic',
       statusbar: false
     };
-    var arrType=[];
-    var str="";
+
+    var arrType = [];
+    var str = "";
     $scope.selectItinerary = function (val) {
       if ($scope.qItineraryType[val].activeClass == "active-itinerary") {
         $scope.qItineraryType[val].activeClass = "";
-        str=$scope.qItineraryType[val].caption;
-        str=str.toLowerCase();
-        _.pull(arrType,str);  //removing values from array
-        
+        str = $scope.qItineraryType[val].caption;
+        str = str.toLowerCase();
+        _.pull(arrType, str); //removing values from array
+
       } else {
         $scope.qItineraryType[val].activeClass = "active-itinerary";
-        str=$scope.qItineraryType[val].caption;
-        str=str.toLowerCase();
-        if(_.indexOf(arrType, str)==-1){
-          arrType.push(str);    //adding values to array only if its not present already
-        }   
+        str = $scope.qItineraryType[val].caption;
+        str = str.toLowerCase();
+        if (_.indexOf(arrType,  str) == -1) {
+          arrType.push(str); //adding values to array only if its not present already
+        }
       }
-      $scope.qItinerary.type=arrType;
+      $scope.qItinerary.type = arrType;
     };
 
-    var countriesCallback=function(data){
-      // $scope.countries=
-      console.log(data);
+    var countriesCallback = function (data) {
+      countries=data.data;
+      $scope.countries.push(countries);
     };
 
-    
-
-
-    NavigationService.getAllCountries(countriesCallback,function(){
+    NavigationService.getAllCountries(countriesCallback, function () {
       console.log("error getting data");
-    });    
+    });
+
+
+    var selectedCities = [];
+    var obj = {};
+    $scope.addCity = function (id, flag) {
+      if (flag) {
+        if (_.findIndex(selectedCities,   ['city',  id]) == -1) {
+          obj = {
+            "city": id
+          }
+          selectedCities.push(obj);
+        }
+      } else {
+        selectedCities = _.reject(selectedCities, ['city', id]);
+      }
+      $scope.qItinerary.countryVisited.cityVisited = selectedCities;
+    };
+
+    $scope.addCountryVisited = function (countryVisited) {
+      var arr = {}
+      arr = _.omit(countryVisited, ['search']);
+      console.log(arr);
+      $scope.qItinerary.countryVisitedArray.push(arr);
+      console.log($scope.qItinerary.countryVisitedArray);
+      // reset variables starts
+      $scope.qItinerary.countryVisitedArray = [];
+      var selectedCities = [];
+      var obj = {};
+      // reset variables ends
+
+    };
+
+    var citiesCallback = function (data) {
+      $scope.cities = data.data;
+      _.each(selectedCities, function (n) {
+        var index = _.findIndex($scope.cities, ['_id', n.city]);
+        if (index == -1) {
+          $scope.cities.flag = false;
+        } else {
+          $scope.cities[index].flag = true;
+        }
+      });
+    };
+
+    $scope.searchCity = function (searchData) {
+      var str = searchData.search;
+      if (str.length > 2) {
+        NavigationService.searchCityByCountry(searchData, citiesCallback);
+      }
+    };
+
+    $scope.addClass = "";
+    $scope.addCity = [[{}]];
+    $scope.addCountry = [{}];  
+    $scope.nation1=[{}]  
+    $scope.nation=$scope.nation1[0];
+
+    $scope.addPanel = function (val,index) {   
+      if(val=="city"){
+        $scope.addCity[index].push({});   
+      }else if(val=="country"){
+        $scope.addCountry.push({});
+        $scope.addCity.push([{}]);
+        console.log();
+        $scope.countries.push(countries); 
+        console.log($scope.countries);
+      } 
+    };
+
+   $scope.removeStayed = function (flag,countryIndex,cityIndex) {
+     console.log(flag,countryIndex,cityIndex);
+      if(flag=="country"){
+        if(countryIndex>0){
+          $scope.addCountry.splice(countryIndex, 1);
+          $scope.qItinerary.countryVisited.splice(countryIndex, 1);
+          
+        }
+      }else if(flag=="city"){
+        if(cityIndex>0){
+          console.log(countryIndex,cityIndex);
+          $scope.addCity[countryIndex].splice(cityIndex, 1);
+          console.log($scope.stayedAt);
+        }
+      }     
+    };
 
     $scope.getYear = [];
     $scope.viewYear = function () {
@@ -8023,34 +8112,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.navigation = NavigationService.getnav();
   $scope.oneAtATime = true;
 
-   //country setting accordion
- $scope.agtRegionSetting = [
-   {
-   settRegion: "Africa",
-   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
- },
-   {
-   settRegion: "Asia",
-   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
- },
-   {
-   settRegion: "Europe",
-   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
- },
-   {
-   settRegion: "North America",
-   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
- },
-   {
-   settRegion: "Ocenia",
-   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait"]
- },
-   {
-   settRegion: "South America",
-   settcountryName:["Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait","Afghanistan", "Dubai", "Iraq", "Iran", "India","Kuwait",]
- }
-];
- //country setting accordion end
+  //country setting accordion
+  $scope.agtRegionSetting = [{
+    settRegion: "Africa",
+    settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
+  }, {
+    settRegion: "Asia",
+    settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
+  }, {
+    settRegion: "Europe",
+    settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
+  }, {
+    settRegion: "North America",
+    settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
+  }, {
+    settRegion: "Ocenia",
+    settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
+  }, {
+    settRegion: "South America",
+    settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", ]
+  }];
+  //country setting accordion end
 
   // Textarea counter
   $scope.$on('$viewContentLoaded', function () {
