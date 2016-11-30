@@ -104,7 +104,7 @@
               <div class="pull-right">
                 <button class="btn btn-pink following-btn" ng-hide="list.following">Follow</button>
                 <button class="btn btn-pink following-btn" ng-show="list.following">Following</button>
-                
+
               </div>
             </div>
             <div class="following-user-info">
@@ -131,7 +131,7 @@
       <div class="country-visited-tab" ng-if="profileList == 3">
         <div class="list-country-visited">
            <div class="row">
-             <div class="col-md-3 col-pad-zero" ng-repeat="country in countryVisitedList">
+             <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="country in countryVisitedList">
               <div class="country-list-holder">
                 <div class="list-imgholder">
                   <img ng-src="{{country.countryImage}}" alt="" class="img-responsive country-img">
@@ -149,7 +149,7 @@
                   </div>
                   <!-- hover -->
                   <div class="country-list">
-                    <div class="get-center">
+                    <div class="get-center full-width text-center">
                       <span class="year-remove avenir-medium"><i class="fa fa-calendar block mb5"></i>
                         Add Year
                       </span>
@@ -170,7 +170,7 @@
       <div class="bucket-tab-main" ng-if="profileList == 4" ">
         <div class="bucket-list-main">
           <div class="row">
-            <div class="col-md-3 col-pad-zero" ng-repeat="bucket in bucketList track by $index" id="{{bucket._id}}">
+            <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="bucket in bucketList track by $index" id="{{bucket._id}}">
               <div class="bucket-list-holder">
                 <div class="list-imgholder">
                   <img ng-src="{{bucket.countryImage}}" alt="" class="img-responsive country-img">
