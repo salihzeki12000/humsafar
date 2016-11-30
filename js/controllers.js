@@ -1306,7 +1306,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
 
-
+    $scope.hours = _.range(1, 13, 1);
+      $scope.mins = _.range(1, 60, 1);
+      $scope.change = function (id, val) {
+        if (id == 'hour') {
+          $scope.time.hour = val;
+        } else if (id == 'min') {
+          $scope.time.min = val;
+        } else {
+          $scope.time.am_pm = val;
+        }
+      }
 
     // $scope.$on('$viewContentLoaded', function(event) {
     //   $timeout(function(){
@@ -6291,6 +6301,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var callbackGetCountriesVisited = function (data) {
       $scope.countryVisitedList = data;
+      console.log(data);
       reloadCount();
     };
 
