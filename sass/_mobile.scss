@@ -62,6 +62,14 @@
     }
   }
   // setting end
+  // profile list
+  .following-container { width: 33.33%; }
+  .list-profile-tab li {
+    margin-right: 25px;
+    &:last-child { margin-right: 0; }
+  }
+  .follow-followers-holder input { width: 300px; }
+  // profile list end
 }
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
@@ -198,6 +206,17 @@
   }
   .setting-list i { display: none; }
   // setting end
+  // profile list
+  .follow-followers-holder {
+    width: 300px;
+  }
+  .profile-tab-strip {
+    padding: 0 0 10px;
+    .pull-left { float: none !important; }
+    .pull-right { float: none !important; }
+  }
+  .following-container { width: 50%; }
+  // profile list end
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -527,13 +546,31 @@
       &:nth-child(3) .tab-heading {  padding: 17px 20px; }
     }
   }
-}
 // setting page
 .setting-main {
   .container { padding: 0; }
 }
 .travel-blogger .button-group .btn { margin: 5px; }
 // setting page end
+// profile list
+.follow-followers-holder {
+  width: 100%;
+  input { width: 100%; }
+}
+.profile-tab-strip {
+  .pull-left {
+    ::-webkit-scrollbar { height: 1px; }
+  }
+}
+.list-profile-tab {
+  overflow-x: scroll;
+  overflow-y: auto;
+  ul { width: 526px; }
+  li { margin-right: 15px; }
+}
+.following-container { width: 100%; }
+// profile list end
+}
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
@@ -882,5 +919,13 @@
     }
   }
   // setting end
+  // profile list
+  .list-profile-tab {
+    ul { width: 482px; }
+    li { margin-right: 10px; }
+    a { font-size: 14px; }
+  }
+  .profile-tab-main { padding: 60px 0px 0; }
+  // profile list end
 }
 // media query for 480px to 320px end

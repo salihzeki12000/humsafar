@@ -6601,17 +6601,14 @@ header {
   padding: 10px;
   border-radius: 6px;
   box-shadow: 2px 2px 3px #888;
+  margin: 5px;
   background-color: rgba(255, 255, 255, 0.8);
 }
 
 .following-container {
-  width: 19.33%;
+  width: 20%;
   float: left;
-  margin-right: 10px;
   margin-bottom: 50px;
-  &:nth-child(5n) {
-    margin-right: 0;
-  }
 }
 
 .following-detail {

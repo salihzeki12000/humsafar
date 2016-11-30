@@ -94,7 +94,7 @@
                       <div class="travel-journey-heading">
                         <p ng-hide="life.onJourney">{{life.heading}}</p>
                         <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
-                          <i class="fa fa-clock-o mr5 ml5">{{life.startTime|formatDate: 'time'}}</i> <span>{{life.timestampHour}}</span></p>
+                          <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span> <span>{{life.timestampHour}}</span></p>
                       </div>
                       <div class="travelled-journey relate" ng-hide="life.onJourney" ui-sref="ongojourney({id:life.urlSlug})">
                         <div class="travelled-imgholder">
