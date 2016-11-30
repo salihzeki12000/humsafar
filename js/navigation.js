@@ -151,9 +151,7 @@ var navigationservice = angular.module('navigationservice', [])
                 url:adminURL+"/city/searchCity",
                 data:formData,
                 method:"POST"
-            }).success(function(data){
-                callback(data);
-            });
+            }).success(callback);
         },
         saveUserData: function(formData, callback, errorCallback) {
             $http.post(adminURL + "/user/editUserWeb", formData).success(callback).error(errorCallback);
