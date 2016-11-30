@@ -1,4 +1,5 @@
-// AGENT LOGIN START
+ // AGENT LOGIN START
+
 
 .btn-cyan {
   @include button-variant( white, $brand-cyan, $brand-cyan);
@@ -1715,4 +1716,14 @@ input[type=range]:focus::-ms-fill-lower {
 input[type=range]:focus::-ms-fill-upper {
   background: #000000;
 }
+}
+
+.wid90{
+  width: 90%;
+}
+
+.booking-bg{
+  .menu-contact{
+    left: 40px;
+  }
 }

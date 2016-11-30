@@ -9,7 +9,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <h4 class="text-center fnt-24 p-clear">Itineraries and Journeys</h4>
+          <h4 class="text-center  fnt-24 p-clear">Itineraries and Journeys</h4>
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@
                 <div class="col-md-2 col-sm-3">
                   <div class="select-all-made" ng-mouseleave="showme=false">
                     <form action="#">
-                      <span class="btn btn-default form-control" ng-click="showme=true" ng-hide="showme">Type 
+                      <span class="btn btn-default form-control" ng-click="showme=true" ng-hide="showme">Type
                   <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
                       <input type="type" placeholder="Type" ng-model="searchFilter" ng-show="showme" class="form-control input-tab avenir-roman">
                       <div class="check-box-panel" ng-show="showme">
@@ -55,7 +55,7 @@
                 </div>
                 <div class="col-md-2 col-sm-3">
                   <div class="select-all-made" ng-mouseleave="showme=false">
-                    <span class="btn btn-default form-control" ng-click="showme=true" ng-hide="showme">By 
+                    <span class="btn btn-default form-control" ng-click="showme=true" ng-hide="showme">By
                   <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
                     <input type="type" placeholder="By" ng-model="searchFilter" ng-show="showme" class="form-control input-tab avenir-roman">
                     <div class="check-box-panel" ng-show="showme">
@@ -108,7 +108,7 @@
       <div class="plr30">
         <div class="" masonry>
           <div class="row">
-            <div class="col-md-4 masonry-brick" ng-repeat="post in activityPost">
+            <div class="col-md-4 col-sm-6 col-xs-12 masonry-brick" ng-repeat="post in activityPost">
               <!-- activity-post -->
               <div class="activity-post {{post.class}}" ng-if="post.activitySec">
                 <div class="activity-post-main">

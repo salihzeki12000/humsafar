@@ -1,13 +1,15 @@
 @media screen and (max-width: 1200px) {
   //agent home page
-  .agent-home-nav{
-    .col-md-10{
+  .agent-home-nav {
+    .col-md-10 {
       overflow: auto;
-      ul{
+
+      ul {
         width: 928px;
       }
     }
   }
+
   .agthome-itinerary-youtube,
   .agthome-tourpackage-youtube,
   .youtube-placeholder {
@@ -67,6 +69,23 @@
     border-radius: 22px;
   }
   // agent setting page end
+  //destination city page
+  .hotels .hotel-card .tag-made span {
+    margin-bottom: 10px;
+  }
+  .destination-nav{
+    .col-md-8{
+      overflow: scroll;
+      overflow-y: hidden;
+      ul{
+        width: 730px;
+      }
+    }
+  }
+  .destination-nav::-webkit-scrollbar {
+    display: none;
+  }
+  //destination city page end
 }
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
@@ -153,6 +172,14 @@
     display: none;
   }
   // agent setting page end
+  // destination city page
+  .destination-nav{
+    padding-bottom: 10px;
+  }
+  .addfixed .destin-fixednav1 {
+    top: 155px;
+}
+  // destination city page end
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -192,12 +219,15 @@
   .agt-title-card {
     width: 100%;
   }
-  .agent-user-nav{
-    .col-md-8{
+
+  .agent-user-nav {
+    .col-md-8 {
       overflow: scroll;
-      ul{
+
+      ul {
         width: 768px;
-        li{
+
+        li {
           padding-bottom: 5px;
         }
       }
@@ -255,6 +285,70 @@
     margin: 0;
   }
   // agent setting page end
+  // Booking page
+  .booking-bg {
+    .text-cont {
+      top: 10%;
+      @include transform (translateX(-50%));
+      h3{
+        font-size: 36px;
+      }
+    }
+  }
+  .menu-booking ul li a {
+    font-size: 16px;
+    padding: 3% 15px;
+    display: block;
+    border-bottom: 1px solid #cecece;
+}
+
+  .booking-bg .menu-contact {
+    left: 0;
+  }
+
+  .booking-bg .menu-contact ul li img {
+    margin: 5px 0;
+  }
+  // Booking page end
+  //destination country
+  .country-title{
+      top: 10%;
+      @include transform (translateX(-50%));
+    }
+  .destination .list-horizontal {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    height: auto;
+    width: 100%;
+    @include transition (translateY(-50%));
+}
+.destination .country-title h4 {
+    font-size: 30px;
+  }
+  .destination-content .img-holder .title-head-left {
+    font-size: 20px;
+  }
+  .destination-content .img-holder .left-bottom ul li {
+    font-size: 14px;
+}
+.destination-content .head-title-all h4{
+  font-size: 20px;
+}
+.destination .list-horizontal ul{
+      padding: 20px 0;
+  // @extend .list-inline;
+}
+.destination .list-horizontal ul li {
+    height: auto;
+    padding: 10px 0;
+    display: inline-block;
+}
+.destination .mouse-scrolldown{
+  display: none;
+}
+
+  //destination country end
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -312,11 +406,13 @@
     padding: 0;
   }
 
-  .agt-home-aboutus  , .agt-usr-aboutus{
-    .row-flex{
+  .agt-home-aboutus,
+  .agt-usr-aboutus {
+    .row-flex {
       flex-wrap: wrap;
     }
-    .col-flex{
+
+    .col-flex {
       flex: 0 0 100%;
     }
   }
@@ -364,5 +460,26 @@
     margin: 10px;
   }
   // agent setting page end
+  //Destination city page
+  .journey-travelling-type {
+    .pull-right {
+      margin-top: 20px;
+    }
+  }
+  //Destination city page end
+  //Destination country page
+  .destination-content-box{
+    .container-fluid{
+      padding: 0;
+      .row{
+        margin: 0;
+      }
+    }
+  }
+
+  .destination-featured{
+    padding: 0;
+  }
+  //Destination country page end
 }
 // media query for 480px to 320px end

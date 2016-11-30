@@ -223,6 +223,9 @@ a.color-white {
       @include transform(translateY(0));
     }
   }
+  .slide-cont-dest::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .alphabhates {
@@ -776,6 +779,7 @@ a.color-white {
       border: 1px solid #ff6759;
       padding: 5px 8px;
       margin-right: 10px;
+      margin-right: 10px;
       font-size: 12px;
       line-height: 100%;
       border-radius: 5px;
@@ -1188,7 +1192,7 @@ a.color-white {
   }
   .destin-fixednav1 {
     position: fixed;
-    top: 80px;
+    top: 122px;
     z-index: 4;
     width: 100%;
   }
@@ -1212,6 +1216,9 @@ a.color-white {
   }
   .destination-content .img-holder.card .back .flipped-cont {
     overflow: scroll;
+  }
+  .destination-content .img-holder.card .back .flipped-cont::-webkit-scrollbar {
+    display: none;
   }
 }
 
