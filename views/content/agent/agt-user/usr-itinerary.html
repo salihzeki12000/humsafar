@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-4 col-sm-6" ng-repeat = "usritinerary in usrItineraryCard track by $index">
         <div class="agt-itinerarycard">
-          <div class="itinerary-cardhead">
+          <div class="itinerary-cardhead avenir-roman">
             <p class="m-clear"><i class="fa fa-calendar"></i><span class="ml5 ">{{usritinerary.timestampDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span>{{usritinerary.timestampHour}}</span></p>
           </div>
           <div class="itinerary-img">
@@ -18,7 +18,7 @@
             <img ng-src="{{usritinerary.tripImg}}" alt="" class="img-responsive">
             <div class="itinerary-imgfoot ">
               <div class="imgfoot-top">
-                <p>{{usritinerary.itineraryTitle}}</p>
+                <h4>{{usritinerary.itineraryTitle}}</h4>
               </div>
               <div class="imgfoot-bottom clearfix">
                 <div class="pull-left">

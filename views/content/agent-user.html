@@ -16,19 +16,23 @@
   <!-- agent-user-fixednav -->
   <div class="agent-user-nav">
     <div class="container-fluid">
-      <div class="col-md-8 col-sm-8">
-        <ul class="list-inline">
-          <li ng-click="getTab(0)" ng-class="{'active': agtuseroptions.active=='usr-itinerary'}">Itineraries </li>
-          <li ng-click="getTab(1)" ng-class="{'active': agtuseroptions.active=='usr-tourpackages'}">Tours &amp; Packages</li>
-          <li ng-click="getTab(2)" ng-class="{'active': agtuseroptions.active=='usr-photovideos'}"> Photos &amp; Videos</li>
-          <li ng-click="getTab(3)" ng-class="{'active': agtuseroptions.active=='usr-testimonialreviews'}">Testimonials &amp; Reviews</li>
-        </ul>
-      </div>
-      <div class="col-md-4 col-sm-4">
-        <ul class="list-inline pull-right">
-          <li ng-click="getTab(4)" ng-class="{'active': agtuseroptions.active=='usr-aboutus'}">About Us</li>
-          <li ng-click="getTab(4)" ng-class="{'active': agtuseroptions.active=='usr-aboutus'}">Speciality</li>
-        </ul>
+      <div class="row">
+        <div class="col-md-8 col-sm-8">
+          <div class="agent-scroll">
+            <ul class="list-inline">
+              <li ng-click="getTab(0)" ng-class="{'active': agtuseroptions.active=='usr-itinerary'}">Itineraries </li>
+              <li ng-click="getTab(1)" ng-class="{'active': agtuseroptions.active=='usr-tourpackages'}">Tours &amp; Packages</li>
+              <li ng-click="getTab(2)" ng-class="{'active': agtuseroptions.active=='usr-photovideos'}"> Photos &amp; Videos</li>
+              <li ng-click="getTab(3)" ng-class="{'active': agtuseroptions.active=='usr-testimonialreviews'}">Testimonials &amp; Reviews</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+          <ul class="list-inline pull-right  mob-left">
+            <li ng-click="getTab(4)" ng-class="{'active': agtuseroptions.active=='usr-aboutus'}">About Us</li>
+            <li ng-click="getTab(4)" ng-class="{'active': agtuseroptions.active=='usr-aboutus'}">Speciality</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
