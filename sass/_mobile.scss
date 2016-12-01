@@ -217,6 +217,11 @@
   }
   .following-container { width: 50%; }
   // profile list end
+  // popular agent
+  .popular-agent-sec {
+    .country-title h4 { font-size: 40px; }
+  }
+  // popular agent end
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -570,6 +575,15 @@
 }
 .following-container { width: 100%; }
 // profile list end
+.popular-agent-sec {
+  .country-title {
+    width: 100%;
+    top: 50%;
+    @include transform(translate(-50%,-50%));
+    text-align: center;
+    h4 { font-size: 30px; }
+  }
+}
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -928,5 +942,8 @@
   .profile-tab-main { padding: 60px 0px 0; }
   .following-holder { margin: 0; }
   // profile list end
+  // popular agent
+  .popular-agent-sec .country-title h4 { font-size: 22px; }
+  // popular agent end
 }
 // media query for 480px to 320px end
