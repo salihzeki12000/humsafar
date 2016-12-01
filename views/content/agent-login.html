@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-        <div class="bg-agent">
+        <div class="bg-agent avenir-roman">
 
           <!-- VERIFICATION CODE START -->
           <div class="agt-verification-code" ng-if="agentloginView==1">
@@ -195,7 +195,7 @@
           <!-- ABOUT AGENT END -->
 
 
-          <!-- CATEGORY START 1-->
+          <!-- CATEGORY START 1 : Category Of Specialization-->
           <div class="agent-category" ng-if="agentloginView==7" >
             <!-- category page1 -->
             <div class="cat-special" >
@@ -243,7 +243,7 @@
           </div>
           <!-- CATEGORY END 1-->
 
-          <!-- CATEGORY START 2-->
+          <!-- CATEGORY START 2 : Countries Of Specialization-->
           <div class="agent-category" ng-if="agentloginView==8" >
             <!-- category page2 -->
             <div class="cat-special" >
@@ -272,7 +272,7 @@
                           </div>
                         </uib-accordion-heading>
                         <div class="country-tabs">
-                          <button ng-repeat="country in agtcregion.countryName track by $index" class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">{{country}}</button>
+                          <button ng-repeat="country in agtcregion.countryName track by $index" class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5 flex-auto">{{country}}</button>
                         </div>
                       </uib-accordion-group>
                     </uib-accordion>
@@ -292,7 +292,7 @@
           </div>
           <!-- CATEGORY END 2-->
 
-          <!-- CATEGORY START 3-->
+          <!-- CATEGORY START 3 : Services-->
           <div class="agent-category" ng-if="agentloginView==9" >
             <!-- category page3 -->
             <div class="agt-services">
@@ -322,14 +322,13 @@
                 <div class="button-panel loginbtn-panel clearfix">
                   <button class="btn btn-blue-outline btn-more pull-left" ng-click="agentSec(8)">Previous</button>
 
-                  <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)">Done</button>
+                  <button class="btn btn-blue-outline btn-more pull-right" ng-click="uploadFile();saveUserData(userData)" ui-sref="agent-home">Done</button>
                 </div>
               </div>
             </div>
             <!-- category page3 end -->
           </div>
           <!-- CATEGORY END 3-->
-
 
         </div>
       </div>

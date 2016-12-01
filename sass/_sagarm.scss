@@ -224,6 +224,9 @@
   .country-tabs {
     max-height: 250px;
     overflow-y: auto;
+    text-align: justify;
+    display: flex;
+    flex-wrap: wrap;
   }
 }
 // scroll style start
@@ -294,6 +297,7 @@
   // bottom: 0;
   // width: 100%;
   ul {
+    @extend .avenir-roman;
     li {
       line-height: 150%;
       color: #fff;
@@ -545,6 +549,7 @@
 .agt-usr-tourpackages {
   margin-bottom: 0;
   padding: 40px 0;
+  @extend .avenir-roman;
 }
 
 .agt-home-aboutus,
@@ -569,6 +574,12 @@
   border-radius: 4px;
   margin: 30px 0;
 }
+
+.agt-home-itineraryintro, .agt-home-tourpackageintro, .agt-home-photovideointro,
+.agt-home-testimonialreiewsintro {
+  @extend .avenir-roman;
+}
+
 
 .rt-foot-marg {
   margin-bottom: -30px;
@@ -1279,7 +1290,7 @@ q {
   }
 
   .agtprofile-detail {
-    margin: 12px;
+    margin:20px 15px;
   }
 
   i {
@@ -1354,15 +1365,23 @@ q {
 }
 
 .categoryspcl-imgholder {
-  min-height: 60px;
-  padding: 10px 0;
+  min-height: 55px;
+  padding: 15px 0;
   background: url("../img/agt-bg-blue.png") no-repeat 50% 0;
   cursor: pointer;
   background-size: contain;
   @include transition(background 300ms linear);
 
   img {
-    height: 30px;
+    // height: 30px;
+  }
+}
+
+.agtcountry-setting{
+  .country-tabs{
+    text-align: justify;
+    display: flex;
+    flex-wrap: wrap;
   }
 }
 
@@ -1474,14 +1493,15 @@ q {
     border-radius: 50%;
   }
 }
-
 .enquiry-sidetab {
-  width: 600px;
-  height: 500px;
-  position: absolute;
-  top: 30px;
-  right: -600px;
-  z-index: 3;
+  width: 100%;
+  height: auto;
+  // width: 600px;
+  // height: 500px;
+  // position: absolute;
+  // top: 30px;
+  // right: -600px;
+  // z-index: 3;
   background-color: #fff;
   padding: 20px 30px;
   @include transition(all 300ms linear);
@@ -1602,12 +1622,12 @@ q {
   }
 }
 
-.side-enquiry {
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 4;
-}
+// .side-enquiry {
+//   position: absolute;
+//   right: 0;
+//   top: 0;
+//   z-index: 4;
+// }
 
 .backdrop-enquiry:after {
   content: "";

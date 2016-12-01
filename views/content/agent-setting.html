@@ -13,7 +13,6 @@
                 </div>
                 <div class="agtprofile-detail inline-block v-top">
                   <h4 class="color-blue m-clear">Amit Duxctronn</h4>
-                  <span class="color-blue">16 Jan 1988</span>
                 </div>
               </div>
               <ul>
@@ -282,7 +281,7 @@
                       <div class="select-categoryspcl">
                         <figure>
                           <div class="categoryspcl-imgholder">
-                            <img ng-src="{{categgoryspcl.img}}" alt="" class="img-responsive m-center">
+                            <img ng-src="{{categgoryspcl.img}}" alt="" class="img-responsive m-center" width="{{categgoryspcl.catWidth}}">
                           </div>
                           <figcaption class="color-blue font-bold">{{categgoryspcl.caption}}</figcaption>
                         </figure>
@@ -303,7 +302,7 @@
                           </div>
                         </uib-accordion-heading>
                         <div class="country-tabs">
-                          <button ng-repeat="settCountry in agtsetnRegion.settcountryName track by $index"  class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5">{{settCountry}}</button>
+                          <button ng-repeat="settCountry in agtsetnRegion.settcountryName track by $index"  class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5 flex-auto">{{settCountry}}</button>
                         </div>
                       </uib-accordion-group>
                     </uib-accordion>
@@ -402,7 +401,7 @@
                         <p class="avenir-medium">for 3 Months</p>
                         <a class="font-sz10 color-grey bord-bot">Details</a>
                         <div class="text-center mt10 mb10">
-                          <button class="btn btn-cyan btn-more">Upgrade</button>
+                          <button class="btn btn-cyan btn-more" ui-sref="agent-upgrade">Upgrade</button>
                         </div>
                       </div>
                     </div>
@@ -416,7 +415,7 @@
                         <p class="avenir-medium">for 3 Months</p>
                         <a class="font-sz10 color-grey bord-bot">Details</a>
                         <div class="text-center mt10 mb10">
-                          <button class="btn btn-cyan btn-more">Upgrade</button>
+                          <button class="btn btn-cyan btn-more" ui-sref="agent-upgrade">Upgrade</button>
                         </div>
                       </div>
                     </div>

@@ -9,7 +9,7 @@
       }
 
       ul {
-        width: 830px;
+        width: 840px;
         margin: 0;
       }
     }
@@ -18,6 +18,7 @@
       display: none;
     }
   }
+
   .agtsetting-menu-tab {
     padding: 0;
   }
@@ -67,6 +68,15 @@
   //destination city page
   .hotels .hotel-card .tag-made span {
     margin-bottom: 10px;
+  }
+
+  .destination-scroll {
+    overflow: scroll;
+    overflow-y: hidden;
+
+    ul {
+      width: 667px;
+    }
   }
 
   .destination-scroll::-webkit-scrollbar {
@@ -119,9 +129,16 @@
     margin: 20px 0;
   }
 
+  .agthome-itinerary-youtube,
+  .agthome-tourpackage-youtube,
+  .youtube-placeholder {
+    margin-top: 10px;
+  }
+
   .agent-home-nav {
     .agent-scroll {
       overflow: auto;
+
       ul {
         width: 740px;
       }
@@ -171,6 +188,10 @@
 @media screen and (max-width: 767px) {
   .mob-left {
     float: left !important;
+  }
+
+  .mob-ml5{
+    margin-left: 5px;
   }
   // agent upgrade page
   .package-img {
@@ -334,11 +355,9 @@
     display: inline-block;
   }
 
-  .destination .destination-nav {
-    .destination-scroll {
-      ul {
-        width: 488px;
-      }
+  .destination-scroll {
+    ul {
+      width: 488px;
     }
   }
 
@@ -346,14 +365,15 @@
     display: none;
   }
 
-.destination-content .head-title-all{
-  h4{
-    font-size: 16px;
+  .destination-content .head-title-all {
+    h4 {
+      font-size: 16px;
+    }
+
+    p {
+      font-size: 12px;
+    }
   }
-  p{
-    font-size: 12px;
-  }
-}
   //destination country end
 }
 // media query for 767px to 480px end
@@ -386,13 +406,18 @@
   .agthome-tourpackage-youtube,
   .youtube-placeholder {
     height: 170px;
-    margin-top: 10px;
   }
-  .agt-home-itineraryintro , .agt-home-tourpackageintro , .agt-home-photovideointro , .agt-home-testimonialreiewsintro , .agt-home-leadmonitorintro{
-    h3{
+
+  .agt-home-itineraryintro,
+  .agt-home-leadmonitorintro,
+  .agt-home-photovideointro,
+  .agt-home-testimonialreiewsintro,
+  .agt-home-tourpackageintro {
+    h3 {
       font-size: 20px;
     }
-    p{
+
+    p {
       font-size: 14px;
     }
   }
@@ -430,8 +455,11 @@
     width: 100px;
     padding: 10px 0;
   }
-  .enquiry-sidetab{
-    h4{ font-size: 15px;}
+
+  .enquiry-sidetab {
+    h4 {
+      font-size: 15px;
+    }
   }
   //agent home page end
   // agent setting page

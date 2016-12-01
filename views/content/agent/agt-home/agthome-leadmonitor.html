@@ -9,6 +9,50 @@
           <p>The Lead Monitor shows you the most recent enquiries and keeps a record of the old ones. get in touch with these potetial clients and convert leads to real business!</p>
         </div>
       </div>
+
+      <div class="row">
+
+                <!-- Enquiry side tab -->
+                <div class="side-enquiry">
+                  <div class="enquiry-sidetab">
+                     <!-- ng-show="showEnquiry" ng-class="{'view-enquiry-list' : showEnquiry ,  ' ' : !showEnquiry}" -->
+                    <div class="enquirytab-head">
+                      <h4 class="avenir-roman color-blue">Enquires</h4>
+                    </div>
+                    <div class="enquirytab-accordionbox">
+                      <uib-accordion close-others="oneAtATime">
+                        <uib-accordion-group ng-repeat="agtenquiry in enquiryAgent track by $index" is-open="status.open">
+                          <uib-accordion-heading>
+                            <div class="enquires-tab-title color-blue avenir-medium clearfix">
+                              <div class="enquiretab-profileholder  pull-left">
+                                <img ng-src="{{agtenquiry.enquireimgProfile}}" alt="" class="img-responsive">
+                              </div>
+                              <div class="enquiretab-title">
+                                <p class="color-pink avenir-heavy">{{agtenquiry.profileName}}</p>
+                              </div>
+                              <div class="enquiretab-msgdiv" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
+                                <p class="enquiretab-msg">{{agtenquiry.enquirymsghead}}</p>
+                              </div>
+                              <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open, 'fa fa-chevron-down': !status.open}"></i>
+                            </div>
+                          </uib-accordion-heading>
+                          <div class="enquirestab-mail">
+                            <p ng-bind-html="agtenquiry.enquirymsg"></p>
+                            <div class="btn-replyenquiry">
+                              <button type="button" class="btn btn-pink"><i class="fa fa-share" aria-hidden="true"></i> Reply </button>
+                            </div>
+                          </div>
+                        </uib-accordion-group>
+                      </uib-accordion>
+                    </div>
+                  </div>
+                  <!-- <div class="enquirytab-btn" ng-click="showEnquiry = !showEnquiry">
+                    <a class="btn-transparent-dark-blue btn" ng-class="{'hide' : showEnquiry}">Your Enquires</a>
+                    <a class="btn-dark-blue btn" ng-class="{'hide': !showEnquiry}"><i class="fa fa-chevron-down mr5"></i> Close</a>
+                  </div> -->
+                </div>
+                <!-- Enquiry side tab enD-->
+      </div>
     </div>
   </div>
 </div>
