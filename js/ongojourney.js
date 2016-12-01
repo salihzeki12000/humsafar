@@ -710,7 +710,7 @@ ongojourney.filter('formatTimeCalender', function () {
 
 ongojourney.filter('formatDate', function () {
   return function (input, type) {
-
+ 
     if (type == 'date') {
       var returnVal = moment(input).format('D MMM,YYYY');
     } else if (type == 'time') {
