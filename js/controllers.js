@@ -443,7 +443,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.saveUserData = function (userData) {
-      console.log(userData.profilePicture);
+      var str=userData.homeCity;
+      var arr=str.split(",");
+      userData.homeCity=arr[0];
       $state.go('holiday');
       NavigationService.saveUserData(userData, saveDataCallback, function (err) {
         console.log(err);
@@ -746,6 +748,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     $scope.saveUserData = function (userData) {
+      console.log(userData);
       NavigationService.saveUserData(userData, saveDataCallback, function (err) {
         console.log(err);
       });
@@ -848,16 +851,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       postsWithLatLng = _.filter($scope.journey.post,  'latlong');
 
       _.each(postsWithLatLng, function (n, $index) {
-        centers[$index] = {
+        
+        if(n && n.latlong && n.latlong.lat && n.latlong.long){
+           centers[$index] = {
           "lat": parseFloat(n.latlong.lat),
           "lng": parseFloat(n.latlong.long)
         };
+        }else{
+          alert("no latlong found");
+        }
+       
       });
-      var obj = {
+
+      if(journeys && journeys.location && journeys.location.lat){
+         var obj = {
         "lat": parseFloat(journeys.location.lat),
         "lng": parseFloat(journeys.location.long)
       }
       centers.unshift(obj);
+      }else{
+        alert("Location of Banner not found");
+      }
+     
       // center = {
       //     "lat": centers[0].lat,
       //     "lng": centers[0].lng
@@ -3338,7 +3353,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             return;
           }
         });
-
+ 
       });
       $timeout(function () {
         $scope.data = otherData;
@@ -8172,10 +8187,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   //country of Specialisation accordion end
 
   //Services
-  $scope.agtServicesSpcl = [
-    'Flights', 'Cruise', 'MICE', 'Personal', 'Business Travel', 'Car Rentals', 'Visas', 'Fully Independent Traveller', 'Accomodation', 'Travel Insurance', 'Sports & Events', 'Tours And Packages', 'Forex', 'Holidays', 'Festival & Concerts', 'Transportation'
-  ];
-  //Services end
+ $scope.agtServicesSpcl = [
+    'Tours And Packages','Day Tours','Outdoors & Excursions','Flights', 'Cruise', 'MICE', 'Personal', 'Business Travel', 'Car Rentals', 'Visas', 'Fully Independent Traveller', 'Accomodation', 'Travel Insurance', 'Sports & Events', 'Forex', 'Holidays', 'Festival & Concerts', 'Transportation'
+ ];
+ //Services end
 })
 
 .controller('AgentsettingCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -8360,7 +8375,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     premValue: '<i class="fa fa-check"></i>',
     upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentiumreprehenderit cupiditate"
   }, {
-    upgradeFeature: "Analyse Views &amp; Downloads",
+    upgradeFeature: "Analyse Views & Downloads",
     basicValue: '<i class="fa fa-minus"></i>',
     advValue: '<i class="fa fa-minus"></i>',
     premValue: '<i class="fa fa-check"></i>',

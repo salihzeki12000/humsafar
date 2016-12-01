@@ -1,5 +1,5 @@
 <!--{{ongo.class}}--Add this as class if any problem comes in in velow div-->
-<div id="{{ongo._id}}" class="ongo-journey-card" ng-if="ongo.type=='travel-life'" ng-class="{'hasLatLng':ongo.latlong}">
+<div id="{{ongo._id}}" class="ongo-journey-card" ng-if="ongo.type=='travel-life'" ng-class="{'hasLatLng':ongo.latlong && ongo.latlong.lat}">
   <!-- card header -->
   <div class="ongo-card-header">
     <div class="clearfix">
