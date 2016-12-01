@@ -6582,7 +6582,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var countriesCallback = function (data) {
       countries = data.data;
-      $scope.countries.push(countries);
+      $scope.countries=data.data;
+      console.log($scope.countries);
+
     };
 
     NavigationService.getAllCountries(countriesCallback, function () {
@@ -6684,12 +6686,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
         console.log($scope.qItinerary.countryVisited);
       } else if (val == "country") {
+        console.log($scope.countries);
         $scope.addCountry.push({});
         $scope.addCity.push({"cities":[{}]});
-      
-        $scope.countries.push(countries);
+        // $scope.countries.push(countries);
         console.log($scope.countries);
-        console.log($scope.addCity);
+        
       }
     };
 
@@ -8125,6 +8127,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   });
 
   //about textarea counter end
+  $scope.agentloginView = 1;
+ $scope.agentSec = function(val){
+   if(val == 1) {
+     $scope.agentloginView = 1;
+   }else if (val == 2) {
+     $scope.agentloginView = 2;
+     console.log(2);
+   }else if (val == 3) {
+     $scope.agentloginView = 3;
+   }else if (val == 4) {
+     $scope.agentloginView = 4;
+   }else if (val == 5) {
+     $scope.agentloginView = 5;
+   }else if (val == 6) {
+     $scope.agentloginView = 6;
+   }else if (val == 7) {
+     $scope.agentloginView = 7;
+   }else if (val == 8) {
+     $scope.agentloginView = 8;
+   }else if (val == 9) {
+     $scope.agentloginView = 9;
+   }else {
+     $scope.agentloginView = 1;
+   }
+ }
   // category of Specialisation array
   $scope.categoriesSpecial = [{
     agtcatImg: "img/agt-cat1.png",
@@ -8902,45 +8929,68 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     default:
       $scope.agthome.innerView = allagthome[0];
   }
-  $scope.getTab = function (view) {
-    $scope.agthome.innerView = allagthome[view];
-    var url = "agthome-itinerary";
-    var active = "";
-    console.log(view);
-    switch (view) {
-      case 0:
-        url = "agthome-itinerary";
-        $scope.agthomeoptions.active = "agthome-itinerary";
-        break;
-      case 1:
-        url = "agthome-tourpackages";
-        $scope.agthomeoptions.active = "agthome-tourpackages";
-        break;
-      case 2:
-        url = "agthome-photovideos";
-        $scope.agthomeoptions.active = "agthome-photovideos";;
-        break;
-      case 3:
-        url = "agthome-testimonialreviews";
-        $scope.agthomeoptions.active = "agthome-testimonialreviews";
-        break;
-      case 4:
-        url = "agthome-travelactivity";
-        $scope.agthomeoptions.active = "agthome-travelactivity";
-        break;
-      case 5:
-        url = "agthome-leadmonitor";
-        $scope.agthomeoptions.active = "agthome-leadmonitor";
-        break;
-      case 6:
-        url = "agthome-analytics";
-        $scope.agthomeoptions.active = "agthome-analytics";
-        break;
-      case 7:
-        url = "agthome-aboutus";
-        $scope.agthomeoptions.active = "agthome-aboutus";
-        break;
-    }
+$scope.agenthomeItinerary = true;
+ $scope.agentFixednav = ""
+ $scope.getTab = function (view) {
+   $scope.agthome.innerView = allagthome[view];
+   var url = "agthome-itinerary";
+   var active = "";
+   console.log(view);
+   switch (view) {
+     case 0:
+       url = "agthome-itinerary";
+       $scope.agthomeoptions.active = "agthome-itinerary";
+       $scope.agenthomeItinerary = true;
+       $scope.agentFixednav = "";
+       break;
+     case 1:
+       url = "agthome-tourpackages";
+       $scope.agthomeoptions.active = "agthome-tourpackages";
+       $scope.agenthomeItinerary = false;
+       $scope.agentFixednav = "change";
+       break;
+     case 2:
+       url = "agthome-photovideos";
+       $scope.agthomeoptions.active = "agthome-photovideos";
+       $scope.agenthomeItinerary = false;
+       $scope.agentFixednav = "change";
+       break;
+     case 3:
+       url = "agthome-testimonialreviews";
+       $scope.agthomeoptions.active = "agthome-testimonialreviews";
+       $scope.agenthomeItinerary = false;
+       $scope.agentFixednav = "change";
+       break;
+     case 4:
+       url = "agthome-travelactivity";
+       $scope.agthomeoptions.active = "agthome-travelactivity";
+       $scope.agenthomeItinerary = false;
+       $scope.agentFixednav = "change";
+       break;
+     case 5:
+       url = "agthome-leadmonitor";
+       $scope.agthomeoptions.active = "agthome-leadmonitor";
+       $scope.agenthomeItinerary = false;
+       $scope.agentFixednav = "change";
+       break;
+     case 6:
+       url = "agthome-analytics";
+       $scope.agthomeoptions.active = "agthome-analytics";
+       $scope.agenthomeItinerary = false;
+       $scope.agentFixednav = "change";
+       break;
+     case 7:
+       url = "agthome-aboutus";
+       $scope.agthomeoptions.active = "agthome-aboutus";
+       $scope.agenthomeItinerary = false;
+       $scope.agentFixednav = "change";
+       break;
+
+     default :
+       url = "agthome-itinerary";
+       $scope.agthomeoptions.active = "agthome-itinerary";
+       $scope.agenthomeItinerary = true;
+   }
     console.log(url);
     $state.go("agent-home", {
       name: url

@@ -76,42 +76,18 @@
               <!--{{qItinerary.countryVisited}}-->
               <!-- itinerary type end -->
               <!-- country and city visited -->
-              <div class="itinerary-country-visited" ng-init="countrySelectedFlag=true">
+              {{qItinerary.countryVisited[countryPanel]}}
+              
+              <div class="itinerary-country-visited" ng-init="countrySelectedFlag=true">{{countries}}
                 <div class="row" ng-repeat="add in addCountry track by $index" ng-init="countryPanel=$index">
-
-                  <!-- old drop down for country  -->
-                  <div class="col-md-6 hide">
-                    <div class="itinerary-inputholder relate">
-                      <input type="text" class="form-control" placeholder="Country You Visited" ng-model="searchNation[countryPanel]" ng-change="showCountries[countryPanel]=true" ng-click="showCountries[countryPanel]=!showCountries[countryPanel];">
-                      <span class="itinerary-dropdown-icon" ng-click="removeStayed('country',countryPanel)">
-                        <i class="fa" ng-class="$index>0 ? 'fa-times o' : 'fa-chevron-up'"></i>
-                      </span>
-                      <!--temporary ui for checkbox starts-->
-                      <ul class="avenir-roman bg-dark-blue" ng-show="showCountries[countryPanel]"><span class="color-white">
-                        <li ng-repeat="nation in countries[countryPanel] | filter:searchNation[countryPanel]">
-                          <div class="nation-select relate">
-                            <input type="radio" id="{{nation._id}}" name="nation" ng-model="qItinerary.countryVisited[countryPanel].country" ng-value="nation._id" ng-click="updateCountryPanel(countryPanel,nation.name);">
-                            <label for="{{nation._id}}">
-                              <!--<img ng-src="{{nation.flag|uploadpath}}" alt="" class="img-responsive inline-block mr10" width="30px">-->
-                              <span class="color-white">{{nation.name}}</span>
-                          </label>
-                          </div>
-                        </li>
-                      </ul>
-                      <!--temporary ui for checkbox ends-->
-                    </div>
-                    <div class="add-country clearfix" ng-if="countryPanel+1==addCountry.length">
-                      <button class="btn btn-pink pull-left" ng-click="addPanel('country',$index)" >Add Country</button>
-                      <span class="color-dark-blue pull-right mt5">If you have visited any other country on the same trip</span>
-                    </div>
-                  </div>
-                  <!-- old drop down for country end  -->
                   <!-- new ui select dropdown country -->
                   <div class="col-md-6">
                     <div class="itinerary-inputholder">
-                      <ui-select  ng-model="qItinerary.countryVisited[countryPanel].country" theme="bootstrap">
+
+                      <!--<ui-select  ng-model="qItinerary.countryVisited[countryPanel].country" theme="bootstrap">{{qItinerary.countryVisited[countryPanel].country}}-->
+                      <ui-select  ng-model="qItinerary.countryVisited[countryPanel].country" theme="bootstrap">                        
                         <ui-select-match placeholder="Add Country">{{$select.selected.name}}</ui-select-match>
-                        <ui-select-choices repeat="nation in countries[countryPanel] | filter:searchNation[countryPanel]">
+                        <ui-select-choices repeat="nation in countries>
                           <span ng-bind="nation.name"></span>
                         </ui-select-choices>
                       </ui-select>
@@ -122,34 +98,7 @@
                     </div>
                   </div>
                   <!-- new ui select dropdown country end-->
-                  <!-- old dropdown city -->
-                  <div class="col-md-6 hide">
-                    <div class="itinerary-inputholder {{addClass}}" id="panel_$index" ng-repeat="add in addCity[countryPanel].cities track by $index" ng-init="cityPanel=$index">
-                      <input type="text" class="form-control" placeholder="City You Visited" ng-model="qItinerary.countryVisited[countryPanel].cityVisited[cityPanel].search" ng-change="searchCity(qItinerary.countryVisited[countryPanel],countryPanel,cityPanel);showCities[cityPanel]=true;" ng-disabled="!countrySelectedFlag" ng-click="showCities[cityPanel]=!showCities[cityPanel];">
-                      <span class="itinerary-dropdown-icon" ng-click="removeStayed('city',countryPanel,cityPanel)">
-                        <i class="fa" ng-click="showCities=!showCities;" ng-class="$index>0 ? 'fa-times o' : 'fa-chevron-up'"></i>
-                      </span>
-                        <!--temporary ui for checkbox starts-->
-                       <ul class="avenir-roman bg-dark-blue" ng-show="showCities[cityPanel]">
-                        <li ng-repeat="city in addCity[countryPanel].cities[cityPanel]">
-                          <div class="nation-select relate">
-                            <input type="checkbox" id="{{city._id}}" name="nation" ng-model="city.flag" ng-click="addCityInList(city._id,city.flag,city.name,countryPanel,cityPanel);">
-                            <label for="{{city._id}}">
-                              <!--<img ng-src="{{nation.flag|uploadpath}}" alt="" class="img-responsive inline-block mr10" width="30px">-->
-                              <span class="color-white">{{city.name}}</span>
-                          </label>
-                          </div>
-                        </li>
-                      </ul>
-                      <!--temporary ui for checkbox ends-->
-                    </div>
-                    <div class="add-country clearfix">
-                      <!--<button class="btn btn-pink pull-left" ng-click="addCountryVisited(qItinerary.countryVisited)">Add City</button>-->
-                      <button class="btn btn-pink pull-left" ng-click="addPanel('city',countryPanel)">Add City</button>
-                      <span class="color-dark-blue pull-right mt5">If you have visited any other cities on the same trip</span>
-                    </div>
-                  </div>
-                  <!-- old dropdown city end-->
+                 
                   <!-- new ui select dropdown for city -->
                   <div class="col-md-6">
                     <div class="itinerary-inputholder">
@@ -159,10 +108,7 @@
                           <span>{{nation.name}}</span>
                         </ui-select-choices>
                       </ui-select>
-                      <div class="add-country clearfix">    
-                        <button class="btn btn-pink pull-left" ng-click="addPanel('city',countryPanel)">Add City</button>
-                        <span class="color-dark-blue pull-right mt5">If you have visited any other cities on the same trip</span>
-                      </div>
+                      
                     </div>
                   </div>
                   <!-- new ui select dropdown for city end-->
