@@ -1,6 +1,6 @@
-<div class="agent-home relate mt-80" scrolladd1class ng-init="showEnquiry = false;" ng-class="{'backdrop-enquiry' : showEnquiry, '' : !showEnquiry}">
+<div class="agent-home relate" scrolladd1class ng-init="showEnquiry = false;" ng-class="{'backdrop-enquiry' : showEnquiry, '' : !showEnquiry}">
   <div scrolldown>
-    <div class="img-holder-agent bg-agent-home-img">
+    <div class="img-holder-agent bg-agent-home-img" ng-if="agenthomeItinerary">
       <div class="agt-card-posi">
         <div class="agt-title-card get-center">
           <div class="circ-agtimg">
@@ -14,7 +14,7 @@
     </div>
   </div>
   <!-- agent-user-fixednav -->
-  <div class="agent-home-nav">
+  <div class="agent-home-nav {{agentFixednav}}">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-9 col-sm-9">
