@@ -18,12 +18,12 @@
                       <div class="itinerary-month relate">
                         <label for="month">Month</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control text-center" id="month" ng-model="qItinerary.month" ng-click="viewMonths = !viewMonths"
-                            ng-change="viewMonths=true">
+                          <input type="text" class="form-control text-center" id="month" ng-model="qItinerary.month" ng-click="viewMonths.a = !viewMonths.a"
+                            >
                         </div>
-                        <div class="month-dropdown" ng-show="viewMonths">
+                        <div class="month-dropdown" ng-show="viewMonths.a">
                           <ul>
-                            <li ng-repeat="month in monthDrop | filter:qItinerary.month"><a href="" title="{{month}}" ng-click="qItinerary.month=month">{{month}}</a></li>
+                            <li ng-repeat="month in monthDrop | filter:qItinerary.month"><a href="" title="{{month}}" ng-click="qItinerary.month=month;viewMonths.a=false">{{month}}</a></li>
                             <!-- <li><a href="" title="February">February</a></li>
                             <li><a href="" title="March">March</a></li>
                             <li><a href="" title="April">April</a></li>
@@ -157,7 +157,8 @@
                       <span class="block color-grey avenir-roman">- or -</span>
                       <div class="upload-btn">
                         <div class="inline-block">
-                          <button class="btn btn-dark-blue pointer avenir-light">Select a photo from your computer</button>
+                          <!--<button class="btn btn-dark-blue pointer avenir-light">Select a photo from your computer</button>-->
+                           <upload-image ng-model="formData.photo" ng-callback="callback"></upload-image>
                         </div>
                       </div>
                     </div>
