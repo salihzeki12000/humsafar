@@ -1817,7 +1817,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       followbtn: 'follow',
     }];
   })
-  .controller('Populartrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+  .controller('PopularAgentCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -6496,16 +6496,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.qItinerary = {};
     $scope.qItinerary.type = [];
     $scope.qItinerary.countryVisited = [{}];
+    $scope.qItinerary.countryVisited[0].country="";
     $scope.qItinerary.countryVisited[0].cityVisited = [];
-    console.log($scope.qItinerary.countryVisited.cityVisited);
-    $scope.qItinerary.countryVisitedArray = [];
-    $scope.showCountries = [];
-    $scope.showCities = [];
-    $scope.searchNation = [];
-    $scope.countries = [];
-    $scope.cities = [
-      [{}]
-    ];
+    
+    console.log($scope.qItinerary.countryVisited);
+
+    // $scope.qItinerary.countryVisitedArray = [];
+    // $scope.showCountries = [];
+    // $scope.showCities = [];
+    // $scope.searchNation = [];
+    // $scope.countries = [];
+    // $scope.cities = [
+    //   [{}]
+    // ];
 
     var countries = [];
     var cities = [];
@@ -6583,8 +6586,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var countriesCallback = function (data) {
       countries = data.data;
       $scope.countries=data.data;
-      console.log($scope.countries);
-
     };
 
     NavigationService.getAllCountries(countriesCallback, function () {
@@ -6672,59 +6673,68 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.addCity = [
       {"cities":[{}]}
     ];
-    $scope.addCountry = [{}];
+    $scope.addCountry = [{"country":{}}];
     $scope.nation1 = [{}]
     $scope.nation = $scope.nation1[0];
 
     $scope.addPanel = function (val, index) {
       if (val == "city") {
         $scope.addCity[index].cities.push([]);
-
         // $scope.qItinerary.countryVisited[index].cityVisited.push({});
         // $scope.qItinerary.countryVisited[index].push({"cityVisited":[]});   
-
-
         console.log($scope.qItinerary.countryVisited);
       } else if (val == "country") {
-        console.log($scope.countries);
-        $scope.addCountry.push({});
+        console.log(index);
+        $scope.addCountry.push({"country":{}});
+
+        $scope.qItinerary.countryVisited.push({});
+        $scope.qItinerary.countryVisited[index].country="";           
+        $scope.qItinerary.countryVisited[index].cityVisited=[];  
+
+        console.log($scope.qItinerary.countryVisited);
+
         $scope.addCity.push({"cities":[{}]});
         // $scope.countries.push(countries);
-        console.log($scope.countries);
-        
+            
       }
     };
 
-    $scope.removeStayed = function (flag, countryIndex, cityIndex) {
-      console.log(flag, countryIndex, cityIndex);
-      if (flag == "country") {
-        if (countryIndex > 0) {
-          $scope.addCountry.splice(countryIndex, 1);
-          $scope.qItinerary.countryVisited.splice(countryIndex, 1);
-          $scope.searchNation.splice(countryIndex, 1);
-          $scope.countries.splice(countryIndex, 1);
-          $scope.addCity.splice(countryIndex, 1);
-          console.log($scope.searchNation);
-        }
-      } else if (flag == "city") {
-        if (cityIndex > 0) {
-          console.log(countryIndex, cityIndex);
-          $scope.addCity[countryIndex].cities.splice(cityIndex, 1);
-          $scope.qItinerary.countryVisited[countryIndex].cityVisited.splice(cityIndex, 1);
-          console.log($scope.stayedAt);
-        }
-      }
-    };
+    // $scope.removeStayed = function (flag, countryIndex, cityIndex) {
+    //   console.log(flag, countryIndex, cityIndex);
+    //   if (flag == "country") {
+    //     if (countryIndex > 0) {
+    //       $scope.addCountry.splice(countryIndex, 1);
+    //       $scope.qItinerary.countryVisited.splice(countryIndex, 1);
+    //       $scope.searchNation.splice(countryIndex, 1);
+    //       $scope.countries.splice(countryIndex, 1);
+    //       $scope.addCity.splice(countryIndex, 1);
+    //       console.log($scope.searchNation);
+    //     }
+    //   } else if (flag == "city") {
+    //     if (cityIndex > 0) {
+    //       console.log(countryIndex, cityIndex);
+    //       $scope.addCity[countryIndex].cities.splice(cityIndex, 1);
+    //       $scope.qItinerary.countryVisited[countryIndex].cityVisited.splice(cityIndex, 1);
+    //       console.log($scope.stayedAt);
+    //     }
+    //   }
+    // };
 
-    $scope.updateCountryPanel = function (index, name) {
-      console.log(index, name);
-      if (_.indexOf($scope.searchNation, name) == -1) {
-        $scope.countrySelectedFlag = true;
-        $scope.showCountries[index]=false;
+    $scope.updateCountryPanel = function (index) {
+    
+      
+      var countryId=$scope.addCountry[index].country._id;
+      var name=$scope.addCountry[index].country.name;
+      
+     
+      if (_.findIndex($scope.qItinerary.countryVisited, ['country', countryId])==-1) {
+        alert("new country");
+        // $scope.countrySelectedFlag = true;
+        // $scope.showCountries[index]=false;
+        // $scope.searchNation[index] = name;
         $scope.qItinerary.countryVisited[index].name = name;
-        $scope.searchNation[index] = name;
-        $scope.qItinerary.countryVisited[index].cityVisited = [];
-        console.log($scope.searchNation);
+        $scope.qItinerary.countryVisited[index].country=countryId;
+        // console.log($scope.searchNation);
       } else {
         alert(name + " already added");
       }
@@ -8299,36 +8309,46 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   };
   //setting tab navigation end
 
-  // choose category Specialisation
+   // choose category Specialisation
   $scope.chooseCategorySpcl = [{
     img: "img/agt-cat1.png",
     caption: "Adventure",
+    catWidth: "30px"
   }, {
     img: "img/agt-cat2.png",
-    caption: "Business"
+    caption: "Business",
+    catWidth: "30px"
   }, {
     img: "img/agt-cat3.png",
-    caption: "Family"
+    caption: "Family",
+    catWidth: "42px"
   }, {
     img: "img/agt-cat4.png",
-    caption: "Romance"
+    caption: "Romance",
+    catWidth: "33px"
   }, {
     img: "img/agt-cat5.png",
-    caption: "Backpacking"
+    caption: "Backpacking",
+    catWidth: "30px"
   }, {
     img: "img/agt-cat6.png",
-    caption: "Budget"
+    caption: "Budget",
+    catWidth: "28px"
   }, {
     img: "img/agt-cat7.png",
-    caption: "Luxury"
+    caption: "Luxury",
+    catWidth: "28px"
   }, {
     img: "img/agt-cat8.png",
-    caption: "Religious"
+    caption: "Religious",
+    catWidth: "33px"
   }, {
     img: "img/agt-cat9.png",
-    caption: "Friends"
+    caption: "Friends",
+    catWidth: "30px"
   }];
   // choose category Specialisation end
+
 })
 
 

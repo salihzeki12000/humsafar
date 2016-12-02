@@ -76,23 +76,23 @@
               <!--{{qItinerary.countryVisited}}-->
               <!-- itinerary type end -->
               <!-- country and city visited -->
-              {{qItinerary.countryVisited[countryPanel]}}
+              <!--{{qItinerary.countryVisited[countryPanel]}}-->
               
-              <div class="itinerary-country-visited" ng-init="countrySelectedFlag=true">{{countries}}
+              <div class="itinerary-country-visited" ng-init="countrySelectedFlag=true">{{addCountry}}
                 <div class="row" ng-repeat="add in addCountry track by $index" ng-init="countryPanel=$index">
                   <!-- new ui select dropdown country -->
                   <div class="col-md-6">
                     <div class="itinerary-inputholder">
 
                       <!--<ui-select  ng-model="qItinerary.countryVisited[countryPanel].country" theme="bootstrap">{{qItinerary.countryVisited[countryPanel].country}}-->
-                      <ui-select  ng-model="qItinerary.countryVisited[countryPanel].country" theme="bootstrap">                        
+                      <ui-select  ng-model="add.country" theme="bootstrap">                        
                         <ui-select-match placeholder="Add Country">{{$select.selected.name}}</ui-select-match>
-                        <ui-select-choices repeat="nation in countries>
+                        <ui-select-choices repeat="nation in countries | filter: $select.search" ng-click="updateCountryPanel(countryPanel)">
                           <span ng-bind="nation.name"></span>
                         </ui-select-choices>
                       </ui-select>
                       <div class="add-country clearfix" ng-if="countryPanel+1==addCountry.length">
-                        <button class="btn btn-pink pull-left" ng-click="addPanel('country',$index)" >Add Country</button>
+                        <button class="btn btn-pink pull-left" ng-click="addPanel('country',countryPanel)" >Add Country</button>
                         <span class="color-dark-blue pull-right mt5">If you have visited any other country on the same trip</span>
                       </div>
                     </div>
@@ -104,7 +104,7 @@
                     <div class="itinerary-inputholder">
                       <ui-select multiple ng-model="qItinerary.countryVisited[countryPanel].country" theme="bootstrap">
                         <ui-select-match placeholder="Add Country">{{$item.name}}</ui-select-match>
-                        <ui-select-choices repeat="nation in countries[countryPanel] | filter:searchNation[countryPanel]">
+                        <ui-select-choices repeat="nation in countries | filter:searchNation[countryPanel]">
                           <span>{{nation.name}}</span>
                         </ui-select-choices>
                       </ui-select>
