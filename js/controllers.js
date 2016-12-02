@@ -443,9 +443,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.saveUserData = function (userData) {
-      var str=userData.homeCity;
-      var arr=str.split(",");
-      userData.homeCity=arr[0];
+      var str = userData.homeCity;
+      var arr = str.split(",");
+      userData.homeCity = arr[0];
       $state.go('holiday');
       NavigationService.saveUserData(userData, saveDataCallback, function (err) {
         console.log(err);
@@ -851,28 +851,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       postsWithLatLng = _.filter($scope.journey.post,  'latlong');
 
       _.each(postsWithLatLng, function (n, $index) {
-        
-        if(n && n.latlong && n.latlong.lat && n.latlong.long){
-           centers[$index] = {
-          "lat": parseFloat(n.latlong.lat),
-          "lng": parseFloat(n.latlong.long)
-        };
-        }else{
+
+        if (n && n.latlong && n.latlong.lat && n.latlong.long) {
+          centers[$index] = {
+            "lat": parseFloat(n.latlong.lat),
+            "lng": parseFloat(n.latlong.long)
+          };
+        } else {
           alert("no latlong found");
         }
-       
+
       });
 
-      if(journeys && journeys.location && journeys.location.lat){
-         var obj = {
-        "lat": parseFloat(journeys.location.lat),
-        "lng": parseFloat(journeys.location.long)
-      }
-      centers.unshift(obj);
-      }else{
+      if (journeys && journeys.location && journeys.location.lat) {
+        var obj = {
+          "lat": parseFloat(journeys.location.lat),
+          "lng": parseFloat(journeys.location.long)
+        }
+        centers.unshift(obj);
+      } else {
         alert("Location of Banner not found");
       }
-     
+
       // center = {
       //     "lat": centers[0].lat,
       //     "lng": centers[0].lng
@@ -1322,16 +1322,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     $scope.hours = _.range(1, 13, 1);
-      $scope.mins = _.range(1, 60, 1);
-      $scope.change = function (id, val) {
-        if (id == 'hour') {
-          $scope.time.hour = val;
-        } else if (id == 'min') {
-          $scope.time.min = val;
-        } else {
-          $scope.time.am_pm = val;
-        }
+    $scope.mins = _.range(1, 60, 1);
+    $scope.change = function (id, val) {
+      if (id == 'hour') {
+        $scope.time.hour = val;
+      } else if (id == 'min') {
+        $scope.time.min = val;
+      } else {
+        $scope.time.am_pm = val;
       }
+    }
 
     // $scope.$on('$viewContentLoaded', function(event) {
     //   $timeout(function(){
@@ -3353,7 +3353,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             return;
           }
         });
- 
+
       });
       $timeout(function () {
         $scope.data = otherData;
@@ -6495,20 +6495,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.qItinerary = {};
     $scope.qItinerary.type = [];
-    $scope.qItinerary.countryVisited = [{}];
-    $scope.qItinerary.countryVisited[0].country="";
-    $scope.qItinerary.countryVisited[0].cityVisited = [];
+    $scope.qItinerary.countryVisited = [];
     
-    console.log($scope.qItinerary.countryVisited);
+    $scope.previousCountryId = [];
 
     // $scope.qItinerary.countryVisitedArray = [];
     // $scope.showCountries = [];
     // $scope.showCities = [];
     // $scope.searchNation = [];
     // $scope.countries = [];
-    // $scope.cities = [
-    //   [{}]
-    // ];
+    $scope.cities = [];
 
     var countries = [];
     var cities = [];
@@ -6585,7 +6581,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var countriesCallback = function (data) {
       countries = data.data;
-      $scope.countries=data.data;
+      $scope.countries = data.data;
     };
 
     NavigationService.getAllCountries(countriesCallback, function () {
@@ -6595,10 +6591,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var selectedCities = [];
     var obj = {};
-    $scope.addCityInList = function (id, flag,name,countryIndex,cityIndex) {
-      console.log(id, flag,name,countryIndex,cityIndex);
-      $scope.showCities[cityIndex]=false;
-      $scope.qItinerary.countryVisited[countryIndex].cityVisited[cityIndex].search=name;
+    $scope.addCityInList = function (id, flag, name, countryIndex, cityIndex) {
+      console.log(id, flag, name, countryIndex, cityIndex);
+      $scope.showCities[cityIndex] = false;
+      $scope.qItinerary.countryVisited[countryIndex].cityVisited[cityIndex].search = name;
       if (flag) {
         if (_.findIndex(selectedCities,   ['city',  id]) == -1) {
           obj = {
@@ -6612,40 +6608,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.qItinerary.countryVisited.cityVisited = selectedCities;
     };
 
-    // $scope.addCountryVisited = function (countryVisited) {
-    //   var arr = {}
-    //   arr = _.omit(countryVisited, ['search']);
-    //   console.log(arr);
-    //   $scope.qItinerary.countryVisitedArray.push(arr);
-    //   console.log($scope.qItinerary.countryVisitedArray);
-    //   // reset variables starts
-    //   $scope.qItinerary.countryVisitedArray = [];
-    //   var selectedCities = [];
-    //   var obj = {};
-    //   // reset variables ends
-
-    // };
-
-    // var citiesCallback = function (data) {
-    //   cities = data.data;
-    //   $scope.cities.push(cities);
-    //   _.each(selectedCities, function (n) {
-    //     var index = _.findIndex($scope.cities, ['_id', n.city]);
-    //     if (index == -1) {
-    //       $scope.cities.flag = false;
-    //     } else {
-    //       $scope.cities[index].flag = true;
-    //     }
-    //   });
-    // };
-
-    $scope.searchCity = function (searchData,countryIndex,cityIndex) {
-      console.log(searchData,countryIndex,cityIndex)
-
-      console.log(searchData.cityVisited[cityIndex]);
+    $scope.searchCity = function (countryId, searchData) {
+      console.log(searchData, countryId)
       var formData = {
-        "country": searchData.country,
-        "search": searchData.cityVisited[cityIndex].search
+        "country": countryId,
+        "search": searchData
       }
       console.log(formData);
       var str = formData.search;
@@ -6653,92 +6620,60 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         NavigationService.searchCityByCountry(formData, function (data) {
           cities = data.data;
           console.log(cities);
-          console.log(countryIndex,cityIndex);
-          console.log($scope.addCity);
-          console.log( $scope.addCity[countryIndex])
-          $scope.addCity[countryIndex].cities[cityIndex]=cities;
-          _.each(selectedCities, function (n) {
-            var index = _.findIndex($scope.cities, ['_id', n.city]);
-            if (index == -1) {
-              $scope.cities.flag = false;
-            } else {
-              $scope.cities[index].flag = true;
-            }
-          });
+          $scope.cities = cities;
         });
       }
     };
 
     $scope.addClass = "";
-    $scope.addCity = [
-      {"cities":[{}]}
-    ];
-    $scope.addCountry = [{"country":{}}];
-    $scope.nation1 = [{}]
-    $scope.nation = $scope.nation1[0];
+    $scope.addCity = [{
+      "cities": []
+    }];
+
+    $scope.addCountry = [{}];
+    // $scope.addCountry = [{
+    //   "country": "",
+    //   "cityVisited": []
+    // }];
 
     $scope.addPanel = function (val, index) {
       if (val == "city") {
         $scope.addCity[index].cities.push([]);
-        // $scope.qItinerary.countryVisited[index].cityVisited.push({});
-        // $scope.qItinerary.countryVisited[index].push({"cityVisited":[]});   
         console.log($scope.qItinerary.countryVisited);
       } else if (val == "country") {
-        console.log(index);
-        $scope.addCountry.push({"country":{}});
-
-        $scope.qItinerary.countryVisited.push({});
-        $scope.qItinerary.countryVisited[index].country="";           
-        $scope.qItinerary.countryVisited[index].cityVisited=[];  
-
-        console.log($scope.qItinerary.countryVisited);
-
-        $scope.addCity.push({"cities":[{}]});
-        // $scope.countries.push(countries);
-            
+        $scope.addCountry.push({
+          // "country": {}
+        });
+        
       }
     };
 
-    // $scope.removeStayed = function (flag, countryIndex, cityIndex) {
-    //   console.log(flag, countryIndex, cityIndex);
-    //   if (flag == "country") {
-    //     if (countryIndex > 0) {
-    //       $scope.addCountry.splice(countryIndex, 1);
-    //       $scope.qItinerary.countryVisited.splice(countryIndex, 1);
-    //       $scope.searchNation.splice(countryIndex, 1);
-    //       $scope.countries.splice(countryIndex, 1);
-    //       $scope.addCity.splice(countryIndex, 1);
-    //       console.log($scope.searchNation);
-    //     }
-    //   } else if (flag == "city") {
-    //     if (cityIndex > 0) {
-    //       console.log(countryIndex, cityIndex);
-    //       $scope.addCity[countryIndex].cities.splice(cityIndex, 1);
-    //       $scope.qItinerary.countryVisited[countryIndex].cityVisited.splice(cityIndex, 1);
-    //       console.log($scope.stayedAt);
-    //     }
-    //   }
-    // };
+    $scope.removeStayed = function (countryPanel) {
+      $scope.addCountry.splice(countryPanel, 1);
+    };
 
-    $scope.updateCountryPanel = function (index) {
-    
-      
-      var countryId=$scope.addCountry[index].country._id;
-      var name=$scope.addCountry[index].country.name;
-      
-     
-      if (_.findIndex($scope.qItinerary.countryVisited, ['country', countryId])==-1) {
-        alert("new country");
-        // $scope.countrySelectedFlag = true;
-        // $scope.showCountries[index]=false;
-        // $scope.searchNation[index] = name;
-        $scope.qItinerary.countryVisited[index].name = name;
-        $scope.qItinerary.countryVisited[index].country=countryId;
-        // console.log($scope.searchNation);
+    $scope.updateCountryPanel = function (countryPanel, countryId) {
+      var currentId = $scope.addCountry[countryPanel].country;
+      var index = _.indexOf($scope.previousCountryId, countryId);
+      $scope.previousCountryId[countryPanel] = countryId;
+      if (index == -1) {
+        $scope.addCountry[countryPanel].cityVisited = [];
       } else {
         alert(name + " already added");
       }
+    };
 
+    $scope.updateCountriesArr = function (id) {
+      $scope.countries = countries;
+      _.each($scope.addCountry, function (n) {
+        if (n.country != id) {
+          $scope.countries = _.reject($scope.countries, ['_id', n.country]);
+        }
+      });
+    };
+
+    $scope.updateCitiesArr = function () {
+      $scope.cities = [];
     };
 
     $scope.getYear = [];
@@ -8138,31 +8073,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   //about textarea counter end
   $scope.agentloginView = 1;
- $scope.agentSec = function(val){
-   if(val == 1) {
-     $scope.agentloginView = 1;
-   }else if (val == 2) {
-     $scope.agentloginView = 2;
-     console.log(2);
-   }else if (val == 3) {
-     $scope.agentloginView = 3;
-   }else if (val == 4) {
-     $scope.agentloginView = 4;
-   }else if (val == 5) {
-     $scope.agentloginView = 5;
-   }else if (val == 6) {
-     $scope.agentloginView = 6;
-   }else if (val == 7) {
-     $scope.agentloginView = 7;
-   }else if (val == 8) {
-     $scope.agentloginView = 8;
-   }else if (val == 9) {
-     $scope.agentloginView = 9;
-   }else {
-     $scope.agentloginView = 1;
-   }
- }
-  // category of Specialisation array
+  $scope.agentSec = function (val) {
+      if (val == 1) {
+        $scope.agentloginView = 1;
+      } else if (val == 2) {
+        $scope.agentloginView = 2;
+        console.log(2);
+      } else if (val == 3) {
+        $scope.agentloginView = 3;
+      } else if (val == 4) {
+        $scope.agentloginView = 4;
+      } else if (val == 5) {
+        $scope.agentloginView = 5;
+      } else if (val == 6) {
+        $scope.agentloginView = 6;
+      } else if (val == 7) {
+        $scope.agentloginView = 7;
+      } else if (val == 8) {
+        $scope.agentloginView = 8;
+      } else if (val == 9) {
+        $scope.agentloginView = 9;
+      } else {
+        $scope.agentloginView = 1;
+      }
+    }
+    // category of Specialisation array
   $scope.categoriesSpecial = [{
     agtcatImg: "img/agt-cat1.png",
     catwidth: "35px",
@@ -8224,10 +8159,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   //country of Specialisation accordion end
 
   //Services
- $scope.agtServicesSpcl = [
-    'Tours And Packages','Day Tours','Outdoors & Excursions','Flights', 'Cruise', 'MICE', 'Personal', 'Business Travel', 'Car Rentals', 'Visas', 'Fully Independent Traveller', 'Accomodation', 'Travel Insurance', 'Sports & Events', 'Forex', 'Holidays', 'Festival & Concerts', 'Transportation'
- ];
- //Services end
+  $scope.agtServicesSpcl = [
+    'Tours And Packages', 'Day Tours', 'Outdoors & Excursions', 'Flights', 'Cruise', 'MICE', 'Personal', 'Business Travel', 'Car Rentals', 'Visas', 'Fully Independent Traveller', 'Accomodation', 'Travel Insurance', 'Sports & Events', 'Forex', 'Holidays', 'Festival & Concerts', 'Transportation'
+  ];
+  //Services end
 })
 
 .controller('AgentsettingCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -8309,7 +8244,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   };
   //setting tab navigation end
 
-   // choose category Specialisation
+  // choose category Specialisation
   $scope.chooseCategorySpcl = [{
     img: "img/agt-cat1.png",
     caption: "Adventure",
@@ -8949,68 +8884,68 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     default:
       $scope.agthome.innerView = allagthome[0];
   }
-$scope.agenthomeItinerary = true;
- $scope.agentFixednav = ""
- $scope.getTab = function (view) {
-   $scope.agthome.innerView = allagthome[view];
-   var url = "agthome-itinerary";
-   var active = "";
-   console.log(view);
-   switch (view) {
-     case 0:
-       url = "agthome-itinerary";
-       $scope.agthomeoptions.active = "agthome-itinerary";
-       $scope.agenthomeItinerary = true;
-       $scope.agentFixednav = "";
-       break;
-     case 1:
-       url = "agthome-tourpackages";
-       $scope.agthomeoptions.active = "agthome-tourpackages";
-       $scope.agenthomeItinerary = false;
-       $scope.agentFixednav = "change";
-       break;
-     case 2:
-       url = "agthome-photovideos";
-       $scope.agthomeoptions.active = "agthome-photovideos";
-       $scope.agenthomeItinerary = false;
-       $scope.agentFixednav = "change";
-       break;
-     case 3:
-       url = "agthome-testimonialreviews";
-       $scope.agthomeoptions.active = "agthome-testimonialreviews";
-       $scope.agenthomeItinerary = false;
-       $scope.agentFixednav = "change";
-       break;
-     case 4:
-       url = "agthome-travelactivity";
-       $scope.agthomeoptions.active = "agthome-travelactivity";
-       $scope.agenthomeItinerary = false;
-       $scope.agentFixednav = "change";
-       break;
-     case 5:
-       url = "agthome-leadmonitor";
-       $scope.agthomeoptions.active = "agthome-leadmonitor";
-       $scope.agenthomeItinerary = false;
-       $scope.agentFixednav = "change";
-       break;
-     case 6:
-       url = "agthome-analytics";
-       $scope.agthomeoptions.active = "agthome-analytics";
-       $scope.agenthomeItinerary = false;
-       $scope.agentFixednav = "change";
-       break;
-     case 7:
-       url = "agthome-aboutus";
-       $scope.agthomeoptions.active = "agthome-aboutus";
-       $scope.agenthomeItinerary = false;
-       $scope.agentFixednav = "change";
-       break;
+  $scope.agenthomeItinerary = true;
+  $scope.agentFixednav = ""
+  $scope.getTab = function (view) {
+    $scope.agthome.innerView = allagthome[view];
+    var url = "agthome-itinerary";
+    var active = "";
+    console.log(view);
+    switch (view) {
+      case 0:
+        url = "agthome-itinerary";
+        $scope.agthomeoptions.active = "agthome-itinerary";
+        $scope.agenthomeItinerary = true;
+        $scope.agentFixednav = "";
+        break;
+      case 1:
+        url = "agthome-tourpackages";
+        $scope.agthomeoptions.active = "agthome-tourpackages";
+        $scope.agenthomeItinerary = false;
+        $scope.agentFixednav = "change";
+        break;
+      case 2:
+        url = "agthome-photovideos";
+        $scope.agthomeoptions.active = "agthome-photovideos";
+        $scope.agenthomeItinerary = false;
+        $scope.agentFixednav = "change";
+        break;
+      case 3:
+        url = "agthome-testimonialreviews";
+        $scope.agthomeoptions.active = "agthome-testimonialreviews";
+        $scope.agenthomeItinerary = false;
+        $scope.agentFixednav = "change";
+        break;
+      case 4:
+        url = "agthome-travelactivity";
+        $scope.agthomeoptions.active = "agthome-travelactivity";
+        $scope.agenthomeItinerary = false;
+        $scope.agentFixednav = "change";
+        break;
+      case 5:
+        url = "agthome-leadmonitor";
+        $scope.agthomeoptions.active = "agthome-leadmonitor";
+        $scope.agenthomeItinerary = false;
+        $scope.agentFixednav = "change";
+        break;
+      case 6:
+        url = "agthome-analytics";
+        $scope.agthomeoptions.active = "agthome-analytics";
+        $scope.agenthomeItinerary = false;
+        $scope.agentFixednav = "change";
+        break;
+      case 7:
+        url = "agthome-aboutus";
+        $scope.agthomeoptions.active = "agthome-aboutus";
+        $scope.agenthomeItinerary = false;
+        $scope.agentFixednav = "change";
+        break;
 
-     default :
-       url = "agthome-itinerary";
-       $scope.agthomeoptions.active = "agthome-itinerary";
-       $scope.agenthomeItinerary = true;
-   }
+      default:
+        url = "agthome-itinerary";
+        $scope.agthomeoptions.active = "agthome-itinerary";
+        $scope.agenthomeItinerary = true;
+    }
     console.log(url);
     $state.go("agent-home", {
       name: url

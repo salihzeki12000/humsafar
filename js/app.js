@@ -433,7 +433,6 @@ firstapp.directive('uploadImage', function($http, $filter) {
       }
 
       $scope.$watch("image", function(newVal, oldVal) {
-        console.log(newVal);
         if (newVal && newVal.file) {
           $scope.uploadNow(newVal);
         }

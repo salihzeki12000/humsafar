@@ -85,12 +85,15 @@
                     <div class="itinerary-inputholder">
 
                       <!--<ui-select  ng-model="qItinerary.countryVisited[countryPanel].country" theme="bootstrap">{{qItinerary.countryVisited[countryPanel].country}}-->
-                      <ui-select  ng-model="add.country" theme="bootstrap">                        
+                      <ui-select  ng-model="add.country" theme="bootstrap" on-select="updateCountryPanel(countryPanel,add.country)" ng-click="updateCountriesArr($select.selected._id)">                   
                         <ui-select-match placeholder="Add Country">{{$select.selected.name}}</ui-select-match>
-                        <ui-select-choices repeat="nation in countries | filter: $select.search" ng-click="updateCountryPanel(countryPanel)">
+                        <ui-select-choices repeat="nation._id as nation in countries | filter: $select.search">
                           <span ng-bind="nation.name"></span>
                         </ui-select-choices>
                       </ui-select>
+                      <!--temporary-->
+                      <span ng-if="$index>0" ng-click="removeStayed(countryPanel)"><i class="fa fa-times"></i></span>
+                      <!--temporary end close-->
                       <div class="add-country clearfix" ng-if="countryPanel+1==addCountry.length">
                         <button class="btn btn-pink pull-left" ng-click="addPanel('country',countryPanel)" >Add Country</button>
                         <span class="color-dark-blue pull-right mt5">If you have visited any other country on the same trip</span>
@@ -102,13 +105,12 @@
                   <!-- new ui select dropdown for city -->
                   <div class="col-md-6">
                     <div class="itinerary-inputholder">
-                      <ui-select multiple ng-model="qItinerary.countryVisited[countryPanel].country" theme="bootstrap">
+                      <ui-select multiple ng-model="add.cityVisited" theme="bootstrap" ng-click="updateCitiesArr($select.selected._id)">{{$select.search}}
                         <ui-select-match placeholder="Add Country">{{$item.name}}</ui-select-match>
-                        <ui-select-choices repeat="nation in countries | filter:searchNation[countryPanel]">
-                          <span>{{nation.name}}</span>
+                        <ui-select-choices repeat="{'city':city._id} as city in cities"  refresh="searchCity(add.country,$select.search)" refresh-delay="0">
+                          <span>{{city.name}}</span>
                         </ui-select-choices>
                       </ui-select>
-                      
                     </div>
                   </div>
                   <!-- new ui select dropdown for city end-->
