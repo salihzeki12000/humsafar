@@ -4485,7 +4485,6 @@ header {
   right: -450px;
   background-color: #fff;
   @include transform(all 900ms linear);
-  @include animation(slidecomment 300ms linear 200ms forwards);
 }
 .view-whole-card {
   right: 0;
@@ -5194,7 +5193,9 @@ header {
   border: 1px solid $brand-blue;
   border-radius: 6px;
 }
-
+.budget-quick-itinerary {
+  margin-top: 30px;
+}
 .itinerary-fill-info {
   label {
     font-size: 15px;
@@ -5298,6 +5299,75 @@ header {
       color: #707070;
     }
   }
+  // country visited input ui select
+  .ui-select-bootstrap {
+    border: none;
+    position: static;
+    ::-webkit-scrollbar {
+     width: 4px;
+   }
+    ::-webkit-scrollbar-track {
+     background-color: $brand-lighter-grey;
+   }
+    ::-webkit-scrollbar-thumb {
+     background-color: $brand-dark-pink;
+   }
+    .ui-select-toggle {
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid $brand-blue;
+      position: static;
+      cursor: text;
+      &:hover { background-color: transparent; }
+    }
+    .caret { display: none; }
+  }
+  .ui-select-multiple  {
+    height: 34px;
+    padding: 5px 12px;
+    border-bottom: 1px solid $brand-blue;
+    ::-webkit-scrollbar {
+     width: 2px;
+     height: 2px;
+   }
+    input.ui-select-search {
+      width: auto !important;
+      margin-bottom: 0;
+    }
+    > div:first-child {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+    }
+    .ui-select-match-item {
+      margin: 0 0 0 3px;
+    }
+  }
+  .ui-select-choices-row.active>span {
+    background-color: $brand-pink;
+  }
+  // country visited input ui select end
+}
+.quick-upload-photos {
+  width: 260px;
+  height: 34px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  @include transform(translateX(-50%));
+  overflow: hidden;
+  opacity: 0;
+  .create-btn {
+    width: 100%;
+  }
+  input[type="file"] {
+    @include square(100%);
+    @include position(absolute, 0);
+  }
+}
+.quick-add-country {
+  margin: 30px 0;
 }
 
 .trip-descp-itinerary {
@@ -5342,12 +5412,43 @@ header {
     font-weight: 500;
   }
   .trip-photo-holder {
-    padding: 40px 0;
+    padding: 40px 20px;
     border: 1px solid $brand-dark-blue;
     border-radius: 6px;
   }
 }
-
+.trip-view-photo {
+  width: 200px;
+  margin-right: 10px;
+  display: inline-block;
+  position: relative;
+  &:hover .remove-quick-photo {
+    display: block;
+  }
+}
+.remove-quick-photo {
+  padding: 10px;
+  @include position(absolute,0);
+  background-color: rgba(0,0,0,0.6);
+  display: none;
+}
+.scroll-photoitinerary {
+  overflow-x: auto;
+  overflow-y: hidden;
+  ::-webkit-scrollbar {
+    height: 2px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: $brand-pink;
+  }
+}
+.trip-cards-panel {
+  width: 976px;
+  white-space: nowrap;
+}
 // quick itinerary detail end
 // detail itinerary detail
 .fill-detail-itinerary {

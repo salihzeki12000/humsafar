@@ -77,16 +77,15 @@
               <!-- itinerary type end -->
               <!-- country and city visited -->
               <!--{{qItinerary.countryVisited[countryPanel]}}-->
-              
-              <div class="itinerary-country-visited" ng-init="countrySelectedFlag=true">{{addCountry}}
+
+              <div class="itinerary-country-visited" ng-init="countrySelectedFlag=true">
+                <!-- {{addCountry}} -->
                 <div class="row" ng-repeat="add in addCountry track by $index" ng-init="countryPanel=$index">
                   <!-- new ui select dropdown country -->
                   <div class="col-md-6">
-                    <div class="itinerary-inputholder">
-
-                      <!--<ui-select  ng-model="qItinerary.countryVisited[countryPanel].country" theme="bootstrap">{{qItinerary.countryVisited[countryPanel].country}}-->
-                      <ui-select  ng-model="add.country" theme="bootstrap" on-select="updateCountryPanel(countryPanel,add.country)" ng-click="updateCountriesArr($select.selected._id)">                   
-                        <ui-select-match placeholder="Add Country">{{$select.selected.name}}</ui-select-match>
+                    <div class="itinerary-inputholder input-country-visited">
+                      <ui-select  ng-model="add.country" theme="bootstrap" on-select="updateCountryPanel(countryPanel,add.country)" ng-click="updateCountriesArr($select.selected._id)">
+                        <ui-select-match placeholder="Country Visited ">{{$select.selected.name}}</ui-select-match>
                         <ui-select-choices repeat="nation._id as nation in countries | filter: $select.search">
                           <span ng-bind="nation.name"></span>
                         </ui-select-choices>
@@ -94,27 +93,28 @@
                       <!--temporary-->
                       <span ng-if="$index>0" ng-click="removeStayed(countryPanel)"><i class="fa fa-times"></i></span>
                       <!--temporary end close-->
-                      <div class="add-country clearfix" ng-if="countryPanel+1==addCountry.length">
-                        <button class="btn btn-pink pull-left" ng-click="addPanel('country',countryPanel)" >Add Country</button>
-                        <span class="color-dark-blue pull-right mt5">If you have visited any other country on the same trip</span>
-                      </div>
                     </div>
                   </div>
                   <!-- new ui select dropdown country end-->
-                 
+
                   <!-- new ui select dropdown for city -->
                   <div class="col-md-6">
-                    <div class="itinerary-inputholder">
+                    <div class="itinerary-inputholder input-city-visited">
                       <ui-select multiple ng-model="add.cityVisited" theme="bootstrap" ng-click="updateCitiesArr($select.selected._id)">{{$select.search}}
-                        <ui-select-match placeholder="Add Country">{{$item.name}}</ui-select-match>
+                        <ui-select-match placeholder="City Visited">{{$item.name}}</ui-select-match>
                         <ui-select-choices repeat="{'city':city._id} as city in cities"  refresh="searchCity(add.country,$select.search)" refresh-delay="0">
                           <span>{{city.name}}</span>
                         </ui-select-choices>
                       </ui-select>
                     </div>
+                    <i class="avenir-roman color-light-grey">Add other cities visited in this country on this trip</i>
                   </div>
                   <!-- new ui select dropdown for city end-->
                 </div>
+              </div>
+              <div class="quick-add-country clearfix text-center" ng-if="countryPanel+1==addCountry.length">
+                <button class="btn btn-pink" ng-click="addPanel('country',countryPanel)" >Add Country</button>
+                <i class="color-light-grey avenir-roman block mt5">If you have visited any other country on the same trip</i>
               </div>
               <!-- country and city visited end-->
               <!-- trip descp -->
@@ -127,20 +127,25 @@
               <!-- upload trip photo -->
               <div class="upload-trip-photo-sec">
                 <label for="trip-photo">Upload Trip Photo</label>
-                <div class="trip-photo-holder text-center">
-                  <div class="trip-view-photo">
-                    <!-- <img src="" alt="" class="img-responsive"> -->
+                <div class="trip-photo-holder">
+                  <div class="scroll-photoitinerary">
+                    <div class="trip-cards-panel">
+                      <div class="trip-view-photo">
+                        <img ng-src="{{formData.photo|uploadpath}}" alt="Quick Itinerary" class="img-responsive">
+                        <div class="remove-quick-photo text-right">
+                          <div class="delete-photo"><i class="fa fa-times color-white pointer"></i></div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="trip-upload">
+                  <div class="trip-upload text-center">
                     <div class="upload-section">
                       <img src="img/upload-icon.jpg" alt="" class="m-center img-responsive">
                       <p class="text-center color-grey avenir-roman">Drag a your itinerary photos here</p>
                       <span class="block color-grey avenir-roman">- or -</span>
-                      <div class="upload-btn">
-                        <div class="inline-block">
-                          <!--<button class="btn btn-dark-blue pointer avenir-light">Select a photo from your computer</button>-->
-                           <upload-image ng-model="formData.photo" ng-callback="callback"></upload-image>
-                        </div>
+                      <div class="upload-btn relate">
+                          <button class="btn btn-dark-blue pointer avenir-light pointer">Select a photo from your computer</button>
+                           <upload-image ng-model="formData.photo" ng-callback="callback" class="quick-upload-photos"></upload-image>
                       </div>
                     </div>
                   </div>
@@ -148,10 +153,36 @@
               </div>
               <!-- upload trip photo end-->
             </div>
-            <div class="save-quick-itinerary mt20 text-right">
-              <button class="btn btn-pink btn-more mr10">Save</button>
-              <button class="btn btn-pink btn-more">Publish</button>
+            <!-- trip total budget and save  -->
+            <div class="trip-budget budget-quick-itinerary">
+              <div class="clearfix">
+                <div class="pull-left">
+                  <label for="budget">Trip Budget</label>
+                  <div class="select-currency-holder">
+                    <div class="currency-holder">
+                      <div class="itinerary-inputholder relate">
+                        <input type="text" placeholder="Select Currency">
+                        <span class="itinerary-dropdown-icon">
+                          <i class="fa fa-chevron-down"></i>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="currency-amount">
+                      <div class="itinerary-inputholder">
+                        <input type="text" class="text-center">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pull-right">
+                  <div class="save-publish-detail">
+                    <button class="btn btn-pink btn-more mr5">Save</button>
+                    <button class="btn btn-pink btn-more">Publish</button>
+                  </div>
+                </div>
+              </div>
             </div>
+            <!-- trip total budget and save end -->
         </div>
         </form>
       </div>
