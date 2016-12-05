@@ -125,15 +125,17 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
     scope: {
       ongo: "=post",
       json: "=json",
-      profile: "=profile"
+      profile: "=profile",
+      getCommentsData:'&'
     },
+    // controller: 'OnGoJourneyCtrl',
     templateUrl: 'views/directive/journey-post.html',
     link: function ($scope, element, attrs) {
       // var counter = 0
       $scope.index = 0;
       $scope.changeImage = function (index) {
         $scope.index = index;
-      }
+      };
 
       var makePostString = function () {
         $scope.ongo.buddiesCount = $scope.ongo.buddies.length;
@@ -172,7 +174,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           }
         }
       }
-
 
 
       $scope.getTimes = function (n, type) {
@@ -226,6 +227,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           data: formData
         })
       };
+      
       $scope.getLikes = function (id) {
         var formData = {
           "_id": id
@@ -238,66 +240,13 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           $scope.listOfLikes = data.data;
         });
       }
-    $scope.viewCardComment = -1;
-    $scope.getCard = "";
-      $scope.getComments = function (id) {
-        // //open modal starts
-        // $uibModal.open({
-        //   templateUrl: "views/modal/notify.html",
-        //   animation: true,
-        //   scope: $scope,
-        //   windowClass: "notify-popup"
-        // });
-        // //open model ends
+    
 
-        if($scope.viewCardComment == -1){
-          $scope.getCard = "view-whole-card";
-          $scope.viewCardComment = id;
-        }else {
-          $scope.viewCardComment = -1;
-          $scope.getCard = "";
-        }
 
-        var formData = {
-          "_id": id
-        };
-        $http({
-          url: adminURL + "/post/getPostCommentWeb",
-          method: "POST",
-          data: formData
-        }).success(function (data) {
-          $scope.uniqueArr = [];
-          $scope.listOfComments = data.data;
-          $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
-        });
-      };
 
-      $scope.postComment = function (uniqueId, comment, id) {
-        var formData = {
-          "uniqueId": uniqueId,
-          "text": comment,
-          "type": "post",
-          "post": id
-        };
-        $http({
-          url: adminURL + "/comment/addCommentWeb",
-          method: "POST",
-          data: formData
-        }).success(function (data) {
-          formData = {
-            "_id": $scope.ongo._id
-          }
-          $http({
-            url: adminURL + "/post/getPostCommentWeb",
-            method: "POST",
-            data: formData
-          }).success(function (data) {
-            $scope.listOfComments = data.data;
-            document.getElementById('enterComment').value = "";
-          });
-        });
-
-      };
+//post comments starts
+  
+//post comments ends
 
       // checkin
       var modal = "";
