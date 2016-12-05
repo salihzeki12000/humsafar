@@ -1,5 +1,5 @@
 <div class="agt-home-testimonialreviews">
-  <div class="container">
+  <div class="container" hidden>
     <div class="clearfix">
       <div class="pull-right">
         <div class="add-agtitinerary">
@@ -16,8 +16,49 @@
       <div class="row">
         <div class="col-md-offset-3 col-md-6">
           <h3 class="color-blue">
-                Fill in this space to give travel lovers a better sense of what your agency has to offer.</h3>
-          <p class="color-blue">Regularly updating your itinerary with new itineraries, keeps travellers interedted and informed about how travelling with your agency can make a good trip, great!</p>
+                What are clients saying?</h3>
+          <p class="color-blue">Clients who have experienced your tours and packages can rate their experiences with you and leave a testimonial. This space  will help attract more clients based on your ratings.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- write testimonial box -->
+  <div class="container">
+    <div class="color-white clearfix">
+      <div class="pull-left avenir-light">
+        <h2>9/10 <span class="font-sz18">(222 Reviews)</span></h2>
+      </div>
+    </div>
+  </div>
+  <!-- write testimonial box  end-->
+
+  <div class="container">
+    <div masonry class="masonry-main">
+      <div class="row">
+        <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="review in testimonialreview track by $index">
+          <div class="testimonial-card">
+            <div class="testimonial-comment">
+              <p class="testimonial-quote"><q>{{review.testimonialQuote}}</q></p>
+            </div>
+            <div class="testimonial-details clearfix">
+              <div class="pull-left">
+                <div class="testprofile-holder">
+                  <img ng-src="{{review.usrprofileImgholder}}" alt="" class="img-responsive">
+                </div>
+                <div class="testprofile-name">
+                  <p>{{review.usrName}}</p>
+                  <span>{{review.usrLoc}}</span>
+                </div>
+              </div>
+              <div class="pull-right">
+                <div class="testimonial-rate">
+                  <p class="avenir-light">{{review.usrRating}}/10</p>
+                  <span>Rated</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

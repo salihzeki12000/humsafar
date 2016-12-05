@@ -1,11 +1,33 @@
 <div class="agt-usr-tourpackages">
+  <!-- EMPTY POSTS PAGE -->
+  <div class="empty-intro  avenir-roman" hidden>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <div class="agt-user-intro">
+            <h3 class="color-blue avenir-heavy">Lifestyle Holidays</h3>
+            <p class="color-blue">is still to upload this space with interesting tours & packages</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- EMPTY POSTS PAGE END -->
   <div class="container">
     <div class="row">
-      <div class="col-md-4 col-sm-6" ng-repeat = "tourcard in usrTourPackageCard track by $index">
+      <div class="col-md-4 col-sm-6" ng-repeat="tourcard in usrTourPackageCard track by $index">
         <div class="agt-itinerarycard">
           <div class="itinerary-img">
+            <div class="theme">
+              <div class="theme-img">
+                <img ng-src="{{tourcard.tourcategoryImg}}" class="img-responsive" alt="">
+              </div>
+              <div class="theme-name">
+                <p>{{tourcard.tourcategoryTitle}}</p>
+              </div>
+            </div>
             <div class="country-badges">
-              <div class="country-holder"  ng-repeat = "tourcountryflagbadge in tourcard.tourcountryBadgesFlag track by $index">
+              <div class="country-holder" ng-repeat="tourcountryflagbadge in tourcard.tourcountryBadgesFlag track by $index">
                 <img ng-src="{{tourcountryflagbadge}}" alt="" class="img-responsive">
               </div>
               <span class="country-count">+4</span>
@@ -20,8 +42,12 @@
                 <div class="pull-right">
                   <p class="font-sz18 cost-posi">${{tourcard.agttourCost}}</p>
                 </div>
+                <button class="btn btn-pink btn-download">Download</button>
                 <button class="btn btn-pink btn-book">Book</button>
               </div>
+            </div>
+            <div class="call-btn" ng-click="viewContact = !viewContact">
+              <i class="fa fa-phone" aria-hidden="true"></i>
             </div>
           </div>
         </div>

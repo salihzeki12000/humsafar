@@ -1,4 +1,4 @@
-<div class="agent-home relate" scrolladd1class ng-init="showEnquiry = false;" ng-class="{'backdrop-enquiry' : showEnquiry, '' : !showEnquiry}">
+<div class="agent-home relate" scrolladd1class>
   <div scrolldown>
     <div class="img-holder-agent bg-agent-home-img" ng-if="agenthomeItinerary">
       <div class="agt-card-posi">
@@ -11,76 +11,35 @@
           <button class="btn btn-white-outline mr5">Edit </button>
           <span><span class="font-bold"> 255 </span> Followers </span>
         </div>
+      </div>
     </div>
-  </div>
-  <!-- agent-user-fixednav -->
-  <div class="agent-home-nav {{agentFixednav}}">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-9 col-sm-9">
-          <div class="agent-scroll">
-            <ul class="list-inline">
-              <li ng-click="getTab(0)" ng-class="{'active': agthomeoptions.active=='agthome-itinerary'}">Itineraries </li>
-              <li ng-click="getTab(1)" ng-class="{'active': agthomeoptions.active=='agthome-tourpackages'}">Tours &amp; Packages</li>
-              <li ng-click="getTab(2)" ng-class="{'active': agthomeoptions.active=='agthome-photovideos'}"> Photos &amp; Videos</li>
-              <li ng-click="getTab(3)" ng-class="{'active': agthomeoptions.active=='agthome-testimonialreviews'}">Testimonials &amp; Reviews</li>
-              <li ng-click="getTab(4)" ng-class="{'active': agthomeoptions.active=='agthome-testimonialreviews'}">Travel Activities</li>
-              <li ng-click="getTab(5)" ng-class="{'active': agthomeoptions.active=='agthome-testimonialreviews'}">Lead Monitor</li>
-              <li ng-click="getTab(6)" ng-class="{'active': agthomeoptions.active=='agthome-testimonialreviews'}">Analytics</li>
-            </ul>
+    <!-- agent-user-fixednav -->
+    <div class="agent-home-nav {{agentFixednav}}">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-9 col-sm-9">
+            <div class="agent-scroll">
+              <ul class="list-inline">
+                <li ng-click="getTab(0)" ng-class="{'active': agthomeoptions.active=='agthome-itinerary'}">Itineraries </li>
+                <li ng-click="getTab(1)" ng-class="{'active': agthomeoptions.active=='agthome-tourpackages'}">Tours &amp; Packages</li>
+                <li ng-click="getTab(2)" ng-class="{'active': agthomeoptions.active=='agthome-photovideos'}"> Photos &amp; Videos</li>
+                <li ng-click="getTab(3)" ng-class="{'active': agthomeoptions.active=='agthome-testimonialreviews'}">Testimonials &amp; Reviews</li>
+                <li ng-click="getTab(4)" ng-class="{'active': agthomeoptions.active=='agthome-testimonialreviews'}">My Activity</li>
+                <li ng-click="getTab(5)" ng-class="{'active': agthomeoptions.active=='agthome-testimonialreviews'}">Lead Monitor</li>
+                <li ng-click="getTab(6)" ng-class="{'active': agthomeoptions.active=='agthome-testimonialreviews'}">Analytics</li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="col-md-3 col-sm-3">
-          <div class="mob-ml5">
-            <ul class="list-inline pull-right mob-left">
-              <li ng-click="getTab(7)" ng-class="{'active': agthomeoptions.active=='agthome-aboutus'}">About Us</li>
-              <li ng-click="getTab(7)" ng-class="{'active': agthomeoptions.active=='agthome-aboutus'}">Speciality</li>
-            </ul>
+          <div class="col-md-3 col-sm-3">
+            <div class="mob-ml5">
+              <ul class="list-inline pull-right mob-left">
+                <li ng-click="getTab(7)" ng-class="{'active': agthomeoptions.active=='agthome-aboutus'}">About Us</li>
+                <li ng-click="getTab(7)" ng-class="{'active': agthomeoptions.active=='agthome-aboutus'}">Speciality</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="agent-home-content" ng-include="agthome.innerView"></div>
   </div>
-  <div class="agent-home-content" ng-include="agthome.innerView"></div>
-
-
-  <!-- Enquiry side tab -->
-  <div class="side-enquiry">
-  <div class="enquiry-sidetab" ng-show="showEnquiry" ng-class="{'view-enquiry-list' : showEnquiry ,  ' ' : !showEnquiry}">
-    <div class="enquirytab-head">
-      <h4 class="avenir-roman color-blue">Enquires</h4>
-    </div>
-    <div class="enquirytab-accordionbox">
-      <uib-accordion close-others="oneAtATime">
-        <uib-accordion-group  ng-repeat="agtenquiry in enquiryAgent track by $index" is-open="status.open">
-          <uib-accordion-heading>
-            <div class="enquires-tab-title color-blue avenir-medium clearfix">
-              <div class="enquiretab-profileholder  pull-left">
-                <img ng-src="{{agtenquiry.enquireimgProfile}}" alt="" class="img-responsive">
-              </div>
-              <div class="enquiretab-title">
-                <p class="color-pink avenir-heavy">{{agtenquiry.profileName}}</p>
-              </div>
-              <div class="enquiretab-msgdiv"  ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
-                <p class="enquiretab-msg">{{agtenquiry.enquirymsghead}}</p>
-              </div>
-              <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open, 'fa fa-chevron-down': !status.open}"></i>
-            </div>
-          </uib-accordion-heading>
-          <div class="enquirestab-mail">
-            <p ng-bind-html="agtenquiry.enquirymsg"></p>
-            <div class="btn-replyenquiry">
-              <button type="button" class="btn btn-pink"><i class="fa fa-share" aria-hidden="true"></i> Reply </button>
-            </div>
-          </div>
-        </uib-accordion-group>
-    </uib-accordion>
-    </div>
-  </div>
-  <div class="enquirytab-btn" ng-click="showEnquiry = !showEnquiry">
-    <a class="btn-transparent-dark-blue btn" ng-class="{'hide' : showEnquiry}">Your Enquires</a>
-    <a class="btn-dark-blue btn" ng-class="{'hide': !showEnquiry}"><i class="fa fa-chevron-down mr5"></i> Close</a>
-  </div>
-  </div>
-  <!-- Enquiry side tab enD-->
-</div>

@@ -1,4 +1,21 @@
 <div class="agt-usr-testimonialreviews" ng-class="{'backdrop-testimonial' : showTestimonial, '' : !showTestimonial}">
+  <!-- EMPTY POSTS PAGE -->
+  <div class="empty-intro  avenir-roman" hidden>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <div class="agt-user-intro">
+            <h3 class="color-blue avenir-heavy">Lifestyle Holidays</h3>
+            <p class="color-blue">has not recievedany testimonials yet</p>
+            <p class="color-pink avenir-heavy font-sz18">Be the first to rate your experience with them!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- EMPTY POSTS PAGE END -->
+
+  <!-- write testimonial box -->
   <div class="container">
     <div class="color-white clearfix">
       <div class="pull-left avenir-light">
@@ -40,6 +57,9 @@
         </div>
       </div>
     </div>
+  </div>
+  <!-- write testimonial box  end-->
+  <div class="container">
     <div masonry class="masonry-main">
       <div class="row">
         <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="review in testimonialreview track by $index">

@@ -5,15 +5,36 @@
         <div class="add-agtitinerary">
           <span class="pointer" ng-click="showItinerary = !showItinerary" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
           <div class="add-more-itinerary" ng-show="showItinerary">
-            <ul>
-              <li><a href="">On The Go Journeys</a></li>
-              <li><a href="">Upload An Itinerary</a></li>
-              <li><a href="">Holiday Planner</a></li>
-            </ul>
+            <p class="color-cyan bord-bot">Update</p>
+            <form>
+              <div class="form-group">
+                <div class="a">
+                  <input type="text" class="form-control color-white" placeholder="Status" id="postStatus">
+                  <span class="pull-right font-sz10" id="postcount"></span>
+                </div>
+              </div>￼
+            </form>
+            <button class="btn btn-pink tourupload-position">POST</button>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <!-- EMPTY POSTS PAGE -->
+  <div class="empty-intro text-center avenir-roman">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <h3 class="color-blue">Your social space to let your followers get a  sense of what your  company has to offer.</h3>
+          <p class="color-blue">Regularly updating your library with new itineraries,tours & packages, photos, videos, status and offers keeps travellers interested in following you and informed about your services all the time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- EMPTY POSTS PAGE END -->
+
+
+  <div class="container hide">
     <div class="row">
       <div class="col-md-4 col-sm-6" ng-repeat = "travelactivity in agtTravelCard track by $index">
         <div class="agthome-activitycard">

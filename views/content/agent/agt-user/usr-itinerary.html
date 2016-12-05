@@ -1,14 +1,133 @@
 <div class="agt-usr-itinerary">
+  <!-- EMPTY POSTS PAGE -->
+  <div class="empty-intro  avenir-roman" hidden>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <div class="agt-user-intro">
+            <h3 class="color-blue avenir-heavy">Lifestyle Holidays</h3>
+            <p class="color-blue">is still to upload this space with interesting itineraries</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- EMPTY POSTS PAGE END -->
+  <!-- FILTER START -->
+  <div class="relate " ng-class="{'openfilter': isopenfilter}">
+    <div class="pt20 pb10 head-title-all bg-white pl35">
+      <div class="row m-clear">
+        <div class="col-md-3">
+          <div class="pad-btn">
+            <button class="btn btn-dark-blue" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i> Filter
+          </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="libro-filter filterclose">
+      <form>
+        <div class="pt20 pb10 head-title-all fliter-min-hght bg-white">
+          <div class="container-fluid">
+            <div class="pad-btn">
+              <div class="row">
+                <div class="col-md-2 col-sm-3">
+                  <div class="select-all-made" ng-mouseleave="showme=false">
+                    <form action="#">
+                      <span class="btn btn-default form-control" ng-click="showme=true" ng-hide="showme">Cities
+                  <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
+                      <input type="type" placeholder="Cities" ng-model="searchFilter" ng-show="showme" class="form-control input-tab avenir-roman">
+                      <div class="check-box-panel" ng-show="showme">
+                        <ul>
+                          <li ng-repeat="country in countries | filter:searchFilter">
+                            <input type="checkbox" id="{{country.code}} " ng-show="showme" class="form-control">
+                            <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
+                          </li>
+                        </ul>
+                      </div>
+                  </div>
+                  </form>
+                </div>
+                <div class="col-md-2 col-sm-3">
+                  <div class="select-all-made" ng-mouseleave="showme=false">
+                    <form action="#">
+                      <span class="btn btn-default form-control" ng-click="showme=true" ng-hide="showme">Type
+                  <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
+                      <input type="type" placeholder="Type" ng-model="searchFilter" ng-show="showme" class="form-control input-tab avenir-roman">
+                      <div class="check-box-panel" ng-show="showme">
+                        <ul>
+                          <li ng-repeat="country in countries | filter:searchFilter">
+                            <input type="checkbox" id="{{country.code}} " ng-show="showme" class="form-control">
+                            <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
+                          </li>
+                        </ul>
+                      </div>
+                  </div>
+                  </form>
+                </div>
+                <div class="col-md-2 col-sm-3">
+                  <div class="select-all-made" ng-mouseleave="showme=false">
+                    <span class="btn btn-default form-control" ng-click="showme=true" ng-hide="showme">By
+                  <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
+                    <input type="type" placeholder="By" ng-model="searchFilter" ng-show="showme" class="form-control input-tab avenir-roman">
+                    <div class="check-box-panel" ng-show="showme">
+                      <ul>
+                        <li ng-repeat="country in countries | filter:searchFilter">
+                          <input type="checkbox" id="{{country.code}} " ng-show="showme" class="form-control" ng-model="testCtrl.myText">
+                          <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!--<div class="col-md-2 col-sm-3 ">
+                <div class="select-all-made ">
+                  <ui-select ng-model="selectedItem ">
+                    <ui-select-match placeholder="Budget ">
+                      <span ng-bind="$select.selected.name "></span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="item in (countries | filter: $select.search) track by $index ">
+                      <span ng-bind="item.name "></span>
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
+              </div>-->
+                <div class="col-md-offset-1 col-md-5  col-sm-3 ">
+                  <!--<button type="submit">Add</button>-->
+                  <div class="txt-clear text-right ">
+                    <a>Clear All</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pt10 pb10 head-title-all bg-grey mb20 ">
+          <div class="container-fluid ">
+            <div class="plr30 ">
+              <div class="close-all ">
+                <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
+                <span class="tags avenir-roman" ng-repeat="item in country">{{item}} <span>X</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- FILTER START  END-->
+
+  <!-- ITINERARY CARDS -->
   <div class="container">
     <div class="row">
-      <div class="col-md-4 col-sm-6" ng-repeat = "usritinerary in usrItineraryCard track by $index">
+      <div class="col-md-4 col-sm-6" ng-repeat="usritinerary in usrItineraryCard track by $index">
         <div class="agt-itinerarycard">
           <div class="itinerary-cardhead avenir-roman">
             <p class="m-clear"><i class="fa fa-calendar"></i><span class="ml5 ">{{usritinerary.timestampDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span>{{usritinerary.timestampHour}}</span></p>
           </div>
           <div class="itinerary-img">
             <div class="country-badges">
-              <div class="country-holder" ng-repeat = "countryflagbadge in usritinerary.countryBadgesFlag track by $index">
+              <div class="country-holder" ng-repeat="countryflagbadge in usritinerary.countryBadgesFlag track by $index">
                 <img ng-src="{{countryflagbadge}}" alt="" class="img-responsive">
               </div>
 
@@ -24,7 +143,7 @@
                 <div class="pull-left">
                   <div class="journey-type">
                     <ul class="list-inline">
-                      <li ng-repeat = "journeytype in usritinerary.tripCat">
+                      <li ng-repeat="journeytype in usritinerary.tripCat">
                         <a href=""><img src="img/sunset.png" ng-src="{{journeytype}}" alt="" height="20"></a>
                       </li>
                     </ul>
