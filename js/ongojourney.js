@@ -238,16 +238,25 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           $scope.listOfLikes = data.data;
         });
       }
-
+    $scope.viewCardComment = -1;
+    $scope.getCard = "";
       $scope.getComments = function (id) {
-        //open modal starts
-        $uibModal.open({
-          templateUrl: "views/modal/notify.html",
-          animation: true,
-          scope: $scope,
-          windowClass: "notify-popup"
-        });
-        //open model ends
+        // //open modal starts
+        // $uibModal.open({
+        //   templateUrl: "views/modal/notify.html",
+        //   animation: true,
+        //   scope: $scope,
+        //   windowClass: "notify-popup"
+        // });
+        // //open model ends
+
+        if($scope.viewCardComment == -1){
+          $scope.getCard = "view-whole-card";
+          $scope.viewCardComment = id;
+        }else {
+          $scope.viewCardComment = -1;
+          $scope.getCard = "";
+        }
 
         var formData = {
           "_id": id
@@ -710,7 +719,7 @@ ongojourney.filter('formatTimeCalender', function () {
 
 ongojourney.filter('formatDate', function () {
   return function (input, type) {
- 
+
     if (type == 'date') {
       var returnVal = moment(input).format('D MMM,YYYY');
     } else if (type == 'time') {
