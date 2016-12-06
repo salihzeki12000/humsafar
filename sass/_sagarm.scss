@@ -560,8 +560,8 @@
 .agt-usr-itinerary,
 .agt-usr-photosvideos,
 .agt-usr-testimonialreviews,
-.agt-usr-tourpackages,
-.agt-usr-touractivity {
+.agt-usr-touractivity,
+.agt-usr-tourpackages {
   margin-bottom: 0;
   padding: 50px 0;
   @extend .avenir-roman;
@@ -1711,20 +1711,14 @@ q {
 }
 
 .leadtab-accordionbox {
-  // height: 410px;
   margin: 10px 0;
-  // overflow-y: auto;
 
   .panel {
-    background-color: rgba(45,54,85,0.7);
     border: none;
-    color: #fff;
   }
 
   .panel-default > .panel-heading {
-    background-color: $brand-blue;
     border: none;
-    color:#fff;
   }
 
   .panel-group .panel {
@@ -1742,6 +1736,7 @@ q {
   overflow: hidden;
   display: inline-block;
   border-radius: 15px;
+  margin: 0 10px;
 }
 
 .enquirytab-cmpny-inputholder {
@@ -1785,37 +1780,40 @@ q {
 .leadtab-msgdiv,
 .leadtab-title {
   display: inline-block;
-  margin: 10px 5px 0 10px;
+  margin: 10px 10px 5px;
   padding: 5px 0;
   vertical-align: top;
-  color: #fff;
 
   p {
     margin: 0;
   }
 }
-.lead-content{
+
+.lead-content {
   margin: 10px 0;
   padding: 10px 0;
   color: #fff;
   @extend .avenir-roman;
-  .btn-pink-outline{
+
+  .btn-pink-outline {
     margin: 5px 10px;
   }
-  a{
+
+  a {
     color: #fff;
-    &:hover{
+
+    &:hover {
       color: #fff;
     }
   }
 }
 
-.link-underline{
+.link-underline {
   text-decoration: underline;
 }
 
 .leadtab-msgdiv {
-  width: 275px;
+  width: 400px;
   @include transition(all 300ms linear);
 
   p {
@@ -1823,6 +1821,30 @@ q {
     white-space: nowrap;
     overflow: hidden;
     font-style: italic;
+  }
+}
+
+.newlead-tab {
+  .panel {
+    background-color: rgba(45,54,85,0.7);
+    color: #fff;
+  }
+
+  .panel-default > .panel-heading {
+    background-color: rgba(45,54,85,0.8);
+    color: #fff;
+  }
+}
+
+.actionlead-tab {
+  .panel {
+    background-color: rgba(255,255,255,0.7);
+    color: $brand-blue;
+  }
+
+  .panel-default > .panel-heading {
+    background-color: rgba(255,255,255,0.8);
+    color: $brand-blue;
   }
 }
 
@@ -1836,6 +1858,20 @@ q {
   padding: 10px 30px;
 }
 
+.action-contentbox {
+  @extend .avenir-light;
+  padding: 10px 30px;
+  .lead-content{
+    color: $brand-blue;
+    a{
+      color: $brand-blue;
+      &:hover{
+        color: $brand-blue;
+      }
+    }
+  }
+}
+
 .btn-replyenquiry {
   margin: 10px 0;
 }
@@ -1847,16 +1883,7 @@ q {
   z-index: 4;
   @include transform(rotate(-90deg));
   @include transition(all 300ms linear);
-  // &:before {
-  //   content: '';
-  //   width: 98%;
-  //   height: 20px;
-  //   position: absolute;
-  //   bottom: 0;
-  //   left: 5px;
-  //   background-color: #fff;
-  //   z-index: -1;
-  // }
+
   a {
     width: 100px;
     padding: 10px 0;
@@ -2152,6 +2179,7 @@ q {
   }
 }
 // Agent home
+
 .agt-home-photovideos {
   .filter-head {
     margin-bottom: 20px;
