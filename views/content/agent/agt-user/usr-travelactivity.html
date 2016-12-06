@@ -13,8 +13,178 @@
     </div>
   </div>
   <!-- EMPTY POSTS PAGE END -->
-    <div class="container">
-     <div class="yash">
+  <div class="container">
+    <div class="sec-travel-activity">
+      <div class="row">
+        <div class="col-md-4" ng-repeat="activity in travelActivity track by $index">
+          <div class="travel-activity">
+            <!-- header travel sec -->
+            <div class="header-travel-sec" ng-if="activity.header">
+              <!-- agent traveller part header -->
+              <div class="agent-travel-header" ng-if="activity.agentHeader">
+                <div class="agent-traveller-imgholder">
+                  <!-- <img ng-src="" alt="" class="img-responsive"> -->
+                </div>
+                <div class="agent-traveller-detail">
+                  <h4 class="color-blue">{{activity.agentName}}</h4>
+                  <p class="m-clear"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">26 Jan, 2015</span> | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">1:20 pm</span></p>
+                </div>
+              </div>
+              <!-- agent traveller part header end-->
+              <!-- itinerary header-->
+              <div class="travel-itinerary-header" ng-if="activity.itineraryHeader">
+                <p class="m-clear"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">26 Jan, 2015</span> | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">1:20 pm</span></p>
+              </div>
+              <!-- itinerary header end-->
+            </div>
+            <!-- header travel sec end-->
+            <!-- main travel sec -->
+            <div class="activitiy-card-sec">
+              <!-- agent traveller card -->
+                <div class="agent-traveller-card" ng-if="activity.travellerAgent">
+                  <div class="traveller-post">
+                    <p>{{activity.agentPost}}</p>
+                  </div>
+                </div>
+              <!-- agent traveller card end-->
+              <!-- tour package card -->
+              <div class="tour-package-card" ng-if="activity.tourPackage">
+                <div class="itinerary-img">
+                  <div class="theme">
+                    <div class="theme-img">
+                      <img ng-src="img/agt-cat1.png" class="img-responsive doneLoading" alt="" src="img/agt-cat1.png">
+                    </div>
+                    <div class="theme-name">
+                      <p class="ng-binding">Adventure</p>
+                    </div>
+                  </div>
+                  <div class="country-badges">
+                    <div class="country-holder ng-scope" ng-repeat="tourcountryflagbadge in tourcard.tourcountryBadgesFlag track by $index">
+                      <img ng-src="img/england-visit.png" alt="" class="img-responsive doneLoading" src="img/england-visit.png">
+                    </div>
+                    <div class="country-holder ng-scope" ng-repeat="tourcountryflagbadge in tourcard.tourcountryBadgesFlag track by $index">
+                      <img ng-src="img/canada-visit.png" alt="" class="img-responsive doneLoading" src="img/canada-visit.png">
+                    </div>
+                    <div class="country-holder ng-scope" ng-repeat="tourcountryflagbadge in tourcard.tourcountryBadgesFlag track by $index">
+                      <img ng-src="img/india-visit.png" alt="" class="img-responsive doneLoading" src="img/india-visit.png">
+                    </div>
+                    <span class="country-count">+4</span>
+                  </div>
+                  <img ng-src="img/paris.jpg" alt="" class="img-responsive doneLoading" src="img/paris.jpg">
+                  <div class="itinerary-imgfoot ">
+                    <div class="imgfoot-top clearfix">
+                      <div class="pull-left">
+                        <h4 class="font-sz18 ng-binding">Love In Paris</h4>
+                        <p class="font-sz10"><span class="ng-binding">3 Nights</span> | <span class="ng-binding">4 Days</span></p>
+                      </div>
+                      <div class="pull-right">
+                        <p class="font-sz18 cost-posi ng-binding">$25000</p>
+                      </div>
+                      <button class="btn btn-pink btn-download">Download</button>
+                      <button class="btn btn-pink btn-book">Book</button>
+                    </div>
+                  </div>
+                  <div class="call-btn" ng-click="viewContact = !viewContact">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
+              <!-- tour package card end -->
+              <!-- itinerary activity card  -->
+              <div class="itinerary-activity-card" ng-if="activity.itinerary">
+                <div class="itinerary-img">
+                  <div class="country-badges">
+                    <div class="country-holder ng-scope" ng-repeat="countryflagbadge in usritinerary.countryBadgesFlag track by $index">
+                      <img ng-src="img/england-visit.png" alt="" class="img-responsive doneLoading" src="img/england-visit.png">
+                    </div>
+                    <div class="country-holder ng-scope" ng-repeat="countryflagbadge in usritinerary.countryBadgesFlag track by $index">
+                      <img ng-src="img/canada-visit.png" alt="" class="img-responsive doneLoading" src="img/canada-visit.png">
+                    </div>
+                    <div class="country-holder ng-scope" ng-repeat="countryflagbadge in usritinerary.countryBadgesFlag track by $index">
+                      <img ng-src="img/india-visit.png" alt="" class="img-responsive doneLoading" src="img/india-visit.png">
+                    </div>
+                    <span class="country-count">+4</span>
+                  </div>
+                  <img ng-src="img/paris.jpg" alt="" class="img-responsive doneLoading" src="img/paris.jpg">
+                  <div class="itinerary-imgfoot ">
+                    <div class="imgfoot-top">
+                      <h4 class="ng-binding">Love In Paris</h4>
+                    </div>
+                    <div class="imgfoot-bottom clearfix">
+                      <div class="pull-left">
+                        <div class="journey-type">
+                          <ul class="list-inline">
+                            <li ng-repeat="journeytype in usritinerary.tripCat" class="ng-scope">
+                              <a href=""><img src="img/sunset.png" ng-src="img/sunset.png" alt="" height="20" class="doneLoading"></a>
+                            </li>
+                            <li ng-repeat="journeytype in usritinerary.tripCat" class="ng-scope">
+                              <a href=""><img src="img/bag-journey.png" ng-src="img/bag-journey.png" alt="" height="20" class="doneLoading"></a>
+                            </li>
+                            <li ng-repeat="journeytype in usritinerary.tripCat" class="ng-scope">
+                              <a href=""><img src="img/luxury-journey.png" ng-src="img/luxury-journey.png" alt="" height="20" class="doneLoading"></a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="pull-right">
+                        <div class="rt-foot-marg">
+                          <div class="journey-cost">
+                            <span class="ng-binding">$ 25000</span>
+                          </div>
+                          <div class="days-spent">
+                            <p><span class="block ng-binding">75</span>Days</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- itinerary activity card end -->
+            </div>
+            <!-- main travel sec end-->
+            <!-- footer travel sec -->
+            <div class="footer-travel-sec" ng-if="activity.footer">
+              <div class="social-field-types">
+                <div class="user-social-item clearfix">
+                  <div class="pull-left">
+                    <ul>
+                      <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
+                      <li>
+                        <a href="">
+                          <img src="img/comments.png" alt="" height="18" class="if-blue doneLoading">
+                        </a>
+                      </li>
+                      <li>
+                        <a href="">
+                          <img src="img/share.png" alt="" height="18" class="if-blue doneLoading">
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="pull-right">
+                    <div class="">
+                      <span>
+                    <img src="img/options.png" alt="" width="3" class="if-blue doneLoading">
+                  </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="social-likes-reviews">
+                  <div class="clearfix">
+                    <div class="pull-left">
+                      <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5 ng-binding">99</b>Likes</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- footer travel sec end-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="yash">
         <div class="row">
             <div class="col-md-4">
                 <div class="sai">
@@ -48,6 +218,6 @@
                <div class="col-md-4"></div>
                   <div class="col-md-4"></div>
         </div>
-    </div>
-    </div>
+    </div> -->
+  </div>
 </div>
