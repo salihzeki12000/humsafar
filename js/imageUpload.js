@@ -107,7 +107,6 @@ angular.module('imageupload', [])
 
 
                 element.bind('change', function (evt) {
-                    console.log(evt);
                     //when multiple always return an array of images
                     if (attrs.multiple)
                         scope.image = [];

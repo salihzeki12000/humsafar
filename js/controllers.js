@@ -1287,6 +1287,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   smoothZoom(map, level, cnt + 1, true);
                 });
                 setTimeout(function () {
+                  console.log("zooming in-->"+level,cnt);
                   map.setZoom(cnt)
                 }, 0.01);
               }
@@ -1300,6 +1301,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   smoothZoom(map, level, cnt - 1, false);
                 });
                 setTimeout(function () {
+                    console.log("zooming out-->"+level,cnt);
                   map.setZoom(cnt)
                 }, 0.01);
               }
@@ -6643,7 +6645,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.qItinerary = {};
     $scope.qItinerary.type = [];
     $scope.qItinerary.countryVisited = [];
-
+    $scope.qItinerary.photos=[];
     $scope.previousCountryId = [];
 
     // $scope.qItinerary.countryVisitedArray = [];
@@ -6756,12 +6758,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.searchCity = function (countryId, searchData) {
-      console.log(searchData, countryId)
       var formData = {
         "country": countryId,
         "search": searchData
       }
-      console.log(formData);
       var str = formData.search;
       if (str.length > 2) {
         NavigationService.searchCityByCountry(formData, function (data) {
@@ -6821,6 +6821,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.updateCitiesArr = function () {
       $scope.cities = [];
+    };
+
+    $scope.addPhotosCallback=function(data){
+      console.log(data);
+      $scope.qItinerary.photos.push({'name':data.data[0]})
     };
 
     $scope.getYear = [];
@@ -9782,6 +9787,60 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.oneAtATime = true;
+
+  //lead monitor accordion
+   $scope.leadMonAgent = [{
+     leadStatus: 'new',
+     leadImg:'img/follower.jpg',
+     leadName: 'Andrea Christina',
+     leadDate: '02/12/2016',
+     leadDestination : 'India',
+     leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+     leadPhone:'91961845656',
+     leadMail:'leads@leads.com',
+     leadItinerary:'Incredible India'
+   },{
+     leadStatus: 'actioned',
+     leadImg:'img/follower.jpg',
+     leadName: 'Andrea Christina',
+     leadDate: '02/12/2016',
+     leadDestination : 'India',
+     leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+     leadPhone:'91961845656',
+     leadMail:'leads@leads.com',
+     leadItinerary:'Incredible India'
+   },{
+     leadStatus: 'new',
+     leadImg:'img/follower.jpg',
+     leadName: 'Andrea Christina',
+     leadDate: '02/12/2016',
+     leadDestination : 'India',
+     leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+     leadPhone:'91961845656',
+     leadMail:'leads@leads.com',
+     leadItinerary:'Incredible India'
+   },{
+     leadStatus: 'actioned',
+     leadImg:'img/follower.jpg',
+     leadName: 'Andrea Christina',
+     leadDate: '02/12/2016',
+     leadDestination : 'India',
+     leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+     leadPhone:'91961845656',
+     leadMail:'leads@leads.com',
+     leadItinerary:'Incredible India'
+   },{
+     leadStatus: 'new',
+     leadImg:'img/follower.jpg',
+     leadName: 'Andrea Christina',
+     leadDate: '02/12/2016',
+     leadDestination : 'India',
+     leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+     leadPhone:'91961845656',
+     leadMail:'leads@leads.com',
+     leadItinerary:'Incredible India'
+   }];
+  //lead monitor accordion end
 
   //scroll change
   $(window).scroll(function () {
