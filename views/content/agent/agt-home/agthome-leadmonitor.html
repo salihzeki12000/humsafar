@@ -1,56 +1,91 @@
-<div class="agt-home-leadmonitor">
+<div class="agt-home-leadmonitor" style="background-color:transparent;">
   <div class="container">
-    <div class="agt-home-leadmonitorintro text-center">
+
+    <!-- EMPTY DATA SECTION -->
+    <div class="agt-home-leadmonitorintro text-center" hidden>
       <div class="row">
         <div class="col-md-offset-3 col-md-6">
           <h3 class="color-blue avenir-heavy">Open your business to the World ...</h3>
-          <p class="color-blue">People from world over have access to your Profile vis TraveLibro. The ones who are interested in availing your services, send you an enquiry from time to time which reflects on your Lead Monitor. The Lead Monitor shows you the most recent enquiries and keeps a record of the old ones. get in touch with these potetial clients and convert leads to real business!</p>
+          <p class="color-blue">People from world over have access to your Profile vis TraveLibro. The ones who are interested in availing your services, send you an enquiry from time to time which reflects on your Lead Monitor. The Lead Monitor shows you the most recent enquiries
+            and keeps a record of the old ones. get in touch with these potetial clients and convert leads to real business!</p>
         </div>
       </div>
+    </div>
+    <!-- EMPTY DATA SECTION END -->
 
+    <!-- LEAD ACCCORDION SECTION -->
+    <div class="agt-home-leadmonitortab">
       <div class="row">
-
-                <!-- Enquiry side tab -->
-                <div class="side-enquiry">
-                  <div class="enquiry-sidetab">
-                     <!-- ng-show="showEnquiry" ng-class="{'view-enquiry-list' : showEnquiry ,  ' ' : !showEnquiry}" -->
-                    <div class="enquirytab-head">
-                      <h4 class="avenir-roman color-blue">Enquires</h4>
+        <!-- NEW LEAD ACCORDION -->
+        <div class="">
+          <div class="">
+            <div class="">
+              <h4 class="avenir-roman color-white">New Leads <span class="avenir-heavy">2</span></h4>
+            </div>
+            <div class="leadtab-accordionbox">
+              <uib-accordion close-others="oneAtATime">
+                <uib-accordion-group is-open="status.open">
+                  <uib-accordion-heading>
+                    <div class="lead-tab-title color-blue avenir-medium clearfix">
+                      <div class="leadtab-profileholder  pull-left">
+                        <img src="img/follower.jpg" alt="" class="img-responsive">
+                      </div>
+                      <div class="leadtab-title">
+                        <p class="color-pink avenir-heavy">Andrea Cristina</p>
+                      </div>
+                      <div class="leadtab-msgdiv" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
+                        <p class="leadtab-msg"><span class="avenir-heavy">India </span>- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci soluta laboriosam commodi, voluptatibus impedit iusto pariatur eius quaerat voluptas explicabo vel laborum assumenda possimus
+                          quibusdam, dolores unde repellendus rerum expedita!</p>
+                      </div>
+                      <i class="pull-right color-white mt10 fa " ng-class="{'fa fa-chevron-up': status.open, 'fa fa-chevron-down': !status.open}"></i>
+                      <div class="leadtab-title pull-right" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
+                        <p>02/12/2016</p>
+                      </div>
                     </div>
-                    <div class="enquirytab-accordionbox">
-                      <uib-accordion close-others="oneAtATime">
-                        <uib-accordion-group ng-repeat="agtenquiry in enquiryAgent track by $index" is-open="status.open">
-                          <uib-accordion-heading>
-                            <div class="enquires-tab-title color-blue avenir-medium clearfix">
-                              <div class="enquiretab-profileholder  pull-left">
-                                <img ng-src="{{agtenquiry.enquireimgProfile}}" alt="" class="img-responsive">
-                              </div>
-                              <div class="enquiretab-title">
-                                <p class="color-pink avenir-heavy">{{agtenquiry.profileName}}</p>
-                              </div>
-                              <div class="enquiretab-msgdiv" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
-                                <p class="enquiretab-msg">{{agtenquiry.enquirymsghead}}</p>
-                              </div>
-                              <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open, 'fa fa-chevron-down': !status.open}"></i>
-                            </div>
-                          </uib-accordion-heading>
-                          <div class="enquirestab-mail">
-                            <p ng-bind-html="agtenquiry.enquirymsg"></p>
-                            <div class="btn-replyenquiry">
-                              <button type="button" class="btn btn-pink"><i class="fa fa-share" aria-hidden="true"></i> Reply </button>
-                            </div>
+                  </uib-accordion-heading>
+                  <div class="lead-contentbox">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="lead-details">
+                          <div class="lead-content bord-bot">
+                            <label class="color-cyan" for=""><i class="fa fa-phone" aria-hidden="true"></i> Contact: </label>
+                            <a href="tel">+919618254690</a>
+                            <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
                           </div>
-                        </uib-accordion-group>
-                      </uib-accordion>
+                          <div class="lead-content bord-bot">
+                            <label class="color-cyan" for=""><i class="fa fa-envelope" aria-hidden="true"></i> Email: </label>
+                            
+                            <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
+                          </div>
+                          <div class="lead-content bord-bot">
+                            <label class="color-cyan" for=""><i class="fa fa-plane" aria-hidden="true"></i> Destination: </label>
+                            <a href="">India</a>
+                          </div>
+                          <div class="lead-content bord-bot">
+                            <label class="color-cyan" for=""><i class="fa fa-thumb-tack" aria-hidden="true"></i> Itinerary: </label>
+                            <a href="" class="link-underline">Incredible India</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-7">
+                        <div class="lead-commentbox">
+                          <div class="lead-content">
+                            <label class="color-cyan" for=""><i class="fa fa-comments" aria-hidden="true"></i> Comment: </label>
+                            <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
+                            <p class="link-underline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, assumenda adipisci. Necessitatibus perspiciatis dolorum molestias sit veritatis in facere quae accusamus. Necessitatibus accusantium harum et. Soluta modi laboriosam, fugit excepturi.</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <!-- <div class="enquirytab-btn" ng-click="showEnquiry = !showEnquiry">
-                    <a class="btn-transparent-dark-blue btn" ng-class="{'hide' : showEnquiry}">Your Enquires</a>
-                    <a class="btn-dark-blue btn" ng-class="{'hide': !showEnquiry}"><i class="fa fa-chevron-down mr5"></i> Close</a>
-                  </div> -->
-                </div>
-                <!-- Enquiry side tab enD-->
+                </uib-accordion-group>
+              </uib-accordion>
+            </div>
+          </div>
+        </div>
+        <!-- NEW LEAD ACCORDION END -->
       </div>
     </div>
+    <!-- LEAD ACCCORDION SECTION END -->
   </div>
 </div>

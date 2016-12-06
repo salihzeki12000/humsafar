@@ -1078,7 +1078,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           height: $map.height(),
           width: $map.width()
         }
-       
+
         center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
         if (typeof google === 'object' && typeof google.maps === 'object') {
           var bounds = new google.maps.LatLngBounds();
@@ -1190,7 +1190,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             // console.log(Math.abs(ydiff));
             var currentZoom=currentZoom = map.getZoom();
             var commingZoom;
-            
+
             // if (value) {
             //   var commingMarkerBounds = new google.maps.LatLngBounds();
             //   commingZoom = commingMap.getZoom();
@@ -1214,7 +1214,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 commingZoom = currentZoom;
               }
             }
-             
+
               map.fitBounds(markerBounds);
               // currentZoom = map.getZoom();
                 console.log(currentZoom, commingZoom);
@@ -8644,14 +8644,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         url = "usr-travelactivity";
         $scope.agtuseroptions.active = "usr-travelactivity";
         break;
-      case 5 :
+      case 5:
         url = "usr-aboutus";
         $scope.agtuseroptions.active = "usr-aboutus";
         break;
-      // case 6:
-      //   url = "usr-aboutus";
-      //   $scope.agtuseroptions.active = "usr-aboutus";
-      //   break;
+      default:
+        url = "usr-itinerary";
+        $scope.agtuseroptions.active = "usr-itinerary";
+        break;
     }
     console.log(url);
     $state.go("agent-user", {
@@ -8660,7 +8660,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       notify: false
     });
   };
-// tab change end
+  // tab change end
 
 
 
@@ -9992,6 +9992,182 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
   };
   // itinerary popover end
+
+  //user itinerary cards
+  $scope.usrItineraryCard = [{
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '35000',
+    noDays: '55',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '1505',
+    agtRating: '3.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '15 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '75000',
+    noDays: '15',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '342',
+    agtRating: '4.0',
+    agtLikesCount: '199',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }];
+  //user itinerary cards end
+
+  // tour packages card
+  $scope.usrTourPackageCard = [{
+    tourImg: 'img/paris.jpg',
+    agttourTitle: 'Love In Paris',
+    agttourCost: '25000',
+    tourDayC: '4',
+    tourNightC: '3',
+    tourcategoryTitle: 'Adventure',
+      tourcategoryImg: 'img/agt-cat1.png',
+    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    tourImg: 'img/paris.jpg',
+    agttourTitle: 'Love In Paris',
+    agttourCost: '25000',
+    tourDayC: '4',
+    tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat5.png',
+      tourcategoryTitle: 'Backpacking',
+    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    tourImg: 'img/paris.jpg',
+    agttourTitle: 'Love In Paris',
+    agttourCost: '25000',
+    tourDayC: '4',
+    tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat4.png',
+      tourcategoryTitle: 'Romance',
+    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    tourImg: 'img/paris.jpg',
+    agttourTitle: 'Love In Paris',
+    agttourCost: '25000',
+    tourDayC: '4',
+    tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat9.png',
+      tourcategoryTitle: 'Friends',
+    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    tourImg: 'img/paris.jpg',
+    agttourTitle: 'Love In Paris',
+    agttourCost: '25000',
+    tourDayC: '4',
+    tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat1.png',
+      tourcategoryTitle: 'Adventure',
+    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    tourImg: 'img/paris.jpg',
+    agttourTitle: 'Love In Paris',
+    agttourCost: '25000',
+    tourDayC: '4',
+    tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat7.png',
+      tourcategoryTitle: 'Luxury',
+    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    tourImg: 'img/paris.jpg',
+    agttourTitle: 'Love In Paris',
+    agttourCost: '25000',
+    tourDayC: '4',
+    tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat1.png',
+      tourcategoryTitle: 'Adventure',
+    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    tourImg: 'img/paris.jpg',
+    agttourTitle: 'Love In Paris',
+    agttourCost: '25000',
+    tourDayC: '4',
+    tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat4.png',
+      tourcategoryTitle: 'Romance',
+    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }];
+  // tour packages card end
 
   // gallery card
   $scope.agenPhotogallery = [
