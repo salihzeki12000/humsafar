@@ -1073,18 +1073,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
       initMap = function () {
-
-
+        var $map = $('#map');
+        var mapDim = {
+          height: $map.height(),
+          width: $map.width()
+        }
+       
         center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
-
         if (typeof google === 'object' && typeof google.maps === 'object') {
           var bounds = new google.maps.LatLngBounds();
-
           setMarker = function (status, n, i) {
-
             var jump = centers.length;
             if (_.isEmpty(markers[i])) {
-
               var position = new google.maps.LatLng(n.lat, n.lng);
               // bounds.extend(position);
               var obj = {
@@ -1110,10 +1110,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             zoom: 4
               // styles: mapStyle
           });
+
+          commingMap = new google.maps.Map('', {
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            center: center,
+            zoom: 4
+              // styles: mapStyle
+          });
+
+
           var step = 0;
           var numSteps = 100; //Change this to set animation resolution
-
-
           //Grey static polylines starts here
           travelPath = new google.maps.Polyline({
             path: centers,
@@ -1124,39 +1132,93 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           });
           travelPath.setMap(map);
           //Grey static polylines ends here
-          _.each(centers, function (n, index) {
-            setMarker(false, n, index + 1);
-          });
 
-          setMarker(true, centers[0], 1);
+
+          var myVar = setInterval(myTimer, 1000);
+
+          function myTimer() {
+            if (centers.length != 0) {
+              _.each(centers, function (n, index) {
+                setMarker(false, n, index + 1);
+              });
+              setMarker(true, centers[0], 1);
+              clearInterval(myVar);
+            } else {
+              console.log("didnt got center");
+            }
+          };
+          // _.each(centers, function (n, index) {
+          //   setMarker(false, n, index + 1);
+          // });
+          // setMarker(true, centers[0], 1);
+
+          function getBoundsZoomLevel(bounds, mapDim) {
+            var WORLD_DIM = {
+              height: 256,
+              width: 256
+            };
+            var ZOOM_MAX = 21;
+
+            function latRad(lat) {
+              var sin = Math.sin(lat * Math.PI / 180);
+              var radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
+              return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
+            }
+
+            function zoom(mapPx, worldPx, fraction) {
+              return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2);
+            }
+
+            var ne = bounds.getNorthEast();
+            var sw = bounds.getSouthWest();
+
+            var latFraction = (latRad(ne.lat()) - latRad(sw.lat())) / Math.PI;
+
+            var lngDiff = ne.lng() - sw.lng();
+            var lngFraction = ((lngDiff < 0) ? (lngDiff + 360) : lngDiff) / 360;
+
+            var latZoom = zoom(mapDim.height, WORLD_DIM.height, latFraction);
+            var lngZoom = zoom(mapDim.width, WORLD_DIM.width, lngFraction);
+
+            return Math.min(latZoom, lngZoom, ZOOM_MAX);
+          }
 
           function redLineDraw(i, departure, arrival, percentComplete, value, flag) {
             // console.log(percentComplete, flag);
             var xdiff = (centers[i].lat - centers[i - 1].lat);
             var ydiff = (centers[i].lng - centers[i - 1].lng);
-
             // console.log(Math.abs(ydiff));
-            // if (Math.abs(ydiff) < 4 && value) {
-            //   smoothZoom(map, 9, map.getZoom(), true); //for zooming in
-            // } else if (Math.abs(ydiff) > 4 && value) {
-            //   smoothZoom(map, 4, map.getZoom(), false); //for zooming out
+            var currentZoom=currentZoom = map.getZoom();
+            var commingZoom;
+            
+            // if (value) {
+            //   var commingMarkerBounds = new google.maps.LatLngBounds();
+            //   commingZoom = commingMap.getZoom();
+            //   commingMarkerBounds.extend(departure);
+            //   commingMarkerBounds.extend(arrival);
+            //   commingMap.fitBounds(commingMarkerBounds);
             // }
 
-            //  console.log(value + "---bounds set");
-            //   var markerBounds = new google.maps.LatLngBounds();
-            //   markerBounds.extend(departure);
-            //   markerBounds.extend(arrival);
-            //   map.fitBounds(markerBounds);
-
-
             if (value) {
-              console.log(value + "---bounds set");
               var markerBounds = new google.maps.LatLngBounds();
               markerBounds.extend(departure);
               markerBounds.extend(arrival);
-              map.fitBounds(markerBounds);
-            }
+              commingZoom = getBoundsZoomLevel(markerBounds, mapDim);
 
+            if(Math.abs(commingZoom-currentZoom)>2){
+               if (commingZoom > currentZoom) {
+                smoothZoom(map, commingZoom, currentZoom, true); //for zooming in
+                commingZoom = currentZoom;
+              } else if (commingZoom < currentZoom) {
+                smoothZoom(map, commingZoom, currentZoom, false); //for zooming out
+                commingZoom = currentZoom;
+              }
+            }
+             
+              map.fitBounds(markerBounds);
+              // currentZoom = map.getZoom();
+                console.log(currentZoom, commingZoom);
+            }
 
             var frac1 = xdiff / 100;
             var frac2 = ydiff / 100;
@@ -1186,38 +1248,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 map: map,
               });
             }
-
-            // function offsetCenter(latlng, offsetx, offsety) {
-
-            //   // latlng is the apparent centre-point
-            //   // offsetx is the distance you want that point to move to the right, in pixels
-            //   // offsety is the distance you want that point to move upwards, in pixels
-            //   // offset can be negative
-            //   // offsetx and offsety are both optional
-
-            //   var scale = Math.pow(2, map.getZoom());
-
-            //   var worldCoordinateCenter = map.getProjection().fromLatLngToPoint(latlng);
-            //   var pixelOffset = new google.maps.Point((offsetx / scale) || 0, (offsety / scale) || 0);
-
-            //   var worldCoordinateNewCenter = new google.maps.Point(
-            //     worldCoordinateCenter.x - pixelOffset.x,
-            //     worldCoordinateCenter.y + pixelOffset.y
-            //   );
-
-            //   var newCenter = map.getProjection().fromPointToLatLng(worldCoordinateNewCenter);
-
-            //   map.setCenter(newCenter);
-
-            // }
-
             var drawLine = function (departure, arrival, percent, i, value) {
               percentFrac = percent / 100;
               var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
               line[i].setPath([departure, are_we_there_yet]);
               //moving center starts here
               if (value) {
-
                 // center = {
                 //   "lat": iniLat + (frac1 * percent),
                 //   "lng": iniLng + (frac2 * percent)
@@ -1230,7 +1266,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               }
               // offsetCenter(center, 100, 0);
               map.setCenter(center);
-              map.panBy(-150, 0);
+              // map.panBy(-150, 0);
               //moving center ends here
 
               // if (percent >= 100) {
@@ -1239,7 +1275,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             };
             drawLine(departure, arrival, percentComplete, i, value);
           };
-
 
           function smoothZoom(map, level, cnt, mode) {
             if (mode == true) {
@@ -1253,7 +1288,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 });
                 setTimeout(function () {
                   map.setZoom(cnt)
-                }, 1);
+                }, 0.01);
               }
             } else {
               if (cnt <= (level - 1)) { //zooming out
@@ -1266,17 +1301,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 });
                 setTimeout(function () {
                   map.setZoom(cnt)
-                }, 1);
+                }, 0.01);
               }
             }
-          }
-
-
-
-
-
-
-
+          };
           pointsForLine = function (i, percentComplete, value, flag) {
             var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
             var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
@@ -1294,13 +1322,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               // markers[linesCount].setIcon("img/maps/small-marker.png");
               linesCount--;
             };
-
             while ((i < markerCount) && (value == true) && (percentComplete < 100)) {
               markers[markerCount].setIcon("img/maps/small-marker.png");
               markerCount--;
             }
             //clearPolyLines ends
-
             //draw succeeding polyLines starts
             if (i > 1) {
               pointsForLine(i - 1, 100);
@@ -1313,7 +1339,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       setTimeout(function () {
         initMap();
       }, 1000);
-
     }
     //maps integration ends here
 
@@ -1325,13 +1350,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.viewCardComment = false;
     $scope.getCard = "";
-    $scope.getCommentsData = function (id, uniqueId, postString,likeDone,likeCount) {
+    $scope.getCommentsData = function (id, uniqueId, postString, likeDone, likeCount) {
       console.log(likeCount);
       // console.log(id, uniqueId, postString,likeDone,likeCount);
       $scope.post_id = id;
       $scope.post_uniqueId = uniqueId;
       $scope.post_postString = postString;
-      $scope.post_likeDone=likeDone;
+      $scope.post_likeDone = likeDone;
       // //open modal starts
       // $uibModal.open({
       //   templateUrl: "views/modal/notify.html",
@@ -1391,26 +1416,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     };
 
-    $scope.likeUnlikePost=function(){
-       $scope.ongo.likeDone = !$scope.ongo.likeDone;
-        // var id = $scope.ongo.uniqueId;
-        if ($scope.ongo.likeDone) {
-          $scope.ongo.likeCount = $scope.ongo.likeCount + 1;
-          var formData = {
-            'uniqueId': id
-          };
-        } else {
-          $scope.ongo.likeCount = $scope.ongo.likeCount - 1;
-          var formData = {
-            'uniqueId': id,
-            'unlike': 'true'
-          };
-        }
-        $http({
-          url: adminURL + "/post/updateLikePostWeb",
-          method: "POST",
-          data: formData
-        })
+    $scope.likeUnlikePost = function () {
+      $scope.ongo.likeDone = !$scope.ongo.likeDone;
+      // var id = $scope.ongo.uniqueId;
+      if ($scope.ongo.likeDone) {
+        $scope.ongo.likeCount = $scope.ongo.likeCount + 1;
+        var formData = {
+          'uniqueId': id
+        };
+      } else {
+        $scope.ongo.likeCount = $scope.ongo.likeCount - 1;
+        var formData = {
+          'uniqueId': id,
+          'unlike': 'true'
+        };
+      }
+      $http({
+        url: adminURL + "/post/updateLikePostWeb",
+        method: "POST",
+        data: formData
+      })
     };
 
 
@@ -6569,12 +6594,40 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }]
     }, ];
     // country list end
+    // $scope.addClass = "";
+    // $scope.addCountryCity = [{}];
+    // $scope.addPanel = function () {
+    //   $scope.addCountryCity.push({});
+    //   $scope.addClass = "added-panel"
+    // }
     $scope.addClass = "";
-    $scope.addCountryCity = [{}];
-    $scope.addPanel = function () {
-      $scope.addCountryCity.push({});
-      $scope.addClass = "added-panel"
-    }
+    $scope.countryPanel = false;
+    $scope.countryCity = [{}];
+    $scope.countryCity[0].detailedCity = [{}];
+    console.log($scope.countryCity.length + "  initial length of array  ");
+    $scope.addCountryCity = function () {
+      $scope.countryCity.push({});
+      $scope.countryCity[$scope.countryCity.length - 1].detailedCity = [{}];
+      console.log($scope.countryCity.length - 1 + " + 1 length of array now");
+      $scope.addClass = "city-country-holder";
+    };
+    $scope.removeCountryCity = function (index) {
+        $scope.countryCity.splice(index, 1)
+        console.log(index);
+      }
+      // city add
+    console.log($scope.countryCity.detailedCity + "detailedCity");
+    $scope.addYourCity = function () {
+        console.log("clicked city add");
+        $scope.countryCity[$scope.countryCity.length - 1].detailedCity.push({});
+      }
+      // city add end
+      // remove city
+    $scope.removeCity = function (index) {
+        console.log("removed city");
+        $scope.countryCity[$scope.countryCity.length - 1].detailedCity.splice(index, 1);
+      }
+      // remove city end
 
   })
   .controller('QuickItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -8135,15 +8188,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 })
 
-.controller('AgentloginCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+.controller('AgentloginCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
   $scope.template = TemplateService.changecontent("agent-login"); //Use same name of .html file
   $scope.menutitle = NavigationService.makeactive("Agent Login"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.oneAtATime = true;
   //about textarea counter
-  $scope.$on('$viewContentLoaded', function() {
-    $timeout(function() {
+  $scope.$on('$viewContentLoaded', function () {
+    $timeout(function () {
       $('#textareaChars').keyup(updateCount);
       $('#textareaChars').keydown(updateCount);
       $('#remainingC').text(0 + '/ 500');
@@ -8157,7 +8210,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   //about textarea counter end
   $scope.agentloginView = 1;
-  $scope.agentSec = function(val) {
+  $scope.agentSec = function (val) {
       if (val == 1) {
         $scope.agentloginView = 1;
       } else if (val == 2) {
@@ -8249,7 +8302,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   //Services end
 })
 
-.controller('AgentsettingCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+.controller('AgentsettingCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
   $scope.template = TemplateService.changecontent("agent-setting"); //Use same name of .html file
   $scope.menutitle = NavigationService.makeactive("Agent Settings"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
@@ -8279,8 +8332,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   //country setting accordion end
 
   // Textarea counter
-  $scope.$on('$viewContentLoaded', function() {
-    $timeout(function() {
+  $scope.$on('$viewContentLoaded', function () {
+    $timeout(function () {
       $('#textareaChars').keyup(updateCount);
       $('#textareaChars').keydown(updateCount);
       $('#remainAbt').text(0 + '/ 500');
@@ -8295,7 +8348,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   //setting tab navigation
   $scope.showAgtSetting = 1;
-  $scope.agtsetting = function(val) {
+  $scope.agtsetting = function (val) {
     if (val == 1) {
       $scope.showAgtSetting = 1;
     } else if (val == 2) {
@@ -8471,7 +8524,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 })
 
 
-.controller('AgentuserCtrl', function($scope, TemplateService, NavigationService, $timeout, $state) {
+.controller('AgentuserCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
   $scope.template = TemplateService.changecontent("agent-user"); //Use same name of .html file
   $scope.menutitle = NavigationService.makeactive("Agent User"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
@@ -8483,7 +8536,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   $scope.viewEnquiry = false;
   $scope.getBackdrop = "";
-  $scope.showEnquiry = function() {
+  $scope.showEnquiry = function () {
     // console.log("click");
     if ($scope.viewEnquiry == false) {
       $scope.getBackdrop = "backdrop-enquiry";
@@ -8498,7 +8551,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   //contact us
   $scope.viewContact = false;
   $scope.getBackdrop = "";
-  $scope.showContact = function() {
+  $scope.showContact = function () {
     // console.log("click");
     if ($scope.viewContact == false) {
       $scope.getBackdrop = "backdrop-enquiry";
@@ -8514,7 +8567,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
   //scroll change
-  $(window).scroll(function() {
+  $(window).scroll(function () {
     //  var navHeight = $('.img-holder-agent').height($(window).height() - 41);
     var scroll = $(window).scrollTop();
     //console.log(scroll);
@@ -8588,17 +8641,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agtuseroptions.active = "usr-testimonialreviews";
         break;
       case 4:
-        url = "usr-aboutus";
-        $scope.agtuseroptions.active = "usr-aboutus";
-        break;
-      case 5:
         url = "usr-travelactivity";
         $scope.agtuseroptions.active = "usr-travelactivity";
         break;
-      case 6:
+      case 5 :
         url = "usr-aboutus";
         $scope.agtuseroptions.active = "usr-aboutus";
         break;
+      // case 6:
+      //   url = "usr-aboutus";
+      //   $scope.agtuseroptions.active = "usr-aboutus";
+      //   break;
     }
     console.log(url);
     $state.go("agent-user", {
@@ -8607,7 +8660,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       notify: false
     });
   };
-  // tab change end
+// tab change end
+
+
 
   //user itinerary cards
   $scope.usrItineraryCard = [{
@@ -8717,7 +8772,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourDayC: '4',
     tourNightC: '3',
     tourcategoryTitle: 'Adventure',
-      tourcategoryImg: 'img/agt-cat1.png',
+    tourcategoryImg: 'img/agt-cat1.png',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8725,8 +8780,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat5.png',
-      tourcategoryTitle: 'Backpacking',
+    tourcategoryImg: 'img/agt-cat5.png',
+    tourcategoryTitle: 'Backpacking',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8734,8 +8789,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat4.png',
-      tourcategoryTitle: 'Romance',
+    tourcategoryImg: 'img/agt-cat4.png',
+    tourcategoryTitle: 'Romance',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8743,8 +8798,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat9.png',
-      tourcategoryTitle: 'Friends',
+    tourcategoryImg: 'img/agt-cat9.png',
+    tourcategoryTitle: 'Friends',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8752,8 +8807,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat1.png',
-      tourcategoryTitle: 'Adventure',
+    tourcategoryImg: 'img/agt-cat1.png',
+    tourcategoryTitle: 'Adventure',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8761,8 +8816,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat7.png',
-      tourcategoryTitle: 'Luxury',
+    tourcategoryImg: 'img/agt-cat7.png',
+    tourcategoryTitle: 'Luxury',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8770,8 +8825,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat1.png',
-      tourcategoryTitle: 'Adventure',
+    tourcategoryImg: 'img/agt-cat1.png',
+    tourcategoryTitle: 'Adventure',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8779,8 +8834,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat4.png',
-      tourcategoryTitle: 'Romance',
+    tourcategoryImg: 'img/agt-cat4.png',
+    tourcategoryTitle: 'Romance',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }];
   // tour packages card end
@@ -8872,8 +8927,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
   // review textarea counter
-  $scope.$on('$viewContentLoaded', function() {
-    $timeout(function() {
+  $scope.$on('$viewContentLoaded', function () {
+    $timeout(function () {
       $('#textareaChars').keyup(updateCount);
       $('#textareaChars').keydown(updateCount);
       $('#reviewremainingC').text(0 + '/ 300');
@@ -8886,21 +8941,44 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   });
 
   // review textarea counter end
+   // travel activity json
+  $scope.travelActivity = [
+    {
+      header: true,
+      footer: true,
+      agentHeader : true,
+      travellerAgent : true,
+      agentName: "Holiday Travallers",
+      agentPost : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
+    },
+    {
+      header: false,
+      footer: false,
+      tourPackage: true,
+    },
+    {
+      header: true,
+      footer: true,
+      itineraryHeader : true,
+      itinerary: true,
+    },
+  ];
+  // travel activity json end
 
   // ITINERARY FILTER
   //OpenFilter
   $scope.isopenfilter = false;
-  $scope.openFilter = function() {
+  $scope.openFilter = function () {
     $scope.isopenfilter = !$scope.isopenfilter;
   };
   //OpenFiltertab
   $scope.isopenfiltertab = false;
-  $scope.openFiltertab = function() {
+  $scope.openFiltertab = function () {
     $scope.isopenfilter = !$scope.isopenfilter;
   };
   $scope.country = [];
 
-  $scope.addLine = function() {
+  $scope.addLine = function () {
     $scope.lines.push($scope.lines.length);
   };
   // this.addText = function(text) {
@@ -9698,7 +9776,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   // category type end
 })
 
-.controller('AgenthomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $state) {
+.controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
   $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
   $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
@@ -9706,7 +9784,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.oneAtATime = true;
 
   //scroll change
-  $(window).scroll(function() {
+  $(window).scroll(function () {
     var scroll = $(window).scrollTop();
     //console.log(scroll);
     if (scroll >= 225) {
@@ -9720,8 +9798,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   //scroll change end
 
   //status character counter
-  $scope.$on('$viewContentLoaded', function() {
-    $timeout(function() {
+  $scope.$on('$viewContentLoaded', function () {
+    $timeout(function () {
       $('#postStatus').keyup(updateCount);
       $('#postStatus').keydown(updateCount);
       $('#postcount').text(0 + '/350');
@@ -9732,7 +9810,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }, 100);
   });
-    //status character counter end
+  //status character counter end
 
   // tab change
   var allagthome = ["views/content/agent/agt-home/agthome-itinerary.html", "views/content/agent/agt-home/agthome-tourpackages.html", "views/content/agent/agt-home/agthome-photovideos.html", "views/content/agent/agt-home/agthome-testimonialreviews.html",
@@ -9785,7 +9863,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   }
   $scope.agenthomeItinerary = true;
   $scope.agentFixednav = ""
-  $scope.getTab = function(view) {
+  $scope.getTab = function (view) {
     $scope.agthome.innerView = allagthome[view];
     var url = "agthome-itinerary";
     var active = "";
@@ -9896,20 +9974,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   // itinerary popover
   $scope.viewdetailInfo = false;
-  $scope.showdetailInfo = function(){
-    if($scope.viewdetailInfo == false) {
+  $scope.showdetailInfo = function () {
+    if ($scope.viewdetailInfo == false) {
       $scope.viewdetailInfo = true;
       console.log("true");
-    }else {
+    } else {
       $scope.viewdetailInfo = false;
     }
   };
 
   $scope.viewquickInfo = false;
-  $scope.showquickInfo = function(){
-    if($scope.viewquickInfo == false) {
+  $scope.showquickInfo = function () {
+    if ($scope.viewquickInfo == false) {
       $scope.viewquickInfo = true;
-    }else {
+    } else {
       $scope.viewquickInfo = false;
     }
   };

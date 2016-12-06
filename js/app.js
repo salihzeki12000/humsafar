@@ -654,6 +654,7 @@ firstapp.directive('functionmap', ['$parse', function($parse) {
             if (n <= currentScroll && divPositions[index + 1] > currentScroll) { //would work for  1st checkIn till second last checkin coz divPositions[index + 1] would return false
               // console.log("inside 1st if");
               ith = index;
+              
               if (n > 0) {
                 percentage = ((currentScroll - n) / divHeights[index]) * 100; //percentage based on size of div
                 if (ith > 0) {
