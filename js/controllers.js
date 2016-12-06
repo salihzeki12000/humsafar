@@ -839,7 +839,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
   })
-  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, $state, $stateParams, $filter) {
+  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, $state, $stateParams, $filter, $http) {
     //Used to name the .html file
     var slug = $stateParams.id;
     var checkinCount = "";
@@ -934,391 +934,485 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       result.startTime = new Date(date + " " + time);
       OnGoJourney.updateBannerDateTime(result, callback);
     };
-
-
     //change banner date and time ends
 
+    //maps integration starts here
     {
-      //mapStyle
-      var mapStyle = [{
-        "featureType": "landscape.man_made",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#f7f1df"
+      {
+        //mapStyle
+        var mapStyle = [{
+          "featureType": "landscape.man_made",
+          "elementType": "geometry",
+          "stylers": [{
+            "color": "#f7f1df"
+          }]
+        }, {
+          "featureType": "landscape.natural",
+          "elementType": "geometry",
+          "stylers": [{
+            "color": "#d0e3b4"
+          }]
+        }, {
+          "featureType": "landscape.natural.terrain",
+          "elementType": "geometry",
+          "stylers": [{
+            "visibility": "off"
+          }]
+        }, {
+          "featureType": "poi",
+          "elementType": "labels",
+          "stylers": [{
+            "visibility": "off"
+          }]
+        }, {
+          "featureType": "poi.business",
+          "elementType": "all",
+          "stylers": [{
+            "visibility": "off"
+          }]
+        }, {
+          "featureType": "poi.medical",
+          "elementType": "geometry",
+          "stylers": [{
+            "color": "#fbd3da"
+          }]
+        }, {
+          "featureType": "poi.park",
+          "elementType": "geometry",
+          "stylers": [{
+            "color": "#bde6ab"
+          }]
+        }, {
+          "featureType": "road",
+          "elementType": "geometry.stroke",
+          "stylers": [{
+            "visibility": "off"
+          }]
+        }, {
+          "featureType": "road",
+          "elementType": "labels",
+          "stylers": [{
+            "visibility": "off"
+          }]
+        }, {
+          "featureType": "road.highway",
+          "elementType": "geometry.fill",
+          "stylers": [{
+            "color": "#ffe15f"
+          }]
+        }, {
+          "featureType": "road.highway",
+          "elementType": "geometry.stroke",
+          "stylers": [{
+            "color": "#efd151"
+          }]
+        }, {
+          "featureType": "road.arterial",
+          "elementType": "geometry.fill",
+          "stylers": [{
+            "color": "#ffffff"
+          }]
+        }, {
+          "featureType": "road.local",
+          "elementType": "geometry.fill",
+          "stylers": [{
+            "color": "black"
+          }]
+        }, {
+          "featureType": "transit.station.airport",
+          "elementType": "geometry.fill",
+          "stylers": [{
+            "color": "#cfb2db"
+          }]
+        }, {
+          "featureType": "water",
+          "elementType": "geometry",
+          "stylers": [{
+            "color": "#a2daf2"
+          }]
         }]
-      }, {
-        "featureType": "landscape.natural",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#d0e3b4"
-        }]
-      }, {
-        "featureType": "landscape.natural.terrain",
-        "elementType": "geometry",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "poi",
-        "elementType": "labels",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "poi.business",
-        "elementType": "all",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "poi.medical",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#fbd3da"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#bde6ab"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "labels",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "road.highway",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "#ffe15f"
-        }]
-      }, {
-        "featureType": "road.highway",
-        "elementType": "geometry.stroke",
-        "stylers": [{
-          "color": "#efd151"
-        }]
-      }, {
-        "featureType": "road.arterial",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "#ffffff"
-        }]
-      }, {
-        "featureType": "road.local",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "black"
-        }]
-      }, {
-        "featureType": "transit.station.airport",
-        "elementType": "geometry.fill",
-        "stylers": [{
-          "color": "#cfb2db"
-        }]
-      }, {
-        "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#a2daf2"
-        }]
-      }]
 
-      //latlongs format
-      // var center = {
-      //   lat: 19.089560,
-      //   lng: 72.865614
-      // };
+        //latlongs format
+        // var center = {
+        //   lat: 19.089560,
+        //   lng: 72.865614
+        // };
 
-      // var centers = [{
-      //   lat: 19.089560,
-      //   lng: 72.865614
-      // }, {
-      //   lat: 51.470022,
-      //   lng: -0.454295
-      // }, {
-      //   lat: 29.276052,
-      //   lng: -81.034910
-      // }, {
-      //   lat: 51.512072,
-      //   lng: -0.144223
-      // }, {
-      //   lat: 52.923608,
-      //   lng: -1.482560
-      // }, {
-      //   lat: 51.899603,
-      //   lng: -1.153590
-      // }, {
-      //   lat: 51.470022,
-      //   lng: -0.454295
-      // }, {
-      //   lat: 25.253175,
-      //   lng: 55.365673
-      // }];
-    }
-    line = _.map(centers, function () {
-      return {};
-    });
-    _.map(centers, function () {
-      markers.push({});
-    });
-
-
-    initMap = function () {
-
-
-      center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
-
-      if (typeof google === 'object' && typeof google.maps === 'object') {
-        var bounds = new google.maps.LatLngBounds();
-
-        setMarker = function (status, n, i) {
-
-          var jump = centers.length;
-          if (_.isEmpty(markers[i])) {
-
-            var position = new google.maps.LatLng(n.lat, n.lng);
-            // bounds.extend(position);
-            var obj = {
-              position: position,
-              map: map,
-              icon: "img/maps/small-marker.png"
-            };
-            if (status) {
-              obj.icon = "img/maps/marker.png";
-              console.log("big marker icon set");
-            }
-            marker = new google.maps.Marker(obj);
-            markers[i] = marker;
-          } else {
-            markers[i].setIcon("img/maps/marker.png");
-          }
-        };
-
-        map = new google.maps.Map(document.getElementById('map'), {
-          draggable: true,
-          animation: google.maps.Animation.DROP,
-          center: center,
-          zoom: 4
-            // styles: mapStyle
-        });
-        var step = 0;
-        var numSteps = 100; //Change this to set animation resolution
-
-
-        //Grey static polylines starts here
-        travelPath = new google.maps.Polyline({
-          path: centers,
-          geodesic: true,
-          strokeColor: 'grey',
-          strokeOpacity: 1.0,
-          strokeWeight: 1
-        });
-        travelPath.setMap(map);
-        //Grey static polylines ends here
-        _.each(centers, function (n, index) {
-          setMarker(false, n, index + 1);
-        });
-
-        setMarker(true, centers[0], 1);
-
-        function redLineDraw(i, departure, arrival, percentComplete, value, flag) {
-          // console.log(percentComplete, flag);
-          var xdiff = (centers[i].lat - centers[i - 1].lat);
-          var ydiff = (centers[i].lng - centers[i - 1].lng);
-
-          // console.log(Math.abs(ydiff));
-          // if (Math.abs(ydiff) < 4 && value) {
-          //   smoothZoom(map, 9, map.getZoom(), true); //for zooming in
-          // } else if (Math.abs(ydiff) > 4 && value) {
-          //   smoothZoom(map, 4, map.getZoom(), false); //for zooming out
-          // }
-
-          //  console.log(value + "---bounds set");
-          //   var markerBounds = new google.maps.LatLngBounds();
-          //   markerBounds.extend(departure);
-          //   markerBounds.extend(arrival);
-          //   map.fitBounds(markerBounds);
-
-
-          if (value) {
-            console.log(value + "---bounds set");
-            var markerBounds = new google.maps.LatLngBounds();
-            markerBounds.extend(departure);
-            markerBounds.extend(arrival);
-            map.fitBounds(markerBounds);
-          }
-
-
-          var frac1 = xdiff / 100;
-          var frac2 = ydiff / 100;
-          var iniLat = centers[i - 1].lat;
-          var iniLng = centers[i - 1].lng;
-          var timePerStep = frac1; //Change this to alter animation speed
-          var lineSymbol = {
-            path: 'M 0,-1 0,1',
-            strokeOpacity: 1,
-            scale: 4
-          };
-          if (percentComplete == 100 && flag) {
-            setMarker(true, centers[i], i + 1);
-          }
-          if (_.isEmpty(line[i])) {
-            line[i] = new google.maps.Polyline({
-              path: [departure, departure],
-              strokeColor: "#FF0000",
-              strokeOpacity: 0,
-              icons: [{
-                icon: lineSymbol,
-                offset: '0',
-                repeat: '25px'
-              }],
-              strokeWeight: 3,
-              geodesic: true, //set to false if you want straight line instead of arc
-              map: map,
-            });
-          }
-
-          // function offsetCenter(latlng, offsetx, offsety) {
-
-          //   // latlng is the apparent centre-point
-          //   // offsetx is the distance you want that point to move to the right, in pixels
-          //   // offsety is the distance you want that point to move upwards, in pixels
-          //   // offset can be negative
-          //   // offsetx and offsety are both optional
-
-          //   var scale = Math.pow(2, map.getZoom());
-
-          //   var worldCoordinateCenter = map.getProjection().fromLatLngToPoint(latlng);
-          //   var pixelOffset = new google.maps.Point((offsetx / scale) || 0, (offsety / scale) || 0);
-
-          //   var worldCoordinateNewCenter = new google.maps.Point(
-          //     worldCoordinateCenter.x - pixelOffset.x,
-          //     worldCoordinateCenter.y + pixelOffset.y
-          //   );
-
-          //   var newCenter = map.getProjection().fromPointToLatLng(worldCoordinateNewCenter);
-
-          //   map.setCenter(newCenter);
-
-          // }
-
-          var drawLine = function (departure, arrival, percent, i, value) {
-            percentFrac = percent / 100;
-            var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
-            line[i].setPath([departure, are_we_there_yet]);
-            //moving center starts here
-            if (value) {
-
-              // center = {
-              //   "lat": iniLat + (frac1 * percent),
-              //   "lng": iniLng + (frac2 * percent)
-              // }
-              center = {
-                "lat": iniLat + (centers[i].lat - centers[i - 1].lat) / 2,
-                "lng": iniLng + (centers[i].lng - centers[i - 1].lng) / 2
-              }
-              center = new google.maps.LatLng(center.lat, center.lng);
-            }
-            // offsetCenter(center, 100, 0);
-            map.setCenter(center);
-            map.panBy(-150, 0);
-            //moving center ends here
-
-            // if (percent >= 100) {
-            //   setMarker(true, center);
-            // }
-          };
-          drawLine(departure, arrival, percentComplete, i, value);
-        };
-
-
-        function smoothZoom(map, level, cnt, mode) {
-          if (mode == true) {
-            if (cnt >= level) { //zooming in
-              return;
-            } else {
-              var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
-                google.maps.event.removeListener(z);
-                console.log("zooming in smoothZoom");
-                smoothZoom(map, level, cnt + 1, true);
-              });
-              setTimeout(function () {
-                map.setZoom(cnt)
-              }, 1);
-            }
-          } else {
-            if (cnt <= (level - 1)) { //zooming out
-              return;
-            } else {
-              var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
-                google.maps.event.removeListener(z);
-                console.log("zooming out smoothZoom");
-                smoothZoom(map, level, cnt - 1, false);
-              });
-              setTimeout(function () {
-                map.setZoom(cnt)
-              }, 1);
-            }
-          }
-        }
-
-
-
-
-
-
-
-        pointsForLine = function (i, percentComplete, value, flag) {
-          var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
-          var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
-          step = 0;
-          redLineDraw(i, departure, arrival, percentComplete, value, flag);
-          var linesCount = line.length - 1;
-          var markerCount = markers.length - 1;
-
-          //clearPolyLines starts
-          while ((linesCount >= (i + 1)) && (value)) {
-            if (!_.isEmpty(line[linesCount])) {
-              line[linesCount].setMap(null);
-              line[linesCount] = {};
-            };
-            // markers[linesCount].setIcon("img/maps/small-marker.png");
-            linesCount--;
-          };
-
-          while ((i < markerCount) && (value == true) && (percentComplete < 100)) {
-            markers[markerCount].setIcon("img/maps/small-marker.png");
-            markerCount--;
-          }
-          //clearPolyLines ends
-
-          //draw succeeding polyLines starts
-          if (i > 1) {
-            pointsForLine(i - 1, 100);
-            count = centers.length;
-          };
-          //draw succeeding polyLines end
-        };
+        // var centers = [{
+        //   lat: 19.089560,
+        //   lng: 72.865614
+        // }, {
+        //   lat: 51.470022,
+        //   lng: -0.454295
+        // }, {
+        //   lat: 29.276052,
+        //   lng: -81.034910
+        // }, {
+        //   lat: 51.512072,
+        //   lng: -0.144223
+        // }, {
+        //   lat: 52.923608,
+        //   lng: -1.482560
+        // }, {
+        //   lat: 51.899603,
+        //   lng: -1.153590
+        // }, {
+        //   lat: 51.470022,
+        //   lng: -0.454295
+        // }, {
+        //   lat: 25.253175,
+        //   lng: 55.365673
+        // }];
       }
-    };
-    setTimeout(function () {
-      initMap();
-    }, 1000);
+      line = _.map(centers, function () {
+        return {};
+      });
+      _.map(centers, function () {
+        markers.push({});
+      });
 
+
+      initMap = function () {
+
+
+        center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
+
+        if (typeof google === 'object' && typeof google.maps === 'object') {
+          var bounds = new google.maps.LatLngBounds();
+
+          setMarker = function (status, n, i) {
+
+            var jump = centers.length;
+            if (_.isEmpty(markers[i])) {
+
+              var position = new google.maps.LatLng(n.lat, n.lng);
+              // bounds.extend(position);
+              var obj = {
+                position: position,
+                map: map,
+                icon: "img/maps/small-marker.png"
+              };
+              if (status) {
+                obj.icon = "img/maps/marker.png";
+                console.log("big marker icon set");
+              }
+              marker = new google.maps.Marker(obj);
+              markers[i] = marker;
+            } else {
+              markers[i].setIcon("img/maps/marker.png");
+            }
+          };
+
+          map = new google.maps.Map(document.getElementById('map'), {
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            center: center,
+            zoom: 4
+              // styles: mapStyle
+          });
+          var step = 0;
+          var numSteps = 100; //Change this to set animation resolution
+
+
+          //Grey static polylines starts here
+          travelPath = new google.maps.Polyline({
+            path: centers,
+            geodesic: true,
+            strokeColor: 'grey',
+            strokeOpacity: 1.0,
+            strokeWeight: 1
+          });
+          travelPath.setMap(map);
+          //Grey static polylines ends here
+          _.each(centers, function (n, index) {
+            setMarker(false, n, index + 1);
+          });
+
+          setMarker(true, centers[0], 1);
+
+          function redLineDraw(i, departure, arrival, percentComplete, value, flag) {
+            // console.log(percentComplete, flag);
+            var xdiff = (centers[i].lat - centers[i - 1].lat);
+            var ydiff = (centers[i].lng - centers[i - 1].lng);
+
+            // console.log(Math.abs(ydiff));
+            // if (Math.abs(ydiff) < 4 && value) {
+            //   smoothZoom(map, 9, map.getZoom(), true); //for zooming in
+            // } else if (Math.abs(ydiff) > 4 && value) {
+            //   smoothZoom(map, 4, map.getZoom(), false); //for zooming out
+            // }
+
+            //  console.log(value + "---bounds set");
+            //   var markerBounds = new google.maps.LatLngBounds();
+            //   markerBounds.extend(departure);
+            //   markerBounds.extend(arrival);
+            //   map.fitBounds(markerBounds);
+
+
+            if (value) {
+              console.log(value + "---bounds set");
+              var markerBounds = new google.maps.LatLngBounds();
+              markerBounds.extend(departure);
+              markerBounds.extend(arrival);
+              map.fitBounds(markerBounds);
+            }
+
+
+            var frac1 = xdiff / 100;
+            var frac2 = ydiff / 100;
+            var iniLat = centers[i - 1].lat;
+            var iniLng = centers[i - 1].lng;
+            var timePerStep = frac1; //Change this to alter animation speed
+            var lineSymbol = {
+              path: 'M 0,-1 0,1',
+              strokeOpacity: 1,
+              scale: 4
+            };
+            if (percentComplete == 100 && flag) {
+              setMarker(true, centers[i], i + 1);
+            }
+            if (_.isEmpty(line[i])) {
+              line[i] = new google.maps.Polyline({
+                path: [departure, departure],
+                strokeColor: "#FF0000",
+                strokeOpacity: 0,
+                icons: [{
+                  icon: lineSymbol,
+                  offset: '0',
+                  repeat: '25px'
+                }],
+                strokeWeight: 3,
+                geodesic: true, //set to false if you want straight line instead of arc
+                map: map,
+              });
+            }
+
+            // function offsetCenter(latlng, offsetx, offsety) {
+
+            //   // latlng is the apparent centre-point
+            //   // offsetx is the distance you want that point to move to the right, in pixels
+            //   // offsety is the distance you want that point to move upwards, in pixels
+            //   // offset can be negative
+            //   // offsetx and offsety are both optional
+
+            //   var scale = Math.pow(2, map.getZoom());
+
+            //   var worldCoordinateCenter = map.getProjection().fromLatLngToPoint(latlng);
+            //   var pixelOffset = new google.maps.Point((offsetx / scale) || 0, (offsety / scale) || 0);
+
+            //   var worldCoordinateNewCenter = new google.maps.Point(
+            //     worldCoordinateCenter.x - pixelOffset.x,
+            //     worldCoordinateCenter.y + pixelOffset.y
+            //   );
+
+            //   var newCenter = map.getProjection().fromPointToLatLng(worldCoordinateNewCenter);
+
+            //   map.setCenter(newCenter);
+
+            // }
+
+            var drawLine = function (departure, arrival, percent, i, value) {
+              percentFrac = percent / 100;
+              var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
+              line[i].setPath([departure, are_we_there_yet]);
+              //moving center starts here
+              if (value) {
+
+                // center = {
+                //   "lat": iniLat + (frac1 * percent),
+                //   "lng": iniLng + (frac2 * percent)
+                // }
+                center = {
+                  "lat": iniLat + (centers[i].lat - centers[i - 1].lat) / 2,
+                  "lng": iniLng + (centers[i].lng - centers[i - 1].lng) / 2
+                }
+                center = new google.maps.LatLng(center.lat, center.lng);
+              }
+              // offsetCenter(center, 100, 0);
+              map.setCenter(center);
+              map.panBy(-150, 0);
+              //moving center ends here
+
+              // if (percent >= 100) {
+              //   setMarker(true, center);
+              // }
+            };
+            drawLine(departure, arrival, percentComplete, i, value);
+          };
+
+
+          function smoothZoom(map, level, cnt, mode) {
+            if (mode == true) {
+              if (cnt >= level) { //zooming in
+                return;
+              } else {
+                var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
+                  google.maps.event.removeListener(z);
+                  console.log("zooming in smoothZoom");
+                  smoothZoom(map, level, cnt + 1, true);
+                });
+                setTimeout(function () {
+                  map.setZoom(cnt)
+                }, 1);
+              }
+            } else {
+              if (cnt <= (level - 1)) { //zooming out
+                return;
+              } else {
+                var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
+                  google.maps.event.removeListener(z);
+                  console.log("zooming out smoothZoom");
+                  smoothZoom(map, level, cnt - 1, false);
+                });
+                setTimeout(function () {
+                  map.setZoom(cnt)
+                }, 1);
+              }
+            }
+          }
+
+
+
+
+
+
+
+          pointsForLine = function (i, percentComplete, value, flag) {
+            var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
+            var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
+            step = 0;
+            redLineDraw(i, departure, arrival, percentComplete, value, flag);
+            var linesCount = line.length - 1;
+            var markerCount = markers.length - 1;
+
+            //clearPolyLines starts
+            while ((linesCount >= (i + 1)) && (value)) {
+              if (!_.isEmpty(line[linesCount])) {
+                line[linesCount].setMap(null);
+                line[linesCount] = {};
+              };
+              // markers[linesCount].setIcon("img/maps/small-marker.png");
+              linesCount--;
+            };
+
+            while ((i < markerCount) && (value == true) && (percentComplete < 100)) {
+              markers[markerCount].setIcon("img/maps/small-marker.png");
+              markerCount--;
+            }
+            //clearPolyLines ends
+
+            //draw succeeding polyLines starts
+            if (i > 1) {
+              pointsForLine(i - 1, 100);
+              count = centers.length;
+            };
+            //draw succeeding polyLines end
+          };
+        }
+      };
+      setTimeout(function () {
+        initMap();
+      }, 1000);
+
+    }
+    //maps integration ends here
 
     $scope.template = TemplateService.changecontent("ongojourney");
     $scope.menutitle = NavigationService.makeactive("OnGoJourney");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+
+    $scope.viewCardComment = false;
+    $scope.getCard = "";
+    $scope.getCommentsData = function (id, uniqueId, postString,likeDone,likeCount) {
+      console.log(likeCount);
+      // console.log(id, uniqueId, postString,likeDone,likeCount);
+      $scope.post_id = id;
+      $scope.post_uniqueId = uniqueId;
+      $scope.post_postString = postString;
+      $scope.post_likeDone=likeDone;
+      // //open modal starts
+      // $uibModal.open({
+      //   templateUrl: "views/modal/notify.html",
+      //   animation: true,
+      //   scope: $scope,`
+      //   windowClass: "notify-popup"
+      // });
+      // //open model ends
+      if ($scope.viewCardComment) {
+        $scope.viewCardComment = false;
+        $scope.getCard = "";
+        console.log($scope.viewCardComment);
+      } else {
+        $scope.viewCardComment = true;
+        $scope.getCard = "view-whole-card";
+        console.log($scope.viewCardComment);
+      }
+      var formData = {
+        "_id": $scope.post_id
+      };
+      $http({
+        url: adminURL + "/post/getPostCommentWeb",
+        method: "POST",
+        data: formData
+      }).success(function (data) {
+        $scope.uniqueArr = [];
+        $scope.listOfComments = data.data;
+        console.log($scope.listOfComments);
+        $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+      });
+    };
+
+    $scope.postComment = function (uniqueId, comment, id) {
+      var formData = {
+        "uniqueId": uniqueId,
+        "text": comment,
+        "type": "post",
+        "post": id
+      };
+      $http({
+        url: adminURL + "/comment/addCommentWeb",
+        method: "POST",
+        data: formData
+      }).success(function (data) {
+        formData = {
+          "_id": id
+        }
+        $http({
+          url: adminURL + "/post/getPostCommentWeb",
+          method: "POST",
+          data: formData
+        }).success(function (data) {
+          $scope.listOfComments = data.data;
+          document.getElementById('enterComment').value = "";
+        });
+      });
+
+    };
+
+    $scope.likeUnlikePost=function(){
+       $scope.ongo.likeDone = !$scope.ongo.likeDone;
+        // var id = $scope.ongo.uniqueId;
+        if ($scope.ongo.likeDone) {
+          $scope.ongo.likeCount = $scope.ongo.likeCount + 1;
+          var formData = {
+            'uniqueId': id
+          };
+        } else {
+          $scope.ongo.likeCount = $scope.ongo.likeCount - 1;
+          var formData = {
+            'uniqueId': id,
+            'unlike': 'true'
+          };
+        }
+        $http({
+          url: adminURL + "/post/updateLikePostWeb",
+          method: "POST",
+          data: formData
+        })
+    };
+
 
 
     $scope.hours = _.range(1, 13, 1);
@@ -6496,7 +6590,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.qItinerary = {};
     $scope.qItinerary.type = [];
     $scope.qItinerary.countryVisited = [];
-    
+
     $scope.previousCountryId = [];
 
     // $scope.qItinerary.countryVisitedArray = [];
@@ -6644,7 +6738,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.addCountry.push({
           // "country": {}
         });
-        
+
       }
     };
 
@@ -8041,25 +8135,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 })
 
-.controller('AgentloginCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+.controller('AgentloginCtrl', function($scope, TemplateService, NavigationService, $timeout) {
   $scope.template = TemplateService.changecontent("agent-login"); //Use same name of .html file
   $scope.menutitle = NavigationService.makeactive("Agent Login"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.oneAtATime = true;
   //about textarea counter
-  $scope.$on('$viewContentLoaded', function () {
-    // $timeout(function () {
-    //   $("#remainingC").html("00 / 500");
-    //   $('textarea').keypress(function () {
-    //
-    //     if (this.value.length > 500) {
-    //       return false;
-    //     }
-    //     $("#remainingC").html((this.value.length) + " / 500");
-    //   });
-    // });
-    $timeout(function () {
+  $scope.$on('$viewContentLoaded', function() {
+    $timeout(function() {
       $('#textareaChars').keyup(updateCount);
       $('#textareaChars').keydown(updateCount);
       $('#remainingC').text(0 + '/ 500');
@@ -8073,7 +8157,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   //about textarea counter end
   $scope.agentloginView = 1;
-  $scope.agentSec = function (val) {
+  $scope.agentSec = function(val) {
       if (val == 1) {
         $scope.agentloginView = 1;
       } else if (val == 2) {
@@ -8165,7 +8249,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   //Services end
 })
 
-.controller('AgentsettingCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+.controller('AgentsettingCtrl', function($scope, TemplateService, NavigationService, $timeout) {
   $scope.template = TemplateService.changecontent("agent-setting"); //Use same name of .html file
   $scope.menutitle = NavigationService.makeactive("Agent Settings"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
@@ -8195,18 +8279,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   //country setting accordion end
 
   // Textarea counter
-  $scope.$on('$viewContentLoaded', function () {
-    // $timeout(function () {
-    //   $("#remainingC").html("00 / 500");
-    //   $('textarea').keypress(function () {
-    //
-    //     if (this.value.length > 500) {
-    //       return false;
-    //     }
-    //     $("#remainingC").html((this.value.length) + " / 500");
-    //   });
-    // });
-    $timeout(function () {
+  $scope.$on('$viewContentLoaded', function() {
+    $timeout(function() {
       $('#textareaChars').keyup(updateCount);
       $('#textareaChars').keydown(updateCount);
       $('#remainAbt').text(0 + '/ 500');
@@ -8221,7 +8295,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   //setting tab navigation
   $scope.showAgtSetting = 1;
-  $scope.agtsetting = function (val) {
+  $scope.agtsetting = function(val) {
     if (val == 1) {
       $scope.showAgtSetting = 1;
     } else if (val == 2) {
@@ -8397,16 +8471,50 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 })
 
 
-.controller('AgentuserCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+.controller('AgentuserCtrl', function($scope, TemplateService, NavigationService, $timeout, $state) {
   $scope.template = TemplateService.changecontent("agent-user"); //Use same name of .html file
   $scope.menutitle = NavigationService.makeactive("Agent User"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.oneAtATime = true;
 
+  //enquiry & contact card initialisation
+  // enquiry
+
+  $scope.viewEnquiry = false;
+  $scope.getBackdrop = "";
+  $scope.showEnquiry = function() {
+    // console.log("click");
+    if ($scope.viewEnquiry == false) {
+      $scope.getBackdrop = "backdrop-enquiry";
+      $scope.viewEnquiry = true;
+    } else {
+      $scope.viewEnquiry = false;
+      $scope.getBackdrop = "";
+    }
+  };
+  //enquiry end
+
+  //contact us
+  $scope.viewContact = false;
+  $scope.getBackdrop = "";
+  $scope.showContact = function() {
+    // console.log("click");
+    if ($scope.viewContact == false) {
+      $scope.getBackdrop = "backdrop-enquiry";
+      $scope.viewContact = true;
+    } else {
+      $scope.viewContact = false;
+      $scope.getBackdrop = "";
+    }
+  };
+  //contact us end
+  //enquiry & contact card initialisation
+
+
 
   //scroll change
-  $(window).scroll(function () {
+  $(window).scroll(function() {
     //  var navHeight = $('.img-holder-agent').height($(window).height() - 41);
     var scroll = $(window).scrollTop();
     //console.log(scroll);
@@ -8421,7 +8529,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   //scroll change end
 
   // tab change
-  var allagtuser = ["views/content/agent/agt-user/usr-itinerary.html", "views/content/agent/agt-user/usr-tourpackages.html", "views/content/agent/agt-user/usr-photovideos.html", "views/content/agent/agt-user/usr-testimonialreviews.html", "views/content/agent/agt-user/usr-aboutus.html"];
+  var allagtuser = ["views/content/agent/agt-user/usr-itinerary.html", "views/content/agent/agt-user/usr-tourpackages.html", "views/content/agent/agt-user/usr-photovideos.html", "views/content/agent/agt-user/usr-testimonialreviews.html", "views/content/agent/agt-user/usr-travelactivity.html", "views/content/agent/agt-user/usr-aboutus.html"];
   $scope.agtuser = {
     innerView: allagtuser[0]
   };
@@ -8446,14 +8554,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.agtuser.innerView = allagtuser[3];
       $scope.agtuseroptions.active = "usr-testimonialreviews";
       break;
-    case "usr-aboutus":
+    case "usr-testimonialreviews":
       $scope.agtuser.innerView = allagtuser[4];
+      $scope.agtuseroptions.active = "usr-travelactivity";
+      break;
+    case "usr-aboutus":
+      $scope.agtuser.innerView = allagtuser[5];
       $scope.agtuseroptions.active = "usr-aboutus";
       break;
     default:
       $scope.agtuser.innerView = allagtuser[0];
   }
-  $scope.getTab = function (view) {
+  $scope.getTab = function(view) {
     $scope.agtuser.innerView = allagtuser[view];
     var url = "usr-itinerary";
     var active = "";
@@ -8480,6 +8592,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agtuseroptions.active = "usr-aboutus";
         break;
       case 5:
+        url = "usr-travelactivity";
+        $scope.agtuseroptions.active = "usr-travelactivity";
+        break;
+      case 6:
         url = "usr-aboutus";
         $scope.agtuseroptions.active = "usr-aboutus";
         break;
@@ -8600,6 +8716,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
+    tourcategoryTitle: 'Adventure',
+      tourcategoryImg: 'img/agt-cat1.png',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8607,6 +8725,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat5.png',
+      tourcategoryTitle: 'Backpacking',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8614,6 +8734,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat4.png',
+      tourcategoryTitle: 'Romance',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8621,6 +8743,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat9.png',
+      tourcategoryTitle: 'Friends',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8628,6 +8752,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat1.png',
+      tourcategoryTitle: 'Adventure',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8635,6 +8761,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat7.png',
+      tourcategoryTitle: 'Luxury',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8642,6 +8770,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat1.png',
+      tourcategoryTitle: 'Adventure',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8649,11 +8779,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat4.png',
+      tourcategoryTitle: 'Romance',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }];
   // tour packages card end
 
-  // gallery card end
+  // gallery card
   $scope.agenPhotogallery = [
     'img/uploaded-pic.jpg',
     'img/slider2.jpg',
@@ -8675,6 +8807,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     'img/follower.jpg'
   ];
   // gallery card end
+
+  //gallery filter list
+  $scope.picFilterList = ['India', 'Malaysia', 'Singapore', 'Dubai', 'London', 'USA', 'Abu Dhabi', 'Kenya', 'South Africa', 'Cuba', 'Cambodia', 'China', 'England', 'Russia', 'Kazakhstan', 'Iran', 'Iraq', 'Bolivia'];
+  //gallery filter list end
 
   // testimonial card
   $scope.testimonialreview = [{
@@ -8736,18 +8872,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
   // review textarea counter
-  $scope.$on('$viewContentLoaded', function () {
-    // $timeout(function () {
-    //   $("#remainingC").html("00 / 500");
-    //   $('textarea').keypress(function () {
-    //
-    //     if (this.value.length > 500) {
-    //       return false;
-    //     }
-    //     $("#remainingC").html((this.value.length) + " / 500");
-    //   });
-    // });
-    $timeout(function () {
+  $scope.$on('$viewContentLoaded', function() {
+    $timeout(function() {
       $('#textareaChars').keyup(updateCount);
       $('#textareaChars').keydown(updateCount);
       $('#reviewremainingC').text(0 + '/ 300');
@@ -8760,6 +8886,764 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   });
 
   // review textarea counter end
+
+  // ITINERARY FILTER
+  //OpenFilter
+  $scope.isopenfilter = false;
+  $scope.openFilter = function() {
+    $scope.isopenfilter = !$scope.isopenfilter;
+  };
+  //OpenFiltertab
+  $scope.isopenfiltertab = false;
+  $scope.openFiltertab = function() {
+    $scope.isopenfilter = !$scope.isopenfilter;
+  };
+  $scope.country = [];
+
+  $scope.addLine = function() {
+    $scope.lines.push($scope.lines.length);
+  };
+  // this.addText = function(text) {
+  //   if (text) {
+  //     var obj = {
+  //       text: text
+  //     };
+  //     this.country.push(obj);
+  //     this.myText = '';
+  //   }
+  // }
+
+  $scope.countries = [{
+    name: 'Afghanistan',
+    code: 'AF'
+  }, {
+    name: 'Åland Islands',
+    code: 'AX'
+  }, {
+    name: 'Albania',
+    code: 'AL'
+  }, {
+    name: 'Algeria',
+    code: 'DZ'
+  }, {
+    name: 'American Samoa',
+    code: 'AS'
+  }, {
+    name: 'Andorra',
+    code: 'AD'
+  }, {
+    name: 'Angola',
+    code: 'AO'
+  }, {
+    name: 'Anguilla',
+    code: 'AI'
+  }, {
+    name: 'Antarctica',
+    code: 'AQ'
+  }, {
+    name: 'Antigua and Barbuda',
+    code: 'AG'
+  }, {
+    name: 'Argentina',
+    code: 'AR'
+  }, {
+    name: 'Armenia',
+    code: 'AM'
+  }, {
+    name: 'Aruba',
+    code: 'AW'
+  }, {
+    name: 'Australia',
+    code: 'AU'
+  }, {
+    name: 'Austria',
+    code: 'AT'
+  }, {
+    name: 'Azerbaijan',
+    code: 'AZ'
+  }, {
+    name: 'Bahamas',
+    code: 'BS'
+  }, {
+    name: 'Bahrain',
+    code: 'BH'
+  }, {
+    name: 'Bangladesh',
+    code: 'BD'
+  }, {
+    name: 'Barbados',
+    code: 'BB'
+  }, {
+    name: 'Belarus',
+    code: 'BY'
+  }, {
+    name: 'Belgium',
+    code: 'BE'
+  }, {
+    name: 'Belize',
+    code: 'BZ'
+  }, {
+    name: 'Benin',
+    code: 'BJ'
+  }, {
+    name: 'Bermuda',
+    code: 'BM'
+  }, {
+    name: 'Bhutan',
+    code: 'BT'
+  }, {
+    name: 'Bolivia',
+    code: 'BO'
+  }, {
+    name: 'Bosnia and Herzegovina',
+    code: 'BA'
+  }, {
+    name: 'Botswana',
+    code: 'BW'
+  }, {
+    name: 'Bouvet Island',
+    code: 'BV'
+  }, {
+    name: 'Brazil',
+    code: 'BR'
+  }, {
+    name: 'British Indian Ocean Territory',
+    code: 'IO'
+  }, {
+    name: 'Brunei Darussalam',
+    code: 'BN'
+  }, {
+    name: 'Bulgaria',
+    code: 'BG'
+  }, {
+    name: 'Burkina Faso',
+    code: 'BF'
+  }, {
+    name: 'Burundi',
+    code: 'BI'
+  }, {
+    name: 'Cambodia',
+    code: 'KH'
+  }, {
+    name: 'Cameroon',
+    code: 'CM'
+  }, {
+    name: 'Canada',
+    code: 'CA'
+  }, {
+    name: 'Cape Verde',
+    code: 'CV'
+  }, {
+    name: 'Cayman Islands',
+    code: 'KY'
+  }, {
+    name: 'Central African Republic',
+    code: 'CF'
+  }, {
+    name: 'Chad',
+    code: 'TD'
+  }, {
+    name: 'Chile',
+    code: 'CL'
+  }, {
+    name: 'China',
+    code: 'CN'
+  }, {
+    name: 'Christmas Island',
+    code: 'CX'
+  }, {
+    name: 'Cocos (Keeling) Islands',
+    code: 'CC'
+  }, {
+    name: 'Colombia',
+    code: 'CO'
+  }, {
+    name: 'Comoros',
+    code: 'KM'
+  }, {
+    name: 'Congo',
+    code: 'CG'
+  }, {
+    name: 'Congo, The Democratic Republic of the',
+    code: 'CD'
+  }, {
+    name: 'Cook Islands',
+    code: 'CK'
+  }, {
+    name: 'Costa Rica',
+    code: 'CR'
+  }, {
+    name: 'Cote D\'Ivoire',
+    code: 'CI'
+  }, {
+    name: 'Croatia',
+    code: 'HR'
+  }, {
+    name: 'Cuba',
+    code: 'CU'
+  }, {
+    name: 'Cyprus',
+    code: 'CY'
+  }, {
+    name: 'Czech Republic',
+    code: 'CZ'
+  }, {
+    name: 'Denmark',
+    code: 'DK'
+  }, {
+    name: 'Djibouti',
+    code: 'DJ'
+  }, {
+    name: 'Dominica',
+    code: 'DM'
+  }, {
+    name: 'Dominican Republic',
+    code: 'DO'
+  }, {
+    name: 'Ecuador',
+    code: 'EC'
+  }, {
+    name: 'Egypt',
+    code: 'EG'
+  }, {
+    name: 'El Salvador',
+    code: 'SV'
+  }, {
+    name: 'Equatorial Guinea',
+    code: 'GQ'
+  }, {
+    name: 'Eritrea',
+    code: 'ER'
+  }, {
+    name: 'Estonia',
+    code: 'EE'
+  }, {
+    name: 'Ethiopia',
+    code: 'ET'
+  }, {
+    name: 'Falkland Islands (Malvinas)',
+    code: 'FK'
+  }, {
+    name: 'Faroe Islands',
+    code: 'FO'
+  }, {
+    name: 'Fiji',
+    code: 'FJ'
+  }, {
+    name: 'Finland',
+    code: 'FI'
+  }, {
+    name: 'France',
+    code: 'FR'
+  }, {
+    name: 'French Guiana',
+    code: 'GF'
+  }, {
+    name: 'French Polynesia',
+    code: 'PF'
+  }, {
+    name: 'French Southern Territories',
+    code: 'TF'
+  }, {
+    name: 'Gabon',
+    code: 'GA'
+  }, {
+    name: 'Gambia',
+    code: 'GM'
+  }, {
+    name: 'Georgia',
+    code: 'GE'
+  }, {
+    name: 'Germany',
+    code: 'DE'
+  }, {
+    name: 'Ghana',
+    code: 'GH'
+  }, {
+    name: 'Gibraltar',
+    code: 'GI'
+  }, {
+    name: 'Greece',
+    code: 'GR'
+  }, {
+    name: 'Greenland',
+    code: 'GL'
+  }, {
+    name: 'Grenada',
+    code: 'GD'
+  }, {
+    name: 'Guadeloupe',
+    code: 'GP'
+  }, {
+    name: 'Guam',
+    code: 'GU'
+  }, {
+    name: 'Guatemala',
+    code: 'GT'
+  }, {
+    name: 'Guernsey',
+    code: 'GG'
+  }, {
+    name: 'Guinea',
+    code: 'GN'
+  }, {
+    name: 'Guinea-Bissau',
+    code: 'GW'
+  }, {
+    name: 'Guyana',
+    code: 'GY'
+  }, {
+    name: 'Haiti',
+    code: 'HT'
+  }, {
+    name: 'Heard Island and Mcdonald Islands',
+    code: 'HM'
+  }, {
+    name: 'Holy See (Vatican City State)',
+    code: 'VA'
+  }, {
+    name: 'Honduras',
+    code: 'HN'
+  }, {
+    name: 'Hong Kong',
+    code: 'HK'
+  }, {
+    name: 'Hungary',
+    code: 'HU'
+  }, {
+    name: 'Iceland',
+    code: 'IS'
+  }, {
+    name: 'India',
+    code: 'IN'
+  }, {
+    name: 'Indonesia',
+    code: 'ID'
+  }, {
+    name: 'Iran, Islamic Republic Of',
+    code: 'IR'
+  }, {
+    name: 'Iraq',
+    code: 'IQ'
+  }, {
+    name: 'Ireland',
+    code: 'IE'
+  }, {
+    name: 'Isle of Man',
+    code: 'IM'
+  }, {
+    name: 'Israel',
+    code: 'IL'
+  }, {
+    name: 'Italy',
+    code: 'IT'
+  }, {
+    name: 'Jamaica',
+    code: 'JM'
+  }, {
+    name: 'Japan',
+    code: 'JP'
+  }, {
+    name: 'Jersey',
+    code: 'JE'
+  }, {
+    name: 'Jordan',
+    code: 'JO'
+  }, {
+    name: 'Kazakhstan',
+    code: 'KZ'
+  }, {
+    name: 'Kenya',
+    code: 'KE'
+  }, {
+    name: 'Kiribati',
+    code: 'KI'
+  }, {
+    name: 'Korea, Democratic People\'s Republic of',
+    code: 'KP'
+  }, {
+    name: 'Korea, Republic of',
+    code: 'KR'
+  }, {
+    name: 'Kuwait',
+    code: 'KW'
+  }, {
+    name: 'Kyrgyzstan',
+    code: 'KG'
+  }, {
+    name: 'Lao People\'s Democratic Republic',
+    code: 'LA'
+  }, {
+    name: 'Latvia',
+    code: 'LV'
+  }, {
+    name: 'Lebanon',
+    code: 'LB'
+  }, {
+    name: 'Lesotho',
+    code: 'LS'
+  }, {
+    name: 'Liberia',
+    code: 'LR'
+  }, {
+    name: 'Libyan Arab Jamahiriya',
+    code: 'LY'
+  }, {
+    name: 'Liechtenstein',
+    code: 'LI'
+  }, {
+    name: 'Lithuania',
+    code: 'LT'
+  }, {
+    name: 'Luxembourg',
+    code: 'LU'
+  }, {
+    name: 'Macao',
+    code: 'MO'
+  }, {
+    name: 'Macedonia, The Former Yugoslav Republic of',
+    code: 'MK'
+  }, {
+    name: 'Madagascar',
+    code: 'MG'
+  }, {
+    name: 'Malawi',
+    code: 'MW'
+  }, {
+    name: 'Malaysia',
+    code: 'MY'
+  }, {
+    name: 'Maldives',
+    code: 'MV'
+  }, {
+    name: 'Mali',
+    code: 'ML'
+  }, {
+    name: 'Malta',
+    code: 'MT'
+  }, {
+    name: 'Marshall Islands',
+    code: 'MH'
+  }, {
+    name: 'Martinique',
+    code: 'MQ'
+  }, {
+    name: 'Mauritania',
+    code: 'MR'
+  }, {
+    name: 'Mauritius',
+    code: 'MU'
+  }, {
+    name: 'Mayotte',
+    code: 'YT'
+  }, {
+    name: 'Mexico',
+    code: 'MX'
+  }, {
+    name: 'Micronesia, Federated States of',
+    code: 'FM'
+  }, {
+    name: 'Moldova, Republic of',
+    code: 'MD'
+  }, {
+    name: 'Monaco',
+    code: 'MC'
+  }, {
+    name: 'Mongolia',
+    code: 'MN'
+  }, {
+    name: 'Montserrat',
+    code: 'MS'
+  }, {
+    name: 'Morocco',
+    code: 'MA'
+  }, {
+    name: 'Mozambique',
+    code: 'MZ'
+  }, {
+    name: 'Myanmar',
+    code: 'MM'
+  }, {
+    name: 'Namibia',
+    code: 'NA'
+  }, {
+    name: 'Nauru',
+    code: 'NR'
+  }, {
+    name: 'Nepal',
+    code: 'NP'
+  }, {
+    name: 'Netherlands',
+    code: 'NL'
+  }, {
+    name: 'Netherlands Antilles',
+    code: 'AN'
+  }, {
+    name: 'New Caledonia',
+    code: 'NC'
+  }, {
+    name: 'New Zealand',
+    code: 'NZ'
+  }, {
+    name: 'Nicaragua',
+    code: 'NI'
+  }, {
+    name: 'Niger',
+    code: 'NE'
+  }, {
+    name: 'Nigeria',
+    code: 'NG'
+  }, {
+    name: 'Niue',
+    code: 'NU'
+  }, {
+    name: 'Norfolk Island',
+    code: 'NF'
+  }, {
+    name: 'Northern Mariana Islands',
+    code: 'MP'
+  }, {
+    name: 'Norway',
+    code: 'NO'
+  }, {
+    name: 'Oman',
+    code: 'OM'
+  }, {
+    name: 'Pakistan',
+    code: 'PK'
+  }, {
+    name: 'Palau',
+    code: 'PW'
+  }, {
+    name: 'Palestinian Territory, Occupied',
+    code: 'PS'
+  }, {
+    name: 'Panama',
+    code: 'PA'
+  }, {
+    name: 'Papua New Guinea',
+    code: 'PG'
+  }, {
+    name: 'Paraguay',
+    code: 'PY'
+  }, {
+    name: 'Peru',
+    code: 'PE'
+  }, {
+    name: 'Philippines',
+    code: 'PH'
+  }, {
+    name: 'Pitcairn',
+    code: 'PN'
+  }, {
+    name: 'Poland',
+    code: 'PL'
+  }, {
+    name: 'Portugal',
+    code: 'PT'
+  }, {
+    name: 'Puerto Rico',
+    code: 'PR'
+  }, {
+    name: 'Qatar',
+    code: 'QA'
+  }, {
+    name: 'Reunion',
+    code: 'RE'
+  }, {
+    name: 'Romania',
+    code: 'RO'
+  }, {
+    name: 'Russian Federation',
+    code: 'RU'
+  }, {
+    name: 'Rwanda',
+    code: 'RW'
+  }, {
+    name: 'Saint Helena',
+    code: 'SH'
+  }, {
+    name: 'Saint Kitts and Nevis',
+    code: 'KN'
+  }, {
+    name: 'Saint Lucia',
+    code: 'LC'
+  }, {
+    name: 'Saint Pierre and Miquelon',
+    code: 'PM'
+  }, {
+    name: 'Saint Vincent and the Grenadines',
+    code: 'VC'
+  }, {
+    name: 'Samoa',
+    code: 'WS'
+  }, {
+    name: 'San Marino',
+    code: 'SM'
+  }, {
+    name: 'Sao Tome and Principe',
+    code: 'ST'
+  }, {
+    name: 'Saudi Arabia',
+    code: 'SA'
+  }, {
+    name: 'Senegal',
+    code: 'SN'
+  }, {
+    name: 'Serbia and Montenegro',
+    code: 'CS'
+  }, {
+    name: 'Seychelles',
+    code: 'SC'
+  }, {
+    name: 'Sierra Leone',
+    code: 'SL'
+  }, {
+    name: 'Singapore',
+    code: 'SG'
+  }, {
+    name: 'Slovakia',
+    code: 'SK'
+  }, {
+    name: 'Slovenia',
+    code: 'SI'
+  }, {
+    name: 'Solomon Islands',
+    code: 'SB'
+  }, {
+    name: 'Somalia',
+    code: 'SO'
+  }, {
+    name: 'South Africa',
+    code: 'ZA'
+  }, {
+    name: 'South Georgia and the South Sandwich Islands',
+    code: 'GS'
+  }, {
+    name: 'Spain',
+    code: 'ES'
+  }, {
+    name: 'Sri Lanka',
+    code: 'LK'
+  }, {
+    name: 'Sudan',
+    code: 'SD'
+  }, {
+    name: 'Suriname',
+    code: 'SR'
+  }, {
+    name: 'Svalbard and Jan Mayen',
+    code: 'SJ'
+  }, {
+    name: 'Swaziland',
+    code: 'SZ'
+  }, {
+    name: 'Sweden',
+    code: 'SE'
+  }, {
+    name: 'Switzerland',
+    code: 'CH'
+  }, {
+    name: 'Syrian Arab Republic',
+    code: 'SY'
+  }, {
+    name: 'Taiwan, Province of China',
+    code: 'TW'
+  }, {
+    name: 'Tajikistan',
+    code: 'TJ'
+  }, {
+    name: 'Tanzania, United Republic of',
+    code: 'TZ'
+  }, {
+    name: 'Thailand',
+    code: 'TH'
+  }, {
+    name: 'Timor-Leste',
+    code: 'TL'
+  }, {
+    name: 'Togo',
+    code: 'TG'
+  }, {
+    name: 'Tokelau',
+    code: 'TK'
+  }, {
+    name: 'Tonga',
+    code: 'TO'
+  }, {
+    name: 'Trinidad and Tobago',
+    code: 'TT'
+  }, {
+    name: 'Tunisia',
+    code: 'TN'
+  }, {
+    name: 'Turkey',
+    code: 'TR'
+  }, {
+    name: 'Turkmenistan',
+    code: 'TM'
+  }, {
+    name: 'Turks and Caicos Islands',
+    code: 'TC'
+  }, {
+    name: 'Tuvalu',
+    code: 'TV'
+  }, {
+    name: 'Uganda',
+    code: 'UG'
+  }, {
+    name: 'Ukraine',
+    code: 'UA'
+  }, {
+    name: 'United Arab Emirates',
+    code: 'AE'
+  }, {
+    name: 'United Kingdom',
+    code: 'GB'
+  }, {
+    name: 'United States',
+    code: 'US'
+  }, {
+    name: 'United States Minor Outlying Islands',
+    code: 'UM'
+  }, {
+    name: 'Uruguay',
+    code: 'UY'
+  }, {
+    name: 'Uzbekistan',
+    code: 'UZ'
+  }, {
+    name: 'Vanuatu',
+    code: 'VU'
+  }, {
+    name: 'Venezuela',
+    code: 'VE'
+  }, {
+    name: 'Vietnam',
+    code: 'VN'
+  }, {
+    name: 'Virgin Islands, British',
+    code: 'VG'
+  }, {
+    name: 'Virgin Islands, U.S.',
+    code: 'VI'
+  }, {
+    name: 'Wallis and Futuna',
+    code: 'WF'
+  }, {
+    name: 'Western Sahara',
+    code: 'EH'
+  }, {
+    name: 'Yemen',
+    code: 'YE'
+  }, {
+    name: 'Zambia',
+    code: 'ZM'
+  }, {
+    name: 'Zimbabwe',
+    code: 'ZW'
+  }];
+  //ITINERARY FILTER END
 
   //rating slider
   $scope.ratingSlide = {
@@ -8814,7 +9698,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   // category type end
 })
 
-.controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+.controller('AgenthomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $state) {
   $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
   $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
@@ -8822,7 +9706,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.oneAtATime = true;
 
   //scroll change
-  $(window).scroll(function () {
+  $(window).scroll(function() {
     var scroll = $(window).scrollTop();
     //console.log(scroll);
     if (scroll >= 225) {
@@ -8834,6 +9718,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
   });
   //scroll change end
+
+  //status character counter
+  $scope.$on('$viewContentLoaded', function() {
+    $timeout(function() {
+      $('#postStatus').keyup(updateCount);
+      $('#postStatus').keydown(updateCount);
+      $('#postcount').text(0 + '/350');
+
+      function updateCount() {
+        var count = $('#postcount').val().length;
+        $('#postcount').text(count + '/350');
+      }
+    }, 100);
+  });
+    //status character counter end
 
   // tab change
   var allagthome = ["views/content/agent/agt-home/agthome-itinerary.html", "views/content/agent/agt-home/agthome-tourpackages.html", "views/content/agent/agt-home/agthome-photovideos.html", "views/content/agent/agt-home/agthome-testimonialreviews.html",
@@ -8886,7 +9785,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   }
   $scope.agenthomeItinerary = true;
   $scope.agentFixednav = ""
-  $scope.getTab = function (view) {
+  $scope.getTab = function(view) {
     $scope.agthome.innerView = allagthome[view];
     var url = "agthome-itinerary";
     var active = "";
@@ -8994,6 +9893,114 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     width: "24"
   }];
   // category type end
+
+  // itinerary popover
+  $scope.viewdetailInfo = false;
+  $scope.showdetailInfo = function(){
+    if($scope.viewdetailInfo == false) {
+      $scope.viewdetailInfo = true;
+      console.log("true");
+    }else {
+      $scope.viewdetailInfo = false;
+    }
+  };
+
+  $scope.viewquickInfo = false;
+  $scope.showquickInfo = function(){
+    if($scope.viewquickInfo == false) {
+      $scope.viewquickInfo = true;
+    }else {
+      $scope.viewquickInfo = false;
+    }
+  };
+  // itinerary popover end
+
+  // gallery card
+  $scope.agenPhotogallery = [
+    'img/uploaded-pic.jpg',
+    'img/slider2.jpg',
+    'img/moment-travel1.jpg',
+    'img/moment-travel2.jpg',
+    'img/local-life-post.jpg',
+    'img/destination/goldentemple.jpg',
+    'img/destination/list1.jpg',
+    'img/destination/list2.jpg',
+    'img/destination/info.jpg',
+    'img/destination/taj-featured.jpg',
+    'img/itinerary/itinerary.jpg',
+    'img/india-gate.jpg',
+    'img/notify-adrena.jpg',
+    'img/paris.jpg',
+    'img/bg-popular.jpg',
+    'img/bg-blur.jpg',
+    'img/blog-banner.jpg',
+    'img/follower.jpg'
+  ];
+  // gallery card end
+
+  //gallery filter list
+  $scope.picFilterList = ['India', 'Malaysia', 'Singapore', 'Dubai', 'London', 'USA', 'Abu Dhabi', 'Kenya', 'South Africa', 'Cuba', 'Cambodia', 'China', 'England', 'Russia', 'Kazakhstan', 'Iran', 'Iraq', 'Bolivia'];
+  //gallery filter list end
+
+  // testimonial card
+  $scope.testimonialreview = [{
+    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+    usrprofileImgholder: '../img/adrena.jpg',
+    usrName: 'Randy & Victoria',
+    usrLoc: 'New-York, USA',
+    usrRating: '9'
+  }, {
+    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and',
+    usrprofileImgholder: '../img/adrena.jpg',
+    usrName: 'Randy & Victoria',
+    usrLoc: 'New-York, USA',
+    usrRating: '9'
+  }, {
+    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, text ever since the 1500s,',
+    usrprofileImgholder: '../img/adrena.jpg',
+    usrName: 'Randy & Victoria',
+    usrLoc: 'New-York, USA',
+    usrRating: '9'
+  }, {
+    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text evers,',
+    usrprofileImgholder: '../img/adrena.jpg',
+    usrName: 'Randy & Victoria',
+    usrLoc: 'New-York, USA',
+    usrRating: '9'
+  }, {
+    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy',
+    usrprofileImgholder: '../img/adrena.jpg',
+    usrName: 'Randy & Victoria',
+    usrLoc: 'New-York, USA',
+    usrRating: '9'
+  }, {
+    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+    usrprofileImgholder: '../img/adrena.jpg',
+    usrName: 'Randy & Victoria',
+    usrLoc: 'New-York, USA',
+    usrRating: '9'
+  }, {
+    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+    usrprofileImgholder: '../img/adrena.jpg',
+    usrName: 'Randy & Victoria',
+    usrLoc: 'New-York, USA',
+    usrRating: '9'
+  }, {
+    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+    usrprofileImgholder: '../img/adrena.jpg',
+    usrName: 'Randy & Victoria',
+    usrLoc: 'New-York, USA',
+    usrRating: '9'
+  }, {
+    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+    usrprofileImgholder: '../img/adrena.jpg',
+    usrName: 'Randy & Victoria',
+    usrLoc: 'New-York, USA',
+    usrRating: '9'
+  }];
+  // testimonial card end
+
+
 
   // travel activity card ng-repeat
   $scope.agtTravelCard = [{
