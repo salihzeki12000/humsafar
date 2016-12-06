@@ -59,14 +59,14 @@
                       <input type="text" class="form-control" placeholder="Trip Title">
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                     <div class="itinerary-inputholder relate">
                       <input type="text" class="form-control" placeholder="Travelled With">
                       <span class="itinerary-dropdown-icon">
                         <i class="fa fa-chevron-down"></i>
                       </span>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
               <!-- itinerary type -->
@@ -82,13 +82,53 @@
                 </div>
               </div>
               <!-- itinerary type end -->
-              <div class="add-country-city {{addClass}}" ng-repeat="add in addCountryCity track by $index">
-              <!-- country Visited -->
-              <div class="itinerary-country-visited">
+              {{countryCity}}
+              <div class="add-country-city {{addClass}}" ng-repeat="add in countryCity track by $index">
+               <div class="remove-country-city"><i class="fa fa-times" ng-click="removeCountryCity($index);"></i></div>
+               <!-- country Visited -->
+               <div class="itinerary-country-visited">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="itinerary-inputholder">
-                      <input type="text" class="form-control" placeholder="Country You Visited">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Country You Visited" ng-model="add.countryName">
+                    </div>
+                      <span class="itinerary-dropdown-icon">
+                        <i class="fa fa-chevron-down"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-6">
+                    <div class="itinerary-country-detail">
+                      <div class="itinerary-from itinerary-month">
+                        <label for="From">From</label>
+                        <div class="itinerary-inputholder">
+                          <input type="text" class="form-control text-center" id="From">
+                        </div>
+                      </div>
+                      <div class="itinerary-to itinerary-year">
+                        <label for="to">To</label>
+                        <div class="itinerary-inputholder">
+                          <input type="text" class="form-control text-center" id="to">
+                        </div>
+                      </div>
+                      <div class="itinerary-duration">
+                        <label for="Duration">Days</label>
+                        <div class="itinerary-inputholder">
+                          <input type="text" class="form-control text-center" id="Duration">
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+               <!-- country Visited end-->
+               <!-- city visited  -->
+               <div class="itinerary-country-visited itinerary-city-visited" >
+                <div class="row" ng-repeat="addCity in add.detailedCity track by $index">
+                  <div class="col-md-6">
+                    <div class="itinerary-inputholder">
+                      <input type="text" class="form-control" placeholder="City You Visited" ng-model="addCity.cityName">
                       <span class="itinerary-dropdown-icon">
                         <i class="fa fa-chevron-down"></i>
                       </span>
@@ -116,62 +156,25 @@
                       </div>
                     </div>
                   </div>
+                  <span ng-click="removeCity($index)"> city remove<i class="fa fa-times"></i></span>
                 </div>
                 <div class="row">
                   <div class="col-md-6">
                     <div class="add-country clearfix">
-                      <button class="btn btn-pink pull-left" ng-click="addPanel();">Add Country</button>
+                      <button class="btn btn-pink pull-left" ng-click="addYourCity()">Add City</button>
                       <span class="color-dark-blue pull-right mt5">If you have visited any other cities on the same trip</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- country Visited end-->
-              <!-- city visited  -->
-              <div class="itinerary-country-visited itinerary-city-visited">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="itinerary-inputholder">
-                      <input type="text" class="form-control" placeholder="Country You Visited">
-                      <span class="itinerary-dropdown-icon">
-                        <i class="fa fa-chevron-down"></i>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="itinerary-country-detail">
-                      <div class="itinerary-from itinerary-month">
-                        <label for="From">From</label>
-                        <div class="itinerary-inputholder">
-                          <input type="text" class="form-control text-center" id="From">
-                        </div>
-                      </div>
-                      <div class="itinerary-to itinerary-year">
-                        <label for="to">To</label>
-                        <div class="itinerary-inputholder">
-                          <input type="text" class="form-control text-center" id="to">
-                        </div>
-                      </div>
-                      <div class="itinerary-duration">
-                        <label for="Duration">Days</label>
-                        <div class="itinerary-inputholder">
-                          <input type="text" class="form-control text-center" id="Duration">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="add-country clearfix">
-                      <button class="btn btn-pink pull-left">Add City</button>
-                      <span class="color-dark-blue pull-right mt5">If you have visited any other cities on the same trip</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- city visited end -->
+               <!-- city visited end -->
             </div>
+            <!-- add country on click -->
+              <div class="add-country clearfix">
+                <button class="btn btn-pink pull-left" ng-click="addCountryCity();">Add Country</button>
+                <span class="color-dark-blue pull-right mt5">If you have visited any other cities on the same trip</span>
+              </div>
+            <!-- add country on click end-->
             </div>
             <!-- accordion -->
             <div class="accordion-trip-detail">
@@ -272,21 +275,27 @@
                     </div>
                     <!-- trip descp end -->
                     <!-- upload trip photo -->
-                    <div class="upload-trip-photo-sec">
+                    <div class="upload-trip-photo-sec detailed-trip-photo">
                       <label for="trip-photo">Upload Trip Photo</label>
-                      <div class="trip-photo-holder text-center">
-                        <div class="trip-view-photo">
-                          <!-- <img src="" alt="" class="img-responsive"> -->
+                      <div class="trip-photo-holder">
+                        <div class="scroll-photoitinerary">
+                          <div class="trip-cards-panel">
+                            <div class="trip-view-photo">
+                              <img ng-src="{{formData.photo|uploadpath}}" alt="Quick Itinerary" class="img-responsive">
+                              <div class="remove-quick-photo text-right">
+                                <div class="delete-photo"><i class="fa fa-times color-white pointer"></i></div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <div class="trip-upload">
+                        <div class="trip-upload text-center">
                           <div class="upload-section">
                             <img src="img/upload-icon.jpg" alt="" class="m-center img-responsive">
                             <p class="text-center color-grey avenir-roman">Drag a your itinerary photos here</p>
                             <span class="block color-grey avenir-roman">- or -</span>
-                            <div class="upload-btn">
-                              <div class="inline-block">
-                                <button class="btn btn-dark-blue pointer avenir-light">Select a photo from your computer</button>
-                              </div>
+                            <div class="upload-btn relate">
+                                <button class="btn btn-dark-blue pointer avenir-light pointer">Select a photo from your computer</button>
+                                 <upload-image ng-model="formData.photo" ng-callback="callback" class="quick-upload-photos"></upload-image>
                             </div>
                           </div>
                         </div>
