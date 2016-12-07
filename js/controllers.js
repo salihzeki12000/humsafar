@@ -6643,7 +6643,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
     $scope.qItinerary = {};
-    $scope.qItinerary.type = [];
+    $scope.qItinerary.itineraryType = [];
     $scope.qItinerary.countryVisited = [];
     $scope.qItinerary.photos=[];
     $scope.previousCountryId = [];
@@ -6725,7 +6725,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           arrType.push(str); //adding values to array only if its not present already
         }
       }
-      $scope.qItinerary.type = arrType;
+      $scope.qItinerary.itineraryType = arrType;
     };
 
     var countriesCallback = function (data) {
@@ -6823,9 +6823,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.cities = [];
     };
 
-    $scope.addPhotosCallback=function(data){
-      console.log(data);
-      $scope.qItinerary.photos.push({'name':data.data[0]})
+    $scope.addPhotosCallback=function(photo){
+      console.log(photo);
+      $scope.qItinerary.photos.push({"name":photo})
+    };
+
+    $scope.removePhoto=function(index){
+      $scope.qItinerary.photos.splice(index, 1);
+      console.log($scope.qItinerary.photos);      
+    };
+
+    $scope.currency_symbols =[
+	 '&#1583',
+	 '&#65',
+	 '&#76',
+    ];
+
+    $scope.upload=function(status){
+      $scope.qItinerary.status=status;
+      $scope.qItinerary.countryVisited=$scope.addCountry;
+      console.log($scope.qItinerary);
     };
 
     $scope.getYear = [];
@@ -8946,28 +8963,140 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   });
 
   // review textarea counter end
-   // travel activity json
-  $scope.travelActivity = [
-    {
-      header: true,
-      footer: true,
-      agentHeader : true,
-      travellerAgent : true,
-      agentName: "Holiday Travallers",
-      agentPost : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
-    },
-    {
-      header: false,
-      footer: false,
-      tourPackage: true,
-    },
-    {
-      header: true,
-      footer: true,
-      itineraryHeader : true,
-      itinerary: true,
-    },
-  ];
+    // travel activity json
+  $scope.travelActivity = [{
+    header: true,
+    footer: true,
+    agentHeader: true,
+    travellerAgent: true,
+    agentName: "Holiday Travallers",
+    agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
+    travellerProfile: "img/profile-main.png",
+    travelDate: "26 dec, 2016",
+    travelTime: "1:20pm"
+  }, {
+    header: false,
+    footer: false,
+    tourPackage: true,
+    packageType: "Adventure",
+    packageImg: "img/agt-cat1.png",
+    tourFlag: [{
+      flagImg: "img/canada-visit.png"
+    }, {
+      flagImg: "img/england-visit.png"
+    }, {
+      flagImg: "img/india-visit.png"
+    }],
+    tourTitle: "Love in Paris",
+    tourCost: "25000",
+    tourNight: "4",
+    tourDay: "5",
+    tourPic: "img/paris.jpg",
+    tourDate: "26 dec, 2016",
+    tourTime: "1:20pm"
+  }, {
+    header: true,
+    footer: true,
+    itineraryHeader: true,
+    itinerary: true,
+    itineraryDate: "26 Dec, 2016",
+    itineraryTime: "1:20 pm",
+    itineraryCat: "img/agt-cat1.png",
+    itineraryPic: "img/paris.jpg",
+    itineraryTitle: "Love In Paris",
+    itineraryCost: "25000",
+    itineraryDays: "75",
+    itineraryFlag: [{
+      itineraryImg: "img/canada-visit.png"
+    }, {
+      itineraryImg: "img/england-visit.png"
+    }, {
+      itineraryImg: "img/india-visit.png"
+    }],
+    itineraryJourney: [{
+      journeyImg: "img/sunset.png"
+    }, {
+      journeyImg: "img/bag-journey.png"
+    }, {
+      journeyImg: "img/luxury-journey.png"
+    }]
+  },{
+    header: true,
+    footer: true,
+    agentHeader: true,
+    travellerAgent: true,
+    agentName: "Holiday Travallers",
+    agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
+    travellerProfile: "img/profile-main.png",
+    travelDate: "26 dec, 2016",
+    travelTime: "1:20pm"
+  },{
+    header: true,
+    footer: true,
+    itineraryHeader: true,
+    itinerary: true,
+    itineraryDate: "26 Dec, 2016",
+    itineraryTime: "1:20 pm",
+    itineraryCat: "img/agt-cat1.png",
+    itineraryPic: "img/paris.jpg",
+    itineraryTitle: "Love In Paris",
+    itineraryCost: "25000",
+    itineraryDays: "75",
+    itineraryFlag: [{
+      itineraryImg: "img/canada-visit.png"
+    }, {
+      itineraryImg: "img/england-visit.png"
+    }, {
+      itineraryImg: "img/india-visit.png"
+    }],
+    itineraryJourney: [{
+      journeyImg: "img/sunset.png"
+    }, {
+      journeyImg: "img/bag-journey.png"
+    }, {
+      journeyImg: "img/luxury-journey.png"
+    }]
+  },{
+    header: false,
+    footer: false,
+    tourPackage: true,
+    packageType: "Adventure",
+    packageImg: "img/agt-cat1.png",
+    tourFlag: [{
+      flagImg: "img/canada-visit.png"
+    }, {
+      flagImg: "img/england-visit.png"
+    }, {
+      flagImg: "img/india-visit.png"
+    }],
+    tourTitle: "Love in Paris",
+    tourCost: "25000",
+    tourNight: "4",
+    tourDay: "5",
+    tourPic: "img/paris.jpg",
+    tourDate: "26 dec, 2016",
+    tourTime: "1:20pm"
+  },{
+    header: false,
+    footer: false,
+    tourPackage: true,
+    packageType: "Adventure",
+    packageImg: "img/agt-cat1.png",
+    tourFlag: [{
+      flagImg: "img/canada-visit.png"
+    }, {
+      flagImg: "img/england-visit.png"
+    }, {
+      flagImg: "img/india-visit.png"
+    }],
+    tourTitle: "Love in Paris",
+    tourCost: "25000",
+    tourNight: "4",
+    tourDay: "5",
+    tourPic: "img/paris.jpg",
+    tourDate: "26 dec, 2016",
+    tourTime: "1:20pm"
+  }];
   // travel activity json end
 
   // ITINERARY FILTER
@@ -10315,152 +10444,141 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
 
-  // travel activity card ng-repeat
-  $scope.agtTravelCard = [{
-    traveltimestampDate: '26 Jan, 2015',
-    traveltimestampHour: '1:20 pm',
-    travelImg: 'img/paris.jpg',
-    travelTitle: 'Love In Paris',
-    travelCost: '25000',
-    travelnoDays: '75',
-    travelCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    travelPost: 'Has uploaded a new itinerary',
-    travelReviewCount: '352',
-    travelRating: '4.5',
-    travelLikesCount: '99',
-    travelcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  // travel activity json
+  $scope.travelActivity = [{
+    header: true,
+    footer: true,
+    agentHeader: true,
+    travellerAgent: true,
+    agentName: "Holiday Travallers",
+    agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
+    travellerProfile: "img/profile-main.png",
+    travelDate: "26 dec, 2016",
+    travelTime: "1:20pm"
   }, {
-    traveltimestampDate: '26 Jan, 2015',
-    traveltimestampHour: '1:20 pm',
-    travelImg: 'img/paris.jpg',
-    travelTitle: 'Love In Paris',
-    travelCost: '25000',
-    travelnoDays: '75',
-    travelCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    travelPost: 'Has uploaded a new itinerary',
-    travelReviewCount: '352',
-    travelRating: '4.5',
-    travelLikesCount: '99',
-    travelcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    header: false,
+    footer: false,
+    tourPackage: true,
+    packageType: "Adventure",
+    packageImg: "img/agt-cat1.png",
+    tourFlag: [{
+      flagImg: "img/canada-visit.png"
+    }, {
+      flagImg: "img/england-visit.png"
+    }, {
+      flagImg: "img/india-visit.png"
+    }],
+    tourTitle: "Love in Paris",
+    tourCost: "25000",
+    tourNight: "4",
+    tourDay: "5",
+    tourPic: "img/paris.jpg",
+    tourDate: "26 dec, 2016",
+    tourTime: "1:20pm"
   }, {
-    traveltimestampDate: '26 Jan, 2015',
-    traveltimestampHour: '1:20 pm',
-    travelImg: 'img/paris.jpg',
-    travelTitle: 'Love In Paris',
-    travelCost: '25000',
-    travelnoDays: '75',
-    travelCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    travelPost: 'Has uploaded a new itinerary',
-    travelReviewCount: '352',
-    travelRating: '4.5',
-    travelLikesCount: '99',
-    travelcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    traveltimestampDate: '26 Jan, 2015',
-    traveltimestampHour: '1:20 pm',
-    travelImg: 'img/paris.jpg',
-    travelTitle: 'Love In Paris',
-    travelCost: '25000',
-    travelnoDays: '75',
-    travelCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    travelPost: 'Has uploaded a new itinerary',
-    travelReviewCount: '352',
-    travelRating: '4.5',
-    travelLikesCount: '99',
-    travelcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    traveltimestampDate: '26 Jan, 2015',
-    traveltimestampHour: '1:20 pm',
-    travelImg: 'img/paris.jpg',
-    travelTitle: 'Love In Paris',
-    travelCost: '25000',
-    travelnoDays: '75',
-    travelCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    travelPost: 'Has uploaded a new itinerary',
-    travelReviewCount: '352',
-    travelRating: '4.5',
-    travelLikesCount: '99',
-    travelcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    traveltimestampDate: '26 Jan, 2015',
-    traveltimestampHour: '1:20 pm',
-    travelImg: 'img/paris.jpg',
-    travelTitle: 'Love In Paris',
-    travelCost: '25000',
-    travelnoDays: '75',
-    travelCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    travelPost: 'Has uploaded a new itinerary',
-    travelReviewCount: '352',
-    travelRating: '4.5',
-    travelLikesCount: '99',
-    travelcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    traveltimestampDate: '26 Jan, 2015',
-    traveltimestampHour: '1:20 pm',
-    travelImg: 'img/paris.jpg',
-    travelTitle: 'Love In Paris',
-    travelCost: '25000',
-    travelnoDays: '75',
-    travelCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    travelPost: 'Has uploaded a new itinerary',
-    travelReviewCount: '352',
-    travelRating: '4.5',
-    travelLikesCount: '99',
-    travelcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    traveltimestampDate: '26 Jan, 2015',
-    traveltimestampHour: '1:20 pm',
-    travelImg: 'img/paris.jpg',
-    travelTitle: 'Love In Paris',
-    travelCost: '25000',
-    travelnoDays: '75',
-    travelCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    travelPost: 'Has uploaded a new itinerary',
-    travelReviewCount: '352',
-    travelRating: '4.5',
-    travelLikesCount: '99',
-    travelcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    traveltimestampDate: '26 Jan, 2015',
-    traveltimestampHour: '1:20 pm',
-    travelImg: 'img/paris.jpg',
-    travelTitle: 'Love In Paris',
-    travelCost: '25000',
-    travelnoDays: '75',
-    travelCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    travelPost: 'Has uploaded a new itinerary',
-    travelReviewCount: '352',
-    travelRating: '4.5',
-    travelLikesCount: '99',
-    travelcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    traveltimestampDate: '26 Jan, 2015',
-    traveltimestampHour: '1:20 pm',
-    travelImg: 'img/paris.jpg',
-    travelTitle: 'Love In Paris',
-    travelCost: '25000',
-    travelnoDays: '75',
-    travelCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    travelPost: 'Has uploaded a new itinerary',
-    travelReviewCount: '352',
-    travelRating: '4.5',
-    travelLikesCount: '99',
-    travelcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    traveltimestampDate: '26 Jan, 2015',
-    traveltimestampHour: '1:20 pm',
-    travelImg: 'img/paris.jpg',
-    travelTitle: 'Love In Paris',
-    travelCost: '25000',
-    travelnoDays: '75',
-    travelCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    travelPost: 'Has uploaded a new itinerary',
-    travelReviewCount: '352',
-    travelRating: '4.5',
-    travelLikesCount: '99',
-    travelcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    header: true,
+    footer: true,
+    itineraryHeader: true,
+    itinerary: true,
+    itineraryDate: "26 Dec, 2016",
+    itineraryTime: "1:20 pm",
+    itineraryCat: "img/agt-cat1.png",
+    itineraryPic: "img/paris.jpg",
+    itineraryTitle: "Love In Paris",
+    itineraryCost: "25000",
+    itineraryDays: "75",
+    itineraryFlag: [{
+      itineraryImg: "img/canada-visit.png"
+    }, {
+      itineraryImg: "img/england-visit.png"
+    }, {
+      itineraryImg: "img/india-visit.png"
+    }],
+    itineraryJourney: [{
+      journeyImg: "img/sunset.png"
+    }, {
+      journeyImg: "img/bag-journey.png"
+    }, {
+      journeyImg: "img/luxury-journey.png"
+    }]
+  },{
+    header: true,
+    footer: true,
+    agentHeader: true,
+    travellerAgent: true,
+    agentName: "Holiday Travallers",
+    agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
+    travellerProfile: "img/profile-main.png",
+    travelDate: "26 dec, 2016",
+    travelTime: "1:20pm"
+  },{
+    header: true,
+    footer: true,
+    itineraryHeader: true,
+    itinerary: true,
+    itineraryDate: "26 Dec, 2016",
+    itineraryTime: "1:20 pm",
+    itineraryCat: "img/agt-cat1.png",
+    itineraryPic: "img/paris.jpg",
+    itineraryTitle: "Love In Paris",
+    itineraryCost: "25000",
+    itineraryDays: "75",
+    itineraryFlag: [{
+      itineraryImg: "img/canada-visit.png"
+    }, {
+      itineraryImg: "img/england-visit.png"
+    }, {
+      itineraryImg: "img/india-visit.png"
+    }],
+    itineraryJourney: [{
+      journeyImg: "img/sunset.png"
+    }, {
+      journeyImg: "img/bag-journey.png"
+    }, {
+      journeyImg: "img/luxury-journey.png"
+    }]
+  },{
+    header: false,
+    footer: false,
+    tourPackage: true,
+    packageType: "Adventure",
+    packageImg: "img/agt-cat1.png",
+    tourFlag: [{
+      flagImg: "img/canada-visit.png"
+    }, {
+      flagImg: "img/england-visit.png"
+    }, {
+      flagImg: "img/india-visit.png"
+    }],
+    tourTitle: "Love in Paris",
+    tourCost: "25000",
+    tourNight: "4",
+    tourDay: "5",
+    tourPic: "img/paris.jpg",
+    tourDate: "26 dec, 2016",
+    tourTime: "1:20pm"
+  },{
+    header: false,
+    footer: false,
+    tourPackage: true,
+    packageType: "Adventure",
+    packageImg: "img/agt-cat1.png",
+    tourFlag: [{
+      flagImg: "img/canada-visit.png"
+    }, {
+      flagImg: "img/england-visit.png"
+    }, {
+      flagImg: "img/india-visit.png"
+    }],
+    tourTitle: "Love in Paris",
+    tourCost: "25000",
+    tourNight: "4",
+    tourDay: "5",
+    tourPic: "img/paris.jpg",
+    tourDate: "26 dec, 2016",
+    tourTime: "1:20pm"
   }];
-  // travel activity card ng-repeat end
+  // travel activity json end
 
   // Enquiry accordion
   $scope.enquiryAgent = [{

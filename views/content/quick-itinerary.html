@@ -10,7 +10,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="itinerary-inputholder">
-                      <input type="text" class="form-control" placeholder="Trip Title" ng-model="qItinerary.tripTitle">
+                      <input type="text" class="form-control" placeholder="Trip Title" ng-model="qItinerary.title">
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -18,12 +18,12 @@
                       <div class="itinerary-month relate">
                         <label for="month">Month</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control text-center" id="month" ng-model="qItinerary.month" ng-click="viewMonths.a = !viewMonths.a"
+                          <input type="text" class="form-control text-center" id="month" ng-model="qItinerary.month" ng-click="viewMonths.show = !viewMonths.show"
                             >
                         </div>
-                        <div class="month-dropdown" ng-show="viewMonths.a">
+                        <div class="month-dropdown" ng-show="viewMonths.show">
                           <ul>
-                            <li ng-repeat="month in monthDrop | filter:qItinerary.month"><a href="" title="{{month}}" ng-click="qItinerary.month=month;viewMonths.a=false">{{month}}</a></li>
+                            <li ng-repeat="month in monthDrop | filter:qItinerary.month"><a href="" title="{{month}}" ng-click="qItinerary.month=month;viewMonths.show=false">{{month}}</a></li>
                             <!-- <li><a href="" title="February">February</a></li>
                             <li><a href="" title="March">March</a></li>
                             <li><a href="" title="April">April</a></li>
@@ -54,7 +54,7 @@
                       <div class="itinerary-duration">
                         <label for="Day">Days</label>
                         <div class="itinerary-inputholder duration-input">
-                          <input type="text" class="form-control text-center" id="Day" placeholder="e.g. 20" ng-model="qItinerary.days">
+                          <input type="text" class="form-control text-center" id="Day" placeholder="e.g. 20" ng-model="qItinerary.duration">
                         </div>
                       </div>
                     </div>
@@ -120,8 +120,8 @@
               <!-- trip descp -->
               <div class="trip-descp-itinerary">
                 <label for="descp">A Little More About This Trip</label>
-                <textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel" id="descp"></textarea>
-                <!--<textarea ui-tinymce="tinymceOptions" ng-model="qItineraryTripDesc" id="descp"></textarea>                -->
+                <!--<textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel" id="descp"></textarea>-->
+                <textarea ui-tinymce="tinymceOptions" ng-model="qItinerary.description" id="descp"></textarea>                
               </div>
               <!-- trip descp end -->
               <!-- upload trip photo -->
@@ -130,22 +130,24 @@
                 <div class="trip-photo-holder">
                   <div class="scroll-photoitinerary">
                     <div class="trip-cards-panel">
-                      <div class="trip-view-photo">
-                        <img ng-src="{{formData.photo|uploadpath}}" alt="Quick Itinerary" class="img-responsive">
+                      <div class="trip-view-photo" ng-repeat="photo in qItinerary.photos track by $index">
+                        <img ng-src="{{photo.name|uploadpath}}" alt="Quick Itinerary" class="img-responsive">
                         <div class="remove-quick-photo text-right">
-                          <div class="delete-photo"><i class="fa fa-times color-white pointer"></i></div>
+                          <div class="delete-photo"><i class="fa fa-times color-white pointer" ng-click="removePhoto($index)"></i></div>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="trip-upload text-center">
                     <div class="upload-section">
+                    <div ng-if="qItinerary.photos.length==0">
                       <img src="img/upload-icon.jpg" alt="" class="m-center img-responsive">
                       <p class="text-center color-grey avenir-roman">Drag a your itinerary photos here</p>
                       <span class="block color-grey avenir-roman">- or -</span>
+                    </div> 
                       <div class="upload-btn relate">
                           <button class="btn btn-dark-blue pointer avenir-light pointer">Select a photo from your computer</button>
-                           <upload-image ng-model="formData.photo" ng-callback="addPhotosCallback" multiple="true" class="quick-upload-photos"></upload-image>
+                           <upload-image ng-model="formData.photo" ng-callback="addPhotosCallback(data)" multiple="true" class="quick-upload-photos"></upload-image>
                       </div>
                     </div>
                   </div>
@@ -176,8 +178,8 @@
                 </div>
                 <div class="pull-right">
                   <div class="save-publish-detail">
-                    <button class="btn btn-pink btn-more mr5">Save</button>
-                    <button class="btn btn-pink btn-more">Publish</button>
+                    <button class="btn btn-pink btn-more mr5" ng-click="upload(true)">Save</button>
+                    <button class="btn btn-pink btn-more" ng-click="upload(false)">Publish</button>
                   </div>
                 </div>
               </div>
