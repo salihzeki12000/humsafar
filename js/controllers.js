@@ -1188,7 +1188,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             var xdiff = (centers[i].lat - centers[i - 1].lat);
             var ydiff = (centers[i].lng - centers[i - 1].lng);
             // console.log(Math.abs(ydiff));
-            var currentZoom=currentZoom = map.getZoom();
+            var currentZoom = currentZoom = map.getZoom();
             var commingZoom;
 
             // if (value) {
@@ -1205,19 +1205,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               markerBounds.extend(arrival);
               commingZoom = getBoundsZoomLevel(markerBounds, mapDim);
 
-            if(Math.abs(commingZoom-currentZoom)>2){
-               if (commingZoom > currentZoom) {
-                smoothZoom(map, commingZoom, currentZoom, true); //for zooming in
-                commingZoom = currentZoom;
-              } else if (commingZoom < currentZoom) {
-                smoothZoom(map, commingZoom, currentZoom, false); //for zooming out
-                commingZoom = currentZoom;
+              if (Math.abs(commingZoom - currentZoom) > 2) {
+                if (commingZoom > currentZoom) {
+                  smoothZoom(map, commingZoom, currentZoom, true); //for zooming in
+                  commingZoom = currentZoom;
+                } else if (commingZoom < currentZoom) {
+                  smoothZoom(map, commingZoom, currentZoom, false); //for zooming out
+                  commingZoom = currentZoom;
+                }
               }
-            }
 
               map.fitBounds(markerBounds);
               // currentZoom = map.getZoom();
-                console.log(currentZoom, commingZoom);
+              console.log(currentZoom, commingZoom);
             }
 
             var frac1 = xdiff / 100;
@@ -1287,7 +1287,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   smoothZoom(map, level, cnt + 1, true);
                 });
                 setTimeout(function () {
-                  console.log("zooming in-->"+level,cnt);
+                  console.log("zooming in-->" + level, cnt);
                   map.setZoom(cnt)
                 }, 0.01);
               }
@@ -1301,7 +1301,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   smoothZoom(map, level, cnt - 1, false);
                 });
                 setTimeout(function () {
-                    console.log("zooming out-->"+level,cnt);
+                  console.log("zooming out-->" + level, cnt);
                   map.setZoom(cnt)
                 }, 0.01);
               }
@@ -6424,6 +6424,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var callbackFollowers = function (data) {
       $scope.followersList = data.data.followers;
+      _.each($scope.followersList, function (n) {
+        if (n.following) {
+          n.status = "Following";
+        } else {
+          n.status = "Follow";
+        }
+      });
+      console.log($scope.followersList);
       reloadCount();
       console.log($scope.followersList);
     };
@@ -6461,6 +6469,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     MyLife.getOneBucketList(callbackBucketList);
 
+
+
+    $scope.followUnFollowUser = function (userId, name, flag) {
+      console.log(flag);
+      if (flag == "Follow") {
+        console.log("requested to follow");
+        MyLife.followUser(userId, name, function (data) {
+          if (data.value) {
+            var index = _.findIndex($scope.followersList, ['_id', userId]);
+            console.log(index);
+            $scope.followersList[index].following = true;
+            $scope.followersList[index].status = "Following";
+             MyLife.getFollowingWeb(callbackFollowings);
+          }
+        });
+      } else if (flag == "Following") {
+        console.log("requested to unfollow");
+        MyLife.unFollowUser(userId, function (data) {
+          if (data.value) {
+            var index = _.findIndex($scope.followersList, ['_id', userId]);
+            console.log(index);
+            $scope.followersList[index].following = false;
+            $scope.followersList[index].status = "Follow";
+             MyLife.getFollowingWeb(callbackFollowings);
+          }
+        });
+      }
+    };
 
     // following and followers end
 
@@ -6645,7 +6681,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.qItinerary = {};
     $scope.qItinerary.itineraryType = [];
     $scope.qItinerary.countryVisited = [];
-    $scope.qItinerary.photos=[];
+    $scope.qItinerary.photos = [];
     $scope.previousCountryId = [];
 
     // $scope.qItinerary.countryVisitedArray = [];
@@ -6823,25 +6859,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.cities = [];
     };
 
-    $scope.addPhotosCallback=function(photo){
+    $scope.addPhotosCallback = function (photo) {
       console.log(photo);
-      $scope.qItinerary.photos.push({"name":photo})
+      $scope.qItinerary.photos.push({
+        "name": photo
+      })
     };
 
-    $scope.removePhoto=function(index){
+    $scope.removePhoto = function (index) {
       $scope.qItinerary.photos.splice(index, 1);
       console.log($scope.qItinerary.photos);
     };
 
-    $scope.currency_symbols =[
-	 '&#1583',
-	 '&#65',
-	 '&#76',
+    $scope.currency_symbols = [
+      '&#1583',
+      '&#65',
+      '&#76',
     ];
 
-    $scope.upload=function(status){
-      $scope.qItinerary.status=status;
-      $scope.qItinerary.countryVisited=$scope.addCountry;
+    $scope.upload = function (status) {
+      $scope.qItinerary.status = status;
+      $scope.qItinerary.countryVisited = $scope.addCountry;
       console.log($scope.qItinerary);
     };
 
@@ -8640,7 +8678,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     default:
       $scope.agtuser.innerView = allagtuser[0];
   }
-  $scope.getTab = function(view) {
+  $scope.getTab = function (view) {
     $scope.agtuser.innerView = allagtuser[view];
     var url = "usr-itinerary";
     var active = "";
@@ -8963,7 +9001,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   });
 
   // review textarea counter end
-    // travel activity json
+  // travel activity json
   $scope.travelActivity = [{
     header: true,
     footer: true,
@@ -9020,7 +9058,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       journeyImg: "img/luxury-journey.png"
     }]
-  },{
+  }, {
     header: true,
     footer: true,
     agentHeader: true,
@@ -9030,7 +9068,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     travellerProfile: "img/profile-main.png",
     travelDate: "26 dec, 2016",
     travelTime: "1:20pm"
-  },{
+  }, {
     header: true,
     footer: true,
     itineraryHeader: true,
@@ -9056,7 +9094,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       journeyImg: "img/luxury-journey.png"
     }]
-  },{
+  }, {
     header: false,
     footer: false,
     tourPackage: true,
@@ -9076,7 +9114,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourPic: "img/paris.jpg",
     tourDate: "26 dec, 2016",
     tourTime: "1:20pm"
-  },{
+  }, {
     header: false,
     footer: false,
     tourPackage: true,
@@ -9918,57 +9956,57 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.oneAtATime = true;
 
   //lead monitor accordion
-   $scope.leadMonAgent = [{
-     leadStatus: 'new',
-     leadImg:'img/follower.jpg',
-     leadName: 'Andrea Christina',
-     leadDate: '02/12/2016',
-     leadDestination : 'India',
-     leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-     leadPhone:'91961845656',
-     leadMail:'leads@leads.com',
-     leadItinerary:'Incredible India'
-   },{
-     leadStatus: 'actioned',
-     leadImg:'img/follower.jpg',
-     leadName: 'Andrea Christina',
-     leadDate: '02/12/2016',
-     leadDestination : 'India',
-     leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-     leadPhone:'91961845656',
-     leadMail:'leads@leads.com',
-     leadItinerary:'Incredible India'
-   },{
-     leadStatus: 'new',
-     leadImg:'img/follower.jpg',
-     leadName: 'Andrea Christina',
-     leadDate: '02/12/2016',
-     leadDestination : 'India',
-     leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-     leadPhone:'91961845656',
-     leadMail:'leads@leads.com',
-     leadItinerary:'Incredible India'
-   },{
-     leadStatus: 'actioned',
-     leadImg:'img/follower.jpg',
-     leadName: 'Andrea Christina',
-     leadDate: '02/12/2016',
-     leadDestination : 'India',
-     leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-     leadPhone:'91961845656',
-     leadMail:'leads@leads.com',
-     leadItinerary:'Incredible India'
-   },{
-     leadStatus: 'new',
-     leadImg:'img/follower.jpg',
-     leadName: 'Andrea Christina',
-     leadDate: '02/12/2016',
-     leadDestination : 'India',
-     leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-     leadPhone:'91961845656',
-     leadMail:'leads@leads.com',
-     leadItinerary:'Incredible India'
-   }];
+  $scope.leadMonAgent = [{
+    leadStatus: 'new',
+    leadImg: 'img/follower.jpg',
+    leadName: 'Andrea Christina',
+    leadDate: '02/12/2016',
+    leadDestination: 'India',
+    leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+    leadPhone: '91961845656',
+    leadMail: 'leads@leads.com',
+    leadItinerary: 'Incredible India'
+  }, {
+    leadStatus: 'actioned',
+    leadImg: 'img/follower.jpg',
+    leadName: 'Andrea Christina',
+    leadDate: '02/12/2016',
+    leadDestination: 'India',
+    leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+    leadPhone: '91961845656',
+    leadMail: 'leads@leads.com',
+    leadItinerary: 'Incredible India'
+  }, {
+    leadStatus: 'new',
+    leadImg: 'img/follower.jpg',
+    leadName: 'Andrea Christina',
+    leadDate: '02/12/2016',
+    leadDestination: 'India',
+    leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+    leadPhone: '91961845656',
+    leadMail: 'leads@leads.com',
+    leadItinerary: 'Incredible India'
+  }, {
+    leadStatus: 'actioned',
+    leadImg: 'img/follower.jpg',
+    leadName: 'Andrea Christina',
+    leadDate: '02/12/2016',
+    leadDestination: 'India',
+    leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+    leadPhone: '91961845656',
+    leadMail: 'leads@leads.com',
+    leadItinerary: 'Incredible India'
+  }, {
+    leadStatus: 'new',
+    leadImg: 'img/follower.jpg',
+    leadName: 'Andrea Christina',
+    leadDate: '02/12/2016',
+    leadDestination: 'India',
+    leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+    leadPhone: '91961845656',
+    leadMail: 'leads@leads.com',
+    leadItinerary: 'Incredible India'
+  }];
   //lead monitor accordion end
 
   //scroll change
@@ -10289,7 +10327,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourDayC: '4',
     tourNightC: '3',
     tourcategoryTitle: 'Adventure',
-      tourcategoryImg: 'img/agt-cat1.png',
+    tourcategoryImg: 'img/agt-cat1.png',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -10297,8 +10335,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat5.png',
-      tourcategoryTitle: 'Backpacking',
+    tourcategoryImg: 'img/agt-cat5.png',
+    tourcategoryTitle: 'Backpacking',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -10306,8 +10344,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat4.png',
-      tourcategoryTitle: 'Romance',
+    tourcategoryImg: 'img/agt-cat4.png',
+    tourcategoryTitle: 'Romance',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -10315,8 +10353,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat9.png',
-      tourcategoryTitle: 'Friends',
+    tourcategoryImg: 'img/agt-cat9.png',
+    tourcategoryTitle: 'Friends',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -10324,8 +10362,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat1.png',
-      tourcategoryTitle: 'Adventure',
+    tourcategoryImg: 'img/agt-cat1.png',
+    tourcategoryTitle: 'Adventure',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -10333,8 +10371,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat7.png',
-      tourcategoryTitle: 'Luxury',
+    tourcategoryImg: 'img/agt-cat7.png',
+    tourcategoryTitle: 'Luxury',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -10342,8 +10380,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat1.png',
-      tourcategoryTitle: 'Adventure',
+    tourcategoryImg: 'img/agt-cat1.png',
+    tourcategoryTitle: 'Adventure',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -10351,8 +10389,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     agttourCost: '25000',
     tourDayC: '4',
     tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat4.png',
-      tourcategoryTitle: 'Romance',
+    tourcategoryImg: 'img/agt-cat4.png',
+    tourcategoryTitle: 'Romance',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }];
   // tour packages card end
@@ -10501,7 +10539,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       journeyImg: "img/luxury-journey.png"
     }]
-  },{
+  }, {
     header: true,
     footer: true,
     agentHeader: true,
@@ -10511,7 +10549,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     travellerProfile: "img/profile-main.png",
     travelDate: "26 dec, 2016",
     travelTime: "1:20pm"
-  },{
+  }, {
     header: true,
     footer: true,
     itineraryHeader: true,
@@ -10537,7 +10575,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       journeyImg: "img/luxury-journey.png"
     }]
-  },{
+  }, {
     header: false,
     footer: false,
     tourPackage: true,
@@ -10557,7 +10595,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourPic: "img/paris.jpg",
     tourDate: "26 dec, 2016",
     tourTime: "1:20pm"
-  },{
+  }, {
     header: false,
     footer: false,
     tourPackage: true,

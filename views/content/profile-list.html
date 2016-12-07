@@ -102,8 +102,11 @@
                 </div>
               </div>
               <div class="pull-right">
-                <button class="btn btn-pink following-btn" ng-hide="list.following">Follow</button>
-                <button class="btn btn-pink following-btn" ng-show="list.following">Following</button>
+                <!--<button class="btn btn-pink following-btn" ng-if="!list.following" ng-click="followUser(list._id,list.name)">Follow</button>
+                <button class="btn btn-pink following-btn" ng-if="list.following" ng-click="unFollowUser(list._id)">Following</button>-->
+
+                <button class="btn btn-pink following-btn" ng-click="followUnFollowUser(list._id,list.name,list.status)">{{list.status}}</button>
+
 
               </div>
             </div>

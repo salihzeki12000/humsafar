@@ -73,7 +73,7 @@ var navigationservice = angular.module('mylife', [])
         method:"POST",
         data:obj
       }).success(function(){
-        callback(countryId);
+        callback(countryId); 
       });
     },
     getFollowingWeb: function (callback) {
@@ -87,6 +87,31 @@ var navigationservice = angular.module('mylife', [])
         url: adminURL + "/user/getFollowersWeb",
         method: "POST"
       }).success(callback);
+    },
+    followUser:function(userId,name,callback){
+      var obj={
+        "_id":userId,
+        "toName":name
+      }
+      $http({
+        url:adminURL + "/user/followUserWeb",
+        method:"POST",
+        data:obj
+      }).success(function(data){
+        callback(data);
+      });
+    },
+     unFollowUser:function(userId,callback){
+      var obj={
+        "_id":userId,
+      }
+      $http({
+        url:adminURL + "/user/unFollowUserWeb",
+        method:"POST",
+        data:obj
+      }).success(function(data){
+        callback(data);
+      });
     }
   };
 });
