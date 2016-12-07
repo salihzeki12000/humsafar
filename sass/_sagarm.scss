@@ -2205,12 +2205,14 @@ q {
 
     .photo-filter {
       padding: 10px;
-      border: 1px solid #ccc;
+      background-color: #fff;
+      color: $brand-blue;
+      // border: 1px solid #ccc;
       border-radius: 4px;
       @extend .pointer;
     }
 
-    .down {
+    .down{
       display: none;
     }
 
