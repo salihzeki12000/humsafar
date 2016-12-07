@@ -1861,11 +1861,14 @@ q {
 .action-contentbox {
   @extend .avenir-light;
   padding: 10px 30px;
-  .lead-content{
+
+  .lead-content {
     color: $brand-blue;
-    a{
+
+    a {
       color: $brand-blue;
-      &:hover{
+
+      &:hover {
         color: $brand-blue;
       }
     }
@@ -1969,6 +1972,17 @@ q {
 
 .change {
   background: $brand-grey;
+  color: #fff;
+  position: fixed;
+  width: 100%;
+  /* top: 0; */
+  bottom: auto;
+  top: 60px;
+  // top: 80px;
+}
+
+.change-blue{
+  background-color: $brand-blue;
   color: #fff;
   position: fixed;
   width: 100%;
@@ -2259,3 +2273,57 @@ q {
     }
   }
 }
+// USER TRAVEL ACTIVITY CARD
+.travel-activity {
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+.agent-traveller-card {
+  padding: 10px;
+}
+
+.agent-travel-header {
+  margin: 0 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid $brand-grey;
+  position: relative;
+  p{
+    font-size: 12px;
+  }
+}
+
+.travel-itinerary-header {
+  padding: 10px;
+  p{
+    font-size: 12px;
+  }
+}
+.footer-travel-sec .user-social-item {
+    border-top: 1px solid $brand-grey;
+    padding: 10px 0;
+}
+.agent-traveller-imgholder {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 100%;
+    border: 5px solid #fff;
+    position: absolute;
+    top: -30px;
+}
+.agent-traveller-detail {
+    display: inline-block;
+    margin-left: 80px;
+    h4{
+      margin-bottom: 5px;
+    }
+}
+
+.imgfoot-top .day-night{
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+// USER TRAVEL ACTIVITY CARD END

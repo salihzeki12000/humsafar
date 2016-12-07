@@ -6830,7 +6830,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.removePhoto=function(index){
       $scope.qItinerary.photos.splice(index, 1);
-      console.log($scope.qItinerary.photos);      
+      console.log($scope.qItinerary.photos);
     };
 
     $scope.currency_symbols =[
@@ -9977,10 +9977,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //console.log(scroll);
     if (scroll >= 225) {
       //console.log('a');
-      $(".agent-home-nav").addClass("change");
+      $(".agent-home-nav").addClass("change-blue");
     } else {
       //console.log('a');
-      $(".agent-home-nav").removeClass("change");
+      $(".agent-home-nav").removeClass("change-blue");
     }
   });
   //scroll change end
@@ -10067,43 +10067,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         url = "agthome-tourpackages";
         $scope.agthomeoptions.active = "agthome-tourpackages";
         $scope.agenthomeItinerary = false;
-        $scope.agentFixednav = "change";
+        $scope.agentFixednav = "change-blue";
         break;
       case 2:
         url = "agthome-photovideos";
         $scope.agthomeoptions.active = "agthome-photovideos";
         $scope.agenthomeItinerary = false;
-        $scope.agentFixednav = "change";
+        $scope.agentFixednav = "change-blue";
         break;
       case 3:
         url = "agthome-testimonialreviews";
         $scope.agthomeoptions.active = "agthome-testimonialreviews";
         $scope.agenthomeItinerary = false;
-        $scope.agentFixednav = "change";
+        $scope.agentFixednav = "change-blue";
         break;
       case 4:
         url = "agthome-travelactivity";
         $scope.agthomeoptions.active = "agthome-travelactivity";
         $scope.agenthomeItinerary = false;
-        $scope.agentFixednav = "change";
+        $scope.agentFixednav = "change-blue";
         break;
       case 5:
         url = "agthome-leadmonitor";
         $scope.agthomeoptions.active = "agthome-leadmonitor";
         $scope.agenthomeItinerary = false;
-        $scope.agentFixednav = "change";
+        $scope.agentFixednav = "change-blue";
         break;
       case 6:
         url = "agthome-analytics";
         $scope.agthomeoptions.active = "agthome-analytics";
         $scope.agenthomeItinerary = false;
-        $scope.agentFixednav = "change";
+        $scope.agentFixednav = "change-bluechange-blue";
         break;
       case 7:
         url = "agthome-aboutus";
         $scope.agthomeoptions.active = "agthome-aboutus";
         $scope.agenthomeItinerary = false;
-        $scope.agentFixednav = "change";
+        $scope.agentFixednav = "change-blue";
         break;
 
       default:
