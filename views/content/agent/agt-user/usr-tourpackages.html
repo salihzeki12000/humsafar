@@ -37,7 +37,8 @@
               <div class="imgfoot-top clearfix">
                 <div class="pull-left">
                   <h4 class="font-sz18">{{tourcard.agttourTitle}}</h4>
-                  <p class="font-sz10"><span>{{tourcard.tourNightC}} Nights</span> | <span>{{tourcard.tourDayC}} Days</span></p>
+                  <p class="day-night"><span>{{tourcard.tourNightC}} Nights</span> | <span>{{tourcard.tourDayC}} Days</span></p>
+                  <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{tourcard.tourDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{tourcard.tourTime}}</span></p>
                 </div>
                 <div class="pull-right">
                   <p class="font-sz18 cost-posi">${{tourcard.agttourCost}}</p>

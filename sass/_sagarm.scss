@@ -97,6 +97,14 @@
 .agent-cmpny-inputholder {
   position: relative;
 
+  textarea {
+    border: none;
+    border-bottom: 1px solid #2d3655;
+    line-height: 1;
+    height: 30px;
+    padding: 6px 12px 6px 30px;
+  }
+
   input {
     border: none;
     border-bottom: 1px solid $brand-blue;
@@ -305,7 +313,7 @@
 .agent-user-nav {
   background: $brand-pink;
   padding: 5px 0;
-  z-index: 3;
+  z-index: 6;
   // position: absolute;
   // bottom: 0;
   // width: 100%;
@@ -325,6 +333,24 @@
 
     li:last-child {
       border-right: none !important;
+    }
+  }
+}
+
+.agent-user-nav,
+.change ul {
+  li {
+    &:active {
+      color: $brand-blue !important;
+    }
+  }
+}
+
+.agent-home-nav,
+.change-blue ul {
+  li {
+    &:active {
+      color: $brand-pink !important;
     }
   }
 }
@@ -609,6 +635,7 @@
 .activity-img,
 .itinerary-img {
   position: relative;
+  min-height: 250px;
 }
 
 .itinerary-imgfoot {
@@ -625,8 +652,8 @@
 }
 
 .imgfoot-top {
-  padding: 10px;
-  background-color: rgba(0,0,0,.8);
+  padding: 10px 10px 0;
+  background-color: rgba(0,0,0,0.5);
 
   p {
     margin: 0;
@@ -917,16 +944,11 @@ q {
 .agthome-itinerary-youtube,
 .agthome-tourpackage-youtube,
 .youtube-placeholder {
-  // width: 550px;
-  height: 250px;
-  // margin: 0 auto;
-  // padding: 10px 0;
-  //
+  height: 300px;
   // iframe {
   //   width: 550px;
   //   height: 360px;
   // }
-  //
   // img {
   //   max-height: 100%;
   // }
@@ -1004,7 +1026,7 @@ q {
   border: 1px solid $brand-blue;
   background-color: $brand-blue;
   @include position(absolute, -15px 35px null null);
-  z-index: 10;
+  z-index: 2;
 
   &:before {
     content: "";
@@ -1108,7 +1130,7 @@ q {
   input {
     background: transparent;
     border: none;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid $brand-grey;
     padding: 0;
   }
 
@@ -1227,6 +1249,16 @@ q {
   width: 270px;
   position: relative;
 
+  .clear-link {
+    padding: 0 10px;
+    text-decoration: underline;
+    color: $brand-grey;
+
+    &:hover {
+      color: $brand-grey;
+    }
+  }
+
   .photo-filter {
     padding: 10px;
     border: 1px solid #ccc;
@@ -1252,7 +1284,7 @@ q {
     width: 100%;
     position: absolute;
     top: 34px;
-    z-index: 222;
+    z-index: 3;
     background-color: #fff;
     padding: 5px;
     border: 1px solid #ccc;
@@ -1687,7 +1719,7 @@ q {
 .enquiry-sidetab {
   width: 450px;
   // height: 350px;
-  position: absolute;
+  position: fixed;
   top: 100px;
   right: -450px;
   z-index: 3;
@@ -1898,7 +1930,7 @@ q {
 }
 
 .contacttab-btn {
-  position: absolute;
+  position: fixed;
   top: 250px;
   right: -29px;
   z-index: 4;
@@ -1975,18 +2007,16 @@ q {
   color: #fff;
   position: fixed;
   width: 100%;
-  /* top: 0; */
   bottom: auto;
   top: 60px;
   // top: 80px;
 }
 
-.change-blue{
+.change-blue {
   background-color: $brand-blue;
   color: #fff;
   position: fixed;
   width: 100%;
-  /* top: 0; */
   bottom: auto;
   top: 60px;
   // top: 80px;
@@ -2097,6 +2127,12 @@ q {
 .user-contactdetail {
   color: #fff;
   padding: 0 15px;
+  a{
+    color: #fff;
+    &:hover{
+      color: #fff;
+    }
+  }
 }
 
 .wid90 {
@@ -2203,6 +2239,16 @@ q {
     background-color: $brand-blue;
     border-radius: 6px;
 
+    .clear-link {
+      padding: 0 10px;
+      text-decoration: underline;
+      color: #fff;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
     .photo-filter {
       padding: 10px;
       background-color: #fff;
@@ -2212,7 +2258,7 @@ q {
       @extend .pointer;
     }
 
-    .down{
+    .down {
       display: none;
     }
 
@@ -2230,7 +2276,7 @@ q {
       width: 100%;
       position: absolute;
       top: 34px;
-      z-index: 222;
+      z-index: 3;
       background-color: $brand-blue;
       padding: 5px;
       border: 1px solid #ccc;
@@ -2260,6 +2306,11 @@ q {
           position: absolute;
           top: 0;
         }
+
+        [type="checkbox"]:checked+label:after {
+          color: $brand-cyan;
+          @include transition(all 300ms linear);
+        }
       }
     }
   }
@@ -2276,6 +2327,7 @@ q {
   }
 }
 // USER TRAVEL ACTIVITY CARD
+
 .travel-activity {
   background-color: #fff;
   border-radius: 5px;
@@ -2291,41 +2343,155 @@ q {
   padding: 10px 0;
   border-bottom: 1px solid $brand-grey;
   position: relative;
-  p{
+
+  p {
     font-size: 12px;
   }
 }
 
 .travel-itinerary-header {
   padding: 10px;
-  p{
+
+  p {
     font-size: 12px;
   }
 }
+
 .footer-travel-sec .user-social-item {
-    border-top: 1px solid $brand-grey;
-    padding: 10px 0;
-}
-.agent-traveller-imgholder {
-    display: inline-block;
-    width: 80px;
-    height: 80px;
-    overflow: hidden;
-    border-radius: 100%;
-    border: 5px solid #fff;
-    position: absolute;
-    top: -30px;
-}
-.agent-traveller-detail {
-    display: inline-block;
-    margin-left: 80px;
-    h4{
-      margin-bottom: 5px;
-    }
+  border-top: 1px solid $brand-grey;
+  padding: 10px 0;
 }
 
-.imgfoot-top .day-night{
+.agent-traveller-imgholder {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 100%;
+  border: 5px solid #fff;
+  position: absolute;
+  top: -30px;
+}
+
+.agent-traveller-detail {
+  display: inline-block;
+  margin-left: 80px;
+
+  h4 {
+    margin-bottom: 5px;
+  }
+}
+
+.imgfoot-top .day-night {
   font-size: 12px;
   margin-bottom: 10px;
 }
 // USER TRAVEL ACTIVITY CARD END
+//AGENT HOME ANALYTICS
+
+.agt-home-analytics {
+  background-color: $brand-blue;
+  min-height: 500px;
+}
+// tour package dropdown
+
+.tour-type {
+  position: relative;
+  background-color: $brand-dark-blue;
+  border-radius: 5px;
+  @extend .pointer;
+}
+
+.tour-typeinput {
+  position: relative;
+  .a input {
+    padding-right: 30px;
+  }
+}
+
+  .form-control {
+    &:focus {
+      outline: none;
+      border-color: $brand-grey;
+    }
+}
+
+.type-tourarrow {
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  font-size: 24px;
+}
+
+.tourcategory {
+  text-align: center;
+  color: #fff;
+
+  figcaption {
+    font-size: 13px;
+  }
+  @extend .avenir-roman;
+  @extend .pointer;
+}
+
+.tourcategory-img {
+  width: 40px;
+  height: 40px;
+  background-position: center;
+  background-size: contain;
+  padding: 8px 0;
+  margin: 0 auto;
+  background-image: url('../img/icons/box9.png');
+  background-repeat: no-repeat;
+  @include transition(all ease 300ms);
+
+  &:active{
+    background-image: url('../img/icons/box7.png');
+    @include transition(all ease 300ms);
+  }
+
+  img {
+    margin: 0 auto;
+    // width: 25px;
+  }
+}
+
+.optiondiv {
+  position: absolute;
+  width: 100%;
+  z-index: 4;
+  background-color: $brand-dark-blue;
+  left: 0;
+  top: 40px;
+  text-align: center;
+}
+
+.tour-typeoption {
+  overflow-y: scroll;
+  max-height: 280px;
+
+  ul {
+    li {
+      margin: 0 8px;
+      width: 25%;
+    }
+  }
+}
+
+.tour-typeoption::-webkit-scrollbar {
+  display: none;
+}
+
+.tourcurrency-option{
+  overflow-y: scroll;
+  max-height: 280px;
+  ul li{
+    padding: 0;
+    border-bottom: 1px solid $brand-cyan;
+  }
+}
+.tourcurrency-option::-webkit-scrollbar {
+  display: none;
+}
+// tour package dropdown end
+//AGENT HOME ANALYTICS END

@@ -16,37 +16,63 @@
                       <input type="text" class="form-control color-white" placeholder="Tour Title">
                     </div>
                   </div>￼
-                  <div class="form-group">
-                    <div class="a select-div">
-                      <select class="form-control color-white" id="">
-                         <option disabled selected hidden>Type of Holiday / Tour</option>
-                         <option>1</option>
-                         <option>2</option>
-                         <option>3</option>
-                      </select>
-                      <p><i class="fa fa-angle-down" aria-hidden="true"></i></p>
+
+                  <!-- tour-type -->
+                  <div class="tour-type">
+                    <div class="tour-typeinput">
+                      <div class="form-group">
+                        <div class="a" data-toggle="collapse" data-target="#demo">
+                          <input type="text" class="form-control color-white" placeholder="Type of Holiday/Tour">
+                        </div>
+                      </div>
+                      <i class="fa fa-angle-down color-white type-tourarrow arrow-down" ></i>
+                      <!-- <i class="fa fa-angle-up color-white type-tourarrow arrow-up" ></i> -->
+                    </div>  ￼
+                    <div class="collapse optiondiv" id="demo">
+                      <div class="tour-typeoption">
+                        <ul class="list-inline">
+                          <li ng-repeat="tourtype in categoriesSpecial track by $index">
+                            <figure class="tourcategory">
+                              <div class="tourcategory-img">
+                                <img ng-src="{{tourtype.tourImgCat}}" width="{{tourtype.catwidth}}" alt="" class="img-responsive">
+                              </div>
+                              <figcaption>{{tourtype.tourCat}}</figcaption>
+                            </figure>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6">
+                  <!-- tour-type end -->
+
+                  <!-- currency list -->
+                  <div class="tour-type">
+                    <div class="tour-typeinput">
                       <div class="form-group">
-                        <div class="a select-div">
-                          <select class="form-control color-white" id="">
-                             <option disabled selected hidden>Currency</option>
-                             <option>1</option>
-                             <option>2</option>
-                             <option>3</option>
-                          </select>
-                          <p><i class="fa fa-angle-down" aria-hidden="true"></i></p>
+                        <div class="a" data-toggle="collapse" data-target="#currencyList">
+                          <input type="text" class="form-control color-white" placeholder="Currency">
                         </div>
+                      </div>
+                      <i class="fa fa-angle-down color-white type-tourarrow arrow-down" ></i>
+                      <!-- <i class="fa fa-angle-up color-white type-tourarrow arrow-up" ></i> -->
+                    </div>  ￼
+                    <div class="collapse optiondiv" id="currencyList">
+                      <div class="tourcurrency-option">
+                        <ul class="">
+                          <li class="clearfix" ng-repeat="currency in tourCurrency track by $index">
+                            <span class="pull-left">{{currency.currencyCountry}}</span>
+                            <span class="pull-right">{{currency.currencyCode}}</span>
+                          </li>
+                        </ul>
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <div class="a">
-                          <input type="text" class="form-control color-white" placeholder="Price">
-                        </div>
-                      </div>
+                  </div>
+                  <!-- currency list end -->
+
+
+                  <div class="form-group">
+                    <div class="a">
+                      <input type="text" class="form-control color-white" placeholder="Price">
                     </div>
                   </div>
                   <div class="row">
@@ -165,7 +191,8 @@
               <div class="imgfoot-top clearfix">
                 <div class="pull-left">
                   <h4 class="font-sz18">{{tourcard.agttourTitle}}</h4>
-                  <p class="font-sz10"><span>{{tourcard.tourNightC}} Nights</span> | <span>{{tourcard.tourDayC}} Days</span></p>
+                  <p class="day-night"><span>{{tourcard.tourNightC}} Nights</span> | <span>{{tourcard.tourDayC}} Days</span></p>
+                  <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{tourcard.tourDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{tourcard.tourTime}}</span></p>
                 </div>
                 <div class="pull-right">
                   <p class="font-sz18 cost-posi">${{tourcard.agttourCost}}</p>
