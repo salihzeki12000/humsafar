@@ -840,582 +840,580 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
   .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, $state, $stateParams, $filter, $http) {
-    //Used to name the .html file
-    var slug = $stateParams.id;
-    var checkinCount = "";
-    $scope.userData = $.jStorage.get("profile");
+      //Used to name the .html file
+      var slug = $stateParams.id;
+      var checkinCount = "";
+      $scope.userData = $.jStorage.get("profile");
 
-    var getOneJourneyCallback = function (journeys) {
-      $scope.journey = journeys;
-      var postsWithLatLng = [];
-      postsWithLatLng = _.filter($scope.journey.post,  'latlong');
+      var getOneJourneyCallback = function (journeys) {
+        $scope.journey = journeys;
+        var postsWithLatLng = [];
+        postsWithLatLng = _.filter($scope.journey.post,  'latlong');
 
-      _.each(postsWithLatLng, function (n, $index) {
+        _.each(postsWithLatLng, function (n, $index) {
 
-        if (n && n.latlong && n.latlong.lat && n.latlong.long) {
-          centers[$index] = {
-            "lat": parseFloat(n.latlong.lat),
-            "lng": parseFloat(n.latlong.long)
-          };
-        } else {
-          alert("no latlong found");
-        }
-
-      });
-
-      if (journeys && journeys.location && journeys.location.lat) {
-        var obj = {
-          "lat": parseFloat(journeys.location.lat),
-          "lng": parseFloat(journeys.location.long)
-        }
-        centers.unshift(obj);
-      } else {
-        alert("Location of Banner not found");
-      }
-
-      // center = {
-      //     "lat": centers[0].lat,
-      //     "lng": centers[0].lng
-      //   };
-
-      initMap();
-    };
-
-    OnGoJourney.getOneJourney({
-      "urlSlug": slug
-    }, getOneJourneyCallback, function (err) {
-      console.log(err);
-    });
-
-    //change banner date and time starts
-    $scope.time = {};
-    $scope.datetime = {};
-    $scope.changeBannerDate = function () {
-      $scope.isPostDate = false;
-      $scope.isBannerDate = true;
-      date = $scope.journey.startTime;
-      var d = new Date(date);
-      var hh = d.getHours();
-      if (hh > 12) {
-        hh = hh - 12;
-        $scope.time.am_pm = "PM";
-      } else {
-        $scope.time.am_pm = "AM";
-      }
-      $scope.time.hour = hh;
-      $scope.time.min = d.getMinutes();
-      $scope.datetime.dt = d;
-      modal = $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/date-time.html",
-        scope: $scope,
-        backdropClass: "review-backdrop",
-      })
-    };
-
-    $scope.updateBannerDateTime = function (id, formData, dt) {
-      console.log(dt);
-      var date = $filter('formatDateCalender')(dt);
-      var time = $filter('formatTimeCalender')(formData);
-      var result = {};
-      var callback = function (data) {
-        var formData = {
-          "urlSlug": $scope.journey.urlSlug
-        }
-        OnGoJourney.getOneJourney(formData, function (journeys) {
-          $scope.journey.startTime = journeys.startTime;
-          modal.close();
-          console.log(journeys);
-        }, function (err) {
-          console.log(err);
-        });
-      }
-      result._id = id;
-      result.startTime = new Date(date + " " + time);
-      OnGoJourney.updateBannerDateTime(result, callback);
-    };
-    //change banner date and time ends
-
-    //maps integration starts here
-    {
-      {
-        //mapStyle
-        var mapStyle = [{
-          "featureType": "landscape.man_made",
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#f7f1df"
-          }]
-        }, {
-          "featureType": "landscape.natural",
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#d0e3b4"
-          }]
-        }, {
-          "featureType": "landscape.natural.terrain",
-          "elementType": "geometry",
-          "stylers": [{
-            "visibility": "off"
-          }]
-        }, {
-          "featureType": "poi",
-          "elementType": "labels",
-          "stylers": [{
-            "visibility": "off"
-          }]
-        }, {
-          "featureType": "poi.business",
-          "elementType": "all",
-          "stylers": [{
-            "visibility": "off"
-          }]
-        }, {
-          "featureType": "poi.medical",
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#fbd3da"
-          }]
-        }, {
-          "featureType": "poi.park",
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#bde6ab"
-          }]
-        }, {
-          "featureType": "road",
-          "elementType": "geometry.stroke",
-          "stylers": [{
-            "visibility": "off"
-          }]
-        }, {
-          "featureType": "road",
-          "elementType": "labels",
-          "stylers": [{
-            "visibility": "off"
-          }]
-        }, {
-          "featureType": "road.highway",
-          "elementType": "geometry.fill",
-          "stylers": [{
-            "color": "#ffe15f"
-          }]
-        }, {
-          "featureType": "road.highway",
-          "elementType": "geometry.stroke",
-          "stylers": [{
-            "color": "#efd151"
-          }]
-        }, {
-          "featureType": "road.arterial",
-          "elementType": "geometry.fill",
-          "stylers": [{
-            "color": "#ffffff"
-          }]
-        }, {
-          "featureType": "road.local",
-          "elementType": "geometry.fill",
-          "stylers": [{
-            "color": "black"
-          }]
-        }, {
-          "featureType": "transit.station.airport",
-          "elementType": "geometry.fill",
-          "stylers": [{
-            "color": "#cfb2db"
-          }]
-        }, {
-          "featureType": "water",
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#a2daf2"
-          }]
-        }]
-
-        //latlongs format
-        // var center = {
-        //   lat: 19.089560,
-        //   lng: 72.865614
-        // };
-
-        // var centers = [{
-        //   lat: 19.089560,
-        //   lng: 72.865614
-        // }, {
-        //   lat: 51.470022,
-        //   lng: -0.454295
-        // }, {
-        //   lat: 29.276052,
-        //   lng: -81.034910
-        // }, {
-        //   lat: 51.512072,
-        //   lng: -0.144223
-        // }, {
-        //   lat: 52.923608,
-        //   lng: -1.482560
-        // }, {
-        //   lat: 51.899603,
-        //   lng: -1.153590
-        // }, {
-        //   lat: 51.470022,
-        //   lng: -0.454295
-        // }, {
-        //   lat: 25.253175,
-        //   lng: 55.365673
-        // }];
-      }
-      line = _.map(centers, function () {
-        return {};
-      });
-      _.map(centers, function () {
-        markers.push({});
-      });
-
-
-      initMap = function () {
-        var $map = $('#map');
-        var mapDim = {
-          height: $map.height(),
-          width: $map.width()
-        }
-
-        center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
-        if (typeof google === 'object' && typeof google.maps === 'object') {
-          var bounds = new google.maps.LatLngBounds();
-          setMarker = function (status, n, i) {
-            var jump = centers.length;
-            if (_.isEmpty(markers[i])) {
-              var position = new google.maps.LatLng(n.lat, n.lng);
-              // bounds.extend(position);
-              var obj = {
-                position: position,
-                map: map,
-                icon: "img/maps/small-marker.png"
-              };
-              if (status) {
-                obj.icon = "img/maps/marker.png";
-                console.log("big marker icon set");
-              }
-              marker = new google.maps.Marker(obj);
-              markers[i] = marker;
-            } else {
-              markers[i].setIcon("img/maps/marker.png");
-            }
-          };
-
-          map = new google.maps.Map(document.getElementById('map'), {
-            draggable: true,
-            animation: google.maps.Animation.DROP,
-            center: center,
-            zoom: 4
-              // styles: mapStyle
-          });
-
-          commingMap = new google.maps.Map('', {
-            draggable: true,
-            animation: google.maps.Animation.DROP,
-            center: center,
-            zoom: 4
-              // styles: mapStyle
-          });
-
-
-          var step = 0;
-          var numSteps = 100; //Change this to set animation resolution
-          //Grey static polylines starts here
-          travelPath = new google.maps.Polyline({
-            path: centers,
-            geodesic: true,
-            strokeColor: 'grey',
-            strokeOpacity: 1.0,
-            strokeWeight: 1
-          });
-          travelPath.setMap(map);
-          //Grey static polylines ends here
-
-
-          var myVar = setInterval(myTimer, 1000);
-
-          function myTimer() {
-            if (centers.length != 0) {
-              _.each(centers, function (n, index) {
-                setMarker(false, n, index + 1);
-              });
-              setMarker(true, centers[0], 1);
-              clearInterval(myVar);
-            } else {
-              console.log("didnt got center");
-            }
-          };
-          // _.each(centers, function (n, index) {
-          //   setMarker(false, n, index + 1);
-          // });
-          // setMarker(true, centers[0], 1);
-
-          function getBoundsZoomLevel(bounds, mapDim) {
-            var WORLD_DIM = {
-              height: 256,
-              width: 256
+          if (n && n.latlong && n.latlong.lat && n.latlong.long) {
+            centers[$index] = {
+              "lat": parseFloat(n.latlong.lat),
+              "lng": parseFloat(n.latlong.long)
             };
-            var ZOOM_MAX = 21;
-
-            function latRad(lat) {
-              var sin = Math.sin(lat * Math.PI / 180);
-              var radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
-              return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
-            }
-
-            function zoom(mapPx, worldPx, fraction) {
-              return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2);
-            }
-
-            var ne = bounds.getNorthEast();
-            var sw = bounds.getSouthWest();
-
-            var latFraction = (latRad(ne.lat()) - latRad(sw.lat())) / Math.PI;
-
-            var lngDiff = ne.lng() - sw.lng();
-            var lngFraction = ((lngDiff < 0) ? (lngDiff + 360) : lngDiff) / 360;
-
-            var latZoom = zoom(mapDim.height, WORLD_DIM.height, latFraction);
-            var lngZoom = zoom(mapDim.width, WORLD_DIM.width, lngFraction);
-
-            return Math.min(latZoom, lngZoom, ZOOM_MAX);
+          } else {
+            alert("no latlong found");
           }
 
-          function redLineDraw(i, departure, arrival, percentComplete, value, flag) {
-            // console.log(percentComplete, flag);
-            var xdiff = (centers[i].lat - centers[i - 1].lat);
-            var ydiff = (centers[i].lng - centers[i - 1].lng);
-            // console.log(Math.abs(ydiff));
-            var currentZoom = currentZoom = map.getZoom();
-            var commingZoom;
+        });
 
-            // if (value) {
-            //   var commingMarkerBounds = new google.maps.LatLngBounds();
-            //   commingZoom = commingMap.getZoom();
-            //   commingMarkerBounds.extend(departure);
-            //   commingMarkerBounds.extend(arrival);
-            //   commingMap.fitBounds(commingMarkerBounds);
-            // }
-
-            if (value) {
-              var markerBounds = new google.maps.LatLngBounds();
-              markerBounds.extend(departure);
-              markerBounds.extend(arrival);
-              commingZoom = getBoundsZoomLevel(markerBounds, mapDim);
-
-              if (Math.abs(commingZoom - currentZoom) > 2) {
-                if (commingZoom > currentZoom) {
-                  smoothZoom(map, commingZoom, currentZoom, true); //for zooming in
-                  commingZoom = currentZoom;
-                } else if (commingZoom < currentZoom) {
-                  smoothZoom(map, commingZoom, currentZoom, false); //for zooming out
-                  commingZoom = currentZoom;
-                }
-              }
-
-              map.fitBounds(markerBounds);
-              // currentZoom = map.getZoom();
-              console.log(currentZoom, commingZoom);
-            }
-
-            var frac1 = xdiff / 100;
-            var frac2 = ydiff / 100;
-            var iniLat = centers[i - 1].lat;
-            var iniLng = centers[i - 1].lng;
-            var timePerStep = frac1; //Change this to alter animation speed
-            var lineSymbol = {
-              path: 'M 0,-1 0,1',
-              strokeOpacity: 1,
-              scale: 4
-            };
-            if (percentComplete == 100 && flag) {
-              setMarker(true, centers[i], i + 1);
-            }
-            if (_.isEmpty(line[i])) {
-              line[i] = new google.maps.Polyline({
-                path: [departure, departure],
-                strokeColor: "#FF0000",
-                strokeOpacity: 0,
-                icons: [{
-                  icon: lineSymbol,
-                  offset: '0',
-                  repeat: '25px'
-                }],
-                strokeWeight: 3,
-                geodesic: true, //set to false if you want straight line instead of arc
-                map: map,
-              });
-            }
-            var drawLine = function (departure, arrival, percent, i, value) {
-              percentFrac = percent / 100;
-              var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
-              line[i].setPath([departure, are_we_there_yet]);
-              //moving center starts here
-              if (value) {
-                // center = {
-                //   "lat": iniLat + (frac1 * percent),
-                //   "lng": iniLng + (frac2 * percent)
-                // }
-                center = {
-                  "lat": iniLat + (centers[i].lat - centers[i - 1].lat) / 2,
-                  "lng": iniLng + (centers[i].lng - centers[i - 1].lng) / 2
-                }
-                center = new google.maps.LatLng(center.lat, center.lng);
-              }
-              // offsetCenter(center, 100, 0);
-              map.setCenter(center);
-              // map.panBy(-150, 0);
-              //moving center ends here
-
-              // if (percent >= 100) {
-              //   setMarker(true, center);
-              // }
-            };
-            drawLine(departure, arrival, percentComplete, i, value);
-          };
-
-          function smoothZoom(map, level, cnt, mode) {
-            if (mode == true) {
-              if (cnt >= level) { //zooming in
-                return;
-              } else {
-                var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
-                  google.maps.event.removeListener(z);
-                  console.log("zooming in smoothZoom");
-                  smoothZoom(map, level, cnt + 1, true);
-                });
-                setTimeout(function () {
-                  console.log("zooming in-->" + level, cnt);
-                  map.setZoom(cnt)
-                }, 0.01);
-              }
-            } else {
-              if (cnt <= (level - 1)) { //zooming out
-                return;
-              } else {
-                var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
-                  google.maps.event.removeListener(z);
-                  console.log("zooming out smoothZoom");
-                  smoothZoom(map, level, cnt - 1, false);
-                });
-                setTimeout(function () {
-                  console.log("zooming out-->" + level, cnt);
-                  map.setZoom(cnt)
-                }, 0.01);
-              }
-            }
-          };
-          pointsForLine = function (i, percentComplete, value, flag) {
-            var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
-            var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
-            step = 0;
-            redLineDraw(i, departure, arrival, percentComplete, value, flag);
-            var linesCount = line.length - 1;
-            var markerCount = markers.length - 1;
-
-            //clearPolyLines starts
-            while ((linesCount >= (i + 1)) && (value)) {
-              if (!_.isEmpty(line[linesCount])) {
-                line[linesCount].setMap(null);
-                line[linesCount] = {};
-              };
-              // markers[linesCount].setIcon("img/maps/small-marker.png");
-              linesCount--;
-            };
-            while ((i < markerCount) && (value == true) && (percentComplete < 100)) {
-              markers[markerCount].setIcon("img/maps/small-marker.png");
-              markerCount--;
-            }
-            //clearPolyLines ends
-            //draw succeeding polyLines starts
-            if (i > 1) {
-              pointsForLine(i - 1, 100);
-              count = centers.length;
-            };
-            //draw succeeding polyLines end
-          };
+        if (journeys && journeys.location && journeys.location.lat) {
+          var obj = {
+            "lat": parseFloat(journeys.location.lat),
+            "lng": parseFloat(journeys.location.long)
+          }
+          centers.unshift(obj);
+        } else {
+          alert("Location of Banner not found");
         }
-      };
-      setTimeout(function () {
+
+        // center = {
+        //     "lat": centers[0].lat,
+        //     "lng": centers[0].lng
+        //   };
+
         initMap();
-      }, 1000);
-    }
-    //maps integration ends here
-
-    $scope.template = TemplateService.changecontent("ongojourney");
-    $scope.menutitle = NavigationService.makeactive("OnGoJourney");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-
-
-    $scope.viewCardComment = false;
-    $scope.getCard = "";
-    $scope.getCommentsData = function (id, uniqueId, postString, likeDone, likeCount) {
-      console.log(likeCount);
-      // console.log(id, uniqueId, postString,likeDone,likeCount);
-      $scope.post_id = id;
-      $scope.post_uniqueId = uniqueId;
-      $scope.post_postString = postString;
-      $scope.post_likeDone = likeDone;
-      // //open modal starts
-      // $uibModal.open({
-      //   templateUrl: "views/modal/notify.html",
-      //   animation: true,
-      //   scope: $scope,`
-      //   windowClass: "notify-popup"
-      // });
-      // //open model ends
-      if ($scope.viewCardComment) {
-        $scope.viewCardComment = false;
-        $scope.getCard = "";
-        console.log($scope.viewCardComment);
-      } else {
-        $scope.viewCardComment = true;
-        $scope.getCard = "view-whole-card";
-        console.log($scope.viewCardComment);
-      }
-      var formData = {
-        "_id": $scope.post_id
       };
-      $http({
-        url: adminURL + "/post/getPostCommentWeb",
-        method: "POST",
-        data: formData
-      }).success(function (data) {
-        $scope.uniqueArr = [];
-        $scope.listOfComments = data.data;
-        console.log($scope.listOfComments);
-        $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+
+      OnGoJourney.getOneJourney({
+        "urlSlug": slug
+      }, getOneJourneyCallback, function (err) {
+        console.log(err);
       });
+
+      //change banner date and time starts
+      $scope.time = {};
+      $scope.datetime = {};
+      $scope.changeBannerDate = function () {
+        $scope.isPostDate = false;
+        $scope.isBannerDate = true;
+        date = $scope.journey.startTime;
+        var d = new Date(date);
+        var hh = d.getHours();
+        if (hh > 12) {
+          hh = hh - 12;
+          $scope.time.am_pm = "PM";
+        } else {
+          $scope.time.am_pm = "AM";
+        }
+        $scope.time.hour = hh;
+        $scope.time.min = d.getMinutes();
+        $scope.datetime.dt = d;
+        modal = $uibModal.open({
+          animation: true,
+          templateUrl: "views/modal/date-time.html",
+          scope: $scope,
+          backdropClass: "review-backdrop",
+        })
+      };
+
+      $scope.updateBannerDateTime = function (id, formData, dt) {
+        console.log(dt);
+        var date = $filter('formatDateCalender')(dt);
+        var time = $filter('formatTimeCalender')(formData);
+        var result = {};
+        var callback = function (data) {
+          var formData = {
+            "urlSlug": $scope.journey.urlSlug
+          }
+          OnGoJourney.getOneJourney(formData, function (journeys) {
+            $scope.journey.startTime = journeys.startTime;
+            modal.close();
+            console.log(journeys);
+          }, function (err) {
+            console.log(err);
+          });
+        }
+        result._id = id;
+        result.startTime = new Date(date + " " + time);
+        OnGoJourney.updateBannerDateTime(result, callback);
+      };
+      //change banner date and time ends
+
+      //maps integration starts here
+      {
+        {
+          //mapStyle
+          var mapStyle = [{
+            "featureType": "landscape.man_made",
+            "elementType": "geometry",
+            "stylers": [{
+              "color": "#f7f1df"
+            }]
+          }, {
+            "featureType": "landscape.natural",
+            "elementType": "geometry",
+            "stylers": [{
+              "color": "#d0e3b4"
+            }]
+          }, {
+            "featureType": "landscape.natural.terrain",
+            "elementType": "geometry",
+            "stylers": [{
+              "visibility": "off"
+            }]
+          }, {
+            "featureType": "poi",
+            "elementType": "labels",
+            "stylers": [{
+              "visibility": "off"
+            }]
+          }, {
+            "featureType": "poi.business",
+            "elementType": "all",
+            "stylers": [{
+              "visibility": "off"
+            }]
+          }, {
+            "featureType": "poi.medical",
+            "elementType": "geometry",
+            "stylers": [{
+              "color": "#fbd3da"
+            }]
+          }, {
+            "featureType": "poi.park",
+            "elementType": "geometry",
+            "stylers": [{
+              "color": "#bde6ab"
+            }]
+          }, {
+            "featureType": "road",
+            "elementType": "geometry.stroke",
+            "stylers": [{
+              "visibility": "off"
+            }]
+          }, {
+            "featureType": "road",
+            "elementType": "labels",
+            "stylers": [{
+              "visibility": "off"
+            }]
+          }, {
+            "featureType": "road.highway",
+            "elementType": "geometry.fill",
+            "stylers": [{
+              "color": "#ffe15f"
+            }]
+          }, {
+            "featureType": "road.highway",
+            "elementType": "geometry.stroke",
+            "stylers": [{
+              "color": "#efd151"
+            }]
+          }, {
+            "featureType": "road.arterial",
+            "elementType": "geometry.fill",
+            "stylers": [{
+              "color": "#ffffff"
+            }]
+          }, {
+            "featureType": "road.local",
+            "elementType": "geometry.fill",
+            "stylers": [{
+              "color": "black"
+            }]
+          }, {
+            "featureType": "transit.station.airport",
+            "elementType": "geometry.fill",
+            "stylers": [{
+              "color": "#cfb2db"
+            }]
+          }, {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [{
+              "color": "#a2daf2"
+            }]
+          }]
+
+          //latlongs format
+          // var center = {
+          //   lat: 19.089560,
+          //   lng: 72.865614
+          // };
+
+          // var centers = [{
+          //   lat: 19.089560,
+          //   lng: 72.865614
+          // }, {
+          //   lat: 51.470022,
+          //   lng: -0.454295
+          // }, {
+          //   lat: 29.276052,
+          //   lng: -81.034910
+          // }, {
+          //   lat: 51.512072,
+          //   lng: -0.144223
+          // }, {
+          //   lat: 52.923608,
+          //   lng: -1.482560
+          // }, {
+          //   lat: 51.899603,
+          //   lng: -1.153590
+          // }, {
+          //   lat: 51.470022,
+          //   lng: -0.454295
+          // }, {
+          //   lat: 25.253175,
+          //   lng: 55.365673
+          // }];
+        }
+        line = _.map(centers, function () {
+          return {};
+        });
+        _.map(centers, function () {
+          markers.push({});
+        });
+
+
+        initMap = function () {
+          var $map = $('#map');
+          var mapDim = {
+            height: $map.height(),
+            width: $map.width()
+          }
+
+          center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
+          if (typeof google === 'object' && typeof google.maps === 'object') {
+            var bounds = new google.maps.LatLngBounds();
+            setMarker = function (status, n, i) {
+              var jump = centers.length;
+              if (_.isEmpty(markers[i])) {
+                var position = new google.maps.LatLng(n.lat, n.lng);
+                // bounds.extend(position);
+                var obj = {
+                  position: position,
+                  map: map,
+                  icon: "img/maps/small-marker.png"
+                };
+                if (status) {
+                  obj.icon = "img/maps/marker.png";
+                  console.log("big marker icon set");
+                }
+                marker = new google.maps.Marker(obj);
+                markers[i] = marker;
+              } else {
+                markers[i].setIcon("img/maps/marker.png");
+              }
+            };
+
+            map = new google.maps.Map(document.getElementById('map'), {
+              draggable: true,
+              animation: google.maps.Animation.DROP,
+              center: center,
+              zoom: 4
+                // styles: mapStyle
+            });
+
+            commingMap = new google.maps.Map('', {
+              draggable: true,
+              animation: google.maps.Animation.DROP,
+              center: center,
+              zoom: 4
+                // styles: mapStyle
+            });
+
+
+            var step = 0;
+            var numSteps = 100; //Change this to set animation resolution
+             var lineSymbol = {
+                path: 'M 0,-1 0,1',
+                strokeOpacity: 1,
+                scale: 3
+              };
+            //Grey static polylines starts here
+            travelPath = new google.maps.Polyline({
+              path: centers,
+              geodesic: true,
+              strokeColor: 'grey',
+              strokeOpacity: 0,
+              strokeWeight: -1,
+               icons: [{
+                    icon: lineSymbol,
+                    offset: '0',
+                    repeat: '20px'
+                  }],
+            });
+            travelPath.setMap(map);
+            //Grey static polylines ends here
+
+
+            var myVar = setInterval(myTimer, 1000);
+
+            function myTimer() {
+              if (centers.length != 0) {
+                _.each(centers, function (n, index) {
+                  setMarker(false, n, index + 1);
+                });
+                setMarker(true, centers[0], 1);
+                clearInterval(myVar);
+              } else {
+                console.log("didnt got center");
+              }
+            };
+            // _.each(centers, function (n, index) {
+            //   setMarker(false, n, index + 1);
+            // });
+            // setMarker(true, centers[0], 1);
+
+            function getBoundsZoomLevel(bounds, mapDim) {
+              var WORLD_DIM = {
+                height: 256,
+                width: 256
+              };
+              var ZOOM_MAX = 21;
+
+              function latRad(lat) {
+                var sin = Math.sin(lat * Math.PI / 180);
+                var radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
+                return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
+              }
+
+              function zoom(mapPx, worldPx, fraction) {
+                return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2);
+              }
+
+              var ne = bounds.getNorthEast();
+              var sw = bounds.getSouthWest();
+
+              var latFraction = (latRad(ne.lat()) - latRad(sw.lat())) / Math.PI;
+
+              var lngDiff = ne.lng() - sw.lng();
+              var lngFraction = ((lngDiff < 0) ? (lngDiff + 360) : lngDiff) / 360;
+
+              var latZoom = zoom(mapDim.height, WORLD_DIM.height, latFraction);
+              var lngZoom = zoom(mapDim.width, WORLD_DIM.width, lngFraction);
+
+              return Math.min(latZoom, lngZoom, ZOOM_MAX);
+            }
+
+            function redLineDraw(i, departure, arrival, percentComplete, value, flag) {
+              // console.log(percentComplete, flag);
+              var xdiff = (centers[i].lat - centers[i - 1].lat);
+              var ydiff = (centers[i].lng - centers[i - 1].lng);
+              // console.log(Math.abs(ydiff));
+              var currentZoom = currentZoom = map.getZoom();
+              var commingZoom;
+
+              // if (value) {
+              //   var commingMarkerBounds = new google.maps.LatLngBounds();
+              //   commingZoom = commingMap.getZoom();
+              //   commingMarkerBounds.extend(departure);
+              //   commingMarkerBounds.extend(arrival);
+              //   commingMap.fitBounds(commingMarkerBounds);
+              // }
+
+              if (value) {
+                var markerBounds = new google.maps.LatLngBounds();
+                markerBounds.extend(departure);
+                markerBounds.extend(arrival);
+                commingZoom = getBoundsZoomLevel(markerBounds, mapDim);
+
+                if (Math.abs(commingZoom - currentZoom) > 2) {
+                  if (commingZoom > currentZoom) {
+                    smoothZoom(map, commingZoom, currentZoom, true); //for zooming in
+                    commingZoom = currentZoom;
+                  } else if (commingZoom < currentZoom) {
+                    smoothZoom(map, commingZoom, currentZoom, false); //for zooming out
+                    commingZoom = currentZoom;
+                  }
+                }
+
+                map.fitBounds(markerBounds);
+                // currentZoom = map.getZoom();
+                console.log(currentZoom, commingZoom);
+              }
+
+              var frac1 = xdiff / 100;
+              var frac2 = ydiff / 100;
+              var iniLat = centers[i - 1].lat;
+              var iniLng = centers[i - 1].lng;
+              var timePerStep = frac1; //Change this to alter animation speed
+              var lineSymbol = {
+                path: 'M 0,-1 0,1',
+                strokeOpacity: 1,
+                scale: 4
+              };
+              if (percentComplete == 100 && flag) {
+                setMarker(true, centers[i], i + 1);
+              }
+              if (_.isEmpty(line[i])) {
+                line[i] = new google.maps.Polyline({
+                  path: [departure, departure],
+                  strokeColor: "#f2675b",
+                  strokeOpacity: 1,
+                  // icons: [{
+                  //   icon: lineSymbol,
+                  //   offset: '0',
+                  //   repeat: '25px'
+                  // }],
+                  strokeWeight: 3,
+                  geodesic: true, //set to false if you want straight line instead of arc
+                  map: map,
+                });
+              }
+              var drawLine = function (departure, arrival, percent, i, value) {
+                percentFrac = percent / 100;
+                var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
+                line[i].setPath([departure, are_we_there_yet]);
+                //moving center starts here
+                if (value) {
+                  // center = {
+                  //   "lat": iniLat + (frac1 * percent),
+                  //   "lng": iniLng + (frac2 * percent)
+                  // }
+                  center = {
+                    "lat": iniLat + (centers[i].lat - centers[i - 1].lat) / 2,
+                    "lng": iniLng + (centers[i].lng - centers[i - 1].lng) / 2
+                  }
+                  center = new google.maps.LatLng(center.lat, center.lng);
+                }
+                // offsetCenter(center, 100, 0);
+                map.setCenter(center);
+                // map.panBy(-150, 0);
+                //moving center ends here
+
+                // if (percent >= 100) {
+                //   setMarker(true, center);
+                // }
+              };
+              drawLine(departure, arrival, percentComplete, i, value);
+            };
+
+            function smoothZoom(map, level, cnt, mode) {
+              if (mode == true) {
+                if (cnt >= level) { //zooming in
+                  return;
+                } else {
+                  var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
+                    google.maps.event.removeListener(z);
+                    console.log("zooming in smoothZoom");
+                    smoothZoom(map, level, cnt + 1, true);
+                  });
+                  setTimeout(function () {
+                    console.log("zooming in-->" + level, cnt);
+                    map.setZoom(cnt)
+                  }, 0.01);
+                }
+              } else {
+                if (cnt <= (level - 1)) { //zooming out
+                  return;
+                } else {
+                  var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
+                    google.maps.event.removeListener(z);
+                    console.log("zooming out smoothZoom");
+                    smoothZoom(map, level, cnt - 1, false);
+                  });
+                  setTimeout(function () {
+                    console.log("zooming out-->" + level, cnt);
+                    map.setZoom(cnt)
+                  }, 0.01);
+                }
+              }
+            };
+            pointsForLine = function (i, percentComplete, value, flag) {
+              var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
+              var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
+              step = 0;
+              redLineDraw(i, departure, arrival, percentComplete, value, flag);
+              var linesCount = line.length - 1;
+              var markerCount = markers.length - 1;
+
+              //clearPolyLines starts
+              while ((linesCount >= (i + 1)) && (value)) {
+                if (!_.isEmpty(line[linesCount])) {
+                  line[linesCount].setMap(null);
+                  line[linesCount] = {};
+                };
+                // markers[linesCount].setIcon("img/maps/small-marker.png");
+                linesCount--;
+              };
+              while ((i < markerCount) && (value == true) && (percentComplete < 100)) {
+                markers[markerCount].setIcon("img/maps/small-marker.png");
+                markerCount--;
+              }
+              //clearPolyLines ends
+              //draw succeeding polyLines starts
+              if (i > 1) {
+                pointsForLine(i - 1, 100);
+                count = centers.length;
+              };
+              //draw succeeding polyLines end
+            };
+          }
+        };
+        setTimeout(function () {
+          initMap();
+        }, 1000);
+      }
+      //maps integration ends here
+
+      $scope.template = TemplateService.changecontent("ongojourney");
+      $scope.menutitle = NavigationService.makeactive("OnGoJourney");
+      TemplateService.title = $scope.menutitle;
+      $scope.navigation = NavigationService.getnav();
+
+
+      $scope.viewCardComment = false;
+      $scope.getCard = "";
+
+
+      $scope.getCommentsData = function (id, uniqueId, postString, likeDone, likeCount) {
+        console.log(likeCount);
+        // console.log(id, uniqueId, postString,likeDone,likeCount);
+        $scope.previousId;
+        $scope.post_id = id;
+        $scope.post_uniqueId = uniqueId;
+        $scope.post_postString = postString;
+        $scope.post_likeDone = likeDone;
+        // //open modal starts
+        // $uibModal.open({
+        //   templateUrl: "views/modal/notify.html",
+        //   animation: true,
+        //   scope: $scope,`
+        //   windowClass: "notify-popup"
+        // });
+        // //open model ends
+        var callback=function(data){
+              $scope.uniqueArr = [];
+              $scope.listOfComments = data.data;
+              console.log($scope.listOfComments);
+              $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+        }
+        
+        if ($scope.previousId != id) {
+            $scope.viewCardComment = true;
+            $scope.getCard = "view-whole-card";
+            console.log($scope.viewCardComment);
+            OnGoJourney.getPostsComment(id,callback);           
+        } else {
+           if ($scope.viewCardComment) {
+            $scope.viewCardComment = false;
+            $scope.getCard = "";
+            console.log($scope.viewCardComment);
+          }else{
+            $scope.viewCardComment = true;
+            $scope.getCard = "view-whole-card";
+            console.log($scope.viewCardComment);
+            OnGoJourney.getPostsComment(id,callback);     
+          }
+        }
+        $scope.previousId=id;
     };
 
-    $scope.postComment = function (uniqueId, comment, id) {
-      var formData = {
-        "uniqueId": uniqueId,
-        "text": comment,
-        "type": "post",
-        "post": id
-      };
-      $http({
-        url: adminURL + "/comment/addCommentWeb",
-        method: "POST",
-        data: formData
-      }).success(function (data) {
-        formData = {
-          "_id": id
-        }
-        $http({
-          url: adminURL + "/post/getPostCommentWeb",
-          method: "POST",
-          data: formData
-        }).success(function (data) {
+    $scope.postComment = function (uniqueId, comment, postId) {
+      var type="post";
+      var callback=function(data){
           $scope.listOfComments = data.data;
           document.getElementById('enterComment').value = "";
-        });
-      });
-
+      }
+      OnGoJourney.postComment(uniqueId,comment,type,postId,callback);
     };
 
     $scope.likeUnlikePost = function () {
@@ -1442,9 +1440,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
 
-    $scope.hours = _.range(1, 13, 1);
-    $scope.mins = _.range(1, 60, 1);
-    $scope.change = function (id, val) {
+    $scope.hours = _.range(1, 13, 1); $scope.mins = _.range(1, 60, 1); $scope.change = function (id, val) {
       if (id == 'hour') {
         $scope.time.hour = val;
       } else if (id == 'min') {
@@ -1506,8 +1502,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     // share whole trip social
-    $scope.viewSocialShare = false;
-    $scope.shareSocial = function () {
+    $scope.viewSocialShare = false; $scope.shareSocial = function () {
       if ($scope.viewSocialShare == false) {
         $scope.viewSocialShare = true;
       } else {
@@ -1517,8 +1512,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // share whole trip social end
 
     // share single trip / card
-    $scope.viewSingleTrip = -1;
-    $scope.shareTrip = function (index) {
+    $scope.viewSingleTrip = -1; $scope.shareTrip = function (index) {
       console.log($scope.viewSingleTrip);
       if ($scope.viewSingleTrip == index) {
         $scope.viewSingleTrip = -1;
@@ -1531,15 +1525,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.options = {
       minDate: new Date(),
       showWeeks: false
-    };
-    $scope.format = "yyyy/MM/dd";
+    }; $scope.format = "yyyy/MM/dd";
 
 
 
     // edit journey name
     //edit journey name modal
-    $scope.editName = {};
-    $scope.nameJourney = function (name) {
+    $scope.editName = {}; $scope.nameJourney = function (name) {
       console.log(name);
       $scope.editName.name = name;
       modal = $uibModal.open({
@@ -1585,43 +1577,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.setJourneyCoverPhoto = function (id, coverPhoto) {
-        var formData = {
-          "_id": id,
-          "coverPhoto": coverPhoto
-        };
-        var callback = function () {
-          modal.close();
-        }
-        OnGoJourney.setJourneyCoverPhoto(formData, callback);
+      var formData = {
+        "_id": id,
+        "coverPhoto": coverPhoto
+      };
+      var callback = function () {
+        modal.close();
       }
-      // cover photo modal ends
-      //edit journey cover photo ends
-      // $scope.galleryCover = [
-      //   'img/london.jpg',
-      //   'img/paris.jpg',
-      //   'img/india-gate.jpg',
-      //   'img/slider1.jpg',
-      //   'img/slider2.jpg',
-      //   'img/blog/blog-post.jpg',
-      //   'img/blog/blog-post2.jpg',
-      //   'img/blog/blog-post3.jpg',
-      //   'img/london.jpg',
-      //   'img/paris.jpg',
-      //   'img/india-gate.jpg',
-      //   'img/slider1.jpg',
-      //   'img/slider2.jpg',
-      //   'img/blog/blog-post.jpg',
-      //   'img/blog/blog-post2.jpg',
-      //   'img/blog/blog-post3.jpg',
-      // ];
+      OnGoJourney.setJourneyCoverPhoto(formData, callback);
+    }
+    // cover photo modal ends
+    //edit journey cover photo ends
+    // $scope.galleryCover = [
+    //   'img/london.jpg',
+    //   'img/paris.jpg',
+    //   'img/india-gate.jpg',
+    //   'img/slider1.jpg',
+    //   'img/slider2.jpg',
+    //   'img/blog/blog-post.jpg',
+    //   'img/blog/blog-post2.jpg',
+    //   'img/blog/blog-post3.jpg',
+    //   'img/london.jpg',
+    //   'img/paris.jpg',
+    //   'img/india-gate.jpg',
+    //   'img/slider1.jpg',
+    //   'img/slider2.jpg',
+    //   'img/blog/blog-post.jpg',
+    //   'img/blog/blog-post2.jpg',
+    //   'img/blog/blog-post3.jpg',
+    // ];
 
 
     // cover photo end
     $scope.cropCover = function (imgCrop) {
       $scope.showCover = imgCrop;
       $scope.cropImage = true;
-    };
-    $scope.viewPrev = function () {
+    }; $scope.viewPrev = function () {
       // $scope.showCover = imgCrop;
       $scope.cropImage = false;
     };
@@ -1742,43 +1733,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // country modal ends
 
     $scope.rateThisCountry = function (journeyId, countryId, formData, index) {
-        var result = {
-          journey: journeyId,
-          country: countryId,
-          review: formData.fillMeIn,
-          rating: formData.rate
-        };
-        var callback = function () {
+      var result = {
+        journey: journeyId,
+        country: countryId,
+        review: formData.fillMeIn,
+        rating: formData.rate
+      };
+      var callback = function () {
 
-          $scope.journey.review[index].review = result.review;
-          $scope.journey.review[index].rating = result.rating;
+        $scope.journey.review[index].review = result.review;
+        $scope.journey.review[index].rating = result.rating;
 
-          // console.log($scope.journey.review[index].review,$scope.journey.review[index].rating);
-        };
-        OnGoJourney.rateThisCountry(result, callback);
-        $scope.reviewCountryCount = $scope.reviewCountryCount + 1;
-        var len = $scope.journey.countryVisited.length;
-        if ($scope.reviewCountryCount < len) {
-          $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
-          $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
-        } else {
-          console.log(modal);
-          modal.close();
-
-        }
-        //  test=$scope.journey.review[$scope.reviewCountryCount].review
-        // $scope.review.fillM=test;
-        // console.log($scope.review.fil);
-        // $scope.review.fillMeIn=$scope.journey.review[$scope.reviewCountryCount].review;
-
-
+        // console.log($scope.journey.review[index].review,$scope.journey.review[index].rating);
+      };
+      OnGoJourney.rateThisCountry(result, callback);
+      $scope.reviewCountryCount = $scope.reviewCountryCount + 1;
+      var len = $scope.journey.countryVisited.length;
+      if ($scope.reviewCountryCount < len) {
+        $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
+        $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
+      } else {
+        console.log(modal);
+        modal.close();
 
       }
-      // Rating country ends
+      //  test=$scope.journey.review[$scope.reviewCountryCount].review
+      // $scope.review.fillM=test;
+      // console.log($scope.review.fil);
+      // $scope.review.fillMeIn=$scope.journey.review[$scope.reviewCountryCount].review;
+
+
+
+    }
+    // Rating country ends
     $scope.hoveringOver = function (value) {
       $scope.overStar = value;
-    };
-    $scope.ratingStates = [{
+    }; $scope.ratingStates = [{
       stateOn: 'fa fa-star-o',
       stateOff: 'fa fa-star'
     }, {
@@ -6470,7 +6460,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     MyLife.getOneBucketList(callbackBucketList);
 
 
-
+    //follow unfollow user starts
     $scope.followUnFollowUser = function (userId, name, flag) {
       console.log(flag);
       if (flag == "Follow") {
@@ -6481,7 +6471,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             console.log(index);
             $scope.followersList[index].following = true;
             $scope.followersList[index].status = "Following";
-             MyLife.getFollowingWeb(callbackFollowings);
+            MyLife.getFollowingWeb(callbackFollowings);
           }
         });
       } else if (flag == "Following") {
@@ -6492,11 +6482,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             console.log(index);
             $scope.followersList[index].following = false;
             $scope.followersList[index].status = "Follow";
-             MyLife.getFollowingWeb(callbackFollowings);
+            MyLife.getFollowingWeb(callbackFollowings);
           }
         });
       }
     };
+    //follow unfollow user ends
+    $scope.searchFriend = {};
+    $scope.searchAllUser = function (searchUser) {
+      var len = searchUser.length;
+      if (len > 3) {
+        console.log(searchUser);
+        MyLife.searchAllUser(searchUser, function (data) {
+          console.log(data);
+        });
+      }
+    };
+
 
     // following and followers end
 
@@ -6677,7 +6679,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("QuickItinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
     $scope.qItinerary = {};
     $scope.qItinerary.itineraryType = [];
     $scope.qItinerary.countryVisited = [];
@@ -6885,13 +6886,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.getYear = [];
     $scope.viewYear = function () {
-      if ($scope.getYear.length > 0) {
-        $scope.getYear = [];
-      } else {
+      $scope.viewYear.show = !$scope.viewYear.show
         var d = new Date();
         var n = d.getFullYear();
         $scope.getYear = _.rangeRight(1900, n + 1);
-      }
+      
     };
 
     // month array
@@ -8833,6 +8832,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourNightC: '3',
     tourcategoryTitle: 'Adventure',
     tourcategoryImg: 'img/agt-cat1.png',
+    tourDate:'26 Dec, 2016',
+    tourTime: '1.20 pm',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8842,6 +8843,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourNightC: '3',
     tourcategoryImg: 'img/agt-cat5.png',
     tourcategoryTitle: 'Backpacking',
+    tourDate:'26 Dec, 2016',
+    tourTime: '1.20 pm',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8851,6 +8854,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourNightC: '3',
     tourcategoryImg: 'img/agt-cat4.png',
     tourcategoryTitle: 'Romance',
+    tourDate:'26 Dec, 2016',
+    tourTime: '1.20 pm',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8860,6 +8865,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourNightC: '3',
     tourcategoryImg: 'img/agt-cat9.png',
     tourcategoryTitle: 'Friends',
+    tourDate:'26 Dec, 2016',
+    tourTime: '1.20 pm',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8869,6 +8876,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourNightC: '3',
     tourcategoryImg: 'img/agt-cat1.png',
     tourcategoryTitle: 'Adventure',
+    tourDate:'26 Dec, 2016',
+    tourTime: '1.20 pm',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8878,6 +8887,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourNightC: '3',
     tourcategoryImg: 'img/agt-cat7.png',
     tourcategoryTitle: 'Luxury',
+    tourDate:'26 Dec, 2016',
+    tourTime: '1.20 pm',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8887,6 +8898,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourNightC: '3',
     tourcategoryImg: 'img/agt-cat1.png',
     tourcategoryTitle: 'Adventure',
+    tourDate:'26 Dec, 2016',
+    tourTime: '1.20 pm',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -8896,6 +8909,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourNightC: '3',
     tourcategoryImg: 'img/agt-cat4.png',
     tourcategoryTitle: 'Romance',
+    tourDate:'26 Dec, 2016',
+    tourTime: '1.20 pm',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }];
   // tour packages card end
@@ -10328,6 +10343,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourNightC: '3',
     tourcategoryTitle: 'Adventure',
     tourcategoryImg: 'img/agt-cat1.png',
+    tourDate:'26 Dec, 2016',
+    tourTime: '1.20 pm',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -10337,6 +10354,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourNightC: '3',
     tourcategoryImg: 'img/agt-cat5.png',
     tourcategoryTitle: 'Backpacking',
+    tourDate:'26 Dec, 2016',
+    tourTime: '1.20 pm',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -10346,6 +10365,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourNightC: '3',
     tourcategoryImg: 'img/agt-cat4.png',
     tourcategoryTitle: 'Romance',
+    tourDate:'26 Dec, 2016',
+    tourTime: '1.20 pm',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -10355,6 +10376,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourNightC: '3',
     tourcategoryImg: 'img/agt-cat9.png',
     tourcategoryTitle: 'Friends',
+    tourDate:'26 Dec, 2016',
+    tourTime: '1.20 pm',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -10364,6 +10387,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourNightC: '3',
     tourcategoryImg: 'img/agt-cat1.png',
     tourcategoryTitle: 'Adventure',
+    tourDate:'26 Dec, 2016',
+    tourTime: '1.20 pm',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -10373,6 +10398,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourNightC: '3',
     tourcategoryImg: 'img/agt-cat7.png',
     tourcategoryTitle: 'Luxury',
+    tourDate:'26 Dec, 2016',
+    tourTime: '1.20 pm',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -10382,6 +10409,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourNightC: '3',
     tourcategoryImg: 'img/agt-cat1.png',
     tourcategoryTitle: 'Adventure',
+    tourDate:'26 Dec, 2016',
+    tourTime: '1.20 pm',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }, {
     tourImg: 'img/paris.jpg',
@@ -10391,9 +10420,76 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     tourNightC: '3',
     tourcategoryImg: 'img/agt-cat4.png',
     tourcategoryTitle: 'Romance',
+    tourDate:'26 Dec, 2016',
+    tourTime: '1.20 pm',
     tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
   }];
   // tour packages card end
+
+  // category of Specialisation array
+$scope.categoriesSpecial = [{
+  tourImgCat: "img/agt-cat1.png",
+  catwidth: "25px",
+  tourCat: "Adventure"
+}, {
+  tourImgCat: "img/agt-cat2.png",
+  catwidth: "25px",
+  tourCat: "Business"
+}, {
+  tourImgCat: "img/agt-cat3.png",
+  catwidth: "33px",
+  tourCat: "Family"
+}, {
+  tourImgCat: "img/agt-cat4.png",
+  catwidth: "28px",
+  tourCat: "Romance"
+}, {
+  tourImgCat: "img/agt-cat5.png",
+  catwidth: "25px",
+  tourCat: "Backpacking"
+}, {
+  tourImgCat: "img/agt-cat6.png",
+  catwidth: "24px",
+  tourCat: "Budget"
+}, {
+  tourImgCat: "img/agt-cat7.png",
+  catwidth: "22px",
+  tourCat: "Luxury"
+}, {
+  tourImgCat: "img/agt-cat8.png",
+  catwidth: "28px",
+  tourCat: "Religious"
+}, {
+  tourImgCat: "img/agt-cat9.png",
+  catwidth: "25px",
+  tourCat: "Friends"
+}];
+// category of Specialisation array end
+
+//tourCurrency start
+$scope.tourCurrency = [{
+ currencyCountry: 'Indian',
+ currencyCode:'INR'
+},{
+ currencyCountry: 'Indian',
+ currencyCode:'INR'
+},{
+ currencyCountry: 'Indian',
+ currencyCode:'INR'
+},{
+ currencyCountry: 'Indian',
+ currencyCode:'INR'
+},{
+ currencyCountry: 'Indian',
+ currencyCode:'INR'
+},{
+ currencyCountry: 'Indian',
+ currencyCode:'INR'
+},{
+ currencyCountry: 'Indian',
+ currencyCode:'INR'
+}];
+//tourCurrency end
 
   // gallery card
   $scope.agenPhotogallery = [

@@ -18,7 +18,8 @@
             <!-- search friend -->
             <div class="search-friend" ng-if="profileList == 1 || profileList == 2">
               <div class="follow-followers-holder">
-                <input type="text" placeholder="Search Friend" ng-model="searchFriend">
+                <input type="text" placeholder="Search Friend" ng-model="searchFriend.name" ng-if="profileList==1">
+                <input type="text" placeholder="Search Friend" ng-model="searchUser" ng-if="profileList==2" ng-change="searchAllUser(searchUser)">                
                 <span class="search-follow"><i class="fa fa-search"></i></span>
               </div>
             </div>
@@ -43,7 +44,7 @@
     <div class="container-fluid">
       <!-- following tab -->
       <div class="follower-tab-main" ng-if="profileList == 1">
-          <div class="following-container" ng-repeat="list in followingList track by $index">
+          <div class="following-container" ng-repeat="list in followingList | filter:searchFriend.name">
             <div class="following-holder">
               <div class="follow-imgholder">
                 <img ng-src="{{list.profilePicture|uploadpath}}" class="img-responsive">

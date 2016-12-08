@@ -112,6 +112,18 @@ var navigationservice = angular.module('mylife', [])
       }).success(function(data){
         callback(data);
       });
+    },
+    searchAllUser:function(searchUser,callback){
+      var obj={
+        search:searchUser
+      };
+      $http({
+        url:adminURL + "/user/getFollowingWeb",
+        method:"POST",
+        data:obj
+      }).success(function(data){
+        callback(data);
+      });
     }
   };
 });

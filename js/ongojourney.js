@@ -107,14 +107,51 @@ var ongojourney = angular.module('ongojourney', [])
         callback();
       });
     },
-    updateBannerDateTime:function(formData,callback){
+    updateBannerDateTime: function (formData, callback) {
       $http({
         url: adminURL + "/journey/editData/",
         method: "POST",
         data: formData
-      }).success(function(data){
+      }).success(function (data) {
         callback();
       });
+    },
+    getPostsComment: function (id, callback) {
+      var formData = {
+        "_id": id
+      };
+      $http({
+        url: adminURL + "/post/getPostCommentWeb",
+        method: "POST",
+        data: formData
+      }).success(function (data) {
+        callback(data);
+      });
+    },
+    postComment:function(uniqueId,comment,type,postId,callback){
+      var formData = {
+        "uniqueId": uniqueId,
+        "text": comment,
+        "type": type,
+        "post": postId
+      };
+       $http({
+        url: adminURL + "/comment/addCommentWeb",
+        method: "POST",
+        data: formData
+      }).success(function (data) {
+        formData = {
+          "_id": postId
+        }
+        $http({
+          url: adminURL + "/post/getPostCommentWeb",
+          method: "POST",
+          data: formData
+        }).success(function (data) {
+          callback(data);
+        });
+      });
+
     }
   };
 });
@@ -126,7 +163,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       ongo: "=post",
       json: "=json",
       profile: "=profile",
-      getCommentsData:'&'
+      getCommentsData: '&'
     },
     // controller: 'OnGoJourneyCtrl',
     templateUrl: 'views/directive/journey-post.html',
@@ -227,7 +264,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           data: formData
         })
       };
-      
+
       $scope.getLikes = function (id) {
         var formData = {
           "_id": id
@@ -240,13 +277,13 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           $scope.listOfLikes = data.data;
         });
       }
-    
 
 
 
-//post comments starts
-  
-//post comments ends
+
+      //post comments starts
+
+      //post comments ends
 
       // checkin
       var modal = "";
@@ -457,7 +494,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
 
       $scope.updateDateTime = function (id, formData, dt) {
         console.log(dt);
-        console.log(formData,dt);
+        console.log(formData, dt);
         var date = $filter('formatDateCalender')(dt);
         var time = $filter('formatTimeCalender')(formData);
         var result = {};
@@ -647,21 +684,21 @@ ongojourney.filter('formatDateCalender', function () {
 ongojourney.filter('formatTimeCalender', function () {
   return function (formData) {
 
-     var hour = formData.hour,
-          mins = formData.min,
-          sec = 00;
-        if (formData.am_pm == "AM") {
-          if (hour == 12) {
-            hour = 0;
-          }
-        } else if (formData.am_pm == "PM") {
-          if (hour == 12) {
-            hour = 12;
-          } else {
-            hour = parseInt(hour) + 12;
-          }
-        }
-        return [hour, mins, sec].join(':');
+    var hour = formData.hour,
+      mins = formData.min,
+      sec = 00;
+    if (formData.am_pm == "AM") {
+      if (hour == 12) {
+        hour = 0;
+      }
+    } else if (formData.am_pm == "PM") {
+      if (hour == 12) {
+        hour = 12;
+      } else {
+        hour = parseInt(hour) + 12;
+      }
+    }
+    return [hour, mins, sec].join(':');
   };
 });
 
