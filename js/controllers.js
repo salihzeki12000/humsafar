@@ -1386,12 +1386,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               console.log($scope.listOfComments);
               $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
         }
-        
+
         if ($scope.previousId != id) {
             $scope.viewCardComment = true;
             $scope.getCard = "view-whole-card";
             console.log($scope.viewCardComment);
-            OnGoJourney.getPostsComment(id,callback);           
+            OnGoJourney.getPostsComment(id,callback);
         } else {
            if ($scope.viewCardComment) {
             $scope.viewCardComment = false;
@@ -1401,7 +1401,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.viewCardComment = true;
             $scope.getCard = "view-whole-card";
             console.log($scope.viewCardComment);
-            OnGoJourney.getPostsComment(id,callback);     
+            OnGoJourney.getPostsComment(id,callback);
           }
         }
         $scope.previousId=id;
@@ -6890,7 +6890,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         var d = new Date();
         var n = d.getFullYear();
         $scope.getYear = _.rangeRight(1900, n + 1);
-      
+
     };
 
     // month array
@@ -8630,7 +8630,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //  var navHeight = $('.img-holder-agent').height($(window).height() - 41);
     var scroll = $(window).scrollTop();
     //console.log(scroll);
-    if (scroll >= 225) {
+    if (scroll >= 300) {
       //console.log('a');
       $(".agent-user-nav").addClass("change");
     } else {
@@ -10028,7 +10028,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $(window).scroll(function () {
     var scroll = $(window).scrollTop();
     //console.log(scroll);
-    if (scroll >= 225) {
+    if (scroll >= 370) {
       //console.log('a');
       $(".agent-home-nav").addClass("change-blue");
     } else {
@@ -10150,7 +10150,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         url = "agthome-analytics";
         $scope.agthomeoptions.active = "agthome-analytics";
         $scope.agenthomeItinerary = false;
-        $scope.agentFixednav = "change-bluechange-blue";
+        $scope.agentFixednav = "change-blue";
         break;
       case 7:
         url = "agthome-aboutus";
