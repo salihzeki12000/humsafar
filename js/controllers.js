@@ -1366,7 +1366,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       $scope.getCommentsData = function (id, uniqueId, postString, likeDone, likeCount) {
         console.log(likeCount);
-        // console.log(id, uniqueId, postString,likeDone,likeCount);
         $scope.previousId;
         $scope.post_id = id;
         $scope.post_uniqueId = uniqueId;
@@ -1388,6 +1387,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
 
         if ($scope.previousId != id) {
+             $scope.listOfComments=[];
             $scope.viewCardComment = true;
             $scope.getCard = "view-whole-card";
             console.log($scope.viewCardComment);
@@ -1398,6 +1398,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.getCard = "";
             console.log($scope.viewCardComment);
           }else{
+             $scope.listOfComments=[];
             $scope.viewCardComment = true;
             $scope.getCard = "view-whole-card";
             console.log($scope.viewCardComment);
@@ -1416,18 +1417,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       OnGoJourney.postComment(uniqueId,comment,type,postId,callback);
     };
 
-    $scope.likeUnlikePost = function () {
-      $scope.ongo.likeDone = !$scope.ongo.likeDone;
+    $scope.likeUnlikePost = function (uniqueId) {
+      $scope.post_likeDone = !$scope.post_likeDone;
       // var id = $scope.ongo.uniqueId;
-      if ($scope.ongo.likeDone) {
-        $scope.ongo.likeCount = $scope.ongo.likeCount + 1;
+      if ($scope.post_likeDone) {
+        $scope.post_likeCount = $scope.post_likeCount + 1;
         var formData = {
-          'uniqueId': id
+          'uniqueId': uniqueId
         };
       } else {
-        $scope.ongo.likeCount = $scope.ongo.likeCount - 1;
+        $scope.post_likeCount = $scope.post_likeCount - 1;
         var formData = {
-          'uniqueId': id,
+          'uniqueId': uniqueId,
           'unlike': 'true'
         };
       }
@@ -1438,7 +1439,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       })
     };
 
-
+    $scope.focusThis=false;
+    $scope.focus=function(){
+      console.log("focus called");
+      $scope.focusThis=true;
+    };
 
     $scope.hours = _.range(1, 13, 1); $scope.mins = _.range(1, 60, 1); $scope.change = function (id, val) {
       if (id == 'hour') {

@@ -90,7 +90,7 @@
                     <div class="itinerary-inputholder input-city-visited">
                       <ui-select multiple ng-model="add.cityVisited" theme="bootstrap" ng-click="updateCitiesArr($select.selected._id)">{{$select.search}}
                         <ui-select-match placeholder="City Visited">{{$item.name}}</ui-select-match>
-                        <ui-select-choices repeat="{'city':city._id} as city in cities"  refresh="searchCity(add.country,$select.search)" refresh-delay="0">
+                        <ui-select-choices repeat="{'city':city.name,placeId:city.placeId} as city in cities"  refresh="searchCity(add.country,$select.search)" refresh-delay="0">
                           <span>{{city.name}}</span>
                         </ui-select-choices>
                       </ui-select>

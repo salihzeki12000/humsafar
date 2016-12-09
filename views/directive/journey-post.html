@@ -36,7 +36,7 @@
     </div>
     <!--if checkin is done and no photos is uploaded then add map i.e.  if showMap is true  ENDS-->
     <!-- ongo img -->
-    <div class="card-imgholder" ng-if="ongo.photos.length>0">
+    <div class="card-imgholder" ng-if="ongo.photos.length>0" ng-click="getPhotoCommentsData(ongo.photos[index]._id)">
       <div class="blur-img">
         <img ng-src="{{ongo.photos[index].name|uploadpath}}" alt="" class="img-responsive" >
       </div>
