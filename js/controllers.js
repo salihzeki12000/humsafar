@@ -8666,7 +8666,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.agtuser.innerView = allagtuser[3];
       $scope.agtuseroptions.active = "usr-testimonialreviews";
       break;
-    case "usr-testimonialreviews":
+    case "usr-travelactivity":
       $scope.agtuser.innerView = allagtuser[4];
       $scope.agtuseroptions.active = "usr-travelactivity";
       break;
