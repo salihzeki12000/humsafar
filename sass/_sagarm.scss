@@ -656,7 +656,7 @@
   background-color: rgba(0,0,0,0.5);
 
   p {
-    margin: 0;
+    // margin: 0;
   }
 }
 
@@ -2127,9 +2127,11 @@ q {
 .user-contactdetail {
   color: #fff;
   padding: 0 15px;
-  a{
+
+  a {
     color: #fff;
-    &:hover{
+
+    &:hover {
       color: #fff;
     }
   }
@@ -2393,6 +2395,7 @@ q {
   background-color: $brand-blue;
   min-height: 500px;
 }
+//AGENT HOME ANALYTICS END
 // tour package dropdown
 
 .tour-type {
@@ -2404,16 +2407,17 @@ q {
 
 .tour-typeinput {
   position: relative;
+
   .a input {
     padding-right: 30px;
   }
 }
 
-  .form-control {
-    &:focus {
-      outline: none;
-      border-color: $brand-grey;
-    }
+.form-control {
+  &:focus {
+    outline: none;
+    border-color: $brand-grey;
+  }
 }
 
 .type-tourarrow {
@@ -2445,7 +2449,7 @@ q {
   background-repeat: no-repeat;
   @include transition(all ease 300ms);
 
-  &:active{
+  &:active {
     background-image: url('../img/icons/box7.png');
     @include transition(all ease 300ms);
   }
@@ -2482,16 +2486,166 @@ q {
   display: none;
 }
 
-.tourcurrency-option{
+.tourcurrency-option {
   overflow-y: scroll;
   max-height: 280px;
-  ul li{
+
+  ul li {
     padding: 0;
     border-bottom: 1px solid $brand-cyan;
   }
 }
+
 .tourcurrency-option::-webkit-scrollbar {
   display: none;
 }
+
+.tourfile-preview {
+  display: block;
+}
+
+.tour-dp-preview,
+.tour-pdf-preview {
+  display: inline-block;
+  // width: 50%;
+  height: 80px;
+  float: left;
+  position: relative;
+}
+
+.tour-pdf-preview {
+  width: 40%;
+}
+
+.tour-dp-preview {
+  width: 60%;
+}
+
+.tour-dp-holder,
+.tour-pdf-holder {
+  margin: 5px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  height: 70px;
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    @include position(absolute, 0);
+    background-color: rgba(0,0,0,0.7);
+    @include transition(all 300ms linear);
+    opacity: 0;
+  }
+
+  &:hover:before {
+    opacity: 1;
+    @include transition(all 300ms linear);
+  }
+
+  .remove-preview {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 3;
+    background-color: transparent;
+    @extend .pointer;
+  }
+}
+
+.tour-pdf-holder {
+  img {
+    height: 60px;
+    width: auto;
+    margin: 0 auto;
+  }
+}
+
+.tour-dp-holder {
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
 // tour package dropdown end
-//AGENT HOME ANALYTICS END
+// AGENT ON LOAD MODAL
+
+.agent-home .modal-body{
+  padding: 20px 50px;
+}
+.agent-modal-bg {
+  background-color: rgba(45,54,85,0.8);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.agtmodal-title {
+    color: #fff;
+    text-align: center;
+  @extend .avenir-heavy;
+}
+
+.agtmodal-imgholder {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    overflow: hidden;
+    margin: -50px auto 0;
+}
+.modal-package {
+    display: block;
+    color: #fff;
+}
+.modal-packagebox {
+  display: inline-block;
+  text-align: center;
+  border: 1px solid #11d3cb;
+  border-radius: 100%;
+  padding: 20px;
+  width: 160px;
+  height: 160px;
+  margin: 20px 10px;
+}
+
+.modal-packageholder {
+    width: 70px;
+    height: 60px;
+    margin: 0px auto;
+}
+
+.advanced-icon{
+  width: 90px;
+}
+
+.modal-listholder {
+    width: 50%;
+    float: left;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.agtmodal-base {
+  text-align: center;
+  .btn {
+      margin-bottom: -20px;
+  }
+}
+
+.modal-listholder{
+  ul{
+    li{
+      position: relative;
+      padding-left: 20px;
+      &:before{
+        content: "\f00c";
+        position: absolute;
+        left: 0;
+        top: 3px;
+        color: $brand-cyan;
+        font: normal normal normal normal 14px/1 FontAwesome;
+      }
+    }
+  }
+}
+// AGENT ON LOAD MODAL END
