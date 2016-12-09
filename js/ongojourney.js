@@ -629,6 +629,25 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         }
       };
 
+      $scope.getPhotoCommentsData=function(photoId){
+        console.log(photoId);
+         var callback=function(data){
+              $scope.uniqueArr = [];
+              $scope.listOfComments = data.data;
+              console.log($scope.listOfComments);
+              $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+        };
+        OnGoJourney.getPostsComment(photoId,callback);
+        //open modal starts
+        $uibModal.open({
+          templateUrl: "views/modal/notify.html",
+          animation: true,
+          scope: $scope,
+          windowClass: "notify-popup"
+        });
+        // open model ends
+      };
+
       // review post visited pop up end
 
       // var formatDate = function (date) {
