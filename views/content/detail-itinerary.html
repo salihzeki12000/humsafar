@@ -56,10 +56,10 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="itinerary-inputholder">
-                      <input type="text" class="form-control" placeholder="Trip Title">
+                      <input type="text" class="form-control" placeholder="Trip Title" ng-model="dItinerary.title">
                     </div>
                   </div>
-                  <!-- <div class="col-md-6">
+                   <!--<div class="col-md-6">
                     <div class="itinerary-inputholder relate">
                       <input type="text" class="form-control" placeholder="Travelled With">
                       <span class="itinerary-dropdown-icon">
@@ -72,7 +72,7 @@
               <!-- itinerary type -->
               <div class="fill-itinerary-type">
                 <h4 class="color-light-grey mt20 mb20">Itineraries Type</h4>
-                <div class="select-itinerary-type" ng-repeat="itinerary in itineraryType">
+                <div class="select-itinerary-type" ng-repeat="itinerary in dItineraryType">
                   <figure class="pointer"  ng-click="selectItinerary($index)">
                     <div class="itinerary-iconholder {{itinerary.activeClass}}" >
                       <img ng-src="{{itinerary.img}}" alt="{{itinerary.caption}}" class="img-responsive" width="{{itinerary.width}}">

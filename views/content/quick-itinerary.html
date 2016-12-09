@@ -152,23 +152,30 @@
                   <div class="select-currency-holder">
                     <div class="currency-holder">
                       <div class="itinerary-inputholder relate">
-                        <input type="text" placeholder="Select Currency">
+                        <input type="text" placeholder="Select Currency" ng-model="qItinerary.currency" ng-change="currency.showCurrency=true" ng-click="currency.showCurrency=!currency.showCurrency">
                         <span class="itinerary-dropdown-icon">
                           <i class="fa fa-chevron-down"></i>
                         </span>
+                        <div class="dropdown-currency-itinerary" ng-show="currency.showCurrency">
+                          <ul>
+                          <li ng-repeat="name in currency | filter:qItinerary.currency" ng-click="currency.showCurrency=false;qItinerary.currency=name.currency;" >
+                            <a href="" title="{{name.currency}}">{{name.currency}}</a>
+                          </li>
+                        </ul>
+                        </div>
                       </div>
                     </div>
                     <div class="currency-amount">
                       <div class="itinerary-inputholder">
-                        <input type="text" class="text-center">
+                        <input type="text" class="text-center" ng-model="qItinerary.cost">
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="pull-right">
                   <div class="save-publish-detail">
-                    <button class="btn btn-pink btn-more mr5" ng-click="upload(true)">Save</button>
-                    <button class="btn btn-pink btn-more" ng-click="upload(false)">Publish</button>
+                    <button class="btn btn-pink btn-more mr5" ng-click="upload('true')">Save</button>
+                    <button class="btn btn-pink btn-more" ng-click="upload('false')">Publish</button>
                   </div>
                 </div>
               </div>

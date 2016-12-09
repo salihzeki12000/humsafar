@@ -1384,6 +1384,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $scope.listOfComments = data.data;
               console.log($scope.listOfComments);
               $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+              console.log($scope.uniqueArr);
         }
 
         if ($scope.previousId != id) {
@@ -6529,7 +6530,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.itineraryType = [{
+    $scope.dItinerary={};
+    $scope.dItineraryType = [{
       img: "img/itinerary/adventure.png",
       caption: "Adventure",
       width: "25"
@@ -6687,6 +6689,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.qItinerary = {};
     $scope.qItinerary.itineraryType = [];
     $scope.qItinerary.countryVisited = [];
+    $scope.qItinerary.photos=[];
+    $scope.qItinerary.videos=[];
+    $scope.qItinerary.hashtag=[];
     $scope.qItinerary.photos = [];
     $scope.previousCountryId = [];
 
@@ -6696,7 +6701,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // $scope.searchNation = [];
     // $scope.countries = [];
     $scope.cities = [];
-
     var countries = [];
     var cities = [];
     $scope.qItineraryType = [{
@@ -6773,6 +6777,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var countriesCallback = function (data) {
       countries = data.data;
       $scope.countries = data.data;
+      $scope.currency=data.data;
     };
 
     NavigationService.getAllCountries(countriesCallback, function () {
@@ -6877,16 +6882,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log($scope.qItinerary.photos);
     };
 
-    $scope.currency_symbols = [
-      '&#1583',
-      '&#65',
-      '&#76',
-    ];
-
     $scope.upload = function (status) {
       $scope.qItinerary.status = status;
+      $scope.qItinerary.duration=parseInt($scope.qItinerary.duration);
+      $scope.qItinerary.year=parseInt($scope.qItinerary.year);
+      $scope.qItinerary.cost=parseInt($scope.qItinerary.cost);
       $scope.qItinerary.countryVisited = $scope.addCountry;
       console.log($scope.qItinerary);
+      NavigationService.uploadQuickItinerary($scope.qItinerary);
+
+
+
     };
 
     $scope.getYear = [];
@@ -9974,6 +9980,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
   $scope.oneAtATime = true;
+
+  // on load modal
+ // $(window).load(function(){
+ //   $('#getModal').modal('show');
+ // });
+ // on load modal end
 
   //lead monitor accordion
   $scope.leadMonAgent = [{

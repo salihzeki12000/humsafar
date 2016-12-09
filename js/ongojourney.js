@@ -637,7 +637,20 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
               console.log($scope.listOfComments);
               $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
         };
-        OnGoJourney.getPostsComment(photoId,callback);
+        var obj={  
+          "_id":photoId
+        }
+       $http({
+         url:adminURL + "/postphotos/getOneWeb",
+         method:"POST",
+         data:obj
+       }).success(function(data){
+              $scope.uniqueArr = [];
+              $scope.listOfComments = data.data;
+              console.log($scope.listOfComments);
+              $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+       });
+
         //open modal starts
         $uibModal.open({
           templateUrl: "views/modal/notify.html",
@@ -648,6 +661,41 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         // open model ends
       };
 
+
+
+
+
+ $scope.postComment = function (uniqueId, comment, postId,photoId) {
+      var type="photo";
+
+      var callback=function(data){
+          $scope.listOfComments = data.data;
+          document.getElementById('enterComment').value = "";
+      }
+      var formData = {
+        "uniqueId": uniqueId,
+        "text": comment,
+        "type": type,
+        "post": postId,
+        "photo":photoId
+      };
+       $http({
+        url: adminURL + "/comment/addCommentWeb",
+        method: "POST",
+        data: formData
+      }).success(function (data) {
+        formData = {
+          "_id": postId
+        }
+        $http({
+          url: adminURL + "/post/getPostCommentWeb",
+          method: "POST",
+          data: formData
+        }).success(function (data) {
+          callback(data);
+        });
+      });
+    };
       // review post visited pop up end
 
       // var formatDate = function (date) {
