@@ -18,7 +18,16 @@
       display: none;
     }
   }
-
+  //agent home page end
+  //agent user page
+  .agent-user-nav {
+    .agent-scroll {
+      ul {
+        width: 630px;
+      }
+    }
+  }
+  //agent user page end
   .agtsetting-menu-tab {
     padding: 0;
   }
@@ -114,6 +123,14 @@
     font-size: 12px;
   }
 
+  .agent-user-nav {
+    .agent-scroll {
+      ul {
+        width: 555px;
+      }
+    }
+  }
+
   .agent-photogallery {
     width: 170px;
     max-width: 170px;
@@ -121,6 +138,21 @@
   }
   // agent user page end
   // agent home page
+  .modal-packagebox {
+    width: 140px;
+    height: 140px;
+    margin: 10px;
+  }
+
+  .modal-packageholder {
+    width: 60px;
+    height: 45px;
+  }
+
+  .advanced-icon {
+    width: 80px;
+  }
+
   .agthome-activitycard {
     margin: 20px 0;
   }
@@ -143,6 +175,10 @@
         width: 740px;
       }
     }
+  }
+
+  .agt-home-leadmonitor .leadtab-msgdiv {
+    width: 330px;
   }
   // agent home page end
   // agent setting page
@@ -190,7 +226,7 @@
     float: left !important;
   }
 
-  .mob-ml5{
+  .mob-ml5 {
     margin-left: 5px;
   }
   // agent upgrade page
@@ -249,8 +285,7 @@
   }
 
   .enquiry-sidetab {
-    width: 395px;
-    top: 65px;
+    // width: 395px;
     padding: 10px 15px;
   }
 
@@ -263,12 +298,59 @@
   }
 
   .view-enquiry-list + .enquirytab-btn {
-    right: 360px;
-    top: 110px;
+    right: 370px;
+    top: 190px;
+  }
+
+  .leadtab-msgdiv p,
+  .leadtab-title p {
+    font-size: 14px;
+  }
+
+  .agt-home-leadmonitor .leadtab-msgdiv {
+    width: 130px;
+  }
+
+  .leadtab-profileholder {
+    margin: 0;
   }
 
   .enquiretab-msgdiv {
-    width: 130px;
+    width: 90px;
+    padding: 0;
+  }
+
+  .leadtab-msgdiv,
+  .leadtab-title {
+    margin: 5px;
+  }
+
+  .leadtab-date {
+    margin: 5px 0;
+  }
+
+  .agent-home .modal-body {
+    padding: 20px;
+  }
+
+  .agent-modal-bg {
+    font-size: 14px;
+    margin: 50px 10px;
+  }
+
+  .modal-packagebox {
+    width: 120px;
+    height: 120px;
+    margin: 10px 5px;
+  }
+
+  .modal-packageholder {
+    width: 45px;
+    height: 35px;
+  }
+
+  .advanced-icon {
+    width: 65px;
   }
   // agent home page end
   // agent setting page
@@ -375,6 +457,10 @@
     }
   }
   //destination country end
+  .action-contentbox,
+  .lead-contentbox {
+    padding: 10px;
+  }
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -422,18 +508,22 @@
     }
   }
 
+  .contact-sidetab,
   .enquiry-sidetab {
     width: 245px;
     padding: 10px;
   }
 
   .view-enquiry-list + .enquirytab-btn {
-    right: 215px;
+    right: 164px;
+  }
+
+  .view-contact-list + .contacttab-btn {
+    right: 164px;
   }
 
   .enquiretab-msgdiv {
-    width: 90px;
-    padding: 0;
+    width: 130px;
   }
 
   .enquirestab-mail {
@@ -460,6 +550,48 @@
     h4 {
       font-size: 15px;
     }
+  }
+
+  .action-contentbox,
+  .lead-contentbox {
+    padding: 0;
+  }
+
+  .lead-content {
+    padding: 0;
+  }
+
+  .leadtab-profileholder {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+  }
+
+  .imgfoot-top {
+    padding-bottom: 10px;
+  }
+
+  .agt-home-leadmonitor .panel-heading {
+    padding: 5px;
+  }
+
+  .modal-packagebox {
+    display: block;
+    margin: 10px auto;
+  }
+
+  .modal-listholder {
+    width: 100%;
+    padding: 0;
+  }
+
+  .listholder-modal .modal-listborder{
+    border: none;
+  }
+
+  .agtmodal-imgholder {
+    width: 80px;
+    height: 80px;
   }
   //agent home page end
   // agent setting page

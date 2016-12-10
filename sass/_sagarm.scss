@@ -1166,6 +1166,13 @@ q {
   }
 }
 
+.agt-usr-tourpackages,
+.tour-package-card {
+  .imgfoot-top {
+    padding: 10px;
+  }
+}
+
 .tourupload-position {
   position: absolute;
   bottom: -20px;
@@ -1718,8 +1725,6 @@ q {
 .contact-sidetab,
 .enquiry-sidetab {
   width: 450px;
-  // height: 350px;
-  position: fixed;
   top: 100px;
   right: -450px;
   z-index: 3;
@@ -1729,12 +1734,17 @@ q {
   border-radius: 5px 0 0 5px;
 }
 
+.enquiry-sidetab {
+  position: absolute;
+}
+
 .enquirytab-head {
   border-bottom: 1px solid #ebebeb;
 }
 
 .contact-sidetab {
   background-color: $brand-blue;
+  position: fixed;
 }
 
 .contacttab-head {
@@ -1807,6 +1817,13 @@ q {
   position: absolute;
   bottom: 7px;
   left: 8px;
+}
+
+.enquirytab-cmpny-inputholder textarea {
+  border-top: none;
+  border-right: 1px solid $brand-blue;
+  border-bottom: 1px solid $brand-blue;
+  border-left: 1px solid $brand-blue;
 }
 
 .leadtab-msgdiv,
@@ -2570,33 +2587,37 @@ q {
 // tour package dropdown end
 // AGENT ON LOAD MODAL
 
-.agent-home .modal-body{
+.agent-home .modal-body {
   padding: 20px 50px;
 }
+
 .agent-modal-bg {
   background-color: rgba(45,54,85,0.8);
   border-radius: 10px;
   color: #fff;
   font-size: 16px;
+  text-align: justify;
 }
 
 .agtmodal-title {
-    color: #fff;
-    text-align: center;
+  color: #fff;
+  text-align: center;
   @extend .avenir-heavy;
 }
 
 .agtmodal-imgholder {
-    width: 70px;
-    height: 70px;
-    border-radius: 100%;
-    overflow: hidden;
-    margin: -50px auto 0;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  overflow: hidden;
+  margin: -50px auto 0;
 }
+
 .modal-package {
-    display: block;
-    color: #fff;
+  display: block;
+  color: #fff;
 }
+
 .modal-packagebox {
   display: inline-block;
   text-align: center;
@@ -2609,35 +2630,45 @@ q {
 }
 
 .modal-packageholder {
-    width: 70px;
-    height: 60px;
-    margin: 0px auto;
+  width: 70px;
+  height: 60px;
+  margin: 0 auto;
 }
 
-.advanced-icon{
+.advanced-icon {
   width: 90px;
 }
 
 .modal-listholder {
-    width: 50%;
-    float: left;
-    padding: 10px;
-    margin: 10px 0;
+  width: 50%;
+  float: left;
+  padding: 10px;
+  margin: 10px 0;
 }
 
 .agtmodal-base {
   text-align: center;
+
   .btn {
-      margin-bottom: -20px;
+    margin-bottom: -50px;
   }
 }
 
-.modal-listholder{
-  ul{
-    li{
+.modal-textcontent {
+  margin: 20px 0;
+}
+
+.listholder-modal .modal-listborder {
+  border-right: 1px solid $brand-grey;
+}
+
+.modal-listholder {
+  ul {
+    li {
       position: relative;
       padding-left: 20px;
-      &:before{
+
+      &:before {
         content: "\f00c";
         position: absolute;
         left: 0;

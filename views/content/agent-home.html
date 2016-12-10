@@ -1,4 +1,3 @@
-
 <div class="agent-home relate" scrolladd1class>
   <div scrolldown>
     <div class="img-holder-agent bg-agent-home-img" ng-if="agenthomeItinerary">
@@ -22,9 +21,9 @@
             <div class="agent-scroll">
               <ul class="list-inline">
                 <li ng-click="getTab(0)" ng-class="{'active': agthomeoptions.active=='agthome-itinerary'}">Itineraries </li>
-                <li ng-click="getTab(1)" ng-class="{'active': agthomeoptions.active=='agthome-tourpackages'}">Tours &amp;amp; Packages</li>
-                <li ng-click="getTab(2)" ng-class="{'active': agthomeoptions.active=='agthome-photovideos'}"> Photos &amp;amp; Videos</li>
-                <li ng-click="getTab(3)" ng-class="{'active': agthomeoptions.active=='agthome-testimonialreviews'}">Testimonials &amp;amp; Reviews</li>
+                <li ng-click="getTab(1)" ng-class="{'active': agthomeoptions.active=='agthome-tourpackages'}">Tours & Packages</li>
+                <li ng-click="getTab(2)" ng-class="{'active': agthomeoptions.active=='agthome-photovideos'}"> Photos & Videos</li>
+                <li ng-click="getTab(3)" ng-class="{'active': agthomeoptions.active=='agthome-testimonialreviews'}">Testimonials & Reviews</li>
                 <li ng-click="getTab(4)" ng-class="{'active': agthomeoptions.active=='agthome-travelactivity'}">My Activity</li>
                 <li ng-click="getTab(5)" ng-class="{'active': agthomeoptions.active=='agthome-leadmonitor'}">Lead Monitor</li>
                 <li ng-click="getTab(6)" ng-class="{'active': agthomeoptions.active=='agthome-analytics'}">Analytics</li>
@@ -44,89 +43,107 @@
     </div>
     <div class="agent-home-content" ng-include="agthome.innerView"></div>
   </div>
-<!-- modal on load -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#getModal">Open Modal</button>
+  <!-- modal on load -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#getModal">Open Modal</button>
 
-<div class="modal fade" id="getModal" role="dialog">
-  <div class="modal-dialog modal-lg agent-modal-bg">
+  <div class="modal fade" id="getModal" role="dialog">
+    <div class="modal-dialog modal-lg agent-modal-bg">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="agtmodal-title text-center">
-          <div class="agtmodal-imgholder">
-            <img src="img/follower.jpg" alt="" class="img-responsive">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="agtmodal-title text-center">
+            <div class="agtmodal-imgholder">
+              <img src="img/follower.jpg" alt="" class="img-responsive">
+            </div>
+            <h4 class="modal-title">Lifestyle Holidays</h4>
           </div>
-          <h4 class="modal-title">Lifestyle Holidays</h4>
-        </div>
-        <div class="agtmodal-content">
-          <h4 class="color-cyan avenir-heavy m-clear">Welcome to TraveLibro</h4>
-          <p class="avenir-roman color-white">A travel global ecosystem that connects travel enthusiasts of all types to each other and to travel agents as well. We are very excited to have you on board with us in our journey to help travellers explore the world. Through TraveLibro, take your services to our esteemed users, a global audiencec of travellers.</p>
+          <div class="agtmodal-content">
+            <div class="modal-textcontent">
+              <h4 class="color-cyan avenir-heavy m-clear">Welcome to TraveLibro</h4>
+              <p class="avenir-roman color-white">A travel global ecosystem that connects travel enthusiasts of all types to each other and to travel agents as well. We are very excited to have you on board with us in our journey to help travellers explore the world. Through TraveLibro,
+                take your services to our esteemed users, a global audiencec of travellers.</p>
+            </div>
 
-          <h4 class="color-cyan avenir-heavy m-clear">90 Day Trial Period Of Our Premium Offering</h4>
-          <p class="color-white avenir-roman m-clear">While we have three packages on offer: </p>
-          <div class="modal-package">
-            <div class="modal-packagebox">
-              <div class="modal-packageholder">
-                <img src="img/basic-icon.png" alt="" class="img-responsive">
-              </div>
-              <p class="avenir-heavy">Basic</p>
-              <p class="avenir-roman">Free</p>
-            </div>
-            <div class="modal-packagebox">
-              <div class="modal-packageholder advanced-icon">
-                <img src="img/advanced-icon.png" alt="" class="img-responsive">
-              </div>
-              <p class="avenir-heavy">Advanced</p>
-              <p class="avenir-roman">$149 per Q</p>
-            </div>
-            <div class="modal-packagebox">
-              <div class="modal-packageholder">
-                <img src="img/premium-icon.png" alt="" class="img-responsive">
-              </div>
-              <p class="avenir-heavy">Premium</p>
-              <p class="avenir-roman">$249 per Q</p>
-            </div>
-            <p>As a gesture of goodwill we would like to offeryou a <span>  free trial period of 90 days for our Premium package</span> to give you an idea of how using the TraveLibro platform can benefit you in the best possible way.</p>
-
-            <div class="agtmodal-list">
-              <p class="color-cyan m-clear">During these 90 days you will be able to access all the features of the Premium account:</p>
-              <div class="listholder-modal clearfix">
-                <div class="modal-listholder">
-                  <ul>
-                    <li>Upload Unlimited Itineraries</li>
-                    <li>Featured Tours &amp; Packages on Popular Agents Pages</li>
-                    <li>Feature Tours &amp; Packages on Destination Pages</li>
-                    <li>List on Popular Agent</li>
-                    <li>Lead Monitor - Access to TraveLibro Audience</li>
-                  </ul>
+            <div class="modal-textcontent">
+              <h4 class="color-cyan avenir-heavy m-clear">90 Day Trial Period Of Our Premium Offering</h4>
+              <p class="color-white avenir-roman m-clear">While we have three packages on offer: </p>
+              <div class="modal-package">
+                <div class="modal-packagebox">
+                  <div class="modal-packageholder">
+                    <img src="img/basic-icon.png" alt="" class="img-responsive">
+                  </div>
+                  <p class="avenir-heavy">Basic</p>
+                  <p class="avenir-roman">Free</p>
                 </div>
-                <div class="modal-listholder">
-                  <ul>
-                    <li>Upload Unlimited Tours &amp; Packages</li>
-                    <li>Analyse Profile Views</li>
-                    <li>Connect with Followers</li>
-                    <li>Lead Analytics</li>
-                    <li>Analyse Views &amp; Downloads</li>
-                  </ul>
+                <div class="modal-packagebox">
+                  <div class="modal-packageholder advanced-icon">
+                    <img src="img/advanced-icon.png" alt="" class="img-responsive">
+                  </div>
+                  <p class="avenir-heavy">Advanced</p>
+                  <p class="avenir-roman">$149 per Q</p>
+                </div>
+                <div class="modal-packagebox">
+                  <div class="modal-packageholder">
+                    <img src="img/premium-icon.png" alt="" class="img-responsive">
+                  </div>
+                  <p class="avenir-heavy">Premium</p>
+                  <p class="avenir-roman">$249 per Q</p>
                 </div>
               </div>
+              <p>As a gesture of goodwill we would like to offeryou a <span>  free trial period of 90 days for our Premium package</span> to give you an idea of how using the TraveLibro platform can benefit you in the best possible way.</p>
+            </div>
 
+
+            <div class="modal-textcontent">
+              <div class="agtmodal-list">
+                <p class="color-cyan m-clear">During these 90 days you will be able to access all the features of the Premium account:</p>
+                <div class="listholder-modal clearfix">
+                  <div class="modal-listholder modal-listborder">
+                    <ul>
+                      <li>Upload Unlimited Itineraries</li>
+                      <li>Featured Tours & Packages on Popular Agents Pages</li>
+                      <li>Feature Tours & Packages on Destination Pages</li>
+                      <li>List on Popular Agent</li>
+                      <li>Lead Monitor - Access to TraveLibro Audience</li>
+                    </ul>
+                  </div>
+                  <div class="modal-listholder">
+                    <ul>
+                      <li>Upload Unlimited Tours & Packages</li>
+                      <li>Analyse Profile Views</li>
+                      <li>Connect with Followers</li>
+                      <li>Lead Analytics</li>
+                      <li>Analyse Views & Downloads</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-textcontent">
               <p>These tours and packages along with your foremost and popular itineraries will help prospective travellers to browse through and choose you as their travel agent when they search fir that particular destination.</p>
+            </div>
 
+            <div class="modal-textcontent">
               <p>Apart from this, you will receive an in-depth business analysis of month-by-month-activity, leads from prospective clients to engage with and details of activities on your page ass well</p>
+            </div>
 
+            <div class="modal-textcontent">
               <h4 class="color-cyan avenir-heavy m-clear">End of Trial Period</h4>
-              <p>We will further notify you three weeks in advance before the trial period expires to choose between the advanced or premium, as per your preference. Furthermore, if at the end of the trial period you choose not to upgrade your account, you can yet benefit of our services using the basic  account.</p>
+              <p>We will further notify you three weeks in advance before the trial period expires to choose between the advanced or premium, as per your preference. Furthermore, if at the end of the trial period you choose not to upgrade your account, you
+                can yet benefit of our services using the basic account.</p>
+            </div>
 
+            <div class="modal-textcontent">
               <h4 class="color-cyan avenir-heavy m-clear">Best Wishes</h4>
               <p>We are eager to see your business grow and hope our association lasts for a lifetime.</p>
             </div>
           </div>
+          <div class="agtmodal-base text-center">
+            <button type="button" class="btn btn-pink btn-more" data-dismiss="modal">Continue</button>
+          </div>
         </div>
-      </div>
-      <div class="agtmodal-base text-center">
-        <button type="button" class="btn btn-pink btn-more" data-dismiss="modal">Continue</button>
       </div>
     </div>
   </div>
