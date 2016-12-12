@@ -16,14 +16,14 @@
   <div class="container" >
     <div class="clearfix">
       <div class="filter-head  pull-right">
-        <div class="photo-filter " data-toggle="collapse" data-target="#demo">
-          <span class="down">All</span>
+        <div class="photo-filter color-grey collapsed" data-toggle="collapse" data-target="#demo">
+            <span class="down">All</span>
+            <i class="fa fa-chevron-down pull-right down"></i>
           <span class="up">Photos & Videos</span>
           <i class="fa fa-chevron-up pull-right up"></i>
-          <i class="fa fa-chevron-down pull-right down"></i>
         </div>
         <div id="demo" class="collapse filter-data">
-          <div class="options">
+          <div class="options color-blue">
             <div class="opt custom-checkbox" ng-repeat="picfilter in picFilterList track by $index">
               <input type="checkbox" id="{{picfilter}}">
               <label for="{{picfilter}}">{{picfilter}}</label>

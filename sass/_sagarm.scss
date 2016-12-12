@@ -355,6 +355,21 @@
   }
 }
 
+.agent-itinerary-filter {
+  .openfilter {
+    // min-height: 120px;
+    .libro-filter {
+      display: block;
+    }
+  }
+
+  .libro-filter {
+    top: 0;
+    z-index: 1;
+    display: none;
+  }
+}
+
 .img-holder-agent {
   height: calc(100vh - 60px);
   width: 100%;
@@ -1166,10 +1181,13 @@ q {
   }
 }
 
-.agt-usr-tourpackages,
+.agt-usr-tourpackages, .agt-home-tourpackage,
 .tour-package-card {
   .imgfoot-top {
     padding: 10px;
+    h4{
+      margin-top: 0;
+    }
   }
 }
 
@@ -1207,7 +1225,7 @@ q {
 .call-btn {
   position: absolute;
   right: 10px;
-  top: 50%;
+  top: 45%;
   color: #fff;
   border: 1px solid $brand-cyan;
   border-radius: 50%;
@@ -1287,6 +1305,7 @@ q {
     }
   }
 
+
   .filter-data {
     width: 100%;
     position: absolute;
@@ -1298,7 +1317,7 @@ q {
 
     .options {
       overflow-y: scroll;
-      height: 190px;
+      height: 180px;
     }
 
     .options::-webkit-scrollbar {
@@ -1308,6 +1327,10 @@ q {
     .opt {
       padding: 5px;
       border-bottom: 1px solid #ccc;
+
+      label {
+        font-weight: 500;
+      }
 
       [type="checkbox"]:checked+label:after,
       [type="checkbox"]:not(:checked)+label:after {
@@ -2270,9 +2293,8 @@ q {
 
     .photo-filter {
       padding: 10px;
-      background-color: #fff;
-      color: $brand-blue;
-      // border: 1px solid #ccc;
+      background-color: $brand-blue;
+      color: #fff;
       border-radius: 4px;
       @extend .pointer;
     }
@@ -2282,6 +2304,8 @@ q {
     }
 
     .collapsed {
+      color: $brand-blue;
+      background-color: #fff;
       .up {
         display: none;
       }
@@ -2302,7 +2326,7 @@ q {
 
       .options {
         overflow-y: scroll;
-        height: 190px;
+        height: 180px;
       }
 
       .options::-webkit-scrollbar {
@@ -2642,8 +2666,8 @@ q {
 .modal-listholder {
   width: 50%;
   float: left;
-  padding: 10px;
-  margin: 10px 0;
+  padding: 10px 10px 0;
+  // margin: 10px 0;
 }
 
 .agtmodal-base {
