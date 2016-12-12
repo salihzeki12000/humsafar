@@ -1,0 +1,152 @@
+<div class="edit-journeypop-main">
+  <!-- edit otg -->
+  <div class="edit-otg-sec">
+    <!-- edit otg info window -->
+    <!-- edit otg title -->
+    <div class="edit-otg-title">
+      <h4>Edit Activity</h4>
+    </div>
+    <!-- edit otg title end-->
+    <div class="edit-otg-info">
+      <div class="row">
+        <!-- search location sec -->
+        <div class="col-md-4">
+          <div class="otg-search-location otg-bg-all">
+            <img src="img/ongojourney/otg-location.png" alt="" class="img-responsive">
+            <div class="search-by-category">
+              <input type="text" ng-model="searchByCat.category" class="form-control">
+              <div class="search-otg-location">
+                <ul>
+                  <li><a href="">Dropdown</a></li>
+                  <li><a href="">Asmita</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="category-laction">
+              <input type="text" class="form-control">
+              <div class="dropdown-category">
+                <ul>
+                  <li><a href="">Beaches</a></li>
+                  <li><a href="">Airport</a></li>
+                  <li><a href="">Hotels</a></li>
+                  <li><a href="">Restaurants</a></li>
+                  <li><a href="">Nature & parks</a></li>
+                  <li><a href="">Sights & Landmarks</a></li>
+                  <li><a href="">Museums & Galleries</a></li>
+                  <li><a href="">Religious</a></li>
+                  <li><a href="">Shopping</a></li>
+                  <li><a href="">Adventure & Excursion</a></li>
+                  <li><a href="">Zoos & Aqua</a></li>
+                  <li><a href="">Cinema & Theatre</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- search location sec end -->
+        <!-- tag friends sec -->
+        <div class="col-md-4">
+          <div class="tag-journey-friend otg-bg-all">
+            <img src="img/ongojourney/otg-tag.png" alt="" class="img-responsive">
+            <input type="text" class="form-control" placeholder="Tag Friends">
+            <div class="dropdown-tagfriend">
+              <ul>
+                <li><a href="">Manana Vora</a></li>
+                <li><a href="">Yacha potaat bora</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- tag friends sec end-->
+        <!-- otg thought sec -->
+        <div class="col-md-4">
+          <div class="edit-otg-thought otg-bg-all">
+            <img src="img/ongojourney/otg-thought.png" alt="" class="img-responsive">
+            <div class="otg-thought">
+              <textarea maxlength="150" class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
+        <!-- otg thought sec end-->
+      </div>
+    </div>
+    <!-- edit otg info window end-->
+    <!-- edit otg photos and videos -->
+    <div class="otg-photo-video">
+      <div class="row">
+        <!-- photo sec -->
+        <div class="col-md-6">
+          <div class="view-photo-sec otg-bg-all">
+            <div class="otg-photo-count">
+              <img src="img/ongojourney/otg-photo.png" alt="" class="img-responsive">
+              <span>(20)</span>
+            </div>
+            <!-- swiper slider for photo in 2 row -->
+            <div class="otg-photo-slider">
+              <flex-slider class="carousel" flex-slide="photo in otgPhoto track by $index" animation="true" control-nav="false">
+                <li>
+                  <div class="otg-slider-row" ng-repeat="slide in photo track by $index">
+                    <div class="otg-column" ng-repeat="column in slide track by $index">
+                      <div class="otg-photo-holder">
+                        <img ng-src="{{column.img}}" alt="" class="img-responsive">
+                        <!-- add caption -->
+                        <div class="otg-add-caption" hidden>
+                          <p>Add Captions</p>
+                          <div class="caption-added">
+                            <!-- <input type="text"> -->
+                            <!-- <p>text will come if added in textarea</p> -->
+                          </div>
+                          <div class="edit-otg-caption">
+                            <textarea name="" id="" maxlength="150"></textarea>
+                          </div>
+                        </div>
+                        <!-- add caption end-->
+                        <div class="delete-otg-photo">
+                          <i class="fa fa-trash-o"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </flex-slider>
+            </div>
+            <!-- swiper slider for photo in 2 row end -->
+          </div>
+        </div>
+        <!-- photo sec end-->
+        <!-- video sec -->
+        <div class="col-md-6">
+          <div class="view-video-sec otg-bg-all">
+            <div class="otg-video-count">
+              <img src="img/ongojourney/otg-video.png" alt="" class="img-responsive">
+              <span>(20)</span>
+            </div>
+            <!-- flexslider for video -->
+            <div class="video-otg-slider">
+              <flex-slider flex-slide="video in videoOtg track by index" class="carsouel">
+                <li>
+                  <img ng-src="video" alt="" class="img">
+                </li>
+              </flex-slider>
+            </div>
+            <!-- flexslider for video end-->
+          </div>
+        </div>
+        <!-- video sec end-->
+      </div>
+    </div>
+    <!-- edit otg photos and videos end-->
+  </div>
+  <!-- edit otg end-->
+  <!-- for add otg photos and videos -->
+  <div class="add-otg-sec">
+
+  </div>
+  <!-- for add otg photos and videos end -->
+  <!-- save or cancel otg -->
+  <div class="save-cancel-otg text-center">
+    <a href="">Cancel</a>
+    <button class="btn btn-pink">Save</button>
+  </div>
+  <!-- save or cancel otg end-->
+</div>

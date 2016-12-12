@@ -2485,9 +2485,12 @@ header {
 }
 
 .review-backdrop.modal-backdrop {
-  background: url('../img/bg-blur.jpg') no-repeat;
-  background-size: cover;
+  // background: url('../img/bg-blur.jpg') no-repeat;
+  // background-size: cover;
   opacity: 1;
+}
+.review-backdrop.modal-backdrop + .repeated-item {
+  @include filter(blur(15px));
 }
 
 // country
@@ -3691,6 +3694,7 @@ header {
       padding: 0 15px;
       display: inline-block;
       line-height: 100%;
+      vertical-align: middle;
       &:first-child {
         padding: 0 15px 0 0;
       }
@@ -4979,6 +4983,14 @@ header {
 }
 
 // check in end
+// new edit otg start
+.otg-bg-all {
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 1px 2px 3px #272727;
+  background-color: #ececec;
+}
+// new edit otg end
 // pop up journey used end
 // on go journey end
 // trip summary

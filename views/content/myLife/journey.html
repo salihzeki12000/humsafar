@@ -96,7 +96,8 @@
                         <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
                           <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span> <span>{{life.timestampHour}}</span></p>
                       </div>
-                      <div class="travelled-journey relate" ng-hide="life.onJourney" ui-sref="ongojourney({id:life.urlSlug})">
+                      <!--<div class="travelled-journey relate" ng-hide="life.onJourney" ui-sref="ongojourney({id:life.urlSlug})" ng-click="testin">-->
+                      <div class="travelled-journey relate" ng-hide="life.onJourney" ng-click="testing(life.type,life.urlSlug)">                        
                         <div class="travelled-imgholder">
                           <img ng-src="{{life.coverPhoto|uploadpath}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto!=null">
                           <img ng-src="{{life.startLocationPic|small|uploadpath}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto==null">

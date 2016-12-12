@@ -12,12 +12,11 @@ var markers = [];
 var travelPath;
 var initMap = function () {};
 var setMarker = function () {};
-
 var map;
 var center = {};
 var centers = [];
 markers[0] = {};
-angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'itinerary', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
 .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
   //Used to name the .html file
@@ -840,582 +839,595 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
   .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, $state, $stateParams, $filter, $http) {
-      //Used to name the .html file
-      var slug = $stateParams.id;
-      var checkinCount = "";
-      $scope.userData = $.jStorage.get("profile");
+    //Used to name the .html file
+    var slug = $stateParams.id;
+    console.log(slug);
+    var checkinCount = "";
+    $scope.userData = $.jStorage.get("profile");
 
-      var getOneJourneyCallback = function (journeys) {
-        $scope.journey = journeys;
-        var postsWithLatLng = [];
-        postsWithLatLng = _.filter($scope.journey.post,  'latlong');
+    var getOneJourneyCallback = function (journeys) {
+      $scope.journey = journeys;
+      var postsWithLatLng = [];
+      postsWithLatLng = _.filter($scope.journey.post,  'latlong');
 
-        _.each(postsWithLatLng, function (n, $index) {
+      _.each(postsWithLatLng, function (n, $index) {
 
-          if (n && n.latlong && n.latlong.lat && n.latlong.long) {
-            centers[$index] = {
-              "lat": parseFloat(n.latlong.lat),
-              "lng": parseFloat(n.latlong.long)
-            };
-          } else {
-            alert("no latlong found");
-          }
-
-        });
-
-        if (journeys && journeys.location && journeys.location.lat) {
-          var obj = {
-            "lat": parseFloat(journeys.location.lat),
-            "lng": parseFloat(journeys.location.long)
-          }
-          centers.unshift(obj);
+        if (n && n.latlong && n.latlong.lat && n.latlong.long) {
+          centers[$index] = {
+            "lat": parseFloat(n.latlong.lat),
+            "lng": parseFloat(n.latlong.long)
+          };
         } else {
-          alert("Location of Banner not found");
+          alert("no latlong found");
         }
 
-        // center = {
-        //     "lat": centers[0].lat,
-        //     "lng": centers[0].lng
-        //   };
-
-        initMap();
-      };
-
-      OnGoJourney.getOneJourney({
-        "urlSlug": slug
-      }, getOneJourneyCallback, function (err) {
-        console.log(err);
       });
 
-      //change banner date and time starts
-      $scope.time = {};
-      $scope.datetime = {};
-      $scope.changeBannerDate = function () {
-        $scope.isPostDate = false;
-        $scope.isBannerDate = true;
-        date = $scope.journey.startTime;
-        var d = new Date(date);
-        var hh = d.getHours();
-        if (hh > 12) {
-          hh = hh - 12;
-          $scope.time.am_pm = "PM";
-        } else {
-          $scope.time.am_pm = "AM";
+      if (journeys && journeys.location && journeys.location.lat) {
+        var obj = {
+          "lat": parseFloat(journeys.location.lat),
+          "lng": parseFloat(journeys.location.long)
         }
-        $scope.time.hour = hh;
-        $scope.time.min = d.getMinutes();
-        $scope.datetime.dt = d;
-        modal = $uibModal.open({
-          animation: true,
-          templateUrl: "views/modal/date-time.html",
-          scope: $scope,
-          backdropClass: "review-backdrop",
-        })
-      };
+        centers.unshift(obj);
+      } else {
+        alert("Location of Banner not found");
+      }
 
-      $scope.updateBannerDateTime = function (id, formData, dt) {
-        console.log(dt);
-        var date = $filter('formatDateCalender')(dt);
-        var time = $filter('formatTimeCalender')(formData);
-        var result = {};
-        var callback = function (data) {
-          var formData = {
-            "urlSlug": $scope.journey.urlSlug
-          }
-          OnGoJourney.getOneJourney(formData, function (journeys) {
-            $scope.journey.startTime = journeys.startTime;
-            modal.close();
-            console.log(journeys);
-          }, function (err) {
-            console.log(err);
-          });
+      // center = {
+      //     "lat": centers[0].lat,
+      //     "lng": centers[0].lng
+      //   };
+
+      initMap();
+    };
+
+    OnGoJourney.getOneJourney({
+      "urlSlug": slug
+    }, getOneJourneyCallback, function (err) {
+      console.log(err);
+    });
+
+    //change banner date and time starts
+    $scope.time = {};
+    $scope.datetime = {};
+    $scope.changeBannerDate = function () {
+      $scope.isPostDate = false;
+      $scope.isBannerDate = true;
+      date = $scope.journey.startTime;
+      var d = new Date(date);
+      var hh = d.getHours();
+      if (hh > 12) {
+        hh = hh - 12;
+        $scope.time.am_pm = "PM";
+      } else {
+        $scope.time.am_pm = "AM";
+      }
+      $scope.time.hour = hh;
+      $scope.time.min = d.getMinutes();
+      $scope.datetime.dt = d;
+      modal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/date-time.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+      })
+    };
+
+    $scope.updateBannerDateTime = function (id, formData, dt) {
+      console.log(dt);
+      var date = $filter('formatDateCalender')(dt);
+      var time = $filter('formatTimeCalender')(formData);
+      var result = {};
+      var callback = function (data) {
+        var formData = {
+          "urlSlug": $scope.journey.urlSlug
         }
-        result._id = id;
-        result.startTime = new Date(date + " " + time);
-        OnGoJourney.updateBannerDateTime(result, callback);
-      };
-      //change banner date and time ends
+        OnGoJourney.getOneJourney(formData, function (journeys) {
+          $scope.journey.startTime = journeys.startTime;
+          modal.close();
+          console.log(journeys);
+        }, function (err) {
+          console.log(err);
+        });
+      }
+      result._id = id;
+      result.startTime = new Date(date + " " + time);
+      OnGoJourney.updateBannerDateTime(result, callback);
+    };
+    //change banner date and time ends
 
-      //maps integration starts here
+    //maps integration starts here
+    {
       {
-        {
-          //mapStyle
-          var mapStyle = [{
-            "featureType": "landscape.man_made",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#f7f1df"
-            }]
-          }, {
-            "featureType": "landscape.natural",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#d0e3b4"
-            }]
-          }, {
-            "featureType": "landscape.natural.terrain",
-            "elementType": "geometry",
-            "stylers": [{
-              "visibility": "off"
-            }]
-          }, {
-            "featureType": "poi",
-            "elementType": "labels",
-            "stylers": [{
-              "visibility": "off"
-            }]
-          }, {
-            "featureType": "poi.business",
-            "elementType": "all",
-            "stylers": [{
-              "visibility": "off"
-            }]
-          }, {
-            "featureType": "poi.medical",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#fbd3da"
-            }]
-          }, {
-            "featureType": "poi.park",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#bde6ab"
-            }]
-          }, {
-            "featureType": "road",
-            "elementType": "geometry.stroke",
-            "stylers": [{
-              "visibility": "off"
-            }]
-          }, {
-            "featureType": "road",
-            "elementType": "labels",
-            "stylers": [{
-              "visibility": "off"
-            }]
-          }, {
-            "featureType": "road.highway",
-            "elementType": "geometry.fill",
-            "stylers": [{
-              "color": "#ffe15f"
-            }]
-          }, {
-            "featureType": "road.highway",
-            "elementType": "geometry.stroke",
-            "stylers": [{
-              "color": "#efd151"
-            }]
-          }, {
-            "featureType": "road.arterial",
-            "elementType": "geometry.fill",
-            "stylers": [{
-              "color": "#ffffff"
-            }]
-          }, {
-            "featureType": "road.local",
-            "elementType": "geometry.fill",
-            "stylers": [{
-              "color": "black"
-            }]
-          }, {
-            "featureType": "transit.station.airport",
-            "elementType": "geometry.fill",
-            "stylers": [{
-              "color": "#cfb2db"
-            }]
-          }, {
-            "featureType": "water",
-            "elementType": "geometry",
-            "stylers": [{
-              "color": "#a2daf2"
-            }]
+        //mapStyle
+        var mapStyle = [{
+          "featureType": "landscape.man_made",
+          "elementType": "geometry",
+          "stylers": [{
+            "color": "#f7f1df"
           }]
+        }, {
+          "featureType": "landscape.natural",
+          "elementType": "geometry",
+          "stylers": [{
+            "color": "#d0e3b4"
+          }]
+        }, {
+          "featureType": "landscape.natural.terrain",
+          "elementType": "geometry",
+          "stylers": [{
+            "visibility": "off"
+          }]
+        }, {
+          "featureType": "poi",
+          "elementType": "labels",
+          "stylers": [{
+            "visibility": "off"
+          }]
+        }, {
+          "featureType": "poi.business",
+          "elementType": "all",
+          "stylers": [{
+            "visibility": "off"
+          }]
+        }, {
+          "featureType": "poi.medical",
+          "elementType": "geometry",
+          "stylers": [{
+            "color": "#fbd3da"
+          }]
+        }, {
+          "featureType": "poi.park",
+          "elementType": "geometry",
+          "stylers": [{
+            "color": "#bde6ab"
+          }]
+        }, {
+          "featureType": "road",
+          "elementType": "geometry.stroke",
+          "stylers": [{
+            "visibility": "off"
+          }]
+        }, {
+          "featureType": "road",
+          "elementType": "labels",
+          "stylers": [{
+            "visibility": "off"
+          }]
+        }, {
+          "featureType": "road.highway",
+          "elementType": "geometry.fill",
+          "stylers": [{
+            "color": "#ffe15f"
+          }]
+        }, {
+          "featureType": "road.highway",
+          "elementType": "geometry.stroke",
+          "stylers": [{
+            "color": "#efd151"
+          }]
+        }, {
+          "featureType": "road.arterial",
+          "elementType": "geometry.fill",
+          "stylers": [{
+            "color": "#ffffff"
+          }]
+        }, {
+          "featureType": "road.local",
+          "elementType": "geometry.fill",
+          "stylers": [{
+            "color": "black"
+          }]
+        }, {
+          "featureType": "transit.station.airport",
+          "elementType": "geometry.fill",
+          "stylers": [{
+            "color": "#cfb2db"
+          }]
+        }, {
+          "featureType": "water",
+          "elementType": "geometry",
+          "stylers": [{
+            "color": "#a2daf2"
+          }]
+        }]
 
-          //latlongs format
-          // var center = {
-          //   lat: 19.089560,
-          //   lng: 72.865614
-          // };
+        //latlongs format
+        // var center = {
+        //   lat: 19.089560,
+        //   lng: 72.865614
+        // };
 
-          // var centers = [{
-          //   lat: 19.089560,
-          //   lng: 72.865614
-          // }, {
-          //   lat: 51.470022,
-          //   lng: -0.454295
-          // }, {
-          //   lat: 29.276052,
-          //   lng: -81.034910
-          // }, {
-          //   lat: 51.512072,
-          //   lng: -0.144223
-          // }, {
-          //   lat: 52.923608,
-          //   lng: -1.482560
-          // }, {
-          //   lat: 51.899603,
-          //   lng: -1.153590
-          // }, {
-          //   lat: 51.470022,
-          //   lng: -0.454295
-          // }, {
-          //   lat: 25.253175,
-          //   lng: 55.365673
-          // }];
+        // var centers = [{
+        //   lat: 19.089560,
+        //   lng: 72.865614
+        // }, {
+        //   lat: 51.470022,
+        //   lng: -0.454295
+        // }, {
+        //   lat: 29.276052,
+        //   lng: -81.034910
+        // }, {
+        //   lat: 51.512072,
+        //   lng: -0.144223
+        // }, {
+        //   lat: 52.923608,
+        //   lng: -1.482560
+        // }, {
+        //   lat: 51.899603,
+        //   lng: -1.153590
+        // }, {
+        //   lat: 51.470022,
+        //   lng: -0.454295
+        // }, {
+        //   lat: 25.253175,
+        //   lng: 55.365673
+        // }];
+      }
+      line = _.map(centers, function () {
+        return {};
+      });
+      _.map(centers, function () {
+        markers.push({});
+      });
+
+
+      initMap = function () {
+        var $map = $('#map');
+        var mapDim = {
+          height: $map.height(),
+          width: $map.width()
         }
-        line = _.map(centers, function () {
-          return {};
-        });
-        _.map(centers, function () {
-          markers.push({});
-        });
 
-
-        initMap = function () {
-          var $map = $('#map');
-          var mapDim = {
-            height: $map.height(),
-            width: $map.width()
-          }
-
-          center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
-          if (typeof google === 'object' && typeof google.maps === 'object') {
-            var bounds = new google.maps.LatLngBounds();
-            setMarker = function (status, n, i) {
-              var jump = centers.length;
-              if (_.isEmpty(markers[i])) {
-                var position = new google.maps.LatLng(n.lat, n.lng);
-                // bounds.extend(position);
-                var obj = {
-                  position: position,
-                  map: map,
-                  icon: "img/maps/small-marker.png"
-                };
-                if (status) {
-                  obj.icon = "img/maps/marker.png";
-                  console.log("big marker icon set");
-                }
-                marker = new google.maps.Marker(obj);
-                markers[i] = marker;
-              } else {
-                markers[i].setIcon("img/maps/marker.png");
-              }
-            };
-
-            map = new google.maps.Map(document.getElementById('map'), {
-              draggable: true,
-              animation: google.maps.Animation.DROP,
-              center: center,
-              zoom: 4
-                // styles: mapStyle
-            });
-
-            commingMap = new google.maps.Map('', {
-              draggable: true,
-              animation: google.maps.Animation.DROP,
-              center: center,
-              zoom: 4
-                // styles: mapStyle
-            });
-
-
-            var step = 0;
-            var numSteps = 100; //Change this to set animation resolution
-             var lineSymbol = {
-                path: 'M 0,-1 0,1',
-                strokeOpacity: 1,
-                scale: 3
+        center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
+        if (typeof google === 'object' && typeof google.maps === 'object') {
+          var bounds = new google.maps.LatLngBounds();
+          setMarker = function (status, n, i) {
+            var jump = centers.length;
+            if (_.isEmpty(markers[i])) {
+              var position = new google.maps.LatLng(n.lat, n.lng);
+              // bounds.extend(position);
+              var obj = {
+                position: position,
+                map: map,
+                icon: "img/maps/small-marker.png"
               };
-            //Grey static polylines starts here
-            travelPath = new google.maps.Polyline({
-              path: centers,
-              geodesic: true,
-              strokeColor: 'grey',
-              strokeOpacity: 0,
-              strokeWeight: -1,
-               icons: [{
-                    icon: lineSymbol,
-                    offset: '0',
-                    repeat: '20px'
-                  }],
-            });
-            travelPath.setMap(map);
-            //Grey static polylines ends here
-
-
-            var myVar = setInterval(myTimer, 1000);
-
-            function myTimer() {
-              if (centers.length != 0) {
-                _.each(centers, function (n, index) {
-                  setMarker(false, n, index + 1);
-                });
-                setMarker(true, centers[0], 1);
-                clearInterval(myVar);
-              } else {
-                console.log("didnt got center");
+              if (status) {
+                obj.icon = "img/maps/marker.png";
+                obj.label = toString(i);
+                console.log("big marker icon set");
               }
+              marker = new google.maps.Marker(obj);
+              markers[i] = marker;
+            } else {
+              markers[i].setIcon("img/maps/marker.png");
+            }
+          };
+
+          map = new google.maps.Map(document.getElementById('map'), {
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            center: center,
+            zoom: 4
+              // styles: mapStyle
+          });
+
+          commingMap = new google.maps.Map('', {
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            center: center,
+            zoom: 4
+              // styles: mapStyle
+          });
+
+
+          var step = 0;
+          var numSteps = 100; //Change this to set animation resolution
+          var lineSymbol = {
+            path: 'M 0,-1 0,1',
+            strokeOpacity: 1,
+            scale: 3
+          };
+          //Grey static polylines starts here
+          travelPath = new google.maps.Polyline({
+            path: centers,
+            geodesic: true,
+            strokeColor: 'grey',
+            strokeOpacity: 0,
+            strokeWeight: -1,
+            icons: [{
+              icon: lineSymbol,
+              offset: '0',
+              repeat: '20px'
+            }],
+          });
+          travelPath.setMap(map);
+          //Grey static polylines ends here
+
+
+          var myVar = setInterval(myTimer, 1000);
+
+          function myTimer() {
+            if (centers.length != 0) {
+              _.each(centers, function (n, index) {
+                setMarker(false, n, index + 1);
+              });
+              setMarker(true, centers[0], 1);
+              clearInterval(myVar);
+
+              // var markers_cluster = centers.map(function (center, i) {
+              //   return new google.maps.Marker({
+              //     position: center,
+
+              //   });
+              // });
+              // var markerCluster = new MarkerClusterer(map, markers_cluster, {
+              //   imagePath: 'img/maps/marker_cluster'
+              // });
+
+            } else {
+              console.log("didnt got center");
+            }
+          };
+          // _.each(centers, function (n, index) {
+          //   setMarker(false, n, index + 1);
+          // });
+          // setMarker(true, centers[0], 1);
+
+          function getBoundsZoomLevel(bounds, mapDim) {
+            var WORLD_DIM = {
+              height: 256,
+              width: 256
             };
-            // _.each(centers, function (n, index) {
-            //   setMarker(false, n, index + 1);
-            // });
-            // setMarker(true, centers[0], 1);
+            var ZOOM_MAX = 21;
 
-            function getBoundsZoomLevel(bounds, mapDim) {
-              var WORLD_DIM = {
-                height: 256,
-                width: 256
-              };
-              var ZOOM_MAX = 21;
-
-              function latRad(lat) {
-                var sin = Math.sin(lat * Math.PI / 180);
-                var radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
-                return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
-              }
-
-              function zoom(mapPx, worldPx, fraction) {
-                return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2);
-              }
-
-              var ne = bounds.getNorthEast();
-              var sw = bounds.getSouthWest();
-
-              var latFraction = (latRad(ne.lat()) - latRad(sw.lat())) / Math.PI;
-
-              var lngDiff = ne.lng() - sw.lng();
-              var lngFraction = ((lngDiff < 0) ? (lngDiff + 360) : lngDiff) / 360;
-
-              var latZoom = zoom(mapDim.height, WORLD_DIM.height, latFraction);
-              var lngZoom = zoom(mapDim.width, WORLD_DIM.width, lngFraction);
-
-              return Math.min(latZoom, lngZoom, ZOOM_MAX);
+            function latRad(lat) {
+              var sin = Math.sin(lat * Math.PI / 180);
+              var radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
+              return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
             }
 
-            function redLineDraw(i, departure, arrival, percentComplete, value, flag) {
-              // console.log(percentComplete, flag);
-              var xdiff = (centers[i].lat - centers[i - 1].lat);
-              var ydiff = (centers[i].lng - centers[i - 1].lng);
-              // console.log(Math.abs(ydiff));
-              var currentZoom = currentZoom = map.getZoom();
-              var commingZoom;
+            function zoom(mapPx, worldPx, fraction) {
+              return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2);
+            }
 
-              // if (value) {
-              //   var commingMarkerBounds = new google.maps.LatLngBounds();
-              //   commingZoom = commingMap.getZoom();
-              //   commingMarkerBounds.extend(departure);
-              //   commingMarkerBounds.extend(arrival);
-              //   commingMap.fitBounds(commingMarkerBounds);
-              // }
+            var ne = bounds.getNorthEast();
+            var sw = bounds.getSouthWest();
 
-              if (value) {
-                var markerBounds = new google.maps.LatLngBounds();
-                markerBounds.extend(departure);
-                markerBounds.extend(arrival);
-                commingZoom = getBoundsZoomLevel(markerBounds, mapDim);
+            var latFraction = (latRad(ne.lat()) - latRad(sw.lat())) / Math.PI;
 
-                if (Math.abs(commingZoom - currentZoom) > 2) {
-                  if (commingZoom > currentZoom) {
-                    smoothZoom(map, commingZoom, currentZoom, true); //for zooming in
-                    commingZoom = currentZoom;
-                  } else if (commingZoom < currentZoom) {
-                    smoothZoom(map, commingZoom, currentZoom, false); //for zooming out
-                    commingZoom = currentZoom;
-                  }
+            var lngDiff = ne.lng() - sw.lng();
+            var lngFraction = ((lngDiff < 0) ? (lngDiff + 360) : lngDiff) / 360;
+
+            var latZoom = zoom(mapDim.height, WORLD_DIM.height, latFraction);
+            var lngZoom = zoom(mapDim.width, WORLD_DIM.width, lngFraction);
+
+            return Math.min(latZoom, lngZoom, ZOOM_MAX);
+          }
+
+          function redLineDraw(i, departure, arrival, percentComplete, value, flag) {
+            // console.log(percentComplete, flag);
+            var xdiff = (centers[i].lat - centers[i - 1].lat);
+            var ydiff = (centers[i].lng - centers[i - 1].lng);
+            // console.log(Math.abs(ydiff));
+            var currentZoom = currentZoom = map.getZoom();
+            var commingZoom;
+
+            // if (value) {
+            //   var commingMarkerBounds = new google.maps.LatLngBounds();
+            //   commingZoom = commingMap.getZoom();
+            //   commingMarkerBounds.extend(departure);
+            //   commingMarkerBounds.extend(arrival);
+            //   commingMap.fitBounds(commingMarkerBounds);
+            // }
+
+            if (value) {
+              var markerBounds = new google.maps.LatLngBounds();
+              markerBounds.extend(departure);
+              markerBounds.extend(arrival);
+              commingZoom = getBoundsZoomLevel(markerBounds, mapDim);
+
+              if (Math.abs(commingZoom - currentZoom) > 2) {
+                if (commingZoom > currentZoom) {
+                  smoothZoom(map, commingZoom, currentZoom, true); //for zooming in
+                  commingZoom = currentZoom;
+                } else if (commingZoom < currentZoom) {
+                  smoothZoom(map, commingZoom, currentZoom, false); //for zooming out
+                  commingZoom = currentZoom;
                 }
-
-                map.fitBounds(markerBounds);
-                // currentZoom = map.getZoom();
-                console.log(currentZoom, commingZoom);
               }
 
-              var frac1 = xdiff / 100;
-              var frac2 = ydiff / 100;
-              var iniLat = centers[i - 1].lat;
-              var iniLng = centers[i - 1].lng;
-              var timePerStep = frac1; //Change this to alter animation speed
-              var lineSymbol = {
-                path: 'M 0,-1 0,1',
+              map.fitBounds(markerBounds);
+              // currentZoom = map.getZoom();
+              console.log(currentZoom, commingZoom);
+            }
+
+            var frac1 = xdiff / 100;
+            var frac2 = ydiff / 100;
+            var iniLat = centers[i - 1].lat;
+            var iniLng = centers[i - 1].lng;
+            var timePerStep = frac1; //Change this to alter animation speed
+            var lineSymbol = {
+              path: 'M 0,-1 0,1',
+              strokeOpacity: 1,
+              scale: 4
+            };
+            if (percentComplete == 100 && flag) {
+              setMarker(true, centers[i], i + 1);
+            }
+            if (_.isEmpty(line[i])) {
+              line[i] = new google.maps.Polyline({
+                path: [departure, departure],
+                strokeColor: "#f2675b",
                 strokeOpacity: 1,
-                scale: 4
-              };
-              if (percentComplete == 100 && flag) {
-                setMarker(true, centers[i], i + 1);
-              }
-              if (_.isEmpty(line[i])) {
-                line[i] = new google.maps.Polyline({
-                  path: [departure, departure],
-                  strokeColor: "#f2675b",
-                  strokeOpacity: 1,
-                  // icons: [{
-                  //   icon: lineSymbol,
-                  //   offset: '0',
-                  //   repeat: '25px'
-                  // }],
-                  strokeWeight: 3,
-                  geodesic: true, //set to false if you want straight line instead of arc
-                  map: map,
-                });
-              }
-              var drawLine = function (departure, arrival, percent, i, value) {
-                percentFrac = percent / 100;
-                var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
-                line[i].setPath([departure, are_we_there_yet]);
-                //moving center starts here
-                if (value) {
-                  // center = {
-                  //   "lat": iniLat + (frac1 * percent),
-                  //   "lng": iniLng + (frac2 * percent)
-                  // }
-                  center = {
-                    "lat": iniLat + (centers[i].lat - centers[i - 1].lat) / 2,
-                    "lng": iniLng + (centers[i].lng - centers[i - 1].lng) / 2
-                  }
-                  center = new google.maps.LatLng(center.lat, center.lng);
-                }
-                // offsetCenter(center, 100, 0);
-                map.setCenter(center);
-                // map.panBy(-150, 0);
-                //moving center ends here
-
-                // if (percent >= 100) {
-                //   setMarker(true, center);
+                // icons: [{
+                //   icon: lineSymbol,
+                //   offset: '0',
+                //   repeat: '25px'
+                // }],
+                strokeWeight: 3,
+                geodesic: true, //set to false if you want straight line instead of arc
+                map: map,
+              });
+            }
+            var drawLine = function (departure, arrival, percent, i, value) {
+              percentFrac = percent / 100;
+              var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
+              line[i].setPath([departure, are_we_there_yet]);
+              //moving center starts here
+              if (value) {
+                // center = {
+                //   "lat": iniLat + (frac1 * percent),
+                //   "lng": iniLng + (frac2 * percent)
                 // }
-              };
-              drawLine(departure, arrival, percentComplete, i, value);
-            };
-
-            function smoothZoom(map, level, cnt, mode) {
-              if (mode == true) {
-                if (cnt >= level) { //zooming in
-                  return;
-                } else {
-                  var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
-                    google.maps.event.removeListener(z);
-                    console.log("zooming in smoothZoom");
-                    smoothZoom(map, level, cnt + 1, true);
-                  });
-                  setTimeout(function () {
-                    console.log("zooming in-->" + level, cnt);
-                    map.setZoom(cnt)
-                  }, 0.01);
+                center = {
+                  "lat": iniLat + (centers[i].lat - centers[i - 1].lat) / 2,
+                  "lng": iniLng + (centers[i].lng - centers[i - 1].lng) / 2
                 }
+                center = new google.maps.LatLng(center.lat, center.lng);
+              }
+              // offsetCenter(center, 100, 0);
+              map.setCenter(center);
+              // map.panBy(-150, 0);
+              //moving center ends here
+
+              // if (percent >= 100) {
+              //   setMarker(true, center);
+              // }
+            };
+            drawLine(departure, arrival, percentComplete, i, value);
+          };
+
+          function smoothZoom(map, level, cnt, mode) {
+            if (mode == true) {
+              if (cnt >= level) { //zooming in
+                return;
               } else {
-                if (cnt <= (level - 1)) { //zooming out
-                  return;
-                } else {
-                  var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
-                    google.maps.event.removeListener(z);
-                    console.log("zooming out smoothZoom");
-                    smoothZoom(map, level, cnt - 1, false);
-                  });
-                  setTimeout(function () {
-                    console.log("zooming out-->" + level, cnt);
-                    map.setZoom(cnt)
-                  }, 0.01);
-                }
+                var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
+                  google.maps.event.removeListener(z);
+                  console.log("zooming in smoothZoom");
+                  smoothZoom(map, level, cnt + 1, true);
+                });
+                setTimeout(function () {
+                  console.log("zooming in-->" + level, cnt);
+                  map.setZoom(cnt)
+                }, 0.01);
               }
-            };
-            pointsForLine = function (i, percentComplete, value, flag) {
-              var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
-              var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
-              step = 0;
-              redLineDraw(i, departure, arrival, percentComplete, value, flag);
-              var linesCount = line.length - 1;
-              var markerCount = markers.length - 1;
+            } else {
+              if (cnt <= (level - 1)) { //zooming out
+                return;
+              } else {
+                var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
+                  google.maps.event.removeListener(z);
+                  console.log("zooming out smoothZoom");
+                  smoothZoom(map, level, cnt - 1, false);
+                });
+                setTimeout(function () {
+                  console.log("zooming out-->" + level, cnt);
+                  map.setZoom(cnt)
+                }, 0.01);
+              }
+            }
+          };
+          pointsForLine = function (i, percentComplete, value, flag) {
+            var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
+            var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
+            step = 0;
+            redLineDraw(i, departure, arrival, percentComplete, value, flag);
+            var linesCount = line.length - 1;
+            var markerCount = markers.length - 1;
 
-              //clearPolyLines starts
-              while ((linesCount >= (i + 1)) && (value)) {
-                if (!_.isEmpty(line[linesCount])) {
-                  line[linesCount].setMap(null);
-                  line[linesCount] = {};
-                };
-                // markers[linesCount].setIcon("img/maps/small-marker.png");
-                linesCount--;
+            //clearPolyLines starts
+            while ((linesCount >= (i + 1)) && (value)) {
+              if (!_.isEmpty(line[linesCount])) {
+                line[linesCount].setMap(null);
+                line[linesCount] = {};
               };
-              while ((i < markerCount) && (value == true) && (percentComplete < 100)) {
-                markers[markerCount].setIcon("img/maps/small-marker.png");
-                markerCount--;
-              }
-              //clearPolyLines ends
-              //draw succeeding polyLines starts
-              if (i > 1) {
-                pointsForLine(i - 1, 100);
-                count = centers.length;
-              };
-              //draw succeeding polyLines end
+              // markers[linesCount].setIcon("img/maps/small-marker.png");
+              linesCount--;
             };
-          }
-        };
-        setTimeout(function () {
-          initMap();
-        }, 1000);
+            while ((i < markerCount) && (value == true) && (percentComplete < 100)) {
+              markers[markerCount].setIcon("img/maps/small-marker.png");
+              markerCount--;
+            }
+            //clearPolyLines ends
+            //draw succeeding polyLines starts
+            if (i > 1) {
+              pointsForLine(i - 1, 100);
+              count = centers.length;
+            };
+            //draw succeeding polyLines end
+          };
+        }
+      };
+      setTimeout(function () {
+        initMap();
+      }, 1000);
+    }
+    //maps integration ends here
+
+    $scope.template = TemplateService.changecontent("ongojourney");
+    $scope.menutitle = NavigationService.makeactive("OnGoJourney");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+
+    $scope.viewCardComment = false;
+    $scope.getCard = "";
+
+
+    $scope.getCommentsData = function (id, uniqueId, postString, likeDone, likeCount) {
+      console.log(likeCount);
+      $scope.previousId;
+      $scope.post_id = id;
+      $scope.post_uniqueId = uniqueId;
+      $scope.post_postString = postString;
+      $scope.post_likeDone = likeDone;
+      // //open modal starts
+      // $uibModal.open({
+      //   templateUrl: "views/modal/notify.html",
+      //   animation: true,
+      //   scope: $scope,`
+      //   windowClass: "notify-popup"
+      // });
+      // //open model ends
+      var callback = function (data) {
+        $scope.uniqueArr = [];
+        $scope.listOfComments = data.data;
+        console.log($scope.listOfComments);
+        $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+        console.log($scope.uniqueArr);
       }
-      //maps integration ends here
 
-      $scope.template = TemplateService.changecontent("ongojourney");
-      $scope.menutitle = NavigationService.makeactive("OnGoJourney");
-      TemplateService.title = $scope.menutitle;
-      $scope.navigation = NavigationService.getnav();
-
-
-      $scope.viewCardComment = false;
-      $scope.getCard = "";
-
-
-      $scope.getCommentsData = function (id, uniqueId, postString, likeDone, likeCount) {
-        console.log(likeCount);
-        $scope.previousId;
-        $scope.post_id = id;
-        $scope.post_uniqueId = uniqueId;
-        $scope.post_postString = postString;
-        $scope.post_likeDone = likeDone;
-        // //open modal starts
-        // $uibModal.open({
-        //   templateUrl: "views/modal/notify.html",
-        //   animation: true,
-        //   scope: $scope,`
-        //   windowClass: "notify-popup"
-        // });
-        // //open model ends
-        var callback=function(data){
-              $scope.uniqueArr = [];
-              $scope.listOfComments = data.data;
-              console.log($scope.listOfComments);
-              $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
-              console.log($scope.uniqueArr);
-        }
-
-        if ($scope.previousId != id) {
-             $scope.listOfComments=[];
-            $scope.viewCardComment = true;
-            $scope.getCard = "view-whole-card";
-            console.log($scope.viewCardComment);
-            OnGoJourney.getPostsComment(id,callback);
+      if ($scope.previousId != id) {
+        $scope.listOfComments = [];
+        $scope.viewCardComment = true;
+        $scope.getCard = "view-whole-card";
+        console.log($scope.viewCardComment);
+        OnGoJourney.getPostsComment(id, callback);
+      } else {
+        if ($scope.viewCardComment) {
+          $scope.viewCardComment = false;
+          $scope.getCard = "";
+          console.log($scope.viewCardComment);
         } else {
-           if ($scope.viewCardComment) {
-            $scope.viewCardComment = false;
-            $scope.getCard = "";
-            console.log($scope.viewCardComment);
-          }else{
-             $scope.listOfComments=[];
-            $scope.viewCardComment = true;
-            $scope.getCard = "view-whole-card";
-            console.log($scope.viewCardComment);
-            OnGoJourney.getPostsComment(id,callback);
-          }
+          $scope.listOfComments = [];
+          $scope.viewCardComment = true;
+          $scope.getCard = "view-whole-card";
+          console.log($scope.viewCardComment);
+          OnGoJourney.getPostsComment(id, callback);
         }
-        $scope.previousId=id;
+      }
+      $scope.previousId = id;
     };
 
     $scope.postComment = function (uniqueId, comment, postId) {
-      var type="post";
-      var callback=function(data){
-          $scope.listOfComments = data.data;
-          document.getElementById('enterComment').value = "";
+      var type = "post";
+      var callback = function (data) {
+        $scope.listOfComments = data.data;
+        document.getElementById('enterComment').value = "";
       }
-      OnGoJourney.postComment(uniqueId,comment,type,postId,callback);
+      OnGoJourney.postComment(uniqueId, comment, type, postId, callback);
     };
 
     $scope.likeUnlikePost = function (uniqueId) {
@@ -1440,13 +1452,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       })
     };
 
-    $scope.focusThis=false;
-    $scope.focus=function(){
+    $scope.focusThis = false;
+    $scope.focus = function () {
       console.log("focus called");
-      $scope.focusThis=true;
+      $scope.focusThis = true;
     };
 
-    $scope.hours = _.range(1, 13, 1); $scope.mins = _.range(1, 60, 1); $scope.change = function (id, val) {
+    $scope.hours = _.range(1, 13, 1);
+    $scope.mins = _.range(1, 60, 1);
+    $scope.change = function (id, val) {
       if (id == 'hour') {
         $scope.time.hour = val;
       } else if (id == 'min') {
@@ -1508,7 +1522,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     // share whole trip social
-    $scope.viewSocialShare = false; $scope.shareSocial = function () {
+    $scope.viewSocialShare = false;
+    $scope.shareSocial = function () {
       if ($scope.viewSocialShare == false) {
         $scope.viewSocialShare = true;
       } else {
@@ -1518,7 +1533,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // share whole trip social end
 
     // share single trip / card
-    $scope.viewSingleTrip = -1; $scope.shareTrip = function (index) {
+    $scope.viewSingleTrip = -1;
+    $scope.shareTrip = function (index) {
       console.log($scope.viewSingleTrip);
       if ($scope.viewSingleTrip == index) {
         $scope.viewSingleTrip = -1;
@@ -1531,13 +1547,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.options = {
       minDate: new Date(),
       showWeeks: false
-    }; $scope.format = "yyyy/MM/dd";
+    };
+    $scope.format = "yyyy/MM/dd";
 
 
 
     // edit journey name
     //edit journey name modal
-    $scope.editName = {}; $scope.nameJourney = function (name) {
+    $scope.editName = {};
+    $scope.nameJourney = function (name) {
       console.log(name);
       $scope.editName.name = name;
       modal = $uibModal.open({
@@ -1583,42 +1601,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.setJourneyCoverPhoto = function (id, coverPhoto) {
-      var formData = {
-        "_id": id,
-        "coverPhoto": coverPhoto
-      };
-      var callback = function () {
-        modal.close();
+        var formData = {
+          "_id": id,
+          "coverPhoto": coverPhoto
+        };
+        var callback = function () {
+          modal.close();
+        }
+        OnGoJourney.setJourneyCoverPhoto(formData, callback);
       }
-      OnGoJourney.setJourneyCoverPhoto(formData, callback);
-    }
-    // cover photo modal ends
-    //edit journey cover photo ends
-    // $scope.galleryCover = [
-    //   'img/london.jpg',
-    //   'img/paris.jpg',
-    //   'img/india-gate.jpg',
-    //   'img/slider1.jpg',
-    //   'img/slider2.jpg',
-    //   'img/blog/blog-post.jpg',
-    //   'img/blog/blog-post2.jpg',
-    //   'img/blog/blog-post3.jpg',
-    //   'img/london.jpg',
-    //   'img/paris.jpg',
-    //   'img/india-gate.jpg',
-    //   'img/slider1.jpg',
-    //   'img/slider2.jpg',
-    //   'img/blog/blog-post.jpg',
-    //   'img/blog/blog-post2.jpg',
-    //   'img/blog/blog-post3.jpg',
-    // ];
+      // cover photo modal ends
+      //edit journey cover photo ends
+      // $scope.galleryCover = [
+      //   'img/london.jpg',
+      //   'img/paris.jpg',
+      //   'img/india-gate.jpg',
+      //   'img/slider1.jpg',
+      //   'img/slider2.jpg',
+      //   'img/blog/blog-post.jpg',
+      //   'img/blog/blog-post2.jpg',
+      //   'img/blog/blog-post3.jpg',
+      //   'img/london.jpg',
+      //   'img/paris.jpg',
+      //   'img/india-gate.jpg',
+      //   'img/slider1.jpg',
+      //   'img/slider2.jpg',
+      //   'img/blog/blog-post.jpg',
+      //   'img/blog/blog-post2.jpg',
+      //   'img/blog/blog-post3.jpg',
+      // ];
 
 
     // cover photo end
     $scope.cropCover = function (imgCrop) {
       $scope.showCover = imgCrop;
       $scope.cropImage = true;
-    }; $scope.viewPrev = function () {
+    };
+    $scope.viewPrev = function () {
       // $scope.showCover = imgCrop;
       $scope.cropImage = false;
     };
@@ -1739,42 +1758,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // country modal ends
 
     $scope.rateThisCountry = function (journeyId, countryId, formData, index) {
-      var result = {
-        journey: journeyId,
-        country: countryId,
-        review: formData.fillMeIn,
-        rating: formData.rate
-      };
-      var callback = function () {
+        var result = {
+          journey: journeyId,
+          country: countryId,
+          review: formData.fillMeIn,
+          rating: formData.rate
+        };
+        var callback = function () {
 
-        $scope.journey.review[index].review = result.review;
-        $scope.journey.review[index].rating = result.rating;
+          $scope.journey.review[index].review = result.review;
+          $scope.journey.review[index].rating = result.rating;
 
-        // console.log($scope.journey.review[index].review,$scope.journey.review[index].rating);
-      };
-      OnGoJourney.rateThisCountry(result, callback);
-      $scope.reviewCountryCount = $scope.reviewCountryCount + 1;
-      var len = $scope.journey.countryVisited.length;
-      if ($scope.reviewCountryCount < len) {
-        $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
-        $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
-      } else {
-        console.log(modal);
-        modal.close();
+          // console.log($scope.journey.review[index].review,$scope.journey.review[index].rating);
+        };
+        OnGoJourney.rateThisCountry(result, callback);
+        $scope.reviewCountryCount = $scope.reviewCountryCount + 1;
+        var len = $scope.journey.countryVisited.length;
+        if ($scope.reviewCountryCount < len) {
+          $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
+          $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
+        } else {
+          console.log(modal);
+          modal.close();
+
+        }
+        //  test=$scope.journey.review[$scope.reviewCountryCount].review
+        // $scope.review.fillM=test;
+        // console.log($scope.review.fil);
+        // $scope.review.fillMeIn=$scope.journey.review[$scope.reviewCountryCount].review;
+
+
 
       }
-      //  test=$scope.journey.review[$scope.reviewCountryCount].review
-      // $scope.review.fillM=test;
-      // console.log($scope.review.fil);
-      // $scope.review.fillMeIn=$scope.journey.review[$scope.reviewCountryCount].review;
-
-
-
-    }
-    // Rating country ends
+      // Rating country ends
     $scope.hoveringOver = function (value) {
       $scope.overStar = value;
-    }; $scope.ratingStates = [{
+    };
+    $scope.ratingStates = [{
       stateOn: 'fa fa-star-o',
       stateOff: 'fa fa-star'
     }, {
@@ -3717,106 +3737,117 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     var updateBadgeBar = function () {
-      $scope.tik1 = true;
-      $scope.tik2 = false;
-      $scope.tik3 = false;
-      $scope.tik4 = false;
-      $scope.tik5 = false;
-      $scope.newbie = false;
-      $scope.justgotwings = false;
-      $scope.globetrotter = false;
-      $scope.wayfarer = false;
-      $scope.nomad = false;
-      if (len < 4) {
-        $scope.newbie = true;
         $scope.tik1 = true;
-        $scope.mystyle1 = {
-          "width": (len / 3) * 100 + '%',
-          "background-color": "#ff6759",
+        $scope.tik2 = false;
+        $scope.tik3 = false;
+        $scope.tik4 = false;
+        $scope.tik5 = false;
+        $scope.newbie = false;
+        $scope.justgotwings = false;
+        $scope.globetrotter = false;
+        $scope.wayfarer = false;
+        $scope.nomad = false;
+        if (len < 4) {
+          $scope.newbie = true;
+          $scope.tik1 = true;
+          $scope.mystyle1 = {
+            "width": (len / 3) * 100 + '%',
+            "background-color": "#ff6759",
+          }
+        } else if (len < 8) {
+          $scope.justgotwings = true;
+          $scope.tik1 = true;
+          $scope.tik2 = true;
+          $scope.mystyle1 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle2 = {
+            "width": ((len - 3) / 4) * 100 + '%',
+            "background-color": "#ff6759",
+          };
+        } else if (len < 16) {
+          $scope.globetrotter = true;
+          $scope.tik1 = true;
+          $scope.tik2 = true;
+          $scope.tik3 = true;
+          $scope.mystyle1 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle2 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle3 = {
+            "width": ((len - 7) / 8) * 100 + '%',
+            "background-color": "#ff6759",
+          };
+        } else if (len < 25) {
+          $scope.wayfarer = true;
+          $scope.tik1 = true;
+          $scope.tik2 = true;
+          $scope.tik3 = true;
+          $scope.tik4 = true;
+          $scope.mystyle1 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle2 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle3 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle4 = {
+            "width": ((len - 15) / 9) * 100 + '%',
+            "background-color": "#ff6759",
+          };
+        } else if (len > 24) {
+          $scope.nomad = true;
+          $scope.tik1 = true;
+          $scope.tik2 = true;
+          $scope.tik3 = true;
+          $scope.tik4 = true;
+          $scope.tik5 = true;
+          $scope.mystyle1 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle2 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle3 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle4 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle5 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
         }
-      } else if (len < 8) {
-        $scope.justgotwings = true;
-        $scope.tik1 = true;
-        $scope.tik2 = true;
-        $scope.mystyle1 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle2 = {
-          "width": ((len - 3) / 4) * 100 + '%',
-          "background-color": "#ff6759",
-        };
-      } else if (len < 16) {
-        $scope.globetrotter = true;
-        $scope.tik1 = true;
-        $scope.tik2 = true;
-        $scope.tik3 = true;
-        $scope.mystyle1 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle2 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle3 = {
-          "width": ((len - 7) / 8) * 100 + '%',
-          "background-color": "#ff6759",
-        };
-      } else if (len < 25) {
-        $scope.wayfarer = true;
-        $scope.tik1 = true;
-        $scope.tik2 = true;
-        $scope.tik3 = true;
-        $scope.tik4 = true;
-        $scope.mystyle1 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle2 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle3 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle4 = {
-          "width": ((len - 15) / 9) * 100 + '%',
-          "background-color": "#ff6759",
-        };
-      } else if (len > 24) {
-        $scope.nomad = true;
-        $scope.tik1 = true;
-        $scope.tik2 = true;
-        $scope.tik3 = true;
-        $scope.tik4 = true;
-        $scope.tik5 = true;
-        $scope.mystyle1 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle2 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle3 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle4 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle5 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
       }
-    }
+      //badge-bar ends here
+    $scope.testing = function (type, urlSlug) {
 
+      if (type == "travel-life") {
+        $state.go('ongojourney', {
+          id: urlSlug
+        });
+      } else if (type == "quick-itinerary") {
+        $state.go('userquickitinerary', {
+          id: urlSlug
+        });
+      }
+    };
 
-    //badge-bar ends here
 
     //Integration Section Ends here
     {
@@ -6530,7 +6561,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.dItinerary={};
+    $scope.dItinerary = {};
     $scope.dItineraryType = [{
       img: "img/itinerary/adventure.png",
       caption: "Adventure",
@@ -6689,9 +6720,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.qItinerary = {};
     $scope.qItinerary.itineraryType = [];
     $scope.qItinerary.countryVisited = [];
-    $scope.qItinerary.photos=[];
-    $scope.qItinerary.videos=[];
-    $scope.qItinerary.hashtag=[];
+    $scope.qItinerary.photos = [];
+    $scope.qItinerary.videos = [];
+    $scope.qItinerary.hashtag = [];
     $scope.qItinerary.photos = [];
     $scope.previousCountryId = [];
 
@@ -6777,7 +6808,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var countriesCallback = function (data) {
       countries = data.data;
       $scope.countries = data.data;
-      $scope.currency=data.data;
+      $scope.currency = data.data;
     };
 
     NavigationService.getAllCountries(countriesCallback, function () {
@@ -6884,9 +6915,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.upload = function (status) {
       $scope.qItinerary.status = status;
-      $scope.qItinerary.duration=parseInt($scope.qItinerary.duration);
-      $scope.qItinerary.year=parseInt($scope.qItinerary.year);
-      $scope.qItinerary.cost=parseInt($scope.qItinerary.cost);
+      $scope.qItinerary.duration = parseInt($scope.qItinerary.duration);
+      $scope.qItinerary.year = parseInt($scope.qItinerary.year);
+      $scope.qItinerary.cost = parseInt($scope.qItinerary.cost);
       $scope.qItinerary.countryVisited = $scope.addCountry;
       console.log($scope.qItinerary);
       NavigationService.uploadQuickItinerary($scope.qItinerary);
@@ -6898,9 +6929,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.getYear = [];
     $scope.viewYear = function () {
       $scope.viewYear.show = !$scope.viewYear.show
-        var d = new Date();
-        var n = d.getFullYear();
-        $scope.getYear = _.rangeRight(1900, n + 1);
+      var d = new Date();
+      var n = d.getFullYear();
+      $scope.getYear = _.rangeRight(1900, n + 1);
 
     };
 
@@ -7258,7 +7289,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, ];
 
   })
-  .controller('UserQuickItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('UserQuickItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, Itinerary) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -7268,6 +7299,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+
+    //Integration starts here
+    var slug = $stateParams.id;
+    Itinerary.getOneQuickItinerary(slug,function(data){
+      $scope.itinerary=data.data;
+      console.log($scope.itinerary);
+    });
+    //integration ends here
     $scope.showClass = "close-gallery";
     $scope.viewGallery = function () {
       if ($scope.showClass == "close-gallery") {
@@ -8209,2609 +8248,2602 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   })
 
 .controller('headerctrl', function ($scope, TemplateService, NavigationService, $state, $interval) {
-  $scope.template = TemplateService;
+    $scope.template = TemplateService;
 
-  NavigationService.getProfile(globalGetProfile, function (err) {
-    console.log(err);
-  });
-  $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
-  $scope.userData = $.jStorage.get("profile");
-  $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-    $(window).scrollTop(0);
-  });
-  $scope.oneAtATime = true;
-  $.fancybox.close(true);
-  $scope.getslide = "menu-out";
-  $scope.getnav = function () {
-    if ($scope.getslide == "menu-in") {
-      $scope.getslide = "menu-out";
-      $scope.onebar = "";
-      $scope.secondbar = "";
-      $scope.thirdbar = "";
-      $scope.buttonpos = "";
-    } else {
-      $scope.getslide = "menu-in";
-      $scope.onebar = "firstbar";
-      $scope.secondbar = "secondbar";
-      $scope.thirdbar = "thirdbar";
-      $scope.buttonpos = "buttonpos";
-    }
-  };
-  $scope.isopen = false;
-  $scope.opensearch = function () {
-    $scope.isopen = !$scope.isopen;
-  };
-  if (typeof $.fn.fullpage.destroy == 'function') {
-    $.fn.fullpage.destroy('all');
-  }
-
-  $scope.logout = function () {
-    NavigationService.logout(function () {
-        $.jStorage.flush();
-        $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
-        $state.go('home');
-      },
-      function (err) {
-        console.log(err);
-      });
-  };
-
-})
-
-.controller('AgentloginCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
-  $scope.template = TemplateService.changecontent("agent-login"); //Use same name of .html file
-  $scope.menutitle = NavigationService.makeactive("Agent Login"); //This is the Title of the Website
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
-  $scope.oneAtATime = true;
-  //about textarea counter
-  $scope.$on('$viewContentLoaded', function () {
-    $timeout(function () {
-      $('#textareaChars').keyup(updateCount);
-      $('#textareaChars').keydown(updateCount);
-      $('#remainingC').text(0 + '/ 500');
-
-      function updateCount() {
-        var count = $('#textareaChars').val().length;
-        $('#remainingC').text(count + '/ 500');
-      }
-    }, 100);
-  });
-
-  //about textarea counter end
-  $scope.agentloginView = 1;
-  $scope.agentSec = function (val) {
-      if (val == 1) {
-        $scope.agentloginView = 1;
-      } else if (val == 2) {
-        $scope.agentloginView = 2;
-        console.log(2);
-      } else if (val == 3) {
-        $scope.agentloginView = 3;
-      } else if (val == 4) {
-        $scope.agentloginView = 4;
-      } else if (val == 5) {
-        $scope.agentloginView = 5;
-      } else if (val == 6) {
-        $scope.agentloginView = 6;
-      } else if (val == 7) {
-        $scope.agentloginView = 7;
-      } else if (val == 8) {
-        $scope.agentloginView = 8;
-      } else if (val == 9) {
-        $scope.agentloginView = 9;
+    NavigationService.getProfile(globalGetProfile, function (err) {
+      console.log(err);
+    });
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+    $scope.userData = $.jStorage.get("profile");
+    $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+      $(window).scrollTop(0);
+    });
+    $scope.oneAtATime = true;
+    $.fancybox.close(true);
+    $scope.getslide = "menu-out";
+    $scope.getnav = function () {
+      if ($scope.getslide == "menu-in") {
+        $scope.getslide = "menu-out";
+        $scope.onebar = "";
+        $scope.secondbar = "";
+        $scope.thirdbar = "";
+        $scope.buttonpos = "";
       } else {
-        $scope.agentloginView = 1;
+        $scope.getslide = "menu-in";
+        $scope.onebar = "firstbar";
+        $scope.secondbar = "secondbar";
+        $scope.thirdbar = "thirdbar";
+        $scope.buttonpos = "buttonpos";
       }
+    };
+    $scope.isopen = false;
+    $scope.opensearch = function () {
+      $scope.isopen = !$scope.isopen;
+    };
+    if (typeof $.fn.fullpage.destroy == 'function') {
+      $.fn.fullpage.destroy('all');
     }
-    // category of Specialisation array
-  $scope.categoriesSpecial = [{
-    agtcatImg: "img/agt-cat1.png",
-    catwidth: "35px",
-    agtcatCap: "Adventure"
-  }, {
-    agtcatImg: "img/agt-cat2.png",
-    catwidth: "33px",
-    agtcatCap: "Business"
-  }, {
-    agtcatImg: "img/agt-cat3.png",
-    catwidth: "48px",
-    agtcatCap: "Family"
-  }, {
-    agtcatImg: "img/agt-cat4.png",
-    catwidth: "35px",
-    agtcatCap: "Romance"
-  }, {
-    agtcatImg: "img/agt-cat5.png",
-    catwidth: "35px",
-    agtcatCap: "Backpacking"
-  }, {
-    agtcatImg: "img/agt-cat6.png",
-    catwidth: "33px",
-    agtcatCap: "Budget"
-  }, {
-    agtcatImg: "img/agt-cat7.png",
-    catwidth: "33px",
-    agtcatCap: "Luxury"
-  }, {
-    agtcatImg: "img/agt-cat8.png",
-    catwidth: "38px",
-    agtcatCap: "Religious"
-  }, {
-    agtcatImg: "img/agt-cat9.png",
-    catwidth: "35px",
-    agtcatCap: "Friends"
-  }];
-  // category of Specialisation array end
-  //country of Specialisation accordion
-  $scope.agtRegionSpcl = [{
-    regionName: "Africa",
-    countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-  }, {
-    regionName: "Asia",
-    countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-  }, {
-    regionName: "Europe",
-    countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-  }, {
-    regionName: "North America",
-    countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-  }, {
-    regionName: "Ocenia",
-    countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-  }, {
-    regionName: "South America",
-    countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", ]
-  }];
-  //country of Specialisation accordion end
 
-  //Services
-  $scope.agtServicesSpcl = [
-    'Tours And Packages', 'Day Tours', 'Outdoors & Excursions', 'Flights', 'Cruise', 'MICE', 'Personal', 'Business Travel', 'Car Rentals', 'Visas', 'Fully Independent Traveller', 'Accomodation', 'Travel Insurance', 'Sports & Events', 'Forex', 'Holidays', 'Festival & Concerts', 'Transportation'
-  ];
-  //Services end
-})
+    $scope.logout = function () {
+      NavigationService.logout(function () {
+          $.jStorage.flush();
+          $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+          $state.go('home');
+        },
+        function (err) {
+          console.log(err);
+        });
+    };
 
-.controller('AgentsettingCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
-  $scope.template = TemplateService.changecontent("agent-setting"); //Use same name of .html file
-  $scope.menutitle = NavigationService.makeactive("Agent Settings"); //This is the Title of the Website
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
-  $scope.oneAtATime = true;
+  })
+  .controller('AgentloginCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    $scope.template = TemplateService.changecontent("agent-login"); //Use same name of .html file
+    $scope.menutitle = NavigationService.makeactive("Agent Login"); //This is the Title of the Website
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.oneAtATime = true;
+    //about textarea counter
+    $scope.$on('$viewContentLoaded', function () {
+      $timeout(function () {
+        $('#textareaChars').keyup(updateCount);
+        $('#textareaChars').keydown(updateCount);
+        $('#remainingC').text(0 + '/ 500');
 
-  //country setting accordion
-  $scope.agtRegionSetting = [{
-    settRegion: "Africa",
-    settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-  }, {
-    settRegion: "Asia",
-    settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-  }, {
-    settRegion: "Europe",
-    settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-  }, {
-    settRegion: "North America",
-    settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-  }, {
-    settRegion: "Ocenia",
-    settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-  }, {
-    settRegion: "South America",
-    settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", ]
-  }];
-  //country setting accordion end
+        function updateCount() {
+          var count = $('#textareaChars').val().length;
+          $('#remainingC').text(count + '/ 500');
+        }
+      }, 100);
+    });
 
-  // Textarea counter
-  $scope.$on('$viewContentLoaded', function () {
-    $timeout(function () {
-      $('#textareaChars').keyup(updateCount);
-      $('#textareaChars').keydown(updateCount);
-      $('#remainAbt').text(0 + '/ 500');
-
-      function updateCount() {
-        var count = $('#textareaChars').val().length;
-        $('#remainAbt').text(count + '/ 500');
+    //about textarea counter end
+    $scope.agentloginView = 1;
+    $scope.agentSec = function (val) {
+        if (val == 1) {
+          $scope.agentloginView = 1;
+        } else if (val == 2) {
+          $scope.agentloginView = 2;
+          console.log(2);
+        } else if (val == 3) {
+          $scope.agentloginView = 3;
+        } else if (val == 4) {
+          $scope.agentloginView = 4;
+        } else if (val == 5) {
+          $scope.agentloginView = 5;
+        } else if (val == 6) {
+          $scope.agentloginView = 6;
+        } else if (val == 7) {
+          $scope.agentloginView = 7;
+        } else if (val == 8) {
+          $scope.agentloginView = 8;
+        } else if (val == 9) {
+          $scope.agentloginView = 9;
+        } else {
+          $scope.agentloginView = 1;
+        }
       }
-    }, 100);
-  });
-  // Textarea counter end
+      // category of Specialisation array
+    $scope.categoriesSpecial = [{
+      agtcatImg: "img/agt-cat1.png",
+      catwidth: "35px",
+      agtcatCap: "Adventure"
+    }, {
+      agtcatImg: "img/agt-cat2.png",
+      catwidth: "33px",
+      agtcatCap: "Business"
+    }, {
+      agtcatImg: "img/agt-cat3.png",
+      catwidth: "48px",
+      agtcatCap: "Family"
+    }, {
+      agtcatImg: "img/agt-cat4.png",
+      catwidth: "35px",
+      agtcatCap: "Romance"
+    }, {
+      agtcatImg: "img/agt-cat5.png",
+      catwidth: "35px",
+      agtcatCap: "Backpacking"
+    }, {
+      agtcatImg: "img/agt-cat6.png",
+      catwidth: "33px",
+      agtcatCap: "Budget"
+    }, {
+      agtcatImg: "img/agt-cat7.png",
+      catwidth: "33px",
+      agtcatCap: "Luxury"
+    }, {
+      agtcatImg: "img/agt-cat8.png",
+      catwidth: "38px",
+      agtcatCap: "Religious"
+    }, {
+      agtcatImg: "img/agt-cat9.png",
+      catwidth: "35px",
+      agtcatCap: "Friends"
+    }];
+    // category of Specialisation array end
+    //country of Specialisation accordion
+    $scope.agtRegionSpcl = [{
+      regionName: "Africa",
+      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
+    }, {
+      regionName: "Asia",
+      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
+    }, {
+      regionName: "Europe",
+      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
+    }, {
+      regionName: "North America",
+      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
+    }, {
+      regionName: "Ocenia",
+      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
+    }, {
+      regionName: "South America",
+      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", ]
+    }];
+    //country of Specialisation accordion end
 
-  //setting tab navigation
-  $scope.showAgtSetting = 1;
-  $scope.agtsetting = function (val) {
-    if (val == 1) {
-      $scope.showAgtSetting = 1;
-    } else if (val == 2) {
-      $scope.showAgtSetting = 2;
-    } else if (val == 3) {
-      $scope.showAgtSetting = 3;
-    } else if (val == 4) {
-      $scope.showAgtSetting = 4;
-    } else if (val == 5) {
-      $scope.showAgtSetting = 5;
-    } else if (val == 6) {
-      $scope.showAgtSetting = 6;
-    } else if (val == 7) {
-      $scope.showAgtSetting = 7;
-    } else if (val == 8) {
-      $scope.showAgtSetting = 8;
-    } else {
-      $scope.showAgtSetting = 1;
-    }
-  };
-  //setting tab navigation end
+    //Services
+    $scope.agtServicesSpcl = [
+      'Tours And Packages', 'Day Tours', 'Outdoors & Excursions', 'Flights', 'Cruise', 'MICE', 'Personal', 'Business Travel', 'Car Rentals', 'Visas', 'Fully Independent Traveller', 'Accomodation', 'Travel Insurance', 'Sports & Events', 'Forex', 'Holidays', 'Festival & Concerts', 'Transportation'
+    ];
+    //Services end
+  })
+  .controller('AgentsettingCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    $scope.template = TemplateService.changecontent("agent-setting"); //Use same name of .html file
+    $scope.menutitle = NavigationService.makeactive("Agent Settings"); //This is the Title of the Website
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.oneAtATime = true;
 
-  // choose category Specialisation
-  $scope.chooseCategorySpcl = [{
-    img: "img/agt-cat1.png",
-    caption: "Adventure",
-    catWidth: "30px"
-  }, {
-    img: "img/agt-cat2.png",
-    caption: "Business",
-    catWidth: "30px"
-  }, {
-    img: "img/agt-cat3.png",
-    caption: "Family",
-    catWidth: "42px"
-  }, {
-    img: "img/agt-cat4.png",
-    caption: "Romance",
-    catWidth: "33px"
-  }, {
-    img: "img/agt-cat5.png",
-    caption: "Backpacking",
-    catWidth: "30px"
-  }, {
-    img: "img/agt-cat6.png",
-    caption: "Budget",
-    catWidth: "28px"
-  }, {
-    img: "img/agt-cat7.png",
-    caption: "Luxury",
-    catWidth: "28px"
-  }, {
-    img: "img/agt-cat8.png",
-    caption: "Religious",
-    catWidth: "33px"
-  }, {
-    img: "img/agt-cat9.png",
-    caption: "Friends",
-    catWidth: "30px"
-  }];
-  // choose category Specialisation end
+    //country setting accordion
+    $scope.agtRegionSetting = [{
+      settRegion: "Africa",
+      settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
+    }, {
+      settRegion: "Asia",
+      settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
+    }, {
+      settRegion: "Europe",
+      settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
+    }, {
+      settRegion: "North America",
+      settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
+    }, {
+      settRegion: "Ocenia",
+      settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
+    }, {
+      settRegion: "South America",
+      settcountryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", ]
+    }];
+    //country setting accordion end
 
-})
+    // Textarea counter
+    $scope.$on('$viewContentLoaded', function () {
+      $timeout(function () {
+        $('#textareaChars').keyup(updateCount);
+        $('#textareaChars').keydown(updateCount);
+        $('#remainAbt').text(0 + '/ 500');
+
+        function updateCount() {
+          var count = $('#textareaChars').val().length;
+          $('#remainAbt').text(count + '/ 500');
+        }
+      }, 100);
+    });
+    // Textarea counter end
+
+    //setting tab navigation
+    $scope.showAgtSetting = 1;
+    $scope.agtsetting = function (val) {
+      if (val == 1) {
+        $scope.showAgtSetting = 1;
+      } else if (val == 2) {
+        $scope.showAgtSetting = 2;
+      } else if (val == 3) {
+        $scope.showAgtSetting = 3;
+      } else if (val == 4) {
+        $scope.showAgtSetting = 4;
+      } else if (val == 5) {
+        $scope.showAgtSetting = 5;
+      } else if (val == 6) {
+        $scope.showAgtSetting = 6;
+      } else if (val == 7) {
+        $scope.showAgtSetting = 7;
+      } else if (val == 8) {
+        $scope.showAgtSetting = 8;
+      } else {
+        $scope.showAgtSetting = 1;
+      }
+    };
+    //setting tab navigation end
+
+    // choose category Specialisation
+    $scope.chooseCategorySpcl = [{
+      img: "img/agt-cat1.png",
+      caption: "Adventure",
+      catWidth: "30px"
+    }, {
+      img: "img/agt-cat2.png",
+      caption: "Business",
+      catWidth: "30px"
+    }, {
+      img: "img/agt-cat3.png",
+      caption: "Family",
+      catWidth: "42px"
+    }, {
+      img: "img/agt-cat4.png",
+      caption: "Romance",
+      catWidth: "33px"
+    }, {
+      img: "img/agt-cat5.png",
+      caption: "Backpacking",
+      catWidth: "30px"
+    }, {
+      img: "img/agt-cat6.png",
+      caption: "Budget",
+      catWidth: "28px"
+    }, {
+      img: "img/agt-cat7.png",
+      caption: "Luxury",
+      catWidth: "28px"
+    }, {
+      img: "img/agt-cat8.png",
+      caption: "Religious",
+      catWidth: "33px"
+    }, {
+      img: "img/agt-cat9.png",
+      caption: "Friends",
+      catWidth: "30px"
+    }];
+    // choose category Specialisation end
+
+  })
+  .controller('AgentupgradeCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    $scope.template = TemplateService.changecontent("agent-upgrade"); //Use same name of .html file
+    $scope.menutitle = NavigationService.makeactive("Agent Upgrade"); //This is the Title of the Website
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.variables = {};
+    $scope.variables.tooltips = {};
+    $scope.showTip = false;
+    $scope.showTip = function (index) {
+      // if($scope.showTip == false){
+      //   $scope.showTip = true;
+      // }else{
+      //   $scope.showTip = false;
+      // }
+      _.each($scope.variables.tooltips, function (value, property) {
+        $scope.variables.tooltips[property] = false;
+      })
+      $scope.variables.tooltips[index] = $scope.variables.tooltips[index] ? false : true;
+    };
+
+    // // upgrade feature end
+    $scope.agentUpgradeFeature = [{
+      upgradeFeature: "Itineraries",
+      basicValue: "5",
+      advValue: "25",
+      premValue: "Unlimited",
+      upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
+    }, {
+      upgradeFeature: "Tours & Packages",
+      basicValue: "1",
+      advValue: "5",
+      premValue: "Unlimited",
+      upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
+    }, {
+      upgradeFeature: "Featured Tours & Packages on Popular Agents",
+      basicValue: '<i class="fa fa-minus"></i>',
+      advValue: '<i class="fa fa-minus"></i>',
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool: "Lorem ipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
+    }, {
+      upgradeFeature: "Featured Tours & Packages on Destination Agents",
+      basicValue: '<i class="fa fa-minus"></i>',
+      advValue: '<i class="fa fa-check"></i>',
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool: "t. Est praesentium modi cum odit reprehenderit cupiditate"
+    }, {
+      upgradeFeature: "Lead Monitor - Access to TraveLibro Audience",
+      basicValue: '<i class="fa fa-minus"></i>',
+      advValue: '<i class="fa fa-minus"></i>',
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
+    }, {
+      upgradeFeature: "Analyse Profile Views",
+      basicValue: "3",
+      advValue: "3",
+      premValue: "3",
+      upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum t cupiditate"
+    }, {
+      upgradeFeature: "Connect With Followers",
+      basicValue: "3",
+      advValue: '<i class="fa fa-check"></i>',
+      premValue: "3",
+      upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentiumnderit cupiditate"
+    }, {
+      upgradeFeature: "Lead Analytics",
+      basicValue: '<i class="fa fa-minus"></i>',
+      advValue: '<i class="fa fa-minus"></i>',
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentiumreprehenderit cupiditate"
+    }, {
+      upgradeFeature: "Analyse Views & Downloads",
+      basicValue: '<i class="fa fa-minus"></i>',
+      advValue: '<i class="fa fa-minus"></i>',
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium  cum odit reprehenderit cupiditate"
+    }, {
+      upgradeFeature: "List on Popular Agents",
+      basicValue: '<i class="fa fa-minus"></i>',
+      advValue: '<i class="fa fa-minus"></i>',
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool: " ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
+    }, {
+      upgradeFeature: "Upload Photos & Videos",
+      basicValue: '<i class="fa fa-check"></i>',
+      advValue: '<i class="fa fa-check"></i>',
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. dit reprehenderit cupiditate"
+    }, {
+      upgradeFeature: "About Us",
+      basicValue: '<i class="fa fa-check"></i>',
+      advValue: '<i class="fa fa-check"></i>',
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditateLorem Est praesentium modi cum odit reprehen"
+    }, {
+      upgradeFeature: "Select Specialisation",
+      basicValue: '<i class="fa fa-check"></i>',
+      advValue: '<i class="fa fa-check"></i>',
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool: "Lorem Est praesentium modi cum odit reprehenderit cupiditate"
+    }, {
+      upgradeFeature: "Popular Agents Adverts to TraveLibro Audience",
+      basicValue: '<i class="fa fa-check"></i>',
+      advValue: '<i class="fa fa-check"></i>',
+      premValue: '<i class="fa fa-check"></i>',
+      upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cupiditate"
+    }];
+    // // upgrade feature end
+  })
+  .controller('AgentuserCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+    $scope.template = TemplateService.changecontent("agent-user"); //Use same name of .html file
+    $scope.menutitle = NavigationService.makeactive("Agent User"); //This is the Title of the Website
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.oneAtATime = true;
+
+    //enquiry & contact card initialisation
+    // enquiry
+
+    $scope.viewEnquiry = false;
+    $scope.getBackdrop = "";
+    $scope.showEnquiry = function () {
+      // console.log("click");
+      if ($scope.viewEnquiry == false) {
+        $scope.getBackdrop = "backdrop-enquiry";
+        $scope.viewEnquiry = true;
+      } else {
+        $scope.viewEnquiry = false;
+        $scope.getBackdrop = "";
+      }
+    };
+    //enquiry end
+
+    //contact us
+    $scope.viewContact = false;
+    $scope.getBackdrop = "";
+    $scope.showContact = function () {
+      // console.log("click");
+      if ($scope.viewContact == false) {
+        $scope.getBackdrop = "backdrop-enquiry";
+        $scope.viewContact = true;
+      } else {
+        $scope.viewContact = false;
+        $scope.getBackdrop = "";
+      }
+    };
+    //contact us end
+    //enquiry & contact card initialisation
 
 
-.controller('AgentupgradeCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
-  $scope.template = TemplateService.changecontent("agent-upgrade"); //Use same name of .html file
-  $scope.menutitle = NavigationService.makeactive("Agent Upgrade"); //This is the Title of the Website
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
-  $scope.variables = {};
-  $scope.variables.tooltips = {};
-  $scope.showTip = false;
-  $scope.showTip = function (index) {
-    // if($scope.showTip == false){
-    //   $scope.showTip = true;
-    // }else{
-    //   $scope.showTip = false;
-    // }
-    _.each($scope.variables.tooltips, function (value, property) {
-      $scope.variables.tooltips[property] = false;
-    })
-    $scope.variables.tooltips[index] = $scope.variables.tooltips[index] ? false : true;
-  };
 
-  // // upgrade feature end
-  $scope.agentUpgradeFeature = [{
-    upgradeFeature: "Itineraries",
-    basicValue: "5",
-    advValue: "25",
-    premValue: "Unlimited",
-    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
-  }, {
-    upgradeFeature: "Tours & Packages",
-    basicValue: "1",
-    advValue: "5",
-    premValue: "Unlimited",
-    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
-  }, {
-    upgradeFeature: "Featured Tours & Packages on Popular Agents",
-    basicValue: '<i class="fa fa-minus"></i>',
-    advValue: '<i class="fa fa-minus"></i>',
-    premValue: '<i class="fa fa-check"></i>',
-    upgradetool: "Lorem ipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
-  }, {
-    upgradeFeature: "Featured Tours & Packages on Destination Agents",
-    basicValue: '<i class="fa fa-minus"></i>',
-    advValue: '<i class="fa fa-check"></i>',
-    premValue: '<i class="fa fa-check"></i>',
-    upgradetool: "t. Est praesentium modi cum odit reprehenderit cupiditate"
-  }, {
-    upgradeFeature: "Lead Monitor - Access to TraveLibro Audience",
-    basicValue: '<i class="fa fa-minus"></i>',
-    advValue: '<i class="fa fa-minus"></i>',
-    premValue: '<i class="fa fa-check"></i>',
-    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
-  }, {
-    upgradeFeature: "Analyse Profile Views",
-    basicValue: "3",
-    advValue: "3",
-    premValue: "3",
-    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum t cupiditate"
-  }, {
-    upgradeFeature: "Connect With Followers",
-    basicValue: "3",
-    advValue: '<i class="fa fa-check"></i>',
-    premValue: "3",
-    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentiumnderit cupiditate"
-  }, {
-    upgradeFeature: "Lead Analytics",
-    basicValue: '<i class="fa fa-minus"></i>',
-    advValue: '<i class="fa fa-minus"></i>',
-    premValue: '<i class="fa fa-check"></i>',
-    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentiumreprehenderit cupiditate"
-  }, {
-    upgradeFeature: "Analyse Views & Downloads",
-    basicValue: '<i class="fa fa-minus"></i>',
-    advValue: '<i class="fa fa-minus"></i>',
-    premValue: '<i class="fa fa-check"></i>',
-    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium  cum odit reprehenderit cupiditate"
-  }, {
-    upgradeFeature: "List on Popular Agents",
-    basicValue: '<i class="fa fa-minus"></i>',
-    advValue: '<i class="fa fa-minus"></i>',
-    premValue: '<i class="fa fa-check"></i>',
-    upgradetool: " ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditate"
-  }, {
-    upgradeFeature: "Upload Photos & Videos",
-    basicValue: '<i class="fa fa-check"></i>',
-    advValue: '<i class="fa fa-check"></i>',
-    premValue: '<i class="fa fa-check"></i>',
-    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. dit reprehenderit cupiditate"
-  }, {
-    upgradeFeature: "About Us",
-    basicValue: '<i class="fa fa-check"></i>',
-    advValue: '<i class="fa fa-check"></i>',
-    premValue: '<i class="fa fa-check"></i>',
-    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cum odit reprehenderit cupiditateLorem Est praesentium modi cum odit reprehen"
-  }, {
-    upgradeFeature: "Select Specialisation",
-    basicValue: '<i class="fa fa-check"></i>',
-    advValue: '<i class="fa fa-check"></i>',
-    premValue: '<i class="fa fa-check"></i>',
-    upgradetool: "Lorem Est praesentium modi cum odit reprehenderit cupiditate"
-  }, {
-    upgradeFeature: "Popular Agents Adverts to TraveLibro Audience",
-    basicValue: '<i class="fa fa-check"></i>',
-    advValue: '<i class="fa fa-check"></i>',
-    premValue: '<i class="fa fa-check"></i>',
-    upgradetool: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est praesentium modi cupiditate"
-  }];
-  // // upgrade feature end
-})
+    //scroll change
+    $(window).scroll(function () {
+      //  var navHeight = $('.img-holder-agent').height($(window).height() - 41);
+      var scroll = $(window).scrollTop();
+      //console.log(scroll);
+      if (scroll >= 300) {
+        //console.log('a');
+        $(".agent-user-nav").addClass("change");
+      } else {
+        //console.log('a');
+        $(".agent-user-nav").removeClass("change");
+      }
+    });
+    //scroll change end
 
-
-.controller('AgentuserCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
-  $scope.template = TemplateService.changecontent("agent-user"); //Use same name of .html file
-  $scope.menutitle = NavigationService.makeactive("Agent User"); //This is the Title of the Website
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
-  $scope.oneAtATime = true;
-
-  //enquiry & contact card initialisation
-  // enquiry
-
-  $scope.viewEnquiry = false;
-  $scope.getBackdrop = "";
-  $scope.showEnquiry = function () {
-    // console.log("click");
-    if ($scope.viewEnquiry == false) {
-      $scope.getBackdrop = "backdrop-enquiry";
-      $scope.viewEnquiry = true;
-    } else {
-      $scope.viewEnquiry = false;
-      $scope.getBackdrop = "";
-    }
-  };
-  //enquiry end
-
-  //contact us
-  $scope.viewContact = false;
-  $scope.getBackdrop = "";
-  $scope.showContact = function () {
-    // console.log("click");
-    if ($scope.viewContact == false) {
-      $scope.getBackdrop = "backdrop-enquiry";
-      $scope.viewContact = true;
-    } else {
-      $scope.viewContact = false;
-      $scope.getBackdrop = "";
-    }
-  };
-  //contact us end
-  //enquiry & contact card initialisation
-
-
-
-  //scroll change
-  $(window).scroll(function () {
-    //  var navHeight = $('.img-holder-agent').height($(window).height() - 41);
-    var scroll = $(window).scrollTop();
-    //console.log(scroll);
-    if (scroll >= 300) {
-      //console.log('a');
-      $(".agent-user-nav").addClass("change");
-    } else {
-      //console.log('a');
-      $(".agent-user-nav").removeClass("change");
-    }
-  });
-  //scroll change end
-
-  // tab change
-  var allagtuser = ["views/content/agent/agt-user/usr-itinerary.html", "views/content/agent/agt-user/usr-tourpackages.html", "views/content/agent/agt-user/usr-photovideos.html", "views/content/agent/agt-user/usr-testimonialreviews.html", "views/content/agent/agt-user/usr-travelactivity.html", "views/content/agent/agt-user/usr-aboutus.html"];
-  $scope.agtuser = {
-    innerView: allagtuser[0]
-  };
-  // change url
-  $scope.agtuseroptions = {};
-  $scope.agtuseroptions.active = "";
-  $scope.viewTab = 1;
-  switch ($state.params.name) {
-    case "usr-itinerary":
-      $scope.agtuser.innerView = allagtuser[0];
-      $scope.agtuseroptions.active = "usr-itinerary";
-      break;
-    case "usr-tourpackages":
-      $scope.agtuser.innerView = allagtuser[1];
-      $scope.agtuseroptions.active = "usr-tourpackages";
-      break;
-    case "usr-photovideos":
-      $scope.agtuser.innerView = allagtuser[2];
-      $scope.agtuseroptions.active = "usr-photovideos";
-      break;
-    case "usr-testimonialreviews":
-      $scope.agtuser.innerView = allagtuser[3];
-      $scope.agtuseroptions.active = "usr-testimonialreviews";
-      break;
-    case "usr-travelactivity":
-      $scope.agtuser.innerView = allagtuser[4];
-      $scope.agtuseroptions.active = "usr-travelactivity";
-      break;
-    case "usr-aboutus":
-      $scope.agtuser.innerView = allagtuser[5];
-      $scope.agtuseroptions.active = "usr-aboutus";
-      break;
-    default:
-      $scope.agtuser.innerView = allagtuser[0];
-  }
-  $scope.getTab = function (view) {
-    $scope.agtuser.innerView = allagtuser[view];
-    var url = "usr-itinerary";
-    var active = "";
-    console.log(view);
-    switch (view) {
-      case 0:
-        url = "usr-itinerary";
+    // tab change
+    var allagtuser = ["views/content/agent/agt-user/usr-itinerary.html", "views/content/agent/agt-user/usr-tourpackages.html", "views/content/agent/agt-user/usr-photovideos.html", "views/content/agent/agt-user/usr-testimonialreviews.html", "views/content/agent/agt-user/usr-travelactivity.html", "views/content/agent/agt-user/usr-aboutus.html"];
+    $scope.agtuser = {
+      innerView: allagtuser[0]
+    };
+    // change url
+    $scope.agtuseroptions = {};
+    $scope.agtuseroptions.active = "";
+    $scope.viewTab = 1;
+    switch ($state.params.name) {
+      case "usr-itinerary":
+        $scope.agtuser.innerView = allagtuser[0];
         $scope.agtuseroptions.active = "usr-itinerary";
         break;
-      case 1:
-        url = "usr-tourpackages";
+      case "usr-tourpackages":
+        $scope.agtuser.innerView = allagtuser[1];
         $scope.agtuseroptions.active = "usr-tourpackages";
         break;
-      case 2:
-        url = "usr-photovideos";
-        $scope.agtuseroptions.active = "usr-photovideos";;
+      case "usr-photovideos":
+        $scope.agtuser.innerView = allagtuser[2];
+        $scope.agtuseroptions.active = "usr-photovideos";
         break;
-      case 3:
-        url = "usr-testimonialreviews";
+      case "usr-testimonialreviews":
+        $scope.agtuser.innerView = allagtuser[3];
         $scope.agtuseroptions.active = "usr-testimonialreviews";
         break;
-      case 4:
-        url = "usr-travelactivity";
+      case "usr-travelactivity":
+        $scope.agtuser.innerView = allagtuser[4];
         $scope.agtuseroptions.active = "usr-travelactivity";
         break;
-      case 5:
-        url = "usr-aboutus";
+      case "usr-aboutus":
+        $scope.agtuser.innerView = allagtuser[5];
         $scope.agtuseroptions.active = "usr-aboutus";
         break;
       default:
-        url = "usr-itinerary";
-        $scope.agtuseroptions.active = "usr-itinerary";
-        break;
+        $scope.agtuser.innerView = allagtuser[0];
     }
-    console.log(url);
-    $state.go("agent-user", {
-      name: url
+    $scope.getTab = function (view) {
+      $scope.agtuser.innerView = allagtuser[view];
+      var url = "usr-itinerary";
+      var active = "";
+      console.log(view);
+      switch (view) {
+        case 0:
+          url = "usr-itinerary";
+          $scope.agtuseroptions.active = "usr-itinerary";
+          break;
+        case 1:
+          url = "usr-tourpackages";
+          $scope.agtuseroptions.active = "usr-tourpackages";
+          break;
+        case 2:
+          url = "usr-photovideos";
+          $scope.agtuseroptions.active = "usr-photovideos";;
+          break;
+        case 3:
+          url = "usr-testimonialreviews";
+          $scope.agtuseroptions.active = "usr-testimonialreviews";
+          break;
+        case 4:
+          url = "usr-travelactivity";
+          $scope.agtuseroptions.active = "usr-travelactivity";
+          break;
+        case 5:
+          url = "usr-aboutus";
+          $scope.agtuseroptions.active = "usr-aboutus";
+          break;
+        default:
+          url = "usr-itinerary";
+          $scope.agtuseroptions.active = "usr-itinerary";
+          break;
+      }
+      console.log(url);
+      $state.go("agent-user", {
+        name: url
+      }, {
+        notify: false
+      });
+    };
+    // tab change end
+
+
+
+    //user itinerary cards
+    $scope.usrItineraryCard = [{
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
     }, {
-      notify: false
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '35000',
+      noDays: '55',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '1505',
+      agtRating: '3.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '15 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '75000',
+      noDays: '15',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '342',
+      agtRating: '4.0',
+      agtLikesCount: '199',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }];
+    //user itinerary cards end
+
+    // tour packages card
+    $scope.usrTourPackageCard = [{
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryTitle: 'Adventure',
+      tourcategoryImg: 'img/agt-cat1.png',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat5.png',
+      tourcategoryTitle: 'Backpacking',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat4.png',
+      tourcategoryTitle: 'Romance',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat9.png',
+      tourcategoryTitle: 'Friends',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat1.png',
+      tourcategoryTitle: 'Adventure',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat7.png',
+      tourcategoryTitle: 'Luxury',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat1.png',
+      tourcategoryTitle: 'Adventure',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat4.png',
+      tourcategoryTitle: 'Romance',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }];
+    // tour packages card end
+
+    // gallery card
+    $scope.agenPhotogallery = [
+      'img/uploaded-pic.jpg',
+      'img/slider2.jpg',
+      'img/moment-travel1.jpg',
+      'img/moment-travel2.jpg',
+      'img/local-life-post.jpg',
+      'img/destination/goldentemple.jpg',
+      'img/destination/list1.jpg',
+      'img/destination/list2.jpg',
+      'img/destination/info.jpg',
+      'img/destination/taj-featured.jpg',
+      'img/itinerary/itinerary.jpg',
+      'img/india-gate.jpg',
+      'img/notify-adrena.jpg',
+      'img/paris.jpg',
+      'img/bg-popular.jpg',
+      'img/bg-blur.jpg',
+      'img/blog-banner.jpg',
+      'img/follower.jpg'
+    ];
+    // gallery card end
+
+    //gallery filter list
+    $scope.picFilterList = ['India', 'Malaysia', 'Singapore', 'Dubai', 'London', 'USA', 'Abu Dhabi', 'Kenya', 'South Africa', 'Cuba', 'Cambodia', 'China', 'England', 'Russia', 'Kazakhstan', 'Iran', 'Iraq', 'Bolivia'];
+    //gallery filter list end
+
+    // testimonial card
+    $scope.testimonialreview = [{
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, text ever since the 1500s,',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text evers,',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }];
+    // testimonial card end
+
+
+    // review textarea counter
+    $scope.$on('$viewContentLoaded', function () {
+      $timeout(function () {
+        $('#textareaChars').keyup(updateCount);
+        $('#textareaChars').keydown(updateCount);
+        $('#reviewremainingC').text(0 + '/ 300');
+
+        function updateCount() {
+          var count = $('#textareaChars').val().length;
+          $('#reviewremainingC').text(count + '/ 300');
+        }
+      }, 100);
     });
-  };
-  // tab change end
 
+    // review textarea counter end
+    // travel activity json
+    $scope.travelActivity = [{
+      header: true,
+      footer: true,
+      agentHeader: true,
+      travellerAgent: true,
+      agentName: "Holiday Travallers",
+      agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
+      travellerProfile: "img/profile-main.png",
+      travelDate: "26 dec, 2016",
+      travelTime: "1:20pm"
+    }, {
+      header: false,
+      footer: false,
+      tourPackage: true,
+      packageType: "Adventure",
+      packageImg: "img/agt-cat1.png",
+      tourFlag: [{
+        flagImg: "img/canada-visit.png"
+      }, {
+        flagImg: "img/england-visit.png"
+      }, {
+        flagImg: "img/india-visit.png"
+      }],
+      tourTitle: "Love in Paris",
+      tourCost: "25000",
+      tourNight: "4",
+      tourDay: "5",
+      tourPic: "img/paris.jpg",
+      tourDate: "26 dec, 2016",
+      tourTime: "1:20pm"
+    }, {
+      header: true,
+      footer: true,
+      itineraryHeader: true,
+      itinerary: true,
+      itineraryDate: "26 Dec, 2016",
+      itineraryTime: "1:20 pm",
+      itineraryCat: "img/agt-cat1.png",
+      itineraryPic: "img/paris.jpg",
+      itineraryTitle: "Love In Paris",
+      itineraryCost: "25000",
+      itineraryDays: "75",
+      itineraryFlag: [{
+        itineraryImg: "img/canada-visit.png"
+      }, {
+        itineraryImg: "img/england-visit.png"
+      }, {
+        itineraryImg: "img/india-visit.png"
+      }],
+      itineraryJourney: [{
+        journeyImg: "img/sunset.png"
+      }, {
+        journeyImg: "img/bag-journey.png"
+      }, {
+        journeyImg: "img/luxury-journey.png"
+      }]
+    }, {
+      header: true,
+      footer: true,
+      agentHeader: true,
+      travellerAgent: true,
+      agentName: "Holiday Travallers",
+      agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
+      travellerProfile: "img/profile-main.png",
+      travelDate: "26 dec, 2016",
+      travelTime: "1:20pm"
+    }, {
+      header: true,
+      footer: true,
+      itineraryHeader: true,
+      itinerary: true,
+      itineraryDate: "26 Dec, 2016",
+      itineraryTime: "1:20 pm",
+      itineraryCat: "img/agt-cat1.png",
+      itineraryPic: "img/paris.jpg",
+      itineraryTitle: "Love In Paris",
+      itineraryCost: "25000",
+      itineraryDays: "75",
+      itineraryFlag: [{
+        itineraryImg: "img/canada-visit.png"
+      }, {
+        itineraryImg: "img/england-visit.png"
+      }, {
+        itineraryImg: "img/india-visit.png"
+      }],
+      itineraryJourney: [{
+        journeyImg: "img/sunset.png"
+      }, {
+        journeyImg: "img/bag-journey.png"
+      }, {
+        journeyImg: "img/luxury-journey.png"
+      }]
+    }, {
+      header: false,
+      footer: false,
+      tourPackage: true,
+      packageType: "Adventure",
+      packageImg: "img/agt-cat1.png",
+      tourFlag: [{
+        flagImg: "img/canada-visit.png"
+      }, {
+        flagImg: "img/england-visit.png"
+      }, {
+        flagImg: "img/india-visit.png"
+      }],
+      tourTitle: "Love in Paris",
+      tourCost: "25000",
+      tourNight: "4",
+      tourDay: "5",
+      tourPic: "img/paris.jpg",
+      tourDate: "26 dec, 2016",
+      tourTime: "1:20pm"
+    }, {
+      header: false,
+      footer: false,
+      tourPackage: true,
+      packageType: "Adventure",
+      packageImg: "img/agt-cat1.png",
+      tourFlag: [{
+        flagImg: "img/canada-visit.png"
+      }, {
+        flagImg: "img/england-visit.png"
+      }, {
+        flagImg: "img/india-visit.png"
+      }],
+      tourTitle: "Love in Paris",
+      tourCost: "25000",
+      tourNight: "4",
+      tourDay: "5",
+      tourPic: "img/paris.jpg",
+      tourDate: "26 dec, 2016",
+      tourTime: "1:20pm"
+    }];
+    // travel activity json end
 
+    // ITINERARY FILTER
+    //OpenFilter
+    $scope.isopenfilter = false;
+    $scope.openFilter = function () {
+      $scope.isopenfilter = !$scope.isopenfilter;
+    };
+    //OpenFiltertab
+    $scope.isopenfiltertab = false;
+    $scope.openFiltertab = function () {
+      $scope.isopenfilter = !$scope.isopenfilter;
+    };
+    $scope.country = [];
 
-  //user itinerary cards
-  $scope.usrItineraryCard = [{
-    timestampDate: '26 Jan, 2015',
-    timestampHour: '1:20 pm',
-    tripImg: 'img/paris.jpg',
-    itineraryTitle: 'Love In Paris',
-    tripCost: '25000',
-    noDays: '75',
-    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    agtReviewCount: '352',
-    agtRating: '4.5',
-    agtLikesCount: '99',
-    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    timestampDate: '26 Jan, 2015',
-    timestampHour: '1:20 pm',
-    tripImg: 'img/paris.jpg',
-    itineraryTitle: 'Love In Paris',
-    tripCost: '35000',
-    noDays: '55',
-    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    agtReviewCount: '1505',
-    agtRating: '3.5',
-    agtLikesCount: '99',
-    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    timestampDate: '15 Jan, 2015',
-    timestampHour: '1:20 pm',
-    tripImg: 'img/paris.jpg',
-    itineraryTitle: 'Love In Paris',
-    tripCost: '75000',
-    noDays: '15',
-    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    agtReviewCount: '342',
-    agtRating: '4.0',
-    agtLikesCount: '199',
-    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    timestampDate: '26 Jan, 2015',
-    timestampHour: '1:20 pm',
-    tripImg: 'img/paris.jpg',
-    itineraryTitle: 'Love In Paris',
-    tripCost: '25000',
-    noDays: '75',
-    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    agtReviewCount: '352',
-    agtRating: '4.5',
-    agtLikesCount: '99',
-    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    timestampDate: '26 Jan, 2015',
-    timestampHour: '1:20 pm',
-    tripImg: 'img/paris.jpg',
-    itineraryTitle: 'Love In Paris',
-    tripCost: '25000',
-    noDays: '75',
-    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    agtReviewCount: '352',
-    agtRating: '4.5',
-    agtLikesCount: '99',
-    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    timestampDate: '26 Jan, 2015',
-    timestampHour: '1:20 pm',
-    tripImg: 'img/paris.jpg',
-    itineraryTitle: 'Love In Paris',
-    tripCost: '25000',
-    noDays: '75',
-    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    agtReviewCount: '352',
-    agtRating: '4.5',
-    agtLikesCount: '99',
-    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    timestampDate: '26 Jan, 2015',
-    timestampHour: '1:20 pm',
-    tripImg: 'img/paris.jpg',
-    itineraryTitle: 'Love In Paris',
-    tripCost: '25000',
-    noDays: '75',
-    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    agtReviewCount: '352',
-    agtRating: '4.5',
-    agtLikesCount: '99',
-    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    timestampDate: '26 Jan, 2015',
-    timestampHour: '1:20 pm',
-    tripImg: 'img/paris.jpg',
-    itineraryTitle: 'Love In Paris',
-    tripCost: '25000',
-    noDays: '75',
-    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    agtReviewCount: '352',
-    agtRating: '4.5',
-    agtLikesCount: '99',
-    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }];
-  //user itinerary cards end
+    $scope.addLine = function () {
+      $scope.lines.push($scope.lines.length);
+    };
+    // this.addText = function(text) {
+    //   if (text) {
+    //     var obj = {
+    //       text: text
+    //     };
+    //     this.country.push(obj);
+    //     this.myText = '';
+    //   }
+    // }
 
-  // tour packages card
-  $scope.usrTourPackageCard = [{
-    tourImg: 'img/paris.jpg',
-    agttourTitle: 'Love In Paris',
-    agttourCost: '25000',
-    tourDayC: '4',
-    tourNightC: '3',
-    tourcategoryTitle: 'Adventure',
-    tourcategoryImg: 'img/agt-cat1.png',
-    tourDate:'26 Dec, 2016',
-    tourTime: '1.20 pm',
-    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    tourImg: 'img/paris.jpg',
-    agttourTitle: 'Love In Paris',
-    agttourCost: '25000',
-    tourDayC: '4',
-    tourNightC: '3',
-    tourcategoryImg: 'img/agt-cat5.png',
-    tourcategoryTitle: 'Backpacking',
-    tourDate:'26 Dec, 2016',
-    tourTime: '1.20 pm',
-    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    tourImg: 'img/paris.jpg',
-    agttourTitle: 'Love In Paris',
-    agttourCost: '25000',
-    tourDayC: '4',
-    tourNightC: '3',
-    tourcategoryImg: 'img/agt-cat4.png',
-    tourcategoryTitle: 'Romance',
-    tourDate:'26 Dec, 2016',
-    tourTime: '1.20 pm',
-    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    tourImg: 'img/paris.jpg',
-    agttourTitle: 'Love In Paris',
-    agttourCost: '25000',
-    tourDayC: '4',
-    tourNightC: '3',
-    tourcategoryImg: 'img/agt-cat9.png',
-    tourcategoryTitle: 'Friends',
-    tourDate:'26 Dec, 2016',
-    tourTime: '1.20 pm',
-    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    tourImg: 'img/paris.jpg',
-    agttourTitle: 'Love In Paris',
-    agttourCost: '25000',
-    tourDayC: '4',
-    tourNightC: '3',
-    tourcategoryImg: 'img/agt-cat1.png',
-    tourcategoryTitle: 'Adventure',
-    tourDate:'26 Dec, 2016',
-    tourTime: '1.20 pm',
-    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    tourImg: 'img/paris.jpg',
-    agttourTitle: 'Love In Paris',
-    agttourCost: '25000',
-    tourDayC: '4',
-    tourNightC: '3',
-    tourcategoryImg: 'img/agt-cat7.png',
-    tourcategoryTitle: 'Luxury',
-    tourDate:'26 Dec, 2016',
-    tourTime: '1.20 pm',
-    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    tourImg: 'img/paris.jpg',
-    agttourTitle: 'Love In Paris',
-    agttourCost: '25000',
-    tourDayC: '4',
-    tourNightC: '3',
-    tourcategoryImg: 'img/agt-cat1.png',
-    tourcategoryTitle: 'Adventure',
-    tourDate:'26 Dec, 2016',
-    tourTime: '1.20 pm',
-    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    tourImg: 'img/paris.jpg',
-    agttourTitle: 'Love In Paris',
-    agttourCost: '25000',
-    tourDayC: '4',
-    tourNightC: '3',
-    tourcategoryImg: 'img/agt-cat4.png',
-    tourcategoryTitle: 'Romance',
-    tourDate:'26 Dec, 2016',
-    tourTime: '1.20 pm',
-    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }];
-  // tour packages card end
+    $scope.countries = [{
+      name: 'Afghanistan',
+      code: 'AF'
+    }, {
+      name: 'Åland Islands',
+      code: 'AX'
+    }, {
+      name: 'Albania',
+      code: 'AL'
+    }, {
+      name: 'Algeria',
+      code: 'DZ'
+    }, {
+      name: 'American Samoa',
+      code: 'AS'
+    }, {
+      name: 'Andorra',
+      code: 'AD'
+    }, {
+      name: 'Angola',
+      code: 'AO'
+    }, {
+      name: 'Anguilla',
+      code: 'AI'
+    }, {
+      name: 'Antarctica',
+      code: 'AQ'
+    }, {
+      name: 'Antigua and Barbuda',
+      code: 'AG'
+    }, {
+      name: 'Argentina',
+      code: 'AR'
+    }, {
+      name: 'Armenia',
+      code: 'AM'
+    }, {
+      name: 'Aruba',
+      code: 'AW'
+    }, {
+      name: 'Australia',
+      code: 'AU'
+    }, {
+      name: 'Austria',
+      code: 'AT'
+    }, {
+      name: 'Azerbaijan',
+      code: 'AZ'
+    }, {
+      name: 'Bahamas',
+      code: 'BS'
+    }, {
+      name: 'Bahrain',
+      code: 'BH'
+    }, {
+      name: 'Bangladesh',
+      code: 'BD'
+    }, {
+      name: 'Barbados',
+      code: 'BB'
+    }, {
+      name: 'Belarus',
+      code: 'BY'
+    }, {
+      name: 'Belgium',
+      code: 'BE'
+    }, {
+      name: 'Belize',
+      code: 'BZ'
+    }, {
+      name: 'Benin',
+      code: 'BJ'
+    }, {
+      name: 'Bermuda',
+      code: 'BM'
+    }, {
+      name: 'Bhutan',
+      code: 'BT'
+    }, {
+      name: 'Bolivia',
+      code: 'BO'
+    }, {
+      name: 'Bosnia and Herzegovina',
+      code: 'BA'
+    }, {
+      name: 'Botswana',
+      code: 'BW'
+    }, {
+      name: 'Bouvet Island',
+      code: 'BV'
+    }, {
+      name: 'Brazil',
+      code: 'BR'
+    }, {
+      name: 'British Indian Ocean Territory',
+      code: 'IO'
+    }, {
+      name: 'Brunei Darussalam',
+      code: 'BN'
+    }, {
+      name: 'Bulgaria',
+      code: 'BG'
+    }, {
+      name: 'Burkina Faso',
+      code: 'BF'
+    }, {
+      name: 'Burundi',
+      code: 'BI'
+    }, {
+      name: 'Cambodia',
+      code: 'KH'
+    }, {
+      name: 'Cameroon',
+      code: 'CM'
+    }, {
+      name: 'Canada',
+      code: 'CA'
+    }, {
+      name: 'Cape Verde',
+      code: 'CV'
+    }, {
+      name: 'Cayman Islands',
+      code: 'KY'
+    }, {
+      name: 'Central African Republic',
+      code: 'CF'
+    }, {
+      name: 'Chad',
+      code: 'TD'
+    }, {
+      name: 'Chile',
+      code: 'CL'
+    }, {
+      name: 'China',
+      code: 'CN'
+    }, {
+      name: 'Christmas Island',
+      code: 'CX'
+    }, {
+      name: 'Cocos (Keeling) Islands',
+      code: 'CC'
+    }, {
+      name: 'Colombia',
+      code: 'CO'
+    }, {
+      name: 'Comoros',
+      code: 'KM'
+    }, {
+      name: 'Congo',
+      code: 'CG'
+    }, {
+      name: 'Congo, The Democratic Republic of the',
+      code: 'CD'
+    }, {
+      name: 'Cook Islands',
+      code: 'CK'
+    }, {
+      name: 'Costa Rica',
+      code: 'CR'
+    }, {
+      name: 'Cote D\'Ivoire',
+      code: 'CI'
+    }, {
+      name: 'Croatia',
+      code: 'HR'
+    }, {
+      name: 'Cuba',
+      code: 'CU'
+    }, {
+      name: 'Cyprus',
+      code: 'CY'
+    }, {
+      name: 'Czech Republic',
+      code: 'CZ'
+    }, {
+      name: 'Denmark',
+      code: 'DK'
+    }, {
+      name: 'Djibouti',
+      code: 'DJ'
+    }, {
+      name: 'Dominica',
+      code: 'DM'
+    }, {
+      name: 'Dominican Republic',
+      code: 'DO'
+    }, {
+      name: 'Ecuador',
+      code: 'EC'
+    }, {
+      name: 'Egypt',
+      code: 'EG'
+    }, {
+      name: 'El Salvador',
+      code: 'SV'
+    }, {
+      name: 'Equatorial Guinea',
+      code: 'GQ'
+    }, {
+      name: 'Eritrea',
+      code: 'ER'
+    }, {
+      name: 'Estonia',
+      code: 'EE'
+    }, {
+      name: 'Ethiopia',
+      code: 'ET'
+    }, {
+      name: 'Falkland Islands (Malvinas)',
+      code: 'FK'
+    }, {
+      name: 'Faroe Islands',
+      code: 'FO'
+    }, {
+      name: 'Fiji',
+      code: 'FJ'
+    }, {
+      name: 'Finland',
+      code: 'FI'
+    }, {
+      name: 'France',
+      code: 'FR'
+    }, {
+      name: 'French Guiana',
+      code: 'GF'
+    }, {
+      name: 'French Polynesia',
+      code: 'PF'
+    }, {
+      name: 'French Southern Territories',
+      code: 'TF'
+    }, {
+      name: 'Gabon',
+      code: 'GA'
+    }, {
+      name: 'Gambia',
+      code: 'GM'
+    }, {
+      name: 'Georgia',
+      code: 'GE'
+    }, {
+      name: 'Germany',
+      code: 'DE'
+    }, {
+      name: 'Ghana',
+      code: 'GH'
+    }, {
+      name: 'Gibraltar',
+      code: 'GI'
+    }, {
+      name: 'Greece',
+      code: 'GR'
+    }, {
+      name: 'Greenland',
+      code: 'GL'
+    }, {
+      name: 'Grenada',
+      code: 'GD'
+    }, {
+      name: 'Guadeloupe',
+      code: 'GP'
+    }, {
+      name: 'Guam',
+      code: 'GU'
+    }, {
+      name: 'Guatemala',
+      code: 'GT'
+    }, {
+      name: 'Guernsey',
+      code: 'GG'
+    }, {
+      name: 'Guinea',
+      code: 'GN'
+    }, {
+      name: 'Guinea-Bissau',
+      code: 'GW'
+    }, {
+      name: 'Guyana',
+      code: 'GY'
+    }, {
+      name: 'Haiti',
+      code: 'HT'
+    }, {
+      name: 'Heard Island and Mcdonald Islands',
+      code: 'HM'
+    }, {
+      name: 'Holy See (Vatican City State)',
+      code: 'VA'
+    }, {
+      name: 'Honduras',
+      code: 'HN'
+    }, {
+      name: 'Hong Kong',
+      code: 'HK'
+    }, {
+      name: 'Hungary',
+      code: 'HU'
+    }, {
+      name: 'Iceland',
+      code: 'IS'
+    }, {
+      name: 'India',
+      code: 'IN'
+    }, {
+      name: 'Indonesia',
+      code: 'ID'
+    }, {
+      name: 'Iran, Islamic Republic Of',
+      code: 'IR'
+    }, {
+      name: 'Iraq',
+      code: 'IQ'
+    }, {
+      name: 'Ireland',
+      code: 'IE'
+    }, {
+      name: 'Isle of Man',
+      code: 'IM'
+    }, {
+      name: 'Israel',
+      code: 'IL'
+    }, {
+      name: 'Italy',
+      code: 'IT'
+    }, {
+      name: 'Jamaica',
+      code: 'JM'
+    }, {
+      name: 'Japan',
+      code: 'JP'
+    }, {
+      name: 'Jersey',
+      code: 'JE'
+    }, {
+      name: 'Jordan',
+      code: 'JO'
+    }, {
+      name: 'Kazakhstan',
+      code: 'KZ'
+    }, {
+      name: 'Kenya',
+      code: 'KE'
+    }, {
+      name: 'Kiribati',
+      code: 'KI'
+    }, {
+      name: 'Korea, Democratic People\'s Republic of',
+      code: 'KP'
+    }, {
+      name: 'Korea, Republic of',
+      code: 'KR'
+    }, {
+      name: 'Kuwait',
+      code: 'KW'
+    }, {
+      name: 'Kyrgyzstan',
+      code: 'KG'
+    }, {
+      name: 'Lao People\'s Democratic Republic',
+      code: 'LA'
+    }, {
+      name: 'Latvia',
+      code: 'LV'
+    }, {
+      name: 'Lebanon',
+      code: 'LB'
+    }, {
+      name: 'Lesotho',
+      code: 'LS'
+    }, {
+      name: 'Liberia',
+      code: 'LR'
+    }, {
+      name: 'Libyan Arab Jamahiriya',
+      code: 'LY'
+    }, {
+      name: 'Liechtenstein',
+      code: 'LI'
+    }, {
+      name: 'Lithuania',
+      code: 'LT'
+    }, {
+      name: 'Luxembourg',
+      code: 'LU'
+    }, {
+      name: 'Macao',
+      code: 'MO'
+    }, {
+      name: 'Macedonia, The Former Yugoslav Republic of',
+      code: 'MK'
+    }, {
+      name: 'Madagascar',
+      code: 'MG'
+    }, {
+      name: 'Malawi',
+      code: 'MW'
+    }, {
+      name: 'Malaysia',
+      code: 'MY'
+    }, {
+      name: 'Maldives',
+      code: 'MV'
+    }, {
+      name: 'Mali',
+      code: 'ML'
+    }, {
+      name: 'Malta',
+      code: 'MT'
+    }, {
+      name: 'Marshall Islands',
+      code: 'MH'
+    }, {
+      name: 'Martinique',
+      code: 'MQ'
+    }, {
+      name: 'Mauritania',
+      code: 'MR'
+    }, {
+      name: 'Mauritius',
+      code: 'MU'
+    }, {
+      name: 'Mayotte',
+      code: 'YT'
+    }, {
+      name: 'Mexico',
+      code: 'MX'
+    }, {
+      name: 'Micronesia, Federated States of',
+      code: 'FM'
+    }, {
+      name: 'Moldova, Republic of',
+      code: 'MD'
+    }, {
+      name: 'Monaco',
+      code: 'MC'
+    }, {
+      name: 'Mongolia',
+      code: 'MN'
+    }, {
+      name: 'Montserrat',
+      code: 'MS'
+    }, {
+      name: 'Morocco',
+      code: 'MA'
+    }, {
+      name: 'Mozambique',
+      code: 'MZ'
+    }, {
+      name: 'Myanmar',
+      code: 'MM'
+    }, {
+      name: 'Namibia',
+      code: 'NA'
+    }, {
+      name: 'Nauru',
+      code: 'NR'
+    }, {
+      name: 'Nepal',
+      code: 'NP'
+    }, {
+      name: 'Netherlands',
+      code: 'NL'
+    }, {
+      name: 'Netherlands Antilles',
+      code: 'AN'
+    }, {
+      name: 'New Caledonia',
+      code: 'NC'
+    }, {
+      name: 'New Zealand',
+      code: 'NZ'
+    }, {
+      name: 'Nicaragua',
+      code: 'NI'
+    }, {
+      name: 'Niger',
+      code: 'NE'
+    }, {
+      name: 'Nigeria',
+      code: 'NG'
+    }, {
+      name: 'Niue',
+      code: 'NU'
+    }, {
+      name: 'Norfolk Island',
+      code: 'NF'
+    }, {
+      name: 'Northern Mariana Islands',
+      code: 'MP'
+    }, {
+      name: 'Norway',
+      code: 'NO'
+    }, {
+      name: 'Oman',
+      code: 'OM'
+    }, {
+      name: 'Pakistan',
+      code: 'PK'
+    }, {
+      name: 'Palau',
+      code: 'PW'
+    }, {
+      name: 'Palestinian Territory, Occupied',
+      code: 'PS'
+    }, {
+      name: 'Panama',
+      code: 'PA'
+    }, {
+      name: 'Papua New Guinea',
+      code: 'PG'
+    }, {
+      name: 'Paraguay',
+      code: 'PY'
+    }, {
+      name: 'Peru',
+      code: 'PE'
+    }, {
+      name: 'Philippines',
+      code: 'PH'
+    }, {
+      name: 'Pitcairn',
+      code: 'PN'
+    }, {
+      name: 'Poland',
+      code: 'PL'
+    }, {
+      name: 'Portugal',
+      code: 'PT'
+    }, {
+      name: 'Puerto Rico',
+      code: 'PR'
+    }, {
+      name: 'Qatar',
+      code: 'QA'
+    }, {
+      name: 'Reunion',
+      code: 'RE'
+    }, {
+      name: 'Romania',
+      code: 'RO'
+    }, {
+      name: 'Russian Federation',
+      code: 'RU'
+    }, {
+      name: 'Rwanda',
+      code: 'RW'
+    }, {
+      name: 'Saint Helena',
+      code: 'SH'
+    }, {
+      name: 'Saint Kitts and Nevis',
+      code: 'KN'
+    }, {
+      name: 'Saint Lucia',
+      code: 'LC'
+    }, {
+      name: 'Saint Pierre and Miquelon',
+      code: 'PM'
+    }, {
+      name: 'Saint Vincent and the Grenadines',
+      code: 'VC'
+    }, {
+      name: 'Samoa',
+      code: 'WS'
+    }, {
+      name: 'San Marino',
+      code: 'SM'
+    }, {
+      name: 'Sao Tome and Principe',
+      code: 'ST'
+    }, {
+      name: 'Saudi Arabia',
+      code: 'SA'
+    }, {
+      name: 'Senegal',
+      code: 'SN'
+    }, {
+      name: 'Serbia and Montenegro',
+      code: 'CS'
+    }, {
+      name: 'Seychelles',
+      code: 'SC'
+    }, {
+      name: 'Sierra Leone',
+      code: 'SL'
+    }, {
+      name: 'Singapore',
+      code: 'SG'
+    }, {
+      name: 'Slovakia',
+      code: 'SK'
+    }, {
+      name: 'Slovenia',
+      code: 'SI'
+    }, {
+      name: 'Solomon Islands',
+      code: 'SB'
+    }, {
+      name: 'Somalia',
+      code: 'SO'
+    }, {
+      name: 'South Africa',
+      code: 'ZA'
+    }, {
+      name: 'South Georgia and the South Sandwich Islands',
+      code: 'GS'
+    }, {
+      name: 'Spain',
+      code: 'ES'
+    }, {
+      name: 'Sri Lanka',
+      code: 'LK'
+    }, {
+      name: 'Sudan',
+      code: 'SD'
+    }, {
+      name: 'Suriname',
+      code: 'SR'
+    }, {
+      name: 'Svalbard and Jan Mayen',
+      code: 'SJ'
+    }, {
+      name: 'Swaziland',
+      code: 'SZ'
+    }, {
+      name: 'Sweden',
+      code: 'SE'
+    }, {
+      name: 'Switzerland',
+      code: 'CH'
+    }, {
+      name: 'Syrian Arab Republic',
+      code: 'SY'
+    }, {
+      name: 'Taiwan, Province of China',
+      code: 'TW'
+    }, {
+      name: 'Tajikistan',
+      code: 'TJ'
+    }, {
+      name: 'Tanzania, United Republic of',
+      code: 'TZ'
+    }, {
+      name: 'Thailand',
+      code: 'TH'
+    }, {
+      name: 'Timor-Leste',
+      code: 'TL'
+    }, {
+      name: 'Togo',
+      code: 'TG'
+    }, {
+      name: 'Tokelau',
+      code: 'TK'
+    }, {
+      name: 'Tonga',
+      code: 'TO'
+    }, {
+      name: 'Trinidad and Tobago',
+      code: 'TT'
+    }, {
+      name: 'Tunisia',
+      code: 'TN'
+    }, {
+      name: 'Turkey',
+      code: 'TR'
+    }, {
+      name: 'Turkmenistan',
+      code: 'TM'
+    }, {
+      name: 'Turks and Caicos Islands',
+      code: 'TC'
+    }, {
+      name: 'Tuvalu',
+      code: 'TV'
+    }, {
+      name: 'Uganda',
+      code: 'UG'
+    }, {
+      name: 'Ukraine',
+      code: 'UA'
+    }, {
+      name: 'United Arab Emirates',
+      code: 'AE'
+    }, {
+      name: 'United Kingdom',
+      code: 'GB'
+    }, {
+      name: 'United States',
+      code: 'US'
+    }, {
+      name: 'United States Minor Outlying Islands',
+      code: 'UM'
+    }, {
+      name: 'Uruguay',
+      code: 'UY'
+    }, {
+      name: 'Uzbekistan',
+      code: 'UZ'
+    }, {
+      name: 'Vanuatu',
+      code: 'VU'
+    }, {
+      name: 'Venezuela',
+      code: 'VE'
+    }, {
+      name: 'Vietnam',
+      code: 'VN'
+    }, {
+      name: 'Virgin Islands, British',
+      code: 'VG'
+    }, {
+      name: 'Virgin Islands, U.S.',
+      code: 'VI'
+    }, {
+      name: 'Wallis and Futuna',
+      code: 'WF'
+    }, {
+      name: 'Western Sahara',
+      code: 'EH'
+    }, {
+      name: 'Yemen',
+      code: 'YE'
+    }, {
+      name: 'Zambia',
+      code: 'ZM'
+    }, {
+      name: 'Zimbabwe',
+      code: 'ZW'
+    }];
+    //ITINERARY FILTER END
 
-  // gallery card
-  $scope.agenPhotogallery = [
-    'img/uploaded-pic.jpg',
-    'img/slider2.jpg',
-    'img/moment-travel1.jpg',
-    'img/moment-travel2.jpg',
-    'img/local-life-post.jpg',
-    'img/destination/goldentemple.jpg',
-    'img/destination/list1.jpg',
-    'img/destination/list2.jpg',
-    'img/destination/info.jpg',
-    'img/destination/taj-featured.jpg',
-    'img/itinerary/itinerary.jpg',
-    'img/india-gate.jpg',
-    'img/notify-adrena.jpg',
-    'img/paris.jpg',
-    'img/bg-popular.jpg',
-    'img/bg-blur.jpg',
-    'img/blog-banner.jpg',
-    'img/follower.jpg'
-  ];
-  // gallery card end
+    //rating slider
+    $scope.ratingSlide = {
+      range: {
+        min: 0,
+        max: 10
+      },
+      step: 1,
+      minRating: 0,
+      maxRating: 10
+    };
+    //rating slider end
 
-  //gallery filter list
-  $scope.picFilterList = ['India', 'Malaysia', 'Singapore', 'Dubai', 'London', 'USA', 'Abu Dhabi', 'Kenya', 'South Africa', 'Cuba', 'Cambodia', 'China', 'England', 'Russia', 'Kazakhstan', 'Iran', 'Iraq', 'Bolivia'];
-  //gallery filter list end
+    // category type
+    $scope.categoryType = [{
+      img: "img/itinerary/adventure.png",
+      caption: "Adventure",
+      width: "25"
+    }, {
+      img: "img/itinerary/business.png",
+      caption: "Business",
+      width: "24"
+    }, {
+      img: "img/itinerary/family.png",
+      caption: "Family",
+      width: "30"
+    }, {
+      img: "img/itinerary/romance.png",
+      caption: "Romance",
+      width: "26"
+    }, {
+      img: "img/itinerary/backpacking.png",
+      caption: "Backpacking",
+      width: "23"
+    }, {
+      img: "img/itinerary/budget.png",
+      caption: "Budget",
+      width: "22"
+    }, {
+      img: "img/itinerary/luxury.png",
+      caption: "Luxury",
+      width: "21"
+    }, {
+      img: "img/itinerary/religious.png",
+      caption: "Religious",
+      width: "26"
+    }, {
+      img: "img/itinerary/friend.png",
+      caption: "Friends",
+      width: "24"
+    }, ];
+    // category type end
+  })
+  .controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+    $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
+    $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.oneAtATime = true;
 
-  // testimonial card
-  $scope.testimonialreview = [{
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }, {
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }, {
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, text ever since the 1500s,',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }, {
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text evers,',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }, {
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }, {
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }, {
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }, {
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }, {
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }];
-  // testimonial card end
+    // on load modal
+    // $(window).load(function(){
+    //   $('#getModal').modal('show');
+    // });
+    // on load modal end
 
+    //lead monitor accordion
+    $scope.leadMonAgent = [{
+      leadStatus: 'new',
+      leadImg: 'img/follower.jpg',
+      leadName: 'Andrea Christina',
+      leadDate: '02/12/2016',
+      leadDestination: 'India',
+      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+      leadPhone: '91961845656',
+      leadMail: 'leads@leads.com',
+      leadItinerary: 'Incredible India'
+    }, {
+      leadStatus: 'actioned',
+      leadImg: 'img/follower.jpg',
+      leadName: 'Andrea Christina',
+      leadDate: '02/12/2016',
+      leadDestination: 'India',
+      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+      leadPhone: '91961845656',
+      leadMail: 'leads@leads.com',
+      leadItinerary: 'Incredible India'
+    }, {
+      leadStatus: 'new',
+      leadImg: 'img/follower.jpg',
+      leadName: 'Andrea Christina',
+      leadDate: '02/12/2016',
+      leadDestination: 'India',
+      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+      leadPhone: '91961845656',
+      leadMail: 'leads@leads.com',
+      leadItinerary: 'Incredible India'
+    }, {
+      leadStatus: 'actioned',
+      leadImg: 'img/follower.jpg',
+      leadName: 'Andrea Christina',
+      leadDate: '02/12/2016',
+      leadDestination: 'India',
+      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+      leadPhone: '91961845656',
+      leadMail: 'leads@leads.com',
+      leadItinerary: 'Incredible India'
+    }, {
+      leadStatus: 'new',
+      leadImg: 'img/follower.jpg',
+      leadName: 'Andrea Christina',
+      leadDate: '02/12/2016',
+      leadDestination: 'India',
+      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+      leadPhone: '91961845656',
+      leadMail: 'leads@leads.com',
+      leadItinerary: 'Incredible India'
+    }];
+    //lead monitor accordion end
 
-  // review textarea counter
-  $scope.$on('$viewContentLoaded', function () {
-    $timeout(function () {
-      $('#textareaChars').keyup(updateCount);
-      $('#textareaChars').keydown(updateCount);
-      $('#reviewremainingC').text(0 + '/ 300');
-
-      function updateCount() {
-        var count = $('#textareaChars').val().length;
-        $('#reviewremainingC').text(count + '/ 300');
+    //scroll change
+    $(window).scroll(function () {
+      var scroll = $(window).scrollTop();
+      //console.log(scroll);
+      if (scroll >= 370) {
+        //console.log('a');
+        $(".agent-home-nav").addClass("change-blue");
+      } else {
+        //console.log('a');
+        $(".agent-home-nav").removeClass("change-blue");
       }
-    }, 100);
-  });
+    });
+    //scroll change end
 
-  // review textarea counter end
-  // travel activity json
-  $scope.travelActivity = [{
-    header: true,
-    footer: true,
-    agentHeader: true,
-    travellerAgent: true,
-    agentName: "Holiday Travallers",
-    agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
-    travellerProfile: "img/profile-main.png",
-    travelDate: "26 dec, 2016",
-    travelTime: "1:20pm"
-  }, {
-    header: false,
-    footer: false,
-    tourPackage: true,
-    packageType: "Adventure",
-    packageImg: "img/agt-cat1.png",
-    tourFlag: [{
-      flagImg: "img/canada-visit.png"
-    }, {
-      flagImg: "img/england-visit.png"
-    }, {
-      flagImg: "img/india-visit.png"
-    }],
-    tourTitle: "Love in Paris",
-    tourCost: "25000",
-    tourNight: "4",
-    tourDay: "5",
-    tourPic: "img/paris.jpg",
-    tourDate: "26 dec, 2016",
-    tourTime: "1:20pm"
-  }, {
-    header: true,
-    footer: true,
-    itineraryHeader: true,
-    itinerary: true,
-    itineraryDate: "26 Dec, 2016",
-    itineraryTime: "1:20 pm",
-    itineraryCat: "img/agt-cat1.png",
-    itineraryPic: "img/paris.jpg",
-    itineraryTitle: "Love In Paris",
-    itineraryCost: "25000",
-    itineraryDays: "75",
-    itineraryFlag: [{
-      itineraryImg: "img/canada-visit.png"
-    }, {
-      itineraryImg: "img/england-visit.png"
-    }, {
-      itineraryImg: "img/india-visit.png"
-    }],
-    itineraryJourney: [{
-      journeyImg: "img/sunset.png"
-    }, {
-      journeyImg: "img/bag-journey.png"
-    }, {
-      journeyImg: "img/luxury-journey.png"
-    }]
-  }, {
-    header: true,
-    footer: true,
-    agentHeader: true,
-    travellerAgent: true,
-    agentName: "Holiday Travallers",
-    agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
-    travellerProfile: "img/profile-main.png",
-    travelDate: "26 dec, 2016",
-    travelTime: "1:20pm"
-  }, {
-    header: true,
-    footer: true,
-    itineraryHeader: true,
-    itinerary: true,
-    itineraryDate: "26 Dec, 2016",
-    itineraryTime: "1:20 pm",
-    itineraryCat: "img/agt-cat1.png",
-    itineraryPic: "img/paris.jpg",
-    itineraryTitle: "Love In Paris",
-    itineraryCost: "25000",
-    itineraryDays: "75",
-    itineraryFlag: [{
-      itineraryImg: "img/canada-visit.png"
-    }, {
-      itineraryImg: "img/england-visit.png"
-    }, {
-      itineraryImg: "img/india-visit.png"
-    }],
-    itineraryJourney: [{
-      journeyImg: "img/sunset.png"
-    }, {
-      journeyImg: "img/bag-journey.png"
-    }, {
-      journeyImg: "img/luxury-journey.png"
-    }]
-  }, {
-    header: false,
-    footer: false,
-    tourPackage: true,
-    packageType: "Adventure",
-    packageImg: "img/agt-cat1.png",
-    tourFlag: [{
-      flagImg: "img/canada-visit.png"
-    }, {
-      flagImg: "img/england-visit.png"
-    }, {
-      flagImg: "img/india-visit.png"
-    }],
-    tourTitle: "Love in Paris",
-    tourCost: "25000",
-    tourNight: "4",
-    tourDay: "5",
-    tourPic: "img/paris.jpg",
-    tourDate: "26 dec, 2016",
-    tourTime: "1:20pm"
-  }, {
-    header: false,
-    footer: false,
-    tourPackage: true,
-    packageType: "Adventure",
-    packageImg: "img/agt-cat1.png",
-    tourFlag: [{
-      flagImg: "img/canada-visit.png"
-    }, {
-      flagImg: "img/england-visit.png"
-    }, {
-      flagImg: "img/india-visit.png"
-    }],
-    tourTitle: "Love in Paris",
-    tourCost: "25000",
-    tourNight: "4",
-    tourDay: "5",
-    tourPic: "img/paris.jpg",
-    tourDate: "26 dec, 2016",
-    tourTime: "1:20pm"
-  }];
-  // travel activity json end
+    //status character counter
+    $scope.$on('$viewContentLoaded', function () {
+      $timeout(function () {
+        $('#postStatus').keyup(updateCount);
+        $('#postStatus').keydown(updateCount);
+        $('#postcount').text(0 + '/350');
 
-  // ITINERARY FILTER
-  //OpenFilter
-  $scope.isopenfilter = false;
-  $scope.openFilter = function () {
-    $scope.isopenfilter = !$scope.isopenfilter;
-  };
-  //OpenFiltertab
-  $scope.isopenfiltertab = false;
-  $scope.openFiltertab = function () {
-    $scope.isopenfilter = !$scope.isopenfilter;
-  };
-  $scope.country = [];
+        function updateCount() {
+          var count = $('#postcount').val().length;
+          $('#postcount').text(count + '/350');
+        }
+      }, 100);
+    });
+    //status character counter end
 
-  $scope.addLine = function () {
-    $scope.lines.push($scope.lines.length);
-  };
-  // this.addText = function(text) {
-  //   if (text) {
-  //     var obj = {
-  //       text: text
-  //     };
-  //     this.country.push(obj);
-  //     this.myText = '';
-  //   }
-  // }
-
-  $scope.countries = [{
-    name: 'Afghanistan',
-    code: 'AF'
-  }, {
-    name: 'Åland Islands',
-    code: 'AX'
-  }, {
-    name: 'Albania',
-    code: 'AL'
-  }, {
-    name: 'Algeria',
-    code: 'DZ'
-  }, {
-    name: 'American Samoa',
-    code: 'AS'
-  }, {
-    name: 'Andorra',
-    code: 'AD'
-  }, {
-    name: 'Angola',
-    code: 'AO'
-  }, {
-    name: 'Anguilla',
-    code: 'AI'
-  }, {
-    name: 'Antarctica',
-    code: 'AQ'
-  }, {
-    name: 'Antigua and Barbuda',
-    code: 'AG'
-  }, {
-    name: 'Argentina',
-    code: 'AR'
-  }, {
-    name: 'Armenia',
-    code: 'AM'
-  }, {
-    name: 'Aruba',
-    code: 'AW'
-  }, {
-    name: 'Australia',
-    code: 'AU'
-  }, {
-    name: 'Austria',
-    code: 'AT'
-  }, {
-    name: 'Azerbaijan',
-    code: 'AZ'
-  }, {
-    name: 'Bahamas',
-    code: 'BS'
-  }, {
-    name: 'Bahrain',
-    code: 'BH'
-  }, {
-    name: 'Bangladesh',
-    code: 'BD'
-  }, {
-    name: 'Barbados',
-    code: 'BB'
-  }, {
-    name: 'Belarus',
-    code: 'BY'
-  }, {
-    name: 'Belgium',
-    code: 'BE'
-  }, {
-    name: 'Belize',
-    code: 'BZ'
-  }, {
-    name: 'Benin',
-    code: 'BJ'
-  }, {
-    name: 'Bermuda',
-    code: 'BM'
-  }, {
-    name: 'Bhutan',
-    code: 'BT'
-  }, {
-    name: 'Bolivia',
-    code: 'BO'
-  }, {
-    name: 'Bosnia and Herzegovina',
-    code: 'BA'
-  }, {
-    name: 'Botswana',
-    code: 'BW'
-  }, {
-    name: 'Bouvet Island',
-    code: 'BV'
-  }, {
-    name: 'Brazil',
-    code: 'BR'
-  }, {
-    name: 'British Indian Ocean Territory',
-    code: 'IO'
-  }, {
-    name: 'Brunei Darussalam',
-    code: 'BN'
-  }, {
-    name: 'Bulgaria',
-    code: 'BG'
-  }, {
-    name: 'Burkina Faso',
-    code: 'BF'
-  }, {
-    name: 'Burundi',
-    code: 'BI'
-  }, {
-    name: 'Cambodia',
-    code: 'KH'
-  }, {
-    name: 'Cameroon',
-    code: 'CM'
-  }, {
-    name: 'Canada',
-    code: 'CA'
-  }, {
-    name: 'Cape Verde',
-    code: 'CV'
-  }, {
-    name: 'Cayman Islands',
-    code: 'KY'
-  }, {
-    name: 'Central African Republic',
-    code: 'CF'
-  }, {
-    name: 'Chad',
-    code: 'TD'
-  }, {
-    name: 'Chile',
-    code: 'CL'
-  }, {
-    name: 'China',
-    code: 'CN'
-  }, {
-    name: 'Christmas Island',
-    code: 'CX'
-  }, {
-    name: 'Cocos (Keeling) Islands',
-    code: 'CC'
-  }, {
-    name: 'Colombia',
-    code: 'CO'
-  }, {
-    name: 'Comoros',
-    code: 'KM'
-  }, {
-    name: 'Congo',
-    code: 'CG'
-  }, {
-    name: 'Congo, The Democratic Republic of the',
-    code: 'CD'
-  }, {
-    name: 'Cook Islands',
-    code: 'CK'
-  }, {
-    name: 'Costa Rica',
-    code: 'CR'
-  }, {
-    name: 'Cote D\'Ivoire',
-    code: 'CI'
-  }, {
-    name: 'Croatia',
-    code: 'HR'
-  }, {
-    name: 'Cuba',
-    code: 'CU'
-  }, {
-    name: 'Cyprus',
-    code: 'CY'
-  }, {
-    name: 'Czech Republic',
-    code: 'CZ'
-  }, {
-    name: 'Denmark',
-    code: 'DK'
-  }, {
-    name: 'Djibouti',
-    code: 'DJ'
-  }, {
-    name: 'Dominica',
-    code: 'DM'
-  }, {
-    name: 'Dominican Republic',
-    code: 'DO'
-  }, {
-    name: 'Ecuador',
-    code: 'EC'
-  }, {
-    name: 'Egypt',
-    code: 'EG'
-  }, {
-    name: 'El Salvador',
-    code: 'SV'
-  }, {
-    name: 'Equatorial Guinea',
-    code: 'GQ'
-  }, {
-    name: 'Eritrea',
-    code: 'ER'
-  }, {
-    name: 'Estonia',
-    code: 'EE'
-  }, {
-    name: 'Ethiopia',
-    code: 'ET'
-  }, {
-    name: 'Falkland Islands (Malvinas)',
-    code: 'FK'
-  }, {
-    name: 'Faroe Islands',
-    code: 'FO'
-  }, {
-    name: 'Fiji',
-    code: 'FJ'
-  }, {
-    name: 'Finland',
-    code: 'FI'
-  }, {
-    name: 'France',
-    code: 'FR'
-  }, {
-    name: 'French Guiana',
-    code: 'GF'
-  }, {
-    name: 'French Polynesia',
-    code: 'PF'
-  }, {
-    name: 'French Southern Territories',
-    code: 'TF'
-  }, {
-    name: 'Gabon',
-    code: 'GA'
-  }, {
-    name: 'Gambia',
-    code: 'GM'
-  }, {
-    name: 'Georgia',
-    code: 'GE'
-  }, {
-    name: 'Germany',
-    code: 'DE'
-  }, {
-    name: 'Ghana',
-    code: 'GH'
-  }, {
-    name: 'Gibraltar',
-    code: 'GI'
-  }, {
-    name: 'Greece',
-    code: 'GR'
-  }, {
-    name: 'Greenland',
-    code: 'GL'
-  }, {
-    name: 'Grenada',
-    code: 'GD'
-  }, {
-    name: 'Guadeloupe',
-    code: 'GP'
-  }, {
-    name: 'Guam',
-    code: 'GU'
-  }, {
-    name: 'Guatemala',
-    code: 'GT'
-  }, {
-    name: 'Guernsey',
-    code: 'GG'
-  }, {
-    name: 'Guinea',
-    code: 'GN'
-  }, {
-    name: 'Guinea-Bissau',
-    code: 'GW'
-  }, {
-    name: 'Guyana',
-    code: 'GY'
-  }, {
-    name: 'Haiti',
-    code: 'HT'
-  }, {
-    name: 'Heard Island and Mcdonald Islands',
-    code: 'HM'
-  }, {
-    name: 'Holy See (Vatican City State)',
-    code: 'VA'
-  }, {
-    name: 'Honduras',
-    code: 'HN'
-  }, {
-    name: 'Hong Kong',
-    code: 'HK'
-  }, {
-    name: 'Hungary',
-    code: 'HU'
-  }, {
-    name: 'Iceland',
-    code: 'IS'
-  }, {
-    name: 'India',
-    code: 'IN'
-  }, {
-    name: 'Indonesia',
-    code: 'ID'
-  }, {
-    name: 'Iran, Islamic Republic Of',
-    code: 'IR'
-  }, {
-    name: 'Iraq',
-    code: 'IQ'
-  }, {
-    name: 'Ireland',
-    code: 'IE'
-  }, {
-    name: 'Isle of Man',
-    code: 'IM'
-  }, {
-    name: 'Israel',
-    code: 'IL'
-  }, {
-    name: 'Italy',
-    code: 'IT'
-  }, {
-    name: 'Jamaica',
-    code: 'JM'
-  }, {
-    name: 'Japan',
-    code: 'JP'
-  }, {
-    name: 'Jersey',
-    code: 'JE'
-  }, {
-    name: 'Jordan',
-    code: 'JO'
-  }, {
-    name: 'Kazakhstan',
-    code: 'KZ'
-  }, {
-    name: 'Kenya',
-    code: 'KE'
-  }, {
-    name: 'Kiribati',
-    code: 'KI'
-  }, {
-    name: 'Korea, Democratic People\'s Republic of',
-    code: 'KP'
-  }, {
-    name: 'Korea, Republic of',
-    code: 'KR'
-  }, {
-    name: 'Kuwait',
-    code: 'KW'
-  }, {
-    name: 'Kyrgyzstan',
-    code: 'KG'
-  }, {
-    name: 'Lao People\'s Democratic Republic',
-    code: 'LA'
-  }, {
-    name: 'Latvia',
-    code: 'LV'
-  }, {
-    name: 'Lebanon',
-    code: 'LB'
-  }, {
-    name: 'Lesotho',
-    code: 'LS'
-  }, {
-    name: 'Liberia',
-    code: 'LR'
-  }, {
-    name: 'Libyan Arab Jamahiriya',
-    code: 'LY'
-  }, {
-    name: 'Liechtenstein',
-    code: 'LI'
-  }, {
-    name: 'Lithuania',
-    code: 'LT'
-  }, {
-    name: 'Luxembourg',
-    code: 'LU'
-  }, {
-    name: 'Macao',
-    code: 'MO'
-  }, {
-    name: 'Macedonia, The Former Yugoslav Republic of',
-    code: 'MK'
-  }, {
-    name: 'Madagascar',
-    code: 'MG'
-  }, {
-    name: 'Malawi',
-    code: 'MW'
-  }, {
-    name: 'Malaysia',
-    code: 'MY'
-  }, {
-    name: 'Maldives',
-    code: 'MV'
-  }, {
-    name: 'Mali',
-    code: 'ML'
-  }, {
-    name: 'Malta',
-    code: 'MT'
-  }, {
-    name: 'Marshall Islands',
-    code: 'MH'
-  }, {
-    name: 'Martinique',
-    code: 'MQ'
-  }, {
-    name: 'Mauritania',
-    code: 'MR'
-  }, {
-    name: 'Mauritius',
-    code: 'MU'
-  }, {
-    name: 'Mayotte',
-    code: 'YT'
-  }, {
-    name: 'Mexico',
-    code: 'MX'
-  }, {
-    name: 'Micronesia, Federated States of',
-    code: 'FM'
-  }, {
-    name: 'Moldova, Republic of',
-    code: 'MD'
-  }, {
-    name: 'Monaco',
-    code: 'MC'
-  }, {
-    name: 'Mongolia',
-    code: 'MN'
-  }, {
-    name: 'Montserrat',
-    code: 'MS'
-  }, {
-    name: 'Morocco',
-    code: 'MA'
-  }, {
-    name: 'Mozambique',
-    code: 'MZ'
-  }, {
-    name: 'Myanmar',
-    code: 'MM'
-  }, {
-    name: 'Namibia',
-    code: 'NA'
-  }, {
-    name: 'Nauru',
-    code: 'NR'
-  }, {
-    name: 'Nepal',
-    code: 'NP'
-  }, {
-    name: 'Netherlands',
-    code: 'NL'
-  }, {
-    name: 'Netherlands Antilles',
-    code: 'AN'
-  }, {
-    name: 'New Caledonia',
-    code: 'NC'
-  }, {
-    name: 'New Zealand',
-    code: 'NZ'
-  }, {
-    name: 'Nicaragua',
-    code: 'NI'
-  }, {
-    name: 'Niger',
-    code: 'NE'
-  }, {
-    name: 'Nigeria',
-    code: 'NG'
-  }, {
-    name: 'Niue',
-    code: 'NU'
-  }, {
-    name: 'Norfolk Island',
-    code: 'NF'
-  }, {
-    name: 'Northern Mariana Islands',
-    code: 'MP'
-  }, {
-    name: 'Norway',
-    code: 'NO'
-  }, {
-    name: 'Oman',
-    code: 'OM'
-  }, {
-    name: 'Pakistan',
-    code: 'PK'
-  }, {
-    name: 'Palau',
-    code: 'PW'
-  }, {
-    name: 'Palestinian Territory, Occupied',
-    code: 'PS'
-  }, {
-    name: 'Panama',
-    code: 'PA'
-  }, {
-    name: 'Papua New Guinea',
-    code: 'PG'
-  }, {
-    name: 'Paraguay',
-    code: 'PY'
-  }, {
-    name: 'Peru',
-    code: 'PE'
-  }, {
-    name: 'Philippines',
-    code: 'PH'
-  }, {
-    name: 'Pitcairn',
-    code: 'PN'
-  }, {
-    name: 'Poland',
-    code: 'PL'
-  }, {
-    name: 'Portugal',
-    code: 'PT'
-  }, {
-    name: 'Puerto Rico',
-    code: 'PR'
-  }, {
-    name: 'Qatar',
-    code: 'QA'
-  }, {
-    name: 'Reunion',
-    code: 'RE'
-  }, {
-    name: 'Romania',
-    code: 'RO'
-  }, {
-    name: 'Russian Federation',
-    code: 'RU'
-  }, {
-    name: 'Rwanda',
-    code: 'RW'
-  }, {
-    name: 'Saint Helena',
-    code: 'SH'
-  }, {
-    name: 'Saint Kitts and Nevis',
-    code: 'KN'
-  }, {
-    name: 'Saint Lucia',
-    code: 'LC'
-  }, {
-    name: 'Saint Pierre and Miquelon',
-    code: 'PM'
-  }, {
-    name: 'Saint Vincent and the Grenadines',
-    code: 'VC'
-  }, {
-    name: 'Samoa',
-    code: 'WS'
-  }, {
-    name: 'San Marino',
-    code: 'SM'
-  }, {
-    name: 'Sao Tome and Principe',
-    code: 'ST'
-  }, {
-    name: 'Saudi Arabia',
-    code: 'SA'
-  }, {
-    name: 'Senegal',
-    code: 'SN'
-  }, {
-    name: 'Serbia and Montenegro',
-    code: 'CS'
-  }, {
-    name: 'Seychelles',
-    code: 'SC'
-  }, {
-    name: 'Sierra Leone',
-    code: 'SL'
-  }, {
-    name: 'Singapore',
-    code: 'SG'
-  }, {
-    name: 'Slovakia',
-    code: 'SK'
-  }, {
-    name: 'Slovenia',
-    code: 'SI'
-  }, {
-    name: 'Solomon Islands',
-    code: 'SB'
-  }, {
-    name: 'Somalia',
-    code: 'SO'
-  }, {
-    name: 'South Africa',
-    code: 'ZA'
-  }, {
-    name: 'South Georgia and the South Sandwich Islands',
-    code: 'GS'
-  }, {
-    name: 'Spain',
-    code: 'ES'
-  }, {
-    name: 'Sri Lanka',
-    code: 'LK'
-  }, {
-    name: 'Sudan',
-    code: 'SD'
-  }, {
-    name: 'Suriname',
-    code: 'SR'
-  }, {
-    name: 'Svalbard and Jan Mayen',
-    code: 'SJ'
-  }, {
-    name: 'Swaziland',
-    code: 'SZ'
-  }, {
-    name: 'Sweden',
-    code: 'SE'
-  }, {
-    name: 'Switzerland',
-    code: 'CH'
-  }, {
-    name: 'Syrian Arab Republic',
-    code: 'SY'
-  }, {
-    name: 'Taiwan, Province of China',
-    code: 'TW'
-  }, {
-    name: 'Tajikistan',
-    code: 'TJ'
-  }, {
-    name: 'Tanzania, United Republic of',
-    code: 'TZ'
-  }, {
-    name: 'Thailand',
-    code: 'TH'
-  }, {
-    name: 'Timor-Leste',
-    code: 'TL'
-  }, {
-    name: 'Togo',
-    code: 'TG'
-  }, {
-    name: 'Tokelau',
-    code: 'TK'
-  }, {
-    name: 'Tonga',
-    code: 'TO'
-  }, {
-    name: 'Trinidad and Tobago',
-    code: 'TT'
-  }, {
-    name: 'Tunisia',
-    code: 'TN'
-  }, {
-    name: 'Turkey',
-    code: 'TR'
-  }, {
-    name: 'Turkmenistan',
-    code: 'TM'
-  }, {
-    name: 'Turks and Caicos Islands',
-    code: 'TC'
-  }, {
-    name: 'Tuvalu',
-    code: 'TV'
-  }, {
-    name: 'Uganda',
-    code: 'UG'
-  }, {
-    name: 'Ukraine',
-    code: 'UA'
-  }, {
-    name: 'United Arab Emirates',
-    code: 'AE'
-  }, {
-    name: 'United Kingdom',
-    code: 'GB'
-  }, {
-    name: 'United States',
-    code: 'US'
-  }, {
-    name: 'United States Minor Outlying Islands',
-    code: 'UM'
-  }, {
-    name: 'Uruguay',
-    code: 'UY'
-  }, {
-    name: 'Uzbekistan',
-    code: 'UZ'
-  }, {
-    name: 'Vanuatu',
-    code: 'VU'
-  }, {
-    name: 'Venezuela',
-    code: 'VE'
-  }, {
-    name: 'Vietnam',
-    code: 'VN'
-  }, {
-    name: 'Virgin Islands, British',
-    code: 'VG'
-  }, {
-    name: 'Virgin Islands, U.S.',
-    code: 'VI'
-  }, {
-    name: 'Wallis and Futuna',
-    code: 'WF'
-  }, {
-    name: 'Western Sahara',
-    code: 'EH'
-  }, {
-    name: 'Yemen',
-    code: 'YE'
-  }, {
-    name: 'Zambia',
-    code: 'ZM'
-  }, {
-    name: 'Zimbabwe',
-    code: 'ZW'
-  }];
-  //ITINERARY FILTER END
-
-  //rating slider
-  $scope.ratingSlide = {
-    range: {
-      min: 0,
-      max: 10
-    },
-    step: 1,
-    minRating: 0,
-    maxRating: 10
-  };
-  //rating slider end
-
-  // category type
-  $scope.categoryType = [{
-    img: "img/itinerary/adventure.png",
-    caption: "Adventure",
-    width: "25"
-  }, {
-    img: "img/itinerary/business.png",
-    caption: "Business",
-    width: "24"
-  }, {
-    img: "img/itinerary/family.png",
-    caption: "Family",
-    width: "30"
-  }, {
-    img: "img/itinerary/romance.png",
-    caption: "Romance",
-    width: "26"
-  }, {
-    img: "img/itinerary/backpacking.png",
-    caption: "Backpacking",
-    width: "23"
-  }, {
-    img: "img/itinerary/budget.png",
-    caption: "Budget",
-    width: "22"
-  }, {
-    img: "img/itinerary/luxury.png",
-    caption: "Luxury",
-    width: "21"
-  }, {
-    img: "img/itinerary/religious.png",
-    caption: "Religious",
-    width: "26"
-  }, {
-    img: "img/itinerary/friend.png",
-    caption: "Friends",
-    width: "24"
-  }, ];
-  // category type end
-})
-
-.controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
-  $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
-  $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
-  TemplateService.title = $scope.menutitle;
-  $scope.navigation = NavigationService.getnav();
-  $scope.oneAtATime = true;
-
-  // on load modal
- // $(window).load(function(){
- //   $('#getModal').modal('show');
- // });
- // on load modal end
-
-  //lead monitor accordion
-  $scope.leadMonAgent = [{
-    leadStatus: 'new',
-    leadImg: 'img/follower.jpg',
-    leadName: 'Andrea Christina',
-    leadDate: '02/12/2016',
-    leadDestination: 'India',
-    leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-    leadPhone: '91961845656',
-    leadMail: 'leads@leads.com',
-    leadItinerary: 'Incredible India'
-  }, {
-    leadStatus: 'actioned',
-    leadImg: 'img/follower.jpg',
-    leadName: 'Andrea Christina',
-    leadDate: '02/12/2016',
-    leadDestination: 'India',
-    leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-    leadPhone: '91961845656',
-    leadMail: 'leads@leads.com',
-    leadItinerary: 'Incredible India'
-  }, {
-    leadStatus: 'new',
-    leadImg: 'img/follower.jpg',
-    leadName: 'Andrea Christina',
-    leadDate: '02/12/2016',
-    leadDestination: 'India',
-    leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-    leadPhone: '91961845656',
-    leadMail: 'leads@leads.com',
-    leadItinerary: 'Incredible India'
-  }, {
-    leadStatus: 'actioned',
-    leadImg: 'img/follower.jpg',
-    leadName: 'Andrea Christina',
-    leadDate: '02/12/2016',
-    leadDestination: 'India',
-    leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-    leadPhone: '91961845656',
-    leadMail: 'leads@leads.com',
-    leadItinerary: 'Incredible India'
-  }, {
-    leadStatus: 'new',
-    leadImg: 'img/follower.jpg',
-    leadName: 'Andrea Christina',
-    leadDate: '02/12/2016',
-    leadDestination: 'India',
-    leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-    leadPhone: '91961845656',
-    leadMail: 'leads@leads.com',
-    leadItinerary: 'Incredible India'
-  }];
-  //lead monitor accordion end
-
-  //scroll change
-  $(window).scroll(function () {
-    var scroll = $(window).scrollTop();
-    //console.log(scroll);
-    if (scroll >= 370) {
-      //console.log('a');
-      $(".agent-home-nav").addClass("change-blue");
-    } else {
-      //console.log('a');
-      $(".agent-home-nav").removeClass("change-blue");
-    }
-  });
-  //scroll change end
-
-  //status character counter
-  $scope.$on('$viewContentLoaded', function () {
-    $timeout(function () {
-      $('#postStatus').keyup(updateCount);
-      $('#postStatus').keydown(updateCount);
-      $('#postcount').text(0 + '/350');
-
-      function updateCount() {
-        var count = $('#postcount').val().length;
-        $('#postcount').text(count + '/350');
-      }
-    }, 100);
-  });
-  //status character counter end
-
-  // tab change
-  var allagthome = ["views/content/agent/agt-home/agthome-itinerary.html", "views/content/agent/agt-home/agthome-tourpackages.html", "views/content/agent/agt-home/agthome-photovideos.html", "views/content/agent/agt-home/agthome-testimonialreviews.html",
-    "views/content/agent/agt-home/agthome-travelactivity.html",
-    "views/content/agent/agt-home/agthome-leadmonitor.html", "views/content/agent/agt-home/agthome-analytics.html",
-    "views/content/agent/agt-home/agthome-aboutus.html"
-  ];
-  $scope.agthome = {
-    innerView: allagthome[0]
-  };
-  // change url
-  $scope.agthomeoptions = {};
-  $scope.agthomeoptions.active = "";
-  $scope.viewTab = 1;
-  switch ($state.params.name) {
-    case "agthome-itinerary":
-      $scope.agthome.innerView = allagthome[0];
-      $scope.agthomeoptions.active = "agthome-itinerary";
-      break;
-    case "agthome-tourpackages":
-      $scope.agthome.innerView = allagthome[1];
-      $scope.agthomeoptions.active = "agthome-tourpackages";
-      break;
-    case "agthome-photovideos":
-      $scope.agthome.innerView = allagthome[2];
-      $scope.agthomeoptions.active = "agthome-photovideos";
-      break;
-    case "agthome-testimonialreviews":
-      $scope.agthome.innerView = allagthome[3];
-      $scope.agthomeoptions.active = "agthome-testimonialreviews";
-      break;
-    case "agthome-travelactivity":
-      $scope.agthome.innerView = allagthome[4];
-      $scope.agthomeoptions.active = "agthome-travelactivity";
-      break;
-    case "agthome-leadmonitor":
-      $scope.agthome.innerView = allagthome[5];
-      $scope.agthomeoptions.active = "agthome-leadmonitor";
-      break;
-    case "agthome-analytics":
-      $scope.agthome.innerView = allagthome[6];
-      $scope.agthomeoptions.active = "agthome-analytics";
-      break;
-    case "agthome-aboutus":
-      $scope.agthome.innerView = allagthome[7];
-      $scope.agthomeoptions.active = "agthome-aboutus";
-      break;
-    default:
-      $scope.agthome.innerView = allagthome[0];
-  }
-  $scope.agenthomeItinerary = true;
-  $scope.agentFixednav = ""
-  $scope.getTab = function (view) {
-    $scope.agthome.innerView = allagthome[view];
-    var url = "agthome-itinerary";
-    var active = "";
-    console.log(view);
-    switch (view) {
-      case 0:
-        url = "agthome-itinerary";
+    // tab change
+    var allagthome = ["views/content/agent/agt-home/agthome-itinerary.html", "views/content/agent/agt-home/agthome-tourpackages.html", "views/content/agent/agt-home/agthome-photovideos.html", "views/content/agent/agt-home/agthome-testimonialreviews.html",
+      "views/content/agent/agt-home/agthome-travelactivity.html",
+      "views/content/agent/agt-home/agthome-leadmonitor.html", "views/content/agent/agt-home/agthome-analytics.html",
+      "views/content/agent/agt-home/agthome-aboutus.html"
+    ];
+    $scope.agthome = {
+      innerView: allagthome[0]
+    };
+    // change url
+    $scope.agthomeoptions = {};
+    $scope.agthomeoptions.active = "";
+    $scope.viewTab = 1;
+    switch ($state.params.name) {
+      case "agthome-itinerary":
+        $scope.agthome.innerView = allagthome[0];
         $scope.agthomeoptions.active = "agthome-itinerary";
-        $scope.agenthomeItinerary = true;
-        $scope.agentFixednav = "";
         break;
-      case 1:
-        url = "agthome-tourpackages";
+      case "agthome-tourpackages":
+        $scope.agthome.innerView = allagthome[1];
         $scope.agthomeoptions.active = "agthome-tourpackages";
-        $scope.agenthomeItinerary = false;
-        $scope.agentFixednav = "change-blue";
         break;
-      case 2:
-        url = "agthome-photovideos";
+      case "agthome-photovideos":
+        $scope.agthome.innerView = allagthome[2];
         $scope.agthomeoptions.active = "agthome-photovideos";
-        $scope.agenthomeItinerary = false;
-        $scope.agentFixednav = "change-blue";
         break;
-      case 3:
-        url = "agthome-testimonialreviews";
+      case "agthome-testimonialreviews":
+        $scope.agthome.innerView = allagthome[3];
         $scope.agthomeoptions.active = "agthome-testimonialreviews";
-        $scope.agenthomeItinerary = false;
-        $scope.agentFixednav = "change-blue";
         break;
-      case 4:
-        url = "agthome-travelactivity";
+      case "agthome-travelactivity":
+        $scope.agthome.innerView = allagthome[4];
         $scope.agthomeoptions.active = "agthome-travelactivity";
-        $scope.agenthomeItinerary = false;
-        $scope.agentFixednav = "change-blue";
         break;
-      case 5:
-        url = "agthome-leadmonitor";
+      case "agthome-leadmonitor":
+        $scope.agthome.innerView = allagthome[5];
         $scope.agthomeoptions.active = "agthome-leadmonitor";
-        $scope.agenthomeItinerary = false;
-        $scope.agentFixednav = "change-blue";
         break;
-      case 6:
-        url = "agthome-analytics";
+      case "agthome-analytics":
+        $scope.agthome.innerView = allagthome[6];
         $scope.agthomeoptions.active = "agthome-analytics";
-        $scope.agenthomeItinerary = false;
-        $scope.agentFixednav = "change-blue";
         break;
-      case 7:
-        url = "agthome-aboutus";
+      case "agthome-aboutus":
+        $scope.agthome.innerView = allagthome[7];
         $scope.agthomeoptions.active = "agthome-aboutus";
-        $scope.agenthomeItinerary = false;
-        $scope.agentFixednav = "change-blue";
         break;
-
       default:
-        url = "agthome-itinerary";
-        $scope.agthomeoptions.active = "agthome-itinerary";
-        $scope.agenthomeItinerary = true;
+        $scope.agthome.innerView = allagthome[0];
     }
-    console.log(url);
-    $state.go("agent-home", {
-      name: url
+    $scope.agenthomeItinerary = true;
+    $scope.agentFixednav = ""
+    $scope.getTab = function (view) {
+      $scope.agthome.innerView = allagthome[view];
+      var url = "agthome-itinerary";
+      var active = "";
+      console.log(view);
+      switch (view) {
+        case 0:
+          url = "agthome-itinerary";
+          $scope.agthomeoptions.active = "agthome-itinerary";
+          $scope.agenthomeItinerary = true;
+          $scope.agentFixednav = "";
+          break;
+        case 1:
+          url = "agthome-tourpackages";
+          $scope.agthomeoptions.active = "agthome-tourpackages";
+          $scope.agenthomeItinerary = false;
+          $scope.agentFixednav = "change-blue";
+          break;
+        case 2:
+          url = "agthome-photovideos";
+          $scope.agthomeoptions.active = "agthome-photovideos";
+          $scope.agenthomeItinerary = false;
+          $scope.agentFixednav = "change-blue";
+          break;
+        case 3:
+          url = "agthome-testimonialreviews";
+          $scope.agthomeoptions.active = "agthome-testimonialreviews";
+          $scope.agenthomeItinerary = false;
+          $scope.agentFixednav = "change-blue";
+          break;
+        case 4:
+          url = "agthome-travelactivity";
+          $scope.agthomeoptions.active = "agthome-travelactivity";
+          $scope.agenthomeItinerary = false;
+          $scope.agentFixednav = "change-blue";
+          break;
+        case 5:
+          url = "agthome-leadmonitor";
+          $scope.agthomeoptions.active = "agthome-leadmonitor";
+          $scope.agenthomeItinerary = false;
+          $scope.agentFixednav = "change-blue";
+          break;
+        case 6:
+          url = "agthome-analytics";
+          $scope.agthomeoptions.active = "agthome-analytics";
+          $scope.agenthomeItinerary = false;
+          $scope.agentFixednav = "change-blue";
+          break;
+        case 7:
+          url = "agthome-aboutus";
+          $scope.agthomeoptions.active = "agthome-aboutus";
+          $scope.agenthomeItinerary = false;
+          $scope.agentFixednav = "change-blue";
+          break;
+
+        default:
+          url = "agthome-itinerary";
+          $scope.agthomeoptions.active = "agthome-itinerary";
+          $scope.agenthomeItinerary = true;
+      }
+      console.log(url);
+      $state.go("agent-home", {
+        name: url
+      }, {
+        notify: false
+      });
+    };
+    // tab change end
+
+    // category type
+    $scope.categoryType = [{
+      img: "img/itinerary/adventure.png",
+      caption: "Adventure",
+      width: "25"
     }, {
-      notify: false
-    });
-  };
-  // tab change end
-
-  // category type
-  $scope.categoryType = [{
-    img: "img/itinerary/adventure.png",
-    caption: "Adventure",
-    width: "25"
-  }, {
-    img: "img/itinerary/business.png",
-    caption: "Business",
-    width: "24"
-  }, {
-    img: "img/itinerary/family.png",
-    caption: "Family",
-    width: "30"
-  }, {
-    img: "img/itinerary/romance.png",
-    caption: "Romance",
-    width: "26"
-  }, {
-    img: "img/itinerary/backpacking.png",
-    caption: "Backpacking",
-    width: "23"
-  }, {
-    img: "img/itinerary/budget.png",
-    caption: "Budget",
-    width: "22"
-  }, {
-    img: "img/itinerary/luxury.png",
-    caption: "Luxury",
-    width: "21"
-  }, {
-    img: "img/itinerary/religious.png",
-    caption: "Religious",
-    width: "26"
-  }, {
-    img: "img/itinerary/friend.png",
-    caption: "Friends",
-    width: "24"
-  }];
-  // category type end
-
-  // itinerary popover
-  $scope.viewdetailInfo = false;
-  $scope.showdetailInfo = function () {
-    if ($scope.viewdetailInfo == false) {
-      $scope.viewdetailInfo = true;
-      console.log("true");
-    } else {
-      $scope.viewdetailInfo = false;
-    }
-  };
-
-  $scope.viewquickInfo = false;
-  $scope.showquickInfo = function () {
-    if ($scope.viewquickInfo == false) {
-      $scope.viewquickInfo = true;
-    } else {
-      $scope.viewquickInfo = false;
-    }
-  };
-  // itinerary popover end
-
-  //user itinerary cards
-  $scope.usrItineraryCard = [{
-    timestampDate: '26 Jan, 2015',
-    timestampHour: '1:20 pm',
-    tripImg: 'img/paris.jpg',
-    itineraryTitle: 'Love In Paris',
-    tripCost: '25000',
-    noDays: '75',
-    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    agtReviewCount: '352',
-    agtRating: '4.5',
-    agtLikesCount: '99',
-    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    timestampDate: '26 Jan, 2015',
-    timestampHour: '1:20 pm',
-    tripImg: 'img/paris.jpg',
-    itineraryTitle: 'Love In Paris',
-    tripCost: '35000',
-    noDays: '55',
-    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    agtReviewCount: '1505',
-    agtRating: '3.5',
-    agtLikesCount: '99',
-    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    timestampDate: '15 Jan, 2015',
-    timestampHour: '1:20 pm',
-    tripImg: 'img/paris.jpg',
-    itineraryTitle: 'Love In Paris',
-    tripCost: '75000',
-    noDays: '15',
-    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    agtReviewCount: '342',
-    agtRating: '4.0',
-    agtLikesCount: '199',
-    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    timestampDate: '26 Jan, 2015',
-    timestampHour: '1:20 pm',
-    tripImg: 'img/paris.jpg',
-    itineraryTitle: 'Love In Paris',
-    tripCost: '25000',
-    noDays: '75',
-    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    agtReviewCount: '352',
-    agtRating: '4.5',
-    agtLikesCount: '99',
-    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    timestampDate: '26 Jan, 2015',
-    timestampHour: '1:20 pm',
-    tripImg: 'img/paris.jpg',
-    itineraryTitle: 'Love In Paris',
-    tripCost: '25000',
-    noDays: '75',
-    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    agtReviewCount: '352',
-    agtRating: '4.5',
-    agtLikesCount: '99',
-    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    timestampDate: '26 Jan, 2015',
-    timestampHour: '1:20 pm',
-    tripImg: 'img/paris.jpg',
-    itineraryTitle: 'Love In Paris',
-    tripCost: '25000',
-    noDays: '75',
-    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    agtReviewCount: '352',
-    agtRating: '4.5',
-    agtLikesCount: '99',
-    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    timestampDate: '26 Jan, 2015',
-    timestampHour: '1:20 pm',
-    tripImg: 'img/paris.jpg',
-    itineraryTitle: 'Love In Paris',
-    tripCost: '25000',
-    noDays: '75',
-    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    agtReviewCount: '352',
-    agtRating: '4.5',
-    agtLikesCount: '99',
-    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    timestampDate: '26 Jan, 2015',
-    timestampHour: '1:20 pm',
-    tripImg: 'img/paris.jpg',
-    itineraryTitle: 'Love In Paris',
-    tripCost: '25000',
-    noDays: '75',
-    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-    agtReviewCount: '352',
-    agtRating: '4.5',
-    agtLikesCount: '99',
-    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }];
-  //user itinerary cards end
-
-  // tour packages card
-  $scope.usrTourPackageCard = [{
-    tourImg: 'img/paris.jpg',
-    agttourTitle: 'Love In Paris',
-    agttourCost: '25000',
-    tourDayC: '4',
-    tourNightC: '3',
-    tourcategoryTitle: 'Adventure',
-    tourcategoryImg: 'img/agt-cat1.png',
-    tourDate:'26 Dec, 2016',
-    tourTime: '1.20 pm',
-    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    tourImg: 'img/paris.jpg',
-    agttourTitle: 'Love In Paris',
-    agttourCost: '25000',
-    tourDayC: '4',
-    tourNightC: '3',
-    tourcategoryImg: 'img/agt-cat5.png',
-    tourcategoryTitle: 'Backpacking',
-    tourDate:'26 Dec, 2016',
-    tourTime: '1.20 pm',
-    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    tourImg: 'img/paris.jpg',
-    agttourTitle: 'Love In Paris',
-    agttourCost: '25000',
-    tourDayC: '4',
-    tourNightC: '3',
-    tourcategoryImg: 'img/agt-cat4.png',
-    tourcategoryTitle: 'Romance',
-    tourDate:'26 Dec, 2016',
-    tourTime: '1.20 pm',
-    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    tourImg: 'img/paris.jpg',
-    agttourTitle: 'Love In Paris',
-    agttourCost: '25000',
-    tourDayC: '4',
-    tourNightC: '3',
-    tourcategoryImg: 'img/agt-cat9.png',
-    tourcategoryTitle: 'Friends',
-    tourDate:'26 Dec, 2016',
-    tourTime: '1.20 pm',
-    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    tourImg: 'img/paris.jpg',
-    agttourTitle: 'Love In Paris',
-    agttourCost: '25000',
-    tourDayC: '4',
-    tourNightC: '3',
-    tourcategoryImg: 'img/agt-cat1.png',
-    tourcategoryTitle: 'Adventure',
-    tourDate:'26 Dec, 2016',
-    tourTime: '1.20 pm',
-    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    tourImg: 'img/paris.jpg',
-    agttourTitle: 'Love In Paris',
-    agttourCost: '25000',
-    tourDayC: '4',
-    tourNightC: '3',
-    tourcategoryImg: 'img/agt-cat7.png',
-    tourcategoryTitle: 'Luxury',
-    tourDate:'26 Dec, 2016',
-    tourTime: '1.20 pm',
-    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    tourImg: 'img/paris.jpg',
-    agttourTitle: 'Love In Paris',
-    agttourCost: '25000',
-    tourDayC: '4',
-    tourNightC: '3',
-    tourcategoryImg: 'img/agt-cat1.png',
-    tourcategoryTitle: 'Adventure',
-    tourDate:'26 Dec, 2016',
-    tourTime: '1.20 pm',
-    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }, {
-    tourImg: 'img/paris.jpg',
-    agttourTitle: 'Love In Paris',
-    agttourCost: '25000',
-    tourDayC: '4',
-    tourNightC: '3',
-    tourcategoryImg: 'img/agt-cat4.png',
-    tourcategoryTitle: 'Romance',
-    tourDate:'26 Dec, 2016',
-    tourTime: '1.20 pm',
-    tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-  }];
-  // tour packages card end
-
-  // category of Specialisation array
-$scope.categoriesSpecial = [{
-  tourImgCat: "img/agt-cat1.png",
-  catwidth: "25px",
-  tourCat: "Adventure"
-}, {
-  tourImgCat: "img/agt-cat2.png",
-  catwidth: "25px",
-  tourCat: "Business"
-}, {
-  tourImgCat: "img/agt-cat3.png",
-  catwidth: "33px",
-  tourCat: "Family"
-}, {
-  tourImgCat: "img/agt-cat4.png",
-  catwidth: "28px",
-  tourCat: "Romance"
-}, {
-  tourImgCat: "img/agt-cat5.png",
-  catwidth: "25px",
-  tourCat: "Backpacking"
-}, {
-  tourImgCat: "img/agt-cat6.png",
-  catwidth: "24px",
-  tourCat: "Budget"
-}, {
-  tourImgCat: "img/agt-cat7.png",
-  catwidth: "22px",
-  tourCat: "Luxury"
-}, {
-  tourImgCat: "img/agt-cat8.png",
-  catwidth: "28px",
-  tourCat: "Religious"
-}, {
-  tourImgCat: "img/agt-cat9.png",
-  catwidth: "25px",
-  tourCat: "Friends"
-}];
-// category of Specialisation array end
-
-//tourCurrency start
-$scope.tourCurrency = [{
- currencyCountry: 'Indian',
- currencyCode:'INR'
-},{
- currencyCountry: 'Indian',
- currencyCode:'INR'
-},{
- currencyCountry: 'Indian',
- currencyCode:'INR'
-},{
- currencyCountry: 'Indian',
- currencyCode:'INR'
-},{
- currencyCountry: 'Indian',
- currencyCode:'INR'
-},{
- currencyCountry: 'Indian',
- currencyCode:'INR'
-},{
- currencyCountry: 'Indian',
- currencyCode:'INR'
-}];
-//tourCurrency end
-
-  // gallery card
-  $scope.agenPhotogallery = [
-    'img/uploaded-pic.jpg',
-    'img/slider2.jpg',
-    'img/moment-travel1.jpg',
-    'img/moment-travel2.jpg',
-    'img/local-life-post.jpg',
-    'img/destination/goldentemple.jpg',
-    'img/destination/list1.jpg',
-    'img/destination/list2.jpg',
-    'img/destination/info.jpg',
-    'img/destination/taj-featured.jpg',
-    'img/itinerary/itinerary.jpg',
-    'img/india-gate.jpg',
-    'img/notify-adrena.jpg',
-    'img/paris.jpg',
-    'img/bg-popular.jpg',
-    'img/bg-blur.jpg',
-    'img/blog-banner.jpg',
-    'img/follower.jpg'
-  ];
-  // gallery card end
-
-  //gallery filter list
-  $scope.picFilterList = ['India', 'Malaysia', 'Singapore', 'Dubai', 'London', 'USA', 'Abu Dhabi', 'Kenya', 'South Africa', 'Cuba', 'Cambodia', 'China', 'England', 'Russia', 'Kazakhstan', 'Iran', 'Iraq', 'Bolivia'];
-  //gallery filter list end
-
-  // testimonial card
-  $scope.testimonialreview = [{
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }, {
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }, {
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, text ever since the 1500s,',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }, {
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text evers,',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }, {
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }, {
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }, {
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }, {
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }, {
-    testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    usrprofileImgholder: '../img/adrena.jpg',
-    usrName: 'Randy & Victoria',
-    usrLoc: 'New-York, USA',
-    usrRating: '9'
-  }];
-  // testimonial card end
-
-
-
-  // travel activity json
-  $scope.travelActivity = [{
-    header: true,
-    footer: true,
-    agentHeader: true,
-    travellerAgent: true,
-    agentName: "Holiday Travallers",
-    agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
-    travellerProfile: "img/profile-main.png",
-    travelDate: "26 dec, 2016",
-    travelTime: "1:20pm"
-  }, {
-    header: false,
-    footer: false,
-    tourPackage: true,
-    packageType: "Adventure",
-    packageImg: "img/agt-cat1.png",
-    tourFlag: [{
-      flagImg: "img/canada-visit.png"
+      img: "img/itinerary/business.png",
+      caption: "Business",
+      width: "24"
     }, {
-      flagImg: "img/england-visit.png"
+      img: "img/itinerary/family.png",
+      caption: "Family",
+      width: "30"
     }, {
-      flagImg: "img/india-visit.png"
-    }],
-    tourTitle: "Love in Paris",
-    tourCost: "25000",
-    tourNight: "4",
-    tourDay: "5",
-    tourPic: "img/paris.jpg",
-    tourDate: "26 dec, 2016",
-    tourTime: "1:20pm"
-  }, {
-    header: true,
-    footer: true,
-    itineraryHeader: true,
-    itinerary: true,
-    itineraryDate: "26 Dec, 2016",
-    itineraryTime: "1:20 pm",
-    itineraryCat: "img/agt-cat1.png",
-    itineraryPic: "img/paris.jpg",
-    itineraryTitle: "Love In Paris",
-    itineraryCost: "25000",
-    itineraryDays: "75",
-    itineraryFlag: [{
-      itineraryImg: "img/canada-visit.png"
+      img: "img/itinerary/romance.png",
+      caption: "Romance",
+      width: "26"
     }, {
-      itineraryImg: "img/england-visit.png"
+      img: "img/itinerary/backpacking.png",
+      caption: "Backpacking",
+      width: "23"
     }, {
-      itineraryImg: "img/india-visit.png"
-    }],
-    itineraryJourney: [{
-      journeyImg: "img/sunset.png"
+      img: "img/itinerary/budget.png",
+      caption: "Budget",
+      width: "22"
     }, {
-      journeyImg: "img/bag-journey.png"
+      img: "img/itinerary/luxury.png",
+      caption: "Luxury",
+      width: "21"
     }, {
-      journeyImg: "img/luxury-journey.png"
-    }]
-  }, {
-    header: true,
-    footer: true,
-    agentHeader: true,
-    travellerAgent: true,
-    agentName: "Holiday Travallers",
-    agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
-    travellerProfile: "img/profile-main.png",
-    travelDate: "26 dec, 2016",
-    travelTime: "1:20pm"
-  }, {
-    header: true,
-    footer: true,
-    itineraryHeader: true,
-    itinerary: true,
-    itineraryDate: "26 Dec, 2016",
-    itineraryTime: "1:20 pm",
-    itineraryCat: "img/agt-cat1.png",
-    itineraryPic: "img/paris.jpg",
-    itineraryTitle: "Love In Paris",
-    itineraryCost: "25000",
-    itineraryDays: "75",
-    itineraryFlag: [{
-      itineraryImg: "img/canada-visit.png"
+      img: "img/itinerary/religious.png",
+      caption: "Religious",
+      width: "26"
     }, {
-      itineraryImg: "img/england-visit.png"
-    }, {
-      itineraryImg: "img/india-visit.png"
-    }],
-    itineraryJourney: [{
-      journeyImg: "img/sunset.png"
-    }, {
-      journeyImg: "img/bag-journey.png"
-    }, {
-      journeyImg: "img/luxury-journey.png"
-    }]
-  }, {
-    header: false,
-    footer: false,
-    tourPackage: true,
-    packageType: "Adventure",
-    packageImg: "img/agt-cat1.png",
-    tourFlag: [{
-      flagImg: "img/canada-visit.png"
-    }, {
-      flagImg: "img/england-visit.png"
-    }, {
-      flagImg: "img/india-visit.png"
-    }],
-    tourTitle: "Love in Paris",
-    tourCost: "25000",
-    tourNight: "4",
-    tourDay: "5",
-    tourPic: "img/paris.jpg",
-    tourDate: "26 dec, 2016",
-    tourTime: "1:20pm"
-  }, {
-    header: false,
-    footer: false,
-    tourPackage: true,
-    packageType: "Adventure",
-    packageImg: "img/agt-cat1.png",
-    tourFlag: [{
-      flagImg: "img/canada-visit.png"
-    }, {
-      flagImg: "img/england-visit.png"
-    }, {
-      flagImg: "img/india-visit.png"
-    }],
-    tourTitle: "Love in Paris",
-    tourCost: "25000",
-    tourNight: "4",
-    tourDay: "5",
-    tourPic: "img/paris.jpg",
-    tourDate: "26 dec, 2016",
-    tourTime: "1:20pm"
-  }];
-  // travel activity json end
+      img: "img/itinerary/friend.png",
+      caption: "Friends",
+      width: "24"
+    }];
+    // category type end
 
-  // Enquiry accordion
-  $scope.enquiryAgent = [{
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }, {
-    profileName: "Yash Chudasma",
-    enquireimgProfile: "img/adrena.jpg",
-    enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
-    enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
-  }];
+    // itinerary popover
+    $scope.viewdetailInfo = false;
+    $scope.showdetailInfo = function () {
+      if ($scope.viewdetailInfo == false) {
+        $scope.viewdetailInfo = true;
+        console.log("true");
+      } else {
+        $scope.viewdetailInfo = false;
+      }
+    };
 
-  // Enquiry accordion end
+    $scope.viewquickInfo = false;
+    $scope.showquickInfo = function () {
+      if ($scope.viewquickInfo == false) {
+        $scope.viewquickInfo = true;
+      } else {
+        $scope.viewquickInfo = false;
+      }
+    };
+    // itinerary popover end
 
-})
+    //user itinerary cards
+    $scope.usrItineraryCard = [{
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '35000',
+      noDays: '55',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '1505',
+      agtRating: '3.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '15 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '75000',
+      noDays: '15',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '342',
+      agtRating: '4.0',
+      agtLikesCount: '199',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }];
+    //user itinerary cards end
+
+    // tour packages card
+    $scope.usrTourPackageCard = [{
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryTitle: 'Adventure',
+      tourcategoryImg: 'img/agt-cat1.png',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat5.png',
+      tourcategoryTitle: 'Backpacking',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat4.png',
+      tourcategoryTitle: 'Romance',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat9.png',
+      tourcategoryTitle: 'Friends',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat1.png',
+      tourcategoryTitle: 'Adventure',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat7.png',
+      tourcategoryTitle: 'Luxury',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat1.png',
+      tourcategoryTitle: 'Adventure',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat4.png',
+      tourcategoryTitle: 'Romance',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }];
+    // tour packages card end
+
+    // category of Specialisation array
+    $scope.categoriesSpecial = [{
+      tourImgCat: "img/agt-cat1.png",
+      catwidth: "25px",
+      tourCat: "Adventure"
+    }, {
+      tourImgCat: "img/agt-cat2.png",
+      catwidth: "25px",
+      tourCat: "Business"
+    }, {
+      tourImgCat: "img/agt-cat3.png",
+      catwidth: "33px",
+      tourCat: "Family"
+    }, {
+      tourImgCat: "img/agt-cat4.png",
+      catwidth: "28px",
+      tourCat: "Romance"
+    }, {
+      tourImgCat: "img/agt-cat5.png",
+      catwidth: "25px",
+      tourCat: "Backpacking"
+    }, {
+      tourImgCat: "img/agt-cat6.png",
+      catwidth: "24px",
+      tourCat: "Budget"
+    }, {
+      tourImgCat: "img/agt-cat7.png",
+      catwidth: "22px",
+      tourCat: "Luxury"
+    }, {
+      tourImgCat: "img/agt-cat8.png",
+      catwidth: "28px",
+      tourCat: "Religious"
+    }, {
+      tourImgCat: "img/agt-cat9.png",
+      catwidth: "25px",
+      tourCat: "Friends"
+    }];
+    // category of Specialisation array end
+
+    //tourCurrency start
+    $scope.tourCurrency = [{
+      currencyCountry: 'Indian',
+      currencyCode: 'INR'
+    }, {
+      currencyCountry: 'Indian',
+      currencyCode: 'INR'
+    }, {
+      currencyCountry: 'Indian',
+      currencyCode: 'INR'
+    }, {
+      currencyCountry: 'Indian',
+      currencyCode: 'INR'
+    }, {
+      currencyCountry: 'Indian',
+      currencyCode: 'INR'
+    }, {
+      currencyCountry: 'Indian',
+      currencyCode: 'INR'
+    }, {
+      currencyCountry: 'Indian',
+      currencyCode: 'INR'
+    }];
+    //tourCurrency end
+
+    // gallery card
+    $scope.agenPhotogallery = [
+      'img/uploaded-pic.jpg',
+      'img/slider2.jpg',
+      'img/moment-travel1.jpg',
+      'img/moment-travel2.jpg',
+      'img/local-life-post.jpg',
+      'img/destination/goldentemple.jpg',
+      'img/destination/list1.jpg',
+      'img/destination/list2.jpg',
+      'img/destination/info.jpg',
+      'img/destination/taj-featured.jpg',
+      'img/itinerary/itinerary.jpg',
+      'img/india-gate.jpg',
+      'img/notify-adrena.jpg',
+      'img/paris.jpg',
+      'img/bg-popular.jpg',
+      'img/bg-blur.jpg',
+      'img/blog-banner.jpg',
+      'img/follower.jpg'
+    ];
+    // gallery card end
+
+    //gallery filter list
+    $scope.picFilterList = ['India', 'Malaysia', 'Singapore', 'Dubai', 'London', 'USA', 'Abu Dhabi', 'Kenya', 'South Africa', 'Cuba', 'Cambodia', 'China', 'England', 'Russia', 'Kazakhstan', 'Iran', 'Iraq', 'Bolivia'];
+    //gallery filter list end
+
+    // testimonial card
+    $scope.testimonialreview = [{
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, text ever since the 1500s,',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text evers,',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder: '../img/adrena.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }];
+    // testimonial card end
+
+
+
+    // travel activity json
+    $scope.travelActivity = [{
+      header: true,
+      footer: true,
+      agentHeader: true,
+      travellerAgent: true,
+      agentName: "Holiday Travallers",
+      agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
+      travellerProfile: "img/profile-main.png",
+      travelDate: "26 dec, 2016",
+      travelTime: "1:20pm"
+    }, {
+      header: false,
+      footer: false,
+      tourPackage: true,
+      packageType: "Adventure",
+      packageImg: "img/agt-cat1.png",
+      tourFlag: [{
+        flagImg: "img/canada-visit.png"
+      }, {
+        flagImg: "img/england-visit.png"
+      }, {
+        flagImg: "img/india-visit.png"
+      }],
+      tourTitle: "Love in Paris",
+      tourCost: "25000",
+      tourNight: "4",
+      tourDay: "5",
+      tourPic: "img/paris.jpg",
+      tourDate: "26 dec, 2016",
+      tourTime: "1:20pm"
+    }, {
+      header: true,
+      footer: true,
+      itineraryHeader: true,
+      itinerary: true,
+      itineraryDate: "26 Dec, 2016",
+      itineraryTime: "1:20 pm",
+      itineraryCat: "img/agt-cat1.png",
+      itineraryPic: "img/paris.jpg",
+      itineraryTitle: "Love In Paris",
+      itineraryCost: "25000",
+      itineraryDays: "75",
+      itineraryFlag: [{
+        itineraryImg: "img/canada-visit.png"
+      }, {
+        itineraryImg: "img/england-visit.png"
+      }, {
+        itineraryImg: "img/india-visit.png"
+      }],
+      itineraryJourney: [{
+        journeyImg: "img/sunset.png"
+      }, {
+        journeyImg: "img/bag-journey.png"
+      }, {
+        journeyImg: "img/luxury-journey.png"
+      }]
+    }, {
+      header: true,
+      footer: true,
+      agentHeader: true,
+      travellerAgent: true,
+      agentName: "Holiday Travallers",
+      agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
+      travellerProfile: "img/profile-main.png",
+      travelDate: "26 dec, 2016",
+      travelTime: "1:20pm"
+    }, {
+      header: true,
+      footer: true,
+      itineraryHeader: true,
+      itinerary: true,
+      itineraryDate: "26 Dec, 2016",
+      itineraryTime: "1:20 pm",
+      itineraryCat: "img/agt-cat1.png",
+      itineraryPic: "img/paris.jpg",
+      itineraryTitle: "Love In Paris",
+      itineraryCost: "25000",
+      itineraryDays: "75",
+      itineraryFlag: [{
+        itineraryImg: "img/canada-visit.png"
+      }, {
+        itineraryImg: "img/england-visit.png"
+      }, {
+        itineraryImg: "img/india-visit.png"
+      }],
+      itineraryJourney: [{
+        journeyImg: "img/sunset.png"
+      }, {
+        journeyImg: "img/bag-journey.png"
+      }, {
+        journeyImg: "img/luxury-journey.png"
+      }]
+    }, {
+      header: false,
+      footer: false,
+      tourPackage: true,
+      packageType: "Adventure",
+      packageImg: "img/agt-cat1.png",
+      tourFlag: [{
+        flagImg: "img/canada-visit.png"
+      }, {
+        flagImg: "img/england-visit.png"
+      }, {
+        flagImg: "img/india-visit.png"
+      }],
+      tourTitle: "Love in Paris",
+      tourCost: "25000",
+      tourNight: "4",
+      tourDay: "5",
+      tourPic: "img/paris.jpg",
+      tourDate: "26 dec, 2016",
+      tourTime: "1:20pm"
+    }, {
+      header: false,
+      footer: false,
+      tourPackage: true,
+      packageType: "Adventure",
+      packageImg: "img/agt-cat1.png",
+      tourFlag: [{
+        flagImg: "img/canada-visit.png"
+      }, {
+        flagImg: "img/england-visit.png"
+      }, {
+        flagImg: "img/india-visit.png"
+      }],
+      tourTitle: "Love in Paris",
+      tourCost: "25000",
+      tourNight: "4",
+      tourDay: "5",
+      tourPic: "img/paris.jpg",
+      tourDate: "26 dec, 2016",
+      tourTime: "1:20pm"
+    }];
+    // travel activity json end
+
+    // Enquiry accordion
+    $scope.enquiryAgent = [{
+      profileName: "Yash Chudasma",
+      enquireimgProfile: "img/adrena.jpg",
+      enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+      enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+    }, {
+      profileName: "Yash Chudasma",
+      enquireimgProfile: "img/adrena.jpg",
+      enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+      enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+    }, {
+      profileName: "Yash Chudasma",
+      enquireimgProfile: "img/adrena.jpg",
+      enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+      enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+    }, {
+      profileName: "Yash Chudasma",
+      enquireimgProfile: "img/adrena.jpg",
+      enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+      enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+    }, {
+      profileName: "Yash Chudasma",
+      enquireimgProfile: "img/adrena.jpg",
+      enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+      enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+    }, {
+      profileName: "Yash Chudasma",
+      enquireimgProfile: "img/adrena.jpg",
+      enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+      enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+    }, {
+      profileName: "Yash Chudasma",
+      enquireimgProfile: "img/adrena.jpg",
+      enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+      enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+    }, {
+      profileName: "Yash Chudasma",
+      enquireimgProfile: "img/adrena.jpg",
+      enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+      enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+    }, {
+      profileName: "Yash Chudasma",
+      enquireimgProfile: "img/adrena.jpg",
+      enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+      enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+    }, {
+      profileName: "Yash Chudasma",
+      enquireimgProfile: "img/adrena.jpg",
+      enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+      enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+    }, {
+      profileName: "Yash Chudasma",
+      enquireimgProfile: "img/adrena.jpg",
+      enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+      enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+    }, {
+      profileName: "Yash Chudasma",
+      enquireimgProfile: "img/adrena.jpg",
+      enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+      enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+    }, {
+      profileName: "Yash Chudasma",
+      enquireimgProfile: "img/adrena.jpg",
+      enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+      enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+    }, {
+      profileName: "Yash Chudasma",
+      enquireimgProfile: "img/adrena.jpg",
+      enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+      enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+    }, {
+      profileName: "Yash Chudasma",
+      enquireimgProfile: "img/adrena.jpg",
+      enquirymsg: '<p>Hello!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p><p>Confirm email address</p>',
+      enquirymsghead: "Hello! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.Confirm email address"
+    }];
+
+    // Enquiry accordion end
+
+  })
 
 .controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {
 

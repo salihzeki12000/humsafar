@@ -5,8 +5,11 @@ var ongojourney = angular.module('ongojourney', [])
   return {
     getAllJourney: function (callback, errorCallback) {
       $http({
-        url: adminURL + "/journey/getAll",
-        method: "POST"
+        url: adminURL + "/journey/myLifeWeb",
+        method: "POST",
+        data:{
+          "type":"all"
+        }
       }).success(function (data) {
         var hasJourney = "";
         if (_.isEmpty(data.data)) {
@@ -284,6 +287,41 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       //post comments starts
 
       //post comments ends
+
+      // edit otg
+
+      // $scope.otgPhoto = _.chunk([$scope.otgPhoto],2);
+
+      // photos array edit
+      $scope.otgPhoto = [
+        {
+          img : 'img/ongojourney/adrena.jpg'
+        },
+        {
+          img : 'img/ongojourney/adrena.jpg'
+        },
+        {
+          img : 'img/ongojourney/adrena.jpg'
+        },
+        {
+          img : 'img/ongojourney/adrena.jpg'
+        },
+        {
+          img : 'img/ongojourney/adrena.jpg'
+        },
+        {
+          img : 'img/ongojourney/adrena.jpg'
+        },
+      ];
+      // $scope.otgPhoto = [];
+      $scope.otgPhoto = _.chunk($scope.otgPhoto,4);
+      for (var i=0; i < $scope.otgPhoto.length; i++){
+        $scope.otgPhoto[i] = _.chunk($scope.otgPhoto[i],2);
+        console.log($scope.otgPhoto[i + 'row'] = _.chunk($scope.otgPhoto[i + 'col'],2));
+      }
+      // photos array edit end
+      // edit otg end
+
 
       // checkin
       var modal = "";
