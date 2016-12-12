@@ -12,12 +12,11 @@ var markers = [];
 var travelPath;
 var initMap = function () {};
 var setMarker = function () {};
-
 var map;
 var center = {};
 var centers = [];
 markers[0] = {};
-angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'itinerary', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
 .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
   //Used to name the .html file
@@ -842,6 +841,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, $state, $stateParams, $filter, $http) {
     //Used to name the .html file
     var slug = $stateParams.id;
+    console.log(slug);
     var checkinCount = "";
     $scope.userData = $.jStorage.get("profile");
 
@@ -1094,7 +1094,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               };
               if (status) {
                 obj.icon = "img/maps/marker.png";
-                obj.label=toString(i);
+                obj.label = toString(i);
                 console.log("big marker icon set");
               }
               marker = new google.maps.Marker(obj);
@@ -1146,6 +1146,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
           var myVar = setInterval(myTimer, 1000);
+
           function myTimer() {
             if (centers.length != 0) {
               _.each(centers, function (n, index) {
@@ -1153,11 +1154,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               });
               setMarker(true, centers[0], 1);
               clearInterval(myVar);
-             
+
               // var markers_cluster = centers.map(function (center, i) {
               //   return new google.maps.Marker({
               //     position: center,
-                  
+
               //   });
               // });
               // var markerCluster = new MarkerClusterer(map, markers_cluster, {
@@ -3736,106 +3737,117 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     var updateBadgeBar = function () {
-      $scope.tik1 = true;
-      $scope.tik2 = false;
-      $scope.tik3 = false;
-      $scope.tik4 = false;
-      $scope.tik5 = false;
-      $scope.newbie = false;
-      $scope.justgotwings = false;
-      $scope.globetrotter = false;
-      $scope.wayfarer = false;
-      $scope.nomad = false;
-      if (len < 4) {
-        $scope.newbie = true;
         $scope.tik1 = true;
-        $scope.mystyle1 = {
-          "width": (len / 3) * 100 + '%',
-          "background-color": "#ff6759",
+        $scope.tik2 = false;
+        $scope.tik3 = false;
+        $scope.tik4 = false;
+        $scope.tik5 = false;
+        $scope.newbie = false;
+        $scope.justgotwings = false;
+        $scope.globetrotter = false;
+        $scope.wayfarer = false;
+        $scope.nomad = false;
+        if (len < 4) {
+          $scope.newbie = true;
+          $scope.tik1 = true;
+          $scope.mystyle1 = {
+            "width": (len / 3) * 100 + '%',
+            "background-color": "#ff6759",
+          }
+        } else if (len < 8) {
+          $scope.justgotwings = true;
+          $scope.tik1 = true;
+          $scope.tik2 = true;
+          $scope.mystyle1 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle2 = {
+            "width": ((len - 3) / 4) * 100 + '%',
+            "background-color": "#ff6759",
+          };
+        } else if (len < 16) {
+          $scope.globetrotter = true;
+          $scope.tik1 = true;
+          $scope.tik2 = true;
+          $scope.tik3 = true;
+          $scope.mystyle1 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle2 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle3 = {
+            "width": ((len - 7) / 8) * 100 + '%',
+            "background-color": "#ff6759",
+          };
+        } else if (len < 25) {
+          $scope.wayfarer = true;
+          $scope.tik1 = true;
+          $scope.tik2 = true;
+          $scope.tik3 = true;
+          $scope.tik4 = true;
+          $scope.mystyle1 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle2 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle3 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle4 = {
+            "width": ((len - 15) / 9) * 100 + '%',
+            "background-color": "#ff6759",
+          };
+        } else if (len > 24) {
+          $scope.nomad = true;
+          $scope.tik1 = true;
+          $scope.tik2 = true;
+          $scope.tik3 = true;
+          $scope.tik4 = true;
+          $scope.tik5 = true;
+          $scope.mystyle1 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle2 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle3 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle4 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
+          $scope.mystyle5 = {
+            "width": "100%",
+            "background-color": "#ff6759",
+          };
         }
-      } else if (len < 8) {
-        $scope.justgotwings = true;
-        $scope.tik1 = true;
-        $scope.tik2 = true;
-        $scope.mystyle1 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle2 = {
-          "width": ((len - 3) / 4) * 100 + '%',
-          "background-color": "#ff6759",
-        };
-      } else if (len < 16) {
-        $scope.globetrotter = true;
-        $scope.tik1 = true;
-        $scope.tik2 = true;
-        $scope.tik3 = true;
-        $scope.mystyle1 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle2 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle3 = {
-          "width": ((len - 7) / 8) * 100 + '%',
-          "background-color": "#ff6759",
-        };
-      } else if (len < 25) {
-        $scope.wayfarer = true;
-        $scope.tik1 = true;
-        $scope.tik2 = true;
-        $scope.tik3 = true;
-        $scope.tik4 = true;
-        $scope.mystyle1 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle2 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle3 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle4 = {
-          "width": ((len - 15) / 9) * 100 + '%',
-          "background-color": "#ff6759",
-        };
-      } else if (len > 24) {
-        $scope.nomad = true;
-        $scope.tik1 = true;
-        $scope.tik2 = true;
-        $scope.tik3 = true;
-        $scope.tik4 = true;
-        $scope.tik5 = true;
-        $scope.mystyle1 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle2 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle3 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle4 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
-        $scope.mystyle5 = {
-          "width": "100%",
-          "background-color": "#ff6759",
-        };
       }
-    }
+      //badge-bar ends here
+    $scope.testing = function (type, urlSlug) {
 
+      if (type == "travel-life") {
+        $state.go('ongojourney', {
+          id: urlSlug
+        });
+      } else if (type == "quick-itinerary") {
+        $state.go('userquickitinerary', {
+          id: urlSlug
+        });
+      }
+    };
 
-    //badge-bar ends here
 
     //Integration Section Ends here
     {
@@ -7277,7 +7289,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, ];
 
   })
-  .controller('UserQuickItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('UserQuickItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, Itinerary) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -7287,6 +7299,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+
+    //Integration starts here
+    var slug = $stateParams.id;
+    Itinerary.getOneQuickItinerary(slug,function(data){
+      $scope.itinerary=data.data;
+      console.log($scope.itinerary);
+    });
+    //integration ends here
     $scope.showClass = "close-gallery";
     $scope.viewGallery = function () {
       if ($scope.showClass == "close-gallery") {

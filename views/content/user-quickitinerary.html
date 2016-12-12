@@ -4,18 +4,18 @@
     <div class="user-banner-detail full-width text-center">
       <div class="user-tag color-white">
         <div class="user-imgholder">
-          <img src="img/profile-main.png" alt="" class="img-responsive">
+          <img ng-src="{{itinerary.creator.profilePicture|uploadpath}}" alt="" class="img-responsive">
         </div>
-        <h4 class="user-name avenir-medium">Andrea Christina</h4>
+        <h4 class="user-name avenir-medium">{{itinerary.creator.name}}</h4>
       </div>
       <!-- <div class="journey-day">
         <span class="color-white avenir-roman">Jan 2016</span>
       </div> -->
       <div class="journey-travel-heading color-white">
-        <h3 class="avenir-heavy m-clear">Family Holiday 2016</h3>
+        <h3 class="avenir-heavy m-clear"{{itinerary.title}}</h3>
       </div>
       <div class="itinerary-trip-day">
-        <p><span class="days block avenir-heavy">20</span> <span class="block avenir-roman">Days Trip</span></p>
+        <p><span class="days block avenir-heavy">{{itinerary.duration}}</span> <span class="block avenir-roman">Days Trip</span></p>
       </div>
       <div class="itinerary-name">
         <span class="block ">Quick</span><span class="block">Itinerary</span>

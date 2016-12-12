@@ -219,7 +219,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'EditorItineraryCtrl'
     })
     .state('userquickitinerary', {
-      url: "/user-quickitinerary",
+      url: "/user-quickitinerary/:id",
       templateUrl: "views/template.html",
       controller: 'UserQuickItineraryCtrl'
     })
