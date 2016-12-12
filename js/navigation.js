@@ -176,7 +176,7 @@ var navigationservice = angular.module('navigationservice', [])
         },
         uploadQuickItinerary:function(obj){
             $http({
-                url:adminURL + "/itinerary/saveQuickItinerary",
+                url:adminURL + "/itinerary/saveQuickItineraryWeb",
                 method:"POST",
                 data:obj
             }).success(function(data){
