@@ -218,6 +218,17 @@
     top: 155px;
   }
   // destination city page end
+
+  // popular blogger
+  .popular-blogger .blogger-cover {
+    width: 340px;
+    max-width: 340px;
+  }
+  .popular-blogger .blogger-cover .gallery-imgholder {
+    width: 340px;
+    max-width: 340px;
+}
+  // popular blogger end
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -456,11 +467,36 @@
       font-size: 12px;
     }
   }
+
+  header{
+    display: none;
+  }
   //destination country end
   .action-contentbox,
   .lead-contentbox {
     padding: 10px;
   }
+  // popular blogger
+  .popular-blogger .blogger-cover {
+    width: 100%;
+    max-width: 100%;
+    margin: 5px 0;
+  }
+  .popular-blogger .blogger-cover .gallery-imgholder {
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
+}
+
+.popular-blogger .blogger-cover .overlay-imgholder{
+  top: 0;
+}
+
+.bg-bloggers .country-title{
+  top: 50%;
+  @include transform (translateX(-50%));
+}
+  // popular blogger end
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -585,7 +621,7 @@
     padding: 0;
   }
 
-  .listholder-modal .modal-listborder{
+  .listholder-modal .modal-listborder {
     border: none;
   }
 
@@ -659,5 +695,31 @@
     padding: 0;
   }
   //Destination country page end
+  //POPULAR AGENT PAGE
+  .agent-07 .agent-box .overlay-down {
+    height: auto;
+  }
+
+  .agent-07 .agent-box .overlay-down .title-agent {
+    margin-bottom: 5px;
+
+    h4 {
+      font-size: 16px;
+    }
+  }
+
+  .agent-07 .agent-box .overlay-down .logo-agents {
+    max-width: 80px;
+    max-height: 60px;
+  }
+
+  .agent-07 .agent-box .overlay-down .title-cityagent {
+    font-size: 12px;
+  }
+
+  .agent-07 .agent-box .overlay-down .btn-btm {
+    margin-top: 0;
+  }
+  //POPULAR AGENT PAGE END
 }
 // media query for 480px to 320px end

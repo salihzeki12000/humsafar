@@ -697,10 +697,17 @@
   margin-left: -20px;
 }
 
-.country-holder {
-  width: 30px;
-  margin-left: -10px;
-  display: inline-block;
+.agt-home-itinerary,
+.agt-home-tourpackage,
+.agt-home-travelactivity,
+.agt-usr-itinerary,
+.agt-usr-touractivity,
+.agt-usr-tourpackages {
+  .country-holder {
+    width: 30px;
+    margin-left: -10px;
+    display: inline-block;
+  }
 }
 
 .cost-posi {
@@ -1181,11 +1188,13 @@ q {
   }
 }
 
-.agt-usr-tourpackages, .agt-home-tourpackage,
+.agt-home-tourpackage,
+.agt-usr-tourpackages,
 .tour-package-card {
   .imgfoot-top {
     padding: 10px;
-    h4{
+
+    h4 {
       margin-top: 0;
     }
   }
@@ -1304,7 +1313,6 @@ q {
       display: inline-block;
     }
   }
-
 
   .filter-data {
     width: 100%;
@@ -2306,6 +2314,7 @@ q {
     .collapsed {
       color: $brand-blue;
       background-color: #fff;
+
       .up {
         display: none;
       }
