@@ -6708,7 +6708,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // remove city end
 
   })
-  .controller('QuickItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('QuickItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, $timeout, $stateParams) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -6717,6 +6717,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("QuickItinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+
     $scope.qItinerary = {};
     $scope.qItinerary.itineraryType = [];
     $scope.qItinerary.countryVisited = [];
@@ -6726,11 +6728,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.qItinerary.photos = [];
     $scope.previousCountryId = [];
 
-    // $scope.qItinerary.countryVisitedArray = [];
-    // $scope.showCountries = [];
-    // $scope.showCities = [];
-    // $scope.searchNation = [];
-    // $scope.countries = [];
+    var flag = $stateParams.flag;
+    var urlSlug = $stateParams.urlSlug;
+    if (flag != '') {
+      Itinerary.getOneQuickItinerary(urlSlug, function (data) {
+        $scope.qItinerary = data.data;
+        $scope.addCountry = $scope.qItinerary.countryVisited;
+        console.log($scope.qItinerary);
+      });
+    }
     $scope.cities = [];
     var countries = [];
     var cities = [];
@@ -6782,8 +6788,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       theme: 'modern',
       menubar: false,
       toolbar: 'bold italic',
-      statusbar: false
+      statusbar: false,
+      plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table contextmenu paste code'
+      ],
+      paste_as_text: true
     };
+
+
+
 
     var arrType = [];
     var str = "";
@@ -6836,6 +6851,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.searchCity = function (countryId, searchData) {
+      console.log(countryId);
       var formData = {
         "country": countryId,
         "search": searchData
@@ -6851,27 +6867,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.addClass = "";
-    $scope.addCity = [{
-      "cities": []
-    }];
+
 
     $scope.addCountry = [{}];
-    // $scope.addCountry = [{
-    //   "country": "",
-    //   "cityVisited": []
-    // }];
 
-    $scope.addPanel = function (val, index) {
-      if (val == "city") {
-        $scope.addCity[index].cities.push([]);
-        console.log($scope.qItinerary.countryVisited);
-      } else if (val == "country") {
-        $scope.addCountry.push({
-          // "country": {}
-        });
 
-      }
+    $scope.addPanel = function () {
+      $scope.addCountry.push({});
     };
+
 
     $scope.removeStayed = function (countryPanel) {
       $scope.addCountry.splice(countryPanel, 1);
@@ -6914,16 +6918,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.upload = function (status) {
+      console.log($scope.addCountry);
       $scope.qItinerary.status = status;
       $scope.qItinerary.duration = parseInt($scope.qItinerary.duration);
       $scope.qItinerary.year = parseInt($scope.qItinerary.year);
       $scope.qItinerary.cost = parseInt($scope.qItinerary.cost);
       $scope.qItinerary.countryVisited = $scope.addCountry;
-      console.log($scope.qItinerary);
-      NavigationService.uploadQuickItinerary($scope.qItinerary);
-
-
-
+      console.log($scope.qItinerary.countryVisited);
+      // NavigationService.uploadQuickItinerary($scope.qItinerary);
     };
 
     $scope.getYear = [];
@@ -6934,6 +6936,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.getYear = _.rangeRight(1900, n + 1);
 
     };
+
+
 
     // month array
     $scope.monthDrop = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -7302,8 +7306,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //Integration starts here
     var slug = $stateParams.id;
-    Itinerary.getOneQuickItinerary(slug,function(data){
-      $scope.itinerary=data.data;
+    Itinerary.getOneQuickItinerary(slug, function (data) {
+      $scope.itinerary = data.data;
       console.log($scope.itinerary);
     });
     //integration ends here

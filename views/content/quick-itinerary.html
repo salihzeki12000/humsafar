@@ -91,7 +91,7 @@
                       <ui-select multiple ng-model="add.cityVisited" theme="bootstrap" ng-click="updateCitiesArr($select.selected._id)">{{$select.search}}
                         <ui-select-match placeholder="City Visited">{{$item.name}}</ui-select-match>
                         <ui-select-choices repeat="{'city':city.name,placeId:city.placeId} as city in cities"  refresh="searchCity(add.country,$select.search)" refresh-delay="0">
-                          <span>{{city.name}}</span>
+                          <span ng-bind="city.name"></span>
                         </ui-select-choices>
                       </ui-select>
                     </div>
@@ -102,7 +102,7 @@
               </div>
               <!--<div class="quick-add-country clearfix text-center" ng-if="countryPanel+1==addCountry.length">-->
               <div class="quick-add-country clearfix text-center">        
-                <button class="btn btn-pink" ng-click="addPanel('country',countryPanel)" >Add Country</button>
+                <button class="btn btn-pink" ng-click="addPanel()" >Add Country</button>
                 <i class="color-light-grey avenir-roman block mt5">If you have visited any other country on the same trip</i>
               </div>
               <!-- country and city visited end-->
@@ -174,8 +174,8 @@
                 </div>
                 <div class="pull-right">
                   <div class="save-publish-detail">
-                    <button class="btn btn-pink btn-more mr5" ng-click="upload(true)">Save</button>
-                    <button class="btn btn-pink btn-more" ng-click="upload(false)">Publish</button>
+                    <button class="btn btn-pink btn-more mr5" ng-click="upload(false)">Save</button>
+                    <button class="btn btn-pink btn-more" ng-click="upload(true)">Publish</button>
                   </div>
                 </div>
               </div>

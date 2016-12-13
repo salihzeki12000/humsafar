@@ -12,7 +12,7 @@
         <span class="color-white avenir-roman">Jan 2016</span>
       </div> -->
       <div class="journey-travel-heading color-white">
-        <h3 class="avenir-heavy m-clear"{{itinerary.title}}</h3>
+        <h3 class="avenir-heavy m-clear">{{itinerary.title}}</h3>
       </div>
       <div class="itinerary-trip-day">
         <p><span class="days block avenir-heavy">{{itinerary.duration}}</span> <span class="block avenir-roman">Days Trip</span></p>
@@ -22,8 +22,8 @@
       </div>
       <div class="journey-type-icon">
         <ul class="list-inline">
-          <li ng-repeat="icon in getItineraryType track by $index">
-            <img ng-src="{{icon.img}}" alt="" width="{{icon.width}}" class="img-responsive">
+          <li ng-repeat="icon in itinerary.itineraryType track by $index">
+            <img ng-src="{{icon|kindOfJourney}}" alt="" " class="img-responsive">
             <!-- Note :  use width size in backend -->
           </li>
         </ul>
@@ -43,9 +43,9 @@
         <div class="trip-pic-view {{showClass}}">
           <p class="color-pink heading-gallery-name"><i class="fa fa-picture-o mr5"></i>Family Holiday 2013 Photos</p>
           <div masonry class="masonry-main side-scroll-direction">
-            <div class="masonry-brick" ng-repeat="pic in photoGallery track by $index">
+            <div class="masonry-brick" ng-repeat="pic in itinerary.photos track by $index">
               <div class="gallery-imgholder">
-                <img ng-src="{{pic}}" alt="">
+                <img ng-src="{{pic.name|uploadpath}}" alt="">
               </div>
             </div>
           </div>
@@ -64,8 +64,8 @@
               <div class="itinerary-quick-imgholder">
                 <img src="img/itinerary/family-whole-bg.jpg" alt="" class="img-responsive">
                 <div class="itinerary-heading-detail">
-                  <p class="m-clear mb5"><span class="avenir-roman color-pink">Country Visited : </span><span class="color-white country-visited-name avenir-heavy">Singapore | India</span></p>
-                  <p class="m-clear"><span class="avenir-roman color-pink">Cities Visited : </span><span class="color-white avenir-roman">Singapore | Mumbai</span></p>
+                  <p class="m-clear mb5"><span class="avenir-roman color-pink">Country Visited : </span><span class="color-white country-visited-name avenir-heavy" ng-repeat="country in itinerary.countryVisited track by $index">{{country.country.name}}<span ng-if="$index<(itinerary.countryVisited.length-1)"> | </span></span></p>
+                  <p class="m-clear"><span class="avenir-roman color-pink">Cities Visited : </span><span ng-repeat="countryObj in itinerary.countryVisited"><span class="color-white avenir-roman" ng-repeat="city in countryObj.cityVisited track by $index">{{city.city.name}}<span ng-if="$index<(countryObj.cityVisited.length-1)"> | </span></span></span></p>
                 </div>
                 <div class="itinerary-type-head"><span>Quick Itinerary</span></div>
               </div>
@@ -74,19 +74,7 @@
               <h4 class="color-pink avenir-roman">A Little More About This Trip...</h4>
               <div class="view-quick-descp avenir-roman text-justify">
                 <!--ng-bind-html put in this class -->
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-                  book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
-                  recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
-                <p>Why do we use it?
-                  <br>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
-                  'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                  in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). </p>
-                <p>Where does it come from?
-                  <br>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia,
-                  looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33
-                  of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit
-                  amet..", comes from a line in section 1.10.32.
-                </p>
+                <p ng-bind-html="itinerary.description"></p>
               </div>
             </div>
           </div>

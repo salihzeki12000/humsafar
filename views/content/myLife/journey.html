@@ -42,7 +42,7 @@
                   <div class="add-more-journey" ng-show="showMore">
                     <ul>
                       <li><a href="">On The Go Journeys</a></li>
-                      <li><a href="">Upload An Itinerary</a></li>
+                      <li><a ui-sref="itinerary">Upload An Itinerary</a></li>
                       <li><a href="">Holiday Planner</a></li>
                     </ul>
                   </div>
@@ -51,7 +51,6 @@
             </div>
           </div>
           <!--End of switch Travel life and local life-->
-
           <!-- user logged for first time -->
           <div class="empty-profile-journey" ng-hide="hasJourney">
             <div class="row">
@@ -70,7 +69,8 @@
                       <h3 class="color-pink">My Tales &amp; Trails</h3>
                       <div class="empty-ongo">
                         <h4>On-the-Go Journeys</h4>
-                        <p class="empty-descp">Capture your journeys and activities whether local or global, creating a beautiful timeline and relive these treasured experiences of your past.</p>
+                        <p class="empty-descp">Capture your journeys and activities whether local or global, creating a beautiful timeline and relive
+                          these treasured experiences of your past.</p>
                       </div>
                       <div class="empty-chronicling">
                         <h4>Chronicling Past Travels</h4>
@@ -83,30 +83,29 @@
             </div>
           </div>
           <!-- user logged for first time end -->
-    
-          <div class="masonry-detail ng-show="hasJourney">
+          <div class="masonry-detail" ng-show="hasJourney">
             <div masonry>
               <div class="row">
-                <!--1st card-->
                 <div class="col-lg-4 col-md-6 col-sm-6 masonry-brick " ng-repeat="life in travelLife">
-                  <div class="journey-masonry-brick">
+                  <!--journey card -->
+                  <div class="journey-masonry-brick" ng-if="life.type=='travel-life'">
                     <div class="travel-life-part avenir-roman">
                       <div class="travel-journey-heading">
                         <p ng-hide="life.onJourney">{{life.heading}}</p>
                         <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
-                          <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span> <span>{{life.timestampHour}}</span></p>
+                          <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                          <span>{{life.timestampHour}}</span></p>
                       </div>
-                      <!--<div class="travelled-journey relate" ng-hide="life.onJourney" ui-sref="ongojourney({id:life.urlSlug})" ng-click="testin">-->
-                      <div class="travelled-journey relate" ng-hide="life.onJourney" ng-click="testing(life.type,life.urlSlug)">                        
+                      <!--jounrey main detail card-->
+                      <div class="travelled-journey relate" ng-click="testing(life.type,life.urlSlug)">
                         <div class="travelled-imgholder">
                           <img ng-src="{{life.coverPhoto|uploadpath}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto!=null">
                           <img ng-src="{{life.startLocationPic|small|uploadpath}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto==null">
                         </div>
                         <div class="country-visited">
                           <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30" ng-repeat="visit in life.countryVisited | limitTo : 3">
-                          <span ng-show="life.showRemainingCount" class="">+{{life.remainingCount}}</span>
+                          <!--<span ng-show="life.showRemainingCount" class="">+{{life.remainingCount}}</span>-->
+                          <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
                         </div>
-
                         <div class="journey-tag-holder">
                           <h4 class="m-clear text-capitalize">{{life.name}}</h4>
                           <div class="clearfix journey-travelling-type">
@@ -143,14 +142,8 @@
                             <div class="pull-right">
                               <div class="journey-type inline-block">
                                 <ul>
-                                  <li>
-                                    <a href=""><img ng-src="{{life.kindOfJourney[0]|kindOfJourney}}" alt="" height="20"></a>
-                                  </li>
-                                  <li>
-                                    <a href=""><img ng-src="{{life.kindOfJourney[1]|kindOfJourney}}" alt="" height="20"></a>
-                                  </li>
-                                  <li>
-                                    <a href=""><img ng-src="{{life.kindOfJourney[2]|kindOfJourney}}" alt="" height="20"></a>
+                                  <li ng-repeat="list in life.kindOfJourney|limitTo:3">
+                                    <a href=""><img ng-src="{{list|kindOfJourney}}" alt="" height="20"></a>
                                   </li>
                                 </ul>
                               </div>
@@ -161,45 +154,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="onway-journey relate" ng-show="life.onJourney">
-                        <div class="onway-imgholder">
-                          <img ng-src="{{life.imgOnway}}" alt="" class="img-responsive m-center">
-                        </div>
-                        <div class="country-visited">
-                          <img ng-src="{{visit.imgFlag}}" alt="" height="30" ng-repeat="visit in life.countryVisit track by $index">
-                          <span class="" ng-show="life.onJourney">+4</span>
-                        </div>
-                        <div class="journey-tag-holder">
-                          <h3 class="m-clear text-capitalize">{{life.onwayTag}}</h3>
-                          <div class="clearfix journey-travelling-type">
-                            <div class="pull-left">
-                              <div class="journey-type">
-                                <ul>
-                                  <li>
-                                    <a href=""><img ng-src="{{life.itineraryType1}}" alt="" height="20"></a>
-                                  </li>
-                                  <li>
-                                    <a href=""><img ng-src="{{life.itineraryType2}}" alt="" height="20"></a>
-                                  </li>
-                                  <li>
-                                    <a href=""><img ng-src="{{life.itineraryType3}}" alt="" height="20"></a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                            <div class="pull-right">
-                              <div class="journey-cost">
-                                <span>{{life.cost}}</span>
-                              </div>
-                              <div class="days-spent">
-
-                                <p><span class="block"></span>Days</p>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <!--jounrey main detail end-->
                       <div class="social-field-types">
                         <div class="user-social-item clearfix">
                           <div class="pull-left">
@@ -236,9 +191,100 @@
                       </div>
                     </div>
                   </div>
+                  <!--journey card end-->
+                  <!--itinerary card-->
+                  <div class="journey-masonry-brick" ng-if="life.type=='quick-itinerary' || life.type=='detail-itinerary'">
+                    <div class="travel-life-part avenir-roman">
+                      <div class="travel-journey-heading">
+                        <p ng-hide="life.onJourney">{{life.heading}}</p>
+                        <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
+                          <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                          <span>{{life.timestampHour}}</span></p>
+                      </div>
+                      <!--for itinerary card main-->
+                      <div class="onway-journey relate" ng-click="testing(life.type,life.urlSlug)">
+                        <div class="onway-imgholder">
+                          <img ng-src="{{life.imgOnway}}" alt="" class="img-responsive m-center">
+                        </div>
+                        <div class="country-visited">
+                          <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30" ng-repeat="visit in life.countryVisited | limitTo : 3">
+                          <!--<span ng-show="life.showRemainingCount" class="">+{{life.remainingCount}}</span>-->
+                          <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
+                        </div>
+                        <div class="country-visited">
+                          <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30" ng-repeat="visit in life.countryVisited track by $index | limitTo : 3">
+                          <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
+                        </div>
+                        <div class="journey-tag-holder">
+                          <h3 class="m-clear text-capitalize">{{life.onwayTag}}</h3>
+                          <div class="clearfix journey-travelling-type">
+                            <div class="pull-left">
+                              <div class="journey-type">
+                                <ul>
+                                  <li ng-repeat="list in life.itineraryType|limitTo:3">
+                                    <a href=""><img ng-src="{{list|kindOfJourney}}" alt="" height="20"></a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="pull-right">
+                              <div class="journey-cost">
+                                <span>{{life.currency}}</span>
+                                <span>{{life.cost}}</span>
+                              </div>
+                              <div class="days-spent">
+                                <p><span class="block">{{"current"|dateDifference: life.startTime}}</span>Days</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!--for itinerary card main end-->
+                      <div class="social-field-types">
+                        <div class="user-social-item clearfix">
+                          <div class="pull-left">
+                            <ul>
+                              <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
+                              <li>
+                                <a href=""><img src="img/comments.png" alt="" height="18"></a>
+                              </li>
+                              <li>
+                                <a href=""><img src="img/reviews.png" alt="" height="18"></a>
+                              </li>
+                              <li>
+                                <a href=""><img src="img/share.png" alt="" height="18"></a>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="pull-right">
+                            <div class="" ng-click="editItinerary=!editItinerary">
+                              <span><img src="img/options.png" alt="" height="18"></span>
+                            </div>
+                            <!--temporary edit button dropdown-->
+                            <div class="edit-kind-journey" ng-show="editItinerary">
+                              <ul>
+                                <li><a ui-sref="quickitinerary({flag:'edit',urlSlug:life.urlSlug})">Edit Itinerary</a></li>
+                              </ul>
+                            </div>
+                             <!--temporary edit button dropdown-->
+                          </div>
+                        </div>
+                        <div class="social-likes-reviews">
+                          <div class="clearfix">
+                            <div class="pull-left">
+                              <span class="color-blue mr10 avenir-heavy"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{life.likes}}</b>Likes</span>
+                              <span class="color-blue avenir-heavy"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>
+                            </div>
+                            <div class="pull-right">
+                              <img src="img/travel.png" alt="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--itinerary card end-->
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -306,7 +352,8 @@
                         <img src="img/profile-empty/local-empty.png" alt="" class="img-responsive inline-block">
                       </div>
                       <h3 class="color-pink">Life In The City</h3>
-                      <p class="empty-descp">Candid, fun moments with friends, happy family get-togethers, some precious ‘me-time’…share your love for your city and inspire others to do the same. Cherish your local life memories eternally.</p>
+                      <p class="empty-descp">Candid, fun moments with friends, happy family get-togethers, some precious ‘me-time’…share your love
+                        for your city and inspire others to do the same. Cherish your local life memories eternally.</p>
                     </div>
                   </div>
                 </div>

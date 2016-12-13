@@ -209,7 +209,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'DetailedItineraryCtrl'
     })
     .state('quickitinerary', {
-      url: "/quick-itinerary",
+      url: "/quick-itinerary/:flag/:urlSlug",
       templateUrl: "views/template.html",
       controller: 'QuickItineraryCtrl'
     })
