@@ -92,6 +92,15 @@
     display: none;
   }
   //destination city page end
+  // AGENT ITINERARY PAGE
+  .agent-itinerary-page .close-gallery {
+    left: -880px;
+  }
+
+  .agent-itinerary-page .trip-pic-view {
+    width: 900px;
+  }
+  // AGENT ITINERARY PAGE END
 }
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
@@ -218,17 +227,87 @@
     top: 155px;
   }
   // destination city page end
-
   // popular blogger
   .popular-blogger .blogger-cover {
     width: 340px;
     max-width: 340px;
   }
+
   .popular-blogger .blogger-cover .gallery-imgholder {
     width: 340px;
     max-width: 340px;
-}
+  }
   // popular blogger end
+  //AGENT ITINERARY PAGE
+  .agent-itinerary-page .trip-pic-view {
+    width: 700px;
+  }
+
+  .agent-itinerary-page .open-gallery {
+    left: 47%;
+  }
+
+  .agent-itinerary-page .close-gallery {
+    left: -680px;
+  }
+
+  .listing-accordion .panel-open .panel-heading {
+    height: 190px;
+  }
+
+  .agent-itinerary-page .trip-status-main {
+    right: 10px;
+  }
+
+  .trip-itinerary-status .trip-status-main {
+    padding: 20px 10px 10px;
+  }
+
+  .listing-accordion .panel-heading {
+    height: 50px;
+
+    a {
+      padding: 15px 20px;
+    }
+  }
+
+  .share-comment-main .like-holder,
+  .share-comment-main .review-holder {
+    margin-right: 10px;
+  }
+
+  .share-social-holder span .share-text {
+    margin: 0;
+  }
+
+  .share-social-holder .social-logo-padd li {
+    padding-right: 0;
+  }
+
+  .share-comment-main {
+    .commenter-img {
+      width: 10%;
+    }
+
+    .comment-container {
+      width: 90%;
+    }
+
+    .comment-ur-text {
+      width: 90%;
+    }
+  }
+
+  .listing-accordion .journey-accordion-detail {
+    .user-trip-descp {
+      width: 84%;
+    }
+
+    .user-trip-heading {
+      width: 15%;
+    }
+  }
+  //AGENT ITINERARY PAGE END
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -468,7 +547,7 @@
     }
   }
 
-  header{
+  header {
     display: none;
   }
   //destination country end
@@ -482,21 +561,126 @@
     max-width: 100%;
     margin: 5px 0;
   }
+
   .popular-blogger .blogger-cover .gallery-imgholder {
     width: 100%;
     max-width: 100%;
     max-height: none;
-}
+  }
 
-.popular-blogger .blogger-cover .overlay-imgholder{
-  top: 0;
-}
+  .popular-blogger .blogger-cover .overlay-imgholder {
+    top: 0;
+  }
 
-.bg-bloggers .country-title{
-  top: 50%;
-  @include transform (translateX(-50%));
-}
+  .bg-bloggers .country-title {
+    top: 50%;
+    @include transform (translateX(-50%));
+  }
   // popular blogger end
+  // AGENT ITINERARY PAGE
+  .agent-itinerary-page .close-gallery {
+    left: -435px;
+  }
+
+  .agent-itinerary-page .trip-pic-view {
+    width: 455px;
+
+    .masonry-main {
+      height: 450px !important;
+    }
+
+    .gallery-imgholder {
+      width: 130px;
+      max-width: 130px;
+    }
+  }
+
+  .agent-itinerary-page .user-button-holder {
+    right: -220px;
+  }
+
+  .agent-itinerary-page .connect-agent .photos,
+  .agent-itinerary-page .itinerary-photo-btn .photos {
+    width: 180px;
+    padding: 10px 0;
+  }
+
+  .connect-agentbox-holder {
+    width: 420px;
+  }
+
+  .listing-accordion .panel-open .panel-heading {
+    height: 115px;
+
+    a {
+      padding: 10px 20px;
+    }
+  }
+
+  .listing-accordion .panel-heading {
+    height: 40px;
+
+    a {
+      padding: 11px 20px;
+    }
+  }
+
+  .trip-itinerary-status .trip-status-main {
+    display: none;
+  }
+  // side status
+  .trip-heading-accordion .trip-country-name {
+    font-size: 20px;
+  }
+
+  .listing-accordion .city-heading {
+    font-size: 12px;
+
+    .trip-city-name {
+      font-size: 18px;
+    }
+  }
+
+  .share-comment-main {
+    .like-review-holder {
+      margin-top: 7px;
+      margin-bottom: 10px;
+      float: none !important;
+    }
+
+    .share-social-holder.pull-right {
+      float: none !important;
+    }
+  }
+
+  .listing-accordion .journey-accordion-detail {
+    .user-trip-heading {
+      width: 100%;
+    }
+
+    .listing-accordion .journey-accordion-detail .user-trip-descp {
+      width: auto;
+    }
+  }
+
+  .commenter-text {
+    padding: 0 10px;
+  }
+
+  .other-itineraries-main .name-follower {
+    font-size: 20px;
+  }
+
+  .travel-journey-heading .heading-name {
+    font-size: 20px;
+  }
+
+  .travel-journey-heading .editor-logo {
+    img {
+      width: 50px;
+    }
+  }
+  // AGENT ITINERARY PAGE END
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -721,5 +905,137 @@
     margin-top: 0;
   }
   //POPULAR AGENT PAGE END
+  // AGENT ITINERARY
+  .listing-accordion {
+    .trip-descp h4 {
+      font-size: 15px;
+    }
+
+    .journey-accordion-detail .user-trip-heading {
+      font-size: 15px;
+    }
+  }
+
+  .listing-accordion .journey-accordion-detail .user-trip-descp {
+    font-size: 14px;
+  }
+
+  .connect-agentbox-holder .button-connect-box {
+    right: -118px;
+
+    a {
+      width: 180px;
+      padding: 5px 0;
+    }
+  }
+
+  .connect-agentbox-holder {
+    width: 280px;
+
+    .agentbox-detail {
+      padding: 10px;
+    }
+  }
+
+  .agent-itinerary-page .close-gallery {
+    left: -280px;
+  }
+
+  .agent-itinerary-page .trip-pic-view {
+    width: 300px;
+  }
+
+  .share-comment-main .task-holder li {
+    padding: 0 10px;
+  }
+
+  .share-comment-main .task-holder li:first-child {
+    padding: 0 10px 0 5px;
+  }
+
+  .connect-agentbox-holder .btn-more {
+    padding: 5px 10px;
+  }
+
+  .agent-itinerary-page .trip-pic-view .gallery-imgholder {
+    width: 80px;
+    max-width: 80px;
+  }
+
+  .agent-itinerary-page .user-button-holder {
+    right: -205px;
+  }
+
+  .agent-itinerary-page .connect-agent .photos,
+  .agent-itinerary-page .itinerary-photo-btn .photos {
+    width: 170px;
+    padding: 5px 0;
+  }
+
+  .listing-accordion .panel-body {
+    padding: 10px 10px 20px;
+  }
+
+  .other-itineraries-main .name-follower {
+    font-size: 18px;
+  }
+
+  .other-itineraries-main .follow-detail {
+    font-size: 14px;
+  }
+
+  .travel-journey-heading .heading-name {
+    font-size: 18px;
+  }
+
+  .travel-journey-heading .editor-logo {
+    vertical-align: top;
+
+    img {
+      width: 40px;
+    }
+  }
+
+  .travel-journey-heading .editor-subdetail {
+    p {
+      font-size: 10px;
+    }
+  }
+
+  .journey-tag-holder h3 {
+    font-size: 18px;
+  }
+
+  .journey-cost span {
+    margin: 0;
+  }
+
+  .agent-itinerary-page .like-block {
+    display: block;
+  }
+
+  .book-title-mob {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .share-comment-main .comment-container {
+    padding: 0 10px;
+  }
+
+  .share-comment-main .comment-ur-text {
+    padding: 0 15px;
+  }
+
+  .like-reply-line {
+    span.time-stamp {
+      display: block;
+      margin: 0;
+    }
+  }
+  // .visit-view-imgholder {
+  //   height: 260px;
+  // }
+  // AGENT ITINERARY END
 }
 // media query for 480px to 320px end

@@ -872,10 +872,13 @@ q {
   z-index: 30;
 }
 
-.review-count {
-  font-style: italic;
-  color: #fff;
-  margin-top: 10px;
+.agt-home-aboutus,
+.agt-usr-testimonialreviews {
+  .review-count {
+    font-style: italic;
+    color: #fff;
+    margin-top: 10px;
+  }
 }
 
 .backdrop-testimonial:after {
