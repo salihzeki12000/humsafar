@@ -174,7 +174,7 @@ var navigationservice = angular.module('navigationservice', [])
         changePasswordEmail: function(formData, callback) {
             $http.post(adminURL + "/user/changePasswordEmail", formData).success(callback);
         },
-        uploadQuickItinerary:function(obj){
+        uploadQuickItinerary:function(obj,flag,callback){
             $http({
                 url:adminURL + "/itinerary/saveQuickItineraryWeb",
                 method:"POST",
@@ -183,6 +183,7 @@ var navigationservice = angular.module('navigationservice', [])
                 if(data.value){
                     console.log("Qitinerary saved successfully");
                 }
+                callback(data);
             });
         }
 

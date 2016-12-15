@@ -6829,7 +6829,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       plugins: [
         'advlist autolink lists link image charmap print preview anchor',
         'searchreplace visualblocks code fullscreen',
-        'insertdatetime media table contextmenu paste code'
+        'insertdatetime media table contextmenu paste code','autoresize'
       ],
       paste_as_text: true
     };
@@ -6971,7 +6971,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
       //storing all selected itinerarytype on sending variable ends
       
-      NavigationService.uploadQuickItinerary($scope.qItinerary,function(data){
+      NavigationService.uploadQuickItinerary($scope.qItinerary,flag,function(data){
          $state.go('userquickitinerary', {
           id: data.data.message
         });
