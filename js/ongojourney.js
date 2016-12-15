@@ -320,9 +320,65 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         console.log($scope.otgPhoto[i + 'row'] = _.chunk($scope.otgPhoto[i + 'col'],2));
       }
       // photos array edit end
+      // edit otg
+
+      // $scope.otgPhoto = _.chunk([$scope.otgPhoto],2);
+
+      // photos array edit
+      $scope.otgPhoto = [{
+        img: 'img/ongojourney/andrea-santa.jpg'
+      }, {
+        img: 'img/ongojourney/fire.jpg'
+      }, {
+        img: 'img/ongojourney/window.jpg'
+      }, {
+        img: 'img/ongojourney/winter.jpg'
+      }, {
+        img: 'img/ongojourney/jitu-sofa.jpg'
+      }, {
+        img: 'img/ongojourney/andrea-santa.jpg'
+      }, ];
+
+      // $scope.otgPhoto = [];
+      $scope.index =-1;
+      $scope.addMoreCaption = function(index) {
+        if ($scope.index === index) {
+          $scope.index = -1;
+        } else {
+          $scope.index = index;
+        }
+      }
+      $scope.otgPhoto = _.chunk($scope.otgPhoto, 4);
+      for (var i = 0; i < $scope.otgPhoto.length; i++) {
+        $scope.otgPhoto[i] = _.chunk($scope.otgPhoto[i], 2);
+        console.log($scope.otgPhoto[i + 'row'] = _.chunk($scope.otgPhoto[i + 'col'], 2));
+      }
+      // photos array edit end
+      // video array
+      $scope.videoOtg = [
+        {
+          img: 'img/ongojourney/andrea-santa.jpg'
+        }, {
+          img: 'img/ongojourney/fire.jpg'
+        }, {
+          img: 'img/ongojourney/window.jpg'
+        }, {
+          img: 'img/ongojourney/winter.jpg'
+        }, {
+          img: 'img/ongojourney/jitu-sofa.jpg'
+        },
+      ];
+      $scope.index = -1;
+      $scope.addVideoCaption = function(index){
+        if($scope.index == index) {
+          $scope.index == -1;
+          console.log(index);
+        }else {
+          $scope.index = index;
+        }
+      }
+      // video array end
       // edit otg end
-
-
       // checkin
       var modal = "";
       $scope.editCheckIn = function () {
@@ -363,8 +419,10 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         // }, ];
         modal = $uibModal.open({
           animation: true,
-          templateUrl: "views/modal/checkin.html",
+          // templateUrl: "views/modal/checkin.html",
+          templateUrl: "views/modal/edit-otg.html",
           backdropClass: "review-backdrop",
+          size: "lg",
           scope: $scope
         });
 
@@ -675,7 +733,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
               console.log($scope.listOfComments);
               $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
         };
-        var obj={  
+        var obj={
           "_id":photoId
         }
        $http({
