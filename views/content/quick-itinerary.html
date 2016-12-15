@@ -67,26 +67,23 @@
               <!--{{qItinerary.countryVisited[countryPanel]}}-->
                 
               <div class="itinerary-country-visited" ng-init="countrySelectedFlag=true">
-                <div class="row" ng-repeat="add in addCountry track by $index" ng-init="countryPanel=$index">
+                <div class="row relate" ng-repeat="add in addCountry track by $index" ng-init="countryPanel=$index">
                   <!-- new ui select dropdown country -->
                   <div class="col-md-6">
-                    <div class="itinerary-inputholder input-country-visited">{{add}}
+                    <div class="itinerary-inputholder input-country-visited">
                       <ui-select  ng-model="add.country" theme="bootstrap" on-select="updateCountryPanel(countryPanel,add.country)" ng-click="updateCountriesArr($select.selected._id)">
                         <ui-select-match placeholder="Country Visited ">{{$select.selected.name}}</ui-select-match>
                         <ui-select-choices repeat="nation._id as nation in countries | filter: $select.search">
                           <span ng-bind="nation.name"></span>
                         </ui-select-choices>
-                      </ui-select>
-                      <!--temporary-->
-                      <span ng-if="$index>0" ng-click="removeStayed(countryPanel)"><i class="fa fa-times"></i></span>
-                      <!--temporary end close-->
+                      </ui-select>                      
                     </div>
                   </div>
                   <!-- new ui select dropdown country end-->
 
                   <!-- new ui select dropdown for city -->
                   <div class="col-md-6">
-                    <div class="itinerary-inputholder input-city-visited">{{add.cityVisited}}
+                    <div class="itinerary-inputholder input-city-visited">
                       <ui-select multiple ng-model="add.cityVisited" theme="bootstrap" ng-click="updateCitiesArr($select.selected._id)">{{$select.search}}
                         <ui-select-match placeholder="City Visited">{{$item.name}}</ui-select-match>
                         <ui-select-choices repeat="{'name':city.name,placeId:city.placeId} as city in cities"  refresh="searchCity(add.country,$select.search,add.cityVisited)" refresh-delay="0">
@@ -97,6 +94,9 @@
                     <i class="avenir-roman color-light-grey">Add other cities visited in this country on this trip</i>
                   </div>
                   <!-- new ui select dropdown for city end-->
+                  <!--temporary-->
+                    <span ng-if="$index>0" ng-click="removeStayed(countryPanel)" class="remove-countrycity-panel"><i class="fa fa-times"></i></span>
+                  <!--temporary end close-->
                 </div>
               </div>
               <!--<div class="quick-add-country clearfix text-center" ng-if="countryPanel+1==addCountry.length">-->
@@ -116,15 +116,11 @@
               <div class="upload-trip-photo-sec">
                 <label for="trip-photo">Upload Trip Photo</label>
                 <div class="trip-photo-holder">
-                  <div class="scroll-photoitinerary">
-                    <div class="trip-cards-panel">
                       <div class="trip-view-photo" ng-repeat="photo in qItinerary.photos track by $index">
-                        <img ng-src="{{photo.name|uploadpath}}" alt="Quick Itinerary" class="img-responsive">
+                        <img ng-src="{{photo.name|uploadpath}}" alt="Quick Itinerary" class="img-responsive get-center">
                         <div class="remove-quick-photo text-right">
                           <div class="delete-photo"><i class="fa fa-times color-white pointer" ng-click="removePhoto($index)"></i></div>
                         </div>
-                      </div>
-                    </div>
                   </div>
                   <div class="trip-upload text-center">
                     <div class="upload-section">

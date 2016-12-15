@@ -5693,12 +5693,21 @@ header {
 }
 .trip-view-photo {
   width: 234px;
+  height: 200px;
   max-height: 200px;
   margin: 5px;
   display: inline-block;
   position: relative;
-  &:hover .remove-quick-photo {
+  overflow: hidden;
+  border: 1px solid #a0a0a0;
+  img { width: 100%; } 
+  &:hover {
+    .remove-quick-photo {
     display: block;
+  }
+  img {
+    @include transform(translate(-50%,-50%) scale(1.2));
+  }
   }
 }
 .remove-quick-photo {

@@ -6729,15 +6729,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.qItinerary.hashtag = [];
     $scope.qItinerary.photos = [];
     $scope.previousCountryId = [];
-  
+    $scope.previouslyAddedCountries=[];
+
     var flag = $stateParams.flag;
     var urlSlug = $stateParams.urlSlug;
 
     //check whether page is called for editing itinerary or for new itinerary starts
     //if edit then make call to that itinerary
     if (flag=='edit' && urlSlug != '') {
+
       Itinerary.getOneQuickItinerary(urlSlug, function (data) {
-        
         $scope.qItinerary = data.data;
         $scope.addCountry = $scope.qItinerary.countryVisited;
         
@@ -6754,6 +6755,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.addCountry=[];
         _.each(data.data.countryVisited,function(n1,key1){
            $scope.addCountry.push({"country":n1.country._id,"cityVisited":[]});
+           $scope.previouslyAddedCountries.push({"country":n1.country._id,"cityVisited":[]});
           _.each(n1.cityVisited,function(n2,key2){
             var obj={
               "name":"",
@@ -6764,15 +6766,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               obj.placeId=n2.city.googlePlaceId;
             }
             $scope.addCountry[key1].cityVisited.push(obj);
-            // $scope.addCountry[key1].cityVisited[key2].city=n2.city.name;
-            // if(n2 && n2.googlePlaceId && n2.googlePlaceId != ""){
-            //   $scope.addCountry[key1].cityVisited[key2].placeId=n2.city.googlePlaceId;
-            // }
           });
+          $scope.previousCountryId[key1]=n1.country._id;
         });
         //setting up addCountry variable ends        
-                
-       
       });
     }
      //check whether page is called for editing itinerary or for new itinerary ends
@@ -6911,8 +6908,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.previousCountryId[countryPanel] = countryId;
       if (index == -1) {
         $scope.addCountry[countryPanel].cityVisited = [];
+        $scope.addCountry[countryPanel].new='add';
       } else {
-        alert(name + " already added");
+        alert(name + " already selected");
       }
     };
 
@@ -6948,6 +6946,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.qItinerary.year = parseInt($scope.qItinerary.year);
       $scope.qItinerary.cost = parseInt($scope.qItinerary.cost);
       $scope.qItinerary.countryVisited = $scope.addCountry;
+//update countryVisited with new='remove' fo deleted countries starts
+  _.each($scope.previouslyAddedCountries,function(n1){
+    var index=_.findIndex($scope.qItinerary.countryVisited,function(n2){
+      console.log(n1.country,n2.country);
+      return n1.country==n2.country;
+    });
+    console.log(index);
+    if(index==-1){
+      n1.new='remove';
+      $scope.qItinerary.countryVisited.push(n1);
+    }
+  });
+//update countryVisited with new='remove' fo deleted countries ends
+
       console.log($scope.qItinerary.countryVisited);
 
       //storing all selected itinerarytype on sending variable starts
@@ -6959,7 +6971,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
       //storing all selected itinerarytype on sending variable ends
       
-      NavigationService.uploadQuickItinerary($scope.qItinerary);
+      NavigationService.uploadQuickItinerary($scope.qItinerary,function(data){
+         $state.go('userquickitinerary', {
+          id: data.data.message
+        });
+      });
     };
 
     $scope.getYear = [];
