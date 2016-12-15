@@ -5481,7 +5481,7 @@ header {
   }
   .month-dropdown {
     width: 100px;
-    height: 150px;
+    max-height: 150px;
     position: absolute;
     top: 35px;
     left: 57px;
@@ -5489,7 +5489,7 @@ header {
     z-index: 1;
     border: 1px solid $brand-blue;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     li {
       padding: 5px;
       border-bottom: 1px solid $brand-blue;
@@ -5595,13 +5595,29 @@ header {
       white-space: nowrap;
     }
     .ui-select-match-item {
+      border-radius: 0;
+      border-color: $brand-pink;
       margin: 0 0 0 3px;
+      &:hover { background-color: transparent; }
+    }
+    .ui-select-match .close {
+      font-size: 15px;
+      line-height: 17px;
+      color: $brand-pink;
+      opacity: 1;
     }
   }
   .ui-select-choices-row.active>span {
     background-color: $brand-pink;
   }
   // country visited input ui select end
+  // remove country city panel
+  .remove-countrycity-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  // remove country city panel end
 }
 .quick-upload-photos {
   width: 260px;
@@ -5631,6 +5647,7 @@ header {
     font-size: 17px;
     font-weight: 500;
   }
+  iframe { height: 100% !important; }
   .mce-edit-area {
     height: 250px;
   }
@@ -5655,6 +5672,9 @@ header {
   .mce-btn.mce-active {
     background-color: $brand-lighter-grey;
   }
+  #tinymce {
+    font-family: "AvenirLTStd-Medium";
+  }
 }
 
 .upload-trip-photo-sec {
@@ -5672,8 +5692,9 @@ header {
   }
 }
 .trip-view-photo {
-  width: 200px;
-  margin-right: 10px;
+  width: 234px;
+  max-height: 200px;
+  margin: 5px;
   display: inline-block;
   position: relative;
   &:hover .remove-quick-photo {
@@ -5704,15 +5725,22 @@ header {
   white-space: nowrap;
 }
 .dropdown-currency-itinerary {
+  width: 100%;
+  border: 1px solid #424242;
+  border-bottom: 1px solid transparent;
+  position: absolute;
+  bottom: 24px;
+  background-color: #fff;
   ::-webkit-scrollbar { width: 3px; }
   ::-webkit-scrollbar-track { background-color: #fff; }
   ::-webkit-scrollbar-thumb { background-color: $brand-pink; }
   ul {
-    max-height: 250px;
+    max-height: 150px;
     overflow-y: auto;
   }
   li {
     padding: 5px 10px;
+    border-bottom: 1px solid #ccc;
   }
   a { color: #424242; }
 }
@@ -5908,7 +5936,7 @@ header {
   .currency-amount {
     display: inline-block;
     input {
-      width: 60px;
+      width: 120px;
     }
   }
   .itinerary-dropdown-icon {
