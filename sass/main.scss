@@ -1403,6 +1403,7 @@ header {
 
 .onway-imgholder {
   height: 330px;
+  max-height: 330px;
   overflow: hidden;
   img {
     min-height: 100%;
@@ -3575,6 +3576,7 @@ header {
 
 .visit-view-imgholder {
   height: 370px;
+  max-height: 370px;
   overflow: hidden;
   img {
     border-top-left-radius: 6px;

@@ -100,6 +100,12 @@
   .agent-itinerary-page .trip-pic-view {
     width: 900px;
   }
+  .onway-imgholder {
+    height: auto;
+  }
+  .visit-view-imgholder  {
+    height: auto;
+  }
   // AGENT ITINERARY PAGE END
 }
 // media query for 991px to 768px
@@ -653,13 +659,27 @@
     }
   }
 
+  .listing-accordion {
+    .trip-descp h4 {
+      font-size: 15px;
+    }
+
+    .trip-descp .user-about-trip {
+      font-size: 14px;
+      text-align: justify;
+    }
+  }
+
   .listing-accordion .journey-accordion-detail {
     .user-trip-heading {
       width: 100%;
+      font-size: 15px;
     }
 
-    .listing-accordion .journey-accordion-detail .user-trip-descp {
-      width: auto;
+    .user-trip-descp {
+      width: 100%;
+      text-align: justify;
+      font-size: 14px;
     }
   }
 
@@ -679,6 +699,64 @@
     img {
       width: 50px;
     }
+  }
+
+  .agent-itinerary-page .agent-imgholder {
+    width: 100px;
+    max-width: 100px;
+  }
+
+  .agent-itinerary-page .journey-travel-heading h3,
+  .user-itinerary-page .journey-travel-heading h3 {
+    font-size: 24px;
+  }
+
+  .agent-banner-holder .mouse-scrolldown {
+    display: none;
+  }
+
+  .agent-banner-detail .agent-tag .user-name {
+    font-size: 18px;
+  }
+
+  .agent-itinerary-page .itinerary-trip-day .days,
+  .user-itinerary-page .itinerary-trip-day .days {
+    font-size: 30px;
+  }
+
+  .agent-itinerary-page .journey-start-end p {
+    font-size: 14px;
+  }
+
+  .share-comment-main .task-holder li:first-child {
+    padding: 0 5px;
+  }
+
+  .share-comment-main .task-holder li {
+    padding: 0 5px;
+  }
+
+  .agent-itinerary-page .itinerary-trip-day span,
+  .user-itinerary-page .itinerary-trip-day span {
+    font-size: 12px;
+  }
+
+  .share-comment-main .task-holder {
+    .like-button-icon {
+      font-size: 18px;
+    }
+
+    .agent-iti-comment-icon,
+    .agent-iti-download-icon,
+    .agent-iti-options-icon,
+    .agent-iti-print-icon,
+    .agent-iti-review-icon {
+      height: 18px;
+    }
+  }
+
+  .listing-accordion .panel-body {
+    padding: 10px 10px 20px;
   }
   // AGENT ITINERARY PAGE END
 }
@@ -916,10 +994,6 @@
     }
   }
 
-  .listing-accordion .journey-accordion-detail .user-trip-descp {
-    font-size: 14px;
-  }
-
   .connect-agentbox-holder .button-connect-box {
     right: -118px;
 
@@ -946,11 +1020,11 @@
   }
 
   .share-comment-main .task-holder li {
-    padding: 0 10px;
+    padding: 0 5px;
   }
 
   .share-comment-main .task-holder li:first-child {
-    padding: 0 10px 0 5px;
+    padding: 0 5px;
   }
 
   .connect-agentbox-holder .btn-more {
@@ -970,10 +1044,6 @@
   .agent-itinerary-page .itinerary-photo-btn .photos {
     width: 170px;
     padding: 5px 0;
-  }
-
-  .listing-accordion .panel-body {
-    padding: 10px 10px 20px;
   }
 
   .other-itineraries-main .name-follower {

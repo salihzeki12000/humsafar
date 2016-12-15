@@ -1359,14 +1359,17 @@ q {
   }
 }
 
-.button-holder {
-  float: right;
-  padding: 10px 0;
+.agt-home-photovideos,
+.agt-usr-photosvideos {
+  .button-holder {
+    float: right;
+    padding: 10px 0;
 
-  label {
-    margin-right: 15px;
-    text-decoration: underline;
-    color: #ccc;
+    label {
+      margin-right: 15px;
+      text-decoration: underline;
+      color: #ccc;
+    }
   }
 }
 // ------ yash scss end ----------------
