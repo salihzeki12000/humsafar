@@ -93,6 +93,14 @@
   }
   //destination city page end
   // AGENT ITINERARY PAGE
+  .editor-subdetail {
+    width: 65%;
+
+    p span {
+      margin: 0;
+    }
+  }
+
   .agent-itinerary-page .close-gallery {
     left: -880px;
   }
@@ -100,13 +108,28 @@
   .agent-itinerary-page .trip-pic-view {
     width: 900px;
   }
+
   .onway-imgholder {
     height: auto;
   }
-  .visit-view-imgholder  {
+
+  .visit-view-imgholder {
     height: auto;
   }
   // AGENT ITINERARY PAGE END
+  // USER-DETAIL ITINERARY PAGE
+  .user-detailitinerary-page .listing-accordion .panel-open .panel-heading {
+    height: 245px;
+  }
+
+  .user-detailitinerary-page .trip-pic-view {
+    width: 900px;
+  }
+
+  .user-detailitinerary-page .close-gallery {
+    left: -880px;
+  }
+  // USER-DETAIL ITINERARY PAGE END
 }
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
@@ -313,7 +336,26 @@
       width: 15%;
     }
   }
+
+  .agent-itinerary-page .user-social-item {
+    padding: 15px 0;
+  }
+
+  .agent-itinerary-page .social-likes-reviews .agent-card-ballon {
+    margin-top: -5px;
+  }
   //AGENT ITINERARY PAGE END
+  // USER-DETAIL ITINERARY PAGE
+  .user-detailitinerary-page .listing-accordion .panel-open .panel-heading {
+    height: 190px;
+  }
+  .user-detailitinerary-page  .social-likes-reviews .user-card-ballon {
+    margin-top: -5px;
+  }
+  .user-detailitinerary-page .user-social-item {
+    padding: 15px 0;
+  }
+  // USER-DETAIL ITINERARY PAGE END
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -615,11 +657,19 @@
     width: 420px;
   }
 
+  .journey-accordion-heading .span-plus {
+    font-size: 14px;
+  }
+
+  .editor-subdetail {
+    width: 84%;
+  }
+
   .listing-accordion .panel-open .panel-heading {
     height: 115px;
 
     a {
-      padding: 10px 20px;
+      padding: 10px;
     }
   }
 
@@ -627,7 +677,7 @@
     height: 40px;
 
     a {
-      padding: 11px 20px;
+      padding: 10px;
     }
   }
 
@@ -637,6 +687,10 @@
   // side status
   .trip-heading-accordion .trip-country-name {
     font-size: 20px;
+  }
+
+  .user-button-holder:after {
+    height: 12px;
   }
 
   .listing-accordion .city-heading {
@@ -696,14 +750,26 @@
   }
 
   .travel-journey-heading .editor-logo {
-    img {
-      width: 50px;
-    }
+    width: 50px;
   }
 
   .agent-itinerary-page .agent-imgholder {
     width: 100px;
     max-width: 100px;
+  }
+
+  .visiting-post.travel-visit {
+    .user-social-item {
+      padding: 10px 0;
+    }
+
+    .social-likes-reviews {
+      padding: 10px 0;
+    }
+  }
+
+  .agentitinerary-countryImg {
+    width: 25px;
   }
 
   .agent-itinerary-page .journey-travel-heading h3,
@@ -729,11 +795,11 @@
   }
 
   .share-comment-main .task-holder li:first-child {
-    padding: 0 5px;
+    padding: 0 10px;
   }
 
   .share-comment-main .task-holder li {
-    padding: 0 5px;
+    padding: 0 10px;
   }
 
   .agent-itinerary-page .itinerary-trip-day span,
@@ -1007,7 +1073,7 @@
     width: 280px;
 
     .agentbox-detail {
-      padding: 10px;
+      padding: 10px 10px 10px 15px;
     }
   }
 
@@ -1017,14 +1083,6 @@
 
   .agent-itinerary-page .trip-pic-view {
     width: 300px;
-  }
-
-  .share-comment-main .task-holder li {
-    padding: 0 5px;
-  }
-
-  .share-comment-main .task-holder li:first-child {
-    padding: 0 5px;
   }
 
   .connect-agentbox-holder .btn-more {
@@ -1038,6 +1096,28 @@
 
   .agent-itinerary-page .user-button-holder {
     right: -205px;
+  }
+
+  .agent-itinerary-page .journey-travelling-type {
+    .pull-right {
+      margin-top: 0;
+    }
+  }
+
+  .editor-subdetail {
+    width: 79%;
+  }
+
+  .agent-itinerary-page .social-likes-reviews {
+    padding: 10px 0;
+  }
+
+  .like-block {
+    margin-right: 5px;
+  }
+
+  .agent-card-ballon {
+    margin-right: -5px;
   }
 
   .agent-itinerary-page .connect-agent .photos,
@@ -1060,15 +1140,19 @@
 
   .travel-journey-heading .editor-logo {
     vertical-align: top;
-
-    img {
-      width: 40px;
-    }
+    width: 40px;
+    margin-right: 5px;
   }
 
   .travel-journey-heading .editor-subdetail {
     p {
       font-size: 10px;
+    }
+  }
+
+  .travel-life-part .social-likes-reviews {
+    .mr5 {
+      margin-right: 2px;
     }
   }
 
@@ -1078,10 +1162,6 @@
 
   .journey-cost span {
     margin: 0;
-  }
-
-  .agent-itinerary-page .like-block {
-    display: block;
   }
 
   .book-title-mob {
@@ -1097,15 +1177,16 @@
     padding: 0 15px;
   }
 
+  .journey-accordion-heading .span-plus {
+    font-size: 12px;
+  }
+
   .like-reply-line {
     span.time-stamp {
       display: block;
       margin: 0;
     }
   }
-  // .visit-view-imgholder {
-  //   height: 260px;
-  // }
   // AGENT ITINERARY END
 }
 // media query for 480px to 320px end
