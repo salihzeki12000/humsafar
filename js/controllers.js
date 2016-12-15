@@ -1739,7 +1739,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
         $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
         $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
-        
+
       }
       modal = $uibModal.open({
         animation: true,
@@ -6741,7 +6741,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       Itinerary.getOneQuickItinerary(urlSlug, function (data) {
         $scope.qItinerary = data.data;
         $scope.addCountry = $scope.qItinerary.countryVisited;
-        
+
         //setting up qItineraryType variable starts
        _.each($scope.qItinerary.itineraryType,function(n){
          var index=_.findIndex($scope.qItineraryType,function(type){
@@ -6769,11 +6769,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           });
           $scope.previousCountryId[key1]=n1.country._id;
         });
-        //setting up addCountry variable ends        
+        //setting up addCountry variable ends
       });
     }
      //check whether page is called for editing itinerary or for new itinerary ends
-    
+
     $scope.cities = [];
     var countries = [];
     var cities = [];
@@ -6829,18 +6829,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       plugins: [
         'advlist autolink lists link image charmap print preview anchor',
         'searchreplace visualblocks code fullscreen',
-        'insertdatetime media table contextmenu paste code','autoresize'
+        'insertdatetime media table contextmenu paste code','importcss','autoresize'
       ],
-      paste_as_text: true
+      paste_as_text: true,
+      content_css: "css/main.css",
+      autoresize_on_init: false,
+      autoresize_min_height: 0,
+      autoresize_overflow_padding: 0,      
     };
 
-    
+
     var str = "";
     $scope.selectItinerary = function (val) {
       if ($scope.qItineraryType[val].activeClass == "active-itinerary") {
         $scope.qItineraryType[val].activeClass = "";
       } else {
-        $scope.qItineraryType[val].activeClass = "active-itinerary";  
+        $scope.qItineraryType[val].activeClass = "active-itinerary";
       }
     };
 
@@ -6895,7 +6899,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
          $scope.addCountry.push({});
       }else if(flag=='edit'){
         $scope.addCountry.push({'new':'add'});
-      } 
+      }
     };
 
     $scope.removeStayed = function (countryPanel) {
@@ -6970,7 +6974,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       });
       //storing all selected itinerarytype on sending variable ends
-      
+
       NavigationService.uploadQuickItinerary($scope.qItinerary,flag,function(data){
          $state.go('userquickitinerary', {
           id: data.data.message

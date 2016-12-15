@@ -5673,6 +5673,10 @@ header {
     background-color: $brand-lighter-grey;
   }
 }
+.mce-content-body {
+  padding: 10px 0 0 !important;
+  font-family: "AvenirLTStd-Roman";
+}
 
 .upload-trip-photo-sec {
   margin: 30px 0 10px;
