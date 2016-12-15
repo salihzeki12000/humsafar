@@ -168,6 +168,11 @@ a.mail-icon:hover {
 }
 
 // scroll end
+.text-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
 //bootstrap forms
 .btn,
 .form-control,
@@ -4841,17 +4846,26 @@ header {
 
 .tagfriend-list {
   width: 100%;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  box-shadow: 1px 2px 3px #272727;
   position: absolute;
-  top: 35px;
+  top: 65px;
   left: 0;
   z-index: 3;
+  overflow: hidden;
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background-color: $brand-pink; }
+  ::-webkit-scrollbar-thumb { background-color: transparent; }
+  ul {
+    max-height: 250px;
+    overflow-y: auto;
+  }
   li {
-    padding: 5px 10px;
+    background-color: #fff;
+    padding: 10px 15px;
     &:nth-child(odd) {
-      background-color: #bec3c9;
-    }
-    &:nth-child(even) {
-      background-color: #e2e4e7;
+      background-color: #e7e7e7;
     }
   }
 }
@@ -4865,6 +4879,7 @@ header {
     display: inline-block;
     overflow: hidden;
     vertical-align: middle;
+    img { min-height: 100%; }
   }
 }
 
@@ -4912,7 +4927,8 @@ header {
     transform: scale(1);
   }
   [type="checkbox"]:checked+label:before {
-    background-color: $brand-blue;
+    background-color: $brand-pink;
+    border-color: $brand-pink;
     color: #fff;
     @include transition(all 300ms linear);
   }
@@ -4990,6 +5006,230 @@ header {
   box-shadow: 1px 2px 3px #272727;
   background-color: #ececec;
 }
+.otg-search-location {
+  position: relative;
+  .icon-location { position: absolute; }
+}
+.search-by-category {
+  padding-left: 30px;
+  input {
+    height: auto;
+    padding: 0px 6px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    background-color: transparent;
+    font-family: "AvenirLTStd-Medium";
+    &:focus { border-color: #fff; }
+  }
+}
+.category-location {
+  padding-left: 30px;
+  input {
+    height: auto;
+    border: none;
+    padding: 3px 6px;
+    background-color: transparent;
+    background: url('../img/ongojourney/pencil.png') no-repeat center right;
+    color: #424242;
+    font-size: 12px;
+    font-family: "AvenirLTStd-Roman";
+  }
+}
+.search-otg-location, .dropdown-otg-category {
+  width: 100%;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  box-shadow: 1px 2px 3px #272727;
+  position: absolute;
+  top: 65px;
+  left: 0;
+  z-index: 5;
+  overflow: hidden;
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-thumb { background-color: $brand-pink; }
+  ::-webkit-scrollbar-track { background-color: transparent; }
+  ul {
+    max-height: 250px;
+    overflow-y: auto;
+  }
+  li {
+    padding: 10px 15px;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    &:nth-child(odd){ background-color: #e7e7e7; }
+  }
+  a {
+    display: block;
+    color: $brand-blue;
+    font-family: "AvenirLTStd-Roman";
+    font-size: 15px;
+  }
+}
+.tag-journey-friend {
+  min-height: 63px;
+  position: relative;
+  img.icon-tag { position: absolute; }
+}
+.tag-otg-friend {
+  padding-left: 30px;
+  input {
+    height: auto;
+    padding: 0px 12px;
+    border: none;
+    background-color: transparent;
+    color: #424242;
+    @include placeholder { color: #424242; };
+  }
+}
+.tagfriend-count {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #424242;
+  font-size: 12px;
+}
+.edit-otg-thought {
+  position: relative;
+}
+.icon-thought {
+  position: absolute;
+}
+.otg-thought {
+  padding-left: 30px;
+  textarea {
+    height: 43px;
+    padding: 3px 6px;
+    border: none;
+    background-color: transparent;
+    font-family: "AvenirLTStd-Medium";
+    font-size: 15px;
+    &:focus { height: 100px; }
+  }
+}
+.otg-photo-video {
+  margin-top: 15px;
+}
+.view-photo-sec, .view-video-sec {
+  position: relative;
+  padding: 15px 50px;
+ }
+.otg-photo-count, .otg-video-count {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  span { color: #424242; }
+}
+.otg-photo-slider {
+  .flexslider {
+    border-radius: 0;
+    background-color: transparent;
+  }
+}
+.otg-photo-holder {
+  height: 157px;
+  margin: 5px;
+  position: relative;
+  overflow: hidden;
+}
+.otg-photo-caption {
+  width: 100%;
+  padding: 5px 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  @include background(linear-gradient(to top, rgba(0,0,0,0.7), transparent));
+}
+.otg-add-caption {
+  @include square(100%);
+  padding: 10px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(0,0,0,0.6);
+  @include transition(all 300ms linear);
+  textarea {
+    width: 100%;
+    height: 90px;
+    border: none;
+    margin-top: 15px;
+    background-color: transparent;
+    color: #fff;
+    font-family: "AvenirLTStd-Medium";
+    @include placeholder { color: #fff; };
+  }
+}
+.show-otg-caption {
+  top: 0;
+  @include transition(all 300ms linear);
+}
+.delete-otg-photo {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  i {
+    font-size: 15px;
+    color: #fff;
+    text-shadow: 1px 2px 3px #424242;
+  }
+}
+.text-typed-count {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  color: #fff;
+}
+// video edit
+.video-otg-slider {
+  .flexslider {
+    border-radius: 0;
+    background-color: transparent;
+  }
+}
+.holder-otg-video {
+  height: 334px; //temporary height
+  position: relative;
+  overflow: hidden;
+}
+.otg-photo-slider, .video-otg-slider {
+  .flex-direction-nav {
+    .flex-prev {
+      left: -33px;
+      opacity: 1;
+      &:before {
+        content: "\f104";
+        font: normal normal normal normal 14px/1 FontAwesome;
+        font-size: 40px;
+        color: #a0a0a0;
+      }
+    }
+    .flex-next {
+      right: -33px;
+      opacity: 1;
+      &:before {
+        content: "\f105";
+        font: normal normal normal normal 14px/1 FontAwesome;
+        font-size: 40px;
+        color: #a0a0a0;
+      }
+     }
+  }
+  .flexslider:hover {
+    .flex-prev {
+      left: -33px;
+      opacity: 1;
+     }
+    .flex-next {
+      right: -33px;
+      opacity: 1;
+     }
+  }
+}
+.save-cancel-otg {
+  margin-top: 30px;
+  a, button { margin: 10px; }
+  a:hover { color: #fff; }
+}
+// video edit end
 // new edit otg end
 // pop up journey used end
 // on go journey end
@@ -6304,8 +6544,9 @@ header {
     height: 92vh;
     background-image: url('../img/itinerary/religious.jpg');
     background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: 100%;
+    // background-position: 50% 50%;
+    background-position: 0 50%;
+    background-size: cover;
   }
   .agent-banner-detail {
     width: 100%;
