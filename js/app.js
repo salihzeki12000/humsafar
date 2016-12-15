@@ -769,3 +769,10 @@ firstapp.filter('postString', function () {
   }
 
 });
+
+firstapp.filter('filterCity', function () {
+  return function (search,arr) {
+    console.log(search,arr);
+  }
+});
+   
