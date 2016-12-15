@@ -5649,7 +5649,7 @@ header {
   }
   iframe { height: 100% !important; }
   .mce-edit-area {
-    height: 250px;
+    min-height: 250px;
   }
   #mceu_2 {
     padding: 5px 15px;
@@ -5700,7 +5700,7 @@ header {
   position: relative;
   overflow: hidden;
   border: 1px solid #a0a0a0;
-  img { width: 100%; } 
+  img { width: 100%; }
   &:hover {
     .remove-quick-photo {
     display: block;
