@@ -204,7 +204,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'TripSummaryCtrl'
     })
     .state('detailitinerary', {
-      url: "/detail-itinerary",
+      url: "/detail-itinerary/:flag/:urlSlug",
       templateUrl: "views/template.html",
       controller: 'DetailedItineraryCtrl'
     })

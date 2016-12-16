@@ -59,14 +59,14 @@
                       <input type="text" class="form-control" placeholder="Trip Title" ng-model="dItinerary.title">
                     </div>
                   </div>
-                   <!--<div class="col-md-6">
+                   <div class="col-md-6">
                     <div class="itinerary-inputholder relate">
                       <input type="text" class="form-control" placeholder="Travelled With">
                       <span class="itinerary-dropdown-icon">
                         <i class="fa fa-chevron-down"></i>
                       </span>
                     </div>
-                  </div> -->
+                  </div> 
                 </div>
               </div>
               <!-- itinerary type -->
@@ -82,86 +82,69 @@
                 </div>
               </div>
               <!-- itinerary type end -->
-              {{countryCity}}
-              <div class="add-country-city {{addClass}}" ng-repeat="add in countryCity track by $index">
-               <div class="remove-country-city"><i class="fa fa-times" ng-click="removeCountryCity($index);"></i></div>
+              {{addCountry}}
+            <div class="add-country-city {{addClass}}" ng-repeat="add in addCountry track by $index" ng-init="countryPanel=$index">
+              <div class="remove-country-city"><i class="fa fa-times" ng-click="removeCountry(countryPanel);" ng-if="countryPanel>0"></i></div>
                <!-- country Visited -->
-               <div class="itinerary-country-visited">
+              <div class="itinerary-country-visited">
                 <div class="row">
+                   <!-- new ui select dropdown country -->
                   <div class="col-md-6">
-                    <div class="itinerary-inputholder">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Country You Visited" ng-model="add.countryName">
-                    </div>
-                      <span class="itinerary-dropdown-icon">
-                        <i class="fa fa-chevron-down"></i>
-                      </span>
+                    <div class="itinerary-inputholder input-country-visited">
+                      <ui-select  ng-model="add.country" theme="bootstrap" on-select="updateCountryPanel(countryPanel,add.country)" ng-click="updateCountriesArr($select.selected._id)">
+                        <ui-select-match placeholder="Country Visited ">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="nation._id as nation in countries | filter: $select.search">
+                          <span ng-bind="nation.name"></span>
+                        </ui-select-choices>
+                      </ui-select>                      
                     </div>
                   </div>
-                  <!-- <div class="col-md-6">
-                    <div class="itinerary-country-detail">
-                      <div class="itinerary-from itinerary-month">
-                        <label for="From">From</label>
-                        <div class="itinerary-inputholder">
-                          <input type="text" class="form-control text-center" id="From">
-                        </div>
-                      </div>
-                      <div class="itinerary-to itinerary-year">
-                        <label for="to">To</label>
-                        <div class="itinerary-inputholder">
-                          <input type="text" class="form-control text-center" id="to">
-                        </div>
-                      </div>
-                      <div class="itinerary-duration">
-                        <label for="Duration">Days</label>
-                        <div class="itinerary-inputholder">
-                          <input type="text" class="form-control text-center" id="Duration">
-                        </div>
-                      </div>
-                    </div>
-                  </div> -->
+                 
                 </div>
               </div>
                <!-- country Visited end-->
                <!-- city visited  -->
                <div class="itinerary-country-visited itinerary-city-visited" >
-                <div class="row" ng-repeat="addCity in add.detailedCity track by $index">
-                  <div class="col-md-6">
-                    <div class="itinerary-inputholder">
-                      <input type="text" class="form-control" placeholder="City You Visited" ng-model="addCity.cityName">
-                      <span class="itinerary-dropdown-icon">
-                        <i class="fa fa-chevron-down"></i>
-                      </span>
+                <div class="row" ng-repeat="city in add.cityVisited track by $index" ng-init="cityPanel=$index">
+                   <div class="col-md-6">{{city}}
+                     <div class="itinerary-inputholder input-country-visited">
+                      <ui-select  ng-model="add.cityVisited[cityPanel]" theme="bootstrap" ng-click="updateCitiesArr($select.selected._id)">
+                        <ui-select-match placeholder="Country Visited ">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="{'name':citi.name,placeId:citi.placeId} as citi in cities" refresh="searchCity(add.country,$select.search)" refresh-delay="0">
+                          <span ng-bind="citi.name"></span>
+                        </ui-select-choices>
+                      </ui-select>                      
                     </div>
+                    <i class="avenir-roman color-light-grey">Add other cities visited in this country on this trip</i>
                   </div>
                   <div class="col-md-6">
                     <div class="itinerary-country-detail">
                       <div class="itinerary-from itinerary-month">
                         <label for="From">From</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control text-center" id="From">
+                          <input type="date" class="form-control text-center" id="From" ng-model="city.from">
                         </div>
                       </div>
                       <div class="itinerary-to itinerary-year">
                         <label for="to">To</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control text-center" id="to">
+                          <input type="date" class="form-control text-center" id="to" ng-model="city.to">
                         </div>
                       </div>
                       <div class="itinerary-duration">
                         <label for="Duration">Days</label>
                         <div class="itinerary-inputholder">
-                          <input type="text" class="form-control text-center" id="Duration">
+                          <input type="text" class="form-control text-center" id="Duration" ng-model="city.duration">
                         </div>
                       </div>
                     </div>
                   </div>
-                  <span ng-click="removeCity($index)"> city remove<i class="fa fa-times"></i></span>
+                  <span ng-click="removeCity(countryPanel,cityPanel)"><i class="fa fa-times" ng-if="cityPanel>0"></i></span>
                 </div>
                 <div class="row">
                   <div class="col-md-6">
                     <div class="add-country clearfix">
-                      <button class="btn btn-pink pull-left" ng-click="addYourCity()">Add City</button>
+                      <button class="btn btn-pink pull-left" ng-click="addYourCity(countryPanel)">Add City</button>
                       <span class="color-dark-blue pull-right mt5">If you have visited any other cities on the same trip</span>
                     </div>
                   </div>
@@ -171,7 +154,7 @@
             </div>
             <!-- add country on click -->
               <div class="add-country clearfix">
-                <button class="btn btn-pink pull-left" ng-click="addCountryCity();">Add Country</button>
+                <button class="btn btn-pink pull-left" ng-click="addYourCountry();">Add Country</button>
                 <span class="color-dark-blue pull-right mt5">If you have visited any other cities on the same trip</span>
               </div>
             <!-- add country on click end-->
@@ -320,17 +303,26 @@
                         </span>
                       </div>
                     </div>
-                    <div class="currency-amount">
+                    <!--<div class="currency-amount">
                       <div class="itinerary-inputholder">
                         <input type="text" class="text-center">
                       </div>
+                    </div>-->
+
+                    <!--quick-itinerary copy-paste-->
+                     <div class="dropdown-currency-itinerary" ng-show="currency.showCurrency">
+                          <ul>
+                          <li ng-repeat="name in currency | filter:qItinerary.currency" ng-click="currency.showCurrency=false;qItinerary.currency=name.currency;" >
+                            <a href="" title="{{name.currency}}">{{name.currency}}</a>
+                          </li>
+                        </ul>
                     </div>
                   </div>
                 </div>
                 <div class="pull-right">
                   <div class="save-publish-detail">
-                    <button class="btn btn-pink btn-more mr5">Save</button>
-                    <button class="btn btn-pink btn-more">Publish</button>
+                    <button class="btn btn-pink btn-more mr5" ng-click="uploadQuickItinerary(false)">Save</button> 
+                    <button class="btn btn-pink btn-more" ng-click="uploadQuickItinerary(true)">Publish</button>
                   </div>
                 </div>
               </div>
