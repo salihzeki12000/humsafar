@@ -6709,7 +6709,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // remove city end
 
   })
-  .controller('QuickItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, $timeout, $stateParams) {
+  .controller('QuickItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, $timeout, $stateParams ,$state) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -7357,7 +7357,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-
+    $scope.userData=$.jStorage.get("profile");
     //Integration starts here
     var slug = $stateParams.id;
     Itinerary.getOneQuickItinerary(slug, function (data) {
