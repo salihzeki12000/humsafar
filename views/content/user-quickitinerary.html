@@ -28,7 +28,7 @@
           </li>
         </ul>
       </div>
-      <div class="button-holder mt20">
+      <div class="button-holder mt20" ng-if='userData._id != itinerary.creator._id'>
         <button class="btn btn-white-outline btn-more avenir-medium">Follow</button>
       </div>
     </div>
@@ -65,7 +65,7 @@
                 <img src="img/itinerary/family-whole-bg.jpg" alt="" class="img-responsive">
                 <div class="itinerary-heading-detail">
                   <p class="m-clear mb5"><span class="avenir-roman color-pink">Country Visited : </span><span class="color-white country-visited-name avenir-heavy" ng-repeat="country in itinerary.countryVisited track by $index">{{country.country.name}}<span ng-if="$index<(itinerary.countryVisited.length-1)"> | </span></span></p>
-                  <p class="m-clear"><span class="avenir-roman color-pink">Cities Visited : </span><span ng-repeat="countryObj in itinerary.countryVisited"><span class="color-white avenir-roman" ng-repeat="city in countryObj.cityVisited track by $index">{{city.city.name}}<span ng-if="$index<(countryObj.cityVisited.length-1)"> | </span></span></span></p>
+                  <p class="m-clear"><span class="avenir-roman color-pink">Cities Visited : </span><span ng-repeat="countryObj in itinerary.countryVisited track by $index" ng-init="outerIndex=$index"><span class="color-white avenir-roman" ng-repeat="city in countryObj.cityVisited track by $index" ng-init="innerIndex=$index">{{city.city.name}}<span ng-if="((innerIndex<(countryObj.cityVisited.length-1))||(outerIndex<(itinerary.countryVisited.length-1)))"> | </span></span></span></p>
                 </div>
                 <div class="itinerary-type-head"><span>Quick Itinerary</span></div>
               </div>
@@ -156,7 +156,7 @@
               <div class="write-comment-text">
                 <div class="commenter-img">
                   <div class="commenter-imgholder">
-                    <img src="img/profile.jpg" alt="" class="img-responsive">
+                    <img ng-src="{{userData.profilePicture|uploadpath}}" alt="" class="img-responsive">
                   </div>
                 </div>
                 <div class="comment-ur-text">
@@ -165,7 +165,7 @@
               </div>
               <div class="clearfix comment-post">
                 <div class="pull-right">
-                  <button class="btn btn-pink post-btn">Post</button>
+                  <button class="btn btn-pink post-btn" ng-click="">Post</button>
                 </div>
               </div>
             </div>
