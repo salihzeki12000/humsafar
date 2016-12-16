@@ -116,12 +116,12 @@
   .visit-view-imgholder {
     height: auto;
   }
+
+  .listing-accordion .panel-open .panel-heading {
+    max-height: 250px;
+  }
   // AGENT ITINERARY PAGE END
   // USER-DETAIL ITINERARY PAGE
-  .user-detailitinerary-page .listing-accordion .panel-open .panel-heading {
-    height: 245px;
-  }
-
   .user-detailitinerary-page .trip-pic-view {
     width: 900px;
   }
@@ -129,7 +129,29 @@
   .user-detailitinerary-page .close-gallery {
     left: -880px;
   }
+
+  .commenter-text {
+    text-align: justify;
+  }
   // USER-DETAIL ITINERARY PAGE END
+  // USER QUICK ITINERARY PAGE
+  .user-itinerary-page .user-tag .user-imgholder {
+    width: 90px;
+    height: 95px;
+  }
+
+  .user-itinerary-page .journey-travel-heading h3 {
+    font-size: 30px;
+  }
+
+  .user-itinerary-page .trip-pic-view {
+    width: 900px;
+  }
+
+  .user-itinerary-page .close-gallery {
+    left: -880px;
+  }
+  // USER QUICK ITINERARY PAGE END
 }
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
@@ -268,15 +290,18 @@
   }
   // popular blogger end
   //AGENT ITINERARY PAGE
-  .agent-itinerary-page .trip-pic-view {
+  .agent-itinerary-page .trip-pic-view,
+  .user-itinerary-page .trip-pic-view {
     width: 700px;
   }
 
-  .agent-itinerary-page .open-gallery {
+  .agent-itinerary-page .open-gallery,
+  .user-itinerary-page .open-gallery {
     left: 47%;
   }
 
-  .agent-itinerary-page .close-gallery {
+  .agent-itinerary-page .close-gallery,
+  .user-itinerary-page .close-gallery {
     left: -680px;
   }
 
@@ -344,18 +369,48 @@
   .agent-itinerary-page .social-likes-reviews .agent-card-ballon {
     margin-top: -5px;
   }
+
+  .trip-itinerary-status .trip-status-main:after {
+    border-right: 25px solid transparent;
+    border-left: 25px solid transparent;
+  }
   //AGENT ITINERARY PAGE END
   // USER-DETAIL ITINERARY PAGE
   .user-detailitinerary-page .listing-accordion .panel-open .panel-heading {
-    height: 190px;
+    min-height: 190px;
   }
-  .user-detailitinerary-page  .social-likes-reviews .user-card-ballon {
+
+  .user-detailitinerary-page .social-likes-reviews .user-card-ballon {
     margin-top: -5px;
   }
+
   .user-detailitinerary-page .user-social-item {
     padding: 15px 0;
   }
+
+  .agent-itinerary-page .user-tag .user-imgholder,
+  .user-itinerary-page .user-tag .user-imgholder {
+    width: 90px;
+    height: 95px;
+  }
+
+  .user-itinerary-page .journey-travel-heading h3 {
+    font-size: 30px;
+  }
   // USER-DETAIL ITINERARY PAGE END
+  // USER QUICK ITINERARY PAGE
+  .user-itinerary-page .itinerary-name span {
+    font-size: 14px;
+  }
+
+  .user-itinerary-page .itinerary-name span:first-child {
+    font-size: 24px;
+  }
+
+  .user-itinerary-page .social-likes-reviews .user-card-ballon {
+    margin-top: -5px;
+  }
+  // USER QUICK ITINERARY PAGE END
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -626,11 +681,13 @@
   }
   // popular blogger end
   // AGENT ITINERARY PAGE
-  .agent-itinerary-page .close-gallery {
+  .agent-itinerary-page .close-gallery,
+  .user-itinerary-page .close-gallery {
     left: -435px;
   }
 
-  .agent-itinerary-page .trip-pic-view {
+  .agent-itinerary-page .trip-pic-view,
+  .user-itinerary-page .trip-pic-view {
     width: 455px;
 
     .masonry-main {
@@ -666,7 +723,7 @@
   }
 
   .listing-accordion .panel-open .panel-heading {
-    height: 115px;
+    height: 120px;
 
     a {
       padding: 10px;
@@ -772,8 +829,7 @@
     width: 25px;
   }
 
-  .agent-itinerary-page .journey-travel-heading h3,
-  .user-itinerary-page .journey-travel-heading h3 {
+  .agent-itinerary-page .journey-travel-heading h3 {
     font-size: 24px;
   }
 
@@ -825,6 +881,61 @@
     padding: 10px 10px 20px;
   }
   // AGENT ITINERARY PAGE END
+  // USER-DETAIL ITINERARY PAGE
+  .user-banner-holder .mouse-scrolldown {
+    display: none;
+  }
+
+  .user-itinerary-page .travel-journey-heading .editor-subdetail {
+    width: 80%;
+  }
+
+  .user-detailitinerary-page .listing-accordion .panel-open .panel-heading {
+    min-height: 120px;
+  }
+
+  .user-detailitinerary-page .trip-pic-holder {
+    .user-button-holder {
+      right: -130px;
+
+      .photos {
+        width: 225px;
+        padding: 10px 0;
+      }
+    }
+  }
+
+  .user-banner-detail .user-tag .user-name {
+    font-size: 18px;
+  }
+
+  .user-banner-detail .journey-travel-heading h3 {
+    font-size: 24px;
+  }
+
+  .user-itinerary-page .user-tag .user-imgholder {
+    width: 70px;
+    height: 75px;
+    border-radius: 27px;
+  }
+  // USER-DETAIL ITINERARY PAGE END
+  // USER QUICK ITINERARY PAGE
+  .user-itinerary-page .trip-pic-holder {
+    .user-button-holder {
+      right: -130px;
+
+      .photos {
+        width: 225px;
+        padding: 10px 0;
+      }
+    }
+  }
+  .book-title-mob {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  // USER QUICK ITINERARY PAGE END
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -1188,5 +1299,50 @@
     }
   }
   // AGENT ITINERARY END
+  // USER-DETAIL ITINERARY PAGE
+  .user-itinerary-page .trip-pic-view .gallery-imgholder {
+    width: 80px;
+    max-width: 80px;
+  }
+
+  .user-itinerary-page .trip-pic-view {
+    width: 300px;
+  }
+
+  .user-itinerary-page .close-gallery {
+    left: -280px;
+  }
+
+  .user-itinerary-page .photos {
+    width: 170px;
+    padding: 5px 0;
+  }
+
+  .user-detailitinerary-page .trip-pic-holder {
+    .user-button-holder {
+      right: -125px;
+
+      .photos {
+        width: 220px;
+        padding: 5px 0;
+      }
+    }
+  }
+
+  .user-itinerary-page .travel-journey-heading .editor-subdetail {
+    width: 78%;
+  }
+
+  .user-itinerary-page .journey-travelling-type {
+    .pull-right {
+      margin-top: 0;
+    }
+  }
+
+  .mob-booknow {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+  // USER-DETAIL ITINERARY PAGE END
 }
 // media query for 480px to 320px end

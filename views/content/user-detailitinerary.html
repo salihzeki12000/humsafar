@@ -219,21 +219,21 @@
                 <ul class="list-inline">
                   <li><a href="" ng-click="getClicked = true;"><i class="fa like-button-icon color-blue" ng-class="{'fa-heart-o': getClicked == false, 'fa-heart': getClicked == true}"></i></a></li>
                   <li>
-                    <a href=""><img src="img/comments.png" alt="Comments" height="22"></a>
+                    <a href=""><img src="img/comments.png" alt="Comments" height="22"  class="agent-iti-comment-icon"></a>
                   </li>
                   <li>
-                    <a href=""><img src="img/reviews.png" alt="Review" height="22"></a>
+                    <a href=""><img src="img/reviews.png" alt="Review" height="22"  class="agent-iti-review-icon"></a>
                   </li>
                   <li>
-                    <a href=""><img src="img/print.png" alt="Print" height="22"></a>
+                    <a href=""><img src="img/print.png" alt="Print" height="22"  class="agent-iti-print-icon"></a>
                   </li>
                   <li>
-                    <a href=""><img src="img/download.png" alt="Download" height="22"></a>
+                    <a href=""><img src="img/download.png" alt="Download" height="22"  class="agent-iti-download-icon"></a>
                   </li>
                 </ul>
               </div>
               <div class="opitions pull-right">
-                <img src="img/options.png" alt="Options" height="22">
+                <img src="img/options.png" alt="Options" height="22"  class="agent-iti-options-icon">
               </div>
             </div>
             <div class="clearfix like-review-main">
@@ -253,7 +253,7 @@
               <!-- share  -->
               <div class="share-social-holder pull-right">
                 <span class="color-blue avenir-heavy inline-block v-mid mr10">Share This Itinerary</span>
-                <ul class="list-inline inline-block v-mid">
+                <ul class="list-inline inline-block v-mid social-logo-padd">
                   <li><a href="" class="fb-icon color-blue"><i class="fa fa-facebook-square fa-2x"></i></a></li>
                   <li><a href="" class="twi-icon color-blue"><i class="fa fa-twitter-square fa-2x"></i></a></li>
                   <li><a href="" class="google-icon color-blue"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
@@ -391,7 +391,7 @@
                       <div class="social-likes-reviews avenir-heavy">
                         <div class="clearfix">
                           <div class="pull-left">
-                            <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{life.likes}}</b>Likes</span>
+                            <span class="color-blue mr10 like-block"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{life.likes}}</b>Likes</span>
                             <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>
                           </div>
                           <div class="pull-right user-card-ballon">
@@ -443,10 +443,10 @@
                         <div class="travelvisit" ng-if="visit.travelVisit">
                           <div class="row">
                             <div class="col-md-8 col-sm-8">
-                              <h4 class="color-white avenir-heavy m-clear">{{visit.tagTravel}}</h4>
+                              <h4 class="color-white avenir-heavy m-clear book-title-mob">{{visit.tagTravel}}</h4>
                             </div>
                             <div class="col-md-4 col-sm-4 text-center">
-                              <button class="btn btn-white-outline">Book Now</button>
+                              <button class="btn btn-white-outline mob-booknow">Book Now</button>
                             </div>
                           </div>
                         </div>
@@ -523,7 +523,7 @@
                         </div>
                         <h3 class="name-follower color-white avenir-roman">{{view.name}}</h3>
                         <p class="color-white follow-detail avenir-roman"><i class="fa fa-map-marker mr5"></i> <span class="location">{{view.location}}</span> | <span class="follower">Follower : {{view.follower}} </span></p>
-                        <button class="btn btn-white-outline">View This Profile</button>
+                        <button class="btn btn-white-outline mob-booknow">View This Profile</button>
                       </div>
                     </div>
                   </div>
