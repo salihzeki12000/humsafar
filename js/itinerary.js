@@ -13,6 +13,25 @@ var itinerary = angular.module('itinerary', [])
       }).success(function (data) {
         callback(data);
       });
+    },
+    postItineraryComment: function(obj,callback){
+      $http({
+        url:adminURL + "/comment/addCommentWeb",
+        method:"POST",
+        data:obj
+      }).success(function(data){
+        callback(data);
+      });
+    },
+    updateLikeItinerary: function (obj,callback){
+      console.log(obj);
+      $http({
+        url:adminURL + "/itinerary/updateLikeItineraryWeb",
+        method:"POST",
+        data:obj
+      }).success(function(data){
+        callback(data);
+      });
     }
   };
 });
