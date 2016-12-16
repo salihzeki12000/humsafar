@@ -86,7 +86,7 @@
       <!-- accordion main -->
       <div class="accordion-holder">
         <div class="row">
-          <div class="col-md-offset-1 col-md-10">
+          <div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12">
             <div class="accordion-list" ng-repeat="list in countryTripList">
               <!-- trip accordion heading -->
               <div class="trip-heading-accordion">
@@ -173,7 +173,7 @@
       <!-- accordion main end-->
       <!-- comment and like panel main --->
       <div class="row">
-        <div class="col-md-offset-1 col-md-10">
+        <div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12">
           <div class="share-comment-main">
             <div class="clearfix share-option-main">
               <div class="task-holder pull-left" ng-init="getClicked = false;">
@@ -214,7 +214,7 @@
               <!-- share  -->
               <div class="share-social-holder pull-right">
                 <span class="color-blue avenir-heavy inline-block v-mid mr10">Share This Itinerary</span>
-                <ul class="list-inline inline-block v-mid">
+                <ul class="list-inline inline-block v-mid  social-logo-padd">
                   <li><a href="" class="fb-icon color-blue"><i class="fa fa-facebook-square fa-2x"></i></a></li>
                   <li><a href="" class="twi-icon color-blue"><i class="fa fa-twitter-square fa-2x"></i></a></li>
                   <li><a href="" class="google-icon color-blue"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
@@ -272,7 +272,7 @@
             <h4 class="color-blue avenir-roman text-center">You Can Also View Other Popular Itineraries</h4>
             <div masonry class="blog-itineraries-main">
               <div class="row">
-                <div class="masonry-brick col-md-4" ng-repeat="life in travelLife" >
+                <div class="masonry-brick col-md-4 col-sm-6" ng-repeat="life in travelLife" >
                   <div class="travel-life-part blog-post avenir-roman" ng-if="life.popItinerary">
                     <div class="travel-journey-heading">
                       <div class="editor-logo">
@@ -352,10 +352,10 @@
                       <div class="social-likes-reviews avenir-heavy">
                         <div class="clearfix">
                           <div class="pull-left">
-                            <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{life.likes}}</b>Likes</span>
+                            <span class="color-blue mr10 like-block"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{life.likes}}</b>Likes</span>
                             <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>
                           </div>
-                          <div class="pull-right">
+                          <div class="pull-right user-card-ballon">
                             <img src="img/travel.png" alt="">
                           </div>
                         </div>
@@ -403,11 +403,11 @@
                         <!-- travel visit post -->
                         <div class="travelvisit" ng-if="visit.travelVisit">
                           <div class="row">
-                            <div class="col-md-8">
-                              <h4 class="color-white avenir-heavy m-clear">{{visit.tagTravel}}</h4>
+                            <div class="col-md-8 col-sm-8">
+                              <h4 class="color-white avenir-heavy m-clear book-title-mob">{{visit.tagTravel}}</h4>
                             </div>
-                            <div class="col-md-4 text-center">
-                              <button class="btn btn-white-outline">Book Now</button>
+                            <div class="col-md-4 col-sm-4 text-center">
+                              <button class="btn btn-white-outline mob-booknow">Book Now</button>
                             </div>
                           </div>
                         </div>

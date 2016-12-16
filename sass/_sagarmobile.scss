@@ -151,6 +151,10 @@
   .user-itinerary-page .close-gallery {
     left: -880px;
   }
+
+  .editor-itinerary-page .journey-travelling-type .pull-right {
+    margin-top: 0;
+  }
   // USER QUICK ITINERARY PAGE END
 }
 // media query for 991px to 768px
@@ -411,6 +415,16 @@
     margin-top: -5px;
   }
   // USER QUICK ITINERARY PAGE END
+  // EDITOR ITINERARY PAGE
+  .editor-itinerary-page .listing-accordion .gallery-image-holder {
+    width: 120px;
+    max-width: 120px;
+  }
+
+  .editor-itinerary-page .social-likes-reviews .user-card-ballon {
+    margin-top: -5px;
+  }
+  // EDITOR ITINERARY PAGE END
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -930,12 +944,14 @@
       }
     }
   }
+
   .book-title-mob {
     font-size: 16px;
     margin-bottom: 5px;
   }
-
   // USER QUICK ITINERARY PAGE END
+  // EDITOR ITINERARY PAGE
+  // EDITOR ITINERARY PAGE END
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -1344,5 +1360,19 @@
     padding: 5px 10px;
   }
   // USER-DETAIL ITINERARY PAGE END
+  // EDITOR ITINERARY PAGE
+  .editor-itinerary-page .listing-accordion .gallery-image-holder {
+    width: 65px;
+    max-width: 65px;
+  }
+
+  .editor-itinerary-page .listing-accordion .view-trip-photo {
+    padding: 0 12px;
+  }
+
+  .editor-itinerary-page .listing-accordion .masonry-holder {
+    padding: 10px 10px 0;
+  }
+  // EDITOR ITINERARY PAGE END
 }
 // media query for 480px to 320px end
