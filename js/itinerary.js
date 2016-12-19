@@ -32,6 +32,15 @@ var itinerary = angular.module('itinerary', [])
       }).success(function(data){
         callback(data);
       });
-    }
+    },
+    getGooglePlaceDetail:function(obj,callback){
+      $http({
+        url:adminURL + "/itinerary/getGooglePlaceDetail",
+        method:"POST",
+        data:obj
+    }).success(function(data){
+      callback(data);
+    });
+    }  
   };
 });

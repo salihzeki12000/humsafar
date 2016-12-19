@@ -440,7 +440,6 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout) {
             // }
 
             $scope.$watch("image", function (newVal, oldVal) {
-                console.log(newVal, oldVal);
                 isArr = _.isArray(newVal);
                 if (!isArr && newVal && newVal.file) {
                     $scope.uploadNow(newVal);
@@ -770,9 +769,9 @@ firstapp.filter('postString', function () {
 
 });
 
-firstapp.filter('filterCity', function () {
-  return function (search,arr) {
-    console.log(search,arr);
-  }
+firstapp.filter('filterDate', function(){
+   return function(duration){
+     return "inside";
+   };
 });
    
