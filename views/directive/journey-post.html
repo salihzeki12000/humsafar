@@ -54,7 +54,7 @@
     <div class="related-imgslider" ng-if="ongo.photos.length>5">
       <flex-slider flex-slide="slide in ongo.photos track by $index" item-width="99" class="related-slide carousel" animation="true"
         item-margin="5" control-nav="false">
-        <!---- put item width 99 if needed -->
+        <!---- put/remove item width 99 if needed -->
         <li>
           <div class="related-ongo-slider" ng-click="changeImage($index)">
             <img ng-src="{{slide.name|uploadpath}}" alt="" class="img-responsive">
@@ -113,6 +113,9 @@
               <ul>
                 <!-- ng if for checkin -->
                 <li><a href="" title="Edit Check In" ng-click="editCheckIn();">Edit <span>Check In</span></a></li>
+                <!-- add photos videos -->
+                <li><a href="" title="Add Photos &amp; Videos" ng-click="addPhotosVideo();">Add Photos &amp; Videos</a></li>
+                <!-- add photos videos end-->
                 <!-- ng if for Photos -->
                 <li class="hide"><a href="" title="Edit Photos" ng-click="editCheckIn();">Edit Photos</a></li>
                 <!-- ng-if for Videos -->
@@ -131,7 +134,7 @@
               </ul>
             </div>
           </div>
-        </div> 
+        </div>
       </div>
       <div class="social-likes-reviews">
         <div class="clearfix">

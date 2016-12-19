@@ -5226,6 +5226,21 @@ header {
      }
   }
 }
+.add-otg-more {
+  position: absolute;
+  bottom: 30px;
+  right: 15px;
+}
+.putmore-photo-video {
+  @include square(25px);
+  border-radius: 100%;
+  background-color: $brand-pink;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 25px;
+  text-align: center;
+  i { color: #fff; }
+}
 .save-cancel-otg {
   margin-top: 30px;
   a, button { margin: 10px; }
@@ -5233,6 +5248,10 @@ header {
 }
 // video edit end
 // new edit otg end
+// add new otg photo video
+.uplad-otg-sec { margin: 90px 0; }
+.otg-upload-btn { margin: 15px 0px 0; }
+// add new otg photo video end
 // pop up journey used end
 // on go journey end
 // trip summary
@@ -5406,6 +5425,7 @@ header {
 
 // itinerary end
 // quick itinerary detail
+.quick-itinerary-page { padding: 0px 15px; }
 .fill-detail-itinerary,
 .fill-quick-itinerary {
   margin: 30px 0;

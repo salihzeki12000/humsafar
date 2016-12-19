@@ -281,39 +281,29 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         });
       }
 
-
-
-
       //post comments starts
 
       //post comments ends
+
+      // add photo videos otg
+      $scope.addPhotosVideo = function(){
+        $uibModal.open({
+          animation: true,
+          templateUrl: "views/modal/add-photo-video.html",
+          size: "lg",
+          scope: $scope,
+        })
+      };
+      // add photo videos otg end
 
       // edit otg
 
       // $scope.otgPhoto = _.chunk([$scope.otgPhoto],2);
 
       // photos array edit
-      $scope.otgPhoto = [
-        {
-          img : 'img/ongojourney/adrena.jpg'
-        },
-        {
-          img : 'img/ongojourney/adrena.jpg'
-        },
-        {
-          img : 'img/ongojourney/adrena.jpg'
-        },
-        {
-          img : 'img/ongojourney/adrena.jpg'
-        },
-        {
-          img : 'img/ongojourney/adrena.jpg'
-        },
-        {
-          img : 'img/ongojourney/adrena.jpg'
-        },
-      ];
       // $scope.otgPhoto = [];
+
+
       $scope.otgPhoto = _.chunk($scope.otgPhoto,4);
       for (var i=0; i < $scope.otgPhoto.length; i++){
         $scope.otgPhoto[i] = _.chunk($scope.otgPhoto[i],2);
@@ -333,12 +323,13 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         img: 'img/ongojourney/window.jpg'
       }, {
         img: 'img/ongojourney/winter.jpg'
-      }, {
+      },
+       {
         img: 'img/ongojourney/jitu-sofa.jpg'
       }, {
         img: 'img/ongojourney/andrea-santa.jpg'
-      }, ];
-
+      },
+    ];
       // $scope.otgPhoto = [];
       $scope.index =-1;
       $scope.addMoreCaption = function(index) {
@@ -353,6 +344,19 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         $scope.otgPhoto[i] = _.chunk($scope.otgPhoto[i], 2);
         console.log($scope.otgPhoto[i + 'row'] = _.chunk($scope.otgPhoto[i + 'col'], 2));
       }
+      // show direction nav arrow
+      setTimeout(function(){
+        if($scope.otgPhoto.length > 1){
+          $(".flexslider").flexslider({
+            directionNav: false
+        });
+        }else {
+          $(".flexslider").flexslider({
+          directionNav: true
+        });
+        }
+      },1000);
+      // show direction nav arrow end
       // photos array edit end
       // video array
       $scope.videoOtg = [
