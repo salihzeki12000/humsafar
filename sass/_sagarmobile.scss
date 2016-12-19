@@ -156,6 +156,19 @@
     margin-top: 0;
   }
   // USER QUICK ITINERARY PAGE END
+  .advertise-text {
+    font-size: 50px;
+  }
+  // QUICK ITNERARY PAGE
+  .quick-itinerary-page .quick-itinerary-detail {
+    padding: 30px;
+  }
+  .quick-itinerary-page .trip-photo-holder .trip-view-photo{
+    width: 199px;
+    height: 190px;
+    max-height: 190px;
+  }
+  // QUICK ITNERARY PAGE END
 }
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
@@ -274,7 +287,7 @@
   }
   // agent setting page end
   // destination city page
-  .destination-nav {
+  .destination .destination-nav {
     padding-bottom: 10px;
   }
 
@@ -425,6 +438,45 @@
     margin-top: -5px;
   }
   // EDITOR ITINERARY PAGE END
+  // DESTINATION PAGE
+  .destination-head .destination-nav {
+    padding: 0;
+  }
+  // DESTINATION PAGE END
+  .advertise-text {
+    font-size: 42px;
+  }
+  // ITINENRARY PAGE
+  .itinerary-main {
+    .itinerary-holder {
+      .row-flex {
+        flex-wrap: wrap;
+
+        .col-flex {
+          flex: auto;
+
+          .itinerary-imgholder.itinerary-detailed {
+            margin-right: 0;
+          }
+
+          .itinerary-imgholder.itinerary-quick {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+  // ITINENRARY PAGE END
+  //QUICK ITINENRARY PAGE
+  .quick-itinerary-detail .itinerary-fill-info {
+    margin: 10px 0;
+  }
+  .quick-itinerary-page .trip-photo-holder .trip-view-photo{
+    width: 144px;
+    height: 140px;
+    max-height: 140px;
+  }
+  //QUICK ITINENRARY PAGE END
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -884,11 +936,14 @@
 
     .agent-iti-comment-icon,
     .agent-iti-download-icon,
-    .agent-iti-options-icon,
     .agent-iti-print-icon,
     .agent-iti-review-icon {
       height: 18px;
     }
+  }
+
+  .share-comment-main .opitions .agent-iti-options-icon {
+    height: 18px;
   }
 
   .listing-accordion .panel-body {
@@ -951,7 +1006,175 @@
   }
   // USER QUICK ITINERARY PAGE END
   // EDITOR ITINERARY PAGE
+  .editor-itinerary-page .listing-accordion .view-trip-photo {
+    height: 400px;
+  }
+
+  .editor-itinerary-page .listing-accordion .close-editor-gallery {
+    bottom: -360px;
+  }
+
+  .editor-itinerary-page .listing-accordion .panel-body {
+    padding: 10px 10px 35px;
+  }
+
+  .editor-itinerary-page .listing-accordion .gallery-image-holder {
+    width: 100px;
+    max-width: 100px;
+  }
+
+  .editor-itinerary-page .listing-accordion .masonry-holder {
+    padding: 15px 20px 0;
+  }
+
+  .editor-itinerary-page .listing-accordion .editor-photos {
+    padding: 10px 0;
+  }
+
+  .editor-itinerary-page .listing-accordion .photo-button-holder {
+    padding: 0 70px;
+
+    &:before {
+      width: 75%;
+      left: 47px;
+    }
+  }
+
+  .editor-itinerary-page .editor-tag h4 {
+    font-size: 18px;
+  }
+
+  .editor-itinerary-page .journey-travel-heading h3 {
+    font-size: 24px;
+  }
+
+  .editor-itinerary-page .trip-day-count .days {
+    font-size: 30px;
+  }
   // EDITOR ITINERARY PAGE END
+  // DESTINATION PAGE
+  .destination-head .destination-nav {
+    background: none;
+  }
+
+  .destination .destiantion-country-title h4 {
+    font-size: 36px;
+  }
+
+  .destination-nav {
+    .dest-chnge {
+      padding-top: 10px;
+
+      i {
+        font-size: 15px;
+      }
+    }
+  }
+
+  .destination-content {
+    .head-title {
+      padding: 5px 0;
+
+      h4 {
+        font-size: 30px;
+      }
+    }
+  }
+
+  .bg-destination {
+    .country-title {
+      top: 50%;
+    }
+
+    .destiantion-download-app {
+      display: none;
+    }
+  }
+  // DESTINATION PAGE END
+  .advertise-bg,
+  .contact-bg {
+    .text-cont {
+      width: 100%;
+    }
+  }
+
+  .advertise-text {
+    font-size: 42px;
+  }
+
+  .contact-txt {
+    font-size: 48px;
+  }
+  // ITINENRARY PAGE
+  .itinerary-main {
+    .itinerary-holder {
+      padding: 20px;
+    }
+
+    .itinerary-detail {
+      width: 100%;
+
+      h3 {
+        font-size: 22px;
+      }
+
+      p {
+        margin: 5px 0;
+        font-size: 14px;
+      }
+
+      .btn-more {
+        padding: 5px 20px;
+      }
+    }
+  }
+  // ITINENRARY PAGE END
+  // QUICK ITINENRARY PAGE
+  .itinerary-fill-info {
+    .itinerary-duration,
+    .itinerary-month,
+    .itinerary-year {
+      margin: 20px 0;
+      display: block;
+      width: 100%;
+
+      label {
+        width: 100%;
+        margin: 0;
+      }
+
+      .itinerary-inputholder {
+        width: 100%;
+        margin: 0;
+      }
+    }
+
+    .month-dropdown,
+    .year-dropdown {
+      width: 100%;
+      top: 61px;
+      left: 0;
+    }
+  }
+
+  .trip-budget {
+    .mob-quicktrip-budget {
+      width: 100%;
+      float: none !important;
+    }
+
+    .mob-quicktrip-btn {
+      display: block;
+      text-align: center;
+      float: none !important;
+    }
+  }
+  .quick-itinerary-page .trip-photo-holder .trip-view-photo{
+    width: 140px;
+    height: 100px;
+    max-height: 100px;
+  }
+  // QUICK ITINENRARY PAGE END
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -1373,6 +1596,75 @@
   .editor-itinerary-page .listing-accordion .masonry-holder {
     padding: 10px 10px 0;
   }
+
+  .editor-itinerary-page .listing-accordion .photo-button-holder {
+    &:before {
+      left: 33px;
+    }
+  }
   // EDITOR ITINERARY PAGE END
+  // DESTINATION PAGE
+  .destination .destiantion-country-title h4 {
+    font-size: 30px;
+  }
+
+  .destination-content .head-title h4 {
+    font-size: 24px;
+  }
+  // DESTINATION PAGE END
+  .advertise-text {
+    font-size: 30px;
+  }
+  // ITINERARY PAGE
+  .itinerary-main .itinerary-holder {
+    padding: 10px;
+  }
+
+  .itinerary-main {
+    .itinerary-detail {
+      h3 {
+        font-size: 18px;
+      }
+
+      p {
+        font-size: 12px;
+      }
+    }
+  }
+  // ITINERARY PAGE END
+  // QUICK ITINERARY PAGE
+  .quick-itinerary-page .quick-itinerary-detail {
+    padding: 20px 10px;
+  }
+
+  .quick-itinerary-detail .upload-trip-photo-sec .trip-photo-holder {
+    padding: 20px 10px;
+  }
+
+  .trip-budget{
+    .currency-holder{
+      width: 100%;
+      input{
+        width: 100%;
+      }
+      .dropdown-currency-itinerary{
+        bottom: 30px;
+        border-bottom: 1px solid #424242;
+      }
+    }
+    .currency-amount{
+      width: 100%;
+      margin-top: 10px;
+      input{
+        width: 100%;
+      }
+    }
+  }
+  .quick-itinerary-page .trip-photo-holder .trip-view-photo{
+    width: 98px;
+    height: 80px;
+    max-height: 80px;
+  }
+  // QUICK ITINERARY PAGE END
 }
 // media query for 480px to 320px end
