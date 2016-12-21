@@ -1076,6 +1076,10 @@ q {
   }
 }
 
+.agt-home-photovideos .add-more-itinerary {
+  width: 400px;
+}
+
 .agt-home-tourpackage .add-more-itinerary {
   width: 290px;
   padding-bottom: 40px;
@@ -2719,3 +2723,135 @@ q {
   }
 }
 // AGENT ON LOAD MODAL END
+// AGENT HOME PHOTO UPLOAD SLIDER
+
+.agthome-photouploadbox {
+  background-color: $brand-blue;
+
+  .flexslider {
+    background-color: transparent;
+
+    .flex-direction-nav{
+      font-size: 0px;
+      a:before {
+        font-size: 18px;
+        color: #fff;
+        text-shadow: none;
+      }
+    }
+
+    &:hover {
+      .flex-direction-nav {
+        .flex-prev {
+          opacity: 1;
+          left: -15px;
+        }
+
+        .flex-next {
+          opacity: 1;
+          right: -15px;
+        }
+      }
+    }
+  }
+
+  li {
+    padding: 0;
+  }
+
+  .slider-addmore {
+    margin: 10px 0;
+
+    .btn {
+      font-size: 12px;
+    }
+  }
+}
+
+.agtphoto-sliderholder {
+  width: 50px;
+  height: 50px;
+}
+
+.agent-pic-holder {
+  height: 150px;
+  margin: 5px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  @extend .avenir-roman;
+  // background-color: #fff;
+  .slider-agent-trash {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 16px;
+    color: #fff;
+    background: transparent;
+    cursor: pointer;
+    z-index: 5;
+  }
+
+  .text-typed-count {
+    font-size: 12px;
+  }
+
+  span {
+    background-color: transparent;
+  }
+
+  .view-caption-onimg {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+
+    span {
+      background: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+
+  .agent-edit-caption {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    @include transition(all 300ms linear);
+
+    textarea {
+      background-color: transparent;
+      border: none;
+      padding-top: 20px;
+      color: #fff;
+      @include placeholder {
+        color: #fff;
+      };
+    }
+  }
+
+  .showcaptionagent {
+    top: 0;
+    @include transition(all 300ms linear);
+  }
+
+  .agent-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: #fff;
+    padding: 5px;
+    @extend .avenir-roman;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+// AGENT HOME PHOTO UPLOAD SLIDER END

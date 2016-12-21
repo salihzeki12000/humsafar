@@ -2,22 +2,58 @@
 
   <!-- ADD BUTTON START -->
   <div class="container">
-    <div class="clearfix">
+    <div class="clearfix agt-moreholder">
       <div class="pull-right">
         <div class="add-agtitinerary">
-          <span class="pointer" ng-click="showItinerary = !showItinerary" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
+          <span class="pointer photo-xbtn" ng-click="showItinerary = !showItinerary" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
           <div class="add-more-itinerary" ng-show="showItinerary">
             <p class="color-cyan bord-bot">Photos & Videos</p>
-            <form>
-              <div class="form-group">
-                <div class="a">
-                  <input type="text" class="form-control color-white" placeholder="Name Album">
+            <div class="upload-photosec hide" ng-hide="showPhotoupload">
+              <form>
+                <div class="form-group">
+                  <div class="a">
+                    <input type="text" class="form-control color-white" placeholder="Name Album">
+                  </div>
+                </div>￼
+                <div class="mb10  text-center">
+                  <button class="btn btn-white-outline" ng-click="showPhotoupload=!showPhotoupload">Upload Photos/Videos</button>
                 </div>
-              </div>￼
-              <div class="mb10  text-center">
-                <button class="btn btn-white-outline">Upload Photos/Videos</button>
+              </form>
+            </div>
+             <!-- ng-show="showPhotoupload" -->
+            <div class="agthome-photouploadbox">
+              <div class="agthome-photo-slider">
+                <flex-slider class="carousel" flex-slide="agent in agentPhotos" slideshow="false" control-nav="false">
+                  <li>
+                    <div class="slideragent-row row-flex" ng-repeat="slide in agent track by $index">
+                      <div class="slideragent-column col-flex" ng-repeat="column in slide track by $index">
+                        <div class="agent-pic-holder">
+                          <span class="slider-agent-trash"><i class="fa fa-trash-o"></i></span>
+                          <img ng-src="{{column.agentImg}}" alt="" class="img-responsive get-center">
+                          <div class="agent-caption" ng-click="putCaptionAgent(column.agentImg);"
+                          ng-hide="column.agentImg==index">
+                            <p ng-if="!column.editAgent || column.editAgent==''">Add Caption</p>
+                            <p class="text-ellipsis" ng-if="column.editAgent && !column.editAgent==''">{{column.editAgent}}</p>
+                          </div>
+                           <div class="agent-edit-caption" ng-show="column.agentImg==index" ng-class="{'showcaptionagent' : index==column.agentImg, '' : !index==column.agentImg}">
+                            <textarea name="" id="captionArea" cols="30" rows="7" class="form-control" maxlength="150" ng-model="column.editAgent" placeholder="Add Caption"></textarea>
+                            <div class="view-caption-onimg">
+                              <span ng-click="putCaptionAgent(column.agentImg);"><i class="fa fa-angle-down"></i></span>
+                            </div>
+                            <div class="text-typed-count">
+                              <span id="remainCaption"></span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </flex-slider>
               </div>
-            </form>
+              <div class="slider-addmore  text-center">
+                <button class="btn btn-white-outline btn-more">Add More</button>
+              </div>
+            </div>
             <button class="btn btn-pink tourupload-position">POST</button>
           </div>
         </div>
@@ -40,8 +76,8 @@
   </div>
   <!-- EMPTY SCREEN END -->
 
-<!-- PHOTO CARDS START -->
-  <div class="container" >
+  <!-- PHOTO CARDS START -->
+  <div class="container">
     <div class="clearfix">
       <div class="filter-head  pull-left">
         <div class="photo-filter color-grey collapsed" data-toggle="collapse" data-target="#demo">

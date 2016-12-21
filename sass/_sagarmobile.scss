@@ -163,7 +163,8 @@
   .quick-itinerary-page .quick-itinerary-detail {
     padding: 30px;
   }
-  .quick-itinerary-page .trip-photo-holder .trip-view-photo{
+
+  .quick-itinerary-page .trip-photo-holder .trip-view-photo {
     width: 199px;
     height: 190px;
     max-height: 190px;
@@ -256,6 +257,20 @@
 
   .agt-home-leadmonitor .leadtab-msgdiv {
     width: 330px;
+  }
+
+  .agthome-photouploadbox .flexslider {
+    .flex-direction-nav {
+      .flex-prev {
+        opacity: 1;
+        left: -15px;
+      }
+
+      .flex-next {
+        opacity: 1;
+        right: -15px;
+      }
+    }
   }
   // agent home page end
   // agent setting page
@@ -471,7 +486,8 @@
   .quick-itinerary-detail .itinerary-fill-info {
     margin: 10px 0;
   }
-  .quick-itinerary-page .trip-photo-holder .trip-view-photo{
+
+  .quick-itinerary-page .trip-photo-holder .trip-view-photo {
     width: 144px;
     height: 140px;
     max-height: 140px;
@@ -786,6 +802,10 @@
 
   .editor-subdetail {
     width: 84%;
+  }
+
+  .editor-itinerary-page .editor-subdetail {
+    width: 82%;
   }
 
   .listing-accordion .panel-open .panel-heading {
@@ -1169,12 +1189,19 @@
       float: none !important;
     }
   }
-  .quick-itinerary-page .trip-photo-holder .trip-view-photo{
+
+  .quick-itinerary-page .trip-photo-holder .trip-view-photo {
     width: 140px;
     height: 100px;
     max-height: 100px;
   }
   // QUICK ITINENRARY PAGE END
+  .popular-agent-sec .pop-agt-download-app{
+    display: none;
+  }
+  .bg-bloggers .pop-blog-download-app{
+    display: none;
+  }
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -1306,6 +1333,27 @@
   .agtmodal-imgholder {
     width: 80px;
     height: 80px;
+  }
+
+  .agt-home-photovideos .add-more-itinerary {
+    width: 290px;
+    padding: 15px 5px;
+    right: 0;
+
+    &:before {
+      display: none;
+    }
+  }
+
+  .agt-home-photovideos .agt-moreholder {
+    min-height: 30px;
+  }
+
+  .photo-xbtn {
+    position: absolute;
+    z-index: 3;
+    top: -15px;
+    right: 0;
   }
   //agent home page end
   // agent setting page
@@ -1641,30 +1689,45 @@
     padding: 20px 10px;
   }
 
-  .trip-budget{
-    .currency-holder{
+  .trip-budget {
+    .currency-holder {
       width: 100%;
-      input{
+
+      input {
         width: 100%;
       }
-      .dropdown-currency-itinerary{
+
+      .dropdown-currency-itinerary {
         bottom: 30px;
         border-bottom: 1px solid #424242;
       }
     }
-    .currency-amount{
+
+    .currency-amount {
       width: 100%;
       margin-top: 10px;
-      input{
+
+      input {
         width: 100%;
       }
     }
   }
-  .quick-itinerary-page .trip-photo-holder .trip-view-photo{
+
+  .quick-itinerary-page .trip-photo-holder .trip-view-photo {
     width: 98px;
     height: 80px;
     max-height: 80px;
   }
   // QUICK ITINERARY PAGE END
+
+  //MAINPAGE
+  .login-process{
+    .bg-white{
+      .upload-profile{
+        padding: 30px 5px 15px;
+      }
+    }
+  }
+  //MAINPAGE END
 }
 // media query for 480px to 320px end
