@@ -3,7 +3,7 @@
   <div class="edit-otg-sec add-otg-sec">
     <!-- add otg title -->
     <div class="edit-otg-title add-otg-title">
-      <h4>Edit Activity</h4>
+      <h4 class="avenir-roman text-center color-white">Add Photos & Videos</h4>
     </div>
     <!-- add otg title end-->
     <!-- add otg photos and videos -->
@@ -14,37 +14,38 @@
           <div class="view-photo-sec otg-bg-all">
             <div class="otg-photo-count">
               <img src="img/ongojourney/otg-photo.png" alt="" class="img-responsive" width="25">
-              <span class="avenir-roman">(20)</span>
+              <span class="avenir-roman">({{otgPhoto.length}})</span>
             </div>
             <!-- photo upload -->
-            <div class="uplad-otg-sec">
+            <div class="uplad-otg-sec" ng-hide="photoSec">
               <img src="img/upload-blue.png" alt="" class="m-center img-responsive" width="47px">
               <p class="text-center color-dark-blue avenir-roman">Drag photo here</p>
               <span class="block text-center color-dark-blue avenir-roman">-or-</span>
               <div class="otg-upload-btn text-center">
                 <button class="btn btn-pink btn-more">Select Photos from your computer</button>
+                <upload-image-otg multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data,length);" no-view></upload-image-otg>
               </div>
             </div>
             <!-- photo upload end-->
             <!-- flex slider for photo in 2 row -->
-            <div class="otg-photo-slider" hidden>
-              <flex-slider class="carousel" flex-slide="photo in otgPhoto" control-nav="false" slideshow="false">
+            <div class="otg-photo-slider" ng-show="photoSec" ng-if="flexShow">
+              <flex-slider id="flexslider"class="carousel" flex-slide="photo in otgPhotoArray track by $index" control-nav="false" slideshow="false">
                 <li>
                   <div class="otg-slider-row row-flex" ng-repeat="slide in photo track by $index">
                     <div class="otg-column col-flex" ng-repeat="column in slide track by $index">
                       <div class="otg-photo-holder" >
-                        <img ng-src="{{column.img}}" alt="" class="img-responsive get-center">
+                        <img ng-src="{{column.name|uploadpath}}" alt="" class="img-responsive get-center">
                         <!-- add front caption -->
-                        <div class="otg-photo-caption" ng-hide="column.img==index" ng-click="addMoreCaption(column.img);">
+                        <div class="otg-photo-caption" ng-hide="column.name==index" ng-click="addMoreCaption(column.name);">
                           <p class="color-white avenir-roman m-clear" ng-if="!column.caption || column.caption==''">Add Captions</p>
                           <p class="m-clear color-white avenir-roman text-ellipsis" ng-if="column.caption && !column.caption==''">{{column.caption}}</p>
                         </div>
                         <!-- add front caption end -->
                         <!-- add back caption -->
-                        <div class="otg-add-caption" ng-show="column.img==index" ng-class="{'show-otg-caption' : index==column.img, '' : !index==column.img}">
+                        <div class="otg-add-caption" ng-show="column.name==index" ng-class="{'show-otg-caption' : index==column.name, '' : !index==column.name}">
                           <div class="edit-otg-caption">
                             <textarea name="" id="" maxlength="150" ng-model="column.caption" placeholder="Enter Captions"></textarea>
-                            <p class="text-center m-center" ng-click="addMoreCaption(column.img);"><i class="fa fa-angle-down color-white fa-2x pointer"></i></p>
+                            <p class="text-center m-center" ng-click="addMoreCaption(column.name);"><i class="fa fa-angle-down color-white fa-2x pointer"></i></p>
                             <div class="text-typed-count">
                               <span>150</span>
                             </div>
@@ -64,7 +65,12 @@
             <!-- flex slider for photo in 2 row end -->
             <!-- add more photo video part -->
             <div class="add-otg-more">
-              <span class="putmore-photo-video"><i class="fa fa-plus"></i></span>
+              <span class="putmore-photo-video" data-toggle="collapse" data-target="#addMorePic"><i class="fa fa-plus"></i></span>
+              <div class="add-more-pic collapse" id="addMorePic">
+                <upload-image-otg multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data,length);" no-view>
+                </upload-image-otg>
+                <span>Click above</span>
+              </div>
             </div>
             <!-- add more photo video part end-->
           </div>
@@ -133,8 +139,8 @@
   <!-- add otg end-->
   <!-- save or cancel otg -->
   <div class="save-cancel-otg text-center">
-    <a href="" class="color-white">Cancel</a>
-    <button class="btn btn-pink btn-more">Done</button>
+    <a href="" class="color-white" ng-click="dismiss();">Cancel</a>
+    <button class="btn btn-pink btn-more" ng-click="addedPhotosVideos();">Done</button>
   </div>
   <!-- save or cancel otg end-->
 </div>

@@ -4,7 +4,7 @@
     <!-- edit otg info window -->
     <!-- edit otg title -->
     <div class="edit-otg-title">
-      <h4>Edit Activity</h4>
+      <h4 class="avenir-roman text-center color-white">Edit Activity</h4>
     </div>
     <!-- edit otg title end-->
     <div class="edit-otg-info">
@@ -14,30 +14,18 @@
           <div class="otg-search-location otg-bg-all">
             <img src="img/ongojourney/otg-location.png" alt="" class="img-responsive icon-location" width="22">
             <div class="search-by-category">
-              <input type="text" ng-model="searchByCat.category" class="form-control" placeholder="Choose your location" ng-click="viewLocation = !viewLocation;">
-              <div class="search-otg-location" ng-show="viewLocation">
+              <input type="text" ng-model="ongo.checkIn.location" class="form-control" placeholder="Choose your location" ng-click="getLocation();" ng-change="getLocation()">
+              <div class="search-otg-location" ng-show="showLocation">
                 <ul>
-                  <li><a href="">Dropdown</a></li>
-                  <li><a href="">Asmita</a></li>
+                  <li ng-repeat="location in nearByLocation track by $index" ng-click="locationId(location);viewLocation();"><a href="" >{{location.name}}</a></li>
                 </ul>
               </div>
             </div>
             <div class="category-location">
-              <input type="text" class="form-control" placeholder="Select Category" ng-click="viewCategory = !viewCategory;">
-              <div class="dropdown-otg-category" ng-show="viewCategory">
+              <input type="text" class="form-control" ng-model="ongo.checkIn.category" placeholder="Select Category" ng-click="viewCategory();">
+              <div class="dropdown-otg-category" ng-show="showCategory">
                 <ul>
-                  <li><a href="">Beaches</a></li>
-                  <li><a href="">Airport</a></li>
-                  <li><a href="">Hotels</a></li>
-                  <li><a href="">Restaurants</a></li>
-                  <li><a href="">Nature & parks</a></li>
-                  <li><a href="">Sights & Landmarks</a></li>
-                  <li><a href="">Museums & Galleries</a></li>
-                  <li><a href="">Religious</a></li>
-                  <li><a href="">Shopping</a></li>
-                  <li><a href="">Adventure & Excursion</a></li>
-                  <li><a href="">Zoos & Aqua</a></li>
-                  <li><a href="">Cinema & Theatre</a></li>
+                  <li ng-repeat="category in categoryList" ng-click="ongo.checkIn.category=category; viewCategory();"><a href="">{{category}}</a></li>
                 </ul>
               </div>
             </div>
@@ -49,18 +37,18 @@
           <div class="tag-journey-friend otg-bg-all">
             <img src="img/ongojourney/otg-tag.png" alt="" class="img-responsive icon-tag" width="25">
             <div class="tag-otg-friend">
-              <input type="text" class="form-control" placeholder="Tag Friends" ng-click="listTagfriend = !listTagfriend;">
-              <div class="tagfriend-count avenir-roman"><span>3</span> Friends</div>
-              <div class="dropdown-tagfriend tagfriend-list" ng-show="listTagfriend">
+              <input type="text" class="form-control" placeholder="Tag Friends" ng-model="getSearchedList" ng-change="listTagfriend(getSearchedList);">
+              <div class="tagfriend-count avenir-roman"><span>{{ongo.buddiesCount}}</span> Friends</div>
+              <div class="dropdown-tagfriend tagfriend-list" ng-show="viewListFriend">
                 <ul>
-                  <li>
+                  <li ng-repeat="list in tagFriends track by $index">
                     <div class="friend-listholder select-friend">
-                      <input type="checkbox" name="tag-list" id="Andrea">
-                      <label for="Andrea">
+                      <input type="checkbox" name="tag-list" id="{{list.name}}">
+                      <label for="{{list.name}}">
                         <div class="friend-imgholder">
-                          <img src="img/ongojourney/adrena.jpg" alt="" class="img-responsive">
+                          <img ng-src="{{list.profilePicture|uploadpath}}" alt="" class="img-responsive">
                         </div>
-                        <span class="color-blue avenir-roman">Andrea Cristina</span>
+                        <span class="color-blue avenir-roman">{{list.name}}</span>
                       </label>
                     </div>
                   </li>
@@ -75,7 +63,7 @@
           <div class="edit-otg-thought otg-bg-all">
             <img src="img/ongojourney/otg-thought.png" alt="" class="img-responsive icon-thought" width="20">
             <div class="otg-thought">
-              <textarea maxlength="150" class="form-control"></textarea>
+              <textarea maxlength="150" class="form-control" ng-model="ongo.thoughts"></textarea>
               <!-- <div id="thoughtCount"><span></span><span>/ 150</span></div> -->
             </div>
           </div>
@@ -92,27 +80,27 @@
           <div class="view-photo-sec otg-bg-all">
             <div class="otg-photo-count">
               <img src="img/ongojourney/otg-photo.png" alt="" class="img-responsive" width="25">
-              <span class="avenir-roman">(20)</span>
+              <span class="avenir-roman">({{ongo.photos.length}})</span>
             </div>
             <!-- flex slider for photo in 2 row -->
-            <div class="otg-photo-slider {{singleSlide}}">
-              <flex-slider class="carousel" flex-slide="photo in otgPhoto" control-nav="false" slideshow="false">
+            <div class="otg-photo-slider">
+              <flex-slider class="carousel" flex-slide="photo in photosArray track by $index" control-nav="false" slideshow="false">
                 <li>
-                  <div class="otg-slider-row row-flex" ng-repeat="slide in photo track by $index">
-                    <div class="otg-column col-flex" ng-repeat="column in slide track by $index">
+                  <div class="otg-slider-row row-flex" ng-repeat="slide in photo" ng-init="rowId=$index">
+                    <div class="otg-column col-flex" ng-repeat="column in slide" ng-init="colId=$index">
                       <div class="otg-photo-holder" >
-                        <img ng-src="{{column.img}}" alt="" class="img-responsive get-center">
+                        <img ng-src="{{column.name|uploadpath}}" alt="" class="img-responsive get-center">
                         <!-- add front caption -->
-                        <div class="otg-photo-caption" ng-hide="column.img==index" ng-click="addMoreCaption(column.img);">
+                        <div class="otg-photo-caption" ng-hide="column.img==index" ng-click="addMoreCaption(column._id);">
                           <p class="color-white avenir-roman m-clear" ng-if="!column.caption || column.caption==''">Add Captions</p>
-                          <p class="m-clear color-white avenir-roman text-ellipsis" ng-if="column.caption && !column.caption==''">{{column.caption}}</p>
+                          <p class="m-clear color-white avenir-roman text-ellipsis" ng-if="column.caption && !column.caption==''" title="{{column.caption}}">{{column.caption}}</p>
                         </div>
                         <!-- add front caption end -->
                         <!-- add back caption -->
-                        <div class="otg-add-caption" ng-show="column.img==index" ng-class="{'show-otg-caption' : index==column.img, '' : !index==column.img}">
+                        <div class="otg-add-caption" ng-show="column._id==index" ng-class="{'show-otg-caption' : index==column._id, '' : !index==column._id}">
                           <div class="edit-otg-caption">
                             <textarea name="" id="" maxlength="150" ng-model="column.caption" placeholder="Enter Captions"></textarea>
-                            <p class="text-center m-center" ng-click="addMoreCaption(column.img);"><i class="fa fa-angle-down color-white fa-2x pointer"></i></p>
+                            <p class="text-center m-center" ng-click="addMoreCaption(column._id);"><i class="fa fa-angle-down color-white fa-2x pointer"></i></p>
                             <div class="text-typed-count">
                               <span>150</span>
                             </div>
@@ -120,7 +108,7 @@
                         </div>
                         <!-- add back caption end-->
                         <!-- add caption end-->
-                        <div class="delete-otg-photo">
+                        <div class="delete-otg-photo" ng-click="deletePhotos(photoId,rowId,colId);">
                           <i class="fa fa-trash-o"></i>
                         </div>
                       </div>
@@ -181,7 +169,7 @@
   <!-- edit otg end-->
   <!-- save or cancel otg -->
   <div class="save-cancel-otg text-center">
-    <a href="" class="color-white">Cancel</a>
+    <a href="" class="color-white" ng-click="dismiss();">Cancel</a>
     <button class="btn btn-pink btn-more">Save</button>
   </div>
   <!-- save or cancel otg end-->

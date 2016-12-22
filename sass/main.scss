@@ -5112,8 +5112,10 @@ header {
   margin-top: 15px;
 }
 .view-photo-sec, .view-video-sec {
-  position: relative;
+  min-height: 364px;
+  max-height: 364px;
   padding: 15px 50px;
+  position: relative;
  }
 .otg-photo-count, .otg-video-count {
   position: absolute;
