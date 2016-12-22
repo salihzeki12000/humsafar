@@ -337,21 +337,28 @@
   }
 }
 
-.agent-user-nav,
-.change ul {
-  li {
-    &:active {
-      color: $brand-blue !important;
-    }
+.agent-user-nav ul {
+  .active {
+    color: $brand-blue !important;
+  }
+}
+// .change ul {
+//   li {
+//     .active {
+//       color: $brand-blue !important;
+//     }
+//   }
+// }
+
+.agent-home-nav ul {
+  .active {
+    color: $brand-blue !important;
   }
 }
 
-.agent-home-nav,
 .change-blue ul {
-  li {
-    &:active {
-      color: $brand-pink !important;
-    }
+  .active {
+    color: $brand-pink !important;
   }
 }
 
@@ -367,6 +374,10 @@
     top: 0;
     z-index: 1;
     display: none;
+
+    .txt-clear {
+      padding-right: 40px;
+    }
   }
 }
 
@@ -739,7 +750,7 @@
 }
 
 .testimonial-card {
-  background-color: rgba(255,255,255,0.7);
+  background-color: rgba(255,255,255,0.9);
   border-radius: 5px;
   padding: 20px 15px;
   margin: 10px;
@@ -758,7 +769,7 @@
 .testimonial-comment {
   border-bottom: 1px solid #fff;
   margin: 10px 0;
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
   color: $brand-blue;
   font-style: italic;
@@ -798,6 +809,7 @@
     line-height: 1;
     color: $brand-pink;
     margin: 0;
+    @extend .avenir-heavy;
   }
 
   span {
@@ -821,25 +833,35 @@ q {
   background-color: $brand-blue;
   position: relative;
   width: 300px;
-  border-radius: 4px;
+  border-radius: 12px;
   cursor: pointer;
   z-index: 4;
+
+  .testimonial-droparrow {
+    position: absolute;
+    top: -6px;
+    right: 0;
+    font-size: 30px;
+    font-weight: 900;
+  }
 }
 
 .testimonial-rating {
   p {
     margin: 0;
+    @extend .avenir-heavy;
   }
 }
 
 .testimonial-closed {
   background-color: $brand-pink;
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 10px 20px;
 }
 
 .view-testimonial {
   background-color: $brand-blue;
+  border-radius: 8px 8px 0 0;
 
   p {
     padding-bottom: 5px;
@@ -852,6 +874,7 @@ q {
   position: absolute;
   width: 100%;
   background-color: #2d3655;
+  border-radius: 0 0 8px 8px;
 }
 
 .review-text {
@@ -2731,8 +2754,9 @@ q {
   .flexslider {
     background-color: transparent;
 
-    .flex-direction-nav{
-      font-size: 0px;
+    .flex-direction-nav {
+      font-size: 0;
+
       a:before {
         font-size: 18px;
         color: #fff;

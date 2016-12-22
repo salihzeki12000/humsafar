@@ -20,6 +20,7 @@ $brand-pink: #ff6759;
 $brand-dark-cyan: #57d3c7;
 $brand-cyan: #11d3cb;
 $brand-light-cyan: #91e2d6;
+$brand-dark-grey: #949494;
 $brand-grey: #b2b2b2;
 $brand-light-grey: #a0a0a0;
 $brand-lighter-grey: #e3e3e3;
@@ -500,6 +501,12 @@ textarea {
 .color-grey {
   color: $brand-grey;
 }
+
+
+.color-darkgrey{
+  color:$brand-dark-grey;
+}
+
 
 .color-light-grey {
   color: $brand-light-grey;
