@@ -654,6 +654,15 @@
   @extend .avenir-roman;
 }
 
+.agt-home-photovideos .agt-home-photo-card{
+  margin-top: -50px;
+  // TO ALIGN WITH ADD PHOTO BUTTON
+}
+
+.agt-usr-testimonialreviews, .agt-usr-touractivity, .agt-home-testimonialreviews, .agt-home-travelactivity {
+    background-color: rgba(45,54,85,0.5);
+}
+
 .rt-foot-marg {
   margin-bottom: -30px;
 }
@@ -730,7 +739,7 @@
   padding: 5px 30px;
   position: absolute;
   right: 5px;
-  bottom: -15px;
+  bottom: -10px;
 }
 
 .agent-photogallery {
@@ -753,7 +762,7 @@
   background-color: rgba(255,255,255,0.9);
   border-radius: 5px;
   padding: 20px 15px;
-  margin: 10px;
+  margin: 10px 0px;
 
   img {
     max-width: 100%;
@@ -976,6 +985,8 @@ q {
   top: 0;
   width: 100%;
   padding: 10px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+  @extend .avenir-heavy;
 }
 
 .spclcountry-name {
@@ -1004,6 +1015,7 @@ q {
 
 .add-agtitinerary {
   position: relative;
+  z-index: 9;
 
   span {
     @include square(30px);
@@ -1037,6 +1049,7 @@ q {
   height: auto;
   @extend .font-sz18;
   z-index: 6;
+  background: transparent;
 
   i {
     z-index: 6;
@@ -1067,12 +1080,23 @@ q {
   }
 }
 
+.backdrop-addhome:after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 8;
+}
+
 .add-more-itinerary {
   width: 300px;
   padding: 15px 20px;
   border-radius: 12px;
-  border: 1px solid $brand-blue;
-  background-color: $brand-blue;
+  border: none;
+  background-color: rgba(45,54,85,0.9);
   @include position(absolute, -15px 35px null null);
   z-index: 2;
 
@@ -1081,13 +1105,13 @@ q {
     border-top: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid transparent;
-    border-left: 10px solid $brand-blue;
+    border-left: 10px solid rgba(45,54,85,0.9);
     @include position(absolute, 21px -20px null null);
   }
 
   li {
     padding: 8px 0;
-    border-bottom: 1px solid $brand-blue;
+    border-bottom: 1px solid rgba(255,255,255,0.8);
 
     &:last-child {
       border: none;
@@ -1258,7 +1282,7 @@ q {
   padding: 5px 12px;
   position: absolute;
   right: 105px;
-  bottom: -15px;
+  bottom: -10px;
 }
 
 .call-btn {
@@ -1286,7 +1310,7 @@ q {
   background-color: rgba(0, 0, 0, 0.6);
   padding: 4px 10px 0;
   left: 10px;
-  top: -20px;
+  top: -10px;
   border: 1px solid #fff;
   border-radius: 4px;
 
@@ -1939,7 +1963,7 @@ q {
 
 .newlead-tab {
   .panel {
-    background-color: rgba(45,54,85,0.7);
+    background-color: rgba(45,54,85,0.9);
     color: #fff;
   }
 
@@ -2452,7 +2476,7 @@ q {
   width: 80px;
   height: 80px;
   overflow: hidden;
-  border-radius: 100%;
+  border-radius: 33px;
   border: 5px solid #fff;
   position: absolute;
   top: -30px;
@@ -2483,7 +2507,7 @@ q {
 
 .tour-type {
   position: relative;
-  background-color: $brand-dark-blue;
+  background-color: transparent;
   border-radius: 5px;
   @extend .pointer;
 }

@@ -5,7 +5,7 @@
     <div class="clearfix agt-moreholder">
       <div class="pull-right">
         <div class="add-agtitinerary">
-          <span class="pointer photo-xbtn" ng-click="showItinerary = !showItinerary" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
+          <span class="pointer photo-xbtn" ng-click="addItinerary();" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
           <div class="add-more-itinerary" ng-show="showItinerary">
             <p class="color-cyan bord-bot">Photos & Videos</p>
             <div class="upload-photosec hide" ng-hide="showPhotoupload">
@@ -77,34 +77,36 @@
   <!-- EMPTY SCREEN END -->
 
   <!-- PHOTO CARDS START -->
-  <div class="container">
-    <div class="clearfix">
-      <div class="filter-head  pull-left">
-        <div class="photo-filter color-grey collapsed" data-toggle="collapse" data-target="#demo">
-          <span class="down">All</span>
-          <span class="up">Photos & Videos</span>
-          <i class="fa fa-chevron-up pull-right up"></i>
-          <i class="fa fa-chevron-down pull-right down"></i>
-        </div>
-        <div id="demo" class="collapse filter-data">
-          <div class="options">
-            <div class="opt custom-checkbox" ng-repeat="picfilter in picFilterList track by $index">
-              <input type="checkbox" id="{{picfilter}}">
-              <label for="{{picfilter}}">{{picfilter}}</label>
-            </div>
+  <div class="agt-home-photo-card">
+    <div class="container">
+      <div class="clearfix">
+        <div class="filter-head  pull-left">
+          <div class="photo-filter color-grey collapsed" data-toggle="collapse" data-target="#demo">
+            <span class="down">All</span>
+            <span class="up">Photos & Videos</span>
+            <i class="fa fa-chevron-up pull-right up"></i>
+            <i class="fa fa-chevron-down pull-right down"></i>
           </div>
-          <div class="button-holder">
-            <a for="" class="clear-link">Clear</a>
-            <button class="btn btn-pink btn-apply">Apply</button>
+          <div id="demo" class="collapse filter-data">
+            <div class="options">
+              <div class="opt custom-checkbox" ng-repeat="picfilter in picFilterList track by $index">
+                <input type="checkbox" id="{{picfilter}}">
+                <label for="{{picfilter}}">{{picfilter}}</label>
+              </div>
+            </div>
+            <div class="button-holder">
+              <a for="" class="clear-link">Clear</a>
+              <button class="btn btn-pink btn-apply">Apply</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="m-center">
-      <div masonry class="masonry-main">
-        <div class="masonry-brick" ng-repeat="photo in agenPhotogallery track by $index">
-          <div class="agent-photogallery">
-            <img ng-src="{{photo}}" alt="">
+      <div class="m-center">
+        <div masonry class="masonry-main">
+          <div class="masonry-brick" ng-repeat="photo in agenPhotogallery track by $index">
+            <div class="agent-photogallery">
+              <img ng-src="{{photo}}" alt="">
+            </div>
           </div>
         </div>
       </div>
