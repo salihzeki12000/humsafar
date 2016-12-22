@@ -6567,6 +6567,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var countries = [];
     $scope.previousCountryId = [];
     $scope.day = {};
+    $scope.showCountry=[];   
 
     $scope.dItinerary = {};
     $scope.dItinerary.photos = [];
@@ -6646,11 +6647,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
 
     $scope.searchCity = function (countryId, searchData) {
+      console.log("in search city");
       var formData = {
         "country": countryId,
         "search": searchData
       }
       var str = formData.search;
+      console.log(str);
       if (str.length > 2) {
         NavigationService.searchCityByCountry(formData, function (data) {
           cities = data.data;
@@ -6682,25 +6685,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     $scope.from = "";
     $scope.to = "";
-    $scope.getDays = function (city, countryPanel, cityPanel) {
-      console.log(countryPanel, cityPanel);
-      if (cityPanel > 0) {
-        var fromId = '#From_' + countryPanel + cityPanel;
-        var toId = '#To_' + countryPanel + cityPanel;
-        var date = moment($scope.addCountry[countryPanel].cityVisited[cityPanel - 1].to).format('YYYY-MM-DD');
-        console.log(date);
-        $scope.addCountry[countryPanel].cityVisited[cityPanel].to;
-        angular.element(document.querySelector(fromId)).attr('min', date);
-        angular.element(document.querySelector(fromId)).attr('max', date);
-
-        angular.element(document.querySelector(toId)).attr('min', date);
-      }
-      if ((city.from == undefined) || (city.to == undefined)) {
+    $scope.getDays = function (country) { 
+      console.log(country)    
+      if ((country.from == undefined) || (country.to == undefined)) {
 
       } else {
-        city.duration = $filter('dateDifference')(city.to, city.from) - 1;
-
+        country.duration = $filter('dateDifference')(country.to, country.from) - 1;
       }
+
     };
     $scope.google = {};
     var stayedAtCallback = function (data) {
@@ -6724,34 +6716,56 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.findResults = function (placeId, type, search) {
+    $scope.findResults = function (placeId, type, search, flag) {
+      console.log(placeId, type, search);
       var callback;
-      if (placeId != undefined && search.length > 2) {
-        var obj = {
-          "placeId": placeId,
-          "type": type,
-          "search": search
-        };
+      if (flag=="onchange"){
+        if (placeId != undefined && search.length > 2) {
+          var obj = {
+            "placeId": placeId,
+            "type": type,
+            "search": search
+          };
 
-        if (type == "Hotels & Accomodations") {
-          callback = stayedAtCallback;
-        } else if (type == "Restaurants & Bars") {
-          callback = ateAtCallback;
-        } else if (type == "Sights") {
-          callback = mustDosCallback;
-        };
+          if (type == "Hotels & Accomodations") {
+            callback = stayedAtCallback;
+          } else if (type == "Restaurants & Bars") {
+            callback = ateAtCallback;
+          } else if (type == "Sights") {
+            callback = mustDosCallback;
+          };
 
-        Itinerary.getGooglePlaceDetail(obj, callback);
+          Itinerary.getGooglePlaceDetail(obj, callback);
 
-      } else {
+        } else {
 
+        }
+      }else if(flag=="onclick"){
+         var obj = {
+            "placeId": placeId,
+            "type": type,
+            "search": search
+          };
+
+          if (type == "Hotels & Accomodations") {
+            callback = stayedAtCallback;
+          } else if (type == "Restaurants & Bars") {
+            callback = ateAtCallback;
+          } else if (type == "Sights") {
+            callback = mustDosCallback;
+          };
+
+          Itinerary.getGooglePlaceDetail(obj, callback);
       }
     };
 
-    $scope.removePhoto = function (index,city) {
+
+    $scope.removePhoto = function (index, city) {
       city.photos.splice(index, 1);
       console.log($scope.qItinerary.photos);
     };
+
+
     //integration ends
 
     $scope.hoveringOver = function (value) {
@@ -6825,11 +6839,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
 
     $scope.addYourCountry = function () {
-      $scope.addCountry.push({});
+      $scope.addCountry.push({"cityVisited": [{}]});
       $scope.addClass = "city-country-holder";
     };
     $scope.removeCountry = function (countryPanel) {
       $scope.addCountry.splice(countryPanel, 1);
+    };
+   
+    $scope.updateCountryDetail=function(editCountry,nation,countryPanel,cityPanel){
+      $scope.showCountry[countryPanel]=false;
+      editCountry.country=nation._id;
+      editCountry.flag=nation.flag;
+      editCountry.name=nation.name;
     };
 
     $scope.addYourCity = function (countryPanel) {
@@ -6839,6 +6860,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.removeCity = function (countryPanel, cityPanel) {
       console.log("removed city");
       $scope.addCountry[countryPanel].cityVisited.splice(cityPanel, 1);
+    };
+    $scope.updateCityDetail=function(editCity,city,countryPanel,cityPanel){
+      console.log(editCity,city);
+      editCity.name=city.name;
+      editCity.placeId=city.placeId;
     };
   })
   .controller('QuickItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, $timeout, $stateParams, $state) {
@@ -7083,7 +7109,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log($scope.qItinerary.photos);
     };
 
-    $scope.upload = function (status) {
+    $scope.uploadQuickItinerary = function (status) {
       console.log($scope.qItinerary);
       $scope.qItinerary.status = status;
       $scope.qItinerary.duration = parseInt($scope.qItinerary.duration);
@@ -10264,6 +10290,54 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   $('#getModal').modal('show');
     // });
     // on load modal end
+
+      // agent add photo edit
+    $scope.agentPhotos = [
+      {
+        agentImg: "img/ongojourney/winter.jpg"
+      },
+      {
+        agentImg: "img/ongojourney/fire.jpg"
+      },
+      {
+        agentImg: "img/ongojourney/jitu-sofa.jpg"
+      },
+      {
+        agentImg: "img/ongojourney/andrea-santa.jpg"
+      },
+      {
+        agentImg: "img/ongojourney/window.jpg"
+      }
+    ];
+    $scope.agentPhotos = _.chunk($scope.agentPhotos,4);
+    for(i=0; i< $scope.agentPhotos.length; i++){
+      $scope.agentPhotos[i] = _.chunk($scope.agentPhotos[i],2);
+    }
+    $scope.index = -1;
+    $scope.putCaptionAgent = function(index){
+      if($scope.index == index){
+        $scope.index = -1;
+      }else {
+        $scope.index = index;
+      }
+    }
+
+    //photo caption textarea counter
+    $scope.$on('$viewContentLoaded', function () {
+      $timeout(function () {
+        $('#captionArea').keyup(updateCount);
+        $('#captionArea').keydown(updateCount);
+        $('#remainCaption').text(0+'/150');
+
+        function updateCount() {
+          var count = $('#captionArea').val().length;
+          $('#remainCaption').text(count +'/150');
+        }
+      }, 200);
+    });
+
+    //photo caption textarea counter end
+    // agent add photo edit end
 
     //lead monitor accordion
     $scope.leadMonAgent = [{
