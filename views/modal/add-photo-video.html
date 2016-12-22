@@ -36,13 +36,13 @@
                       <div class="otg-photo-holder" >
                         <img ng-src="{{column.name|uploadpath}}" alt="" class="img-responsive get-center">
                         <!-- add front caption -->
-                        <div class="otg-photo-caption" ng-hide="column.name==index" ng-click="addMoreCaption(column.name);">
+                        <div class="otg-photo-caption" ng-hide="column.name==indexPhotoCaption" ng-click="addMoreCaption(column.name);">
                           <p class="color-white avenir-roman m-clear" ng-if="!column.caption || column.caption==''">Add Captions</p>
                           <p class="m-clear color-white avenir-roman text-ellipsis" ng-if="column.caption && !column.caption==''">{{column.caption}}</p>
                         </div>
                         <!-- add front caption end -->
                         <!-- add back caption -->
-                        <div class="otg-add-caption" ng-show="column.name==index" ng-class="{'show-otg-caption' : index==column.name, '' : !index==column.name}">
+                        <div class="otg-add-caption" ng-show="column.name==indexPhotoCaption" ng-class="{'show-otg-caption' : indexPhotoCaption==column.name, '' : !indexPhotoCaption==column.name}">
                           <div class="edit-otg-caption">
                             <textarea name="" id="" maxlength="150" ng-model="column.caption" placeholder="Enter Captions"></textarea>
                             <p class="text-center m-center" ng-click="addMoreCaption(column.name);"><i class="fa fa-angle-down color-white fa-2x pointer"></i></p>
@@ -53,7 +53,7 @@
                         </div>
                         <!-- add back caption end-->
                         <!-- add caption end-->
-                        <div class="delete-otg-photo">
+                        <div class="delete-otg-photo" ng-click="deletePhotos(column.name)">
                           <i class="fa fa-trash-o"></i>
                         </div>
                       </div>
@@ -139,8 +139,8 @@
   <!-- add otg end-->
   <!-- save or cancel otg -->
   <div class="save-cancel-otg text-center">
-    <a href="" class="color-white" ng-click="dismiss();">Cancel</a>
-    <button class="btn btn-pink btn-more" ng-click="addedPhotosVideos();">Done</button>
+    <a href="" class="color-white" ng-click="$dismiss();">Cancel</a>
+    <button class="btn btn-pink btn-more" ng-click="savePhotosVideos(); $dismiss();">Done</button>
   </div>
   <!-- save or cancel otg end-->
 </div>
