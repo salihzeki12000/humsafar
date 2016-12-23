@@ -1,4 +1,4 @@
-<div class="agt-home-leadmonitor" style="background-color:transparent;">
+<div class="agt-home-leadmonitor">
   <div class="container">
 
     <!-- EMPTY DATA SECTION -->
@@ -15,138 +15,138 @@
 
     <!-- LEAD ACCCORDION SECTION -->
     <div class="agt-home-leadmonitortab">
-        <!-- NEW LEAD ACCORDION -->
-        <div class="lead-title">
-          <h4 class="avenir-roman color-white">New Leads <span class="avenir-heavy font-sz24">2</span></h4>
-        </div>
-        <div class="leadtab-accordionbox newlead-tab">
-          <uib-accordion close-others="oneAtATime">
-            <uib-accordion-group ng-repeat="agtlead in leadMonAgent track by $index" is-open="status.open">
-              <uib-accordion-heading>
-                <div class="lead-tab-title color-white avenir-medium clearfix">
-                  <div class="leadtab-profileholder pull-left">
-                    <img ng-src="{{agtlead.leadImg}}" alt="" class="img-responsive">
-                  </div>
-                  <div class="leadtab-title">
-                    <p class="color-pink avenir-heavy">{{agtlead.leadName}}</p>
-                  </div>
-                  <div class="leadtab-msgdiv color-white" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
-                    <p class="leadtab-msg"><span class="avenir-heavy">{{agtlead.leadDestination}} </span>- {{agtlead.leadComment}}</p>
-                  </div>
-                  <i class="pull-right color-white mt10 fa " ng-class="{'fa fa-chevron-up': status.open, 'fa fa-chevron-down': !status.open}"></i>
-                  <div class="leadtab-title leadtab-date pull-right  color-white" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
-                    <p>{{agtlead.leadDate}}</p>
-
-                  </div>
+      <!-- NEW LEAD ACCORDION -->
+      <div class="lead-title">
+        <h4 class="avenir-roman color-white">New Leads <span class="avenir-heavy font-sz24">2</span></h4>
+      </div>
+      <div class="leadtab-accordionbox newlead-tab">
+        <uib-accordion close-others="oneAtATime">
+          <uib-accordion-group ng-repeat="agtlead in leadMonAgent track by $index" is-open="status.open">
+            <uib-accordion-heading>
+              <div class="lead-tab-title color-white avenir-medium clearfix">
+                <div class="leadtab-profileholder pull-left">
+                  <img ng-src="{{agtlead.leadImg}}" alt="" class="img-responsive">
                 </div>
-              </uib-accordion-heading>
-              <div class="lead-contentbox">
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="lead-details color-white">
-                      <div class="lead-content bord-bot">
-                        <label class="color-cyan" for=""><i class="fa fa-phone" aria-hidden="true"></i> Contact: </label>
-                        <a href="tel">+{{agtlead.leadPhone}}</a>
-                      </div>
-                      <div class="lead-content bord-bot">
-                        <label class="color-cyan" for=""><i class="fa fa-envelope" aria-hidden="true"></i> Email: </label>
-                        <a href="mailto:{{agtlead.leadMail}}" class="link-underline">{{agtlead.leadMail}}</a>
-                        <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
-                      </div>
-                      <div class="lead-content bord-bot">
-                        <label class="color-cyan" for=""><i class="fa fa-plane" aria-hidden="true"></i> Destination: </label>
-                        <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
-                        <a href="">{{agtlead.leadDestination}}</a>
-                      </div>
-                      <div class="lead-content bord-bot">
-                        <label class="color-cyan" for=""><i class="fa fa-thumb-tack" aria-hidden="true"></i> Itinerary: </label>
-                        <a href="" class="link-underline">{{agtlead.leadItinerary}}</a>
-                      </div>
+                <div class="leadtab-title">
+                  <p class="color-pink avenir-heavy">{{agtlead.leadName}}</p>
+                </div>
+                <div class="leadtab-msgdiv color-white" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
+                  <p class="leadtab-msg"><span class="ledadmsg-country">{{agtlead.leadDestination}} </span><span class="ledadmsg-comment">- {{agtlead.leadComment}}</span></p>
+                </div>
+                <i class="pull-right color-white mt10 fa " ng-class="{'fa fa-chevron-up': status.open, 'fa fa-chevron-down': !status.open}"></i>
+                <div class="leadtab-title leadtab-date pull-right  color-white" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
+                  <p>{{agtlead.leadDate}}</p>
+
+                </div>
+              </div>
+            </uib-accordion-heading>
+            <div class="lead-contentbox">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="lead-details color-white">
+                    <div class="lead-content bord-bot">
+                      <label class="color-cyan" for=""><i class="fa fa-phone" aria-hidden="true"></i> Contact: </label>
+                      <a href="tel">+{{agtlead.leadPhone}}</a>
+                    </div>
+                    <div class="lead-content bord-bot">
+                      <label class="color-cyan" for=""><i class="fa fa-envelope" aria-hidden="true"></i> Email: </label>
+                      <a href="mailto:{{agtlead.leadMail}}" class="link-underline">{{agtlead.leadMail}}</a>
+                      <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
+                    </div>
+                    <div class="lead-content bord-bot">
+                      <label class="color-cyan" for=""><i class="fa fa-plane" aria-hidden="true"></i> Destination: </label>
+                      <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
+                      <a href="">{{agtlead.leadDestination}}</a>
+                    </div>
+                    <div class="lead-content bord-bot">
+                      <label class="color-cyan" for=""><i class="fa fa-thumb-tack" aria-hidden="true"></i> Itinerary: </label>
+                      <a href="" class="link-underline">{{agtlead.leadItinerary}}</a>
                     </div>
                   </div>
-                  <div class="col-md-offset-1 col-md-7">
-                    <div class="lead-commentbox color-white">
-                      <div class="lead-content">
-                        <label class="color-cyan" for=""><i class="fa fa-comments" aria-hidden="true"></i> Comment: </label>
-                        <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
-                        <p class="link-underline">{{agtlead.leadComment}}</p>
-                      </div>
+                </div>
+                <div class="col-md-offset-1 col-md-7">
+                  <div class="lead-commentbox color-white">
+                    <div class="lead-content">
+                      <label class="color-cyan" for=""><i class="fa fa-comments" aria-hidden="true"></i> Comment: </label>
+                      <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
+                      <p class="link-underline">{{agtlead.leadComment}}</p>
                     </div>
                   </div>
                 </div>
               </div>
-            </uib-accordion-group>
-          </uib-accordion>
-        </div>
-        <!-- NEW LEAD ACCORDION END -->
+            </div>
+          </uib-accordion-group>
+        </uib-accordion>
+      </div>
+      <!-- NEW LEAD ACCORDION END -->
     </div>
     <!-- LEAD ACCCORDION SECTION END -->
 
     <!-- ACTIONED ACCCORDION SECTION -->
     <div class="agt-home-leadmonitortab">
-        <!-- ACTIONED ACCORDION -->
-        <div class="lead-title">
-          <h4 class="avenir-roman color-white">Actioned <span class="avenir-heavy font-sz24">1</span></h4>
-        </div>
-        <div class="actiontab-accordionbox actionlead-tab">
-          <uib-accordion close-others="oneAtATime">
-            <uib-accordion-group ng-repeat="agtlead in leadMonAgent track by $index" is-open="status.open">
-              <uib-accordion-heading>
-                <div class="lead-tab-title color-blue avenir-medium clearfix">
-                  <div class="leadtab-profileholder  pull-left">
-                    <img ng-src="{{agtlead.leadImg}}" alt="" class="img-responsive">
-                  </div>
-                  <div class="leadtab-title">
-                    <p class="color-pink avenir-heavy">{{agtlead.leadName}}</p>
-                  </div>
-                  <div class="leadtab-msgdiv color-blue" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
-                    <p class="leadtab-msg"><span class="avenir-heavy">{{agtlead.leadDestination}} </span>- {{agtlead.leadComment}}</p>
-                  </div>
-                  <i class="pull-right color-blue mt10 fa " ng-class="{'fa fa-chevron-up': status.open, 'fa fa-chevron-down': !status.open}"></i>
-                  <div class="leadtab-title pull-right  color-blue" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
-                    <p>{{agtlead.leadDate}}</p>
-                  </div>
+      <!-- ACTIONED ACCORDION -->
+      <div class="lead-title">
+        <h4 class="avenir-roman color-white">Actioned <span class="avenir-heavy font-sz24">1</span></h4>
+      </div>
+      <div class="actiontab-accordionbox actionlead-tab">
+        <uib-accordion close-others="oneAtATime">
+          <uib-accordion-group ng-repeat="agtlead in leadMonAgent track by $index" is-open="status.open">
+            <uib-accordion-heading>
+              <div class="lead-tab-title color-blue avenir-medium clearfix">
+                <div class="leadtab-profileholder  pull-left">
+                  <img ng-src="{{agtlead.leadImg}}" alt="" class="img-responsive">
                 </div>
-              </uib-accordion-heading>
-              <div class="action-contentbox">
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="lead-details color-blue">
-                      <div class="lead-content bord-bot">
-                        <label class="color-cyan" for=""><i class="fa fa-phone" aria-hidden="true"></i> Contact: </label>
-                        <a href="tel">+{{agtlead.leadPhone}}</a>
-                        <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
-                      </div>
-                      <div class="lead-content bord-bot">
-                        <label class="color-cyan" for=""><i class="fa fa-envelope" aria-hidden="true"></i> Email: </label>
-                        <a href="mailto:{{agtlead.leadMail}}" class="link-underline">{{agtlead.leadMail}}</a>
-                        <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
-                      </div>
-                      <div class="lead-content bord-bot">
-                        <label class="color-cyan" for=""><i class="fa fa-plane" aria-hidden="true"></i> Destination: </label>
-                        <a href="">{{agtlead.leadDestination}}</a>
-                      </div>
-                      <div class="lead-content bord-bot">
-                        <label class="color-cyan" for=""><i class="fa fa-thumb-tack" aria-hidden="true"></i> Itinerary: </label>
-                        <a href="" class="link-underline">{{agtlead.leadItinerary}}</a>
-                      </div>
+                <div class="leadtab-title">
+                  <p class="color-pink avenir-heavy">{{agtlead.leadName}}</p>
+                </div>
+                <div class="leadtab-msgdiv color-blue" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
+                  <p class="leadtab-msg"><span class="ledadmsg-country">{{agtlead.leadDestination}} </span><span class="ledadmsg-comment">- {{agtlead.leadComment}}</span></p>
+                </div>
+                <i class="pull-right color-blue mt10 fa " ng-class="{'fa fa-chevron-up': status.open, 'fa fa-chevron-down': !status.open}"></i>
+                <div class="leadtab-title leadtab-date pull-right  color-blue" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
+                  <p>{{agtlead.leadDate}}</p>
+                </div>
+              </div>
+            </uib-accordion-heading>
+            <div class="action-contentbox">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="lead-details color-blue">
+                    <div class="lead-content bord-bot">
+                      <label class="color-cyan" for=""><i class="fa fa-phone" aria-hidden="true"></i> Contact: </label>
+                      <a href="tel">+{{agtlead.leadPhone}}</a>
+                      <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
+                    </div>
+                    <div class="lead-content bord-bot">
+                      <label class="color-cyan" for=""><i class="fa fa-envelope" aria-hidden="true"></i> Email: </label>
+                      <a href="mailto:{{agtlead.leadMail}}" class="link-underline">{{agtlead.leadMail}}</a>
+                      <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
+                    </div>
+                    <div class="lead-content bord-bot">
+                      <label class="color-cyan" for=""><i class="fa fa-plane" aria-hidden="true"></i> Destination: </label>
+                      <a href="">{{agtlead.leadDestination}}</a>
+                    </div>
+                    <div class="lead-content bord-bot">
+                      <label class="color-cyan" for=""><i class="fa fa-thumb-tack" aria-hidden="true"></i> Itinerary: </label>
+                      <a href="" class="link-underline">{{agtlead.leadItinerary}}</a>
                     </div>
                   </div>
-                  <div class="col-md-offset-1 col-md-7">
-                    <div class="lead-commentbox color-white">
-                      <div class="lead-content">
-                        <label class="color-cyan" for=""><i class="fa fa-comments" aria-hidden="true"></i> Comment: </label>
-                        <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
-                        <p class="link-underline">{{agtlead.leadComment}}</p>
-                      </div>
+                </div>
+                <div class="col-md-offset-1 col-md-7">
+                  <div class="lead-commentbox color-white">
+                    <div class="lead-content">
+                      <label class="color-cyan" for=""><i class="fa fa-comments" aria-hidden="true"></i> Comment: </label>
+                      <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
+                      <p class="link-underline">{{agtlead.leadComment}}</p>
                     </div>
                   </div>
                 </div>
               </div>
-            </uib-accordion-group>
-          </uib-accordion>
-        </div>
-        <!-- actioned ACCORDION END -->
+            </div>
+          </uib-accordion-group>
+        </uib-accordion>
+      </div>
+      <!-- actioned ACCORDION END -->
     </div>
     <!-- ACTIONED ACCCORDION SECTION END -->
   </div>

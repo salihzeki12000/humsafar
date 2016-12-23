@@ -1,4 +1,4 @@
-<div class="agent-login">
+<div class="agent-login" ng-class="{'agent-login-failbackdrop': agentloginView==2, '': agentloginView!==2}">
   <div class="container">
     <div class="row">
       <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
@@ -7,7 +7,7 @@
           <!-- VERIFICATION CODE START -->
           <div class="agt-verification-code" ng-if="agentloginView==1">
             <div class="text-center">
-              <h3 class="color-blue avenir-black">Verification</h3>
+              <h3 class="color-blue avenir-heavy">Verification</h3>
               <p>A 4-digit Verification code has been sent <br> to your registered email address</p>
               <div class="veri-box">
                 <form>
@@ -26,10 +26,10 @@
           <!-- VERIFICATION CODE END -->
 
 
-          <!-- VERIFIED START -->
+          <!-- VERIFIED SUCCESS START -->
           <div class="verification-complete"  ng-if="agentloginView==2">
             <div class="text-center">
-              <h3 class="color-blue avenir-black">Verification</h3>
+              <h3 class="color-blue avenir-heavy">Verification</h3>
               <img src="img/verified.png" alt="Verified" class="mt20 mb20 img-responsive m-center">
               <p class="color-blue avenir-roman">Your account has been <span class="block">successfully verified</span></p>
               <div class="button-panel clearfix">
@@ -37,13 +37,28 @@
               </div>
             </div>
           </div>
-          <!-- VERIFIED END -->
+          <!-- VERIFIED SUCCESS END -->
+
+          <!-- VERIFIED ERROR START -->
+          <div class="verification-complete"  ng-if="agentloginView==2">
+            <div class="text-center">
+              <h3 class="color-blue avenir-heavy">Verification Code Error</h3>
+              <p class="color-pink">Incorrect Verification Code entered.<br>
+              Kindly re-enter the correct code.</p>
+              <img src="img/verified.png" alt="Verified" class="mt20 mb20 img-responsive m-center">
+              <p class="color-blue avenir-roman">Click here to <a class="color-blue"><u>Re-send</u></a> Verification Code</p>
+              <div class="veri-error-btn text-center"><!--button-panel-->
+                  <button class="btn btn-more btn-pink" ng-click="agentSec(1)">Close</button>
+              </div>
+            </div>
+          </div>
+          <!-- VERIFIED ERROR END -->
 
 
           <!-- SELECT CITY START -->
           <div class="city"  ng-if="agentloginView==3">
             <div class="text-center">
-              <h3 class="color-blue avenir-black">Head Office Location</h3>
+              <h3 class="color-blue avenir-heavy">Head Office Location</h3>
               <div class="select-your-nation select-your-city">
                 <div class="search-nation select-city">
                   <input type="text" class="form-control avenir-roman" placeholder="Search City" ng-model="searchCity" ng-value="userData.homeCity" ng-change="searchByKey(searchCity)">
@@ -70,7 +85,7 @@
           <!-- COMPANY DETAILS START -->
           <div class="agent-cmpny-det"  ng-if="agentloginView==4">
             <div class="text-center">
-              <h3 class="color-blue avenir-black">Company Details</h3>
+              <h3 class="color-blue avenir-heavy">Company Details</h3>
               <div class="company-details">
                 <form>
                   <div class="form-group">
@@ -135,7 +150,7 @@
 
           <!-- AGENT LOGO UPLOAD START-->
           <div class="agent-logoupload text-center"  ng-if="agentloginView==5">
-            <h3 class="color-blue avenir-black">Upload Company Logo</h3>
+            <h3 class="color-blue avenir-heavy">Upload Company Logo</h3>
             <div class="text-center">
               <div class="cropArea" ng-show="showImage">
                 <img-crop image="myCompLogo" result-image="myCroppedCompLogo" /></img-crop>
@@ -176,7 +191,7 @@
           <!-- ABOUT AGENT -->
           <div class="agent-about" ng-if="agentloginView==6">
             <div class="text-center">
-              <h3 class="color-blue avenir-black">About Sai Travels</h3>
+              <h3 class="color-blue avenir-heavy">About Sai Travels</h3>
               <div class="form-group">
                 <div class="agent-about-inputholder">
                   <textarea name="" id="textareaChars" maxlength="500" placeholder="Fill me in ..." class="form-control color-blue"></textarea>
@@ -213,7 +228,7 @@
                 </ul>
               </div>
               <div class="text-center">
-                <h3 class="color-blue avenir-black">Category Of Specialization</h3>
+                <h3 class="color-blue avenir-heavy">Category Of Specialization</h3>
                 <div class="row">
                   <div class="col-md-offset-1 col-md-10">
                     <div class="row">
@@ -261,7 +276,7 @@
                 </ul>
               </div>
               <div class="category-countrylist">
-                <h3 class="color-blue avenir-black text-center">Countries Of Specialization</h3>
+                <h3 class="color-blue avenir-heavy text-center">Countries Of Specialization</h3>
                 <div class="row">
                   <div class="col-md-12">
                     <uib-accordion close-others="oneAtATime">
@@ -310,7 +325,7 @@
                 </ul>
               </div>
               <div class="text-center">
-                <h3 class="color-blue avenir-black">Services</h3>
+                <h3 class="color-blue avenir-heavy">Services</h3>
                 <div class="row">
                   <div class="col-md-12">
                     <div class="service-box">
