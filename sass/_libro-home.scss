@@ -1,13 +1,3 @@
-@import "../bower_components/bourbon/app/assets/stylesheets/bourbon";
-@import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
-@import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
-@import "../bower_components/flexslider/flexslider.css";
-@import "../bower_components/font-awesome/css/font-awesome.min.css";
-@import "../bower_components/fancyBox/source/jquery.fancybox.css";
-@import "../bower_components/swiper/dist/css/swiper.min.css";
-@import "../bower_components/smart-app-banner/smart-app-banner.css";
-
-/* Bootstrap Variables Goes Here */
 
 $brand-primary: #0d9dff !default;
 $brand-success: #ff6759 !default;
@@ -415,7 +405,7 @@ a.color-white {
 }
 
 .color-primary {
-  color: $brand-success;
+  color: #f3645e;
 }
 
 .mlr20 {
