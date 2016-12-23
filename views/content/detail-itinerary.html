@@ -362,13 +362,13 @@
                     </div>
                     <!-- trip info container end-->
                     <!-- trip descp -->
-                    <div class="trip-descp-itinerary">
+                    <!--<div class="trip-descp-itinerary">
                       <label for="descp">A Little More About This Trip</label>
                       <textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel" id="descp"></textarea>
-                    </div>
+                    </div>-->
                     <!-- trip descp end -->
                     <!-- upload trip photo -->
-                    <div class="upload-trip-photo-sec detailed-trip-photo">
+                    <!--<div class="upload-trip-photo-sec detailed-trip-photo">
                       <label for="trip-photo">Upload Trip Photo</label>
                       <div class="trip-photo-holder">
                         <div class="trip-view-photo" ng-repeat="photo in city.photos track by $index">
@@ -391,13 +391,47 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div>-->
                     <!-- upload trip photo end-->
                   </div>
                 </div>
               </uib-accordion>
             </div>
             <!-- accordion end -->
+                        <!--all trip descp and all photos sec-->
+             <!-- trip descp -->
+                    <div class="trip-descp-itinerary">
+                      <label for="descp">A Little More About This Trip</label>
+                      <textarea ui-tinymce="tinymceOptions" ng-model="dItinerary.description" id="descp"></textarea>
+                    </div>
+                    <!-- trip descp end -->
+                    <!-- upload trip photo -->
+                    <div class="upload-trip-photo-sec detailed-trip-photo">
+                      <label for="trip-photo">Upload Trip Photo</label>
+                      <div class="trip-photo-holder">
+                        <div class="trip-view-photo" ng-repeat="photo in dItinerary.photos track by $index">
+                          <img ng-src="{{photo.name|uploadpath}}" alt="Quick Itinerary" class="img-responsive get-center">
+                          <div class="remove-quick-photo text-right">
+                            <div class="delete-photo"><i class="fa fa-times color-white pointer" ng-click="removePhoto($index,city)"></i></div>
+                          </div>
+                        </div>
+                        <div class="trip-upload text-center">
+                          <div class="upload-section">
+                            <div ng-if="dItinerary.photos.length==0">
+                              <img src="img/upload-icon.jpg" alt="" class="m-center img-responsive">
+                              <p class="text-center color-grey avenir-roman">Drag a your itinerary photos here</p>
+                              <span class="block color-grey avenir-roman">- or -</span>
+                            </div>
+                            <div class="upload-btn relate">
+                              <button class="btn btn-dark-blue pointer avenir-light pointer">Select a photo from your computer</button>
+                              <upload-image ng-model="formData.photo" ng-callback="addPhotosCallback(data)" multiple="true" class="quick-upload-photos"></upload-image>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- upload trip photo end-->
+                    <!--all trip descp and all photos sec-->
             <div class="trip-budget budget-quick-itinerary">
               <div class="clearfix">
                 <div class="pull-left">

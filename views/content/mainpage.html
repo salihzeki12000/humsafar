@@ -191,15 +191,8 @@
                 <span class="block mt10 color-grey avenir-roman">- or -</span>
                 <div class="upload-btn">
                   <div class="relate inline-block mr10 select-photo">
-
                     <button class="btn btn-dark-blue pointer avenir-roman">Select a photo from your computer input</button>
-                    <!--Using image upload directive-->
-
-                    <!--<upload-image ng-model="formData.photo"></upload-image>-->
-
-                    <!--Using image upload directive ends-->
-
-                    <input type="file" class="getfile pointer" id="fileInput" class="getfile pointer" ng-model="myCroppedImage" />
+                    <input type="file" class="getfile pointer" id="fileInput" class="getfile pointer" ng-model="myCroppedImage"/>
                   </div>
                   <!--id=fileInput class="getfile pointer" for above code-->
                   <div class="relate inline-block ml10 web-camera">
@@ -210,7 +203,7 @@
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
                 <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="saveUserData(userData)">Done</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="saveUserData(userData);uploadFile(myCroppedImage)">Done</button>
               </div>
             </div>
           </div>

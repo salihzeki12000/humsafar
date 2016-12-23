@@ -52,6 +52,41 @@ var itinerary = angular.module('itinerary', [])
       }).success(function (data) {
         callback(data);
       })
+    },
+    uploadQuickItinerary: function (obj, flag, callback) {
+      if (flag == 'new') {
+        var url = "/itinerary/saveQuickItineraryWeb";
+      } else if (flag == 'edit') {
+
+      }
+      $http({
+        url: adminURL + url,
+        method: "POST",
+        data: obj
+      }).success(function (data) {
+        if (data.value) {
+          console.log("Qitinerary saved successfully");
+        }
+        callback(data);
+      });
+    },
+    uploadDetailedItinerary:function(obj, flag, callback){
+      console.log(obj, flag);
+       if (flag == 'new') {
+        var url = "/itinerary/save";
+      } else if (flag == 'edit') {
+
+      }
+      $http({
+        url: adminURL + url,
+        method: "POST",
+        data: obj
+      }).success(function (data) {
+        if (data.value) {
+          console.log("Qitinerary saved successfully");
+        }
+        callback(data);
+      });
     }
   };
 });

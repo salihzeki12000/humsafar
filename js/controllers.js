@@ -430,6 +430,57 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     //End-Of get all the cities from database
+
+    $scope.uploadFile = function (data) {
+      // Base64 to Blob
+      var imageBase64 = data;
+
+      function dataURItoBlob(dataURI, type) {
+        // convert base64 to raw binary data held in a string
+        var byteString = atob(dataURI.split(',')[1]);
+
+        // separate out the mime component
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+        // write the bytes of the string to an ArrayBuffer
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+          ia[i] = byteString.charCodeAt(i);
+        }
+
+        // write the ArrayBuffer to a blob, and you're done
+        var bb = new Blob([ab], {
+          type: type
+        });
+        return bb;
+      }
+
+      var blob = dataURItoBlob(imageBase64, 'image/png');
+
+      // Blob to File
+      var file = new File([blob], 'photo-' + $scope.formData.name + '.png');
+
+      // File to FormData
+      var formData = new FormData();
+      formData.append('file', file, file.name);
+
+      NavigationService.uploadFile(formData, function (response) {
+        if (response.value) {
+          $scope.userData.profilePicture = response.data[0];
+          console.log($scope.userData.profilePicture);
+          // $scope.modalUpload.dismiss();
+        } else {
+          toastr.warning('Error Uploading Image!');
+        }
+      });
+    };
+
+    $scope.testing = function (a) {
+      console.log(a);
+    }
+
+
     var saveDataCallback = function (data, status) {
       if (data.value == true) {
         console.log(data);
@@ -440,6 +491,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log(data);
       }
     };
+
+
 
     $scope.saveUserData = function (userData) {
       var str = userData.homeCity;
@@ -511,40 +564,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       i++;
     }, 1000);
 
-    // var dataURItoBlob = function (dataURI) {
-    //     // convert base64/URLEncoded data component to raw binary data held in a string
-    //     var byteString;
-    //     if (dataURI.split(',')[0].indexOf('base64') >= 0)
-    //       byteString = atob(dataURI.split(',')[1]);
-    //     else
-    //       byteString = unescape(dataURI.split(',')[1]);
-
-    //     // separate out the mime component
-    //     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-    //     // write the bytes of the string to a typed array
-    //     var ia = new Uint8Array(byteString.length);
-    //     for (var i = 0; i < byteString.length; i++) {
-    //       ia[i] = byteString.charCodeAt(i);
-    //     }
-
-    //     return new Blob([ia], {
-    //       type: mimeString
-    //     });
-    //   }
-    //   //Angular-file-upload starts here
-
     $scope.file = {
       myFile: "Chintan"
     };
-    $scope.uploadFile = function () {
-      var file = $scope.file.myFile;
 
-      console.log('file is ');
-      console.dir($scope.file.myFile);
-
-      FileUploadService.uploadFileToUrl(file, uploadurl);
-    };
     //angular file upload ends here
 
     // $scope.getImage = function(){
@@ -737,8 +760,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     var saveDataCallback = function (data, status) {
       if (data.value == "true") {
-        console.log(data);
-        console.log("holiday");
         NavigationService.getProfile(globalGetProfile, function (err) {
           console.log(err);
         });
@@ -3435,6 +3456,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //Integration Section Starts here
     $scope.userData = $.jStorage.get("profile");
+    console.log($scope.userData);
     var arr = ($scope.userData.homeCity).split(",");
     $scope.homeCity = arr[0];
     var travelCountCallback = function (data, status) {
@@ -3526,8 +3548,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     $scope.listOfYears = years(1950);
     $scope.checkIfSelected = function (list) {
-      console.log($scope.visited[list].times);
-      console.log($scope.visited);
+      // console.log($scope.visited[list].times);
+      // console.log($scope.visited);
+      console.log(list);
+      if (list.year) {
+        list.times = 1;
+        $scope.disableAll = false;
+      } else {
+        list.times = 0;
+        $scope.disableAll = true;
+      }
+
     };
     var modal = "";
     var arr = [];
@@ -6647,7 +6678,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log("error getting data");
     });
 
-    $scope.searchCity = function (countryId, searchData,cityVisited) {
+    $scope.searchCity = function (countryId, searchData, cityVisited) {
       console.log("in search city");
       var formData = {
         "country": countryId,
@@ -6655,11 +6686,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
       var str = formData.search;
       console.log(str);
-      $scope.cities=[];
+      $scope.cities = [];
       if (str.length > 3) {
         NavigationService.searchCityByCountry(formData, function (data) {
           cities = data.data;
-          var cities=_.differenceBy(cities,cityVisited,'name');
+          var cities = _.differenceBy(cities, cityVisited, 'name');
           $scope.cities = cities;
         });
       }
@@ -6764,14 +6795,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     //add-remove photos starts
-    $scope.addPhotosCallback = function (city, photo) {
-      console.log(city, photo);
-      city.photos.push({
-        "name": photo
+    $scope.addPhotosCallback = function (photo) {
+      console.log(photo);
+      $scope.dItinerary.photos.push({
+        "name": photo,
+        "caption":""
       })
     };
     $scope.removePhoto = function (index, city) {
-      city.photos.splice(index, 1);
+      $scope.dItinerary.photos.splice(index, 1);
     };
     //add-remove photos ends
 
@@ -6826,15 +6858,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
 
       } else {
-        $scope.dItinerary.buddies=_.reject($scope.dItinerary.buddies, ['_id', friend._id]);
+        $scope.dItinerary.buddies = _.reject($scope.dItinerary.buddies, ['_id', friend._id]);
       }
     };
     //travelled with ends
 
-     $scope.uploadDetailedItinerary = function (status) {
+    $scope.uploadDetailedItinerary = function (status) {
       $scope.dItinerary.status = status;
       $scope.dItinerary.cost = parseInt($scope.dItinerary.cost);
       $scope.dItinerary.countryVisited = $scope.addCountry;
+
       //storing all selected itinerarytype on sending variable starts
       $scope.dItinerary.itineraryType = [];
       _.each($scope.dItineraryType, function (n) {
@@ -6844,17 +6877,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
       //storing all selected itinerarytype on sending variable ends
 
-
-      _.each($scope.dItinerary.buddies,function(n){
-        n=_.omit(n, ['flag']);
+      //removing unwanted values from buddies starts
+      _.each($scope.dItinerary.buddies, function (n, index) {
+        $scope.dItinerary.buddies[index] = _.omit(n, ['flag']);
       });
+      //removing unwanted values from buddies starts
 
-    //   NavigationService.uploadDetailedItinerary($scope.qItinerary, flag, function (data) {
-    //     $state.go('userquickitinerary', {
-    //       id: data.data.message
-    //     });
-    //   });
-    console.log($scope.dItinerary);
+      //removing unwanted values from countryVisited starts
+      _.each($scope.dItinerary.countryVisited, function (n, index) {
+        $scope.dItinerary.countryVisited[index] = _.omit(n, ['name', 'flag']);
+      });
+      //removing unwanted values from countryVisited starts
+
+      Itinerary.uploadDetailedItinerary($scope.dItinerary, flag, function (data) {
+        // $state.go('userquickitinerary', {
+        //   id: data.data.message
+        // });
+        console.log(data);
+      });
     };
 
     //integration ends
@@ -6926,16 +6966,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // }
     $scope.addClass = "";
     $scope.addCountry = [{
-      "cityVisited": [{
-        "photos": []
-      }]
+      "cityVisited": [{}]
     }];
 
     $scope.addYourCountry = function () {
       $scope.addCountry.push({
-        "cityVisited": [{
-          "photos": []
-        }]
+        "cityVisited": [{}]
       });
       $scope.addClass = "city-country-holder";
     };
@@ -6951,9 +6987,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.addYourCity = function (countryPanel) {
-      $scope.addCountry[countryPanel].cityVisited.push({
-        "photos": []
-      });
+      $scope.addCountry[countryPanel].cityVisited.push({});
     };
 
     $scope.removeCity = function (countryPanel, cityPanel) {
@@ -7240,7 +7274,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
       //storing all selected itinerarytype on sending variable ends
 
-      NavigationService.uploadQuickItinerary($scope.qItinerary, flag, function (data) {
+      Itinerary.uploadQuickItinerary($scope.qItinerary, flag, function (data) {
         $state.go('userquickitinerary', {
           id: data.data.message
         });
@@ -8621,10 +8655,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 .controller('headerctrl', function ($scope, TemplateService, NavigationService, $state, $interval) {
     $scope.template = TemplateService;
 
-    NavigationService.getProfile(globalGetProfile, function (err) {
+    NavigationService.getProfile(function (data, status) {
+      if (data._id) {
+        $.jStorage.set("isLoggedIn", true);
+        $.jStorage.set("profile", data);
+      } else {
+        // $state.go('login');
+        $.jStorage.flush();
+      }
+    }, function (err) {
       console.log(err);
     });
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+    // if (!$scope.isLoggedIn) {
+    //   $state.go('login');
+    // }
     $scope.userData = $.jStorage.get("profile");
     $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
       $(window).scrollTop(0);
@@ -8658,8 +8703,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.logout = function () {
       NavigationService.logout(function () {
           $.jStorage.flush();
-          $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
-          $state.go('home');
+          $state.go('login');
         },
         function (err) {
           console.log(err);
@@ -10394,7 +10438,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.showItinerary = false;
     $scope.addHomeBackdrop = "";
-    $scope.addItinerary = function() {
+    $scope.addItinerary = function () {
       // console.log("click");
       if ($scope.showItinerary == false) {
         $scope.showItinerary = true;
