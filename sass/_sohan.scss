@@ -65,9 +65,9 @@ body.fp-viewing-0 {
 }
 
 .section {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
+  background-size: cover !important;
+  background-repeat: no-repeat!important;
+  background-position: center center !important;
 }
 
 a.color-white {
@@ -1447,45 +1447,71 @@ a.color-white {
     display: none;
   }
 
-  .contact {
-    .content-left {
-      width: 100%;
-    }
-
-    .contact-ab {
-      .contact-decrp {
-        position: relative;
-        padding: 0 20px;
-
-        img {
-          right: 70px;
-          height: 40px;
-          top: 1px;
-        }
-      }
-
-      .social-icons li {
-        width: 65px;
-        height: 55px;
-        padding: 0;
-        margin: 0 -3px;
-
-        .contact-ab .social-icons li a {
-          padding: 11px 0;
-        }
-      }
-    }
-  }
-
   .home-slide {
     .slide2 .life-icon img {
       width: 25px;
     }
 
+    .fnt-60 {
+      font-size: 50px;
+    }
+
+    .contact {
+      .content-left {
+        width: 100%;
+      }
+
+      .contact-ab {
+        top: 100px;
+        left: 0;
+        width: 100%;
+        padding: 0 25px;
+
+        .contact-decrp {
+          position: relative;
+          padding: 0;
+          width: 100%;
+
+          img {
+            right: 0;
+            height: 40px;
+            margin: -8px -8px 0;
+            position: static;
+          }
+        }
+      }
+
+      .contact-ab {
+        .social-icons {
+          margin-top: 40px;
+          padding: 0 10px;
+
+          li {
+            width: 60px;
+            height: 55px;
+            padding: 0;
+            margin: 0 -2.6px;
+            border: 1px dotted #fff;
+
+            a {
+              padding: 11px 0;
+            }
+          }
+        }
+      }
+    }
+
     .text-left-ab.text-sec-left {
-      left: 25%;
+      left: 20%;
       top: 24%;
       bottom: auto;
+      width: 100%;
+      padding: 0 25px;
+    }
+
+    .mobile-travellife ul {
+      padding: 10px 0;
+      font-weight: bold;
     }
 
     .mobile-home-travel-cont {
@@ -1498,6 +1524,7 @@ a.color-white {
     .mobile-home-travel-life {
       position: absolute;
       bottom: 0;
+      left: 0;
 
       .play-mobile {
         position: absolute;
@@ -1514,9 +1541,11 @@ a.color-white {
         padding: 0 12px;
       }
     }
+
     .person-section4 {
-        height: 50px;
+      height: 50px;
     }
+
     .life-icon3 {
       margin-left: 3px;
     }
