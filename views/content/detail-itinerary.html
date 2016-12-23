@@ -61,10 +61,25 @@
                   </div>
                   <div class="col-md-6">
                     <div class="itinerary-inputholder relate">
-                      <input type="text" class="form-control" placeholder="Travelled With">
+                      <input type="text" class="form-control" placeholder="Travelled With" ng-model="getSearchedList" ng-change="listFollowers(getSearchedList);">
                       <span class="itinerary-dropdown-icon">
                         <i class="fa fa-chevron-down"></i>
                       </span>
+                      <div class="dropdown-tagfriend tagfriend-list" ng-show="viewFollowers">
+                        <ul>
+                          <li ng-repeat="list in followersList track by $index">
+                            <div class="friend-listholder select-friend">
+                              <input type="checkbox" name="tag-list" id="{{list.name}}" ng-model="list.flag" ng-click="tagFriend(list.flag,list)">
+                              <label for="{{list.name}}">
+                                <div class="friend-imgholder">
+                                  <img ng-src="{{list.profilePicture|uploadpath}}" alt="" class="img-responsive">
+                                </div>
+                                <span class="color-blue avenir-roman">{{list.name}}</span>
+                            </label>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -82,7 +97,6 @@
                 </div>
               </div>
               <!-- itinerary type end -->
-              {{addCountry}}
               <div class="add-country-city {{addClass}}" ng-repeat="editCountry in addCountry track by $index" ng-init="countryPanel=$index">
                 <div class="remove-country-city"><i class="fa fa-times" ng-click="removeCountry(countryPanel);" ng-if="countryPanel>0"></i></div>
                 <!-- country Visited -->
@@ -94,7 +108,7 @@
                         <input type="text" class="form-control" ng-model="editCountry.name" ng-change="showCountry[countryPanel]=true"></input>
                         <div class="dropdown-country" ng-show="showCountry[countryPanel]">
                           <ul>
-                            <li ng-repeat="nation in countries | filter: editCountry.name | limitTo:4" ><a href="" ng-click="updateCountryDetail(editCountry,nation,countryPanel,cityPanel)">{{nation.name}}</a></li>
+                            <li ng-repeat="nation in countries | filter: editCountry.name | limitTo:4"><a href="" ng-click="updateCountryDetail(editCountry,nation,countryPanel,cityPanel)">{{nation.name}}</a></li>
                           </ul>
                         </div>
                         <!--<ui-select ng-model="addCountry[countryPanel]" theme="bootstrap" ng-click="updateCountriesArr($select.selected._id)">
@@ -103,19 +117,16 @@
                             <span ng-bind="nation.name"></span>
                           </ui-select-choices>
                         </ui-select>-->
-
-
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="itinerary-country-detail">
                         <div class="itinerary-from itinerary-month">
                           <label for="From">From</label>
-
                           <div class="itinerary-inputholder">
                             <input type="date" class="form-control text-center" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);"
-                              ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'" >
-                          </div>                         
+                              ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'">
+                          </div>
                         </div>
                         <div class="itinerary-to itinerary-year">
                           <label for="to">To</label>
@@ -126,7 +137,7 @@
                         <div class="itinerary-duration">
                           <label for="Duration">Days</label>
                           <div class="itinerary-inputholder">
-                            <input type="text" class="form-control text-center" id="Duration" ng-model="editCity.duration">
+                            <input type="text" class="form-control text-center" id="Duration" ng-model="editCountry.duration">
                             <!--<span>{{(city.to | dateDifference:city.from)-1}}</span>-->
                           </div>
                         </div>
@@ -138,15 +149,14 @@
                 <!-- city visited  -->
                 <div class="itinerary-country-visited itinerary-city-visited">
                   <div class="row" ng-repeat="editCity in editCountry.cityVisited track by $index" ng-init="cityPanel=$index">
-                    <div class="col-md-6">{{editCity}}
+                    <div class="col-md-6">
                       <div class="itinerary-inputholder input-country-visited">
-                        <input type="text" class="form-control" ng-model="editCity.name" ng-change="searchCity(editCountry.country,editCity.name);showCity[countryPanel][cityPanel]=true"></input>
+                        <input type="text" class="form-control" ng-model="editCity.name" ng-change="searchCity(editCountry.country,editCity.name,editCountry.cityVisited);showCity[countryPanel][cityPanel]=true"></input>
                         <div class="dropdown-city" ng-show="showCity[countryPanel][cityPanel]">
                           <ul>
                             <li ng-repeat="city in cities" ng-click="updateCityDetail(editCity,city);showCity[countryPanel][cityPanel]=false;"><a href="">{{city.name}}</a></li>
                           </ul>
                         </div>
-                        
                         <!--<ui-select ng-model="editCountry.cityVisited[cityPanel]" theme="bootstrap" ng-click="updateCitiesArr($select.selected._id)">
                           <ui-select-match placeholder="Country Visited ">{{$select.selected.name}}</ui-select-match>
                           <ui-select-choices repeat="{'name':citi.name,placeId:citi.placeId} as citi in cities" refresh="searchCity(editCountry.country,$select.search)"
@@ -154,7 +164,6 @@
                             <span ng-bind="citi.name"></span>
                           </ui-select-choices>
                         </ui-select>-->
-
                       </div>
                       <i class="avenir-roman color-light-grey">Add other cities visited in this country on this trip</i>
                     </div>
@@ -192,18 +201,18 @@
                         </div>
                       </div>
                     </div>-->
-                     <div class="col-md-6">
+                    <div class="col-md-6">
                       <div class="itinerary-country-detail">
                         <div class="itinerary-from itinerary-month">
                           <label for="Day">Day</label>
                           <div class="itinerary-inputholder">
-                            <input type="number" class="form-control text-center" ng-model="editCity.from">
+                            <input type="number" class="form-control text-center" ng-model="editCity.from" min=1>
                           </div>
                         </div>
                         <div class="itinerary-to itinerary-year">
                           <label for="to">To Day</label>
                           <div class="itinerary-inputholder">
-                            <input type="number" class="form-control text-center" ng-model="editCity.to">
+                            <input type="number" class="form-control text-center" ng-model="editCity.to" min=1>
                           </div>
                         </div>
                       </div>
@@ -229,7 +238,7 @@
               <!-- add country on click end-->
             </div>
             <!-- accordion -->
-            <div class="accordion-trip-detail" ng-repeat="country in addCountry track by $index" ng-init="countryIndex=$index">
+            <div class="accordion-trip-detail" ng-repeat="country in addCountry track by $index" ng-init="countryIndex=$index" ng-if="country.cityVisited[0].name && country.cityVisited[0].from && country.cityVisited[0].to">
               <div class="trip-heading-accordion">
                 <div class="clearfix">
                   <div class="pull-left">
@@ -244,13 +253,14 @@
                   </div>
                 </div>
               </div>
-              <uib-accordion close-others="oneAtATime" >
-                <div class="panel-default" uib-accordion-group is-open="status.open" ng-repeat="city in country.cityVisited track by $index" ng-init="cityIndex=$index">
+              <uib-accordion close-others="oneAtATime">
+                <div class="panel-default" uib-accordion-group is-open="status.open" ng-repeat="city in country.cityVisited track by $index"
+                  ng-init="cityIndex=$index" ng-if="city.from && city.to && city.name">
                   <uib-accordion-heading>
                     <div class="clearfix">
-                      <p class="city-heading pull-left m-clear">Day <span>{{addCountry | fromCalculation:countryIndex:cityIndex}}</span> to Day {{addCountry | toCalculation:countryIndex:cityIndex}} <span></span> In <span class="trip-city-name color-pink">{{city.name}}</span></p>
+                      <p class="city-heading pull-left m-clear">Day <span>{{city.from}}</span> to Day {{city.to}} <span></span> In <span class="trip-city-name color-pink">{{city.name}}</span></p>
                       <span class="pull-right"><i class="fa accordion-icon" ng-class="{'fa-minus' : status.open , 'fa-plus' : !status.open}"></i></span>
-                    </div >
+                    </div>
                   </uib-accordion-heading>
                   <div class="accordion-main">
                     <!-- trip info container -->
@@ -338,7 +348,7 @@
                             </div>-->
                             <ui-select multiple ng-model="city.days.mustDo" theme="bootstrap" tagging="tagHandler">
                               <ui-select-match placeholder="Must Do's'">{{$item.name}}</ui-select-match>
-                              <ui-select-choices repeat="mustdo.name as mustdo in google.mustDo | filter:$select.search" refresh="findResults(city.placeId,'Sights',$select.search,'onchange')"
+                              <ui-select-choices repeat="mustdo.name as mustdo in google.mustDos | filter:$select.search" refresh="findResults(city.placeId,'Sights',$select.search,'onchange')"
                                 refresh-delay="0">
                                 <span ng-bind="mustdo.name"></span>
                               </ui-select-choices>
@@ -376,7 +386,7 @@
                             </div>
                             <div class="upload-btn relate">
                               <button class="btn btn-dark-blue pointer avenir-light pointer">Select a photo from your computer</button>
-                              <upload-image ng-model="city.photos" multiple="true" class="quick-upload-photos"></upload-image>
+                              <upload-image ng-model="formData.photo" ng-callback="addPhotosCallback(city,data)" multiple="true" class="quick-upload-photos"></upload-image>
                             </div>
                           </div>
                         </div>
@@ -388,7 +398,7 @@
               </uib-accordion>
             </div>
             <!-- accordion end -->
-            <div class="trip-budget budget-quick-itinerary">{{dItinerary}}
+            <div class="trip-budget budget-quick-itinerary">
               <div class="clearfix">
                 <div class="pull-left">
                   <label for="budget">Trip Budget</label>
@@ -401,24 +411,25 @@
                         </span>
                         <div class="dropdown-currency-itinerary" ng-show="currency.showCurrency">
                           <ul>
-                          <li ng-repeat="name in currency | filter:dItinerary.currency" ng-click="currency.showCurrency=false;dItinerary.currency=name.currency;" >
-                            <a href="" title="{{name.currency}}">{{name.currency}}</a>
-                          </li>
-                        </ul>
+                            <li ng-repeat="name in currency | filter:dItinerary.currency" ng-click="currency.showCurrency=false;dItinerary.currency=name.currency;">
+                              <a href="" title="{{name.currency}}">{{name.currency}}</a>
+                            </li>
+                          </ul>
                         </div>
                       </div>
                     </div>
                     <div class="currency-amount">
                       <div class="itinerary-inputholder">
-                        <input type="text" class="text-center" ng-model="dItinerary.cost">
+                        <!--<input type="number" class="text-center" ng-model="dItinerary.cost">-->
+                        <input id="id" type="number" ng-model="dItinerary.cost"><label for="id">{{dItinerary.cost | number}}</label><br>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="pull-right">
                   <div class="save-publish-detail">
-                    <button class="btn btn-pink btn-more mr5" ng-click="uploadQuickItinerary(false)">Save</button>
-                    <button class="btn btn-pink btn-more" ng-click="uploadQuickItinerary(true)">Publish</button>
+                    <button class="btn btn-pink btn-more mr5" ng-click="uploadDetailedItinerary(false)">Save</button>
+                    <button class="btn btn-pink btn-more" ng-click="uploadDetailedItinerary(true)">Publish</button>
                   </div>
                 </div>
               </div>
