@@ -83,7 +83,7 @@
               <span class="avenir-roman">({{ongo.photos.length}})</span>
             </div>
             <!-- flex slider for photo in 2 row -->
-            <div class="otg-photo-slider">
+            <div class="otg-photo-slider" ng-if="flexShow">
               <flex-slider class="carousel" flex-slide="photo in photosArray track by $index" control-nav="false" slideshow="false">
                 <li>
                   <div class="otg-slider-row row-flex" ng-repeat="slide in photo">
@@ -99,7 +99,7 @@
                         <!-- add back caption -->
                         <div class="otg-add-caption" ng-show="column._id==indexEditPhotoCap" ng-class="{'show-otg-caption' : indexEditPhotoCap==column._id, '' : !indexEditPhotoCap==column._id}">
                           <div class="edit-otg-caption">
-                            <textarea name="" id="" maxlength="150" ng-model="column.caption" placeholder="Enter Captions"></textarea>
+                            <textarea name="" id="" maxlength="150" ng-model="column.caption" placeholder="Enter Captions" ng-change="editCaption(column);"></textarea>
                             <p class="text-center m-center" ng-click="editMoreCaption(column._id);"><i class="fa fa-angle-down color-white fa-2x pointer"></i></p>
                             <div class="text-typed-count">
                               <span>150</span>
@@ -108,7 +108,7 @@
                         </div>
                         <!-- add back caption end-->
                         <!-- add caption end-->
-                        <div class="delete-otg-photo" ng-click="deletePhotos(column._id);">
+                        <div class="delete-otg-photo" ng-click="removeEditPic(column._id);">
                           <i class="fa fa-trash-o"></i>
                         </div>
                       </div>
@@ -170,7 +170,7 @@
   <!-- save or cancel otg -->
   <div class="save-cancel-otg text-center">
     <a href="" class="color-white" ng-click="dismiss();">Cancel</a>
-    <button class="btn btn-pink btn-more">Save</button>
+    <button class="btn btn-pink btn-more" ng-click="saveEditOtg();">Save</button>
   </div>
   <!-- save or cancel otg end-->
 </div>
