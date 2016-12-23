@@ -186,6 +186,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       $scope.otgPhotoArray = [];
       $scope.editedPhotosArr = [];
       $scope.checkInData = {};
+      $scope.newBuddies = [];
       if ($scope.ongo.checkIn && $scope.ongo.checkIn.location) {
         $scope.checkInData = _.cloneDeep($scope.ongo.checkIn);
       }
@@ -477,6 +478,34 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
             }).success(function(data) {
               console.log(data.data);
               $scope.tagFriends = data.data;
+              _.each($scope.tagFriends, function(n) {
+                var buddyIndex=_.findIndex($scope.ongo.buddies, function(m) {
+                  return m._id === n._id;
+                });
+                if (buddyIndex !== -1) {
+                  n.checked = true;
+                  $("#"+n._id).prop('disabled', true);
+                  // $("n").parent().css('cursor', 'not-allowed');
+                } else {
+                  n.checked = false;
+                }
+              });
+              $scope.editTagFriends = function(list){
+                var getBuddy = _.findIndex($scope.newBuddies, function(id){
+                  return id._id === list._id;
+                });
+                if (getBuddy === -1) {
+                  $scope.newBuddies.push({
+                    _id : list._id,
+                    name : list.name,
+                    email: list.email
+                  })
+                }else {
+                  _.remove($scope.newBuddies, function(newId){
+                    return newId._id === list._id;
+                  });
+                }
+              }
             })
           } else {
             $scope.viewListFriend = false;
@@ -536,6 +565,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       var modal = "";
       // edit otg checkin
       $scope.editCheckIn = function() {
+        $scope.alreadyTagFrnd = true;
         modal = $uibModal.open({
           animation: true,
           templateUrl: "views/modal/edit-otg.html",
@@ -612,9 +642,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       // edit save data
       $scope.saveEditOtg = function() {
 
-        // get photos id
-        $scope.photosId = _.map($scope.ongo.photos,"_id");
-        // get photos id end
+          // get photos id
+          $scope.photosId = _.map($scope.ongo.photos, "_id");
+          // get photos id end
 
           var editedData = {
             checkIn: $scope.ongo.checkIn,
@@ -623,7 +653,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
             "_id": $scope.ongo._id,
             photos: $scope.photosId,
             videos: [],
-            buddiesArr: [],
+            buddiesArr: $scope.newBuddies,
             hashtag: [],
             addHashtag: [],
             removeHashtag: [],
@@ -633,10 +663,10 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           }
           if ($scope.ongo.checkIn && $scope.ongo.checkIn.lat && $scope.ongo.checkIn.long && $scope.ongo.checkIn.category && $scope.ongo.checkIn.location) {
             if ($scope.checkInData.lat && $scope.checkInData.long) {
-              if( $scope.ongo.checkIn.lat === $scope.checkInData.lat && $scope.ongo.checkIn.long ===  $scope.checkInData.long){
-                  editedData.checkInChange = false;
-              }else{
-                editedData.checkInChange =true;
+              if ($scope.ongo.checkIn.lat === $scope.checkInData.lat && $scope.ongo.checkIn.long === $scope.checkInData.long) {
+                editedData.checkInChange = false;
+              } else {
+                editedData.checkInChange = true;
               }
             } else {
               editedData.checkInChange = true;
@@ -652,7 +682,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
             };
             editedData.checkInChange = false;
           }
-          console.log(editedData,"dataEdited hai");
+          console.log(editedData, "dataEdited hai");
           // $http({
           //   url: adminURL + "/post/editData",
           //   method: "POST",
