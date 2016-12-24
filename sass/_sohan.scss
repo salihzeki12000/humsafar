@@ -195,7 +195,7 @@ a.color-white {
     position: absolute;
     bottom: 0;
     transform: translateY(100%);
-    padding: 30px 50px;
+    padding: 80px 50px 20px;
     width: 100%;
     background: rgba(0, 0, 0, 0.8);
     @include transition(all ease 300ms);
@@ -348,8 +348,10 @@ a.color-white {
         background-size: cover !important;
         background-repeat: no-repeat !important;
       }
+
       .col-md-6:nth-of-type(5n) {
         width: 100%;
+
         .img-holder {
           height: 400px;
         }
