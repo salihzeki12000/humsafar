@@ -146,7 +146,7 @@ var navigationservice = angular.module('navigationservice', [])
             console.log(formData);
             var arr=_.omit(formData,['cityVisited']);
             console.log(arr);
-            
+
             $http({
                 url:adminURL+"/city/searchCity",
                 data:formData,
@@ -174,13 +174,26 @@ var navigationservice = angular.module('navigationservice', [])
         changePasswordEmail: function(formData, callback) {
             $http.post(adminURL + "/user/changePasswordEmail", formData).success(callback);
         },
-        uploadFile: function (formData, callback) {
-            $http.post(uploadurl, formData, {
-                headers: {
-                    'Content-Type': undefined
-                },
-                transformRequest: angular.identity
-            }).success(callback);
+        getDestination: function(formData, callback) {
+            $http.post(adminURL + "/country/getDestination", formData).success(callback);
+        },
+        uploadQuickItinerary:function(obj,flag,callback){
+            if(flag=='new'){
+                var url="/itinerary/saveQuickItineraryWeb";
+            }else if(flag=='edit'){
+
+            }
+            $http({
+                url:adminURL + url,
+                method:"POST",
+                data:obj
+            }).success(function(data){
+                if(data.value){
+                    console.log("Qitinerary saved successfully");
+                }
+                callback(data);
+            });
         }
+
     };
 });
