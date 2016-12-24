@@ -7343,6 +7343,209 @@ ng-map {
     }
   };
 }
+
+
+// destination booking
+.destination-hotel-card {
+  .hotel-card-list {
+    margin-top: 5px;
+    margin-right: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 1;
+  }
+  .hotel-card-holder {
+    max-height: 290px;
+    margin-bottom: 10px;
+    position: relative;
+    @include perspective(1000px);
+    &:last-child { margin: 0; }
+    .hotel-flipper-holder {
+      position: relative;
+      @include transform-style(preserve-3d);
+      @include transition(all 300ms linear);
+    }
+    .hotel-front-view {
+      position: relative;
+      @include transform(rotateX(0deg));
+      @include backface-visibility(hidden);
+      z-index: 2;
+    }
+    .hotel-back-view {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include transform(rotateX(180deg));
+      @include backface-visibility(hidden);
+      .hotel-details { border-bottom: 1px solid #fff; }  // delete if not needed this border
+    }
+    .flip-card {
+      @include transform(rotateX(180deg));
+      @include transition(all 300ms linear);
+    }
+  }
+  .hotel-card-holder:nth-child(odd) {
+    .score-round-holder {
+      border-color: $brand-pink;
+    }
+    .btn-deal {
+      @extend .btn-pink;
+    }
+  }
+  .hotel-card-holder:nth-child(even) {
+    .score-round-holder {
+      border-color: $brand-cyan;
+    }
+    .btn-deal {
+      @extend .btn-cyan;
+    }
+  }
+  .hotel-information {
+    padding: 25px 25px 15px 15px;
+    @extend .avenir-medium;
+    color: #fff;
+  }
+  .blur-overlay-bg-div {
+    @include square(100%);
+    @include position(absolute, 0);
+    background-color: rgba(0,0,0,0.7);
+  }
+  .slider-hotel {
+    height: 290px;
+    overflow: hidden;
+    position: relative;
+    .item {
+       position: relative;
+       height: 100%;
+       background-repeat: no-repeat;
+       background-position: center center;
+       -webkit-background-size: cover;
+       background-size: cover;
+  }
+}
+  .hotel-list-heading {
+    .hotel-name {
+      margin: 0;
+      font-size: 18px;
+      @extend .avenir-medium;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .hotel-extra-booking { margin: 5px 0px 0;  }
+    .rate-by-star {
+      padding: 7px 0;
+    }
+  }
+  .hotel-chart-main {
+    padding: 20px 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 15px;
+    text-align: center;
+    .chart-type-title {
+      font-size: 13px;
+    }
+  }
+  .score-round-holder {
+    @include square(80px);
+    padding: 20px 0;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 100%;
+    margin: 10px auto 0;
+    background-color: #fff;
+    color: #424242;
+    text-align: center;
+    @extend .avenir-medium;
+  }
+  .see-detail {
+    .view-detail {
+      margin-top: 5px;
+      display: inline-block;
+    }
+  }
+}
+// destination booking end
+// destination vacations and rentals
+.vacation-card-list {
+  .hotel-card-holder {
+    max-height: initial;
+  }
+  .vacation-hotel-chart {
+    padding: 15px 0 10px;
+  }
+  .rate-by-star ul { display: inline-block; }
+  .hotel-review {
+    margin-left: 10px;
+    display: inline-block;
+    @extend .avenir-roman;
+  }
+  .hotel-descp {
+    margin-bottom: 10px;
+    p {
+      margin: 0;
+      @extend .avenir-light;
+      font-style: italic;
+      text-align: justify;
+    }
+  }
+  .hotel-info-list {
+    ul { @include display(flex); }
+    li {
+      padding: 0px 10px;
+      border-right: 1px solid #fff;
+      @include flex(1);
+      font-size: 12px;
+      @extend .avenir-medium;
+      span { font-size: 20px; }
+      &:last-child { border-right: none; }
+    }
+  }
+  .total-hotel-cost {
+    margin-top: 15px;
+    @extend .avenir-medium;
+    text-align: left;
+    .hotel-cost {
+      font-size: 20px;
+    }
+  }
+}
+// destination vacations and rentals end
+// destination homestay
+.homestay-owner-img {
+  position: absolute;
+  top: -15px;
+  left: -87px;
+  z-index: 3;
+}
+.room-owner-imgholder {
+  @include square(80px);
+  border-radius: 100%;
+  border-width: 3px;
+  border-style: solid;
+  box-shadow: 3px 3px 3px #212121;
+  overflow: hidden;
+  img { width: 100%; }
+}
+.homestay-hotel-distance , .homestay-hotel-cost {
+  /*padding: 10px;*/
+  /*border-radius: 4px;*/
+  /*margin-bottom: 10px;*/
+  margin: 5px 0;
+  text-align: left;
+  p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+// destination homestay end
+
 @import "_sagarmobile.scss";
 @import "mobile.scss";
 // header { display: none; }
