@@ -1525,6 +1525,11 @@ a.color-white {
       position: absolute;
       bottom: 0;
       left: 0;
+      width: 100%;
+
+      .img-travel-life img {
+        margin: 0 auto;
+      }
 
       .play-mobile {
         position: absolute;
