@@ -1994,26 +1994,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.template = TemplateService.changecontent("destination");
     $scope.menutitle = NavigationService.makeactive("Destination");
     TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
     $scope.destinationList = [];
-  $scope.viewListByKey = "A";
-
-  NavigationService.getDestination({
-    search: "a",
-    searchText: ""
-  },function(data){
-    $scope.destinationList = data.data;
-  })
-  $scope.searchDestination = function(searchVal){
-    $scope.viewListByKey = searchVal.charAt(0);
-    NavigationService.getDestination({
-      search: searchVal,
-      searchText: ""
-    },function(data){
-      $scope.destinationList = data.data;
-    })
-  };
-  $scope.countryDestList = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+    $scope.viewListByKey = "A";
+    $scope.countryDestList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    $scope.i = 0;
+    $scope.callCountry = function(search, searchText) {
+      $scope.i++;
+      NavigationService.getDestination({
+        search: search,
+        searchText: searchText,
+        count: $scope.i
+      }, function(data) {
+        if ($scope.i === data.count) {
+          $scope.destinationList = data.data;
+          $scope.i=0;
+        } else {
+          $scope.destinationList = [];
+        }
+      });
+    }
+    $scope.callCountry("a", "");
+    $scope.searchDestination = function(searchVal) {
+      if(searchVal === "") {
+        $scope.callCountry("a", "");
+        $scope.viewListByKey = "A";
+      }else {
+        $scope.viewListByKey = searchVal.charAt(0);
+        $scope.callCountry(searchVal, searchVal);
+      }
+    };
+  
   })
 
 .controller('DestinationCountryCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
@@ -3886,8 +3896,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       }
       //badge-bar ends here
-    $scope.testing = function (type, urlSlug) {
-
+     $scope.routeTO = function (type, urlSlug) {
       if (type == "travel-life") {
         $state.go('ongojourney', {
           id: urlSlug
@@ -3896,10 +3905,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $state.go('userquickitinerary', {
           id: urlSlug
         });
+      } else if(type == 'detail-itinerary'){
+        $state.go('userdetailitinerary',{
+          id:urlSlug
+        });
       }
     };
-
-
     //Integration Section Ends here
     {
       var allMyLife = ["views/content/myLife/journey.html", "views/content/myLife/moments.html", "views/content/myLife/reviews.html", "views/content/myLife/holidayplanner.html"];
@@ -7048,7 +7059,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //if edit then make call to that itinerary
     if (flag == 'edit' && urlSlug != '') {
 
-      Itinerary.getOneQuickItinerary(urlSlug, function (data) {
+      Itinerary.getOneItinerary(urlSlug, function (data) {
         $scope.qItinerary = data.data;
         $scope.addCountry = $scope.qItinerary.countryVisited;
 
@@ -7680,7 +7691,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.userData = $.jStorage.get("profile");
     //get quick-itinerary details starts
     var slug = $stateParams.id;
-    Itinerary.getOneQuickItinerary(slug, function (data) {
+    Itinerary.getOneItinerary(slug, function (data) {
       $scope.itinerary = data.data;
       console.log($scope.itinerary);
     });
@@ -7985,7 +7996,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // other itineraries main end
 
   })
-  .controller('UserDetailItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('UserDetailItineraryCtrl', function ($scope, TemplateService, NavigationService,  Itinerary, $timeout, $stateParams) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -7994,6 +8005,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("User-DetailItinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    //Integration starts here
+    $scope.userData = $.jStorage.get("profile");
+    //get quick-itinerary details starts
+    var slug = $stateParams.id;
+    Itinerary.getOneItinerary(slug, function (data) {
+      $scope.itinerary = data.data;
+      console.log($scope.itinerary);
+    });
+    //get quick-itinerary details ends
 
     $scope.journeyItinerary = [{
       img: "img/ongojourney/monish.jpg",

@@ -224,7 +224,7 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       controller: 'UserQuickItineraryCtrl'
     })
     .state('userdetailitinerary', {
-      url: "/user-detailitinerary",
+      url: "/user-detailitinerary/:id",
       templateUrl: "views/template.html",
       controller: 'UserDetailItineraryCtrl'
     })

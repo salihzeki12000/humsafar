@@ -1,4 +1,4 @@
-<div class="user-itinerary-page">
+<div class="user-itinerary-page"> 
   <div class="user-banner-holder relate" scrolldown>
     <div class="overlay-itinerary-bg"></div>
     <div class="user-banner-detail full-width text-center">
@@ -28,7 +28,7 @@
           </li>
         </ul>
       </div>
-      <div class="button-holder mt20">
+      <div class="button-holder mt20" ng-if="userData._id!=itinerary.creator._id">
         <button class="btn btn-white-outline btn-more avenir-medium">Follow</button>
       </div>
     </div>
