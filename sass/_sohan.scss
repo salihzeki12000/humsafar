@@ -433,6 +433,7 @@ a.color-white {
       border-radius: 5px;
 
       img {
+        width: 35px;
         margin: 0 0 0 10px;
       }
     }
@@ -1558,5 +1559,11 @@ a.color-white {
     .cycle-section3 {
       height: 38px;
     }
+  }
+}
+
+.destination {
+  .destination-nav {
+    background: #fff;
   }
 }
