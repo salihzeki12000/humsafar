@@ -484,8 +484,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
                 });
                 if (buddyIndex !== -1) {
                   n.checked = true;
+                  n.noEdit = "un-tag"
                   $("#"+n._id).prop('disabled', true);
-                  // $("n").parent().css('cursor', 'not-allowed');
                 } else {
                   n.checked = false;
                 }

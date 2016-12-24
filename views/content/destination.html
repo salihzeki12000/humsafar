@@ -23,7 +23,7 @@
             <form action="">
               <div class="input-search dest-chnge pt20">
                 <div class="input-group">
-                  <input type="text" class="form-control fnt-16" placeholder="Search Destination">
+                  <input type="text" class="form-control fnt-16" placeholder="Search Destination" ng-model="destination" ng-change="searchDestination(destination)">
                   <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
                 </div>
               </div>
@@ -33,30 +33,30 @@
       </div>
       <div class="destination-content">
         <div class="head-title">
-          <h4 class="fnt-42 brdbtm alpha-color mt-clear">A</h4>
+          <h4 class="fnt-42 brdbtm alpha-color mt-clear text-uppercase">{{viewListByKey}}</h4>
         </div>
         <div class="destination-holder relate pt20 pr20">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6"  ng-repeat="dest in destinationList track by $index">
               <div class="img-holder relate">
-                <img src="img/destination/taj-featured.jpg" alt="travel-libro" class="full-width">
+                <img ng-src="{{dest.cityCoverPhoto|uploadpath}}" alt="travel-libro" class="full-width">
                 <div class="title-head-left color-white">
-                  India
+                  {{dest.name}}
                 </div>
                 <div class="title-head-right color-white">
-                  <img src="img/destination/flag.png" alt="Travelibro">
+                  <img ng-src="{{dest.country[0].flag|uploadpath}}"   alt="Travelibro">
                 </div>
 
                 <div class="read-more left-bottom">
                   <ul class="list-inline">
                     <li class="avenir-roman color-white">Cities: <span class="avenir-heavy">33</span> </li>
                     <li class="avenir-heavy color-white">|</li>
-                    <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">222</span> </li>
+                    <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">{{dest.itineraryCount}}</span> </li>
                   </ul>
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" hidden>
               <div class="img-holder relate">
                 <img src="img/destination/taj-featured.jpg" alt="travel-libro" class="full-width">
                 <div class="title-head-left color-white">
@@ -75,7 +75,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" hidden>
               <div class="img-holder relate">
                 <img src="img/destination/goldentemple.jpg" alt="travel-libro" class="full-width">
                 <div class="title-head-left color-white">
@@ -93,7 +93,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" hidden>
               <div class="img-holder relate">
                 <img src="img/destination/taj-featured.jpg" alt="travel-libro" class="full-width">
                 <div class="title-head-left color-white">
@@ -112,7 +112,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12" hidden>
               <div class="img-holder relate">
                 <img src="img/destination/taj-featured.jpg" alt="travel-libro" class="full-width">
                 <div class="title-head-left color-white">
@@ -133,8 +133,10 @@
           </div>
           <div class="alphabhates right-end" scrolladdclass>
             <ul class="list-unstyle">
-              <li><a href="" class="color-grey-apha">A</a></li>
-              <li><a href="" class="color-grey-apha">B</a></li>
+              <li ng-repeat="countryKey in countryDestList track by $index" ng-click="searchDestination(countryKey)">
+                <a href="" class="color-grey-apha">{{countryKey}}</a>
+              </li>
+              <!-- <li><a href="" class="color-grey-apha">B</a></li>
               <li><a href="" class="color-grey-apha">C</a></li>
               <li><a href="" class="color-grey-apha">D</a></li>
               <li><a href="" class="color-grey-apha">E</a></li>
@@ -158,7 +160,7 @@
               <li><a href="" class="color-grey-apha">W</a></li>
               <li><a href="" class="color-grey-apha">X</a></li>
               <li><a href="" class="color-grey-apha">Y</a></li>
-              <li><a href="" class="color-grey-apha">Z</a></li>
+              <li><a href="" class="color-grey-apha">Z</a></li> -->
             </ul>
           </div>
         </div>

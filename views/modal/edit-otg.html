@@ -44,7 +44,7 @@
                   <li ng-repeat="list in tagFriends track by $index" ng-click="editTagFriends(list);">
                     <div class="friend-listholder select-friend">
                       <input type="checkbox" name="tag-list {{list.name}}" id="{{list._id}}" ng-model="list.checked">
-                      <label for="{{list._id}}">
+                      <label for="{{list._id}}" class="{{list.noEdit}}">
                         <div class="friend-imgholder">
                           <img ng-src="{{list.profilePicture|uploadpath}}" alt="" class="img-responsive">
                         </div>
