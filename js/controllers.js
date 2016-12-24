@@ -1998,32 +1998,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.viewListByKey = "A";
     $scope.countryDestList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     $scope.i = 0;
-    $scope.callCountry = function(search, searchText) {
+    $scope.callCountry = function (search, searchText) {
       $scope.i++;
       NavigationService.getDestination({
         search: search,
         searchText: searchText,
         count: $scope.i
-      }, function(data) {
+      }, function (data) {
         if ($scope.i === data.count) {
           $scope.destinationList = data.data;
-          $scope.i=0;
+          $scope.i = 0;
         } else {
           $scope.destinationList = [];
         }
       });
     }
     $scope.callCountry("a", "");
-    $scope.searchDestination = function(searchVal) {
-      if(searchVal === "") {
+    $scope.searchDestination = function (searchVal) {
+      if (searchVal === "") {
         $scope.callCountry("a", "");
         $scope.viewListByKey = "A";
-      }else {
+      } else {
         $scope.viewListByKey = searchVal.charAt(0);
         $scope.callCountry(searchVal, searchVal);
       }
     };
-  
+
   })
 
 .controller('DestinationCountryCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
@@ -3896,7 +3896,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       }
       //badge-bar ends here
-     $scope.routeTO = function (type, urlSlug) {
+    $scope.routeTO = function (type, urlSlug) {
       if (type == "travel-life") {
         $state.go('ongojourney', {
           id: urlSlug
@@ -3905,9 +3905,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $state.go('userquickitinerary', {
           id: urlSlug
         });
-      } else if(type == 'detail-itinerary'){
-        $state.go('userdetailitinerary',{
-          id:urlSlug
+      } else if (type == 'detail-itinerary') {
+        $state.go('userdetailitinerary', {
+          id: urlSlug
         });
       }
     };
@@ -6829,7 +6829,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log(photo);
       $scope.dItinerary.photos.push({
         "name": photo,
-        "caption":""
+        "caption": ""
       })
     };
     $scope.removePhoto = function (index, city) {
@@ -7716,27 +7716,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //like-unlike itinerary starts
     $scope.likeUnlikeItinerary = function (flag, _id, uniqueId) {
-      console.log(flag, _id, uniqueId);
-      var callback;
-      var obj = {
-        "itinerary": _id,
-        "uniqueId": uniqueId
-      }
-      if (flag) {
-        obj.unlike = true;
-        callback = function (data) {
-          if (data.value) {
-            $scope.itinerary.likeDone = null;
-          }
-        };
-      } else if (flag == null || flag == undefined) {
-        callback = function (data) {
-          if (data.value) {
-            $scope.itinerary.likeDone = true;
-          }
-        };
-      }
-      Itinerary.updateLikeItinerary(obj, callback);
+      Itinerary.updateLikeItinerary(flag, _id, uniqueId, function (data) {
+        console.log(data);
+        $scope.itinerary.likeDone = data;
+      });
     };
     //like-unlike itinerary ends
 
@@ -7996,7 +7979,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // other itineraries main end
 
   })
-  .controller('UserDetailItineraryCtrl', function ($scope, TemplateService, NavigationService,  Itinerary, $timeout, $stateParams) {
+  .controller('UserDetailItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, $timeout, $stateParams) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -8007,7 +7990,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
     //Integration starts here
+    
     $scope.userData = $.jStorage.get("profile");
+
     //get quick-itinerary details starts
     var slug = $stateParams.id;
     Itinerary.getOneItinerary(slug, function (data) {
@@ -8015,6 +8000,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log($scope.itinerary);
     });
     //get quick-itinerary details ends
+
+    //like-unlike itinerary starts
+    $scope.likeUnlikeItinerary = function (flag, _id, uniqueId) {
+      Itinerary.updateLikeItinerary(flag, _id, uniqueId, function (data) {
+        console.log(data);
+        $scope.itinerary.likeDone = data;
+      });
+    };
+    //like-unlike itinerary ends
+
+    //Integration starts here
 
     $scope.journeyItinerary = [{
       img: "img/ongojourney/monish.jpg",

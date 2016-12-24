@@ -85,9 +85,9 @@
         <div class="col-md-offset-1 col-md-10 col-ms-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
           <div class="share-comment-main">
             <div class="clearfix share-option-main">
-              <div class="task-holder pull-left" ng-init="getClicked = false;">
+              <div class="task-holder pull-left">
                 <ul class="list-inline">
-                  <li><a href="" ng-click="getClicked = true;"><i class="fa like-button-icon color-blue" ng-class="{'fa-heart-o': getClicked == false, 'fa-heart': getClicked == true}"></i></a></li>
+                  <li><a href="" ng-click="likeUnlikeItinerary(itinerary.likeDone,itinerary._id,itinerary.uniqueId);"><i class="fa like-button-icon color-blue" ng-class="{'fa-heart-o': itinerary.likeDone == null, 'fa-heart': itinerary.likeDone == true}"></i></a></li>
                   <li>
                     <a href=""><img src="img/comments.png" alt="Comments" height="22"   class="agent-iti-comment-icon"></a>
                   </li>

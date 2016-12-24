@@ -23,14 +23,28 @@ var itinerary = angular.module('itinerary', [])
         callback(data);
       });
     },
-    updateLikeItinerary: function (obj, callback) {
+    updateLikeItinerary: function (flag, _id, uniqueId, callback) {
+       var callback;
+      var result;
+      var obj = {
+        "itinerary": _id,
+        "uniqueId": uniqueId
+      }
+      if (flag) {
+        obj.unlike = true;
+        result = null;
+      } else {
+        result = true;
+      }
       console.log(obj);
       $http({
         url: adminURL + "/itinerary/updateLikeItineraryWeb",
         method: "POST",
         data: obj
       }).success(function (data) {
-        callback(data);
+        if (data.value) {
+          callback(result);
+        }
       });
     },
     getGooglePlaceDetail: function (obj, callback) {
