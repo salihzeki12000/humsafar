@@ -67,10 +67,11 @@
       <!-- <a class="navbar-brand" ui-sref="home"><img src="img/logo.png" alt="logo" width="20"> </a> -->
     </div>
     </div>
+    <div class="fixed-close {{getslide}}" ng-click="getnav();"></div>
     <div class="sidemenu menu-common {{getslide}}">
       <div class="nav-list">
-        <div class="custscroll">
-          <div ng-include="template.menu" class="template menu"></div>
+        <div class="custscroll ">
+          <div ng-include="template.menu " class="template menu "></div>
         </div>
       </div>
     </div>
@@ -82,7 +83,7 @@
 
 
 
-<header class="libro-header {{isLoggedIn}}" ng-controller="headerctrl" ng-hide="isLoggedIn">
+<header class="libro-header {{isLoggedIn}}" ng-controller="headerctrl" ng-hide="isLoggedIn" scrolladd1class>
   <section class="bg-black custom-search pd20 " ng-class="{ 'open': isopen} ">
     <div class="container-fluid ">
       <div class="row ">
@@ -147,8 +148,9 @@
           </div>
         </div>
       </nav>
-      <div class="sidemenu menu-common {{getslide}} ">
-        <div class="nav-list ">
+      <div class="fixed-close {{getslide}}" ng-click="getnav();"></div>
+      <div class="sidemenu menu-common {{getslide}}">
+        <div class="nav-list">
           <div class="custscroll ">
             <div ng-include="template.menu " class="template menu "></div>
           </div>

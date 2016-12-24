@@ -373,7 +373,7 @@ firstapp.directive('scrolldown', function($compile, $parse) {
 firstapp.directive("scrolladdclass", function($window) {
   return function(scope, element, attrs) {
     angular.element($window).bind("scroll", function() {
-      var windowHeight = $(window).height();
+      var windowHeight = $(window).height() - 120;
       if (this.pageYOffset >= windowHeight) {
         // console.log(windowHeight);
         element.addClass('addfixed');
@@ -901,7 +901,7 @@ firstapp.filter('fromCalculation', function () {
   return function (country, countryIndex, cityIndex) {
     var sum = 0;
     if (countryIndex == 0) { //when only 1 country is selected
-      if(cityIndex == 0){    
+      if(cityIndex == 0){
           return 1;
       }else{
         cityIndex = cityIndex - 1;
@@ -913,7 +913,7 @@ firstapp.filter('fromCalculation', function () {
       }
     }else {       //when more than 1 countries selected
       if(cityIndex>=0){
-        cityIndex = cityIndex - 1;  
+        cityIndex = cityIndex - 1;
         while (countryIndex >= 0) {
           while (cityIndex >= 0) {
             sum = sum + country[countryIndex].cityVisited[cityIndex].duration;

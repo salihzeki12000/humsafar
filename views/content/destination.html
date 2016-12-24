@@ -35,11 +35,10 @@
         <div class="head-title">
           <h4 class="fnt-42 brdbtm alpha-color mt-clear text-uppercase">{{viewListByKey}}</h4>
         </div>
-        <div class="destination-holder relate pt20 pr20">
+        <div class="destination-holder main-destination-page relate pt20 pr20">
           <div class="row">
             <div class="col-md-6"  ng-repeat="dest in destinationList track by $index" ng-if="dest.isCity==true">
-              <div class="img-holder relate">
-                <img ng-src="{{dest.cityCoverPhoto|uploadpath}}" alt="travel-libro" class="full-width">
+              <div class="img-holder relate" style="background:url('{{dest.cityCoverPhoto|uploadpath}}');">
                 <div class="title-head-left color-white">
                   {{dest.name}}
                 </div>
@@ -57,94 +56,19 @@
               </div>
             </div>
             <div class="col-md-6"  ng-repeat="dest in destinationList track by $index" ng-if="dest.isCity==false">
-              <div class="img-holder relate">
-                <img ng-src="{{dest.countryCoverPhoto|uploadpath}}" alt="travel-libro" class="full-width">
+              <div class="img-holder relate" style="background:url('{{dest.countryCoverPhoto|uploadpath}}');">
+                <!-- <img ng-src="{{dest.countryCoverPhoto|uploadpath}}" alt="travel-libro" class="full-width"> -->
                 <div class="title-head-left color-white">
                   {{dest.name}}
                 </div>
                 <div class="title-head-right color-white">
                   <img ng-src="{{dest.flag|uploadpath}}"   alt="Travelibro">
                 </div>
-
                 <div class="read-more left-bottom">
                   <ul class="list-inline">
                     <li class="avenir-roman color-white">Cities: <span class="avenir-heavy">{{dest.cityCount}}</span> </li>
                     <li class="avenir-heavy color-white">|</li>
                     <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">{{dest.itineraryCount}}</span> </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6" hidden>
-              <div class="img-holder relate">
-                <img src="img/destination/taj-featured.jpg" alt="travel-libro" class="full-width">
-                <div class="title-head-left color-white">
-                  Mumbai
-                </div>
-                <div class="title-head-right color-white">
-                  India
-                  <img src="img/destination/flag.png" alt="Travelibro">
-                </div>
-                <div class="read-more left-bottom">
-                  <ul class="list-inline">
-                    <li class="avenir-roman color-white">Must Do’s: <span class="avenir-heavy">33</span> </li>
-                    <li class="avenir-heavy color-white">|</li>
-                    <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">222</span> </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6" hidden>
-              <div class="img-holder relate">
-                <img src="img/destination/goldentemple.jpg" alt="travel-libro" class="full-width">
-                <div class="title-head-left color-white">
-                  India
-                </div>
-                <div class="title-head-right color-white">
-                  <img src="img/destination/flag.png" alt="Travelibro">
-                </div>
-                <div class="read-more left-bottom">
-                  <ul class="list-inline">
-                    <li class="avenir-roman color-white">Cities: <span class="avenir-heavy">33</span> </li>
-                    <li class="avenir-heavy color-white">|</li>
-                    <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">222</span> </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6" hidden>
-              <div class="img-holder relate">
-                <img src="img/destination/taj-featured.jpg" alt="travel-libro" class="full-width">
-                <div class="title-head-left color-white">
-                  Mumbai
-                </div>
-                <div class="title-head-right color-white">
-                  India
-                  <img src="img/destination/flag.png" alt="Travelibro">
-                </div>
-                <div class="read-more left-bottom">
-                  <ul class="list-inline">
-                    <li class="avenir-roman color-white">Must Do’s: <span class="avenir-heavy">33</span> </li>
-                    <li class="avenir-heavy color-white">|</li>
-                    <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">222</span> </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12" hidden>
-              <div class="img-holder relate">
-                <img src="img/destination/taj-featured.jpg" alt="travel-libro" class="full-width">
-                <div class="title-head-left color-white">
-                  India
-                </div>
-                <div class="title-head-right color-white">
-                  <img src="img/destination/flag.png" alt="Travelibro">
-                </div>
-                <div class="read-more left-bottom">
-                  <ul class="list-inline">
-                    <li class="avenir-roman color-white">Must Do’s: <span class="avenir-heavy">33</span> </li>
-                    <li class="avenir-heavy color-white">|</li>
-                    <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">222</span> </li>
                   </ul>
                 </div>
               </div>
@@ -155,31 +79,6 @@
               <li ng-repeat="countryKey in countryDestList track by $index" ng-click="searchDestination(countryKey)">
                 <a href="" class="color-grey-apha">{{countryKey}}</a>
               </li>
-              <!-- <li><a href="" class="color-grey-apha">B</a></li>
-              <li><a href="" class="color-grey-apha">C</a></li>
-              <li><a href="" class="color-grey-apha">D</a></li>
-              <li><a href="" class="color-grey-apha">E</a></li>
-              <li><a href="" class="color-grey-apha">F</a></li>
-              <li><a href="" class="color-grey-apha">G</a></li>
-              <li><a href="" class="color-grey-apha">H</a></li>
-              <li><a href="" class="color-grey-apha">I</a></li>
-              <li><a href="" class="color-grey-apha">J</a></li>
-              <li><a href="" class="color-grey-apha">K</a></li>
-              <li><a href="" class="color-grey-apha">L</a></li>
-              <li><a href="" class="color-grey-apha">M</a></li>
-              <li><a href="" class="color-grey-apha">N</a></li>
-              <li><a href="" class="color-grey-apha">O</a></li>
-              <li><a href="" class="color-grey-apha">P</a></li>
-              <li><a href="" class="color-grey-apha">Q</a></li>
-              <li><a href="" class="color-grey-apha">R</a></li>
-              <li><a href="" class="color-grey-apha">S</a></li>
-              <li><a href="" class="color-grey-apha">T</a></li>
-              <li><a href="" class="color-grey-apha">U</a></li>
-              <li><a href="" class="color-grey-apha">V</a></li>
-              <li><a href="" class="color-grey-apha">W</a></li>
-              <li><a href="" class="color-grey-apha">X</a></li>
-              <li><a href="" class="color-grey-apha">Y</a></li>
-              <li><a href="" class="color-grey-apha">Z</a></li> -->
             </ul>
           </div>
         </div>

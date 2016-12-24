@@ -340,6 +340,23 @@ a.color-white {
     }
   }
 
+  .destination-holder {
+    &.main-destination-page {
+      .img-holder {
+        height: 300px;
+        background-position: center center !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+      }
+      .col-md-6:nth-of-type(5n) {
+        width: 100%;
+        .img-holder {
+          height: 400px;
+        }
+      }
+    }
+  }
+
   .img-holder {
     margin-bottom: 20px;
     border-radius: 5px;
@@ -1300,8 +1317,9 @@ a.color-white {
 .addfixed {
   .destin-fixednav {
     position: fixed;
-    top: 80px;
+    top: 60px;
     z-index: 9;
+    width: 100%;
   }
 
   .destin-fixednav1 {
@@ -1393,12 +1411,16 @@ a.color-white {
     left: -146px;
   }
 
-  .destination-content .img-holder.card .back .flipped-cont {
-    overflow: scroll;
-  }
+  .destination-content {
+    .img-holder.card {
+      .back .flipped-cont {
+        overflow: scroll;
 
-  .destination-content .img-holder.card .back .flipped-cont::-webkit-scrollbar {
-    display: none;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+    }
   }
 }
 @media screen and (max-width: 767px) {
