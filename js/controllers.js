@@ -1995,6 +1995,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Destination");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.destinationList = [];
+  $scope.viewListByKey = "A";
+
+  NavigationService.getDestination({
+    search: "a",
+    searchText: ""
+  },function(data){
+    $scope.destinationList = data.data;
+  })
+  $scope.searchDestination = function(searchVal){
+    $scope.viewListByKey = searchVal.charAt(0);
+    NavigationService.getDestination({
+      search: searchVal,
+      searchText: ""
+    },function(data){
+      $scope.destinationList = data.data;
+    })
+  };
+  $scope.countryDestList = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
   })
 
 .controller('DestinationCountryCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
@@ -6821,7 +6840,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           //       n1.flag=true;
           //     }else{
           //       n1.flag=false;
-          //     }              
+          //     }
           //   });
           // });
 
