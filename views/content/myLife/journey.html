@@ -96,7 +96,7 @@
                           <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                          <span>{{life.timestampHour}}</span></p>
                       </div>
                       <!--jounrey main detail card-->
-                      <div class="travelled-journey relate" ng-click="testing(life.type,life.urlSlug)">
+                      <div class="travelled-journey relate" ng-click="routeTO(life.type,life.urlSlug)">
                         <div class="travelled-imgholder">
                           <img ng-src="{{life.coverPhoto|uploadpath}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto!=null">
                           <img ng-src="{{life.startLocationPic|small|uploadpath}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto==null">
@@ -201,7 +201,7 @@
                           <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                          <span>{{life.timestampHour}}</span></p>
                       </div>
                       <!--for itinerary card main-->
-                      <div class="onway-journey relate" ng-click="testing(life.type,life.urlSlug)">
+                      <div class="onway-journey relate" ng-click="routeTO(life.type,life.urlSlug)">
                         <div class="onway-imgholder">
                           <img ng-src="{{life.imgOnway}}" alt="" class="img-responsive m-center">
                         </div>
@@ -262,7 +262,8 @@
                             <!--temporary edit button dropdown-->
                             <div class="edit-kind-journey" ng-show="editItinerary">
                               <ul>
-                                <li><a ui-sref="quickitinerary({flag:'edit',urlSlug:life.urlSlug})">Edit Itinerary</a></li>
+                                <li ng-if="life.type=='quick-itinerary'"><a ui-sref="quickitinerary({flag:'edit',urlSlug:life.urlSlug})">Edit Itinerary</a></li>
+                                <li ng-if="life.type=='detail-itinerary'"><a ui-sref="detailitinerary({flag:'edit',urlSlug:life.urlSlug})">Edit Itinerary</a></li>                                
                               </ul>
                             </div>
                              <!--temporary edit button dropdown-->

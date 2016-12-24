@@ -3,7 +3,7 @@ var itinerary = angular.module('itinerary', [])
 .factory('Itinerary', function ($http, $filter) {
 
   return {
-    getOneQuickItinerary: function (slug, callback) {
+    getOneItinerary: function (slug, callback) {    //get Quick/detail itinerary
       $http({
         url: adminURL + "/itinerary/getOneWeb",
         method: "POST",
