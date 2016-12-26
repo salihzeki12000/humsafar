@@ -661,7 +661,7 @@ header {
   &.addfixed {
     background: rgba(0, 0, 0, 0.6);
   }
-  
+
 }
 
 .navbar {
@@ -3909,7 +3909,7 @@ header {
   border-radius: 8px;
   // box-shadow: 1px 4px 5px #ccc;
   box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.19);
-  background-color: #fff;
+  background-color: rgba(255,255,255,0.75);
   .user-social-item {
     padding: 12px 0 15px;
   }
@@ -4109,6 +4109,7 @@ header {
 
 .related-imgslider {
   padding: 10px 23px 10px 10px;
+  .flexslider { background-color: transparent; }
   .flex-direction-nav a {
     @include square(15px);
     color: transparent;
@@ -4193,7 +4194,7 @@ header {
   .join-card {
     padding: 15px 10px;
     border-radius: 6px;
-    background-color: $brand-dark-pink;
+    background-color: rgba(242, 103, 91, 0.75);
   }
   h4 {
     margin: 0 0 5px;
@@ -4297,7 +4298,7 @@ header {
     padding: 20px 10px;
     border-radius: 6px;
     @include transform(rotate(-2deg));
-    background-color: $brand-dark-pink;
+    background-color: rgba(242, 103, 91, 0.75);
   }
   h4 {
     margin: 0;
@@ -4316,7 +4317,7 @@ header {
   .journey-end {
     padding: 20px 10px;
     border-radius: 6px;
-    background-color: $brand-dark-pink;
+    background-color: rgba(242, 103, 91, 0.75);
   }
   h4 {
     margin: 0 0 5px;
@@ -4508,11 +4509,11 @@ header {
   top: 60px;
   right: -450px;
   background-color: #fff;
-  @include transform(all 900ms linear);
+  @include transition(all 300ms linear);
 }
-.view-whole-card {
+.whole-card-comment.view-whole-card {
   right: 0;
-  @include transform(all 900ms linear);
+  @include transition(all 300ms linear);
 }
 // comment whole card end
 // pop up journey used
@@ -7305,7 +7306,7 @@ header {
   position: fixed;
   top: 0;
   z-index: 2;
-  background-color: rgba(182,212,255,0.7);
+  background-color: rgba(0,0,0,0.4);
   &:before {
     content: '';
     width: 30px;
