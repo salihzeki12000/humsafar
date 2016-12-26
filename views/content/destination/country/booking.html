@@ -65,7 +65,7 @@
             <div class="hotel-card-holder relate">
               <div class="blur-overlay-bg-div"></div>
               <!-- flipper holder -->
-              <div class="hotel-flipper-holder">
+              <div class="hotel-flipper-holder {{showBackCard}}">
                 <!-- hotel front view -->
                 <div class="hotel-front-view">
                   <div class="row m-clear">
@@ -149,7 +149,7 @@
                         <div class="see-detail">
                           <div class="clearfix">
                             <div class="pull-left">
-                              <span class="view-detail view-card-detail pointer" data-req="wait">
+                              <span class="view-detail view-card-detail pointer"ng-click="backView();">
                                     See All Details <i class="fa fa-chevron-down"></i>
                                   </span>
                             </div>
@@ -166,8 +166,9 @@
                 <!-- hotel front view -->
                 <!-- hotel back view -->
                 <div class="hotel-back-view">
-                  <div class="get-center">
-                    <img src="/assets/Untitled-1.gif">
+                  <div class="">
+                    <!-- <img src="/assets/Untitled-1.gif"> -->
+                    <span ng-click="backView();"><i class="fa fa-times"></i></span>
                   </div>
                 </div>
                 <!-- hotel back view end-->
