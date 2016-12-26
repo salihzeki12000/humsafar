@@ -370,6 +370,28 @@ firstapp.directive('scrolldown', function($compile, $parse) {
   };
 });
 
+
+firstapp.directive('scroll', function($window) {
+  return {
+    restrict: 'EA',
+    replace: false,
+    link: function($scope, element, attrs) {
+      var $element = $(element);
+      var divslide5 = $('#slide5')[0].scrollHeight;
+      var winTop = $(window).scrollTop();
+      console.log(winTop);
+      console.log(divslide5);
+      angular.element($window).bind("scroll", function() {
+        console.log(divslide5 - 1);
+        if (winTop > divslide5) {
+          scope.active = true;
+          console.log("all done");
+        }
+      });
+    }
+  };
+});
+
 firstapp.directive("scrolladdclass", function($window) {
   return function(scope, element, attrs) {
     angular.element($window).bind("scroll", function() {

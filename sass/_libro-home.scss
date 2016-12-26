@@ -38,11 +38,6 @@ body {
   width: 100%;
   z-index: 2;
 }
-
-.shadow * {
-  @extend .text-shadow;
-}
-
 body.fp-.fp-viewing-4 {
   .slide4-none {
     @include transition(all ease 300ms);
@@ -1022,8 +1017,8 @@ a.color-white {
     img {
       position: absolute;
       right: 75px;
-      height: 55px;
-      top: -15px;
+      height: 50px;
+      top: 0px;
     }
   }
 
