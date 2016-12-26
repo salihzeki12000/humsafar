@@ -41,8 +41,7 @@
   margin-top: 30px;
 }
 
-
-.agent-login-failbackdrop:before{
+.agent-login-failbackdrop:before {
   content: "";
   position: fixed;
   top: 0;
@@ -64,7 +63,7 @@
     margin: 0;
   }
 
-  .veri-error-btn{
+  .veri-error-btn {
     margin: 40px 0;
   }
 }
@@ -592,7 +591,7 @@
   display: inline-block;
   padding: 0;
   margin: 0;
-  transform: translateX(-50%);
+    @include transform(translateX(-50%));
 }
 
 .agt-title-card {
@@ -611,7 +610,7 @@
   position: absolute;
   left: 50%;
   top: -20%;
-  transform: translateX(-50%);
+    @include transform(translateX(-50%));
 }
 //AGENT USER ITENERARY END
 //AGENT USER ITENERARY END
@@ -689,7 +688,7 @@
 .activity-img,
 .itinerary-img {
   position: relative;
-  min-height: 250px;
+  min-height: 225px;
 }
 
 .itinerary-imgfoot {
@@ -744,8 +743,19 @@
 .agt-usr-tourpackages {
   .country-holder {
     width: 30px;
-    margin-left: -10px;
-    display: inline-block;
+    height: 30px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #fff;
+
+    img {
+      max-width: initial;
+      max-height: 100%;
+      border-radius: 50%;
+      position: absolute;
+      left: 50%;
+      @include transform(translateX(-50%));
+    }
   }
 }
 
@@ -1277,7 +1287,7 @@ q {
   position: absolute;
   bottom: -20px;
   left: 50%;
-  transform: translateX(-50%);
+    @include transform(translateX(-50%));
 }
 
 .upgrade-card {
@@ -1492,7 +1502,7 @@ q {
 
   &::before {
     border-color: #2d3655 transparent transparent;
-    transform: translateX(-50%);
+      @include transform(translateX(-50%));
     width: 0;
     border-style: solid;
     border-width: 10px 10px 0;
@@ -1574,7 +1584,7 @@ q {
     width: 100%;
     overflow: hidden;
     height: 100px;
-      padding: 6px 12px;
+    padding: 6px 12px;
   }
 }
 
@@ -1608,7 +1618,7 @@ q {
   padding: 15px;
 }
 
-.agent-upgrade{
+.agent-upgrade {
   @extend .avenir-roman;
 }
 

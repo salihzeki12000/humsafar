@@ -2358,6 +2358,78 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, ]
     }, ];
 
+
+    // tour packages card
+    $scope.usrTourPackageCard = [{
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryTitle: 'Adventure',
+      tourcategoryImg: 'img/agt-cat1.png',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat5.png',
+      tourcategoryTitle: 'Backpacking',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat4.png',
+      tourcategoryTitle: 'Romance',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat9.png',
+      tourcategoryTitle: 'Friends',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat1.png',
+      tourcategoryTitle: 'Adventure',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/canada-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat7.png',
+      tourcategoryTitle: 'Luxury',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/review-country.png']
+    }];
+    // tour packages card end
+
+
   })
   .controller('DestinationCityCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
@@ -7990,7 +8062,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
     //Integration starts here
-    
+
     $scope.userData = $.jStorage.get("profile");
 
     //get quick-itinerary details starts

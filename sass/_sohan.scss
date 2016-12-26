@@ -94,6 +94,36 @@ a.color-white {
     position: relative;
   }
 
+  .booking-sec-card {
+    .agt-usr-tourpackages {
+      padding: 0;
+
+      .theme {
+        left: 50px;
+        border: 0;
+      }
+
+      .logo-booking-card {
+        top: -15px;
+        left: 10px;
+        height: 35px;
+        width: 35px;
+        overflow: hidden;
+        position: absolute;
+
+        img {
+          max-width: 30px;
+          max-height: 30px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          @include transform (translate(-50%,-50%));
+          padding: 4px;
+        }
+      }
+    }
+  }
+
   .bg-destination {
     background: url('../img/destination/bg-destination.jpg') no-repeat;
     z-index: 2;
@@ -1584,8 +1614,9 @@ a.color-white {
       height: 38px;
     }
   }
-  .home-slide{
-    .section.one{
+
+  .home-slide {
+    .section.one {
       background: url('../img/home-mobile-1.jpg');
     }
   }

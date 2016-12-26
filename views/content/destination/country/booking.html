@@ -6,8 +6,60 @@
   </div>
   <div class="booking-sec-card">
     <div class="container">
+            <!-- Tours and Excursions End  -->
+      <div class="title-head-left">
+        <h4 class="uppercase">Tours and Excursions</h4>
+      </div>
+      <div class="agt-usr-tourpackages">
+        <div class="row">
+          <div class="col-md-4 col-sm-6" ng-repeat="tourcard in usrTourPackageCard track by $index">
+            <div class="agt-itinerarycard">
+              <div class="itinerary-img">
+                <div class="logo-booking-card">
+                  <img ng-src="{{tourcard.tourcategoryImg}}" alt="travel-libro">
+                </div>
+                <div class="theme">
+                  <div class="theme-img">
+                    <img ng-src="{{tourcard.tourcategoryImg}}" class="img-responsive" alt="">
+                  </div>
+                  <div class="theme-name">
+                    <p>{{tourcard.tourcategoryTitle}}</p>
+                  </div>
+                </div>
+                <div class="country-badges">
+                  <div class="country-holder img-circle" ng-repeat="tourcountryflagbadge in tourcard.tourcountryBadgesFlag track by $index">
+                    <img ng-src="{{tourcountryflagbadge}}" alt="" class="img-responsive">
+                  </div>
+                </div>
+                <img ng-src="{{tourcard.tourImg}}" alt="" class="img-responsive">
+                <div class="itinerary-imgfoot ">
+                  <div class="imgfoot-top clearfix">
+                    <div class="pull-left">
+                      <h4 class="font-sz18">{{tourcard.agttourTitle}}</h4>
+                      <p class="day-night"><span>{{tourcard.tourNightC}} Nights</span> | <span>{{tourcard.tourDayC}} Days</span></p>
+                      <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{tourcard.tourDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{tourcard.tourTime}}</span></p>
+                    </div>
+                    <div class="pull-right">
+                      <p class="font-sz18 cost-posi">${{tourcard.agttourCost}}</p>
+                    </div>
+                    <button class="btn btn-pink btn-download">Download</button>
+                    <button class="btn btn-pink btn-book">Book</button>
+                  </div>
+                </div>
+                <div class="call-btn" ng-click="showContact();">
+                  <i class="fa fa-phone" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Tours and Excursions End  -->
       <!-- destination hotel card -->
-      <div class="destination-hotel-card ">
+      <div class="destination-hotel-card">
+        <div class="title-head-left">
+          <h4 class="uppercase">Hotels</h4>
+        </div>
         <div class="row">
           <div class="col-md-6">
             <div class="hotel-card-holder relate">
@@ -242,6 +294,9 @@
       <!-- destination hotel card end-->
       <!-- vacation rentals -->
       <div class="destination-hotel-card destination-vaction-card">
+        <div class="title-head-left">
+          <h4 class="uppercase">Vaction Rentals</h4>
+        </div>
         <div class="row">
           <div class="col-md-6">
             <div class="vacation-card-list">
@@ -336,6 +391,9 @@
       <!-- vacation rentals end-->
       <!-- homestay card -->
       <div class="destination-hotel-card destination-homestay-card">
+        <div class="title-head-left">
+          <h4 class="uppercase">Homestays</h4>
+        </div>
         <div class="row">
           <div class="col-md-6">
             <div class="hotel-card-holder relate">
@@ -370,34 +428,34 @@
                           </span></h5>
                           <div class="rate-by-star">
                             <ul class="list-inline">
-                                <li><i class="fa fa-star color-white"></i></li>
-                                <li><i class="fa fa-star color-white"></i></li>
-                                <li><i class="fa fa-star color-white"></i></li>
-                                <li><i class="fa fa-star color-white"></i></li>
-                                <li><i class="fa fa-star-o color-white"></i></li>
+                              <li><i class="fa fa-star color-white"></i></li>
+                              <li><i class="fa fa-star color-white"></i></li>
+                              <li><i class="fa fa-star color-white"></i></li>
+                              <li><i class="fa fa-star color-white"></i></li>
+                              <li><i class="fa fa-star-o color-white"></i></li>
                             </ul>
                             <!-- <span class="hotel-review ml10">12 <span>Reviews</span></span> -->
                           </div>
                         </div>
                         <!-- hotel heading -->
                         <!-- hotel chart -->
-                          <div class="hotel-chart-main homestay-hotel-chart">
-                            <div class="homestay-hotel-info">
-                              <div class="homestay-hotel-distance">
-                                <p class="m-clear"><span class="homestay-distance">6.6 Km</span>
+                        <div class="hotel-chart-main homestay-hotel-chart">
+                          <div class="homestay-hotel-info">
+                            <div class="homestay-hotel-distance">
+                              <p class="m-clear"><span class="homestay-distance">6.6 Km</span>
                                 <span>Distance From Center</span></p>
-                              </div>
-                              <div class="homestay-hotel-cost">
-                                <p class="m-clear"><span class="homestay-price">1,900 INR</span>
-                                <span>Price Per Night</span></p>
-                              </div>
-                              <!-- see detail temporary -->
-                              <div class="see-detail text-left">
-                                <span class="view-detail view-card-detail pointer" data-title="deepwelcome" data-req="wait">See All Details <i class="fa fa-chevron-down"></i> </span>
-                              </div>
-                              <!-- see detail temporary end -->
                             </div>
+                            <div class="homestay-hotel-cost">
+                              <p class="m-clear"><span class="homestay-price">1,900 INR</span>
+                                <span>Price Per Night</span></p>
+                            </div>
+                            <!-- see detail temporary -->
+                            <div class="see-detail text-left">
+                              <span class="view-detail view-card-detail pointer" data-title="deepwelcome" data-req="wait">See All Details <i class="fa fa-chevron-down"></i> </span>
+                            </div>
+                            <!-- see detail temporary end -->
                           </div>
+                        </div>
                         <!-- hotel chart end-->
                         <!-- hotel see detail and button -->
                         <div class="see-detail">
@@ -407,7 +465,8 @@
                               <!-- <span class="view-detail view-card-detail pointer">See All Details <i class="fa fa-chevron-down"></i></span> -->
                             </div>
                             <div class="pull-right">
-                              <a href="/bookings/home-stays-redirect?referer=hotels&amp;url=https%3A%2F%2Faffiliate.homestay.com%2Findia%2Fpune%2F75432-homestay-in-vishrantwadinear-dighi-jakat-naka-pune%3Futm_medium%3Daffiliate%26utm_source%3Dtravelibro-online-private-limited-global" target="_blank">
+                              <a href="/bookings/home-stays-redirect?referer=hotels&amp;url=https%3A%2F%2Faffiliate.homestay.com%2Findia%2Fpune%2F75432-homestay-in-vishrantwadinear-dighi-jakat-naka-pune%3Futm_medium%3Daffiliate%26utm_source%3Dtravelibro-online-private-limited-global"
+                                  target="_blank">
                                 <button class="btn btn-deal">View Deal</button>
                               </a>
                             </div>
@@ -461,34 +520,34 @@
                           </span></h5>
                           <div class="rate-by-star">
                             <ul class="list-inline">
-                                <li><i class="fa fa-star color-white"></i></li>
-                                <li><i class="fa fa-star color-white"></i></li>
-                                <li><i class="fa fa-star color-white"></i></li>
-                                <li><i class="fa fa-star color-white"></i></li>
-                                <li><i class="fa fa-star-o color-white"></i></li>
+                              <li><i class="fa fa-star color-white"></i></li>
+                              <li><i class="fa fa-star color-white"></i></li>
+                              <li><i class="fa fa-star color-white"></i></li>
+                              <li><i class="fa fa-star color-white"></i></li>
+                              <li><i class="fa fa-star-o color-white"></i></li>
                             </ul>
                             <!-- <span class="hotel-review ml10">12 <span>Reviews</span></span> -->
                           </div>
                         </div>
                         <!-- hotel heading -->
                         <!-- hotel chart -->
-                          <div class="hotel-chart-main homestay-hotel-chart">
-                            <div class="homestay-hotel-info">
-                              <div class="homestay-hotel-distance">
-                                <p class="m-clear"><span class="homestay-distance">6.6 Km</span>
+                        <div class="hotel-chart-main homestay-hotel-chart">
+                          <div class="homestay-hotel-info">
+                            <div class="homestay-hotel-distance">
+                              <p class="m-clear"><span class="homestay-distance">6.6 Km</span>
                                 <span>Distance From Center</span></p>
-                              </div>
-                              <div class="homestay-hotel-cost">
-                                <p class="m-clear"><span class="homestay-price">1,900 INR</span>
-                                <span>Price Per Night</span></p>
-                              </div>
-                              <!-- see detail temporary -->
-                              <div class="see-detail text-left">
-                                <span class="view-detail view-card-detail pointer" data-title="deepwelcome" data-req="wait">See All Details <i class="fa fa-chevron-down"></i> </span>
-                              </div>
-                              <!-- see detail temporary end -->
                             </div>
+                            <div class="homestay-hotel-cost">
+                              <p class="m-clear"><span class="homestay-price">1,900 INR</span>
+                                <span>Price Per Night</span></p>
+                            </div>
+                            <!-- see detail temporary -->
+                            <div class="see-detail text-left">
+                              <span class="view-detail view-card-detail pointer" data-title="deepwelcome" data-req="wait">See All Details <i class="fa fa-chevron-down"></i> </span>
+                            </div>
+                            <!-- see detail temporary end -->
                           </div>
+                        </div>
                         <!-- hotel chart end-->
                         <!-- hotel see detail and button -->
                         <div class="see-detail">
@@ -498,7 +557,8 @@
                               <!-- <span class="view-detail view-card-detail pointer">See All Details <i class="fa fa-chevron-down"></i></span> -->
                             </div>
                             <div class="pull-right">
-                              <a href="/bookings/home-stays-redirect?referer=hotels&amp;url=https%3A%2F%2Faffiliate.homestay.com%2Findia%2Fpune%2F75432-homestay-in-vishrantwadinear-dighi-jakat-naka-pune%3Futm_medium%3Daffiliate%26utm_source%3Dtravelibro-online-private-limited-global" target="_blank">
+                              <a href="/bookings/home-stays-redirect?referer=hotels&amp;url=https%3A%2F%2Faffiliate.homestay.com%2Findia%2Fpune%2F75432-homestay-in-vishrantwadinear-dighi-jakat-naka-pune%3Futm_medium%3Daffiliate%26utm_source%3Dtravelibro-online-private-limited-global"
+                                  target="_blank">
                                 <button class="btn btn-deal">View Deal</button>
                               </a>
                             </div>
