@@ -2036,6 +2036,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    $scope.showBackCard = "";
+    $scope.backView = function () {
+      if ($scope.showBackCard === "") {
+        $scope.showBackCard = "flip-card";
+      } else {
+        $scope.showBackCard = "";
+      }
+    };
+
     var alldestination = ["views/content/destination/country/featured.html", "views/content/destination/country/mustdo.html", "views/content/destination/country/itineraries.html", "views/content/destination/country/booking.html", "views/content/destination/country/visit.html"];
     $scope.destination = {
       innerView: alldestination[0]
@@ -7770,21 +7779,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //get quick-itinerary details ends
 
     //post quick-itinerary comments starts
+    $scope.commentText = {};
     $scope.postItineraryComment = function (_id, uniqueId, text) {
       console.log(_id, uniqueId, text);
-      var obj = {
-        "itinerary": _id,
-        "uniqueId": uniqueId,
-        "text": text,
-        "type": "itinerary",
-        "hashtag": []
-      };
-
-      Itinerary.postItineraryComment(obj, function (data) {
+      Itinerary.postItineraryComment(_id, uniqueId, text, function (data) {
         console.log(data);
-      })
+        Itinerary.getOneItinerary(slug, function (data) {
+          $scope.itinerary.comment = data.data.comment;
+          console.log($scope.itinerary);
+          $scope.commentText.text = "";
+        });
+      });
     };
     //post quick-itinerary comments ends
+
+
 
     //like-unlike itinerary starts
     $scope.likeUnlikeItinerary = function (flag, _id, uniqueId) {
@@ -8081,6 +8090,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     //like-unlike itinerary ends
+
+    //post detail-itinerary comments starts
+    $scope.commentText = {};
+    $scope.postItineraryComment = function (_id, uniqueId, text) {
+      console.log(_id, uniqueId, text);
+      Itinerary.postItineraryComment(_id, uniqueId, text, function (data) {
+        console.log(data);
+        Itinerary.getOneItinerary(slug, function (data) {
+          $scope.itinerary.comment = data.data.comment;
+          console.log($scope.itinerary);
+          $scope.commentText.text = "";
+        });
+      });
+    };
+    //post detail-itinerary comments ends
+
 
     //Integration starts here
 

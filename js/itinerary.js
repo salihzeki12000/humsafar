@@ -14,7 +14,14 @@ var itinerary = angular.module('itinerary', [])
         callback(data);
       });
     },
-    postItineraryComment: function (obj, callback) {
+    postItineraryComment: function (_id, uniqueId, text, callback) {
+       var obj = {
+        "itinerary": _id,
+        "uniqueId": uniqueId,
+        "text": text,
+        "type": "itinerary",
+        "hashtag": []
+      };
       $http({
         url: adminURL + "/comment/addCommentWeb",
         method: "POST",
@@ -104,3 +111,14 @@ var itinerary = angular.module('itinerary', [])
     }
   };
 });
+
+itinerary.filter('whoIsThis',function(){
+  return function(name,commentedUserId,profileId){
+    console.log(name,commentedUserId,profileId);
+    if(commentedUserId==profileId){
+      return "You";
+    }else{
+      return name;
+    }
+  }
+})
