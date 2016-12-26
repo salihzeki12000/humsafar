@@ -349,7 +349,7 @@ a.color-white {
         background-repeat: no-repeat !important;
       }
 
-      .col-md-6:nth-of-type(5n) {
+      .col-sm-6:nth-of-type(5n) {
         width: 100%;
 
         .img-holder {
@@ -1582,6 +1582,11 @@ a.color-white {
 
     .cycle-section3 {
       height: 38px;
+    }
+  }
+  .home-slide{
+    .section.one{
+      background: url('../img/home-mobile-1.jpg');
     }
   }
 }
