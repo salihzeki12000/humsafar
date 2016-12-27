@@ -2024,16 +2024,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    // destination country
+     // destination country city
     $scope.countryView = function(url,isCity){
       if(isCity === false){
         $state.go("destinationcountry",{
           name: "featured",
           url: url
         });
+      }else {
+        $state.go("destinationcity",{
+          name: "mustdo",
+          url: url
+        })
       }
     }
-    // destination country end
+    // destination country city end
+
 
   })
 
@@ -2439,6 +2445,51 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
     // tour packages card end
 
+    //contact us
+    $scope.viewContact = false;
+    $scope.getBackdrop = "";
+    $scope.showContact = function() {
+      // console.log("click");
+      if ($scope.viewContact == false) {
+        $scope.getBackdrop = "backdrop-enquiry";
+        $scope.viewContact = true;
+      } else {
+        $scope.viewContact = false;
+        $scope.getBackdrop = "";
+      }
+    };
+    //contact us end
+
+
+    //bookings photos
+    $scope.bookingPhoto = [{
+      img: 'img/hotel.jpg',
+    }, {
+      img: 'img/hotel1.jpg',
+    }, {
+      img: 'img/hotel2.jpg',
+    }, {
+      img: 'img/hotel.jpg',
+    }, {
+      img: 'img/hotel1.jpg',
+    }, {
+      img: 'img/hotel2.jpg',
+    }];
+
+    $scope.bookingPhoto = _.chunk($scope.bookingPhoto, 2);
+
+
+
+  $scope.$on('$viewContentLoaded', function(event) {
+      setTimeout(function() {
+        var swiper = new Swiper('.swiper-container', {
+          pagination: '.swiper-pagination',
+          slidesPerView: 2,
+          paginationClickable: true,
+          spaceBetween: 5
+        });
+      }, 500);
+    })
 
   })
   .controller('DestinationCityCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
@@ -2451,6 +2502,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    $scope.urlDestinationCity = $state.params.url;
+    $scope.getCityInfo = function(type,urlSlug){
+      NavigationService.getCityDestination({
+        type: type,
+        urlSlug: $scope.urlDestinationCity
+      }, function(data){
+        $scope.cityDestData = data.data;
+        console.log($scope.cityDestData,"destination city ka data");
+      })
+    }
+
+
     var alldestination = ["views/content/destination/city/mustdo.html", "views/content/destination/city/hotels.html", "views/content/destination/city/restaurants.html", "views/content/destination/city/itineraries.html", "views/content/destination/city/booking.html", "views/content/destination/city/visit.html"];
     $scope.destination = {
       innerView: alldestination[0]
@@ -2462,6 +2525,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     switch ($state.params.name) {
       case "mustdo":
         $scope.destination.innerView = alldestination[0];
+        $scope.getCityInfo("mustDo",$scope.urlDestinationCity);
         $scope.cityoptions.active = "mustdo";
         break;
       case "hotels":
@@ -2496,6 +2560,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         case 0:
           url = "mustdo";
           $scope.cityoptions.active = "mustdo";
+          $scope.getCityInfo("mustDo",$scope.urlDestinationCity);
           break;
         case 1:
           url = "hotels";
@@ -3549,6 +3614,53 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       name: 'Zimbabwe',
       code: 'ZW'
     }];
+
+    //contact us
+    $scope.viewContact = false;
+    $scope.getBackdrop = "";
+    $scope.showContact = function() {
+      // console.log("click");
+      if ($scope.viewContact == false) {
+        $scope.getBackdrop = "backdrop-enquiry";
+        $scope.viewContact = true;
+      } else {
+        $scope.viewContact = false;
+        $scope.getBackdrop = "";
+      }
+    };
+    //contact us end
+
+
+    //bookings photos
+    $scope.bookingPhoto = [{
+      img: 'img/hotel.jpg',
+    }, {
+      img: 'img/hotel1.jpg',
+    }, {
+      img: 'img/hotel2.jpg',
+    }, {
+      img: 'img/hotel.jpg',
+    }, {
+      img: 'img/hotel1.jpg',
+    }, {
+      img: 'img/hotel2.jpg',
+    }];
+
+    $scope.bookingPhoto = _.chunk($scope.bookingPhoto, 2);
+
+
+
+  $scope.$on('$viewContentLoaded', function(event) {
+      setTimeout(function() {
+        var swiper = new Swiper('.swiper-container', {
+          pagination: '.swiper-pagination',
+          slidesPerView: 2,
+          paginationClickable: true,
+          spaceBetween: 5
+        });
+      }, 500);
+    })
+
   })
 
 
@@ -8117,12 +8229,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //post detail-itinerary comments ends
     $scope.country={};
     $scope.city={};
+    $scope.previousId={};
     $scope.updateOpenStatus = function (groups) {
-      console.log(groups);
+     
       $scope.isOpen = groups.some(function (item) {
-        console.log($scope.isOpen);
+        console.log($scope.previousId,item);
+       if($scope.previousId==item){
+          item.isOpen=!item.isOpen;
+       }else{
+          $scope.previousId.isOpen=false;
+          item.isOpen=!item.isOpen;
+       }
+        $scope.previousId=item;
         return item.isOpen;
       });
+      console.log($scope.isOpen);
+      
     }
 
     //Integration starts here

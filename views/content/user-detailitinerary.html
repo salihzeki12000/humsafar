@@ -141,7 +141,7 @@
               <!-- trip accordion heading end-->
               <div class="listing-accordion">
                 <uib-accordion close-other="oneAtATime">
-                  <uib-accordion-group  is-open="city.isOpen" ng-click="updateOpenStatus(country.cityVisited)" ng-repeat="city in country.cityVisited">
+                  <uib-accordion-group  is-open="city.isOpen" ng-repeat="city in country.cityVisited" ng-scroll="city in country.cityVisited">
                     <uib-accordion-heading class="relate">
                       <div class="journey-accordion-heading color-white">
                         <div class="clearfix">
