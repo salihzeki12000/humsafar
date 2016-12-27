@@ -854,6 +854,47 @@ a.color-white {
     padding: 20px 15px;
     border-radius: 6px;
 
+    .review-box {
+      textarea {
+        background: transparent;
+        border: 0;
+      }
+
+      .smiley img {
+        width: 60px;
+      }
+
+      .title-review {
+        color: #f2675b;
+      }
+
+      .button-review {
+        padding: 6px 20px;
+        color: #fff;
+        background: #000;
+        position: absolute;
+        left: 50%;
+        bottom: -15px;
+        @include transform(translateX(-50%));
+      }
+    }
+
+    .review-list {
+      .profile-img-review {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        overflow: hidden;
+        border: 4px solid #fff;
+        border-radius: 18px;
+      }
+
+      .review-content-destination {
+        padding: 0 0 15px 75px;
+        border-bottom: 1px solid #fff;
+      }
+    }
+
     .pb10 {
       padding-bottom: 10px;
     }
@@ -1361,6 +1402,19 @@ a.color-white {
     width: 100%;
   }
 }
+
+.booking-sec-card {
+  .title-head-left {
+    color: #838383;
+  }
+
+  .load-more {
+    .btn {
+      background: #c2c2c2;
+      color: #fff;
+    }
+  }
+}
 @media screen and (max-width: 1200px) {
   .cover-modal1 .modal-dialog {
     width: 100%;
@@ -1471,9 +1525,11 @@ a.color-white {
       }
     }
   }
+
   .navigation-dots {
     display: none;
   }
+
   .download-app-footer {
     background: #000;
     color: #fff;

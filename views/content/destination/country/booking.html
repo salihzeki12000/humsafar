@@ -6,7 +6,7 @@
   </div>
   <div class="booking-sec-card">
     <div class="container">
-            <!-- Tours and Excursions End  -->
+      <!-- Tours and Excursions End  -->
       <div class="title-head-left">
         <h4 class="uppercase">Tours and Excursions</h4>
       </div>
@@ -52,6 +52,9 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="button load-more text-center ptb20">
+          <button class="btn">Load More..</button>
         </div>
       </div>
       <!-- Tours and Excursions End  -->
@@ -149,7 +152,7 @@
                         <div class="see-detail">
                           <div class="clearfix">
                             <div class="pull-left">
-                              <span class="view-detail view-card-detail pointer"ng-click="backView();">
+                              <span class="view-detail view-card-detail pointer" ng-click="backView();">
                                     See All Details <i class="fa fa-chevron-down"></i>
                                   </span>
                             </div>
@@ -166,9 +169,387 @@
                 <!-- hotel front view -->
                 <!-- hotel back view -->
                 <div class="hotel-back-view">
-                  <div class="">
-                    <!-- <img src="/assets/Untitled-1.gif"> -->
-                    <span ng-click="backView();"><i class="fa fa-times"></i></span>
+                  <div class="bg-white">
+                    <span ng-click="backView();" class="on-tabs-close"><i class="fa fa-times"></i></span>
+
+                    <uib-tabset active="activeJustified" justified="true">
+                      <uib-tab index="0" heading="About">
+                        <div class="scroll-content">
+                          <div class="about-view text-justify avenir-roman ui-tabs-panel ui-widget-content ui-corner-bottom pr10">
+                            <p>
+                              Sahar, Andheri 400059
+                            </p>
+                            <p>Located in Andheri East, The Lalit Mumbai is a perfect starting point from which to explore Mumbai. The hotel offers a wide range of amenities and perks to ensure you have a great time. To be found at the hotel are 24-hour
+                              room service, 24-hour front desk, facilities for disabled guests, express check-in/check-out, luggage storage. Guestrooms are fitted with all the amenities you need for a good night's sleep. In some of the rooms, guests can
+                              find carpeting, clothes rack, scale, slippers, television LCD/plasma screen. Take a break from a long day and make use of fitness center, sauna, outdoor pool, spa, massage. No matter what your reasons are for visiting Mumbai,
+                              The Lalit Mumbai will make you feel instantly at home.</p>
+                          </div>
+                        </div>
+
+                      </uib-tab>
+                      <uib-tab index="1" heading="Photos">
+                        <div class="scroll-content pr10">
+                          <!-- <flex-slider flex-slide="item in bookingPhoto track by $index" class="carousel" animation="slide"  item-width="300" control-nav="false">
+                            <li>
+                              <img ng-src="{{item.img}}" class="img-responsive" />
+                            </li>
+                          </flex-slider> -->
+                          <!-- <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                              <div class="swiper-slide" ng-repeat="item in bookingPhoto track by $index"><img ng-src="{{item.img}}" class="img-responsive" /></div>
+                            </div> -->
+
+
+                          <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                            <div uib-slide ng-repeat="slides in bookingPhoto track by $index" index="$index">
+                              <div class="row">
+                                <div class="col-xs-6" ng-repeat="slide in slides track by $index"><img ng-src="{{slide.img}}" class="img-responsive" /></div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Add Pagination -->
+                          <!-- <div class="swiper-pagination"></div> -->
+                        </div>
+                      </uib-tab>
+                      <uib-tab index="2" heading="Deals">
+                        <div class="scroll-content pr10">
+                          <div class="deal-list">
+                            <table class="table avenir-roman">
+                              <thead>
+                                <tr>
+                                  <th class="color-pink">Booking Sites</th>
+                                  <th class="color-pink">Room</th>
+                                  <th class="color-pink">Room per night</th>
+                                  <th class="color-pink">Total for 1 night </th>
+                                  <th class="color-pink"></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    <div class="deals-logo-holder">
+                                      <img src="img/logo-1.png" alt="" class="img-responsive">
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="deals-room-holder">
+                                      <span class="block font-bold">Deluxe</span>
+                                      <span></span>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="deals-nightroom-holder text-center">
+                                      <span class="font-bold">6,499</span>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="deals-total-holder text-center">
+                                      <span class="font-bold">6,499</span>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="text-center">
+                                      <a href="#" target="_blank">
+                                        <button class="btn btn-deal">View Deal</button>
+                                      </a>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </uib-tab>
+                      <uib-tab index="3" heading="Amenities">
+                        <div class="scroll-content pr10">
+                          <div class="amenities-holder">
+                            <ul>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Airport Transfer</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Atm/Cash Machine On Site</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Babysitting</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Bar</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Business Center</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Car Park</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Coffee Shop</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Daily Housekeeping</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Free Wi Fi In All Rooms</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Gift/Souvenir Shop</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Laundry Service</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Meeting Facilities</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Poolside Bar</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Restaurant</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Room Service</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Safety Deposit Boxes</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Salon</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Shops</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Smoking Area</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Tours</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Wi Fi In Public Areas</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">24 Hour Front Desk</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">24 Hour Room Service</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Concierge</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Elevator</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Executive Floor</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Facilities For Disabled Guests</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Car Hire</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">24 Hour Security</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Currency Exchange</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Dry Cleaning</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Family Room</span>
+                              </li>
+
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Fax Machine</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Luggage Storage</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Photocopying</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Portable Wi Fi Rental</span>
+                              </li>
+
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Postal Service</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Printer</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Shuttle Service</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Ticket Service</span>
+                              </li>
+
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Valet Parking</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Bbq Facilities</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Bicycle Rental</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Express Check In/Check Out</span>
+                              </li>
+
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Newspapers</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Shared Lounge/Tv Area</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Casino</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Library</span>
+                              </li>
+
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Pets Allowed</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Vending Machine</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Nightclub</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">24 Hour Check In</span>
+                              </li>
+
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Grocery Deliveries</span>
+                              </li>
+                              <li>
+                                <span class="available"><i class="fa fa-check color-cyan"></i></span>
+                                <span class="amenity-type">Lockers</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Laundromat</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Wheelchair Accessible</span>
+                              </li>
+
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Doorman </span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Taxi Service</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Private Check In/Check Out</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Convenience Store</span>
+                              </li>
+
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Shrine</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Car Power Charging Station</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Fireplace</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Infirmary</span>
+                              </li>
+
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Chapel</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Kosher Restaurant</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Shared Kitchen</span>
+                              </li>
+                              <li>
+                                <span class="available-not"><i class="fa fa-times color-pink"></i></span>
+                                <span class="amenity-type">Halal Restaurant</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </uib-tab>
+                    </uib-tabset>
                   </div>
                 </div>
                 <!-- hotel back view end-->
@@ -178,9 +559,9 @@
           </div>
           <div class="col-md-6">
             <div class="hotel-card-holder relate">
-              <div class="blur-overlay-bg-div"></div>
               <!-- flipper holder -->
               <div class="hotel-flipper-holder">
+                <div class="blur-overlay-bg-div"></div>
                 <!-- hotel front view -->
                 <div class="hotel-front-view">
                   <div class="row m-clear">
@@ -280,16 +661,19 @@
                 <!-- hotel see detail and button end-->
                 <!-- hotel front view -->
                 <!-- hotel back view -->
-                <div class="hotel-back-view">
+                <!-- <div class="hotel-back-view">
                   <div class="get-center">
                     <img src="/assets/Untitled-1.gif">
                   </div>
-                </div>
+                </div> -->
                 <!-- hotel back view end-->
               </div>
               <!-- flipper holder end -->
             </div>
           </div>
+        </div>
+        <div class="button load-more text-center ptb20">
+          <button class="btn">Load More..</button>
         </div>
       </div>
       <!-- destination hotel card end-->
@@ -331,62 +715,65 @@
                                 <li><a href=""><i class="fa fa-star-o color-white"></i></a></li>
                               </ul>
                             </div>
-                          </div>
-                          <!-- hotel heading -->
-                          <!-- hotel chart -->
-                          <div class="hotel-chart-main vacation-hotel-chart">
+                            <!-- hotel heading -->
+                            <!-- hotel chart -->
+                            <div class="hotel-chart-main vacation-hotel-chart">
 
-                            <div class="hotel-info-list">
-                              <ul>
-                                <li><span class="block">5</span> Accommodates</li>
-                                <li><span class="block">0</span>Bathrooms</li>
-                                <li><span class="block">0</span>Bedrooms</li>
-                                <li><span class="block">1</span>Nights</li>
-                              </ul>
-                            </div>
-                            <div class="total-hotel-cost clearfix">
-                              <div class="pull-left">
-                                <!--remove pull left if not needed -->
-                                <span class="hotel-cost">229</span> EUR Per Night
+                              <div class="hotel-info-list">
+                                <ul>
+                                  <li><span class="block">5</span> Accommodates</li>
+                                  <li><span class="block">0</span>Bathrooms</li>
+                                  <li><span class="block">0</span>Bedrooms</li>
+                                  <li><span class="block">1</span>Nights</li>
+                                </ul>
                               </div>
-                              <!--remove pull left if not needed -->
-                              <div class="pull-right">
+                              <div class="total-hotel-cost clearfix">
+                                <div class="pull-left">
+                                  <!--remove pull left if not needed -->
+                                  <span class="hotel-cost">229</span> EUR Per Night
+                                </div>
+                                <!--remove pull left if not needed -->
+                                <div class="pull-right">
+                                  <!--remove pull right if not needed -->
+                                  <div class="see-detail text-left">
+                                    <span class="view-detail view-card-detail pointer" data-title="Entire House in California" data-req="wait">See All Details </span>
+                                  </div>
+                                </div>
                                 <!--remove pull right if not needed -->
-                                <div class="see-detail text-left">
-                                  <span class="view-detail view-card-detail pointer" data-title="Entire House in California" data-req="wait">See All Details </span>
+                              </div>
+                            </div>
+                            <!-- hotel chart end-->
+                            <!-- hotel see detail and button -->
+                            <div class="see-detail">
+                              <div class="clearfix">
+                                <div class="pull-left">
+                                  <a href=""><img src="img/9flats.png" alt="" class="img-responsive" width="90"></a>
+                                  <!-- <span class="view-detail view-card-detail pointer">See All Details <i class="fa fa-chevron-down"></i></span> -->
+                                </div>
+                                <div class="pull-right">
+                                  <a href="/bookings/vacation_rentals/redirect?referer=vacation_rentals&amp;url=https%3A%2F%2Fwww.9flats.com%2Fplaces%2F257087-house-san_francisco-corona_hts%3Fclient_id%3DZbn6Vr5mtBHYhtAn8syFl491xrQbzDKe58pviz6g" target="_blank">
+                                    <button class="btn btn-deal">View Deal</button>
+                                  </a>
                                 </div>
                               </div>
-                              <!--remove pull right if not needed -->
                             </div>
+                            <!-- hotel see detail and button end-->
                           </div>
-                          <!-- hotel chart end-->
-                          <!-- hotel see detail and button -->
-                          <div class="see-detail">
-                            <div class="clearfix">
-                              <div class="pull-left">
-                                <a href=""><img src="img/9flats.png" alt="" class="img-responsive" width="90"></a>
-                                <!-- <span class="view-detail view-card-detail pointer">See All Details <i class="fa fa-chevron-down"></i></span> -->
-                              </div>
-                              <div class="pull-right">
-                                <a href="/bookings/vacation_rentals/redirect?referer=vacation_rentals&amp;url=https%3A%2F%2Fwww.9flats.com%2Fplaces%2F257087-house-san_francisco-corona_hts%3Fclient_id%3DZbn6Vr5mtBHYhtAn8syFl491xrQbzDKe58pviz6g" target="_blank">
-                                  <button class="btn btn-deal">View Deal</button>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- hotel see detail and button end-->
                         </div>
                       </div>
                     </div>
+                    <!-- hotel back view -->
+                    <div class="hotel-back-view">
+                    </div>
+                    <!-- hotel back view end-->
                   </div>
-                  <!-- hotel back view -->
-                  <div class="hotel-back-view">
-                  </div>
-                  <!-- hotel back view end-->
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="button load-more text-center ptb20">
+          <button class="btn">Load More..</button>
         </div>
       </div>
       <!-- vacation rentals end-->
@@ -479,11 +866,11 @@
                   </div>
                 </div>
                 <!-- hotel back view -->
-                <div class="hotel-back-view">
-                  <div id="small-loader" class="get-center">
-                    <img src="/assets/Untitled-1.gif">
-                  </div>
-                </div>
+                <!-- <div class="hotel-back-view">
+                    <div id="small-loader" class="get-center">
+                      <img src="/assets/Untitled-1.gif">
+                    </div>
+                  </div> -->
                 <!-- hotel back view end-->
               </div>
             </div>
@@ -571,15 +958,18 @@
                   </div>
                 </div>
                 <!-- hotel back view -->
-                <div class="hotel-back-view">
-                  <div id="small-loader" class="get-center">
-                    <img src="/assets/Untitled-1.gif">
-                  </div>
-                </div>
+                <!-- <div class="hotel-back-view">
+                    <div id="small-loader" class="get-center">
+                      <img src="/assets/Untitled-1.gif">
+                    </div>
+                  </div> -->
                 <!-- hotel back view end-->
               </div>
             </div>
           </div>
+        </div>
+        <div class="button load-more text-center ptb20">
+          <button class="btn">Load More..</button>
         </div>
       </div>
       <!-- homestay card end-->

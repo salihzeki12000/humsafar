@@ -591,7 +591,7 @@
   display: inline-block;
   padding: 0;
   margin: 0;
-    @include transform(translateX(-50%));
+  @include transform(translateX(-50%));
 }
 
 .agt-title-card {
@@ -610,7 +610,7 @@
   position: absolute;
   left: 50%;
   top: -20%;
-    @include transform(translateX(-50%));
+  @include transform(translateX(-50%));
 }
 //AGENT USER ITENERARY END
 //AGENT USER ITENERARY END
@@ -732,7 +732,8 @@
 .country-count {
   color: #fff;
   font-size: 24px;
-  margin-left: -20px;
+  margin-left: -12px;
+  position: relative;
 }
 
 .agt-home-itinerary,
@@ -747,6 +748,8 @@
     overflow: hidden;
     position: relative;
     border: 1px solid #fff;
+    float: left;
+    margin-left: -10px;
 
     img {
       max-width: initial;
@@ -1287,7 +1290,7 @@ q {
   position: absolute;
   bottom: -20px;
   left: 50%;
-    @include transform(translateX(-50%));
+  @include transform(translateX(-50%));
 }
 
 .upgrade-card {
@@ -1502,7 +1505,7 @@ q {
 
   &::before {
     border-color: #2d3655 transparent transparent;
-      @include transform(translateX(-50%));
+    @include transform(translateX(-50%));
     width: 0;
     border-style: solid;
     border-width: 10px 10px 0;
