@@ -110,7 +110,7 @@
               <!-- like and review -->
               <div class="like-review-holder pull-left">
                 <div class="like-holder">
-                  <p class="m-clear"><i class="fa fa-heart color-blue mr5"></i><span class="like-count avenir-medium">{{itinerary.likeCount}}</span> <span class="color-blue avenir-roman">Likes</span></p>
+                  <p class="m-clear"><i class="fa fa-heart color-blue mr5"></i><span class="like-count avenir-medium">{{itinerary.likeCount}}</span> <span class="color-blue avenir-roman" ng-if="itinerary.likeCount==1">Like</span><span class="color-blue avenir-roman" ng-if="itinerary.likeCount> 1|| itinerary.likeCount==0">Like</span></p>
                 </div>
                 <div class="review-holder">
                   <p class="avenir-heavy color-blue m-clear">

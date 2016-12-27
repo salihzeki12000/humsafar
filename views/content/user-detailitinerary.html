@@ -54,9 +54,9 @@
       <div class="trip-pic-view {{showClass}}">
         <p class="color-pink heading-gallery-name"><i class="fa fa-picture-o mr5"></i>Family Holiday 2013 Photos</p>
         <div masonry class="masonry-main side-scroll-direction">
-          <div class="masonry-brick" ng-repeat="pic in photoGallery track by $index">
+          <div class="masonry-brick" ng-repeat="pic in itinerary.photos track by $index">
             <div class="gallery-imgholder">
-              <img ng-src="{{pic}}" alt="">
+              <img ng-src="{{pic.name|uploadpath}}" alt="">
             </div>
           </div>
         </div>
@@ -70,28 +70,28 @@
     <!-- trip status -->
     <div class="trip-itinerary-status">
       <div class="trip-status-main">
-        <div class="status-country-holder" ng-repeat="countryBar in itinerary.countryVisited track by $index">
+        <div class="status-country-holder" ng-repeat="country in itinerary.countryVisited track by $index">
           <div class="country-flag-holder relate">
-            <img ng-src="{{countryBar.country.flag|uploadpath}}" alt="Country">
+            <img ng-src="{{country.country.flag|uploadpath}}" alt="Country">
             <div class="status-country-name text-center">
-              <span>{{countryBar.country.name}}</span>
+              <span>{{country.country.name}}</span>
             </div>
           </div>
           <ul>
             <!-- <li ng-repeat="country in countryList track by $index"> -->
-            <li ng-repeat="cityBar in countryBar.cityVisited track by $index">
+            <li ng-repeat="city in country.cityVisited track by $index">
               <div class="status-city-holder">
                 <!-- dotted line -->
                 <span class="small-dot"></span>
                 <span class="small-dot"></span>
                 <span class="small-dot"></span>
-                <span class="small-dot last-dot"></span>
+                <span class="small-dot last-dot"> </span>
                 <!-- dotted line end -->
                 <!-- dot status -->
-                <div class="status-indot relate">
+                <div class="status-indot relate" ng-click="updateOpenStatus(country.cityVisited)">
                   <!-- city name of dot and img -->
                   <div class="status-city-name ">
-                    <span>{{cityBar.city.name}}</span>
+                    <span>{{city.city.name}}</span>
                   </div>
                   <!-- city name of dot and img end-->
                 </div>
@@ -141,12 +141,13 @@
               <!-- trip accordion heading end-->
               <div class="listing-accordion">
                 <uib-accordion close-other="oneAtATime">
-                  <uib-accordion-group is-open="status.open" ng-repeat="city in country.cityVisited">
+                  <uib-accordion-group  is-open="city.isOpen" ng-click="updateOpenStatus(country.cityVisited)" ng-repeat="city in country.cityVisited">
                     <uib-accordion-heading class="relate">
                       <div class="journey-accordion-heading color-white">
                         <div class="clearfix">
+                          <a name="city_{{city.city._id}}">
                           <p class="city-heading avenir-heavy m-clear pull-left">Day <span>{{city.from}}</span> to Day <span>{{city.to}}</span> In <span class="trip-city-name">{{city.city.name}}</span></p>
-                          <span class="pull-right"><i class="fa accordion-icon" ng-class="{'fa-minus' : status.open , 'fa-plus' : !status.open}"></i></span>
+                          <span class="pull-right"><i class="fa accordion-icon" ng-class="{'fa-minus' : status.open , 'fa-plus' : !status.open}"></i></span></a>
                         </div>
                       </div>
                     </uib-accordion-heading>

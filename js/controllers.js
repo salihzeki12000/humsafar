@@ -1986,7 +1986,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
   })
-  .controller('DestinationCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+.controller('DestinationCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -2024,6 +2024,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
+    // destination country
+    $scope.countryView = function(url,isCity){
+      if(isCity === false){
+        $state.go("destinationcountry",{
+          name: "featured",
+          url: url
+        });
+      }
+    }
+    // destination country end
+
   })
 
 .controller('DestinationCountryCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
@@ -2035,6 +2046,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Destination");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    $scope.urlDestinationCountry = $state.params.url;
+    console.log($scope.urlDestinationCountry, "destination country url");
+
+    $scope.getCountryInfo = function(type, urlSlug){
+      NavigationService.getCountryDestination({
+        type: type,
+        urlSlug: $scope.urlDestinationCountry
+      }, function(data){
+        $scope.countryDestData = data.data;
+        console.log(data);
+      });
+    };
+    // $scope.getCountryInfo("featuredCities",$scope.urlDestinationCountry);
 
     $scope.showBackCard = "";
     $scope.backView = function () {
@@ -2053,60 +2078,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.countryoptions = {};
     $scope.countryoptions.active = "";
     $scope.viewTab = 1;
-    switch ($state.params.name) {
-      case "featured":
-        $scope.countryoptions.active = "featured";
-        $scope.destination.innerView = alldestination[0];
-        break;
-      case "mustdo":
-        $scope.countryoptions.active = "mustdo";
-        $scope.destination.innerView = alldestination[1];
-        break;
-      case "itineraries":
-        $scope.countryoptions.active = "itineraries";
-        $scope.destination.innerView = alldestination[2];
-        break;
-      case "booking":
-        $scope.countryoptions.active = "booking";
-        $scope.destination.innerView = alldestination[3];
-        break;
-      case "visit":
-        $scope.countryoptions.active = "visit";
-        $scope.destination.innerView = alldestination[4];
-        break;
-      default:
-        $scope.destination.innerView = alldestination[0];
-    }
-    $scope.getTab = function (view) {
-      $scope.destination.innerView = alldestination[view];
-      var url = "featured";
-      var active = "";
-      console.log(view);
-      switch (view) {
-        case 0:
-          url = "featured";
+    $scope.destinationTabView = function(destinationType){
+      switch (destinationType) {
+        case "featured":
           $scope.countryoptions.active = "featured";
+          $scope.destination.innerView = alldestination[0];
+          $scope.getCountryInfo("featuredCities",$scope.urlDestinationCountry);
           break;
-        case 1:
-          url = "mustdo";
+        case "mustdo":
           $scope.countryoptions.active = "mustdo";
+          $scope.destination.innerView = alldestination[1];
+          $scope.getCountryInfo("mustDo",$scope.urlDestinationCountry);
           break;
-        case 2:
-          url = "itineraries";
+        case "itineraries":
           $scope.countryoptions.active = "itineraries";
+          $scope.destination.innerView = alldestination[2];
+          $scope.getCountryInfo("itinerary",$scope.urlDestinationCountry);
           break;
-        case 3:
-          url = "booking";
+        case "booking":
           $scope.countryoptions.active = "booking";
+          $scope.destination.innerView = alldestination[3];
           break;
-        case 4:
-          url = "visit";
+        case "visit":
           $scope.countryoptions.active = "visit";
+          $scope.destination.innerView = alldestination[4];
           break;
+        default:
+          $scope.destination.innerView = alldestination[0];
       }
-      console.log(url);
+    };
+    $scope.destinationTabView($state.params.name);
+    $scope.getTab = function (view) {
+      console.log(view);
+      $scope.destinationTabView(view);
+      console.log(view);
       $state.go("destinationcountry", {
-        name: url
+        name: view
       }, {
         notify: false
       });
@@ -2122,17 +2129,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // // $('.card').toggleClass('flipped');
     // $(".card").addClass("flipped");
 
-
-    $scope.cardClass = "";
-    $scope.flip = function () {
-      if ($scope.cardClass == "") {
-        $scope.cardClass = "flipped";
-      } else {
-        $scope.cardClass = "";
-      }
-    };
     // country popup
-    $scope.openCountry = function () {
+    $scope.countryIndex = -1
+    $scope.openCountry = function (index) {
+      $scope.countryIndex = index;
+      console.log($scope.countryIndex,"bc countryIndex");
       $uibModal.open({
         animation: true,
         templateUrl: "views/modal/country-mustdo.html",
@@ -2141,7 +2142,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         scope: $scope
       });
     };
-    $scope.place = {
+        $scope.place = {
       title: "Taj Mahal",
       description: "<p>A symbol of an eternal love story etched out in the world’s most marvellous structures in the world, the Taj Mahal epitomises one of the greatest romances in the history of mankind. Designated as a UNESCO World Heritage Site and one of the Seven Wonders of the World, this ‘tear-drop on the cheek of time’, as Rabindranath Tagore described it, is regarded as the best example of Mughal architecture and the country’s rich history. Marvel at the great marble monument ornamented with 28 types of precious and semi-precious stones for the inlay work. With its four minarets and the red sandstone mosque, this fascinating monument is a sight to behold.</p>",
       link: "http://www.india-tajmahal.com/",
@@ -3549,6 +3550,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       code: 'ZW'
     }];
   })
+
+
+
 
 
 .controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife, OnGoJourney) {
@@ -8083,10 +8087,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //get quick-itinerary details ends
 
     //like-unlike itinerary starts
+
     $scope.likeUnlikeItinerary = function (flag, _id, uniqueId) {
       Itinerary.updateLikeItinerary(flag, _id, uniqueId, function (data) {
         console.log(data);
         $scope.itinerary.likeDone = data;
+        // if($scope.itinerary.likeDone){
+        //   $scope.itinerary.likeCount=$scope.itinerary.likeCount+1;
+        // }else{
+        //   $scope.itinerary.likeCount=$scope.itinerary.likeCount-1;
+        // }
       });
     };
     //like-unlike itinerary ends
@@ -8105,7 +8115,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     //post detail-itinerary comments ends
-
+    $scope.country={};
+    $scope.city={};
+    $scope.updateOpenStatus = function (groups) {
+      console.log(groups);
+      $scope.isOpen = groups.some(function (item) {
+        console.log($scope.isOpen);
+        return item.isOpen;
+      });
+    }
 
     //Integration starts here
 
