@@ -118,7 +118,7 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       reloadOnSearch: false
     })
     .state('destinationcity', {
-      url: "/destination-city/:name",
+      url: "/destination-city/:name/:url",
       templateUrl: "views/template.html",
       controller: 'DestinationCityCtrl',
       reloadOnSearch: false

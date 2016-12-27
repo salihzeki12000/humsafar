@@ -185,6 +185,11 @@ var navigationservice = angular.module('navigationservice', [])
         callback(data);
       });
     },
+    getCityDestination: function(formData, callback) {
+      $http.post(adminURL + "/city/getOneCity", formData).success(function(data) {
+        callback(data);
+      });
+    },
     uploadQuickItinerary: function(obj, flag, callback) {
       if (flag == 'new') {
         var url = "/itinerary/saveQuickItineraryWeb";

@@ -38,7 +38,7 @@
         <div class="destination-holder main-destination-page relate pt20 pr20">
           <div class="row">
             <div class="col-sm-6"  ng-repeat="dest in destinationList track by $index" ng-if="dest.isCity==true">
-              <div class="img-holder relate" style="background:url('{{dest.cityCoverPhoto|uploadpath}}');">
+              <div class="img-holder relate" ng-click="countryView(dest.urlSlug,dest.isCity)" style="background:url('{{dest.cityCoverPhoto|uploadpath}}');">
                 <div class="title-head-left color-white">
                   {{dest.name}}
                 </div>
