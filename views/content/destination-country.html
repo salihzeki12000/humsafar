@@ -3,7 +3,7 @@
     <div class="img-holder-destination bg-destination-cc-img relate" id="blur">
       <!-- <div class="overlay"></div> -->
       <div class="get-center country-title">
-        <h4 class="color-white title-head">India</h4>
+        <h4 class="color-white title-head">{{countryDestData.name}}</h4>
       </div>
       <div class="list-horizontal">
         <ul class="dest-right color-white">
@@ -24,7 +24,7 @@
             </label>
             </div>
             <div class="right-label">
-              <span>New Delhi</span>
+              <span>{{countryDestData.capital}}</span>
             </div>
           </li>
           <li>
@@ -34,7 +34,7 @@
             </label>
             </div>
             <div class="right-label">
-              <span>INR</span>
+              <span>{{countryDestData.currency}}</span>
             </div>
           </li>
           <li>
@@ -92,11 +92,11 @@
         <div class="col-md-8 col-sm-8">
         <div class="destination-scroll">
           <ul class="list-inline">
-            <li ng-click="getTab(0)" ng-class="{'active': countryoptions.active=='featured'}">Featured Cities</li>
-            <li ng-click="getTab(1)" ng-class="{'active': countryoptions.active=='mustdo'}">Must Do’s</li>
-            <li ng-click="getTab(2)" ng-class="{'active': countryoptions.active=='itineraries'}">Itineraries</li>
-            <li ng-click="getTab(3)" ng-class="{'active': countryoptions.active=='booking'}">Bookings</li>
-            <li ng-click="getTab(4)" ng-class="{'active': countryoptions.active=='visit'}">Best Time To Visit</li>
+            <li ng-click="getTab('featured')" ng-class="{'active': countryoptions.active=='featured'}">Featured Cities</li>
+            <li ng-click="getTab('mustdo')" ng-class="{'active': countryoptions.active=='mustdo'}">Must Do’s</li>
+            <li ng-click="getTab('itineraries')" ng-class="{'active': countryoptions.active=='itineraries'}">Itineraries</li>
+            <li ng-click="getTab('booking')" ng-class="{'active': countryoptions.active=='booking'}">Bookings</li>
+            <li ng-click="getTab('visit')" ng-class="{'active': countryoptions.active=='visit'}">Best Time To Visit</li>
           </ul>
         </div>
       </div>

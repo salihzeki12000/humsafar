@@ -5,32 +5,17 @@
     </div>
     <div class="destination-holder">
       <div class="row">
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-6 col-sm-6" ng-repeat="feature in countryDestData.featuredCities track by $index">
           <div class="img-holder relate">
-            <img src="img/destination/taj-featured.jpg" alt="travel-libro" class="full-width">
+            <img ng-src="{{feature.cityCoverPhoto|uploadpath}}" alt="travel-libro" class="full-width">
             <div class="title-head-left color-white text-uppercase">
-              Agra
+              {{feature.name}}
             </div>
             <div class="read-more left-bottom">
               <ul class="list-inline">
-                <li class="avenir-roman color-white">Must Do’s: <span class="avenir-heavy">33</span> </li>
+                <li class="avenir-roman color-white">Must Do’s: <span class="avenir-heavy">{{feature.mustDoCount}}</span> </li>
                 <li class="avenir-heavy color-white">|</li>
-                <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">222</span> </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-6">
-          <div class="img-holder relate">
-            <img src="img/destination/goldentemple.jpg" alt="travel-libro" class="full-width">
-            <div class="title-head-left color-white text-uppercase">
-              AMRITSAR
-            </div>
-            <div class="read-more left-bottom">
-              <ul class="list-inline">
-                <li class="avenir-roman color-white">Must Do’s: <span class="avenir-heavy">33</span> </li>
-                <li class="avenir-heavy color-white">|</li>
-                <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">222</span> </li>
+                <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">{{feature.itineraryCount}}</span> </li>
               </ul>
             </div>
           </div>

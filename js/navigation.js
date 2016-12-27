@@ -180,6 +180,11 @@ var navigationservice = angular.module('navigationservice', [])
         callback(data);
       });
     },
+    getCountryDestination: function(formData, callback) {
+      $http.post(adminURL + "/country/getOneCountry", formData).success(function(data) {
+        callback(data);
+      });
+    },
     uploadQuickItinerary: function(obj, flag, callback) {
       if (flag == 'new') {
         var url = "/itinerary/saveQuickItineraryWeb";

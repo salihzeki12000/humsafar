@@ -112,7 +112,7 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
       reloadOnSearch: false
     })
     .state('destinationcountry', {
-      url: "/destination-country/:name",
+      url: "/destination-country/:name/:url",
       templateUrl: "views/template.html",
       controller: 'DestinationCountryCtrl',
       reloadOnSearch: false

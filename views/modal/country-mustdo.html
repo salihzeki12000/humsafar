@@ -5,33 +5,32 @@
         <div class="flex-slider">
           <div class="holder-places">
             <div class="img-holder-place">
-              <flex-slider flex-slide="item in place.images track by $index" slider-id="slider" prev-text="" next-text="" sync="#carousel"
-                slideshow="true" animation="slide">
+              <flex-slider flex-slide="item in countryDestData.mustDo track by $index" slider-id="slider" prev-text="" next-text="" sync="#carousel"
+                slideshow="true" animation="slide" start-at="countryIndex">
                 <li>
-                  <img ng-src="{{item.imgurl}}" alt="Travelibro" class="full-width">
+                  <img ng-src="{{item.mainPhoto|uploadpath}}" alt="Travelibro" class="full-width">
                   <div class="overlay-slider"></div>
+                  <div class="destination-desc-modal">
+                    <h4 class="title-head mt-clear">
+                      {{item.name}}
+                    </h4>
+                    <p class="cont-place">{{item.description}}</p>
+                    <p class="cont-place text-right fnt-12 m-clear">
+                      Image Courtesy: <a href="{{item.imageCredit}}" class="color-white" target="_blank">{{item.imageCredit}}</a >
+                </p>
+              </div>
                 </li>
               </flex-slider>
-              <div class="destination-desc-modal">
-                <h4 class="title-head mt-clear">
-                  {{place.title}}
-                </h4>
-                <p class="cont-place" ng-bind-html="place.description"></p>
-                <p class="cont-place text-right fnt-12 m-clear">
-                  Image Courtesy: <a href="{{place.link}}" class="color-white" target="_blank">{{place.link}}</a >
-            </p>
-          </div>
       </div>
     </div>
   </div>
   </div>
       <div class="col-md-2 col-sm-3">
         <div class="musto-thumbnail">
-          <flex-slider flex-slide="item in place.images track by $index" animation="slide" animation-loop="false" item-width="100" item-margin="0" as-nav-for="#slider" slideshow="true" control-nav="false" prev-text="" next-text="" slider-id="carousel"
-  animation-loop="false">
+          <flex-slider flex-slide="item in countryDestData.mustDo track by $index" animation="slide" animation-loop="false" item-width="100" item-margin="0" as-nav-for="#slider" slideshow="true" control-nav="false" prev-text="" next-text="" slider-id="carousel"  animation-loop="false" start-at="$index">
             <li>
               <div class="img-holder-place">
-                <img ng-src="{{item.imgurl}}" alt="Travelibro">
+                <img ng-src="{{item.mainPhoto|uploadpath}}" alt="Travelibro">
               </div>
             </li>
           </flex-slider>
