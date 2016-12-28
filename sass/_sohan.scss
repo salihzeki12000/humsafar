@@ -1197,9 +1197,10 @@ a.color-white {
 .libro-filter {
   position: absolute;
   width: 100%;
-  top: -300px;
+  top: -200px;
   z-index: -2;
   @include transition (all ease 300ms);
+  opacity: 0;
 
   .select-all-made {
     .input-tab {
@@ -1281,6 +1282,7 @@ a.color-white {
   .filterclose {
     top: 0;
     z-index: 2;
+    opacity: 1;
   }
 }
 
@@ -1397,7 +1399,7 @@ a.color-white {
 
   .destin-fixednav1 {
     position: fixed;
-    top: 122px;
+    top: 102px;
     z-index: 4;
     width: 100%;
   }

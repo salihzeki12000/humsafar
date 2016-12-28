@@ -90,7 +90,7 @@
     <div class="destination-featured plr30">
       <div class="hotels">
         <div class="row">
-          <div class="col-md-4 col-sm-6  col-xs-12 mb20">
+          <div class="col-md-4 col-sm-6  col-xs-12 mb20" hidden>
             <div class="hotel-card">
               <div class="brdbtm">
                 <div class="title-head-inside">
@@ -138,7 +138,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 col-sm-6 col-xs-12 mb20">
+          <div class="col-md-4 col-sm-6 col-xs-12 mb20" hidden>
             <div class="hotel-card">
               <div class="brdbtm">
                 <div class="title-head-inside">
@@ -199,12 +199,12 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 col-sm-6 col-xs-12 mb20">
+          <div class="col-md-4 col-sm-6 col-xs-12 mb20" ng-repeat="hotels in cityDestData.hotel">
             <div class="hotel-card">
               <div class="brdbtm">
                 <div class="title-head-inside">
-                  <span class="pull-right fnt-20 color-grey-dollar avenir-roman">$</span>
-                  <h4 class="avenir-heavy fnt-22">The Oberoi Amarvilas</h4>
+                  <span class="pull-right fnt-20 color-grey-dollar avenir-roman">{{hotels.budget}}</span>
+                  <h4 class="avenir-heavy fnt-22">{{hotels.name}}</h4>
                 </div>
                 <div class="rating-localpost inline-block pb10">
                   <!-- <span class="color-blue font-bold mr5">Rating:</span> -->
