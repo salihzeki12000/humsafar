@@ -348,7 +348,8 @@
                         <span class="follow-following color-blue text-capitalize">{{post.follower}}</span>
                       </div>
                     </div>
-                    <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.createdAt | date}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.createdAt | date :  "hh:mm a"}}</span></p>
+                    <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.createdAt | date : 'dd MMM, yyyy'
+                    }}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.createdAt | date :  "hh:mm a"}}</span></p>
                   </div>
                 </div>
                 <div class="onway-journey relate">
