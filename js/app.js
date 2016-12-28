@@ -694,6 +694,7 @@ firstapp.filter('uploadpath', function() {
 
 firstapp.filter('kindOfJourney', function() {
   return function(input) {
+    var input = input.toLowerCase();
     var returnVal = "";
     switch (input) {
       case "friends":

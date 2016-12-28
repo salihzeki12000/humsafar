@@ -2052,9 +2052,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Destination");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
     $scope.urlDestinationCountry = $state.params.url;
-    console.log($scope.urlDestinationCountry, "destination country url");
 
     $scope.getCountryInfo = function(type, urlSlug){
       NavigationService.getCountryDestination({
@@ -2125,10 +2123,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     //contentopen
-    $scope.isopencont = false;
-    $scope.openFilter = function () {
-      $scope.isopencont = !$scope.isopencont;
-    };
+    // $scope.isopencont = false;
+    // $scope.openFilter = function () {
+    //   $scope.isopencont = !$scope.isopencont;
+    // };
 
 
     // $scope.flip = function() {
@@ -2136,10 +2134,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // $(".card").addClass("flipped");
 
     // country popup
-    $scope.countryIndex = -1
+    // $scope.mustDoArr = $scope.countryDestData.mustDo;
     $scope.openCountry = function (index) {
-      $scope.countryIndex = index;
-      console.log($scope.countryIndex,"bc countryIndex");
+      $scope.mustDoArr = _.cloneDeep($scope.countryDestData.mustDo);
+      $scope.mustDoSplice = $scope.mustDoArr.splice(0,index);
+      $scope.countryMustDoImg = _.concat($scope.mustDoArr,$scope.mustDoSplice);
       $uibModal.open({
         animation: true,
         templateUrl: "views/modal/country-mustdo.html",
@@ -2148,234 +2147,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         scope: $scope
       });
     };
-        $scope.place = {
-      title: "Taj Mahal",
-      description: "<p>A symbol of an eternal love story etched out in the world’s most marvellous structures in the world, the Taj Mahal epitomises one of the greatest romances in the history of mankind. Designated as a UNESCO World Heritage Site and one of the Seven Wonders of the World, this ‘tear-drop on the cheek of time’, as Rabindranath Tagore described it, is regarded as the best example of Mughal architecture and the country’s rich history. Marvel at the great marble monument ornamented with 28 types of precious and semi-precious stones for the inlay work. With its four minarets and the red sandstone mosque, this fascinating monument is a sight to behold.</p>",
-      link: "http://www.india-tajmahal.com/",
-      images: [{
-        imgurl: "img/destination/taj.jpg"
-      }, {
-        imgurl: "img/destination/taj.jpg"
-
-      }, {
-        imgurl: "img/destination/taj.jpg"
-
-      }, {
-        imgurl: "img/destination/taj.jpg"
-
-      }, {
-        imgurl: "img/destination/taj.jpg"
-
-      }, {
-        imgurl: "img/destination/taj.jpg"
-
-      }, {
-        imgurl: "img/destination/taj.jpg"
-
-      }]
-
-    };
-    //itineraries
-    $scope.activityPost = [{
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey photo slider",
-      relatedPhoto: [
-        'img/blog/blog-post.jpg',
-        'img/blog/blog-post2.jpg',
-        'img/blog/blog-post3.jpg',
-        'img/blog/blog-post4.jpg',
-        'img/blog/blog-post.jpg',
-        'img/blog/blog-post2.jpg',
-        'img/blog/blog-post3.jpg',
-        'img/blog/blog-post4.jpg',
-      ],
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: true,
-      postIcon: true,
-      video: false,
-      photo: true,
-      photoSlider: true,
-      travelledJourney: false,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: false,
-      postIcon: true,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      visitPost: false,
-      getpopularPost: false,
-      activitySec: true
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: false,
-      postIcon: true,
-      video: false,
-      photo: true,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      visitPost: false,
-      getpopularPost: false,
-      activitySec: true
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: false,
-      postIcon: false,
-      video: true,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      visitPost: false,
-      getpopularPost: false,
-      activitySec: true
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: true,
-      visitPost: false,
-      getpopularPost: false,
-      activitySec: true
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "follow",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, ];
-
-
-    // tour packages card
+  // tour packages card
     $scope.usrTourPackageCard = [{
       tourImg: 'img/paris.jpg',
       agttourTitle: 'Love In Paris',
@@ -2513,7 +2285,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       })
     }
 
-
     var alldestination = ["views/content/destination/city/mustdo.html", "views/content/destination/city/hotels.html", "views/content/destination/city/restaurants.html", "views/content/destination/city/itineraries.html", "views/content/destination/city/booking.html", "views/content/destination/city/visit.html"];
     $scope.destination = {
       innerView: alldestination[0]
@@ -2531,14 +2302,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       case "hotels":
         $scope.destination.innerView = alldestination[1];
         $scope.cityoptions.active = "hotels";
+        $scope.getCityInfo("hotel",$scope.urlDestinationCity);
         break;
       case "restaurants":
         $scope.destination.innerView = alldestination[2];
         $scope.cityoptions.active = "restaurants";
+        $scope.getCityInfo("restaurant",$scope.urlDestinationCity);
         break;
       case "itineraries":
         $scope.destination.innerView = alldestination[3];
         $scope.cityoptions.active = "itineraries";
+        $scope.getCityInfo("itinerary",$scope.urlDestinationCity);
         break;
       case "booking":
         $scope.destination.innerView = alldestination[4];
@@ -2614,33 +2388,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.cardClass = "";
       }
     };
-    $scope.place = {
-      title: "Taj Mahal",
-      description: "<p>A symbol of an eternal love story etched out in the world’s most marvellous structures in the world, the Taj Mahal epitomises one of the greatest romances in the history of mankind. Designated as a UNESCO World Heritage Site and one of the Seven Wonders of the World, this ‘tear-drop on the cheek of time’, as Rabindranath Tagore described it, is regarded as the best example of Mughal architecture and the country’s rich history. Marvel at the great marble monument ornamented with 28 types of precious and semi-precious stones for the inlay work. With its four minarets and the red sandstone mosque, this fascinating monument is a sight to behold.</p>",
-      link: "http://www.india-tajmahal.com/",
-      images: [{
-        imgurl: "img/destination/taj.jpg"
-      }, {
-        imgurl: "img/destination/taj.jpg"
 
-      }, {
-        imgurl: "img/destination/taj.jpg"
-
-      }, {
-        imgurl: "img/destination/taj.jpg"
-
-      }, {
-        imgurl: "img/destination/taj.jpg"
-
-      }, {
-        imgurl: "img/destination/taj.jpg"
-
-      }, {
-        imgurl: "img/destination/taj.jpg"
-
-      }]
-
-    };
+    $scope.filterByBudget = function(getBudget){
+      console.log(getBudget,"budget hia bc");
+    }
 
     $scope.hoveringOver = function (value) {
       $scope.overStar = value;
@@ -8231,7 +7982,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.city={};
     $scope.previousId={};
     $scope.updateOpenStatus = function (groups) {
-     
+
       $scope.isOpen = groups.some(function (item) {
         console.log($scope.previousId,item);
        if($scope.previousId==item){
@@ -8244,7 +7995,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         return item.isOpen;
       });
       console.log($scope.isOpen);
-      
+
     }
 
     //Integration starts here

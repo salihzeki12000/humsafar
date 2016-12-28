@@ -1,6 +1,6 @@
-<div class="destination {{getBackdrop}} relate mt-60" scrolladdclass>
+<div class="destination {{getBackdrop}} relate mt-60" scrolladdclass ng-init="openCont=false">
   <div scrolldown>
-    <div class="img-holder-destination bg-destination-cc-img relate" id="blur">
+    <div class="img-holder-destination bg-destination-cc-img relate" id="blur" style="background:url('{{countryDestData.countryCoverPhoto|uploadpath}}')">
       <!-- <div class="overlay"></div> -->
       <div class="get-center country-title">
         <h4 class="color-white title-head">{{countryDestData.name}}</h4>
@@ -59,24 +59,17 @@
           </li>
           <li>
             <div class="right-label">
-              <a class="color-white" ng-click="openCont();">Read</a>
+              <a class="color-white" ng-click="openCont = !openCont;">Read</a>
             </div>
           </li>
         </ul>
       </div>
-      <div class="slide-cont-dest" ng-class="{'open-cont': isopencont}">
+      <div class="slide-cont-dest" ng-class="{'open-cont': openCont==true, '':openCont==false}">
         <div class="blur-bg"></div>
         <div class="hght-destination-scroll color-white">
-          <p class="text-justify">India promises to be nothing short of an all encompassing poetry reveling in striking oxymoron's like serene temples amidst manic bazaars; eternal personification of lost love in form of the Taj Mahal & beautifully juxtaposed, alliterative range
-            of snow topped mountains and sun-kissed beaches!</p>
-          <p class="text-justify">Bristling with intricately woven phenomenal spectrum of cultures, India for first-timers can be a soul-stirring experience. Being the birthplace of ancient religions, She also provides the seeker with an enriching spiritual life and thought
-            provoking philosophies. This medley of vibrant cultures, spiritual depth and sheer history makes for an intensely intoxicating experience!</p>
-          <p class="text-justify">As you pendulum wide eyed among magnificent mountains & historical sites in the North, vibrant world of textiles & heart racing safaris in the West, tranquil religious sites & elegant textiles in the South and breathtaking beauty of Nature in
-            the East; another aspect that'll take you on a ride is, the food! You'll have a humongous buffet of alluring delicacies ranging from the brilliantly spiced-up Northern food to splendidly steamed Southern delights! So brace up your senses for
-            an extraordinary experience- the only souvenir that can sum up this astonishingly diverse journey that India is!</p>
-          <p class="text-justify">TraveLibro provides an exhaustive travel guide for India featuring popular cities, attractions, tours, best places to visit, where to go, tourist information, and itineraries.</p>
+          <p class="text-justify">{{countryDestData.description}}</p>
           <div class="right-label text-right">
-            <a class="color-white pad-40" ng-click="openCont();">Close</a>
+            <a class="color-white pad-40" ng-click="openCont=!openCont;">Close</a>
           </div>
         </div>
       </div>
