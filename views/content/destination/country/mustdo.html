@@ -5,8 +5,8 @@
     </div>
     <div class="row" ng-init="index=-1">
       <div class="col-md-6 col-sm-6" ng-repeat="must in countryDestData.mustDo track by $index">
-        <div class="img-holder card relate" ng-class="($index==index)?'flipped':''">
-          <div class="flip-holder">
+        <div class="img-holder card relate" >
+          <div class="flip-holder" ng-class="($index==index)?'flipped':''">
             <div class="pop-hover-css front">
               <div class="" ng-click="openCountry($index);">
                 <img src="{{must.mainPhoto|uploadpath}}" alt="travel-libro" class="full-width">
@@ -20,7 +20,7 @@
             </div>
 
             <div class="back">
-              <!-- <img ng-src="{{must.mainPhoto|uploadpath}}" alt="travel-libro" class="full-width"> -->
+              <img ng-src="{{must.mainPhoto|uploadpath}}" alt="travel-libro" class="full-width">
               <!-- <div class="flipped-cont"> -->
               <div class="">
                 <p>{{must.description}}</p>

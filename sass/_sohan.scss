@@ -400,6 +400,12 @@ a.color-white {
       position: relative;
       @include transform-style(preserve-3d);
       @include transition(all 300ms linear);
+      @include transform(rotateY(0deg));
+      &.flipped {
+        @include transform(rotateY(180deg));
+        @include transition(all 300ms linear);
+        z-index: 4;
+      }
     }
 
     &.card {
@@ -422,7 +428,6 @@ a.color-white {
         left: 0;
         @include transform(rotateY(180deg));
         @include backface-visibility(hidden);
-
         p {
           @extend .avenir-roman;
         }
@@ -441,18 +446,6 @@ a.color-white {
         // }
       }
 
-      &.flipped {
-        @include transform(rotateY(180deg));
-        @include transition(all 300ms linear);
-        z-index: 4;
-        // .back {
-        //   z-index: 1;
-        // }
-        // .flipdown {
-        //   display: block;
-        //   @include transform(rotateY( 180deg));
-        // }
-      }
     }
 
     .read-more {
