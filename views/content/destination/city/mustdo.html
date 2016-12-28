@@ -3,28 +3,27 @@
     <div class="destination-featured plr30">
       <div class="row">
         <div class="col-md-6 col-sm-6" ng-repeat="mustdo in cityDestData.mustDo track by $index">
-          <div class="flip-container">
-            <div class="img-holder card relate" ng-class="($index==index)?'flipped':''">
-              <div class="pop-hover-css front">
-                <img ng-src="{{mustdo.mainPhoto}}" alt="travel-libro" class="full-width">
-                <div class="title-head-left color-white">
-                  {{mustdo.name}}
+          <div class="img-holder card relate">
+            <div class="flip-holder" ng-class="($index==index)?'flipped':''">
+              <img ng-src="{{mustdo.mainPhoto}}" alt="travel-libro" class="full-width">
+              <div class="front">
+                <div class="pop-hover-css" ng-click="openCountry($index);">
+                  <div class="pop-hover-css title-head-left color-white">
+                    {{mustdo.name}}
+                  </div>
                 </div>
+                <div class="read-more right-bottom filpup">
+                  <a class="color-white" ng-click="index=$index">Read</a>
+                </div>
+              </div>
 
-              </div>
-              <div class="read-more right-bottom filpup">
-                <a class="color-white" ng-click="index=$index">Read</a>
-              </div>
               <div class="back relate">
-                <!-- <div class="img-holder relate">-->
-                <img ng-src="{{mustdo.mainPhoto}}" alt="travel-libro" class="full-width">
                 <div class="flipped-cont">
                   <p>{{mustdo.description}}</p>
                 </div>
                 <div class="read-more right-bottom flipdown">
                   <a class="color-white" ng-click="index=-1">Close</a>
                 </div>
-                <!-- </div> -->
               </div>
             </div>
           </div>
@@ -58,5 +57,4 @@
       </div>
     </div>
   </div>
-</div>
 </div>

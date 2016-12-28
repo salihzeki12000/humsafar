@@ -401,6 +401,7 @@ a.color-white {
       @include transform-style(preserve-3d);
       @include transition(all 300ms linear);
       @include transform(rotateY(0deg));
+
       &.flipped {
         @include transform(rotateY(180deg));
         @include transition(all 300ms linear);
@@ -414,10 +415,14 @@ a.color-white {
       //   display: none;
       // }
       .front {
-        position: relative;
+        position: absolute;
         @include transform(rotateY(0deg));
         @include backface-visibility(hidden);
         z-index: 2;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
       }
 
       .back {
@@ -428,24 +433,15 @@ a.color-white {
         left: 0;
         @include transform(rotateY(180deg));
         @include backface-visibility(hidden);
+        background: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        text-align: justify;
+        color: #fff;
+
         p {
           @extend .avenir-roman;
         }
-        // .flipped-cont {
-        //   color: #fff;
-        //   position: absolute;
-        //   top: 0;
-        //   background: rgba(0, 0, 0, 0.8);
-        //   height: 100%;
-        //   padding: 20px;
-        //   text-align: justify;
-        //   border-radius: 5px;
-        //   p {
-        //     @extend .avenir-roman;
-        //   }
-        // }
       }
-
     }
 
     .read-more {
@@ -485,6 +481,12 @@ a.color-white {
       }
     }
 
+    .pop-hover-css {
+      height: 100%;
+      position: relative;
+      z-index: 0;
+    }
+
     .right-bottom {
       position: absolute;
       bottom: 0;
@@ -506,6 +508,7 @@ a.color-white {
       width: 100%;
       @extend .avenir-roman;
       border-radius: 5px;
+      z-index: 5;
 
       ul {
         li {
