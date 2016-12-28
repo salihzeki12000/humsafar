@@ -1322,12 +1322,13 @@
   }
 
   .modal-listholder {
-    width: 100%;
+    // width: 100%;
     padding: 0;
   }
 
   .listholder-modal .modal-listborder {
     border: none;
+    padding: 0;
   }
 
   .agtmodal-imgholder {
@@ -1354,6 +1355,12 @@
     z-index: 3;
     top: -15px;
     right: 0;
+  }
+
+  .agent-photogallery {
+    width: 125px;
+    max-width: 125px;
+    // max-height: 250px;
   }
   //agent home page end
   // agent setting page
