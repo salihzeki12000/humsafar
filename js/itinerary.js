@@ -78,7 +78,7 @@ var itinerary = angular.module('itinerary', [])
       if (flag == 'new') {
         var url = "/itinerary/saveQuickItineraryWeb";
       } else if (flag == 'edit') {
-
+        var url="/itinerary/editQuickItinerary"
       }
       $http({
         url: adminURL + url,
@@ -96,7 +96,7 @@ var itinerary = angular.module('itinerary', [])
        if (flag == 'new') {
         var url = "/itinerary/save";
       } else if (flag == 'edit') {
-
+        var url= "/itinerary/editData"
       }
       $http({
         url: adminURL + url,

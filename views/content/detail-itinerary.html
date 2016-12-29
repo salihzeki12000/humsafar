@@ -288,7 +288,7 @@
                             <!--<span>{{city}}</span>-->
                             <ui-select multiple ng-model="city.days.stay" theme="bootstrap" tagging="tagHandler">
                               <ui-select-match placeholder="Stayed At">{{$item.name}}</ui-select-match>
-                              <ui-select-choices repeat="hotels.name as hotels in google.hotels" refresh="findResults(city.placeId,'Hotels & Accomodations',$select.search,'onchange')"
+                              <ui-select-choices repeat="{'name':hotels.name} as hotels in google.hotels" refresh="findResults(city.placeId,'Hotels & Accomodations',$select.search,'onchange')"
                                 refresh-delay="0">
                                 <span ng-bind="hotels.name"></span>
                               </ui-select-choices>
@@ -318,7 +318,7 @@
                             </div>-->
                             <ui-select multiple ng-model="city.days.ate" theme="bootstrap" tagging="tagHandler">
                               <ui-select-match placeholder="Ate At">{{$item.name}}</ui-select-match>
-                              <ui-select-choices repeat="resto.name as resto in google.restaurants" refresh="findResults(city.placeId,'Restaurants & Bars',$select.search,'onchange')"
+                              <ui-select-choices repeat="{'name':resto.name} as resto in google.restaurants" refresh="findResults(city.placeId,'Restaurants & Bars',$select.search,'onchange')"
                                 refresh-delay="0">
                                 <span ng-bind="resto.name"></span>
                               </ui-select-choices>
@@ -348,7 +348,7 @@
                             </div>-->
                             <ui-select multiple ng-model="city.days.mustDo" theme="bootstrap" tagging="tagHandler">
                               <ui-select-match placeholder="Must Do's'">{{$item.name}}</ui-select-match>
-                              <ui-select-choices repeat="mustdo.name as mustdo in google.mustDos | filter:$select.search" refresh="findResults(city.placeId,'Sights',$select.search,'onchange')"
+                              <ui-select-choices repeat="{'name':mustdo.name} as mustdo in google.mustDos | filter:$select.search" refresh="findResults(city.placeId,'Sights',$select.search,'onchange')"
                                 refresh-delay="0">
                                 <span ng-bind="mustdo.name"></span>
                               </ui-select-choices>

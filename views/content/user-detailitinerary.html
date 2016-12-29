@@ -88,7 +88,7 @@
                 <span class="small-dot last-dot"> </span>
                 <!-- dotted line end -->
                 <!-- dot status -->
-                <a href="#{{city.city._id}}" ng-click="updateOpenStatus(country.cityVisited)">
+                <a  ng-click="updateOpenStatus(country.cityVisited)">
                   <div class="status-indot relate" >
                     <!-- city name of dot and img -->
                     <div class="status-city-name ">
@@ -161,7 +161,7 @@
                             <span class="user-trip-heading">
                               Stayed At
                             </span>
-                            <div class="avenir-roman user-trip-descp" ng-repeat="stay in city.days[0].stay track by $index">{{stay}}<span ng-if="$index<(city.days[0].stay.length-1)"> | </span></div>
+                            <div class="avenir-roman user-trip-descp" ng-repeat="stay in city.days[0].stay track by $index">{{stay.name}}<span ng-if="$index<(city.days[0].stay.length-1)"> | </span></div>
                           </div>
                         </li>
                         <li>
@@ -169,7 +169,7 @@
                             <span class="user-trip-heading">
                               Ate At
                             </span>
-                            <div class="avenir-roman user-trip-descp" ng-repeat="ate in city.days[0].ate track by $index">{{ate}}<span ng-if="$index<(city.days[0].ate.length-1)"> | </span>></div>
+                            <div class="avenir-roman user-trip-descp" ng-repeat="ate in city.days[0].ate track by $index">{{ate.name}}<span ng-if="$index<(city.days[0].ate.length-1)"> | </span></div>
                           </div>
                         </li>
                         <li>
@@ -177,13 +177,13 @@
                             <span class="user-trip-heading">
                               Must Do's
                             </span>
-                            <div class="avenir-roman user-trip-descp" ng-repeat="mustDo in city.days[0].mustDo track by $index">{{mustDo}}<span ng-if="$index<(city.days[0].mustDo.length-1)"> | </span>></div>
+                            <div class="avenir-roman user-trip-descp" ng-repeat="mustDo in city.days[0].mustDo track by $index">{{mustDo.name}}<span ng-if="$index<(city.days[0].mustDo.length-1)"> | </span></div>
                           </div>
                         </li>
                       </ul>
                       <div class="trip-descp">
                         <h4>A Little More About This Trip ...</h4>
-                        <div class="user-about-trip" ng-bind-html="detail.aboutTrip"></div>
+                        <div class="user-about-trip" ng-bind-html="city.description"></div>
                       </div>
                       <!-- gallery photo -->
                       <!-- <div class="view-trip-photo {{editGallery}}">
