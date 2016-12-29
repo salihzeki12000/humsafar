@@ -1434,8 +1434,16 @@ a.color-white {
 }
 @media screen and (max-width: 1200px) {
   .cover-modal1 .modal-dialog {
-    width: 100%;
+    width: 95%;
     border: 3px solid #2c3757;
+
+    .musto-thumbnail {
+      left: -235px;
+
+      .img-holder-place img {
+        width: 150px;
+      }
+    }
   }
 
   .hotels .hotel-card .title-head-inside h4 {
@@ -1508,10 +1516,10 @@ a.color-white {
     height: 16px;
   }
 
-  .musto-thumbnail {
-    width: 456px;
-    top: 138px;
-    left: -146px;
+  .cover-modal1 .modal-dialog .musto-thumbnail {
+    width: 405px;
+    top: 115px;
+    left: -115px;
   }
 
   .destination-content {
@@ -1527,26 +1535,6 @@ a.color-white {
   }
 }
 @media screen and (max-width: 767px) {
-  .musto-thumbnail {
-    width: 100%;
-    top: 0;
-    left: 0;
-    position: static;
-    transform: rotate(0deg) translate(0, 0);
-
-    .img-holder-place {
-      width: 100%;
-      height: auto;
-      overflow: auto;
-
-      img {
-        transform: rotate(0deg) translate(0, 0);
-        position: static;
-        width: 100%;
-      }
-    }
-  }
-
   .navigation-dots {
     display: none;
   }
@@ -1575,6 +1563,29 @@ a.color-white {
 
   .cover-modal1 {
     padding-right: 20px;
+
+    .modal-dialog {
+      .musto-thumbnail {
+        width: 98%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        position: static;
+        transform: rotate(0deg) translate(0, 0);
+
+        .img-holder-place {
+          width: 100%;
+          height: auto;
+          overflow: auto;
+
+          img {
+            transform: rotate(0deg) translate(0, 0);
+            position: static;
+            width: 100%;
+          }
+        }
+      }
+    }
   }
 
   .destination-desc-modal {
