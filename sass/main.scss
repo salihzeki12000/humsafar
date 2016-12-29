@@ -4714,6 +4714,11 @@ header {
 // ongo-journey-end
 // started-journey-card
 
+.started-journey-card .journey-start h4 {
+    color: #fff;
+    text-shadow: 2px 2px 2px #020202;
+}
+
 .started-journey-card {
   margin-bottom: 30px;
 
@@ -4725,7 +4730,7 @@ header {
   }
 
   .journey-start {
-    background: url('../img/ongojourney/bg-start.png') no-repeat 50% 50%;
+    background: url('../img/ongojourney/bg-start-white.png') no-repeat 50% 50%;
 
     h4 {
       margin: 35px 0 20px;
@@ -7327,7 +7332,7 @@ header {
 }
 
 .open-gallery {
-  left: 50%;
+  left: 500px;
   @include transition(all 300ms linear);
   @include transform(translateX(-50%));
 

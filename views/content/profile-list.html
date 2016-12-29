@@ -19,7 +19,7 @@
             <div class="search-friend" ng-if="profileList == 1 || profileList == 2">
               <div class="follow-followers-holder">
                 <input type="text" placeholder="Search Friend" ng-model="searchFriend.name" ng-if="profileList==1">
-                <input type="text" placeholder="Search Friend" ng-model="searchUser" ng-if="profileList==2" ng-change="searchAllUser(searchUser)">                
+                <input type="text" placeholder="Search Friend" ng-model="searchUser" ng-if="profileList==2" ng-change="searchAllUser(searchUser)">
                 <span class="search-follow"><i class="fa fa-search"></i></span>
               </div>
             </div>
@@ -51,7 +51,7 @@
               </div>
               <div class="following-detail text-center">
                 <h4 class="color-blue avenir-heavy">{{list.name}}</h4>
-                <h5 class="color-pink avenir-medium"><i class="fa fa-map-marker mr5 color-pink"></i> <span>{{list.homeCity}}</span>, <span>{{list.homeCountry.name}}</span></h5>
+                <h5 class="color-pink avenir-medium text-ellipsis"><i class="fa fa-map-marker mr5 color-pink"></i> <span>{{list.homeCity}}</span>, <span>{{list.homeCountry.name}}</span></h5>
               </div>
               <div class="photos-location-sec clearfix">
                 <div class="pull-left">
@@ -93,7 +93,7 @@
             </div>
             <div class="following-detail text-center">
               <h4 class="color-blue avenir-heavy">{{list.name}}</h4>
-              <h5 class="color-pink avenir-medium"><i class="fa fa-map-marker mr5 color-pink"></i> <span>{{list.homeCity}}</span>, <span>{{list.homeCountry.name}}</span></h5>
+              <h5 class="color-pink avenir-medium text-ellipsis"><i class="fa fa-map-marker mr5 color-pink"></i> <span>{{list.homeCity}}</span>, <span>{{list.homeCountry.name}}</span></h5>
             </div>
             <div class="photos-location-sec clearfix">
               <div class="pull-left">

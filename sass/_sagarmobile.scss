@@ -144,6 +144,11 @@
     font-size: 30px;
   }
 
+  .agent-itinerary-page .open-gallery,
+  .user-itinerary-page .open-gallery {
+    left: 450px;
+  }
+
   .user-itinerary-page .trip-pic-view {
     width: 900px;
   }
@@ -329,7 +334,7 @@
 
   .agent-itinerary-page .open-gallery,
   .user-itinerary-page .open-gallery {
-    left: 47%;
+    left: 350px;
   }
 
   .agent-itinerary-page .close-gallery,
@@ -1020,6 +1025,10 @@
     }
   }
 
+  .agent-itinerary-page .open-gallery, .user-itinerary-page .open-gallery, .agent-itinerary-page .open-gallery{
+    left: 230px;
+  }
+
   .book-title-mob {
     font-size: 16px;
     margin-bottom: 5px;
@@ -1636,6 +1645,10 @@
   .mob-booknow {
     font-size: 12px;
     padding: 5px 10px;
+  }
+
+  .agent-itinerary-page .open-gallery, .user-itinerary-page .open-gallery, .agent-itinerary-page .open-gallery, .agent-itinerary-page .open-gallery{
+    left: 150px;
   }
   // USER-DETAIL ITINERARY PAGE END
   // EDITOR ITINERARY PAGE
