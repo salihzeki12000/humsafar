@@ -88,13 +88,15 @@
                 <span class="small-dot last-dot"> </span>
                 <!-- dotted line end -->
                 <!-- dot status -->
-                <div class="status-indot relate" ng-click="updateOpenStatus(country.cityVisited)">
-                  <!-- city name of dot and img -->
-                  <div class="status-city-name ">
-                    <span>{{city.city.name}}</span>
+                <a href="#{{city.city._id}}" ng-click="updateOpenStatus(country.cityVisited)">
+                  <div class="status-indot relate" >
+                    <!-- city name of dot and img -->
+                    <div class="status-city-name ">
+                      <span>{{city.city.name}}</span>
+                    </div>
+                    <!-- city name of dot and img end-->
                   </div>
-                  <!-- city name of dot and img end-->
-                </div>
+                </a>
                 <!-- dot status end -->
                 <!-- img on dot  -->
                 <div class="status-imgholder relate hide">
@@ -141,14 +143,15 @@
               <!-- trip accordion heading end-->
               <div class="listing-accordion">
                 <uib-accordion close-other="oneAtATime">
-                  <uib-accordion-group  is-open="city.isOpen" ng-repeat="city in country.cityVisited" ng-scroll="city in country.cityVisited">
+                  <uib-accordion-group is-open="city.isOpen" ng-repeat="city in country.cityVisited" ng-scroll="city in country.cityVisited">
                     <uib-accordion-heading class="relate">
                       <div class="journey-accordion-heading color-white">
-                        <div class="clearfix">
-                          <a name="city_{{city.city._id}}">
-                          <p class="city-heading avenir-heavy m-clear pull-left">Day <span>{{city.from}}</span> to Day <span>{{city.to}}</span> In <span class="trip-city-name">{{city.city.name}}</span></p>
-                          <span class="pull-right"><i class="fa accordion-icon" ng-class="{'fa-minus' : status.open , 'fa-plus' : !status.open}"></i></span></a>
+                        <a name="{{city.city._id}}">
+                          <div class="clearfix">
+                            <p class="city-heading avenir-heavy m-clear pull-left">Day <span>{{city.from}}</span> to Day <span>{{city.to}}</span> In <span class="trip-city-name">{{city.city.name}}</span></p>
+                            <span class="pull-right"><i class="fa accordion-icon" ng-class="{'fa-minus' : city.isOpen , 'fa-plus' : !city.isOpen}"></i></span></a>
                         </div>
+                        </a>
                       </div>
                     </uib-accordion-heading>
                     <div class="journey-accordion-detail avenir-roman">
@@ -241,7 +244,7 @@
               <!-- like and review -->
               <div class="like-review-holder pull-left">
                 <div class="like-holder">
-                  <p class="m-clear"><i class="fa fa-heart color-blue mr5"></i><span class="like-count avenir-medium">{{itinerary.likeCount}}</span> <span class="color-blue avenir-roman">Likes</span></p>
+                  <p class="m-clear"><i class="fa fa-heart color-blue mr5"></i><span class="like-count avenir-medium">{{itinerary.likeCount}}</span>                    <span class="color-blue avenir-roman">Likes</span></p>
                 </div>
                 <div class="review-holder">
                   <p class="avenir-heavy color-blue m-clear">
@@ -279,7 +282,7 @@
                     <div class="like-reply-line">
                       <span class="color-blue avenir-roman mr5 pointer">Like</span>
                       <span class="color-blue avenir-roman mr5 pointer">Reply</span>
-                      <span class="time-stamp ml5"><i class="fa fa-calendar color-grey mr5"></i><span>{{comment.date|formatDate:"date"}}</span> | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{comment.date|formatDate:"time"}}</span></span>
+                      <span class="time-stamp ml5"><i class="fa fa-calendar color-grey mr5"></i><span>{{comment.date|formatDate:"date"}}</span>                      | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{comment.date|formatDate:"time"}}</span></span>
                     </div>
                   </div>
                 </div>
