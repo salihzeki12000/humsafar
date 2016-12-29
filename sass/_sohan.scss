@@ -370,6 +370,15 @@ a.color-white {
     }
   }
 
+  .destination-featured {
+    .img-holder {
+      height: 300px;
+      background-position: center center !important;
+      background-size: cover !important;
+      background-repeat: no-repeat !important;
+    }
+  }
+
   .destination-holder {
     &.main-destination-page {
       .img-holder {
@@ -401,6 +410,10 @@ a.color-white {
       @include transform-style(preserve-3d);
       @include transition(all 300ms linear);
       @include transform(rotateY(0deg));
+      height: 100%;
+      background-position: center center !important;
+      background-size: cover !important;
+      background-repeat: no-repeat !important;
 
       &.flipped {
         @include transform(rotateY(180deg));
@@ -446,12 +459,6 @@ a.color-white {
 
     .read-more {
       text-decoration: underline;
-    }
-
-    &:hover {
-      img {
-        @include transform(scale(1.1));
-      }
     }
 
     .title-head-left {

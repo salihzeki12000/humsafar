@@ -6,8 +6,8 @@
     <div class="row" ng-init="index=-1">
       <div class="col-md-6 col-sm-6" ng-repeat="must in countryDestData.mustDo track by $index">
         <div class="img-holder card relate">
-          <div class="flip-holder" ng-class="($index==index)?'flipped':''">
-            <img src="{{must.mainPhoto|uploadpath}}" alt="travel-libro" class="full-width">
+          <div class="flip-holder" ng-class="($index==index)?'flipped':''" style="background:url('{{must.mainPhoto|uploadpath}}');">
+            <!-- <img src="" alt="travel-libro"> -->
             <div class="front">
               <div class="pop-hover-css" ng-click="openCountry($index);">
                 <div class="title-head-left color-white">

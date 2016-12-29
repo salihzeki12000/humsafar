@@ -4,8 +4,8 @@
       <div class="row">
         <div class="col-md-6 col-sm-6" ng-repeat="mustdo in cityDestData.mustDo track by $index">
           <div class="img-holder card relate">
-            <div class="flip-holder" ng-class="($index==index)?'flipped':''">
-              <img ng-src="{{mustdo.mainPhoto}}" alt="travel-libro" class="full-width">
+            <div class="flip-holder" ng-class="($index==index)?'flipped':''" style="background:url('{{mustdo.mainPhoto}}')">
+              <!-- <img ng-src="" alt="travel-libro" class="full-width"> -->
               <div class="front">
                 <div class="pop-hover-css" ng-click="openCountry($index);">
                   <div class="pop-hover-css title-head-left color-white">

@@ -6,8 +6,8 @@
     <div class="destination-holder">
       <div class="row">
         <div class="col-md-6 col-sm-6" ng-repeat="feature in countryDestData.featuredCities track by $index">
-          <div class="img-holder relate">
-            <img ng-src="{{feature.cityCoverPhoto|uploadpath}}" alt="travel-libro" class="full-width">
+          <div class="img-holder relate" style="background:url('{{feature.cityCoverPhoto|uploadpath}}');">
+            <img alt="travel-libro" class="">
             <div class="title-head-left color-white text-uppercase">
               {{feature.name}}
             </div>
