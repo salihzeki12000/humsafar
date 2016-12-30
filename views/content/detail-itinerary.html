@@ -108,7 +108,7 @@
                         <input type="text" class="form-control" ng-model="editCountry.name" ng-change="showCountry[countryPanel]=true"></input>
                         <div class="dropdown-country" ng-show="showCountry[countryPanel]">
                           <ul>
-                            <li ng-repeat="nation in countries | filter: editCountry.name | limitTo:4"><a href="" ng-click="updateCountryDetail(editCountry,nation,countryPanel,cityPanel)">{{nation.name}}</a></li>
+                            <li ng-repeat="nation in countries | filter: editCountry.name"><a href="" ng-click="updateCountryDetail(editCountry,nation,countryPanel,cityPanel)" class="country-drop">{{nation.name}}</a></li>
                           </ul>
                         </div>
                         <!--<ui-select ng-model="addCountry[countryPanel]" theme="bootstrap" ng-click="updateCountriesArr($select.selected._id)">
@@ -148,13 +148,13 @@
                 <!-- country Visited end-->
                 <!-- city visited  -->
                 <div class="itinerary-country-visited itinerary-city-visited">
-                  <div class="row" ng-repeat="editCity in editCountry.cityVisited track by $index" ng-init="cityPanel=$index">
+                  <div class="row relate" ng-repeat="editCity in editCountry.cityVisited track by $index" ng-init="cityPanel=$index">
                     <div class="col-md-6">
                       <div class="itinerary-inputholder input-country-visited">
                         <input type="text" class="form-control" ng-model="editCity.name" ng-change="searchCity(editCountry.country,editCity.name,editCountry.cityVisited);showCity[countryPanel][cityPanel]=true"></input>
                         <div class="dropdown-city" ng-show="showCity[countryPanel][cityPanel]">
                           <ul>
-                            <li ng-repeat="city in cities" ng-click="updateCityDetail(editCity,city);showCity[countryPanel][cityPanel]=false;"><a href="">{{city.name}}</a></li>
+                            <li ng-repeat="city in cities" ng-click="updateCityDetail(editCity,city);showCity[countryPanel][cityPanel]=false;"><a class="city-drop" href="">{{city.name}}</a></li>
                           </ul>
                         </div>
                         <!--<ui-select ng-model="editCountry.cityVisited[cityPanel]" theme="bootstrap" ng-click="updateCitiesArr($select.selected._id)">
@@ -184,7 +184,7 @@
                             <input type="date" class="form-control text-center" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCity.from" ng-change="getDays(editCity,countryPanel,cityPanel);"
                               ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'" >
                           </div>
-                          
+
                         </div>
                         <div class="itinerary-to itinerary-year">
                           <label for="to">To</label>
@@ -196,7 +196,7 @@
                           <label for="Duration">Days</label>
                           <div class="itinerary-inputholder">
                             <input type="text" class="form-control text-center" id="Duration" ng-model="editCity.duration">
-                            
+
                           </div>
                         </div>
                       </div>
@@ -217,13 +217,13 @@
                         </div>
                       </div>
                     </div>
-                    <span ng-click="removeCity(countryPanel,cityPanel)"><i class="fa fa-times" ng-if="cityPanel>0"></i></span>
+                    <span class="close-city-x" ng-click="removeCity(countryPanel,cityPanel)"><i class="fa fa-times" ng-if="cityPanel>0"></i></span>
                   </div>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="add-country clearfix">
-                        <button class="btn btn-pink pull-left" ng-click="addYourCity(countryPanel)">Add City</button>
-                        <span class="color-dark-blue pull-right mt5">If you have visited any other cities on the same trip</span>
+                        <button class="btn btn-pink " ng-click="addYourCity(countryPanel)">Add City</button>
+                        <span class="color-dark-blue mt5">If you have visited any other cities on the same trip</span>
                       </div>
                     </div>
                   </div>
@@ -231,9 +231,9 @@
                 <!-- city visited end -->
               </div>
               <!-- add country on click -->
-              <div class="add-country clearfix">
-                <button class="btn btn-pink pull-left" ng-click="addYourCountry();">Add Country</button>
-                <span class="color-dark-blue pull-right mt5">If you have visited any other cities on the same trip</span>
+              <div class="add-country text-center clearfix">
+                <button class="btn btn-pink" ng-click="addYourCountry();">Add Country</button>
+                <span class="color-dark-blue add-country-margin">If you have visited any other cities on the same trip</span>
               </div>
               <!-- add country on click end-->
             </div>
@@ -264,7 +264,7 @@
                   </uib-accordion-heading>
                   <div class="accordion-main">
                     <!-- trip info container -->
-                    <div class="trip-info-container"> 
+                    <div class="trip-info-container">
                       <ul>
                         <li>
                           <div class="stayed-at">
