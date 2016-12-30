@@ -2339,14 +2339,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         case 1:
           url = "hotels";
           $scope.cityoptions.active = "hotels";
+          $scope.getCityInfo("hotel",$scope.urlDestinationCity);
           break;
         case 2:
           url = "restaurants";
           $scope.cityoptions.active = "restaurants";
+          $scope.getCityInfo("restaurant",$scope.urlDestinationCity);
           break;
         case 3:
           url = "itineraries";
           $scope.cityoptions.active = "itineraries";
+          $scope.getCityInfo("itinerary",$scope.urlDestinationCity);
           break;
         case 4:
           url = "booking";
@@ -6921,7 +6924,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.dItinerary.buddies[index] = _.omit(n, ['flag']);
       });
       //removing unwanted values from buddies starts
-  
+
       //removing unwanted values from countryVisited starts
       _.each($scope.dItinerary.countryVisited, function (n, index) {
         $scope.dItinerary.countryVisited[index] = _.omit(n, ['name', 'flag']);
