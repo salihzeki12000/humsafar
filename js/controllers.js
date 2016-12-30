@@ -6316,6 +6316,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    $scope.changeStatus=function(status){
+      $stateParams.active=status;
+      $scope.activeMenu=status;
+    };
+
     $scope.userData = $.jStorage.get("profile");
     console.log($scope.userData);
     var travelCountCallback = function (data, status) {
@@ -6328,8 +6333,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     reloadCount();
-
-    // countryList and bucketList
+{
+     // countryList and bucketList
     // $scope.countryList = [{
     //   countryImage: "img/india-gate.jpg",
     //   countryName: "India",
@@ -6461,7 +6466,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   followersUser: "2.8M",
     //   journey: "315"
     // }, ];
-
+}
     var callbackFollowers = function (data) {
       $scope.followersList = data.data.followers;
       _.each($scope.followersList, function (n) {
@@ -7169,13 +7174,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       plugins: [
         'advlist autolink lists link image charmap print preview anchor',
         'searchreplace visualblocks code fullscreen',
-        'insertdatetime media table contextmenu paste code', 'importcss', 'autoresize'
+        'insertdatetime media table contextmenu paste code', 'importcss'
       ],
       paste_as_text: true,
       content_css: "css/main.css",
       autoresize_on_init: false,
       autoresize_min_height: 0,
       autoresize_overflow_padding: 0,
+      autoresize_bottom_margin: 0
     };
 
 
@@ -7197,26 +7203,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     NavigationService.getAllCountries(countriesCallback, function () {
       console.log("error getting data");
     });
-
-
-    // var selectedCities = [];
-    // var obj = {};
-    // $scope.addCityInList = function (id, flag, name, countryIndex, cityIndex) {
-    //   console.log(id, flag, name, countryIndex, cityIndex);
-    //   $scope.showCities[cityIndex] = false;
-    //   $scope.qItinerary.countryVisited[countryIndex].cityVisited[cityIndex].search = name;
-    //   if (flag) {
-    //     if (_.findIndex(selectedCities,   ['city',  id]) == -1) {
-    //       obj = {
-    //         "city": id
-    //       }
-    //       selectedCities.push(obj);
-    //     }
-    //   } else {
-    //     selectedCities = _.reject(selectedCities, ['city', id]);
-    //   }
-    //   $scope.qItinerary.countryVisited.cityVisited = selectedCities;
-    // };
 
     $scope.searchCity = function (countryId, searchData, cityVisited) {
       var formData = {

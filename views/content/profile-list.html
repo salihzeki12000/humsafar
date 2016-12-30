@@ -1,31 +1,31 @@
 <div class="profile-list-main">
   <!-- profile tab strip -->
-  <div class="profile-tab-strip" ng-init="profileList = activeMenu">
+  <div class="profile-tab-strip">
     <div class="container-fluid">
       <div class="clearfix">
         <div class="pull-left">
           <div class="list-profile-tab">
             <ul>
-              <li><a href="" ng-click="profileList = 1" ng-class="{'active-list': profileList == 1}">Following - <span class="avenir-heavy">{{count.following_count}}</span></a></li>
-              <li><a href="" ng-click="profileList = 2" ng-class="{'active-list': profileList == 2}">Followers - <span class="avenir-heavy">{{count.followers_count}}</span></a></li>
-              <li><a href="" ng-click="profileList = 3" ng-class="{'active-list': profileList == 3}">Countries Visited - <span class="avenir-heavy">{{count.countriesVisited_count}}</span></a></li>
-              <li><a href="" ng-click="profileList = 4" ng-class="{'active-list': profileList == 4}">Bucket List - <span class="avenir-heavy">{{count.bucketList_count}}</span></a></li>
+              <li><a href="" ng-click="changeStatus('following')" ng-class="{'active-list': activeMenu == 'following'}">Following - <span class="avenir-heavy">{{count.following_count}}</span></a></li>
+              <li><a href="" ng-click="changeStatus('followers')" ng-class="{'active-list': activeMenu == 'followers'}">Followers - <span class="avenir-heavy">{{count.followers_count}}</span></a></li>
+              <li><a href="" ng-click="changeStatus('countriesVisited')" ng-class="{'active-list': activeMenu == 'countriesVisited'}">Countries Visited - <span class="avenir-heavy">{{count.countriesVisited_count}}</span></a></li>
+              <li><a href="" ng-click="changeStatus('bucketList')" ng-class="{'active-list': activeMenu == 'bucketList'}">Bucket List - <span class="avenir-heavy">{{count.bucketList_count}}</span></a></li>
             </ul>
           </div>
         </div>
         <div class="pull-right">
           <form action="">
             <!-- search friend -->
-            <div class="search-friend" ng-if="profileList == 1 || profileList == 2">
+            <div class="search-friend" ng-if="activeMenu == 'following' || activeMenu == 'followers'">
               <div class="follow-followers-holder">
-                <input type="text" placeholder="Search Friend" ng-model="searchFriend.name" ng-if="profileList==1">
-                <input type="text" placeholder="Search Friend" ng-model="searchUser" ng-if="profileList==2" ng-change="searchAllUser(searchUser)">
+                <input type="text" placeholder="Search Friend" ng-model="searchFriend.name" ng-if="activeMenu=='following'">
+                <input type="text" placeholder="Search Friend" ng-model="searchUser" ng-if="activeMenu=='followers'" ng-change="searchAllUser(searchUser)">
                 <span class="search-follow"><i class="fa fa-search"></i></span>
               </div>
             </div>
             <!-- search friend end-->
             <!-- add country -->
-            <div class="list-add-country" ng-if="profileList == 3 || profileList == 4">
+            <div class="list-add-country" ng-if="activeMenu == 'countriesVisited' || activeMenu == 'bucketList'">
               <div class="bucket-visited-holder">
                 <input type="text" placeholder="Add Country Visited">
                 <span><i class="fa fa-search"></i></span>
@@ -43,21 +43,21 @@
   <div class="profile-tab-main">
     <div class="container-fluid">
       <!-- following tab -->
-      <div class="follower-tab-main" ng-if="profileList == 1">
+      <div class="follower-tab-main" ng-if="activeMenu == 'following'">
           <div class="following-container" ng-repeat="list in followingList | filter:searchFriend.name">
             <div class="following-holder">
               <div class="follow-imgholder">
                 <img ng-src="{{list.profilePicture|uploadpath}}" class="img-responsive">
               </div>
               <div class="following-detail text-center">
-                <h4 class="color-blue avenir-heavy">{{list.name}}</h4>
+                <h'bucketList' class="color-blue avenir-heavy">{{list.name}}</h'bucketList'>
                 <h5 class="color-pink avenir-medium text-ellipsis"><i class="fa fa-map-marker mr5 color-pink"></i> <span>{{list.homeCity}}</span>, <span>{{list.homeCountry.name}}</span></h5>
               </div>
               <div class="photos-location-sec clearfix">
                 <div class="pull-left">
                   <div class="photo-loc">
-                      <img src="img/camera-blue.png" alt="Photos" width="20" class="v-mid">
-                      <span class="avenir-heavy color-dark-blue v-mid">{{list.count.photoCount}}</span> | <img src="img/location-blue.png" alt="Location" width="20" class="v-mid"> <span class="avenir-heavy color-dark-blue v-mid">{{list.count.checkInCount}}</span>
+                      <img src="img/camera-blue.png" alt="Photos" width="'followers'0" class="v-mid">
+                      <span class="avenir-heavy color-dark-blue v-mid">{{list.count.photoCount}}</span> | <img src="img/location-blue.png" alt="Location" width="'followers'0" class="v-mid"> <span class="avenir-heavy color-dark-blue v-mid">{{list.count.checkInCount}}</span>
                   </div>
                 </div>
                 <div class="pull-right">
@@ -85,21 +85,21 @@
         </div>
       <!-- following tab end-->
       <!-- follower tab -->
-      <div class="follow-tab-main" ng-if="profileList == 2">
+      <div class="follow-tab-main" ng-if="activeMenu == 'followers'">
         <div class="following-container" ng-repeat="list in followersList track by $index">
           <div class="following-holder">
             <div class="follow-imgholder">
               <img ng-src="{{list.profilePicture|uploadpath}}" alt="{{list.nameFollow}}" class="img-responsive">
             </div>
             <div class="following-detail text-center">
-              <h4 class="color-blue avenir-heavy">{{list.name}}</h4>
+              <h'bucketList' class="color-blue avenir-heavy">{{list.name}}</h'bucketList'>
               <h5 class="color-pink avenir-medium text-ellipsis"><i class="fa fa-map-marker mr5 color-pink"></i> <span>{{list.homeCity}}</span>, <span>{{list.homeCountry.name}}</span></h5>
             </div>
             <div class="photos-location-sec clearfix">
               <div class="pull-left">
                 <div class="photo-loc">
-                    <img src="img/camera-blue.png" alt="Photos" width="20" class="v-mid">
-                    <span class="avenir-heavy color-dark-blue v-mid">{{list.count.photoCount}}</span> | <img src="img/location-blue.png" alt="Location" width="20" class="v-mid"> <span class="avenir-heavy color-dark-blue v-mid">{{list.count.checkInCount}}</span>
+                    <img src="img/camera-blue.png" alt="Photos" width="'followers'0" class="v-mid">
+                    <span class="avenir-heavy color-dark-blue v-mid">{{list.count.photoCount}}</span> | <img src="img/location-blue.png" alt="Location" width="'followers'0" class="v-mid"> <span class="avenir-heavy color-dark-blue v-mid">{{list.count.checkInCount}}</span>
                 </div>
               </div>
               <div class="pull-right">
@@ -132,21 +132,21 @@
       </div>
       <!-- follower tab end -->
       <!-- country visited -->
-      <div class="country-visited-tab" ng-if="profileList == 3">
+      <div class="country-visited-tab" ng-if="activeMenu == 'countriesVisited'">
         <div class="list-country-visited">
            <div class="row">
-             <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="country in countryVisitedList">
+             <div class="col-md-'countriesVisited' col-sm-6 col-pad-zero" ng-repeat="country in countryVisitedList">
               <div class="country-list-holder">
                 <div class="list-imgholder">
                   <img ng-src="{{country.countryId.flag|uploadpath}}" alt="" class="img-responsive country-img">
                   <div class="list-info">
                     <div class="clearfix">
                       <div class="pull-left">
-                        <h4 class="avenir-heavy">{{country.countryId.name}} <span>{{country.countryYear}}</span></h4>
+                        <h'bucketList' class="avenir-heavy">{{country.countryId.name}} <span>{{country.countryYear}}</span></h'bucketList'>
                       </div>
                       <div class="pull-right">
                         <div class="bucket-flag">
-                          <img ng-src="{{country.flag|uploadpath}}" alt="{{country.countryName}}" class="img-responsive" width="30">
+                          <img ng-src="{{country.flag|uploadpath}}" alt="{{country.countryName}}" class="img-responsive" width="'countriesVisited'0">
                         </div>
                       </div>
                     </div>
@@ -171,21 +171,21 @@
       </div>
       <!-- country visited end -->
       <!-- bucket list -->
-      <div class="bucket-tab-main" ng-if="profileList == 4" ">
+      <div class="bucket-tab-main" ng-if="activeMenu == 'bucketList'" ">
         <div class="bucket-list-main">
           <div class="row">
-            <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="bucket in bucketList track by $index" id="{{bucket._id}}">
+            <div class="col-md-'countriesVisited' col-sm-6 col-pad-zero" ng-repeat="bucket in bucketList track by $index" id="{{bucket._id}}">
               <div class="bucket-list-holder">
                 <div class="list-imgholder">
                   <img ng-src="{{bucket.flag|uploadpath}}" alt="" class="img-responsive country-img">
                   <div class="list-info">
                     <div class="clearfix">
                       <div class="pull-left">
-                        <h4 class="avenir-heavy">{{bucket.name}}</h4>
+                        <h'bucketList' class="avenir-heavy">{{bucket.name}}</h'bucketList'>
                       </div>
                       <div class="pull-right">
                         <div class="bucket-flag">
-                          <img ng-src="{{bucket.countryFlag}}" alt="{{bucket.countryName}}" width="30" class="img-responsive">
+                          <img ng-src="{{bucket.countryFlag}}" alt="{{bucket.countryName}}" width="'countriesVisited'0" class="img-responsive">
                         </div>
                       </div>
                     </div>
