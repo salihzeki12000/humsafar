@@ -7728,10 +7728,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     //like-unlike itinerary starts
+    $scope.itinerary.likeDone;
+    $scope.itinerary.likeCount;
     $scope.likeUnlikeItinerary = function (flag, _id, uniqueId) {
       Itinerary.updateLikeItinerary(flag, _id, uniqueId, function (data) {
-        console.log(data);
+        if(data){
+          $scope.itinerary.likeCount=$scope.likeCount+1;
+        }else{
+          $scope.itinerary.likeCount=$scope.likeCount-1;
+        }
         $scope.itinerary.likeDone = data;
+        console.log($scope.itinerary.likeCount,$scope.itinerary.likeDone);
       });
     };
     //like-unlike itinerary ends
@@ -8010,7 +8017,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var slug = $stateParams.id;
     Itinerary.getOneItinerary(slug, function (data) {
       $scope.itinerary = data.data;
-      console.log($scope.itinerary);
     });
     //get quick-itinerary details ends
 
@@ -8018,13 +8024,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.likeUnlikeItinerary = function (flag, _id, uniqueId) {
       Itinerary.updateLikeItinerary(flag, _id, uniqueId, function (data) {
-        console.log(data);
+        if(data){
+          if($scope.itinerary.likeCount==null){
+            $scope.itinerary.likeCount=1
+          }else{
+            $scope.itinerary.likeCount=$scope.likeCount+1;
+          }
+        }else{
+          $scope.itinerary.likeCount=$scope.likeCount-1;
+        }
         $scope.itinerary.likeDone = data;
-        // if($scope.itinerary.likeDone){
-        //   $scope.itinerary.likeCount=$scope.itinerary.likeCount+1;
-        // }else{
-        //   $scope.itinerary.likeCount=$scope.itinerary.likeCount-1;
-        // }
+        console.log($scope.itinerary.likeCount,$scope.itinerary.likeDone);
       });
     };
     //like-unlike itinerary ends
