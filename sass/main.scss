@@ -663,7 +663,6 @@ header {
 
 .search {
   margin: 2px 10px 2px 13px;
-
   input {
     width: 360px;
     padding: 6px 10px 6px 25px;
@@ -712,6 +711,10 @@ header {
 // end header
 // Set Profile process
 
+.background-login {
+  background-color: #fff;
+}
+
 .city,
 .gender,
 .nationality,
@@ -750,10 +753,12 @@ header {
   [type="radio"]:not(:checked)+label:before {
     content: '';
     @include square(20px);
+    border: 1px solid $brand-pink;
+    border-radius: 4px;
     position: absolute;
     right: 0;
     top: 2px;
-    background-color: #d1d1d1;
+    background-color: transparent;
     color: #f6f6f6;
     @include transition(all 300ms linear);
   }
@@ -761,6 +766,7 @@ header {
   [type="radio"]:checked+label:after,
   [type="radio"]:not(:checked)+label:after {
     content: '\f00c';
+    color: #b7b7b7;
     font: normal normal normal 14px/1 FontAwesome;
     position: absolute;
     top: 6px;
@@ -776,8 +782,13 @@ header {
   }
 
   [type="radio"]:checked+label:before {
-    background-color: $brand-pink;
-    color: #fff;
+    background-color: transparent;
+    color: $brand-pink;
+    @include transition(all 300ms linear);
+  }
+
+  [type="radio"]:checked+label:after {
+    color: $brand-pink;
     @include transition(all 300ms linear);
   }
 }
@@ -884,7 +895,6 @@ header {
 
   .search-nation {
     position: relative;
-
     &:after,
     &:before {
       content: "";
@@ -921,40 +931,43 @@ header {
   }
 
   ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: $brand-lighter-grey;
   }
 
   ::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #fff;
+    background-color: $brand-pink;
   }
 
   ul {
     width: 100%;
     height: 220px;
-    padding: 10px 0 0;
+    padding: 10px 10px 0;
+    border: 1px solid #a0a0a0;
+    border-top: 1px solid transparent;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
     position: absolute;
     overflow-x: hidden;
     overflow-y: scroll;
     list-style-type: none;
     text-align: left;
-
     li {
-      padding: 10px;
-      border-bottom: 2px solid $brand-dark-blue;
+      padding: 10px 0;
+      // border-bottom: 2px solid $brand-dark-blue;
+      border-bottom: 1px solid $brand-lighter-grey;
       color: #fff;
 
       span {
         font-size: 16px;
       }
-
-      &:nth-child(even) {
-        background-color: #979aab;
-      }
-
-      &:nth-child(odd) {
-        background-color: #555f7a;
-      }
+      //
+      // &:nth-child(even) {
+      //   background-color: #979aab;
+      // }
+      //
+      // &:nth-child(odd) {
+      //   background-color: #555f7a;
+      // }
     }
   }
 }
@@ -1677,10 +1690,21 @@ header {
 }
 
 .country-visited {
-  @include position(absolute, -10px 10px null null);
+width: 30px;
+height: 30px;
+overflow: hidden;
+position: relative;
+border: 1px solid #fff;
+float: left;
+margin-left: -10px;
+border-radius: 100%;
 
   img {
-    margin-left: -10px;
+    max-width: initial;
+    max-height: 100%;
+    border-radius: 50%;
+    @include position(absolute, null null 50% null);
+    @include transform(translateX(-50%));
   }
 
   span {
@@ -3492,6 +3516,11 @@ header {
   margin-top: -30px;
   margin-right: 15px;
   display: inline-block;
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  border: 1px solid #fff;
+  border-radius: 35%;
 }
 
 .editor-subdetail {
@@ -6194,7 +6223,7 @@ header {
 }
 
 .fill-itinerary-type {
-  margin: 30px 0;
+  margin: 30px 0 15px;
 
   .select-itinerary-type {
     min-width: 80px;
@@ -6239,7 +6268,7 @@ header {
 
     .close-city-x{
       position: absolute;
-      top: 5px;
+      top: 10px;
       right: 0;
       cursor: pointer;
     }
@@ -6787,7 +6816,7 @@ header {
 }
 
 .listed-button {
-  margin: 10px 10px 0;
+  margin: 10px 0px 0;
 }
 // trip budget
 
@@ -6991,6 +7020,120 @@ header {
   }
 }
 // trip status right side end
+//sagar css
+.itinerary-from,
+.itinerary-to {
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    @include appearance(none);
+  }
+
+  input[type=date]::-webkit-inner-spin-button,
+  input[type=date]::-webkit-outer-spin-button {
+    @include appearance(none);
+  }
+
+  input[type=date]::-webkit-calendar-picker-indicator {
+    // -webkit-appearance: none;
+    // display: none;
+  }
+}
+
+.remove-country-city {
+  position: absolute;
+  top: -10px;
+  right: -30px;
+  cursor: pointer;
+}
+
+.detail-select-box {
+  display: inline-block;
+  width: 90%;
+  margin-left: -4px;
+  border: none;
+
+  .ui-select-container{
+    width: auto;
+    border: none;
+  }
+
+  span.ui-select-match > span {
+    margin-bottom: 10px;
+    margin-right: 10px;
+    /* background-color: red; */
+    display: inline-block;
+  }
+
+  .ui-select-match-item {
+    border: none;
+    border-bottom: 1px solid $brand-blue;
+    border-radius: 0;
+    font-size: 13px;
+
+    &:before {
+      content: '';
+      width: 1px;
+      height: 10px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background-color: #2d3655;
+    }
+
+    &:after {
+      content: '';
+      width: 1px;
+      height: 10px;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      background-color: #2d3655;
+    }
+
+    .close {
+      color: $brand-blue;
+    }
+  }
+}
+
+.add-country-city-repeat {
+  .add-country-city {
+    padding-top: 20px;
+    border-top: 2px solid $brand-lighter-grey;
+
+    &:first-child {
+      padding-top: 10px;
+      border: none;
+    }
+  }
+}
+
+.add-country-border {
+  padding: 20px;
+  border-top: 2px solid $brand-lighter-grey;
+}
+
+.add-country-span {
+  font-size: 12px;
+}
+
+.detail-itinerary-type {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: $brand-light-grey;
+}
+
+.add-country-span {
+  font-size: 12px;
+  display: block;
+}
+
+.add-city-span {
+  font-size: 12px;
+  margin: 5px 10px;
+}
+//sagar css end
 // detail itinerary detail end
 // editor itinerary
 
@@ -8106,8 +8249,9 @@ header {
   border-top: 1px solid #c2c8cf;
   border-bottom: 1px solid #c2c8cf;
 
-  button {
+  .following-btn {
     font-size: 13px;
+    &:hover { box-shadow: 1px 3px 3px #a0a0a0; }
   }
 
   .photo-loc {
@@ -8151,13 +8295,14 @@ header {
 }
 
 .follow-imgholder {
-  width: 90px;
-  height: 95px;
-  border: 3px solid #fff;
+  width: 78px;
+  height: 82px;
+  border: 2px solid #fff;
   border-radius: 30px;
   box-shadow: 1px 4px 4px #888;
   margin: -40px auto 0;
   overflow: hidden;
+  img { min-height: 100%; }
 }
 // follow and following end
 // profile list (follow following countryVisited BucketList) end
