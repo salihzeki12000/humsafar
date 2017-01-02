@@ -627,13 +627,14 @@ a.color-white {
 }
 
 .destination-desc-modal {
+  width: 100%;
   position: absolute;
   bottom: -20px;
   left: 0;
   background: rgba(0, 0, 0, 0.8);
   color: #fff;
   padding: 20px 30px 10px;
-  margin: 20px 40px;
+  margin: 20px 0px;
 
   h4 {
     @extend .avenir-heavy;

@@ -7,7 +7,7 @@
             <div class="img-holder-place">
               <flex-slider flex-slide="item in countryMustDoImg track by $index" slider-id="slider" prev-text="" next-text="" sync="#carousel"
                 slideshow="true" animation="slide">
-                <li>
+                <li class="relate">
                   <img ng-src="{{item.mainPhoto|uploadpath}}" alt="Travelibro" class="full-width">
                   <div class="overlay-slider"></div>
                   <div class="destination-desc-modal">
@@ -15,7 +15,7 @@
                       {{item.name}}
                     </h4>
                     <p class="cont-place">{{item.description}}</p>
-                    <p class="cont-place text-right fnt-12 m-clear">
+                    <p class="cont-place text-right fnt-12 m-clear" ng-class="{'hide': item.imageCredit=='','show':item.imageCredit!==''}">
                       Image Courtesy: <a href="{{item.imageCredit}}" class="color-white" target="_blank">{{item.imageCredit}}</a >
                 </p>
               </div>
