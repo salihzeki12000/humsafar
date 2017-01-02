@@ -19,16 +19,34 @@
           <div class="container-fluid">
             <div class="pad-btn">
               <div class="row">
+                <div class="row">
+                  <div class="col-md-2 col-sm-3">
+                    <div class="select-all-made" ng-mouseleave="showAll=false">
+                      <form action="#">
+                        <span class="btn btn-default form-control" ng-click="showAll=true" ng-hide="showAll">All
+                      <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
+                        <input type="type" placeholder="Show All" ng-model="searchFilter" ng-show="showAll" class="form-control input-tab avenir-roman">
+                        <div class="check-box-panel" ng-show="showAll">
+                          <ul>
+                            <li ng-repeat="country in countries | filter:searchFilter">
+                              <input type="checkbox" id="{{country.code}} " class="form-control">
+                              <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
+                            </li>
+                          </ul>
+                        </div>
+                    </div>
+                    </form>
+                  </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-mouseleave="showme=false">
+                  <div class="select-all-made" ng-mouseleave="showcities=false">
                     <form action="#">
-                      <span class="btn btn-default form-control" ng-click="showme=true" ng-hide="showme">Cities
+                      <span class="btn btn-default form-control" ng-click="showcities=true" ng-hide="showcities">Cities
                   <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                      <input type="type" placeholder="Cities" ng-model="searchFilter" ng-show="showme" class="form-control input-tab avenir-roman">
-                      <div class="check-box-panel" ng-show="showme">
+                      <input type="type" placeholder="Cities" ng-model="searchFilter" ng-show="showcities" class="form-control input-tab avenir-roman">
+                      <div class="check-box-panel" ng-show="showcities">
                         <ul>
                           <li ng-repeat="country in countries | filter:searchFilter">
-                            <input type="checkbox" id="{{country.code}} " ng-show="showme" class="form-control">
+                            <input type="checkbox" id="{{country.code}} " class="form-control">
                             <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
                           </li>
                         </ul>
@@ -37,15 +55,15 @@
                   </form>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-mouseleave="showme=false">
+                  <div class="select-all-made" ng-mouseleave="showtype=false">
                     <form action="#">
-                      <span class="btn btn-default form-control" ng-click="showme=true" ng-hide="showme">Type
+                      <span class="btn btn-default form-control" ng-click="showtype=true" ng-hide="showtype">Type
                   <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                      <input type="type" placeholder="Type" ng-model="searchFilter" ng-show="showme" class="form-control input-tab avenir-roman">
-                      <div class="check-box-panel" ng-show="showme">
+                      <input type="type" placeholder="Type" ng-model="searchFilter" ng-show="showtype" class="form-control input-tab avenir-roman">
+                      <div class="check-box-panel" ng-show="showtype">
                         <ul>
                           <li ng-repeat="country in countries | filter:searchFilter">
-                            <input type="checkbox" id="{{country.code}} " ng-show="showme" class="form-control">
+                            <input type="checkbox" id="{{country.code}} " ng-show="showtype" class="form-control">
                             <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
                           </li>
                         </ul>
@@ -54,21 +72,21 @@
                   </form>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-mouseleave="showme=false">
-                    <span class="btn btn-default form-control" ng-click="showme=true" ng-hide="showme">By
+                  <div class="select-all-made" ng-mouseleave="showby=false">
+                    <span class="btn btn-default form-control" ng-click="showby=true" ng-hide="showby">By
                   <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                    <input type="type" placeholder="By" ng-model="searchFilter" ng-show="showme" class="form-control input-tab avenir-roman">
-                    <div class="check-box-panel" ng-show="showme">
+                    <input type="type" placeholder="By" ng-model="searchFilter" ng-show="showby" class="form-control input-tab avenir-roman">
+                    <div class="check-box-panel" ng-show="showby">
                       <ul>
                         <li ng-repeat="country in countries | filter:searchFilter">
-                          <input type="checkbox" id="{{country.code}} " ng-show="showme" class="form-control" ng-model="testCtrl.myText">
+                          <input type="checkbox" id="{{country.code}} " ng-show="showby" class="form-control" ng-model="testCtrl.myText">
                           <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-offset-1 col-md-5  col-sm-3 ">
+                <div class="col-md-offset-1 col-md-3  col-sm-3 ">
                   <div class="txt-clear text-right ">
                     <a>Clear All</a>
                   </div>

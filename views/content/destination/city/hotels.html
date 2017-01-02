@@ -22,14 +22,14 @@
             <div class="pad-btn">
               <div class="row">
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-mouseleave="showme=false">
-                    <span class="btn btn-default form-control" ng-click="showme=true" ng-hide="showme">Cuisine
+                  <div class="select-all-made" ng-mouseleave="showCategory=false">
+                    <span class="btn btn-default form-control" ng-click="showCategory=true" ng-hide="showCategory">Category
                   <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                    <input type="type" placeholder="Cuisine" ng-model="searchFilter" ng-show="showme" class="form-control input-tab avenir-roman">
-                    <div class="check-box-panel" ng-show="showme">
+                    <input type="type" placeholder="Cuisine" ng-model="searchFilter" ng-show="showCategory" class="form-control input-tab avenir-roman">
+                    <div class="check-box-panel" ng-show="showCategory">
                       <ul>
                         <li ng-repeat="country in countries | filter:searchFilter">
-                          <input type="checkbox" id="{{country.code}} " ng-show="showme" class="form-control">
+                          <input type="checkbox" id="{{country.code}} " ng-show="showCategory" class="form-control">
                           <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
                         </li>
                       </ul>
@@ -37,34 +37,21 @@
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-mouseleave="showme=false">
-                    <span class="btn btn-default form-control" ng-click="showme=true" ng-hide="showme">Budget
+                  <div class="select-all-made" ng-mouseleave="showbudget=false">
+                    <span class="btn btn-default form-control" ng-click="showbudget=true" ng-hide="showbudget">Budget
                   <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                    <input type="type" placeholder="Budget" ng-model="searchFilter" ng-show="showme" class="form-control input-tab avenir-roman">
-                    <div class="check-box-panel" ng-show="showme">
+                    <input type="type" placeholder="Budget" ng-model="hotelsBudget" ng-show="showbudget" class="form-control input-tab avenir-roman">
+                    <div class="check-box-panel" ng-show="showbudget">
                       <ul>
-                        <li ng-repeat="country in countries | filter:searchFilter">
-                          <input type="checkbox" id="{{country.code}} " ng-show="showme" class="form-control">
-                          <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
+                        <li ng-repeat="country in countries | filter:hotelsBudget">
+                          <input type="checkbox" id="{{country.code}} " ng-model="hotelsBudget" ng-show="showbudget" class="form-control">
+                          <label for="{{country.code}} " class="avenir-roman " ng-model="hotelsBudget">{{country.name}}</label>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
-                <!--<div class="col-md-2 col-sm-3 ">
-                <div class="select-all-made ">
-                  <ui-select ng-model="selectedItem ">
-                    <ui-select-match placeholder="Budget ">
-                      <span ng-bind="$select.selected.name "></span>
-                    </ui-select-match>
-                    <ui-select-choices repeat="item in (countries | filter: $select.search) track by $index ">
-                      <span ng-bind="item.name "></span>
-                    </ui-select-choices>
-                  </ui-select>
-                </div>
-              </div>-->
-                <div class="col-md-offset-1 col-md-5  col-sm-3 ">
-                  <!--<button type="submit">Add</button>-->
+                <div class="col-md-offset-1 col-md-7 col-sm-5">
                   <div class="txt-clear text-right ">
                     <a>Clear All</a>
                   </div>
@@ -78,7 +65,7 @@
             <div class="plr30 ">
               <div class="close-all ">
                 <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
-                <span class="tags avenir-roman" ng-repeat="item in country">{{item}} <span>X</span></span>
+                <span class="tags avenir-roman">{{hotelsBudget}} <span>X</span></span>
               </div>
             </div>
           </div>

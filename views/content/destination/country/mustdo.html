@@ -1,30 +1,34 @@
-<div class="bg-white min-hght">
-  <div class="destination-featured plr30">
-    <div class="head-title-all pt20 pb10">
+<div class="min-hght">
+  <div class="destination-featured">
+    <div class="head-title-all pt20 pb10 bg-white">
       <h4 class="text-center fnt-22">Top 10 In {{countryDestData.name}}</h4>
     </div>
-    <div class="row" ng-init="index=-1">
-      <div class="col-md-6 col-sm-6" ng-repeat="must in countryDestData.mustDo track by $index">
-        <div class="img-holder card relate">
-          <div class="flip-holder" ng-class="($index==index)?'flipped':''" style="background:url('{{must.mainPhoto|uploadpath}}');">
-            <!-- <img src="" alt="travel-libro"> -->
-            <div class="front">
-              <div class="pop-hover-css" ng-click="openCountry($index);">
-                <div class="title-head-left color-white">
-                  {{must.name}}
+    <div class="container-fluid">
+      <div class="plr30 bg-white">
+        <div class="row" ng-init="index=-1">
+          <div class="col-md-6 col-sm-6" ng-repeat="must in countryDestData.mustDo track by $index">
+            <div class="img-holder card relate">
+              <div class="flip-holder" ng-class="($index==index)?'flipped':''" style="background:url('{{must.mainPhoto|uploadpath}}');">
+                <!-- <img src="" alt="travel-libro"> -->
+                <div class="front">
+                  <div class="pop-hover-css" ng-click="openCountry($index);">
+                    <div class="title-head-left color-white">
+                      {{must.name}}
+                    </div>
+                  </div>
+                  <div class="read-more right-bottom filpup">
+                    <a class="color-white" ng-click="index=$index">Read</a>
+                  </div>
                 </div>
-              </div>
-              <div class="read-more right-bottom filpup">
-                <a class="color-white" ng-click="index=$index">Read</a>
-              </div>
-            </div>
-            <div class="back">
-              <div class="flipped-cont">
-                <div class="">
-                  <p>{{must.description}}</p>
-                </div>
-                <div class="read-more right-bottom flipdown">
-                  <a class="color-white" ng-click="index=-1">Close</a>
+                <div class="back">
+                  <div class="flipped-cont">
+                    <div class="">
+                      <p>{{must.description}}</p>
+                    </div>
+                    <div class="read-more right-bottom flipdown">
+                      <a class="color-white" ng-click="index=-1">Close</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

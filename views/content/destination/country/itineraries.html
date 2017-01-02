@@ -1,96 +1,207 @@
 <div class="activity-main min-hght">
-  <div class="bg-white activity-container">
-    <div class="plr30">
-      <div class="" masonry>
-        <div class="row">
-          <div class="col-md-4 col-sm-6 col-xs-12 masonry-brick" ng-repeat="post in countryDestData.itinerary">
-            <!-- user-iternarys -->
-            <div class="travel-life-part blog-post avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
-              <div class="travel-journey-heading">
-                <div class="editor-logo user-logo">
-                  <img ng-src="{{post.user.profilePicture|uploadpath}}" alt="" width="70" class="img-responsive">
-                </div>
-                <div class="inline-block editor-subdetail">
-                  <div class="clearfix">
-                    <div class="pull-left">
-                      <h3 class="font-bold color-dark-blue m-clear mb5 heading-name">{{post.user.name}}</h3>
-                    </div>
-                    <div class="pull-right">
-                      <span class="follow-following color-blue text-capitalize">{{post.follower}}</span>
-                    </div>
-                  </div>
-                    <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.createdAt | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.createdAt | date :'hh:mm a'}}</span></p>
-                </div>
-              </div>
-              <div class="onway-journey relate">
-                <div class="onway-imgholder">
-                  <img ng-src="{{post.photos[0].name|uploadpath}}" alt="" class="img-responsive m-center">
-                </div>
-                <div class="country-visited">
-                  <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30" ng-repeat="visit in post.countryVisited track by $index">
-                  <span class="" ng-if="visit.country.length > 3">+4</span>
-                </div>
-                <div class="journey-tag-holder">
-                  <h3 class="m-clear text-capitalize">{{post.title}}</h3>
-                  <div class="clearfix journey-travelling-type">
-                    <div class="pull-left">
-                      <div class="journey-type">
+  <div class="relate  destin-fixednav1" ng-class="{'openfilter': isopenfilter}">
+    <div class="pt20 pb10 head-title-all bg-white">
+      <div class="row m-clear">
+        <div class="col-md-3">
+          <div class="pad-btn">
+            <button class="btn btn-pink" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i> Filter
+            </button>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h4 class="text-center  fnt-24 p-clear">Itineraries and Journeys</h4>
+        </div>
+      </div>
+    </div>
+    <div class="libro-filter filterclose">
+      <form>
+        <div class="pt20 pb10 head-title-all fliter-min-hght bg-white">
+          <div class="container-fluid">
+            <div class="pad-btn">
+              <div class="row">
+                <div class="col-md-2 col-sm-3">
+                  <div class="select-all-made" ng-mouseleave="showAll=false">
+                    <form action="#">
+                      <span class="btn btn-default form-control" ng-click="showAll=true" ng-hide="showAll">All
+                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
+                      <input type="type" placeholder="Show All" ng-model="searchFilter" ng-show="showAll" class="form-control input-tab avenir-roman">
+                      <div class="check-box-panel" ng-show="showAll">
                         <ul>
-                          <li ng-repeat="type in post.itineraryType">
-                            <a href=""><img ng-src="{{type|kindOfJourney}}" alt="" height="20"></a>
+                          <li ng-repeat="country in countries | filter:searchFilter">
+                            <input type="checkbox" id="{{country.code}} " class="form-control">
+                            <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
                           </li>
                         </ul>
                       </div>
-                    </div>
-                    <div class="pull-right">
-                      <div class="journey-cost">
-                        <span>{{post.cost}}</span>
+                  </div>
+                  </form>
+                </div>
+                <div class="col-md-2 col-sm-3">
+                  <div class="select-all-made" ng-mouseleave="showcities=false">
+                    <form action="#">
+                      <span class="btn btn-default form-control" ng-click="showcities=true" ng-hide="showcities">Cities
+                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
+                      <input type="type" placeholder="Cities" ng-model="searchFilter" ng-show="showcities" class="form-control input-tab avenir-roman">
+                      <div class="check-box-panel" ng-show="showcities">
+                        <ul>
+                          <li ng-repeat="country in countries | filter:searchFilter">
+                            <input type="checkbox" id="{{country.code}} " class="form-control">
+                            <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
+                          </li>
+                        </ul>
                       </div>
-                      <div class="days-spent">
-                        <p><span class="block">{{post.duration}}</span>Days</p>
+                  </div>
+                  </form>
+                </div>
+                <div class="col-md-2 col-sm-3">
+                  <div class="select-all-made" ng-mouseleave="showtype=false">
+                    <form action="#">
+                      <span class="btn btn-default form-control" ng-click="showtype=true" ng-hide="showtype">Type
+                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
+                      <input type="type" placeholder="Type" ng-model="searchFilter" ng-show="showtype" class="form-control input-tab avenir-roman">
+                      <div class="check-box-panel" ng-show="showtype">
+                        <ul>
+                          <li ng-repeat="country in countries | filter:searchFilter">
+                            <input type="checkbox" id="{{country.code}} " ng-show="showtype" class="form-control">
+                            <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
+                          </li>
+                        </ul>
                       </div>
+                  </div>
+                  </form>
+                </div>
+                <div class="col-md-2 col-sm-3">
+                  <div class="select-all-made" ng-mouseleave="showby=false">
+                    <span class="btn btn-default form-control" ng-click="showby=true" ng-hide="showby">By
+                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
+                    <input type="type" placeholder="By" ng-model="searchFilter" ng-show="showby" class="form-control input-tab avenir-roman">
+                    <div class="check-box-panel" ng-show="showby">
+                      <ul>
+                        <li ng-repeat="country in countries | filter:searchFilter">
+                          <input type="checkbox" id="{{country.code}} " ng-show="showby" class="form-control" ng-model="testCtrl.myText">
+                          <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="social-field-types">
-                <div class="user-social-item clearfix">
-                  <div class="pull-left">
-                    <ul>
-                      <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
-                      <li>
-                        <a href=""><img src="img/comments.png" alt="" height="18"></a>
-                      </li>
-                      <li>
-                        <a href=""><img src="img/reviews.png" alt="" height="18"></a>
-                      </li>
-                      <li>
-                        <a href=""><img src="img/share.png" alt="" height="18"></a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="pull-right">
-                    <div class="">
-                      <span><img src="img/options.png" alt="" height="18" class="pointer"></span>
-                    </div>
-                  </div>
-                </div>
-                <div class="social-likes-reviews avenir-heavy">
-                  <div class="clearfix">
-                    <div class="pull-left">
-                      <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{post.likeCount}}</b>Likes</span>
-                      <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{post.userReviewCount}} Reviews ({{post.userReviewCount}}/5)</span>
-                    </div>
-                    <div class="pull-right">
-                      <img src="img/travel.png" alt="">
-                    </div>
+                <div class="col-md-offset-1 col-md-3  col-sm-3 ">
+                  <div class="txt-clear text-right ">
+                    <a>Clear All</a>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- end-user-iternarys -->
+          </div>
+        </div>
+        <div class="pt10 pb10 head-title-all bg-grey mb20 ">
+          <div class="container-fluid ">
+            <div class="plr30 ">
+              <div class="close-all ">
+                <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
+                <span class="tags avenir-roman" ng-repeat="item in country">{{item}} <span>X</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="bg-white activity-container">
+      <div class="plr30">
+        <div class="" masonry>
+          <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12 masonry-brick" ng-repeat="post in countryDestData.itinerary">
+              <!-- user-iternarys -->
+              <div class="travel-life-part blog-post avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
+                <div class="travel-journey-heading">
+                  <div class="editor-logo user-logo">
+                    <img ng-src="{{post.user.profilePicture|uploadpath}}" alt="" width="70" class="img-responsive">
+                  </div>
+                  <div class="inline-block editor-subdetail">
+                    <div class="clearfix">
+                      <div class="pull-left">
+                        <h3 class="font-bold color-dark-blue m-clear mb5 heading-name">{{post.user.name}}</h3>
+                      </div>
+                      <div class="pull-right">
+                        <span class="follow-following color-blue text-capitalize">{{post.follower}}</span>
+                      </div>
+                    </div>
+                    <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.createdAt | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.createdAt | date :'hh:mm a'}}</span></p>
+                  </div>
+                </div>
+                <div class="onway-journey relate">
+                  <div class="onway-imgholder">
+                    <img ng-src="{{post.photos[0].name|uploadpath}}" alt="" class="img-responsive m-center">
+                  </div>
+                  <div class="country-visited">
+                    <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30" ng-repeat="visit in post.countryVisited track by $index">
+                    <span class="" ng-if="visit.country.length > 3">+4</span>
+                  </div>
+                  <div class="journey-tag-holder">
+                    <h3 class="m-clear text-capitalize">{{post.title}}</h3>
+                    <div class="clearfix journey-travelling-type">
+                      <div class="pull-left">
+                        <div class="journey-type">
+                          <ul>
+                            <li ng-repeat="type in post.itineraryType">
+                              <a href=""><img ng-src="{{type|kindOfJourney}}" alt="" height="20"></a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="pull-right">
+                        <div class="journey-cost">
+                          <span>{{post.cost}}</span>
+                        </div>
+                        <div class="days-spent">
+                          <p><span class="block">{{post.duration}}</span>Days</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="social-field-types">
+                  <div class="user-social-item clearfix">
+                    <div class="pull-left">
+                      <ul>
+                        <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
+                        <li>
+                          <a href=""><img src="img/comments.png" alt="" height="18"></a>
+                        </li>
+                        <li>
+                          <a href=""><img src="img/reviews.png" alt="" height="18"></a>
+                        </li>
+                        <li>
+                          <a href=""><img src="img/share.png" alt="" height="18"></a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="pull-right">
+                      <div class="">
+                        <span><img src="img/options.png" alt="" height="18" class="pointer"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="social-likes-reviews avenir-heavy">
+                    <div class="clearfix">
+                      <div class="pull-left">
+                        <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{post.likeCount}}</b>Likes</span>
+                        <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{post.userReviewCount}} Reviews ({{post.userReviewCount}}/5)</span>
+                      </div>
+                      <div class="pull-right">
+                        <img src="img/travel.png" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end-user-iternarys -->
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

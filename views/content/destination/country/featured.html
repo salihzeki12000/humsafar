@@ -1,22 +1,24 @@
-<div class="bg-white min-hght">
-  <div class="destination-featured plr30">
-    <div class="head-title-all pt20 pb10">
+<div class=" min-hght">
+  <div class="destination-featured">
+    <div class="head-title-all bg-white pt20 pb10">
       <h4 class="text-center fnt-22">Featured Cities</h4>
     </div>
-    <div class="destination-holder">
-      <div class="row">
-        <div class="col-md-6 col-sm-6" ng-repeat="feature in countryDestData.featuredCities track by $index">
-          <div class="img-holder relate" style="background:url('{{feature.cityCoverPhoto|uploadpath}}');">
-            <img alt="travel-libro" class="">
-            <div class="title-head-left color-white text-uppercase">
-              {{feature.name}}
-            </div>
-            <div class="read-more left-bottom">
-              <ul class="list-inline">
-                <li class="avenir-roman color-white">Must Do’s: <span class="avenir-heavy">{{feature.mustDoCount}}</span> </li>
-                <li class="avenir-heavy color-white">|</li>
-                <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">{{feature.itineraryCount}}</span> </li>
-              </ul>
+    <div class="container-fluid">
+      <div class="destination-holder bg-white plr30">
+        <div class="row">
+          <div class="col-md-6 col-sm-6" ng-repeat="feature in countryDestData.featuredCities track by $index">
+            <div class="img-holder relate" style="background:url('{{feature.cityCoverPhoto|uploadpath}}');">
+              <img alt="travel-libro" class="">
+              <div class="title-head-left color-white text-uppercase">
+                {{feature.name}}
+              </div>
+              <div class="read-more left-bottom">
+                <ul class="list-inline">
+                  <li class="avenir-roman color-white">Must Do’s: <span class="avenir-heavy">{{feature.mustDoCount}}</span> </li>
+                  <li class="avenir-heavy color-white">|</li>
+                  <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">{{feature.itineraryCount}}</span> </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

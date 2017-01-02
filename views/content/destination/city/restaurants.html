@@ -20,28 +20,26 @@
             <div class="pad-btn">
               <div class="row">
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-click="showCuisine = !showCuisine">
-                    <form action="#">
-                      <span class="btn btn-default form-control" ng-click="showme=true" ng-hide="showme">Cuisine
+                  <div class="select-all-made" ng-mouseleave="showCuisine=false">
+                    <span class="btn btn-default form-control" ng-click="showCuisine=true" ng-hide="showCuisine">Cuisine
                   <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                      <input type="type" placeholder="Cuisine" ng-model="searchFilter" class="form-control input-tab avenir-roman">
-                      <div class="check-box-panel" ng-show="showCuisine">
-                        <ul>
-                          <li ng-repeat="country in countries | filter:searchFilter">
-                            <input type="checkbox" id="{{country.code}} " ng-show="showme" class="form-control">
-                            <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
-                          </li>
-                        </ul>
-                      </div>
+                    <input type="type" placeholder="Cuisine" ng-model="searchFilter" ng-show="showCuisine" class="form-control input-tab avenir-roman">
+                    <div class="check-box-panel" ng-show="showCuisine">
+                      <ul>
+                        <li ng-repeat="country in countries | filter:searchFilter">
+                          <input type="checkbox" id="{{country.code}} " ng-show="showCuisine" class="form-control">
+                          <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                  </form>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-click="showType=!showType">
+                  <div class="select-all-made" ng-mouseleave="showType=false">
                     <form action="#">
-                      <span class="btn btn-default form-control" >Type
+                      <span class="btn btn-default form-control" ng-click="showType=true" ng-hide="showType">Type
                   <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                      <input type="type" placeholder="Type" ng-model="searchFilter" class="form-control input-tab avenir-roman">
+                      <input type="type" placeholder="Type" ng-model="searchFilter" ng-show="showType" class="form-control input-tab avenir-roman">
                       <div class="check-box-panel" ng-show="showType">
                         <ul>
                           <li ng-repeat="country in countries | filter:searchFilter">
