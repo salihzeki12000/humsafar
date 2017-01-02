@@ -84,12 +84,9 @@
                                         <img src="img/more-road.png" alt="" width="30" /> <b>{{userData.travelConfig.usuallyGo[0]}}</b>him,
                                        He prefers to travel<img src="img/bus.png" alt="" width="30" /> <b>{{userData.travelConfig.preferToTravel[0]}}</b>along. His idea of a holiday is to go out of his way to see his favourite artist
                                         perform at a <img src="img/dj.png" alt="" width="30" /> <b>Music Festival</b>.</p>-->
-                                    <p class="avenir-roman">{{userName}} loves to travel and explore the<img ng-src="{{kindOfHolidayIcon}}" alt=""
-                                            width="30" /><b>{{kindOfHoliday}}</b>.{{pronoun}} usually goes<img ng-src="{{usuallyGoIcon}}"
-                                            alt="" width="30" /><b>{{usuallyGo}}</b><img ng-if=flag src="{{usuallyGoIcon1}}"
-                                            alt="" width="30" /><b>{{usuallyGo1}}</b>,{{pronoun}} {{intermediate}}<img ng-src="{{preferToTravelIcon}}"
-                                            alt="" width="30" /><b>{{preferToTravel}}</b>.<b> {{userName}}'s</b>' Ideal holiday
-                                        type is <img ng-src="{{idealHolidayIcon}}" alt="" width="30" />{{idealHoliday}}.</p>
+                                    <p class="avenir-roman">{{userName}} loves to travel and explore <b>{{kindOfHoliday}}</b>.{{pronoun | capitalize}} usually goes
+                                    <b>{{usuallyGo}}</b><b>{{usuallyGo1}}</b>,{{pronoun}} {{intermediate}}<b>{{preferToTravel}}</b>.<b> {{userName}}'s</b>' Ideal holiday
+                                        type is <b>{{idealHoliday}}.</b></p>
                                 </div>
                                 <span class="djb-font get-more pointer" ng-click="getMore = !getMore">more about me... <img src="img/more-about-me.png" alt="" height="35" class="" ng-class="{'abt-me': getMore == true}"></span>
                             </div>

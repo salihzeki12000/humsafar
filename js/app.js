@@ -692,6 +692,12 @@ firstapp.filter('uploadpath', function() {
   };
 });
 
+firstapp.filter('capitalize', function() {
+    return function(input) {
+      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    }
+});
+
 firstapp.filter('kindOfJourney', function() {
   return function(input) {
     var input = input.toLowerCase();
