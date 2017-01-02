@@ -4,11 +4,12 @@
       <div class="row">
         <div class="col-md-6 col-sm-6" ng-repeat="mustdo in cityDestData.mustDo track by $index">
           <div class="img-holder card relate">
-            <div class="flip-holder" ng-class="($index==index)?'flipped':''" style="background:url('{{mustdo.mainPhoto}}')">
-              <!-- <img ng-src="" alt="travel-libro" class="full-width"> -->
+            <!-- <div class="flip-holder" ng-class="($index==index)?'flipped':''" style="background:url('{{mustdo.mainPhoto}}')"> -->
+            <div class="flip-holder" ng-class="($index==index)?'flipped':''">
+              <img ng-src="{{mustdo.mainPhoto}}" alt="travel-libro" class="full-width">
               <div class="front">
                 <div class="pop-hover-css" ng-click="openCountry($index);">
-                  <div class="pop-hover-css title-head-left color-white">
+                  <div class="title-head-left color-white">
                     {{mustdo.name}}
                   </div>
                 </div>
@@ -28,32 +29,6 @@
             </div>
           </div>
         </div>
-        <!--flip-->
-        <!--<div class="flip-card-holder img-holder card relate {{cardClass}}">
-          <div class="flipper">
-            <div class="flip-front">
-              div class="pop-hover-css front" ng-click="openCountry();">
-              <img src="img/destination/taj-featured.jpg" alt="travel-libro" class="full-width">
-              <div class="title-head-left color-white">
-                Taj Mahal
-              </div>
-              <div class="read-more right-bottom filpup">
-                <a class="color-white" ng-click="flip();">Read</a>
-              </div>
-            </div>
-          </div>
-          <div class="flip-back">
-            <img src="img/destination/taj-featured.jpg" alt="travel-libro" class="full-width">
-            <div class="flipped-cont">
-              <p>A symbol of an eternal love story etched out in the world’s most marvellous structures in the world, the Taj Mahal epitomises one of the greatest romances in the history of mankind. Designated as a UNESCO World Heritage Site and one of the
-                Seven Wonders of the World, this ‘tear-drop on the cheek of time’, as Rabindranath Tagore described it, is regarded as the best example of Mughal architecture and the country’s rich history. Marvel at the great marble monument ornamented
-                with 28 types of precious and semi-precious stones for the inlay work. With its four minarets and the red sandstone mosque, this fascinating monument is a sight to behold.</p>
-            </div>
-            <div class="read-more right-bottom flipdown">
-              <a class="color-white" ng-click="flip();">Close</a>
-            </div>
-          </div>
-        </div>-->
       </div>
     </div>
   </div>

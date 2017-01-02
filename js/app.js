@@ -410,7 +410,7 @@ firstapp.directive("scrolladd1class", function($window) {
   return function(scope, element, attrs) {
     angular.element($window).bind("scroll", function() {
       var windowHeight = $(window).height();
-      if (this.pageYOffset >= 450) {
+      if (this.pageYOffset >= 370) {
         // console.log(windowHeight);
         element.addClass('addfixed');
       } else {
