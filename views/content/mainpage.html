@@ -107,7 +107,7 @@
               </div>
             </div>
           </div>-->
-        <div class="bg-white" ng-init="goNext=2">
+        <div class="background-login" ng-init="goNext=2">
           <div class="nationality" ng-show="goNext==2">
             <div class="text-center">
               <h3 class="color-blue avenir-black">Nationality</h3>
@@ -115,13 +115,13 @@
                 <div class="search-nation">
                   <input type="text" class="form-control avenir-roman" placeholder="Search" ng-model="searchNation">
                 </div>
-                <ul class="avenir-roman bg-dark-blue">
+                <ul class="avenir-roman">
                   <li ng-repeat="nation in nationality | filter:searchNation track by $index">
                     <div class="nation-select relate">
                       <input type="radio" id="{{nation._id}}" name="nation" ng-model="userData.homeCountry" ng-value="nation._id" />
                       <label for="{{nation._id}}">
                         <img ng-src="{{nation.flag|uploadpath}}" alt="" class="img-responsive inline-block mr10" width="30px">
-                        <span class="color-white">{{nation.name}}</span>
+                        <span class="color-light-grey">{{nation.name}}</span>
                       </label>
                     </div>
                   </li>
@@ -141,12 +141,12 @@
                   <input type="text" class="form-control avenir-roman" placeholder="City" ng-model="searchCity" ng-value="userData.homeCity"
                     ng-change="searchByKey(searchCity)">
                 </div>
-                <ul class="avenir-roman bg-dark-blue">
+                <ul class="avenir-roman">
                   <li ng-repeat="city in cities | filter:searchCity track by $index">
                     <div class="nation-select relate">
                       <input type="radio" id="{{city.id}}" name="city" ng-value="city.description" ng-model="userData.homeCity" />
                       <label for="{{city.id}}">
-                        <span class="color-white">{{city.description}}</span>
+                        <span class="color-light-grey">{{city.description}}</span>
                       </label>
                     </div>
                   </li>
