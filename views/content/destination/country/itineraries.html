@@ -136,7 +136,7 @@
                     <img ng-src="{{post.photos[0].name|uploadpath}}" alt="" class="full-width m-center">
                   </div>
                   <div class="country-badges">
-                    <div class="country-visited" ng-repeat="visit in post.countryVisited track by $index">
+                    <div class="country-visited">
                       <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30">
                       <span class="" ng-if="visit.country.length > 3">+4</span>
                     </div>

@@ -443,6 +443,100 @@
               </div>
               <!-- end-user-iternarys -->
             </div>
+
+
+
+
+
+            <div class="col-md-4 col-sm-6 col-xs-12 masonry-brick" ng-repeat="post in cityDestData.itinerary">
+              <!-- user-iternarys -->
+              <div class="travel-life-part blog-post avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
+                <div class="travel-journey-heading">
+                  <div class="editor-logo user-logo">
+                    <img ng-src="{{post.user.profilePicture|uploadpath}}" alt="" width="70" class="img-responsive">
+                  </div>
+                  <div class="inline-block editor-subdetail">
+                    <div class="clearfix">
+                      <div class="pull-left">
+                        <h3 class="font-bold color-dark-blue m-clear mb5 heading-name">{{post.user.name}}</h3>
+                      </div>
+                      <div class="pull-right">
+                        <span class="follow-following color-blue text-capitalize">{{post.follower}}</span>
+                      </div>
+                    </div>
+                    <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.createdAt | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.createdAt | date :'hh:mm a'}}</span></p>
+                  </div>
+                </div>
+                <div class="onway-journey relate">
+                  <div class="onway-imgholder">
+                    <img ng-src="{{post.photos[0].name|uploadpath}}" alt="" class="full-width m-center">
+                  </div>
+                  <div class="country-badges">
+                    <div class="country-visited">
+                      <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30">
+                      <span class="" ng-if="visit.country.length > 3">+4</span>
+                    </div>
+                  </div>
+                  <div class="journey-tag-holder">
+                    <h3 class="m-clear text-capitalize">{{post.title}}</h3>
+                    <div class="clearfix journey-travelling-type">
+                      <div class="pull-left">
+                        <div class="journey-type">
+                          <ul>
+                            <li ng-repeat="type in post.itineraryType">
+                              <a href=""><img ng-src="{{type|kindOfJourney}}" alt="" height="20"></a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="pull-right">
+                        <div class="journey-cost">
+                          <span>{{post.cost}}</span>
+                        </div>
+                        <div class="days-spent">
+                          <p><span class="block">{{post.duration}}</span>Days</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="social-field-types">
+                  <div class="user-social-item clearfix">
+                    <div class="pull-left">
+                      <ul>
+                        <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
+                        <li>
+                          <a href=""><img src="img/comments.png" alt="" height="18"></a>
+                        </li>
+                        <li>
+                          <a href=""><img src="img/reviews.png" alt="" height="18"></a>
+                        </li>
+                        <li>
+                          <a href=""><img src="img/share.png" alt="" height="18"></a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="pull-right">
+                      <div class="">
+                        <span><img src="img/options.png" alt="" height="18" class="pointer"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="social-likes-reviews avenir-heavy">
+                    <div class="clearfix">
+                      <div class="pull-left">
+                        <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{post.likeCount}}</b>Likes</span>
+                        <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{post.userReviewCount}} Reviews ({{post.userReviewCount}}/5)</span>
+                      </div>
+                      <div class="pull-right">
+                        <img src="img/travel.png" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end-user-iternarys -->
+            </div>
           </div>
         </div>
       </div>
