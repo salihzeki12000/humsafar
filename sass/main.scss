@@ -6285,8 +6285,8 @@ border-radius: 100%;
     left: 0;
     width: 100%;
     background-color: #fff;
-    border: 1px solid #424242;
-    border-top: none;
+    border: none;
+    border-radius:  0 0 6px 6px;
     z-index: 2;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     ::-webkit-scrollbar {
@@ -6307,10 +6307,8 @@ border-radius: 100%;
     .country-drop {
       display: block;
       padding: 5px 20px;
-      color: #424242;
-      &:hover {
-        background-color: $brand-lighter-grey;
-      }
+      border-bottom: 1px solid #ebebeb;
+      color: #a0a0a0;
     }
   }
 
@@ -6320,8 +6318,8 @@ border-radius: 100%;
     left: 0;
     width: 100%;
     background-color: #fff;
-    border: 1px solid #424242;
-    border-top: none;
+    border: none;
+    border-radius: 0px 0px 6px 6px;
     z-index: 1;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 
@@ -6345,11 +6343,8 @@ border-radius: 100%;
     .city-drop {
       display: block;
       padding: 5px 20px;
-      color: #424242;
-
-      &:hover {
-        background-color: $brand-lighter-grey;
-      }
+      border-bottom: 1px solid #ebebeb;
+      color: #a0a0a0;
     }
   }
 }
@@ -6597,8 +6592,8 @@ border-radius: 100%;
 
 .dropdown-currency-itinerary {
   width: 100%;
-  border: 1px solid #424242;
-  border-bottom: 1px solid transparent;
+  border: none;
+  border-radius: 6px 6px 0px 0px;
   position: absolute;
   bottom: 24px;
   background-color: #fff;
@@ -6622,11 +6617,10 @@ border-radius: 100%;
 
   li {
     padding: 5px 10px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ebebeb;
   }
-
   a {
-    color: #424242;
+    color: #a0a0a0;
   }
 }
 // quick itinerary detail end
@@ -6700,7 +6694,7 @@ border-radius: 100%;
     a {
       padding: 15px 20px;
       display: block;
-      background-color: #ebebeb;
+      background-color: #f5f5f5;
     }
   }
 
@@ -6843,7 +6837,7 @@ border-radius: 100%;
     display: inline-block;
 
     input {
-      width: 170px;
+      width: 270px;
       @include placeholder {
         font-size: 16px;
       };
@@ -6859,12 +6853,13 @@ border-radius: 100%;
         display: none;
       }
     }
-    input[type="number"]::-webkit-outer-spin-button,   ::-webkit-inner-spin-button {
+    input[type="number"]::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
       @include appearance(none);
     }
     label {
       width: 118px;
-      padding: 0px 10px 2px 10px;
+      padding: 0px 10px 2px;
       margin: 0;
       display: block;
       position: absolute;
@@ -7040,6 +7035,107 @@ border-radius: 100%;
     // -webkit-appearance: none;
     // display: none;
   }
+  .uib-datepicker-popup {
+    @extend .avenir-roman;
+    padding: 10px;
+
+    .uib-daypicker:focus {
+      outline: none;
+    }
+
+    .uib-datepicker {
+      .btn-default {
+        border: none;
+        border-radius: 100%;
+      }
+    }
+
+    .uib-year .btn-default{
+      border-radius: 0;
+    }
+
+    .uib-monthpicker .btn-default {
+      border-radius: 0;
+    }
+
+    .uib-left {
+      border-radius: 0;
+
+      i {
+        display: none;
+      }
+
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: #fff;
+      }
+
+      &:after {
+        content: "\f053";
+        color: #000;
+        font: normal normal normal 14px/1 FontAwesome;
+      }
+    }
+
+    .uib-right {
+      border-radius: 0;
+
+      i {
+        display: none;
+      }
+
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: #fff;
+      }
+
+      &:after {
+        content: "\f054";
+        color: #000;
+        font: normal normal normal 14px/1 FontAwesome;
+      }
+    }
+
+    .uib-title {
+      border-radius: 0;
+      font-size: 14px;
+      padding: 10px 0;
+
+      &:hover {
+        background-color: #fff;
+      }
+    }
+
+    .uib-datepicker:focus,
+    li:focus {
+      outline: none;
+    }
+
+    .uib-day button,
+    .uib-month button,
+    .uib-year button {
+      min-width: 34px;
+      min-height: 34px;
+      border: none;
+      border-radius: 100%;
+    }
+
+    .btn-default-focus,
+    .btn.active {
+      color: #fff;
+      background-color: $brand-pink;
+
+      .text-info {
+        color: #fff;
+      }
+    }
+
+    .uib-button-bar {
+      display: none;
+    }
+  }
 }
 
 .remove-country-city {
@@ -7102,8 +7198,7 @@ border-radius: 100%;
 .add-country-city-repeat {
   .add-country-city {
     padding-top: 20px;
-    border-top: 2px solid $brand-lighter-grey;
-
+    border-top: 1px solid $brand-light-grey;
     &:first-child {
       padding-top: 10px;
       border: none;
@@ -7113,7 +7208,7 @@ border-radius: 100%;
 
 .add-country-border {
   padding: 20px;
-  border-top: 2px solid $brand-lighter-grey;
+  border-top: 1px solid $brand-light-grey;
 }
 
 .add-country-span {
