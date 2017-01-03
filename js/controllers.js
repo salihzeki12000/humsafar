@@ -129,6 +129,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $.fn.fullpage.destroy('all');
     }
 
+    $(window).load(function () {
+      console.log("tooltip");
+      $('[data-toggle="tooltip"]').tooltip();
+    })
+
+
     $scope.openalreadyexist = function (size) {
       $uibModal.open({
         animation: true,
@@ -346,12 +352,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
     $scope.userData = {};
     $scope.profile = $.jStorage.get("profile");
-    
 
-  $scope.image = null;
-  $scope.imageFileName = '';
-  $scope.uploadme = {};
-  $scope.uploadme.src = '';
+
+    $scope.image = null;
+    $scope.imageFileName = '';
+    $scope.uploadme = {};
+    $scope.uploadme.src = '';
 
 
     setTimeout(function () {
@@ -433,7 +439,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     //End-Of get all the cities from database
 
-    $scope.uploadFile = function (data) {
+    $scope.uploadFile = function (data, userData) {
       // Base64 to Blob
       var imageBase64 = data;
 
@@ -459,19 +465,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
 
       var blob = dataURItoBlob(imageBase64, 'image/png');
-
+      console.log(blob);
       // Blob to File
-      var file = new File([blob], 'photo-' + $scope.formData.name + '.png');
+      var file = new File([blob], 'photo-' + "1" + '.png');
 
       // File to FormData
       var formData = new FormData();
       formData.append('file', file, file.name);
 
       NavigationService.uploadFile(formData, function (response) {
+        console.log(formData);
         if (response.value) {
           $scope.userData.profilePicture = response.data[0];
-          console.log($scope.userData.profilePicture);
-          // $scope.modalUpload.dismiss();
+          console.log($scope.userData);
+          $scope.saveUserData($scope.userData);
         } else {
           toastr.warning('Error Uploading Image!');
         }
@@ -506,41 +513,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
 
-    // $scope.myImage = '';
-    // $scope.myCroppedImage = '';
-    // $scope.showImage = false;
-    // var i = 1;
-    // var got = setInterval(function () {
-    //   console.log(i);
-    //   if (document.getElementById('fileInput')) {
-    //     document.getElementById('fileInput').onchange = function (evt) {
-    //       console.log($scope.myCroppedImage);
-    //       var file = evt.currentTarget.files[0];
-
-    //       var reader = new FileReader();
-    //       reader.onload = function (evt) {
-    //         $scope.$apply(function ($scope) {
-    //           $scope.showImage = true;
-    //           $scope.myImage = evt.target.result;
-    //         });
-    //       };
-    //       reader.readAsDataURL(file);
-    //     };
-    //     clearInterval(got);
-    //   }
-    //   i++;
-    // }, 1000);
     $scope.myImage = '';
     $scope.myCroppedImage = '';
     $scope.showImage = false;
     var i = 1;
-    var got = setInterval(function () {
-      if (document.getElementById('fileInput')) {
-        document.getElementById('fileInput').onchange = function (evt) {
+    var got1 = setInterval(function () {
+      if (document.getElementById('fileInput1')) {
+        document.getElementById('fileInput1').onchange = function (evt) {
+          console.log(evt);
           var file = evt.currentTarget.files[0];
           var formData = new FormData();
           console.log(file);
           formData.append('file', file, "file.jpg");
+
           $http.post(uploadurl, formData, {
             headers: {
               'Content-Type': undefined
@@ -556,15 +541,55 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           reader.onload = function (evt) {
             $scope.$apply(function ($scope) {
               $scope.showImage = true;
+              console.log($scope.showImage);
               $scope.myImage = evt.target.result;
             });
           };
           reader.readAsDataURL(file);
         };
-        clearInterval(got);
+        clearInterval(got1);
       }
       i++;
     }, 1000);
+
+
+
+    // var got2 = setInterval(function () {
+    //   if (document.getElementById('fileInput2')) {
+    //     document.getElementById('fileInput2').onchange = function (evt) {
+    //       console.log(evt);
+    //       var file = evt.currentTarget.files[0];
+    //       var formData = new FormData();
+    //       console.log(file);
+    //       formData.append('file', file, "file.jpg");
+    //       $http.post(uploadurl, formData, {
+    //         headers: {
+    //           'Content-Type': undefined
+    //         },
+    //         transformRequest: angular.identity
+    //       }).success(function (data) {
+    //         console.log(data);
+    //         if ($scope.callback) {
+    //           $scope.callback(data);
+    //         }
+    //       });
+    //       var reader = new FileReader();
+    //       reader.onload = function (evt) {
+    //         $scope.$apply(function ($scope) {
+    //           $scope.showImage = true;
+    //           $scope.showImage
+    //           $scope.myImage = evt.target.result;
+    //         });
+    //       };
+    //       reader.readAsDataURL(file);
+    //     };
+    //     clearInterval(got2);
+    //   }
+    //   i++;
+    // }, 1000);
+
+
+
 
     $scope.file = {
       myFile: "Chintan"
@@ -2082,6 +2107,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
+      // destination city
+    $scope.countryView = function(url, isCity) {
+        $state.go("destinationcity", {
+          name: "mustdo",
+          url: url
+        })
+      }
+
+      // destination city end
+
     var alldestination = ["views/content/destination/country/featured.html", "views/content/destination/country/mustdo.html", "views/content/destination/country/itineraries.html", "views/content/destination/country/booking.html", "views/content/destination/country/visit.html"];
     $scope.destination = {
       innerView: alldestination[0]
@@ -2292,6 +2327,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log($scope.cityDestData, "destination city ka data");
       })
     }
+
+    $scope.showBackCard = "";
+    $scope.backView = function() {
+      if ($scope.showBackCard === "") {
+        $scope.showBackCard = "flip-card";
+      } else {
+        $scope.showBackCard = "";
+      }
+    };
+
 
     $scope.openCountry = function (index) {
       $scope.mustDoArr = _.cloneDeep($scope.cityDestData.mustDo);
@@ -3558,7 +3603,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
       }, 500);
     })
-})
+  })
 
 
 
@@ -6213,7 +6258,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, 100);
 
   })
-  .controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, MyLife) {
+  .controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, MyLife,$uibModal) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -6223,6 +6268,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("ProfileList");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+      // update country Visited
+    $scope.addCountryVisit = function(){
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/country-visited.html",
+        scope: $scope
+      })
+    }
+    // update country Visited end
 
     $scope.changeStatus = function (status) {
       $stateParams.active = status;
@@ -6554,6 +6609,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         //setting up addCountry variable ends
       });
     }
+
+     // datetrial
+    $scope.openFrom = function() {
+    $scope.popupFrom.opened = true;
+  };
+  $scope.dateOptions = {
+    showWeeks: false
+  }
+    $scope.openTo = function() {
+    $scope.popupTo.opened = true;
+  };
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = 'dd-MM-yyyy';
+  $scope.altInputFormats = ['M!/d!/yyyy'];
+  $scope.popupFrom = {
+   opened: false
+ };
+  $scope.popupTo = {
+   opened: false
+ };
+
+    // datetrial end
+
     $scope.dItineraryType = [{
       img: "img/itinerary/adventure.png",
       caption: "Adventure",

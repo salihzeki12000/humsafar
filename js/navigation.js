@@ -11,7 +11,7 @@ var imgpath = imgurl + "readFile";
 var uploadurl = imgurl;
 var navigationservice = angular.module('navigationservice', [])
 
-.factory('NavigationService', function($http) {
+.factory('NavigationService', function ($http) {
   var navigation = [{
     name: "Home",
     classis: "active",
@@ -104,10 +104,10 @@ var navigationservice = angular.module('navigationservice', [])
   }];
 
   return {
-    getnav: function() {
+    getnav: function () {
       return navigation;
     },
-    makeactive: function(menuname) {
+    makeactive: function (menuname) {
       for (var i = 0; i < navigation.length; i++) {
         if (navigation[i].name == menuname) {
           navigation[i].classis = "active";
@@ -117,31 +117,31 @@ var navigationservice = angular.module('navigationservice', [])
       }
       return menuname;
     },
-    getProfile: function(callback, errCallback) {
+    getProfile: function (callback, errCallback) {
       return $http({
         url: adminURL + "/user/profile",
         method: "POST"
       }).success(callback).error(errCallback);
     },
 
-    logout: function(callback, errCallback) {
+    logout: function (callback, errCallback) {
       return $http({
         url: adminURL + "/user/logout",
         method: "POST"
       }).success(callback).error(errCallback);
     },
 
-    getAllCountries: function(callback, errCallback) {
+    getAllCountries: function (callback, errCallback) {
       return $http({
         url: adminURL + "/country/getAll",
         method: "POST"
       }).success(callback).error(errCallback);
     },
 
-    getAllCities: function(formData, callback, errCallback) {
+    getAllCities: function (formData, callback, errCallback) {
       $http.post(adminURL + "/city/locationSearch", formData).success(callback).error(errCallback);
     },
-    searchCityByCountry: function(formData, callback) {
+    searchCityByCountry: function (formData, callback) {
       var arr = {};
       console.log(formData);
       var arr = _.omit(formData, ['cityVisited']);
@@ -153,44 +153,44 @@ var navigationservice = angular.module('navigationservice', [])
         method: "POST"
       }).success(callback);
     },
-    saveUserData: function(formData, callback, errorCallback) {
+    saveUserData: function (formData, callback, errorCallback) {
       $http.post(adminURL + "/user/editUserWeb", formData).success(callback).error(errorCallback);
     },
 
-    travelCount: function(callback, errorCallback) {
+    travelCount: function (callback, errorCallback) {
       $http.post(adminURL + "/user/getOneDataWeb").success(callback).error(errorCallback);
     },
 
-    getBucketListWeb: function(callback, errorCallback) {
+    getBucketListWeb: function (callback, errorCallback) {
       $http.post(adminURL + "/user/getBucketListWeb").success(callback).error(errorCallback);
     },
 
-    updateCountriesVisitedWeb: function(formData, callback, errCallback) {
+    updateCountriesVisitedWeb: function (formData, callback, errCallback) {
       $http.post(adminURL + "/user/updateCountriesVisitedWeb", formData).success(callback).error(errCallback);
     },
-    checkToken: function(formData, callback) {
+    checkToken: function (formData, callback) {
       $http.post(adminURL + "/user/checkToken", formData).success(callback);
     },
-    changePasswordEmail: function(formData, callback) {
+    changePasswordEmail: function (formData, callback) {
       $http.post(adminURL + "/user/changePasswordEmail", formData).success(callback);
     },
-    getDestination: function(formData, callback) {
-      $http.post(adminURL + "/country/getDestination", formData).success(function(data) {
+    getDestination: function (formData, callback) {
+      $http.post(adminURL + "/country/getDestination", formData).success(function (data) {
         data.count = formData.count;
         callback(data);
       });
     },
-    getCountryDestination: function(formData, callback) {
-      $http.post(adminURL + "/country/getOneCountry", formData).success(function(data) {
+    getCountryDestination: function (formData, callback) {
+      $http.post(adminURL + "/country/getOneCountry", formData).success(function (data) {
         callback(data);
       });
     },
-    getCityDestination: function(formData, callback) {
-      $http.post(adminURL + "/city/getOneCity", formData).success(function(data) {
+    getCityDestination: function (formData, callback) {
+      $http.post(adminURL + "/city/getOneCity", formData).success(function (data) {
         callback(data);
       });
     },
-    uploadQuickItinerary: function(obj, flag, callback) {
+    uploadQuickItinerary: function (obj, flag, callback) {
       if (flag == 'new') {
         var url = "/itinerary/saveQuickItineraryWeb";
       } else if (flag == 'edit') {
@@ -200,13 +200,21 @@ var navigationservice = angular.module('navigationservice', [])
         url: adminURL + url,
         method: "POST",
         data: obj
-      }).success(function(data) {
+      }).success(function (data) {
         if (data.value) {
           console.log("Qitinerary saved successfully");
         }
         callback(data);
       });
-    }
+    },
+    uploadFile: function (formData, callback) {
+      $http.post(uploadurl, formData, {
+        headers: {
+          'Content-Type': undefined
+        },
+        transformRequest: angular.identity
+      }).success(callback);
+    },
 
   };
 });

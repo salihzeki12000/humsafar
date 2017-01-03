@@ -1012,7 +1012,6 @@ firstapp.directive('fileDropzone', function() {
       // };
 
       processDragOverOrEnter = function (event) {
-        console.log(event);
                 if (event != null) {
                     event.preventDefault();
                 }
@@ -1046,6 +1045,7 @@ firstapp.directive('fileDropzone', function() {
       element.bind('dragenter', processDragOverOrEnter);
 
       return element.bind('drop', function(event) {
+        console.log(event);
         var file, name, reader, size, type;
         if (event != null) {
           event.preventDefault();
@@ -1061,8 +1061,8 @@ firstapp.directive('fileDropzone', function() {
             });
           }
         };
-        console.log(event.dataTransfer.files);
-        file = event.dataTransfer.files[0];
+        console.log(event.originalEvent.dataTransfer.files);
+        file = event.originalEvent.dataTransfer.files[0];
         name = file.name;
         type = file.type;
         size = file.size;
