@@ -56,7 +56,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="itinerary-inputholder">
-                      <input type="text" class="avenir-heavy form-control" placeholder="Trip Title" ng-model="dItinerary.title">
+                      <input type="text" class="avenir-roman form-control" placeholder="Trip Title" ng-model="dItinerary.title">
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -130,14 +130,14 @@
                             <label for="From">From</label>
                             <div class="itinerary-inputholder">
                               <!-- <input type="date" class="form-control text-center" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'"> -->
-                              <input type="text" placeholder="dd/mm" class="form-control" ng-click="openFrom()" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popupFrom.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="false" />
+                              <input type="text" placeholder="dd/mm" class="form-control" ng-click="openFrom()" uib-datepicker-popup="{{format}}" is-open="popupFrom.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="false" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'" />
                             </div>
                           </div>
                           <div class="itinerary-to itinerary-year">
                             <label for="to">To</label>
                             <div class="itinerary-inputholder">
                               <!-- <input type="date" class="form-control text-center" id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)"> -->
-                              <input type="text" placeholder="dd/mm" class="form-control" ng-click="openTo()" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popupTo.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                              <input type="text" placeholder="dd/mm" class="form-control" ng-click="openTo()" uib-datepicker-popup="{{format}}" is-open="popupTo.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)"/>
                             </div>
                           </div>
                           <div class="itinerary-duration">
