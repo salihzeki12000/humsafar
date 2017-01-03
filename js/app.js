@@ -1003,13 +1003,23 @@ firstapp.directive('fileDropzone', function() {
           processDragOverOrEnter,
           validMimeTypes;
       
+      // processDragOverOrEnter = function (event) {
+      //   if (event != null) {
+      //     event.preventDefault();
+      //   }
+      //   event.dataTransfer.effectAllowed = 'copy';
+      //   return false;
+      // };
+
       processDragOverOrEnter = function (event) {
-        if (event != null) {
-          event.preventDefault();
-        }
-        event.dataTransfer.effectAllowed = 'copy';
-        return false;
-      };
+        console.log(event);
+                if (event != null) {
+                    event.preventDefault();
+                }
+                (event.originalEvent || event).dataTransfer.effectAllowed = 'copy';
+                return false;
+            };
+
       
       validMimeTypes = attrs.fileDropzone;
       
@@ -1051,6 +1061,7 @@ firstapp.directive('fileDropzone', function() {
             });
           }
         };
+        console.log(event.dataTransfer.files);
         file = event.dataTransfer.files[0];
         name = file.name;
         type = file.type;

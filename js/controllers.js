@@ -346,6 +346,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
     $scope.userData = {};
     $scope.profile = $.jStorage.get("profile");
+    
+
+  $scope.image = null;
+  $scope.imageFileName = '';
+  $scope.uploadme = {};
+  $scope.uploadme.src = '';
+
+
     setTimeout(function () {
       var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
@@ -2296,6 +2304,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         controller: 'DestinationCityCtrl',
         scope: $scope
       });
+    };
 
 
     //OpenFilter
@@ -3549,7 +3558,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
       }, 500);
     })
-  };
 })
 
 

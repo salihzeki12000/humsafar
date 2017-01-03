@@ -73,9 +73,7 @@
             </div>
         </div>
       </div> -->
-
 <!-- upar wala bus check karne k liye hai asliii wala code neeche hai -->
-
 <div class="container">
   <div class="login-process">
     <div class="row">
@@ -96,7 +94,6 @@
             <button class="btn btn-blue-outline">Submit</button>
           </div>
         </div> -->
-
         <!--<div class="verification-complete" ng-show="goNext==1">
             <div class="text-center">
               <h3 class="color-blue avenir-black">Verification</h3>
@@ -129,7 +126,7 @@
               </div>
               <div class="button-panel clearfix">
                 <!--<button class="btn btn-blue-outline btn-more pull-left" ui-sref="mylife">Skip</button>-->
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=3" ng-disabled="!userData.homeCountry">Next</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=3" ng-disabled="userData.homeCountry">Next</button>
               </div>
             </div>
           </div>
@@ -154,7 +151,7 @@
               </div>
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=2">Previous</button>
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=4" ng-disabled="!userData.homeCity">Next</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=4" ng-disabled="userData.homeCity">Next</button>
               </div>
             </div>
           </div>
@@ -171,7 +168,7 @@
               </div>
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=3">Previous</button>
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=5" ng-disabled="!userData.gender">Next</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=5" ng-disabled="userData.gender">Next</button>
               </div>
             </div>
           </div>
@@ -179,32 +176,45 @@
             <div class="text-center">
               <h3 class="color-blue avenir-black">Upload Profile Photo</h3>
               <div class="cropArea" ng-show="showImage">
-                <img-crop image="myImage" result-image="myCroppedImage" /></img-crop>
+                <img-crop image="myImage" result-image="image" /></img-crop>
               </div>
               <div class="hide">
-                <img ng-src="{{myCroppedImage}}" />
+                <img ng-src="{{image}}" />
               </div>
-              <div class="upload-section" ng-hide="showImage" class="dropzone" file-dropzone="[image/png, image/jpeg, image/gif]"
-                  file="image" file-name="imageFileName" data-max-file-size="3">
-                <!-- <img src="{{userData.profilePicture|uploadpath}}" class="m-center img-responsive doneLoading"> -->
+              <!--<div class="upload-section" file-dropzone="[image/png, image/jpeg, image/gif]" file="image" file-name="imageFileName" data-max-file-size="3">
                 <img src="img/upload-icon.jpg" class="m-center img-responsive doneLoading">
                 <p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
                 <span class="block mt10 color-grey avenir-roman">- or -</span>
                 <div class="upload-btn">
                   <div class="relate inline-block mr10 select-photo">
                     <button class="btn btn-dark-blue pointer avenir-roman">Select a photo from your computer input</button>
-                    <input type="file" class="getfile pointer" id="fileInput" class="getfile pointer" ng-model="myCroppedImage"/>
+                    <input type="file" class="getfile pointer" id="fileInput" class="getfile pointer" ng-model="myCroppedImage" fileread="myCroppedImage"/>
                   </div>
-                  <!--id=fileInput class="getfile pointer" for above code-->
                   <div class="relate inline-block ml10 web-camera">
                     <button class="btn btn-dark-blue pointer avenir-roman">Web Camera</button>
                   </div>
                 </div>
+              </div>-->
+              <div class="image-container" style="width: 300px;
+    height: 300px;">
+                <img ng-src={{image}} />
+                <span class="file-name">{{imageFileName}}</span>
               </div>
-              <div class="image-container">
-      <img ng-src={{image}} />
-      <span class="file-name">{{imageFileName}}</span>
-    </div>
+
+              <div class="dropzone" file-dropzone="[image/png, image/jpeg, image/gif]" file="image" file-name="imageFileName" data-max-file-size="3" style=" width: 250px;
+  height: 45px;
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 30px;
+  margin: 20px;
+  font-family: Arial;">
+                <span>Drop Image Here</span>
+              </div>
+              
+              <form action>
+                <input type="file" fileread="uploadme.src" style="width:500px;height:500px">
+                <img ng-src="{{ uploadme.src }}">
+              </form>
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
                 <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
