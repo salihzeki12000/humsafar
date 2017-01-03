@@ -1271,6 +1271,14 @@ a.color-white {
     color: #aaa;
   }
 }
+.login-partner-tooltip + .tooltip .tooltip-inner {
+padding: 10px;
+ background-color: rgba(0,0,0,0.7);
+ font-family: "AvenirLTStd-Roman";
+}
+.login-partner-tooltip + .tooltip .tooltip-arrow {
+ border-top-color: rgba(0,0,0,0.7);
+}
 
 .error-forgot-msg {
   color: $brand-pink;

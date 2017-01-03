@@ -1191,6 +1191,9 @@ header {
   overflow: hidden;
   box-shadow: 0 2px 3px #636363;
   // background: url('../img/profile-main.png') no-repeat 50% 50%;
+  img {
+    min-height: 100%;
+  }
 }
 
 .flag {
@@ -8131,6 +8134,9 @@ border-radius: 100%;
   }
 
   .list-imgholder {
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
     height: 250px;
   }
 
@@ -8251,7 +8257,7 @@ border-radius: 100%;
 
   .following-btn {
     font-size: 13px;
-    &:hover { box-shadow: 1px 3px 3px #a0a0a0; }
+    box-shadow: 2px 3px 3px #a0a0a0;
   }
 
   .photo-loc {
@@ -8278,7 +8284,7 @@ border-radius: 100%;
     }
 
     &:first-child {
-      @include flex(2);
+      @include flex(1.5);
     }
   }
 
@@ -8288,7 +8294,7 @@ border-radius: 100%;
   }
 
   .listing-text {
-    font-size: 12px;
+    font-size: 11px;
     @extend .avenir-roman;
     color: #868686;
   }

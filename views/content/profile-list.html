@@ -137,16 +137,16 @@
            <div class="row">
              <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="country in countryVisitedList">
               <div class="country-list-holder">
-                <div class="list-imgholder">
-                  <img ng-src="{{country.countryId.flag|uploadpath}}" alt="" class="img-responsive country-img">
+                <div class="list-imgholder" style="background-image: url('{{country.countryId.countryCoverPhoto|uploadpath}}');">
+                  <!-- <img ng-src="{{country.countryId.countryCoverPhoto|uploadpath}}" alt="" class="img-responsive country-img"> -->
                   <div class="list-info">
                     <div class="clearfix">
                       <div class="pull-left">
-                        <h4 class="avenir-heavy">{{country.countryId.name}} <span>{{country.countryYear}}</span></h4>
+                        <h4 class="avenir-heavy">{{country.countryId.name}} <span>{{country.visited[0].year}}</span></h4>
                       </div>
                       <div class="pull-right">
                         <div class="bucket-flag">
-                          <img ng-src="{{country.flag|uploadpath}}" alt="{{country.countryName}}" class="img-responsive" width="'countriesVisited'0">
+                          <img ng-src="{{country.countryId.flag|uploadpath}}" alt="{{country.countryId.name}}" class="img-responsive" width="30">
                         </div>
                       </div>
                     </div>
@@ -154,7 +154,7 @@
                   <!-- hover -->
                   <div class="country-list">
                     <div class="get-center full-width text-center">
-                      <span class="year-remove avenir-medium"><i class="fa fa-calendar block mb5"></i>
+                      <span class="year-remove avenir-medium"><i class="fa fa-calendar block mb5" ng-click="addCountryVisit();"></i>
                         Add Year
                       </span>
                       <span class="year-remove avenir-medium"><i class="fa fa-trash-o block"></i>
@@ -176,8 +176,8 @@
           <div class="row">
             <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="bucket in bucketList track by $index" id="{{bucket._id}}">
               <div class="bucket-list-holder">
-                <div class="list-imgholder">
-                  <img ng-src="{{bucket.flag|uploadpath}}" alt="" class="img-responsive country-img">
+                <div class="list-imgholder" style="background-image: url('{{bucket.countryCoverPhoto|uploadpath}}');">
+                  <!-- <img ng-src="{{bucket.countryCoverPhoto|uploadpath}}" alt="{{bucket.name}}" class="img-responsive country-img"> -->
                   <div class="list-info">
                     <div class="clearfix">
                       <div class="pull-left">
@@ -185,7 +185,7 @@
                       </div>
                       <div class="pull-right">
                         <div class="bucket-flag">
-                          <img ng-src="{{bucket.countryFlag}}" alt="{{bucket.countryName}}" width="'countriesVisited'0" class="img-responsive">
+                          <img ng-src="{{bucket.flag|uploadpath}}" alt="{{bucket.name}}" width="30" class="img-responsive">
                         </div>
                       </div>
                     </div>
