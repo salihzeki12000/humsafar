@@ -3549,8 +3549,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
       }, 500);
     })
-
-  })
+  };
+})
 
 
 
