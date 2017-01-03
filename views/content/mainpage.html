@@ -116,7 +116,7 @@
                   <input type="text" class="form-control avenir-roman" placeholder="Search" ng-model="searchNation">
                 </div>
                 <ul class="avenir-roman">
-                  <li ng-repeat="nation in nationality | filter:searchNation track by $index">
+                  <li ng-repeat="nation in nationality | filter:searchNation track by $index" ng-click="$parent.goNext=3">
                     <div class="nation-select relate">
                       <input type="radio" id="{{nation._id}}" name="nation" ng-model="userData.homeCountry" ng-value="nation._id" />
                       <label for="{{nation._id}}">
@@ -142,7 +142,7 @@
                     ng-change="searchByKey(searchCity)">
                 </div>
                 <ul class="avenir-roman">
-                  <li ng-repeat="city in cities | filter:searchCity track by $index">
+                  <li ng-repeat="city in cities | filter:searchCity track by $index" ng-click="$parent.goNext=4">
                     <div class="nation-select relate">
                       <input type="radio" id="{{city.id}}" name="city" ng-value="city.description" ng-model="userData.homeCity" />
                       <label for="{{city.id}}">
@@ -161,11 +161,11 @@
           <div class="gender" ng-show="goNext==4">
             <div class="text-center">
               <h3 class="color-blue avenir-black">Gender</h3>
-              <div class="male inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==1}" ng-click="changeGender(1,'male');">
+              <div class="male inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==1}" ng-click="changeGender(1,'male');goNext=5">
                 <img src="img/male.png" alt="Gender" class="img-responsive">
                 <span class="color-blue avenir-medium">He</span>
               </div>
-              <div class="female inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==2}" ng-click="changeGender(2,'female');">
+              <div class="female inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==2}" ng-click="changeGender(2,'female');goNext=5">
                 <img src="img/female.png" alt="Gender" class="img-responsive">
                 <span class="color-blue avenir-medium">She</span>
               </div>
@@ -184,7 +184,8 @@
               <div class="hide">
                 <img ng-src="{{myCroppedImage}}" />
               </div>
-              <div class="upload-section" ng-hide="showImage">
+              <div class="upload-section" ng-hide="showImage" class="dropzone" file-dropzone="[image/png, image/jpeg, image/gif]"
+                  file="image" file-name="imageFileName" data-max-file-size="3">
                 <!-- <img src="{{userData.profilePicture|uploadpath}}" class="m-center img-responsive doneLoading"> -->
                 <img src="img/upload-icon.jpg" class="m-center img-responsive doneLoading">
                 <p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
@@ -200,6 +201,10 @@
                   </div>
                 </div>
               </div>
+              <div class="image-container">
+      <img ng-src={{image}} />
+      <span class="file-name">{{imageFileName}}</span>
+    </div>
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
                 <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->

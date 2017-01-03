@@ -2285,6 +2285,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       })
     }
 
+    $scope.openCountry = function (index) {
+      $scope.mustDoArr = _.cloneDeep($scope.cityDestData.mustDo);
+      $scope.mustDoSplice = $scope.mustDoArr.splice(0, index);
+      $scope.countryMustDoImg = _.concat($scope.mustDoArr, $scope.mustDoSplice);
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/city-mustdo.html",
+        windowClass: "cover-modal1",
+        controller: 'DestinationCityCtrl',
+        scope: $scope
+      });
+
+
     //OpenFilter
     $scope.isopenfilter = false;
     $scope.openFilter = function () {
@@ -2295,6 +2308,91 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.openFiltertab = function () {
       $scope.isopenfilter = !$scope.isopenfilter;
     };
+
+    // tour packages card
+    $scope.usrTourPackageCard = [{
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryTitle: 'Adventure',
+      tourcategoryImg: 'img/agt-cat1.png',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat5.png',
+      tourcategoryTitle: 'Backpacking',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/england-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat4.png',
+      tourcategoryTitle: 'Romance',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat9.png',
+      tourcategoryTitle: 'Friends',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/india-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat1.png',
+      tourcategoryTitle: 'Adventure',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/canada-visit.png']
+    }, {
+      tourImg: 'img/paris.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/agt-cat7.png',
+      tourcategoryTitle: 'Luxury',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/review-country.png']
+    }];
+    // tour packages card end
+
+    //contact us
+    $scope.viewContact = false;
+    $scope.getBackdrop = "";
+    $scope.showContact = function () {
+      // console.log("click");
+      if ($scope.viewContact == false) {
+        $scope.getBackdrop = "backdrop-enquiry";
+        $scope.viewContact = true;
+      } else {
+        $scope.viewContact = false;
+        $scope.getBackdrop = "";
+      }
+    };
+    //contact us end
 
     var alldestination = ["views/content/destination/city/mustdo.html", "views/content/destination/city/hotels.html", "views/content/destination/city/restaurants.html", "views/content/destination/city/itineraries.html", "views/content/destination/city/booking.html", "views/content/destination/city/visit.html"];
     $scope.destination = {
