@@ -294,7 +294,7 @@ a.color-white {
 }
 
 .destination-nav {
-  background: #ebebeb;
+  // background: #ebebeb;
   padding: 10px 0 0;
   position: relative;
   z-index: 3;
@@ -371,30 +371,19 @@ a.color-white {
     }
   }
 
-  .destination-featured {
-    .img-holder-country {
-      height: 300px;
-      background-position: center center !important;
-      background-size: cover !important;
-      background-repeat: no-repeat !important;
+  .img-holder {
+    @include transition(all ease 300ms);
+    min-height: 300px;
+
+    &:hover img {
+      @include transform (scale(1.1));
     }
   }
 
   .destination-holder {
     &.main-destination-page {
-      .img-holder {
-        height: 300px;
-        background-position: center center !important;
-        background-size: cover !important;
-        background-repeat: no-repeat !important;
-      }
-
       .col-sm-6:nth-of-type(5n) {
         width: 100%;
-
-        .img-holder {
-          height: 400px;
-        }
       }
     }
   }
@@ -467,7 +456,7 @@ a.color-white {
       position: absolute;
       top: 0;
       left: 0;
-      padding: 8px 15px;
+      padding: 8px 60px 8px 15px;
       @include background(linear-gradient(rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0)));
       width: 100%;
       @extend .avenir-heavy;

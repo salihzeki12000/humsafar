@@ -9,13 +9,13 @@
     </uib-accordion-group>
     <uib-accordion-group is-open="status.open" ng-repeat="menu in navigation track by $index" class="{{menu.classis}}" is-disabled="menu.disabled">
       <uib-accordion-heading>
-        <a ui-sref="{{menu.anchor}}" class="color-white main-menu-anchor" ng-click="getnav();">{{menu.name}}
+        <a ui-sref="{{menu.anchor}}" class="color-white main-menu-anchor">{{menu.name}}
                     <i class="pull-right fa icon color-white" ng-class="{'fa-caret-up':( status.open && !menu.disabled), 'fa-caret-down': (!status.open && !menu.disabled)}"></i>
         </a>
       </uib-accordion-heading>
       <ul class="nav-submenu list-unstyled">
         <li ng-repeat="submenu in menu.subnav">
-          <a href="" ui-sref="{{submenu.anchor}}" class="color-white" ng-click="getnav();">{{submenu.name}}</a>
+          <a href="" ui-sref="{{submenu.anchor}}" class="color-white">{{submenu.name}}</a>
         </li>
       </ul>
     </uib-accordion-group>
