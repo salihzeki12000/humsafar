@@ -1371,13 +1371,27 @@ header {
     display: inline-block;
   }
 }
+.visit-inputholder {
+  position: relative;
+  margin: 15px 5px 10px 0;
+  &:before, &:after {
+    content: '';
+    width: 1px;
+    height: 15px;
+    position: absolute;
+    bottom: 0;
+    background-color: #ccc;
+  }
+  &:before { left: 0; }
+  &:after { right: 0; }
+}
 
 .visit-input {
-  width: 180px;
+  // width: 180px;
+  width: 100%;
   padding: 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin: 15px 5px 10px 0;
+  border: none;
+  border-bottom: 1px solid #ccc;
 }
 
 .country-list {
@@ -8269,7 +8283,6 @@ border-radius: 100%;
 
 .follow-followers-holder {
   position: relative;
-
   &:after,
   &:before {
     content: '';
@@ -8315,16 +8328,32 @@ border-radius: 100%;
 .bucket-visited-holder {
   position: relative;
   display: inline-block;
+  &:after,
+  &:before {
+    content: '';
+    width: 1px;
+    height: 10px;
+    background-color: #c9cbd0;
+    position: absolute;
+    bottom: 0;
+  }
 
+  &:after {
+    left: 0;
+  }
+
+  &:before {
+    right: 0;
+  }
   input {
-    padding: 5px 20px 5px 10px;
-    border: 1px solid #c9cbd0;
-    border-radius: 4px;
+    width: 400px;
+    padding: 5px 5px 5px 30px;
+    border: none;
+    border-bottom: 1px solid #c9cbd0;
     background-color: transparent;
     color: #979ba7;
     font-family: "AvenirLTStd-Medium";
   }
-
   &+button {
     display: inline-block;
     vertical-align: top;
@@ -8333,7 +8362,7 @@ border-radius: 100%;
   span {
     position: absolute;
     top: 5px;
-    right: 10px;
+    left: 10px;
     color: #979ba7;
   }
 }
