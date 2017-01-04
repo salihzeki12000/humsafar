@@ -276,32 +276,6 @@ a:focus {
   background-repeat: no-repeat!important;
 }
 
-// fonts
-@font-face {
-  font-family: "AvenirLTStd-Black";
-  src: url('../fonts/AvenirLTStd-Black.otf');
-}
-
-@font-face {
-  font-family: "AvenirLTStd-Heavy";
-  src: url('../fonts/AvenirLTStd-Heavy.otf');
-}
-
-@font-face {
-  font-family: "AvenirLTStd-Light";
-  src: url('../fonts/AvenirLTStd-Light.otf');
-}
-
-@font-face {
-  font-family: "AvenirLTStd-Medium";
-  src: url('../fonts/AvenirLTStd-Medium.otf');
-}
-
-@font-face {
-  font-family: "AvenirLTStd-Roman";
-  src: url('../fonts/AvenirLTStd-Roman.otf');
-}
-
 @font-face {
   font-family: "djb";
   src: url('../fonts/djb.ttf');
@@ -312,41 +286,6 @@ a:focus {
   src: url('../fonts/JennaSue.ttf');
 }
 
-// end fonts
-// classes
-.avenir-black {
-  font-family: "AvenirLTStd-Black";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.avenir-heavy {
-  font-family: "AvenirLTStd-Heavy";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.avenir-light {
-  font-family: "AvenirLTStd-Light";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.avenir-medium {
-  font-family: "AvenirLTStd-Medium";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.avenir-roman {
-  font-family: "AvenirLTStd-Roman";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-// p {
-//     font-size: 16px;
-// }
 .ab {
   position: absolute;
 }
@@ -457,25 +396,25 @@ a.color-white {
   }
   ul.nav-submenu {
     margin: -1px 0;
-    padding: 0;
+    padding: 0 0 10px;
     border-bottom: 1px dotted #fff;
     li {
       a {
         @extend .avenir-roman;
-        font-size: 22px;
-        padding: 5px 30px;
+        font-size: 19px;
+        padding: 5px 20px;
         display: block;
       }
     }
   }
   .nav-list {
-    padding-bottom: 30px;
+    padding: 30px 0;
   }
   .main-menu-anchor {
     padding: 10px 20px 10px 0;
     letter-spacing: 1px;
     display: block;
-    font-size: 22px;
+    font-size: 19px;
     border-bottom: 1px dotted #fff;
     @extend .avenir-heavy;
   }
@@ -486,12 +425,12 @@ a.color-white {
       font-size: 20px;
     }
     li+li {
-      margin-left: 15px;
+      margin-left: 10px;
     }
     li {
       a {
         display: inline-block;
-        font-size: 35px;
+        font-size: 30px;
         line-height: 1;
         text-align: center;
         margin: 8px 0;
@@ -608,7 +547,7 @@ a.color-white {
 
 .menu-common {
   position: fixed;
-  width: 320px;
+  width: 300px;
   z-index: 999;
   left: 0;
   bottom: 0;
@@ -640,7 +579,13 @@ header {
   left: 0;
   right: 0;
   bottom: 0;
-  @include transform(translateX(-100%));
+  &.menu-out {
+    @include transform(translateX(-100%));
+  }
+  @include transition(all 300ms linear);
+  &.menu-in {
+    @include transform(translateX(00%));
+  }
 }
 
 header {
@@ -808,8 +753,8 @@ header {
   right: 30px;
   @include transform(translateY(-50%));
   span {
-    height: 10px;
-    width: 10px;
+    height: 8px;
+    width: 8px;
     border: 2px solid #fff;
     display: block;
     margin: 20px 0;
@@ -1321,12 +1266,11 @@ header {
 }
 
 .booking-bg .menu-contact {
-  bottom: 10px;
+  bottom: 30px;
   ul {
     li {
       img {
         padding: 0 5px;
-        height: 20px;
       }
     }
   }
@@ -1343,6 +1287,7 @@ header {
         display: block;
         border-bottom: 1px solid #cecece;
         @extend .text-shadow;
+        font-family: "AvenirLTStd-Medium";
       }
     }
   }

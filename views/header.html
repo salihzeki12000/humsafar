@@ -1,4 +1,4 @@
-<header class="bg-dark-blue {{isLoggedIn}}" ng-controller="headerctrl" ng-show="isLoggedIn">
+<header class="bg-dark-blue {{isLoggedIn}}" ng-show="isLoggedIn">
   <nav class="navbar">
     <div class="container-fluid">
       <!-- <div class="navbar-header">
@@ -36,7 +36,6 @@
                 <a ng-click="logout()">Logout</a>
               </li>
               <!--End OF logout BUTTON -->
-
               <li ui-sref="mylife">
                 <a href="">
                   <div class="user-img inline-block v-mid">
@@ -80,9 +79,6 @@
     </div> -->
   </nav>
 </header>
-
-
-
 <header class="libro-header {{isLoggedIn}}" ng-controller="headerctrl" ng-hide="isLoggedIn" scrolladd1class>
   <section class="bg-black custom-search pd20 " ng-class="{ 'open': isopen} ">
     <div class="container-fluid ">

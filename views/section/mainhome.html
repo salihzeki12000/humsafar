@@ -1,9 +1,10 @@
 <div class="web-layer layer"></div>
-<div id="scene" class="scene unselectable" data-friction-x="0.1" data-friction-y="0.1" data-scalar-x="25" data-scalar-y="15" style="width: 100%; transform: translate3d(0px, 0px, 0px); transform-style: preserve-3d; backface-visibility: hidden;" data-mode="cursor">
+<div id="scene" class="scene unselectable" data-friction-x="0.1" data-friction-y="0.1" data-scalar-x="25" data-scalar-y="15"
+  style="width: 100%; transform: translate3d(0px, 0px, 0px); transform-style: preserve-3d; backface-visibility: hidden;" data-mode="cursor">
   <div class="fullscreen-bg hidden-xs">
-    <video class='videoPlayer' autoplay muted loop>
-            <source src='img/libro-home/video/Homevideo.mp4' type='video/mp4'>
-        </video>
+    <video class='videoPlayer' autoplay muted loop id="movie1">
+      <source src='img/libro-home/video/Homevideo.mp4' type='video/mp4'>
+    </video>
     <div class="overlay colorblue"></div>
   </div>
   <div class="layer" data-depth="0.15">
@@ -30,30 +31,28 @@
     </div>
   </div>
   <footer class="hidden-xs">
-      <div class="container-fluid">
-          <div class="">
-              <div class="col-md-12">
-                  <div class="app-icons ab">
-                      <ul class="list-unstyled list-inline text-right color-white">
-                          <li class="">
-                              Download App
-                          </li>
-                          <li>
-                              <a href="#" target="_blank" class="color-white">
-                                  <i class="fa fa-apple"></i>
-                              </a>
-                          </li>
-                          <li>|</li>
-                          <li>
-                              <a href="#" class="color-white" target="_blank">
-                                  <i class="fa fa-android"></i>
-                              </a>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
+    <div class="container-fluid">
+      <div class="col-md-12">
+        <div class="app-icons ab">
+          <ul class="list-unstyled list-inline text-right color-white">
+            <li class="">
+              Download App
+            </li>
+            <li>
+              <a href="#" target="_blank" class="color-white">
+                <i class="fa fa-apple"></i>
+              </a>
+            </li>
+            <li>|</li>
+            <li>
+              <a href="#" class="color-white" target="_blank">
+                <i class="fa fa-android"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
+    </div>
   </footer>
 </div>
 <div class="download-app text-center uppercase download-app-footer visible-xs">
