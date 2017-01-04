@@ -1474,6 +1474,11 @@ header {
       @extend .avenir-light;
     }
   }
+  .clear-countryvisit {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #424242;
+    color: #424242;
+  }
 }
 
 .count-visited {
@@ -4890,7 +4895,7 @@ border-radius: 100%;
 
   .travelling-journey-type {
     padding: 10px;
-    background-color: #fff;
+    background-color: rgba(255,255,255,0.75);
 
     li {
       margin-right: 10px;
@@ -4921,7 +4926,7 @@ border-radius: 100%;
 
   .journey-with {
     padding: 10px;
-    background-color: #fff;
+    background-color: rgba(255,255,255,0.75);
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
 
@@ -6229,7 +6234,7 @@ border-radius: 100%;
   margin: 30px 0 15px;
 
   .select-itinerary-type {
-    min-width: 80px;
+    min-width: 74px;
     display: inline-block;
     text-align: center;
   }
@@ -6597,6 +6602,7 @@ border-radius: 100%;
   position: absolute;
   bottom: 24px;
   background-color: #fff;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.175);
 
   ::-webkit-scrollbar {
     width: 3px;
@@ -6623,6 +6629,73 @@ border-radius: 100%;
     color: #a0a0a0;
   }
 }
+//detail photo caption
+
+.trip-view-photo .detail-pic-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  color: #fff;
+  padding: 5px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.trip-view-photo .detail-pic-edit-caption {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  @include transition(all 300ms linear);
+
+  textarea {
+    background-color: transparent;
+    border: none;
+    padding-top: 20px;
+    color: #fff;
+    @include placeholder {
+      color: #fff;
+    };
+  }
+}
+
+.trip-view-photo .delete-detail-pic {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 16px;
+  color: #fff;
+  background: transparent;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.trip-view-photo .view-caption-onimg {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+
+  span {
+    color: #fff;
+    background: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+}
+
+.trip-view-photo .showcaptiondetailpic {
+  top: 0;
+  @include transition(all 300ms linear);
+}
+//detail photo caption end
+
 // quick itinerary detail end
 // detail itinerary detail
 
@@ -6721,6 +6794,7 @@ border-radius: 100%;
     margin: 0;
     display: inline-block;
     font-size: 25px;
+    vertical-align: middle;
   }
 
   .rate-trip {
@@ -7191,6 +7265,12 @@ border-radius: 100%;
 
     .close {
       color: $brand-blue;
+      opacity: 1;
+    }
+    &:hover, &:active, &:focus {
+      box-shadow: none;
+      background-color: transparent;
+      color: #fff;
     }
   }
 }
@@ -7304,6 +7384,10 @@ border-radius: 100%;
   .panel-title a {
     display: block;
     padding: 24px 20px;
+  }
+  .journey-accordion-heading .journey-head {
+    padding: 0;
+    color: #fff;
   }
 
   .panel-heading {
@@ -8224,8 +8308,10 @@ border-radius: 100%;
   .country-list-holder {
     margin: 5px;
     position: relative;
+    top: 0;
     z-index: 1;
     overflow: hidden;
+    @include transition(all 200ms linear);
   }
 
   .list-imgholder {
@@ -8246,12 +8332,11 @@ border-radius: 100%;
     position: absolute;
     top: 0;
     left: 0;
-
+    z-index: 1;
     h4 {
       margin: 0;
       color: #fff;
       font-size: 20px;
-
       span {
         font-size: 14px;
       }
@@ -8283,6 +8368,9 @@ border-radius: 100%;
   }
 
   .country-list-holder:hover {
+    box-shadow: 1px 7px 4px #a0a0a0;
+    top: -3px;
+    @include transition(all 200ms linear);
     .country-list {
       opacity: 1;
       @include transition(all 300ms linear);
@@ -8302,10 +8390,14 @@ border-radius: 100%;
   .bucket-list-holder {
     margin: 5px;
     position: relative;
+    top: 0;
     z-index: 1;
     overflow: hidden;
-
+    @include transition(all 200ms linear);
     &:hover {
+      box-shadow: 1px 7px 4px #a0a0a0;
+      top: -3px;
+      @include transition(all 200ms linear);
       .country-list {
         opacity: 1;
         @include transition(all 300ms linear);
@@ -9023,4 +9115,6 @@ ng-map {
 }
 // destination homestay end
 @import "_sagarmobile.scss";
+@import "fancybox-override";
+@import "animation";
 @import "mobile.scss"; // header { display: none; }

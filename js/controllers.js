@@ -19,11 +19,8 @@ var centers = [];
 markers[0] = {};
 angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'itinerary', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
-.controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
+.controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $stateParams) {
   //Used to name the .html file
-
-  console.log("Testing Consoles");
-
   $scope.template = TemplateService.changecontent("home");
   $scope.menutitle = NavigationService.makeactive("Home");
   TemplateService.title = $scope.menutitle;
@@ -36,7 +33,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     four: "views/section/mylife.html",
     five: "views/section/share.html",
   };
-  $scope.changePage = function (text) {
+  $scope.changePage = function(text) {
     // console.log(text);
     var length = $(".fp-section").length;
     // console.log(length);
@@ -67,32 +64,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         break;
     }
   };
-  setTimeout(function () {
+  $(window).load(function() {
+    document.getElementById('movie1').play();
+  });
+  setTimeout(function() {
     $('.scene').parallax();
     $('.fullpage').fullpage({
       //Navigation
-      onLeave: function (index, nextIndex, direction) {
 
-        $timeout(function () {
+      onLeave: function(index, nextIndex, direction) {
+
+        $timeout(function() {
           swiper.slideTo(nextIndex - 1);
           //playing the video
-
           $('video').get(nextIndex - 1).load();
           $('video').get(nextIndex - 1).play();
-          console.log(nextIndex - 1);
+          $('video').get(nextIndex).pause();
+          $('video').get(nextIndex - 2).pause();
         }, 0);
 
       }
     });
 
-
-    $scope.vidplay = function () {
-      var video = document.getElementById("Video1");
-      var button = document.getElementById("play");
-      if (video.paused) {
-        video.play();
-      }
-    };
     swiper = new Swiper('.swiper-container', {
       pagination: '.swiper-pagination',
       direction: 'vertical',
@@ -107,8 +100,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
   }, 500);
 
-  $scope.$on('$viewContentLoaded', function () {
-    $timeout(function () {
+  $scope.$on('$viewContentLoaded', function() {
+    $timeout(function() {
       $('body').addClass('fp-');
       $scope.changePage($stateParams.id);
     }, 1000);
@@ -520,29 +513,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var got1 = setInterval(function () {
       if (document.getElementById('fileInput1')) {
         document.getElementById('fileInput1').onchange = function (evt) {
-          console.log(evt);
           var file = evt.currentTarget.files[0];
-          var formData = new FormData();
           console.log(file);
+          var formData = new FormData();
           formData.append('file', file, "file.jpg");
-
-          $http.post(uploadurl, formData, {
-            headers: {
-              'Content-Type': undefined
-            },
-            transformRequest: angular.identity
-          }).success(function (data) {
-            console.log(data);
-            if ($scope.callback) {
-              $scope.callback(data);
-            }
-          });
           var reader = new FileReader();
           reader.onload = function (evt) {
             $scope.$apply(function ($scope) {
               $scope.showImage = true;
               console.log($scope.showImage);
-              $scope.myImage = evt.target.result;
+              $scope.myImage = evt.target.result
             });
           };
           reader.readAsDataURL(file);
@@ -554,39 +534,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
 
-    // var got2 = setInterval(function () {
-    //   if (document.getElementById('fileInput2')) {
-    //     document.getElementById('fileInput2').onchange = function (evt) {
-    //       console.log(evt);
-    //       var file = evt.currentTarget.files[0];
-    //       var formData = new FormData();
-    //       console.log(file);
-    //       formData.append('file', file, "file.jpg");
-    //       $http.post(uploadurl, formData, {
-    //         headers: {
-    //           'Content-Type': undefined
-    //         },
-    //         transformRequest: angular.identity
-    //       }).success(function (data) {
-    //         console.log(data);
-    //         if ($scope.callback) {
-    //           $scope.callback(data);
-    //         }
-    //       });
-    //       var reader = new FileReader();
-    //       reader.onload = function (evt) {
-    //         $scope.$apply(function ($scope) {
-    //           $scope.showImage = true;
-    //           $scope.showImage
-    //           $scope.myImage = evt.target.result;
-    //         });
-    //       };
-    //       reader.readAsDataURL(file);
-    //     };
-    //     clearInterval(got2);
-    //   }
-    //   i++;
-    // }, 1000);
+    var got2 = setInterval(function () {
+      if (document.getElementById('fileInput2')) {
+        document.getElementById('fileInput2').ondrop = function (evt) {
+           console.log(evt);
+          var file = evt.currentTarget.files[0];
+          var formData = new FormData();
+          formData.append('file', file, "file.jpg");
+          var reader = new FileReader();
+          reader.onload = function (evt) {
+            $scope.$apply(function ($scope) {
+              $scope.showImage = true;
+              $scope.myImage = evt.target.result;
+              console.log($scope.myImage);              
+            });
+          };
+          reader.readAsDataURL(file);
+        };
+        clearInterval(got2);
+      }
+      i++;
+    }, 1000);
 
 
 
@@ -708,11 +676,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       img: "img/greentravelling.png",
       caption: "Green",
-      caption1: "travelling"
+      caption1: "Travelling"
     }, {
       img: "img/pocketfriendly.png",
       caption: "Pocket",
-      caption1: "friendly"
+      caption1: "Friendly"
     }, {
       img: "img/romance.png",
       caption: "Romance",
@@ -779,7 +747,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         if (caption != null) {
           $scope.listOfCategories.travelConfig[arrType].push(caption);
         } else {
-          $scope.listOfCategories.travelConfig[arrType].push(element.caption);
+          caption=element.caption;
+          if(category=='holidayKindType'){
+            if(caption=="Island & Beach"){
+              caption="Islands & Beaches";
+            }else if(caption=="City"){
+              caption="Cities";
+            }else if(caption=="Cruise"){
+              caption="Cruises";
+            }
+          }
+          $scope.listOfCategories.travelConfig[arrType].push(caption);
         }
       });
     }
@@ -3850,7 +3828,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       } else if ($scope.usuallyGo == "A little bit of both") {
         $scope.flag = true;
         $scope.usuallyGo = "by the map or ";
-        $scope.usuallyGo1 = "where the road takes" + $scope.pronoun1;
+        $scope.usuallyGo1 = "where the road takes " + $scope.pronoun1;
       }
 
       if (($scope.preferToTravel == "Blogger") || ($scope.preferToTravel == "Photographer")) {
@@ -6295,6 +6273,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log(err);
       });
     };
+
+    var years = function (startYear) {
+      var currentYear = new Date().getFullYear(),
+        years = [];
+      startYear = startYear || 1980;
+      while (startYear <= currentYear) {
+        years.push(currentYear--);
+      }
+      return years;
+    }
+    $scope.listOfYears = years(1950);
     reloadCount(); {
       // countryList and bucketList
       // $scope.countryList = [{
@@ -6649,10 +6638,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       caption: "Romance",
       width: "26"
     }, {
-      img: "img/itinerary/backpacking.png",
-      caption: "Backpacking",
-      width: "23"
-    }, {
       img: "img/itinerary/budget.png",
       caption: "Budget",
       width: "22"
@@ -6668,7 +6653,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       img: "img/itinerary/friend.png",
       caption: "Friends",
       width: "24"
-    }, ];
+    }, {
+      img: "img/itinerary/shopping-white.png",
+      caption: "Shopping",
+      width: "24"
+    }, {
+      img: "img/itinerary/cap-white.png",
+      caption: "Solo",
+      width: "35"
+    }, {
+      img: "img/itinerary/speaker-white.png",
+      caption: "Festival",
+      width: "29"
+    }, {
+      img: "img/itinerary/backpacking.png",
+      caption: "Backpacking",
+      width: "23"
+    }];
     // tinymce
     $scope.tinymceOptions = {
       onChange: function (e) {

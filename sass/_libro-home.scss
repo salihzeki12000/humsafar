@@ -13,6 +13,7 @@ $brand-menu: #2b2d2f !default;
     }
   }
 }
+
 @font-face {
   font-family: "Facile Sans";
   src: url("../fonts/.otf");
@@ -20,7 +21,10 @@ $brand-menu: #2b2d2f !default;
   font-weight: normal;
   font-style: normal;
 }
+
+
 /* Start writing sass here */
+
 body,
 html {
   // position: relative;
@@ -71,13 +75,13 @@ a {
   cursor: pointer;
   @include transition(all ease 300ms);
 }
-//bootstrap forms
 
+//bootstrap forms
 .btn,
 .form-control,
-.input-group-lg > .form-control,
-.input-group-lg > .input-group-addon,
-.input-group-lg > .input-group-btn > .btn,
+.input-group-lg>.form-control,
+.input-group-lg>.input-group-addon,
+.input-group-lg>.input-group-btn>.btn,
 .input-lg {
   border-radius: 0;
   @include box-shadow(none);
@@ -133,7 +137,6 @@ a {
   background-color: rgba(0, 0, 0, 0.34);
   border-color: rgba(0, 0, 0, 0);
   padding: 0;
-
   .logo-size {
     width: 110px;
     margin-top: 5px;
@@ -160,11 +163,9 @@ a:focus {
   bottom: 0;
   right: 0;
   height: 100vh;
-
   &.colorblack {
     background: #000;
   }
-
   &.colorblue {
     background: #232c49;
   }
@@ -274,38 +275,45 @@ a:focus {
   background-position: center center!important;
   background-repeat: no-repeat!important;
 }
+
 // fonts
 @font-face {
   font-family: "AvenirLTStd-Black";
   src: url('../fonts/AvenirLTStd-Black.otf');
 }
+
 @font-face {
   font-family: "AvenirLTStd-Heavy";
   src: url('../fonts/AvenirLTStd-Heavy.otf');
 }
+
 @font-face {
   font-family: "AvenirLTStd-Light";
   src: url('../fonts/AvenirLTStd-Light.otf');
 }
+
 @font-face {
   font-family: "AvenirLTStd-Medium";
   src: url('../fonts/AvenirLTStd-Medium.otf');
 }
+
 @font-face {
   font-family: "AvenirLTStd-Roman";
   src: url('../fonts/AvenirLTStd-Roman.otf');
 }
+
 @font-face {
   font-family: "djb";
   src: url('../fonts/djb.ttf');
 }
+
 @font-face {
   font-family: "JennaSue";
   src: url('../fonts/JennaSue.ttf');
 }
+
 // end fonts
 // classes
-
 .avenir-black {
   font-family: "AvenirLTStd-Black";
   -webkit-font-smoothing: antialiased;
@@ -335,10 +343,10 @@ a:focus {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 // p {
 //     font-size: 16px;
 // }
-
 .ab {
   position: absolute;
 }
@@ -350,7 +358,8 @@ a:focus {
 .text-cont {
   top: 50%;
   left: 50%;
-  @include transform(translate( -50%, -50%));
+  @include transform(translate( -50%,
+  -50%));
 }
 
 .full-height {
@@ -377,7 +386,6 @@ a:focus {
 a.color-white {
   color: white;
   @include transition(all ease 300ms);
-
   &:hover {
     color: darken(#fff, 20%);
   }
@@ -406,16 +414,16 @@ a.color-white {
   left: 0;
   height: 120px;
   padding: 65px 0 0 20px;
-  @include transition(cubic-bezier(0.69, 0.16, 0.24, 1) 300ms);
-
+  @include transition(cubic-bezier(0.69,
+  0.16,
+  0.24,
+  1) 300ms);
   &.bg-black {
     background: $brand-menu;
   }
-
   &.open {
     top: 0;
   }
-
   .input-group-addon {
     border: none;
     border-radius: 0;
@@ -423,12 +431,10 @@ a.color-white {
     border-bottom: 1px dotted #fff;
     padding: 3px 12px;
   }
-
   .form-control {
     background: transparent;
     border: none;
     border-bottom: 1px dotted #fff;
-
     &:focus {
       @include box-shadow(none);
       border-color: #fff;
@@ -439,39 +445,32 @@ a.color-white {
 .sidemenu {
   overflow-y: scroll;
   padding: 0 30px;
-
   &::-webkit-scrollbar {
     width: 0;
   }
-
   &::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 0 #282b2d;
   }
-
   &::-webkit-scrollbar-thumb {
     background-color: #282b2d;
     outline: 1px solid #282b2d;
   }
-
   ul.nav-submenu {
     margin: -1px 0;
     padding: 0;
     border-bottom: 1px dotted #fff;
-
     li {
       a {
-        @extend .avenir-medium;
+        @extend .avenir-roman;
         font-size: 22px;
         padding: 5px 30px;
         display: block;
       }
     }
   }
-
   .nav-list {
     padding-bottom: 30px;
   }
-
   .main-menu-anchor {
     padding: 10px 20px 10px 0;
     letter-spacing: 1px;
@@ -480,19 +479,15 @@ a.color-white {
     border-bottom: 1px dotted #fff;
     @extend .avenir-heavy;
   }
-
   .social-icon-menu {
     margin-top: 50px;
-
     h4 {
       @extend .avenir-heavy;
       font-size: 20px;
     }
-
     li+li {
       margin-left: 15px;
     }
-
     li {
       a {
         display: inline-block;
@@ -501,64 +496,55 @@ a.color-white {
         text-align: center;
         margin: 8px 0;
         border-radius: 5px;
+        @extend .avenir-roman;
       }
     }
   }
-
   .menu-dropdown {
     margin: 0;
     padding: 0;
-
     li {
       list-style-type: none;
-
       a {
         padding: 10px 0;
         border-bottom: 1px dotted rgba(61, 60, 62, 0.2);
         display: block;
         font-size: 16px;
       }
-
       &:last-child a {
         border-bottom: none;
       }
     }
   }
-
   .accordion-custom {
     .panel,
-    .panel-default > .panel-heading {
+    .panel-default>.panel-heading {
       border: none;
       border-radius: 0;
       box-shadow: none;
       background-color: transparent;
-
       &:first-child {
         border-top: none;
       }
     }
-
-    .panel-default > .panel-heading {
+    .panel-default>.panel-heading {
       padding: 0;
     }
-
-    .panel-default > .panel-heading+.panel-collapse > .panel-body {
+    .panel-default>.panel-heading+.panel-collapse>.panel-body {
       padding: 10px 0 0;
       border: none;
     }
-
-    .panel-group .panel + .panel {
+    .panel-group .panel+.panel {
       margin-top: 0;
     }
-
     .icon {
       font-size: 25px;
       @include transition(all ease 300ms);
     }
   }
 }
-// menu
 
+// menu
 .hamburger {
   width: 25px;
   height: 25px;
@@ -566,7 +552,6 @@ a.color-white {
   position: relative;
   z-index: 10;
   cursor: pointer;
-
   .icon-bar {
     width: 25px;
     height: 3px;
@@ -574,20 +559,17 @@ a.color-white {
     background-color: #fff;
     @include transition(all 400ms ease-in-out);
   }
-
   .top-bar {
     @include transform(rotate(45deg));
     position: absolute;
     top: 7px !important;
     @include transition(all 400ms ease-in-out);
   }
-
   .mid-bar {
     opacity: 0;
     position: absolute;
     @include transition(all 400ms ease-in-out);
   }
-
   .down-bar {
     @include transform(rotate(-45deg));
     top: 7px !important;
@@ -603,7 +585,6 @@ a.color-white {
 .navbar-default {
   background-color: transparent;
   border-color: transparent;
-
   .navbar-toggle {
     display: block;
     border-color: transparent;
@@ -611,16 +592,13 @@ a.color-white {
     position: relative;
     padding: 0 10px;
     margin-top: 5px;
-
     &:hover .icon-bar {
       background-color: darken(white, 10%);
     }
-
     .icon-bar {
       background-color: white;
       border-radius: 5px;
     }
-
     &:focus,
     &:hover {
       background-color: transparent;
@@ -639,9 +617,21 @@ a.color-white {
   color: #fff;
 }
 
-.menu-out {
-  @include transform(translateX(-400px));
-  @include transition(all 300ms linear);
+header {
+  .menu-out {
+    @include transform(translateX(-400px));
+    @include transition(all 300ms linear);
+  }
+}
+
+.menu-auto-slide {
+  .content {
+    @include transform(translateX(00px));
+    @include transition(all 300ms linear);
+  }
+  &.menu-in .content {
+    @include transform(translateX(400px));
+  }
 }
 
 .fixed-close {
@@ -653,42 +643,45 @@ a.color-white {
   @include transform(translateX(-100%));
 }
 
-.menu-in {
-  @include transform(translateX(0));
-  @include transition(all 300ms linear);
+header {
+  .menu-in {
+    @include transform(translateX(0));
+    @include transition(all 300ms linear);
+  }
 }
 
+// .menu-in {
+//   @include transform(translateX(0));
+//   @include transition(all 300ms linear);
+// }
 .text-left-ab {
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
   position: absolute;
   padding: 10px;
   top: 50%;
   left: 20.5%;
-  @include transform(translate(-50%, -50%));
-
+  @include transform(translate(-50%,
+  -50%));
   .dot-icon {
     li {
       text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
     }
   }
-
   &.text-sec-left {
     width: 300px;
     left: 20%;
-    @include transform(translate(-20%, -50%));
+    @include transform(translate(-20%,
+    -50%));
     text-align: left;
   }
-
   .text-color3 {
     color: #11d3cb;
   }
-
   .dot-icon {
     li {
       position: relative;
       text-shadow: 2px 1px 0 rgba(0, 0, 0, 0.5);
     }
-
     li+li:before {
       content: "\f111";
       font-family: FontAwesome;
@@ -713,8 +706,8 @@ a.color-white {
 .box-shadow {
   box-shadow: 0 1px 3px #444444;
 }
-// slide1
 
+// slide1
 .videoplay {
   width: 100%;
   height: 100%;
@@ -722,13 +715,12 @@ a.color-white {
   position: absolute;
   top: 50%;
   left: 50%;
-  @include transform(translate(-50%, -50%));
-
+  @include transform(translate(-50%,
+  -50%));
   video {
     width: 100%;
     height: 100%;
   }
-
   .play-button {
     border: 4px solid #fff;
     width: 40px;
@@ -740,12 +732,10 @@ a.color-white {
     top: 50%;
     @include transition(all ease 300ms);
     opacity: 0;
-
     &:hover {
       border-color: darken(#fff, 20%);
     }
   }
-
   &:hover {
     .play-button {
       opacity: 1;
@@ -755,7 +745,6 @@ a.color-white {
 
 .img-ballon-middle {
   margin: 20px 0;
-
   img {
     height: 30px;
   }
@@ -764,15 +753,14 @@ a.color-white {
 .mobile-video {
   position: relative;
   width: 275px;
-
   .iphone-image {
     img {
       width: 100%;
     }
   }
 }
-// slide2
 
+// slide2
 .slide2 {
   .life-icon {
     img {
@@ -819,7 +807,6 @@ a.color-white {
   top: 50%;
   right: 30px;
   @include transform(translateY(-50%));
-
   span {
     height: 10px;
     width: 10px;
@@ -830,23 +817,19 @@ a.color-white {
     @include transition(all ease 300ms);
     cursor: pointer;
     position: relative;
-
     &:hover {
       background: #fff;
     }
-
     &::after,
     &::before {
       opacity: 0;
       @include transition(all ease 300ms);
     }
-
     &:hover:after,
     &:hover:before {
       opacity: 1;
     }
   }
-
   span:nth-child(1)::before,
   span:nth-child(2)::before,
   span:nth-child(3)::before,
@@ -865,7 +848,6 @@ a.color-white {
     font-size: 12px;
     @include transition(all ease 300ms);
   }
-
   span::after {
     content: '';
     position: absolute;
@@ -876,23 +858,18 @@ a.color-white {
     border-left: 13px solid #2c3757;
     @include transition(all ease 300ms);
   }
-
   span:nth-child(1)::before {
     content: 'Home';
   }
-
   span:nth-child(2)::before {
     content: 'Travel Life';
   }
-
   span:nth-child(3)::before {
     content: 'Local Life';
   }
-
   span:nth-child(4)::before {
     content: 'My Life';
   }
-
   span:nth-child(5)::before {
     content: 'Share';
   }
@@ -914,18 +891,14 @@ a.color-white {
       text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
     }
   }
-
   .line-height90 {
     line-height: 90%;
   }
-
   .text-sec-left {
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
   }
-
   .img-section1 {
     margin: 0 6px;
-
     img {
       height: 24px;
       vertical-align: inherit;
@@ -935,10 +908,8 @@ a.color-white {
 
 .login-signup {
   padding: 12px 0;
-
   ul {
     margin: 0;
-
     li {
       a {
         @extend .avenir-heavy;
@@ -976,12 +947,10 @@ a.color-white {
 .contact-ab {
   top: 100px;
   left: 15%;
-
   .contact-decrp {
     position: relative;
     padding-left: 50px;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
-
     img {
       position: absolute;
       right: 65px;
@@ -989,7 +958,6 @@ a.color-white {
       top: 0;
     }
   }
-
   .social-icons {
     li {
       width: 14.6%;
@@ -997,48 +965,38 @@ a.color-white {
       padding: 0;
       margin: -2.6px;
       border: 1px dotted;
-
       a {
         display: block;
         text-align: center;
         padding: 9px 0;
         font-size: 22px;
         text-shadow: 2px 1px 0 rgba(0, 0, 0, 0.5);
-
         i {
           @include transition(all ease 300ms);
         }
-
         &:hover {
           i {
             text-shadow: none;
           }
           color: #fff;
-
           &.facebook-icon {
             background-color: #3b5998;
           }
-
           &.twitter-icon {
             background-color: #00aced;
           }
-
           &.google-plus-icon {
             background-color: #dd4b39;
           }
-
           &.pinterest-icon {
             background-color: #cb2027;
           }
-
           &.instagram-icon {
             background-color: #e95950;
           }
-
           &.linkedin-icon {
             background-color: #007bb6;
           }
-
           &.youtube-icon {
             background-color: #bb0000;
           }
@@ -1066,7 +1024,6 @@ a.color-white {
   left: 0;
   width: 100%;
   padding: 20px 40px;
-
   ul li a {
     font-size: 14px;
   }
@@ -1090,7 +1047,7 @@ a.color-white {
   border-color: transparent;
 }
 
-.nav-tabs > li > a {
+.nav-tabs>li>a {
   border-color: transparent;
   color: #fff;
   border: 0 solid transparent;
@@ -1099,16 +1056,16 @@ a.color-white {
   font-size: 16px;
 }
 
-.nav > li > a:focus,
-.nav > li > a:hover {
+.nav>li>a:focus,
+.nav>li>a:hover {
   background-color: transparent;
   border-bottom-color: #fff;
 }
 
 .login-signup-tab {
-  .nav-tabs > li.active > a,
-  .nav-tabs > li.active > a:focus,
-  .nav-tabs > li.active > a:hover {
+  .nav-tabs>li.active>a,
+  .nav-tabs>li.active>a:focus,
+  .nav-tabs>li.active>a:hover {
     color: #fff;
     background-color: transparent;
     border-color: transparent;
@@ -1116,23 +1073,19 @@ a.color-white {
     border-bottom-width: 2px;
     border-bottom-color: #fff;
   }
-
   .social-login {
     .login-social-img {
       img {
         width: 45px;
       }
     }
-
     li {
       padding: 10px 2px;
-
       a {
         display: inline-block;
       }
     }
   }
-
   .input-group-addon {
     border: none;
     border-radius: 0;
@@ -1140,37 +1093,30 @@ a.color-white {
     border-bottom: 1px solid #fff;
     padding: 3px 12px;
   }
-
   .form-control {
     background: transparent;
     border: none;
     border-bottom: 1px solid #fff;
-
     &:focus {
       @include box-shadow(none);
       border-color: #fff;
     }
   }
-
   input {
     @extend .avenir-roman;
   }
-
   input::-webkit-input-placeholder {
     color: #fff;
     opacity: 0.7;
   }
-
   input:-moz-placeholder {
     color: #fff;
     opacity: 0.7;
   }
-
   input::-moz-placeholder {
     color: #fff;
     opacity: 0.7;
   }
-
   input:-ms-input-placeholder {
     color: #fff;
     opacity: 0.7;
@@ -1181,12 +1127,10 @@ a.color-white {
     position: absolute;
     left: -9999px;
   }
-
   .checkbox label {
     padding-left: 5px;
     font-size: 12px;
   }
-
   [type="checkbox"]:checked+label,
   [type="checkbox"]:not(:checked)+label {
     position: relative;
@@ -1225,7 +1169,6 @@ a.color-white {
     opacity: 0;
     transform: scale(0);
   }
-
   [type="checkbox"]:checked+label:after {
     opacity: 1;
     transform: scale(1);
@@ -1237,24 +1180,22 @@ a.color-white {
     border-color: #bbb;
     background-color: #ddd;
   }
-
   [type="checkbox"]:disabled:checked+label:after {
     color: #999;
   }
-
   [type="checkbox"]:disabled+label {
     color: #aaa;
   }
 }
 
-.login-partner-tooltip + .tooltip .tooltip-inner {
+.login-partner-tooltip+.tooltip .tooltip-inner {
   padding: 10px;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   font-family: "AvenirLTStd-Roman";
 }
 
-.login-partner-tooltip + .tooltip .tooltip-arrow {
-  border-top-color: rgba(0,0,0,0.7);
+.login-partner-tooltip+.tooltip .tooltip-arrow {
+  border-top-color: rgba(0, 0, 0, 0.7);
 }
 
 .error-forgot-msg {
@@ -1266,7 +1207,8 @@ a.color-white {
   position: fixed;
   top: 55%;
   left: 50%;
-  @include transform(translate(-50%, -50%));
+  @include transform(translate(-50%,
+  -50%));
   width: 275px;
   z-index: 9;
   @include transition(all ease 300ms);
@@ -1284,11 +1226,9 @@ a.color-white {
       bottom: 0;
       height: 10px;
     }
-
     &:before {
       left: 0;
     }
-
     &:after {
       right: 0;
     }
@@ -1296,7 +1236,8 @@ a.color-white {
 }
 
 .profile-imgholder {
-  @include size(135px, 145px);
+  @include size(135px,
+  145px);
   border: 3px solid #fff;
   border-radius: 55px;
   margin: 0 auto;
@@ -1306,16 +1247,13 @@ a.color-white {
 
 .notexist {
   background: rgba(0, 0, 0, 0.7);
-
   .modal-content {
     @include box-shadow(none);
   }
-
   .modal-content {
     background-color: transparent;
     border-radius: 0;
   }
-
   .alreadyexist {
     padding-top: 100px;
   }
@@ -1327,7 +1265,6 @@ a.color-white {
     border: 1px solid #fff;
     border-radius: 2px;
     padding: 6px 30px;
-
     &:focus,
     &:hover {
       color: darken(#fff, 20%);
@@ -1346,8 +1283,8 @@ a.color-white {
   z-index: 2;
   left: 50%;
   top: 47%;
-  @include transform(translate(-50%, -50%));
-
+  @include transform(translate(-50%,
+  -50%));
   .swiper-slide {
     background: transparent;
   }
@@ -1361,7 +1298,8 @@ a.color-white {
     height: auto;
     top: 50%;
     left: 50%;
-    @include transform(translate(-50%, -50%));
+    @include transform(translate(-50%,
+    -50%));
     z-index: -99;
   }
 }
@@ -1376,7 +1314,6 @@ a.color-white {
 
 .description {
   line-height: 150%;
-
   h4 {
     text-transform: uppercase;
     margin: 0;
@@ -1385,7 +1322,6 @@ a.color-white {
 
 .booking-bg .menu-contact {
   bottom: 10px;
-
   ul {
     li {
       img {
@@ -1399,7 +1335,6 @@ a.color-white {
 .menu-booking {
   left: 0;
   top: 30%;
-
   ul {
     li {
       a {
@@ -1416,12 +1351,12 @@ a.color-white {
 .app-icons {
   ul {
     margin: 0;
-
     li {
       @extend .avenir-heavy;
       text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
     }
   }
 }
+
 @import "fancybox-override";
 @import "animation";

@@ -2,13 +2,13 @@
 var initMap = {};
 var backgroundClick = {
   object: undefined,
-  close: function() {
+  close: function () {
     backgroundClick.object.backgroundClick = false;
     backgroundClick.scope.$apply();
   }
 };
-$(document).ready(function() {
-  $("body").click(function() {
+$(document).ready(function () {
+  $("body").click(function () {
     if (backgroundClick.object) {
       backgroundClick.close();
     }
@@ -29,7 +29,7 @@ var firstapp = angular.module('firstapp', [
   'angularFileUpload'
 ]);
 
-firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
+firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
   // for http request with session
   $httpProvider.defaults.withCredentials = true;
   $stateProvider
@@ -286,16 +286,16 @@ firstapp.config(function($stateProvider, $urlRouterProvider, $httpProvider, $loc
 });
 
 
-firstapp.directive('img', function($compile, $parse) {
+firstapp.directive('img', function ($compile, $parse) {
   return {
     restrict: 'E',
     replace: false,
-    link: function($scope, element, attrs) {
+    link: function ($scope, element, attrs) {
       var $element = $(element);
       if (!attrs.noloading) {
         $element.after("<img src='img/loading.gif' class='loading' />");
         var $loading = $element.next(".loading");
-        $element.load(function() {
+        $element.load(function () {
           $loading.remove();
           $(this).addClass("doneLoading");
         });
@@ -306,27 +306,27 @@ firstapp.directive('img', function($compile, $parse) {
   };
 });
 
-firstapp.directive('autoHeight', function($compile, $parse) {
+firstapp.directive('autoHeight', function ($compile, $parse) {
   return {
     restrict: 'EA',
     replace: false,
-    link: function($scope, element, attrs) {
+    link: function ($scope, element, attrs) {
       var $element = $(element);
       var windowHeight = $(window).height();
 
       $element.css("min-height", windowHeight);
-      setTimeout(function() {
+      setTimeout(function () {
         $element.css("min-height", windowHeight);
       });
     }
   };
 });
 
-firstapp.directive('fancyboxBox', function($document) {
+firstapp.directive('fancyboxBox', function ($document) {
   return {
     restrict: 'EA',
     replace: false,
-    link: function(scope, element, attr) {
+    link: function (scope, element, attr) {
       var $element = $(element);
       var target;
       if (attr.rel) {
@@ -348,19 +348,19 @@ firstapp.directive('fancyboxBox', function($document) {
 });
 
 
-firstapp.config(function($translateProvider) {
+firstapp.config(function ($translateProvider) {
   $translateProvider.translations('en', LanguageEnglish);
   $translateProvider.translations('hi', LanguageHindi);
   $translateProvider.preferredLanguage('en');
 });
 
-firstapp.directive('scrolldown', function($compile, $parse) {
+firstapp.directive('scrolldown', function ($compile, $parse) {
   return {
     restrict: 'EA',
     replace: false,
-    link: function($scope, element, attrs) {
+    link: function ($scope, element, attrs) {
       var $element = $(element);
-      $scope.scrollDown = function() {
+      $scope.scrollDown = function () {
         $('html,body').animate({
             scrollTop: $(".second").offset().top
           },
@@ -371,17 +371,17 @@ firstapp.directive('scrolldown', function($compile, $parse) {
 });
 
 
-firstapp.directive('scroll', function($window) {
+firstapp.directive('scroll', function ($window) {
   return {
     restrict: 'EA',
     replace: false,
-    link: function($scope, element, attrs) {
+    link: function ($scope, element, attrs) {
       var $element = $(element);
       var divslide5 = $('#slide5')[0].scrollHeight;
       var winTop = $(window).scrollTop();
       console.log(winTop);
       console.log(divslide5);
-      angular.element($window).bind("scroll", function() {
+      angular.element($window).bind("scroll", function () {
         console.log(divslide5 - 1);
         if (winTop > divslide5) {
           scope.active = true;
@@ -392,9 +392,9 @@ firstapp.directive('scroll', function($window) {
   };
 });
 
-firstapp.directive("scrolladdclass", function($window) {
-  return function(scope, element, attrs) {
-    angular.element($window).bind("scroll", function() {
+firstapp.directive("scrolladdclass", function ($window) {
+  return function (scope, element, attrs) {
+    angular.element($window).bind("scroll", function () {
       var windowHeight = $(window).height() - 120;
       if (this.pageYOffset >= windowHeight) {
         // console.log(windowHeight);
@@ -406,9 +406,9 @@ firstapp.directive("scrolladdclass", function($window) {
   };
 });
 
-firstapp.directive("scrolladd1class", function($window) {
-  return function(scope, element, attrs) {
-    angular.element($window).bind("scroll", function() {
+firstapp.directive("scrolladd1class", function ($window) {
+  return function (scope, element, attrs) {
+    angular.element($window).bind("scroll", function () {
       var windowHeight = $(window).height();
       if (this.pageYOffset >= 370) {
         // console.log(windowHeight);
@@ -419,18 +419,18 @@ firstapp.directive("scrolladd1class", function($window) {
     });
   };
 });
-firstapp.directive('imageonload', function() {
+firstapp.directive('imageonload', function () {
   return {
     restrict: 'A',
-    link: function(scope, element, attrs) {
-      element.bind('load', function() {
+    link: function (scope, element, attrs) {
+      element.bind('load', function () {
         scope.$apply(attrs.imageonload);
       });
     }
   };
 });
 
-firstapp.directive('uploadImage', function($http, $filter, $timeout) {
+firstapp.directive('uploadImage', function ($http, $filter, $timeout) {
   return {
     templateUrl: 'views/directive/uploadFile.html',
     scope: {
@@ -438,8 +438,8 @@ firstapp.directive('uploadImage', function($http, $filter, $timeout) {
       type: "@type",
       callback: "&ngCallback"
     },
-    link: function($scope, element, attrs) {
-      $scope.showImage = function() {
+    link: function ($scope, element, attrs) {
+      $scope.showImage = function () {
         console.log($scope.image);
       };
       $scope.check = true;
@@ -461,15 +461,15 @@ firstapp.directive('uploadImage', function($http, $filter, $timeout) {
       //     $scope.required = false;
       // }
 
-      $scope.$watch("image", function(newVal, oldVal) {
+      $scope.$watch("image", function (newVal, oldVal) {
         isArr = _.isArray(newVal);
         if (!isArr && newVal && newVal.file) {
           $scope.uploadNow(newVal);
         } else if (isArr && newVal.length > 0 && newVal[0].file) {
-          $timeout(function() {
+          $timeout(function () {
             console.log(oldVal, newVal);
             console.log(newVal.length);
-            _.each(newVal, function(newV, key) {
+            _.each(newVal, function (newV, key) {
               if (newV && newV.file) {
                 $scope.uploadNow(newV);
               }
@@ -481,7 +481,7 @@ firstapp.directive('uploadImage', function($http, $filter, $timeout) {
       if ($scope.model) {
         if (_.isArray($scope.model)) {
           $scope.image = [];
-          _.each($scope.model, function(n) {
+          _.each($scope.model, function (n) {
             $scope.image.push({
               url: n
             });
@@ -496,10 +496,10 @@ firstapp.directive('uploadImage', function($http, $filter, $timeout) {
       if (attrs.inobj || attrs.inobj === "") {
         $scope.inObject = true;
       }
-      $scope.clearOld = function() {
+      $scope.clearOld = function () {
         $scope.model = [];
       };
-      $scope.uploadNow = function(image) {
+      $scope.uploadNow = function (image) {
         $scope.uploadStatus = "uploading";
 
         var Template = this;
@@ -511,7 +511,7 @@ firstapp.directive('uploadImage', function($http, $filter, $timeout) {
             'Content-Type': undefined
           },
           transformRequest: angular.identity
-        }).success(function(data) {
+        }).success(function (data) {
 
           $scope.uploadStatus = "uploaded";
           if ($scope.isMultiple) {
@@ -547,7 +547,7 @@ firstapp.directive('uploadImage', function($http, $filter, $timeout) {
     }
   };
 });
-firstapp.directive('uploadImageOtg', function($http, $filter, $timeout) {
+firstapp.directive('uploadImageOtg', function ($http, $filter, $timeout) {
   return {
     templateUrl: 'views/directive/uploadFile.html',
     scope: {
@@ -555,12 +555,12 @@ firstapp.directive('uploadImageOtg', function($http, $filter, $timeout) {
       type: "@type",
       callback: "&ngCallback"
     },
-    link: function($scope, element, attrs) {
-      $scope.showImage = function() {
+    link: function ($scope, element, attrs) {
+      $scope.showImage = function () {
         console.log($scope.image);
       };
       $scope.check = true;
-      $scope.length=0;
+      $scope.length = 0;
       if (!$scope.type) {
         $scope.type = "image";
       }
@@ -579,18 +579,18 @@ firstapp.directive('uploadImageOtg', function($http, $filter, $timeout) {
       //     $scope.required = false;
       // }
 
-      $scope.$watch("image", function(newVal, oldVal) {
+      $scope.$watch("image", function (newVal, oldVal) {
         console.log(newVal);
         console.log(oldVal);
         isArr = _.isArray(newVal);
         if (!isArr && newVal && newVal.file) {
           $scope.uploadNow(newVal);
         } else if (isArr && newVal.length > 0 && newVal[0].file) {
-          $timeout(function() {
+          $timeout(function () {
             console.log(oldVal, newVal);
             console.log(newVal.length);
-            $scope.length=newVal.length;
-            _.each(newVal, function(newV, key) {
+            $scope.length = newVal.length;
+            _.each(newVal, function (newV, key) {
               if (newV && newV.file) {
                 $scope.uploadNow(newV);
               }
@@ -602,7 +602,7 @@ firstapp.directive('uploadImageOtg', function($http, $filter, $timeout) {
       if ($scope.model) {
         if (_.isArray($scope.model)) {
           $scope.image = [];
-          _.each($scope.model, function(n) {
+          _.each($scope.model, function (n) {
             $scope.image.push({
               url: n
             });
@@ -617,10 +617,10 @@ firstapp.directive('uploadImageOtg', function($http, $filter, $timeout) {
       if (attrs.inobj || attrs.inobj === "") {
         $scope.inObject = true;
       }
-      $scope.clearOld = function() {
+      $scope.clearOld = function () {
         $scope.model = [];
       };
-      $scope.uploadNow = function(image) {
+      $scope.uploadNow = function (image) {
         $scope.uploadStatus = "uploading";
 
         var Template = this;
@@ -632,7 +632,7 @@ firstapp.directive('uploadImageOtg', function($http, $filter, $timeout) {
             'Content-Type': undefined
           },
           transformRequest: angular.identity
-        }).success(function(data) {
+        }).success(function (data) {
 
           $scope.uploadStatus = "uploaded";
           if ($scope.isMultiple) {
@@ -658,7 +658,7 @@ firstapp.directive('uploadImageOtg', function($http, $filter, $timeout) {
           }
           $scope.callback({
             'data': data.data[0],
-            'length':$scope.length
+            'length': $scope.length
           });
           // $timeout(function () {
           //    $scope.callback({'data':$scope.model});
@@ -670,8 +670,8 @@ firstapp.directive('uploadImageOtg', function($http, $filter, $timeout) {
   };
 });
 
-firstapp.filter('uploadpath', function() {
-  return function(input, width, height, style) {
+firstapp.filter('uploadpath', function () {
+  return function (input, width, height, style) {
     var other = "";
     if (width && width !== "") {
       other += "&width=" + width;
@@ -692,14 +692,14 @@ firstapp.filter('uploadpath', function() {
   };
 });
 
-firstapp.filter('capitalize', function() {
-    return function(input) {
-      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
-    }
+firstapp.filter('capitalize', function () {
+  return function (input) {
+    return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+  }
 });
 
-firstapp.filter('kindOfJourney', function() {
-  return function(input) {
+firstapp.filter('kindOfJourney', function () {
+  return function (input) {
     var input = input.toLowerCase();
     var returnVal = "";
     switch (input) {
@@ -744,8 +744,8 @@ firstapp.filter('kindOfJourney', function() {
   };
 });
 
-firstapp.filter('kindOfCheckIn', function() {
-  return function(input) {
+firstapp.filter('kindOfCheckIn', function () {
+  return function (input) {
     var returnVal = "";
     switch (input) {
       case "Cinema & Theatre":
@@ -793,14 +793,64 @@ firstapp.filter('kindOfCheckIn', function() {
   };
 });
 
-firstapp.directive('fileModel', ['$parse', function($parse) {
+firstapp.filter('itineraryType', function () {
+  return function (input) {
+    var returnVal = "";
+
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    var random=getRandomInt(0,2);
+    switch (input) {
+      case "friends":
+        returnVal = "img/banner-itinerary/friends"+random+".jpg";
+        break;
+      case "backpacking":
+        returnVal = "img/banner-itinerary/backpacking"+random+".jpg";
+        break;
+      case "business":
+        returnVal = "img/banner-itinerary/business"+random+".jpg";
+        break;
+      case "religious":
+        returnVal = "img/banner-itinerary/religious"+random+".jpg";
+        break;
+      case "romance":
+        returnVal = "img/banner-itinerary/romance"+random+".jpg";
+        break;
+      case "budget":
+        returnVal = "img/banner-itinerary/budget"+random+".jpg";
+        break;
+      case "luxury":
+        returnVal = "img/banner-itinerary/luxury"+random+".jpg";
+        break;
+      case "family":
+        returnVal = "img/banner-itinerary/family"+random+".jpg";
+        break;
+      case "sole":
+        returnVal = "img/banner-itinerary/sole"+random+".jpg";
+        break;
+      case "betterhalf":
+        returnVal = "img/banner-itinerary/betterhalf"+random+".jpg";
+        break;
+      case "colleague":
+        returnVal = "img/banner-itinerary/colleague"+random+".jpg";
+        break;
+      case "adventure":
+        returnVal = "img/banner-itinerary/adventure"+random+".jpg";
+        break;
+    }
+    return returnVal;
+  };
+});
+
+firstapp.directive('fileModel', ['$parse', function ($parse) {
   return {
     restrict: 'A',
     scope: {
       fileModel: '=fileModel',
     },
-    link: function(scope, element, attrs) {
-      element.bind('change', function() {
+    link: function (scope, element, attrs) {
+      element.bind('change', function () {
         scope.fileModel = element[0].files;
         scope.$apply();
       });
@@ -808,25 +858,25 @@ firstapp.directive('fileModel', ['$parse', function($parse) {
   };
 }]);
 
-firstapp.directive('functionmap', ['$parse', function($parse) {
+firstapp.directive('functionmap', ['$parse', function ($parse) {
   return {
     restrict: 'C',
-    link: function(scope, element, attrs) {
+    link: function (scope, element, attrs) {
 
-      setTimeout(function() {
+      setTimeout(function () {
         var check = $(".hasLatLng").length;
         var flag;
-        $(window).scroll(function() {
+        $(window).scroll(function () {
           var currentScroll = $(window).scrollTop() + $(window).height();
-          var divPositions = _.map($(".hasLatLng"), function(n) {
+          var divPositions = _.map($(".hasLatLng"), function (n) {
             return $(n).offset().top;
           });
-          var divHeights = _.map($(".hasLatLng"), function(n) {
+          var divHeights = _.map($(".hasLatLng"), function (n) {
             return $(n).height();
           });
           var ith = 1;
           var percentage = 0;
-          _.each(divPositions, function(n, index) {
+          _.each(divPositions, function (n, index) {
             if (n <= currentScroll && divPositions[index + 1] > currentScroll) { //would work for  1st checkIn till second last checkin coz divPositions[index + 1] would return false
               // console.log("inside 1st if");
               ith = index;
@@ -877,8 +927,8 @@ firstapp.directive('functionmap', ['$parse', function($parse) {
   };
 }]);
 
-firstapp.filter('postString', function() {
-  return function(checkIn) {
+firstapp.filter('postString', function () {
+  return function (checkIn) {
     var postString = "";
     var buddiesString = "";
     var buddiesCount = checkIn.buddies.length;
@@ -920,8 +970,8 @@ firstapp.filter('postString', function() {
 
 });
 
-firstapp.filter('filterDate', function() {
-  return function(duration) {
+firstapp.filter('filterDate', function () {
+  return function (duration) {
     return "inside";
   };
 });
@@ -930,9 +980,9 @@ firstapp.filter('fromCalculation', function () {
   return function (country, countryIndex, cityIndex) {
     var sum = 0;
     if (countryIndex == 0) { //when only 1 country is selected
-      if(cityIndex == 0){
-          return 1;
-      }else{
+      if (cityIndex == 0) {
+        return 1;
+      } else {
         cityIndex = cityIndex - 1;
         while (cityIndex >= 0) {
           sum = sum + country[countryIndex].cityVisited[cityIndex].duration;
@@ -940,8 +990,8 @@ firstapp.filter('fromCalculation', function () {
         };
         return sum;
       }
-    }else {       //when more than 1 countries selected
-      if(cityIndex>=0){
+    } else { //when more than 1 countries selected
+      if (cityIndex >= 0) {
         cityIndex = cityIndex - 1;
         while (countryIndex >= 0) {
           while (cityIndex >= 0) {
@@ -949,14 +999,14 @@ firstapp.filter('fromCalculation', function () {
             cityIndex--;
           };
           countryIndex--;
-          if(countryIndex==-1){
+          if (countryIndex == -1) {
             break;
           }
-          cityIndex=country[countryIndex].cityVisited.length-1;
+          cityIndex = country[countryIndex].cityVisited.length - 1;
         }
       }
-        return sum;
-      }
+      return sum;
+    }
   };
 });
 
@@ -964,45 +1014,45 @@ firstapp.filter('toCalculation', function () {
   return function (country, countryIndex, cityIndex) {
     var sum = 0;
     if (countryIndex == 0) {
-      if(cityIndex >= 0){
+      if (cityIndex >= 0) {
         while (cityIndex >= 0) {
           sum = sum + country[countryIndex].cityVisited[cityIndex].duration;
           cityIndex--;
         };
       }
       return sum;
-    }else {
-      if(cityIndex>=0){
+    } else {
+      if (cityIndex >= 0) {
         while (countryIndex >= 0) {
           while (cityIndex >= 0) {
             sum = sum + country[countryIndex].cityVisited[cityIndex].duration;
             cityIndex--;
           };
           countryIndex--;
-          if(countryIndex==-1){
+          if (countryIndex == -1) {
             break;
           }
-          cityIndex=country[countryIndex].cityVisited.length-1;
+          cityIndex = country[countryIndex].cityVisited.length - 1;
         }
       }
-        return sum;
-      }
+      return sum;
+    }
   };
 });
 
-firstapp.directive('fileDropzone', function() {
+firstapp.directive('fileDropzone', function () {
   return {
     restrict: 'A',
     scope: {
       file: '=',
       fileName: '='
     },
-    link: function(scope, element, attrs) {
+    link: function (scope, element, attrs) {
       var checkSize,
-          isTypeValid,
-          processDragOverOrEnter,
-          validMimeTypes;
-      
+        isTypeValid,
+        processDragOverOrEnter,
+        validMimeTypes;
+
       // processDragOverOrEnter = function (event) {
       //   if (event != null) {
       //     event.preventDefault();
@@ -1012,17 +1062,17 @@ firstapp.directive('fileDropzone', function() {
       // };
 
       processDragOverOrEnter = function (event) {
-                if (event != null) {
-                    event.preventDefault();
-                }
-                (event.originalEvent || event).dataTransfer.effectAllowed = 'copy';
-                return false;
-            };
+        if (event != null) {
+          event.preventDefault();
+        }
+        (event.originalEvent || event).dataTransfer.effectAllowed = 'copy';
+        return false;
+      };
 
-      
+
       validMimeTypes = attrs.fileDropzone;
-      
-      checkSize = function(size) {
+
+      checkSize = function (size) {
         var _ref;
         if (((_ref = attrs.maxFileSize) === (void 0) || _ref === '') || (size / 1024) / 1024 < attrs.maxFileSize) {
           return true;
@@ -1032,7 +1082,7 @@ firstapp.directive('fileDropzone', function() {
         }
       };
 
-      isTypeValid = function(type) {
+      isTypeValid = function (type) {
         if ((validMimeTypes === (void 0) || validMimeTypes === '') || validMimeTypes.indexOf(type) > -1) {
           return true;
         } else {
@@ -1040,28 +1090,28 @@ firstapp.directive('fileDropzone', function() {
           return false;
         }
       };
-      
+
       element.bind('dragover', processDragOverOrEnter);
       element.bind('dragenter', processDragOverOrEnter);
 
-      return element.bind('drop', function(event) {
+      return element.bind('drop', function (event) {
         console.log(event);
         var file, name, reader, size, type;
         if (event != null) {
           event.preventDefault();
         }
         reader = new FileReader();
-        reader.onload = function(evt) {
+        reader.onload = function (evt) {
           if (checkSize(size) && isTypeValid(type)) {
-            return scope.$apply(function() {
+            return scope.$apply(function () {
               scope.file = evt.target.result;
               if (angular.isString(scope.fileName)) {
                 return scope.fileName = name;
               }
             });
           }
+          console.log(evt.target.files);
         };
-        console.log(event.originalEvent.dataTransfer.files);
         file = event.originalEvent.dataTransfer.files[0];
         name = file.name;
         type = file.type;
@@ -1075,20 +1125,21 @@ firstapp.directive('fileDropzone', function() {
 
 
 firstapp.directive("fileread", [function () {
-    return {
-        scope: {
-            fileread: "="
-        },
-        link: function (scope, element, attributes) {
-            element.bind("change", function (changeEvent) {
-                var reader = new FileReader();
-                reader.onload = function (loadEvent) {
-                    scope.$apply(function () {
-                        scope.fileread = loadEvent.target.result;
-                    });
-                }
-                reader.readAsDataURL(changeEvent.target.files[0]);
-            });
+  return {
+    scope: {
+      fileread: "="
+    },
+    link: function (scope, element, attributes) {
+      element.bind("change", function (changeEvent) {
+        var reader = new FileReader();
+        reader.onload = function (loadEvent) {
+          scope.$apply(function () {
+            scope.fileread = loadEvent.target.result;
+          });
         }
+        console.log(changeEvent.target.files);
+        reader.readAsDataURL(changeEvent.target.files[0]);
+      });
     }
+  }
 }]);
