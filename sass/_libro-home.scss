@@ -38,6 +38,7 @@ body {
   width: 100%;
   z-index: 2;
 }
+
 body.fp-.fp-viewing-4 {
   .slide4-none {
     @include transition(all ease 300ms);
@@ -71,6 +72,7 @@ a {
   @include transition(all ease 300ms);
 }
 //bootstrap forms
+
 .btn,
 .form-control,
 .input-group-lg > .form-control,
@@ -92,7 +94,7 @@ a {
 }
 
 .fnt-32 {
-  font-size: 32px;
+  font-size: 33px;
 }
 
 .fnt-22 {
@@ -108,7 +110,7 @@ a {
 }
 
 .fnt-60 {
-  font-size: 60px;
+  font-size: 58px;
 }
 
 .pt70 {
@@ -174,7 +176,7 @@ a:focus {
 
 .one {
   .overlay {
-    opacity: 0.1;
+    opacity: 0.3;
   }
 }
 
@@ -436,7 +438,7 @@ a.color-white {
 
 .sidemenu {
   overflow-y: scroll;
-  padding: 0 20px;
+  padding: 0 30px;
 
   &::-webkit-scrollbar {
     width: 0;
@@ -451,6 +453,21 @@ a.color-white {
     outline: 1px solid #282b2d;
   }
 
+  ul.nav-submenu {
+    margin: -1px 0;
+    padding: 0;
+    border-bottom: 1px dotted #fff;
+
+    li {
+      a {
+        @extend .avenir-medium;
+        font-size: 22px;
+        padding: 5px 30px;
+        display: block;
+      }
+    }
+  }
+
   .nav-list {
     padding-bottom: 30px;
   }
@@ -462,21 +479,6 @@ a.color-white {
     font-size: 22px;
     border-bottom: 1px dotted #fff;
     @extend .avenir-heavy;
-  }
-
-  ul.nav-submenu {
-    margin: -1px 0;
-    padding: 0;
-    border-bottom: 1px dotted #fff;
-
-    li {
-      a {
-        font-size: 22px;
-        padding: 5px 30px;
-        display: block;
-        @extend .avenir-medium;
-      }
-    }
   }
 
   .social-icon-menu {
@@ -545,6 +547,10 @@ a.color-white {
       border: none;
     }
 
+    .panel-group .panel + .panel {
+      margin-top: 0;
+    }
+
     .icon {
       font-size: 25px;
       @include transition(all ease 300ms);
@@ -552,6 +558,7 @@ a.color-white {
   }
 }
 // menu
+
 .hamburger {
   width: 25px;
   height: 25px;
@@ -632,11 +639,11 @@ a.color-white {
   color: #fff;
 }
 
-
 .menu-out {
   @include transform(translateX(-400px));
   @include transition(all 300ms linear);
 }
+
 .fixed-close {
   position: fixed;
   top: 0;
@@ -645,17 +652,25 @@ a.color-white {
   bottom: 0;
   @include transform(translateX(-100%));
 }
+
 .menu-in {
   @include transform(translateX(0));
   @include transition(all 300ms linear);
 }
 
 .text-left-ab {
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
   position: absolute;
   padding: 10px;
   top: 50%;
   left: 20.5%;
   @include transform(translate(-50%, -50%));
+
+  .dot-icon {
+    li {
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+    }
+  }
 
   &.text-sec-left {
     width: 300px;
@@ -671,6 +686,7 @@ a.color-white {
   .dot-icon {
     li {
       position: relative;
+      text-shadow: 2px 1px 0 rgba(0, 0, 0, 0.5);
     }
 
     li+li:before {
@@ -698,6 +714,7 @@ a.color-white {
   box-shadow: 0 1px 3px #444444;
 }
 // slide1
+
 .videoplay {
   width: 100%;
   height: 100%;
@@ -755,6 +772,7 @@ a.color-white {
   }
 }
 // slide2
+
 .slide2 {
   .life-icon {
     img {
@@ -882,81 +900,27 @@ a.color-white {
 
 .text-sec2 {
   position: absolute;
-  top: 50%;
+  top: 55%;
   width: 300px;
   right: 11%;
   @include transform(translateY(-50%));
 }
 
 .home-slide {
-  // .swiper-container-vertical > .swiper-pagination .swiper-pagination-bullet {
-  //   margin: 25px 0;
-  // }
-  // .swiper-pagination {
-  //   span {
-  //     position: relative;
-  //     @include transition(all ease 300ms);
-  //
-  //     &::after,
-  //     &::before {
-  //       opacity: 0;
-  //     }
-  //
-  //     &:hover:after,
-  //     &:hover:before {
-  //       opacity: 1;
-  //     }
-  //   }
-  //
-  //   span:nth-child(1)::before,
-  //   span:nth-child(2)::before,
-  //   span:nth-child(3)::before,
-  //   span:nth-child(4)::before,
-  //   span:nth-child(5)::before {
-  //     color: white;
-  //     background: #2c3757;
-  //     position: absolute;
-  //     left: -90px;
-  //     width: 75px;
-  //     top: -10px;
-  //     line-height: 1;
-  //     padding: 6px 0;
-  //     @include transition(all ease 300ms);
-  //   }
-  //
-  //   span::after {
-  //     content: '';
-  //     position: absolute;
-  //     left: -15px;
-  //     top: -10px;
-  //     border-top: 13px solid transparent;
-  //     border-bottom: 13px solid transparent;
-  //     border-left: 10px solid #2c3757;
-  //     @include transition(all ease 300ms);
-  //   }
-  //
-  //   span:nth-child(1)::before {
-  //     content: 'Home';
-  //   }
-  //
-  //   span:nth-child(2)::before {
-  //     content: 'Home1';
-  //   }
-  //
-  //   span:nth-child(3)::before {
-  //     content: 'Home1';
-  //   }
-  //
-  //   span:nth-child(4)::before {
-  //     content: 'Home1';
-  //   }
-  //
-  //   span:nth-child(5)::before {
-  //     content: 'Contact';
-  //   }
-  // }
+  .description,
+  .description-shown {
+    h4,
+    p {
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+    }
+  }
+
   .line-height90 {
     line-height: 90%;
+  }
+
+  .text-sec-left {
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
   }
 
   .img-section1 {
@@ -974,6 +938,13 @@ a.color-white {
 
   ul {
     margin: 0;
+
+    li {
+      a {
+        @extend .avenir-heavy;
+        text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+      }
+    }
   }
 }
 
@@ -1009,12 +980,13 @@ a.color-white {
   .contact-decrp {
     position: relative;
     padding-left: 50px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
 
     img {
       position: absolute;
-      right: 75px;
+      right: 65px;
       height: 50px;
-      top: 0px;
+      top: 0;
     }
   }
 
@@ -1031,6 +1003,7 @@ a.color-white {
         text-align: center;
         padding: 9px 0;
         font-size: 22px;
+        text-shadow: 2px 1px 0 rgba(0, 0, 0, 0.5);
 
         i {
           @include transition(all ease 300ms);
@@ -1089,8 +1062,10 @@ a.color-white {
 }
 
 .menu-contact {
-  bottom: 20px;
-  left: 20px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 40px;
 
   ul li a {
     font-size: 14px;
@@ -1271,13 +1246,15 @@ a.color-white {
     color: #aaa;
   }
 }
+
 .login-partner-tooltip + .tooltip .tooltip-inner {
-padding: 10px;
- background-color: rgba(0,0,0,0.7);
- font-family: "AvenirLTStd-Roman";
+  padding: 10px;
+  background-color: rgba(0,0,0,0.7);
+  font-family: "AvenirLTStd-Roman";
 }
+
 .login-partner-tooltip + .tooltip .tooltip-arrow {
- border-top-color: rgba(0,0,0,0.7);
+  border-top-color: rgba(0,0,0,0.7);
 }
 
 .error-forgot-msg {
@@ -1432,6 +1409,17 @@ padding: 10px;
         border-bottom: 1px solid #cecece;
         @extend .text-shadow;
       }
+    }
+  }
+}
+
+.app-icons {
+  ul {
+    margin: 0;
+
+    li {
+      @extend .avenir-heavy;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
     }
   }
 }

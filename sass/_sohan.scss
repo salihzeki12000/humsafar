@@ -6,26 +6,6 @@ body.fp-viewing-0 {
   padding: 0;
 }
 
-.fnt-32 {
-  font-size: 32px;
-}
-
-.fnt-24 {
-  font-size: 24px;
-}
-
-.fnt-20 {
-  font-size: 20px;
-}
-
-.fnt-16 {
-  font-size: 16px;
-}
-
-.fnt-60 {
-  font-size: 60px;
-}
-
 .pointer {
   cursor: pointer;
 }
@@ -1444,6 +1424,8 @@ a.color-white {
   }
 
   .text-left-ab {
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+
     .dot-icon li {
       font-size: 22px;
     }
@@ -1609,6 +1591,7 @@ a.color-white {
           position: relative;
           padding: 0;
           width: 100%;
+          text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
 
           img {
             right: 0;
@@ -1704,8 +1687,3 @@ a.color-white {
     }
   }
 }
-// .destination {
-//   .destination-nav {
-//     background: #fff;
-//   }
-// }
