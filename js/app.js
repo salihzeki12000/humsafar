@@ -793,6 +793,51 @@ firstapp.filter('kindOfCheckIn', function() {
   };
 });
 
+firstapp.filter('itineraryType', function() {
+  return function(input) {
+    var returnVal = "";
+    switch (input) {
+      case "friends":
+        returnVal = "img/banner-itinerary/friends.jpg";
+        break;
+      case "backpacking":
+        returnVal = "img/banner-itinerary/backpacking.jpg";
+        break;
+      case "business":
+        returnVal = "img/banner-itinerary/business.jpg";
+        break;
+      case "religious":
+        returnVal = "img/banner-itinerary/religious.jpg";
+        break;
+      case "romance":
+        returnVal = "img/banner-itinerary/romance.jpg";
+        break;
+      case "budget":
+        returnVal = "img/banner-itinerary/budget.jpg";
+        break;
+      case "luxury":
+        returnVal = "img/banner-itinerary/luxury.jpg";
+        break;
+      case "family":
+        returnVal = "img/banner-itinerary/family.jpg";
+        break;
+      case "sole":
+        returnVal = "img/banner-itinerary/sole.jpg";
+        break;
+      case "betterhalf":
+        returnVal = "img/banner-itinerary/betterhalf.jpg";
+        break;
+      case "colleague":
+        returnVal = "img/banner-itinerary/colleague.jpg";
+        break;
+      case "adventure":
+        returnVal = "img/banner-itinerary/adventure.jpg";
+        break;
+    }
+    return returnVal;
+  };
+});
+
 firstapp.directive('fileModel', ['$parse', function($parse) {
   return {
     restrict: 'A',
@@ -1060,8 +1105,8 @@ firstapp.directive('fileDropzone', function() {
               }
             });
           }
+          console.log(evt.target.files);
         };
-        console.log(event.originalEvent.dataTransfer.files);
         file = event.originalEvent.dataTransfer.files[0];
         name = file.name;
         type = file.type;
@@ -1087,6 +1132,7 @@ firstapp.directive("fileread", [function () {
                         scope.fileread = loadEvent.target.result;
                     });
                 }
+                console.log(changeEvent.target.files);
                 reader.readAsDataURL(changeEvent.target.files[0]);
             });
         }

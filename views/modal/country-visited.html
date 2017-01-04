@@ -14,7 +14,7 @@
             <input type="checkbox" id="year{{list}}" ng-model="visited[list].year" ng-true-value="{{list}}" ng-click="checkIfSelected(visited[list])">
             <label for="year{{list}}">{{list}}</label>
           </div>
-          <div class="count-visited" style="cursor:not-allowed">
+          <div class="count-visited" ng-show="visited[list].times>0">
             <span class="disable-span"><i class="fa fa-minus-circle minus" ng-click="visited[list].times=visited[list].times-1" ng-class="{'disabled':!visited[list].year}"></i></span>
             <input type="number" id="rooms" ng-model="visited[list].times" ng-disabled="!visited[list].year" placeholder="0" min="1">
             <span class="disable-span"><i class="fa fa-plus-circle plus" ng-click="visited[list].times=visited[list].times+1"></i></span>
@@ -22,8 +22,14 @@
         </li>
       </ul>
     </div>
-    <div class="update-btn text-right">
+    <div class="update-btn clearfix">
+      <div class="text-center fz12">No Of Times</div>
+      <div class="pull-left">
+        <a href="" class="clear-countryvisit">Clear All</a>
+      </div>
+      <div class="pull-right">
       <button class="btn btn-pink" ng-click="updateNumOfTimes(visited)">Update</button>
+      </div>
     </div>
   </div>
 </div>
