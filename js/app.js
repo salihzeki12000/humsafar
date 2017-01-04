@@ -796,26 +796,33 @@ firstapp.filter('kindOfCheckIn', function () {
 firstapp.filter('itineraryType', function () {
   return function (input) {
     var returnVal = "";
-
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    var random=getRandomInt(0,2);
-    switch (input) {
-      case "friends":
-        returnVal = "img/banner-itinerary/friends"+random+".jpg";
-        break;
-      case "backpacking":
-        returnVal = "img/banner-itinerary/backpacking"+random+".jpg";
+    var itineraryBg = input.length;
+    console.log(input,itineraryBg);
+    var itineraryGet = getRandomInt(0,itineraryBg-1);
+    var backImg = input[itineraryGet];
+    console.log(backImg);
+    var random=getRandomInt(1,2);
+    switch (backImg) {
+      case "adventure":
+        returnVal = "img/banner-itinerary/adventure"+random+".jpg";
         break;
       case "business":
         returnVal = "img/banner-itinerary/business"+random+".jpg";
         break;
+      case "family":
+        returnVal = "img/banner-itinerary/family"+random+".jpg";
+        break;
+        case "romance":
+        returnVal = "img/banner-itinerary/romance"+random+".jpg";
+        break;
+      case "backpacking":
+        returnVal = "img/banner-itinerary/backpacking"+random+".jpg";
+        break;
       case "religious":
         returnVal = "img/banner-itinerary/religious"+random+".jpg";
-        break;
-      case "romance":
-        returnVal = "img/banner-itinerary/romance"+random+".jpg";
         break;
       case "budget":
         returnVal = "img/banner-itinerary/budget"+random+".jpg";
@@ -823,22 +830,20 @@ firstapp.filter('itineraryType', function () {
       case "luxury":
         returnVal = "img/banner-itinerary/luxury"+random+".jpg";
         break;
-      case "family":
-        returnVal = "img/banner-itinerary/family"+random+".jpg";
-        break;
-      case "sole":
+      case "solo":
         returnVal = "img/banner-itinerary/sole"+random+".jpg";
         break;
-      case "betterhalf":
-        returnVal = "img/banner-itinerary/betterhalf"+random+".jpg";
+      case "festival":
+        returnVal = "img/banner-itinerary/all"+random+".jpg";
         break;
-      case "colleague":
-        returnVal = "img/banner-itinerary/colleague"+random+".jpg";
+      case "shopping":
+        returnVal = "img/banner-itinerary/all"+random+".jpg";
         break;
-      case "adventure":
-        returnVal = "img/banner-itinerary/adventure"+random+".jpg";
+      case "friends":
+        returnVal = "img/banner-itinerary/friends"+random+".jpg";
         break;
     }
+    console.log(returnVal,'return wla kya hai');
     return returnVal;
   };
 });
