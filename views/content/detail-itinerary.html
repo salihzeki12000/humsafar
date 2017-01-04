@@ -113,7 +113,7 @@
                         </span>
                           <div class="dropdown-country" ng-show="showCountry[countryPanel]">
                             <ul>
-                              <li ng-repeat="nation in countries | filter: editCountry.name"><a href="" ng-click="updateCountryDetail(editCountry,nation,countryPanel,cityPanel)" class="country-drop">{{nation.name}}</a></li>
+                              <li ng-repeat="nation in countries | filter: editCountry.name"><a href="" ng-click="updateCountryDetail(editCountry,nation,countryPanel,cityPanel)" class="country-drop v-mid"><img ng-src="{{nation.flag|uploadpath}}" width="30" class="mr10 v-mid" alt="{{nation.name}}">{{nation.name}}</a></li>
                             </ul>
                           </div>
                           <!--<ui-select ng-model="addCountry[countryPanel]" theme="bootstrap" ng-click="updateCountriesArr($select.selected._id)">
@@ -130,14 +130,14 @@
                             <label for="From">From</label>
                             <div class="itinerary-inputholder">
                               <!-- <input type="date" class="form-control text-center" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'"> -->
-                              <input type="text" placeholder="dd/mm" class="form-control" ng-click="openFrom()" uib-datepicker-popup="{{format}}" is-open="popupFrom.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="false" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'" />
+                              <input type="text" placeholder="Month" class="form-control text-center" ng-click="openFrom()" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popupFrom.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="false" />
                             </div>
                           </div>
                           <div class="itinerary-to itinerary-year">
                             <label for="to">To</label>
                             <div class="itinerary-inputholder">
                               <!-- <input type="date" class="form-control text-center" id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)"> -->
-                              <input type="text" placeholder="dd/mm" class="form-control" ng-click="openTo()" uib-datepicker-popup="{{format}}" is-open="popupTo.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)"/>
+                              <input type="text" placeholder="Month" class="form-control text-center" ng-click="openTo()" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popupTo.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
                             </div>
                           </div>
                           <div class="itinerary-duration">
@@ -215,13 +215,13 @@
                           <div class="itinerary-from itinerary-month">
                             <label for="Day">From</label>
                             <div class="itinerary-inputholder">
-                              <input type="number" class="form-control text-center" ng-model="editCity.from" min=1 placeholder="00">
+                              <input type="number" class="form-control text-center" ng-model="editCity.from" min=1 placeholder="Day">
                             </div>
                           </div>
                           <div class="itinerary-to itinerary-year">
                             <label for="to">To</label>
                             <div class="itinerary-inputholder">
-                              <input type="number" class="form-control text-center" ng-model="editCity.to" min=1 placeholder="00">
+                              <input type="number" class="form-control text-center" ng-model="editCity.to" min=1 placeholder="Day">
                             </div>
                           </div>
                         </div>
@@ -428,10 +428,33 @@
               <label for="trip-photo">Upload Trip Photo</label>
               <div class="trip-photo-holder">
                 <div class="trip-view-photo" ng-repeat="photo in dItinerary.photos track by $index">
+                  <span class="delete-detail-pic"><i class="fa fa-times"></i></span>
                   <img ng-src="{{photo.name|uploadpath}}" alt="Quick Itinerary" class="img-responsive get-center">
-                  <div class="remove-quick-photo text-right">
+                  <!-- <div class="remove-quick-photo text-right">
                     <div class="delete-photo"><i class="fa fa-times color-white pointer" ng-click="removePhoto($index,city)"></i></div>
+                  </div> -->
+
+                  <!-- caption start -->
+
+                  <div class="detail-pic-caption" ng-click=""
+                  ng-hide="">
+                    <p  ng-if="!column.editDetailPic || column.editDetailPic==''">Add Caption</p>
+                    <p class="text-ellipsis" ng-if="column.editDetailPic && !column.editDetailPic==''">{{column.editDetailPic}}</p>
                   </div>
+
+                  <div class="detail-pic-edit-caption" ng-show="column.agentImg==index" ng-class="{'showcaptionagent' : index==column.agentImg, '' : !index==column.agentImg}">
+                   <textarea name="" id="captionArea" cols="30" rows="7" class="form-control" maxlength="150" placeholder="Enter Caption"></textarea>
+                   <div class="view-caption-onimg">
+                     <span ><i class="fa fa-angle-down"></i></span>
+                   </div>
+                   <div class="text-typed-count">
+                     <span id="remainCaption"></span>
+                   </div>
+                 </div>
+
+                 <!-- caption end -->
+
+
                 </div>
                 <div class="trip-upload text-center">
                   <div class="upload-section">
