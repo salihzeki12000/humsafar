@@ -25,14 +25,21 @@
             </div>
             <!-- search friend end-->
             <!-- add country -->
-            <div class="list-add-country" ng-if="activeMenu == 'countriesVisited' || activeMenu == 'bucketList'">
+            <div class="list-add-country" ng-if="activeMenu == 'countriesVisited'">
               <div class="bucket-visited-holder">
                 <input type="text" placeholder="Add Country Visited">
                 <span><i class="fa fa-search"></i></span>
               </div>
-              <button class="btn btn-pink">Add</button>
             </div>
             <!-- add country end-->
+            <!-- search bucketList -->
+            <div class="list-add-country" ng-if="activeMenu == 'bucketList'">
+              <div class="bucket-visited-holder">
+                <input type="text" placeholder="Add bucketList">
+                <span><i class="fa fa-search"></i></span>
+              </div>
+            </div>
+            <!-- search bucketList end-->
           </form>
         </div>
       </div>

@@ -111,8 +111,10 @@
                                     <span class="color-blue fz12 ml10 avenir-roman"><i class="fa fa-heart color-blue mr5"></i> Would Love To Go</span>
                                 </div>
                                 <form>
-                                    <input type="text" class="visit-input" placeholder="Add Country Visited" ng-model="input">
-                                    <button class="btn btn-pink">Add</button>
+                                    <div class="visit-inputholder">
+                                      <input type="text" class="visit-input" placeholder="Add Country Visited" ng-model="input">
+                                    </div>
+                                    <!-- <button class="btn btn-pink">Add</button> -->
                                     <div class="visited-country-list avenir-roman">
                                         <ul>
                                             <li ng-repeat="list in  nationality | filter:input">
