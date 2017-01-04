@@ -7266,11 +7266,12 @@ border-radius: 100%;
     .close {
       color: $brand-blue;
       opacity: 1;
+      font-size: 15px;
     }
     &:hover, &:active, &:focus {
       box-shadow: none;
       background-color: transparent;
-      color: #fff;
+      color: $brand-blue;
     }
   }
 }
@@ -7310,6 +7311,44 @@ border-radius: 100%;
 .add-city-span {
   font-size: 12px;
   margin: 5px 10px;
+}
+.ui-select-multiple {
+  input[type="search"] {
+    width: auto !important;
+  }
+}
+
+.ui-select-bootstrap .ui-select-choices-row.active > span {
+  background-color: #fff;
+  color: #a0a0a0;
+}
+
+.ui-select-dropdown{
+  border: none;
+  li{
+    border: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $brand-pink;
+  }
+}
+
+.ui-select-bootstrap .ui-select-choices-row > span {
+  color: #a0a0a0;
+  border-bottom: 1px solid #ebebeb;
+
+  &:hover {
+    color: #a0a0a0;
+  }
 }
 //sagar css end
 // detail itinerary detail end
