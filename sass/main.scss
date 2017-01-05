@@ -663,6 +663,7 @@ header {
 
 .search {
   margin: 2px 10px 2px 13px;
+
   input {
     width: 360px;
     padding: 6px 10px 6px 25px;
@@ -895,6 +896,7 @@ header {
 
   .search-nation {
     position: relative;
+
     &:after,
     &:before {
       content: "";
@@ -951,6 +953,7 @@ header {
     overflow-y: scroll;
     list-style-type: none;
     text-align: left;
+
     li {
       padding: 10px 0;
       // border-bottom: 2px solid $brand-dark-blue;
@@ -1371,10 +1374,13 @@ header {
     display: inline-block;
   }
 }
+
 .visit-inputholder {
   position: relative;
   margin: 15px 5px 10px 0;
-  &:before, &:after {
+
+  &:after,
+  &:before {
     content: '';
     width: 1px;
     height: 15px;
@@ -1382,8 +1388,14 @@ header {
     bottom: 0;
     background-color: #ccc;
   }
-  &:before { left: 0; }
-  &:after { right: 0; }
+
+  &:before {
+    left: 0;
+  }
+
+  &:after {
+    right: 0;
+  }
 }
 
 .visit-input {
@@ -1488,6 +1500,7 @@ header {
       @extend .avenir-light;
     }
   }
+
   .clear-countryvisit {
     padding-bottom: 5px;
     border-bottom: 1px solid #424242;
@@ -1510,7 +1523,8 @@ header {
     text-align: center;
   }
 
-  input[type="number"]::-webkit-outer-spin-button,   ::-webkit-inner-spin-button {
+  ::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
     @include appearance(none);
   }
 
@@ -1711,15 +1725,28 @@ header {
   padding: 20px;
 }
 
+.country-badges {
+  span {
+    margin-left: -18px;
+    display: inline-block;
+    font-size: 19px;
+    color: #fcfcfc;
+    text-shadow: 1px 1px 1px #000;
+    vertical-align: middle;
+    z-index: 4;
+    position: relative;
+  }
+}
+
 .country-visited {
-width: 30px;
-height: 30px;
-overflow: hidden;
-position: relative;
-border: 1px solid #fff;
-float: left;
-margin-left: -10px;
-border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #fff;
+  float: left;
+  margin-left: -10px;
+  border-radius: 100%;
 
   img {
     max-width: initial;
@@ -1728,15 +1755,14 @@ border-radius: 100%;
     @include position(absolute, 50% null null 50%);
     @include transform(translate(-50%,-50%));
   }
-
-  span {
-    margin-left: -18px;
-    display: inline-block;
-    font-size: 19px;
-    color: #fcfcfc;
-    text-shadow: 1px 1px 1px #000;
-    vertical-align: middle;
-  }
+  // span {
+  //   margin-left: -18px;
+  //   display: inline-block;
+  //   font-size: 19px;
+  //   color: #fcfcfc;
+  //   text-shadow: 1px 1px 1px #000;
+  //   vertical-align: middle;
+  // }
 }
 
 .journey-tag-holder {
@@ -6288,7 +6314,7 @@ border-radius: 100%;
   .itinerary-city-visited {
     margin: 10px 0;
 
-    .close-city-x{
+    .close-city-x {
       position: absolute;
       top: 10px;
       right: 0;
@@ -6305,9 +6331,10 @@ border-radius: 100%;
     width: 100%;
     background-color: #fff;
     border: none;
-    border-radius:  0 0 6px 6px;
+    border-radius: 0 0 6px 6px;
     z-index: 2;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+
     ::-webkit-scrollbar {
       width: 3px;
     }
@@ -6319,10 +6346,12 @@ border-radius: 100%;
     ::-webkit-scrollbar-thumb {
       background-color: $brand-pink;
     }
+
     ul {
       max-height: 120px;
       overflow-y: auto;
     }
+
     .country-drop {
       display: block;
       padding: 5px 20px;
@@ -6338,7 +6367,7 @@ border-radius: 100%;
     width: 100%;
     background-color: #fff;
     border: none;
-    border-radius: 0px 0px 6px 6px;
+    border-radius: 0 0 6px 6px;
     z-index: 1;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 
@@ -6612,7 +6641,7 @@ border-radius: 100%;
 .dropdown-currency-itinerary {
   width: 100%;
   border: none;
-  border-radius: 6px 6px 0px 0px;
+  border-radius: 6px 6px 0 0;
   position: absolute;
   bottom: 24px;
   background-color: #fff;
@@ -6639,6 +6668,7 @@ border-radius: 100%;
     padding: 5px 10px;
     border-bottom: 1px solid #ebebeb;
   }
+
   a {
     color: #a0a0a0;
   }
@@ -6709,7 +6739,6 @@ border-radius: 100%;
   @include transition(all 300ms linear);
 }
 //detail photo caption end
-
 // quick itinerary detail end
 // detail itinerary detail
 
@@ -6901,7 +6930,7 @@ border-radius: 100%;
 }
 
 .listed-button {
-  margin: 10px 0px 0;
+  margin: 10px 0 0;
 }
 // trip budget
 
@@ -6937,17 +6966,20 @@ border-radius: 100%;
 
     input {
       width: 120px;
+
       &:focus + label {
         display: none;
       }
     }
-    input[type="number"]::-webkit-outer-spin-button,
-    ::-webkit-inner-spin-button {
+
+    ::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
       @include appearance(none);
     }
+
     label {
       width: 118px;
-      padding: 0px 10px 2px;
+      padding: 0 10px 2px;
       margin: 0;
       display: block;
       position: absolute;
@@ -7002,7 +7034,10 @@ border-radius: 100%;
       width: 30px;
       border: 1px solid #fff;
     }
-    img[src="img/loading.gif"] { display: none; }
+
+    img[src="img/loading.gif"] {
+      display: none;
+    }
   }
 
   .status-country-holder {
@@ -7107,6 +7142,7 @@ border-radius: 100%;
 }
 // trip status right side end
 //sagar css
+
 .itinerary-from,
 .itinerary-to {
   input[type=number]::-webkit-inner-spin-button,
@@ -7123,6 +7159,7 @@ border-radius: 100%;
     // -webkit-appearance: none;
     // display: none;
   }
+
   .uib-datepicker-popup {
     @extend .avenir-roman;
     padding: 10px;
@@ -7138,7 +7175,7 @@ border-radius: 100%;
       }
     }
 
-    .uib-year .btn-default{
+    .uib-year .btn-default {
       border-radius: 0;
     }
 
@@ -7239,7 +7276,7 @@ border-radius: 100%;
   margin-left: -4px;
   border: none;
 
-  .ui-select-container{
+  .ui-select-container {
     width: auto;
     border: none;
   }
@@ -7282,7 +7319,10 @@ border-radius: 100%;
       opacity: 1;
       font-size: 15px;
     }
-    &:hover, &:active, &:focus {
+
+    &:active,
+    &:focus,
+    &:hover {
       box-shadow: none;
       background-color: transparent;
       color: $brand-blue;
@@ -7294,6 +7334,7 @@ border-radius: 100%;
   .add-country-city {
     padding-top: 20px;
     border-top: 1px solid $brand-light-grey;
+
     &:first-child {
       padding-top: 10px;
       border: none;
@@ -7326,6 +7367,7 @@ border-radius: 100%;
   font-size: 12px;
   margin: 5px 10px;
 }
+
 .detail-select-box .ui-select-multiple {
   input[type="search"] {
     width: auto !important;
@@ -7337,9 +7379,10 @@ border-radius: 100%;
   color: #a0a0a0;
 }
 
-.detail-select-box .ui-select-dropdown{
+.detail-select-box .ui-select-dropdown {
   border: none;
-  li{
+
+  li {
     border: none;
   }
 
@@ -7364,58 +7407,59 @@ border-radius: 100%;
     color: #a0a0a0;
   }
 }
+
 .input-city-visited {
- .round-travelledimg{
-   border-radius: 11px;
- }
+  .round-travelledimg {
+    border-radius: 11px;
+  }
 
- .ui-select-multiple {
-   input[type="search"] {
-     width: auto !important;
-     margin: 0;
-   }
- }
+  .ui-select-multiple {
+    input[type="search"] {
+      width: auto !important;
+      margin: 0;
+    }
+  }
 
- .ui-select-choices-row.active > span {
-   background-color: #fff;
-   color: #a0a0a0;
- }
+  .ui-select-choices-row.active > span {
+    background-color: #fff;
+    color: #a0a0a0;
+  }
 
- .ui-select-dropdown {
-   border: none;
+  .ui-select-dropdown {
+    border: none;
 
-   li {
-     border: none;
-   }
- }
+    li {
+      border: none;
+    }
+  }
 
- .ui-select-choices-row > span {
-   color: #a0a0a0;
-   border-bottom: 1px solid #ebebeb;
+  .ui-select-choices-row > span {
+    color: #a0a0a0;
+    border-bottom: 1px solid #ebebeb;
 
-   &:hover {
-     color: #a0a0a0;
-   }
- }
+    &:hover {
+      color: #a0a0a0;
+    }
+  }
 
- .ui-select-bootstrap {
-   background-color: transparent;
-   border: none;
-   padding: 6px 12px;
-   border-bottom: 1px solid $brand-blue;
+  .ui-select-bootstrap {
+    background-color: transparent;
+    border: none;
+    padding: 6px 12px;
+    border-bottom: 1px solid $brand-blue;
 
-   ::-webkit-scrollbar {
-     width: 3px;
-   }
+    ::-webkit-scrollbar {
+      width: 3px;
+    }
 
-   ::-webkit-scrollbar-track {
-     background-color: #fff;
-   }
+    ::-webkit-scrollbar-track {
+      background-color: #fff;
+    }
 
-   ::-webkit-scrollbar-thumb {
-     background-color: $brand-pink;
-   }
- }
+    ::-webkit-scrollbar-thumb {
+      background-color: $brand-pink;
+    }
+  }
 }
 //sagar css end
 // detail itinerary detail end
@@ -7491,6 +7535,7 @@ border-radius: 100%;
     display: block;
     padding: 24px 20px;
   }
+
   .journey-accordion-heading .journey-head {
     padding: 0;
     color: #fff;
@@ -8336,6 +8381,7 @@ border-radius: 100%;
 
 .follow-followers-holder {
   position: relative;
+
   &:after,
   &:before {
     content: '';
@@ -8381,6 +8427,7 @@ border-radius: 100%;
 .bucket-visited-holder {
   position: relative;
   display: inline-block;
+
   &:after,
   &:before {
     content: '';
@@ -8398,6 +8445,7 @@ border-radius: 100%;
   &:before {
     right: 0;
   }
+
   input {
     width: 400px;
     padding: 5px 5px 5px 30px;
@@ -8407,6 +8455,7 @@ border-radius: 100%;
     color: #979ba7;
     font-family: "AvenirLTStd-Medium";
   }
+
   &+button {
     display: inline-block;
     vertical-align: top;
@@ -8419,7 +8468,9 @@ border-radius: 100%;
     color: #979ba7;
   }
 }
-.bucket-dropdown, .countryvisit-dropdown {
+
+.bucket-dropdown,
+.countryvisit-dropdown {
   width: 100%;
   border-radius: 0 0 6px 6px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
@@ -8429,14 +8480,25 @@ border-radius: 100%;
   z-index: 2;
   background-color: #fff;
   overflow: hidden;
-  ::-webkit-scrollbar { width: 2px; }
-  ::-webkit-scrollbar-track { background-color: #fff; }
-  ::-webkit-scrollbar-thumb { background-color: $brand-pink; }
+
+  ::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $brand-pink;
+  }
+
   ul {
     max-height: 215px;
     overflow-x: hidden;
     overflow-y: auto;
   }
+
   li {
     padding: 5px 10px;
     border-bottom: 1px solid #ebebeb;
@@ -8477,10 +8539,12 @@ border-radius: 100%;
     top: 0;
     left: 0;
     z-index: 1;
+
     h4 {
       margin: 0;
       color: #fff;
       font-size: 20px;
+
       span {
         font-size: 14px;
       }
@@ -8515,6 +8579,7 @@ border-radius: 100%;
     box-shadow: 1px 7px 4px #a0a0a0;
     top: -3px;
     @include transition(all 200ms linear);
+
     .country-list {
       opacity: 1;
       @include transition(all 300ms linear);
@@ -8538,10 +8603,12 @@ border-radius: 100%;
     z-index: 1;
     overflow: hidden;
     @include transition(all 200ms linear);
+
     &:hover {
       box-shadow: 1px 7px 4px #a0a0a0;
       top: -3px;
       @include transition(all 200ms linear);
+
       .country-list {
         opacity: 1;
         @include transition(all 300ms linear);
@@ -8639,7 +8706,10 @@ border-radius: 100%;
   box-shadow: 1px 4px 4px #888;
   margin: -40px auto 0;
   overflow: hidden;
-  img { min-height: 100%; }
+
+  img {
+    min-height: 100%;
+  }
 }
 // follow and following end
 // profile list (follow following countryVisited BucketList) end
