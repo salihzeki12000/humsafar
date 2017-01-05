@@ -66,6 +66,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   };
   $(window).load(function () {
     document.getElementById('movie1').play();
+         if($(window).width()<767){
+        $('video').remove();
+    }
   });
   setTimeout(function () {
     $('.scene').parallax();
