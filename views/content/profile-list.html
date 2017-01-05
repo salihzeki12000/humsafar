@@ -21,14 +21,57 @@
                 <input type="text" placeholder="Search Friend" ng-model="searchFriend.name" ng-if="activeMenu=='following'">
                 <input type="text" placeholder="Search Friend" ng-model="searchUser" ng-if="activeMenu=='followers'" ng-change="searchAllUser(searchUser)">
                 <span class="search-follow"><i class="fa fa-search"></i></span>
+                <div class="dropdown-follow-followers">
+                  <ul>
+                    <li>
+                      <div class="clearfix">
+                        <div class="pull-left">
+                          <div class="user-profileholder">
+                            <img src="" alt="" class="img-responsive">
+                          </div>
+                          <div class="user-detail">
+                            <h4 class="user-name avenir-roman color-dark-blue">Monish Shah</h4>
+                            <span class="color-light-grey avenir-roman">@monish-shah</span>
+                          </div>
+                        </div>
+                        <div class="pull-right">
+                          <button class="btn btn-pink following-btn"></i>Following</button>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
             <!-- search friend end-->
             <!-- add country -->
             <div class="list-add-country" ng-if="activeMenu == 'countriesVisited'">
-              <div class="bucket-visited-holder">
+              <div class="bucket-visited-holder country-visit-holder">
                 <input type="text" placeholder="Add Country Visited">
-                <span><i class="fa fa-search"></i></span>
+                <span class="search-icon"><i class="fa fa-search"></i></span>
+                <div class="countryvisit-dropdown">
+                  <ul>
+                    <li ng-repeat="list in nationality | filter: visitedCountry">
+                      <div class="country-list clearfix relate">
+                          <span class="color-light-grey inline-block country-name pull-left">{{list.name}} </span>
+                          <div class="get-right pull-right">
+                              <div class="relate inline-block">
+                                  <div class="custom-checkbox">
+                                      <input type="checkbox" id="{{list._id}}" ng-model="list.countryVisited">
+                                      <label for=" {{list._id}} " ng-click="updateCountryVisited(list);"></label>
+                                  </div>
+                              </div>
+                              <!-- <div class="relate inline-block">
+                                  <div class="bucket-list custom-checkbox-heart ">
+                                      <input type="checkbox" id="wish{{list._id}}" ng-model="list.bucketList" ng-click="updateBucketList(list) ">
+                                      <label for="wish{{list._id}}"></label>
+                                  </div>
+                              </div> -->
+                          </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
             <!-- add country end-->
@@ -36,12 +79,12 @@
             <div class="list-add-country" ng-if="activeMenu == 'bucketList'">
               <div class="bucket-visited-holder">
                 <input type="text" placeholder="Add bucketList" ng-model="visitedCountry" ng-change="getBucketList();">
-                <span><i class="fa fa-search"></i></span>
+                <span class="search-icon"><i class="fa fa-search"></i></span>
                 <div class="bucket-dropdown">
                   <ul>
                     <li ng-repeat="list in nationality | filter: visitedCountry">
                       <div class="country-list clearfix relate">
-                          <span class="color-blue inline-block country-name pull-left">{{list.name}} </span>
+                          <span class="color-light-grey inline-block country-name pull-left">{{list.name}} </span>
                           <div class="get-right pull-right">
                               <!-- <div class="relate inline-block mr10">
                                   <div class="custom-checkbox">
@@ -49,7 +92,7 @@
                                       <label for=" {{list._id}} " ng-click="updateCountryVisited(list);"></label>
                                   </div>
                               </div> -->
-                              <div class="relate inline-block mr10 ">
+                              <div class="relate inline-block">
                                   <div class="bucket-list custom-checkbox-heart ">
                                       <input type="checkbox" id="wish{{list._id}}" ng-model="list.bucketList" ng-click="updateBucketList(list) ">
                                       <label for="wish{{list._id}}"></label>
@@ -137,8 +180,6 @@
                 <button class="btn btn-pink following-btn" ng-if="list.following" ng-click="unFollowUser(list._id)">Following</button>-->
 
                 <button class="btn btn-pink following-btn" ng-click="followUnFollowUser(list._id,list.name,list.status)">{{list.status}}</button>
-
-
               </div>
             </div>
             <div class="following-user-info">
