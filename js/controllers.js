@@ -910,7 +910,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       initMap();
     };
 
-    OnGoJourney.getOneJourney({
+    OnGoJourney.getOneJourney({ 
       "urlSlug": slug
     }, getOneJourneyCallback, function (err) {
       console.log(err);

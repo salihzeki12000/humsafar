@@ -5,7 +5,7 @@
     <div class="clearfix">
       <div class="card-user-imgholder">
         <div class="journey-userimg user-img-ongo">
-          <img ng-src="{{userData.profilePicture|uploadpath}}" alt="" class="img-responsive">
+          <img ng-src="{{ongo.postCreator.profilePicture|uploadpath}}" alt="" class="img-responsive">
         </div>
       </div>
       <div class="card-journeypost">
@@ -57,7 +57,7 @@
         <!---- put/remove item width 99 if needed -->
         <li>
           <div class="related-ongo-slider" ng-click="changeImage($index)">
-            <img ng-src="{{slide.name|uploadpath}}" alt="" class="img-responsive">
+            <img ng-src="{{slide.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive">
           </div>
         </li>
       </flex-slider>
