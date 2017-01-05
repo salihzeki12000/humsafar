@@ -108,10 +108,10 @@
             <div class="started-journey-card">
               <div class="relate text-center">
                 <div class="journey-start">
-                  <img src="img/ongojourney/journey-step.png" alt="" class="img-responsive m-center" width="55">
+                  <img src="img/ongojourney/journey-step.png" alt="" class="img-responsive m-center" width="40">
                   <h4 class="avenir-roman"><span class="block">{{journey.name}}</span></h4>
                   <div class="you-in">
-                    <img src="img/icons/at.png" alt="" class="img-responsive m-center" width="200">
+                    <img src="img/icons/at.png" alt="" class="img-responsive m-center" width="140">
                   </div>
                 </div>
               </div>
@@ -128,7 +128,11 @@
                     </div>
                   </div>
                   <h4 class="color-white avenir-light">{{journey.startLocation}}</h4>
-                  <p class="color-white m-clear"><i class="fa fa-calendar mr5"></i><span>{{journey.startTime|formatDate: 'date'}}</span> | <i class="fa fa-clock-o mr5"></i><span>{{journey.startTime|formatDate: 'time'}}</span></p>
+                  <p class="color-white m-clear avenir-roman">
+                    <!-- <i class="fa fa-calendar mr5"></i> -->
+                    <span>{{journey.startTime|formatDate: 'date'}}</span> |
+                    <!-- <i class="fa fa-clock-o mr5"></i> -->
+                    <span>{{journey.startTime|formatDate: 'time'}}</span></p>
                 </div>
                 <!-- header started end-->
                 <div class="journey-imgholder ">
@@ -141,7 +145,7 @@
                       <ul>
                         <li ng-repeat="list in journey.kindOfJourney|limitTo:3">
                           <a href="">
-                            <img ng-src="{{list|kindOfJourney}}" alt="" height="25">
+                            <img ng-src="{{list|kindOfJourney}}" alt="" height="15">
                           </a>
                         </li>
                       </ul>
@@ -149,7 +153,7 @@
                     <div class="pull-right relate full-width">
                       <div class="journey-travelling-buddies">
                         <div class="img-buddies pointer" ng-repeat="img in journey.buddies|limitTo:3">
-                          <img ng-src="{{img.profilePicture|uploadpath}}" alt="" class="img-responsive">
+                          <img ng-src="{{img.profilePicture|uploadpath:50}}" alt="" class="img-responsive">
                         </div>
                         <span ng-show="journey.showRemainingCount" class="">+{{journey.remainingCount}}</span>
                       </div>
@@ -168,7 +172,7 @@
           <!-- journey tab view end -->
           <!-- card-ongo-main -->
           <div class="relate">
-            <div class="dot-line"></div> 
+            <div class="dot-line"></div>
             <div class="card-relate-holder functionmap" ng-if="journey.post">
 
               <journey-post post="ongo" json=journey get-comments-data="getCommentsData(post_id,post_uniqueId,post_postString,post_likeDone)" profile=userData ng-repeat="ongo in journey.post"></journey-post>
@@ -176,8 +180,12 @@
               <!-- ongo journey-end -->
               <div class="ongo-journey-end" ng-if="journey.onGoing==false">
                 <div class="journey-end text-center">
-                  <h4 class="color-white">{{ongo.location}}</h4>
-                  <p class="m-clear color-white"><i class="fa fa-calendar mr5"></i><span>{{journey.endTime|formatDate: 'date'}}</span> | <i class="fa fa-clock-o mr5"></i><span>{{journey.endTime|formatDate: 'time'}}</span></p>
+                  <h4 class="color-white avenir-roman">{{ongo.location}}</h4>
+                  <p class="m-clear color-white avenir-roman">
+                    <!-- <i class="fa fa-calendar mr5"></i> -->
+                    <span>{{journey.endTime|formatDate: 'date'}}</span> |
+                    <!-- <i class="fa fa-clock-o mr5"></i> -->
+                    <span>{{journey.endTime|formatDate: 'time'}}</span></p>
                 </div>
                 <div class="end-journey-flag text-center">
                   <img src="img/ongojourney/end-flag.png" alt="" class="img-responsive m-center" width="50">

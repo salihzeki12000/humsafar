@@ -70,7 +70,6 @@ img.loading {
 
 img {
   opacity: 1;
-  @include transition(all 300ms ease);
 }
 
 img.doneLoading {
@@ -684,6 +683,10 @@ header {
 }
 
 .user-detail {
+  width: 70%;
+  h4 {
+    @extend .avenir-heavy;
+  }
   .list-inline {
     margin: 0;
   }
@@ -1780,6 +1783,7 @@ header {
   h3,
   h4 {
     padding: 12px 0;
+    @extend .avenir-heavy;
   }
 
   .journey-travelling-type {
@@ -1861,7 +1865,7 @@ header {
 }
 
 .social-likes-reviews {
-  padding: 15px 0;
+  padding: 8px 2px 5px;
   font-size: 12px;
 }
 // progress bar
@@ -3652,7 +3656,7 @@ header {
 }
 
 .activity-post-main {
-  margin: 10px 10px 20px;
+  margin: 10px 0px 20px;
   border: 1px solid #ccc;
   border-radius: 6px;
 
@@ -3721,16 +3725,19 @@ header {
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
   position: absolute;
-  top: -15px;
+  top: 20px;
   right: 0;
   background-color: $brand-pink;
   z-index: 1;
 }
 
 .flag-section {
-  .country-visited {
-    left: 20px;
-  }
+  position: absolute;
+   left: 15px;
+   top: -6px;
+  // .country-visited {
+  //   left: 20px;
+  // }
 }
 
 .post-img,
@@ -4097,7 +4104,7 @@ header {
         border-right: none;
       }
     }
-    a { cursor: auto; }
+    a { cursor: default; }
   }
 
   .trip-info {
@@ -4308,10 +4315,13 @@ header {
   border-radius: 8px;
   // box-shadow: 1px 4px 5px #ccc;
   box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.19);
-  background-color: rgba(255,255,255,0.75);
-
+  background-color: #fff;
   .user-social-item {
-    padding: 12px 0 15px;
+    padding: 8px 2px ;
+  }
+  .journey-rate {
+    color: #424242;
+    font-size: 12px;
   }
 }
 
@@ -4346,7 +4356,7 @@ header {
 
 .journey-post {
   .post {
-    color: #6d6e71;
+    color: #424242;
     @extend .avenir-roman;
 
     b {
@@ -4356,7 +4366,7 @@ header {
 }
 
 .journey-date {
-  color: #6d6e71;
+  color: #424242;
   font-size: 12px;
 }
 
@@ -4409,7 +4419,7 @@ header {
       }
 
       a {
-        color: #6d6e71;
+        color: #424242;
         font-size: 15px;
         @extend .avenir-roman;
 
@@ -4591,7 +4601,7 @@ header {
 .related-ongo-slider {
   width: 99px;
   height: 99px;
-  border: 1px solid $brand-dark-blue;
+  border: 1px solid #ebebeb;
   overflow: hidden;
 }
 
@@ -4628,27 +4638,35 @@ header {
 .ongo-journey-join {
   width: 350px;
   margin: 30px auto;
-
+  .join-relate { z-index: 1; }
   .join-card {
-    padding: 15px 10px;
+    padding: 10px;
     border-radius: 6px;
-    background-color: rgba(242, 103, 91, 0.75);
+    // background-color: rgba(242, 103, 91, 0.75);
+    background-color: $brand-pink;
+    @include transform(rotate(-2deg));
+  }
+  p {
+    margin: 15px 0;
   }
 
   h4 {
-    margin: 0 0 5px;
+    margin: 0 0 2px;
     color: #fff;
-    font-size: 22px;
+    font-size: 14px;
     @extend .avenir-light;
   }
 
   .join-tag {
     position: absolute;
-    top: 80px;
-    right: 20px;
+    top: 55px;
+    right: 100px;
   }
 
   .journey-pic-imgholder {
+    width: 80px;
+    height: 85px;
+    border-radius: 30px;
     margin: 0 auto -10px;
     box-shadow: none;
   }
@@ -4721,25 +4739,32 @@ header {
 .ongo-journey-left {
   width: 350px;
   margin: 30px auto;
-
+  .journey-pic-imgholder {
+    width: 80px;
+    height: 85px;
+    border-radius: 30px;
+    margin: 0 auto -10px;
+    box-shadow: none;
+  }
   .journey-left {
-    padding: 20px 10px;
+    padding: 15px 10px;
     border-radius: 6px;
     background-color: $brand-dark-blue;
     color: #fff;
 
     h4 {
-      margin: 0 0 5px;
+      margin: 0 0 2px;
       color: #fff;
-      font-size: 22px;
+      font-size: 14px;
       @extend .avenir-light;
     }
+    p { font-size: 12px; }
   }
 
   .left-tag {
     position: absolute;
-    left: 30px;
-    bottom: -5px;
+    left: 80px;
+    bottom: 0px;
   }
 }
 // left card end
@@ -4750,15 +4775,16 @@ header {
   margin: 30px auto;
 
   .journey-change {
-    padding: 20px 10px;
+    padding: 15px 10px;
     border-radius: 6px;
     @include transform(rotate(-2deg));
-    background-color: rgba(242, 103, 91, 0.75);
+    // background-color: rgba(242, 103, 91, 0.75);
+    background-color: $brand-pink;
   }
 
   h4 {
     margin: 0;
-    font-size: 22px;
+    font-size: 18px;
   }
 
   p {
@@ -4773,9 +4799,10 @@ header {
   margin: 0 auto;
 
   .journey-end {
-    padding: 20px 10px;
+    padding: 10px 10px;
     border-radius: 6px;
-    background-color: rgba(242, 103, 91, 0.75);
+    // background-color: rgba(242, 103, 91, 0.75);
+    background-color: $brand-pink;
   }
 
   h4 {
@@ -4796,11 +4823,6 @@ header {
 // ongo-journey-end
 // started-journey-card
 
-.started-journey-card .journey-start h4 {
-  color: #fff;
-  text-shadow: 2px 2px 2px #020202;
-}
-
 .started-journey-card {
   margin-bottom: 30px;
 
@@ -4815,9 +4837,11 @@ header {
     background: url('../img/ongojourney/bg-start-white.png') no-repeat 50% 50%;
 
     h4 {
-      margin: 35px 0 20px;
-      font-size: 30px;
+      margin: 25px 0 20px;
+      font-size: 20px;
       position: relative;
+      color: #fff;
+      text-shadow: 2px 2px 2px #020202;
 
       &:before {
         content: "";
@@ -4825,7 +4849,7 @@ header {
         height: 55%;
         border-right: 2px dashed $brand-dark-pink;
         position: absolute;
-        bottom: 66px;
+        bottom: 30px;
         left: 50%;
         @include transform(translateX(-50%));
       }
@@ -4852,22 +4876,20 @@ header {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     background-color: $brand-dark-pink;
-
     h4 {
       margin: 0;
-      font-size: 25px;
+      font-size: 16px;
     }
-
     p {
-      margin-top: 5px;
-      font-size: 12px;
+      margin-top: 2px;
+      font-size: 10px;
     }
   }
 
   .start-card-options {
     padding: 0 5px;
     position: absolute;
-    top: 20px;
+    top: 10px;
     right: 10px;
     cursor: pointer;
   }
@@ -4935,9 +4957,8 @@ header {
   }
 
   .travelling-journey-type {
-    padding: 10px;
-    background-color: rgba(255,255,255,0.75);
-
+    padding: 10px 10px 0;
+    background-color: #fff;
     li {
       margin-right: 10px;
       display: inline-block;
@@ -4947,12 +4968,11 @@ header {
   .journey-travelling-buddies {
     position: absolute;
     right: 0;
-    bottom: -10px;
-
+    bottom: 3px;
     .img-buddies {
-      width: 55px;
-      height: 57px;
-      border-radius: 20px;
+      width: 40px;
+      height: 42px;
+      border-radius: 15px;
       border: 2px solid #fff;
       margin-left: 5px;
       display: inline-block;
@@ -4967,12 +4987,11 @@ header {
 
   .journey-with {
     padding: 10px;
-    background-color: rgba(255,255,255,0.75);
+    background-color: #fff;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
-
     p {
-      color: #6d6e71;
+      color: #424242;
     }
   }
 }
@@ -7039,6 +7058,7 @@ header {
   .status-country-holder {
     img {
       width: 30px;
+      min-height: 21px;
       border: 1px solid #fff;
     }
 
@@ -7174,11 +7194,28 @@ header {
     .uib-daypicker:focus {
       outline: none;
     }
-
+    .uib-daypicker {
+      thead {
+        tr:first-child {
+          th {
+            height: auto;
+            border: none;
+          }
+        }
+      }
+      th {
+        @extend .avenir-roman;
+        height: 40px;
+        border-top: 1px solid #ebebeb;
+        border-bottom: 1px solid #ebebeb;
+        color: $brand-light-grey;
+      }
+    }
     .uib-datepicker {
       .btn-default {
         border: none;
         border-radius: 100%;
+        margin-top: 5px;
       }
     }
 
@@ -7192,6 +7229,7 @@ header {
 
     .uib-left {
       border-radius: 0;
+      padding: 10px 0;
       i {
         &:hover:before { color : $brand-pink; }
         &:before {
@@ -7210,7 +7248,7 @@ header {
 
     .uib-right {
       border-radius: 0;
-
+        padding: 10px 0;
       i {
         &:hover:before { color : $brand-pink; }
         &:before {
@@ -7228,9 +7266,9 @@ header {
     }
 
     .uib-title {
+      padding: 5px 0;
       border-radius: 0;
       font-size: 14px;
-      padding: 10px 0;
       color: $brand-light-grey;
 
       &:hover {
@@ -7372,12 +7410,6 @@ header {
 .add-city-span {
   font-size: 12px;
   margin: 5px 10px;
-}
-
-.detail-select-box .ui-select-multiple {
-  input[type="search"] {
-    width: auto !important;
-  }
 }
 
 .detail-select-box .ui-select-choices-row.active > span {
@@ -8011,11 +8043,11 @@ header {
 
   .journey-start-end {
     margin: 12px 0;
-
     p {
       font-size: 15px;
     }
   }
+  .listing-accordion .user-trip-descp { width: auto; }
 }
 
 .journey-travelled-with {
