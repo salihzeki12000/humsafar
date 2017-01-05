@@ -543,7 +543,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.$apply(function ($scope) {
               $scope.showImage = true;
               $scope.myImage = evt.target.result;
-              console.log($scope.myImage);              
+              console.log($scope.myImage);
             });
           };
           reader.readAsDataURL(file);
@@ -6244,6 +6244,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    var getAllCountries = function (countries) {
+      $scope.nationality = countries;
+      // $scope.getMap();
+    };
+
+    MyLife.getAllCountries(getAllCountries, function (err) {
+      console.log(err);
+    });
+
+    $scope.updateBucketList = function (country) {
+      MyLife.updateBucketList(country, function (data, status) {
+        reloadCount();
+      }, function () {});
+      // $scope.getMap();
+    };
+
       // update country Visited
     $scope.addCountryVisit = function(){
       $uibModal.open({
@@ -6674,7 +6690,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Photo caption function
 
  $scope.index = -1
-  
+
 
   $scope.addDetailCaption = function(index){
       // console.log(index,"hai");
