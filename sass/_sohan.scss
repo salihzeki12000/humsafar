@@ -1,10 +1,3 @@
-.fp-viewing-1,
-.fp-viewing-2,
-.fp-viewing-3,
-.fp-viewing-4,
-body.fp-viewing-0 {
-  padding: 0;
-}
 
 .pointer {
   cursor: pointer;
@@ -32,7 +25,7 @@ body.fp-viewing-0 {
 }
 
 .overlay-landing {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   position: absolute;
   top: 0;
   bottom: 0;
@@ -108,6 +101,15 @@ a.color-white {
   }
   .bg-agents {
     background: url('../img/popularagent/bg-agent.jpg') no-repeat;
+    z-index: 2;
+  }
+  
+  .bg-itinerary {
+    background: url('../img/libro-home/bg-itinerary.jpg') no-repeat;
+    z-index: 2;
+  }
+    .bg-journey {
+    background: url('../img/libro-home/bg-journey.jpg') no-repeat;
     z-index: 2;
   }
   .img-holder-destination {

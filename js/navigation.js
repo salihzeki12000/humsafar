@@ -21,27 +21,32 @@ var navigationservice = angular.module('navigationservice', [])
     name: "Destination",
     classis: "active",
     disabled: true,
-    anchor: "home",
+    anchor: "destination",
   }, {
     name: "Popular Journeys",
     classis: "active",
     disabled: true,
-    anchor: "home",
+    anchor: "popularjourney",
   }, {
     name: "Popular Bloggers",
     classis: "active",
     disabled: true,
-    anchor: "home",
+    anchor: "popularblogger",
   }, {
     name: "Popular Agents",
     classis: "active",
     disabled: true,
-    anchor: "home",
+    anchor: "popularagent",
+  }, {
+    name: "Popular Itinerary",
+    classis: "active",
+    disabled: true,
+    anchor: "popularitinerary",
   }, {
     name: "Bookings",
     classis: "active",
     disabled: false,
-    anchor: "home",
+    anchor: "booking",
     subnav: [{
       name: "Flights",
       classis: "active",
@@ -75,27 +80,24 @@ var navigationservice = angular.module('navigationservice', [])
     name: "Blogs",
     classis: "active",
     disabled: true,
-    anchor: "home",
+    anchor: "popularblogger",
   }, {
     name: "About Us",
     classis: "active",
     disabled: false,
-    anchor: "home",
+    anchor: "about",
     subnav: [{
       name: "About TraveLibro",
       classis: "active",
-      anchor: "home"
+      anchor: "about"
     }, {
       name: "Advertise With Us",
       classis: "active",
-      anchor: "home"
+      anchor: "advertise"
     }, {
       name: "Contact Us",
       classis: "active",
-      anchor: "home",
-      params: {
-        'id': 'contact',
-      }
+      anchor: "contact",
     }, {
       name: "Terms & Conditions",
       classis: "active",

@@ -95,10 +95,20 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'PopularBloggerCtrl'
     })
+    .state('popularjourney', {
+      url: "/popular-journey",
+      templateUrl: "views/template.html",
+      controller: 'PopularJourneyCtrl'
+    })
     .state('popularagent', {
       url: "/popular-agent",
       templateUrl: "views/template.html",
       controller: 'PopularAgentCtrl'
+    })
+    .state('popularitinerary', {
+      url: "/popular-itinerary",
+      templateUrl: "views/template.html",
+      controller: 'PopularItineraryCtrl'
     })
     .state('destination', {
       url: "/destination",
@@ -286,25 +296,25 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
 });
 
 
-firstapp.directive('img', function ($compile, $parse) {
-  return {
-    restrict: 'E',
-    replace: false,
-    link: function ($scope, element, attrs) {
-      var $element = $(element);
-      if (!attrs.noloading) {
-        $element.after("<img src='img/loading.gif' class='loading' />");
-        var $loading = $element.next(".loading");
-        $element.load(function () {
-          $loading.remove();
-          $(this).addClass("doneLoading");
-        });
-      } else {
-        $($element).addClass("doneLoading");
-      }
-    }
-  };
-});
+// firstapp.directive('img', function ($compile, $parse) {
+//   return {
+//     restrict: 'E',
+//     replace: false,
+//     link: function ($scope, element, attrs) {
+//       var $element = $(element);
+//       if (!attrs.noloading) {
+//         $element.after("<img src='img/loading.gif' class='loading' />");
+//         var $loading = $element.next(".loading");
+//         $element.load(function () {
+//           $loading.remove();
+//           $(this).addClass("doneLoading");
+//         });
+//       } else {
+//         $($element).addClass("doneLoading");
+//       }
+//     }
+//   };
+// });
 
 firstapp.directive('autoHeight', function ($compile, $parse) {
   return {

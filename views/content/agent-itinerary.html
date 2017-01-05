@@ -377,9 +377,11 @@
                       <div class="onway-imgholder">
                         <img ng-src="{{life.imgOnway}}" alt="" class="img-responsive m-center">
                       </div>
-                      <div class="country-visited">
-                        <img ng-src="{{visit.imgFlag}}" alt="" height="30" ng-repeat="visit in life.countryVisit track by $index">
-                        <span class="">+4</span>
+                      <div class="country-badges">
+                      <div class="country-visited" ng-repeat="visit in life.countryVisit track by $index">
+                        <img ng-src="{{visit.imgFlag}}" alt="" height="30">
+                        <!--<span class="">+4</span>-->
+                      </div>
                       </div>
                       <div class="journey-tag-holder">
                         <h3 class="m-clear text-capitalize">{{life.onwayTag}}</h3>

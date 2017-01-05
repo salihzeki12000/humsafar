@@ -3,7 +3,7 @@
         <div class="profile-photo-section relate">
             <div class="profile-pic relate">
                 <div class="profile-imgholder ">
-                    <img src="{{userData.profilePicture|uploadpath:135:145}}" alt="{{userData.name}}" class="img-responsive">
+                    <img ng-src="{{userData.profilePicture|uploadpath:135:145}}" alt="{{userData.name}}" class="img-responsive" style="border-radius='55px';">
                 </div>
                 <img src="{{userData.homeCountry.flag|uploadpath:40}}" alt="" class="flag img-responsive">
                 <img src="img/wave-profile.png" alt="" width="40" class="wave img-responsive">
