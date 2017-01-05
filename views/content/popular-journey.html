@@ -15,7 +15,263 @@
     </div>
   </div>
 </div>
-<div class="container">
-  <div class="popular-journey second">
-  </div>
+<div class="bg-white">
+    <div class="container">
+        <div class="popular-journey mt20 second">
+     <div masonry>
+        <div class="row">
+          <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="post in activityPost">
+                  <div class="activity-post {{post.class}}">
+              <div class="activity-post-main">
+                <!-- post header -->
+                <div class="post-header relate">
+                  <div class="inline-block picture-section">
+                    <div class="editor-logo" ng-if="post.editor">
+                      <img src="img/blog/editor-logo.png" alt="" class="img-responsive">
+                    </div>
+                    <div class="user-pic" ng-if="post.userPic">
+                      <img ng-src="{{post.profilePic}}" alt="" class="img-responsive">
+                    </div>
+                  </div>
+                  <div class="user-detail inline-block">
+                    <h4 class="font-bold color-dark-blue m-clear mb5">{{post.userName}}</h4>
+                    <div class="clearfix user-more-detail">
+                      <div class="pull-left">
+                        <p class="m-clear"><span class="fnt-12">{{post.timestampDate}}</span> | <span class="fnt-12">{{post.timestampHour}}</span></p>
+                      </div>
+                      <div class="pull-right">
+                        <div class="follow-or-following">
+                          <span class="color-dark-blue ml5" ng-if="post.follow">Follow</span>
+                          <span class="color-dark-blue ml5" ng-if="post.following">Following</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- post status -->
+                  <div class="post-your-status">
+                    <p class="your-post">{{post.status}}</p>
+                  </div>
+                  <!-- post status end -->
+                  <!-- post type icon -->
+                  <div class="post-icon" ng-if="post.postIcon">
+                    <div class="location circle-rounded pointer">
+                      <img src="img/location-blue.png" alt="" height="18" class="">
+                      <!-- <img src="img/camera.png" alt="" height="18" class=""> -->
+                      <!-- <img src="img/video.png" alt="" height="18" class=""> -->
+                      <!-- <img src="img/pin.png" alt="" height="18" class=""> -->
+                    </div>
+                  </div>
+                  <!-- post type icon end -->
+                </div>
+                <!-- post header end -->
+                <!-- post-main-section -->
+                <div class="post-main-section">
+                  <div class="relate">
+                    <!-- flag country -->
+                    <div class="flag-section">
+                      <div class="country-visited" ng-repeat="visit in post.countryVisit track by $index">
+                        <img ng-src="{{visit.imgFlag}}" alt="" height="30">
+                      </div>
+                    </div>
+                    <!-- flag country end -->
+                    <!-- tag on journey -->
+                    <div class="tag-ongo-journey">
+                      <span class="inline-block color-white">On The Go</span>
+                    </div>
+                    <!-- tag on journey end-->
+                    <!-- video post -->
+                    <div class="video-post relate" ng-if="post.video">
+                      <img src="img/blog/popular-blog.jpg" alt="" class="img-responsive">
+                      <div class="youtube-icon get-center">
+                        <span><i class="fa fa-youtube-play fa-4x"></i></span>
+                      </div>
+                    </div>
+                    <!-- video post end -->
+                    <!-- img post -->
+                    <div class="post-img relate" ng-if="post.photo">
+                      <img src="img/blog/popular-blog.jpg" alt="" class="img-responsive">
+                    </div>
+                    <!-- img post end -->
+                    <!-- img post slider -->
+                    <div class="imgpost-relatedslider" ng-if="post.photoSlider">
+                      <flex-slider class="carousel" flex-slide="slider in post.relatedPhoto track by $index" item-width="80" animation="slide" item-margin="5" direction-nav="false" control-nav="false" mousewheel="true">
+                        <li>
+                          <div class="related-postimgholder">
+                            <img ng-src="{{slider}}" alt="" class="img-responsive">
+                          </div>
+                        </li>
+                      </flex-slider>
+                      <div class="post-rating">
+                        <span class="avenir-heavy color-blue">Rating : <i class="fa fa-star color-pink"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                        </span>
+                      </div>
+                    </div>
+                    <!-- img post slider end -->
+                    <!-- post travelled journey -->
+                    <div class="travelled-journey" ng-if="post.travelledJourney">
+                      <div class="travelled-imgholder">
+                        <img ng-src="{{post.imgTravelled}}" alt="" class="img-responsive m-center">
+                      </div>
+                      <div class="journey-tag-holder">
+                        <h4 class="m-clear text-capitalize">{{post.Travelledtag}}</h4>
+                        <div class="clearfix journey-travelling-type">
+                          <div class="pull-left">
+                            <div class="journey-collection">
+                              <ul>
+                                <li>
+                                  <a href="">
+                                    <div class="">
+                                      <img src="img/camera.png" alt="Camera" width="18" class="mr5">
+                                      <span class="inline-block v-mid">{{post.photoCount}}</span>
+                                    </div>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="">
+                                    <div class="">
+                                      <img src="img/video.png" alt="Video" width="18" class="mr5">
+                                      <span class="inline-block v-mid">{{post.videoCount}}</span>
+                                    </div>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="">
+                                    <div class="">
+                                      <img src="img/location.png" alt="Location" width="18" class="mr5">
+                                      <span class="inline-block v-mid">{{post.locationVisited}}</span>
+                                    </div>
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="pull-right">
+                            <div class="journey-type inline-block">
+                              <ul>
+                                <li>
+                                  <a href=""><img ng-src="{{post.itineraryType1}}" alt="" height="20"></a>
+                                </li>
+                                <li>
+                                  <a href=""><img ng-src="{{post.itineraryType2}}" alt="" height="20"></a>
+                                </li>
+                                <li>
+                                  <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="20"></a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="days-spent inline-block">
+                              <p><span class="block">{{post.travelledDay}}</span> Days</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- post travelled journey end-->
+                    <!-- post onway journey -->
+                    <div class="onway-journey relate" ng-if="post.onJourney">
+                      <div class="onway-imgholder">
+                        <img ng-src="{{post.imgOnway}}" alt="" class="img-responsive m-center">
+                      </div>
+                      <div class="journey-tag-holder">
+                        <h3 class="m-clear text-capitalize">{{post.onwayTag}}</h3>
+                        <div class="clearfix journey-travelling-type">
+                          <div class="pull-left">
+                            <div class="journey-type">
+                              <ul>
+                                <li>
+                                  <a href=""><img ng-src="{{post.itineraryType1}}" alt="" height="20"></a>
+                                </li>
+                                <li>
+                                  <a href=""><img ng-src="{{post.itineraryType2}}" alt="" height="20"></a>
+                                </li>
+                                <li>
+                                  <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="20"></a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="pull-right">
+                            <div class="journey-cost">
+                              <span>{{post.cost}}</span>
+                            </div>
+                            <div class="days-spent">
+                              <p><span class="block">{{post.spendingDay}}</span>Days</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- post onway journey end-->
+                  </div>
+                </div>
+                <!-- post-main-section end -->
+                <!-- post footer -->
+                <div class="post-footer">
+                  <div class="social-field-types">
+                    <div class="user-social-item clearfix">
+                      <div class="pull-left">
+                        <ul>
+                          <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
+                          <li>
+                            <a href="">
+                              <img src="img/comments.png" alt="" height="18" class="if-blue">
+                              <img src="img/comments-white.png" alt="" height="18" class="if-white">
+                            </a>
+                          </li>
+                          <li>
+                            <a href="">
+                              <img src="img/reviews.png" alt="" height="18" class="if-blue">
+                              <img src="img/reviews-white.png" alt="" height="18" class="if-white">
+                            </a>
+                          </li>
+                          <li>
+                            <a href="">
+                              <img src="img/share.png" alt="" height="18" class="if-blue">
+                              <img src="img/share-white.png" alt="" height="18" class="if-white">
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="pull-right">
+                        <div class="">
+                          <span>
+                            <img src="img/options.png" alt="" width="3" class="if-blue">
+                            <img src="img/options-white.png" alt="" width="3" class="if-white">
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="social-likes-reviews">
+                      <div class="clearfix">
+                        <div class="pull-left">
+                          <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">15660</b>Likes</span>
+                          <span class="color-blue">
+                            <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue">
+                            <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white">
+                            354 Reviews (4.5/5)</span>
+                        </div>
+                        <div class="pull-right">
+                          <div class="post-travel-icon">
+                            <img src="img/travel.png" alt="" class="activity-travel-icon">
+                            <img src="img/cycle-cyan.png" alt="" height="20" class="activity-local-icon">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- post footer end -->
+              </div>
+            </div>
+            <!-- activity-post end-->
+          </div>
+        </div>
+      </div>
+
+        </div>
+    </div>
 </div>

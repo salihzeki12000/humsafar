@@ -658,6 +658,19 @@
         font-size: 36px;
       }
     }
+    .menu-contact {
+    left: 0;
+  ul li img {
+    margin: 5px 0;
+  }
+    }
+  .country-title {
+    top: 10%;
+    @include transform (translateX(-50%));
+  }
+  .menu-contact {
+    bottom: 70px;
+}
   }
 
   .menu-booking ul li a {
@@ -666,21 +679,14 @@
     display: block;
     border-bottom: 1px solid #cecece;
   }
-
-  .booking-bg .menu-contact {
-    left: 0;
-  }
-
-  .booking-bg .menu-contact ul li img {
-    margin: 5px 0;
-  }
   // Booking page end
   //destination country
+  
   .country-title {
-    top: 10%;
-    @include transform (translateX(-50%));
+    width: 100%;
+    text-align: center;
+    padding: 0 20px;
   }
-
   .destination .list-horizontal {
     top: auto;
     bottom: 0;
@@ -738,7 +744,10 @@
   }
 
   header {
-    display: none;
+    .navbar-default .logo-size {
+    width: 15px;
+    margin-top: 12px;
+}
   }
   //destination country end
   .action-contentbox,
@@ -1219,7 +1228,27 @@
   .agt-verification-code {
     padding: 30px 20px 15px;
   }
-
+  .sidemenu {
+    overflow-y: scroll;
+    padding: 0 20px;
+  .main-menu-anchor,   ul.nav-submenu li a {
+    font-size: 16px;
+  }
+.social-icon-menu{ 
+    li{
+       a {
+    font-size: 25px;
+    margin: 5px 0;
+}
+  }
+li + li {
+    margin-left: 5px;
+}
+  }
+}
+.menu-common {
+    width: 240px;
+}
   .veri-code-box {
     height: 45px;
     width: 45px;
@@ -1680,6 +1709,14 @@
     font-size: 24px;
   }
   // DESTINATION PAGE END
+    .contact-bg{
+      p{
+        a{
+        font-size:12px; 
+      }
+      }
+    }
+  .contact-txt,
   .advertise-text {
     font-size: 30px;
   }

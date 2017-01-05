@@ -39,7 +39,7 @@
                 <h4 class="color-white text-center fnt-20">{{photoblogger.name}}</h4>
               </div>
               <div class="socialize-holder brd-btm pbt-15">
-                <ul class="list-unstyled list-inline">
+                <ul class="list-unstyled list-inline text-center">
                   <li class="color-white">
                     <img src="img/popularblogger/camera.png" alt="Travelibro">
                     <span>{{photoblogger.nophoto}}</span>
@@ -58,18 +58,22 @@
                     <img src="img/popularblogger/location.png" alt="Travelibro">
                     <span>{{photoblogger.nolocation}}</span>
                   </li>
-                  <li class="pull-right" ng-if="photoblogger.followingbtn">
-                    <button class="btn btn-pink btn-follow">
-           {{photoblogger.followingbtn}}</button>
-                  </li>
-                  <li class="pull-right" ng-if="photoblogger.followbtn">
-                    <button class="btn btn-pink btn-follow-outline">
-           {{photoblogger.followbtn}}</button>
-                  </li>
                 </ul>
+                 <ul class="list-unstyled text-center mt10">
+                  <li ng-if="photoblogger.followingbtn">
+                    <button class="btn btn-pink btn-follow">
+                    {{photoblogger.followingbtn}}
+                    </button>
+                  </li>
+                  <li ng-if="photoblogger.followbtn">
+                    <button class="btn btn-pink btn-follow-outline">
+                    {{photoblogger.followbtn}}
+                    </button>
+                  </li>
+                  </ul>
               </div>
               <div class="cfj-holder pbt-15">
-                <ul class="list-unstyled list-inline">
+                <ul class="list-unstyled text-center list-inline">
                   <li class="color-white">
                     <h5 class="text-center fnt-16">{{photoblogger.countryvisit}}</h5>
                     <p class="text-center">Countries Visited</p>
