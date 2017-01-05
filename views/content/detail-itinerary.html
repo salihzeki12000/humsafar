@@ -144,14 +144,14 @@
                             <label for="From">From</label>
                             <div class="itinerary-inputholder">
                               <!-- <input type="date" class="form-control text-center" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'"> -->
-                              <input type="text" placeholder="Month" class="form-control text-center" ng-click="openFrom()" uib-datepicker-popup="{{format}}" is-open="popupFrom.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="false" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'" />
+                              <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="openFrom()" uib-datepicker-popup="{{format}}" is-open="popupFrom.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="false" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'" />
                             </div>
                           </div>
                           <div class="itinerary-to itinerary-year">
                             <label for="to">To</label>
                             <div class="itinerary-inputholder">
                               <!-- <input type="date" class="form-control text-center" id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)"> -->
-                              <input type="text" placeholder="Month" class="form-control text-center" ng-click="openTo()" uib-datepicker-popup="{{format}}" is-open="popupTo.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)" />
+                              <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="openTo()" uib-datepicker-popup="{{format}}" is-open="popupTo.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)" />
                             </div>
                           </div>
                           <div class="itinerary-duration">
@@ -263,7 +263,7 @@
               <!-- add country on click -->
               <div class="add-country add-country-border text-center clearfix">
                 <button class="btn btn-pink btn-more" ng-click="addYourCountry();">Add Country</button>
-                <span class="color-light-grey italic add-country-span add-country-margin">If you have visited any other cities on the same trip</span>
+                <span class="color-light-grey italic add-country-span add-country-margin">If you have visited any other country on the same trip</span>
               </div>
               <!-- add country on click end-->
             </div>
@@ -395,7 +395,7 @@
                     <!-- trip info container end-->
                     <!-- trip descp -->
                     <div class="trip-descp-itinerary">
-                      <label for="descp">A Little More About This Trip</label>
+                      <label for="descp">A Little More About This Trip...</label>
                       <textarea ui-tinymce="tinymceOptions" ng-model="city.description" id="descp"></textarea>
                     </div>
                     <!-- trip descp end -->
@@ -433,7 +433,7 @@
             <!--all trip descp and all photos sec-->
             <!-- trip descp -->
             <!--<div class="trip-descp-itinerary">
-                      <label for="descp">A Little More About This Trip</label>
+                      <label for="descp">A Little More About This Trip...</label>
                       <textarea ui-tinymce="tinymceOptions" ng-model="dItinerary.description" id="descp"></textarea>
                     </div>-->
             <!-- trip descp end -->

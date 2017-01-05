@@ -6573,10 +6573,10 @@ border-radius: 100%;
     .remove-quick-photo {
       display: block;
     }
-
-    img {
-      @include transform(translate(-50%,-50%) scale(1.2));
-    }
+    //
+    // img {
+    //   @include transform(translate(-50%,-50%) scale(1.2));
+    // }
   }
 }
 
@@ -6666,6 +6666,7 @@ border-radius: 100%;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
+  z-index: 2;
   @include transition(all 300ms linear);
 
   textarea {
@@ -6687,7 +6688,7 @@ border-radius: 100%;
   color: #fff;
   background: transparent;
   cursor: pointer;
-  z-index: 5;
+  z-index: 1;
 }
 
 .trip-view-photo .view-caption-onimg {
@@ -6699,7 +6700,8 @@ border-radius: 100%;
   span {
     color: #fff;
     background: none;
-    font-size: 20px;
+    font-size: 30px;
+    font-weight: 900;
     cursor: pointer;
   }
 }
@@ -6723,6 +6725,10 @@ border-radius: 100%;
   .itinerary-to {
     .itinerary-inputholder {
       width: 86px;
+    }
+
+    .detail-date{
+      font-size: 12px;
     }
   }
 
@@ -7148,21 +7154,19 @@ border-radius: 100%;
 
     .uib-left {
       border-radius: 0;
-
       i {
-        display: none;
+        &:hover:before { color : $brand-pink; }
+        &:before {
+          content: "\f053";
+          color: $brand-light-grey;
+          font: normal normal normal 14px/1 FontAwesome;
+        }
       }
 
       &:active,
       &:focus,
       &:hover {
         background-color: #fff;
-      }
-
-      &:after {
-        content: "\f053";
-        color: #000;
-        font: normal normal normal 14px/1 FontAwesome;
       }
     }
 
@@ -7170,7 +7174,12 @@ border-radius: 100%;
       border-radius: 0;
 
       i {
-        display: none;
+        &:hover:before { color : $brand-pink; }
+        &:before {
+          content: "\f054";
+          color: $brand-light-grey;
+          font: normal normal normal 14px/1 FontAwesome;
+        }
       }
 
       &:active,
@@ -7178,20 +7187,16 @@ border-radius: 100%;
       &:hover {
         background-color: #fff;
       }
-
-      &:after {
-        content: "\f054";
-        color: #000;
-        font: normal normal normal 14px/1 FontAwesome;
-      }
     }
 
     .uib-title {
       border-radius: 0;
       font-size: 14px;
       padding: 10px 0;
+      color: $brand-light-grey;
 
       &:hover {
+        color: $brand-pink;
         background-color: #fff;
       }
     }
