@@ -89,7 +89,7 @@
                       <ui-select multiple ng-model="dItinerary.buddies" theme="bootstrap" ng-click="updateBuddiesArr($select.selected._id)">
                         <ui-select-match placeholder="Travelled With">{{$item.name}}</ui-select-match>
                         <ui-select-choices repeat="{'_id':list._id,'name':list.name,'email':list.email} as list in followersList"  refresh="listFollowers($select.search)" refresh-delay="0">
-                          <img alt="{{list.name}}" ng-src="{{list.profilePicture|uploadpath}}" width="20" />
+                          <img class="round-travelledimg" alt="{{list.name}}" ng-src="{{list.profilePicture|uploadpath}}" width="30" />
                           <span ng-bind="list.name"></span>
                         </ui-select-choices>
                       </ui-select>
