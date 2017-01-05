@@ -4,7 +4,7 @@
       <div class="trip-itinerary-status">
         <div class="trip-status-main">
           <div class="status-country-holder" ng-repeat="country in addCountry track by $index">
-            <img ng-src="{{country.flag|uploadpath}}" alt="Country">
+            <img ng-src="{{country.flag|uploadpath}}" >
             <ul>
               <!-- <li ng-repeat="country in countryList track by $index"> -->
               <li ng-repeat="city in country.cityVisited track by $index">
@@ -144,14 +144,14 @@
                             <label for="From">From</label>
                             <div class="itinerary-inputholder">
                               <!-- <input type="date" class="form-control text-center" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'"> -->
-                              <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="openFrom()" uib-datepicker-popup="{{format}}" is-open="popupFrom.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="false" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'" />
+                              <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="$index.openFrom()" uib-datepicker-popup="{{format}}" is-open="popupFrom.opened" datepicker-options="dateOptions"  close-text="Close" alt-input-formats="false" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'" />
                             </div>
                           </div>
                           <div class="itinerary-to itinerary-year">
                             <label for="to">To</label>
                             <div class="itinerary-inputholder">
                               <!-- <input type="date" class="form-control text-center" id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)"> -->
-                              <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="openTo()" uib-datepicker-popup="{{format}}" is-open="popupTo.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)" />
+                              <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="$index.openTo()" uib-datepicker-popup="{{format}}" is-open="popupTo.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)" />
                             </div>
                           </div>
                           <div class="itinerary-duration">
@@ -317,7 +317,7 @@
                             <!--<span>{{city}}</span>-->
                             <div class="detail-select-box">
                               <ui-select multiple ng-model="city.days.stay" theme="bootstrap" tagging="tagHandler">
-                                <ui-select-match placeholder="Stayed At">{{$item.name}}</ui-select-match>
+                                <ui-select-match placeholder="Search Hotel From Google or Enter Manually">{{$item.name}}</ui-select-match>
                                 <ui-select-choices repeat="{'name':hotels.name} as hotels in google.hotels" refresh="findResults(city.placeId,'Hotels & Accomodations',$select.search,'onchange')" refresh-delay="0">
                                   <span ng-bind="hotels.name"></span>
                                 </ui-select-choices>
@@ -348,7 +348,7 @@
                             </div>-->
                             <div class="detail-select-box">
                               <ui-select multiple ng-model="city.days.ate" theme="bootstrap" tagging="tagHandler">
-                                <ui-select-match placeholder="Ate At">{{$item.name}}</ui-select-match>
+                                <ui-select-match placeholder="Search Restaurants From Google or Enter Manually">{{$item.name}}</ui-select-match>
                                 <ui-select-choices repeat="{'name':resto.name} as resto in google.restaurants" refresh="findResults(city.placeId,'Restaurants & Bars',$select.search,'onchange')" refresh-delay="0">
                                   <span ng-bind="resto.name"></span>
                                 </ui-select-choices>
@@ -379,7 +379,7 @@
                             </div>-->
                             <div class="detail-select-box">
                               <ui-select multiple ng-model="city.days.mustDo" theme="bootstrap" tagging="tagHandler">
-                                <ui-select-match placeholder="Must Do's'">{{$item.name}}</ui-select-match>
+                                <ui-select-match placeholder="Search Things You Did From Google or Enter Manually">{{$item.name}}</ui-select-match>
                                 <ui-select-choices repeat="{'name':mustdo.name} as mustdo in google.mustDos | filter:$select.search" refresh="findResults(city.placeId,'Sights',$select.search,'onchange')" refresh-delay="0">
                                   <span ng-bind="mustdo.name"></span>
                                 </ui-select-choices>
@@ -452,12 +452,12 @@
 
                   <div class="detail-pic-caption" ng-click="addDetailCaption(photo.name);"
                   ng-hide="photo.name==index">
-                    <p ng-if="!photo.editDetailPic || photo.editDetailPic==''">Add Caption</p>
-                    <p class="text-ellipsis" ng-if="photo.name && !photo.name==''">{{photo.editDetailPic}}</p>
+                    <p ng-if="!photo.editDetailPic || photo.caption==''">Add Caption</p>
+                    <p class="text-ellipsis" ng-if="photo.name && !photo.name==''">{{photo.caption}}</p>
                   </div>
 
                   <div class="detail-pic-edit-caption" ng-show="photo.name==index" ng-class="{'showcaptiondetailpic' : index==photo.name,'' : index!==photo.name}">
-                   <textarea name="" id="captionArea" cols="30" rows="7" class="form-control" maxlength="150" placeholder="Enter Caption" ng-model="photo.editDetailPic"></textarea>
+                   <textarea name="" id="captionArea" cols="30" rows="7" class="form-control" maxlength="150" placeholder="Enter Caption" ng-model="photo.caption"></textarea>
                    <div class="view-caption-onimg">
                      <span ng-click="addDetailCaption(photo.name);"><i class="fa fa-angle-down"></i></span>
                    </div>
