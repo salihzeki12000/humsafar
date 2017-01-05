@@ -901,7 +901,7 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
                 if (ith > 0) {
                   if (percentage <= 100) {
                     // console.log("<=100");
-                    flag = true;
+                    flag = true;  //flag is only sent when percent >100 
                     pointsForLine(ith, percentage, true);
                   } else {
                     // console.log(">100");

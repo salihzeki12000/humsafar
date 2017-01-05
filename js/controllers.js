@@ -19,7 +19,7 @@ var centers = [];
 markers[0] = {};
 angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'itinerary', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
-.controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $stateParams) {
+.controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
   //Used to name the .html file
   $scope.template = TemplateService.changecontent("home");
   $scope.menutitle = NavigationService.makeactive("Home");
@@ -33,7 +33,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     four: "views/section/mylife.html",
     five: "views/section/share.html",
   };
-  $scope.changePage = function(text) {
+  $scope.changePage = function (text) {
     // console.log(text);
     var length = $(".fp-section").length;
     // console.log(length);
@@ -64,17 +64,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         break;
     }
   };
-  $(window).load(function() {
+  $(window).load(function () {
     document.getElementById('movie1').play();
   });
-  setTimeout(function() {
+  setTimeout(function () {
     $('.scene').parallax();
     $('.fullpage').fullpage({
       //Navigation
 
-      onLeave: function(index, nextIndex, direction) {
+      onLeave: function (index, nextIndex, direction) {
 
-        $timeout(function() {
+        $timeout(function () {
           swiper.slideTo(nextIndex - 1);
           //playing the video
           $('video').get(nextIndex - 1).load();
@@ -100,8 +100,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
   }, 500);
 
-  $scope.$on('$viewContentLoaded', function() {
-    $timeout(function() {
+  $scope.$on('$viewContentLoaded', function () {
+    $timeout(function () {
       $('body').addClass('fp-');
       $scope.changePage($stateParams.id);
     }, 1000);
@@ -534,7 +534,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var got2 = setInterval(function () {
       if (document.getElementById('fileInput2')) {
         document.getElementById('fileInput2').ondrop = function (evt) {
-           console.log(evt);
+          console.log(evt);
           var file = evt.currentTarget.files[0];
           var formData = new FormData();
           formData.append('file', file, "file.jpg");
@@ -744,14 +744,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         if (caption != null) {
           $scope.listOfCategories.travelConfig[arrType].push(caption);
         } else {
-          caption=element.caption;
-          if(category=='holidayKindType'){
-            if(caption=="Island & Beach"){
-              caption="Islands & Beaches";
-            }else if(caption=="City"){
-              caption="Cities";
-            }else if(caption=="Cruise"){
-              caption="Cruises";
+          caption = element.caption;
+          if (category == 'holidayKindType') {
+            if (caption == "Island & Beach") {
+              caption = "Islands & Beaches";
+            } else if (caption == "City") {
+              caption = "Cities";
+            } else if (caption == "Cruise") {
+              caption = "Cruises";
             }
           }
           $scope.listOfCategories.travelConfig[arrType].push(caption);
@@ -910,7 +910,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       initMap();
     };
 
-    OnGoJourney.getOneJourney({ 
+    OnGoJourney.getOneJourney({
       "urlSlug": slug
     }, getOneJourneyCallback, function (err) {
       console.log(err);
@@ -966,433 +966,384 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //change banner date and time ends
 
     //maps integration starts here
-    {
-      {
-        //mapStyle
-        var mapStyle = [{
-          "featureType": "landscape.man_made",
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#f7f1df"
-          }]
-        }, {
-          "featureType": "landscape.natural",
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#d0e3b4"
-          }]
-        }, {
-          "featureType": "landscape.natural.terrain",
-          "elementType": "geometry",
-          "stylers": [{
-            "visibility": "off"
-          }]
-        }, {
-          "featureType": "poi",
-          "elementType": "labels",
-          "stylers": [{
-            "visibility": "off"
-          }]
-        }, {
-          "featureType": "poi.business",
-          "elementType": "all",
-          "stylers": [{
-            "visibility": "off"
-          }]
-        }, {
-          "featureType": "poi.medical",
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#fbd3da"
-          }]
-        }, {
-          "featureType": "poi.park",
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#bde6ab"
-          }]
-        }, {
-          "featureType": "road",
-          "elementType": "geometry.stroke",
-          "stylers": [{
-            "visibility": "off"
-          }]
-        }, {
-          "featureType": "road",
-          "elementType": "labels",
-          "stylers": [{
-            "visibility": "off"
-          }]
-        }, {
-          "featureType": "road.highway",
-          "elementType": "geometry.fill",
-          "stylers": [{
-            "color": "#ffe15f"
-          }]
-        }, {
-          "featureType": "road.highway",
-          "elementType": "geometry.stroke",
-          "stylers": [{
-            "color": "#efd151"
-          }]
-        }, {
-          "featureType": "road.arterial",
-          "elementType": "geometry.fill",
-          "stylers": [{
-            "color": "#ffffff"
-          }]
-        }, {
-          "featureType": "road.local",
-          "elementType": "geometry.fill",
-          "stylers": [{
-            "color": "black"
-          }]
-        }, {
-          "featureType": "transit.station.airport",
-          "elementType": "geometry.fill",
-          "stylers": [{
-            "color": "#cfb2db"
-          }]
-        }, {
-          "featureType": "water",
-          "elementType": "geometry",
-          "stylers": [{
-            "color": "#a2daf2"
-          }]
+    var mapStyle = [{
+        "featureType": "all",
+        "elementType": "labels.text.fill",
+        "stylers": [{
+          "color": "#ffffff"
         }]
+      }, {
+        "featureType": "all",
+        "elementType": "labels.text.stroke",
+        "stylers": [{
+          "visibility": "on"
+        }, {
+          "color": "#3e606f"
+        }, {
+          "weight": 2
+        }, {
+          "gamma": 0.84
+        }]
+      }, {
+        "featureType": "all",
+        "elementType": "labels.icon",
+        "stylers": [{
+          "visibility": "off"
+        }]
+      }, {
+        "featureType": "administrative",
+        "elementType": "geometry",
+        "stylers": [{
+          "weight": 0.6
+        }, {
+          "color": "#1a3541"
+        }]
+      }, {
+        "featureType": "landscape",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#2c5a71"
+        }]
+      }, {
+        "featureType": "poi",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#406d80"
+        }]
+      }, {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#2c5a71"
+        }]
+      }, {
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#29768a"
+        }, {
+          "lightness": -37
+        }]
+      }, {
+        "featureType": "transit",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#406d80"
+        }]
+      }, {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#2c3757"
+        }]
+      }]
+    {
+      //latlongs format
+      // var center = {
+      //   lat: 19.089560,
+      //   lng: 72.865614
+      // };
 
-        //latlongs format
-        // var center = {
-        //   lat: 19.089560,
-        //   lng: 72.865614
-        // };
+      // var centers = [{
+      //   lat: 19.089560,
+      //   lng: 72.865614
+      // }, {
+      //   lat: 51.470022,
+      //   lng: -0.454295
+      // }, {
+      //   lat: 29.276052,
+      //   lng: -81.034910
+      // }, {
+      //   lat: 51.512072,
+      //   lng: -0.144223
+      // }, {
+      //   lat: 52.923608,
+      //   lng: -1.482560
+      // }, {
+      //   lat: 51.899603,
+      //   lng: -1.153590
+      // }, {
+      //   lat: 51.470022,
+      //   lng: -0.454295
+      // }, {
+      //   lat: 25.253175,
+      //   lng: 55.365673
+      // }];
+    }
+    line = _.map(centers, function () {
+      return {};
+    });
+    _.map(centers, function () {
+      markers.push({});
+    });
 
-        // var centers = [{
-        //   lat: 19.089560,
-        //   lng: 72.865614
-        // }, {
-        //   lat: 51.470022,
-        //   lng: -0.454295
-        // }, {
-        //   lat: 29.276052,
-        //   lng: -81.034910
-        // }, {
-        //   lat: 51.512072,
-        //   lng: -0.144223
-        // }, {
-        //   lat: 52.923608,
-        //   lng: -1.482560
-        // }, {
-        //   lat: 51.899603,
-        //   lng: -1.153590
-        // }, {
-        //   lat: 51.470022,
-        //   lng: -0.454295
-        // }, {
-        //   lat: 25.253175,
-        //   lng: 55.365673
-        // }];
+
+    initMap = function () {
+      var $map = $('#map');
+      var mapDim = {
+        height: $map.height(),
+        width: $map.width()
       }
-      line = _.map(centers, function () {
-        return {};
-      });
-      _.map(centers, function () {
-        markers.push({});
-      });
+
+      center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
+      if (typeof google === 'object' && typeof google.maps === 'object') {
+        var bounds = new google.maps.LatLngBounds();
+
+        setMarker = function (status, n, i) { //status=false for small-marker and true for big
+          var jump = centers.length;
+          console.log("inside setMarker",status);
+          // console.log(_.isEmpty(markers[i])&&status);
+          // if (_.isEmpty(markers[i])) {
+          //   console.log("inside isempty",status);
+          //   var position = new google.maps.LatLng(n.lat, n.lng);
+          //   // bounds.extend(position);
+          //   var obj = {
+          //     position: position,
+          //     map: map,
+          //     icon: "img/maps/small-marker.png"
+          //   };
+          //   console.log(status);
+          //   if (status=="green") {
+          //   console.log("setting up green marker");
+          //     obj.icon = "img/maps/green-marker.png";
+          //     obj.label = toString(i);
+          //     console.log("big marker icon set");
+          //   }
+          //   marker = new google.maps.Marker(obj);
+          //   markers[i] = marker;
+          // } 
+          // else {
+          //   markers[i].setIcon("img/maps/red-marker.png");
+          // }
+
+          
+            var position = new google.maps.LatLng(n.lat, n.lng);
+            var obj = {
+              position: position,
+              map: map,
+              icon: "img/maps/small-marker.png"
+            };
+            if(status=="small-marker"){
+               obj.icon = "img/maps/small-marker.png";
+            }else if(status=="red-marker"){
+              obj.icon="img/maps/red-marker.png";
+            }else if(status=="green-marker"){
+              obj.icon="img/maps/green-marker.png";
+            }
+            marker = new google.maps.Marker(obj);
+            markers[i] = marker;
+          
+         
 
 
-      initMap = function () {
-        var $map = $('#map');
-        var mapDim = {
-          height: $map.height(),
-          width: $map.width()
+        };
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          draggable: true,
+          animation: google.maps.Animation.DROP,
+          center: center,
+          zoom: 4,
+          styles: mapStyle
+        });
+
+        commingMap = new google.maps.Map('', {
+          draggable: true,
+          animation: google.maps.Animation.DROP,
+          center: center,
+          zoom: 4
+            // styles: mapStyle
+        });
+
+
+        var step = 0;
+        var numSteps = 100; //Change this to set animation resolution
+        var lineSymbol = {
+          path: 'M 0,-1 0,1',
+          strokeOpacity: 1,
+          scale: 3
+        };
+        //Grey static polylines starts here
+        // travelPath = new google.maps.Polyline({
+        //   path: centers,
+        //   geodesic: true,
+        //   strokeColor: '#D3D3D3',
+        //   strokeOpacity: 0,
+        //   strokeWeight: -3,
+        //   icons: [{
+        //     icon: lineSymbol,
+        //     offset: '0',
+        //     repeat: '20px'
+        //   }],
+        // });
+        // travelPath.setMap(map);
+        //Grey static polylines ends here
+
+
+        var myVar = setInterval(myTimer, 1000);
+
+        function myTimer() {
+          if (centers.length != 0) {
+            _.each(centers, function (n, index) {
+              setMarker("small-marker", n, index + 1);
+            });
+            setMarker("green-marker", centers[0], 1);
+            clearInterval(myVar);
+          } else {
+            console.log("didnt got center");
+          }
+        };
+      
+        function getBoundsZoomLevel(bounds, mapDim) {
+          var WORLD_DIM = {
+            height: 256,
+            width: 256
+          };
+          var ZOOM_MAX = 21;
+
+          function latRad(lat) {
+            var sin = Math.sin(lat * Math.PI / 180);
+            var radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
+            return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
+          }
+
+          function zoom(mapPx, worldPx, fraction) {
+            return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2);
+          }
+
+          var ne = bounds.getNorthEast();
+          var sw = bounds.getSouthWest();
+
+          var latFraction = (latRad(ne.lat()) - latRad(sw.lat())) / Math.PI;
+
+          var lngDiff = ne.lng() - sw.lng();
+          var lngFraction = ((lngDiff < 0) ? (lngDiff + 360) : lngDiff) / 360;
+
+          var latZoom = zoom(mapDim.height, WORLD_DIM.height, latFraction);
+          var lngZoom = zoom(mapDim.width, WORLD_DIM.width, lngFraction);
+
+          return Math.min(latZoom, lngZoom, ZOOM_MAX);
         }
 
-        center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
-        if (typeof google === 'object' && typeof google.maps === 'object') {
-          var bounds = new google.maps.LatLngBounds();
-          setMarker = function (status, n, i) {
-            var jump = centers.length;
-            if (_.isEmpty(markers[i])) {
-              var position = new google.maps.LatLng(n.lat, n.lng);
-              // bounds.extend(position);
-              var obj = {
-                position: position,
-                map: map,
-                icon: "img/maps/small-marker.png"
-              };
-              if (status) {
-                obj.icon = "img/maps/marker.png";
-                obj.label = toString(i);
-                console.log("big marker icon set");
-              }
-              marker = new google.maps.Marker(obj);
-              markers[i] = marker;
-            } else {
-              markers[i].setIcon("img/maps/marker.png");
+        function redLineDraw(i, departure, arrival, percentComplete, value, flag) {
+          // console.log(percentComplete, flag);
+          var xdiff = (centers[i].lat - centers[i - 1].lat);
+          var ydiff = (centers[i].lng - centers[i - 1].lng);
+          // console.log(Math.abs(ydiff));
+          var currentZoom = currentZoom = map.getZoom();
+          var commingZoom;
+
+          // if (value) {
+          //   var commingMarkerBounds = new google.maps.LatLngBounds();
+          //   commingZoom = commingMap.getZoom();
+          //   commingMarkerBounds.extend(departure);
+          //   commingMarkerBounds.extend(arrival);
+          //   commingMap.fitBounds(commingMarkerBounds);
+          // }
+
+          if (value) {
+            var markerBounds = new google.maps.LatLngBounds();
+            markerBounds.extend(departure);
+            markerBounds.extend(arrival);
+            commingZoom = getBoundsZoomLevel(markerBounds, mapDim); {
+              // if (Math.abs(commingZoom - currentZoom) > 2) {
+              //               if (commingZoom > currentZoom) {
+              //                 smoothZoom(map, commingZoom, currentZoom, true); //for zooming in
+              //                 commingZoom = currentZoom;
+              //               } else if (commingZoom < currentZoom) {
+              //                 smoothZoom(map, commingZoom, currentZoom, false); //for zooming out
+              //                 commingZoom = currentZoom;
+              //               }
+              //             }
+
             }
-          };
 
-          map = new google.maps.Map(document.getElementById('map'), {
-            draggable: true,
-            animation: google.maps.Animation.DROP,
-            center: center,
-            zoom: 4
-              // styles: mapStyle
-          });
+            map.fitBounds(markerBounds);
+          }
 
-          commingMap = new google.maps.Map('', {
-            draggable: true,
-            animation: google.maps.Animation.DROP,
-            center: center,
-            zoom: 4
-              // styles: mapStyle
-          });
-
-
-          var step = 0;
-          var numSteps = 100; //Change this to set animation resolution
+          var frac1 = xdiff / 100;
+          var frac2 = ydiff / 100;
+          var iniLat = centers[i - 1].lat;
+          var iniLng = centers[i - 1].lng;
+          var timePerStep = frac1; //Change this to alter animation speed
           var lineSymbol = {
             path: 'M 0,-1 0,1',
             strokeOpacity: 1,
             scale: 3
           };
-          //Grey static polylines starts here
-          travelPath = new google.maps.Polyline({
-            path: centers,
-            geodesic: true,
-            strokeColor: 'grey',
-            strokeOpacity: 0,
-            strokeWeight: -1,
-            icons: [{
-              icon: lineSymbol,
-              offset: '0',
-              repeat: '20px'
-            }],
-          });
-          travelPath.setMap(map);
-          //Grey static polylines ends here
-
-
-          var myVar = setInterval(myTimer, 1000);
-
-          function myTimer() {
-            if (centers.length != 0) {
-              _.each(centers, function (n, index) {
-                setMarker(false, n, index + 1);
-              });
-              setMarker(true, centers[0], 1);
-              clearInterval(myVar);
-
-              // var markers_cluster = centers.map(function (center, i) {
-              //   return new google.maps.Marker({
-              //     position: center,
-
-              //   });
-              // });
-              // var markerCluster = new MarkerClusterer(map, markers_cluster, {
-              //   imagePath: 'img/maps/marker_cluster'
-              // });
-
-            } else {
-              console.log("didnt got center");
-            }
-          };
-          // _.each(centers, function (n, index) {
-          //   setMarker(false, n, index + 1);
-          // });
-          // setMarker(true, centers[0], 1);
-
-          function getBoundsZoomLevel(bounds, mapDim) {
-            var WORLD_DIM = {
-              height: 256,
-              width: 256
-            };
-            var ZOOM_MAX = 21;
-
-            function latRad(lat) {
-              var sin = Math.sin(lat * Math.PI / 180);
-              var radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
-              return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
-            }
-
-            function zoom(mapPx, worldPx, fraction) {
-              return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2);
-            }
-
-            var ne = bounds.getNorthEast();
-            var sw = bounds.getSouthWest();
-
-            var latFraction = (latRad(ne.lat()) - latRad(sw.lat())) / Math.PI;
-
-            var lngDiff = ne.lng() - sw.lng();
-            var lngFraction = ((lngDiff < 0) ? (lngDiff + 360) : lngDiff) / 360;
-
-            var latZoom = zoom(mapDim.height, WORLD_DIM.height, latFraction);
-            var lngZoom = zoom(mapDim.width, WORLD_DIM.width, lngFraction);
-
-            return Math.min(latZoom, lngZoom, ZOOM_MAX);
+          if (percentComplete == 100 && flag) {
+            setMarker("green-marker", centers[i], i + 1);
           }
-
-          function redLineDraw(i, departure, arrival, percentComplete, value, flag) {
-            // console.log(percentComplete, flag);
-            var xdiff = (centers[i].lat - centers[i - 1].lat);
-            var ydiff = (centers[i].lng - centers[i - 1].lng);
-            // console.log(Math.abs(ydiff));
-            var currentZoom = currentZoom = map.getZoom();
-            var commingZoom;
-
-            // if (value) {
-            //   var commingMarkerBounds = new google.maps.LatLngBounds();
-            //   commingZoom = commingMap.getZoom();
-            //   commingMarkerBounds.extend(departure);
-            //   commingMarkerBounds.extend(arrival);
-            //   commingMap.fitBounds(commingMarkerBounds);
-            // }
-
-            if (value) {
-              var markerBounds = new google.maps.LatLngBounds();
-              markerBounds.extend(departure);
-              markerBounds.extend(arrival);
-              commingZoom = getBoundsZoomLevel(markerBounds, mapDim);
-
-              if (Math.abs(commingZoom - currentZoom) > 2) {
-                if (commingZoom > currentZoom) {
-                  smoothZoom(map, commingZoom, currentZoom, true); //for zooming in
-                  commingZoom = currentZoom;
-                } else if (commingZoom < currentZoom) {
-                  smoothZoom(map, commingZoom, currentZoom, false); //for zooming out
-                  commingZoom = currentZoom;
-                }
-              }
-
-              map.fitBounds(markerBounds);
-              // currentZoom = map.getZoom();
-              console.log(currentZoom, commingZoom);
-            }
-
-            var frac1 = xdiff / 100;
-            var frac2 = ydiff / 100;
-            var iniLat = centers[i - 1].lat;
-            var iniLng = centers[i - 1].lng;
-            var timePerStep = frac1; //Change this to alter animation speed
-            var lineSymbol = {
-              path: 'M 0,-1 0,1',
+          if (_.isEmpty(line[i])) {
+            line[i] = new google.maps.Polyline({
+              path: [departure, departure],
+              // strokeColor: "#f2675b", //orange
+              // strokeColor: "#263757", //navy-blue
+              strokeColor: "#11d3cb", //navy-blue
               strokeOpacity: 1,
-              scale: 4
-            };
-            if (percentComplete == 100 && flag) {
-              setMarker(true, centers[i], i + 1);
-            }
-            if (_.isEmpty(line[i])) {
-              line[i] = new google.maps.Polyline({
-                path: [departure, departure],
-                strokeColor: "#f2675b",
-                strokeOpacity: 1,
-                // icons: [{
-                //   icon: lineSymbol,
-                //   offset: '0',
-                //   repeat: '25px'
-                // }],
-                strokeWeight: 3,
-                geodesic: true, //set to false if you want straight line instead of arc
-                map: map,
-              });
-            }
-            var drawLine = function (departure, arrival, percent, i, value) {
-              percentFrac = percent / 100;
-              var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
-              line[i].setPath([departure, are_we_there_yet]);
-              //moving center starts here
-              if (value) {
-                // center = {
-                //   "lat": iniLat + (frac1 * percent),
-                //   "lng": iniLng + (frac2 * percent)
-                // }
-                center = {
-                  "lat": iniLat + (centers[i].lat - centers[i - 1].lat) / 2,
-                  "lng": iniLng + (centers[i].lng - centers[i - 1].lng) / 2
-                }
-                center = new google.maps.LatLng(center.lat, center.lng);
+              // icons: [{
+              //   icon: lineSymbol,
+              //   offset: '0',
+              //   repeat: '25px'
+              // }],
+              strokeWeight: 3,
+              geodesic: true, //set to false if you want straight line instead of arc
+              map: map,
+            });
+          }
+          var drawLine = function (departure, arrival, percent, i, value) {
+            percentFrac = percent / 100;
+            var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
+            line[i].setPath([departure, are_we_there_yet]);
+            //moving center starts here
+            if (value) {
+              center = {
+                "lat": iniLat + (centers[i].lat - centers[i - 1].lat) / 2,
+                "lng": iniLng + (centers[i].lng - centers[i - 1].lng) / 2
               }
-              // offsetCenter(center, 100, 0);
-              map.setCenter(center);
-              // map.panBy(-150, 0);
-              //moving center ends here
-
-              // if (percent >= 100) {
-              //   setMarker(true, center);
-              // }
-            };
-            drawLine(departure, arrival, percentComplete, i, value);
-          };
-
-          function smoothZoom(map, level, cnt, mode) {
-            if (mode == true) {
-              if (cnt >= level) { //zooming in
-                return;
-              } else {
-                var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
-                  google.maps.event.removeListener(z);
-                  console.log("zooming in smoothZoom");
-                  smoothZoom(map, level, cnt + 1, true);
-                });
-                setTimeout(function () {
-                  console.log("zooming in-->" + level, cnt);
-                  map.setZoom(cnt)
-                }, 0.01);
-              }
-            } else {
-              if (cnt <= (level - 1)) { //zooming out
-                return;
-              } else {
-                var z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
-                  google.maps.event.removeListener(z);
-                  console.log("zooming out smoothZoom");
-                  smoothZoom(map, level, cnt - 1, false);
-                });
-                setTimeout(function () {
-                  console.log("zooming out-->" + level, cnt);
-                  map.setZoom(cnt)
-                }, 0.01);
-              }
+              center = new google.maps.LatLng(center.lat, center.lng);
             }
+            map.setCenter(center);
           };
-          pointsForLine = function (i, percentComplete, value, flag) {
-            var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
-            var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
-            step = 0;
-            redLineDraw(i, departure, arrival, percentComplete, value, flag);
-            var linesCount = line.length - 1;
-            var markerCount = markers.length - 1;
+          drawLine(departure, arrival, percentComplete, i, value);
+        };
 
-            //clearPolyLines starts
-            while ((linesCount >= (i + 1)) && (value)) {
-              if (!_.isEmpty(line[linesCount])) {
-                line[linesCount].setMap(null);
-                line[linesCount] = {};
-              };
-              // markers[linesCount].setIcon("img/maps/small-marker.png");
-              linesCount--;
+        pointsForLine = function (i, percentComplete, value, flag) {
+          var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
+          var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
+          step = 0;
+          var linesCount = line.length - 1;
+          var markerCount = markers.length - 1;
+
+          while ((i < markerCount) && (value == true) && (percentComplete < 100)) {
+            console.log(i,markerCount);
+            markers[markerCount].setIcon("img/maps/small-marker.png");
+            markerCount--;
+          }
+          redLineDraw(i, departure, arrival, percentComplete, value, flag);
+         
+          //clearPolyLines starts
+          while ((linesCount >= (i + 1)) && (value)) {
+            if (!_.isEmpty(line[linesCount])) {
+              line[linesCount].setMap(null);
+              line[linesCount] = {};
             };
-            while ((i < markerCount) && (value == true) && (percentComplete < 100)) {
-              markers[markerCount].setIcon("img/maps/small-marker.png");
-              markerCount--;
-            }
-            //clearPolyLines ends
-            //draw succeeding polyLines starts
-            if (i > 1) {
-              pointsForLine(i - 1, 100);
-              count = centers.length;
-            };
-            //draw succeeding polyLines end
+            // markers[linesCount].setIcon("img/maps/small-marker.png");
+            linesCount--;
           };
-        }
-      };
-      setTimeout(function () {
-        initMap();
-      }, 1000);
-    }
+          
+          //clearPolyLines ends
+          //draw succeeding polyLines starts
+          if (i > 1) {
+            pointsForLine(i - 1, 100);
+            count = centers.length;
+          };
+          //draw succeeding polyLines end
+        };
+      }
+    };
+    setTimeout(function () {
+      initMap();
+    }, 1000);
     //maps integration ends here
 
     $scope.template = TemplateService.changecontent("ongojourney");
@@ -1995,85 +1946,85 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
   })
 
-   .controller('PopularItineraryCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
-    //Used to name the .html file
+.controller('PopularItineraryCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+  //Used to name the .html file
 
-    // console.log("Testing Consoles");
+  // console.log("Testing Consoles");
 
-    $scope.template = TemplateService.changecontent("popular-itinerary");
-    $scope.menutitle = NavigationService.makeactive("Popular Itinerary");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-  })
-  
-   .controller('PopularJourneyCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
-    //Used to name the .html file
+  $scope.template = TemplateService.changecontent("popular-itinerary");
+  $scope.menutitle = NavigationService.makeactive("Popular Itinerary");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+})
 
-    // console.log("Testing Consoles");
+.controller('PopularJourneyCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+  //Used to name the .html file
 
-    $scope.template = TemplateService.changecontent("popular-journey");
-    $scope.menutitle = NavigationService.makeactive("Popular Journey");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-  })
+  // console.log("Testing Consoles");
 
-  .controller('DestinationCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
-    //Used to name the .html file
+  $scope.template = TemplateService.changecontent("popular-journey");
+  $scope.menutitle = NavigationService.makeactive("Popular Journey");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+})
 
-    // console.log("Testing Consoles");
+.controller('DestinationCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+  //Used to name the .html file
 
-    $scope.template = TemplateService.changecontent("destination");
-    $scope.menutitle = NavigationService.makeactive("Destination");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-    $scope.destinationList = [];
-    $scope.viewListByKey = "A";
-    $scope.countryDestList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    $scope.i = 0;
-    $scope.callCountry = function (search, searchText) {
-      $scope.i++;
-      NavigationService.getDestination({
-        search: search,
-        searchText: searchText,
-        count: $scope.i
-      }, function (data) {
-        if ($scope.i === data.count) {
-          $scope.destinationList = data.data;
-          $scope.i = 0;
-        } else {
-          $scope.destinationList = [];
-        }
-      });
-    }
-    $scope.callCountry("a", "");
-    $scope.searchDestination = function (searchVal) {
-      if (searchVal === "") {
-        $scope.callCountry("a", "");
-        $scope.viewListByKey = "A";
+  // console.log("Testing Consoles");
+
+  $scope.template = TemplateService.changecontent("destination");
+  $scope.menutitle = NavigationService.makeactive("Destination");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+  $scope.destinationList = [];
+  $scope.viewListByKey = "A";
+  $scope.countryDestList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+  $scope.i = 0;
+  $scope.callCountry = function (search, searchText) {
+    $scope.i++;
+    NavigationService.getDestination({
+      search: search,
+      searchText: searchText,
+      count: $scope.i
+    }, function (data) {
+      if ($scope.i === data.count) {
+        $scope.destinationList = data.data;
+        $scope.i = 0;
       } else {
-        $scope.viewListByKey = searchVal.charAt(0);
-        $scope.callCountry(searchVal, searchVal);
+        $scope.destinationList = [];
       }
-    };
+    });
+  }
+  $scope.callCountry("a", "");
+  $scope.searchDestination = function (searchVal) {
+    if (searchVal === "") {
+      $scope.callCountry("a", "");
+      $scope.viewListByKey = "A";
+    } else {
+      $scope.viewListByKey = searchVal.charAt(0);
+      $scope.callCountry(searchVal, searchVal);
+    }
+  };
 
-    // destination country city
-    $scope.countryView = function (url, isCity) {
-        if (isCity === false) {
-          $state.go("destinationcountry", {
-            name: "featured",
-            url: url
-          });
-        } else {
-          $state.go("destinationcity", {
-            name: "mustdo",
-            url: url
-          })
-        }
+  // destination country city
+  $scope.countryView = function (url, isCity) {
+      if (isCity === false) {
+        $state.go("destinationcountry", {
+          name: "featured",
+          url: url
+        });
+      } else {
+        $state.go("destinationcity", {
+          name: "mustdo",
+          url: url
+        })
       }
-      // destination country city end
+    }
+    // destination country city end
 
 
-  })
+})
 
 .controller('DestinationCountryCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
@@ -2106,15 +2057,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-      // destination city
-    $scope.countryView = function(url, isCity) {
-        $state.go("destinationcity", {
-          name: "mustdo",
-          url: url
-        })
-      }
+    // destination city
+    $scope.countryView = function (url, isCity) {
+      $state.go("destinationcity", {
+        name: "mustdo",
+        url: url
+      })
+    }
 
-      // destination city end
+    // destination city end
 
     var alldestination = ["views/content/destination/country/featured.html", "views/content/destination/country/mustdo.html", "views/content/destination/country/itineraries.html", "views/content/destination/country/booking.html", "views/content/destination/country/visit.html"];
     $scope.destination = {
@@ -2328,7 +2279,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     $scope.showBackCard = "";
-    $scope.backView = function() {
+    $scope.backView = function () {
       if ($scope.showBackCard === "") {
         $scope.showBackCard = "flip-card";
       } else {
@@ -6257,7 +6208,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, 100);
 
   })
-  .controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, MyLife,$uibModal) {
+  .controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, MyLife, $uibModal) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -6284,15 +6235,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // $scope.getMap();
     };
 
-      // update country Visited
-    $scope.addCountryVisit = function(){
-      $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/country-visited.html",
-        scope: $scope
-      })
-    }
-    // update country Visited end
+    // update country Visited
+    $scope.addCountryVisit = function () {
+        $uibModal.open({
+          animation: true,
+          templateUrl: "views/modal/country-visited.html",
+          scope: $scope
+        })
+      }
+      // update country Visited end
 
     $scope.changeStatus = function (status) {
       $stateParams.active = status;
@@ -6639,25 +6590,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
 
-     // datetrial
-    $scope.openFrom = function() {
-    $scope.popupFrom.opened = true;
-  };
-  $scope.dateOptions = {
-    showWeeks: false
-  }
-    $scope.openTo = function() {
-    $scope.popupTo.opened = true;
-  };
-  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = 'dd-MM-yyyy';
-  $scope.altInputFormats = ['M!/d!/yyyy'];
-  $scope.popupFrom = {
-   opened: false
- };
-  $scope.popupTo = {
-   opened: false
- };
+    // datetrial
+    $scope.openFrom = function () {
+      $scope.popupFrom.opened = true;
+    };
+    $scope.dateOptions = {
+      showWeeks: false
+    }
+    $scope.openTo = function () {
+      $scope.popupTo.opened = true;
+    };
+    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = 'dd-MM-yyyy';
+    $scope.altInputFormats = ['M!/d!/yyyy'];
+    $scope.popupFrom = {
+      opened: false
+    };
+    $scope.popupTo = {
+      opened: false
+    };
 
     // datetrial end
 
@@ -6713,21 +6664,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //Photo caption function
 
- $scope.index = -1
+    $scope.index = -1
 
 
-  $scope.addDetailCaption = function(index){
+    $scope.addDetailCaption = function (index) {
       // console.log(index,"hai");
-      if($scope.index == index){
+      if ($scope.index == index) {
         $scope.index = -1;
-      }else {
+      } else {
         $scope.index = index;
       }
     }
 
 
 
-//Photo caption function end
+    //Photo caption function end
 
 
     // tinymce
@@ -6890,7 +6841,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log(photo);
       $scope.dItinerary.photos.push({
         "name": photo,
-        "caption": ""
+        "caption": "editDetailPic"
       })
     };
     $scope.removePhoto = function (index, city) {
