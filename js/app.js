@@ -95,10 +95,20 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'PopularBloggerCtrl'
     })
+    .state('popularjourney', {
+      url: "/popular-journey",
+      templateUrl: "views/template.html",
+      controller: 'PopularJourneyCtrl'
+    })
     .state('popularagent', {
       url: "/popular-agent",
       templateUrl: "views/template.html",
       controller: 'PopularAgentCtrl'
+    })
+    .state('popularitinerary', {
+      url: "/popular-itinerary",
+      templateUrl: "views/template.html",
+      controller: 'PopularItineraryCtrl'
     })
     .state('destination', {
       url: "/destination",
