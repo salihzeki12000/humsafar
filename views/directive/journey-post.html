@@ -29,7 +29,7 @@
   <!-- card main -->
   <div class="ongo-card-main">
     <!--if checkin is done and no photos is uploaded then add map i.e.  if showMap is true  STARTS-->
-    <div class="card-imgholder" ng-if="ongo.showMap">
+    <div class="card-imgholder pointer" ng-if="ongo.photos && ongo.photos.length==0 && ongo.showMap && ongo.checkIn && ongo.checkIn.lat ">
       <div class="blur-img">
         <img ng-src="{{ongo.imgageUrl}}"
           alt="" class="img-responsive">
@@ -39,7 +39,7 @@
     </div>
     <!--if checkin is done and no photos is uploaded then add map i.e.  if showMap is true  ENDS-->
     <!-- ongo img -->
-    <div class="card-imgholder" ng-if="ongo.photos.length>0" ng-click="getPhotoCommentsData(ongo.photos[index]._id)">
+    <div class="card-imgholder pointer" ng-if="ongo.photos.length>0" ng-click="getPhotoCommentsData(ongo.photos[index]._id)">
       <div class="blur-img">
         <img ng-src="{{ongo.photos[index].name|uploadpath}}" alt="" class="img-responsive" >
       </div>
@@ -49,7 +49,7 @@
     <!-- related img if less then 5-->
     <div class="relate-pic" ng-if="(ongo.photos.length>1)&&(ongo.photos.length<=5)">
       <div class="related-ongo-slider" ng-repeat="relatePic in ongo.photos track by $index" ng-click="changeImage($index)">
-        <img ng-src="{{relatePic.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive">
+        <img ng-src="{{relatePic.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer">
       </div>
     </div>
     <!-- related img end if less then 5-->
@@ -60,7 +60,7 @@
         <!---- put/remove item width 99 if needed -->
         <li>
           <div class="related-ongo-slider" ng-click="changeImage($index)">
-            <img ng-src="{{slide.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive">
+            <img ng-src="{{slide.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer">
           </div>
         </li>
       </flex-slider>
@@ -81,7 +81,7 @@
   <!-- card footer -->
   <div class="ongo-card-footer">
     <div class="social-field-types">
-      <div class="user-social-item clearfix">
+      <div class="user-social-item clearfix" ng-class="(ongo.showMap && ongo.photos && ongo.photos.length==0 && ongo.checkIn && ongo.checkIn.lat)?'get-border':''">
         <div class="pull-left">
           <ul>
             <li><a href=""><i class="fa color-blue" ng-class="ongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likes(ongo.uniqueId)"></i></a></li>
@@ -109,12 +109,12 @@
         </div>
         <div class="pull-right">
           <span class="inline-block" ng-if="ongo.checkIn && ongo.checkIn.location!='' && ongo.review && ongo.review!=''">
-              <p class="inline-block avenir-heavy journey-rate"><span class="mr5">Rating :</span>
-                  <i class="fa fa-star color-pink" ng-repeat="a in getTimes(ongo.review[0].rating,'marked') track by $index"></i>
-                  <i class="fa fa-star-o" ng-repeat="b in getTimes(ongo.review[0].rating,'unmarked') track by $index"></i>
+              <p class="inline-block avenir-heavy journey-rate"><span class="mr5">Rating:</span>
+                  <span class="rated-star"><i class="fa fa-star color-pink" ng-repeat="a in getTimes(ongo.review[0].rating,'marked') track by $index"></i></span>
+                  <span class="non-rated-star"><i class="fa fa-star-o" ng-repeat="b in getTimes(ongo.review[0].rating,'unmarked') track by $index"></i></span>
           </p>
           </span>
-          <p class="inline-block pointer m-clear journey-rate" ng-click="giveReview();" ng-if="ongo.checkIn && ongo.checkIn.location!='' && ongo.review && ongo.review==''"><i class=" avenir-heavy">Rate This Now</i></p>
+          <p class="inline-block pointer m-clear journey-rate" ng-click="giveReview(ongo.checkIn);" ng-if="ongo.checkIn && ongo.checkIn.location!='' && ongo.review && ongo.review==''"><i class=" avenir-heavy">Rate This Now</i></p>
           <div class="options inline-block">
             <span class="inline-block pl10 pointer" ng-init="ongo.edit={};" ng-click="editOption(ongo.edit);" class="pointer">
                             <img src="img/options.png" alt="" width="3">
@@ -122,7 +122,7 @@
             <div class="own-trip" ng-show="ongo.edit.backgroundClick">
               <ul>
                 <!-- ng if for checkin -->
-                <li><a href="" title="Edit Check In" ng-click="editCheckIn();">Edit <span>Check In</span></a></li>
+                <li><a href="" title="Edit Check In" ng-click="editCheckIn();">Edit Activity</a></li>
                 <!-- add photos videos -->
                 <li><a href="" title="Add Photos &amp; Videos" ng-click="addPhotosVideo();">Add Photos &amp; Videos</a></li>
                 <!-- add photos videos end-->
@@ -133,7 +133,7 @@
                 <!-- ng if for Thoughts -->
                 <li class="hide"><a href="" title="Edit Thoughts" ng-click="editCheckIn();">Edit Thoughts</a></li>
                 <li><a href="" title="Change Date &amp; Time" ng-click="changeDate();">Change Date &amp; Time</a></li>
-                <li><a href="" title="Delete" ng-click="deletePost(ongo._id,json.uniqueId)">Delete</a></li>
+                <li><a href="" title="Delete" ng-click="deletePost(ongo._id,json.uniqueId)">Delete Activity</a></li>
                 <li class="hide" ><a href="" title="Copy URL">Copy URL</a></li>
               </ul>
             </div>

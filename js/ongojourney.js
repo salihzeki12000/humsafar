@@ -816,7 +816,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       }
 
       // review post visited pop up
-      $scope.giveReview = function() {
+      $scope.giveReview = function(checkin) {
+        console.log(checkin,"location");
+        $scope.checkIn = checkin;
         modal = $uibModal.open({
           animation: true,
           templateUrl: "views/modal/review-post.html",

@@ -4320,11 +4320,14 @@ header {
     padding: 8px 2px ;
   }
   .journey-rate {
+    margin-bottom: 5px;
     color: #424242;
     font-size: 12px;
+    i { margin-right: 3px; }
   }
 }
 
+.non-rated-star i:first-child { margin-left: -3px; }
 .only-post {
   .user-social-item {
     border-top: 1px solid #bababa;
@@ -8754,6 +8757,11 @@ header {
 // other itineraries main of agent, user and editor end
 // Notify
 
+.notify-close {
+  position: absolute;
+  top: -20px;
+  right: 10px;
+}
 .notify-popup {
   .modal-dialog {
     width: 100%;
