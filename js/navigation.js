@@ -192,23 +192,6 @@ var navigationservice = angular.module('navigationservice', [])
         callback(data);
       });
     },
-    uploadQuickItinerary: function (obj, flag, callback) {
-      if (flag == 'new') {
-        var url = "/itinerary/saveQuickItineraryWeb";
-      } else if (flag == 'edit') {
-
-      }
-      $http({
-        url: adminURL + url,
-        method: "POST",
-        data: obj
-      }).success(function (data) {
-        if (data.value) {
-          console.log("Qitinerary saved successfully");
-        }
-        callback(data);
-      });
-    },
     uploadFile: function (formData, callback) {
       $http.post(uploadurl, formData, {
         headers: {

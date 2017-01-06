@@ -61,7 +61,7 @@ var ongojourney = angular.module('ongojourney', [])
         } else if (journey.buddiesCount >= 2) {
           journey.buddiesString = journey.buddies[0].name.bold() + " and " + (journey.buddiesCount - 1) + " others ";
         }
-        journey.startJourneyString = journey.startLocation + " " + $filter('formatDate')(journey.startTime, 'year') + " " + journey.user.name.bold() + " with " + journey.buddiesString;
+        journey.startJourneyString = "Trip Travellers-" + " " + journey.user.name.bold() + " with " + journey.buddiesString;
         // header integration ends
         callback(journey);
       })
@@ -201,16 +201,16 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         } else if ($scope.ongo.buddiesCount == 2) {
           $scope.ongo.buddiesString = $scope.ongo.buddies[0].name.bold() + " and " + $scope.ongo.buddies[1].name.bold();
         } else if ($scope.ongo.buddiesCount >= 2) {
-          $scope.ongo.buddiesString = $scope.ongo.buddies[0].name.bold() + " and " + ($scope.ongo.buddiesCount - 1) + "others ";
+          $scope.ongo.buddiesString = $scope.ongo.buddies[0].name.bold() + " and " + "<b>"+($scope.ongo.buddiesCount - 1) + " others."+"</b>";
         }
         var postString = "";
 
         // $filter('category')($scope.ongo.checkIn.category) +
         if ($scope.ongo.buddiesString != "") {
           if ($scope.ongo.thoughts && $scope.ongo.checkIn.location) {
-            $scope.ongo.postString = $scope.ongo.thoughts.bold() + " with " + $scope.ongo.buddiesString + " at " + $scope.ongo.checkIn.location.bold();
+            $scope.ongo.postString = $scope.ongo.thoughts + " with " + $scope.ongo.buddiesString + " at " + $scope.ongo.checkIn.location.bold();
           } else if ($scope.ongo.thoughts) {
-            $scope.ongo.postString = $scope.ongo.thoughts.bold() + " with " + $scope.ongo.buddiesString;
+            $scope.ongo.postString = $scope.ongo.thoughts + " with " + $scope.ongo.buddiesString;
           } else if ($scope.ongo.checkIn && $scope.ongo.checkIn.location) {
             $scope.ongo.postString = $scope.ongo.user.name.bold() + " with " + $scope.ongo.buddiesString + " at " + $scope.ongo.checkIn.location.bold();
           } else {
@@ -218,9 +218,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           }
         } else {
           if ($scope.ongo.thoughts && $scope.ongo.checkIn.location) {
-            $scope.ongo.postString = $scope.ongo.thoughts.bold() + " at " + $scope.ongo.checkIn.location.bold();
+            $scope.ongo.postString = $scope.ongo.thoughts + " at " + $scope.ongo.checkIn.location.bold();
           } else if ($scope.ongo.thoughts) {
-            $scope.ongo.postString = $scope.ongo.thoughts.bold();
+            $scope.ongo.postString = $scope.ongo.thoughts;
           } else if ($scope.ongo.checkIn && $scope.ongo.checkIn.location) {
             $scope.ongo.postString = $scope.ongo.user.name.bold() + " at " + $scope.ongo.checkIn.location.bold();
           } else {
@@ -683,11 +683,11 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
             editedData.checkInChange = false;
           }
           console.log(editedData, "dataEdited hai");
-          // $http({
-          //   url: adminURL + "/post/editData",
-          //   method: "POST",
-          //   data: editedData,
-          // })
+          $http({
+            url: adminURL + "/post/editData",
+            method: "POST",
+            data: editedData,
+          })
         }
         // edit save data end
         // edit otg checkin end
@@ -959,37 +959,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         });
       };
       // review post visited pop up end
-
-      // var formatDate = function (date) {
-      //   var d = new Date(date),
-      //     month = '' + (d.getMonth() + 1),
-      //     day = '' + d.getDate(),
-      //     year = d.getFullYear();
-
-      //   if (month.length < 2) month = '0' + month;
-      //   if (day.length < 2) day = '0' + day;
-
-      //   return [year, month, day].join('/');
-      // }
-
-      // var formatTime = function (formData) {
-      //   var hour = formData.hour,
-      //     mins = formData.min,
-      //     sec = 00;
-      //   if (formData.am_pm == "AM") {
-      //     if (hour == 12) {
-      //       hour = 0;
-      //     }
-      //   } else if (formData.am_pm == "PM") {
-      //     if (hour == 12) {
-      //       hour = 12;
-      //     } else {
-      //       hour = parseInt(hour) + 12;
-      //     }
-      //   }
-      //   return [hour, mins, sec].join(':');
-      // }
-
     }
   }
 }]);
@@ -1036,9 +1005,9 @@ ongojourney.filter('formatDate', function() {
   return function(input, type) {
 
     if (type == 'date') {
-      var returnVal = moment(input).format('D MMM,YYYY');
+      var returnVal = moment(input).format('D MMM, YYYY');
     } else if (type == 'time') {
-      var returnVal = moment(input).format('h:mm a');
+      var returnVal = moment(input).format('hh:mm a');
     } else if (type == 'year') {
       var returnVal = moment(input).format('YYYY');
     }
