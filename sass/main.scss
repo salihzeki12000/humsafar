@@ -3684,11 +3684,20 @@ header {
 }
 
 .user-pic {
-  margin-top: -25px;
+    margin-top: -30px;
+    margin-right: 15px;
+    display: inline-block;
+    width: 65px;
+    height: 70px;
+    overflow: hidden;
+    border: 2px solid #ddd;
+    border-radius: 35%;
 
   img {
-    @include size(66px, 67px);
+    max-height: 100%;
     border-radius: 20px;
+    padding: 0;
+     border-radius: 35%;
   }
 }
 
@@ -3733,8 +3742,8 @@ header {
 
 .flag-section {
   position: absolute;
-   left: 15px;
-   top: -6px;
+  left: 15px;
+  top: 20px;
   // .country-visited {
   //   left: 20px;
   // }
@@ -3891,10 +3900,15 @@ header {
     color: #fff;
   }
 
-  .post-your-status {
-    border-top: 1px solid #fff;
-    color: #fff;
-  }
+.post-your-status {
+  padding: 8px 5px 0;
+  border-top: 1px solid #ccc;
+  margin-top: 10px;
+  color: #727272;
+  p {
+    margin: 0px 0 0;
+}
+}
 
   .days-spent {
     margin-top: -15px;

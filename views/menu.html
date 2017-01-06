@@ -7,6 +7,13 @@
         </a>
       </uib-accordion-heading>
     </uib-accordion-group>-->
+        <uib-accordion-group is-disabled="menu.disabled" class="visible-xs">
+      <uib-accordion-heading>
+        <a class="color-white main-menu-anchor" ui-sref="login">
+         Login
+        </a>
+      </uib-accordion-heading>
+    </uib-accordion-group>
     <uib-accordion-group is-open="status.open" ng-repeat="menu in navigation track by $index" class="{{menu.classis}}" is-disabled="menu.disabled">
       <uib-accordion-heading>
         <a ui-sref="{{menu.anchor}}" class="color-white main-menu-anchor">{{menu.name}}

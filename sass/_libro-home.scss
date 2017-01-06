@@ -397,7 +397,7 @@ a.color-white {
   }
   ul.nav-submenu {
     margin: -1px 0;
-    padding: 0 0 10px;
+    padding: 10px 0;
     border-bottom: 1px dotted #fff;
     li {
       a {
@@ -471,7 +471,7 @@ a.color-white {
       padding: 0;
     }
     .panel-default>.panel-heading+.panel-collapse>.panel-body {
-      padding: 10px 0 0;
+      padding: 0px 0 0;
       border: none;
     }
     .panel-group .panel+.panel {
@@ -479,6 +479,7 @@ a.color-white {
     }
     .icon {
       font-size: 25px;
+      margin-top: -3px;
       @include transition(all ease 300ms);
     }
   }

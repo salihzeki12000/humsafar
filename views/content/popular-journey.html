@@ -4,7 +4,7 @@
     <div class="get-center country-title">
       <h4 class="color-white title-head">Popular Journey</h4>
     </div>
-    <div class="btm-right right-label download-app pop-blog-download-app color-white">
+    <div class="btm-right right-label download-app pop-blog-download-app color-white hidden-xs">
       Download App
       <a class="color-white" href="#" target="_blank"><i class="fa fa-apple" aria-hidden="true"></i></a> |
       <a class="color-white" href="#" target="_blank"><i class="fa fa-android" aria-hidden="true"></i></a>
@@ -16,12 +16,12 @@
   </div>
 </div>
 <div class="bg-white">
-    <div class="container">
-        <div class="popular-journey mt20 second">
+ <div class="container">
+   <div class="popular-journey mt20 second blog-itineraries-main">
      <div masonry>
         <div class="row">
           <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="post in activityPost">
-                  <div class="activity-post {{post.class}}">
+            <div class="activity-post {{post.class}}">
               <div class="activity-post-main">
                 <!-- post header -->
                 <div class="post-header relate">
@@ -33,7 +33,7 @@
                       <img ng-src="{{post.profilePic}}" alt="" class="img-responsive">
                     </div>
                   </div>
-                  <div class="user-detail inline-block">
+                  <div class="user-detail width74 inline-block">
                     <h4 class="font-bold color-dark-blue m-clear mb5">{{post.userName}}</h4>
                     <div class="clearfix user-more-detail">
                       <div class="pull-left">

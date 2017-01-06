@@ -1528,6 +1528,7 @@ a.color-white {
       width: 100%;
       .img-travel-life img {
         margin: 0 auto;
+        height: 55vh;
       }
       .play-mobile {
         position: absolute;
@@ -1568,4 +1569,8 @@ a.color-white {
     top: 20px;
     left: 20px;
 }
+}
+
+.width70{
+  width: 70%;
 }
