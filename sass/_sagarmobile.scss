@@ -618,6 +618,16 @@
     margin: 50px 10px;
   }
 
+  .alphabhates.addfixed {
+  display: none;
+}
+.destination-holder.main-destination-page.pr20 {
+  padding-right: 0;
+}
+.destination-head.plr30 {
+    padding: 0 15px;
+}
+
   .modal-packagebox {
     width: 120px;
     height: 120px;
@@ -647,6 +657,9 @@
   .upload-btn {
     margin: 0;
   }
+  .mouse-scrolldown {
+    bottom: 35px;
+  }
   // agent setting page end
   // Booking page
   .booking-bg {
@@ -660,8 +673,15 @@
     }
     .menu-contact {
     left: 0;
-  ul li img {
+  ul{ 
+    li{ 
+      
+      img {
     margin: 5px 0;
+        width: 60px;
+        padding: 0;
+  }
+  }
   }
     }
   .country-title {
@@ -713,10 +733,12 @@
   }
 
   .destination .list-horizontal ul {
-    padding: 20px 0;
+    padding: 0;
     // @extend .list-inline;
   }
-
+.destination .slide-cont-dest {
+    padding: 20px;
+}
   .destination .list-horizontal ul li {
     height: auto;
     padding: 10px 0;
@@ -1107,8 +1129,8 @@
 
   .destination-content {
     .head-title {
-      padding: 5px 0;
-
+      padding: 15px 0 0 0;
+      display: none;
       h4 {
         font-size: 30px;
       }

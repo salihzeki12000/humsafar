@@ -352,6 +352,7 @@ a.color-white {
   top: -130px;
   width: 100%;
   left: 0;
+      z-index: -1;
   height: 120px;
   padding: 65px 0 0 20px;
   @include transition(cubic-bezier(0.69,
@@ -973,6 +974,11 @@ header {
   padding: 20px 40px;
   ul li a {
     font-size: 14px;
+  }
+  &.share{
+    .app-icons {
+      bottom: -20px;
+    }
   }
 }
 

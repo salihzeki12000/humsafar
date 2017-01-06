@@ -7,10 +7,10 @@
         </a>
       </uib-accordion-heading>
     </uib-accordion-group>-->
-        <uib-accordion-group is-disabled="menu.disabled" class="visible-xs">
+        <uib-accordion-group is-disabled="menu.disabled" class="visible-xs" ng-hide="isLoggedIn">
       <uib-accordion-heading>
         <a class="color-white main-menu-anchor" ui-sref="login">
-         Login
+         Login / Sign Up
         </a>
       </uib-accordion-heading>
     </uib-accordion-group>
@@ -25,6 +25,13 @@
           <a href="" ui-sref="{{submenu.anchor}}" class="color-white">{{submenu.name}}</a>
         </li>
       </ul>
+    </uib-accordion-group>
+            <uib-accordion-group is-disabled="menu.disabled" class="visible-xs" ng-show="isLoggedIn">
+      <uib-accordion-heading>
+        <a class="color-white main-menu-anchor" ng-click="logout()">
+         Logout
+        </a>
+      </uib-accordion-heading>
     </uib-accordion-group>
   </uib-accordion>
 </div>

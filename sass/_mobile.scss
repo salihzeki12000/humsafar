@@ -113,7 +113,7 @@ li:last-child {
 .user-img {
     width: 30px;
     height: 30px;;
-    border-radius: 8px;
+    border-radius: 10px;
     .ml10 {
     margin-left: 3px;
 }
@@ -272,6 +272,41 @@ li:last-child {
 // media query for 991px to 768px end
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
+  //header
+.sidemenu.mobile-menu .nav-list {
+    padding-top: 5px;
+}
+  .mobile-header{
+    border-bottom: 1px dotted #ddd;
+.profile-mobile{
+        padding: 25px 0px 10px;
+        .user-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    img{
+      width: 50px !important;
+    }
+}
+     a span {
+   font-size: 18px;
+    line-height: 1;
+    font-weight: 700;
+      }
+}
+.mobile-nofity{
+   ul {
+text-align: right;
+    margin: 10px 0 0;
+    font-size: 30px;
+    li a {
+    color: #fff;
+    font-size: 22px;
+    padding-right: 20px;
+}
+}
+}
+  }
   // main page
   .upload-section {
     img { width: 80px; }
@@ -336,10 +371,10 @@ li:last-child {
   // footer
   .menu-contact {
     width: 100%;
-    bottom: 55px;
+    bottom: 0px;
     left: 0;
     text-align: center;
-    padding: 0 20px;
+    padding: 0 15px;
   }
   .app-icons {
     width: 100%;
