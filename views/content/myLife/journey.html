@@ -211,8 +211,8 @@
                           <div class="country-visited" ng-repeat="visit in life.countryVisited | limitTo : 3">
                             <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30">
                             <!--<span ng-show="life.showRemainingCount" class="">+{{life.remainingCount}}</span>-->
-                            <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
                           </div>
+                          <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
                           <!-- <div class="country-visited">
                             <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30" ng-repeat="visit in life.countryVisited track by $index | limitTo : 3">
                             <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>

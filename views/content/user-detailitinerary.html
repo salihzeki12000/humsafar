@@ -1,10 +1,10 @@
-<div class="user-itinerary-page user-detailitinerary-page">
+<div class="user-itinerary-page user-detailitinerary-page relate">
   <div class="user-banner-holder relate" scrolldown style="background-image: url('{{itinerary.itineraryType|itineraryType}}')">
     <div class="overlay-itinerary-bg"></div>
     <div class="user-banner-detail full-width text-center">
       <div class="user-tag color-white">
         <div class="user-imgholder">
-          <img ng-src="{{itinerary.creator.profilePicture|uploadpath}}" alt="" class="img-responsive">
+          <img ng-src="{{itinerary.creator.profilePicture|uploadpath:105:110:'cover'}}" alt="" class="img-responsive">
         </div>
         <h4 class="user-name avenir-roman">{{itinerary.creator.name}}</h4>
       </div>
@@ -21,7 +21,7 @@
         <span class="color-white avenir-light with">With</span>
         <figure class="traveller-list pointer" ng-repeat="list in itinerary.buddies track by $index">
           <div class="journey-travelled-holder">
-            <img ng-src="{{list.profilePicture|uploadpath:105:110}}" alt="" class="img-responsive">
+            <img ng-src="{{list.profilePicture|uploadpath:37:40:'cover'}}" alt="" class="img-responsive">
           </div>
           <figcaption class="traveller-name avenir-roman color-white">{{list.name}}</figcaption>
         </figure>
@@ -47,6 +47,10 @@
       <img src="img/mouse-scroll.png" alt="Travelibro" class="doneLoading">
       <p>Scroll Down</p>
     </div>
+    <div class="edit-publish-userdetail">
+      <button class="btn btn-white-outline btn-more mr5" ng-click="">Edit</button>
+      <button class="btn btn-white-outline btn-more" ng-click="uploadDetailedItinerary(true)">Publish</button>
+    </div>
   </div>
   <div class="user-quick-itinerary second bg-white">
     <!-- trip side pic holder -->
@@ -56,7 +60,7 @@
         <div masonry class="masonry-main side-scroll-direction">
           <div class="masonry-brick" ng-repeat="pic in itinerary.photos track by $index">
             <div class="gallery-imgholder">
-              <img ng-src="{{pic.name|uploadpath}}" alt="">
+              <img ng-src="{{pic.name|uploadpath}}" alt="" class "img-responsive full-width">
             </div>
           </div>
         </div>
@@ -88,8 +92,8 @@
                 <span class="small-dot last-dot"> </span>
                 <!-- dotted line end -->
                 <!-- dot status -->
-                <a  ng-click="updateOpenStatus(country.cityVisited)">
-                  <div class="status-indot relate" >
+                <a ng-click="updateOpenStatus(country.cityVisited)">
+                  <div class="status-indot relate">
                     <!-- city name of dot and img -->
                     <div class="status-city-name ">
                       <span>{{city.city.name}}</span>
@@ -150,7 +154,7 @@
                           <div class="clearfix">
                             <p class="city-heading avenir-heavy m-clear pull-left">Day <span>{{city.from}}</span> to Day <span>{{city.to}}</span> In <span class="trip-city-name">{{city.city.name}}</span></p>
                             <span class="pull-right"><i class="fa accordion-icon" ng-class="{'fa-minus' : city.isOpen , 'fa-plus' : !city.isOpen}"></i></span>
-                        </div>
+                          </div>
                         </a>
                       </div>
                     </uib-accordion-heading>
@@ -244,7 +248,7 @@
               <!-- like and review -->
               <div class="like-review-holder pull-left">
                 <div class="like-holder" ng-if="itinerary.likeCount>0">
-                  <p class="m-clear"><i class="fa fa-heart color-blue mr5"></i><span class="like-count avenir-roman">{{itinerary.likeCount}}</span>                    <span class="color-blue avenir-roman">Likes</span></p>
+                  <p class="m-clear"><i class="fa fa-heart color-blue mr5"></i><span class="like-count avenir-roman">{{itinerary.likeCount}}</span> <span class="color-blue avenir-roman">Likes</span></p>
                 </div>
                 <div class="review-holder">
                   <p class="avenir-heavy color-blue m-clear">
@@ -273,7 +277,7 @@
               <div class="view-comment-list" ng-repeat="comment in itinerary.comment track by $index">
                 <div class="commenter-img">
                   <div class="commenter-imgholder">
-                    <img ng-src="{{comment.user.profilePicture|uploadpath}}" alt="" class="img-responsive">
+                    <img ng-src="{{comment.user.profilePicture|uploadpath:40:45:'cover'}}" alt="" class="img-responsive">
                   </div>
                 </div>
                 <div class="comment-container">
@@ -282,7 +286,7 @@
                     <div class="like-reply-line">
                       <span class="color-blue avenir-roman mr5 pointer">Like</span>
                       <span class="color-blue avenir-roman mr5 pointer">Reply</span>
-                      <span class="time-stamp ml5"><i class="fa fa-calendar color-grey mr5"></i><span>{{comment.date|formatDate:"date"}}</span>                      | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{comment.date|formatDate:"time"}}</span></span>
+                      <span class="time-stamp ml5"><i class="fa fa-calendar color-grey mr5"></i><span>{{comment.date|formatDate:"date"}}</span> | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{comment.date|formatDate:"time"}}</span></span>
                     </div>
                   </div>
                 </div>
@@ -290,7 +294,7 @@
               <div class="write-comment-text">
                 <div class="commenter-img">
                   <div class="commenter-imgholder">
-                    <img src="{{userData.profilePicture|uploadpath}}" alt="" class="img-responsive">
+                    <img src="{{userData.profilePicture|uploadpath:40:45:'cover'}}" alt="" class="img-responsive">
                   </div>
                 </div>
                 <div class="comment-ur-text">
@@ -330,15 +334,17 @@
                             <span class="follow-following color-blue text-capitalize">{{life.follower}}</span>
                           </div>
                         </div>
-                        <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i>                          <span>{{life.timestampHour}}</span></p>
+                        <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{life.timestampHour}}</span></p>
                       </div>
                     </div>
                     <div class="onway-journey relate">
                       <div class="onway-imgholder">
                         <img ng-src="{{life.imgOnway}}" alt="" class="img-responsive m-center">
                       </div>
-                      <div class="country-visited">
-                        <img ng-src="{{visit.imgFlag}}" alt="" height="30" ng-repeat="visit in life.countryVisit track by $index">
+                      <div class="country-badges">
+                        <div class="country-visited" ng-repeat="visit in life.countryVisit track by $index">
+                          <img ng-src="{{visit.imgFlag}}" alt="" height="30">
+                        </div>
                         <span class="">+4</span>
                       </div>
                       <div class="journey-tag-holder">
@@ -540,4 +546,5 @@
       <!-- other itineraries main end-->
     </div>
   </div>
+  <div class="photo-open-backdrop" ng-show="viewBackDrop"></div>
 </div>
