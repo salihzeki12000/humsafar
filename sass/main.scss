@@ -8950,13 +8950,13 @@ header {
 
   &:before {
     content: '';
-    width: 30px;
+    width: 15px;
     height: 100%;
     position: absolute;
     top: 0;
-    left: 645px;
+    left: 651px;
     z-index: 1;
-    @include background(linear-gradient(to right, #a0a0a0, transparent));
+    @include background(linear-gradient(to right, rgba(0, 0, 0, 0.82), transparent));
   }
 
   img[src="https://maps.gstatic.com/mapfiles/api-3/images/google_white5.png"] {
