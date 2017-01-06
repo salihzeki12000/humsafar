@@ -66,8 +66,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   };
   $(window).load(function () {
     document.getElementById('movie1').play();
-         if($(window).width()<767){
-        $('video').remove();
+    if ($(window).width() < 767) {
+      $('video').remove();
     }
   });
   setTimeout(function () {
@@ -970,76 +970,76 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //maps integration starts here
     var mapStyle = [{
-        "featureType": "all",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-          "color": "#ffffff"
-        }]
-      }, {
-        "featureType": "all",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-          "visibility": "on"
-        }, {
-          "color": "#3e606f"
-        }, {
-          "weight": 2
-        }, {
-          "gamma": 0.84
-        }]
-      }, {
-        "featureType": "all",
-        "elementType": "labels.icon",
-        "stylers": [{
-          "visibility": "off"
-        }]
-      }, {
-        "featureType": "administrative",
-        "elementType": "geometry",
-        "stylers": [{
-          "weight": 0.6
-        }, {
-          "color": "#1a3541"
-        }]
-      }, {
-        "featureType": "landscape",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#2c5a71"
-        }]
-      }, {
-        "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#406d80"
-        }]
-      }, {
-        "featureType": "poi.park",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#2c5a71"
-        }]
-      }, {
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#29768a"
-        }, {
-          "lightness": -37
-        }]
-      }, {
-        "featureType": "transit",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#406d80"
-        }]
-      }, {
-        "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [{
-          "color": "#2c3757"
-        }]
+      "featureType": "all",
+      "elementType": "labels.text.fill",
+      "stylers": [{
+        "color": "#ffffff"
       }]
+    }, {
+      "featureType": "all",
+      "elementType": "labels.text.stroke",
+      "stylers": [{
+        "visibility": "on"
+      }, {
+        "color": "#3e606f"
+      }, {
+        "weight": 2
+      }, {
+        "gamma": 0.84
+      }]
+    }, {
+      "featureType": "all",
+      "elementType": "labels.icon",
+      "stylers": [{
+        "visibility": "off"
+      }]
+    }, {
+      "featureType": "administrative",
+      "elementType": "geometry",
+      "stylers": [{
+        "weight": 0.6
+      }, {
+        "color": "#1a3541"
+      }]
+    }, {
+      "featureType": "landscape",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#2c5a71"
+      }]
+    }, {
+      "featureType": "poi",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#406d80"
+      }]
+    }, {
+      "featureType": "poi.park",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#2c5a71"
+      }]
+    }, {
+      "featureType": "road",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#29768a"
+      }, {
+        "lightness": -37
+      }]
+    }, {
+      "featureType": "transit",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#406d80"
+      }]
+    }, {
+      "featureType": "water",
+      "elementType": "geometry",
+      "stylers": [{
+        "color": "#2c3757"
+      }]
+    }] 
     {
       //latlongs format
       // var center = {
@@ -1092,9 +1092,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       if (typeof google === 'object' && typeof google.maps === 'object') {
         var bounds = new google.maps.LatLngBounds();
 
-        setMarker = function (status, n, i) { //status=false for small-marker and true for big
+        setMarker = function (status, current, previous, i) { //status=false for small-marker and true for big
           var jump = centers.length;
-          console.log("inside setMarker",status);
+          console.log("current-"+i+",previous-"+(i-1));
           // console.log(_.isEmpty(markers[i])&&status);
           // if (_.isEmpty(markers[i])) {
           //   console.log("inside isempty",status);
@@ -1119,24 +1119,37 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           //   markers[i].setIcon("img/maps/red-marker.png");
           // }
 
-          
-            var position = new google.maps.LatLng(n.lat, n.lng);
-            var obj = {
-              position: position,
+
+          var currentPosition = new google.maps.LatLng(current.lat, current.lng);
+          if (previous != null) {
+            console.log("previous should set now");
+            var previousPosition = new google.maps.LatLng(previous.lat, previous.lng);
+            // markers[i-1].setMap(null);
+            var previousObj = {
+              position: previousPosition,
               map: map,
-              icon: "img/maps/small-marker.png"
-            };
-            if(status=="small-marker"){
-               obj.icon = "img/maps/small-marker.png";
-            }else if(status=="red-marker"){
-              obj.icon="img/maps/red-marker.png";
-            }else if(status=="green-marker"){
-              obj.icon="img/maps/green-marker.png";
+              icon: "img/maps/red-marker.png"
             }
-            marker = new google.maps.Marker(obj);
-            markers[i] = marker;
-          
-         
+            // marker = new google.maps.Marker(previousObj);
+            // markers[i-1] = marker;
+          }
+          var currentObj = {
+            position: currentPosition,
+            map: map,
+            icon: "img/maps/small-marker.png"
+          };
+          if (status == "small-marker") {
+            currentObj.icon = "img/maps/small-marker.png";
+          } else if (status == "red-marker") {
+            currentObj.icon = "img/maps/red-marker.png";
+          } else if (status == "green-marker") {
+            // markers[i].setMap(null);
+            currentObj.icon = "img/maps/green-marker.png";
+          }
+          marker = new google.maps.Marker(currentObj);
+          markers[i] = marker;
+
+
 
 
         };
@@ -1165,7 +1178,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           strokeOpacity: 1,
           scale: 3
         };
-        //Grey static polylines starts here
+        //Grey static dotted-polylines starts here
         // travelPath = new google.maps.Polyline({
         //   path: centers,
         //   geodesic: true,
@@ -1187,15 +1200,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         function myTimer() {
           if (centers.length != 0) {
             _.each(centers, function (n, index) {
-              setMarker("small-marker", n, index + 1);
+              setMarker("small-marker", n, null, index + 1);
             });
-            setMarker("green-marker", centers[0], 1);
+            // setMarker("green-marker", centers[0], null, 1);
+            // markers[1].setIcon("img/maps/green-marker.png");
             clearInterval(myVar);
           } else {
             console.log("didnt got center");
           }
         };
-      
+
         function getBoundsZoomLevel(bounds, mapDim) {
           var WORLD_DIM = {
             height: 256,
@@ -1274,7 +1288,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             scale: 3
           };
           if (percentComplete == 100 && flag) {
-            setMarker("green-marker", centers[i], i + 1);
+            console.log(percentComplete, flag);
+            // setMarker("green-marker", centers[i], centers[i - 1], i + 1);
+          markers[i+1].setIcon("img/maps/green-marker.png");
+          markers[i].setIcon("img/maps/red-marker.png");
+          
           }
           if (_.isEmpty(line[i])) {
             line[i] = new google.maps.Polyline({
@@ -1317,13 +1335,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           var linesCount = line.length - 1;
           var markerCount = markers.length - 1;
 
-          while ((i < markerCount) && (value == true) && (percentComplete < 100)) {
-            console.log(i,markerCount);
-            markers[markerCount].setIcon("img/maps/small-marker.png");
-            markerCount--;
+          // while ((i < markerCount) && (value == true) && (percentComplete < 100)) {
+          //     console.log("while-----"+markerCount+">"+i);
+            
+          //   markers[markerCount].setIcon("img/maps/small-marker.png");
+          //   markerCount--;
+          // }        
+          for(markerCount=markers.length - 1;markerCount>0;markerCount--){
+            if((value == true) && (percentComplete < 100)){
+               if(markerCount==i){
+              console.log("for----"+markerCount+"=="+i);
+              markers[markerCount].setIcon("");
+              markers[markerCount].setIcon("img/maps/green-marker.png");
+            }else{
+              // console.log("for-----"+markerCount+"< or >"+i);
+              markers[markerCount].setIcon("img/maps/small-marker.png");
+            }
+            }else{
+              break;
+            }  
           }
+
+
           redLineDraw(i, departure, arrival, percentComplete, value, flag);
-         
+
           //clearPolyLines starts
           while ((linesCount >= (i + 1)) && (value)) {
             if (!_.isEmpty(line[linesCount])) {
@@ -1333,7 +1368,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             // markers[linesCount].setIcon("img/maps/small-marker.png");
             linesCount--;
           };
-          
+
           //clearPolyLines ends
           //draw succeeding polyLines starts
           if (i > 1) {
@@ -1960,190 +1995,190 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.navigation = NavigationService.getnav();
 
   $scope.travelLife = [{
-      otherProfile: true,
-      viewProfile: [{
-        imgBg: "img/itinerary/religious.jpg",
-        profileImg: "img/profile-main.png",
-        name: "Andrea Christina",
-        location: "London",
-        follower: "2090"
-      }],
+    otherProfile: true,
+    viewProfile: [{
+      imgBg: "img/itinerary/religious.jpg",
+      profileImg: "img/profile-main.png",
+      name: "Andrea Christina",
+      location: "London",
+      follower: "2090"
+    }],
+  }, {
+    popItinerary: true,
+    heading: "Editor",
+    follower: "follow",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
     }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "follow",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
+      imgFlag: "img/england-visit.png"
     }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
+      imgFlag: "img/canada-visit.png",
+    }, ]
+  }, {
+    popItinerary: true,
+    heading: "Editor",
+    follower: "following",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
     }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "follow",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
+      imgFlag: "img/england-visit.png"
     }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
+      imgFlag: "img/canada-visit.png",
+    }, ]
+  }, {
+    popItinerary: true,
+    heading: "Editor",
+    follower: "follow",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
     }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
+      imgFlag: "img/england-visit.png"
     }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-    }, ];
-    // other itineraries main end
+      imgFlag: "img/canada-visit.png",
+    }, ]
+  }, {
+    popItinerary: true,
+    heading: "Editor",
+    follower: "following",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
+    }, {
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ]
+  }, {
+    popItinerary: true,
+    heading: "Editor",
+    follower: "following",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
+    }, {
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ]
+  }, {
+    popItinerary: true,
+    heading: "Editor",
+    follower: "following",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
+    }, {
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ],
+  }, ];
+  // other itineraries main end
 })
 
 .controller('PopularJourneyCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
@@ -2155,265 +2190,265 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.menutitle = NavigationService.makeactive("Popular Journey");
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
-   $scope.activityPost = [{
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
-    },{
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
-    },{
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
-    },{
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
-    },{
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
-    },{
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
-    }];
+  $scope.activityPost = [{
+    class: "travel-life",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Has started his London Journey",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
+    }, {
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ],
+    editor: false,
+    userPic: true,
+    follow: true,
+    following: false,
+    postIcon: false,
+    video: false,
+    photo: false,
+    photoSlider: false,
+    travelledJourney: true,
+    onJourney: false,
+    getpopularPost: false,
+    activitySec: true,
+    visitPost: false
+  }, {
+    class: "travel-life",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Has started his London Journey",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
+    }, {
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ],
+    editor: false,
+    userPic: true,
+    follow: true,
+    following: false,
+    postIcon: false,
+    video: false,
+    photo: false,
+    photoSlider: false,
+    travelledJourney: true,
+    onJourney: false,
+    getpopularPost: false,
+    activitySec: true,
+    visitPost: false
+  }, {
+    class: "travel-life",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Has started his London Journey",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
+    }, {
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ],
+    editor: false,
+    userPic: true,
+    follow: true,
+    following: false,
+    postIcon: false,
+    video: false,
+    photo: false,
+    photoSlider: false,
+    travelledJourney: true,
+    onJourney: false,
+    getpopularPost: false,
+    activitySec: true,
+    visitPost: false
+  }, {
+    class: "travel-life",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Has started his London Journey",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
+    }, {
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ],
+    editor: false,
+    userPic: true,
+    follow: true,
+    following: false,
+    postIcon: false,
+    video: false,
+    photo: false,
+    photoSlider: false,
+    travelledJourney: true,
+    onJourney: false,
+    getpopularPost: false,
+    activitySec: true,
+    visitPost: false
+  }, {
+    class: "travel-life",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Has started his London Journey",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
+    }, {
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ],
+    editor: false,
+    userPic: true,
+    follow: true,
+    following: false,
+    postIcon: false,
+    video: false,
+    photo: false,
+    photoSlider: false,
+    travelledJourney: true,
+    onJourney: false,
+    getpopularPost: false,
+    activitySec: true,
+    visitPost: false
+  }, {
+    class: "travel-life",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Has started his London Journey",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
+    }, {
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ],
+    editor: false,
+    userPic: true,
+    follow: true,
+    following: false,
+    postIcon: false,
+    video: false,
+    photo: false,
+    photoSlider: false,
+    travelledJourney: true,
+    onJourney: false,
+    getpopularPost: false,
+    activitySec: true,
+    visitPost: false
+  }];
 })
 
 .controller('DestinationCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
