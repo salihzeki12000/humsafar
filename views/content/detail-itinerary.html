@@ -85,12 +85,15 @@
 
                   <!-- new travelled with -->
                   <div class="col-md-6 col-sm-6">
-                    <div class="itinerary-inputholder input-city-visited">
+                    <div class="itinerary-inputholder input-city-visited travelled-withselect">
                       <ui-select multiple ng-model="dItinerary.buddies" theme="bootstrap" ng-click="updateBuddiesArr($select.selected._id)">
                         <ui-select-match placeholder="Travelled With">{{$item.name}}</ui-select-match>
-                        <ui-select-choices repeat="{'_id':list._id,'name':list.name,'email':list.email} as list in followersList"  refresh="listFollowers($select.search)" refresh-delay="0">
-                          <img class="round-travelledimg" alt="{{list.name}}" ng-src="{{list.profilePicture|uploadpath}}" width="30" />
-                          <span ng-bind="list.name"></span>
+                        <ui-select-choices repeat="{'_id':list._id,'name':list.name,'email':list.email,'urlSlug':list.urlSlug} as list in followersList"  refresh="listFollowers($select.search)" refresh-delay="0">
+                          <img class="round-travelledimg" alt="{{list.name}}" ng-src="{{list.profilePicture|uploadpath:35:40:'cover'}}" width="30" />
+                          <div class="travelwith-namestyle">
+                            <span ng-bind="list.name"></span>
+                            <span class="at-tag-travelselect">@ {{list.urlSlug}}</span>
+                          </div>
                         </ui-select-choices>
                       </ui-select>
                     </div>
@@ -452,8 +455,8 @@
 
                   <div class="detail-pic-caption" ng-click="addDetailCaption(photo.name);"
                   ng-hide="photo.name==index">
-                    <p ng-if="!photo.editDetailPic || photo.caption==''">Add Caption</p>
-                    <p class="text-ellipsis" ng-if="photo.name && !photo.name==''">{{photo.caption}}</p>
+                    <p ng-if="!photo.caption || photo.caption==''">Add Caption</p>
+                    <p class="text-ellipsis" ng-if="photo.caption && !photo.caption==''">{{photo.caption}}</p>
                   </div>
 
                   <div class="detail-pic-edit-caption" ng-show="photo.name==index" ng-class="{'showcaptiondetailpic' : index==photo.name,'' : index!==photo.name}">
