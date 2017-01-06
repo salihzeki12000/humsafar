@@ -1,5 +1,5 @@
-<footer>
-            <div class="hidden-xs app-icons ab">
+<footer ng-controller=headerctrl>
+<div class="hidden-xs app-icons ab">
     <div class="container-fluid">
             <div class="col-md-12">
                     <ul class="list-unstyled list-inline text-right color-white">
@@ -19,14 +19,13 @@
                         </li>
                     </ul>
                 </div>
-            </div>
         </div>
-    </div>
+</div>
 
 <div class="visible-xs">
-    <div class="download-app text-center uppercase download-app-footer visible-xs">
+    <div class="download-app text-center uppercase download-app-footer visible-xs" ng-class="{ 'close-download': isopen} ">
   <div class="pull-right">
-    <i class="fa fa-times color-white" aria-hidden="true"></i>
+    <a ng-click="opendownload();"><i class="fa fa-times color-white" aria-hidden="true"></i></a>
   </div>
   <a href="#" target="_blank">
   Download App

@@ -1408,17 +1408,22 @@ a.color-white {
   .popular-blogger .bloggerholder-made .cfj-holder li {
     float: none;
 }
-    .download-app-footer {
+  .download-app-footer {
     background: #000;
-    padding: 6px 15px;
+    padding: 0px 15px;
     position: absolute;
     bottom: 0;
     left:0;
     letter-spacing: 1.5px;
     width: 100%;
+    @include transition (all ease 300ms);
+    &.close-download{
+      @include transform (translateY(100%));
+    }
     a {
       color: #fff;
       display: block;
+      padding: 6px 0;
     }
   }
   .text-left-ab {
