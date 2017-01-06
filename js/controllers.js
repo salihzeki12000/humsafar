@@ -290,7 +290,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.animationsEnabled = true;
-    $scope.template.footer = "";
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
     }
@@ -308,7 +307,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.animationsEnabled = true;
-    $scope.template.footer = "";
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
     }
@@ -325,7 +323,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.animationsEnabled = true;
-    $scope.template.footer = "";
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
     }
@@ -464,7 +461,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       // File to FormData
       var formData = new FormData();
-      formData.append('file', file, file.name);
+      formData.append('file', file, file.name); 
 
       NavigationService.uploadFile(formData, function (response) {
         console.log(formData);
@@ -1395,20 +1392,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     $scope.getCommentsData = function (id, uniqueId, postString, likeDone, likeCount) {
-      console.log(likeCount);
       $scope.previousId;
       $scope.post_id = id;
       $scope.post_uniqueId = uniqueId;
       $scope.post_postString = postString;
       $scope.post_likeDone = likeDone;
-      // //open modal starts
-      // $uibModal.open({
-      //   templateUrl: "views/modal/notify.html",
-      //   animation: true,
-      //   scope: $scope,`
-      //   windowClass: "notify-popup"
-      // });
-      // //open model ends
       var callback = function (data) {
         $scope.uniqueArr = [];
         $scope.listOfComments = data.data;
@@ -7324,7 +7312,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log(photo);
       $scope.dItinerary.photos.push({
         "name": photo,
-        "caption": "editDetailPic"
+        "caption": ""
       })
     };
     $scope.removePhoto = function (index, city) {
@@ -9262,6 +9250,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.opensearch = function () {
       $scope.isopen = !$scope.isopen;
     };
+      $scope.opendownload = function () {
+     $scope.isopen = !$scope.isopen;
+   };
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
     }

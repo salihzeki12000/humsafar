@@ -57,7 +57,7 @@
               <li ui-sref="mylife">
                 <a href="">
                   <div class="user-img inline-block v-mid">
-                    <img src="{{userData.profilePicture|uploadpath}}" alt="" width="40" class="img-responsive">
+                    <img src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" width="40" class="img-responsive">
                   </div>
                   <span class="color-white ml10 fz13">{{userData.name}}</span>
                 </a>
@@ -91,7 +91,7 @@
     <div class="profile-mobile">
       <a ui-sref="mylife">
         <div class="user-img inline-block v-mid">
-          <img src="{{userData.profilePicture|uploadpath}}" alt="" width="40" class="img-responsive">
+          <img src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" width="40" class="img-responsive">
         </div>
       <span class="color-white ml10 fz13">{{userData.name}}</span>
       </a>
