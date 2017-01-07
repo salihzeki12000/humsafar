@@ -29,9 +29,14 @@ var firstapp = angular.module('firstapp', [
   'angularFileUpload'
 ]);
 
-firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
+firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider,cfpLoadingBarProvider) {
   // for http request with session
   $httpProvider.defaults.withCredentials = true;
+   cfpLoadingBarProvider.includeSpinner = true;
+   cfpLoadingBarProvider.latencyThreshold = 2000;
+   cfpLoadingBarProvider.includeBar = true;
+   cfpLoadingBarProvider.spinnerTemplate = '<div class="travelibro-loader"><img src="img/travelibro-loader.gif" alt="Travelibro" class="img-responsive" /></div>';
+
   $stateProvider
     .state('home', {
       url: "/",
@@ -901,7 +906,7 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
                 if (ith > 0) {
                   if (percentage <= 100) {
                     // console.log("<=100");
-                    flag = true;  //flag is only sent when percent >100 
+                    flag = true;  //flag is only sent when percent >100
                     pointsForLine(ith, percentage, true);
                   } else {
                     // console.log(">100");
