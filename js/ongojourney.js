@@ -201,7 +201,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         } else if ($scope.ongo.buddiesCount == 2) {
           $scope.ongo.buddiesString = $scope.ongo.buddies[0].name.bold() + " and " + $scope.ongo.buddies[1].name.bold();
         } else if ($scope.ongo.buddiesCount >= 2) {
-          $scope.ongo.buddiesString = $scope.ongo.buddies[0].name.bold() + " and " + "<b>"+($scope.ongo.buddiesCount - 1) + " others."+"</b>";
+          $scope.ongo.buddiesString = $scope.ongo.buddies[0].name.bold() + " and " + "<b>" + ($scope.ongo.buddiesCount - 1) + " others." + "</b>";
         }
         var postString = "";
 
@@ -479,40 +479,47 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
               console.log(data.data);
               $scope.tagFriends = data.data;
               _.each($scope.tagFriends, function(n) {
-                var buddyIndex=_.findIndex($scope.ongo.buddies, function(m) {
+                var buddyIndex = _.findIndex($scope.ongo.buddies, function(m) {
                   return m._id === n._id;
                 });
                 if (buddyIndex !== -1) {
                   n.checked = true;
                   n.noEdit = "un-tag"
-                  $("#"+n._id).prop('disabled', true);
+                  $("#" + n._id).prop('disabled', true);
                 } else {
                   n.checked = false;
                 }
               });
-              $scope.editTagFriends = function(list){
-                var getBuddy = _.findIndex($scope.newBuddies, function(id){
-                  return id._id === list._id;
-                });
-                if (getBuddy === -1) {
-                  $scope.newBuddies.push({
-                    _id : list._id,
-                    name : list.name,
-                    email: list.email
-                  })
-                }else {
-                  _.remove($scope.newBuddies, function(newId){
-                    return newId._id === list._id;
-                  });
-                }
-              }
             })
           } else {
+            console.log($scope.newBuddies,'total-array');
             $scope.viewListFriend = false;
           }
         }
         // tag friend list end
 
+        $scope.editTagFriends = function(list,num) {
+          var getBuddy = _.findIndex($scope.newBuddies, function(id) {
+            return id._id === list._id;
+          });
+          console.log(getBuddy);
+          if (getBuddy === -1) {
+            $scope.newBuddies.push({
+              _id: list._id,
+              name: list.name,
+              email: list.email
+            })
+            $scope.viewListFriend = false;
+            $scope.list.checked = "";
+            console.log($scope.newBuddies,"new buddies");
+          } else {
+            _.remove($scope.newBuddies, function(newId) {
+              return newId._id === list._id;
+            });
+            $scope.viewListFriend = false;
+            $scope.list.checked = "";
+          }
+        }
       // photos array edit
       $scope.addMoreCaption = function(index) {
           if ($scope.indexPhotoCaption === index) {
@@ -607,9 +614,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         _.remove($scope.ongo.photos, function(editPic) {
           return editPic._id === id;
         });
-        _.remove($scope.editedPhotosArr, function(editPic) {
-          return editPic._id === id;
-        });
         $scope.photosArray = $scope.ongo.photos;
         $scope.photosArray = _.chunk($scope.photosArray, 4);
         for (var i = 0; i < $scope.photosArray.length; i++) {
@@ -624,32 +628,25 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
 
       // caption edit
       $scope.editCaption = function(columndata) {
-          var editIndex = _.findIndex($scope.editedPhotosArr, function(j) {
+          var editIndex = _.findIndex($scope.ongo.photos, function(j) {
             return j._id === columndata._id;
           });
-          if (editIndex === -1) {
-            $scope.editedPhotosArr.push({
-              _id: columndata._id,
-              caption: columndata.caption,
-            });
-          } else {
-            $scope.editedPhotosArr[editIndex].caption = columndata.caption;
-          }
-          console.log($scope.editedPhotosArr, "photosArr");
+          $scope.ongo.photos[editIndex].caption = columndata.caption;
         }
         // caption edit end
 
       // edit save data
       $scope.saveEditOtg = function() {
-
           // get photos id
           $scope.photosId = _.map($scope.ongo.photos, "_id");
           // get photos id end
 
           var editedData = {
+            thoughts: $scope.ongo.thoughts,
             checkIn: $scope.ongo.checkIn,
             checkInChange: true,
             journeyUniqueId: $scope.json.uniqueId,
+            "uniqueId": $scope.ongo.uniqueId,
             "_id": $scope.ongo._id,
             photos: $scope.photosId,
             videos: [],
@@ -657,7 +654,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
             hashtag: [],
             addHashtag: [],
             removeHashtag: [],
-            photosArr: $scope.editedPhotosArr,
+            photosArr: $scope.ongo.photos,
             videosArr: [],
             type: "editPost"
           }
@@ -684,9 +681,14 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           }
           console.log(editedData, "dataEdited hai");
           $http({
-            url: adminURL + "/post/editData",
+            url: adminURL + "/post/editDataWeb",
             method: "POST",
             data: editedData,
+          }, function(data) {
+            $scope.getNewData = data.data;
+            $scope.editedData = {};
+            console.log($scope.getNewData, "new edit data");
+            console.log($scope.editedData, "edit ka data");
           })
         }
         // edit save data end
@@ -817,7 +819,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
 
       // review post visited pop up
       $scope.giveReview = function(checkin) {
-        console.log(checkin,"location");
+        console.log(checkin, "location");
         $scope.checkIn = checkin;
         modal = $uibModal.open({
           animation: true,

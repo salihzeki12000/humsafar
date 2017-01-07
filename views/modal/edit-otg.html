@@ -41,9 +41,9 @@
               <div class="tagfriend-count avenir-roman"><span>{{ongo.buddiesCount}}</span> Friends</div>
               <div class="dropdown-tagfriend tagfriend-list" ng-show="viewListFriend">
                 <ul>
-                  <li ng-repeat="list in tagFriends track by $index" ng-click="editTagFriends(list);">
+                  <li ng-repeat="list in tagFriends track by $index">
                     <div class="friend-listholder select-friend">
-                      <input type="checkbox" name="tag-list {{list.name}}" id="{{list._id}}" ng-model="list.checked">
+                      <input type="checkbox" name="tag-list {{list.name}}" id="{{list._id}}" ng-model="list.checked"  ng-click="editTagFriends(list);">
                       <label for="{{list._id}}" class="{{list.noEdit}}">
                         <div class="friend-imgholder">
                           <img ng-src="{{list.profilePicture|uploadpath}}" alt="" class="img-responsive">
@@ -170,7 +170,7 @@
   <!-- save or cancel otg -->
   <div class="save-cancel-otg text-center">
     <a href="" class="color-white" ng-click="dismiss();">Cancel</a>
-    <button class="btn btn-pink btn-more" ng-click="saveEditOtg();">Save</button>
+    <button class="btn btn-pink btn-more" ng-click="saveEditOtg(); $dismiss();">Save</button>
   </div>
   <!-- save or cancel otg end-->
 </div>
