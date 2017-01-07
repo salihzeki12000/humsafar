@@ -159,7 +159,7 @@ var ongojourney = angular.module('ongojourney', [])
   };
 });
 
-ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal', 'OnGoJourney', function($http, $filter, $timeout, $uibModal, OnGoJourney) {
+ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal', 'OnGoJourney','LikesAndComments', function($http, $filter, $timeout, $uibModal, OnGoJourney, LikesAndComments) {
   return {
     restrict: 'E',
     scope: {
@@ -897,70 +897,36 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         }
       };
 
-      $scope.getPhotoCommentsData = function(photoId) {
+      $scope.getPhotosCommentData = function(photoId) {
         console.log(photoId);
-        var callback = function(data) {
-          $scope.uniqueArr = [];
-          $scope.listOfComments = data.data;
-          console.log($scope.listOfComments);
-          $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
-        };
-        var obj = {
-          "_id": photoId
-        }
-        $http({
-          url: adminURL + "/postphotos/getOneWeb",
-          method: "POST",
-          data: obj
-        }).success(function(data) {
-          $scope.uniqueArr = [];
-          $scope.listOfComments = data.data;
-          console.log($scope.listOfComments);
-          $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
-        });
-
-        //open modal starts
-        $uibModal.open({
+        modal=$uibModal.open({
           templateUrl: "views/modal/notify.html",
           animation: true,
           scope: $scope,
           windowClass: "notify-popup"
         });
-        // open model ends
+        modal.closed.then(function () {
+        $scope.listOfComments={};
+      });
+        var callback = function(data) {
+          $scope.uniqueArr = [];
+          $scope.listOfComments = data.data;
+          console.log($scope.listOfComments);
+          $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+        };
+        LikesAndComments.getComments("photo",photoId,callback);
       };
 
-      $scope.postComment = function(uniqueId, comment, postId, photoId) {
+      $scope.postPhotosComment = function(uniqueId, comment, postId, photoId) {
+        console.log(uniqueId, comment, postId, photoId);
         var type = "photo";
-
+        var hashTag=[];
         var callback = function(data) {
           $scope.listOfComments = data.data;
           document.getElementById('enterComment').value = "";
         }
-        var formData = {
-          "uniqueId": uniqueId,
-          "text": comment,
-          "type": type,
-          "post": postId,
-          "photo": photoId
-        };
-        $http({
-          url: adminURL + "/comment/addCommentWeb",
-          method: "POST",
-          data: formData
-        }).success(function(data) {
-          formData = {
-            "_id": postId
-          }
-          $http({
-            url: adminURL + "/post/getPostCommentWeb",
-            method: "POST",
-            data: formData
-          }).success(function(data) {
-            callback(data);
-          });
-        });
+        LikesAndComments.postComment(type,uniqueId,postId,comment,hashTag,photoId,callback);
       };
-      // review post visited pop up end
     }
   }
 }]);

@@ -17,10 +17,11 @@ var map;
 var center = {};
 var centers = [];
 markers[0] = {};
-angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'itinerary', 'navigationservice', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'itinerary', 'commontask','navigationservice','cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
-.controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams) {
+.controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams,cfpLoadingBar) {
   //Used to name the .html file
+  // cfpLoadingBar.start();
   $scope.template = TemplateService.changecontent("home");
   $scope.menutitle = NavigationService.makeactive("Home");
   TemplateService.title = $scope.menutitle;
@@ -867,7 +868,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
   })
-  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, $state, $stateParams, $filter, $http) {
+  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, LikesAndComments, $state, $stateParams, $filter, $http) {
     //Used to name the .html file
     var slug = $stateParams.id;
     console.log(slug);
@@ -1391,7 +1392,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.getCard = "";
 
 
-    $scope.getCommentsData = function (id, uniqueId, postString, likeDone, likeCount) {
+    $scope.getPostsCommentData = function (id, uniqueId, postString, likeDone, likeCount) {
       $scope.previousId;
       $scope.post_id = id;
       $scope.post_uniqueId = uniqueId;
@@ -1410,7 +1411,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewCardComment = true;
         $scope.getCard = "view-whole-card";
         console.log($scope.viewCardComment);
-        OnGoJourney.getPostsComment(id, callback);
+        LikesAndComments.getComments("post",id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
@@ -1421,19 +1422,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.viewCardComment = true;
           $scope.getCard = "view-whole-card";
           console.log($scope.viewCardComment);
-          OnGoJourney.getPostsComment(id, callback);
+          LikesAndComments.getComments("post",id, callback);
         }
       }
       $scope.previousId = id;
     };
 
-    $scope.postComment = function (uniqueId, comment, postId) {
+    $scope.postPostsComment = function (uniqueId, comment, postId) {
+      console.log("controller se comment hua");
       var type = "post";
+      var additionalId = null; 
+      var hashTag=[];
       var callback = function (data) {
         $scope.listOfComments = data.data;
         document.getElementById('enterComment').value = "";
       }
-      OnGoJourney.postComment(uniqueId, comment, type, postId, callback);
+      LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, additionalId, callback);
     };
 
     $scope.likeUnlikePost = function (uniqueId) {
@@ -7232,6 +7236,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.to = "";
     $scope.getDays = function (country) {
       console.log(country);
+      country.datePopUp.minDate=new Date(country.from)
       if ((country.from == undefined) || (country.to == undefined)) {
 
       } else {
@@ -7378,8 +7383,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //travelled with ends
 
     $scope.uploadDetailedItinerary = function (status) {
-      console.log($scope.dItinerary);
-      console.log($scope.addCountry);
       $scope.dItinerary.status = status;
       $scope.dItinerary.cost = parseInt($scope.dItinerary.cost);
       $scope.dItinerary.countryVisited = $scope.addCountry;
@@ -7401,10 +7404,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       //removing unwanted values from countryVisited starts
       _.each($scope.dItinerary.countryVisited, function (n, index) {
-        $scope.dItinerary.countryVisited[index] = _.omit(n, ['name', 'flag']);
+        $scope.dItinerary.countryVisited[index] = _.omit(n, ['name', 'flag','datePopUp']);
       });
       //removing unwanted values from countryVisited starts
-
+      console.log($scope.dItinerary);
+      
       Itinerary.uploadDetailedItinerary($scope.dItinerary, flag, function (data) {
         $state.go('userdetailitinerary', {
           id: data.data.message
@@ -7482,13 +7486,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // }
     $scope.addClass = "";
     $scope.addCountry = [{
-      "cityVisited": [{}]
+      "cityVisited": [{}],
+      "datePopUp":{
+          "showWeeks": false,
+          "from":false,
+          "to":false,
+          "minDate":null
+        }
     }];
 
     $scope.addYourCountry = function () {
       $scope.addCountry.push({
         "cityVisited": [{}],
-        "new": "add"
+        "new": "add",
+        "datePopUp":{
+          "showWeeks": false,
+          "from":false,
+          "to":false,
+          "minDate":null
+        }
       });
       $scope.addClass = "city-country-holder";
     };
@@ -7591,7 +7607,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.cities = [];
     var countries = [];
     var cities = [];
-    $scope.qItineraryType = [{
+    $scope.qItineraryType =[{
       img: "img/itinerary/adventure.png",
       caption: "Adventure",
       width: "25"
@@ -7608,10 +7624,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       caption: "Romance",
       width: "26"
     }, {
-      img: "img/itinerary/backpacking.png",
-      caption: "Backpacking",
-      width: "23"
-    }, {
       img: "img/itinerary/budget.png",
       caption: "Budget",
       width: "22"
@@ -7627,7 +7639,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       img: "img/itinerary/friend.png",
       caption: "Friends",
       width: "24"
-    }, ];
+    }, {
+      img: "img/itinerary/shopping-white.png",
+      caption: "Shopping",
+      width: "24"
+    }, {
+      img: "img/itinerary/cap-white.png",
+      caption: "Solo",
+      width: "35"
+    }, {
+      img: "img/itinerary/speaker-white.png",
+      caption: "Festival",
+      width: "29"
+    }, {
+      img: "img/itinerary/backpacking.png",
+      caption: "Backpacking",
+      width: "23"
+    }];
+
 
     $scope.tinymceOptions = {
       onChange: function (e) {
@@ -7734,6 +7763,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         "name": photo
       })
     };
+
+    //Photo caption function
+    $scope.index = -1
+    $scope.addQuickCaption = function (index) {
+      // console.log(index,"hai");
+      if ($scope.index == index) {
+        $scope.index = -1;
+      } else {
+        $scope.index = index;
+      }
+    }
+    //Photo caption function end
 
     $scope.removePhoto = function (index) {
       $scope.qItinerary.photos.splice(index, 1);

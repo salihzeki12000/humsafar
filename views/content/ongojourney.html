@@ -175,7 +175,7 @@
             <div class="dot-line"></div>
             <div class="card-relate-holder functionmap" ng-if="journey.post">
 
-              <journey-post post="ongo" json=journey get-comments-data="getCommentsData(post_id,post_uniqueId,post_postString,post_likeDone)" profile=userData ng-repeat="ongo in journey.post"></journey-post>
+              <journey-post post="ongo" json=journey get-comments-data="getPostsCommentData(post_id,post_uniqueId,post_postString,post_likeDone)" profile=userData ng-repeat="ongo in journey.post"></journey-post>
 
               <!-- ongo journey-end -->
               <div class="ongo-journey-end" ng-if="journey.onGoing==false">
@@ -242,7 +242,7 @@
           </div>
           <div class="clearfix comment-post">
             <div class="pull-right">
-              <button class="btn btn-pink post-btn" ng-click=postComment(post_uniqueId,text,post_id)>Post</button>
+              <button class="btn btn-pink post-btn" ng-click=postPostsComment(post_uniqueId,text,post_id)>Post</button>
             </div>
           </div>
           <div class="view-comment-list" ng-repeat="list in listOfComments.comment">
