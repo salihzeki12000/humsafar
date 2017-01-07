@@ -1,182 +1,199 @@
 <div class="quick-itinerary-page avenir-roman">
   <div class="bg-white">
-      <div class="container">
-        <div class="fill-quick-itinerary">
-          <form>
-            <h4 class="color-blue mb20">Quick Itinerary</h4>
-            <div class="quick-itinerary-detail">
-              <div class="itinerary-title">
-                <div class="row">
-                  <div class="col-lg-6 col-md-5 col-sm-12">
-                    <div class="itinerary-inputholder">
-                      <input type="text" class="form-control" placeholder="Trip Title" ng-model="qItinerary.title">
-                    </div>
+    <div class="container">
+      <div class="fill-quick-itinerary">
+        <form>
+          <h4 class="color-blue mb20">Quick Itinerary</h4>
+          <div class="quick-itinerary-detail">
+            <div class="itinerary-title">
+              <div class="row">
+                <div class="col-lg-6 col-md-5 col-sm-12">
+                  <div class="itinerary-inputholder">
+                    <input type="text" class="form-control" placeholder="Trip Title" ng-model="qItinerary.title">
                   </div>
-                  <div class="col-lg-6 col-md-7 col-sm-12">
-                    <div class="itinerary-fill-info">
-                      <div class="itinerary-month relate">
-                        <label for="month">Month</label>
-                        <div class="itinerary-inputholder">
-                          <input type="text" class="form-control text-center" id="month" ng-model="qItinerary.month" ng-click="viewMonths.show = !viewMonths.show" ng-change="viewMonths.show=true">
-                        </div>
-                        <div class="month-dropdown" ng-show="viewMonths.show">
-                          <ul>
-                            <li ng-repeat="month in monthDrop | filter:qItinerary.month"><a href="" title="{{month}}" ng-click="qItinerary.month=month;viewMonths.show=false">{{month}}</a></li>
-                          </ul>
-                        </div>
+                </div>
+                <div class="col-lg-6 col-md-7 col-sm-12">
+                  <div class="itinerary-fill-info">
+                    <div class="itinerary-month relate">
+                      <label for="month">Month</label>
+                      <div class="itinerary-inputholder">
+                        <input type="text" class="form-control text-center" id="month" ng-model="qItinerary.month" ng-click="viewMonths.show = !viewMonths.show" ng-change="viewMonths.show=true">
                       </div>
-                      <div class="itinerary-year relate">
-                        <label for="year">Year</label>
-                        <div class="itinerary-inputholder">
-                          <input type="text" class="form-control text-center" id="year" ng-click="viewYear();" ng-model="qItinerary.year" ng-change="viewYear.show=true">
-                        </div>
-                        <div class="year-dropdown" ng-show="viewYear.show">
-                          <ul>
-                            <li ng-repeat="list in getYear | filter:qItinerary.year track by $index" ng-click="qItinerary.year=list;viewYear.show=false">
-                              <a href="" title="{{list}}">{{list}}</a>
-                            </li>
-                          </ul>
-                        </div>
+                      <div class="month-dropdown" ng-show="viewMonths.show">
+                        <ul>
+                          <li ng-repeat="month in monthDrop | filter:qItinerary.month"><a href="" title="{{month}}" ng-click="qItinerary.month=month;viewMonths.show=false">{{month}}</a></li>
+                        </ul>
                       </div>
-                      <div class="itinerary-duration">
-                        <label for="Day">Days</label>
-                        <div class="itinerary-inputholder duration-input">
-                          <input type="text" class="form-control text-center" id="Day" placeholder="e.g. 20" ng-model="qItinerary.duration">
-                        </div>
+                    </div>
+                    <div class="itinerary-year relate">
+                      <label for="year">Year</label>
+                      <div class="itinerary-inputholder">
+                        <input type="text" class="form-control text-center" id="year" ng-click="viewYear();" ng-model="qItinerary.year" ng-change="viewYear.show=true">
+                      </div>
+                      <div class="year-dropdown" ng-show="viewYear.show">
+                        <ul>
+                          <li ng-repeat="list in getYear | filter:qItinerary.year track by $index" ng-click="qItinerary.year=list;viewYear.show=false">
+                            <a href="" title="{{list}}">{{list}}</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="itinerary-duration">
+                      <label for="Day">Days</label>
+                      <div class="itinerary-inputholder duration-input">
+                        <input type="text" class="form-control text-center" id="Day" placeholder="e.g. 20" ng-model="qItinerary.duration">
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- itinerary type -->
-              <div class="fill-itinerary-type">
-                <h4 class="color-light-grey mt20 mb20">Itineraries Type</h4>
-                <div class="select-itinerary-type" ng-repeat="itinerary in qItineraryType">
-                  <figure class="pointer" ng-click="selectItinerary($index);">
-                    <div class="itinerary-iconholder  {{itinerary.activeClass}}">
-                      <img ng-src="{{itinerary.img}}" alt="{{itinerary.caption}}" class="img-responsive" width="{{itinerary.width}}">
-                    </div>
-                    <figcaption class="color-dark-blue avenir-roman">{{itinerary.caption}}</figcaption>
-                  </figure>
-                </div>
+            </div>
+            <!-- itinerary type -->
+            <div class="fill-itinerary-type">
+              <h4 class="color-light-grey mt20 mb20">Itineraries Type</h4>
+              <div class="select-itinerary-type" ng-repeat="itinerary in qItineraryType">
+                <figure class="pointer" ng-click="selectItinerary($index);">
+                  <div class="itinerary-iconholder  {{itinerary.activeClass}}">
+                    <img ng-src="{{itinerary.img}}" alt="{{itinerary.caption}}" class="img-responsive" width="{{itinerary.width}}">
+                  </div>
+                  <figcaption class="color-dark-blue avenir-roman">{{itinerary.caption}}</figcaption>
+                </figure>
               </div>
-              <!--{{qItinerary.countryVisited}}-->
-              <!-- itinerary type end -->
-              <!-- country and city visited -->
-              <!--{{qItinerary.countryVisited[countryPanel]}}-->
+            </div>
+            <!--{{qItinerary.countryVisited}}-->
+            <!-- itinerary type end -->
+            <!-- country and city visited -->
+            <!--{{qItinerary.countryVisited[countryPanel]}}-->
 
-              <div class="itinerary-country-visited" ng-init="countrySelectedFlag=true">
-                <div class="row relate" ng-repeat="add in addCountry track by $index" ng-init="countryPanel=$index">
-                  <!-- new ui select dropdown country -->
-                  <div class="col-md-6 col-sm-6">
-                    <div class="itinerary-inputholder input-country-visited">
-                      <ui-select  ng-model="add.country" theme="bootstrap" on-select="updateCountryPanel(countryPanel,add.country)" ng-click="updateCountriesArr($select.selected._id)">
-                        <ui-select-match placeholder="Country Visited ">{{$select.selected.name}}</ui-select-match>
-                        <ui-select-choices repeat="nation._id as nation in countries | filter: $select.search">
-                          <span ng-bind="nation.name"></span>
-                        </ui-select-choices>
-                      </ui-select>
-                    </div>
+            <div class="itinerary-country-visited" ng-init="countrySelectedFlag=true">
+              <div class="row relate" ng-repeat="add in addCountry track by $index" ng-init="countryPanel=$index">
+                <!-- new ui select dropdown country -->
+                <div class="col-md-6 col-sm-6">
+                  <div class="itinerary-inputholder input-country-visited">
+                    <ui-select ng-model="add.country" theme="bootstrap" on-select="updateCountryPanel(countryPanel,add.country)" ng-click="updateCountriesArr($select.selected._id)">
+                      <ui-select-match placeholder="Country Visited ">{{$select.selected.name}}</ui-select-match>
+                      <ui-select-choices repeat="nation._id as nation in countries | filter: $select.search">
+                        <span ng-bind="nation.name"></span>
+                      </ui-select-choices>
+                    </ui-select>
                   </div>
-                  <!-- new ui select dropdown country end-->
-
-                  <!-- new ui select dropdown for city -->
-                  <div class="col-md-6 col-sm-6">
-                    <div class="itinerary-inputholder input-city-visited">
-                      <ui-select multiple ng-model="add.cityVisited" theme="bootstrap" ng-click="updateCitiesArr($select.selected._id)">{{$select.search}}
-                        <ui-select-match placeholder="City Visited">{{$item.name}}</ui-select-match>
-                        <ui-select-choices repeat="{'name':city.name,placeId:city.placeId} as city in cities"  refresh="searchCity(add.country,$select.search,add.cityVisited)" refresh-delay="0">
-                          <span ng-bind="city.name"></span>
-                        </ui-select-choices>
-                      </ui-select>
-                    </div>
-                    <i class="avenir-roman color-light-grey">Add other cities visited in this country on this trip</i>
-                  </div>
-                  <!-- new ui select dropdown for city end-->
-                  <!--temporary-->
-                    <span ng-if="$index>0" ng-click="removeStayed(countryPanel)" class="remove-countrycity-panel"><i class="fa fa-times"></i></span>
-                  <!--temporary end close-->
                 </div>
-              </div>
-              <!--<div class="quick-add-country clearfix text-center" ng-if="countryPanel+1==addCountry.length">-->
-              <div class="quick-add-country clearfix text-center">
-                <button class="btn btn-pink" ng-click="addPanel()" >Add Country</button>
-                <i class="color-light-grey avenir-roman block mt5">If you have visited any other country on the same trip</i>
-              </div>
-              <!-- country and city visited end-->
-              <!-- trip descp -->
-              <div class="trip-descp-itinerary">
-                <label for="descp">A Little More About This Trip</label>
-                <!--<textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel" id="descp"></textarea>-->
-                <textarea ui-tinymce="tinymceOptions" ng-model="qItinerary.description" id="descp"></textarea>
-              </div>
-              <!-- trip descp end -->
-              <!-- upload trip photo -->
-              <div class="upload-trip-photo-sec">
-                <label for="trip-photo">Upload Trip Photo</label>
-                <div class="trip-photo-holder">
-                      <div class="trip-view-photo" ng-repeat="photo in qItinerary.photos track by $index">
-                        <img ng-src="{{photo.name|uploadpath}}" alt="Quick Itinerary" class="img-responsive get-center">
-                        <div class="remove-quick-photo text-right">
-                          <div class="delete-photo"><i class="fa fa-times color-white pointer" ng-click="removePhoto($index)"></i></div>
-                        </div>
+                <!-- new ui select dropdown country end-->
+
+                <!-- new ui select dropdown for city -->
+                <div class="col-md-6 col-sm-6">
+                  <div class="itinerary-inputholder input-city-visited">
+                    <ui-select multiple ng-model="add.cityVisited" theme="bootstrap" ng-click="updateCitiesArr($select.selected._id)">{{$select.search}}
+                      <ui-select-match placeholder="City Visited">{{$item.name}}</ui-select-match>
+                      <ui-select-choices repeat="{'name':city.name,placeId:city.placeId} as city in cities" refresh="searchCity(add.country,$select.search,add.cityVisited)" refresh-delay="0">
+                        <span ng-bind="city.name"></span>
+                      </ui-select-choices>
+                    </ui-select>
                   </div>
-                  <div class="trip-upload text-center">
-                    <div class="upload-section">
+                  <i class="avenir-roman color-light-grey">Add other cities visited in this country on this trip</i>
+                </div>
+                <!-- new ui select dropdown for city end-->
+                <!--temporary-->
+                <span ng-if="$index>0" ng-click="removeStayed(countryPanel)" class="remove-countrycity-panel"><i class="fa fa-times"></i></span>
+                <!--temporary end close-->
+              </div>
+            </div>
+            <!--<div class="quick-add-country clearfix text-center" ng-if="countryPanel+1==addCountry.length">-->
+            <div class="quick-add-country clearfix text-center">
+              <button class="btn btn-pink" ng-click="addPanel()">Add Country</button>
+              <i class="color-light-grey avenir-roman block mt5">If you have visited any other country on the same trip</i>
+            </div>
+            <!-- country and city visited end-->
+            <!-- trip descp -->
+            <div class="trip-descp-itinerary">
+              <label for="descp">A Little More About This Trip</label>
+              <!--<textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel" id="descp"></textarea>-->
+              <textarea ui-tinymce="tinymceOptions" ng-model="qItinerary.description" id="descp"></textarea>
+            </div>
+            <!-- trip descp end -->
+            <!-- upload trip photo -->
+            <div class="upload-trip-photo-sec">
+              <label for="trip-photo">Upload Trip Photo</label>
+              <div class="trip-photo-holder">
+                <div class="trip-view-photo" ng-repeat="photo in qItinerary.photos track by $index">
+                  <img ng-src="{{photo.name|uploadpath}}" alt="Quick Itinerary" class="img-responsive get-center">
+                  <span class="delete-detail-pic"><i ng-click="removePhoto($index,city)" class="fa fa-times"></i></span>
+                  <!-- caption start -->
+
+                  <div class="detail-pic-caption" ng-click="addQuickCaption(photo.name);"
+                  ng-hide="photo.name==index">
+                    <p ng-if="!photo.caption || photo.caption==''">Add Caption</p>
+                    <p class="text-ellipsis" ng-if="photo.caption && !photo.caption==''">{{photo.caption}}</p>
+                  </div>
+
+                  <div class="detail-pic-edit-caption" ng-show="photo.name==index" ng-class="{'showcaptiondetailpic' : index==photo.name,'' : index!==photo.name}">
+                   <textarea name="" id="captionArea" cols="30" rows="7" class="form-control" maxlength="150" placeholder="Enter Caption" ng-model="photo.caption"></textarea>
+                   <div class="view-caption-onimg">
+                     <span ng-click="addQuickCaption(photo.name);"><i class="fa fa-angle-down"></i></span>
+                   </div>
+                   <div class="text-typed-count">
+                     <span id="remainCaption"></span>
+                   </div>
+                 </div>
+
+                 <!-- caption end -->
+                </div>
+                <div class="trip-upload text-center">
+                  <div class="upload-section">
                     <div ng-if="qItinerary.photos.length==0">
                       <img src="img/upload-icon.jpg" alt="" class="m-center img-responsive">
                       <p class="text-center color-grey avenir-roman">Drag a your itinerary photos here</p>
                       <span class="block color-grey avenir-roman">- or -</span>
                     </div>
-                      <div class="upload-btn relate">
-                          <button class="btn btn-dark-blue pointer avenir-light pointer">Select a photo from your computer</button>
-                           <upload-image ng-model="formData.photo" ng-callback="addPhotosCallback(data)" multiple="true" class="quick-upload-photos"></upload-image>
-                      </div>
+                    <div class="upload-btn relate">
+                      <button class="btn btn-dark-blue pointer avenir-light pointer">Select a photo from your computer</button>
+                      <upload-image ng-model="formData.photo" ng-callback="addPhotosCallback(data)" multiple="true" class="quick-upload-photos"></upload-image>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- upload trip photo end-->
             </div>
-            <!-- trip total budget and save  -->
-            <div class="trip-budget budget-quick-itinerary">
-              <div class="clearfix">
-                <div class="pull-left mob-quicktrip-budget">
-                  <label for="budget">Trip Budget</label>
-                  <div class="select-currency-holder">
-                    <div class="currency-holder">
-                      <div class="itinerary-inputholder relate">
-                        <input type="text" placeholder="Select Currency" ng-model="qItinerary.currency" ng-change="currency.showCurrency=true" ng-click="currency.showCurrency=!currency.showCurrency">
-                        <span class="itinerary-dropdown-icon">
+            <!-- upload trip photo end-->
+          </div>
+          <!-- trip total budget and save  -->
+          <div class="trip-budget budget-quick-itinerary">
+            <div class="clearfix">
+              <div class="pull-left mob-quicktrip-budget">
+                <label for="budget">Trip Budget</label>
+                <div class="select-currency-holder">
+                  <div class="currency-holder">
+                    <div class="itinerary-inputholder relate">
+                      <input type="text" placeholder="Select Currency" ng-model="qItinerary.currency" ng-change="currency.showCurrency=true" ng-click="currency.showCurrency=!currency.showCurrency">
+                      <span class="itinerary-dropdown-icon">
                           <i class="fa fa-chevron-down"></i>
                         </span>
-                        <div class="dropdown-currency-itinerary" ng-show="currency.showCurrency">
-                          <ul>
-                          <li ng-repeat="name in currency | filter:qItinerary.currency" ng-click="currency.showCurrency=false;qItinerary.currency=name.currency;" >
+                      <div class="dropdown-currency-itinerary" ng-show="currency.showCurrency">
+                        <ul>
+                          <li ng-repeat="name in currency | filter:qItinerary.currency" ng-click="currency.showCurrency=false;qItinerary.currency=name.currency;">
                             <a href="" title="{{name.currency}}">{{name.currency}}</a>
                           </li>
                         </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="currency-amount">
-                      <div class="itinerary-inputholder">
-                        <input type="text" class="text-center" ng-model="qItinerary.cost">
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="pull-right mob-quicktrip-btn">
-                  <div class="save-publish-detail">
-                    <button class="btn btn-pink btn-more mr5" ng-click="uploadQuickItinerary(false)">Save</button>
-                    <button class="btn btn-pink btn-more" ng-click="uploadQuickItinerary(true)">Publish</button>
+                  <div class="currency-amount">
+                    <div class="itinerary-inputholder">
+                      <input type="text" class="text-center" ng-model="qItinerary.cost">
+                    </div>
                   </div>
                 </div>
               </div>
+              <div class="pull-right mob-quicktrip-btn">
+                <div class="save-publish-detail">
+                  <button class="btn btn-pink btn-more mr5" ng-click="uploadQuickItinerary(false)">Save</button>
+                  <button class="btn btn-pink btn-more" ng-click="uploadQuickItinerary(true)">Publish</button>
+                </div>
+              </div>
             </div>
-            <!-- trip total budget and save end -->
-        </div>
-        </form>
+          </div>
+          <!-- trip total budget and save end -->
       </div>
+      </form>
     </div>
+  </div>
 </div>

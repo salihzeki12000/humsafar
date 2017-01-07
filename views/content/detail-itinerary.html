@@ -4,7 +4,7 @@
       <div class="trip-itinerary-status">
         <div class="trip-status-main">
           <div class="status-country-holder" ng-repeat="country in addCountry track by $index">
-            <img ng-src="{{country.flag|uploadpath}}" >
+            <img ng-src="{{country.flag|uploadpath}}">
             <ul>
               <!-- <li ng-repeat="country in countryList track by $index"> -->
               <li ng-repeat="city in country.cityVisited track by $index">
@@ -88,7 +88,7 @@
                     <div class="itinerary-inputholder input-city-visited travelled-withselect">
                       <ui-select multiple ng-model="dItinerary.buddies" theme="bootstrap" ng-click="updateBuddiesArr($select.selected._id)">
                         <ui-select-match placeholder="Travelled With">{{$item.name}}</ui-select-match>
-                        <ui-select-choices repeat="{'_id':list._id,'name':list.name,'email':list.email,'urlSlug':list.urlSlug} as list in followersList"  refresh="listFollowers($select.search)" refresh-delay="0">
+                        <ui-select-choices repeat="{'_id':list._id,'name':list.name,'email':list.email,'urlSlug':list.urlSlug} as list in followersList" refresh="listFollowers($select.search)" refresh-delay="0">
                           <img class="round-travelledimg" alt="{{list.name}}" ng-src="{{list.profilePicture|uploadpath:35:40:'cover'}}" width="30" />
                           <div class="travelwith-namestyle">
                             <span ng-bind="list.name"></span>
@@ -130,7 +130,9 @@
                         </span>
                           <div class="dropdown-country" ng-show="showCountry[countryPanel]">
                             <ul>
-                              <li ng-repeat="nation in countries | filter: editCountry.name"><a href="" ng-click="updateCountryDetail(editCountry,nation,countryPanel,cityPanel)" class="country-drop v-mid"><img ng-src="{{nation.flag|uploadpath}}" width="30" class="mr10 v-mid" alt="{{nation.name}}">{{nation.name}}</a></li>
+                              <li ng-repeat="nation in countries | filter: editCountry.name">
+                                <a href="" ng-click="updateCountryDetail(editCountry,nation,countryPanel,cityPanel)" class="country-drop v-mid"><img ng-src="{{nation.flag|uploadpath}}" width="30" class="mr10 v-mid" alt="{{nation.name}}">{{nation.name}}</a>
+                              </li>
                             </ul>
                           </div>
                           <!--<ui-select ng-model="addCountry[countryPanel]" theme="bootstrap" ng-click="updateCountriesArr($select.selected._id)">
@@ -147,14 +149,16 @@
                             <label for="From">From</label>
                             <div class="itinerary-inputholder">
                               <!-- <input type="date" class="form-control text-center" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'"> -->
-                              <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="openFrom()" uib-datepicker-popup="{{format}}" is-open="popupFrom.opened" datepicker-options="dateOptions"  close-text="Close" alt-input-formats="false" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'" />
+                              <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="openFrom()" uib-datepicker-popup="{{format}}" is-open="popupFrom.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="false" id="From_{{countryPanel}}{{cityPanel}}"
+                                  ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'" />
                             </div>
                           </div>
                           <div class="itinerary-to itinerary-year">
                             <label for="to">To</label>
                             <div class="itinerary-inputholder">
                               <!-- <input type="date" class="form-control text-center" id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)"> -->
-                              <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="openTo()" uib-datepicker-popup="{{format}}" is-open="popupTo.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)" />
+                              <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="openTo()" uib-datepicker-popup="{{format}}" is-open="popupTo.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
+                                  id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)" />
                             </div>
                           </div>
                           <div class="itinerary-duration">
@@ -453,23 +457,22 @@
 
                   <!-- caption start -->
 
-                  <div class="detail-pic-caption" ng-click="addDetailCaption(photo.name);"
-                  ng-hide="photo.name==index">
+                  <div class="detail-pic-caption" ng-click="addDetailCaption(photo.name);" ng-hide="photo.name==index">
                     <p ng-if="!photo.caption || photo.caption==''">Add Caption</p>
                     <p class="text-ellipsis" ng-if="photo.caption && !photo.caption==''">{{photo.caption}}</p>
                   </div>
 
                   <div class="detail-pic-edit-caption" ng-show="photo.name==index" ng-class="{'showcaptiondetailpic' : index==photo.name,'' : index!==photo.name}">
-                   <textarea name="" id="captionArea" cols="30" rows="7" class="form-control" maxlength="150" placeholder="Enter Caption" ng-model="photo.caption"></textarea>
-                   <div class="view-caption-onimg">
-                     <span ng-click="addDetailCaption(photo.name);"><i class="fa fa-angle-down"></i></span>
-                   </div>
-                   <div class="text-typed-count">
-                     <span id="remainCaption"></span>
-                   </div>
-                 </div>
+                    <textarea name="" id="captionArea" cols="30" rows="7" class="form-control" maxlength="150" placeholder="Enter Caption" ng-model="photo.caption"></textarea>
+                    <div class="view-caption-onimg">
+                      <span ng-click="addDetailCaption(photo.name);"><i class="fa fa-angle-down"></i></span>
+                    </div>
+                    <div class="text-typed-count">
+                      <span id="remainCaption"></span>
+                    </div>
+                  </div>
 
-                 <!-- caption end -->
+                  <!-- caption end -->
 
 
                 </div>
