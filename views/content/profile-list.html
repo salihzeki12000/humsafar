@@ -26,12 +26,12 @@
                     <li>
                       <div class="clearfix">
                         <div class="pull-left">
-                          <div class="user-profileholder">
+                          <div class="profile-picholder">
                             <img src="" alt="" class="img-responsive">
                           </div>
-                          <div class="user-detail">
-                            <h4 class="user-name avenir-roman color-dark-blue">Monish Shah</h4>
-                            <span class="color-light-grey avenir-roman">@monish-shah</span>
+                          <div class="profile-detailed">
+                            <h4 class="profile-name avenir-roman color-dark-blue m-clear">Monish Shah</h4>
+                            <span class="color-light-grey avenir-roman profile-tag">@monish-shah</span>
                           </div>
                         </div>
                         <div class="pull-right">
@@ -120,7 +120,7 @@
           <div class="following-container" ng-repeat="list in followingList | filter:searchFriend.name">
             <div class="following-holder">
               <div class="follow-imgholder">
-                <img ng-src="{{list.profilePicture|uploadpath}}" class="img-responsive">
+                <img ng-src="{{list.profilePicture|uploadpath:104:108:'cover'}}" class="img-responsive">
               </div>
               <div class="following-detail text-center">
                 <h4 class="color-blue avenir-heavy">{{list.name}}</h4>
@@ -162,7 +162,7 @@
         <div class="following-container" ng-repeat="list in followersList track by $index">
           <div class="following-holder">
             <div class="follow-imgholder">
-              <img ng-src="{{list.profilePicture|uploadpath}}" alt="{{list.nameFollow}}" class="img-responsive">
+              <img ng-src="{{list.profilePicture|uploadpath:104:108:'cover'}}" alt="{{list.nameFollow}}" class="img-responsive">
             </div>
             <div class="following-detail text-center">
               <h4 class="color-blue avenir-heavy">{{list.name}}</h4>

@@ -117,8 +117,8 @@
                     <div class="nation-select relate">
                       <input type="radio" id="{{nation._id}}" name="nation" ng-model="userData.homeCountry" ng-value="nation._id" />
                       <label for="{{nation._id}}">
-                        <img ng-src="{{nation.flag|uploadpath}}" alt="" class="img-responsive inline-block mr10" width="30px">
-                        <span class="color-light-grey">{{nation.name}}</span>
+                        <img ng-src="{{nation.flag|uploadpath:30}}" alt="" class="img-responsive inline-block mr10" width="30px">
+                        <span class="color-light-grey avenir-medium font-light">{{nation.name}}</span>
                       </label>
                     </div>
                   </li>
@@ -206,13 +206,13 @@
               <!--<div class="dropzone" file-dropzone="[image/png, image/jpeg, image/gif]" file="uploadme.src" file-name="imageFileName" data-max-file-size="3" style=" width: 250px;height: 45px;border: 1px solid #ccc;text-align: center;padding: 30px;margin: 20px;font-family: Arial;">
                 <span>Drop Image Here</span>
               </div>
-              
+
               <form action>
                 <input type="file" fileread="uploadme.src" style="width:500px;height:500px">
                 <img ng-src="{{ uploadme.src }}">
               </form>-->
               <!--working drag and drop ends-->
-              
+
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=4">Previous</button>
                 <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
