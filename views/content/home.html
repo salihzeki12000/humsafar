@@ -1,5 +1,4 @@
 <div class="shadow mt-60">
-  <div ngMuted>
   <div class="home-slide fullpage">
     <section auto-height class="home section one rl" id="landing" ng-include="section.one"></section>
     <section auto-height class="home section two slide2 rl" id="travellife" ng-include="section.two" style="background:url(../img/libro-home/slide/2.jpg)"></section>
@@ -24,22 +23,22 @@
             </div>
             <div class="swiper-slide" data-hash="slide2">
               <div class="videoplay" id="Video1">
-                <video width="100%" height="400px" ng-click="vidplay()">
-                  <source src="img/libro-home/video/Travel_life.mp4" type="video/mp4" ng-muted="{{video.mute}}">
+                <video width="100%" height="400px">
+                  <source src="img/libro-home/video/Travel_life.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             <div class="swiper-slide" data-hash="slide3">
               <div class="videoplay">
                 <video width="100%" height="400px">
-                  <source src="img/libro-home/video/Local_life.mp4" type="video/mp4" ng-muted="{{video.mute}}">
+                  <source src="img/libro-home/video/Local_life.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
             <div class="swiper-slide" data-hash="slide4">
               <div class="videoplay">
                 <video width="100%" height="400px">
-                  <source src="img/libro-home/video/My_life.mp4" type="video/mp4" ng-muted="{{video.mute}}">
+                  <source src="img/libro-home/video/My_life.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
@@ -58,4 +57,3 @@
     <span ng-click="changePage('share')" class="five"></span>
   </div>
   </div>
-</div>
