@@ -142,7 +142,7 @@
                               <div class="journey-type inline-block">
                                 <ul>
                                   <li ng-repeat="list in life.kindOfJourney|limitTo:3">
-                                    <a href=""><img ng-src="{{list|kindOfJourney}}" alt="" height="20"></a>
+                                    <a href=""><img ng-src="{{list|kindOfJourney:'white'}}" alt="" height="20"></a>
                                   </li>
                                 </ul>
                               </div>
@@ -225,7 +225,7 @@
                               <div class="journey-type">
                                 <ul>
                                   <li ng-repeat="list in life.itineraryType|limitTo:3">
-                                    <a href=""><img ng-src="{{list|kindOfJourney}}" alt="" height="20"></a>
+                                    <a href=""><img ng-src="{{list|kindOfJourney:'white'}}" alt="" height="20"></a>
                                   </li>
                                 </ul>
                               </div>

@@ -34,7 +34,7 @@
       <div class="journey-type-icon">
         <ul class="list-inline">
           <li ng-repeat="icon in itinerary.itineraryType track by $index">
-            <img ng-src="{{icon|kindOfJourney}}" alt="" width="{{icon.width}}" class="img-responsive">
+            <img ng-src="{{icon|kindOfJourney:'white'}}" alt="" width="{{icon.width}}" class="img-responsive">
             <!-- Note :  use width size in backend -->
           </li>
         </ul>

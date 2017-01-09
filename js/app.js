@@ -714,45 +714,45 @@ firstapp.filter('capitalize', function () {
 });
 
 firstapp.filter('kindOfJourney', function () {
-  return function (input) {
+  return function (input,color) {
     var input = input.toLowerCase();
     var returnVal = "";
     switch (input) {
       case "friends":
-        returnVal = "img/icons/friends.png";
+        returnVal = "img/kindofjourney/"+color+"-friends.png";
         break;
       case "backpacking":
-        returnVal = "img/icons/backpacking.png";
+        returnVal = "img/kindofjourney/"+color+"-backpacking.png";
         break;
       case "business":
-        returnVal = "img/icons/business.png";
+        returnVal = "img/kindofjourney/"+color+"-business.png";
         break;
       case "religious":
-        returnVal = "img/icons/religious.png";
+        returnVal = "img/kindofjourney/"+color+"-religious.png";
         break;
       case "romance":
-        returnVal = "img/icons/romance.png";
+        returnVal = "img/kindofjourney/"+color+"-romance.png";
         break;
       case "budget":
-        returnVal = "img/icons/budget.png";
+        returnVal = "img/kindofjourney/"+color+"-budget.png";
         break;
       case "luxury":
-        returnVal = "img/icons/luxury.png";
+        returnVal = "img/kindofjourney/"+color+"-luxury.png";
         break;
       case "family":
-        returnVal = "img/icons/family.png";
+        returnVal = "img/kindofjourney/"+color+"-family.png";
         break;
       case "sole":
-        returnVal = "img/icons/sole.png";
+        returnVal = "img/kindofjourney/"+color+"-solo.png";
         break;
       case "betterhalf":
-        returnVal = "img/icons/betterhalf.png";
+        returnVal = "img/kindofjourney/"+color+"-betterhalf.png";
         break;
       case "colleague":
-        returnVal = "img/icons/colleague.png";
+        returnVal = "img/kindofjourney/"+color+"-colleague.png";
         break;
       case "adventure":
-        returnVal = "img/icons/adventure.png";
+        returnVal = "img/kindofjourney/"+color+"-adventure.png";
         break;
     }
     return returnVal;
