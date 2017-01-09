@@ -2,7 +2,7 @@
 <div id="scene" class="scene unselectable" data-friction-x="0.1" data-friction-y="0.1" data-scalar-x="25" data-scalar-y="15"
   style="width: 100%; transform: translate3d(0px, 0px, 0px); transform-style: preserve-3d; backface-visibility: hidden;" data-mode="cursor">
   <div class="overlay colorblack"></div>
-  <div class="img-holder" auto-height>
+  <div class="img-holder mobile-hide-footer" auto-height>
     <div class="container">
       <div class="text-left-ab text-sec-left">
         <div class="layer" data-depth="0.10">
@@ -58,6 +58,12 @@
         </div>
       </div>
     </div>
+    <a class="volume-off-on">
+      <i class="fa fa-volume-up" aria-hidden="true"></i>
+    </a>
+    <a class="volume-off-on">
+      <i class="fa fa-volume-off" aria-hidden="true"></i>
+    </a>
   <div ng-include="template.footer" class="template footer"></div>
   </div>
 </div>
