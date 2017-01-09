@@ -260,26 +260,20 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       // type of post ends
       makePostString();
 
-      $scope.likes = function(id) {
+      $scope.likes = function(uniqueId,_id) {
+        console.log($scope.ongo.likeDone);
         $scope.ongo.likeDone = !$scope.ongo.likeDone;
-        // var id = $scope.ongo.uniqueId;
         if ($scope.ongo.likeDone) {
-          $scope.ongo.likeCount = $scope.ongo.likeCount + 1;
-          var formData = {
-            'uniqueId': id
-          };
+          if($scope.ongo.likeCount==undefined){
+            $scope.ongo.likeCount=1;
+          }else{
+            $scope.ongo.likeCount = $scope.ongo.likeCount + 1;            
+          }
+          LikesAndComments.likeUnlike("post","like",uniqueId,_id,null)
         } else {
           $scope.ongo.likeCount = $scope.ongo.likeCount - 1;
-          var formData = {
-            'uniqueId': id,
-            'unlike': 'true'
-          };
+          LikesAndComments.likeUnlike("post","unlike",uniqueId,_id,null)
         }
-        $http({
-          url: adminURL + "/post/updateLikePostWeb",
-          method: "POST",
-          data: formData
-        })
       };
 
       $scope.getLikes = function(id) {
@@ -293,7 +287,25 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         }).success(function(data) {
           $scope.listOfLikes = data.data;
         });
-      }
+      };
+
+      $scope.likePhoto=function(uniqueId,_id,additionalId){
+        console.log(uniqueId,_id,additionalId);
+         $scope.listOfComments.likeDone = !$scope.listOfComments.likeDone;
+        if ($scope.listOfComments.likeDone) {
+          if($scope.listOfComments.likeCount==undefined){
+            $scope.listOfComments.likeCount=1;
+          }else{
+            $scope.listOfComments.likeCount = $scope.listOfComments.likeCount + 1;            
+          }
+          LikesAndComments.likeUnlike("photo","like",uniqueId,_id,additionalId)
+        } else {
+          $scope.listOfComments.likeCount = $scope.listOfComments.likeCount - 1;
+          LikesAndComments.likeUnlike("photo","unlike",uniqueId,_id,additionalId)
+        }
+      };
+
+
 
       //post comments starts
 
@@ -1069,4 +1081,34 @@ firstapp.filter('category', function() {
         break;
     }
   };
+});
+
+ongojourney.filter('singularOrPlural', function() {
+  return function(count,flag) {
+     console.log(count,flag);
+    if(flag=='like'){
+      if(count==1){
+        return "Like";
+      }else{
+        return "Likes";
+     }
+    }else if(flag=='comment'){
+       if(count==1){
+        return "Comment";
+      }else{
+        return "Comments";
+     }
+    }
+  }
+});
+
+ongojourney.filter('filterCount', function() {
+  return function(count) {
+     console.log(count);
+    if(count==undefined){
+        return 0;
+    }else{
+      return count;
+    }
+  }
 });

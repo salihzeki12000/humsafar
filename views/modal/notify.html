@@ -12,7 +12,7 @@
           <div class="clearfix">
             <div class="pull-left">
               <ul class="notify-like">
-                <li><a href=""><i class="fa color-blue" ng-class="listOfComments.likeDone ? 'fa-heart' : 'fa-heart-o'" ng-click="likes(ongo.uniqueId)"></i></a></li>
+                <li><a href=""><i class="fa color-blue" ng-class="listOfComments.likeDone ? 'fa-heart' : 'fa-heart-o'" ng-click="likePhoto(listOfComments.name,ongo._id,listOfComments._id)"></i></a></li>
                 <li>
                   <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve"></a>
                 </li>
@@ -25,7 +25,7 @@
               <div class="notification-like">
                 <span class="notify-like-holder pointer avenir-roman" ng-click="showLikes=!showLikes;getLikes(ongo._id)">
                   <i class="fa fa-heart color-blue" ng-class="{'view-like' : showLikes == true , '' : showLikes == false}" ></i>
-                 <span>{{listOfComments.like.length}}   </span>Like
+                 <span>{{listOfComments.like.length|filterCount}}   </span>{{listOfComments.like.length|singularOrPlural:'like'}}
                 <div class="like-dropdown" ng-show="showLikes">
                   <ul>
                     <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>

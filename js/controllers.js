@@ -1286,7 +1286,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             scale: 3
           };
           if (percentComplete == 100 && flag) {
-            console.log(percentComplete, flag);
             // setMarker("green-marker", centers[i], centers[i - 1], i + 1);
           markers[i+1].setIcon("img/maps/green-marker.png");
           markers[i].setIcon("img/maps/red-marker.png");
@@ -1342,7 +1341,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           for(markerCount=markers.length - 1;markerCount>0;markerCount--){
             if((value == true) && (percentComplete < 100)){
                if(markerCount==i){
-              console.log("for----"+markerCount+"=="+i);
               markers[markerCount].setIcon("");
               markers[markerCount].setIcon("img/maps/green-marker.png");
             }else{
@@ -1392,12 +1390,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.getCard = "";
 
 
-    $scope.getPostsCommentData = function (id, uniqueId, postString, likeDone, likeCount) {
+    $scope.getPostsCommentData = function (ongo) {
+      $scope.post=ongo;
       $scope.previousId;
-      $scope.post_id = id;
-      $scope.post_uniqueId = uniqueId;
-      $scope.post_postString = postString;
-      $scope.post_likeDone = likeDone;
+      // $scope.post_id = id;
+      // $scope.post_uniqueId = uniqueId;
+      // $scope.post_postString = postString;
+      // $scope.post_likeDone = likeDone;
       var callback = function (data) {
         $scope.uniqueArr = [];
         $scope.listOfComments = data.data;
@@ -1405,13 +1404,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
         console.log($scope.uniqueArr);
       }
-
-      if ($scope.previousId != id) {
+      if ($scope.previousId != $scope.post._id) {
         $scope.listOfComments = [];
         $scope.viewCardComment = true;
         $scope.getCard = "view-whole-card";
         console.log($scope.viewCardComment);
-        LikesAndComments.getComments("post",id, callback);
+        LikesAndComments.getComments("post",$scope.post._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
@@ -1422,10 +1420,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.viewCardComment = true;
           $scope.getCard = "view-whole-card";
           console.log($scope.viewCardComment);
-          LikesAndComments.getComments("post",id, callback);
+          LikesAndComments.getComments("post",$scope.post._id, callback);
         }
       }
-      $scope.previousId = id;
+      $scope.previousId = $scope.post._id;
     };
 
     $scope.postPostsComment = function (uniqueId, comment, postId) {
@@ -1440,28 +1438,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, additionalId, callback);
     };
 
-    $scope.likeUnlikePost = function (uniqueId) {
-      $scope.post_likeDone = !$scope.post_likeDone;
-      // var id = $scope.ongo.uniqueId;
-      if ($scope.post_likeDone) {
-        $scope.post_likeCount = $scope.post_likeCount + 1;
-        var formData = {
-          'uniqueId': uniqueId
-        };
-      } else {
-        $scope.post_likeCount = $scope.post_likeCount - 1;
-        var formData = {
-          'uniqueId': uniqueId,
-          'unlike': 'true'
-        };
-      }
-      $http({
-        url: adminURL + "/post/updateLikePostWeb",
-        method: "POST",
-        data: formData
-      })
-    };
+     $scope.likes = function(uniqueId,_id) {
+        console.log($scope.post.likeDone);
+        $scope.post.likeDone = !$scope.post.likeDone;
+        if ($scope.post.likeDone) {
+          if($scope.post.likeCount==undefined){
+            $scope.post.likeCount=1;
+          }else{
+            $scope.post.likeCount = $scope.post.likeCount + 1;            
+          }
+          LikesAndComments.likeUnlike("post","like",uniqueId,_id,null)
+        } else {
+          $scope.post.likeCount = $scope.post.likeCount - 1;
+          LikesAndComments.likeUnlike("post","unlike",uniqueId,_id,null)
+        }
+      };
 
+       $scope.getLikes = function(id) {
+        var formData = {
+          "_id": id
+        }
+        $http({
+          url: adminURL + "/post/getPostLikes",
+          method: "POST",
+          data: formData
+        }).success(function(data) {
+          $scope.listOfLikes = data.data;
+        });
+      };
+
+      
     $scope.focusThis = false;
     $scope.focus = function () {
       console.log("focus called");
@@ -11836,7 +11842,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   })
 
 .controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {
-
   $scope.changeLanguage = function () {
     console.log("Language CLicked");
 

@@ -175,7 +175,7 @@
             <div class="dot-line"></div>
             <div class="card-relate-holder functionmap" ng-if="journey.post">
 
-              <journey-post post="ongo" json=journey get-comments-data="getPostsCommentData(post_id,post_uniqueId,post_postString,post_likeDone)" profile=userData ng-repeat="ongo in journey.post"></journey-post>
+              <journey-post post="ongo" json=journey get-comments-data="getPostsCommentData(post)" profile=userData ng-repeat="ongo in journey.post"></journey-post>
 
               <!-- ongo journey-end -->
               <div class="ongo-journey-end" ng-if="journey.onGoing==false">
@@ -204,7 +204,7 @@
           <div class="clearfix">
             <div class="pull-left">
               <ul class="notify-like">
-                <li><a href=""><i class="fa color-blue" ng-class="post_likeDone ? 'fa-heart' : 'fa-heart-o'" ng-click="likeUnlikePost(post_uniqueId)"></i></a></li>
+                <li><a href=""><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likes(post.uniqueId,post._id)"></i></a></li>
                 <li>
                   <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve" ng-click="focus();"></a>
                 </li>
@@ -215,9 +215,9 @@
             </div>
             <div class="pull-right">
               <div class="notification-like">
-                <span class="notify-like-holder pointer avenir-roman" ng-click="showLikes=!showLikes;getLikes(ongo._id)">
+                <span class="notify-like-holder pointer avenir-roman" ng-click="showLikes=!showLikes;getLikes(post._id)">
                   <i class="fa fa-heart color-blue" ng-class="{'view-like' : showLikes == true , '' : showLikes == false}" ></i>
-                 <span>{{photos.like.length}}   </span>Like
+                 <span>{{post.likeCount|filterCount}}   </span>{{post.likeCount|singularOrPlural:'like'}}
                 <div class="like-dropdown" ng-show="showLikes">
                   <ul>
                     <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
