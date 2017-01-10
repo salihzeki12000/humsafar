@@ -9281,7 +9281,30 @@ ng-map {
           color: #fff;
         }
       }
+   .glyphicon-chevron-right,.glyphicon-chevron-left {
+         display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.glyphicon-chevron-right:before {
+       content: "\f054";
+}
+.glyphicon-chevron-left:before {
+       content: "\f053";
+}
+.carousel-indicators {
+    bottom: 0px;
+}
+.carousel-indicators li{
+border-color: #f2675b;
+&.active {
 
+    background-color: #f2675b;
+}
+}
       .nav-tabs.nav-justified {
         border-bottom: 0;
         padding-right: 45px;

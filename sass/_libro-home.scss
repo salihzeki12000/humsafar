@@ -1339,5 +1339,43 @@ a.volume-off-on {
     left: 40px;
       }
 }
+
+//About
+.about-reviews{
+.head-about{
+  padding: 100px 0;
+  min-height: 400px;
+   h4 {
+  font-size: 100px;
+ text-shadow: 3px 1px 3px rgba(0, 0, 0, 0.5);
+  @extend .avenir-heavy;
+}
+}
+.our-story {
+.title-head {
+h4{
+      padding: 15px 0;
+      font-size: 18px;
+      @extend .avenir-heavy;
+}
+}
+}
+.head-revealed {
+ul{
+  li{
+    font-size: 18px;
+       @extend .avenir-heavy;
+  }
+}
+}
+.bg-black {
+    background: #000;
+}
+.footer-about {
+    padding: 6px 20px;
+    font-size: 18px;
+    @extend .avenir-heavy;
+}
+}
 @import "fancybox-override";
 // @import "animation";
