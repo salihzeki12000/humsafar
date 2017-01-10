@@ -84,7 +84,7 @@
       <div class="user-social-item clearfix" ng-class="{'get-border' : ongo.showMap==true &&  ongo.photos.length==0 && ongo.checkIn.lat=='', '' : ongo.showMap==false && ongo.photos.length!==0 && ongo.checkIn && ongo.checkIn.lat!==''}">
         <div class="pull-left">
           <ul>
-            <li><a href=""><i class="fa color-blue" ng-class="ongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likes(ongo.uniqueId,ongo._id)"></i></a></li>
+            <li><a href=""><i class="fa color-blue" ng-class="ongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(ongo.uniqueId,ongo._id)"></i></a></li>
             <li>
               <a href="">
                 <img src="img/comments.png" alt="" height="18" ng-click="getCommentsData({'post':ongo});">
@@ -150,7 +150,7 @@
         <div class="clearfix">
           <div class="pull-left">
             <span class="color-blue mr10 card-like avenir-heavy" ng-click="cardLikeList = !cardLikeList;getLikes(ongo._id)"><i class="fa fa-heart color-blue mr5"></i><b>{{ongo.likeCount|filterCount}}</b> {{ongo.likeCount|singularOrPlural:'like'}}
-                        <div class="card-like-dropdown" ng-show="cardLikeList && ongo.likeDone">
+                        <div class="card-like-dropdown" ng-show="cardLikeList">
                           <ul>
                             <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
                           </ul>

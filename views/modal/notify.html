@@ -25,7 +25,7 @@
               <div class="notification-like">
                 <span class="notify-like-holder pointer avenir-roman" ng-click="showLikes=!showLikes;getLikes(ongo._id)">
                   <i class="fa fa-heart color-blue" ng-class="{'view-like' : showLikes == true , '' : showLikes == false}" ></i>
-                 <span>{{listOfComments.like.length|filterCount}}   </span>{{listOfComments.like.length|singularOrPlural:'like'}}
+                 <span>{{listOfComments.likeCount|filterCount}}   </span>{{listOfComments.likeCount|singularOrPlural:'like'}}
                 <div class="like-dropdown" ng-show="showLikes">
                   <ul>
                     <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
@@ -50,7 +50,7 @@
           </div>
           <div class="clearfix comment-post">
             <div class="pull-right">
-              <button class="btn btn-pink post-btn" ng-click=postPhotosComment(listOfComments.name,text,listOfComments.post,listOfComments._id)>Post</button>
+              <button class="btn btn-pink post-btn" ng-click=postPhotosComment(listOfComments.name,text,listOfComments.post,listOfComments._id)>Post</button> 
             </div>
           </div>
           <div class="view-comment-list" ng-repeat="list in listOfComments.comment">

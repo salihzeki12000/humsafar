@@ -45,7 +45,6 @@ var commontask = angular.module('commontask', [])
       });
     },
     getComments: function (type, _id, callback) {
-      console.log(type, _id, callback);
       var obj = {
         "_id": _id
       };

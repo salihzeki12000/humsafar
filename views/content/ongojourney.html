@@ -204,7 +204,7 @@
           <div class="clearfix">
             <div class="pull-left">
               <ul class="notify-like">
-                <li><a href=""><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likes(post.uniqueId,post._id)"></i></a></li>
+                <li><a href=""><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(post.uniqueId,post._id)"></i></a></li>
                 <li>
                   <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve" ng-click="focus();"></a>
                 </li>
@@ -232,17 +232,17 @@
         <div class="comment-sec">
             <div class="write-comment-text">
             <div class="commenter-img">
-              <div class="commenter-imgholder">
+              <div class="commenter-imgholder"> 
                 <img ng-src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
               </div>
             </div>
             <div class="comment-ur-text">
-              <textarea name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="text"></textarea>
+              <textarea name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="text" ng-change="testingHash(text)"></textarea>
             </div>
           </div>
           <div class="clearfix comment-post">
             <div class="pull-right">
-              <button class="btn btn-pink post-btn" ng-click=postPostsComment(post_uniqueId,text,post_id)>Post</button>
+              <button class="btn btn-pink post-btn" ng-click=postPostsComment(post.uniqueId,text,post._id)>Post</button>
             </div>
           </div>
           <div class="view-comment-list" ng-repeat="list in listOfComments.comment">
