@@ -1,12 +1,19 @@
 <div class="user-itinerary-page user-detailitinerary-page relate">
   <div class="user-banner-holder relate" scrolldown style="background-image: url('{{itinerary.itineraryType|itineraryType}}')">
     <div class="overlay-itinerary-bg"></div>
+    <div class="publish-notification-strip">
+      <div class="">
+        <p class="noti-strip-txt">Mohnish added you to this itinerary. Accept the itinerary to publish as your own </p>
+        <button class="btn btn-white-outline">Accept</button>
+        <button class="btn btn-white-outline">Decline</button>
+      </div>
+    </div>
     <div class="user-banner-detail full-width text-center">
       <div class="user-tag color-white">
         <div class="user-imgholder">
-          <img ng-src="{{itinerary.creator.profilePicture|uploadpath:115:120:'cover'}}" alt="" class="img-responsive">
+          <img ng-src="{{itinerary.user.profilePicture|uploadpath:115:125:'cover'}}" alt="" class="img-responsive">
         </div>
-        <h4 class="user-name avenir-roman">{{itinerary.creator.name}}</h4>
+        <h4 class="user-name avenir-roman">{{itinerary.user.firstName}}</h4>
       </div>
       <!-- <div class="journey-day">
         <span class="color-white avenir-roman">Jan 2016</span>
@@ -23,7 +30,7 @@
           <div class="journey-travelled-holder">
             <img ng-src="{{list.profilePicture|uploadpath:37:40:'cover'}}" alt="" class="img-responsive">
           </div>
-          <figcaption class="traveller-name avenir-roman color-white">{{list.name}}</figcaption>
+          <figcaption class="traveller-name avenir-roman color-white">{{list.firstName}}</figcaption>
         </figure>
       </div>
       <!-- start and end date -->
@@ -34,7 +41,7 @@
       <div class="journey-type-icon">
         <ul class="list-inline">
           <li ng-repeat="icon in itinerary.itineraryType track by $index">
-            <img ng-src="{{icon|kindOfJourney:'white'}}" alt="" width="{{icon.width}}" class="img-responsive">
+            <img ng-src="{{icon|kindOfJourney:'white'}}" alt="" height="30px" class="">
             <!-- Note :  use width size in backend -->
           </li>
         </ul>
@@ -56,16 +63,16 @@
     <!-- trip side pic holder -->
     <div class="trip-pic-holder relate">
       <div class="trip-pic-view {{showClass}}" ng-if="itinerary.photos.length > 0">
-        <p class="color-pink heading-gallery-name"><i class="fa fa-picture-o mr5"></i>Family Holiday 2013 Photos</p>
+        <p class="color-pink heading-gallery-name"><i class="fa fa-picture-o mr5"></i>{{itinerary.title}} Photos</p>
         <div masonry class="masonry-main side-scroll-direction">
           <div class="masonry-brick" ng-repeat="pic in itinerary.photos track by $index">
-            <div class="gallery-imgholder">
+            <div class="gallery-imgholder pointer" ng-click="getPhotosCommentData(pic._id)">
               <img ng-src="{{pic.name|uploadpath}}" alt="" class "img-responsive full-width">
             </div>
           </div>
         </div>
         <div class="user-button-holder">
-          <a class="photos btn-pink photo-button" ng-click="viewGallery();"><i class="fa fa-picture-o mr5"></i>{{itinerary.title}} 2013 Photos</a>
+          <a class="photos btn-pink photo-button" ng-click="viewGallery();"><i class="fa fa-picture-o mr5"></i>{{itinerary.title}} Photos</a>
           <a class="photos btn-dark-blue close-button" ng-click="viewGallery();"><i class="fa fa-chevron-down mr5"></i>Close</a>
         </div>
       </div>
@@ -147,8 +154,9 @@
               <!-- trip accordion heading end-->
               <div class="listing-accordion">
                 <uib-accordion close-other="oneAtATime">
-                  <uib-accordion-group is-open="city.isOpen" ng-repeat="city in country.cityVisited" ng-scroll="city in country.cityVisited">
-                    <uib-accordion-heading class="relate">
+                  <uib-accordion-group is-open="city.isOpen" ng-repeat="city in country.cityVisited" ng-scroll="city in country.cityVisited" class="kaiyaa">
+                    <uib-accordion-heading class="relate city-coverphoto">
+                      <!-- <img ng-src="{{city.city.cityCoverPhoto|uploadpath}}" alt="" class="img-responsive"> -->
                       <div class="journey-accordion-heading color-white">
                         <a name="{{city.city._id}}" class="journey-head">
                           <div class="clearfix">

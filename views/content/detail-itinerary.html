@@ -91,7 +91,7 @@
                         <ui-select-choices repeat="{'_id':list._id,'name':list.name,'email':list.email,'urlSlug':list.urlSlug} as list in followersList" refresh="listFollowers($select.search)" refresh-delay="0">
                           <img class="round-travelledimg" alt="{{list.name}}" ng-src="{{list.profilePicture|uploadpath:35:40:'cover'}}" width="30" />
                           <div class="travelwith-namestyle">
-                            <span ng-bind="list.name"></span>
+                            <span class="travel-with-name">{{list.name}}</span>
                             <span class="at-tag-travelselect">@ {{list.urlSlug}}</span>
                           </div>
                         </ui-select-choices>
@@ -158,7 +158,7 @@
                             <div class="itinerary-inputholder">
                               <!-- <input type="date" class="form-control text-center" id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)"> -->
                               <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="editCountry.datePopUp.to=true" uib-datepicker-popup="{{format}}" is-open="editCountry.datePopUp.to" datepicker-options="editCountry.datePopUp" close-text="Close" alt-input-formats="altInputFormats"
-                                  id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)" />
+                                  id="To_{{countryPanel}}{{cityPanel}}"  ng-model="editCountry.to" init-date="editCountry.from" ng-change="getDays(editCountry)" />
                             </div>
                           </div>
                           <div class="itinerary-duration">
@@ -326,7 +326,7 @@
                               <ui-select multiple ng-model="city.days.stay" theme="bootstrap" tagging="tagHandler">
                                 <ui-select-match placeholder="Search Hotel From Google or Enter Manually">{{$item.name}}</ui-select-match>
                                 <ui-select-choices repeat="{'name':hotels.name} as hotels in google.hotels" refresh="findResults(city.placeId,'Hotels & Accomodations',$select.search,'onchange')" refresh-delay="0">
-                                  <span ng-bind="hotels.name"></span>
+                                  <span>{{hotels.name}} , {{hotels.vicinity}}</span>
                                 </ui-select-choices>
                               </ui-select>
                             </div>
@@ -357,7 +357,7 @@
                               <ui-select multiple ng-model="city.days.ate" theme="bootstrap" tagging="tagHandler">
                                 <ui-select-match placeholder="Search Restaurants From Google or Enter Manually">{{$item.name}}</ui-select-match>
                                 <ui-select-choices repeat="{'name':resto.name} as resto in google.restaurants" refresh="findResults(city.placeId,'Restaurants & Bars',$select.search,'onchange')" refresh-delay="0">
-                                  <span ng-bind="resto.name"></span>
+                                  <span>{{resto.name}} , {{resto.vicinity}}</span>
                                 </ui-select-choices>
                               </ui-select>
                             </div>
@@ -388,7 +388,7 @@
                               <ui-select multiple ng-model="city.days.mustDo" theme="bootstrap" tagging="tagHandler">
                                 <ui-select-match placeholder="Search Things You Did From Google or Enter Manually">{{$item.name}}</ui-select-match>
                                 <ui-select-choices repeat="{'name':mustdo.name} as mustdo in google.mustDos | filter:$select.search" refresh="findResults(city.placeId,'Sights',$select.search,'onchange')" refresh-delay="0">
-                                  <span ng-bind="mustdo.name"></span>
+                                  <span>{{mustdo.name}}, {{mustdo.vicinity}}</span>
                                 </ui-select-choices>
                               </ui-select>
                             </div>
