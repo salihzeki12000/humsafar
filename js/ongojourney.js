@@ -397,6 +397,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         modal.closed.then(function(){
           $scope.otgPhotoArray=[];
           $scope.photoSec=false;
+          $scope.otgPhoto= [];
         });
       };
       // add photo videos otg end
