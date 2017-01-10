@@ -1550,6 +1550,22 @@ header {
     color: $brand-cyan;
   }
 }
+// delete country visited list
+.delete-your-country {
+  padding: 20px 0 0;
+  margin-top: 20px;
+  background-color: #fff;
+  text-align: center;
+  @extend .avenir-roman;
+  .delete-confirmation {
+    padding: 10px;
+    display: block;
+    margin-top: 10px;
+    border: 1px solid $brand-light-grey;
+    @extend .avenir-roman;
+    cursor: pointer;
+  }
+}
 // travel life
 
 .travelled-imgholder {
@@ -2243,7 +2259,7 @@ header {
     padding: 10px;
     position: relative;
     font-size: 15px;
-
+    p {padding-right: 60px; }
     .location {
       @include position(absolute, 10px 10px null null);
     }
@@ -2644,10 +2660,9 @@ header {
   vertical-align: top;
   margin-right: 37px;
   margin-bottom: 15px;
-
-  &:nth-child(4n+4) {
-    margin-right: 0;
-  }
+  // &:nth-child(4n+4) {
+  //   margin-right: 0;
+  // }
 
   .review-backimgholder {
     @include square(120px);
@@ -4352,9 +4367,8 @@ header {
   background-color: #fff;
   .user-social-item {
     padding: 8px 2px ;
-    &.get-border {
-      border-top: 1px solid #b2b2b2;
-    }
+    border-top: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
   }
   .journey-rate {
     margin-bottom: 5px;
@@ -4397,6 +4411,7 @@ header {
 .journey-post {
   .post {
     color: #424242;
+    word-break: break-all;
     @extend .avenir-roman;
 
     b {
@@ -5464,15 +5479,13 @@ header {
 
 .tagfriend-list {
   width: 100%;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
+  border-radius: 0px 0px 6px 6px;
   box-shadow: 1px 2px 3px #272727;
   position: absolute;
-  top: 40px;
+  top: 64px;
   left: 0;
   z-index: 3;
   overflow: hidden;
-
   ::-webkit-scrollbar {
     width: 5px;
   }
@@ -5489,27 +5502,25 @@ header {
     max-height: 250px;
     overflow-y: auto;
   }
-
   li {
     background-color: #fff;
-    padding: 10px 15px;
-
-    &:nth-child(odd) {
-      background-color: #e7e7e7;
-    }
+    padding: 5px 15px;
+    // &:nth-child(odd) {
+    //   background-color: #e7e7e7;
+    // }
   }
+  a { font-size: 14px; }
 }
 
 .friend-listholder {
   .friend-imgholder {
-    width: 34px;
-    height: 37px;
-    border-radius: 15px;
-    margin-right: 15px;
+    width: 25px;
+    height: 28px;
+    border-radius: 10px;
+    margin-right: 5px;
     display: inline-block;
     overflow: hidden;
     vertical-align: middle;
-
     img {
       min-height: 100%;
     }
@@ -5696,57 +5707,70 @@ header {
 .dropdown-otg-category,
 .search-otg-location {
   width: 100%;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
+  border-radius: 0px 0px 6px 6px;
   box-shadow: 1px 2px 3px #272727;
   position: absolute;
   top: 65px;
   left: 0;
-  z-index: 5;
+  z-index: 11;
+  background-color: #fff;
   overflow: hidden;
-
   ::-webkit-scrollbar {
     width: 5px;
   }
-
   ::-webkit-scrollbar-thumb {
     background-color: $brand-pink;
   }
-
   ::-webkit-scrollbar-track {
     background-color: transparent;
   }
-
   ul {
     max-height: 250px;
     overflow-y: auto;
   }
-
   li {
-    padding: 10px 15px;
+    padding: 5px 15px;
     background-color: #fff;
-    border-bottom: 1px solid #ccc;
-
-    &:nth-child(odd) {
-      background-color: #e7e7e7;
-    }
+    border-bottom: 1px solid #ebebeb;
+    // &:nth-child(odd) {
+    //   background-color: #e7e7e7;
+    // }
   }
 
   a {
     display: block;
-    color: $brand-blue;
+    color: $brand-light-grey;
     font-family: "AvenirLTStd-Roman";
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
 .tag-journey-friend {
   min-height: 63px;
+  padding: 10px 10px 0;
   position: relative;
-
   img.icon-tag {
     position: absolute;
   }
+}
+.tagged-buddy-images {
+  ::-webkit-scrollbar { height: 0px; }
+  ::-webkit-scrollbar-thumb { background-color: #000; }
+  ::-webkit-scrollbar-track { background-color: #ccc; }
+}
+.buddy-tagged-view {
+  width: 259px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.buddy-viewholder {
+  width: 25px;
+  height: 24px;
+  border: 1px solid #fff;
+  border-radius: 9px;
+  margin: 5px 5px 0px 0;
+  display: inline-block;
+  overflow: hidden;
 }
 
 .tag-otg-friend {
@@ -5785,18 +5809,27 @@ header {
 
 .otg-thought {
   padding-left: 30px;
-
+  ::-webkit-scrollbar { width: 2px; }
+  ::-webkit-scrollbar-thumb { background-color: #fff; }
+  ::-webkit-scrollbar-track { background-color: $brand-pink; }
   textarea {
     height: 43px;
     padding: 3px 6px;
+    overflow-x: hidden;
+    overflow-y: auto;
     border: none;
     background-color: transparent;
     font-family: "AvenirLTStd-Medium";
     font-size: 15px;
-
     &:focus {
       height: 100px;
+      + .thoughtCount { display: block; }
     }
+  }
+  .thoughtCount {
+    font-size: 13px;
+    text-align: right;
+    display: none;
   }
 }
 
@@ -5854,19 +5887,27 @@ header {
   left: 0;
   background-color: rgba(0,0,0,0.6);
   @include transition(all 300ms linear);
-
+  .edit-otg-caption {
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-thumb { background-color: $brand-pink; }
+    ::-webkit-scrollbar-track { background-color: $brand-pink; }
+  }
   textarea {
     width: 100%;
     height: 90px;
+    overflow-y: auto;
+    overflow-x : hidden;
     border: none;
     margin-top: 15px;
     background-color: transparent;
     color: #fff;
     font-family: "AvenirLTStd-Medium";
+    font-size: 13px;
     @include placeholder {
       color: #fff;
     };
   }
+  i.fa-angle-down { font-size: 36px; }
 }
 
 .show-otg-caption {
@@ -5891,6 +5932,7 @@ header {
   right: 5px;
   bottom: 5px;
   color: #fff;
+  font-size: 10px;
 }
 // video edit
 
@@ -5953,6 +5995,19 @@ header {
   bottom: 30px;
   right: 15px;
 }
+.add-more-pic {
+  @include square(25px);
+  border-radius: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  .create-btn {
+    padding: 0;
+  }
+  input { @include square(25px); }
+}
 
 .putmore-photo-video {
   @include square(25px);
@@ -5991,7 +6046,7 @@ header {
 .otg-upload-btn {
   margin: 15px 0 0;
 
-  upload-image-otg {
+  upload-image-otg, upload-image {
     width: 100%;
     position: absolute;
     top: 0;
@@ -6769,22 +6824,24 @@ header {
 }
 
 .trip-view-photo .delete-detail-pic {
+  padding: 5px 6px;
+  border-radius: 100%;
   position: absolute;
   top: 5px;
   right: 5px;
   font-size: 16px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
   color: #fff;
-  background: transparent;
   cursor: pointer;
+  line-height: 1;
   z-index: 1;
 }
 
 .trip-view-photo .view-caption-onimg {
+  width: 100%;
   position: absolute;
   bottom: 0;
   text-align: center;
-  width: 100%;
-
   span {
     color: #fff;
     background: none;
@@ -7455,13 +7512,7 @@ header {
   color: #a0a0a0;
 }
 
-.detail-select-box .ui-select-dropdown {
-  border: none;
-
-  li {
-    border: none;
-  }
-
+.detail-select-box {
   ::-webkit-scrollbar {
     width: 3px;
   }
@@ -7473,8 +7524,13 @@ header {
   ::-webkit-scrollbar-thumb {
     background-color: $brand-pink;
   }
+  .ui-select-dropdown {
+    border: none;
+    li {
+      border: none;
+    }
+  }
 }
-
 .detail-select-box .ui-select-choices-row > span {
   color: #a0a0a0;
   border-bottom: 1px solid #ebebeb;
@@ -7488,6 +7544,9 @@ header {
   .travelwith-namestyle {
     display: inline-block;
     vertical-align: top;
+    .travel-with-name {
+      color: #424242;
+    }
   }
   .at-tag-travelselect {
     display: block;
@@ -7512,16 +7571,16 @@ header {
 
   .ui-select-dropdown {
     border: none;
-
     li {
-      border: none;
+      border-bottom: 1px solid #ebebeb;
+      &:first-child { border: none; }
     }
   }
 
   .ui-select-choices-row > span {
     color: #a0a0a0;
-    border-bottom: 1px solid #ebebeb;
-
+    // border-bottom: 1px solid #ebebeb;
+    border: none;
     &:hover {
       color: #a0a0a0;
     }
@@ -7735,7 +7794,7 @@ header {
     .user-about-trip {
       width: 100%;
       // min-height: 250px;
-      color: #787878;
+      color: #424242;
     }
   }
 
@@ -7861,10 +7920,10 @@ header {
 
   .user-tag {
     .user-imgholder {
-      width: 105px;
-      height: 110px;
+      width: 85px;
+      height: 9px;
       border: 2px solid #fff;
-      border-radius: 37px;
+      border-radius: 30px;
       margin: 0 auto;
       overflow: hidden;
     }
@@ -8109,7 +8168,27 @@ header {
   .trip-status-main {
     right: 15px;
   }
+  .publish-notification-strip {
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.7);
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    z-index: 1;
 
+    .noti-strip-txt {
+      display: inline-block;
+      margin: 0;
+    }
+
+    .btn-white-outline {
+      margin: 0 10px;
+    }
+  }
   .journey-start-end {
     margin: 12px 0;
     p {
@@ -8563,6 +8642,16 @@ header {
     padding: 5px 10px;
     border-bottom: 1px solid #ebebeb;
   }
+  .profile-picholder {
+    width: 25px;
+    height: 27px;
+    border-radius: 10px;
+    border: 1px solid $brand-light-grey;
+    box-shadow: 1px 2px 3px $brand-grey;
+    display: inline-block;
+    overflow: hidden;
+  }
+  .profile-detailed { display: inline-block; }
   .profile-name { font-size: 14px; }
   .profile-tag { font-size: 12px; }
   .following-btn {

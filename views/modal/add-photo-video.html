@@ -4,6 +4,9 @@
     <!-- add otg title -->
     <div class="edit-otg-title add-otg-title">
       <h4 class="avenir-roman text-center color-white">Add Photos & Videos</h4>
+      <div class="pull-right">
+        <div class="close pop-close-btn notify-close" ng-click="$dismiss();"><i class="fa fa-times"></i></div>
+      </div>
     </div>
     <!-- add otg title end-->
     <!-- add otg photos and videos -->
@@ -14,16 +17,16 @@
           <div class="view-photo-sec otg-bg-all">
             <div class="otg-photo-count">
               <img src="img/ongojourney/otg-photo.png" alt="" class="img-responsive" width="25">
-              <span class="avenir-roman">({{otgPhoto.length}})</span>
+              <span class="avenir-roman">({{otgPhotoArray.length}})</span>
             </div>
             <!-- photo upload -->
             <div class="uplad-otg-sec" ng-hide="photoSec">
               <img src="img/upload-blue.png" alt="" class="m-center img-responsive" width="47px">
-              <p class="text-center color-dark-blue avenir-roman">Drag photo here</p>
+              <p class="text-center color-dark-blue avenir-roman">Drag photos here</p>
               <span class="block text-center color-dark-blue avenir-roman">-or-</span>
               <div class="otg-upload-btn relate text-center">
-                <button class="btn btn-pink btn-more pointer">Select Photos from your computer</button>
-                <upload-image-otg multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data,length);" no-view class="pointer"></upload-image-otg>
+                <button class="btn btn-pink btn-more pointer">Select photos from your computer</button>
+                <upload-image multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data);" no-view class="pointer"></upload-image>
               </div>
             </div>
             <!-- photo upload end-->
@@ -34,7 +37,7 @@
                   <div class="otg-slider-row row-flex" ng-repeat="slide in photo track by $index">
                     <div class="otg-column col-flex" ng-repeat="column in slide track by $index">
                       <div class="otg-photo-holder" >
-                        <img ng-src="{{column.name|uploadpath}}" alt="" class="img-responsive get-center">
+                        <img ng-src="{{column.name|uploadpath:300:300:'cover'}}" alt="" class="img-responsive get-center">
                         <!-- add front caption -->
                         <div class="otg-photo-caption" ng-hide="column.name==indexPhotoCaption" ng-click="addMoreCaption(column.name);">
                           <p class="color-white avenir-roman m-clear" ng-if="!column.caption || column.caption==''">Add Captions</p>
@@ -53,7 +56,7 @@
                         </div>
                         <!-- add back caption end-->
                         <!-- add caption end-->
-                        <div class="delete-otg-photo" ng-click="deletePhotos(column.name)">
+                        <div class="delete-otg-photo" ng-hide="column.name==indexPhotoCaption" ng-click="deletePhotos(column.name)">
                           <i class="fa fa-trash-o"></i>
                         </div>
                       </div>
@@ -64,12 +67,11 @@
             </div>
             <!-- flex slider for photo in 2 row end -->
             <!-- add more photo video part -->
-            <div class="add-otg-more">
+            <div class="add-otg-more" ng-show="photoSec">
               <span class="putmore-photo-video" data-toggle="collapse" data-target="#addMorePic"><i class="fa fa-plus"></i></span>
               <div class="add-more-pic collapse" id="addMorePic">
                 <upload-image-otg multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data,length);" no-view>
                 </upload-image-otg>
-                <span>Click above</span>
               </div>
             </div>
             <!-- add more photo video part end-->
@@ -86,10 +88,10 @@
             <!-- video upload -->
             <div class="uplad-otg-sec">
               <img src="img/upload-blue.png" alt="" class="m-center img-responsive"  width="47px">
-              <p class="text-center color-dark-blue avenir-roman">Drag video here</p>
+              <p class="text-center color-dark-blue avenir-roman">Drag a video here</p>
               <span class="block text-center color-dark-blue avenir-roman">-or-</span>
               <div class="otg-upload-btn text-center">
-                <button class="btn btn-pink btn-more">Select Videos from your computer</button>
+                <button class="btn btn-pink btn-more">Select a videos from your computer</button>
               </div>
             </div>
             <!-- video upload end-->
@@ -139,7 +141,7 @@
   <!-- add otg end-->
   <!-- save or cancel otg -->
   <div class="save-cancel-otg text-center">
-    <a href="" class="color-white" ng-click="$dismiss();">Cancel</a>
+    <a href="" class="color-white" ng-click="$close();">Cancel</a>
     <button class="btn btn-pink btn-more" ng-click="savePhotosVideos(); $dismiss();">Done</button>
   </div>
   <!-- save or cancel otg end-->
