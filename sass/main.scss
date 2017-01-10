@@ -6279,6 +6279,19 @@ header {
   margin-bottom: 15px;
 }
 
+.add-city-quick{
+  color: $brand-light-grey;
+  font-size: 12px;
+  font-style: italic;
+  @extend .avenir-roman;
+}
+
+.add-country-quick{
+  @extend add-city-quick;
+  margin-top: 5px;
+  display: block;
+}
+
 .itinerary-inputholder {
   position: relative;
 
@@ -6380,7 +6393,7 @@ header {
       }
 
       a {
-        color: $brand-lighter-grey;
+        color: $brand-light-grey;
       }
     }
   }
@@ -6589,12 +6602,13 @@ header {
     }
 
     .ui-select-match-item {
-      border-radius: 0;
-      border-color: $brand-pink;
+      border-radius: 4px;
+      border-color: $brand-light-grey;
       margin: 0 0 0 3px;
 
       &:hover {
-        background-color: transparent;
+        background-color: #fff;
+        color: $brand-light-grey;
       }
     }
 
@@ -6606,15 +6620,34 @@ header {
     }
   }
 
+  .ui-select-choices-row {
+   padding: 5px 20px;
+   border-bottom: 1px solid $brand-lighter-grey;
+
+   &:hover {
+     background-color: #fff;
+     color: $brand-light-grey;
+
+     .ui-select-choices-row-inner {
+       background-color: #fff;
+       color: $brand-light-grey;
+     }
+   }
+   &:last-child {
+     border: none;
+   }
+ }
+
   .ui-select-choices-row.active > span {
-    background-color: $brand-pink;
+    background-color: #fff;
+    color: $brand-light-grey;
   }
   // country visited input ui select end
   // remove country city panel
   .remove-countrycity-panel {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 6px;
+    right: -5px;
   }
   // remove country city panel end
 }
@@ -6838,10 +6871,11 @@ header {
   top: 5px;
   right: 5px;
   font-size: 16px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+  background: transparent;
   color: #fff;
   cursor: pointer;
   line-height: 1;
+  text-shadow: 0 2px 3px #000;
   z-index: 1;
 }
 
