@@ -2511,18 +2511,18 @@ header {
 }
 // travel moment imgholder
 
-.moment-travel-main {
-  .moment-travel-view:nth-child(5n+1) {
-    margin: 15px 22px 15px 0;
-  }
+// .moment-travel-main {
+//   .moment-travel-view:nth-child(5n+1) {
+//     margin: 15px 22px 15px 0;
+//   }
 
-  .moment-travel-view:nth-child(5n+5) {
-    margin: 15px 0 15px 22px;
-  }
-}
+//   .moment-travel-view:nth-child(5n+5) {
+//     margin: 15px 0 15px 22px;
+//   }
+// }
 
 .moment-travel-view {
-  margin: 15px 22px;
+  margin: 15px 44px 15px 0;
   display: inline-block;
 }
 
@@ -2564,18 +2564,18 @@ header {
 // travel moment imgholder end
 // local moment imgholder
 
-.moment-local-main {
-  .moment-local-view:nth-child(5n+1) {
-    margin: 15px 22px 15px 0;
-  }
+// .moment-local-main {
+//   .moment-local-view:nth-child(5n+1) {
+//     margin: 15px 22px 15px 0;
+//   }
 
-  .moment-local-view:nth-child(5n+5) {
-    margin: 15px 0 15px 22px;
-  }
-}
+//   .moment-local-view:nth-child(5n+5) {
+//     margin: 15px 0 15px 22px;
+//   }
+// }
 
 .moment-local-view {
-  margin: 15px 22px;
+  margin: 15px 44px 15px 0;
   display: inline-block;
 }
 

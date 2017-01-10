@@ -56,9 +56,16 @@
             <div class="row">
               <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10">
                 <div class="row">
-                  <div class="col-md-6 col-sm-6 hidden-xs">
+                  <div class="col-md-6 col-sm-6">
+                    <div class="video-gif-journey">
                     <div class="mobile-gif">
                       <img src="img/profile-empty/gif-mobile.png" alt="GIF Travelibro" class="img-responsive">
+                    </div>
+                        <div class="videoplay-empty-journey">
+                        <video width="238px" height="100%">
+                          <source src="img/libro-home/video/Travel_life.mp4" type="video/mp4">
+                        </video>
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-6">
@@ -344,11 +351,18 @@
           <!-- user logged for first time local life-->
           <div class="empty-profile-journey">
             <div class="row">
-              <div class="col-md-offset-2 col-md-8">
+              <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10">
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="mobile-gif">
-                      <img src="img/profile-empty/gif-mobile.png" alt="GIF Travelibro" class="img-responsive">
+                    <div class="video-gif-journey">
+                      <div class="mobile-gif">
+                        <img src="img/profile-empty/gif-mobile.png" alt="GIF Travelibro" class="img-responsive">
+                      </div>
+                        <div class="videoplay-empty-journey">
+                        <video width="238px" height="100%">
+                          <source src="img/libro-home/video/Local_life.mp4" type="video/mp4">
+                        </video>
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -366,9 +380,15 @@
           </div>
           <!-- user logged for first time local life end -->
           <div class="local-life-main">
-            <div class="inline-block filter-local-life avenir-roman">
+                          <div class="overlay-filter" ng-class="{ 'fliter-open': isopen}"  ng-click="openMyLifeFilter()"></div>
+            <div class="inline-block filter-local-life avenir-roman" ng-class="{ 'fliter-open': isopen} ">
               <form action="">
                 <div class="clearfix pt10 pl20 pr20">
+                     <div class="pull-right visible-xs" ng-click="openMyLifeFilter()">
+                    <span class="clear-all pointer pl20">
+                      <i class="fa fa-times-circle-o fnt-20" aria-hidden="true"></i>
+                    </span>
+                  </div>
                   <div class="pull-right">
                     <span class="clear-all pointer">Clear All</span>
                   </div>
@@ -509,6 +529,9 @@
               <div class="relate">
                 <div class="bg-dark-cyan post-header-view">
                   <div class="clearfix">
+                    <div class="pull-right mylife-filter font-bold inline-block v-mid pointer visible-xs" ng-click="openMyLifeFilter()">
+                      Filter <i class="fa fa-filter"></i>
+                    </div>
                     <div class="pull-left">
                       <div class="post-list-view">
                         <ul class="list-inline">
@@ -519,7 +542,13 @@
                         </ul>
                       </div>
                     </div>
-                    <div class="pull-right">
+                    <div class="pull-right hidden-xs">
+                      <div class="total-post">
+                        <span>Total Post's <b>128</b></span>
+                      </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                    <div class="visible-xs">
                       <div class="total-post">
                         <span>Total Post's <b>128</b></span>
                       </div>
