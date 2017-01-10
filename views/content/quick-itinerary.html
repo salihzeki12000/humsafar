@@ -72,8 +72,8 @@
                   <div class="itinerary-inputholder input-country-visited">
                     <ui-select ng-model="add.country" theme="bootstrap" on-select="updateCountryPanel(countryPanel,add.country)" ng-click="updateCountriesArr($select.selected._id)">
                       <ui-select-match placeholder="Country Visited ">{{$select.selected.name}}</ui-select-match>
-                      <ui-select-choices repeat="nation._id as nation in countries | filter: $select.search">
-                        <span ng-bind="nation.name"></span>
+                      <ui-select-choices repeat="nation._id as nation in countries | filter: $select.search"><img ng-src="{{nation.flag|uploadpath}}" width="30" class="mr10 v-mid" alt="{{nation.name}}">
+                        <span class="color-light-grey" ng-bind="nation.name"></span>
                       </ui-select-choices>
                     </ui-select>
                   </div>
@@ -90,7 +90,7 @@
                       </ui-select-choices>
                     </ui-select>
                   </div>
-                  <i class="avenir-roman color-light-grey">Add other cities visited in this country on this trip</i>
+                  <span class="add-city-quick">Add other cities visited in this country on this trip</span>
                 </div>
                 <!-- new ui select dropdown for city end-->
                 <!--temporary-->
@@ -101,7 +101,7 @@
             <!--<div class="quick-add-country clearfix text-center" ng-if="countryPanel+1==addCountry.length">-->
             <div class="quick-add-country clearfix text-center">
               <button class="btn btn-pink" ng-click="addPanel()">Add Country</button>
-              <i class="color-light-grey avenir-roman block mt5">If you have visited any other country on the same trip</i>
+              <span class="add-country-quick">If you have visited any other country on the same trip</span>
             </div>
             <!-- country and city visited end-->
             <!-- trip descp -->
@@ -116,8 +116,8 @@
               <label for="trip-photo">Upload Trip Photo</label>
               <div class="trip-photo-holder">
                 <div class="trip-view-photo" ng-repeat="photo in qItinerary.photos track by $index">
-                  <img ng-src="{{photo.name|uploadpath}}" alt="Quick Itinerary" class="img-responsive get-center">
-                  <span class="delete-detail-pic"><i ng-click="removePhoto($index,city)" class="fa fa-times"></i></span>
+                  <img ng-src="{{photo.name|uploadpath:250:250:'cover'}}" alt="Quick Itinerary" class="img-responsive get-center">
+                  <span class="delete-detail-pic" ng-hide="photo.name==index"><i ng-click="removePhoto($index,city)" class="fa fa-times"></i></span>
                   <!-- caption start -->
 
                   <div class="detail-pic-caption" ng-click="addQuickCaption(photo.name);"
@@ -142,11 +142,11 @@
                   <div class="upload-section">
                     <div ng-if="qItinerary.photos.length==0">
                       <img src="img/upload-icon.jpg" alt="" class="m-center img-responsive">
-                      <p class="text-center color-grey avenir-roman">Drag a your itinerary photos here</p>
+                      <p class="text-center color-grey avenir-roman">Drag an itinerary photo here</p>
                       <span class="block color-grey avenir-roman">- or -</span>
                     </div>
                     <div class="upload-btn relate">
-                      <button class="btn btn-dark-blue pointer avenir-light pointer">Select a photo from your computer</button>
+                      <button class="btn btn-dark-blue pointer avenir-light pointer">Select photos from your computer</button>
                       <upload-image ng-model="formData.photo" ng-callback="addPhotosCallback(data)" multiple="true" class="quick-upload-photos"></upload-image>
                     </div>
                   </div>

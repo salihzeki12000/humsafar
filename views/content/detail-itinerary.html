@@ -449,7 +449,7 @@
               <label for="trip-photo">Upload Trip Photo</label>
               <div class="trip-photo-holder">
                 <div class="trip-view-photo" ng-repeat="photo in dItinerary.photos track by $index">
-                  <span class="delete-detail-pic"><i ng-click="removePhoto($index,city)" class="fa fa-times"></i></span>
+                  <span class="delete-detail-pic" ng-hide="photo.name==index"><i ng-click="removePhoto($index,city)" class="fa fa-times"></i></span>
                   <img ng-src="{{photo.name|uploadpath}}" alt="Quick Itinerary" class="img-responsive get-center">
                   <!-- <div class="remove-quick-photo text-right">
                     <div class="delete-photo"><i class="fa fa-times color-white pointer" ng-click="removePhoto($index,city)"></i></div>
