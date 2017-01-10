@@ -142,7 +142,7 @@
                 <div class="travelling-journey-type">
                   <div class="clearfix">
                     <div class="pull-left">
-                      <ul> 
+                      <ul>
                         <li ng-repeat="list in journey.kindOfJourney|limitTo:3">
                           <a href="">
                             <img ng-src="{{list|kindOfJourney:'blue'}}" alt="" height="15">
@@ -232,12 +232,18 @@
         <div class="comment-sec">
             <div class="write-comment-text">
             <div class="commenter-img">
-              <div class="commenter-imgholder"> 
+              <div class="commenter-imgholder">
                 <img ng-src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
               </div>
             </div>
-            <div class="comment-ur-text">
+            <div class="comment-ur-text relate">
               <textarea name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="text" ng-change="testingHash(text)"></textarea>
+              <div class="dropdown-hashtag">
+                <ul>
+                  <li><a href="">#angularJs</a></li>
+                  <li><a href="">#traveLibro</a></li>
+                </ul>
+              </div>
             </div>
           </div>
           <div class="clearfix comment-post">
