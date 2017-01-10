@@ -828,19 +828,33 @@ img {
     font-size: 15px;
         height: 30px;
 }
+.heading-single-view {
+    padding: 10px;
+    h2 {
+    font-size: 24px;
+}
+}
+.city-accordion {
+  .panel-default { .panel-heading {
+    padding: 6px 10px;
+    border-bottom: 2px solid #f2675b;
+     h3 {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.panel-title {
+    font-size: 15px;
+}
+}
+.panel-heading + .panel-collapse > .panel-body {
+    padding: 0;
+    border: none;
+}
+  }
+}
 }
 
-//video mylife
-// .video-gif-journey{ .mobile-gif {
-//     margin: 0 auto;
-// }
-// .videoplay-empty-journey {
-//     position: absolute;
-//     top: 54%;
-//     left: 50%;
-//     @include transform(translate(-50%,-50%));
-// }
-// }
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
@@ -945,6 +959,7 @@ img {
 }
 .empty-travel-journey {
     text-align: justify;
+    padding-top: 20px;
 }
 .journey-cycle img {
     width: 50px;
@@ -1304,6 +1319,12 @@ margin-right: auto
 }
 .itinerary-main .itinerary-holder .row-flex .col-flex .itinerary-imgholder.itinerary-detailed {
     min-height: 210px;
+}
+.video-gif-journey{ 
+      width: 260px;
+  .videoplay-empty-journey {
+    left: 12px;
+}
 }
 }
 // media query for 480px to 320px end
