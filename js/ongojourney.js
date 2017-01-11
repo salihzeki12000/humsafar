@@ -189,6 +189,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       $scope.newBuddies = [];
       $scope.ongo.getSearchedList="";
       $scope.ongo.buddiesCount=0;
+      console.log($scope.ongo,"ongo ka journey");
       if ($scope.ongo.checkIn && $scope.ongo.checkIn.location) {
         $scope.checkInData = _.cloneDeep($scope.ongo.checkIn);
       }
@@ -324,6 +325,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           }
         }).success(function(location) {
           console.log("geolocationdtata", location);
+          _.each(location.data, function(o) {
+            o.name = o.name+", "+o.vicinity;
+          });
           $scope.nearByLocation = location.data;
         });
       };
@@ -340,7 +344,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
             }
           }).success(function(location) {
             _.each(location.data, function(o) {
-              o.name = o.description.split(",")[0]
+              o.name = o.description;
             });
             $scope.nearByLocation = location.data;
           });
@@ -392,6 +396,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           backdropClass: "review-backdrop",
           size: "lg",
           scope: $scope,
+          backdrop: 'static'
         })
         console.log($scope.ongo, "add wala");
         modal.closed.then(function(){
@@ -477,6 +482,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
             console.log(data);
             if (data.value === true) {
               $scope.ongo.photos = _.concat($scope.ongo.photos, $scope.otgPhoto);
+              console.log($scope.ongo.photos,"check");
             }
             $scope.otgPhoto = [];
             $scope.otgPhotoArray = [];
@@ -617,6 +623,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           templateUrl: "views/modal/edit-otg.html",
           size: "lg",
           scope: $scope,
+          backdrop: 'static',
           backdropClass: "review-backdrop"
         });
         console.log("abc", $scope.ongo);
@@ -687,7 +694,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
             journeyUniqueId: $scope.json.uniqueId,
             "uniqueId": $scope.ongo.uniqueId,
             "_id": $scope.ongo._id,
-            photos: $scope.photosId,
             videos: [],
             buddiesArr: $scope.newBuddies,
             hashtag: [],
@@ -724,11 +730,16 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
             method: "POST",
             data: editedData,
           }, function(data) {
-            $scope.getNewData = data.data;
-            $scope.editedData = {};
-            console.log($scope.getNewData, "new edit data");
-            console.log($scope.editedData, "edit ka data");
+            console.log(data, 'kya hai data');
+            if( data === true ) {
+
+              // $scope.ongo.photos = $scope.photosArray;
+              // $scope.ongo.buddies = $scope.newBuddies;
+              // $scope.ongo.thoughts = editedData.thoughts;
+            }
+            // $scope.editedData = {};
           })
+          console.log($scope.ongo, "journey ka arrray");
         }
         // edit save data end
         // edit otg checkin end
