@@ -1,4 +1,4 @@
-<div class="profile-list-main" ng-class="{'bg-white' : activeMenu == 'countriesVisited' || activeMenu == 'bucketList', '' : activeMenu !== 'countriesVisited' || activeMenu !== 'bucketList'}">
+<div class="profile-list-main" ng-class="{'bg-white full-height' : activeMenu == 'countriesVisited' || activeMenu == 'bucketList', '' : activeMenu !== 'countriesVisited' || activeMenu !== 'bucketList'}" ng-init="searchCard.name=''">
   <!-- profile tab strip -->
   <div class="profile-tab-strip">
     <div class="container-fluid">
@@ -6,8 +6,8 @@
         <div class="pull-left">
           <div class="list-profile-tab">
             <ul>
-              <li><a href="" ng-click="changeStatus('following')" ng-class="{'active-list': activeMenu == 'following'}">Following - <span class="avenir-heavy">{{count.following_count}}</span></a></li>
-              <li><a href="" ng-click="changeStatus('followers')" ng-class="{'active-list': activeMenu == 'followers'}">Followers - <span class="avenir-heavy">{{count.followers_count}}</span></a></li>
+              <li><a href="" ng-click="changeStatus('following',followingList);" ng-class="{'active-list': activeMenu == 'following'}">Following - <span class="avenir-heavy">{{count.following_count}}</span></a></li>
+              <li><a href="" ng-click="changeStatus('followers',followersList);" ng-class="{'active-list': activeMenu == 'followers'}">Followers - <span class="avenir-heavy">{{count.followers_count}}</span></a></li>
               <li><a href="" ng-click="changeStatus('countriesVisited')" ng-class="{'active-list': activeMenu == 'countriesVisited'}">Countries Visited - <span class="avenir-heavy">{{count.countriesVisited_count}}</span></a></li>
               <li><a href="" ng-click="changeStatus('bucketList')" ng-class="{'active-list': activeMenu == 'bucketList'}">Bucket List - <span class="avenir-heavy">{{count.bucketList_count}}</span></a></li>
             </ul>
@@ -17,13 +17,14 @@
           <form action="">
             <!-- search friend -->
             <div class="search-friend" ng-if="activeMenu == 'following' || activeMenu == 'followers'">
-              <div class="follow-followers-holder">
-                <input type="text" placeholder="Search Friend" ng-model="searchFriend.name" ng-if="activeMenu=='following'">
-                <input type="text" placeholder="Search Friend" ng-model="searchUser" ng-if="activeMenu=='followers'" ng-change="searchAllUser(searchUser)">
+              <div class="follow-followers-holder" ng-init="searchUser.open!=searchUser.open">
+                <input type="text" placeholder="Search Friend" ng-model="searchFriend.name" ng-change="testingDropDown(searchFriend.name);">
+                <!--<input type="text" placeholder="Search Friend" ng-model="searchUser.name" ng-if="activeMenu=='followers'">-->
                 <span class="search-follow"><i class="fa fa-search"></i></span>
                 <div class="dropdown-follow-followers">
-                  <ul>
-                    <li>
+                  <ul ng-show="searchUser.open">
+                    <!--ng-repeat="list in searchList"-->
+                    <!--<li>
                       <div class="clearfix">
                         <div class="pull-left">
                           <div class="profile-picholder">
@@ -33,10 +34,26 @@
                             <h4 class="profile-name avenir-roman color-dark-blue m-clear">Monish Shah</h4>
                             <span class="color-light-grey avenir-roman profile-tag">@monish-shah</span>
                           </div>
-                        </div>
-                        <div class="pull-right">
+                        </div>-->
+                        <!--<div class="pull-right">
                           <button class="btn btn-pink following-btn"></i>Following</button>
+                        </div>-->
+                      <!--</div>
+                    </li>-->
+                     <li class="pointer" ng-repeat="list in searchList| filter:searchFriend.name" ng-click="searchUser.open=false;searchFriend.name=list.name;searchCard.name=list.name">
+                      <div class="clearfix">
+                        <div class="pull-left">
+                          <div class="profile-picholder">
+                            <img ng-src="{{list.profilePicture|uploadpath:23:30}}" alt="" class="img-responsive">
+                          </div>
+                          <div class="profile-detailed">
+                            <h4 class="profile-name avenir-roman color-dark-blue m-clear">{{list.name}}</h4>
+                            <!--<span class="color-light-grey avenir-roman profile-tag">@monish-shah</span>-->
+                          </div>
                         </div>
+                        <!--<div class="pull-right">
+                          <button class="btn btn-pink following-btn"></i>Following</button>
+                        </div>-->
                       </div>
                     </li>
                   </ul>
@@ -117,7 +134,7 @@
     <div class="container-fluid">
       <!-- following tab -->
       <div class="follower-tab-main" ng-if="activeMenu == 'following'">
-          <div class="following-container" ng-repeat="list in followingList | filter:searchFriend.name">
+          <div class="following-container" ng-repeat="list in followingList | filter:searchCard.name">
             <div class="following-holder">
               <div class="follow-imgholder">
                 <img ng-src="{{list.profilePicture|uploadpath:104:108:'cover'}}" class="img-responsive">
@@ -134,7 +151,7 @@
                   </div>
                 </div>
                 <div class="pull-right">
-                  <button class="btn btn-pink following-btn">Following</button>
+                  <button class="btn btn-pink following-btn" ng-click="followUnFollowUser('fromFollowing',list._id,list.name,list.status)">{{list.status}}</button>
                 </div>
               </div>
               <div class="following-user-info">
@@ -159,7 +176,7 @@
       <!-- following tab end-->
       <!-- follower tab -->
       <div class="follow-tab-main" ng-if="activeMenu == 'followers'">
-        <div class="following-container" ng-repeat="list in followersList track by $index">
+        <div class="following-container" ng-repeat="list in followersList | filter:searchCard.name">
           <div class="following-holder">
             <div class="follow-imgholder">
               <img ng-src="{{list.profilePicture|uploadpath:104:108:'cover'}}" alt="{{list.nameFollow}}" class="img-responsive">
@@ -179,7 +196,7 @@
                 <!--<button class="btn btn-pink following-btn" ng-if="!list.following" ng-click="followUser(list._id,list.name)">Follow</button>
                 <button class="btn btn-pink following-btn" ng-if="list.following" ng-click="unFollowUser(list._id)">Following</button>-->
 
-                <button class="btn btn-pink following-btn" ng-click="followUnFollowUser(list._id,list.name,list.status)">{{list.status}}</button>
+                <button class="btn btn-pink following-btn" ng-click="followUnFollowUser('fromFollowers',list._id,list.name,list.status)">{{list.status}}</button>
               </div>
             </div>
             <div class="following-user-info">

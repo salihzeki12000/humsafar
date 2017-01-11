@@ -7,6 +7,40 @@ var commontask = angular.module('commontask', [])
       console.log("inside LikesAndComments");
       console.log(type, uniqueId, type_Id, comment, hashTag, additionalId, callback);
       var getCommentId = "";
+      console.log(comment);
+      var len=comment.length;
+      var counter=0;
+      var startIndex=null;
+      var endIndex=null;
+      var i;
+      var tag;
+      hashTag=[];
+      while(counter!=len-1){
+        if(comment[counter]=="#"){
+          startIndex=counter;
+          i=startIndex+1;
+          while(i<=len){
+            if(comment[i]==" " || comment[i]=="#"){
+              endIndex=i-1;
+              console.log(startIndex,endIndex);
+              tag=comment.substring(startIndex,endIndex+1);
+              hashTag.push(tag);
+              console.log(tag);
+              break;
+            }else if(i==comment.length-1){
+              endIndex=i;
+              console.log(startIndex,endIndex);
+              tag=comment.substring(startIndex,endIndex+1);
+              hashTag.push(tag);              
+              console.log(tag);
+              break;
+            }
+            i++;
+          }
+          console.log(hashTag);
+        }
+        counter++;
+      }
       var obj = {
         "type": type,
         "uniqueId": uniqueId,
@@ -114,6 +148,53 @@ var commontask = angular.module('commontask', [])
         console.log(data);
       });
     },
+    searchTags: function(tag,callback){
+      $http({
+        url:adminURL+"/hashtag/findHash",
+        method:"POST",
+        data:{
+          "hashtag":tag
+        }
+      }).success(function(data){
+        callback(data);
+      });
+    }
   };
   return returnVal
+});
+commontask.filter('findTags', function() {
+  return function (text) {
+      var ctl = document.getElementById('enterComment');
+      var startTagIndex=null;
+      var endTagIndex=null;
+      var hashTag;
+      currentPosition = ctl.selectionStart - 1;
+      var counter = currentPosition;
+      if (text[currentPosition] != " " || text[currentPosition] != "#") {
+        while (text[counter] != " " && text[counter] != "#" && counter >= 0) {
+          counter--;
+        }
+        if (text[counter] == "#") {
+          startTagIndex = counter;
+        } else if (text[counter + 1] == "#") {
+          startTagIndex = counter + 1;
+        }
+        counter = counter + 1;
+        console.log(counter,text.length,startTagIndex);
+        while ((counter <= text.length) && (startTagIndex != null)) {
+          console.log("asd");
+          if (text[counter] == " " || text[counter] == "#" || counter == text.length - 1) {
+            endTagIndex = counter + 1;
+            break;
+          }
+          counter++;
+        }
+        console.log(counter,text.length,startTagIndex,endTagIndex);
+        if (startTagIndex != null && endTagIndex != null) {
+          hashTag = text.substring(startTagIndex, endTagIndex);
+          console.log(hashTag);
+          return hashTah;
+        }
+      }
+    }
 });

@@ -29,19 +29,24 @@ var firstapp = angular.module('firstapp', [
   'angularFileUpload'
 ]);
 
-firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider,cfpLoadingBarProvider) {
+firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, cfpLoadingBarProvider) {
   // for http request with session
   $httpProvider.defaults.withCredentials = true;
-   cfpLoadingBarProvider.includeSpinner = true;
-   cfpLoadingBarProvider.latencyThreshold = 2000;
-   cfpLoadingBarProvider.includeBar = true;
-   cfpLoadingBarProvider.spinnerTemplate = '<div class="travelibro-loader"><img src="img/travelibro-loader.gif" alt="Travelibro" class="img-responsive" /></div>';
+  cfpLoadingBarProvider.includeSpinner = true;
+  cfpLoadingBarProvider.latencyThreshold = 2000;
+  cfpLoadingBarProvider.includeBar = true;
+  cfpLoadingBarProvider.spinnerTemplate = '<div class="travelibro-loader"><img src="img/travelibro-loader.gif" alt="Travelibro" class="img-responsive" /></div>';
 
   $stateProvider
     .state('home', {
       url: "/",
       templateUrl: "views/template.html",
       controller: 'HomeCtrl'
+    })
+    .state('about', {
+      url: "/about-travelibro",
+      templateUrl: "views/template.html",
+      controller: 'AboutCtrl'
     })
     .state('forgot-password', {
       url: "/forgot-password/:token/:email",
@@ -714,45 +719,48 @@ firstapp.filter('capitalize', function () {
 });
 
 firstapp.filter('kindOfJourney', function () {
-  return function (input,color) {
+  return function (input, color) {
     var input = input.toLowerCase();
     var returnVal = "";
     switch (input) {
       case "friends":
-        returnVal = "img/kindofjourney/"+color+"-friends.png";
+        returnVal = "img/kindofjourney/" + color + "-friends.png";
         break;
       case "backpacking":
-        returnVal = "img/kindofjourney/"+color+"-backpacking.png";
+        returnVal = "img/kindofjourney/" + color + "-backpacking.png";
         break;
       case "business":
-        returnVal = "img/kindofjourney/"+color+"-business.png";
+        returnVal = "img/kindofjourney/" + color + "-business.png";
         break;
       case "religious":
-        returnVal = "img/kindofjourney/"+color+"-religious.png";
+        returnVal = "img/kindofjourney/" + color + "-religious.png";
         break;
       case "romance":
-        returnVal = "img/kindofjourney/"+color+"-romance.png";
+        returnVal = "img/kindofjourney/" + color + "-romance.png";
         break;
       case "budget":
-        returnVal = "img/kindofjourney/"+color+"-budget.png";
+        returnVal = "img/kindofjourney/" + color + "-budget.png";
         break;
       case "luxury":
-        returnVal = "img/kindofjourney/"+color+"-luxury.png";
+        returnVal = "img/kindofjourney/" + color + "-luxury.png";
         break;
       case "family":
-        returnVal = "img/kindofjourney/"+color+"-family.png";
+        returnVal = "img/kindofjourney/" + color + "-family.png";
         break;
-      case "sole":
-        returnVal = "img/kindofjourney/"+color+"-solo.png";
+      case "solo":
+        returnVal = "img/kindofjourney/" + color + "-solo.png";
         break;
       case "betterhalf":
-        returnVal = "img/kindofjourney/"+color+"-betterhalf.png";
+        returnVal = "img/kindofjourney/" + color + "-betterhalf.png";
         break;
       case "colleague":
-        returnVal = "img/kindofjourney/"+color+"-colleague.png";
+        returnVal = "img/kindofjourney/" + color + "-colleague.png";
+        break;
+      case "festival":
+        returnVal = "img/kindofjourney/" + color + "-festival.png";
         break;
       case "adventure":
-        returnVal = "img/kindofjourney/"+color+"-adventure.png";
+        returnVal = "img/kindofjourney/" + color + "-adventure.png";
         break;
     }
     return returnVal;
@@ -767,7 +775,7 @@ firstapp.filter('kindOfCheckIn', function () {
         returnVal = "img/icons/smallcinema.png";
         break;
       case "Restaurants & Bars":
-        returnVal = "img/icons/resto.png";
+        returnVal = "img/icons/small-resto.png";
         break;
       case "Shopping":
         returnVal = "img/icons/smallshopping.png";
@@ -790,7 +798,7 @@ firstapp.filter('kindOfCheckIn', function () {
       case "Religious":
         returnVal = "img/icons/smallreligious.png";
         break;
-      case "Hotels and Accomodations":
+      case "Hotels & Accomodations":
         returnVal = "img/icons/smallhotels.png";
         break;
       case "Others":
@@ -802,6 +810,8 @@ firstapp.filter('kindOfCheckIn', function () {
       case "City":
         returnVal = "img/city.png";
         break;
+      default:
+        returnVal = "img/icons/smallothers.png";
     }
     console.log(input, returnVal);
     return returnVal;
@@ -811,54 +821,55 @@ firstapp.filter('kindOfCheckIn', function () {
 firstapp.filter('itineraryType', function () {
   return function (input) {
     var returnVal = "";
+
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
     var itineraryBg = input.length;
-    console.log(input,itineraryBg);
-    var itineraryGet = getRandomInt(0,itineraryBg-1);
+    console.log(input, itineraryBg);
+    var itineraryGet = getRandomInt(0, itineraryBg - 1);
     var backImg = input[itineraryGet];
     console.log(backImg);
-    var random=getRandomInt(1,2);
+    var random = getRandomInt(1, 2);
     switch (backImg) {
       case "adventure":
-        returnVal = "img/banner-itinerary/adventure"+random+".jpg";
+        returnVal = "img/banner-itinerary/adventure" + random + ".jpg";
         break;
       case "business":
-        returnVal = "img/banner-itinerary/business"+random+".jpg";
+        returnVal = "img/banner-itinerary/business" + random + ".jpg";
         break;
       case "family":
-        returnVal = "img/banner-itinerary/family"+random+".jpg";
+        returnVal = "img/banner-itinerary/family" + random + ".jpg";
         break;
-        case "romance":
-        returnVal = "img/banner-itinerary/romance"+random+".jpg";
+      case "romance":
+        returnVal = "img/banner-itinerary/romance" + random + ".jpg";
         break;
       case "backpacking":
-        returnVal = "img/banner-itinerary/backpacking"+random+".jpg";
+        returnVal = "img/banner-itinerary/backpacking" + random + ".jpg";
         break;
       case "religious":
-        returnVal = "img/banner-itinerary/religious"+random+".jpg";
+        returnVal = "img/banner-itinerary/religious" + random + ".jpg";
         break;
       case "budget":
-        returnVal = "img/banner-itinerary/budget"+random+".jpg";
+        returnVal = "img/banner-itinerary/budget" + random + ".jpg";
         break;
       case "luxury":
-        returnVal = "img/banner-itinerary/luxury"+random+".jpg";
+        returnVal = "img/banner-itinerary/luxury" + random + ".jpg";
         break;
       case "solo":
-        returnVal = "img/banner-itinerary/sole"+random+".jpg";
+        returnVal = "img/banner-itinerary/sole" + random + ".jpg";
         break;
       case "festival":
-        returnVal = "img/banner-itinerary/all"+random+".jpg";
+        returnVal = "img/banner-itinerary/all" + random + ".jpg";
         break;
       case "shopping":
-        returnVal = "img/banner-itinerary/all"+random+".jpg";
+        returnVal = "img/banner-itinerary/all" + random + ".jpg";
         break;
       case "friends":
-        returnVal = "img/banner-itinerary/friends"+random+".jpg";
+        returnVal = "img/banner-itinerary/friends" + random + ".jpg";
         break;
     }
-    console.log(returnVal,'return wla kya hai');
+    console.log(returnVal, 'return wla kya hai');
     return returnVal;
   };
 });
@@ -906,7 +917,7 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
                 if (ith > 0) {
                   if (percentage <= 100) {
                     // console.log("<=100");
-                    flag = true;  //flag is only sent when percent >100
+                    flag = true; //flag is only sent when percent >100
                     pointsForLine(ith, percentage, true);
                   } else {
                     // console.log(">100");
@@ -958,13 +969,13 @@ firstapp.filter('postString', function () {
     } else if (buddiesCount == 2) {
       buddiesString = checkIn.buddies[0].name.bold() + " and " + checkIn.buddies[1].name.bold();
     } else if (buddiesCount >= 2) {
-      buddiesString = checkIn.buddies[0].name.bold() + " and " + (buddiesCount - 1) + "others ";
+      buddiesString = checkIn.buddies[0].name.bold() + " and " + (buddiesCount - 1) + " others ";
     }
     var postString = "";
     // $filter('category')(checkIn.category) +
     if (buddiesString != "") {
       if (checkIn.thoughts && checkIn.location) {
-        postString = checkIn.thoughts.bold() + " with " + buddiesString + " at " + checkIn.location.bold();
+        postString = checkIn.thoughts + " with " + buddiesString + " at " + checkIn.location.bold();
       } else if (checkIn.thoughts) {
         postString = checkIn.thoughts.bold() + " with " + buddiesString;
       } else if (checkIn && checkIn.location) {

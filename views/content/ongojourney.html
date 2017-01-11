@@ -206,7 +206,7 @@
               <ul class="notify-like">
                 <li><a href=""><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(post.uniqueId,post._id)"></i></a></li>
                 <li>
-                  <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve" ng-click="focus();"></a>
+                  <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve" ng-click="focus('enterComment');"></a>
                 </li>
                 <li>
                   <a href=""><img src="img/share.png" alt="" height="20" class="img-responisve"></a>
@@ -237,18 +237,17 @@
               </div>
             </div>
             <div class="comment-ur-text relate">
-              <textarea name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="text" ng-change="testingHash(text)"></textarea>
+              <textarea name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="comment.text" ng-change="testingHash(comment.text)"></textarea>
               <div class="dropdown-hashtag">
-                <ul>
-                  <li><a href="">#angularJs</a></li>
-                  <li><a href="">#traveLibro</a></li>
+                <ul ng-repeat="tag in hashTags">
+                  <li ng-click="appendComment(comment,tag.title,hashTag,startTagIndex,endTagIndex)"><a href="">{{tag.title}} <span class="tag-count ml10">{{tag.count}}</span></a></li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="clearfix comment-post">
             <div class="pull-right">
-              <button class="btn btn-pink post-btn" ng-click=postPostsComment(post.uniqueId,text,post._id)>Post</button>
+              <button class="btn btn-pink post-btn" ng-click=postPostsComment(post.uniqueId,comment.text,post._id)>Post</button>
             </div>
           </div>
           <div class="view-comment-list" ng-repeat="list in listOfComments.comment">
@@ -261,8 +260,8 @@
               <div class="commenter-text">
                 <p class="avenir-roman"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name}}</span>{{list.text}}</p>
                 <div class="like-reply-line">
-                  <span class="color-blue avenir-roman mr5 pointer">Like</span>
-                  <span class="color-blue avenir-roman mr5 pointer">Reply</span>
+                  <!--<span class="color-blue avenir-roman mr5 pointer">Like</span>-->
+                  <!--<span class="color-blue avenir-roman mr5 pointer">Reply</span>-->
                   <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                  | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
                 </div>
               </div>
