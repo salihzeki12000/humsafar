@@ -403,7 +403,7 @@ a.color-white {
       @include background(linear-gradient(rgba(0,
       0,
       0,
-      0.80),
+      0.50),
       rgba(0,
       0,
       0,
@@ -443,7 +443,7 @@ a.color-white {
       rgba(0,
       0,
       0,
-      90)));
+      0.70)));
       text-align: right;
       width: 100%;
       @extend .avenir-roman;
@@ -457,11 +457,11 @@ a.color-white {
       @include background(linear-gradient(rgba(0,
       0,
       0,
-      0),
+      0.70),
       rgba(0,
       0,
       0,
-      90)));
+      0)));
       width: 100%;
       @extend .avenir-roman;
       border-radius: 5px;
@@ -1304,6 +1304,9 @@ a.color-white {
 }
 
 @media screen and (max-width: 1200px) {
+      .destination-content .img-holder .title-head-left {
+    font-size: 24px;
+}
   .cover-modal1 .modal-dialog {
     width: 95%;
     border: 3px solid #2c3757;
@@ -1354,6 +1357,9 @@ a.color-white {
   .destination-nav ul li {
     margin: 0 5px;
   }
+    .destination-content .img-holder .title-head-left {
+    font-size: 20px;
+}
   .text-left-ab {
     .dot-icon li {
       font-size: 18px;

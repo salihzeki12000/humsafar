@@ -212,10 +212,10 @@ ul {
 }
 
 .circle-rounded {
-  @include size(45px, 48px);
-  border-radius: 18px;
+  @include size(38px, 38px);
+  border-radius: 35%;
   display: inline-block;
-  line-height: 45px;
+  line-height: 38px;
   text-align: center;
 }
 
@@ -694,7 +694,11 @@ header {
 }
 
 .user-detail {
-  // width: 70%;
+p{
+  span{
+    font-size:12px;
+  }
+}
   h4 {
     @extend .avenir-heavy;
   }
@@ -1806,6 +1810,7 @@ header {
 
 .journey-tag-holder {
   width: 100%;
+  min-height: 75px;
   padding: 0 10px;
   position: absolute;
   bottom: 0;
@@ -1828,7 +1833,7 @@ header {
 }
 
 .journey-type {
-  vertical-align: top;
+  margin-top: -5px;
 
   li {
     padding: 0 5px;
@@ -1850,7 +1855,7 @@ header {
   border-radius: 18px;
   display: inline-block;
   position: relative;
-  bottom: 10px;
+  bottom: 12px;
   background-color: $brand-dark-blue;
 
   p {
@@ -1859,7 +1864,7 @@ header {
     text-align: center;
 
     span {
-      font-size: 18px;
+      font-size: 16px;
       line-height: 18px;
     }
   }
@@ -1868,13 +1873,14 @@ header {
 .journey-collection {
   li {
     padding: 0 10px;
-    border-right: 1px solid #fff;
     line-height: 12px;
-
     &:first-child {
       padding: 0 10px 0 0;
     }
   }
+  li + li{
+      border-left: 1px solid #fff;
+}
 }
 
 .social-field-types {
@@ -1882,8 +1888,8 @@ header {
 }
 
 .user-social-item {
-  padding: 12px 0 20px;
-  border-bottom: 1px solid $brand-grey;
+  padding: 12px 0 12px;
+  border-bottom: 1px solid #f0f0f0;
 
   li {
     display: inline-block;
@@ -3726,21 +3732,27 @@ header {
     height: 70px;
     overflow: hidden;
     border: 2px solid #ddd;
-    border-radius: 35%;
+    border-radius: 28%;
 
   img {
     max-height: 100%;
     border-radius: 20px;
     padding: 0;
-     border-radius: 35%;
+     border-radius: 25%;
   }
 }
 
 .post-your-status {
-  padding: 5px 5px 0;
-  border-top: 1px solid #ccc;
+  padding: 10px 5px 0;
+  border-top: 1px solid #f0f0f0;
   margin-top: 10px;
-  color: #727272;
+  color: #424242;
+  p{
+    margin:0;
+  }
+  a{
+      color: #232c49;
+}
 }
 
 .post-icon {
@@ -3765,20 +3777,21 @@ header {
 }
 
 .tag-ongo-journey {
-  padding: 5px 15px;
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
-  position: absolute;
-  top: 20px;
-  right: 0;
-  background-color: $brand-pink;
-  z-index: 1;
+    padding: 4px 10px 2px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    position: absolute;
+    top: 20px;
+    right: 0;
+    background-color: #ff6759;
+    z-index: 1;
 }
 
 .flag-section {
   position: absolute;
   left: 15px;
   top: 20px;
+  z-index: 1;
   // .country-visited {
   //   left: 20px;
   // }
@@ -3808,7 +3821,7 @@ header {
 
 .post-rating {
   padding: 10px 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .post-footer {
@@ -3839,31 +3852,66 @@ header {
 .view-list-popular {
   padding: 10px;
   border-bottom: 3px solid #e5e5e5;
-
+  position: relative;
   .pic-imgholder {
     width: 55px;
     border-radius: 15px;
-    display: inline-block;
     overflow: hidden;
     vertical-align: middle;
   }
-
   .list-user-detail {
-    margin: 0 38px 0 10px;
-    display: inline-block;
+    margin: 0 20px 0 10px;
     vertical-align: middle;
-
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 18px 40px 3px 65px;
     h4 {
-      margin: 5px 0;
+    margin: 3px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+        font-size: 16px;
+     @extend .avenir-heavy
     }
   }
 
   .btn-follow {
     display: inline-block;
     vertical-align: middle;
+    padding: 0px 0;
+    margin-top: -3px;
+    position: relative;
+    z-index: 2;
+    a{
+      @extend .avenir-heavy;
+    }
+  }
+}
+.follow-or-following{
+  span{
+    font-size: 13px;
+    @extend .avenir-heavy;
   }
 }
 // traveller post end
+//taught
+.travel-taught{
+    .location {
+    background-color: $brand-pink;
+  }
+    .activity-local-icon {
+    display: none;
+  }
+  
+.tag-ongo-journey {
+    top: -5px;
+}  
+.user-social-item {
+  margin-top: 10px;
+    border-top: 1px solid #f0f0f0;
+}
+}
 // get class by post like travel local life and editor
 
 .travel-life {
@@ -3889,12 +3937,44 @@ header {
     display: none;
   }
 }
-
+.local-life-taught{
+.location {
+    background-color: $brand-cyan !important;
+  }
+    .tag-ongo-journey {
+    background-color: $brand-cyan;
+    span{
+      @extend .avenir-heavy;
+    }
+  }
+    .location {
+    background-color: $brand-pink;
+  }
+  .activity-travel-icon {
+    display: none;
+}
+    .activity-local-icon {
+    display: none;
+  }
+  
+.tag-ongo-journey {
+    top: -5px;
+}  
+.user-social-item {
+  margin-top: 10px;
+    border-top: 1px solid #f0f0f0;
+}
+}
 .local-life {
   .tag-ongo-journey {
     background-color: $brand-cyan;
+    span{
+      @extend .avenir-heavy;
+    }
   }
-
+.days-spent {
+    bottom: 26px;
+}
   .activity-travel-icon {
     display: none;
   }
@@ -3917,8 +3997,63 @@ header {
     display: none;
   }
 }
-
-.editor {
+.user-detail-itinerary,.user-quick-itinerary,.travel-taught,.local-life-taught{
+  .if-white {
+    display: none;
+}
+}
+.user-detail-itinerary{
+  .activity-local-icon {
+    display: none;
+}
+  .flag-section {
+    right: 5px;
+    left: initial;
+}
+.days-spent {
+    bottom: 25px;
+}
+}
+.user-quick-itinerary {
+    .activity-local-icon {
+    display: none;
+}
+.days-spent {
+      top: -285px;
+}
+.quick-itinerary-tag {
+    position: absolute;
+    right: 10px;
+    bottom: 0;
+    background: #ff6759;
+    padding: 7px 15px;
+    border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+ h4 {
+    margin: 0;
+    padding: 0;
+}
+ p {
+    margin: 0;
+}
+}
+.date-quick-itinerary {
+    position: absolute;
+    right: 110px;
+    bottom: 12px;
+}
+}
+.editor,.editor-blog {
+  .follow-or-following span {
+    color: #fff;
+}
+  .editor-logo {
+  border:none;
+}
+  .flag-section {
+    right: 5px;
+    left: initial;
+}
   .activity-post-main {
     background-color: $brand-dark-blue;
   }
@@ -3937,11 +4072,15 @@ header {
 
 .post-your-status {
   padding: 8px 5px 0;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #f0f0f0;
   margin-top: 10px;
   color: #727272;
   p {
     margin: 0px 0 0;
+    color:#fff;
+}
+a{
+      color: #232c49;
 }
 }
 
@@ -3971,6 +4110,22 @@ header {
   .journey-travelling-type {
     margin-bottom: -10px;
   }
+}
+
+.editor-blog{
+  .journey-tag-holder h3{
+    font-size: 18px;
+}
+.journey-tag-holder {
+    min-height: 55px;
+}
+.tag-ongo-journey{
+     background-color: $brand-dark-blue;
+     span{
+       color: #fff;
+       @extend .avenir-heavy;
+     }
+}
 }
 // visit-post
 
@@ -4367,8 +4522,8 @@ header {
   background-color: #fff;
   .user-social-item {
     padding: 8px 2px ;
-    border-top: 1px solid #ebebeb;
-    border-bottom: 1px solid #ebebeb;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
   }
   .journey-rate {
     margin-bottom: 5px;
@@ -6142,7 +6297,7 @@ header {
 
 .trip-summary-detail {
   padding: 20px;
-  margin-top: -10px;
+  // margin-top: -10px;
 }
 
 .trip-visited-detail {
@@ -6154,7 +6309,8 @@ header {
 }
 
 .trip-day-detail {
-  max-height: 100px;
+  min-height: 140px;
+  max-height: 140px;
   border: 1px solid #dbdbdb;
   border-radius: 4px;
   margin-bottom: 35px;
@@ -6163,7 +6319,7 @@ header {
 
   .day {
     width: 12%;
-    height: 100%;
+   min-height: 138px;
     padding: 23px 0;
     margin-left: 15px;
     display: inline-block;
@@ -6201,7 +6357,7 @@ header {
     vertical-align: top;
 
     .status {
-      font-size: 16px;
+      font-size: 14px;
     }
 
     img {
@@ -7963,7 +8119,7 @@ header {
   .user-tag {
     .user-imgholder {
       width: 85px;
-      height: 9px;
+      height: 90px;
       border: 2px solid #fff;
       border-radius: 30px;
       margin: 0 auto;
@@ -8014,7 +8170,7 @@ header {
   .itinerary-name {
     margin-left: 15px;
     display: inline-block;
-    color: $brand-light-cyan;
+    color: $brand-cyan;
     vertical-align: middle;
 
     span {
@@ -9067,6 +9223,7 @@ header {
   top: 28px;
   right: -5px;
   background-color: $brand-blue;
+  z-index: 1;
 
   ::-webkit-scrollbar {
     width: 2px;
@@ -9202,6 +9359,7 @@ header {
 .map-journey {
   width: 100%;
   height: 100%;
+  margin-top: 60px;
   padding-left: 650px;
   position: fixed;
   top: 0;

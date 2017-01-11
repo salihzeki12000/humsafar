@@ -35,14 +35,21 @@
                     </div>
                   </div>
                   <!-- post status -->
-                  <div class="post-your-status">
-                    <p class="your-post">{{post.status}}</p>
+                  <div class="post-your-status" ng-if="post.status">
+                    <p class="your-post">{{post.status}}
+                      <span ng-repeat="tags in post.hashtag" ng-if="post.hashtag"><a >{{tags.tag}}</a>,</span>
+                    </p>
+                  </div>
+                  <!-- post status end -->
+                           <!-- post status -->
+                  <div class="post-your-status" ng-if="post.taught">
+                    <p class="your-post">{{post.taught}}</p>
                   </div>
                   <!-- post status end -->
                   <!-- post type icon -->
                   <div class="post-icon" ng-if="post.postIcon">
                     <div class="location circle-rounded pointer">
-                      <img src="img/location-blue.png" alt="" height="18" class="">
+                      <img src="img/location-blue.png" alt="" height="22" class="">
                       <!-- <img src="img/camera.png" alt="" height="18" class=""> -->
                       <!-- <img src="img/video.png" alt="" height="18" class=""> -->
                       <!-- <img src="img/pin.png" alt="" height="18" class=""> -->
@@ -62,8 +69,14 @@
                     </div>
                     <!-- flag country end -->
                     <!-- tag on journey -->
-                    <div class="tag-ongo-journey">
+                    <div class="tag-ongo-journey" ng-if="((post.class =='travel-taught') || (post.class =='travel-life'))">
                       <span class="inline-block color-white">On The Go</span>
+                    </div>
+                        <div class="tag-ongo-journey" ng-if="((post.class =='local-life') || (post.class =='local-life-taught'))">
+                      <span class="inline-block color-blue">Local Life</span>
+                    </div>
+                  <div class="tag-ongo-journey" ng-if="((post.class =='editor-blog'))">
+                      <span class="inline-block color-blue">Cagtegory</span>
                     </div>
                     <!-- tag on journey end-->
                     <!-- video post -->
@@ -104,15 +117,20 @@
                         <img ng-src="{{post.imgTravelled}}" alt="" class="img-responsive m-center">
                       </div>
                       <div class="journey-tag-holder">
+                      <div class="days-spent pull-right">
+                          <p><span class="block">{{post.travelledDay}}</span> Days</p>
+                        </div>
                         <h4 class="m-clear text-capitalize">{{post.Travelledtag}}</h4>
                         <div class="clearfix journey-travelling-type">
+                          <div class="row">
+                            <div class="col-xs-6">
                           <div class="pull-left">
                             <div class="journey-collection">
                               <ul>
                                 <li>
                                   <a href="">
                                     <div class="">
-                                      <img src="img/camera.png" alt="Camera" width="18" class="mr5">
+                                      <img src="img/camera.png" alt="Camera" width="15" class="mr5">
                                       <span class="inline-block v-mid">{{post.photoCount}}</span>
                                     </div>
                                   </a>
@@ -120,7 +138,7 @@
                                 <li>
                                   <a href="">
                                     <div class="">
-                                      <img src="img/video.png" alt="Video" width="18" class="mr5">
+                                      <img src="img/video.png" alt="Video" width="15" class="mr5">
                                       <span class="inline-block v-mid">{{post.videoCount}}</span>
                                     </div>
                                   </a>
@@ -128,7 +146,7 @@
                                 <li>
                                   <a href="">
                                     <div class="">
-                                      <img src="img/location.png" alt="Location" width="18" class="mr5">
+                                      <img src="img/location.png" alt="Location" width="15" class="mr5">
                                       <span class="inline-block v-mid">{{post.locationVisited}}</span>
                                     </div>
                                   </a>
@@ -136,22 +154,24 @@
                               </ul>
                             </div>
                           </div>
+                            </div>
+                            <div class="col-xs-6">
+
                           <div class="pull-right">
-                            <div class="journey-type inline-block">
+                            <div class="journey-type">
                               <ul>
                                 <li>
-                                  <a href=""><img ng-src="{{post.itineraryType1}}" alt="" height="20"></a>
+                                  <a href=""><img ng-src="{{post.itineraryType1}}" alt="" height="15"></a>
                                 </li>
                                 <li>
-                                  <a href=""><img ng-src="{{post.itineraryType2}}" alt="" height="20"></a>
+                                  <a href=""><img ng-src="{{post.itineraryType2}}" alt="" height="15"></a>
                                 </li>
                                 <li>
-                                  <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="20"></a>
+                                  <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="15"></a>
                                 </li>
                               </ul>
                             </div>
-                            <div class="days-spent inline-block">
-                              <p><span class="block">{{post.travelledDay}}</span> Days</p>
+                          </div>
                             </div>
                           </div>
                         </div>
@@ -170,22 +190,31 @@
                             <div class="journey-type">
                               <ul>
                                 <li>
-                                  <a href=""><img ng-src="{{post.itineraryType1}}" alt="" height="20"></a>
+                                  <a href=""><img ng-src="{{post.itineraryType1}}" alt="" height="15"></a>
                                 </li>
                                 <li>
-                                  <a href=""><img ng-src="{{post.itineraryType2}}" alt="" height="20"></a>
+                                  <a href=""><img ng-src="{{post.itineraryType2}}" alt="" height="15"></a>
                                 </li>
                                 <li>
-                                  <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="20"></a>
+                                  <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="15"></a>
                                 </li>
                               </ul>
                             </div>
                           </div>
+                          <div class="" ng-if="post.class=='user-quick-itinerary'">
+                        <div class="quick-itinerary-tag">
+                          <h4>Quick</h4>
+                          <p>Itinerary</p>
+                        </div>
+                        <div class="date-quick-itinerary">
+                          {{post.dateitinerary}}
+                        </div>
+                        </div>
                           <div class="pull-right">
                             <div class="journey-cost">
                               <span>{{post.cost}}</span>
                             </div>
-                            <div class="days-spent">
+                            <div class="days-spent"  ng-if="post.class!='editor-blog'">
                               <p><span class="block">{{post.spendingDay}}</span>Days</p>
                             </div>
                           </div>
@@ -209,7 +238,7 @@
                               <img src="img/comments-white.png" alt="" height="18" class="if-white">
                             </a>
                           </li>
-                          <li>
+                          <li ng-if="!((post.class =='travel-taught')||(post.class =='local-life')||(post.class =='local-life-taught')||(post.class =='editor-blog'))">
                             <a href="">
                               <img src="img/reviews.png" alt="" height="18" class="if-blue">
                               <img src="img/reviews-white.png" alt="" height="18" class="if-white">
@@ -237,9 +266,9 @@
                         <div class="pull-left">
                           <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">15660</b>Likes</span>
                           <span class="color-blue">
-                            <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue">
-                            <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white">
-                            354 Reviews (4.5/5)</span>
+                            <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue" ng-if="!((post.class !='travel-taught') || (post.class !='local-life'))">
+                            <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white" ng-if="!((post.class !='travel-taught') || (post.class !='local-life'))">
+                            <span ng-if="!((post.class !='travel-taught') || (post.class !='local-life'))">354 Reviews (4.5/5)</span></span>
                         </div>
                         <div class="pull-right">
                           <div class="post-travel-icon">
@@ -263,15 +292,15 @@
                 <ul>
                   <li ng-repeat="list in view.listPopular | limitTo : 6 track by $index">
                     <div class="view-list-popular">
+                      <div class="btn-follow pull-right">
+                        <a class="color-dark-blue">Follow</a>
+                      </div>
                       <div class="pic-imgholder">
                         <img ng-src="{{list.profile}}" alt="" class="img-responsive">
                       </div>
                       <div class="list-user-detail">
                         <h4 class="color-blue avenir-heavy">{{list.name}}</h4>
                         <p class="color-light-grey fz12 m-clear"><i class="fa fa-map-marker mr5"></i> <span class="mr5">{{list.location}}</span> | <span class="ml5">Follower : {{list.follower}}</span></p>
-                      </div>
-                      <div class="btn-follow">
-                        <button type="button" class="btn btn-pink-outline">Follow</button>
                       </div>
                     </div>
                   </li>
