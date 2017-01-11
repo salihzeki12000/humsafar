@@ -6287,7 +6287,7 @@ header {
 }
 
 .add-country-quick{
-  @extend add-city-quick;
+  @extend .add-city-quick;
   margin-top: 5px;
   display: block;
 }
@@ -6615,7 +6615,7 @@ header {
     .ui-select-match .close {
       font-size: 15px;
       line-height: 17px;
-      color: $brand-pink;
+      color: $brand-light-grey;
       opacity: 1;
     }
   }
