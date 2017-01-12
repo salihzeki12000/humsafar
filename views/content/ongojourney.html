@@ -117,10 +117,10 @@
               </div>
               <div class="box-start-journey hasLatLng">
                 <!-- header started -->
-                <div class="started-heading relate text-center clearfix"  ng-init="editKindJourney = false;">
-                  <div class="start-card-options" ng-click="editKindJourney =!editKindJourney">
+                <div class="started-heading relate text-center clearfix"  ng-init="ongo.kindOf = {};">
+                  <div class="start-card-options" ng-click="editOption(ongo.kindOf);">
                     <img src="img/options-white.png" alt="Edit Journey" width="3" class="img-responsive">
-                    <div class="edit-kind-journey" ng-show="editKindJourney">
+                    <div class="edit-kind-journey" ng-show="ongo.kindOf.backgroundClick;">
                       <ul>
                         <li><a href="" >Edit Kind of Journey</a></li>
                         <li><a href="" ng-click="changeBannerDate()">Change Date &amp; Time</a></li>

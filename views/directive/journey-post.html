@@ -89,7 +89,7 @@
             <li>
               <a href="">
                 <img src="img/comments.png" alt="" height="18" ng-click="getCommentsData({'post':ongo});json.journeyHighLight=ongo._id">
-                <span>{{json.journeyHighLight}}</span>
+                <!-- <span>{{json.journeyHighLight}}</span> -->
               </a>
             </li>
             <li class="relate">
@@ -150,9 +150,10 @@
       </div>
       <div class="social-likes-reviews" ng-if="!(((ongo.likeCount==0)||(ongo.likeCount==undefined))&&(ongo.comment.length==0))">
         <div class="clearfix">
-          <div class="pull-left">
-            <span class="color-blue mr10 card-like avenir-heavy" ng-click="cardLikeList = !cardLikeList;getLikes(ongo._id)"><i class="fa fa-heart color-blue mr5"></i><b>{{ongo.likeCount|filterCount}}</b> {{ongo.likeCount|singularOrPlural:'like'}}
-                        <div class="card-like-dropdown" ng-show="cardLikeList">
+          <div class="pull-left" ng-init="ongo.like={};">
+            <!-- cardLikeList = !cardLikeList -->
+            <span class="color-blue mr10 card-like avenir-heavy" ng-click="getLikes(ongo._id);editOption(ongo.like)"><i class="fa fa-heart color-blue mr5"></i><b>{{ongo.likeCount|filterCount}}</b> {{ongo.likeCount|singularOrPlural:'like'}}
+                        <div class="card-like-dropdown" ng-show="ongo.like.backgroundClick;">
                           <ul>
                             <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
                           </ul>
