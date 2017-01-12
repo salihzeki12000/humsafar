@@ -648,7 +648,7 @@ header {
   top: 0;
   left: 0;
   z-index: 10;
-
+  @include transition(all 100ms linear);
   &.addfixed {
     @extend .bg-dark-blue;
   }
@@ -810,6 +810,7 @@ p{
     color: $brand-pink;
     @include transition(all 300ms linear);
   }
+  label img { border: 1px solid #ebebeb; }
 }
 
 .custom-checkbox {
@@ -962,7 +963,7 @@ p{
   ul {
     width: 100%;
     height: 220px;
-    padding: 10px 10px 0;
+    padding: 0px 10px 0;
     border: 1px solid $brand-lighter-grey;
     border-top: 1px solid transparent;
     border-bottom-right-radius: 5px;
@@ -1448,7 +1449,10 @@ p{
     border-radius: 4px;
     background-color: #fff;
   }
-
+.no-of-time {
+  color: $brand-lighter-grey;
+  font-size: 10px;
+}
   .search-year-input {
     position: relative;
 
@@ -1520,7 +1524,7 @@ p{
   }
 
   .clear-countryvisit {
-    padding-bottom: 5px;
+    padding-bottom: 3px;
     border-bottom: 1px solid #424242;
     color: #424242;
   }
@@ -3670,7 +3674,7 @@ p{
 }
 
 .blog-itineraries-main {
-  margin-top: 40px;
+  padding-top: 80px;
 
   .blog-post {
     overflow: visible;
@@ -3903,10 +3907,10 @@ p{
     .activity-local-icon {
     display: none;
   }
-  
+
 .tag-ongo-journey {
     top: -5px;
-}  
+}
 .user-social-item {
   margin-top: 10px;
     border-top: 1px solid #f0f0f0;
@@ -3956,10 +3960,10 @@ p{
     .activity-local-icon {
     display: none;
   }
-  
+
 .tag-ongo-journey {
     top: -5px;
-}  
+}
 .user-social-item {
   margin-top: 10px;
     border-top: 1px solid #f0f0f0;
@@ -6315,8 +6319,7 @@ a{
   border-radius: 4px;
   margin-bottom: 35px;
   position: relative;
-  overflow: hidden;
-
+  // overflow: hidden;
   .day {
     width: 12%;
    min-height: 138px;
@@ -6848,6 +6851,13 @@ a{
     padding: 5px 15px;
     border: 1px solid $brand-dark-blue;
     background-color: transparent;
+  }
+  .tinymce-style1 {
+    .mce-panel {
+      padding: 5px 15px;
+      border-bottom: 1px solid $brand-dark-blue;
+      background-color: transparent;
+    }
   }
 
   #mceu_3 {
@@ -7792,6 +7802,7 @@ a{
 
     ::-webkit-scrollbar {
       width: 3px;
+      height: 4px;
     }
 
     ::-webkit-scrollbar-track {
@@ -7975,7 +7986,7 @@ a{
     .user-trip-descp {
       width: 89%;
       display: inline-block;
-      color: #787878;
+      color: #424242;
       vertical-align: top;
     }
   }
@@ -8335,7 +8346,13 @@ a{
     }
   }
 }
-
+.quick-input-city {
+  .ui-select-multiple {
+    input[type="search"] {
+      margin-bottom: 10px;
+    }
+  }
+}
 .view-itinerary-descp {
   padding: 25px;
 
@@ -8393,7 +8410,10 @@ a{
       font-size: 15px;
     }
   }
-  .listing-accordion .user-trip-descp { width: auto; }
+  .listing-accordion .user-trip-descp {
+    width: auto;
+    margin-right: 5px;
+  }
 }
 
 .journey-travelled-with {
