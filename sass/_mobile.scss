@@ -288,11 +288,16 @@ li:last-child {
   .vector-map mappy svg {
     zoom: 0.75;
 }
-}
 
+.moment-travel-view,
+.moment-local-view {
+    margin: 15px 20px 15px 0;
+}
 .post-main .post-imgholder {
     height: auto;
 }
+}
+
 // media query for 991px to 768px end
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
@@ -869,6 +874,13 @@ img {
     border: none;
 }
   }
+}
+.city-accordion {
+   .panel-title {
+.mt5 {
+    margin-top: 0px;
+}
+}
 }
 }
 
