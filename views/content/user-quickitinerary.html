@@ -1,10 +1,10 @@
-<div class="user-itinerary-page"> 
-  <div class="user-banner-holder relate" scrolldown>
+<div class="user-itinerary-page">
+  <div class="user-banner-holder relate" scrolldown style="background-image: url('{{itinerary.itineraryType|itineraryType}}')">
     <div class="overlay-itinerary-bg"></div>
     <div class="user-banner-detail full-width text-center">
       <div class="user-tag color-white">
         <div class="user-imgholder">
-          <img ng-src="{{itinerary.creator.profilePicture|uploadpath}}" alt="" class="img-responsive">
+          <img ng-src="{{itinerary.creator.profilePicture|uploadpath:90:95:'cover'}}" alt="" class="img-responsive">
         </div>
         <h4 class="user-name avenir-medium">{{itinerary.creator.name}}</h4>
       </div>
@@ -23,7 +23,7 @@
       <div class="journey-type-icon">
         <ul class="list-inline">
           <li ng-repeat="icon in itinerary.itineraryType track by $index">
-            <img ng-src="{{icon|kindOfJourney}}" alt=""  class="img-responsive">
+            <img ng-src="{{icon|kindOfJourney:'white'}}" alt="" height="30px" class="">
             <!-- Note :  use width size in backend -->
           </li>
         </ul>
@@ -39,22 +39,23 @@
   </div>
   <div class="user-quick-itinerary second bg-white">
     <!-- trip side pic holder -->
-      <div class="trip-pic-holder relate">
-        <div class="trip-pic-view {{showClass}}">
-          <p class="color-pink heading-gallery-name"><i class="fa fa-picture-o mr5"></i>Family Holiday 2013 Photos</p>
-          <div masonry class="masonry-main side-scroll-direction">
-            <div class="masonry-brick" ng-repeat="pic in itinerary.photos track by $index">
-              <div class="gallery-imgholder">
-                <img ng-src="{{pic.name|uploadpath}}" alt="">
-              </div>
+    <div class="trip-pic-holder relate">
+      <div class="trip-pic-view {{showClass}}">
+        <p class="color-pink heading-gallery-name"><i class="fa fa-picture-o mr5"></i>{{itinerary.title}} Photos</p>
+        <div masonry class="masonry-main side-scroll-direction">
+          <div class="masonry-brick" ng-repeat="pic in itinerary.photos track by $index">
+            <div class="gallery-imgholder pointer"  ng-click="getPhotosCommentData(pic)">
+              <img ng-src="{{pic.name|uploadpath}}" alt="">
+              <span class="color-blue">{{pic.caption}}</span>
             </div>
           </div>
-          <div class="user-button-holder">
-            <a class="photos btn-pink photo-button" ng-click="viewGallery();"><i class="fa fa-picture-o mr5"></i>Family Holiday 2013 Photos</a>
-            <a class="photos btn-dark-blue close-button" ng-click="viewGallery();"><i class="fa fa-chevron-down mr5"></i>Close</a>
-          </div>
+        </div>
+        <div class="user-button-holder">
+          <a class="photos btn-pink photo-button" ng-click="viewGallery();"><i class="fa fa-picture-o mr5"></i>{{itinerary.title}} Photos</a>
+          <a class="photos btn-dark-blue close-button" ng-click="viewGallery();"><i class="fa fa-chevron-down mr5"></i>Close</a>
         </div>
       </div>
+    </div>
     <!-- trip side pic holder end -->
     <div class="container">
       <div class="row">
@@ -62,10 +63,17 @@
           <div class="view-quick-itinerary">
             <div class="itinerary-header">
               <div class="itinerary-quick-imgholder">
-                <img src="img/itinerary/family-whole-bg.jpg" alt="" class="img-responsive">
+                <img ng-src="{{itinerary.countryVisited[0].cityVisited[0].city.cityCoverPhoto|uploadpath}}" alt="" class="img-responsive">
                 <div class="itinerary-heading-detail">
-                  <p class="m-clear mb5"><span class="avenir-roman color-pink">Country Visited : </span><span class="color-white country-visited-name avenir-heavy" ng-repeat="country in itinerary.countryVisited track by $index">{{country.country.name}}<span ng-if="$index<(itinerary.countryVisited.length-1)"> | </span></span></p>
-                  <p class="m-clear"><span class="avenir-roman color-pink">Cities Visited : </span><span ng-repeat="countryObj in itinerary.countryVisited"><span class="color-white avenir-roman" ng-repeat="city in countryObj.cityVisited track by $index">{{city.city.name}}<span ng-if="$index<(countryObj.cityVisited.length-1)"> | </span></span></span></p>
+                  <p class="m-clear mb5"><span class="avenir-roman color-pink">Country Visited : </span><span class="color-white country-visited-name avenir-heavy" ng-repeat="country in itinerary.countryVisited track by $index">{{country.country.name}}<span ng-if="$index<(itinerary.countryVisited.length-1)"> | </span></span>
+                  </p>
+                  <p class="m-clear">
+                    <span class="avenir-roman color-pink">Cities Visited : </span>
+                    <span ng-repeat="countryObj in itinerary.countryVisited">
+                      <span class="color-white avenir-roman" ng-repeat="city in countryObj.cityVisited track by $index">{{city.city.name}}<span ng-if="$index<(countryObj.cityVisited.length-1)"> | </span></span>
+                    <span ng-if="$index<(itinerary.countryVisited.length-1)" class="color-white"> | </span>
+                    </span>
+                  </p>
                 </div>
                 <div class="itinerary-type-head"><span>Quick Itinerary</span></div>
               </div>
@@ -89,21 +97,21 @@
                 <ul class="list-inline">
                   <li><a href="" ng-click="likeUnlikeItinerary(itinerary.likeDone,itinerary._id,itinerary.uniqueId);"><i class="fa like-button-icon color-blue" ng-class="{'fa-heart-o': itinerary.likeDone == null, 'fa-heart': itinerary.likeDone == true}"></i></a></li>
                   <li>
-                    <a href=""><img src="img/comments.png" alt="Comments" height="22"   class="agent-iti-comment-icon"></a>
+                    <a href=""><img src="img/comments.png" alt="Comments" height="22" class="agent-iti-comment-icon"></a>
                   </li>
                   <li>
-                    <a href=""><img src="img/reviews.png" alt="Review" height="22"  class="agent-iti-review-icon"></a>
+                    <a href=""><img src="img/reviews.png" alt="Review" height="22" class="agent-iti-review-icon"></a>
                   </li>
                   <li>
-                    <a href=""><img src="img/print.png" alt="Print" height="22"   class="agent-iti-print-icon"></a>
+                    <a href=""><img src="img/print.png" alt="Print" height="22" class="agent-iti-print-icon"></a>
                   </li>
                   <li>
-                    <a href=""><img src="img/download.png" alt="Download" height="22"   class="agent-iti-download-icon"></a>
+                    <a href=""><img src="img/download.png" alt="Download" height="22" class="agent-iti-download-icon"></a>
                   </li>
                 </ul>
               </div>
               <div class="opitions pull-right">
-                <img src="img/options.png" alt="Options" height="22"   class="agent-iti-options-icon">
+                <img src="img/options.png" alt="Options" height="22" class="agent-iti-options-icon">
               </div>
             </div>
             <div class="clearfix like-review-main">
@@ -181,7 +189,7 @@
             <h4 class="color-blue avenir-roman text-center">You Can Also View Other Popular Itineraries</h4>
             <div masonry class="blog-itineraries-main">
               <div class="row">
-                <div class="masonry-brick col-md-4 col-sm-6" ng-repeat="life in travelLife" >
+                <div class="masonry-brick col-md-4 col-sm-6" ng-repeat="life in travelLife">
                   <div class="travel-life-part blog-post avenir-roman" ng-if="life.popItinerary">
                     <div class="travel-journey-heading">
                       <div class="editor-logo">
@@ -203,8 +211,10 @@
                       <div class="onway-imgholder">
                         <img ng-src="{{life.imgOnway}}" alt="" class="img-responsive m-center">
                       </div>
-                      <div class="country-visited">
-                        <img ng-src="{{visit.imgFlag}}" alt="" height="30" ng-repeat="visit in life.countryVisit track by $index">
+                      <div class="country-badges">
+                        <div class="country-visited" ng-repeat="visit in life.countryVisit track by $index">
+                          <img ng-src="{{visit.imgFlag}}" alt="" height="30">
+                        </div>
                         <span class="">+4</span>
                       </div>
                       <div class="journey-tag-holder">
@@ -374,7 +384,7 @@
                             <div class="clearfix">
                               <div class="pull-left">
                                 <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">15660</b>Likes</span>
-                             </div>
+                              </div>
                             </div>
                           </div>
                         </div>

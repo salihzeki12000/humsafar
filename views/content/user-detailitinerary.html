@@ -66,7 +66,7 @@
         <p class="color-pink heading-gallery-name"><i class="fa fa-picture-o mr5"></i>{{itinerary.title}} Photos</p>
         <div masonry class="masonry-main side-scroll-direction">
           <div class="masonry-brick" ng-repeat="pic in itinerary.photos track by $index">
-            <div class="gallery-imgholder pointer" ng-click="getPhotosCommentData(pic._id)">
+            <div class="gallery-imgholder pointer" ng-click="getPhotosCommentData(pic)">
               <img ng-src="{{pic.name|uploadpath}}" alt="" class "img-responsive full-width">
             </div>
           </div>
@@ -173,7 +173,7 @@
                             <span class="user-trip-heading">
                               Stayed At
                             </span>
-                            <div class="avenir-roman user-trip-descp" ng-repeat="stay in city.days[0].stay track by $index">{{stay.name}}<span ng-if="$index<(city.days[0].stay.length-1)"> | </span></div>
+                            <div class="avenir-roman user-trip-descp" ng-repeat="stay in city.days[0].stay track by $index"> {{stay.name}} <span ng-if="$index<(city.days[0].stay.length-1)"> | </span></div>
                           </div>
                         </li>
                         <li>
@@ -181,7 +181,7 @@
                             <span class="user-trip-heading">
                               Ate At
                             </span>
-                            <div class="avenir-roman user-trip-descp" ng-repeat="ate in city.days[0].ate track by $index">{{ate.name}}<span ng-if="$index<(city.days[0].ate.length-1)"> | </span></div>
+                            <div class="avenir-roman user-trip-descp" ng-repeat="ate in city.days[0].ate track by $index"> {{ate.name}} <span ng-if="$index<(city.days[0].ate.length-1)"> | </span></div>
                           </div>
                         </li>
                         <li>
@@ -189,7 +189,7 @@
                             <span class="user-trip-heading">
                               Must Do's
                             </span>
-                            <div class="avenir-roman user-trip-descp" ng-repeat="mustDo in city.days[0].mustDo track by $index">{{mustDo.name}}<span ng-if="$index<(city.days[0].mustDo.length-1)"> |  </span></div>
+                            <div class="avenir-roman user-trip-descp" ng-repeat="mustDo in city.days[0].mustDo track by $index"> {{mustDo.name}} <span ng-if="$index<(city.days[0].mustDo.length-1)"> | </span></div>
                           </div>
                         </li>
                       </ul>

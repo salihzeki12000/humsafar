@@ -82,7 +82,7 @@
 
                 <!-- new ui select dropdown for city -->
                 <div class="col-md-6 col-sm-6">
-                  <div class="itinerary-inputholder input-city-visited">
+                  <div class="itinerary-inputholder input-city-visited quick-input-city">
                     <ui-select multiple ng-model="add.cityVisited" theme="bootstrap" ng-click="updateCitiesArr($select.selected._id)">{{$select.search}}
                       <ui-select-match placeholder="City Visited">{{$item.name}}</ui-select-match>
                       <ui-select-choices repeat="{'name':city.name,placeId:city.placeId} as city in cities" refresh="searchCity(add.country,$select.search,add.cityVisited)" refresh-delay="0">
@@ -158,7 +158,7 @@
           <!-- trip total budget and save  -->
           <div class="trip-budget budget-quick-itinerary">
             <div class="clearfix">
-              <div class="pull-left mob-quicktrip-budget">
+              <!-- <div class="pull-left mob-quicktrip-budget">
                 <label for="budget">Trip Budget</label>
                 <div class="select-currency-holder">
                   <div class="currency-holder">
@@ -182,7 +182,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="pull-right mob-quicktrip-btn">
                 <div class="save-publish-detail">
                   <button class="btn btn-pink btn-more mr5" ng-click="uploadQuickItinerary(false)">Save</button>

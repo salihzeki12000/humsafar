@@ -403,7 +403,9 @@
                     <!-- trip descp -->
                     <div class="trip-descp-itinerary">
                       <label for="descp">A Little More About This Trip...</label>
-                      <textarea ui-tinymce="tinymceOptions" ng-model="city.description" id="descp"></textarea>
+                      <div class="tinymce-style1">
+                        <textarea ui-tinymce="tinymceOptions" ng-model="city.description" id="descp"></textarea>
+                      </div>
                     </div>
                     <!-- trip descp end -->
                     <!-- upload trip photo -->
@@ -450,7 +452,7 @@
               <div class="trip-photo-holder">
                 <div class="trip-view-photo" ng-repeat="photo in dItinerary.photos track by $index">
                   <span class="delete-detail-pic" ng-hide="photo.name==index"><i ng-click="removePhoto($index,city)" class="fa fa-times"></i></span>
-                  <img ng-src="{{photo.name|uploadpath}}" alt="Quick Itinerary" class="img-responsive get-center">
+                  <img ng-src="{{photo.name|uploadpath:235:205:'cover'}}" alt="Quick Itinerary" class="img-responsive get-center">
                   <!-- <div class="remove-quick-photo text-right">
                     <div class="delete-photo"><i class="fa fa-times color-white pointer" ng-click="removePhoto($index,city)"></i></div>
                   </div> -->
