@@ -1,4 +1,4 @@
-<div class="user-itinerary-page">
+<div class="user-itinerary-page relate">
   <div class="user-banner-holder relate" scrolldown style="background-image: url('{{itinerary.itineraryType|itineraryType}}')">
     <div class="overlay-itinerary-bg"></div>
     <div class="user-banner-detail full-width text-center">
@@ -46,7 +46,7 @@
           <div class="masonry-brick" ng-repeat="pic in itinerary.photos track by $index">
             <div class="gallery-imgholder pointer"  ng-click="getPhotosCommentData(pic)">
               <img ng-src="{{pic.name|uploadpath}}" alt="">
-              <span class="color-blue">{{pic.caption}}</span>
+              <!-- <span class="color-blue">{{pic.caption}}</span> -->
             </div>
           </div>
         </div>
@@ -65,7 +65,9 @@
               <div class="itinerary-quick-imgholder">
                 <img ng-src="{{itinerary.countryVisited[0].cityVisited[0].city.cityCoverPhoto|uploadpath}}" alt="" class="img-responsive">
                 <div class="itinerary-heading-detail">
-                  <p class="m-clear mb5"><span class="avenir-roman color-pink">Country Visited : </span><span class="color-white country-visited-name avenir-heavy" ng-repeat="country in itinerary.countryVisited track by $index">{{country.country.name}}<span ng-if="$index<(itinerary.countryVisited.length-1)"> | </span></span>
+                  <p class="m-clear mb5"><span class="avenir-roman color-pink">
+                    <span ng-if="itinerary.countryVisited.length==1">Country</span>
+                    <span ng-if="itinerary.countryVisited.length>1">Countries</span> Visited : </span><span class="color-white country-visited-name avenir-heavy" ng-repeat="country in itinerary.countryVisited track by $index">{{country.country.name}}<span ng-if="$index<(itinerary.countryVisited.length-1)"> | </span></span>
                   </p>
                   <p class="m-clear">
                     <span class="avenir-roman color-pink">Cities Visited : </span>
@@ -416,4 +418,5 @@
       <!-- other itineraries main end-->
     </div>
   </div>
+  <div class="photo-open-backdrop {{dispBackDrop}}" ng-click="viewGallery();"></div>
 </div>

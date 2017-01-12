@@ -2,14 +2,14 @@
   <span class="text-center block year-title">Update Year</span>
   <div class="update-year-main">
     <div class="search-year-input">
-      <input type="text" class="form-control" placeholder="Search Year">
+      <input type="text" class="form-control" ng-model="countryYear" placeholder="Search Year">
       <div class="search-dropdown-icon">
         <i class="fa fa-search"></i>
       </div>
     </div>
     <div class="update-dropdown">
       <ul>
-        <li ng-repeat="list in listOfYears">
+        <li ng-repeat="list in listOfYears|filter:countryYear">
           <div class="year-checkbox custom-checkbox">
             <input type="checkbox" id="year{{list}}" ng-model="visited[list].year" ng-true-value="{{list}}" ng-click="checkIfSelected(visited[list])">
             <label for="year{{list}}">{{list}}</label>

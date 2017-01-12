@@ -1450,7 +1450,7 @@ p{
     background-color: #fff;
   }
 .no-of-time {
-  color: $brand-lighter-grey;
+  color: $brand-light-grey;
   font-size: 10px;
 }
   .search-year-input {
@@ -5107,7 +5107,7 @@ a{
   }
 
   .edit-kind-journey {
-    width: 200px;
+    width: 205px;
     padding: 20px 25px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -8467,6 +8467,9 @@ a{
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 5;
   display: none;
+}
+.showphoto-backdrop{
+  display: block;
 }
 // user detail itinerary end
 // agent itinerary
