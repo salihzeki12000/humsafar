@@ -54,20 +54,22 @@ var ongojourney = angular.module('ongojourney', [])
           journey.showRemainingCount = true;
           journey.remainingCount = journey.buddiesCount - 3;
         }
+        journey.buddiesString="";
         if (journey.buddiesCount == 1) {
           journey.buddiesString = journey.buddies[0].name.bold();
         } else if (journey.buddiesCount == 2) {
           journey.buddiesString = journey.buddies[0].name.bold() + " and " + journey.buddies[1].name.bold();
         } else if (journey.buddiesCount >= 2) {
-          journey.buddiesString = journey.buddies[0].name.bold() + " and " + (journey.buddiesCount - 1) + " others ";
+          // journey.buddiesString = journey.buddies[0].name.bold() + " and " + (journey.buddiesCount - 1) + " others ";
           var i=0;
-          journey.individualBuddiesString="";
-          while(i<=journey.buddiesCount){
-            if(i<journey.buddiesCount){
-              journey.individualBuddiesString=journey.individualBuddiesString+", "+journey.buddies[i].name.bold();
-            }else if(i==journey.buddiesCount){
-            journey.individualBuddiesString=journey.individualBuddiesString+" and "+journey.buddies[i].name.bold();
+          // journey.individualBuddiesString="";
+          while(i<=journey.buddiesCount-1){
+            if(i<journey.buddiesCount-1){ 
+              journey.buddiesString=journey.buddiesString+journey.buddies[i].name.bold()+", ";
+            }else if(i==journey.buddiesCount-1){
+            journey.buddiesString=journey.buddiesString+" and "+journey.buddies[i].name.bold();
             }
+            i++;
           }
         }
         if(journey.buddiesString!=undefined){
