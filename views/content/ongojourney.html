@@ -3,7 +3,7 @@
     <div id="map" class="get-map-height">
     </div>
   </div>
-  <div class="on-go-journey" >
+  <div class="on-go-journey " ng-class="{'comment-backdrop': viewCardComment==true, '': viewCardComment == false}" >
     <div class="container-fluid">
       <!-- on go journey main -->
       <div class="ongo-journey-main">
@@ -175,7 +175,7 @@
             <div class="dot-line"></div>
             <div class="card-relate-holder functionmap" ng-if="journey.post">
 
-              <journey-post post="ongo" json=journey get-comments-data="getPostsCommentData(post)" profile=userData ng-repeat="ongo in journey.post"></journey-post>
+              <journey-post post="ongo" json=journey get-comments-data="getPostsCommentData(post)" profile=userData ng-repeat="ongo in journey.post" ></journey-post>
 
               <!-- ongo journey-end -->
               <div class="ongo-journey-end" ng-if="journey.onGoing==false">
@@ -214,11 +214,13 @@
               </ul>
             </div>
             <div class="pull-right">
-              <div class="notification-like">
-                <span class="notify-like-holder pointer avenir-roman" ng-click="showLikes=!showLikes;getLikes(post._id)">
-                  <i class="fa fa-heart color-blue" ng-class="{'view-like' : showLikes == true , '' : showLikes == false}" ></i>
+              <div class="notification-like" ng-init="commentLike={};">
+                <!-- showLikes=!showLikes; -->
+                <span class="notify-like-holder pointer avenir-roman" ng-click="getLikes(post._id);editOption(commentLike)">
+                  <i class="fa fa-heart color-blue" ng-class="{'view-like' : commentLike.backgroundClick == true , '' : commentLike.backgroundClick == false}" ></i>
                  <span>{{post.likeCount|filterCount}}   </span>{{post.likeCount|singularOrPlural:'like'}}
-                <div class="like-dropdown" ng-show="showLikes">
+                 <!-- ng-show="showLikes" -->
+                <div class="like-dropdown" ng-show="commentLike.backgroundClick;">
                   <ul>
                     <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
                   </ul>
@@ -236,9 +238,9 @@
                 <img ng-src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
               </div>
             </div>
-            <div class="comment-ur-text relate">
-              <textarea name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="comment.text" ng-change="testingHash(comment.text)"></textarea>
-              <div class="dropdown-hashtag">
+            <div class="comment-ur-text relate" ng-init="hashtag={};">
+              <textarea name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="comment.text" ng-change="testingHash(comment.text);editOption(hashtag)"></textarea>
+              <div class="dropdown-hashtag" ng-show="hashtag.backgroundClick;">
                 <ul ng-repeat="tag in hashTags">
                   <li ng-click="appendComment(comment,tag.title,hashTag,startTagIndex,endTagIndex)"><a href="">{{tag.title}} <span class="tag-count ml10">{{tag.count}}</span></a></li>
                 </ul>

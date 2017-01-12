@@ -6235,6 +6235,20 @@ a{
 }
 // add new otg photo video end
 // pop up journey used end
+// comment pop up and focus
+.comment-backdrop {
+  &:before {
+    // content: '';
+    @include square(100%);
+    @include position(absolute, 0);
+    background-color: rgba(0,0,0,0.4);
+    z-index: 3;
+  }
+  .whole-card-comment {
+    z-index: 5;
+  }
+}
+// comment pop up and focus end
 // on go journey end
 // trip summary
 
@@ -9433,6 +9447,7 @@ ng-map {
     }
   };
 }
+
 // destination booking
 
 .destination-hotel-card {
