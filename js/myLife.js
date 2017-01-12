@@ -54,12 +54,19 @@ var navigationservice = angular.module('mylife', [])
         callback(data.data.countriesVisited);
       });
     },
+    getCountryVisitedListExpanded:function(callback){
+       $http({
+        url: adminURL + "/user/getCountryVisitedListExpanded",
+        method: "POST"
+      }).success(function (data) {
+        callback(data.data.countriesVisited);
+      });
+    },
     getOneBucketList: function (callback) {
       $http({
         url: adminURL + "/user/getBucketListWeb",///////////////////use getOneBucketList
         method: "POST"
       }).success(function (data) {
-        console.log(data.data.bucketList);
         callback(data.data.bucketList);
       });
     },

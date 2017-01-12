@@ -4153,10 +4153,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.isopen = !$scope.isopen;
     };
 
-    //video play
-    $timeout(function () {
-      $('video').play();
-    }, 30);
 
     $scope.getMap = function () {
       // console.log("GET MAP CALLED");
@@ -4264,6 +4260,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           templateUrl: "views/modal/delete-visited-country.html"
           // templateUrl: "views/modal/country-visited.html"
         });
+        $scope.removeCountryVisited=function(){
+          alert("deleteCountry");
+        };
         var id = {
           '_id': country._id
         };
@@ -6810,6 +6809,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+     // click background close
+    $scope.getDropdown = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+    // click background close end
+
     var getAllCountries = function (countries) {
       $scope.nationality = countries;
       // $scope.getMap();
@@ -6821,7 +6830,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.updateBucketList = function (country) {
       MyLife.updateBucketList(country, function (data, status) {
+         MyLife.getOneBucketList(callbackBucketList);
         reloadCount();
+
       }, function () {});
       // $scope.getMap();
     };
@@ -6863,7 +6874,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.userData = $.jStorage.get("profile");
-    console.log($scope.userData);
     var travelCountCallback = function (data, status) {
       $scope.count = data.data;
     };
@@ -6884,140 +6894,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       return years;
     }
     $scope.listOfYears = years(1950);
-    reloadCount(); {
-      // countryList and bucketList
-      // $scope.countryList = [{
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, ];
-      // $scope.bucketList = [{
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, ];
-      // countrylist and bucketlist end
-      // following and followers
-      // $scope.following = [{
-      //   imgFollowing: "img/follower.jpg",
-      //   nameFollow: "Andrea Christina",
-      //   cityName: "Mumbai",
-      //   countryName: "India",
-      //   photos: "208",
-      //   location: "345",
-      //   followType: "Follow",
-      //   countryVisited: "300",
-      //   followersUser: "2.8M",
-      //   journey: "315"
-      // }, {
-      //   imgFollowing: "img/follower.jpg",
-      //   nameFollow: "Andrea Christina",
-      //   cityName: "Mumbai",
-      //   countryName: "India",
-      //   photos: "208",
-      //   location: "345",
-      //   followType: "Following",
-      //   countryVisited: "300",
-      //   followersUser: "2.8M",
-      //   journey: "315"
-      // }, {
-      //   imgFollowing: "img/follower.jpg",
-      //   nameFollow: "Andrea Christina",
-      //   cityName: "Mumbai",
-      //   countryName: "India",
-      //   photos: "208",
-      //   location: "345",
-      //   followType: "Follow",
-      //   countryVisited: "300",
-      //   followersUser: "2.8M",
-      //   journey: "315"
-      // }, {
-      //   imgFollowing: "img/follower.jpg",
-      //   nameFollow: "Andrea Christina",
-      //   cityName: "Mumbai",
-      //   countryName: "India",
-      //   photos: "208",
-      //   location: "345",
-      //   followType: "Following",
-      //   countryVisited: "300",
-      //   followersUser: "2.8M",
-      //   journey: "315"
-      // }, {
-      //   imgFollowing: "img/follower.jpg",
-      //   nameFollow: "Andrea Christina",
-      //   cityName: "Mumbai",
-      //   countryName: "India",
-      //   photos: "208",
-      //   location: "345",
-      //   followType: "Follow",
-      //   countryVisited: "300",
-      //   followersUser: "2.8M",
-      //   journey: "315"
-      // }, {
-      //   imgFollowing: "img/follower.jpg",
-      //   nameFollow: "Andrea Christina",
-      //   cityName: "Mumbai",
-      //   countryName: "India",
-      //   photos: "208",
-      //   location: "345",
-      //   followType: "Following",
-      //   countryVisited: "300",
-      //   followersUser: "2.8M",
-      //   journey: "315"
-      // }, ];
-    }
+    reloadCount();
+
     var callbackFollowers = function (data) {
       $scope.followersList = data.data.followers;
       _.each($scope.followersList, function (n) {
@@ -7026,10 +6904,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         } else {
           n.status = "Follow";
         }
-      });
-      console.log($scope.followersList);
+      }); 
       reloadCount();
-      console.log($scope.followersList);
       if($scope.activeMenu=='followers'){
         $scope.searchList=$scope.followersList;
       }
@@ -7045,7 +6921,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       });
       reloadCount();
-      console.log($scope.followingList);
        if($scope.activeMenu=='following'){
         $scope.searchList=$scope.followingList;
       }
@@ -7053,6 +6928,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var callbackGetCountriesVisited = function (data) {
       $scope.countryVisitedList = data;
+      console.log($scope.countryVisitedList);
       console.log(data);
       reloadCount();
     };
@@ -7072,7 +6948,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     MyLife.getFollowingWeb(callbackFollowings);
     MyLife.getFollowersWeb(callbackFollowers);
-    MyLife.getCountryVisitedListWeb(callbackGetCountriesVisited);
+    MyLife.getCountryVisitedListExpanded(callbackGetCountriesVisited);
     MyLife.getOneBucketList(callbackBucketList);
 
     MyLife.getOneBucketList(callbackBucketList);
@@ -8450,14 +8326,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     //integration ends here
+     //photo gallery backdrop
     $scope.showClass = "close-gallery";
+    $scope.dispBackDrop = "";
     $scope.viewGallery = function () {
       if ($scope.showClass == "close-gallery") {
         $scope.showClass = "open-gallery";
+        $scope.dispBackDrop = "showphoto-backdrop";
       } else {
         $scope.showClass = "close-gallery";
+        $scope.dispBackDrop = "";
       }
     };
+    //photo gallery backdrop end
     $scope.getItineraryType = [{
       img: "img/itinerary/family.png",
       width: "40",
@@ -8948,14 +8829,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       '../img/itinerary/itinerary.jpg',
     ];
 
+      //photo gallery backdrop
     $scope.showClass = "close-gallery";
+    $scope.dispBackDrop = "";
     $scope.viewGallery = function () {
       if ($scope.showClass == "close-gallery") {
         $scope.showClass = "open-gallery";
+        $scope.dispBackDrop = "showphoto-backdrop";
       } else {
         $scope.showClass = "close-gallery";
+        $scope.dispBackDrop = "";
       }
     };
+    //photo gallery backdrop end
     // other itineraries main
     $scope.travelLife = [{
       otherProfile: true,
@@ -9278,12 +9164,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     // connect agent
-    $scope.lass = "";
+    $scope.agentClass = "";
     $scope.agentbox = "agentbox-in";
     $scope.viewAgent = function () {
       if ($scope.agentbox == "agentbox-in") {
         $scope.agentbox = "agentbox-out";
-        $scope.lass = "backdrop-agent";
+        $scope.agentClass = "backdrop-agent";
       } else {
         $scope.agentClass = "";
         $scope.agentbox = "agentbox-in";
