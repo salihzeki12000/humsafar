@@ -1,5 +1,6 @@
 <!--{{ongo.class}}--Add this as class if any problem comes in in velow div-->
-<div id="{{ongo._id}}" class="ongo-journey-card" ng-if="ongo.type=='travel-life'" ng-class="{'hasLatLng':ongo.latlong && ongo.latlong.lat}">
+<div id="{{ongo._id}}" class="ongo-journey-card" ng-if="ongo.type=='travel-life'" ng-class="{'hasLatLng':ongo.latlong && ongo.latlong.lat}" ng-init="json.journeyHighLight=false">
+  <div class="" ng-class="{'hightlight': json.journeyHighLight==ongo._id, '': json.journeyHighLight==ongo._id}"></div>
   <!-- card header -->
   <div class="ongo-card-header">
     <div class="clearfix">
@@ -87,7 +88,8 @@
             <li><a href=""><i class="fa color-blue" ng-class="ongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(ongo.uniqueId,ongo._id)"></i></a></li>
             <li>
               <a href="">
-                <img src="img/comments.png" alt="" height="18" ng-click="getCommentsData({'post':ongo});">
+                <img src="img/comments.png" alt="" height="18" ng-click="getCommentsData({'post':ongo});json.journeyHighLight=ongo._id">
+                <span>{{json.journeyHighLight}}</span>
               </a>
             </li>
             <li class="relate">

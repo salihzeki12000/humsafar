@@ -59,7 +59,7 @@ var navigationservice = angular.module('mylife', [])
         url: adminURL + "/user/getCountryVisitedListExpanded",
         method: "POST"
       }).success(function (data) {
-        callback(data.data.countriesVisited);
+        callback(data.data);
       });
     },
     getOneBucketList: function (callback) {
