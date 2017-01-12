@@ -113,15 +113,20 @@
                         <img ng-src="{{post.imgTravelled}}" alt="" class="img-responsive m-center">
                       </div>
                       <div class="journey-tag-holder">
+                            <div class="days-spent pull-right">
+                              <p><span class="block">{{post.travelledDay}}</span> Days</p>
+                            </div>
                         <h4 class="m-clear text-capitalize">{{post.Travelledtag}}</h4>
                         <div class="clearfix journey-travelling-type">
+                          <div class="row">
+                            <div class="col-xs-6">
                           <div class="pull-left">
                             <div class="journey-collection">
                               <ul>
                                 <li>
                                   <a href="">
                                     <div class="">
-                                      <img src="img/camera.png" alt="Camera" width="18" class="mr5">
+                                      <img src="img/camera.png" alt="Camera" width="15" class="mr5">
                                       <span class="inline-block v-mid">{{post.photoCount}}</span>
                                     </div>
                                   </a>
@@ -129,7 +134,7 @@
                                 <li>
                                   <a href="">
                                     <div class="">
-                                      <img src="img/video.png" alt="Video" width="18" class="mr5">
+                                      <img src="img/video.png" alt="Video" width="15" class="mr5">
                                       <span class="inline-block v-mid">{{post.videoCount}}</span>
                                     </div>
                                   </a>
@@ -137,7 +142,7 @@
                                 <li>
                                   <a href="">
                                     <div class="">
-                                      <img src="img/location.png" alt="Location" width="18" class="mr5">
+                                      <img src="img/location.png" alt="Location" width="15" class="mr5">
                                       <span class="inline-block v-mid">{{post.locationVisited}}</span>
                                     </div>
                                   </a>
@@ -145,22 +150,23 @@
                               </ul>
                             </div>
                           </div>
+                            </div>
+                            <div class="col-xs-6">
                           <div class="pull-right">
-                            <div class="journey-type inline-block">
+                            <div class="journey-type">
                               <ul>
                                 <li>
-                                  <a href=""><img ng-src="{{post.itineraryType1}}" alt="" height="20"></a>
+                                  <a href=""><img ng-src="{{post.itineraryType1}}" alt="" height="15"></a>
                                 </li>
                                 <li>
-                                  <a href=""><img ng-src="{{post.itineraryType2}}" alt="" height="20"></a>
+                                  <a href=""><img ng-src="{{post.itineraryType2}}" alt="" height="15"></a>
                                 </li>
                                 <li>
-                                  <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="20"></a>
+                                  <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="15"></a>
                                 </li>
                               </ul>
                             </div>
-                            <div class="days-spent inline-block">
-                              <p><span class="block">{{post.travelledDay}}</span> Days</p>
+                          </div>
                             </div>
                           </div>
                         </div>

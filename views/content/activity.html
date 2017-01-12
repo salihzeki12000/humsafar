@@ -238,7 +238,7 @@
                               <img src="img/comments-white.png" alt="" height="18" class="if-white">
                             </a>
                           </li>
-                          <li ng-if="!((post.class =='travel-taught')||(post.class =='local-life')||(post.class =='local-life-taught')||(post.class =='editor-blog'))">
+                          <li ng-if="!((post.class =='travel-taught')||(post.class =='local-life')||(post.class =='local-life-taught')||(post.class =='editor-blog')||(post.class =='editor'))">
                             <a href="">
                               <img src="img/reviews.png" alt="" height="18" class="if-blue">
                               <img src="img/reviews-white.png" alt="" height="18" class="if-white">
@@ -252,7 +252,7 @@
                           </li>
                         </ul>
                       </div>
-                      <div class="pull-right">
+                      <div class="pull-right" ng-if="!((post.class =='editor') || (post.class =='editor-blog'))">
                         <div class="">
                           <span>
                             <img src="img/options.png" alt="" width="3" class="if-blue">

@@ -430,7 +430,7 @@ firstapp.directive("scrolladd1class", function ($window) {
   return function (scope, element, attrs) {
     angular.element($window).bind("scroll", function () {
       var windowHeight = $(window).height();
-      if (this.pageYOffset >= 370) {
+      if (this.pageYOffset >= 50) {
         // console.log(windowHeight);
         element.addClass('addfixed');
       } else {
@@ -439,6 +439,21 @@ firstapp.directive("scrolladd1class", function ($window) {
     });
   };
 });
+
+firstapp.directive("scrolladd2class", function ($window) {
+  return function (scope, element, attrs) {
+    angular.element($window).bind("scroll", function () {
+      var windowHeight = $(window).height();
+      if (this.pageYOffset >= 370) {
+        // console.log(windowHeight);
+        element.addClass('addfixed2');
+      } else {
+        element.removeClass('addfixed2');
+      }
+    });
+  };
+});
+
 firstapp.directive('imageonload', function () {
   return {
     restrict: 'A',
@@ -808,7 +823,7 @@ firstapp.filter('kindOfCheckIn', function () {
         returnVal = "img/smallothers.png";
         break;
       case "City":
-        returnVal = "img/city.png";
+        returnVal = "img/icons/cityfull.png";
         break;
       default:
         returnVal = "img/icons/smallothers.png";
