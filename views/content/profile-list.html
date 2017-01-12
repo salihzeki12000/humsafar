@@ -17,12 +17,12 @@
           <form action="">
             <!-- search friend -->
             <div class="search-friend" ng-if="activeMenu == 'following' || activeMenu == 'followers'">
-              <div class="follow-followers-holder" ng-init="searchUser.open!=searchUser.open">
-                <input type="text" placeholder="Search Friend" ng-model="searchFriend.name" ng-change="testingDropDown(searchFriend.name);">
+              <div class="follow-followers-holder" ng-init="viewDropdown={};">
+                <input type="text" placeholder="Search Friend" ng-model="searchFriend.name" ng-change="getDropdown(viewDropdown)"/>
                 <!--<input type="text" placeholder="Search Friend" ng-model="searchUser.name" ng-if="activeMenu=='followers'">-->
                 <span class="search-follow"><i class="fa fa-search"></i></span>
-                <div class="dropdown-follow-followers">
-                  <ul ng-show="searchUser.open">
+                <div class="dropdown-follow-followers" ng-show="viewDropdown.backgroundClick;">
+                  <ul>
                     <!--ng-repeat="list in searchList"-->
                     <!--<li>
                       <div class="clearfix">
@@ -43,10 +43,10 @@
                      <li class="pointer" ng-repeat="list in searchList| filter:searchFriend.name" ng-click="searchUser.open=false;searchFriend.name=list.name;searchCard.name=list.name">
                       <div class="clearfix">
                         <div class="pull-left">
-                          <div class="profile-picholder">
+                          <div class="profile-picholder v-mid">
                             <img ng-src="{{list.profilePicture|uploadpath:23:30}}" alt="" class="img-responsive">
                           </div>
-                          <div class="profile-detailed">
+                          <div class="profile-detailed v-mid">
                             <h4 class="profile-name avenir-roman color-dark-blue m-clear">{{list.name}}</h4>
                             <!--<span class="color-light-grey avenir-roman profile-tag">@monish-shah</span>-->
                           </div>
@@ -63,10 +63,10 @@
             <!-- search friend end-->
             <!-- add country -->
             <div class="list-add-country" ng-if="activeMenu == 'countriesVisited'">
-              <div class="bucket-visited-holder country-visit-holder">
-                <input type="text" placeholder="Add Country Visited">
+              <div class="bucket-visited-holder country-visit-holder"  ng-init="viewDropdown={};">
+                <input type="text" placeholder="Add Country Visited" ng-model="visitedCountry" ng-click="getDropdown(viewDropdown)">
                 <span class="search-icon"><i class="fa fa-search"></i></span>
-                <div class="countryvisit-dropdown">
+                <div class="countryvisit-dropdown" ng-show="viewDropdown.backgroundClick">
                   <ul>
                     <li ng-repeat="list in nationality | filter: visitedCountry">
                       <div class="country-list clearfix relate">
@@ -94,10 +94,10 @@
             <!-- add country end-->
             <!-- search bucketList -->
             <div class="list-add-country" ng-if="activeMenu == 'bucketList'">
-              <div class="bucket-visited-holder">
-                <input type="text" placeholder="Add bucketList" ng-model="visitedCountry" ng-change="getBucketList();">
+              <div class="bucket-visited-holder" ng-init="viewDropdown={};">
+                <input type="text" placeholder="Add bucketList" ng-model="visitedCountry" ng-change="getDropdown(viewDropdown);">
                 <span class="search-icon"><i class="fa fa-search"></i></span>
-                <div class="bucket-dropdown">
+                <div class="bucket-dropdown" ng-show="viewDropdown.backgroundClick;">
                   <ul>
                     <li ng-repeat="list in nationality | filter: visitedCountry">
                       <div class="country-list clearfix relate">
