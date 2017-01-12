@@ -60,8 +60,21 @@ var ongojourney = angular.module('ongojourney', [])
           journey.buddiesString = journey.buddies[0].name.bold() + " and " + journey.buddies[1].name.bold();
         } else if (journey.buddiesCount >= 2) {
           journey.buddiesString = journey.buddies[0].name.bold() + " and " + (journey.buddiesCount - 1) + " others ";
+          var i=0;
+          journey.individualBuddiesString="";
+          while(i<=journey.buddiesCount){
+            if(i<journey.buddiesCount){
+              journey.individualBuddiesString=journey.individualBuddiesString+", "+journey.buddies[i].name.bold();
+            }else if(i==journey.buddiesCount){
+            journey.individualBuddiesString=journey.individualBuddiesString+" and "+journey.buddies[i].name.bold();
+            }
+          }
         }
-        journey.startJourneyString = "Trip Travellers-" + " " + journey.user.name.bold() + " with " + journey.buddiesString;
+        if(journey.buddiesString!=undefined){
+          journey.startJourneyString = "Trip Travellers - "+ journey.user.name.bold() + " with " + journey.buddiesString;  
+        }else{
+          journey.startJourneyString= "Trip Traveller - "+ journey.user.name.bold();
+        }
         // header integration ends
         callback(journey);
       })

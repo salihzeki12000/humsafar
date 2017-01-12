@@ -1389,6 +1389,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     $scope.getPostsCommentData = function (ongo) {
+      $scope.focus('enterComment');
       $scope.post = ongo;
       $scope.previousId;
       var callback = function (data) {
@@ -4260,7 +4261,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         modal = $uibModal.open({
           scope: $scope,
           animation: true,
-          templateUrl: "views/modal/country-visited.html"
+          templateUrl: "views/modal/delete-visited-country.html"
+          // templateUrl: "views/modal/country-visited.html"
         });
         var id = {
           '_id': country._id
@@ -8431,8 +8433,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     //like-unlike itinerary starts
-    $scope.itinerary.likeDone;
-    $scope.itinerary.likeCount;
+    // $scope.itinerary.likeDone;
+    // $scope.itinerary.likeCount;
     $scope.likeUnlikeItinerary = function (flag, _id, uniqueId) {
       Itinerary.updateLikeItinerary(flag, _id, uniqueId, function (data) {
         if (data) {
