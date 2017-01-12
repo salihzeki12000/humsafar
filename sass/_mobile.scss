@@ -1,4 +1,13 @@
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1400px) {
+  //vectormap
+  .vector-map{ 
+  padding: 40px 20px 30px 20px;
+    mappy svg {
+  zoom: 0.8;
+  }
+  }
+}
+  @media screen and (max-width: 1200px) {
   //header
 .user-detail .list-inline > li {
     padding: 0 8px;
@@ -98,6 +107,10 @@
   }
   .follow-followers-holder input { width: 300px; }
   // profile list end
+  //vectormap
+  .vector-map mappy svg {
+    zoom: 0.6;
+}
 }
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
@@ -271,6 +284,10 @@ li:last-child {
     .country-title h4 { font-size: 40px; }
   }
   // popular agent end
+    //vectormap
+  .vector-map mappy svg {
+    zoom: 0.75;
+}
 }
 
 .post-main .post-imgholder {
