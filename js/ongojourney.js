@@ -56,13 +56,12 @@ var ongojourney = angular.module('ongojourney', [])
         }
         journey.buddiesString="";
         if (journey.buddiesCount == 1) {
-          journey.buddiesString = journey.buddies[0].name.bold();
+          journey.buddiesString = " and "+journey.buddies[0].name.bold();
         } else if (journey.buddiesCount == 2) {
-          journey.buddiesString = journey.buddies[0].name.bold() + " and " + journey.buddies[1].name.bold()+".";
+          journey.buddiesString = ", "+journey.buddies[0].name.bold() + " and " + journey.buddies[1].name.bold()+".";
         } else if (journey.buddiesCount >= 2) {
-          // journey.buddiesString = journey.buddies[0].name.bold() + " and " + (journey.buddiesCount - 1) + " others ";
           var i=0;
-          // journey.individualBuddiesString="";
+          journey.buddiesString=", ";
           while(i<=journey.buddiesCount-1){
             if(i<journey.buddiesCount-1){ 
               journey.buddiesString=journey.buddiesString+journey.buddies[i].name.bold()+", ";
@@ -73,7 +72,7 @@ var ongojourney = angular.module('ongojourney', [])
           }
         }
         if(journey.buddiesString!=undefined){
-          journey.startJourneyString = "Trip Travellers - "+ journey.user.name.bold() + ", " + journey.buddiesString;  
+          journey.startJourneyString = "Trip Travellers - "+ journey.user.name.bold() + journey.buddiesString;  
         }else{
           journey.startJourneyString= "Trip Traveller - "+ journey.user.name.bold();
         }
