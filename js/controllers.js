@@ -110,9 +110,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.changePage($stateParams.id);
     }, 1000);
   });
-   $scope.muteVolume= function () {
-    if( $("video").prop('muted') ) {
-          $("video").prop('muted', false);
+  $scope.muteVolume = function () {
+    if ($("video").prop('muted')) {
+      $("video").prop('muted', false);
     } else {
       $("video").prop('muted', true);
     }
@@ -1389,7 +1389,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     $scope.getPostsCommentData = function (ongo) {
-      $scope.focus('enterComment');
       $scope.post = ongo;
       $scope.previousId;
       var callback = function (data) {
@@ -1398,41 +1397,46 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
       }
       if ($scope.previousId != $scope.post._id) {
+        $scope.focus('enterComment');
         $scope.listOfComments = [];
         $scope.viewCardComment = true;
+        $scope.journey.journeyHighLight=ongo._id;
         $scope.getCard = "view-whole-card";
         LikesAndComments.getComments("post", $scope.post._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
+          $scope.journey.journeyHighLight="";
           $scope.getCard = "";
         } else {
           $scope.listOfComments = [];
           $scope.viewCardComment = true;
+          $scope.focus('enterComment');          
+          $scope.journey.journeyHighLight=ongo._id;
           $scope.getCard = "view-whole-card";
           LikesAndComments.getComments("post", $scope.post._id, callback);
         }
       }
       $scope.previousId = $scope.post._id;
     };
-      $scope.hashTags=[];
-      $scope.comment={
-        'text':""
-      };
-      $scope.startTagIndex=null;
-      $scope.endTagIndex=null;
-      $scope.hashTag;
+    $scope.hashTags = [];
+    $scope.comment = {
+      'text': ""
+    };
+    $scope.startTagIndex = null;
+    $scope.endTagIndex = null;
+    $scope.hashTag;
     $scope.testingHash = function (text) {
       var ctl = document.getElementById('enterComment');
-      $scope.startTagIndex=null;
-      $scope.endTagIndex=null;
+      $scope.startTagIndex = null;
+      $scope.endTagIndex = null;
       $scope.hashTag;
       currentPosition = ctl.selectionStart - 1;
       var counter = currentPosition;
 
       //for finding hashtags
       if (text[currentPosition] != " " || text[currentPosition] != "#") {
-        $scope.hashTags=[];
+        $scope.hashTags = [];
         while (text[counter] != " " && text[counter] != "#" && counter >= 0) {
           counter--;
         }
@@ -1444,52 +1448,52 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         counter = counter + 1;
         while ((counter <= text.length) && ($scope.startTagIndex != null)) {
           if (text[counter] == " " || text[counter] == "#") {
-            $scope.endTagIndex = counter-1;
+            $scope.endTagIndex = counter - 1;
             break;
-          }else if(counter == text.length - 1){
+          } else if (counter == text.length - 1) {
             $scope.endTagIndex = counter;
             break;
           }
           counter++;
         }
         if ($scope.startTagIndex != null && $scope.endTagIndex != null) {
-          console.log("testing",$scope.startTagIndex,$scope.endTagIndex);
-          $scope.hashTag = text.substring($scope.startTagIndex, $scope.endTagIndex+1);
-          var callback=function(data){
-            $scope.hashTags=data.data;
+          console.log("testing", $scope.startTagIndex, $scope.endTagIndex);
+          $scope.hashTag = text.substring($scope.startTagIndex, $scope.endTagIndex + 1);
+          var callback = function (data) {
+            $scope.hashTags = data.data;
           }
-          LikesAndComments.searchTags($scope.hashTag,callback);
+          LikesAndComments.searchTags($scope.hashTag, callback);
         }
       }
     };
 
-    String.prototype.replaceBetween = function(start, end,len, what) {
-      console.log(start, end,len, what);
-      return this.substring(0, start) + what + this.substring(end+1,len);
+    String.prototype.replaceBetween = function (start, end, len, what) {
+      console.log(start, end, len, what);
+      return this.substring(0, start) + what + this.substring(end + 1, len);
     };
 
-    $scope.appendComment=function(comment,replaceWith,tag,startTagIndex,endTagIndex){
-      var counter="";
+    $scope.appendComment = function (comment, replaceWith, tag, startTagIndex, endTagIndex) {
+      var counter = "";
       // console.log(comment.text,replaceWith,tag,startTagIndex,endTagIndex);
-      var len=comment.text.length;
-      counter=startTagIndex+1;
+      var len = comment.text.length;
+      counter = startTagIndex + 1;
 
-       while ((counter <= comment.text.length) && ($scope.startTagIndex != null)) {
-          if (comment.text[counter] == " " || comment.text[counter] == "#") {
-            $scope.endTagIndex = counter-1;
-            console.log("first",$scope.endTagIndex);
-            break;
-          }else if(counter == comment.text.length - 1){
-            $scope.endTagIndex = counter;
-            console.log("second",$scope.endTagIndex);
-            break;
-          }
-          counter++;
-        }   
-        console.log(comment.text,startTagIndex,$scope.endTagIndex,len);
-      var a=comment.text.replaceBetween(startTagIndex,$scope.endTagIndex,len,replaceWith);
-      comment.text=a;
-      $scope.hashTags=[];
+      while ((counter <= comment.text.length) && ($scope.startTagIndex != null)) {
+        if (comment.text[counter] == " " || comment.text[counter] == "#") {
+          $scope.endTagIndex = counter - 1;
+          console.log("first", $scope.endTagIndex);
+          break;
+        } else if (counter == comment.text.length - 1) {
+          $scope.endTagIndex = counter;
+          console.log("second", $scope.endTagIndex);
+          break;
+        }
+        counter++;
+      }
+      console.log(comment.text, startTagIndex, $scope.endTagIndex, len);
+      var a = comment.text.replaceBetween(startTagIndex, $scope.endTagIndex, len, replaceWith);
+      comment.text = a;
+      $scope.hashTags = [];
     };
 
     $scope.postPostsComment = function (uniqueId, comment, postId) {
@@ -1535,10 +1539,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
 
-    
+
     $scope.focus = function (id) {
-     document.getElementById(id).focus();
-     document.getElementById(id).select();
+      document.getElementById(id).focus();
+      document.getElementById(id).select();
     };
 
     $scope.hours = _.range(1, 13, 1);
@@ -2059,15 +2063,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.navigation = NavigationService.getnav();
 
   $scope.travelLife = [{
-    otherProfile: true,
-    viewProfile: [{
-      imgBg: "img/itinerary/religious.jpg",
-      profileImg: "img/profile-main.png",
-      name: "Andrea Christina",
-      location: "London",
-      follower: "2090"
-    }],
-  }, {
     popItinerary: true,
     heading: "Editor",
     follower: "follow",
@@ -4102,10 +4097,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     })
   })
 
-
-
-
-
 .controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife, OnGoJourney) {
     //Used to name the .html file
 
@@ -4116,6 +4107,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.obj = {};
+    $scope.showTravellife=false;
     $scope.visited = [];
     var len = "";
 
@@ -4153,10 +4145,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.isopen = !$scope.isopen;
     };
 
-    //video play
-    $timeout(function () {
-      $('video').play();
-    }, 30);
 
     $scope.getMap = function () {
       // console.log("GET MAP CALLED");
@@ -4240,6 +4228,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var arr = [];
     $scope.updateCountryVisited = function (country) {
       $scope.obj.countryId = country._id;
+
       if (country.countryVisited === true) {
         $scope.visited = [];
 
@@ -4262,8 +4251,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           scope: $scope,
           animation: true,
           templateUrl: "views/modal/delete-visited-country.html"
-          // templateUrl: "views/modal/country-visited.html"
+            // templateUrl: "views/modal/country-visited.html"
         });
+
+        $scope.removeCountryVisited = function () {
+          var obj = {
+            "countryId": country._id,
+            "visited": []
+          }
+          MyLife.updateCountriesVisited(obj, function (data, status) {
+            reloadCount();
+            console.log(data);
+            modal.close();
+          }, function () {
+          });
+          $scope.getMap(); 
+        };
+
         var id = {
           '_id': country._id
         };
@@ -4275,6 +4279,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           templateUrl: "views/modal/country-visited.html"
         });
       }
+
+
       $scope.getMap();
       modal.closed.then(function () {
         console.log(_.isEmpty(arr));
@@ -4286,6 +4292,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           console.log(country);
         }
       });
+    };
+
+    $scope.clearAllSelected=function(visited){
+      console.log(visited);
+      $scope.visited=[];
     };
 
     $scope.updateNumOfTimes = function (visited) {
@@ -4304,6 +4315,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       //applying validations and filters ends
 
       $scope.obj.visited = arr;
+      console.log($scope.obj);
       MyLife.updateCountriesVisited($scope.obj, function (data, status) {
         reloadCount();
         console.log(data);
@@ -4340,8 +4352,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
 
       $scope.idealHoliday = $scope.userData.travelConfig.holidayType[0];
-
-      // console.log($scope.kindOfHoliday + "," + $scope.usuallyGo + "," + $scope.preferToTravel + "," + $scope.idealHoliday);
 
       if ($scope.userData.gender == "male") {
         $scope.pronoun = "he";
@@ -6171,7 +6181,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, ]
     }];
   })
-.controller('ActivityCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('ActivityCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("activity");
     $scope.menutitle = NavigationService.makeactive("Activity");
@@ -6368,7 +6378,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       status: "Has uploaded a new Itinerary",
       photoCount: "28",
       videoCount: "5",
-      dateitinerary:"Jan 2016",
+      dateitinerary: "Jan 2016",
       locationVisited: "9",
       itineraryType1: "img/sunset.png",
       itineraryType2: "img/bag-journey.png",
@@ -6400,7 +6410,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       getpopularPost: false,
       visitPost: false,
       activitySec: true
-    },{
+    }, {
       class: "editor-blog",
       profilePic: "img/profile-main.png",
       userName: "Editor",
@@ -6431,8 +6441,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       getpopularPost: false,
       visitPost: false,
       activitySec: true
-    },
-       {
+    }, {
       class: "editor",
       profilePic: "img/profile-main.png",
       userName: "Editor",
@@ -6472,8 +6481,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       getpopularPost: false,
       visitPost: false,
       activitySec: true
-    }, 
-    {
+    }, {
       class: "local-life",
       profilePic: "img/profile-main.png",
       userName: "John Doe",
@@ -6800,7 +6808,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   })
 
 
-  .controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, MyLife, $uibModal) {
+.controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, MyLife, $uibModal) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -6809,6 +6817,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("ProfileList");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    // click background close
+    $scope.getDropdown = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+    // click background close end
 
     var getAllCountries = function (countries) {
       $scope.nationality = countries;
@@ -6821,7 +6839,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.updateBucketList = function (country) {
       MyLife.updateBucketList(country, function (data, status) {
+        MyLife.getOneBucketList(callbackBucketList);
         reloadCount();
+
       }, function () {});
       // $scope.getMap();
     };
@@ -6835,35 +6855,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         })
       }
       // update country Visited end
-    $scope.searchList=[];
-    $scope.searchFriend={
-      'name':''
+    $scope.searchList = [];
+    $scope.searchFriend = {
+      'name': ''
     };
-    $scope.searchCard={
-      'name':''
+    $scope.searchCard = {
+      'name': ''
     };
-    $scope.searchUser={
-      'open':''
+    $scope.searchUser = {
+      'open': ''
     };
-    $scope.changeStatus = function (status,results) {
+    $scope.changeStatus = function (status, results) {
       $stateParams.active = status;
       $scope.activeMenu = status;
-      $scope.searchList=results;
-      $scope.searchFriend.name="";
-      $scope.searchCard.name="";
-      $scope.searchUser.open=false;
+      $scope.searchList = results;
+      $scope.searchFriend.name = "";
+      $scope.searchCard.name = "";
+      $scope.searchUser.open = false;
       console.log(results);
     };
 
-    $scope.testingDropDown=function(name){
-      $scope.searchUser.open=true;
-      if(name.length==0){
-        $scope.searchCard.name="";
+    $scope.testingDropDown = function (name) {
+      $scope.searchUser.open = true;
+      if (name.length == 0) {
+        $scope.searchCard.name = "";
       }
     };
 
     $scope.userData = $.jStorage.get("profile");
-    console.log($scope.userData);
     var travelCountCallback = function (data, status) {
       $scope.count = data.data;
     };
@@ -6884,140 +6903,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       return years;
     }
     $scope.listOfYears = years(1950);
-    reloadCount(); {
-      // countryList and bucketList
-      // $scope.countryList = [{
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, ];
-      // $scope.bucketList = [{
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, {
-      //   countryImage: "img/india-gate.jpg",
-      //   countryName: "India",
-      //   countryYear: "2016",
-      //   countryFlag: "img/flag.png"
-      // }, ];
-      // countrylist and bucketlist end
-      // following and followers
-      // $scope.following = [{
-      //   imgFollowing: "img/follower.jpg",
-      //   nameFollow: "Andrea Christina",
-      //   cityName: "Mumbai",
-      //   countryName: "India",
-      //   photos: "208",
-      //   location: "345",
-      //   followType: "Follow",
-      //   countryVisited: "300",
-      //   followersUser: "2.8M",
-      //   journey: "315"
-      // }, {
-      //   imgFollowing: "img/follower.jpg",
-      //   nameFollow: "Andrea Christina",
-      //   cityName: "Mumbai",
-      //   countryName: "India",
-      //   photos: "208",
-      //   location: "345",
-      //   followType: "Following",
-      //   countryVisited: "300",
-      //   followersUser: "2.8M",
-      //   journey: "315"
-      // }, {
-      //   imgFollowing: "img/follower.jpg",
-      //   nameFollow: "Andrea Christina",
-      //   cityName: "Mumbai",
-      //   countryName: "India",
-      //   photos: "208",
-      //   location: "345",
-      //   followType: "Follow",
-      //   countryVisited: "300",
-      //   followersUser: "2.8M",
-      //   journey: "315"
-      // }, {
-      //   imgFollowing: "img/follower.jpg",
-      //   nameFollow: "Andrea Christina",
-      //   cityName: "Mumbai",
-      //   countryName: "India",
-      //   photos: "208",
-      //   location: "345",
-      //   followType: "Following",
-      //   countryVisited: "300",
-      //   followersUser: "2.8M",
-      //   journey: "315"
-      // }, {
-      //   imgFollowing: "img/follower.jpg",
-      //   nameFollow: "Andrea Christina",
-      //   cityName: "Mumbai",
-      //   countryName: "India",
-      //   photos: "208",
-      //   location: "345",
-      //   followType: "Follow",
-      //   countryVisited: "300",
-      //   followersUser: "2.8M",
-      //   journey: "315"
-      // }, {
-      //   imgFollowing: "img/follower.jpg",
-      //   nameFollow: "Andrea Christina",
-      //   cityName: "Mumbai",
-      //   countryName: "India",
-      //   photos: "208",
-      //   location: "345",
-      //   followType: "Following",
-      //   countryVisited: "300",
-      //   followersUser: "2.8M",
-      //   journey: "315"
-      // }, ];
-    }
+    reloadCount();
+
     var callbackFollowers = function (data) {
       $scope.followersList = data.data.followers;
       _.each($scope.followersList, function (n) {
@@ -7027,11 +6914,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           n.status = "Follow";
         }
       });
-      console.log($scope.followersList);
       reloadCount();
-      console.log($scope.followersList);
-      if($scope.activeMenu=='followers'){
-        $scope.searchList=$scope.followersList;
+      if ($scope.activeMenu == 'followers') {
+        $scope.searchList = $scope.followersList;
       }
     };
 
@@ -7045,14 +6930,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       });
       reloadCount();
-      console.log($scope.followingList);
-       if($scope.activeMenu=='following'){
-        $scope.searchList=$scope.followingList;
+      if ($scope.activeMenu == 'following') {
+        $scope.searchList = $scope.followingList;
       }
     };
 
     var callbackGetCountriesVisited = function (data) {
+      console.log(data);
       $scope.countryVisitedList = data;
+      console.log($scope.countryVisitedList);
       console.log(data);
       reloadCount();
     };
@@ -7072,65 +6958,65 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     MyLife.getFollowingWeb(callbackFollowings);
     MyLife.getFollowersWeb(callbackFollowers);
-    MyLife.getCountryVisitedListWeb(callbackGetCountriesVisited);
+    MyLife.getCountryVisitedListExpanded(callbackGetCountriesVisited);
     MyLife.getOneBucketList(callbackBucketList);
 
     MyLife.getOneBucketList(callbackBucketList);
 
 
     //follow unfollow user starts
-    $scope.followUnFollowUser = function (status,userId, name, flag) {
+    $scope.followUnFollowUser = function (status, userId, name, flag) {
       console.log(flag);
-      if(status=='fromFollowers'){
-         if (flag == "Follow") {
-        console.log("requested to follow");
-        MyLife.followUser(userId, name, function (data) {
-          if (data.value) {
-            var index = _.findIndex($scope.followersList, ['_id', userId]);
-            console.log(index);
-            $scope.followersList[index].following = true;
-            $scope.followersList[index].status = "Following";
-            MyLife.getFollowingWeb(callbackFollowings);
-          }
-        });
-      } else if (flag == "Following") {
-        console.log("requested to unfollow");
-        MyLife.unFollowUser(userId, function (data) {
-          if (data.value) {
-            var index = _.findIndex($scope.followersList, ['_id', userId]);
-            console.log(index);
-            $scope.followersList[index].following = false;
-            $scope.followersList[index].status = "Follow";
-            MyLife.getFollowingWeb(callbackFollowings);
-          }
-        });
+      if (status == 'fromFollowers') {
+        if (flag == "Follow") {
+          console.log("requested to follow");
+          MyLife.followUser(userId, name, function (data) {
+            if (data.value) {
+              var index = _.findIndex($scope.followersList, ['_id', userId]);
+              console.log(index);
+              $scope.followersList[index].following = true;
+              $scope.followersList[index].status = "Following";
+              MyLife.getFollowingWeb(callbackFollowings);
+            }
+          });
+        } else if (flag == "Following") {
+          console.log("requested to unfollow");
+          MyLife.unFollowUser(userId, function (data) {
+            if (data.value) {
+              var index = _.findIndex($scope.followersList, ['_id', userId]);
+              console.log(index);
+              $scope.followersList[index].following = false;
+              $scope.followersList[index].status = "Follow";
+              MyLife.getFollowingWeb(callbackFollowings);
+            }
+          });
+        }
+      } else if (status == "fromFollowing") {
+        if (flag == "Follow") {
+          console.log("requested to follow");
+          MyLife.followUser(userId, name, function (data) {
+            if (data.value) {
+              var index = _.findIndex($scope.followingList, ['_id', userId]);
+              console.log(index);
+              $scope.followingList[index].following = true;
+              $scope.followingList[index].status = "Following";
+              MyLife.getFollowersWeb(callbackFollowers);
+            }
+          });
+        } else if (flag == "Following") {
+          console.log("requested to unfollow");
+          MyLife.unFollowUser(userId, function (data) {
+            if (data.value) {
+              var index = _.findIndex($scope.followingList, ['_id', userId]);
+              console.log(index);
+              $scope.followingList[index].following = false;
+              $scope.followingList[index].status = "Follow";
+              MyLife.getFollowersWeb(callbackFollowers);
+            }
+          });
+        }
       }
-      }else if(status=="fromFollowing"){
-          if (flag == "Follow") {
-        console.log("requested to follow");
-        MyLife.followUser(userId, name, function (data) {
-          if (data.value) {
-            var index = _.findIndex($scope.followingList, ['_id', userId]);
-            console.log(index);
-            $scope.followingList[index].following = true;
-            $scope.followingList[index].status = "Following";
-           MyLife.getFollowersWeb(callbackFollowers);
-          }
-        });
-      } else if (flag == "Following") {
-        console.log("requested to unfollow");
-        MyLife.unFollowUser(userId, function (data) {
-          if (data.value) {
-            var index = _.findIndex($scope.followingList, ['_id', userId]);
-            console.log(index);
-            $scope.followingList[index].following = false;
-            $scope.followingList[index].status = "Follow";
-           MyLife.getFollowersWeb(callbackFollowers);
-          }
-        });
-      }
-      }
-     
+
     };
     //follow unfollow user ends
     $scope.searchFriend = {};
@@ -8361,7 +8247,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, ];
 
   })
- .controller('UserQuickItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams,$uibModal, Itinerary){
+  .controller('UserQuickItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, $uibModal, Itinerary) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -8397,39 +8283,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     //post quick-itinerary comments ends
 
-      //Photo comment popup
-   $scope.getPhotosCommentData = function(photo) {
-     $scope.listOfComments = photo;
-     modal=$uibModal.open({
-       templateUrl: "views/modal/quickitinerary-notify.html",
-       animation: true,
-       scope: $scope,
-       windowClass: "notify-popup"
-     });
-     modal.closed.then(function () {
-     $scope.listOfComments={};
-   });
-    //  var callback = function(data) {
-    //    console.log(data,'callback ka data' );
-    //    $scope.uniqueArr = [];
-    //    $scope.listOfComments = data.data;
-    //    console.log($scope.listOfComments);
-    //    $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
-    //  };
-    //  LikesAndComments.getComments("photo",photoId,callback);
-   };
+    //Photo comment popup
+    $scope.getPhotosCommentData = function (photo) {
+      $scope.listOfComments = photo;
+      modal = $uibModal.open({
+        templateUrl: "views/modal/quickitinerary-notify.html",
+        animation: true,
+        scope: $scope,
+        windowClass: "notify-popup"
+      });
+      modal.closed.then(function () {
+        $scope.listOfComments = {};
+      });
+      //  var callback = function(data) {
+      //    console.log(data,'callback ka data' );
+      //    $scope.uniqueArr = [];
+      //    $scope.listOfComments = data.data;
+      //    console.log($scope.listOfComments);
+      //    $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+      //  };
+      //  LikesAndComments.getComments("photo",photoId,callback);
+    };
 
-   $scope.postPhotosComment = function(uniqueId, comment, postId, photoId) {
-     console.log(uniqueId, comment, postId, photoId);
-     var type = "photo";
-     var hashTag=[];
-     var callback = function(data) {
-       $scope.listOfComments = data.data;
-       document.getElementById('enterComment').value = "";
-     }
-     LikesAndComments.postComment(type,uniqueId,postId,comment,hashTag,photoId,callback);
-   };
-   //Photo comment popup end
+    $scope.postPhotosComment = function (uniqueId, comment, postId, photoId) {
+      console.log(uniqueId, comment, postId, photoId);
+      var type = "photo";
+      var hashTag = [];
+      var callback = function (data) {
+        $scope.listOfComments = data.data;
+        document.getElementById('enterComment').value = "";
+      }
+      LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, photoId, callback);
+    };
+    //Photo comment popup end
 
 
     //like-unlike itinerary starts
@@ -8450,14 +8336,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     //integration ends here
+    //photo gallery backdrop
     $scope.showClass = "close-gallery";
+    $scope.dispBackDrop = "";
     $scope.viewGallery = function () {
       if ($scope.showClass == "close-gallery") {
         $scope.showClass = "open-gallery";
+        $scope.dispBackDrop = "showphoto-backdrop";
       } else {
         $scope.showClass = "close-gallery";
+        $scope.dispBackDrop = "";
       }
     };
+    //photo gallery backdrop end
     $scope.getItineraryType = [{
       img: "img/itinerary/family.png",
       width: "40",
@@ -8704,7 +8595,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // other itineraries main end
 
   })
- .controller('UserDetailItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, $timeout,$uibModal, $stateParams) {
+  .controller('UserDetailItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, $timeout, $uibModal, $stateParams) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -8779,18 +8670,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     //Photo comment popup
-    $scope.getPhotosCommentData = function(photo) {
+    $scope.getPhotosCommentData = function (photo) {
       console.log(photo);
       $scope.listOfComments = photo;
-      modal=$uibModal.open({
+      modal = $uibModal.open({
         templateUrl: "views/modal/itinerary-notify.html",
         animation: true,
         scope: $scope,
         windowClass: "notify-popup"
       });
       modal.closed.then(function () {
-      $scope.listOfComments={};
-    });
+        $scope.listOfComments = {};
+      });
       // var callback = function(data) {
       //   $scope.uniqueArr = [];
       //   $scope.listOfComments = data.data;
@@ -8800,15 +8691,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // LikesAndComments.getComments("photo",photoId,callback);
     };
 
-    $scope.postPhotosComment = function(uniqueId, comment, postId, photoId) {
+    $scope.postPhotosComment = function (uniqueId, comment, postId, photoId) {
       console.log(uniqueId, comment, postId, photoId);
       var type = "photo";
-      var hashTag=[];
-      var callback = function(data) {
+      var hashTag = [];
+      var callback = function (data) {
         $scope.listOfComments = data.data;
         document.getElementById('enterComment').value = "";
       }
-      LikesAndComments.postComment(type,uniqueId,postId,comment,hashTag,photoId,callback);
+      LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, photoId, callback);
     };
     //Photo comment popup end
     //Integration starts here
@@ -8948,14 +8839,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       '../img/itinerary/itinerary.jpg',
     ];
 
+    //photo gallery backdrop
     $scope.showClass = "close-gallery";
+    $scope.dispBackDrop = "";
     $scope.viewGallery = function () {
       if ($scope.showClass == "close-gallery") {
         $scope.showClass = "open-gallery";
+        $scope.dispBackDrop = "showphoto-backdrop";
       } else {
         $scope.showClass = "close-gallery";
+        $scope.dispBackDrop = "";
       }
     };
+    //photo gallery backdrop end
     // other itineraries main
     $scope.travelLife = [{
       otherProfile: true,
@@ -9278,12 +9174,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     // connect agent
-    $scope.lass = "";
+    $scope.agentClass = "";
     $scope.agentbox = "agentbox-in";
     $scope.viewAgent = function () {
       if ($scope.agentbox == "agentbox-in") {
         $scope.agentbox = "agentbox-out";
-        $scope.lass = "backdrop-agent";
+        $scope.agentClass = "backdrop-agent";
       } else {
         $scope.agentClass = "";
         $scope.agentbox = "agentbox-in";
@@ -9490,14 +9386,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   })
 
 .controller('AboutCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife, OnGoJourney) {
-    //Used to name the .html file
+  //Used to name the .html file
 
-    // console.log("Testing Consoles");
+  // console.log("Testing Consoles");
 
-    $scope.template = TemplateService.changecontent("about-travelibro");
-    $scope.menutitle = NavigationService.makeactive("About TraveLibro");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
+  $scope.template = TemplateService.changecontent("about-travelibro");
+  $scope.menutitle = NavigationService.makeactive("About TraveLibro");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
 })
 
 
