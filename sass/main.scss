@@ -5252,6 +5252,7 @@ a{
 
 .whole-card-comment.view-whole-card {
   right: 0;
+  z-index: 5;
   @include transition(all 300ms linear);
 }
 // comment whole card end
