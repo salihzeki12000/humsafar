@@ -1,5 +1,5 @@
 <div class="quick-itinerary-page avenir-roman">
-  <div class="bg-white">
+  <div class="bg-white-95">
     <div class="container">
       <div class="fill-quick-itinerary">
         <form>
@@ -108,7 +108,9 @@
             <div class="trip-descp-itinerary">
               <label for="descp">A Little More About This Trip</label>
               <!--<textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel" id="descp"></textarea>-->
-              <textarea ui-tinymce="tinymceOptions" ng-model="qItinerary.description" id="descp"></textarea>
+              <div class="tinymce-style1">
+                <textarea ui-tinymce="tinymceOptions" ng-model="qItinerary.description" id="descp"></textarea>
+              </div>
             </div>
             <!-- trip descp end -->
             <!-- upload trip photo -->
@@ -141,7 +143,7 @@
                 <div class="trip-upload text-center">
                   <div class="upload-section">
                     <div ng-if="qItinerary.photos.length==0">
-                      <img src="img/upload-icon.jpg" alt="" class="m-center img-responsive">
+                      <img src="img/upload-transparent.png" alt="" class="m-center img-responsive">
                       <p class="text-center color-grey avenir-roman">Drag an itinerary photo here</p>
                       <span class="block color-grey avenir-roman">- or -</span>
                     </div>
