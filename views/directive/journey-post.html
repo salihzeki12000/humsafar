@@ -1,6 +1,6 @@
+<div class="" ng-class="{'highlighted-post': json.journeyHighLight==ongo._id, '': json.journeyHighLight!==ongo._id}">
 <!--{{ongo.class}}--Add this as class if any problem comes in in velow div-->
 <div id="{{ongo._id}}" class="ongo-journey-card" ng-if="ongo.type=='travel-life'" ng-class="{'hasLatLng':ongo.latlong && ongo.latlong.lat}">
-  <div class="" ng-class="{'hightlight': json.journeyHighLight==ongo._id, '': json.journeyHighLight==ongo._id}"></div>
   <!-- card header -->
   <div class="ongo-card-header">
     <div class="clearfix">
@@ -89,7 +89,6 @@
             <li>
               <a href="">
                 <img src="img/comments.png" alt="" height="18" ng-click="getCommentsData({'post':ongo});">
-                <!-- <span>{{json.journeyHighLight}}</span> -->
               </a>
             </li>
             <li class="relate">
@@ -185,6 +184,7 @@
   </div>
   <!-- card footer end-->
 </div>
+</div>
 <!-- card-ongo-main -->
 <!-- ongo journey join -->
 <div class="ongo-journey-join" ng-if="ongo.type=='join'">
@@ -240,3 +240,6 @@
 </div>
 <!-- on go journey-change end -->
 <!-- on go journey main end-->
+<!-- close comment wala backdrop div -->
+<div class="close-comment-backdrop" ng-click="getCommentsData({'post':ongo});"></div>
+<!-- close comment wala backdrop div end-->
