@@ -75,7 +75,7 @@
                               <div class="relate inline-block">
                                   <div class="custom-checkbox">
                                       <input type="checkbox" id="{{list._id}}" ng-model="list.countryVisited">
-                                      <label for=" {{list._id}} " ng-click="updateCountryVisited(list);"></label>
+                                      <label for=" {{list._id}} " ng-click="addCountryVisited(list);"></label>
                                   </div>
                               </div>
                               <!-- <div class="relate inline-block">
@@ -225,8 +225,9 @@
            <div class="row">
              <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="country in countryVisitedList">
               <div class="country-list-holder">
-                <div class="list-imgholder" style="background-image: url('{{country.countryId.countryCoverPhoto|uploadpath}}');">
-                  <!-- <img ng-src="{{country.countryId.countryCoverPhoto|uploadpath}}" alt="" class="img-responsive country-img"> -->
+                <!--style="background-image: url('{{country.countryId.countryCoverPhoto|uploadpath:405:255:''}}');"-->
+                <div class="list-imgholder" >
+                   <img ng-src="{{country.countryId.countryCoverPhoto|uploadpath:405:255:'cover'}}" alt="" class="img-responsive country-img"> 
                   <div class="list-info">
                     <div class="clearfix">
                       <div class="pull-left">
@@ -242,10 +243,10 @@
                   <!-- hover -->
                   <div class="country-list">
                     <div class="get-center full-width text-center">
-                      <span class="year-remove avenir-medium"><i class="fa fa-calendar block mb5" ng-click="addCountryVisit();"></i>
+                      <span class="year-remove avenir-medium"><i class="fa fa-calendar block mb5" ng-click="updateCountryVisited(country.countryId._id);"></i>
                         Add Year
                       </span>
-                      <span class="year-remove avenir-medium"><i class="fa fa-trash-o block"></i>
+                      <span class="year-remove avenir-medium"><i class="fa fa-trash-o block" ng-click="removeCountryVisit();"></i>
                         Remove
                       </span>
                     </div>
@@ -264,8 +265,9 @@
           <div class="row">
             <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="bucket in bucketList track by $index" id="{{bucket._id}}">
               <div class="bucket-list-holder">
-                <div class="list-imgholder" style="background-image: url('{{bucket.countryCoverPhoto|uploadpath}}');">
-                  <!-- <img ng-src="{{bucket.countryCoverPhoto|uploadpath}}" alt="{{bucket.name}}" class="img-responsive country-img"> -->
+                <!--style="background-image: url('{{bucket.countryCoverPhoto|uploadpath}}');-->
+                <div class="list-imgholder">
+                   <img ng-src="{{bucket.countryCoverPhoto|uploadpath:405:225:'cover'}}" alt="{{bucket.name}}" class="img-responsive country-img"> 
                   <div class="list-info">
                     <div class="clearfix">
                       <div class="pull-left">

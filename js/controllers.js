@@ -2658,10 +2658,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     //contentopen
-    // $scope.isopencont = false;
-    // $scope.openFilter = function () {
-    //   $scope.isopencont = !$scope.isopencont;
-    // };
+    $scope.isopencont = false;
+    $scope.openFilter = function () {
+      $scope.isopencont = !$scope.isopencont;
+    };
 
 
     // $scope.flip = function() {
@@ -4212,8 +4212,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     $scope.listOfYears = years(1950);
     $scope.checkIfSelected = function (list) {
-      // console.log($scope.visited[list].times);
-      // console.log($scope.visited);
       console.log(list);
       if (list.year) {
         list.times = 1;
@@ -4222,39 +4220,51 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         list.times = 0;
         $scope.disableAll = true;
       }
-
     };
     var modal = "";
     var arr = [];
     $scope.updateCountryVisited = function (country) {
       $scope.obj.countryId = country._id;
+      console.log(country.countryVisited);
 
       if (country.countryVisited === true) {
-        $scope.visited = [];
+        arr = [{}];
 
-        var callback = function (data) {
-          var a = _.filter(data, ["countryId._id", country._id]);
-          var visitedArr = [];
-          _.each(a[0].visited, function (n, index) {
-            visitedArr[n.year] = {
-              "times": n.times,
-              "year": n.year
-            };
-          });
-          console.log(visitedArr);
-          $scope.visited = visitedArr;
-          arr = visitedArr;
-        };
-
-        MyLife.getCountryVisitedListWeb(callback);
+        //for getting all the visited years  of that respective country starts 
+          // var callback = function (data) {
+          //   var a = _.filter(data, ["countryId._id", country._id]);
+          //   var visitedArr = [];
+          //   _.each(a[0].visited, function (n, index) {
+          //     visitedArr[n.year] = {
+          //       "times": n.times,
+          //       "year": n.year
+          //     };
+          //   });
+          //   console.log(visitedArr);
+          //   $scope.visited = visitedArr;
+          //   arr = visitedArr;
+          // };
+          // MyLife.getCountryVisitedListWeb(callback); 
+        //for getting all the visited years  of that respective country ends
+          
         modal = $uibModal.open({
           scope: $scope,
           animation: true,
           templateUrl: "views/modal/delete-visited-country.html"
             // templateUrl: "views/modal/country-visited.html"
+        }); 
+      } else {  
+        $scope.visited = [];
+        arr=[];
+        modal = $uibModal.open({
+          scope: $scope,
+          animation: true,
+          templateUrl: "views/modal/country-visited.html"
         });
+      }
 
-        $scope.removeCountryVisited = function () {
+      //remove country visited and all its count starts
+      $scope.removeCountryVisited = function () {
           var obj = {
             "countryId": country._id,
             "visited": []
@@ -4265,22 +4275,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             modal.close();
           }, function () {
           });
+          arr=[];
           $scope.getMap(); 
         };
-
-        var id = {
-          '_id': country._id
-        };
-      } else {
-        $scope.visited = [];
-        modal = $uibModal.open({
-          scope: $scope,
-          animation: true,
-          templateUrl: "views/modal/country-visited.html"
-        });
-      }
-
-
+      //remove country visited and all its count ends
+        
       $scope.getMap();
       modal.closed.then(function () {
         console.log(_.isEmpty(arr));
@@ -4301,7 +4300,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.updateNumOfTimes = function (visited) {
       modal.close();
-
       //applying validations and filters starts
       arr = _.pull(visited, undefined);
       arr = _.reject(arr, {
@@ -4316,11 +4314,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       $scope.obj.visited = arr;
       console.log($scope.obj);
+       if(!(_.isEmpty($scope.obj.visited))){
       MyLife.updateCountriesVisited($scope.obj, function (data, status) {
         reloadCount();
         console.log(data);
       }, function () {});
       $scope.getMap();
+       }
     };
 
 
@@ -6222,7 +6222,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       userPic: true,
       follow: true,
       following: false,
-      postIcon: true,
+      postIcon: false,
       video: false,
       photo: false,
       photoSlider: false,
@@ -6845,16 +6845,141 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, function () {});
       // $scope.getMap();
     };
-
+     $scope.obj={};
     // update country Visited
-    $scope.addCountryVisit = function () {
-        $uibModal.open({
+    $scope.updateCountryVisited = function (id) {
+      $scope.obj.countryId=id;
+      console.log(id);
+        modal=$uibModal.open({
           animation: true,
           templateUrl: "views/modal/country-visited.html",
           scope: $scope
-        })
+        });
+        modal.closed.then(function(){
+          visitedArr=[];
+        });
+         //for getting all the visited years  of that respective country starts
+          var callback = function (data) {
+            var a = _.filter(data, ["countryId._id", id]);
+            var visitedArr = [];
+            _.each(a[0].visited, function (n, index) {
+              visitedArr[n.year] = {
+                "times": n.times,
+                "year": n.year
+              };
+            });
+            console.log(visitedArr);
+            $scope.visited = visitedArr;
+            arr = visitedArr;
+          };
+          MyLife.getCountryVisitedListWeb(callback); 
+        //for getting all the visited years  of that respective country ends
       }
       // update country Visited end
+      
+      //remove counytry visitede starts
+      $scope.removeCountryVisit=function(){
+         modal = $uibModal.open({
+          scope: $scope,
+          animation: true,
+          templateUrl: "views/modal/delete-visited-country.html"
+            // templateUrl: "views/modal/country-visited.html"
+        }); 
+      };
+      //remove counytry visitede ends
+
+      $scope.addCountryVisited = function (country) {
+      $scope.obj.countryId = country._id;
+      if (country.countryVisited === true) {
+        arr = [{}];
+        modal = $uibModal.open({
+          scope: $scope,
+          animation: true,
+          templateUrl: "views/modal/delete-visited-country.html"
+            // templateUrl: "views/modal/country-visited.html"
+        }); 
+      } else {
+        $scope.visited = [];
+        arr=[];
+        modal = $uibModal.open({
+          scope: $scope,
+          animation: true,
+          templateUrl: "views/modal/country-visited.html"
+        });
+      }
+
+      //remove country visited and all its count starts
+      $scope.removeCountryVisited = function () {
+          var obj = {
+            "countryId": country._id,
+            "visited": []
+          }
+          MyLife.updateCountriesVisited(obj, function (data, status) {
+            reloadCount();
+            console.log(data);
+            MyLife.getCountryVisitedListExpanded(callbackGetCountriesVisited);
+            modal.close();
+          }, function () {
+          });
+          arr=[];
+        };
+      //remove country visited and all its count ends
+      modal.closed.then(function () {
+        console.log(_.isEmpty(arr));
+        if (_.isEmpty(arr)) {
+          country.countryVisited = false;
+          console.log(country);
+        } else {
+          country.countryVisited = true;
+          console.log(country);
+        }
+      });
+    };
+
+     $scope.checkIfSelected = function (list) {
+      console.log(list);
+      if (list.year) {
+        list.times = 1;
+        $scope.disableAll = false;
+      } else {
+        list.times = 0;
+        $scope.disableAll = true;
+      }
+    };
+
+    $scope.updateNumOfTimes = function (visited) {
+      modal.close();
+      //applying validations and filters starts
+      arr = _.pull(visited, undefined);
+      arr = _.reject(arr, {
+        'year': false
+      });
+      arr = _.filter(arr, 'times');
+      arr = _.reject(arr, {
+        'times': 0
+      });
+      console.log(arr);
+      //applying validations and filters ends
+
+      $scope.obj.visited = arr;
+      console.log($scope.obj);
+      if(!(_.isEmpty($scope.obj.visited))){
+        MyLife.updateCountriesVisited($scope.obj, function (data, status) {
+          reloadCount();
+          MyLife.getCountryVisitedListExpanded(callbackGetCountriesVisited);
+         }, function () {});
+      }
+     
+    };
+
+    $scope.clearAllSelected=function(visited){
+      console.log(visited);
+      $scope.visited=[];
+    };
+
+    
+      
+
     $scope.searchList = [];
     $scope.searchFriend = {
       'name': ''
