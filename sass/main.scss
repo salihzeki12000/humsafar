@@ -1844,7 +1844,9 @@ p{
 
 .journey-type {
    margin-top: -11px;
-
+&.m0{
+  margin: 0;
+}
   li {
     padding: 0 5px;
   }
@@ -3854,17 +3856,24 @@ p{
   border: 1px solid #ccc;
   border-radius: 6px;
   margin: 10px;
-
+// .popular-main{
+//   background-color: rgba(255, 255, 255, 0.8);
+// }
   .heading-popular {
     padding: 15px;
     background-color: #e5e5e5;
     color: #8a8a8a;
   }
 }
-
+li + li{
+  .view-list-popular {
+  border-top: 3px solid #e5e5e5;
+  }
+}
 .view-list-popular {
   padding: 10px;
-  border-bottom: 3px solid #e5e5e5;
+  // border-bottom: 3px solid #e5e5e5;
+   background-color: rgba(255, 255, 255, 0.8);
   position: relative;
   .pic-imgholder {
     width: 55px;
@@ -4037,7 +4046,7 @@ p{
 .quick-itinerary-tag {
     position: absolute;
     right: 10px;
-    bottom: 0;
+    bottom: 2px;
     background: #ff6759;
     padding: 7px 15px;
     border-top-left-radius: 5px;
@@ -4096,12 +4105,6 @@ a{
       color: #232c49;
 }
 }
-
-  .days-spent {
-    margin-top: -15px;
-    margin-bottom: 5px;
-  }
-
   .social-likes-reviews {
     span {
       color: #fff;
@@ -4185,7 +4188,7 @@ a{
   width: 100%;
   padding: 10px 10px 20px;
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
 
@@ -4215,7 +4218,7 @@ a{
 
 .visit-slider {
   padding: 0 10px;
-  margin-top: -10px;
+  margin-top: -20px;
 
   .flexslider-container {
     border: 2px solid #fff;
@@ -6245,17 +6248,19 @@ a{
 // add new otg photo video end
 // pop up journey used end
 // comment pop up and focus
-.comment-backdrop {
-  &:before {
-    // content: '';
-    @include square(100%);
-    @include position(absolute, 0);
-    background-color: rgba(0,0,0,0.4);
-    z-index: 3;
+  .highlighted-post {
+    position: relative;
+    z-index: 6;
+    + .close-comment-backdrop {
+        display: block;
+      }
   }
-  .whole-card-comment {
-    z-index: 5;
-  }
+.close-comment-backdrop {
+  @include square(100%);
+  @include position(fixed, 0);
+  z-index: 5;
+  background-color: rgba(0,0,0,0.7);
+  display: none;
 }
 // comment pop up and focus end
 // on go journey end
@@ -6450,6 +6455,9 @@ a{
 
 .quick-itinerary-page {
   padding: 0 15px;
+  .form-control{
+    background: transparent;
+  }
 }
 
 .fill-detail-itinerary,
@@ -6908,6 +6916,7 @@ a{
 .mce-content-body {
   padding: 10px 0 0 !important;
   font-family: "AvenirLTStd-Roman";
+  background: transparent;
 }
 
 .upload-trip-photo-sec {
@@ -7146,6 +7155,7 @@ a{
     border-radius: 6px;
     border-color: $brand-dark-blue;
     overflow: hidden;
+    background: transparent;
   }
 
   .panel-body {
@@ -7310,6 +7320,7 @@ a{
 
     input {
       width: 270px;
+      background: transparent;
       @include placeholder {
         font-size: 16px;
       };
@@ -7321,7 +7332,7 @@ a{
 
     input {
       width: 120px;
-
+      background: transparent;
       &:focus + label {
         display: none;
       }
@@ -7939,6 +7950,7 @@ a{
   .panel-default {
     position: relative;
     overflow: hidden;
+    background: transparent;
   }
 
   .panel-title a {
@@ -8241,20 +8253,25 @@ a{
   position: absolute;
   top: 0;
   z-index: 6;
-  background-color: #fff;
+  background: transparent;
 
   .heading-gallery-name {
     font-size: 18px;
+  padding: 10px;
+  margin: 0;
+  border-radius: 10px 10px 0 0;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.95);
   }
 
   .masonry-main {
-    height: 650px !important;
+    height: 540px !important;
     border: 1px solid #ccc;
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
     overflow-y: scroll;
     overflow-x: hidden;
-    background-color: #fff;
+    background: rgba(255, 255, 255, 0.95);
     z-index: 2;
   }
 
@@ -8290,7 +8307,7 @@ a{
 .user-button-holder {
   padding: 0 20px;
   position: absolute;
-  top: 50%;
+  top: 55%;
   right: -240px;
   @include transform(translateY(-50%)rotate(90deg));
 
@@ -8298,7 +8315,7 @@ a{
     content: '';
     width: 100%;
     height: 25px;
-    border: 1px solid #ccc;
+    // border: 1px solid #ccc;
     border-bottom: none;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -8306,7 +8323,7 @@ a{
     position: absolute;
     left: 0;
     bottom: 0;
-    background-color: #fff;
+    background: rgba(255, 255, 255, 0.9);
     z-index: -1;
   }
 }
@@ -8321,7 +8338,7 @@ a{
 }
 
 .close-gallery {
-  left: -972px;
+  left: -980px;
   @include transition(all 300ms linear);
 
   .close-button {
@@ -8392,7 +8409,7 @@ a{
   padding: 25px;
 
   .view-quick-descp {
-    color: #787878;
+    color: #424242;
   }
 }
 
@@ -9372,6 +9389,7 @@ a{
         color: #787878;
         line-height: 100%;
         @extend .avenir-roman;
+        background: transparent;
       }
     }
 

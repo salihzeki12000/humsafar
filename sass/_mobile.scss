@@ -882,6 +882,16 @@ img {
 }
 }
 }
+.activity-main {
+  .col-md-4.masonry-brick {
+    width: 100%;
+    padding: 0;
+}
+}
+.activity-popular-main,.visit-post {
+   margin-left: 0;
+    margin-right: 0px;
+}
 }
 
 // media query for 767px to 480px end

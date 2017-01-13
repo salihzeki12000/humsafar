@@ -386,6 +386,10 @@ a.color-white {
         padding: 20px;
         text-align: justify;
         color: #fff;
+        .flipped-cont {
+        width: 100%;
+        padding: 0 20px;
+        }
         p {
           @extend .avenir-roman;
         }
@@ -1284,6 +1288,31 @@ a.color-white {
   }
 }
 .addfixed {
+.destin-fixednav-country{
+    position: fixed;
+    top: 60px;
+    z-index: 9;
+    width: 100%;
+}
+}
+.addfixed {
+  .destin-fixednav1 {
+    position: fixed;
+    top: 102px;
+    z-index: 4;
+    width: 100%;
+  }
+}
+
+.addfixed2 {
+  .destin-fixednav2 {
+    position: fixed;
+    top: 102px;
+    z-index: 4;
+    width: 100%;
+  }
+}
+.addfixed2 {
   .destin-fixednav1 {
     position: fixed;
     top: 102px;
@@ -1388,6 +1417,8 @@ a.color-white {
   .destination-content {
     .img-holder.card {
       .back .flipped-cont {
+        width: 100%;
+    padding: 0 20px;
         overflow: scroll;
         &::-webkit-scrollbar {
           display: none;
