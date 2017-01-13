@@ -47,8 +47,9 @@ var ongojourney = angular.module('ongojourney', [])
       }).success(function(data) {
         var journey = data.data;
         // header integration starts
-        journey.kindOfJourneyIconsAddr = [];
+        journey.kindOfJourneyIconsAddr = [];                             
         journey.buddiesCount = journey.buddies.length;
+        
         journey.showRemainingCount = false;
         if (journey.buddiesCount >= 4) {
           journey.showRemainingCount = true;

@@ -1389,7 +1389,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     $scope.getPostsCommentData = function (ongo) {
-      $scope.focus('enterComment');
       $scope.post = ongo;
       $scope.previousId;
       var callback = function (data) {
@@ -1398,17 +1397,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
       }
       if ($scope.previousId != $scope.post._id) {
+        $scope.focus('enterComment');
         $scope.listOfComments = [];
         $scope.viewCardComment = true;
+        $scope.journey.journeyHighLight=ongo._id;
         $scope.getCard = "view-whole-card";
         LikesAndComments.getComments("post", $scope.post._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
+          $scope.journey.journeyHighLight="";
           $scope.getCard = "";
         } else {
           $scope.listOfComments = [];
           $scope.viewCardComment = true;
+          $scope.focus('enterComment');          
+          $scope.journey.journeyHighLight=ongo._id;
           $scope.getCard = "view-whole-card";
           LikesAndComments.getComments("post", $scope.post._id, callback);
         }
@@ -2059,15 +2063,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.navigation = NavigationService.getnav();
 
   $scope.travelLife = [{
-    otherProfile: true,
-    viewProfile: [{
-      imgBg: "img/itinerary/religious.jpg",
-      profileImg: "img/profile-main.png",
-      name: "Andrea Christina",
-      location: "London",
-      follower: "2090"
-    }],
-  }, {
     popItinerary: true,
     heading: "Editor",
     follower: "follow",
@@ -4102,10 +4097,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     })
   })
 
-
-
-
-
 .controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife, OnGoJourney) {
     //Used to name the .html file
 
@@ -4116,6 +4107,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.obj = {};
+    $scope.showTravellife=false;
     $scope.visited = [];
     var len = "";
 
