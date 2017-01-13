@@ -7121,6 +7121,9 @@ a{
 
 .detail-itinerary-page {
   padding: 0 20px;
+  .form-control{
+    background-color: transparent;
+  }
 }
 
 .itinerary-country-detail {
@@ -7850,6 +7853,15 @@ a{
   }
 }
 
+.travelled-withselect .ui-select-multiple.ui-select-bootstrap .ui-select-match .close{
+  line-height: 1 !important;
+  color: $brand-blue
+}
+
+.travelled-withselect .ui-select-multiple.ui-select-bootstrap .btn-default{
+  color: $brand-blue !important;
+}
+
 //sagar css end
 // detail itinerary detail end
 // editor itinerary
@@ -8242,9 +8254,9 @@ a{
   }
 
   .gallery-imgholder {
-    width: 180px;
-    max-width: 180px;
-    max-height: 370px;
+    width: 450px;
+    max-width: 450px;
+    max-height: 550px;
     margin: 3px;
 
     img {
@@ -8392,6 +8404,10 @@ a{
 }
 // user itinerary end
 // user detail itinerary
+
+.bg-white-95{
+  background-color: rgba(255,255,255,0.95);
+}
 
 .user-detailitinerary-page {
   .trip-status-main {
