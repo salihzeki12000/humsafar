@@ -11,7 +11,7 @@
     </div>
   </div>
 </div>
-<div class="bg-white">
+<div class="tint-bg">
   <div class="container">
   <div class="popular-itinerary second">
            <!-- other itineraries main -->
@@ -19,7 +19,7 @@
         <div class="blog-popular-itineraries">
             <div masonry class="blog-itineraries-main">
               <div class="row">
-                <div class="masonry-brick col-md-4 col-sm-6" ng-repeat="life in travelLife" >
+                <div class="masonry-brick travelLife col-md-4 col-sm-6" ng-repeat="life in travelLife" >
                   <div class="travel-life-part blog-post avenir-roman" ng-if="life.popItinerary">
                     <div class="travel-journey-heading">
                       <div class="editor-logo">
@@ -48,30 +48,36 @@
                       <span>+4</span>
                       </div>
                       <div class="journey-tag-holder">
+                          <div class="days-spent pull-right">
+                              <p><span class="block">{{life.spendingDay}}</span>Days</p>
+                            </div>
                         <h3 class="m-clear text-capitalize">{{life.onwayTag}}</h3>
                         <div class="clearfix journey-travelling-type">
+                            <div class="row">
+                            <div class="col-xs-6">
                           <div class="pull-left">
-                            <div class="journey-type">
+                            <div class="journey-collection">
                               <ul>
                                 <li>
-                                  <a href=""><img ng-src="{{life.itineraryType1}}" alt="" height="20"></a>
+                                  <a href=""><img ng-src="{{life.itineraryType1}}" alt="" height="18"></a>
                                 </li>
                                 <li>
-                                  <a href=""><img ng-src="{{life.itineraryType2}}" alt="" height="20"></a>
+                                  <a href=""><img ng-src="{{life.itineraryType2}}" alt="" height="18"></a>
                                 </li>
                                 <li>
-                                  <a href=""><img ng-src="{{life.itineraryType3}}" alt="" height="20"></a>
+                                  <a href=""><img ng-src="{{life.itineraryType3}}" alt="" height="18"></a>
                                 </li>
                               </ul>
                             </div>
                           </div>
+                            </div>
+                             <div class="col-xs-6">
                           <div class="pull-right">
                             <div class="journey-cost">
                               <span>{{life.cost}}</span>
                             </div>
-                            <div class="days-spent">
-                              <p><span class="block">{{life.spendingDay}}</span>Days</p>
-                            </div>
+                          </div>   
+                          </div>   
                           </div>
                         </div>
                       </div>
@@ -112,43 +118,11 @@
                     </div>
                   </div>
                   <!-- visit local and travel post -->
-                  <!--<div class="visit-post {{life.class}}" ng-if="life.visitPost">-->
-                    <div class="visit-post-main" ng-repeat="visit in life.getvisitPost track by $index">
+                    <!--<div class="visit-post-main" ng-repeat="visit in life.getvisitPost track by $index">
                       <div class="relate">
                         <div class="visit-view-imgholder">
                           <img ng-src="{{visit.imgVisit}}" alt="" class="img-responsive">
                         </div>
-                        <!-- local visit post -->
-                        <!-- <div class="local-visit-post" ng-if="visit.localLifeMain">
-                          <div class="local-visit-header clearfix">
-                            <div class="pull-left">
-                              <h4 class="color-white avenir-heavy"><img src="img/flag.png" alt="Journey Flag" ng-if="visit.flag" width="30" class="mr5">{{visit.locationLocal}}</h4>
-                            </div>
-                            <div class="pull-right">
-                              <div class="tag-ongo-journey-local bg-dark-cyan">
-                                <span class="inline-block color-blue avenir-heavy">Explore Destinations</span>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="local-visit-detail" ng-if="visit.localVisit">
-                            <div class="clearfix">
-                              <div class="pull-left" ng-if="visit.cityTag">
-                                <p class="color-white avenir-roman m-clear mt5">{{visit.tag}}</p>
-                              </div>
-                              <div class="pull-left" ng-if="visit.rating">
-                                <p class="avenir-roman color-white m-clear mt5 been-here">People Been Here : {{visit.peopleBeen}} | Rating : <span><i class="fa fa-star color-pink"></i>
-                                  <i class="fa fa-star color-pink"></i>
-                                  <i class="fa fa-star color-pink"></i>
-                                  <i class="fa fa-star color-pink"></i>
-                                  <i class="fa fa-star-o"></i></span></p>
-                              </div>
-                              <div class="pull-right">
-                                <button class="btn btn-white-outline avenir-roman">View</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div> -->
-                        <!-- local visit post end-->
                       </div>
                       <div class="travelocal-visit-foot">
                         <div class="visit-slider" ng-if="visit.visitSlider">
@@ -204,7 +178,7 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div>-->
                   </div>
                 </div>
               </div>

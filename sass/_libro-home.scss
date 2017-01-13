@@ -416,13 +416,13 @@ a.color-white {
     letter-spacing: 1px;
     display: block;
     font-size: 19px;
-    border-bottom: 1px dotted #fff;
-    @extend .avenir-heavy;
+    border-bottom: 1px solid #fff;
+    @extend .avenir-medium;
   }
   .social-icon-menu {
     margin-top: 50px;
     h4 {
-      @extend .avenir-heavy;
+      @extend .avenir-medium;
       font-size: 20px;
     }
     li+li {
@@ -478,8 +478,8 @@ a.color-white {
       margin-top: 0;
     }
     .icon {
-      font-size: 25px;
-      margin-top: -3px;
+      font-size: 20px;
+      margin-top: 0px;
       @include transition(all ease 300ms);
     }
   }
@@ -554,7 +554,7 @@ a.color-white {
   left: 0;
   bottom: 0;
   top: 0;
-  background: $brand-menu;
+      background: rgba(0, 0, 0, 0.85);
   color: #fff;
 }
 
@@ -1344,6 +1344,11 @@ a.volume-off-on {
 .bg-about{
     background: url('../img/bg-about-home.jpg') no-repeat;
   background-size: cover;
+  .head-about {
+  font-size: 100px !important;
+ text-shadow: 3px 1px 3px rgba(0, 0, 0, 0.5);
+  @extend .avenir-heavy;
+}
 }
 .about-reviews{
   background: url('../img/bg-about.jpg') no-repeat;
@@ -1356,15 +1361,6 @@ a.volume-off-on {
     margin: 0 0 20px;
 }
   }
-.head-about{
-    padding: 250px 0;
-    min-height: 500px;
-   h4 {
-  font-size: 100px;
- text-shadow: 3px 1px 3px rgba(0, 0, 0, 0.5);
-  @extend .avenir-heavy;
-}
-}
 .our-story {
 .title-head {
 h4{

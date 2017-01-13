@@ -888,9 +888,13 @@ img {
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
   .home-slide{ 
-    .contact{ .contact-ab {.social-icons li {
+    .contact{ .contact-ab {
+      .social-icons li {
     width: 50px;
     height: 50px;
+     a {
+    padding: 8px 0;
+}
 }
 .contact-decrp img {
     height: 35px;
@@ -920,7 +924,14 @@ img {
     font-size: 40px;
 }
   }
-
+.more-about-me{ .more-detail {
+  margin-bottom: 15px;
+    font-size: 14px;
+}
+p{
+      font-size: 16px;
+}
+}
   .journey-tabs .btn-tab, .moments-tab .btn-tab {
     width: 16px;
     height: 16px;
