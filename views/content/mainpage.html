@@ -109,7 +109,7 @@
             <div class="text-center">
               <h3 class="color-blue avenir-black">Nationality</h3>
               <div class="select-your-nation">
-                <div class="search-nation">
+                <!-- <div class="search-nation">
                   <input type="text" class="form-control avenir-roman" placeholder="Search" ng-model="searchNation">
                 </div>
                 <ul class="avenir-roman">
@@ -122,7 +122,15 @@
                       </label>
                     </div>
                   </li>
-                </ul>
+                </ul> -->
+                <div class="nation-country">
+                  <ui-select ng-model="userData.homeCountry" theme="bootstrap" on-select="$parent.goNext=3">
+                    <ui-select-match placeholder="Search"   >{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="nation._id as nation in nationality | filter:$select.search" track by $index ng-click="$parent.goNext=3"><img ng-src="{{nation.flag|uploadpath:30}}" width="30" class="mr10 v-mid inline-block" alt="{{nation.name}}">
+                      <span class="color-light-grey" ng-bind="nation.name"></span>
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
               </div>
               <div class="button-panel clearfix">
                 <!--<button class="btn btn-blue-outline btn-more pull-left" ui-sref="mylife">Skip</button>-->
@@ -134,7 +142,7 @@
             <div class="text-center">
               <h3 class="color-blue avenir-black">Where Do You Live ?</h3>
               <div class="select-your-nation select-your-city">
-                <div class="search-nation select-city">
+                <!-- <div class="search-nation select-city">
                   <input type="text" class="form-control avenir-roman" placeholder="City" ng-model="searchCity" ng-value="userData.homeCity"
                     ng-change="searchByKey(searchCity)">
                 </div>
@@ -147,7 +155,15 @@
                       </label>
                     </div>
                   </li>
-                </ul>
+                </ul> -->
+                <div class="nation-city">
+                  <ui-select ng-model="userData.homeCity" theme="bootstrap" on-select="$parent.goNext=4" ng-value="userData.homeCity">
+                    <ui-select-match placeholder="Search City"   >{{$select.selected.description}}</ui-select-match>
+                    <ui-select-choices repeat="city.description as city in cities | filter:searchCity" track by $index ng-click="$parent.goNext=4" refresh="searchByKey($select.search)" refresh-delay="0">
+                      <span class="color-light-grey">{{city.description}}</span>
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
               </div>
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext=2">Previous</button>
@@ -176,6 +192,9 @@
             <div class="text-center">
               <h3 class="color-blue avenir-black">Upload Profile Photo</h3>
               <div class="cropArea" ng-show="showImage">
+                <div class="text-right">
+                  <span class="color-dark-blue">Cancel</span>
+                </div>
                 <img-crop image="myImage" result-image="uploadme.src" /></img-crop>
               </div>
               <div class="hide">

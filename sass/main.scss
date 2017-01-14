@@ -14,13 +14,13 @@
 @import "../bower_components/smart-app-banner/smart-app-banner.css";
 /* Boots
 trap Variables Goes Here */
-$brand-dark-blue: #2c3757;
-$brand-blue: #2d3655;
-$brand-dark-pink: #f2675b;
-$brand-pink: #ff6759;
-$brand-dark-cyan: #57d3c7;
+$brand-dark-blue: #272b49;
+$brand-blue: #303557;
+$brand-dark-pink: #ef645e;
+$brand-pink: #f58b86;
+$brand-dark-cyan: #4fd4ca;
 $brand-cyan: #11d3cb;
-$brand-light-cyan: #91e2d6;
+$brand-light-cyan: #6ed4c6;
 $brand-dark-grey: #949494;
 $brand-grey: #b2b2b2;
 $brand-light-grey: #a0a0a0;
@@ -912,7 +912,64 @@ p{
 .select-your-nation {
   min-height: 200px;
   position: relative;
+  z-index: 1;
+  // ui-select nation
+  .ui-select-container[theme="bootstrap"].direction-up .ui-select-dropdown {
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    position: static !important;
+  }
+  .ui-select-container {
+    &:after,
+    &:before {
+      content: "";
+      @include size(1px, 15px);
+      position: absolute;
+      top: 19px;
+      // background-color: $brand-pink;
+      background-color: $brand-lighter-grey;
+      z-index: 1;
+    }
 
+    &:before {
+      left: 0;
+    }
+
+    &:after {
+      right: 0;
+    }
+    input { width: 100% !important; }
+  }
+  .ui-select-bootstrap  {
+    .ui-select-choices-row > span {
+      padding: 5px 10px;
+      border-bottom: 1px solid $brand-lighter-grey;
+    }
+    .ui-select-choices-row.active>span {
+      background-color: #f5f5f5;
+    }
+    .ui-select-choices, .ui-select-no-choice {
+      max-height: 232px;
+      padding: 0;
+      box-shadow: none;
+      border-radius: 0;
+      margin-top: 0;
+    }
+  }
+  .ui-select-match {
+    border: none;
+    border-radius: 0;
+    .btn {
+      border: none;
+      border-bottom: 1px solid #e3e3e3;
+      border-radius: 0;
+      background: url("../img/dropdown-icon.png") no-repeat 98% 50%;
+      &:hover { background-color: transparent; }
+    }
+    i { display: none; }
+  }
+  // ui-select nation end
   .search-nation {
     position: relative;
 
@@ -975,9 +1032,9 @@ p{
     text-align: left;
 
     li {
-      padding: 10px 0;
+      // padding: 10px 0;
       // border-bottom: 2px solid $brand-dark-blue;
-      border-bottom: 1px solid $brand-lighter-grey;
+      // border-bottom: 1px solid $brand-lighter-grey;
       color: #fff;
 
       span {
@@ -8850,6 +8907,10 @@ a{
   }
 }
 // profile list (follow following countryVisited BucketList)
+.white-full {
+  min-height: 100vh;
+  height: 100%;  
+}
 
 .profile-tab-strip {
   padding: 0 20px;
