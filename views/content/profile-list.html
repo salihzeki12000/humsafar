@@ -225,9 +225,8 @@
            <div class="row">
              <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="country in countryVisitedList">
               <div class="country-list-holder">
-                <!--style="background-image: url('{{country.countryId.countryCoverPhoto|uploadpath:405:255:''}}');"-->
-                <div class="list-imgholder" >
-                   <img ng-src="{{country.countryId.countryCoverPhoto|uploadpath:405:255:'cover'}}" alt="" class="img-responsive country-img"> 
+                <div class="list-imgholder" style="background-image: url('{{country.countryId.countryCoverPhoto|uploadpath}}');">
+                   <!-- <img ng-src="{{country.countryId.countryCoverPhoto|uploadpath}}" alt="" class="img-responsive country-img">  -->
                   <div class="list-info">
                     <div class="clearfix">
                       <div class="pull-left">
@@ -265,9 +264,8 @@
           <div class="row">
             <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="bucket in bucketList track by $index" id="{{bucket._id}}">
               <div class="bucket-list-holder">
-                <!--style="background-image: url('{{bucket.countryCoverPhoto|uploadpath}}');-->
-                <div class="list-imgholder">
-                   <img ng-src="{{bucket.countryCoverPhoto|uploadpath:405:225:'cover'}}" alt="{{bucket.name}}" class="img-responsive country-img"> 
+                <div class="list-imgholder" style="background-image: url('{{bucket.countryCoverPhoto|uploadpath}}');">
+                   <!-- <img ng-src="{{bucket.countryCoverPhoto|uploadpath:405:225:'cover'}}" alt="{{bucket.name}}" class="img-responsive country-img"> -->
                   <div class="list-info">
                     <div class="clearfix">
                       <div class="pull-left">

@@ -4,6 +4,9 @@
     <div class="bg-white">
       <div class="notify-imgsec">
         <div class="notify-imgholder">
+          <div class="blurnotify-imgholder">
+            <img ng-src="{{listOfComments.name|uploadpath}}" alt="" class="img-responsive">
+          </div>
           <img ng-src="{{listOfComments.name|uploadpath}}" alt="Andrea" class="img-reponsive">
         </div>
       </div>
@@ -50,7 +53,7 @@
           </div>
           <div class="clearfix comment-post">
             <div class="pull-right">
-              <button class="btn btn-pink post-btn" ng-click=postPhotosComment(listOfComments.name,text,listOfComments.post,listOfComments._id)>Post</button> 
+              <button class="btn btn-pink post-btn" ng-click=postPhotosComment(listOfComments.name,text,listOfComments.post,listOfComments._id)>Post</button>
             </div>
           </div>
           <div class="view-comment-list" ng-repeat="list in listOfComments.comment">
