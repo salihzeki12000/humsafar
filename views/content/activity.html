@@ -6,7 +6,7 @@
       </div>
       <div class="" masonry>
         <div class="row">
-          <div class="col-md-4 masonry-brick" ng-repeat="post in activityPost">
+          <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="post in activityPost">
             <!-- activity-post -->
             <div class="activity-post {{post.class}}" ng-if="post.activitySec">
               <div class="activity-post-main">
@@ -191,8 +191,8 @@
                         <div class="clearfix journey-travelling-type">
                           <div class="row">
                             <div class="col-xs-4">
-                            <div class="journey-type m0"  ng-if="post.class != 'editor-blog''">
-                              <ul>
+                            <div class="journey-type m0">
+                              <ul  ng-if="post.class != 'editor-blog''">
                                 <li>
                                   <a href=""><img ng-src="{{post.itineraryType1}}" alt="" height="15"></a>
                                 </li>

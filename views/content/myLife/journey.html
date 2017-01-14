@@ -89,12 +89,13 @@
             </div>
           </div>
           <!-- user logged for first time end -->
+          <div class="container">
           <div class="masonry-detail" ng-show="hasJourney">
             <div masonry>
               <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-6 masonry-brick " ng-repeat="life in travelLife">
                   <!--journey card -->
-                  <div class="journey-masonry-brick" ng-if="life.type=='travel-life'">
+                  <div class="journey-masonry-brick {{life.type}}" ng-if="life.type=='travel-life'">
                     <div class="travel-life-part avenir-roman">
                       <div class="travel-journey-heading">
                         <p ng-hide="life.onJourney">{{life.heading}}</p>
@@ -104,23 +105,28 @@
                       <!--jounrey main detail card-->
                       <div class="travelled-journey relate" ng-click="routeTO(life.type,life.urlSlug)">
                         <div class="travelled-imgholder">
-                          <img ng-src="{{life.coverPhoto|uploadpath}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto!=null">
-                          <img ng-src="{{life.startLocationPic|small|uploadpath}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto==null">
+                          <img ng-src="{{life.coverPhoto|uploadpath}}" alt="" class="img-responsive full-height m-center" ng-if="life.coverPhoto!=null">
+                          <img ng-src="{{life.startLocationPic|small|uploadpath}}" alt="" class="img-responsive full-height m-center" ng-if="life.coverPhoto==null">
                         </div>
-                        <div class="country-visited">
-                          <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30" ng-repeat="visit in life.countryVisited | limitTo : 3">
+                      <div class="country-badges">
+                        <div class="country-visited" ng-repeat="visit in life.countryVisited | limitTo : 3">
+                          <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30">
                           <!--<span ng-show="life.showRemainingCount" class="">+{{life.remainingCount}}</span>-->
-                          <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
                         </div>
+                        <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
+                      </div>
                         <div class="journey-tag-holder">
                               <div class="days-spent pull-right">
                                 <p><span class="block">{{"current"|dateDifference: life.startTime}}</span> Days</p>
                               </div>
                           <h4 class="m-clear text-capitalize">{{life.name}}</h4>
                           <div class="clearfix journey-travelling-type">
-                            <div class="pull-left">
+                            <div class="row">
+                              <div class="col-xs-6">
+                           <div class="pull-left">
                               <div class="journey-collection">
-                                <ul>
+                                <!--<ul ng-if="life.photos.length">-->
+                                  <ul ng-if="life.photos.length > 1">
                                   <li>
                                     <a href="">
                                       <div class="">
@@ -148,13 +154,17 @@
                                 </ul>
                               </div>
                             </div>
-                            <div class="pull-right">
-                              <div class="journey-type inline-block">
+                              </div>
+                              <div class="col-xs-6">
+                                                            <div class="pull-right">
+                              <div class="journey-type">
                                 <ul>
                                   <li ng-repeat="list in life.kindOfJourney|limitTo:3">
-                                    <a href=""><img ng-src="{{list|kindOfJourney:'white'}}" alt="" height="20"></a>
+                                    <a href=""><img ng-src="{{list|kindOfJourney:'white'}}" alt="" height="18"></a>
                                   </li>
                                 </ul>
+                              </div>
+                            </div>
                               </div>
                             </div>
                           </div>
@@ -231,8 +241,8 @@
                               </div>
                           <h3 class="m-clear text-capitalize">{{life.title}}</h3>
                           <div class="clearfix journey-travelling-type">
-<div class="row">
-  <div class="col-xs-6">
+                          <div class="row">
+                          <div class="col-xs-6">
                             <div class="pull-left">
                               <div class="journey-type m0">
                                 <ul>
@@ -242,18 +252,16 @@
                                 </ul>
                               </div>
                             </div>
-  </div>
-   <div class="col-xs-6">
-                                 <div class="pull-right">
+                          </div>
+                           <div class="col-xs-6">
+                              <div class="pull-right">
                               <div class="journey-cost">
                                 <span>{{life.currency}}</span>
                                 <span>{{life.cost}}</span>
                               </div>
                             </div>
-   </div>
-</div>
-
-
+                         </div>
+                      </div>
                           </div>
                         </div>
                       </div>
@@ -306,6 +314,7 @@
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
         <!-- end journey travel-life -->

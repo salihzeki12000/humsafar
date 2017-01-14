@@ -33,13 +33,14 @@
               <span>Local Life</span>
             </div>
             <!-- back button -->
-            <div class="pull-right" ng-show="viewMonth" ng-click="showMonthView();">
-              <button class="btn btn-blue-outline btn-more">Back</button>
+            <div class="pull-right" ng-show="viewMonth">
+              <button class="btn btn-blue-outline btn-more" ng-click="showMonthView();">Back</button>
             </div>
             <!-- back button end -->
           </div>
           <!-- moments view tab end -->
           <!-- moment all view -->
+          <div class="container">
           <div class="moment-view">
             <div class="moment-all-view" ng-show="momentView == 1" >
               <!-- empty all view profile user login for first time  -->
@@ -99,9 +100,11 @@
                   </div>
                 </div>
                 <div class="travel-info text-center avenir-roman">
-                  <h4>{{view.placeName}} <span>({{view.totalPhoto}})</span></h4>
-                  <span class="color-light-grey">{{view.timestampMonth}}</span>
+                  <span class="pull-right">({{view.totalPhoto}})</span>
+                  <h4>{{view.placeName}} </h4>
+                   <span class="color-light-grey pull-right">{{view.timestampMonth}}</span>
                 </div>
+                
               <!--</div>
                   </div>
                 </div>-->
@@ -141,6 +144,7 @@
 
               </div>
             </div>
+          </div>
           </div>
           <!-- moment local view end -->
         </div>

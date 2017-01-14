@@ -224,10 +224,15 @@
                         <span class="">+4</span>
                       </div>
                       <div class="journey-tag-holder">
+                            <div class="days-spent pull-right">
+                              <p><span class="block">{{life.spendingDay}}</span>Days</p>
+                            </div>
                         <h3 class="m-clear text-capitalize">{{life.onwayTag}}</h3>
                         <div class="clearfix journey-travelling-type">
+                        <div class="row">
+                          <div class="col-xs-6">
                           <div class="pull-left">
-                            <div class="journey-type">
+                            <div class="journey-type m0">
                               <ul>
                                 <li>
                                   <a href=""><img ng-src="{{life.itineraryType1}}" alt="" height="20"></a>
@@ -241,14 +246,15 @@
                               </ul>
                             </div>
                           </div>
-                          <div class="pull-right">
+                          </div>
+                           <div class="col-xs-6">
+                            <div class="pull-right">
                             <div class="journey-cost">
                               <span>{{life.cost}}</span>
                             </div>
-                            <div class="days-spent">
-                              <p><span class="block">{{life.spendingDay}}</span>Days</p>
-                            </div>
                           </div>
+                           </div>
+                        </div>
                         </div>
                       </div>
                     </div>
