@@ -1120,6 +1120,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             currentObj.icon = "img/maps/green-marker.png";
           }else if(status==null){
             currentObj.map=null;
+            currentObj.zIndex=i;
           }
           marker = new google.maps.Marker(currentObj);
           markers[i] = marker;
@@ -1310,7 +1311,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 markers[markerCount].setIcon("img/maps/green-marker.png");
               } else if(markerCount>=i){
                 markers[markerCount].setMap(null);
-              }else if((markerCount<i)){
+              }else if((markerCount<=i)){
                  if( markers[markerCount].map==null){
                    markers[markerCount].setMap(map);         
                 };
@@ -1395,6 +1396,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.startTagIndex = null;
     $scope.endTagIndex = null;
     $scope.hashTag;
+
     $scope.testingHash = function (text) {
       var ctl = document.getElementById('enterComment');
       $scope.startTagIndex = null;
@@ -1443,10 +1445,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.appendComment = function (comment, replaceWith, tag, startTagIndex, endTagIndex) {
       var counter = "";
-      // console.log(comment.text,replaceWith,tag,startTagIndex,endTagIndex);
       var len = comment.text.length;
       counter = startTagIndex + 1;
-
       while ((counter <= comment.text.length) && ($scope.startTagIndex != null)) {
         if (comment.text[counter] == " " || comment.text[counter] == "#") {
           $scope.endTagIndex = counter - 1;
@@ -4903,7 +4903,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       $scope.viewMonth = false;
       $scope.showMonthView = function () {
-        $scope.viewMonth = true;
+        if ( $scope.viewMonth == false){
+            $scope.viewMonth = true;
+        }
+      else {
+            $scope.viewMonth = false;
+        }
       };
       // reviews json
       $scope.oneAtATime = true;
