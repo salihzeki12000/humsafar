@@ -100,7 +100,7 @@
       </form>     
   </div>
   </div>
-    <div class="bg-white activity-container">
+    <div class="activity-container">
       <div class="plr30">
         <div  masonry>
           <div class="row">
@@ -134,10 +134,13 @@
                     </div>
                   </div>
                   <div class="journey-tag-holder">
+                    <div class="days-spent pull-right">
+                          <p><span class="block">{{post.duration}}</span>Days</p>
+                    </div>
                     <h3 class="m-clear text-capitalize">{{post.title}}</h3>
                     <div class="clearfix journey-travelling-type">
                       <div class="pull-left">
-                        <div class="journey-type">
+                        <div class="journey-type m0">
                           <ul>
                             <li ng-repeat="type in post.itineraryType">
                               <a href=""><img ng-src="{{type|kindOfJourney}}" alt="" height="20"></a>
@@ -148,9 +151,6 @@
                       <div class="pull-right">
                         <div class="journey-cost">
                           <span>{{post.cost}}</span>
-                        </div>
-                        <div class="days-spent">
-                          <p><span class="block">{{post.duration}}</span>Days</p>
                         </div>
                       </div>
                     </div>
