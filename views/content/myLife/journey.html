@@ -113,6 +113,9 @@
                           <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
                         </div>
                         <div class="journey-tag-holder">
+                              <div class="days-spent pull-right">
+                                <p><span class="block">{{"current"|dateDifference: life.startTime}}</span> Days</p>
+                              </div>
                           <h4 class="m-clear text-capitalize">{{life.name}}</h4>
                           <div class="clearfix journey-travelling-type">
                             <div class="pull-left">
@@ -152,9 +155,6 @@
                                     <a href=""><img ng-src="{{list|kindOfJourney:'white'}}" alt="" height="20"></a>
                                   </li>
                                 </ul>
-                              </div>
-                              <div class="days-spent inline-block">
-                                <p><span class="block">{{"current"|dateDifference: life.startTime}}</span> Days</p>
                               </div>
                             </div>
                           </div>
@@ -226,10 +226,15 @@
                           </div> -->
                         </div>
                         <div class="journey-tag-holder">
+                                <div class="days-spent pull-right">
+                                <p><span class="block">{{"current"|dateDifference: life.startTime}}</span>Days</p>
+                              </div>
                           <h3 class="m-clear text-capitalize">{{life.title}}</h3>
                           <div class="clearfix journey-travelling-type">
+<div class="row">
+  <div class="col-xs-6">
                             <div class="pull-left">
-                              <div class="journey-type">
+                              <div class="journey-type m0">
                                 <ul>
                                   <li ng-repeat="list in life.itineraryType|limitTo:3">
                                     <a href=""><img ng-src="{{list|kindOfJourney:'white'}}" alt="" height="20"></a>
@@ -237,15 +242,18 @@
                                 </ul>
                               </div>
                             </div>
-                            <div class="pull-right">
+  </div>
+   <div class="col-xs-6">
+                                 <div class="pull-right">
                               <div class="journey-cost">
                                 <span>{{life.currency}}</span>
                                 <span>{{life.cost}}</span>
                               </div>
-                              <div class="days-spent">
-                                <p><span class="block">{{"current"|dateDifference: life.startTime}}</span>Days</p>
-                              </div>
                             </div>
+   </div>
+</div>
+
+
                           </div>
                         </div>
                       </div>

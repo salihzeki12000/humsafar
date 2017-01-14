@@ -100,7 +100,7 @@
       </form>     
   </div>
   <div class="container-fluid">
-    <div class="bg-white activity-container">
+    <div class="activity-container">
       <div class="plr30">
         <div class="" masonry>
           <div class="row">
@@ -191,6 +191,9 @@
                           <img ng-src="{{post.imgTravelled}}" alt="" class="img-responsive m-center">
                         </div>
                         <div class="journey-tag-holder">
+                          <div class="days-spent pull-right">
+                                <p><span class="block">{{post.travelledDay}}</span> Days</p>
+                          </div>
                           <h4 class="m-clear text-capitalize">{{post.Travelledtag}}</h4>
                           <div class="clearfix journey-travelling-type">
                             <div class="pull-left">
@@ -224,21 +227,18 @@
                               </div>
                             </div>
                             <div class="pull-right">
-                              <div class="journey-type inline-block">
+                              <div class="journey-type m0 inline-block">
                                 <ul>
                                   <li>
-                                    <a href=""><img ng-src="{{post.itineraryType1}}" alt="" height="20"></a>
+                                    <a href=""><img ng-src="{{post.itineraryType1}}" alt="" height="18"></a>
                                   </li>
                                   <li>
-                                    <a href=""><img ng-src="{{post.itineraryType2}}" alt="" height="20"></a>
+                                    <a href=""><img ng-src="{{post.itineraryType2}}" alt="" height="18"></a>
                                   </li>
                                   <li>
-                                    <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="20"></a>
+                                    <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="18"></a>
                                   </li>
                                 </ul>
-                              </div>
-                              <div class="days-spent inline-block">
-                                <p><span class="block">{{post.travelledDay}}</span> Days</p>
                               </div>
                             </div>
                           </div>
@@ -251,19 +251,22 @@
                           <img ng-src="{{post.imgOnway}}" alt="" class="full-width m-center">
                         </div>
                         <div class="journey-tag-holder">
+                              <div class="days-spent pull-right">
+                                <p><span class="block">{{post.spendingDay}}</span>Days</p>
+                              </div>
                           <h3 class="m-clear text-capitalize">{{post.onwayTag}}</h3>
                           <div class="clearfix journey-travelling-type">
                             <div class="pull-left">
-                              <div class="journey-type">
+                              <div class="journey-type m0">
                                 <ul>
                                   <li>
-                                    <a href=""><img ng-src="{{post.itineraryType1}}" alt="" height="20"></a>
+                                    <a href=""><img ng-src="{{post.itineraryType1}}" alt="" height="18"></a>
                                   </li>
                                   <li>
-                                    <a href=""><img ng-src="{{post.itineraryType2}}" alt="" height="20"></a>
+                                    <a href=""><img ng-src="{{post.itineraryType2}}" alt="" height="18"></a>
                                   </li>
                                   <li>
-                                    <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="20"></a>
+                                    <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="18"></a>
                                   </li>
                                 </ul>
                               </div>
@@ -271,9 +274,6 @@
                             <div class="pull-right">
                               <div class="journey-cost">
                                 <span>{{post.cost}}</span>
-                              </div>
-                              <div class="days-spent">
-                                <p><span class="block">{{post.spendingDay}}</span>Days</p>
                               </div>
                             </div>
                           </div>
@@ -373,10 +373,13 @@
                   </div>
                   <div class="journey-tag-holder">
                     <!-- <h3 class="m-clear text-capitalize">{{post.itineraryType|kindOfJourney}}</h3> -->
+                        <div class="days-spent pull-right">
+                          <p><span class="block">{{post.duration}}</span>Days</p>
+                        </div>
                     <h3 class="m-clear text-capitalize">{{post.title}}</h3>
                     <div class="clearfix journey-travelling-type">
                       <div class="pull-left">
-                        <div class="journey-type">
+                        <div class="journey-type m0">
                           <ul>
                             <li ng-repeat="type in post.itineraryType track by $index">
                               <a href="">
@@ -389,9 +392,6 @@
                       <div class="pull-right">
                         <div class="journey-cost">
                           <span>{{post.cost}}</span>
-                        </div>
-                        <div class="days-spent">
-                          <p><span class="block">{{post.duration}}</span>Days</p>
                         </div>
                       </div>
                     </div>
@@ -469,10 +469,13 @@
                     </div>
                   </div>
                   <div class="journey-tag-holder">
+                        <div class="days-spent pull-right">
+                          <p><span class="block">{{post.duration}}</span>Days</p>
+                        </div>
                     <h3 class="m-clear text-capitalize">{{post.title}}</h3>
                     <div class="clearfix journey-travelling-type">
                       <div class="pull-left">
-                        <div class="journey-type">
+                        <div class="journey-type m0">
                           <ul>
                             <li ng-repeat="type in post.itineraryType">
                               <a href=""><img ng-src="{{type|kindOfJourney}}" alt="" height="20"></a>
@@ -483,9 +486,6 @@
                       <div class="pull-right">
                         <div class="journey-cost">
                           <span>{{post.cost}}</span>
-                        </div>
-                        <div class="days-spent">
-                          <p><span class="block">{{post.duration}}</span>Days</p>
                         </div>
                       </div>
                     </div>
