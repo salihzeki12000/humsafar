@@ -204,7 +204,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       $scope.newBuddies = [];
       $scope.ongo.getSearchedList="";
       $scope.ongo.buddiesCount=0;
-      console.log($scope.ongo,"ongo ka journey");
       if ($scope.ongo.checkIn && $scope.ongo.checkIn.location) {
         $scope.checkInData = _.cloneDeep($scope.ongo.checkIn);
       }
@@ -1156,6 +1155,7 @@ ongojourney.filter('singularOrPlural', function() {
 
 ongojourney.filter('filterCount', function() {
   return function(count){
+    console.log(count);
     if(count==undefined){
         return 0;
     }else{

@@ -1092,33 +1092,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
       if (typeof google === 'object' && typeof google.maps === 'object') {
         var bounds = new google.maps.LatLngBounds();
-        setMarker = function (status, current, previous, i) { //status=false for small-marker and true for big
-          var jump = centers.length;
-          // console.log(_.isEmpty(markers[i])&&status);
-          // if (_.isEmpty(markers[i])) {
-          //   console.log("inside isempty",status);
-          //   var position = new google.maps.LatLng(n.lat, n.lng);
-          //   // bounds.extend(position);
-          //   var obj = {
-          //     position: position,
-          //     map: map,
-          //     icon: "img/maps/small-marker.png"
-          //   };
-          //   console.log(status);
-          //   if (status=="green") {
-          //   console.log("setting up green marker");
-          //     obj.icon = "img/maps/green-marker.png";
-          //     obj.label = toString(i);
-          //     console.log("big marker icon set");
-          //   }
-          //   marker = new google.maps.Marker(obj);
-          //   markers[i] = marker;
-          // } 
-          // else {
-          //   markers[i].setIcon("img/maps/red-marker.png");
-          // }
-
-
+        
+        setMarker = function (status, current, previous, i) {
           var currentPosition = new google.maps.LatLng(current.lat, current.lng);
           if (previous != null) {
             console.log("previous should set now");
@@ -1135,15 +1110,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           var currentObj = {
             position: currentPosition,
             map: map,
-            icon: "img/maps/small-marker.png"
+            // icon: "img/maps/small-marker.png"
           };
           if (status == "small-marker") {
             currentObj.icon = "img/maps/small-marker.png";
           } else if (status == "red-marker") {
             currentObj.icon = "img/maps/red-marker.png";
           } else if (status == "green-marker") {
-            // markers[i].setMap(null);
             currentObj.icon = "img/maps/green-marker.png";
+          }else if(status==null){
+            currentObj.map=null;
           }
           marker = new google.maps.Marker(currentObj);
           markers[i] = marker;
@@ -1174,21 +1150,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           strokeOpacity: 1,
           scale: 3
         };
-        //Grey static dotted-polylines starts here
-        // travelPath = new google.maps.Polyline({
-        //   path: centers,
-        //   geodesic: true,
-        //   strokeColor: '#D3D3D3',
-        //   strokeOpacity: 0,
-        //   strokeWeight: -3,
-        //   icons: [{
-        //     icon: lineSymbol,
-        //     offset: '0',
-        //     repeat: '20px'
-        //   }],
-        // });
-        // travelPath.setMap(map);
-        //Grey static polylines ends here
+
+
+        {
+          //Grey static dotted-polylines starts here
+          // travelPath = new google.maps.Polyline({
+          //   path: centers,
+          //   geodesic: true,
+          //   strokeColor: '#D3D3D3',
+          //   strokeOpacity: 0,
+          //   strokeWeight: -3,
+          //   icons: [{
+          //     icon: lineSymbol,
+          //     offset: '0',
+          //     repeat: '20px'
+          //   }],
+          // });
+          // travelPath.setMap(map);
+          //Grey static polylines ends here
+
+        }
 
 
         var myVar = setInterval(myTimer, 1000);
@@ -1196,9 +1177,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         function myTimer() {
           if (centers.length != 0) {
             _.each(centers, function (n, index) {
-              setMarker("small-marker", n, null, index + 1);
+              setMarker(null, n, null, index + 1);
             });
             // setMarker("green-marker", centers[0], null, 1);
+            // markers[1].setMap(map);
             // markers[1].setIcon("img/maps/green-marker.png");
             clearInterval(myVar);
           } else {
@@ -1238,41 +1220,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
 
         function redLineDraw(i, departure, arrival, percentComplete, value, flag) {
-          // console.log(percentComplete, flag);
           var xdiff = (centers[i].lat - centers[i - 1].lat);
           var ydiff = (centers[i].lng - centers[i - 1].lng);
-          // console.log(Math.abs(ydiff));
           var currentZoom = currentZoom = map.getZoom();
           var commingZoom;
-
-          // if (value) {
-          //   var commingMarkerBounds = new google.maps.LatLngBounds();
-          //   commingZoom = commingMap.getZoom();
-          //   commingMarkerBounds.extend(departure);
-          //   commingMarkerBounds.extend(arrival);
-          //   commingMap.fitBounds(commingMarkerBounds);
-          // }
-
           if (value) {
             var markerBounds = new google.maps.LatLngBounds();
             markerBounds.extend(departure);
             markerBounds.extend(arrival);
-            commingZoom = getBoundsZoomLevel(markerBounds, mapDim); {
-              // if (Math.abs(commingZoom - currentZoom) > 2) {
-              //               if (commingZoom > currentZoom) {
-              //                 smoothZoom(map, commingZoom, currentZoom, true); //for zooming in
-              //                 commingZoom = currentZoom;
-              //               } else if (commingZoom < currentZoom) {
-              //                 smoothZoom(map, commingZoom, currentZoom, false); //for zooming out
-              //                 commingZoom = currentZoom;
-              //               }
-              //             }
-
-            }
-
+            commingZoom = getBoundsZoomLevel(markerBounds, mapDim);
             map.fitBounds(markerBounds);
           }
-
           var frac1 = xdiff / 100;
           var frac2 = ydiff / 100;
           var iniLat = centers[i - 1].lat;
@@ -1283,12 +1241,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             strokeOpacity: 1,
             scale: 3
           };
+           console.log(percentComplete,flag);     
           if (percentComplete == 100 && flag) {
-            // setMarker("green-marker", centers[i], centers[i - 1], i + 1);
+            console.log(percentComplete,flag);
+            if(markers[i + 1].map==null){
+              markers[i + 1].setMap(map);
+            }
             markers[i + 1].setIcon("img/maps/green-marker.png");
             markers[i].setIcon("img/maps/red-marker.png");
-
+          }else if((percentComplete > 98 && percentComplete < 100 && i==centers.length-1)){       
+             if(markers[i + 1].map==null){
+              markers[i + 1].setMap(map);
+            }
+            markers[i + 1].setIcon("img/maps/green-marker.png");
+            markers[i].setIcon("img/maps/red-marker.png");
           }
+
           if (_.isEmpty(line[i])) {
             line[i] = new google.maps.Polyline({
               path: [departure, departure],
@@ -1310,7 +1278,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             percentFrac = percent / 100;
             var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
             line[i].setPath([departure, are_we_there_yet]);
-            //moving center starts here
+            // static center =center of departure and arrival starts 
             if (value) {
               center = {
                 "lat": iniLat + (centers[i].lat - centers[i - 1].lat) / 2,
@@ -1318,52 +1286,53 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               }
               center = new google.maps.LatLng(center.lat, center.lng);
             }
+            // static center =center of departure and arrival ends             
             map.setCenter(center);
           };
           drawLine(departure, arrival, percentComplete, i, value);
         };
 
         pointsForLine = function (i, percentComplete, value, flag) {
+          // i=currennt card comming from bottom / arrival card
+          //value=true for identifyng current departure and arrival
+          //flag=true only when percentComplete reaches 100
           var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
           var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
           step = 0;
           var linesCount = line.length - 1;
-          var markerCount = markers.length - 1;
-
-          // while ((i < markerCount) && (value == true) && (percentComplete < 100)) {
-          //     console.log("while-----"+markerCount+">"+i);
-
-          //   markers[markerCount].setIcon("img/maps/small-marker.png");
-          //   markerCount--;
-          // }        
           for (markerCount = markers.length - 1; markerCount > 0; markerCount--) {
             if ((value == true) && (percentComplete < 100)) {
               if (markerCount == i) {
                 markers[markerCount].setIcon("");
+                if( markers[markerCount].map==null){
+                   markers[markerCount].setMap(map);         
+                };
                 markers[markerCount].setIcon("img/maps/green-marker.png");
-              } else {
-                // console.log("for-----"+markerCount+"< or >"+i);
+              } else if(markerCount>=i){
+                markers[markerCount].setMap(null);
+              }else if((markerCount<i)){
+                 if( markers[markerCount].map==null){
+                   markers[markerCount].setMap(map);         
+                };
                 markers[markerCount].setIcon("img/maps/small-marker.png");
               }
             } else {
               break;
             }
           }
-
-
           redLineDraw(i, departure, arrival, percentComplete, value, flag);
 
           //clearPolyLines starts
           while ((linesCount >= (i + 1)) && (value)) {
             if (!_.isEmpty(line[linesCount])) {
               line[linesCount].setMap(null);
+              markers[linesCount].setMap(null);
               line[linesCount] = {};
             };
-            // markers[linesCount].setIcon("img/maps/small-marker.png");
             linesCount--;
           };
-
           //clearPolyLines ends
+
           //draw succeeding polyLines starts
           if (i > 1) {
             pointsForLine(i - 1, 100);
@@ -1400,19 +1369,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.focus('enterComment');
         $scope.listOfComments = [];
         $scope.viewCardComment = true;
-        $scope.journey.journeyHighLight=ongo._id;
+        $scope.journey.journeyHighLight = ongo._id;
         $scope.getCard = "view-whole-card";
         LikesAndComments.getComments("post", $scope.post._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
-          $scope.journey.journeyHighLight="";
+          $scope.journey.journeyHighLight = "";
           $scope.getCard = "";
         } else {
           $scope.listOfComments = [];
           $scope.viewCardComment = true;
-          $scope.focus('enterComment');          
-          $scope.journey.journeyHighLight=ongo._id;
+          $scope.focus('enterComment');
+          $scope.journey.journeyHighLight = ongo._id;
           $scope.getCard = "view-whole-card";
           LikesAndComments.getComments("post", $scope.post._id, callback);
         }
@@ -4107,7 +4076,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.obj = {};
-    $scope.showTravellife=false;
+    $scope.showTravellife = false;
     $scope.visited = [];
     var len = "";
 
@@ -4231,31 +4200,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         arr = [{}];
 
         //for getting all the visited years  of that respective country starts 
-          // var callback = function (data) {
-          //   var a = _.filter(data, ["countryId._id", country._id]);
-          //   var visitedArr = [];
-          //   _.each(a[0].visited, function (n, index) {
-          //     visitedArr[n.year] = {
-          //       "times": n.times,
-          //       "year": n.year
-          //     };
-          //   });
-          //   console.log(visitedArr);
-          //   $scope.visited = visitedArr;
-          //   arr = visitedArr;
-          // };
-          // MyLife.getCountryVisitedListWeb(callback); 
+        // var callback = function (data) {
+        //   var a = _.filter(data, ["countryId._id", country._id]);
+        //   var visitedArr = [];
+        //   _.each(a[0].visited, function (n, index) {
+        //     visitedArr[n.year] = {
+        //       "times": n.times,
+        //       "year": n.year
+        //     };
+        //   });
+        //   console.log(visitedArr);
+        //   $scope.visited = visitedArr;
+        //   arr = visitedArr;
+        // };
+        // MyLife.getCountryVisitedListWeb(callback); 
         //for getting all the visited years  of that respective country ends
-          
+
         modal = $uibModal.open({
           scope: $scope,
           animation: true,
           templateUrl: "views/modal/delete-visited-country.html"
             // templateUrl: "views/modal/country-visited.html"
-        }); 
-      } else {  
+        });
+      } else {
         $scope.visited = [];
-        arr=[];
+        arr = [];
         modal = $uibModal.open({
           scope: $scope,
           animation: true,
@@ -4265,21 +4234,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       //remove country visited and all its count starts
       $scope.removeCountryVisited = function () {
-          var obj = {
-            "countryId": country._id,
-            "visited": []
-          }
-          MyLife.updateCountriesVisited(obj, function (data, status) {
-            reloadCount();
-            console.log(data);
-            modal.close();
-          }, function () {
-          });
-          arr=[];
-          $scope.getMap(); 
-        };
+        var obj = {
+          "countryId": country._id,
+          "visited": []
+        }
+        MyLife.updateCountriesVisited(obj, function (data, status) {
+          reloadCount();
+          console.log(data);
+          modal.close();
+        }, function () {});
+        arr = [];
+        $scope.getMap();
+      };
       //remove country visited and all its count ends
-        
+
       $scope.getMap();
       modal.closed.then(function () {
         console.log(_.isEmpty(arr));
@@ -4293,9 +4261,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
 
-    $scope.clearAllSelected=function(visited){
+    $scope.clearAllSelected = function (visited) {
       console.log(visited);
-      $scope.visited=[];
+      $scope.visited = [];
     };
 
     $scope.updateNumOfTimes = function (visited) {
@@ -4314,13 +4282,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       $scope.obj.visited = arr;
       console.log($scope.obj);
-       if(!(_.isEmpty($scope.obj.visited))){
-      MyLife.updateCountriesVisited($scope.obj, function (data, status) {
-        reloadCount();
-        console.log(data);
-      }, function () {});
-      $scope.getMap();
-       }
+      if (!(_.isEmpty($scope.obj.visited))) {
+        MyLife.updateCountriesVisited($scope.obj, function (data, status) {
+          reloadCount();
+          console.log(data);
+        }, function () {});
+        $scope.getMap();
+      }
     };
 
 
@@ -6413,7 +6381,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       class: "editor-blog",
       profilePic: "img/profile-main.png",
-      userName: "Editor",
+      userName: "Editor - blog",
       timestampDate: "14 Jan, 2014",
       timestampHour: "01:20 pm",
       status: "Has uploaded a new blog",
@@ -6444,7 +6412,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       class: "editor",
       profilePic: "img/profile-main.png",
-      userName: "Editor",
+      userName: "Editor - Itinerary",
       timestampDate: "14 Jan, 2014",
       timestampHour: "01:20 pm",
       status: "Has uploaded a new Itinerary",
@@ -6845,50 +6813,50 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, function () {});
       // $scope.getMap();
     };
-     $scope.obj={};
+    $scope.obj = {};
     // update country Visited
     $scope.updateCountryVisited = function (id) {
-      $scope.obj.countryId=id;
-      console.log(id);
-        modal=$uibModal.open({
+        $scope.obj.countryId = id;
+        console.log(id);
+        modal = $uibModal.open({
           animation: true,
           templateUrl: "views/modal/country-visited.html",
           scope: $scope
         });
-        modal.closed.then(function(){
-          visitedArr=[];
+        modal.closed.then(function () {
+          visitedArr = [];
         });
-         //for getting all the visited years  of that respective country starts
-          var callback = function (data) {
-            var a = _.filter(data, ["countryId._id", id]);
-            var visitedArr = [];
-            _.each(a[0].visited, function (n, index) {
-              visitedArr[n.year] = {
-                "times": n.times,
-                "year": n.year
-              };
-            });
-            console.log(visitedArr);
-            $scope.visited = visitedArr;
-            arr = visitedArr;
-          };
-          MyLife.getCountryVisitedListWeb(callback); 
+        //for getting all the visited years  of that respective country starts
+        var callback = function (data) {
+          var a = _.filter(data, ["countryId._id", id]);
+          var visitedArr = [];
+          _.each(a[0].visited, function (n, index) {
+            visitedArr[n.year] = {
+              "times": n.times,
+              "year": n.year
+            };
+          });
+          console.log(visitedArr);
+          $scope.visited = visitedArr;
+          arr = visitedArr;
+        };
+        MyLife.getCountryVisitedListWeb(callback);
         //for getting all the visited years  of that respective country ends
       }
       // update country Visited end
-      
-      //remove counytry visitede starts
-      $scope.removeCountryVisit=function(){
-         modal = $uibModal.open({
-          scope: $scope,
-          animation: true,
-          templateUrl: "views/modal/delete-visited-country.html"
-            // templateUrl: "views/modal/country-visited.html"
-        }); 
-      };
-      //remove counytry visitede ends
 
-      $scope.addCountryVisited = function (country) {
+    //remove counytry visitede starts
+    $scope.removeCountryVisit = function () {
+      modal = $uibModal.open({
+        scope: $scope,
+        animation: true,
+        templateUrl: "views/modal/delete-visited-country.html"
+          // templateUrl: "views/modal/country-visited.html"
+      });
+    };
+    //remove counytry visitede ends
+
+    $scope.addCountryVisited = function (country) {
       $scope.obj.countryId = country._id;
       if (country.countryVisited === true) {
         arr = [{}];
@@ -6897,10 +6865,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           animation: true,
           templateUrl: "views/modal/delete-visited-country.html"
             // templateUrl: "views/modal/country-visited.html"
-        }); 
+        });
       } else {
         $scope.visited = [];
-        arr=[];
+        arr = [];
         modal = $uibModal.open({
           scope: $scope,
           animation: true,
@@ -6910,19 +6878,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       //remove country visited and all its count starts
       $scope.removeCountryVisited = function () {
-          var obj = {
-            "countryId": country._id,
-            "visited": []
-          }
-          MyLife.updateCountriesVisited(obj, function (data, status) {
-            reloadCount();
-            console.log(data);
-            MyLife.getCountryVisitedListExpanded(callbackGetCountriesVisited);
-            modal.close();
-          }, function () {
-          });
-          arr=[];
-        };
+        var obj = {
+          "countryId": country._id,
+          "visited": []
+        }
+        MyLife.updateCountriesVisited(obj, function (data, status) {
+          reloadCount();
+          console.log(data);
+          MyLife.getCountryVisitedListExpanded(callbackGetCountriesVisited);
+          modal.close();
+        }, function () {});
+        arr = [];
+      };
       //remove country visited and all its count ends
       modal.closed.then(function () {
         console.log(_.isEmpty(arr));
@@ -6936,7 +6903,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
 
-     $scope.checkIfSelected = function (list) {
+    $scope.checkIfSelected = function (list) {
       console.log(list);
       if (list.year) {
         list.times = 1;
@@ -6963,22 +6930,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       $scope.obj.visited = arr;
       console.log($scope.obj);
-      if(!(_.isEmpty($scope.obj.visited))){
+      if (!(_.isEmpty($scope.obj.visited))) {
         MyLife.updateCountriesVisited($scope.obj, function (data, status) {
           reloadCount();
           MyLife.getCountryVisitedListExpanded(callbackGetCountriesVisited);
-         }, function () {});
+        }, function () {});
       }
-     
+
     };
 
-    $scope.clearAllSelected=function(visited){
+    $scope.clearAllSelected = function (visited) {
       console.log(visited);
-      $scope.visited=[];
+      $scope.visited = [];
     };
 
-    
-      
+
+
 
     $scope.searchList = [];
     $scope.searchFriend = {

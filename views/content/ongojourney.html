@@ -71,10 +71,10 @@
             </div>
           </div>
           <div class="pull-right">
-            <div class="share-trip-journey relate" ng-click="shareSocial();">
+            <div class="share-trip-journey relate" ng-click="shareSocial();" ng-init='ongo.shareJrny={}'>
               <img src="img/share-white.png" alt="Share" width="11">
-              <span class="color-white avenir-heavy">Share</span>
-              <div class="share-dropdown" ng-show="viewSocialShare">
+              <span class="color-white avenir-heavy" ng-click="editOption(ongo.shareJrny);">Share</span>
+              <div class="share-dropdown" ng-show="ongo.shareJrny.backgroundClick">
                 <ul>
                   <li><a href="" class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>
                   <li><a href="" class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>
@@ -88,9 +88,9 @@
             <div class="following hide">
               <span class="color-white avenir-medium">Following</span>
             </div>
-            <div class="edit-journey relate">
-              <span class="color-white pointer" ng-click="editJourney = !editJourney">Edit This Journey</span>
-              <div class="edit-journey-dropdown" ng-show="editJourney">
+            <div class="edit-journey relate" ng-init='ongo.editThisJrny={}'>
+              <span class="color-white pointer" ng-click="editOption(ongo.editThisJrny);">Edit This Journey</span>
+              <div class="edit-journey-dropdown" ng-show="ongo.editThisJrny.backgroundClick">
                 <ul>
                   <li><a href="" title="Journey Cover Photo" ng-click="coverPhoto(journey._id);">Journey Cover Photo</a></li>
                   <li><a href="" title="Journey Name" ng-click="nameJourney(journey.name);">Journey Name</a></li>

@@ -908,35 +908,35 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
   return {
     restrict: 'C',
     link: function (scope, element, attrs) {
-
       setTimeout(function () {
         var check = $(".hasLatLng").length;
         var flag;
+        //perform tasks on window scroll starts
         $(window).scroll(function () {
           var currentScroll = $(window).scrollTop() + $(window).height();
           var divPositions = _.map($(".hasLatLng"), function (n) {
             return $(n).offset().top;
-          });
+          });         
+          //getting divHeights for scrolling based on percentage of div's height displayed on screen starts
           var divHeights = _.map($(".hasLatLng"), function (n) {
             return $(n).height();
           });
+          //getting divHeights for scrolling based on percentage of div displayed on screen ends
+          
           var ith = 1;
           var percentage = 0;
+          //manipulating map based on divPositions starts
           _.each(divPositions, function (n, index) {
             if (n <= currentScroll && divPositions[index + 1] > currentScroll) { //would work for  1st checkIn till second last checkin coz divPositions[index + 1] would return false
-              // console.log("inside 1st if");
               ith = index;
-
               if (n > 0) {
                 percentage = ((currentScroll - n) / divHeights[index]) * 100; //percentage based on size of div
                 if (ith > 0) {
                   if (percentage <= 100) {
-                    // console.log("<=100");
                     flag = true; //flag is only sent when percent >100
                     pointsForLine(ith, percentage, true);
                   } else {
-                    // console.log(">100");
-                    // console.log(flag); //else condion is given coz polyline should not exceed beyond 100%
+                    //else is given coz polyline should not exceed beyond 100%
                     pointsForLine(ith, 100, true, flag);
                     flag = false;
                   }
@@ -947,16 +947,13 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
               }
               return false;
             } else if ((n <= currentScroll) && (index == (divPositions.length - 1))) { //for last checkIn
-              // console.log("last div Reached");
               ith = index;
               percentage = ((currentScroll - n) / divHeights[index]) * 100; //percentage based on size of div
               if (percentage <= 100) {
-                // console.log("<=100");
                 flag = true;
                 pointsForLine(ith, percentage, true, true);
               } else {
-                // console.log(">100"); //else condion is given coz polyline should not exceed beyond 100%
-                // console.log(flag);
+                 //else is given coz polyline should not exceed beyond 100%
                 pointsForLine(ith, 100, true);
                 flag = false;
               }
@@ -967,7 +964,9 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
               }
             }
           });
+          //manipulating map based on divPositions ends          
         });
+        //perform tasks on window scroll ends
       }, 1);
     }
   };
@@ -978,7 +977,6 @@ firstapp.filter('postString', function () {
     var postString = "";
     var buddiesString = "";
     var buddiesCount = checkIn.buddies.length;
-
     if (buddiesCount == 1) {
       buddiesString = checkIn.buddies[0].name.bold();
     } else if (buddiesCount == 2) {
@@ -987,7 +985,6 @@ firstapp.filter('postString', function () {
       buddiesString = checkIn.buddies[0].name.bold() + " and " + (buddiesCount - 1) + " others ";
     }
     var postString = "";
-    // $filter('category')(checkIn.category) +
     if (buddiesString != "") {
       if (checkIn.thoughts && checkIn.location) {
         postString = checkIn.thoughts + " with " + buddiesString + " at " + checkIn.location.bold();
@@ -1009,8 +1006,6 @@ firstapp.filter('postString', function () {
         postString = checkIn.postCreator.name.bold();
       }
     }
-
-
     return postString;
   }
 
