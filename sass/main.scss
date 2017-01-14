@@ -16,8 +16,8 @@
 trap Variables Goes Here */
 $brand-dark-blue: #272b49;
 $brand-blue: #303557;
-$brand-dark-pink: #ef645e;
-$brand-pink: #f58b86;
+$brand-dark-pink: #f58b86;
+$brand-pink: #ef645e;
 $brand-dark-cyan: #4fd4ca;
 $brand-cyan: #11d3cb;
 $brand-light-cyan: #6ed4c6;
@@ -1250,6 +1250,14 @@ p{
   // max-width: 1400px;
   max-width: 2000px;
   margin: 0 auto;
+  .btn-blue-outline {
+    background-color: transparent;
+    &:hover {
+      border-color: #2d3655;
+      background-color: $brand-pink;
+      color: #fff;
+    }
+  }
 }
 
 .profile-photo-section {
@@ -1277,6 +1285,7 @@ p{
 }
 
 .flag {
+  border: 2px solid #fff;
   position: absolute;
   right: 65px;
   bottom: 0;
@@ -1845,6 +1854,7 @@ p{
     vertical-align: middle;
     z-index: 4;
     position: relative;
+    @extend .avenir-heavy;
   }
 }
 
@@ -1898,9 +1908,19 @@ p{
   .journey-travelling-type {
     margin-bottom: -20px;
   }
+  .pull-right {
+    .journey-type {
+      ul {
+        li+li {
+          border-left: none;
+        }
+      }
+    }
+  }
 }
 
 .journey-type {
+   min-height: 20px;
    margin-top: -11px;
    ul {
      li+li { border-left: 1px solid #fff; }
@@ -1947,6 +1967,7 @@ p{
 }
 
 .journey-collection {
+  min-height: 20px;
   li {
     padding: 0 10px;
     line-height: 12px;
@@ -2154,7 +2175,11 @@ p{
 
 .travel-journey-heading {
   padding: 10px;
-  color: $brand-grey;
+  color: $brand-light-grey;
+  p {
+    padding-bottom: 5px;
+    margin: 0;
+  }
 }
 // masonry end
 // travel life end
@@ -2604,16 +2629,16 @@ p{
 // }
 
 .moment-travel-view {
-  margin: 15px 44px 15px 0;
+  margin: 15px 25px 15px 0;
   display: inline-block;
 }
 
 .moment-travelimgholder {
-  @include square(200px);
+  @include square(185px);
   position: relative;
 
   .img-backholder {
-    @include square(190px);
+    @include square(170px);
     @include position(absolute, 15px null null 15px);
     @include transform(rotate(1deg));
 
@@ -2626,7 +2651,7 @@ p{
   }
 
   .img-frontholder {
-    @include square(200px);
+    @include square(180px);
     @include position(absolute, 0 null null 0);
   }
 }
@@ -2635,9 +2660,12 @@ p{
   margin: 20px 0 0;
 
   h4 {
+    max-width: 150px;
     margin: 0 0 5px;
     font-size: 17px;
-
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     span {
       font-size: 13px;
     }
@@ -2657,12 +2685,12 @@ p{
 // }
 
 .moment-local-view {
-  margin: 15px 44px 15px 0;
+  margin: 15px 25px 15px 0;
   display: inline-block;
 }
 
 .moment-localimgholder {
-  @include square(200px);
+  @include square(185px);
   position: relative;
 
   .img-backholder {
@@ -2671,7 +2699,7 @@ p{
   }
 
   .img-frontholder {
-    @include square(200px);
+    @include square(185px);
     @include position(absolute, 0 null null 0);
   }
 }
@@ -2682,10 +2710,13 @@ p{
 .review-travel-view {
   margin-top: 20px;
 }
+.review-all-life + .review-all-life {
+  border-top: 1px solid $brand-lighter-grey;
+}
 
 .review-all-life {
   padding: 15px 10px 25px;
-  border-bottom: 1px solid $brand-lighter-grey;
+  // border-bottom: 1px solid $brand-lighter-grey;
 
   .place-name {
     font-size: 22px;
@@ -2740,7 +2771,7 @@ p{
 .list-travel-view {
   display: inline-block;
   vertical-align: top;
-  margin-right: 37px;
+  margin-right: 15px;
   margin-bottom: 15px;
   // &:nth-child(4n+4) {
   //   margin-right: 0;
@@ -2763,11 +2794,13 @@ p{
 
 .city-accordion {
   margin-top: 10px;
-  .panel {
-    background-color: transparent;
-  }
-  .panel-default > .panel-heading {
+  .panel-title a {
     padding: 10px 30px;
+    display: block;
+  }
+
+  .panel-default > .panel-heading {
+    padding: 0;
     border-radius: 0;
     border-bottom: 4px solid $brand-dark-pink;
     background-color: transparent;
@@ -5180,7 +5213,7 @@ a{
     padding: 5px 10px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    background-color: $brand-dark-pink;
+    background-color: $brand-pink;
     h4 {
       margin: 0;
       font-size: 16px;
@@ -5323,7 +5356,7 @@ a{
 .whole-card-comment {
   width: 450px;
   height: 100%;
-  padding: 25px;
+  padding: 25px 25px 0;
   position: fixed;
   top: 60px;
   right: -450px;
@@ -8909,7 +8942,7 @@ a{
 // profile list (follow following countryVisited BucketList)
 .white-full {
   min-height: 100vh;
-  height: 100%;  
+  height: 100%;
 }
 
 .profile-tab-strip {
@@ -9428,6 +9461,10 @@ a{
 }
 
 .notify-main {
+  .listing-comment {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
   .comment-sec {
     padding-top: 20px;
     border-top: 1px solid #ccc;
