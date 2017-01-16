@@ -2993,5 +2993,301 @@ q {
   }
 }
 // AGENT HOME PHOTO UPLOAD SLIDER END
-//DETAIL ITINERARY START
-//DETAIL ITINERARY END
+// MESSAGE PAGE
+
+.message-page {
+  height:  calc(100vh - 60px);
+  @extend .avenir-roman;
+}
+// message page Header
+
+.listfriend-header {
+  padding: 5px 15px;
+  // position: fixed;
+  // top: 60px;
+  background-color: $brand-pink;
+}
+
+.listfriend-search {
+  width: 90%;
+}
+
+.message-inputholder {
+  border-bottom: 1px solid #fff;
+
+  .search-input {
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    color: #c44332;
+  }
+
+  .form-control {
+    width: 90%;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    @include placeholder {
+      color: #c44332;
+    }
+  }
+
+  &:after,
+  &:before {
+    content: "";
+    @include size(1px, 15px);
+    position: absolute;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 1;
+  }
+
+  &:before {
+    left: 0;
+  }
+
+  &:after {
+    right: 0;
+  }
+}
+
+.listfriend-newmessage-btn {
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+
+  i {
+    padding: 4px 0;
+  }
+}
+// message page Header end
+// Followers chat list
+.list-of-friends{
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+
+}
+.listfriend-div{
+     height: calc(100vh - 80px);
+     overflow-y: scroll;
+}
+
+.listfriend-card {
+  margin-left: 15px;
+  border-top: 1px solid $brand-grey;
+  background-color: rgba(255,255,255,0.85);
+  vertical-align: top;
+
+  &:first-child {
+    border-top: none;
+  }
+
+  &:nth-child( even ) {
+    background-color: #fff;
+  }
+}
+
+.listfriend-imgcard {
+  display: inline-block;
+  width: 25%;
+  height: 100px;
+  vertical-align: top;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.listfriend-detailcard {
+  display: inline-block;
+  padding: 5px;
+  width: 74%;
+}
+
+.listfriend-countbadge {
+  padding: 10px 5px 0;
+  text-align: right;
+
+  .msg-countbadge {
+    padding: 5px;
+    border-radius: 100%;
+    background-color: $brand-pink;
+    color: #fff;
+    font-size: 12px;
+    @extend .avenir-roman;
+  }
+}
+
+.listfriend-message-timestamp {
+  padding: 0 5px;
+  color: $brand-dark-grey;
+  font-size: 10px;
+  text-align: right;
+  @extend .avenir-roman;
+}
+
+.listfriend-follower {
+  margin-bottom: 5px;
+  color: $brand-blue;
+  @extend .avenir-heavy;
+}
+
+.listfriend-msg {
+  margin: 0;
+  color: $brand-blue;
+  @extend .avenir-roman;
+  @extend .text-ellipsis;
+}
+// Followers chat list end
+// Message empty section
+
+.message-empty-section {
+  padding: 20px;
+   height: calc(100vh - 60px);
+  position: relative;
+  background-color: rgba(255,255,255,0.8);
+}
+
+.empty-msg-box{
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @include transform(translate(-50%,-50%));
+  text-align: center;
+}
+// Message empty section end
+// Message chat box
+.message-chat-section{
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.7);
+  }
+}
+
+.chat-box{
+   height: calc(100vh - 60px);
+   overflow-y: scroll;
+}
+
+.message-chatbox {
+  padding: 40px;
+}
+
+.new-message-box {
+  padding: 10px 0;
+}
+
+.message-bubble {
+  width: 50%;
+  padding: 10px;
+  color: #424242;
+
+  .listfriend-message-timestamp {
+    color: #424242;
+  }
+}
+
+.message-sent-bubble {
+  position: relative;
+  border-radius: 10px 0 10px 10px;
+  background-color: rgba(17,211,203,0.7);
+  float: right;
+
+  &:after {
+    content: "";
+    border-bottom: 18px solid transparent;
+    border-left: 18px solid rgba(17,211,203,0.7);
+    position: absolute;
+    top: 0;
+    right: -18px;
+  }
+
+  .listfriend-message-timestamp {
+    text-align: left;
+  }
+}
+
+.message-recieved-bubble {
+  position: relative;
+  border-radius: 0 10px 10px 10px;
+  background-color: rgba(255,255,255,0.7);
+  float: left;
+
+  &:after {
+    content: "";
+    border-top: 18px solid rgba(255,255,255,0.7);
+    border-left: 18px solid transparent;
+    position: absolute;
+    top: 0;
+    left: -18px;
+  }
+}
+// Message Type Box
+
+.message-typebox-position {
+  position: fixed;
+  bottom: 0;
+}
+
+.chat-timestamp{
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  text-shadow: 0 2px 3px #000;
+}
+
+.message-typebox {
+  background-color: #fff;
+  margin-right: 15px;
+  padding: 10px;
+
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: $brand-pink;
+    }
+
+
+  .form-control {
+    background-color: transparent;
+    border: none;
+    color: #424242;
+  }
+
+  .btn-message-send {
+    padding: 4px 8px;
+    border-radius: 100% !important;
+    margin-left: 10px !important;
+
+    i {
+      font-size: 20px;
+    }
+  }
+}
+// Message Type Box end
+// Message chat box end
+// MESSAGE PAGE END
