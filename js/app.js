@@ -296,6 +296,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'AgentupgradeCtrl'
     })
+    .state('message', {
+  url: "/message",
+  templateUrl: "views/template.html",
+  controller: 'MessageCtrl'
+})
     .state('ProfileList', {
       url: "/profile-list/:active",
       templateUrl: "views/template.html",
@@ -916,13 +921,13 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
           var currentScroll = $(window).scrollTop() + $(window).height();
           var divPositions = _.map($(".hasLatLng"), function (n) {
             return $(n).offset().top;
-          });         
+          });
           //getting divHeights for scrolling based on percentage of div's height displayed on screen starts
           var divHeights = _.map($(".hasLatLng"), function (n) {
             return $(n).height();
           });
           //getting divHeights for scrolling based on percentage of div displayed on screen ends
-          
+
           var ith = 1;
           var percentage = 0;
           //manipulating map based on divPositions starts
@@ -964,7 +969,7 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
               }
             }
           });
-          //manipulating map based on divPositions ends          
+          //manipulating map based on divPositions ends
         });
         //perform tasks on window scroll ends
       }, 1);
@@ -1050,6 +1055,11 @@ firstapp.filter('fromCalculation', function () {
     }
   };
 });
+firstapp.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);
 
 firstapp.filter('toCalculation', function () {
   return function (country, countryIndex, cityIndex) {

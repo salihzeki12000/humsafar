@@ -69,9 +69,11 @@
     </div>
     <!-- related img end if more then 5 then slider-->
     <!-- ongo journey video -->
-    <div class="" ng-if="ongo.video">
-      <div class="video-ongo-journey relate">
-        <img ng-src="{{ongo.video}}" alt="" class="img-responsive">
+    <div class="" ng-if="ongo.videos.length>0">
+      <div class="video-ongo-journey relate {{removeVideoButton}}" ng-click="playVideo(ongo._id,$parent.index);">
+        <video id="{{ongo._id}}_{{index}}" poster="{{ongo.videos[index].thumbnail|uploadpath}}" controls="controls" width="550">
+          <source src="{{ongo.videos[index].name| trusted}}" type="video/mp4">
+        </video>
         <div class="youtube-icon get-center">
           <span><i class="fa fa-youtube-play fa-4x color-pink"></i></span>
         </div>
@@ -86,7 +88,7 @@
       <div class="user-social-item clearfix">
         <div class="pull-left">
           <ul>
-            <li><a href=""><i class="fa color-blue" ng-class="ongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(ongo.uniqueId,ongo._id)"></i></a></li>
+            <li><a href=""><i class="fa color-blue card-like" ng-class="ongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(ongo.uniqueId,ongo._id)"></i></a></li>
             <li>
               <a href="">
                 <img src="img/comments.png" alt="" height="18" ng-click="getCommentsData({'post':ongo});">

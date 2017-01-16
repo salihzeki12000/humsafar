@@ -47,9 +47,9 @@ var ongojourney = angular.module('ongojourney', [])
       }).success(function(data) {
         var journey = data.data;
         // header integration starts
-        journey.kindOfJourneyIconsAddr = [];                             
+        journey.kindOfJourneyIconsAddr = [];
         journey.buddiesCount = journey.buddies.length;
-        
+
         journey.showRemainingCount = false;
         if (journey.buddiesCount >= 4) {
           journey.showRemainingCount = true;
@@ -64,7 +64,7 @@ var ongojourney = angular.module('ongojourney', [])
           var i=0;
           journey.buddiesString=", ";
           while(i<=journey.buddiesCount-1){
-            if(i<journey.buddiesCount-1){ 
+            if(i<journey.buddiesCount-1){
               journey.buddiesString=journey.buddiesString+journey.buddies[i].name.bold()+", ";
             }else if(i==journey.buddiesCount-1){
             journey.buddiesString=journey.buddiesString+" and "+journey.buddies[i].name.bold()+".";
@@ -73,7 +73,7 @@ var ongojourney = angular.module('ongojourney', [])
           }
         }
         if(journey.buddiesString!=undefined){
-          journey.startJourneyString = "Trip Travellers - "+ journey.user.name.bold() + journey.buddiesString;  
+          journey.startJourneyString = "Trip Travellers - "+ journey.user.name.bold() + journey.buddiesString;
         }else{
           journey.startJourneyString= "Trip Traveller - "+ journey.user.name.bold();
         }
@@ -247,7 +247,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           }
         }
       }
-
 
       $scope.getTimes = function(n, type) {
         if (type == "marked") {
@@ -605,6 +604,20 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
 
       // photos array edit end
       // video array
+      setTimeout(function(){
+        $scope.removeVideoButton ="";
+        $scope.playVideo = function(id,index){
+          videoId=id+"_"+index;
+          var vid = document.getElementById(videoId);
+          if($scope.removeVideoButton === ""){
+            $scope.removeVideoButton = "remove-playbtn";
+            vid.play();
+          }else {
+            $scope.removeVideoButton = "";
+            vid.pause();
+          }
+        }
+      },100)
       $scope.videoOtg = [{
         img: 'img/ongojourney/andrea-santa.jpg'
       }, {
