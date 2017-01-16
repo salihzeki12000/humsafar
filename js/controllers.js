@@ -874,6 +874,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
   .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, LikesAndComments, $state, $stateParams, $filter, $http) {
+
+    // set height on comment box
+    $(window).resize(function(){
+      $('.listing-comment').height($(window).height()-226);
+    })
+    // set height on comment box end
     //Used to name the .html file
     var slug = $stateParams.id;
     var checkinCount = "";
@@ -1092,7 +1098,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
       if (typeof google === 'object' && typeof google.maps === 'object') {
         var bounds = new google.maps.LatLngBounds();
-        
+
         setMarker = function (status, current, previous, i) {
           var currentPosition = new google.maps.LatLng(current.lat, current.lng);
           if (previous != null) {
@@ -1242,7 +1248,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             strokeOpacity: 1,
             scale: 3
           };
-           console.log(percentComplete,flag);     
+           console.log(percentComplete,flag);
           if (percentComplete == 100 && flag) {
             console.log(percentComplete,flag);
             if(markers[i + 1].map==null){
@@ -1250,7 +1256,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             }
             markers[i + 1].setIcon("img/maps/green-marker.png");
             markers[i].setIcon("img/maps/red-marker.png");
-          }else if((percentComplete > 98 && percentComplete < 100 && i==centers.length-1)){       
+          }else if((percentComplete > 98 && percentComplete < 100 && i==centers.length-1)){
              if(markers[i + 1].map==null){
               markers[i + 1].setMap(map);
             }
@@ -1279,7 +1285,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             percentFrac = percent / 100;
             var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
             line[i].setPath([departure, are_we_there_yet]);
-            // static center =center of departure and arrival starts 
+            // static center =center of departure and arrival starts
             if (value) {
               center = {
                 "lat": iniLat + (centers[i].lat - centers[i - 1].lat) / 2,
@@ -1287,7 +1293,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               }
               center = new google.maps.LatLng(center.lat, center.lng);
             }
-            // static center =center of departure and arrival ends             
+            // static center =center of departure and arrival ends
             map.setCenter(center);
           };
           drawLine(departure, arrival, percentComplete, i, value);
@@ -1306,14 +1312,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               if (markerCount == i) {
                 markers[markerCount].setIcon("");
                 if( markers[markerCount].map==null){
-                   markers[markerCount].setMap(map);         
+                   markers[markerCount].setMap(map);
                 };
                 markers[markerCount].setIcon("img/maps/green-marker.png");
               } else if(markerCount>=i){
                 markers[markerCount].setMap(null);
               }else if((markerCount<=i)){
                  if( markers[markerCount].map==null){
-                   markers[markerCount].setMap(map);         
+                   markers[markerCount].setMap(map);
                 };
                 markers[markerCount].setIcon("img/maps/small-marker.png");
               }
@@ -4199,7 +4205,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       if (country.countryVisited === true) {
         arr = [{}];
 
-        //for getting all the visited years  of that respective country starts 
+        //for getting all the visited years  of that respective country starts
         // var callback = function (data) {
         //   var a = _.filter(data, ["countryId._id", country._id]);
         //   var visitedArr = [];
@@ -4213,7 +4219,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         //   $scope.visited = visitedArr;
         //   arr = visitedArr;
         // };
-        // MyLife.getCountryVisitedListWeb(callback); 
+        // MyLife.getCountryVisitedListWeb(callback);
         //for getting all the visited years  of that respective country ends
 
         modal = $uibModal.open({
