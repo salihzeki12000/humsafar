@@ -8,30 +8,30 @@ var commontask = angular.module('commontask', [])
       console.log(type, uniqueId, type_Id, comment, hashTag, additionalId, callback);
       var getCommentId = "";
       console.log(comment);
-      var len=comment.length;
-      var counter=0;
-      var startIndex=null;
-      var endIndex=null;
+      var len = comment.length;
+      var counter = 0;
+      var startIndex = null;
+      var endIndex = null;
       var i;
       var tag;
-      hashTag=[];
-      while(counter!=len-1){
-        if(comment[counter]=="#"){
-          startIndex=counter;
-          i=startIndex+1;
-          while(i<=len){
-            if(comment[i]==" " || comment[i]=="#"){
-              endIndex=i-1;
-              console.log(startIndex,endIndex);
-              tag=comment.substring(startIndex,endIndex+1);
+      hashTag = [];
+      while (counter != len - 1) {
+        if (comment[counter] == "#") {
+          startIndex = counter;
+          i = startIndex + 1;
+          while (i <= len) {
+            if (comment[i] == " " || comment[i] == "#" || comment[i]=="@") {
+              endIndex = i - 1;
+              console.log(startIndex, endIndex);
+              tag = comment.substring(startIndex, endIndex + 1);
               hashTag.push(tag);
               console.log(tag);
               break;
-            }else if(i==comment.length-1){
-              endIndex=i;
-              console.log(startIndex,endIndex);
-              tag=comment.substring(startIndex,endIndex+1);
-              hashTag.push(tag);              
+            } else if (i == comment.length - 1) {
+              endIndex = i;
+              console.log(startIndex, endIndex);
+              tag = comment.substring(startIndex, endIndex + 1);
+              hashTag.push(tag);
               console.log(tag);
               break;
             }
@@ -41,6 +41,10 @@ var commontask = angular.module('commontask', [])
         }
         counter++;
       }
+      hashTag=_.remove(hashTag,function(n){
+        return !(n=="#" || n=="@");
+      });
+      console.log(hashTag);
       var obj = {
         "type": type,
         "uniqueId": uniqueId,
@@ -148,53 +152,135 @@ var commontask = angular.module('commontask', [])
         console.log(data);
       });
     },
-    searchTags: function(tag,callback){
+    searchTags: function (tag, callback) {
       $http({
-        url:adminURL+"/hashtag/findHash",
-        method:"POST",
-        data:{
-          "hashtag":tag
+        url: adminURL + "/hashtag/findHash",
+        method: "POST",
+        data: {
+          "hashtag": tag
         }
-      }).success(function(data){
+      }).success(function (data) {
+        callback(data);
+      });
+    },
+    searchBuddies:function(buddy,callback){
+        $http({
+        url: adminURL + "/user/searchBuddyWeb",
+        method: "POST",
+        data: {
+          fromTag: true,
+          search:buddy
+        }
+      }).success(function (data) {
         callback(data);
       });
     }
   };
   return returnVal
 });
-commontask.filter('findTags', function() {
-  return function (text) {
-      var ctl = document.getElementById('enterComment');
-      var startTagIndex=null;
-      var endTagIndex=null;
-      var hashTag;
-      currentPosition = ctl.selectionStart - 1;
-      var counter = currentPosition;
-      if (text[currentPosition] != " " || text[currentPosition] != "#") {
-        while (text[counter] != " " && text[counter] != "#" && counter >= 0) {
-          counter--;
+commontask.directive('findTags', function (LikesAndComments) {
+  return {
+    restrict: 'E',
+    scope: {
+      ngModel:"="
+    },
+    templateUrl: "views/modal/hashtag.html",
+    link: function ($scope, element, attrs) {
+      $scope.$watch('ngModel', function (newVal, oldVal) {
+        var text = $scope.ngModel;
+        var comment={
+          'text':newVal
+        };
+        var ctl = document.getElementById('enterComment');
+        $scope.startTagIndex = null;
+        $scope.endTagIndex = null;
+        $scope.hashTag;
+        currentPosition = ctl.selectionStart - 1;
+        var counter = currentPosition;
+
+        //for finding hashtags
+        if (text[currentPosition] != " " || text[currentPosition] != "#" || text[currentPosition] != "@") {
+          $scope.hashTags = [];
+          while (text[counter] != " " && text[counter] != "#" && text[counter]!="@" && counter >= 0) {
+            counter--;
+          }
+          if ((text[counter] == "#" || text[counter] == "@") && text[counter+1] != "#" && text[counter+1] != "@") {
+            $scope.startTagIndex = counter;
+          } else if (text[counter + 1] == "#" || text[counter + 1]=="@") {
+            $scope.startTagIndex = counter + 1;
+          }
+          counter = counter + 1;
+          while ((counter <= text.length) && ($scope.startTagIndex != null)) {
+            if (text[counter] == " " || text[counter] == "#" || text[counter]=="@") {
+              $scope.endTagIndex = counter - 1;
+              break;
+            } else if (counter == text.length - 1) {
+              $scope.endTagIndex = counter;
+              break;
+            }
+            counter++;
+          }
+          if ($scope.startTagIndex != null && $scope.endTagIndex != null) {
+            // console.log("testing", $scope.startTagIndex, $scope.endTagIndex);
+            $scope.flag=text[$scope.startTagIndex];
+            $scope.showTags=false;
+            $scope.showBuddies=false;
+            // $scope.hashTag = text.substring($scope.startTagIndex, $scope.endTagIndex + 1);
+            var tagCallback = function (data) {
+              $scope.hashTags = data.data;
+              console.log($scope.hashTags);
+              $scope.showTags=true;
+              $scope.showBuddies=false;
+            };
+            var buddiesCallback = function (data) {
+              $scope.buddies = data.data;
+              console.log($scope.buddies);
+              $scope.showTags=false;
+              $scope.showBuddies=true;
+            }
+            if($scope.flag=="#"){
+              $scope.hashTag = text.substring($scope.startTagIndex, $scope.endTagIndex + 1);              
+              LikesAndComments.searchTags($scope.hashTag, tagCallback); 
+              
+            }else if($scope.flag=="@"){
+              $scope.hashTag = text.substring($scope.startTagIndex+1, $scope.endTagIndex + 1);  
+              LikesAndComments.searchBuddies($scope.hashTag, buddiesCallback);
+            }
+            console.log($scope.hashTag);
+          }
         }
-        if (text[counter] == "#") {
-          startTagIndex = counter;
-        } else if (text[counter + 1] == "#") {
-          startTagIndex = counter + 1;
-        }
-        counter = counter + 1;
-        console.log(counter,text.length,startTagIndex);
-        while ((counter <= text.length) && (startTagIndex != null)) {
-          console.log("asd");
-          if (text[counter] == " " || text[counter] == "#" || counter == text.length - 1) {
-            endTagIndex = counter + 1;
+      });
+
+      String.prototype.replaceBetween = function (start, end, len, what) {
+        console.log(start, end, len, what);
+        return this.substring(0, start) + what + this.substring(end + 1, len);
+      };
+
+      $scope.appendComment = function (flag,comment, replaceWith, tag, startTagIndex, endTagIndex) {
+        console.log(comment, replaceWith, tag, startTagIndex, endTagIndex);
+        var counter = "";
+        var len = comment.length;
+        counter = startTagIndex + 1;
+        while ((counter <= comment.length) && ($scope.startTagIndex != null)) {
+          if (comment[counter] == " " || comment[counter] == "#" || comment[counter]=="@") {
+            $scope.endTagIndex = counter - 1;
+            break;
+          } else if (counter == comment.length - 1) {
+            $scope.endTagIndex = counter;
             break;
           }
           counter++;
         }
-        console.log(counter,text.length,startTagIndex,endTagIndex);
-        if (startTagIndex != null && endTagIndex != null) {
-          hashTag = text.substring(startTagIndex, endTagIndex);
-          console.log(hashTag);
-          return hashTah;
+        if(flag=="#"){
+          var a = comment.replaceBetween(startTagIndex, $scope.endTagIndex, len, replaceWith);
+        }else if(flag=="@"){
+           var a = comment.replaceBetween(startTagIndex+1, $scope.endTagIndex, len, replaceWith);
         }
-      }
+        console.log(a);
+        $scope.ngModel = a;
+        $scope.hashTags = [];
+        $scope.showTags=false;
+      };
     }
+  }
 });

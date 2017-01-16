@@ -875,12 +875,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   })
   .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, LikesAndComments, $state, $stateParams, $filter, $http) {
 
+    var didScroll;
+    var lastScrollTop = 0;
+    var delta = 5;
+    var journeyInfoStrip = $('.journey-info-strip').outerHeight();
+
+    $(window).scroll(function (event) {
+      didScroll = true;
+    });
+
+    setInterval(function () {
+      if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+      }
+    }, 250);
+
+    function hasScrolled() {
+      var st = $(this).scrollTop();
+
+      if (Math.abs(lastScrollTop - st) <= delta)
+        return;
+
+      if (st > lastScrollTop && st > journeyInfoStrip) {
+        // Scroll Down
+        $('.journey-info-strip').addClass('remove-otgstrip').removeClass('get-otgstrip');
+      } else {
+        // Scroll Up
+        if (st + $(window).height() < $(document).height()) {
+          $('.journey-info-strip').addClass('get-otgstrip').removeClass('remove-otgstrip');
+        }
+      }
+
+      lastScrollTop = st;
+    }
+
+
+
     // set height on comment box
-    $(window).resize(function(){
-      $('.listing-comment').height($(window).height()-226);
-    })
-    // set height on comment box end
-    //Used to name the .html file
+    $(window).resize(function () {
+        $('.listing-comment').height($(window).height() - 226);
+      })
+      // set height on comment box end
+      //Used to name the .html file
     var slug = $stateParams.id;
     var checkinCount = "";
     $scope.userData = $.jStorage.get("profile");
@@ -1124,9 +1161,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             currentObj.icon = "img/maps/red-marker.png";
           } else if (status == "green-marker") {
             currentObj.icon = "img/maps/green-marker.png";
-          }else if(status==null){
-            currentObj.map=null;
-            currentObj.zIndex=i;
+          } else if (status == null) {
+            currentObj.map = null;
+            currentObj.zIndex = i;
           }
           marker = new google.maps.Marker(currentObj);
           markers[i] = marker;
@@ -1248,16 +1285,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             strokeOpacity: 1,
             scale: 3
           };
-           console.log(percentComplete,flag);
           if (percentComplete == 100 && flag) {
-            console.log(percentComplete,flag);
-            if(markers[i + 1].map==null){
+            if (markers[i + 1].map == null) {
               markers[i + 1].setMap(map);
             }
             markers[i + 1].setIcon("img/maps/green-marker.png");
             markers[i].setIcon("img/maps/red-marker.png");
-          }else if((percentComplete > 98 && percentComplete < 100 && i==centers.length-1)){
-             if(markers[i + 1].map==null){
+          } else if ((percentComplete > 98 && percentComplete < 100 && i == centers.length - 1)) {
+            if (markers[i + 1].map == null) {
               markers[i + 1].setMap(map);
             }
             markers[i + 1].setIcon("img/maps/green-marker.png");
@@ -1311,15 +1346,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             if ((value == true) && (percentComplete < 100)) {
               if (markerCount == i) {
                 markers[markerCount].setIcon("");
-                if( markers[markerCount].map==null){
-                   markers[markerCount].setMap(map);
+                if (markers[markerCount].map == null) {
+                  markers[markerCount].setMap(map);
                 };
                 markers[markerCount].setIcon("img/maps/green-marker.png");
-              } else if(markerCount>=i){
+              } else if (markerCount >= i) {
                 markers[markerCount].setMap(null);
-              }else if((markerCount<=i)){
-                 if( markers[markerCount].map==null){
-                   markers[markerCount].setMap(map);
+              } else if ((markerCount <= i)) {
+                if (markers[markerCount].map == null) {
+                  markers[markerCount].setMap(map);
                 };
                 markers[markerCount].setIcon("img/maps/small-marker.png");
               }
@@ -1373,7 +1408,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
       }
       if ($scope.previousId != $scope.post._id) {
-        $scope.focus('enterComment');
+        // $scope.focus('enterComment');
         $scope.listOfComments = [];
         $scope.viewCardComment = true;
         $scope.journey.journeyHighLight = ongo._id;
@@ -1387,7 +1422,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         } else {
           $scope.listOfComments = [];
           $scope.viewCardComment = true;
-          $scope.focus('enterComment');
+          // $scope.focus('enterComment');
           $scope.journey.journeyHighLight = ongo._id;
           $scope.getCard = "view-whole-card";
           LikesAndComments.getComments("post", $scope.post._id, callback);
@@ -4909,11 +4944,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       $scope.viewMonth = false;
       $scope.showMonthView = function () {
-        if ( $scope.viewMonth == false){
-            $scope.viewMonth = true;
-        }
-      else {
-            $scope.viewMonth = false;
+        if ($scope.viewMonth == false) {
+          $scope.viewMonth = true;
+        } else {
+          $scope.viewMonth = false;
         }
       };
       // reviews json
@@ -12088,6 +12122,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
     // travel activity json end
   })
+
+.controller('MessageCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  $scope.template = TemplateService.changecontent("message"); //Use same name of .html file
+  $scope.menutitle = NavigationService.makeactive("Message"); //This is the Title of the Website
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+})
 
 .controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {
   $scope.changeLanguage = function () {

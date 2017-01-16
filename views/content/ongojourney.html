@@ -8,7 +8,7 @@
       <!-- on go journey main -->
       <div class="ongo-journey-main">
         <!-- strip journey -->
-        <div class="journey-info-strip clearfix">
+        <div class="journey-info-strip get-otgstrip clearfix">
           <div class="pull-left">
             <!-- own journey -->
             <div class="own-journey">
@@ -238,14 +238,15 @@
                 <img ng-src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
               </div>
             </div>
-            <div class="comment-ur-text relate" ng-init="hashtag={};">
-              <textarea name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="comment.text" ng-change="testingHash(comment.text);editOption(hashtag)"></textarea>
+            <!--<div class="comment-ur-text relate" ng-init="hashtag={};">
+             <find-tags ng-model="comment.text" hash-tags="hashTags">
               <div class="dropdown-hashtag" ng-show="hashtag.backgroundClick;">
                 <ul ng-repeat="tag in hashTags">
                   <li ng-click="appendComment(comment,tag.title,hashTag,startTagIndex,endTagIndex)"><a href="">{{tag.title}} <span class="tag-count ml10">{{tag.count}}</span></a></li>
                 </ul>
               </div>
-            </div>
+            </div>-->
+             <find-tags ng-model="comment.text">
           </div>
           <div class="clearfix comment-post">
             <div class="pull-right">

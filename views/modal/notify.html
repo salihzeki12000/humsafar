@@ -47,9 +47,10 @@
                 <img ng-src="{{profile.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
               </div>
             </div>
-            <div class="comment-ur-text">
+            <!--<div class="comment-ur-text">
               <textarea name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="text"></textarea>
-            </div>
+            </div>-->
+            <find-tags ng-model="text">
           </div>
           <div class="clearfix comment-post">
             <div class="pull-right">
