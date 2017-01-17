@@ -926,9 +926,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.journey = journeys;
       var postsWithLatLng = [];
       postsWithLatLng = _.filter($scope.journey.post,  'latlong');
-
       _.each(postsWithLatLng, function (n, $index) {
-
         if (n && n.latlong && n.latlong.lat && n.latlong.long) {
           centers[$index] = {
             "lat": parseFloat(n.latlong.lat),
@@ -937,9 +935,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         } else {
           alert("no latlong found");
         }
-
       });
-
       if (journeys && journeys.location && journeys.location.lat) {
         var obj = {
           "lat": parseFloat(journeys.location.lat),
@@ -949,12 +945,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       } else {
         alert("Location of Banner not found");
       }
-
-      // center = {
-      //     "lat": centers[0].lat,
-      //     "lng": centers[0].lng
-      //   };
-
       initMap();
     };
 
@@ -968,6 +958,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.time = {};
     $scope.datetime = {};
     $scope.changeBannerDate = function () {
+      console.log("Banner Date");
       $scope.isPostDate = false;
       $scope.isBannerDate = true;
       date = $scope.journey.startTime;
@@ -982,6 +973,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.time.hour = hh;
       $scope.time.min = d.getMinutes();
       $scope.datetime.dt = d;
+
+      console.log($scope.journey.post[$scope.journey.post.length-1].UTCModified);
+       $scope.options = {    
+        minDate:new Date(1/1/1970), 
+        maxDate:new Date($scope.journey.post[$scope.journey.post.length-1].UTCModified),                                                                                                                                                                         
+        showWeeks: false
+      };
       modal = $uibModal.open({
         animation: true,
         templateUrl: "views/modal/date-time.html",
@@ -1397,8 +1395,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.viewCardComment = false;
     $scope.getCard = "";
-
-
+    $scope.comment={
+      'text':""
+    };
     $scope.getPostsCommentData = function (ongo) {
       $scope.post = ongo;
       $scope.previousId;
@@ -1419,6 +1418,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.viewCardComment = false;
           $scope.journey.journeyHighLight = "";
           $scope.getCard = "";
+          $scope.comment.text="";
         } else {
           $scope.listOfComments = [];
           $scope.viewCardComment = true;
@@ -1429,81 +1429,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       }
       $scope.previousId = $scope.post._id;
-    };
-    $scope.hashTags = [];
-    $scope.comment = {
-      'text': ""
-    };
-    $scope.startTagIndex = null;
-    $scope.endTagIndex = null;
-    $scope.hashTag;
-
-    $scope.testingHash = function (text) {
-      var ctl = document.getElementById('enterComment');
-      $scope.startTagIndex = null;
-      $scope.endTagIndex = null;
-      $scope.hashTag;
-      currentPosition = ctl.selectionStart - 1;
-      var counter = currentPosition;
-
-      //for finding hashtags
-      if (text[currentPosition] != " " || text[currentPosition] != "#") {
-        $scope.hashTags = [];
-        while (text[counter] != " " && text[counter] != "#" && counter >= 0) {
-          counter--;
-        }
-        if (text[counter] == "#") {
-          $scope.startTagIndex = counter;
-        } else if (text[counter + 1] == "#") {
-          $scope.startTagIndex = counter + 1;
-        }
-        counter = counter + 1;
-        while ((counter <= text.length) && ($scope.startTagIndex != null)) {
-          if (text[counter] == " " || text[counter] == "#") {
-            $scope.endTagIndex = counter - 1;
-            break;
-          } else if (counter == text.length - 1) {
-            $scope.endTagIndex = counter;
-            break;
-          }
-          counter++;
-        }
-        if ($scope.startTagIndex != null && $scope.endTagIndex != null) {
-          console.log("testing", $scope.startTagIndex, $scope.endTagIndex);
-          $scope.hashTag = text.substring($scope.startTagIndex, $scope.endTagIndex + 1);
-          var callback = function (data) {
-            $scope.hashTags = data.data;
-          }
-          LikesAndComments.searchTags($scope.hashTag, callback);
-        }
-      }
-    };
-
-    String.prototype.replaceBetween = function (start, end, len, what) {
-      console.log(start, end, len, what);
-      return this.substring(0, start) + what + this.substring(end + 1, len);
-    };
-
-    $scope.appendComment = function (comment, replaceWith, tag, startTagIndex, endTagIndex) {
-      var counter = "";
-      var len = comment.text.length;
-      counter = startTagIndex + 1;
-      while ((counter <= comment.text.length) && ($scope.startTagIndex != null)) {
-        if (comment.text[counter] == " " || comment.text[counter] == "#") {
-          $scope.endTagIndex = counter - 1;
-          console.log("first", $scope.endTagIndex);
-          break;
-        } else if (counter == comment.text.length - 1) {
-          $scope.endTagIndex = counter;
-          console.log("second", $scope.endTagIndex);
-          break;
-        }
-        counter++;
-      }
-      console.log(comment.text, startTagIndex, $scope.endTagIndex, len);
-      var a = comment.text.replaceBetween(startTagIndex, $scope.endTagIndex, len, replaceWith);
-      comment.text = a;
-      $scope.hashTags = [];
     };
 
     $scope.postPostsComment = function (uniqueId, comment, postId) {
@@ -1548,9 +1473,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
 
-
-
     $scope.focus = function (id) {
+      console.log(id,"focus called");
       document.getElementById(id).focus();
       document.getElementById(id).select();
     };
@@ -1567,38 +1491,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
 
-    // $scope.$on('$viewContentLoaded', function(event) {
-    //   $timeout(function(){
-    //       var loadFile = function(event) {
-    //       var output = document.getElementById('output');
-    //       output.src = URL.createObjectURL(event.target.files[0]);
-    //     };
-    //     },100);
-    // });
-
-
-    // $scope.myImage = '';
-    // $scope.myCroppedImage = '';
-    // $scope.viewImage = false;
-    // var got = setInterval(function() {
-    //   if (document.getElementById('fileInput')) {
-    //     console.log("got");
-    //     document.getElementById('fileInput').onchange = function(evt) {
-    //       var file = evt.currentTarget.files[0];
-    //       var reader = new FileReader();
-    //       reader.onload = function(evt) {
-    //         $scope.$apply(function($scope) {
-    //           console.log(evt);
-    //           $scope.viewImage = true;
-    //           $scope.myImage = evt.target.result;
-    //         });
-    //       };
-    //       reader.readAsDataURL(file);
-    //     };
-    //     clearInterval(got);
-    //   }
-    // }, 1000);
-
     $scope.tagButton = [{
       img: "img/profile.jpg",
       name: "Yash Chadasama (Me)"
@@ -1613,7 +1505,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         model.backgroundClick = true;
         backgroundClick.object = model;
       }, 200);
-
       backgroundClick.scope = $scope;
     };
 
@@ -1639,17 +1530,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     // share single trip / card  end
-
-    $scope.options = {
-      minDate: new Date(),
-      showWeeks: false
-    };
+ 
+   
     $scope.format = "yyyy/MM/dd";
 
-
-
-    // edit journey name
-    //edit journey name modal
+    // edit journey name starts
     $scope.editName = {};
     $scope.nameJourney = function (name) {
       console.log(name);
@@ -1661,7 +1546,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         backdropClass: "review-backdrop"
       });
     };
-    //edit journey name modal ends
     $scope.editJourneyName = function (id, obj) {
       var formData = {
         "_id": id,
@@ -1676,7 +1560,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // edit journey name end
 
     //edit journey cover photo
-    // cover photo modal
     $scope.coverPhoto = function (id) {
       modal = $uibModal.open({
         animation: true,
@@ -1706,105 +1589,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
         OnGoJourney.setJourneyCoverPhoto(formData, callback);
       }
-      // cover photo modal ends
-      //edit journey cover photo ends
-      // $scope.galleryCover = [
-      //   'img/london.jpg',
-      //   'img/paris.jpg',
-      //   'img/india-gate.jpg',
-      //   'img/slider1.jpg',
-      //   'img/slider2.jpg',
-      //   'img/blog/blog-post.jpg',
-      //   'img/blog/blog-post2.jpg',
-      //   'img/blog/blog-post3.jpg',
-      //   'img/london.jpg',
-      //   'img/paris.jpg',
-      //   'img/india-gate.jpg',
-      //   'img/slider1.jpg',
-      //   'img/slider2.jpg',
-      //   'img/blog/blog-post.jpg',
-      //   'img/blog/blog-post2.jpg',
-      //   'img/blog/blog-post3.jpg',
-      // ];
-
-
     // cover photo end
     $scope.cropCover = function (imgCrop) {
       $scope.showCover = imgCrop;
       $scope.cropImage = true;
     };
     $scope.viewPrev = function () {
-      // $scope.showCover = imgCrop;
       $scope.cropImage = false;
     };
 
     // edit date and time
-    $scope.changeDate = function () {
-      $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/date-time.html",
-        scope: $scope,
-        backdropClass: "review-backdrop",
-      })
-    };
+    // $scope.changeDate = function () {
+    //   alert();
+    //   $scope.options = {    
+    //     minDate:new Date(1/1/1970),                                                                                                                                                                          
+    //     showWeeks: false
+    //   };
+    //   $uibModal.open({
+    //     animation: true,
+    //     templateUrl: "views/modal/date-time.html",
+    //     scope: $scope,
+    //     backdropClass: "review-backdrop",
+    //   });
+    // };
     // edit date and time end
-
-    $scope.travelBuddy = [
-      'img/ongojourney/adrena.jpg',
-      'img/ongojourney/monish.jpg',
-      'img/ongojourney/malhar.jpg'
-    ];
-
-    $scope.ongoJourney = [{
-      profilepic: "img/adrena.jpg",
-      post: "First time together in London... A trip after ages!! at 27 You with <b>Monish Shah</b>, <b>Malhar Gala</b> & <b>Nida Kapadia</b>",
-      journeyDay: "01",
-      journeyDate: "14 Jan, 2014",
-      journeyTime: "01:20 pm",
-      journeyTypeicon: "img/ongojourney/location.png",
-      journeyPhoto: "img/ongojourney/ongopic.jpg",
-      like: "1550",
-      relatedPhoto: [
-        'img/ongojourney/slider1.jpg',
-        'img/ongojourney/slider2.jpg',
-        'img/ongojourney/slider3.jpg',
-        'img/ongojourney/slider4.jpg',
-        'img/ongojourney/slider5.jpg',
-        'img/ongojourney/slider1.jpg',
-        'img/ongojourney/slider2.jpg',
-      ],
-    }, {
-      profilepic: "img/adrena.jpg",
-      post: "First time together in London... A trip after ages!! at 27 You with Monish Shah,Malhar Gala &amp; Nida Kapadia",
-      journeyDay: "01",
-      journeyDate: "14 Jan, 2014",
-      journeyTime: "01:20 pm",
-      journeyTypeicon: "img/ongojourney/camera.png",
-      journeyPhoto: "img/ongojourney/ongopic2.jpg",
-      like: "1550",
-      viewRelatepic: [
-        'img/ongojourney/related1.jpg',
-        'img/ongojourney/related2.jpg'
-      ],
-    }, {
-      class: "only-post",
-      profilepic: "img/adrena.jpg",
-      post: "First time together in London... A trip after ages!! at 27 You with Monish Shah,Malhar Gala &amp; Nida Kapadia",
-      journeyDay: "01",
-      journeyDate: "14 Jan, 2014",
-      journeyTime: "01:20 pm",
-      journeyTypeicon: "img/ongojourney/thought.png",
-      like: "1550",
-    }, {
-      profilepic: "img/adrena.jpg",
-      post: "First time together in London... A trip after ages!! at 27 You with Monish Shah,Malhar Gala &amp; Nida Kapadia",
-      journeyDay: "01",
-      journeyDate: "14 Jan, 2014",
-      journeyTime: "01:20 pm",
-      journeyTypeicon: "img/ongojourney/video.png",
-      video: "img/ongojourney/video-journey.jpg",
-      like: "1550",
-    }, ];
 
     setTimeout(function () {
       $('.flexslider').flexslider({
@@ -1815,14 +1623,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }, 100);
 
-
-    //place for checkin upload
-
-
-
-
-
-    //rating country
     // country modal
     var modal = "";
 
@@ -1831,11 +1631,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.countryReview = function () {
       $scope.reviewCountryCount = 0;
       if ($scope.journey.review[$scope.reviewCountryCount] != undefined) {
-
-
         $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
         $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
-
       }
       modal = $uibModal.open({
         animation: true,
@@ -1843,13 +1640,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         scope: $scope,
         backdropClass: "review-backdrop",
       });
-      // modal.closed.then(function () {
-      //   OnGoJourney.getOneJourney({
-      //     "urlSlug": slug
-      //   }, getOneJourneyCallback, function (err) {
-      //     console.log(err);
-      //   });
-      // });
     };
 
     // country modal ends
@@ -1862,11 +1652,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           rating: formData.rate.toString()
         };
         var callback = function () {
-
           $scope.journey.review[index].review = result.review;
           $scope.journey.review[index].rating = result.rating;
-
-          // console.log($scope.journey.review[index].review,$scope.journey.review[index].rating);
         };
         OnGoJourney.rateThisCountry(result, callback);
         $scope.reviewCountryCount = $scope.reviewCountryCount + 1;
@@ -1877,15 +1664,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         } else {
           console.log(modal);
           modal.close();
-
         }
         //  test=$scope.journey.review[$scope.reviewCountryCount].review
         // $scope.review.fillM=test;
         // console.log($scope.review.fil);
         // $scope.review.fillMeIn=$scope.journey.review[$scope.reviewCountryCount].review;
-
-
-
       }
       // Rating country ends
     $scope.hoveringOver = function (value) {
@@ -2574,6 +2357,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     // destination country city end
+
+    // get booking data
+    $scope.getBooking = function(dest){
+      console.log(dest);
+      $scope.destCityName = dest.name;
+      $scope.destCountryName = dest.country[0].name;
+      NavigationService.getDestinationBooking({
+        cityName: $scope.destCityName,
+        countryName: $scope.destCountryName
+      },function(data){
+        $scope.bookingData = data;
+        console.log($scope.bookingData,'booking ka data');
+      });
+    };
+    // get booking data end
 
 
 })
@@ -6494,50 +6292,52 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       getpopularPost: false,
       visitPost: false,
       activitySec: true
-    }, {
-      class: "local-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: true,
-      postIcon: true,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      visitPost: false,
-      getpopularPost: false,
-      activitySec: true
-    }, {
+    }, 
+    // {
+    //   class: "local-life",
+    //   profilePic: "img/profile-main.png",
+    //   userName: "John Doe",
+    //   timestampDate: "14 Jan, 2014",
+    //   timestampHour: "01:20 pm",
+    //   status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+    //   imgTravelled: "img/london.jpg",
+    //   Travelledtag: "London Eye",
+    //   photoCount: "28",
+    //   videoCount: "5",
+    //   locationVisited: "9",
+    //   itineraryType1: "img/sunset.png",
+    //   itineraryType2: "img/bag-journey.png",
+    //   itineraryType3: "img/luxury-journey.png",
+    //   travelledDay: "75",
+    //   onwayTag: "love in paris",
+    //   imgOnway: "img/paris.jpg",
+    //   cost: "$10,000",
+    //   spendingDay: "75",
+    //   likes: "15660",
+    //   reviews: "354",
+    //   pointReview: "4.5",
+    //   countryVisit: [{
+    //     imgFlag: "img/india-visit.png"
+    //   }, {
+    //     imgFlag: "img/england-visit.png"
+    //   }, {
+    //     imgFlag: "img/canada-visit.png",
+    //   }, ],
+    //   editor: false,
+    //   userPic: true,
+    //   follow: false,
+    //   following: true,
+    //   postIcon: true,
+    //   video: false,
+    //   photo: false,
+    //   photoSlider: false,
+    //   travelledJourney: true,
+    //   onJourney: false,
+    //   visitPost: false,
+    //   getpopularPost: false,
+    //   activitySec: true
+    // },
+     {
       class: "local-life",
       profilePic: "img/profile-main.png",
       userName: "John Doe",
@@ -12128,6 +11928,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.menutitle = NavigationService.makeactive("Message"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
+
+   //showNewMessage box
+  $scope.showNewMessage = false;
+  $scope.newMessage = function() {
+    if ($scope.showNewMessage == false) {
+      $scope.showNewMessage = true;
+    } else {
+      $scope.showNewMessage = false;
+    }
+  };
+  //showNewMessage box end
+
+  //Delete message Function
+  $scope.showDeleteMessage = false;
+  $scope.deleteMessage = function() {
+    if ($scope.showDeleteMessage == false) {
+      $scope.showDeleteMessage = true;
+    } else {
+      $scope.showDeleteMessage = false;
+    }
+  };
+  //Delete message Function End
+
 })
 
 .controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {

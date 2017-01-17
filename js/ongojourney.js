@@ -8,7 +8,8 @@ var ongojourney = angular.module('ongojourney', [])
         url: adminURL + "/journey/myLifeWeb",
         method: "POST",
         data: {
-          "type": "all"
+          "type": "all",
+          "type2":"journey"
         }
       }).success(function(data) {
         var hasJourney = "";
@@ -810,8 +811,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
 
       $scope.time = {};
       $scope.datetime = {};
-      $scope.options = { showWeeks : false };
-      $scope.changeDate = function() {
+      
+      $scope.changePostsDate = function() {
+        console.log("Posts Date");
         $scope.isPostDate = true;
         $scope.isBannerDate = false;
         console.log($scope.isPostDate, $scope.isBannerDate);
@@ -827,6 +829,11 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         $scope.time.hour = hh;
         $scope.time.min = d.getMinutes();
         $scope.datetime.dt = d;
+        $scope.options = {
+          minDate:$scope.json.startTime,
+          maxDate:$scope.json.post[$scope.json.post.length-1].UTCModified,
+          showWeeks : false 
+        };
         $uibModal.open({
           animation: true,
           templateUrl: "views/modal/date-time.html",
@@ -1168,7 +1175,6 @@ ongojourney.filter('singularOrPlural', function() {
 
 ongojourney.filter('filterCount', function() {
   return function(count){
-    console.log(count);
     if(count==undefined){
         return 0;
     }else{

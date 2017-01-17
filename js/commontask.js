@@ -182,7 +182,8 @@ commontask.directive('findTags', function (LikesAndComments) {
   return {
     restrict: 'E',
     scope: {
-      ngModel:"="
+      ngModel:"=",
+      focus:"&"
     },
     templateUrl: "views/modal/hashtag.html",
     link: function ($scope, element, attrs) {
@@ -257,6 +258,8 @@ commontask.directive('findTags', function (LikesAndComments) {
       };
 
       $scope.appendComment = function (flag,comment, replaceWith, tag, startTagIndex, endTagIndex) {
+        $scope.showTags=false;
+        $scope.showBuddies=false;
         console.log(comment, replaceWith, tag, startTagIndex, endTagIndex);
         var counter = "";
         var len = comment.length;
@@ -279,7 +282,7 @@ commontask.directive('findTags', function (LikesAndComments) {
         console.log(a);
         $scope.ngModel = a;
         $scope.hashTags = [];
-        $scope.showTags=false;
+        $scope.focus();
       };
     }
   }
