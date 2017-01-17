@@ -1,36 +1,98 @@
-<div class="message-page">
+<div class="message-page ">
+  <div class="backdrop-popup" ng-show="showDeleteMessage" ng-click="deleteMessage()"></div>
   <div class="container-fluid">
+
+    <!-- MESSAGE HEADER -->
+    <div class="message-header">
+      <div class="row">
+        <div class="col-md-4 pad-zero">
+          <!-- List of friend header -->
+          <div class="listfriend-header clearfix" ng-hide="showNewMessage">
+            <!-- Search Input  -->
+            <div class="listfriend-search pull-left">
+              <div class="message-inputholder input-group">
+                <span class="input-group-addon search-input"><i class="fa fa-search"></i></span>
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+            </div>
+            <!-- Search Input END -->
+
+            <!-- Write new message btn -->
+            <div class="listfriend-newmessage-btn pull-right" ng-click="newMessage()">
+              <i class="fa fa-pencil-square-o"></i>
+            </div>
+            <!-- Write new message btn end -->
+          </div>
+          <!-- List of friend header  END-->
+
+          <!-- NEW MESSAGE HEADER -->
+          <div class="new-message-header" ng-show="showNewMessage">
+            <div class="newmsg-header-content clearfix">
+              <span class="newmsg-header-option pull-left" ng-click="newMessage()"><i class="fa fa-times"></i></span>
+              <span class="newmsg-header-content">New Message</span>
+              <span class="newmsg-header-option pull-right"> Next </span>
+            </div>
+          </div>
+          <!-- NEW MESSAGE HEADER END -->
+        </div>
+        <div class="col-md-8 pad-zero">
+          <!-- Chat-box header -->
+          <div class="chatbox-header clearfix">
+            <h4>
+              <img src="img/follower.jpg" alt="" class="chat-header-profile">
+              <span>Andrea Christna</span>
+            </h4>
+            <ul class="list-inline pull-right chat-option-icons">
+              <li><a><i class="fa fa-camera color-white"></i></a></li>
+              <li><a ng-click="deleteMessage()"><i class="fa fa-trash-o color-white"></i></a></li>
+              <!-- <li><a><i class="fa fa-info-circle color-white"></i></a></li> -->
+            </ul>
+          </div>
+          <!-- Chat-box header enD -->
+        </div>
+      </div>
+    </div>
+    <!-- MESSAGE HEADER END -->
+
+
     <div class="row">
       <div class="col-md-4 pad-zero">
+
         <div class="relate">
-          <!-- List of followers to message view -->
-          <div class="list-of-friends">
-            <!-- List of friend header -->
-            <div class="listfriend-header clearfix">
-              <!-- Search Input  -->
-              <div class="listfriend-search pull-left">
-                <div class="message-inputholder input-group">
-                  <span class="input-group-addon search-input"><i class="fa fa-search"></i></span>
-                  <input type="text" class="form-control" placeholder="Search">
-                </div>
-              </div>
-              <!-- Search Input END -->
 
-              <!-- Write new message btn -->
-              <div class="listfriend-newmessage-btn pull-right">
-                <i class="fa fa-pencil-square-o"></i>
+          <!-- NEW MESSAGE section -->
+          <div class="newmessage-section" ng-show="showNewMessage">
+            <div class="newmessage-listview">
+              <div class="newmsg-input-holder">
+                <input type="text" class="form-control " placeholder="Write to:">
               </div>
-              <!-- Write new message btn end -->
+              <div class="follower-list-scroll">
+                <ul class="avenir-roman">
+                  <li>
+                    <div class="follower-msg-select relate">
+                      <input type="checkbox" id="nargis1" name="" />
+                      <label for="nargis1">
+                          <div class="follower-imgholder">
+                            <img src="img/nargis1.jpg" alt="" class="get-center">
+                          </div>
+                          <span class="">Monish Shah</span>
+                        </label>
+                    </div>
+                  </li>
+              </div>
             </div>
-            <!-- List of friend header  END-->
+          </div>
+          <!-- NEW MESSAGE section END -->
 
+          <!-- List of followers to message view -->
+          <div class="list-of-friends" ng-hide="showNewMessage">
             <!-- Followers List -->
             <div class="listfriend-div">
               <!-- FOLLOWER CARD -->
               <div class="listfriend-card">
                 <!-- Follwer card img holder -->
                 <div class="listfriend-imgcard">
-                  <img src="img/follower.jpg" alt="">
+                  <img src="img/follower.jpg" alt="" class="get-center">
                 </div>
                 <!-- Follwer card img holder end -->
                 <!-- Follwer card details -->
@@ -51,7 +113,41 @@
               <!-- FOLLOWER CARD END -->
               <div class="listfriend-card">
                 <div class="listfriend-imgcard">
-                  <img src="img/follower.jpg" alt="">
+                  <img src="img/follower.jpg" alt="" class="get-center">
+                </div>
+                <div class="listfriend-detailcard">
+                  <div class="listfriend-countbadge">
+                    <span class="msg-countbadge">20</span>
+                  </div>
+                  <div class="">
+                    <p class="listfriend-follower">Nargis Fakri</p>
+                    <p class="listfriend-msg">Whasssssup?</p>
+                  </div>
+                  <div class="listfriend-message-timestamp">
+                    <p class="m-clear"><i class="fa fa-calendar"></i><span class="ml5 ">14 Jan, 2015</span> | <i class="fa fa-clock-o mr5"></i> <span> 1.20 pm</span></p>
+                  </div>
+                </div>
+              </div>
+              <div class="listfriend-card">
+                <div class="listfriend-imgcard">
+                  <img src="img/follower.jpg" alt="" class="get-center">
+                </div>
+                <div class="listfriend-detailcard">
+                  <div class="listfriend-countbadge">
+                    <span class="msg-countbadge">20</span>
+                  </div>
+                  <div class="">
+                    <p class="listfriend-follower">Nargis Fakri</p>
+                    <p class="listfriend-msg">Whasssssup?</p>
+                  </div>
+                  <div class="listfriend-message-timestamp">
+                    <p class="m-clear"><i class="fa fa-calendar"></i><span class="ml5 ">14 Jan, 2015</span> | <i class="fa fa-clock-o mr5"></i> <span> 1.20 pm</span></p>
+                  </div>
+                </div>
+              </div>
+              <div class="listfriend-card">
+                <div class="listfriend-imgcard">
+                  <img src="img/follower.jpg" alt="" class="get-center">
                 </div>
                 <div class="listfriend-detailcard">
                   <div class="listfriend-countbadge">
@@ -85,7 +181,7 @@
               </div>
               <div class="listfriend-card">
                 <div class="listfriend-imgcard">
-                  <img src="img/follower.jpg" alt="">
+                  <img src="img/follower.jpg" alt="" class="get-center">
                 </div>
                 <div class="listfriend-detailcard">
                   <div class="listfriend-countbadge">
@@ -102,7 +198,7 @@
               </div>
               <div class="listfriend-card">
                 <div class="listfriend-imgcard">
-                  <img src="img/follower.jpg" alt="">
+                  <img src="img/follower.jpg" alt="" class="get-center">
                 </div>
                 <div class="listfriend-detailcard">
                   <div class="listfriend-countbadge">
@@ -119,41 +215,7 @@
               </div>
               <div class="listfriend-card">
                 <div class="listfriend-imgcard">
-                  <img src="img/follower.jpg" alt="">
-                </div>
-                <div class="listfriend-detailcard">
-                  <div class="listfriend-countbadge">
-                    <span class="msg-countbadge">20</span>
-                  </div>
-                  <div class="">
-                    <p class="listfriend-follower">Nargis Fakri</p>
-                    <p class="listfriend-msg">Whasssssup?</p>
-                  </div>
-                  <div class="listfriend-message-timestamp">
-                    <p class="m-clear"><i class="fa fa-calendar"></i><span class="ml5 ">14 Jan, 2015</span> | <i class="fa fa-clock-o mr5"></i> <span> 1.20 pm</span></p>
-                  </div>
-                </div>
-              </div>
-              <div class="listfriend-card">
-                <div class="listfriend-imgcard">
-                  <img src="img/follower.jpg" alt="">
-                </div>
-                <div class="listfriend-detailcard">
-                  <div class="listfriend-countbadge">
-                    <span class="msg-countbadge">20</span>
-                  </div>
-                  <div class="">
-                    <p class="listfriend-follower">Nargis Fakri</p>
-                    <p class="listfriend-msg">Whasssssup?</p>
-                  </div>
-                  <div class="listfriend-message-timestamp">
-                    <p class="m-clear"><i class="fa fa-calendar"></i><span class="ml5 ">14 Jan, 2015</span> | <i class="fa fa-clock-o mr5"></i> <span> 1.20 pm</span></p>
-                  </div>
-                </div>
-              </div>
-              <div class="listfriend-card">
-                <div class="listfriend-imgcard">
-                  <img src="img/follower.jpg" alt="">
+                  <img src="img/follower.jpg" alt="" class="get-center">
                 </div>
                 <div class="listfriend-detailcard">
                   <div class="listfriend-countbadge">
@@ -177,19 +239,9 @@
       <div class="col-md-8 pad-zero">
         <div class="relate">
           <div class="message-chat-section">
-            <!-- message box header -->
-            <div class="listfriend-header color-white clearfix text-center">
-              <span class="color-white">Andrea Christna</span>
-              <ul class="list-inline pull-right">
-                <li><i class="fa fa-camera"></i></li>
-                <li><i class="fa fa-trash-o"></i></li>
-                <li><i class="fa fa-info-circle"></i></li>
-              </ul>
-            </div>
-            <!-- message box header end -->
 
             <!-- Blank message display -->
-            <div class="message-empty-section hide">
+            <div class="message-empty-section">
               <div class="empty-msg-box">
                 <h3 class="color-pink"><i class="fa fa-envelope color-darkgrey"></i> Stay Connected!</h3>
                 <p class="color-darkgrey">Interact and share interesting content with your buddies and followers on TraveLibro.</p>
@@ -198,7 +250,7 @@
             <!-- Blank message display end -->
 
             <!-- CHAT VIEW -->
-            <div class="chat-box ">
+            <div class="chat-box hide">
               <!-- MESSAGE VIEW BOX -->
               <div class="message-chatbox">
                 <!-- Timestamp for chat -->
@@ -525,5 +577,19 @@
         </div>
       </div>
     </div>
+
+    <!-- DELETE MSG BOX -->
+    <div class="msg-delete-popup" ng-show="showDeleteMessage">
+      <div class="msg-popup-box relate">
+        <span class="msg-delete-popup-close pointer" ng-click="deleteMessage();"><i class="fa fa-times"></i></span>
+        <h3 class="">Delete Chat?</h3>
+        <div class="msg-delete-btnbox">
+          <button type="button" name="button" class="btn btn-more btn-delete-msg">Yes</button>
+          <button type="button" name="button" class="btn btn-more btn-delete-msg" ng-click="deleteMessage();">No</button>
+        </div>
+      </div>
+    </div>
+    <!-- DELETE MSG BOX END -->
   </div>
+  <!-- container-fluid end -->
 </div>

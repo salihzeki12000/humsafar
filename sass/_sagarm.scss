@@ -2996,16 +2996,16 @@ q {
 // MESSAGE PAGE
 
 .message-page {
-  height:  calc(100vh - 60px);
+  height: calc(100vh - 60px);
   @extend .avenir-roman;
 }
 // message page Header
 
 .listfriend-header {
-  padding: 5px 15px;
+  // padding: 5px 15px;
   // position: fixed;
   // top: 60px;
-  background-color: $brand-pink;
+  // background-color: $brand-pink;
 }
 
 .listfriend-search {
@@ -3057,14 +3057,16 @@ q {
   cursor: pointer;
 
   i {
-    padding: 4px 0;
+    // padding: 4px 0;
+    vertical-align: middle;
   }
 }
 // message page Header end
 // Followers chat list
-.list-of-friends{
+
+.list-of-friends {
   ::-webkit-scrollbar {
-    width: 0px;
+    width: 0;
   }
 
   ::-webkit-scrollbar-track {
@@ -3074,11 +3076,26 @@ q {
   ::-webkit-scrollbar-thumb {
     background-color: transparent;
   }
-
 }
-.listfriend-div{
-     height: calc(100vh - 80px);
-     overflow-y: scroll;
+
+.listfriend-div {
+  height: calc(100vh - 60px);
+  padding-top: 40px;
+  overflow-y: scroll;
+
+  .active {
+    background-color: $brand-blue;
+    color: #fff;
+
+    .listfriend-follower {
+      color: $brand-cyan;
+    }
+
+    .listfriend-message-timestamp,
+    .listfriend-msg {
+      color: #fff;
+    }
+  }
 }
 
 .listfriend-card {
@@ -3086,6 +3103,21 @@ q {
   border-top: 1px solid $brand-grey;
   background-color: rgba(255,255,255,0.85);
   vertical-align: top;
+  @extend .pointer;
+
+  .active {
+    background-color: $brand-blue;
+    color: #fff;
+
+    .listfriend-follower {
+      color: $brand-cyan;
+    }
+
+    .listfriend-message-timestamp,
+    .listfriend-msg {
+      color: #fff;
+    }
+  }
 
   &:first-child {
     border-top: none;
@@ -3101,10 +3133,12 @@ q {
   width: 25%;
   height: 100px;
   vertical-align: top;
+  position: relative;
+  overflow: hidden;
 
   img {
     width: 100%;
-    height: 100%;
+    // height: 100%;
   }
 }
 
@@ -3119,11 +3153,16 @@ q {
   text-align: right;
 
   .msg-countbadge {
-    padding: 5px;
+    // padding: 5px;
     border-radius: 100%;
     background-color: $brand-pink;
     color: #fff;
     font-size: 12px;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    line-height: 27px;
+    text-align: center;
     @extend .avenir-roman;
   }
 }
@@ -3153,12 +3192,12 @@ q {
 
 .message-empty-section {
   padding: 20px;
-   height: calc(100vh - 60px);
+  height: calc(100vh - 60px);
   position: relative;
   background-color: rgba(255,255,255,0.8);
 }
 
-.empty-msg-box{
+.empty-msg-box {
   width: 100%;
   position: absolute;
   top: 50%;
@@ -3168,7 +3207,8 @@ q {
 }
 // Message empty section end
 // Message chat box
-.message-chat-section{
+
+.message-chat-section {
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -3182,17 +3222,17 @@ q {
   }
 }
 
-.chat-box{
-   height: calc(100vh - 60px);
-   overflow-y: scroll;
+.chat-box {
+  height: calc(100vh - 60px);
+  overflow-y: scroll;
 }
 
 .message-chatbox {
-  padding: 40px;
+  padding: 45px 40px 65px;
 }
 
 .new-message-box {
-  padding: 10px 0;
+  padding-bottom: 10px;
 }
 
 .message-bubble {
@@ -3247,7 +3287,8 @@ q {
   bottom: 0;
 }
 
-.chat-timestamp{
+.chat-timestamp {
+  padding-bottom: 10px;
   color: #fff;
   font-size: 12px;
   text-align: center;
@@ -3259,18 +3300,17 @@ q {
   margin-right: 15px;
   padding: 10px;
 
-    ::-webkit-scrollbar {
-      width: 4px;
-    }
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
 
-    ::-webkit-scrollbar-track {
-      background-color: transparent;
-    }
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
 
-    ::-webkit-scrollbar-thumb {
-      background-color: $brand-pink;
-    }
-
+  ::-webkit-scrollbar-thumb {
+    background-color: $brand-pink;
+  }
 
   .form-control {
     background-color: transparent;
@@ -3290,4 +3330,255 @@ q {
 }
 // Message Type Box end
 // Message chat box end
+// message header
+
+.message-header {
+  padding: 5px 30px;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background-color: $brand-pink;
+  z-index: 3;
+}
+
+.chatbox-header {
+  padding: 5px 0;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  vertical-align: middle;
+
+  h4 {
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+    @extend .text-ellipsis;
+  }
+}
+
+.chat-header-profile {
+  width: 25px;
+  height: 25px;
+  overflow: hidden;
+  border: 2px solid #fff;
+  border-radius: 9px;
+  margin: 0 5px;
+
+  .chat-option-icons {
+    padding: 0 5px;
+    vertical-align: middle;
+  }
+}
+// message header end
+// msg-delete-popup
+.backdrop-popup {
+  background-color: rgba(0,0,0,0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 15;
+}
+
+.msg-delete-popup {
+  border-radius: 5px;
+  background-color: rgba(255,255,255,0.8);
+  text-align: center;
+  z-index: 15;
+  @extend .get-center;
+  @extend .avenir-roman;
+}
+
+.msg-popup-box {
+  padding: 30px 50px;
+  color: #424242;
+}
+
+.msg-delete-popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: $brand-pink;
+}
+
+.msg-delete-btnbox {
+  text-align: center;
+}
+
+.btn-delete-msg {
+  border-radius: 5px;
+  margin: 0 5px;
+  background-color: $brand-dark-grey;
+  color: #fff;
+
+  &:active,
+  &:focus,
+  &:hover {
+    background-color: $brand-pink;
+    color: #fff;
+  }
+}
+// msg-delete-popup end
+// new-message-header
+
+.new-message-header {
+  padding: 5px 15px;
+  width: 100%;
+  margin: -5px -15px;
+  background-color: $brand-grey;
+  // height: 40px;
+}
+
+.newmsg-header-content {
+  padding: 10px 0 3px;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  @extend .avenir-roman;
+
+  .newmsg-header-content {
+    font-size: 16px;
+    vertical-align: middle;
+  }
+
+  .newmsg-header-option {
+    font-size: 12px;
+    vertical-align: middle;
+    @extend .pointer;
+
+    i {
+      margin: 0 5px;
+    }
+  }
+}
+// new-message-header end
+// NEW MESSAGE SECTION
+.newmessage-section {
+  // padding-right: 10px;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+}
+
+.newmessage-listview {
+  // height: calc(100vh - 60px);
+  padding-top: 40px;
+  // overflow-y: scroll;
+}
+
+.follower-list-scroll{
+  height: calc(100vh - 146px);
+  overflow-y: scroll;
+}
+
+.newmsg-input-holder {
+  padding: 6px 12px;
+  background-color: #fff;
+  color: #424242;
+  @extend .avenir-roman;
+
+  .form-control {
+    border: none;
+    background-color: transparent;
+  }
+}
+
+.follower-msg-select {
+  padding: 10px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+  background-color: rgba(255,255,255,0.8);
+  color: $brand-blue;
+  @extend .avenir-roman;
+
+  [type="checkbox"]:checked,
+  [type="checkbox"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+  }
+
+  [type="checkbox"]:checked+label,
+  [type="checkbox"]:not(:checked)+label {
+    width: 100%;
+    position: relative;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  /* radio aspect */
+  [type="checkbox"]:checked+label:before,
+  [type="checkbox"]:not(:checked)+label:before {
+    content: '';
+    @include square(20px);
+    border: 1px solid $brand-grey;
+    border-radius: 2px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    @include transform(translateY(-50%));
+    background-color: transparent;
+    color: #f6f6f6;
+    @include transition(all 300ms linear);
+  }
+  /* checked mark aspect */
+  [type="checkbox"]:checked+label:after,
+  [type="checkbox"]:not(:checked)+label:after {
+    content: '\f00c';
+    color: #fff;
+    font: normal normal normal 14px/1 FontAwesome;
+    position: absolute;
+    top: 50%;
+    right: 2px;
+    @include transform(translateY(-50%));
+    font-size: 15px;
+    line-height: 0.8;
+    @include transition(all 300ms linear);
+  }
+  /* checked mark aspect changes */
+  [type="checkbox"]:not(:checked)+label:after {
+    opacity: 1;
+    // transform: scale(1);
+  }
+
+  [type="checkbox"]:checked+label:before {
+    background-color: $brand-pink;
+    border: 1px solid $brand-pink;
+    color: $brand-blue;
+    @include transition(all 300ms linear);
+  }
+
+  [type="checkbox"]:checked+label:after {
+    color: #fff;
+    // background-color: $brand-pink;
+    @include transition(all 300ms linear);
+  }
+  label img { border: 1px solid #ebebeb; }
+}
+
+.follower-imgholder {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #fff;
+  border-radius: 19px;
+  margin-right: 10px;
+  overflow: hidden;
+  vertical-align: middle;
+
+  img {
+    height: 100%;
+  }
+}
+// NEW MESSAGE SECTION END
 // MESSAGE PAGE END
