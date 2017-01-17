@@ -103,7 +103,7 @@ a.color-white {
     background: url('../img/popularagent/bg-agent.jpg') no-repeat;
     z-index: 2;
   }
-  
+
   .bg-itinerary {
     background: url('../img/libro-home/bg-itinerary.jpg') no-repeat;
     z-index: 2;
@@ -1283,6 +1283,7 @@ a.color-white {
   .destin-fixednav {
     position: fixed;
     top: 60px;
+    left: 0;
     z-index: 9;
     width: 100%;
   }
@@ -1291,6 +1292,7 @@ a.color-white {
 .destin-fixednav-country{
     position: fixed;
     top: 60px;
+    left: 0;
     z-index: 9;
     width: 100%;
 }
@@ -1308,6 +1310,7 @@ a.color-white {
   .destin-fixednav2 {
     position: fixed;
     top: 102px;
+    left: 0;
     z-index: 4;
     width: 100%;
   }
@@ -1316,6 +1319,7 @@ a.color-white {
   .destin-fixednav1 {
     position: fixed;
     top: 102px;
+    left: 0;
     z-index: 4;
     width: 100%;
   }

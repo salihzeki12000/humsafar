@@ -192,6 +192,11 @@ var navigationservice = angular.module('navigationservice', [])
         callback(data);
       });
     },
+    getDestinationBooking: function(formData, callback){
+      $http.get("http://192.168.0.124:3000/migrations/city_hotels.json?city_name="+formData.cityName+"&country_name="+formData.countryName+"&withCredentials=true", formData).success(function (data) {
+        callback(data);
+      });
+    },
     uploadFile: function (formData, callback) {
       $http.post(uploadurl, formData, {
         headers: {

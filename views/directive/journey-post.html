@@ -88,7 +88,7 @@
       <div class="user-social-item clearfix">
         <div class="pull-left">
           <ul>
-            <li><a href=""><i class="fa color-blue card-like" ng-class="ongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(ongo.uniqueId,ongo._id)"></i></a></li>
+            <li><a href=""><i class="fa color-blue card-like-animation" ng-class="ongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(ongo.uniqueId,ongo._id)"></i></a></li>
             <li>
               <a href="">
                 <img src="img/comments.png" alt="" height="18" ng-click="getCommentsData({'post':ongo});">
@@ -136,7 +136,7 @@
                 <li class="hide"><a href="" title="Edit Videos" ng-click="editCheckIn();">Edit Videos</a></li>
                 <!-- ng if for Thoughts -->
                 <li class="hide"><a href="" title="Edit Thoughts" ng-click="editCheckIn();">Edit Thoughts</a></li>
-                <li><a href="" title="Change Date &amp; Time" ng-click="changeDate();">Change Date &amp; Time</a></li>
+                <li><a href="" title="Change Date &amp; Time" ng-click="changePostsDate();">Change Date &amp; Time</a></li>
                 <li><a href="" title="Delete" ng-click="deletePost(ongo._id,json.uniqueId)">Delete Activity</a></li>
                 <li class="hide" ><a href="" title="Copy URL">Copy URL</a></li>
               </ul>
