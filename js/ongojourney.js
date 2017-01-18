@@ -194,8 +194,10 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       $scope.indexEditPhotoCap = -1;
       $scope.indexEditVideoCap = -1;
       $scope.index = 0;
-      $scope.changeImage = function(index) {
+      $scope.changeImage = function(index,flag) {
         $scope.index = index;
+        $scope.ongo.onDisplay=flag;
+        console.log($scope.index,$scope.ongo.onDisplay);
       };
       var getLocation = {};
       $scope.otgPhoto = [];
@@ -259,23 +261,34 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           return new Array(remainCount);
         }
       };
-      $scope.ongo.journeyTypeicon = "";
+
+        if($scope.ongo && $scope.ongo.photos && $scope.ongo.videos){
+           $scope.ongo.photosVideos=$scope.ongo.videos.concat($scope.ongo.photos); 
+          if($scope.ongo && $scope.ongo.photosVideos[0] && $scope.ongo.photosVideos[0].thumbnail){
+            $scope.ongo.onDisplay="videos"; 
+          }else {
+            $scope.ongo.onDisplay="photos";
+          }
+          console.log($scope.ongo.photosVideos,$scope.ongo.onDisplay);
+        }
+       
+        // $scope.ongo.journeyTypeicon = "";
 
       // type of post starts
-      $scope.ongo.typeOfPost = "";
-      if ($scope.ongo && $scope.ongo.checkIn && $scope.ongo.checkIn.location) {
-        $scope.ongo.journeyTypeicon = "img/ongojourney/location.png";
-        $scope.ongo.typeOfPost = 'checkIn';
-      } else if ($scope.ongo && $scope.ongo.photos && $scope.ongo.photos.length != 0) {
-        $scope.ongo.journeyTypeicon = "img/ongojourney/camera.png";
-        $scope.ongo.typeOfPost = 'photo';
-      } else if ($scope.ongo && $scope.ongo.videos && $scope.ongo.videos.length != 0) {
-        $scope.ongo.journeyTypeicon = "img/ongojourney/video.png";
-        $scope.ongo.typeOfPost = 'video';
-      } else if ($scope.ongo && $scope.ongo.thoughts) {
-        $scope.ongo.journeyTypeicon = "img/ongojourney/thought.png";
-        $scope.ongo.typeOfPost = 'thought';
-      }
+      // $scope.ongo.typeOfPost = "";
+      // if ($scope.ongo && $scope.ongo.checkIn && $scope.ongo.checkIn.location) {
+      //   $scope.ongo.journeyTypeicon = "img/ongojourney/location.png";
+      //   $scope.ongo.typeOfPost = 'checkIn';
+      // } else if ($scope.ongo && $scope.ongo.photos && $scope.ongo.photos.length != 0) {
+      //   $scope.ongo.journeyTypeicon = "img/ongojourney/camera.png";
+      //   $scope.ongo.typeOfPost = 'photo';
+      // } else if ($scope.ongo && $scope.ongo.videos && $scope.ongo.videos.length != 0) {
+      //   $scope.ongo.journeyTypeicon = "img/ongojourney/video.png";
+      //   $scope.ongo.typeOfPost = 'video';
+      // } else if ($scope.ongo && $scope.ongo.thoughts) {
+      //   $scope.ongo.journeyTypeicon = "img/ongojourney/thought.png";
+      //   $scope.ongo.typeOfPost = 'thought';
+      // }
       // type of post ends
       makePostString();
 
@@ -377,8 +390,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
               placeId: id.place_id
             }
           }).success(function(locationData) {
-            // $scope.locationDetail = locationData.data;
-            // console.log(locationData);
             $scope.ongo.checkIn = {
               location: id.name,
               lat: locationData.lat,

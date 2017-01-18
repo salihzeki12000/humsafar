@@ -297,10 +297,15 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'AgentupgradeCtrl'
     })
     .state('message', {
-  url: "/message",
-  templateUrl: "views/template.html",
-  controller: 'MessageCtrl'
-})
+      url: "/message",
+      templateUrl: "views/template.html",
+      controller: 'MessageCtrl'
+    })
+     .state('notification', {
+      url: "/notification",
+      templateUrl: "views/template.html",
+      controller: 'NotificationCtrl'
+    })
     .state('ProfileList', {
       url: "/profile-list/:active",
       templateUrl: "views/template.html",
@@ -838,6 +843,21 @@ firstapp.filter('kindOfCheckIn', function () {
   };
 });
 
+firstapp.filter('typeOfPost', function () {
+  return function (ongo) {
+    var returnVal = "";
+    if (ongo && ongo.checkIn && ongo.checkIn.location) {
+      return "img/ongojourney/location.png";
+    } else if (ongo && ongo.photos && ongo.photos.length != 0) {
+      return "img/ongojourney/camera.png";
+    } else if (ongo && ongo.videos && ongo.videos.length != 0) {
+      return "img/ongojourney/video.png";
+    } else if (ongo && ongo.thoughts) {
+      return "img/ongojourney/thought.png";
+    }
+  }
+});
+
 firstapp.filter('itineraryType', function () {
   return function (input) {
     var returnVal = "";
@@ -958,7 +978,7 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
                 flag = true;
                 pointsForLine(ith, percentage, true, true);
               } else {
-                 //else is given coz polyline should not exceed beyond 100%
+                //else is given coz polyline should not exceed beyond 100%
                 pointsForLine(ith, 100, true);
                 flag = false;
               }
@@ -1056,9 +1076,9 @@ firstapp.filter('fromCalculation', function () {
   };
 });
 firstapp.filter('trusted', ['$sce', function ($sce) {
-    return function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
+  return function (url) {
+    return $sce.trustAsResourceUrl(url);
+  };
 }]);
 
 firstapp.filter('toCalculation', function () {

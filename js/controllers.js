@@ -2357,7 +2357,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     // destination country city end
-
+ 
     // get booking data
     $scope.getBooking = function(dest){
       console.log(dest);
@@ -2372,8 +2372,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     // get booking data end
-
-
 })
 
 .controller('DestinationCountryCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
@@ -11951,7 +11949,291 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   };
   //Delete message Function End
 
+   //Show Message Chat
+  $scope.userMessage =[];
+  $scope.viewMessageChat == false;
+  $scope.showMessageChat = function(name){
+    $scope.userMessage =[];
+      var newArray = _.findIndex($scope.followerList, function(o){
+      return  o.name == name.name;
+    });
+    if(newArray!==-1){
+      $scope.userMessage = $scope.followerList[newArray].followerMessage;
+      console.log($scope.userMessage,'user ka naya');
+      $scope.viewMessageChat = true;
+    }
+  }
+  //Show Message Chat END
+
+  // Follower List
+  $scope.followerList = [
+    {
+      name : "Monish Shah",
+      profilePic : "img/nargis1.jpg",
+      timeStampDate : "12 Jan, 2017",
+      timeStampTime : "1.20 pm",
+      followerMessage : [{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "Hey",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.50 pm"
+      },{
+        msgStatus : true,
+        msgType : "recieved",
+        msgText : "Hi",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.58 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "Wassssup?",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.59 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText :  "BLA bla",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.05 pm"
+      },{
+        msgStatus : true,
+        msgType : "recieved",
+        msgText : "YO!",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.10 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "QWERTYU...",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.20 pm"
+      }]
+    },{
+      name : "Andrea Christina",
+      profilePic : "img/follower.jpg",
+      timeStampDate : "12 Jan, 2017",
+      timeStampTime : "1.20 pm",
+      followerMessage : [{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "Hey",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.50 pm"
+      },{
+        msgStatus : true,
+        msgType : "recieved",
+        msgText : "Hi",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.58 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "Wassssup?",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.59 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText :  "BLA bla Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit blanditiis dolores error tempore tempora. Iusto fugit qui voluptate officia quasi accusamus facere, ab, recusandae eveniet, non dignissimos.",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.05 pm"
+      },{
+        msgStatus : true,
+        msgType : "recieved",
+        msgText : "YO! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit blanditiis dolores error tempore tempora. Iusto fugit qui voluptate",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.10 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "Lorem ipsum dolor sit amet, ",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.20 pm"
+      }]
+    },{
+      name : "Nargis Fakhri",
+      profilePic : "img/nargis1.jpg",
+      timeStampDate : "12 Jan, 2017",
+      timeStampTime : "1.20 pm",
+      followerMessage : [{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "Hey. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.50 pm"
+      },{
+        msgStatus : true,
+        msgType : "recieved",
+        msgText : "Hi Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit blanditiis dolores error tempore tempora. Iusto fugit qui voluptate officia quasi accusamus facere, ab, recusandae eveniet, non dignissimos.",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.58 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "Wassssup? beach Meet Lorem",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.59 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText :  "BLAH",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.05 pm"
+      },{
+        msgStatus : true,
+        msgType : "recieved",
+        msgText : "YOyoyoyoyo!",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.10 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "QWYU...",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.20 pm"
+      }]
+    },{
+      name : "Disha Patani",
+      profilePic : "img/dishapatani1.jpg",
+      timeStampDate : "12 Jan, 2017",
+      timeStampTime : "1.20 pm",
+      followerMessage : [{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "Heyya",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.50 pm"
+      },{
+        msgStatus : true,
+        msgType : "recieved",
+        msgText : "Hiya",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.58 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "Wassssup? YO!",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.59 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText :  "BLA blah BLAH!!!!!!!!!!!",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.05 pm"
+      },{
+        msgStatus : true,
+        msgType : "recieved",
+        msgText : "YOLO Babes!",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.10 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "MACDSVJFB...",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.20 pm"
+      }]
+    },{
+      name : "Alladin",
+      profilePic : "img/adrena.jpg",
+      timeStampDate : "12 Jan, 2017",
+      timeStampTime : "1.20 pm",
+      followerMessage : [{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "Hey",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.50 pm"
+      },{
+        msgStatus : true,
+        msgType : "recieved",
+        msgText : "Hi buddy",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.58 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "Wassssup? Meet up at Stamford",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.59 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText :  "BLA bla bla",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.05 pm"
+      },{
+        msgStatus : true,
+        msgType : "recieved",
+        msgText : "Yikes!",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.10 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "Q be!!!!!!!!!!!!!...",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.20 pm"
+      }]
+    },{
+      name : "Bla Blabla",
+      profilePic : "img/nargis1.jpg",
+      timeStampDate : "12 Jan, 2017",
+      timeStampTime : "1.20 pm",
+      followerMessage : [{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "Hey yo",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.50 pm"
+      },{
+        msgStatus : true,
+        msgType : "recieved",
+        msgText : "Hi",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.58 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "Wassssup? BAMBS",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "12.59 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText :  "BLA bla bla vlA bla",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.05 pm"
+      },{
+        msgStatus : true,
+        msgType : "recieved",
+        msgText : "YO maama!",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.10 pm"
+      },{
+        msgStatus : true,
+        msgType : "sent",
+        msgText : "QWERTYU vladdujfdsv...",
+        msgStampDate : "12 Jan, 2017",
+        msgStampTime : "1.20 pm"
+      }]
+    }];
+  // Follower List END
+
+
 })
+
+.controller('NotificationCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  $scope.template = TemplateService.changecontent("notification"); //Use same name of .html file
+  $scope.menutitle = NavigationService.makeactive("Notification"); //This is the Title of the Website
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+
+})
+
+
 
 .controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {
   $scope.changeLanguage = function () {
