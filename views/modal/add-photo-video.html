@@ -68,9 +68,9 @@
             <!-- flex slider for photo in 2 row end -->
             <!-- add more photo video part -->
             <div class="add-otg-more" ng-show="photoSec">
-              <span class="putmore-photo-video" data-toggle="collapse" data-target="#addMorePic"><i class="fa fa-plus"></i></span>
-              <div class="add-more-pic collapse" id="addMorePic">
-                <upload-image-otg multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data,length);" no-view>
+              <span class="putmore-photo-video"><i class="fa fa-plus"></i></span>
+              <div class="add-more-pic">
+                <upload-image-otg multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data);" no-view>
                 </upload-image-otg>
               </div>
             </div>
@@ -92,6 +92,7 @@
               <span class="block text-center color-dark-blue avenir-roman">-or-</span>
               <div class="otg-upload-btn text-center">
                 <button class="btn btn-pink btn-more">Select a videos from your computer</button>
+                <upload-image multiple="true" ng-model="uploadPic" ng-callback="addOtgVideo(data);" no-view class="pointer"></upload-image>
               </div>
             </div>
             <!-- video upload end-->
