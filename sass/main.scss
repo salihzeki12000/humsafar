@@ -9655,45 +9655,41 @@ ng-map {
 .like-animate {
   position: relative;
   color: $brand-pink;
-  @include animation(heart-pop 250ms linear forwards);
+  @include animation(heart-pop 600ms linear forwards);
   @keyframes heart-pop {
     0% {
       @include transform(scale(0));
+    }
+    50% {
+      @include transform(scale(1.4));
     }
     100% {
       @include transform(scale(1));
     }
   }
-  &:after {
-    content: '';
-    width: 9px;
-    height: 9px;
+  + span {
+    @include square(10px);
     border-radius: 100%;
     @include position(absolute, 50% null null 50%);
     @include transform(translate(-50%,-50%) scale(0.6));
-    @include animation(like-heart 700ms linear forwards);
+    opacity: 0;
+    @include animation(like-heart 400ms linear forwards 200ms);
     box-shadow: 0.32476rem -3rem 0 -0.1875rem #ef645e, -0.32476rem -2.625rem 0 -0.1875rem #ef645e, 2.54798rem -1.61656rem 0 -0.1875rem #ef645e, 1.84982rem -1.89057rem 0 -0.1875rem #ef645e, 2.85252rem 0.98418rem 0 -0.1875rem #ef645e, 2.63145rem 0.2675rem 0 -0.1875rem #ef645e, 1.00905rem 2.84381rem 0 -0.1875rem #ef645e, 1.43154rem 2.22414rem 0 -0.1875rem #ef645e, -1.59425rem 2.562rem 0 -0.1875rem #ef645e, -0.84635rem 2.50595rem 0 -0.1875rem #ef645e, -2.99705rem 0.35095rem 0 -0.1875rem #ef645e, -2.48692rem 0.90073rem 0 -0.1875rem #ef645e, -2.14301rem -2.12438rem 0 -0.1875rem #ef645e, -2.25479rem -1.38275rem 0 -0.1875rem #ef645e;
     @keyframes like-heart {
       0% {
-        // @include transform(translate(-50%,-50%) scale(0.6));
-        @include square(8px);
+        @include square(10px);
         opacity: 0;
       }
-      // 25% {
-      //   @include transform(translate(-50%,-50%) scale(0.5));
-      // }
       50% {
-        // @include transform(translate(-50%,-50%) scale(0.6));
         opacity: 1;
-        @include square(11px);
-        box-shadow: 0.32476rem -3rem 0 -0.1875rem #ef645e, -0.32476rem -2.625rem 0 -0.1875rem #ef645e, 2.54798rem -1.61656rem 0 -0.1875rem #ef645e, 1.84982rem -1.89057rem 0 -0.1875rem #ef645e, 2.85252rem 0.98418rem 0 -0.1875rem #ef645e, 2.63145rem 0.2675rem 0 -0.1875rem #ef645e, 1.00905rem 2.84381rem 0 -0.1875rem #ef645e, 1.43154rem 2.22414rem 0 -0.1875rem #ef645e, -1.59425rem 2.562rem 0 -0.1875rem #ef645e, -0.84635rem 2.50595rem 0 -0.1875rem #ef645e, -2.99705rem 0.35095rem 0 -0.1875rem #ef645e, -2.48692rem 0.90073rem 0 -0.1875rem #ef645e, -2.14301rem -2.12438rem 0 -0.1875rem #ef645e, -2.25479rem -1.38275rem 0 -0.1875rem #ef645e;
+        @include square(8px);
       }
-      // 75% {
-      //   @include transform(translate(-50%,-50%) scale(0.7));
-      // }
+      75% {
+        @include square(5px);
+      }
       100% {
-        // @include transform(translate(-50%,-50%) scale(0.7));
-        @include square(4px);
+        // @include transform(translate(-50%,-50%) scale(0.6));
+        @include square(2px);
         opacity: 0;
       }
     }
