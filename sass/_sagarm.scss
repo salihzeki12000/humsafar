@@ -3138,7 +3138,7 @@ q {
 
   img {
     width: 100%;
-    // height: 100%;
+    height: 100%;
   }
 }
 
@@ -3372,6 +3372,7 @@ q {
 }
 // message header end
 // msg-delete-popup
+
 .backdrop-popup {
   background-color: rgba(0,0,0,0.7);
   position: absolute;
@@ -3455,6 +3456,7 @@ q {
 }
 // new-message-header end
 // NEW MESSAGE SECTION
+
 .newmessage-section {
   // padding-right: 10px;
   ::-webkit-scrollbar {
@@ -3476,7 +3478,7 @@ q {
   // overflow-y: scroll;
 }
 
-.follower-list-scroll{
+.follower-list-scroll {
   height: calc(100vh - 146px);
   overflow-y: scroll;
 }
@@ -3514,7 +3516,6 @@ q {
     margin: 0;
     cursor: pointer;
   }
-
   /* radio aspect */
   [type="checkbox"]:checked+label:before,
   [type="checkbox"]:not(:checked)+label:before {
@@ -3562,7 +3563,10 @@ q {
     // background-color: $brand-pink;
     @include transition(all 300ms linear);
   }
-  label img { border: 1px solid #ebebeb; }
+
+  label img {
+    border: 1px solid #ebebeb;
+  }
 }
 
 .follower-imgholder {
@@ -3582,3 +3586,156 @@ q {
 }
 // NEW MESSAGE SECTION END
 // MESSAGE PAGE END
+//NOTIFICATION PAGE
+.notification-page {
+  padding: 30px;
+  @extend .avenir-roman;
+}
+
+.notification-card {
+  min-height: 230px;
+  border-radius: 5px;
+  margin: 10px 0;
+  background-color: rgba(255,255,255,0.9);
+}
+
+.notification-content {
+  position: relative;
+  padding: 15px;
+}
+
+.remove-notification {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: $brand-grey;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.notification-profile {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #fff;
+  border-radius: 19px;
+  margin-top: -25px;
+  overflow: hidden;
+}
+
+.notification-timestamp {
+  display: inline-block;
+  margin: 0 5px;
+  color: $brand-dark-grey;
+  font-size: 10px;
+  vertical-align: top;
+}
+
+.notification-detail {
+  color: #424242;
+  font-size: 12px;
+}
+
+.notification-action {
+  color: #424242;
+  font-size: 12px;
+}
+
+.notification-btn {
+  margin-top: 20px;
+}
+
+.btn-notification-card {
+  padding: 6px 25px;
+  border-radius: 5px;
+  margin: 0 5px;
+  background-color: $brand-dark-grey;
+  color: #fff;
+  font-size: 12px;
+
+  &:active,
+  &:focus,
+  &:hover {
+    background-color: $brand-pink;
+    color: #fff;
+  }
+}
+
+.notification-tagitinerary-photo {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+}
+
+.notification-checkin-ongo-photo {
+  position: relative;
+  width: 100%;
+  height: 125px;
+  overflow: hidden;
+}
+
+.notification-addpic-ongo-photo {
+  display: inline-block;
+  position: relative;
+  width: 48%;
+  height: 120px;
+  overflow: hidden;
+
+  .addpic-count {
+    color: #fff;
+    font-size: 11px;
+    text-shadow: 0 2px 2px #000;
+    @extend .get-center;
+    @extend .avenir-heavy;
+  }
+}
+
+.notification-addvideo-ongo-photo {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+}
+
+.notification-video-thumbicon {
+  font-size: 30px;
+  @extend .get-center;
+}
+
+.notification-addthought-ongo-action {
+  margin: 20px 0 0;
+}
+
+.notification-started-following-action {
+  .notification-btn {
+    margin-top: 10px;
+  }
+
+  .btn-notificationpink-card {
+    padding: 6px 25px;
+    border-radius: 5px;
+    margin: 0 5px;
+    font-size: 12px;
+    @extend .btn-pink;
+  }
+}
+
+.notification-follower-detail {
+  display: inline-block;
+  margin: 10px 5px;
+  text-align: center;
+
+  .notifcation-follower-count {
+    display: block;
+    color: $brand-dark-grey;
+    font-size: 20px;
+    @extend .avenir-heavy;
+  }
+
+  .notifcation-follower-property {
+    display: block;
+    color: $brand-dark-grey;
+  }
+}
+//NOTIFICATION PAGE END
