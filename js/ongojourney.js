@@ -207,6 +207,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       $scope.editedPhotosArr = [];
       $scope.checkInData = {};
       $scope.newBuddies = [];
+      $scope.selectedTagFriend = [];
       $scope.ongo.getSearchedList="";
       $scope.ongo.buddiesCount=0;
       if ($scope.ongo.checkIn && $scope.ongo.checkIn.location) {
@@ -492,6 +493,13 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
             }
           },100)
         };
+        $scope.addVideoCaption = function(id){
+          if($scope.indexVideoCaption == id){
+            $scope.indexVideoCaption = -1;
+          }else {
+            $scope.indexVideoCaption = id;
+          }
+        }
         // add video end
         // delete added photos
       $scope.deletePhotos = function(name) {
@@ -518,13 +526,27 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           console.log($scope.otgPhotoArray);
         }
         // delete added photos end
+        // tag selected buddy
+        _.each($scope.ongo.buddies,function(o){
+          o.selected = true;
+        });
+        $scope.selectBuddy = function(buddy){
+          if(buddy.selected==true) {
+            buddy.selected = false;
+          }else {
+            buddy.selected = true;
+          }
+        };
+        // tag selected buddy end
       $scope.savePhotosVideos = function() {
+        _.filter($scope.ongo.buddies,['selected', true]);
           // console.log(photos,uniqueId);
           var formData = {
             type: "addPhotosVideos",
             photosArr: $scope.otgPhoto,
             videosArr: $scope.otgVideo,
-            uniqueId: $scope.ongo.uniqueId
+            uniqueId: $scope.ongo.uniqueId,
+            buddies: $scope.ongo.buddies
           }
           $http({
             url: adminURL + "/post/editDataWeb",
@@ -658,7 +680,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         }
       },100)
 
-      $scope.addVideoCaption = function(index) {
+      $scope.addEditVideoCaption = function(index) {
           if ($scope.indexEditVideoCap === index) {
             $scope.indexEditVideoCap = -1;
           } else {
@@ -671,11 +693,21 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         _.remove($scope.ongo.videos, function(remove){
           return remove._id == videoId;
         })
+        $scope.ongo.videos = $scope.ongo.videos;
         $timeout(function(){
           console.log('timeout chala kya');
           $scope.videoFlex = true;
         },100);
       }
+
+      // edit video caption
+      $scope.editVideoCap = function(videoCap){
+        var videoCaption = _.findIndex($scope.ongo.videos, function(n){
+          return n._id == videoCap._id;
+        })
+        $scope.ongo.videos[videoCaption].caption = videoCap.caption;
+      }
+      // edit video caption end
         // video array end
         // edit otg end
         // checkin
@@ -760,13 +792,12 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
             journeyUniqueId: $scope.json.uniqueId,
             "uniqueId": $scope.ongo.uniqueId,
             "_id": $scope.ongo._id,
-            videos: [],
             buddiesArr: $scope.newBuddies,
             hashtag: [],
             addHashtag: [],
             removeHashtag: [],
             photosArr: $scope.ongo.photos,
-            videosArr: [],
+            videosArr: $scope.ongo.videos,
             type: "editPost"
           }
           if ($scope.ongo.checkIn && $scope.ongo.checkIn.lat && $scope.ongo.checkIn.long && $scope.ongo.checkIn.category && $scope.ongo.checkIn.location) {
@@ -798,7 +829,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           }, function(data) {
             console.log(data, 'kya hai data');
             if( data === true ) {
-
+              $scope.ongo.photosVideos = $scope.ongo.videos.concat($scope.ongo.photos);
+              console.log($scope.ongo.photosVideos,'photo video kya hai');
               // $scope.ongo.photos = $scope.photosArray;
               // $scope.ongo.buddies = $scope.newBuddies;
               // $scope.ongo.thoughts = editedData.thoughts;

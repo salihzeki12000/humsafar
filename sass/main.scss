@@ -3820,6 +3820,7 @@ p{
 
 .post-header {
   padding: 10px;
+  border-bottom: 1px solid #b5b5b5;
 }
 
 .picture-section {
@@ -3856,7 +3857,7 @@ p{
 
 .post-your-status {
   padding: 10px 5px 0;
-  border-top: 1px solid #b5b5b5;
+  // border-top: 1px solid #b5b5b5;
   margin-top: 10px;
   color: #424242;
   p{
@@ -6352,6 +6353,47 @@ a{
   }
 }
 // video edit end
+// tagged buddy on add photo video
+.tag-selected-buddy { margin-top: 20px; }
+.select-buddy {
+  h5 {
+    font-size: 10px;
+  }
+  &.active {
+    .checked-friend {
+      &:before { background-color: rgba(255,255,255,0.5); }
+      color: $brand-pink;
+    }
+  }
+}
+.tagging-buddy-holder {
+  width: 42px;
+  height: 44px;
+  border-radius: 16px;
+  border: 2px solid #fff;
+  position: relative;
+  overflow: hidden;
+}
+.checked-friend {
+  @include square(100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 44px;
+  text-align: center;
+  color: #fff;
+  &:before {
+    content: '';
+    @include square(100%);
+    @include position(absolute,0);
+    background-color: rgba(0,0,0,0.5);
+  }
+  i {
+    position: relative;
+    font-size: 22px;
+  }
+}
+// tagged buddy on add photo video end
 // new edit otg end
 // add new otg photo video
 
@@ -8896,6 +8938,7 @@ a{
       padding: 0 10px;
       color: $brand-dark-blue;
       line-height: 100%;
+      background-color: transparent;
     }
   }
 

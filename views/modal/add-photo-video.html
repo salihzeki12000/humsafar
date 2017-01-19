@@ -103,15 +103,15 @@
                   <div class="holder-otg-video">
                     <img ng-src="{{video.thumbnail|uploadpath}}" alt="" class="img-responsive">
                     <!-- video front caption -->
-                    <div class="video-caption otg-photo-caption" ng-click="addVideoCaption($index);" ng-hide="$index == index">
+                    <div class="video-caption otg-photo-caption" ng-click="addVideoCaption($index);" ng-hide="video._id == indexVideoCaption">
                       <p class="color-white avenir-roman m-clear" ng-if="!video.caption || video.caption==''">Add Caption</p>
                       <p class="color-white avenir-roman m-clear text-ellipsis" ng-if="video.caption && video.caption!==''">{{video.caption}}</p>
                     </div>
                     <!-- video front caption end-->
                     <!-- video back add caption -->
-                    <div class="video-otg-caption otg-add-caption" ng-class="{'show-otg-caption': $index==index, '': !$index == index}" ng-show="$index==index">
+                    <div class="video-otg-caption otg-add-caption" ng-class="{'show-otg-caption': video._id==indexVideoCaption, '': video._id!==index}" ng-show="video._id==indexVideoCaption">
                       <textarea name="" id="" maxlength="150" class="form-control" ng-model="video.caption" placeholder="Enter Captions"></textarea>
-                      <p class="text-center m-center" ng-click="addVideoCaption();"><i class="fa fa-angle-down color-white fa-2x pointer"></i></p>
+                      <p class="text-center m-center" ng-click="addVideoCaption(video._id);"><i class="fa fa-angle-down color-white fa-2x pointer"></i></p>
                       <div class="text-typed-count">
                         <span>150</span>
                       </div>
@@ -141,6 +141,19 @@
       </div>
     </div>
     <!-- add otg photos and videos end-->
+    <!-- tag selected peoples -->
+    <div class="tag-selected-buddy">
+      <div class="select-buddy inline-block" ng-repeat="buddy in ongo.buddies track by $index" ng-click="selectBuddy(buddy)" ng-class="{'active': buddy.selected==true,'':buddy.selected==false}">
+        <div class="tagging-buddy-holder">
+          <img ng-src="{{buddy.profilePicture|uploadpath:45:50:'cover'}}" alt="{{buddy.name}}" class="img-responsive">
+          <div class="checked-friend">
+            <i class="fa fa-check"></i>
+          </div>
+        </div>
+        <h5 class="color-white">{{buddy.name}}</h5>
+      </div>
+    </div>
+    <!-- tag selected peoples end-->
   </div>
   <!-- add otg end-->
   <!-- save or cancel otg -->
