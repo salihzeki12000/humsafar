@@ -1139,7 +1139,8 @@ ongojourney.filter('formatDate', function() {
 
 ongojourney.filter('dateDifference', function() {
   return function(current, previous) {
-    if (current == "current") {
+    console.log(current,previous);
+    if (current == "current" || current == "" || current == null || current == undefined) {
       current = Date();
     }
 
