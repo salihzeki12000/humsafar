@@ -42,7 +42,7 @@
         <div class="col-md-8 pad-zero">
 
           <!-- Chat-box header -->
-          <div class="chatbox-header clearfix" ng-show = "viewMessageChat">
+          <div class="chatbox-header clearfix" ng-show="viewMessageChat">
             <h4>
               <img src="img/follower.jpg" alt="" class="chat-header-profile">
               <span>Andrea Christina</span>
@@ -80,7 +80,9 @@
                           <div class="follower-imgholder">
                             <img ng-src="{{follower.profilePic}}" alt="" class="get-center">
                           </div>
-                          <span class="">{{follower.name}}</span>
+                          <span class="follower-name">
+                            <span class="follower-username">{{follower.name}}</span>
+                            <span class="follower-at-tag">@user-name</span></span>
                         </label>
                     </div>
                   </li>
@@ -129,7 +131,7 @@
           <div class="message-chat-section">
 
             <!-- Blank message display -->
-            <div class="message-empty-section" ng-hide = "viewMessageChat">
+            <div class="message-empty-section" ng-hide="viewMessageChat">
               <div class="empty-msg-box">
                 <h3 class="color-pink"><i class="fa fa-envelope color-darkgrey"></i> Stay Connected!</h3>
                 <p class="color-darkgrey">Interact and share interesting content with your buddies and followers on TraveLibro.</p>
@@ -138,7 +140,7 @@
             <!-- Blank message display end -->
 
             <!-- CHAT VIEW -->
-            <div class="chat-box" ng-show = "viewMessageChat">
+            <div class="chat-box" ng-show="viewMessageChat">
               <!-- MESSAGE VIEW BOX -->
               <div class="message-chatbox">
                 <!-- Timestamp for chat -->
@@ -148,18 +150,18 @@
                 <!-- Timestamp for chat end -->
 
                 <!-- NEW MESSAGEE BOX -->
-                <div class="new-message-box clearfix" ng-repeat = "newMsg in userMessage track by $index">
+                <div class="new-message-box clearfix" ng-repeat="newMsg in userMessage track by $index">
                   <!-- MESSAGE RECIEVED BUBBLE -->
-                  <div class="message-bubble message-recieved-bubble" ng-if = "newMsg.msgType == 'recieved'">
+                  <div class="message-bubble message-recieved-bubble" ng-if="newMsg.msgType == 'recieved'">
                     <p>{{newMsg.msgText}}</p>
                     <div class="listfriend-message-timestamp">
                       <p class="m-clear"><i class="fa fa-clock-o "></i> <span>{{newMsg.msgStampTime}}</span></p>
                     </div>
                   </div>
-                <!-- MESSAGE RECIEVED BUBBLE  END-->
+                  <!-- MESSAGE RECIEVED BUBBLE  END-->
 
-                <!-- MESSAGE SENT BUBBLE -->
-                  <div class="message-bubble message-sent-bubble"  ng-if = "newMsg.msgType=='sent'" >
+                  <!-- MESSAGE SENT BUBBLE -->
+                  <div class="message-bubble message-sent-bubble" ng-if="newMsg.msgType=='sent'">
                     <p>{{newMsg.msgText}}</p>
                     <div class="listfriend-message-timestamp">
                       <p class="m-clear"><i class="fa fa-clock-o"></i> <span>{{newMsg.msgStampTime}}</span></p>

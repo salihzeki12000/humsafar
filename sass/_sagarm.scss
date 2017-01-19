@@ -2997,6 +2997,7 @@ q {
 
 .message-page {
   height: calc(100vh - 60px);
+  background-color: rgba(0,0,0,0.4);
   @extend .avenir-roman;
 }
 // message page Header
@@ -3016,9 +3017,10 @@ q {
   border-bottom: 1px solid #fff;
 
   .search-input {
+    padding: 6px 0px 6px 12px;
     border: none;
     background-color: transparent;
-    font-size: 20px;
+    font-size: 14px;
     color: #c44332;
   }
 
@@ -3249,7 +3251,12 @@ q {
   position: relative;
   border-radius: 10px 0 10px 10px;
   background-color: rgba(17,211,203,0.7);
+  color: $brand-blue;
   float: right;
+
+  .listfriend-message-timestamp {
+    color: $brand-blue;
+  }
 
   &:after {
     content: "";
@@ -3268,12 +3275,12 @@ q {
 .message-recieved-bubble {
   position: relative;
   border-radius: 0 10px 10px 10px;
-  background-color: rgba(255,255,255,0.7);
+  background-color: rgba(255,255,255,0.8);
   float: left;
 
   &:after {
     content: "";
-    border-top: 18px solid rgba(255,255,255,0.7);
+    border-top: 18px solid rgba(255,255,255,0.8);
     border-left: 18px solid transparent;
     position: absolute;
     top: 0;
@@ -3567,6 +3574,21 @@ q {
   label img {
     border: 1px solid #ebebeb;
   }
+}
+
+.follower-name{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.follower-at-tag{
+  display: block;
+  color: $brand-dark-grey;
+  font-size: 12px;
+}
+
+.follower-username{
+  display: block;
 }
 
 .follower-imgholder {
