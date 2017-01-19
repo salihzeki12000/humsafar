@@ -3594,6 +3594,7 @@ q {
 
 .notification-card {
   min-height: 230px;
+  // max-height: 230px;
   border-radius: 5px;
   margin: 10px 0;
   background-color: rgba(255,255,255,0.9);
@@ -3634,11 +3635,17 @@ q {
 .notification-detail {
   color: #424242;
   font-size: 12px;
+  p{
+    margin-bottom: 5px;
+  }
 }
 
 .notification-action {
   color: #424242;
   font-size: 12px;
+  p{
+    margin-bottom: 5px;
+  }
 }
 
 .notification-btn {
@@ -3666,6 +3673,7 @@ q {
   width: 100%;
   height: 100px;
   overflow: hidden;
+  @extend .pointer;
 }
 
 .notification-checkin-ongo-photo {
@@ -3673,6 +3681,7 @@ q {
   width: 100%;
   height: 125px;
   overflow: hidden;
+  @extend .pointer;
 }
 
 .notification-addpic-ongo-photo {
@@ -3691,11 +3700,16 @@ q {
   }
 }
 
+.notification-addpic-ongo-action{
+  @extend .pointer;
+}
+
 .notification-addvideo-ongo-photo {
   position: relative;
   width: 100%;
   height: 120px;
   overflow: hidden;
+  @extend .pointer;
 }
 
 .notification-video-thumbicon {
@@ -3707,18 +3721,12 @@ q {
   margin: 20px 0 0;
 }
 
-.notification-started-following-action {
-  .notification-btn {
-    margin-top: 10px;
-  }
-
-  .btn-notificationpink-card {
-    padding: 6px 25px;
-    border-radius: 5px;
-    margin: 0 5px;
-    font-size: 12px;
-    @extend .btn-pink;
-  }
+.btn-notificationpink-card {
+  padding: 6px 25px;
+  border-radius: 5px;
+  margin: 0px 5px;
+  font-size: 12px;
+  @extend .btn-pink;
 }
 
 .notification-follower-detail {
@@ -3737,5 +3745,9 @@ q {
     display: block;
     color: $brand-dark-grey;
   }
+}
+
+.notification-youtube-local{
+  color: $brand-cyan;
 }
 //NOTIFICATION PAGE END

@@ -975,9 +975,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.datetime.dt = d;
 
       console.log($scope.journey.post[$scope.journey.post.length-1].UTCModified);
-       $scope.options = {    
-        minDate:new Date(1/1/1970), 
-        maxDate:new Date($scope.journey.post[$scope.journey.post.length-1].UTCModified),                                                                                                                                                                         
+       $scope.options = {
+        minDate:new Date(1/1/1970),
+        maxDate:new Date($scope.journey.post[$scope.journey.post.length-1].UTCModified),
         showWeeks: false
       };
       modal = $uibModal.open({
@@ -1530,8 +1530,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     // share single trip / card  end
- 
-   
+
+
     $scope.format = "yyyy/MM/dd";
 
     // edit journey name starts
@@ -1601,8 +1601,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // edit date and time
     // $scope.changeDate = function () {
     //   alert();
-    //   $scope.options = {    
-    //     minDate:new Date(1/1/1970),                                                                                                                                                                          
+    //   $scope.options = {
+    //     minDate:new Date(1/1/1970),
     //     showWeeks: false
     //   };
     //   $uibModal.open({
@@ -2357,7 +2357,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     // destination country city end
- 
+
     // get booking data
     $scope.getBooking = function(dest){
       console.log(dest);
@@ -2367,7 +2367,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         cityName: $scope.destCityName,
         countryName: $scope.destCountryName
       },function(data){
-        $scope.bookingData = data;
+        $scope.bookingData = data.hotels;
         console.log($scope.bookingData,'booking ka data');
       });
     };
@@ -6290,7 +6290,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       getpopularPost: false,
       visitPost: false,
       activitySec: true
-    }, 
+    },
     // {
     //   class: "local-life",
     //   profilePic: "img/profile-main.png",
@@ -6929,7 +6929,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       getpopularPost: false,
       visitPost: false,
       activitySec: true
-    }, 
+    },
     // {
     //   class: "local-life",
     //   profilePic: "img/profile-main.png",
@@ -12872,6 +12872,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.menutitle = NavigationService.makeactive("Notification"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
+
+  // NOTIFICATION CARD JSON
+
+$scope.notificationCard = [{
+  notiType: "tagOnGo"
+},{
+  notiType: "endOnGo"
+},{
+  notiType: "tagItinerary"
+},{
+  notiType: "checkinOnGo"
+},{
+  notiType: "addPicOnGo"
+},{
+  notiType: "commentPicOnGo"
+},{
+  notiType: "commentPicLocal"
+},{
+  notiType: "addVideoOnGo"
+},{
+  notiType: "commentVideoOnGo"
+},{
+  notiType: "commentVideoLocal"
+},{
+  notiType: "addThought"
+},{
+  notiType: "startedFollowing"
+},{
+  notiType: "requestFollow"
+},{
+  notiType: "acceptedRequest"
+},{
+  notiType: "commentOnGo"
+},{
+  notiType: "commentLocal"
+},{
+  notiType: "commentMention"
+},{
+  notiType: "likedOnGo"
+},{
+  notiType: "likedLocal"
+}];
+// NOTIFICATION CARD JSON END
 
 })
 
