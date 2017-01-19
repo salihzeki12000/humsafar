@@ -208,6 +208,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'ActivityCtrl'
     })
+     .state('activitytest', {
+      url: "/activity-test",
+      templateUrl: "views/template.html",
+      controller: 'ActivityTestCtrl'
+    })
     .state('holiday', {
       url: "/holiday",
       templateUrl: "views/template.html",
@@ -844,16 +849,22 @@ firstapp.filter('kindOfCheckIn', function () {
 });
 
 firstapp.filter('typeOfPost', function () {
-  return function (ongo) {
+  return function (post,type) {
     var returnVal = "";
-    if (ongo && ongo.checkIn && ongo.checkIn.location) {
-      return "img/ongojourney/location.png";
-    } else if (ongo && ongo.photos && ongo.photos.length != 0) {
-      return "img/ongojourney/camera.png";
-    } else if (ongo && ongo.videos && ongo.videos.length != 0) {
-      return "img/ongojourney/video.png";
-    } else if (ongo && ongo.thoughts) {
-      return "img/ongojourney/thought.png";
+    var color;
+    if(type=='travel-life'){
+      color='red_';
+    }else if(type=='local-life'){
+      color="green_"
+    }
+    if (post && post.checkIn && post.checkIn.location) {
+      return "img/typeOfPost/"+color+"location.png";
+    } else if (post && post.photos && post.photos.length != 0) {
+      return "img/typeOfPost/"+color+"camera.png";
+    } else if (post && post.videos && post.videos.length != 0) {
+      return "img/typeOfPost/"+color+"video.png";
+    } else if (post && post.thoughts) {
+      return "img/typeOfPost/"+color+"thought.png";
     }
   }
 });

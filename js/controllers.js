@@ -17,7 +17,7 @@ var map;
 var center = {};
 var centers = [];
 markers[0] = {};
-angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'itinerary', 'commontask', 'navigationservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'itinerary', 'commontask', 'activity', 'navigationservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
 .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar) {
   //Used to name the .html file
@@ -5990,7 +5990,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, ]
     }];
   })
-  .controller('ActivityCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('ActivityCtrl', function ($scope, TemplateService, NavigationService, Activity, $timeout) {
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("activity");
     $scope.menutitle = NavigationService.makeactive("Activity");
@@ -6604,6 +6604,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, ],
     }, ];
 
+
+
+
+
     setTimeout(function () {
       $('.travelocal-slider').flexslider({
         animation: "slide",
@@ -6618,6 +6622,644 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
+  .controller('ActivityTestCtrl', function ($scope, TemplateService, NavigationService, Activity, $timeout) {
+    //Used to name the .html file
+    $scope.template = TemplateService.changecontent("activitytest");
+    $scope.menutitle = NavigationService.makeactive("Activity");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+    var callback=function(data){
+      $scope.activities=data;
+      console.log($scope.activities);
+    };
+
+    Activity.getAllActivities(1,callback);
+
+    $scope.activityPost = [{
+      class: "travel-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ],
+      editor: false,
+      userPic: true,
+      follow: true,
+      following: false,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: true,
+      onJourney: false,
+      getpopularPost: false,
+      activitySec: true,
+      visitPost: false
+    }, {
+      class: "travel-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. #hagtags,#hagtags1,#hagtags2,",
+      relatedPhoto: [
+        'img/blog/blog-post.jpg',
+        'img/blog/blog-post2.jpg',
+        'img/blog/blog-post3.jpg',
+        'img/blog/blog-post4.jpg',
+        'img/blog/blog-post.jpg',
+        'img/blog/blog-post2.jpg',
+        'img/blog/blog-post3.jpg',
+        'img/blog/blog-post4.jpg',
+      ],
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: true,
+      video: false,
+      photo: true,
+      photoSlider: true,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      activitySec: true,
+      visitPost: false
+    }, {
+      class: "travel-taught",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+      hashtag: [{
+        tag: "#hagtags"
+      }, {
+        tag: "#hagtags1"
+      }, {
+        tag: "#hagtags2",
+      }, ],
+      editor: false,
+      userPic: true,
+      follow: true,
+      following: false,
+      postIcon: true,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "travel-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: true,
+      video: false,
+      photo: true,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }, {
+      class: "travel-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      editor: false,
+      userPic: true,
+      follow: true,
+      following: false,
+      postIcon: true,
+      video: true,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }, {
+      class: "user-detail-itinerary",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has uploaded a new Itinerary",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ],
+      pointReview: "4.5",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: true,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }, , {
+      class: "user-quick-itinerary",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has uploaded a new Itinerary",
+      photoCount: "28",
+      videoCount: "5",
+      dateitinerary: "Jan 2016",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ],
+      pointReview: "4.5",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: true,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }, {
+      class: "editor-blog",
+      profilePic: "img/profile-main.png",
+      userName: "Editor - blog",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has uploaded a new blog",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "",
+      itineraryType2: "",
+      itineraryType3: "",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      editor: true,
+      userPic: false,
+      follow: false,
+      following: false,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: true,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }, {
+      class: "editor",
+      profilePic: "img/profile-main.png",
+      userName: "Editor - Itinerary",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has uploaded a new Itinerary",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ],
+      editor: true,
+      userPic: false,
+      follow: false,
+      following: false,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: true,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }, 
+    // {
+    //   class: "local-life",
+    //   profilePic: "img/profile-main.png",
+    //   userName: "John Doe",
+    //   timestampDate: "14 Jan, 2014",
+    //   timestampHour: "01:20 pm",
+    //   status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+    //   imgTravelled: "img/london.jpg",
+    //   Travelledtag: "London Eye",
+    //   photoCount: "28",
+    //   videoCount: "5",
+    //   locationVisited: "9",
+    //   itineraryType1: "img/sunset.png",
+    //   itineraryType2: "img/bag-journey.png",
+    //   itineraryType3: "img/luxury-journey.png",
+    //   travelledDay: "75",
+    //   onwayTag: "love in paris",
+    //   imgOnway: "img/paris.jpg",
+    //   cost: "$10,000",
+    //   spendingDay: "75",
+    //   likes: "15660",
+    //   reviews: "354",
+    //   pointReview: "4.5",
+    //   countryVisit: [{
+    //     imgFlag: "img/india-visit.png"
+    //   }, {
+    //     imgFlag: "img/england-visit.png"
+    //   }, {
+    //     imgFlag: "img/canada-visit.png",
+    //   }, ],
+    //   editor: false,
+    //   userPic: true,
+    //   follow: false,
+    //   following: true,
+    //   postIcon: true,
+    //   video: false,
+    //   photo: false,
+    //   photoSlider: false,
+    //   travelledJourney: true,
+    //   onJourney: false,
+    //   visitPost: false,
+    //   getpopularPost: false,
+    //   activitySec: true
+    // },
+     {
+      class: "local-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      relatedPhoto: [
+        'img/blog/blog-post.jpg',
+        'img/blog/blog-post2.jpg',
+        'img/blog/blog-post3.jpg',
+        'img/blog/blog-post4.jpg',
+        'img/blog/blog-post.jpg',
+        'img/blog/blog-post2.jpg',
+        'img/blog/blog-post3.jpg',
+        'img/blog/blog-post4.jpg',
+      ],
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: true,
+      video: false,
+      photo: true,
+      photoSlider: true,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }, {
+      class: "local-life-taught",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: true,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "local-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      editor: false,
+      userPic: true,
+      follow: true,
+      following: false,
+      postIcon: true,
+      video: false,
+      photo: true,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "local-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: true,
+      video: true,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }, {
+      class: "popular-activity",
+      visitPost: false,
+      getpopularPost: true,
+      activitySec: false,
+      postPopular: [{
+        heading: "Popular Travelers",
+        listPopular: [{
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }],
+      }],
+    }, {
+      class: "popular-activity",
+      visitPost: false,
+      getpopularPost: true,
+      activitySec: false,
+      postPopular: [{
+        heading: "Popular Agents",
+        listPopular: [{
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }],
+      }],
+    }, {
+      class: "visiting-post local-visit",
+      visitPost: true,
+      getpopularPost: false,
+      activitySec: false,
+      getvisitPost: [{
+        imgVisit: "img/india-gate.jpg",
+        locationLocal: "Mumbai",
+        tag: "Must Do's in Mumbai,India",
+        travelVisit: false,
+        localVisit: true,
+        cityTag: true,
+        rating: false,
+        flag: false,
+        visitSlider: true,
+        visitImg: false,
+        localLifeMain: true,
+        visitedPost: [{
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, ],
+      }, ],
+    }, {
+      class: "visiting-post local-visit",
+      visitPost: true,
+      getpopularPost: false,
+      activitySec: false,
+      getvisitPost: [{
+        imgVisit: "img/india-gate.jpg",
+        locationLocal: "India",
+        travelVisit: false,
+        localVisit: true,
+        cityTag: false,
+        rating: true,
+        peopleBeen: 33,
+        flag: true,
+        visitSlider: true,
+        visitImg: false,
+        localLifeMain: true,
+        visitedPost: [{
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, ],
+      }, ],
+    }, {
+      class: "visiting-post travel-visit",
+      visitPost: true,
+      getpopularPost: false,
+      activitySec: false,
+      getvisitPost: [{
+        imgVisit: "img/india-gate.jpg",
+        locationLocal: "Mumbai",
+        tagTravel: "Book Your Travel form take off to touchdown!",
+        travelVisit: true,
+        localVisit: false,
+        visitSlider: false,
+        visitImg: true,
+        localLifeMain: false,
+      }, ],
+    }, ];
+
+
+
+
+
+    setTimeout(function () {
+      $('.travelocal-slider').flexslider({
+        animation: "slide",
+        animationLoop: false,
+        itemWidth: 150,
+        itemMargin: 3,
+        mousewheel: true,
+        directionNav: false,
+        controlNav: false,
+      });
+    }, 100);
+
+  })
 
 .controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, MyLife, $uibModal) {
     //Used to name the .html file
