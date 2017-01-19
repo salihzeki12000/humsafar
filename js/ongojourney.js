@@ -189,6 +189,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
     link: function($scope, element, attrs) {
       // var counter = 0
       $scope.flexShow = true;
+      $scope.videoFlex = true;
       $scope.indexPhotoCaption = -1;
       $scope.indexVideoCaption = -1;
       $scope.indexEditPhotoCap = -1;
@@ -202,6 +203,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       var getLocation = {};
       $scope.otgPhoto = [];
       $scope.otgPhotoArray = [];
+      $scope.otgVideo = [];
       $scope.editedPhotosArr = [];
       $scope.checkInData = {};
       $scope.newBuddies = [];
@@ -263,15 +265,15 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       };
 
         if($scope.ongo && $scope.ongo.photos && $scope.ongo.videos){
-           $scope.ongo.photosVideos=$scope.ongo.videos.concat($scope.ongo.photos); 
+           $scope.ongo.photosVideos=$scope.ongo.videos.concat($scope.ongo.photos);
           if($scope.ongo && $scope.ongo.photosVideos[0] && $scope.ongo.photosVideos[0].thumbnail){
-            $scope.ongo.onDisplay="videos"; 
+            $scope.ongo.onDisplay="videos";
           }else {
             $scope.ongo.onDisplay="photos";
           }
           console.log($scope.ongo.photosVideos,$scope.ongo.onDisplay);
         }
-       
+
         // $scope.ongo.journeyTypeicon = "";
 
       // type of post starts
@@ -434,7 +436,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       // edit otg
 
       // $scope.otgPhoto = _.chunk([$scope.otgPhoto],2);
-      // add photos and video
+      // add photos start
       $scope.photoSec = false;
       $scope.addOtgPhotos = function(detail, length) {
           console.log(detail);
@@ -465,7 +467,32 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           //   y++;
           // }
         }
-        // add photos and video end
+        // add photos end
+        // add video start
+        $scope.addOtgVideo = function(video){
+          console.log(video,'video mai kya aaya');
+          $scope.otgVideo.push({
+            name: video.name,
+            thumbnail: video.thumbnail,
+            caption: ""
+          });
+          console.log($scope.otgVideo,'otg Video');
+          $timeout(function(){
+            $scope.videoFlex = true;
+            if($scope.otgVideo.length>0){
+              $scope.videoSec = true;
+              $(".flexslider").flexslider({
+                directionNav: true
+              });
+            }else {
+              $scope.videoSec = false;
+              $(".flexslider").flexslider({
+                directionNav: false
+              });
+            }
+          },100)
+        };
+        // add video end
         // delete added photos
       $scope.deletePhotos = function(name) {
           $scope.flexShow = false;
@@ -496,7 +523,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           var formData = {
             type: "addPhotosVideos",
             photosArr: $scope.otgPhoto,
-            videosArr: [],
+            videosArr: $scope.otgVideo,
             uniqueId: $scope.ongo.uniqueId
           }
           $http({
@@ -630,26 +657,25 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           }
         }
       },100)
-      $scope.videoOtg = [{
-        img: 'img/ongojourney/andrea-santa.jpg'
-      }, {
-        img: 'img/ongojourney/fire.jpg'
-      }, {
-        img: 'img/ongojourney/window.jpg'
-      }, {
-        img: 'img/ongojourney/winter.jpg'
-      }, {
-        img: 'img/ongojourney/jitu-sofa.jpg'
-      }, ];
-      $scope.indexVideoCaption = -1;
+
       $scope.addVideoCaption = function(index) {
-          if ($scope.indexVideoCaption == index) {
-            $scope.indexVideoCaption == -1;
-            console.log(indexVideoCaption);
+          if ($scope.indexEditVideoCap === index) {
+            $scope.indexEditVideoCap = -1;
           } else {
-            $scope.indexVideoCaption = index;
+            $scope.indexEditVideoCap = index;
           }
         }
+
+      $scope.removeEditVid = function(videoId){
+        $scope.videoFlex = false;
+        _.remove($scope.ongo.videos, function(remove){
+          return remove._id == videoId;
+        })
+        $timeout(function(){
+          console.log('timeout chala kya');
+          $scope.videoFlex = true;
+        },100);
+      }
         // video array end
         // edit otg end
         // checkin
@@ -680,6 +706,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
 
       // edit more caption
       $scope.editMoreCaption = function(index) {
+        console.log(index, 'photo ka index');
         if ($scope.indexEditPhotoCap === index) {
           $scope.indexEditPhotoCap = -1;
         } else {
@@ -822,7 +849,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
 
       $scope.time = {};
       $scope.datetime = {};
-      
+
       $scope.changePostsDate = function() {
         console.log("Posts Date");
         $scope.isPostDate = true;
@@ -843,7 +870,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
         $scope.options = {
           minDate:$scope.json.startTime,
           maxDate:$scope.json.post[$scope.json.post.length-1].UTCModified,
-          showWeeks : false 
+          showWeeks : false
         };
         $uibModal.open({
           animation: true,

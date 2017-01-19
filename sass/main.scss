@@ -6311,7 +6311,7 @@ a{
   bottom: 30px;
   right: 15px;
 }
-.add-more-pic {
+.add-more-pic, .add-more-vid {
   @include square(25px);
   border-radius: 100%;
   overflow: hidden;
