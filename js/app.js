@@ -1025,7 +1025,7 @@ firstapp.filter('postString', function () {
       if (checkIn.thoughts && checkIn.location) {
         postString = checkIn.thoughts + " with " + buddiesString + " at " + checkIn.location.bold();
       } else if (checkIn.thoughts) {
-        postString = checkIn.thoughts.bold() + " with " + buddiesString;
+        postString = checkIn.thoughts + " with " + buddiesString;
       } else if (checkIn && checkIn.location) {
         postString = checkIn.postCreator.name.bold() + " with " + buddiesString + " at " + checkIn.location.bold();
       } else {
@@ -1033,18 +1033,18 @@ firstapp.filter('postString', function () {
       }
     } else {
       if (checkIn.thoughts && checkIn.location) {
-        postString = checkIn.thoughts.bold() + " at " + checkIn.location.bold();
+        postString = checkIn.thoughts + " at " + checkIn.location.bold();
       } else if (checkIn.thoughts) {
-        postString = checkIn.thoughts.bold();
+        postString = checkIn.thoughts;
       } else if (checkIn && checkIn.location) {
         postString = checkIn.postCreator.name.bold() + " at " + checkIn.location.bold();
       } else {
-        postString = checkIn.postCreator.name.bold();
+        postString = "";
       }
     }
+    console.log(postString);
     return postString;
   }
-
 });
 
 firstapp.filter('filterDate', function () {

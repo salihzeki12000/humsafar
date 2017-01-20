@@ -13,7 +13,6 @@ var activity = angular.module('activity', [])
       }).success(function (data) {
         var activities = data.data;
         _.each(activities, function (activity) {
-
           switch (activity.type) {
             case "travel-life":
               if (activity.photos.length == 0 && activity.videos.length == 0) {
@@ -22,6 +21,7 @@ var activity = angular.module('activity', [])
                 activity.class = "travel-life";
               }
               activity.likeUnlikeFlag="post";
+              activity.location=activity.checkIn.location;              
               break;
             case "on-the-go-journey":
               activity.class = "travel-life";
@@ -45,7 +45,7 @@ var activity = angular.module('activity', [])
               } else {
                 activity.class = "local-life";
               }
-              activity.likeUnlikeFlag="localLife";                            
+              activity.likeUnlikeFlag="post";                            
               break;
           }
 
@@ -71,7 +71,7 @@ var activity = angular.module('activity', [])
               pronoun = "her";
             }
             activity.thoughts = "Has started " + pronoun + " " + activity.name + " Journey";
-          } else if (activity.type == "quick-itinerary") {
+          } else if (activity.type == "quick-itinerary" || activity.type=='detail-itinerary') {
             var pronoun = "his";
             if (activity.creator.gender == 'male') {
               pronoun = "his";

@@ -138,7 +138,7 @@ var commontask = angular.module('commontask', [])
           break;
         case "journey":
           obj.journey = type_id
-          url = "/journey/likeJourney";
+          url = "/journey/likeJourneyWeb";
           break;
       };
       if (task == "unlike") {
