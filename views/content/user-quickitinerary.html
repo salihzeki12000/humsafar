@@ -22,7 +22,7 @@
       </div>
       <div class="journey-type-icon">
         <ul class="list-inline">
-          <li ng-repeat="icon in itinerary.itineraryType track by $index">
+          <li ng-repeat="icon in itinerary.itineraryType">
             <img ng-src="{{icon|kindOfJourney:'white'}}" alt="" height="30px" class="">
             <!-- Note :  use width size in backend -->
           </li>

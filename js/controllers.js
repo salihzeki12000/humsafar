@@ -6622,7 +6622,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('ActivityTestCtrl', function ($scope, TemplateService, NavigationService, Activity, $timeout) {
+  .controller('ActivityTestCtrl', function ($scope, TemplateService, NavigationService, Activity, LikesAndComments,$timeout) {
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("activitytest");
     $scope.menutitle = NavigationService.makeactive("Activity");
@@ -6635,6 +6635,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     Activity.getAllActivities(1,callback);
+
+    $scope.changeImage = function(index,activity) {
+        console.log(index,activity);      
+        activity.index = index;
+    };
+
+    $scope.likeUnlikeActivity = function (activity) {
+      console.log(activity.likeUnlikeFlag,activity.uniqueId,activity._id);
+      console.log(activity.likeDone + "this call is from activitytest.html");
+      activity.likeDone = !activity.likeDone;
+      if (activity.likeDone) {
+        if (activity.likeCount == undefined) {
+          activity.likeCount = 1;
+        } else {
+          activity.likeCount = activity.likeCount + 1;
+        }
+        LikesAndComments.likeUnlike(activity.likeUnlikeFlag, "like", activity.uniqueId, activity._id, null)
+      } else {
+        activity.likeCount = activity.likeCount - 1;
+        LikesAndComments.likeUnlike(activity.likeUnlikeFlag, "unlike", activity.uniqueId, activity._id, null)
+      }
+    };
 
     $scope.activityPost = [{
       class: "travel-life",
@@ -7813,7 +7835,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         'insertdatetime media table contextmenu paste code', 'importcss', 'autoresize'
       ],
       paste_as_text: true,
-      content_css: "css/main.css",
+      // content_css: "css/main.css",
       autoresize_on_init: false,
       autoresize_min_height: 0,
       autoresize_overflow_padding: 0,

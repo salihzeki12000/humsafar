@@ -102,7 +102,10 @@
         bricks = {};
       };
       this.reload = function reload() {
+       setTimeout(function(){
+         console.log('masonry ka tomeout');
         $element.masonry();
+       },250);        
         $scope.$emit('masonry.reloaded');
       };
     }
