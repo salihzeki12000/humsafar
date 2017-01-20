@@ -6226,6 +6226,11 @@ a{
   }
   i.fa-angle-down { font-size: 36px; }
 }
+.video-otg-caption {
+  textarea {
+    height: 85%;
+  }
+}
 
 .show-otg-caption {
   top: 0;
@@ -6356,8 +6361,10 @@ a{
 // tagged buddy on add photo video
 .tag-selected-buddy { margin-top: 20px; }
 .select-buddy {
+  margin-right: 20px;
   h5 {
-    font-size: 10px;
+    font-size: 12px;
+    text-align: center;
   }
   &.active {
     .checked-friend {

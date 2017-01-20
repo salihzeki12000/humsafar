@@ -175,7 +175,7 @@ var ongojourney = angular.module('ongojourney', [])
   };
 });
 
-ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal', 'OnGoJourney','LikesAndComments', function($http, $filter, $timeout, $uibModal, OnGoJourney, LikesAndComments) {
+ongojourney.directive('journeyPost', ['$http', '$filter','$window', '$timeout', '$uibModal', 'OnGoJourney','LikesAndComments', function($http, $filter,$window, $timeout, $uibModal, OnGoJourney, LikesAndComments) {
   return {
     restrict: 'E',
     scope: {
@@ -208,6 +208,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
       $scope.checkInData = {};
       $scope.newBuddies = [];
       $scope.selectedTagFriend = [];
+      $scope.buddyName = [];
       $scope.ongo.getSearchedList="";
       $scope.ongo.buddiesCount=0;
       if ($scope.ongo.checkIn && $scope.ongo.checkIn.location) {
@@ -425,7 +426,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           size: "lg",
           scope: $scope,
           backdrop: 'static'
-        })
+        });
         console.log($scope.ongo, "add wala");
         modal.closed.then(function(){
           $scope.otgPhotoArray=[];
@@ -555,8 +556,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           }).success(function(data) {
             console.log(data);
             if (data.value === true) {
-              $scope.ongo.photos = _.concat($scope.ongo.photos, $scope.otgPhoto);
-              console.log($scope.ongo.photos,"check");
+              setTimeout(function(){
+                $window.location.reload();
+              },100);
             }
             $scope.otgPhoto = [];
             $scope.otgPhotoArray = [];
@@ -826,11 +828,15 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
             url: adminURL + "/post/editDataWeb",
             method: "POST",
             data: editedData,
-          }, function(data) {
+          }).success(function(data) {
             console.log(data, 'kya hai data');
-            if( data === true ) {
-              $scope.ongo.photosVideos = $scope.ongo.videos.concat($scope.ongo.photos);
-              console.log($scope.ongo.photosVideos,'photo video kya hai');
+            if( data.value === true ) {
+              $window.location.reload();
+              // setTimeout(function(){
+              //   console.log('ave');
+              // },200);
+              // $scope.ongo.photosVideos = $scope.ongo.videos.concat($scope.ongo.photos);
+              // console.log($scope.ongo.photosVideos,'photo video kya hai');
               // $scope.ongo.photos = $scope.photosArray;
               // $scope.ongo.buddies = $scope.newBuddies;
               // $scope.ongo.thoughts = editedData.thoughts;
@@ -856,7 +862,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$timeout', '$uibModal
           reader.addEventListener("load", function() {  
             preview.src = reader.result; 
           }, false);
-          if (file) {  
+          if (file) { 
             $scope.uploadImage = false;
             $scope.viewUploadedImg = true;
             reader.readAsDataURL(file);

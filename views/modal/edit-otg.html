@@ -157,7 +157,7 @@
                     <!-- video back add caption -->
                     <div class="video-otg-caption otg-add-caption" ng-show="video._id == indexEditVideoCap" ng-class="{'show-otg-caption': indexEditVideoCap==video._id, '' : indexEditVideoCap!==video._id}" >
                       <textarea name="" id="" maxlength="150" class="form-control" ng-model="video.caption" placeholder="Enter Captions" ng-change="editVideoCap(video);"></textarea>
-                      <p class="text-center m-center" ng-click="addVideoCaption(video._id);"><i class="fa fa-angle-down color-white fa-2x pointer"></i></p>
+                      <p class="text-center m-center" ng-click="addEditVideoCaption(video._id);"><i class="fa fa-angle-down color-white fa-2x pointer"></i></p>
                       <div class="text-typed-count">
                         <span>150</span>
                       </div>
