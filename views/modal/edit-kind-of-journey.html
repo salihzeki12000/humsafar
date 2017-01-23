@@ -1,0 +1,20 @@
+<div class="edit-kindof-popup">
+  <div class="edit-kindof-header">
+    <p> Edit Kind Of Journey</p>
+    <span class="edit-kindof-popup-close" ng-click="$dismiss();"><i class="fa fa-times"></i></span>
+  </div>
+  <div class="edit-kindof">
+    <div class="row">
+      <div class="col-md-3"  ng-repeat="itinerary in dItineraryType">
+        <div class="select-itinerary-type">
+          <figure class="pointer" ng-click="selectItinerary($index)">
+            <div class="itinerary-iconholder {{itinerary.activeClass}}">
+              <img ng-src="{{itinerary.img}}" alt="{{itinerary.caption}}" class="img-responsive" width="{{itinerary.width}}">
+            </div>
+            <figcaption class="color-blue avenir-roman">{{itinerary.caption}}</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

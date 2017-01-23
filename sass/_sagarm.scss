@@ -3777,10 +3777,10 @@ q {
 }
 //NOTIFICATION PAGE END
 //DETAILED ITINERARY SHOW LISTED POPUP
+
 .show-listed-popup {}
 
 .listed-detail-page {
-  height: 200px;
   padding: 30px;
   border-radius: 10px;
   background-color: rgba(255,255,255,0.8);
@@ -3813,81 +3813,186 @@ q {
   @extend .pointer;
 }
 
-.listed-popup-select{
-  padding: 10px;
-  margin-right: 2px;
-  margin-bottom: 2px;
-  background-color: #fff;
-  color: $brand-blue;
-  @extend .avenir-roman;
+.hotel-mainlist {
+  width: 50%;
+  display: inline-block;
 
-  [type="checkbox"]:checked,
-  [type="checkbox"]:not(:checked) {
-    position: absolute;
-    left: -9999px;
+  .hotel-listing:nth-child( even ) {
+    .listed-popup-select {
+      background-color: rgba(255,255,255,0.8);
+    }
   }
 
-  [type="checkbox"]:checked+label,
-  [type="checkbox"]:not(:checked)+label {
-    width: 100%;
-    position: relative;
-    margin: 0;
-    cursor: pointer;
-  }
-  /* radio aspect */
-  [type="checkbox"]:checked+label:before,
-  [type="checkbox"]:not(:checked)+label:before {
-    content: '';
-    @include square(20px);
-    border: 1px solid $brand-grey;
-    border-radius: 2px;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    @include transform(translateY(-50%));
-    background-color: transparent;
-    color: #f6f6f6;
-    @include transition(all 300ms linear);
-  }
-  /* checked mark aspect */
-  [type="checkbox"]:checked+label:after,
-  [type="checkbox"]:not(:checked)+label:after {
-    content: '\f00c';
-    color: #fff;
-    font: normal normal normal 14px/1 FontAwesome;
-    position: absolute;
-    top: 50%;
-    right: 2px;
-    @include transform(translateY(-50%));
-    font-size: 15px;
-    line-height: 0.8;
-    @include transition(all 300ms linear);
-  }
-  /* checked mark aspect changes */
-  [type="checkbox"]:not(:checked)+label:after {
-    opacity: 1;
-    // transform: scale(1);
+  .listed-popup-list {
+    ::-webkit-scrollbar {
+      width: 0;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: transparent;
+    }
   }
 
-  [type="checkbox"]:checked+label:before {
-    background-color: $brand-pink;
-    border: 1px solid $brand-pink;
+  .list-popup-scroll {
+    max-height: 310px;
+    overflow-y: scroll;
+  }
+
+  .list-done-btn {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .listed-popup-li {
+    &:nth-child( even ) {
+      .listed-popup-select {
+        background-color: rgba(255,255,255,0.8);
+      }
+    }
+  }
+
+  .listed-popup-select {
+    padding: 10px;
+    margin-right: 2px;
+    background-color: #fff;
     color: $brand-blue;
-    @include transition(all 300ms linear);
+    @extend .avenir-roman;
+
+    [type="checkbox"]:checked,
+    [type="checkbox"]:not(:checked) {
+      position: absolute;
+      left: -9999px;
+    }
+
+    [type="checkbox"]:checked+label,
+    [type="checkbox"]:not(:checked)+label {
+      width: 100%;
+      position: relative;
+      margin: 0;
+      cursor: pointer;
+    }
+    /* radio aspect */
+    [type="checkbox"]:checked+label:before,
+    [type="checkbox"]:not(:checked)+label:before {
+      content: '';
+      @include square(20px);
+      border: 1px solid $brand-grey;
+      border-radius: 2px;
+      position: absolute;
+      top: 50%;
+      right: 0;
+      @include transform(translateY(-50%));
+      background-color: $brand-lighter-grey;
+      color: #f6f6f6;
+      @include transition(all 300ms linear);
+    }
+    /* checked mark aspect */
+    [type="checkbox"]:checked+label:after,
+    [type="checkbox"]:not(:checked)+label:after {
+      content: '\f00c';
+      color: #fff;
+      font: normal normal normal 14px/1 FontAwesome;
+      position: absolute;
+      top: 50%;
+      right: 2px;
+      @include transform(translateY(-50%));
+      font-size: 15px;
+      line-height: 0.8;
+      @include transition(all 300ms linear);
+    }
+    /* checked mark aspect changes */
+    [type="checkbox"]:not(:checked)+label:after {
+      opacity: 1;
+      // transform: scale(1);
+    }
+
+    [type="checkbox"]:checked+label:before {
+      background-color: $brand-pink;
+      border: 1px solid $brand-pink;
+      color: $brand-blue;
+      @include transition(all 300ms linear);
+    }
+
+    [type="checkbox"]:checked+label:after {
+      color: #fff;
+      // background-color: $brand-pink;
+      @include transition(all 300ms linear);
+    }
   }
 
-  [type="checkbox"]:checked+label:after {
-    color: #fff;
-    // background-color: $brand-pink;
-    @include transition(all 300ms linear);
+  .list-select-budget {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    @include transform(translateY(-50%));
+    font-size: 12px;
+    color: $brand-grey;
   }
-}
-.list-select-budget{
-  position: absolute;
-  top: 50%;
-  right: 30px;
-  @include transform(translateY(-50%));
-  font-size: 12px;
-  color: $brand-grey;
-}
-//DETAILED ITINERARY SHOW LISTED POPUP END
+  //DETAILED ITINERARY SHOW LISTED POPUP END
+  // EDIT KIND OF JOURNEY POPUP
+  .edit-kindof-popup {
+    padding: 30px 0;
+    background-color: transparent;
+    @extend .avenir-roman;
+  }
+
+  .edit-kindof-header {
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .edit-kindof-popup-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #fff;
+    font-size: 15px;
+    // @include transform(translateY(-50%));
+    @extend .pointer;
+  }
+
+  .edit-kindof {
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px 0;
+    background-color: rgba(255,255,255,0.8);
+    text-align: center;
+
+    .select-itinerary-type {
+      margin: 10px 0;
+      min-width: 74px;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .itinerary-iconholder {
+      @include square(40px);
+      background: url('../img/itinerary/bluebox.png');
+      background-size: 100% 100%;
+      display: inline-block;
+      position: relative;
+      @include transition(all 300ms linear);
+
+      img {
+        @extend .get-center;
+      }
+
+      &:hover {
+        background: url('../img/itinerary/orangebox.png');
+        background-size: 100% 100%;
+        @include transition(all 300ms linear);
+      }
+    }
+
+    .active-itinerary {
+      background: url('../img/itinerary/orangebox.png');
+      background-size: 100% 100%;
+      @include transition(all 300ms linear);
+    }
+  }
+  // EDIT KIND OF JOURNEY POPUP END

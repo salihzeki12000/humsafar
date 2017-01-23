@@ -38,7 +38,8 @@
     </div>
     <div class="edit-publish-userdetail">
       <button class="btn btn-white-outline btn-more mr5"  ui-sref="quickitinerary({flag:'edit',urlSlug:itinerary.urlSlug})">Edit</button>
-      <button class="btn btn-white-outline btn-more" ng-click="uploadDetailedItinerary(true)">Publish</button>
+      <button class="btn btn-white-outline btn-more" ng-click="uploadDetailedItinerary(true)"  ng-if="itinerary.status== false">Publish</button>
+      <button class="btn btn-white-outline btn-more" ng-click="" ng-if="itinerary.status == true">Delete</button>
     </div>
   </div>
   <div class="user-quick-itinerary second bg-white-95">
