@@ -175,9 +175,8 @@
     max-height: 190px;
   }
   // QUICK ITNERARY PAGE END
-
   // ALREADY EXISTS MODAL
-  .alreadyexist .profile-imgholder{
+  .alreadyexist .profile-imgholder {
     width: 120px;
     height: 120px;
     border-radius: 45px;
@@ -318,7 +317,6 @@
   .destination .destination-nav {
     padding-bottom: 10px;
   }
-
   // destination city page end
   // popular blogger
   .popular-blogger .blogger-cover {
@@ -503,20 +501,19 @@
     max-height: 140px;
   }
   //QUICK ITINENRARY PAGE END
-
   // EDIT OTG MODAL
-  .edit-otg-info .edit-otg-thought{
+  .edit-otg-info .edit-otg-thought {
     width: 100%;
-    margin-top: 15px ;
+    margin-top: 15px;
     position: static;
   }
+
   .otg-photo-video .view-video-sec {
     margin-top: 15px;
   }
   // EDIT OTG MODAL END
-
   // NOTIFY MODAL
-  .notify-main .comment-sec .commenter-imgholder{
+  .notify-main .comment-sec .commenter-imgholder {
     width: 25px;
     height: 29px;
     border-radius: 10px;
@@ -595,33 +592,42 @@
 
   .enquirestab-mail {
     padding: 10px;
-    .enquirytab-btn {
-       top: 100px;
-     }
-     .destination-scroll {
+  }
+
+  .enquirytab-btn {
+    top: 100px;
+  }
+
+  .destination-scroll {
     padding: 0;
+  }
+
+  .activity-container,
+  .destination-content-box {
+    .plr30 {
+      padding: 0;
     }
-    .activity-container,.destination-content-box{
-     .plr30 {
-       padding: 0 0px;
+  }
+
+  .destination-featured {
+    .plr30 {
+      padding: 0 20px;
     }
+  }
+
+  .addfixed {
+    .destin-fixednav1 {
+      top: 132px;
     }
-    .destination-featured{
-     .plr30 {
-       padding: 0 20px;
+
+    .destin-fixednav-country {
+      top: 55px;
     }
-    }
-    .addfixed{
-       .destin-fixednav1 {
-       top: 132px;
-       }
-       .destin-fixednav-country {
-       top: 55px;
-       }
-     }
-     .destination .destination-nav {
-       padding: 10px 35px;
-    }
+  }
+
+  .destination .destination-nav {
+    padding: 10px 35px;
+  }
 
   .enquirytab-btn {
     top: 100px;
@@ -669,14 +675,16 @@
   }
 
   .alphabhates.addfixed {
-  display: none;
-}
-.destination-holder.main-destination-page.pr20 {
-  padding-right: 0;
-}
-.destination-head.plr30 {
+    display: none;
+  }
+
+  .destination-holder.main-destination-page.pr20 {
+    padding-right: 0;
+  }
+
+  .destination-head.plr30 {
     padding: 0 15px;
-}
+  }
 
   .modal-packagebox {
     width: 120px;
@@ -707,6 +715,7 @@
   .upload-btn {
     margin: 0;
   }
+
   .mouse-scrolldown {
     bottom: 35px;
   }
@@ -721,26 +730,29 @@
         font-size: 36px;
       }
     }
-    .menu-contact {
-    left: 0;
-  ul{
-    li{
 
-      img {
-    margin: 5px 0;
-        width: 60px;
-        padding: 0;
-  }
-  }
-  }
+    .menu-contact {
+      left: 0;
+
+      ul {
+        li {
+          img {
+            margin: 5px 0;
+            width: 60px;
+            padding: 0;
+          }
+        }
+      }
     }
-  .country-title {
-    top: 10%;
-    @include transform (translateX(-50%));
-  }
-  .menu-contact {
-    bottom: 70px;
-}
+
+    .country-title {
+      top: 10%;
+      @include transform (translateX(-50%));
+    }
+
+    .menu-contact {
+      bottom: 70px;
+    }
   }
 
   .menu-booking ul li a {
@@ -751,12 +763,12 @@
   }
   // Booking page end
   //destination country
-
   .country-title {
     width: 100%;
     text-align: center;
     padding: 0 20px;
   }
+
   .destination .list-horizontal {
     top: auto;
     bottom: 0;
@@ -786,9 +798,11 @@
     padding: 0;
     // @extend .list-inline;
   }
-.destination .slide-cont-dest {
+
+  .destination .slide-cont-dest {
     padding: 20px;
-}
+  }
+
   .destination .list-horizontal ul li {
     height: auto;
     padding: 10px 0;
@@ -813,9 +827,9 @@
 
   header {
     .navbar-default .logo-size {
-    width: 15px;
-    margin-top: 12px;
-}
+      width: 15px;
+      margin-top: 12px;
+    }
   }
   //destination country end
   .action-contentbox,
@@ -1102,7 +1116,9 @@
     }
   }
 
-  .agent-itinerary-page .open-gallery, .user-itinerary-page .open-gallery, .agent-itinerary-page .open-gallery{
+  .agent-itinerary-page .open-gallery,
+  .agent-itinerary-page .open-gallery,
+  .user-itinerary-page .open-gallery {
     left: 230px;
   }
 
@@ -1179,8 +1195,9 @@
 
   .destination-content {
     .head-title {
-      padding: 15px 0 0 0;
+      padding: 15px 0 0;
       display: none;
+
       h4 {
         font-size: 30px;
       }
@@ -1282,26 +1299,24 @@
     max-height: 100px;
   }
   // QUICK ITINENRARY PAGE END
-  .popular-agent-sec .pop-agt-download-app{
-    display: none;
-  }
-  .bg-bloggers .pop-blog-download-app{
+  .popular-agent-sec .pop-agt-download-app {
     display: none;
   }
 
-// ALREADY EXISTS MODAL
-.alreadyexist {
-  width: 100%;
-  left: 0;
-}
-// ALREADY EXISTS MODAL END
-
-// EDIT OTG MODAL
-.tag-journey-friend{
-  margin-top: 15px;
-}
-// EDIT OTG MODAL END
-
+  .bg-bloggers .pop-blog-download-app {
+    display: none;
+  }
+  // ALREADY EXISTS MODAL
+  .alreadyexist {
+    width: 100%;
+    left: 0;
+  }
+  // ALREADY EXISTS MODAL END
+  // EDIT OTG MODAL
+  .tag-journey-friend {
+    margin-top: 15px;
+  }
+  // EDIT OTG MODAL END
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -1310,27 +1325,34 @@
   .agt-verification-code {
     padding: 30px 20px 15px;
   }
+
   .sidemenu {
     overflow-y: scroll;
     padding: 0 20px;
-  .main-menu-anchor,   ul.nav-submenu li a {
-    font-size: 16px;
+
+    .main-menu-anchor,
+    ul.nav-submenu li a {
+      font-size: 16px;
+    }
+
+    .social-icon-menu {
+      li {
+        a {
+          font-size: 25px;
+          margin: 5px 0;
+        }
+      }
+
+      li + li {
+        margin-left: 5px;
+      }
+    }
   }
-.social-icon-menu{
-    li{
-       a {
-    font-size: 25px;
-    margin: 5px 0;
-}
-  }
-li + li {
-    margin-left: 5px;
-}
-  }
-}
-.menu-common {
+
+  .menu-common {
     width: 240px;
-}
+  }
+
   .veri-code-box {
     height: 45px;
     width: 45px;
@@ -1756,7 +1778,10 @@ li + li {
     padding: 5px 10px;
   }
 
-  .agent-itinerary-page .open-gallery, .user-itinerary-page .open-gallery, .agent-itinerary-page .open-gallery, .agent-itinerary-page .open-gallery{
+  .agent-itinerary-page .open-gallery,
+  .agent-itinerary-page .open-gallery,
+  .agent-itinerary-page .open-gallery,
+  .user-itinerary-page .open-gallery {
     left: 150px;
   }
   // USER-DETAIL ITINERARY PAGE END
@@ -1789,15 +1814,16 @@ li + li {
     font-size: 24px;
   }
   // DESTINATION PAGE END
-    .contact-bg{
-      p{
-        a{
-        font-size:12px;
-      }
+  .contact-bg {
+    p {
+      a {
+        font-size: 12px;
       }
     }
-  .contact-txt,
-  .advertise-text {
+  }
+
+  .advertise-text,
+  .contact-txt {
     font-size: 30px;
   }
   // ITINERARY PAGE
@@ -1856,23 +1882,21 @@ li + li {
     max-height: 80px;
   }
   // QUICK ITINERARY PAGE END
-
   //MAINPAGE
-  .login-process{
-    .bg-white{
-      .upload-profile{
+  .login-process {
+    .bg-white {
+      .upload-profile {
         padding: 30px 5px 15px;
       }
     }
   }
   //MAINPAGE END
   // ALREADY EXIST MODAL
-  .alreadyexist .profile-imgholder{
+  .alreadyexist .profile-imgholder {
     width: 100px;
     height: 100px;
     border-radius: 37px;
   }
   // ALREADY EXIST MODAL END
-
 }
 // media query for 480px to 320px end
