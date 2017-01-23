@@ -3822,6 +3822,7 @@ q {
       background-color: rgba(255,255,255,0.8);
     }
   }
+}
 
   .listed-popup-list {
     ::-webkit-scrollbar {
@@ -3987,12 +3988,11 @@ q {
         background-size: 100% 100%;
         @include transition(all 300ms linear);
       }
-    }
-
-    .active-itinerary {
-      background: url('../img/itinerary/orangebox.png');
-      background-size: 100% 100%;
-      @include transition(all 300ms linear);
+      .active-itinerary {
+        background: url('../img/itinerary/orangebox.png');
+        background-size: 100% 100%;
+        @include transition(all 300ms linear);
+      }
     }
   }
   // EDIT KIND OF JOURNEY POPUP END
