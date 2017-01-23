@@ -197,7 +197,7 @@
           <h4 class="uppercase">Hotels</h4>
         </div>
         <div class="row">
-          <div class="col-md-6" ng-repeat="hotel in bookingData track by $index">
+          <div class="col-md-6" ng-repeat="hotel in bookingData|limitTo:6 track by $index">
             <div class="hotel-card-holder mt10 relate">
               <div class="blur-overlay-bg-div"></div>
               <!-- flipper holder -->
@@ -209,7 +209,7 @@
                       <a>
                         <div class="photo-view">
                           <div class="slider-hotel">
-                            <div class="item active" style="background-image: url(&quot;http://pix4.agoda.net/hotelimages/438/43881/43881_14020319250018239001.jpg?s=650x&quot;)">
+                            <div class="item active" style="background-image: url('{{hotel.pic_url}}')">
                             </div>
                           </div>
                         </div>
@@ -220,7 +220,7 @@
                         <!-- hotel heading -->
                         <div class="hotel-list-heading">
                           <h4 class="hotel-name" title="The Lalit Mumbai">
-                                The Lalit Mumbai
+                                {{hotel.name}}
                               </h4>
                           <div class="rate-by-star">
                             <ul class="list-inline">
@@ -240,9 +240,7 @@
                               <div class="score-popular">
                                 <span class="chart-type-title">Popularity <span>Score<span></span>
                                 <div class="score-round-holder">
-                                  <span class="pop-score">
-                                          7,778
-                                        </span>
+                                  <span class="pop-score">                                          {{hotel.popularity_score}}                                       </span>
                                 </div>
                                 </span>
                                 </span>
@@ -253,10 +251,10 @@
                                 <span class="chart-type-title">Guest <span>Rating<span></span>
                                 <div class="score-round-holder">
                                   <span class="guest-score">
-                                          8/10
+                                          {{hotel.guest_rating}}/10
                                         </span>
                                   <span class="review">
-                                          706 reviews
+                                          {{hotel.number_of_reviews}} reviews
                                         </span>
                                 </div>
                                 </span>
@@ -271,7 +269,7 @@
                                           INR
                                         </span>
                                   <span class="price-count">
-                                          7,000
+                                          {{hotel.price_per_night}}
                                         </span>
                                 </div>
                                 </span>
@@ -309,39 +307,35 @@
                       <uib-tab index="0" heading="About">
                         <div class="scroll-content">
                           <div class="about-view text-justify avenir-roman ui-tabs-panel ui-widget-content ui-corner-bottom pr10">
-                            <p>
-                              Sahar, Andheri 400059
+                            <p>{{hotel.addresses[0]}}<span class="block">{{hotel.addresses[1]}}</span>
                             </p>
-                            <p>Located in Andheri East, The Lalit Mumbai is a perfect starting point from which to explore Mumbai. The hotel offers a wide range of amenities and perks to ensure you have a great time. To be found at the hotel are 24-hour
-                              room service, 24-hour front desk, facilities for disabled guests, express check-in/check-out, luggage storage. Guestrooms are fitted with all the amenities you need for a good night's sleep. In some of the rooms, guests can
-                              find carpeting, clothes rack, scale, slippers, television LCD/plasma screen. Take a break from a long day and make use of fitness center, sauna, outdoor pool, spa, massage. No matter what your reasons are for visiting Mumbai,
-                              The Lalit Mumbai will make you feel instantly at home.</p>
+                            <p>{{hotel.about}}</p>
                           </div>
                         </div>
 
                       </uib-tab>
                       <uib-tab index="1" heading="Photos">
                         <div class="scroll-content pr10">
-                          <!-- <flex-slider flex-slide="item in bookingPhoto track by $index" class="carousel" animation="slide"  item-width="300" control-nav="false">
+                          <flex-slider flex-slide="item in hotel.pic_urls track by $index" class="carousel" animation="slide"  item-width="300" control-nav="false">
                               <li>
-                                <img ng-src="{{item.img}}" class="img-responsive" />
+                                <img ng-src="{{item}}" class="img-responsive" />
                               </li>
-                            </flex-slider> -->
+                            </flex-slider>
                           <!-- <div class="swiper-container">
                               <div class="swiper-wrapper">
                                 <div class="swiper-slide" ng-repeat="item in bookingPhoto track by $index"><img ng-src="{{item.img}}" class="img-responsive" /></div>
                               </div> -->
 
 
-                          <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-                            <div uib-slide ng-repeat="slides in bookingPhoto track by $index" index="$index">
+                          <!-- <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                            <div uib-slide ng-repeat="slides in hotel.pic_urls track by $index" index="$index">
                               <div class="row">
                                 <div class="col-xs-6" ng-repeat="slide in slides track by $index">
-                                  <img ng-src="{{slide.img}}" class="img-responsive" />
+                                  <img ng-src="{{slide|uploadpath}}" class="img-responsive" />
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </div> -->
                           <!-- Add Pagination -->
                           <!-- <div class="swiper-pagination"></div> -->
                         </div>
@@ -360,7 +354,7 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
+                                <tr ng-repeat="deal in hotel.deals">
                                   <td>
                                     <div class="deals-logo-holder">
                                       <img src="img/logo-1.png" alt="" class="img-responsive">
@@ -368,18 +362,18 @@
                                   </td>
                                   <td>
                                     <div class="deals-room-holder">
-                                      <span class="block font-bold">Deluxe</span>
+                                      <span class="block font-bold">{{deal.name}}</span>
                                       <span></span>
                                     </div>
                                   </td>
                                   <td>
                                     <div class="deals-nightroom-holder text-center">
-                                      <span class="font-bold">6,499</span>
+                                      <span class="font-bold">{{deal.per_night}}</span>
                                     </div>
                                   </td>
                                   <td>
                                     <div class="deals-total-holder text-center">
-                                      <span class="font-bold">6,499</span>
+                                      <span class="font-bold">{{deal.per_night}}</span>
                                     </div>
                                   </td>
                                   <td>
@@ -687,120 +681,6 @@
                     </uib-tabset>
                   </div>
                 </div>
-                <!-- hotel back view end-->
-              </div>
-              <!-- flipper holder end -->
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="hotel-card-holder mt10 relate">
-              <!-- flipper holder -->
-              <div class="hotel-flipper-holder">
-                <div class="blur-overlay-bg-div"></div>
-                <!-- hotel front view -->
-                <div class="hotel-front-view">
-                  <div class="row m-clear">
-                    <div class="col-md-5 col-sm-5 col-pad-zero image-div">
-                      <a>
-                        <div class="photo-view">
-                          <div class="slider-hotel">
-                            <div class="item active" style="background-image: url(&quot;http://pix4.agoda.net/hotelimages/438/43881/43881_14020319250018239001.jpg?s=650x&quot;)">
-                            </div>
-                          </div>
-                        </div>
-                      </a>
-                    </div>
-                    <div class="col-md-7 col-sm-7 col-pad-zero ">
-                      <div class="hotel-information">
-                        <!-- hotel heading -->
-                        <div class="hotel-list-heading">
-                          <h4 class="hotel-name" title="The Lalit Mumbai">
-                                The Lalit Mumbai
-                              </h4>
-                          <div class="rate-by-star">
-                            <ul class="list-inline">
-                              <li><i class="fa fa-star color-white"></i></li>
-                              <li><i class="fa fa-star color-white"></i></li>
-                              <li><i class="fa fa-star color-white"></i></li>
-                              <li><i class="fa fa-star color-white"></i></li>
-                              <li><i class="fa fa-star color-white"></i></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <!-- hotel heading -->
-                        <!-- hotel chart -->
-                        <div class="hotel-chart-main">
-                          <div class="row m-clear">
-                            <div class="col-md-4 col-sm-4 col-xs-4 col-pad-zero ">
-                              <div class="score-popular">
-                                <span class="chart-type-title">Popularity <span>Score<span></span>
-                                <div class="score-round-holder">
-                                  <span class="pop-score">
-                                          7,778
-                                        </span>
-                                </div>
-                                </span>
-                                </span>
-                              </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 col-pad-zero ">
-                              <div class="guest-rating">
-                                <span class="chart-type-title">Guest <span>Rating<span></span>
-                                <div class="score-round-holder">
-                                  <span class="guest-score">
-                                          8/10
-                                        </span>
-                                  <span class="review">
-                                          706 reviews
-                                        </span>
-                                </div>
-                                </span>
-                                </span>
-                              </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 col-pad-zero ">
-                              <div class="per-night">
-                                <span class="chart-type-title">Price Per <span>Night<span></span>
-                                <div class="score-round-holder">
-                                  <span class="block inr">
-                                          INR
-                                        </span>
-                                  <span class="price-count">
-                                          7,000
-                                        </span>
-                                </div>
-                                </span>
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- hotel chart end-->
-                        <!-- hotel see detail and button -->
-                        <div class="see-detail">
-                          <div class="clearfix">
-                            <div class="pull-left">
-                              <span class="view-detail view-card-detail pointer" data-req="wait">
-                                      See All Details <i class="fa fa-chevron-down"></i>
-                                    </span>
-                            </div>
-                            <div class="pull-right">
-                              <a><button class="btn btn-deal">View Deal</button></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- hotel see detail and button end-->
-                <!-- hotel front view -->
-                <!-- hotel back view -->
-                <!-- <div class="hotel-back-view">
-                    <div class="get-center">
-                      <img src="/assets/Untitled-1.gif">
-                    </div>
-                  </div> -->
                 <!-- hotel back view end-->
               </div>
               <!-- flipper holder end -->
