@@ -212,12 +212,12 @@ commontask.directive('findTags', function (LikesAndComments) {
   return {
     restrict: 'E',
     scope: {
-      ngModel: "=",
-      focus: "&"
+      ngModel: "="
     },
     templateUrl: "views/modal/hashtag.html",
     link: function ($scope, element, attrs) {
       $scope.$watch('ngModel', function (newVal, oldVal) {
+        // alert($scope.ngModel);
         var text = $scope.ngModel;
         var comment = {
           'text': newVal
@@ -227,6 +227,7 @@ commontask.directive('findTags', function (LikesAndComments) {
         $scope.endTagIndex = null;
         $scope.hashTag;
         currentPosition = ctl.selectionStart - 1;
+        console.log(currentPosition);
         var counter = currentPosition;
 
         //for finding hashtags
@@ -312,7 +313,7 @@ commontask.directive('findTags', function (LikesAndComments) {
         console.log(a);
         $scope.ngModel = a;
         $scope.hashTags = [];
-        $scope.focus();
+        // $scope.focus();
       };
     }
   }

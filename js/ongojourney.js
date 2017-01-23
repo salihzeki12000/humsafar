@@ -829,7 +829,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter','$window', '$timeout', 
             method: "POST",
             data: editedData,
           }).success(function(data) {
-            console.log(data, 'kya hai data');
             if( data.value === true ) {
               $window.location.reload();
               // setTimeout(function(){
@@ -1058,7 +1057,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter','$window', '$timeout', 
       };
 
       $scope.getPhotosCommentData = function(photoId) {
-        console.log(photoId);
+        console.log(photoId,"mdmdsdsdmks");
         modal=$uibModal.open({
           templateUrl: "views/modal/notify.html",
           animation: true,
@@ -1145,7 +1144,6 @@ ongojourney.filter('formatDate', function() {
 
 ongojourney.filter('dateDifference', function() {
   return function(current, previous) {
-    console.log(current,previous);
     if (current == "current" || current == "" || current == null || current == undefined) {
       current = Date();
     }

@@ -910,8 +910,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       lastScrollTop = st;
     }
 
-
-
     // set height on comment box
     $(window).resize(function () {
         $('.listing-comment').height($(window).height() - 226);
@@ -1391,6 +1389,68 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("OnGoJourney");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    // EDIT KIND OF JOURNEY POPUP
+    $scope.editKindOf = function(){
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/edit-kind-of-journey.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+      })
+    };
+
+    $scope.dItineraryType = [{
+      img: "img/itinerary/adventure.png",
+      caption: "Adventure",
+      width: "25"
+    }, {
+      img: "img/itinerary/business.png",
+      caption: "Business",
+      width: "24"
+    }, {
+      img: "img/itinerary/family.png",
+      caption: "Family",
+      width: "30"
+    }, {
+      img: "img/itinerary/romance.png",
+      caption: "Romance",
+      width: "26"
+    }, {
+      img: "img/itinerary/budget.png",
+      caption: "Budget",
+      width: "22"
+    }, {
+      img: "img/itinerary/luxury.png",
+      caption: "Luxury",
+      width: "21"
+    }, {
+      img: "img/itinerary/religious.png",
+      caption: "Religious",
+      width: "26"
+    }, {
+      img: "img/itinerary/friend.png",
+      caption: "Friends",
+      width: "24"
+    }, {
+      img: "img/itinerary/shopping-white.png",
+      caption: "Shopping",
+      width: "24"
+    }, {
+      img: "img/itinerary/cap-white.png",
+      caption: "Solo",
+      width: "35"
+    }, {
+      img: "img/itinerary/speaker-white.png",
+      caption: "Festival",
+      width: "29"
+    }, {
+      img: "img/itinerary/backpacking.png",
+      caption: "Backpacking",
+      width: "23"
+    }];
+    // EDIT KIND OF JOURNEY POPUP END
+
 
 
     $scope.viewCardComment = false;
@@ -2358,7 +2418,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     // destination country city end
 
-    // get booking data
+     // get booking data
     $scope.getBooking = function(dest){
       console.log(dest);
       $scope.destCityName = dest.name;
@@ -2367,11 +2427,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         cityName: $scope.destCityName,
         countryName: $scope.destCountryName
       },function(data){
-        $scope.bookingData = data.hotels;
-        console.log($scope.bookingData,'booking ka data');
+        $.jStorage.set("booking", data.hotels);
+        $.jStorage.set("booking-amenities", data.hotel_facilities);
+        // $scope.bookingData = data.hotels;
+        // console.log($scope.bookingData,'booking ka data');
       });
     };
     // get booking data end
+
+
+
 })
 
 .controller('DestinationCountryCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
@@ -2614,6 +2679,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Destination");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    $scope.hotelAmenities = $.jStorage.get("booking-amenities");
+    $scope.bookingData = $.jStorage.get("booking");
+    console.log($scope.bookingData,'data hai');
+    console.log($scope.hotelAmenities,'hotelAmenities');
 
     $scope.urlDestinationCity = $state.params.url;
     $scope.getCityInfo = function (type, urlSlug) {
@@ -6631,7 +6701,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var callback=function(data){
       $scope.activities=data;
-      console.log($scope.activities);
     };
 
     Activity.getAllActivities(1,callback);
@@ -6676,6 +6745,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         backgroundClick.object = model;
       }, 200);
       backgroundClick.scope = $scope;
+    };
+
+     $scope.getPostsCommentData = function (activity) {
+       console.log(activity);
+      $scope.previousId;
+      var callback = function (data) {
+        $scope.uniqueArr = [];
+        $scope.listOfComments = data.data;
+        $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+      }
+      if ($scope.previousId != activity._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfComments = [];
+        $scope.viewCardComment = true;
+        // $scope.journey.journeyHighLight = activity._id;
+        $scope.getCard = "view-whole-card";
+        LikesAndComments.getComments(activity.likeUnlikeFlag, activity._id, callback);
+      } else {
+        if ($scope.viewCardComment) {
+          $scope.viewCardComment = false;
+          // $scope.journey.journeyHighLight = "";
+          $scope.getCard = "";
+          $scope.comment.text="";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardComment = true;
+          // $scope.focus('enterComment');
+          // $scope.journey.journeyHighLight = activity._id;
+          $scope.getCard = "view-whole-card";
+          LikesAndComments.getComments(activity.likeUnlikeFlag, activity._id, callback);
+        }
+      }
+      $scope.previousId = activity._id;
     };
 
     $scope.activityPost = [{
@@ -7675,6 +7777,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
     // LISTED MODAL POPUP
+$scope.hotelList = [];
     $scope.showListed = function () {
       modal = $uibModal.open({
         templateUrl: "views/modal/show-listed.html",
@@ -7684,7 +7787,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         size: "lg"
       });
     };
+
+    $scope.hotelMainList = [ 'Taj Mahal Hotel', 'Oberoi Gardens', 'Ramee Guestline' , 'J W Marriot' , 'St. Regis' , 'Sea Princess', 'Royal Gardens' , 'ITC Maratha' , 'Grand Hyatt' ];
+
+
+    $scope.hotelList = _.chunk($scope.hotelMainList,2);
+    console.log($scope.hotelList,'new array');
     // LISTED MODAL POPUP END
+
 
 
     var flag = $stateParams.flag;
@@ -7756,7 +7866,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.previousCountryId[key1] = n1.country._id;
         });
         //setting up addCountry variable ends
-      });
+      }); 
     }
 
     // datetrial
@@ -7930,7 +8040,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.to = "";
     $scope.getDays = function (country) {
       console.log(country);
-      country.datePopUp.minDate = new Date(country.from)
+      if(country.to==undefined){
+        country.datePopUp.to.initDate=country.from;
+        country.to=country.from;
+        country.datePopUp.to.openCalender=true;
+      }
+     
+      // country.datePopUp.minDate = new Date(country.from)
       if ((country.from == undefined) || (country.to == undefined)) {
 
       } else {
@@ -8182,10 +8298,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.addCountry = [{
       "cityVisited": [{}],
       "datePopUp": {
-        "showWeeks": false,
-        "from": false,
-        "to": false,
-        "minDate": null
+        // "showWeeks": false,
+        // "from": false,
+        // "to": false,       
+        // "maxDate": new Date()
+        "from":{
+          'openCalender':false,
+          'showWeeks':false,
+          'maxDate':new Date()
+        },
+        "to":{
+          'openCalender':false,
+          'showWeeks':false,
+          'maxDate':new Date()
+        }
       }
     }];
 
@@ -8194,13 +8320,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         "cityVisited": [{}],
         "new": "add",
         "datePopUp": {
-          "showWeeks": false,
-          "from": false,
-          "to": false,
-          "minDate": null
+          // "showWeeks": false,
+          // "from": false,
+          // "to": false,
+          // "initDate":new Date(),
+          // "maxDate": new Date()
+          "from":{
+          'openCalender':false,
+          'showWeeks':false,
+          'maxDate':new Date()
+        },
+        "to":{
+          'openCalender':false,
+          'showWeeks':false,
+          'maxDate':new Date()
+        }
         }
       });
       $scope.addClass = "city-country-holder";
+      console.log($scope.addCountry);
     };
     $scope.removeCountry = function (countryPanel) {
       $scope.addCountry.splice(countryPanel, 1);
