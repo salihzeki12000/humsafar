@@ -6622,7 +6622,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('ActivityTestCtrl', function ($scope, TemplateService, NavigationService, Activity, LikesAndComments,$timeout) {
+  .controller('ActivityTestCtrl', function ($scope, TemplateService, NavigationService, Activity, LikesAndComments, $timeout, $http) {
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("activitytest");
     $scope.menutitle = NavigationService.makeactive("Activity");
@@ -6636,8 +6636,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     Activity.getAllActivities(1,callback);
 
-    $scope.changeImage = function(index,activity) {
-        console.log(index,activity);      
+    $scope.changeImage = function(index,activity) {     
         activity.index = index;
     };
 
@@ -6656,6 +6655,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         activity.likeCount = activity.likeCount - 1;
         LikesAndComments.likeUnlike(activity.likeUnlikeFlag, "unlike", activity.uniqueId, activity._id, null)
       }
+    };
+
+    $scope.getLikes = function(activity) {
+      console.log(activity);
+        $scope.listLikesDropDown(activity.listLike);
+        var formData = {
+          "_id": activity._id
+        }
+        var callback=function(data) {
+          $scope.listOfLikes = data.data;
+          console.log($scope.listOfLikes);
+        };
+      LikesAndComments.getLikes(activity.likeUnlikeFlag,activity._id,callback);
+    };
+
+    $scope.listLikesDropDown = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
     };
 
     $scope.activityPost = [{
@@ -7644,7 +7664,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
   })
-  .controller('DetailedItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, $timeout, $stateParams, $filter, $state) {
+  .controller('DetailedItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, $timeout, $stateParams, $filter, $state, $uibModal) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -7653,6 +7673,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("DetailedItinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    // LISTED MODAL POPUP
+    $scope.showListed = function () {
+      modal = $uibModal.open({
+        templateUrl: "views/modal/show-listed.html",
+        animation: true,
+        scope: $scope,
+        windowClass: "show-listed-popup",
+        size: "lg"
+      });
+    };
+    // LISTED MODAL POPUP END
+
 
     var flag = $stateParams.flag;
     var urlSlug = $stateParams.urlSlug;

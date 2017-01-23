@@ -237,7 +237,7 @@
                       <div class="pull-left">
                         <div class="">
                           <span class="inline-block v-mid mr5" ng-click="likeUnlikeActivity(activity)" ;>
-                            <a href="" class="fnt-20"><i class="fa color-blue card-like-animation fa-heart like-animate" ng-class="activity.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i></a>
+                            <a href="" class="fnt-20"><i class="fa color-blue card-like-animation " ng-class="activity.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i></a>
                           </span>
                           <div class="inline-block v-mid" ng-if="!(activity.type=='editor')">
                             <span class="pointer mr5"><img src="img/comments.png" alt="" height="19"></span>
@@ -289,30 +289,38 @@
                         </ul>-->
                       </div>
                       <div class="pull-right" ng-if="!((activity.type =='editor') || (activity.type =='editor-blog'))">
-                        <div class="">
+                        <div class="three-dots pointer">
                           <span>
                             <img src="img/options.png" alt="" width="3" class="if-blue" ng-if="!(activity.type=='editor')">
                             <img src="img/options-white.png" alt="" width="3" class="if-white" ng-if="activity.type=='editor'">
                           </span>
                         </div>
+                        <!--<div>
+                          <ul>
+                            <li>Hide From All</li>
+                            <li>Report</li>                            
+                          </ul>
+                        </div>-->
                       </div>
                     </div>
-                    <div class="social-likes-reviews">
+                    <div class="social-likes-reviews" ng-if="!(((activity.likeCount==0)||(activity.likeCount==undefined))&&(activity.commentCount==0))">
                       <div class="clearfix">
-                        <div class="pull-left">
-                          <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{activity.likeCount}}</b>Likes</span>
-                          <span class="color-blue mr10 card-like avenir-heavy" ng-click="getLikes(ongo._id);editOption(ongo.like)"><i class="fa fa-heart color-blue mr5"></i><b>{{ongo.likeCount|filterCount}}</b> {{ongo.likeCount|singularOrPlural:'like'}}
-                            <div class="card-like-dropdown" ng-show="ongo.like.backgroundClick;">
+                        <div class="pull-left" ng-init="activity.listLike={}" ng-click="getLikes(activity);">
+                          <span class="color-blue mr10 card-like avenir-heavy"><i class="fa fa-heart color-blue mr5"></i><b>{{activity.likeCount}}</b> {{activity.likeCount|singularOrPlural:'like'}}
+                           <div class="card-like-dropdown" ng-show="activity.listLike.backgroundClick;">
                               <ul>
                                 <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
                               </ul>
                             </div>
                           </span>
+                          <!--<span class="color-blue mr10 card-like avenir-heavy" ng-click="getLikes(ongo._id);editOption(ongo.like)"><i class="fa fa-heart color-blue mr5"></i><b>{{ongo.likeCount|filterCount}}</b> {{ongo.likeCount|singularOrPlural:'like'}}-->
+                       
                           <span class="color-blue">
                             <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue" ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">
                             <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white" ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">
                             <span ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">354 Reviews (4.5/5)</span></span>
                         </div>
+                        
                         <div class="pull-right">
                           <div class="post-travel-icon">
                             <img src="img/travel.png" alt="" class="activity-travel-icon" ng-if="activity.type!='local-life'">

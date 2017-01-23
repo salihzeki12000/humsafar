@@ -1042,7 +1042,6 @@ firstapp.filter('postString', function () {
         postString = "";
       }
     }
-    console.log(postString);
     return postString;
   }
 });

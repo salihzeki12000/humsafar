@@ -881,7 +881,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter','$window', '$timeout', 
           model.backgroundClick = true;
           backgroundClick.object = model;
         }, 200);
-
+        console.log($scope);
         backgroundClick.scope = $scope;
       };
 
