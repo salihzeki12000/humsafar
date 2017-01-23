@@ -3017,7 +3017,7 @@ q {
   border-bottom: 1px solid #fff;
 
   .search-input {
-    padding: 6px 0px 6px 12px;
+    padding: 6px 0 6px 12px;
     border: none;
     background-color: transparent;
     font-size: 14px;
@@ -3576,18 +3576,18 @@ q {
   }
 }
 
-.follower-name{
+.follower-name {
   display: inline-block;
   vertical-align: middle;
 }
 
-.follower-at-tag{
+.follower-at-tag {
   display: block;
   color: $brand-dark-grey;
   font-size: 12px;
 }
 
-.follower-username{
+.follower-username {
   display: block;
 }
 
@@ -3609,6 +3609,7 @@ q {
 // NEW MESSAGE SECTION END
 // MESSAGE PAGE END
 //NOTIFICATION PAGE
+
 .notification-page {
   padding: 30px;
   @extend .avenir-roman;
@@ -3657,7 +3658,8 @@ q {
 .notification-detail {
   color: #424242;
   font-size: 12px;
-  p{
+
+  p {
     margin-bottom: 5px;
   }
 }
@@ -3665,7 +3667,8 @@ q {
 .notification-action {
   color: #424242;
   font-size: 12px;
-  p{
+
+  p {
     margin-bottom: 5px;
   }
 }
@@ -3722,7 +3725,7 @@ q {
   }
 }
 
-.notification-addpic-ongo-action{
+.notification-addpic-ongo-action {
   @extend .pointer;
 }
 
@@ -3746,7 +3749,7 @@ q {
 .btn-notificationpink-card {
   padding: 6px 25px;
   border-radius: 5px;
-  margin: 0px 5px;
+  margin: 0 5px;
   font-size: 12px;
   @extend .btn-pink;
 }
@@ -3769,7 +3772,122 @@ q {
   }
 }
 
-.notification-youtube-local{
+.notification-youtube-local {
   color: $brand-cyan;
 }
 //NOTIFICATION PAGE END
+//DETAILED ITINERARY SHOW LISTED POPUP
+.show-listed-popup {}
+
+.listed-detail-page {
+  height: 200px;
+  padding: 30px;
+  border-radius: 10px;
+  background-color: rgba(255,255,255,0.8);
+}
+
+.listed-detail-header {
+  padding: 20px;
+  border-radius: 10px 10px 0 0;
+  margin: -30px -30px 30px;
+  position: relative;
+  background-color: $brand-pink;
+  color: #fff;
+  text-align: center;
+  @extend .avenir-roman;
+}
+
+.listed-popup-close {
+  width: 28px;
+  height: 27px;
+  border-radius: 100%;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  background-color: rgba(255,255,255,0.8);
+  color: $brand-pink;
+  font-size: 20px;
+  text-align: center;
+  vertical-align: middle;
+  @include transform(translateY(-50%));
+  @extend .pointer;
+}
+
+.listed-popup-select{
+  padding: 10px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+  background-color: #fff;
+  color: $brand-blue;
+  @extend .avenir-roman;
+
+  [type="checkbox"]:checked,
+  [type="checkbox"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+  }
+
+  [type="checkbox"]:checked+label,
+  [type="checkbox"]:not(:checked)+label {
+    width: 100%;
+    position: relative;
+    margin: 0;
+    cursor: pointer;
+  }
+  /* radio aspect */
+  [type="checkbox"]:checked+label:before,
+  [type="checkbox"]:not(:checked)+label:before {
+    content: '';
+    @include square(20px);
+    border: 1px solid $brand-grey;
+    border-radius: 2px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    @include transform(translateY(-50%));
+    background-color: transparent;
+    color: #f6f6f6;
+    @include transition(all 300ms linear);
+  }
+  /* checked mark aspect */
+  [type="checkbox"]:checked+label:after,
+  [type="checkbox"]:not(:checked)+label:after {
+    content: '\f00c';
+    color: #fff;
+    font: normal normal normal 14px/1 FontAwesome;
+    position: absolute;
+    top: 50%;
+    right: 2px;
+    @include transform(translateY(-50%));
+    font-size: 15px;
+    line-height: 0.8;
+    @include transition(all 300ms linear);
+  }
+  /* checked mark aspect changes */
+  [type="checkbox"]:not(:checked)+label:after {
+    opacity: 1;
+    // transform: scale(1);
+  }
+
+  [type="checkbox"]:checked+label:before {
+    background-color: $brand-pink;
+    border: 1px solid $brand-pink;
+    color: $brand-blue;
+    @include transition(all 300ms linear);
+  }
+
+  [type="checkbox"]:checked+label:after {
+    color: #fff;
+    // background-color: $brand-pink;
+    @include transition(all 300ms linear);
+  }
+}
+.list-select-budget{
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  @include transform(translateY(-50%));
+  font-size: 12px;
+  color: $brand-grey;
+}
+//DETAILED ITINERARY SHOW LISTED POPUP END

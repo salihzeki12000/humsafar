@@ -175,6 +175,14 @@
     max-height: 190px;
   }
   // QUICK ITNERARY PAGE END
+
+  // ALREADY EXISTS MODAL
+  .alreadyexist .profile-imgholder{
+    width: 120px;
+    height: 120px;
+    border-radius: 45px;
+  }
+  // ALREADY EXISTS MODAL END
 }
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
@@ -311,9 +319,6 @@
     padding-bottom: 10px;
   }
 
-  .addfixed .destin-fixednav1 {
-    top: 155px;
-  }
   // destination city page end
   // popular blogger
   .popular-blogger .blogger-cover {
@@ -498,6 +503,25 @@
     max-height: 140px;
   }
   //QUICK ITINENRARY PAGE END
+
+  // EDIT OTG MODAL
+  .edit-otg-info .edit-otg-thought{
+    width: 100%;
+    margin-top: 15px ;
+    position: static;
+  }
+  .otg-photo-video .view-video-sec {
+    margin-top: 15px;
+  }
+  // EDIT OTG MODAL END
+
+  // NOTIFY MODAL
+  .notify-main .comment-sec .commenter-imgholder{
+    width: 25px;
+    height: 29px;
+    border-radius: 10px;
+  }
+  // NOTIFY MODAL END
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -571,7 +595,33 @@
 
   .enquirestab-mail {
     padding: 10px;
-  }
+    .enquirytab-btn {
+       top: 100px;
+     }
+     .destination-scroll {
+    padding: 0;
+    }
+    .activity-container,.destination-content-box{
+     .plr30 {
+       padding: 0 0px;
+    }
+    }
+    .destination-featured{
+     .plr30 {
+       padding: 0 20px;
+    }
+    }
+    .addfixed{
+       .destin-fixednav1 {
+       top: 132px;
+       }
+       .destin-fixednav-country {
+       top: 55px;
+       }
+     }
+     .destination .destination-nav {
+       padding: 10px 35px;
+    }
 
   .enquirytab-btn {
     top: 100px;
@@ -673,9 +723,9 @@
     }
     .menu-contact {
     left: 0;
-  ul{ 
-    li{ 
-      
+  ul{
+    li{
+
       img {
     margin: 5px 0;
         width: 60px;
@@ -701,7 +751,7 @@
   }
   // Booking page end
   //destination country
-  
+
   .country-title {
     width: 100%;
     text-align: center;
@@ -1238,6 +1288,20 @@
   .bg-bloggers .pop-blog-download-app{
     display: none;
   }
+
+// ALREADY EXISTS MODAL
+.alreadyexist {
+  width: 100%;
+  left: 0;
+}
+// ALREADY EXISTS MODAL END
+
+// EDIT OTG MODAL
+.tag-journey-friend{
+  margin-top: 15px;
+}
+// EDIT OTG MODAL END
+
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -1252,7 +1316,7 @@
   .main-menu-anchor,   ul.nav-submenu li a {
     font-size: 16px;
   }
-.social-icon-menu{ 
+.social-icon-menu{
     li{
        a {
     font-size: 25px;
@@ -1472,8 +1536,6 @@ li + li {
   //Destination country page
   .destination-content-box {
     .container-fluid {
-      padding: 0;
-
       .row {
         margin: 0;
       }
@@ -1730,7 +1792,7 @@ li + li {
     .contact-bg{
       p{
         a{
-        font-size:12px; 
+        font-size:12px;
       }
       }
     }
@@ -1804,5 +1866,13 @@ li + li {
     }
   }
   //MAINPAGE END
+  // ALREADY EXIST MODAL
+  .alreadyexist .profile-imgholder{
+    width: 100px;
+    height: 100px;
+    border-radius: 37px;
+  }
+  // ALREADY EXIST MODAL END
+
 }
 // media query for 480px to 320px end
