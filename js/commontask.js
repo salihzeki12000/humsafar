@@ -213,13 +213,14 @@ commontask.directive('findTags', function (LikesAndComments) {
     restrict: 'E',
     scope: {
       ngModel: "=",
-      elementId:"@"
+      elementId:"@",
+      enable:"@"
     },
     templateUrl: "views/modal/hashtag.html",
     link: function ($scope, element, attrs) {
       $scope.$watch('ngModel', function (newVal, oldVal) {
         // alert($scope.ngModel);
-        // console.log($scope.elementId);
+        console.log($scope.elementId,$scope.enable);
         var text = $scope.ngModel;
         var comment = {
           'text': newVal
@@ -272,11 +273,13 @@ commontask.directive('findTags', function (LikesAndComments) {
               $scope.showTags = false;
               $scope.showBuddies = true;
             }
-            if ($scope.flag == "#") {
+       
+
+            if ($scope.flag == "#" && ($scope.enable =='hashTag' || $scope.enable =='bothTagging')) {
               $scope.hashTag = text.substring($scope.startTagIndex, $scope.endTagIndex + 1);
               LikesAndComments.searchTags($scope.hashTag, tagCallback);
 
-            } else if ($scope.flag == "@") {
+            } else if ($scope.flag == "@" && ($scope.enable =='tagFriends' || $scope.enable =='bothTagging')) {
               $scope.hashTag = text.substring($scope.startTagIndex + 1, $scope.endTagIndex + 1);
               LikesAndComments.searchBuddies($scope.hashTag, buddiesCallback);
             }
