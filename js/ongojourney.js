@@ -787,20 +787,26 @@ ongojourney.directive('journeyPost', ['$http', '$filter','$window', '$timeout', 
           $scope.photosId = _.map($scope.ongo.photos, "_id");
           // get photos id end
           // hashtag
-          while (i <= len) {
-            if (comment[i] == " " || comment[i] == "#" || comment[i] == "@") {
+          var startIndex = null;
+          var endIndex = null;
+          var i;
+          var tag;
+          hashTag = [];
+          while (i <= $scope.ongo.thoughts.length) {
+            if ($scope.ongo.thoughts[i] == " " || $scope.ongo.thoughts[i] == "#" || $scope.ongo.thoughts[i] == "@") {
               endIndex = i - 1;
               console.log(startIndex, endIndex);
-              tag = comment.substring(startIndex, endIndex + 1);
+              tag = $scope.ongo.thoughts.substring(startIndex, endIndex + 1);
               hashTag.push(tag);
               console.log(tag);
               break;
-            } else if (i == comment.length - 1) {
+            } else if (i == $scope.ongo.thoughts.length - 1) {
               endIndex = i;
               console.log(startIndex, endIndex);
-              tag = comment.substring(startIndex, endIndex + 1);
+              tag = $scope.ongo.thoughts.substring(startIndex, endIndex + 1);
               hashTag.push(tag);
               console.log(tag);
+              console.log(hashTag,'kiayaa hashtag');
               break;
             }
             i++;
@@ -817,8 +823,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter','$window', '$timeout', 
             "uniqueId": $scope.ongo.uniqueId,
             "_id": $scope.ongo._id,
             buddiesArr: $scope.newBuddies,
-            hashtag: [],
-            addHashtag: [],
+            hashtag: hashTag,
+            addHashtag: hashTag,
             removeHashtag: [],
             photosArr: $scope.ongo.photos,
             videosArr: $scope.ongo.videos,
@@ -852,7 +858,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter','$window', '$timeout', 
             data: editedData,
           }).success(function(data) {
             if( data.value === true ) {
-              $window.location.reload();
+              // $window.location.reload();
               // setTimeout(function(){
               //   console.log('ave');
               // },200);
