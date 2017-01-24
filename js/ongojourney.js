@@ -786,6 +786,28 @@ ongojourney.directive('journeyPost', ['$http', '$filter','$window', '$timeout', 
           // get photos id
           $scope.photosId = _.map($scope.ongo.photos, "_id");
           // get photos id end
+          // hashtag
+          while (i <= len) {
+            if (comment[i] == " " || comment[i] == "#" || comment[i] == "@") {
+              endIndex = i - 1;
+              console.log(startIndex, endIndex);
+              tag = comment.substring(startIndex, endIndex + 1);
+              hashTag.push(tag);
+              console.log(tag);
+              break;
+            } else if (i == comment.length - 1) {
+              endIndex = i;
+              console.log(startIndex, endIndex);
+              tag = comment.substring(startIndex, endIndex + 1);
+              hashTag.push(tag);
+              console.log(tag);
+              break;
+            }
+            i++;
+          }
+          console.log(hashTag);
+
+          // hashtag end
 
           var editedData = {
             thoughts: $scope.ongo.thoughts,
