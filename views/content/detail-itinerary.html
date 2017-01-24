@@ -51,7 +51,7 @@
         <div class="fill-detail-itinerary">
           <h4 class="color-blue avenir-roman mb20">Input Trip Details</h4>
           <form>
-            <div class="fill-itinerary-detail" ng-init="">
+            <div class="fill-itinerary-detail" ng-init="countryIndex">
               <div class="itinerary-title">
                 <div class="row">
                   <div class="col-md-6">
@@ -276,7 +276,7 @@
               </div>
               <!-- add country on click -->
               <div class="add-country add-country-border text-center clearfix">
-                <button class="btn btn-pink btn-more" ng-click="addYourCountry();">Add Country</button>
+                <button class="btn btn-pink btn-more" ng-click="addYourCountry(countryPanel);">Add Country</button>
                 <span class="color-light-grey italic add-country-span add-country-margin">If you have visited any other country on the same trip</span>
               </div>
               <!-- add country on click end-->

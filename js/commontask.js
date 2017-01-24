@@ -3,48 +3,55 @@ var commontask = angular.module('commontask', [])
 .factory('LikesAndComments', function ($http, $filter) {
 
   var returnVal = {
-    postComment: function (type, uniqueId, type_Id, comment, hashTag, additionalId, callback) { //type_id=postId,journeyId,ItineraryId
-      console.log("inside LikesAndComments");
-      console.log(type, uniqueId, type_Id, comment, hashTag, additionalId, callback);
-      var getCommentId = "";
-      console.log(comment);
-      var len = comment.length;
+     getHashTags:function(commentString,callback){
+      var len = commentString.length;
       var counter = 0;
       var startIndex = null;
       var endIndex = null;
       var i;
       var tag;
-      hashTag = [];
-      while (counter != len - 1) {
-        if (comment[counter] == "#") {
+      var hashTag = [];
+      while (counter != len - 1) { 
+        if (commentString[counter] == "#") {
           startIndex = counter;
           i = startIndex + 1;
           while (i <= len) {
-            if (comment[i] == " " || comment[i] == "#" || comment[i] == "@") {
+            if (commentString[i] == " " || commentString[i] == "#" || commentString[i] == "@") {
               endIndex = i - 1;
               console.log(startIndex, endIndex);
-              tag = comment.substring(startIndex, endIndex + 1);
+              tag = commentString.substring(startIndex, endIndex + 1);
               hashTag.push(tag);
               console.log(tag);
               break;
-            } else if (i == comment.length - 1) {
+            } else if (i == commentString.length - 1) {
               endIndex = i;
               console.log(startIndex, endIndex);
-              tag = comment.substring(startIndex, endIndex + 1);
+              tag = commentString.substring(startIndex, endIndex + 1);
               hashTag.push(tag);
               console.log(tag);
               break;
             }
             i++;
           }
-          console.log(hashTag);
+          // console.log(hashTag);
         }
         counter++;
       }
       hashTag = _.remove(hashTag, function (n) {
         return !(n == "#" || n == "@");
       });
-      console.log(hashTag);
+     callback(hashTag);
+    },
+    postComment: function (type, uniqueId, type_Id, comment, hashTag, additionalId, callback) { //type_id=postId,journeyId,ItineraryId
+      console.log("inside LikesAndComments");
+      console.log(type, uniqueId, type_Id, comment, hashTag, additionalId, callback);
+      var getCommentId = "";
+      hashtag=[];
+      console.log(comment);
+     returnVal.getHashTags(comment,function(data){
+        hashTag=data;
+      });
+      // console.log(hashTag);
       var obj = {
         "type": type,
         "uniqueId": uniqueId,

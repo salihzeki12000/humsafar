@@ -791,26 +791,10 @@ ongojourney.directive('journeyPost', ['$http', '$filter','$window', '$timeout', 
           var endIndex = null;
           var i;
           var tag;
-          hashTag = [];
-          while (i <= $scope.ongo.thoughts.length) {
-            if ($scope.ongo.thoughts[i] == " " || $scope.ongo.thoughts[i] == "#" || $scope.ongo.thoughts[i] == "@") {
-              endIndex = i - 1;
-              console.log(startIndex, endIndex);
-              tag = $scope.ongo.thoughts.substring(startIndex, endIndex + 1);
-              hashTag.push(tag);
-              console.log(tag);
-              break;
-            } else if (i == $scope.ongo.thoughts.length - 1) {
-              endIndex = i;
-              console.log(startIndex, endIndex);
-              tag = $scope.ongo.thoughts.substring(startIndex, endIndex + 1);
-              hashTag.push(tag);
-              console.log(tag);
-              console.log(hashTag,'kiayaa hashtag');
-              break;
-            }
-            i++;
-          }
+          var hashTag = [];
+         LikesAndComments.getHashTags($scope.ongo.thoughts,function(data){
+            hashTag=data;
+          });
           console.log(hashTag);
 
           // hashtag end

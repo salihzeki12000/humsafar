@@ -972,10 +972,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.time.min = d.getMinutes();
       $scope.datetime.dt = d;
 
-      console.log($scope.journey.post[$scope.journey.post.length-1].UTCModified);
-       $scope.options = {
-        minDate:new Date(1/1/1970),
-        maxDate:new Date($scope.journey.post[$scope.journey.post.length-1].UTCModified),
+      console.log($scope.journey.post[$scope.journey.post.length - 1].UTCModified);
+      $scope.options = {
+        minDate: new Date(1 / 1 / 1970),
+        maxDate: new Date($scope.journey.post[$scope.journey.post.length - 1].UTCModified),
         showWeeks: false
       };
       modal = $uibModal.open({
@@ -1391,7 +1391,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
     // EDIT KIND OF JOURNEY POPUP
-    $scope.editKindOf = function(){
+    $scope.editKindOf = function () {
       $uibModal.open({
         animation: true,
         templateUrl: "views/modal/edit-kind-of-journey.html",
@@ -1455,8 +1455,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.viewCardComment = false;
     $scope.getCard = "";
-    $scope.comment={
-      'text':""
+    $scope.comment = {
+      'text': ""
     };
     $scope.getPostsCommentData = function (ongo) {
       $scope.post = ongo;
@@ -1478,7 +1478,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.viewCardComment = false;
           $scope.journey.journeyHighLight = "";
           $scope.getCard = "";
-          $scope.comment.text="";
+          $scope.comment.text = "";
         } else {
           $scope.listOfComments = [];
           $scope.viewCardComment = true;
@@ -1534,7 +1534,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.focus = function (id) {
-      console.log(id,"focus called");
+      console.log(id, "focus called");
       document.getElementById(id).focus();
       document.getElementById(id).select();
     };
@@ -1649,7 +1649,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
         OnGoJourney.setJourneyCoverPhoto(formData, callback);
       }
-    // cover photo end
+      // cover photo end
     $scope.cropCover = function (imgCrop) {
       $scope.showCover = imgCrop;
       $scope.cropImage = true;
@@ -2418,22 +2418,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     // destination country city end
 
-     // get booking data
-    $scope.getBooking = function(dest){
-      console.log(dest);
-      $scope.destCityName = dest.name;
-      $scope.destCountryName = dest.country[0].name;
-      NavigationService.getDestinationBooking({
-        cityName: $scope.destCityName,
-        countryName: $scope.destCountryName
-      },function(data){
-        $.jStorage.set("booking", data.hotels);
-        $.jStorage.set("booking-amenities", data.hotel_facilities);
-        // $scope.bookingData = data.hotels;
-        // console.log($scope.bookingData,'booking ka data');
-      });
-    };
-    // get booking data end
+  // get booking data
+  $scope.getBooking = function (dest) {
+    console.log(dest);
+    $scope.destCityName = dest.name;
+    $scope.destCountryName = dest.country[0].name;
+    NavigationService.getDestinationBooking({
+      cityName: $scope.destCityName,
+      countryName: $scope.destCountryName
+    }, function (data) {
+      $.jStorage.set("booking", data.hotels);
+      $.jStorage.set("booking-amenities", data.hotel_facilities);
+      // $scope.bookingData = data.hotels;
+      // console.log($scope.bookingData,'booking ka data');
+    });
+  };
+  // get booking data end
 
 
 
@@ -2682,8 +2682,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.hotelAmenities = $.jStorage.get("booking-amenities");
     $scope.bookingData = $.jStorage.get("booking");
-    console.log($scope.bookingData,'data hai');
-    console.log($scope.hotelAmenities,'hotelAmenities');
+    console.log($scope.bookingData, 'data hai');
+    console.log($scope.hotelAmenities, 'hotelAmenities');
 
     $scope.urlDestinationCity = $state.params.url;
     $scope.getCityInfo = function (type, urlSlug) {
@@ -6068,611 +6068,612 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
     $scope.activityPost = [{
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. #hagtags,#hagtags1,#hagtags2,",
-      relatedPhoto: [
-        'img/blog/blog-post.jpg',
-        'img/blog/blog-post2.jpg',
-        'img/blog/blog-post3.jpg',
-        'img/blog/blog-post4.jpg',
-        'img/blog/blog-post.jpg',
-        'img/blog/blog-post2.jpg',
-        'img/blog/blog-post3.jpg',
-        'img/blog/blog-post4.jpg',
-      ],
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: true,
-      postIcon: true,
-      video: false,
-      photo: true,
-      photoSlider: true,
-      travelledJourney: false,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
-    }, {
-      class: "travel-taught",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-      hashtag: [{
-        tag: "#hagtags"
-      }, {
-        tag: "#hagtags1"
-      }, {
-        tag: "#hagtags2",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: true,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      visitPost: false,
-      getpopularPost: false,
-      activitySec: true
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: true,
-      postIcon: true,
-      video: false,
-      photo: true,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      getpopularPost: false,
-      visitPost: false,
-      activitySec: true
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: true,
-      video: true,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      getpopularPost: false,
-      visitPost: false,
-      activitySec: true
-    }, {
-      class: "user-detail-itinerary",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has uploaded a new Itinerary",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      pointReview: "4.5",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: true,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: true,
-      getpopularPost: false,
-      visitPost: false,
-      activitySec: true
-    }, , {
-      class: "user-quick-itinerary",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has uploaded a new Itinerary",
-      photoCount: "28",
-      videoCount: "5",
-      dateitinerary: "Jan 2016",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      pointReview: "4.5",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: true,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: true,
-      getpopularPost: false,
-      visitPost: false,
-      activitySec: true
-    }, {
-      class: "editor-blog",
-      profilePic: "img/profile-main.png",
-      userName: "Editor - blog",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has uploaded a new blog",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "",
-      itineraryType2: "",
-      itineraryType3: "",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      editor: true,
-      userPic: false,
-      follow: false,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: true,
-      getpopularPost: false,
-      visitPost: false,
-      activitySec: true
-    }, {
-      class: "editor",
-      profilePic: "img/profile-main.png",
-      userName: "Editor - Itinerary",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has uploaded a new Itinerary",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: true,
-      userPic: false,
-      follow: false,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: true,
-      getpopularPost: false,
-      visitPost: false,
-      activitySec: true
-    },
-    // {
-    //   class: "local-life",
-    //   profilePic: "img/profile-main.png",
-    //   userName: "John Doe",
-    //   timestampDate: "14 Jan, 2014",
-    //   timestampHour: "01:20 pm",
-    //   status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    //   imgTravelled: "img/london.jpg",
-    //   Travelledtag: "London Eye",
-    //   photoCount: "28",
-    //   videoCount: "5",
-    //   locationVisited: "9",
-    //   itineraryType1: "img/sunset.png",
-    //   itineraryType2: "img/bag-journey.png",
-    //   itineraryType3: "img/luxury-journey.png",
-    //   travelledDay: "75",
-    //   onwayTag: "love in paris",
-    //   imgOnway: "img/paris.jpg",
-    //   cost: "$10,000",
-    //   spendingDay: "75",
-    //   likes: "15660",
-    //   reviews: "354",
-    //   pointReview: "4.5",
-    //   countryVisit: [{
-    //     imgFlag: "img/india-visit.png"
-    //   }, {
-    //     imgFlag: "img/england-visit.png"
-    //   }, {
-    //     imgFlag: "img/canada-visit.png",
-    //   }, ],
-    //   editor: false,
-    //   userPic: true,
-    //   follow: false,
-    //   following: true,
-    //   postIcon: true,
-    //   video: false,
-    //   photo: false,
-    //   photoSlider: false,
-    //   travelledJourney: true,
-    //   onJourney: false,
-    //   visitPost: false,
-    //   getpopularPost: false,
-    //   activitySec: true
-    // },
-     {
-      class: "local-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      relatedPhoto: [
-        'img/blog/blog-post.jpg',
-        'img/blog/blog-post2.jpg',
-        'img/blog/blog-post3.jpg',
-        'img/blog/blog-post4.jpg',
-        'img/blog/blog-post.jpg',
-        'img/blog/blog-post2.jpg',
-        'img/blog/blog-post3.jpg',
-        'img/blog/blog-post4.jpg',
-      ],
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: true,
-      postIcon: true,
-      video: false,
-      photo: true,
-      photoSlider: true,
-      travelledJourney: false,
-      onJourney: false,
-      getpopularPost: false,
-      visitPost: false,
-      activitySec: true
-    }, {
-      class: "local-life-taught",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: true,
-      postIcon: true,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      visitPost: false,
-      getpopularPost: false,
-      activitySec: true
-    }, {
-      class: "local-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: true,
-      video: false,
-      photo: true,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      visitPost: false,
-      getpopularPost: false,
-      activitySec: true
-    }, {
-      class: "local-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: true,
-      postIcon: true,
-      video: true,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      getpopularPost: false,
-      visitPost: false,
-      activitySec: true
-    }, {
-      class: "popular-activity",
-      visitPost: false,
-      getpopularPost: true,
-      activitySec: false,
-      postPopular: [{
-        heading: "Popular Travelers",
-        listPopular: [{
-          profile: "img/profile-main.png",
-          name: "Rolandia Travel",
-          location: "London",
-          follower: "1994",
+        class: "travel-life",
+        profilePic: "img/profile-main.png",
+        userName: "John Doe",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        status: "Has started his London Journey",
+        imgTravelled: "img/london.jpg",
+        Travelledtag: "London Eye",
+        photoCount: "28",
+        videoCount: "5",
+        locationVisited: "9",
+        itineraryType1: "img/sunset.png",
+        itineraryType2: "img/bag-journey.png",
+        itineraryType3: "img/luxury-journey.png",
+        travelledDay: "75",
+        onwayTag: "love in paris",
+        imgOnway: "img/paris.jpg",
+        cost: "$10,000",
+        spendingDay: "75",
+        likes: "15660",
+        reviews: "354",
+        pointReview: "4.5",
+        countryVisit: [{
+          imgFlag: "img/india-visit.png"
         }, {
-          profile: "img/profile-main.png",
-          name: "Rolandia Travel",
-          location: "London",
-          follower: "1994",
+          imgFlag: "img/england-visit.png"
         }, {
-          profile: "img/profile-main.png",
-          name: "Rolandia Travel",
-          location: "London",
-          follower: "1994",
-        }, {
-          profile: "img/profile-main.png",
-          name: "Rolandia Travel",
-          location: "London",
-          follower: "1994",
-        }, {
-          profile: "img/profile-main.png",
-          name: "Rolandia Travel",
-          location: "London",
-          follower: "1994",
-        }, {
-          profile: "img/profile-main.png",
-          name: "Rolandia Travel",
-          location: "London",
-          follower: "1994",
-        }, {
-          profile: "img/profile-main.png",
-          name: "Rolandia Travel",
-          location: "London",
-          follower: "1994",
-        }],
-      }],
-    }, {
-      class: "popular-activity",
-      visitPost: false,
-      getpopularPost: true,
-      activitySec: false,
-      postPopular: [{
-        heading: "Popular Agents",
-        listPopular: [{
-          profile: "img/profile-main.png",
-          name: "Rolandia Travel",
-          location: "London",
-          follower: "1994",
-        }, {
-          profile: "img/profile-main.png",
-          name: "Rolandia Travel",
-          location: "London",
-          follower: "1994",
-        }, {
-          profile: "img/profile-main.png",
-          name: "Rolandia Travel",
-          location: "London",
-          follower: "1994",
-        }, {
-          profile: "img/profile-main.png",
-          name: "Rolandia Travel",
-          location: "London",
-          follower: "1994",
-        }, {
-          profile: "img/profile-main.png",
-          name: "Rolandia Travel",
-          location: "London",
-          follower: "1994",
-        }, {
-          profile: "img/profile-main.png",
-          name: "Rolandia Travel",
-          location: "London",
-          follower: "1994",
-        }, {
-          profile: "img/profile-main.png",
-          name: "Rolandia Travel",
-          location: "London",
-          follower: "1994",
-        }],
-      }],
-    }, {
-      class: "visiting-post local-visit",
-      visitPost: true,
-      getpopularPost: false,
-      activitySec: false,
-      getvisitPost: [{
-        imgVisit: "img/india-gate.jpg",
-        locationLocal: "Mumbai",
-        tag: "Must Do's in Mumbai,India",
-        travelVisit: false,
-        localVisit: true,
-        cityTag: true,
-        rating: false,
-        flag: false,
-        visitSlider: true,
-        visitImg: false,
-        localLifeMain: true,
-        visitedPost: [{
-          imgSlider: "img/small-activity-slider.jpg",
-          visitName: "#1 Shree Siddhivinayak",
-        }, {
-          imgSlider: "img/small-activity-slider.jpg",
-          visitName: "#1 Shree Siddhivinayak",
-        }, {
-          imgSlider: "img/small-activity-slider.jpg",
-          visitName: "#1 Shree Siddhivinayak",
-        }, {
-          imgSlider: "img/small-activity-slider.jpg",
-          visitName: "#1 Shree Siddhivinayak",
-        }, {
-          imgSlider: "img/small-activity-slider.jpg",
-          visitName: "#1 Shree Siddhivinayak",
-        }, {
-          imgSlider: "img/small-activity-slider.jpg",
-          visitName: "#1 Shree Siddhivinayak",
+          imgFlag: "img/canada-visit.png",
         }, ],
-      }, ],
-    }, {
-      class: "visiting-post local-visit",
-      visitPost: true,
-      getpopularPost: false,
-      activitySec: false,
-      getvisitPost: [{
-        imgVisit: "img/india-gate.jpg",
-        locationLocal: "India",
-        travelVisit: false,
-        localVisit: true,
-        cityTag: false,
-        rating: true,
-        peopleBeen: 33,
-        flag: true,
-        visitSlider: true,
-        visitImg: false,
-        localLifeMain: true,
-        visitedPost: [{
-          imgSlider: "img/small-activity-slider.jpg",
-          visitName: "#1 Shree Siddhivinayak",
+        editor: false,
+        userPic: true,
+        follow: true,
+        following: false,
+        postIcon: false,
+        video: false,
+        photo: false,
+        photoSlider: false,
+        travelledJourney: true,
+        onJourney: false,
+        getpopularPost: false,
+        activitySec: true,
+        visitPost: false
+      }, {
+        class: "travel-life",
+        profilePic: "img/profile-main.png",
+        userName: "John Doe",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. #hagtags,#hagtags1,#hagtags2,",
+        relatedPhoto: [
+          'img/blog/blog-post.jpg',
+          'img/blog/blog-post2.jpg',
+          'img/blog/blog-post3.jpg',
+          'img/blog/blog-post4.jpg',
+          'img/blog/blog-post.jpg',
+          'img/blog/blog-post2.jpg',
+          'img/blog/blog-post3.jpg',
+          'img/blog/blog-post4.jpg',
+        ],
+        editor: false,
+        userPic: true,
+        follow: false,
+        following: true,
+        postIcon: true,
+        video: false,
+        photo: true,
+        photoSlider: true,
+        travelledJourney: false,
+        onJourney: false,
+        getpopularPost: false,
+        activitySec: true,
+        visitPost: false
+      }, {
+        class: "travel-taught",
+        profilePic: "img/profile-main.png",
+        userName: "John Doe",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        hashtag: [{
+          tag: "#hagtags"
         }, {
-          imgSlider: "img/small-activity-slider.jpg",
-          visitName: "#1 Shree Siddhivinayak",
+          tag: "#hagtags1"
         }, {
-          imgSlider: "img/small-activity-slider.jpg",
-          visitName: "#1 Shree Siddhivinayak",
-        }, {
-          imgSlider: "img/small-activity-slider.jpg",
-          visitName: "#1 Shree Siddhivinayak",
-        }, {
-          imgSlider: "img/small-activity-slider.jpg",
-          visitName: "#1 Shree Siddhivinayak",
-        }, {
-          imgSlider: "img/small-activity-slider.jpg",
-          visitName: "#1 Shree Siddhivinayak",
+          tag: "#hagtags2",
         }, ],
-      }, ],
-    }, {
-      class: "visiting-post travel-visit",
-      visitPost: true,
-      getpopularPost: false,
-      activitySec: false,
-      getvisitPost: [{
-        imgVisit: "img/india-gate.jpg",
-        locationLocal: "Mumbai",
-        tagTravel: "Book Your Travel form take off to touchdown!",
-        travelVisit: true,
-        localVisit: false,
-        visitSlider: false,
-        visitImg: true,
-        localLifeMain: false,
-      }, ],
-    }, ];
+        editor: false,
+        userPic: true,
+        follow: true,
+        following: false,
+        postIcon: true,
+        video: false,
+        photo: false,
+        photoSlider: false,
+        travelledJourney: false,
+        onJourney: false,
+        visitPost: false,
+        getpopularPost: false,
+        activitySec: true
+      }, {
+        class: "travel-life",
+        profilePic: "img/profile-main.png",
+        userName: "John Doe",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        status: "Has started his London Journey",
+        editor: false,
+        userPic: true,
+        follow: false,
+        following: true,
+        postIcon: true,
+        video: false,
+        photo: true,
+        photoSlider: false,
+        travelledJourney: false,
+        onJourney: false,
+        getpopularPost: false,
+        visitPost: false,
+        activitySec: true
+      }, {
+        class: "travel-life",
+        profilePic: "img/profile-main.png",
+        userName: "John Doe",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        status: "Has started his London Journey",
+        editor: false,
+        userPic: true,
+        follow: true,
+        following: false,
+        postIcon: true,
+        video: true,
+        photo: false,
+        photoSlider: false,
+        travelledJourney: false,
+        onJourney: false,
+        getpopularPost: false,
+        visitPost: false,
+        activitySec: true
+      }, {
+        class: "user-detail-itinerary",
+        profilePic: "img/profile-main.png",
+        userName: "John Doe",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        status: "Has uploaded a new Itinerary",
+        photoCount: "28",
+        videoCount: "5",
+        locationVisited: "9",
+        itineraryType1: "img/sunset.png",
+        itineraryType2: "img/bag-journey.png",
+        itineraryType3: "img/luxury-journey.png",
+        travelledDay: "75",
+        onwayTag: "love in paris",
+        imgOnway: "img/paris.jpg",
+        cost: "$10,000",
+        spendingDay: "75",
+        likes: "15660",
+        reviews: "354",
+        countryVisit: [{
+          imgFlag: "img/india-visit.png"
+        }, {
+          imgFlag: "img/england-visit.png"
+        }, {
+          imgFlag: "img/canada-visit.png",
+        }, ],
+        pointReview: "4.5",
+        editor: false,
+        userPic: true,
+        follow: false,
+        following: true,
+        postIcon: false,
+        video: false,
+        photo: false,
+        photoSlider: false,
+        travelledJourney: false,
+        onJourney: true,
+        getpopularPost: false,
+        visitPost: false,
+        activitySec: true
+      }, , {
+        class: "user-quick-itinerary",
+        profilePic: "img/profile-main.png",
+        userName: "John Doe",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        status: "Has uploaded a new Itinerary",
+        photoCount: "28",
+        videoCount: "5",
+        dateitinerary: "Jan 2016",
+        locationVisited: "9",
+        itineraryType1: "img/sunset.png",
+        itineraryType2: "img/bag-journey.png",
+        itineraryType3: "img/luxury-journey.png",
+        travelledDay: "75",
+        onwayTag: "love in paris",
+        imgOnway: "img/paris.jpg",
+        spendingDay: "75",
+        likes: "15660",
+        reviews: "354",
+        countryVisit: [{
+          imgFlag: "img/india-visit.png"
+        }, {
+          imgFlag: "img/england-visit.png"
+        }, {
+          imgFlag: "img/canada-visit.png",
+        }, ],
+        pointReview: "4.5",
+        editor: false,
+        userPic: true,
+        follow: false,
+        following: true,
+        postIcon: false,
+        video: false,
+        photo: false,
+        photoSlider: false,
+        travelledJourney: false,
+        onJourney: true,
+        getpopularPost: false,
+        visitPost: false,
+        activitySec: true
+      }, {
+        class: "editor-blog",
+        profilePic: "img/profile-main.png",
+        userName: "Editor - blog",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        status: "Has uploaded a new blog",
+        imgTravelled: "img/london.jpg",
+        Travelledtag: "London Eye",
+        photoCount: "28",
+        videoCount: "5",
+        locationVisited: "9",
+        itineraryType1: "",
+        itineraryType2: "",
+        itineraryType3: "",
+        travelledDay: "75",
+        onwayTag: "love in paris",
+        imgOnway: "img/paris.jpg",
+        editor: true,
+        userPic: false,
+        follow: false,
+        following: false,
+        postIcon: false,
+        video: false,
+        photo: false,
+        photoSlider: false,
+        travelledJourney: false,
+        onJourney: true,
+        getpopularPost: false,
+        visitPost: false,
+        activitySec: true
+      }, {
+        class: "editor",
+        profilePic: "img/profile-main.png",
+        userName: "Editor - Itinerary",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        status: "Has uploaded a new Itinerary",
+        imgTravelled: "img/london.jpg",
+        Travelledtag: "London Eye",
+        photoCount: "28",
+        videoCount: "5",
+        locationVisited: "9",
+        itineraryType1: "img/sunset.png",
+        itineraryType2: "img/bag-journey.png",
+        itineraryType3: "img/luxury-journey.png",
+        travelledDay: "75",
+        onwayTag: "love in paris",
+        imgOnway: "img/paris.jpg",
+        cost: "$10,000",
+        spendingDay: "75",
+        countryVisit: [{
+          imgFlag: "img/india-visit.png"
+        }, {
+          imgFlag: "img/england-visit.png"
+        }, {
+          imgFlag: "img/canada-visit.png",
+        }, ],
+        editor: true,
+        userPic: false,
+        follow: false,
+        following: false,
+        postIcon: false,
+        video: false,
+        photo: false,
+        photoSlider: false,
+        travelledJourney: false,
+        onJourney: true,
+        getpopularPost: false,
+        visitPost: false,
+        activitySec: true
+      },
+      // {
+      //   class: "local-life",
+      //   profilePic: "img/profile-main.png",
+      //   userName: "John Doe",
+      //   timestampDate: "14 Jan, 2014",
+      //   timestampHour: "01:20 pm",
+      //   status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      //   imgTravelled: "img/london.jpg",
+      //   Travelledtag: "London Eye",
+      //   photoCount: "28",
+      //   videoCount: "5",
+      //   locationVisited: "9",
+      //   itineraryType1: "img/sunset.png",
+      //   itineraryType2: "img/bag-journey.png",
+      //   itineraryType3: "img/luxury-journey.png",
+      //   travelledDay: "75",
+      //   onwayTag: "love in paris",
+      //   imgOnway: "img/paris.jpg",
+      //   cost: "$10,000",
+      //   spendingDay: "75",
+      //   likes: "15660",
+      //   reviews: "354",
+      //   pointReview: "4.5",
+      //   countryVisit: [{
+      //     imgFlag: "img/india-visit.png"
+      //   }, {
+      //     imgFlag: "img/england-visit.png"
+      //   }, {
+      //     imgFlag: "img/canada-visit.png",
+      //   }, ],
+      //   editor: false,
+      //   userPic: true,
+      //   follow: false,
+      //   following: true,
+      //   postIcon: true,
+      //   video: false,
+      //   photo: false,
+      //   photoSlider: false,
+      //   travelledJourney: true,
+      //   onJourney: false,
+      //   visitPost: false,
+      //   getpopularPost: false,
+      //   activitySec: true
+      // },
+      {
+        class: "local-life",
+        profilePic: "img/profile-main.png",
+        userName: "John Doe",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+        relatedPhoto: [
+          'img/blog/blog-post.jpg',
+          'img/blog/blog-post2.jpg',
+          'img/blog/blog-post3.jpg',
+          'img/blog/blog-post4.jpg',
+          'img/blog/blog-post.jpg',
+          'img/blog/blog-post2.jpg',
+          'img/blog/blog-post3.jpg',
+          'img/blog/blog-post4.jpg',
+        ],
+        editor: false,
+        userPic: true,
+        follow: false,
+        following: true,
+        postIcon: true,
+        video: false,
+        photo: true,
+        photoSlider: true,
+        travelledJourney: false,
+        onJourney: false,
+        getpopularPost: false,
+        visitPost: false,
+        activitySec: true
+      }, {
+        class: "local-life-taught",
+        profilePic: "img/profile-main.png",
+        userName: "John Doe",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+        editor: false,
+        userPic: true,
+        follow: false,
+        following: true,
+        postIcon: true,
+        video: false,
+        photo: false,
+        photoSlider: false,
+        travelledJourney: false,
+        onJourney: false,
+        visitPost: false,
+        getpopularPost: false,
+        activitySec: true
+      }, {
+        class: "local-life",
+        profilePic: "img/profile-main.png",
+        userName: "John Doe",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+        editor: false,
+        userPic: true,
+        follow: true,
+        following: false,
+        postIcon: true,
+        video: false,
+        photo: true,
+        photoSlider: false,
+        travelledJourney: false,
+        onJourney: false,
+        visitPost: false,
+        getpopularPost: false,
+        activitySec: true
+      }, {
+        class: "local-life",
+        profilePic: "img/profile-main.png",
+        userName: "John Doe",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "01:20 pm",
+        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+        editor: false,
+        userPic: true,
+        follow: false,
+        following: true,
+        postIcon: true,
+        video: true,
+        photo: false,
+        photoSlider: false,
+        travelledJourney: false,
+        onJourney: false,
+        getpopularPost: false,
+        visitPost: false,
+        activitySec: true
+      }, {
+        class: "popular-activity",
+        visitPost: false,
+        getpopularPost: true,
+        activitySec: false,
+        postPopular: [{
+          heading: "Popular Travelers",
+          listPopular: [{
+            profile: "img/profile-main.png",
+            name: "Rolandia Travel",
+            location: "London",
+            follower: "1994",
+          }, {
+            profile: "img/profile-main.png",
+            name: "Rolandia Travel",
+            location: "London",
+            follower: "1994",
+          }, {
+            profile: "img/profile-main.png",
+            name: "Rolandia Travel",
+            location: "London",
+            follower: "1994",
+          }, {
+            profile: "img/profile-main.png",
+            name: "Rolandia Travel",
+            location: "London",
+            follower: "1994",
+          }, {
+            profile: "img/profile-main.png",
+            name: "Rolandia Travel",
+            location: "London",
+            follower: "1994",
+          }, {
+            profile: "img/profile-main.png",
+            name: "Rolandia Travel",
+            location: "London",
+            follower: "1994",
+          }, {
+            profile: "img/profile-main.png",
+            name: "Rolandia Travel",
+            location: "London",
+            follower: "1994",
+          }],
+        }],
+      }, {
+        class: "popular-activity",
+        visitPost: false,
+        getpopularPost: true,
+        activitySec: false,
+        postPopular: [{
+          heading: "Popular Agents",
+          listPopular: [{
+            profile: "img/profile-main.png",
+            name: "Rolandia Travel",
+            location: "London",
+            follower: "1994",
+          }, {
+            profile: "img/profile-main.png",
+            name: "Rolandia Travel",
+            location: "London",
+            follower: "1994",
+          }, {
+            profile: "img/profile-main.png",
+            name: "Rolandia Travel",
+            location: "London",
+            follower: "1994",
+          }, {
+            profile: "img/profile-main.png",
+            name: "Rolandia Travel",
+            location: "London",
+            follower: "1994",
+          }, {
+            profile: "img/profile-main.png",
+            name: "Rolandia Travel",
+            location: "London",
+            follower: "1994",
+          }, {
+            profile: "img/profile-main.png",
+            name: "Rolandia Travel",
+            location: "London",
+            follower: "1994",
+          }, {
+            profile: "img/profile-main.png",
+            name: "Rolandia Travel",
+            location: "London",
+            follower: "1994",
+          }],
+        }],
+      }, {
+        class: "visiting-post local-visit",
+        visitPost: true,
+        getpopularPost: false,
+        activitySec: false,
+        getvisitPost: [{
+          imgVisit: "img/india-gate.jpg",
+          locationLocal: "Mumbai",
+          tag: "Must Do's in Mumbai,India",
+          travelVisit: false,
+          localVisit: true,
+          cityTag: true,
+          rating: false,
+          flag: false,
+          visitSlider: true,
+          visitImg: false,
+          localLifeMain: true,
+          visitedPost: [{
+            imgSlider: "img/small-activity-slider.jpg",
+            visitName: "#1 Shree Siddhivinayak",
+          }, {
+            imgSlider: "img/small-activity-slider.jpg",
+            visitName: "#1 Shree Siddhivinayak",
+          }, {
+            imgSlider: "img/small-activity-slider.jpg",
+            visitName: "#1 Shree Siddhivinayak",
+          }, {
+            imgSlider: "img/small-activity-slider.jpg",
+            visitName: "#1 Shree Siddhivinayak",
+          }, {
+            imgSlider: "img/small-activity-slider.jpg",
+            visitName: "#1 Shree Siddhivinayak",
+          }, {
+            imgSlider: "img/small-activity-slider.jpg",
+            visitName: "#1 Shree Siddhivinayak",
+          }, ],
+        }, ],
+      }, {
+        class: "visiting-post local-visit",
+        visitPost: true,
+        getpopularPost: false,
+        activitySec: false,
+        getvisitPost: [{
+          imgVisit: "img/india-gate.jpg",
+          locationLocal: "India",
+          travelVisit: false,
+          localVisit: true,
+          cityTag: false,
+          rating: true,
+          peopleBeen: 33,
+          flag: true,
+          visitSlider: true,
+          visitImg: false,
+          localLifeMain: true,
+          visitedPost: [{
+            imgSlider: "img/small-activity-slider.jpg",
+            visitName: "#1 Shree Siddhivinayak",
+          }, {
+            imgSlider: "img/small-activity-slider.jpg",
+            visitName: "#1 Shree Siddhivinayak",
+          }, {
+            imgSlider: "img/small-activity-slider.jpg",
+            visitName: "#1 Shree Siddhivinayak",
+          }, {
+            imgSlider: "img/small-activity-slider.jpg",
+            visitName: "#1 Shree Siddhivinayak",
+          }, {
+            imgSlider: "img/small-activity-slider.jpg",
+            visitName: "#1 Shree Siddhivinayak",
+          }, {
+            imgSlider: "img/small-activity-slider.jpg",
+            visitName: "#1 Shree Siddhivinayak",
+          }, ],
+        }, ],
+      }, {
+        class: "visiting-post travel-visit",
+        visitPost: true,
+        getpopularPost: false,
+        activitySec: false,
+        getvisitPost: [{
+          imgVisit: "img/india-gate.jpg",
+          locationLocal: "Mumbai",
+          tagTravel: "Book Your Travel form take off to touchdown!",
+          travelVisit: true,
+          localVisit: false,
+          visitSlider: false,
+          visitImg: true,
+          localLifeMain: false,
+        }, ],
+      },
+    ];
 
 
 
@@ -6692,95 +6693,95 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('ActivityTestCtrl', function ($scope, TemplateService, NavigationService, Activity, LikesAndComments, $timeout, $http) {
-    //Used to name the .html file
-    $scope.template = TemplateService.changecontent("activitytest");
-    $scope.menutitle = NavigationService.makeactive("Activity");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
+.controller('ActivityTestCtrl', function ($scope, TemplateService, NavigationService, Activity, LikesAndComments, $timeout, $http) {
+  //Used to name the .html file
+  $scope.template = TemplateService.changecontent("activitytest");
+  $scope.menutitle = NavigationService.makeactive("Activity");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
 
-    var callback=function(data){
-      $scope.activities=data;
-    };
+  var callback = function (data) {
+    $scope.activities = data;
+  };
 
-    Activity.getAllActivities(1,callback);
+  Activity.getAllActivities(1, callback);
 
-    $scope.changeImage = function(index,activity) {     
-        activity.index = index;
-    };
+  $scope.changeImage = function (index, activity) {
+    activity.index = index;
+  };
 
-    $scope.likeUnlikeActivity = function (activity) {
-      console.log(activity.likeUnlikeFlag,activity.uniqueId,activity._id);
-      console.log(activity.likeDone + "this call is from activitytest.html");
-      activity.likeDone = !activity.likeDone;
-      if (activity.likeDone) {
-        if (activity.likeCount == undefined) {
-          activity.likeCount = 1;
-        } else {
-          activity.likeCount = activity.likeCount + 1;
-        }
-        LikesAndComments.likeUnlike(activity.likeUnlikeFlag, "like", activity.uniqueId, activity._id, null)
+  $scope.likeUnlikeActivity = function (activity) {
+    console.log(activity.likeUnlikeFlag, activity.uniqueId, activity._id);
+    console.log(activity.likeDone + "this call is from activitytest.html");
+    activity.likeDone = !activity.likeDone;
+    if (activity.likeDone) {
+      if (activity.likeCount == undefined) {
+        activity.likeCount = 1;
       } else {
-        activity.likeCount = activity.likeCount - 1;
-        LikesAndComments.likeUnlike(activity.likeUnlikeFlag, "unlike", activity.uniqueId, activity._id, null)
+        activity.likeCount = activity.likeCount + 1;
       }
-    };
+      LikesAndComments.likeUnlike(activity.likeUnlikeFlag, "like", activity.uniqueId, activity._id, null)
+    } else {
+      activity.likeCount = activity.likeCount - 1;
+      LikesAndComments.likeUnlike(activity.likeUnlikeFlag, "unlike", activity.uniqueId, activity._id, null)
+    }
+  };
 
-    $scope.getLikes = function(activity) {
-      console.log(activity);
-        $scope.listLikesDropDown(activity.listLike);
-        var formData = {
-          "_id": activity._id
-        }
-        var callback=function(data) {
-          $scope.listOfLikes = data.data;
-          console.log($scope.listOfLikes);
-        };
-      LikesAndComments.getLikes(activity.likeUnlikeFlag,activity._id,callback);
+  $scope.getLikes = function (activity) {
+    console.log(activity);
+    $scope.listLikesDropDown(activity.listLike);
+    var formData = {
+      "_id": activity._id
+    }
+    var callback = function (data) {
+      $scope.listOfLikes = data.data;
+      console.log($scope.listOfLikes);
     };
+    LikesAndComments.getLikes(activity.likeUnlikeFlag, activity._id, callback);
+  };
 
-    $scope.listLikesDropDown = function (model) {
-      $timeout(function () {
-        model.backgroundClick = true;
-        backgroundClick.object = model;
-      }, 200);
-      backgroundClick.scope = $scope;
-    };
+  $scope.listLikesDropDown = function (model) {
+    $timeout(function () {
+      model.backgroundClick = true;
+      backgroundClick.object = model;
+    }, 200);
+    backgroundClick.scope = $scope;
+  };
 
-     $scope.getPostsCommentData = function (activity) {
-       console.log(activity);
-      $scope.previousId;
-      var callback = function (data) {
-        $scope.uniqueArr = [];
-        $scope.listOfComments = data.data;
-        $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
-      }
-      if ($scope.previousId != activity._id) {
-        // $scope.focus('enterComment');
+  $scope.getPostsCommentData = function (activity) {
+    console.log(activity);
+    $scope.previousId;
+    var callback = function (data) {
+      $scope.uniqueArr = [];
+      $scope.listOfComments = data.data;
+      $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+    }
+    if ($scope.previousId != activity._id) {
+      // $scope.focus('enterComment');
+      $scope.listOfComments = [];
+      $scope.viewCardComment = true;
+      // $scope.journey.journeyHighLight = activity._id;
+      $scope.getCard = "view-whole-card";
+      LikesAndComments.getComments(activity.likeUnlikeFlag, activity._id, callback);
+    } else {
+      if ($scope.viewCardComment) {
+        $scope.viewCardComment = false;
+        // $scope.journey.journeyHighLight = "";
+        $scope.getCard = "";
+        $scope.comment.text = "";
+      } else {
         $scope.listOfComments = [];
         $scope.viewCardComment = true;
+        // $scope.focus('enterComment');
         // $scope.journey.journeyHighLight = activity._id;
         $scope.getCard = "view-whole-card";
         LikesAndComments.getComments(activity.likeUnlikeFlag, activity._id, callback);
-      } else {
-        if ($scope.viewCardComment) {
-          $scope.viewCardComment = false;
-          // $scope.journey.journeyHighLight = "";
-          $scope.getCard = "";
-          $scope.comment.text="";
-        } else {
-          $scope.listOfComments = [];
-          $scope.viewCardComment = true;
-          // $scope.focus('enterComment');
-          // $scope.journey.journeyHighLight = activity._id;
-          $scope.getCard = "view-whole-card";
-          LikesAndComments.getComments(activity.likeUnlikeFlag, activity._id, callback);
-        }
       }
-      $scope.previousId = activity._id;
-    };
+    }
+    $scope.previousId = activity._id;
+  };
 
-    $scope.activityPost = [{
+  $scope.activityPost = [{
       class: "travel-life",
       profilePic: "img/profile-main.png",
       userName: "John Doe",
@@ -7118,7 +7119,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   getpopularPost: false,
     //   activitySec: true
     // },
-     {
+    {
       class: "local-life",
       profilePic: "img/profile-main.png",
       userName: "John Doe",
@@ -7385,25 +7386,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         visitImg: true,
         localLifeMain: false,
       }, ],
-    }, ];
+    },
+  ];
 
 
 
 
 
-    setTimeout(function () {
-      $('.travelocal-slider').flexslider({
-        animation: "slide",
-        animationLoop: false,
-        itemWidth: 150,
-        itemMargin: 3,
-        mousewheel: true,
-        directionNav: false,
-        controlNav: false,
-      });
-    }, 100);
+  setTimeout(function () {
+    $('.travelocal-slider').flexslider({
+      animation: "slide",
+      animationLoop: false,
+      itemWidth: 150,
+      itemMargin: 3,
+      mousewheel: true,
+      directionNav: false,
+      controlNav: false,
+    });
+  }, 100);
 
-  })
+})
 
 .controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, MyLife, $uibModal) {
     //Used to name the .html file
@@ -7777,7 +7779,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
     // LISTED MODAL POPUP
-$scope.hotelList = [];
+    $scope.hotelList = [];
     $scope.showListed = function () {
       modal = $uibModal.open({
         templateUrl: "views/modal/show-listed.html",
@@ -7788,15 +7790,15 @@ $scope.hotelList = [];
       });
     };
 
-    $scope.hotelMainList = [ 'Taj Mahal Hotel', 'Oberoi Gardens', 'Ramee Guestline' , 'J W Marriot' , 'St. Regis' , 'Sea Princess', 'Royal Gardens' , 'ITC Maratha' , 'Grand Hyatt' ];
+    $scope.hotelMainList = ['Taj Mahal Hotel', 'Oberoi Gardens', 'Ramee Guestline', 'J W Marriot', 'St. Regis', 'Sea Princess', 'Royal Gardens', 'ITC Maratha', 'Grand Hyatt'];
 
 
-    $scope.hotelList = _.chunk($scope.hotelMainList,2);
-    console.log($scope.hotelList,'new array');
+    $scope.hotelList = _.chunk($scope.hotelMainList, 2);
+    console.log($scope.hotelList, 'new array');
     // LISTED MODAL POPUP END
-
-
-
+    $scope.countryPanel="";
+    $scope.cityPanel="";
+    
     var flag = $stateParams.flag;
     var urlSlug = $stateParams.urlSlug;
     var countries = [];
@@ -7866,7 +7868,7 @@ $scope.hotelList = [];
           $scope.previousCountryId[key1] = n1.country._id;
         });
         //setting up addCountry variable ends
-      }); 
+      });
     }
 
     // datetrial
@@ -8040,12 +8042,12 @@ $scope.hotelList = [];
     $scope.to = "";
     $scope.getDays = function (country) {
       console.log(country);
-      if(country.to==undefined){
-        country.datePopUp.to.initDate=country.from;
-        country.to=country.from;
-        country.datePopUp.to.openCalender=true;
+      if (country.to == undefined) {
+        country.datePopUp.to.initDate = country.from;
+        country.to = country.from;
+        country.datePopUp.to.openCalender = true;
       }
-     
+
       // country.datePopUp.minDate = new Date(country.from)
       if ((country.from == undefined) || (country.to == undefined)) {
 
@@ -8302,39 +8304,36 @@ $scope.hotelList = [];
         // "from": false,
         // "to": false,       
         // "maxDate": new Date()
-        "from":{
-          'openCalender':false,
-          'showWeeks':false,
-          'maxDate':new Date()
+        "from": {
+          'openCalender': false,
+          'showWeeks': false,
+          'maxDate': new Date()
         },
-        "to":{
-          'openCalender':false,
-          'showWeeks':false,
-          'maxDate':new Date()
+        "to": {
+          'openCalender': false,
+          'showWeeks': false,
+          'maxDate': new Date()
         }
       }
     }];
 
-    $scope.addYourCountry = function () {
+    $scope.addYourCountry = function (index) {
+      console.log(index);
       $scope.addCountry.push({
         "cityVisited": [{}],
         "new": "add",
         "datePopUp": {
-          // "showWeeks": false,
-          // "from": false,
-          // "to": false,
-          // "initDate":new Date(),
-          // "maxDate": new Date()
-          "from":{
-          'openCalender':false,
-          'showWeeks':false,
-          'maxDate':new Date()
-        },
-        "to":{
-          'openCalender':false,
-          'showWeeks':false,
-          'maxDate':new Date()
-        }
+          "from": {
+            'openCalender': false,
+            'showWeeks': false,
+            'maxDate': new Date(),
+            // "initDate"
+          },
+          "to": {
+            'openCalender': false,
+            'showWeeks': false,
+            'maxDate': new Date()
+          }
         }
       });
       $scope.addClass = "city-country-holder";
@@ -12762,9 +12761,9 @@ $scope.hotelList = [];
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
 
-   //showNewMessage box
+  //showNewMessage box
   $scope.showNewMessage = false;
-  $scope.newMessage = function() {
+  $scope.newMessage = function () {
     if ($scope.showNewMessage == false) {
       $scope.showNewMessage = true;
     } else {
@@ -12775,7 +12774,7 @@ $scope.hotelList = [];
 
   //Delete message Function
   $scope.showDeleteMessage = false;
-  $scope.deleteMessage = function() {
+  $scope.deleteMessage = function () {
     if ($scope.showDeleteMessage == false) {
       $scope.showDeleteMessage = true;
     } else {
@@ -12784,277 +12783,276 @@ $scope.hotelList = [];
   };
   //Delete message Function End
 
-   //Show Message Chat
-  $scope.userMessage =[];
+  //Show Message Chat
+  $scope.userMessage = [];
   $scope.viewMessageChat == false;
-  $scope.showMessageChat = function(name){
-    $scope.userMessage =[];
-      var newArray = _.findIndex($scope.followerList, function(o){
-      return  o.name == name.name;
-    });
-    if(newArray!==-1){
-      $scope.userMessage = $scope.followerList[newArray].followerMessage;
-      console.log($scope.userMessage,'user ka naya');
-      $scope.viewMessageChat = true;
+  $scope.showMessageChat = function (name) {
+      $scope.userMessage = [];
+      var newArray = _.findIndex($scope.followerList, function (o) {
+        return o.name == name.name;
+      });
+      if (newArray !== -1) {
+        $scope.userMessage = $scope.followerList[newArray].followerMessage;
+        console.log($scope.userMessage, 'user ka naya');
+        $scope.viewMessageChat = true;
+      }
     }
-  }
-  //Show Message Chat END
+    //Show Message Chat END
 
   // Follower List
-  $scope.followerList = [
-    {
-      name : "Monish Shah",
-      profilePic : "img/nargis1.jpg",
-      timeStampDate : "12 Jan, 2017",
-      timeStampTime : "1.20 pm",
-      followerMessage : [{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "Hey",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.50 pm"
-      },{
-        msgStatus : true,
-        msgType : "recieved",
-        msgText : "Hi",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.58 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "Wassssup?",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.59 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText :  "BLA bla",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.05 pm"
-      },{
-        msgStatus : true,
-        msgType : "recieved",
-        msgText : "YO!",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.10 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "QWERTYU...",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.20 pm"
-      }]
-    },{
-      name : "Andrea Christina",
-      profilePic : "img/follower.jpg",
-      timeStampDate : "12 Jan, 2017",
-      timeStampTime : "1.20 pm",
-      followerMessage : [{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "Hey",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.50 pm"
-      },{
-        msgStatus : true,
-        msgType : "recieved",
-        msgText : "Hi",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.58 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "Wassssup?",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.59 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText :  "BLA bla Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit blanditiis dolores error tempore tempora. Iusto fugit qui voluptate officia quasi accusamus facere, ab, recusandae eveniet, non dignissimos.",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.05 pm"
-      },{
-        msgStatus : true,
-        msgType : "recieved",
-        msgText : "YO! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit blanditiis dolores error tempore tempora. Iusto fugit qui voluptate",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.10 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "Lorem ipsum dolor sit amet, ",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.20 pm"
-      }]
-    },{
-      name : "Nargis Fakhri",
-      profilePic : "img/nargis1.jpg",
-      timeStampDate : "12 Jan, 2017",
-      timeStampTime : "1.20 pm",
-      followerMessage : [{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "Hey. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.50 pm"
-      },{
-        msgStatus : true,
-        msgType : "recieved",
-        msgText : "Hi Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit blanditiis dolores error tempore tempora. Iusto fugit qui voluptate officia quasi accusamus facere, ab, recusandae eveniet, non dignissimos.",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.58 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "Wassssup? beach Meet Lorem",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.59 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText :  "BLAH",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.05 pm"
-      },{
-        msgStatus : true,
-        msgType : "recieved",
-        msgText : "YOyoyoyoyo!",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.10 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "QWYU...",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.20 pm"
-      }]
-    },{
-      name : "Disha Patani",
-      profilePic : "img/dishapatani1.jpg",
-      timeStampDate : "12 Jan, 2017",
-      timeStampTime : "1.20 pm",
-      followerMessage : [{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "Heyya",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.50 pm"
-      },{
-        msgStatus : true,
-        msgType : "recieved",
-        msgText : "Hiya",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.58 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "Wassssup? YO!",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.59 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText :  "BLA blah BLAH!!!!!!!!!!!",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.05 pm"
-      },{
-        msgStatus : true,
-        msgType : "recieved",
-        msgText : "YOLO Babes!",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.10 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "MACDSVJFB...",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.20 pm"
-      }]
-    },{
-      name : "Alladin",
-      profilePic : "img/adrena.jpg",
-      timeStampDate : "12 Jan, 2017",
-      timeStampTime : "1.20 pm",
-      followerMessage : [{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "Hey",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.50 pm"
-      },{
-        msgStatus : true,
-        msgType : "recieved",
-        msgText : "Hi buddy",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.58 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "Wassssup? Meet up at Stamford",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.59 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText :  "BLA bla bla",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.05 pm"
-      },{
-        msgStatus : true,
-        msgType : "recieved",
-        msgText : "Yikes!",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.10 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "Q be!!!!!!!!!!!!!...",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.20 pm"
-      }]
-    },{
-      name : "Bla Blabla",
-      profilePic : "img/nargis1.jpg",
-      timeStampDate : "12 Jan, 2017",
-      timeStampTime : "1.20 pm",
-      followerMessage : [{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "Hey yo",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.50 pm"
-      },{
-        msgStatus : true,
-        msgType : "recieved",
-        msgText : "Hi",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.58 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "Wassssup? BAMBS",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "12.59 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText :  "BLA bla bla vlA bla",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.05 pm"
-      },{
-        msgStatus : true,
-        msgType : "recieved",
-        msgText : "YO maama!",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.10 pm"
-      },{
-        msgStatus : true,
-        msgType : "sent",
-        msgText : "QWERTYU vladdujfdsv...",
-        msgStampDate : "12 Jan, 2017",
-        msgStampTime : "1.20 pm"
-      }]
-    }];
+  $scope.followerList = [{
+    name: "Monish Shah",
+    profilePic: "img/nargis1.jpg",
+    timeStampDate: "12 Jan, 2017",
+    timeStampTime: "1.20 pm",
+    followerMessage: [{
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Hey",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.50 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "Hi",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.58 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Wassssup?",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.59 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "BLA bla",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.05 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "YO!",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.10 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "QWERTYU...",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.20 pm"
+    }]
+  }, {
+    name: "Andrea Christina",
+    profilePic: "img/follower.jpg",
+    timeStampDate: "12 Jan, 2017",
+    timeStampTime: "1.20 pm",
+    followerMessage: [{
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Hey",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.50 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "Hi",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.58 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Wassssup?",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.59 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "BLA bla Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit blanditiis dolores error tempore tempora. Iusto fugit qui voluptate officia quasi accusamus facere, ab, recusandae eveniet, non dignissimos.",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.05 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "YO! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit blanditiis dolores error tempore tempora. Iusto fugit qui voluptate",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.10 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Lorem ipsum dolor sit amet, ",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.20 pm"
+    }]
+  }, {
+    name: "Nargis Fakhri",
+    profilePic: "img/nargis1.jpg",
+    timeStampDate: "12 Jan, 2017",
+    timeStampTime: "1.20 pm",
+    followerMessage: [{
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Hey. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.50 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "Hi Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit blanditiis dolores error tempore tempora. Iusto fugit qui voluptate officia quasi accusamus facere, ab, recusandae eveniet, non dignissimos.",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.58 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Wassssup? beach Meet Lorem",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.59 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "BLAH",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.05 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "YOyoyoyoyo!",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.10 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "QWYU...",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.20 pm"
+    }]
+  }, {
+    name: "Disha Patani",
+    profilePic: "img/dishapatani1.jpg",
+    timeStampDate: "12 Jan, 2017",
+    timeStampTime: "1.20 pm",
+    followerMessage: [{
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Heyya",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.50 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "Hiya",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.58 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Wassssup? YO!",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.59 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "BLA blah BLAH!!!!!!!!!!!",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.05 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "YOLO Babes!",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.10 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "MACDSVJFB...",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.20 pm"
+    }]
+  }, {
+    name: "Alladin",
+    profilePic: "img/adrena.jpg",
+    timeStampDate: "12 Jan, 2017",
+    timeStampTime: "1.20 pm",
+    followerMessage: [{
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Hey",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.50 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "Hi buddy",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.58 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Wassssup? Meet up at Stamford",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.59 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "BLA bla bla",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.05 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "Yikes!",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.10 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Q be!!!!!!!!!!!!!...",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.20 pm"
+    }]
+  }, {
+    name: "Bla Blabla",
+    profilePic: "img/nargis1.jpg",
+    timeStampDate: "12 Jan, 2017",
+    timeStampTime: "1.20 pm",
+    followerMessage: [{
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Hey yo",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.50 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "Hi",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.58 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Wassssup? BAMBS",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.59 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "BLA bla bla vlA bla",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.05 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "YO maama!",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.10 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "QWERTYU vladdujfdsv...",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.20 pm"
+    }]
+  }];
   // Follower List END
 
 
@@ -13068,46 +13066,46 @@ $scope.hotelList = [];
 
   // NOTIFICATION CARD JSON
 
-$scope.notificationCard = [{
-  notiType: "tagOnGo"
-},{
-  notiType: "endOnGo"
-},{
-  notiType: "tagItinerary"
-},{
-  notiType: "checkinOnGo"
-},{
-  notiType: "addPicOnGo"
-},{
-  notiType: "commentPicOnGo"
-},{
-  notiType: "commentPicLocal"
-},{
-  notiType: "addVideoOnGo"
-},{
-  notiType: "commentVideoOnGo"
-},{
-  notiType: "commentVideoLocal"
-},{
-  notiType: "addThought"
-},{
-  notiType: "startedFollowing"
-},{
-  notiType: "requestFollow"
-},{
-  notiType: "acceptedRequest"
-},{
-  notiType: "commentOnGo"
-},{
-  notiType: "commentLocal"
-},{
-  notiType: "commentMention"
-},{
-  notiType: "likedOnGo"
-},{
-  notiType: "likedLocal"
-}];
-// NOTIFICATION CARD JSON END
+  $scope.notificationCard = [{
+    notiType: "tagOnGo"
+  }, {
+    notiType: "endOnGo"
+  }, {
+    notiType: "tagItinerary"
+  }, {
+    notiType: "checkinOnGo"
+  }, {
+    notiType: "addPicOnGo"
+  }, {
+    notiType: "commentPicOnGo"
+  }, {
+    notiType: "commentPicLocal"
+  }, {
+    notiType: "addVideoOnGo"
+  }, {
+    notiType: "commentVideoOnGo"
+  }, {
+    notiType: "commentVideoLocal"
+  }, {
+    notiType: "addThought"
+  }, {
+    notiType: "startedFollowing"
+  }, {
+    notiType: "requestFollow"
+  }, {
+    notiType: "acceptedRequest"
+  }, {
+    notiType: "commentOnGo"
+  }, {
+    notiType: "commentLocal"
+  }, {
+    notiType: "commentMention"
+  }, {
+    notiType: "likedOnGo"
+  }, {
+    notiType: "likedLocal"
+  }];
+  // NOTIFICATION CARD JSON END
 
 })
 
