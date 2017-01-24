@@ -1400,5 +1400,17 @@ ul{
 @extend .avenir-heavy;
     font-size: 13px;
 }
+.fp-{
+.fancybox-opened .fancybox-skin {
+    box-shadow: none;
+}
+
+.fancybox-skin {
+    background: transparent;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}  
+}
 @import "fancybox-override";
 // @import "animation";
