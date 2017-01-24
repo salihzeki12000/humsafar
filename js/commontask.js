@@ -3,7 +3,7 @@ var commontask = angular.module('commontask', [])
 .factory('LikesAndComments', function ($http, $filter) {
 
   var returnVal = {
-     getHashTags:function(commentString,callback){
+    getHashTags: function (commentString, callback) {
       var len = commentString.length;
       var counter = 0;
       var startIndex = null;
@@ -11,7 +11,7 @@ var commontask = angular.module('commontask', [])
       var i;
       var tag;
       var hashTag = [];
-      while (counter != len - 1) { 
+      while (counter != len - 1) {
         if (commentString[counter] == "#") {
           startIndex = counter;
           i = startIndex + 1;
@@ -40,16 +40,16 @@ var commontask = angular.module('commontask', [])
       hashTag = _.remove(hashTag, function (n) {
         return !(n == "#" || n == "@");
       });
-     callback(hashTag);
+      callback(hashTag);
     },
     postComment: function (type, uniqueId, type_Id, comment, hashTag, additionalId, callback) { //type_id=postId,journeyId,ItineraryId
       console.log("inside LikesAndComments");
       console.log(type, uniqueId, type_Id, comment, hashTag, additionalId, callback);
       var getCommentId = "";
-      hashtag=[];
+      hashtag = [];
       console.log(comment);
-     returnVal.getHashTags(comment,function(data){
-        hashTag=data;
+      returnVal.getHashTags(comment, function (data) {
+        hashTag = data;
       });
       // console.log(hashTag);
       var obj = {
@@ -108,7 +108,7 @@ var commontask = angular.module('commontask', [])
           url = "/itinerary/getItineraryCommentWeb";
           break;
         case "journey":
-          url = "/journey/getJourneyCommentWeb"
+          url = "/journey/getJourneyCommentWeb";
           break;
       }
       $http({
@@ -159,7 +159,7 @@ var commontask = angular.module('commontask', [])
         console.log(data);
       });
     },
-    getLikes: function (type, _id,callback) {
+    getLikes: function (type, _id, callback) {
       console.log(type, _id);
       var obj = {
         "_id": _id
@@ -181,13 +181,13 @@ var commontask = angular.module('commontask', [])
           url = "/journey/getJourneyLikes";
           break;
       };
-       $http({
-          url: adminURL + url,
-          method: "POST",
-          data: obj
-        }).success(function(data){
-          callback(data);
-        });
+      $http({
+        url: adminURL + url,
+        method: "POST",
+        data: obj
+      }).success(function (data) {
+        callback(data);
+      });
     },
     searchTags: function (tag, callback) {
       $http({
@@ -220,14 +220,14 @@ commontask.directive('findTags', function (LikesAndComments) {
     restrict: 'E',
     scope: {
       ngModel: "=",
-      elementId:"@",
-      enable:"@"
+      elementId: "@",
+      enable: "@"
     },
     templateUrl: "views/modal/hashtag.html",
     link: function ($scope, element, attrs) {
       $scope.$watch('ngModel', function (newVal, oldVal) {
         // alert($scope.ngModel);
-        console.log($scope.elementId,$scope.enable);
+        console.log($scope.elementId, $scope.enable);
         var text = $scope.ngModel;
         var comment = {
           'text': newVal
@@ -280,13 +280,13 @@ commontask.directive('findTags', function (LikesAndComments) {
               $scope.showTags = false;
               $scope.showBuddies = true;
             }
-       
 
-            if ($scope.flag == "#" && ($scope.enable =='hashTag' || $scope.enable =='bothTagging')) {
+
+            if ($scope.flag == "#" && ($scope.enable == 'hashTag' || $scope.enable == 'bothTagging')) {
               $scope.hashTag = text.substring($scope.startTagIndex, $scope.endTagIndex + 1);
               LikesAndComments.searchTags($scope.hashTag, tagCallback);
 
-            } else if ($scope.flag == "@" && ($scope.enable =='tagFriends' || $scope.enable =='bothTagging')) {
+            } else if ($scope.flag == "@" && ($scope.enable == 'tagFriends' || $scope.enable == 'bothTagging')) {
               $scope.hashTag = text.substring($scope.startTagIndex + 1, $scope.endTagIndex + 1);
               LikesAndComments.searchBuddies($scope.hashTag, buddiesCallback);
             }
