@@ -29,11 +29,17 @@ var activity = angular.module('activity', [])
               break;
             case "quick-itinerary":
               activity.class = "user-quick-itinerary";
-              activity.likeUnlikeFlag="itinerary";              
+              activity.likeUnlikeFlag="itinerary";
+              var len=activity.photos.length-1;
+              var randomNum=Math.floor((Math.random() * len) + 0); 
+              activity.coverPhoto=activity.photos[randomNum].name;             
               break;
             case "detail-itinerary":
               activity.class = "user-detail-itinerary";
-              activity.likeUnlikeFlag="itinerary";              
+              activity.likeUnlikeFlag="itinerary";        
+              var len=activity.photos.length-1;
+              var randomNum=Math.floor((Math.random() * len) + 0); 
+              activity.coverPhoto=activity.photos[randomNum].name;       
               break;
             case "ended-journey":
               activity.class = "travel-life";

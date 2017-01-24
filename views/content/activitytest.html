@@ -19,10 +19,10 @@
                     <div class="user-pic" ng-if="activity.type=='travel-life' || activity.type=='local-life'">
                       <img ng-src="{{activity.postCreator.profilePicture|uploadpath:62:67}}" alt="" class="img-responsive">
                     </div>
-                    <div class="user-pic" ng-if="activity.type=='quick-itinerary'">
+                    <!--<div class="user-pic" ng-if="activity.type=='quick-itinerary'">
                       <img ng-src="{{activity.creator.profilePicture|uploadpath:62:67}}" alt="" class="img-responsive">
-                    </div>
-                    <div class="user-pic" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey' ||  activity.type=='detail-itinerary'">
+                    </div>-->
+                    <div class="user-pic" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey' || activity.type=='quick-itinerary' || activity.type=='detail-itinerary'">
                       <img ng-src="{{activity.user.profilePicture|uploadpath:62:67}}" alt="" class="img-responsive">
                     </div>
                   </div>
@@ -188,7 +188,7 @@
                     <!-- post onway journey -->
                     <div class="onway-journey relate" ng-if="activity.type=='quick-itinerary' || activity.type=='detail-itinerary'">
                       <div class="onway-imgholder">
-                        <img ng-src="{{activity.imgOnway}}" alt="" class="img-responsive m-center">
+                        <img ng-src="{{activity.coverPhoto|uploadpath}}" alt="" class="img-responsive m-center">
                       </div>
                       <div class="journey-tag-holder">
                         <div class="days-spent pull-right" ng-if="activity.type!='editor-blog'">
@@ -240,7 +240,7 @@
                             <a href="" class="fnt-20"><i class="fa color-blue card-like-animation " ng-class="activity.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i></a>
                           </span>
                           <div class="inline-block v-mid" ng-if="!(activity.type=='editor')">
-                            <span class="pointer mr5"><img src="img/comments.png" alt="" height="19"></span>
+                            <span class="pointer mr5"><img src="img/comments.png" alt="" height="19" ng-click="getPostsCommentData(activity)"></span>
                             <span class="pointer mr5"><img src="img/reviews.png" alt="" height="19" ng-if="activity.type =='ended-journey' || activity.type =='detail-itinerary' || activity.type =='quick-itinerary'"></span>
                             <span class="pointer mr5"><img src="img/share.png" alt="" height="19"></span>
                           </div>
@@ -475,4 +475,83 @@
         </div>
       </div>
     </div>
+    <!--comment activity-->
+    <div class="notify-main whole-card-comment {{getCard}}"  ng-show="viewCardComment">
+    <div class="comment-like-notify">
+        <div class="like-comment-mainsec">
+          <div class="clearfix">
+            <div class="pull-left">
+              <ul class="notify-like">
+                <li><a href=""><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"  ng-click="likeUnlikeActivity(activity)"></i></a></li>
+                <li>
+                  <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve" ng-click="focus('enterComment');"></a>
+                </li>
+                <li>
+                  <a href=""><img src="img/share.png" alt="" height="20" class="img-responisve"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="pull-right">
+              <div class="notification-like" ng-init="commentLike={};">
+                <!-- showLikes=!showLikes; -->
+                <span class="notify-like-holder pointer avenir-roman" ng-click="getLikes(post._id);editOption(commentLike)">
+                  <i class="fa fa-heart color-blue" ng-class="{'view-like' : commentLike.backgroundClick == true , '' : commentLike.backgroundClick == false}" ></i>
+                 <span>{{post.likeCount|filterCount}}   </span>{{post.likeCount|singularOrPlural:'like'}}
+                 <!-- ng-show="showLikes" -->
+                <div class="like-dropdown" ng-show="commentLike.backgroundClick;">
+                  <ul>
+                    <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
+                  </ul>
+                </div>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- comment section -->
+        <div class="comment-sec">
+            <div class="write-comment-text">
+            <div class="commenter-img">
+              <div class="commenter-imgholder">
+                <img ng-src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
+              </div>
+            </div>
+            <div class="comment-ur-text relate" ng-init="hashtag={};">
+              <textarea name="" class="findTags" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="comment.text" ng-change="testingHash(comment.text);editOption(hashtag)"></textarea>
+              <div class="dropdown-hashtag" ng-show="hashtag.backgroundClick;">
+                <ul ng-repeat="tag in hashTags">
+                  <li ng-click="appendComment(comment,tag.title,hashTag,startTagIndex,endTagIndex)"><a href="">{{tag.title}} <span class="tag-count ml10">{{tag.count}}</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix comment-post">
+            <div class="pull-right">
+              <button class="btn btn-pink post-btn" ng-click=postPostsComment(post.uniqueId,comment.text,post._id)>Post</button>
+            </div>
+          </div>
+          <div class="listing-comment">
+          <div class="view-comment-list" ng-repeat="list in listOfComments.comment">
+            <div class="commenter-img">
+              <div class="commenter-imgholder">
+                <img ng-src="{{list.user.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
+              </div>
+            </div>
+            <div class="comment-container">
+              <div class="commenter-text">
+                <p class="avenir-roman"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name}}</span>{{list.text}}</p>
+                <div class="like-reply-line">
+                  <!--<span class="color-blue avenir-roman mr5 pointer">Like</span>-->
+                  <!--<span class="color-blue avenir-roman mr5 pointer">Reply</span>-->
+                  <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                  | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <!-- comment section end` -->
+      </div>
+</div>
+    <!--comment activity end-->
   </div>

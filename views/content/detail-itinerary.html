@@ -51,7 +51,7 @@
         <div class="fill-detail-itinerary">
           <h4 class="color-blue avenir-roman mb20">Input Trip Details</h4>
           <form>
-            <div class="fill-itinerary-detail">
+            <div class="fill-itinerary-detail" ng-init="countryIndex">
               <div class="itinerary-title">
                 <div class="row">
                   <div class="col-md-6">
@@ -155,15 +155,16 @@
                             <label for="From">From</label>
                             <div class="itinerary-inputholder">
                               <!-- <input type="date" class="form-control text-center" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'"> -->
-                              <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="editCountry.datePopUp.from=true" uib-datepicker-popup="{{format}}" is-open="editCountry.datePopUp.from" datepicker-options="dateOptions" close-text="Close" alt-input-formats="false" id="From_{{countryPanel}}{{cityPanel}}"
-                                  ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'" />
+                              <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="editCountry.datePopUp.from.openCalender=true" uib-datepicker-popup="{{format}}" is-open="editCountry.datePopUp.from.openCalender" datepicker-options="editCountry.datePopUp.from" close-text="Close" alt-input-formats="false" id="From_{{countryPanel}}{{cityPanel}}"
+                                  ng-model="editCountry.from" ng-change="getDays(editCountry);" />
+                                  <!--ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'"-->
                             </div>
                           </div>
                           <div class="itinerary-to itinerary-year">
                             <label for="to">To</label>
                             <div class="itinerary-inputholder">
                               <!-- <input type="date" class="form-control text-center" id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)"> -->
-                              <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="editCountry.datePopUp.to=true" uib-datepicker-popup="{{format}}" is-open="editCountry.datePopUp.to" datepicker-options="editCountry.datePopUp" close-text="Close" alt-input-formats="altInputFormats"
+                              <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="editCountry.datePopUp.to.openCalender=true" uib-datepicker-popup="{{format}}" is-open="editCountry.datePopUp.to.openCalender" datepicker-options="editCountry.datePopUp.to" close-text="Close" alt-input-formats="altInputFormats"
                                   id="To_{{countryPanel}}{{cityPanel}}"  ng-model="editCountry.to" init-date="editCountry.from" ng-change="getDays(editCountry)" />
                             </div>
                           </div>
@@ -275,7 +276,7 @@
               </div>
               <!-- add country on click -->
               <div class="add-country add-country-border text-center clearfix">
-                <button class="btn btn-pink btn-more" ng-click="addYourCountry();">Add Country</button>
+                <button class="btn btn-pink btn-more" ng-click="addYourCountry(countryPanel);">Add Country</button>
                 <span class="color-light-grey italic add-country-span add-country-margin">If you have visited any other country on the same trip</span>
               </div>
               <!-- add country on click end-->

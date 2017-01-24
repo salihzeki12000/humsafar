@@ -786,6 +786,18 @@ ongojourney.directive('journeyPost', ['$http', '$filter','$window', '$timeout', 
           // get photos id
           $scope.photosId = _.map($scope.ongo.photos, "_id");
           // get photos id end
+          // hashtag
+          var startIndex = null;
+          var endIndex = null;
+          var i;
+          var tag;
+          var hashTag = [];
+         LikesAndComments.getHashTags($scope.ongo.thoughts,function(data){
+            hashTag=data;
+          });
+          console.log(hashTag);
+
+          // hashtag end
 
           var editedData = {
             thoughts: $scope.ongo.thoughts,
@@ -795,8 +807,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter','$window', '$timeout', 
             "uniqueId": $scope.ongo.uniqueId,
             "_id": $scope.ongo._id,
             buddiesArr: $scope.newBuddies,
-            hashtag: [],
-            addHashtag: [],
+            hashtag: hashTag,
+            addHashtag: hashTag,
             removeHashtag: [],
             photosArr: $scope.ongo.photos,
             videosArr: $scope.ongo.videos,
@@ -829,9 +841,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter','$window', '$timeout', 
             method: "POST",
             data: editedData,
           }).success(function(data) {
-            console.log(data, 'kya hai data');
             if( data.value === true ) {
-              $window.location.reload();
+              // $window.location.reload();
               // setTimeout(function(){
               //   console.log('ave');
               // },200);
@@ -1058,7 +1069,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter','$window', '$timeout', 
       };
 
       $scope.getPhotosCommentData = function(photoId) {
-        console.log(photoId);
+        console.log(photoId,"mdmdsdsdmks");
         modal=$uibModal.open({
           templateUrl: "views/modal/notify.html",
           animation: true,
@@ -1145,7 +1156,6 @@ ongojourney.filter('formatDate', function() {
 
 ongojourney.filter('dateDifference', function() {
   return function(current, previous) {
-    console.log(current,previous);
     if (current == "current" || current == "" || current == null || current == undefined) {
       current = Date();
     }

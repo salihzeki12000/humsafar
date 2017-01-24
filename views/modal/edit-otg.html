@@ -78,25 +78,7 @@
             <div class="otg-thought">
               <textarea maxlength="150" class="form-control edit-textarea" id="editTextarea" ng-model="ongo.thoughts">{{ongo.thoughts}}</textarea>
               <!-- hashtag in edit -->
-              <div class="dropdown-hashtag">
-                <!--hashtag-->
-                <div>
-                  <ui-select ng-model="tag.title" theme="bootstrap" on-select="appendComment(flag,ngModel,$select.selected.title,hashTag,startTagIndex,endTagIndex)">
-                    <ui-select-match placeholder="Search" ></ui-select-match>
-                    <ui-select-choices repeat="tag.titile as tag in hashTags | filter:$select.search" track by $index>
-                      <div class="clearfix">
-                        <div class="pull-left">
-                          <span class="color-light-grey tag-name" ng-bind="tag.title"></span>
-                        </div>
-                        <div class="pull-right">
-                          <span class="color-light-grey tag-count">{{tag.count}}</span>
-                        </div>
-                      </div>
-                    </ui-select-choices>
-                  </ui-select>
-                </div>
-                <!--hashtag end-->
-              </div>
+                <find-tags class="" ng-model="ongo.thoughts" element-id="editTextarea" enable="hashTag">
               <!-- hashtag in edit end-->
               <div class="thoughtCount"><span>{{ongo.thoughts.length}}</span><span> / 150</span></div>
             </div>
