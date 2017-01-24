@@ -117,8 +117,18 @@
                   </li>
                 </ul>
               </div>
-              <div class="opitions pull-right">
+              <div class="options pull-right relate" ng-click="viewItineraryOptions()" >
                 <img src="img/options.png" alt="Options" height="22" class="agent-iti-options-icon">
+                <div class="itinerary-edit-option" ng-show="showItineraryEditOptions">
+                  <ul>
+                    <li>
+                      <a ui-sref="quickitinerary({flag:'edit',urlSlug:itinerary.urlSlug})">Edit</a>
+                    </li>
+                    <li>
+                      <a class="">Delete</a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
             <div class="clearfix like-review-main">

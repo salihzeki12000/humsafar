@@ -7798,7 +7798,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // LISTED MODAL POPUP END
     $scope.countryPanel="";
     $scope.cityPanel="";
-    
+
     var flag = $stateParams.flag;
     var urlSlug = $stateParams.urlSlug;
     var countries = [];
@@ -8302,7 +8302,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       "datePopUp": {
         // "showWeeks": false,
         // "from": false,
-        // "to": false,       
+        // "to": false,
         // "maxDate": new Date()
         "from": {
           'openCalender': false,
@@ -9052,6 +9052,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     //post quick-itinerary comments ends
 
+    //Itinerary Options List Show
+    $scope.showItineraryEditOptions = false;
+    $scope.viewItineraryOptions = function() {
+      if($scope.showItineraryEditOptions == false){
+        $scope.showItineraryEditOptions = true;
+      }else {
+        $scope.showItineraryEditOptions = false;
+      }
+    }
+    //Itinerary Options List Show End
+
     //Photo comment popup
     $scope.getPhotosCommentData = function (photo) {
       $scope.listOfComments = photo;
@@ -9471,6 +9482,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, photoId, callback);
     };
     //Photo comment popup end
+
+    //Itinerary Options List Show
+    $scope.showItineraryEditOptions = false;
+    $scope.viewItineraryOptions = function() {
+      if($scope.showItineraryEditOptions == false){
+        $scope.showItineraryEditOptions = true;
+      }else {
+        $scope.showItineraryEditOptions = false;
+      }
+    }
+    //Itinerary Options List Show End
     //Integration starts here
 
     $scope.journeyItinerary = [{
