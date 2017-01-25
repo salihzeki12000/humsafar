@@ -1,6 +1,11 @@
 <div class="relate">
   <!--<textarea id='enterComment' placeholder='Write a comment' class='form-control' ng-model='ngModel'></textarea>-->
-  <div class="dropdown-hashtag"> 
+  <div class="dropdown">
+    <ul>
+      <li ng-click="appendComment(flag,ngModel,tag.title,hashTag,startTagIndex,endTagIndex)" ng-repeat="tag in hashTags"><a href="">{{tag.title}}</a></li>
+    </ul>
+  </div>
+  <div class="dropdown-hashtag" hidden>
     <div ng-show="showBuddies">
       <ui-select ng-model="buddy.name" theme="bootstrap" on-select="appendComment(flag,ngModel,$select.selected.urlSlug,hashTag,startTagIndex,endTagIndex)">
         <ui-select-match placeholder="Search" ></ui-select-match>
