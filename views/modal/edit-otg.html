@@ -16,20 +16,20 @@
         <div class="col-md-4 col-sm-6">
           <div class="otg-search-location otg-bg-all">
             <img src="img/ongojourney/otg-location.png" alt="" class="img-responsive icon-location" width="22">
-            <div class="search-by-category">
-              <input type="text" ng-model="ongo.checkIn.location" class="form-control" placeholder="Choose your location" ng-click="getLocation();" ng-change="getLocation()">
-              <div class="search-otg-location" ng-show="showLocation">
+            <div class="search-by-category" ng-init="ongo.locationEdit = {};">
+              <input type="text" ng-model="ongo.checkIn.location" class="form-control" placeholder="Choose your location" ng-click="getLocation(); editOption(ongo.locationEdit);" ng-change="getLocation()">
+              <div class="search-otg-location" ng-show="showLocation &&  ongo.locationEdit.backgroundClick;">
                 <ul>
                   <li ng-repeat="location in nearByLocation track by $index" ng-click="locationId(location);viewLocation();">
                     <a href="" >{{location.name}}</a></li>
                 </ul>
               </div>
             </div>
-            <div class="category-location">
-              <input type="text" class="form-control" ng-model="ongo.checkIn.category" placeholder="Select Category" ng-click="viewCategory();">
-              <div class="dropdown-otg-category" ng-show="showCategory">
+            <div class="category-location" ng-init="ongo.type= {};">
+              <input type="text" class="form-control" ng-model="ongo.checkIn.category" placeholder="Select Category" ng-click="editOption(ongo.type)">
+              <div class="dropdown-otg-category" ng-show="ongo.type.backgroundClick;">
                 <ul>
-                  <li ng-repeat="category in categoryList" ng-click="ongo.checkIn.category=category; viewCategory();"><a href="">{{category}}</a></li>
+                  <li ng-repeat="category in categoryList" ng-click="ongo.checkIn.category=category;"><a href="">{{category}}</a></li>
                 </ul>
               </div>
             </div>
@@ -75,10 +75,10 @@
         <div class="col-md-4 col-sm-12">
           <div class="edit-otg-thought otg-bg-all">
             <img src="img/ongojourney/otg-thought.png" alt="" class="img-responsive icon-thought" width="20">
-            <div class="otg-thought">
-              <textarea maxlength="150" class="form-control edit-textarea" id="editTextarea" ng-model="ongo.thoughts" ng-click="$select.activate();">{{ongo.thoughts}}</textarea>
+            <div class="otg-thought" ng-init="ongo.editArea={};ongo.editArea.backgroundClick = false">
+              <textarea maxlength="150" class="form-control edit-textarea" id="editTextarea" ng-model="ongo.thoughts" ng-click="editOption(ongo.editArea);" ng-class="{'opened-editarea': ongo.editArea.backgroundClick == true, '': ongo.editArea.backgroundClick == false}">{{ongo.thoughts}}</textarea>
               <!-- hashtag in edit -->
-                <find-tags class="" ng-model="ongo.thoughts" element-id="editTextarea" enable="hashTag">
+                <find-tags class="hashtag-edit" ng-model="ongo.thoughts" element-id="editTextarea" enable="hashTag" ng-show="ongo.editArea.backgroundClick;"></find-tags>
               <!-- hashtag in edit end-->
               <div class="thoughtCount"><span>{{ongo.thoughts.length}}</span><span> / 150</span></div>
             </div>
