@@ -3824,175 +3824,230 @@ q {
   }
 }
 
-  .listed-popup-list {
-    ::-webkit-scrollbar {
-      width: 0;
-    }
-
-    ::-webkit-scrollbar-track {
-      background-color: transparent;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background-color: transparent;
-    }
+.listed-popup-list {
+  ::-webkit-scrollbar {
+    width: 0;
   }
 
-  .list-popup-scroll {
-    max-height: 310px;
-    overflow-y: scroll;
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
   }
 
-  .list-done-btn {
-    text-align: center;
-    margin-top: 30px;
+  ::-webkit-scrollbar-thumb {
+    background-color: transparent;
   }
+}
 
-  .listed-popup-li {
-    &:nth-child( even ) {
-      .listed-popup-select {
-        background-color: rgba(255,255,255,0.8);
-      }
-    }
-  }
+.list-popup-scroll {
+  max-height: 310px;
+  overflow-y: scroll;
+}
 
-  .listed-popup-select {
-    padding: 10px;
-    margin-right: 2px;
-    background-color: #fff;
-    color: $brand-blue;
-    @extend .avenir-roman;
+.list-done-btn {
+  text-align: center;
+  margin-top: 30px;
+}
 
-    [type="checkbox"]:checked,
-    [type="checkbox"]:not(:checked) {
-      position: absolute;
-      left: -9999px;
-    }
-
-    [type="checkbox"]:checked+label,
-    [type="checkbox"]:not(:checked)+label {
-      width: 100%;
-      position: relative;
-      margin: 0;
-      cursor: pointer;
-    }
-    /* radio aspect */
-    [type="checkbox"]:checked+label:before,
-    [type="checkbox"]:not(:checked)+label:before {
-      content: '';
-      @include square(20px);
-      border: 1px solid $brand-grey;
-      border-radius: 2px;
-      position: absolute;
-      top: 50%;
-      right: 0;
-      @include transform(translateY(-50%));
-      background-color: $brand-lighter-grey;
-      color: #f6f6f6;
-      @include transition(all 300ms linear);
-    }
-    /* checked mark aspect */
-    [type="checkbox"]:checked+label:after,
-    [type="checkbox"]:not(:checked)+label:after {
-      content: '\f00c';
-      color: #fff;
-      font: normal normal normal 14px/1 FontAwesome;
-      position: absolute;
-      top: 50%;
-      right: 2px;
-      @include transform(translateY(-50%));
-      font-size: 15px;
-      line-height: 0.8;
-      @include transition(all 300ms linear);
-    }
-    /* checked mark aspect changes */
-    [type="checkbox"]:not(:checked)+label:after {
-      opacity: 1;
-      // transform: scale(1);
-    }
-
-    [type="checkbox"]:checked+label:before {
-      background-color: $brand-pink;
-      border: 1px solid $brand-pink;
-      color: $brand-blue;
-      @include transition(all 300ms linear);
-    }
-
-    [type="checkbox"]:checked+label:after {
-      color: #fff;
-      // background-color: $brand-pink;
-      @include transition(all 300ms linear);
+.listed-popup-li {
+  &:nth-child( even ) {
+    .listed-popup-select {
+      background-color: rgba(255,255,255,0.8);
     }
   }
+}
 
-  .list-select-budget {
+.listed-popup-select {
+  padding: 10px;
+  margin-right: 2px;
+  background-color: #fff;
+  color: $brand-blue;
+  @extend .avenir-roman;
+
+  [type="checkbox"]:checked,
+  [type="checkbox"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+  }
+
+  [type="checkbox"]:checked+label,
+  [type="checkbox"]:not(:checked)+label {
+    width: 100%;
+    position: relative;
+    margin: 0;
+    cursor: pointer;
+  }
+  /* radio aspect */
+  [type="checkbox"]:checked+label:before,
+  [type="checkbox"]:not(:checked)+label:before {
+    content: '';
+    @include square(20px);
+    border: 1px solid $brand-grey;
+    border-radius: 2px;
     position: absolute;
     top: 50%;
-    right: 30px;
-    @include transform(translateY(-50%));
-    font-size: 12px;
-    color: $brand-grey;
-  }
-  //DETAILED ITINERARY SHOW LISTED POPUP END
-  // EDIT KIND OF JOURNEY POPUP
-  .edit-kindof-popup {
-    padding: 30px 0;
-    background-color: transparent;
-    @extend .avenir-roman;
-  }
-
-  .edit-kindof-header {
-    color: #fff;
-    font-size: 18px;
-    text-align: center;
-  }
-
-  .edit-kindof-popup-close {
-    position: absolute;
-    top: 0;
     right: 0;
+    @include transform(translateY(-50%));
+    background-color: $brand-lighter-grey;
+    color: #f6f6f6;
+    @include transition(all 300ms linear);
+  }
+  /* checked mark aspect */
+  [type="checkbox"]:checked+label:after,
+  [type="checkbox"]:not(:checked)+label:after {
+    content: '\f00c';
     color: #fff;
+    font: normal normal normal 14px/1 FontAwesome;
+    position: absolute;
+    top: 50%;
+    right: 2px;
+    @include transform(translateY(-50%));
     font-size: 15px;
-    // @include transform(translateY(-50%));
-    @extend .pointer;
+    line-height: 0.8;
+    @include transition(all 300ms linear);
+  }
+  /* checked mark aspect changes */
+  [type="checkbox"]:not(:checked)+label:after {
+    opacity: 1;
+    // transform: scale(1);
   }
 
-  .edit-kindof {
-    padding: 10px;
-    border-radius: 10px;
-    margin: 20px 0;
-    background-color: rgba(255,255,255,0.8);
+  [type="checkbox"]:checked+label:before {
+    background-color: $brand-pink;
+    border: 1px solid $brand-pink;
+    color: $brand-blue;
+    @include transition(all 300ms linear);
+  }
+
+  [type="checkbox"]:checked+label:after {
+    color: #fff;
+    // background-color: $brand-pink;
+    @include transition(all 300ms linear);
+  }
+}
+
+.list-select-budget {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  @include transform(translateY(-50%));
+  font-size: 12px;
+  color: $brand-grey;
+}
+//DETAILED ITINERARY SHOW LISTED POPUP END
+// EDIT KIND OF JOURNEY POPUP
+
+.edit-kindof-popup {
+  padding: 30px 0;
+  background-color: transparent;
+  @extend .avenir-roman;
+}
+
+.edit-kindof-header {
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+}
+
+.edit-kindof-popup-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+  font-size: 15px;
+  // @include transform(translateY(-50%));
+  @extend .pointer;
+}
+
+.edit-kindof {
+  padding: 10px;
+  border-radius: 10px;
+  margin: 20px 0;
+  background-color: rgba(255,255,255,0.8);
+  text-align: center;
+
+  .select-itinerary-type {
+    margin: 10px 0;
+    min-width: 74px;
+    display: inline-block;
     text-align: center;
+  }
 
-    .select-itinerary-type {
-      margin: 10px 0;
-      min-width: 74px;
-      display: inline-block;
-      text-align: center;
+  .itinerary-iconholder {
+    @include square(40px);
+    background: url('../img/itinerary/bluebox.png');
+    background-size: 100% 100%;
+    display: inline-block;
+    position: relative;
+    @include transition(all 300ms linear);
+
+    img {
+      @extend .get-center;
     }
 
-    .itinerary-iconholder {
-      @include square(40px);
-      background: url('../img/itinerary/bluebox.png');
+    &:hover {
+      background: url('../img/itinerary/orangebox.png');
       background-size: 100% 100%;
-      display: inline-block;
-      position: relative;
       @include transition(all 300ms linear);
+    }
 
-      img {
-        @extend .get-center;
-      }
-
-      &:hover {
-        background: url('../img/itinerary/orangebox.png');
-        background-size: 100% 100%;
-        @include transition(all 300ms linear);
-      }
-      .active-itinerary {
-        background: url('../img/itinerary/orangebox.png');
-        background-size: 100% 100%;
-        @include transition(all 300ms linear);
-      }
+    .active-itinerary {
+      background: url('../img/itinerary/orangebox.png');
+      background-size: 100% 100%;
+      @include transition(all 300ms linear);
     }
   }
-  // EDIT KIND OF JOURNEY POPUP END
+}
+// EDIT KIND OF JOURNEY POPUP END
+
+//ITINERARY OPTIONS DROPDOWN
+.itinerary-edit-option {
+  width: 180px;
+  padding: 15px 20px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.35), inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
+  position: absolute;
+  top: 35px;
+  right: -25px;
+  background-color: #f6fafc;
+
+  &:before {
+    content: '';
+    border-top: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-bottom: 13px solid #f6fafc;
+    border-left: 13px solid transparent;
+    position: absolute;
+    right: 14px;
+    top: -26px;
+    z-index: 1;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: -23px;
+    right: 15px;
+    border-top: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #e7f1f7;
+    border-left: 12px solid transparent;
+    z-index: 2;
+  }
+
+  li {
+    padding: 7px 5px;
+    border-bottom: 1px solid #b1b3b6;
+    display: block;
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+  a {
+    color: #6d6e71;
+    font-size: 15px;
+  }
+}
+//ITINERARY OPTIONS DROPDOWN END

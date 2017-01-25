@@ -229,7 +229,6 @@ ul {
   font-family: "AvenirLTStd-Medium";
   src: url('../fonts/AvenirLTStd-Medium.otf');
 }
-
 @font-face {
   font-family: "AvenirLTStd-Black";
   src: url('../fonts/AvenirLTStd-Black.otf');
@@ -284,6 +283,7 @@ ul {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .avenir-Medium {
   font-family: "avenir-lt-std-65-medium-58708f166adc1";
   -webkit-font-smoothing: antialiased;
@@ -649,6 +649,7 @@ header {
   left: 0;
   z-index: 10;
   @include transition(all 100ms linear);
+
   &.addfixed {
     @extend .bg-dark-blue;
   }
@@ -694,14 +695,16 @@ header {
 }
 
 .user-detail {
-p{
-  span{
-    font-size:12px;
+  p {
+    span {
+      font-size: 12px;
+    }
   }
-}
+
   h4 {
     @extend .avenir-heavy;
   }
+
   .list-inline {
     margin: 0;
   }
@@ -810,7 +813,10 @@ p{
     color: $brand-pink;
     @include transition(all 300ms linear);
   }
-  label img { border: 1px solid #ebebeb; }
+
+  label img {
+    border: 1px solid #ebebeb;
+  }
 }
 
 .custom-checkbox {
@@ -920,6 +926,7 @@ p{
     box-shadow: none;
     position: static !important;
   }
+
   .ui-select-container {
     &:after,
     &:before {
@@ -939,17 +946,24 @@ p{
     &:after {
       right: 0;
     }
-    input { width: 100% !important; }
+
+    input {
+      width: 100% !important;
+    }
   }
-  .ui-select-bootstrap  {
+
+  .ui-select-bootstrap {
     .ui-select-choices-row > span {
       padding: 5px 10px;
       border-bottom: 1px solid $brand-lighter-grey;
     }
-    .ui-select-choices-row.active>span {
+
+    .ui-select-choices-row.active > span {
       background-color: #f5f5f5;
     }
-    .ui-select-choices, .ui-select-no-choice {
+
+    .ui-select-choices,
+    .ui-select-no-choice {
       max-height: 232px;
       padding: 0;
       box-shadow: none;
@@ -957,17 +971,25 @@ p{
       margin-top: 0;
     }
   }
+
   .ui-select-match {
     border: none;
     border-radius: 0;
+
     .btn {
       border: none;
       border-bottom: 1px solid #e3e3e3;
       border-radius: 0;
       background: url("../img/dropdown-icon.png") no-repeat 98% 50%;
-      &:hover { background-color: transparent; }
+
+      &:hover {
+        background-color: transparent;
+      }
     }
-    i { display: none; }
+
+    i {
+      display: none;
+    }
   }
   // ui-select nation end
   .search-nation {
@@ -1020,7 +1042,7 @@ p{
   ul {
     width: 100%;
     height: 220px;
-    padding: 0px 10px 0;
+    padding: 0 10px;
     border: 1px solid $brand-lighter-grey;
     border-top: 1px solid transparent;
     border-bottom-right-radius: 5px;
@@ -1250,8 +1272,10 @@ p{
   // max-width: 1400px;
   max-width: 2000px;
   margin: 0 auto;
+
   .btn-blue-outline {
     background-color: transparent;
+
     &:hover {
       border-color: #2d3655;
       background-color: $brand-pink;
@@ -1369,6 +1393,7 @@ p{
     position: absolute;
     bottom: 70px;
     left: 30px;
+
     img {
       height: 80px;
     }
@@ -1516,10 +1541,12 @@ p{
     border-radius: 4px;
     background-color: #fff;
   }
-.no-of-time {
-  color: $brand-light-grey;
-  font-size: 10px;
-}
+
+  .no-of-time {
+    color: $brand-light-grey;
+    font-size: 10px;
+  }
+
   .search-year-input {
     position: relative;
 
@@ -1626,12 +1653,14 @@ p{
   }
 }
 // delete country visited list
+
 .delete-your-country {
   padding: 20px 0 0;
   margin-top: 20px;
   background-color: #fff;
   text-align: center;
   @extend .avenir-roman;
+
   .delete-confirmation {
     padding: 10px;
     display: block;
@@ -1653,9 +1682,10 @@ p{
   height: 330px;
   max-height: 330px;
   overflow: hidden;
+
   .unpublish-banner {
     padding: 8px 15px;
-    border-radius: 0px 6px 6px 0;
+    border-radius: 0 6px 6px 0;
     position: absolute;
     top: 20px;
     left: 0;
@@ -1663,14 +1693,16 @@ p{
     background-color: $brand-pink;
     color: #fff;
   }
+
   img {
     min-height: 100%;
   }
 }
 
 .travel-life-part {
-   border-radius: 6px;
-   background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.8);
+
   ul {
     padding: 0;
     margin: 0;
@@ -1797,7 +1829,7 @@ p{
 }
 
 .tint-bg {
-    background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.15);
 }
 
 .add-more-journey {
@@ -1909,6 +1941,7 @@ p{
   .journey-travelling-type {
     margin-bottom: -20px;
   }
+
   .pull-right {
     .journey-type {
       ul {
@@ -1921,14 +1954,19 @@ p{
 }
 
 .journey-type {
-   min-height: 20px;
-   margin-top: -11px;
-   ul {
-     li+li { border-left: 1px solid #fff; }
-   }
-&.m0{
-  margin: 0;
-}
+  min-height: 20px;
+  margin-top: -11px;
+
+  ul {
+    li+li {
+      border-left: 1px solid #fff;
+    }
+  }
+
+  &.m0 {
+    margin: 0;
+  }
+
   li {
     padding: 0 5px;
   }
@@ -1937,7 +1975,8 @@ p{
 .journey-cost {
   display: inline-block;
   vertical-align: top;
-    margin-top: -11px;
+  margin-top: -11px;
+
   span {
     font-size: 15px;
   }
@@ -1963,22 +2002,25 @@ p{
   }
 }
 
-.pt-60{
-  padding-top:60px;
+.pt-60 {
+  padding-top: 60px;
 }
 
 .journey-collection {
   min-height: 20px;
+
   li {
     padding: 0 10px;
     line-height: 12px;
+
     &:first-child {
       padding: 0 10px 0 0;
     }
   }
-  li + li{
-      border-left: 1px solid #fff;
-}
+
+  li + li {
+    border-left: 1px solid #fff;
+  }
 }
 
 .social-field-types {
@@ -1986,7 +2028,7 @@ p{
 }
 
 .user-social-item {
-  padding: 12px 0 12px;
+  padding: 12px 0;
   border-bottom: 1px solid #b5b5b5;
 
   li {
@@ -2177,6 +2219,7 @@ p{
 .travel-journey-heading {
   padding: 10px;
   color: $brand-light-grey;
+
   p {
     padding-bottom: 5px;
     margin: 0;
@@ -2367,7 +2410,11 @@ p{
     padding: 10px;
     position: relative;
     font-size: 15px;
-    p {padding-right: 60px; }
+
+    p {
+      padding-right: 60px;
+    }
+
     .location {
       @include position(absolute, 10px 10px null null);
     }
@@ -2618,12 +2665,10 @@ p{
   }
 }
 // travel moment imgholder
-
 // .moment-travel-main {
 //   .moment-travel-view:nth-child(5n+1) {
 //     margin: 15px 22px 15px 0;
 //   }
-
 //   .moment-travel-view:nth-child(5n+5) {
 //     margin: 15px 0 15px 22px;
 //   }
@@ -2667,6 +2712,7 @@ p{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
     span {
       font-size: 13px;
     }
@@ -2674,12 +2720,10 @@ p{
 }
 // travel moment imgholder end
 // local moment imgholder
-
 // .moment-local-main {
 //   .moment-local-view:nth-child(5n+1) {
 //     margin: 15px 22px 15px 0;
 //   }
-
 //   .moment-local-view:nth-child(5n+5) {
 //     margin: 15px 0 15px 22px;
 //   }
@@ -2711,6 +2755,7 @@ p{
 .review-travel-view {
   margin-top: 20px;
 }
+
 .review-all-life + .review-all-life {
   border-top: 1px solid $brand-lighter-grey;
 }
@@ -2718,7 +2763,6 @@ p{
 .review-all-life {
   padding: 15px 10px 25px;
   // border-bottom: 1px solid $brand-lighter-grey;
-
   .place-name {
     font-size: 22px;
   }
@@ -2777,7 +2821,6 @@ p{
   // &:nth-child(4n+4) {
   //   margin-right: 0;
   // }
-
   .review-backimgholder {
     @include square(120px);
     @include position(absolute, 10px 20px null null);
@@ -2795,6 +2838,7 @@ p{
 
 .city-accordion {
   margin-top: 10px;
+
   .panel-title a {
     padding: 10px 30px;
     display: block;
@@ -3802,17 +3846,19 @@ p{
 }
 
 .activity-container {
-    padding: 30px 0 0;
+  padding: 30px 0 0;
+
   h3.heading-activity {
     font-size: 32px;
-}
+  }
 }
 
 .activity-post-main {
-  margin: 10px 0px 20px;
+  margin: 10px 0 20px;
   border: 1px solid #ccc;
   border-radius: 6px;
-    background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
+
   li {
     display: inline-block;
   }
@@ -3838,20 +3884,20 @@ p{
 }
 
 .user-pic {
-    margin-top: -30px;
-    margin-right: 15px;
-    display: inline-block;
-    width: 65px;
-    height: 70px;
-    overflow: hidden;
-    border: 2px solid #ddd;
-    border-radius: 28%;
+  margin-top: -30px;
+  margin-right: 15px;
+  display: inline-block;
+  width: 65px;
+  height: 70px;
+  overflow: hidden;
+  border: 2px solid #ddd;
+  border-radius: 28%;
 
   img {
     max-height: 100%;
     border-radius: 20px;
     padding: 0;
-     border-radius: 25%;
+    border-radius: 25%;
   }
 }
 
@@ -3860,12 +3906,14 @@ p{
   // border-top: 1px solid #b5b5b5;
   margin-top: 10px;
   color: #424242;
-  p{
-    margin:0;
+
+  p {
+    margin: 0;
   }
-  a{
-      color: #232c49;
-}
+
+  a {
+    color: #232c49;
+  }
 }
 
 .post-icon {
@@ -3890,14 +3938,14 @@ p{
 }
 
 .tag-ongo-journey {
-    padding: 4px 10px 2px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    position: absolute;
-    top: 20px;
-    right: 0;
-    background-color: #ff6759;
-    z-index: 1;
+  padding: 4px 10px 2px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  position: absolute;
+  top: 20px;
+  right: 0;
+  background-color: #ff6759;
+  z-index: 1;
 }
 
 .flag-section {
@@ -3954,13 +4002,15 @@ p{
   border: 1px solid #ccc;
   border-radius: 6px;
   margin: 10px;
+
   .popular-main {
     ul {
-        border-bottom-left-radius: 6px;
-        border-bottom-right-radius: 6px;
-        background-color: rgba(255, 255, 255, 0.8);
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      background-color: rgba(255, 255, 255, 0.8);
     }
   }
+
   .heading-popular {
     padding: 15px;
     border-top-left-radius: 6px;
@@ -3969,22 +4019,25 @@ p{
     color: #8a8a8a;
   }
 
-  li + li{
+  li + li {
     .view-list-popular {
-    border-top: 3px solid #e5e5e5;
+      border-top: 3px solid #e5e5e5;
     }
   }
 }
+
 .view-list-popular {
   padding: 10px;
   // border-bottom: 3px solid #e5e5e5;
   position: relative;
+
   .pic-imgholder {
     width: 55px;
     border-radius: 15px;
     overflow: hidden;
     vertical-align: middle;
   }
+
   .list-user-detail {
     margin: 0 20px 0 10px;
     vertical-align: middle;
@@ -3992,51 +4045,57 @@ p{
     top: 0;
     width: 100%;
     padding: 18px 40px 3px 65px;
+
     h4 {
-    margin: 3px 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-        font-size: 16px;
-     @extend .avenir-heavy
+      margin: 3px 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 16px;
+      @extend .avenir-heavy
     }
   }
 
   .btn-follow {
     display: inline-block;
     vertical-align: middle;
-    padding: 0px 0;
+    padding: 0;
     margin-top: -3px;
     position: relative;
     z-index: 2;
-    a{
+
+    a {
       @extend .avenir-heavy;
     }
   }
 }
-.follow-or-following{
-  span{
+
+.follow-or-following {
+  span {
     font-size: 13px;
     @extend .avenir-heavy;
   }
 }
 // traveller post end
 //taught
-.travel-taught{
-    .location {
+
+.travel-taught {
+  .location {
     background-color: $brand-pink;
   }
-    .activity-local-icon {
+
+  .activity-local-icon {
     display: none;
   }
 
-.tag-ongo-journey {
+  .tag-ongo-journey {
     top: -5px;
-}
-.user-social-item {
+  }
+
+  .user-social-item {
     margin-top: 10px;
     border-top: 1px solid #b5b5b5;
-}
+  }
 }
 // get class by post like travel local life and editor
 
@@ -4063,44 +4122,55 @@ p{
     display: none;
   }
 }
-.local-life-taught{
-.location {
+
+.local-life-taught {
+  .location {
     background-color: $brand-cyan !important;
   }
-    .tag-ongo-journey {
+
+  .tag-ongo-journey {
     background-color: $brand-cyan;
-    span{
+
+    span {
       @extend .avenir-heavy;
     }
   }
-    .location {
+
+  .location {
     background-color: $brand-pink;
   }
+
   .activity-travel-icon {
-    display: none;
-}
-    .activity-local-icon {
     display: none;
   }
 
-.tag-ongo-journey {
+  .activity-local-icon {
+    display: none;
+  }
+
+  .tag-ongo-journey {
     top: -5px;
-}
-.user-social-item {
-  margin-top: 10px;
+  }
+
+  .user-social-item {
+    margin-top: 10px;
     border-top: 1px solid #b5b5b5;
+  }
 }
-}
+
 .local-life {
   .tag-ongo-journey {
     background-color: $brand-cyan;
-    span{
+
+    span {
       @extend .avenir-heavy;
     }
   }
-.days-spent {
+
+  .days-spent {
     bottom: 26px;
-}
+  }
+
   .activity-travel-icon {
     display: none;
   }
@@ -4123,63 +4193,81 @@ p{
     display: none;
   }
 }
-.user-detail-itinerary,.user-quick-itinerary,.travel-taught,.local-life-taught{
+
+.local-life-taught,
+.travel-taught,
+.user-detail-itinerary,
+.user-quick-itinerary {
   .if-white {
     display: none;
+  }
 }
-}
-.user-detail-itinerary{
+
+.user-detail-itinerary {
   .activity-local-icon {
     display: none;
-}
+  }
+
   .flag-section {
     right: 5px;
     left: initial;
-}
-.days-spent {
+  }
+
+  .days-spent {
     bottom: 25px;
+  }
 }
-}
+
 .user-quick-itinerary {
-    .activity-local-icon {
+  .activity-local-icon {
     display: none;
-}
-.days-spent {
-      top: -285px;
-}
-.quick-itinerary-tag {
+  }
+
+  .days-spent {
+    top: -285px;
+  }
+
+  .quick-itinerary-tag {
     position: absolute;
     right: 10px;
     bottom: 2px;
     background: #ff6759;
     padding: 7px 15px;
     border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
- h4 {
-    margin: 0;
-    padding: 0;
-}
- p {
-    margin: 0;
-}
-}
-.date-quick-itinerary {
+    border-top-right-radius: 5px;
+
+    h4 {
+      margin: 0;
+      padding: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .date-quick-itinerary {
     position: absolute;
     right: 110px;
     bottom: 12px;
+  }
 }
-}
-.editor,.editor-blog {
+
+.editor,
+.editor-blog {
   .follow-or-following span {
     color: #fff;
-}
+  }
+
   .editor-logo {
-  border:none;
-}
+    border: none;
+  }
+
   .flag-section {
     right: 5px;
     left: initial;
-}
+  }
+
   .activity-post-main {
     background-color: $brand-dark-blue;
   }
@@ -4196,19 +4284,22 @@ p{
     color: #fff;
   }
 
-.post-your-status {
-  padding: 8px 5px 0;
-  border-top: 1px solid #b5b5b5;
-  margin-top: 10px;
-  color: #727272;
-  p {
-    margin: 0px 0 0;
-    color:#fff;
-}
-a{
+  .post-your-status {
+    padding: 8px 5px 0;
+    border-top: 1px solid #b5b5b5;
+    margin-top: 10px;
+    color: #727272;
+
+    p {
+      margin: 0;
+      color: #fff;
+    }
+
+    a {
       color: #232c49;
-}
-}
+    }
+  }
+
   .social-likes-reviews {
     span {
       color: #fff;
@@ -4232,20 +4323,23 @@ a{
   }
 }
 
-.editor-blog{
-  .journey-tag-holder h3{
+.editor-blog {
+  .journey-tag-holder h3 {
     font-size: 18px;
-}
-.journey-tag-holder {
+  }
+
+  .journey-tag-holder {
     min-height: 55px;
-}
-.tag-ongo-journey{
-     background-color: $brand-dark-blue;
-     span{
-       color: #fff;
-       @extend .avenir-heavy;
-     }
-}
+  }
+
+  .tag-ongo-journey {
+    background-color: $brand-dark-blue;
+
+    span {
+      color: #fff;
+      @extend .avenir-heavy;
+    }
+  }
 }
 // visit-post
 
@@ -4409,14 +4503,17 @@ a{
   // background: url('../img/ongo-strip.png') no-repeat;
   background-color: rgba(0,0,0,0.7);
   background-size: 100% 100%;
+
   &.get-otgstrip {
     top: 60px;
     @include transition(all 200ms linear);
   }
+
   &.remove-otgstrip {
     top: 0;
     @include transition(all 200ms linear);
   }
+
   .btn-summary,
   .own-journey,
   .trip-list {
@@ -4441,7 +4538,10 @@ a{
         border-right: none;
       }
     }
-    a { cursor: default; }
+
+    a {
+      cursor: default;
+    }
   }
 
   .trip-info {
@@ -4654,20 +4754,28 @@ a{
   // box-shadow: 1px 4px 5px #ccc;
   box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.19);
   background-color: rgba(255,255,255,0.90);
+
   .user-social-item {
-   padding: 8px 2px ;
+    padding: 8px 2px;
     border-top: 1px solid #b5b5b5;
     border-bottom: 1px solid #b5b5b5;
   }
+
   .journey-rate {
     margin-bottom: 5px;
     color: #424242;
     font-size: 12px;
-    i { margin-right: 3px; }
+
+    i {
+      margin-right: 3px;
+    }
   }
 }
 
-.non-rated-star i:first-child { margin-left: -3px; }
+.non-rated-star i:first-child {
+  margin-left: -3px;
+}
+
 .only-post {
   .user-social-item {
     border-top: 1px solid #bababa;
@@ -4712,7 +4820,10 @@ a{
 .journey-date {
   color: #a0a0a0;
   font-size: 12px;
-  .day-journey { color: #424242; }
+
+  .day-journey {
+    color: #424242;
+  }
 }
 
 .options {
@@ -4964,26 +5075,38 @@ a{
 
 .video-ongo-journey {
   position: relative;
+
   &:after {
     content: '';
     @include square(100%);
     @include position(absolute, 0 0 0 0);
     background-color: rgba(0, 0, 0, 0.4);
   }
+
   .youtube-icon {
     z-index: 1;
   }
 }
+
 .remove-playbtn {
-  &:after { display: none; }
-  .youtube-icon { display: none; }
+  &:after {
+    display: none;
+  }
+
+  .youtube-icon {
+    display: none;
+  }
 }
 // join card
 
 .ongo-journey-join {
   width: 350px;
   margin: 30px auto;
-  .join-relate { z-index: 1; }
+
+  .join-relate {
+    z-index: 1;
+  }
+
   .join-card {
     padding: 10px;
     border-radius: 6px;
@@ -4991,6 +5114,7 @@ a{
     background-color: $brand-pink;
     @include transform(rotate(-2deg));
   }
+
   p {
     margin: 15px 0;
     text-shadow: 2px 2px 2px #020202;
@@ -5086,6 +5210,7 @@ a{
 .ongo-journey-left {
   width: 350px;
   margin: 30px auto;
+
   .journey-pic-imgholder {
     width: 80px;
     height: 85px;
@@ -5093,6 +5218,7 @@ a{
     margin: 0 auto -10px;
     box-shadow: none;
   }
+
   .journey-left {
     padding: 15px 10px;
     border-radius: 6px;
@@ -5106,6 +5232,7 @@ a{
       @extend .avenir-light;
       text-shadow: 2px 2px 2px #020202;
     }
+
     p {
       font-size: 12px;
       text-shadow: 2px 2px 2px #020202;
@@ -5115,7 +5242,7 @@ a{
   .left-tag {
     position: absolute;
     left: 80px;
-    bottom: 0px;
+    bottom: 0;
   }
 }
 // left card end
@@ -5152,11 +5279,14 @@ a{
   margin: 0 auto;
 
   .journey-end {
-    padding: 10px 10px;
+    padding: 10px;
     border-radius: 6px;
     // background-color: rgba(242, 103, 91, 0.75);
     background-color: $brand-pink;
-    p { text-shadow: 2px 2px 2px #020202; }
+
+    p {
+      text-shadow: 2px 2px 2px #020202;
+    }
   }
 
   h4 {
@@ -5192,6 +5322,7 @@ a{
   .journey-start {
     background: url('../img/ongojourney/bg-start-white.png') no-repeat 50% 50%;
     background-size: contain;
+
     h4 {
       margin: 25px 0 20px;
       font-size: 20px;
@@ -5232,10 +5363,12 @@ a{
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     background-color: $brand-pink;
+
     h4 {
       margin: 0;
       font-size: 16px;
     }
+
     p {
       margin-top: 2px;
       font-size: 10px;
@@ -5315,6 +5448,7 @@ a{
   .travelling-journey-type {
     padding: 10px 10px 0;
     background-color: rgba(255,255,255,0.90);
+
     li {
       margin-right: 10px;
       display: inline-block;
@@ -5325,6 +5459,7 @@ a{
     position: absolute;
     right: 0;
     bottom: 3px;
+
     .img-buddies {
       width: 40px;
       height: 42px;
@@ -5346,6 +5481,7 @@ a{
     background-color: rgba(255,255,255,0.9);
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
+
     p {
       color: #424242;
     }
@@ -5498,12 +5634,14 @@ a{
   display: inline-block;
   position: relative;
   margin: 0 5px;
+
   ::-webkit-inner-spin-button,
- ::-webkit-outer-spin-button {
-   -webkit-appearance: none;
-   margin: 0;
- }
- -moz-appearance:textfield;
+  ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  -moz-appearance: textfield;
+
   &:after,
   &:before {
     content: '';
@@ -5541,6 +5679,7 @@ a{
   left: 0;
   // background-color: rgba(0,0,0,0.7);
   background-color: #fff;
+
   ul {
     max-height: 120px;
     overflow-y: auto;
@@ -5593,14 +5732,22 @@ a{
       padding: 12px;
       border: none;
       border-radius: 0;
+
       &.active {
         background-color: $brand-pink;
-        span { color: #fff; }
+
+        span {
+          color: #fff;
+        }
       }
     }
+
     .btn-info {
       @extend .btn-default;
-      span { color: #333; }
+
+      span {
+        color: #333;
+      }
     }
 
     th {
@@ -5796,13 +5943,14 @@ a{
 
 .tagfriend-list {
   width: 100%;
-  border-radius: 0px 0px 6px 6px;
+  border-radius: 0 0 6px 6px;
   box-shadow: 1px 2px 3px #272727;
   position: absolute;
   top: 64px;
   left: 0;
   z-index: 3;
   overflow: hidden;
+
   ::-webkit-scrollbar {
     width: 5px;
   }
@@ -5819,6 +5967,7 @@ a{
     max-height: 250px;
     overflow-y: auto;
   }
+
   li {
     background-color: #fff;
     padding: 5px 15px;
@@ -5826,7 +5975,10 @@ a{
     //   background-color: #e7e7e7;
     // }
   }
-  a { font-size: 14px; }
+
+  a {
+    font-size: 14px;
+  }
 }
 
 .friend-listholder {
@@ -5838,6 +5990,7 @@ a{
     display: inline-block;
     overflow: hidden;
     vertical-align: middle;
+
     img {
       min-height: 100%;
     }
@@ -6024,7 +6177,7 @@ a{
 .dropdown-otg-category,
 .search-otg-location {
   width: 100%;
-  border-radius: 0px 0px 6px 6px;
+  border-radius: 0 0 6px 6px;
   box-shadow: 1px 2px 3px #272727;
   position: absolute;
   top: 65px;
@@ -6032,19 +6185,24 @@ a{
   z-index: 11;
   background-color: #fff;
   overflow: hidden;
+
   ::-webkit-scrollbar {
     width: 5px;
   }
+
   ::-webkit-scrollbar-thumb {
     background-color: $brand-pink;
   }
+
   ::-webkit-scrollbar-track {
     background-color: transparent;
   }
+
   ul {
     max-height: 250px;
     overflow-y: auto;
   }
+
   li {
     padding: 5px 15px;
     background-color: #fff;
@@ -6066,26 +6224,38 @@ a{
   min-height: 63px;
   padding: 10px 10px 0;
   position: relative;
+
   img.icon-tag {
     position: absolute;
   }
 }
+
 .tagged-buddy-images {
-  ::-webkit-scrollbar { height: 0px; }
-  ::-webkit-scrollbar-thumb { background-color: #000; }
-  ::-webkit-scrollbar-track { background-color: #ccc; }
+  ::-webkit-scrollbar {
+    height: 0;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #000;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #ccc;
+  }
 }
+
 .buddy-tagged-view {
   width: 259px;
   overflow-x: auto;
   overflow-y: hidden;
 }
+
 .buddy-viewholder {
   width: 25px;
   height: 24px;
   border: 1px solid #fff;
   border-radius: 9px;
-  margin: 5px 5px 0px 0;
+  margin: 5px 5px 0 0;
   display: inline-block;
   overflow: hidden;
 }
@@ -6126,9 +6296,19 @@ a{
 
 .otg-thought {
   padding-left: 30px;
-  ::-webkit-scrollbar { width: 2px; }
-  ::-webkit-scrollbar-thumb { background-color: #fff; }
-  ::-webkit-scrollbar-track { background-color: $brand-pink; }
+
+  ::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #fff;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: $brand-pink;
+  }
+
   textarea {
     height: 43px;
     padding: 3px 6px;
@@ -6138,11 +6318,16 @@ a{
     background-color: transparent;
     font-family: "AvenirLTStd-Medium";
     font-size: 15px;
+
     &:focus {
       height: 100px;
-      + .thoughtCount { display: block; }
+
+      + .thoughtCount {
+        display: block;
+      }
     }
   }
+
   .thoughtCount {
     font-size: 12px;
     text-align: right;
@@ -6204,16 +6389,26 @@ a{
   left: 0;
   background-color: rgba(0,0,0,0.6);
   @include transition(all 300ms linear);
+
   .edit-otg-caption {
-    ::-webkit-scrollbar { width: 2px; }
-    ::-webkit-scrollbar-thumb { background-color: $brand-pink; }
-    ::-webkit-scrollbar-track { background-color: $brand-pink; }
+    ::-webkit-scrollbar {
+      width: 2px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: $brand-pink;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: $brand-pink;
+    }
   }
+
   textarea {
     width: 100%;
     height: 90px;
     overflow-y: auto;
-    overflow-x : hidden;
+    overflow-x: hidden;
     border: none;
     margin-top: 15px;
     background-color: transparent;
@@ -6224,8 +6419,12 @@ a{
       color: #fff;
     };
   }
-  i.fa-angle-down { font-size: 36px; }
+
+  i.fa-angle-down {
+    font-size: 36px;
+  }
 }
+
 .video-otg-caption {
   textarea {
     height: 85%;
@@ -6317,7 +6516,9 @@ a{
   bottom: 30px;
   right: 15px;
 }
-.add-more-pic, .add-more-vid {
+
+.add-more-pic,
+.add-more-vid {
   @include square(25px);
   border-radius: 100%;
   overflow: hidden;
@@ -6325,10 +6526,14 @@ a{
   top: 0;
   left: 0;
   opacity: 0;
+
   .create-btn {
     padding: 0;
   }
-  input { @include square(25px); }
+
+  input {
+    @include square(25px);
+  }
 }
 
 .putmore-photo-video {
@@ -6359,20 +6564,29 @@ a{
 }
 // video edit end
 // tagged buddy on add photo video
-.tag-selected-buddy { margin-top: 20px; }
+
+.tag-selected-buddy {
+  margin-top: 20px;
+}
+
 .select-buddy {
   margin-right: 20px;
+
   h5 {
     font-size: 12px;
     text-align: center;
   }
+
   &.active {
     .checked-friend {
-      &:before { background-color: rgba(255,255,255,0.5); }
+      &:before {
+        background-color: rgba(255,255,255,0.5);
+      }
       color: $brand-pink;
     }
   }
 }
+
 .tagging-buddy-holder {
   width: 42px;
   height: 44px;
@@ -6381,6 +6595,7 @@ a{
   position: relative;
   overflow: hidden;
 }
+
 .checked-friend {
   @include square(100%);
   position: absolute;
@@ -6389,12 +6604,14 @@ a{
   line-height: 44px;
   text-align: center;
   color: #fff;
+
   &:before {
     content: '';
     @include square(100%);
     @include position(absolute,0);
     background-color: rgba(0,0,0,0.5);
   }
+
   i {
     position: relative;
     font-size: 22px;
@@ -6411,7 +6628,8 @@ a{
 .otg-upload-btn {
   margin: 15px 0 0;
 
-  upload-image-otg, upload-image {
+  upload-image,
+  upload-image-otg {
     width: 100%;
     position: absolute;
     top: 0;
@@ -6434,13 +6652,16 @@ a{
 // add new otg photo video end
 // pop up journey used end
 // comment pop up and focus
-  .highlighted-post {
-    position: relative;
-    z-index: 6;
-    + .close-comment-backdrop {
-        display: block;
-      }
+
+.highlighted-post {
+  position: relative;
+  z-index: 6;
+
+  + .close-comment-backdrop {
+    display: block;
   }
+}
+
 .close-comment-backdrop {
   @include square(100%);
   @include position(fixed, 0);
@@ -6449,6 +6670,73 @@ a{
   display: none;
 }
 // comment pop up and focus end
+//LIKE SIDE  TAB
+.like-side-sec {
+  width: 400px;
+  height: 100%;
+  padding: 25px 25px 0;
+  position: fixed;
+  top: 60px;
+  right: -400px;
+  background-color: #fff;
+  @extend .avenir-roman;
+}
+
+.show-like-side-sec{
+  right:0;
+  z-index: 5;
+  @include transition(all 300ms linear);
+}
+
+.like-section {
+  li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ebebeb;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.like-notify-buddy {}
+
+.like-buddy-pic {
+  display: inline-block;
+  width: 50px;
+  height: 50%;
+  overflow: hidden;
+  border-radius: 19px;
+  border: 2px solid #fff;
+  vertical-align: middle;
+}
+
+.like-buddy-name {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.like-buddy-user {
+  margin: 0;
+  font-size: 14px;
+  color: $brand-blue;
+  @extend .avenir-heavy;
+}
+
+.like-buddy-attag {
+  margin: 0;
+  font-size: 12px;
+  color: #a0a0a0;
+}
+
+.like-buddy-follow-btn {
+  display: inline-block;
+  padding: 7px 0;
+
+  .following-btn {
+    box-shadow: 2px 3px 3px #a0a0a0;
+  }
+}
+//LIKE SIDE  TAB END
 // on go journey end
 // trip summary
 
@@ -6536,7 +6824,7 @@ a{
   // overflow: hidden;
   .day {
     width: 12%;
-   min-height: 138px;
+    min-height: 138px;
     padding: 23px 0;
     margin-left: 15px;
     display: inline-block;
@@ -6641,7 +6929,8 @@ a{
 
 .quick-itinerary-page {
   padding: 0 15px;
-  .form-control{
+
+  .form-control {
     background: transparent;
   }
 }
@@ -6655,14 +6944,14 @@ a{
   margin-bottom: 15px;
 }
 
-.add-city-quick{
+.add-city-quick {
   color: $brand-light-grey;
   font-size: 12px;
   font-style: italic;
   @extend .avenir-roman;
 }
 
-.add-country-quick{
+.add-country-quick {
   @extend .add-city-quick;
   margin-top: 5px;
   display: block;
@@ -6997,22 +7286,23 @@ a{
   }
 
   .ui-select-choices-row {
-   padding: 5px 20px;
-   border-bottom: 1px solid $brand-lighter-grey;
+    padding: 5px 20px;
+    border-bottom: 1px solid $brand-lighter-grey;
 
-   &:hover {
-     background-color: #fff;
-     color: $brand-light-grey;
+    &:hover {
+      background-color: #fff;
+      color: $brand-light-grey;
 
-     .ui-select-choices-row-inner {
-       background-color: #fff;
-       color: $brand-light-grey;
-     }
-   }
-   &:last-child {
-     border: none;
-   }
- }
+      .ui-select-choices-row-inner {
+        background-color: #fff;
+        color: $brand-light-grey;
+      }
+    }
+
+    &:last-child {
+      border: none;
+    }
+  }
 
   .ui-select-choices-row.active > span {
     background-color: #fff;
@@ -7069,6 +7359,7 @@ a{
     border: 1px solid $brand-dark-blue;
     background-color: transparent;
   }
+
   .tinymce-style1 {
     .mce-panel {
       padding: 5px 15px;
@@ -7268,6 +7559,7 @@ a{
   position: absolute;
   bottom: 0;
   text-align: center;
+
   span {
     color: #fff;
     background: none;
@@ -7297,7 +7589,7 @@ a{
       width: 86px;
     }
 
-    .detail-date{
+    .detail-date {
       font-size: 12px;
     }
   }
@@ -7325,7 +7617,8 @@ a{
 
 .detail-itinerary-page {
   padding: 0 20px;
-  .form-control{
+
+  .form-control {
     background-color: transparent;
   }
 }
@@ -7519,6 +7812,7 @@ a{
     input {
       width: 120px;
       background: transparent;
+
       &:focus + label {
         display: none;
       }
@@ -7720,6 +8014,7 @@ a{
     .uib-daypicker:focus {
       outline: none;
     }
+
     .uib-daypicker {
       thead {
         tr:first-child {
@@ -7729,6 +8024,7 @@ a{
           }
         }
       }
+
       th {
         @extend .avenir-roman;
         height: 40px;
@@ -7737,6 +8033,7 @@ a{
         color: $brand-light-grey;
       }
     }
+
     .uib-datepicker {
       .btn-default {
         border: none;
@@ -7756,8 +8053,12 @@ a{
     .uib-left {
       border-radius: 0;
       padding: 10px 0;
+
       i {
-        &:hover:before { color : $brand-pink; }
+        &:hover:before {
+          color: $brand-pink;
+        }
+
         &:before {
           content: "\f053";
           color: $brand-light-grey;
@@ -7774,9 +8075,13 @@ a{
 
     .uib-right {
       border-radius: 0;
-        padding: 10px 0;
+      padding: 10px 0;
+
       i {
-        &:hover:before { color : $brand-pink; }
+        &:hover:before {
+          color: $brand-pink;
+        }
+
         &:before {
           content: "\f054";
           color: $brand-light-grey;
@@ -7956,13 +8261,16 @@ a{
   ::-webkit-scrollbar-thumb {
     background-color: $brand-pink;
   }
+
   .ui-select-dropdown {
     border: none;
+
     li {
       border: none;
     }
   }
 }
+
 .detail-select-box .ui-select-choices-row > span {
   color: #a0a0a0;
   border-bottom: 1px solid #ebebeb;
@@ -7976,15 +8284,18 @@ a{
   .travelwith-namestyle {
     display: inline-block;
     vertical-align: top;
+
     .travel-with-name {
       color: #424242;
     }
   }
+
   .at-tag-travelselect {
     display: block;
     font-size: 12px;
     color: #afafaf;
   }
+
   .round-travelledimg {
     border-radius: 11px;
   }
@@ -8003,9 +8314,13 @@ a{
 
   .ui-select-dropdown {
     border: none;
+
     li {
       border-bottom: 1px solid #ebebeb;
-      &:first-child { border: none; }
+
+      &:first-child {
+        border: none;
+      }
     }
   }
 
@@ -8013,6 +8328,7 @@ a{
     color: #a0a0a0;
     // border-bottom: 1px solid #ebebeb;
     border: none;
+
     &:hover {
       color: #a0a0a0;
     }
@@ -8038,6 +8354,7 @@ a{
     }
   }
 }
+
 .travelled-withselect {
   .ui-select-multiple > div:first-child {
     width: 100%;
@@ -8052,23 +8369,24 @@ a{
     width: 2px;
     height: 4px;
   }
+
   ::-webkit-scrollbar-thumb {
     background-color: #ff6759;
   }
+
   ::-webkit-scrollbar-track {
     background-color: #fff;
   }
 }
 
-.travelled-withselect .ui-select-multiple.ui-select-bootstrap .ui-select-match .close{
+.travelled-withselect .ui-select-multiple.ui-select-bootstrap .ui-select-match .close {
   line-height: 1 !important;
-  color: $brand-blue
+  color: $brand-blue;
 }
 
-.travelled-withselect .ui-select-multiple.ui-select-bootstrap .btn-default{
+.travelled-withselect .ui-select-multiple.ui-select-bootstrap .btn-default {
   color: $brand-blue !important;
 }
-
 //sagar css end
 // detail itinerary detail end
 // editor itinerary
@@ -8336,31 +8654,38 @@ a{
     }
   }
 }
-.city-accordion-back{
-.journey-accordion-heading {
-  height: 67px;
-   @include transition(all 300ms linear);
-}
-.panel-title a {
+
+.city-accordion-back {
+  .journey-accordion-heading {
+    height: 67px;
+    @include transition(all 300ms linear);
+  }
+
+  .panel-title a {
     display: block;
     padding: 0;
+
     a.journey-head {
-    padding: 25px 20px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    @include transition(all 300ms linear);
-}
-}
-&.panel-open{ .panel-title a {
-    padding: 0;
+      padding: 25px 20px;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      @include transition(all 300ms linear);
+    }
+  }
+
+  &.panel-open {
+    .panel-title a {
+      padding: 0;
+
       .journey-accordion-heading {
-    height: 300px;
+        height: 300px;
+      }
+    }
+  }
 }
-}
-}
-}
+
 .overlay-itinerary-bg {
   @include position(absolute, 0);
   background-color: rgba(0, 0, 0, 0.5);
@@ -8468,11 +8793,11 @@ a{
 
   .heading-gallery-name {
     font-size: 18px;
-  padding: 10px;
-  margin: 0;
-  border-radius: 10px 10px 0 0;
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.95);
+    padding: 10px;
+    margin: 0;
+    border-radius: 10px 10px 0 0;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.95);
   }
 
   .masonry-main {
@@ -8609,6 +8934,7 @@ a{
     }
   }
 }
+
 .quick-input-city {
   .ui-select-multiple {
     input[type="search"] {
@@ -8616,6 +8942,7 @@ a{
     }
   }
 }
+
 .view-itinerary-descp {
   padding: 25px;
 
@@ -8642,7 +8969,7 @@ a{
 // user itinerary end
 // user detail itinerary
 
-.bg-white-95{
+.bg-white-95 {
   background-color: rgba(255,255,255,0.95);
 }
 
@@ -8650,6 +8977,7 @@ a{
   .trip-status-main {
     right: 15px;
   }
+
   .publish-notification-strip {
     padding: 10px;
     position: absolute;
@@ -8671,12 +8999,15 @@ a{
       margin: 0 10px;
     }
   }
+
   .journey-start-end {
     margin: 12px 0;
+
     p {
       font-size: 15px;
     }
   }
+
   .listing-accordion .user-trip-descp {
     width: auto;
     margin-right: 5px;
@@ -8719,13 +9050,14 @@ a{
     font-size: 13px;
   }
 }
+
 .edit-publish-userdetail {
   position: absolute;
   right: 20px;
   bottom: 30px;
 }
 
-.photo-open-backdrop{
+.photo-open-backdrop {
   position: absolute;
   top: 0;
   right: 0;
@@ -8735,7 +9067,8 @@ a{
   z-index: 5;
   display: none;
 }
-.showphoto-backdrop{
+
+.showphoto-backdrop {
   display: block;
 }
 // user detail itinerary end
@@ -8895,6 +9228,7 @@ a{
     .like-button-icon {
       font-size: 22px;
     }
+
     li {
       &:first-child {
         padding: 0 15px 0 5px;
@@ -8903,20 +9237,25 @@ a{
       vertical-align: top;
     }
   }
+
   .view-comment-list {
     margin-bottom: 20px;
   }
+
   .share-option-main {
     padding-bottom: 15px;
     border-bottom: 1px solid #ccc;
   }
+
   .like-review-main {
     padding: 15px 0;
     border-bottom: 1px solid #ccc;
   }
+
   .like-review-holder {
     margin-top: 7px;
   }
+
   .like-holder,
   .review-holder {
     margin-right: 30px;
@@ -8995,6 +9334,7 @@ a{
   .visit-post {
     margin: 0;
   }
+
   .view-other-profile {
     border-radius: 6px;
     border: 1px solid #ccc;
@@ -9037,6 +9377,7 @@ a{
   }
 }
 // profile list (follow following countryVisited BucketList)
+
 .white-full {
   min-height: 100vh;
   height: 100%;
@@ -9107,27 +9448,40 @@ a{
     color: #979ba7;
   }
 }
+
 .dropdown-follow-followers {
   width: 100%;
-  border-radius: 0px 0px 6px 6px;
+  border-radius: 0 0 6px 6px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   position: absolute;
   top: 40px;
   left: 0;
   background-color: #fff;
   overflow: hidden;
-  ::-webkit-scrollbar { width: 2px; }
-  ::-webkit-scrollbar-thumb { background-color: $brand-pink; }
-  ::-webkit-scrollbar-track { background-color: #fff; }
+
+  ::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $brand-pink;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+
   ul {
     max-height: 200px;
     overflow-x: hidden;
     overflow-y: auto;
   }
+
   li {
     padding: 5px 10px;
     border-bottom: 1px solid #ebebeb;
   }
+
   .profile-picholder {
     width: 25px;
     height: 27px;
@@ -9137,9 +9491,19 @@ a{
     display: inline-block;
     overflow: hidden;
   }
-  .profile-detailed { display: inline-block; }
-  .profile-name { font-size: 14px; }
-  .profile-tag { font-size: 12px; }
+
+  .profile-detailed {
+    display: inline-block;
+  }
+
+  .profile-name {
+    font-size: 14px;
+  }
+
+  .profile-tag {
+    font-size: 12px;
+  }
+
   .following-btn {
     margin-top: 2px;
     box-shadow: 2px 3px 3px #a0a0a0;
@@ -9272,6 +9636,7 @@ a{
       color: #fff;
       font-size: 20px;
       text-shadow: 2px 2px 2px #000;
+
       span {
         font-size: 14px;
       }
@@ -9448,6 +9813,7 @@ a{
   top: -20px;
   right: 10px;
 }
+
 .notify-popup {
   .modal-dialog {
     width: 100%;
@@ -9471,15 +9837,18 @@ a{
     height: 550px;
     position: relative;
     overflow: hidden;
+
     .blurnotify-imgholder {
       width: 100%;
       @include filter(blur(10px));
       @extend .get-center;
+
       img {
         width: 100%;
         height: auto;
       }
     }
+
     img {
       height: 100%;
       width: auto;
@@ -9562,12 +9931,19 @@ a{
     padding-top: 20px;
     border-top: 1px solid #ccc;
     margin-top: 10px;
+
     ::-webkit-scrollbar {
       width: 4px;
       border-radius: 8px;
     }
-    ::-webkit-scrollbar-track { background-color: transparent; }
-    ::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,0.5); }
+
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: rgba(0,0,0,0.5);
+    }
 
     .view-comment-list {
       margin-bottom: 20px;
@@ -9634,6 +10010,7 @@ a{
       font-size: 13px;
     }
   }
+
   .listing-comment {
     height: calc(100vh - 226px);
     overflow-x: hidden;
@@ -9642,19 +10019,22 @@ a{
   // dropdown comment otg
   .dropdown-hashtag {
     max-height: 150px;
-    border-radius: 0px 0px 6px 6px;
-    box-shadow: 0px 2px 7px #a0a0a0;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 2px 7px #a0a0a0;
     position: absolute;
     background-color: #fff;
+
     li {
       padding: 5px 10px;
       border-bottom: 1px solid #ebebeb;
     }
-    a { color: #a0a0a0; }
+
+    a {
+      color: #a0a0a0;
+    }
   }
   // dropdown comment otg end
 }
-
 // Notify end
 @import "sohan.scss";
 @import "fancybox-override";
@@ -9710,7 +10090,6 @@ a{
 ng-map {
   height: 1000px;
 }
-
 // .like-animate {
 //   @include animation(heartbubble 300ms cubic-bezier(0.17, 0.89, 0.32, 1.49) 1);
 //   @include keyframes(heartbubble) {
@@ -9726,6 +10105,7 @@ ng-map {
 //     }
 //   };
 // }
+
 .like-animate {
   position: relative;
   color: $brand-pink;
@@ -9734,13 +10114,16 @@ ng-map {
     0% {
       @include transform(scale(0));
     }
+
     50% {
       @include transform(scale(1.4));
     }
+
     100% {
       @include transform(scale(1));
     }
   }
+
   + span {
     @include square(11px);
     border-radius: 100%;
@@ -9754,13 +10137,16 @@ ng-map {
         @include square(11px);
         opacity: 0;
       }
+
       50% {
         opacity: 1;
         @include square(9px);
       }
+
       75% {
         @include square(7px);
       }
+
       100% {
         @include square(2px);
         opacity: 0;
@@ -9773,9 +10159,7 @@ ng-map {
 //
 //   }
 // }
-
 // destination booking
-
 .destination-hotel-card {
   .hotel-card-list {
     margin-top: 5px;
@@ -9837,30 +10221,37 @@ ng-map {
           color: #fff;
         }
       }
-   .glyphicon-chevron-right,.glyphicon-chevron-left {
-         display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-.glyphicon-chevron-right:before {
-       content: "\f054";
-}
-.glyphicon-chevron-left:before {
-       content: "\f053";
-}
-.carousel-indicators {
-    bottom: 0px;
-}
-.carousel-indicators li{
-border-color: #f2675b;
-&.active {
 
-    background-color: #f2675b;
-}
-}
+      .glyphicon-chevron-left,
+      .glyphicon-chevron-right {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .glyphicon-chevron-right:before {
+        content: "\f054";
+      }
+
+      .glyphicon-chevron-left:before {
+        content: "\f053";
+      }
+
+      .carousel-indicators {
+        bottom: 0;
+      }
+
+      .carousel-indicators li {
+        border-color: #f2675b;
+
+        &.active {
+          background-color: #f2675b;
+        }
+      }
+
       .nav-tabs.nav-justified {
         border-bottom: 0;
         padding-right: 45px;
@@ -10173,12 +10564,11 @@ border-color: #f2675b;
 @import "fancybox-override";
 @import "animation";
 @import "mobile.scss"; // header { display: none; }
-
-
 // travelibro loader
 .blured-loader-bg {
   // .repeated-item { @include filter(blur(5px)); background-color: rgba(255,255,255,0.8); }
 }
+
 .travelibro-loader {
   @include square(100%);
   @include position(absolute,0);

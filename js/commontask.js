@@ -1,233 +1,235 @@
 var commontask = angular.module('commontask', [])
 
-.factory('LikesAndComments', function ($http, $filter) {
+  .factory('LikesAndComments', function ($http, $filter) {
 
-  var returnVal = {
-     getHashTags:function(commentString,callback){
-      var len = commentString.length;
-      var counter = 0;
-      var startIndex = null;
-      var endIndex = null;
-      var i;
-      var tag;
-      var hashTag = [];
-      while (counter != len - 1) { 
-        if (commentString[counter] == "#") {
-          startIndex = counter;
-          i = startIndex + 1;
-          while (i <= len) {
-            if (commentString[i] == " " || commentString[i] == "#" || commentString[i] == "@") {
-              endIndex = i - 1;
-              console.log(startIndex, endIndex);
-              tag = commentString.substring(startIndex, endIndex + 1);
-              hashTag.push(tag);
-              console.log(tag);
-              break;
-            } else if (i == commentString.length - 1) {
-              endIndex = i;
-              console.log(startIndex, endIndex);
-              tag = commentString.substring(startIndex, endIndex + 1);
-              hashTag.push(tag);
-              console.log(tag);
-              break;
+    var returnVal = {
+      getHashTags: function (commentString, callback) {
+        var len = commentString.length;
+        var counter = 0;
+        var startIndex = null;
+        var endIndex = null;
+        var i;
+        var tag;
+        var hashTag = [];
+        while (counter != len - 1) {
+          if (commentString[counter] == "#") {
+            startIndex = counter;
+            i = startIndex + 1;
+            while (i <= len) {
+              if (commentString[i] == " " || commentString[i] == "#" || commentString[i] == "@") {
+                endIndex = i - 1;
+                console.log(startIndex, endIndex);
+                tag = commentString.substring(startIndex, endIndex + 1);
+                hashTag.push(tag);
+                console.log(tag);
+                break;
+              } else if (i == commentString.length - 1) {
+                endIndex = i;
+                console.log(startIndex, endIndex);
+                tag = commentString.substring(startIndex, endIndex + 1);
+                hashTag.push(tag);
+                console.log(tag);
+                break;
+              }
+              i++;
             }
-            i++;
+            // console.log(hashTag);
           }
-          // console.log(hashTag);
+          counter++;
         }
-        counter++;
-      }
-      hashTag = _.remove(hashTag, function (n) {
-        return !(n == "#" || n == "@");
-      });
-     callback(hashTag);
-    },
-    postComment: function (type, uniqueId, type_Id, comment, hashTag, additionalId, callback) { //type_id=postId,journeyId,ItineraryId
-      console.log("inside LikesAndComments");
-      console.log(type, uniqueId, type_Id, comment, hashTag, additionalId, callback);
-      var getCommentId = "";
-      hashtag=[];
-      console.log(comment);
-     returnVal.getHashTags(comment,function(data){
-        hashTag=data;
-      });
-      // console.log(hashTag);
-      var obj = {
-        "type": type,
-        "uniqueId": uniqueId,
-        "text": comment,
-        "hashtag": hashTag
-      };
-      switch (type) {
-        case "post":
-          obj.post = type_Id;
-          getCommentId = type_Id;
-          break;
-        case "photo":
-          obj.post = type_Id;
-          obj.photo = additionalId; //this var is initialized only when commenting for photo,video or itinerary
-          getCommentId = additionalId;
-          break;
-        case "video":
-          obj.video = additionalId;
-          getCommentId = "";
-          break;
-        case "itinerary":
-          obj.itinerary = type_Id;
-          getCommentId = "";
-          break;
-        case "journey":
-          obj.journey = type_Id;
-          getCommentId = "";
-          break;
-      }
-      $http({
-        url: adminURL + "/comment/addCommentWeb",
-        method: "POST",
-        data: obj
-      }).success(function (data) {
-        returnVal.getComments(type, getCommentId, callback);
-      });
-    },
-    getComments: function (type, _id, callback) {
-      var obj = {
-        "_id": _id
-      };
-      var url;
-      switch (type) {
-        case "post":
-          url = "/post/getPostCommentWeb";
-          break;
-        case "photo":
-          url = "/postphotos/getOneWeb";
-          break;
-        case "video":
-          url = "/postvideos/getPostComment";
-          break;
-        case "itinerary":
-          url = "/itinerary/getItineraryCommentWeb";
-          break;
-        case "journey":
-          url = "/journey/getJourneyCommentWeb"
-          break;
-      }
-      $http({
-        url: adminURL + url,
-        method: "POST",
-        data: obj
-      }).success(function (data) {
-        callback(data);
-      });
-    },
-    likeUnlike: function (type, task, uniqueId, type_id, additionalId) {
-      console.log(type, task, uniqueId, type_id, additionalId);
-      var obj = {
-        "uniqueId": uniqueId
-      };
-      switch (type) {
-        case "post":
-          obj.post = type_id;
-          url = "/post/updateLikePostWeb";
-          break;
-        case "photo":
-          obj.postId = type_id;
-          obj.photoId = additionalId;
-          url = "/postphotos/updateLikePostWeb";
-          break;
-        case "video":
-          obj.postId = type_id;
-          obj.videoId = additionalId;
-          url = "/postvideos/updateLikePostWeb";
-          break;
-        case "itinerary":
-          obj.itinerary = type_id
-          url = "/itinerary/updateLikeItineraryWeb";
-          break;
-        case "journey":
-          obj.journey = type_id
-          url = "/journey/likeJourneyWeb";
-          break;
-      };
-      if (task == "unlike") {
-        obj.unlike = true;
-      };
-      $http({
-        url: adminURL + url,
-        method: "POST",
-        data: obj
-      }).success(function (data) {
-        console.log(data);
-      });
-    },
-    getLikes: function (type, _id,callback) {
-      console.log(type, _id);
-      var obj = {
-        "_id": _id
-      };
-      switch (type) {
-        case "post":
-          url = "/post/getPostLikes";
-          break;
-        case "photo":
-          url = "/postphotos/getPostLikes";
-          break;
-        case "video":
-          url = "/postvideos/getPostLikes";
-          break;
-        case "itinerary":
-          url = "/itinerary/getItineraryLikes";
-          break;
-        case "journey":
-          url = "/journey/getJourneyLikes";
-          break;
-      };
-       $http({
+        hashTag = _.remove(hashTag, function (n) {
+          return !(n == "#" || n == "@");
+        });
+        callback(hashTag);
+      },
+      postComment: function (type, uniqueId, type_Id, comment, hashTag, additionalId, callback) { //type_id=postId,journeyId,ItineraryId
+        console.log("inside LikesAndComments");
+        console.log(type, uniqueId, type_Id, comment, hashTag, additionalId, callback);
+        var getCommentId = "";
+        hashtag = [];
+        console.log(comment);
+        returnVal.getHashTags(comment, function (data) {
+          hashTag = data;
+        });
+        // console.log(hashTag);
+        var obj = {
+          "type": type,
+          "uniqueId": uniqueId,
+          "text": comment,
+          "hashtag": hashTag
+        };
+        switch (type) {
+          case "post":
+            obj.post = type_Id;
+            getCommentId = type_Id;
+            break;
+          case "photo":
+            obj.post = type_Id;
+            obj.photo = additionalId; //this var is initialized only when commenting for photo,video or itinerary
+            getCommentId = additionalId;
+            break;
+          case "video":
+            obj.video = additionalId;
+            getCommentId = "";
+            break;
+          case "itinerary":
+            obj.itinerary = type_Id;
+            getCommentId = "";
+            break;
+          case "journey":
+            obj.journey = type_Id;
+            getCommentId = "";
+            break;
+        }
+        $http({
+          url: adminURL + "/comment/addCommentWeb",
+          method: "POST",
+          data: obj
+        }).success(function (data) {
+          returnVal.getComments(type, getCommentId, callback);
+        });
+      },
+      getComments: function (type, _id, callback) {
+        var obj = {
+          "_id": _id,
+          "pagenumber": 1
+        };
+        var url;
+        switch (type) {
+          case "post":
+            url = "/post/getPostCommentWeb";
+            break;
+          case "photo":
+            url = "/postphotos/getPostCommentWeb";
+            break;
+          case "video":
+            url = "/postvideos/getPostCommentWeb";
+            break;
+          case "itinerary":
+            url = "/itinerary/getItineraryCommentWeb";
+            break;
+          case "journey":
+            url = "/journey/getJourneyCommentWeb";
+            break;
+        }
+        $http({
           url: adminURL + url,
           method: "POST",
           data: obj
-        }).success(function(data){
+        }).success(function (data) {
           callback(data);
         });
-    },
-    searchTags: function (tag, callback) {
-      $http({
-        url: adminURL + "/hashtag/findHash",
-        method: "POST",
-        data: {
-          "hashtag": tag
-        }
-      }).success(function (data) {
-        callback(data);
-      });
-    },
-    searchBuddies: function (buddy, callback) {
-      $http({
-        url: adminURL + "/user/searchBuddyWeb",
-        method: "POST",
-        data: {
-          fromTag: true,
-          search: buddy
-        }
-      }).success(function (data) {
-        callback(data);
-      });
-    }
-  };
-  return returnVal
-});
+      },
+      likeUnlike: function (type, task, uniqueId, type_id, additionalId) {
+        console.log(type, task, uniqueId, type_id, additionalId);
+        var obj = {
+          "uniqueId": uniqueId
+        };
+        switch (type) {
+          case "post":
+            obj.post = type_id;
+            url = "/post/updateLikePostWeb";
+            break;
+          case "photo":
+            obj.postId = type_id;
+            obj.photoId = additionalId;
+            url = "/postphotos/updateLikePostWeb";
+            break;
+          case "video":
+            obj.postId = type_id;
+            obj.videoId = additionalId;
+            url = "/postvideos/updateLikePostWeb";
+            break;
+          case "itinerary":
+            obj.itinerary = type_id
+            url = "/itinerary/updateLikeItineraryWeb";
+            break;
+          case "journey":
+            obj.journey = type_id
+            url = "/journey/likeJourneyWeb";
+            break;
+        };
+        if (task == "unlike") {
+          obj.unlike = true;
+        };
+        $http({
+          url: adminURL + url,
+          method: "POST",
+          data: obj
+        }).success(function (data) {
+          console.log(data);
+        });
+      },
+      getLikes: function (type, _id, callback) {
+        console.log(type, _id);
+        var obj = {
+          "_id": _id,
+          "pagenumber": 1
+        };
+        switch (type) {
+          case "post":
+            url = "/post/getPostLikesWeb";
+            break;
+          case "photo":
+            url = "/postphotos/getPostLikesWeb";
+            break;
+          case "video":
+            url = "/postvideos/getPostLikesWeb";
+            break;
+          case "itinerary":
+            url = "/itinerary/getItineraryLikesWeb";
+            break;
+          case "journey":
+            url = "/journey/getJourneyLikesWeb";
+            break;
+        };
+        $http({
+          url: adminURL + url,
+          method: "POST",
+          data: obj
+        }).success(function (data) {
+          callback(data);
+        });
+      },
+      searchTags: function (tag, callback) {
+        $http({
+          url: adminURL + "/hashtag/findHash",
+          method: "POST",
+          data: {
+            "hashtag": tag
+          }
+        }).success(function (data) {
+          callback(data);
+        });
+      },
+      searchBuddies: function (buddy, callback) {
+        $http({
+          url: adminURL + "/user/searchBuddyWeb",
+          method: "POST",
+          data: {
+            fromTag: true,
+            search: buddy
+          }
+        }).success(function (data) {
+          callback(data);
+        });
+      }
+    };
+    return returnVal
+  });
 commontask.directive('findTags', function (LikesAndComments) {
   return {
     restrict: 'E',
     scope: {
       ngModel: "=",
-      elementId:"@",
-      enable:"@"
+      elementId: "@",
+      enable: "@"
     },
     templateUrl: "views/modal/hashtag.html",
     link: function ($scope, element, attrs) {
       $scope.$watch('ngModel', function (newVal, oldVal) {
         // alert($scope.ngModel);
-        console.log($scope.elementId,$scope.enable);
+        console.log($scope.elementId, $scope.enable);
         var text = $scope.ngModel;
         var comment = {
           'text': newVal
@@ -280,13 +282,13 @@ commontask.directive('findTags', function (LikesAndComments) {
               $scope.showTags = false;
               $scope.showBuddies = true;
             }
-       
 
-            if ($scope.flag == "#" && ($scope.enable =='hashTag' || $scope.enable =='bothTagging')) {
+
+            if ($scope.flag == "#" && ($scope.enable == 'hashTag' || $scope.enable == 'bothTagging')) {
               $scope.hashTag = text.substring($scope.startTagIndex, $scope.endTagIndex + 1);
               LikesAndComments.searchTags($scope.hashTag, tagCallback);
 
-            } else if ($scope.flag == "@" && ($scope.enable =='tagFriends' || $scope.enable =='bothTagging')) {
+            } else if ($scope.flag == "@" && ($scope.enable == 'tagFriends' || $scope.enable == 'bothTagging')) {
               $scope.hashTag = text.substring($scope.startTagIndex + 1, $scope.endTagIndex + 1);
               LikesAndComments.searchBuddies($scope.hashTag, buddiesCallback);
             }
