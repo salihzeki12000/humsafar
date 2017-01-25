@@ -182,6 +182,11 @@
     border-radius: 45px;
   }
   // ALREADY EXISTS MODAL END
+  // CHOOSE COVER PHOTO MODAL
+  .cover-modal .modal-dialog {
+    width: 940px;
+  }
+  // CHOOSE COVER PHOTO MODAL END
 }
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
@@ -519,6 +524,11 @@
     border-radius: 10px;
   }
   // NOTIFY MODAL END
+  // CHOOSE COVER PHOTO MODAL
+  .cover-modal .modal-dialog {
+    width: 750px;
+  }
+  // CHOOSE COVER PHOTO MODAL END
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -1317,6 +1327,23 @@
     margin-top: 15px;
   }
   // EDIT OTG MODAL END
+  // CHOOSE COVER PHOTO MODAL
+  .cover-modal .modal-dialog {
+    width: auto;
+  }
+
+  .cover-gallery-grid .choose-cover-pic {
+    width: 100px;
+    height: 100px;
+  }
+
+  .cover-gallery-grid {
+    .cover-scroll {
+      height: 300px;
+      overflow-y: scroll;
+    }
+  }
+  // CHOOSE COVER PHOTO MODAL END
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -1898,5 +1925,16 @@
     border-radius: 37px;
   }
   // ALREADY EXIST MODAL END
+  // CHOOSE COVER PHOTO MODAL
+  .cover-gallery-grid .choose-cover-pic {
+    width: 84px;
+    height: 84px;
+  }
+
+  .cover-gallery-grid .cover-scroll {
+    height: 360px;
+    overflow-y: scroll;
+  }
+  // CHOOSE COVER PHOTO MODAL END
 }
 // media query for 480px to 320px end
