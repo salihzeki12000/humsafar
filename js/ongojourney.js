@@ -182,7 +182,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       ongo: "=post",
       json: "=json",
       profile: "=profile",
-      getCommentsData: '&'
+      getCommentsData: '&',
+      getLikesData: '&'
     },
     // controller: 'OnGoJourneyCtrl',
     templateUrl: 'views/directive/journey-post.html',
@@ -314,18 +315,18 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
         }
       };
 
-      $scope.getLikes = function (id) {
-        var formData = {
-          "_id": id
-        }
-        $http({
-          url: adminURL + "/post/getPostLikes",
-          method: "POST",
-          data: formData
-        }).success(function (data) {
-          $scope.listOfLikes = data.data;
-        });
-      };
+      // $scope.getLikes = function (id) {
+      //   var formData = {
+      //     "_id": id
+      //   }
+      //   $http({
+      //     url: adminURL + "/post/getPostLikes",
+      //     method: "POST",
+      //     data: formData
+      //   }).success(function (data) {
+      //     $scope.listOfLikes = data.data;
+      //   });
+      // };
 
       $scope.likePhoto = function (uniqueId, _id, additionalId) {
         console.log(uniqueId, _id, additionalId);
@@ -892,7 +893,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
           model.backgroundClick = true;
           backgroundClick.object = model;
         }, 200);
-        console.log($scope);
         backgroundClick.scope = $scope;
       };
 

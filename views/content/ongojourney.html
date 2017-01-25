@@ -122,7 +122,7 @@
                     <img src="img/options-white.png" alt="Edit Journey" width="3" class="img-responsive">
                     <div class="edit-kind-journey" ng-show="ongo.kindOf.backgroundClick;">
                       <ul>
-                        <li><a ng-click="editKindOf()" >Edit Kind of Journey</a></li>
+                        <li><a ng-click="editKindOf()">Edit Kind of Journey</a></li>
                         <li><a href="" ng-click="changeBannerDate()">Change Date &amp; Time</a></li>
                       </ul>
                     </div>
@@ -174,23 +174,24 @@
           <div class="relate">
             <div class="dot-line"></div>
             <div class="card-relate-holder functionmap" ng-if="journey.post">
-              <journey-post post="ongo" json=journey get-comments-data="getPostsCommentData(post)" profile=userData ng-repeat="ongo in journey.post"></journey-post>
-              <!-- ongo journey-end -->
-              <div class="ongo-journey-end" ng-if="journey.onGoing==false">
-                <div class="journey-end text-center">
-                  <h4 class="color-white avenir-roman">{{ongo.location}}</h4>
-                  <p class="m-clear color-white avenir-roman">
-                    <!-- <i class="fa fa-calendar mr5"></i> -->
-                    <span>{{journey.endTime|formatDate: 'date'}}</span> |
-                    <!-- <i class="fa fa-clock-o mr5"></i> -->
-                    <span>{{journey.endTime|formatDate: 'time'}}</span></p>
+              <journey-post post="ongo" json=journey get-comments-data="getCommentsData(post)" get-likes-data="getLikesData(post)" profile=userData
+                ng-repeat="ongo in journey.post"></journey-post>
+                <!-- ongo journey-end -->
+                <div class="ongo-journey-end" ng-if="journey.onGoing==false">
+                  <div class="journey-end text-center">
+                    <h4 class="color-white avenir-roman">{{ongo.location}}</h4>
+                    <p class="m-clear color-white avenir-roman">
+                      <!-- <i class="fa fa-calendar mr5"></i> -->
+                      <span>{{journey.endTime|formatDate: 'date'}}</span> |
+                      <!-- <i class="fa fa-clock-o mr5"></i> -->
+                      <span>{{journey.endTime|formatDate: 'time'}}</span></p>
+                  </div>
+                  <div class="end-journey-flag text-center">
+                    <img src="img/ongojourney/end-flag.png" alt="" class="img-responsive m-center" width="50">
+                    <span class="color-white jenna-font">until we meet again!</span>
+                  </div>
                 </div>
-                <div class="end-journey-flag text-center">
-                  <img src="img/ongojourney/end-flag.png" alt="" class="img-responsive m-center" width="50">
-                  <span class="color-white jenna-font">until we meet again!</span>
-                </div>
-              </div>
-              <!-- ongo journey end -->
+                <!-- ongo journey end -->
             </div>
           </div>
           <!-- whole window comment -->
@@ -202,7 +203,9 @@
                   <div class="clearfix">
                     <div class="pull-left">
                       <ul class="notify-like">
-                        <li><a href=""><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(post.uniqueId,post._id)"></i></a></li>
+                        <li>
+                          <a href=""><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(post.uniqueId,post._id)"></i></a>
+                        </li>
                         <li>
                           <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve" ng-click="focus('enterComment');"></a>
                         </li>
@@ -236,11 +239,11 @@
                         <img ng-src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
                       </div>
                     </div>
-             <div class="comment-ur-text relate">
-                    <textarea name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="comment.text" >
+                    <div class="comment-ur-text relate">
+                      <textarea name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="comment.text">
                     </textarea>
-                    <find-tags ng-model="comment.text" element-id="enterComment" enable="bothTagging">
-             </div>
+                      <find-tags ng-model="comment.text" element-id="enterComment" enable="bothTagging">
+                    </div>
                   </div>
                   <div class="clearfix comment-post">
                     <div class="pull-right">
@@ -276,21 +279,19 @@
             </div>
           </div>
           <!-- whole window comment end-->
-
           <!-- whole window LIKE -->
-          <div class="like-side-sec show-like-side-sec {{showLikeShow}}">
-
+          <div class="like-side-sec  {{showLikeShow}}" ng-show="viewCardLike">
             <div class="like-section">
               <ul>
                 <!-- REPEAT BUDDY LIST -->
-                <li>
+                <li ng-repeat="like in listOfLikes.like">
                   <div class="like-notify-buddy clearfix">
                     <div class="like-buddy-pic">
-                      <img src="img/dishapatani1.jpg" alt="" class="img-responsive">
+                      <img ng-src="{{like.profilePicture|uploadpath}}" alt="" class="img-responsive">
                     </div>
                     <div class="like-buddy-name">
-                      <p class="like-buddy-user">Amit Verma</p>
-                      <p class="like-buddy-attag">@ <span>amit</span></p>
+                      <p class="like-buddy-user">{{like.name}}</p>
+                      <p class="like-buddy-attag">@ <span>{{like.urlSlug}}</span></p>
                     </div>
                     <div class="like-buddy-follow-btn pull-right">
                       <button class="btn btn-pink following-btn">Follow</button>
