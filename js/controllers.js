@@ -2544,14 +2544,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // $scope.getCountryInfo("featuredCities",$scope.urlDestinationCountry);
 
-    $scope.showBackCard = "";
-    $scope.backView = function () {
-      if ($scope.showBackCard === "") {
-        $scope.showBackCard = "flip-card";
-      } else {
-        $scope.showBackCard = "";
-      }
-    };
+    // $scope.showBackCard = "";
+    // $scope.backView = function () {
+    //   if ($scope.showBackCard === "") {
+    //     $scope.showBackCard = "flip-card";
+    //   } else {
+    //     $scope.showBackCard = "";
+    //   }
+    // };
 
     // destination city
     $scope.countryView = function (url, isCity) {
@@ -2779,14 +2779,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       })
     }
 
-    $scope.showBackCard = "";
-    $scope.backView = function () {
-      if ($scope.showBackCard === "") {
-        $scope.showBackCard = "flip-card";
-      } else {
-        $scope.showBackCard = "";
-      }
-    };
+    // $scope.showBackCard = "";
+    // $scope.backView = function () {
+    //   if ($scope.showBackCard === "") {
+    //     $scope.showBackCard = "flip-card";
+    //   } else {
+    //     $scope.showBackCard = "";
+    //   }
+    // };
 
 
     $scope.openCountry = function (index) {
