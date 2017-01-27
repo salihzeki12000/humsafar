@@ -252,7 +252,7 @@
                       </div>
                       <!--<ul>
                           <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
-                          <div ng-if="!(activity.type=='editor' || activity.type=='detail-itinerary' || activity.type=='quick-itinerary')"> 
+                          <div ng-if="!(activity.type=='editor' || activity.type=='detail-itinerary' || activity.type=='quick-itinerary')">
                             <li>
                               <a href="">
                                 <img src="img/comments.png" alt="" height="18" class="if-blue">
@@ -269,7 +269,7 @@
                               </a>
                             </li>
                           </div>
-                           <div ng-if="activity.type=='editor' || activity.type=='detail-itinerary' || activity.type=='quick-itinerary'"> 
+                           <div ng-if="activity.type=='editor' || activity.type=='detail-itinerary' || activity.type=='quick-itinerary'">
                             <li>
                               <a href="">
                                 <img src="img/comments-white.png" alt="" height="18" class="if-white">
@@ -289,18 +289,18 @@
                         </ul>-->
                     </div>
                     <div class="pull-right" ng-if="!((activity.type =='editor') || (activity.type =='editor-blog'))">
-                      <div class="three-dots pointer">
+                      <div class="three-dots relate pointer">
                         <span>
                             <img src="img/options.png" alt="" width="3" class="if-blue" ng-if="!(activity.type=='editor')">
                             <img src="img/options-white.png" alt="" width="3" class="if-white" ng-if="activity.type=='editor'">
                           </span>
+                          <div class="activity-edit-option">
+                              <ul>
+                                <li>Hide From All</li>
+                                <li>Report</li>
+                              </ul>
+                            </div>
                       </div>
-                      <!--<div>
-                          <ul>
-                            <li>Hide From All</li>
-                            <li>Report</li>                            
-                          </ul>
-                        </div>-->
                     </div>
                   </div>
                   <div class="social-likes-reviews" ng-if="!(((activity.likeCount==0)||(activity.likeCount==undefined))&&(activity.commentCount==0))">

@@ -4486,6 +4486,50 @@ header {
 }
 // visiting
 // post profile pic end
+//ACTIVITY OPTIONS BUTTON
+.user-social-item .activity-edit-option {
+  width: 125px;
+  position: absolute;
+  bottom: 37px;
+  right: -25px;
+  padding: 10px 15px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  box-shadow: -1px 1px 10px 0 rgba(0, 0, 0, 0.35), inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
+  background-color: #f6fafc;
+  text-align: left;
+  z-index: 10;
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: -23px;
+    right: 15px;
+    border-top: 12px solid #e7f1f7;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 12px solid transparent;
+    z-index: 2;
+  }
+
+  &:after {
+    z-index: 1;
+    right: 14px;
+    bottom: -26px;
+    border-top: 13px solid #bababa;
+    border-right: 13px solid transparent;
+    border-bottom: 13px solid transparent;
+    border-left: 13px solid transparent;
+  }
+
+  ul{
+    li{
+      display: block;
+      padding: 0;
+    }
+  }
+}
+//ACTIVITY OPTIONS BUTTON END
 // activity end
 // on go journey
 
@@ -6324,11 +6368,13 @@ header {
 
     &.opened-editarea {
       height: 100px;
+
       + find-tags + .thoughtCount {
         display: block;
       }
     }
   }
+
   .hashtag-edit {
     width: 100%;
     box-shadow: 1px 2px 3px #272727;
@@ -6337,13 +6383,18 @@ header {
     position: absolute;
     left: 0;
     background-color: #fff;
+
     li {
       padding: 3px 5px;
       border-bottom: 1px solid #ebebeb;
-      &:last-child { border-bottom: none; }
+
+      &:last-child {
+        border-bottom: none;
+      }
     }
+
     a {
-    color: #555;
+      color: #555;
     }
   }
 
@@ -6690,6 +6741,7 @@ header {
 }
 // comment pop up and focus end
 //LIKE SIDE  TAB
+
 .like-side-sec {
   width: 400px;
   height: 100%;
@@ -6701,8 +6753,8 @@ header {
   @extend .avenir-roman;
 }
 
-.show-like-side-sec{
-  right:0;
+.show-like-side-sec {
+  right: 0;
   z-index: 5;
   @include transition(all 300ms linear);
 }
@@ -6711,6 +6763,7 @@ header {
   li {
     padding: 5px 0;
     border-bottom: 1px solid #ebebeb;
+
     &:last-child {
       border-bottom: none;
     }
@@ -10179,6 +10232,7 @@ ng-map {
 //   }
 // }
 // destination booking
+
 .destination-hotel-card {
   .hotel-card-list {
     margin-top: 5px;
@@ -10584,6 +10638,7 @@ ng-map {
 @import "animation";
 @import "mobile.scss"; // header { display: none; }
 // travelibro loader
+
 .blured-loader-bg {
   // .repeated-item { @include filter(blur(5px)); background-color: rgba(255,255,255,0.8); }
 }
