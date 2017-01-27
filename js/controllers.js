@@ -6912,6 +6912,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
 
+    $scope.editOption = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+
     $scope.postPostsComment = function (activity, comment) {
       // console.log(uniqueId, comment, postId);
       console.log(activity, comment);

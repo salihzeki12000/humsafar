@@ -36,9 +36,9 @@
                         <p class="m-clear"><span>{{activity.startTime|formatDate:'date'}}</span> | <span>{{activity.startTime|formatDate:'time'}}</span></p>
                       </div>
                       <div class="pull-right">
-                        <div class="follow-or-following">
-                          <span class="color-dark-blue ml5" ng-if="activity.follow">Follow</span>
-                          <span class="color-dark-blue ml5" ng-if="activity.following">Following</span>
+                        <div class="follow-or-following pointer" ng-click="followFollowing(activity.)">
+                          <!--<span class="color-dark-blue ml5" ng-if="activity.follow">Follow</span>-->
+                          <span class="color-dark-blue ml5">{{activity.following|followFollowingStatus:activity._id}}</span>
                         </div>
                       </div>
                     </div>
@@ -289,17 +289,17 @@
                         </ul>-->
                     </div>
                     <div class="pull-right" ng-if="!((activity.type =='editor') || (activity.type =='editor-blog'))">
-                      <div class="three-dots relate pointer">
-                        <span>
+                      <div class="three-dots relate pointer" ng-init="activity.option={}">
+                        <span ng-click="editOption(activity.option)">
                             <img src="img/options.png" alt="" width="3" class="if-blue" ng-if="!(activity.type=='editor')">
                             <img src="img/options-white.png" alt="" width="3" class="if-white" ng-if="activity.type=='editor'">
                           </span>
-                          <div class="activity-edit-option">
-                              <ul>
-                                <li>Hide From All</li>
-                                <li>Report</li>
-                              </ul>
-                            </div>
+                        <div class="activity-edit-option" ng-show="activity.option.backgroundClick">
+                          <ul>
+                            <li ng-if="activity._id==userData._id">Hide From All</li>
+                            <li ng-if="activity._id!=userData._id">Report</li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
