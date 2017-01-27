@@ -1343,6 +1343,48 @@
       overflow-y: scroll;
     }
   }
+
+  // EDIT ACTIVITY MODAL
+  .otg-photo-slider,
+  .video-otg-slider{
+    .flex-direction-nav {
+      .flex-prev {
+        left: -25px;
+      }
+
+      .flex-next {
+        right: -25px;
+      }
+    }
+
+    .flexslider:hover {
+      .flex-prev {
+        left: -25px;
+      }
+
+      .flex-next {
+        right: -25px;
+      }
+    }
+  }
+  .view-photo-sec,
+  .view-video-sec {
+    padding: 15px 30px;
+  }
+
+  .edit-otg-sec{
+    .icon-thought{
+      width: 17px;
+    }
+    .otg-photo-count, .otg-video-count{
+      img{
+        width: 20px;
+      }
+    }
+    .icon-tag{ width: 17px;}
+    .icon-location{width: 17px;}
+  }
+  // EDIT ACTIVITY MODAL END
   // CHOOSE COVER PHOTO MODAL END
 }
 // media query for 767px to 480px end
@@ -1936,5 +1978,55 @@
     overflow-y: scroll;
   }
   // CHOOSE COVER PHOTO MODAL END
+  // rEVIEW COUNTRY MODAL
+  .review-country-main .country-rating i.glyphicon{
+    margin: 0 10px;
+  }
+
+  .review-country-main .fill-post textarea{
+    width: 260px;
+  }
+  // rEVIEW COUNTRY MODAL END
+
+  // DATE TIME MODAL EDIT
+  .date-time-main .date-holder input{
+    width: 60px;
+    padding: 3px 10px;
+    font-size: 16px;
+  }
+  // DATE TIME MODAL EDIT END
+  // EDIT ACTIVITY MODAL
+  .otg-photo-slider,
+  .video-otg-slider{
+    .flex-direction-nav {
+      .flex-prev {
+        left: -10px;
+      }
+
+      .flex-next {
+        right: -10px;
+      }
+    }
+
+    .flexslider:hover {
+      .flex-prev {
+        left: -10px;
+      }
+
+      .flex-next {
+        right: -10px;
+      }
+    }
+  }
+  .view-photo-sec,
+  .view-video-sec {
+    padding: 25px 10px;
+  }
+  // EDIT ACTIVITY MODAL END
+  .otg-upload-btn{
+    .btn-more{
+      padding: 8px 30px;
+    }
+  }
 }
 // media query for 480px to 320px end

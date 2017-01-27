@@ -5395,6 +5395,7 @@ header {
     top: 35px;
     right: -25px;
     background-color: #f6fafc;
+    z-index: 2;
 
     &:before {
       content: '';
