@@ -912,7 +912,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
   .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, LikesAndComments, $state, $stateParams, $filter, $http) {
-
     var didScroll;
     var lastScrollTop = 0;
     var delta = 5;
@@ -1548,7 +1547,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.viewCardLike = false;
           $scope.journey.journeyHighLight = "";
           $scope.getCard = "";
-          $scope.comment.text = "";
         } else {
           $scope.listOfComments = [];
           $scope.viewCardLike = true;
@@ -1820,6 +1818,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       stateOn: 'fa fa-star-o',
       stateOff: 'fa fa-star'
     }];
+
+    $scope.followFollowing = function (user) {
+      console.log(user.following, user._id, user.name);
+      if (user.following) {
+        LikesAndComments.unFollowUser(user._id, function (data) {
+          console.log(data);
+          user.following = false;
+        })
+      } else {
+        LikesAndComments.followUser(user._id, user.name, function (data) {
+          console.log(data);
+          user.following = true;
+        });
+      }
+    }
   })
 
   .controller('PopularBloggerCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
@@ -6770,6 +6783,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    $scope.userData = $.jStorage.get("profile");
+
     var callback = function (data) {
       $scope.activities = data;
     };
@@ -6818,7 +6833,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       backgroundClick.scope = $scope;
     };
 
-    $scope.getPostsCommentData = function (activity) {
+    $scope.getCommentsData = function (activity) {
       console.log(activity);
       $scope.previousId;
       $scope.post = activity;
@@ -6851,6 +6866,51 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
       $scope.previousId = activity._id;
     };
+
+    $scope.getLikesData = function (activity) {
+      var callback = function (data) {
+        $scope.listOfLikes = data.data;
+        console.log($scope.listOfLikes);
+      };
+      console.log($scope.post);
+      if ($scope.previousLikeId != activity._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfLikes = [];
+        $scope.viewCardLike = true;
+        // $scope.journey.journeyHighLight = activity._id;
+        $scope.showLikeShow = "show-like-side-sec";
+        LikesAndComments.getLikes("post", activity._id, callback);
+      } else {
+        if ($scope.viewCardLike) {
+          $scope.viewCardLike = false;
+          // $scope.journey.journeyHighLight = "";
+          $scope.getCard = "";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardLike = true;
+          // $scope.focus('enterComment');
+          // $scope.journey.journeyHighLight = activity._id;
+          $scope.showLikeShow = "show-like-side-sec";
+          LikesAndComments.getLikes("post", activity._id, callback);
+        }
+      }
+      $scope.previousLikeId = activity._id;
+    };
+
+    $scope.followFollowing = function (user) {
+      console.log(user.following, user._id, user.name);
+      if (user.following) {
+        LikesAndComments.unFollowUser(user._id, function (data) {
+          console.log(data);
+          user.following = false;
+        })
+      } else {
+        LikesAndComments.followUser(user._id, user.name, function (data) {
+          console.log(data);
+          user.following = true;
+        });
+      }
+    }
 
     $scope.postPostsComment = function (activity, comment) {
       // console.log(uniqueId, comment, postId);
@@ -7474,10 +7534,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       },
     ];
 
-
-
-
-
     setTimeout(function () {
       $('.travelocal-slider').flexslider({
         animation: "slide",
@@ -7744,10 +7800,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     var callbackGetCountriesVisited = function (data) {
-      console.log(data);
       $scope.countryVisitedList = data;
-      console.log($scope.countryVisitedList);
-      console.log(data);
       reloadCount();
     };
 
@@ -7824,7 +7877,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           });
         }
       }
-
     };
     //follow unfollow user ends
     $scope.searchFriend = {};

@@ -213,10 +213,39 @@ var commontask = angular.module('commontask', [])
         }).success(function (data) {
           callback(data);
         });
+      },
+      followFollowing: function (flag, id, name) {
+        console.log(flag, id, name);
+      },
+      followUser: function (userId, name, callback) {
+        var obj = {
+          "_id": userId,
+          "toName": name
+        }
+        $http({
+          url: adminURL + "/user/followUserWeb",
+          method: "POST",
+          data: obj
+        }).success(function (data) {
+          callback(data);
+        });
+      },
+      unFollowUser: function (userId, callback) {
+        var obj = {
+          "_id": userId,
+        }
+        $http({
+          url: adminURL + "/user/unFollowUserWeb",
+          method: "POST",
+          data: obj
+        }).success(function (data) {
+          callback(data);
+        });
       }
     };
-    return returnVal
+    return returnVal;
   });
+
 commontask.directive('findTags', function (LikesAndComments) {
   return {
     restrict: 'E',
@@ -332,3 +361,14 @@ commontask.directive('findTags', function (LikesAndComments) {
     }
   }
 });
+
+commontask.filter("followFollowingStatus", function () {
+  return function (input) {
+    console.log(input);
+    if (input) {
+      return "Following";
+    } else {
+      return "Follow";
+    }
+  }
+})

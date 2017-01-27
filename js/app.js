@@ -208,7 +208,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'ActivityCtrl'
     })
-     .state('activitytest', {
+    .state('activitytest', {
       url: "/activity-test",
       templateUrl: "views/template.html",
       controller: 'ActivityTestCtrl'
@@ -284,7 +284,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'AgenthomeCtrl'
     })
 
-  .state('agent-user', {
+    .state('agent-user', {
       url: "/agent-user/:name",
       templateUrl: "views/template.html",
       controller: 'AgentuserCtrl',
@@ -306,7 +306,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'MessageCtrl'
     })
-     .state('notification', {
+    .state('notification', {
       url: "/notification",
       templateUrl: "views/template.html",
       controller: 'NotificationCtrl'
@@ -849,22 +849,22 @@ firstapp.filter('kindOfCheckIn', function () {
 });
 
 firstapp.filter('typeOfPost', function () {
-  return function (post,type) {
+  return function (post, type) {
     var returnVal = "";
     var color;
-    if(type=='travel-life'){
-      color='red_';
-    }else if(type=='local-life'){
-      color="green_"
+    if (type == 'travel-life') {
+      color = 'red_';
+    } else if (type == 'local-life') {
+      color = "cyan_";
     }
     if (post && post.checkIn && post.checkIn.location) {
-      return "img/typeOfPost/"+color+"location.png";
+      return "img/typeOfPost/" + color + "location.png";
     } else if (post && post.photos && post.photos.length != 0) {
-      return "img/typeOfPost/"+color+"camera.png";
+      return "img/typeOfPost/" + color + "camera.png";
     } else if (post && post.videos && post.videos.length != 0) {
-      return "img/typeOfPost/"+color+"video.png";
+      return "img/typeOfPost/" + color + "video.png";
     } else if (post && post.thoughts) {
-      return "img/typeOfPost/"+color+"thought.png";
+      return "img/typeOfPost/" + color + "thought.png";
     }
   }
 });

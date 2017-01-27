@@ -287,14 +287,14 @@
                 <li ng-repeat="like in listOfLikes.like">
                   <div class="like-notify-buddy clearfix">
                     <div class="like-buddy-pic">
-                      <img ng-src="{{like.profilePicture|uploadpath}}" alt="" class="img-responsive">
+                      <img ng-src="{{like.profilePicture|uploadpath:51:51}}" alt="" class="img-responsive">
                     </div>
                     <div class="like-buddy-name">
                       <p class="like-buddy-user">{{like.name}}</p>
                       <p class="like-buddy-attag">@ <span>{{like.urlSlug}}</span></p>
                     </div>
-                    <div class="like-buddy-follow-btn pull-right">
-                      <button class="btn btn-pink following-btn">Follow</button>
+                    <div class="like-buddy-follow-btn pull-right" ng-if="like._id!=userData._id">
+                      <button class=" btn btn-pink following-btn" ng-click=followFollowing(like);>{{like.following|followFollowingStatus}}</button>
                     </div>
                   </div>
                 </li>
