@@ -79,8 +79,10 @@
           element.imagesLoaded(_layout);
         } else {
           element.imagesLoaded(function imagesLoaded() {
-            _add();
-            _layout();
+            setTimeout(function(){
+              _add();
+              _layout();
+            },1000);
           });
         }
       };
@@ -105,7 +107,7 @@
        setTimeout(function(){
          console.log('masonry ka tomeout');
         $element.masonry();
-       },250);        
+       },250);
         $scope.$emit('masonry.reloaded');
       };
     }

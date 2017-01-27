@@ -1,8 +1,8 @@
 <div class="relate">
   <!--<textarea id='enterComment' placeholder='Write a comment' class='form-control' ng-model='ngModel'></textarea>-->
-  <div class="dropdown">
+  <div class="hashtag-dropdown">
     <ul>
-      <li ng-click="appendComment(flag,ngModel,tag.title,hashTag,startTagIndex,endTagIndex)" ng-repeat="tag in hashTags"><a href="">{{tag.title}}</a></li>
+      <li ng-click="appendComment(flag,ngModel,tag.title,hashTag,startTagIndex,endTagIndex)" ng-repeat="tag in hashTags track by $index"><a href="">{{tag.title}}</a></li>
     </ul>
   </div>
   <div class="dropdown-hashtag" hidden>

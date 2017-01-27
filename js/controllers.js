@@ -811,6 +811,44 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    // start scroll
+    var didScroll;
+    var lastScrollTop = 0;
+    var delta = 5;
+    var journeyInfoStrip = $('.journey-info-strip').outerHeight();
+
+    $(window).scroll(function (event) {
+      didScroll = true;
+    });
+
+    setInterval(function () {
+      if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+      }
+    }, 250);
+
+    function hasScrolled() {
+      var st = $(this).scrollTop();
+
+      if (Math.abs(lastScrollTop - st) <= delta)
+        return;
+
+      if (st > lastScrollTop && st > journeyInfoStrip) {
+        // Scroll Down
+        $('.journey-info-strip').addClass('remove-otgstrip').removeClass('get-otgstrip');
+      } else {
+        // Scroll Up
+        if (st + $(window).height() < $(document).height()) {
+          $('.journey-info-strip').addClass('get-otgstrip').removeClass('remove-otgstrip');
+        }
+      }
+
+      lastScrollTop = st;
+    }
+    // scroll end
+
+
     // $scope.trip = {
     //   date: "12 Feb, 2016",
     //   dayNo: "8",
@@ -911,9 +949,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     // set height on comment box
-    $(window).resize(function () {
-      $('.listing-comment').height($(window).height() - 226);
-    })
+    // $(window).resize(function () {
+    //   $('.listing-comment').height($(window).height() - 226);
+    // })
     // set height on comment box end
     //Used to name the .html file
     var slug = $stateParams.id;
@@ -1458,7 +1496,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.comment = {
       'text': ""
     };
-    $scope.getPostsCommentData = function (ongo) {
+
+    $scope.getCommentsData = function (ongo) {
       $scope.post = ongo;
       $scope.previousId;
       var callback = function (data) {
@@ -1491,6 +1530,37 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.previousId = $scope.post._id;
     };
 
+    $scope.getLikesData = function (ongo) {
+      var callback = function (data) {
+        $scope.listOfLikes = data.data;
+        console.log($scope.listOfLikes);
+      };
+      console.log($scope.post);
+      if ($scope.previousLikeId != ongo._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfLikes = [];
+        $scope.viewCardLike = true;
+        $scope.journey.journeyHighLight = ongo._id;
+        $scope.showLikeShow = "show-like-side-sec";
+        LikesAndComments.getLikes("post", ongo._id, callback);
+      } else {
+        if ($scope.viewCardLike) {
+          $scope.viewCardLike = false;
+          $scope.journey.journeyHighLight = "";
+          $scope.getCard = "";
+          $scope.comment.text = "";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardLike = true;
+          // $scope.focus('enterComment');
+          $scope.journey.journeyHighLight = ongo._id;
+          $scope.showLikeShow = "show-like-side-sec";
+          LikesAndComments.getLikes("post", ongo._id, callback);
+        }
+      }
+      $scope.previousLikeId = ongo._id;
+    };
+
     $scope.postPostsComment = function (uniqueId, comment, postId) {
       console.log(uniqueId, comment, postId);
       console.log("controller se comment hua");
@@ -1520,18 +1590,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.getLikes = function (id) {
-      var formData = {
-        "_id": id
-      }
-      $http({
-        url: adminURL + "/post/getPostLikes",
-        method: "POST",
-        data: formData
-      }).success(function (data) {
-        $scope.listOfLikes = data.data;
-      });
-    };
+    // $scope.getLikes = function (id) {
+    //   var formData = {
+    //     "_id": id
+    //   }
+    //   $http({
+    //     url: adminURL + "/post/getPostLikes",
+    //     method: "POST",
+    //     data: formData
+    //   }).success(function (data) {
+    //     $scope.listOfLikes = data.data;
+    //   });
+    // };
 
     $scope.focus = function (id) {
       console.log(id, "focus called");
@@ -2529,9 +2599,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     //contentopen
-    $scope.isopencont = false;
+    $scope.isopenfilter = false;
     $scope.openFilter = function () {
-      $scope.isopencont = !$scope.isopencont;
+      $scope.isopenfilter = !$scope.isopenfilter;
     };
 
 
@@ -7809,7 +7879,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     $scope.hotelList = _.chunk($scope.hotelMainList, 2);
-    console.log($scope.hotelList, 'new array');
+    // console.log($scope.hotelList, 'new array');
     // LISTED MODAL POPUP END
     $scope.countryPanel = "";
     $scope.cityPanel = "";
@@ -8056,11 +8126,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.from = "";
     $scope.to = "";
     $scope.getDays = function (country) {
+      country.datePopUp.to
       console.log(country);
       if (country.to == undefined) {
         country.datePopUp.to.initDate = country.from;
         country.to = country.from;
         country.datePopUp.to.openCalender = true;
+        country.datePopUp.to.minDate = country.from;
+      } else {
+        if (country.from.getTime() > country.to.getTime()) {
+          alert("from greater than To");
+          country.datePopUp.to.initDate = country.from;
+          country.to = country.from;
+          country.datePopUp.to.openCalender = true;
+          country.datePopUp.to.minDate = country.from;
+        } else {
+          alert("from is smaller or equal to  TO");
+        }
       }
 
       // country.datePopUp.minDate = new Date(country.from)
@@ -8069,6 +8151,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       } else {
         country.duration = $filter('dateDifference')(country.to, country.from) - 1;
       }
+    };
+
+    $scope.ifNotChanged = function (country) {
+      country.datePopUp.from.openCalender = true;
+
     };
     $scope.tagHandler = function (tag) {
       return {
@@ -8333,12 +8420,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
 
     $scope.addYourCountry = function () {
-      console.log($scope.addCountry.length - 1);
-      console.log($scope.addCountry);
-      console.log($scope.addCountry[prevIndex]);
       var prevIndex = $scope.addCountry.length - 1;
+      console.log($scope.addCountry[prevIndex]);
       var prevDate = $scope.addCountry[prevIndex].to;
-      var newDate = prevDate.setDate(prevDate.getDate() + 1);
+      var newDate = new Date(prevDate);
+      var maxDate = new Date();
+      newDate.setDate(prevDate.getDate() + 1);
+      console.log(prevDate, newDate);
       $scope.addCountry.push({
         "cityVisited": [{}],
         "new": "add",
@@ -8346,21 +8434,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           "from": {
             'openCalender': true,
             'showWeeks': false,
-            'maxDate': new Date(),
-            "initDate": newDate
+            'maxDate': maxDate,
+            "initDate": new Date(newDate)
           },
           "to": {
             'openCalender': false,
             'showWeeks': false,
-            'maxDate': new Date()
+            'maxDate': maxDate
           }
         }
       });
-      $scope.addCountry[prevIndex + 1].from = newDate;
-      // $scope.addCountry[prevIndex + 1].datePopUp.to.openCalender = true;
+      // $scope.addCountry[prevIndex + 1].from = new Date(newDate);
       $scope.addClass = "city-country-holder";
       console.log($scope.addCountry);
     };
+
     $scope.removeCountry = function (countryPanel) {
       $scope.addCountry.splice(countryPanel, 1);
     };
@@ -8525,10 +8613,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       plugins: [
         'advlist autolink lists link image charmap print preview anchor',
         'searchreplace visualblocks code fullscreen',
-        'insertdatetime media table contextmenu paste code', 'importcss'
+        'insertdatetime media table contextmenu paste code', 'importcss', 'autoresize'
       ],
       paste_as_text: true,
-      content_css: "css/main.css",
+      // content_css: "css/main.css",
       autoresize_on_init: false,
       autoresize_min_height: 0,
       autoresize_overflow_padding: 0,

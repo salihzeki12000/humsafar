@@ -1935,6 +1935,7 @@ header {
   h4 {
     font-size: 18px;
     padding: 10px 0 7px;
+    @extend .text-ellipsis;
     @extend .avenir-heavy;
   }
 
@@ -2954,6 +2955,7 @@ header {
     border: none;
     margin: 15px auto 0;
     font-size: 16px;
+    background-color: transparent;
   }
 }
 
@@ -6319,12 +6321,28 @@ header {
     font-family: "AvenirLTStd-Medium";
     font-size: 15px;
 
-    &:focus {
+    &.opened-editarea {
       height: 100px;
-
-      + .thoughtCount {
+      + find-tags + .thoughtCount {
         display: block;
       }
+    }
+  }
+  .hashtag-edit {
+    width: 100%;
+    box-shadow: 1px 2px 3px #272727;
+    border-radius: 0 0 6px 6px;
+    margin-top: 30px;
+    position: absolute;
+    left: 0;
+    background-color: #fff;
+    li {
+      padding: 3px 5px;
+      border-bottom: 1px solid #ebebeb;
+      &:last-child { border-bottom: none; }
+    }
+    a {
+    color: #555;
     }
   }
 
@@ -6703,7 +6721,7 @@ header {
 .like-buddy-pic {
   display: inline-block;
   width: 50px;
-  height: 50%;
+  height: 50px;
   overflow: hidden;
   border-radius: 19px;
   border: 2px solid #fff;
@@ -6741,7 +6759,7 @@ header {
 // trip summary
 
 .trip-summary-strip {
-  position: relative;
+  // position: relative;
   // background: url('../img/ongojourney/trip-summary-bg.png');
   // background-size: 100% 100%;
   background-color: rgba(0,0,0,0.7);
@@ -6803,7 +6821,7 @@ header {
 
 .trip-summary-detail {
   padding: 20px;
-  // margin-top: -10px;
+  margin-top: 60px;
 }
 
 .trip-visited-detail {
@@ -8375,7 +8393,7 @@ header {
   }
 
   ::-webkit-scrollbar-track {
-    background-color: #fff;
+    background-color: transparent;
   }
 }
 

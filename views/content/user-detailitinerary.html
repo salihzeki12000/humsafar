@@ -158,7 +158,7 @@
                   <uib-accordion-group is-open="city.isOpen" ng-repeat="city in country.cityVisited" ng-scroll="city in country.cityVisited" class="city-accordion-back">
                     <uib-accordion-heading class="relate city-coverphoto">
                       <!-- <img ng-src="{{city.city.cityCoverPhoto|uploadpath}}" alt="" class="img-responsive"> -->
-                      <div class="journey-accordion-heading color-white" style="background: url('{{city.city.cityCoverPhoto|uploadpath}}') 0 no-repeat; background-size: 100%;background-attachment: fixed;">
+                      <div class="journey-accordion-heading color-white" style="background: url('{{city.city.cityCoverPhoto|uploadpath}}') 0 no-repeat; background-size: cover;background-attachment: fixed;">
                         <a name="{{city.city._id}}" class="journey-head">
                           <div class="clearfix">
                             <p class="city-heading avenir-heavy m-clear pull-left">Day <span>{{city.from}}</span> to Day <span>{{city.to}}</span> In <span class="trip-city-name">{{city.city.name}}</span></p>

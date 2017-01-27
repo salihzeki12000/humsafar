@@ -458,7 +458,7 @@ a.color-white {
       bottom: 0;
       left: 0;
       padding: 8px 15px;
-      @include background(linear-gradient(rgba(0,
+      @include background(linear-gradient(to top,rgba(0,
       0,
       0,
       0.70),
