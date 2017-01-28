@@ -197,6 +197,16 @@ var navigationservice = angular.module('navigationservice', [])
         callback(data);
       });
     },
+    getDestinationVacation: function(formData, callback){
+      $http.get("http://192.168.0.119:3000/migrations/city_vacation_rentals.json?city_name="+formData.cityName+"&country_name="+formData.countryName+"&withCredentials=true", formData).success(function (data) {
+        callback(data);
+      });
+    },
+    getDestinationHomestay: function(formData, callback){
+      $http.get("http://192.168.0.119:3000/migrations/city_home_stays.json?city_name="+formData.cityName+"&country_name="+formData.countryName+"&withCredentials=true", formData).success(function (data) {
+        callback(data);
+      });
+    },
     uploadFile: function (formData, callback) {
       $http.post(uploadurl, formData, {
         headers: {

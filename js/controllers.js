@@ -2515,8 +2515,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         // $scope.bookingData = data.hotels;
         // console.log($scope.bookingData,'booking ka data');
       });
+      NavigationService.getDestinationVacation({
+        cityName: $scope.destCityName,
+        countryName: $scope.destCountryName
+      },function(data){
+        $.jStorage.set("vacation", data.vacation_rentals);
+      });
+      NavigationService.getDestinationHomestay({
+        cityName: $scope.destCityName,
+        countryName: $scope.destCountryName
+      },function(data){
+        $.jStorage.set("homestay", data.home_stays);
+      });
     };
     // get booking data end
+
+    // get vacations
+
+    // get vacations end
 
 
 
@@ -2765,8 +2781,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.hotelAmenities = $.jStorage.get("booking-amenities");
     $scope.bookingData = $.jStorage.get("booking");
-    console.log($scope.bookingData, 'data hai');
     console.log($scope.hotelAmenities, 'hotelAmenities');
+
+    $scope.vacationData = $.jStorage.get("vacation");
+    $scope.homestayData = $.jStorage.get("homestay");
+
+    $scope.star = function (starCount, type) {
+      if (type == "marked") {
+        starCount = parseInt(starCount);
+        return new Array(starCount);
+      } else if (type == "unmarked") {
+        starCount = parseInt(starCount);
+        var remainCount = 5 - starCount;
+        return new Array(remainCount);
+      }
+    };
 
     $scope.urlDestinationCity = $state.params.url;
     $scope.getCityInfo = function (type, urlSlug) {
