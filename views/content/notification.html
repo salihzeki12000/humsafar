@@ -93,7 +93,27 @@
 
               <!-- LIKED LOCAL LIFE -->
               <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'likedLocal'"><span class="avenir-heavy color-blue">Andrea Christina </span> has liked your Local Life Activity.</p>
-              <!--  LOCAL LIFE  END-->
+              <!-- LIKED LOCAL LIFE  END-->
+
+              <!-- FIRST LOCAL LIFE -->
+              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'firstLocalLife'"><span class="avenir-heavy color-blue">Andrea Christina </span> has added a post to his Local Life for the very first time.</p>
+              <!-- FIRST LOCAL LIFE  END-->
+
+              <!-- NEWBIE TO WINGS -->
+              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'newbieWings'"><span class="avenir-heavy color-blue">Andrea Christina </span> has added a post to his Local Life for the very first time.</p>
+              <!-- NEWBIE TO WINGS  END-->
+
+              <!-- WINGS TO GLOBE -->
+              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'wingsGlobe'"><span class="avenir-heavy color-blue">Andrea Christina </span> has added a post to his Local Life for the very first time.</p>
+              <!-- WINGS TO GLOBE END-->
+
+              <!-- GLOBE TO WAYFARER -->
+              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'globeWafarer'"><span class="avenir-heavy color-blue">Andrea Christina </span> has added a post to his Local Life for the very first time.</p>
+              <!-- GLOBE TO WAYFARER  END-->
+
+              <!-- WAYFARER TO NOMAD -->
+              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'wayfarerNomad'"><span class="avenir-heavy color-blue">Andrea Christina </span> has added a post to his Local Life for the very first time.</p>
+              <!-- WAYFARER TO NOMAD  END-->
 
             </div>
             <!-- NOTIFICATION DETAIL END -->
@@ -192,6 +212,30 @@
                 <img src="img/london.jpg" alt="" class="img-responsive get-center">
               </div>
               <!-- CHECKIN ON GO END -->
+
+              <!-- NEWBIE TO WINGS -->
+              <div class="notification-checkin-ongo-photo" ng-if="notification.notiType == 'newbieWings'">
+                <img src="img/notification/newbie-wings.jpg" alt="" class="img-responsive get-center">
+              </div>
+              <!-- NEWBIE TO WINGS END -->
+
+              <!-- WINGS TO GLOBE -->
+              <div class="notification-checkin-ongo-photo" ng-if="notification.notiType == 'wingsGlobe'">
+                <img src="img/notification/wings-globe.jpg" alt="" class="img-responsive get-center">
+              </div>
+              <!-- WINGS TO GLOBE END -->
+
+              <!-- GLOBE TO WAYFARER -->
+              <div class="notification-checkin-ongo-photo" ng-if="notification.notiType == 'globeWafarer'">
+                <img src="img/notification/globe-wayfarer.jpg" alt="" class="img-responsive get-center">
+              </div>
+              <!-- GLOBE TO WAYFARER END -->
+
+              <!-- WAYFARER TO NOMAD -->
+              <div class="notification-checkin-ongo-photo" ng-if="notification.notiType == 'wayfarerNomad'">
+                <img src="img/notification/wayfarer-nomad.jpg" alt="" class="img-responsive get-center">
+              </div>
+              <!-- WAYFARER TO NOMAD END -->
 
               <!-- ADD / COMMENT PHOTO -->
               <div class="notification-addpic-ongo-action" ng-if="notification.notiType == 'addPicOnGo' || notification.notiType == 'commentPicOnGo' || notification.notiType == 'commentPicLocal'">

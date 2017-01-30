@@ -7,8 +7,8 @@
   <!-- LISTED HEADER END -->
 
   <div class="listed-popup-list">
-    <div class="hotel-mainlist" ng-repeat="list in hotelList track by $index">
-      <div class="hotel-listing" ng-repeat="hotel in list track by $index">
+    <div class="hotel-mainlist" ng-repeat="hotel in hotelList track by $index">
+      <!-- <div class="hotel-listing" ng-repeat="hotel in list track by $index"> -->
         <div class="listed-popup-select relate">
           <input type="checkbox" id="{{hotel}}" name="{{hotel}}" />
           <label for="{{hotel}}">
@@ -16,7 +16,7 @@
                 <span class="list-select-budget"> $$$ </span>
             </label>
         </div>
-      </div>
+      <!-- </div> -->
     </div>
   </div>
 

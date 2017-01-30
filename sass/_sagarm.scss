@@ -3783,7 +3783,8 @@ q {
 .listed-detail-page {
   padding: 30px;
   border-radius: 10px;
-  background-color: rgba(255,255,255,0.8);
+  background-color: #fff;
+  // background-color: rgba(255,255,255,0.8);
 }
 
 .listed-detail-header {
@@ -3848,17 +3849,11 @@ q {
   margin-top: 30px;
 }
 
-.listed-popup-li {
-  &:nth-child( even ) {
-    .listed-popup-select {
-      background-color: rgba(255,255,255,0.8);
-    }
-  }
-}
-
 .listed-popup-select {
   padding: 10px;
   margin-right: 2px;
+  margin-bottom: 2px;
+  border: 1px solid #ebebeb;
   background-color: #fff;
   color: $brand-blue;
   @extend .avenir-roman;
