@@ -2030,8 +2030,7 @@ header {
 
 .user-social-item {
   padding: 12px 0;
-  border-bottom: 1px solid #b5b5b5;
-
+  // border-bottom: 1px solid #b5b5b5;
   li {
     display: inline-block;
     padding: 0 10px;
@@ -2048,6 +2047,7 @@ header {
 }
 
 .social-likes-reviews {
+  border-top: 1px solid #b5b5b5;
   padding: 8px 2px 5px;
   font-size: 12px;
 }
@@ -3868,7 +3868,7 @@ header {
 
 .post-header {
   padding: 10px;
-  border-bottom: 1px solid #b5b5b5;
+  // border-bottom: 1px solid #b5b5b5;
 }
 
 .picture-section {
@@ -3972,11 +3972,13 @@ header {
 
 .imgpost-relatedslider {
   padding: 10px 10px 0;
-
   .related-postimgholder {
     @include square(80px);
   }
-
+  .flexslider {
+    border-color: none;
+    background-color: transparent;
+  }
   .carousel {
     min-height: 80px;
   }
@@ -10467,7 +10469,6 @@ ng-map {
     height: 290px;
     overflow: hidden;
     position: relative;
-
     .item {
       position: relative;
       height: 100%;
@@ -10530,6 +10531,68 @@ ng-map {
     }
   }
 }
+// tour destination
+// tours
+.tour-card-holder {
+  position: relative;
+  margin-bottom: 10px;
+}
+.blurry-tour-overlay {
+  &:after {
+  	content: '';
+  	@include position(absolute, 0);
+  	background-color: rgba(0,0,0,0.5);
+  }
+}
+.slider-tour {
+  height: 290px;
+  overflow: hidden;
+  position: relative;
+  .item {
+  	height: 100%;
+  	background-repeat: no-repeat;
+    background-position: 50% 50%;
+    -webkit-background-size: cover;
+    background-size: cover;
+ }
+}
+.tour-information {
+  padding: 25px 25px 15px 15px;
+  color: #fff;
+}
+.tour-list-heading {
+  .tour-name {
+    margin: 0;
+    font-family: "AvenirLTStd-Medium";
+    font-size: 18px;
+    @extend.text-ellipsis;
+  }
+}
+.tour-chart-main {
+  padding: 12px 0;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  .tour-descp { min-height: 120px; }
+}
+.tour-see-detail {
+  padding: 10px 0px 0px;
+}
+.tour-price {
+	margin-top: 8px;
+	display: inline-block;
+}
+.tour-star-rate {
+  margin: 10px 0;
+  ul { display: inline-block; }
+  .tour-review {
+    margin-left: 5px;
+    display: inline-block;
+  }
+}
+.tour-cost { font-size: 16px; }
+
+// tours listing end
+// tour destination end
 // destination booking end
 // destination vacations and rentals
 

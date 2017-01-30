@@ -869,6 +869,18 @@ firstapp.filter('typeOfPost', function () {
   }
 });
 
+firstapp.filter('truncate', function () {
+  return function (value,limit) {
+    if(value) {
+      if(value.length < limit) {
+        return value;
+      }else {
+        return value.slice(0, limit) + "...";
+      }
+    }
+  }
+});
+
 firstapp.filter('itineraryType', function () {
   return function (input) {
     var returnVal = "";

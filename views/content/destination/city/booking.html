@@ -139,55 +139,71 @@
         </div>
       </div>
       <!-- Tours and Excursions End  -->
-      <!-- Tours and Excursions End  -->
+      <!-- Tours and Excursions start  -->
       <div class="title-head-left pt20">
         <h4 class="uppercase">Tours and Excursions</h4>
       </div>
-      <div class="agt-usr-tourpackages">
+      <div class="destination-tour-booking destination-hotel-card tour-card-container">
         <div class="row">
-          <div class="col-md-4 col-sm-6" ng-repeat="tourcard in usrTourPackageCard track by $index">
-            <div class="agt-itinerarycard">
-              <div class="itinerary-img">
-                <div class="logo-booking-card">
-                  <img ng-src="{{tourcard.tourcategoryImg}}" alt="travel-libro">
-                </div>
-                <div class="theme">
-                  <div class="theme-img">
-                    <img ng-src="{{tourcard.tourcategoryImg}}" class="img-responsive" alt="">
-                  </div>
-                  <div class="theme-name">
-                    <p>{{tourcard.tourcategoryTitle}}</p>
-                  </div>
-                </div>
-                <div class="country-badges">
-                  <div class="country-holder img-circle" ng-repeat="tourcountryflagbadge in tourcard.tourcountryBadgesFlag track by $index">
-                    <img ng-src="{{tourcountryflagbadge}}" alt="" class="img-responsive">
-                  </div>
-                </div>
-                <img ng-src="{{tourcard.tourImg}}" alt="" class="img-responsive">
-                <div class="itinerary-imgfoot ">
-                  <div class="imgfoot-top clearfix">
-                    <div class="pull-left">
-                      <h4 class="font-sz18">{{tourcard.agttourTitle}}</h4>
-                      <p class="day-night"><span>{{tourcard.tourNightC}} Nights</span> | <span>{{tourcard.tourDayC}} Days</span></p>
-                      <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{tourcard.tourDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{tourcard.tourTime}}</span></p>
+          <div class="col-md-6" ng-repeat="tour in toursData track by $index">
+            <div class="tour-card-holder">
+                  <div class="blur-overlay-bg-div"></div>
+                  <div class="tour-view">
+                    <div class="row m-clear">
+                      <div class="col-md-5 col-sm-5 col-pad-zero">
+                        <div class="slider-tour">
+                          <div class="item " style="background-image: url('{{tour.pic_url}}');">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-7 col-sm-7 col-pad-zero">
+                        <div class="tour-information">
+                          <!-- tour heading -->
+                          <div class="tour-list-heading">
+                            <h4 class="tour-name" title="Peacock Trail Walking Tour in Mylapore">
+                              {{tour.name}}
+                            </h4>
+                            <div class="tour-star-rate">
+                              <ul class="list-inline">
+                                    <li><i class="fa fa-star tour-star"></i></li>
+                                    <li><i class="fa fa-star tour-star"></i></li>
+                                    <li><i class="fa fa-star tour-star"></i></li>
+                                    <li><i class="fa fa-star tour-star"></i></li>
+                                    <li><i class="fa fa-star tour-star"></i></li>
+                              </ul>
+                              <span class="tour-review">
+                                {{tour.review}}
+                                <span>Reviews</span>
+                              </span>
+                            </div>
+                          </div>
+                          <!-- tour heading -->
+                          <!-- tour chart -->
+                          <div class="tour-chart-main">
+                            <div class="tour-descp text-justify">
+                              <p class="avenir-roman m-clear text-justify" ng-bind-html="tour.description | truncate:210"></p>
+                            </div>
+                          </div>
+                          <!-- tour chart end-->
+                          <!-- tour see detail and button -->
+                          <div class="tour-see-detail">
+                            <div class="clearfix">
+                              <div class="pull-left">
+                                <span class="tour-price">From <span class="tour-cost avenir-medium">USD {{tour.from}}</span></span>
+                              </div>
+                              <div class="pull-right">
+                                <a class="btn btn-deal" href="{{tour.link}}" target="_blank">View Deal
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- tour see detail and button end-->
+                        </div>
+                      </div>
                     </div>
-                    <div class="pull-right">
-                      <p class="font-sz18 cost-posi">${{tourcard.agttourCost}}</p>
-                    </div>
-                    <button class="btn btn-pink btn-download">Download</button>
-                    <button class="btn btn-pink btn-book">Book</button>
                   </div>
                 </div>
-                <div class="call-btn" ng-click="showContact();">
-                  <i class="fa fa-phone" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
-        <div class="button load-more text-center ptb20">
-          <button class="btn">Load More..</button>
         </div>
       </div>
       <!-- Tours and Excursions End  -->

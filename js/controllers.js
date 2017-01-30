@@ -2527,6 +2527,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       },function(data){
         $.jStorage.set("homestay", data.home_stays);
       });
+      NavigationService.getDestinationTours({
+        cityName: $scope.destCityName,
+        countryName: $scope.destCountryName
+      },function(data){
+        $.jStorage.set("tours", data.tours);
+      });
     };
     // get booking data end
 
@@ -2785,6 +2791,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.vacationData = $.jStorage.get("vacation");
     $scope.homestayData = $.jStorage.get("homestay");
+    $scope.toursData = $.jStorage.get("tours");
 
     $scope.star = function (starCount, type) {
       if (type == "marked") {

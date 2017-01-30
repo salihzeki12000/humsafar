@@ -207,6 +207,11 @@ var navigationservice = angular.module('navigationservice', [])
         callback(data);
       });
     },
+    getDestinationTours: function(formData, callback){
+      $http.get("http://192.168.0.119:3000/migrations/city_tours.json?city_name="+formData.cityName+"&country_name="+formData.countryName+"&withCredentials=true", formData).success(function (data) {
+        callback(data);
+      });
+    },
     uploadFile: function (formData, callback) {
       $http.post(uploadurl, formData, {
         headers: {
