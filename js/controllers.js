@@ -2518,19 +2518,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       NavigationService.getDestinationVacation({
         cityName: $scope.destCityName,
         countryName: $scope.destCountryName
-      },function(data){
+      }, function (data) {
         $.jStorage.set("vacation", data.vacation_rentals);
       });
       NavigationService.getDestinationHomestay({
         cityName: $scope.destCityName,
         countryName: $scope.destCountryName
-      },function(data){
+      }, function (data) {
         $.jStorage.set("homestay", data.home_stays);
       });
       NavigationService.getDestinationTours({
         cityName: $scope.destCityName,
         countryName: $scope.destCountryName
-      },function(data){
+      }, function (data) {
         $.jStorage.set("tours", data.tours);
       });
     };
@@ -6934,15 +6934,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.followFollowing = function (user) {
+      console.log("object", user);
       console.log(user.following, user._id, user.name);
       if (user.following) {
         LikesAndComments.unFollowUser(user._id, function (data) {
-          console.log(data);
+          console.log(data, "unfollow now");
           user.following = false;
         })
       } else {
         LikesAndComments.followUser(user._id, user.name, function (data) {
-          console.log(data);
+          console.log(data, "follow now");
           user.following = true;
         });
       }
@@ -7960,23 +7961,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
     // LISTED MODAL POPUP
-  $scope.hotelList = [];
-  $scope.showListed = function () {
-    modal = $uibModal.open({
-      templateUrl: "views/modal/show-listed.html",
-      animation: true,
-      scope: $scope,
-      windowClass: "show-listed-popup",
-      size: "lg"
-    });
-  };
+    $scope.hotelList = [];
+    $scope.showListed = function () {
+      modal = $uibModal.open({
+        templateUrl: "views/modal/show-listed.html",
+        animation: true,
+        scope: $scope,
+        windowClass: "show-listed-popup",
+        size: "lg"
+      });
+    };
 
-  $scope.hotelList = ['Taj Mahal Hotel', 'Oberoi Gardens', 'Ramee Guestline', 'J W Marriot', 'St. Regis', 'Sea Princess', 'Royal Gardens', 'ITC Maratha', 'Grand Hyatt'];
+    $scope.hotelList = ['Taj Mahal Hotel', 'Oberoi Gardens', 'Ramee Guestline', 'J W Marriot', 'St. Regis', 'Sea Princess', 'Royal Gardens', 'ITC Maratha', 'Grand Hyatt'];
 
 
-  // $scope.hotelList = _.chunk($scope.hotelMainList, 2);
-  // console.log($scope.hotelList, 'new array');
-  // LISTED MODAL POPUP END
+    // $scope.hotelList = _.chunk($scope.hotelMainList, 2);
+    // console.log($scope.hotelList, 'new array');
+    // LISTED MODAL POPUP END
 
     $scope.countryPanel = "";
     $scope.cityPanel = "";
@@ -13335,13 +13336,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       notiType: "likedLocal"
     }, {
       notiType: "firstLocalLife"
-    },{
+    }, {
       notiType: "newbieWings"
-    },{
+    }, {
       notiType: "wingsGlobe"
-    },{
+    }, {
       notiType: "globeWafarer"
-    },{
+    }, {
       notiType: "wayfarerNomad"
     }];
     // NOTIFICATION CARD JSON END

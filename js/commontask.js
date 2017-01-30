@@ -363,8 +363,8 @@ commontask.directive('findTags', function (LikesAndComments) {
 });
 
 commontask.filter("followFollowingStatus", function () {
-  return function (input, id) {
-    console.log(input, "---", id);
+  return function (input) {
+    console.log(input, "---");
     if (input) {
       return "Following";
     } else {

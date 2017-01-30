@@ -35,10 +35,10 @@
                       <div class="pull-left">
                         <p class="m-clear"><span>{{activity.startTime|formatDate:'date'}}</span> | <span>{{activity.startTime|formatDate:'time'}}</span></p>
                       </div>
-                      <div class="pull-right">
-                        <div class="follow-or-following pointer" ng-click="followFollowing(activity.)">
+                      <div class="pull-right" ng-if="activity.owner._id!=userData._id">
+                        <div class="follow-or-following pointer" ng-click="followFollowing(activity.owner)">
                           <!--<span class="color-dark-blue ml5" ng-if="activity.follow">Follow</span>-->
-                          <span class="color-dark-blue ml5">{{activity.following|followFollowingStatus:activity._id}}</span>
+                          <span class="color-dark-blue ml5">{{activity.owner.following|followFollowingStatus}}</span>
                         </div>
                       </div>
                     </div>
@@ -102,7 +102,7 @@
                     </div>
                     <div class="post-img relate" ng-if="activity.photos.length>0 && activity.type!='quick-itinerary' && activity.type!='detail-itinerary'"
                       ng-init="activity.index=0">
-                      <img ng-src="{{activity.photos[activity.index].name|uploadpath:350}}" alt="" class="img-responsive">
+                      <img ng-src="{{activity.photos[activity.index].name|uploadpath:350:240}}" alt="" class="img-responsive">
                   </div>
                   <!-- img post end -->
                   <!-- img post slider -->
@@ -128,7 +128,7 @@
                   <!-- post travelled journey -->
                   <div class="travelled-journey" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey'">
                     <div class="travelled-imgholder">
-                      <img ng-src="{{activity.startLocationPic|uploadpath}}" alt="" class="img-responsive m-center">
+                      <img ng-src="{{activity.startLocationPic|uploadpath:722:900}}" alt="" class="img-responsive m-center">
                     </div>
                     <div class="journey-tag-holder">
                       <div class="days-spent pull-right">
@@ -240,7 +240,7 @@
                             <a href="" class="fnt-20"><i class="fa color-blue card-like-animation " ng-class="activity.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i></a>
                           </span>
                         <div class="inline-block v-mid" ng-if="!(activity.type=='editor')">
-                          <span class="pointer mr5"><img src="img/comments.png" alt="" height="19" ng-click="getCommentsData(activity)"></span>
+                          <span class="pointer mr5"><img src="img/comments.png" alt="" height="19" ng-click="getCommentsData(activity);editOption(activity.option)"></span>
                           <span class="pointer mr5"><img src="img/reviews.png" alt="" height="19" ng-if="activity.type =='ended-journey' || activity.type =='detail-itinerary' || activity.type =='quick-itinerary'"></span>
                           <span class="pointer mr5"><img src="img/share.png" alt="" height="19"></span>
                         </div>
@@ -296,8 +296,8 @@
                           </span>
                         <div class="activity-edit-option" ng-show="activity.option.backgroundClick">
                           <ul>
-                            <li ng-if="activity._id==userData._id">Hide From All</li>
-                            <li ng-if="activity._id!=userData._id">Report</li>
+                            <li ng-if="activity.owner._id==userData._id">Hide From All</li>
+                            <li ng-if="activity.owner._id!=userData._id">Report</li>
                           </ul>
                         </div>
                       </div>
