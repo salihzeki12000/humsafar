@@ -4092,7 +4092,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     })
   })
 
-  .controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife, OnGoJourney) {
+  .controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, $filter,MyLife, OnGoJourney) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -4569,6 +4569,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
       }
 
+  //moments of Mylife
+    var myDate = new Date();
+    var nextMonth = new Date(myDate);
+    nextMonth.setMonth(myDate.getMonth()+1);
+    $scope.month = $filter('date')(nextMonth, 'MMMM');
+    $scope.year = $filter('date')(nextMonth, 'yyyy');
+
+
+    console.log($scope.year , "this date");
+      $scope.getMoments = function(type,type2,month,year){
+       console.log(month , "this date");
+        NavigationService.getMyLifeMoments({
+          type: type,
+          type2: type2,
+          month: month,
+          year: year,
+          }, function(data){
+            $scope.monthsMoments = data;
+            console.log($scope.monthsMoments,"Moments aaya");
+          });
+      };
+       $scope.getMoments("all", "moments", $scope.month, $scope.year);
+
+    //End moments of Mylife
+      
       $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
       $scope.mapDataHumanizeFn = function (val) {
         return val + " units";
@@ -5185,6 +5210,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     // holidayplanner json
   })
+
+
+
+
+
+
+
+
+ 
   .controller('JourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 

@@ -105,8 +105,8 @@
                       <!--jounrey main detail card-->
                       <div class="travelled-journey relate" ng-click="routeTO(life.type,life.urlSlug)">
                         <div class="travelled-imgholder">
-                          <img ng-src="{{life.coverPhoto|uploadpath}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto!=null">
-                          <img ng-src="{{life.startLocationPic|small|uploadpath}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto==null">
+                        <img ng-src="{{life.coverPhoto|uploadpath:722:900}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto!=null">
+                        <img ng-src="{{life.startLocationPic|small|uploadpath:722:900:'cover'}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto==null">
                         </div>
                       <div class="country-badges">
                         <div class="country-visited" ng-repeat="visit in life.countryVisited | limitTo : 3">
