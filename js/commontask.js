@@ -258,7 +258,6 @@ commontask.directive('findTags', function (LikesAndComments) {
     link: function ($scope, element, attrs) {
       $scope.$watch('ngModel', function (newVal, oldVal) {
         // alert($scope.ngModel);
-        console.log($scope.elementId, $scope.enable);
         var text = $scope.ngModel;
         var comment = {
           'text': newVal
@@ -375,10 +374,8 @@ commontask.filter("followFollowingStatus", function () {
 
 commontask.filter("singularPlural", function () {
   return function (input, flag) {
-    console.log(input, flag);
     switch (flag) {
       case "Likes":
-        console.log(input, flag);
         if (input == 1) {
           return "Like";
         } else {
@@ -386,7 +383,6 @@ commontask.filter("singularPlural", function () {
         }
         break;
       case "Comments":
-        console.log(input, flag);
         if (input == 1) {
           return "Comment";
         } else {
@@ -394,7 +390,6 @@ commontask.filter("singularPlural", function () {
         }
         break;
       case "Days":
-        console.log(input, flag);
         if (input == 1) {
           return 'Day';
         } else {
@@ -402,7 +397,6 @@ commontask.filter("singularPlural", function () {
         }
         break;
       case "Countries Visited":
-        console.log(input, flag);
         if (input == 1) {
           return 'Country Visited';
         } else {

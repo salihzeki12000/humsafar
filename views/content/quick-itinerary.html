@@ -16,18 +16,24 @@
                   <div class="itinerary-fill-info">
                     <div class="itinerary-month relate">
                       <label for="month">Month</label>
-                      <div class="itinerary-inputholder">
+                      <!--<div class="itinerary-inputholder">
                         <input type="text" class="form-control text-center" id="month" ng-model="qItinerary.month" ng-click="viewMonths.show = !viewMonths.show" ng-change="viewMonths.show=true">
                       </div>
                       <div class="month-dropdown" ng-show="viewMonths.show">
                         <ul>
                           <li ng-repeat="month in monthDrop | filter:qItinerary.month"><a href="" title="{{month}}" ng-click="qItinerary.month=month;viewMonths.show=false">{{month}}</a></li>
                         </ul>
-                      </div>
+                      </div>-->
+                      <ui-select ng-model="qItinerary.month" theme="selectize" ng-disabled="ctrl.disabled" style="width: 300px;" title="Selecct Month">
+                        <ui-select-match placeholder="Select Month">{{$select.selected}}</ui-select-match>
+                        <ui-select-choices repeat="month in monthDrop | filter: $select.search">
+                          <span ng-bind-html="month | highlight: $select.search"></span>
+                        </ui-select-choices>
+                      </ui-select>
                     </div>
                     <div class="itinerary-year relate">
                       <label for="year">Year</label>
-                      <div class="itinerary-inputholder">
+                      <!--<div class="itinerary-inputholder">
                         <input type="text" class="form-control text-center" id="year" ng-click="viewYear();" ng-model="qItinerary.year" ng-change="viewYear.show=true">
                       </div>
                       <div class="year-dropdown" ng-show="viewYear.show">
@@ -36,7 +42,14 @@
                             <a href="" title="{{list}}">{{list}}</a>
                           </li>
                         </ul>
-                      </div>
+                      </div>-->
+                      <ui-select ng-model="qItinerary.year" theme="selectize" ng-disabled="ctrl.disabled" style="width: 300px;" title="Selecct Year"
+                        ng-click="viewYear();">
+                        <ui-select-match placeholder="Select Year">{{$select.selected}}</ui-select-match>
+                        <ui-select-choices repeat="list in getYear | filter: $select.search">
+                          <span ng-bind-html="list | highlight: $select.search"></span>
+                        </ui-select-choices>
+                        </ui-select>
                     </div>
                     <div class="itinerary-duration">
                       <label for="Day">Days</label>
@@ -64,7 +77,6 @@
             <!-- itinerary type end -->
             <!-- country and city visited -->
             <!--{{qItinerary.countryVisited[countryPanel]}}-->
-
             <div class="itinerary-country-visited" ng-init="countrySelectedFlag=true">
               <div class="row relate" ng-repeat="add in addCountry track by $index" ng-init="countryPanel=$index">
                 <!-- new ui select dropdown country -->
@@ -79,15 +91,15 @@
                   </div>
                 </div>
                 <!-- new ui select dropdown country end-->
-
                 <!-- new ui select dropdown for city -->
                 <div class="col-md-6 col-sm-6">
                   <div class="itinerary-inputholder input-city-visited quick-input-city">
                     <ui-select multiple ng-model="add.cityVisited" theme="bootstrap" ng-click="updateCitiesArr($select.selected._id)">{{$select.search}}
                       <ui-select-match placeholder="City Visited">{{$item.name}}</ui-select-match>
-                      <ui-select-choices repeat="{'name':city.name,placeId:city.placeId} as city in cities" refresh="searchCity(add.country,$select.search,add.cityVisited)" refresh-delay="0">
+                      <ui-select-choices repeat="{'name':city.name,placeId:city.placeId} as city in cities" refresh="searchCity(add.country,$select.search,add.cityVisited)"
+                        refresh-delay="0">
                         <span ng-bind="city.name"></span>
-                      </ui-select-choices>
+                        </ui-select-choices>
                     </ui-select>
                   </div>
                   <span class="add-city-quick">Add other cities visited in this country on this trip</span>
@@ -121,24 +133,20 @@
                   <img ng-src="{{photo.name|uploadpath:250:250:'cover'}}" alt="Quick Itinerary" class="img-responsive get-center">
                   <span class="delete-detail-pic" ng-hide="photo.name==index"><i ng-click="removePhoto($index,city)" class="fa fa-times"></i></span>
                   <!-- caption start -->
-
-                  <div class="detail-pic-caption" ng-click="addQuickCaption(photo.name);"
-                  ng-hide="photo.name==index">
+                  <div class="detail-pic-caption" ng-click="addQuickCaption(photo.name);" ng-hide="photo.name==index">
                     <p ng-if="!photo.caption || photo.caption==''">Add Caption</p>
                     <p class="text-ellipsis" ng-if="photo.caption && !photo.caption==''">{{photo.caption}}</p>
                   </div>
-
                   <div class="detail-pic-edit-caption" ng-show="photo.name==index" ng-class="{'showcaptiondetailpic' : index==photo.name,'' : index!==photo.name}">
-                   <textarea name="" id="captionArea" cols="30" rows="7" class="form-control" maxlength="150" placeholder="Enter Caption" ng-model="photo.caption"></textarea>
-                   <div class="view-caption-onimg">
-                     <span ng-click="addQuickCaption(photo.name);"><i class="fa fa-angle-down"></i></span>
-                   </div>
-                   <div class="text-typed-count">
-                     <span id="remainCaption"></span>
-                   </div>
-                 </div>
-
-                 <!-- caption end -->
+                    <textarea name="" id="captionArea" cols="30" rows="7" class="form-control" maxlength="150" placeholder="Enter Caption" ng-model="photo.caption"></textarea>
+                    <div class="view-caption-onimg">
+                      <span ng-click="addQuickCaption(photo.name);"><i class="fa fa-angle-down"></i></span>
+                    </div>
+                    <div class="text-typed-count">
+                      <span id="remainCaption"></span>
+                    </div>
+                  </div>
+                  <!-- caption end -->
                 </div>
                 <div class="trip-upload text-center">
                   <div class="upload-section">

@@ -1365,7 +1365,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             map.setCenter(center);
           };
           drawLine(departure, arrival, percentComplete, i, value);
-        };
+        }
 
         pointsForLine = function (i, percentComplete, value, flag) {
           // i=currennt card comming from bottom / arrival card
@@ -1434,10 +1434,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         templateUrl: "views/modal/edit-kind-of-journey.html",
         scope: $scope,
         backdropClass: "review-backdrop",
-      })
+      });
     };
 
-    $scope.dItineraryType = [{
+    $scope.journeyType = [{
       img: "img/itinerary/adventure.png",
       caption: "Adventure",
       width: "25"
@@ -1488,7 +1488,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
     // EDIT KIND OF JOURNEY POPUP END
 
-
+    $scope.selectItinerary = function (val) {
+      console.log(val);
+      if ($scope.journeyType[val].activeClass == "active-itinerary") {
+        console.log("inside if");
+        $scope.journeyType[val].activeClass = "";
+      } else {
+        console.log("inside else");
+        $scope.journeyType[val].activeClass = "active-itinerary";
+      }
+      console.log($scope.journeyType[val]);
+    };
 
     $scope.viewCardComment = false;
     $scope.getCard = "";
@@ -2510,31 +2520,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         cityName: $scope.destCityName,
         countryName: $scope.destCountryName
       }, function (data) {
-        $.jStorage.set("booking", data.hotels);
-        $.jStorage.set("booking-amenities", data.hotel_facilities);
+        $.jStorage.set("booking", data);
         // $scope.bookingData = data.hotels;
         // console.log($scope.bookingData,'booking ka data');
       });
-      NavigationService.getDestinationVacation({
-        cityName: $scope.destCityName,
-        countryName: $scope.destCountryName
-      }, function (data) {
-        $.jStorage.set("vacation", data.vacation_rentals);
-      });
-      NavigationService.getDestinationHomestay({
-        cityName: $scope.destCityName,
-        countryName: $scope.destCountryName
-      }, function (data) {
-        $.jStorage.set("homestay", data.home_stays);
-      });
-      NavigationService.getDestinationTours({
-        cityName: $scope.destCityName,
-        countryName: $scope.destCountryName
-      }, function (data) {
-        $.jStorage.set("tours", data.tours);
-      });
     };
     // get booking data end
+
 
     // get vacations
 
@@ -2785,13 +2777,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.hotelAmenities = $.jStorage.get("booking-amenities");
     $scope.bookingData = $.jStorage.get("booking");
-    console.log($scope.hotelAmenities, 'hotelAmenities');
+    $scope.hotelsData = $scope.bookingData.hotels;
+    $scope.toursData = $scope.bookingData.tours;
+    $scope.vacationsData = $scope.bookingData.vacation_rentals;
+    $scope.homestayData = $scope.bookingData.home_stays;
+    console.log($scope.hotelsData, 'hotel ka data');
+    console.log($scope.toursData, 'tourData ka data');
+    console.log($scope.vacationsData, 'vacationData ka data');
+    console.log($scope.homestayData, 'homestayData ka data');
 
-    $scope.vacationData = $.jStorage.get("vacation");
-    $scope.homestayData = $.jStorage.get("homestay");
-    $scope.toursData = $.jStorage.get("tours");
 
     $scope.star = function (starCount, type) {
       if (type == "marked") {
@@ -8898,11 +8893,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.getYear = [];
     $scope.viewYear = function () {
-      $scope.viewYear.show = !$scope.viewYear.show
       var d = new Date();
       var n = d.getFullYear();
       $scope.getYear = _.rangeRight(1900, n + 1);
-
     };
 
 

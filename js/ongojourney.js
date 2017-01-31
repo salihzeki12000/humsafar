@@ -276,7 +276,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
         } else {
           $scope.ongo.onDisplay = "photos";
         }
-        console.log($scope.ongo.photosVideos, $scope.ongo.onDisplay);
       }
 
       // $scope.ongo.journeyTypeicon = "";
