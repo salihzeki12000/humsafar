@@ -3290,6 +3290,9 @@ header {
   .button-group {
     .btn {
       font-size: 18px;
+      &.active {
+        background-color: $brand-pink;
+      }
     }
 
     .btn:first-child {
@@ -3982,7 +3985,7 @@ header {
   .flexslider {
     border-color: none;
     background-color: transparent;
-    .flex-direction-nav{ 
+    .flex-direction-nav{
       .flex-prev {
         left: 4px;
       }
@@ -7086,6 +7089,36 @@ header {
   &:after {
     right: 0;
   }
+}
+
+.itinerary-inputholder .quick-month-year-select{
+  border-bottom: 1px solid $brand-blue;
+  background-color: transparent;
+  color: $brand-blue;
+  input[type="search"]{
+    padding: 6px 12px;
+    border-bottom: 0px;
+    background-color: transparent;
+  }
+  .ui-select-dropdown{
+    height: 150px;
+    opacity: 1;
+    position: absolute;
+    top: 35px !important;
+    background-color: #fff;
+    color: $brand-blue;
+    overflow-y: scroll;
+    text-align: center;
+    z-index: 1;
+    .option{
+      @extend .pointer;
+    }
+  }
+}
+
+.itinerary-inputholder .month-year-select{
+  padding: 6px 12px;
+  text-align: center;
 }
 
 .fill-itinerary-detail,
@@ -10292,151 +10325,155 @@ ng-map {
       z-index: 2;
     }
 
-    .hotel-back-view {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      @include transform(rotateX(180deg));
-      @include backface-visibility(hidden);
-
-      .flexslider {
-        background-color: transparent;
-        border: none;
-      }
-      //tabs
-      .on-tabs-close {
-        min-height: 44px;
-        display: block;
-        float: right;
-        width: 50px;
-        text-align: center;
-        border: 1px solid #ddd;
-        color: #fff;
-        background: rgba(0, 0, 0, 0.7);
-        border-radius: 0;
-        padding: 10px 14px;
-        cursor: pointer;
-        @include transition (all ease 300ms);
-
-        &:hover {
-          background-color: #ff6759;
-          color: #fff;
-        }
-      }
-
-      .glyphicon-chevron-left,
-      .glyphicon-chevron-right {
-        display: inline-block;
-        font: normal normal normal 14px/1 FontAwesome;
-        font-size: inherit;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-
-      .glyphicon-chevron-right:before {
-        content: "\f054";
-      }
-
-      .glyphicon-chevron-left:before {
-        content: "\f053";
-      }
-
-      .carousel-indicators {
-        bottom: 0;
-      }
-
-      .carousel-indicators li {
-        border-color: #f2675b;
-
-        &.active {
-          background-color: #f2675b;
-        }
-      }
-
-      .nav-tabs.nav-justified {
-        border-bottom: 0;
-        padding-right: 45px;
-
-        .uib-tab.nav-item {
-          border-radius: 0;
-
-          a {
-            border: 1px solid #ddd;
-            border-radius: 4px 4px 0 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 0;
-
-            &:focus,
-            &:hover {
-              background-color: #ff6759;
-              color: #fff;
-            }
-          }
-
-          &.active a {
-            background-color: #ff6759;
-            color: #fff;
-          }
-        }
-      }
-
-      .deal-tablehead {
-        font-size: 13px;
-        text-align: left;
-        vertical-align: top;
-      }
-
-      .tab-content {
-        min-height: 246px;
-        padding: 20px;
-
-        .scroll-content {
-          height: 220px;
-          overflow-y: auto;
-          overflow-x: hidden;
-
-          &::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-            border-radius: 10px;
-            background-color: #F5F5F5;
-          }
-
-          &::-webkit-scrollbar {
-            width: 2px;
-            background-color: #F5F5F5;
-          }
-
-          &::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-            background-color: #555;
-          }
-
-          .amenities-holder ul li {
-            display: inline-block;
-            width: 49.5%;
-            line-height: 2;
-          }
-        }
-
-        .deals-logo-holder img {
-          width: 60px;
-        }
-      }
-      //tabs end
-      .hotel-details {
-        border-bottom: 1px solid #fff;
-      }
-      // delete if not needed this border
-    }
-
     .flip-card {
       @include transform(rotateX(180deg));
       @include transition(all 300ms linear);
     }
+  }
+  .hotel-back-view {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include transform(rotateX(180deg));
+    @include backface-visibility(hidden);
+
+    .flexslider {
+      background-color: transparent;
+      border: none;
+    }
+    //tabs
+    .on-tabs-close {
+      min-height: 44px;
+      display: block;
+      float: right;
+      width: 50px;
+      text-align: center;
+      border: 1px solid #ddd;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 0;
+      padding: 10px 14px;
+      cursor: pointer;
+      @include transition (all ease 300ms);
+
+      &:hover {
+        background-color: #ff6759;
+        color: #fff;
+      }
+    }
+
+    .glyphicon-chevron-left,
+    .glyphicon-chevron-right {
+      display: inline-block;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: inherit;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .glyphicon-chevron-right:before {
+      content: "\f054";
+    }
+
+    .glyphicon-chevron-left:before {
+      content: "\f053";
+    }
+
+    .carousel-indicators {
+      bottom: 0;
+    }
+
+    .carousel-indicators li {
+      border-color: #f2675b;
+
+      &.active {
+        background-color: #f2675b;
+      }
+    }
+
+    .nav-tabs.nav-justified {
+      border-bottom: 0;
+      padding-right: 45px;
+
+      .uib-tab.nav-item {
+        border-radius: 0;
+
+        a {
+          border: 1px solid #ddd;
+          border-radius: 4px 4px 0 0;
+          background-color: rgba(0, 0, 0, 0.7);
+          border-radius: 0;
+
+          &:focus,
+          &:hover {
+            background-color: #ff6759;
+            color: #fff;
+          }
+        }
+
+        &.active a {
+          background-color: #ff6759;
+          color: #fff;
+        }
+      }
+    }
+
+    .deal-tablehead {
+      width: 20%;
+      font-size: 13px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .deal-list .table>tbody>tr>td { font-size: 13px; }
+    .btn-deal {
+      padding: 5px 9px;
+      font-size: 12px;
+    }
+    .tab-content {
+      min-height: 246px;
+      padding: 20px;
+
+      .scroll-content {
+        height: 220px;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        &::-webkit-scrollbar-track {
+          -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+          border-radius: 10px;
+          background-color: #F5F5F5;
+        }
+
+        &::-webkit-scrollbar {
+          width: 2px;
+          background-color: #F5F5F5;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          border-radius: 10px;
+          -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+          background-color: #555;
+        }
+
+        .amenities-holder ul li {
+          display: inline-block;
+          width: 49.5%;
+          line-height: 2;
+        }
+      }
+
+      .deals-logo-holder img {
+        width: 50px;
+      }
+    }
+    //tabs end
+    .hotel-details {
+      border-bottom: 1px solid #fff;
+    }
+    // delete if not needed this border
   }
 
   .col-md-6:nth-child(odd) {
@@ -10557,12 +10594,9 @@ ng-map {
       .star-marked {
         padding: 0 5px;
       }
-
       .star-unmarked {
         padding: 0 5px;
-        &:first-child {
-          padding-left: 0px;
-        }
+        &:first-child { padding-left: 0; }
       }
     }
   }
@@ -10598,86 +10632,87 @@ ng-map {
       display: inline-block;
     }
   }
-}
-// tour destination
-// tours
 
-.tour-card-holder {
-  position: relative;
-  margin-bottom: 10px;
-}
+  // tours
 
-.blurry-tour-overlay {
-  &:after {
-    content: '';
-    @include position(absolute, 0);
-    background-color: rgba(0,0,0,0.5);
+  .tour-card-holder {
+    position: relative;
+    margin-bottom: 10px;
   }
-}
 
-.slider-tour {
-  height: 290px;
-  overflow: hidden;
-  position: relative;
-
-  .item {
-    height: 100%;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    -webkit-background-size: cover;
-    background-size: cover;
+  .blurry-tour-overlay {
+    &:after {
+      content: '';
+      @include position(absolute, 0);
+      background-color: rgba(0,0,0,0.5);
+    }
   }
-}
 
-.tour-information {
-  padding: 25px 25px 15px 15px;
-  color: #fff;
-}
+  .slider-tour {
+    height: 290px;
+    overflow: hidden;
+    position: relative;
 
-.tour-list-heading {
-  .tour-name {
-    margin: 0;
-    font-family: "AvenirLTStd-Medium";
-    font-size: 18px;
-    @extend.text-ellipsis;
+    .item {
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      -webkit-background-size: cover;
+      background-size: cover;
+    }
   }
-}
 
-.tour-chart-main {
-  padding: 12px 0;
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #fff;
-
-  .tour-descp {
-    min-height: 120px;
+  .tour-information {
+    padding: 25px 25px 15px 15px;
+    color: #fff;
   }
-}
 
-.tour-see-detail {
-  padding: 10px 0 0;
-}
+  .tour-list-heading {
+    .tour-name {
+      margin: 0;
+      font-family: "AvenirLTStd-Medium";
+      font-size: 18px;
+      @extend.text-ellipsis;
+    }
+  }
 
-.tour-price {
-  margin-top: 8px;
-  display: inline-block;
-}
+  .tour-chart-main {
+    padding: 12px 0;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
 
-.tour-star-rate {
-  margin: 10px 0;
+    .tour-descp {
+      min-height: 120px;
+    }
+  }
 
-  ul {
+  .tour-see-detail {
+    padding: 10px 0 0;
+  }
+
+  .tour-price {
+    margin-top: 8px;
     display: inline-block;
   }
 
-  .tour-review {
-    margin-left: 5px;
-    display: inline-block;
+  .tour-star-rate {
+    margin: 10px 0;
+
+    ul {
+      display: inline-block;
+    }
+
+    .tour-review {
+      margin-left: 5px;
+      display: inline-block;
+    }
+  }
+
+  .tour-cost {
+    font-size: 16px;
   }
 }
 
-.tour-cost {
-  font-size: 16px;
-}
 // tours listing end
 // tour destination end
 // destination booking end
