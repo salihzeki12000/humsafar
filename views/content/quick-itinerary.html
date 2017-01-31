@@ -16,20 +16,22 @@
                   <div class="itinerary-fill-info">
                     <div class="itinerary-month relate">
                       <label for="month">Month</label>
-                      <!--<div class="itinerary-inputholder">
+                      <!-- <div class="itinerary-inputholder">
                         <input type="text" class="form-control text-center" id="month" ng-model="qItinerary.month" ng-click="viewMonths.show = !viewMonths.show" ng-change="viewMonths.show=true">
                       </div>
                       <div class="month-dropdown" ng-show="viewMonths.show">
                         <ul>
                           <li ng-repeat="month in monthDrop | filter:qItinerary.month"><a href="" title="{{month}}" ng-click="qItinerary.month=month;viewMonths.show=false">{{month}}</a></li>
                         </ul>
-                      </div>-->
-                      <ui-select ng-model="qItinerary.month" theme="selectize" ng-disabled="ctrl.disabled" style="width: 300px;" title="Selecct Month">
-                        <ui-select-match placeholder="Select Month">{{$select.selected}}</ui-select-match>
-                        <ui-select-choices repeat="month in monthDrop | filter: $select.search">
-                          <span ng-bind-html="month | highlight: $select.search"></span>
-                        </ui-select-choices>
-                      </ui-select>
+                      </div> -->
+                      <div class="itinerary-inputholder">
+                        <ui-select ng-model="qItinerary.month" theme="selectize" ng-disabled="ctrl.disabled" title="Select Month" class="quick-month-year-select">
+                          <ui-select-match class="month-year-select" placeholder="Select Month">{{$select.selected}}</ui-select-match>
+                          <ui-select-choices repeat="month in monthDrop | filter: $select.search">
+                            <span ng-bind-html="month | highlight: $select.search" class="yo-mama"></span>
+                          </ui-select-choices>
+                        </ui-select>
+                      </div>
                     </div>
                     <div class="itinerary-year relate">
                       <label for="year">Year</label>
@@ -43,13 +45,15 @@
                           </li>
                         </ul>
                       </div>-->
-                      <ui-select ng-model="qItinerary.year" theme="selectize" ng-disabled="ctrl.disabled" style="width: 300px;" title="Selecct Year"
-                        ng-click="viewYear();">
-                        <ui-select-match placeholder="Select Year">{{$select.selected}}</ui-select-match>
-                        <ui-select-choices repeat="list in getYear | filter: $select.search">
-                          <span ng-bind-html="list | highlight: $select.search"></span>
-                        </ui-select-choices>
-                        </ui-select>
+                      <div class="itinerary-inputholder">
+                        <ui-select ng-model="qItinerary.year" theme="selectize" ng-disabled="ctrl.disabled" title="Select Year"
+                          ng-click="viewYear();" class="quick-month-year-select">
+                          <ui-select-match class="month-year-select" placeholder="Select Year">{{$select.selected}}</ui-select-match>
+                          <ui-select-choices repeat="list in getYear | filter: $select.search">
+                            <span ng-bind-html="list | highlight: $select.search"></span>
+                          </ui-select-choices>
+                          </ui-select>
+                      </div>
                     </div>
                     <div class="itinerary-duration">
                       <label for="Day">Days</label>
