@@ -7101,21 +7101,17 @@ header {
     background-color: transparent;
   }
   .ui-select-dropdown{
-    max-height: 150px;
+    height: 150px;
     opacity: 1;
     position: absolute;
     top: 35px !important;
     background-color: #fff;
-    box-shadow: 0px 2px 15px #272727;
     color: $brand-blue;
     overflow-y: scroll;
     text-align: center;
     z-index: 1;
     .option{
       @extend .pointer;
-    }
-    .active{
-      background-color: #f5f5f5;
     }
   }
 }
@@ -10470,7 +10466,7 @@ ng-map {
       }
 
       .deals-logo-holder img {
-        width: 50px;
+        width: 60px;
       }
     }
     //tabs end
