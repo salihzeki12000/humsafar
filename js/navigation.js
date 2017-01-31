@@ -198,22 +198,7 @@ var navigationservice = angular.module('navigationservice', [])
       });
     },
     getDestinationBooking: function(formData, callback){
-      $http.get("http://192.168.0.119:3000/migrations/city_hotels.json?city_name="+formData.cityName+"&country_name="+formData.countryName+"&withCredentials=true", formData).success(function (data) {
-        callback(data);
-      });
-    },
-    getDestinationVacation: function(formData, callback){
-      $http.get("http://192.168.0.119:3000/migrations/city_vacation_rentals.json?city_name="+formData.cityName+"&country_name="+formData.countryName+"&withCredentials=true", formData).success(function (data) {
-        callback(data);
-      });
-    },
-    getDestinationHomestay: function(formData, callback){
-      $http.get("http://192.168.0.119:3000/migrations/city_home_stays.json?city_name="+formData.cityName+"&country_name="+formData.countryName+"&withCredentials=true", formData).success(function (data) {
-        callback(data);
-      });
-    },
-    getDestinationTours: function(formData, callback){
-      $http.get("http://192.168.0.119:3000/migrations/city_tours.json?city_name="+formData.cityName+"&country_name="+formData.countryName+"&withCredentials=true", formData).success(function (data) {
+      $http.get("http://192.168.0.119:3000/migrations/city_bookings.json?city_name="+formData.cityName+"&country_name="+formData.countryName+"&withCredentials=true", formData).success(function (data) {
         callback(data);
       });
     },

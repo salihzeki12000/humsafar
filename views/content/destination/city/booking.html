@@ -145,7 +145,7 @@
       </div>
       <div class="destination-tour-booking destination-hotel-card tour-card-container">
         <div class="row">
-          <div class="col-md-6" ng-repeat="tour in toursData track by $index">
+          <div class="col-md-6" ng-repeat="tour in toursData.tours_data track by $index">
             <div class="tour-card-holder">
                   <div class="blur-overlay-bg-div"></div>
                   <div class="tour-view">
@@ -165,11 +165,10 @@
                             </h4>
                             <div class="tour-star-rate">
                               <ul class="list-inline">
-                                    <li><i class="fa fa-star tour-star"></i></li>
-                                    <li><i class="fa fa-star tour-star"></i></li>
-                                    <li><i class="fa fa-star tour-star"></i></li>
-                                    <li><i class="fa fa-star tour-star"></i></li>
-                                    <li><i class="fa fa-star tour-star"></i></li>
+                                <li>
+                                  <span class="star-marked" ng-repeat="marked in star(tour.star_rating,'marked') track by $index"><i class="fa fa-star color-white"></i></span>
+                                <span class="star-unmarked" ng-repeat="unmarked in star(tour.star_rating,'unmarked') track by $index"><i class="fa fa-star-o color-white"></i></span>
+                              </li>
                               </ul>
                               <span class="tour-review">
                                 {{tour.review}}
@@ -213,7 +212,8 @@
           <h4 class="uppercase">Hotels</h4>
         </div>
         <div class="row">
-          <div class="col-md-6" ng-repeat="hotel in bookingData|limitTo:6 track by $index">
+          {{hotel}}
+          <div class="col-md-6" ng-repeat="hotel in hotelsData.hotels_data track by $index">
             <div class="hotel-card-holder mt10 relate" ng-init="backView=-1;">
               <div class="blur-overlay-bg-div"></div>
               <!-- flipper holder -->
@@ -440,7 +440,7 @@
           <h4 class="uppercase">Vaction Rentals</h4>
         </div>
         <div class="row" ng-init="vacationBackView=-1;">
-          <div class="col-md-6" ng-repeat="vacation in vacationData track by $index">
+          <div class="col-md-6" ng-repeat="vacation in vacationsData.vacation_rentals_data track by $index">
             <div class="vacation-card-list mt10">
               <div class="hotel-card-holder relate">
                 <div class="blur-overlay-bg-div"></div>
@@ -626,7 +626,7 @@
           <h4 class="uppercase">Homestays</h4>
         </div>
         <div class="row" ng-init="backHomestayView = -1">
-          <div class="col-md-6" ng-repeat="homestay in homestayData track by $index">
+          <div class="col-md-6" ng-repeat="homestay in homestayData.home_stays_data track by $index">
             <div class="hotel-card-holder mt10 relate">
               <div class="blur-overlay-bg-div"></div>
               <div class="hotel-flipper-holder" ng-class="{'flip-card': backHomestayView==homestay.host._id,'': backHomestayView!==homestay.host._id}">
