@@ -4570,27 +4570,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
 
       //moments of Mylife
-      var myDate = new Date();
-      var nextMonth = new Date(myDate);
-      nextMonth.setMonth(myDate.getMonth() + 1);
-      $scope.month = $filter('date')(nextMonth, 'MMMM');
-      $scope.year = $filter('date')(nextMonth, 'yyyy');
+      // var myDate = new Date();
+      // var nextMonth = new Date(myDate);
+      // nextMonth.setMonth(myDate.getMonth() + 1);
+      // $scope.month = $filter('date')(nextMonth, 'MMMM');
+      // $scope.year = $filter('date')(nextMonth, 'yyyy');
 
 
-      console.log($scope.year, "this date");
-      $scope.getMoments = function (type, type2, month, year) {
-        console.log(month, "this date");
-        NavigationService.getMyLifeMoments({
-          type: type,
-          type2: type2,
-          month: month,
-          year: year,
-        }, function (data) {
-          $scope.monthsMoments = data;
-          console.log($scope.monthsMoments, "Moments aaya");
-        });
-      };
-      $scope.getMoments("all", "moments", $scope.month, $scope.year);
+      // console.log($scope.year, "this date");
+      // $scope.getMoments = function (type, type2, month, year) {
+      //   console.log(month, "this date");
+      //   NavigationService.getMyLifeMoments({
+      //     type: type,
+      //     type2: type2,
+      //     month: month,
+      //     year: year,
+      //   }, function (data) {
+      //     $scope.monthsMoments = data;
+      //     console.log($scope.monthsMoments, "Moments aaya");
+      //   });
+      // };
+      // $scope.getMoments("all", "moments", $scope.month, $scope.year);
 
       //End moments of Mylife
 
