@@ -3967,13 +3967,14 @@ header {
   overflow: hidden;
 
   img {
-    width: 100%;
+    max-height: 100%;
+    margin: 0 auto;
   }
 }
 
 .imgpost-relatedslider {
   padding: 10px 10px 0;
-
+  cursor: pointer;
   .related-postimgholder {
     @include square(80px);
   }
@@ -3981,11 +3982,30 @@ header {
   .flexslider {
     border-color: none;
     background-color: transparent;
+    .flex-direction-nav{ 
+      .flex-prev {
+        left: 4px;
+      }
+      .flex-next {
+        right: 4px;
+      }
+      a:before {
+          font-size: 28px;
+          color: #fff;
+        }
+    }
+    &:hover .flex-direction-nav .flex-prev {
+    opacity: 1;
+    left: 4px;
+    }
+    &:hover .flex-direction-nav .flex-next {
+    opacity: 1;
+    right: 4px;
+    }
   }
-
   .carousel {
     min-height: 80px;
-  }
+    }
 }
 
 .post-rating {

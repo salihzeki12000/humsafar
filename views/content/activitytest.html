@@ -102,13 +102,13 @@
                     </div>
                     <div class="post-img relate" ng-if="activity.photos.length>0 && activity.type!='quick-itinerary' && activity.type!='detail-itinerary'"
                       ng-init="activity.index=0">
-                      <img ng-src="{{activity.photos[activity.index].name|uploadpath:350:240}}" alt="" class="img-responsive">
+                      <img ng-src="{{activity.photos[activity.index].name|uploadpath}}" alt="" class="img-responsive">
                   </div>
                   <!-- img post end -->
                   <!-- img post slider -->
                   <div class="imgpost-relatedslider" ng-if="activity.photos.length>1 && activity.type!='quick-itinerary' && activity.type!='detail-itinerary'">
                     <flex-slider class="carousel" flex-slide="photo in activity.photos track by $index" item-width="80" animation="slide" item-margin="5"
-                      direction-nav="false" control-nav="false" mousewheel="true">
+                      direction-nav="true" control-nav="false" mousewheel="true">
                       <li>
                         <div class="related-postimgholder" ng-click="changeImage($index,activity)">
                           <img ng-src="{{photo.name|uploadpath:85:85:'cover'}}" alt="" class="img-responsive">
@@ -128,7 +128,7 @@
                   <!-- post travelled journey -->
                   <div class="travelled-journey" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey'">
                     <div class="travelled-imgholder">
-                      <img ng-src="{{activity.startLocationPic|uploadpath:722:900}}" alt="" class="img-responsive m-center">
+                      <img ng-src="{{activity.startLocationPic|uploadpath:722:900:'cover'}}" alt="" class="img-responsive m-center">
                     </div>
                     <div class="journey-tag-holder">
                       <div class="days-spent pull-right">
