@@ -189,10 +189,10 @@
                           <div class="tour-see-detail">
                             <div class="clearfix">
                               <div class="pull-left">
-                                <span class="tour-price">From <span class="tour-cost avenir-medium">USD {{tour.from}}</span></span>
+                                <span class="tour-price">From <span class="tour-cost color-pink avenir-medium">USD {{tour.from}}</span></span>
                               </div>
                               <div class="pull-right">
-                                <a class="btn btn-deal" href="{{tour.link}}" target="_blank">View Deal
+                                <a class="btn btn-pink btn-deal" href="{{tour.link}}" target="_blank">View Deal
                                 </a>
                               </div>
                             </div>
@@ -241,8 +241,8 @@
                           <div class="rate-by-star">
                             <ul class="list-inline">
                               <li>
-                                <span ng-repeat="marked in star(hotel.star_rating,'marked') track by $index"><i class="fa fa-star color-white"></i></span>
-                                <span ng-repeat="unmarked in star(hotel.star_rating,'unmarked') track by $index"><i class="fa fa-star-o color-white"></i></span>
+                                <span class="star-marked" ng-repeat="marked in star(hotel.star_rating,'marked') track by $index"><i class="fa fa-star color-white"></i></span>
+                                <span class="star-unmarked" ng-repeat="unmarked in star(hotel.star_rating,'unmarked') track by $index"><i class="fa fa-star-o color-white"></i></span>
                               </li>
                             </ul>
                           </div>
@@ -361,11 +361,11 @@
                             <table class="table avenir-roman">
                               <thead>
                                 <tr>
-                                  <th class="color-pink">Booking Sites</th>
-                                  <th class="color-pink">Room</th>
-                                  <th class="color-pink">Room per night</th>
-                                  <th class="color-pink">Total for 1 night </th>
-                                  <th class="color-pink"></th>
+                                  <th class="color-pink deal-tablehead">Booking Sites</th>
+                                  <th class="color-pink  deal-tablehead">Room</th>
+                                  <th class="color-pink  deal-tablehead">Room per night</th>
+                                  <th class="color-pink  deal-tablehead">Total for 1 night </th>
+                                  <th class="color-pink  deal-tablehead"></th>
                                 </tr>
                               </thead>
                               <tbody>

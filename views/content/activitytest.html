@@ -240,7 +240,7 @@
                             <a href="" class="fnt-20"><i class="fa color-blue card-like-animation " ng-class="activity.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i></a>
                           </span>
                         <div class="inline-block v-mid" ng-if="!(activity.type=='editor')">
-                          <span class="pointer mr5"><img src="img/comments.png" alt="" height="19" ng-click="getCommentsData(activity);editOption(activity.option)"></span>
+                          <span class="pointer mr5"><img src="img/comments.png" alt="" height="19" ng-click="getCommentsData(activity)"></span>
                           <span class="pointer mr5"><img src="img/reviews.png" alt="" height="19" ng-if="activity.type =='ended-journey' || activity.type =='detail-itinerary' || activity.type =='quick-itinerary'"></span>
                           <span class="pointer mr5"><img src="img/share.png" alt="" height="19"></span>
                         </div>
@@ -306,7 +306,7 @@
                   <div class="social-likes-reviews" ng-if="!(((activity.likeCount==0)||(activity.likeCount==undefined))&&(activity.commentCount==0))">
                     <div class="clearfix">
                       <div class="pull-left" ng-init="activity.listLike={}" ng-click="getLikesData(activity);">
-                        <span class="color-blue mr10 card-like avenir-heavy"><i class="fa fa-heart color-blue mr5"></i><b>{{activity.likeCount}}</b> {{activity.likeCount|singularOrPlural:'like'}}
+                        <span class="color-blue mr10 card-like avenir-heavy"><i class="fa fa-heart color-blue mr5"></i><b>{{activity.likeCount}}</b> {{activity.likeCount|singularPlural:'Likes'}}
                            <div class="card-like-dropdown" ng-show="activity.listLike.backgroundClick;">
                               <ul>
                                 <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
@@ -494,7 +494,7 @@
               <!-- showLikes=!showLikes; -->
               <span class="notify-like-holder pointer avenir-roman" ng-click="getLikes(activity);editOption(commentLike)">
                   <i class="fa fa-heart color-blue" ng-class="{'view-like' : commentLike.backgroundClick == true , '' : commentLike.backgroundClick == false}" ></i>
-                 <span>{{post.likeCount|filterCount}}   </span>{{post.likeCount|singularOrPlural:'like'}}
+                 <span>{{post.likeCount|filterCount}}   </span>{{post.likeCount|singularPlural:'Likes'}}
               <!-- ng-show="showLikes" -->
               <!--<div class="like-dropdown" ng-show="commentLike.backgroundClick;">
                 <ul>

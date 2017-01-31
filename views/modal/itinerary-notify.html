@@ -27,7 +27,7 @@
                 <div class="notification-like">
                   <span class="notify-like-holder pointer avenir-roman" ng-click="showLikes=!showLikes;getLikes(ongo._id)">
                     <i class="fa fa-heart color-blue" ng-class="{'view-like' : showLikes == true , '' : showLikes == false}" ></i>
-                   <span>{{listOfComments.like.length|filterCount}}   </span>{{listOfComments.like.length|singularOrPlural:'like'}}
+                   <span>{{listOfComments.like.length|filterCount}}   </span>{{listOfComments.like.length|singularPlural:'Likes'}}
                   <div class="like-dropdown" ng-show="showLikes">
                     <ul>
                       <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
@@ -70,7 +70,7 @@
                   <div class="like-reply-line">
                     <span class="color-blue avenir-roman mr5 pointer">Like</span>
                     <span class="color-blue avenir-roman mr5 pointer">Reply</span>
-                    <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span> | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
+                    <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                    | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
                   </div>
                 </div>
               </div>
@@ -81,7 +81,6 @@
         <div class="comment-tag color-blue">
           <!--<p class="m-clear avenir-roman" >Evening by the beach! :) with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon</p>-->
           <p class="m-clear avenir-roman" ng-bind-html="ongo.postString"></p>
-
         </div>
       </div>
     </div>

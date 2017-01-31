@@ -92,9 +92,9 @@
         <div class="text-center">
           <ul>
             <li>
-              <div class="days-count">
+              <div class="days-count" ng-init="count=('current'|dateDifference: trip.startTime)">
                 <span class="color-blue avenir-roman block">{{trip.startTime|formatDate:'date'}}</span>
-                <p class="m-clear"><span class="color-blue avenir-black">{{"current"|dateDifference: trip.startTime}}</span> <span>days</span></p>
+                <p class="m-clear"><span class="color-blue avenir-black">{{count}}</span> <span>{{count|singularPlural:'Days'}}</span></p>
               </div>
             </li>
             <!-- <li>
@@ -140,9 +140,9 @@
             </div>
           </li>
         </ul>
-        <div class="country-list-count mt10">
-          <span class="color-blue avenir-black">{{trip.countryVisited.length}}</span>
-          <span class="avenir-roman color-blue">Countries Visited</span>
+        <div class="country-list-count mt10" ng-init="count=trip.countryVisited.length">
+          <span class="color-blue avenir-black">{{count}}</span>
+          <span class="avenir-roman color-blue">{{count|singularPlural:'Countries Visited'}}</span>
         </div>
       </div>
       <!-- trip type country img end-->

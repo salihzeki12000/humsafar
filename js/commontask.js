@@ -371,4 +371,44 @@ commontask.filter("followFollowingStatus", function () {
       return "Follow";
     }
   }
-})
+});
+
+commontask.filter("singularPlural", function () {
+  return function (input, flag) {
+    console.log(input, flag);
+    switch (flag) {
+      case "Likes":
+        console.log(input, flag);
+        if (input == 1) {
+          return "Like";
+        } else {
+          return "Likes";
+        }
+        break;
+      case "Comments":
+        console.log(input, flag);
+        if (input == 1) {
+          return "Comment";
+        } else {
+          return "Comments";
+        }
+        break;
+      case "Days":
+        console.log(input, flag);
+        if (input == 1) {
+          return 'Day';
+        } else {
+          return 'Days';
+        }
+        break;
+      case "Countries Visited":
+        console.log(input, flag);
+        if (input == 1) {
+          return 'Country Visited';
+        } else {
+          return 'Countries Visited';
+        }
+        break;
+    }
+  };
+});

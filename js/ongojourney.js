@@ -1241,7 +1241,7 @@ firstapp.filter('category', function () {
     }
   };
 });
-
+//remove it once its of no use
 ongojourney.filter('singularOrPlural', function () {
   return function (count, flag) {
     if (flag == 'like') {
