@@ -219,7 +219,7 @@
                         <!-- showLikes=!showLikes; -->
                         <span class="notify-like-holder pointer avenir-roman" ng-click="getLikes(post._id);editOption(commentLike)">
                   <i class="fa fa-heart color-blue" ng-class="{'view-like' : commentLike.backgroundClick == true , '' : commentLike.backgroundClick == false}" ></i>
-                 <span>{{post.likeCount|filterCount}}   </span>{{post.likeCount|singularOrPlural:'like'}}
+                 <span>{{post.likeCount|filterCount}}   </span>{{post.likeCount|singularPlural:'Likes'}}
                         <!-- ng-show="showLikes" -->
                         <div class="like-dropdown" ng-show="commentLike.backgroundClick;">
                           <ul>
