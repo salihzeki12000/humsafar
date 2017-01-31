@@ -91,7 +91,7 @@
               <!--<div class="container-fluid">
                 <div class="row">
                   <div class="col-md-3 col-sm-4" >-->
-              <div class="moment-travel-view" ng-repeat="view in travelMoment">
+              <div class="moment-travel-view" ng-repeat="view in travelMoment" ng-click="showMonthView();" ng-hide="viewMonth">
                 <div class="moment-travelimgholder pointer">
                   <div class="img-backholder">
                     <img ng-src="{{view.imgBack}}" alt="" class="img-responsive">
@@ -110,6 +110,16 @@
                   </div>
                 </div>-->
               </div>
+                         <div class="month-view-moments" ng-show="viewMonth">
+                <h4 class="">London Journey (50)</h4>
+                <div class="month-view-pic">
+                  <div class="flex-wrap-container">
+                    <div class="singleMonth-imgholder" ng-repeat="monthMoments in momentPic track by $index">
+                      <img ng-src="{{monthMoments}}" alt="" class="img-responsive">
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- moment travel view end  -->
             <!-- moment local view  -->
@@ -127,7 +137,7 @@
               <!--<div class="container-fluid">
                 <div class="row">
                   <div class="col-md-3 col-sm-4" >-->
-              <div class="moment-local-view" ng-repeat="moment in localMoment">
+              <div class="moment-local-view" ng-repeat="moment in localMoment" ng-click="showMonthView();" ng-hide="viewMonth">
                 <div class="moment-localimgholder pointer">
                   <div class="img-backholder">
                     <img ng-src="{{moment.imgBack}}" alt="" class="img-responsive">
@@ -143,6 +153,16 @@
                   </div>
                 </div>-->
 
+              </div>
+                         <div class="month-view-moments" ng-show="viewMonth">
+                <h4 class="">August, 2014 (50)</h4>
+                <div class="month-view-pic">
+                  <div class="flex-wrap-container">
+                    <div class="singleMonth-imgholder" ng-repeat="monthMoments in momentPic track by $index">
+                      <img ng-src="{{monthMoments}}" alt="" class="img-responsive">
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

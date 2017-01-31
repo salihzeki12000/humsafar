@@ -166,11 +166,11 @@ var navigationservice = angular.module('navigationservice', [])
     getBucketListWeb: function (callback, errorCallback) {
       $http.post(adminURL + "/user/getBucketListWeb").success(callback).error(errorCallback);
     },
-     getMyLifeMoments: function (formData, callback) {
-      $http.post(adminURL + "/journey/myLifeWeb", formData).success(function (data) {
-      callback(data);
-      })
-    },
+    //  getMyLifeMoments: function (formData, callback) {
+    //   $http.post(adminURL + "/journey/myLifeWeb", formData).success(function (data) {
+    //   callback(data);
+    //   })
+    // },
 
     updateCountriesVisitedWeb: function (formData, callback, errCallback) {
       $http.post(adminURL + "/user/updateCountriesVisitedWeb", formData).success(callback).error(errCallback);

@@ -20,6 +20,11 @@
           <!-- end tabs -->
           <!-- reviews view tab -->
           <div class="moments-tab review-tab" ng-init="reviewView=1">
+            <!-- back button -->
+            <!--<div class="pull-right">
+              <button class="btn btn-blue-outline btn-more" ng-click="showMonthView();">Back</button>
+            </div>-->
+            <!-- back button end -->
             <div class="btn-view-moments btn-view-review pointer" ng-click="reviewView = 1">
               <span class="btn-tab" ng-class="{'active-btn-all': reviewView ==1}"></span>
               <span>All</span>
@@ -93,7 +98,7 @@
               </div>
             </div>
             <!-- review all view end -->
-                  <div class="container">
+      <div class="container">
             <!-- review travel-life-->
             <div class="review-travel-view" ng-show="reviewView == 2">
               <!-- review empty travel view profile user login for first time  -->

@@ -209,7 +209,7 @@
                   </div>
                   <!--journey card end-->
                   <!--itinerary card-->
-                  <div class="journey-masonry-brick" ng-if="life.type=='quick-itinerary' || life.type=='detail-itinerary'">
+                  <div class="journey-masonry-brick {{life.type}}"  ng-if="life.type=='quick-itinerary' || life.type=='detail-itinerary'">
                     <div class="travel-life-part avenir-roman">
                       <div class="travel-journey-heading">
                         <p ng-hide="life.onJourney">{{life.heading}}</p>
@@ -224,7 +224,18 @@
                           </div>
                           <img ng-src="{{life.imgOnway}}" alt="" class="img-responsive m-center">
                         </div>
-                        <div class="country-badges">
+                        <div class="country-badges" ng-if="life.type=='detail-itinerary'">
+                          <div class="country-visited" ng-repeat="visit in life.countryVisited | limitTo : 3">
+                            <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30">
+                            <!--<span ng-show="life.showRemainingCount" class="">+{{life.remainingCount}}</span>-->
+                          </div>
+                          <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
+                          <!-- <div class="country-visited">
+                            <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30" ng-repeat="visit in life.countryVisited track by $index | limitTo : 3">
+                            <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
+                          </div> -->
+                        </div>
+                                  <div class="flag-section" ng-if="life.type=='quick-itinerary'">
                           <div class="country-visited" ng-repeat="visit in life.countryVisited | limitTo : 3">
                             <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30">
                             <!--<span ng-show="life.showRemainingCount" class="">+{{life.remainingCount}}</span>-->
@@ -260,6 +271,12 @@
                                 <span>{{life.cost}}</span>
                               </div>
                             </div>
+                            <div class="ng-scope" ng-if="life.type=='quick-itinerary'">
+                                <div class="quick-itinerary-tag">
+                                  <h4>Quick</h4>
+                                  <p>Itinerary</p>
+                                </div>
+                              </div>
                          </div>
                       </div>
                           </div>
