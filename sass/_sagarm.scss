@@ -3616,7 +3616,7 @@ q {
 }
 
 .notification-card {
-  min-height: 230px;
+  min-height: 240px;
   // max-height: 230px;
   border-radius: 5px;
   margin: 10px 0;
@@ -3626,6 +3626,14 @@ q {
 .notification-content {
   position: relative;
   padding: 15px;
+}
+
+.read-notification{
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  color: $brand-pink;
+  font-size: 16px;
 }
 
 .remove-notification {
@@ -3725,6 +3733,18 @@ q {
   }
 }
 
+.notification-tagongo-action {
+  p {
+    margin: 15px 0;
+  }
+}
+
+.notification-endongo-action {
+  p {
+    margin: 15px 0;
+  }
+}
+
 .notification-addpic-ongo-action {
   @extend .pointer;
 }
@@ -3774,6 +3794,49 @@ q {
 
 .notification-youtube-local {
   color: $brand-cyan;
+}
+
+.notification-social-list {}
+
+.notification-social-btn{
+  margin: 25px 0;
+  .fb-icon {
+    background-color: #3b5998;
+  }
+
+  .twi-icon {
+    background-color: #55acee;
+  }
+
+  .google-icon{
+    background-color: #d34836;
+  }
+
+  .pin-icon {
+    background-color: #cb2027;
+  }
+
+  .instagram-icon{
+    background-color:  #cd486b;
+    font-size: 16px;
+  }
+
+  .linkedin-icon {
+    background-color: #007bb5;
+  }
+}
+.btn-notification-social {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  margin: 5px 2px;
+  padding: 0;
+  font-size: 15px;
+  color: #fff;
+  text-align: center;
+  &:hover, &:active, &:focus{
+    color: #fff;
+  }
 }
 //NOTIFICATION PAGE END
 //DETAILED ITINERARY SHOW LISTED POPUP
@@ -3984,17 +4047,16 @@ q {
       background-size: 100% 100%;
       @include transition(all 300ms linear);
     }
-
-    .active-itinerary {
-      background: url('../img/itinerary/orangebox.png');
-      background-size: 100% 100%;
-      @include transition(all 300ms linear);
-    }
+  }
+  .active-itinerary {
+    background: url('../img/itinerary/orangebox.png');
+    background-size: 100% 100%;
+    @include transition(all 300ms linear);
   }
 }
 // EDIT KIND OF JOURNEY POPUP END
-
 //ITINERARY OPTIONS DROPDOWN
+
 .itinerary-edit-option {
   width: 180px;
   padding: 15px 20px;
