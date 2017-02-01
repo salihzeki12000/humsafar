@@ -12,8 +12,10 @@
 @import "../bower_components/angular-loading-bar/build/loading-bar.min.css";
 @import "../bower_components/angular-rangeslider/angular.rangeSlider.css";
 @import "../bower_components/smart-app-banner/smart-app-banner.css";
+
 /* Boots
 trap Variables Goes Here */
+
 $brand-dark-blue: #272b49;
 $brand-blue: #303557;
 $brand-dark-pink: #f58b86;
@@ -36,11 +38,11 @@ $brand-lighter-grey: #e3e3e3;
     }
   }
 }
+
 // body {
 //   padding-top: 70px;
 // }
 // over-ride
-
 a,
 button,
 figure,
@@ -120,14 +122,13 @@ a.mail-icon:hover {
   opacity: 1;
   color: #fff;
   font-size: 15px;
-
   &:hover {
     color: #fff;
     opacity: 1;
   }
 }
-// scroll down
 
+// scroll down
 .mouse-scrolldown {
   position: absolute;
   bottom: 15px;
@@ -137,7 +138,6 @@ a.mail-icon:hover {
   @extend .text-shadow;
   font-size: 12px;
   cursor: pointer;
-
   img {
     width: 15px;
     margin-bottom: 5px;
@@ -147,46 +147,43 @@ a.mail-icon:hover {
     0% {
       @include transform(translate(0%, 0%));
     }
-
     50% {
       @include transform(translate(0%, 20%));
     }
-
     100% {
       @include transform(translate(0%, 0%));
     }
-  };
+  }
+  ;
 }
+
 // scroll down end
 // scroll
-
 .scroll-side {
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 6px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
   }
 }
-// scroll end
 
+// scroll end
 .text-ellipsis {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
-//bootstrap forms
 
+//bootstrap forms
 .btn,
 .form-control,
-.input-group-lg > .form-control,
-.input-group-lg > .input-group-addon,
-.input-group-lg > .input-group-btn > .btn,
+.input-group-lg>.form-control,
+.input-group-lg>.input-group-addon,
+.input-group-lg>.input-group-btn>.btn,
 .input-lg {
   border-radius: 0;
   @include box-shadow(none);
@@ -223,43 +220,51 @@ ul {
   border: none;
   margin: 0;
 }
+
 //bootstrap forms
 // fonts
 @font-face {
   font-family: "AvenirLTStd-Medium";
   src: url('../fonts/AvenirLTStd-Medium.otf');
 }
+
 @font-face {
   font-family: "AvenirLTStd-Black";
   src: url('../fonts/AvenirLTStd-Black.otf');
 }
+
 @font-face {
   font-family: "AvenirLTStd-Heavy";
   src: url('../fonts/AvenirLTStd-Heavy.otf');
 }
+
 @font-face {
   font-family: "AvenirLTStd-Light";
   src: url('../fonts/AvenirLTStd-Light.otf');
 }
+
 @font-face {
   font-family: "AvenirLTStd-Roman";
   src: url('../fonts/AvenirLTStd-Roman.otf');
 }
+
 @font-face {
   font-family: "djb";
   src: url('../fonts/djb.ttf');
 }
+
 @font-face {
   font-family: "JennaSue";
   src: url('../fonts/JennaSue.ttf');
 }
+
 @font-face {
   font-family: "avenir-lt-std-65-medium-58708f166adc1";
   src: url('../fonts/avenir-lt-std-65-medium-58708f166adc1.ttf');
 }
+
 // end fonts
 // classes
-
 .avenir-black {
   font-family: "AvenirLTStd-Black";
   -webkit-font-smoothing: antialiased;
@@ -337,8 +342,10 @@ textarea {
 }
 
 .get-center {
-  @include position(absolute, 50% null null 50%);
-  @include transform(translate(-50%, -50%));
+  @include position(absolute,
+  50% null null 50%);
+  @include transform(translate(-50%,
+  -50%));
 }
 
 .full-width {
@@ -476,8 +483,8 @@ textarea {
 .fz13 {
   font-size: 13px;
 }
-// end classes
 
+// end classes
 .color-dark-blue {
   color: $brand-dark-blue;
 }
@@ -525,10 +532,10 @@ textarea {
 .btn-more {
   padding: 8px 34px;
 }
+
 // btn classes
 // end btn classes
 // bg classes
-
 .bg-white {
   background-color: rgba(255, 255, 255, 0.90);
 }
@@ -560,57 +567,70 @@ textarea {
 .bg-light-cyan {
   background-color: $brand-light-cyan;
 }
+
 // end bg classes
 // btn classes
-
 .btn {
   border-radius: 6px;
   @include transition(all 300ms linear);
-
   &:hover {
     @include transition(all 300ms linear);
   }
 }
 
 .btn-dark-pink {
-  @include button-variant( white, $brand-dark-pink, $brand-dark-blue);
+  @include button-variant( white,
+  $brand-dark-pink,
+  $brand-dark-blue);
 }
 
 .btn-pink {
-  @include button-variant( white, $brand-dark-pink, $brand-dark-pink);
+  @include button-variant( white,
+  $brand-dark-pink,
+  $brand-dark-pink);
 }
 
 .btn-pink-outline {
-  @include button-variant( $brand-pink, transparent, $brand-pink);
-
+  @include button-variant( $brand-pink,
+  transparent,
+  $brand-pink);
   &:hover {
-    @include button-variant( white, $brand-pink, $brand-pink);
+    @include button-variant( white,
+    $brand-pink,
+    $brand-pink);
   }
 }
 
 .btn-white-outline {
-  @include button-variant( white, transparent, white);
-
+  @include button-variant( white,
+  transparent,
+  white);
   &:hover {
     border-color: #fff;
   }
 }
 
 .btn-grey-pink {
-  @include button-variant( white, $brand-grey, $brand-dark-blue);
-
+  @include button-variant( white,
+  $brand-grey,
+  $brand-dark-blue);
   &:hover {
-    @include button-variant( white, $brand-dark-pink, $brand-dark-blue);
+    @include button-variant( white,
+    $brand-dark-pink,
+    $brand-dark-blue);
   }
 }
 
 .btn-dark-blue {
-  @include button-variant( white, $brand-dark-blue, $brand-dark-blue);
+  @include button-variant( white,
+  $brand-dark-blue,
+  $brand-dark-blue);
 }
 
 .btn-blue-outline {
-  @include button-variant( $brand-blue, white, $brand-blue);
-
+  @include button-variant( $brand-blue,
+  white,
+  $brand-blue);
   &:hover {
     border-color: $brand-blue;
     background-color: $brand-pink;
@@ -619,7 +639,9 @@ textarea {
 }
 
 .btn-outline-blue {
-  @include button-variant( $brand-blue, transparent, $brand-blue);
+  @include button-variant( $brand-blue,
+  transparent,
+  $brand-blue);
 }
 
 .btn.disabled,
@@ -630,8 +652,11 @@ fieldset[disabled] .btn {
     color: initial;
   }
 }
+
 // end btn classes
+
 /* Start writing sass here */
+
 .travel-bg {
   // min-height: 550px;
   // height: 100%;
@@ -639,8 +664,8 @@ fieldset[disabled] .btn {
   background-size: cover;
   background-attachment: fixed;
 }
-// header
 
+// header
 header {
   width: 100%;
   padding: 10px 20px 0;
@@ -649,7 +674,6 @@ header {
   left: 0;
   z-index: 10;
   @include transition(all 100ms linear);
-
   &.addfixed {
     @extend .bg-dark-blue;
   }
@@ -663,9 +687,9 @@ header {
 
 .hamburger {
   margin: 10px 0;
-
   span {
-    @include size(22px, 3px);
+    @include size(22px,
+    3px);
     margin-bottom: 4px;
     display: block;
     background-color: $brand-pink;
@@ -674,7 +698,6 @@ header {
 
 .search {
   margin: 2px 10px 2px 13px;
-
   input {
     width: 360px;
     padding: 6px 10px 6px 25px;
@@ -686,7 +709,6 @@ header {
     color: #fff;
     font-size: 13px;
     background: url('../img/search-icon.png') no-repeat 0 50%;
-
     &:focus {
       outline: none;
       border-color: #17213e;
@@ -700,24 +722,19 @@ header {
       font-size: 12px;
     }
   }
-
   h4 {
     @extend .avenir-heavy;
   }
-
   .list-inline {
     margin: 0;
   }
-
-  .list-inline > li {
+  .list-inline>li {
     padding: 0 15px;
     font-size: 16px;
-
     &:last-child {
       padding: 0 0 0 15px;
     }
   }
-
   a {
     color: #80879a;
   }
@@ -730,9 +747,9 @@ header {
   border-radius: 15px;
   overflow: hidden;
 }
+
 // end header
 // Set Profile process
-
 .background-login {
   background-color: #fff;
 }
@@ -744,7 +761,6 @@ header {
 .verification-complete {
   padding: 30px 20px 15px;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.7);
-
   h3 {
     margin: 0 0 25px;
     font-size: 20px;
@@ -754,15 +770,14 @@ header {
 .button-panel {
   margin-top: 80px;
 }
-// nation tab
 
+// nation tab
 .nation-select {
   [type="radio"]:checked,
   [type="radio"]:not(:checked) {
     position: absolute;
     left: -9999px;
   }
-
   [type="radio"]:checked+label,
   [type="radio"]:not(:checked)+label {
     width: 100%;
@@ -802,18 +817,15 @@ header {
     opacity: 1;
     transform: scale(1);
   }
-
   [type="radio"]:checked+label:before {
     background-color: transparent;
     color: $brand-pink;
     @include transition(all 300ms linear);
   }
-
   [type="radio"]:checked+label:after {
     color: $brand-pink;
     @include transition(all 300ms linear);
   }
-
   label img {
     border: 1px solid #ebebeb;
   }
@@ -825,7 +837,6 @@ header {
     position: absolute;
     left: -9999px;
   }
-
   [type="checkbox"]:checked+label,
   [type="checkbox"]:not(:checked)+label {
     width: 100%;
@@ -858,20 +869,18 @@ header {
     text-align: center;
     @include transition(all 300ms linear);
   }
-
   [type="checkbox"]:checked+label:after {
     color: $brand-pink;
     @include transition(all 300ms linear);
   }
 }
-// custom select
 
+// custom select
 .custom-select {
   position: relative;
   border-radius: 4px;
   overflow: hidden;
   z-index: 999;
-
   select {
     @include appearance(none);
     border: none;
@@ -884,7 +893,6 @@ header {
     position: relative;
     z-index: 9999;
   }
-
   &:after {
     font: normal normal normal 14px/1 FontAwesome;
     content: "\f0d7";
@@ -899,17 +907,15 @@ header {
     font-size: 20px;
   }
 }
-// custom select end
 
+// custom select end
 .custom-checkbox-heart {
   @extend .custom-checkbox;
-
   [type="checkbox"]:checked+label:after,
   [type="checkbox"]:not(:checked)+label:after {
     content: "\f004";
     color: #b7b7b7;
   }
-
   [type="checkbox"]:checked+label:after {
     color: $brand-blue;
   }
@@ -926,42 +932,36 @@ header {
     box-shadow: none;
     position: static !important;
   }
-
   .ui-select-container {
     &:after,
     &:before {
       content: "";
-      @include size(1px, 15px);
+      @include size(1px,
+      15px);
       position: absolute;
       top: 19px;
       // background-color: $brand-pink;
       background-color: $brand-lighter-grey;
       z-index: 1;
     }
-
     &:before {
       left: 0;
     }
-
     &:after {
       right: 0;
     }
-
     input {
       width: 100% !important;
     }
   }
-
   .ui-select-bootstrap {
-    .ui-select-choices-row > span {
+    .ui-select-choices-row>span {
       padding: 5px 10px;
       border-bottom: 1px solid $brand-lighter-grey;
     }
-
-    .ui-select-choices-row.active > span {
+    .ui-select-choices-row.active>span {
       background-color: #f5f5f5;
     }
-
     .ui-select-choices,
     .ui-select-no-choice {
       max-height: 232px;
@@ -971,22 +971,18 @@ header {
       margin-top: 0;
     }
   }
-
   .ui-select-match {
     border: none;
     border-radius: 0;
-
     .btn {
       border: none;
       border-bottom: 1px solid #e3e3e3;
       border-radius: 0;
       background: url("../img/dropdown-icon.png") no-repeat 98% 50%;
-
       &:hover {
         background-color: transparent;
       }
     }
-
     i {
       display: none;
     }
@@ -994,26 +990,23 @@ header {
   // ui-select nation end
   .search-nation {
     position: relative;
-
     &:after,
     &:before {
       content: "";
-      @include size(1px, 15px);
+      @include size(1px,
+      15px);
       position: absolute;
       bottom: 0;
       // background-color: $brand-pink;
       background-color: $brand-lighter-grey;
     }
-
     &:before {
       left: 0;
     }
-
     &:after {
       right: 0;
     }
   }
-
   input {
     border-top: none;
     border-right: none;
@@ -1021,24 +1014,19 @@ header {
     border-bottom: 1px solid $brand-lighter-grey;
     border-left: none;
     background: url('../img/dropdown-icon.png') no-repeat 98% 50%;
-
     &:focus {
       border-color: $brand-lighter-grey;
     }
   }
-
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 4px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: $brand-lighter-grey;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-pink;
   }
-
   ul {
     width: 100%;
     height: 220px;
@@ -1052,13 +1040,11 @@ header {
     overflow-y: scroll;
     list-style-type: none;
     text-align: left;
-
     li {
       // padding: 10px 0;
       // border-bottom: 2px solid $brand-dark-blue;
       // border-bottom: 1px solid $brand-lighter-grey;
       color: #fff;
-
       span {
         font-size: 16px;
       }
@@ -1073,9 +1059,9 @@ header {
     }
   }
 }
+
 // nation tab end
 // gender
-
 .female,
 .male {
   @include square(120px);
@@ -1083,14 +1069,13 @@ header {
   background-color: #c2c2c2;
   overflow: hidden;
   @include transition(all 300ms linear);
-
   img {
     height: 100px;
     margin: 20px auto 0;
   }
-
   span {
-    @include position(relative, -17px null null 2px);
+    @include position(relative,
+    -17px null null 2px);
   }
 }
 
@@ -1101,10 +1086,11 @@ header {
 .female:hover {
   background-color: $brand-cyan;
 }
-// gender end
 
+// gender end
 .cropArea {
-  @include size(100%, 350px);
+  @include size(100%,
+  350px);
   overflow: hidden;
 }
 
@@ -1117,7 +1103,6 @@ header {
 
 .upload-btn {
   margin: 15px 0;
-
   button {
     padding: 6px 20px;
   }
@@ -1132,20 +1117,18 @@ header {
   background-color: $brand-cyan;
   @include transition(all 300ms linear);
 }
+
 // end set Profile process
 // holiday step
-
 .holiday-indicators {
   ul {
     padding: 0;
     list-style-type: none;
     text-align: center;
-
     li {
       padding: 0 3px;
       display: inline-block;
     }
-
     a {
       @include square(10px);
       border: 1px solid $brand-blue;
@@ -1154,7 +1137,6 @@ header {
       @include transition(all 300ms linear);
     }
   }
-
   .four,
   .one,
   .three,
@@ -1168,12 +1150,10 @@ header {
   background: url('../img/grey-half.png') no-repeat 50% 0;
   cursor: pointer;
   @include transition(background 300ms linear);
-
   &:hover {
     background: url('../img/green-half.png') no-repeat 50% 0;
     @include transition(background 300ms linear);
   }
-
   figcaption {
     font-size: 16px;
   }
@@ -1186,7 +1166,6 @@ header {
 
 .holiday-imgholder {
   min-height: 60px;
-
   img {
     height: 55px;
   }
@@ -1208,7 +1187,6 @@ header {
 .holiday-step4 {
   padding: 13px 20px;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.7);
-
   h3 {
     margin: 15px 0 10px;
     font-size: 20px;
@@ -1229,28 +1207,23 @@ header {
     width: 140px;
     margin: 20px 0 0;
     display: inline-block;
-
     &:nth-child(4),
     &:nth-child(5),
     &:nth-child(6) {
       margin: 20px 0 40px;
     }
   }
-
   .preference-travel {
     width: 130px;
     margin: 10px 0;
     display: inline-block;
-
     &:last-child {
       width: 180px;
     }
-
     &:nth-last-of-type(2) {
       width: 180px;
     }
   }
-
   .ideal-holiday {
     width: 124px;
     display: inline-block;
@@ -1264,18 +1237,16 @@ header {
   display: inline-block;
   vertical-align: top;
 }
+
 // .travel-row-main .preference-travel:last-child { width: 180px; }
 // holiday step end
 // profile
-
 .profile-main {
   // max-width: 1400px;
   max-width: 2000px;
   margin: 0 auto;
-
   .btn-blue-outline {
     background-color: transparent;
-
     &:hover {
       border-color: #2d3655;
       background-color: $brand-pink;
@@ -1296,7 +1267,8 @@ header {
 }
 
 .profile-imgholder {
-  @include size(135px, 145px);
+  @include size(135px,
+  145px);
   border: 3px solid #fff;
   border-radius: 55px;
   margin: 0 auto -15px;
@@ -1327,17 +1299,14 @@ header {
   background: url('../img/travel-detail-bg.png') no-repeat;
   background-size: 100% 100%;
   text-align: center;
-
   ul {
     padding: 0;
     margin: 0;
-
     li {
       padding: 0 23px;
       display: inline-block;
       list-style-type: none;
       border-right: 1px solid $brand-dark-blue;
-
       &:last-child {
         border-right: none;
       }
@@ -1357,23 +1326,18 @@ header {
   padding: 25px 20px 20px;
   margin-top: -5px;
   background-color: rgba(255, 255, 255, 0.8);
-
   p {
     font-size: 18px;
   }
-
   .get-more {
     font-size: 20px;
   }
-
   .more-detail {
     margin-bottom: 30px;
-
     img {
       @include transition(all 300ms linear);
     }
   }
-
   .abt-me {
     @include transition(all 300ms linear);
     @include transform(rotate(180deg));
@@ -1384,16 +1348,13 @@ header {
   max-height: 550px;
   padding: 40px 30px 30px 40px;
   position: relative;
-
   mappy svg {
     max-height: 500px;
   }
-
   .travel-badge {
     position: absolute;
     bottom: 70px;
     left: 30px;
-
     img {
       height: 80px;
     }
@@ -1402,13 +1363,12 @@ header {
 
 .vector-map-full {
   max-height: 750px;
-
   mappy svg {
     max-height: 750px;
   }
 }
-// Empty profile
 
+// Empty profile
 .empty-title {
   font-family: "AvenirLTStd-Medium";
 }
@@ -1418,8 +1378,8 @@ header {
   font-size: 16px;
   font-family: "AvenirLTStd-Roman";
 }
-// journey emptytab
 
+// journey emptytab
 .journey-cycle,
 .journey-parachute {
   margin-bottom: -50px;
@@ -1443,43 +1403,37 @@ header {
 .empty-chronicling,
 .empty-ongo {
   margin: 15px 0 0;
-
   h4 {
     color: #555;
     font-family: "AvenirLTStd-Medium";
   }
 }
+
 // journey emptytab end
 // Empty profile end
 // visited list
-
 .wish-country-visit {
   padding: 20px 15px 0 0;
 }
 
 .visited-country-list {
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 2px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: $brand-lighter-grey;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-dark-pink;
   }
-
   ul {
     max-height: 400px;
     overflow-y: auto;
   }
-
   li {
     padding: 10px 5px;
     border-top: 1px solid #ebebeb;
   }
-
   .get-right {
     display: inline-block;
   }
@@ -1488,7 +1442,6 @@ header {
 .visit-inputholder {
   position: relative;
   margin: 15px 5px 10px 0;
-
   &:after,
   &:before {
     content: '';
@@ -1498,11 +1451,9 @@ header {
     bottom: 0;
     background-color: #ccc;
   }
-
   &:before {
     left: 0;
   }
-
   &:after {
     right: 0;
   }
@@ -1524,32 +1475,27 @@ header {
     vertical-align: top;
   }
 }
-// modal country visited
 
+// modal country visited
 .country-visited-main {
   width: 250px;
   margin: 0 auto;
-
   .year-title {
     margin-bottom: 10px;
     color: #ccc;
     font-size: 18px;
   }
-
   .update-year-main {
     padding: 15px;
     border-radius: 4px;
     background-color: #fff;
   }
-
   .no-of-time {
     color: $brand-light-grey;
     font-size: 10px;
   }
-
   .search-year-input {
     position: relative;
-
     input {
       border: 1px solid #ccc;
       border-radius: 4px;
@@ -1558,29 +1504,24 @@ header {
         @extend .avenir-medium;
       }
     }
-
     .search-dropdown-icon {
-      @include position(absolute, 7px 10px null null);
+      @include position(absolute,
+      7px 10px null null);
       color: #8a8a8a;
     }
   }
-
   .update-dropdown {
     margin-bottom: 10px;
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 2px;
     }
-
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     }
-
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
       background-color: #fff;
     }
-
     ul {
       height: 210px;
       margin-top: 5px;
@@ -1588,26 +1529,23 @@ header {
       overflow-x: hidden;
       overflow-y: scroll;
     }
-
     li {
       padding: 10px 0;
       border-bottom: 1px solid #dcdcdc;
       position: relative;
     }
   }
-
   .year-checkbox {
     [type="checkbox"]:checked+label:before,
     [type="checkbox"]:not(:checked)+label:before {
-      @include position(absolute, 0 0 null null);
+      @include position(absolute,
+      0 0 null null);
     }
-
     [type="checkbox"]:checked+label:after,
     [type="checkbox"]:not(:checked)+label:after {
       right: 0;
       left: auto;
     }
-
     [type="checkbox"]:checked+label,
     [type="checkbox"]:not(:checked)+label {
       color: $brand-blue;
@@ -1616,7 +1554,6 @@ header {
       @extend .avenir-light;
     }
   }
-
   .clear-countryvisit {
     padding-bottom: 3px;
     border-bottom: 1px solid #424242;
@@ -1628,9 +1565,9 @@ header {
   padding: 2px 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  @include position(absolute, 7px null null 50%);
+  @include position(absolute,
+  7px null null 50%);
   @include transform(translateX(-50%));
-
   input {
     width: 30px;
     border: none;
@@ -1638,29 +1575,25 @@ header {
     background-color: transparent;
     text-align: center;
   }
-
-  ::-webkit-inner-spin-button,
+   ::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     @include appearance(none);
   }
-
   .minus {
     color: #918f8f;
   }
-
   .plus {
     color: $brand-cyan;
   }
 }
-// delete country visited list
 
+// delete country visited list
 .delete-your-country {
   padding: 20px 0 0;
   margin-top: 20px;
   background-color: #fff;
   text-align: center;
   @extend .avenir-roman;
-
   .delete-confirmation {
     padding: 10px;
     display: block;
@@ -1670,8 +1603,8 @@ header {
     cursor: pointer;
   }
 }
-// travel life
 
+// travel life
 .travelled-imgholder {
   min-height: 200px;
   max-height: 440px;
@@ -1682,7 +1615,6 @@ header {
   height: 330px;
   max-height: 330px;
   overflow: hidden;
-
   .unpublish-banner {
     padding: 8px 15px;
     border-radius: 0 6px 6px 0;
@@ -1694,7 +1626,6 @@ header {
     background-color: $brand-pink;
     color: #fff;
   }
-
   img {
     min-height: 100%;
   }
@@ -1703,23 +1634,20 @@ header {
 .travel-life-part {
   border-radius: 6px;
   background-color: rgba(255, 255, 255, 0.8);
-
   ul {
     padding: 0;
     margin: 0;
-
     li {
       display: inline-block;
       list-style-type: none;
     }
   }
 }
-// tabs
 
+// tabs
 .profile-tabs {
   margin: 0 10px;
   position: relative;
-
   .first-strip,
   .fourth-strip,
   .sec-strip,
@@ -1731,25 +1659,19 @@ header {
     bottom: 0;
     background-color: $brand-grey;
   }
-
   .sec-strip {
     bottom: 4px;
   }
-
   .third-strip {
     bottom: 8px;
   }
-
   ul {
     @include display(flex);
-
     li {
       @include flex(1);
-
       &:nth-child(1) {
         z-index: 4;
       }
-
       &:nth-child(2) {
         .tab-heading {
           padding: 15px 20px;
@@ -1760,7 +1682,6 @@ header {
           z-index: 3;
         }
       }
-
       &:nth-child(3) {
         .tab-heading {
           padding: 11px 20px;
@@ -1771,7 +1692,6 @@ header {
           z-index: 2;
         }
       }
-
       &:nth-child(4) {
         .tab-heading {
           padding: 6px 20px;
@@ -1784,7 +1704,6 @@ header {
       }
     }
   }
-
   .tab-heading {
     padding: 20px;
     border-top-left-radius: 10px;
@@ -1798,11 +1717,10 @@ header {
     z-index: 1;
   }
 }
-// tabs end
 
+// tabs end
 .add-journey {
   position: relative;
-
   span {
     @include square(30px);
     display: inline-block;
@@ -1812,16 +1730,13 @@ header {
     color: #fff;
     text-align: center;
     @include transition(all 300ms linear);
-
     i {
       @include transition(all 300ms linear);
     }
   }
-
   .close-more {
     background-color: $brand-grey;
     @include transition(all 300ms linear);
-
     i {
       @include transform(rotate(45deg));
       @include transition(all 300ms linear);
@@ -1839,35 +1754,33 @@ header {
   border-radius: 12px;
   border: 1px solid $brand-blue;
   background-color: $brand-pink;
-  @include position(absolute, -15px 35px null null);
+  @include position(absolute,
+  -15px 35px null null);
   z-index: 10;
-
   &:after {
     content: "";
     border-top: 9px solid transparent;
     border-right: 9px solid transparent;
     border-bottom: 9px solid transparent;
     border-left: 9px solid $brand-pink;
-    @include position(absolute, 22px -18px null null);
+    @include position(absolute,
+    22px -18px null null);
   }
-
   &:before {
     content: "";
     border-top: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid transparent;
     border-left: 10px solid $brand-blue;
-    @include position(absolute, 21px -20px null null);
+    @include position(absolute,
+    21px -20px null null);
   }
-
   li {
     padding: 8px 0;
     border-bottom: 1px solid $brand-blue;
-
     &:last-child {
       border: none;
     }
-
     a {
       color: #fff;
     }
@@ -1901,13 +1814,14 @@ header {
   float: left;
   margin-left: -10px;
   border-radius: 100%;
-
   img {
     max-width: initial;
     max-height: 100%;
     border-radius: 50%;
-    @include position(absolute, 50% null null 50%);
-    @include transform(translate(-50%,-50%));
+    @include position(absolute,
+    50% null null 50%);
+    @include transform(translate(-50%,
+    -50%));
   }
   // span {
   //   margin-left: -18px;
@@ -1927,11 +1841,9 @@ header {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
-
   a {
     color: #fff;
   }
-
   h3,
   h4 {
     font-size: 18px;
@@ -1939,11 +1851,9 @@ header {
     @extend .text-ellipsis;
     @extend .avenir-heavy;
   }
-
   .journey-travelling-type {
     margin-bottom: -20px;
   }
-
   .pull-right {
     .journey-type {
       ul {
@@ -1958,17 +1868,14 @@ header {
 .journey-type {
   min-height: 20px;
   margin-top: -11px;
-
   ul {
     li+li {
       border-left: 1px solid #fff;
     }
   }
-
   &.m0 {
     margin: 0;
   }
-
   li {
     padding: 0 5px;
   }
@@ -1978,25 +1885,23 @@ header {
   display: inline-block;
   vertical-align: top;
   margin-top: -11px;
-
   span {
     font-size: 15px;
   }
 }
 
 .days-spent {
-  @include size(45px, 48px);
+  @include size(45px,
+  48px);
   border-radius: 18px;
   display: inline-block;
   position: relative;
   bottom: 15px;
   background-color: $brand-dark-blue;
-
   p {
     padding-top: 8px;
     font-size: 10px;
     text-align: center;
-
     span {
       font-size: 16px;
       line-height: 18px;
@@ -2010,17 +1915,14 @@ header {
 
 .journey-collection {
   min-height: 20px;
-
   li {
     padding: 0 10px;
     line-height: 12px;
-
     &:first-child {
       padding: 0 10px 0 0;
     }
   }
-
-  li + li {
+  li+li {
     border-left: 1px solid #fff;
   }
 }
@@ -2035,10 +1937,8 @@ header {
   li {
     display: inline-block;
     padding: 0 10px;
-
     &:first-child {
       padding: 0 10px 0 0;
-
       i {
         font-size: 18px;
         vertical-align: bottom;
@@ -2052,8 +1952,8 @@ header {
   padding: 8px 2px 5px;
   font-size: 12px;
 }
-// progress bar
 
+// progress bar
 .level1,
 .level2,
 .level3,
@@ -2064,7 +1964,6 @@ header {
     color: $brand-light-grey;
     font-size: 15px;
   }
-
   .progress-range {
     margin: 10px 0 0 -8px;
   }
@@ -2086,11 +1985,9 @@ header {
   .name {
     margin: 0 0 10px -42px;
   }
-
   .progress-range {
     margin: 5px 0 0 -10px;
   }
-
   .progress-bar-strip {
     background-color: #bfbfbf;
   }
@@ -2100,14 +1997,11 @@ header {
   .name {
     margin: 0 0 10px -25px;
   }
-
   .progress-range {
     margin: 5px 0 0 -15px;
   }
-
   .progress-bar-strip {
     background-color: #bfbfbf;
-
     &:after {
       background-color: $brand-light-grey;
     }
@@ -2118,7 +2012,6 @@ header {
   position: absolute;
   top: 0;
   right: -15px;
-
   .progress-range {
     margin: 25px -15px 0 0;
   }
@@ -2130,20 +2023,28 @@ header {
   }
 }
 
+.last-active-bar {
+  .last-name {
+    color: $brand-pink;
+  }
+}
+
 .last-progress-strip {
   position: relative;
-
   &:after {
     content: "";
-    @include size(8px, 17px);
+    @include size(8px,
+    17px);
     border-radius: 20px;
-    @include position(absolute, -5px 10px null null);
+    @include position(absolute,
+    5px 10px null null);
     background-color: $brand-light-grey;
   }
 }
 
 .progress-grey-bg {
-  @include position(absolute, 0);
+  @include position(absolute,
+  0);
   background-color: #bfbfbf;
 }
 
@@ -2153,12 +2054,13 @@ header {
   position: relative;
   // background-color: $brand-pink;
   background-color: #bfbfbf;
-
   &:after {
     content: "";
-    @include size(8px, 17px);
+    @include size(8px,
+    17px);
     border-radius: 20px;
-    @include position(absolute, -5px null null 0);
+    @include position(absolute,
+    -5px null null 0);
     // background-color: $brand-pink;
     background-color: $brand-light-grey;
   }
@@ -2171,8 +2073,8 @@ header {
 .travel-progress-bar {
   margin-bottom: 30px;
 }
-// journey tabs
 
+// journey tabs
 .journey-tabs {
   .btn-tab {
     @include square(18px);
@@ -2183,12 +2085,10 @@ header {
     background-color: #bdbdbd;
     vertical-align: top;
   }
-
   .active-btn-travel {
     background-color: $brand-pink;
     @include transition(all 300ms linear);
   }
-
   .active-btn-local {
     background-color: $brand-cyan;
     @include transition(all 300ms linear);
@@ -2200,17 +2100,15 @@ header {
     font-size: 16px;
   }
 }
+
 // end journey tabs
 // masonry tab
-
 .masonry-detail {
   padding: 0 10px;
   margin-top: -10px;
-
   .masonry-brick {
     padding: 0;
   }
-
   .journey-masonry-brick {
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -2221,32 +2119,27 @@ header {
 .travel-journey-heading {
   padding: 10px;
   color: $brand-light-grey;
-
   p {
     padding-bottom: 5px;
     margin: 0;
   }
 }
+
 // masonry end
 // travel life end
 // local life
-
 .add-more-life {
   @extend .add-journey;
-
   span {
     background-color: $brand-dark-cyan;
     color: $brand-blue;
   }
-
   .add-more-journey {
     background-color: $brand-dark-cyan;
-
     &:after {
       border-left: 9px solid $brand-dark-cyan;
     }
   }
-
   .close-more {
     background-color: $brand-blue;
     color: #fff;
@@ -2261,17 +2154,14 @@ header {
   width: 24%;
   border-top: 1px solid $brand-lighter-grey;
   vertical-align: top;
-
   span {
     font-size: 17px;
     color: $brand-light-grey;
   }
-
   .clear-all {
     font-size: 15px;
     text-decoration: underline;
   }
-
   .checkin-more {
     color: $brand-blue;
     text-decoration: underline;
@@ -2284,29 +2174,24 @@ header {
 .rating-filter {
   padding: 15px 0;
   border-bottom: 1px solid $brand-lighter-grey;
-
   .custom-checkbox {
     [type="checkbox"]:checked+label:before,
     [type="checkbox"]:not(:checked)+label:before {
       margin-right: 10px;
       vertical-align: top;
     }
-
     [type="checkbox"]:checked+label:after {
       color: $brand-cyan;
     }
   }
-
   .local-filter-checkbox {
     margin: 12px 0;
-
     label {
       color: $brand-blue;
       font-size: 16px;
       font-weight: 400;
       text-transform: capitalize;
     }
-
     i {
       color: $brand-blue;
     }
@@ -2315,7 +2200,6 @@ header {
 
 .custom-select-local {
   margin: 5px 0;
-
   select {
     width: 93%;
     padding: 0 10px;
@@ -2324,7 +2208,6 @@ header {
     color: $brand-dark-blue;
     font-size: 15px;
   }
-
   &.custom-select:after {
     content: "\f078";
     right: 25px;
@@ -2340,23 +2223,20 @@ header {
   width: 76%;
   margin-left: -4px;
   vertical-align: top;
-
   .post-header-view {
     padding: 15px 30px;
   }
 }
 
 .post-list-view {
-  .list-inline > li {
+  .list-inline>li {
     padding: 0 13px;
     border-right: 2px solid $brand-blue;
     line-height: 16px;
     font-size: 16px;
-
     img {
       margin-right: 8px;
     }
-
     &:last-child {
       border-right: none;
     }
@@ -2381,23 +2261,19 @@ header {
   .ngsb-wrap {
     height: auto !important;
   }
-
   .ngsb-wrap .ngsb-scrollbar .ngsb-track {
     width: 4px;
     background: $brand-dark-cyan;
     box-shadow: none;
   }
-
   .ngsb-wrap .ngsb-scrollbar .ngsb-thumb-pos .ngsb-thumb {
     @include square(16px);
     background: #fff;
     border: 3px solid $brand-dark-blue;
   }
-
   .ngsb-wrap .ngsb-scrollbar .ngsb-thumb-pos:active {
     background-color: transparent;
   }
-
   .ngsb-wrap .ngsb-scrollbar {
     left: 17px;
   }
@@ -2407,66 +2283,54 @@ header {
   border: 1px solid $brand-lighter-grey;
   border-radius: 6px;
   margin-bottom: 20px;
-
   .heading-local-life {
     padding: 10px;
     position: relative;
     font-size: 15px;
-
     p {
       padding-right: 60px;
     }
-
     .location {
-      @include position(absolute, 10px 10px null null);
+      @include position(absolute,
+      10px 10px null null);
     }
   }
-
   .post-imgholder {
     height: 500px;
     overflow: hidden;
   }
-
   .post-social-type {
     padding: 0 10px;
   }
-
   .post-social-item {
     padding: 15px 0 25px;
     border-bottom: 1px solid $brand-lighter-grey;
-
     li {
       padding: 0 15px;
       display: inline-block;
       vertical-align: middle;
-
       i {
         font-size: 20px;
       }
-
       &:first-child {
         padding: 0 15px 0 0;
       }
     }
   }
-
   .post-socail-reviews {
     padding: 10px 0 15px;
     font-size: 15px;
   }
-
   .rating-localpost {
     i.glyphicon {
       margin-right: 5px;
       font: normal normal normal 14px/1 FontAwesome;
       font-size: 15px;
     }
-
     .glyphicon-star-empty:before {
       content: "\f006";
       color: $brand-light-grey;
     }
-
     .glyphicon-star:before {
       content: "\f005";
       color: $brand-cyan;
@@ -2476,49 +2340,40 @@ header {
 
 .local-post-slider {
   padding: 10px;
-
   .carousel {
     width: 95%;
   }
-
-  .flexslider .slides > li {
+  .flexslider .slides>li {
     width: 136px !important;
   }
-
   .flex-direction-nav a {
     @include square(20px);
     color: transparent;
     text-shadow: none;
-
     &:before {
       color: $brand-blue;
       font: normal normal normal 14px/1 FontAwesome;
       font-size: 18px;
     }
   }
-
   .flex-direction-nav .flex-prev:before {
     content: '\f053';
   }
-
   .flex-direction-nav .flex-next:before {
     content: '\f054';
   }
-
   .flex-direction-nav .flex-prev {
     left: auto;
     right: -27px;
     opacity: 1;
     top: 45%;
   }
-
   .flex-direction-nav .flex-next {
     left: auto;
     right: -27px;
     opacity: 1;
     top: 65%;
   }
-
   .flexslider:hover {
     .flex-direction-nav .flex-prev {
       left: auto;
@@ -2526,7 +2381,6 @@ header {
       opacity: 1;
       top: 45%;
     }
-
     .flex-direction-nav .flex-next {
       left: auto;
       right: -27px;
@@ -2534,7 +2388,6 @@ header {
       top: 65%;
     }
   }
-
   .related-postholder {
     @include square(136px);
     border: 1px solid $brand-cyan;
@@ -2544,17 +2397,17 @@ header {
 .local-imgview-pop {
   .modal-dialog {
     width: auto;
-    @include position(absolute, 50% null null 50%);
-    @include transform(translate(-50%, -50%)!important);
+    @include position(absolute,
+    50% null null 50%);
+    @include transform(translate(-50%,
+    -50%)!important);
   }
-
   .imgviewpop-holder {
     height: 550px;
     border: 2px solid $brand-dark-blue;
     position: relative;
     overflow: hidden;
   }
-
   .view-heading {
     width: 100%;
     padding: 10px;
@@ -2564,7 +2417,6 @@ header {
     background-color: rgba(0, 0, 0, 0.3);
     font-size: 18px;
   }
-
   .view-imgdown {
     width: 100%;
     padding: 10px;
@@ -2572,18 +2424,15 @@ header {
     bottom: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.5);
-
     li {
       padding-right: 25px;
       display: inline-block;
       vertical-align: top;
-
       i {
         font-size: 25px;
       }
     }
   }
-
   .likes-img {
     padding: 5px 25px;
     border-left: 1px solid #fff;
@@ -2591,19 +2440,20 @@ header {
     vertical-align: top;
   }
 }
+
 // local life end
 // profile end
 // moment tab
-
 .moments-active {
   ul {
     li {
       &:first-child .tab-heading {
         padding: 15px 20px;
         margin: 6px 0 0;
-        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+        @include background(linear-gradient(to left,
+        #e85a4d,
+        #f05b4d));
       }
-
       &:nth-child(2) .tab-heading {
         padding: 20px;
         margin: 0 0 0 -18px;
@@ -2629,7 +2479,6 @@ header {
     margin-top: -2px;
     display: inline-block;
     cursor: pointer;
-
     img {
       max-height: 100%;
     }
@@ -2640,7 +2489,6 @@ header {
   @include square(169px);
   display: inline-block;
   cursor: pointer;
-
   img {
     max-height: 100%;
     margin: 0 auto;
@@ -2650,22 +2498,20 @@ header {
 .moments-tab {
   padding: 20px;
   @extend .journey-tabs;
-
   .btn-view-moments {
     margin: 0 20px;
     display: inline-block;
-
     span {
       color: $brand-dark-blue;
       font-size: 16px;
     }
   }
-
   .active-btn-all {
     background-color: $brand-dark-blue;
     @include transition(all 300ms linear);
   }
 }
+
 // travel moment imgholder
 // .moment-travel-main {
 //   .moment-travel-view:nth-child(5n+1) {
@@ -2675,7 +2521,6 @@ header {
 //     margin: 15px 0 15px 22px;
 //   }
 // }
-
 .moment-travel-view {
   margin: 15px 25px 15px 0;
   display: inline-block;
@@ -2684,12 +2529,11 @@ header {
 .moment-travelimgholder {
   @include square(185px);
   position: relative;
-
   .img-backholder {
     @include square(170px);
-    @include position(absolute, 15px null null 15px);
+    @include position(absolute,
+    15px null null 15px);
     @include transform(rotate(1deg));
-
     img {
       min-height: 100%;
       border: 3px solid #fff;
@@ -2697,16 +2541,15 @@ header {
       box-shadow: 1px 1px 5px $brand-light-grey;
     }
   }
-
   .img-frontholder {
     @include square(180px);
-    @include position(absolute, 0 null null 0);
+    @include position(absolute,
+    0 null null 0);
   }
 }
 
 .travel-info {
   margin: 20px 0 0;
-
   h4 {
     max-width: 150px;
     margin: 0 0 5px;
@@ -2714,12 +2557,12 @@ header {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-
     span {
       font-size: 13px;
     }
   }
 }
+
 // travel moment imgholder end
 // local moment imgholder
 // .moment-local-main {
@@ -2730,7 +2573,6 @@ header {
 //     margin: 15px 0 15px 22px;
 //   }
 // }
-
 .moment-local-view {
   margin: 15px 25px 15px 0;
   display: inline-block;
@@ -2739,26 +2581,26 @@ header {
 .moment-localimgholder {
   @include square(185px);
   position: relative;
-
   .img-backholder {
     @include square(150px);
-    @include position(absolute, 30px null null 15px);
+    @include position(absolute,
+    30px null null 15px);
   }
-
   .img-frontholder {
     @include square(185px);
-    @include position(absolute, 0 null null 0);
+    @include position(absolute,
+    0 null null 0);
   }
 }
+
 // local moment imgholder end
 // moment tab end
 // revies tab
-
 .review-travel-view {
   margin-top: 20px;
 }
 
-.review-all-life + .review-all-life {
+.review-all-life+.review-all-life {
   border-top: 1px solid $brand-lighter-grey;
 }
 
@@ -2775,7 +2617,6 @@ header {
     font-style: italic;
     font-size: 17px;
   }
-
   .travel-life-rating {
     .star-rating {
       font-size: 20px;
@@ -2790,23 +2631,24 @@ header {
       &:first-child .tab-heading {
         padding: 11px 20px;
         margin: 10px 0 0 2px;
-        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+        @include background(linear-gradient(to left,
+        #e85a4d,
+        #f05b4d));
       }
-
       &:nth-child(2) .tab-heading {
         padding: 15px 20px;
         margin: 6px 0 0 -18px;
-        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+        @include background(linear-gradient(to left,
+        #e85a4d,
+        #f05b4d));
         z-index: 4;
       }
-
       &:nth-child(3) .tab-heading {
         padding: 20px;
         margin: 0 0 0 -18px;
         z-index: 4;
         background: $brand-pink;
       }
-
       &:nth-child(4) .tab-heading {
         padding: 10px 20px;
         margin: 12px 0 0 -30px;
@@ -2825,73 +2667,63 @@ header {
   // }
   .review-backimgholder {
     @include square(120px);
-    @include position(absolute, 10px 20px null null);
+    @include position(absolute,
+    10px 20px null null);
     border-radius: 100%;
     overflow: hidden;
   }
-
   .review-frontimgholder {
     h3 {
-      @include position(absolute, null null 25px 25px);
+      @include position(absolute,
+      null null 25px 25px);
     }
   }
 }
-// accordion review
 
+// accordion review
 .city-accordion {
   margin-top: 10px;
-
   .panel-title a {
     padding: 10px 30px;
     display: block;
   }
-
-  .panel-default > .panel-heading {
+  .panel-default>.panel-heading {
     padding: 0;
     border-radius: 0;
     border-bottom: 4px solid $brand-dark-pink;
     background-color: transparent;
-
     h3 {
       font-size: 18px;
       font-weight: 700;
       text-transform: uppercase;
     }
   }
-
   .panel-title a:focus {
     outline: none;
     text-decoration: none;
   }
-
   .panel {
     border: none;
     border-radius: 0;
     box-shadow: none;
   }
-
   .panel-body {
     border: none;
   }
-
-  .panel-default > .panel-heading+.panel-collapse > .panel-body {
+  .panel-default>.panel-heading+.panel-collapse>.panel-body {
     padding: 0 30px;
     border: none;
   }
-
   .review-local-life {
     padding: 20px 0;
     border-bottom: 1px solid $brand-grey;
-
     .place-name {
       font-size: 20px;
     }
   }
-
   .accordion-detail:last-child .review-local-life {
     border: none;
   }
-
   .panel-collapse {
     @include transition(all 0.20s ease);
   }
@@ -2902,15 +2734,14 @@ header {
   // background-color: #f3f3f3;
   text-align: center;
 }
-// pop-up rate
 
+// pop-up rate
 .star-post-rating {
   .fa-star:before {
     content: "\f005";
     color: $brand-pink;
   }
-
-  .list-inline > li {
+  .list-inline>li {
     padding: 0 15px;
   }
 }
@@ -2928,7 +2759,6 @@ header {
 
 .post-heading {
   padding: 20px 0;
-
   .popup-title {
     font-size: 15px;
   }
@@ -2937,12 +2767,10 @@ header {
 .post-content-main {
   padding: 20px 20px 0;
   border-radius: 8px;
-
   figcaption {
     margin: 10px 0 15px;
     font-size: 18px;
   }
-
   .post-emojis {
     min-height: 150px;
   }
@@ -2950,7 +2778,6 @@ header {
 
 .fill-post {
   text-align: center;
-
   textarea {
     width: 300px;
     border: none;
@@ -2964,7 +2791,6 @@ header {
   text-align: center;
   position: relative;
   bottom: -20px;
-
   button {
     padding: 6px 16px;
     font-size: 17px;
@@ -2977,20 +2803,18 @@ header {
   opacity: 1;
 }
 
-.review-backdrop.modal-backdrop + .repeated-item {
+.review-backdrop.modal-backdrop+.repeated-item {
   @include filter(blur(15px));
 }
-// country
 
+// country
 .review-country-main {
   .country-flag {
     margin: 20px 10px;
-
     img {
       width: 70px;
     }
   }
-
   .country-rating {
     i.glyphicon {
       margin: 0 15px;
@@ -2998,46 +2822,47 @@ header {
       font-size: 28px;
       cursor: pointer;
     }
-
     .glyphicon-star-empty:before {
       content: "\f006";
       color: $brand-light-grey;
     }
-
     .glyphicon-star:before {
       content: "\f005";
       color: $brand-pink;
     }
   }
 }
+
 // pop-up rate end
 // accordion review end
 // reviews tab end
 // holiday planner tab
-
 .holidayplanner-active {
   ul {
     li {
       &:nth-child(1) .tab-heading {
         padding: 9px 20px;
         margin: 11px 0 0 2px;
-        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+        @include background(linear-gradient(to left,
+        #e85a4d,
+        #f05b4d));
       }
-
       &:nth-child(2) .tab-heading {
         padding: 12px 20px;
         margin: 8px 0 0 -17px;
         z-index: 4;
-        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+        @include background(linear-gradient(to left,
+        #e85a4d,
+        #f05b4d));
       }
-
       &:nth-child(3) .tab-heading {
         padding: 15px 20px;
         margin: 6px 0 0 -18px;
         z-index: 4;
-        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+        @include background(linear-gradient(to left,
+        #e85a4d,
+        #f05b4d));
       }
-
       &:last-child .tab-heading {
         padding: 20px;
         margin: 0 0 0 -18px;
@@ -3047,13 +2872,12 @@ header {
     }
   }
 }
+
 // holiday planner tab end
 // setting tab
-
 .setting {
   padding: 20px 40px;
   background-color: #f1f2f2;
-
   .setting-heading {
     font-size: 20px;
   }
@@ -3063,28 +2887,23 @@ header {
   .profile-photo-sec {
     box-shadow: none;
   }
-
   label {
     margin-bottom: 10px;
     font-size: 15px;
   }
-
   .date-pick {
     input {
       background: url('../img/dropdown-icon.png') no-repeat 98% 50%;
     }
-
     .uib-daypicker:focus {
       outline: none;
     }
-
     .uib-left {
       .glyphicon-chevron-left:before {
         content: "\f053";
         font: normal normal normal 14px/1 FontAwesome;
       }
     }
-
     .uib-right {
       .glyphicon-chevron-right:before {
         content: "\f054";
@@ -3099,28 +2918,22 @@ header {
     font-size: 20px;
     color: $brand-lighter-grey;
   }
-
   ul {
     border: 1px solid #ebebeb;
   }
-
   li {
     padding: 8px 15px 0;
     cursor: pointer;
   }
-
   .col-md-10,
   .col-md-2 {
     padding: 0;
   }
-
   .tab-list {
     padding: 10px 10px 15px;
     border-bottom: 1px solid #ebebeb;
-
     h5 {
       font-size: 15px;
-
       span {
         font-size: 13px;
       }
@@ -3136,7 +2949,6 @@ header {
   padding: 10px;
   border: 1px solid #ebebeb;
   margin-bottom: 5px;
-
   i {
     margin-top: 25px;
   }
@@ -3159,7 +2971,6 @@ header {
 .setting-main-detail {
   min-height: 364px;
   padding: 20px 30px;
-
   .form-control {
     height: 40px;
     border: 1px solid $brand-dark-blue;
@@ -3169,7 +2980,6 @@ header {
     //   color: $brand-blue;
     // };
   }
-
   .select-holiday {
     background: url("../img/setting/grey-half.png") no-repeat 50% 0;
     // &:hover {
@@ -3178,32 +2988,26 @@ header {
     img {
       height: 45px;
     }
-
     figcaption {
       margin-top: 10px;
       font-size: 13px;
       text-align: center;
     }
   }
-
   .active-holiday {
     background: url("../img/setting/green-half.png") no-repeat 50% 0;
   }
-
   .holiday-imgholder {
     min-height: 55px;
   }
-
   .holiday-section,
   .setting-ideal-holiday,
   .setting-prefer-travel,
   .setting-usually-go {
     margin-bottom: 20px;
-
     ul {
       margin: 0 -10px;
     }
-
     li {
       width: 90px;
       margin: 15px 3px;
@@ -3211,38 +3015,33 @@ header {
       vertical-align: top;
     }
   }
-
   .holiday-section ul {
     margin: 0;
   }
-
   .profile-photo-sec {
     padding: 0;
     margin-bottom: 25px;
-
     .upload-section {
       padding: 40px 0 30px;
       border: 1px solid $brand-dark-blue;
       border-radius: 7px;
     }
   }
-
   img-crop {
     background-color: $brand-dark-blue;
     border-radius: 7px;
   }
-
   .cropArea {
     height: 300px;
   }
-
   .cancel {
-    @include position(absolute, 3px 7px null null);
+    @include position(absolute,
+    3px 7px null null);
     z-index: 1;
   }
-
   .btn-upload {
-    @include position(absolute, null 5px 7px null);
+    @include position(absolute,
+    null 5px 7px null);
   }
 }
 
@@ -3251,7 +3050,6 @@ header {
   .male {
     @include square(100px);
     margin: 0 20px 0 0;
-
     img {
       height: 80px;
     }
@@ -3266,7 +3064,6 @@ header {
 
 .setting-nationality {
   margin-top: 25px;
-
   .custom-select {
     select {
       padding: 10px;
@@ -3274,7 +3071,6 @@ header {
       border-radius: 7px;
       color: $brand-dark-blue;
     }
-
     &:after {
       content: "\f078";
       color: $brand-dark-blue;
@@ -3286,7 +3082,6 @@ header {
 .travel-blogger {
   margin-top: 10px;
   margin-bottom: 20px;
-
   .button-group {
     .btn {
       font-size: 18px;
@@ -3294,30 +3089,26 @@ header {
         background-color: $brand-pink;
       }
     }
-
     .btn:first-child {
       padding: 8px 28px;
     }
-
     .btn:nth-child(2) {
       padding: 8px 30px;
       margin: 0 20px;
     }
-
     .btn:last-child {
       padding: 8px 68px;
     }
   }
 }
-// select with checkbox
 
+// select with checkbox
 .checkbox-select {
   [type="checkbox"]:checked,
   [type="checkbox"]:not(:checked) {
     position: absolute;
     left: -9999px;
   }
-
   [type="checkbox"]:checked+label,
   [type="checkbox"]:not(:checked)+label {
     width: 100%;
@@ -3334,7 +3125,8 @@ header {
   [type="checkbox"]:not(:checked)+label:before {
     content: '';
     @include square(20px);
-    @include position(absolute, 50% 8px null null);
+    @include position(absolute,
+    50% 8px null null);
     @include transform(translateY(-50%));
     @include transition(all 300ms linear);
   }
@@ -3345,13 +3137,13 @@ header {
     font: normal normal normal 14px/1 FontAwesome;
     @include square(20px);
     color: #b7b7b7;
-    @include position(absolute, 50% 8px null null);
+    @include position(absolute,
+    50% 8px null null);
     @include transform(translateY(-50%));
     line-height: 20px;
     text-align: center;
     @include transition(all 300ms linear);
   }
-
   [type="checkbox"]:checked+label:after {
     color: $brand-pink;
     @include transition(all 300ms linear);
@@ -3364,7 +3156,6 @@ header {
     position: absolute;
     left: -9999px;
   }
-
   [type="radio"]:checked+label,
   [type="radio"]:not(:checked)+label {
     width: 100%;
@@ -3382,7 +3173,8 @@ header {
   [type="radio"]:not(:checked)+label:before {
     content: '';
     @include square(20px);
-    @include position(absolute, 50% 8px null null);
+    @include position(absolute,
+    50% 8px null null);
     @include transform(translateY(-50%));
     @include transition(all 300ms linear);
   }
@@ -3393,43 +3185,41 @@ header {
     font: normal normal normal 14px/1 FontAwesome;
     @include square(20px);
     color: #b7b7b7;
-    @include position(absolute, 50% 8px null null);
+    @include position(absolute,
+    50% 8px null null);
     @include transform(translateY(-50%));
     line-height: 20px;
     text-align: center;
     @include transition(all 300ms linear);
   }
-
   [type="radio"]:checked+label:after {
     color: $brand-pink;
     @include transition(all 300ms linear);
   }
-
   [type="radio"]:checked+label {
     color: $brand-blue;
     @include transition(all 300ms linear);
   }
 }
+
 // privacy policy tab end
 // report problem tab
-
 .problem-detail {
   label {
     margin-bottom: 10px;
   }
-
   textarea {
     min-height: 230px;
   }
 }
+
 // report problem tab end
 // setting tab end
-
 .get-width {
   width: 555px;
 }
-// blog
 
+// blog
 .blog-banner-header {
   z-index: 1;
 }
@@ -3454,7 +3244,6 @@ header {
   padding: 10px 20px;
   display: inline-block;
   background-color: rgba(252, 245, 230, 0.9);
-
   .blog-icon {
     padding-right: 10px;
     border-right: 1px solid #424242;
@@ -3469,28 +3258,23 @@ header {
   top: 40px;
   left: 0;
   background-color: rgba(252, 245, 230, 0.9);
-
   ul {
     height: 320px;
     overflow-x: hidden;
     overflow-y: scroll;
   }
-
   li {
     padding: 10px 25px;
     border-bottom: 1px solid #424242;
-
     &:last-child {
       border-bottom: none;
     }
-
     a {
       color: #424242;
       display: block;
     }
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: #424242;
   }
 }
@@ -3501,7 +3285,6 @@ header {
 
 .go-button {
   display: inline-block;
-
   button {
     min-height: 40px;
     margin-left: -4px;
@@ -3533,14 +3316,13 @@ header {
 .post-descp {
   width: 100%;
   padding: 10px;
-  @include position(absolute, null null 0 0);
+  @include position(absolute,
+  null null 0 0);
   background-color: rgba(0, 0, 0, 0.6);
-
   .post-title {
     margin: 8px 0;
     font-size: 17px;
   }
-
   .post-journey-type {
     span {
       padding: 3px 10px;
@@ -3550,7 +3332,6 @@ header {
       background-color: $brand-dark-blue;
     }
   }
-
   .post-date {
     font-size: 11px;
   }
@@ -3559,7 +3340,6 @@ header {
 .popular-blog-section {
   padding-bottom: 10px;
   border-bottom: 2px solid #ebebeb;
-
   h4 {
     margin: 10px 0 20px;
   }
@@ -3580,7 +3360,6 @@ header {
   position: absolute;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
-
   h4 {
     height: 34px;
     margin: 0;
@@ -3594,7 +3373,6 @@ header {
 .popular-post-type {
   position: absolute;
   top: 20px;
-
   span {
     padding: 3px 15px;
   }
@@ -3607,7 +3385,6 @@ header {
 
 .post-right {
   right: 0;
-
   span {
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
@@ -3630,12 +3407,10 @@ header {
 
 .social-media {
   text-align: center;
-
   li {
     margin: 15px;
     display: inline-block;
     font-size: 17px;
-
     a {
       color: #424242;
     }
@@ -3644,24 +3419,20 @@ header {
 
 .blog-filter-checkbox {
   margin: 12px 0;
-
   label {
     color: $brand-dark-blue;
     font-size: 15px;
   }
-
   [type="checkbox"]:checked+label:before,
   [type="checkbox"]:not(:checked)+label:before {
     border: 1px solid $brand-dark-blue;
     vertical-align: middle;
     margin-right: 10px;
   }
-
   [type="checkbox"]:checked+label:after,
   [type="checkbox"]:not(:checked)+label:after {
     top: 2px;
   }
-
   [type="checkbox"]:checked+label:after {
     color: $brand-dark-blue;
   }
@@ -3674,9 +3445,9 @@ header {
   font-weight: 700;
   text-decoration: underline;
 }
+
 // blog end
 // blog detail
-
 .blog-main-detail {
   padding: 30px 0;
 }
@@ -3705,7 +3476,6 @@ header {
 
 .blog-journey-detail {
   padding: 30px 50px;
-
   p {
     color: #424242;
     font-size: 17px;
@@ -3715,11 +3485,9 @@ header {
 
 .social-share li {
   vertical-align: top;
-
   i {
     color: #999;
     @include transition(all 300ms linear);
-
     &:hover {
       color: $brand-pink;
       @include transition(all 300ms linear);
@@ -3735,12 +3503,10 @@ header {
       left: 0;
       opacity: 0;
     }
-
     &:hover {
       .icon-pink {
         opacity: 1;
       }
-
       .icon-grey {
         opacity: 0;
       }
@@ -3752,11 +3518,9 @@ header {
   display: inline-block;
   padding: 0 10px;
   vertical-align: top;
-
   &:first-child i {
     font-size: 21px;
   }
-
   &:last-child span {
     margin-top: 2px;
     display: inline-block;
@@ -3788,14 +3552,12 @@ header {
   border-top: 2px solid #dcdcdc;
   border-bottom: 2px solid #dcdcdc;
   margin: 30px 0;
-
   .recent-blog-imgholder {
     width: 200px;
     height: 130px;
     border-radius: 6px;
     overflow: hidden;
   }
-
   h4 {
     font-size: 14px;
   }
@@ -3815,11 +3577,9 @@ header {
 
 .blog-view {
   margin-bottom: 10px;
-
   span {
     font-size: 18px;
   }
-
   .icon {
     font-size: 19px;
   }
@@ -3833,19 +3593,17 @@ header {
 
 .blog-itineraries-main {
   padding-top: 80px;
-
   .blog-post {
     overflow: visible;
   }
-
   .masonry-brick {
     margin-bottom: 15px;
   }
 }
+
 // blog detail end
 // activity
 // post profile pic
-
 .heading-activity {
   margin: 0 0 25px;
   font-size: 30px;
@@ -3853,7 +3611,6 @@ header {
 
 .activity-container {
   padding: 30px 0 0;
-
   h3.heading-activity {
     font-size: 32px;
   }
@@ -3864,7 +3621,6 @@ header {
   border: 1px solid #ccc;
   border-radius: 6px;
   background-color: rgba(255, 255, 255, 0.8);
-
   li {
     display: inline-block;
   }
@@ -3898,7 +3654,6 @@ header {
   overflow: hidden;
   border: 2px solid #ddd;
   border-radius: 28%;
-
   img {
     max-height: 100%;
     border-radius: 20px;
@@ -3912,11 +3667,9 @@ header {
   // border-top: 1px solid #b5b5b5;
   margin-top: 10px;
   color: #424242;
-
   p {
     margin: 0;
   }
-
   a {
     color: #232c49;
   }
@@ -3930,12 +3683,10 @@ header {
 
 .post-main-section {
   min-height: 20px;
-
   .journey-collection {
     li {
       display: inline-block;
       padding: 0 7px;
-
       &:first-child {
         padding: 0 7px 0 0;
       }
@@ -3968,7 +3719,6 @@ header {
 .video-post {
   height: 250px;
   overflow: hidden;
-
   img {
     max-height: 100%;
     margin: 0 auto;
@@ -3981,11 +3731,10 @@ header {
   .related-postimgholder {
     @include square(80px);
   }
-
   .flexslider {
     border-color: none;
     background-color: transparent;
-    .flex-direction-nav{
+    .flex-direction-nav {
       .flex-prev {
         left: 4px;
       }
@@ -3993,22 +3742,22 @@ header {
         right: 4px;
       }
       a:before {
-          font-size: 28px;
-          color: #fff;
-        }
+        font-size: 28px;
+        color: #fff;
+      }
     }
     &:hover .flex-direction-nav .flex-prev {
-    opacity: 1;
-    left: 4px;
+      opacity: 1;
+      left: 4px;
     }
     &:hover .flex-direction-nav .flex-next {
-    opacity: 1;
-    right: 4px;
+      opacity: 1;
+      right: 4px;
     }
   }
   .carousel {
     min-height: 80px;
-    }
+  }
 }
 
 .post-rating {
@@ -4020,20 +3769,18 @@ header {
   .user-social-item {
     li {
       padding: 0 7px;
-
       &:first-child {
         padding: 0 7px 0 0;
       }
     }
   }
 }
-// traveller post
 
+// traveller post
 .activity-popular-main {
   border: 1px solid #ccc;
   border-radius: 6px;
   margin: 10px;
-
   .popular-main {
     ul {
       border-bottom-left-radius: 6px;
@@ -4041,7 +3788,6 @@ header {
       background-color: rgba(255, 255, 255, 0.8);
     }
   }
-
   .heading-popular {
     padding: 15px;
     border-top-left-radius: 6px;
@@ -4049,8 +3795,7 @@ header {
     background-color: #e5e5e5;
     color: #8a8a8a;
   }
-
-  li + li {
+  li+li {
     .view-list-popular {
       border-top: 3px solid #e5e5e5;
     }
@@ -4061,14 +3806,12 @@ header {
   padding: 10px;
   // border-bottom: 3px solid #e5e5e5;
   position: relative;
-
   .pic-imgholder {
     width: 55px;
     border-radius: 15px;
     overflow: hidden;
     vertical-align: middle;
   }
-
   .list-user-detail {
     margin: 0 20px 0 10px;
     vertical-align: middle;
@@ -4076,7 +3819,6 @@ header {
     top: 0;
     width: 100%;
     padding: 18px 40px 3px 65px;
-
     h4 {
       margin: 3px 0;
       overflow: hidden;
@@ -4086,7 +3828,6 @@ header {
       @extend .avenir-heavy
     }
   }
-
   .btn-follow {
     display: inline-block;
     vertical-align: middle;
@@ -4094,7 +3835,6 @@ header {
     margin-top: -3px;
     position: relative;
     z-index: 2;
-
     a {
       @extend .avenir-heavy;
     }
@@ -4107,48 +3847,41 @@ header {
     @extend .avenir-heavy;
   }
 }
+
 // traveller post end
 //taught
-
 .travel-taught {
   .location {
     background-color: $brand-pink;
   }
-
   .activity-local-icon {
     display: none;
   }
-
   .tag-ongo-journey {
     top: -5px;
   }
-
   .user-social-item {
     margin-top: 10px;
     border-top: 1px solid #b5b5b5;
   }
 }
-// get class by post like travel local life and editor
 
+// get class by post like travel local life and editor
 .travel-life {
   .activity-local-icon {
     display: none;
   }
-
   .youtube-icon {
     color: $brand-pink;
   }
-
   .location {
     background-color: $brand-pink;
   }
-
   .post-rating {
     i {
       color: $brand-pink;
     }
   }
-
   .if-white {
     display: none;
   }
@@ -4158,31 +3891,24 @@ header {
   .location {
     background-color: $brand-cyan !important;
   }
-
   .tag-ongo-journey {
     background-color: $brand-cyan;
-
     span {
       @extend .avenir-heavy;
     }
   }
-
   .location {
     background-color: $brand-pink;
   }
-
   .activity-travel-icon {
     display: none;
   }
-
   .activity-local-icon {
     display: none;
   }
-
   .tag-ongo-journey {
     top: -5px;
   }
-
   .user-social-item {
     margin-top: 10px;
     border-top: 1px solid #b5b5b5;
@@ -4192,34 +3918,27 @@ header {
 .local-life {
   .tag-ongo-journey {
     background-color: $brand-cyan;
-
     span {
       @extend .avenir-heavy;
     }
   }
-
   .days-spent {
     bottom: 26px;
   }
-
   .activity-travel-icon {
     display: none;
   }
-
   .youtube-icon {
     color: $brand-cyan;
   }
-
   .location {
     background-color: $brand-cyan;
   }
-
   .post-rating {
     i {
       color: $brand-cyan;
     }
   }
-
   .if-white {
     display: none;
   }
@@ -4238,12 +3957,10 @@ header {
   .activity-local-icon {
     display: none;
   }
-
   .flag-section {
     right: 5px;
     left: initial;
   }
-
   .days-spent {
     bottom: 25px;
   }
@@ -4254,11 +3971,9 @@ header {
   .activity-local-icon {
     display: none;
   }
-
   .days-spent {
     top: -285px;
   }
-
   .quick-itinerary-tag {
     position: absolute;
     right: 10px;
@@ -4267,17 +3982,14 @@ header {
     padding: 7px 15px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-
     h4 {
       margin: 0;
       padding: 0;
     }
-
     p {
       margin: 0;
     }
   }
-
   .date-quick-itinerary {
     position: absolute;
     right: 110px;
@@ -4290,66 +4002,52 @@ header {
   .follow-or-following span {
     color: #fff;
   }
-
   .editor-logo {
     border: none;
   }
-
   .flag-section {
     right: 5px;
     left: initial;
   }
-
   .activity-post-main {
     background-color: $brand-dark-blue;
   }
-
   .post-travel-icon {
     display: none;
   }
-
   .user-detail h4 {
     color: #fff;
   }
-
   .user-more-detail {
     color: #fff;
   }
-
   .post-your-status {
     padding: 8px 5px 0;
     border-top: 1px solid #b5b5b5;
     margin-top: 10px;
     color: #727272;
-
     p {
       margin: 0;
       color: #fff;
     }
-
     a {
       color: #232c49;
     }
   }
-
   .social-likes-reviews {
     span {
       color: #fff;
     }
-
     i {
       color: #fff;
     }
   }
-
   .user-social-item li:first-child i {
     color: #fff;
   }
-
   .if-blue {
     display: none;
   }
-
   .journey-travelling-type {
     margin-bottom: -10px;
   }
@@ -4359,28 +4057,24 @@ header {
   .journey-tag-holder h3 {
     font-size: 18px;
   }
-
   .journey-tag-holder {
     min-height: 55px;
   }
-
   .tag-ongo-journey {
     background-color: $brand-dark-blue;
-
     span {
       color: #fff;
       @extend .avenir-heavy;
     }
   }
 }
-// visit-post
 
+// visit-post
 .visit-post {
   border: 1px solid #ccc;
   border-radius: 6px;
   margin: 10px;
   overflow: hidden;
-
   .social-field-types {
     padding: 10px 10px 0;
   }
@@ -4391,7 +4085,6 @@ header {
   position: absolute;
   top: 10px;
   left: 0;
-
   h4 {
     margin: 5px 0 0 10px;
   }
@@ -4407,7 +4100,6 @@ header {
   height: 370px;
   max-height: 370px;
   overflow: hidden;
-
   img {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -4421,11 +4113,9 @@ header {
   bottom: 10px;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
-
   .btn {
     padding: 4px 14px;
   }
-
   .been-here {
     font-size: 13px;
   }
@@ -4449,7 +4139,6 @@ header {
 .visit-slider {
   padding: 0 10px;
   margin-top: -20px;
-
   .flexslider-container {
     border: 2px solid #fff;
     background-color: #fff;
@@ -4459,7 +4148,6 @@ header {
 .postslider-imgholder {
   height: 120px;
   position: relative;
-
   span {
     position: absolute;
     top: 3px;
@@ -4468,18 +4156,16 @@ header {
     font-size: 12px;
   }
 }
+
 // visit-post end
 // visiting
-
 .visiting-post.local-visit {
   .if-white {
     display: none;
   }
-
   .travelocal-visit-foot {
     background-color: $brand-cyan;
   }
-
   .user-social-item {
     padding: 15px 0;
     border-top: 1px solid $brand-dark-blue;
@@ -4491,33 +4177,28 @@ header {
   .if-blue {
     display: none;
   }
-
   .travelocal-visit-foot {
     background-color: $brand-pink;
   }
-
   .user-social-item {
     padding: 15px 0;
     border-top: 1px solid #fff;
     border-bottom: 1px solid #fff;
   }
-
   .fa.fa-heart-o {
     color: #fff;
   }
-
   .fa.fa-heart {
     color: #fff;
   }
-
   .social-likes-reviews span {
     color: #fff;
   }
 }
+
 // visiting
 // post profile pic end
 //ACTIVITY OPTIONS BUTTON
-
 .user-social-item .activity-edit-option {
   width: 125px;
   position: absolute;
@@ -4530,7 +4211,6 @@ header {
   background-color: #f6fafc;
   text-align: left;
   z-index: 10;
-
   &:before {
     content: '';
     position: absolute;
@@ -4542,7 +4222,6 @@ header {
     border-left: 12px solid transparent;
     z-index: 2;
   }
-
   &:after {
     z-index: 1;
     right: 14px;
@@ -4552,7 +4231,6 @@ header {
     border-bottom: 13px solid transparent;
     border-left: 13px solid transparent;
   }
-
   ul {
     li {
       display: block;
@@ -4560,10 +4238,10 @@ header {
     }
   }
 }
+
 //ACTIVITY OPTIONS BUTTON END
 // activity end
 // on go journey
-
 .on-go-journey {
   position: relative;
   z-index: 3;
@@ -4578,26 +4256,22 @@ header {
   z-index: 6;
   @include transition(all 200ms linear);
   // background: url('../img/ongo-strip.png') no-repeat;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   background-size: 100% 100%;
-
   &.get-otgstrip {
     top: 60px;
     @include transition(all 200ms linear);
   }
-
   &.remove-otgstrip {
     top: 0;
     @include transition(all 200ms linear);
   }
-
   .btn-summary,
   .own-journey,
   .trip-list {
     display: inline-block;
     vertical-align: middle;
   }
-
   .trip-list {
     li {
       // border-right: 2px solid $brand-dark-blue;
@@ -4606,21 +4280,17 @@ header {
       display: inline-block;
       line-height: 100%;
       vertical-align: middle;
-
       &:first-child {
         padding: 0 15px 0 0;
       }
-
       &:last-child {
         border-right: none;
       }
     }
-
     a {
       cursor: default;
     }
   }
-
   .trip-info {
     span {
       margin: 3px 2px 0;
@@ -4629,7 +4299,6 @@ header {
       color: #fff;
       font-size: 16px;
     }
-
     img {
       height: 20px;
       display: inline-block;
@@ -4650,7 +4319,6 @@ header {
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.60), inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
   background-color: #daeafa;
   @extend .avenir-roman;
-
   &:after,
   &:before {
     content: "";
@@ -4662,7 +4330,6 @@ header {
     border-left: 17px solid transparent;
     border-right: 17px solid transparent;
   }
-
   &:before {
     top: -38px;
     right: 23px;
@@ -4671,19 +4338,15 @@ header {
     border-left: 19px solid transparent;
     border-right: 19px solid transparent;
   }
-
   li {
     padding: 7px 0;
     border-bottom: 1px solid #6d6e71;
-
     &:last-child {
       border-bottom: none;
     }
   }
-
   a {
     color: #6d6e71;
-
     &:hover {
       color: #363636;
     }
@@ -4723,17 +4386,14 @@ header {
   margin-right: 20px;
   display: inline-block;
   cursor: pointer;
-
   img,
   span {
     display: inline-block;
     vertical-align: top;
   }
-
   img {
     margin-right: 3px;
   }
-
   span {
     font-size: 16px;
     line-height: 100%;
@@ -4752,7 +4412,6 @@ header {
   background-color: #daeafa;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.6), inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
   text-align: center;
-
   &:after,
   &:before {
     content: "";
@@ -4764,7 +4423,6 @@ header {
     border-left: 17px solid transparent;
     border-right: 17px solid transparent;
   }
-
   &:before {
     top: -38px;
     right: 23px;
@@ -4773,51 +4431,41 @@ header {
     border-left: 19px solid transparent;
     border-right: 19px solid transparent;
   }
-
   ul li {
     display: inline-block;
     margin-right: 15px;
-
     &:last-child {
       margin-right: 0;
     }
   }
-
   a {
     color: #999;
     @include transition(all 300ms linear);
-
     &:hover {
       @include transition(all 300ms linear);
     }
   }
-
   a.fb-icon:hover {
     color: #3b5998;
   }
-
   a.twi-icon:hover {
     color: #55acee;
   }
-
   a.google-icon:hover {
     color: #d34836;
   }
-
   a.pin-icon:hover {
     color: #cb2027;
   }
-
   a.linkedin-icon:hover {
     color: #007bb5;
   }
-
   a.mail-icon:hover {
     color: $brand-pink;
   }
 }
-// card
 
+// card
 .ongo-card-holder {
   width: 550px;
   margin-top: 80px;
@@ -4830,19 +4478,16 @@ header {
   border-radius: 8px;
   // box-shadow: 1px 4px 5px #ccc;
   box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.19);
-  background-color: rgba(255,255,255,0.90);
-
+  background-color: rgba(255, 255, 255, 0.90);
   .user-social-item {
     padding: 8px 2px;
     border-top: 1px solid #b5b5b5;
     border-bottom: 1px solid #b5b5b5;
   }
-
   .journey-rate {
     margin-bottom: 5px;
     color: #424242;
     font-size: 12px;
-
     i {
       margin-right: 3px;
     }
@@ -4858,8 +4503,8 @@ header {
     border-top: 1px solid #bababa;
   }
 }
-// card header
 
+// card header
 .ongo-card-header {
   padding: 10px;
 }
@@ -4887,7 +4532,6 @@ header {
     color: #424242;
     word-break: break-all;
     @extend .avenir-roman;
-
     b {
       @extend .avenir-heavy;
     }
@@ -4897,7 +4541,6 @@ header {
 .journey-date {
   color: #a0a0a0;
   font-size: 12px;
-
   .day-journey {
     color: #424242;
   }
@@ -4905,7 +4548,6 @@ header {
 
 .options {
   position: relative;
-
   .other-trip,
   .own-trip {
     width: 205px;
@@ -4918,7 +4560,6 @@ header {
     box-shadow: -1px 1px 10px 0 rgba(0, 0, 0, 0.35), inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
     background-color: #f6fafc;
     z-index: 10;
-
     &:after,
     &:before {
       content: '';
@@ -4931,7 +4572,6 @@ header {
       border-left: 12px solid transparent;
       z-index: 2;
     }
-
     &:after {
       z-index: 1;
       right: 14px;
@@ -4941,21 +4581,17 @@ header {
       border-bottom: 13px solid transparent;
       border-left: 13px solid transparent;
     }
-
     li {
       padding: 7px 5px;
       display: block;
       border-bottom: 1px solid #b1b3b6;
-
       &:last-child {
         border-bottom: none;
       }
-
       a {
         color: #424242;
         font-size: 15px;
         @extend .avenir-roman;
-
         &:hover {
           color: #363636;
         }
@@ -4963,8 +4599,8 @@ header {
     }
   }
 }
-// share single trip
 
+// share single trip
 .share-single-trip {
   width: 300px;
   padding: 20px 15px;
@@ -4977,7 +4613,6 @@ header {
   left: -6px;
   background-color: #f6fafc;
   text-align: center;
-
   &:after,
   &:before {
     content: '';
@@ -4990,7 +4625,6 @@ header {
     border-left: 12px solid transparent;
     z-index: 2;
   }
-
   &:after {
     z-index: 1;
     left: 12px;
@@ -5000,73 +4634,60 @@ header {
     border-bottom: 13px solid transparent;
     border-left: 13px solid transparent;
   }
-
   li:first-child i {
     font-size: 2em;
   }
-
   li:last-child {
     padding: 0 0 0 10px;
   }
-
   a {
     color: #999;
     @include transition(all 300ms linear);
-
     &:hover {
       @include transition(all 300ms linear);
     }
   }
-
   a.fb-icon:hover {
     color: #3b5998;
   }
-
   a.twi-icon:hover {
     color: #55acee;
   }
-
   a.google-icon:hover {
     color: #d34836;
   }
-
   a.pin-icon:hover {
     color: #cb2027;
   }
-
   a.linkedin-icon:hover {
     color: #007bb5;
   }
-
   a.mail-icon:hover {
     color: $brand-pink;
   }
 }
+
 // share single trip cancel
 // card header end
-
 .card-imgholder {
   height: 400px;
   position: relative;
   overflow: hidden;
-
   .blur-img {
     width: 100%;
     @extend .get-center;
     @include filter(blur(6px));
-
     img {
       width: 100%;
     }
-
     &:after {
       content: '';
       @include square(100%);
-      @include position(absolute, 0 0 0 0);
+      @include position(absolute,
+      0 0 0 0);
       background-color: rgba(0, 0, 0, 0.5);
     }
   }
-
   .card-img {
     height: 100%;
     @extend .get-center;
@@ -5075,45 +4696,37 @@ header {
 
 .related-imgslider {
   padding: 10px 23px 10px 10px;
-
   .flexslider {
     background-color: transparent;
   }
-
   .flex-direction-nav a {
     @include square(15px);
     color: transparent;
     text-shadow: none;
-
     &:before {
       color: $brand-blue;
       font: normal normal normal 14px/1 FontAwesome;
       font-size: 16px;
     }
   }
-
   .flex-direction-nav .flex-prev:before {
     content: '\f053';
   }
-
   .flex-direction-nav .flex-next:before {
     content: '\f054';
   }
-
   .flex-direction-nav .flex-prev {
     left: auto;
     right: -18px;
     opacity: 1;
     top: 50%;
   }
-
   .flex-direction-nav .flex-next {
     left: auto;
     right: -18px;
     opacity: 1;
     top: 70%;
   }
-
   .flexslider:hover {
     .flex-direction-nav .flex-prev {
       left: auto;
@@ -5121,7 +4734,6 @@ header {
       opacity: 1;
       top: 50%;
     }
-
     .flex-direction-nav .flex-next {
       left: auto;
       right: -18px;
@@ -5141,7 +4753,6 @@ header {
 .ongo-card-main {
   .relate-pic {
     padding: 10px 10px 0;
-
     .related-ongo-slider {
       margin-right: 3px;
       display: inline-block;
@@ -5152,14 +4763,13 @@ header {
 
 .video-ongo-journey {
   position: relative;
-
   &:after {
     content: '';
     @include square(100%);
-    @include position(absolute, 0 0 0 0);
+    @include position(absolute,
+    0 0 0 0);
     background-color: rgba(0, 0, 0, 0.4);
   }
-
   .youtube-icon {
     z-index: 1;
   }
@@ -5169,21 +4779,18 @@ header {
   &:after {
     display: none;
   }
-
   .youtube-icon {
     display: none;
   }
 }
-// join card
 
+// join card
 .ongo-journey-join {
   width: 350px;
   margin: 30px auto;
-
   .join-relate {
     z-index: 1;
   }
-
   .join-card {
     padding: 10px;
     border-radius: 6px;
@@ -5191,12 +4798,10 @@ header {
     background-color: $brand-pink;
     @include transform(rotate(-2deg));
   }
-
   p {
     margin: 15px 0;
     text-shadow: 2px 2px 2px #020202;
   }
-
   h4 {
     margin: 0 0 2px;
     color: #fff;
@@ -5204,13 +4809,11 @@ header {
     @extend .avenir-light;
     text-shadow: 2px 2px 2px #020202;
   }
-
   .join-tag {
     position: absolute;
     top: 55px;
     right: 100px;
   }
-
   .journey-pic-imgholder {
     width: 80px;
     height: 85px;
@@ -5219,14 +4822,13 @@ header {
     box-shadow: none;
   }
 }
+
 // join card end
 // card footer
 // card like and comment start
-
 .card-comment,
 .card-like {
   position: relative;
-
   .card-comment-dropdown,
   .card-like-dropdown {
     width: 155px;
@@ -5235,12 +4837,10 @@ header {
     left: -10px;
     z-index: 2;
     background-color: $brand-blue;
-
     ul {
       max-height: 230px;
       overflow-y: auto;
     }
-
     a {
       padding: 8px 10px;
       display: block;
@@ -5249,10 +4849,8 @@ header {
       @extend .avenir-roman;
     }
   }
-
   .card-like-dropdown {
     top: 25px;
-
     &:after {
       content: "";
       position: absolute;
@@ -5264,10 +4862,8 @@ header {
       border-left: 8px solid transparent;
     }
   }
-
   .card-comment-dropdown {
     bottom: 28px;
-
     &:after {
       content: "";
       position: absolute;
@@ -5280,14 +4876,13 @@ header {
     }
   }
 }
+
 // card like and comment end
 // card footer end
 // left card
-
 .ongo-journey-left {
   width: 350px;
   margin: 30px auto;
-
   .journey-pic-imgholder {
     width: 80px;
     height: 85px;
@@ -5295,13 +4890,11 @@ header {
     margin: 0 auto -10px;
     box-shadow: none;
   }
-
   .journey-left {
     padding: 15px 10px;
     border-radius: 6px;
     background-color: $brand-dark-blue;
     color: #fff;
-
     h4 {
       margin: 0 0 2px;
       color: #fff;
@@ -5309,26 +4902,23 @@ header {
       @extend .avenir-light;
       text-shadow: 2px 2px 2px #020202;
     }
-
     p {
       font-size: 12px;
       text-shadow: 2px 2px 2px #020202;
     }
   }
-
   .left-tag {
     position: absolute;
     left: 80px;
     bottom: 0;
   }
 }
+
 // left card end
 // change journey card
-
 .ongo-journey-change {
   width: 350px;
   margin: 30px auto;
-
   .journey-change {
     padding: 15px 10px;
     border-radius: 6px;
@@ -5336,45 +4926,38 @@ header {
     // background-color: rgba(242, 103, 91, 0.75);
     background-color: $brand-pink;
   }
-
   h4 {
     margin: 0;
     font-size: 18px;
     text-shadow: 2px 2px 2px #020202;
   }
-
   p {
     margin: 15px 0;
     text-shadow: 2px 2px 2px #020202;
   }
 }
+
 // change journey card end
 // ongo-journey-end
-
 .ongo-journey-end {
   width: 350px;
   margin: 0 auto;
-
   .journey-end {
     padding: 10px;
     border-radius: 6px;
     // background-color: rgba(242, 103, 91, 0.75);
     background-color: $brand-pink;
-
     p {
       text-shadow: 2px 2px 2px #020202;
     }
   }
-
   h4 {
     margin: 0 0 5px;
     font-size: 22px;
     text-shadow: 2px 2px 2px #020202;
   }
-
   .end-journey-flag {
     margin: 25px 0;
-
     span {
       margin-top: 10px;
       display: inline-block;
@@ -5383,30 +4966,26 @@ header {
     }
   }
 }
+
 // ongo-journey-end
 // started-journey-card
-
 .started-journey-card {
   margin-bottom: 30px;
-
   .box-start-journey {
     border-radius: 6px;
     box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.19);
     position: relative;
     z-index: 2;
   }
-
   .journey-start {
     background: url('../img/ongojourney/bg-start-white.png') no-repeat 50% 50%;
     background-size: contain;
-
     h4 {
       margin: 25px 0 20px;
       font-size: 20px;
       position: relative;
       color: #fff;
       text-shadow: 2px 2px 2px #020202;
-
       &:before {
         content: "";
         width: 1px;
@@ -5417,7 +4996,6 @@ header {
         left: 50%;
         @include transform(translateX(-50%));
       }
-
       &:after {
         content: '';
         width: 1px;
@@ -5430,28 +5008,23 @@ header {
       }
     }
   }
-
   .you-in {
     margin-bottom: -5px;
   }
-
   .started-heading {
     padding: 5px 10px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     background-color: $brand-pink;
-
     h4 {
       margin: 0;
       font-size: 16px;
     }
-
     p {
       margin-top: 2px;
       font-size: 10px;
     }
   }
-
   .start-card-options {
     padding: 0 5px;
     position: absolute;
@@ -5459,7 +5032,6 @@ header {
     right: 10px;
     cursor: pointer;
   }
-
   .edit-kind-journey {
     width: 205px;
     padding: 20px 25px;
@@ -5471,7 +5043,6 @@ header {
     right: -25px;
     background-color: #f6fafc;
     z-index: 2;
-
     &:before {
       content: '';
       border-top: 13px solid transparent;
@@ -5483,7 +5054,6 @@ header {
       top: -26px;
       z-index: 1;
     }
-
     &:after {
       content: '';
       position: absolute;
@@ -5495,49 +5065,40 @@ header {
       border-left: 12px solid transparent;
       z-index: 2;
     }
-
     li {
       padding: 7px 5px;
       border-bottom: 1px solid #b1b3b6;
       display: block;
-
       &:last-child {
         border: none;
       }
     }
-
     a {
       color: #6d6e71;
       font-size: 15px;
     }
   }
-
   .journey-imgholder {
     width: 100%;
     max-height: 260px;
     margin-top: -2px;
     overflow: hidden;
-
     img {
       width: 100%;
     }
   }
-
   .travelling-journey-type {
     padding: 10px 10px 0;
-    background-color: rgba(255,255,255,0.90);
-
+    background-color: rgba(255, 255, 255, 0.90);
     li {
       margin-right: 10px;
       display: inline-block;
     }
   }
-
   .journey-travelling-buddies {
     position: absolute;
     right: 0;
     bottom: 3px;
-
     .img-buddies {
       width: 40px;
       height: 42px;
@@ -5547,19 +5108,16 @@ header {
       display: inline-block;
       overflow: hidden;
       box-shadow: 0 2px 5px #ccc;
-
       img {
         min-height: 100%;
       }
     }
   }
-
   .journey-with {
     padding: 10px;
-    background-color: rgba(255,255,255,0.9);
+    background-color: rgba(255, 255, 255, 0.9);
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
-
     p {
       color: #424242;
     }
@@ -5581,10 +5139,10 @@ header {
   position: relative;
   z-index: 2;
 }
+
 // started-journey-card end
 // card end
 // comment whole card
-
 .whole-card-comment {
   width: 450px;
   height: 100%;
@@ -5601,9 +5159,9 @@ header {
   z-index: 5;
   @include transition(all 300ms linear);
 }
+
 // comment whole card end
 // pop up journey used
-
 .cover-heading,
 .journey-name-heading {
   padding: 15px 0;
@@ -5615,10 +5173,8 @@ header {
     height: 450px;
     overflow: hidden;
   }
-
   .input-holder {
     position: relative;
-
     &:after,
     &:before {
       content: '';
@@ -5628,30 +5184,26 @@ header {
       bottom: 0;
       background-color: $brand-dark-pink;
     }
-
     &:after {
       right: 0;
     }
-
     &:before {
       left: 0;
     }
   }
-
   .put-journey-name {
     width: 100%;
     padding: 20px;
-    @include position(absolute, null null 0 0);
+    @include position(absolute,
+    null null 0 0);
     background-color: rgba(0, 0, 0, 0.6);
   }
-
   input {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid $brand-dark-pink;
     color: #fff;
     font-size: 20px;
-
     &:focus {
       outline: none;
       border-color: $brand-dark-pink;
@@ -5667,14 +5219,12 @@ header {
 
 .cover-gallery-grid {
   padding: 10px;
-
   .choose-cover-pic {
     width: 148px;
     height: 148px;
     margin: 0 3px;
     display: inline-block;
     overflow: hidden;
-
     img {
       min-height: 100%;
     }
@@ -5695,31 +5245,27 @@ header {
   margin: 0 0 25px 40px;
   display: inline-block;
   vertical-align: bottom;
-
   span {
     color: #fff;
     padding-bottom: 2px;
     border-bottom: 1px solid #fff;
   }
-
   .btn-cover-save {
     margin-left: 35px;
   }
 }
-// date and time
 
+// date and time
 .date-holder {
   display: inline-block;
   position: relative;
   margin: 0 5px;
-
-  ::-webkit-inner-spin-button,
-  ::-webkit-outer-spin-button {
+   ::-webkit-inner-spin-button,
+   ::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
   -moz-appearance: textfield;
-
   &:after,
   &:before {
     content: '';
@@ -5729,15 +5275,12 @@ header {
     bottom: 0;
     background-color: #fff;
   }
-
   &:before {
     left: 0;
   }
-
   &:after {
     right: 0;
   }
-
   input {
     width: 75px;
     padding: 0 10px;
@@ -5757,34 +5300,27 @@ header {
   left: 0;
   // background-color: rgba(0,0,0,0.7);
   background-color: #fff;
-
   ul {
     max-height: 120px;
     overflow-y: auto;
   }
-
   ul.timer {
     height: auto;
   }
-
   li {
     padding: 5px 0;
     border-bottom: 1px solid #ebebeb;
   }
-
   a {
     color: #424242;
   }
-
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 1px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: $brand-lighter-grey;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-pink;
   }
 }
@@ -5801,68 +5337,55 @@ header {
   .uib-monthpicker,
   .uib-yearpicker {
     width: 100%;
-
     &:focus {
       outline: none;
     }
-
     .btn {
       padding: 12px;
       border: none;
       border-radius: 0;
-
       &.active {
         background-color: $brand-pink;
-
         span {
           color: #fff;
         }
       }
     }
-
     .btn-info {
       @extend .btn-default;
-
       span {
         color: #333;
       }
     }
-
     th {
       font-size: 16px;
     }
-
     thead:first-child tr button {
       margin-bottom: 10px;
       font-size: 16px;
       padding: 8px;
-
       &.uib-title {
         padding: 12px;
       }
     }
-
     .glyphicon {
       font: normal normal normal normal 14px/1 FontAwesome;
     }
-
     .glyphicon-chevron-left:before {
       content: "\f104";
       font-size: 29px;
     }
-
     .glyphicon-chevron-right:before {
       content: "\f105";
       font-size: 29px;
     }
   }
 }
+
 // date and time end
 // check in
-
 .checkin-input-holder {
   position: relative;
-
   &:after,
   &:before {
     width: 1px;
@@ -5872,15 +5395,12 @@ header {
     bottom: 0;
     background-color: #fff;
   }
-
   &:before {
     left: 0;
   }
-
   &:after {
     right: 0;
   }
-
   input {
     background-color: transparent;
     color: #fff;
@@ -5888,20 +5408,18 @@ header {
     border-bottom: 1px solid #fff;
     @include placeholder {
       color: #fff;
-    };
-
+    }
+    ;
     &:focus {
       border-color: #fff;
     }
   }
-
   i {
     position: absolute;
     right: 7px;
     bottom: 1px;
     font-size: 20px;
   }
-
   .journeytype-dropdown,
   .location-dropdown {
     width: 100%;
@@ -5910,16 +5428,13 @@ header {
     position: absolute;
     top: 40px;
     z-index: 2;
-
     li {
       padding: 5px 10px;
       border-bottom: 1px solid #fff;
-
       &:last-child {
         border-bottom: none;
       }
     }
-
     a {
       color: #fff;
     }
@@ -5928,13 +5443,11 @@ header {
 
 .file-input {
   margin-bottom: 20px;
-
   .upload-file {
     height: 223px;
     border: 2px dashed #fff;
     position: relative;
     overflow: hidden;
-
     input {
       @include square(100%);
       position: relative;
@@ -5943,33 +5456,31 @@ header {
     }
   }
 }
-// view uploaded file
 
+// view uploaded file
 .uploaded-imgholder {
   @include square(179px);
   border: 2px solid #fff;
   margin-bottom: 10px;
   position: relative;
   overflow: hidden;
-
   &:before {
     content: '';
-    @include position(absolute, 0 0 0 0);
+    @include position(absolute,
+    0 0 0 0);
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 2;
     display: none;
   }
-
   &:hover {
     &:before {
       display: block;
     }
-
     .scale-onhover {
-      @include transform(translate(-50%, -50%)scale(1.2));
+      @include transform(translate(-50%,
+      -50%)scale(1.2));
       @include transition(all 300ms linear);
     }
-
     .onhover-uploaded-img {
       display: block;
       cursor: crosshair;
@@ -5988,9 +5499,9 @@ header {
   z-index: 2;
   display: none;
   @include transition(all 300ms linear);
-
   .remove-img {
-    @include position(absolute, 5px 5px null null);
+    @include position(absolute,
+    5px 5px null null);
     font-size: 18px;
   }
 }
@@ -6001,17 +5512,14 @@ header {
       padding: 6px 42px;
     }
   }
-
   .tag-search-icon {
     position: absolute;
     right: 5px;
     bottom: 7px;
-
     i {
       font-size: 14px;
     }
   }
-
   .tag-add-imgholder {
     position: absolute;
     top: 10px;
@@ -6028,24 +5536,19 @@ header {
   left: 0;
   z-index: 3;
   overflow: hidden;
-
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 5px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: $brand-pink;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: transparent;
   }
-
   ul {
     max-height: 250px;
     overflow-y: auto;
   }
-
   li {
     background-color: #fff;
     padding: 5px 15px;
@@ -6053,7 +5556,6 @@ header {
     //   background-color: #e7e7e7;
     // }
   }
-
   a {
     font-size: 14px;
   }
@@ -6068,7 +5570,6 @@ header {
     display: inline-block;
     overflow: hidden;
     vertical-align: middle;
-
     img {
       min-height: 100%;
     }
@@ -6081,7 +5582,6 @@ header {
     position: absolute;
     left: -9999px;
   }
-
   [type="checkbox"]:checked+label,
   [type="checkbox"]:not(:checked)+label {
     width: 100%;
@@ -6119,14 +5619,12 @@ header {
     opacity: 1;
     transform: scale(1);
   }
-
   [type="checkbox"]:checked+label:before {
     background-color: $brand-pink;
     border-color: $brand-pink;
     color: #fff;
     @include transition(all 300ms linear);
   }
-
   .un-tag {
     cursor: not-allowed !important;
   }
@@ -6136,11 +5634,9 @@ header {
   .upload-section {
     padding: 20px 0;
   }
-
   .upload-btn button {
     padding: 6px 34px;
   }
-
   .upload-btn .file-btn {
     padding: 6px 30px;
   }
@@ -6152,7 +5648,6 @@ header {
   border: 1px solid #fff;
   position: relative;
   overflow: hidden;
-
   .video-icon {
     position: absolute;
     left: 10px;
@@ -6162,7 +5657,6 @@ header {
 
 .tagged-delete-list {
   margin-top: 20px;
-
   a {
     min-width: 140px;
     padding: 3px 7px;
@@ -6171,40 +5665,37 @@ header {
     position: relative;
     display: inline-block;
     background-color: #9fa6ab;
-
     &:hover {
       .hover-tag-btn {
         display: block;
       }
     }
   }
-
   .img-friend {
-    @include size(25px, 27px);
+    @include size(25px,
+    27px);
     border-radius: 10px;
     border: 1px solid #fff;
     display: inline-block;
     overflow: hidden;
     vertical-align: middle;
-
     img {
       width: 100%;
     }
   }
-
   .hover-tag-btn {
-    @include position(absolute, 0 0 0 0);
+    @include position(absolute,
+    0 0 0 0);
     background-color: rgba(0, 0, 0, 0.6);
     display: none;
-
     i {
       font-size: 16px;
     }
   }
 }
+
 // check in end
 // new edit otg start
-
 .otg-bg-all {
   padding: 10px;
   border-radius: 6px;
@@ -6214,7 +5705,6 @@ header {
 
 .otg-search-location {
   position: relative;
-
   .icon-location {
     position: absolute;
   }
@@ -6222,7 +5712,6 @@ header {
 
 .search-by-category {
   padding-left: 30px;
-
   input {
     height: auto;
     padding: 0 6px;
@@ -6230,7 +5719,6 @@ header {
     border-bottom: 1px solid #fff;
     background-color: transparent;
     font-family: "AvenirLTStd-Medium";
-
     &:focus {
       border-color: #fff;
     }
@@ -6239,7 +5727,6 @@ header {
 
 .category-location {
   padding-left: 30px;
-
   input {
     height: auto;
     border: none;
@@ -6263,24 +5750,19 @@ header {
   z-index: 11;
   background-color: #fff;
   overflow: hidden;
-
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 5px;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-pink;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: transparent;
   }
-
   ul {
     max-height: 250px;
     overflow-y: auto;
   }
-
   li {
     padding: 5px 15px;
     background-color: #fff;
@@ -6289,7 +5771,6 @@ header {
     //   background-color: #e7e7e7;
     // }
   }
-
   a {
     display: block;
     color: $brand-light-grey;
@@ -6302,22 +5783,19 @@ header {
   min-height: 63px;
   padding: 10px 10px 0;
   position: relative;
-
   img.icon-tag {
     position: absolute;
   }
 }
 
 .tagged-buddy-images {
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     height: 0;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: #000;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: #ccc;
   }
 }
@@ -6340,7 +5818,6 @@ header {
 
 .tag-otg-friend {
   padding-left: 30px;
-
   input {
     height: auto;
     padding: 0 12px;
@@ -6349,7 +5826,8 @@ header {
     color: #424242;
     @include placeholder {
       color: #424242;
-    };
+    }
+    ;
   }
 }
 
@@ -6374,19 +5852,15 @@ header {
 
 .otg-thought {
   padding-left: 30px;
-
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 2px;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: #fff;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: $brand-pink;
   }
-
   textarea {
     height: 43px;
     padding: 3px 6px;
@@ -6396,16 +5870,13 @@ header {
     background-color: transparent;
     font-family: "AvenirLTStd-Medium";
     font-size: 15px;
-
     &.opened-editarea {
       height: 100px;
-
-      + find-tags + .thoughtCount {
+      +find-tags+.thoughtCount {
         display: block;
       }
     }
   }
-
   .hashtag-edit {
     width: 100%;
     box-shadow: 1px 2px 3px #272727;
@@ -6414,21 +5885,17 @@ header {
     position: absolute;
     left: 0;
     background-color: #fff;
-
     li {
       padding: 3px 5px;
       border-bottom: 1px solid #ebebeb;
-
       &:last-child {
         border-bottom: none;
       }
     }
-
     a {
       color: #555;
     }
   }
-
   .thoughtCount {
     font-size: 12px;
     text-align: right;
@@ -6453,7 +5920,6 @@ header {
   position: absolute;
   top: 10px;
   left: 10px;
-
   span {
     color: #424242;
   }
@@ -6479,7 +5945,12 @@ header {
   position: absolute;
   bottom: 0;
   left: 0;
-  @include background(linear-gradient(to top, rgba(0,0,0,0.7), transparent));
+  @include background(linear-gradient(to top,
+  rgba(0,
+  0,
+  0,
+  0.7),
+  transparent));
 }
 
 .otg-add-caption {
@@ -6488,23 +5959,19 @@ header {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   @include transition(all 300ms linear);
-
   .edit-otg-caption {
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 2px;
     }
-
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       background-color: $brand-pink;
     }
-
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: $brand-pink;
     }
   }
-
   textarea {
     width: 100%;
     height: 90px;
@@ -6518,9 +5985,9 @@ header {
     font-size: 13px;
     @include placeholder {
       color: #fff;
-    };
+    }
+    ;
   }
-
   i.fa-angle-down {
     font-size: 36px;
   }
@@ -6541,7 +6008,6 @@ header {
   position: absolute;
   top: 5px;
   right: 5px;
-
   i {
     font-size: 15px;
     color: #fff;
@@ -6556,8 +6022,8 @@ header {
   color: #fff;
   font-size: 10px;
 }
-// video edit
 
+// video edit
 .video-otg-slider {
   .flexslider {
     border-radius: 0;
@@ -6577,7 +6043,6 @@ header {
     .flex-prev {
       left: -33px;
       opacity: 1;
-
       &:before {
         content: "\f104";
         font: normal normal normal normal 14px/1 FontAwesome;
@@ -6585,11 +6050,9 @@ header {
         color: #a0a0a0;
       }
     }
-
     .flex-next {
       right: -33px;
       opacity: 1;
-
       &:before {
         content: "\f105";
         font: normal normal normal normal 14px/1 FontAwesome;
@@ -6598,13 +6061,11 @@ header {
       }
     }
   }
-
   .flexslider:hover {
     .flex-prev {
       left: -33px;
       opacity: 1;
     }
-
     .flex-next {
       right: -33px;
       opacity: 1;
@@ -6627,11 +6088,9 @@ header {
   top: 0;
   left: 0;
   opacity: 0;
-
   .create-btn {
     padding: 0;
   }
-
   input {
     @include square(25px);
   }
@@ -6645,7 +6104,6 @@ header {
   display: inline-block;
   line-height: 25px;
   text-align: center;
-
   i {
     color: #fff;
   }
@@ -6653,35 +6111,31 @@ header {
 
 .save-cancel-otg {
   margin-top: 30px;
-
   a,
   button {
     margin: 10px;
   }
-
   a:hover {
     color: #fff;
   }
 }
+
 // video edit end
 // tagged buddy on add photo video
-
 .tag-selected-buddy {
   margin-top: 20px;
 }
 
 .select-buddy {
   margin-right: 20px;
-
   h5 {
     font-size: 12px;
     text-align: center;
   }
-
   &.active {
     .checked-friend {
       &:before {
-        background-color: rgba(255,255,255,0.5);
+        background-color: rgba(255, 255, 255, 0.5);
       }
       color: $brand-pink;
     }
@@ -6705,30 +6159,28 @@ header {
   line-height: 44px;
   text-align: center;
   color: #fff;
-
   &:before {
     content: '';
     @include square(100%);
-    @include position(absolute,0);
-    background-color: rgba(0,0,0,0.5);
+    @include position(absolute,
+    0);
+    background-color: rgba(0, 0, 0, 0.5);
   }
-
   i {
     position: relative;
     font-size: 22px;
   }
 }
+
 // tagged buddy on add photo video end
 // new edit otg end
 // add new otg photo video
-
 .uplad-otg-sec {
   margin: 90px 0;
 }
 
 .otg-upload-btn {
   margin: 15px 0 0;
-
   upload-image,
   upload-image-otg {
     width: 100%;
@@ -6737,42 +6189,39 @@ header {
     left: 0;
     opacity: 0;
   }
-
   .btn-upload {
     padding: 0;
   }
-
   input {
     height: 34px;
   }
-
   span {
     display: none;
   }
 }
+
 // add new otg photo video end
 // pop up journey used end
 // comment pop up and focus
-
 .highlighted-post {
   position: relative;
   z-index: 6;
-
-  + .close-comment-backdrop {
+  +.close-comment-backdrop {
     display: block;
   }
 }
 
 .close-comment-backdrop {
   @include square(100%);
-  @include position(fixed, 0);
+  @include position(fixed,
+  0);
   z-index: 5;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   display: none;
 }
+
 // comment pop up and focus end
 //LIKE SIDE  TAB
-
 .like-side-sec {
   width: 400px;
   height: 100%;
@@ -6794,7 +6243,6 @@ header {
   li {
     padding: 5px 0;
     border-bottom: 1px solid #ebebeb;
-
     &:last-child {
       border-bottom: none;
     }
@@ -6834,27 +6282,24 @@ header {
 .like-buddy-follow-btn {
   display: inline-block;
   padding: 7px 0;
-
   .following-btn {
     box-shadow: 2px 3px 3px #a0a0a0;
   }
 }
+
 //LIKE SIDE  TAB END
 // on go journey end
 // trip summary
-
 .trip-summary-strip {
   // position: relative;
   // background: url('../img/ongojourney/trip-summary-bg.png');
   // background-size: 100% 100%;
-  background-color: rgba(0,0,0,0.7);
-
+  background-color: rgba(0, 0, 0, 0.7);
   .trip-info {
     span {
       color: #fff;
     }
   }
-
   .trip-list li {
     border-right: 2px solid #fff;
   }
@@ -6873,7 +6318,6 @@ header {
 .trip-days-count,
 .trip-type {
   padding: 15px 0;
-
   li {
     padding: 0 17px;
     display: inline-block;
@@ -6884,7 +6328,6 @@ header {
 .trip-type {
   border-top: 1px solid #dbdbdb;
   border-bottom: 1px solid #dbdbdb;
-
   .icon-type {
     img {
       height: 45px;
@@ -6898,7 +6341,6 @@ header {
     height: 25px;
     margin-right: 5px;
   }
-
   figcaption {
     display: inline-block;
   }
@@ -6911,7 +6353,6 @@ header {
 
 .trip-visited-detail {
   margin-top: 40px;
-
   img {
     opacity: 1;
   }
@@ -6934,70 +6375,61 @@ header {
     background-color: #f4f4f4;
     vertical-align: top;
   }
-
   .watch-day {
     font-size: 16px;
     color: $brand-dark-pink;
     display: block;
   }
-
   .travel-day {
     margin-top: -5px;
     display: block;
     color: #868686;
     font-size: 30px;
   }
-
   .trip-type-icon {
     position: absolute;
     top: -20px;
     right: 15px;
-
     img {
       width: 40px;
     }
   }
-
   .trip-status {
     width: 78%;
     padding: 13px 10px;
     display: inline-block;
     vertical-align: top;
-
     .status {
       font-size: 14px;
     }
-
     img {
       width: 25px;
     }
   }
-
   .trip-time-day {
     margin: 5px 0 0;
     color: #868686;
     font-size: 12px;
   }
-
   .trip-photo-added {
     color: #868686;
     font-size: 13px;
     text-decoration: underline;
   }
 }
+
 // trip summary end
 // itinerary
-
 .itinerary-holder {
   padding: 0 40px 20px;
 }
 
 .itinerary-imgholder {
   margin-bottom: 10px;
-
   &:before {
     content: '';
-    @include position(absolute, 0 0 0 0);
+    @include position(absolute,
+    0 0 0 0);
     background-color: rgba(0, 0, 0, 0.6);
   }
 }
@@ -7015,7 +6447,6 @@ header {
     margin: 0;
     font-size: 28px;
   }
-
   p {
     margin: 10px 0;
     font-size: 16px;
@@ -7027,12 +6458,11 @@ header {
     font-size: 18px;
   }
 }
+
 // itinerary end
 // quick itinerary detail
-
 .quick-itinerary-page {
   padding: 0 15px;
-
   .form-control {
     background: transparent;
   }
@@ -7062,16 +6492,13 @@ header {
 
 .itinerary-inputholder {
   position: relative;
-
   input {
     border: none;
     border-bottom: 1px solid $brand-blue;
-
     &:focus {
       border-color: $brand-blue;
     }
   }
-
   &:after,
   &:before {
     content: '';
@@ -7081,26 +6508,24 @@ header {
     bottom: 0;
     background-color: $brand-blue;
   }
-
   &:before {
     left: 0;
   }
-
   &:after {
     right: 0;
   }
 }
 
-.itinerary-inputholder .quick-month-year-select{
+.itinerary-inputholder .quick-month-year-select {
   border-bottom: 1px solid $brand-blue;
   background-color: transparent;
   color: $brand-blue;
-  input[type="search"]{
+  input[type="search"] {
     padding: 6px 12px;
     border-bottom: 0px;
     background-color: transparent;
   }
-  .ui-select-dropdown{
+  .ui-select-dropdown {
     height: 150px;
     opacity: 1;
     position: absolute;
@@ -7110,13 +6535,13 @@ header {
     overflow-y: scroll;
     text-align: center;
     z-index: 1;
-    .option{
+    .option {
       @extend .pointer;
     }
   }
 }
 
-.itinerary-inputholder .month-year-select{
+.itinerary-inputholder .month-year-select {
   padding: 6px 12px;
   text-align: center;
 }
@@ -7139,35 +6564,28 @@ header {
     font-weight: 500;
     color: $brand-dark-blue;
   }
-
   .itinerary-inputholder {
     width: 98px;
     margin-left: 10px;
     display: inline-block;
   }
-
   .itinerary-month,
   .itinerary-year {
     display: inline-block;
     margin-right: 22px;
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 4px;
     }
-
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: $brand-lighter-grey;
     }
-
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       background-color: $brand-pink;
     }
   }
-
   .itinerary-duration {
     display: inline-block;
   }
-
   .month-dropdown {
     width: 100px;
     max-height: 150px;
@@ -7177,25 +6595,21 @@ header {
     background-color: #fff;
     z-index: 1;
     border: none;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     overflow-x: hidden;
     overflow-y: auto;
-
     li {
       padding: 5px;
       border-bottom: 1px solid $brand-lighter-grey;
       text-align: center;
-
       &:last-child {
         border-bottom: none;
       }
-
       a {
         color: $brand-light-grey;
       }
     }
   }
-
   .year-dropdown {
     @extend .month-dropdown;
     left: 42px;
@@ -7204,13 +6618,11 @@ header {
 
 .fill-itinerary-type {
   margin: 30px 0 15px;
-
   .select-itinerary-type {
     min-width: 74px;
     display: inline-block;
     text-align: center;
   }
-
   .itinerary-iconholder {
     @include square(40px);
     background: url('../img/itinerary/bluebox.png');
@@ -7218,18 +6630,15 @@ header {
     display: inline-block;
     position: relative;
     @include transition(all 300ms linear);
-
     img {
       @extend .get-center;
     }
-
     &:hover {
       background: url('../img/itinerary/orangebox.png');
       background-size: 100% 100%;
       @include transition(all 300ms linear);
     }
   }
-
   .active-itinerary {
     background: url('../img/itinerary/orangebox.png');
     background-size: 100% 100%;
@@ -7245,7 +6654,6 @@ header {
 .add-country-city {
   .itinerary-city-visited {
     margin: 10px 0;
-
     .close-city-x {
       position: absolute;
       top: 10px;
@@ -7266,24 +6674,19 @@ header {
     border-radius: 0 0 6px 6px;
     z-index: 2;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 3px;
     }
-
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: #fff;
     }
-
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       background-color: $brand-pink;
     }
-
     ul {
       max-height: 120px;
       overflow-y: auto;
     }
-
     .country-drop {
       display: block;
       padding: 5px 20px;
@@ -7291,7 +6694,6 @@ header {
       color: #a0a0a0;
     }
   }
-
   .dropdown-city {
     position: absolute;
     top: 35px;
@@ -7302,24 +6704,19 @@ header {
     border-radius: 0 0 6px 6px;
     z-index: 1;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 3px;
     }
-
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: #fff;
     }
-
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       background-color: $brand-pink;
     }
-
     ul {
       max-height: 120px;
       overflow-y: auto;
     }
-
     .city-drop {
       display: block;
       padding: 5px 20px;
@@ -7333,12 +6730,10 @@ header {
   .add-country {
     margin: 25px 0;
   }
-
   .itinerary-dropdown-icon {
     position: absolute;
     right: 8px;
     bottom: 5px;
-
     i {
       color: #707070;
     }
@@ -7347,69 +6742,56 @@ header {
   .ui-select-bootstrap {
     border: none;
     position: static;
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 4px;
     }
-
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: $brand-lighter-grey;
     }
-
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       background-color: $brand-dark-pink;
     }
-
     .ui-select-toggle {
       border-radius: 0;
       border: none;
       border-bottom: 1px solid $brand-blue;
       position: static;
       cursor: text;
-
       &:hover {
         background-color: transparent;
       }
     }
-
     .caret {
       display: none;
     }
   }
-
   .ui-select-multiple {
     height: 34px;
     padding: 5px 12px;
     border-bottom: 1px solid $brand-blue;
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 2px;
       height: 2px;
     }
-
     input.ui-select-search {
       width: auto !important;
       margin-bottom: 0;
     }
-
-    > div:first-child {
+    >div:first-child {
       width: 100%;
       overflow-x: auto;
       overflow-y: hidden;
       white-space: nowrap;
     }
-
     .ui-select-match-item {
       border-radius: 4px;
       border-color: $brand-light-grey;
       margin: 0 0 0 3px;
-
       &:hover {
         background-color: #fff;
         color: $brand-light-grey;
       }
     }
-
     .ui-select-match .close {
       font-size: 15px;
       line-height: 17px;
@@ -7417,27 +6799,22 @@ header {
       opacity: 1;
     }
   }
-
   .ui-select-choices-row {
     padding: 5px 20px;
     border-bottom: 1px solid $brand-lighter-grey;
-
     &:hover {
       background-color: #fff;
       color: $brand-light-grey;
-
       .ui-select-choices-row-inner {
         background-color: #fff;
         color: $brand-light-grey;
       }
     }
-
     &:last-child {
       border: none;
     }
   }
-
-  .ui-select-choices-row.active > span {
+  .ui-select-choices-row.active>span {
     background-color: #fff;
     color: $brand-light-grey;
   }
@@ -7460,14 +6837,13 @@ header {
   @include transform(translateX(-50%));
   overflow: hidden;
   opacity: 0;
-
   .create-btn {
     width: 100%;
   }
-
   input[type="file"] {
     @include square(100%);
-    @include position(absolute, 0);
+    @include position(absolute,
+    0);
   }
 }
 
@@ -7486,13 +6862,11 @@ header {
   .mce-edit-area {
     min-height: 250px;
   }
-
   #mceu_2 {
     padding: 5px 15px;
     border: 1px solid $brand-dark-blue;
     background-color: transparent;
   }
-
   .tinymce-style1 {
     .mce-panel {
       padding: 5px 15px;
@@ -7500,24 +6874,19 @@ header {
       background-color: transparent;
     }
   }
-
   #mceu_3 {
     background-color: transparent;
   }
-
   .mce-btn {
     border: none;
     background-color: transparent;
-
     .mce-ico {
       color: #707070;
     }
-
     &:hover {
       background-color: $brand-lighter-grey;
     }
   }
-
   .mce-btn.mce-active {
     background-color: $brand-lighter-grey;
   }
@@ -7531,14 +6900,12 @@ header {
 
 .upload-trip-photo-sec {
   margin: 30px 0 10px;
-
   label {
     margin-bottom: 10px;
     color: $brand-pink;
     font-size: 17px;
     font-weight: 500;
   }
-
   .trip-photo-holder {
     padding: 40px 20px;
     border: 1px solid $brand-dark-blue;
@@ -7555,11 +6922,9 @@ header {
   position: relative;
   overflow: hidden;
   border: 1px solid #a0a0a0;
-
   img {
     width: 100%;
   }
-
   &:hover {
     .remove-quick-photo {
       display: block;
@@ -7573,24 +6938,22 @@ header {
 
 .remove-quick-photo {
   padding: 10px;
-  @include position(absolute,0);
-  background-color: rgba(0,0,0,0.6);
+  @include position(absolute,
+  0);
+  background-color: rgba(0, 0, 0, 0.6);
   display: none;
 }
 
 .scroll-photoitinerary {
   overflow-x: auto;
   overflow-y: hidden;
-
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     height: 2px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: #fff;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-pink;
   }
 }
@@ -7607,36 +6970,30 @@ header {
   position: absolute;
   bottom: 24px;
   background-color: #fff;
-  box-shadow: 0 -3px 12px rgba(0,0,0,0.175);
-
-  ::-webkit-scrollbar {
+  box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.175);
+   ::-webkit-scrollbar {
     width: 3px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: #fff;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-pink;
   }
-
   ul {
     max-height: 150px;
     overflow-y: auto;
   }
-
   li {
     padding: 5px 10px;
     border-bottom: 1px solid #ebebeb;
   }
-
   a {
     color: #a0a0a0;
   }
 }
-//detail photo caption
 
+//detail photo caption
 .trip-view-photo .detail-pic-caption {
   position: absolute;
   bottom: 0;
@@ -7645,7 +7002,6 @@ header {
   background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
   color: #fff;
   padding: 5px;
-
   p {
     margin: 0;
   }
@@ -7660,7 +7016,6 @@ header {
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 2;
   @include transition(all 300ms linear);
-
   textarea {
     background-color: transparent;
     border: none;
@@ -7668,7 +7023,8 @@ header {
     color: #fff;
     @include placeholder {
       color: #fff;
-    };
+    }
+    ;
   }
 }
 
@@ -7692,7 +7048,6 @@ header {
   position: absolute;
   bottom: 0;
   text-align: center;
-
   span {
     color: #fff;
     background: none;
@@ -7706,10 +7061,10 @@ header {
   top: 0;
   @include transition(all 300ms linear);
 }
+
 //detail photo caption end
 // quick itinerary detail end
 // detail itinerary detail
-
 .fill-detail-itinerary {
   padding-right: 10%;
 }
@@ -7721,27 +7076,22 @@ header {
     .itinerary-inputholder {
       width: 86px;
     }
-
     .detail-date {
       font-size: 12px;
     }
   }
-
   .added-panel {
     border-bottom: 1px solid #ccc;
     margin-bottom: 20px;
-
     &:last-child {
       border-bottom: none;
       margin-bottom: 0;
     }
   }
-
   .itinerary-inputholder .itinerary-dropdown-icon {
     position: absolute;
     right: 8px;
     bottom: 5px;
-
     i {
       color: #707070;
     }
@@ -7750,7 +7100,6 @@ header {
 
 .detail-itinerary-page {
   padding: 0 20px;
-
   .form-control {
     background-color: transparent;
   }
@@ -7762,27 +7111,22 @@ header {
 
 .accordion-trip-detail {
   margin: 50px 0;
-
   .panel-default {
     border-radius: 6px;
     border-color: $brand-dark-blue;
     overflow: hidden;
     background: transparent;
   }
-
   .panel-body {
     padding: 15px 20px 25px;
   }
-
-  .panel-group .panel-heading+.panel-collapse > .list-group,
-  .panel-group .panel-heading+.panel-collapse > .panel-body {
+  .panel-group .panel-heading+.panel-collapse>.list-group,
+  .panel-group .panel-heading+.panel-collapse>.panel-body {
     border-top: 1px solid transparent;
   }
-
   .panel-heading {
     padding: 0;
   }
-
   .panel-title {
     a {
       padding: 15px 20px;
@@ -7790,18 +7134,15 @@ header {
       background-color: #f5f5f5;
     }
   }
-
   .city-heading {
     margin: 0;
     @extend .avenir-heavy;
     color: $brand-dark-blue;
     font-size: 13px;
   }
-
   .accordion-icon {
     color: #626262;
   }
-
   .trip-city-name {
     font-size: 18px;
   }
@@ -7809,14 +7150,12 @@ header {
 
 .trip-heading-accordion {
   margin-bottom: 15px;
-
   .trip-country-name {
     margin: 0;
     display: inline-block;
     font-size: 25px;
     vertical-align: middle;
   }
-
   .rate-trip {
     h4 {
       margin: 0 10px 0 0;
@@ -7826,24 +7165,20 @@ header {
       @extend .avenir-heavy;
       vertical-align: middle;
     }
-
     span[aria-valuemax="5"] {
       display: inline-block;
       vertical-align: middle;
     }
-
     i.glyphicon {
       margin-right: 5px;
       font: normal normal normal 14px/1 FontAwesome;
       font-size: 25px;
       cursor: pointer;
     }
-
     .glyphicon-star-empty:before {
       content: "\f006";
       color: $brand-lighter-grey;
     }
-
     .glyphicon-star:before {
       content: "\f005";
       color: $brand-pink;
@@ -7853,53 +7188,44 @@ header {
 
 .trip-info-container {
   margin-bottom: 25px;
-
   li {
     padding: 10px 0;
     border-bottom: 1px solid $brand-lighter-grey;
   }
-
   .label-holder {
     width: 10%;
     display: inline-block;
     vertical-align: top;
-
     label {
       font-size: 17px;
       font-weight: normal;
     }
   }
-
   .city-info-holder {
     width: 90%;
     margin-left: -4px;
     display: inline-block;
     vertical-align: top;
   }
-
   .cross {
     position: absolute;
     right: 5px;
     bottom: 5px;
-
     i {
       color: #707070;
     }
   }
-
   .ate-inputholder,
   .must-inputholder,
   .stayed-inputholder {
     width: 200px;
     margin: 0 10px 15px;
     display: inline-block;
-
     input {
       width: 100%;
       padding: 2px 20px 2px 5px;
     }
   }
-
   .added-btn {
     margin: 0 10px;
     display: inline-block;
@@ -7909,53 +7235,45 @@ header {
 .listed-button {
   margin: 10px 0 0;
 }
-// trip budget
 
+// trip budget
 .trip-budget {
   label {
     color: $brand-pink;
     font-size: 17px;
     font-weight: normal;
   }
-
   .select-currency-holder {
     margin-top: 10px;
-
     input {
       padding: 2px 10px;
     }
   }
-
   .currency-holder {
     margin-right: 15px;
     display: inline-block;
-
     input {
       width: 270px;
       background: transparent;
       @include placeholder {
         font-size: 16px;
-      };
+      }
+      ;
     }
   }
-
   .currency-amount {
     display: inline-block;
-
     input {
       width: 120px;
       background: transparent;
-
-      &:focus + label {
+      &:focus+label {
         display: none;
       }
     }
-
-    ::-webkit-inner-spin-button,
+     ::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button {
       @include appearance(none);
     }
-
     label {
       width: 118px;
       padding: 0 10px 2px;
@@ -7968,34 +7286,29 @@ header {
       font-size: 14px;
     }
   }
-
   .itinerary-dropdown-icon {
     position: absolute;
     bottom: 5px;
     right: 5px;
-
     i {
       color: #707070;
     }
   }
-
   .save-publish-detail {
     margin-top: 25px;
   }
 }
+
 // trip budget end
 // trip status right side
-
 .trip-itinerary-status {
   position: relative;
-
   .trip-status-main {
     padding: 20px 12px 10px;
     position: absolute;
     right: 0;
     top: 0;
     background-color: #626262;
-
     &:after {
       content: '';
       border-top: 18px solid #626262;
@@ -8007,66 +7320,54 @@ header {
       left: 0;
     }
   }
-
   .status-country-holder {
     img {
       width: 30px;
       min-height: 21px;
       border: 1px solid #fff;
     }
-
     img[src="img/loading.gif"] {
       display: none;
     }
   }
-
   .status-country-holder {
     li {
       text-align: center;
-
       &:first-child .last-dot {
         display: block;
       }
-
       &:last-child .last-dotted-line {
         display: block;
       }
     }
-
     &:last-child li .last-dotted-line {
       display: none;
     }
   }
-
   .last-dotted-line {
     display: none;
   }
-
   .status-indot {
     @include square(12px);
     border-radius: 100%;
     display: inline-block;
     background-color: #ccc;
     cursor: pointer;
-
     &:hover .status-city-name {
       opacity: 1;
       @include transition(all 300ms linear);
     }
   }
-
   .small-dot {
     @include square(4px);
     margin: 8px auto;
     border-radius: 100%;
     display: block;
     background-color: #ccc;
-
     &.last-dot {
       display: none;
     }
   }
-
   .status-city-name {
     opacity: 0;
     position: absolute;
@@ -8074,7 +7375,6 @@ header {
     right: 33px;
     // z-index: 5;
     @include transition(all 300ms linear);
-
     &:before {
       content: "";
       border-top: 18px solid transparent;
@@ -8085,7 +7385,6 @@ header {
       top: -2px;
       right: -30px;
     }
-
     &:after {
       content: "";
       border-top: 16px solid transparent;
@@ -8096,7 +7395,6 @@ header {
       top: 0;
       right: -26px;
     }
-
     span {
       width: 110px;
       padding: 7px 5px;
@@ -8106,13 +7404,11 @@ header {
       color: #fff;
     }
   }
-
   .status-country-name {
     @extend .status-city-name;
     top: -7px;
     right: 46px;
   }
-
   .country-flag-holder {
     &:hover .status-city-name {
       opacity: 1;
@@ -8120,34 +7416,29 @@ header {
     }
   }
 }
+
 // trip status right side end
 //sagar css
-
 .itinerary-from,
 .itinerary-to {
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {
     @include appearance(none);
   }
-
   input[type=date]::-webkit-inner-spin-button,
   input[type=date]::-webkit-outer-spin-button {
     @include appearance(none);
   }
-
   input[type=date]::-webkit-calendar-picker-indicator {
     // -webkit-appearance: none;
     // display: none;
   }
-
   .uib-datepicker-popup {
     @extend .avenir-roman;
     padding: 10px;
-
     .uib-daypicker:focus {
       outline: none;
     }
-
     .uib-daypicker {
       thead {
         tr:first-child {
@@ -8157,7 +7448,6 @@ header {
           }
         }
       }
-
       th {
         @extend .avenir-roman;
         height: 40px;
@@ -8166,7 +7456,6 @@ header {
         color: $brand-light-grey;
       }
     }
-
     .uib-datepicker {
       .btn-default {
         border: none;
@@ -8174,78 +7463,64 @@ header {
         margin-top: 5px;
       }
     }
-
     .uib-year .btn-default {
       border-radius: 0;
     }
-
     .uib-monthpicker .btn-default {
       border-radius: 0;
     }
-
     .uib-left {
       border-radius: 0;
       padding: 10px 0;
-
       i {
         &:hover:before {
           color: $brand-pink;
         }
-
         &:before {
           content: "\f053";
           color: $brand-light-grey;
           font: normal normal normal 14px/1 FontAwesome;
         }
       }
-
       &:active,
       &:focus,
       &:hover {
         background-color: #fff;
       }
     }
-
     .uib-right {
       border-radius: 0;
       padding: 10px 0;
-
       i {
         &:hover:before {
           color: $brand-pink;
         }
-
         &:before {
           content: "\f054";
           color: $brand-light-grey;
           font: normal normal normal 14px/1 FontAwesome;
         }
       }
-
       &:active,
       &:focus,
       &:hover {
         background-color: #fff;
       }
     }
-
     .uib-title {
       padding: 5px 0;
       border-radius: 0;
       font-size: 14px;
       color: $brand-light-grey;
-
       &:hover {
         color: $brand-pink;
         background-color: #fff;
       }
     }
-
     .uib-datepicker:focus,
     li:focus {
       outline: none;
     }
-
     .uib-day button,
     .uib-month button,
     .uib-year button {
@@ -8254,17 +7529,14 @@ header {
       border: none;
       border-radius: 100%;
     }
-
     .btn-default-focus,
     .btn.active {
       color: #fff;
       background-color: $brand-pink;
-
       .text-info {
         color: #fff;
       }
     }
-
     .uib-button-bar {
       display: none;
     }
@@ -8283,26 +7555,22 @@ header {
   width: 90%;
   margin-left: -4px;
   border: none;
-
   .ui-select-container {
     width: auto;
     border: none;
   }
-
-  span.ui-select-match > span {
+  span.ui-select-match>span {
     margin-bottom: 10px;
     margin-right: 10px;
     /* background-color: red; */
     display: inline-block;
   }
-
   .ui-select-match-item {
     border: none;
     border-bottom: 1px solid $brand-blue;
     border-radius: 0;
     background-color: transparent;
     font-size: 13px;
-
     &:before {
       content: '';
       width: 1px;
@@ -8312,7 +7580,6 @@ header {
       left: 0;
       background-color: #2d3655;
     }
-
     &:after {
       content: '';
       width: 1px;
@@ -8322,13 +7589,11 @@ header {
       bottom: 0;
       background-color: #2d3655;
     }
-
     .close {
       color: $brand-blue;
       opacity: 1;
       font-size: 15px;
     }
-
     &:active,
     &:focus,
     &:hover {
@@ -8343,7 +7608,6 @@ header {
   .add-country-city {
     padding-top: 20px;
     border-top: 1px solid $brand-light-grey;
-
     &:first-child {
       padding-top: 10px;
       border: none;
@@ -8377,37 +7641,32 @@ header {
   margin: 5px 10px;
 }
 
-.detail-select-box .ui-select-choices-row.active > span {
+.detail-select-box .ui-select-choices-row.active>span {
   background-color: #fff;
   color: #a0a0a0;
 }
 
 .detail-select-box {
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 3px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: #fff;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-pink;
   }
-
   .ui-select-dropdown {
     border: none;
-
     li {
       border: none;
     }
   }
 }
 
-.detail-select-box .ui-select-choices-row > span {
+.detail-select-box .ui-select-choices-row>span {
   color: #a0a0a0;
   border-bottom: 1px solid #ebebeb;
-
   &:hover {
     color: #a0a0a0;
   }
@@ -8417,79 +7676,65 @@ header {
   .travelwith-namestyle {
     display: inline-block;
     vertical-align: top;
-
     .travel-with-name {
       color: #424242;
     }
   }
-
   .at-tag-travelselect {
     display: block;
     font-size: 12px;
     color: #afafaf;
   }
-
   .round-travelledimg {
     border-radius: 11px;
   }
-
   .ui-select-multiple {
     input[type="search"] {
       width: auto !important;
       margin: 0;
     }
   }
-
-  .ui-select-choices-row.active > span {
+  .ui-select-choices-row.active>span {
     background-color: #fff;
     color: #a0a0a0;
   }
-
   .ui-select-dropdown {
     border: none;
-
     li {
       border-bottom: 1px solid #ebebeb;
-
       &:first-child {
         border: none;
       }
     }
   }
-
-  .ui-select-choices-row > span {
+  .ui-select-choices-row>span {
     color: #a0a0a0;
     // border-bottom: 1px solid #ebebeb;
     border: none;
-
     &:hover {
       color: #a0a0a0;
     }
   }
-
   .ui-select-bootstrap {
     background-color: transparent;
     border: none;
     padding: 6px 12px;
     border-bottom: 1px solid $brand-blue;
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 3px;
       height: 4px;
     }
-
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: #fff;
     }
-
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       background-color: $brand-pink;
     }
   }
 }
 
 .travelled-withselect {
-  .ui-select-multiple > div:first-child {
+  .ui-select-multiple>div:first-child {
     width: 100%;
     overflow-x: auto;
     overflow-y: scroll;
@@ -8498,16 +7743,14 @@ header {
 }
 
 .travelled-withselect .ui-select-bootstrap {
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 2px;
     height: 4px;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: #ff6759;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: transparent;
   }
 }
@@ -8520,10 +7763,10 @@ header {
 .travelled-withselect .ui-select-multiple.ui-select-bootstrap .btn-default {
   color: $brand-blue !important;
 }
+
 //sagar css end
 // detail itinerary detail end
 // editor itinerary
-
 .editor-itinerary-page {
   .editor-banner-holder {
     width: 100%;
@@ -8532,53 +7775,41 @@ header {
     // background-size: 100% auto;
     background-size: cover;
   }
-
   .journey-type-icon {
     margin-top: 10px;
-
     li {
       padding: 0 8px;
     }
   }
-
   .editor-tag {
     margin-bottom: 25px;
-
     h4 {
       font-size: 20px;
     }
   }
-
   .journey-travel-heading {
     margin: 5px 0 12px;
-
     h3 {
       font-size: 35px;
     }
   }
-
   .journey-date span {
     font-size: 15px;
   }
-
   .trip-day-count {
     color: $brand-cyan;
-
     span {
       font-size: 12px;
       line-height: 100%;
     }
-
     .days {
       margin-bottom: -4px;
       font-size: 37px;
     }
   }
-
   .accordion-holder {
     padding: 20px 0;
   }
-
   .trip-status-main {
     right: 15px;
   }
@@ -8590,17 +7821,14 @@ header {
     overflow: hidden;
     background: transparent;
   }
-
   .panel-title a {
     display: block;
     padding: 24px 20px;
   }
-
   .journey-accordion-heading .journey-head {
     padding: 0;
     color: #fff;
   }
-
   .panel-heading {
     height: 67px;
     padding: 0;
@@ -8610,13 +7838,11 @@ header {
     background-size: 100%;
     @include transition(all 200ms linear);
   }
-
   .panel-body {
     // position: relative;
     padding: 15px 15px 70px;
     // overflow: hidden;
   }
-
   .panel-title {
     width: 100%;
     left: 0;
@@ -8624,33 +7850,26 @@ header {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.6);
   }
-
   .panel-open .panel-heading {
     height: 300px;
     @include transition(all 200ms linear);
-
     &:before {
       background-color: transparent;
       @include transition(all 300ms linear);
     }
   }
-
   .panel-open .panel-title {
     bottom: 0;
-
     a {
       padding: 15px 20px;
     }
   }
-
   .city-heading {
     font-size: 13px;
-
     .trip-city-name {
       font-size: 18px;
     }
   }
-
   .user-trip-detail {
     li {
       padding: 10px 0;
@@ -8658,7 +7877,6 @@ header {
       display: block;
     }
   }
-
   .journey-accordion-detail {
     .user-trip-heading {
       width: 10%;
@@ -8667,7 +7885,6 @@ header {
       font-size: 16px;
       vertical-align: top;
     }
-
     .user-trip-descp {
       width: 89%;
       display: inline-block;
@@ -8675,23 +7892,19 @@ header {
       vertical-align: top;
     }
   }
-
   .trip-descp {
     padding: 15px 0 0;
-
     h4 {
       margin: 0 0 15px;
       color: $brand-pink;
       font-size: 16px;
     }
-
     .user-about-trip {
       width: 100%;
       // min-height: 250px;
       color: #424242;
     }
   }
-
   .view-trip-photo {
     width: 100%;
     height: 550px;
@@ -8700,28 +7913,22 @@ header {
     left: 0;
     @include transition(all 300ms linear);
   }
-
   .close-editor-gallery {
     bottom: -500px;
-
     .btn-close {
       display: none;
     }
   }
-
   .view-editor-gallery {
     bottom: -2px;
-
     .btn-view {
       display: none;
     }
   }
-
   .photo-button-holder {
     padding: 0 30px;
     position: relative;
     z-index: 1;
-
     &:before {
       content: '';
       width: 97%;
@@ -8738,14 +7945,12 @@ header {
       background-color: #fff;
     }
   }
-
   .editor-photos {
     padding: 15px 0;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     text-align: center;
   }
-
   .masonry-holder {
     height: 100%;
     padding: 20px 40px 0;
@@ -8756,32 +7961,26 @@ header {
     position: relative;
     z-index: 2;
     background-color: #fff;
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 6px;
     }
-
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: $brand-light-grey;
     }
-
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       background-color: $brand-dark-pink;
     }
   }
-
   .masonry-editor-pic {
     height: 460px !important;
     overflow-y: scroll;
     overflow-x: hidden;
   }
-
   .gallery-image-holder {
     width: 154px;
     max-width: 154px;
     max-height: 250px;
     margin: 3px;
-
     img {
       width: 100%;
     }
@@ -8793,11 +7992,9 @@ header {
     height: 67px;
     @include transition(all 300ms linear);
   }
-
   .panel-title a {
     display: block;
     padding: 0;
-
     a.journey-head {
       padding: 25px 20px;
       position: absolute;
@@ -8807,11 +8004,9 @@ header {
       @include transition(all 300ms linear);
     }
   }
-
   &.panel-open {
     .panel-title a {
       padding: 0;
-
       .journey-accordion-heading {
         height: 300px;
       }
@@ -8820,12 +8015,13 @@ header {
 }
 
 .overlay-itinerary-bg {
-  @include position(absolute, 0);
+  @include position(absolute,
+  0);
   background-color: rgba(0, 0, 0, 0.5);
 }
+
 // editor itinerary end
 // user itinerary
-
 .user-itinerary-page {
   .user-banner-holder {
     width: 100%;
@@ -8835,14 +8031,13 @@ header {
     background-position: 50% 50%;
     background-size: 100%;
   }
-
   .user-banner-detail {
     position: absolute;
     top: 30%;
     left: 50%;
-    @include transform(translate(-50%, -30%));
+    @include transform(translate(-50%,
+    -30%));
   }
-
   .user-tag {
     .user-imgholder {
       width: 85px;
@@ -8852,65 +8047,52 @@ header {
       margin: 0 auto;
       overflow: hidden;
     }
-
     .user-name {
       font-size: 20px;
     }
   }
-
   .journey-type-icon {
     margin-top: 10px;
-
     li {
       padding: 0 8px;
     }
   }
-
   .journey-travel-heading {
     margin: 5px 0 12px;
-
     h3 {
       font-size: 35px;
     }
   }
-
   .journey-day span {
     font-size: 15px;
   }
-
   .itinerary-trip-day {
     display: inline-block;
     color: $brand-cyan;
     vertical-align: middle;
-
     span {
       font-size: 12px;
       line-height: 100%;
     }
-
     .days {
       margin-bottom: -4px;
       font-size: 37px;
     }
   }
-
   .itinerary-name {
     margin-left: 15px;
     display: inline-block;
     color: $brand-cyan;
     vertical-align: middle;
-
     span {
       font-size: 16px;
       line-height: 100%;
     }
-
     span:first-child {
       margin-bottom: -3px;
       font-size: 25px;
     }
   }
-
   .accordion-holder {
     padding: 30px 0;
   }
@@ -8923,7 +8105,6 @@ header {
   top: 0;
   z-index: 6;
   background: transparent;
-
   .heading-gallery-name {
     font-size: 18px;
     padding: 10px;
@@ -8932,7 +8113,6 @@ header {
     display: inline-block;
     background: rgba(255, 255, 255, 0.95);
   }
-
   .masonry-main {
     height: 540px !important;
     border: 1px solid #ccc;
@@ -8943,32 +8123,26 @@ header {
     background: rgba(255, 255, 255, 0.95);
     z-index: 2;
   }
-
   .side-scroll-direction {
     direction: rtl;
   }
-
   .gallery-imgholder {
     width: 450px;
     max-width: 450px;
     max-height: 550px;
     margin: 3px;
-
     img {
       max-width: 100%;
       max-height: 100%;
     }
   }
-
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 6px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: $brand-lighter-grey;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-dark-pink;
   }
 }
@@ -8979,7 +8153,6 @@ header {
   top: 55%;
   right: -240px;
   @include transform(translateY(-50%)rotate(90deg));
-
   &:after {
     content: '';
     width: 100%;
@@ -9009,11 +8182,9 @@ header {
 .close-gallery {
   left: -980px;
   @include transition(all 300ms linear);
-
   .close-button {
     display: none;
   }
-
   .photo-button {
     display: block;
   }
@@ -9023,11 +8194,9 @@ header {
   left: 500px;
   @include transition(all 300ms linear);
   @include transform(translateX(-50%));
-
   .close-button {
     display: block;
   }
-
   .photo-button {
     display: none;
   }
@@ -9038,18 +8207,15 @@ header {
   border-radius: 6px;
   margin: 40px 0;
   overflow: hidden;
-
   .itinerary-quick-imgholder {
     height: 350px;
     position: relative;
     overflow: hidden;
-
     img {
       width: 100%;
       min-height: 100%;
     }
   }
-
   .itinerary-heading-detail {
     width: 100%;
     padding: 8px 20px;
@@ -9057,11 +8223,9 @@ header {
     bottom: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.6);
-
     p {
       font-size: 16px;
     }
-
     .country-visited-name {
       font-size: 19px;
     }
@@ -9078,7 +8242,6 @@ header {
 
 .view-itinerary-descp {
   padding: 25px;
-
   .view-quick-descp {
     color: #424242;
   }
@@ -9088,7 +8251,6 @@ header {
   position: absolute;
   top: 0;
   left: 30px;
-
   span {
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 6px;
@@ -9099,48 +8261,42 @@ header {
     @extend .avenir-roman;
   }
 }
+
 // user itinerary end
 // user detail itinerary
-
 .bg-white-95 {
-  background-color: rgba(255,255,255,0.95);
+  background-color: rgba(255, 255, 255, 0.95);
 }
 
 .user-detailitinerary-page {
   .trip-status-main {
     right: 15px;
   }
-
   .publish-notification-strip {
     padding: 10px;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     color: #fff;
     text-align: center;
     vertical-align: middle;
     z-index: 1;
-
     .noti-strip-txt {
       display: inline-block;
       margin: 0;
     }
-
     .btn-white-outline {
       margin: 0 10px;
     }
   }
-
   .journey-start-end {
     margin: 12px 0;
-
     p {
       font-size: 15px;
     }
   }
-
   .listing-accordion .user-trip-descp {
     width: auto;
     margin-right: 5px;
@@ -9151,18 +8307,15 @@ header {
   margin-left: 15px;
   display: inline-block;
   vertical-align: middle;
-
   .with {
     display: inline-block;
     font-size: 13px;
   }
-
   .traveller-list {
     margin-left: 12px;
     display: inline-block;
     vertical-align: middle;
   }
-
   .journey-travelled-holder {
     width: 34px;
     height: 37px;
@@ -9172,12 +8325,10 @@ header {
     overflow: hidden;
     text-align: center;
     color: #fff;
-
     img {
       min-height: 100%;
     }
   }
-
   .traveller-name {
     margin-top: 3px;
     font-size: 13px;
@@ -9204,12 +8355,11 @@ header {
 .showphoto-backdrop {
   display: block;
 }
+
 // user detail itinerary end
 // agent itinerary
-
 .agent-itinerary-page {
   @extend .user-itinerary-page;
-
   .agent-banner-holder {
     width: 100%;
     height: 92vh;
@@ -9219,29 +8369,25 @@ header {
     background-position: 0 50%;
     background-size: cover;
   }
-
   .agent-banner-detail {
     width: 100%;
     position: absolute;
     top: 30%;
     left: 50%;
-    @include transform(translate(-50%, -30%));
+    @include transform(translate(-50%,
+    -30%));
   }
-
   .agent-imgholder {
     width: 150px;
     max-width: 150px;
     margin: 0 auto 15px;
   }
-
   .journey-type-icon {
     margin-top: 10px;
-
     li {
       padding: 0 8px;
     }
   }
-
   .journey-start-end p {
     font-size: 15px;
   }
@@ -9249,7 +8395,6 @@ header {
   .accordion-holder {
     padding: 20px 0;
   }
-
   .trip-status-main {
     right: 15px;
   }
@@ -9258,59 +8403,51 @@ header {
   .connect-agent,
   .itinerary-photo-btn {
     display: inline-block;
-
     .photos {
       width: 250px;
       margin: 0 10px;
     }
   }
-
   .user-button-holder {
     top: 53%;
     right: -290px;
     @include transform(translateY(-53%) rotate(90deg));
   }
 }
-// side section of agent end
 
+// side section of agent end
 .connect-agentbox-holder {
   width: 450px;
   position: absolute;
   top: 107px;
   z-index: 3;
   @include transition(all 300ms linear);
-
   input {
     padding: 6px 12px 6px 26px;
   }
-
   .agent-input-icon {
     position: absolute;
     bottom: 7px;
     left: 8px;
   }
-
   .contact-tag {
     padding: 10px 0;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     font-size: 15px;
   }
-
   .agentbox-detail {
     padding: 25px;
     position: relative;
     z-index: 2;
     background-color: #fff;
   }
-
   .button-connect-box {
     position: absolute;
     top: 110px;
     right: -145px;
     z-index: 1;
     @include transform(rotate(90deg));
-
     &:before {
       content: '';
       width: 98%;
@@ -9321,7 +8458,6 @@ header {
       background-color: #fff;
       z-index: -1;
     }
-
     a {
       width: 220px;
       padding: 15px 0;
@@ -9343,25 +8479,24 @@ header {
   &:before {
     content: '';
     @include square(100%);
-    @include position(fixed, 0);
+    @include position(fixed,
+    0);
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 7;
   }
-
   .close-gallery {
     left: -1025px;
     @include transition(all 300ms linear);
   }
 }
+
 // agent itinerary end
 // itinerary comment like and share
-
 .share-comment-main {
   .task-holder {
     .like-button-icon {
       font-size: 22px;
     }
-
     li {
       &:first-child {
         padding: 0 15px 0 5px;
@@ -9370,31 +8505,25 @@ header {
       vertical-align: top;
     }
   }
-
   .view-comment-list {
     margin-bottom: 20px;
   }
-
   .share-option-main {
     padding-bottom: 15px;
     border-bottom: 1px solid #ccc;
   }
-
   .like-review-main {
     padding: 15px 0;
     border-bottom: 1px solid #ccc;
   }
-
   .like-review-holder {
     margin-top: 7px;
   }
-
   .like-holder,
   .review-holder {
     margin-right: 30px;
     display: inline-block;
   }
-
   .commenter-imgholder {
     width: 34px;
     height: 37px;
@@ -9402,39 +8531,32 @@ header {
     border-radius: 13px;
     box-shadow: 0 2px 3px #ccc;
     overflow: hidden;
-
     img {
       min-height: 100%;
     }
   }
-
   .comment-list-holder {
     padding: 15px 0 0;
   }
-
   .commenter-img {
     width: 5%;
     display: inline-block;
     vertical-align: top;
   }
-
   .comment-container {
     width: 95%;
     margin-left: -4px;
     display: inline-block;
     vertical-align: top;
   }
-
   .write-comment-text {
     margin-bottom: 10px;
   }
-
   .comment-ur-text {
     width: 95%;
     margin-left: -4px;
     display: inline-block;
     vertical-align: bottom;
-
     textarea {
       border: none;
       border-bottom: 2px solid $brand-dark-blue;
@@ -9444,44 +8566,37 @@ header {
       background-color: transparent;
     }
   }
-
   .commenter-text {
     color: #787878;
     @extend .avenir-roman;
   }
-
   .like-reply-line {
     font-size: 13px;
   }
-
   .share-social-holder {
-    .list-inline > li:last-child {
+    .list-inline>li:last-child {
       padding-right: 0;
     }
   }
 }
+
 // itinerary comment like and share end
 // other itineraries main of agent, user and editor
-
 .other-itineraries-main {
   .visit-post {
     margin: 0;
   }
-
   .view-other-profile {
     border-radius: 6px;
     border: 1px solid #ccc;
-
     .profile-pic-follower {
       @include filter(blur(4px));
       height: 200px;
       overflow: hidden;
-
       img {
         width: 100%;
       }
     }
-
     .other-profile-detail {
       width: 100%;
       height: 100%;
@@ -9491,7 +8606,6 @@ header {
       @include transform(translateX(-50%));
     }
   }
-
   .other-profile-holder {
     width: 80px;
     height: 85px;
@@ -9500,17 +8614,15 @@ header {
     margin: -20px auto 0;
     overflow: hidden;
   }
-
   .name-follower {
     margin: 5px 0;
   }
-
   .follow-detail {
     font-size: 16px;
   }
 }
-// profile list (follow following countryVisited BucketList)
 
+// profile list (follow following countryVisited BucketList)
 .white-full {
   min-height: 100vh;
   height: 100%;
@@ -9526,7 +8638,6 @@ header {
     margin-right: 40px;
     display: inline-block;
   }
-
   a {
     padding: 15px 5px 7px;
     border-bottom: 3px solid transparent;
@@ -9535,7 +8646,6 @@ header {
     font-family: "AvenirLTStd-Medium";
     font-size: 15px;
   }
-
   .active-list {
     border-bottom: 3px solid $brand-pink;
   }
@@ -9543,7 +8653,6 @@ header {
 
 .follow-followers-holder {
   position: relative;
-
   &:after,
   &:before {
     content: '';
@@ -9553,15 +8662,12 @@ header {
     position: absolute;
     bottom: 0;
   }
-
   &:after {
     left: 0;
   }
-
   &:before {
     right: 0;
   }
-
   input {
     width: 400px;
     padding: 5px 5px 5px 30px;
@@ -9573,11 +8679,12 @@ header {
     font-family: "AvenirLTStd-Medium";
     @include placeholder {
       color: #979ba7;
-    };
+    }
+    ;
   }
-
   .search-follow {
-    @include position(absolute, 10px null null 10px);
+    @include position(absolute,
+    10px null null 10px);
     color: #979ba7;
   }
 }
@@ -9591,30 +8698,24 @@ header {
   left: 0;
   background-color: #fff;
   overflow: hidden;
-
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 2px;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-pink;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: #fff;
   }
-
   ul {
     max-height: 200px;
     overflow-x: hidden;
     overflow-y: auto;
   }
-
   li {
     padding: 5px 10px;
     border-bottom: 1px solid #ebebeb;
   }
-
   .profile-picholder {
     width: 25px;
     height: 27px;
@@ -9624,19 +8725,15 @@ header {
     display: inline-block;
     overflow: hidden;
   }
-
   .profile-detailed {
     display: inline-block;
   }
-
   .profile-name {
     font-size: 14px;
   }
-
   .profile-tag {
     font-size: 12px;
   }
-
   .following-btn {
     margin-top: 2px;
     box-shadow: 2px 3px 3px #a0a0a0;
@@ -9651,7 +8748,6 @@ header {
 .bucket-visited-holder {
   position: relative;
   display: inline-block;
-
   &:after,
   &:before {
     content: '';
@@ -9661,15 +8757,12 @@ header {
     position: absolute;
     bottom: 0;
   }
-
   &:after {
     left: 0;
   }
-
   &:before {
     right: 0;
   }
-
   input {
     width: 400px;
     padding: 5px 5px 5px 30px;
@@ -9679,12 +8772,10 @@ header {
     color: #979ba7;
     font-family: "AvenirLTStd-Medium";
   }
-
   &+button {
     display: inline-block;
     vertical-align: top;
   }
-
   span.search-icon {
     position: absolute;
     top: 5px;
@@ -9704,25 +8795,20 @@ header {
   z-index: 2;
   background-color: #fff;
   overflow: hidden;
-
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 2px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: #fff;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-pink;
   }
-
   ul {
     max-height: 215px;
     overflow-x: hidden;
     overflow-y: auto;
   }
-
   li {
     padding: 5px 10px;
     border-bottom: 1px solid #ebebeb;
@@ -9732,8 +8818,8 @@ header {
 .profile-tab-main {
   padding: 60px 20px 0;
 }
-// country visited start
 
+// country visited start
 .country-visited-tab {
   .country-list-holder {
     margin: 5px;
@@ -9743,19 +8829,16 @@ header {
     overflow: hidden;
     @include transition(all 200ms linear);
   }
-
   .list-imgholder {
     background-position: 50% 50%;
     background-size: cover;
     background-repeat: no-repeat;
     height: 250px;
   }
-
   .country-img {
     @extend .get-center;
     @include transition(all 300ms linear);
   }
-
   .list-info {
     width: 100%;
     padding: 10px;
@@ -9763,26 +8846,23 @@ header {
     top: 0;
     left: 0;
     z-index: 1;
-
     h4 {
       margin: 0;
       color: #fff;
       font-size: 20px;
       text-shadow: 2px 2px 2px #000;
-
       span {
         font-size: 14px;
       }
     }
   }
-
   .country-list {
-    @include position(absolute, 0);
+    @include position(absolute,
+    0);
     background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
     @include transition(all 300ms linear);
   }
-
   .year-remove {
     margin: 0 5px;
     display: inline-block;
@@ -9790,37 +8870,32 @@ header {
     cursor: pointer;
     vertical-align: middle;
     text-align: center;
-
     i.fa-calendar {
       font-size: 20px;
     }
-
     i.fa-trash-o {
       font-size: 25px;
     }
   }
-
   .country-list-holder:hover {
     box-shadow: 1px 7px 4px #a0a0a0;
     top: -3px;
     @include transition(all 200ms linear);
-
     .country-list {
       opacity: 1;
       @include transition(all 300ms linear);
     }
-
     .country-img {
-      @include transform(translate(-50%, -50%) scale(1.1));
+      @include transform(translate(-50%,
+      -50%) scale(1.1));
       @include transition(all 300ms linear);
     }
   }
 }
-// country visited end
 
+// country visited end
 .bucket-tab-main {
   @extend .country-visited-tab;
-
   .bucket-list-holder {
     margin: 5px;
     position: relative;
@@ -9828,26 +8903,24 @@ header {
     z-index: 1;
     overflow: hidden;
     @include transition(all 200ms linear);
-
     &:hover {
       box-shadow: 1px 7px 4px #a0a0a0;
       top: -3px;
       @include transition(all 200ms linear);
-
       .country-list {
         opacity: 1;
         @include transition(all 300ms linear);
       }
-
       .country-img {
-        @include transform(translate(-50%, -50%) scale(1.1));
+        @include transform(translate(-50%,
+        -50%) scale(1.1));
         @include transition(all 300ms linear);
       }
     }
   }
 }
-// follow and following start
 
+// follow and following start
 .following-holder {
   padding: 10px;
   border-radius: 6px;
@@ -9866,7 +8939,6 @@ header {
   h4 {
     margin: 15px 0 5px;
   }
-
   h5 {
     margin: 5px 0 10px;
     font-family: "AvenirLTStd-Medium";
@@ -9877,12 +8949,10 @@ header {
   padding: 8px 0;
   border-top: 1px solid #c2c8cf;
   border-bottom: 1px solid #c2c8cf;
-
   .following-btn {
     font-size: 13px;
     box-shadow: 2px 3px 3px #a0a0a0;
   }
-
   .photo-loc {
     margin-top: 5px;
   }
@@ -9891,31 +8961,25 @@ header {
 .following-user-info {
   padding: 10px 0;
   border-bottom: 1px solid #c2c8cf;
-
   ul {
     @include display (flex);
   }
-
   li {
     // display: inline-block;
     @include flex(1);
     margin-right: 10px;
     text-align: center;
-
     &:last-child {
       margin-right: 0;
     }
-
     &:first-child {
       @include flex(1.5);
     }
   }
-
   .user-count {
     color: $brand-pink;
     @extend .avenir-heavy;
   }
-
   .listing-text {
     font-size: 11px;
     @extend .avenir-roman;
@@ -9931,16 +8995,15 @@ header {
   box-shadow: 1px 4px 4px #888;
   margin: -40px auto 0;
   overflow: hidden;
-
   img {
     min-height: 100%;
   }
 }
+
 // follow and following end
 // profile list (follow following countryVisited BucketList) end
 // other itineraries main of agent, user and editor end
 // Notify
-
 .notify-close {
   position: absolute;
   top: -20px;
@@ -9951,13 +9014,11 @@ header {
   .modal-dialog {
     width: 100%;
   }
-
   .notify-imgsec {
     width: 65%;
     display: inline-block;
     vertical-align: top;
   }
-
   .comment-like-notify {
     width: 35%;
     padding: 10px 20px;
@@ -9965,23 +9026,19 @@ header {
     display: inline-block;
     vertical-align: top;
   }
-
   .notify-imgholder {
     height: 550px;
     position: relative;
     overflow: hidden;
-
     .blurnotify-imgholder {
       width: 100%;
       @include filter(blur(10px));
       @extend .get-center;
-
       img {
         width: 100%;
         height: auto;
       }
     }
-
     img {
       height: 100%;
       width: auto;
@@ -9996,7 +9053,6 @@ header {
     display: inline-block;
     vertical-align: middle;
   }
-
   a {
     font-size: 20px;
     vertical-align: top;
@@ -10007,13 +9063,12 @@ header {
   margin-top: 2px;
   position: relative;
   display: block;
-
   .view-like {
     position: relative;
-
     &:after {
       content: '';
-      @include position(absolute, 10px null null 0);
+      @include position(absolute,
+      10px null null 0);
       border-top: 8px solid transparent;
       border-right: 8px solid transparent;
       border-bottom: 8px solid $brand-blue;
@@ -10030,24 +9085,19 @@ header {
   right: -5px;
   background-color: $brand-blue;
   z-index: 1;
-
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 2px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: #fff;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-pink;
   }
-
   ul {
     max-height: 230px;
     overflow-y: auto;
   }
-
   a {
     padding: 8px 10px;
     display: block;
@@ -10064,24 +9114,19 @@ header {
     padding-top: 20px;
     border-top: 1px solid #ccc;
     margin-top: 10px;
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 4px;
       border-radius: 8px;
     }
-
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: transparent;
     }
-
-    ::-webkit-scrollbar-thumb {
-      background-color: rgba(0,0,0,0.5);
+     ::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.5);
     }
-
     .view-comment-list {
       margin-bottom: 20px;
     }
-
     .commenter-imgholder {
       width: 34px;
       height: 37px;
@@ -10089,39 +9134,32 @@ header {
       border-radius: 13px;
       box-shadow: 0 2px 3px #ccc;
       overflow: hidden;
-
       img {
         min-height: 100%;
       }
     }
-
     .comment-list-holder {
       padding: 15px 0 0;
     }
-
     .commenter-img {
       width: 10%;
       display: inline-block;
       vertical-align: top;
     }
-
     .comment-container {
       width: 90%;
       margin-left: -5px;
       display: inline-block;
       vertical-align: top;
     }
-
     .write-comment-text {
       margin-bottom: 10px;
     }
-
     .comment-ur-text {
       width: 90%;
       margin-left: -5px;
       display: inline-block;
       vertical-align: bottom;
-
       textarea {
         border: none;
         border-bottom: 2px solid $brand-dark-blue;
@@ -10132,18 +9170,15 @@ header {
         background: transparent;
       }
     }
-
     .commenter-text {
       color: #787878;
       @extend .avenir-roman;
     }
-
     .like-reply-line {
       margin-top: 5px;
       font-size: 13px;
     }
   }
-
   .listing-comment {
     height: calc(100vh - 226px);
     overflow-x: hidden;
@@ -10156,35 +9191,32 @@ header {
     box-shadow: 0 2px 7px #a0a0a0;
     position: absolute;
     background-color: #fff;
-
     li {
       padding: 5px 10px;
       border-bottom: 1px solid #ebebeb;
     }
-
     a {
       color: #a0a0a0;
     }
   }
   // dropdown comment otg end
 }
+
 // Notify end
 @import "sohan.scss";
 @import "fancybox-override";
 @import "sagarm.scss";
-
 #map {
   width: 100%;
   height: 100%;
-
   img {
     opacity: 1;
   }
 }
+
 // .get-map-height {
 //   height: 500px;
 // }
-
 .map-journey {
   width: 100%;
   height: 100%;
@@ -10193,8 +9225,7 @@ header {
   position: fixed;
   top: 0;
   z-index: 2;
-  background-color: rgba(0,0,0,0.4);
-
+  background-color: rgba(0, 0, 0, 0.4);
   &:before {
     content: '';
     width: 15px;
@@ -10203,13 +9234,16 @@ header {
     top: 0;
     left: 651px;
     z-index: 1;
-    @include background(linear-gradient(to right, rgba(0, 0, 0, 0.82), transparent));
+    @include background(linear-gradient(to right,
+    rgba(0,
+    0,
+    0,
+    0.82),
+    transparent));
   }
-
   img[src="https://maps.gstatic.com/mapfiles/api-3/images/google_white5.png"] {
     display: none !important;
   }
-
   img[src="https://maps.gstatic.com/mapfiles/api-3/images/google4.png"] {
     display: none !important;
   }
@@ -10217,12 +9251,13 @@ header {
 
 .ngMaps img {
   opacity: 1 !important;
-  -webkit-mask-image: -webkit-gradient(linear, left top, right top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+  -webkit-mask-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
 }
 
 ng-map {
   height: 1000px;
 }
+
 // .like-animate {
 //   @include animation(heartbubble 300ms cubic-bezier(0.17, 0.89, 0.32, 1.49) 1);
 //   @include keyframes(heartbubble) {
@@ -10238,7 +9273,6 @@ ng-map {
 //     }
 //   };
 // }
-
 .like-animate {
   position: relative;
   color: $brand-pink;
@@ -10247,21 +9281,20 @@ ng-map {
     0% {
       @include transform(scale(0));
     }
-
     50% {
       @include transform(scale(1.4));
     }
-
     100% {
       @include transform(scale(1));
     }
   }
-
-  + span {
+  +span {
     @include square(11px);
     border-radius: 100%;
-    @include position(absolute, 50% null null 50%);
-    @include transform(translate(-50%,-50%) scale(0.6));
+    @include position(absolute,
+    50% null null 50%);
+    @include transform(translate(-50%,
+    -50%) scale(0.6));
     opacity: 0;
     @include animation(like-heart 550ms linear forwards 200ms);
     box-shadow: 0.32476rem -3rem 0 -0.1875rem #ef645e, -0.32476rem -2.625rem 0 -0.1875rem #ef645e, 2.54798rem -1.61656rem 0 -0.1875rem #ef645e, 1.84982rem -1.89057rem 0 -0.1875rem #ef645e, 2.85252rem 0.98418rem 0 -0.1875rem #ef645e, 2.63145rem 0.2675rem 0 -0.1875rem #ef645e, 1.00905rem 2.84381rem 0 -0.1875rem #ef645e, 1.43154rem 2.22414rem 0 -0.1875rem #ef645e, -1.59425rem 2.562rem 0 -0.1875rem #ef645e, -0.84635rem 2.50595rem 0 -0.1875rem #ef645e, -2.99705rem 0.35095rem 0 -0.1875rem #ef645e, -2.48692rem 0.90073rem 0 -0.1875rem #ef645e, -2.14301rem -2.12438rem 0 -0.1875rem #ef645e, -2.25479rem -1.38275rem 0 -0.1875rem #ef645e;
@@ -10270,16 +9303,13 @@ ng-map {
         @include square(11px);
         opacity: 0;
       }
-
       50% {
         opacity: 1;
         @include square(9px);
       }
-
       75% {
         @include square(7px);
       }
-
       100% {
         @include square(2px);
         opacity: 0;
@@ -10287,13 +9317,13 @@ ng-map {
     }
   }
 }
+
 // .card-like.like-animate {
 //   &:after {
 //
 //   }
 // }
 // destination booking
-
 .destination-hotel-card {
   .hotel-card-list {
     margin-top: 5px;
@@ -10303,7 +9333,6 @@ ng-map {
     position: relative;
     z-index: 1;
   }
-
   .hotel-card-holder {
     max-height: 290px;
     margin-bottom: 10px;
@@ -10317,14 +9346,12 @@ ng-map {
       @include transform-style(preserve-3d);
       @include transition(all 300ms linear);
     }
-
     .hotel-front-view {
       position: relative;
       @include transform(rotateX(0deg));
       @include backface-visibility(hidden);
       z-index: 2;
     }
-
     .flip-card {
       @include transform(rotateX(180deg));
       @include transition(all 300ms linear);
@@ -10338,7 +9365,6 @@ ng-map {
     left: 0;
     @include transform(rotateX(180deg));
     @include backface-visibility(hidden);
-
     .flexslider {
       background-color: transparent;
       border: none;
@@ -10357,13 +9383,11 @@ ng-map {
       padding: 10px 14px;
       cursor: pointer;
       @include transition (all ease 300ms);
-
       &:hover {
         background-color: #ff6759;
         color: #fff;
       }
     }
-
     .glyphicon-chevron-left,
     .glyphicon-chevron-right {
       display: inline-block;
@@ -10373,61 +9397,52 @@ ng-map {
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-
     .glyphicon-chevron-right:before {
       content: "\f054";
     }
-
     .glyphicon-chevron-left:before {
       content: "\f053";
     }
-
     .carousel-indicators {
       bottom: 0;
     }
-
     .carousel-indicators li {
       border-color: #f2675b;
-
       &.active {
         background-color: #f2675b;
       }
     }
-
     .nav-tabs.nav-justified {
       border-bottom: 0;
       padding-right: 45px;
-
       .uib-tab.nav-item {
         border-radius: 0;
-
         a {
           border: 1px solid #ddd;
           border-radius: 4px 4px 0 0;
           background-color: rgba(0, 0, 0, 0.7);
           border-radius: 0;
-
           &:focus,
           &:hover {
             background-color: #ff6759;
             color: #fff;
           }
         }
-
         &.active a {
           background-color: #ff6759;
           color: #fff;
         }
       }
     }
-
     .deal-tablehead {
       width: 20%;
       font-size: 13px;
       text-align: left;
       vertical-align: top;
     }
-    .deal-list .table>tbody>tr>td { font-size: 13px; }
+    .deal-list .table>tbody>tr>td {
+      font-size: 13px;
+    }
     .btn-deal {
       padding: 5px 9px;
       font-size: 12px;
@@ -10435,36 +9450,30 @@ ng-map {
     .tab-content {
       min-height: 246px;
       padding: 20px;
-
       .scroll-content {
         height: 220px;
         overflow-y: auto;
         overflow-x: hidden;
-
         &::-webkit-scrollbar-track {
-          -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+          -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
           border-radius: 10px;
           background-color: #F5F5F5;
         }
-
         &::-webkit-scrollbar {
           width: 2px;
           background-color: #F5F5F5;
         }
-
         &::-webkit-scrollbar-thumb {
           border-radius: 10px;
-          -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+          -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
           background-color: #555;
         }
-
         .amenities-holder ul li {
           display: inline-block;
           width: 49.5%;
           line-height: 2;
         }
       }
-
       .deals-logo-holder img {
         width: 60px;
       }
@@ -10475,94 +9484,77 @@ ng-map {
     }
     // delete if not needed this border
   }
-
   .col-md-6:nth-child(odd) {
     .hotel-card-holder .score-round-holder {
       border-color: $brand-pink;
-
       span.pop-score {
         margin-top: 10px;
         display: inline-block;
         font-size: 16px;
       }
-
       .price-count {
         font-size: 16px;
       }
-
       .inr {
         font-size: 11px;
       }
-
       .guest-score {
         font-size: 16px;
         display: block;
       }
-
       .review {
         font-size: 11px;
         font-style: italic;
         display: block;
       }
     }
-
     .hotel-card-holder .btn-deal {
       @extend .btn-pink;
     }
   }
-
   .col-md-6:nth-child(even) {
     .hotel-card-holder .score-round-holder {
       border-color: $brand-cyan;
-
       span.pop-score {
         margin-top: 10px;
         display: inline-block;
         font-size: 16px;
       }
-
       .price-count {
         font-size: 16px;
       }
-
       .inr {
         font-size: 11px;
       }
-
       .guest-score {
         font-size: 16px;
         display: block;
       }
-
       .review {
         font-size: 11px;
         font-style: italic;
         display: block;
       }
     }
-
     .hotel-card-holder .btn-deal {
       @extend .btn-cyan;
     }
   }
-
   .hotel-information {
     padding: 25px 25px 15px 15px;
     @extend .avenir-medium;
     color: #fff;
   }
-
   .blur-overlay-bg-div {
     @include square(100%);
-    @include position(absolute, 0);
-    background-color: rgba(0,0,0,0.7);
+    @include position(absolute,
+    0);
+    background-color: rgba(0, 0, 0, 0.7);
   }
-
   .slider-hotel {
     height: 290px;
     overflow: hidden;
     position: relative;
-
     .item {
       position: relative;
       height: 100%;
@@ -10572,7 +9564,6 @@ ng-map {
       background-size: cover;
     }
   }
-
   .hotel-list-heading {
     .hotel-name {
       margin: 0;
@@ -10583,36 +9574,32 @@ ng-map {
       overflow: hidden;
       white-space: nowrap;
     }
-
     .hotel-extra-booking {
       margin: 5px 0 0;
     }
-
     .rate-by-star {
       padding: 7px 0;
-
       .star-marked {
         padding: 0 5px;
       }
       .star-unmarked {
         padding: 0 5px;
-        &:first-child { padding-left: 0; }
+        &:first-child {
+          padding-left: 0;
+        }
       }
     }
   }
-
   .hotel-chart-main {
     padding: 20px 0;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     margin-bottom: 15px;
     text-align: center;
-
     .chart-type-title {
       font-size: 12px;
     }
   }
-
   .score-round-holder {
     @include square(80px);
     padding: 20px 0;
@@ -10625,34 +9612,29 @@ ng-map {
     text-align: center;
     @extend .avenir-medium;
   }
-
   .see-detail {
     .view-detail {
       margin-top: 5px;
       display: inline-block;
     }
   }
-
   // tours
-
   .tour-card-holder {
     position: relative;
     margin-bottom: 10px;
   }
-
   .blurry-tour-overlay {
     &:after {
       content: '';
-      @include position(absolute, 0);
-      background-color: rgba(0,0,0,0.5);
+      @include position(absolute,
+      0);
+      background-color: rgba(0, 0, 0, 0.5);
     }
   }
-
   .slider-tour {
     height: 290px;
     overflow: hidden;
     position: relative;
-
     .item {
       height: 100%;
       background-repeat: no-repeat;
@@ -10661,12 +9643,10 @@ ng-map {
       background-size: cover;
     }
   }
-
   .tour-information {
     padding: 25px 25px 15px 15px;
     color: #fff;
   }
-
   .tour-list-heading {
     .tour-name {
       margin: 0;
@@ -10675,39 +9655,31 @@ ng-map {
       @extend.text-ellipsis;
     }
   }
-
   .tour-chart-main {
     padding: 12px 0;
     border-top: 1px solid #fff;
     border-bottom: 1px solid #fff;
-
     .tour-descp {
       min-height: 120px;
     }
   }
-
   .tour-see-detail {
     padding: 10px 0 0;
   }
-
   .tour-price {
     margin-top: 8px;
     display: inline-block;
   }
-
   .tour-star-rate {
     margin: 10px 0;
-
     ul {
       display: inline-block;
     }
-
     .tour-review {
       margin-left: 5px;
       display: inline-block;
     }
   }
-
   .tour-cost {
     font-size: 16px;
   }
@@ -10717,29 +9689,23 @@ ng-map {
 // tour destination end
 // destination booking end
 // destination vacations and rentals
-
 .vacation-card-list {
   .hotel-card-holder {
     max-height: initial;
   }
-
   .vacation-hotel-chart {
     padding: 15px 0 10px;
   }
-
   .rate-by-star ul {
     display: inline-block;
   }
-
   .hotel-review {
     margin-left: 10px;
     display: inline-block;
     @extend .avenir-roman;
   }
-
   .hotel-descp {
     margin-bottom: 10px;
-
     p {
       margin: 0;
       @extend .avenir-light;
@@ -10747,42 +9713,36 @@ ng-map {
       text-align: justify;
     }
   }
-
   .hotel-info-list {
     ul {
       @include display(flex);
     }
-
     li {
       padding: 0 10px;
       border-right: 1px solid #fff;
       @include flex(1);
       font-size: 12px;
       @extend .avenir-medium;
-
       span {
         font-size: 20px;
       }
-
       &:last-child {
         border-right: none;
       }
     }
   }
-
   .total-hotel-cost {
     margin-top: 15px;
     @extend .avenir-medium;
     text-align: left;
-
     .hotel-cost {
       font-size: 20px;
     }
   }
 }
+
 // destination vacations and rentals end
 // destination homestay
-
 .homestay-owner-img {
   position: absolute;
   top: -15px;
@@ -10797,7 +9757,6 @@ ng-map {
   border-style: solid;
   box-shadow: 3px 3px 3px #212121;
   overflow: hidden;
-
   img {
     width: 100%;
   }
@@ -10810,27 +9769,28 @@ ng-map {
   /*margin-bottom: 10px;*/
   margin: 5px 0;
   text-align: left;
-
   p {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
   }
 }
+
 // destination homestay end
 @import "_sagarmobile.scss";
 @import "fancybox-override";
 @import "animation";
 @import "mobile.scss"; // header { display: none; }
 // travelibro loader
-
 .blured-loader-bg {
   // .repeated-item { @include filter(blur(5px)); background-color: rgba(255,255,255,0.8); }
 }
 
 .travelibro-loader {
   @include square(100%);
-  @include position(absolute,0);
+  @include position(absolute,
+  0);
   z-index: 100;
 }
+
 // travelibro loader end
