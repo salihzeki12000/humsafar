@@ -1,6 +1,7 @@
 <div class="setting-main">
   <div class="container">
-    <div class="setting" auto-height> <!-- remove auto height of not needed -->
+    <div class="setting" auto-height>
+      <!-- remove auto height of not needed -->
       <h3 class="color-blue font-bold text-center m-clear mb20 setting-heading">Settings</h3>
       <div class="setting-user-detail">
         <div class="row">
@@ -10,11 +11,12 @@
                 <div class="profile-heading clearfix">
                   <i class="fa fa-chevron-right pull-right"></i>
                   <div class="setting-prof-imgholder">
-                    <img src="img/profile-main.png" alt="" class="img-responsive">
+                    <img ng-src="{{userData.profilePicture|uploadpath:60:64}}" alt="" class="img-responsive">
                   </div>
                   <div class="profile-detail inline-block v-top">
-                    <h4 class="color-blue m-clear">Amit Duxctronn</h4>
-                    <span class="color-blue">16 Jan 1988</span>
+                    <h4 class="color-blue m-clear">{{userData.name}}</h4>
+                    <span class="color-blue" ng-if="userData.dob!=undefined">{{userData.dob}}</span>
+                    <!--<span class="color-blue" ng-if="userData.dob==undefined">DOB --/--/--</span>-->
                   </div>
                 </div>
               </div>
@@ -143,12 +145,12 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Amit">
+                        <input type="text" class="form-control" placeholder="Firstname" ng-model="userData.firstName">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Duxctronn">
+                        <input type="text" class="form-control" placeholder="Lastname" ng-model="userData.lastName">
                       </div>
                     </div>
                   </div>
@@ -156,14 +158,15 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="email" class="color-blue">Email</label>
-                        <input type="text" class="form-control" id="email" placeholder="amit@travelibro.com">
+                        <input type="text" class="form-control" id="email" placeholder="" ng-model="userData.email" disabled>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group date-pick">
                         <label for="dob" class="color-blue">DOB</label>
                         <!-- <input type="date" class="form-control" id="dob"> -->
-                        <input type="text" class="form-control" ng-click="open1();" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                        <input type="text" class="form-control" ng-click="open1();" uib-datepicker-popup="{{format}}" ng-model="userData.dob" is-open="popup1.opened"
+                          datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
                       </div>
                     </div>
                   </div>
@@ -171,293 +174,309 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="username" class="color-blue">Username</label>
-                        <input type="text" class="form-control" placeholder="amit-duxctronn">
+                        <input type="text" class="form-control" placeholder="amit-duxctronn" disabled ng-model="userData.urlSlug">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="gender">Gender</label>
                         <div class="setting-tab-gender" ng-init="gender=''">
-                          <div class="male text-center inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==1}" ng-click="gender=1">
+                          <div class="male text-center inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': userData.gender=='male'}" ng-click="userData.gender='male'">
                             <img src="img/male.png" alt="Gender" class="img-responsive">
                             <span class="color-blue avenir-medium">He</span>
                           </div>
-                          <div class="female text-center inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==2}" ng-click="gender=2">
+                          <div class="female text-center inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': userData.gender=='female'}"
+                            ng-click="userData.gender='female'">
                             <img src="img/female.png" alt="Gender" class="img-responsive">
                             <span class="color-blue avenir-medium">She</span>
-                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="setting-nationality">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label for="Nationality" class="color-blue">Nationality</label>
-                          <div class="custom-select">
-                            <select name="" id="Nationality">
+              </div>
+              <div class="setting-nationality">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="Nationality" class="color-blue">Nationality</label>
+                      <!--<div class="custom-select">
+                        <select name="" id="Nationality">
                               <option value="India">India</option>
                             </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label for="Live" class="color-blue">Where Do You Live ?</label>
-                          <div class="custom-select">
-                            <select name="" id="Live">
+                      </div>-->
+                      <ui-select ng-model="userData.homeCountry" theme="bootstrap">
+                        <ui-select-match placeholder="Search">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="nation._id as nation in nationality | filter:$select.search" track by $index><img ng-src="{{nation.flag|uploadpath:30}}" width="30" class="mr10 v-mid inline-block" alt="{{nation.name}}">
+                          <span class="color-light-grey" ng-bind="nation.name"></span>
+                        </ui-select-choices>
+                      </ui-select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="Live" class="color-blue">Where Do You Live ?</label>
+                      <!--<div class="custom-select">
+                        <select name="" id="Live">
                               <option value="Mumbai">Mumbai</option>
                             </select>
-                          </div>
-                        </div>
-                      </div>
+                      </div>-->
+                      <ui-select ng-model="userData.homeCity" theme="bootstrap">
+                        <ui-select-match placeholder="Search City">{{$select.selected.description}}</ui-select-match>
+                        <ui-select-choices repeat="city.description as city in cities | filter:$select.search" track by $index refresh="searchByKey($select.search)"
+                          refresh-delay="0">
+                          <span class="color-light-grey">{{city.description}}</span>
+                          </ui-select-choices>
+                      </ui-select>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="travel-blogger">
-                        <h4 class="color-blue setting-tab-heading">Are You A Travel Blogger?</h4>
-                        <div class="button-group djb-font">
-                          <button class="btn btn-grey-pink ">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="travel-blogger">
+                    <h4 class="color-blue setting-tab-heading">Are You A Travel Blogger?</h4>
+                    <div class="button-group djb-font">
+                      <button class="btn btn-grey-pink " ng-class="{'active':userData.isPhotographer}" ng-click="setPhotographer();">
                             <img src="img/travel-photographer.png" alt="" height="25" class="mr5"> travel Photographer
                           </button>
-                          <button class="btn btn-grey-pink">
+                      <button class="btn btn-grey-pink" ng-class="{'active':userData.isBlogger}" ng-click="setBlogger();">
                             <img src="img/travel-blogger.png" alt="" height="25" class="mr5"> travel Blogger
                           </button>
-                          <button class="btn btn-grey-pink avenir-roman btn-more">
-                            None
-                          </button>
-                        </div>
-                      </div>
-                      <div class="blog-link">
-                        <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Blog Link">
-                        </div>
-                      </div>
+                      <button class="btn btn-grey-pink avenir-roman btn-more" ng-class="{'active':userData.isPhotographer==false && userData.isBlogger==false}"
+                        ng-click="setNone();">
+                        None
+                        </button>
                     </div>
                   </div>
-                  <div class="">
-                    <h4 class="color-blue setting-tab-heading">Personal Details</h4>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Favourite City">
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Dream Destination">
-                        </div>
-                      </div>
+                  <div class="blog-link">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Blog Link">
                     </div>
                   </div>
-                  <div class="clearfix mt20">
-                    <div class="pull-right">
-                      <button type="submit" class="btn btn-pink btn-more">Save</button>
-                    </div>
-                  </div>
-                </form>
+                </div>
               </div>
-              <!-- profile detail -->
-              <!-- more profile detail -->
-              <div class="more-profile-detail avenir-roman" ng-if="showSetting == 2">
-                <!-- holiday -->
-                <div class="holiday-section">
-                  <h4 class="color-blue setting-tab-heading">Your kind of a holiday</h4>
-                  <ul>
-                    <li ng-repeat="holiday in chooseHoliday">
-                      <div class="select-holiday {{holiday.class}}" ng-click="holidayType($index)">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="{{holiday.img}}" alt="" class="img-responsive m-center">
-                          </div>
+              <div class="">
+                <h4 class="color-blue setting-tab-heading">Personal Details</h4>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Favourite City" ng-model='favorite_city'>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Dream Destination" ng-model='dream_destination'>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix mt20">
+                <div class="pull-right">
+                  <button type="submit" class="btn btn-pink btn-more" ng-click="saveData();">Save</button>
+                </div>
+              </div>
+              </form>
+            </div>
+            <!-- profile detail -->
+            <!-- more profile detail -->
+            <div class="more-profile-detail avenir-roman" ng-if="showSetting == 2">
+              <!-- holiday -->
+              <div class="holiday-section">
+                <h4 class="color-blue setting-tab-heading">Your kind of a holiday</h4>
+                <ul>
+                  <li ng-repeat="holiday in chooseHoliday">
+                    <div class="select-holiday {{holiday.class}}" ng-click="holidayType($index)">
+                      <figure>
+                        <div class="holiday-imgholder">
+                          <img src="{{holiday.img}}" alt="" class="img-responsive m-center">
+                        </div>
+                        <figcaption class="color-blue font-bold">{{holiday.caption}}</figcaption>
+                      </figure>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <!-- holiday -->
+              <!-- usually go -->
+              <div class="setting-usually-go">
+                <h4 class="color-blue setting-tab-heading">You usually go</h4>
+                <ul>
+                  <li ng-repeat="holiday in usuallyGo">
+                    <div class="select-holiday {{holiday.class}}" ng-click="usuallyType($index)">
+                      <figure>
+                        <div class="holiday-imgholder">
+                          <img src="{{holiday.img}}" alt="" class="img-responsive m-center">
+                        </div>
+                        <figcaption class="color-blue font-bold">{{holiday.caption1}} <span>{{holiday.caption2}}</span></figcaption>
+                      </figure>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <!-- usually go -->
+              <!-- prefer travel -->
+              <div class="setting-prefer-travel">
+                <h4 class="color-blue setting-tab-heading">Preference of travel</h4>
+                <ul>
+                  <li ng-repeat="holiday in preferTravel" ng-click="travelType($index)">
+                    <div class="select-holiday {{holiday.class}}">
+                      <figure>
+                        <div class="holiday-imgholder">
+                          <img src="{{holiday.img}}" alt="" class="img-responsive m-center">
                           <figcaption class="color-blue font-bold">{{holiday.caption}}</figcaption>
-                        </figure>
-                      </div>
-                    </li>
-                  </ul>
+                        </div>
+                      </figure>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <!-- prefer travel end-->
+              <!-- ideal holiday type -->
+              <div class="setting-ideal-holiday">
+                <h4 class="color-blue setting-tab-heading">Your ideal holiday type</h4>
+                <ul>
+                  <li ng-repeat="holiday in idealSelect" ng-click="idealType($index)">
+                    <div class="select-holiday {{holiday.class}}">
+                      <figure>
+                        <div class="holiday-imgholder">
+                          <img src="{{holiday.img}}" alt="" class="img-responsive m-center">
+                          <figcaption class="color-blue font-bold">{{holiday.caption1}} <span class="block">{{holiday.caption2}}</span></figcaption>
+                        </div>
+                      </figure>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <!-- ideal holiday type end -->
+              <div class="clearfix mt20">
+                <div class="pull-right">
+                  <button class="btn btn-pink btn-more">Save</button>
                 </div>
-                <!-- holiday -->
-                <!-- usually go -->
-                <div class="setting-usually-go">
-                  <h4 class="color-blue setting-tab-heading">You usually go</h4>
-                  <ul>
-                    <li ng-repeat="holiday in usuallyGo">
-                      <div class="select-holiday {{holiday.class}}" ng-click="usuallyType($index)">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="{{holiday.img}}" alt="" class="img-responsive m-center">
-                          </div>
-                          <figcaption class="color-blue font-bold">{{holiday.caption1}} <span>{{holiday.caption2}}</span></figcaption>
-                        </figure>
-                      </div>
-                    </li>
-                  </ul>
+              </div>
+            </div>
+            <!-- more profile detail end -->
+            <!-- change password -->
+            <div class="change-password-detail" ng-if="showSetting == 3">
+              <form>
+                <h4 class="color-blue setting-tab-heading">Password</h4>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <input type="password" class="form-control" placeholder="Current Password">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <input type="password" class="form-control" placeholder="New Password">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <input type="password" class="form-control" placeholder="Confirm Password">
+                    </div>
+                  </div>
                 </div>
-                <!-- usually go -->
-                <!-- prefer travel -->
-                <div class="setting-prefer-travel">
-                  <h4 class="color-blue setting-tab-heading">Preference of travel</h4>
-                  <ul>
-                    <li ng-repeat="holiday in preferTravel" ng-click="travelType($index)">
-                      <div class="select-holiday {{holiday.class}}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="{{holiday.img}}" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">{{holiday.caption}}</figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <!-- prefer travel end-->
-                <!-- ideal holiday type -->
-                <div class="setting-ideal-holiday">
-                  <h4 class="color-blue setting-tab-heading">Your ideal holiday type</h4>
-                  <ul>
-                    <li ng-repeat="holiday in idealSelect" ng-click="idealType($index)">
-                      <div class="select-holiday {{holiday.class}}">
-                        <figure>
-                          <div class="holiday-imgholder">
-                            <img src="{{holiday.img}}" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">{{holiday.caption1}} <span class="block">{{holiday.caption2}}</span></figcaption>
-                          </div>
-                        </figure>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <!-- ideal holiday type end -->
                 <div class="clearfix mt20">
                   <div class="pull-right">
                     <button class="btn btn-pink btn-more">Save</button>
                   </div>
                 </div>
-              </div>
-              <!-- more profile detail end -->
-              <!-- change password -->
-              <div class="change-password-detail" ng-if="showSetting == 3">
-                <form>
-                  <h4 class="color-blue setting-tab-heading">Password</h4>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Current Password">
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <input type="password" class="form-control" placeholder="New Password">
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Confirm Password">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="clearfix mt20">
-                    <div class="pull-right">
-                      <button class="btn btn-pink btn-more">Save</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <!-- change password -->
-              <!-- data upload -->
-              <div class="data-upload-detail" ng-if="showSetting == 4">
-                <h4 class="color-blue setting-tab-heading">Data Upload</h4>
-                <form>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <div class="radio-select">
-                          <input type="radio" id="cellular-wifi" name="data-upload">
-                          <label for="cellular-wifi" class="color-blue">
+              </form>
+            </div>
+            <!-- change password -->
+            <!-- data upload -->
+            <div class="data-upload-detail" ng-if="showSetting == 4">
+              <h4 class="color-blue setting-tab-heading">Data Upload</h4>
+              <form>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="radio-select">
+                        <input type="radio" id="cellular-wifi" name="data-upload">
+                        <label for="cellular-wifi" class="color-blue">
                             Cellular and Wi-Fi
                           </label>
-                        </div>
                       </div>
                     </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <div class="radio-select">
-                          <input type="radio" id="wifi" name="data-upload">
-                          <label for="wifi" class="color-blue">
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="radio-select">
+                        <input type="radio" id="wifi" name="data-upload">
+                        <label for="wifi" class="color-blue">
                             Wi-Fi
                           </label>
-                        </div>
                       </div>
                     </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <div class="radio-select">
-                          <input type="radio" id="Cellular" name="data-upload">
-                          <label for="Cellular" class="color-blue">
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="radio-select">
+                        <input type="radio" id="Cellular" name="data-upload">
+                        <label for="Cellular" class="color-blue">
                             Cellular
                           </label>
-                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class="clearfix mt20">
-                    <div class="pull-right">
-                      <button class="btn btn-pink btn-more">Save</button>
-                    </div>
+                </div>
+                <div class="clearfix mt20">
+                  <div class="pull-right">
+                    <button class="btn btn-pink btn-more">Save</button>
                   </div>
-                </form>
-              </div>
-              <!-- data upload end-->
-              <!-- privacy policy  -->
-              <div class="privacy-detail" ng-if="showSetting == 5">
-                <h4 class="color-blue setting-tab-heading">Privacy Policy</h4>
-                <form>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <div class="radio-select">
-                          <input type="radio" id="public" name="privacy">
-                          <label for="public" class="color-blue">Public - Everyone</label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <div class="radio-select">
-                          <input type="radio" id="private" name="privacy">
-                          <label for="private" class="color-blue">Private - My Followers</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="avenir-medium color-grey fz12 mt20">When you select your account to be private only, your followers can view your My Life - Journeys, Moments and Reviews.</p>
-                  <div class="clearfix mt20">
-                    <div class="pull-right">
-                      <button class="btn btn-pink btn-more">Save</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <!-- privacy policy end -->
-              <!-- report a problem -->
-              <div class="problem-detail" ng-if="showSetting == 6">
-                <form>
-                  <label for="problem">Report A Problem</label>
-                  <textarea name="" id="problem" class="form-control" placeholder="Comment"></textarea>
-                  <div class="clearfix mt20">
-                    <div class="pull-right">
-                      <button class="btn btn-pink btn-more">Submit</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <!-- report a problem end -->
+                </div>
+              </form>
             </div>
+            <!-- data upload end-->
+            <!-- privacy policy  -->
+            <div class="privacy-detail" ng-if="showSetting == 5">
+              <h4 class="color-blue setting-tab-heading">Privacy Policy</h4>
+              <form>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="radio-select">
+                        <input type="radio" id="public" name="privacy">
+                        <label for="public" class="color-blue">Public - Everyone</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="radio-select">
+                        <input type="radio" id="private" name="privacy">
+                        <label for="private" class="color-blue">Private - My Followers</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p class="avenir-medium color-grey fz12 mt20">When you select your account to be private only, your followers can view your My Life - Journeys, Moments
+                  and Reviews.</p>
+                <div class="clearfix mt20">
+                  <div class="pull-right">
+                    <button class="btn btn-pink btn-more">Save</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!-- privacy policy end -->
+            <!-- report a problem -->
+            <div class="problem-detail" ng-if="showSetting == 6">
+              <form>
+                <label for="problem">Report A Problem</label>
+                <textarea name="" id="problem" class="form-control" placeholder="Comment"></textarea>
+                <div class="clearfix mt20">
+                  <div class="pull-right">
+                    <button class="btn btn-pink btn-more">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!-- report a problem end -->
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>
