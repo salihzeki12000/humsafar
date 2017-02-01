@@ -4104,7 +4104,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Integration Section Starts here
 
     $scope.userData = $.jStorage.get("profile");
-    console.log($scope.userData);
     var arr = ($scope.userData.homeCity).split(",");
     $scope.homeCity = arr[0];
     var travelCountCallback = function (data, status) {
@@ -4258,7 +4257,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
         MyLife.updateCountriesVisited(obj, function (data, status) {
           reloadCount();
-          console.log(data);
           modal.close();
         }, function () {});
         arr = [];
@@ -4292,7 +4290,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       arr = _.reject(arr, {
         'times': 0
       });
-      console.log(arr);
       //applying validations and filters ends
 
       $scope.obj.visited = arr;
@@ -4517,7 +4514,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     //badge-bar ends here
     $scope.routeTO = function (type, urlSlug) {
-      if (type == "on-the-go-route-journey") {
+      console.log(type, urlSlug);
+      if (type == "on-the-go-journey") {
         $state.go('ongojourney', {
           id: urlSlug
         });
@@ -4527,6 +4525,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
       } else if (type == 'detail-itinerary') {
         $state.go('userdetailitinerary', {
+          id: urlSlug
+        });
+      } else if (type == "ended-journey") {
+        $state.go('ongojourney', {
           id: urlSlug
         });
       }
