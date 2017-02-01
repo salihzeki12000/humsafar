@@ -25,10 +25,10 @@
                         </ul>
                       </div> -->
                       <div class="itinerary-inputholder">
-                        <ui-select ng-model="qItinerary.month" theme="selectize" ng-disabled="ctrl.disabled" title="Select Month" class="quick-month-year-select">
-                          <ui-select-match class="month-year-select" placeholder="Select Month">{{$select.selected}}</ui-select-match>
+                        <ui-select ng-model="qItinerary.month" theme="selectize" ng-disabled="ctrl.disabled" title="Month" class="quick-month-year-select">
+                          <ui-select-match class="month-year-select" placeholder="Month">{{$select.selected}}</ui-select-match>
                           <ui-select-choices repeat="month in monthDrop | filter: $select.search">
-                            <span ng-bind-html="month | highlight: $select.search" class="yo-mama"></span>
+                            <span ng-bind-html="month | highlight: $select.search" class=""></span>
                           </ui-select-choices>
                         </ui-select>
                       </div>
@@ -46,9 +46,9 @@
                         </ul>
                       </div>-->
                       <div class="itinerary-inputholder">
-                        <ui-select ng-model="qItinerary.year" theme="selectize" ng-disabled="ctrl.disabled" title="Select Year"
+                        <ui-select ng-model="qItinerary.year" theme="selectize" ng-disabled="ctrl.disabled" title="Year"
                           ng-click="viewYear();" class="quick-month-year-select">
-                          <ui-select-match class="month-year-select" placeholder="Select Year">{{$select.selected}}</ui-select-match>
+                          <ui-select-match class="month-year-select" placeholder="Year">{{$select.selected}}</ui-select-match>
                           <ui-select-choices repeat="list in getYear | filter: $select.search">
                             <span ng-bind-html="list | highlight: $select.search"></span>
                           </ui-select-choices>
