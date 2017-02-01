@@ -5,11 +5,11 @@ var ongojourney = angular.module('ongojourney', [])
     return {
       getAllJourney: function (callback, errorCallback) {
         $http({
-          url: adminURL + "/journey/myLifeWeb",
+          url: adminURL + "/journey/myLifeJourneyWeb",
           method: "POST",
           data: {
-            "type": "all",
-            "type2": "journey"
+            "type": "travel-life",
+            "pagenumber": 1
           }
         }).success(function (data) {
           var hasJourney = "";
