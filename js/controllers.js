@@ -338,9 +338,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('MainPageCtrl', ['$scope', 'TemplateService', 'NavigationService', '$timeout', '$http', '$state', 'FileUploadService', 'FileUploader', function ($scope, TemplateService, NavigationService, $timeout, $http, $state, FileUploadService, FileUploader) {
+  .controller('MainPageCtrl', ['$scope', 'TemplateService', 'NavigationService', '$timeout', '$http', '$state', 'FileUploadService', 'FileUploader', 'DataUriToBlob', function ($scope, TemplateService, NavigationService, $timeout, $http, $state, FileUploadService, FileUploader, DataUriToBlob) {
     //Used to name the .html file
-
     // console.log("Testing Consoles");
     $scope.form = {};
     $scope.template = TemplateService.changecontent("mainpage");
@@ -350,14 +349,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
     $scope.userData = {};
     $scope.profile = $.jStorage.get("profile");
-
-
     $scope.image = null;
     $scope.imageFileName = '';
     $scope.uploadme = {};
     $scope.uploadme.src = '';
-
-
     setTimeout(function () {
       var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
@@ -437,40 +432,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     //End-Of get all the cities from database
 
-    $scope.uploadFile = function (data, userData) {
+    $scope.uploadFile = function (data, fileName, userData) {
       // Base64 to Blob
+      console.log(fileName, userData);
       var imageBase64 = data;
-
-      function dataURItoBlob(dataURI, type) {
-        // convert base64 to raw binary data held in a string
-        var byteString = atob(dataURI.split(',')[1]);
-
-        // separate out the mime component
-        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
-
-        // write the bytes of the string to an ArrayBuffer
-        var ab = new ArrayBuffer(byteString.length);
-        var ia = new Uint8Array(ab);
-        for (var i = 0; i < byteString.length; i++) {
-          ia[i] = byteString.charCodeAt(i);
-        }
-
-        // write the ArrayBuffer to a blob, and you're done
-        var bb = new Blob([ab], {
-          type: type
-        });
-        return bb;
-      }
-
-      var blob = dataURItoBlob(imageBase64, 'image/png');
+      console.log(imageBase64);
+      var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
       console.log(blob);
       // Blob to File
       var file = new File([blob], 'photo-' + "1" + '.png');
-
+      console.log(file);
       // File to FormData
       var formData = new FormData();
+      console.log(formData, "before appending");
       formData.append('file', file, file.name);
-
+      console.log(formData, "after appending");
       NavigationService.uploadFile(formData, function (response) {
         console.log(formData);
         if (response.value) {
@@ -525,7 +501,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.$apply(function ($scope) {
               $scope.showImage = true;
               console.log($scope.showImage);
-              $scope.myImage = evt.target.result
+              $scope.myImage = evt.target.result;
             });
           };
           reader.readAsDataURL(file);
@@ -4662,7 +4638,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.travelLife = journeys;
         $scope.hasJourney = flag;
       };
-      OnGoJourney.getAllJourney(getAllJourney, function (err) {
+      MyLife.getAllJourney(getAllJourney, function (err) {
         console.log(err);
       });
 
@@ -5812,12 +5788,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       if (document.getElementById('fileInput')) {
         document.getElementById('fileInput').onchange = function (evt) {
           var file = evt.currentTarget.files[0];
+          console.log(evt);
           var reader = new FileReader();
-          reader.onload = function (evt) {
+          reader.onload = function (evt1) {
             $scope.$apply(function ($scope) {
-              console.log(evt);
+              console.log(evt1);
               $scope.showImage = true;
-              $scope.myImage = evt.target.result;
+              $scope.myImage = evt1.target.result;
+              console.log(evt);
             });
           };
           reader.readAsDataURL(file);

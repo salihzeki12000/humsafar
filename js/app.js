@@ -870,11 +870,11 @@ firstapp.filter('typeOfPost', function () {
 });
 
 firstapp.filter('truncate', function () {
-  return function (value,limit) {
-    if(value) {
-      if(value.length < limit) {
+  return function (value, limit) {
+    if (value) {
+      if (value.length < limit) {
         return value;
-      }else {
+      } else {
         return value.slice(0, limit) + "...";
       }
     }
@@ -1228,6 +1228,7 @@ firstapp.directive("fileread", [function () {
         reader.onload = function (loadEvent) {
           scope.$apply(function () {
             scope.fileread = loadEvent.target.result;
+            console.log(scope.fileread);
           });
         }
         console.log(changeEvent.target.files);
