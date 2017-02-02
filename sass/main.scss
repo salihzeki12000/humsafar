@@ -1606,7 +1606,7 @@ header {
 
 // travel life
 .travelled-imgholder {
-  min-height: 200px;
+  min-height: 440px;
   max-height: 440px;
   overflow: hidden;
 }
@@ -6526,7 +6526,7 @@ header {
     background-color: transparent;
   }
   .ui-select-dropdown {
-    height: 150px;
+    max-height: 150px;
     opacity: 1;
     position: absolute;
     top: 35px !important;
@@ -6858,6 +6858,12 @@ header {
     font-size: 17px;
     font-weight: 500;
   }
+  .mce-container iframe {
+    min-height: 250px;
+}
+div.mce-edit-area {
+    background:transparent;
+}
   // iframe { height: 100% !important; }
   .mce-edit-area {
     min-height: 250px;
