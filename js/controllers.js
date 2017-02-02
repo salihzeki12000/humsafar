@@ -17,7 +17,7 @@ var map;
 var center = {};
 var centers = [];
 markers[0] = {};
-angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'itinerary', 'commontask', 'activity', 'inifinite-scroll', 'navigationservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'itinerary', 'commontask', 'activity', 'infinite-scroll', 'navigationservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
   .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar) {
     //Used to name the .html file
