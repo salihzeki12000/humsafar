@@ -587,102 +587,129 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.holidayKindType = [{
       img: "img/beach.png",
-      caption: "Island & Beach"
+      caption: "Island & Beach",
+      storeCaption: "Islands & Beaches",
     }, {
       img: "img/city.png",
-      caption: "City"
+      caption: "City",
+      storeCaption: "Cities"
     }, {
       img: "img/safari.png",
-      caption: "Safari"
+      caption: "Safari",
+      storeCaption: "Safari"
     }, {
       img: "img/mountain.png",
-      caption: "Mountains"
+      caption: "Mountains",
+      storeCaption: "Mountains"
     }, {
       img: "img/cruise.png",
-      caption: "Cruise"
+      caption: "Cruise",
+      storeCaption: "Cruises"
     }, {
       img: "img/countryside.png",
-      caption: "Countryside"
-    }, ];
+      caption: "Countryside",
+      storeCaption: "Countryside"
+    }];
     $scope.usuallygoHoliday = [{
       img: "img/map.png",
-      caption: "By the map",
-      caption1: ""
+      caption1: "By the map",
+      storeCaption: "By the map"
     }, {
       img: "img/road.png",
-      caption: "Where the",
-      caption1: "road takes you"
+      caption1: "Where the",
+      caption2: "road takes you",
+      storeCaption: "Where the road takes you"
     }, {
       img: "img/both.png",
-      caption: "A little bit",
-      caption1: "of both"
+      caption1: "A little bit",
+      caption2: "of both",
+      storeCaption: "A little bit of both"
     }, ];
+
 
     $scope.travelPrefer = [{
       img: "img/family.png",
-      caption: "Family"
+      caption: "Family",
+      storeCaption: "Family"
     }, {
       img: "img/friends.png",
-      caption: "Friends"
+      caption: "Friends",
+      storeCaption: "Friends"
     }, {
       img: "img/spouse.png",
-      caption: "Partner/Spouse"
+      caption: "Partner/Spouse",
+      storeCaption: "Partner/Spouse"
     }, {
       img: "img/solo.png",
-      caption: "Solo"
+      caption: "Solo",
+      storeCaption: "Solo"
     }, {
       img: "img/business.png",
-      caption: "Business"
+      caption: "Business",
+      storeCaption: "Business"
     }, {
       img: "img/blogger.png",
-      caption: "Blogger"
+      caption: "Blogger",
+      storeCaption: "Blogger"
     }, {
       img: "img/grouptour.png",
-      caption: "Group Tour"
+      caption: "Group Tour",
+      storeCaption: "Group Tour"
     }, {
       img: "img/photographer.png",
-      caption: "Photographer"
-    }];
+      caption: "Photographer",
+      storeCaption: "Photographer"
+    }, ];
+
     $scope.idealHoliday = [{
       img: "img/luxury.png",
-      caption: "Luxury",
-      caption1: ""
+      caption1: "luxury",
+      storeCaption: "Luxury"
     }, {
       img: "img/backpacking.png",
-      caption: "Backpacking",
-      caption1: ""
+      caption1: "Backpacking",
+      storeCaption: "Backpacking"
     }, {
       img: "img/greentravelling.png",
-      caption: "Green",
-      caption1: "Travelling"
+      caption1: "Green",
+      caption2: "travelling",
+      storeCaption: "Green Travelling"
     }, {
       img: "img/pocketfriendly.png",
-      caption: "Pocket",
-      caption1: "Friendly"
+      caption1: "Pocket",
+      caption2: "friendly",
+      storeCaption: "Pocket Friendly"
     }, {
       img: "img/romance.png",
-      caption: "Romance",
-      caption1: ""
+      caption1: "Romance",
+      storeCaption: "Romance"
     }, {
       img: "img/sportandadventure.png",
-      caption: "Sports & Adventure",
-      caption1: ""
+      caption1: "Sports &",
+      caption2: "Adventure",
+      storeCaption: "Sports & Adventure"
     }, {
       img: "img/historyandculture.png",
-      caption: "History &",
-      caption1: "Culture"
+      caption1: "History &",
+      caption2: "Culture",
+      storeCaption: "History & Culture"
     }, {
       img: "img/spirituality.png",
-      caption: "Spirituality & Wellness",
-      caption1: ""
+      caption1: "Spirituality &",
+      caption2: "Wellness",
+      storeCaption: "Spirituality & Wellness"
     }, {
       img: "img/shopping.png",
-      caption: "Shopping",
-      caption1: ""
+      caption1: "Shopping",
+      storeCaption: "Shopping"
     }, {
       img: "img/foodandwine.png",
-      caption: "Food & Wine",
-      caption1: ""
+      caption1: "Food & Wine",
+      storeCaption: "Food & Wine"
+    }, {
+      img: "img/festival.png",
+      caption1: "Festivals",
+      storeCaption: "Festivals"
     }];
     $scope.getHoliday = function (val) {
       if ($scope.holidayKindType[val].class == "active-holiday") {
@@ -696,7 +723,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       if ($scope.travelPrefer[val].class == "active-holiday") {
         $scope.travelPrefer[val].class = "";
       } else {
-        $scope.travelPrefer[val].class = "active-holiday"
+        $scope.travelPrefer[val].class = "active-holiday";
+        ``
       }
     };
     $scope.getideal = function (val) {
@@ -713,32 +741,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.usuallygoHoliday[val].class = "active-holiday";
     }
     // Integration Section starts here
+    // $scope.selectedCategory = function (category, arrType) {
+    //   holidayList = _.filter($scope[category], ['class', "active-holiday"]);
+    //   _.forEach(holidayList, function (element) {
+    //     var caption = null;
+    //     _.forEach(element, function (value, key) {
+    //       if (key == "caption1") {
+    //         caption = element.caption + " " + element.caption1;
+    //       }
+    //     });
+    //     if (caption !== null) {
+    //       $scope.listOfCategories.travelConfig[arrType].push(caption);
+    //     } else {
+    //       caption = element.caption;
+    //       if (category == 'holidayKindType') {
+    //         if (caption == "Island & Beach") {
+    //           caption = "Islands & Beaches";
+    //         } else if (caption == "City") {
+    //           caption = "Cities";
+    //         } else if (caption == "Cruise") {
+    //           caption = "Cruises";
+    //         }
+    //       }
+    //       $scope.listOfCategories.travelConfig[arrType].push(caption);
+    //     }
+    //   });
+    // };
     $scope.selectedCategory = function (category, arrType) {
       holidayList = _.filter($scope[category], ['class', "active-holiday"]);
-      _.forEach(holidayList, function (element) {
-        var caption = null;
-        _.forEach(element, function (value, key) {
-          if (key == "caption1") {
-            caption = element.caption + " " + element.caption1;
-          }
-        });
-        if (caption != null) {
-          $scope.listOfCategories.travelConfig[arrType].push(caption);
-        } else {
-          caption = element.caption;
-          if (category == 'holidayKindType') {
-            if (caption == "Island & Beach") {
-              caption = "Islands & Beaches";
-            } else if (caption == "City") {
-              caption = "Cities";
-            } else if (caption == "Cruise") {
-              caption = "Cruises";
-            }
-          }
-          $scope.listOfCategories.travelConfig[arrType].push(caption);
-        }
-      });
-    }
+      // _.each(holidayList, function (element) {
+
+      //   }
+      // $scope.listOfCategories.travelConfig[arrType].push(caption);
+      // console.log(holidayList);
+    };
+
+
     var saveDataCallback = function (data, status) {
       if (data.value == true) {
         NavigationService.getProfile(function (data, status) {
@@ -5687,87 +5725,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   .controller('SettingCtrl', function ($scope, TemplateService, NavigationService, $timeout, DataUriToBlob) {
     //Used to name the .html file
 
+    $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
+
+    $scope.loadMore = function () {
+      alert("scroll hua");
+      var last = $scope.images[$scope.images.length - 1];
+      for (var i = 1; i <= 8; i++) {
+        $scope.images.push(last + i);
+      }
+    };
+
     // console.log("Testing Consoles");
 
     $scope.template = TemplateService.changecontent("setting");
     $scope.menutitle = NavigationService.makeactive("Setting");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
-    $scope.userData = $.jStorage.get("profile");
-    var selectedCity = $scope.userData.homeCity;
-    $scope.userData.homeCity = {
-      "description": selectedCity
-    };
-
-    //gets all the cities from database
-    var getAllCities = function (data, status) {
-      if (data.value) {
-        $scope.cities = data.data.predictions;
-      } else {
-        console.log("Eroor Fetching Data");
-      }
-    };
-    $scope.searchByKey = function (searchCity) {
-      NavigationService.getAllCities({
-        "search": searchCity
-      }, getAllCities, function (err) {
-        console.log(err);
-      });
-    };
-    //End-Of get all the cities from database
-
-    //get all countries
-    var getAllCountries = function (data, status) {
-      if (data.value) {
-        $scope.nationality = data.data;
-      } else {
-        console.log("Error Fetching Data");
-      }
-    };
-    NavigationService.getAllCountries(getAllCountries, function (err) {
-      console.log(err);
-    });
-    //get all countries ends
-
-    $scope.setPhotographer = function () {
-      if ($scope.userData.isPhotographer) {
-        $scope.userData.isPhotographer = false;
-      } else {
-        $scope.userData.isPhotographer = true;
-      }
-    };
-
-    $scope.setBlogger = function () {
-      if ($scope.userData.isBlogger) {
-        $scope.userData.isBlogger = false;
-      } else {
-        $scope.userData.isBlogger = true;
-      }
-    };
-
-    $scope.setNone = function () {
-      $scope.userData.isBlogger = false;
-      $scope.userData.isPhotographer = false;
-    };
-
-    $scope.eidtUserData = function (imageBase64) {
-      console.log(imageBase64);
-      var formData = imageTestingCallback(imageBase64, 'image/png');
-      console.log(formData);
-      NavigationService.uploadFile(formData, function (response) {
-        if (response.value) {
-          $scope.userData.newProfilePicture = response.data[0];
-          console.log($scope.userData);
-        } else {
-
-        }
-      });
-
-      // NavigationService.editUserData($scope.userData, function (data) {
-      //   console.log(data);
-      // })
-    };
 
     $scope.open1 = function () {
       $scope.popup1.opened = true;
@@ -5853,105 +5826,266 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.chooseHoliday = [{
       img: "img/beach.png",
       caption: "Island & Beach",
-      class: "active-holiday"
+      storeCaption: "Islands & Beaches",
     }, {
       img: "img/city.png",
-      caption: "City"
+      caption: "City",
+      storeCaption: "Cities"
     }, {
       img: "img/safari.png",
-      caption: "Safari"
+      caption: "Safari",
+      storeCaption: "Safari"
     }, {
       img: "img/mountain.png",
-      caption: "Mountains"
+      caption: "Mountains",
+      storeCaption: "Mountains"
     }, {
       img: "img/cruise.png",
-      caption: "Cruise"
+      caption: "Cruise",
+      storeCaption: "Cruises"
     }, {
       img: "img/countryside.png",
-      caption: "Countryside"
+      caption: "Countryside",
+      storeCaption: "Countryside"
     }];
 
     $scope.usuallyGo = [{
       img: "img/map.png",
       caption1: "By the map",
-      class: "active-holiday"
+      storeCaption: "By the map"
     }, {
       img: "img/road.png",
       caption1: "Where the",
-      caption2: "road takes you"
+      caption2: "road takes you",
+      storeCaption: "Where the road takes you"
     }, {
       img: "img/both.png",
       caption1: "A little bit",
-      caption2: "of both"
+      caption2: "of both",
+      storeCaption: "A little bit of both"
     }, ];
 
     $scope.preferTravel = [{
       img: "img/family.png",
       caption: "Family",
-      class: "active-holiday"
+      storeCaption: "Family"
     }, {
       img: "img/friends.png",
-      caption: "Friends"
+      caption: "Friends",
+      storeCaption: "Friends"
     }, {
       img: "img/spouse.png",
-      caption: "Partner/Spouse"
+      caption: "Partner/Spouse",
+      storeCaption: "Partner/Spouse"
     }, {
       img: "img/solo.png",
-      caption: "Solo"
+      caption: "Solo",
+      storeCaption: "Solo"
     }, {
       img: "img/business.png",
-      caption: "Business"
+      caption: "Business",
+      storeCaption: "Business"
     }, {
       img: "img/blogger.png",
-      caption: "Blogger"
+      caption: "Blogger",
+      storeCaption: "Blogger"
     }, {
       img: "img/grouptour.png",
-      caption: "Group Tour"
+      caption: "Group Tour",
+      storeCaption: "Group Tour"
     }, {
       img: "img/photographer.png",
-      caption: "Photographer"
+      caption: "Photographer",
+      storeCaption: "Photographer"
     }, ];
 
     $scope.idealSelect = [{
       img: "img/luxury.png",
       caption1: "luxury",
-      class: "active-holiday"
+      storeCaption: "Luxury"
     }, {
       img: "img/backpacking.png",
-      caption1: "Backpacking"
+      caption1: "Backpacking",
+      storeCaption: "Backpacking"
     }, {
       img: "img/greentravelling.png",
       caption1: "Green",
-      caption2: "travelling"
+      caption2: "travelling",
+      storeCaption: "Green Travelling"
     }, {
       img: "img/pocketfriendly.png",
       caption1: "Pocket",
-      caption2: "friendly"
+      caption2: "friendly",
+      storeCaption: "Pocket Friendly"
     }, {
       img: "img/romance.png",
-      caption1: "Romance"
+      caption1: "Romance",
+      storeCaption: "Romance"
     }, {
       img: "img/sportandadventure.png",
       caption1: "Sports &",
-      caption2: "Adventure"
+      caption2: "Adventure",
+      storeCaption: "Sports & Adventure"
     }, {
       img: "img/historyandculture.png",
       caption1: "History &",
-      caption2: "Culture"
+      caption2: "Culture",
+      storeCaption: "History & Culture"
     }, {
       img: "img/spirituality.png",
       caption1: "Spirituality &",
-      caption2: "Wellness"
+      caption2: "Wellness",
+      storeCaption: "Spirituality & Wellness"
     }, {
       img: "img/shopping.png",
-      caption1: "Shopping"
+      caption1: "Shopping",
+      storeCaption: "Shopping"
     }, {
       img: "img/foodandwine.png",
-      caption1: "Food & Wine"
+      caption1: "Food & Wine",
+      storeCaption: "Food & Wine"
     }, {
       img: "img/festival.png",
-      caption1: "Festivals"
+      caption1: "Festivals",
+      storeCaption: "Festivals"
     }];
+
+    $scope.userData = $.jStorage.get("profile");
+    var selectedCity = $scope.userData.homeCity;
+    $scope.userData.homeCity = {
+      "description": selectedCity
+    };
+
+    // page 1 integration starts
+    //gets all the cities starts  
+    var getAllCities = function (data, status) {
+      if (data.value) {
+        $scope.cities = data.data.predictions;
+      } else {
+        console.log("Eroor Fetching Data");
+      }
+    };
+    $scope.searchByKey = function (searchCity) {
+      NavigationService.getAllCities({
+        "search": searchCity
+      }, getAllCities, function (err) {
+        console.log(err);
+      });
+    };
+    //End-Of get all the cities ends
+    //get all countries
+    var getAllCountries = function (data, status) {
+      if (data.value) {
+        $scope.nationality = data.data;
+      } else {
+        console.log("Error Fetching Data");
+      }
+    };
+    NavigationService.getAllCountries(getAllCountries, function (err) {
+      console.log(err);
+    });
+    //get all countries ends
+    // are u travel blogger section starts
+    $scope.setPhotographer = function () {
+      if ($scope.userData.isPhotographer) {
+        $scope.userData.isPhotographer = false;
+      } else {
+        $scope.userData.isPhotographer = true;
+      }
+    };
+
+    $scope.setBlogger = function () {
+      if ($scope.userData.isBlogger) {
+        $scope.userData.isBlogger = false;
+      } else {
+        $scope.userData.isBlogger = true;
+      }
+    };
+
+    $scope.setNone = function () {
+      $scope.userData.isBlogger = false;
+      $scope.userData.isPhotographer = false;
+    };
+    // are u travel blogger section ends
+    // page 1 integration ends
+
+    // page 2 integration starts
+    // console.log($scope.userData.travelConfig);
+    // _.each($scope.userData.travelConfig.kindOfHoliday, function (n1) {
+    //   var index = _.findIndex($scope.chooseHoliday, function (n2) {
+    //     return n1 == n2.storeCaption;
+    //   });
+    //   $scope.chooseHoliday[index].class = "active-holiday"
+    // });
+
+    console.log($scope.userData.travelConfig);
+    _.each(new Array(4), function (value, key) {
+      console.log(key);
+      switch (key) {
+        case 0:
+          _.each($scope.userData.travelConfig.kindOfHoliday, function (n1) {
+            var index = _.findIndex($scope.chooseHoliday, function (n2) {
+              return n1 == n2.storeCaption;
+            });
+            $scope.chooseHoliday[index].class = "active-holiday"
+          });
+          break;
+        case 1:
+          _.each($scope.userData.travelConfig.usuallyGo, function (n1) {
+            var index = _.findIndex($scope.usuallyGo, function (n2) {
+              return n1 == n2.storeCaption;
+            });
+            $scope.usuallyGo[index].class = "active-holiday"
+          });
+          break;
+        case 2:
+          _.each($scope.userData.travelConfig.preferToTravel, function (n1) {
+            var index = _.findIndex($scope.preferTravel, function (n2) {
+              return n1 == n2.storeCaption;
+            });
+            $scope.preferTravel[index].class = "active-holiday"
+          });
+          break;
+        case 3:
+          console.log("changing holiday type");
+          _.each($scope.userData.travelConfig.holidayType, function (n1) {
+            // console.log(n1);
+            // var index = _.findIndex($scope.idealSelect, function (n2) {
+            //   return n1 == n2.storeCaption;
+            //   console.log(n1, n2.storeCaption);
+            // });
+            _.each($scope.idealSelect, function (n2) {
+              console.log(n1, n2.storeCaption, n1 == n2.storeCaption);
+            });
+            // console.log(index);
+            // $scope.idealSelect[index].class = "active-holiday"
+          });
+          break;
+      }
+
+    })
+
+    // page 2 integration ends   
+
+    $scope.eidtUserData = function (imageBase64) {
+      console.log(imageBase64);
+      var formData = imageTestingCallback(imageBase64, 'image/png');
+      console.log(formData);
+      NavigationService.uploadFile(formData, function (response) {
+        if (response.value) {
+          $scope.userData.newProfilePicture = response.data[0];
+          console.log($scope.userData);
+        } else {
+
+        }
+      });
+
+      // NavigationService.editUserData($scope.userData, function (data) {
+      //   console.log(data);
+      // })
+    };
+
+
 
   })
   .controller('BlogCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -8700,6 +8834,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       Itinerary.getOneItinerary(urlSlug, function (data) {
         $scope.qItinerary = data.data;
+        $scope.qItinerary.oldStatus = $scope.qItinerary.status;
         $scope.addCountry = $scope.qItinerary.countryVisited;
 
         //setting up qItineraryType variable starts
