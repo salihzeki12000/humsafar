@@ -130,8 +130,7 @@ var navigationservice = angular.module('mylife', [])
           callback(data);
         });
       },
-      getAllJourney: function (callback, pageNo, errorCallback) {
-        pageNo = pageNo+1;
+      getAllJourney: function (callback, pageNo, errorCallback){
         $http({
           url: adminURL + "/journey/myLifeJourneyWeb",
           method: "POST",
@@ -140,32 +139,46 @@ var navigationservice = angular.module('mylife', [])
             "pagenumber": pageNo
           }
         }).success(function (data) {
-          var travelMain = [];
           var hasJourney = "";
           if (_.isEmpty(data.data)) {
             hasJourney = false;
           } else {
             hasJourney = true;
-          }
-          var journeys = data.data;
+            var journeys = data.data;
 
-          var i = 0;
-          _.each(journeys, function (n) {
-            travelMain.push(n);
-            console.log(travelMain,'main travel');
-            journeys[i].start_Time = {};
-            if (n.onGoing == true || n.onGoing == false) {
-              journeys[i].onJourney = false;
-            }
-            // journeys[i].travelledDay = moment().diff(moment("2016-10-17T06:49:44.536Z"), 'days');
-            journeys[i].showRemainingCount = false;
-            if (n.countryVisited.length >= 3) {
-              journeys[i].showRemainingCount = true;
-            }
-            journeys[i].remainingCount = n.countryVisited.length - 3;
-            i++;
-          });
-          callback(journeys, hasJourney);
+            var i = 0;
+            _.each(journeys, function (n) {
+              journeys[i].start_Time = {};
+              if (n.onGoing == true || n.onGoing == false) {
+                journeys[i].onJourney = false;
+              }
+              // journeys[i].travelledDay = moment().diff(moment("2016-10-17T06:49:44.536Z"), 'days');
+              journeys[i].showRemainingCount = false;
+              if (n.countryVisited.length >= 3) {
+                journeys[i].showRemainingCount = true;
+              }
+              journeys[i].remainingCount = n.countryVisited.length - 3;
+              i++;
+            });
+            callback(journeys);
+          }
+          // var journeys = data.data;
+          //
+          // var i = 0;
+          // _.each(journeys, function (n) {
+          //   journeys[i].start_Time = {};
+          //   if (n.onGoing == true || n.onGoing == false) {
+          //     journeys[i].onJourney = false;
+          //   }
+          //   // journeys[i].travelledDay = moment().diff(moment("2016-10-17T06:49:44.536Z"), 'days');
+          //   journeys[i].showRemainingCount = false;
+          //   if (n.countryVisited.length >= 3) {
+          //     journeys[i].showRemainingCount = true;
+          //   }
+          //   journeys[i].remainingCount = n.countryVisited.length - 3;
+          //   i++;
+          // });
+          // callback(journeys);
         });
       },
     };

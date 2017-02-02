@@ -91,10 +91,10 @@
           </div>
           <!-- user logged for first time end -->
           <div class="container">
-            <div class="masonry-detail" ng-show="hasJourney">
-              <div masonry>
-                <div class="row" infinite-scroll="addMoreItems()">
-                  <div class="col-lg-4 col-md-6 col-sm-6 masonry-brick " ng-repeat="life in travelLife">
+            <div class="masonry-detail" ng-show="hasJourney" infinite-scroll="getMore()" infinite-scroll-disabled="scroll.busy" infinite-scroll-distance='1'>
+              <div masonry >
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-sm-6 masonry-brick " ng-repeat="life in travelLife  track by $index">
                     <!--journey card -->
                     <div class="journey-masonry-brick {{life.type}}">
                       <div class="travel-life-part avenir-roman">
