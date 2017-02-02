@@ -6522,6 +6522,7 @@ header {
   color: $brand-blue;
   input[type="search"] {
     padding: 6px 12px;
+    text-align: center;
     border-bottom: 0px;
     background-color: transparent;
   }
@@ -6878,6 +6879,11 @@ div.mce-edit-area {
       padding: 5px 15px;
       border-bottom: 1px solid $brand-dark-blue;
       background-color: transparent;
+        .mce-content-body {
+        padding: 10px 0 0 !important;
+        font-family: "AvenirLTStd-Roman";
+        background: transparent;
+      }
     }
   }
   #mceu_3 {
@@ -6897,13 +6903,6 @@ div.mce-edit-area {
     background-color: $brand-lighter-grey;
   }
 }
-
-.mce-content-body {
-  padding: 10px 0 0 !important;
-  font-family: "AvenirLTStd-Roman";
-  background: transparent;
-}
-
 .upload-trip-photo-sec {
   margin: 30px 0 10px;
   label {
