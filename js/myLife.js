@@ -2,8 +2,6 @@ var bl = [];
 var navigationservice = angular.module('mylife', [])
 
   .factory('MyLife', function ($http) {
-
-
     return {
       getAllCountries: function (callback, errCallback) {
         $http({
@@ -132,13 +130,13 @@ var navigationservice = angular.module('mylife', [])
           callback(data);
         });
       },
-      getAllJourney: function (callback, errorCallback) {
+      getAllJourney: function (callback, pageNo, errorCallback) {
         $http({
           url: adminURL + "/journey/myLifeJourneyWeb",
           method: "POST",
           data: {
             "type": "travel-life",
-            "pagenumber": 1
+            "pagenumber": pageNo
           }
         }).success(function (data) {
           var hasJourney = "";
@@ -151,6 +149,8 @@ var navigationservice = angular.module('mylife', [])
 
           var i = 0;
           _.each(journeys, function (n) {
+            $scope.travelMain.push(n);
+            console.log($scope.travelMain,'main travel');
             journeys[i].start_Time = {};
             if (n.onGoing == true || n.onGoing == false) {
               journeys[i].onJourney = false;
