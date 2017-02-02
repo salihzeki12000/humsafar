@@ -769,11 +769,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // };
     $scope.selectedCategory = function (category, arrType) {
       holidayList = _.filter($scope[category], ['class', "active-holiday"]);
-      // _.each(holidayList, function (element) {
-
-      //   }
-      // $scope.listOfCategories.travelConfig[arrType].push(caption);
-      // console.log(holidayList);
+      _.each(holidayList, function (element) {
+        $scope.listOfCategories.travelConfig[arrType].push(element.storeCaption);
+      });
     };
 
 
@@ -4701,7 +4699,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             console.log(err);
           });
         }
-
       }
       $scope.redirectTo = function (id) {
         console.log(id);
@@ -6077,16 +6074,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         case 3:
           console.log("changing holiday type");
           _.each($scope.userData.travelConfig.holidayType, function (n1) {
-            // console.log(n1);
-            // var index = _.findIndex($scope.idealSelect, function (n2) {
-            //   return n1 == n2.storeCaption;
-            //   console.log(n1, n2.storeCaption);
-            // });
-            _.each($scope.idealSelect, function (n2) {
-              console.log(n1, n2.storeCaption, n1 == n2.storeCaption);
+            console.log(n1);
+            var index = _.findIndex($scope.idealSelect, function (n2) {
+              return n1 == n2.storeCaption;
+              // console.log(n1, n2.storeCaption);
             });
             // console.log(index);
-            // $scope.idealSelect[index].class = "active-holiday"
+            $scope.idealSelect[index].class = "active-holiday"
           });
           break;
       }
@@ -9082,11 +9076,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.uploadQuickItinerary = function (status) {
       console.log($scope.qItinerary);
-      i
-      if () {
-
+      if (flag == 'edit' && urlSlug != '') {
+        if ($scope.qItinerary.status != true) {
+          $scope.qItinerary.status = status;
+        }
+      } else {
+        $scope.qItinerary.status = status;
       }
-      $scope.qItinerary.status = status;
       $scope.qItinerary.duration = parseInt($scope.qItinerary.duration);
       $scope.qItinerary.year = parseInt($scope.qItinerary.year);
       $scope.qItinerary.cost = parseInt($scope.qItinerary.cost);
