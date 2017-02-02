@@ -303,7 +303,7 @@
                                     </span>
                             </div>
                             <div class="pull-right">
-                              <a><button class="btn btn-deal">View Deal</button></a>
+                              <a href="http:/{{hotel.link}}" target="_blank"><button class="btn btn-deal">View Deal</button></a>
                             </div>
                           </div>
                         </div>
@@ -330,16 +330,18 @@
 
                       </uib-tab>
                       <uib-tab index="1" heading="Photos">
-                        <div class="scroll-content pr10">
-                          <flex-slider flex-slide="item in hotel.pic_urls track by $index" control-nav="false" item-width="300" item-margin="2" class="carousel">
+                        <div class="scroll-content hotel-photo-slider pr10">
+                            <flex-slider class="carousel" flex-slide="item in hotel.pic_urls track by $index" item-width="280" animation="slide" item-margin="5"
+                              direction-nav="true" control-nav="false">
                               <li>
-                                <img ng-src="{{item}}" class="img-responsive" />
+                                  <img ng-src="{{item}}" class="img-responsive" />
                               </li>
-                            </flex-slider>
+                              </flex-slider>
+
                           <!-- <div class="swiper-container">
-                              <div class="swiper-wrapper">
-                                <div class="swiper-slide" ng-repeat="item in bookingPhoto track by $index"><img ng-src="{{item.img}}" class="img-responsive" /></div>
-                              </div> -->
+<div class="swiper-wrapper">                                <div class="swiper-slide" ng-repeat="item in hotel.pic_urls track by $index" style="width: 50% !important;"><img ng-src="{{item}}" class="img-responsive" /></div>
+                              </div>
+                            </div> -->
 
 
                           <!-- <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
@@ -393,7 +395,7 @@
                                   </td>
                                   <td>
                                     <div class="text-center">
-                                      <a href="#" target="_blank">
+                                      <a href="{{hotel.link}}" target="_blank">
                                         <button class="btn btn-deal">View Deal</button>
                                       </a>
                                     </div>
@@ -507,7 +509,7 @@
                                   <!-- <span class="view-detail view-card-detail pointer">See All Details <i class="fa fa-chevron-down"></i></span> -->
                                 </div>
                                 <div class="pull-right">
-                                  <a href="/bookings/vacation_rentals/redirect?referer=vacation_rentals&amp;url=https%3A%2F%2Fwww.9flats.com%2Fplaces%2F257087-house-san_francisco-corona_hts%3Fclient_id%3DZbn6Vr5mtBHYhtAn8syFl491xrQbzDKe58pviz6g" target="_blank">
+                                  <a href="{{vacation.link}}" target="_blank">
                                     <button class="btn btn-deal">View Deal</button>
                                   </a>
                                 </div>
@@ -695,7 +697,7 @@
                               <!-- <span class="view-detail view-card-detail pointer">See All Details <i class="fa fa-chevron-down"></i></span> -->
                             </div>
                             <div class="pull-right">
-                              <a href="/bookings/home-stays-redirect?referer=hotels&amp;url=https%3A%2F%2Faffiliate.homestay.com%2Findia%2Fpune%2F75432-homestay-in-vishrantwadinear-dighi-jakat-naka-pune%3Futm_medium%3Daffiliate%26utm_source%3Dtravelibro-online-private-limited-global"
+                              <a href="{{homestay.link}}"
                                   target="_blank">
                                 <button class="btn btn-deal">View Deal</button>
                               </a>
@@ -721,8 +723,8 @@
 
                       </uib-tab>
                       <uib-tab index="1" heading="Photos">
-                        <div class="scroll-content pr10">
-                          <flex-slider flex-slide="item in homestay.pic_urls track by $index" class="carousel" animation="slide"  item-width="300" control-nav="false">
+                        <div class="scroll-content pr10 homestay-photo-slider">
+                          <flex-slider flex-slide="item in homestay.pic_urls track by $index" class="carousel" animation="slide"  item-width="280" control-nav="false">
                             <li>
                               <img ng-src="{{item}}" alt="" class="img-responsive" />
                             </li>
@@ -767,7 +769,7 @@
                                   </td>
                                   <td>
                                     <div class="text-center">
-                                      <a href="#" target="_blank">
+                                      <a href="{{homestay.link}}" target="_blank">
                                         <button class="btn btn-deal">View Deal</button>
                                       </a>
                                     </div>

@@ -9685,6 +9685,39 @@ ng-map {
   }
 }
 
+.hotel-back-view .hotel-photo-slider, .homestay-photo-slider{
+  .flexslider .flex-direction-nav a{
+    font-size: 0;
+    opacity: 1;
+  }
+  .flexslider .flex-direction-nav .flex-prev{
+    left: 0;
+    &:before{
+      content: '\f053';
+      color: #fff;
+      font: normal normal normal 18px/1 FontAwesome;
+      text-shadow: 1px 1px 0 #000;
+    }
+    &:hover{
+      left: 0;
+      opacity: 1;
+    }
+  }
+  .flexslider .flex-direction-nav .flex-next{
+    right: 0;
+    &:before{
+      content: '\f054';
+      color: #fff;
+      font: normal normal normal 18px/1 FontAwesome;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
+    }
+    &:hover{
+      right: 0;
+      opacity: 1;
+    }
+  }
+}
+
 // tours listing end
 // tour destination end
 // destination booking end
