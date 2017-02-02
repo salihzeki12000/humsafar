@@ -4628,7 +4628,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           windowTopClass: "local-imgview-pop"
         })
       };
-      var pageNo = 1;
+      var pageNo = 0;
       var getAllJourney = function (journeys, flag) {
         $scope.travelLife = journeys;
         $scope.hasJourney = flag;
