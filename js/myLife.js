@@ -131,6 +131,7 @@ var navigationservice = angular.module('mylife', [])
         });
       },
       getAllJourney: function (callback, pageNo, errorCallback) {
+        pageNo = pageNo+1;
         $http({
           url: adminURL + "/journey/myLifeJourneyWeb",
           method: "POST",
@@ -139,6 +140,7 @@ var navigationservice = angular.module('mylife', [])
             "pagenumber": pageNo
           }
         }).success(function (data) {
+          var travelMain = [];
           var hasJourney = "";
           if (_.isEmpty(data.data)) {
             hasJourney = false;
@@ -149,8 +151,8 @@ var navigationservice = angular.module('mylife', [])
 
           var i = 0;
           _.each(journeys, function (n) {
-            $scope.travelMain.push(n);
-            console.log($scope.travelMain,'main travel');
+            travelMain.push(n);
+            console.log(travelMain,'main travel');
             journeys[i].start_Time = {};
             if (n.onGoing == true || n.onGoing == false) {
               journeys[i].onJourney = false;
