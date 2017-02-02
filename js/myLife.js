@@ -130,7 +130,6 @@ var navigationservice = angular.module('mylife', [])
           callback(data);
         });
       },
-      $scope.travelMain = [];
       getAllJourney: function (callback, pageNo, errorCallback) {
         $http({
           url: adminURL + "/journey/myLifeJourneyWeb",
