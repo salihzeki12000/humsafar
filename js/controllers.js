@@ -349,6 +349,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
     $scope.userData = {};
     $scope.profile = $.jStorage.get("profile");
+    $scope.userData.gender = $scope.profile.gender;
     $scope.image = null;
     $scope.imageFileName = '';
     $scope.uploadme = {};
@@ -382,20 +383,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
 
     };
-    $scope.profile = $.jStorage.get("profile");
-    // if ($scope.profile.gender != "") {
-    //   $scope.userData.gender = $scope.profile.gender;
-    //   if ($scope.profile.gender == "male") {
-    //     $scope.gender = 1;
-    //   } else {
-    //     $scope.gender = 2;
-    //   }
-    // }
-    // if ($scope.profile.profilePicture != null) {
-    //   $scope.userData.profilePicture = $scope.profile.profilePicture;
-    // }
-    $scope.changeGender = function (id, name) {
-      $scope.gender = id;
+
+
+    $scope.changeGender = function (val, name) {
+      $scope.gender = val;
       $scope.userData.gender = name;
     };
 
@@ -10656,8 +10647,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
   .controller('headerctrl', function ($scope, TemplateService, NavigationService, $state, $interval) {
-    $scope.template = TemplateService;
+    var currentUrl = window.location.href;
 
+    $scope.template = TemplateService;
     NavigationService.getProfile(function (data, status) {
       if (data._id) {
         $.jStorage.set("isLoggedIn", true);
@@ -10670,9 +10662,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log(err);
     });
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
-    // if (!$scope.isLoggedIn) {
-    //   $state.go('login');
-    // }
+    if (!$scope.isLoggedIn) {
+      $state.go('login');
+    }
     $scope.userData = $.jStorage.get("profile");
     $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
       $(window).scrollTop(0);

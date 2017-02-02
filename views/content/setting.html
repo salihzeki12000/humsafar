@@ -436,7 +436,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <div class="radio-select">
-                        <input type="radio" id="public" name="privacy">
+                        <input type="radio" id="public" name="privacy" ng-model="userData.status" ng-value="public">
                         <label for="public" class="color-blue">Public - Everyone</label>
                       </div>
                     </div>
@@ -444,7 +444,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <div class="radio-select">
-                        <input type="radio" id="private" name="privacy">
+                        <input type="radio" id="private" name="privacy" ng-model="userData.status" ng-value="private">
                         <label for="private" class="color-blue">Private - My Followers</label>
                       </div>
                     </div>

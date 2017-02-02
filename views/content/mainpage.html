@@ -175,11 +175,11 @@
           <div class="gender" ng-show="goNext==4">
             <div class="text-center">
               <h3 class="color-blue avenir-black">Gender</h3>
-              <div class="male inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==1}" ng-click="changeGender(1,'male');goNext=5">
+              <div class="male inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': userData.gender=='male'}" ng-click="changeGender(1,'male');goNext=5">
                 <img src="img/male.png" alt="Gender" class="img-responsive">
                 <span class="color-blue avenir-medium">He</span>
               </div>
-              <div class="female inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': gender==2}" ng-click="changeGender(2,'female');goNext=5">
+              <div class="female inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': userData.gender=='female'}" ng-click="changeGender(2,'female');goNext=5">
                 <img src="img/female.png" alt="Gender" class="img-responsive">
                 <span class="color-blue avenir-medium">She</span>
               </div>
