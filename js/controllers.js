@@ -4667,14 +4667,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         })
       };
       var pageNo = 0;
-      var getAllJourney = function (journeys, flag) {
-        $scope.travelLife = journeys;
-        $scope.hasJourney = flag;
+      $scope.scroll = {
+        busy: false
       };
-      MyLife.getAllJourney(getAllJourney, pageNo, function (err) {
-        console.log(err);
-      });
+      $scope.travelLife = [];
+      var getAllJourney = function (journeys) {
+        console.log(journeys, 'data');
+        _.each(journeys, function (obj) {
+          $scope.travelLife.push(obj);
+          console.log($scope.travelLife, 'new array');
+          setTimeout(function () {
+            $scope.scroll.busy = false;
+          }, 500);
+        });
+        if ($scope.travelLife.length == 0) {
+          $scope.hasJourney = false;
+        } else {
+          $scope.hasJourney = true;
+        }
+        // $scope.hasJourney = flag;
+      };
+      // MyLife.getAllJourney(getAllJourney, pageNo, function (err) {
+      //   console.log(err);
+      // });
+      $scope.getMore = function () {
+        console.log('scroll event');
+        if ($scope.scroll.busy) {
+          return;
+        } else {
+          pageNo++;
+          $scope.scroll.busy = true;
+          MyLife.getAllJourney(getAllJourney, pageNo, function (err) {
+            console.log(err);
+          });
+        }
 
+      }
       $scope.redirectTo = function (id) {
         console.log(id);
         $.jStorage.set('travelId', id);
@@ -9054,6 +9082,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.uploadQuickItinerary = function (status) {
       console.log($scope.qItinerary);
+      i
+      if () {
+
+      }
       $scope.qItinerary.status = status;
       $scope.qItinerary.duration = parseInt($scope.qItinerary.duration);
       $scope.qItinerary.year = parseInt($scope.qItinerary.year);
