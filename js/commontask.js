@@ -295,7 +295,7 @@ commontask.directive('findTags', function (LikesAndComments) {
         // console.log(currentPosition);
         var counter = currentPosition;
 
-        //for finding hashtags
+        //for finding hashtags 
         if (text[currentPosition] != " " || text[currentPosition] != "#" || text[currentPosition] != "@") {
           $scope.hashTags = [];
           while (text[counter] != " " && text[counter] != "#" && text[counter] != "@" && counter >= 0) {

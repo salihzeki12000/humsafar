@@ -17,7 +17,7 @@ var map;
 var center = {};
 var centers = [];
 markers[0] = {};
-angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'itinerary', 'commontask', 'activity', 'navigationservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'itinerary', 'commontask', 'activity', 'inifinite-scroll', 'navigationservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
   .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar) {
     //Used to name the .html file
@@ -448,7 +448,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       formData.append('file', file, file.name);
       console.log(formData, "after appending");
       NavigationService.uploadFile(formData, function (response) {
-        console.log(formData);
         if (response.value) {
           $scope.userData.profilePicture = response.data[0];
           console.log($scope.userData);
@@ -4491,7 +4490,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //badge-bar ends here
     $scope.routeTO = function (type, urlSlug) {
       console.log(type, urlSlug);
-      if (type == "on-the-go-journey") {
+      if (type == "on-the-go-journey" || type == "ended-journey") {
         $state.go('ongojourney', {
           id: urlSlug
         });
@@ -4501,10 +4500,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
       } else if (type == 'detail-itinerary') {
         $state.go('userdetailitinerary', {
-          id: urlSlug
-        });
-      } else if (type == "ended-journey") {
-        $state.go('ongojourney', {
           id: urlSlug
         });
       }
@@ -4633,12 +4628,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           windowTopClass: "local-imgview-pop"
         })
       };
-
+      var pageNo = 1;
       var getAllJourney = function (journeys, flag) {
         $scope.travelLife = journeys;
         $scope.hasJourney = flag;
       };
-      MyLife.getAllJourney(getAllJourney, function (err) {
+      MyLife.getAllJourney(getAllJourney, pageNo, function (err) {
         console.log(err);
       });
 
@@ -5689,7 +5684,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
 
   })
-  .controller('SettingCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('SettingCtrl', function ($scope, TemplateService, NavigationService, $timeout, DataUriToBlob) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -5704,7 +5699,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.userData.homeCity = {
       "description": selectedCity
     };
-
 
     //gets all the cities from database
     var getAllCities = function (data, status) {
@@ -5757,20 +5751,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.userData.isPhotographer = false;
     };
 
-    $scope.saveData = function () {
-      var temp = "";
-
-      if (formData.homeCity && formData.homeCity.description) {
-        temp = formData.homeCity.description;
-        formData.homeCity = "";
-        formData.homeCity = temp;
-      }
-      if (formData.homeCountry && formData.homeCountry.name) {
-        temp = formData.homeCountry.name;
-        formData.homeCity = "";
-        formData.homeCountry = temp;
-      }
+    $scope.eidtUserData = function (imageBase64) {
+      console.log(imageBase64);
+      var formData = imageTestingCallback(imageBase64, 'image/png');
       console.log(formData);
+      NavigationService.uploadFile(formData, function (response) {
+        if (response.value) {
+          $scope.userData.newProfilePicture = response.data[0];
+          console.log($scope.userData);
+        } else {
+
+        }
+      });
+
+      // NavigationService.editUserData($scope.userData, function (data) {
+      //   console.log(data);
+      // })
     };
 
     $scope.open1 = function () {

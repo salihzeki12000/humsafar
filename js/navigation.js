@@ -198,12 +198,33 @@ var navigationservice = angular.module('navigationservice', [])
         });
       },
       uploadFile: function (formData, callback) {
+        console.log(formData);
         $http.post(uploadurl, formData, {
           headers: {
             'Content-Type': undefined
           },
           transformRequest: angular.identity
         }).success(callback);
+      },
+      editUserData: function (userData, callback) {
+        var formData = _.clone(userData);
+        var temp = "";
+        if (userData.homeCity && userData.homeCity.description) {
+          console.log("changing homecity");
+          temp = userData.homeCity.description;
+          formData.homeCity = "";
+          formData.homeCity = temp;
+        }
+        if (userData.homeCountry && userData.homeCountry.name) {
+          console.log("changing homecountry");
+          temp = userData.homeCountry._id;
+          formData.homeCountry = "";
+          formData.homeCountry = temp;
+        }
+        if (userData.newProfilePicture) {
+          formData.profilePicture = userData.newProfilePicture;
+        }
+        console.log(formData, "after formating");
       }
     };
   });

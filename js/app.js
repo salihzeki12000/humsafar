@@ -7,6 +7,38 @@ var backgroundClick = {
     backgroundClick.scope.$apply();
   }
 };
+
+var imageTestingCallback = function (dataURI, type) {
+
+  // convert base64 to raw binary data held in a string
+  var byteString = atob(dataURI.split(',')[1]);
+
+  // separate out the mime component
+  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+  // write the bytes of the string to an ArrayBuffer
+  var ab = new ArrayBuffer(byteString.length);
+  var ia = new Uint8Array(ab);
+  for (var i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
+
+  // write the ArrayBuffer to a blob, and you're done
+  var blob = new Blob([ab], {
+    type: type
+  });
+  console.log(blob);
+  // Blob to File
+  var file = new File([blob], 'photo-' + "1" + '.png');
+  console.log(file);
+  // File to FormData
+  var formData = new FormData();
+  console.log(formData, "before appending");
+  formData.append('file', file, file.name);
+  console.log(formData, "after appending");
+  return formData;
+};
+
 $(document).ready(function () {
   $("body").click(function () {
     if (backgroundClick.object) {
