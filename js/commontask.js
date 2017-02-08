@@ -141,17 +141,17 @@ var commontask = angular.module('commontask', [])
             url = "/postvideos/updateLikePostWeb";
             break;
           case "itinerary":
-            obj.itinerary = type_id
+            obj.itinerary = type_id;
             url = "/itinerary/updateLikeItineraryWeb";
             break;
           case "journey":
-            obj.journey = type_id
+            obj.journey = type_id;
             url = "/journey/likeJourneyWeb";
             break;
         };
         if (task == "unlike") {
           obj.unlike = true;
-        };
+        }
         $http({
           url: adminURL + url,
           method: "POST",

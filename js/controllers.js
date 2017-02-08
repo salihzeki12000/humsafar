@@ -17,7 +17,7 @@ var map;
 var center = {};
 var centers = [];
 markers[0] = {};
-angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'itinerary', 'commontask', 'activity', 'infinite-scroll', 'navigationservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'commontask', 'activity', 'infinite-scroll', 'navigationservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
   .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar) {
     //Used to name the .html file
@@ -159,7 +159,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $.jStorage.set("profile", data);
         var alreadyLoggedIn = data.alreadyLoggedIn;
         if (alreadyLoggedIn === true) {
-          $state.go('mylife');
+          $state.go("mylife", {
+            name: 'journey'
+          });
         } else if (alreadyLoggedIn === false) {
           $state.go('mainpage');
         }
@@ -476,8 +478,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.myImage = '';
-    $scope.myCroppedImage = '';
-    $scope.showImage = false;
+    // $scope.myCroppedImage = '';
+    $scope.showImage = {
+      "val": false
+    };
     var i = 1;
     var got1 = setInterval(function () {
       if (document.getElementById('fileInput1')) {
@@ -489,8 +493,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           var reader = new FileReader();
           reader.onload = function (evt) {
             $scope.$apply(function ($scope) {
-              $scope.showImage = true;
-              console.log($scope.showImage);
+              $scope.showImage.val = true;
+              console.log($scope.showImage.val);
               $scope.myImage = evt.target.result;
             });
           };
@@ -767,12 +771,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     var saveDataCallback = function (data, status) {
-      if (data.value == true) {
+      if (data.value === true) {
         NavigationService.getProfile(function (data, status) {
           if (data._id) {
             $.jStorage.set("isLoggedIn", true);
             $.jStorage.set("profile", data);
-            $state.go('mylife');
+            $state.go("mylife", {
+              name: 'journey'
+            });
           } else {
             $.jStorage.flush();
           }
@@ -4089,34 +4095,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     })
   })
 
-  .controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, $filter, MyLife, OnGoJourney) {
+  .controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, $filter, MyLife, OnGoJourney, localLife) {
     //Used to name the .html file
-
     // console.log("Testing Consoles");
-
     $scope.template = TemplateService.changecontent("mylife");
     $scope.menutitle = NavigationService.makeactive("Mylife");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    $scope.obj = {};
+
+    $scope.userData = $.jStorage.get("profile");
     $scope.showTravellife = false;
+    console.log("showTravellife-->", $scope.showTravellife);
     $scope.visited = [];
-    var len = "";
 
     //Integration Section Starts here
 
-    $scope.userData = $.jStorage.get("profile");
+
     var arr = ($scope.userData.homeCity).split(",");
     $scope.homeCity = arr[0];
-    var travelCountCallback = function (data, status) {
-      $scope.count = data.data;
-      len = $scope.count.countriesVisited_count;
-      updateBadge();
-      updateBadgeBar();
-    };
 
     var reloadCount = function () {
-      NavigationService.travelCount(travelCountCallback, function (err) {
+      NavigationService.travelCount(function (data, status) {
+        $scope.count = data.data;
+        var len = $scope.count.countriesVisited_count;
+        // updateBadge(len);  
+        updateBadgeBar(len);
+      }, function (err) {
         console.log(err);
       });
     };
@@ -4135,7 +4139,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.openMyLifeFilter = function () {
       $scope.isopen = !$scope.isopen;
     };
-
 
     $scope.getMap = function () {
       // console.log("GET MAP CALLED");
@@ -4213,6 +4216,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     var modal = "";
     var arr = [];
+    $scope.obj = {};
     $scope.updateCountryVisited = function (country) {
       $scope.obj.countryId = country._id;
       if (country.countryVisited === true) {
@@ -4367,59 +4371,46 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // Little more about me ends here
 
     //userBadge starts here
-    var updateBadge = function () {
-      if (len < 4) {
-        $scope.userBadgeName = "img/newbie.png";
-      } else if ((len > 3) && (len < 8)) {
-        $scope.userBadgeName = "img/Just-got-wings.png";
-      } else if ((len > 8) && (len < 16)) {
-        $scope.userBadgeName = "img/Globe-Trotter.png";
-      } else if ((len > 16) && (len < 25)) {
-        $scope.userBadgeName = "img/wayfarer.png";
-      } else if (len >= 25) {
-        $scope.userBadgeName = "img/nomad.png";
-      }
-    }
+    // var updateBadge = function (len) {
+    //   if (len < 4) {
+    //     $scope.userBadgeName = "img/newbie.png";
+    //   } else if ((len > 3) && (len < 8)) {
+    //     $scope.userBadgeName = "img/Just-got-wings.png";
+    //   } else if ((len > 8) && (len < 16)) {
+    //     $scope.userBadgeName = "img/Globe-Trotter.png";
+    //   } else if ((len > 16) && (len < 25)) {
+    //     $scope.userBadgeName = "img/wayfarer.png";
+    //   } else if (len >= 25) {
+    //     $scope.userBadgeName = "img/nomad.png";
+    //   }
+    // }
     //userBadge ends here
 
     //badge-bar starts here
 
 
+    $scope.level = "";
+    $scope.mystyle1 = {
+      "width": "0",
+      "background-color": "#ff6759",
+    };
+    $scope.mystyle2 = {
+      "width": "0",
+      "background-color": "#ff6759",
+    };
+    $scope.mystyle3 = {
+      "width": "0",
+      "background-color": "#ff6759",
+    };
+    $scope.mystyle4 = {
+      "width": "0",
+      "background-color": "#ff6759",
+    };
 
-    var updateBadgeBar = function () {
-      $scope.tik1 = true;
-      $scope.tik2 = false;
-      $scope.tik3 = false;
-      $scope.tik4 = false;
-      $scope.tik5 = false;
-      $scope.mystyle1 = {
-        "width": "0",
-        "background-color": "#ff6759",
-      };
-      $scope.mystyle2 = {
-        "width": "0",
-        "background-color": "#ff6759",
-      };
-      $scope.mystyle3 = {
-        "width": "0",
-        "background-color": "#ff6759",
-      };
-      $scope.mystyle4 = {
-        "width": "0",
-        "background-color": "#ff6759",
-      };
-      // $scope.mystyle5 = {
-      //   "width": "0",
-      //   "background-color": "#ff6759",
-      // };
-      $scope.newbie = false;
-      $scope.justgotwings = false;
-      $scope.globetrotter = false;
-      $scope.wayfarer = false;
-      $scope.nomad = false;
+    var updateBadgeBar = function (len) {
       if (len < 4) {
-        $scope.newbie = true;
-        $scope.tik1 = true;
+        $scope.level = 1;
+        $scope.userBadgeName = "img/newbie.png";
         $scope.mystyle1 = {
           "width": (len / 3) * 100 + '%',
           "background-color": "#ff6759",
@@ -4427,11 +4418,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.mystyle2.width = "0";
         $scope.mystyle3.width = "0";
         $scope.mystyle4.width = "0";
-        // $scope.mystyle5.width = "0";
       } else if (len < 8) {
-        $scope.justgotwings = true;
-        $scope.tik1 = true;
-        $scope.tik2 = true;
+        $scope.level = 2;
+        $scope.userBadgeName = "img/Just-got-wings.png";
         $scope.mystyle1 = {
           "width": "100%",
           "background-color": "#ff6759",
@@ -4442,12 +4431,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         };
         $scope.mystyle3.width = "0";
         $scope.mystyle4.width = "0";
-        $scope.mystyle5.width = "0";
       } else if (len < 16) {
-        $scope.globetrotter = true;
-        $scope.tik1 = true;
-        $scope.tik2 = true;
-        $scope.tik3 = true;
+        $scope.level = 3;
+        $scope.userBadgeName = "img/Globe-Trotter.png";
         $scope.mystyle1 = {
           "width": "100%",
           "background-color": "#ff6759",
@@ -4461,13 +4447,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           "background-color": "#ff6759",
         };
         $scope.mystyle4.width = "0";
-        // $scope.mystyle5.width = "0";
       } else if (len < 25) {
-        $scope.wayfarer = true;
-        $scope.tik1 = true;
-        $scope.tik2 = true;
-        $scope.tik3 = true;
-        $scope.tik4 = true;
+        $scope.level = 4;
+        $scope.userBadgeName = "img/wayfarer.png";
         $scope.mystyle1 = {
           "width": "100%",
           "background-color": "#ff6759",
@@ -4484,14 +4466,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           "width": ((len - 15) / 9) * 100 + '%',
           "background-color": "#ff6759",
         };
-
       } else if (len > 24) {
-        $scope.nomad = true;
-        $scope.tik1 = true;
-        $scope.tik2 = true;
-        $scope.tik3 = true;
-        $scope.tik4 = true;
-        $scope.tik5 = true;
+        $scope.level = 5;
+        $scope.userBadgeName = "img/nomad.png";
         $scope.mystyle1 = {
           "width": "100%",
           "background-color": "#ff6759",
@@ -4515,6 +4492,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     //badge-bar ends here
+    // routing to on-the-go,detailed-iti,quick-iti
     $scope.routeTO = function (type, urlSlug) {
       console.log(type, urlSlug);
       if (type == "on-the-go-journey" || type == "ended-journey") {
@@ -4531,733 +4509,822 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
       }
     };
-    //Integration Section Ends here
-    {
-      var allMyLife = ["views/content/myLife/journey.html", "views/content/myLife/moments.html", "views/content/myLife/reviews.html", "views/content/myLife/holidayplanner.html"];
-      $scope.myLife = {
-        profileMain: "views/content/myLife/profile.html",
-        innerView: allMyLife[0]
-      };
-      // change url
-      $scope.viewTab = 1;
-      switch ($state.params.name) {
-        case "journey":
-          $scope.myLife.innerView = allMyLife[0];
-          break;
-        case "moments":
-          $scope.myLife.innerView = allMyLife[1];
-          break;
-        case "reviews":
-          $scope.myLife.innerView = allMyLife[2];
-          break;
-        case "holidayplanner":
-          $scope.myLife.innerView = allMyLife[3];
-          break;
-        default:
-          $scope.myLife.innerView = allMyLife[0];
-      }
-      $scope.getTab = function (view) {
-        $scope.myLife.innerView = allMyLife[view];
-        var url = "journey";
-        switch (view) {
-          case 0:
-            url = "journey";
-            break;
-          case 1:
-            url = "moments";
-            break;
-          case 2:
-            url = "reviews";
-            break;
-          case 3:
-            url = "holidayplanner";
-            break;
+    // routing to on-the-go,detailed-iti,quick-iti ends here
+    $scope.allMoments = {
+      "arr": [],
+      "scrollBusy": false,
+      "stopCallingApi": false,
+      "type": "all"
 
-        }
-        console.log(url);
-        $state.go("mylife", {
-          name: url
-        }, {
-          notify: false
-        });
-      }
+    };
+    $scope.travelLifeMoments = {
+      "arr": [],
+      "scrollBusy": false,
+      "stopCallingApi": false,
+      "type": "travel-life",
+      "pageNo": 1
+    };
+    $scope.localLifeMoments = {
+      "arr": [],
+      "scrollBusy": false,
+      "stopCallingApi": false,
+      "type": "local-life"
+    };
 
-      //moments of Mylife
-      // var myDate = new Date();
-      // var nextMonth = new Date(myDate);
-      // nextMonth.setMonth(myDate.getMonth() + 1);
-      // $scope.month = $filter('date')(nextMonth, 'MMMM');
-      // $scope.year = $filter('date')(nextMonth, 'yyyy');
+    var getMoments = function () {
+      console.log("getAllMoments called");
+      MyLife.getAllMoments("", 26, "all", 3, function (data) {
+        $scope.allMoments = {
+          "arr": data.data,
+          "scrollBusy": false,
+          "stopCallingApi": false,
+          "type": "all"
 
-
-      // console.log($scope.year, "this date");
-      // $scope.getMoments = function (type, type2, month, year) {
-      //   console.log(month, "this date");
-      //   NavigationService.getMyLifeMoments({
-      //     type: type,
-      //     type2: type2,
-      //     month: month,
-      //     year: year,
-      //   }, function (data) {
-      //     $scope.monthsMoments = data;
-      //     console.log($scope.monthsMoments, "Moments aaya");
-      //   });
-      // };
-      // $scope.getMoments("all", "moments", $scope.month, $scope.year);
-
-      //End moments of Mylife
-
-      $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
-      $scope.mapDataHumanizeFn = function (val) {
-        return val + " units";
-      };
-      $scope.heatmapColors = ['#2c3757', '#ff6759'];
-
-      $scope.hoveringOver = function (value) {
-        $scope.overStar = value;
-      };
-      $scope.ratingStates = [{
-        stateOn: 'fa fa-star-o',
-        stateOff: 'fa fa-star'
-      }, {
-        stateOn: 'fa fa-star-o',
-        stateOff: 'fa fa-star'
-      }, {
-        stateOn: 'fa fa-star-o',
-        stateOff: 'fa fa-star'
-      }, {
-        stateOn: 'fa fa-star-o',
-        stateOff: 'fa fa-star'
-      }, {
-        stateOn: 'fa fa-star-o',
-        stateOff: 'fa fa-star'
-      }];
-      // journey json
-      $scope.buildNow = function () {
-        $scope.$broadcast('rebuild:me');
-      }
-      $scope.$on('scrollbar.hide', function () {
-        // console.log('Scrollbar hide');
+        };
+        console.log($scope.allMoments);
       });
-      $scope.$on('scrollbar.show', function () {
-        // console.log('Scrollbar show');
+      MyLife.getTravelLifeMoments("travel-life", 1, function (data) {
+        console.log(data);
+        $scope.travelLifeMoments = {
+          "arr": data.data,
+          "scrollBusy": false,
+          "stopCallingApi": false,
+          "type": "travel-life",
+          "pageNo": 1
+        };
+        // $scope.travelLifeMoments = data.data;
+        console.log($scope.travelLifeMoments);
       });
+      MyLife.getAllMoments("", 5, "local-life", 3, function (data) {
+        console.log(data);
+        $scope.localLifeMoments = {
+          "arr": data.data,
+          "scrollBusy": false,
+          "stopCallingApi": false,
+          "type": "local-life"
+        };
+        // $scope.localLifeMoments = data.data;
+      })
+    };
 
-
-      $scope.openLocalimg = function (getVal) {
-        // $scope.showimgData = $scope.localLife[getVal];
-        $scope.showimgData = getVal;
-        // console.log(getVal);
-        $uibModal.open({
-          animation: true,
-          templateUrl: "views/modal/local-imgview.html",
-          scope: $scope,
-          windowTopClass: "local-imgview-pop"
-        })
-      };
-      var pageNo = 0;
-      $scope.scroll = {
-        busy: false
-      };
-      $scope.travelLife = [];
-      var getAllJourney = function (journeys) {
-        console.log(journeys, 'data');
-        _.each(journeys, function (obj) {
-          $scope.travelLife.push(obj);
-          console.log($scope.travelLife, 'new array');
-          setTimeout(function () {
-            $scope.scroll.busy = false;
-          }, 500);
-        });
-        if ($scope.travelLife.length == 0) {
-          $scope.hasJourney = false;
-        } else {
-          $scope.hasJourney = true;
-        }
-        // $scope.hasJourney = flag;
-      };
-      // MyLife.getAllJourney(getAllJourney, pageNo, function (err) {
-      //   console.log(err);
-      // });
-      $scope.getMore = function () {
-        console.log('scroll event');
-        if ($scope.scroll.busy) {
+    $scope.getMoreMoments = function (moment) {
+      console.log(moment);
+      if (moment.scrollBusy) {
+        return;
+      } else {
+        if (moment.stopCallingApi) {
           return;
         } else {
-          pageNo++;
-          $scope.scroll.busy = true;
-          MyLife.getAllJourney(getAllJourney, pageNo, function (err) {
+          console.log("passed 2 if");
+          switch (moment.type) {
+            case 'all':
+            case 'local-life':
+              console.log("inside case 1");
+              if (moment.arr.length == 0) {
+                return;
+              } else {
+                var lastToken = moment.arr[moment.arr.length - 1].token;
+                console.log(lastToken);
+                if (lastToken == -1) {
+                  moment.stopCallingApi = true;
+                  console.log("no data so calling api is closed");
+                } else {
+                  moment.scrollBusy = true;
+                  MyLife.getAllMoments(lastToken, 26, moment.type, 3, function (data) {
+                    moment.scrollBusy = false;
+                    _.each(data.data, function (n) {
+                      if (n.token == -1) {
+                        moment.stopCallingApi = true;
+                      } else {
+                        moment.arr.push(n);
+                      }
+                    });
+                  });
+                }
+              }
+              break;
+            case 'travel-life':
+              console.log("inside case 2");
+              moment.scrollBusy = true;
+              moment.pageNo++;
+              MyLife.getTravelLifeMoments("travel-life", moment.pageNo, function (data) {
+                moment.scrollBusy = false;
+                if (data.data.length == 0) {
+                  moment.stopCallingApi = true;
+                } else {
+                  _.each(data.data, function (n) {
+                    moment.arr.push(n);
+                  });
+                }
+                console.log(data);
+              });
+              break;
+            default:
+              console.log("No Match Found");
+          }
+        }
+      }
+    };
+    $scope.getMorePhotos = function (album) {
+      console.log(album);
+      if (album.scrollBusy) {
+        return;
+      } else {
+        if (album.stopCallingApi) {
+          return
+        } else {
+          console.log("inside scroll done");
+          album.pageNo++;
+          album.scrollBusy = true;
+          console.log(album.type);
+          switch (album.type) {
+            case ('journey' || 'itinerary'):
+              console.log('inside case 1');
+              MyLife.getJournItiMoments(album._id, album.pageNo, 24, album.type, function (data) {
+                album.scrollBusy = false;
+                if (data.data.length !== 0) {
+                  _.each(data.data, function (n) {
+                    // $scope.perMonthMoments.push(n);\
+                    album.perMonthMoments.push(n);
+                  });
+
+                } else {
+                  album.stopCallingApi = true;
+                }
+              });
+              break;
+            case "all":
+              MyLife.getPerMonthMoments(album.token, album.pageNo, 24, album.type, function (data) {
+                album.scrollBusy = false;
+                if (data.data.length !== 0) {
+                  _.each(data.data, function () {
+                    // $scope.perMonthMoments.push(n);
+                    album.perMonthMoments.push(n);
+                  });
+                } else {
+                  album.stopCallingApi = true;
+                }
+              });
+              break;
+          }
+        }
+      }
+    };
+
+    var allMyLife = [
+      "views/content/myLife/journey.html",
+      "views/content/myLife/moments.html",
+      "views/content/myLife/reviews.html",
+      "views/content/myLife/holidayplanner.html"
+    ];
+    $scope.myLife = {
+      profileMain: "views/content/myLife/profile.html",
+      innerView: allMyLife[0]
+    };
+    // change url
+    $scope.viewTab = 1;
+    console.log($state.params.name);
+    switch ($state.params.name) {
+      case "journey":
+        $scope.myLife.innerView = allMyLife[0];
+        break;
+      case "moments":
+        console.log("setting moments URL");
+        getMoments();
+        $scope.myLife.innerView = allMyLife[1];
+        break;
+      case "reviews":
+        $scope.myLife.innerView = allMyLife[2];
+        break;
+      case "holidayplanner":
+        $scope.myLife.innerView = allMyLife[3];
+        break;
+      default:
+        $scope.myLife.innerView = allMyLife[0];
+    }
+    $scope.getTab = function (view) {
+      $scope.myLife.innerView = allMyLife[view];
+      var url = "journey";
+      switch (view) {
+        case 0:
+          url = "journey";
+          break;
+        case 1:
+          url = "moments";
+          getMoments();
+          break;
+        case 2:
+          url = "reviews";
+          break;
+        case 3:
+          url = "holidayplanner";
+          break;
+      }
+      $state.go("mylife", {
+        name: url
+      }, {
+        notify: false
+      });
+    }
+
+    //moments of Mylife
+    // var myDate = new Date();
+    // var nextMonth = new Date(myDate);
+    // nextMonth.setMonth(myDate.getMonth() + 1);
+    // $scope.month = $filter('date')(nextMonth, 'MMMM');
+    // $scope.year = $filter('date')(nextMonth, 'yyyy');
+
+
+    // console.log($scope.year, "this date");
+    // $scope.getMoments = function (type, type2, month, year) {
+    //   console.log(month, "this date");
+    //   NavigationService.getMyLifeMoments({
+    //     type: type,
+    //     type2: type2,
+    //     month: month,
+    //     year: year,
+    //   }, function (data) {
+    //     $scope.monthsMoments = data;
+    //     console.log($scope.monthsMoments, "Moments aaya");
+    //   });
+    // };
+    // $scope.getMoments("all", "moments", $scope.month, $scope.year);
+
+    //End moments of Mylife
+
+    $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
+    $scope.mapDataHumanizeFn = function (val) {
+      return val + " units";
+    };
+    $scope.heatmapColors = ['#2c3757', '#ff6759'];
+
+    $scope.hoveringOver = function (value) {
+      $scope.overStar = value;
+    };
+    $scope.ratingStates = [{
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }];
+    // journey json
+    $scope.buildNow = function () {
+      $scope.$broadcast('rebuild:me');
+    }
+    $scope.$on('scrollbar.hide', function () {
+      // console.log('Scrollbar hide');
+    });
+    $scope.$on('scrollbar.show', function () {
+      // console.log('Scrollbar show');
+    });
+
+
+    $scope.openLocalimg = function (getVal) {
+      // $scope.showimgData = $scope.localLife[getVal];
+      $scope.showimgData = getVal;
+      // console.log(getVal);
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/local-imgview.html",
+        scope: $scope,
+        windowTopClass: "local-imgview-pop"
+      })
+    };
+    var pageNo = 0;
+    $scope.scroll = {
+      busy: false
+    };
+    $scope.travelLife = [];
+    var getAllJourney = function (journeys) {
+      _.each(journeys, function (obj) {
+        $scope.travelLife.push(obj);
+        setTimeout(function () {
+          $scope.scroll.busy = false;
+        }, 500);
+      });
+      if ($scope.travelLife.length == 0) {
+        $scope.hasJourney = false;
+      } else {
+        $scope.hasJourney = true;
+      }
+      // $scope.hasJourney = flag;
+    };
+    // MyLife.getAllJourney(getAllJourney, pageNo, function (err) {
+    //   console.log(err);
+    // });
+    $scope.getMore = function () {
+      if ($scope.scroll.busy) {
+        return;
+      } else {
+        pageNo++;
+        $scope.scroll.busy = true;
+        MyLife.getAllJourney(getAllJourney, pageNo, function (err) {
+          console.log(err);
+        });
+      }
+    }
+    $scope.redirectTo = function (id) {
+      console.log(id);
+      $.jStorage.set('travelId', id);
+      $state.go('ongojourney');
+    }
+
+    // local life
+    // var localPageNo = 1;
+    $scope.localLifeJourney = [];
+    $scope.localDate = [];
+    $scope.localFilterPost = {};
+    $scope.localFilterPost.checkInType = [];
+    $scope.localFilterPost.type = "local-life";
+    $scope.localFilterPost.pagenumber = 1;
+    $scope.localFilterPost.month = 0;
+    $scope.localFilterPost.year = 0;
+    $scope.localFilterPost.rating = [];
+    $scope.localFilterPost.photos = false;
+    $scope.localFilterPost.videos = false;
+    $scope.localFilterPost.thoughts = false;
+    $scope.showTravellife = true;
+    $scope.showLocalLife = true;
+    $scope.localCategory = [{
+        name: "Beaches",
+        checked: false
+      },
+      {
+        name: "Airport",
+        checked: false
+      },
+      {
+        name: "Hotels & Accommodation",
+        checked: false
+      },
+      {
+        name: "Restaurants & Bars",
+        checked: false
+      },
+      {
+        name: "Natures & Parks",
+        checked: false
+      },
+      {
+        name: "Sights & Landmarks",
+        checked: false
+      },
+      {
+        name: "Museums & Galleries",
+        checked: false
+      },
+      {
+        name: "Religious",
+        checked: false
+      },
+      {
+        name: "Shopping",
+        checked: false
+      },
+      {
+        name: "Spa & Wellness",
+        checked: false
+      },
+      {
+        name: "Adventure & Excursions",
+        checked: false
+      },
+      {
+        name: "Zoos & Aquariums",
+        checked: false
+      },
+      {
+        name: "Others",
+        checked: false
+      }
+    ];
+    var viewLocalLife = function (dataLocal) {
+      $scope.localLifeJourney = dataLocal.data;
+      $scope.localDate = dataLocal.datesArr;
+      if ($scope.localLifeJourney.length == 0) {
+        $scope.showLocalLife = true;
+      } else {
+        $scope.showLocalLife = false;
+      }
+    };
+
+    $scope.getlocalLife = function () {
+      $scope.showTravellife = false;
+      console.log($scope.showTravellife);
+      localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+        console.log(err);
+      })
+    };
+    $scope.viewTravelLife = function () {
+      $scope.showTravellife = true;
+    };
+    // get by Filter
+    $scope.getByFilter = function (filterdData, filterType) {
+      console.log(filterdData, 'what data is coming');
+      switch (filterType) {
+        case 'date':
+          $scope.localFilterPost.month = parseInt(moment(filterdData.split(",")[0], "MMMM").format('M'));
+          $scope.localFilterPost.year = parseInt(filterdData.split(",")[1]);
+          localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
             console.log(err);
           });
-        }
+          break;
+        case 'checkIn':
+          if (filterdData.checked == false) {
+            filterdData.checked = true;
+            $scope.localFilterPost.checkInType.push(filterdData.name);
+            console.log($scope.localFilterPost.checkInType, 'array');
+          } else {
+            filterdData.checked = false;
+            _.remove($scope.localFilterPost.checkInType, function (newArr) {
+              return newArr == filterdData.name;
+            })
+            console.log($scope.localFilterPost.checkInType, 'removed data');
+          }
+          localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+            console.log(err);
+          });
+          break;
+        case 'rating':
+          var getRatingIndex = _.findIndex($scope.localFilterPost.rating, function (rating) {
+            return rating == filterdData;
+          });
+          if (getRatingIndex === -1) {
+            $scope.localFilterPost.rating.push(filterdData);
+            console.log($scope.localFilterPost.rating, 'rating ka array');
+          } else {
+            _.remove($scope.localFilterPost.rating, function (remove) {
+              return remove == filterdData;
+            });
+            console.log($scope.localFilterPost.rating, 'removed ');
+          }
+          localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+            console.log(err);
+          });
+          break;
+        case 'photos':
+          if ($scope.localFilterPost.photos == false) {
+            $scope.localFilterPost.photos = true;
+            localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+              console.log(err);
+            });
+          } else {
+            $scope.localFilterPost.photos = false;
+            localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+              console.log(err);
+            });
+          }
+          break;
+        case 'videos':
+          if ($scope.localFilterPost.videos == false) {
+            $scope.localFilterPost.videos = true;
+            localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+              console.log(err);
+            });
+          } else {
+            $scope.localFilterPost.videos = false;
+            localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+              console.log(err);
+            });
+          }
+          break;
+        case 'thoughts':
+          if ($scope.localFilterPost.thoughts == false) {
+            $scope.localFilterPost.thoughts = true;
+            localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+              console.log(err);
+            });
+          } else {
+            $scope.localFilterPost.thoughts = false;
+            localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+              console.log(err);
+            });
+          }
+          break;
       }
-      $scope.redirectTo = function (id) {
-        console.log(id);
-        $.jStorage.set('travelId', id);
-        $state.go('ongojourney');
-      }
+    };
+    // get by Filter end
+    // local life end
 
-      $scope.localLife = [{
-        heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgWall: "img/local-life-post.jpg",
-        likes: "15660",
-        travelledIcon: "img/cycle-cyan.png",
-        postSlider: [{
-          imgRelated: "img/slider1.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }, {
-          imgRelated: "img/slider1.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }, {
-          imgRelated: "img/slider1.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }]
-      }, {
-        heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgWall: "img/local-life-post.jpg",
-        likes: "15660",
-        travelledIcon: "img/cycle-cyan.png",
-        postSlider: [{
-          imgRelated: "img/slider1.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }, {
-          imgRelated: "img/slider1.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }, {
-          imgRelated: "img/slider1.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }]
-      }, {
-        heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgWall: "img/local-life-post.jpg",
-        likes: "15660",
-        travelledIcon: "img/cycle-cyan.png",
-        postSlider: [{
-          imgRelated: "img/slider1.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }, {
-          imgRelated: "img/slider1.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }, {
-          imgRelated: "img/slider1.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }]
-      }, {
-        heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgWall: "img/local-life-post.jpg",
-        likes: "15660",
-        travelledIcon: "img/cycle-cyan.png",
-        postSlider: [{
-          imgRelated: "img/slider1.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }, {
-          imgRelated: "img/slider1.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }, {
-          imgRelated: "img/slider1.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }]
-      }, {
-        heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgWall: "img/local-life-post.jpg",
-        likes: "15660",
-        travelledIcon: "img/cycle-cyan.png",
-        postSlider: [{
-          imgRelated: "img/slider1.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }, {
-          imgRelated: "img/slider1.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }, {
-          imgRelated: "img/slider1.jpg"
-        }, {
-          imgRelated: "img/slider2.jpg"
-        }]
-      }];
-
-      // moments json
-      $scope.monthMoments = [{
-        monthName: "November 2015",
-        momentPic: [
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg'
-        ]
-      }, {
-        monthName: "October 2015",
-        momentPic: [
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg'
-        ]
-      }, {
-        monthName: "September 2015",
-        momentPic: [
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg',
-          'img/slider1.jpg',
-          'img/slider2.jpg'
-        ]
-      }, ];
-      $scope.momentPic = [
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg',
-        'img/slider1.jpg',
-        'img/slider2.jpg'
-      ];
-
-      $scope.travelMoment = [{
-        imgBack: "img/moment-travel1.jpg",
-        imgFront: "img/moment-travel.png",
-        placeName: "London Journey",
-        totalPhoto: "50",
-        timestampMonth: "14 Jan, 2014"
-      }, {
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-travel.png",
-        placeName: "London Journey",
-        totalPhoto: "50",
-        timestampMonth: "14 Jan, 2014"
-      }, {
-        imgBack: "img/moment-travel1.jpg",
-        imgFront: "img/moment-travel.png",
-        placeName: "London Journey",
-        totalPhoto: "50",
-        timestampMonth: "14 Jan, 2014"
-      }, {
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-travel.png",
-        placeName: "London Journey",
-        totalPhoto: "50",
-        timestampMonth: "14 Jan, 2014"
-      }, {
-        imgBack: "img/moment-travel1.jpg",
-        imgFront: "img/moment-travel.png",
-        placeName: "London Journey",
-        totalPhoto: "50",
-        timestampMonth: "14 Jan, 2014"
-      }, {
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-travel.png",
-        placeName: "London Journey",
-        totalPhoto: "50",
-        timestampMonth: "14 Jan, 2014"
-      }, ];
-
-      $scope.localMoment = [{
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-local.png",
-        timestampDate: "August, 2014",
-        totalPhoto: "50"
-      }, {
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-local.png",
-        timestampDate: "October, 2014",
-        totalPhoto: "50"
-      }, {
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-local.png",
-        timestampDate: "August, 2014",
-        totalPhoto: "50"
-      }, {
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-local.png",
-        timestampDate: "October, 2014",
-        totalPhoto: "50"
-      }, {
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-local.png",
-        timestampDate: "October, 2014",
-        totalPhoto: "50"
-      }, {
-        imgBack: "img/moment-travel2.jpg",
-        imgFront: "img/moment-local.png",
-        timestampDate: "August, 2014",
-        totalPhoto: "50"
-      }];
-
+    $scope.viewMonth = false;
+    $scope.momentView = 1;
+    $scope.album = {};
+    $scope.changeTypeView = function (num) {
       $scope.viewMonth = false;
-      $scope.showMonthView = function () {
-        if ($scope.viewMonth == false) {
-          $scope.viewMonth = true;
-        } else {
-          $scope.viewMonth = false;
-        }
+      // $scope.perMonthMoments = [];
+      $scope.momentView = num;
+    };
+    $scope.showMonthView = function () {
+      console.log("showMonthView called", $scope.viewMonth);
+      if ($scope.viewMonth == false) {
+        $scope.viewMonth = true;
+      } else {
+        $scope.viewMonth = false;
+      }
+    };
+    var viewMonthDataCallback = function (data) {
+      // $scope.perMonthMoments = data.data;
+      $scope.album.perMonthMoments = data.data;
+      console.log($scope.album.perMonthMoments);
+    };
+    $scope.getPerMonthMoments = function (obj, type) {
+      $scope.token = obj.token;
+      $scope.count = obj.count;
+      $scope.album = {
+        "token": obj.token,
+        "pageNo": 1,
+        "scrollBusy": false,
+        "type": type,
+        "stopCallingApi": false,
+        "perMonthMoments": []
       };
-      // reviews json
-      $scope.oneAtATime = true;
-
-      $scope.getReview = function () {
-        $uibModal.open({
-          animation: true,
-          templateUrl: "views/modal/review-post.html",
-          scope: $scope,
-          backdropClass: "review-backdrop"
-        })
-      };
-      $scope.showRating = 1;
-      $scope.fillColor = "";
-      $scope.starRating = function (val) {
-        if (val == 1) {
-          $scope.showRating = 1;
-          $scope.fillColor2 = "";
-          $scope.fillColor3 = "";
-          $scope.fillColor4 = "";
-          $scope.fillColor5 = "";
-        } else if (val == 2) {
-          $scope.showRating = 2;
-          $scope.fillColor2 = "fa-star";
-          $scope.fillColor3 = "";
-          $scope.fillColor4 = "";
-          $scope.fillColor5 = "";
-        } else if (val == 3) {
-          $scope.showRating = 3;
-          $scope.fillColor2 = "fa-star";
-          $scope.fillColor3 = "fa-star";
-          $scope.fillColor4 = "";
-          $scope.fillColor5 = "";
-        } else if (val == 4) {
-          $scope.showRating = 4;
-          $scope.fillColor2 = "fa-star";
-          $scope.fillColor3 = "fa-star";
-          $scope.fillColor4 = "fa-star";
-          $scope.fillColor5 = "";
-        } else if (val == 5) {
-          $scope.showRating = 5;
-          $scope.fillColor2 = "fa-star";
-          $scope.fillColor3 = "fa-star";
-          $scope.fillColor4 = "fa-star";
-          $scope.fillColor5 = "fa-star";
-        } else {
-          $scope.showRating = 1;
-        }
-      };
-      $scope.reviewAll = [{
-        locationName: "Girgaon Beach",
-        travelType: "img/beach.png",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-        city: "Mumbai",
-        country: "India",
-        reviewLocation: true
-      }, {
-        locationName: "Girgaon Beach",
-        travelType: "img/beach.png",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-        city: "Mumbai",
-        country: "India",
-        reviewLocation: false
-      }, {
-        locationName: "Girgaon Beach",
-        travelType: "img/beach.png",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-        city: "Mumbai",
-        country: "India",
-        reviewLocation: true
-      }, {
-        locationName: "Girgaon Beach",
-        travelType: "img/beach.png",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-        city: "Mumbai",
-        country: "India",
-        reviewLocation: false
-      }];
-      $scope.travelReview = [{
-        img: "img/moment-travel2.jpg",
-        countryName: "India"
-      }, {
-        img: "img/moment-travel2.jpg",
-        countryName: "India"
-      }, {
-        img: "img/moment-travel2.jpg",
-        countryName: "India"
-      }, {
-        img: "img/moment-travel2.jpg",
-        countryName: "India"
-      }, {
-        img: "img/moment-travel2.jpg",
-        countryName: "India"
-      }];
-
-      $scope.travelCity = [{
-        cityName: "Mumbai",
-        visitedCity: [{
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }]
-      }, {
-        cityName: "Mumbai",
-        visitedCity: [{
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }]
-      }, {
-        cityName: "Mumbai",
-        visitedCity: [{
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }]
-      }, {
-        cityName: "Mumbai",
-        visitedCity: [{
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }]
-      }, {
-        cityName: "Mumbai",
-        visitedCity: [{
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }]
-      }, {
-        cityName: "Mumbai",
-        visitedCity: [{
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }, {
-          travelType: "img/beach.png",
-          locationName: "Girgaon Beach",
-          timestampDate: "14 Jan, 2014",
-          timestampHour: "1:20 pm",
-        }]
-      }, ];
-      $scope.viewtravelCountry = false;
-      $scope.showtravelCountry = function () {
-        $scope.viewtravelCountry = true;
-      };
-      $scope.viewlocalCountry = false;
-      $scope.showlocalCountry = function () {
-        $scope.viewlocalCountry = true;
-      };
+      console.log($scope.count);
+      // $scope.perMonthMoments = [];
+      MyLife.getPerMonthMoments($scope.album.token, 1, 24, $scope.album.type, viewMonthDataCallback);
+      $scope.showMonthView();
+    };
 
 
-    }
+    $scope.getJournItiMoments = function (obj) {
+      // $scope.perMonthMoments = [];
+      $scope.token = obj.name;
+      $scope.count = obj.mediaCount;
+      $scope.album = {
+        "_id": obj._id,
+        "pageNo": 1,
+        "scrollBusy": false,
+        "stopCallingApi": false,
+        "perMonthMoments": []
+      };
+      $scope.type = obj.type;
+      var flag = obj.type && obj.type != ''
+      if (flag) {
+        $scope.album.type = 'itinerary';
+      } else {
+        $scope.album.type = 'journey';
+      }
+      $scope.albumPageNo = 1;
+      MyLife.getJournItiMoments(obj._id, $scope.albumPageNo, 24, $scope.album.type, viewMonthDataCallback);
+      $scope.showMonthView();
+    };
+
+    // reviews json
+    $scope.oneAtATime = true;
+
+    $scope.getReview = function () {
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/review-post.html",
+        scope: $scope,
+        backdropClass: "review-backdrop"
+      })
+    };
+    $scope.showRating = 1;
+    $scope.fillColor = "";
+    $scope.starRating = function (val) {
+      if (val == 1) {
+        $scope.showRating = 1;
+        $scope.fillColor2 = "";
+        $scope.fillColor3 = "";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 2) {
+        $scope.showRating = 2;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 3) {
+        $scope.showRating = 3;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 4) {
+        $scope.showRating = 4;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "fa-star";
+        $scope.fillColor5 = "";
+      } else if (val == 5) {
+        $scope.showRating = 5;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "fa-star";
+        $scope.fillColor5 = "fa-star";
+      } else {
+        $scope.showRating = 1;
+      }
+    };
+    $scope.reviewAll = [{
+      locationName: "Girgaon Beach",
+      travelType: "img/beach.png",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "1:20 pm",
+      city: "Mumbai",
+      country: "India",
+      reviewLocation: true
+    }, {
+      locationName: "Girgaon Beach",
+      travelType: "img/beach.png",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "1:20 pm",
+      city: "Mumbai",
+      country: "India",
+      reviewLocation: false
+    }, {
+      locationName: "Girgaon Beach",
+      travelType: "img/beach.png",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "1:20 pm",
+      city: "Mumbai",
+      country: "India",
+      reviewLocation: true
+    }, {
+      locationName: "Girgaon Beach",
+      travelType: "img/beach.png",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "1:20 pm",
+      city: "Mumbai",
+      country: "India",
+      reviewLocation: false
+    }];
+    $scope.travelReview = [{
+      img: "img/moment-travel2.jpg",
+      countryName: "India"
+    }, {
+      img: "img/moment-travel2.jpg",
+      countryName: "India"
+    }, {
+      img: "img/moment-travel2.jpg",
+      countryName: "India"
+    }, {
+      img: "img/moment-travel2.jpg",
+      countryName: "India"
+    }, {
+      img: "img/moment-travel2.jpg",
+      countryName: "India"
+    }];
+
+    $scope.travelCity = [{
+      cityName: "Mumbai",
+      visitedCity: [{
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }]
+    }, {
+      cityName: "Mumbai",
+      visitedCity: [{
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }]
+    }, {
+      cityName: "Mumbai",
+      visitedCity: [{
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }]
+    }, {
+      cityName: "Mumbai",
+      visitedCity: [{
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }]
+    }, {
+      cityName: "Mumbai",
+      visitedCity: [{
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }]
+    }, {
+      cityName: "Mumbai",
+      visitedCity: [{
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }, {
+        travelType: "img/beach.png",
+        locationName: "Girgaon Beach",
+        timestampDate: "14 Jan, 2014",
+        timestampHour: "1:20 pm",
+      }]
+    }, ];
+    $scope.viewtravelCountry = false;
+    $scope.showtravelCountry = function () {
+      $scope.viewtravelCountry = true;
+    };
+    $scope.viewlocalCountry = false;
+    $scope.showlocalCountry = function () {
+      $scope.viewlocalCountry = true;
+    };
     // holidayplanner json
   })
-
-
-
-
-
-
-
-
 
   .controller('JourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
@@ -5740,24 +5807,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   })
   .controller('SettingCtrl', function ($scope, TemplateService, NavigationService, $timeout, DataUriToBlob) {
     //Used to name the .html file
-
-    $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
-
-    $scope.loadMore = function () {
-      alert("scroll hua");
-      var last = $scope.images[$scope.images.length - 1];
-      for (var i = 1; i <= 8; i++) {
-        $scope.images.push(last + i);
-      }
-    };
+    $scope.profile = $.jStorage.get("profile");
+    $scope.userData = _.clone($scope.profile);
 
     // console.log("Testing Consoles");
-
     $scope.template = TemplateService.changecontent("setting");
     $scope.menutitle = NavigationService.makeactive("Setting");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    $scope.format = 'dd-MM-yyyy';
     $scope.open1 = function () {
       $scope.popup1.opened = true;
       showWeeks = false;
@@ -5773,14 +5832,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       if (document.getElementById('fileInput')) {
         document.getElementById('fileInput').onchange = function (evt) {
           var file = evt.currentTarget.files[0];
-          console.log(evt);
           var reader = new FileReader();
           reader.onload = function (evt1) {
             $scope.$apply(function ($scope) {
-              console.log(evt1);
               $scope.showImage = true;
               $scope.myImage = evt1.target.result;
-              console.log(evt);
             });
           };
           reader.readAsDataURL(file);
@@ -5811,35 +5867,62 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     // datepicker end
-
+    $scope.travelConfig = {};
+    var atleastOne = "";
+    var length = "";
     $scope.holidayType = function (val) {
-      if ($scope.chooseHoliday[val].class == "active-holiday") {
-        $scope.chooseHoliday[val].class = "";
+      atleastOne = _.filter($scope.travelConfig.chooseHoliday, ['class', "active-holiday"]);
+      length = atleastOne.length;
+      console.log(length);
+      if (length == 1) {
+        $scope.travelConfig.chooseHoliday[val].class = "active-holiday"
       } else {
-        $scope.chooseHoliday[val].class = "active-holiday";
+        if ($scope.travelConfig.chooseHoliday[val].class == "active-holiday") {
+          $scope.travelConfig.chooseHoliday[val].class = "";
+        } else {
+          $scope.travelConfig.chooseHoliday[val].class = "active-holiday";
+        }
       }
+
     };
     $scope.usuallyType = function (val) {
-      _.each($scope.usuallyGo, function (abc) {
+      _.each($scope.travelConfig.usuallyGo, function (abc) {
         abc.class = "";
       });
-      $scope.usuallyGo[val].class = "active-holiday";
+      $scope.travelConfig.usuallyGo[val].class = "active-holiday";
     };
+
     $scope.travelType = function (val) {
-      if ($scope.preferTravel[val].class == "active-holiday") {
-        $scope.preferTravel[val].class = "";
+      atleastOne = _.filter($scope.travelConfig.preferTravel, ['class', "active-holiday"]);
+      length = atleastOne.length;
+      console.log(length);
+      if (length == 1) {
+        $scope.travelConfig.preferTravel[val].class = "active-holiday"
       } else {
-        $scope.preferTravel[val].class = "active-holiday";
+        if ($scope.travelConfig.preferTravel[val].class == "active-holiday") {
+          $scope.travelConfig.preferTravel[val].class = "";
+        } else {
+          $scope.travelConfig.preferTravel[val].class = "active-holiday";
+        }
       }
     };
+
     $scope.idealType = function (val) {
-      if ($scope.idealSelect[val].class == "active-holiday") {
-        $scope.idealSelect[val].class = "";
+      atleastOne = _.filter($scope.travelConfig.idealSelect, ['class', "active-holiday"]);
+      length = atleastOne.length;
+      console.log(length);
+      if (length == 1) {
+        $scope.travelConfig.idealSelect[val].class = "active-holiday"
       } else {
-        $scope.idealSelect[val].class = "active-holiday";
+        if ($scope.travelConfig.idealSelect[val].class == "active-holiday") {
+          $scope.travelConfig.idealSelect[val].class = "";
+        } else {
+          $scope.travelConfig.idealSelect[val].class = "active-holiday";
+        }
       }
     };
-    $scope.chooseHoliday = [{
+
+    $scope.travelConfig.chooseHoliday = [{
       img: "img/beach.png",
       caption: "Island & Beach",
       storeCaption: "Islands & Beaches",
@@ -5865,7 +5948,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       storeCaption: "Countryside"
     }];
 
-    $scope.usuallyGo = [{
+    $scope.travelConfig.usuallyGo = [{
       img: "img/map.png",
       caption1: "By the map",
       storeCaption: "By the map"
@@ -5881,7 +5964,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       storeCaption: "A little bit of both"
     }, ];
 
-    $scope.preferTravel = [{
+    $scope.travelConfig.preferTravel = [{
       img: "img/family.png",
       caption: "Family",
       storeCaption: "Family"
@@ -5915,7 +5998,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       storeCaption: "Photographer"
     }, ];
 
-    $scope.idealSelect = [{
+    $scope.travelConfig.idealSelect = [{
       img: "img/luxury.png",
       caption1: "luxury",
       storeCaption: "Luxury"
@@ -5966,7 +6049,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       storeCaption: "Festivals"
     }];
 
-    $scope.userData = $.jStorage.get("profile");
+
     var selectedCity = $scope.userData.homeCity;
     $scope.userData.homeCity = {
       "description": selectedCity
@@ -6034,44 +6117,40 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   $scope.chooseHoliday[index].class = "active-holiday"
     // });
 
-    console.log($scope.userData.travelConfig);
     _.each(new Array(4), function (value, key) {
-      console.log(key);
       switch (key) {
         case 0:
           _.each($scope.userData.travelConfig.kindOfHoliday, function (n1) {
-            var index = _.findIndex($scope.chooseHoliday, function (n2) {
+            var index = _.findIndex($scope.travelConfig.chooseHoliday, function (n2) {
               return n1 == n2.storeCaption;
             });
-            $scope.chooseHoliday[index].class = "active-holiday"
+            $scope.travelConfig.chooseHoliday[index].class = "active-holiday"
           });
           break;
         case 1:
           _.each($scope.userData.travelConfig.usuallyGo, function (n1) {
-            var index = _.findIndex($scope.usuallyGo, function (n2) {
+            var index = _.findIndex($scope.travelConfig.usuallyGo, function (n2) {
               return n1 == n2.storeCaption;
             });
-            $scope.usuallyGo[index].class = "active-holiday"
+            $scope.travelConfig.usuallyGo[index].class = "active-holiday"
           });
           break;
         case 2:
           _.each($scope.userData.travelConfig.preferToTravel, function (n1) {
-            var index = _.findIndex($scope.preferTravel, function (n2) {
+            var index = _.findIndex($scope.travelConfig.preferTravel, function (n2) {
               return n1 == n2.storeCaption;
             });
-            $scope.preferTravel[index].class = "active-holiday"
+            $scope.travelConfig.preferTravel[index].class = "active-holiday"
           });
           break;
         case 3:
-          console.log("changing holiday type");
           _.each($scope.userData.travelConfig.holidayType, function (n1) {
-            console.log(n1);
-            var index = _.findIndex($scope.idealSelect, function (n2) {
+            var index = _.findIndex($scope.travelConfig.idealSelect, function (n2) {
               return n1 == n2.storeCaption;
               // console.log(n1, n2.storeCaption);
             });
             // console.log(index);
-            $scope.idealSelect[index].class = "active-holiday"
+            $scope.travelConfig.idealSelect[index].class = "active-holiday"
           });
           break;
       }
@@ -6080,26 +6159,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // page 2 integration ends   
 
-    $scope.eidtUserData = function (imageBase64) {
-      console.log(imageBase64);
-      var formData = imageTestingCallback(imageBase64, 'image/png');
-      console.log(formData);
-      NavigationService.uploadFile(formData, function (response) {
+    $scope.editUserData = function (userData, status, valid) {
+      console.log(valid);
+      if (valid) {
+        NavigationService.editUserData(userData, status);
+      } else {
+        alert("fields invalid");
+      }
+    };
+
+    $scope.uploadProfilePicture = function (imageBase64) {
+      var file = imageTestingCallback(imageBase64, 'image/png');
+      console.log(file);
+      NavigationService.uploadFile(file, function (response) {
         if (response.value) {
-          $scope.userData.newProfilePicture = response.data[0];
-          console.log($scope.userData);
+          $scope.userData.profilePicture = response.data[0];
+          NavigationService.saveUserData({
+            'profilePicture': $scope.userData.profilePicture
+          }, function (data) {
+            $scope.showImage = false;
+            NavigationService.getProfile(globalGetProfile, function () {
+              console.log("error");
+            });
+          });
         } else {
 
         }
       });
-
-      // NavigationService.editUserData($scope.userData, function (data) {
-      //   console.log(data);
-      // })
-    };
-
-
-
+    }
   })
   .controller('BlogCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -10648,14 +10735,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   .controller('headerctrl', function ($scope, TemplateService, NavigationService, $state, $interval) {
     var currentUrl = window.location.href;
-
     $scope.template = TemplateService;
     NavigationService.getProfile(function (data, status) {
       if (data._id) {
         $.jStorage.set("isLoggedIn", true);
         $.jStorage.set("profile", data);
       } else {
-        // $state.go('login');
+        $state.go('login');
         $.jStorage.flush();
       }
     }, function (err) {
@@ -11135,6 +11221,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agtuser.innerView = allagtuser[0];
     }
     $scope.getTab = function (view) {
+      console.log(view);
       $scope.agtuser.innerView = allagtuser[view];
       var url = "usr-itinerary";
       var active = "";

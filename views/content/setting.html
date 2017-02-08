@@ -15,7 +15,7 @@
                   </div>
                   <div class="profile-detail inline-block v-top">
                     <h4 class="color-blue m-clear">{{userData.name}}</h4>
-                    <span class="color-blue" ng-if="userData.dob!=undefined">{{userData.dob}}</span>
+                    <span class="color-blue" ng-if="userData.dob!=undefined">{{userData.dob|formatDate:'date'}}</span>
                     <!--<span class="color-blue" ng-if="userData.dob==undefined">DOB --/--/--</span>-->
                   </div>
                 </div>
@@ -113,7 +113,7 @@
             <div class="setting-main-detail bg-white avenir-roman">
               <!-- profile detail -->
               <div class="profile-detail-main" ng-if="showSetting == 1">
-                <form action="">
+                <form action="" name='profile'>
                   <div class="profile-photo-sec upload-profile">
                     <label for="profile" class="color-blue">Profile Photo</label>
                     <div class="cropArea relate" ng-show="showImage" id="profile">
@@ -121,13 +121,16 @@
                       <img-crop image="myImage" result-image="myCroppedImage">
                       </img-crop>
                       <div class="btn-upload">
-                        <button class="btn btn-pink btn-more">Upload</button>
+                        <button class="btn btn-pink btn-more" ng-click="uploadProfilePicture(myCroppedImage)">Upload</button>
                       </div>
                     </div>
                     <div class="upload-section text-center" ng-hide="showImage">
-                      <img src="img/upload-icon.jpg" alt="" class="m-center img-responsive">
-                      <p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
-                      <span class="block mt10 color-grey avenir-roman">-or-</span>
+                      <div>
+                        <img ng-src="{{userData.profilePicture|uploadpath:200:200}}" alt="" class="m-center img-responsive">
+                        <!--<img ng-src="img/upload-icon.jpg" alt="" class="m-center img-responsive">-->
+                        <!--<p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
+                        <span class="block mt10 color-grey avenir-roman">-or-</span>-->
+                      </div>
                       <div class="upload-btn">
                         <div class="relate inline-block mr10 form-file">
                           <button class="btn btn-dark-blue pointer avenir-light ">Select a photo from your computer input</button>
@@ -145,12 +148,14 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Firstname" ng-model="userData.firstName">
+                        <input type="text" class="form-control" name='firstName' placeholder="Firstname" ng-model="userData.firstName" required>
+                        <span ng-show="profile.firstName.$touched && profile.firstName.$invalid">The firstName cannot be Empty.</span>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Lastname" ng-model="userData.lastName">
+                        <input type="text" class="form-control" name="lastName" placeholder="Lastname" ng-model="userData.lastName" required>
+                        <span ng-show="profile.firstName.$touched && profile.firstName.$invalid">The lastName cannot be Empty.</span>
                       </div>
                     </div>
                   </div>
@@ -158,15 +163,16 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="email" class="color-blue">Email</label>
-                        <input type="text" class="form-control" id="email" placeholder="" ng-model="userData.email" disabled>
+                        <input type="email" class="form-control" id="email" placeholder="" ng-model="userData.email">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group date-pick">
                         <label for="dob" class="color-blue">DOB</label>
                         <!-- <input type="date" class="form-control" id="dob"> -->
-                        <input type="text" class="form-control" ng-click="open1();" uib-datepicker-popup="{{format}}" ng-model="userData.dob" is-open="popup1.opened"
-                          datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
+                        <input type="text" class="form-control" placeholder="DOB" ng-click="open1();" uib-datepicker-popup="{{format}}" ng-model="userData.dob"
+                          is-open="popup1.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
+                        />
                       </div>
                     </div>
                   </div>
@@ -204,12 +210,13 @@
                               <option value="India">India</option>
                             </select>
                       </div>-->
-                      <ui-select ng-model="userData.homeCountry" theme="bootstrap">
+                      <ui-select ng-model="userData.homeCountry" theme="bootstrap" name="nationality" required>
                         <ui-select-match placeholder="Search">{{$select.selected.name}}</ui-select-match>
                         <ui-select-choices repeat="nation._id as nation in nationality | filter:$select.search" track by $index><img ng-src="{{nation.flag|uploadpath:30}}" width="30" class="mr10 v-mid inline-block" alt="{{nation.name}}">
                           <span class="color-light-grey" ng-bind="nation.name"></span>
                         </ui-select-choices>
                       </ui-select>
+                      <span ng-show="profile.nationality.$touched && profile.nationality.$invalid">Nationality cannot be Empty.</span>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -250,7 +257,8 @@
                   </div>
                   <div class="blog-link">
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Blog Link">
+                      <input id="inputUrl" type="url" name="url" class="form-control" placeholder="Blog Link" ng-model='blog_link'>
+                      <span ng-show="profile.url.$touched && profile.url.$invalid">The email is invalid.</span>
                     </div>
                   </div>
                 </div>
@@ -260,19 +268,19 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Favourite City" ng-model='favorite_city'>
+                      <input type="text" class="form-control" placeholder="Favourite City" ng-model='userData.favorite_city'>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Dream Destination" ng-model='dream_destination'>
+                      <input type="text" class="form-control" placeholder="Dream Destination" ng-model='userData.dream_destination'>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="clearfix mt20">
                 <div class="pull-right">
-                  <button type="submit" class="btn btn-pink btn-more" ng-click="eidtUserData(myCroppedImage);">Save</button>
+                  <button type="submit" class="btn btn-pink btn-more" ng-class="{'disabled' : !profile.$valid }" ng-click="editUserData(userData,1,profile.$valid);">Save</button>
                 </div>
               </div>
               </form>
@@ -284,7 +292,7 @@
               <div class="holiday-section">
                 <h4 class="color-blue setting-tab-heading">Your kind of a holiday</h4>
                 <ul>
-                  <li ng-repeat="holiday in chooseHoliday">
+                  <li ng-repeat="holiday in travelConfig.chooseHoliday">
                     <div class="select-holiday {{holiday.class}}" ng-click="holidayType($index)">
                       <figure>
                         <div class="holiday-imgholder">
@@ -301,7 +309,7 @@
               <div class="setting-usually-go">
                 <h4 class="color-blue setting-tab-heading">You usually go</h4>
                 <ul>
-                  <li ng-repeat="holiday in usuallyGo">
+                  <li ng-repeat="holiday in travelConfig.usuallyGo">
                     <div class="select-holiday {{holiday.class}}" ng-click="usuallyType($index)">
                       <figure>
                         <div class="holiday-imgholder">
@@ -318,7 +326,7 @@
               <div class="setting-prefer-travel">
                 <h4 class="color-blue setting-tab-heading">Preference of travel</h4>
                 <ul>
-                  <li ng-repeat="holiday in preferTravel" ng-click="travelType($index)">
+                  <li ng-repeat="holiday in travelConfig.preferTravel" ng-click="travelType($index)">
                     <div class="select-holiday {{holiday.class}}">
                       <figure>
                         <div class="holiday-imgholder">
@@ -335,7 +343,7 @@
               <div class="setting-ideal-holiday">
                 <h4 class="color-blue setting-tab-heading">Your ideal holiday type</h4>
                 <ul>
-                  <li ng-repeat="holiday in idealSelect" ng-click="idealType($index)">
+                  <li ng-repeat="holiday in travelConfig.idealSelect" ng-click="idealType($index)">
                     <div class="select-holiday {{holiday.class}}">
                       <figure>
                         <div class="holiday-imgholder">
@@ -350,7 +358,7 @@
               <!-- ideal holiday type end -->
               <div class="clearfix mt20">
                 <div class="pull-right">
-                  <button class="btn btn-pink btn-more">Save</button>
+                  <button class="btn btn-pink btn-more" ng-click="editUserData(travelConfig, 2,true)" ;>Save</button>
                 </div>
               </div>
             </div>
@@ -378,7 +386,7 @@
                 </div>
                 <div class="clearfix mt20">
                   <div class="pull-right">
-                    <button class="btn btn-pink btn-more">Save</button>
+                    <button class="btn btn-pink btn-more" ng-click="editUserData(userData, 3, true)" ;>Save</button>
                   </div>
                 </div>
               </form>
@@ -422,7 +430,7 @@
                 </div>
                 <div class="clearfix mt20">
                   <div class="pull-right">
-                    <button class="btn btn-pink btn-more">Save</button>
+                    <button class="btn btn-pink btn-more" ng-click="editUserData(userData, 4,true)" ;>Save</button>
                   </div>
                 </div>
               </form>
@@ -436,7 +444,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <div class="radio-select">
-                        <input type="radio" id="public" name="privacy" ng-model="userData.status" ng-value="public">
+                        <input type="radio" id="public" name="privacy" ng-model="userData.status" value="public">
                         <label for="public" class="color-blue">Public - Everyone</label>
                       </div>
                     </div>
@@ -444,7 +452,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <div class="radio-select">
-                        <input type="radio" id="private" name="privacy" ng-model="userData.status" ng-value="private">
+                        <input type="radio" id="private" name="privacy" ng-model="userData.status" value="private">
                         <label for="private" class="color-blue">Private - My Followers</label>
                       </div>
                     </div>
@@ -454,7 +462,7 @@
                   and Reviews.</p>
                 <div class="clearfix mt20">
                   <div class="pull-right">
-                    <button class="btn btn-pink btn-more">Save</button>
+                    <button class="btn btn-pink btn-more" ng-click="editUserData(userData.status, 5,true)" ;>Save</button>
                   </div>
                 </div>
               </form>

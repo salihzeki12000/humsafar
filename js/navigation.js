@@ -105,7 +105,7 @@ var navigationservice = angular.module('navigationservice', [])
       }, ]
     }];
 
-    return {
+    var returnVal = {
       getnav: function () {
         return navigation;
       },
@@ -125,14 +125,12 @@ var navigationservice = angular.module('navigationservice', [])
           method: "POST"
         }).success(callback).error(errCallback);
       },
-
       logout: function (callback, errCallback) {
         return $http({
           url: adminURL + "/user/logout",
           method: "POST"
         }).success(callback).error(errCallback);
       },
-
       getAllCountries: function (callback, errCallback) {
         return $http({
           url: adminURL + "/country/getAll",
@@ -146,7 +144,7 @@ var navigationservice = angular.module('navigationservice', [])
       searchCityByCountry: function (formData, callback) {
         var arr = {};
         console.log(formData);
-        var arr = _.omit(formData, ['cityVisited']);
+        arr = _.omit(formData, ['cityVisited']);
         console.log(arr);
 
         $http({
@@ -206,25 +204,87 @@ var navigationservice = angular.module('navigationservice', [])
           transformRequest: angular.identity
         }).success(callback);
       },
-      editUserData: function (userData, callback) {
+      editUserData: function (userData, status) {
+        // console.log(userData, status);
         var formData = _.clone(userData);
-        var temp = "";
-        if (userData.homeCity && userData.homeCity.description) {
-          console.log("changing homecity");
-          temp = userData.homeCity.description;
-          formData.homeCity = "";
-          formData.homeCity = temp;
+        var object = {};
+        switch (status) {
+          case 1:
+            console.log('on switch 1');
+            var temp = "";
+            if (userData.homeCity && userData.homeCity.description) {
+              console.log("changing homecity");
+              temp = userData.homeCity.description;
+              formData.homeCity = "";
+              formData.homeCity = temp;
+            }
+            if (userData.homeCountry && userData.homeCountry.name) {
+              console.log("changing homecountry");
+              temp = userData.homeCountry._id;
+              formData.homeCountry = "";
+              formData.homeCountry = temp;
+            }
+
+            console.log(formData, "after formating");
+            object = _.pick(formData, 'firstName', 'lastName', 'gender', 'homeCountry', 'homeCity', 'isBlogger', 'isPhotographer', 'favorite_city', 'dream_destination');
+            if (object.firstName === "" || object.lastName === "") {
+              object.firstName = object.firstName.trim();
+              object.lastName = object.lastName.trim();
+              object.name = object.firstName.concat(" ", object.lastName);
+            } else {
+              console.log("name cannot be empty");
+            }
+
+            console.log(object);
+            break;
+          case 2:
+            // console.log(userData);
+            object = {
+              'travelConfig': {
+                'holidayType': [],
+                'preferToTravel': [],
+                'usuallyGo': [],
+                'kindOfHoliday': []
+              }
+            };
+            var arrType = "";
+            _.each(userData, function (val, key) {
+              if (key == "chooseHoliday") {
+                arrType = "kindOfHoliday";
+              } else if (key == "usuallyGo") {
+                arrType = "usuallyGo";
+              } else if (key == "preferTravel") {
+                arrType = "preferToTravel";
+              } else if (key == "idealSelect") {
+                arrType = "holidayType";
+              }
+              list = _.filter(val, ['class', "active-holiday"]);
+              _.each(list, function (n) {
+                object.travelConfig[arrType].push(n.storeCaption);
+              });
+            });
+            console.log(object);
+            console.log('on switch 2');
+            break;
+          case 3:
+            console.log('on switch 3');
+            break;
+          case 4:
+            console.log('on switch 4');
+            break;
+          case 5:
+            console.log('on switch 5');
+            console.log(userData);
+            object.status = "public";
+            console.log(object);
+            break;
         }
-        if (userData.homeCountry && userData.homeCountry.name) {
-          console.log("changing homecountry");
-          temp = userData.homeCountry._id;
-          formData.homeCountry = "";
-          formData.homeCountry = temp;
-        }
-        if (userData.newProfilePicture) {
-          formData.profilePicture = userData.newProfilePicture;
-        }
-        console.log(formData, "after formating");
+        returnVal.saveUserData(object, function (data) {
+          console.log(data);
+        }, function (data) {
+          console.log(data);
+        });
       }
     };
+    return returnVal;
   });

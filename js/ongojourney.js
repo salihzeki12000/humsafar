@@ -1,7 +1,6 @@
 var ongojourney = angular.module('ongojourney', [])
 
   .factory('OnGoJourney', function ($http, $filter) {
-
     return {
       getOneJourney: function (formData, callback, errorCallback) {
         $http({
@@ -15,7 +14,6 @@ var ongojourney = angular.module('ongojourney', [])
           // header integration starts
           journey.kindOfJourneyIconsAddr = [];
           journey.buddiesCount = journey.buddies.length;
-
           journey.showRemainingCount = false;
           if (journey.buddiesCount >= 4) {
             journey.showRemainingCount = true;
@@ -45,7 +43,7 @@ var ongojourney = angular.module('ongojourney', [])
           }
           // header integration ends
           callback(journey);
-        })
+        });
       },
       editJourneyName: function (formData, callback) {
         $http({
@@ -1150,7 +1148,7 @@ ongojourney.filter('small', function () {
   }
 });
 
-firstapp.filter('category', function () {
+ongojourney.filter('category', function () {
   return function (input) {
     var returnVal = "";
     switch (input) {

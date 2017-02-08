@@ -1,5 +1,5 @@
 var bl = [];
-var navigationservice = angular.module('mylife', [])
+var mylife = angular.module('mylife', [])
 
   .factory('MyLife', function ($http) {
     return {
@@ -41,7 +41,6 @@ var navigationservice = angular.module('mylife', [])
         $http.post(adminURL + "/user/updateBucketListWeb", obj).success(callback).error(errCallback);
       },
       updateCountriesVisited: function (obj, callback, errCallback) {
-        console.log(obj);
         $http.post(adminURL + "/user/updateCountriesVisitedWeb", obj).success(callback).error(errCallback);
       },
       getCountryVisitedListWeb: function (callback) {
@@ -130,7 +129,7 @@ var navigationservice = angular.module('mylife', [])
           callback(data);
         });
       },
-      getAllJourney: function (callback, pageNo, errorCallback){
+      getAllJourney: function (callback, pageNo, errorCallback) {
         $http({
           url: adminURL + "/journey/myLifeJourneyWeb",
           method: "POST",
@@ -181,5 +180,77 @@ var navigationservice = angular.module('mylife', [])
           // callback(journeys);
         });
       },
+      getAllMoments: function (token, limit, type, times, callback) {
+        var obj = {
+          "token": token,
+          "limit": limit,
+          "type": type,
+          "times": times
+        };
+        $http({
+          url: adminURL + "/journey/myLifeMomentWeb",
+          data: obj,
+          method: "POST"
+        }).success(callback);
+      },
+      getTravelLifeMoments: function (type, pageNo, callback) {
+        var obj = {
+          "type": type,
+          "pagenumber": pageNo
+        };
+        $http({
+          url: adminURL + "/journey/myLifeMomentWeb",
+          data: obj,
+          method: "POST"
+        }).success(callback);
+      },
+      getPerMonthMoments: function (token, pageNo, limit, type, callback) {
+        var obj = {
+          "token": token,
+          "pagenumber": pageNo,
+          "limit": limit
+        };
+        if (type == 'local') {
+          obj.type = true;
+        } else if (type == 'all') {
+
+        }
+        console.log(obj);
+        $http({
+          url: adminURL + "/journey/getTokenMomentWeb",
+          data: obj,
+          method: "POST"
+        }).success(callback);
+      },
+      getJournItiMoments: function (_id, pagenumber, limit, flag, callback) {
+        var url = "";
+        var obj = {
+          "_id": _id,
+          "pagenumber": pagenumber,
+          "limit": limit
+        };
+        if (flag == 'itinerary') {
+          url = "/itinerary/getMedia";
+        } else if (flag == 'journey') {
+          url = "/journey/getMediaWeb";
+        }
+        $http({
+          url: adminURL + url,
+          data: obj,
+          method: "POST"
+        }).success(callback);
+      }
     };
   });
+
+mylife.filter('momentsDate', function () {
+  return function (input) {
+    if (input !== undefined) {
+      console.log(input);
+      var string = moment(input, "MM-YYYY").format('MMMM') + ", " + moment(input, "MM-YYYY").format('YYYY');
+      return string;
+    } else {
+      return;
+    }
+  };
+});
