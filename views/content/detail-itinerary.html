@@ -54,7 +54,7 @@
             <div class="fill-itinerary-detail" ng-init="countryIndex">
               <div class="itinerary-title">
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-sm-6">
                     <div class="itinerary-inputholder">
                       <input type="text" class="avenir-roman form-control" placeholder="Trip Title" ng-model="dItinerary.title">
                     </div>
@@ -126,7 +126,7 @@
                   <div class="itinerary-country-visited">
                     <div class="row">
                       <!-- new ui select dropdown country -->
-                      <div class="col-md-6">
+                      <div class="col-md-5 col-lg-6">
                         <div class="itinerary-inputholder input-country-visited">
                           <input type="text" class="form-control" ng-model="editCountry.name" ng-change="showCountry[countryPanel]=true" placeholder="Country Visited"></input>
                           <span class="itinerary-dropdown-icon">
@@ -147,7 +147,7 @@
                           </ui-select>-->
                         </div>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-md-7 col-lg-6">
                         <div class="itinerary-country-detail">
                           <div class="itinerary-from itinerary-month">
                             <label for="From">From</label>
@@ -260,8 +260,8 @@
                       <span class="close-city-x" ng-click="removeCity(countryPanel,cityPanel)"><i class="fa fa-times" ng-if="cityPanel>0"></i></span>
                     </div>
                     <div class="row">
-                      <div class="col-md-6">
-                        <div class="add-country clearfix">
+                      <div class="col-md-8">
+                        <div class="add-country add-city-country clearfix">
                           <button class="btn btn-pink btn-more" ng-click="addYourCity(countryPanel)">Add City</button>
                           <span class="add-city-span color-light-grey italic">
                             Add other cities visited in this country on this trip

@@ -46,7 +46,7 @@
       <div class="trip-pic-holder relate">
         <div class="trip-pic-view {{showClass}}">
           <p class="color-pink heading-gallery-name"><i class="fa fa-picture-o mr5"></i>Family Holiday 2013 Photos</p>
-          <div masonry class="masonry-main side-scroll-direction">
+          <div masonry preserve-order class="masonry-main side-scroll-direction">
             <div class="masonry-brick" ng-repeat="pic in photoGallery track by $index">
               <div class="gallery-imgholder">
                 <a href="{{pic}}"  fancybox-box rel="photoGallery"><img ng-src="{{pic}}" alt=""></a>
@@ -353,7 +353,7 @@
         <div class="blog-popular-itineraries">
           <div class="">
             <h4 class="color-blue avenir-roman text-center">You Can Also View Other Popular Itineraries</h4>
-            <div masonry class="blog-itineraries-main">
+            <div masonry preserve-order class="blog-itineraries-main">
               <div class="row">
                 <div class="masonry-brick col-md-4 col-sm-6" ng-repeat="life in travelLife" >
                   <div class="travel-life-part blog-post avenir-roman" ng-if="life.popItinerary">

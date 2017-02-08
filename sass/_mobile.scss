@@ -1,6 +1,6 @@
 @media screen and (max-width: 1400px) {
   //vectormap
-  .vector-map{ 
+  .vector-map{
   padding: 40px 20px 30px 20px;
     mappy svg {
   zoom: 0.8;
@@ -55,7 +55,7 @@
 .list-travel-view {
     margin-right: 2px;
 }
-  
+
   // my life
   .user-travel-detail {
     ul li {
@@ -149,7 +149,12 @@ li:last-child {
   .map-journey {
     display: none;
   }
-  .on-go-journey { background-color: rgba(0,0,0,0.4); }
+  .on-go-journey {
+    background-color: rgba(0,0,0,0.4);
+    .container-fluid{
+      padding: 0;
+    }
+  }
   .started-journey-card {
     margin-bottom: 50px;
     .travelling-journey-type, .journey-with { background-color: rgba(255,255,255,0.75); }
@@ -191,6 +196,9 @@ li:last-child {
     height: 300px;
   }
   // journey info strip
+  .journey-info-strip.get-otgstrip{
+    top: 0;
+  }
   .journey-info-strip {
     padding: 10px 15px 10px;
     position: relative;
@@ -206,7 +214,14 @@ li:last-child {
   // on the go journey page end
   // trip summary
   .trip-day-detail {
-    max-height: 150px;
+    max-height: initial;
+    min-height: initial;
+    .day{
+      min-height: initial;
+    }
+  }
+  .trip-summary-detail{
+    margin-top: 0;
   }
   // trip summary end
   // My Life
@@ -581,8 +596,8 @@ text-align: right;
     .pull-right { right: 15px; }
     .trip-list {
       li {
-        &:first-child { padding: 0 10px 0 0; }
-        padding: 0px 10px;
+        &:first-child { padding: 0 5px 0 0; }
+        padding: 0px 5px;
       }
     }
     .trip-info {
@@ -652,10 +667,30 @@ text-align: right;
     }
   }
   // jounrey info strip end
+  // journey video
+  .video-ongo-journey{
+    video{
+      width: 100%;
+    }
+  }
+  // journey video end
+  // comment and like Side Section
+  .like-side-sec{
+    padding: 25px 25px 0;
+  }
+  // comment and like Side Section END
   // on the go journey page end
   // trip summary
   .tripsummary-main {
     .container-fluid, .container { padding: 0; }
+  }
+  .trip-country{
+    li{
+      margin-bottom: 10px;
+    }
+  }
+  .trip-day-detail .trip-status{
+    padding: 20px 10px 1px;
   }
   // trip summary end
   .wish-country-visit { padding: 20px 0px 0; }
@@ -822,7 +857,7 @@ img {
 }
 // mylife journey sidefilter
 
-.filter-local-life{ 
+.filter-local-life{
   span {
     font-size: 16px;
     color: #a0a0a0;
@@ -903,7 +938,7 @@ img {
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
-  .home-slide{ 
+  .home-slide{
     .contact{ .contact-ab {
       .social-icons li {
     width: 50px;
@@ -1265,6 +1300,23 @@ p{
     i { font-size: 20px; }
   }
   .edit-journey-dropdown { width: 185px; }
+  // comment and like Side Section
+  .whole-card-comment{
+    width: 290px;
+  }
+  .comment-container .commenter-text{
+    p{
+      span{
+        display: block;
+      }
+    }
+  }
+
+  .like-side-sec{
+    width: 290px;
+    padding: 20px 15px 0;
+  }
+  // comment and like Side Section END
   // on the go journey page end
   // trip summary
   .trip-day-detail  {
@@ -1376,11 +1428,16 @@ margin-right: auto
 .itinerary-main .itinerary-holder .row-flex .col-flex .itinerary-imgholder.itinerary-detailed {
     min-height: 210px;
 }
-.video-gif-journey{ 
+.video-gif-journey{
       width: 260px;
   .videoplay-empty-journey {
     left: 12px;
 }
+}
+.activity-post{
+  .user-detail{
+    margin-left: 5px;
+  }
 }
 }
 // media query for 480px to 320px end

@@ -150,7 +150,7 @@
                           <a class="full-width block editor-photos btn-close btn-dark-blue" ng-click="showGallery($index);"><i class="fa fa-chevron-down mr5"></i>Close</a>
                         </div>
                         <div class="masonry-holder">
-                          <div class="masonry-editor-pic" masonry>
+                          <div class="masonry-editor-pic" masonry preserve-order>
                             <div class="masonry-brick" ng-repeat="img in editorGallery track by $index">
                               <div class="editor-gallery">
                                 <div class="gallery-image-holder">
@@ -270,7 +270,7 @@
         <div class="blog-popular-itineraries">
           <div class="">
             <h4 class="color-blue avenir-roman text-center">You Can Also View Other Popular Itineraries</h4>
-            <div masonry class="blog-itineraries-main">
+            <div masonry preserve-order class="blog-itineraries-main">
               <div class="row">
                 <div class="masonry-brick col-md-4 col-sm-6" ng-repeat="life in travelLife" >
                   <div class="travel-life-part blog-post avenir-roman" ng-if="life.popItinerary">
