@@ -1,0 +1,86 @@
+<div class="post-main">
+  <!-- header local life-->
+  <div class="heading-local-life avenir-roman">
+    <p class="color-light-grey" ng-bind-html="localongo.localpostString"></p>
+    <p class="color-light-grey m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{localongo.UTCModified | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i><span class="mr5">{{localongo.UTCModified | date : 'hh:mm a'}}</span></p>
+    <div class="location circle-rounded bg-dark-cyan pointer">
+      <img src="img/location-blue.png" alt="" height="18">
+    </div>
+  </div>
+  <!-- header local life end-->
+  <!-- mainpost local life -->
+  <div class="local-post-main">
+    <!-- post img and video img holder -->
+    <div class="hide" ng-if="localongo.photos && localongo.photos.length == 0 && localongo.showMap && localongo.checkIn && localongo.checkIn.lat">
+    </div>
+    <div class="post-imgholder" ng-click="openLocalimg()"  ng-if="localongo.photos.length>0 && localongo.onDisplay=='photos'">
+      <img ng-src="{{localongo.photosVideos[index].name|uploadpath}}" alt="" class="img-responsive">
+    </div>
+    <div class="post-video-holder" ng-if="localongo.videos.length>0 && localongo.onDisplay=='videos'">
+      <video poster="{{localongo.photosVideos[index].thumbnail|uploadpath}}" controls="controls">
+        <source src="{{localongo.photosVideos[index].name|trusted}}"  type="video/mp4">
+      </video>
+    </div>
+    <!-- post img and video img holder -->
+    <!-- related images if less then 5 -->
+    <div class="post-imgholder-related" ng-if="localongo.photosVideos.length>1 && localongo.photosVideos.length <=5">
+      <div class="related-postholder inline-block" ng-repeat="related in localongo.photosVideos track by $index">
+        <img ng-src="{{related.name|uploadpath}}" alt="" class="img-responsive" ng-if="localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail" ng-click="changeView($index,'photos')">
+        <img ng-src="{{related.thumbnail|uploadpath}}" alt="" class="img-responsive" ng-if="!localongo.photosVideos[$index] && !localongo.photosVideos[$index].thumbnail" ng-click="changeView($index,'videos')">
+      </div>
+    </div>
+    <!-- related images if less then 5 end -->
+    <!-- related images flexslider more then 5 -->
+    <div class="local-post-slider" ng-if="localongo.photosVideos.length >5">
+      <flex-slider class="carousel" flex-slide="relatedslide in localongo.photosVideos track by $index" item-width="136" animation="slide" item-margin="15" control-nav="false" mousewheel="true">
+        <li>
+          <div class="related-postholder">
+            <img ng-src="{{relatedslide.name|uploadpath}}" alt="" class="img-responsive">
+          </div>
+        </li>
+        </flex-slider>
+    </div>
+    <!-- related images flexslider more then 5 end-->
+  </div>
+  <!-- mainpost local life end-->
+    <!-- footer local life -->
+    <div class="post-social-type">
+      <div class="post-social-item clearfix">
+        <div class="pull-left">
+          <div class="">
+            <ul>
+              <li><a href="">
+                <i class="fa fa-heart-o color-blue" ng-class="localongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likeLocalPost(localongo._id,localongo.uniqueId)">
+                </i></a><span></span></li>
+              <li>
+                <a href=""><img src="img/comments.png" alt="" height="22"></a>
+              </li>
+              <li>
+                <a href=""><img src="img/share.png" alt="" height="22"></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="pull-right">
+          <div class="">
+            <span><img src="img/options.png" alt="" height="18"></span>
+          </div>
+        </div>
+      </div>
+      <div class="post-socail-reviews">
+        <div class="clearfix">
+          <div class="pull-left">
+            <span class="color-blue mr20"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{localongo.likeCount}}</b>Likes</span>
+            <div class="rating-localpost inline-block">
+              <span class="color-blue font-bold mr5">Rating:</span>
+              <uib-rating ng-model="rate" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></uib-rating>
+            </div>
+          </div>
+          <div class="pull-right">
+            <img ng-src="{{post.travelledIcon}}" alt="" height="25">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- footer local life end-->
+  </div>

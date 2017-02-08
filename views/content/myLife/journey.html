@@ -4,7 +4,7 @@
     <div class="all-profile-detail">
       <div class="bg-white">
         <!-- journey travel-life -->
-        <div class="journey-tabs" ng-hide="showTravellife">
+        <div class="journey-tabs" ng-show="showTravellife">
           <!-- tabs -->
           <div class="profile-tabs" id="tabs">
             <span class="first-strip"></span>
@@ -30,7 +30,7 @@
                   </div>
                 </div>
                 <div class="travel-life-btn inline-block mt5 ml20 mr20">
-                  <div class="pointer" ng-click="showTravellife = true;buildNow();">
+                  <div class="pointer" ng-click="getlocalLife(); buildNow();">
                     <span class="btn-tab"></span>
                     <span>Local Life</span>
                   </div>
@@ -90,13 +90,13 @@
             </div>
           </div>
           <!-- user logged for first time end -->
-          <div class="container">
-            <div class="masonry-detail" ng-show="hasJourney" infinite-scroll="getMore()" infinite-scroll-disabled="scroll.busy" infinite-scroll-distance='1'>
-              <div masonry >
-                <div class="row">
-                  <div class="col-lg-4 col-md-6 col-sm-6 masonry-brick " ng-repeat="life in travelLife  track by $index">
+            <div class="container">
+              <div class="masonry-detail" ng-show="hasJourney" infinite-scroll="getMore()"   infinite-scroll-disabled="scroll.busy" infinite-scroll-distance='1'>
+                <div masonry preserve-order>
+                  <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6 masonry-brick " ng-repeat="life in   travelLife  track by $index">
                     <!--journey card -->
-                    <div class="journey-masonry-brick {{life.type}}">
+                    <div class="journey-masonry-brick" ng-if="life.type=='ended-journey' || life.type=='on-the-go-journey'">
                       <div class="travel-life-part avenir-roman">
                         <div class="travel-journey-heading">
                           <p ng-hide="life.onJourney">{{life.heading}}</p>
@@ -313,14 +313,14 @@
                     </div>
                     <!--itinerary card end-->
                   </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         <!-- end journey travel-life -->
         <!-- journey local life -->
-        <div class="journey-tabs" ng-show="showTravellife">
+        <div class="journey-tabs" ng-hide="showTravellife">
           <!-- tabs -->
           <div class="profile-tabs">
             <span class="first-strip"></span>
@@ -339,7 +339,7 @@
             <div class="clearfix">
               <div class="pull-left">
                 <div class="travel-life-btn inline-block mt5 ml20 mr20">
-                  <div class="pointer" ng-click="showTravellife = false">
+                  <div class="pointer" ng-click="viewTravelLife();">
                     <span class="btn-tab"></span>
                     <span>Travel Life</span>
                   </div>
@@ -367,7 +367,7 @@
             </div>
           </div>
           <!-- user logged for first time local life-->
-          <div class="empty-profile-journey">
+          <div class="empty-profile-journey" ng-show="showLocalLife">
             <div class="row">
               <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10">
                 <div class="row">
@@ -398,14 +398,14 @@
             </div>
           </div>
           <!-- user logged for first time local life end -->
-          <div class="local-life-main">
+          <div class="local-life-main" ng-hide="showLocalLife">
             <div class="overlay-filter" ng-class="{ 'fliter-open': isopen}" ng-click="openMyLifeFilter()"></div>
             <div class="inline-block filter-local-life avenir-roman" ng-class="{ 'fliter-open': isopen} ">
               <form action="">
                 <div class="clearfix pt10 pl20 pr20">
                   <div class="pull-right visible-xs" ng-click="openMyLifeFilter()">
                     <span class="clear-all pointer pl20">
-                      <i class="fa fa-times-circle-o fnt-20" aria-hidden="true"></i>
+                      <i class="fa fa-times-circle-o fnt-20"></i>
                     </span>
                   </div>
                   <div class="pull-right">
@@ -417,56 +417,28 @@
                   <span>Month's</span>
                   <div class=" custom-select custom-select-local">
                     <select class="" name="">
-                      <option>May 2016</option>
+                      <option value="" selected>Select Month</option>
+                      <option ng-repeat="month in localDate track by $index" ng-click="getByFilter(month,'date')">{{month}}</option>
                     </select>
+                    <ul>
+                      <li ng-repeat="month in localDate track by $index" ng-click=" getByFilter(month,'date')">{{month}}</li>
+                    </ul>
                   </div>
                 </div>
                 <!-- filter-checkin -->
                 <div class="checkin-filter">
                   <span>Check In's</span>
-                  <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="beaches">
-                    <label for="beaches">Beaches</label>
+                  <div class="local-filter-checkbox custom-checkbox" ng-repeat="catType in localCategory track by $index">
+                    <input type="checkbox" id="{{catType.name}}" ng-model="localFilter.catType" checked="{{catType.checked}}">
+                    <label for="{{catType.name}}" ng-click="getByFilter(catType,'checkIn',$index)">{{catType.name}}</label>
                   </div>
-                  <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="airport">
-                    <label for="airport">airport</label>
-                  </div>
-                  <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="Hotels">
-                    <label for="Hotels">Hotels &amp; Accommodation</label>
-                  </div>
-                  <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="Restaurants">
-                    <label for="Restaurants">Restaurants &amp; Bars</label>
-                  </div>
-                  <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="Parks">
-                    <label for="Parks">Natures &amp; Parks</label>
-                  </div>
-                  <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="Landmarks">
-                    <label for="Landmarks">Sights &amp; Landmarks</label>
-                  </div>
-                  <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="Museums">
-                    <label for="Museums">Museums &amp; Galleries</label>
-                  </div>
-                  <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="Religious">
-                    <label for="Religious">Religious</label>
-                  </div>
-                  <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="Shopping">
-                    <label for="Shopping">Shopping</label>
-                  </div>
-                  <span class="checkin-more pointer">More</span>
+                  <!-- <span class="checkin-more pointer">More</span> -->
                 </div>
                 <!-- rating-filter -->
                 <div class="rating-filter">
                   <span>Rating</span>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="five-star">
+                    <input type="checkbox" id="five-star" ng-click="getByFilter('5','rating');">
                     <label for="five-star">
                       <span>
                         <i class="fa fa-star"></i>
@@ -478,7 +450,7 @@
                     </label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="four-star">
+                    <input type="checkbox" id="four-star" ng-click="getByFilter('4','rating')">
                     <label for="four-star">
                       <span>
                         <i class="fa fa-star"></i>
@@ -490,7 +462,7 @@
                     </label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="three-star">
+                    <input type="checkbox" id="three-star" ng-click="getByFilter('3','rating')">
                     <label for="three-star">
                       <span>
                         <i class="fa fa-star"></i>
@@ -502,7 +474,7 @@
                     </label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="two-star">
+                    <input type="checkbox" id="two-star" ng-click="getByFilter('2','rating')">
                     <label for="two-star">
                       <span>
                         <i class="fa fa-star"></i>
@@ -513,8 +485,8 @@
                       </span>
                     </label>
                   </div>
-                  <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="one-star">
+                  <div class="local-filter-checkbox custom-checkbox" >
+                    <input type="checkbox" id="one-star" ng-click="getByFilter('1','rating')">
                     <label for="one-star">
                       <span>
                         <i class="fa fa-star"></i>
@@ -527,17 +499,17 @@
                   </div>
                 </div>
                 <!-- more-filter-photo video thought -->
-                <div class="more-filter">
+                <div class="more-filter" >
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="photo">
+                    <input type="checkbox" id="photo" ng-click="getByFilter(localFilterPost,'photos')">
                     <label for="photo">Photos</label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="video">
+                    <input type="checkbox" id="video"  ng-click="getByFilter(localFilterPost,'videos')">
                     <label for="video">Videos</label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="thought">
+                    <input type="checkbox" id="thought" ng-click="getByFilter(localFilterPost,'thoughts')">
                     <label for="thought">Thoughts</label>
                   </div>
                 </div>
@@ -574,66 +546,12 @@
                     </div>
                   </div>
                 </div>
-                <div class="scroll-local-life scrollme" ng-scrollbar rebuild-on="rebuild:me">
+                <div class="scroll-local-life scrollme" ng-scrollbar rebuild-on="rebuild:me" rebuild-on-resize>
                   <div class="local-post">
-                    <div class="post-main" ng-repeat="post in localLife">
-                      <div class="heading-local-life avenir-roman">
-                        <p class="color-light-grey">{{post.heading}}</p>
-                        <p class="color-light-grey m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i>                          <span class="mr5">{{post.timestampHour}}</span></p>
-                        <div class="location circle-rounded bg-dark-cyan pointer">
-                          <img src="img/location-blue.png" alt="" height="18">
-                        </div>
-                      </div>
-                      <div class="post-imgholder" ng-click="openLocalimg(post);">
-                        <img ng-src="{{post.imgWall}}" alt="" class="img-responsive">
-                      </div>
-                      <div class="local-post-slider">
-                        <flex-slider class="carousel" flex-slide="related in post.postSlider track by $index" item-width="136" animation="slide"
-                          item-margin="15" control-nav="false" mousewheel="true">
-                          <li>
-                            <div class="related-postholder">
-                              <img ng-src="{{related.imgRelated}}" alt="" class="img-responsive">
-                            </div>
-                          </li>
-                          </flex-slider>
-                      </div>
-                      <div class="post-social-type">
-                        <div class="post-social-item clearfix">
-                          <div class="pull-left">
-                            <div class="">
-                              <ul>
-                                <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
-                                <li>
-                                  <a href=""><img src="img/comments.png" alt="" height="22"></a>
-                                </li>
-                                <li>
-                                  <a href=""><img src="img/share.png" alt="" height="22"></a>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                          <div class="pull-right">
-                            <div class="">
-                              <span><img src="img/options.png" alt="" height="18"></span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="post-socail-reviews">
-                          <div class="clearfix">
-                            <div class="pull-left">
-                              <span class="color-blue mr20"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{post.likes}}</b>Likes</span>
-                              <div class="rating-localpost inline-block">
-                                <span class="color-blue font-bold mr5">Rating:</span>
-                                <uib-rating ng-model="rate" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></uib-rating>
-                              </div>
-                            </div>
-                            <div class="pull-right">
-                              <img ng-src="{{post.travelledIcon}}" alt="" height="25">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <!-- local life data -->
+                    <post-local-life ng-repeat="localPost in localLifeJourney track by $index" ongolocal="localPost">
+                  </post-local-life>
+                    <!-- local life data end-->
                   </div>
                 </div>
               </div>
