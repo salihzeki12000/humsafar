@@ -239,6 +239,38 @@ var mylife = angular.module('mylife', [])
           data: obj,
           method: "POST"
         }).success(callback);
+      },
+      getAllReviews: function (type, pageNo, callback) {
+        var obj = {
+          "type": type,
+          "pagenumber": pageNo
+        };
+        $http({
+          url: adminURL + "/journey/myLifeReviewWeb",
+          data: obj,
+          method: "POST"
+        }).success(callback);
+      },
+      getReviewByCountryOrLocalCity: function (_id, callback) {
+        $http({
+          url: adminURL + "/post/getReviewByLocWeb",
+          data: {
+            "country": _id
+          },
+          method: "POST"
+        }).success(callback);
+      },
+      getReviewsByCities: function (countryId, cityId, pageNo, callback) {
+        var obj = {
+          "country": countryId,
+          "city": cityId,
+          "pagenumber": pageNo
+        };
+        $http({
+          url: adminURL + "/post/getReviewsWeb",
+          data: obj,
+          method: "POST"
+        }).success(callback);
       }
     };
   });

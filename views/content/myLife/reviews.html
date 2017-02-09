@@ -19,21 +19,21 @@
           </div>
           <!-- end tabs -->
           <!-- reviews view tab -->
-          <div class="moments-tab review-tab" ng-init="reviewView=1">
+          <div class="moments-tab review-tab">
             <!-- back button -->
             <!--<div class="pull-right">
-              <button class="btn btn-blue-outline btn-more" ng-click="showMonthView();">Back</button>
+              <button class="btn btn-blue-outline btn-more" ng-click="showMonthView();">Back</button> 
             </div>-->
             <!-- back button end -->
-            <div class="btn-view-moments btn-view-review pointer" ng-click="reviewView = 1">
+            <div class="btn-view-moments btn-view-review pointer" ng-click="changeReviewTypeView(1)">
               <span class="btn-tab" ng-class="{'active-btn-all': reviewView ==1}"></span>
               <span>All</span>
             </div>
-            <div class="btn-view-moments btn-view-review pointer" ng-click="reviewView = 2">
+            <div class="btn-view-moments btn-view-review pointer" ng-click="changeReviewTypeView(2,'viewTravelCountry')">
               <span class="btn-tab" ng-class="{'active-btn-travel': reviewView ==2}"></span>
               <span>Travel Life</span>
             </div>
-            <div class="btn-view-moments btn-view-review pointer" ng-click="reviewView = 3">
+            <div class="btn-view-moments btn-view-review pointer" ng-click="changeReviewTypeView(3,'viewLocalCountry')">
               <span class="btn-tab" ng-class="{'active-btn-local': reviewView ==3}"></span>
               <span>Local Life</span>
             </div>
@@ -44,188 +44,193 @@
               <button class="btn btn-back">Back</button>
             </div> -->
           </div>
-          <!-- reviews view tab end -->
-          <div class="moment-view review-main avenir-roman">
-            <!-- review all view -->
-            <div class="see-review" ng-show="reviewView == 1 ">
-              <!-- review empty all view profile user login for first time  -->
-              <div class="empty-review-all empty-profile-review text-center">
-                <div class="row">
-                  <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
-                    <h3 class="color-pink empty-title">Relive Y​our Storyline</h3>
-                    <p class="empty-descp">Rate the places, restaurants, cuisines, theatres, parks, museums, and more, when you check-in. Jot down your thoughts and feelings about them.</p>
-                  </div>
-                </div>
-              </div>
-              <!-- review empty all view profile user login for first time -->
-              <div class="review-all-life" ng-repeat="view in reviewAll">
-                <div class="review-travel-life" ng-show="view.reviewLocation">
-                  <div class="heading-review clearfix">
-                    <h3 class="place-name pull-left m-clear color-blue">{{view.locationName}}</h3>
-                    <img ng-src="{{view.travelType}}" alt="" height="30" class="pull-right">
-                  </div>
-                  <div class="rate-location">
-                    <p class="color-cyan m-clear inline-block avenir-light" ng-click="getReview();">Rate this now</p>
-                    <div class="travel-life-rating">
-                      <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
-                      <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
-                      <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
-                      <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
+          <div class="container">
+            <!-- reviews view tab end -->
+            <div class="moment-view review-main avenir-roman">
+              <!-- review all view -->
+              <div class="see-review" ng-if="reviewView == 1" infinite-scroll="getAllReviews(reviewAll)">
+                <!-- review empty all view profile user login for first time  -->
+                <div class="empty-review-all empty-profile-review text-center">
+                  <div class="row">
+                    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
+                      <h3 class="color-pink empty-title">Relive Y​our Storyline</h3>
+                      <p class="empty-descp">Rate the places, restaurants, cuisines, theatres, parks, museums, and more, when you check-in. Jot
+                        down your thoughts and feelings about them.</p>
                     </div>
                   </div>
-                  <div class="mt10 review-time">
-                    <p class="m-clear color-light-grey"><i class="fa fa-calendar mr5"></i><span class="mr5">{{view.timestampDate}}</span> | <i class="fa fa-clock-o ml5 mr5"></i> <span>{{view.timestampHour}}</span>, <span>{{view.city}}</span>, <span>{{view.country}}</span></p>
-                  </div>
+                  {{reviewAll.length}}
                 </div>
-                <div class="review-local-life" ng-hide="view.reviewLocation">
-                  <div class="heading-review clearfix">
-                    <h3 class="place-name pull-left m-clear color-blue">{{view.locationName}}</h3>
-                    <img ng-src="{{view.travelType}}" alt="" height="30" class="pull-right">
-                  </div>
-                  <div class="rate-location">
-                    <p class="color-pink m-clear inline-block avenir-light" ng-click="getReview();">Rate this now</p>
-                    <div class="travel-life-rating local-life-rating">
-                      <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
-                      <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
-                      <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
-                      <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
+                <!-- review empty all view profile user login for first time -->
+                <div class="review-all-life" ng-repeat="view in reviewAll.arr">
+                  <div class="review-travel-life">
+                    <div class="heading-review clearfix">
+                      <h3 class="place-name pull-left m-clear color-blue">{{view.checkIn.location}}</h3>
+                      <img ng-src="{{view.travelType}}" alt="" height="30" class="pull-right">
+                    </div>
+                    <div class="rate-location">
+                      <div class="color-cyan m-clear inline-block avenir-light" ng-click="getReview();" ng-if="view.review.length==0">Rate this now</div>
+                      <div class="travel-life-rating" ng-if="!(view.review.length==0)">
+                        <span class="star-rating" ng-repeat="time in view.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':view.type=='local-life','color-pink':view.type=='travel-life'}"></i></span>
+                        <span class="star-rating" ng-repeat="time in view.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
+                        <!--<span class="star-rating"><i class="fa fa-star"></i></span>
+                        <span class="star-rating"><i class="fa fa-star"></i></span>
+                        <span class="star-rating"><i class="fa fa-star"></i></span>-->
+                      </div>
+                    </div>
+                    <div class="mt10 review-time">
+                      <p class="m-clear color-light-grey"><i class="fa fa-calendar mr5"></i><span class="mr5">{{view.UTCModified|formatDate:'date'}}</span> |
+                        <i class="fa fa-clock-o ml5 mr5"></i><span>{{view.UTCModified|formatDate:'time'}}</span>,
+                        <span>{{view.checkIn.city}}</span>, <span>{{view.checkIn.country}}</span></p>
                     </div>
                   </div>
-                  <div class="mt10 review-time">
-                    <p class="m-clear color-light-grey"><i class="fa fa-calendar mr5"></i><span class="mr5">{{view.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{view.timestampHour}}</span> <span>{{view.city}}</span>, <span>{{view.country}}</span></p>
-                  </div>
+                  <!--<div class="review-local-life" ng-hide="view.reviewLocation">
+                    <div class="heading-review clearfix">
+                      <h3 class="place-name pull-left m-clear color-blue">{{view.locationName}}</h3>
+                      <img ng-src="{{view.travelType}}" alt="" height="30" class="pull-right">
+                    </div>
+                    <div class="rate-location">
+                      <p class="color-pink m-clear inline-block avenir-light" ng-click="getReview();">Rate this now</p>
+                      <div class="travel-life-rating local-life-rating">
+                        <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
+                        <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
+                        <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
+                        <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
+                      </div>
+                    </div>
+                    <div class="mt10 review-time">
+                      <p class="m-clear color-light-grey"><i class="fa fa-calendar mr5"></i><span class="mr5">{{view.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i>                        <span>{{view.timestampHour}}</span> <span>{{view.city}}</span>, <span>{{view.country}}</span></p>
+                    </div>
+                  </div>-->
                 </div>
               </div>
-            </div>
-            <!-- review all view end -->
-      <div class="container">
-            <!-- review travel-life-->
-            <div class="review-travel-view" ng-show="reviewView == 2">
-              <!-- review empty travel view profile user login for first time  -->
-              <div class="empty-review-travel empty-profile-review text-center">
-                <div class="row">
-                  <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
-                    <h3 class="color-pink empty-title">The World I​s Your Oyster</h3>
-                    <p class="empty-descp">A five star or a four star? What does that historical monument qualify for? Rate it and write a review. Help others with your rating and review.</p>
+              <!-- review all view end -->
+              <!-- review travel-life-->
+              <div class="review-travel-view" ng-if="reviewView == 2">
+                <!-- review empty travel view profile user login for first time  -->
+                <div class="empty-review-travel empty-profile-review text-center">
+                  <div class="row">
+                    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
+                      <h3 class="color-pink empty-title">The World I​s Your Oyster</h3>
+                      <p class="empty-descp">A five star or a four star? What does that historical monument qualify for? Rate it and write a review.
+                        Help others with your rating and review.</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <!-- review empty travel view profile user login for first time -->
-              <div class="list-travel-view" ng-repeat="review in travelReview" ng-hide="viewtravelCountry">
-                <div class="review-travel-main relate pointer" ng-click="showtravelCountry();">
-                  <div class="review-backimgholder">
-                    <img ng-src="{{review.img}}" alt="" class="img-responsive">
-                  </div>
-                  <div class="review-frontimgholder relate">
-                    <img ng-src="img/review-travel.png" alt="" class="pointer img-responsive">
-                    <h3 class="country-name">{{review.countryName}}{{showCountry}}</h3>
+                <!-- review empty travel view profile user login for first time -->
+                <div class="list-travel-view" ng-repeat="review in reviewTravelLife.arr" ng-hide="viewTravelCountry">
+                  <div class="review-travel-main relate pointer" ng-click="showAccordian(review,'viewTravelCountry');">
+                    <div class="review-backimgholder">
+                      <img ng-src="{{review.countryCoverPhoto|uploadpath:120:120:cover}}" alt="" class="img-responsive">
+                    </div>
+                    <div class="review-frontimgholder relate">
+                      <img ng-src="img/review-travel.png" alt="" class="pointer img-responsive">
+                      <h3 class="country-name">{{review.name}}</h3>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <!-- inside country -->
-              <div class="" ng-show="viewtravelCountry">
-                <div class="travel-single-view">
-                  <div class="heading-single-view">
-                    <h2 class="color-pink font-bold m-clear">India</h2>
-                  </div>
-                  <div class="city-accordion">
-                    <uib-accordion close-others="oneAtATime">
-                      <uib-accordion-group ng-repeat="city in travelCity" is-open="status.open1">
-                        <uib-accordion-heading class="clearfix">
-                          <i class="pull-right fa mt5 color-blue" ng-class="{'fa-minus': status.open1, 'fa-plus': !status.open1}"></i>
-                          <h3 class="color-blue m-clear">{{city.cityName}}</h3>
-                        </uib-accordion-heading>
-                        <div class="accordion-detail" ng-repeat="visit in city.visitedCity track by $index">
-                          <div class="review-local-life">
-                            <div class="heading-review clearfix">
-                              <h3 class="place-name pull-left m-clear color-blue">{{visit.locationName}}</h3>
-                              <img ng-src="{{visit.travelType}}" alt="" height="30" class="pull-right">
-                            </div>
-                            <div class="rate-location">
-                              <p class="color-pink m-clear inline-block avenir-light">Rate this now</p>
-                              <div class="travel-life-rating local-life-rating">
-                                <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
-                                <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
-                                <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
-                                <span class="star-rating"><i class="fa fa-star color-pink"></i></span>
+                <!-- inside country -->
+                <div class="" ng-show="viewTravelCountry">
+                  <div class="travel-single-view">
+                    <div class="heading-single-view">
+                      <h2 class="color-pink font-bold m-clear">{{citiesTravelled.countryName}}</h2>
+                    </div>
+                    <div class="city-accordion">
+                      <uib-accordion close-others="oneAtATime">
+                        <uib-accordion-group ng-repeat="city in citiesTravelled.cities" is-open="status.open1" ng-click="getReviewsByCities(city,status.open1)">
+                          <uib-accordion-heading class="clearfix">
+                            <i class="pull-right fa mt5 color-blue" ng-class="{'fa-minus': status.open1, 'fa-plus': !status.open1}"></i>
+                            <h3 class="color-blue m-clear">{{city.name}}</h3>
+                          </uib-accordion-heading>
+                          <div class="accordion-detail" ng-repeat="visit in city.accordReview track by $index">
+                            <div class="review-local-life">
+                              <div class="heading-review clearfix">
+                                <h3 class="place-name pull-left m-clear color-blue">{{visit.checkIn.location}}</h3>
+                                <img ng-src="{{visit.travelType}}" alt="" height="30" class="pull-right">
+                              </div>
+                              <div class="rate-location">
+                                <p class="color-pink m-clear inline-block avenir-light" ng-if="visit.review.length==0">Rate this now</p>
+                                <div class="travel-life-rating local-life-rating" ng-if="!(visit.review.length==0)">
+                                  <span class="star-rating" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':visit.type=='local-life','color-pink':visit.type=='travel-life'}"></i></span>
+                                  <span class="star-rating" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
+                                </div>
+                              </div>
+                              <div class="mt10 review-time">
+                                <p class="m-clear color-light-grey"><i class="fa fa-calendar mr5"></i><span class="mr5">{{visit.UTCModified|formatDate:'date'}}</span>                                  | <i class="fa fa-clock-o mr5  ml5"></i> <span>{{visit.UTCModified|formatDate:'time'}}</span></p>
                               </div>
                             </div>
-                            <div class="mt10 review-time">
-                              <p class="m-clear color-light-grey"><i class="fa fa-calendar mr5"></i><span class="mr5">{{visit.timestampDate}}</span> | <i class="fa fa-clock-o mr5  ml5"></i> <span>{{visit.timestampHour}}</span></p>
-                            </div>
                           </div>
-                        </div>
-                      </uib-accordion-group>
-                    </uib-accordion>
+                        </uib-accordion-group>
+                      </uib-accordion>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- review travel-life end-->
-            <!-- review local-life-->
-            <div class="review-travel-view review-local-view" ng-show="reviewView == 3">
-              <!-- review empty local view profile user login for first time  -->
-              <div class="empty-review-local empty-profile-review text-center">
-                <div class="row">
-                  <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
-                    <h3 class="color-pink empty-title">A Touch Of Your Daily Dose</h3>
-                    <p class="empty-descp">Now how about rating and writing a super review for that newly-opened restaurant in your town? Wherever you go, click on a star and pen down your experiences. </p>
+              <!-- review travel-life end-->
+              <!-- review local-life-->
+              <div class="review-travel-view review-local-view" ng-if="reviewView == 3">
+                <!-- review empty local view profile user login for first time  -->
+                <div class="empty-review-local empty-profile-review text-center">
+                  <div class="row">
+                    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
+                      <h3 class="color-pink empty-title">A Touch Of Your Daily Dose</h3>
+                      <p class="empty-descp">Now how about rating and writing a super review for that newly-opened restaurant in your town? Wherever
+                        you go, click on a star and pen down your experiences. </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <!-- review empty local view profile user login for first time -->
-              <div class="list-travel-view list-local-view" ng-repeat="review in travelReview" ng-hide="viewlocalCountry">
-                <div class="review-travel-main pointer relate" ng-click="showlocalCountry();">
-                  <div class="review-backimgholder">
-                    <img ng-src="{{review.img}}" alt="" class="img-responsive">
-                  </div>
-                  <div class="review-frontimgholder relate">
-                    <img ng-src="img/review-local.png" alt="" class="img-responsive">
-                    <h3 class="country-name">{{review.countryName}}</h3>
+                <!-- review empty local view profile user login for first time -->
+                <div class="list-travel-view list-local-view" ng-repeat="review in reviewLocalLife.arr" ng-hide="viewLocalCountry">
+                  <div class="review-travel-main pointer relate" ng-click="showAccordian(review,'viewLocalCountry');">
+                    <div class="review-backimgholder">
+                      <img ng-src="{{review.img}}" alt="" class="img-responsive">
+                    </div>
+                    <div class="review-frontimgholder relate">
+                      <img ng-src="img/review-local.png" alt="" class="img-responsive">
+                      <h3 class="country-name">{{review.countryName}}</h3>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <!-- inside country -->
-              <div class="" ng-show="viewlocalCountry">
-                <div class="travel-single-view">
-                  <div class="heading-single-view">
-                    <h2 class="color-pink font-bold m-clear color-cyan">India</h2>
-                  </div>
-                  <div class="city-accordion">
-                    <uib-accordion close-others="oneAtATime">
-                      <uib-accordion-group ng-repeat="city in travelCity" is-open="status.open1">
-                        <uib-accordion-heading class="clearfix">
-                          <i class="pull-right fa mt5 color-blue" ng-class="{'fa-minus': status.open1, 'fa-plus': !status.open1}"></i>
-                          <h3 class="color-blue m-clear">{{city.cityName}}</h3>
-                        </uib-accordion-heading>
-                        <div class="accordion-detail" ng-repeat="visit in city.visitedCity track by $index">
-                          <div class="review-local-life">
-                            <div class="heading-review clearfix">
-                              <h3 class="place-name pull-left m-clear color-blue">{{visit.locationName}}</h3>
-                              <img ng-src="{{visit.travelType}}" alt="" height="30" class="pull-right">
-                            </div>
-                            <div class="rate-location">
-                              <p class="color-cyan m-clear inline-block avenir-light">Rate this now</p>
-                              <div class="travel-life-rating local-life-rating">
-                                <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
-                                <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
-                                <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
-                                <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
+                <!-- inside country -->
+                <div class="" ng-show="viewLocalCountry">
+                  <div class="travel-single-view">
+                    <div class="heading-single-view">
+                      <h2 class="color-pink font-bold m-clear color-cyan">India</h2>
+                    </div>
+                    <div class="city-accordion">
+                      <uib-accordion close-others="oneAtATime">
+                        <uib-accordion-group ng-repeat="city in travelCity" is-open="status.open1">
+                          <uib-accordion-heading class="clearfix">
+                            <i class="pull-right fa mt5 color-blue" ng-class="{'fa-minus': status.open1, 'fa-plus': !status.open1}"></i>
+                            <h3 class="color-blue m-clear">{{city.cityName}}</h3>
+                          </uib-accordion-heading>
+                          <div class="accordion-detail" ng-repeat="visit in city.visitedCity track by $index">
+                            <div class="review-local-life">
+                              <div class="heading-review clearfix">
+                                <h3 class="place-name pull-left m-clear color-blue">{{visit.locationName}}</h3>
+                                <img ng-src="{{visit.travelType}}" alt="" height="30" class="pull-right">
+                              </div>
+                              <div class="rate-location">
+                                <p class="color-cyan m-clear inline-block avenir-light">Rate this now</p>
+                                <div class="travel-life-rating local-life-rating">
+                                  <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
+                                  <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
+                                  <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
+                                  <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
+                                </div>
+                              </div>
+                              <div class="mt10">
+                                <p class="m-clear color-light-grey"><i class="fa fa-calendar mr5"></i><span class="mr5">{{visit.timestampDate}}</span> | <i class="fa fa-clock-o mr5  ml5"></i>                                  <span>{{visit.timestampHour}}</span></p>
                               </div>
                             </div>
-                            <div class="mt10">
-                              <p class="m-clear color-light-grey"><i class="fa fa-calendar mr5"></i><span class="mr5">{{visit.timestampDate}}</span> | <i class="fa fa-clock-o mr5  ml5"></i> <span>{{visit.timestampHour}}</span></p>
-                            </div>
                           </div>
-                        </div>
-                      </uib-accordion-group>
-                    </uib-accordion>
+                        </uib-accordion-group>
+                      </uib-accordion>
+                    </div>
                   </div>
                 </div>
               </div>
+              <!-- review local-life end-->
             </div>
-            <!-- review local-life end-->
-          </div>
           </div>
         </div>
       </div>
