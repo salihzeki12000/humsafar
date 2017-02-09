@@ -27,7 +27,7 @@ var viewlocalLife = angular.module('locallife',[])
     }
   }
 });
-viewlocalLife.directive('postLocalLife', ['$http','localLife','LikesAndComments', function ($http, localLife, LikesAndComments) {
+viewlocalLife.directive('postLocalLife', ['$http','$uibModal','localLife','LikesAndComments', function ($http, $uibModal, localLife, LikesAndComments) {
   return {
     restrict: 'E',
     scope: {
@@ -122,6 +122,90 @@ viewlocalLife.directive('postLocalLife', ['$http','localLife','LikesAndComments'
         console.log(getMonthNo);
       };
       // view by month end
+      // rating local life
+      $scope.getLocalRating = function (n, type) {
+        if (type == "marked") {
+          n = parseInt(n);
+          return new Array(n);
+        } else if (type == "unmarked") {
+          n = parseInt(n);
+          var remainCount = 5 - n;
+          return new Array(remainCount);
+        }
+      };
+      $scope.rateLocalJourney = function(checkIn){
+        console.log(checkIn,'check in');
+        $scope.localCheckIn = checkIn;
+        $uibModal.open({
+          animation: true,
+          templateUrl: 'views/modal/rate-local-journey.html',
+          scope: $scope
+        });
+      };
+      $scope.ratingValue = {};
+      $scope.ratingValue.review = "";
+      $scope.ratingValue.rating = "";
+      $scope.saveLocalPostReview =  function(values,postData) {
+        $scope.ratingValue.review = values.review;
+        $scope.ratingValue.rating = values.rating;
+        console.log(postData,'post data kya hai');
+        var formData = {
+          "post": $scope.localongo._id,
+          "review": values.review,
+          "rating": values.rating
+        };
+        $http({
+          url: adminURL + "/review/saveWeb",
+          method: "POST",
+          data: formData
+        }).success(function(data){
+          if(data.value == true) {
+            postData.review[0] = $scope.ratingValue;
+            console.log(postData.review,'review');
+          }
+        });
+      }
+      $scope.showRating = 1;
+      $scope.fillColor = "";
+      $scope.localPostReview = {};
+      $scope.localPostReview.rating = 1;
+      $scope.starRating = function (val) {
+        $scope.localPostReview.rating = val;
+        if (val == 1) {
+          $scope.showRating = 1;
+          $scope.fillColor2 = "";
+          $scope.fillColor3 = "";
+          $scope.fillColor4 = "";
+          $scope.fillColor5 = "";
+        } else if (val == 2) {
+          $scope.showRating = 2;
+          $scope.fillColor2 = "fa-star";
+          $scope.fillColor3 = "";
+          $scope.fillColor4 = "";
+          $scope.fillColor5 = "";
+        } else if (val == 3) {
+          $scope.showRating = 3;
+          $scope.fillColor2 = "fa-star";
+          $scope.fillColor3 = "fa-star";
+          $scope.fillColor4 = "";
+          $scope.fillColor5 = "";
+        } else if (val == 4) {
+          $scope.showRating = 4;
+          $scope.fillColor2 = "fa-star";
+          $scope.fillColor3 = "fa-star";
+          $scope.fillColor4 = "fa-star";
+          $scope.fillColor5 = "";
+        } else if (val == 5) {
+          $scope.showRating = 5;
+          $scope.fillColor2 = "fa-star";
+          $scope.fillColor3 = "fa-star";
+          $scope.fillColor4 = "fa-star";
+          $scope.fillColor5 = "fa-star";
+        } else {
+          $scope.showRating = 1;
+        }
+      };
+      // rating local life end
       // filters end
     }
   }
