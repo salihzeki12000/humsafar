@@ -133,9 +133,12 @@ viewlocalLife.directive('postLocalLife', ['$http','$uibModal','localLife','Likes
           return new Array(remainCount);
         }
       };
-      $scope.rateLocalJourney = function(checkIn){
-        console.log(checkIn,'check in');
-        $scope.localCheckIn = checkIn;
+      $scope.rateLocalJourney = function(localPost){
+        console.log(localPost,'check in');
+        $scope.localCheckIn = localPost.checkIn;
+        // $scope.localPostReview.rating = localPost.review[0].rating;
+        // $scope.showRating = localPost.review[0].rating;
+        console.log($scope.localPostReview.rating,'kya che rating');
         $uibModal.open({
           animation: true,
           templateUrl: 'views/modal/rate-local-journey.html',
