@@ -83,6 +83,17 @@
     height: 330px;
   }
   // my life end
+  // LOCAL LIFE
+  .related-postholder{
+    width: 105px;
+    height: 105px;
+  }
+
+  .local-post-slider .flexslider .slides > li{
+    width: 115px !important;
+    margin-right: 0 !important;
+  }
+  // LOCAL LIFE END
   // setting
   .setting-menu-tab {
     padding: 0;
@@ -396,7 +407,26 @@
     font-size: 15px;
   }
   // journey empty screen first user end
+
+  .journey-tabs{
+    .container{
+      padding: 0;
+      .masonry-detail{
+        padding: 0;
+      }
+    }
+  }
   // My Life end
+  // LOCAL LIFE
+  .related-postholder{
+    width: 75px;
+    height: 75px;
+  }
+  .local-post-slider .flexslider .slides > li{
+    width: 85px !important;
+    margin-right: 0 !important;
+  }
+  // LOCAL LIFE END
   // setting
   .setting {
     padding: 20px;
@@ -600,6 +630,7 @@
 
     .flexslider:hover {
       .flex-direction-nav .flex-prev {
+        top: 70%;
         right: -20px;
       }
 
@@ -1137,6 +1168,23 @@
       }
     }
   }
+  // LOCAL LIFE
+  .heading-localtitle{
+    font-size: 12px;
+  }
+  .heading-localtimestamp{
+    font-size: 10px;
+  }
+  .related-postholder{
+    width: 87px;
+    height: 87px;
+  }
+
+  .local-post-slider .flexslider .slides > li{
+    width: 97px !important;
+    margin-right: 0 !important;
+  }
+  // LOCAL LIFE END
   // setting page
 
   .setting-main {
@@ -1245,7 +1293,35 @@
   }
 
   .local-post {
-    padding: 30px 20px 30px 45px;
+    padding: 0;
+    border: none;
+  }
+
+  .local-life-main{
+    padding: 0;
+  }
+
+  post-local-life{
+    width: 100%;
+    .post-main .post-social-item{
+      padding: 10px 0 15px;
+      li{
+        padding: 0 10px;
+        img{
+          height: 17px;
+        }
+        i{
+          font-size: 17px;
+        }
+        &:first-child{
+          padding: 0 5px 0 0;
+        }
+      }
+    }
+    .post-main .post-socail-reviews{
+      padding: 5px 0 10px;
+      font-size: 14px;
+    }
   }
 
   .overlay-filter {
@@ -1562,7 +1638,7 @@
   }
 
   .local-life-main {
-    padding: 0 10px;
+    padding: 0;
 
     .post-list-view {
       .list-inline > li span {
@@ -1842,9 +1918,6 @@
     margin-left: -4px;
   }
 
-  .local-post {
-    padding: 30px 5px 30px 20px;
-  }
 
   .journey-post {
     .post {
@@ -2117,6 +2190,16 @@
     }
   }
   // my life\
+  // LOCAL LIFE
+  .related-postholder{
+    width: 55px;
+    height: 55px;
+  }
+  .local-post-slider .flexslider .slides > li{
+    width: 65px !important;
+    margin-right: 0 !important;
+  }
+  // LOCAL LIFE END
   // setting
   .setting {
     padding: 20px 10px;

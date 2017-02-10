@@ -127,6 +127,7 @@ a.mail-icon:hover {
   }
 }
 // scroll down
+
 .mouse-scrolldown {
   position: absolute;
   bottom: 15px;
@@ -173,12 +174,14 @@ a.mail-icon:hover {
   }
 }
 // scroll end
+
 .text-ellipsis {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 //bootstrap forms
+
 .btn,
 .form-control,
 .input-group-lg > .form-control,
@@ -474,6 +477,7 @@ textarea {
   font-size: 13px;
 }
 // end classes
+
 .color-dark-blue {
   color: $brand-dark-blue;
 }
@@ -636,6 +640,7 @@ fieldset[disabled] .btn {
   background-attachment: fixed;
 }
 // header
+
 header {
   width: 100%;
   padding: 10px 20px 0;
@@ -750,6 +755,7 @@ header {
   margin-top: 80px;
 }
 // nation tab
+
 .nation-select {
   [type="radio"]:checked,
   [type="radio"]:not(:checked) {
@@ -824,6 +830,7 @@ header {
   [type="checkbox"]:not(:checked)+label {
     width: 100%;
     position: relative;
+    padding-left: 30px;
     margin: 0;
     cursor: pointer;
   }
@@ -835,6 +842,8 @@ header {
     border: 1px solid $brand-cyan;
     border-radius: 4px;
     display: inline-block;
+    position: absolute;
+    left: 0;
     background-color: transparent;
     @include transition(all 300ms linear);
   }
@@ -859,6 +868,7 @@ header {
   }
 }
 // custom select
+
 .custom-select {
   position: relative;
   border-radius: 4px;
@@ -893,6 +903,7 @@ header {
   }
 }
 // custom select end
+
 .custom-checkbox-heart {
   @extend .custom-checkbox;
 
@@ -1094,6 +1105,7 @@ header {
   background-color: $brand-cyan;
 }
 // gender end
+
 .cropArea {
   @include size(100%, 350px);
   overflow: hidden;
@@ -1399,6 +1411,7 @@ header {
   }
 }
 // Empty profile
+
 .empty-title {
   font-family: "AvenirLTStd-Medium";
 }
@@ -1409,6 +1422,7 @@ header {
   font-family: "AvenirLTStd-Roman";
 }
 // journey emptytab
+
 .journey-cycle,
 .journey-parachute {
   margin-bottom: -50px;
@@ -1514,6 +1528,7 @@ header {
   }
 }
 // modal country visited
+
 .country-visited-main {
   width: 250px;
   margin: 0 auto;
@@ -1641,6 +1656,7 @@ header {
   }
 }
 // delete country visited list
+
 .delete-your-country {
   padding: 20px 0 0;
   margin-top: 20px;
@@ -1658,6 +1674,7 @@ header {
   }
 }
 // travel life
+
 .travelled-imgholder {
   min-height: 440px;
   max-height: 440px;
@@ -1701,6 +1718,7 @@ header {
   }
 }
 // tabs
+
 .profile-tabs {
   margin: 0 10px;
   position: relative;
@@ -1784,6 +1802,7 @@ header {
   }
 }
 // tabs end
+
 .add-journey {
   position: relative;
 
@@ -2013,6 +2032,59 @@ header {
   padding: 0 10px;
 }
 
+.user-social-item .journey-edit-options{
+  width: 140px;
+  padding: 5px 8px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.35), inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
+  position: absolute;
+  top: 35px;
+  right: -15px;
+  background-color: #f6fafc;
+  z-index: 4;
+
+  &:before {
+    content: '';
+    border-top: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-bottom: 13px solid #f6fafc;
+    border-left: 13px solid transparent;
+    position: absolute;
+    right: 4px;
+    top: -26px;
+    z-index: 1;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: -23px;
+    right: 5px;
+    border-top: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #e7f1f7;
+    border-left: 12px solid transparent;
+    z-index: 2;
+  }
+
+  li {
+    width: 100%;
+    padding: 2px;
+    border-bottom: 1px solid #b1b3b6;
+    display: block;
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+  a {
+    color: #6d6e71;
+    font-size: 12px;
+  }
+}
+
 .user-social-item {
   padding: 12px 0;
   // border-bottom: 1px solid #b5b5b5;
@@ -2037,6 +2109,7 @@ header {
   font-size: 12px;
 }
 // progress bar
+
 .level1,
 .level2,
 .level3,
@@ -2161,6 +2234,7 @@ header {
   margin-bottom: 30px;
 }
 // journey tabs
+
 .journey-tabs {
   .btn-tab {
     @include square(18px);
@@ -2313,9 +2387,25 @@ header {
 }
 
 .custom-select-local {
-  padding: 0 15px 0 0;
-  margin: 5px 0;
+  position: relative;
+  border: 1px solid $brand-cyan;
+  border-radius: 4px;
+  margin: 5px 15px 0 0;
+  font-size: 14px;
+  overflow: initial;
   z-index: 5;
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $brand-cyan;
+  }
 
   select {
     width: 93%;
@@ -2328,20 +2418,36 @@ header {
 
   &.custom-select:after {
     content: "\f078";
-    right: 25px;
+    top: 0;
+    right: 5px;
+    height: 36px;
     color: $brand-dark-cyan;
+    line-height: 36px;
   }
 
   .ui-select-container {
-    border: 1px solid $brand-cyan;
     padding: 6px 12px;
-    border-radius: 4px;
 
-    input[type="search"]{
+    input[type="search"] {
       border: none;
       background-color: transparent;
       width: auto;
     }
+  }
+
+  .selectize-control > .selectize-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border-radius: 0 0 4px 4px;
+    background-color: #fff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    max-height: 145px;
+    overflow-y: auto;
+  }
+
+  .ui-select-choices-row {
+    padding: 6px 12px;
   }
 }
 
@@ -2444,16 +2550,16 @@ header {
     border-bottom: 1px solid $brand-lighter-grey;
 
     li {
-      padding: 0 15px;
+      padding: 0 10px;
       display: inline-block;
       vertical-align: middle;
 
       i {
-        font-size: 20px;
+        font-size: 22px;
       }
 
       &:first-child {
-        padding: 0 15px 0 0;
+        padding: 0 10px 0 0;
       }
     }
   }
@@ -2461,6 +2567,27 @@ header {
   .post-socail-reviews {
     padding: 10px 0 15px;
     font-size: 15px;
+
+    .get-rating {
+      display: inline-block;
+    }
+  }
+
+  .get-rating {
+    .rated-star {
+      i {
+        margin-right: 5px;
+      }
+    }
+
+    .non-rated-star {
+      i {
+        margin-right: 5px;
+        &:first-child{
+          margin-left: -1px;
+        }
+      }
+    }
   }
 
   .rating-localpost {
@@ -2518,6 +2645,12 @@ header {
   @include square(136px);
   border: 1px solid $brand-cyan;
   overflow: hidden;
+}
+
+.post-imgholder-related .related-postholder {
+  &:last-child {
+    margin-right: 0;
+  }
 }
 
 .post-video-holder {
@@ -2901,6 +3034,7 @@ header {
   }
 }
 // accordion review
+
 .city-accordion {
   margin-top: 10px;
 
@@ -2935,23 +3069,26 @@ header {
 
   .panel-body {
     border: none;
-     ::-webkit-scrollbar {
+
+    ::-webkit-scrollbar {
       width: 2px;
     }
-     ::-webkit-scrollbar-thumb {
+
+    ::-webkit-scrollbar-thumb {
       background-color: #000;
     }
-     ::-webkit-scrollbar-track {
+
+    ::-webkit-scrollbar-track {
       background-color: #fff;
     }
   }
 
   .panel-default > .panel-heading+.panel-collapse > .panel-body {
     max-height: 607px;
-   padding: 0 30px;
-   border: none;
-   overflow-y: scroll;
-   overflow-x: hidden;
+    padding: 0 30px;
+    border: none;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .review-local-life {
@@ -2978,6 +3115,7 @@ header {
   text-align: center;
 }
 // pop-up rate
+
 .star-post-rating {
   .fa-star:before {
     content: "\f005";
@@ -2986,6 +3124,12 @@ header {
 
   .list-inline > li {
     padding: 0 15px;
+  }
+}
+
+.star-local-rating{
+  .fa-star:before {
+    color: $brand-cyan;
   }
 }
 
@@ -3055,6 +3199,7 @@ header {
   @include filter(blur(15px));
 }
 // country
+
 .review-country-main {
   .country-flag {
     margin: 20px 10px;
@@ -3384,6 +3529,7 @@ header {
   }
 }
 // select with checkbox
+
 .checkbox-select {
   [type="checkbox"]:checked,
   [type="checkbox"]:not(:checked) {
@@ -3502,6 +3648,7 @@ header {
   width: 555px;
 }
 // blog
+
 .blog-banner-header {
   z-index: 1;
 }
@@ -4107,6 +4254,7 @@ header {
   }
 }
 // traveller post
+
 .activity-popular-main {
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -4207,6 +4355,7 @@ header {
   }
 }
 // get class by post like travel local life and editor
+
 .travel-life {
   .activity-local-icon {
     display: none;
@@ -4451,6 +4600,7 @@ header {
   }
 }
 // visit-post
+
 .visit-post {
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -4893,6 +5043,7 @@ header {
   }
 }
 // card
+
 .ongo-card-holder {
   width: 550px;
   margin-top: 80px;
@@ -4934,6 +5085,7 @@ header {
   }
 }
 // card header
+
 .ongo-card-header {
   padding: 10px;
 }
@@ -5038,6 +5190,7 @@ header {
   }
 }
 // share single trip
+
 .share-single-trip {
   width: 300px;
   padding: 20px 15px;
@@ -5248,6 +5401,7 @@ header {
   }
 }
 // join card
+
 .ongo-journey-join {
   width: 350px;
   margin: 30px auto;
@@ -5780,6 +5934,7 @@ header {
   }
 }
 // date and time
+
 .date-holder {
   display: inline-block;
   position: relative;
@@ -6016,6 +6171,7 @@ header {
   }
 }
 // view uploaded file
+
 .uploaded-imgholder {
   @include square(179px);
   border: 2px solid #fff;
@@ -6628,6 +6784,7 @@ header {
   font-size: 10px;
 }
 // video edit
+
 .video-otg-slider {
   .flexslider {
     border-radius: 0;
@@ -7179,6 +7336,7 @@ header {
     position: absolute;
     top: 35px !important;
     background-color: #fff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     color: $brand-blue;
     overflow-y: scroll;
     text-align: center;
@@ -7718,6 +7876,7 @@ header {
   }
 }
 //detail photo caption
+
 .trip-view-photo .detail-pic-caption {
   position: absolute;
   bottom: 0;
@@ -7991,6 +8150,7 @@ header {
   margin: 10px 0 0;
 }
 // trip budget
+
 .trip-budget {
   label {
     color: $brand-pink;
@@ -9352,6 +9512,7 @@ header {
   }
 }
 // side section of agent end
+
 .connect-agentbox-holder {
   width: 450px;
   position: absolute;
@@ -9589,6 +9750,7 @@ header {
   }
 }
 // profile list (follow following countryVisited BucketList)
+
 .white-full {
   min-height: 100vh;
   height: 100%;
@@ -9811,6 +9973,7 @@ header {
   padding: 60px 20px 0;
 }
 // country visited start
+
 .country-visited-tab {
   .country-list-holder {
     margin: 5px;
@@ -9894,6 +10057,7 @@ header {
   }
 }
 // country visited end
+
 .bucket-tab-main {
   @extend .country-visited-tab;
 
@@ -9923,6 +10087,7 @@ header {
   }
 }
 // follow and following start
+
 .following-holder {
   padding: 10px;
   border-radius: 6px;
