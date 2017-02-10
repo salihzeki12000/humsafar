@@ -416,13 +416,22 @@
                 <div class="filter-month">
                   <span>Month's</span>
                   <div class=" custom-select custom-select-local">
-                    <select class="" name="">
+                    <!-- <select class="" name="">
                       <option value="" selected>Select Month</option>
                       <option ng-repeat="month in localDate track by $index" ng-click="getByFilter(month,'date')">{{month}}</option>
                     </select>
                     <ul>
                       <li ng-repeat="month in localDate track by $index" ng-click=" getByFilter(month,'date')">{{month}}</li>
-                    </ul>
+                    </ul> -->
+
+                    <!-- MONTH FILTER UI SELECT -->
+                    <ui-select ng-model="month" theme="selectize" ng-disabled="ctrl.disabled" title="Month" class="">
+                      <ui-select-match class="" placeholder="Month">{{$select.selected}}</ui-select-match>
+                      <ui-select-choices repeat="month in localDate | filter: $select.search">
+                        <span ng-bind-html="month | highlight: $select.search" class=""></span>
+                      </ui-select-choices>
+                    </ui-select>
+                    <!-- MONTH FILTER UI SELECT END -->
                   </div>
                 </div>
                 <!-- filter-checkin -->
@@ -538,7 +547,7 @@
                         <span>Total Post's <b>128</b></span>
                       </div>
                     </div>
-                    <div class="clearfix"> </div> 
+                    <div class="clearfix"> </div>
                     <div class="visible-xs">
                       <div class="total-post">
                         <span>Total Post's <b>128</b></span>

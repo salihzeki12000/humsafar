@@ -61,7 +61,7 @@
                   <div class="collage-month-view">
                     <div class="flex-wrap-container">
                       <div class="moment-imgholder" ng-repeat="img in singleObject.data track by $index">
-                        <img ng-src="{{img.name|uploadpath:80:80}}" alt="" class="img-responsive">
+                        <img ng-src="{{img.name|uploadpath:80:80:'cover'}}" alt="" class="img-responsive">
                       </div>
                     </div>
                   </div>
@@ -87,13 +87,13 @@
               <div class="moment-travel-view" ng-repeat="view in travelLifeMoments.arr" ng-click="getJournItiMoments(view);" ng-hide="viewMonth">
                 <div class="moment-travelimgholder pointer">
                   <div class="img-backholder">
-                    <span ng-if="view.type==undefined">
-                    <img ng-src="{{view.coverPhoto|uploadpath}}" alt="" class="img-responsive" ng-if="view.coverPhoto!=null">
-                    <img ng-src="{{view.startLocationPic|uploadpath}}" alt="" class="img-responsive" ng-if="view.coverPhoto==null">
-                    </span>
-                    <span ng-if="view.type!=''">
-                    <img ng-src="{{view.photos.name|uploadpath}}" alt="" class="img-responsive" ng-if="view.photos!=null">
-                    </span>
+                    <div class="backholder-height" ng-if="view.type==undefined">
+                    <img ng-src="{{view.coverPhoto|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="view.coverPhoto!=null">
+                    <img ng-src="{{view.startLocationPic|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="view.coverPhoto==null">
+                  </div>
+                    <div class="backholder-height" ng-if="view.type!=''">
+                    <img ng-src="{{view.photos.name|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="view.photos!=null">
+                  </div>
                   </div>
                   <div class="img-frontholder">
                     <img src="img/moment-travel.png" alt="" class="img-responsive">
@@ -102,7 +102,7 @@
                 <div class="travel-info text-center avenir-roman">
                   <span class="pull-right">({{view.mediaCount}})</span>
                   <h4>{{view.name}} </h4>
-                  <span class="color-light-grey pull-right">{{view.startTime|formatDate:'date'}}</span>
+                  <span class="color-light-grey">{{view.startTime|formatDate:'date'}}</span>
                 </div>
                 <!--</div>
                   </div>
@@ -130,7 +130,7 @@
                 ng-hide="viewMonth" ng-if="moment.token!=-1">
                 <div class="moment-localimgholder pointer">
                   <div class="img-backholder">
-                    <img ng-src="{{moment.data[0].name|uploadpath}}" alt="" class="img-responsive">
+                    <img ng-src="{{moment.data[0].name|uploadpath:150:150:'covver'}}" alt="" class="img-responsive">
                   </div>
                   <div class="img-frontholder">
                     <img src="img/moment-local.png" alt="" class="img-responsive">
@@ -152,7 +152,7 @@
             <div class="month-view-pic" infinite-scroll="getMorePhotos(album)">
               <div class="flex-wrap-container">
                 <div class="singleMonth-imgholder" ng-repeat="monthMoments in album.perMonthMoments track by $index">
-                  <img ng-src="{{monthMoments.name|uploadpath:170:170}}" alt="" class="img-responsive">
+                  <img ng-src="{{monthMoments.name|uploadpath:170:170:'cover'}}" alt="" class="img-responsive">
                 </div>
               </div>
             </div>

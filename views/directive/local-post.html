@@ -13,8 +13,11 @@
     <!-- post img and video img holder -->
     <div class="hide" ng-if="localongo.photos && localongo.photos.length == 0 && localongo.showMap && localongo.checkIn && localongo.checkIn.lat">
     </div>
-    <div class="post-imgholder" ng-click="openLocalimg()"  ng-if="localongo.photos.length>0 && localongo.onDisplay=='photos'">
-      <img ng-src="{{localongo.photosVideos[index].name|uploadpath}}" alt="" class="img-responsive">
+    <div class="localpost-imgholder" ng-click="openLocalimg()"  ng-if="localongo.photos.length>0 && localongo.onDisplay=='photos'">
+      <div class="localpost-imgblur">
+        <img ng-src="{{localongo.photosVideos[index].name|uploadpath}}" alt="" class="img-responsive">
+      </div>
+      <img ng-src="{{localongo.photosVideos[index].name|uploadpath}}" alt="" class="img-responsive get-center post-single-photo">
     </div>
     <div class="post-video-holder" ng-if="localongo.videos.length>0 && localongo.onDisplay=='videos'">
       <video poster="{{localongo.photosVideos[index].thumbnail|uploadpath}}" controls="controls">
@@ -25,18 +28,18 @@
     <!-- related images if less then 5 -->
     <div class="post-imgholder-related" ng-if="localongo.photosVideos.length>1 && localongo.photosVideos.length <=5">
       <div class="related-postholder inline-block" ng-repeat="related in localongo.photosVideos track by $index">
-        <img ng-src="{{related.thumbnail|uploadpath}}" alt="" class="img-responsive" ng-if="localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail" ng-click="changeView($index,'videos')">
-        <img ng-src="{{related.name|uploadpath}}" alt="" class="img-responsive" ng-if="!(localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail)" ng-click="changeView($index,'photos')">
+        <img ng-src="{{related.thumbnail|uploadpath:140:140:'cover'}}" alt="" class="img-responsive" ng-if="localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail" ng-click="changeView($index,'videos')">
+        <img ng-src="{{related.name|uploadpath:140:140:'cover'}}" alt="" class="img-responsive" ng-if="!(localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail)" ng-click="changeView($index,'photos')">
       </div>
     </div>
     <!-- related images if less then 5 end -->
     <!-- related images flexslider more then 5 -->
     <div class="local-post-slider" ng-if="localongo.photosVideos.length >5">
-      <flex-slider class="carousel" flex-slide="relatedslide in localongo.photosVideos track by $index" item-width="136" animation="slide" item-margin="15" control-nav="false" mousewheel="true">
+      <flex-slider class="carousel" flex-slide="relatedslide in localongo.photosVideos track by $index" item-width="136" animation="slide" item-margin="15" control-nav="false" mousewheel="false">
         <li>
           <div class="related-postholder">
-            <img ng-src="{{relatedslide.thumbnail|uploadpath}}" alt="" class="img-responsive" ng-if="localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail" ng-click="changeView($index,'videos')">
-            <img ng-src="{{relatedslide.name|uploadpath}}" alt="" class="img-responsive" ng-if="!(localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail)" ng-click="changeView($index,'photos')">
+            <img ng-src="{{relatedslide.thumbnail|uploadpath:140:140:'cover'}}" alt="" class="img-responsive" ng-if="localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail" ng-click="changeView($index,'videos')">
+            <img ng-src="{{relatedslide.name|uploadpath:140:140:'cover'}}" alt="" class="img-responsive" ng-if="!(localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail)" ng-click="changeView($index,'photos')">
           </div>
         </li>
         </flex-slider>
