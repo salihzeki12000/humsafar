@@ -219,7 +219,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
             $scope.ongo.postString = $scope.ongo.user.name.bold() + " with " + $scope.ongo.buddiesString;
           }
         }
-      }
+      };
 
       $scope.getTimes = function (n, type) {
         if (type == "marked") {
@@ -966,12 +966,12 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
         var userData = $.jStorage.get("profile");
         var formData = {
           "post": $scope.ongo._id,
-          "user": userData._id,
+          // "user": userData._id,
           "review": values.review,
           "rating": values.rating
-        }
+        };
         $http({
-          url: adminURL + "/review/save",
+          url: adminURL + "/review/saveWeb",
           method: "POST",
           data: formData
         }).success(function (data) {

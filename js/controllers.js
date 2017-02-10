@@ -4510,6 +4510,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     // routing to on-the-go,detailed-iti,quick-iti ends here
+
+    //moment Integration starts here
     $scope.allMoments = {
       "arr": [],
       "scrollBusy": false,
@@ -4530,8 +4532,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       "stopCallingApi": false,
       "type": "local-life"
     };
-
     var getMoments = function () {
+      $scope.allMoments.scrollBusy = true;
+      $scope.travelLifeMoments.scrollBusy = true;
+      $scope.localLifeMoments.scrollBusy = true;
       console.log("getAllMoments called");
       MyLife.getAllMoments("", 26, "all", 3, function (data) {
         $scope.allMoments = {
@@ -4539,7 +4543,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           "scrollBusy": false,
           "stopCallingApi": false,
           "type": "all"
-
         };
         console.log($scope.allMoments);
       });
@@ -4566,7 +4569,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         // $scope.localLifeMoments = data.data;
       })
     };
-
     $scope.getMoreMoments = function (moment) {
       console.log(moment);
       if (moment.scrollBusy) {
@@ -4670,6 +4672,434 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       }
     };
+    $scope.viewMonth = false;
+    $scope.momentView = 1;
+    $scope.album = {};
+    $scope.changeMomentTypeView = function (num) {
+      $scope.viewMonth = false;
+      $scope.momentView = num;
+    };
+    $scope.showMonthView = function () {
+      console.log("showMonthView called", $scope.viewMonth);
+      if ($scope.viewMonth == false) {
+        $scope.viewMonth = true;
+      } else {
+        $scope.viewMonth = false;
+      }
+    };
+
+    var viewMonthDataCallback = function (data) {
+      // $scope.perMonthMoments = data.data;
+      $scope.album.perMonthMoments = data.data;
+      console.log($scope.album.perMonthMoments);
+    };
+    $scope.getPerMonthMoments = function (obj, type) {
+      $scope.token = obj.token;
+      $scope.count = obj.count;
+      $scope.album = {
+        "token": obj.token,
+        "pageNo": 1,
+        "scrollBusy": false,
+        "type": type,
+        "stopCallingApi": false,
+        "perMonthMoments": []
+      };
+      console.log($scope.count);
+      // $scope.perMonthMoments = [];
+      MyLife.getPerMonthMoments($scope.album.token, 1, 24, $scope.album.type, viewMonthDataCallback);
+      $scope.showMonthView();
+    };
+
+
+    $scope.getJournItiMoments = function (obj) {
+      // $scope.perMonthMoments = [];
+      $scope.token = obj.name;
+      $scope.count = obj.mediaCount;
+      $scope.album = {
+        "_id": obj._id,
+        "pageNo": 1,
+        "scrollBusy": false,
+        "stopCallingApi": false,
+        "perMonthMoments": []
+      };
+      $scope.type = obj.type;
+      var flag = obj.type && obj.type != ''
+      if (flag) {
+        $scope.album.type = 'itinerary';
+      } else {
+        $scope.album.type = 'journey';
+      }
+      $scope.albumPageNo = 1;
+      MyLife.getJournItiMoments(obj._id, $scope.albumPageNo, 24, $scope.album.type, viewMonthDataCallback);
+      $scope.showMonthView();
+    };
+    //moment Integration ends here
+
+    // reviews json
+    $scope.oneAtATime = true;
+
+    $scope.getReview = function () {
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/review-post.html",
+        scope: $scope,
+        backdropClass: "review-backdrop"
+      })
+    };
+    $scope.showRating = 1;
+    $scope.fillColor = "";
+    $scope.starRating = function (val) {
+      if (val == 1) {
+        $scope.showRating = 1;
+        $scope.fillColor2 = "";
+        $scope.fillColor3 = "";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 2) {
+        $scope.showRating = 2;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 3) {
+        $scope.showRating = 3;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 4) {
+        $scope.showRating = 4;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "fa-star";
+        $scope.fillColor5 = "";
+      } else if (val == 5) {
+        $scope.showRating = 5;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "fa-star";
+        $scope.fillColor5 = "fa-star";
+      } else {
+        $scope.showRating = 1;
+      }
+    };
+    // $scope.reviewAll = [{
+    //   locationName: "Girgaon Beach",
+    //   travelType: "img/beach.png",
+    //   timestampDate: "14 Jan, 2014",
+    //   timestampHour: "1:20 pm",
+    //   city: "Mumbai",
+    //   country: "India",
+    //   reviewLocation: true
+    // }, {
+    //   locationName: "Girgaon Beach",
+    //   travelType: "img/beach.png",
+    //   timestampDate: "14 Jan, 2014",
+    //   timestampHour: "1:20 pm",
+    //   city: "Mumbai",
+    //   country: "India",
+    //   reviewLocation: false
+    // }, {
+    //   locationName: "Girgaon Beach",
+    //   travelType: "img/beach.png",
+    //   timestampDate: "14 Jan, 2014",
+    //   timestampHour: "1:20 pm",
+    //   city: "Mumbai",
+    //   country: "India",
+    //   reviewLocation: true
+    // }, {
+    //   locationName: "Girgaon Beach",
+    //   travelType: "img/beach.png",
+    //   timestampDate: "14 Jan, 2014",
+    //   timestampHour: "1:20 pm",
+    //   city: "Mumbai",
+    //   country: "India",
+    //   reviewLocation: false
+    // }];
+    // $scope.travelReview = [{
+    //   img: "img/moment-travel2.jpg",
+    //   countryName: "India"
+    // }, {
+    //   img: "img/moment-travel2.jpg",
+    //   countryName: "India"
+    // }, {
+    //   img: "img/moment-travel2.jpg",
+    //   countryName: "India"
+    // }, {
+    //   img: "img/moment-travel2.jpg",
+    //   countryName: "India"
+    // }, {
+    //   img: "img/moment-travel2.jpg",
+    //   countryName: "India"
+    // }];
+
+    // $scope.travelCity = [{
+    //   cityName: "Mumbai",
+    //   visitedCity: [{
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }]
+    // }, {
+    //   cityName: "Mumbai",
+    //   visitedCity: [{
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }]
+    // }, {
+    //   cityName: "Mumbai",
+    //   visitedCity: [{
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }]
+    // }, {
+    //   cityName: "Mumbai",
+    //   visitedCity: [{
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }]
+    // }, {
+    //   cityName: "Mumbai",
+    //   visitedCity: [{
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }]
+    // }, {
+    //   cityName: "Mumbai",
+    //   visitedCity: [{
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }, {
+    //     travelType: "img/beach.png",
+    //     locationName: "Girgaon Beach",
+    //     timestampDate: "14 Jan, 2014",
+    //     timestampHour: "1:20 pm",
+    //   }]
+    // }, ];
+    // $scope.viewtravelCountry = false;
+
+    // $scope.viewlocalCountry = false;
+    // $scope.showlocalCountry = function () {
+    //   $scope.viewlocalCountry = true;
+    // };
+    // holidayplanner json
+
+    //reviews integration starts here
+    $scope.reviewView = 1;
+    $scope.changeReviewTypeView = function (num, type) {
+      $scope.reviewView = num;
+      $scope[type] = false;
+      console.log($scope.reviewView);
+    };
+    $scope.reviewAll = {
+      "arr": [],
+      "scrollBusy": false,
+      "stopCallingApi": false,
+      "type": "all",
+      "pageNo": 1
+    };
+    $scope.reviewTravelLife = {
+      "arr": [],
+      "scrollBusy": false,
+      "stopCallingApi": false,
+      "type": "travel-life",
+      "pageNo": 1
+    };
+    $scope.reviewLocalLife = {
+      "arr": [],
+      "scrollBusy": false,
+      "stopCallingApi": false,
+      "type": "local-life",
+      "pageNo": 1
+    };
+    var getReviews = function () {
+      console.log("getAllReviews called after loading");
+      $scope.reviewAll.scrollBusy = true;
+      MyLife.getAllReviews("all", 1, function (data) {
+        $scope.reviewAll = {
+          "arr": data.data,
+          "scrollBusy": false,
+          "stopCallingApi": false,
+          "type": "all",
+          "pageNo": 1
+
+        };
+        console.log($scope.allMoments);
+      });
+      MyLife.getAllReviews("travel-life", 1, function (data) {
+        console.log(data);
+        $scope.reviewTravelLife = {
+          "arr": data.data,
+          "scrollBusy": false,
+          "stopCallingApi": false,
+          "type": "travel-life",
+          "pageNo": 1
+        };
+        // $scope.travelLifeMoments = data.data;
+        console.log($scope.travelLifeMoments);
+      });
+      MyLife.getAllReviews("local-life", 1, function (data) {
+        console.log(data);
+        $scope.reviewLocalLife = {
+          "arr": data.data,
+          "scrollBusy": false,
+          "stopCallingApi": false,
+          "type": "local-life",
+          "pageNo": 1
+        };
+        // $scope.localLifeMoments = data.data;
+      })
+    };
+
+    $scope.getAllReviews = function (review) {
+      console.log("getAllReviews called after scrolling");
+      console.log(review);
+      if (review.scrollBusy) {
+        return;
+      } else {
+        if (review.stopCallingApi) {
+          return;
+        } else {
+          console.log("passed 2 if");
+          review.pageNo++;
+          review.scrollBusy = true;
+          MyLife.getAllReviews(review.type, review.pageNo, function (data) {
+            review.scrollBusy = false;
+            if (data.data.length == 0) {
+              console.log("reviews is empty");
+              review.stopCallingApi = true;
+              review.pageNo--;
+            } else {
+              _.each(data.data, function (n) {
+                review.arr.push(n);
+              });
+            }
+          });
+        }
+      }
+    };
+
+    $scope.showAccordian = function (review, type) {
+      console.log(review, type);
+      $scope[type] = true;
+      $scope.citiesTravelled = {
+        "countryName": review.name
+      };
+      MyLife.getReviewByCountryOrLocalCity(review._id, function (data) {
+        review.cities = data.data;
+        $scope.citiesTravelled.cities = data.data;
+        console.log(review);
+      })
+    };
+
+    $scope.getReviewsByCities = function (object, flag) {
+      console.log(object, flag);
+      if (flag) {
+        MyLife.getReviewsByCities(object.country, object._id, 1, function (data) {
+          console.log(data);
+         object.accordReview = data.data;
+        });
+      } else {
+
+      }
+    };
+    //reviews integration ends here
 
     var allMyLife = [
       "views/content/myLife/journey.html",
@@ -4694,6 +5124,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.myLife.innerView = allMyLife[1];
         break;
       case "reviews":
+        getReviews();
         $scope.myLife.innerView = allMyLife[2];
         break;
       case "holidayplanner":
@@ -4715,6 +5146,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           break;
         case 2:
           url = "reviews";
+          getReviews();
           break;
         case 3:
           url = "holidayplanner";
@@ -4727,30 +5159,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
 
-    //moments of Mylife
-    // var myDate = new Date();
-    // var nextMonth = new Date(myDate);
-    // nextMonth.setMonth(myDate.getMonth() + 1);
-    // $scope.month = $filter('date')(nextMonth, 'MMMM');
-    // $scope.year = $filter('date')(nextMonth, 'yyyy');
-
-
-    // console.log($scope.year, "this date");
-    // $scope.getMoments = function (type, type2, month, year) {
-    //   console.log(month, "this date");
-    //   NavigationService.getMyLifeMoments({
-    //     type: type,
-    //     type2: type2,
-    //     month: month,
-    //     year: year,
-    //   }, function (data) {
-    //     $scope.monthsMoments = data;
-    //     console.log($scope.monthsMoments, "Moments aaya");
-    //   });
-    // };
-    // $scope.getMoments("all", "moments", $scope.month, $scope.year);
-
-    //End moments of Mylife
 
     $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
     $scope.mapDataHumanizeFn = function (val) {
@@ -5016,314 +5424,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // get by Filter end
     // local life end
 
-    $scope.viewMonth = false;
-    $scope.momentView = 1;
-    $scope.album = {};
-    $scope.changeTypeView = function (num) {
-      $scope.viewMonth = false;
-      // $scope.perMonthMoments = [];
-      $scope.momentView = num;
-    };
-    $scope.showMonthView = function () {
-      console.log("showMonthView called", $scope.viewMonth);
-      if ($scope.viewMonth == false) {
-        $scope.viewMonth = true;
-      } else {
-        $scope.viewMonth = false;
-      }
-    };
-    var viewMonthDataCallback = function (data) {
-      // $scope.perMonthMoments = data.data;
-      $scope.album.perMonthMoments = data.data;
-      console.log($scope.album.perMonthMoments);
-    };
-    $scope.getPerMonthMoments = function (obj, type) {
-      $scope.token = obj.token;
-      $scope.count = obj.count;
-      $scope.album = {
-        "token": obj.token,
-        "pageNo": 1,
-        "scrollBusy": false,
-        "type": type,
-        "stopCallingApi": false,
-        "perMonthMoments": []
-      };
-      console.log($scope.count);
-      // $scope.perMonthMoments = [];
-      MyLife.getPerMonthMoments($scope.album.token, 1, 24, $scope.album.type, viewMonthDataCallback);
-      $scope.showMonthView();
-    };
 
 
-    $scope.getJournItiMoments = function (obj) {
-      // $scope.perMonthMoments = [];
-      $scope.token = obj.name;
-      $scope.count = obj.mediaCount;
-      $scope.album = {
-        "_id": obj._id,
-        "pageNo": 1,
-        "scrollBusy": false,
-        "stopCallingApi": false,
-        "perMonthMoments": []
-      };
-      $scope.type = obj.type;
-      var flag = obj.type && obj.type != ''
-      if (flag) {
-        $scope.album.type = 'itinerary';
-      } else {
-        $scope.album.type = 'journey';
-      }
-      $scope.albumPageNo = 1;
-      MyLife.getJournItiMoments(obj._id, $scope.albumPageNo, 24, $scope.album.type, viewMonthDataCallback);
-      $scope.showMonthView();
-    };
 
-    // reviews json
-    $scope.oneAtATime = true;
 
-    $scope.getReview = function () {
-      $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/review-post.html",
-        scope: $scope,
-        backdropClass: "review-backdrop"
-      })
-    };
-    $scope.showRating = 1;
-    $scope.fillColor = "";
-    $scope.starRating = function (val) {
-      if (val == 1) {
-        $scope.showRating = 1;
-        $scope.fillColor2 = "";
-        $scope.fillColor3 = "";
-        $scope.fillColor4 = "";
-        $scope.fillColor5 = "";
-      } else if (val == 2) {
-        $scope.showRating = 2;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "";
-        $scope.fillColor4 = "";
-        $scope.fillColor5 = "";
-      } else if (val == 3) {
-        $scope.showRating = 3;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "fa-star";
-        $scope.fillColor4 = "";
-        $scope.fillColor5 = "";
-      } else if (val == 4) {
-        $scope.showRating = 4;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "fa-star";
-        $scope.fillColor4 = "fa-star";
-        $scope.fillColor5 = "";
-      } else if (val == 5) {
-        $scope.showRating = 5;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "fa-star";
-        $scope.fillColor4 = "fa-star";
-        $scope.fillColor5 = "fa-star";
-      } else {
-        $scope.showRating = 1;
-      }
-    };
-    $scope.reviewAll = [{
-      locationName: "Girgaon Beach",
-      travelType: "img/beach.png",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "1:20 pm",
-      city: "Mumbai",
-      country: "India",
-      reviewLocation: true
-    }, {
-      locationName: "Girgaon Beach",
-      travelType: "img/beach.png",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "1:20 pm",
-      city: "Mumbai",
-      country: "India",
-      reviewLocation: false
-    }, {
-      locationName: "Girgaon Beach",
-      travelType: "img/beach.png",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "1:20 pm",
-      city: "Mumbai",
-      country: "India",
-      reviewLocation: true
-    }, {
-      locationName: "Girgaon Beach",
-      travelType: "img/beach.png",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "1:20 pm",
-      city: "Mumbai",
-      country: "India",
-      reviewLocation: false
-    }];
-    $scope.travelReview = [{
-      img: "img/moment-travel2.jpg",
-      countryName: "India"
-    }, {
-      img: "img/moment-travel2.jpg",
-      countryName: "India"
-    }, {
-      img: "img/moment-travel2.jpg",
-      countryName: "India"
-    }, {
-      img: "img/moment-travel2.jpg",
-      countryName: "India"
-    }, {
-      img: "img/moment-travel2.jpg",
-      countryName: "India"
-    }];
-
-    $scope.travelCity = [{
-      cityName: "Mumbai",
-      visitedCity: [{
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }]
-    }, {
-      cityName: "Mumbai",
-      visitedCity: [{
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }]
-    }, {
-      cityName: "Mumbai",
-      visitedCity: [{
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }]
-    }, {
-      cityName: "Mumbai",
-      visitedCity: [{
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }]
-    }, {
-      cityName: "Mumbai",
-      visitedCity: [{
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }]
-    }, {
-      cityName: "Mumbai",
-      visitedCity: [{
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }, {
-        travelType: "img/beach.png",
-        locationName: "Girgaon Beach",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "1:20 pm",
-      }]
-    }, ];
-    $scope.viewtravelCountry = false;
-    $scope.showtravelCountry = function () {
-      $scope.viewtravelCountry = true;
-    };
-    $scope.viewlocalCountry = false;
-    $scope.showlocalCountry = function () {
-      $scope.viewlocalCountry = true;
-    };
-    // holidayplanner json
   })
 
   .controller('JourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {

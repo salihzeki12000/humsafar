@@ -431,3 +431,16 @@ commontask.filter("singularPlural", function () {
     }
   };
 });
+
+commontask.filter("getArrayOfSize", function () {
+  return function (input, flag) {
+    if (flag == "marked") {
+      input = parseInt(input);
+      return new Array(input);
+    } else if (flag == "unmarked") {
+      input = parseInt(input);
+      var remainCount = 5 - input;
+      return new Array(remainCount);
+    }
+  };
+});
