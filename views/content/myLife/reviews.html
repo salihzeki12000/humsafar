@@ -68,8 +68,8 @@
                       <img ng-src="{{view.travelType}}" alt="" height="30" class="pull-right">
                     </div>
                     <div class="rate-location">
-                      <div class="color-cyan m-clear inline-block avenir-light" ng-click="getReview();" ng-if="view.review.length==0">Rate this now</div>
-                      <div class="travel-life-rating" ng-if="!(view.review.length==0)">
+                      <div class="color-cyan m-clear inline-block avenir-light" ng-click="getReview(view);" ng-if="view.review.length==0">Rate this now</div>
+                      <div class="travel-life-rating" ng-if="!(view.review.length==0)" ng-click="getReview(view)" ;>
                         <span class="star-rating" ng-repeat="time in view.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':view.type=='local-life','color-pink':view.type=='travel-life'}"></i></span>
                         <span class="star-rating" ng-repeat="time in view.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
                         <!--<span class="star-rating"><i class="fa fa-star"></i></span>
@@ -118,9 +118,9 @@
                 </div>
                 <!-- review empty travel view profile user login for first time -->
                 <div class="list-travel-view" ng-repeat="review in reviewTravelLife.arr" ng-hide="viewTravelCountry">
-                  <div class="review-travel-main relate pointer" ng-click="showAccordian(review,'viewTravelCountry');">
+                  <div class="review-travel-main relate pointer" ng-click="goToAccordian(review,'viewTravelCountry');">
                     <div class="review-backimgholder">
-                      <img ng-src="{{review.countryCoverPhoto|uploadpath:120:120:cover}}" alt="" class="img-responsive">
+                      <img ng-src="{{review.countryCoverPhoto|uploadpath:120:120:'cover'}}" alt="" class="img-responsive">
                     </div>
                     <div class="review-frontimgholder relate">
                       <img ng-src="img/review-travel.png" alt="" class="pointer img-responsive">
@@ -136,26 +136,32 @@
                     </div>
                     <div class="city-accordion">
                       <uib-accordion close-others="oneAtATime">
-                        <uib-accordion-group ng-repeat="city in citiesTravelled.cities" is-open="status.open1" ng-click="getReviewsByCities(city,status.open1)">
+                        <!--infinite-scroll="getMoreReviews(cityDetails)" infinite-scroll-container=".panel-body"
+                            infinite-scroll-distance="1" infinite-scroll-parent="true"-->
+                        <uib-accordion-group ng-repeat="city in citiesTravelled.cities" is-open="status.open1">
                           <uib-accordion-heading class="clearfix">
-                            <i class="pull-right fa mt5 color-blue" ng-class="{'fa-minus': status.open1, 'fa-plus': !status.open1}"></i>
-                            <h3 class="color-blue m-clear">{{city.name}}</h3>
+                            <div ng-click="openAccordian(city,!status.open1,'travel-life')">
+                              <i class="pull-right fa mt5 color-blue" ng-class="{'fa-minus': status.open1, 'fa-plus': !status.open1}"></i>
+                              <h3 class="color-blue m-clear">{{city.name}}</h3>
+                            </div>
                           </uib-accordion-heading>
-                          <div class="accordion-detail" ng-repeat="visit in city.accordReview track by $index">
-                            <div class="review-local-life">
-                              <div class="heading-review clearfix">
-                                <h3 class="place-name pull-left m-clear color-blue">{{visit.checkIn.location}}</h3>
-                                <img ng-src="{{visit.travelType}}" alt="" height="30" class="pull-right">
-                              </div>
-                              <div class="rate-location">
-                                <p class="color-pink m-clear inline-block avenir-light" ng-if="visit.review.length==0">Rate this now</p>
-                                <div class="travel-life-rating local-life-rating" ng-if="!(visit.review.length==0)">
-                                  <span class="star-rating" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':visit.type=='local-life','color-pink':visit.type=='travel-life'}"></i></span>
-                                  <span class="star-rating" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
+                          <div class="" infinite-scroll="getMoreReviews(city,'travel-life')" infinite-scroll-parent="true">
+                            <div class="accordion-detail" ng-repeat="visit in city.accordReview track by $index">
+                              <div class="review-local-life">
+                                <div class="heading-review clearfix">
+                                  <h3 class="place-name pull-left m-clear color-blue">{{visit.checkIn.location}}</h3>
+                                  <img ng-src="{{visit.travelType}}" alt="" height="30" class="pull-right">
                                 </div>
-                              </div>
-                              <div class="mt10 review-time">
-                                <p class="m-clear color-light-grey"><i class="fa fa-calendar mr5"></i><span class="mr5">{{visit.UTCModified|formatDate:'date'}}</span>                                  | <i class="fa fa-clock-o mr5  ml5"></i> <span>{{visit.UTCModified|formatDate:'time'}}</span></p>
+                                <div class="rate-location">
+                                  <p class="color-pink m-clear inline-block avenir-light" ng-click="getReview(visit);" ng-if="visit.review.length==0">Rate this now</p>
+                                  <div class="travel-life-rating local-life-rating" ng-if="!(visit.review.length==0)" ng-click="getReview(visit);">
+                                    <span class="star-rating" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':visit.type=='local-life','color-pink':visit.type=='travel-life'}"></i></span>
+                                    <span class="star-rating" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
+                                  </div>
+                                </div>
+                                <div class="mt10 review-time">
+                                  <p class="m-clear color-light-grey"><i class="fa fa-calendar mr5"></i><span class="mr5">{{visit.UTCModified|formatDate:'date'}}</span>                                    | <i class="fa fa-clock-o mr5  ml5"></i> <span>{{visit.UTCModified|formatDate:'time'}}</span></p>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -180,13 +186,13 @@
                 </div>
                 <!-- review empty local view profile user login for first time -->
                 <div class="list-travel-view list-local-view" ng-repeat="review in reviewLocalLife.arr" ng-hide="viewLocalCountry">
-                  <div class="review-travel-main pointer relate" ng-click="showAccordian(review,'viewLocalCountry');">
+                  <div class="review-travel-main pointer relate" ng-click="goToAccordian(review,'viewLocalCountry');">
                     <div class="review-backimgholder">
-                      <img ng-src="{{review.img}}" alt="" class="img-responsive">
+                      <img ng-src="{{review.cityCoverPhoto|uploadpath:120:120:'cover'}}" alt="" class="img-responsive">
                     </div>
                     <div class="review-frontimgholder relate">
                       <img ng-src="img/review-local.png" alt="" class="img-responsive">
-                      <h3 class="country-name">{{review.countryName}}</h3>
+                      <h3 class="country-name">{{review.name}}</h3>
                     </div>
                   </div>
                 </div>
@@ -194,32 +200,34 @@
                 <div class="" ng-show="viewLocalCountry">
                   <div class="travel-single-view">
                     <div class="heading-single-view">
-                      <h2 class="color-pink font-bold m-clear color-cyan">India</h2>
+                      <h2 class="color-pink font-bold m-clear color-cyan">{{categoryList.cityName}}</h2>
                     </div>
                     <div class="city-accordion">
                       <uib-accordion close-others="oneAtATime">
-                        <uib-accordion-group ng-repeat="city in travelCity" is-open="status.open1">
+                        <uib-accordion-group ng-repeat="category in categoryList.categories" is-open="status.open1">
                           <uib-accordion-heading class="clearfix">
-                            <i class="pull-right fa mt5 color-blue" ng-class="{'fa-minus': status.open1, 'fa-plus': !status.open1}"></i>
-                            <h3 class="color-blue m-clear">{{city.cityName}}</h3>
+                            <div ng-click="openAccordian(category,!status.open1,'local-life')">
+                              <i class="pull-right fa mt5 color-blue" ng-class="{'fa-minus': status.open1, 'fa-plus': !status.open1}"></i>
+                              <h3 class="color-blue m-clear">{{category._id}}</h3>
+                            </div>
                           </uib-accordion-heading>
-                          <div class="accordion-detail" ng-repeat="visit in city.visitedCity track by $index">
-                            <div class="review-local-life">
-                              <div class="heading-review clearfix">
-                                <h3 class="place-name pull-left m-clear color-blue">{{visit.locationName}}</h3>
-                                <img ng-src="{{visit.travelType}}" alt="" height="30" class="pull-right">
-                              </div>
-                              <div class="rate-location">
-                                <p class="color-cyan m-clear inline-block avenir-light">Rate this now</p>
-                                <div class="travel-life-rating local-life-rating">
-                                  <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
-                                  <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
-                                  <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
-                                  <span class="star-rating"><i class="fa fa-star color-cyan"></i></span>
+                          <div class="" infinite-scroll="getMoreReviews(category,'local-life')" infinite-scroll-parent="true">
+                            <div class="accordion-detail" ng-repeat="visit in category.accordReview track by $index">
+                              <div class="review-local-life">
+                                <div class="heading-review clearfix">
+                                  <h3 class="place-name pull-left m-clear color-blue">{{visit.checkIn.location}}</h3>
+                                  <img ng-src="{{visit.travelType}}" alt="" height="30" class="pull-right">
                                 </div>
-                              </div>
-                              <div class="mt10">
-                                <p class="m-clear color-light-grey"><i class="fa fa-calendar mr5"></i><span class="mr5">{{visit.timestampDate}}</span> | <i class="fa fa-clock-o mr5  ml5"></i>                                  <span>{{visit.timestampHour}}</span></p>
+                                <div class="rate-location">
+                                  <p class="color-cyan m-clear inline-block avenir-light" ng-click="getReview(visit);" ng-if="visit.review.length==0">Rate this now</p>
+                                  <div class="travel-life-rating local-life-rating" ng-if="!(visit.review.length==0)" ng-click="getReview(visit);">
+                                    <span class="star-rating" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':visit.type=='local-life','color-pink':visit.type=='travel-life'}"></i></span>
+                                    <span class="star-rating" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
+                                  </div>
+                                </div>
+                                <div class="mt10">
+                                  <p class="m-clear color-light-grey"><i class="fa fa-calendar mr5"></i><span class="mr5">{{visit.UTCModified|formatDate:'date'}}</span>                                    | <i class="fa fa-clock-o mr5  ml5"></i> <span>{{visit.UTCModified|formatDate:'time'}}</span></p>
+                                </div>
                               </div>
                             </div>
                           </div>

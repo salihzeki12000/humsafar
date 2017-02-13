@@ -9,7 +9,7 @@
               <div class="row">
                 <div class="col-lg-6 col-md-5 col-sm-12">
                   <div class="itinerary-inputholder">
-                    <input type="text" class="form-control" placeholder="Trip Title" ng-model="qItinerary.title">
+                    <input type="text" class="form-control" placeholder="Trip Title" ng-model="qItinerary.name">
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-7 col-sm-12">
@@ -46,13 +46,12 @@
                         </ul>
                       </div>-->
                       <div class="itinerary-inputholder">
-                        <ui-select ng-model="qItinerary.year" theme="selectize" ng-disabled="ctrl.disabled" title="Year"
-                          ng-click="viewYear();" class="quick-month-year-select">
+                        <ui-select ng-model="qItinerary.year" theme="selectize" ng-disabled="ctrl.disabled" title="Year" ng-click="viewYear();" class="quick-month-year-select">
                           <ui-select-match class="month-year-select" placeholder="Year">{{$select.selected}}</ui-select-match>
                           <ui-select-choices repeat="list in getYear | filter: $select.search">
                             <span ng-bind-html="list | highlight: $select.search"></span>
                           </ui-select-choices>
-                          </ui-select>
+                        </ui-select>
                       </div>
                     </div>
                     <div class="itinerary-duration">
@@ -103,7 +102,7 @@
                       <ui-select-choices repeat="{'name':city.name,placeId:city.placeId} as city in cities" refresh="searchCity(add.country,$select.search,add.cityVisited)"
                         refresh-delay="0">
                         <span ng-bind="city.name"></span>
-                        </ui-select-choices>
+                      </ui-select-choices>
                     </ui-select>
                   </div>
                   <span class="add-city-quick">Add other cities visited in this country on this trip</span>

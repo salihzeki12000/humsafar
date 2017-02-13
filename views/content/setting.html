@@ -113,7 +113,7 @@
             <div class="setting-main-detail bg-white avenir-roman">
               <!-- profile detail -->
               <div class="profile-detail-main" ng-if="showSetting == 1">
-                <form action="" name='profile'>
+                <form action="" name='profile' ng-submit="editUserData(userData,1,profile.$valid);">
                   <div class="profile-photo-sec upload-profile">
                     <label for="profile" class="color-blue">Profile Photo</label>
                     <div class="cropArea relate" ng-show="showImage" id="profile">
@@ -133,7 +133,7 @@
                       </div>
                       <div class="upload-btn">
                         <div class="relate inline-block mr10 form-file">
-                          <button class="btn btn-dark-blue pointer avenir-light ">Select a photo from your computer input</button>
+                          <button class="btn btn-dark-blue pointer avenir-light ">Select a photo from your computer</button>
                           <input type="file" id="fileInput" class="getfile pointer" />
                         </div>
                         <div class="inline-block from-photogallery">
@@ -280,7 +280,7 @@
               </div>
               <div class="clearfix mt20">
                 <div class="pull-right">
-                  <button type="submit" class="btn btn-pink btn-more" ng-class="{'disabled' : !profile.$valid }" ng-click="editUserData(userData,1,profile.$valid);">Save</button>
+                  <button type="submit" class="btn btn-pink btn-more" ng-class="{'disabled' : !profile.$valid }">Save</button>
                 </div>
               </div>
               </form>

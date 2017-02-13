@@ -204,7 +204,7 @@ var navigationservice = angular.module('navigationservice', [])
           transformRequest: angular.identity
         }).success(callback);
       },
-      editUserData: function (userData, status) {
+      editUserData: function (userData, status, callback) {
         // console.log(userData, status);
         var formData = _.clone(userData);
         var object = {};
@@ -226,8 +226,8 @@ var navigationservice = angular.module('navigationservice', [])
             }
 
             console.log(formData, "after formating");
-            object = _.pick(formData, 'firstName', 'lastName', 'gender', 'homeCountry', 'homeCity', 'isBlogger', 'isPhotographer', 'favorite_city', 'dream_destination');
-            if (object.firstName === "" || object.lastName === "") {
+            object = _.pick(formData, 'firstName', 'lastName', 'gender', 'homeCountry', 'homeCity', 'isBlogger', 'isPhotographer', 'favorite_city', 'dream_destination', 'dob');
+            if (object.firstName !== "" || object.lastName !== "") {
               object.firstName = object.firstName.trim();
               object.lastName = object.lastName.trim();
               object.name = object.firstName.concat(" ", object.lastName);
@@ -279,9 +279,7 @@ var navigationservice = angular.module('navigationservice', [])
             console.log(object);
             break;
         }
-        returnVal.saveUserData(object, function (data) {
-          console.log(data);
-        }, function (data) {
+        returnVal.saveUserData(object, callback, function (data) {
           console.log(data);
         });
       }

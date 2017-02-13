@@ -251,11 +251,11 @@ var mylife = angular.module('mylife', [])
           method: "POST"
         }).success(callback);
       },
-      getReviewByCountryOrLocalCity: function (_id, callback) {
+      getCities: function (countryId, callback) {
         $http({
           url: adminURL + "/post/getReviewByLocWeb",
           data: {
-            "country": _id
+            'country': countryId
           },
           method: "POST"
         }).success(callback);
@@ -270,6 +270,34 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/post/getReviewsWeb",
           data: obj,
           method: "POST"
+        }).success(callback);
+      },
+      getCategories: function (cityId, callback) {
+        $http({
+          url: adminURL + "/post/getReviewByLocWeb",
+          data: {
+            'city': cityId
+          },
+          method: "POST"
+        }).success(callback);
+      },
+      getReviewsByCategories: function (cityId, category, pageNo, callback) {
+        var obj = {
+          "city": cityId,
+          "category": category,
+          "pagenumber": pageNo
+        };
+        $http({
+          url: adminURL + "/post/getReviewsWeb",
+          data: obj,
+          method: "POST"
+        }).success(callback);
+      },
+      savePostReview: function (obj, callback) {
+        $http({
+          url: adminURL + "/review/saveWeb",
+          method: "POST",
+          data: obj
         }).success(callback);
       }
     };

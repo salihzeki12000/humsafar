@@ -680,6 +680,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       var modal = "";
       // edit otg checkin
       $scope.editCheckIn = function () {
+        console.log();
         $scope.alreadyTagFrnd = true;
         modal = $uibModal.open({
           animation: true,
@@ -689,6 +690,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
           backdrop: 'static',
           backdropClass: "review-backdrop"
         });
+        modal.close();
         console.log("abc", $scope.ongo);
 
         // geo location
