@@ -13806,6 +13806,283 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   })
 
 
+  .controller('SearchresultCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+    $scope.template = TemplateService.changecontent("search-result"); //Use same name of .html file
+    $scope.menutitle = NavigationService.makeactive("Search Results"); //This is the Title of the Website
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+    // tab change
+    var allsearchresult = ["views/content/search/search-traveller.html", "views/content/search/search-itinerary.html", "views/content/search/search-hashtag.html", "views/content/search/search-country.html",
+      "views/content/search/search-city.html",
+      "views/content/search/search-travelagent.html"
+    ];
+    $scope.searchresult = {
+      innerView: allsearchresult[0]
+    };
+    // change url
+    $scope.searchresultoptions = {};
+    $scope.searchresultoptions.active = "";
+    $scope.viewTab = 1;
+    switch ($state.params.name) {
+      case "search-traveller":
+        $scope.searchresult.innerView = allsearchresult[0];
+        $scope.searchresultoptions.active = "search-traveller";
+        break;
+      case "search-itinerary":
+        $scope.searchresult.innerView = allsearchresult[1];
+        $scope.searchresultoptions.active = "search-itinerary";
+        break;
+      case "search-hashtag":
+        $scope.searchresult.innerView = allsearchresult[2];
+        $scope.searchresultoptions.active = "search-hashtag";
+        break;
+      case "search-country":
+        $scope.searchresult.innerView = allsearchresult[3];
+        $scope.searchresultoptions.active = "search-country";
+        break;
+      case "search-city":
+        $scope.searchresult.innerView = allsearchresult[4];
+        $scope.searchresultoptions.active = "search-city";
+        break;
+      case "search-travelagent":
+        $scope.searchresult.innerView = allsearchresult[5];
+        $scope.searchresultoptions.active = "search-travelagent";
+        break;
+      default:
+        $scope.searchresult.innerView = allsearchresult[0];
+    }
+    $scope.searchresultTraveller = true;
+    $scope.getTab = function (view) {
+      $scope.searchresult.innerView = allsearchresult[view];
+      var url = "search-traveller";
+      var active = "";
+      console.log(view);
+      switch (view) {
+        case 0:
+          url = "search-traveller";
+          $scope.searchresultoptions.active = "search-traveller";
+          $scope.searchresultTraveller = true;
+          break;
+        case 1:
+          url = "search-itinerary";
+          $scope.searchresultoptions.active = "search-itinerary";
+          $scope.searchresultTraveller = false;
+          break;
+        case 2:
+          url = "search-hashtag";
+          $scope.searchresultoptions.active = "search-hashtag";
+          $scope.searchresultTraveller = false;
+          break;
+        case 3:
+          url = "search-country";
+          $scope.searchresultoptions.active = "search-country";
+          $scope.searchresultTraveller = false;
+          break;
+        case 4:
+          url = "search-city";
+          $scope.searchresultoptions.active = "search-city";
+          $scope.searchresultTraveller = false;
+          break;
+        case 5:
+          url = "search-travelagent";
+          $scope.searchresultoptions.active = "search-travelagent";
+          $scope.searchresultTraveller = false;
+          break;
+        default:
+          url = "search-traveller";
+          $scope.searchresultoptions.active = "search-traveller";
+          $scope.searchresultTraveller = true;
+      }
+      console.log(url);
+      $state.go("search-result", {
+        name: url
+      }, {
+        notify: false
+      });
+    };
+    // tab change end
+
+    // TRAVELLER JSON
+    $scope.searchTraveller = [{
+      followerName: 'Mayo Yo',
+      followerImg: 'img/nargis1.jpg'
+    }, {
+      followerName: 'James Bond',
+      followerImg: 'img/adrena.jpg'
+    }, {
+      followerName: 'Chota Chetan',
+      followerImg: 'img/dishapatani1.jpg'
+    }, {
+      followerName: 'Anwar Hatela',
+      followerImg: 'img/nargis1.jpg'
+    }, {
+      followerName: 'Mayo Yo',
+      followerImg: 'img/dishapatani1.jpg'
+    }, {
+      followerName: 'Mayo Yo',
+      followerImg: 'img/follower.jpg'
+    }];
+    // TRAVELLER JSON END
+
+    //user itinerary cards
+    $scope.usrItineraryCard = [{
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '35000',
+      noDays: '55',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '1505',
+      agtRating: '3.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '15 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '75000',
+      noDays: '15',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '342',
+      agtRating: '4.0',
+      agtLikesCount: '199',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }];
+    //user itinerary cards end
+
+    // COUNTRY PAGE
+    $scope.countryVisitedList = [{
+      countryName: 'India',
+      countryImg: 'img/small-activity-slider.jpg'
+    }, {
+      countryName: 'Argentina',
+      countryImg: 'img/london.jpg'
+    }, {
+      countryName: 'United States',
+      countryImg: 'img/paris.jpg'
+    }, {
+      countryName: 'Germany',
+      countryImg: 'img/london.jpg'
+    }, {
+      countryName: 'Italy',
+      countryImg: 'img/small-activity-slider.jpg'
+    }, {
+      countryName: 'France',
+      countryImg: 'img/small-activity-slider.jpg'
+    }, {
+      countryName: 'China',
+      countryImg: 'img/paris.jpg'
+    }];
+    // COUNTRY PAGE END
+
+    // CITY PAGE
+    $scope.countryVisitedList = [{
+      cityName: 'Mumbai',
+      countryName: 'India',
+      cityImg: 'img/small-activity-slider.jpg'
+    }, {
+      cityName: 'Mumbai',
+      countryName: 'Argentina',
+      cityImg: 'img/london.jpg'
+    }, {
+      cityName: 'Mumbai',
+      countryName: 'United States',
+      cityImg: 'img/paris.jpg'
+    }, {
+      cityName: 'Mumbai',
+      countryName: 'Germany',
+      cityImg: 'img/london.jpg'
+    }, {
+      cityName: 'Mumbai',
+      countryName: 'Italy',
+      cityImg: 'img/small-activity-slider.jpg'
+    }, {
+      cityName: 'Mumbai',
+      countryName: 'France',
+      cityImg: 'img/small-activity-slider.jpg'
+    }, {
+      cityName: 'Mumbai',
+      countryName: 'China',
+      cityImg: 'img/paris.jpg'
+    }];
+    // CITY PAGE END
+  })
+
 
   .controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {
     $scope.changeLanguage = function () {
