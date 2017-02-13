@@ -455,8 +455,8 @@
                 <div class="checkin-filter">
                   <span>Check In's</span>
                   <div class="local-filter-checkbox custom-checkbox" ng-repeat="catType in localCategory track by $index">
-                    <input type="checkbox" id="{{catType.name}}" ng-model="localFilter.catType" checked="{{catType.checked}}">
-                    <label for="{{catType.name}}" ng-click="getByFilter(catType,'checkIn',$index)">{{catType.name}}</label>
+                    <input type="checkbox" id="{{catType.name}}" ng-model="catType.checked" ng-click="getByFilter(catType,'checkIn')">
+                    <label for="{{catType.name}}" >{{catType.name}}</label>
                   </div>
                   <!-- <span class="checkin-more pointer">More</span> -->
                 </div>
@@ -464,7 +464,7 @@
                 <div class="rating-filter">
                   <span>Rating</span>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="five-star" ng-click="getByFilter('5','rating');">
+                    <input type="checkbox" id="five-star" ng-model="localStar.fiveStar" ng-click="getByFilter('5','rating');">
                     <label for="five-star">
                       <span>
                         <i class="fa fa-star"></i>
@@ -476,7 +476,7 @@
                     </label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="four-star" ng-click="getByFilter('4','rating')">
+                    <input type="checkbox" id="four-star" ng-click="getByFilter('4','rating')"  ng-model="localStar.fourStar">
                     <label for="four-star">
                       <span>
                         <i class="fa fa-star"></i>
@@ -488,7 +488,7 @@
                     </label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="three-star" ng-click="getByFilter('3','rating')">
+                    <input type="checkbox" id="three-star" ng-click="getByFilter('3','rating')"  ng-model="localStar.threeStar">
                     <label for="three-star">
                       <span>
                         <i class="fa fa-star"></i>
@@ -500,7 +500,7 @@
                     </label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="two-star" ng-click="getByFilter('2','rating')">
+                    <input type="checkbox" id="two-star" ng-click="getByFilter('2','rating')"  ng-model="localStar.twoStar">
                     <label for="two-star">
                       <span>
                         <i class="fa fa-star"></i>
@@ -512,7 +512,7 @@
                     </label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="one-star" ng-click="getByFilter('1','rating')">
+                    <input type="checkbox" id="one-star"  ng-model="localStar.OneStar" ng-click="getByFilter('1','rating')">
                     <label for="one-star">
                       <span>
                         <i class="fa fa-star"></i>
@@ -527,15 +527,15 @@
                 <!-- more-filter-photo video thought -->
                 <div class="more-filter">
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="photo" ng-click="getByFilter(localFilterPost,'photos')">
+                    <input type="checkbox" id="photo" ng-model="localFilterPost.photos" ng-click="getByFilter(localFilterPost,'photos')">
                     <label for="photo">Photos</label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="video" ng-click="getByFilter(localFilterPost,'videos')">
+                    <input type="checkbox" id="video"  ng-model="localFilterPost.videos" ng-click="getByFilter(localFilterPost,'videos')">
                     <label for="video">Videos</label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="thought" ng-click="getByFilter(localFilterPost,'thoughts')">
+                    <input type="checkbox" id="thought"  ng-model="localFilterPost.thoughts" ng-click="getByFilter(localFilterPost,'thoughts')">
                     <label for="thought">Thoughts</label>
                   </div>
                 </div>

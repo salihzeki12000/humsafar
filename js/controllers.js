@@ -4130,7 +4130,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       NavigationService.travelCount(function (data, status) {
         $scope.count = data.data;
         var len = $scope.count.countriesVisited_count;
-        // updateBadge(len);  
+        // updateBadge(len);
         updateBadgeBar(len);
       }, function (err) {
         console.log(err);
@@ -4761,7 +4761,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var wholePost = {};
     $scope.getReview = function (post) {
       console.log(post);
-      wholePost = post; //this is to set post_id in savePostReview() function       
+      wholePost = post; //this is to set post_id in savePostReview() function
       console.log(wholePost);
       $scope.postReview = {};
       $scope.checkIn = post.checkIn; // this is to diplay checkin location inside uib modal
@@ -5226,6 +5226,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.localFilterPost.photos = false;
     $scope.localFilterPost.videos = false;
     $scope.localFilterPost.thoughts = false;
+    $scope.localStar = {};
+    $scope.localStar.fiveStar = false;
+    $scope.localStar.fourStar = false;
+    $scope.localStar.threeStar = false;
+    $scope.localStar.twoStar = false;
+    $scope.localStar.oneStar = false;
     $scope.showTravellife = true;
     $scope.showLocalLife = true;
     $scope.localCategory = [{
@@ -5337,12 +5343,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           });
           break;
         case 'checkIn':
-          if (filterdData.checked == false) {
-            filterdData.checked = true;
+        console.log(filterdData,"-----------------------------------------");
+          if (filterdData.checked === false) {
             $scope.localFilterPost.checkInType.push(filterdData.name);
             console.log($scope.localFilterPost.checkInType, 'array');
           } else {
-            filterdData.checked = false;
             _.remove($scope.localFilterPost.checkInType, function (newArr) {
               return newArr == filterdData.name;
             })
@@ -5370,43 +5375,52 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           });
           break;
         case 'photos':
-          if ($scope.localFilterPost.photos == false) {
-            $scope.localFilterPost.photos = true;
-            localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-              console.log(err);
-            });
-          } else {
-            $scope.localFilterPost.photos = false;
-            localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-              console.log(err);
-            });
-          }
+          // if ($scope.localFilterPost.photos == false) {
+          //   $scope.localFilterPost.photos = true;
+          //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+          //     console.log(err);
+          //   });
+          // } else {
+          //   $scope.localFilterPost.photos = false;
+          //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+          //     console.log(err);
+          //   });
+          // }
+          localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+            console.log(err);
+          });
           break;
         case 'videos':
-          if ($scope.localFilterPost.videos == false) {
-            $scope.localFilterPost.videos = true;
-            localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-              console.log(err);
-            });
-          } else {
-            $scope.localFilterPost.videos = false;
-            localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-              console.log(err);
-            });
-          }
+          // if ($scope.localFilterPost.videos == false) {
+          //   $scope.localFilterPost.videos = true;
+          //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+          //     console.log(err);
+          //   });
+          // } else {
+          //   $scope.localFilterPost.videos = false;
+          //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+          //     console.log(err);
+          //   });
+          // }
+          localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+            console.log(err);
+          });
           break;
         case 'thoughts':
-          if ($scope.localFilterPost.thoughts == false) {
-            $scope.localFilterPost.thoughts = true;
-            localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-              console.log(err);
-            });
-          } else {
-            $scope.localFilterPost.thoughts = false;
-            localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-              console.log(err);
-            });
-          }
+          // if ($scope.localFilterPost.thoughts == false) {
+          //   $scope.localFilterPost.thoughts = true;
+          //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+          //     console.log(err);
+          //   });
+          // } else {
+          //   $scope.localFilterPost.thoughts = false;
+          //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+          //     console.log(err);
+          //   });
+          // }
+          localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+            console.log(err);
+          });
           break;
       }
     };
@@ -5416,9 +5430,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log($scope.localFilterPost, 'what is local filter post');
       $scope.localFilterPost.checkInType = [];
       $scope.localFilterPost.rating = [];
+      $scope.localStar.fiveStar = false;
+      $scope.localStar.fourStar = false;
+      $scope.localStar.threeStar = false;
+      $scope.localStar.twoStar = false;
+      $scope.localStar.oneStar = false;
       $scope.localFilterPost.photos = false;
       $scope.localFilterPost.videos = false;
       $scope.localFilterPost.thoughts = false;
+      _.each($scope.localCategory, function(value){
+        value.checked = false;
+      });
+      console.log($scope.localCategory);
       localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
         console.log(err);
       });
@@ -6158,7 +6181,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     // page 1 integration starts
-    //gets all the cities starts  
+    //gets all the cities starts
     var getAllCities = function (data, status) {
       if (data.value) {
         $scope.cities = data.data.predictions;
@@ -6259,7 +6282,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     })
 
-    // page 2 integration ends   
+    // page 2 integration ends
 
     $scope.editUserData = function (userData, status, valid) {
       console.log(valid);

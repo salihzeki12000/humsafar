@@ -144,7 +144,16 @@ viewlocalLife.directive('postLocalLife', ['$http','$filter','$uibModal','$window
       $scope.rateLocalJourney = function(localPost){
         console.log(localPost,'check in');
         $scope.localCheckIn = localPost.checkIn;
-        $scope.starRating(localPost.review[0].rating);
+        if (localPost.review.length !== 0) {
+          console.log("Edit Rating");
+          if (localPost.review[0].rating != undefined) {
+            $scope.starRating(parseInt(localPost.review[0].rating));
+          } else {
+
+          }
+        } else {
+          console.log("Rate Us");
+        }
         $uibModal.open({
           animation: true,
           templateUrl: 'views/modal/rate-local-journey.html',
