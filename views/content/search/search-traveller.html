@@ -1,0 +1,42 @@
+<div class="search-traveller clearfix">
+  <div class="following-container" ng-repeat="list in searchTraveller track by $index">
+    <div class="following-holder">
+      <div class="follow-imgholder">
+        <img ng-src="{{list.followerImg}}" class="img-responsive">
+      </div>
+      <div class="following-detail text-center">
+        <h4 class="color-blue avenir-heavy">{{list.followerName}}</h4>
+        <h5 class="color-pink avenir-medium text-ellipsis"><i class="fa fa-map-marker mr5 color-pink"></i> <span>Mumbai</span>, <span>India</span></h5>
+      </div>
+      <div class="photos-location-sec clearfix">
+        <div class="pull-left">
+          <div class="photo-loc">
+            <img src="img/camera-blue.png" alt="Photos" width="20" class="v-mid">
+            <span class="avenir-heavy color-dark-blue v-mid">10</span> |
+            <img src="img/location-blue.png"
+              alt="Location" width="19" class="v-mid"> <span class="avenir-heavy color-dark-blue v-mid">21</span>
+          </div>
+        </div>
+        <div class="pull-right">
+          <button class="btn btn-pink following-btn">Following</button>
+        </div>
+      </div>
+      <div class="following-user-info">
+        <ul>
+          <li>
+            <span class="block user-count">20</span>
+            <span class="listing-text">Countries Visited</span>
+          </li>
+          <li>
+            <span class="block user-count">100</span>
+            <span class="listing-text">Followers</span>
+          </li>
+          <li>
+            <span class="block user-count">18</span>
+            <span class="listing-text">Journeys</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

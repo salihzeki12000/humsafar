@@ -4111,3 +4111,45 @@ q {
   }
 }
 //ITINERARY OPTIONS DROPDOWN END
+
+
+// SEARCH RESULT PAGE
+
+.search-result{
+  margin: 40px 0;
+  @extend .avenir-roman  ;
+}
+
+.search-navigation{
+  padding: 0 20px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent, transparent, transparent, transparent, transparent);
+  color: #424242;
+  li{
+    padding: 15px 20px;
+    font-size: 16px;
+    @extend .pointer;
+  }
+}
+
+.search-result-content{
+  padding: 20px;
+}
+
+// SEARCH TRAVELLER
+.search-traveller{
+  padding: 30px 0;
+}
+// SEARCH TRAVELLER END
+
+// SEARCH COUNTRY
+.search-country{
+  padding: 30px 0;
+}
+// SEARCH COUNTRY END
+
+// SEARCH CITY
+.search-city{
+  padding: 30px 0;
+}
+// SEARCH CITY END
+// SEARCH RESULT PAGE END

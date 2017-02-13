@@ -1,0 +1,24 @@
+<div class="search-result">
+  <div class="container">
+    <div class="search-contentbox bg-white">
+      <!-- SEARCH NAVIGATIION BAR -->
+      <div class="search-navigation">
+        <div class="searchnav-scroll">
+          <ul class="list-inline">
+            <li ng-click="getTab(0)" ng-class="{'active': searchresultoptions.active=='search-traveller'}">Traveller </li>
+            <li ng-click="getTab(1)" ng-class="{'active': searchresultoptions.active=='search-itinerary'}">Itineraries</li>
+            <li ng-click="getTab(2)" ng-class="{'active': searchresultoptions.active=='search-hashtag'}"> Hashtags</li>
+            <li ng-click="getTab(3)" ng-class="{'active': searchresultoptions.active=='search-country'}">Countries</li>
+            <li ng-click="getTab(4)" ng-class="{'active': searchresultoptions.active=='search-city'}">Cities</li>
+            <li ng-click="getTab(5)" ng-class="{'active': searchresultoptions.active=='search-travelagent'}">Travel Agent</li>
+          </ul>
+        </div>
+      </div>
+      <!-- SEARCH NAVIGATIION BAR END -->
+
+      <!-- SEARCH RESULT CONTENT -->
+      <div class="search-result-content" ng-include="searchresult.innerView"></div>
+      <!-- SEARCH RESULT CONTENT END -->
+    </div>
+  </div>
+</div>

@@ -160,6 +160,14 @@
   .editor-itinerary-page .journey-travelling-type .pull-right {
     margin-top: 0;
   }
+  .agent-itinerary-page .trip-pic-view,
+  .user-itinerary-page .trip-pic-view{
+    .gallery-imgholder{
+      width: 420px;
+      max-width: 420px;
+      max-height: 500px
+    }
+  }
   // USER QUICK ITINERARY PAGE END
   .advertise-text {
     font-size: 50px;
@@ -178,6 +186,17 @@
     max-height: 190px;
   }
   // QUICK ITNERARY PAGE END
+  // EDIT JOURNEY NAME MODAL
+  .journey-content-main .popup-journey-img{
+    height: 400px;
+  }
+  .journey-content-main .put-journey-name{
+    padding: 15px;
+  }
+  .journey-content-main input{
+    font-size: 18px;
+  }
+  // EDIT JOURNEY NAME MODAL END
   // ALREADY EXISTS MODAL
   .alreadyexist .profile-imgholder {
     width: 120px;
@@ -389,6 +408,18 @@
     left: -680px;
   }
 
+  .agent-itinerary-page .trip-pic-view,
+  .user-itinerary-page .trip-pic-view{
+    .gallery-imgholder{
+      width: 310px;
+      max-width: 310px;
+      max-height: 400px;
+    }
+  }
+  .trip-pic-view .heading-gallery-name{
+    font-size: 16px;
+  }
+
   .listing-accordion .panel-open .panel-heading {
     height: 190px;
   }
@@ -481,6 +512,11 @@
   .user-itinerary-page .journey-travel-heading h3 {
     font-size: 30px;
   }
+
+  .itinerary-edit-option{
+    width: 160px;
+    padding: 10px 15px;
+  }
   // USER-DETAIL ITINERARY PAGE END
   // USER QUICK ITINERARY PAGE
   .user-itinerary-page .itinerary-name span {
@@ -493,6 +529,10 @@
 
   .user-itinerary-page .social-likes-reviews .user-card-ballon {
     margin-top: -5px;
+  }
+
+  .view-quick-itinerary .itinerary-quick-imgholder{
+    height: 200px;
   }
   // USER QUICK ITINERARY PAGE END
   // EDITOR ITINERARY PAGE
@@ -560,6 +600,17 @@
     margin-top: 15px;
   }
   // EDIT OTG MODAL END
+  // EDIT JOURNEY NAME MODAL
+  .journey-content-main .popup-journey-img{
+    height: 400px;
+  }
+  .journey-content-main .put-journey-name{
+    padding: 10px;
+  }
+  .journey-content-main input{
+    font-size: 16px;
+  }
+  // EDIT JOURNEY NAME MODAL END
   // NOTIFY MODAL
   .notify-main .comment-sec .commenter-imgholder {
     width: 25px;
@@ -570,6 +621,9 @@
   // CHOOSE COVER PHOTO MODAL
   .cover-modal .modal-dialog {
     width: 750px;
+  }
+  .crop-cover-container .cropped-Image{
+    width: 500px;
   }
   // CHOOSE COVER PHOTO MODAL END
   // DESTINATION BOOKING PAGE
@@ -986,8 +1040,8 @@
     }
 
     .gallery-imgholder {
-      width: 130px;
-      max-width: 130px;
+      width: 195px;
+      max-width: 195px;
     }
   }
 
@@ -1188,6 +1242,40 @@
     width: 80%;
   }
 
+  .edit-publish-userdetail{
+    width: 100%;
+    right: auto;
+    left: 0;
+    text-align: center;
+    .btn-more{
+      padding: 5px 18px;
+    }
+  }
+
+  .trip-pic-view .heading-gallery-name{
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .itinerary-edit-option{
+    width: 120px;
+    padding: 5px 8px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    li{
+      padding: 2px;
+      a{
+        font-size: 12px;
+      }
+    }
+  }
+
+  .user-detailitinerary-page{
+    .options img{
+      height: 17px;
+    }
+  }
+
   .user-detailitinerary-page .listing-accordion .panel-open .panel-heading {
     min-height: 120px;
   }
@@ -1238,6 +1326,18 @@
   .book-title-mob {
     font-size: 16px;
     margin-bottom: 5px;
+  }
+  .view-itinerary-descp{
+    padding: 10px;
+  }
+  .user-quick-itinerary{
+    .options img{
+      height: 18px;
+    }
+  }
+
+  .view-quick-itinerary .itinerary-quick-imgholder{
+    height: 150px;
   }
   // USER QUICK ITINERARY PAGE END
   // EDITOR ITINERARY PAGE
@@ -1433,9 +1533,57 @@
     margin-top: 15px;
   }
   // EDIT OTG MODAL END
+  // EDIT JOURNEY NAME MODAL
+  .journey-content-main .popup-journey-img{
+    height: 300px;
+  }
+  .journey-content-main .put-journey-name{
+    padding: 8px;
+  }
+  .journey-content-main input{
+    font-size: 14px;
+  }
+  .journey-name{
+    .btn-more{
+      padding: 8px 18px;
+      font-size: 12px;
+    }
+  }
+  // EDIT JOURNEY NAME MODAL END
+
+  // EDIT DATE TIME MODAL
+    .notify-close{
+        top: 0;
+    }
+    .date-holder input{
+      width: 60px;
+      padding: 0px 8px;
+      font-size: 18px;
+    }
+  // EDIT DATE TIME MODAL END
   // CHOOSE COVER PHOTO MODAL
   .cover-modal .modal-dialog {
     width: auto;
+  }
+
+  .selected-img-gallery{
+    text-align: center;
+  }
+
+  .crop-cover-container .cropped-Image{
+    width: 450px;
+  }
+
+  .cropped-save{
+    display: block;
+    text-align: center;
+    margin: 15px;
+    font-size: 12px;
+   .btn-cover-save{
+      padding: 6px 21px;
+      margin-left: 20px;
+      font-size: 14px;
+    }
   }
 
   .cover-gallery-grid .choose-cover-pic {
@@ -2021,8 +2169,8 @@
   // AGENT ITINERARY END
   // USER-DETAIL ITINERARY PAGE
   .user-itinerary-page .trip-pic-view .gallery-imgholder {
-    width: 80px;
-    max-width: 80px;
+    width: 120px;
+    max-width: 120px;
   }
 
   .user-itinerary-page .trip-pic-view {
@@ -2069,6 +2217,12 @@
   .agent-itinerary-page .open-gallery,
   .user-itinerary-page .open-gallery {
     left: 150px;
+  }
+
+  .edit-publish-userdetail{
+    .btn-white-outline{
+      font-size: 12px;
+    }
   }
   // USER-DETAIL ITINERARY PAGE END
   // EDITOR ITINERARY PAGE
@@ -2194,6 +2348,9 @@
     height: 360px;
     overflow-y: scroll;
   }
+  .crop-cover-container .cropped-Image{
+    width: 280px;
+  }
   // CHOOSE COVER PHOTO MODAL END
   // rEVIEW COUNTRY MODAL
   .review-country-main .country-rating i.glyphicon {
@@ -2206,9 +2363,9 @@
   // rEVIEW COUNTRY MODAL END
   // DATE TIME MODAL EDIT
   .date-time-main .date-holder input {
-    width: 60px;
-    padding: 3px 10px;
-    font-size: 16px;
+    width: 50px;
+    padding: 5px;
+    font-size: 14px;
   }
   // DATE TIME MODAL EDIT END
   // EDIT ACTIVITY MODAL
@@ -2240,6 +2397,14 @@
     padding: 25px 10px;
   }
   // EDIT ACTIVITY MODAL END
+  // EDIT JOURNEY NAME MODAL
+  .journey-content-main .put-journey-name{
+    padding: 5px;
+  }
+  .journey-content-main input{
+    font-size: 12px;
+  }
+  // EDIT JOURNEY NAME MODAL END
   .otg-upload-btn {
     .btn-more {
       padding: 8px 30px;

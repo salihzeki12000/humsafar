@@ -333,6 +333,17 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'AgentupgradeCtrl'
     })
+    .state('search-result-without', {
+      url: "/search-result",
+      templateUrl: "views/template.html",
+      controller: 'SearchresultCtrl'
+    })
+    .state('search-result', {
+      url: "/search-result/:name",
+      templateUrl: "views/template.html",
+      controller: 'SearchresultCtrl',
+      reloadOnSearch: false
+    })
     .state('message', {
       url: "/message",
       templateUrl: "views/template.html",
@@ -1248,6 +1259,25 @@ firstapp.filter('toCalculation', function () {
 //   };
 // })
 
+// date difference
+firstapp.filter('dateDifference', function () {
+  return function (current, previous) {
+    if (current == "current" || current == "" || current == null || current == undefined) {
+      current = Date();
+    }
+
+    var a = moment(current).format('DD/MM/YYYY'); //will remove time from date
+    var b = moment(previous).format('DD/MM/YYYY'); //will remove time from date
+
+    current = moment(a, 'DD/MM/YYYY'); //will convert date to a "moment format" for applying moments "diff" function
+    previous = moment(b, 'DD/MM/YYYY'); //will convert date to a "moment format" for applying moments "diff" function
+
+    var days = current.diff(previous, 'days') + 1;
+    // var returnVal = moment(current).diff(moment(previous), 'days')+1;
+    return days;
+  };
+});
+// date difference end
 
 firstapp.directive("fileread", [function () {
   return {
