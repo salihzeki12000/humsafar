@@ -1,11 +1,14 @@
 <div class="container pad-zero">
   <div class="imgviewpop-holder">
-    <img ng-src={{showimgData.imgWall}} alt="" class="img-responsive">
+    <div class="imgviewpop-blur get-center">
+      <img ng-src="{{localongo.photos[index].name|uploadpath}}" alt="" class="img-responsive blur-img">
+    </div>
+    <img ng-src={{localongo.photos[index].name|uploadpath}} alt="" class="get-center view-local-photo img-responsive">
     <div class="view-heading">
       <div class="close pop-close-btn" ng-click="$close();">
         <i class="fa fa-times"></i>
       </div>
-      <p class="color-white m-clear">{{showimgData.heading}}</p>
+      <p class="color-white m-clear" ng-bind-html="localongo.localpostString"></p>
     </div>
     <div class="view-imgdown">
       <ul class="inline-block">
@@ -13,7 +16,7 @@
         <li><a href="" class="inline-block"><img src="img/comments-white.png" alt="" height="25"></a></li>
         <li><a href="" class="inline-block"><img src="img/share-white.png" alt="" height="27"></a></li>
       </ul>
-      <span class="color-white avernir-roman likes-img"><i class="fa fa-heart color-white mr5"></i>{{showimgData.likes}} Likes</span>
+      <span class="color-white avernir-roman likes-img"><i class="fa fa-heart color-white mr5"></i>{{localongo.likeCount}} Likes</span>
     </div>
   </div>
 </div>

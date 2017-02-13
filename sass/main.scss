@@ -2563,6 +2563,9 @@ header {
       }
     }
   }
+  .edit-journey-life {
+    @extend .own-trip;
+  }
 
   .post-socail-reviews {
     padding: 10px 0 15px;
@@ -2740,8 +2743,26 @@ header {
     border: 2px solid $brand-dark-blue;
     position: relative;
     overflow: hidden;
+    .view-local-photo {
+      height: 100%;
+    }
   }
-
+  .imgviewpop-blur {
+    width: 100%;
+    @include filter(blur(8px));
+    &:after {
+      content: '';
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgba(0,0,0,0.4);
+    }
+    .blur-img {
+      width: 100%;
+    }
+  }
   .view-heading {
     width: 100%;
     padding: 10px;
@@ -5385,7 +5406,6 @@ header {
     @include position(absolute, 0 0 0 0);
     background-color: rgba(0, 0, 0, 0.4);
   }
-
   .youtube-icon {
     z-index: 1;
   }

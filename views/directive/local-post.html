@@ -1,4 +1,4 @@
-<div class="post-main">
+<div id="{{localongo._id}}" class="post-main">
   <!-- header local life-->
   <div class="heading-local-life avenir-roman">
     <p class="color-light-grey heading-localtitle" ng-bind-html="localongo.localpostString"></p>
@@ -13,7 +13,7 @@
     <!-- post img and video img holder -->
     <div class="hide" ng-if="localongo.photos && localongo.photos.length == 0 && localongo.showMap && localongo.checkIn && localongo.checkIn.lat">
     </div>
-    <div class="localpost-imgholder" ng-click="openLocalimg()"  ng-if="localongo.photos.length>0 && localongo.onDisplay=='photos'">
+    <div class="localpost-imgholder" ng-click="openLocalimg(localongo)" ng-if="localongo.photos.length>0 && localongo.onDisplay=='photos'">
       <div class="localpost-imgblur">
         <img ng-src="{{localongo.photosVideos[index].name|uploadpath}}" alt="" class="img-responsive">
       </div>
@@ -28,8 +28,8 @@
     <!-- related images if less then 5 -->
     <div class="post-imgholder-related" ng-if="localongo.photosVideos.length>1 && localongo.photosVideos.length <=5">
       <div class="related-postholder inline-block" ng-repeat="related in localongo.photosVideos track by $index">
-        <img ng-src="{{related.thumbnail|uploadpath:140:140:'cover'}}" alt="" class="img-responsive" ng-if="localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail" ng-click="changeView($index,'videos')">
-        <img ng-src="{{related.name|uploadpath:140:140:'cover'}}" alt="" class="img-responsive" ng-if="!(localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail)" ng-click="changeView($index,'photos')">
+        <img ng-src="{{related.thumbnail|uploadpath:140:140:'cover'}}" alt="" class="img-responsive pointer" ng-if="localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail" ng-click="changeView($index,'videos')">
+        <img ng-src="{{related.name|uploadpath:140:140:'cover'}}" alt="" class="img-responsive pointer" ng-if="!(localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail)" ng-click="changeView($index,'photos')">
       </div>
     </div>
     <!-- related images if less then 5 end -->
@@ -38,59 +38,68 @@
       <flex-slider class="carousel" flex-slide="relatedslide in localongo.photosVideos track by $index" item-width="136" animation="slide" item-margin="15" control-nav="false" mousewheel="false">
         <li>
           <div class="related-postholder">
-            <img ng-src="{{relatedslide.thumbnail|uploadpath:140:140:'cover'}}" alt="" class="img-responsive" ng-if="localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail" ng-click="changeView($index,'videos')">
-            <img ng-src="{{relatedslide.name|uploadpath:140:140:'cover'}}" alt="" class="img-responsive" ng-if="!(localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail)" ng-click="changeView($index,'photos')">
+            <img ng-src="{{relatedslide.thumbnail|uploadpath:140:140:'cover'}}" alt="" class="img-responsive pointer" ng-if="localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail" ng-click="changeView($index,'videos')">
+            <img ng-src="{{relatedslide.name|uploadpath:140:140:'cover'}}" alt="" class="img-responsive pointer" ng-if="!(localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail)" ng-click="changeView($index,'photos')">
           </div>
         </li>
-        </flex-slider>
+      </flex-slider>
     </div>
     <!-- related images flexslider more then 5 end-->
   </div>
   <!-- mainpost local life end-->
-    <!-- footer local life -->
-    <div class="post-social-type">
-      <div class="post-social-item clearfix">
-        <div class="pull-left">
-          <div class="">
-            <ul>
-              <li><a href="">
+  <!-- footer local life -->
+  <div class="post-social-type">
+    <div class="post-social-item clearfix">
+      <div class="pull-left">
+        <div class="">
+          <ul>
+            <li>
+              <a href="">
                 <i class="fa fa-heart-o color-blue" ng-class="localongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likeLocalPost(localongo._id,localongo.uniqueId)">
                 </i></a><span></span></li>
-              <li>
-                <a href=""><img src="img/comments.png" alt="" height="22"></a>
-              </li>
-              <li>
-                <a href=""><img src="img/share.png" alt="" height="22"></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="pull-right">
-          <div class="">
-            <span><img src="img/options.png" alt="" height="18"></span>
-          </div>
+            <li>
+              <a href=""><img src="img/comments.png" alt="" height="22"></a>
+            </li>
+            <li>
+              <a href=""><img src="img/share.png" alt="" height="22"></a>
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="post-socail-reviews">
-        <div class="clearfix">
-          <div class="pull-left">
-            <span class="color-blue mr20"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{localongo.likeCount}}</b>Likes</span>
-            <div class="rating-localpost inline-block" ng-if="localongo.checkIn && localongo.checkIn.location!='' && localongo.review && localongo.review==''">
-              <span class="pointer" ng-click="rateLocalJourney(localongo);">Rate This Now</span>
-              <!-- <uib-rating ng-model="rate" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></uib-rating> -->
-            </div>
-            <div class="get-rating" ng-if="localongo.checkIn && localongo.checkIn.location!='' && localongo.review && localongo.review!=''">
-                <span class="color-blue font-bold mr5">Rating:</span>
-              <span class="pointer" ng-click="rateLocalJourney(localongo);">
-                <span class="rated-star"><i class="fa fa-star color-cyan" ng-repeat="a in getLocalRating(localongo.review[0].rating,'marked') track by $index"></i></span>
-                <span class="non-rated-star"><i class="fa fa-star-o" ng-repeat="b in getLocalRating(localongo.review[0].rating,'unmarked') track by $index"></i></span></span>
-            </div>
-          </div>
-          <div class="pull-right">
-            <img ng-src="{{post.travelledIcon}}" alt="" height="25">
+      <div class="pull-right">
+        <div class="relate options" ng-init="localongo.edit={};">
+          <span ng-click="editOption(localongo.edit);" class="pl10 inline-block pointer"><img src="img/options.png" alt="" height="18"></span>
+          <div class="edit-journey-life" ng-show="localongo.edit.backgroundClick">
+            <ul>
+              <li><a href="" ng-click="editCheckIn();">Edit Activity / Remove Photos & Videos</a></li>
+              <li><a href="" ng-click="addLocalPhotoVideos();">Add Photos & Videos</a></li>
+              <li><a href="" ng-click="changeLocalDate();">Change Date & Time</a></li>
+              <li><a href="" ng-click="deleteLocalPost(localongo._id)">Delete Activity</a></li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-    <!-- footer local life end-->
+    <div class="post-socail-reviews">
+      <div class="clearfix">
+        <div class="pull-left">
+          <span class="color-blue mr20"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{localongo.likeCount}}</b>Likes</span>
+          <div class="rating-localpost inline-block" ng-if="localongo.checkIn && localongo.checkIn.location!='' && localongo.review && localongo.review==''">
+            <span class="pointer" ng-click="rateLocalJourney(localongo);">Rate This Now</span>
+            <!-- <uib-rating ng-model="rate" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></uib-rating> -->
+          </div>
+          <div class="get-rating" ng-if="localongo.checkIn && localongo.checkIn.location!='' && localongo.review && localongo.review!=''">
+            <span class="color-blue font-bold mr5">Rating:</span>
+            <span class="pointer" ng-click="rateLocalJourney(localongo);">
+                <span class="rated-star"><i class="fa fa-star color-cyan" ng-repeat="a in getLocalRating(localongo.review[0].rating,'marked') track by $index"></i></span>
+            <span class="non-rated-star"><i class="fa fa-star-o" ng-repeat="b in getLocalRating(localongo.review[0].rating,'unmarked') track by $index"></i></span></span>
+          </div>
+        </div>
+        <div class="pull-right">
+          <img ng-src="{{post.travelledIcon}}" alt="" height="25">
+        </div>
+      </div>
+    </div>
   </div>
+  <!-- footer local life end-->
+</div>
