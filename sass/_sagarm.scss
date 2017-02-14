@@ -4212,6 +4212,8 @@ q {
   padding: 0;
 }
 .search-itinerary-card{
+  margin: 30px 0 0;
+  background-color: #fff;
   .country-holder{
     width: 30px;
     height: 30px;
@@ -4222,6 +4224,33 @@ q {
     margin-left: -10px;
     border-radius: 100%;
   }
+}
+
+.search-itineraryhead-imgholder{
+  width: 60px;
+  height: 60px;
+  border: 1px solid #000;
+  border-radius: 22px;
+  margin-top: -30px;
+  margin-right: 5px;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+}
+.search-itineraryhead-detail{
+  display: inline-block;
+  h4{
+    margin: 0;
+  }
+  p{
+    font-size: 12px;
+  }
+}
+.searchitinerary-follow{
+  font-size: 10px;
+  @extend .pull-right;
+  @extend .color-blue;
+  @extend .avenir-roman;
 }
 // SEARCH ITINERARY END
 

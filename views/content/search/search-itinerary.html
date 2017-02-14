@@ -1,9 +1,16 @@
 <div class="search-itinerary">
   <div class="row">
     <div class="col-md-4 col-sm-6" ng-repeat="usritinerary in usrItineraryCard track by $index">
-      <div class="agt-itinerarycard search-itinerary-card">
-        <div class="itinerary-cardhead avenir-roman">
-          <p class="m-clear color-darkgrey"><i class="fa fa-calendar"></i><span class="ml5 ">{{usritinerary.timestampDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span>{{usritinerary.timestampHour}}</span></p>
+      <div class="agt-itinerarycard search-itinerary-card ">
+        <div class="itinerary-cardhead avenir-roman clearfix">
+          <div class="search-itineraryhead-imgholder">
+            <img src="img/follower.jpg" class="img-responsive get-center">
+          </div>
+          <div class="search-itineraryhead-detail">
+            <h4 class="avenir-heavy color-blue">yo mama</h4>
+            <p class="m-clear color-darkgrey"><i class="fa fa-calendar"></i><span class="ml5 ">{{usritinerary.timestampDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span>{{usritinerary.timestampHour}}</span></p>
+          </div>
+          <a class="searchitinerary-follow">Follow</a>
         </div>
         <div class="itinerary-img">
           <div class="country-badges">
