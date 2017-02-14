@@ -61,8 +61,12 @@
                     <h4 class="month-name">{{singleObject.token|momentsDate}}</h4>
                     <div class="collage-month-view">
                       <div class="flex-wrap-container">
-                        <div class="moment-imgholder" ng-repeat="img in singleObject.data track by $index">
-                          <img ng-src="{{img.name|uploadpath:80:80:'cover'}}" alt="" class="img-responsive">
+                        <div class="row">
+                          <div class="col-xs-1" ng-repeat="img in singleObject.data track by $index">
+                        <div class="moment-imgholder">
+                          <img ng-src="{{img.name|uploadpath:90:90:'cover'}}" alt="" class="img-responsive">
+                        </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -87,7 +91,9 @@
                 <div class="row">
                   <div class="col-md-3 col-sm-4" >-->
                 <div ng-if="travelLifeMoments.arr.length!==0">
-                  <div class="moment-travel-view" ng-repeat="view in travelLifeMoments.arr" ng-click="getJournItiMoments(view);" ng-if="!viewMonth">
+                  <div class="row">
+                    <div class="col-xs-3"  ng-repeat="view in travelLifeMoments.arr" ng-click="getJournItiMoments(view);" ng-if="!viewMonth">
+                  <div class="moment-travel-view">
                     <div class="moment-travelimgholder pointer">
                       <div class="img-backholder">
                         <div class="backholder-height" ng-if="view.type==undefined">
@@ -110,6 +116,8 @@
                     <!--</div>
                   </div>
                 </div>-->
+                  </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -155,10 +163,14 @@
                 </span>
                 <span ng-if="momentView==2"><h4>{{token}} <span>({{count}})</span></h4>
                 </span>
-                <div class="month-view-pic" infinite-scroll="getMorePhotos(album)">
+                <div class="month-view-pic collage-month-view" infinite-scroll="getMorePhotos(album)">
                   <div class="flex-wrap-container">
-                    <div class="singleMonth-imgholder" ng-repeat="monthMoments in album.perMonthMoments track by $index">
-                      <img ng-src="{{monthMoments.name|uploadpath:170:170:'cover'}}" alt="" class="img-responsive">
+                    <div class="row">
+                      <div class="col-xs-2" ng-repeat="monthMoments in album.perMonthMoments track by $index">
+                    <div class="singleMonth-imgholder">
+                      <img ng-src="{{monthMoments.name|uploadpath:180:180:'cover'}}" alt="" class="img-responsive">
+                    </div>
+                      </div>
                     </div>
                   </div>
                 </div>

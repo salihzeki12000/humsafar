@@ -692,6 +692,67 @@ header {
       border-color: #17213e;
     }
   }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #fff;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border: 1px solid #fff;
+    border-radius: 5px;
+    background-color: $brand-lighter-grey;
+  }
+}
+
+.search-result-dropdown{
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.search-dropheader{
+  padding: 10px;
+  background-color: $brand-lighter-grey;
+  span{
+    font-size: 14px;
+    @extend .color-pink;
+  }
+  a{
+    display: inline-block;
+    border-bottom: 1px solid $brand-blue;
+    font-size: 10px;
+    @extend .color-blue;
+  }
+}
+
+.search-option{
+  padding: 10px;
+  border-bottom: 1px solid $brand-lighter-grey;
+  @extend .avenir-heavy;
+  &:last-child{
+    border: none;
+  }
+  .search-option-img{
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    display: inline-block;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+  .search-optiontxt{
+    color: $brand-blue;
+  }
 }
 
 .user-detail {
@@ -2832,11 +2893,17 @@ header {
 }
 
 .collage-month-view {
+  .flex-wrap-container .row {
+    .col-xs-1 , .col-xs-2{
+    padding: 2px;
+}
+  }
   .moment-imgholder {
-    @include square(79px);
-    margin-top: -2px;
-    margin-right: 5px;
-    display: inline-block;
+
+    // @include square(79px);
+    // margin-top: -2px;
+    // margin-right: 5px;
+    // display: inline-block;
     cursor: pointer;
     overflow: hidden;
 
@@ -2847,9 +2914,9 @@ header {
 }
 
 .singleMonth-imgholder {
-  margin-right: 5px;
-  @include square(169px);
-  display: inline-block;
+  // margin-right: 5px;
+  // @include square(169px);
+  // display: inline-block;
   cursor: pointer;
   overflow: hidden;
 
@@ -2888,23 +2955,26 @@ header {
 //   }
 // }
 
-.moment-travel-view {
-  margin: 15px 25px 15px 0;
-  display: inline-block;
-}
+// .moment-travel-view {
+//   margin: 15px 25px 15px 0;
+//   display: inline-block;
+// }
 
 .moment-travelimgholder {
-  @include square(185px);
+  // @include square(185px);
+  width: 100%;
+  height: auto;
   position: relative;
 
   .img-backholder {
-    @include square(170px);
-    @include position(absolute, 15px null null 15px);
+    // @include square(170px);
+    // @include position(absolute, 15px null null 15px);
+    width: 100%;
     @include transform(rotate(1deg));
     overflow: hidden;
 
     img {
-      min-height: 100%;
+      width: 100%;
       border: 3px solid #fff;
       border-radius: 6px;
       box-shadow: 1px 1px 5px $brand-light-grey;
@@ -2916,8 +2986,12 @@ header {
   }
 
   .img-frontholder {
-    @include square(180px);
+    // @include square(180px);
+    width:100%;
     @include position(absolute, 0 null null 0);
+    img {
+    width: 100%;
+    }
   }
 }
 
@@ -3138,6 +3212,28 @@ header {
 // pop-up rate
 
 .star-post-rating {
+  .fa-star:before {
+    content: "\f005";
+    color: $brand-pink;
+  }
+
+  .list-inline > li {
+    padding: 0 15px;
+  }
+}
+
+.local-star-rating {
+  .fa-star:before {
+    content: "\f005";
+    color: $brand-cyan;
+  }
+
+  .list-inline > li {
+    padding: 0 15px;
+  }
+}
+
+.travel-star-rating {
   .fa-star:before {
     content: "\f005";
     color: $brand-pink;
