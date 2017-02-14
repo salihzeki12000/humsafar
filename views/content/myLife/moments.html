@@ -42,9 +42,9 @@
           <!-- moment all view -->
           <div class="container">
             <div class="moment-view">
-              <div class="moment-all-view" ng-if="momentView == 1" infinite-scroll="getMoreMoments(allMoments)">
+              <div class="moment-all-view" ng-if="momentView == 1 && viewMonth==false" infinite-scroll="getMoreMoments(allMoments)">
                 <!-- empty all view profile user login for first time  -->
-                <div class="empty-moment-all empty-profile-moment text-center">
+                <div class="empty-moment-all empty-profile-moment text-center" ng-if="allMoments.arr.length==0">
                   <div class="row">
                     <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
                       <h3 class="color-pink empty-title">Unwind​ B​y Rewinding</h3>
@@ -55,113 +55,119 @@
                   </div>
                 </div>
                 <!-- empty all view profile user login for first time -->
-                <div class="month-collage" ng-repeat="singleObject in allMoments.arr track by $index" ng-click="getPerMonthMoments(singleObject,'all');"
-                  ng-hide="viewMonth" ng-if="singleObject.token!=-1">
-                  <h4 class="month-name">{{singleObject.token|momentsDate}}</h4>
-                  <div class="collage-month-view">
-                    <div class="flex-wrap-container">
-                      <div class="moment-imgholder" ng-repeat="img in singleObject.data track by $index">
-                        <img ng-src="{{img.name|uploadpath:80:80:'cover'}}" alt="" class="img-responsive">
+                <div ng-if="allMoments.arr.length!==0">
+                  <div class="month-collage" ng-repeat="singleObject in allMoments.arr track by $index" ng-click="getPerMonthMoments(singleObject,'all');"
+                    ng-if="singleObject.token!=-1 && viewMonth == false">
+                    <h4 class="month-name">{{singleObject.token|momentsDate}}</h4>
+                    <div class="collage-month-view">
+                      <div class="flex-wrap-container">
+                        <div class="moment-imgholder" ng-repeat="img in singleObject.data track by $index">
+                          <img ng-src="{{img.name|uploadpath:80:80:'cover'}}" alt="" class="img-responsive">
+                        </div>
                       </div>
                     </div>
                   </div>
-              </div>
-            </div>
-            <!-- moment all view end -->
-            <!-- moment travel view  -->
-            <div class="moment-travel-main" ng-if="momentView == 2" infinite-scroll="getMoreMoments(travelLifeMoments)">
-              <!-- empty travel view profile user login for first time  -->
-              <div class="empty-moment-travel empty-profile-moment text-center">
-                <div class="row">
-                  <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
-                    <h3 class="color-pink empty-title">Travel Becomes A Reason To Take Pictures And Store Them</h3>
-                    <p class="empty-descp">Some memories are worth sharing, travel surely tops the list. Your travels will not only inspire you
-                      to explore more of the world, you may just move another soul or two!</p>
-                  </div>
                 </div>
               </div>
-              <!-- empty travel view profile user login for first time-->
-              <!--<div class="container-fluid">
-                <div class="row">
-                  <div class="col-md-3 col-sm-4" >-->
-              <div class="moment-travel-view" ng-repeat="view in travelLifeMoments.arr" ng-click="getJournItiMoments(view);" ng-hide="viewMonth">
-                <div class="moment-travelimgholder pointer">
-                  <div class="img-backholder">
-                    <div class="backholder-height" ng-if="view.type==undefined">
-                    <img ng-src="{{view.coverPhoto|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="view.coverPhoto!=null">
-                    <img ng-src="{{view.startLocationPic|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="view.coverPhoto==null">
-                  </div>
-                    <div class="backholder-height" ng-if="view.type!=''">
-                    <img ng-src="{{view.photos.name|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="view.photos!=null">
-                  </div>
-                  </div>
-                  <div class="img-frontholder">
-                    <img src="img/moment-travel.png" alt="" class="img-responsive">
+              <!-- moment all view end -->
+              <!-- moment travel view  -->
+              <div class="moment-travel-main" ng-if="momentView == 2 && viewMonth==false" infinite-scroll="getMoreMoments(travelLifeMoments)">
+                <!-- empty travel view profile user login for first time  -->
+                <div class="empty-moment-travel empty-profile-moment text-center" ng-if="travelLifeMoments.arr.length==0">
+                  <div class="row">
+                    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
+                      <h3 class="color-pink empty-title">Travel Becomes A Reason To Take Pictures And Store Them</h3>
+                      <p class="empty-descp">Some memories are worth sharing, travel surely tops the list. Your travels will not only inspire you
+                        to explore more of the world, you may just move another soul or two!</p>
+                    </div>
                   </div>
                 </div>
-                <div class="travel-info text-center avenir-roman">
-                  <span class="pull-right">({{view.mediaCount}})</span>
-                  <h4>{{view.name}} </h4>
-                  <span class="color-light-grey">{{view.startTime|formatDate:'date'}}</span>
-                </div>
-                <!--</div>
-                  </div>
-                </div>-->
-              </div>
-            </div>
-            <!-- moment travel view end  -->
-            <!-- moment local view  -->
-            <div class="moment-local-main" ng-if="momentView == 3" infinite-scroll="getMoreMoments(localLifeMoments)">
-              <!-- empty local view profile user login for first time  -->
-              <div class="empty-moment-local empty-profile-moment text-center">
-                <div class="row">
-                  <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
-                    <h3 class="color-pink empty-title">Suspended In Time</h3>
-                    <p class="empty-descp">Beautiful memories created through fabulous pictures and videos of those precious moments shared with
-                      family, friends and yourself.</p>
-                  </div>
-                </div>
-              </div>
-              <!-- empty local view profile user login for first time-->
-              <!--<div class="container-fluid">
+                <!-- empty travel view profile user login for first time-->
+                <!--<div class="container-fluid">
                 <div class="row">
                   <div class="col-md-3 col-sm-4" >-->
-              <div class="moment-local-view" ng-repeat="moment in localLifeMoments.arr" ng-click="getPerMonthMoments(moment,'local');"
-                ng-hide="viewMonth" ng-if="moment.token!=-1">
-                <div class="moment-localimgholder pointer">
-                  <div class="img-backholder">
-                    <img ng-src="{{moment.data[0].name|uploadpath:150:150:'covver'}}" alt="" class="img-responsive">
-                  </div>
-                  <div class="img-frontholder">
-                    <img src="img/moment-local.png" alt="" class="img-responsive">
-                  </div>
-                </div>
-                <div class="local-info text-center avenir-roman">
-                  <h4>{{moment.token|momentsDate}} <span>({{moment.count}})</span></h4>
-                </div>
-                <!--</div>
+                <div ng-if="travelLifeMoments.arr.length!==0">
+                  <div class="moment-travel-view" ng-repeat="view in travelLifeMoments.arr" ng-click="getJournItiMoments(view);" ng-if="!viewMonth">
+                    <div class="moment-travelimgholder pointer">
+                      <div class="img-backholder">
+                        <div class="backholder-height" ng-if="view.type==undefined">
+                          <img ng-src="{{view.coverPhoto|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="view.coverPhoto!=null">
+                          <img ng-src="{{view.startLocationPic|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="view.coverPhoto==null">
+                        </div>
+                        <div class="backholder-height" ng-if="view.type!=''">
+                          <img ng-src="{{view.photos.name|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="view.photos!=null">
+                        </div>
+                      </div>
+                      <div class="img-frontholder">
+                        <img src="img/moment-travel.png" alt="" class="img-responsive">
+                      </div>
+                    </div>
+                    <div class="travel-info text-center avenir-roman">
+                      <span class="pull-right">({{view.mediaCount}})</span>
+                      <h4>{{view.name}} </h4>
+                      <span class="color-light-grey">{{view.startTime|formatDate:'date'}}</span>
+                    </div>
+                    <!--</div>
                   </div>
                 </div>-->
-            </div>
-          </div>
-          <div class="month-view-moments" ng-if="viewMonth">
-            <span ng-if="momentView!=2"><h4>{{token|momentsDate}} <span>({{count}})</span></h4>
-            </span>
-            <span ng-if="momentView==2"><h4>{{token}} <span>({{count}})</span></h4>
-            </span>
-            <div class="month-view-pic" infinite-scroll="getMorePhotos(album)">
-              <div class="flex-wrap-container">
-                <div class="singleMonth-imgholder" ng-repeat="monthMoments in album.perMonthMoments track by $index">
-                  <img ng-src="{{monthMoments.name|uploadpath:170:170:'cover'}}" alt="" class="img-responsive">
+                  </div>
+                </div>
+              </div>
+              <!-- moment travel view end  -->
+              <!-- moment local view  -->
+              <div class="moment-local-main" ng-if="momentView == 3 && viewMonth==false" infinite-scroll="getMoreMoments(localLifeMoments)">
+                <!-- empty local view profile user login for first time  -->
+                <div class="empty-moment-local empty-profile-moment text-center" ng-if="localLifeMoments.arr.length==0">
+                  <div class="row">
+                    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
+                      <h3 class="color-pink empty-title">Suspended In Time</h3>
+                      <p class="empty-descp">Beautiful memories created through fabulous pictures and videos of those precious moments shared with
+                        family, friends and yourself.</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- empty local view profile user login for first time-->
+                <!--<div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-3 col-sm-4" >-->
+                <div ng-if="localLifeMoments.arr.length!==0">
+                  <div class="moment-local-view" ng-repeat="moment in localLifeMoments.arr" ng-click="getPerMonthMoments(moment,'local');"
+                    ng-if="!viewMonth" ng-if="moment.token!=-1">
+                    <div class="moment-localimgholder pointer">
+                      <div class="img-backholder">
+                        <img ng-src="{{moment.data[0].name|uploadpath:150:150:'cover'}}" alt="" class="img-responsive">
+                      </div>
+                      <div class="img-frontholder">
+                        <img src="img/moment-local.png" alt="" class="img-responsive">
+                      </div>
+                    </div>
+                    <div class="local-info text-center avenir-roman">
+                      <h4>{{moment.token|momentsDate}} <span>({{moment.count}})</span></h4>
+                    </div>
+                    <!--</div>
+                  </div>
+                </div>-->
+                  </div>
+                </div>
+              </div>
+              <div class="month-view-moments" ng-if="viewMonth">
+                <span ng-if="momentView!=2"><h4>{{token|momentsDate}} <span>({{count}})</span></h4>
+                </span>
+                <span ng-if="momentView==2"><h4>{{token}} <span>({{count}})</span></h4>
+                </span>
+                <div class="month-view-pic" infinite-scroll="getMorePhotos(album)">
+                  <div class="flex-wrap-container">
+                    <div class="singleMonth-imgholder" ng-repeat="monthMoments in album.perMonthMoments track by $index">
+                      <img ng-src="{{monthMoments.name|uploadpath:170:170:'cover'}}" alt="" class="img-responsive">
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <!-- moment local view end -->
         </div>
       </div>
-      <!-- moment local view end -->
     </div>
   </div>
-</div>
-</div>
 </div>

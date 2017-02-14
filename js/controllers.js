@@ -4671,7 +4671,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               MyLife.getPerMonthMoments(album.token, album.pageNo, 24, album.type, function (data) {
                 album.scrollBusy = false;
                 if (data.data.length !== 0) {
-                  _.each(data.data, function () {
+                  _.each(data.data, function (n) {
                     // $scope.perMonthMoments.push(n);
                     album.perMonthMoments.push(n);
                   });
@@ -5343,7 +5343,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           });
           break;
         case 'checkIn':
-        console.log(filterdData,"-----------------------------------------");
+          console.log(filterdData, "-----------------------------------------");
           if (filterdData.checked === false) {
             $scope.localFilterPost.checkInType.push(filterdData.name);
             console.log($scope.localFilterPost.checkInType, 'array');
@@ -5438,7 +5438,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.localFilterPost.photos = false;
       $scope.localFilterPost.videos = false;
       $scope.localFilterPost.thoughts = false;
-      _.each($scope.localCategory, function(value){
+      _.each($scope.localCategory, function (value) {
         value.checked = false;
       });
       console.log($scope.localCategory);
@@ -14074,7 +14074,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // COUNTRY PAGE END
 
     // CITY PAGE
-    $scope.countryVisitedList = [{
+    $scope.cityVisitedList = [{
       cityName: 'Mumbai',
       countryName: 'India',
       cityImg: 'img/small-activity-slider.jpg'
@@ -14104,6 +14104,106 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       cityImg: 'img/paris.jpg'
     }];
     // CITY PAGE END
+
+    //user itinerary cards
+    $scope.usrItineraryCard = [{
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '35000',
+      noDays: '55',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '1505',
+      agtRating: '3.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '15 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '75000',
+      noDays: '15',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '342',
+      agtRating: '4.0',
+      agtLikesCount: '199',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }, {
+      timestampDate: '26 Jan, 2015',
+      timestampHour: '1:20 pm',
+      tripImg: 'img/paris.jpg',
+      itineraryTitle: 'Love In Paris',
+      tripCost: '25000',
+      noDays: '75',
+      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+      agtReviewCount: '352',
+      agtRating: '4.5',
+      agtLikesCount: '99',
+      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+    }];
+    //user itinerary cards end
   })
 
 

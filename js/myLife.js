@@ -180,7 +180,7 @@ var mylife = angular.module('mylife', [])
           // callback(journeys);
         });
       },
-      getAllMoments: function (token, limit, type, times, callback) {
+      getAllMoments: function (token, limit, type, times, callback) { //for all and locallife
         var obj = {
           "token": token,
           "limit": limit,
@@ -193,7 +193,7 @@ var mylife = angular.module('mylife', [])
           method: "POST"
         }).success(callback);
       },
-      getTravelLifeMoments: function (type, pageNo, callback) {
+      getTravelLifeMoments: function (type, pageNo, callback) { //for travel-life
         var obj = {
           "type": type,
           "pagenumber": pageNo
