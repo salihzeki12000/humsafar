@@ -68,19 +68,19 @@
       </div>
       <div class="pull-right">
         <div class="relate options" ng-init="localongo.edit={};">
-          <!--<span ng-click="editOption(localongo.edit);" class="pl10 inline-block pointer">
-            <img src="img/options.png" alt="" height="18">
-            </span>-->
                     <div class="pull-right mt5">
                                 <div class="rating-localpost inline-block" ng-if="localongo.checkIn && localongo.checkIn.location!='' && localongo.review && localongo.review==''">
             <span class="pointer" ng-click="rateLocalJourney(localongo);">Rate This Now</span>
           </div>
-          <div class="get-rating" ng-if="localongo.checkIn && localongo.checkIn.location!='' && localongo.review && localongo.review!=''">
+          <div class="get-rating inline-block" ng-if="localongo.checkIn && localongo.checkIn.location!='' && localongo.review && localongo.review!=''">
             <span class="color-blue font-bold mr5">Rating:</span>
             <span class="pointer" ng-click="rateLocalJourney(localongo);">
                 <span class="rated-star"><i class="fa fa-star color-cyan" ng-repeat="a in getLocalRating(localongo.review[0].rating,'marked') track by $index"></i></span>
             <span class="non-rated-star"><i class="fa fa-star-o" ng-repeat="b in getLocalRating(localongo.review[0].rating,'unmarked') track by $index"></i></span></span>
           </div>
+               <span ng-click="editOption(localongo.edit);" class="pl10 inline-block pointer">
+            <img src="img/options.png" alt="" height="18">
+            </span>
         </div>
           <div class="edit-journey-life" ng-show="localongo.edit.backgroundClick">
             <ul>
@@ -95,6 +95,9 @@
     </div>
     <div class="post-socail-reviews">
       <div class="clearfix">
+          <div class="pull-right">
+          <span class="color-blue mr20"></span>
+          </div>
         <div class="pull-left">
           <span class="color-blue mr20"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{localongo.likeCount}}</b>Likes</span>
           <!--<div class="rating-localpost inline-block" ng-if="localongo.checkIn && localongo.checkIn.location!='' && localongo.review && localongo.review==''">

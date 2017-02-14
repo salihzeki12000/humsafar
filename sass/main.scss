@@ -3134,8 +3134,15 @@ header {
   margin-top: 10px;
 
   .panel-title a {
-    padding: 10px 30px;
+    // padding: 10px 30px;
     display: block;
+    h3,h4{
+  padding: 10px 30px;
+    }
+    .fa{
+          margin-right: 20px;
+    margin-top: 12px;
+    }
   }
 
   .panel-default > .panel-heading {
@@ -3147,7 +3154,7 @@ header {
     h3 {
       font-size: 18px;
       font-weight: 700;
-      text-transform: uppercase;
+      text-transform: capitalize;
     }
   }
 
@@ -5260,7 +5267,7 @@ header {
     border-top-right-radius: 15px;
     box-shadow: -1px 1px 10px 0 rgba(0, 0, 0, 0.35), inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
     background-color: #f6fafc;
-    z-index: 10;
+    z-index: 5;
 
     &:after,
     &:before {
