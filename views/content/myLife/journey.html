@@ -98,6 +98,8 @@
                     <div class="journey-masonry-brick" ng-if="life.type=='ended-journey' || life.type=='on-the-go-journey'">
                       <div class="travel-life-part avenir-roman">
                         <div class="travel-journey-heading">
+                          <p ng-if="life.type=='ended-journey'">Has ended <span ng-if="life.user.gender=='male'">his</span><span ng-if="life.user.gender=='female'">her</span> Journey</p>
+                          <p ng-if="life.type=='on-the-go-journey'">Has started <span ng-if="life.user.gender=='male'">his</span><span ng-if="life.user.gender=='female'">her</span> Journey</p>
                           <p ng-hide="life.onJourney">{{life.heading}}</p>
                           <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
                             <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span> <span>{{life.timestampHour}}</span></p>
