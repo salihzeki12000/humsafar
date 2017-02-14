@@ -2996,7 +2996,7 @@ header {
 }
 
 .travel-info {
-  margin: 20px 0 0;
+  margin: 15px 5px;
 
   h4 {
     max-width: 150px;
@@ -3005,7 +3005,7 @@ header {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-
+    text-align: left;
     span {
       font-size: 13px;
     }
