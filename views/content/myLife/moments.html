@@ -132,7 +132,7 @@
                   <div class="col-md-3 col-sm-4" >-->
                 <div ng-if="localLifeMoments.arr.length!==0">
                   <div class="moment-local-view" ng-repeat="moment in localLifeMoments.arr" ng-click="getPerMonthMoments(moment,'local');"
-                    ng-if="!viewMonth" ng-if="moment.token!=-1">
+                    ng-if="moment.token!=-1 && viewMonth==false">
                     <div class="moment-localimgholder pointer">
                       <div class="img-backholder">
                         <img ng-src="{{moment.data[0].name|uploadpath:150:150:'cover'}}" alt="" class="img-responsive">

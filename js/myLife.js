@@ -204,15 +204,16 @@ var mylife = angular.module('mylife', [])
           method: "POST"
         }).success(callback);
       },
-      getPerMonthMoments: function (token, pageNo, limit, type, callback) {
+      getPerMonthMoments: function (token, pageNo, limit, flag, callback) {
+        console.log();
         var obj = {
           "token": token,
           "pagenumber": pageNo,
           "limit": limit
         };
-        if (type == 'local') {
+        if (flag == 'local') {
           obj.type = true;
-        } else if (type == 'all') {
+        } else if (flag == 'all') {
 
         }
         console.log(obj);

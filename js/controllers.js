@@ -4117,7 +4117,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.userData = $.jStorage.get("profile");
     $scope.showTravellife = false;
-    console.log("showTravellife-->", $scope.showTravellife);
     $scope.visited = [];
 
     //Integration Section Starts here
@@ -4323,7 +4322,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     function titleCase(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
-
     if ($scope.userData) {
       $scope.pronoun; //for he and she
       $scope.pronoun1; //for him and her
@@ -4556,10 +4554,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           "stopCallingApi": false,
           "type": "all"
         };
-        console.log($scope.allMoments);
       });
       MyLife.getTravelLifeMoments("travel-life", 1, function (data) {
-        console.log(data);
         $scope.travelLifeMoments = {
           "arr": data.data,
           "scrollBusy": false,
@@ -4568,10 +4564,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           "pageNo": 1
         };
         // $scope.travelLifeMoments = data.data;
-        console.log($scope.travelLifeMoments);
       });
       MyLife.getAllMoments("", 5, "local-life", 3, function (data) {
-        console.log(data);
         $scope.localLifeMoments = {
           "arr": data.data,
           "scrollBusy": false,
@@ -4582,18 +4576,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       })
     };
     $scope.getMoreMoments = function (moment) {
-      console.log(moment);
       if (moment.scrollBusy) {
         return;
       } else {
         if (moment.stopCallingApi) {
           return;
         } else {
-          console.log("passed 2 if");
           switch (moment.type) {
             case 'all':
             case 'local-life':
-              console.log("inside case 1");
               if (moment.arr.length == 0) {
                 return;
               } else {
@@ -4647,13 +4638,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         if (album.stopCallingApi) {
           return
         } else {
-          console.log("inside scroll done");
           album.pageNo++;
           album.scrollBusy = true;
-          console.log(album.type);
           switch (album.type) {
             case ('journey' || 'itinerary'):
-              console.log('inside case 1');
+              console.log("getJournItiMoments called by scrolling");
               MyLife.getJournItiMoments(album._id, album.pageNo, 24, album.type, function (data) {
                 album.scrollBusy = false;
                 if (data.data.length !== 0) {
@@ -4667,7 +4656,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 }
               });
               break;
-            case "all":
+            case 'all':
+            case 'local':
+              console.log("getPerMonthMoments called by scrolling");
               MyLife.getPerMonthMoments(album.token, album.pageNo, 24, album.type, function (data) {
                 album.scrollBusy = false;
                 if (data.data.length !== 0) {
@@ -4703,20 +4694,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var viewMonthDataCallback = function (data) {
       // $scope.perMonthMoments = data.data;
       $scope.album.perMonthMoments = data.data;
+      $scope.album.scrollBusy = false;
       console.log($scope.album.perMonthMoments);
     };
     $scope.getPerMonthMoments = function (obj, type) {
+      console.log("getPerMonthMoments called by ng-click");
       $scope.token = obj.token;
       $scope.count = obj.count;
       $scope.album = {
         "token": obj.token,
         "pageNo": 1,
-        "scrollBusy": false,
+        "scrollBusy": true,
         "type": type,
         "stopCallingApi": false,
         "perMonthMoments": []
       };
-      console.log($scope.count);
       // $scope.perMonthMoments = [];
       MyLife.getPerMonthMoments($scope.album.token, 1, 24, $scope.album.type, viewMonthDataCallback);
       $scope.showMonthView();
@@ -4725,12 +4717,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.getJournItiMoments = function (obj) {
       // $scope.perMonthMoments = [];
+      console.log("getJournItiMoments called by ng-click");
       $scope.token = obj.name;
       $scope.count = obj.mediaCount;
       $scope.album = {
         "_id": obj._id,
         "pageNo": 1,
-        "scrollBusy": false,
+        "scrollBusy": true,
         "stopCallingApi": false,
         "perMonthMoments": []
       };
@@ -5075,13 +5068,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // change url
     $scope.viewTab = 1;
-    console.log($state.params.name);
     switch ($state.params.name) {
       case "journey":
         $scope.myLife.innerView = allMyLife[0];
         break;
       case "moments":
-        console.log("setting moments URL");
         getMoments();
         $scope.myLife.innerView = allMyLife[1];
         break;
@@ -5328,7 +5319,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
       }
     }
-    console.log($scope.localLifeJourney.length, 'length');
     // pagination local life end
 
     // get by Filter
