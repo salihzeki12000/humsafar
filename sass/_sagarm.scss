@@ -3628,7 +3628,7 @@ q {
   padding: 15px;
 }
 
-.read-notification{
+.read-notification {
   position: absolute;
   right: 20px;
   bottom: 10px;
@@ -3798,8 +3798,9 @@ q {
 
 .notification-social-list {}
 
-.notification-social-btn{
+.notification-social-btn {
   margin: 25px 0;
+
   .fb-icon {
     background-color: #3b5998;
   }
@@ -3808,7 +3809,7 @@ q {
     background-color: #55acee;
   }
 
-  .google-icon{
+  .google-icon {
     background-color: #d34836;
   }
 
@@ -3816,8 +3817,8 @@ q {
     background-color: #cb2027;
   }
 
-  .instagram-icon{
-    background-color:  #cd486b;
+  .instagram-icon {
+    background-color: #cd486b;
     font-size: 16px;
   }
 
@@ -3825,6 +3826,7 @@ q {
     background-color: #007bb5;
   }
 }
+
 .btn-notification-social {
   width: 30px;
   height: 30px;
@@ -3834,7 +3836,10 @@ q {
   font-size: 15px;
   color: #fff;
   text-align: center;
-  &:hover, &:active, &:focus{
+
+  &:active,
+  &:focus,
+  &:hover {
     color: #fff;
   }
 }
@@ -4051,6 +4056,7 @@ q {
       @include transition(all 300ms linear);
     }
   }
+
   .active-itinerary {
     background: url('../img/itinerary/orangebox.png');
     background-size: 100% 100%;
@@ -4111,45 +4117,112 @@ q {
   }
 }
 //ITINERARY OPTIONS DROPDOWN END
-
-
 // SEARCH RESULT PAGE
 
-.search-result{
+.search-result {
   margin: 40px 0;
-  @extend .avenir-roman  ;
+  @extend .avenir-roman;
 }
 
-.search-navigation{
+.search-navigation {
   padding: 0 20px;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent, transparent, transparent, transparent, transparent);
   color: #424242;
-  li{
-    padding: 15px 20px;
+
+  ul{
+    .active {
+      &:after {
+        content: '';
+        width: 60px;
+        height: 3px;
+        background-color: $brand-pink;
+        position: absolute;
+        bottom: -3px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 16px;
+      }
+    }
+  }
+
+  li {
+    padding: 15px 20px 10px;
+    position: relative;
     font-size: 16px;
     @extend .pointer;
   }
 }
 
-.search-result-content{
+.search-result-content {
   padding: 20px;
 }
-
 // SEARCH TRAVELLER
-.search-traveller{
+
+.search-traveller {
   padding: 30px 0;
 }
 // SEARCH TRAVELLER END
-
 // SEARCH COUNTRY
-.search-country{
+
+.search-country-tab .country-list-holder{
+  border-radius: 4px;
+}
+
+.search-country {
   padding: 30px 0;
 }
 // SEARCH COUNTRY END
-
 // SEARCH CITY
-.search-city{
+
+.search-city {
   padding: 30px 0;
+
+  .searchcity-country-name {
+    color: #fff;
+    font-size: 12px;
+    text-shadow: 2px 2px 2px #000;
+    vertical-align: top;
+  }
+
+  .bucket-flag {
+    display: inline-block;
+  }
+
+  .search-citydetails {
+    width: 100%;
+    padding: 10px 10px 5px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+    color: #fff;
+    font-size: 12px;
+    text-shadow: 2px 2px 2px #000;
+    z-index: 1;
+  }
+}
+
+.search-city-tab .country-list-holder{
+  border-radius: 4px;
 }
 // SEARCH CITY END
+
+// SEARCH ITINERARY
+.search-itinerary {
+  padding: 0;
+}
+.search-itinerary-card{
+  .country-holder{
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #fff;
+    float: left;
+    margin-left: -10px;
+    border-radius: 100%;
+  }
+}
+// SEARCH ITINERARY END
+
 // SEARCH RESULT PAGE END

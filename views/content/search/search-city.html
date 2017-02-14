@@ -3,19 +3,25 @@
     <div class="country-visited-tab search-city-tab">
       <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="city in cityVisitedList track by $index">
         <div class="country-list-holder">
-          <div class="list-imgholder" style="background-image: url('{{country.countryImg}}');">
+          <div class="list-imgholder" style="background-image: url('{{city.cityImg}}');">
             <!-- <img ng-src="{{country.countryId.countryCoverPhoto|uploadpath}}" alt="" class="img-responsive country-img">  -->
             <div class="list-info">
               <div class="clearfix">
                 <div class="pull-left">
-                  <h4 class="avenir-heavy">{{country.countryName}} <span>2015</span></h4>
+                  <h4 class="avenir-heavy">{{city.cityName}}</h4>
                 </div>
                 <div class="pull-right">
+                  <span class="searchcity-country-name">{{city.countryName}}</span>
                   <div class="bucket-flag">
                     <img src="img/flag.png" alt="Flag" class="img-responsive" width="30">
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div class="search-citydetails">
+              <span>Must Do's: <span>33</span> | </span>
+              <span>Itineraries: <span>222</span></span>
             </div>
             <!-- hover -->
             <div class="country-list">
