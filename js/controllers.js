@@ -14194,6 +14194,171 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
     }];
     //user itinerary cards end
+
+    // HASHTAG CARDS
+    $scope.activityPost = [{
+      class: "travel-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. #hagtags,#hagtags1,#hagtags2,",
+      relatedPhoto: [
+        'img/blog/blog-post.jpg',
+        'img/blog/blog-post2.jpg',
+        'img/blog/blog-post3.jpg',
+        'img/blog/blog-post4.jpg',
+        'img/blog/blog-post.jpg',
+        'img/blog/blog-post2.jpg',
+        'img/blog/blog-post3.jpg',
+        'img/blog/blog-post4.jpg',
+      ],
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: true,
+      video: false,
+      photo: true,
+      photoSlider: true,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      activitySec: true,
+      visitPost: false
+    }, {
+      class: "travel-taught",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+      hashtag: [{
+        tag: "#hagtags"
+      }, {
+        tag: "#hagtags1"
+      }, {
+        tag: "#hagtags2",
+      }, ],
+      editor: false,
+      userPic: true,
+      follow: true,
+      following: false,
+      postIcon: true,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "local-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      relatedPhoto: [
+        'img/blog/blog-post.jpg',
+        'img/blog/blog-post2.jpg',
+        'img/blog/blog-post3.jpg',
+        'img/blog/blog-post4.jpg',
+        'img/blog/blog-post.jpg',
+        'img/blog/blog-post2.jpg',
+        'img/blog/blog-post3.jpg',
+        'img/blog/blog-post4.jpg',
+      ],
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: true,
+      video: false,
+      photo: true,
+      photoSlider: true,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }, {
+      class: "local-life-taught",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: true,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "local-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      editor: false,
+      userPic: true,
+      follow: true,
+      following: false,
+      postIcon: true,
+      video: false,
+      photo: true,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "local-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: true,
+      video: true,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }];
+    // HASHTAG CARDS END
+
+    // HASHTAG IMAGE SLIDER
+    setTimeout(function () {
+      $('.travelocal-slider').flexslider({
+        animation: "slide",
+        animationLoop: false,
+        itemWidth: 150,
+        itemMargin: 3,
+        mousewheel: true,
+        directionNav: false,
+        controlNav: false,
+      });
+    }, 100);
+    // HASHTAG IMAGE SLIDER END
   })
 
 
