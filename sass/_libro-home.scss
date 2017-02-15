@@ -1350,52 +1350,7 @@ a.full-screen {
       }
 }
 
-//About
-.bg-about{
-    background: url('../img/bg-about-home.jpg') no-repeat;
-  background-size: cover;
-  .head-about {
-  font-size: 100px !important;
- text-shadow: 3px 1px 3px rgba(0, 0, 0, 0.5);
-  @extend .avenir-heavy;
-}
-}
-.about-reviews{
-  background: url('../img/bg-about.jpg') no-repeat;
-  background-size: cover;
-  .head-revealed {
-    padding: 60px 0 0;
-}
-  .about-content {
-    p {
-    margin: 0 0 20px;
-}
-  }
-.our-story {
-.title-head {
-h4{
-      padding: 15px 0;
-      font-size: 18px;
-      @extend .avenir-heavy;
-}
-}
-}
-.head-revealed {
-ul{
-  li{
-    font-size: 18px;
-       @extend .avenir-heavy;
-  }
-}
-}
-.bg-black {
-    background: #000;
-}
-.footer-about {
-    padding: 6px 20px;
-    @extend .avenir-heavy;
-}
-}
+
 .follow-following{
 @extend .avenir-heavy;
     font-size: 13px;

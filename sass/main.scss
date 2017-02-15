@@ -2274,16 +2274,16 @@ header {
 
 .progress-bar-strip {
   width: 100%;
-  height: 8px;
+  height: 6px;
   position: relative;
   // background-color: $brand-pink;
   background-color: #bfbfbf;
 
   &:after {
     content: "";
-    @include size(8px, 17px);
+    @include size(6px, 14px);
     border-radius: 20px;
-    @include position(absolute, -5px null null 0);
+    @include position(absolute, -4px null null 0);
     // background-color: $brand-pink;
     background-color: $brand-light-grey;
   }
