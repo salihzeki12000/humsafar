@@ -4107,7 +4107,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     })
   })
 
-  .controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, $filter, MyLife, OnGoJourney, localLife) {
+  .controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, $filter, MyLife, OnGoJourney, localLife, LikesAndComments) {
     //Used to name the .html file
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("mylife");
@@ -4120,7 +4120,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.visited = [];
 
     //Integration Section Starts here
-
+    // backgroundClick
+    $scope.editOption = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+    //backgroundClick
 
     var arr = ($scope.userData.homeCity).split(",");
     $scope.homeCity = arr[0];
@@ -4714,6 +4722,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.showMonthView();
     };
 
+    //Photo comment popup
+    $scope.getPhotosCommentData = function (photoId) {
+      console.log(photoId, "mdmdsdsdmks");
+      modal = $uibModal.open({
+        templateUrl: "views/modal/notify.html",
+        animation: true,
+        scope: $scope,
+        windowClass: "notify-popup"
+      });
+      modal.closed.then(function () {
+        $scope.listOfComments = {};
+      });
+      var callback = function (data) {
+        $scope.uniqueArr = [];
+        $scope.listOfComments = data.data;
+        console.log($scope.listOfComments);
+        $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+      };
+      LikesAndComments.getComments("photo", photoId, callback);
+    };
+
+    $scope.postPhotosComment = function (uniqueId, comment, postId, photoId) {
+      console.log(uniqueId, comment, postId, photoId);
+      var type = "photo";
+      var hashTag = [];
+      var callback = function (data) {
+        $scope.listOfComments = data.data;
+        document.getElementById('enterComment').value = "";
+      }
+      LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, photoId, callback);
+    };
+    //Photo comment popup end
+
 
     $scope.getJournItiMoments = function (obj) {
       // $scope.perMonthMoments = [];
@@ -4758,6 +4799,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log(wholePost);
       $scope.postReview = {};
       $scope.checkIn = post.checkIn; // this is to diplay checkin location inside uib modal
+      $scope.checkIn.type = post.type;
       if (post.review.length !== 0) {
         console.log("Edit Rating");
         $scope.postReview = post.review[0];
@@ -9741,6 +9783,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //Photo comment popup
     $scope.getPhotosCommentData = function (photo) {
+      console.log(photo);
       $scope.listOfComments = photo;
       modal = $uibModal.open({
         templateUrl: "views/modal/quickitinerary-notify.html",
@@ -10138,13 +10181,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       modal.closed.then(function () {
         $scope.listOfComments = {};
       });
-      // var callback = function(data) {
-      //   $scope.uniqueArr = [];
-      //   $scope.listOfComments = data.data;
-      //   console.log($scope.listOfComments);
-      //   $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
-      // };
-      // LikesAndComments.getComments("photo",photoId,callback);
     };
 
     $scope.postPhotosComment = function (uniqueId, comment, postId, photoId) {
@@ -10865,7 +10901,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
 
-  .controller('headerctrl', function ($scope, TemplateService, NavigationService, $state, $interval) {
+  .controller('headerctrl', function ($scope, TemplateService, NavigationService, $state, $interval, $timeout) {
     var currentUrl = window.location.href;
     $scope.template = TemplateService;
     NavigationService.getProfile(function (data, status) {
@@ -10925,6 +10961,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           console.log(err);
         });
     };
+    // backgroundClick
+    $scope.editOption = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+    //backgroundClick
 
   })
   .controller('AgentloginCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
