@@ -98,6 +98,15 @@ var ongojourney = angular.module('ongojourney', [])
           callback();
         });
       },
+      endDateJourney: function (formData, callback) {
+        $http({
+          url: adminURL + "/journey/editData/",
+          method: "POST",
+          data: formData
+        }).success(function (data) {
+          callback();
+        });
+      },
       getPostsComment: function (id, callback) {
         var formData = {
           "_id": id
@@ -936,7 +945,13 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
           $scope.time.am_pm = val;
         }
       }
-
+      $scope.confirmDelete = function(){
+        modal = $uibModal.open({
+          animation: true,
+          templateUrl: 'views/modal/delete-post.html',
+          scope: $scope
+        })
+      }
       $scope.deletePost = function (postId, journeyId) {
         console.log(postId, journeyId);
         var formData = {

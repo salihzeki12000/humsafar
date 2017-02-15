@@ -95,6 +95,7 @@
                   <li><a href="" title="Journey Cover Photo" ng-click="coverPhoto(journey._id);">Journey Cover Photo</a></li>
                   <li><a href="" title="Journey Name" ng-click="nameJourney(journey.name);">Journey Name</a></li>
                   <li><a href="" title="Reviews Countries Visited" ng-click="countryReview();">Reviews Countries Visited</a></li>
+                  <li ng-if="journey.onGoing == false"><a href="" title="Reviews Countries Visited" ng-click="changeEndDate();">Change End Journey Date</a></li>
                 </ul>
               </div>
             </div>

@@ -1065,7 +1065,62 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       OnGoJourney.updateBannerDateTime(result, callback);
     };
     //change banner date and time ends
+    // change ended journey date
+    $scope.time = {};
+    $scope.datetime = {};
+    $scope.changeEndDate = function () {
+      console.log("end journey Date");
+      $scope.isPostDate = false;
+      $scope.isBanner = false;
+      $scope.isEndDate = true;
+      date = $scope.journey.endTime;
+      var d = new Date(date);
+      var hh = d.getHours();
+      if (hh > 12) {
+        hh = hh - 12;
+        $scope.time.am_pm = "PM";
+      } else {
+        $scope.time.am_pm = "AM";
+      }
+      $scope.time.hour = hh;
+      $scope.time.min = d.getMinutes();
+      $scope.datetime.dt = d;
 
+      console.log($scope.journey.post[$scope.journey.post.length - 1].UTCModified);
+      $scope.options = {
+        minDate: new Date(1 / 1 / 1970),
+        maxDate: new Date($scope.journey.post[$scope.journey.post.length - 1].UTCModified),
+        showWeeks: false
+      };
+      modal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/date-time.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+      })
+    };
+    $scope.endJourneyDate = function (id, formData, dt) {
+      console.log(dt);
+      var date = $filter('formatDateCalender')(dt);
+      var time = $filter('formatTimeCalender')(formData);
+      var result = {};
+      var callback = function (data) {
+        var formData = {
+          "urlSlug": $scope.journey.urlSlug
+        }
+        OnGoJourney.getOneJourney(formData, function (journeys) {
+          $scope.journey.endTime = journeys.endTime;
+          modal.close();
+          console.log(journeys);
+        }, function (err) {
+          console.log(err);
+        });
+      }
+      result._id = id;
+      result.endTime = new Date(date + " " + time);
+      OnGoJourney.endDateJourney(result, callback);
+    };
+    // change ended journey date end
     //maps integration starts here
     var mapStyle = [{
       "featureType": "all",
@@ -5193,16 +5248,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     $scope.openLocalimg = function (getVal) {
-      // $scope.showimgData = $scope.localLife[getVal];
-      $scope.showimgData = getVal;
-      // console.log(getVal);
-      $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/local-imgview.html",
-        scope: $scope,
-        windowTopClass: "local-imgview-pop"
-      })
-    };
+         // $scope.showimgData = $scope.localLife[getVal];
+         $scope.showimgData = getVal;
+         // console.log(getVal);
+         $uibModal.open({
+           animation: true,
+           templateUrl: "views/modal/local-imgview.html",
+           scope: $scope,
+           windowTopClass: "notify-popup"
+         })
+       };
     var pageNo = 0;
     $scope.scroll = {
       busy: false
@@ -5556,17 +5611,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.heatmapColors = ['#2c3757', '#ff6759'];
 
     $scope.openLocalimg = function (getVal) {
-      // $scope.showimgData = $scope.localLife[getVal];
-      $scope.showimgData = getVal;
-      // console.log(getVal);
-      console.log("localImg");
-      $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/local-imgview.html",
-        scope: $scope,
-        windowTopClass: "local-imgview-pop"
-      })
-    };
+         // $scope.showimgData = $scope.localLife[getVal];
+         $scope.showimgData = getVal;
+         // console.log(getVal);
+         $uibModal.open({
+           animation: true,
+           templateUrl: "views/modal/local-imgview.html",
+           scope: $scope,
+           windowTopClass: "notify-popup"
+         })
+       };
 
   })
   .controller('MomentsCtrl', function ($scope, TemplateService, NavigationService, $timeout, $location, $anchorScroll) {
