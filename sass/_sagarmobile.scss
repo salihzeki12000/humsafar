@@ -945,10 +945,10 @@
     @include transition (translateY(-50%));
   }
 
-  .destination .country-title h4 {
+  .destination .country-title h4 ,
+  .bg-about .country-title .head-about {
     font-size: 30px;
   }
-
   .destination-content .img-holder .title-head-left {
     font-size: 20px;
   }
