@@ -4255,3 +4255,23 @@ q {
 // SEARCH ITINERARY END
 
 // SEARCH RESULT PAGE END
+
+
+// DELETE POST POPUP
+.delete-post {
+  padding: 20px 0 0;
+  margin-top: 20px;
+  background-color: #fff;
+  text-align: center;
+  @extend .avenir-roman;
+
+  .delete-confirmation {
+    padding: 10px;
+    display: block;
+    margin-top: 10px;
+    border: 1px solid $brand-light-grey;
+    @extend .avenir-roman;
+    cursor: pointer;
+  }
+}
+// DELETE POST POPUP END

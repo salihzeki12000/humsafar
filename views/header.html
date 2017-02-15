@@ -16,7 +16,7 @@
               <span class="icon-bar box-shadow {{secondbar}}"></span>
               <span class="icon-bar box-shadow {{thirdbar}}"></span>
             </div>
-            <div class="search inline-block relate v-top hidden-xs"  ng-init="viewSearch={};" ng-click="editOption(viewSearch);">
+            <div class="search inline-block relate v-top hidden-xs" ng-init="viewSearch={};" ng-click="editOption(viewSearch);">
               <form action="">
                 <input type="text" class="form-control" placeholder="Search people, destinations, itineraries, agents and tags">
                 <div class="search-result-dropdown" ng-show="viewSearch.backgroundClick;">
@@ -291,13 +291,171 @@
         <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
           <form action=" ">
             <div class="form-group ">
-              <div class="input-group ">
+              <div class="input-group " ng-init="viewSearch={};" ng-click="editOption(viewSearch);">
                 <span class="input-group-addon ">
                   <a class="color-white fnt-22 ">
                       <i class="fa fa-search "></i>
                   </a>
                 </span>
                 <input type="text " class="form-control color-white avenir-light " id="search " aria-describedby="Search" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags ">
+                <div class="search-result-dropdown" ng-show="viewSearch.backgroundClick;">
+                  <div class="search-traveller-drop">
+                    <div class="search-dropheader clearfix">
+                      <span class="pull-left">Traveller</span>
+                      <a class="pull-right">View All</a>
+                    </div>
+                    <ul class="searchdrop-options">
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="search-itinerary-drop">
+                    <div class="search-dropheader clearfix">
+                      <span class="pull-left">Itinerary</span>
+                      <a class="pull-right">View All</a>
+                    </div>
+                    <ul class="searchdrop-options">
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="search-hashtag-drop">
+                    <div class="search-dropheader clearfix">
+                      <span class="pull-left">Hashtags</span>
+                      <a class="pull-right">View All</a>
+                    </div>
+                    <ul class="searchdrop-options">
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="search-country-drop">
+                    <div class="search-dropheader clearfix">
+                      <span class="pull-left">Country</span>
+                      <a class="pull-right">View All</a>
+                    </div>
+                    <ul class="searchdrop-options">
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="search-city-drop">
+                    <div class="search-dropheader clearfix">
+                      <span class="pull-left">City</span>
+                      <a class="pull-right">View All</a>
+                    </div>
+                    <ul class="searchdrop-options">
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="search-travelagent-drop" hidden>
+                    <div class="search-dropheader clearfix">
+                      <span class="pull-left">Travel Agents</span>
+                      <a class="pull-right">View All</a>
+                    </div>
+                    <ul class="searchdrop-options">
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                      <li class="search-option">
+                        <div class="search-option-img">
+                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                        </div>
+                        <span class="search-optiontxt">India</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </form>
@@ -311,19 +469,178 @@
     <div class="container-fluid ">
       <div class="row ">
         <div class="col-md-offset-3 col-md-6 ">
-          <form action=" ">
-            <div class="form-group ">
-              <div class="input-group ">
-                <span class="input-group-addon ">
-                  <a class="color-white fnt-22 ">
-                      <i class="fa fa-search "></i>
-                  </a>
-                </span>
-                <input type="text " class="form-control color-white avenir-light " id="search " aria-describedby="Search
-  " placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags ">
+          <div class="" ng-init="viewSearch={};" ng-click="editOption(viewSearch);">
+            <form action=" ">
+              <div class="form-group ">
+                <div class="input-group ">
+                  <span class="input-group-addon ">
+                    <a class="color-white fnt-22 ">
+                        <i class="fa fa-search "></i>
+                    </a>
+                  </span>
+                  <input type="text " class="form-control color-white avenir-light " id="search " aria-describedby="Search" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags ">
+                  <div class="search-result-dropdown" ng-show="viewSearch.backgroundClick;">
+                    <div class="search-traveller-drop">
+                      <div class="search-dropheader clearfix">
+                        <span class="pull-left">Traveller</span>
+                        <a class="pull-right">View All</a>
+                      </div>
+                      <ul class="searchdrop-options">
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="search-itinerary-drop">
+                      <div class="search-dropheader clearfix">
+                        <span class="pull-left">Itinerary</span>
+                        <a class="pull-right">View All</a>
+                      </div>
+                      <ul class="searchdrop-options">
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="search-hashtag-drop">
+                      <div class="search-dropheader clearfix">
+                        <span class="pull-left">Hashtags</span>
+                        <a class="pull-right">View All</a>
+                      </div>
+                      <ul class="searchdrop-options">
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="search-country-drop">
+                      <div class="search-dropheader clearfix">
+                        <span class="pull-left">Country</span>
+                        <a class="pull-right">View All</a>
+                      </div>
+                      <ul class="searchdrop-options">
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="search-city-drop">
+                      <div class="search-dropheader clearfix">
+                        <span class="pull-left">City</span>
+                        <a class="pull-right">View All</a>
+                      </div>
+                      <ul class="searchdrop-options">
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="search-travelagent-drop" hidden>
+                      <div class="search-dropheader clearfix">
+                        <span class="pull-left">Travel Agents</span>
+                        <a class="pull-right">View All</a>
+                      </div>
+                      <ul class="searchdrop-options">
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                        <li class="search-option">
+                          <div class="search-option-img">
+                            <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          </div>
+                          <span class="search-optiontxt">India</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
