@@ -16,10 +16,10 @@
               <span class="icon-bar box-shadow {{secondbar}}"></span>
               <span class="icon-bar box-shadow {{thirdbar}}"></span>
             </div>
-            <div class="search inline-block relate v-top hidden-xs">
+            <div class="search inline-block relate v-top hidden-xs"  ng-init="viewSearch={};" ng-click="editOption(viewSearch);">
               <form action="">
                 <input type="text" class="form-control" placeholder="Search people, destinations, itineraries, agents and tags">
-                <div class="search-result-dropdown">
+                <div class="search-result-dropdown" ng-show="viewSearch.backgroundClick;">
                   <div class="search-traveller-drop">
                     <div class="search-dropheader clearfix">
                       <span class="pull-left">Traveller</span>

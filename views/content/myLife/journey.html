@@ -191,22 +191,22 @@
                               </ul>
                             </div>
                             <div class="pull-right">
-                              <div class="relate options pointer">
-                                <div class="">
-                                  <span><img src="img/options.png" alt="" height="18"></span>
+                              <div class="relate options pointer" ng-init="life.dropdown = {};">
+                                <div class="" ng-click="editOption(life.dropdown)">
+                                  <span class="pl10"><img src="img/options.png" alt="" height="18"></span>
                                 </div>
-                                <div class="journey-edit-options hide">
-                                  <ul>
+                                <div class="journey-edit-options" ng-show="life.dropdown.backgroundClick;">
+                                  <ul ng-click="routeTO(life.type,life.urlSlug)">
                                     <li>
                                       <a href="">Edit Journey Name</a>
                                     </li>
                                     <li ng-if="life.type=='ended-journey'">
                                       <a href="">Change End Journey Date</a>
                                     </li>
-                                    <li ng-click="coverPhoto(journey._id);">
+                                    <li>
                                       <a href="">Change Cover Photo</a>
                                     </li>
-                                    <li ng-click="countryReview();">
+                                    <li>
                                       <a href="">Rate Countries</a>
                                     </li>
                                   </ul>
