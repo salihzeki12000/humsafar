@@ -277,6 +277,11 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
         }
       };
 
+      $scope.playAudio = function () {
+        var audio = document.getElementById('like-play');
+        audio.play();
+      }
+
       // $scope.getLikes = function (id) {
       //   var formData = {
       //     "_id": id
@@ -956,6 +961,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       $scope.giveReview = function (checkin) {
         console.log(checkin, "location");
         $scope.checkIn = checkin;
+        $scope.checkIn.type = 'travel-life';
         modal = $uibModal.open({
           animation: true,
           templateUrl: "views/modal/review-post.html",
