@@ -80,7 +80,9 @@ img.doneLoading {
 nav li:hover .dropdown-menu {
   display: block;
 }
-
+.bold{
+  font-weight: 800;
+}
 .btn,
 a {
   cursor: pointer;
@@ -815,6 +817,7 @@ header {
 .button-panel {
   margin-top: 80px;
 }
+
 // nation tab
 
 .nation-select {
@@ -2260,7 +2263,7 @@ header {
 
   &:after {
     content: "";
-    @include size(8px, 17px);
+    @include size(6px, 14px);
     border-radius: 20px;
     @include position(absolute, 5px 10px null null);
     background-color: $brand-light-grey;
@@ -2896,6 +2899,7 @@ header {
 
 .collage-month-view {
   .flex-wrap-container .row {
+    margin: 0;
     .col-xs-1 , .col-xs-2{
     padding: 2px;
 }
@@ -3024,24 +3028,31 @@ header {
 //   }
 // }
 
-.moment-local-view {
-  margin: 15px 20px 15px 0;
-  display: inline-block;
-}
+// .moment-local-view {
+//   margin: 15px 20px 15px 0;
+//   display: inline-block;
+// }
 
 .moment-localimgholder {
-  @include square(185px);
-  position: relative;
-
+  // @include square(185px);
+  // position: relative;
   .img-backholder {
-    @include square(150px);
-    @include position(absolute, 30px null null 15px);
+    // @include square(150px);
+    width: 100%;
+    // @include position(absolute, 30px null null 15px);
     overflow: hidden;
+   img {
+    width: 100%;
+    padding: 35px 15px;
+    }
   }
 
   .img-frontholder {
-    @include square(185px);
+    width: 100%;
     @include position(absolute, 0 null null 0);
+     img {
+    width: 100%;
+    }
   }
 }
 // local moment imgholder end
@@ -3199,7 +3210,7 @@ header {
   }
 
   .review-local-life {
-    padding: 20px 0;
+    padding: 20px 10px;
     border-bottom: 1px solid $brand-grey;
 
     .place-name {
@@ -9741,6 +9752,7 @@ header {
 
   .view-comment-list {
     margin-bottom: 20px;
+    position: relative;
   }
 
   .share-option-main {
@@ -9798,6 +9810,7 @@ header {
   }
 
   .comment-ur-text {
+    // padding-left: 42px;
     width: 95%;
     margin-left: -4px;
     display: inline-block;
@@ -10429,9 +10442,10 @@ header {
 
 .notify-main {
   .comment-sec {
-    padding-top: 20px;
+    padding-top: 15px;
     border-top: 1px solid #ccc;
     margin-top: 10px;
+    position: relative;
 
     ::-webkit-scrollbar {
       width: 4px;
@@ -10447,7 +10461,9 @@ header {
     }
 
     .view-comment-list {
-      margin-bottom: 20px;
+        padding: 7px 0;
+        margin: 7px 0;
+        position: relative;
     }
 
     .commenter-imgholder {
@@ -10468,16 +10484,19 @@ header {
     }
 
     .commenter-img {
-      width: 10%;
-      display: inline-block;
-      vertical-align: top;
+      // width: 10%;
+      // display: inline-block;
+      // vertical-align: top;
+    position: absolute;
+    top: 7px;
     }
 
     .comment-container {
-      width: 90%;
-      margin-left: -5px;
-      display: inline-block;
-      vertical-align: top;
+         padding-left: 40px;
+      // width: 90%;
+      // margin-left: -5px;
+      // display: inline-block;
+      // vertical-align: top;
     }
 
     .write-comment-text {
@@ -10485,10 +10504,11 @@ header {
     }
 
     .comment-ur-text {
-      width: 90%;
-      margin-left: -5px;
-      display: inline-block;
-      vertical-align: bottom;
+      padding-left: 42px;
+      // width: 90%;
+      // margin-left: -5px;
+      // display: inline-block;
+      // vertical-align: bottom;
 
       textarea {
         border: none;

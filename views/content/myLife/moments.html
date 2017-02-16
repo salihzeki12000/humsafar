@@ -65,7 +65,7 @@
                           <div class="col-xs-1" ng-repeat="img in singleObject.data track by $index">
                             <div class="moment-imgholder">
                               <img ng-src="{{img.name|uploadpath:80:80:'cover'}}" alt="" class="img-responsive" ng-if="img.type=='photo'">
-                              <img ng-src="{{img.thumbnail|uploadpath:80:80:'cover'}}" alt="" class="img-responsive" style="border:2px solid red" ng-if="img.type=='video'">
+                              <img ng-src="{{img.thumbnail|uploadpath:80:80:'cover'}}" alt="" class="img-responsive" ng-if="img.type=='video'">
                             </div>
                           </div>
                         </div>
@@ -93,7 +93,7 @@
                   <div class="col-md-3 col-sm-4" >-->
                 <div ng-if="travelLifeMoments.arr.length!==0">
                   <div class="row">
-                    <div class="col-xs-3" ng-repeat="view in travelLifeMoments.arr" ng-click="getJournItiMoments(view);" ng-if="!viewMonth">
+                    <div class="col-sm-3 col-xs-4" ng-repeat="view in travelLifeMoments.arr" ng-click="getJournItiMoments(view);" ng-if="!viewMonth">
                       <div class="moment-travel-view">
                         <div class="moment-travelimgholder pointer">
                           <div class="img-backholder">
@@ -140,13 +140,16 @@
                 <div class="row">
                   <div class="col-md-3 col-sm-4" >-->
                 <div ng-if="localLifeMoments.arr.length!==0">
-                  <div class="moment-local-view" ng-repeat="moment in localLifeMoments.arr" ng-click="getPerMonthMoments(moment,'local');"
+                  <div class="row">
+                    <div class="col-sm-3 col-xs-4" ng-repeat="moment in localLifeMoments.arr" ng-click="getPerMonthMoments(moment,'local');"
                     ng-if="moment.token!=-1 && viewMonth==false">
+                                        <div class="moment-local-view">
                     <div class="moment-localimgholder pointer">
                       <div class="img-backholder">
-                        <img ng-src="{{moment.data[0].name|uploadpath:150:150:'cover'}}" alt="" class="img-responsive" ng-if="moment.data[0].type=='photo'">
-                        <img ng-src="{{moment.data[0].thumbnail|uploadpath:150:150:'cover'}}" alt="" class="img-responsive" style="border:2px solid red"
-                          ng-if="moment.data[0].type=='video'">
+                        <img ng-src="{{moment.data[0].name|uploadpath:180:180:'cover'}}" alt="" class="img-responsive" ng-if="moment.data[0].type=='photo'">
+                        <!--<img ng-src="{{moment.data[0].thumbnail|uploadpath:180:180:'cover'}}" alt="" class="img-responsive" style="border:2px solid red"
+                          ng-if="moment.data[0].type=='video'">-->
+                               <img ng-src="{{moment.data[0].thumbnail|uploadpath:180:180:'cover'}}" alt="" class="img-responsive" ng-if="moment.data[0].type=='video'">
                       </div>
                       <div class="img-frontholder">
                         <img src="img/moment-local.png" alt="" class="img-responsive">
@@ -159,6 +162,9 @@
                   </div>
                 </div>-->
                   </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
               <div class="month-view-moments" ng-if="viewMonth">
@@ -173,7 +179,7 @@
                         <div class="singleMonth-imgholder">
                           <img ng-src="{{monthMoments.name|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="monthMoments.type=='photo'"
                             ng-click="getPhotosCommentData(monthMoments._id)">
-                          <img ng-src="{{monthMoments.thumbnail|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" style="border:2px solid red"
+                          <img ng-src="{{monthMoments.thumbnail|uploadpath:170:170:'cover'}}" alt="" class="img-responsive"
                             ng-if="monthMoments.type=='video'">
                         </div>
                       </div>
