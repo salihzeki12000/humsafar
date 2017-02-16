@@ -27,7 +27,7 @@
             </div>
             <div class="category-location" ng-init="localongo.typeJourney= {};">
               <input type="text" class="form-control" ng-model="localongo.checkIn.category" placeholder="Select Category" ng-click="editOption(localongo.typeJourney)">
-              <div class="dropdown-otg-category" ng-show="localongo.typeJourney.backgroundClick;">
+              <div class="dropdown-otg-category otg-local" ng-show="localongo.typeJourney.backgroundClick;">
                 <ul>
                   <li ng-repeat="category in categoryList" ng-click="localongo.checkIn.category=category;"><a href="">{{category}}</a></li>
                 </ul>
@@ -73,9 +73,9 @@
         <!-- tag friends sec end-->
         <!-- otg thought sec -->
         <div class="col-md-4 col-sm-12">
-          <div class="edit-otg-thought otg-bg-all">
+          <div class="edit-otg-thought otg-color-cyan otg-bg-all">
             <img src="img/localjourney/local-thought.png" alt="" class="img-responsive icon-thought" width="20">
-            <div class="otg-thought" ng-init="localongo.editArea={};localongo.editArea.backgroundClick = false">
+            <div class="otg-thought otg-color-cyan" ng-init="localongo.editArea={};localongo.editArea.backgroundClick = false">
               <textarea maxlength="150" class="form-control edit-textarea" id="editTextarea" ng-model="localongo.thoughts" ng-click="editOption(localongo.editArea);" ng-class="{'opened-editarea': localongo.editArea.backgroundClick == true, '': localongo.editArea.backgroundClick == false}">{{localongo.thoughts}}</textarea>
               <!-- hashtag in edit -->
                 <find-tags class="hashtag-edit" ng-model="localongo.thoughts" element-id="editTextarea" enable="hashTag" ng-show="localongo.editArea.backgroundClick;"></find-tags>

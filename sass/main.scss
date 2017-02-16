@@ -6663,7 +6663,11 @@ header {
     font-size: 14px;
   }
 }
-
+.dropdown-otg-category.otg-local{
+    ::-webkit-scrollbar-thumb {
+    background-color: $brand-cyan;
+  }
+}
 .tag-journey-friend {
   min-height: 63px;
   padding: 10px 10px 0;
@@ -6706,7 +6710,7 @@ header {
 
 .tag-otg-friend {
   padding-left: 30px;
-
+    padding-right: 45px;
   input {
     height: auto;
     padding: 0 12px;
@@ -6799,6 +6803,11 @@ header {
     font-size: 12px;
     text-align: right;
     display: none;
+  }
+  &.otg-color-cyan{
+      ::-webkit-scrollbar-track {
+    background-color: $brand-cyan;
+  }
   }
 }
 
