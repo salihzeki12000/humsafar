@@ -1,9 +1,9 @@
 <div class="notification-page">
   <div class="container">
     <div class="row">
-      <div class="col-md-3" ng-repeat="notification in notificationCard track by $index">
+      <div class="col-md-3" ng-repeat="notify in notificationCard track by $index">
         <!-- Notification Card -->
-        <div class="notification-card">
+        <div class="notification-card" >
           <!-- READ NOTIFICATION CHECK -->
           <span class="read-notification"><i class="fa fa-check" aria-hidden="true"></i></span>
           <!-- READ NOTIFICATION CHECK END -->
@@ -13,17 +13,18 @@
             <span class="remove-notification"><i class="fa fa-times"></i></span>
             <!-- CLOSE / REMOVE NOTIFICATION END -->
 
-            <!-- PROFILE PIC AND TIMESTAMP -->
+            <!-- PROFILE PIC AND TIMESTAMP  user from detail-->
             <div class="notification-profile">
-              <img src="img/dishapatani1.jpg" alt="" class="img-responsive">
+              <img ng-src="{{notify.userFrom.profilePicture|uploadpath:50:50:'cover'}}" alt="{{notify.userFrom.name}}" class="img-responsive">
             </div>
-            <p class="notification-timestamp"><i class="fa fa-calendar"></i><span class="ml5 ">1 Jan, 2016</span> | <i class="fa fa-clock-o "></i> 1.50 pm<span></span></p>
-            <!-- PROFILE PIC AND TIMESTAMP END -->
+            <p class="notification-timestamp"><i class="fa fa-calendar"></i><span class="ml5 ">{{notify.createdAt | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o "></i> {{notify.createdAt | date:  'hh.mm a'}}<span></span></p>
+            <!-- PROFILE PIC AND TIMESTAMP END user from detail-->
 
             <!-- NOTIFICATION DETAIL -->
             <div class="notification-detail">
               <!-- TAG ON GO -->
-              <p class="notification-tagongo" ng-if="notification.notiType == 'tagOnGo'"><span class="avenir-heavy color-blue">Andrea Christina </span> wants to tag you in her On The Go Journey - <span class="color-pink avenir-heavy"> London Diaries.</span></p>
+              <p class="notification-tagongo" ng-bind-html="notify.notifyString"></p>
+              <!-- <p class="notification-tagongo" ng-if="notification.notiType == 'tagOnGo'"><span class="avenir-heavy color-blue">Andrea Christina </span> wants to tag you in her On The Go Journey - <span class="color-pink avenir-heavy"> London Diaries.</span></p> -->
               <!-- TAG ON GO END -->
 
               <!-- ENDED ON GO -->

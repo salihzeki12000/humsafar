@@ -1,4 +1,4 @@
-var globalGetProfile = function (data, status) {
+var globalGetProfile = function(data, status) {
   if (data._id) {
     $.jStorage.set("isLoggedIn", true);
     $.jStorage.set("profile", data);
@@ -19,119 +19,119 @@ var globalGetProfile = function (data, status) {
 //   }
 // }
 
-var pointsForLine = function () {};
+var pointsForLine = function() {};
 var line = [];
 var markers = [];
 var travelPath;
-var initMap = function () {};
-var setMarker = function () {};
+var initMap = function() {};
+var setMarker = function() {};
 var map;
 var center = {};
 var centers = [];
 markers[0] = {};
 angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'commontask', 'activity', 'infinite-scroll', 'navigationservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
-  .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar) {
-    //Used to name the .html file
-    // cfpLoadingBar.start();
-    $scope.template = TemplateService.changecontent("home");
-    $scope.menutitle = NavigationService.makeactive("Home");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
+.controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar) {
+  //Used to name the .html file
+  // cfpLoadingBar.start();
+  $scope.template = TemplateService.changecontent("home");
+  $scope.menutitle = NavigationService.makeactive("Home");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
 
-    $scope.section = {
-      one: "views/section/mainhome.html",
-      two: "views/section/travellife.html",
-      three: "views/section/locallife.html",
-      four: "views/section/mylife.html",
-      five: "views/section/share.html",
-    };
-    $scope.changePage = function (text) {
-      // console.log(text);
-      var length = $(".fp-section").length;
-      // console.log(length);
-      // console.log($(".fp-section"));
-      if (length === 0) {
-        $('.fullpage').fullpage();
-      }
-      // console.log(text);
-      $scope.homeval = text;
-      switch (text) {
-        case "share":
-          $.fn.fullpage.moveTo(5);
-          break;
-        case "mylife":
-          $.fn.fullpage.moveTo(4);
-          break;
-        case "locallife":
-          $.fn.fullpage.moveTo(3);
-          break;
-        case "travellife":
-          $.fn.fullpage.moveTo(2);
-          break;
-        case "home":
-          $.fn.fullpage.moveTo(1);
-          break;
-        default:
-          $.fn.fullpage.moveTo(1);
-          break;
-      }
-    };
-    $(window).load(function () {
-      document.getElementById('movie1').play();
-      if ($(window).width() < 767) {
-        $('video').remove();
-      }
-    });
-    setTimeout(function () {
-      $('.scene').parallax();
-      $('.fullpage').fullpage({
-        //Navigation
-
-        onLeave: function (index, nextIndex, direction) {
-
-          $timeout(function () {
-            swiper.slideTo(nextIndex - 1);
-            //playing the video
-            $('video').get(nextIndex - 1).load();
-            $('video').get(nextIndex - 1).play();
-            $('video').get(nextIndex - 2).pause();
-            $('video').get(nextIndex).pause();
-          }, 0);
-
-        }
-      });
-
-      swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        direction: 'vertical',
-        slidesPerView: 1,
-        paginationClickable: true,
-        spaceBetween: 0,
-        mousewheelControl: false,
-        mousewheelForceToAxis: false,
-        keyboardControl: false,
-        parallax: true,
-        hashnav: true
-      });
-    }, 500);
-
-    $scope.$on('$viewContentLoaded', function () {
-      $timeout(function () {
-        $('body').addClass('fp-');
-        $scope.changePage($stateParams.id);
-      }, 1000);
-    });
-    $scope.muteVolume = function () {
-      if ($("video").prop('muted')) {
-        $("video").prop('muted', false);
-      } else {
-        $("video").prop('muted', true);
-      }
+  $scope.section = {
+    one: "views/section/mainhome.html",
+    two: "views/section/travellife.html",
+    three: "views/section/locallife.html",
+    four: "views/section/mylife.html",
+    five: "views/section/share.html",
+  };
+  $scope.changePage = function(text) {
+    // console.log(text);
+    var length = $(".fp-section").length;
+    // console.log(length);
+    // console.log($(".fp-section"));
+    if (length === 0) {
+      $('.fullpage').fullpage();
     }
-  })
+    // console.log(text);
+    $scope.homeval = text;
+    switch (text) {
+      case "share":
+        $.fn.fullpage.moveTo(5);
+        break;
+      case "mylife":
+        $.fn.fullpage.moveTo(4);
+        break;
+      case "locallife":
+        $.fn.fullpage.moveTo(3);
+        break;
+      case "travellife":
+        $.fn.fullpage.moveTo(2);
+        break;
+      case "home":
+        $.fn.fullpage.moveTo(1);
+        break;
+      default:
+        $.fn.fullpage.moveTo(1);
+        break;
+    }
+  };
+  $(window).load(function() {
+    document.getElementById('movie1').play();
+    if ($(window).width() < 767) {
+      $('video').remove();
+    }
+  });
+  setTimeout(function() {
+    $('.scene').parallax();
+    $('.fullpage').fullpage({
+      //Navigation
 
-  .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, $state) {
+      onLeave: function(index, nextIndex, direction) {
+
+        $timeout(function() {
+          swiper.slideTo(nextIndex - 1);
+          //playing the video
+          $('video').get(nextIndex - 1).load();
+          $('video').get(nextIndex - 1).play();
+          $('video').get(nextIndex - 2).pause();
+          $('video').get(nextIndex).pause();
+        }, 0);
+
+      }
+    });
+
+    swiper = new Swiper('.swiper-container', {
+      pagination: '.swiper-pagination',
+      direction: 'vertical',
+      slidesPerView: 1,
+      paginationClickable: true,
+      spaceBetween: 0,
+      mousewheelControl: false,
+      mousewheelForceToAxis: false,
+      keyboardControl: false,
+      parallax: true,
+      hashnav: true
+    });
+  }, 500);
+
+  $scope.$on('$viewContentLoaded', function() {
+    $timeout(function() {
+      $('body').addClass('fp-');
+      $scope.changePage($stateParams.id);
+    }, 1000);
+  });
+  $scope.muteVolume = function() {
+    if ($("video").prop('muted')) {
+      $("video").prop('muted', false);
+    } else {
+      $("video").prop('muted', true);
+    }
+  }
+})
+
+.controller('LoginCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, $state) {
     //Used to name the .html file
     var stopinterval;
     $scope.userData = $.jStorage.get("profile");
@@ -145,13 +145,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $.fn.fullpage.destroy('all');
     }
 
-    $(window).load(function () {
+    $(window).load(function() {
       console.log("tooltip");
       $('[data-toggle="tooltip"]').tooltip();
     })
 
 
-    $scope.openalreadyexist = function (size) {
+    $scope.openalreadyexist = function(size) {
       $uibModal.open({
         animation: true,
         templateUrl: 'views/modal/alreadyexist.html',
@@ -162,7 +162,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
 
-    var checktwitter = function (data, status) {
+    var checktwitter = function(data, status) {
       var repdata = {};
       if (data._id) {
         $interval.cancel(stopinterval);
@@ -182,30 +182,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    var callAtIntervaltwitter = function () {
-      NavigationService.getProfile(checktwitter, function (err) {
+    var callAtIntervaltwitter = function() {
+      NavigationService.getProfile(checktwitter, function(err) {
         console.log(err);
       });
     };
 
-    var authenticatesuccess = function (stopinterval) {
+    var authenticatesuccess = function(stopinterval) {
       console.log("login window closed");
       $ionicLoading.hide();
       $interval.cancel(stopinterval);
     };
 
-    $scope.socialLogin = function (loginTo) {
+    $scope.socialLogin = function(loginTo) {
       ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
       console.log(ref);
       stopinterval = $interval(callAtIntervaltwitter, 2000);
-      ref.onbeforeunload = function (e) {
+      ref.onbeforeunload = function(e) {
         console.log("window closed");
         $interval.cancel(stopinterval);
         authenticatesuccess(stopinterval);
       };
     };
   })
-  .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $stateParams) {
+  .controller('ForgotPasswordCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal, $stateParams) {
     //Used to name the .html file
     console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("forgot-password");
@@ -228,7 +228,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       NavigationService.checkToken({
         token: decodeURIComponent($stateParams.token),
         email: $stateParams.email
-      }, function (data) {
+      }, function(data) {
         if (data.value) {
           $scope.showErr = false;
         } else {
@@ -238,7 +238,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     } else {
       $scope.showErr = true;
     }
-    $scope.type = function () {
+    $scope.type = function() {
       if ($scope.formData.password === "" && $scope.formData.confirmPassword === "") {
         $scope.showErr1 = false;
       } else {
@@ -251,14 +251,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       }
     }
-    $scope.change = function () {
+    $scope.change = function() {
       if ($scope.formData.password === $scope.formData.confirmPassword && $scope.showErr === false && $scope.showErr1 === false) {
         $scope.formData.token = decodeURIComponent($stateParams.token);
         $scope.formData.email = $stateParams.email;
-        NavigationService.changePasswordEmail($scope.formData, function (data) {
+        NavigationService.changePasswordEmail($scope.formData, function(data) {
           if (data.value) {
             $scope.opensucessfull();
-            NavigationService.getProfile(globalGetProfile, function (err) {
+            NavigationService.getProfile(globalGetProfile, function(err) {
               $.jStorage.set("profile", data);
             });
           } else {
@@ -272,7 +272,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     if (!_.isEmpty($.jStorage.get("profile"))) {
       $scope.userData = $.jStorage.get("profile");
     }
-    $scope.opensucessfull = function (size) {
+    $scope.opensucessfull = function(size) {
       $uibModal.open({
         animation: true,
         templateUrl: 'views/modal/sucessfull.html',
@@ -284,7 +284,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
   })
-  .controller('ForgotPasswordEmailCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+  .controller('ForgotPasswordEmailCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
     console.log("Testing Consoles");
@@ -302,7 +302,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
   })
-  .controller('ContactCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+  .controller('ContactCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
     console.log("Testing Consoles");
@@ -319,7 +319,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('BookingCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+.controller('BookingCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
     console.log("Testing Consoles");
@@ -335,7 +335,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
   })
-  .controller('AdvertiseCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+  .controller('AdvertiseCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
     console.log("Testing Consoles");
@@ -352,7 +352,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('MainPageCtrl', ['$scope', 'TemplateService', 'NavigationService', '$timeout', '$http', '$state', 'FileUploadService', 'FileUploader', 'DataUriToBlob', function ($scope, TemplateService, NavigationService, $timeout, $http, $state, FileUploadService, FileUploader, DataUriToBlob) {
+.controller('MainPageCtrl', ['$scope', 'TemplateService', 'NavigationService', '$timeout', '$http', '$state', 'FileUploadService', 'FileUploader', 'DataUriToBlob', function($scope, TemplateService, NavigationService, $timeout, $http, $state, FileUploadService, FileUploader, DataUriToBlob) {
     //Used to name the .html file
     // console.log("Testing Consoles");
     $scope.form = {};
@@ -368,7 +368,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.imageFileName = '';
     $scope.uploadme = {};
     $scope.uploadme.src = '';
-    setTimeout(function () {
+    setTimeout(function() {
       var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         effect: 'coverflow',
@@ -387,7 +387,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.getClass = "";
     $scope.viewNext = 1;
-    $scope.goNext = function (val) {
+    $scope.goNext = function(val) {
       if (val == 1) {
         $scope.viewNext = 1;
         $scope.getClass = "swiper-slide-active";
@@ -399,13 +399,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
 
-    $scope.changeGender = function (val, name) {
+    $scope.changeGender = function(val, name) {
       $scope.gender = val;
       $scope.userData.gender = name;
     };
 
     //gets all the countries from database
-    var getAllCountries = function (data, status) {
+    var getAllCountries = function(data, status) {
       if (data.value) {
         $scope.nationality = data.data;
       } else {
@@ -413,7 +413,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    NavigationService.getAllCountries(getAllCountries, function (err) {
+    NavigationService.getAllCountries(getAllCountries, function(err) {
       console.log(err);
     });
 
@@ -421,23 +421,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //End-Of get all the countries from database
 
     //gets all the cities from database
-    var getAllCities = function (data, status) {
+    var getAllCities = function(data, status) {
       if (data.value) {
         $scope.cities = data.data.predictions;
       } else {
         console.log("Eroor Fetching Data");
       }
     };
-    $scope.searchByKey = function (searchCity) {
+    $scope.searchByKey = function(searchCity) {
       NavigationService.getAllCities({
         "search": searchCity
-      }, getAllCities, function (err) {
+      }, getAllCities, function(err) {
         console.log(err);
       });
     };
     //End-Of get all the cities from database
 
-    $scope.uploadFile = function (data, fileName, userData) {
+    $scope.uploadFile = function(data, fileName, userData) {
       // Base64 to Blob
       console.log(fileName, userData);
       var imageBase64 = data;
@@ -452,7 +452,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log(formData, "before appending");
       formData.append('file', file, file.name);
       console.log(formData, "after appending");
-      NavigationService.uploadFile(formData, function (response) {
+      NavigationService.uploadFile(formData, function(response) {
         if (response.value) {
           $scope.userData.profilePicture = response.data[0];
           console.log($scope.userData);
@@ -463,15 +463,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
 
-    $scope.testing = function (a) {
+    $scope.testing = function(a) {
       console.log(a);
     }
 
 
-    var saveDataCallback = function (data, status) {
+    var saveDataCallback = function(data, status) {
       if (data.value == true) {
         console.log(data);
-        NavigationService.getProfile(globalGetProfile, function (err) {
+        NavigationService.getProfile(globalGetProfile, function(err) {
           console.log(err);
         });
       } else {
@@ -479,12 +479,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.saveUserData = function (userData) {
+    $scope.saveUserData = function(userData) {
       var str = userData.homeCity;
       var arr = str.split(",");
       userData.homeCity = arr[0];
       $state.go('holiday');
-      NavigationService.saveUserData(userData, saveDataCallback, function (err) {
+      NavigationService.saveUserData(userData, saveDataCallback, function(err) {
         console.log(err);
       });
     };
@@ -495,16 +495,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       "val": false
     };
     var i = 1;
-    var got1 = setInterval(function () {
+    var got1 = setInterval(function() {
       if (document.getElementById('fileInput1')) {
-        document.getElementById('fileInput1').onchange = function (evt) {
+        document.getElementById('fileInput1').onchange = function(evt) {
           var file = evt.currentTarget.files[0];
           console.log(file);
           var formData = new FormData();
           formData.append('file', file, "file.jpg");
           var reader = new FileReader();
-          reader.onload = function (evt) {
-            $scope.$apply(function ($scope) {
+          reader.onload = function(evt) {
+            $scope.$apply(function($scope) {
               $scope.showImage.val = true;
               console.log($scope.showImage.val);
               $scope.myImage = evt.target.result;
@@ -519,16 +519,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
 
-    var got2 = setInterval(function () {
+    var got2 = setInterval(function() {
       if (document.getElementById('fileInput2')) {
-        document.getElementById('fileInput2').ondrop = function (evt) {
+        document.getElementById('fileInput2').ondrop = function(evt) {
           console.log(evt);
           var file = evt.currentTarget.files[0];
           var formData = new FormData();
           formData.append('file', file, "file.jpg");
           var reader = new FileReader();
-          reader.onload = function (evt) {
-            $scope.$apply(function ($scope) {
+          reader.onload = function(evt) {
+            $scope.$apply(function($scope) {
               $scope.showImage = true;
               $scope.myImage = evt.target.result;
               console.log($scope.myImage);
@@ -559,7 +559,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // };
 
   }])
-  .controller('HolidayCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+  .controller('HolidayCtrl', function($scope, TemplateService, NavigationService, $timeout, $state) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -578,7 +578,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
     $scope.viewHoliday = 1;
-    $scope.showHoliday = function (val) {
+    $scope.showHoliday = function(val) {
       if (val == 1) {
         $scope.viewHoliday = 1;
       } else if (val == 2) {
@@ -718,7 +718,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       caption1: "Festivals",
       storeCaption: "Festivals"
     }];
-    $scope.getHoliday = function (val) {
+    $scope.getHoliday = function(val) {
       if ($scope.holidayKindType[val].class == "active-holiday") {
         $scope.holidayKindType[val].class = "";
       } else {
@@ -726,7 +726,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.getPreference = function (val) {
+    $scope.getPreference = function(val) {
       if ($scope.travelPrefer[val].class == "active-holiday") {
         $scope.travelPrefer[val].class = "";
       } else {
@@ -734,57 +734,57 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         ``
       }
     };
-    $scope.getideal = function (val) {
+    $scope.getideal = function(val) {
       if ($scope.idealHoliday[val].class == "active-holiday") {
         $scope.idealHoliday[val].class = "";
       } else {
         $scope.idealHoliday[val].class = "active-holiday";
       }
     };
-    $scope.getUsually = function (val) {
-      _.each($scope.usuallygoHoliday, function (n) {
-        n.class = "n";
-      });
-      $scope.usuallygoHoliday[val].class = "active-holiday";
-    }
-    // Integration Section starts here
-    // $scope.selectedCategory = function (category, arrType) {
-    //   holidayList = _.filter($scope[category], ['class', "active-holiday"]);
-    //   _.forEach(holidayList, function (element) {
-    //     var caption = null;
-    //     _.forEach(element, function (value, key) {
-    //       if (key == "caption1") {
-    //         caption = element.caption + " " + element.caption1;
-    //       }
-    //     });
-    //     if (caption !== null) {
-    //       $scope.listOfCategories.travelConfig[arrType].push(caption);
-    //     } else {
-    //       caption = element.caption;
-    //       if (category == 'holidayKindType') {
-    //         if (caption == "Island & Beach") {
-    //           caption = "Islands & Beaches";
-    //         } else if (caption == "City") {
-    //           caption = "Cities";
-    //         } else if (caption == "Cruise") {
-    //           caption = "Cruises";
-    //         }
-    //       }
-    //       $scope.listOfCategories.travelConfig[arrType].push(caption);
-    //     }
-    //   });
-    // };
-    $scope.selectedCategory = function (category, arrType) {
+    $scope.getUsually = function(val) {
+        _.each($scope.usuallygoHoliday, function(n) {
+          n.class = "n";
+        });
+        $scope.usuallygoHoliday[val].class = "active-holiday";
+      }
+      // Integration Section starts here
+      // $scope.selectedCategory = function (category, arrType) {
+      //   holidayList = _.filter($scope[category], ['class', "active-holiday"]);
+      //   _.forEach(holidayList, function (element) {
+      //     var caption = null;
+      //     _.forEach(element, function (value, key) {
+      //       if (key == "caption1") {
+      //         caption = element.caption + " " + element.caption1;
+      //       }
+      //     });
+      //     if (caption !== null) {
+      //       $scope.listOfCategories.travelConfig[arrType].push(caption);
+      //     } else {
+      //       caption = element.caption;
+      //       if (category == 'holidayKindType') {
+      //         if (caption == "Island & Beach") {
+      //           caption = "Islands & Beaches";
+      //         } else if (caption == "City") {
+      //           caption = "Cities";
+      //         } else if (caption == "Cruise") {
+      //           caption = "Cruises";
+      //         }
+      //       }
+      //       $scope.listOfCategories.travelConfig[arrType].push(caption);
+      //     }
+      //   });
+      // };
+    $scope.selectedCategory = function(category, arrType) {
       holidayList = _.filter($scope[category], ['class', "active-holiday"]);
-      _.each(holidayList, function (element) {
+      _.each(holidayList, function(element) {
         $scope.listOfCategories.travelConfig[arrType].push(element.storeCaption);
       });
     };
 
 
-    var saveDataCallback = function (data, status) {
+    var saveDataCallback = function(data, status) {
       if (data.value === true) {
-        NavigationService.getProfile(function (data, status) {
+        NavigationService.getProfile(function(data, status) {
           if (data._id) {
             $.jStorage.set("isLoggedIn", true);
             $.jStorage.set("profile", data);
@@ -794,16 +794,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           } else {
             $.jStorage.flush();
           }
-        }, function (err) {
+        }, function(err) {
           console.log(err);
         });
       } else {
         console.log(data);
       }
     }
-    $scope.saveUserData = function (userData) {
+    $scope.saveUserData = function(userData) {
       console.log(userData);
-      NavigationService.saveUserData(userData, saveDataCallback, function (err) {
+      NavigationService.saveUserData(userData, saveDataCallback, function(err) {
         console.log(err);
       });
     }
@@ -811,7 +811,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // Integration Section Ends here
 
   })
-  .controller('TripSummaryCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, OnGoJourney) {
+  .controller('TripSummaryCtrl', function($scope, TemplateService, NavigationService, $timeout, $stateParams, OnGoJourney) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -821,7 +821,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       "urlSlug": slug,
       "type": "tripSummary"
     };
-    var callback = function (summary) {
+    var callback = function(summary) {
       $scope.trip = summary;
     }
     OnGoJourney.getTripSummary(formData, callback);
@@ -837,11 +837,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var delta = 5;
     var journeyInfoStrip = $('.journey-info-strip').outerHeight();
 
-    $(window).scroll(function (event) {
+    $(window).scroll(function(event) {
       didScroll = true;
     });
 
-    setInterval(function () {
+    setInterval(function() {
       if (didScroll) {
         hasScrolled();
         didScroll = false;
@@ -931,17 +931,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
   })
-  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, LikesAndComments, $state, $stateParams, $filter, $http) {
+  .controller('OnGoJourneyCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, LikesAndComments, $state, $stateParams, $filter, $http) {
     var didScroll;
     var lastScrollTop = 0;
     var delta = 5;
     var journeyInfoStrip = $('.journey-info-strip').outerHeight();
 
-    $(window).scroll(function (event) {
+    $(window).scroll(function(event) {
       didScroll = true;
     });
 
-    setInterval(function () {
+    setInterval(function() {
       if (didScroll) {
         hasScrolled();
         didScroll = false;
@@ -977,11 +977,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var checkinCount = "";
     $scope.userData = $.jStorage.get("profile");
 
-    var getOneJourneyCallback = function (journeys) {
+    var getOneJourneyCallback = function(journeys) {
       $scope.journey = journeys;
       var postsWithLatLng = [];
       postsWithLatLng = _.filter($scope.journey.post,  'latlong');
-      _.each(postsWithLatLng, function (n, $index) {
+      _.each(postsWithLatLng, function(n, $index) {
         if (n && n.latlong && n.latlong.lat && n.latlong.long) {
           centers[$index] = {
             "lat": parseFloat(n.latlong.lat),
@@ -1005,14 +1005,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     OnGoJourney.getOneJourney({
       "urlSlug": slug
-    }, getOneJourneyCallback, function (err) {
+    }, getOneJourneyCallback, function(err) {
       console.log(err);
     });
 
     //change banner date and time starts
     $scope.time = {};
     $scope.datetime = {};
-    $scope.changeBannerDate = function () {
+    $scope.changeBannerDate = function() {
       console.log("Banner Date");
       $scope.isPostDate = false;
       $scope.isBannerDate = true;
@@ -1043,20 +1043,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       })
     };
 
-    $scope.updateBannerDateTime = function (id, formData, dt) {
+    $scope.updateBannerDateTime = function(id, formData, dt) {
       console.log(dt);
       var date = $filter('formatDateCalender')(dt);
       var time = $filter('formatTimeCalender')(formData);
       var result = {};
-      var callback = function (data) {
+      var callback = function(data) {
         var formData = {
           "urlSlug": $scope.journey.urlSlug
         }
-        OnGoJourney.getOneJourney(formData, function (journeys) {
+        OnGoJourney.getOneJourney(formData, function(journeys) {
           $scope.journey.startTime = journeys.startTime;
           modal.close();
           console.log(journeys);
-        }, function (err) {
+        }, function(err) {
           console.log(err);
         });
       }
@@ -1068,7 +1068,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // change ended journey date
     $scope.time = {};
     $scope.datetime = {};
-    $scope.changeEndDate = function () {
+    $scope.changeEndDate = function() {
       console.log("end journey Date");
       $scope.isPostDate = false;
       $scope.isBanner = false;
@@ -1099,20 +1099,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         backdropClass: "review-backdrop",
       })
     };
-    $scope.endJourneyDate = function (id, formData, dt) {
+    $scope.endJourneyDate = function(id, formData, dt) {
       console.log(dt);
       var date = $filter('formatDateCalender')(dt);
       var time = $filter('formatTimeCalender')(formData);
       var result = {};
-      var callback = function (data) {
+      var callback = function(data) {
         var formData = {
           "urlSlug": $scope.journey.urlSlug
         }
-        OnGoJourney.getOneJourney(formData, function (journeys) {
+        OnGoJourney.getOneJourney(formData, function(journeys) {
           $scope.journey.endTime = journeys.endTime;
           modal.close();
           console.log(journeys);
-        }, function (err) {
+        }, function(err) {
           console.log(err);
         });
       }
@@ -1226,15 +1226,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   lng: 55.365673
     // }];
 
-    line = _.map(centers, function () {
+    line = _.map(centers, function() {
       return {};
     });
-    _.map(centers, function () {
+    _.map(centers, function() {
       markers.push({});
     });
 
 
-    initMap = function () {
+    initMap = function() {
       var $map = $('#map');
       var mapDim = {
         height: $map.height(),
@@ -1244,19 +1244,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       if (typeof google === 'object' && typeof google.maps === 'object') {
         var bounds = new google.maps.LatLngBounds();
 
-        setMarker = function (status, current, previous, i) {
+        setMarker = function(status, current, previous, i) {
           var currentPosition = new google.maps.LatLng(current.lat, current.lng);
           if (previous != null) {
             console.log("previous should set now");
             var previousPosition = new google.maps.LatLng(previous.lat, previous.lng);
             // markers[i-1].setMap(null);
             var previousObj = {
-              position: previousPosition,
-              map: map,
-              icon: "img/maps/red-marker.png"
-            }
-            // marker = new google.maps.Marker(previousObj);
-            // markers[i-1] = marker;
+                position: previousPosition,
+                map: map,
+                icon: "img/maps/red-marker.png"
+              }
+              // marker = new google.maps.Marker(previousObj);
+              // markers[i-1] = marker;
           }
           var currentObj = {
             position: currentPosition,
@@ -1291,7 +1291,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           animation: google.maps.Animation.DROP,
           center: center,
           zoom: 4
-          // styles: mapStyle
+            // styles: mapStyle
         });
 
 
@@ -1328,7 +1328,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
         function myTimer() {
           if (centers.length != 0) {
-            _.each(centers, function (n, index) {
+            _.each(centers, function(n, index) {
               setMarker(null, n, null, index + 1);
             });
             // setMarker("green-marker", centers[0], null, 1);
@@ -1424,7 +1424,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               map: map,
             });
           }
-          var drawLine = function (departure, arrival, percent, i, value) {
+          var drawLine = function(departure, arrival, percent, i, value) {
             percentFrac = percent / 100;
             var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
             line[i].setPath([departure, are_we_there_yet]);
@@ -1442,7 +1442,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           drawLine(departure, arrival, percentComplete, i, value);
         }
 
-        pointsForLine = function (i, percentComplete, value, flag) {
+        pointsForLine = function(i, percentComplete, value, flag) {
           // i=currennt card comming from bottom / arrival card
           //value=true for identifyng current departure and arrival
           //flag=true only when percentComplete reaches 100
@@ -1492,7 +1492,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         };
       }
     };
-    setTimeout(function () {
+    setTimeout(function() {
       initMap();
     }, 1000);
     //maps integration ends here
@@ -1503,7 +1503,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
     // EDIT KIND OF JOURNEY POPUP
-    $scope.editKindOf = function () {
+    $scope.editKindOf = function() {
       $uibModal.open({
         animation: true,
         templateUrl: "views/modal/edit-kind-of-journey.html",
@@ -1563,7 +1563,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
     // EDIT KIND OF JOURNEY POPUP END
 
-    $scope.selectItinerary = function (val) {
+    $scope.selectItinerary = function(val) {
       console.log(val);
       if ($scope.journeyType[val].activeClass == "active-itinerary") {
         console.log("inside if");
@@ -1581,10 +1581,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       'text': ""
     };
 
-    $scope.getCommentsData = function (ongo) {
+    $scope.getCommentsData = function(ongo) {
       $scope.post = ongo;
       $scope.previousId;
-      var callback = function (data) {
+      var callback = function(data) {
         $scope.uniqueArr = [];
         $scope.listOfComments = data.data;
         $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
@@ -1614,8 +1614,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.previousId = $scope.post._id;
     };
 
-    $scope.getLikesData = function (ongo) {
-      var callback = function (data) {
+    $scope.getLikesData = function(ongo) {
+      var callback = function(data) {
         $scope.listOfLikes = data.data;
         console.log($scope.listOfLikes);
       };
@@ -1644,20 +1644,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.previousLikeId = ongo._id;
     };
 
-    $scope.postPostsComment = function (uniqueId, comment, postId) {
+    $scope.postPostsComment = function(uniqueId, comment, postId) {
       console.log(uniqueId, comment, postId);
       console.log("controller se comment hua");
       var type = "post";
       var additionalId = null;
       var hashTag = [];
-      var callback = function (data) {
+      var callback = function(data) {
         $scope.listOfComments = data.data;
         document.getElementById('enterComment').value = "";
       }
       LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, additionalId, callback);
     };
 
-    $scope.likePost = function (uniqueId, _id) {
+    $scope.likePost = function(uniqueId, _id) {
       console.log($scope.post.likeDone + "this call is from ongojourney.html");
       $scope.post.likeDone = !$scope.post.likeDone;
       if ($scope.post.likeDone) {
@@ -1686,7 +1686,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   });
     // };
 
-    $scope.focus = function (id) {
+    $scope.focus = function(id) {
       console.log(id, "focus called");
       document.getElementById(id).focus();
       document.getElementById(id).select();
@@ -1694,7 +1694,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.hours = _.range(1, 13, 1);
     $scope.mins = _.range(1, 60, 1);
-    $scope.change = function (id, val) {
+    $scope.change = function(id, val) {
       if (id == 'hour') {
         $scope.time.hour = val;
       } else if (id == 'min') {
@@ -1713,8 +1713,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, ];
     // checkin end
 
-    $scope.editOption = function (model) {
-      $timeout(function () {
+    $scope.editOption = function(model) {
+      $timeout(function() {
         model.backgroundClick = true;
         backgroundClick.object = model;
       }, 200);
@@ -1723,7 +1723,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // share whole trip social
     $scope.viewSocialShare = false;
-    $scope.shareSocial = function () {
+    $scope.shareSocial = function() {
       if ($scope.viewSocialShare == false) {
         $scope.viewSocialShare = true;
       } else {
@@ -1734,7 +1734,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // share single trip / card
     $scope.viewSingleTrip = -1;
-    $scope.shareTrip = function (index) {
+    $scope.shareTrip = function(index) {
       console.log($scope.viewSingleTrip);
       if ($scope.viewSingleTrip == index) {
         $scope.viewSingleTrip = -1;
@@ -1749,7 +1749,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // edit journey name starts
     $scope.editName = {};
-    $scope.nameJourney = function (name) {
+    $scope.nameJourney = function(name) {
       console.log(name);
       $scope.editName.name = name;
       modal = $uibModal.open({
@@ -1759,12 +1759,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         backdropClass: "review-backdrop"
       });
     };
-    $scope.editJourneyName = function (id, obj) {
+    $scope.editJourneyName = function(id, obj) {
       var formData = {
         "_id": id,
         "name": obj.name
       };
-      var callback = function (name) {
+      var callback = function(name) {
         $scope.journey.name = name;
         modal.close();
       };
@@ -1773,7 +1773,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // edit journey name end
 
     //edit journey cover photo
-    $scope.coverPhoto = function (id) {
+    $scope.coverPhoto = function(id) {
       modal = $uibModal.open({
         animation: true,
         templateUrl: "views/modal/journey-cover.html",
@@ -1786,28 +1786,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         "_id": id,
         "type": "photos"
       };
-      var callback = function (photos) {
+      var callback = function(photos) {
         $scope.journeyCoverPhotos = photos;
       };
       OnGoJourney.getJourneyCoverPhoto(formData, callback);
     };
 
-    $scope.setJourneyCoverPhoto = function (id, coverPhoto) {
-      var formData = {
-        "_id": id,
-        "coverPhoto": coverPhoto
-      };
-      var callback = function () {
-        modal.close();
+    $scope.setJourneyCoverPhoto = function(id, coverPhoto) {
+        var formData = {
+          "_id": id,
+          "coverPhoto": coverPhoto
+        };
+        var callback = function() {
+          modal.close();
+        }
+        OnGoJourney.setJourneyCoverPhoto(formData, callback);
       }
-      OnGoJourney.setJourneyCoverPhoto(formData, callback);
-    }
-    // cover photo end
-    $scope.cropCover = function (imgCrop) {
+      // cover photo end
+    $scope.cropCover = function(imgCrop) {
       $scope.showCover = imgCrop;
       $scope.cropImage = true;
     };
-    $scope.viewPrev = function () {
+    $scope.viewPrev = function() {
       $scope.cropImage = false;
     };
 
@@ -1827,7 +1827,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // };
     // edit date and time end
 
-    setTimeout(function () {
+    setTimeout(function() {
       $('.flexslider').flexslider({
         itemMargin: 5,
         itemWidth: 99,
@@ -1841,7 +1841,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.review = {};
 
-    $scope.countryReview = function () {
+    $scope.countryReview = function() {
       $scope.reviewCountryCount = 0;
       if ($scope.journey.review[$scope.reviewCountryCount] != undefined) {
         $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
@@ -1857,34 +1857,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // country modal ends
 
-    $scope.rateThisCountry = function (journeyId, countryId, formData, index) {
-      var result = {
-        journey: journeyId,
-        country: countryId,
-        review: formData.fillMeIn,
-        rating: formData.rate.toString()
-      };
-      var callback = function () {
-        $scope.journey.review[index].review = result.review;
-        $scope.journey.review[index].rating = result.rating;
-      };
-      OnGoJourney.rateThisCountry(result, callback);
-      $scope.reviewCountryCount = $scope.reviewCountryCount + 1;
-      var len = $scope.journey.countryVisited.length;
-      if ($scope.reviewCountryCount < len) {
-        $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
-        $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
-      } else {
-        console.log(modal);
-        modal.close();
+    $scope.rateThisCountry = function(journeyId, countryId, formData, index) {
+        var result = {
+          journey: journeyId,
+          country: countryId,
+          review: formData.fillMeIn,
+          rating: formData.rate.toString()
+        };
+        var callback = function() {
+          $scope.journey.review[index].review = result.review;
+          $scope.journey.review[index].rating = result.rating;
+        };
+        OnGoJourney.rateThisCountry(result, callback);
+        $scope.reviewCountryCount = $scope.reviewCountryCount + 1;
+        var len = $scope.journey.countryVisited.length;
+        if ($scope.reviewCountryCount < len) {
+          $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
+          $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
+        } else {
+          console.log(modal);
+          modal.close();
+        }
+        //  test=$scope.journey.review[$scope.reviewCountryCount].review
+        // $scope.review.fillM=test;
+        // console.log($scope.review.fil);
+        // $scope.review.fillMeIn=$scope.journey.review[$scope.reviewCountryCount].review;
       }
-      //  test=$scope.journey.review[$scope.reviewCountryCount].review
-      // $scope.review.fillM=test;
-      // console.log($scope.review.fil);
-      // $scope.review.fillMeIn=$scope.journey.review[$scope.reviewCountryCount].review;
-    }
-    // Rating country ends
-    $scope.hoveringOver = function (value) {
+      // Rating country ends
+    $scope.hoveringOver = function(value) {
       $scope.overStar = value;
     };
     $scope.ratingStates = [{
@@ -1904,15 +1904,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       stateOff: 'fa fa-star'
     }];
 
-    $scope.followFollowing = function (user) {
+    $scope.followFollowing = function(user) {
       console.log(user.following, user._id, user.name);
       if (user.following) {
-        LikesAndComments.unFollowUser(user._id, function (data) {
+        LikesAndComments.unFollowUser(user._id, function(data) {
           console.log(data);
           user.following = false;
         })
       } else {
-        LikesAndComments.followUser(user._id, user.name, function (data) {
+        LikesAndComments.followUser(user._id, user.name, function(data) {
           console.log(data);
           user.following = true;
         });
@@ -1920,7 +1920,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
   })
 
-  .controller('PopularBloggerCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+.controller('PopularBloggerCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -2062,7 +2062,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       followbtn: 'follow',
     }];
   })
-  .controller('PopularAgentCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+  .controller('PopularAgentCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -2073,505 +2073,505 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
   })
 
-  .controller('PopularItineraryCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
-    //Used to name the .html file
+.controller('PopularItineraryCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+  //Used to name the .html file
 
-    // console.log("Testing Consoles");
+  // console.log("Testing Consoles");
 
-    $scope.template = TemplateService.changecontent("popular-itinerary");
-    $scope.menutitle = NavigationService.makeactive("Popular Itinerary");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
+  $scope.template = TemplateService.changecontent("popular-itinerary");
+  $scope.menutitle = NavigationService.makeactive("Popular Itinerary");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
 
-    $scope.travelLife = [{
-      popItinerary: true,
-      heading: "Editor",
-      follower: "follow",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
+  $scope.travelLife = [{
+    popItinerary: true,
+    heading: "Editor",
+    follower: "follow",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
     }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
+      imgFlag: "img/england-visit.png"
     }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "follow",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
+      imgFlag: "img/canada-visit.png",
+    }, ]
+  }, {
+    popItinerary: true,
+    heading: "Editor",
+    follower: "following",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
     }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
+      imgFlag: "img/england-visit.png"
     }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
+      imgFlag: "img/canada-visit.png",
+    }, ]
+  }, {
+    popItinerary: true,
+    heading: "Editor",
+    follower: "follow",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
     }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-    }, ];
-    // other itineraries main end
-  })
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ]
+  }, {
+    popItinerary: true,
+    heading: "Editor",
+    follower: "following",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
+    }, {
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ]
+  }, {
+    popItinerary: true,
+    heading: "Editor",
+    follower: "following",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
+    }, {
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ]
+  }, {
+    popItinerary: true,
+    heading: "Editor",
+    follower: "following",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
+    }, {
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ],
+  }, ];
+  // other itineraries main end
+})
 
-  .controller('PopularJourneyCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
-    //Used to name the .html file
+.controller('PopularJourneyCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+  //Used to name the .html file
 
-    // console.log("Testing Consoles");
+  // console.log("Testing Consoles");
 
-    $scope.template = TemplateService.changecontent("popular-journey");
-    $scope.menutitle = NavigationService.makeactive("Popular Journey");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-    $scope.activityPost = [{
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
+  $scope.template = TemplateService.changecontent("popular-journey");
+  $scope.menutitle = NavigationService.makeactive("Popular Journey");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+  $scope.activityPost = [{
+    class: "travel-life",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Has started his London Journey",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
     }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
+      imgFlag: "img/england-visit.png"
     }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
+      imgFlag: "img/canada-visit.png",
+    }, ],
+    editor: false,
+    userPic: true,
+    follow: true,
+    following: false,
+    postIcon: false,
+    video: false,
+    photo: false,
+    photoSlider: false,
+    travelledJourney: true,
+    onJourney: false,
+    getpopularPost: false,
+    activitySec: true,
+    visitPost: false
+  }, {
+    class: "travel-life",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Has started his London Journey",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
     }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
+      imgFlag: "img/england-visit.png"
     }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
+      imgFlag: "img/canada-visit.png",
+    }, ],
+    editor: false,
+    userPic: true,
+    follow: true,
+    following: false,
+    postIcon: false,
+    video: false,
+    photo: false,
+    photoSlider: false,
+    travelledJourney: true,
+    onJourney: false,
+    getpopularPost: false,
+    activitySec: true,
+    visitPost: false
+  }, {
+    class: "travel-life",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Has started his London Journey",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
     }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
-    }];
-  })
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ],
+    editor: false,
+    userPic: true,
+    follow: true,
+    following: false,
+    postIcon: false,
+    video: false,
+    photo: false,
+    photoSlider: false,
+    travelledJourney: true,
+    onJourney: false,
+    getpopularPost: false,
+    activitySec: true,
+    visitPost: false
+  }, {
+    class: "travel-life",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Has started his London Journey",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
+    }, {
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ],
+    editor: false,
+    userPic: true,
+    follow: true,
+    following: false,
+    postIcon: false,
+    video: false,
+    photo: false,
+    photoSlider: false,
+    travelledJourney: true,
+    onJourney: false,
+    getpopularPost: false,
+    activitySec: true,
+    visitPost: false
+  }, {
+    class: "travel-life",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Has started his London Journey",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
+    }, {
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ],
+    editor: false,
+    userPic: true,
+    follow: true,
+    following: false,
+    postIcon: false,
+    video: false,
+    photo: false,
+    photoSlider: false,
+    travelledJourney: true,
+    onJourney: false,
+    getpopularPost: false,
+    activitySec: true,
+    visitPost: false
+  }, {
+    class: "travel-life",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Has started his London Journey",
+    imgTravelled: "img/london.jpg",
+    Travelledtag: "London Eye",
+    photoCount: "28",
+    videoCount: "5",
+    locationVisited: "9",
+    itineraryType1: "img/sunset.png",
+    itineraryType2: "img/bag-journey.png",
+    itineraryType3: "img/luxury-journey.png",
+    travelledDay: "75",
+    onwayTag: "love in paris",
+    imgOnway: "img/paris.jpg",
+    cost: "$10,000",
+    spendingDay: "75",
+    likes: "15660",
+    reviews: "354",
+    pointReview: "4.5",
+    countryVisit: [{
+      imgFlag: "img/india-visit.png"
+    }, {
+      imgFlag: "img/england-visit.png"
+    }, {
+      imgFlag: "img/canada-visit.png",
+    }, ],
+    editor: false,
+    userPic: true,
+    follow: true,
+    following: false,
+    postIcon: false,
+    video: false,
+    photo: false,
+    photoSlider: false,
+    travelledJourney: true,
+    onJourney: false,
+    getpopularPost: false,
+    activitySec: true,
+    visitPost: false
+  }];
+})
 
-  .controller('DestinationCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
-    //Used to name the .html file
+.controller('DestinationCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+  //Used to name the .html file
 
-    // console.log("Testing Consoles");
+  // console.log("Testing Consoles");
 
-    $scope.template = TemplateService.changecontent("destination");
-    $scope.menutitle = NavigationService.makeactive("Destination");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-    $scope.destinationList = [];
-    $scope.viewListByKey = "A";
-    $scope.countryDestList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    $scope.i = 0;
-    $scope.callCountry = function (search, searchText) {
-      $scope.i++;
-      NavigationService.getDestination({
-        search: search,
-        searchText: searchText,
-        count: $scope.i
-      }, function (data) {
-        if ($scope.i === data.count) {
-          $scope.destinationList = data.data;
-          $scope.i = 0;
-        } else {
-          $scope.destinationList = [];
-        }
-      });
-    }
-    $scope.callCountry("a", "");
-    $scope.searchDestination = function (searchVal) {
-      if (searchVal === "") {
-        $scope.callCountry("a", "");
-        $scope.viewListByKey = "A";
+  $scope.template = TemplateService.changecontent("destination");
+  $scope.menutitle = NavigationService.makeactive("Destination");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+  $scope.destinationList = [];
+  $scope.viewListByKey = "A";
+  $scope.countryDestList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+  $scope.i = 0;
+  $scope.callCountry = function(search, searchText) {
+    $scope.i++;
+    NavigationService.getDestination({
+      search: search,
+      searchText: searchText,
+      count: $scope.i
+    }, function(data) {
+      if ($scope.i === data.count) {
+        $scope.destinationList = data.data;
+        $scope.i = 0;
       } else {
-        $scope.viewListByKey = searchVal.charAt(0);
-        $scope.callCountry(searchVal, searchVal);
+        $scope.destinationList = [];
       }
-    };
+    });
+  }
+  $scope.callCountry("a", "");
+  $scope.searchDestination = function(searchVal) {
+    if (searchVal === "") {
+      $scope.callCountry("a", "");
+      $scope.viewListByKey = "A";
+    } else {
+      $scope.viewListByKey = searchVal.charAt(0);
+      $scope.callCountry(searchVal, searchVal);
+    }
+  };
 
-    // destination country city
-    $scope.countryView = function (url, isCity) {
+  // destination country city
+  $scope.countryView = function(url, isCity) {
       if (isCity === false) {
         $state.go("destinationcountry", {
           name: "featured",
@@ -2586,32 +2586,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     // destination country city end
 
-    // get booking data
-    $scope.getBooking = function (dest) {
-      console.log(dest);
-      $scope.destCityName = dest.name;
-      $scope.destCountryName = dest.country[0].name;
-      NavigationService.getDestinationBooking({
-        cityName: $scope.destCityName,
-        countryName: $scope.destCountryName
-      }, function (data) {
-        $.jStorage.set("booking", data);
-        // $scope.bookingData = data.hotels;
-        // console.log($scope.bookingData,'booking ka data');
-      });
-    };
-    // get booking data end
+  // get booking data
+  $scope.getBooking = function(dest) {
+    console.log(dest);
+    $scope.destCityName = dest.name;
+    $scope.destCountryName = dest.country[0].name;
+    NavigationService.getDestinationBooking({
+      cityName: $scope.destCityName,
+      countryName: $scope.destCountryName
+    }, function(data) {
+      $.jStorage.set("booking", data);
+      // $scope.bookingData = data.hotels;
+      // console.log($scope.bookingData,'booking ka data');
+    });
+  };
+  // get booking data end
 
 
-    // get vacations
+  // get vacations
 
-    // get vacations end
+  // get vacations end
 
 
 
-  })
+})
 
-  .controller('DestinationCountryCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+.controller('DestinationCountryCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -2622,11 +2622,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
     $scope.urlDestinationCountry = $state.params.url;
 
-    $scope.getCountryInfo = function (type, urlSlug) {
+    $scope.getCountryInfo = function(type, urlSlug) {
       NavigationService.getCountryDestination({
         type: type,
         urlSlug: $scope.urlDestinationCountry
-      }, function (data) {
+      }, function(data) {
         $scope.countryDestData = data.data;
         console.log(data);
       });
@@ -2643,7 +2643,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // };
 
     // destination city
-    $scope.countryView = function (url, isCity) {
+    $scope.countryView = function(url, isCity) {
       $state.go("destinationcity", {
         name: "mustdo",
         url: url
@@ -2660,7 +2660,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.countryoptions = {};
     $scope.countryoptions.active = "";
     $scope.viewTab = 1;
-    $scope.destinationTabView = function (destinationType) {
+    $scope.destinationTabView = function(destinationType) {
       switch (destinationType) {
         case "featured":
           $scope.countryoptions.active = "featured";
@@ -2690,7 +2690,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     $scope.destinationTabView($state.params.name);
-    $scope.getTab = function (view) {
+    $scope.getTab = function(view) {
       console.log(view);
       $scope.destinationTabView(view);
       console.log(view);
@@ -2702,7 +2702,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     //contentopen
     $scope.isopenfilter = false;
-    $scope.openFilter = function () {
+    $scope.openFilter = function() {
       $scope.isopenfilter = !$scope.isopenfilter;
     };
 
@@ -2713,7 +2713,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // country popup
     // $scope.mustDoArr = $scope.countryDestData.mustDo;
-    $scope.openCountry = function (index) {
+    $scope.openCountry = function(index) {
       $scope.mustDoArr = _.cloneDeep($scope.countryDestData.mustDo);
       $scope.mustDoSplice = $scope.mustDoArr.splice(0, index);
       $scope.countryMustDoImg = _.concat($scope.mustDoArr, $scope.mustDoSplice);
@@ -2798,7 +2798,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //contact us
     $scope.viewContact = false;
     $scope.getBackdrop = "";
-    $scope.showContact = function () {
+    $scope.showContact = function() {
       // console.log("click");
       if ($scope.viewContact == false) {
         $scope.getBackdrop = "backdrop-enquiry";
@@ -2830,8 +2830,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
 
-    $scope.$on('$viewContentLoaded', function (event) {
-      setTimeout(function () {
+    $scope.$on('$viewContentLoaded', function(event) {
+      setTimeout(function() {
         var swiper = new Swiper('.swiper-container', {
           pagination: '.swiper-pagination',
           slidesPerView: 2,
@@ -2842,7 +2842,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     })
 
   })
-  .controller('DestinationCityCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+  .controller('DestinationCityCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -2863,7 +2863,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     console.log($scope.homestayData, 'homestayData ka data');
 
 
-    $scope.star = function (starCount, type) {
+    $scope.star = function(starCount, type) {
       if (type == "marked") {
         starCount = parseInt(starCount);
         return new Array(starCount);
@@ -2875,11 +2875,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.urlDestinationCity = $state.params.url;
-    $scope.getCityInfo = function (type, urlSlug) {
+    $scope.getCityInfo = function(type, urlSlug) {
       NavigationService.getCityDestination({
         type: type,
         urlSlug: $scope.urlDestinationCity
-      }, function (data) {
+      }, function(data) {
         $scope.cityDestData = data.data;
         console.log($scope.cityDestData, "destination city ka data");
       })
@@ -2895,7 +2895,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // };
 
 
-    $scope.openCountry = function (index) {
+    $scope.openCountry = function(index) {
       $scope.mustDoArr = _.cloneDeep($scope.cityDestData.mustDo);
       $scope.mustDoSplice = $scope.mustDoArr.splice(0, index);
       $scope.countryMustDoImg = _.concat($scope.mustDoArr, $scope.mustDoSplice);
@@ -2911,12 +2911,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //OpenFilter
     $scope.isopenfilter = false;
-    $scope.openFilter = function () {
+    $scope.openFilter = function() {
       $scope.isopenfilter = !$scope.isopenfilter;
     };
     //OpenFiltertab
     $scope.isopenfiltertab = false;
-    $scope.openFiltertab = function () {
+    $scope.openFiltertab = function() {
       $scope.isopenfilter = !$scope.isopenfilter;
     };
 
@@ -2993,7 +2993,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //contact us
     $scope.viewContact = false;
     $scope.getBackdrop = "";
-    $scope.showContact = function () {
+    $scope.showContact = function() {
       // console.log("click");
       if ($scope.viewContact == false) {
         $scope.getBackdrop = "backdrop-enquiry";
@@ -3045,7 +3045,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       default:
         $scope.destination.innerView = alldestination[0];
     }
-    $scope.getTab = function (view) {
+    $scope.getTab = function(view) {
       $scope.destination.innerView = alldestination[view];
       var url = "featured";
       var active = "";
@@ -3089,11 +3089,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     //openCont
     $scope.isopencont = false;
-    $scope.openCont = function () {
+    $scope.openCont = function() {
       $scope.isopencont = !$scope.isopencont;
     };
     // country popup
-    $scope.openCity = function () {
+    $scope.openCity = function() {
       $uibModal.open({
         animation: true,
         templateUrl: "views/modal/city-mustdo.html",
@@ -3104,7 +3104,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // city flip
     $scope.cardClass = "";
-    $scope.flip = function () {
+    $scope.flip = function() {
       if ($scope.cardClass == "") {
         $scope.cardClass = "flipped";
       } else {
@@ -3112,19 +3112,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.getFilterData = function (urlSlug, budget, cuisine, type) {
+    $scope.getFilterData = function(urlSlug, budget, cuisine, type) {
       NavigationService.getCityDestination({
         urlSlug: $scope.urlDestinationCity,
         budget: budget,
         cuisine: cuisine,
         type: type,
-      }, function (data) {
+      }, function(data) {
         $scope.cityDestData = data.data;
         console.log($scope.cityDestData, "budget");
       });
     };
 
-    $scope.filterByBudget = function (getBudget) {
+    $scope.filterByBudget = function(getBudget) {
       console.log("click to huwa", getBudget);
       $scope.getFilterData($scope.urlDestinationCity, getBudget, "", "restaurant");
       $scope.filteredData = {
@@ -3142,7 +3142,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     }
 
-    $scope.hoveringOver = function (value) {
+    $scope.hoveringOver = function(value) {
       $scope.overStar = value;
     };
     $scope.ratingStates = [{
@@ -3361,17 +3361,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, ];
     //OpenFilter
     $scope.isopenfilter = false;
-    $scope.openFilter = function () {
+    $scope.openFilter = function() {
       $scope.isopenfilter = !$scope.isopenfilter;
     };
     //OpenFiltertab
     $scope.isopenfiltertab = false;
-    $scope.openFiltertab = function () {
+    $scope.openFiltertab = function() {
       $scope.isopenfilter = !$scope.isopenfilter;
     };
     $scope.country = [];
 
-    $scope.addLine = function () {
+    $scope.addLine = function() {
       $scope.lines.push($scope.lines.length);
     };
     // this.addText = function(text) {
@@ -4118,7 +4118,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //contact us
     $scope.viewContact = false;
     $scope.getBackdrop = "";
-    $scope.showContact = function () {
+    $scope.showContact = function() {
       // console.log("click");
       if ($scope.viewContact == false) {
         $scope.getBackdrop = "backdrop-enquiry";
@@ -4150,8 +4150,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
 
-    $scope.$on('$viewContentLoaded', function (event) {
-      setTimeout(function () {
+    $scope.$on('$viewContentLoaded', function(event) {
+      setTimeout(function() {
         var swiper = new Swiper('.swiper-container', {
           pagination: '.swiper-pagination',
           slidesPerView: 2,
@@ -4162,45 +4162,62 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     })
   })
 
-  .controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, $filter, MyLife, OnGoJourney, localLife, LikesAndComments) {
-    //Used to name the .html file
-    // console.log("Testing Consoles");
-    $scope.template = TemplateService.changecontent("mylife");
-    $scope.menutitle = NavigationService.makeactive("Mylife");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
+.controller('MylifeCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, $filter, MyLife, OnGoJourney, localLife, LikesAndComments) {
+  //Used to name the .html file
+  // console.log("Testing Consoles");
+  $scope.template = TemplateService.changecontent("mylife");
+  $scope.menutitle = NavigationService.makeactive("Mylife");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
 
-    $scope.userData = $.jStorage.get("profile");
-    $scope.showTravellife = false;
-    $scope.visited = [];
+  $scope.userData = $.jStorage.get("profile");
+  $scope.showTravellife = false;
+  $scope.visited = [];
 
-    //Integration Section Starts here
-    // backgroundClick
-    $scope.editOption = function (model) {
-      $timeout(function () {
-        model.backgroundClick = true;
-        backgroundClick.object = model;
-      }, 200);
-      backgroundClick.scope = $scope;
-    };
-    //backgroundClick
+  //Integration Section Starts here
+  // backgroundClick
+  $scope.editOption = function(model) {
+    $timeout(function() {
+      model.backgroundClick = true;
+      backgroundClick.object = model;
+    }, 200);
+    backgroundClick.scope = $scope;
+  };
+  //backgroundClick
 
-    var arr = ($scope.userData.homeCity).split(",");
-    $scope.homeCity = arr[0];
+  var arr = ($scope.userData.homeCity).split(",");
+  $scope.homeCity = arr[0];
 
-    var reloadCount = function () {
-      NavigationService.travelCount(function (data, status) {
-        $scope.count = data.data;
-        var len = $scope.count.countriesVisited_count;
-        // updateBadge(len);
-        updateBadgeBar(len);
-      }, function (err) {
-        console.log(err);
-      });
-    };
-    reloadCount();
+  var reloadCount = function() {
+    NavigationService.travelCount(function(data, status) {
+      $scope.count = data.data;
+      var len = $scope.count.countriesVisited_count;
+      // updateBadge(len);
+      updateBadgeBar(len);
+    }, function(err) {
+      console.log(err);
+    });
+  };
+  reloadCount();
 
-    $scope.data = {
+  $scope.data = {
+    'bucketList': {
+      metric: 0
+    },
+    'countryVisited': {
+      metric: 1
+    }
+  };
+
+  $scope.isopen = false;
+  $scope.openMyLifeFilter = function() {
+    $scope.isopen = !$scope.isopen;
+  };
+
+  $scope.getMap = function() {
+    // console.log("GET MAP CALLED");
+    var bucket = _.filter($scope.nationality, "bucketList");
+    var otherData = {
       'bucketList': {
         metric: 0
       },
@@ -4208,279 +4225,262 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         metric: 1
       }
     };
-
-    $scope.isopen = false;
-    $scope.openMyLifeFilter = function () {
-      $scope.isopen = !$scope.isopen;
-    };
-
-    $scope.getMap = function () {
-      // console.log("GET MAP CALLED");
-      var bucket = _.filter($scope.nationality, "bucketList");
-      var otherData = {
-        'bucketList': {
-          metric: 0
-        },
-        'countryVisited': {
-          metric: 1
+    _.each(bucket, function(country) {
+      _.each(window._mapPathData.paths, function(map, key) {
+        if (country.name == map.name) {
+          otherData[key] = {
+            metric: 0
+          };
+          return;
         }
-      };
-      _.each(bucket, function (country) {
-        _.each(window._mapPathData.paths, function (map, key) {
-          if (country.name == map.name) {
-            otherData[key] = {
-              metric: 0
-            };
-            return;
-          }
-        });
       });
-      var countryVisited = _.filter($scope.nationality, "countryVisited");
-      _.each(countryVisited, function (country) {
-        _.each(window._mapPathData.paths, function (map, key) {
-          if (country.name == map.name) {
-            otherData[key] = {
-              metric: 1
-            };
-            return;
-          }
-        });
-
-      });
-      $timeout(function () {
-        $scope.data = otherData;
-      }, 100);
-    };
-
-    var getAllCountries = function (countries) {
-      $scope.nationality = countries;
-      $scope.getMap();
-    };
-
-    MyLife.getAllCountries(getAllCountries, function (err) {
-      console.log(err);
     });
+    var countryVisited = _.filter($scope.nationality, "countryVisited");
+    _.each(countryVisited, function(country) {
+      _.each(window._mapPathData.paths, function(map, key) {
+        if (country.name == map.name) {
+          otherData[key] = {
+            metric: 1
+          };
+          return;
+        }
+      });
 
-    $scope.updateBucketList = function (country) {
-      MyLife.updateBucketList(country, function (data, status) {
-        reloadCount();
-      }, function () {});
-      $scope.getMap();
-    };
+    });
+    $timeout(function() {
+      $scope.data = otherData;
+    }, 100);
+  };
 
-    //update countries visited starts
-    var years = function (startYear) {
-      var currentYear = new Date().getFullYear(),
-        years = [];
-      startYear = startYear || 1980;
-      while (startYear <= currentYear) {
-        years.push(currentYear--);
-      }
-      return years;
+  var getAllCountries = function(countries) {
+    $scope.nationality = countries;
+    $scope.getMap();
+  };
+
+  MyLife.getAllCountries(getAllCountries, function(err) {
+    console.log(err);
+  });
+
+  $scope.updateBucketList = function(country) {
+    MyLife.updateBucketList(country, function(data, status) {
+      reloadCount();
+    }, function() {});
+    $scope.getMap();
+  };
+
+  //update countries visited starts
+  var years = function(startYear) {
+    var currentYear = new Date().getFullYear(),
+      years = [];
+    startYear = startYear || 1980;
+    while (startYear <= currentYear) {
+      years.push(currentYear--);
     }
-    $scope.listOfYears = years(1950);
-    $scope.checkIfSelected = function (list) {
-      if (list.year) {
-        list.times = 1;
-        $scope.disableAll = false;
-      } else {
-        list.times = 0;
-        $scope.disableAll = true;
-      }
-    };
-    var modal = "";
-    var arr = [];
-    $scope.obj = {};
-    $scope.updateCountryVisited = function (country) {
-      $scope.obj.countryId = country._id;
-      if (country.countryVisited === true) {
-        arr = [{}];
+    return years;
+  }
+  $scope.listOfYears = years(1950);
+  $scope.checkIfSelected = function(list) {
+    if (list.year) {
+      list.times = 1;
+      $scope.disableAll = false;
+    } else {
+      list.times = 0;
+      $scope.disableAll = true;
+    }
+  };
+  var modal = "";
+  var arr = [];
+  $scope.obj = {};
+  $scope.updateCountryVisited = function(country) {
+    $scope.obj.countryId = country._id;
+    if (country.countryVisited === true) {
+      arr = [{}];
 
-        //for getting all the visited years  of that respective country starts
-        // var callback = function (data) {
-        //   var a = _.filter(data, ["countryId._id", country._id]);
-        //   var visitedArr = [];
-        //   _.each(a[0].visited, function (n, index) {
-        //     visitedArr[n.year] = {
-        //       "times": n.times,
-        //       "year": n.year
-        //     };
-        //   });
-        //   console.log(visitedArr);
-        //   $scope.visited = visitedArr;
-        //   arr = visitedArr;
-        // };
-        // MyLife.getCountryVisitedListWeb(callback);
-        //for getting all the visited years  of that respective country ends
+      //for getting all the visited years  of that respective country starts
+      // var callback = function (data) {
+      //   var a = _.filter(data, ["countryId._id", country._id]);
+      //   var visitedArr = [];
+      //   _.each(a[0].visited, function (n, index) {
+      //     visitedArr[n.year] = {
+      //       "times": n.times,
+      //       "year": n.year
+      //     };
+      //   });
+      //   console.log(visitedArr);
+      //   $scope.visited = visitedArr;
+      //   arr = visitedArr;
+      // };
+      // MyLife.getCountryVisitedListWeb(callback);
+      //for getting all the visited years  of that respective country ends
 
-        modal = $uibModal.open({
-          scope: $scope,
-          animation: true,
-          templateUrl: "views/modal/delete-visited-country.html"
+      modal = $uibModal.open({
+        scope: $scope,
+        animation: true,
+        templateUrl: "views/modal/delete-visited-country.html"
           // templateUrl: "views/modal/country-visited.html"
-        });
-      } else {
-        $scope.visited = [];
-        arr = [];
-        modal = $uibModal.open({
-          scope: $scope,
-          animation: true,
-          templateUrl: "views/modal/country-visited.html"
-        });
-      }
-
-      //remove country visited and all its count starts
-      $scope.removeCountryVisited = function () {
-        var obj = {
-          "countryId": country._id,
-          "visited": []
-        }
-        MyLife.updateCountriesVisited(obj, function (data, status) {
-          reloadCount();
-          modal.close();
-        }, function () {});
-        arr = [];
-        $scope.getMap();
-      };
-      //remove country visited and all its count ends
-
-      $scope.getMap();
-      modal.closed.then(function () {
-        console.log(_.isEmpty(arr));
-        if (_.isEmpty(arr)) {
-          country.countryVisited = false;
-        } else {
-          country.countryVisited = true;
-        }
       });
-    };
-
-    $scope.clearAllSelected = function (visited) {
+    } else {
       $scope.visited = [];
-    };
-
-    $scope.updateNumOfTimes = function (visited) {
-      modal.close();
-      //applying validations and filters starts
-      arr = _.pull(visited, undefined);
-      arr = _.reject(arr, {
-        'year': false
+      arr = [];
+      modal = $uibModal.open({
+        scope: $scope,
+        animation: true,
+        templateUrl: "views/modal/country-visited.html"
       });
-      arr = _.filter(arr, 'times');
-      arr = _.reject(arr, {
-        'times': 0
-      });
-      //applying validations and filters ends
-
-      $scope.obj.visited = arr;
-      if (!(_.isEmpty($scope.obj.visited))) {
-        MyLife.updateCountriesVisited($scope.obj, function (data, status) {
-          reloadCount();
-        }, function () {});
-        $scope.getMap();
-      }
-    };
-    //update countries visited ends
-    // Little more about me starts here
-    function titleCase(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
     }
-    if ($scope.userData) {
-      $scope.pronoun; //for he and she
-      $scope.pronoun1; //for him and her
-      $scope.userName = titleCase($scope.userData.firstName);
-      $scope.kindOfHoliday = $scope.userData.travelConfig.kindOfHoliday[0];
-      $scope.usuallyGo = $scope.userData.travelConfig.usuallyGo[0];
-      $scope.flag = false;
 
-      var blogIndex = $scope.userData.travelConfig.preferToTravel.indexOf("Blogger");
-      var photoIndex = $scope.userData.travelConfig.preferToTravel.indexOf("Photographer");
-
-      if (blogIndex != -1) {
-        $scope.preferToTravel = $scope.userData.travelConfig.preferToTravel[blogIndex];
-      } else if (photoIndex != -1) {
-        $scope.preferToTravel = $scope.userData.travelConfig.preferToTravel[photoIndex];
-      } else {
-        $scope.preferToTravel = $scope.userData.travelConfig.preferToTravel[0];
+    //remove country visited and all its count starts
+    $scope.removeCountryVisited = function() {
+      var obj = {
+        "countryId": country._id,
+        "visited": []
       }
+      MyLife.updateCountriesVisited(obj, function(data, status) {
+        reloadCount();
+        modal.close();
+      }, function() {});
+      arr = [];
+      $scope.getMap();
+    };
+    //remove country visited and all its count ends
 
-      $scope.idealHoliday = $scope.userData.travelConfig.holidayType[0];
-
-      if ($scope.userData.gender == "male") {
-        $scope.pronoun = "he";
-        $scope.pronoun1 = "him";
+    $scope.getMap();
+    modal.closed.then(function() {
+      console.log(_.isEmpty(arr));
+      if (_.isEmpty(arr)) {
+        country.countryVisited = false;
       } else {
-        $scope.pronoun = "she";
-        $scope.pronoun1 = "her";
+        country.countryVisited = true;
       }
+    });
+  };
 
-      if ($scope.usuallyGo == "By the map ") {
-        $scope.usuallyGo = "by the map";
-      } else if ($scope.usuallyGo == "Where the road takes you") {
-        $scope.usuallyGo = "where the road takes " + $scope.pronoun1;
-      } else if ($scope.usuallyGo == "A little bit of both") {
-        $scope.flag = true;
-        $scope.usuallyGo = "by the map or ";
-        $scope.usuallyGo1 = "where the road takes " + $scope.pronoun1;
-      }
+  $scope.clearAllSelected = function(visited) {
+    $scope.visited = [];
+  };
 
-      if (($scope.preferToTravel == "Blogger") || ($scope.preferToTravel == "Photographer")) {
-        $scope.intermediate = "is a ";
-      } else {
-        if (($scope.preferToTravel == "Family") || ($scope.preferToTravel == "Friends")) {
-          $scope.intermediate = "prefers to travel with "
-        } else if ($scope.preferToTravel == "Business") {
-          $scope.intermediate = "prefers to travel on ";
-        } else if ($scope.preferToTravel == "Group Tour") {
-          $scope.intermediate = "prefers to travel on a ";
-        } else if ($scope.preferToTravel == "Partner/Spouse") {
-          $scope.intermediate = "prefers to travel with their";
-          $scope.preferToTravel = "Partner";
-        } else if ($scope.preferToTravel == "Solo") {
-          $scope.intermediate = "prefers to travel ";
-        }
+  $scope.updateNumOfTimes = function(visited) {
+    modal.close();
+    //applying validations and filters starts
+    arr = _.pull(visited, undefined);
+    arr = _.reject(arr, {
+      'year': false
+    });
+    arr = _.filter(arr, 'times');
+    arr = _.reject(arr, {
+      'times': 0
+    });
+    //applying validations and filters ends
+
+    $scope.obj.visited = arr;
+    if (!(_.isEmpty($scope.obj.visited))) {
+      MyLife.updateCountriesVisited($scope.obj, function(data, status) {
+        reloadCount();
+      }, function() {});
+      $scope.getMap();
+    }
+  };
+  //update countries visited ends
+  // Little more about me starts here
+  function titleCase(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  if ($scope.userData) {
+    $scope.pronoun; //for he and she
+    $scope.pronoun1; //for him and her
+    $scope.userName = titleCase($scope.userData.firstName);
+    $scope.kindOfHoliday = $scope.userData.travelConfig.kindOfHoliday[0];
+    $scope.usuallyGo = $scope.userData.travelConfig.usuallyGo[0];
+    $scope.flag = false;
+
+    var blogIndex = $scope.userData.travelConfig.preferToTravel.indexOf("Blogger");
+    var photoIndex = $scope.userData.travelConfig.preferToTravel.indexOf("Photographer");
+
+    if (blogIndex != -1) {
+      $scope.preferToTravel = $scope.userData.travelConfig.preferToTravel[blogIndex];
+    } else if (photoIndex != -1) {
+      $scope.preferToTravel = $scope.userData.travelConfig.preferToTravel[photoIndex];
+    } else {
+      $scope.preferToTravel = $scope.userData.travelConfig.preferToTravel[0];
+    }
+
+    $scope.idealHoliday = $scope.userData.travelConfig.holidayType[0];
+
+    if ($scope.userData.gender == "male") {
+      $scope.pronoun = "he";
+      $scope.pronoun1 = "him";
+    } else {
+      $scope.pronoun = "she";
+      $scope.pronoun1 = "her";
+    }
+
+    if ($scope.usuallyGo == "By the map ") {
+      $scope.usuallyGo = "by the map";
+    } else if ($scope.usuallyGo == "Where the road takes you") {
+      $scope.usuallyGo = "where the road takes " + $scope.pronoun1;
+    } else if ($scope.usuallyGo == "A little bit of both") {
+      $scope.flag = true;
+      $scope.usuallyGo = "by the map or ";
+      $scope.usuallyGo1 = "where the road takes " + $scope.pronoun1;
+    }
+
+    if (($scope.preferToTravel == "Blogger") || ($scope.preferToTravel == "Photographer")) {
+      $scope.intermediate = "is a ";
+    } else {
+      if (($scope.preferToTravel == "Family") || ($scope.preferToTravel == "Friends")) {
+        $scope.intermediate = "prefers to travel with "
+      } else if ($scope.preferToTravel == "Business") {
+        $scope.intermediate = "prefers to travel on ";
+      } else if ($scope.preferToTravel == "Group Tour") {
+        $scope.intermediate = "prefers to travel on a ";
+      } else if ($scope.preferToTravel == "Partner/Spouse") {
+        $scope.intermediate = "prefers to travel with their";
+        $scope.preferToTravel = "Partner";
+      } else if ($scope.preferToTravel == "Solo") {
+        $scope.intermediate = "prefers to travel ";
       }
     }
-    // Little more about me ends here
+  }
+  // Little more about me ends here
 
-    //userBadge starts here
-    // var updateBadge = function (len) {
-    //   if (len < 4) {
-    //     $scope.userBadgeName = "img/newbie.png";
-    //   } else if ((len > 3) && (len < 8)) {
-    //     $scope.userBadgeName = "img/Just-got-wings.png";
-    //   } else if ((len > 8) && (len < 16)) {
-    //     $scope.userBadgeName = "img/Globe-Trotter.png";
-    //   } else if ((len > 16) && (len < 25)) {
-    //     $scope.userBadgeName = "img/wayfarer.png";
-    //   } else if (len >= 25) {
-    //     $scope.userBadgeName = "img/nomad.png";
-    //   }
-    // }
-    //userBadge ends here
+  //userBadge starts here
+  // var updateBadge = function (len) {
+  //   if (len < 4) {
+  //     $scope.userBadgeName = "img/newbie.png";
+  //   } else if ((len > 3) && (len < 8)) {
+  //     $scope.userBadgeName = "img/Just-got-wings.png";
+  //   } else if ((len > 8) && (len < 16)) {
+  //     $scope.userBadgeName = "img/Globe-Trotter.png";
+  //   } else if ((len > 16) && (len < 25)) {
+  //     $scope.userBadgeName = "img/wayfarer.png";
+  //   } else if (len >= 25) {
+  //     $scope.userBadgeName = "img/nomad.png";
+  //   }
+  // }
+  //userBadge ends here
 
-    //badge-bar starts here
+  //badge-bar starts here
 
 
-    $scope.level = "";
-    $scope.mystyle1 = {
-      "width": "0",
-      "background-color": "#ff6759",
-    };
-    $scope.mystyle2 = {
-      "width": "0",
-      "background-color": "#ff6759",
-    };
-    $scope.mystyle3 = {
-      "width": "0",
-      "background-color": "#ff6759",
-    };
-    $scope.mystyle4 = {
-      "width": "0",
-      "background-color": "#ff6759",
-    };
+  $scope.level = "";
+  $scope.mystyle1 = {
+    "width": "0",
+    "background-color": "#ff6759",
+  };
+  $scope.mystyle2 = {
+    "width": "0",
+    "background-color": "#ff6759",
+  };
+  $scope.mystyle3 = {
+    "width": "0",
+    "background-color": "#ff6759",
+  };
+  $scope.mystyle4 = {
+    "width": "0",
+    "background-color": "#ff6759",
+  };
 
-    var updateBadgeBar = function (len) {
+  var updateBadgeBar = function(len) {
       if (len < 4) {
         $scope.level = 1;
         $scope.userBadgeName = "img/newbie.png";
@@ -4566,954 +4566,941 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     //badge-bar ends here
     // routing to on-the-go,detailed-iti,quick-iti
-    $scope.routeTO = function (type, urlSlug) {
-      console.log(type, urlSlug);
-      if (type == "on-the-go-journey" || type == "ended-journey") {
-        $state.go('ongojourney', {
-          id: urlSlug
-        });
-      } else if (type == "quick-itinerary") {
-        $state.go('userquickitinerary', {
-          id: urlSlug
-        });
-      } else if (type == 'detail-itinerary') {
-        $state.go('userdetailitinerary', {
-          id: urlSlug
-        });
-      }
-    };
-    // routing to on-the-go,detailed-iti,quick-iti ends here
-
-    //moment Integration starts here
-    $scope.allMoments = {
-      "arr": [],
-      "scrollBusy": false,
-      "stopCallingApi": false,
-      "type": "all"
-
-    };
-    $scope.travelLifeMoments = {
-      "arr": [],
-      "scrollBusy": false,
-      "stopCallingApi": false,
-      "type": "travel-life",
-      "pageNo": 1
-    };
-    $scope.localLifeMoments = {
-      "arr": [],
-      "scrollBusy": false,
-      "stopCallingApi": false,
-      "type": "local-life"
-    };
-    var getMoments = function () {
-      $scope.allMoments.scrollBusy = true;
-      $scope.travelLifeMoments.scrollBusy = true;
-      $scope.localLifeMoments.scrollBusy = true;
-      console.log("getAllMoments called");
-      MyLife.getAllMoments("", 26, "all", 3, function (data) {
-        $scope.allMoments = {
-          "arr": data.data,
-          "scrollBusy": false,
-          "stopCallingApi": false,
-          "type": "all"
-        };
+  $scope.routeTO = function(type, urlSlug) {
+    console.log(type, urlSlug);
+    if (type == "on-the-go-journey" || type == "ended-journey") {
+      $state.go('ongojourney', {
+        id: urlSlug
       });
-      MyLife.getTravelLifeMoments("travel-life", 1, function (data) {
-        $scope.travelLifeMoments = {
-          "arr": data.data,
-          "scrollBusy": false,
-          "stopCallingApi": false,
-          "type": "travel-life",
-          "pageNo": 1
-        };
-        // $scope.travelLifeMoments = data.data;
+    } else if (type == "quick-itinerary") {
+      $state.go('userquickitinerary', {
+        id: urlSlug
       });
-      MyLife.getAllMoments("", 5, "local-life", 3, function (data) {
-        $scope.localLifeMoments = {
-          "arr": data.data,
-          "scrollBusy": false,
-          "stopCallingApi": false,
-          "type": "local-life"
-        };
-        // $scope.localLifeMoments = data.data;
-      })
-    };
-    $scope.getMoreMoments = function (moment) {
-      if (moment.scrollBusy) {
+    } else if (type == 'detail-itinerary') {
+      $state.go('userdetailitinerary', {
+        id: urlSlug
+      });
+    }
+  };
+  // routing to on-the-go,detailed-iti,quick-iti ends here
+
+  //moment Integration starts here
+  $scope.allMoments = {
+    "arr": [],
+    "scrollBusy": false,
+    "stopCallingApi": false,
+    "type": "all"
+
+  };
+  $scope.travelLifeMoments = {
+    "arr": [],
+    "scrollBusy": false,
+    "stopCallingApi": false,
+    "type": "travel-life",
+    "pageNo": 1
+  };
+  $scope.localLifeMoments = {
+    "arr": [],
+    "scrollBusy": false,
+    "stopCallingApi": false,
+    "type": "local-life"
+  };
+  var getMoments = function() {
+    $scope.allMoments.scrollBusy = true;
+    $scope.travelLifeMoments.scrollBusy = true;
+    $scope.localLifeMoments.scrollBusy = true;
+    console.log("getAllMoments called");
+    MyLife.getAllMoments("", 26, "all", 3, function(data) {
+      $scope.allMoments = {
+        "arr": data.data,
+        "scrollBusy": false,
+        "stopCallingApi": false,
+        "type": "all"
+      };
+    });
+    MyLife.getTravelLifeMoments("travel-life", 1, function(data) {
+      $scope.travelLifeMoments = {
+        "arr": data.data,
+        "scrollBusy": false,
+        "stopCallingApi": false,
+        "type": "travel-life",
+        "pageNo": 1
+      };
+      // $scope.travelLifeMoments = data.data;
+    });
+    MyLife.getAllMoments("", 5, "local-life", 3, function(data) {
+      $scope.localLifeMoments = {
+        "arr": data.data,
+        "scrollBusy": false,
+        "stopCallingApi": false,
+        "type": "local-life"
+      };
+      // $scope.localLifeMoments = data.data;
+    })
+  };
+  $scope.getMoreMoments = function(moment) {
+    if (moment.scrollBusy) {
+      return;
+    } else {
+      if (moment.stopCallingApi) {
         return;
       } else {
-        if (moment.stopCallingApi) {
-          return;
-        } else {
-          switch (moment.type) {
-            case 'all':
-            case 'local-life':
-              if (moment.arr.length == 0) {
-                return;
+        switch (moment.type) {
+          case 'all':
+          case 'local-life':
+            if (moment.arr.length == 0) {
+              return;
+            } else {
+              var lastToken = moment.arr[moment.arr.length - 1].token;
+              console.log(lastToken);
+              if (lastToken == -1) {
+                moment.stopCallingApi = true;
+                console.log("no data so calling api is closed");
               } else {
-                var lastToken = moment.arr[moment.arr.length - 1].token;
-                console.log(lastToken);
-                if (lastToken == -1) {
-                  moment.stopCallingApi = true;
-                  console.log("no data so calling api is closed");
-                } else {
-                  moment.scrollBusy = true;
-                  MyLife.getAllMoments(lastToken, 26, moment.type, 3, function (data) {
-                    moment.scrollBusy = false;
-                    _.each(data.data, function (n) {
-                      if (n.token == -1) {
-                        moment.stopCallingApi = true;
-                      } else {
-                        moment.arr.push(n);
-                      }
-                    });
+                moment.scrollBusy = true;
+                MyLife.getAllMoments(lastToken, 26, moment.type, 3, function(data) {
+                  moment.scrollBusy = false;
+                  _.each(data.data, function(n) {
+                    if (n.token == -1) {
+                      moment.stopCallingApi = true;
+                    } else {
+                      moment.arr.push(n);
+                    }
                   });
-                }
+                });
               }
-              break;
-            case 'travel-life':
-              console.log("inside case 2");
-              moment.scrollBusy = true;
-              moment.pageNo++;
-              MyLife.getTravelLifeMoments("travel-life", moment.pageNo, function (data) {
-                moment.scrollBusy = false;
-                if (data.data.length == 0) {
-                  moment.stopCallingApi = true;
-                } else {
-                  _.each(data.data, function (n) {
-                    moment.arr.push(n);
-                  });
-                }
-                console.log(data);
-              });
-              break;
-            default:
-              console.log("No Match Found");
-          }
+            }
+            break;
+          case 'travel-life':
+            console.log("inside case 2");
+            moment.scrollBusy = true;
+            moment.pageNo++;
+            MyLife.getTravelLifeMoments("travel-life", moment.pageNo, function(data) {
+              moment.scrollBusy = false;
+              if (data.data.length == 0) {
+                moment.stopCallingApi = true;
+              } else {
+                _.each(data.data, function(n) {
+                  moment.arr.push(n);
+                });
+              }
+              console.log(data);
+            });
+            break;
+          default:
+            console.log("No Match Found");
         }
       }
-    };
-    $scope.getMorePhotos = function (album) {
-      console.log(album);
-      if (album.scrollBusy) {
-        return;
+    }
+  };
+  $scope.getMorePhotos = function(album) {
+    console.log(album);
+    if (album.scrollBusy) {
+      return;
+    } else {
+      if (album.stopCallingApi) {
+        return
       } else {
-        if (album.stopCallingApi) {
-          return
-        } else {
-          album.pageNo++;
-          album.scrollBusy = true;
-          switch (album.type) {
-            case ('journey' || 'itinerary'):
-              console.log("getJournItiMoments called by scrolling");
-              MyLife.getJournItiMoments(album._id, album.pageNo, 24, album.type, function (data) {
-                album.scrollBusy = false;
-                if (data.data.length !== 0) {
-                  _.each(data.data, function (n) {
-                    // $scope.perMonthMoments.push(n);\
-                    album.perMonthMoments.push(n);
-                  });
+        album.pageNo++;
+        album.scrollBusy = true;
+        switch (album.type) {
+          case ('journey' || 'itinerary'):
+            console.log("getJournItiMoments called by scrolling");
+            MyLife.getJournItiMoments(album._id, album.pageNo, 24, album.type, function(data) {
+              album.scrollBusy = false;
+              if (data.data.length !== 0) {
+                _.each(data.data, function(n) {
+                  // $scope.perMonthMoments.push(n);\
+                  album.perMonthMoments.push(n);
+                });
 
-                } else {
-                  album.stopCallingApi = true;
-                }
-              });
-              break;
-            case 'all':
-            case 'local':
-              console.log("getPerMonthMoments called by scrolling");
-              MyLife.getPerMonthMoments(album.token, album.pageNo, 24, album.type, function (data) {
-                album.scrollBusy = false;
-                if (data.data.length !== 0) {
-                  _.each(data.data, function (n) {
-                    // $scope.perMonthMoments.push(n);
-                    album.perMonthMoments.push(n);
-                  });
-                } else {
-                  album.stopCallingApi = true;
-                }
-              });
-              break;
-          }
+              } else {
+                album.stopCallingApi = true;
+              }
+            });
+            break;
+          case 'all':
+          case 'local':
+            console.log("getPerMonthMoments called by scrolling");
+            MyLife.getPerMonthMoments(album.token, album.pageNo, 24, album.type, function(data) {
+              album.scrollBusy = false;
+              if (data.data.length !== 0) {
+                _.each(data.data, function(n) {
+                  // $scope.perMonthMoments.push(n);
+                  album.perMonthMoments.push(n);
+                });
+              } else {
+                album.stopCallingApi = true;
+              }
+            });
+            break;
         }
       }
-    };
+    }
+  };
+  $scope.viewMonth = false;
+  $scope.momentView = 1;
+  $scope.album = {};
+  $scope.changeMomentTypeView = function(num) {
     $scope.viewMonth = false;
-    $scope.momentView = 1;
-    $scope.album = {};
-    $scope.changeMomentTypeView = function (num) {
+    $scope.momentView = num;
+  };
+  $scope.showMonthView = function() {
+    console.log("showMonthView called", $scope.viewMonth);
+    if ($scope.viewMonth == false) {
+      $scope.viewMonth = true;
+    } else {
       $scope.viewMonth = false;
-      $scope.momentView = num;
+    }
+  };
+
+  var viewMonthDataCallback = function(data) {
+    // $scope.perMonthMoments = data.data;
+    $scope.album.perMonthMoments = data.data;
+    $scope.album.scrollBusy = false;
+    console.log($scope.album.perMonthMoments);
+  };
+  $scope.getPerMonthMoments = function(obj, type) {
+    console.log("getPerMonthMoments called by ng-click");
+    $scope.token = obj.token;
+    $scope.count = obj.count;
+    $scope.album = {
+      "token": obj.token,
+      "pageNo": 1,
+      "scrollBusy": true,
+      "type": type,
+      "stopCallingApi": false,
+      "perMonthMoments": []
     };
-    $scope.showMonthView = function () {
-      console.log("showMonthView called", $scope.viewMonth);
-      if ($scope.viewMonth == false) {
-        $scope.viewMonth = true;
+    // $scope.perMonthMoments = [];
+    MyLife.getPerMonthMoments($scope.album.token, 1, 24, $scope.album.type, viewMonthDataCallback);
+    $scope.showMonthView();
+  };
+
+  //Photo comment popup
+  $scope.getPhotosCommentData = function(photoId) {
+    console.log(photoId, "mdmdsdsdmks");
+    modal = $uibModal.open({
+      templateUrl: "views/modal/notify.html",
+      animation: true,
+      scope: $scope,
+      windowClass: "notify-popup"
+    });
+    modal.closed.then(function() {
+      $scope.listOfComments = {};
+    });
+    var callback = function(data) {
+      $scope.uniqueArr = [];
+      $scope.listOfComments = data.data;
+      console.log($scope.listOfComments);
+      $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+    };
+    LikesAndComments.getComments("photo", photoId, callback);
+  };
+
+  $scope.postPhotosComment = function(uniqueId, comment, postId, photoId) {
+    console.log(uniqueId, comment, postId, photoId);
+    var type = "photo";
+    var hashTag = [];
+    var callback = function(data) {
+      $scope.listOfComments = data.data;
+      document.getElementById('enterComment').value = "";
+    }
+    LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, photoId, callback);
+  };
+  //Photo comment popup end
+
+
+  $scope.getJournItiMoments = function(obj) {
+    // $scope.perMonthMoments = [];
+    console.log("getJournItiMoments called by ng-click");
+    $scope.token = obj.name;
+    $scope.count = obj.mediaCount;
+    $scope.album = {
+      "_id": obj._id,
+      "pageNo": 1,
+      "scrollBusy": true,
+      "stopCallingApi": false,
+      "perMonthMoments": []
+    };
+    $scope.type = obj.type;
+    var flag = obj.type && obj.type != ''
+    if (flag) {
+      $scope.album.type = 'itinerary';
+    } else {
+      $scope.album.type = 'journey';
+    }
+    $scope.albumPageNo = 1;
+    MyLife.getJournItiMoments(obj._id, $scope.albumPageNo, 24, $scope.album.type, viewMonthDataCallback);
+    $scope.showMonthView();
+  };
+  //moment Integration ends here
+
+  // reviews json
+  $scope.oneAtATime = true;
+  var flushReviewsData = function() {
+    $scope.postReview = {};
+    $scope.showRating = 1;
+    $scope.postReview.rating = 1;
+    $scope.fillColor2 = "";
+    $scope.fillColor3 = "";
+    $scope.fillColor4 = "";
+    $scope.fillColor5 = "";
+  }
+  var wholePost = {};
+  $scope.getReview = function(post) {
+    console.log(post);
+    wholePost = post; //this is to set post_id in savePostReview() function
+    console.log(wholePost);
+    $scope.postReview = {};
+    $scope.checkIn = post.checkIn; // this is to diplay checkin location inside uib modal
+    $scope.checkIn.type = post.type;
+    if (post.review.length !== 0) {
+      console.log("Edit Rating");
+      $scope.postReview = post.review[0];
+      if ($scope.postReview.rating != undefined) {
+        $scope.starRating(parseInt($scope.postReview.rating));
       } else {
-        $scope.viewMonth = false;
+
       }
-    };
+    } else {
+      console.log("Rate Us");
+      flushReviewsData();
+    }
+    modal = $uibModal.open({
+      animation: true,
+      templateUrl: "views/modal/review-post.html",
+      scope: $scope,
+      backdropClass: "review-backdrop"
+    })
+  };
 
-    var viewMonthDataCallback = function (data) {
-      // $scope.perMonthMoments = data.data;
-      $scope.album.perMonthMoments = data.data;
-      $scope.album.scrollBusy = false;
-      console.log($scope.album.perMonthMoments);
-    };
-    $scope.getPerMonthMoments = function (obj, type) {
-      console.log("getPerMonthMoments called by ng-click");
-      $scope.token = obj.token;
-      $scope.count = obj.count;
-      $scope.album = {
-        "token": obj.token,
-        "pageNo": 1,
-        "scrollBusy": true,
-        "type": type,
-        "stopCallingApi": false,
-        "perMonthMoments": []
-      };
-      // $scope.perMonthMoments = [];
-      MyLife.getPerMonthMoments($scope.album.token, 1, 24, $scope.album.type, viewMonthDataCallback);
-      $scope.showMonthView();
-    };
-
-    //Photo comment popup
-    $scope.getPhotosCommentData = function (photoId) {
-      console.log(photoId, "mdmdsdsdmks");
-      modal = $uibModal.open({
-        templateUrl: "views/modal/notify.html",
-        animation: true,
-        scope: $scope,
-        windowClass: "notify-popup"
-      });
-      modal.closed.then(function () {
-        $scope.listOfComments = {};
-      });
-      var callback = function (data) {
-        $scope.uniqueArr = [];
-        $scope.listOfComments = data.data;
-        console.log($scope.listOfComments);
-        $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
-      };
-      LikesAndComments.getComments("photo", photoId, callback);
-    };
-
-    $scope.postPhotosComment = function (uniqueId, comment, postId, photoId) {
-      console.log(uniqueId, comment, postId, photoId);
-      var type = "photo";
-      var hashTag = [];
-      var callback = function (data) {
-        $scope.listOfComments = data.data;
-        document.getElementById('enterComment').value = "";
-      }
-      LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, photoId, callback);
-    };
-    //Photo comment popup end
-
-
-    $scope.getJournItiMoments = function (obj) {
-      // $scope.perMonthMoments = [];
-      console.log("getJournItiMoments called by ng-click");
-      $scope.token = obj.name;
-      $scope.count = obj.mediaCount;
-      $scope.album = {
-        "_id": obj._id,
-        "pageNo": 1,
-        "scrollBusy": true,
-        "stopCallingApi": false,
-        "perMonthMoments": []
-      };
-      $scope.type = obj.type;
-      var flag = obj.type && obj.type != ''
-      if (flag) {
-        $scope.album.type = 'itinerary';
-      } else {
-        $scope.album.type = 'journey';
-      }
-      $scope.albumPageNo = 1;
-      MyLife.getJournItiMoments(obj._id, $scope.albumPageNo, 24, $scope.album.type, viewMonthDataCallback);
-      $scope.showMonthView();
-    };
-    //moment Integration ends here
-
-    // reviews json
-    $scope.oneAtATime = true;
-    var flushReviewsData = function () {
-      $scope.postReview = {};
+  $scope.starRating = function(val) {
+    $scope.postReview.rating = val;
+    if (val == 1) {
       $scope.showRating = 1;
-      $scope.postReview.rating = 1;
       $scope.fillColor2 = "";
       $scope.fillColor3 = "";
       $scope.fillColor4 = "";
       $scope.fillColor5 = "";
+    } else if (val == 2) {
+      $scope.showRating = 2;
+      $scope.fillColor2 = "fa-star";
+      $scope.fillColor3 = "";
+      $scope.fillColor4 = "";
+      $scope.fillColor5 = "";
+    } else if (val == 3) {
+      $scope.showRating = 3;
+      $scope.fillColor2 = "fa-star";
+      $scope.fillColor3 = "fa-star";
+      $scope.fillColor4 = "";
+      $scope.fillColor5 = "";
+    } else if (val == 4) {
+      $scope.showRating = 4;
+      $scope.fillColor2 = "fa-star";
+      $scope.fillColor3 = "fa-star";
+      $scope.fillColor4 = "fa-star";
+      $scope.fillColor5 = "";
+    } else if (val == 5) {
+      $scope.showRating = 5;
+      $scope.fillColor2 = "fa-star";
+      $scope.fillColor3 = "fa-star";
+      $scope.fillColor4 = "fa-star";
+      $scope.fillColor5 = "fa-star";
+    } else {
+      $scope.showRating = 1;
     }
-    var wholePost = {};
-    $scope.getReview = function (post) {
-      console.log(post);
-      wholePost = post; //this is to set post_id in savePostReview() function
-      console.log(wholePost);
-      $scope.postReview = {};
-      $scope.checkIn = post.checkIn; // this is to diplay checkin location inside uib modal
-      $scope.checkIn.type = post.type;
-      if (post.review.length !== 0) {
-        console.log("Edit Rating");
-        $scope.postReview = post.review[0];
-        if ($scope.postReview.rating != undefined) {
-          $scope.starRating(parseInt($scope.postReview.rating));
-        } else {
-
-        }
-      } else {
-        console.log("Rate Us");
-        flushReviewsData();
-      }
-      modal = $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/review-post.html",
-        scope: $scope,
-        backdropClass: "review-backdrop"
-      })
-    };
-
-    $scope.starRating = function (val) {
-      $scope.postReview.rating = val;
-      if (val == 1) {
-        $scope.showRating = 1;
-        $scope.fillColor2 = "";
-        $scope.fillColor3 = "";
-        $scope.fillColor4 = "";
-        $scope.fillColor5 = "";
-      } else if (val == 2) {
-        $scope.showRating = 2;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "";
-        $scope.fillColor4 = "";
-        $scope.fillColor5 = "";
-      } else if (val == 3) {
-        $scope.showRating = 3;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "fa-star";
-        $scope.fillColor4 = "";
-        $scope.fillColor5 = "";
-      } else if (val == 4) {
-        $scope.showRating = 4;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "fa-star";
-        $scope.fillColor4 = "fa-star";
-        $scope.fillColor5 = "";
-      } else if (val == 5) {
-        $scope.showRating = 5;
-        $scope.fillColor2 = "fa-star";
-        $scope.fillColor3 = "fa-star";
-        $scope.fillColor4 = "fa-star";
-        $scope.fillColor5 = "fa-star";
-      } else {
-        $scope.showRating = 1;
-      }
-    };
+  };
 
 
-    //reviews integration starts here
-    $scope.reviewView = 1;
-    $scope.changeReviewTypeView = function (num, type) {
-      $scope.reviewView = num;
-      $scope[type] = false;
-    };
-    var scroll = {
-      'scrollBusy': false,
-      'stopCallingApi': false
-    };
-    $scope.reviewAll = {
-      "arr": [],
-      "scrollBusy": false,
-      "stopCallingApi": false,
-      "type": "all",
-      "pageNo": 1
-    };
-    $scope.reviewTravelLife = {
-      "arr": [],
-      "scrollBusy": false,
-      "stopCallingApi": false,
-      "type": "travel-life",
-      "pageNo": 1
-    };
-    $scope.reviewLocalLife = {
-      "arr": [],
-      "scrollBusy": false,
-      "stopCallingApi": false,
-      "type": "local-life",
-      "pageNo": 1
-    };
-    var getReviews = function () {
-      console.log("getAllReviews called after loading");
-      $scope.reviewAll.scrollBusy = true;
-      MyLife.getAllReviews("all", 1, function (data) {
-        $scope.reviewAll = {
-          "arr": data.data,
-          "scrollBusy": false,
-          "stopCallingApi": false,
-          "type": "all",
-          "pageNo": 1
+  //reviews integration starts here
+  $scope.reviewView = 1;
+  $scope.changeReviewTypeView = function(num, type) {
+    $scope.reviewView = num;
+    $scope[type] = false;
+  };
+  var scroll = {
+    'scrollBusy': false,
+    'stopCallingApi': false
+  };
+  $scope.reviewAll = {
+    "arr": [],
+    "scrollBusy": false,
+    "stopCallingApi": false,
+    "type": "all",
+    "pageNo": 1
+  };
+  $scope.reviewTravelLife = {
+    "arr": [],
+    "scrollBusy": false,
+    "stopCallingApi": false,
+    "type": "travel-life",
+    "pageNo": 1
+  };
+  $scope.reviewLocalLife = {
+    "arr": [],
+    "scrollBusy": false,
+    "stopCallingApi": false,
+    "type": "local-life",
+    "pageNo": 1
+  };
+  var getReviews = function() {
+    console.log("getAllReviews called after loading");
+    $scope.reviewAll.scrollBusy = true;
+    MyLife.getAllReviews("all", 1, function(data) {
+      $scope.reviewAll = {
+        "arr": data.data,
+        "scrollBusy": false,
+        "stopCallingApi": false,
+        "type": "all",
+        "pageNo": 1
 
-        };
-        console.log($scope.allMoments);
-      });
-      MyLife.getAllReviews("travel-life", 1, function (data) {
-        console.log(data);
-        $scope.reviewTravelLife = {
-          "arr": data.data,
-          "scrollBusy": false,
-          "stopCallingApi": false,
-          "type": "travel-life",
-          "pageNo": 1
-        };
-        // $scope.travelLifeMoments = data.data;
-        console.log($scope.travelLifeMoments);
-      });
-      MyLife.getAllReviews("local-life", 1, function (data) {
-        console.log(data);
-        $scope.reviewLocalLife = {
-          "arr": data.data,
-          "scrollBusy": false,
-          "stopCallingApi": false,
-          "type": "local-life",
-          "pageNo": 1
-        };
-        // $scope.localLifeMoments = data.data;
-      })
-    };
+      };
+      console.log($scope.allMoments);
+    });
+    MyLife.getAllReviews("travel-life", 1, function(data) {
+      console.log(data);
+      $scope.reviewTravelLife = {
+        "arr": data.data,
+        "scrollBusy": false,
+        "stopCallingApi": false,
+        "type": "travel-life",
+        "pageNo": 1
+      };
+      // $scope.travelLifeMoments = data.data;
+      console.log($scope.travelLifeMoments);
+    });
+    MyLife.getAllReviews("local-life", 1, function(data) {
+      console.log(data);
+      $scope.reviewLocalLife = {
+        "arr": data.data,
+        "scrollBusy": false,
+        "stopCallingApi": false,
+        "type": "local-life",
+        "pageNo": 1
+      };
+      // $scope.localLifeMoments = data.data;
+    })
+  };
 
-    $scope.getAllReviews = function (review) {
-      console.log("getAllReviews called after scrolling");
-      console.log(review);
-      if (review.scrollBusy) {
+  $scope.getAllReviews = function(review) {
+    console.log("getAllReviews called after scrolling");
+    console.log(review);
+    if (review.scrollBusy) {
+      return;
+    } else {
+      if (review.stopCallingApi) {
         return;
       } else {
-        if (review.stopCallingApi) {
-          return;
-        } else {
-          console.log("passed 2 if");
-          review.pageNo++;
-          review.scrollBusy = true;
-          MyLife.getAllReviews(review.type, review.pageNo, function (data) {
-            review.scrollBusy = false;
-            if (data.data.length == 0) {
-              console.log("reviews is empty");
-              review.stopCallingApi = true;
-              review.pageNo--;
-            } else {
-              _.each(data.data, function (n) {
-                review.arr.push(n);
-              });
-            }
-          });
-        }
-      }
-    };
-
-    $scope.getMoreReviews = function (object, flag) {
-      console.log("getReviews called from getMoreReviews");
-      if (object.country && object._id && object.pageNo) {
-        if (object.scrollBusy) {
-          return;
-        } else {
-          if (object.stopCallingApi) {
-            return
+        console.log("passed 2 if");
+        review.pageNo++;
+        review.scrollBusy = true;
+        MyLife.getAllReviews(review.type, review.pageNo, function(data) {
+          review.scrollBusy = false;
+          if (data.data.length == 0) {
+            console.log("reviews is empty");
+            review.stopCallingApi = true;
+            review.pageNo--;
           } else {
-            object.scrollBusy = true;
-            switch (flag) {
-              case 'travel-life':
-                MyLife.getReviewsByCities(object.country, object._id, ++object.pageNo, function (data) {
-                  if (data.value) {
-                    object.scrollBusy = false;
-                    if (data.data.length == 0) {
-                      object.stopCallingApi = true;
-                    } else {
-                      _.each(data.data, function (n) {
-                        object.accordReview.push(n);
-                      })
-                    }
-                  } else {}
-                });
-                break;
-              case 'local-life':
-                MyLife.getReviewsByCategories(object.city, object._id, object.pageNo, function (data) {
-                  if (data.value) {
-                    object.scrollBusy = false;
-                    if (data.data.length == 0) {
-                      object.stopCallingApi = true;
-                    } else {
-                      _.each(data.data, function (n) {
-                        object.accordReview.push(n);
-                      })
-                    }
-                  } else {}
-                });
-                break;
-            }
-
-          }
-        }
-      } else {
-        console.log("insufficient parameters");
-      }
-    }
-
-    $scope.goToAccordian = function (review, showType) {
-      $scope[showType] = true;
-      switch (showType) {
-        case 'viewTravelCountry':
-          $scope.citiesTravelled = {
-            "countryName": review.name,
-          };
-          MyLife.getCities(review._id, function (data) {
-            // review.cities = data.data;
-            $scope.citiesTravelled.cities = data.data;
-          });
-          break;
-        case 'viewLocalCountry':
-          $scope.categoryList = {
-            "cityName": review.name,
-          };
-          MyLife.getCategories(review._id, function (data) {
-            // review.categories = data.data;
-            $scope.categoryList.categories = data.data;
-          });
-          console.log($scope.categoryList);
-          break;
-      }
-
-
-    };
-
-    // $scope.openAccordian = function (object, openAccordian, flag) {
-    //   object.pageNo = 1;
-    //   object.scrollBusy = false;
-    //   object.stopCallingApi = false;
-    //   console.log(object, openAccordian, flag);
-    //   if (openAccordian) {
-    //     switch (flag) {
-    //       case 'travel-life':
-    //         MyLife.getReviewsByCities(object.country, object._id, object.pageNo, function (data) {
-    //           object.accordReview = data.data;
-    //         });
-    //         break;
-    //       case 'local-life':
-    //         MyLife.getReviewsByCategories(object.city, object._id, object.pageNo, function (data) {
-    //           object.accordReview = data.data;
-    //         });
-    //         break;
-    //     }
-    //   } else {
-    //   }
-    // };
-    $scope.openAccordian = function (object, openAccordian, flag) {
-      console.log("getReviewsWeb called from openAccordian");
-      object.pageNo = 1;
-      object.scrollBusy = false;
-      object.stopCallingApi = false;
-      console.log(object, openAccordian, flag);
-      if (openAccordian) {
-        switch (flag) {
-          case 'travel-life':
-            MyLife.getReviewsByCities(object.country, object._id, object.pageNo, function (data) {
-              object.accordReview = data.data;
+            _.each(data.data, function(n) {
+              review.arr.push(n);
             });
-            break;
-          case 'local-life':
-            MyLife.getReviewsByCategories(object.city, object._id, object.pageNo, function (data) {
-              object.accordReview = data.data;
-            });
-            break;
-        }
-      } else {}
-    };
-    $scope.savePostReview = function (values) {
-      console.log(values, wholePost);
-      var obj = {
-        "post": wholePost._id,
-        "rating": values.rating.toString(),
-        "review": values.review
-      }
-      console.log(obj);
-      console.log(wholePost);
-      MyLife.savePostReview(obj, function (data) {
-        if (data.value) {
-          if (wholePost.review.length == 0) {
-            wholePost.review[0] = {};
           }
-          wholePost.review[0].post = obj.post;
-          wholePost.review[0].rating = obj.rating;
-          wholePost.review[0].review = obj.review;
-          console.log(wholePost);
-          modal.close();
-        } else {}
-      })
-    };
-
-    //reviews integration ends here
-
-    var allMyLife = [
-      "views/content/myLife/journey.html",
-      "views/content/myLife/moments.html",
-      "views/content/myLife/reviews.html",
-      "views/content/myLife/holidayplanner.html"
-    ];
-    $scope.myLife = {
-      profileMain: "views/content/myLife/profile.html",
-      innerView: allMyLife[0]
-    };
-    // change url
-    $scope.viewTab = 1;
-    switch ($state.params.name) {
-      case "journey":
-        $scope.myLife.innerView = allMyLife[0];
-        break;
-      case "moments":
-        getMoments();
-        $scope.myLife.innerView = allMyLife[1];
-        break;
-      case "reviews":
-        getReviews();
-        $scope.myLife.innerView = allMyLife[2];
-        break;
-      case "holidayplanner":
-        $scope.myLife.innerView = allMyLife[3];
-        break;
-      default:
-        $scope.myLife.innerView = allMyLife[0];
-    }
-    $scope.getTab = function (view) {
-      $scope.myLife.innerView = allMyLife[view];
-      var url = "journey";
-      switch (view) {
-        case 0:
-          url = "journey";
-          break;
-        case 1:
-          url = "moments";
-          getMoments();
-          break;
-        case 2:
-          url = "reviews";
-          getReviews();
-          break;
-        case 3:
-          url = "holidayplanner";
-          break;
-      }
-      $state.go("mylife", {
-        name: url
-      }, {
-        notify: false
-      });
-    }
-
-
-    $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
-    $scope.mapDataHumanizeFn = function (val) {
-      return val + " units";
-    };
-    $scope.heatmapColors = ['#2c3757', '#ff6759'];
-
-    $scope.hoveringOver = function (value) {
-      $scope.overStar = value;
-    };
-    $scope.ratingStates = [{
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }, {
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }, {
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }, {
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }, {
-      stateOn: 'fa fa-star-o',
-      stateOff: 'fa fa-star'
-    }];
-    // journey json
-    $scope.buildNow = function () {
-      $scope.$broadcast('rebuild:me');
-    }
-    $scope.$on('scrollbar.hide', function () {
-      // console.log('Scrollbar hide');
-    });
-    $scope.$on('scrollbar.show', function () {
-      // console.log('Scrollbar show');
-    });
-
-
-    $scope.openLocalimg = function (getVal) {
-         // $scope.showimgData = $scope.localLife[getVal];
-         $scope.showimgData = getVal;
-         // console.log(getVal);
-         $uibModal.open({
-           animation: true,
-           templateUrl: "views/modal/local-imgview.html",
-           scope: $scope,
-           windowTopClass: "notify-popup"
-         })
-       };
-    var pageNo = 0;
-    $scope.scroll = {
-      busy: false
-    };
-    $scope.travelLife = [];
-    var getAllJourney = function (journeys) {
-      _.each(journeys, function (obj) {
-        $scope.travelLife.push(obj);
-        setTimeout(function () {
-          $scope.scroll.busy = false;
-        }, 500);
-      });
-      if ($scope.travelLife.length == 0) {
-        $scope.hasJourney = false;
-      } else {
-        $scope.hasJourney = true;
-      }
-      // $scope.hasJourney = flag;
-    };
-    // MyLife.getAllJourney(getAllJourney, pageNo, function (err) {
-    //   console.log(err);
-    // });
-    $scope.getMore = function () {
-      if ($scope.scroll.busy) {
-        return;
-      } else {
-        pageNo++;
-        $scope.scroll.busy = true;
-        MyLife.getAllJourney(getAllJourney, pageNo, function (err) {
-          console.log(err);
         });
       }
     }
-    $scope.redirectTo = function (id) {
-      console.log(id);
-      $.jStorage.set('travelId', id);
-      $state.go('ongojourney');
+  };
+
+  $scope.getMoreReviews = function(object, flag) {
+    console.log("getReviews called from getMoreReviews");
+    if (object.country && object._id && object.pageNo) {
+      if (object.scrollBusy) {
+        return;
+      } else {
+        if (object.stopCallingApi) {
+          return
+        } else {
+          object.scrollBusy = true;
+          switch (flag) {
+            case 'travel-life':
+              MyLife.getReviewsByCities(object.country, object._id, ++object.pageNo, function(data) {
+                if (data.value) {
+                  object.scrollBusy = false;
+                  if (data.data.length == 0) {
+                    object.stopCallingApi = true;
+                  } else {
+                    _.each(data.data, function(n) {
+                      object.accordReview.push(n);
+                    })
+                  }
+                } else {}
+              });
+              break;
+            case 'local-life':
+              MyLife.getReviewsByCategories(object.city, object._id, object.pageNo, function(data) {
+                if (data.value) {
+                  object.scrollBusy = false;
+                  if (data.data.length == 0) {
+                    object.stopCallingApi = true;
+                  } else {
+                    _.each(data.data, function(n) {
+                      object.accordReview.push(n);
+                    })
+                  }
+                } else {}
+              });
+              break;
+          }
+
+        }
+      }
+    } else {
+      console.log("insufficient parameters");
+    }
+  }
+
+  $scope.goToAccordian = function(review, showType) {
+    $scope[showType] = true;
+    switch (showType) {
+      case 'viewTravelCountry':
+        $scope.citiesTravelled = {
+          "countryName": review.name,
+        };
+        MyLife.getCities(review._id, function(data) {
+          // review.cities = data.data;
+          $scope.citiesTravelled.cities = data.data;
+        });
+        break;
+      case 'viewLocalCountry':
+        $scope.categoryList = {
+          "cityName": review.name,
+        };
+        MyLife.getCategories(review._id, function(data) {
+          // review.categories = data.data;
+          $scope.categoryList.categories = data.data;
+        });
+        console.log($scope.categoryList);
+        break;
     }
 
-    // local life
-    // var localPageNo = 1;
-    $scope.scroll2 = {};
-    $scope.scroll2.busy = false;
-    $scope.stopCallingApi = false;
-    $scope.localLifeJourney = [];
-    $scope.localDate = [];
-    $scope.localFilterPost = {};
-    $scope.localFilterPost.checkInType = [];
-    $scope.localFilterPost.type = "local-life";
-    $scope.localFilterPost.pagenumber = 1;
-    $scope.localFilterPost.month = 0;
-    $scope.localFilterPost.year = 0;
-    $scope.localFilterPost.rating = [];
-    $scope.localFilterPost.photos = false;
-    $scope.localFilterPost.videos = false;
-    $scope.localFilterPost.thoughts = false;
-    $scope.localStar = {};
-    $scope.localStar.fiveStar = false;
-    $scope.localStar.fourStar = false;
-    $scope.localStar.threeStar = false;
-    $scope.localStar.twoStar = false;
-    $scope.localStar.oneStar = false;
-    $scope.showTravellife = true;
-    $scope.showLocalLife = true;
-    $scope.localCategory = [{
-        name: "Beaches",
-        checked: false
-      },
-      {
-        name: "Airport",
-        checked: false
-      },
-      {
-        name: "Hotels & Accommodation",
-        checked: false
-      },
-      {
-        name: "Restaurants & Bars",
-        checked: false
-      },
-      {
-        name: "Natures & Parks",
-        checked: false
-      },
-      {
-        name: "Sights & Landmarks",
-        checked: false
-      },
-      {
-        name: "Museums & Galleries",
-        checked: false
-      },
-      {
-        name: "Religious",
-        checked: false
-      },
-      {
-        name: "Shopping",
-        checked: false
-      },
-      {
-        name: "Spa & Wellness",
-        checked: false
-      },
-      {
-        name: "Adventure & Excursions",
-        checked: false
-      },
-      {
-        name: "Zoos & Aquariums",
-        checked: false
-      },
-      {
-        name: "Others",
-        checked: false
-      }
-    ];
-    var viewLocalLife = function (dataLocal) {
-      $scope.localLifeJourney = dataLocal.data;
-      $scope.localDate = dataLocal.datesArr;
-      $scope.scroll2.busy = false;
-      if ($scope.localLifeJourney.length == 0) {
-        $scope.showLocalLife = true;
-      } else {
-        $scope.showLocalLife = false;
-      }
-    };
 
-    $scope.getlocalLife = function () {
-      $scope.showTravellife = false;
-      console.log($scope.showTravellife);
-      $scope.scroll2.busy = true;
-      localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+  };
+
+  // $scope.openAccordian = function (object, openAccordian, flag) {
+  //   object.pageNo = 1;
+  //   object.scrollBusy = false;
+  //   object.stopCallingApi = false;
+  //   console.log(object, openAccordian, flag);
+  //   if (openAccordian) {
+  //     switch (flag) {
+  //       case 'travel-life':
+  //         MyLife.getReviewsByCities(object.country, object._id, object.pageNo, function (data) {
+  //           object.accordReview = data.data;
+  //         });
+  //         break;
+  //       case 'local-life':
+  //         MyLife.getReviewsByCategories(object.city, object._id, object.pageNo, function (data) {
+  //           object.accordReview = data.data;
+  //         });
+  //         break;
+  //     }
+  //   } else {
+  //   }
+  // };
+  $scope.openAccordian = function(object, openAccordian, flag) {
+    console.log("getReviewsWeb called from openAccordian");
+    object.pageNo = 1;
+    object.scrollBusy = false;
+    object.stopCallingApi = false;
+    console.log(object, openAccordian, flag);
+    if (openAccordian) {
+      switch (flag) {
+        case 'travel-life':
+          MyLife.getReviewsByCities(object.country, object._id, object.pageNo, function(data) {
+            object.accordReview = data.data;
+          });
+          break;
+        case 'local-life':
+          MyLife.getReviewsByCategories(object.city, object._id, object.pageNo, function(data) {
+            object.accordReview = data.data;
+          });
+          break;
+      }
+    } else {}
+  };
+  $scope.savePostReview = function(values) {
+    console.log(values, wholePost);
+    var obj = {
+      "post": wholePost._id,
+      "rating": values.rating.toString(),
+      "review": values.review
+    }
+    console.log(obj);
+    console.log(wholePost);
+    MyLife.savePostReview(obj, function(data) {
+      if (data.value) {
+        if (wholePost.review.length == 0) {
+          wholePost.review[0] = {};
+        }
+        wholePost.review[0].post = obj.post;
+        wholePost.review[0].rating = obj.rating;
+        wholePost.review[0].review = obj.review;
+        console.log(wholePost);
+        modal.close();
+      } else {}
+    })
+  };
+
+  //reviews integration ends here
+
+  var allMyLife = [
+    "views/content/myLife/journey.html",
+    "views/content/myLife/moments.html",
+    "views/content/myLife/reviews.html",
+    "views/content/myLife/holidayplanner.html"
+  ];
+  $scope.myLife = {
+    profileMain: "views/content/myLife/profile.html",
+    innerView: allMyLife[0]
+  };
+  // change url
+  $scope.viewTab = 1;
+  switch ($state.params.name) {
+    case "journey":
+      $scope.myLife.innerView = allMyLife[0];
+      break;
+    case "moments":
+      getMoments();
+      $scope.myLife.innerView = allMyLife[1];
+      break;
+    case "reviews":
+      getReviews();
+      $scope.myLife.innerView = allMyLife[2];
+      break;
+    case "holidayplanner":
+      $scope.myLife.innerView = allMyLife[3];
+      break;
+    default:
+      $scope.myLife.innerView = allMyLife[0];
+  }
+  $scope.getTab = function(view) {
+    $scope.myLife.innerView = allMyLife[view];
+    var url = "journey";
+    switch (view) {
+      case 0:
+        url = "journey";
+        break;
+      case 1:
+        url = "moments";
+        getMoments();
+        break;
+      case 2:
+        url = "reviews";
+        getReviews();
+        break;
+      case 3:
+        url = "holidayplanner";
+        break;
+    }
+    $state.go("mylife", {
+      name: url
+    }, {
+      notify: false
+    });
+  }
+
+
+  $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
+  $scope.mapDataHumanizeFn = function(val) {
+    return val + " units";
+  };
+  $scope.heatmapColors = ['#2c3757', '#ff6759'];
+
+  $scope.hoveringOver = function(value) {
+    $scope.overStar = value;
+  };
+  $scope.ratingStates = [{
+    stateOn: 'fa fa-star-o',
+    stateOff: 'fa fa-star'
+  }, {
+    stateOn: 'fa fa-star-o',
+    stateOff: 'fa fa-star'
+  }, {
+    stateOn: 'fa fa-star-o',
+    stateOff: 'fa fa-star'
+  }, {
+    stateOn: 'fa fa-star-o',
+    stateOff: 'fa fa-star'
+  }, {
+    stateOn: 'fa fa-star-o',
+    stateOff: 'fa fa-star'
+  }];
+  // journey json
+  $scope.buildNow = function() {
+    $scope.$broadcast('rebuild:me');
+  }
+  $scope.$on('scrollbar.hide', function() {
+    // console.log('Scrollbar hide');
+  });
+  $scope.$on('scrollbar.show', function() {
+    // console.log('Scrollbar show');
+  });
+
+
+  $scope.openLocalimg = function(getVal) {
+    // $scope.showimgData = $scope.localLife[getVal];
+    $scope.showimgData = getVal;
+    // console.log(getVal);
+    $uibModal.open({
+      animation: true,
+      templateUrl: "views/modal/local-imgview.html",
+      scope: $scope,
+      windowTopClass: "notify-popup"
+    })
+  };
+  var pageNo = 0;
+  $scope.scroll = {
+    busy: false
+  };
+  $scope.travelLife = [];
+  var getAllJourney = function(journeys) {
+    _.each(journeys, function(obj) {
+      $scope.travelLife.push(obj);
+      setTimeout(function() {
+        $scope.scroll.busy = false;
+      }, 500);
+    });
+    if ($scope.travelLife.length == 0) {
+      $scope.hasJourney = false;
+    } else {
+      $scope.hasJourney = true;
+    }
+    // $scope.hasJourney = flag;
+  };
+  // MyLife.getAllJourney(getAllJourney, pageNo, function (err) {
+  //   console.log(err);
+  // });
+  $scope.getMore = function() {
+    if ($scope.scroll.busy) {
+      return;
+    } else {
+      pageNo++;
+      $scope.scroll.busy = true;
+      MyLife.getAllJourney(getAllJourney, pageNo, function(err) {
         console.log(err);
-      })
-    };
-    $scope.viewTravelLife = function () {
-      $scope.showTravellife = true;
-    };
-    // pagination local life
-    $scope.getMoreLocalPost = function () {
+      });
+    }
+  }
+  $scope.redirectTo = function(id) {
+    console.log(id);
+    $.jStorage.set('travelId', id);
+    $state.go('ongojourney');
+  }
+
+  // local life
+  // var localPageNo = 1;
+  $scope.scroll2 = {};
+  $scope.scroll2.busy = false;
+  $scope.stopCallingApi = false;
+  $scope.localLifeJourney = [];
+  $scope.localDate = [];
+  $scope.localFilterPost = {};
+  $scope.localFilterPost.checkInType = [];
+  $scope.localFilterPost.type = "local-life";
+  $scope.localFilterPost.pagenumber = 1;
+  $scope.localFilterPost.month = 0;
+  $scope.localFilterPost.year = 0;
+  $scope.localFilterPost.rating = [];
+  $scope.localFilterPost.photos = false;
+  $scope.localFilterPost.videos = false;
+  $scope.localFilterPost.thoughts = false;
+  $scope.localStar = {};
+  $scope.localStar.fiveStar = false;
+  $scope.localStar.fourStar = false;
+  $scope.localStar.threeStar = false;
+  $scope.localStar.twoStar = false;
+  $scope.localStar.oneStar = false;
+  $scope.showTravellife = true;
+  $scope.showLocalLife = true;
+  $scope.localCategory = [{
+    name: "Beaches",
+    checked: false
+  }, {
+    name: "Airport",
+    checked: false
+  }, {
+    name: "Hotels & Accommodation",
+    checked: false
+  }, {
+    name: "Restaurants & Bars",
+    checked: false
+  }, {
+    name: "Natures & Parks",
+    checked: false
+  }, {
+    name: "Sights & Landmarks",
+    checked: false
+  }, {
+    name: "Museums & Galleries",
+    checked: false
+  }, {
+    name: "Religious",
+    checked: false
+  }, {
+    name: "Shopping",
+    checked: false
+  }, {
+    name: "Spa & Wellness",
+    checked: false
+  }, {
+    name: "Adventure & Excursions",
+    checked: false
+  }, {
+    name: "Zoos & Aquariums",
+    checked: false
+  }, {
+    name: "Others",
+    checked: false
+  }];
+  var viewLocalLife = function(dataLocal) {
+    $scope.localLifeJourney = dataLocal.data;
+    $scope.localDate = dataLocal.datesArr;
+    $scope.scroll2.busy = false;
+    if ($scope.localLifeJourney.length == 0) {
+      $scope.showLocalLife = true;
+    } else {
+      $scope.showLocalLife = false;
+    }
+  };
+
+  $scope.getlocalLife = function() {
+    $scope.showTravellife = false;
+    console.log($scope.showTravellife);
+    $scope.scroll2.busy = true;
+    localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function(err) {
+      console.log(err);
+    })
+  };
+  $scope.viewTravelLife = function() {
+    $scope.showTravellife = true;
+  };
+  // pagination local life
+  $scope.getMoreLocalPost = function() {
       if ($scope.scroll2.stopCallingApi === false && $scope.showTravellife === false) {
         $scope.localFilterPost.pagenumber++;
         $scope.scroll2.busy = true;
-        localLife.getLocalJourney(function (data) {
+        localLife.getLocalJourney(function(data) {
           $scope.scroll2.busy = false;
           if (data.data.length === 0) {
             $scope.scroll2.stopCallingApi = true;
           } else {
-            _.each(data.data, function (newData) {
+            _.each(data.data, function(newData) {
               $scope.localLifeJourney.push(newData);
             });
           }
-        }, $scope.localFilterPost, function (err) {
+        }, $scope.localFilterPost, function(err) {
           console.log(err);
         });
       }
     }
     // pagination local life end
 
-    // get by Filter
-    $scope.getByFilter = function (filterdData, filterType) {
-      console.log(filterdData, 'what data is coming');
-      switch (filterType) {
-        case 'date':
-          $scope.localFilterPost.month = parseInt(moment(filterdData.split(",")[0], "MMMM").format('M'));
-          $scope.localFilterPost.year = parseInt(filterdData.split(",")[1]);
-          localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-            console.log(err);
+  // get by Filter
+  $scope.getByFilter = function(filterdData, filterType) {
+    console.log(filterdData, 'what data is coming');
+    switch (filterType) {
+      case 'date':
+        $scope.localFilterPost.month = parseInt(moment(filterdData.split(",")[0], "MMMM").format('M'));
+        $scope.localFilterPost.year = parseInt(filterdData.split(",")[1]);
+        localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function(err) {
+          console.log(err);
+        });
+        break;
+      case 'checkIn':
+        console.log(filterdData, "-----------------------------------------");
+        if (filterdData.checked === false) {
+          $scope.localFilterPost.checkInType.push(filterdData.name);
+          console.log($scope.localFilterPost.checkInType, 'array');
+        } else {
+          _.remove($scope.localFilterPost.checkInType, function(newArr) {
+            return newArr == filterdData.name;
+          })
+          console.log($scope.localFilterPost.checkInType, 'removed data');
+        }
+        localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function(err) {
+          console.log(err);
+        });
+        break;
+      case 'rating':
+        var getRatingIndex = _.findIndex($scope.localFilterPost.rating, function(rating) {
+          return rating == filterdData;
+        });
+        if (getRatingIndex === -1) {
+          $scope.localFilterPost.rating.push(filterdData);
+          console.log($scope.localFilterPost.rating, 'rating ka array');
+        } else {
+          _.remove($scope.localFilterPost.rating, function(remove) {
+            return remove == filterdData;
           });
-          break;
-        case 'checkIn':
-          console.log(filterdData, "-----------------------------------------");
-          if (filterdData.checked === false) {
-            $scope.localFilterPost.checkInType.push(filterdData.name);
-            console.log($scope.localFilterPost.checkInType, 'array');
-          } else {
-            _.remove($scope.localFilterPost.checkInType, function (newArr) {
-              return newArr == filterdData.name;
-            })
-            console.log($scope.localFilterPost.checkInType, 'removed data');
-          }
-          localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-            console.log(err);
-          });
-          break;
-        case 'rating':
-          var getRatingIndex = _.findIndex($scope.localFilterPost.rating, function (rating) {
-            return rating == filterdData;
-          });
-          if (getRatingIndex === -1) {
-            $scope.localFilterPost.rating.push(filterdData);
-            console.log($scope.localFilterPost.rating, 'rating ka array');
-          } else {
-            _.remove($scope.localFilterPost.rating, function (remove) {
-              return remove == filterdData;
-            });
-            console.log($scope.localFilterPost.rating, 'removed ');
-          }
-          localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-            console.log(err);
-          });
-          break;
-        case 'photos':
-          // if ($scope.localFilterPost.photos == false) {
-          //   $scope.localFilterPost.photos = true;
-          //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-          //     console.log(err);
-          //   });
-          // } else {
-          //   $scope.localFilterPost.photos = false;
-          //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-          //     console.log(err);
-          //   });
-          // }
-          localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-            console.log(err);
-          });
-          break;
-        case 'videos':
-          // if ($scope.localFilterPost.videos == false) {
-          //   $scope.localFilterPost.videos = true;
-          //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-          //     console.log(err);
-          //   });
-          // } else {
-          //   $scope.localFilterPost.videos = false;
-          //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-          //     console.log(err);
-          //   });
-          // }
-          localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-            console.log(err);
-          });
-          break;
-        case 'thoughts':
-          // if ($scope.localFilterPost.thoughts == false) {
-          //   $scope.localFilterPost.thoughts = true;
-          //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-          //     console.log(err);
-          //   });
-          // } else {
-          //   $scope.localFilterPost.thoughts = false;
-          //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-          //     console.log(err);
-          //   });
-          // }
-          localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
-            console.log(err);
-          });
-          break;
-      }
-    };
-    // get by Filter end
-    // clear all filter
-    $scope.clearLocalFilter = function () {
+          console.log($scope.localFilterPost.rating, 'removed ');
+        }
+        localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function(err) {
+          console.log(err);
+        });
+        break;
+      case 'photos':
+        // if ($scope.localFilterPost.photos == false) {
+        //   $scope.localFilterPost.photos = true;
+        //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+        //     console.log(err);
+        //   });
+        // } else {
+        //   $scope.localFilterPost.photos = false;
+        //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+        //     console.log(err);
+        //   });
+        // }
+        localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function(err) {
+          console.log(err);
+        });
+        break;
+      case 'videos':
+        // if ($scope.localFilterPost.videos == false) {
+        //   $scope.localFilterPost.videos = true;
+        //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+        //     console.log(err);
+        //   });
+        // } else {
+        //   $scope.localFilterPost.videos = false;
+        //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+        //     console.log(err);
+        //   });
+        // }
+        localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function(err) {
+          console.log(err);
+        });
+        break;
+      case 'thoughts':
+        // if ($scope.localFilterPost.thoughts == false) {
+        //   $scope.localFilterPost.thoughts = true;
+        //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+        //     console.log(err);
+        //   });
+        // } else {
+        //   $scope.localFilterPost.thoughts = false;
+        //   localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+        //     console.log(err);
+        //   });
+        // }
+        localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function(err) {
+          console.log(err);
+        });
+        break;
+    }
+  };
+  // get by Filter end
+  // clear all filter
+  $scope.clearLocalFilter = function() {
       console.log($scope.localFilterPost, 'what is local filter post');
       $scope.localFilterPost.checkInType = [];
       $scope.localFilterPost.rating = [];
@@ -5525,20 +5512,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.localFilterPost.photos = false;
       $scope.localFilterPost.videos = false;
       $scope.localFilterPost.thoughts = false;
-      _.each($scope.localCategory, function (value) {
+      _.each($scope.localCategory, function(value) {
         value.checked = false;
       });
       console.log($scope.localCategory);
-      localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
+      localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function(err) {
         console.log(err);
       });
     }
     // clear all filter end
 
-    // local life end
-  })
+  // local life end
+})
 
-  .controller('JourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+.controller('JourneyCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("journey");
@@ -5546,8 +5533,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.$watch('masonryContainer', function () {
-      $timeout(function () {
+    $scope.$watch('masonryContainer', function() {
+      $timeout(function() {
         console.log("reload");
         $rootScope.$broadcast('masonry.reload');
       }, 200);
@@ -5561,13 +5548,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //     }, 1000);
     //   }, 100);
     // });
-    $scope.buildNow = function () {
+    $scope.buildNow = function() {
       $scope.$broadcast('rebuild:me');
     }
-    $scope.$on('scrollbar.hide', function () {
+    $scope.$on('scrollbar.hide', function() {
       // console.log('Scrollbar hide');
     });
-    $scope.$on('scrollbar.show', function () {
+    $scope.$on('scrollbar.show', function() {
       // console.log('Scrollbar show');
     });
 
@@ -5605,25 +5592,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // 'FI': {metric: 15}
     };
     $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
-    $scope.mapDataHumanizeFn = function (val) {
+    $scope.mapDataHumanizeFn = function(val) {
       return val + " units";
     };
     $scope.heatmapColors = ['#2c3757', '#ff6759'];
 
-    $scope.openLocalimg = function (getVal) {
-         // $scope.showimgData = $scope.localLife[getVal];
-         $scope.showimgData = getVal;
-         // console.log(getVal);
-         $uibModal.open({
-           animation: true,
-           templateUrl: "views/modal/local-imgview.html",
-           scope: $scope,
-           windowTopClass: "notify-popup"
-         })
-       };
+    $scope.openLocalimg = function(getVal) {
+      // $scope.showimgData = $scope.localLife[getVal];
+      $scope.showimgData = getVal;
+      // console.log(getVal);
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/local-imgview.html",
+        scope: $scope,
+        windowTopClass: "notify-popup"
+      })
+    };
 
   })
-  .controller('MomentsCtrl', function ($scope, TemplateService, NavigationService, $timeout, $location, $anchorScroll) {
+  .controller('MomentsCtrl', function($scope, TemplateService, NavigationService, $timeout, $location, $anchorScroll) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("moments");
@@ -5633,7 +5620,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
   })
-  .controller('ReviewsCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+  .controller('ReviewsCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("reviews");
@@ -5643,7 +5630,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
   })
-  .controller('HolidayPlannerCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('HolidayPlannerCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("holidayplanner");
@@ -5652,7 +5639,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
   })
-  .controller('ProfileCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('ProfileCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -5661,7 +5648,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
   })
-  .controller('OtherProfileCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('OtherProfileCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -5672,7 +5659,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
   })
-  .controller('OtherJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('OtherJourneyCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("otherjourney");
@@ -5680,20 +5667,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $(document).ready(function () {
-      setTimeout(function () {
+    $(document).ready(function() {
+      setTimeout(function() {
         $('html, body').animate({
           scrollTop: $("#tabs").offset().top
         }, 1000);
       }, 100);
     });
-    $scope.buildNow = function () {
+    $scope.buildNow = function() {
       $scope.$broadcast('rebuild:me');
     }
-    $scope.$on('scrollbar.hide', function () {
+    $scope.$on('scrollbar.hide', function() {
       // console.log('Scrollbar hide');
     });
-    $scope.$on('scrollbar.show', function () {
+    $scope.$on('scrollbar.show', function() {
       // console.log('Scrollbar show');
     });
 
@@ -6016,7 +6003,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
 
   })
-  .controller('SettingCtrl', function ($scope, TemplateService, NavigationService, $timeout, DataUriToBlob) {
+  .controller('SettingCtrl', function($scope, TemplateService, NavigationService, $timeout, DataUriToBlob) {
     //Used to name the .html file
     $scope.profile = $.jStorage.get("profile");
     $scope.userData = _.clone($scope.profile);
@@ -6028,7 +6015,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
     $scope.format = 'dd-MM-yyyy';
-    $scope.open1 = function () {
+    $scope.open1 = function() {
       $scope.popup1.opened = true;
       showWeeks = false;
     };
@@ -6039,13 +6026,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.myImage = '';
     $scope.myCroppedImage = '';
     $scope.showImage = false;
-    var got = setInterval(function () {
+    var got = setInterval(function() {
       if (document.getElementById('fileInput')) {
-        document.getElementById('fileInput').onchange = function (evt) {
+        document.getElementById('fileInput').onchange = function(evt) {
           var file = evt.currentTarget.files[0];
           var reader = new FileReader();
-          reader.onload = function (evt1) {
-            $scope.$apply(function ($scope) {
+          reader.onload = function(evt1) {
+            $scope.$apply(function($scope) {
               $scope.showImage = true;
               $scope.myImage = evt1.target.result;
             });
@@ -6057,7 +6044,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, 1000);
 
     $scope.showSetting = 1;
-    $scope.setting = function (val) {
+    $scope.setting = function(val) {
       if (val == 1) {
         $scope.showSetting = 1;
       } else if (val == 2) {
@@ -6081,7 +6068,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.travelConfig = {};
     var atleastOne = "";
     var length = "";
-    $scope.holidayType = function (val) {
+    $scope.holidayType = function(val) {
       atleastOne = _.filter($scope.travelConfig.chooseHoliday, ['class', "active-holiday"]);
       length = atleastOne.length;
       console.log(length);
@@ -6096,14 +6083,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
 
     };
-    $scope.usuallyType = function (val) {
-      _.each($scope.travelConfig.usuallyGo, function (abc) {
+    $scope.usuallyType = function(val) {
+      _.each($scope.travelConfig.usuallyGo, function(abc) {
         abc.class = "";
       });
       $scope.travelConfig.usuallyGo[val].class = "active-holiday";
     };
 
-    $scope.travelType = function (val) {
+    $scope.travelType = function(val) {
       atleastOne = _.filter($scope.travelConfig.preferTravel, ['class', "active-holiday"]);
       length = atleastOne.length;
       console.log(length);
@@ -6118,7 +6105,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.idealType = function (val) {
+    $scope.idealType = function(val) {
       atleastOne = _.filter($scope.travelConfig.idealSelect, ['class', "active-holiday"]);
       length = atleastOne.length;
       console.log(length);
@@ -6268,35 +6255,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // page 1 integration starts
     //gets all the cities starts
-    var getAllCities = function (data, status) {
+    var getAllCities = function(data, status) {
       if (data.value) {
         $scope.cities = data.data.predictions;
       } else {
         console.log("Eroor Fetching Data");
       }
     };
-    $scope.searchByKey = function (searchCity) {
+    $scope.searchByKey = function(searchCity) {
       NavigationService.getAllCities({
         "search": searchCity
-      }, getAllCities, function (err) {
+      }, getAllCities, function(err) {
         console.log(err);
       });
     };
     //End-Of get all the cities ends
     //get all countries
-    var getAllCountries = function (data, status) {
+    var getAllCountries = function(data, status) {
       if (data.value) {
         $scope.nationality = data.data;
       } else {
         console.log("Error Fetching Data");
       }
     };
-    NavigationService.getAllCountries(getAllCountries, function (err) {
+    NavigationService.getAllCountries(getAllCountries, function(err) {
       console.log(err);
     });
     //get all countries ends
     // are u travel blogger section starts
-    $scope.setPhotographer = function () {
+    $scope.setPhotographer = function() {
       if ($scope.userData.isPhotographer) {
         $scope.userData.isPhotographer = false;
       } else {
@@ -6304,7 +6291,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.setBlogger = function () {
+    $scope.setBlogger = function() {
       if ($scope.userData.isBlogger) {
         $scope.userData.isBlogger = false;
       } else {
@@ -6312,7 +6299,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.setNone = function () {
+    $scope.setNone = function() {
       $scope.userData.isBlogger = false;
       $scope.userData.isPhotographer = false;
     };
@@ -6328,35 +6315,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   $scope.chooseHoliday[index].class = "active-holiday"
     // });
 
-    _.each(new Array(4), function (value, key) {
+    _.each(new Array(4), function(value, key) {
       switch (key) {
         case 0:
-          _.each($scope.userData.travelConfig.kindOfHoliday, function (n1) {
-            var index = _.findIndex($scope.travelConfig.chooseHoliday, function (n2) {
+          _.each($scope.userData.travelConfig.kindOfHoliday, function(n1) {
+            var index = _.findIndex($scope.travelConfig.chooseHoliday, function(n2) {
               return n1 == n2.storeCaption;
             });
             $scope.travelConfig.chooseHoliday[index].class = "active-holiday"
           });
           break;
         case 1:
-          _.each($scope.userData.travelConfig.usuallyGo, function (n1) {
-            var index = _.findIndex($scope.travelConfig.usuallyGo, function (n2) {
+          _.each($scope.userData.travelConfig.usuallyGo, function(n1) {
+            var index = _.findIndex($scope.travelConfig.usuallyGo, function(n2) {
               return n1 == n2.storeCaption;
             });
             $scope.travelConfig.usuallyGo[index].class = "active-holiday"
           });
           break;
         case 2:
-          _.each($scope.userData.travelConfig.preferToTravel, function (n1) {
-            var index = _.findIndex($scope.travelConfig.preferTravel, function (n2) {
+          _.each($scope.userData.travelConfig.preferToTravel, function(n1) {
+            var index = _.findIndex($scope.travelConfig.preferTravel, function(n2) {
               return n1 == n2.storeCaption;
             });
             $scope.travelConfig.preferTravel[index].class = "active-holiday"
           });
           break;
         case 3:
-          _.each($scope.userData.travelConfig.holidayType, function (n1) {
-            var index = _.findIndex($scope.travelConfig.idealSelect, function (n2) {
+          _.each($scope.userData.travelConfig.holidayType, function(n1) {
+            var index = _.findIndex($scope.travelConfig.idealSelect, function(n2) {
               return n1 == n2.storeCaption;
               // console.log(n1, n2.storeCaption);
             });
@@ -6370,12 +6357,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // page 2 integration ends
 
-    $scope.editUserData = function (userData, status, valid) {
+    $scope.editUserData = function(userData, status, valid) {
       console.log(valid);
       if (valid) {
-        NavigationService.editUserData(userData, status, function (data) {
+        NavigationService.editUserData(userData, status, function(data) {
           if (data.value) {
-            NavigationService.getProfile(function (data, status) {
+            NavigationService.getProfile(function(data, status) {
               if (data._id) {
                 $.jStorage.set("isLoggedIn", true);
                 $.jStorage.set("profile", data);
@@ -6384,7 +6371,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               } else {
                 $.jStorage.flush();
               }
-            }, function (err) {
+            }, function(err) {
               console.log("Error:", err);
             });
           } else {
@@ -6396,17 +6383,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.uploadProfilePicture = function (imageBase64) {
+    $scope.uploadProfilePicture = function(imageBase64) {
       var file = imageTestingCallback(imageBase64, 'image/png');
       console.log(file);
-      NavigationService.uploadFile(file, function (response) {
+      NavigationService.uploadFile(file, function(response) {
         if (response.value) {
           $scope.userData.profilePicture = response.data[0];
           NavigationService.saveUserData({
             'profilePicture': $scope.userData.profilePicture
-          }, function (data) {
+          }, function(data) {
             $scope.showImage = false;
-            NavigationService.getProfile(globalGetProfile, function () {
+            NavigationService.getProfile(globalGetProfile, function() {
               console.log("error");
             });
           });
@@ -6416,7 +6403,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
   })
-  .controller('BlogCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('BlogCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("blog");
     $scope.menutitle = NavigationService.makeactive("Blog");
@@ -6539,7 +6526,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO"
     }, ];
   })
-  .controller('BlogDetailCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('BlogDetailCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("blogdetail");
     $scope.menutitle = NavigationService.makeactive("BlogDetail");
@@ -6735,7 +6722,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, ]
     }];
   })
-  .controller('ActivityCtrl', function ($scope, TemplateService, NavigationService, Activity, $timeout) {
+  .controller('ActivityCtrl', function($scope, TemplateService, NavigationService, Activity, $timeout) {
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("activity");
     $scope.menutitle = NavigationService.makeactive("Activity");
@@ -7354,7 +7341,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
 
-    setTimeout(function () {
+    setTimeout(function() {
       $('.travelocal-slider').flexslider({
         animation: "slide",
         animationLoop: false,
@@ -7368,791 +7355,791 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('ActivityTestCtrl', function ($scope, TemplateService, NavigationService, Activity, LikesAndComments, $timeout, $http) {
-    //Used to name the .html file
-    $scope.template = TemplateService.changecontent("activitytest");
-    $scope.menutitle = NavigationService.makeactive("Activity");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
+.controller('ActivityTestCtrl', function($scope, TemplateService, NavigationService, Activity, LikesAndComments, $timeout, $http) {
+  //Used to name the .html file
+  $scope.template = TemplateService.changecontent("activitytest");
+  $scope.menutitle = NavigationService.makeactive("Activity");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
 
-    $scope.userData = $.jStorage.get("profile");
+  $scope.userData = $.jStorage.get("profile");
 
-    var callback = function (data) {
-      $scope.activities = data;
-    };
+  var callback = function(data) {
+    $scope.activities = data;
+  };
 
-    Activity.getAllActivities(1, callback);
+  Activity.getAllActivities(1, callback);
 
-    $scope.changeImage = function (index, activity) {
-      activity.index = index;
-    };
+  $scope.changeImage = function(index, activity) {
+    activity.index = index;
+  };
 
-    $scope.likeUnlikeActivity = function (activity) {
-      console.log(activity.likeUnlikeFlag, activity.uniqueId, activity._id);
-      console.log(activity.likeDone + "this call is from activitytest.html");
-      activity.likeDone = !activity.likeDone;
-      if (activity.likeDone) {
-        if (activity.likeCount == undefined) {
-          activity.likeCount = 1;
-        } else {
-          activity.likeCount = activity.likeCount + 1;
-        }
-        LikesAndComments.likeUnlike(activity.likeUnlikeFlag, "like", activity.uniqueId, activity._id, null)
+  $scope.likeUnlikeActivity = function(activity) {
+    console.log(activity.likeUnlikeFlag, activity.uniqueId, activity._id);
+    console.log(activity.likeDone + "this call is from activitytest.html");
+    activity.likeDone = !activity.likeDone;
+    if (activity.likeDone) {
+      if (activity.likeCount == undefined) {
+        activity.likeCount = 1;
       } else {
-        activity.likeCount = activity.likeCount - 1;
-        LikesAndComments.likeUnlike(activity.likeUnlikeFlag, "unlike", activity.uniqueId, activity._id, null)
+        activity.likeCount = activity.likeCount + 1;
       }
-    };
+      LikesAndComments.likeUnlike(activity.likeUnlikeFlag, "like", activity.uniqueId, activity._id, null)
+    } else {
+      activity.likeCount = activity.likeCount - 1;
+      LikesAndComments.likeUnlike(activity.likeUnlikeFlag, "unlike", activity.uniqueId, activity._id, null)
+    }
+  };
 
-    $scope.getLikes = function (activity) {
-      console.log(activity);
-      $scope.listLikesDropDown(activity.listLike);
-      var formData = {
-        "_id": activity._id
-      }
-      var callback = function (data) {
-        $scope.listOfLikes = data.data;
-        console.log($scope.listOfLikes);
-      };
-      LikesAndComments.getLikes(activity.likeUnlikeFlag, activity._id, callback);
+  $scope.getLikes = function(activity) {
+    console.log(activity);
+    $scope.listLikesDropDown(activity.listLike);
+    var formData = {
+      "_id": activity._id
+    }
+    var callback = function(data) {
+      $scope.listOfLikes = data.data;
+      console.log($scope.listOfLikes);
     };
+    LikesAndComments.getLikes(activity.likeUnlikeFlag, activity._id, callback);
+  };
 
-    $scope.listLikesDropDown = function (model) {
-      $timeout(function () {
-        model.backgroundClick = true;
-        backgroundClick.object = model;
-      }, 200);
-      backgroundClick.scope = $scope;
-    };
+  $scope.listLikesDropDown = function(model) {
+    $timeout(function() {
+      model.backgroundClick = true;
+      backgroundClick.object = model;
+    }, 200);
+    backgroundClick.scope = $scope;
+  };
 
-    $scope.getCommentsData = function (activity) {
-      console.log(activity);
-      $scope.previousId;
-      $scope.post = activity;
-      var callback = function (data) {
-        $scope.uniqueArr = [];
-        $scope.listOfComments = data.data;
-        $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
-      }
-      if ($scope.previousId != activity._id) {
-        // $scope.focus('enterComment');
+  $scope.getCommentsData = function(activity) {
+    console.log(activity);
+    $scope.previousId;
+    $scope.post = activity;
+    var callback = function(data) {
+      $scope.uniqueArr = [];
+      $scope.listOfComments = data.data;
+      $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+    }
+    if ($scope.previousId != activity._id) {
+      // $scope.focus('enterComment');
+      $scope.listOfComments = [];
+      $scope.viewCardComment = true;
+      // $scope.journey.journeyHighLight = activity._id;
+      $scope.getCard = "view-whole-card";
+      LikesAndComments.getComments(activity.likeUnlikeFlag, activity._id, callback);
+    } else {
+      if ($scope.viewCardComment) {
+        $scope.viewCardComment = false;
+        // $scope.journey.journeyHighLight = "";
+        $scope.getCard = "";
+        $scope.comment.text = "";
+      } else {
         $scope.listOfComments = [];
         $scope.viewCardComment = true;
+        // $scope.focus('enterComment');
         // $scope.journey.journeyHighLight = activity._id;
         $scope.getCard = "view-whole-card";
         LikesAndComments.getComments(activity.likeUnlikeFlag, activity._id, callback);
-      } else {
-        if ($scope.viewCardComment) {
-          $scope.viewCardComment = false;
-          // $scope.journey.journeyHighLight = "";
-          $scope.getCard = "";
-          $scope.comment.text = "";
-        } else {
-          $scope.listOfComments = [];
-          $scope.viewCardComment = true;
-          // $scope.focus('enterComment');
-          // $scope.journey.journeyHighLight = activity._id;
-          $scope.getCard = "view-whole-card";
-          LikesAndComments.getComments(activity.likeUnlikeFlag, activity._id, callback);
-        }
       }
-      $scope.previousId = activity._id;
-    };
+    }
+    $scope.previousId = activity._id;
+  };
 
-    $scope.getLikesData = function (activity) {
-      var callback = function (data) {
-        $scope.listOfLikes = data.data;
-        console.log($scope.listOfLikes);
-      };
-      console.log($scope.post);
-      if ($scope.previousLikeId != activity._id) {
-        // $scope.focus('enterComment');
-        $scope.listOfLikes = [];
+  $scope.getLikesData = function(activity) {
+    var callback = function(data) {
+      $scope.listOfLikes = data.data;
+      console.log($scope.listOfLikes);
+    };
+    console.log($scope.post);
+    if ($scope.previousLikeId != activity._id) {
+      // $scope.focus('enterComment');
+      $scope.listOfLikes = [];
+      $scope.viewCardLike = true;
+      // $scope.journey.journeyHighLight = activity._id;
+      $scope.showLikeShow = "show-like-side-sec";
+      LikesAndComments.getLikes("post", activity._id, callback);
+    } else {
+      if ($scope.viewCardLike) {
+        $scope.viewCardLike = false;
+        // $scope.journey.journeyHighLight = "";
+        $scope.getCard = "";
+      } else {
+        $scope.listOfComments = [];
         $scope.viewCardLike = true;
+        // $scope.focus('enterComment');
         // $scope.journey.journeyHighLight = activity._id;
         $scope.showLikeShow = "show-like-side-sec";
         LikesAndComments.getLikes("post", activity._id, callback);
-      } else {
-        if ($scope.viewCardLike) {
-          $scope.viewCardLike = false;
-          // $scope.journey.journeyHighLight = "";
-          $scope.getCard = "";
-        } else {
-          $scope.listOfComments = [];
-          $scope.viewCardLike = true;
-          // $scope.focus('enterComment');
-          // $scope.journey.journeyHighLight = activity._id;
-          $scope.showLikeShow = "show-like-side-sec";
-          LikesAndComments.getLikes("post", activity._id, callback);
-        }
-      }
-      $scope.previousLikeId = activity._id;
-    };
-
-    $scope.followFollowing = function (user) {
-      console.log("object", user);
-      console.log(user.following, user._id, user.name);
-      if (user.following) {
-        LikesAndComments.unFollowUser(user._id, function (data) {
-          console.log(data, "unfollow now");
-          user.following = false;
-          _.each($scope.activities, function (n) {
-            console.log(n);
-          });
-        })
-      } else {
-        LikesAndComments.followUser(user._id, user.name, function (data) {
-          console.log(data, "follow now");
-          user.following = true;
-        });
       }
     }
+    $scope.previousLikeId = activity._id;
+  };
 
-    $scope.editOption = function (model) {
-      $timeout(function () {
-        model.backgroundClick = true;
-        backgroundClick.object = model;
-      }, 200);
-      backgroundClick.scope = $scope;
-    };
-
-    $scope.postPostsComment = function (activity, comment) {
-      // console.log(uniqueId, comment, postId);
-      console.log(activity, comment);
-      console.log("controller se comment hua");
-      var type = activity.likeUnlikeFlag;
-      var additionalId = null;
-      var hashTag = [];
-      var callback = function (data) {
-        $scope.listOfComments = data.data;
-        document.getElementById('enterComment').value = "";
-      }
-      LikesAndComments.postComment(type, activity.uniqueId, activity._id, comment, hashTag, additionalId, callback);
-    };
-
-    $scope.activityPost = [{
-        class: "travel-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        countryVisit: [{
-          imgFlag: "img/india-visit.png"
-        }, {
-          imgFlag: "img/england-visit.png"
-        }, {
-          imgFlag: "img/canada-visit.png",
-        }, ],
-        editor: false,
-        userPic: true,
-        follow: true,
-        following: false,
-        postIcon: false,
-        video: false,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: true,
-        onJourney: false,
-        getpopularPost: false,
-        activitySec: true,
-        visitPost: false
-      }, {
-        class: "travel-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. #hagtags,#hagtags1,#hagtags2,",
-        relatedPhoto: [
-          'img/blog/blog-post.jpg',
-          'img/blog/blog-post2.jpg',
-          'img/blog/blog-post3.jpg',
-          'img/blog/blog-post4.jpg',
-          'img/blog/blog-post.jpg',
-          'img/blog/blog-post2.jpg',
-          'img/blog/blog-post3.jpg',
-          'img/blog/blog-post4.jpg',
-        ],
-        editor: false,
-        userPic: true,
-        follow: false,
-        following: true,
-        postIcon: true,
-        video: false,
-        photo: true,
-        photoSlider: true,
-        travelledJourney: false,
-        onJourney: false,
-        getpopularPost: false,
-        activitySec: true,
-        visitPost: false
-      }, {
-        class: "travel-taught",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        hashtag: [{
-          tag: "#hagtags"
-        }, {
-          tag: "#hagtags1"
-        }, {
-          tag: "#hagtags2",
-        }, ],
-        editor: false,
-        userPic: true,
-        follow: true,
-        following: false,
-        postIcon: true,
-        video: false,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      }, {
-        class: "travel-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        editor: false,
-        userPic: true,
-        follow: false,
-        following: true,
-        postIcon: true,
-        video: false,
-        photo: true,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        activitySec: true
-      }, {
-        class: "travel-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        editor: false,
-        userPic: true,
-        follow: true,
-        following: false,
-        postIcon: true,
-        video: true,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        activitySec: true
-      }, {
-        class: "user-detail-itinerary",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has uploaded a new Itinerary",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        countryVisit: [{
-          imgFlag: "img/india-visit.png"
-        }, {
-          imgFlag: "img/england-visit.png"
-        }, {
-          imgFlag: "img/canada-visit.png",
-        }, ],
-        pointReview: "4.5",
-        editor: false,
-        userPic: true,
-        follow: false,
-        following: true,
-        postIcon: false,
-        video: false,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: true,
-        getpopularPost: false,
-        visitPost: false,
-        activitySec: true
-      }, , {
-        class: "user-quick-itinerary",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has uploaded a new Itinerary",
-        photoCount: "28",
-        videoCount: "5",
-        dateitinerary: "Jan 2016",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        countryVisit: [{
-          imgFlag: "img/india-visit.png"
-        }, {
-          imgFlag: "img/england-visit.png"
-        }, {
-          imgFlag: "img/canada-visit.png",
-        }, ],
-        pointReview: "4.5",
-        editor: false,
-        userPic: true,
-        follow: false,
-        following: true,
-        postIcon: false,
-        video: false,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: true,
-        getpopularPost: false,
-        visitPost: false,
-        activitySec: true
-      }, {
-        class: "editor-blog",
-        profilePic: "img/profile-main.png",
-        userName: "Editor - blog",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has uploaded a new blog",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "",
-        itineraryType2: "",
-        itineraryType3: "",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        editor: true,
-        userPic: false,
-        follow: false,
-        following: false,
-        postIcon: false,
-        video: false,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: true,
-        getpopularPost: false,
-        visitPost: false,
-        activitySec: true
-      }, {
-        class: "editor",
-        profilePic: "img/profile-main.png",
-        userName: "Editor - Itinerary",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has uploaded a new Itinerary",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        countryVisit: [{
-          imgFlag: "img/india-visit.png"
-        }, {
-          imgFlag: "img/england-visit.png"
-        }, {
-          imgFlag: "img/canada-visit.png",
-        }, ],
-        editor: true,
-        userPic: false,
-        follow: false,
-        following: false,
-        postIcon: false,
-        video: false,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: true,
-        getpopularPost: false,
-        visitPost: false,
-        activitySec: true
-      },
-      // {
-      //   class: "local-life",
-      //   profilePic: "img/profile-main.png",
-      //   userName: "John Doe",
-      //   timestampDate: "14 Jan, 2014",
-      //   timestampHour: "01:20 pm",
-      //   status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      //   imgTravelled: "img/london.jpg",
-      //   Travelledtag: "London Eye",
-      //   photoCount: "28",
-      //   videoCount: "5",
-      //   locationVisited: "9",
-      //   itineraryType1: "img/sunset.png",
-      //   itineraryType2: "img/bag-journey.png",
-      //   itineraryType3: "img/luxury-journey.png",
-      //   travelledDay: "75",
-      //   onwayTag: "love in paris",
-      //   imgOnway: "img/paris.jpg",
-      //   cost: "$10,000",
-      //   spendingDay: "75",
-      //   likes: "15660",
-      //   reviews: "354",
-      //   pointReview: "4.5",
-      //   countryVisit: [{
-      //     imgFlag: "img/india-visit.png"
-      //   }, {
-      //     imgFlag: "img/england-visit.png"
-      //   }, {
-      //     imgFlag: "img/canada-visit.png",
-      //   }, ],
-      //   editor: false,
-      //   userPic: true,
-      //   follow: false,
-      //   following: true,
-      //   postIcon: true,
-      //   video: false,
-      //   photo: false,
-      //   photoSlider: false,
-      //   travelledJourney: true,
-      //   onJourney: false,
-      //   visitPost: false,
-      //   getpopularPost: false,
-      //   activitySec: true
-      // },
-      {
-        class: "local-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-        relatedPhoto: [
-          'img/blog/blog-post.jpg',
-          'img/blog/blog-post2.jpg',
-          'img/blog/blog-post3.jpg',
-          'img/blog/blog-post4.jpg',
-          'img/blog/blog-post.jpg',
-          'img/blog/blog-post2.jpg',
-          'img/blog/blog-post3.jpg',
-          'img/blog/blog-post4.jpg',
-        ],
-        editor: false,
-        userPic: true,
-        follow: false,
-        following: true,
-        postIcon: true,
-        video: false,
-        photo: true,
-        photoSlider: true,
-        travelledJourney: false,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        activitySec: true
-      }, {
-        class: "local-life-taught",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-        editor: false,
-        userPic: true,
-        follow: false,
-        following: true,
-        postIcon: true,
-        video: false,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      }, {
-        class: "local-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-        editor: false,
-        userPic: true,
-        follow: true,
-        following: false,
-        postIcon: true,
-        video: false,
-        photo: true,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      }, {
-        class: "local-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-        editor: false,
-        userPic: true,
-        follow: false,
-        following: true,
-        postIcon: true,
-        video: true,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        activitySec: true
-      }, {
-        class: "popular-activity",
-        visitPost: false,
-        getpopularPost: true,
-        activitySec: false,
-        postPopular: [{
-          heading: "Popular Travelers",
-          listPopular: [{
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }],
-        }],
-      }, {
-        class: "popular-activity",
-        visitPost: false,
-        getpopularPost: true,
-        activitySec: false,
-        postPopular: [{
-          heading: "Popular Agents",
-          listPopular: [{
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }],
-        }],
-      }, {
-        class: "visiting-post local-visit",
-        visitPost: true,
-        getpopularPost: false,
-        activitySec: false,
-        getvisitPost: [{
-          imgVisit: "img/india-gate.jpg",
-          locationLocal: "Mumbai",
-          tag: "Must Do's in Mumbai,India",
-          travelVisit: false,
-          localVisit: true,
-          cityTag: true,
-          rating: false,
-          flag: false,
-          visitSlider: true,
-          visitImg: false,
-          localLifeMain: true,
-          visitedPost: [{
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, ],
-        }, ],
-      }, {
-        class: "visiting-post local-visit",
-        visitPost: true,
-        getpopularPost: false,
-        activitySec: false,
-        getvisitPost: [{
-          imgVisit: "img/india-gate.jpg",
-          locationLocal: "India",
-          travelVisit: false,
-          localVisit: true,
-          cityTag: false,
-          rating: true,
-          peopleBeen: 33,
-          flag: true,
-          visitSlider: true,
-          visitImg: false,
-          localLifeMain: true,
-          visitedPost: [{
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, ],
-        }, ],
-      }, {
-        class: "visiting-post travel-visit",
-        visitPost: true,
-        getpopularPost: false,
-        activitySec: false,
-        getvisitPost: [{
-          imgVisit: "img/india-gate.jpg",
-          locationLocal: "Mumbai",
-          tagTravel: "Book Your Travel form take off to touchdown!",
-          travelVisit: true,
-          localVisit: false,
-          visitSlider: false,
-          visitImg: true,
-          localLifeMain: false,
-        }, ],
-      },
-    ];
-
-    setTimeout(function () {
-      $('.travelocal-slider').flexslider({
-        animation: "slide",
-        animationLoop: false,
-        itemWidth: 150,
-        itemMargin: 3,
-        mousewheel: true,
-        directionNav: false,
-        controlNav: false,
+  $scope.followFollowing = function(user) {
+    console.log("object", user);
+    console.log(user.following, user._id, user.name);
+    if (user.following) {
+      LikesAndComments.unFollowUser(user._id, function(data) {
+        console.log(data, "unfollow now");
+        user.following = false;
+        _.each($scope.activities, function(n) {
+          console.log(n);
+        });
+      })
+    } else {
+      LikesAndComments.followUser(user._id, user.name, function(data) {
+        console.log(data, "follow now");
+        user.following = true;
       });
-    }, 100);
+    }
+  }
 
-  })
+  $scope.editOption = function(model) {
+    $timeout(function() {
+      model.backgroundClick = true;
+      backgroundClick.object = model;
+    }, 200);
+    backgroundClick.scope = $scope;
+  };
 
-  .controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, MyLife, $uibModal) {
+  $scope.postPostsComment = function(activity, comment) {
+    // console.log(uniqueId, comment, postId);
+    console.log(activity, comment);
+    console.log("controller se comment hua");
+    var type = activity.likeUnlikeFlag;
+    var additionalId = null;
+    var hashTag = [];
+    var callback = function(data) {
+      $scope.listOfComments = data.data;
+      document.getElementById('enterComment').value = "";
+    }
+    LikesAndComments.postComment(type, activity.uniqueId, activity._id, comment, hashTag, additionalId, callback);
+  };
+
+  $scope.activityPost = [{
+      class: "travel-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      pointReview: "4.5",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ],
+      editor: false,
+      userPic: true,
+      follow: true,
+      following: false,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: true,
+      onJourney: false,
+      getpopularPost: false,
+      activitySec: true,
+      visitPost: false
+    }, {
+      class: "travel-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. #hagtags,#hagtags1,#hagtags2,",
+      relatedPhoto: [
+        'img/blog/blog-post.jpg',
+        'img/blog/blog-post2.jpg',
+        'img/blog/blog-post3.jpg',
+        'img/blog/blog-post4.jpg',
+        'img/blog/blog-post.jpg',
+        'img/blog/blog-post2.jpg',
+        'img/blog/blog-post3.jpg',
+        'img/blog/blog-post4.jpg',
+      ],
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: true,
+      video: false,
+      photo: true,
+      photoSlider: true,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      activitySec: true,
+      visitPost: false
+    }, {
+      class: "travel-taught",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+      hashtag: [{
+        tag: "#hagtags"
+      }, {
+        tag: "#hagtags1"
+      }, {
+        tag: "#hagtags2",
+      }, ],
+      editor: false,
+      userPic: true,
+      follow: true,
+      following: false,
+      postIcon: true,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "travel-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: true,
+      video: false,
+      photo: true,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }, {
+      class: "travel-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has started his London Journey",
+      editor: false,
+      userPic: true,
+      follow: true,
+      following: false,
+      postIcon: true,
+      video: true,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }, {
+      class: "user-detail-itinerary",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has uploaded a new Itinerary",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ],
+      pointReview: "4.5",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: true,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }, , {
+      class: "user-quick-itinerary",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has uploaded a new Itinerary",
+      photoCount: "28",
+      videoCount: "5",
+      dateitinerary: "Jan 2016",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      spendingDay: "75",
+      likes: "15660",
+      reviews: "354",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ],
+      pointReview: "4.5",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: true,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }, {
+      class: "editor-blog",
+      profilePic: "img/profile-main.png",
+      userName: "Editor - blog",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has uploaded a new blog",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "",
+      itineraryType2: "",
+      itineraryType3: "",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      editor: true,
+      userPic: false,
+      follow: false,
+      following: false,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: true,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }, {
+      class: "editor",
+      profilePic: "img/profile-main.png",
+      userName: "Editor - Itinerary",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Has uploaded a new Itinerary",
+      imgTravelled: "img/london.jpg",
+      Travelledtag: "London Eye",
+      photoCount: "28",
+      videoCount: "5",
+      locationVisited: "9",
+      itineraryType1: "img/sunset.png",
+      itineraryType2: "img/bag-journey.png",
+      itineraryType3: "img/luxury-journey.png",
+      travelledDay: "75",
+      onwayTag: "love in paris",
+      imgOnway: "img/paris.jpg",
+      cost: "$10,000",
+      spendingDay: "75",
+      countryVisit: [{
+        imgFlag: "img/india-visit.png"
+      }, {
+        imgFlag: "img/england-visit.png"
+      }, {
+        imgFlag: "img/canada-visit.png",
+      }, ],
+      editor: true,
+      userPic: false,
+      follow: false,
+      following: false,
+      postIcon: false,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: true,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    },
+    // {
+    //   class: "local-life",
+    //   profilePic: "img/profile-main.png",
+    //   userName: "John Doe",
+    //   timestampDate: "14 Jan, 2014",
+    //   timestampHour: "01:20 pm",
+    //   status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+    //   imgTravelled: "img/london.jpg",
+    //   Travelledtag: "London Eye",
+    //   photoCount: "28",
+    //   videoCount: "5",
+    //   locationVisited: "9",
+    //   itineraryType1: "img/sunset.png",
+    //   itineraryType2: "img/bag-journey.png",
+    //   itineraryType3: "img/luxury-journey.png",
+    //   travelledDay: "75",
+    //   onwayTag: "love in paris",
+    //   imgOnway: "img/paris.jpg",
+    //   cost: "$10,000",
+    //   spendingDay: "75",
+    //   likes: "15660",
+    //   reviews: "354",
+    //   pointReview: "4.5",
+    //   countryVisit: [{
+    //     imgFlag: "img/india-visit.png"
+    //   }, {
+    //     imgFlag: "img/england-visit.png"
+    //   }, {
+    //     imgFlag: "img/canada-visit.png",
+    //   }, ],
+    //   editor: false,
+    //   userPic: true,
+    //   follow: false,
+    //   following: true,
+    //   postIcon: true,
+    //   video: false,
+    //   photo: false,
+    //   photoSlider: false,
+    //   travelledJourney: true,
+    //   onJourney: false,
+    //   visitPost: false,
+    //   getpopularPost: false,
+    //   activitySec: true
+    // },
+    {
+      class: "local-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      relatedPhoto: [
+        'img/blog/blog-post.jpg',
+        'img/blog/blog-post2.jpg',
+        'img/blog/blog-post3.jpg',
+        'img/blog/blog-post4.jpg',
+        'img/blog/blog-post.jpg',
+        'img/blog/blog-post2.jpg',
+        'img/blog/blog-post3.jpg',
+        'img/blog/blog-post4.jpg',
+      ],
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: true,
+      video: false,
+      photo: true,
+      photoSlider: true,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }, {
+      class: "local-life-taught",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: true,
+      video: false,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "local-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      editor: false,
+      userPic: true,
+      follow: true,
+      following: false,
+      postIcon: true,
+      video: false,
+      photo: true,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      visitPost: false,
+      getpopularPost: false,
+      activitySec: true
+    }, {
+      class: "local-life",
+      profilePic: "img/profile-main.png",
+      userName: "John Doe",
+      timestampDate: "14 Jan, 2014",
+      timestampHour: "01:20 pm",
+      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      editor: false,
+      userPic: true,
+      follow: false,
+      following: true,
+      postIcon: true,
+      video: true,
+      photo: false,
+      photoSlider: false,
+      travelledJourney: false,
+      onJourney: false,
+      getpopularPost: false,
+      visitPost: false,
+      activitySec: true
+    }, {
+      class: "popular-activity",
+      visitPost: false,
+      getpopularPost: true,
+      activitySec: false,
+      postPopular: [{
+        heading: "Popular Travelers",
+        listPopular: [{
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }],
+      }],
+    }, {
+      class: "popular-activity",
+      visitPost: false,
+      getpopularPost: true,
+      activitySec: false,
+      postPopular: [{
+        heading: "Popular Agents",
+        listPopular: [{
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }, {
+          profile: "img/profile-main.png",
+          name: "Rolandia Travel",
+          location: "London",
+          follower: "1994",
+        }],
+      }],
+    }, {
+      class: "visiting-post local-visit",
+      visitPost: true,
+      getpopularPost: false,
+      activitySec: false,
+      getvisitPost: [{
+        imgVisit: "img/india-gate.jpg",
+        locationLocal: "Mumbai",
+        tag: "Must Do's in Mumbai,India",
+        travelVisit: false,
+        localVisit: true,
+        cityTag: true,
+        rating: false,
+        flag: false,
+        visitSlider: true,
+        visitImg: false,
+        localLifeMain: true,
+        visitedPost: [{
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, ],
+      }, ],
+    }, {
+      class: "visiting-post local-visit",
+      visitPost: true,
+      getpopularPost: false,
+      activitySec: false,
+      getvisitPost: [{
+        imgVisit: "img/india-gate.jpg",
+        locationLocal: "India",
+        travelVisit: false,
+        localVisit: true,
+        cityTag: false,
+        rating: true,
+        peopleBeen: 33,
+        flag: true,
+        visitSlider: true,
+        visitImg: false,
+        localLifeMain: true,
+        visitedPost: [{
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, {
+          imgSlider: "img/small-activity-slider.jpg",
+          visitName: "#1 Shree Siddhivinayak",
+        }, ],
+      }, ],
+    }, {
+      class: "visiting-post travel-visit",
+      visitPost: true,
+      getpopularPost: false,
+      activitySec: false,
+      getvisitPost: [{
+        imgVisit: "img/india-gate.jpg",
+        locationLocal: "Mumbai",
+        tagTravel: "Book Your Travel form take off to touchdown!",
+        travelVisit: true,
+        localVisit: false,
+        visitSlider: false,
+        visitImg: true,
+        localLifeMain: false,
+      }, ],
+    },
+  ];
+
+  setTimeout(function() {
+    $('.travelocal-slider').flexslider({
+      animation: "slide",
+      animationLoop: false,
+      itemWidth: 150,
+      itemMargin: 3,
+      mousewheel: true,
+      directionNav: false,
+      controlNav: false,
+    });
+  }, 100);
+
+})
+
+.controller('ProfileListCtrl', function($scope, TemplateService, NavigationService, $timeout, $stateParams, MyLife, $uibModal) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -8163,8 +8150,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
     // click background close
-    $scope.getDropdown = function (model) {
-      $timeout(function () {
+    $scope.getDropdown = function(model) {
+      $timeout(function() {
         model.backgroundClick = true;
         backgroundClick.object = model;
       }, 200);
@@ -8172,67 +8159,67 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // click background close end
 
-    var getAllCountries = function (countries) {
+    var getAllCountries = function(countries) {
       $scope.nationality = countries;
       // $scope.getMap();
     };
 
-    MyLife.getAllCountries(getAllCountries, function (err) {
+    MyLife.getAllCountries(getAllCountries, function(err) {
       console.log(err);
     });
 
-    $scope.updateBucketList = function (country) {
-      MyLife.updateBucketList(country, function (data, status) {
+    $scope.updateBucketList = function(country) {
+      MyLife.updateBucketList(country, function(data, status) {
         MyLife.getOneBucketList(callbackBucketList);
         reloadCount();
 
-      }, function () {});
+      }, function() {});
       // $scope.getMap();
     };
     $scope.obj = {};
     // update country Visited
-    $scope.updateCountryVisited = function (id) {
-      $scope.obj.countryId = id;
-      console.log(id);
-      modal = $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/country-visited.html",
-        scope: $scope
-      });
-      modal.closed.then(function () {
-        visitedArr = [];
-      });
-      //for getting all the visited years  of that respective country starts
-      var callback = function (data) {
-        var a = _.filter(data, ["countryId._id", id]);
-        var visitedArr = [];
-        _.each(a[0].visited, function (n, index) {
-          visitedArr[n.year] = {
-            "times": n.times,
-            "year": n.year
-          };
+    $scope.updateCountryVisited = function(id) {
+        $scope.obj.countryId = id;
+        console.log(id);
+        modal = $uibModal.open({
+          animation: true,
+          templateUrl: "views/modal/country-visited.html",
+          scope: $scope
         });
-        console.log(visitedArr);
-        $scope.visited = visitedArr;
-        arr = visitedArr;
-      };
-      MyLife.getCountryVisitedListWeb(callback);
-      //for getting all the visited years  of that respective country ends
-    }
-    // update country Visited end
+        modal.closed.then(function() {
+          visitedArr = [];
+        });
+        //for getting all the visited years  of that respective country starts
+        var callback = function(data) {
+          var a = _.filter(data, ["countryId._id", id]);
+          var visitedArr = [];
+          _.each(a[0].visited, function(n, index) {
+            visitedArr[n.year] = {
+              "times": n.times,
+              "year": n.year
+            };
+          });
+          console.log(visitedArr);
+          $scope.visited = visitedArr;
+          arr = visitedArr;
+        };
+        MyLife.getCountryVisitedListWeb(callback);
+        //for getting all the visited years  of that respective country ends
+      }
+      // update country Visited end
 
     //remove counytry visitede starts
-    $scope.removeCountryVisit = function () {
+    $scope.removeCountryVisit = function() {
       modal = $uibModal.open({
         scope: $scope,
         animation: true,
         templateUrl: "views/modal/delete-visited-country.html"
-        // templateUrl: "views/modal/country-visited.html"
+          // templateUrl: "views/modal/country-visited.html"
       });
     };
     //remove counytry visitede ends
 
-    $scope.addCountryVisited = function (country) {
+    $scope.addCountryVisited = function(country) {
       $scope.obj.countryId = country._id;
       if (country.countryVisited === true) {
         arr = [{}];
@@ -8240,7 +8227,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           scope: $scope,
           animation: true,
           templateUrl: "views/modal/delete-visited-country.html"
-          // templateUrl: "views/modal/country-visited.html"
+            // templateUrl: "views/modal/country-visited.html"
         });
       } else {
         $scope.visited = [];
@@ -8253,21 +8240,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
 
       //remove country visited and all its count starts
-      $scope.removeCountryVisited = function () {
+      $scope.removeCountryVisited = function() {
         var obj = {
           "countryId": country._id,
           "visited": []
         }
-        MyLife.updateCountriesVisited(obj, function (data, status) {
+        MyLife.updateCountriesVisited(obj, function(data, status) {
           reloadCount();
           console.log(data);
           MyLife.getCountryVisitedListExpanded(callbackGetCountriesVisited);
           modal.close();
-        }, function () {});
+        }, function() {});
         arr = [];
       };
       //remove country visited and all its count ends
-      modal.closed.then(function () {
+      modal.closed.then(function() {
         console.log(_.isEmpty(arr));
         if (_.isEmpty(arr)) {
           country.countryVisited = false;
@@ -8279,7 +8266,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
 
-    $scope.checkIfSelected = function (list) {
+    $scope.checkIfSelected = function(list) {
       console.log(list);
       if (list.year) {
         list.times = 1;
@@ -8290,7 +8277,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.updateNumOfTimes = function (visited) {
+    $scope.updateNumOfTimes = function(visited) {
       modal.close();
       //applying validations and filters starts
       arr = _.pull(visited, undefined);
@@ -8307,15 +8294,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.obj.visited = arr;
       console.log($scope.obj);
       if (!(_.isEmpty($scope.obj.visited))) {
-        MyLife.updateCountriesVisited($scope.obj, function (data, status) {
+        MyLife.updateCountriesVisited($scope.obj, function(data, status) {
           reloadCount();
           MyLife.getCountryVisitedListExpanded(callbackGetCountriesVisited);
-        }, function () {});
+        }, function() {});
       }
 
     };
 
-    $scope.clearAllSelected = function (visited) {
+    $scope.clearAllSelected = function(visited) {
       console.log(visited);
       $scope.visited = [];
     };
@@ -8333,7 +8320,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.searchUser = {
       'open': ''
     };
-    $scope.changeStatus = function (status, results) {
+    $scope.changeStatus = function(status, results) {
       $stateParams.active = status;
       $scope.activeMenu = status;
       $scope.searchList = results;
@@ -8343,7 +8330,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log(results);
     };
 
-    $scope.testingDropDown = function (name) {
+    $scope.testingDropDown = function(name) {
       $scope.searchUser.open = true;
       if (name.length == 0) {
         $scope.searchCard.name = "";
@@ -8351,17 +8338,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.userData = $.jStorage.get("profile");
-    var travelCountCallback = function (data, status) {
+    var travelCountCallback = function(data, status) {
       $scope.count = data.data;
     };
 
-    var reloadCount = function () {
-      NavigationService.travelCount(travelCountCallback, function (err) {
+    var reloadCount = function() {
+      NavigationService.travelCount(travelCountCallback, function(err) {
         console.log(err);
       });
     };
 
-    var years = function (startYear) {
+    var years = function(startYear) {
       var currentYear = new Date().getFullYear(),
         years = [];
       startYear = startYear || 1980;
@@ -8373,9 +8360,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.listOfYears = years(1950);
     reloadCount();
 
-    var callbackFollowers = function (data) {
+    var callbackFollowers = function(data) {
       $scope.followersList = data.data.followers;
-      _.each($scope.followersList, function (n) {
+      _.each($scope.followersList, function(n) {
         if (n.following) {
           n.status = "Following";
         } else {
@@ -8388,9 +8375,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    var callbackFollowings = function (data) {
+    var callbackFollowings = function(data) {
       $scope.followingList = data.data.following;
-      _.each($scope.followingList, function (n) {
+      _.each($scope.followingList, function(n) {
         if (n.following) {
           n.status = "Following";
         } else {
@@ -8403,21 +8390,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    var callbackGetCountriesVisited = function (data) {
+    var callbackGetCountriesVisited = function(data) {
       $scope.countryVisitedList = data;
       reloadCount();
     };
 
-    var callbackBucketList = function (data) {
+    var callbackBucketList = function(data) {
       $scope.bucketList = data;
       reloadCount();
     };
 
-    var callbackRemoveFromBucketList = function (countryId) {
+    var callbackRemoveFromBucketList = function(countryId) {
       reloadCount();
       document.getElementById(countryId).remove();
     };
-    $scope.removeFromBucketList = function (id) {
+    $scope.removeFromBucketList = function(id) {
       MyLife.updateBucketListWeb(id, callbackRemoveFromBucketList);
     }
 
@@ -8430,12 +8417,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     //follow unfollow user starts
-    $scope.followUnFollowUser = function (status, userId, name, flag) {
+    $scope.followUnFollowUser = function(status, userId, name, flag) {
       console.log(flag);
       if (status == 'fromFollowers') {
         if (flag == "Follow") {
           console.log("requested to follow");
-          MyLife.followUser(userId, name, function (data) {
+          MyLife.followUser(userId, name, function(data) {
             if (data.value) {
               var index = _.findIndex($scope.followersList, ['_id', userId]);
               console.log(index);
@@ -8446,7 +8433,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           });
         } else if (flag == "Following") {
           console.log("requested to unfollow");
-          MyLife.unFollowUser(userId, function (data) {
+          MyLife.unFollowUser(userId, function(data) {
             if (data.value) {
               var index = _.findIndex($scope.followersList, ['_id', userId]);
               console.log(index);
@@ -8459,7 +8446,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       } else if (status == "fromFollowing") {
         if (flag == "Follow") {
           console.log("requested to follow");
-          MyLife.followUser(userId, name, function (data) {
+          MyLife.followUser(userId, name, function(data) {
             if (data.value) {
               var index = _.findIndex($scope.followingList, ['_id', userId]);
               console.log(index);
@@ -8470,7 +8457,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           });
         } else if (flag == "Following") {
           console.log("requested to unfollow");
-          MyLife.unFollowUser(userId, function (data) {
+          MyLife.unFollowUser(userId, function(data) {
             if (data.value) {
               var index = _.findIndex($scope.followingList, ['_id', userId]);
               console.log(index);
@@ -8484,11 +8471,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     //follow unfollow user ends
     $scope.searchFriend = {};
-    $scope.searchAllUser = function (searchUser) {
+    $scope.searchAllUser = function(searchUser) {
       var len = searchUser.length;
       if (len > 3) {
         console.log(searchUser);
-        MyLife.searchAllUser(searchUser, function (data) {
+        MyLife.searchAllUser(searchUser, function(data) {
           console.log(data);
         });
       }
@@ -8498,7 +8485,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // following and followers end
 
   })
-  .controller('ItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('ItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -8509,7 +8496,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
   })
-  .controller('DetailedItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, $timeout, $stateParams, $filter, $state, $uibModal) {
+  .controller('DetailedItineraryCtrl', function($scope, TemplateService, NavigationService, Itinerary, $timeout, $stateParams, $filter, $state, $uibModal) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -8521,7 +8508,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // LISTED MODAL POPUP
     $scope.hotelList = [];
-    $scope.showListed = function () {
+    $scope.showListed = function() {
       modal = $uibModal.open({
         templateUrl: "views/modal/show-listed.html",
         animation: true,
@@ -8551,18 +8538,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.dItinerary = {};
     $scope.dItinerary.photos = [];
     $scope.dItinerary.buddies = [];
-    $scope.updateBuddiesArr = function () {
+    $scope.updateBuddiesArr = function() {
       $scope.cities = [];
     };
     if (flag == 'edit' && urlSlug != '') {
 
-      Itinerary.getOneItinerary(urlSlug, function (data) {
+      Itinerary.getOneItinerary(urlSlug, function(data) {
         $scope.dItinerary = data.data;
         $scope.addCountry = $scope.dItinerary.countryVisited;
 
         //setting up qItineraryType variable starts
-        _.each($scope.dItinerary.itineraryType, function (n) {
-          var index = _.findIndex($scope.dItineraryType, function (type) {
+        _.each($scope.dItinerary.itineraryType, function(n) {
+          var index = _.findIndex($scope.dItineraryType, function(type) {
             return n.toUpperCase() == type.caption.toUpperCase();
           });
           $scope.dItineraryType[index].activeClass = "active-itinerary";
@@ -8571,7 +8558,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
         //setting up addCountry variable starts
         $scope.addCountry = [];
-        _.each(data.data.countryVisited, function (n1, key1) {
+        _.each(data.data.countryVisited, function(n1, key1) {
           $scope.addCountry.push({
             "country": n1.country._id,
             "name": n1.country.name,
@@ -8585,7 +8572,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           //   "country": n1.country._id,
           //   "cityVisited": []
           // });
-          _.each(n1.cityVisited, function (n2, key2) {
+          _.each(n1.cityVisited, function(n2, key2) {
             var obj = {
               "name": "",
               "placeId": ""
@@ -8614,13 +8601,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     // datetrial
-    $scope.openFrom = function () {
+    $scope.openFrom = function() {
       $scope.popupFrom.opened = true;
     };
     $scope.dateOptions = {
       showWeeks: false
     }
-    $scope.openTo = function () {
+    $scope.openTo = function() {
       $scope.popupTo.opened = true;
     };
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
@@ -8690,7 +8677,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.index = -1
 
 
-    $scope.addDetailCaption = function (index) {
+    $scope.addDetailCaption = function(index) {
       // console.log(index,"hai");
       if ($scope.index == index) {
         $scope.index = -1;
@@ -8706,7 +8693,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // tinymce
     $scope.tinymceOptions = {
-      onChange: function (e) {
+      onChange: function(e) {
         // put logic here for keypress and cut/paste changes
       },
       inline: false,
@@ -8732,17 +8719,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     //integration starts
-    var countriesCallback = function (data) {
+    var countriesCallback = function(data) {
       countries = data.data;
       $scope.countries = data.data;
       $scope.currency = data.data;
     };
 
-    NavigationService.getAllCountries(countriesCallback, function () {
+    NavigationService.getAllCountries(countriesCallback, function() {
       console.log("error getting data");
     });
 
-    $scope.searchCity = function (countryId, searchData, cityVisited) {
+    $scope.searchCity = function(countryId, searchData, cityVisited) {
       console.log("in search city");
       var formData = {
         "country": countryId,
@@ -8752,7 +8739,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log(str);
       $scope.cities = [];
       if (str.length > 3) {
-        NavigationService.searchCityByCountry(formData, function (data) {
+        NavigationService.searchCityByCountry(formData, function(data) {
           cities = data.data;
           var cities = _.differenceBy(cities, cityVisited, 'name');
           $scope.cities = cities;
@@ -8760,7 +8747,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.updateCountryPanel = function (countryPanel, countryId) {
+    $scope.updateCountryPanel = function(countryPanel, countryId) {
       var currentId = $scope.addCountry[countryPanel].country;
       var index = _.indexOf($scope.previousCountryId, countryId);
       $scope.previousCountryId[countryPanel] = countryId;
@@ -8772,9 +8759,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.updateCountriesArr = function (id) {
+    $scope.updateCountriesArr = function(id) {
       $scope.countries = countries;
-      _.each($scope.addCountry, function (n) {
+      _.each($scope.addCountry, function(n) {
         if (n.country != id) {
           $scope.countries = _.reject($scope.countries, ['_id', n.country]);
         }
@@ -8782,7 +8769,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     $scope.from = "";
     $scope.to = "";
-    $scope.getDays = function (country) {
+    $scope.getDays = function(country) {
       country.datePopUp.to
       console.log(country);
       if (country.to == undefined) {
@@ -8810,11 +8797,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.ifNotChanged = function (country) {
+    $scope.ifNotChanged = function(country) {
       country.datePopUp.from.openCalender = true;
 
     };
-    $scope.tagHandler = function (tag) {
+    $scope.tagHandler = function(tag) {
       return {
         name: tag
       }
@@ -8822,22 +8809,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //find stayed at,ate at and sights starts
     $scope.google = {};
-    var stayedAtCallback = function (data) {
+    var stayedAtCallback = function(data) {
       $scope.google.hotels = data.data;
       console.log($scope.google.hotels);
     };
-    var ateAtCallback = function (data) {
+    var ateAtCallback = function(data) {
 
       $scope.google.restaurants = data.data;
       console.log($scope.google.restaurants);
     };
-    var mustDosCallback = function (data) {
+    var mustDosCallback = function(data) {
 
       $scope.google.mustDos = data.data;
       console.log($scope.google.mustDos);
     };
 
-    $scope.findResults = function (placeId, type, search, flag) {
+    $scope.findResults = function(placeId, type, search, flag) {
       var callback;
       console.log(placeId, type, search, flag);
       if (flag == "onchange") {
@@ -8884,23 +8871,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     //add-remove photos starts
-    $scope.addPhotosCallback = function (photo) {
+    $scope.addPhotosCallback = function(photo) {
       console.log(photo);
       $scope.dItinerary.photos.push({
         "name": photo,
         "caption": ""
       })
     };
-    $scope.removePhoto = function (index, city) {
+    $scope.removePhoto = function(index, city) {
       $scope.dItinerary.photos.splice(index, 1);
     };
     //add-remove photos ends
 
     //travelled with starts
-    $scope.listFollowers = function (searchList) {
+    $scope.listFollowers = function(searchList) {
       if (searchList.length > 3) {
         $scope.viewFollowers = true;
-        var callback = function (data) {
+        var callback = function(data) {
           $scope.followersList = data.data;
 
 
@@ -8914,7 +8901,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           //   });
           // });
 
-          _.each($scope.dItinerary.buddies, function (buddy) {
+          _.each($scope.dItinerary.buddies, function(buddy) {
             buddy.flag = true;
           });
           $scope.followersList = _.uniqBy($scope.followersList, $scope.dItinerary.buddies, "_id");
@@ -8934,9 +8921,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
 
-    $scope.tagFriend = function (flag, friend) {
+    $scope.tagFriend = function(flag, friend) {
       if (flag) {
-        var index = _.findIndex($scope.dItinerary.buddies, function (n) {
+        var index = _.findIndex($scope.dItinerary.buddies, function(n) {
           return n._id == friend._id;
         });
         if (index == -1) {
@@ -8953,14 +8940,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     //travelled with ends
 
-    $scope.uploadDetailedItinerary = function (status) {
+    $scope.uploadDetailedItinerary = function(status) {
       $scope.dItinerary.status = status;
       $scope.dItinerary.cost = parseInt($scope.dItinerary.cost);
       $scope.dItinerary.countryVisited = $scope.addCountry;
 
       //storing all selected itinerarytype on sending variable starts
       $scope.dItinerary.itineraryType = [];
-      _.each($scope.dItineraryType, function (n) {
+      _.each($scope.dItineraryType, function(n) {
         if (n.activeClass == "active-itinerary") {
           $scope.dItinerary.itineraryType.push(n.caption.toLowerCase())
         }
@@ -8968,19 +8955,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       //storing all selected itinerarytype on sending variable ends
 
       //removing unwanted values from buddies starts
-      _.each($scope.dItinerary.buddies, function (n, index) {
+      _.each($scope.dItinerary.buddies, function(n, index) {
         $scope.dItinerary.buddies[index] = _.omit(n, ['flag']);
       });
       //removing unwanted values from buddies starts
 
       //removing unwanted values from countryVisited starts
-      _.each($scope.dItinerary.countryVisited, function (n, index) {
+      _.each($scope.dItinerary.countryVisited, function(n, index) {
         $scope.dItinerary.countryVisited[index] = _.omit(n, ['name', 'flag', 'datePopUp']);
       });
       //removing unwanted values from countryVisited starts
       console.log($scope.dItinerary);
 
-      Itinerary.uploadDetailedItinerary($scope.dItinerary, flag, function (data) {
+      Itinerary.uploadDetailedItinerary($scope.dItinerary, flag, function(data) {
         $state.go('userdetailitinerary', {
           id: data.data.message
         });
@@ -8990,7 +8977,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //integration ends
 
-    $scope.hoveringOver = function (value) {
+    $scope.hoveringOver = function(value) {
       $scope.overStar = value;
     };
     $scope.ratingStates = [{
@@ -9011,16 +8998,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
 
     $scope.stayedAt = [{}];
-    $scope.addedStayed = function () {
+    $scope.addedStayed = function() {
       $scope.stayedAt.push({});
     };
-    $scope.removeStayed = function (index) {
+    $scope.removeStayed = function(index) {
       console.log(index);
       $scope.stayedAt.splice(index, 1);
       console.log($scope.stayedAt);
     };
     // select detail itinerary type
-    $scope.selectItinerary = function (val) {
+    $scope.selectItinerary = function(val) {
       console.log(val);
       if ($scope.dItineraryType[val].activeClass == "active-itinerary") {
         $scope.dItineraryType[val].activeClass = "";
@@ -9076,7 +9063,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }];
 
-    $scope.addYourCountry = function () {
+    $scope.addYourCountry = function() {
       var prevIndex = $scope.addCountry.length - 1;
       console.log($scope.addCountry[prevIndex]);
       var prevDate = $scope.addCountry[prevIndex].to;
@@ -9106,32 +9093,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log($scope.addCountry);
     };
 
-    $scope.removeCountry = function (countryPanel) {
+    $scope.removeCountry = function(countryPanel) {
       $scope.addCountry.splice(countryPanel, 1);
     };
 
-    $scope.updateCountryDetail = function (editCountry, nation, countryPanel, cityPanel) {
+    $scope.updateCountryDetail = function(editCountry, nation, countryPanel, cityPanel) {
       $scope.showCountry[countryPanel] = false;
       editCountry.country = nation._id;
       editCountry.flag = nation.flag;
       editCountry.name = nation.name;
     };
 
-    $scope.addYourCity = function (countryPanel) {
+    $scope.addYourCity = function(countryPanel) {
       $scope.addCountry[countryPanel].cityVisited.push({});
     };
 
-    $scope.removeCity = function (countryPanel, cityPanel) {
+    $scope.removeCity = function(countryPanel, cityPanel) {
       console.log("removed city");
       $scope.addCountry[countryPanel].cityVisited.splice(cityPanel, 1);
     };
-    $scope.updateCityDetail = function (editCity, city, countryPanel, cityPanel) {
+    $scope.updateCityDetail = function(editCity, city, countryPanel, cityPanel) {
       console.log(editCity, city);
       editCity.name = city.name;
       editCity.placeId = city.placeId;
     };
   })
-  .controller('QuickItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, $timeout, $stateParams, $state) {
+  .controller('QuickItineraryCtrl', function($scope, TemplateService, NavigationService, Itinerary, $timeout, $stateParams, $state) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -9160,14 +9147,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //if edit then make call to that itinerary
     if (flag == 'edit' && urlSlug != '') {
 
-      Itinerary.getOneItinerary(urlSlug, function (data) {
+      Itinerary.getOneItinerary(urlSlug, function(data) {
         $scope.qItinerary = data.data;
         $scope.qItinerary.oldStatus = $scope.qItinerary.status;
         $scope.addCountry = $scope.qItinerary.countryVisited;
 
         //setting up qItineraryType variable starts
-        _.each($scope.qItinerary.itineraryType, function (n) {
-          var index = _.findIndex($scope.qItineraryType, function (type) {
+        _.each($scope.qItinerary.itineraryType, function(n) {
+          var index = _.findIndex($scope.qItineraryType, function(type) {
             return n.toUpperCase() == type.caption.toUpperCase();
           });
           $scope.qItineraryType[index].activeClass = "active-itinerary";
@@ -9176,7 +9163,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
         //setting up addCountry variable starts
         $scope.addCountry = [];
-        _.each(data.data.countryVisited, function (n1, key1) {
+        _.each(data.data.countryVisited, function(n1, key1) {
           $scope.addCountry.push({
             "country": n1.country._id,
             "cityVisited": []
@@ -9185,7 +9172,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             "country": n1.country._id,
             "cityVisited": []
           });
-          _.each(n1.cityVisited, function (n2, key2) {
+          _.each(n1.cityVisited, function(n2, key2) {
             var obj = {
               "name": "",
               "placeId": ""
@@ -9258,7 +9245,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     $scope.tinymceOptions = {
-      onChange: function (e) {
+      onChange: function(e) {
         // put logic here for keypress and cut/paste changes
       },
       inline: false,
@@ -9283,7 +9270,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     var str = "";
-    $scope.selectItinerary = function (val) {
+    $scope.selectItinerary = function(val) {
       if ($scope.qItineraryType[val].activeClass == "active-itinerary") {
         $scope.qItineraryType[val].activeClass = "";
       } else {
@@ -9291,24 +9278,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    var countriesCallback = function (data) {
+    var countriesCallback = function(data) {
       countries = data.data;
       $scope.countries = data.data;
       $scope.currency = data.data;
     };
 
-    NavigationService.getAllCountries(countriesCallback, function () {
+    NavigationService.getAllCountries(countriesCallback, function() {
       console.log("error getting data");
     });
 
-    $scope.searchCity = function (countryId, searchData, cityVisited) {
+    $scope.searchCity = function(countryId, searchData, cityVisited) {
       var formData = {
         "country": countryId,
         "search": searchData
       }
       var str = formData.search;
       if (str.length > 2) {
-        NavigationService.searchCityByCountry(formData, function (data) {
+        NavigationService.searchCityByCountry(formData, function(data) {
           cities = data.data;
           console.log(cities, cityVisited);
           var cities = _.differenceBy(cities, cityVisited, 'name');
@@ -9317,7 +9304,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.addPanel = function () {
+    $scope.addPanel = function() {
       if (flag == 'new') {
         $scope.addCountry.push({});
       } else if (flag == 'edit') {
@@ -9327,11 +9314,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.removeStayed = function (countryPanel) {
+    $scope.removeStayed = function(countryPanel) {
       $scope.addCountry.splice(countryPanel, 1);
     };
 
-    $scope.updateCountryPanel = function (countryPanel, countryId) {
+    $scope.updateCountryPanel = function(countryPanel, countryId) {
       var currentId = $scope.addCountry[countryPanel].country;
       var index = _.indexOf($scope.previousCountryId, countryId);
       $scope.previousCountryId[countryPanel] = countryId;
@@ -9343,20 +9330,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.updateCountriesArr = function (id) {
+    $scope.updateCountriesArr = function(id) {
       $scope.countries = countries;
-      _.each($scope.addCountry, function (n) {
+      _.each($scope.addCountry, function(n) {
         if (n.country != id) {
           $scope.countries = _.reject($scope.countries, ['_id', n.country]);
         }
       });
     };
 
-    $scope.updateCitiesArr = function () {
+    $scope.updateCitiesArr = function() {
       $scope.cities = [];
     };
 
-    $scope.addPhotosCallback = function (photo) {
+    $scope.addPhotosCallback = function(photo) {
       console.log(photo);
       $scope.qItinerary.photos.push({
         "name": photo
@@ -9365,22 +9352,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //Photo caption function
     $scope.index = -1
-    $scope.addQuickCaption = function (index) {
-      // console.log(index,"hai");
-      if ($scope.index == index) {
-        $scope.index = -1;
-      } else {
-        $scope.index = index;
+    $scope.addQuickCaption = function(index) {
+        // console.log(index,"hai");
+        if ($scope.index == index) {
+          $scope.index = -1;
+        } else {
+          $scope.index = index;
+        }
       }
-    }
-    //Photo caption function end
+      //Photo caption function end
 
-    $scope.removePhoto = function (index) {
+    $scope.removePhoto = function(index) {
       $scope.qItinerary.photos.splice(index, 1);
       console.log($scope.qItinerary.photos);
     };
 
-    $scope.uploadQuickItinerary = function (status) {
+    $scope.uploadQuickItinerary = function(status) {
       console.log($scope.qItinerary);
       if (flag == 'edit' && urlSlug != '') {
         if ($scope.qItinerary.status != true) {
@@ -9394,8 +9381,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // $scope.qItinerary.cost = parseInt($scope.qItinerary.cost);
       $scope.qItinerary.countryVisited = $scope.addCountry;
       //update countryVisited with new='remove' fo deleted countries starts
-      _.each($scope.previouslyAddedCountries, function (n1) {
-        var index = _.findIndex($scope.qItinerary.countryVisited, function (n2) {
+      _.each($scope.previouslyAddedCountries, function(n1) {
+        var index = _.findIndex($scope.qItinerary.countryVisited, function(n2) {
           console.log(n1.country, n2.country);
           return n1.country == n2.country;
         });
@@ -9411,14 +9398,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       //storing all selected itinerarytype on sending variable starts
       $scope.qItinerary.itineraryType = [];
-      _.each($scope.qItineraryType, function (n) {
+      _.each($scope.qItineraryType, function(n) {
         if (n.activeClass == "active-itinerary") {
           $scope.qItinerary.itineraryType.push(n.caption.toLowerCase())
         }
       });
       //storing all selected itinerarytype on sending variable ends
 
-      Itinerary.uploadQuickItinerary($scope.qItinerary, flag, function (data) {
+      Itinerary.uploadQuickItinerary($scope.qItinerary, flag, function(data) {
         $state.go('userquickitinerary', {
           id: data.data.message
         });
@@ -9426,7 +9413,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.getYear = [];
-    $scope.viewYear = function () {
+    $scope.viewYear = function() {
       var d = new Date();
       var n = d.getFullYear();
       $scope.getYear = _.rangeRight(1900, n + 1);
@@ -9439,7 +9426,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // month array end
 
   })
-  .controller('EditorItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('EditorItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -9565,7 +9552,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     ];
 
     $scope.editGallery = "close-editor-gallery";
-    $scope.showGallery = function () {
+    $scope.showGallery = function() {
       if ($scope.editGallery == "close-editor-gallery") {
         $scope.editGallery = "view-editor-gallery";
       } else {
@@ -9769,7 +9756,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, ],
     }, ];
     // other itineraries main end
-    $scope.getPopup = function () {
+    $scope.getPopup = function() {
       $uibModal.open({
         animation: true,
         templateUrl: "views/modal/itinerary-slide.html",
@@ -9788,7 +9775,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, ];
 
   })
-  .controller('UserQuickItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, $uibModal, Itinerary) {
+  .controller('UserQuickItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout, $stateParams, $uibModal, Itinerary) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -9803,7 +9790,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.userData = $.jStorage.get("profile");
     //get quick-itinerary details starts
     var slug = $stateParams.id;
-    Itinerary.getOneItinerary(slug, function (data) {
+    Itinerary.getOneItinerary(slug, function(data) {
       $scope.itinerary = data.data;
       console.log($scope.itinerary);
     });
@@ -9811,11 +9798,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //post quick-itinerary comments starts
     $scope.commentText = {};
-    $scope.postItineraryComment = function (_id, uniqueId, text) {
+    $scope.postItineraryComment = function(_id, uniqueId, text) {
       console.log(_id, uniqueId, text);
-      Itinerary.postItineraryComment(_id, uniqueId, text, function (data) {
+      Itinerary.postItineraryComment(_id, uniqueId, text, function(data) {
         console.log(data);
-        Itinerary.getOneItinerary(slug, function (data) {
+        Itinerary.getOneItinerary(slug, function(data) {
           $scope.itinerary.comment = data.data.comment;
           console.log($scope.itinerary);
           $scope.commentText.text = "";
@@ -9826,17 +9813,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //Itinerary Options List Show
     $scope.showItineraryEditOptions = false;
-    $scope.viewItineraryOptions = function () {
-      if ($scope.showItineraryEditOptions == false) {
-        $scope.showItineraryEditOptions = true;
-      } else {
-        $scope.showItineraryEditOptions = false;
+    $scope.viewItineraryOptions = function() {
+        if ($scope.showItineraryEditOptions == false) {
+          $scope.showItineraryEditOptions = true;
+        } else {
+          $scope.showItineraryEditOptions = false;
+        }
       }
-    }
-    //Itinerary Options List Show End
+      //Itinerary Options List Show End
 
     //Photo comment popup
-    $scope.getPhotosCommentData = function (photo) {
+    $scope.getPhotosCommentData = function(photo) {
       console.log(photo);
       $scope.listOfComments = photo;
       modal = $uibModal.open({
@@ -9845,7 +9832,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         scope: $scope,
         windowClass: "notify-popup"
       });
-      modal.closed.then(function () {
+      modal.closed.then(function() {
         $scope.listOfComments = {};
       });
       //  var callback = function(data) {
@@ -9858,11 +9845,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       //  LikesAndComments.getComments("photo",photoId,callback);
     };
 
-    $scope.postPhotosComment = function (uniqueId, comment, postId, photoId) {
+    $scope.postPhotosComment = function(uniqueId, comment, postId, photoId) {
       console.log(uniqueId, comment, postId, photoId);
       var type = "photo";
       var hashTag = [];
-      var callback = function (data) {
+      var callback = function(data) {
         $scope.listOfComments = data.data;
         document.getElementById('enterComment').value = "";
       }
@@ -9874,8 +9861,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //like-unlike itinerary starts
     // $scope.itinerary.likeDone;
     // $scope.itinerary.likeCount;
-    $scope.likeUnlikeItinerary = function (flag, _id, uniqueId) {
-      Itinerary.updateLikeItinerary(flag, _id, uniqueId, function (data) {
+    $scope.likeUnlikeItinerary = function(flag, _id, uniqueId) {
+      Itinerary.updateLikeItinerary(flag, _id, uniqueId, function(data) {
         if (data) {
           $scope.itinerary.likeCount = $scope.likeCount + 1;
         } else {
@@ -9892,7 +9879,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //photo gallery backdrop
     $scope.showClass = "close-gallery";
     $scope.dispBackDrop = "";
-    $scope.viewGallery = function () {
+    $scope.viewGallery = function() {
       if ($scope.showClass == "close-gallery") {
         $scope.showClass = "open-gallery";
         $scope.dispBackDrop = "showphoto-backdrop";
@@ -10148,7 +10135,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // other itineraries main end
 
   })
-  .controller('UserDetailItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, $timeout, $uibModal, $stateParams) {
+  .controller('UserDetailItineraryCtrl', function($scope, TemplateService, NavigationService, Itinerary, $timeout, $uibModal, $stateParams) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -10164,15 +10151,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //get quick-itinerary details starts
     var slug = $stateParams.id;
-    Itinerary.getOneItinerary(slug, function (data) {
+    Itinerary.getOneItinerary(slug, function(data) {
       $scope.itinerary = data.data;
     });
     //get quick-itinerary details ends
 
     //like-unlike itinerary starts
 
-    $scope.likeUnlikeItinerary = function (flag, _id, uniqueId) {
-      Itinerary.updateLikeItinerary(flag, _id, uniqueId, function (data) {
+    $scope.likeUnlikeItinerary = function(flag, _id, uniqueId) {
+      Itinerary.updateLikeItinerary(flag, _id, uniqueId, function(data) {
         if (data) {
           if ($scope.itinerary.likeCount == null) {
             $scope.itinerary.likeCount = 1
@@ -10190,11 +10177,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //post detail-itinerary comments starts
     $scope.commentText = {};
-    $scope.postItineraryComment = function (_id, uniqueId, text) {
+    $scope.postItineraryComment = function(_id, uniqueId, text) {
       console.log(_id, uniqueId, text);
-      Itinerary.postItineraryComment(_id, uniqueId, text, function (data) {
+      Itinerary.postItineraryComment(_id, uniqueId, text, function(data) {
         console.log(data);
-        Itinerary.getOneItinerary(slug, function (data) {
+        Itinerary.getOneItinerary(slug, function(data) {
           $scope.itinerary.comment = data.data.comment;
           console.log($scope.itinerary);
           $scope.commentText.text = "";
@@ -10205,9 +10192,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.country = {};
     $scope.city = {};
     $scope.previousId = {};
-    $scope.updateOpenStatus = function (groups) {
+    $scope.updateOpenStatus = function(groups) {
 
-      $scope.isOpen = groups.some(function (item) {
+      $scope.isOpen = groups.some(function(item) {
         console.log($scope.previousId, item);
         if ($scope.previousId == item) {
           item.isOpen = !item.isOpen;
@@ -10223,7 +10210,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     //Photo comment popup
-    $scope.getPhotosCommentData = function (photo) {
+    $scope.getPhotosCommentData = function(photo) {
       console.log(photo);
       $scope.listOfComments = photo;
       modal = $uibModal.open({
@@ -10232,16 +10219,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         scope: $scope,
         windowClass: "notify-popup"
       });
-      modal.closed.then(function () {
+      modal.closed.then(function() {
         $scope.listOfComments = {};
       });
     };
 
-    $scope.postPhotosComment = function (uniqueId, comment, postId, photoId) {
+    $scope.postPhotosComment = function(uniqueId, comment, postId, photoId) {
       console.log(uniqueId, comment, postId, photoId);
       var type = "photo";
       var hashTag = [];
-      var callback = function (data) {
+      var callback = function(data) {
         $scope.listOfComments = data.data;
         document.getElementById('enterComment').value = "";
       }
@@ -10251,15 +10238,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //Itinerary Options List Show
     $scope.showItineraryEditOptions = false;
-    $scope.viewItineraryOptions = function () {
-      if ($scope.showItineraryEditOptions == false) {
-        $scope.showItineraryEditOptions = true;
-      } else {
-        $scope.showItineraryEditOptions = false;
+    $scope.viewItineraryOptions = function() {
+        if ($scope.showItineraryEditOptions == false) {
+          $scope.showItineraryEditOptions = true;
+        } else {
+          $scope.showItineraryEditOptions = false;
+        }
       }
-    }
-    //Itinerary Options List Show End
-    //Integration starts here
+      //Itinerary Options List Show End
+      //Integration starts here
 
     $scope.journeyItinerary = [{
       img: "img/ongojourney/monish.jpg",
@@ -10399,7 +10386,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //photo gallery backdrop
     $scope.showClass = "close-gallery";
     $scope.dispBackDrop = "";
-    $scope.viewGallery = function () {
+    $scope.viewGallery = function() {
       if ($scope.showClass == "close-gallery") {
         $scope.showClass = "open-gallery";
         $scope.dispBackDrop = "showphoto-backdrop";
@@ -10608,7 +10595,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // other itineraries main end
 
   })
-  .controller('AgentItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('AgentItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -10722,7 +10709,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       '../img/itinerary/itinerary.jpg',
     ];
     $scope.showClass = "close-gallery";
-    $scope.viewGallery = function () {
+    $scope.viewGallery = function() {
       if ($scope.showClass == "close-gallery") {
         $scope.showClass = "open-gallery";
       } else {
@@ -10733,7 +10720,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // connect agent
     $scope.agentClass = "";
     $scope.agentbox = "agentbox-in";
-    $scope.viewAgent = function () {
+    $scope.viewAgent = function() {
       if ($scope.agentbox == "agentbox-in") {
         $scope.agentbox = "agentbox-out";
         $scope.agentClass = "backdrop-agent";
@@ -10942,23 +10929,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('AboutCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife, OnGoJourney) {
-    //Used to name the .html file
+.controller('AboutCtrl', function($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife, OnGoJourney) {
+  //Used to name the .html file
 
-    // console.log("Testing Consoles");
+  // console.log("Testing Consoles");
 
-    $scope.template = TemplateService.changecontent("about-travelibro");
-    $scope.menutitle = NavigationService.makeactive("About TraveLibro");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-  })
+  $scope.template = TemplateService.changecontent("about-travelibro");
+  $scope.menutitle = NavigationService.makeactive("About TraveLibro");
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+})
 
 
 
-  .controller('headerctrl', function ($scope, TemplateService, NavigationService, $state, $interval, $timeout) {
+.controller('headerctrl', function($scope, TemplateService, NavigationService, $state, $interval, $timeout) {
     var currentUrl = window.location.href;
     $scope.template = TemplateService;
-    NavigationService.getProfile(function (data, status) {
+    NavigationService.getProfile(function(data, status) {
       if (data._id) {
         $.jStorage.set("isLoggedIn", true);
         $.jStorage.set("profile", data);
@@ -10966,7 +10953,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $state.go('login');
         $.jStorage.flush();
       }
-    }, function (err) {
+    }, function(err) {
       console.log(err);
     });
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
@@ -10974,13 +10961,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $state.go('login');
     }
     $scope.userData = $.jStorage.get("profile");
-    $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+    $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
       $(window).scrollTop(0);
     });
     $scope.oneAtATime = true;
     $.fancybox.close(true);
     $scope.getslide = "menu-out";
-    $scope.getnav = function () {
+    $scope.getnav = function() {
       if ($scope.getslide == "menu-in") {
         $scope.getslide = "menu-out";
         $scope.onebar = "";
@@ -10996,28 +10983,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     $scope.isopen = false;
-    $scope.opensearch = function () {
+    $scope.opensearch = function() {
       $scope.isopen = !$scope.isopen;
     };
-    $scope.opendownload = function () {
+    $scope.opendownload = function() {
       $scope.isopen = !$scope.isopen;
     };
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
     }
 
-    $scope.logout = function () {
-      NavigationService.logout(function () {
+    $scope.logout = function() {
+      NavigationService.logout(function() {
           $.jStorage.flush();
           $state.go('login');
         },
-        function (err) {
+        function(err) {
           console.log(err);
         });
     };
     // backgroundClick
-    $scope.editOption = function (model) {
-      $timeout(function () {
+    $scope.editOption = function(model) {
+      $timeout(function() {
         model.backgroundClick = true;
         backgroundClick.object = model;
       }, 200);
@@ -11026,15 +11013,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //backgroundClick
 
   })
-  .controller('AgentloginCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('AgentloginCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     $scope.template = TemplateService.changecontent("agent-login"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Login"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.oneAtATime = true;
     //about textarea counter
-    $scope.$on('$viewContentLoaded', function () {
-      $timeout(function () {
+    $scope.$on('$viewContentLoaded', function() {
+      $timeout(function() {
         $('#textareaChars').keyup(updateCount);
         $('#textareaChars').keydown(updateCount);
         $('#remainingC').text(0 + '/ 500');
@@ -11048,31 +11035,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //about textarea counter end
     $scope.agentloginView = 1;
-    $scope.agentSec = function (val) {
-      if (val == 1) {
-        $scope.agentloginView = 1;
-      } else if (val == 2) {
-        $scope.agentloginView = 2;
-        console.log(2);
-      } else if (val == 3) {
-        $scope.agentloginView = 3;
-      } else if (val == 4) {
-        $scope.agentloginView = 4;
-      } else if (val == 5) {
-        $scope.agentloginView = 5;
-      } else if (val == 6) {
-        $scope.agentloginView = 6;
-      } else if (val == 7) {
-        $scope.agentloginView = 7;
-      } else if (val == 8) {
-        $scope.agentloginView = 8;
-      } else if (val == 9) {
-        $scope.agentloginView = 9;
-      } else {
-        $scope.agentloginView = 1;
+    $scope.agentSec = function(val) {
+        if (val == 1) {
+          $scope.agentloginView = 1;
+        } else if (val == 2) {
+          $scope.agentloginView = 2;
+          console.log(2);
+        } else if (val == 3) {
+          $scope.agentloginView = 3;
+        } else if (val == 4) {
+          $scope.agentloginView = 4;
+        } else if (val == 5) {
+          $scope.agentloginView = 5;
+        } else if (val == 6) {
+          $scope.agentloginView = 6;
+        } else if (val == 7) {
+          $scope.agentloginView = 7;
+        } else if (val == 8) {
+          $scope.agentloginView = 8;
+        } else if (val == 9) {
+          $scope.agentloginView = 9;
+        } else {
+          $scope.agentloginView = 1;
+        }
       }
-    }
-    // category of Specialisation array
+      // category of Specialisation array
     $scope.categoriesSpecial = [{
       agtcatImg: "img/agt-cat1.png",
       catwidth: "35px",
@@ -11139,7 +11126,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     ];
     //Services end
   })
-  .controller('AgentsettingCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('AgentsettingCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     $scope.template = TemplateService.changecontent("agent-setting"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Settings"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
@@ -11169,8 +11156,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //country setting accordion end
 
     // Textarea counter
-    $scope.$on('$viewContentLoaded', function () {
-      $timeout(function () {
+    $scope.$on('$viewContentLoaded', function() {
+      $timeout(function() {
         $('#textareaChars').keyup(updateCount);
         $('#textareaChars').keydown(updateCount);
         $('#remainAbt').text(0 + '/ 500');
@@ -11185,7 +11172,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //setting tab navigation
     $scope.showAgtSetting = 1;
-    $scope.agtsetting = function (val) {
+    $scope.agtsetting = function(val) {
       if (val == 1) {
         $scope.showAgtSetting = 1;
       } else if (val == 2) {
@@ -11249,7 +11236,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // choose category Specialisation end
 
   })
-  .controller('AgentupgradeCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('AgentupgradeCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     $scope.template = TemplateService.changecontent("agent-upgrade"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Upgrade"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
@@ -11257,13 +11244,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.variables = {};
     $scope.variables.tooltips = {};
     $scope.showTip = false;
-    $scope.showTip = function (index) {
+    $scope.showTip = function(index) {
       // if($scope.showTip == false){
       //   $scope.showTip = true;
       // }else{
       //   $scope.showTip = false;
       // }
-      _.each($scope.variables.tooltips, function (value, property) {
+      _.each($scope.variables.tooltips, function(value, property) {
         $scope.variables.tooltips[property] = false;
       })
       $scope.variables.tooltips[index] = $scope.variables.tooltips[index] ? false : true;
@@ -11357,7 +11344,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
     // // upgrade feature end
   })
-  .controller('AgentuserCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+  .controller('AgentuserCtrl', function($scope, TemplateService, NavigationService, $timeout, $state) {
     $scope.template = TemplateService.changecontent("agent-user"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent User"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
@@ -11369,7 +11356,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.viewEnquiry = false;
     $scope.getBackdrop = "";
-    $scope.showEnquiry = function () {
+    $scope.showEnquiry = function() {
       // console.log("click");
       if ($scope.viewEnquiry == false) {
         $scope.getBackdrop = "backdrop-enquiry";
@@ -11384,7 +11371,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //contact us
     $scope.viewContact = false;
     $scope.getBackdrop = "";
-    $scope.showContact = function () {
+    $scope.showContact = function() {
       // console.log("click");
       if ($scope.viewContact == false) {
         $scope.getBackdrop = "backdrop-enquiry";
@@ -11400,7 +11387,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     //scroll change
-    $(window).scroll(function () {
+    $(window).scroll(function() {
       //  var navHeight = $('.img-holder-agent').height($(window).height() - 41);
       var scroll = $(window).scrollTop();
       //console.log(scroll);
@@ -11451,7 +11438,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       default:
         $scope.agtuser.innerView = allagtuser[0];
     }
-    $scope.getTab = function (view) {
+    $scope.getTab = function(view) {
       console.log(view);
       $scope.agtuser.innerView = allagtuser[view];
       var url = "usr-itinerary";
@@ -11777,8 +11764,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     // review textarea counter
-    $scope.$on('$viewContentLoaded', function () {
-      $timeout(function () {
+    $scope.$on('$viewContentLoaded', function() {
+      $timeout(function() {
         $('#textareaChars').keyup(updateCount);
         $('#textareaChars').keydown(updateCount);
         $('#reviewremainingC').text(0 + '/ 300');
@@ -11930,17 +11917,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // ITINERARY FILTER
     //OpenFilter
     $scope.isopenfilter = false;
-    $scope.openFilter = function () {
+    $scope.openFilter = function() {
       $scope.isopenfilter = !$scope.isopenfilter;
     };
     //OpenFiltertab
     $scope.isopenfiltertab = false;
-    $scope.openFiltertab = function () {
+    $scope.openFiltertab = function() {
       $scope.isopenfilter = !$scope.isopenfilter;
     };
     $scope.country = [];
 
-    $scope.addLine = function () {
+    $scope.addLine = function() {
       $scope.lines.push($scope.lines.length);
     };
     // this.addText = function(text) {
@@ -12737,7 +12724,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, ];
     // category type end
   })
-  .controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+  .controller('AgenthomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $state) {
     $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
@@ -12754,7 +12741,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.showItinerary = false;
     $scope.addHomeBackdrop = "";
-    $scope.addItinerary = function () {
+    $scope.addItinerary = function() {
       // console.log("click");
       if ($scope.showItinerary == false) {
         $scope.showItinerary = true;
@@ -12783,7 +12770,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.agentPhotos[i] = _.chunk($scope.agentPhotos[i], 2);
     }
     $scope.index = -1;
-    $scope.putCaptionAgent = function (index) {
+    $scope.putCaptionAgent = function(index) {
       if ($scope.index == index) {
         $scope.index = -1;
       } else {
@@ -12792,8 +12779,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     //photo caption textarea counter
-    $scope.$on('$viewContentLoaded', function () {
-      $timeout(function () {
+    $scope.$on('$viewContentLoaded', function() {
+      $timeout(function() {
         $('#captionArea').keyup(updateCount);
         $('#captionArea').keydown(updateCount);
         $('#remainCaption').text(0 + '/150');
@@ -12863,7 +12850,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //lead monitor accordion end
 
     //scroll change
-    $(window).scroll(function () {
+    $(window).scroll(function() {
       var scroll = $(window).scrollTop();
       //console.log(scroll);
       if (scroll >= 370) {
@@ -12877,8 +12864,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //scroll change end
 
     //status character counter
-    $scope.$on('$viewContentLoaded', function () {
-      $timeout(function () {
+    $scope.$on('$viewContentLoaded', function() {
+      $timeout(function() {
         $('#postStatus').keyup(updateCount);
         $('#postStatus').keydown(updateCount);
         $('#postcount').text(0 + '/350');
@@ -12942,7 +12929,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     $scope.agenthomeItinerary = true;
     $scope.agentFixednav = ""
-    $scope.getTab = function (view) {
+    $scope.getTab = function(view) {
       $scope.agthome.innerView = allagthome[view];
       var url = "agthome-itinerary";
       var active = "";
@@ -13053,7 +13040,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // itinerary popover
     $scope.viewdetailInfo = false;
-    $scope.showdetailInfo = function () {
+    $scope.showdetailInfo = function() {
       if ($scope.viewdetailInfo == false) {
         $scope.viewdetailInfo = true;
         console.log("true");
@@ -13063,7 +13050,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.viewquickInfo = false;
-    $scope.showquickInfo = function () {
+    $scope.showquickInfo = function() {
       if ($scope.viewquickInfo == false) {
         $scope.viewquickInfo = true;
       } else {
@@ -13553,40 +13540,40 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // travel activity json end
   })
 
-  .controller('MessageCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
-    $scope.template = TemplateService.changecontent("message"); //Use same name of .html file
-    $scope.menutitle = NavigationService.makeactive("Message"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
+.controller('MessageCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+  $scope.template = TemplateService.changecontent("message"); //Use same name of .html file
+  $scope.menutitle = NavigationService.makeactive("Message"); //This is the Title of the Website
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
 
-    //showNewMessage box
-    $scope.showNewMessage = false;
-    $scope.newMessage = function () {
-      if ($scope.showNewMessage == false) {
-        $scope.showNewMessage = true;
-      } else {
-        $scope.showNewMessage = false;
-      }
-    };
-    //showNewMessage box end
+  //showNewMessage box
+  $scope.showNewMessage = false;
+  $scope.newMessage = function() {
+    if ($scope.showNewMessage == false) {
+      $scope.showNewMessage = true;
+    } else {
+      $scope.showNewMessage = false;
+    }
+  };
+  //showNewMessage box end
 
-    //Delete message Function
-    $scope.showDeleteMessage = false;
-    $scope.deleteMessage = function () {
-      if ($scope.showDeleteMessage == false) {
-        $scope.showDeleteMessage = true;
-      } else {
-        $scope.showDeleteMessage = false;
-      }
-    };
-    //Delete message Function End
+  //Delete message Function
+  $scope.showDeleteMessage = false;
+  $scope.deleteMessage = function() {
+    if ($scope.showDeleteMessage == false) {
+      $scope.showDeleteMessage = true;
+    } else {
+      $scope.showDeleteMessage = false;
+    }
+  };
+  //Delete message Function End
 
-    //Show Message Chat
-    $scope.userMessage = [];
-    $scope.viewMessageChat == false;
-    $scope.showMessageChat = function (name) {
+  //Show Message Chat
+  $scope.userMessage = [];
+  $scope.viewMessageChat == false;
+  $scope.showMessageChat = function(name) {
       $scope.userMessage = [];
-      var newArray = _.findIndex($scope.followerList, function (o) {
+      var newArray = _.findIndex($scope.followerList, function(o) {
         return o.name == name.name;
       });
       if (newArray !== -1) {
@@ -13597,886 +13584,949 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     //Show Message Chat END
 
-    // Follower List
-    $scope.followerList = [{
-      name: "Monish Shah",
-      profilePic: "img/nargis1.jpg",
-      timeStampDate: "12 Jan, 2017",
-      timeStampTime: "1.20 pm",
-      followerMessage: [{
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "Hey",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.50 pm"
-      }, {
-        msgStatus: true,
-        msgType: "recieved",
-        msgText: "Hi",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.58 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "Wassssup?",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.59 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "BLA bla",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.05 pm"
-      }, {
-        msgStatus: true,
-        msgType: "recieved",
-        msgText: "YO!",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.10 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "QWERTYU...",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.20 pm"
-      }]
+  // Follower List
+  $scope.followerList = [{
+    name: "Monish Shah",
+    profilePic: "img/nargis1.jpg",
+    timeStampDate: "12 Jan, 2017",
+    timeStampTime: "1.20 pm",
+    followerMessage: [{
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Hey",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.50 pm"
     }, {
-      name: "Andrea Christina",
-      profilePic: "img/follower.jpg",
-      timeStampDate: "12 Jan, 2017",
-      timeStampTime: "1.20 pm",
-      followerMessage: [{
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "Hey",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.50 pm"
-      }, {
-        msgStatus: true,
-        msgType: "recieved",
-        msgText: "Hi",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.58 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "Wassssup?",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.59 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "BLA bla Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit blanditiis dolores error tempore tempora. Iusto fugit qui voluptate officia quasi accusamus facere, ab, recusandae eveniet, non dignissimos.",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.05 pm"
-      }, {
-        msgStatus: true,
-        msgType: "recieved",
-        msgText: "YO! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit blanditiis dolores error tempore tempora. Iusto fugit qui voluptate",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.10 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "Lorem ipsum dolor sit amet, ",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.20 pm"
-      }]
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "Hi",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.58 pm"
     }, {
-      name: "Nargis Fakhri",
-      profilePic: "img/nargis1.jpg",
-      timeStampDate: "12 Jan, 2017",
-      timeStampTime: "1.20 pm",
-      followerMessage: [{
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "Hey. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.50 pm"
-      }, {
-        msgStatus: true,
-        msgType: "recieved",
-        msgText: "Hi Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit blanditiis dolores error tempore tempora. Iusto fugit qui voluptate officia quasi accusamus facere, ab, recusandae eveniet, non dignissimos.",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.58 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "Wassssup? beach Meet Lorem",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.59 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "BLAH",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.05 pm"
-      }, {
-        msgStatus: true,
-        msgType: "recieved",
-        msgText: "YOyoyoyoyo!",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.10 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "QWYU...",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.20 pm"
-      }]
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Wassssup?",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.59 pm"
     }, {
-      name: "Disha Patani",
-      profilePic: "img/dishapatani1.jpg",
-      timeStampDate: "12 Jan, 2017",
-      timeStampTime: "1.20 pm",
-      followerMessage: [{
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "Heyya",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.50 pm"
-      }, {
-        msgStatus: true,
-        msgType: "recieved",
-        msgText: "Hiya",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.58 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "Wassssup? YO!",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.59 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "BLA blah BLAH!!!!!!!!!!!",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.05 pm"
-      }, {
-        msgStatus: true,
-        msgType: "recieved",
-        msgText: "YOLO Babes!",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.10 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "MACDSVJFB...",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.20 pm"
-      }]
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "BLA bla",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.05 pm"
     }, {
-      name: "Alladin",
-      profilePic: "img/adrena.jpg",
-      timeStampDate: "12 Jan, 2017",
-      timeStampTime: "1.20 pm",
-      followerMessage: [{
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "Hey",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.50 pm"
-      }, {
-        msgStatus: true,
-        msgType: "recieved",
-        msgText: "Hi buddy",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.58 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "Wassssup? Meet up at Stamford",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.59 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "BLA bla bla",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.05 pm"
-      }, {
-        msgStatus: true,
-        msgType: "recieved",
-        msgText: "Yikes!",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.10 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "Q be!!!!!!!!!!!!!...",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.20 pm"
-      }]
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "YO!",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.10 pm"
     }, {
-      name: "Bla Blabla",
-      profilePic: "img/nargis1.jpg",
-      timeStampDate: "12 Jan, 2017",
-      timeStampTime: "1.20 pm",
-      followerMessage: [{
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "Hey yo",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.50 pm"
-      }, {
-        msgStatus: true,
-        msgType: "recieved",
-        msgText: "Hi",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.58 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "Wassssup? BAMBS",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "12.59 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "BLA bla bla vlA bla",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.05 pm"
-      }, {
-        msgStatus: true,
-        msgType: "recieved",
-        msgText: "YO maama!",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.10 pm"
-      }, {
-        msgStatus: true,
-        msgType: "sent",
-        msgText: "QWERTYU vladdujfdsv...",
-        msgStampDate: "12 Jan, 2017",
-        msgStampTime: "1.20 pm"
-      }]
-    }];
-    // Follower List END
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "QWERTYU...",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.20 pm"
+    }]
+  }, {
+    name: "Andrea Christina",
+    profilePic: "img/follower.jpg",
+    timeStampDate: "12 Jan, 2017",
+    timeStampTime: "1.20 pm",
+    followerMessage: [{
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Hey",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.50 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "Hi",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.58 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Wassssup?",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.59 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "BLA bla Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit blanditiis dolores error tempore tempora. Iusto fugit qui voluptate officia quasi accusamus facere, ab, recusandae eveniet, non dignissimos.",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.05 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "YO! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit blanditiis dolores error tempore tempora. Iusto fugit qui voluptate",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.10 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Lorem ipsum dolor sit amet, ",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.20 pm"
+    }]
+  }, {
+    name: "Nargis Fakhri",
+    profilePic: "img/nargis1.jpg",
+    timeStampDate: "12 Jan, 2017",
+    timeStampTime: "1.20 pm",
+    followerMessage: [{
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Hey. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.50 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "Hi Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at expedita reprehenderit blanditiis dolores error tempore tempora. Iusto fugit qui voluptate officia quasi accusamus facere, ab, recusandae eveniet, non dignissimos.",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.58 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Wassssup? beach Meet Lorem",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.59 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "BLAH",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.05 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "YOyoyoyoyo!",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.10 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "QWYU...",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.20 pm"
+    }]
+  }, {
+    name: "Disha Patani",
+    profilePic: "img/dishapatani1.jpg",
+    timeStampDate: "12 Jan, 2017",
+    timeStampTime: "1.20 pm",
+    followerMessage: [{
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Heyya",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.50 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "Hiya",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.58 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Wassssup? YO!",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.59 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "BLA blah BLAH!!!!!!!!!!!",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.05 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "YOLO Babes!",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.10 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "MACDSVJFB...",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.20 pm"
+    }]
+  }, {
+    name: "Alladin",
+    profilePic: "img/adrena.jpg",
+    timeStampDate: "12 Jan, 2017",
+    timeStampTime: "1.20 pm",
+    followerMessage: [{
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Hey",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.50 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "Hi buddy",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.58 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Wassssup? Meet up at Stamford",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.59 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "BLA bla bla",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.05 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "Yikes!",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.10 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Q be!!!!!!!!!!!!!...",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.20 pm"
+    }]
+  }, {
+    name: "Bla Blabla",
+    profilePic: "img/nargis1.jpg",
+    timeStampDate: "12 Jan, 2017",
+    timeStampTime: "1.20 pm",
+    followerMessage: [{
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Hey yo",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.50 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "Hi",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.58 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "Wassssup? BAMBS",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "12.59 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "BLA bla bla vlA bla",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.05 pm"
+    }, {
+      msgStatus: true,
+      msgType: "recieved",
+      msgText: "YO maama!",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.10 pm"
+    }, {
+      msgStatus: true,
+      msgType: "sent",
+      msgText: "QWERTYU vladdujfdsv...",
+      msgStampDate: "12 Jan, 2017",
+      msgStampTime: "1.20 pm"
+    }]
+  }];
+  // Follower List END
 
 
-  })
+})
 
-  .controller('NotificationCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
-    $scope.template = TemplateService.changecontent("notification"); //Use same name of .html file
-    $scope.menutitle = NavigationService.makeactive("Notification"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-
-    // NOTIFICATION CARD JSON
-
-    $scope.notificationCard = [{
-      notiType: "tagOnGo"
-    }, {
-      notiType: "endOnGo"
-    }, {
-      notiType: "tagItinerary"
-    }, {
-      notiType: "checkinOnGo"
-    }, {
-      notiType: "addPicOnGo"
-    }, {
-      notiType: "commentPicOnGo"
-    }, {
-      notiType: "commentPicLocal"
-    }, {
-      notiType: "addVideoOnGo"
-    }, {
-      notiType: "commentVideoOnGo"
-    }, {
-      notiType: "commentVideoLocal"
-    }, {
-      notiType: "addThought"
-    }, {
-      notiType: "startedFollowing"
-    }, {
-      notiType: "requestFollow"
-    }, {
-      notiType: "acceptedRequest"
-    }, {
-      notiType: "commentOnGo"
-    }, {
-      notiType: "commentLocal"
-    }, {
-      notiType: "commentMention"
-    }, {
-      notiType: "likedOnGo"
-    }, {
-      notiType: "likedLocal"
-    }, {
-      notiType: "firstLocalLife"
-    }, {
-      notiType: "newbieWings"
-    }, {
-      notiType: "wingsGlobe"
-    }, {
-      notiType: "globeWafarer"
-    }, {
-      notiType: "wayfarerNomad"
-    }];
-    // NOTIFICATION CARD JSON END
-
-  })
-
-
-  .controller('SearchresultCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
-    $scope.template = TemplateService.changecontent("search-result"); //Use same name of .html file
-    $scope.menutitle = NavigationService.makeactive("Search Results"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-
-    // tab change
-    var allsearchresult = ["views/content/search/search-traveller.html", "views/content/search/search-itinerary.html", "views/content/search/search-hashtag.html", "views/content/search/search-country.html",
-      "views/content/search/search-city.html",
-      "views/content/search/search-travelagent.html"
-    ];
-    $scope.searchresult = {
-      innerView: allsearchresult[0]
-    };
-    // change url
-    $scope.searchresultoptions = {};
-    $scope.searchresultoptions.active = "";
-    $scope.viewTab = 1;
-    switch ($state.params.name) {
-      case "search-traveller":
-        $scope.searchresult.innerView = allsearchresult[0];
-        $scope.searchresultoptions.active = "search-traveller";
-        break;
-      case "search-itinerary":
-        $scope.searchresult.innerView = allsearchresult[1];
-        $scope.searchresultoptions.active = "search-itinerary";
-        break;
-      case "search-hashtag":
-        $scope.searchresult.innerView = allsearchresult[2];
-        $scope.searchresultoptions.active = "search-hashtag";
-        break;
-      case "search-country":
-        $scope.searchresult.innerView = allsearchresult[3];
-        $scope.searchresultoptions.active = "search-country";
-        break;
-      case "search-city":
-        $scope.searchresult.innerView = allsearchresult[4];
-        $scope.searchresultoptions.active = "search-city";
-        break;
-      case "search-travelagent":
-        $scope.searchresult.innerView = allsearchresult[5];
-        $scope.searchresultoptions.active = "search-travelagent";
-        break;
-      default:
-        $scope.searchresult.innerView = allsearchresult[0];
-    }
-    $scope.searchresultTraveller = true;
-    $scope.getTab = function (view) {
-      $scope.searchresult.innerView = allsearchresult[view];
-      var url = "search-traveller";
-      var active = "";
-      console.log(view);
-      switch (view) {
-        case 0:
-          url = "search-traveller";
-          $scope.searchresultoptions.active = "search-traveller";
-          $scope.searchresultTraveller = true;
+.controller('NotificationCtrl', function($scope, TemplateService, NavigationService, $timeout) {
+  $scope.template = TemplateService.changecontent("notification"); //Use same name of .html file
+  $scope.menutitle = NavigationService.makeactive("Notification"); //This is the Title of the Website
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
+  $scope.pageNo = 1;
+  $scope.notificationCard = [];
+  $scope.notificationCard.notifyString = "";
+  var makeNotifyString = function(){
+    _.each($scope.notificationCard, function(notification){
+      switch (notification.type) {
+        case 'journeyRequest':
+        console.log(notification,'logo2');
+              notification.notifyString = notification.userFrom.name.bold() + ' wants to tag you in (gender) On The Go Journey - '+'<span>'+notification.data.name+'</span>';
+              console.log(notification,'logo2');
           break;
-        case 1:
-          url = "search-itinerary";
-          $scope.searchresultoptions.active = "search-itinerary";
-          $scope.searchresultTraveller = false;
+          case 'journeyLeft':
+          notification.notifyString = notification.userFrom.name.bold() + ' has ended (gender) On The Go Journey - '+'<span>'+notification.data.name+'</span>';
+          console.log(notification,'logo2');
+            break;
+          case 'postLike':
+            if(notification.data.type=='travel-life'){
+              notification.notifyString = notification.userFrom.name.bold() +' has liked your on the go activity';
+            } else{
+                notification.notifyString = notification.userFrom.name.bold() +' has liked your local life activity';
+            }
+            break;
+          case 'postFirstTime':
+          if(notification.data.type=='travel-life'){
+            notification.notifyString = notification.userFrom.name.bold() +' has added a post to (gender)'+'<b>'+' On The Go Activity'+ '</b>.';
+          } else{
+            notification.notifyString = notification.userFrom.name.bold() +' has added a post to (gender)'+'<b>'+' Local Life'+ '</b> for the first time.';
+          }
+          case 'postComment':
+          if(notification.data.type=='travel-life'){
+            notification.notifyString = notification.userFrom.name.bold() +' has commented your on the go activity';
+          } else{
+            notification.notifyString = notification.userFrom.name.bold() +' has commented your local life activity';
+          }
           break;
-        case 2:
-          url = "search-hashtag";
-          $scope.searchresultoptions.active = "search-hashtag";
-          $scope.searchresultTraveller = false;
+          case 'postMentionComment':
+          if(notification.data.type=='travel-life'){
+            notification.notifyString = notification.userFrom.name.bold() +' has mentioned you in a comment';
+          } else{
+              notification.notifyString = notification.userFrom.name.bold() +' has mentioned you in a comment';
+          }
           break;
-        case 3:
-          url = "search-country";
-          $scope.searchresultoptions.active = "search-country";
-          $scope.searchresultTraveller = false;
-          break;
-        case 4:
-          url = "search-city";
-          $scope.searchresultoptions.active = "search-city";
-          $scope.searchresultTraveller = false;
-          break;
-        case 5:
-          url = "search-travelagent";
-          $scope.searchresultoptions.active = "search-travelagent";
-          $scope.searchresultTraveller = false;
+          case 'postTag':
+          if(notification.data.type=='travel-life'){
+            notification.notifyString = notification.userFrom.name.bold() +' has tagged you to the On The Go Activity';
+          } else{
+              notification.notifyString = notification.userFrom.name.bold() +' has tagged you to the Local Life Activity';
+          }
           break;
         default:
-          url = "search-traveller";
-          $scope.searchresultoptions.active = "search-traveller";
-          $scope.searchresultTraveller = true;
+        break;
       }
-      console.log(url);
-      $state.go("search-result", {
-        name: url
-      }, {
-        notify: false
-      });
-    };
-    // tab change end
+    });
+  }
+  $scope.getNotification = function(pageNo) {
+    NavigationService.notificationWeb({
+      pagenumber: pageNo
+    }, function(data) {
+      console.log(data, 'what is data');
+      $scope.notificationCard = data.data;
+      makeNotifyString();
+    });
+  };
+  $scope.getNotification($scope.pageNo);
+  // NOTIFICATION CARD JSON
 
-    // TRAVELLER JSON
-    $scope.searchTraveller = [{
-      followerName: 'Mayo Yo',
-      followerImg: 'img/nargis1.jpg'
-    }, {
-      followerName: 'James Bond',
-      followerImg: 'img/adrena.jpg'
-    }, {
-      followerName: 'Chota Chetan',
-      followerImg: 'img/dishapatani1.jpg'
-    }, {
-      followerName: 'Anwar Hatela',
-      followerImg: 'img/nargis1.jpg'
-    }, {
-      followerName: 'Mayo Yo',
-      followerImg: 'img/dishapatani1.jpg'
-    }, {
-      followerName: 'Mayo Yo',
-      followerImg: 'img/follower.jpg'
-    }];
-    // TRAVELLER JSON END
+  // $scope.notificationCard = [{
+  //   notiType: "tagOnGo"
+  // }, {
+  //   notiType: "endOnGo"
+  // }, {
+  //   notiType: "tagItinerary"
+  // }, {
+  //   notiType: "checkinOnGo"
+  // }, {
+  //   notiType: "addPicOnGo"
+  // }, {
+  //   notiType: "commentPicOnGo"
+  // }, {
+  //   notiType: "commentPicLocal"
+  // }, {
+  //   notiType: "addVideoOnGo"
+  // }, {
+  //   notiType: "commentVideoOnGo"
+  // }, {
+  //   notiType: "commentVideoLocal"
+  // }, {
+  //   notiType: "addThought"
+  // }, {
+  //   notiType: "startedFollowing"
+  // }, {
+  //   notiType: "requestFollow"
+  // }, {
+  //   notiType: "acceptedRequest"
+  // }, {
+  //   notiType: "commentOnGo"
+  // }, {
+  //   notiType: "commentLocal"
+  // }, {
+  //   notiType: "commentMention"
+  // }, {
+  //   notiType: "likedOnGo"
+  // }, {
+  //   notiType: "likedLocal"
+  // }, {
+  //   notiType: "firstLocalLife"
+  // }, {
+  //   notiType: "newbieWings"
+  // }, {
+  //   notiType: "wingsGlobe"
+  // }, {
+  //   notiType: "globeWafarer"
+  // }, {
+  //   notiType: "wayfarerNomad"
+  // }];
+  // NOTIFICATION CARD JSON END
 
-    //user itinerary cards
-    $scope.usrItineraryCard = [{
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '35000',
-      noDays: '55',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '1505',
-      agtRating: '3.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '15 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '75000',
-      noDays: '15',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '342',
-      agtRating: '4.0',
-      agtLikesCount: '199',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }];
-    //user itinerary cards end
-
-    // COUNTRY PAGE
-    $scope.countryVisitedList = [{
-      countryName: 'India',
-      countryImg: 'img/small-activity-slider.jpg'
-    }, {
-      countryName: 'Argentina',
-      countryImg: 'img/london.jpg'
-    }, {
-      countryName: 'United States',
-      countryImg: 'img/paris.jpg'
-    }, {
-      countryName: 'Germany',
-      countryImg: 'img/london.jpg'
-    }, {
-      countryName: 'Italy',
-      countryImg: 'img/small-activity-slider.jpg'
-    }, {
-      countryName: 'France',
-      countryImg: 'img/small-activity-slider.jpg'
-    }, {
-      countryName: 'China',
-      countryImg: 'img/paris.jpg'
-    }];
-    // COUNTRY PAGE END
-
-    // CITY PAGE
-    $scope.cityVisitedList = [{
-      cityName: 'Mumbai',
-      countryName: 'India',
-      cityImg: 'img/small-activity-slider.jpg'
-    }, {
-      cityName: 'Mumbai',
-      countryName: 'Argentina',
-      cityImg: 'img/london.jpg'
-    }, {
-      cityName: 'Mumbai',
-      countryName: 'United States',
-      cityImg: 'img/paris.jpg'
-    }, {
-      cityName: 'Mumbai',
-      countryName: 'Germany',
-      cityImg: 'img/london.jpg'
-    }, {
-      cityName: 'Mumbai',
-      countryName: 'Italy',
-      cityImg: 'img/small-activity-slider.jpg'
-    }, {
-      cityName: 'Mumbai',
-      countryName: 'France',
-      cityImg: 'img/small-activity-slider.jpg'
-    }, {
-      cityName: 'Mumbai',
-      countryName: 'China',
-      cityImg: 'img/paris.jpg'
-    }];
-    // CITY PAGE END
-
-    //user itinerary cards
-    $scope.usrItineraryCard = [{
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '35000',
-      noDays: '55',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '1505',
-      agtRating: '3.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '15 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '75000',
-      noDays: '15',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '342',
-      agtRating: '4.0',
-      agtLikesCount: '199',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }];
-    //user itinerary cards end
-
-    // HASHTAG CARDS
-    $scope.activityPost = [{
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. #hagtags,#hagtags1,#hagtags2,",
-      relatedPhoto: [
-        'img/blog/blog-post.jpg',
-        'img/blog/blog-post2.jpg',
-        'img/blog/blog-post3.jpg',
-        'img/blog/blog-post4.jpg',
-        'img/blog/blog-post.jpg',
-        'img/blog/blog-post2.jpg',
-        'img/blog/blog-post3.jpg',
-        'img/blog/blog-post4.jpg',
-      ],
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: true,
-      postIcon: true,
-      video: false,
-      photo: true,
-      photoSlider: true,
-      travelledJourney: false,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
-    }, {
-      class: "travel-taught",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-      hashtag: [{
-        tag: "#hagtags"
-      }, {
-        tag: "#hagtags1"
-      }, {
-        tag: "#hagtags2",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: true,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      visitPost: false,
-      getpopularPost: false,
-      activitySec: true
-    }, {
-      class: "local-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      relatedPhoto: [
-        'img/blog/blog-post.jpg',
-        'img/blog/blog-post2.jpg',
-        'img/blog/blog-post3.jpg',
-        'img/blog/blog-post4.jpg',
-        'img/blog/blog-post.jpg',
-        'img/blog/blog-post2.jpg',
-        'img/blog/blog-post3.jpg',
-        'img/blog/blog-post4.jpg',
-      ],
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: true,
-      postIcon: true,
-      video: false,
-      photo: true,
-      photoSlider: true,
-      travelledJourney: false,
-      onJourney: false,
-      getpopularPost: false,
-      visitPost: false,
-      activitySec: true
-    }, {
-      class: "local-life-taught",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: true,
-      postIcon: true,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      visitPost: false,
-      getpopularPost: false,
-      activitySec: true
-    }, {
-      class: "local-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: true,
-      video: false,
-      photo: true,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      visitPost: false,
-      getpopularPost: false,
-      activitySec: true
-    }, {
-      class: "local-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: true,
-      postIcon: true,
-      video: true,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      getpopularPost: false,
-      visitPost: false,
-      activitySec: true
-    }];
-    // HASHTAG CARDS END
-
-    // HASHTAG IMAGE SLIDER
-    setTimeout(function () {
-      $('.travelocal-slider').flexslider({
-        animation: "slide",
-        animationLoop: false,
-        itemWidth: 150,
-        itemMargin: 3,
-        mousewheel: true,
-        directionNav: false,
-        controlNav: false,
-      });
-    }, 100);
-    // HASHTAG IMAGE SLIDER END
-  })
+})
 
 
-  .controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {
-    $scope.changeLanguage = function () {
-      console.log("Language CLicked");
+.controller('SearchresultCtrl', function($scope, TemplateService, NavigationService, $timeout, $state) {
+  $scope.template = TemplateService.changecontent("search-result"); //Use same name of .html file
+  $scope.menutitle = NavigationService.makeactive("Search Results"); //This is the Title of the Website
+  TemplateService.title = $scope.menutitle;
+  $scope.navigation = NavigationService.getnav();
 
-      if (!$.jStorage.get("language")) {
+  // tab change
+  var allsearchresult = ["views/content/search/search-traveller.html", "views/content/search/search-itinerary.html", "views/content/search/search-hashtag.html", "views/content/search/search-country.html",
+    "views/content/search/search-city.html",
+    "views/content/search/search-travelagent.html"
+  ];
+  $scope.searchresult = {
+    innerView: allsearchresult[0]
+  };
+  // change url
+  $scope.searchresultoptions = {};
+  $scope.searchresultoptions.active = "";
+  $scope.viewTab = 1;
+  switch ($state.params.name) {
+    case "search-traveller":
+      $scope.searchresult.innerView = allsearchresult[0];
+      $scope.searchresultoptions.active = "search-traveller";
+      break;
+    case "search-itinerary":
+      $scope.searchresult.innerView = allsearchresult[1];
+      $scope.searchresultoptions.active = "search-itinerary";
+      break;
+    case "search-hashtag":
+      $scope.searchresult.innerView = allsearchresult[2];
+      $scope.searchresultoptions.active = "search-hashtag";
+      break;
+    case "search-country":
+      $scope.searchresult.innerView = allsearchresult[3];
+      $scope.searchresultoptions.active = "search-country";
+      break;
+    case "search-city":
+      $scope.searchresult.innerView = allsearchresult[4];
+      $scope.searchresultoptions.active = "search-city";
+      break;
+    case "search-travelagent":
+      $scope.searchresult.innerView = allsearchresult[5];
+      $scope.searchresultoptions.active = "search-travelagent";
+      break;
+    default:
+      $scope.searchresult.innerView = allsearchresult[0];
+  }
+  $scope.searchresultTraveller = true;
+  $scope.getTab = function(view) {
+    $scope.searchresult.innerView = allsearchresult[view];
+    var url = "search-traveller";
+    var active = "";
+    console.log(view);
+    switch (view) {
+      case 0:
+        url = "search-traveller";
+        $scope.searchresultoptions.active = "search-traveller";
+        $scope.searchresultTraveller = true;
+        break;
+      case 1:
+        url = "search-itinerary";
+        $scope.searchresultoptions.active = "search-itinerary";
+        $scope.searchresultTraveller = false;
+        break;
+      case 2:
+        url = "search-hashtag";
+        $scope.searchresultoptions.active = "search-hashtag";
+        $scope.searchresultTraveller = false;
+        break;
+      case 3:
+        url = "search-country";
+        $scope.searchresultoptions.active = "search-country";
+        $scope.searchresultTraveller = false;
+        break;
+      case 4:
+        url = "search-city";
+        $scope.searchresultoptions.active = "search-city";
+        $scope.searchresultTraveller = false;
+        break;
+      case 5:
+        url = "search-travelagent";
+        $scope.searchresultoptions.active = "search-travelagent";
+        $scope.searchresultTraveller = false;
+        break;
+      default:
+        url = "search-traveller";
+        $scope.searchresultoptions.active = "search-traveller";
+        $scope.searchresultTraveller = true;
+    }
+    console.log(url);
+    $state.go("search-result", {
+      name: url
+    }, {
+      notify: false
+    });
+  };
+  // tab change end
+
+  // TRAVELLER JSON
+  $scope.searchTraveller = [{
+    followerName: 'Mayo Yo',
+    followerImg: 'img/nargis1.jpg'
+  }, {
+    followerName: 'James Bond',
+    followerImg: 'img/adrena.jpg'
+  }, {
+    followerName: 'Chota Chetan',
+    followerImg: 'img/dishapatani1.jpg'
+  }, {
+    followerName: 'Anwar Hatela',
+    followerImg: 'img/nargis1.jpg'
+  }, {
+    followerName: 'Mayo Yo',
+    followerImg: 'img/dishapatani1.jpg'
+  }, {
+    followerName: 'Mayo Yo',
+    followerImg: 'img/follower.jpg'
+  }];
+  // TRAVELLER JSON END
+
+  //user itinerary cards
+  $scope.usrItineraryCard = [{
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '35000',
+    noDays: '55',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '1505',
+    agtRating: '3.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '15 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '75000',
+    noDays: '15',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '342',
+    agtRating: '4.0',
+    agtLikesCount: '199',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }];
+  //user itinerary cards end
+
+  // COUNTRY PAGE
+  $scope.countryVisitedList = [{
+    countryName: 'India',
+    countryImg: 'img/small-activity-slider.jpg'
+  }, {
+    countryName: 'Argentina',
+    countryImg: 'img/london.jpg'
+  }, {
+    countryName: 'United States',
+    countryImg: 'img/paris.jpg'
+  }, {
+    countryName: 'Germany',
+    countryImg: 'img/london.jpg'
+  }, {
+    countryName: 'Italy',
+    countryImg: 'img/small-activity-slider.jpg'
+  }, {
+    countryName: 'France',
+    countryImg: 'img/small-activity-slider.jpg'
+  }, {
+    countryName: 'China',
+    countryImg: 'img/paris.jpg'
+  }];
+  // COUNTRY PAGE END
+
+  // CITY PAGE
+  $scope.cityVisitedList = [{
+    cityName: 'Mumbai',
+    countryName: 'India',
+    cityImg: 'img/small-activity-slider.jpg'
+  }, {
+    cityName: 'Mumbai',
+    countryName: 'Argentina',
+    cityImg: 'img/london.jpg'
+  }, {
+    cityName: 'Mumbai',
+    countryName: 'United States',
+    cityImg: 'img/paris.jpg'
+  }, {
+    cityName: 'Mumbai',
+    countryName: 'Germany',
+    cityImg: 'img/london.jpg'
+  }, {
+    cityName: 'Mumbai',
+    countryName: 'Italy',
+    cityImg: 'img/small-activity-slider.jpg'
+  }, {
+    cityName: 'Mumbai',
+    countryName: 'France',
+    cityImg: 'img/small-activity-slider.jpg'
+  }, {
+    cityName: 'Mumbai',
+    countryName: 'China',
+    cityImg: 'img/paris.jpg'
+  }];
+  // CITY PAGE END
+
+  //user itinerary cards
+  $scope.usrItineraryCard = [{
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '35000',
+    noDays: '55',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '1505',
+    agtRating: '3.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '15 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '75000',
+    noDays: '15',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '342',
+    agtRating: '4.0',
+    agtLikesCount: '199',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }, {
+    timestampDate: '26 Jan, 2015',
+    timestampHour: '1:20 pm',
+    tripImg: 'img/paris.jpg',
+    itineraryTitle: 'Love In Paris',
+    tripCost: '25000',
+    noDays: '75',
+    tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
+    agtReviewCount: '352',
+    agtRating: '4.5',
+    agtLikesCount: '99',
+    countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+  }];
+  //user itinerary cards end
+
+  // HASHTAG CARDS
+  $scope.activityPost = [{
+    class: "travel-life",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. #hagtags,#hagtags1,#hagtags2,",
+    relatedPhoto: [
+      'img/blog/blog-post.jpg',
+      'img/blog/blog-post2.jpg',
+      'img/blog/blog-post3.jpg',
+      'img/blog/blog-post4.jpg',
+      'img/blog/blog-post.jpg',
+      'img/blog/blog-post2.jpg',
+      'img/blog/blog-post3.jpg',
+      'img/blog/blog-post4.jpg',
+    ],
+    editor: false,
+    userPic: true,
+    follow: false,
+    following: true,
+    postIcon: true,
+    video: false,
+    photo: true,
+    photoSlider: true,
+    travelledJourney: false,
+    onJourney: false,
+    getpopularPost: false,
+    activitySec: true,
+    visitPost: false
+  }, {
+    class: "travel-taught",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    hashtag: [{
+      tag: "#hagtags"
+    }, {
+      tag: "#hagtags1"
+    }, {
+      tag: "#hagtags2",
+    }, ],
+    editor: false,
+    userPic: true,
+    follow: true,
+    following: false,
+    postIcon: true,
+    video: false,
+    photo: false,
+    photoSlider: false,
+    travelledJourney: false,
+    onJourney: false,
+    visitPost: false,
+    getpopularPost: false,
+    activitySec: true
+  }, {
+    class: "local-life",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+    relatedPhoto: [
+      'img/blog/blog-post.jpg',
+      'img/blog/blog-post2.jpg',
+      'img/blog/blog-post3.jpg',
+      'img/blog/blog-post4.jpg',
+      'img/blog/blog-post.jpg',
+      'img/blog/blog-post2.jpg',
+      'img/blog/blog-post3.jpg',
+      'img/blog/blog-post4.jpg',
+    ],
+    editor: false,
+    userPic: true,
+    follow: false,
+    following: true,
+    postIcon: true,
+    video: false,
+    photo: true,
+    photoSlider: true,
+    travelledJourney: false,
+    onJourney: false,
+    getpopularPost: false,
+    visitPost: false,
+    activitySec: true
+  }, {
+    class: "local-life-taught",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+    editor: false,
+    userPic: true,
+    follow: false,
+    following: true,
+    postIcon: true,
+    video: false,
+    photo: false,
+    photoSlider: false,
+    travelledJourney: false,
+    onJourney: false,
+    visitPost: false,
+    getpopularPost: false,
+    activitySec: true
+  }, {
+    class: "local-life",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+    editor: false,
+    userPic: true,
+    follow: true,
+    following: false,
+    postIcon: true,
+    video: false,
+    photo: true,
+    photoSlider: false,
+    travelledJourney: false,
+    onJourney: false,
+    visitPost: false,
+    getpopularPost: false,
+    activitySec: true
+  }, {
+    class: "local-life",
+    profilePic: "img/profile-main.png",
+    userName: "John Doe",
+    timestampDate: "14 Jan, 2014",
+    timestampHour: "01:20 pm",
+    status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+    editor: false,
+    userPic: true,
+    follow: false,
+    following: true,
+    postIcon: true,
+    video: true,
+    photo: false,
+    photoSlider: false,
+    travelledJourney: false,
+    onJourney: false,
+    getpopularPost: false,
+    visitPost: false,
+    activitySec: true
+  }];
+  // HASHTAG CARDS END
+
+  // HASHTAG IMAGE SLIDER
+  setTimeout(function() {
+    $('.travelocal-slider').flexslider({
+      animation: "slide",
+      animationLoop: false,
+      itemWidth: 150,
+      itemMargin: 3,
+      mousewheel: true,
+      directionNav: false,
+      controlNav: false,
+    });
+  }, 100);
+  // HASHTAG IMAGE SLIDER END
+})
+
+
+.controller('languageCtrl', function($scope, TemplateService, $translate, $rootScope) {
+  $scope.changeLanguage = function() {
+    console.log("Language CLicked");
+
+    if (!$.jStorage.get("language")) {
+      $translate.use("hi");
+      $.jStorage.set("language", "hi");
+    } else {
+      if ($.jStorage.get("language") == "en") {
         $translate.use("hi");
         $.jStorage.set("language", "hi");
       } else {
-        if ($.jStorage.get("language") == "en") {
-          $translate.use("hi");
-          $.jStorage.set("language", "hi");
-        } else {
-          $translate.use("en");
-          $.jStorage.set("language", "en");
-        }
+        $translate.use("en");
+        $.jStorage.set("language", "en");
       }
-      //  $rootScope.$apply();
-    };
-  })
+    }
+    //  $rootScope.$apply();
+  };
+})

@@ -168,6 +168,9 @@ var navigationservice = angular.module('navigationservice', [])
       updateCountriesVisitedWeb: function (formData, callback, errCallback) {
         $http.post(adminURL + "/user/updateCountriesVisitedWeb", formData).success(callback).error(errCallback);
       },
+      notificationWeb: function (formData, callback) {
+        $http.post(adminURL + "/notification/getNotificationWeb", formData).success(callback);
+      },
       checkToken: function (formData, callback) {
         $http.post(adminURL + "/user/checkToken", formData).success(callback);
       },
