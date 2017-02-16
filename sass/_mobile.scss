@@ -500,6 +500,38 @@
   .post-main .post-imgholder {
     height: auto;
   }
+
+  //modal moments
+.notify-main .comment-sec .comment-ur-text {
+    width: 88%;
+    margin-left: 0;
+}
+
+.notify-popup{ .comment-like-notify {
+    width: 100%;
+    display: block;
+}
+.notify-imgsec {
+    width: 100%;
+    display: block;
+  }
+}
+.notify-main .comment-sec .comment-container {
+    width: 88%;
+    margin-left: 2px;
+}
+.review-all-life .place-name {
+    font-size: 18px;
+}
+.travel-star-rating,
+.local-star-rating { 
+  .list-inline > li {
+    padding: 0 10px;
+}
+}
+.comment-like-notify {
+    padding: 10px;
+}
   // MYLIFE MOMENTS
   // .singleMonth-imgholder {
   //   width: 155px;
@@ -640,7 +672,32 @@
       }
     }
   }
-
+//Moments
+.moment-local-main,
+.moment-travel-main {
+.row{
+  margin: 0;
+  .col-xs-4{
+    padding: 2px;
+  }
+}
+}
+.moment-localimgholder .img-backholder img {
+    padding: 10px 8px;
+}
+.moment-localimgholder .img-frontholder img {
+     padding: 0px;
+}
+.local-info {
+  h4 {
+    font-size: 16px;
+    span{
+      float: right;
+      padding-right: 5px;
+    }
+  }
+}
+//moments end
   .scroll-local-life .ngsb-wrap .ngsb-scrollbar {
     left: 4px;
   }
@@ -845,6 +902,7 @@
   // journey join end
   .post-local-life {
     width: 100%;
+        padding: 0 2px 0 10px;
   }
   // journey left
   .ongo-journey-left {
@@ -1492,6 +1550,14 @@
     }
   }
   // MYLIFE MOMENTS END
+  //scroll unshow 
+  .ngsb-wrap .ngsb-scrollbar .ngsb-thumb-container {
+      display: none;
+}
+  //scroll unshow ended
+  .comment-like-notify {
+    padding: 0 10px;
+}
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -1543,6 +1609,16 @@
       font-size: 40px;
     }
   }
+
+//moments
+.travel-info,.local-info {h4{
+        font-size: 14px;
+        span{
+              font-size: 12px;
+        }
+}
+}
+//moments ended
 
   .more-about-me {
     .more-detail {
@@ -2299,6 +2375,10 @@
       margin-left: 5px;
     }
   }
+  .notify-main .comment-sec .comment-container {
+    width: 85%;
+    margin-left: 2px;
+}
   // MYLIFE MOMENTS
   // .singleMonth-imgholder {
   //   width: 120px;
