@@ -188,6 +188,11 @@
   .vector-map mappy svg {
     zoom: 0.6;
   }
+  .list-travel-view .review-backimgholder {
+    width: 82px;
+    top: 10px;
+    right: 16px;
+}
 }
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
@@ -538,6 +543,11 @@
   //   height: 155px;
   // }
   // MYLIFE MOMENTS END
+  .list-travel-view .review-backimgholder {
+    width: 80px;
+    top: 6px;
+    right: 14px;
+}
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -1492,7 +1502,6 @@
 
         h3 {
           font-size: 16px;
-          font-weight: 700;
           text-transform: uppercase;
         }
 
@@ -1506,9 +1515,6 @@
         border: none;
       }
     }
-  }
-
-  .city-accordion {
     .panel-title {
       .mt5 {
         margin-top: 0;
@@ -1558,6 +1564,19 @@
   .comment-like-notify {
     padding: 0 10px;
 }
+.review-travel-view .list-travel-view .review-backimgholder {
+    width: 44%;
+    top: 8%;
+    right: 8%;
+img {
+  width: 100%;
+}
+}
+.list-travel-view .review-frontimgholder h3{
+    bottom: 20%;
+        line-height: 1;
+}
+
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -2348,11 +2367,6 @@
     font-size: 22px;
   }
   // popular agent end
-  .list-travel-view {
-    width: 269px;
-    display: block;
-    margin: 0 auto 15px;
-  }
 
   .list-travel-view:nth-child(4n+4) {
     margin-right: auto;
@@ -2379,6 +2393,25 @@
     width: 85%;
     margin-left: 2px;
 }
+// .review-travel-view {
+//   .row{
+//     margin:0;
+//   .col-xs-6{
+//     padding: 0;
+//   }
+//   }
+//    .list-travel-view .review-backimgholder {
+//     width: 44%;
+//     top: 6px;
+//     right: 8%;
+// }
+//    .review-frontimgholder h3 {
+//     font-size: 14px;
+//     bottom: 8px;
+//     left: 5px;
+// }
+// }
+
   // MYLIFE MOMENTS
   // .singleMonth-imgholder {
   //   width: 120px;
