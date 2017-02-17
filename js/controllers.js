@@ -9213,6 +9213,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       Itinerary.getOneItinerary(urlSlug, function(data) {
         $scope.qItinerary = data.data;
         $scope.qItinerary.oldStatus = $scope.qItinerary.status;
+        $scope.qItinerary.oldPhotos = _.cloneDeep($scope.qItinerary.photos);
         $scope.addCountry = $scope.qItinerary.countryVisited;
 
         //setting up qItineraryType variable starts
