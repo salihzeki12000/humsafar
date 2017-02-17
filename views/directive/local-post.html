@@ -55,13 +55,13 @@
           <ul>
             <li>
               <a href="">
-                <i class="fa fa-heart-o color-blue" ng-class="localongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likeLocalPost(localongo._id,localongo.uniqueId)">
+                <i class="fa fa-heart-o color-blue" ng-class="localongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likeLocalPost(localongo.uniqueId,localongo._id)">
                 </i></a><span></span></li>
             <li>
-              <a href=""><img src="img/comments.png" alt="" height="22"></a>
+              <a href="" ng-click="getLocalComments({'ongolocal':localongo})"><img src="img/comments.png" alt="" height="22"></a>
             </li>
             <li>
-              <a href=""><img src="img/share.png" alt="" height="22"></a>
+              <a href=""><img src="img/share.png" alt="" height="22" ng-click="getLocalLikes({'ongolocal':localongo})"></a>
             </li>
           </ul>
         </div>

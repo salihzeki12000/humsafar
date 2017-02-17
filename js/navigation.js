@@ -168,6 +168,24 @@ var navigationservice = angular.module('navigationservice', [])
       updateCountriesVisitedWeb: function (formData, callback, errCallback) {
         $http.post(adminURL + "/user/updateCountriesVisitedWeb", formData).success(callback).error(errCallback);
       },
+      getSearchCityData: function (formData, callback) {
+        $http.post(adminURL + "/city/getCity", formData).success(callback);
+      },
+      getSearchCountryData: function (formData, callback) {
+        $http.post(adminURL + "/country/getCountry", formData).success(callback);
+      },
+      getSearchItineraryData: function (formData, callback) {
+        $http.post(adminURL + "/itinerary/getItineraryWeb", formData).success(callback);
+      },
+      getSearchHashData: function (formData, callback) {
+        $http.post(adminURL + "/post/getHashDataWeb", formData).success(callback);
+      },
+      getSearchUserData: function (formData, callback) {
+        $http.post(adminURL + "/user/getUserWeb", formData).success(callback);
+      },
+      notificationWeb: function (formData, callback) {
+        $http.post(adminURL + "/notification/getNotificationWeb", formData).success(callback);
+      },
       checkToken: function (formData, callback) {
         $http.post(adminURL + "/user/checkToken", formData).success(callback);
       },
@@ -190,11 +208,11 @@ var navigationservice = angular.module('navigationservice', [])
           callback(data);
         });
       },
-      getDestinationBooking: function (formData, callback) {
-        $http.get("http://192.168.0.119:3000/migrations/city_bookings.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
-          callback(data);
-        });
-      },
+      // getDestinationBooking: function (formData, callback) {
+      //   $http.get("http://192.168.0.119:3000/migrations/city_bookings.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
+      //     callback(data);
+      //   });
+      // },
       uploadFile: function (formData, callback) {
         console.log(formData);
         $http.post(uploadurl, formData, {

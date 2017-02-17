@@ -14,7 +14,12 @@
             <div class="clearfix">
               <div class="pull-left">
                 <ul class="notify-like">
-                  <li><a href=""><i class="fa color-blue" ng-class="listOfComments.likeDone ? 'fa-heart' : 'fa-heart-o'" ng-click="likePhoto(listOfComments.name,ongo._id,listOfComments._id)"></i></a></li>
+                  <li><a href="" class="relate"><i class="fa color-blue" ng-class="listOfComments.likeDone ? 'fa-heart' : 'fa-heart-o'" ng-click="likePhoto(listOfComments.name,ongo._id,listOfComments._id)"></i>
+                  <span></span>
+                  <audio id="like-play">
+                    <source src="img/tiny1.mp3" type="audio/mp3">
+                  </audio>
+                </a></li>
                   <li>
                     <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve"></a>
                   </li>

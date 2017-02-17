@@ -1,9 +1,9 @@
 <div class="notification-page">
   <div class="container">
     <div class="row">
-      <div class="col-md-3" ng-repeat="notification in notificationCard track by $index">
+      <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="notify in notificationCard track by $index">
         <!-- Notification Card -->
-        <div class="notification-card">
+        <div class="notification-card" >
           <!-- READ NOTIFICATION CHECK -->
           <span class="read-notification"><i class="fa fa-check" aria-hidden="true"></i></span>
           <!-- READ NOTIFICATION CHECK END -->
@@ -13,123 +13,25 @@
             <span class="remove-notification"><i class="fa fa-times"></i></span>
             <!-- CLOSE / REMOVE NOTIFICATION END -->
 
-            <!-- PROFILE PIC AND TIMESTAMP -->
+            <!-- PROFILE PIC AND TIMESTAMP  user from detail-->
             <div class="notification-profile">
-              <img src="img/dishapatani1.jpg" alt="" class="img-responsive">
+              <img ng-src="{{notify.userFrom.profilePicture|uploadpath:50:50:'cover'}}" alt="{{notify.userFrom.name}}" class="img-responsive">
             </div>
-            <p class="notification-timestamp"><i class="fa fa-calendar"></i><span class="ml5 ">1 Jan, 2016</span> | <i class="fa fa-clock-o "></i> 1.50 pm<span></span></p>
-            <!-- PROFILE PIC AND TIMESTAMP END -->
+            <p class="notification-timestamp"><i class="fa fa-calendar"></i><span class="ml5 ">{{notify.createdAt | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o "></i> {{notify.createdAt | date:  'hh.mm a'}}<span></span></p>
+            <!-- PROFILE PIC AND TIMESTAMP END user from detail-->
 
             <!-- NOTIFICATION DETAIL -->
             <div class="notification-detail">
               <!-- TAG ON GO -->
-              <p class="notification-tagongo" ng-if="notification.notiType == 'tagOnGo'"><span class="avenir-heavy color-blue">Andrea Christina </span> wants to tag you in her On The Go Journey - <span class="color-pink avenir-heavy"> London Diaries.</span></p>
-              <!-- TAG ON GO END -->
-
-              <!-- ENDED ON GO -->
-              <p class="notification-tagongo" ng-if="notification.notiType == 'endOnGo'"><span class="avenir-heavy color-blue">Andrea Christina </span> has ended her On The Go Journey - <span class="color-pink avenir-heavy"> London Diaries.</span></p>
-              <!-- ENDED ON GO  END-->
-
-              <!-- TAG ITINERARY -->
-              <p class="notification-tagongo" ng-if="notification.notiType == 'tagItinerary'"><span class="avenir-heavy color-blue">Andrea Christina </span> has tagged you in an Itinerary - <span class="avenir-heavy">London Diaries.</span></p>
-              <!-- TAG ITINERARY  END-->
-
-              <!-- CHECK IN ON GO -->
-              <p class="notification-checkin-ongo" ng-if="notification.notiType == 'checkinOnGo'"><span class="avenir-heavy color-blue">Andrea Christina </span> has checked-in with you in an <span class="avenir-heavy">On The Go Activity</span>.</p>
-              <!-- CHECK IN ON GO  END-->
-
-              <!--ADD PHOTOS ON GO -->
-              <p class="notification-addpic-ongo" ng-if="notification.notiType == 'addPicOnGo'"><span class="avenir-heavy color-blue">Andrea Christina </span> has added photos of you'll to the <span class="avenir-heavy">On The Go Activity</span>.</p>
-              <!-- ADD PHOTOS ON GO  END-->
-
-              <!--COMMENT PHOTOS ON GO -->
-              <p class="notification-addpic-ongo" ng-if="notification.notiType == 'commentPicOnGo'"><span class="avenir-heavy color-blue">Andrea Christina </span> has commented on a photo in your <span class="avenir-heavy">On The Go Activity</span>.</p>
-              <!-- COMMENT PHOTOS ON GO  END-->
-
-              <!--COMMENT PHOTOS LOCAL LIFE -->
-              <p class="notification-addpic-ongo" ng-if="notification.notiType == 'commentPicLocal'"><span class="avenir-heavy color-blue">Andrea Christina </span> has commented on a photo in your <span class="avenir-heavy">Local Life</span>.</p>
-              <!-- COMMENT PHOTOS LOCAL LIFE END-->
-
-              <!--ADD VIDEO ON GO -->
-              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'addVideoOnGo'"><span class="avenir-heavy color-blue">Andrea Christina </span> has added a video of you'll to the <span class="avenir-heavy">On The Go Journey</span>.</p>
-              <!-- ADD VIDEO ON GO  END-->
-
-              <!--ADD COMMENT VIDEO ON GO -->
-              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'commentVideoOnGo'"><span class="avenir-heavy color-blue">Andrea Christina </span> has commented on a video in your <span class="avenir-heavy">On The Go Journey</span>.</p>
-              <!-- ADD COMMENT VIDEO ON GO  END-->
-
-              <!--ADD COMMENT VIDEO LOCAL -->
-              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'commentVideoLocal'"><span class="avenir-heavy color-blue">Andrea Christina </span> has commented on a video in your <span class="avenir-heavy">Local Life</span>.</p>
-              <!-- ADD COMMENT VIDEO LOCAL  END-->
-
-              <!--ADD THOUGHT ON GO -->
-              <p class="notification-addthought-ongo" ng-if="notification.notiType == 'addThought'"><span class="avenir-heavy color-blue">Andrea Christina </span> has tagged you in a thought in an <span class="avenir-heavy">On The Go Journey Activity</span>.</p>
-              <!-- ADD THOUGHT ON GO  END-->
-
-              <!-- STARTED FOLLOWING -->
-              <p class="notification-started-following" ng-if="notification.notiType == 'startedFollowing'"><span class="avenir-heavy color-blue">Andrea Christina </span> has started following you.</p>
-              <!-- STARTED FOLLOWING END -->
-
-              <!-- REQUEST FOLLOW -->
-              <p class="notification-started-following" ng-if="notification.notiType == 'requestFollow'"><span class="avenir-heavy color-blue">Andrea Christina </span> has requested to follow your travel and local activities.</p>
-              <!-- REQUEST FOLLOW END -->
-
-              <!-- ACCEPTED REQUEST -->
-              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'acceptedRequest'"><span class="avenir-heavy color-blue">Andrea Christina </span> has accepted your follow request.</p>
-              <!-- ACCEPTED REQUEST  END-->
-
-              <!-- COMMENT ON GO -->
-              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'commentOnGo'"><span class="avenir-heavy color-blue">Andrea Christina </span> has commented on your <span class="avenir-heavy">On The Go Activity</span>.</p>
-              <!-- COMMENT ON GO  END-->
-
-              <!-- COMMENT LOCAL LIFE -->
-              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'commentLocal'"><span class="avenir-heavy color-blue">Andrea Christina </span> has commented on your <span class="avenir-heavy">Local Life</span>.</p>
-              <!-- COMMENT LOCAL LIFE  END-->
-
-              <!-- MENTIONED IN COMMENT -->
-              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'commentMention'"><span class="avenir-heavy color-blue">Andrea Christina </span> has mentioned you in a comment.</p>
-              <!-- MENTIONED IN COMMENT  END-->
-
-              <!-- LIKED ON GO -->
-              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'likedOnGo'"><span class="avenir-heavy color-blue">Andrea Christina </span> has liked your <span class="avenir-heavy">On The Go Activity</span>.</p>
-              <!-- LIKED ON GO  END-->
-
-              <!-- LIKED LOCAL LIFE -->
-              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'likedLocal'"><span class="avenir-heavy color-blue">Andrea Christina </span> has liked your <span class="avenir-heavy">Local Life Activity</span>.</p>
-              <!-- LIKED LOCAL LIFE  END-->
-
-              <!-- FIRST LOCAL LIFE -->
-              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'firstLocalLife'"><span class="avenir-heavy color-blue">Andrea Christina </span> has added a post to his <span class="avenir-heavy">Local Life</span> for the very first time.</p>
-              <!-- FIRST LOCAL LIFE  END-->
-
-              <!-- NEWBIE TO WINGS -->
-              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'newbieWings'"><span class="avenir-heavy">Congratulations!</span> You have moved from <span class="avenir-heavy color-blue">Newbie</span> to <span class="avenir-heavy color-blue">Just Got Wings</span>. <br>
-              Hope you enjoy your status and grow in your journeys.</p>
-              <!-- NEWBIE TO WINGS  END-->
-
-              <!-- WINGS TO GLOBE -->
-              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'wingsGlobe'"><span class="avenir-heavy">Congratulations!</span> You have moved from <span class="avenir-heavy color-blue">Just Got Wings</span> to <span class="avenir-heavy color-blue">Globe Trotter</span>. <br>
-              Hope you enjoy your status and grow in your journeys.</p>
-              <!-- WINGS TO GLOBE END-->
-
-              <!-- GLOBE TO WAYFARER -->
-              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'globeWafarer'"><span class="avenir-heavy">Congratulations!</span> You have moved from <span class="avenir-heavy color-blue">Globe Trotter</span> to <span class="avenir-heavy color-blue">Wayfarer</span>. <br>
-              Hope you enjoy your status and grow in your journeys.</p>
-              <!-- GLOBE TO WAYFARER  END-->
-
-              <!-- WAYFARER TO NOMAD -->
-              <p class="notification-addvideo-ongo" ng-if="notification.notiType == 'wayfarerNomad'"><span class="avenir-heavy">Congratulations!</span> You have moved from <span class="avenir-heavy color-blue">Wayfarer</span> to <span class="avenir-heavy color-blue">Nomad</span>. <br>
-              Hope you enjoy your status and grow in your journeys.</p>
-              <!-- WAYFARER TO NOMAD  END-->
-
+              <p class="notification-tagongo" ng-bind-html="notify.notifyString"></p>
             </div>
             <!-- NOTIFICATION DETAIL END -->
 
             <!-- NOTIFICATION TAG ON GO ACTION  -->
             <div class="notification-action">
               <!-- TAG ON GO -->
-              <div class="notification-tagongo-action" ng-if="notification.notiType == 'tagOnGo'">
-                <p class="">Accept <span class="avenir-heavy color-blue">Andrea Christina</span>'s request to create your travel memories together.</p>
+              <div class="notification-tagongo-action" ng-if="notify.type=='journeyRequest'">
+                <p class="">Accept <span class="avenir-heavy color-blue">{{notify.userFrom.name}}</span>'s request to create your travel memories together.</p>
                 <!-- ACCEPT DECLINE BUTTONS -->
                 <div class="notification-btn text-center">
                   <button type="button" name="button" class="btn btn-notification-card">Accept</button>
@@ -140,7 +42,7 @@
               <!-- TAG ON GO END -->
 
               <!-- END ON GO -->
-              <div class="notification-endongo-action" ng-if="notification.notiType == 'endOnGo'">
+              <div class="notification-endongo-action" ng-if="notify.type == 'journeyLeft'">
                 <p class="">Would you like to end your journey as well?</p>
                 <!-- END DECLINE BUTTONS -->
                 <div class="notification-btn text-center">
@@ -156,8 +58,8 @@
               <!-- ADD THOUGHT END -->
 
               <!-- FOLLOWER DETAILS -->
-              <div class="" ng-if="notification.notiType == 'requestFollow'">
-                <div class="follower-details" ng-if="notification.notiType == 'startedFollowing'|| notification.notiType == 'requestFollow'">
+              <div class="" ng-if="notify.type == 'userFollowingRequest'">
+                <div class="follower-details" >
                   <div class="notification-follower-detail">
                     <span class="notifcation-follower-count">1.4m</span>
                     <span class="notifcation-follower-property">Followers</span>
@@ -181,7 +83,7 @@
               <!-- FOLLOWER DETAILS END -->
 
               <!-- FOLLOWER DETAILS -->
-              <div class="" ng-if="notification.notiType == 'startedFollowing'">
+              <div class="" ng-if="notify.type == 'userFollowing'">
                 <div class="follower-details">
                   <div class="notification-follower-detail">
                     <span class="notifcation-follower-count">1.4m</span>
@@ -198,7 +100,7 @@
                 </div>
 
                 <!-- FOLLOW BUTTON -->
-                <div class="notification-btn">
+                <div class="notification-btn noti-follow-btn">
                   <button type="button" name="button" class="btn btn-notificationpink-card">Follow</button>
                 </div>
                 <!-- FOLLOW BUTTON END -->
@@ -206,7 +108,7 @@
               <!-- FOLLOWER DETAILS END -->
 
               <!-- TAG ITINERARY -->
-              <div class="notification-tagitinerary-action" ng-if="notification.notiType == 'tagItinerary'">
+              <div class="notification-tagitinerary-action" ng-if="notify.type == 'itineraryRequest'">
                 <p class="">View to add to your My Life.</p>
                 <div class="notification-tagitinerary-photo">
                   <img src="img/london.jpg" alt="" class="img-responsive get-center">
@@ -220,8 +122,8 @@
               </div>
               <!-- CHECKIN ON GO END -->
 
-              <!-- NEWBIE TO WINGS -->
-              <div class="notification-social-btn text-center" ng-if="notification.notiType == 'newbieWings'|| notification.notiType == 'wingsGlobe'|| notification.notiType == 'globeWafarer'|| notification.notiType == 'wayfarerNomad'">
+              <!-- NEWBIE TO WINGS USER BADGE -->
+              <div class="notification-social-btn text-center" ng-if="notify.type == 'userBadge'">
                 <button type="button" name="button" class="btn btn-notification-social fb-icon"><i class="fa fa-facebook" aria-hidden="true"></i></button>
                 <button type="button" name="button" class="btn btn-notification-social twi-icon"><i class="fa fa-twitter" aria-hidden="true"></i></button>
                 <button type="button" name="button" class="btn btn-notification-social google-icon"><i class="fa fa-google-plus" aria-hidden="true"></i></button>
@@ -229,22 +131,7 @@
                 <button type="button" name="button" class="btn btn-notification-social instagram-icon"><i class="fa fa-instagram" aria-hidden="true"></i></button>
                 <button type="button" name="button" class="btn btn-notification-social linkedin-icon"><i class="fa fa-linkedin" aria-hidden="true"></i></button>
               </div>
-              <!-- NEWBIE TO WINGS END -->
-
-              <!-- WINGS TO GLOBE -->
-              <!-- <div class="notification-social-btn" ng-if="notification.notiType == 'wingsGlobe'">
-              </div> -->
-              <!-- WINGS TO GLOBE END -->
-
-              <!-- GLOBE TO WAYFARER -->
-              <!-- <div class="notification-social-btn" ng-if="notification.notiType == 'globeWafarer'">
-              </div> -->
-              <!-- GLOBE TO WAYFARER END -->
-
-              <!-- WAYFARER TO NOMAD -->
-              <!-- <div class="notification-social-btn" ng-if="notification.notiType == 'wayfarerNomad'">
-              </div> -->
-              <!-- WAYFARER TO NOMAD END -->
+              <!-- NEWBIE TO WINGS USER BADGE END -->
 
               <!-- ADD / COMMENT PHOTO -->
               <div class="notification-addpic-ongo-action" ng-if="notification.notiType == 'addPicOnGo' || notification.notiType == 'commentPicOnGo' || notification.notiType == 'commentPicLocal'">

@@ -145,7 +145,7 @@
                       <div class="days-spent pull-right">
                         <p><span class="block">{{activity.endTime|dateDifference: activity.startTime}}</span> Days</p>
                       </div>
-                      <h4 class="m-clear text-capitalize">{{activity.name}}</h4>
+                      <h4 class="m-clear text-capitalize activity-travel-title">{{activity.name}}</h4>
                       <div class="clearfix journey-travelling-type">
                         <div class="row">
                           <div class="col-xs-6">
@@ -205,7 +205,7 @@
                       <div class="days-spent pull-right" ng-if="activity.type!='editor-blog'">
                         <p><span class="block">{{activity.duration}}</span>Days</p>
                       </div>
-                      <h3 class="m-clear text-capitalize">{{activity.title}}</h3>
+                      <h3 class="m-clear text-capitalize activity-journey-title">{{activity.title}}</h3>
                       <div class="clearfix journey-travelling-type">
                         <div class="row">
                           <div class="col-xs-4">
@@ -248,7 +248,12 @@
                     <div class="pull-left">
                       <div class="">
                         <span class="inline-block v-mid mr5" ng-click="likeUnlikeActivity(activity)" ;>
-                            <a href="" class="fnt-20"><i class="fa color-blue card-like-animation " ng-class="activity.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i></a>
+                            <a href="" class="fnt-20 relate"><i class="fa color-blue card-like-animation " ng-class="activity.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i>
+                            <span></span>
+                            <audio id="like-play">
+                              <source src="img/tiny1.mp3" type="audio/mp3">
+                            </audio>
+                          </a>
                           </span>
                         <div class="inline-block v-mid" ng-if="!(activity.type=='editor')">
                           <span class="pointer mr5"><img src="img/comments.png" alt="" height="19" ng-click="getCommentsData(activity)"></span>
@@ -437,7 +442,11 @@
                   <div class="user-social-item clearfix">
                     <div class="pull-left">
                       <ul>
-                        <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
+                        <li><a href="" class="relate"><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click=""></i> <span></span>
+                          <audio id="like-play">
+                            <source src="img/tiny1.mp3" type="audio/mp3">
+                          </audio>
+                        </a></li>
                         <li>
                           <a href="">
                             <img src="img/comments.png" alt="" height="18" class="if-blue">
@@ -491,7 +500,12 @@
         <div class="clearfix">
           <div class="pull-left">
             <ul class="notify-like">
-              <li><a href=""><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"  ng-click="likeUnlikeActivity(activity)"></i></a></li>
+              <li><a href="" class="relate"><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"  ng-click="likeUnlikeActivity(activity)"></i>
+              <span></span>
+              <audio id="like-play">
+                <source src="img/tiny1.mp3" type="audio/mp3">
+              </audio>
+            </a></li>
               <li>
                 <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve" ng-click="focus('enterComment');"></a>
               </li>

@@ -245,6 +245,34 @@
     }
   }
   // DETAIL ITINERARY PAGE END
+  // NOTIFICATION PAGE
+  .notification-card{
+    min-height: 260px;
+  }
+  .notification-profile{
+    width: 40px;
+    height: 40px;
+    border-radius: 15px;
+    margin-left: -5px;
+  }
+  .notification-timestamp{
+    margin-left: 0;
+  }
+  .notification-btn .btn-notification-card{
+    padding: 5px 20px;
+    margin: 0 5px 0 0;
+  }
+  .notification-follower-detail{
+    margin: 10px 2px;
+    .notifcation-follower-count{
+      font-size: 16px;
+    }
+    .notifcation-follower-property{
+      font-size: 10px;
+    }
+  }
+
+  // NOTIFICATION PAGE END
 }
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
@@ -686,6 +714,29 @@
   }
   //LISTING POPUP END
   // DETAIL ITINERARY PAGE END
+  // notification page
+  .notification-page{
+    padding: 30px 0;
+  }
+  .notification-card{
+    min-height: 260px;
+  }
+  .notification-follower-detail{
+    margin: 10px 5px;
+    .notifcation-follower-count{
+      font-size: 20px;
+    }
+    .notifcation-follower-property{
+      font-size: 12px;
+    }
+  }
+  .follower-details{
+    text-align: center;
+  }
+  .noti-follow-btn{
+    text-align: center;
+  }
+  // notification page End
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -1761,6 +1812,14 @@
   }
   //LISTING POPUP END
   // DESTINATION BOOKING PAGE  END
+  // NOTIFICATION PAGE
+  .notification-card {
+    min-height: initial;
+  }
+  .notification-content{
+    padding-bottom: 20px;
+  }
+  // NOTIFICATION PAGE END
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px

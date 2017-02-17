@@ -86,7 +86,12 @@
                       <div class="user-social-item clearfix">
                         <div class="pull-left">
                           <ul>
-                            <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
+                            <li><a href="" class="relate"><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click=""></i>
+                            <span></span>
+                            <audio id="like-play">
+                              <source src="img/tiny1.mp3" type="audio/mp3">
+                            </audio>
+                          </a></li>
                             <li>
                               <a href=""><img src="img/comments.png" alt="" height="18"></a>
                             </li>
