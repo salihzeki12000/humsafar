@@ -102,7 +102,12 @@
             <div class="clearfix share-option-main">
               <div class="task-holder pull-left">
                 <ul class="list-inline">
-                  <li><a href="" ng-click="likeUnlikeItinerary(itinerary.likeDone,itinerary._id,itinerary.uniqueId);"><i class="fa like-button-icon color-blue" ng-class="{'fa-heart-o': itinerary.likeDone == null, 'fa-heart': itinerary.likeDone == true}"></i></a></li>
+                  <li><a href="" class="relate" ng-click="likeUnlikeItinerary(itinerary.likeDone,itinerary._id,itinerary.uniqueId);"><i class="fa like-button-icon color-blue" ng-class="{'fa-heart-o': itinerary.likeDone == null, 'fa-heart like-animate': itinerary.likeDone == true}"></i>
+                  <span></span>
+                  <audio id="like-play">
+                    <source src="img/tiny1.mp3" type="audio/mp3">
+                  </audio>
+                </a></li>
                   <li>
                     <a href=""><img src="img/comments.png" alt="Comments" height="22" class="agent-iti-comment-icon"></a>
                   </li>
@@ -273,7 +278,12 @@
                       <div class="user-social-item clearfix">
                         <div class="pull-left">
                           <ul>
-                            <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
+                            <li><a href="" class="relate"><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click=""></i>
+                            <span></span>
+                            <audio id="like-play">
+                              <source src="img/tiny1.mp3" type="audio/mp3">
+                            </audio>
+                          </a></li>
                             <li>
                               <a href=""><img src="img/comments.png" alt="" height="18"></a>
                             </li>
@@ -373,7 +383,12 @@
                           <div class="user-social-item clearfix">
                             <div class="pull-left">
                               <ul>
-                                <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
+                                <li><a href="" class="relate"><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click=""></i>
+                                <span></span>
+                                <audio id="like-play">
+                                  <source src="img/tiny1.mp3" type="audio/mp3">
+                                </audio>
+                              </a></li>
                                 <li>
                                   <a href="">
                                     <img src="img/comments.png" alt="" height="18" class="if-blue">
