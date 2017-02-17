@@ -1,40 +1,27 @@
 <div class="search-city">
   <div class="row">
     <div class="country-visited-tab search-city-tab">
-      <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="city in cityVisitedList track by $index">
+      <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="city in viewSearchedCity track by $index">
         <div class="country-list-holder">
-          <div class="list-imgholder" style="background-image: url('{{city.cityImg}}');">
+          <div class="list-imgholder" style="background-image: url('{{city.cityCoverPhoto|uploadpath}}');">
             <!-- <img ng-src="{{country.countryId.countryCoverPhoto|uploadpath}}" alt="" class="img-responsive country-img">  -->
             <div class="list-info">
               <div class="clearfix">
                 <div class="pull-left">
-                  <h4 class="avenir-heavy">{{city.cityName}}</h4>
+                  <h4 class="avenir-heavy">{{city.name}}</h4>
                 </div>
                 <div class="pull-right">
-                  <span class="searchcity-country-name">{{city.countryName}}</span>
+                  <span class="searchcity-country-name">{{city.country[0].name}}</span>
                   <div class="bucket-flag">
-                    <img src="img/flag.png" alt="Flag" class="img-responsive" width="30">
+                    <img ng-src="{{city.country[0].flag|uploadpath}}" alt="Flag" class="img-responsive" width="30">
                   </div>
                 </div>
               </div>
             </div>
-
             <div class="search-citydetails">
-              <span>Must Do's: <span>33</span> | </span>
-              <span>Itineraries: <span>222</span></span>
+              <span>Must Do's: <span>{{city.mustDoCount}}</span> | </span>
+              <span>Itineraries: <span>{{city.itineraryCount}}</span></span>
             </div>
-            <!-- hover -->
-            <div class="country-list">
-              <div class="get-center full-width text-center">
-                <span class="year-remove avenir-medium"><i class="fa fa-calendar block mb5" ng-click="updateCountryVisited(country.countryId._id);"></i>
-                  Add Year
-                </span>
-                <span class="year-remove avenir-medium"><i class="fa fa-trash-o block" ng-click="removeCountryVisit();"></i>
-                  Remove
-                </span>
-              </div>
-            </div>
-            <!-- hover end-->
           </div>
         </div>
       </div>

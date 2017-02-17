@@ -1582,6 +1582,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.getCommentsData = function(ongo) {
+      console.log(ongo,'ongo');
       $scope.post = ongo;
       $scope.previousId;
       var callback = function(data) {
@@ -5521,7 +5522,69 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
     // clear all filter end
+    // local post like and share
+    // $scope.getLocalComments = function(localPost) {
+    //   console.log(localPost,'bc ');
+    //   $scope.post = ongo;
+    //   $scope.previousId;
+    //   var callback = function(data) {
+    //     $scope.uniqueArr = [];
+    //     $scope.listOfComments = data.data;
+    //     $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+    //   }
+    //   if ($scope.previousId != $scope.post._id) {
+    //     $scope.listOfComments = [];
+    //     $scope.viewCardComment = true;
+    //     $scope.journey.journeyHighLight = ongo._id;
+    //     $scope.getCard = "view-whole-card";
+    //     LikesAndComments.getComments("post", $scope.post._id, callback);
+    //   } else {
+    //     if ($scope.viewCardComment) {
+    //       $scope.viewCardComment = false;
+    //       $scope.journey.journeyHighLight = "";
+    //       $scope.getCard = "";
+    //       $scope.comment.text = "";
+    //     } else {
+    //       $scope.listOfComments = [];
+    //       $scope.viewCardComment = true;
+    //       $scope.journey.journeyHighLight = ongo._id;
+    //       $scope.getCard = "view-whole-card";
+    //       LikesAndComments.getComments("post", $scope.post._id, callback);
+    //     }
+    //   }
+    //   $scope.previousId = $scope.post._id;
+    // };
+    //
+    // $scope.getLocalLikes = function(localLike) {
+    //   console.log(localLike,'localLike');
+    //   var callback = function(data) {
+    //     $scope.listOfLikes = data.data;
+    //     console.log($scope.listOfLikes);
+    //   };
+    //   console.log($scope.post);
+    //   if ($scope.previousLikeId != ongo._id) {
+    //     $scope.listOfLikes = [];
+    //     $scope.viewCardLike = true;
+    //     $scope.journey.journeyHighLight = ongo._id;
+    //     $scope.showLikeShow = "show-like-side-sec";
+    //     LikesAndComments.getLikes("post", ongo._id, callback);
+    //   } else {
+    //     if ($scope.viewCardLike) {
+    //       $scope.viewCardLike = false;
+    //       $scope.journey.journeyHighLight = "";
+    //       $scope.getCard = "";
+    //     } else {
+    //       $scope.listOfComments = [];
+    //       $scope.viewCardLike = true;
+    //       $scope.journey.journeyHighLight = ongo._id;
+    //       $scope.showLikeShow = "show-like-side-sec";
+    //       LikesAndComments.getLikes("post", ongo._id, callback);
+    //     }
+    //   }
+    //   $scope.previousLikeId = ongo._id;
+    // };
 
+    // local post like and share end
   // local life end
 })
 
@@ -13852,56 +13915,117 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.notificationCard = [];
   $scope.notificationCard.notifyString = "";
   var makeNotifyString = function(){
-    _.each($scope.notificationCard, function(notification){
-      switch (notification.type) {
-        case 'journeyRequest':
-        console.log(notification,'logo2');
-              notification.notifyString = notification.userFrom.name.bold() + ' wants to tag you in (gender) On The Go Journey - '+'<span>'+notification.data.name+'</span>';
-              console.log(notification,'logo2');
-          break;
-          case 'journeyLeft':
-          notification.notifyString = notification.userFrom.name.bold() + ' has ended (gender) On The Go Journey - '+'<span>'+notification.data.name+'</span>';
+      _.each($scope.notificationCard, function(notification){
+        switch (notification.type) {
+          case 'journeyRequest':
           console.log(notification,'logo2');
+                notification.notifyString = notification.userFrom.name.bold() + ' wants to tag you in (gender) On The Go Journey - '+'<span>'+notification.data.name+'</span>';
+                console.log(notification,'logo2');
             break;
-          case 'postLike':
+            case 'journeyLeft':
+            notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name + '</span> has ended (gender) <span class="avenir-heavy">On The Go Journey</span> - '+'<span class="avenir-heavy color-pink">'+notification.data.name+'</span>';
+            console.log(notification,'logo2');
+              break;
+            case 'postLike':
+              if(notification.data.type=='travel-life'){
+                notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name +'</span> has liked your <span class="avenir-heavy">On The Go Activity</span>';
+              } else{
+                  notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name +'</span> has liked your <span class="avenir-heavy">Local Life Activity</span>';
+              }
+              break;
+            case 'postFirstTime':
             if(notification.data.type=='travel-life'){
-              notification.notifyString = notification.userFrom.name.bold() +' has liked your on the go activity';
+              notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name +'</span> has added a post to (gender) <span class="avenir-heavy">On The Go Activity</span>';
             } else{
-                notification.notifyString = notification.userFrom.name.bold() +' has liked your local life activity';
+              notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name +'</span> has added a post to (gender) <span class="avenir-heavy"> Local Life </span> for the first time.';
+            }
+            case 'postComment':
+            if(notification.data.type=='travel-life'){
+              notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name +'</span> has commented your <span class="avenir-heavy">On The Go Activity</span>';
+            } else{
+              notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name +'</span> has commented your <span class="avenir-heavy">Local Life Activity</span>';
             }
             break;
-          case 'postFirstTime':
-          if(notification.data.type=='travel-life'){
-            notification.notifyString = notification.userFrom.name.bold() +' has added a post to (gender)'+'<b>'+' On The Go Activity'+ '</b>.';
-          } else{
-            notification.notifyString = notification.userFrom.name.bold() +' has added a post to (gender)'+'<b>'+' Local Life'+ '</b> for the first time.';
-          }
-          case 'postComment':
-          if(notification.data.type=='travel-life'){
-            notification.notifyString = notification.userFrom.name.bold() +' has commented your on the go activity';
-          } else{
-            notification.notifyString = notification.userFrom.name.bold() +' has commented your local life activity';
-          }
+            case 'postMentionComment':
+            if(notification.data.type=='travel-life'){
+              notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name +'</span> has mentioned you in a comment';
+            } else{
+                notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name +'</span> has mentioned you in a comment';
+            }
+            break;
+            case 'postTag':
+            if(notification.data.type=='travel-life'){
+              notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name +'</span> has tagged you to the <span class="avenir-heavy">On The Go Activity</span>';
+            } else{
+                notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name +'</span> has tagged you to the <span class="avenir-heavy">Local Life Activity</span>';
+            }
+            break;
+            case 'itineraryRequest':
+              notification.notifyString = '<span class="avenir-heavy">'+ notification.userFrom.name + '</span> has tagged you in an Itinerary - '+'<span class="avenir-heavy">'+notification.data.name+'</span>';
+            break;
+            case 'itineraryComment':
+              notification.notifyString = '<span class="avenir-heavy">'+ notification.userFrom.name + '</span> has commented on the Itinerary - '+'<span class= "color-pink avenir-heavy">'+notification.data.name+'</span>';
+            break;
+            case 'itineraryLike':
+              notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name + '</span> has liked the Itinerary - <span class ="color-pink avenir-heavy">'+notification.data.name+'</span>';
+            break;
+            case 'itineraryMentionComment':
+              notification.notifyString = notification.userFrom.name.bold() + ' has mentioned you in a comment on the  ititnerary - <span class ="color-pink avenir-heavy">'+notification.data.name+'</span>';
+              break;
+            case 'journeyComment':
+              notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name + '</span> has commented on the <span class="avenir-heavy">On Go Journey</span> - <span class="color-pink avenir-heavy">'+notification.data.name+'</span>';
+            break;
+            case 'journeyLike':
+              notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name + '</span> has liked the On Go Journey - <span class="color-pink avenir-heavy">'+notification.data.name+'</span>';
+            break;
+            case 'journeyMentionComment':
+                notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name + '</span> has mentioned you in a comment on the  On Go Journey - <span class="avenir-heavy color-pink">'+notification.data.name+'</span>';
+            break;
+            case 'userFollowing':
+              notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name + '</span> has started following you.';
+            break;
+            case 'userFollowingRequest':
+              notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name + '</span> has requested to follow your travel and local activities.';
+              break;
+            case 'userFollowingResponse':
+              notification.notifyString ='<span class="avenir-heavy">'+notification.userFrom.name + '</span> has accepted your follow request.';
+            break;
+            case 'photoComment':
+             if(notification.data.type=='travel-life'){
+               notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name +'</span> has commented on a photo in your on the go activity';
+             } else{
+               notification.notifyString = '<span class="avenir-heavy">' +notification.userFrom.name +'</span> has commented on a photo in your Local Life Activity';
+             }
+            break;
+            case 'photoMentionComment':
+             if(notification.data.type=='travel-life'){
+               notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name +'</span> has mentioned you in a comment';
+             } else{
+                notification.notifyString ='<span class="avenir-heavy">'+notification.userFrom.name +'</span> has mentioned you in a comment';
+             }
+            break;
+            case 'photoLike':
+              if(notification.data.type=='travel-life'){
+                notification.notifyString ='<span class="avenir-heavy">'+notification.userFrom.name +'</span> has liked a photo in your <span class="avenir-heavy">On The go Activity</span>';
+              } else{
+                notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name +'</span> has liked a photo in your <span class= "avenir-heavy">Local Life Activity</span>';
+              }
+            break;
+            case 'userBadge':
+              notification.notifyString = 'Congratulations! You have moved from <span class="avenir-heavy">(FROM)</span> to <span class="avenir-heavy">(TO)</span> . <br>Hope you enjoy your status and grow in your journeys.';
+            break;
+            case 'journeyAccept':
+              notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name + '</span> has accepted your request to join the <span class="avenir-heavy">On Go Activity</span> -<span class ="color-pink">'+notification.data.name+'</span>';
+            break;
+            case 'journeyReject':
+              notification.notifyString = '<span class="avenir-heavy">'+notification.userFrom.name + '</span> has rejected your request to join the <span class="avenir-heavy">On Go Activity</span> -'+'<span class ="color-pink">'+notification.data.name+'</span>';
+            break;
+          default:
           break;
-          case 'postMentionComment':
-          if(notification.data.type=='travel-life'){
-            notification.notifyString = notification.userFrom.name.bold() +' has mentioned you in a comment';
-          } else{
-              notification.notifyString = notification.userFrom.name.bold() +' has mentioned you in a comment';
-          }
-          break;
-          case 'postTag':
-          if(notification.data.type=='travel-life'){
-            notification.notifyString = notification.userFrom.name.bold() +' has tagged you to the On The Go Activity';
-          } else{
-              notification.notifyString = notification.userFrom.name.bold() +' has tagged you to the Local Life Activity';
-          }
-          break;
-        default:
-        break;
-      }
-    });
-  }
+        }
+      });
+    }
+
   $scope.getNotification = function(pageNo) {
     NavigationService.notificationWeb({
       pagenumber: pageNo
@@ -13912,58 +14036,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
   };
   $scope.getNotification($scope.pageNo);
-  // NOTIFICATION CARD JSON
-
-  // $scope.notificationCard = [{
-  //   notiType: "tagOnGo"
-  // }, {
-  //   notiType: "endOnGo"
-  // }, {
-  //   notiType: "tagItinerary"
-  // }, {
-  //   notiType: "checkinOnGo"
-  // }, {
-  //   notiType: "addPicOnGo"
-  // }, {
-  //   notiType: "commentPicOnGo"
-  // }, {
-  //   notiType: "commentPicLocal"
-  // }, {
-  //   notiType: "addVideoOnGo"
-  // }, {
-  //   notiType: "commentVideoOnGo"
-  // }, {
-  //   notiType: "commentVideoLocal"
-  // }, {
-  //   notiType: "addThought"
-  // }, {
-  //   notiType: "startedFollowing"
-  // }, {
-  //   notiType: "requestFollow"
-  // }, {
-  //   notiType: "acceptedRequest"
-  // }, {
-  //   notiType: "commentOnGo"
-  // }, {
-  //   notiType: "commentLocal"
-  // }, {
-  //   notiType: "commentMention"
-  // }, {
-  //   notiType: "likedOnGo"
-  // }, {
-  //   notiType: "likedLocal"
-  // }, {
-  //   notiType: "firstLocalLife"
-  // }, {
-  //   notiType: "newbieWings"
-  // }, {
-  //   notiType: "wingsGlobe"
-  // }, {
-  //   notiType: "globeWafarer"
-  // }, {
-  //   notiType: "wayfarerNomad"
-  // }];
-  // NOTIFICATION CARD JSON END
 
 })
 
@@ -13973,6 +14045,68 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.menutitle = NavigationService.makeactive("Search Results"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
   $scope.navigation = NavigationService.getnav();
+  $scope.searchCityText = "Mu";
+  $scope.searchCountryText = "a";
+  $scope.searchUserText = "a";
+  $scope.searchItineraryText = "a";
+  $scope.searchHashText = "a";
+  $scope.pagenumber = 1;
+  $scope.limit = 20;
+  $scope.getCitySearch = function(searchText,pagenumber,limit){
+    NavigationService.getSearchCityData({
+      search: searchText,
+      pagenumber: pagenumber,
+      limit: limit
+    },function(data){
+      $scope.viewSearchedCity = data.data;
+      console.log($scope.viewSearchedCity,'city');
+    })
+  };
+  $scope.getCountrySearch = function(searchText,pagenumber,limit) {
+    NavigationService.getSearchCountryData({
+      search: searchText,
+      pagenumber: pagenumber,
+      limit: limit
+    },function(data){
+      $scope.viewSearchedCountry = data.data;
+      console.log($scope.viewSearchedCountry,'country');
+    })
+  }
+  $scope.getItinerarySearch = function(searchText,pagenumber,limit) {
+    NavigationService.getSearchItineraryData({
+      search: searchText,
+      pagenumber: pagenumber,
+      limit: limit
+    },function(data){
+      $scope.viewSearchedItinerary = data.data;
+      console.log($scope.viewSearchedItinerary,'itinerary');
+    })
+  }
+  $scope.getHashSearch = function(searchText,pagenumber,limit) {
+    NavigationService.getSearchHashData({
+      search: searchText,
+      pagenumber: pagenumber,
+      limit: limit
+    },function(data){
+      $scope.viewSearchedHashtag = data.data;
+      console.log($scope.viewSearchedHashtag,'Hashtag');
+    })
+  }
+  $scope.getUserSearch = function(searchText,pagenumber,limit) {
+    NavigationService.getSearchUserData({
+      search: searchText,
+      pagenumber: pagenumber,
+      limit: limit
+    },function(data){
+      $scope.viewSearchedUser = data.data;
+      console.log($scope.viewSearchedUser,'user');
+    })
+  }
+  $scope.getCitySearch($scope.searchCityText,$scope.pagenumber,$scope.limit);
+  $scope.getCountrySearch($scope.searchCountryText,$scope.pagenumber,$scope.limit);
+  $scope.getItinerarySearch($scope.searchItineraryText,$scope.pagenumber,$scope.limit);
+  $scope.getHashSearch($scope.searchHashText,$scope.pagenumber,$scope.limit);
+  $scope.getUserSearch($scope.searchUserText,$scope.pagenumber,$scope.limit);
 
   // tab change
   var allsearchresult = ["views/content/search/search-traveller.html", "views/content/search/search-itinerary.html", "views/content/search/search-hashtag.html", "views/content/search/search-country.html",

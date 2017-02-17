@@ -1,34 +1,26 @@
 <div class="search-country">
   <div class="row">
     <div class="country-visited-tab search-country-tab">
-      <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="country in countryVisitedList track by $index">
+      <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="country in viewSearchedCountry track by $index">
         <div class="country-list-holder">
-          <div class="list-imgholder" style="background-image: url('{{country.countryImg}}');">
+          <div class="list-imgholder" style="background-image: url('{{country.countryCoverPhoto|uploadpath}}');">
             <!-- <img ng-src="{{country.countryId.countryCoverPhoto|uploadpath}}" alt="" class="img-responsive country-img">  -->
             <div class="list-info">
               <div class="clearfix">
                 <div class="pull-left">
-                  <h4 class="avenir-heavy">{{country.countryName}} <span>2015</span></h4>
+                  <h4 class="avenir-heavy">{{country.name}} </h4>
                 </div>
                 <div class="pull-right">
                   <div class="bucket-flag">
-                    <img src="img/flag.png" alt="Flag" class="img-responsive" width="30">
+                    <img src="{{country.flag|uploadpath}}" alt="Flag" class="img-responsive" width="30">
                   </div>
                 </div>
               </div>
             </div>
-            <!-- hover -->
-            <div class="country-list">
-              <div class="get-center full-width text-center">
-                <span class="year-remove avenir-medium"><i class="fa fa-calendar block mb5" ng-click="updateCountryVisited(country.countryId._id);"></i>
-                  Add Year
-                </span>
-                <span class="year-remove avenir-medium"><i class="fa fa-trash-o block" ng-click="removeCountryVisit();"></i>
-                  Remove
-                </span>
-              </div>
+            <div class="search-countrydetails ">
+              <span>Cities: <span>{{country.cityCount}}</span> | </span>
+              <span>Itineraries: <span>{{country.itineraryCount}}</span></span>
             </div>
-            <!-- hover end-->
           </div>
         </div>
       </div>

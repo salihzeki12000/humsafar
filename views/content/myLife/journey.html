@@ -577,7 +577,7 @@
                 <div class="scroll-local-life scrollme" ng-scrollbar rebuild-on="rebuild:me" rebuild-on-resize>
                   <div class="local-post" infinite-scroll="getMoreLocalPost();" infinite-scroll-disabled='scroll2.busy' infinite-scroll-distance='1'>
                     <!-- local life data -->
-                    <post-local-life ng-repeat="localPost in localLifeJourney track by $index" ongolocal="localPost">
+                    <post-local-life ng-repeat="localPost in localLifeJourney track by $index" ongolocal="localPost" get-comments-data="getLocalComments(ongolocal)" get-likes-data="getLocalLikes(ongolocal)">
                     </post-local-life>
                     <!-- local life data end-->
                   </div>
@@ -586,6 +586,110 @@
               </div>
             </div>
           </div>
+          <!-- whole window comment -->
+          <div class="notify-main whole-card-comment {{getCard}}" ng-show="viewCardComment">
+            <div class="container-fluid">
+              <div class="comment-like-notify">
+                <div class="like-comment-mainsec">
+                  <div class="clearfix">
+                    <div class="pull-left">
+                      <ul class="notify-like">
+                        <li>
+                          <a href=""><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(post.uniqueId,post._id)"></i></a>
+                        </li>
+                        <li>
+                          <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve" ng-click="focus('enterComment');"></a>
+                        </li>
+                        <li>
+                          <a href=""><img src="img/share.png" alt="" height="20" class="img-responisve"></a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="pull-right">
+                      <div class="notification-like" ng-init="commentLike={};">
+                        <!-- showLikes=!showLikes; -->
+                        <span class="notify-like-holder pointer avenir-roman" ng-click="getLikes(post._id);editOption(commentLike)">
+                  <i class="fa fa-heart color-blue" ng-class="{'view-like' : commentLike.backgroundClick == true , '' : commentLike.backgroundClick == false}" ></i>
+                 <span>{{post.likeCount|filterCount}}   </span>{{post.likeCount|singularPlural:'Likes'}}
+                        <!-- ng-show="showLikes" -->
+                        <div class="like-dropdown" ng-show="commentLike.backgroundClick;">
+                          <ul>
+                            <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
+                          </ul>
+                        </div>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- comment section -->
+                <div class="comment-sec">
+                  <div class="write-comment-text">
+                    <div class="commenter-img">
+                      <div class="commenter-imgholder">
+                        <img ng-src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
+                      </div>
+                    </div>
+                    <div class="comment-ur-text relate">
+                      <textarea name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="comment.text">
+                    </textarea>
+                      <find-tags ng-model="comment.text" element-id="enterComment" enable="bothTagging">
+                    </div>
+                  </div>
+                  <div class="clearfix comment-post">
+                    <div class="pull-right">
+                      <button class="btn btn-pink post-btn" ng-click=postPostsComment(post.uniqueId,comment.text,post._id)>Post</button>
+                    </div>
+                  </div>
+                  <div class="listing-comment">
+                    <div class="view-comment-list" ng-repeat="list in listOfComments.comment">
+                      <div class="commenter-img">
+                        <div class="commenter-imgholder">
+                          <img ng-src="{{list.user.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
+                        </div>
+                      </div>
+                      <div class="comment-container">
+                        <div class="commenter-text">
+                          <p class="avenir-roman"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name}}</span>{{list.text}}</p>
+                          <div class="like-reply-line">
+                            <!--<span class="color-blue avenir-roman mr5 pointer">Like</span>-->
+                            <!--<span class="color-blue avenir-roman mr5 pointer">Reply</span>-->
+                            <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                            | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- comment section end` -->
+              </div>
+            </div>
+          </div>
+          <!-- whole window comment end-->
+          <!-- whole window LIKE -->
+          <div class="like-side-sec  {{showLikeShow}}" ng-show="viewCardLike">
+            <div class="like-section">
+              <ul>
+                <!-- REPEAT BUDDY LIST -->
+                <li ng-repeat="like in listOfLikes.like">
+                  <div class="like-notify-buddy clearfix">
+                    <div class="like-buddy-pic">
+                      <img ng-src="{{like.profilePicture|uploadpath:51:51}}" alt="" class="img-responsive">
+                    </div>
+                    <div class="like-buddy-name">
+                      <p class="like-buddy-user">{{like.name}}</p>
+                      <p class="like-buddy-attag">@ <span>{{like.urlSlug}}</span></p>
+                    </div>
+                    <div class="like-buddy-follow-btn pull-right" ng-if="like._id!=userData._id">
+                      <button class=" btn btn-pink following-btn" ng-click=followFollowing(like);>{{like.following|followFollowingStatus}}</button>
+                    </div>
+                  </div>
+                </li>
+                <!-- REPEAT BUDDY LIST END -->
+              </ul>
+            </div>
+          </div>
+          <!-- whole window LIKE end-->
           <!-- end journey local life -->
         </div>
       </div>

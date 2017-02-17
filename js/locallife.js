@@ -32,7 +32,9 @@ viewlocalLife.directive('postLocalLife', ['$http','$filter','$uibModal','$window
   return {
     restrict: 'E',
     scope: {
-      localongo: "=ongolocal"
+      localongo: "=ongolocal",
+      getCommentsData: '&',
+      getLikesData: '&'
     },
     templateUrl: 'views/directive/local-post.html',
     link: function ($scope, element, attrs){
@@ -114,6 +116,7 @@ viewlocalLife.directive('postLocalLife', ['$http','$filter','$uibModal','$window
       // concating of photos & video of life end
       // localpost like and unlike
       $scope.likeLocalPost = function (uniqueId, _id) {
+        console.log(uniqueId,'un',_id,'id');
         console.log($scope.localongo.likeDone + "this call is from journey-post.html");
         $scope.localongo.likeDone = !$scope.localongo.likeDone;
         if ($scope.localongo.likeDone) {

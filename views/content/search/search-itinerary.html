@@ -1,48 +1,48 @@
 <div class="search-itinerary">
-  <div class="row">
-    <div class="col-md-4 col-sm-6" ng-repeat="usritinerary in usrItineraryCard track by $index">
+  <div class="row" masonry preserve-order>
+    <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="itinerary in viewSearchedItinerary track by $index">
       <div class="agt-itinerarycard search-itinerary-card ">
         <div class="itinerary-cardhead avenir-roman clearfix">
           <div class="search-itineraryhead-imgholder">
-            <img src="img/follower.jpg" class="img-responsive get-center">
+            <img src="{{itinerary.user.profilePicture|uploadpath}}" class="img-responsive get-center">
           </div>
           <div class="search-itineraryhead-detail">
-            <h4 class="avenir-heavy color-blue">yo mama</h4>
-            <p class="m-clear color-darkgrey"><i class="fa fa-calendar"></i><span class="ml5 ">{{usritinerary.timestampDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span>{{usritinerary.timestampHour}}</span></p>
+            <h4 class="avenir-heavy color-blue">{{itinerary.user.name}}</h4>
+            <p class="m-clear color-darkgrey"><i class="fa fa-calendar"></i><span class="ml5 ">{{itinerary.startTime | formatDate:'date'}}</span> | <i class="fa fa-clock-o mr5"></i> <span>{{itinerary.startTime | formatDate:'time'}}</span></p>
           </div>
           <a class="searchitinerary-follow">Follow</a>
         </div>
         <div class="itinerary-img">
           <div class="country-badges">
-            <div class="country-holder" ng-repeat="countryflagbadge in usritinerary.countryBadgesFlag track by $index">
-              <img ng-src="{{countryflagbadge}}" alt="" class="img-responsive">
+            <div class="country-holder" ng-repeat="countryflag in itinerary.countryVisited track by $index">
+              <img ng-src="{{countryflag.country.flag|uploadpath}}" alt="" class="img-responsive">
             </div>
-
-
-            <span class="country-count">+4</span>
+            <span class="country-count" ng-if="countryflag.country.length > 3">+4</span>
           </div>
-          <img ng-src="{{usritinerary.tripImg}}" alt="" class="img-responsive">
+          <img ng-src="{{itinerary.photos[0].name|uploadpath}}" alt="" class="img-responsive">
           <div class="itinerary-imgfoot ">
             <div class="imgfoot-top">
-              <h4 class="m-clear">{{usritinerary.itineraryTitle}}</h4>
+              <h4 class="m-clear">{{itinerary.name}}</h4>
             </div>
             <div class="imgfoot-bottom clearfix">
               <div class="pull-left">
                 <div class="journey-type">
                   <ul class="list-inline">
-                    <li ng-repeat="journeytype in usritinerary.tripCat">
-                      <a href=""><img src="img/sunset.png" ng-src="{{journeytype}}" alt="" height="20"></a>
+                    <li ng-repeat="journeytype in itinerary.itineraryType | limitTo : 3">
+                      <a href=""><img ng-src="{{journeytype|kindOfJourney:'white'}}" alt="" height="20"></a>
                     </li>
                   </ul>
                 </div>
               </div>
               <div class="pull-right">
                 <div class="rt-foot-marg">
-                  <div class="journey-cost">
-                    <span>$ {{usritinerary.tripCost}}</span>
+                  <div class="journey-cost" >
+                    <span ng-if="itinerary.type=='detail-itinerary'">
+                      <span>{{itinerary.currency}} {{itinerary.cost}}</span>
+                    </span>
                   </div>
                   <div class="days-spent">
-                    <p><span class="block">{{usritinerary.noDays}}</span>Days</p>
+                    <p><span class="block">{{itinerary.duration}}</span>Days</p>
                   </div>
                 </div>
               </div>
@@ -54,7 +54,7 @@
             <div class="user-social-item clearfix">
               <div class="pull-left">
                 <ul>
-                  <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
+                  <li><a href=""><i class="fa" ng-class="{'color-pink fa-heart': itinerary.likeDone == true,'fa-heart-o color-blue': itinerary.likeDone!== true}"></i></a></li>
                   <li>
                     <a href="">
                       <img src="img/comments.png" alt="" height="18" class="if-blue">
@@ -83,10 +83,12 @@
             <div class="social-likes-reviews">
               <div class="clearfix">
                 <div class="pull-left">
-                  <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{usritinerary.agtLikesCount}}</b>Likes</span>
+                  <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{itinerary.likeCount}}</b>Likes</span>
                   <span class="color-blue">
                   <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue">
-                  {{usritinerary.agtReviewCount}} Reviews ({{usritinerary.agtRating}}/5)</span>
+                  {{itinerary.userReviewCount}} Reviews
+                  <!-- ({{itinerary.userReviewCount}}/5) -->
+                </span>
                 </div>
                 <div class="pull-right">
                   <div class="post-travel-icon">
