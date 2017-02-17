@@ -238,7 +238,7 @@ viewlocalLife.directive('postLocalLife', ['$http','$filter','$uibModal','$window
             animation: true,
             templateUrl: "views/modal/local-imgview.html",
             scope: $scope,
-            windowTopClass: "local-imgview-pop"
+            windowTopClass: "notify-popup"
           })
         };
       // local pic pop up end
