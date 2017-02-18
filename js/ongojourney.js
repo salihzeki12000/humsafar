@@ -153,7 +153,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
     scope: {
       ongo: "=post",
       json: "=json",
-      profile: "=profile",
       getCommentsData: '&',
       getLikesData: '&'
     },
@@ -161,6 +160,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
     templateUrl: 'views/directive/journey-post.html',
     link: function ($scope, element, attrs) {
       // var counter = 0
+      $scope.userData =$.jStorage.get("profile");
       $scope.flexShow = true;
       $scope.videoFlex = true;
       $scope.indexPhotoCaption = -1;
@@ -958,7 +958,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
           type: "deletePost",
           _id: postId,
           uniqueId: journeyId
-        }
+        };
         console.log(formData);
         $http({
           url: adminURL + "/post/editDataWeb/",
@@ -986,10 +986,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       };
 
       $scope.savePostReview = function (values) {
-        var userData = $.jStorage.get("profile");
         var formData = {
           "post": $scope.ongo._id,
-          // "user": userData._id,
           "review": values.review,
           "rating": values.rating
         };

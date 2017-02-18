@@ -22,26 +22,26 @@ var activity = angular.module('activity', [])
                 }
                 activity.likeUnlikeFlag = "post";
                 activity.location = activity.checkIn.location;
-                // owner of the card 
+                // owner of the card
                 activity.owner = activity.postCreator;
                 if (activity.following) {
                   activity.owner.following = activity.following;
                 } else {
                   activity.owner.following = false;
                 }
-                // owner of the card                 
+                // owner of the card
                 break;
               case "on-the-go-journey":
                 activity.class = "travel-life";
                 activity.likeUnlikeFlag = "journey";
-                // owner of the card 
+                // owner of the card
                 activity.owner = activity.user;
                 if (activity.following) {
                   activity.owner.following = activity.following;
                 } else {
                   activity.owner.following = false;
                 }
-                // owner of the card 
+                // owner of the card
                 break;
               case "quick-itinerary":
                 activity.class = "user-quick-itinerary";
@@ -49,14 +49,14 @@ var activity = angular.module('activity', [])
                 var len = activity.photos.length - 1;
                 var randomNum = Math.floor((Math.random() * len) + 0);
                 activity.coverPhoto = activity.photos[randomNum].name;
-                // owner of the card 
+                // owner of the card
                 activity.owner = activity.creator;
                 if (activity.following) {
                   activity.owner.following = activity.following;
                 } else {
                   activity.owner.following = false;
                 }
-                // owner of the card 
+                // owner of the card
                 break;
               case "detail-itinerary":
                 activity.class = "user-detail-itinerary";
@@ -64,26 +64,26 @@ var activity = angular.module('activity', [])
                 var len = activity.photos.length - 1;
                 var randomNum = Math.floor((Math.random() * len) + 0);
                 activity.coverPhoto = activity.photos[randomNum].name;
-                // owner of the card 
+                // owner of the card
                 activity.owner = activity.user;
                 if (activity.following) {
                   activity.owner.following = activity.following;
                 } else {
                   activity.owner.following = false;
                 }
-                // owner of the card 
+                // owner of the card
                 break;
               case "ended-journey":
                 activity.class = "travel-life";
                 activity.likeUnlikeFlag = "journey";
-                // owner of the card 
+                // owner of the card
                 activity.owner = activity.user;
                 if (activity.following) {
                   activity.owner.following = activity.following;
                 } else {
                   activity.owner.following = false;
                 }
-                // owner of the card 
+                // owner of the card
                 break;
               case "local-life":
                 if (activity.photos.length == 0 && activity.videos.length == 0) {
@@ -92,14 +92,14 @@ var activity = angular.module('activity', [])
                   activity.class = "local-life";
                 }
                 activity.likeUnlikeFlag = "post";
-                // owner of the card 
+                // owner of the card
                 activity.owner = activity.postCreator;
                 if (activity.following) {
                   activity.owner.following = activity.following;
                 } else {
                   activity.owner.following = false;
                 }
-                // owner of the card 
+                // owner of the card
                 break;
             }
 

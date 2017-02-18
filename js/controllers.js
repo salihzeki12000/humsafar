@@ -4811,7 +4811,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   };
   //Photo comment popup end
 
-
+  $scope.likePhoto = function (uniqueId, _id, additionalId) {
+        console.log(uniqueId, _id, additionalId);
+        $scope.listOfComments.likeDone = !$scope.listOfComments.likeDone;
+        if ($scope.listOfComments.likeDone) {
+          if ($scope.listOfComments.likeCount == undefined) {
+            $scope.listOfComments.likeCount = 1;
+          } else {
+            $scope.listOfComments.likeCount = $scope.listOfComments.likeCount + 1;
+          }
+          LikesAndComments.likeUnlike("photo", "like", uniqueId, _id, additionalId)
+        } else {
+          $scope.listOfComments.likeCount = $scope.listOfComments.likeCount - 1;
+          LikesAndComments.likeUnlike("photo", "unlike", uniqueId, _id, additionalId)
+        }
+      };
+      
   $scope.getJournItiMoments = function(obj) {
     // $scope.perMonthMoments = [];
     console.log("getJournItiMoments called by ng-click");

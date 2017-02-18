@@ -224,7 +224,7 @@ var navigationservice = angular.module('navigationservice', [])
       },
       editUserData: function (userData, status, callback) {
         // console.log(userData, status);
-        var formData = _.clone(userData);
+        var formData = _.cloneDeep(userData);
         var object = {};
         switch (status) {
           case 1:

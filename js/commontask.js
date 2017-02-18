@@ -292,61 +292,62 @@ commontask.directive('findTags', function (LikesAndComments) {
         $scope.endTagIndex = null;
         $scope.hashTag;
         currentPosition = ctl.selectionStart - 1;
-        // console.log(currentPosition);
+        console.log(currentPosition);
         var counter = currentPosition;
 
-        //for finding hashtags 
-        if (text[currentPosition] != " " || text[currentPosition] != "#" || text[currentPosition] != "@") {
-          $scope.hashTags = [];
-          while (text[counter] != " " && text[counter] != "#" && text[counter] != "@" && counter >= 0) {
-            counter--;
-          }
-          if ((text[counter] == "#" || text[counter] == "@") && text[counter + 1] != "#" && text[counter + 1] != "@") {
-            $scope.startTagIndex = counter;
-          } else if (text[counter + 1] == "#" || text[counter + 1] == "@") {
-            $scope.startTagIndex = counter + 1;
-          }
-          counter = counter + 1;
-          while ((counter <= text.length) && ($scope.startTagIndex != null)) {
-            if (text[counter] == " " || text[counter] == "#" || text[counter] == "@") {
-              $scope.endTagIndex = counter - 1;
-              break;
-            } else if (counter == text.length - 1) {
-              $scope.endTagIndex = counter;
-              break;
+        //for finding hashtags
+        if (currentPosition != -1 && currentPosition !== undefined) {
+          if (text[currentPosition] != " " || text[currentPosition] != "#" || text[currentPosition] != "@") {
+            $scope.hashTags = [];
+            while (text[counter] != " " && text[counter] != "#" && text[counter] != "@" && counter >= 0) {
+              counter--;
             }
-            counter++;
-          }
-          if ($scope.startTagIndex != null && $scope.endTagIndex != null) {
-            // console.log("testing", $scope.startTagIndex, $scope.endTagIndex);
-            $scope.flag = text[$scope.startTagIndex];
-            $scope.showTags = false;
-            $scope.showBuddies = false;
-            // $scope.hashTag = text.substring($scope.startTagIndex, $scope.endTagIndex + 1);
-            var tagCallback = function (data) {
-              $scope.hashTags = data.data;
-              console.log($scope.hashTags);
-              $scope.showTags = true;
-              $scope.showBuddies = false;
-            };
-            var buddiesCallback = function (data) {
-              $scope.buddies = data.data;
-              console.log($scope.buddies);
+            if ((text[counter] == "#" || text[counter] == "@") && text[counter + 1] != "#" && text[counter + 1] != "@") {
+              $scope.startTagIndex = counter;
+            } else if (text[counter + 1] == "#" || text[counter + 1] == "@") {
+              $scope.startTagIndex = counter + 1;
+            }
+            counter = counter + 1;
+            while ((counter <= text.length) && ($scope.startTagIndex != null)) {
+              if (text[counter] == " " || text[counter] == "#" || text[counter] == "@") {
+                $scope.endTagIndex = counter - 1;
+                break;
+              } else if (counter == text.length - 1) {
+                $scope.endTagIndex = counter;
+                break;
+              }
+              counter++;
+            }
+            if ($scope.startTagIndex != null && $scope.endTagIndex != null) {
+              // console.log("testing", $scope.startTagIndex, $scope.endTagIndex);
+              $scope.flag = text[$scope.startTagIndex];
               $scope.showTags = false;
-              $scope.showBuddies = true;
+              $scope.showBuddies = false;
+              // $scope.hashTag = text.substring($scope.startTagIndex, $scope.endTagIndex + 1);
+              var tagCallback = function (data) {
+                $scope.hashTags = data.data;
+                console.log($scope.hashTags);
+                $scope.showTags = true;
+                $scope.showBuddies = false;
+              };
+              var buddiesCallback = function (data) {
+                $scope.buddies = data.data;
+                console.log($scope.buddies);
+                $scope.showTags = false;
+                $scope.showBuddies = true;
+              }
+              if ($scope.flag == "#" && ($scope.enable == 'hashTag' || $scope.enable == 'bothTagging')) {
+                $scope.hashTag = text.substring($scope.startTagIndex, $scope.endTagIndex + 1);
+                LikesAndComments.searchTags($scope.hashTag, tagCallback);
+              } else if ($scope.flag == "@" && ($scope.enable == 'tagFriends' || $scope.enable == 'bothTagging')) {
+                $scope.hashTag = text.substring($scope.startTagIndex + 1, $scope.endTagIndex + 1);
+                LikesAndComments.searchBuddies($scope.hashTag, buddiesCallback);
+              }
+              console.log($scope.hashTag);
             }
-
-
-            if ($scope.flag == "#" && ($scope.enable == 'hashTag' || $scope.enable == 'bothTagging')) {
-              $scope.hashTag = text.substring($scope.startTagIndex, $scope.endTagIndex + 1);
-              LikesAndComments.searchTags($scope.hashTag, tagCallback);
-
-            } else if ($scope.flag == "@" && ($scope.enable == 'tagFriends' || $scope.enable == 'bothTagging')) {
-              $scope.hashTag = text.substring($scope.startTagIndex + 1, $scope.endTagIndex + 1);
-              LikesAndComments.searchBuddies($scope.hashTag, buddiesCallback);
-            }
-            console.log($scope.hashTag);
           }
+        } else {
+          console.log("invalid currentPosition");
         }
       });
 
