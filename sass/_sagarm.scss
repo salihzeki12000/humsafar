@@ -3616,7 +3616,7 @@ q {
 }
 
 .notification-card {
-  min-height: 240px;
+  min-height: 245px;
   // max-height: 230px;
   border-radius: 5px;
   margin: 10px 0;
@@ -3653,6 +3653,11 @@ q {
   border-radius: 19px;
   margin-top: -25px;
   overflow: hidden;
+}
+
+.notify-pictint{
+  @include position(absolute, 0);
+  background-color: rgba(0,0,0,0.3);
 }
 
 .notification-timestamp {
@@ -3723,6 +3728,9 @@ q {
   width: 48%;
   height: 120px;
   overflow: hidden;
+  img{
+    height: 100%;
+  }
 
   .addpic-count {
     color: #fff;
@@ -3835,6 +3843,7 @@ q {
   padding: 0;
   font-size: 15px;
   color: #fff;
+  line-height: 30px;
   text-align: center;
 
   &:active,
@@ -3842,6 +3851,17 @@ q {
   &:hover {
     color: #fff;
   }
+}
+.notification-social-btn{
+  .fb-icon:hover,
+  .twi-icon:hover,
+  .google-icon:hover,
+  .pin-icon:hover,
+  .instagram-icon:hover,
+  .linkedin-icon:hover {
+    color: #fff;
+  }
+
 }
 //NOTIFICATION PAGE END
 //DETAILED ITINERARY SHOW LISTED POPUP
@@ -4166,10 +4186,33 @@ q {
 
 .search-country-tab .country-list-holder{
   border-radius: 4px;
+  &:hover{
+    box-shadow: 6px 7px 4px #a0a0a0;
+  }
 }
 
 .search-country {
   padding: 30px 0;
+  .search-countrydetails {
+    width: 100%;
+    padding: 10px 10px 5px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+    color: #fff;
+    font-size: 12px;
+    text-shadow: 2px 2px 2px #000;
+    z-index: 1;
+  }
+}
+
+.search-country-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    width: 85%;
 }
 // SEARCH COUNTRY END
 // SEARCH CITY
@@ -4204,6 +4247,13 @@ q {
 
 .search-city-tab .country-list-holder{
   border-radius: 4px;
+}
+.search-city-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    width: 70%;
 }
 // SEARCH CITY END
 
@@ -4253,6 +4303,31 @@ q {
   @extend .avenir-roman;
 }
 // SEARCH ITINERARY END
+
+// SEARCH HASHTAG
+.search-hasshtag{
+  padding: 30px 0;
+}
+.search-hashtag-post{
+  margin: 10px 0 20px;
+  .post-post-main{
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px #888;
+  }
+  .user-social-item{
+    border-top: 1px solid #b5b5b5;
+  }
+  .tag-ongo-journey{
+    @include transform(translateY(-50%));
+  }
+  .tag-local-hashtag-journey{
+    background-color: $brand-cyan;
+  }
+  .post-rating{
+    margin-top: 10px;
+  }
+}
+// SEARCH HASHTAG END
 
 // SEARCH RESULT PAGE END
 

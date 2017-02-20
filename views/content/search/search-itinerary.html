@@ -15,7 +15,7 @@
         <div class="itinerary-img">
           <div class="country-badges">
             <div class="country-holder" ng-repeat="countryflag in itinerary.countryVisited track by $index">
-              <img ng-src="{{countryflag.country.flag|uploadpath}}" alt="" class="img-responsive">
+              <img ng-src="{{countryflag.country.flag|uploadpath:35:35:'cover'}}" alt="" class="img-responsive">
             </div>
             <span class="country-count" ng-if="countryflag.country.length > 3">+4</span>
           </div>

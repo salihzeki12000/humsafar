@@ -1,9 +1,9 @@
 <div class="notification-page">
-  <div class="container">
+  <div class="container" infinite-scroll="loadMoreNotification()" infinite-scroll-disabled="notifyScroll.busy">
     <div class="row">
       <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="notify in notificationCard track by $index">
         <!-- Notification Card -->
-        <div class="notification-card" >
+        <div class="notification-card">
           <!-- READ NOTIFICATION CHECK -->
           <span class="read-notification"><i class="fa fa-check" aria-hidden="true"></i></span>
           <!-- READ NOTIFICATION CHECK END -->
@@ -17,7 +17,7 @@
             <div class="notification-profile">
               <img ng-src="{{notify.userFrom.profilePicture|uploadpath:50:50:'cover'}}" alt="{{notify.userFrom.name}}" class="img-responsive">
             </div>
-            <p class="notification-timestamp"><i class="fa fa-calendar"></i><span class="ml5 ">{{notify.createdAt | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o "></i> {{notify.createdAt | date:  'hh.mm a'}}<span></span></p>
+            <p class="notification-timestamp"><i class="fa fa-calendar"></i><span class="ml5 ">{{notify.createdAt | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o "></i> {{notify.createdAt | date: 'hh.mm a'}}<span></span></p>
             <!-- PROFILE PIC AND TIMESTAMP END user from detail-->
 
             <!-- NOTIFICATION DETAIL -->
@@ -53,13 +53,9 @@
               </div>
               <!-- END ON GO END -->
 
-              <!-- ADD THOUGHT -->
-              <p ng-if="notification.notiType == 'addThought'">"<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam placeat quisquam perspiciatis veritatis, </span>"</p>
-              <!-- ADD THOUGHT END -->
-
-              <!-- FOLLOWER DETAILS -->
+              <!-- userFollowing FOLLOWER DETAILS -->
               <div class="" ng-if="notify.type == 'userFollowingRequest'">
-                <div class="follower-details" >
+                <div class="follower-details">
                   <div class="notification-follower-detail">
                     <span class="notifcation-follower-count">1.4m</span>
                     <span class="notifcation-follower-property">Followers</span>
@@ -82,7 +78,7 @@
               </div>
               <!-- FOLLOWER DETAILS END -->
 
-              <!-- FOLLOWER DETAILS -->
+              <!-- userFollowing  FOLLOWER DETAILS -->
               <div class="" ng-if="notify.type == 'userFollowing'">
                 <div class="follower-details">
                   <div class="notification-follower-detail">
@@ -108,51 +104,86 @@
               <!-- FOLLOWER DETAILS END -->
 
               <!-- TAG ITINERARY -->
-              <div class="notification-tagitinerary-action" ng-if="notify.type == 'itineraryRequest'">
+              <div class="notification-checkin-ongo-photo notification-tagitinerary-action " ng-if="notify.type == 'itineraryRequest'">
                 <p class="">View to add to your My Life.</p>
                 <div class="notification-tagitinerary-photo">
-                  <img src="img/london.jpg" alt="" class="img-responsive get-center">
+                  <img ng-src="{{notify.data.name}}" alt="" class="img-responsive get-center">
                 </div>
               </div>
               <!-- TAG ITINERARY END -->
 
-              <!-- CHECKIN ON GO -->
-              <div class="notification-checkin-ongo-photo" ng-if="notification.notiType == 'checkinOnGo'">
-                <img src="img/london.jpg" alt="" class="img-responsive get-center">
-              </div>
-              <!-- CHECKIN ON GO END -->
+              <!-- PHOTOLIKE START -->
+              <div class="notification-checkin-ongo-photo" ng-if="notify.type == 'photoLike' || notify.type == 'photoComment' || notify.type == 'photoMentionComment'">
+                <img ng-src="{{notify.data.name|uploadpath:250:125:'cover'}}" alt="" class="img-responsive" />
 
-              <!-- NEWBIE TO WINGS USER BADGE -->
+                <!-- IF TYPE.VIDEO LIKE -->
+                <span ng-if="notify.data.type == 'videos'" class="notification-video-thumbicon color-pink"><i class="fa fa-youtube-play"></i></span>
+                <!-- <span class="notification-video-thumbicon notification-youtube-local"><i class="fa fa-youtube-play"></i></span> -->
+                <!-- IF TYPE.VIDEO LIKE END -->
+              </div>
+              <!-- PHOTOLIKE END -->
+
+              <!-- postLike || postTag || postComment || postMentionComment -->
+              <div class="notify-post-type" ng-if="notify.type=='postLike' || notify.type=='postTag' || notify.type=='postComment' || notify.type=='postMentionComment' || notify.type=='postFirstTime'">
+                <!-- if video present -->
+                <div class="video-notify notification-addvideo-ongo-photo" ng-if="notify.data.videos.length>0">
+                  <img ng-src="{{notify.data.videos[0]|uploadpath:250:125:'cover'}}" alt="" class="img-responsive">
+                  <span class="notification-video-thumbicon" ng-class="{'color-pink': notify.data.type=='travel-life', 'color-cyan':notify.data.type=='local-life'}"><i class="fa fa-youtube-play"></i></span>
+                </div>
+                <!-- if video present end-->
+
+                <!-- if photo present -->
+                <div class="notification-checkin-ongo-photo photos-notify" ng-if="notify.data.videos.length==0 &&  notify.data.photos.length>0">
+                  <img ng-src="{{notify.data.photos[0]|uploadpath:250:125:'cover'}}" alt="" class="img-responsive" />
+                </div>
+                <!-- if photo present end-->
+
+                <!-- if checkIn present -->
+                <div class="notification-checkin-ongo-photo notification-checkin-ongo-photo checkin-notify" ng-if="notify.data.videos.length==0 && notify.data.photos.length==0 && notify.data.checkIn.lat!=='' ">
+                  <img ng-src="{{notify.data.imageUrl|uploadpath:250:125:'cover'}}" alt="" class="img-responsive">
+                </div>
+                <!-- if checkIn present end-->
+
+                <!-- if thoughts present-->
+                <div class="thoughts-notify" ng-if="notify.data.videos.length==0 && notify.data.photos.length==0 && notify.data.checkIn.lat=='' &&  notify.data.thoughts!==''">
+                  <!-- " -->
+                  <p>"{{notify.data.thoughts}}"</p>
+                </div>
+                <!-- if thoughts present end-->
+
+              </div>
+              <!-- postLike || postTag || postComment || postMentionComment END -->
+
+              <!-- JOURNEY like, COMMENT START -->
+              <div class="notification-joureny-like" ng-if="notify.type == 'journeyLike' || notify.type == 'journeyComment' || notify.type == 'journeyMentionComment'">
+                <div class="notification-checkin-ongo-photo" ng-if="notify.data.coverPhoto!==null">
+                  <img ng-src="{{notify.data.coverPhoto|uploadpath:250:125:'cover'}}" alt="" class="img-responsive" />
+                </div>
+                <div class="notification-checkin-ongo-photo" ng-if="notify.data.coverPhoto ==null && notify.data.startLocationPic!==''">
+                  <img ng-src="{{notify.data.startLocationPic|uploadpath:250:125:'cover'}}" alt="" class="img-responsive" />
+                </div>
+              </div>
+              <!--  JOURNEY like, COMMENT END -->
+
+
+              <!-- ALL USER BADGE  -->
               <div class="notification-social-btn text-center" ng-if="notify.type == 'userBadge'">
-                <button type="button" name="button" class="btn btn-notification-social fb-icon"><i class="fa fa-facebook" aria-hidden="true"></i></button>
-                <button type="button" name="button" class="btn btn-notification-social twi-icon"><i class="fa fa-twitter" aria-hidden="true"></i></button>
-                <button type="button" name="button" class="btn btn-notification-social google-icon"><i class="fa fa-google-plus" aria-hidden="true"></i></button>
-                <button type="button" name="button" class="btn btn-notification-social pin-icon"><i class="fa fa-pinterest-p" aria-hidden="true"></i></button>
-                <button type="button" name="button" class="btn btn-notification-social instagram-icon"><i class="fa fa-instagram" aria-hidden="true"></i></button>
-                <button type="button" name="button" class="btn btn-notification-social linkedin-icon"><i class="fa fa-linkedin" aria-hidden="true"></i></button>
+                <a class="btn btn-notification-social fb-icon"><i class="fa fa-facebook"></i></a>
+                <a class="btn btn-notification-social twi-icon"><i class="fa fa-twitter"></i></a>
+                <a class="btn btn-notification-social google-icon"><i class="fa fa-google-plus"></i></a>
+                <a class="btn btn-notification-social pin-icon"><i class="fa fa-pinterest-p"></i></a>
+                <a class="btn btn-notification-social instagram-icon"><i class="fa fa-instagram"></i></a>
+                <a class="btn btn-notification-social linkedin-icon"><i class="fa fa-linkedin"></i></a>
               </div>
-              <!-- NEWBIE TO WINGS USER BADGE END -->
+              <!-- ALL USER BADGE END -->
 
-              <!-- ADD / COMMENT PHOTO -->
-              <div class="notification-addpic-ongo-action" ng-if="notification.notiType == 'addPicOnGo' || notification.notiType == 'commentPicOnGo' || notification.notiType == 'commentPicLocal'">
+              <!-- ITINERARY LIKE, COMMENT, MENTION COMMENT -->
+              <div class="notification-addpic-ongo-action" ng-if="notify.type == 'itineraryLike' || notify.type == 'itineraryComment' ||  notify.type ==  'itineraryMentionComment' ">
                 <div class="notification-addpic-ongo-photo">
-                  <img src="img/london.jpg" alt="" class="img-responsive get-center">
-                </div>
-                <div class="notification-addpic-ongo-photo ml5">
-                  <img src="img/london.jpg" alt="" class="img-responsive get-center">
-                  <span class="addpic-count"><span>10</span> More</span>
+                  <img ng-src="{{notify.data.name|uploadpath:250:125:'cover'}}" alt="" class="img-responsive" />
                 </div>
               </div>
-              <!-- ADD / COMMENT PHOTO END -->
-
-              <!-- ADD / COMMENT VIDEO  -->
-              <div class="notification-addvideo-ongo-photo" ng-if="notification.notiType == 'addVideoOnGo' || notification.notiType == 'commentVideoOnGo' || notification.notiType == 'commentVideoLocal'">
-                <img src="img/london.jpg" alt="" class="img-responsive get-center">
-                <span ng-if="notification.notiType == 'addVideoOnGo' || notification.notiType == 'commentVideoOnGo'" class="notification-video-thumbicon color-pink"><i class="fa fa-youtube-play"></i></span>
-                <span ng-if="notification.notiType == 'commentVideoLocal'" class="notification-video-thumbicon notification-youtube-local"><i class="fa fa-youtube-play"></i></span>
-              </div>
-              <!-- ADD / COMMENT VIDEO END -->
-
+              <!-- ITINERARY LIKE, COMMENT, MENTION COMMENT  END -->
             </div>
             <!-- NOTIFICATION TAG ON GO ACTION END -->
           </div>
