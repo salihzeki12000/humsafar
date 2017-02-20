@@ -154,13 +154,14 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       ongo: "=post",
       json: "=json",
       getCommentsData: '&',
-      getLikesData: '&'
+      getLikesData: '&',
+      closeBackDrop: '&'
     },
     // controller: 'OnGoJourneyCtrl',
     templateUrl: 'views/directive/journey-post.html',
     link: function ($scope, element, attrs) {
       // var counter = 0
-      $scope.userData =$.jStorage.get("profile");
+      $scope.userData = $.jStorage.get("profile");
       $scope.flexShow = true;
       $scope.videoFlex = true;
       $scope.indexPhotoCaption = -1;
@@ -945,7 +946,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
           $scope.time.am_pm = val;
         }
       }
-      $scope.confirmDelete = function(){
+      $scope.confirmDelete = function () {
         modal = $uibModal.open({
           animation: true,
           templateUrl: 'views/modal/delete-post.html',

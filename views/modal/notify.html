@@ -62,22 +62,26 @@
               <button class="btn btn-pink post-btn" ng-click=postPhotosComment(listOfComments.name,text,listOfComments.post,listOfComments._id)>Post</button>
             </div>
           </div>
-          <div class="view-comment-list" ng-repeat="list in listOfComments.comment">
-            <div class="commenter-img">
-              <div class="commenter-imgholder">
-                <img ng-src="{{list.user.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
-              </div>
-            </div>
-            <div class="comment-container">
-              <div class="commenter-text">
-                <!--<p class="avenir-roman"><span class="commenter-name color-blue avenir-heavy mr5">Andreas Christina</span>Lorem ipsum dolor sit amet,
+          <div class="view-comment-scroll">
+            <div infinite-scroll="getMoreComments(listOfComments._id)" infinite-scroll-parent="true">
+              <div class="view-comment-list" ng-repeat="list in listOfComments.comment">
+                <div class="commenter-img">
+                  <div class="commenter-imgholder">
+                    <img ng-src="{{list.user.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
+                  </div>
+                </div>
+                <div class="comment-container">
+                  <div class="commenter-text">
+                    <!--<p class="avenir-roman"><span class="commenter-name color-blue avenir-heavy mr5">Andreas Christina</span>Lorem ipsum dolor sit amet,
                   consectetur adipisicing elit. Qui consectetur, iste asperiores similique et veniam tempora nisi. Dignissimos
                   vel, nesciunt fugit odio nobis modi earum nisi iste soluta deserunt at.</p>-->
-                <p class="avenir-roman"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name}}</span>{{list.text}}</p>
-                <div class="like-reply-line">
-                  <span class="color-blue avenir-roman mr5 pointer">Like</span>
-                  <span class="color-blue avenir-roman mr5 pointer">Reply</span>
-                  <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                  | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
+                    <p class="avenir-roman"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name|whoIsThis:list.user._id:userData._id}}</span>{{list.text}}</p>
+                    <div class="like-reply-line">
+                      <span class="color-blue avenir-roman mr5 pointer">Like</span>
+                      <span class="color-blue avenir-roman mr5 pointer">Reply</span>
+                      <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                      | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

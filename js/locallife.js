@@ -1,43 +1,43 @@
-var viewlocalLife = angular.module('locallife',[])
-.factory('localLife',function($http,$filter){
-  return{
-    getLocalJourney: function(callback,localData, errorCallback){
-      // console.log(localData,'data kya hai');
-      console.log(localData);
-      $http({
-        url: adminURL + "/journey/myLocalLifeWeb",
-        method: "POST",
-        data: {
-          "type": localData.type,
-          "pagenumber": localData.pagenumber,
-          "month": localData.month,
-          "year": localData.year,
-          "categories": localData.checkInType,
-          // "categories": [],
-          "photos": localData.photos,
-          "videos": localData.videos,
-          "thoughts": localData.thoughts,
-          "rating": localData.rating
-          // "rating": []
-        }
-      }).success(function(data){
-        var localLifeData = data;
-        callback(localLifeData);
-        console.log(localLifeData,'localLife');
-      });
+var viewlocalLife = angular.module('locallife', [])
+  .factory('localLife', function ($http, $filter) {
+    return {
+      getLocalJourney: function (callback, localData, errorCallback) {
+        // console.log(localData,'data kya hai');
+        console.log(localData);
+        $http({
+          url: adminURL + "/journey/myLocalLifeWeb",
+          method: "POST",
+          data: {
+            "type": localData.type,
+            "pagenumber": localData.pagenumber,
+            "month": localData.month,
+            "year": localData.year,
+            "categories": localData.checkInType,
+            // "categories": [],
+            "photos": localData.photos,
+            "videos": localData.videos,
+            "thoughts": localData.thoughts,
+            "rating": localData.rating
+            // "rating": []
+          }
+        }).success(function (data) {
+          var localLifeData = data;
+          callback(localLifeData);
+          console.log(localLifeData, 'localLife');
+        });
+      }
     }
-  }
-});
-viewlocalLife.directive('postLocalLife', ['$http','$filter','$uibModal','$window','$timeout','localLife','LikesAndComments', function ($http,$filter, $uibModal, $window, $timeout, localLife, LikesAndComments) {
+  });
+viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$window', '$timeout', 'localLife', 'LikesAndComments', function ($http, $filter, $uibModal, $window, $timeout, localLife, LikesAndComments) {
   return {
     restrict: 'E',
     scope: {
       localongo: "=ongolocal",
-      getCommentsData: '&',
-      getLikesData: '&'
+      openCommentSection: '&',
+      openLikeSection: '&'
     },
     templateUrl: 'views/directive/local-post.html',
-    link: function ($scope, element, attrs){
+    link: function ($scope, element, attrs) {
       var getLocation = {};
       $scope.flexShow = true;
       $scope.videoFlex = true;
@@ -63,7 +63,7 @@ viewlocalLife.directive('postLocalLife', ['$http','$filter','$uibModal','$window
         $scope.localongo.onDisplay = flagType;
         console.log($scope.index, $scope.localongo.onDisplay);
       };
-        var makeLocalString = function(){
+      var makeLocalString = function () {
         if ($scope.localongo.buddies) {
           $scope.localongo.buddiesCount = $scope.localongo.buddies.length;
         }
@@ -105,7 +105,7 @@ viewlocalLife.directive('postLocalLife', ['$http','$filter','$uibModal','$window
       makeLocalString();
 
       // concating of photos & video of life
-      if($scope.localongo && $scope.localongo.photos && $scope.localongo.videos){
+      if ($scope.localongo && $scope.localongo.photos && $scope.localongo.videos) {
         $scope.localongo.photosVideos = $scope.localongo.videos.concat($scope.localongo.photos);
         if ($scope.localongo && $scope.localongo.photosVideos[0] && $scope.localongo.photosVideos[0].thumbnail) {
           $scope.localongo.onDisplay = "videos";
@@ -116,11 +116,11 @@ viewlocalLife.directive('postLocalLife', ['$http','$filter','$uibModal','$window
       // concating of photos & video of life end
       // localpost like and unlike
       $scope.likeLocalPost = function (uniqueId, _id) {
-        console.log(uniqueId,'un',_id,'id');
+        console.log(uniqueId, 'un', _id, 'id');
         console.log($scope.localongo.likeDone + "this call is from journey-post.html");
         $scope.localongo.likeDone = !$scope.localongo.likeDone;
         if ($scope.localongo.likeDone) {
-          if ($scope.localongo.likeCount == undefined) {
+          if ($scope.localongo.likeCount === undefined) {
             $scope.localongo.likeCount = 1;
           } else {
             $scope.localongo.likeCount = $scope.localongo.likeCount + 1;
@@ -144,8 +144,8 @@ viewlocalLife.directive('postLocalLife', ['$http','$filter','$uibModal','$window
           return new Array(remainCount);
         }
       };
-      $scope.rateLocalJourney = function(localPost){
-        console.log(localPost,'check in');
+      $scope.rateLocalJourney = function (localPost) {
+        console.log(localPost, 'check in');
         $scope.localCheckIn = localPost.checkIn;
         if (localPost.review.length !== 0) {
           console.log("Edit Rating");
@@ -166,10 +166,10 @@ viewlocalLife.directive('postLocalLife', ['$http','$filter','$uibModal','$window
       $scope.ratingValue = {};
       $scope.ratingValue.review = "";
       $scope.ratingValue.rating = "";
-      $scope.saveLocalPostReview =  function(values,postData) {
+      $scope.saveLocalPostReview = function (values, postData) {
         $scope.ratingValue.review = values.review;
         $scope.ratingValue.rating = values.rating;
-        console.log(postData,'post data kya hai');
+        console.log(postData, 'post data kya hai');
         var formData = {
           "post": $scope.localongo._id,
           "review": values.review,
@@ -179,10 +179,10 @@ viewlocalLife.directive('postLocalLife', ['$http','$filter','$uibModal','$window
           url: adminURL + "/review/saveWeb",
           method: "POST",
           data: formData
-        }).success(function(data){
-          if(data.value == true) {
+        }).success(function (data) {
+          if (data.value == true) {
             postData.review[0] = $scope.ratingValue;
-            console.log(postData.review,'review');
+            console.log(postData.review, 'review');
           }
         });
       };
@@ -229,18 +229,18 @@ viewlocalLife.directive('postLocalLife', ['$http','$filter','$uibModal','$window
       // rating local life end
       // filters end
       // local pic pop up
-        $scope.openLocalimg = function (getVal) {
-          console.log(getVal,'ab val su che');
-          // $scope.showimgData = $scope.localLife[getVal];
-          $scope.showingData = getVal;
-          // console.log(getVal);
-          $uibModal.open({
-            animation: true,
-            templateUrl: "views/modal/local-imgview.html",
-            scope: $scope,
-            windowTopClass: "notify-popup"
-          })
-        };
+      $scope.openLocalimg = function (getVal) {
+        console.log(getVal, 'ab val su che');
+        // $scope.showimgData = $scope.localLife[getVal];
+        $scope.showingData = getVal;
+        // console.log(getVal);
+        $uibModal.open({
+          animation: true,
+          templateUrl: "views/modal/local-imgview.html",
+          scope: $scope,
+          windowTopClass: "notify-popup"
+        })
+      };
       // local pic pop up end
       // local journey edit
       $scope.editOption = function (model) {
@@ -622,7 +622,7 @@ viewlocalLife.directive('postLocalLife', ['$http','$filter','$uibModal','$window
           method: "POST",
           data: formData
         }).success(function (data) {
-          console.log(data,'the added one');
+          console.log(data, 'the added one');
           if (data.value === true) {
             // setTimeout(function () {
             //   $window.location.reload();
@@ -682,7 +682,7 @@ viewlocalLife.directive('postLocalLife', ['$http','$filter','$uibModal','$window
           method: "POST",
           data: result
         }).success(function (data) {
-          console.log(data,'date');
+          console.log(data, 'date');
           localPost.UTCModified = result.date;
           modal.close();
         });

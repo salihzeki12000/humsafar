@@ -1,6 +1,6 @@
 var commontask = angular.module('commontask', [])
 
-  .factory('LikesAndComments', function ($http, $filter) {
+  .factory('LikesAndComments', function ($http, $filter, $uibModal) {
 
     var returnVal = {
       getHashTags: function (commentString, callback) {
@@ -131,12 +131,12 @@ var commontask = angular.module('commontask', [])
             url = "/post/updateLikePostWeb";
             break;
           case "photo":
-            obj.postId = type_id;
+            // obj.postId = type_id;
             obj.photoId = additionalId;
             url = "/postphotos/updateLikePostWeb";
             break;
           case "video":
-            obj.postId = type_id;
+            // obj.postId = type_id;
             obj.videoId = additionalId;
             url = "/postvideos/updateLikePostWeb";
             break;
@@ -190,6 +190,34 @@ var commontask = angular.module('commontask', [])
         }).success(function (data) {
           callback(data);
         });
+      },
+      getPhotoBannerDetails: function (_id, pagenumber, callback) {
+        console.log(_id, pagenumber, callback);
+        var obj = {
+          "_id": _id,
+          "pagenumber": pagenumber
+        };
+        $http({
+          url: adminURL + "/postPhotos/getOneWeb",
+          data: obj,
+          method: "POST"
+        }).success(callback);
+      },
+      openPhotoPopup: function (_id, scope) {
+        scope.listOfComments = {
+          "scrollBusy": false,
+          "stopCallingApi": true
+        }
+        var callback = function (data) {
+          scope.listOfComments = data.data;
+          scope.listOfComments.pageNo = 1;
+          scope.listOfComments.scrollBusy = false;
+          scope.listOfComments.stopCallingApi = false;
+          if (data.data && data.data.comment.length === 0) {
+            scope.listOfComments.stopCallingApi = true;
+          }
+        };
+        returnVal.getPhotoBannerDetails(_id, 1, callback);
       },
       searchTags: function (tag, callback) {
         $http({

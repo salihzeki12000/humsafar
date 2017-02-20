@@ -57,20 +57,25 @@
       <!-- related img if less then 5-->
       <div class="relate-pic" ng-if="(ongo.photosVideos.length>1)&&(ongo.photosVideos.length<=5)">
         <div class="related-ongo-slider" ng-repeat="relatePic in ongo.photosVideos track by $index">
-          <img ng-src="{{relatePic.thumbnail|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer" ng-if="ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail" ng-click="changeImage($index,'videos')">
-          <img ng-src="{{relatePic.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer" ng-if="!(ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail)" ng-click="changeImage($index,'photos')">
+          <img ng-src="{{relatePic.thumbnail|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer" ng-if="ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail"
+            ng-click="changeImage($index,'videos')">
+          <img ng-src="{{relatePic.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer" ng-if="!(ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail)"
+            ng-click="changeImage($index,'photos')">
         </div>
       </div>
       <!-- related img end if less then 5-->
       <!-- related img if more then 5 then slider-->
       <div class="related-imgslider" ng-if="ongo.photosVideos.length>5">
-        <flex-slider flex-slide="slide in ongo.photosVideos track by $index" item-width="99" class="related-slide carousel" animation="true" item-margin="5" control-nav="false">
+        <flex-slider flex-slide="slide in ongo.photosVideos track by $index" item-width="99" class="related-slide carousel" animation="true"
+          item-margin="5" control-nav="false">
           <!---- put/remove item width 99 if needed -->
           <li>
             <div class="related-ongo-slider">
               <!--<img ng-src="{{slide.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer">-->
-              <img ng-src="{{slide.thumbnail|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer" ng-if="ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail" ng-click="changeImage($index,'videos')">
-              <img ng-src="{{slide.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer" ng-if="!(ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail)" ng-click="changeImage($index,'photos')">
+              <img ng-src="{{slide.thumbnail|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer" ng-if="ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail"
+                ng-click="changeImage($index,'videos')">
+              <img ng-src="{{slide.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer" ng-if="!(ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail)"
+                ng-click="changeImage($index,'photos')">
             </div>
           </li>
         </flex-slider>
@@ -142,7 +147,8 @@
               <div class="own-trip" ng-show="ongo.edit.backgroundClick">
                 <ul>
                   <!-- ng if for checkin -->
-                  <li><a href="" title="Edit Check In" ng-click="editCheckIn();">Edit Activity / Remove Photos & Videos</a></li>
+                  <li><a href="" title="Edit Check In" ng-click="editCheckIn();">Edit Activity / Remove Photos &amp; Videos</a></li>
+                  <li><a href="" title="Add Photos & Videos" ng-click="addPhotosVideo();">Add Photos &amp; Videos</a></li>
                   <li><a href="" title="Change Date &amp; Time" ng-click="changePostsDate();">Change Date &amp; Time</a></li>
                   <li><a href="" title="Delete" ng-click="confirmDelete();">Delete Activity</a></li>
                   <li class="hide"><a href="" title="Copy URL">Copy URL</a></li>
@@ -251,8 +257,8 @@
 <!-- on go journey-change end -->
 <!-- on go journey main end-->
 <!-- close comment wala backdrop div -->
-<div class="close-comment-backdrop" ng-click="getCommentsData({'post':ongo});"></div>
+<div class="close-comment-backdrop" ng-click="closeBackDrop();"></div>
 <!-- close comment wala backdrop div end-->
 <!--close like wala backdrop div-->
-<div class="close-like-backdrop close-comment-backdrop" ng-click="getLikesData({'post':ongo})"></div>
+<div class="close-like-backdrop" ng-click="getLikesData({'post':ongo})"></div>
 <!--close like wala backdrop div end-->

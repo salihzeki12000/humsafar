@@ -339,7 +339,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'SearchresultCtrl'
     })
     .state('search-result', {
-      url: "/search-result/:name",
+      url: "/search-result/:name/:searchText",
       templateUrl: "views/template.html",
       controller: 'SearchresultCtrl',
       reloadOnSearch: false
@@ -931,13 +931,13 @@ firstapp.filter('itineraryType', function () {
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    var itineraryBg = input.length;
-    console.log(input, itineraryBg);
-    var itineraryGet = getRandomInt(0, itineraryBg - 1);
-    var backImg = input[itineraryGet];
-    console.log(backImg);
+    // var itineraryBg = input.length;
+    // console.log(input, itineraryBg);
+    // var itineraryGet = getRandomInt(0, itineraryBg - 1);
+    // var backImg = input[itineraryGet];
+    // console.log(backImg);
     var random = getRandomInt(1, 2);
-    switch (backImg) {
+    switch (input) {
       case "adventure":
         returnVal = "img/banner-itinerary/adventure" + random + ".jpg";
         break;

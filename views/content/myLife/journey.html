@@ -76,7 +76,8 @@
                       <h3 class="color-pink">My Tales &amp; Trails</h3>
                       <div class="empty-ongo">
                         <h4>On-the-Go Journeys</h4>
-                        <p class="empty-descp">Capture your journeys and activities whether local or global, creating a beautiful timeline and relive these treasured experiences of your past.</p>
+                        <p class="empty-descp">Capture your journeys and activities whether local or global, creating a beautiful timeline and relive
+                          these treasured experiences of your past.</p>
                       </div>
                       <div class="empty-chronicling">
                         <h4>Chronicling Past Travels</h4>
@@ -98,11 +99,11 @@
                     <div class="journey-masonry-brick" ng-if="life.type=='ended-journey' || life.type=='on-the-go-journey'">
                       <div class="travel-life-part avenir-roman">
                         <div class="travel-journey-heading">
-                          <p ng-if="life.type=='ended-journey'">Has ended <span ng-if="life.user.gender=='male'">his</span><span ng-if="life.user.gender=='female'">her</span> Journey</p>
-                          <p ng-if="life.type=='on-the-go-journey'">Has started <span ng-if="life.user.gender=='male'">his</span><span ng-if="life.user.gender=='female'">her</span> Journey</p>
+                          <p ng-if="life.type=='ended-journey'">Has ended <span ng-if="life.user.gender=='male'">his</span><span ng-if="life.user.gender=='female'">her</span>                            Journey</p>
+                          <p ng-if="life.type=='on-the-go-journey'">Has started <span ng-if="life.user.gender=='male'">his</span><span ng-if="life.user.gender=='female'">her</span>                            Journey</p>
                           <p ng-hide="life.onJourney">{{life.heading}}</p>
                           <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
-                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span> <span>{{life.timestampHour}}</span></p>
+                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p>
                         </div>
                         <!--jounrey main detail card-->
                         <div class="travelled-journey relate" ng-click="routeTO(life.type,life.urlSlug)">
@@ -235,7 +236,7 @@
                         <div class="travel-journey-heading">
                           <p ng-hide="life.onJourney">{{life.heading}}</p>
                           <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
-                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span> <span>{{life.timestampHour}}</span></p>
+                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p>
                         </div>
                         <!--for itinerary card main-->
                         <div class="onway-journey relate" ng-click="routeTO(life.type,life.urlSlug)">
@@ -409,7 +410,8 @@
                         <img src="img/profile-empty/local-empty.png" alt="" class="img-responsive inline-block">
                       </div>
                       <h3 class="color-pink">Life In The City</h3>
-                      <p class="empty-descp">Candid, fun moments with friends, happy family get-togethers, some precious ‘me-time’…share your love for your city and inspire others to do the same. Cherish your local life memories eternally.</p>
+                      <p class="empty-descp">Candid, fun moments with friends, happy family get-togethers, some precious ‘me-time’…share your love
+                        for your city and inspire others to do the same. Cherish your local life memories eternally.</p>
                     </div>
                   </div>
                 </div>
@@ -442,7 +444,6 @@
                     <ul>
                       <li ng-repeat="month in localDate track by $index" ng-click=" getByFilter(month,'date')">{{month}}</li>
                     </ul> -->
-
                     <!-- MONTH FILTER UI SELECT -->
                     <ui-select ng-model="month" theme="selectize" ng-disabled="ctrl.disabled" title="Month" class="">
                       <ui-select-match class="" placeholder="Month">{{$select.selected}}</ui-select-match>
@@ -458,7 +459,7 @@
                   <span>Check In's</span>
                   <div class="local-filter-checkbox custom-checkbox" ng-repeat="catType in localCategory track by $index">
                     <input type="checkbox" id="{{catType.name}}" ng-model="catType.checked" ng-click="getByFilter(catType,'checkIn')">
-                    <label for="{{catType.name}}" >{{catType.name}}</label>
+                    <label for="{{catType.name}}">{{catType.name}}</label>
                   </div>
                   <!-- <span class="checkin-more pointer">More</span> -->
                 </div>
@@ -478,7 +479,7 @@
                     </label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="four-star" ng-click="getByFilter('4','rating')"  ng-model="localStar.fourStar">
+                    <input type="checkbox" id="four-star" ng-click="getByFilter('4','rating')" ng-model="localStar.fourStar">
                     <label for="four-star">
                       <span>
                         <i class="fa fa-star"></i>
@@ -490,7 +491,7 @@
                     </label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="three-star" ng-click="getByFilter('3','rating')"  ng-model="localStar.threeStar">
+                    <input type="checkbox" id="three-star" ng-click="getByFilter('3','rating')" ng-model="localStar.threeStar">
                     <label for="three-star">
                       <span>
                         <i class="fa fa-star"></i>
@@ -502,7 +503,7 @@
                     </label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="two-star" ng-click="getByFilter('2','rating')"  ng-model="localStar.twoStar">
+                    <input type="checkbox" id="two-star" ng-click="getByFilter('2','rating')" ng-model="localStar.twoStar">
                     <label for="two-star">
                       <span>
                         <i class="fa fa-star"></i>
@@ -514,7 +515,7 @@
                     </label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="one-star"  ng-model="localStar.OneStar" ng-click="getByFilter('1','rating')">
+                    <input type="checkbox" id="one-star" ng-model="localStar.OneStar" ng-click="getByFilter('1','rating')">
                     <label for="one-star">
                       <span>
                         <i class="fa fa-star"></i>
@@ -533,11 +534,11 @@
                     <label for="photo">Photos</label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="video"  ng-model="localFilterPost.videos" ng-click="getByFilter(localFilterPost,'videos')">
+                    <input type="checkbox" id="video" ng-model="localFilterPost.videos" ng-click="getByFilter(localFilterPost,'videos')">
                     <label for="video">Videos</label>
                   </div>
                   <div class="local-filter-checkbox custom-checkbox">
-                    <input type="checkbox" id="thought"  ng-model="localFilterPost.thoughts" ng-click="getByFilter(localFilterPost,'thoughts')">
+                    <input type="checkbox" id="thought" ng-model="localFilterPost.thoughts" ng-click="getByFilter(localFilterPost,'thoughts')">
                     <label for="thought">Thoughts</label>
                   </div>
                 </div>
@@ -577,7 +578,8 @@
                 <div class="scroll-local-life scrollme" ng-scrollbar rebuild-on="rebuild:me" rebuild-on-resize>
                   <div class="local-post" infinite-scroll="getMoreLocalPost();" infinite-scroll-disabled='scroll2.busy' infinite-scroll-distance='1'>
                     <!-- local life data -->
-                    <post-local-life ng-repeat="localPost in localLifeJourney track by $index" ongolocal="localPost" get-comments-data="getLocalComments(ongolocal)" get-likes-data="getLocalLikes(ongolocal)">
+                    <post-local-life ng-repeat="localPost in localLifeJourney track by $index" ongolocal="localPost" open-comment-section="openCommentSection(ongolocal)"
+                      open-like-section="openLikeSection(ongolocal)">
                     </post-local-life>
                     <!-- local life data end-->
                   </div>
@@ -595,7 +597,7 @@
                     <div class="pull-left">
                       <ul class="notify-like">
                         <li>
-                          <a href=""><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(post.uniqueId,post._id)"></i></a>
+                          <a href=""><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate like-animate-cyan' : 'fa-heart-o'" ng-click="likePost(post.uniqueId,post._id)"></i></a>
                         </li>
                         <li>
                           <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve" ng-click="focus('enterComment');"></a>
@@ -612,11 +614,11 @@
                   <i class="fa fa-heart color-blue" ng-class="{'view-like' : commentLike.backgroundClick == true , '' : commentLike.backgroundClick == false}" ></i>
                  <span>{{post.likeCount|filterCount}}   </span>{{post.likeCount|singularPlural:'Likes'}}
                         <!-- ng-show="showLikes" -->
-                        <div class="like-dropdown" ng-show="commentLike.backgroundClick;">
+                        <!--<div class="like-dropdown" ng-show="commentLike.backgroundClick;">
                           <ul>
                             <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
                           </ul>
-                        </div>
+                        </div>-->
                         </span>
                       </div>
                     </div>
