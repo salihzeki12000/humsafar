@@ -18,161 +18,85 @@
             </div>
             <div class="search inline-block relate v-top hidden-xs" ng-init="viewSearch={};" ng-click="editOption(viewSearch);">
               <form action="">
-                <input type="text" class="form-control" placeholder="Search people, destinations, itineraries, agents and tags">
+                <input type="text " class="form-control color-white avenir-light " id="search " ng-model="search.searchType"  placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags " ng-change="searchType();">
                 <div class="search-result-dropdown" ng-show="viewSearch.backgroundClick;">
-                  <div class="search-traveller-drop">
-                    <div class="search-dropheader clearfix">
-                      <span class="pull-left">Traveller</span>
-                      <a class="pull-right">View All</a>
+                  <div class="search-traveller-drop" ng-if="getAllSearched.user.length>0">
+                    <div class="search-dropheader">
+                      <div class="clearfix">
+                        <div class="pull-left">
+                          <span>Traveller</span>
+                        </div>
+                        <div class="pull-right">
+                          <a ng-click="viewResult('search-traveller',search.searchType)">View All</a>
+                        </div>
+                      </div>
                     </div>
                     <ul class="searchdrop-options">
-                      <li class="search-option">
+                      <li class="search-option" ng-repeat="user in getAllSearched.user track by $index">
                         <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          <img ng-src="{{user.profilePicture|uploadpath}}" class="img-responsive get-center" alt="">
                         </div>
-                        <span class="search-optiontxt">India</span>
-                      </li>
-                      <li class="search-option">
-                        <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
-                        </div>
-                        <span class="search-optiontxt">India</span>
-                      </li>
-                      <li class="search-option">
-                        <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
-                        </div>
-                        <span class="search-optiontxt">India</span>
+                        <span class="search-optiontxt">{{user.name}}</span>
                       </li>
                     </ul>
                   </div>
-                  <div class="search-itinerary-drop">
+                  <div class="search-itinerary-drop" ng-if="getAllSearched.itinerary.length>0">
                     <div class="search-dropheader clearfix">
                       <span class="pull-left">Itinerary</span>
                       <a class="pull-right">View All</a>
                     </div>
                     <ul class="searchdrop-options">
-                      <li class="search-option">
+                      <li class="search-option" ng-repeat="itinerary in getAllSearched.itinerary track by $index">
                         <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          <img ng-src="{{itinerary.coverPhoto|uploadpath}}" class="img-responsive get-center" alt="">
                         </div>
-                        <span class="search-optiontxt">India</span>
-                      </li>
-                      <li class="search-option">
-                        <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
-                        </div>
-                        <span class="search-optiontxt">India</span>
-                      </li>
-                      <li class="search-option">
-                        <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
-                        </div>
-                        <span class="search-optiontxt">India</span>
+                        <span class="search-optiontxt">{{itinerary.name}}</span>
                       </li>
                     </ul>
                   </div>
-                  <div class="search-hashtag-drop">
+                  <div class="search-hashtag-drop" ng-if="getAllSearched.hashtag.length>0">
                     <div class="search-dropheader clearfix">
                       <span class="pull-left">Hashtags</span>
                       <a class="pull-right">View All</a>
                     </div>
                     <ul class="searchdrop-options">
-                      <li class="search-option">
-                        <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                      <li class="search-option" ng-repeat="hashtag in getAllSearched.hashtag track by $index ">
+                        <div class="clearfix">
+                          <div class="pull-left">
+                            <span>{{hashtag.title}}</span>
+                          </div>
+                          <div class="pull-right">
+                            <span class="search-optiontxt count">{{hashtag.count}}</span>
+                          </div>
                         </div>
-                        <span class="search-optiontxt">India</span>
-                      </li>
-                      <li class="search-option">
-                        <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
-                        </div>
-                        <span class="search-optiontxt">India</span>
-                      </li>
-                      <li class="search-option">
-                        <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
-                        </div>
-                        <span class="search-optiontxt">India</span>
                       </li>
                     </ul>
                   </div>
-                  <div class="search-country-drop">
+                  <div class="search-country-drop" ng-if="getAllSearched.country.length>0">
                     <div class="search-dropheader clearfix">
                       <span class="pull-left">Country</span>
                       <a class="pull-right">View All</a>
                     </div>
                     <ul class="searchdrop-options">
-                      <li class="search-option">
+                      <li class="search-option" ng-repeat="country in getAllSearched.country track by $index ">
                         <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          <img ng-src="{{country.flag|uploadpath}}" class="img-responsive get-center" alt="">
                         </div>
-                        <span class="search-optiontxt">India</span>
-                      </li>
-                      <li class="search-option">
-                        <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
-                        </div>
-                        <span class="search-optiontxt">India</span>
-                      </li>
-                      <li class="search-option">
-                        <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
-                        </div>
-                        <span class="search-optiontxt">India</span>
+                        <span class="search-optiontxt">{{country.name}}</span>
                       </li>
                     </ul>
                   </div>
-                  <div class="search-city-drop">
+                  <div class="search-city-drop" ng-if="getAllSearched.city.length>0">
                     <div class="search-dropheader clearfix">
                       <span class="pull-left">City</span>
                       <a class="pull-right">View All</a>
                     </div>
                     <ul class="searchdrop-options">
-                      <li class="search-option">
+                      <li class="search-option" ng-repeat="city in getAllSearched.city track by $index ">
                         <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
+                          <img src="{{city.cityCoverPhoto|uploadpath}}" class="img-responsive get-center" alt="">
                         </div>
-                        <span class="search-optiontxt">India</span>
-                      </li>
-                      <li class="search-option">
-                        <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
-                        </div>
-                        <span class="search-optiontxt">India</span>
-                      </li>
-                      <li class="search-option">
-                        <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
-                        </div>
-                        <span class="search-optiontxt">India</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="search-travelagent-drop" hidden>
-                    <div class="search-dropheader clearfix">
-                      <span class="pull-left">Travel Agents</span>
-                      <a class="pull-right">View All</a>
-                    </div>
-                    <ul class="searchdrop-options">
-                      <li class="search-option">
-                        <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
-                        </div>
-                        <span class="search-optiontxt">India</span>
-                      </li>
-                      <li class="search-option">
-                        <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
-                        </div>
-                        <span class="search-optiontxt">India</span>
-                      </li>
-                      <li class="search-option">
-                        <div class="search-option-img">
-                          <img src="img/follower.jpg" class="img-responsive get-center" alt="">
-                        </div>
-                        <span class="search-optiontxt">India</span>
+                        <span class="search-optiontxt">{{city.name}}</span>
                       </li>
                     </ul>
                   </div>
@@ -297,7 +221,7 @@
                       <i class="fa fa-search "></i>
                   </a>
                 </span>
-                <input type="text " class="form-control color-white avenir-light " id="search " aria-describedby="Search" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags ">
+                <input type="text " class="form-control color-white avenir-light " id="search " ng-model="search.searchType"  placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags " ng-change="searchType();">
                 <div class="search-result-dropdown" ng-show="viewSearch.backgroundClick;">
                   <div class="search-traveller-drop">
                     <div class="search-dropheader clearfix">
@@ -478,7 +402,7 @@
                         <i class="fa fa-search "></i>
                     </a>
                   </span>
-                  <input type="text " class="form-control color-white avenir-light " id="search " aria-describedby="Search" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags ">
+                  <input type="text " class="form-control color-white avenir-light " id="search " ng-model="search.searchType"  placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags " ng-change="searchType();">
                   <div class="search-result-dropdown" ng-show="viewSearch.backgroundClick;">
                     <div class="search-traveller-drop">
                       <div class="search-dropheader clearfix">

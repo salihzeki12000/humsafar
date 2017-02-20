@@ -168,6 +168,9 @@ var navigationservice = angular.module('navigationservice', [])
       updateCountriesVisitedWeb: function (formData, callback, errCallback) {
         $http.post(adminURL + "/user/updateCountriesVisitedWeb", formData).success(callback).error(errCallback);
       },
+      getSearchData: function (formData, callback) {
+        $http.post(adminURL + "/country/getSearchDataWeb", formData).success(callback);
+      },
       getSearchCityData: function (formData, callback) {
         $http.post(adminURL + "/city/getCity", formData).success(callback);
       },

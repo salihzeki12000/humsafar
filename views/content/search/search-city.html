@@ -1,4 +1,4 @@
-<div class="search-city">
+<div class="search-city" infinite-scroll="loadMoreSearch();" infinite-scroll-disabled='searchScroll.busy'>
   <div class="row">
     <div class="country-visited-tab search-city-tab">
       <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="city in viewSearchedCity track by $index">
@@ -7,10 +7,10 @@
             <!-- <img ng-src="{{country.countryId.countryCoverPhoto|uploadpath}}" alt="" class="img-responsive country-img">  -->
             <div class="list-info">
               <div class="clearfix">
-                <div class="pull-left">
-                  <h4 class="avenir-heavy">{{city.name}}</h4>
+                <div class="search-city-title">
+                  <h4 class="avenir-heavy text-ellipsis">{{city.name}}</h4>
                 </div>
-                <div class="pull-right">
+                <div class="pull-right search-city-flag">
                   <span class="searchcity-country-name">{{city.country[0].name}}</span>
                   <div class="bucket-flag">
                     <img ng-src="{{city.country[0].flag|uploadpath}}" alt="Flag" class="img-responsive" width="30">
