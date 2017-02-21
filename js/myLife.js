@@ -180,7 +180,7 @@ var mylife = angular.module('mylife', [])
           // callback(journeys);
         });
       },
-      getAllMoments: function (token, limit, type, times, callback) { //for all and locallife
+      getAllMoments: function (token, limit, type, times, successCallback, errorCallback) { //for all and locallife
         var obj = {
           "token": token,
           "limit": limit,
@@ -191,9 +191,9 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/journey/myLifeMomentWeb",
           data: obj,
           method: "POST"
-        }).success(callback);
+        }).success(successCallback).error(errorCallback);
       },
-      getTravelLifeMoments: function (type, pageNo, callback) { //for travel-life
+      getTravelLifeMoments: function (type, pageNo, successCallback, errorCallback) { //for travel-life
         var obj = {
           "type": type,
           "pagenumber": pageNo
@@ -202,9 +202,9 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/journey/myLifeMomentWeb",
           data: obj,
           method: "POST"
-        }).success(callback);
+        }).success(successCallback).error(errorCallback);
       },
-      getPerMonthMoments: function (token, pageNo, limit, flag, callback) {
+      getPerMonthMoments: function (token, pageNo, limit, flag, successCallback, errorCallback) {
         console.log();
         var obj = {
           "token": token,
@@ -221,9 +221,9 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/journey/getTokenMomentWeb",
           data: obj,
           method: "POST"
-        }).success(callback);
+        }).success(successCallback, errorCallback);
       },
-      getJournItiMoments: function (_id, pagenumber, limit, flag, callback) {
+      getJournItiMoments: function (_id, pagenumber, limit, flag, successCallback, errorCallback) {
         var url = "";
         var obj = {
           "_id": _id,
@@ -239,9 +239,9 @@ var mylife = angular.module('mylife', [])
           url: adminURL + url,
           data: obj,
           method: "POST"
-        }).success(callback);
+        }).success(successCallback).error(errorCallback);
       },
-      getAllReviews: function (type, pageNo, callback) {
+      getAllReviews: function (type, pageNo, successCallback, errorCallback) {
         var obj = {
           "type": type,
           "pagenumber": pageNo
@@ -250,7 +250,7 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/journey/myLifeReviewWeb",
           data: obj,
           method: "POST"
-        }).success(callback);
+        }).success(successCallback).error(errorCallback);
       },
       getCities: function (countryId, callback) {
         $http({
@@ -261,7 +261,7 @@ var mylife = angular.module('mylife', [])
           method: "POST"
         }).success(callback);
       },
-      getReviewsByCities: function (countryId, cityId, pageNo, callback) {
+      getReviewsByCities: function (countryId, cityId, pageNo, successCallback, errorCallback) {
         var obj = {
           "country": countryId,
           "city": cityId,
@@ -271,7 +271,7 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/post/getReviewsWeb",
           data: obj,
           method: "POST"
-        }).success(callback);
+        }).success(successCallback).error(errorCallback);
       },
       getCategories: function (cityId, callback) {
         $http({
@@ -282,7 +282,7 @@ var mylife = angular.module('mylife', [])
           method: "POST"
         }).success(callback);
       },
-      getReviewsByCategories: function (cityId, category, pageNo, callback) {
+      getReviewsByCategories: function (cityId, category, pageNo, successCallback, errorCallback) {
         var obj = {
           "city": cityId,
           "category": category,
@@ -292,7 +292,7 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/post/getReviewsWeb",
           data: obj,
           method: "POST"
-        }).success(callback);
+        }).success(successCallback).error(errorCallback);
       },
       savePostReview: function (obj, callback) {
         $http({

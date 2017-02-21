@@ -191,8 +191,8 @@ var commontask = angular.module('commontask', [])
           callback(data);
         });
       },
-      getPhotoBannerDetails: function (_id, pagenumber, callback) {
-        console.log(_id, pagenumber, callback);
+      getPhotoBannerDetails: function (_id, pagenumber, successCallback, errorCallback) {
+        console.log(_id, pagenumber);
         var obj = {
           "_id": _id,
           "pagenumber": pagenumber
@@ -201,7 +201,7 @@ var commontask = angular.module('commontask', [])
           url: adminURL + "/postPhotos/getOneWeb",
           data: obj,
           method: "POST"
-        }).success(callback);
+        }).success(successCallback).error(errorCallback);
       },
       openPhotoPopup: function (_id, scope) {
         scope.listOfComments = {
@@ -217,7 +217,9 @@ var commontask = angular.module('commontask', [])
             scope.listOfComments.stopCallingApi = true;
           }
         };
-        returnVal.getPhotoBannerDetails(_id, 1, callback);
+        returnVal.getPhotoBannerDetails(_id, 1, callback, function (data) {
+          console.log(data);
+        });
       },
       searchTags: function (tag, callback) {
         $http({

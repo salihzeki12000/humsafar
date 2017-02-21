@@ -3,7 +3,7 @@ var activity = angular.module('activity', [])
   .factory('Activity', function ($http, $filter) {
 
     return {
-      getAllActivities: function (pageNum, callback) {
+      getAllActivities: function (pageNum, successCallback, errorCallback) {
         $http({
           url: adminURL + "/activityFeed/getDataWeb",
           method: "POST",
@@ -12,7 +12,7 @@ var activity = angular.module('activity', [])
           }
         }).success(function (data) {
           var activities = data.data;
-          _.each(activities, function (activity) {
+          _.each(data.data, function (activity) {
             switch (activity.type) {
               case "travel-life":
                 if (activity.photos.length === 0 && activity.videos.length === 0) {
@@ -143,8 +143,8 @@ var activity = angular.module('activity', [])
               activity.thoughts = "Has ended " + pronoun + " " + activity.name + " Journey";
             }
           });
-          callback(activities);
-        });
+          successCallback(activities);
+        }).error(errorCallback);
       }
     }
   });
