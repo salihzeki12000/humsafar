@@ -10153,18 +10153,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //Photo comment popup
     $scope.getPhotosCommentData = function (photoId) {
-      // var params = $scope;
       console.log(photoId, "click function called");
       modal = $uibModal.open({
         templateUrl: "views/modal/notify.html",
         animation: true,
         controller: 'photoCommentModalCtrl',
         scope: $scope,
-        // resolve: {
-        //   params: function () {
-        //     return params;
-        //   }
-        // },
         windowClass: "notify-popup"
       });
       modal.closed.then(function () {
@@ -10451,7 +10445,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // other itineraries main end
 
   })
-  .controller('UserDetailItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, $timeout, $uibModal, $stateParams) {
+  .controller('UserDetailItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, LikesAndComments, $timeout, $uibModal, $stateParams) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -10528,18 +10522,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //Photo comment popup
     $scope.getPhotosCommentData = function (photoId) {
-      // var params = $scope;
       console.log(photoId, "click function called");
       modal = $uibModal.open({
         templateUrl: "views/modal/notify.html",
         animation: true,
         controller: 'photoCommentModalCtrl',
         scope: $scope,
-        // resolve: {
-        //   params: function () {
-        //     return params;
-        //   }
-        // },
         windowClass: "notify-popup"
       });
       modal.closed.then(function () {

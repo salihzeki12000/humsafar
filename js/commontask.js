@@ -182,7 +182,7 @@ var commontask = angular.module('commontask', [])
           case "journey":
             url = "/journey/getJourneyLikesWeb";
             break;
-        };
+        }
         $http({
           url: adminURL + url,
           method: "POST",

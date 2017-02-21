@@ -57,7 +57,7 @@
     <div class="edit-publish-userdetail">
       <button class="btn btn-white-outline btn-more mr5" ui-sref="detailitinerary({flag:'edit',urlSlug:itinerary.urlSlug})">Edit</button>
       <button class="btn btn-white-outline btn-more" ng-click="uploadDetailedItinerary(true)" ng-if="itinerary.status== false">Publish</button>
-     <button class="btn btn-white-outline btn-more" ng-click="" ng-if="itinerary.status == true">Delete</button>
+      <button class="btn btn-white-outline btn-more" ng-click="" ng-if="itinerary.status == true">Delete</button>
     </div>
   </div>
   <div class="second bg-white-95">
@@ -67,13 +67,13 @@
         <p class="color-pink heading-gallery-name"><i class="fa fa-picture-o mr5"></i>{{itinerary.title}} Photos</p>
         <div masonry preserve-order class="masonry-main side-scroll-direction">
           <div class="masonry-brick" ng-repeat="pic in itinerary.photos track by $index">
-            <div class="gallery-imgholder pointer" ng-click="getPhotosCommentData(pic)">
+            <div class="gallery-imgholder pointer" ng-click="getPhotosCommentData(pic._id)">
               <img ng-src="{{pic.name|uploadpath}}" alt="" class "img-responsive full-width">
             </div>
           </div>
         </div>
         <div class="user-button-holder">
-          <a class="photos btn-pink photo-button" ng-click="viewGallery();"><i class="fa fa-picture-o mr5"></i>{{itinerary.title}} Photos</a>
+          <a class="photos btn-pink photo-button" ng-click="viewGallery();"><i class="fa fa-picture-o mr5"></i>{{itinerary.name}} Photos</a>
           <a class="photos btn-dark-blue close-button" ng-click="viewGallery();"><i class="fa fa-chevron-down mr5"></i>Close</a>
         </div>
       </div>
@@ -155,7 +155,8 @@
               <!-- trip accordion heading end-->
               <div class="listing-accordion">
                 <uib-accordion close-other="oneAtATime">
-                  <uib-accordion-group is-open="city.isOpen" ng-repeat="city in country.cityVisited" ng-scroll="city in country.cityVisited" class="city-accordion-back">
+                  <uib-accordion-group is-open="city.isOpen" ng-repeat="city in country.cityVisited" ng-scroll="city in country.cityVisited"
+                    class="city-accordion-back">
                     <uib-accordion-heading class="relate city-coverphoto">
                       <!-- <img ng-src="{{city.city.cityCoverPhoto|uploadpath}}" alt="" class="img-responsive"> -->
                       <div class="journey-accordion-heading color-white" style="background: url('{{city.city.cityCoverPhoto|uploadpath}}') 0 no-repeat; background-size: cover;background-attachment: fixed;">
@@ -234,12 +235,14 @@
             <div class="clearfix share-option-main">
               <div class="task-holder pull-left" ng-init="getClicked = false;">
                 <ul class="list-inline">
-                  <li><a href="" class="relate" ng-click="likeUnlikeItinerary(itinerary.likeDone,itinerary._id,itinerary.uniqueId);"><i class="fa like-button-icon color-blue" ng-class="{'fa-heart-o': itinerary.likeDone == null, 'fa-heart like-animate': itinerary.likeDone == true}"></i>
-                  <span></span>
-                  <audio id="like-play">
-                    <source src="img/tiny1.mp3" type="audio/mp3">
-                  </audio>
-                </a></li>
+                  <li>
+                    <a href="" class="relate" ng-click="likeUnlikeItinerary(itinerary.likeDone,itinerary._id,itinerary.uniqueId);"><i class="fa like-button-icon color-blue" ng-class="{'fa-heart-o': itinerary.likeDone == null, 'fa-heart like-animate': itinerary.likeDone == true}"></i>
+                      <span></span>
+                      <audio id="like-play">
+                        <source src="img/tiny1.mp3" type="audio/mp3">
+                      </audio>
+                    </a>
+                  </li>
                   <li>
                     <a href=""><img src="img/comments.png" alt="Comments" height="22" class="agent-iti-comment-icon"></a>
                   </li>
@@ -272,7 +275,7 @@
               <!-- like and review -->
               <div class="like-review-holder pull-left">
                 <div class="like-holder" ng-if="itinerary.likeCount>0">
-                  <p class="m-clear"><i class="fa fa-heart color-blue mr5"></i><span class="like-count avenir-roman">{{itinerary.likeCount}}</span> <span class="color-blue avenir-roman">Likes</span></p>
+                  <p class="m-clear"><i class="fa fa-heart color-blue mr5"></i><span class="like-count avenir-roman">{{itinerary.likeCount}}</span>                    <span class="color-blue avenir-roman">Likes</span></p>
                 </div>
                 <div class="review-holder">
                   <p class="avenir-heavy color-blue m-clear">
@@ -310,7 +313,7 @@
                     <div class="like-reply-line">
                       <span class="color-blue avenir-roman mr5 pointer">Like</span>
                       <span class="color-blue avenir-roman mr5 pointer">Reply</span>
-                      <span class="time-stamp ml5"><i class="fa fa-calendar color-grey mr5"></i><span>{{comment.date|formatDate:"date"}}</span> | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{comment.date|formatDate:"time"}}</span></span>
+                      <span class="time-stamp ml5"><i class="fa fa-calendar color-grey mr5"></i><span>{{comment.date|formatDate:"date"}}</span>                      | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{comment.date|formatDate:"time"}}</span></span>
                     </div>
                   </div>
                 </div>
@@ -358,7 +361,7 @@
                             <span class="follow-following color-blue text-capitalize">{{life.follower}}</span>
                           </div>
                         </div>
-                        <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{life.timestampHour}}</span></p>
+                        <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i>                          <span>{{life.timestampHour}}</span></p>
                       </div>
                     </div>
                     <div class="onway-journey relate">
@@ -372,33 +375,33 @@
                         <span class="">+4</span>
                       </div>
                       <div class="journey-tag-holder">
-                                 <div class="days-spent pull-right">
-                              <p><span class="block">{{life.spendingDay}}</span>Days</p>
-                            </div>
+                        <div class="days-spent pull-right">
+                          <p><span class="block">{{life.spendingDay}}</span>Days</p>
+                        </div>
                         <h3 class="m-clear text-capitalize">{{life.onwayTag}}</h3>
                         <div class="clearfix journey-travelling-type">
                           <div class="row">
-                        <div class="col-xs-6">
-                          <div class="pull-left">
-                            <div class="journey-type m0">
-                              <ul>
-                                <li>
-                                  <a href=""><img ng-src="{{life.itineraryType1}}" alt="" height="20"></a>
-                                </li>
-                                <li>
-                                  <a href=""><img ng-src="{{life.itineraryType2}}" alt="" height="20"></a>
-                                </li>
-                                <li>
-                                  <a href=""><img ng-src="{{life.itineraryType3}}" alt="" height="20"></a>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
+                            <div class="col-xs-6">
+                              <div class="pull-left">
+                                <div class="journey-type m0">
+                                  <ul>
+                                    <li>
+                                      <a href=""><img ng-src="{{life.itineraryType1}}" alt="" height="20"></a>
+                                    </li>
+                                    <li>
+                                      <a href=""><img ng-src="{{life.itineraryType2}}" alt="" height="20"></a>
+                                    </li>
+                                    <li>
+                                      <a href=""><img ng-src="{{life.itineraryType3}}" alt="" height="20"></a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
                             </div>
                             <div class="col-xs-6">
                               <div class="text-right">
                                 <div class="journey-cost">
-                                <span>{{life.cost}}</span>
+                                  <span>{{life.cost}}</span>
                                 </div>
                               </div>
                             </div>
