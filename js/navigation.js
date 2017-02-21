@@ -211,6 +211,16 @@ var navigationservice = angular.module('navigationservice', [])
           callback(data);
         });
       },
+      acceptJourneyNotify:function (formData, callback){
+        $http.post(adminURL + "/journey/buddyAcceptWeb",formData).success(function(data){
+          callback(data);
+        });
+      },
+      declineJourneyNotify:function (formData, callback){
+        $http.post(adminURL + "/journey/buddyRejectWeb",formData).success(function(data){
+          callback(data);
+        });
+      },
       // getDestinationBooking: function (formData, callback) {
       //   $http.get("http://192.168.0.119:3000/migrations/city_bookings.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
       //     callback(data);

@@ -34,8 +34,8 @@
                 <p class="">Accept <span class="avenir-heavy color-blue">{{notify.userFrom.name}}</span>'s request to create your travel memories together.</p>
                 <!-- ACCEPT DECLINE BUTTONS -->
                 <div class="notification-btn text-center">
-                  <button type="button" name="button" class="btn btn-notification-card">Accept</button>
-                  <button type="button" name="button" class="btn btn-notification-card">Decline</button>
+                  <button type="button" name="button" class="btn btn-notification-card" ng-click="acceptJourney(notify)">Accept</button>
+                  <button type="button" name="button" class="btn btn-notification-card" ng-click="declineJourney(notify)">Decline</button>
                 </div>
                 <!-- ACCEPT DECLINE BUTTONS END -->
               </div>
@@ -107,7 +107,7 @@
               <div class="notification-checkin-ongo-photo notification-tagitinerary-action " ng-if="notify.type == 'itineraryRequest'">
                 <p class="">View to add to your My Life.</p>
                 <div class="notification-tagitinerary-photo">
-                  <img ng-src="{{notify.data.name}}" alt="" class="img-responsive get-center">
+                  <img ng-src="{{notify.data.coverPhoto|uploadpath:250:100:'cover'}}" alt="" class="img-responsive get-center">
                 </div>
               </div>
               <!-- TAG ITINERARY END -->
@@ -179,8 +179,8 @@
 
               <!-- ITINERARY LIKE, COMMENT, MENTION COMMENT -->
               <div class="notification-addpic-ongo-action" ng-if="notify.type == 'itineraryLike' || notify.type == 'itineraryComment' ||  notify.type ==  'itineraryMentionComment' ">
-                <div class="notification-addpic-ongo-photo">
-                  <img ng-src="{{notify.data.name|uploadpath:250:125:'cover'}}" alt="" class="img-responsive" />
+                <div class="notification-checkin-ongo-photo notification-itinerary-pics">
+                  <img ng-src="{{notify.data.coverPhoto|uploadpath:250:125:'cover'}}" alt="" class="img-responsive" />
                 </div>
               </div>
               <!-- ITINERARY LIKE, COMMENT, MENTION COMMENT  END -->
