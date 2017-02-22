@@ -1,4 +1,4 @@
-<div class="search-itinerary">
+<div class="search-itinerary" infinite-scroll="loadMoreSearch('search-itinerary');" infinite-scroll-disabled='searchScroll.busy'>
   <div class="row" masonry preserve-order>
     <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="itinerary in viewSearchedItinerary track by $index">
       <div class="agt-itinerarycard search-itinerary-card ">

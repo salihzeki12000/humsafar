@@ -43,7 +43,7 @@
                   <div class="search-itinerary-drop" ng-if="getAllSearched.itinerary.length>0">
                     <div class="search-dropheader clearfix">
                       <span class="pull-left">Itinerary</span>
-                      <a class="pull-right">View All</a>
+                      <a class="pull-right" ng-click="viewResult('search-itinerary',search.searchType)">View All</a>
                     </div>
                     <ul class="searchdrop-options">
                       <li class="search-option" ng-repeat="itinerary in getAllSearched.itinerary track by $index">
@@ -57,7 +57,7 @@
                   <div class="search-hashtag-drop" ng-if="getAllSearched.hashtag.length>0">
                     <div class="search-dropheader clearfix">
                       <span class="pull-left">Hashtags</span>
-                      <a class="pull-right">View All</a>
+                      <a class="pull-right" ng-click="viewResult('search-hashtag',search.searchType)">View All</a>
                     </div>
                     <ul class="searchdrop-options">
                       <li class="search-option" ng-repeat="hashtag in getAllSearched.hashtag track by $index ">
@@ -75,7 +75,7 @@
                   <div class="search-country-drop" ng-if="getAllSearched.country.length>0">
                     <div class="search-dropheader clearfix">
                       <span class="pull-left">Country</span>
-                      <a class="pull-right">View All</a>
+                      <a class="pull-right" ng-click="viewResult('search-country',search.searchType)">View All</a>
                     </div>
                     <ul class="searchdrop-options">
                       <li class="search-option" ng-repeat="country in getAllSearched.country track by $index ">
@@ -89,7 +89,7 @@
                   <div class="search-city-drop" ng-if="getAllSearched.city.length>0">
                     <div class="search-dropheader clearfix">
                       <span class="pull-left">City</span>
-                      <a class="pull-right">View All</a>
+                      <a class="pull-right" ng-click="viewResult('search-city',search.searchType)">View All</a>
                     </div>
                     <ul class="searchdrop-options">
                       <li class="search-option" ng-repeat="city in getAllSearched.city track by $index ">

@@ -4812,7 +4812,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         "perMonthMoments": []
       };
       // $scope.perMonthMoments = [];
-      MyLife.getPerMonthMoments($scope.album.token, 1, 24, $scope.album.type, viewMonthDataCallback);
+      MyLife.getPerMonthMoments($scope.album.token, 1, 24, $scope.album.type, viewMonthDataCallback,function(data){
+        console.log(data);
+      });
       $scope.showMonthView();
     };
 
@@ -4937,7 +4939,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.album.type = 'journey';
       }
       // $scope.albumPageNo = 1;
-      MyLife.getJournItiMoments(obj._id, 1, 24, $scope.album.type, viewMonthDataCallback);
+      MyLife.getJournItiMoments(obj._id, 1, 24, $scope.album.type, viewMonthDataCallback,function(data){
+        console.log(data);
+      });
       $scope.showMonthView();
     };
     //moment Integration ends here
@@ -9805,8 +9809,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       var n = d.getFullYear();
       $scope.getYear = _.rangeRight(1900, n + 1);
     };
-
-
+    $scope.viewYear();
 
     // month array
     $scope.monthDrop = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -11461,6 +11464,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             name: 'search-traveller',
             searchText: searchText
           });
+          break;
+        case 'search-itinerary':
+        $state.go('search-result', {
+          name: 'search-itinerary',
+          searchText: searchText
+        });
+          break;
+        case 'search-hashtag':
+        $state.go('search-result', {
+          name: 'search-hashtag',
+          searchText: searchText
+        });
+          break;
+        case 'search-country':
+        $state.go('search-result', {
+          name: 'search-country',
+          searchText: searchText
+        });
+          break;
+        case 'search-city':
+        $state.go('search-result', {
+          name: 'search-city',
+          searchText: searchText
+        });
           break;
         default:
 
@@ -14503,17 +14530,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Search Results"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    $scope.searchCityText = "Mu";
-    $scope.searchCountryText = "a";
-    $scope.searchUserText = "a";
-    $scope.searchItineraryText = "a";
-    $scope.searchHashText = "a";
     $scope.pagenumber = 1;
     $scope.limit = 20;
+    $scope.viewSearchedUser = [];
+    $scope.viewSearchedItinerary = [];
+    $scope.viewSearchedHashtag = [];
+    $scope.viewSearchedCountry = [];
     $scope.viewSearchedCity = [];
     $scope.searchScroll = {
       busy: false,
-      stopCallingApi: false
+      stopCallingApi:false,
+      busyUser: false,
+      busyItinerary: false,
+      busyHash: false,
+      busyCountry: false,
+      busyCity: false,
+      stopCallingApiUser: false,
+      stopCallingApiItinerary: false,
+      stopCallingApiHash: false,
+      stopCallingApiCountry: false,
+      stopCallingApiCity: false,
     };
 
     // change url
@@ -14533,17 +14569,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             pagenumber: pagenumber,
             limit: limit
           }, function (data) {
-            $scope.viewSearchedUser = data.data;
+            if (data.data.length == 0) {
+              $scope.searchScroll.stopCallingApi = true;
+            } else {
+              _.each(data.data, function (newData) {
+                $scope.viewSearchedUser.push(newData);
+              })
+            }
             console.log($scope.viewSearchedUser, 'user');
           });
           break;
         case 'search-itinerary':
+        $scope.searchScroll.busyItinerary = false;
           NavigationService.getSearchItineraryData({
             search: searchText,
             pagenumber: pagenumber,
             limit: limit
           }, function (data) {
-            $scope.viewSearchedItinerary = data.data;
+            if (data.data.length == 0) {
+              $scope.searchScroll.stopCallingApi = true;
+            } else {
+              _.each(data.data, function (newData) {
+                $scope.viewSearchedItinerary.push(newData);
+              })
+            }
             console.log($scope.viewSearchedItinerary, 'itinerary');
           })
           break;
@@ -14553,8 +14602,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             pagenumber: pagenumber,
             limit: limit
           }, function (data) {
-            $scope.viewSearchedHashtag = data.data;
-            console.log($scope.viewSearchedHashtag, 'Hashtag');
+            if (data.data.length == 0) {
+              $scope.searchScroll.stopCallingApi = true;
+            } else {
+              _.each(data.data, function (newData) {
+                $scope.viewSearchedHashtag.push(newData);
+              })
+            }
+            console.log($scope.viewSearchedHashtag, 'hashtag');
           })
           break;
         case 'search-country':
@@ -14563,7 +14618,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             pagenumber: pagenumber,
             limit: limit
           }, function (data) {
-            $scope.viewSearchedCountry = data.data;
+            if (data.data.length == 0) {
+              $scope.searchScroll.stopCallingApi = true;
+            } else {
+              _.each(data.data, function (newData) {
+                $scope.viewSearchedCountry.push(newData);
+              })
+            }
             console.log($scope.viewSearchedCountry, 'country');
           })
           break;
@@ -14573,7 +14634,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             pagenumber: pagenumber,
             limit: limit
           }, function (data) {
-            // $scope.viewSearchedCity = data.data;
             if (data.data.length == 0) {
               $scope.searchScroll.stopCallingApi = true;
             } else {
@@ -14618,15 +14678,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //     console.log($scope.viewSearchedHashtag,'Hashtag');
     //   })
     // }
-    $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, $scope.searchedUrl.name);
+    // $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, $scope.searchedUrl.name);
 
-    $scope.loadMoreSearch = function () {
+    $scope.loadMoreSearch = function (searchType) {
       $scope.pagenumber++;
       $scope.searchScroll.busy = true;
       console.log($scope.pagenumber, 'page number');
       if ($scope.searchScroll.stopCallingApi == false) {
-        $scope.getCitySearch($scope.searchCityText, $scope.pagenumber, $scope.limit);
+          $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, searchType);
       }
+      console.log($scope.searchedUrl.searchText,'text');
+      console.log(searchType,'name');
     };
 
     // tab change
@@ -14678,6 +14740,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.searchresult.innerView = allsearchresult[view];
       var url = "search-traveller";
       var active = "";
+      $scope.pagenumber = 1;
+      $scope.searchScroll.busy = false;
+      $scope.searchScroll.stopCallingApi = false;
       console.log(view);
       switch (view) {
         case 0:

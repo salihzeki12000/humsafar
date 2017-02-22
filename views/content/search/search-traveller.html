@@ -1,4 +1,4 @@
-<div class="search-traveller clearfix">
+<div class="search-traveller clearfix" infinite-scroll="loadMoreSearch('search-traveller');" infinite-scroll-disabled='searchScroll.busy'>
   <div class="following-container" ng-repeat="list in viewSearchedUser track by $index">
     <div class="following-holder">
       <div class="follow-imgholder">
