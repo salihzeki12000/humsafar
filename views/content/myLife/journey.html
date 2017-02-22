@@ -38,7 +38,7 @@
               </div>
               <div class="pull-right">
                 <div class="add-journey">
-                  <span class="pointer" ng-click="showMore = !showMore" ng-class="{'close-more' : showMore == true}"><i class="fa fa-plus"></i></span>
+                  <span class="pointer" ng-click="false||(showMore = !showMore)" remove-link my-profile='false' element-event="$event" ng-class="{'close-more' : showMore == true}"><i class="fa fa-plus"></i></span>
                   <div class="add-more-journey" ng-show="showMore">
                     <ul>
                       <li><a href="">On The Go Journeys</a></li>

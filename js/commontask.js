@@ -417,6 +417,20 @@ commontask.directive('findTags', function (LikesAndComments) {
   }
 });
 
+commontask.directive('removeLink', function () {
+  return {
+    restrict: 'A', // 'A' is the default, so you could remove this line
+    scope: {
+      myProfile: '=',
+      elementEvent: '='
+    },
+    link: function (scope, element, attrs) {
+      console.log(scope.myProfile, scope.elementEvent);
+      attrs.ngClick = "";
+    }
+  };
+});
+
 commontask.filter("followFollowingStatus", function () {
   return function (input) {
     console.log(input, "---");
