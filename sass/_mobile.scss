@@ -61,11 +61,17 @@
       }
     }
   }
+  .options .own-trip{
+    padding: 15px;
+  }
   // ongo journey page end
   .list-travel-view {
     margin-right: 2px;
   }
   // my life
+  .star-post-rating .list-inline > li{
+    padding-left: 0;  
+  }
   .user-travel-detail {
     ul li {
       padding: 0 15px;
@@ -529,7 +535,7 @@
     font-size: 18px;
 }
 .travel-star-rating,
-.local-star-rating { 
+.local-star-rating {
   .list-inline > li {
     padding: 0 10px;
 }
@@ -598,6 +604,17 @@
       }
     }
   }
+
+  //libro-header
+  .libro-header .navbar-default .navbar-toggle{
+    margin-top: 2px;
+    left: 20px;
+  }
+  .navbar-default .navbar-toggle{
+    margin-top: 2px;
+    left: 20px;
+  }
+  //libro-header end
   // main page
   .upload-section {
     img {
@@ -1556,7 +1573,7 @@
     }
   }
   // MYLIFE MOMENTS END
-  //scroll unshow 
+  //scroll unshow
   .ngsb-wrap .ngsb-scrollbar .ngsb-thumb-container {
       display: none;
 }

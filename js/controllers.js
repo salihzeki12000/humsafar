@@ -14337,28 +14337,56 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       stopCallingApi: false
     };
     $scope.notificationCard = [];
+    $scope.notificationCard.notifyGender = "";
     $scope.notificationCard.notifyString = "";
+    // var makeNotifyGender = function() {
+    //   _.each($scope.notificationCard, function (notification) {
+    //     if(notification.userFrom.gender == 'male'){
+    //       notification.notifyGender = 'his';
+    //       console.log(notification.notifyGender,'his hai kya?');
+    //     } else if (notification.userFrom.gender == 'female'){
+    //       notification.notifyGender = 'her';
+    //       console.log(notification.notifyGender,'her hai kya?');
+    //     }
+    //   });
+    // };
     var makeNotifyString = function () {
       _.each($scope.notificationCard, function (notification) {
         switch (notification.type) {
           case 'journeyRequest':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> wants to tag you in (gender) <span class="avenir-heavy">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy">' + notification.data.name + '</span>';
+          if(notification.userFrom.gender=='male') {
+            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> wants to tag you in his <span class="avenir-heavy">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy">' + notification.data.name + '</span>';
+          }else {
+            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> wants to tag you in her <span class="avenir-heavy">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy">' + notification.data.name + '</span>';
+          }
             break;
-            // case 'journeyLeft':
-            //       notification.notifyString = '<span class="avenir-heavy color-blue">'+notification.userFrom.name + '</span> has ended (gender) <span class="avenir-heavy color-blue">On The Go Journey</span> - '+'<span class="avenir-heavy color-pink">'+notification.data.name+'</span>';
-            //   break;
+          case 'journeyLeft':
+          if(notification.userFrom.gender=='male'){
+            notification.notifyString = '<span class="avenir-heavy color-blue">'+notification.userFrom.name + '</span> has ended his <span class="avenir-heavy color-blue">On The Go Journey</span> - '+'<span class="avenir-heavy color-pink">'+notification.data.name+'</span>';
+          } else{
+            notification.notifyString = '<span class="avenir-heavy color-blue">'+notification.userFrom.name + '</span> has ended her <span class="avenir-heavy color-blue">On The Go Journey</span> - '+'<span class="avenir-heavy color-pink">'+notification.data.name+'</span>';
+          }
+            break;
           case 'postLike':
             if (notification.data.type == 'travel-life') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked your <span class="avenir-heavy color-blue">On The Go Activity</span>';
+              notification.notifyString = '<span class="avenir-heavy isblue">' + notification.userFrom.name + '</span> has liked your <span class="avenir-heavy color-blue">On The Go Activity</span>';
             } else {
               notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked your <span class="avenir-heavy color-blue">Local Life Activity</span>';
             }
             break;
           case 'postFirstTime':
             if (notification.data.type == 'travel-life') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to (gender) <span class="avenir-heavy color-blue">On The Go Activity</span>';
+              if(notification.userFrom.gender=='male'){
+                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to his <span class="avenir-heavy color-blue">On The Go Activity</span>';
+              } else {
+                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to her <span class="avenir-heavy color-blue">On The Go Activity</span>';
+              }
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to (gender) <span class="avenir-heavy color-blue"> Local Life </span> for the first time.';
+              if(notification.userFrom.gender=='male'){
+                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to his <span class="avenir-heavy color-blue"> Local Life </span> for the first time.';
+              } else{
+                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to her <span class="avenir-heavy color-blue"> Local Life </span> for the first time.';
+              }
             }
           case 'postComment':
             if (notification.data.type == 'travel-life') {

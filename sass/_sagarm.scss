@@ -4149,7 +4149,20 @@ q {
   background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent, transparent, transparent, transparent, transparent);
   color: #424242;
 
+  ::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $brand-pink;
+  }
+
   ul{
+    width: 525px;
     .active {
       &:after {
         content: '';
@@ -4325,6 +4338,15 @@ q {
   }
   .post-rating{
     margin-top: 10px;
+  }
+}
+.search-traveller{
+  .photos-location-sec .following-btn{
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  .photo-loc{
+    font-size: 12px;
   }
 }
 // SEARCH HASHTAG END

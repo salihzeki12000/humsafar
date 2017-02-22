@@ -1823,7 +1823,22 @@
   .notification-content{
     padding-bottom: 20px;
   }
+  .notification-checkin-ongo-photo{
+    img{
+      width: 100%;
+    }
+  }
   // NOTIFICATION PAGE END
+  // SEARCH PAGE
+  .search-navigation .searchnav-scroll{
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+  .search-navigation li{
+    padding-left: 0;
+    margin-bottom: 10px;
+  }
+  // SEARCH PAGE END
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
