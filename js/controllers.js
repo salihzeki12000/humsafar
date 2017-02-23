@@ -4193,6 +4193,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.showTravellife = false;
     $scope.visited = [];
 
+    $scope.likeUnlikeActivity = function (activity) {
+      console.log(activity.likeUnlikeFlag, activity.uniqueId, activity._id);
+      console.log(activity.likeDone + "this call is from activitytest.html");
+      activity.likeDone = !activity.likeDone;
+      if (activity.likeDone) {
+        if (activity.likeCount == undefined) {
+          activity.likeCount = 1;
+        } else {
+          activity.likeCount = activity.likeCount + 1;
+        }
+        LikesAndComments.likeUnlike(activity.likeUnlikeFlag, "like", activity.uniqueId, activity._id, null)
+      } else {
+        activity.likeCount = activity.likeCount - 1;
+        LikesAndComments.likeUnlike(activity.likeUnlikeFlag, "unlike", activity.uniqueId, activity._id, null)
+      }
+    };
+
     //Integration Section Starts here
     // backgroundClick
     $scope.editOption = function (model) {
@@ -4812,7 +4829,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         "perMonthMoments": []
       };
       // $scope.perMonthMoments = [];
-      MyLife.getPerMonthMoments($scope.album.token, 1, 24, $scope.album.type, viewMonthDataCallback,function(data){
+      MyLife.getPerMonthMoments($scope.album.token, 1, 24, $scope.album.type, viewMonthDataCallback, function (data) {
         console.log(data);
       });
       $scope.showMonthView();
@@ -4939,7 +4956,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.album.type = 'journey';
       }
       // $scope.albumPageNo = 1;
-      MyLife.getJournItiMoments(obj._id, 1, 24, $scope.album.type, viewMonthDataCallback,function(data){
+      MyLife.getJournItiMoments(obj._id, 1, 24, $scope.album.type, viewMonthDataCallback, function (data) {
         console.log(data);
       });
       $scope.showMonthView();
@@ -11377,16 +11394,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $.jStorage.set("isLoggedIn", true);
         $.jStorage.set("profile", data);
       } else {
-        $state.go('login');
+        // $state.go('login');
         $.jStorage.flush();
       }
     }, function (err) {
       console.log(err);
     });
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
-    if (!$scope.isLoggedIn) {
-      $state.go('login');
-    }
+    // if (!$scope.isLoggedIn) {
+    //   $state.go('login');
+    // }
     $scope.userData = $.jStorage.get("profile");
     $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
       $(window).scrollTop(0);
@@ -11466,28 +11483,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           });
           break;
         case 'search-itinerary':
-        $state.go('search-result', {
-          name: 'search-itinerary',
-          searchText: searchText
-        });
+          $state.go('search-result', {
+            name: 'search-itinerary',
+            searchText: searchText
+          });
           break;
         case 'search-hashtag':
-        $state.go('search-result', {
-          name: 'search-hashtag',
-          searchText: searchText
-        });
+          $state.go('search-result', {
+            name: 'search-hashtag',
+            searchText: searchText
+          });
           break;
         case 'search-country':
-        $state.go('search-result', {
-          name: 'search-country',
-          searchText: searchText
-        });
+          $state.go('search-result', {
+            name: 'search-country',
+            searchText: searchText
+          });
           break;
         case 'search-city':
-        $state.go('search-result', {
-          name: 'search-city',
-          searchText: searchText
-        });
+          $state.go('search-result', {
+            name: 'search-city',
+            searchText: searchText
+          });
           break;
         default:
 
@@ -14354,18 +14371,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       _.each($scope.notificationCard, function (notification) {
         switch (notification.type) {
           case 'journeyRequest':
-          if(notification.userFrom.gender=='male') {
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> wants to tag you in his <span class="avenir-heavy">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy">' + notification.data.name + '</span>';
-          }else {
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> wants to tag you in her <span class="avenir-heavy">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy">' + notification.data.name + '</span>';
-          }
+            if (notification.userFrom.gender == 'male') {
+              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> wants to tag you in his <span class="avenir-heavy">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy">' + notification.data.name + '</span>';
+            } else {
+              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> wants to tag you in her <span class="avenir-heavy">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy">' + notification.data.name + '</span>';
+            }
             break;
           case 'journeyLeft':
-          if(notification.userFrom.gender=='male'){
-            notification.notifyString = '<span class="avenir-heavy color-blue">'+notification.userFrom.name + '</span> has ended his <span class="avenir-heavy color-blue">On The Go Journey</span> - '+'<span class="avenir-heavy color-pink">'+notification.data.name+'</span>';
-          } else{
-            notification.notifyString = '<span class="avenir-heavy color-blue">'+notification.userFrom.name + '</span> has ended her <span class="avenir-heavy color-blue">On The Go Journey</span> - '+'<span class="avenir-heavy color-pink">'+notification.data.name+'</span>';
-          }
+            if (notification.userFrom.gender == 'male') {
+              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has ended his <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="avenir-heavy color-pink">' + notification.data.name + '</span>';
+            } else {
+              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has ended her <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="avenir-heavy color-pink">' + notification.data.name + '</span>';
+            }
             break;
           case 'postLike':
             if (notification.data.type == 'travel-life') {
@@ -14376,15 +14393,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             break;
           case 'postFirstTime':
             if (notification.data.type == 'travel-life') {
-              if(notification.userFrom.gender=='male'){
+              if (notification.userFrom.gender == 'male') {
                 notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to his <span class="avenir-heavy color-blue">On The Go Activity</span>';
               } else {
                 notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to her <span class="avenir-heavy color-blue">On The Go Activity</span>';
               }
             } else {
-              if(notification.userFrom.gender=='male'){
+              if (notification.userFrom.gender == 'male') {
                 notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to his <span class="avenir-heavy color-blue"> Local Life </span> for the first time.';
-              } else{
+              } else {
                 notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to her <span class="avenir-heavy color-blue"> Local Life </span> for the first time.';
               }
             }
@@ -14567,7 +14584,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.viewSearchedCity = [];
     $scope.searchScroll = {
       busy: false,
-      stopCallingApi:false,
+      stopCallingApi: false,
       busyUser: false,
       busyItinerary: false,
       busyHash: false,
@@ -14608,7 +14625,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           });
           break;
         case 'search-itinerary':
-        $scope.searchScroll.busyItinerary = false;
+          $scope.searchScroll.busyItinerary = false;
           NavigationService.getSearchItineraryData({
             search: searchText,
             pagenumber: pagenumber,
@@ -14713,10 +14730,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.searchScroll.busy = true;
       console.log($scope.pagenumber, 'page number');
       if ($scope.searchScroll.stopCallingApi == false) {
-          $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, searchType);
+        $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, searchType);
       }
-      console.log($scope.searchedUrl.searchText,'text');
-      console.log(searchType,'name');
+      console.log($scope.searchedUrl.searchText, 'text');
+      console.log(searchType, 'name');
     };
 
     // tab change
@@ -14825,6 +14842,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // tab change end
   })
 
+  .controller('ErrorCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+    $scope.template = TemplateService.changecontent("404error"); //Use same name of .html file
+    $scope.menutitle = NavigationService.makeactive("404 Error"); //This is the Title of the Website
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+  })
+
+  .controller('ComingSoonCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+    $scope.template = TemplateService.changecontent("coming-soon"); //Use same name of .html file
+    $scope.menutitle = NavigationService.makeactive("Coming Soon"); //This is the Title of the Website
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+  })
 
   .controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {
     $scope.changeLanguage = function () {

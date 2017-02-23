@@ -292,16 +292,16 @@
                           <div class="user-social-item clearfix">
                             <div class="pull-left">
                               <ul>
-                                <li><a href=""><i class="fa fa-heart color-blue" ng-class="{'fa-heart-o': life.likeDone == null, 'fa-heart': life.likeDone == true}"></i></a></li>
+                                <li ng-click="likeUnlikeActivity(life)"><a href=""><i class="fa fa-heart color-blue" ng-class="{'fa-heart-o': life.likeDone == null, 'fa-heart': life.likeDone == true}"></i></a></li>
                                 <li>
                                   <a href=""><img src="img/comments.png" alt="" height="18"></a>
                                 </li>
-                                <li>
+                                <!--<li>
                                   <a href=""><img src="img/reviews.png" alt="" height="18"></a>
                                 </li>
                                 <li>
                                   <a href=""><img src="img/share.png" alt="" height="18"></a>
-                                </li>
+                                </li>-->
                               </ul>
                             </div>
                             <div class="pull-right">
@@ -322,7 +322,7 @@
                             <div class="clearfix">
                               <div class="pull-left">
                                 <span class="color-blue mr10 avenir-heavy"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{life.likes}}</b>Likes</span>
-                                <span class="color-blue avenir-heavy"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>
+                                <!--<span class="color-blue avenir-heavy"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
                               </div>
                               <div class="pull-right">
                                 <img src="img/travel.png" alt="">
@@ -611,7 +611,7 @@
                       <div class="notification-like" ng-init="commentLike={};">
                         <!-- showLikes=!showLikes; -->
                         <span class="notify-like-holder pointer avenir-roman" ng-click="getLikes(post._id);editOption(commentLike)">
-                  <i class="fa fa-heart color-blue" ng-class="{'view-like' : commentLike.backgroundClick == true , '' : commentLike.backgroundClick == false}" ></i>
+                  <i class="fa fa-heart color-blue"  ng-click="likeUnlikeActivity(life)" ng-class="{'view-like' : commentLike.backgroundClick == true , '' : commentLike.backgroundClick == false}" ></i>
                  <span>{{post.likeCount|filterCount}}   </span>{{post.likeCount|singularPlural:'Likes'}}
                         <!-- ng-show="showLikes" -->
                         <!--<div class="like-dropdown" ng-show="commentLike.backgroundClick;">

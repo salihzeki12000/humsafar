@@ -148,36 +148,33 @@ var mylife = angular.module('mylife', [])
             var i = 0;
             _.each(journeys, function (n) {
               journeys[i].start_Time = {};
-              if (n.onGoing == true || n.onGoing == false) {
+              if (n.onGoing === true || n.onGoing === false) {
                 journeys[i].onJourney = false;
               }
-              // journeys[i].travelledDay = moment().diff(moment("2016-10-17T06:49:44.536Z"), 'days');
               journeys[i].showRemainingCount = false;
+              console.log(n);
               if (n.countryVisited.length >= 3) {
                 journeys[i].showRemainingCount = true;
               }
               journeys[i].remainingCount = n.countryVisited.length - 3;
               i++;
+              switch (journeys.type) {
+                case "travel-life":
+                  activity.likeUnlikeFlag = "post";
+                  break;
+                case "on-the-go-journey":
+                case "ended-journey":
+                  activity.likeUnlikeFlag = "journey";
+                  break;
+                case "quick-itinerary":
+                case "detail-itinerary":
+                  activity.likeUnlikeFlag = "itinerary";
+                  break;
+              }
             });
+            console.log(journeys);
             callback(journeys);
           }
-          // var journeys = data.data;
-          //
-          // var i = 0;
-          // _.each(journeys, function (n) {
-          //   journeys[i].start_Time = {};
-          //   if (n.onGoing == true || n.onGoing == false) {
-          //     journeys[i].onJourney = false;
-          //   }
-          //   // journeys[i].travelledDay = moment().diff(moment("2016-10-17T06:49:44.536Z"), 'days');
-          //   journeys[i].showRemainingCount = false;
-          //   if (n.countryVisited.length >= 3) {
-          //     journeys[i].showRemainingCount = true;
-          //   }
-          //   journeys[i].remainingCount = n.countryVisited.length - 3;
-          //   i++;
-          // });
-          // callback(journeys);
         });
       },
       getAllMoments: function (token, limit, type, times, successCallback, errorCallback) { //for all and locallife
