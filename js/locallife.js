@@ -709,6 +709,20 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
       }
       // delete local journey post end
       // local journey edit end
+      $scope.getPhotosCommentData = function (photoId) {
+        console.log(photoId, "click function called");
+        modal = $uibModal.open({
+          templateUrl: "views/modal/notify.html",
+          animation: true,
+          controller: 'photoCommentModalCtrl',
+          scope: $scope,
+          windowClass: "notify-popup"
+        });
+        modal.closed.then(function () {
+          $scope.listOfComments = {};
+        });
+        LikesAndComments.openPhotoPopup(photoId, $scope);
+      };
     }
   }
 }]);
