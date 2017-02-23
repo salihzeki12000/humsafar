@@ -1390,7 +1390,7 @@ header {
 }
 
 .user-travel-detail {
-  padding: 25px 0;
+  padding: 15px 0;
   background: url('../img/travel-detail-bg.png') no-repeat;
   background-size: 100% 100%;
   text-align: center;
@@ -1426,7 +1426,7 @@ header {
   background-color: rgba(255, 255, 255, 0.8);
 
   p {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .get-more {
@@ -1549,6 +1549,15 @@ header {
 
   .get-right {
     display: inline-block;
+  }
+}
+
+.country-list{
+  .custom-checkbox [type="checkbox"]:checked + label, .custom-checkbox-heart [type="checkbox"]:checked + label, .custom-checkbox [type="checkbox"]:not(:checked) + label, .custom-checkbox-heart [type="checkbox"]:not(:checked) + label{
+    position: static;
+  }
+  .custom-checkbox [type="checkbox"]:checked + label:before, .custom-checkbox-heart [type="checkbox"]:checked + label:before, .custom-checkbox [type="checkbox"]:not(:checked) + label:before, .custom-checkbox-heart [type="checkbox"]:not(:checked) + label:before{
+    top: 0;
   }
 }
 

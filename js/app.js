@@ -354,6 +354,16 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'NotificationCtrl'
     })
+    .state('errorpage', {
+      url: "/404error",
+      templateUrl: "views/template.html",
+      controller: 'ErrorCtrl'
+    })
+    .state('comingsoonpage', {
+      url: "/coming-soon",
+      templateUrl: "views/template.html",
+      controller: 'ComingSoonCtrl'
+    })
     .state('ProfileList', {
       url: "/profile-list/:active",
       templateUrl: "views/template.html",

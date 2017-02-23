@@ -4372,3 +4372,52 @@ q {
   }
 }
 // DELETE POST POPUP END
+
+//404 ERROR PAGE
+.error-page{
+  width: 100%;
+  height: calc( 100vh - 60px);
+  position: relative;
+  background: url('../img/error.jpg') 50% 50% no-repeat;
+  background-size: cover;
+}
+
+.error-msg{
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  @include transform(translate(-50%,-50%));
+  color: #fff;
+  .error-head{
+    margin: 0;
+    font-size: 90px;
+    line-height: 1;
+  }
+  h4{
+    margin: 0;
+    line-height: 1;
+  }
+  .error-btn{
+    margin: 20px 0;
+  }
+}
+//404 ERROR PAGE END
+
+// COMING SOON PAGE
+.coming-soon-page{
+  width: 100%;
+  height: calc( 100vh - 60px);
+  position: relative;
+  background: url('../img/coming-soon.jpg') 50% 50% no-repeat;
+  background-size: cover;
+}
+.comingsoon-content{
+  color: #fff;
+  text-align: center;
+  @extend .get-center;
+
+  h1{
+    font-size: 48px;
+  }
+}
+// COMING SOON PAGE END

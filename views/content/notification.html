@@ -156,10 +156,10 @@
 
               <!-- JOURNEY like, COMMENT START -->
               <div class="notification-joureny-like" ng-if="notify.type == 'journeyLike' || notify.type == 'journeyComment' || notify.type == 'journeyMentionComment'">
-                <div class="notification-checkin-ongo-photo" ng-if="notify.data.coverPhoto!==null">
+                <div class="notification-checkin-ongo-photo" ng-if="notify.data.coverPhoto!==null || notify.data.startLocationPic==''">
                   <img ng-src="{{notify.data.coverPhoto|uploadpath:250:125:'cover'}}" alt="" class="img-responsive" />
                 </div>
-                <div class="notification-checkin-ongo-photo" ng-if="notify.data.coverPhoto ==null && notify.data.startLocationPic!==''">
+                <div class="notification-checkin-ongo-photo" ng-if="notify.data.coverPhoto==null && notify.data.startLocationPic!==''">
                   <img ng-src="{{notify.data.startLocationPic|uploadpath:250:125:'cover'}}" alt="" class="img-responsive" />
                 </div>
               </div>
