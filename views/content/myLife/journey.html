@@ -108,8 +108,8 @@
                         <!--jounrey main detail card-->
                         <div class="travelled-journey relate" ng-click="routeTO(life.type,life.urlSlug)">
                           <div class="travelled-imgholder">
-                            <img ng-src="{{life.coverPhoto|uploadpath:722:900:'cover'}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto!=null">
-                            <img ng-src="{{life.startLocationPic|small|uploadpath:722:900:'cover'}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto==null">
+                            <img ng-src="{{life.coverPhoto|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto!=null">
+                            <img ng-src="{{life.startLocationPic|small|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto==null">
                           </div>
                           <div class="country-badges">
                             <div class="country-visited" ng-repeat="visit in life.countryVisited | limitTo : 3">
@@ -179,16 +179,16 @@
                           <div class="user-social-item clearfix">
                             <div class="pull-left">
                               <ul>
-                                <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
+                                <li ng-click="likeUnlikeActivity(life)" like-sound><a href=""><i class="fa color-blue card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i></a></li>
                                 <li>
                                   <a href=""><img src="img/comments.png" alt="" height="18"></a>
                                 </li>
-                                <li>
+                                <!--<li>
                                   <a href=""><img src="img/reviews.png" alt="" height="18"></a>
                                 </li>
                                 <li>
                                   <a href=""><img src="img/share.png" alt="" height="18"></a>
-                                </li>
+                                </li>-->
                               </ul>
                             </div>
                             <div class="pull-right">
@@ -215,11 +215,12 @@
                               </div>
                             </div>
                           </div>
-                          <div class="social-likes-reviews">
+                          <div class="social-likes-reviews" ng-if="!(((life.likeCount==0)||(life.likeCount==undefined))&&(life.commentCount==0))">
                             <div class="clearfix">
                               <div class="pull-left">
-                                <span class="color-blue mr10 avenir-heavy"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{life.likes}}</b>Likes</span>
-                                <span class="color-blue avenir-heavy" ng-if="life.pointReview.length>0"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>
+                                <span class="color-blue mr10 avenir-heavy"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
+                                <!--<span class="color-blue avenir-heavy" ng-if="life.pointReview.length>0"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
+                                <span class="color-blue mr10 card-comment avenir-heavy pointer"><img src="img/comments.png" alt="" class="mr5" height="18"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
                               </div>
                               <div class="pull-right">
                                 <img src="img/travel.png" alt="">
@@ -258,8 +259,8 @@
                           </div> -->
                           </div>
                           <div class="journey-tag-holder">
-                            <div class="days-spent pull-right" ng-init="count=(life.endTime|dateDifference: life.startTime)">
-                              <p><span class="block">{{count}}</span>{{count|singularPlural:'Days'}}</p>
+                            <div class="days-spent pull-right">
+                              <p><span class="block">{{life.duration}}</span>{{life.duration|singularPlural:'Days'}}</p>
                             </div>
                             <h3 class="m-clear text-capitalize">{{life.name}}</h3>
                             <div class="clearfix journey-travelling-type">
@@ -292,7 +293,7 @@
                           <div class="user-social-item clearfix">
                             <div class="pull-left">
                               <ul>
-                                <li ng-click="likeUnlikeActivity(life)"><a href=""><i class="fa fa-heart color-blue" ng-class="{'fa-heart-o': life.likeDone == null, 'fa-heart': life.likeDone == true}"></i></a></li>
+                                <li ng-click="likeUnlikeActivity(life)" like-sound><a href=""><i class="fa color-blue card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i></i></a></li>
                                 <li>
                                   <a href=""><img src="img/comments.png" alt="" height="18"></a>
                                 </li>
@@ -318,11 +319,12 @@
                               <!--temporary edit button dropdown-->
                             </div>
                           </div>
-                          <div class="social-likes-reviews">
+                          <div class="social-likes-reviews" ng-if="!(((life.likeCount==0)||(life.likeCount==undefined))&&(life.commentCount==0))">
                             <div class="clearfix">
                               <div class="pull-left">
-                                <span class="color-blue mr10 avenir-heavy"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{life.likes}}</b>Likes</span>
+                                <span class="color-blue mr10 avenir-heavy"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
                                 <!--<span class="color-blue avenir-heavy"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
+                                <span class="color-blue mr10 card-comment avenir-heavy pointer"><img src="img/comments.png" alt="" class="mr5" height="18"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
                               </div>
                               <div class="pull-right">
                                 <img src="img/travel.png" alt="">
@@ -575,7 +577,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="scroll-local-life scrollme" ng-scrollbar rebuild-on="rebuild:me" rebuild-on-resize>
+                <div class="scroll-local-life scrollme" ng-scrollbar rebuild-on="rebuild:me" rebuild-on-resize ng-if="viewLocal">
                   <div class="local-post" infinite-scroll="getMoreLocalPost();" infinite-scroll-disabled='scroll2.busy' infinite-scroll-distance='1'>
                     <!-- local life data -->
                     <post-local-life ng-repeat="localPost in localLifeJourney track by $index" ongolocal="localPost" open-comment-section="openCommentSection(ongolocal)"
@@ -597,7 +599,7 @@
                     <div class="pull-left">
                       <ul class="notify-like">
                         <li>
-                          <a href=""><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate like-animate-cyan' : 'fa-heart-o'" ng-click="likePost(post.uniqueId,post._id)"></i></a>
+                          <a href=""><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate like-animate-cyan' : 'fa-heart-o'" ng-click="likePost(post.uniqueId,post._id)" like-sound></i></a>
                         </li>
                         <li>
                           <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve" ng-click="focus('enterComment');"></a>
@@ -611,7 +613,7 @@
                       <div class="notification-like" ng-init="commentLike={};">
                         <!-- showLikes=!showLikes; -->
                         <span class="notify-like-holder pointer avenir-roman" ng-click="getLikes(post._id);editOption(commentLike)">
-                  <i class="fa fa-heart color-blue"  ng-click="likeUnlikeActivity(life)" ng-class="{'view-like' : commentLike.backgroundClick == true , '' : commentLike.backgroundClick == false}" ></i>
+                  <i class="fa fa-heart color-blue card-like-animation"  ng-click="likeUnlikeActivity(life)" ng-class="{'view-like' : commentLike.backgroundClick == true , '' : commentLike.backgroundClick == false}" ></i>
                  <span>{{post.likeCount|filterCount}}   </span>{{post.likeCount|singularPlural:'Likes'}}
                         <!-- ng-show="showLikes" -->
                         <!--<div class="like-dropdown" ng-show="commentLike.backgroundClick;">

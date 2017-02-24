@@ -1622,6 +1622,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.journey.journeyHighLight = "";
       $scope.getCard = "";
       $scope.comment.text = "";
+      $scope.showLikeShow = "";
     };
 
     $scope.getLikesData = function (ongo) {
@@ -1673,15 +1674,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log($scope.post.likeDone + "this call is from ongojourney.html");
       $scope.post.likeDone = !$scope.post.likeDone;
       if ($scope.post.likeDone) {
-        if ($scope.post.likeCount == undefined) {
+        if ($scope.post.likeCount === undefined) {
           $scope.post.likeCount = 1;
         } else {
           $scope.post.likeCount = $scope.post.likeCount + 1;
         }
-        LikesAndComments.likeUnlike("post", "like", uniqueId, _id, null)
+        LikesAndComments.likeUnlike("post", "like", uniqueId, _id, null);
       } else {
         $scope.post.likeCount = $scope.post.likeCount - 1;
-        LikesAndComments.likeUnlike("post", "unlike", uniqueId, _id, null)
+        LikesAndComments.likeUnlike("post", "unlike", uniqueId, _id, null);
       }
     };
 
@@ -4197,16 +4198,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log(activity.likeUnlikeFlag, activity.uniqueId, activity._id);
       console.log(activity.likeDone + "this call is from activitytest.html");
       activity.likeDone = !activity.likeDone;
+      console.log(activity.likeUnlikeFlag);
       if (activity.likeDone) {
         if (activity.likeCount == undefined) {
           activity.likeCount = 1;
         } else {
           activity.likeCount = activity.likeCount + 1;
         }
-        LikesAndComments.likeUnlike(activity.likeUnlikeFlag, "like", activity.uniqueId, activity._id, null)
+        LikesAndComments.likeUnlike(activity.type, "like", activity.uniqueId, activity._id, null)
       } else {
         activity.likeCount = activity.likeCount - 1;
-        LikesAndComments.likeUnlike(activity.likeUnlikeFlag, "unlike", activity.uniqueId, activity._id, null)
+        LikesAndComments.likeUnlike(activity.type, "unlike", activity.uniqueId, activity._id, null)
       }
     };
 
@@ -5506,6 +5508,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       name: "Others",
       checked: false
     }];
+    $scope.viewLocal = true;
     var viewLocalLife = function (dataLocal) {
       $scope.localLifeJourney = dataLocal.data;
       $scope.localDate = dataLocal.datesArr;
@@ -5515,6 +5518,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       } else {
         $scope.showLocalLife = false;
       }
+      $timeout(function () {
+        $scope.viewLocal = true;
+      }, 100);
     };
 
     $scope.getlocalLife = function () {
@@ -5559,6 +5565,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
             console.log(err);
           });
+          $scope.viewLocal = false;
           break;
         case 'checkIn':
           console.log(filterdData, "-----------------------------------------");
@@ -5574,6 +5581,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
             console.log(err);
           });
+          $scope.viewLocal = false;
           break;
         case 'rating':
           var getRatingIndex = _.findIndex($scope.localFilterPost.rating, function (rating) {
@@ -5591,6 +5599,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
             console.log(err);
           });
+          $scope.viewLocal = false;
           break;
         case 'photos':
           // if ($scope.localFilterPost.photos == false) {
@@ -5604,6 +5613,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           //     console.log(err);
           //   });
           // }
+          $scope.viewLocal = false;
           localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
             console.log(err);
           });
@@ -5623,6 +5633,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
             console.log(err);
           });
+          $scope.viewLocal = false;
           break;
         case 'thoughts':
           // if ($scope.localFilterPost.thoughts == false) {
@@ -5639,6 +5650,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
             console.log(err);
           });
+          $scope.viewLocal = false;
           break;
       }
     };
@@ -5663,6 +5675,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       localLife.getLocalJourney(viewLocalLife, $scope.localFilterPost, function (err) {
         console.log(err);
       });
+      $scope.viewLocal = false;
     }
     // clear all filter end
     // local post like and share
