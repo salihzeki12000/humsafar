@@ -180,7 +180,7 @@
                           <img ng-src="{{monthMoments.name|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="monthMoments.type=='photo'"
                             ng-click="getPhotosCommentData(monthMoments._id)">
                           <img ng-src="{{monthMoments.thumbnail|uploadpath:170:170:'cover'}}" alt="" class="img-responsive"
-                            ng-if="monthMoments.type=='video'">
+                            ng-if="monthMoments.type=='video'" ng-click="getPhotosCommentData(monthMoments._id)">
                         </div>
                       </div>
                     </div>

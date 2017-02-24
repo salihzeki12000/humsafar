@@ -4,10 +4,13 @@
     <div class="bg-white">
       <div class="notify-imgsec">
         <div class="notify-imgholder">
-          <div class="blurnotify-imgholder">
+          <div class="blurnotify-imgholder" ng-if="listOfComments.type=='photo'">
             <img ng-src="{{listOfComments.name|uploadpath}}" alt="" class="img-responsive">
           </div>
-          <img ng-src="{{listOfComments.name|uploadpath}}" alt="" class="img-reponsive">
+          <img ng-src="{{listOfComments.name|uploadpath}}" alt="" class="img-reponsive"  ng-if="listOfComments.type=='photo'">
+          <video  controls="controls"  ng-if="listOfComments.type=='video'">
+          <source src="{{listOfComments.name|trusted}}" type="video/mp4">
+        </video>
         </div>
       </div>
       <div class="comment-like-notify">
@@ -15,7 +18,7 @@
           <div class="clearfix">
             <div class="pull-left">
               <ul class="notify-like">
-                <li><a href="" class="relate"><i class="fa color-blue" ng-class="listOfComments.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePhoto(listOfComments.name,listOfComments.post,listOfComments._id)"></i>
+                <li><a href="" class="relate"><i class="fa color-blue" like-sound ng-class="listOfComments.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePhoto(listOfComments.name,listOfComments.post,listOfComments._id)"></i>
                 <span></span>
                 <audio id="like-play">
                   <source src="img/tiny1.mp3" type="audio/mp3">
