@@ -236,7 +236,7 @@ a:focus {
 
 .login-bg {
   padding-top: 6%;
-  background: url('../img/libro-home/login-bg.jpg');
+  background: url('../img/libro-home/login-bg.gif');
   // height: 100vh;
   overflow-y: hidden;
 }
@@ -1194,6 +1194,7 @@ header {
   border: 3px solid #fff;
   border-radius: 55px;
   margin: 0 auto;
+  background-color: $brand-lighter-grey;
   overflow: hidden;
   box-shadow: 0 2px 3px #636363;
 }
@@ -1365,7 +1366,7 @@ a.full-screen {
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
-}  
+}
 }
 .agthome-activitycard {
     color: #000;

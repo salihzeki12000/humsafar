@@ -1253,6 +1253,7 @@ header {
 
 .holiday-imgholder {
   min-height: 60px;
+  background-color: $brand-lighter-grey;
 
   img {
     height: 55px;
@@ -1367,6 +1368,7 @@ header {
   border: 3px solid #fff;
   border-radius: 55px;
   margin: 0 auto -15px;
+  background-color: $brand-lighter-grey;
   overflow: hidden;
   box-shadow: 0 2px 3px #636363;
   // background: url('../img/profile-main.png') no-repeat 50% 50%;
@@ -1751,12 +1753,14 @@ header {
 .travelled-imgholder {
   min-height: 440px;
   max-height: 440px;
+  background-color: $brand-lighter-grey;
   overflow: hidden;
 }
 
 .onway-imgholder {
   height: 330px;
   max-height: 330px;
+  background-color: $brand-lighter-grey;
   overflow: hidden;
 
   .unpublish-banner {
@@ -1778,7 +1782,7 @@ header {
 
 .travel-life-part {
   border-radius: 6px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: transparent;
 
   ul {
     padding: 0;
@@ -2706,6 +2710,7 @@ header {
   min-height: 300px;
   max-height: 500px;
   position: relative;
+  background-color: $brand-lighter-grey;
   overflow: hidden;
 
   .post-single-photo {
@@ -2934,9 +2939,11 @@ header {
     // margin-right: 5px;
     // display: inline-block;
     cursor: pointer;
+    background-color: $brand-lighter-grey;
     overflow: hidden;
 
     img {
+      width: 100%;
       max-height: 100%;
     }
   }
@@ -2947,6 +2954,7 @@ header {
   // @include square(169px);
   // display: inline-block;
   cursor: pointer;
+  background-color: $brand-lighter-grey;
   overflow: hidden;
 
   img {
@@ -2993,11 +3001,13 @@ header {
   width: 100%;
   height: auto;
   position: relative;
+  background-color: $brand-lighter-grey;
 
   .img-backholder {
     // @include square(170px);
     // @include position(absolute, 15px null null 15px);
     width: 100%;
+    min-height: 250px;
     @include transform(rotate(1deg));
     overflow: hidden;
 
@@ -3058,9 +3068,11 @@ header {
 .moment-localimgholder {
   // @include square(185px);
   // position: relative;
+  background-color: $brand-lighter-grey;
   .img-backholder {
     // @include square(150px);
     width: 100%;
+    min-height: 250px;
     // @include position(absolute, 30px null null 15px);
     overflow: hidden;
    img {
@@ -3155,10 +3167,12 @@ header {
     width: 109px;
     @include position(absolute, 9px 19px null null);
     border-radius: 100%;
+    background-color: $brand-lighter-grey;
     overflow: hidden;
   }
 
   .review-frontimgholder {
+    background-color: $brand-lighter-grey;
     img{
       width: 100%;
     }
@@ -3531,6 +3545,7 @@ header {
   height: 65px;
   border: 2px solid $brand-grey;
   border-radius: 25px;
+  background-color: $brand-lighter-grey;
   box-shadow: 0 3px 1px #e3e3e3;
   display: inline-block;
   overflow: hidden;
@@ -3576,6 +3591,7 @@ header {
 
   .holiday-imgholder {
     min-height: 55px;
+    background-color: $brand-lighter-grey;
   }
 
   .holiday-section,
@@ -3913,6 +3929,7 @@ header {
 
 .box-imgholder {
   width: 395px;
+  background-color: $brand-lighter-grey;
   overflow: hidden;
 }
 
@@ -4186,6 +4203,7 @@ header {
     width: 200px;
     height: 130px;
     border-radius: 6px;
+    background-color: $brand-lighter-grey;
     overflow: hidden;
   }
 
@@ -5491,6 +5509,7 @@ header {
     @include square(15px);
     color: transparent;
     text-shadow: none;
+    z-index: 2;
 
     &:before {
       color: $brand-blue;
@@ -7198,6 +7217,7 @@ header {
   right: -400px;
   background-color: #fff;
   @extend .avenir-roman;
+  @include transition(all 300ms linear);
 }
 
 .show-like-side-sec {

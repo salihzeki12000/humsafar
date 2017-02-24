@@ -2568,6 +2568,7 @@ q {
   border: 5px solid #fff;
   position: absolute;
   top: -30px;
+  background-color: $brand-lighter-grey;
 }
 
 .agent-traveller-detail {
@@ -2788,8 +2789,9 @@ q {
   width: 70px;
   height: 70px;
   border-radius: 100%;
-  overflow: hidden;
   margin: -50px auto 0;
+  background-color: $brand-lighter-grey;
+  overflow: hidden;
 }
 
 .modal-package {
@@ -3599,6 +3601,7 @@ q {
   border: 2px solid #fff;
   border-radius: 19px;
   margin-right: 10px;
+  background-color: $brand-lighter-grey;
   overflow: hidden;
   vertical-align: middle;
 
@@ -4297,6 +4300,7 @@ q {
   margin-top: -30px;
   margin-right: 5px;
   display: inline-block;
+  background-color: $brand-lighter-grey;
   overflow: hidden;
   position: relative;
 }
@@ -4418,6 +4422,32 @@ q {
 
   h1{
     font-size: 48px;
+  }
+}
+.coming-email{
+  border: 1px solid #fff;
+  border-radius:4px 0 0 4px;
+  background-color: transparent;
+}
+
+.email-form{
+  // border: 1px solid #fff;
+  border-radius: 5px;
+  .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group{
+    margin-left: 0;
+  }
+}
+
+.btn-coming{
+  background-color: #fff;
+  border-radius: 0px 4px 4px 0;
+}
+.btn-comingsoon{
+  background-color: transparent;
+  color: $brand-grey;
+  &:active, &:focus, &:hover{
+    background-color: transparent;
+    color: $brand-grey;
   }
 }
 // COMING SOON PAGE END
