@@ -535,6 +535,10 @@ textarea {
   background-color: rgba(255, 255, 255, 0.90);
 }
 
+.bg-black{
+  background-color: rgba(0, 0, 0, 0.40);
+}
+
 .bg-dark-blue {
   background-color: $brand-dark-blue;
 }
@@ -813,7 +817,12 @@ header {
     font-size: 20px;
   }
 }
-
+.select-photo{
+  position: static;
+  input{
+    left: 0;
+  }
+}
 .button-panel {
   margin-top: 80px;
 }
@@ -1253,7 +1262,6 @@ header {
 
 .holiday-imgholder {
   min-height: 60px;
-  background-color: $brand-lighter-grey;
 
   img {
     height: 55px;
@@ -2646,6 +2654,10 @@ header {
       padding: 0 10px;
       display: inline-block;
       vertical-align: middle;
+      a{
+        display: inline-block;
+        position: relative;
+      }
 
       i {
         font-size: 22px;
@@ -3591,7 +3603,6 @@ header {
 
   .holiday-imgholder {
     min-height: 55px;
-    background-color: $brand-lighter-grey;
   }
 
   .holiday-section,
@@ -10254,8 +10265,8 @@ header {
     }
   }
 
-  .country-list-holder:hover {
-    box-shadow: 1px 7px 4px #a0a0a0;
+    .country-list-holder:hover {
+    box-shadow: 1px 7px 4px rgba(0,0,0,0.3);
     top: -3px;
     @include transition(all 200ms linear);
 
