@@ -125,30 +125,46 @@ var commontask = angular.module('commontask', [])
         var obj = {
           "uniqueId": uniqueId
         };
+        // switch (type) {
+        //   case "post":
+        //     obj.post = type_id;
+        //     url = "/post/updateLikePostWeb";
+        //     break;
+        //   case "photo":
+        //     // obj.postId = type_id;
+        //     obj.photoId = additionalId;
+        //     url = "/postphotos/updateLikePostWeb";
+        //     break;
+        //   case "video":
+        //     // obj.postId = type_id;
+        //     obj.videoId = additionalId;
+        //     url = "/postvideos/updateLikePostWeb";
+        //     break;
+        //   case "itinerary":
+        //     obj.itinerary = type_id;
+        //     url = "/itinerary/updateLikeItineraryWeb";
+        //     break;
+        //   case "journey":
+        //     obj.journey = type_id;
+        //     url = "/journey/likeJourneyWeb";
+        //     break;
+        // }
         switch (type) {
-          case "post":
-            obj.post = type_id;
+          case "travel-life":
+          case "local-life":
             url = "/post/updateLikePostWeb";
             break;
-          case "photo":
-            // obj.postId = type_id;
-            obj.photoId = additionalId;
-            url = "/postphotos/updateLikePostWeb";
-            break;
-          case "video":
-            // obj.postId = type_id;
-            obj.videoId = additionalId;
-            url = "/postvideos/updateLikePostWeb";
-            break;
-          case "itinerary":
-            obj.itinerary = type_id;
-            url = "/itinerary/updateLikeItineraryWeb";
-            break;
-          case "journey":
+          case "on-the-go-journey":
+          case "ended-journey":
             obj.journey = type_id;
             url = "/journey/likeJourneyWeb";
             break;
-        };
+          case "quick-itinerary":
+          case "detail-itinerary":
+            obj.itinerary = type_id;
+            url = "/itinerary/updateLikeItineraryWeb";
+            break;
+        }
         if (task == "unlike") {
           obj.unlike = true;
         }
@@ -417,16 +433,25 @@ commontask.directive('findTags', function (LikesAndComments) {
   }
 });
 
-commontask.directive('removeLink', function () {
+commontask.directive('likeSound', function () {
   return {
-    restrict: 'A', // 'A' is the default, so you could remove this line
-    scope: {
-      myProfile: '=',
-      elementEvent: '='
-    },
+    restrict: 'A',
     link: function (scope, element, attrs) {
-      console.log(scope.myProfile, scope.elementEvent);
-      attrs.ngClick = "";
+      element.bind('click', function () {
+
+      });
+    }
+  };
+});
+
+commontask.directive('likeSound', function () {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      element.bind('click', function () {
+        var audio = document.getElementById('like-play');
+        audio.play();
+      });
     }
   };
 });
