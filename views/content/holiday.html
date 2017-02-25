@@ -41,7 +41,7 @@
                 </div>
               </div>
               <div class="button-pane clearfix">
-                <button class="btn btn-outline-blue btn-more pull-right" ng-click="showHoliday(2);selectedCategory('holidayKindType','kindOfHoliday')">Next</button>
+                <button class="btn btn-outline-blue btn-more pull-right" ng-click="showHoliday(2);" ng-disabled="listOfCategories.travelConfig.kindOfHoliday.length==0">Next</button>
               </div>
             </div>
           </div>
@@ -84,7 +84,7 @@
             </div>
             <div class="button-pane clearfix">
               <button class="btn btn-outline-blue btn-more pull-left" ng-click="showHoliday(1)">Previous</button>
-              <button class="btn btn-outline-blue btn-more pull-right" ng-click="showHoliday(3);selectedCategory('usuallygoHoliday','usuallyGo')">Next</button>
+              <button class="btn btn-outline-blue btn-more pull-right" ng-click="showHoliday(3);" ng-disabled="listOfCategories.travelConfig.usuallyGo.length==0">Next</button>
             </div>
           </div>
           <div class="holiday-step3" ng-if="viewHoliday==3">
@@ -125,7 +125,7 @@
               </div>
               <div class="button-pane clearfix">
                 <button class="btn btn-outline-blue btn-more pull-left" ng-click="showHoliday(2)">Previous</button>
-                <button class="btn btn-outline-blue btn-more pull-right" ng-click="showHoliday(4);selectedCategory('travelPrefer','preferToTravel')">Next</button>
+                <button class="btn btn-outline-blue btn-more pull-right" ng-click="showHoliday(4);" ng-disabled="listOfCategories.travelConfig.preferToTravel.length==0">Next</button>
               </div>
             </div>
           </div>
@@ -157,7 +157,7 @@
                         <figure>
                           <div class="holiday-imgholder">
                             <img ng-src="{{ideal.img}}" alt="" class="img-responsive m-center">
-                            <figcaption class="color-blue font-bold">{{ideal.caption}} <span class="block">{{ideal.caption1}}</span></figcaption>
+                            <figcaption class="color-blue font-bold">{{ideal.caption1}} <span class="block">{{ideal.caption2}}</span></figcaption>
                           </div>
                         </figure>
                       </div>
@@ -167,8 +167,7 @@
               </div>
               <div class="button-pane clearfix">
                 <button class="btn btn-outline-blue btn-more pull-left" ng-click="showHoliday(3)">Previous</button>
-                <button class="btn btn-outline-blue btn-more pull-right" ng-click="selectedCategory('idealHoliday','holidayType');saveUserData(listOfCategories);"
-                  ;>Done</button>
+                <button class="btn btn-outline-blue btn-more pull-right" ng-click="saveUserData(listOfCategories);" ; ng-disabled="listOfCategories.travelConfig.holidayType.length==0">Done</button>
               </div>
             </div>
           </div>

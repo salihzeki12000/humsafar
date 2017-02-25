@@ -58,7 +58,7 @@ var firstapp = angular.module('firstapp', [
   'angulartics',
   'angulartics.google.analytics',
   'fileuploadservicemod',
-  'angularFileUpload'
+  'angularFileUpload',
 ]);
 
 firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, cfpLoadingBarProvider) {
@@ -70,6 +70,10 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
   cfpLoadingBarProvider.spinnerTemplate = '<div class="travelibro-loader"><img src="img/travelibro-loader.gif" alt="Travelibro" class="img-responsive" /></div>';
 
   $stateProvider
+    .state('header', {
+      templateUrl: "views/template.html",
+      controller: 'headerctrl'
+    })
     .state('home', {
       url: "/",
       templateUrl: "views/template.html",
@@ -315,7 +319,6 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'AgenthomeCtrl'
     })
-
     .state('agent-user', {
       url: "/agent-user/:name",
       templateUrl: "views/template.html",

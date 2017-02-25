@@ -48,7 +48,7 @@ var activity = angular.module('activity', [])
                 activity.likeUnlikeFlag = "itinerary";
                 var len = activity.photos.length - 1;
                 var randomNum = Math.floor((Math.random() * len) + 0);
-                activity.coverPhoto = activity.photos[randomNum].name;
+                activity.coverPhoto = activity.coverPhoto;
                 // owner of the card
                 activity.owner = activity.creator;
                 if (activity.following) {
@@ -63,7 +63,7 @@ var activity = angular.module('activity', [])
                 activity.likeUnlikeFlag = "itinerary";
                 var len = activity.photos.length - 1;
                 var randomNum = Math.floor((Math.random() * len) + 0);
-                activity.coverPhoto = activity.photos[randomNum].name;
+                activity.coverPhoto = activity.coverPhoto;
                 // owner of the card
                 activity.owner = activity.user;
                 if (activity.following) {

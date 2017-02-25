@@ -44,7 +44,7 @@
             <div class="moment-view">
               <div class="moment-all-view" ng-if="momentView == 1 && viewMonth==false" infinite-scroll="getMoreMoments(allMoments)">
                 <!-- empty all view profile user login for first time  -->
-                <div class="empty-moment-all empty-profile-moment text-center" ng-if="allMoments.arr.length==0">
+                <div class="empty-moment-all empty-profile-moment text-center" ng-if="allMoments.arr[0].token==-1">
                   <div class="row">
                     <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
                       <h3 class="color-pink empty-title">Unwind​ B​y Rewinding</h3>
@@ -126,7 +126,7 @@
               <!-- moment local view  -->
               <div class="moment-local-main" ng-if="momentView == 3 && viewMonth==false" infinite-scroll="getMoreMoments(localLifeMoments)">
                 <!-- empty local view profile user login for first time  -->
-                <div class="empty-moment-local empty-profile-moment text-center" ng-if="localLifeMoments.arr.length==0">
+                <div class="empty-moment-local empty-profile-moment text-center" ng-if="localLifeMoments.arr[0].token==-1">
                   <div class="row">
                     <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
                       <h3 class="color-pink empty-title">Suspended In Time</h3>
@@ -142,29 +142,28 @@
                 <div ng-if="localLifeMoments.arr.length!==0">
                   <div class="row">
                     <div class="col-sm-3 col-xs-4" ng-repeat="moment in localLifeMoments.arr" ng-click="getPerMonthMoments(moment,'local');"
-                    ng-if="moment.token!=-1 && viewMonth==false">
-                                        <div class="moment-local-view">
-                    <div class="moment-localimgholder pointer">
-                      <div class="img-backholder">
-                        <img ng-src="{{moment.data[0].name|uploadpath:180:180:'cover'}}" alt="" class="img-responsive" ng-if="moment.data[0].type=='photo'">
-                        <!--<img ng-src="{{moment.data[0].thumbnail|uploadpath:180:180:'cover'}}" alt="" class="img-responsive" style="border:2px solid red"
+                      ng-if="moment.token!=-1 && viewMonth==false">
+                      <div class="moment-local-view">
+                        <div class="moment-localimgholder pointer">
+                          <div class="img-backholder">
+                            <img ng-src="{{moment.data[0].name|uploadpath:180:180:'cover'}}" alt="" class="img-responsive" ng-if="moment.data[0].type=='photo'">
+                            <!--<img ng-src="{{moment.data[0].thumbnail|uploadpath:180:180:'cover'}}" alt="" class="img-responsive" style="border:2px solid red"
                           ng-if="moment.data[0].type=='video'">-->
-                               <img ng-src="{{moment.data[0].thumbnail|uploadpath:180:180:'cover'}}" alt="" class="img-responsive" ng-if="moment.data[0].type=='video'">
-                      </div>
-                      <div class="img-frontholder">
-                        <img src="img/moment-local.png" alt="" class="img-responsive">
-                      </div>
-                    </div>
-                    <div class="local-info text-center avenir-roman">
-                      <h4>{{moment.token|momentsDate}} <span>({{moment.count}})</span></h4>
-                    </div>
-                    <!--</div>
+                            <img ng-src="{{moment.data[0].thumbnail|uploadpath:180:180:'cover'}}" alt="" class="img-responsive" ng-if="moment.data[0].type=='video'">
+                          </div>
+                          <div class="img-frontholder">
+                            <img src="img/moment-local.png" alt="" class="img-responsive">
+                          </div>
+                        </div>
+                        <div class="local-info text-center avenir-roman">
+                          <h4>{{moment.token|momentsDate}} <span>({{moment.count}})</span></h4>
+                        </div>
+                        <!--</div>
                   </div>
                 </div>-->
-                  </div>
+                      </div>
                     </div>
                   </div>
-
                 </div>
               </div>
               <div class="month-view-moments" ng-if="viewMonth">
@@ -179,8 +178,8 @@
                         <div class="singleMonth-imgholder">
                           <img ng-src="{{monthMoments.name|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="monthMoments.type=='photo'"
                             ng-click="getPhotosCommentData(monthMoments._id)">
-                          <img ng-src="{{monthMoments.thumbnail|uploadpath:170:170:'cover'}}" alt="" class="img-responsive"
-                            ng-if="monthMoments.type=='video'" ng-click="getPhotosCommentData(monthMoments._id)">
+                          <img ng-src="{{monthMoments.thumbnail|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="monthMoments.type=='video'"
+                            ng-click="getPhotosCommentData(monthMoments._id)">
                         </div>
                       </div>
                     </div>

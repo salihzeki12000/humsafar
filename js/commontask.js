@@ -164,6 +164,14 @@ var commontask = angular.module('commontask', [])
             obj.itinerary = type_id;
             url = "/itinerary/updateLikeItineraryWeb";
             break;
+          case "photo":
+            obj.photoId = additionalId;
+            url = "/postphotos/updateLikePostWeb";
+            break;
+          case "video":
+            obj.videoId = additionalId;
+            url = "/postvideos/updateLikePostWeb";
+            break;
         }
         if (task == "unlike") {
           obj.unlike = true;
