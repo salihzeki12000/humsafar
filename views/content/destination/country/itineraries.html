@@ -1,25 +1,26 @@
 <div class="activity-main min-hght">
-<div class="container-fluid">
-  <div class="relate  destin-fixednav1" ng-class="{'openfilter': isopenfilter}">
-    <div class="pt20 pb10 head-title-all bg-white">
-      <div class="row m-clear">
-        <div class="col-sm-3 col-xs-3">
-          <div class="pad-btn">
-            <button class="btn btn-pink" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i> Filter
+  <div class="container-fluid">
+    <div class="relate  destin-fixednav1" ng-class="{'openfilter': isopenfilter}">
+      <div class="pt20 pb10 head-title-all bg-white">
+        <div class="row m-clear">
+          <div class="col-sm-3 col-xs-3">
+            <div class="pad-btn">
+              <button class="btn btn-pink" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i> Filter
             </button>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xs-12">
+            <h4 class="text-center  fnt-24 p-clear">Itineraries</h4>
+            <!-- and Journeys -->
           </div>
         </div>
-        <div class="col-sm-6 col-xs-12">
-          <h4 class="text-center  fnt-24 p-clear">Itineraries and Journeys</h4>
-        </div>
       </div>
-    </div>
-     <div class="libro-filter filterclose">
-      <form>
-        <div class="pt20 pb10 head-title-all fliter-min-hght bg-white">
+      <div class="libro-filter filterclose">
+        <form>
+          <div class="pt20 pb10 head-title-all fliter-min-hght bg-white">
             <div class="pad-btn">
-                <div class="row">
-                  <div class="col-md-2 col-sm-3">
+              <div class="row">
+                <!-- <div class="col-md-2 col-sm-3">
                     <div class="select-all-made" ng-mouseleave="showAll=false">
                         <span class="btn btn-default form-control" ng-click="showAll=true" ng-hide="showAll">All
                       <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
@@ -33,47 +34,47 @@
                           </ul>
                         </div>
                   </div>
-                  </div>
+                  </div> -->
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-mouseleave="showcities=false">
-                      <span class="btn btn-default form-control" ng-click="showcities=true" ng-hide="showcities">Cities
-                  <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                      <input type="type" placeholder="Cities" ng-model="searchFilter" ng-show="showcities" class="form-control input-tab avenir-roman">
-                      <div class="check-box-panel" ng-show="showcities">
-                        <ul>
-                          <li ng-repeat="country in countries | filter:searchFilter">
-                            <input type="checkbox" id="{{country.code}} " class="form-control">
-                            <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
-                          </li>
-                        </ul>
-                      </div>
-                  </div>
-                </div>
-                <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-mouseleave="showtype=false">
-                      <span class="btn btn-default form-control" ng-click="showtype=true" ng-hide="showtype">Type
-                  <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                      <input type="type" placeholder="Type" ng-model="searchFilter" ng-show="showtype" class="form-control input-tab avenir-roman">
-                      <div class="check-box-panel" ng-show="showtype">
-                        <ul>
-                          <li ng-repeat="country in countries | filter:searchFilter">
-                            <input type="checkbox" id="{{country.code}} " ng-show="showtype" class="form-control">
-                            <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
-                          </li>
-                        </ul>
-                      </div>
-                  </div>
-                </div>
-                <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-mouseleave="showby=false">
-                    <span class="btn btn-default form-control" ng-click="showby=true" ng-hide="showby">By
-                  <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                    <input type="type" placeholder="By" ng-model="searchFilter" ng-show="showby" class="form-control input-tab avenir-roman">
-                    <div class="check-box-panel" ng-show="showby">
+                  <div class="select-all-made city-select">
+                    <input type="text" ng-model="itinerary.citySearch" class="form-control" ng-change="getItinerayCity();">
+                    <div class="city-dropdow itinerary-dropdown">
                       <ul>
-                        <li ng-repeat="country in countries | filter:searchFilter">
-                          <input type="checkbox" id="{{country.code}} " ng-show="showby" class="form-control" ng-model="testCtrl.myText">
-                          <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
+                        <li ng-repeat="city in cityList | filter:itinerary.citySearch track by $index">
+                          <div class="select-city custom-checkbox">
+                            <input type="checkbox" id="{{city.name}}" ng-click="itineraryFilter(city.name,'itineraryCity')">
+                            <label for="{{city.name}}">{{city.name}}</label>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-3">
+                  <div class="select-all-made itinerary-select">
+                    <input type="text" ng-model="itinerary.type" class="form-control" ng-change="getItineraryType();">
+                    <div class="city-dropdow itinerary-dropdown">
+                      <ul>
+                        <li ng-repeat="type in itineraryType| filter:itinerary.type track by $index">
+                          <div class="select-city custom-checkbox">
+                            <input type="checkbox" id="{{type}}" ng-click="itineraryFilter(type,'itineraryType')">
+                            <label for="{{type}}">{{type}}</label>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-3">
+                  <div class="select-all-made by-select">
+                    <input type="text" ng-model="itinerary.by" class="form-control" ng-change="getItineraryType();">
+                    <div class="city-dropdow itinerary-dropdown">
+                      <ul>
+                        <li ng-repeat="by in itineraryBy| filter:itinerary.by track by $index">
+                          <div class="select-city custom-checkbox">
+                            <input type="checkbox" id="{{by}}" ng-click="itineraryFilter(by,'itineraryBy')" />
+                            <label for="{{by}}">{{by}}</label>
+                          </div>
                         </li>
                       </ul>
                     </div>
@@ -87,24 +88,24 @@
               </div>
             </div>
           </div>
-        <div class="pt10 pb10 head-title-all bg-grey mb20 ">
-          <div class="container-fluid ">
-            <div class="plr30 ">
-              <div class="close-all ">
-                <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
-                <span class="tags avenir-roman" ng-repeat="item in country">{{item}} <span>X</span></span>
+          <div class="pt10 pb10 head-title-all bg-grey mb20 ">
+            <div class="container-fluid ">
+              <div class="plr30 ">
+                <div class="close-all ">
+                  <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
+                  <span class="tags avenir-roman" ng-repeat="item in country">{{item}} <span>X</span></span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </form>
-  </div>
-  </div>
+        </form>
+      </div>
+    </div>
     <div class="activity-container">
       <div class="plr30">
-        <div  masonry preserve-order>
+        <div masonry preserve-order>
           <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12 masonry-brick" ng-repeat="post in countryDestData.itinerary">
+            <div class="col-md-4 col-sm-6 col-xs-12 masonry-brick" ng-repeat="post in countryDestData.itinerary track by $index">
               <!-- user-iternarys -->
               <div class="travel-life-part blog-post avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
                 <div class="travel-journey-heading">
@@ -135,7 +136,7 @@
                   </div>
                   <div class="journey-tag-holder">
                     <div class="days-spent pull-right">
-                          <p><span class="block">{{post.duration}}</span>Days</p>
+                      <p><span class="block">{{post.duration}}</span>Days</p>
                     </div>
                     <h3 class="m-clear text-capitalize">{{post.title}}</h3>
                     <div class="clearfix journey-travelling-type">

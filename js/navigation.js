@@ -195,6 +195,9 @@ var navigationservice = angular.module('navigationservice', [])
       changePasswordEmail: function (formData, callback) {
         $http.post(adminURL + "/user/changePasswordEmail", formData).success(callback);
       },
+      getCitySearch: function (formData, callback) {
+        $http.post(adminURL + "/city/search", formData).success(callback);
+      },
       getDestination: function (formData, callback) {
         $http.post(adminURL + "/country/getDestination", formData).success(function (data) {
           data.count = formData.count;
