@@ -113,7 +113,7 @@
                           </div>
                           <div class="country-badges">
                             <div class="country-visited" ng-repeat="visit in life.countryVisited | limitTo : 3">
-                              <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30">
+                              <img ng-src="{{visit.country.flag|uploadpath:30:30:'cover'}}" alt="" height="30">
                               <!--<span ng-show="life.showRemainingCount" class="">+{{life.remainingCount}}</span>-->
                             </div>
                             <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
@@ -126,32 +126,32 @@
                             <h4 class="m-clear text-capitalize">{{life.name}}</h4>
                             <div class="clearfix journey-travelling-type">
                               <div class="row">
-                                <div class="col-xs-6">
+                                <div class="col-xs-8">
                                   <div class="pull-left">
                                     <div class="journey-collection">
                                       <!--<ul ng-if="life.photos.length">-->
-                                      <ul ng-if="life.photos.length > 1">
-                                        <li>
+                                      <ul>
+                                        <li ng-if="life.photoCount!='0'">
                                           <a href="">
                                             <div class="">
                                               <img src="img/camera.png" alt="Camera" width="18" class="mr5">
-                                              <span class="inline-block v-mid">{{life.photos}}</span>
+                                              <span class="inline-block v-mid">{{life.photoCount }}</span>
                                             </div>
                                           </a>
                                         </li>
-                                        <li>
+                                        <li ng-if="life.videoCount!='0'">
                                           <a href="">
                                             <div class="">
                                               <img src="img/video.png" alt="Video" width="18" class="mr5">
-                                              <span class="inline-block v-mid">{{life.videos}}</span>
+                                              <span class="inline-block v-mid">{{life.videoCount}}</span>
                                             </div>
                                           </a>
                                         </li>
-                                        <li>
+                                        <li ng-if="life.videoCount!='0'">
                                           <a href="">
                                             <div class="">
                                               <img src="img/location.png" alt="Location" width="18" class="mr5">
-                                              <span class="inline-block v-mid">{{life.checkIn}}</span>
+                                              <span class="inline-block v-mid">{{life.checkInCount}}</span>
                                             </div>
                                           </a>
                                         </li>
@@ -159,7 +159,7 @@
                                     </div>
                                   </div>
                                 </div>
-                                <div class="col-xs-6">
+                                <div class="col-xs-4">
                                   <div class="pull-right">
                                     <div class="journey-type">
                                       <ul>
@@ -179,7 +179,15 @@
                           <div class="user-social-item clearfix">
                             <div class="pull-left">
                               <ul>
-                                <li ng-click="likeUnlikeActivity(life)" like-sound><a href=""><i class="fa color-blue card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i></a></li>
+                                <li ng-click="likeUnlikeActivity(life)" >
+                                  <a href="" class="relate" >
+                                    <i class="fa color-blue card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound></i>
+                                <span></span>
+                                <audio id="like-play">
+                                  <source src="img/tiny1.mp3" type="audio/mp3">
+                                </audio>
+                              </a>
+                            </li>
                                 <li>
                                   <a href=""><img src="img/comments.png" alt="" height="18"></a>
                                 </li>
@@ -293,7 +301,14 @@
                           <div class="user-social-item clearfix">
                             <div class="pull-left">
                               <ul>
-                                <li ng-click="likeUnlikeActivity(life)" like-sound><a href=""><i class="fa color-blue card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i></i></a></li>
+                                <li ng-click="likeUnlikeActivity(life)" >
+                                  <a href="" class="relate" >
+                                    <i class="fa color-blue card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound></i>
+                                    <span></span>
+                                    <audio id="like-play">
+                                      <source src="img/tiny1.mp3" type="audio/mp3">
+                                    </audio>
+                                  </a></li>
                                 <li>
                                   <a href=""><img src="img/comments.png" alt="" height="18"></a>
                                 </li>
@@ -599,7 +614,12 @@
                     <div class="pull-left">
                       <ul class="notify-like">
                         <li>
-                          <a href=""><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate like-animate-cyan' : 'fa-heart-o'" ng-click="likePost(post.uniqueId,post._id)" like-sound></i></a>
+                          <a href="" class="relate"><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate like-animate-cyan' : 'fa-heart-o'" ng-click="likePost(post.uniqueId,post._id)" like-sound></i>
+                          <span></span>
+                          <audio id="like-play">
+                            <source src="img/tiny1.mp3" type="audio/mp3">
+                          </audio>
+                        </a>
                         </li>
                         <li>
                           <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve" ng-click="focus('enterComment');"></a>

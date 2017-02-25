@@ -96,7 +96,7 @@
             <!-- search bucketList -->
             <div class="list-add-country" ng-if="activeMenu == 'bucketList'">
               <div class="bucket-visited-holder" ng-init="viewDropdown={};">
-                <input type="text" placeholder="Add bucketList" ng-model="visitedCountry" ng-change="getDropdown(viewDropdown);">
+                <input type="text" placeholder="Add To BucketList" ng-model="visitedCountry" ng-change="getDropdown(viewDropdown);">
                 <span class="search-icon"><i class="fa fa-search"></i></span>
                 <div class="bucket-dropdown" ng-show="viewDropdown.backgroundClick;">
                   <ul>
@@ -234,7 +234,7 @@
                   <div class="list-info">
                     <div class="clearfix">
                       <div class="pull-left">
-                        <h4 class="avenir-heavy">{{country.countryId.name}} <span>{{country.year}}</span></h4>
+                        <h4 class="avenir-heavy">{{country.countryId.name}} <span>({{country.year}})</span></h4>
                       </div>
                       <div class="pull-right">
                         <div class="bucket-flag">

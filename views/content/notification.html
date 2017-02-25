@@ -4,9 +4,10 @@
       <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="notify in notificationCard track by $index">
         <!-- Notification Card -->
         <div class="notification-card">
-          <!-- READ NOTIFICATION CHECK -->
-          <span class="read-notification"><i class="fa fa-check" aria-hidden="true"></i></span>
-          <!-- READ NOTIFICATION CHECK END -->
+          <!-- UNREAD / READ NOTIFICATION CHECK -->
+          <span class="read-notification color-grey" ng-if="notify.status=='unread'"><i class="fa fa-check"></i></span>
+          <span class="read-notification color-pink" ng-if="notify.status=='read'"><i class="fa fa-check"></i></span>
+          <!-- UNREAD / READ NOTIFICATION CHECK END -->
           <!-- notification Content -->
           <div class="notification-content">
             <!-- CLOSE / REMOVE NOTIFICATION -->
@@ -46,14 +47,14 @@
                 <p class="">Would you like to end your journey as well?</p>
                 <!-- END DECLINE BUTTONS -->
                 <div class="notification-btn text-center">
-                  <button type="button" name="button" class="btn btn-notification-card">End</button>
-                  <button type="button" name="button" class="btn btn-notification-card">Decline</button>
+                  <button type="button" name="button" class="btn btn-notification-card" ng-click="endJourney(notify)">End</button>
+                  <button type="button" name="button" class="btn btn-notification-card" ng-click="cancelJourney(notify)">Decline</button>
                 </div>
                 <!-- END DECLINE BUTTONS END -->
               </div>
               <!-- END ON GO END -->
 
-              <!-- userFollowing FOLLOWER DETAILS -->
+              <!-- userFollowingRequest FOLLOWER DETAILS -->
               <div class="" ng-if="notify.type == 'userFollowingRequest'">
                 <div class="follower-details">
                   <div class="notification-follower-detail">
@@ -76,7 +77,7 @@
                 </div>
                 <!-- ACCEPT DECLINE BUTTONS END -->
               </div>
-              <!-- FOLLOWER DETAILS END -->
+              <!-- userFollowingRequest FOLLOWER DETAILS END -->
 
               <!-- userFollowing  FOLLOWER DETAILS -->
               <div class="" ng-if="notify.type == 'userFollowing'">
@@ -101,7 +102,7 @@
                 </div>
                 <!-- FOLLOW BUTTON END -->
               </div>
-              <!-- FOLLOWER DETAILS END -->
+              <!-- userFollowing FOLLOWER DETAILS END -->
 
               <!-- TAG ITINERARY -->
               <div class="notification-checkin-ongo-photo notification-tagitinerary-action " ng-if="notify.type == 'itineraryRequest'">
@@ -112,7 +113,7 @@
               </div>
               <!-- TAG ITINERARY END -->
 
-              <!-- PHOTOLIKE START -->
+              <!-- photoLike, photoComment, photoMentionComment START -->
               <div class="notification-checkin-ongo-photo" ng-if="notify.type == 'photoLike' || notify.type == 'photoComment' || notify.type == 'photoMentionComment'">
                 <img ng-src="{{notify.data.name|uploadpath:250:125:'cover'}}" alt="" class="img-responsive" />
 
@@ -121,7 +122,7 @@
                 <!-- <span class="notification-video-thumbicon notification-youtube-local"><i class="fa fa-youtube-play"></i></span> -->
                 <!-- IF TYPE.VIDEO LIKE END -->
               </div>
-              <!-- PHOTOLIKE END -->
+              <!-- photoLike, photoComment, photoMentionComment END -->
 
               <!-- postLike || postTag || postComment || postMentionComment -->
               <div class="notify-post-type" ng-if="notify.type=='postLike' || notify.type=='postTag' || notify.type=='postComment' || notify.type=='postMentionComment' || notify.type=='postFirstTime'">
@@ -154,16 +155,16 @@
               </div>
               <!-- postLike || postTag || postComment || postMentionComment END -->
 
-              <!-- JOURNEY like, COMMENT START -->
+              <!-- journeyLike, journeyComment,journeyMentionComment START -->
               <div class="notification-joureny-like" ng-if="notify.type == 'journeyLike' || notify.type == 'journeyComment' || notify.type == 'journeyMentionComment'">
-                <div class="notification-checkin-ongo-photo" ng-if="notify.data.coverPhoto!==null || notify.data.startLocationPic==''">
+                <div class="notification-checkin-ongo-photo" ng-if="notify.data.coverPhoto">
                   <img ng-src="{{notify.data.coverPhoto|uploadpath:250:125:'cover'}}" alt="" class="img-responsive" />
                 </div>
-                <div class="notification-checkin-ongo-photo" ng-if="notify.data.coverPhoto==null && notify.data.startLocationPic!==''">
+                <div class="notification-checkin-ongo-photo" ng-if=" !notify.data.coverPhoto">
                   <img ng-src="{{notify.data.startLocationPic|uploadpath:250:125:'cover'}}" alt="" class="img-responsive" />
                 </div>
               </div>
-              <!--  JOURNEY like, COMMENT END -->
+              <!--  journeyLike, journeyComment,journeyMentionComment END -->
 
 
               <!-- ALL USER BADGE  -->
@@ -177,7 +178,7 @@
               </div>
               <!-- ALL USER BADGE END -->
 
-              <!-- ITINERARY LIKE, COMMENT, MENTION COMMENT -->
+              <!-- ITINERARY LIKE, COMMENT, MENTION COMMENT Start -->
               <div class="notification-addpic-ongo-action" ng-if="notify.type == 'itineraryLike' || notify.type == 'itineraryComment' ||  notify.type ==  'itineraryMentionComment' ">
                 <div class="notification-checkin-ongo-photo notification-itinerary-pics">
                   <img ng-src="{{notify.data.coverPhoto|uploadpath:250:125:'cover'}}" alt="" class="img-responsive" />
