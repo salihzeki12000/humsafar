@@ -37,7 +37,7 @@
                   </div> -->
                 <div class="col-md-2 col-sm-3">
                   <div class="select-all-made city-select">
-                    <input type="text" ng-model="itinerary.citySearch" class="form-control" ng-change="getItinerayCity();">
+                    <input type="text" ng-model="itinerary.citySearch" class="form-control" ng-change="getItinerayCity();" placeholder="City">
                     <div class="city-dropdow itinerary-dropdown">
                       <ul>
                         <li ng-repeat="city in cityList | filter:itinerary.citySearch track by $index">
@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-md-2 col-sm-3">
                   <div class="select-all-made itinerary-select">
-                    <input type="text" ng-model="itinerary.type" class="form-control" ng-change="getItineraryType();">
+                    <input type="text" ng-model="itinerary.type" class="form-control" ng-change="getItineraryType();" placeholder="Type">
                     <div class="city-dropdow itinerary-dropdown">
                       <ul>
                         <li ng-repeat="type in itineraryType| filter:itinerary.type track by $index">
@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-md-2 col-sm-3">
                   <div class="select-all-made by-select">
-                    <input type="text" ng-model="itinerary.by" class="form-control" ng-change="getItineraryType();">
+                    <input type="text" ng-model="itinerary.by" class="form-control" ng-change="getItineraryType();" placeholder="By">
                     <div class="city-dropdow itinerary-dropdown">
                       <ul>
                         <li ng-repeat="by in itineraryBy| filter:itinerary.by track by $index">
@@ -93,6 +93,7 @@
               <div class="plr30 ">
                 <div class="close-all ">
                   <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
+                  <a class="btn btn-pink avenir-roman" ng-click="getCountryInfo('itinerary',$scope.urlDestinationCountry);">Submit</a>
                   <span class="tags avenir-roman" ng-repeat="item in country">{{item}} <span>X</span></span>
                 </div>
               </div>
@@ -103,8 +104,8 @@
     </div>
     <div class="activity-container">
       <div class="plr30">
-        <div masonry preserve-order>
-          <div class="row">
+        <div masonry preserve-order >
+          <div class="row" infinite-scroll="itineraryLoadMore()" infinite-scroll-disabled="scroll.busy">
             <div class="col-md-4 col-sm-6 col-xs-12 masonry-brick" ng-repeat="post in countryDestData.itinerary track by $index">
               <!-- user-iternarys -->
               <div class="travel-life-part blog-post avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">

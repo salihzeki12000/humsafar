@@ -33,40 +33,42 @@
         </div>
         <div class="destination-holder main-destination-page relate pt20 pr20">
           <div class="row">
-            <div class="col-sm-6"  ng-repeat="dest in destinationList track by $index" ng-if="dest.isCity==true">
-              <div class="img-holder relate" ng-click="countryView(dest.urlSlug,dest.isCity);getBooking(dest);">
-                <img src="{{dest.cityCoverPhoto|uploadpath}}" alt="travelibro" class="full-width">
-                <div class="title-head-left color-white">
-                  {{dest.name}}
-                </div>
-                <div class="title-head-right color-white">
-                  <img ng-src="{{dest.country[0].flag|uploadpath}}"   alt="Travelibro">
-                </div>
+            <div class="col-sm-6"  ng-repeat="dest in destinationList track by $index">
+              <div class="city-view" ng-if="dest.isCity==true">
+                <div class="img-holder relate" ng-click="countryView(dest.urlSlug,dest.isCity);getBooking(dest);">
+                  <img src="{{dest.cityCoverPhoto|uploadpath}}" alt="travelibro" class="full-width">
+                  <div class="title-head-left color-white">
+                    {{dest.name}}
+                  </div>
+                  <div class="title-head-right color-white">
+                    <img ng-src="{{dest.country[0].flag|uploadpath}}"   alt="Travelibro">
+                  </div>
 
-                <div class="read-more left-bottom">
-                  <ul class="list-inline">
-                    <li class="avenir-roman color-white">Cities: <span class="avenir-heavy">{{dest.cityCount}}</span> </li>
-                    <li class="avenir-heavy color-white">|</li>
-                    <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">{{dest.itineraryCount}}</span> </li>
-                  </ul>
+                  <div class="read-more left-bottom">
+                    <ul class="list-inline">
+                      <li class="avenir-roman color-white">Cities: <span class="avenir-heavy">{{dest.cityCount}}</span> </li>
+                      <li class="avenir-heavy color-white">|</li>
+                      <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">{{dest.itineraryCount}}</span> </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-sm-6"  ng-repeat="dest in destinationList track by $index" ng-if="dest.isCity==false">
-              <div class="img-holder relate" ng-click="countryView(dest.urlSlug,dest.isCity)" style="background:url('{{dest.countryCoverPhoto|uploadpath}}');">
-                <!-- <img ng-src="{{dest.countryCoverPhoto|uploadpath}}" alt="travel-libro" class="full-width"> -->
-                <div class="title-head-left color-white">
-                  {{dest.name}}
-                </div>
-                <div class="title-head-right color-white">
-                  <img ng-src="{{dest.flag|uploadpath}}"   alt="Travelibro">
-                </div>
-                <div class="read-more left-bottom">
-                  <ul class="list-inline">
-                    <li class="avenir-roman color-white">Cities: <span class="avenir-heavy">{{dest.cityCount}}</span> </li>
-                    <li class="avenir-heavy color-white">|</li>
-                    <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">{{dest.itineraryCount}}</span> </li>
-                  </ul>
+              <div class="country-view" ng-if="dest.isCity==false">
+                <div class="img-holder relate" ng-click="countryView(dest.urlSlug,dest.isCity)" style="background:url('{{dest.countryCoverPhoto|uploadpath}}');">
+                  <!-- <img ng-src="{{dest.countryCoverPhoto|uploadpath}}" alt="travel-libro" class="full-width"> -->
+                  <div class="title-head-left color-white">
+                    {{dest.name}}
+                  </div>
+                  <div class="title-head-right color-white">
+                    <img ng-src="{{dest.flag|uploadpath}}"   alt="Travelibro">
+                  </div>
+                  <div class="read-more left-bottom">
+                    <ul class="list-inline">
+                      <li class="avenir-roman color-white">Cities: <span class="avenir-heavy">{{dest.cityCount}}</span> </li>
+                      <li class="avenir-heavy color-white">|</li>
+                      <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">{{dest.itineraryCount}}</span> </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
