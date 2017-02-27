@@ -1,5 +1,4 @@
 var adminURL = "";
-
 if (isproduction) {
   adminURL = "http://www.wohlig.co.in/demo/index.php";
 } else {
@@ -11,7 +10,7 @@ var imgpath = imgurl + "readFile";
 var uploadurl = imgurl;
 var navigationservice = angular.module('navigationservice', [])
 
-  .factory('NavigationService', function ($http) {
+  .factory('NavigationService', function ($http, TravelibroService) {
     var navigation = [{
       name: "Home",
       classis: "active",
@@ -119,27 +118,33 @@ var navigationservice = angular.module('navigationservice', [])
         }
         return menuname;
       },
-      getProfile: function (callback, errCallback) {
-        return $http({
+      getAccessToken: function (callback, errCallback) {
+        return TravelibroService.http({
           url: adminURL + "/user/profile",
           method: "POST"
         }).success(callback).error(errCallback);
       },
+      getProfile: function (callback, errCallback) {
+        return TravelibroService.http({
+          url: adminURL + "/user/getProfile",
+          method: "POST"
+        }).success(callback).error(errCallback);
+      },
       logout: function (callback, errCallback) {
-        return $http({
+        return TravelibroService.http({
           url: adminURL + "/user/logout",
           method: "POST"
         }).success(callback).error(errCallback);
       },
       getAllCountries: function (callback, errCallback) {
-        return $http({
+        return TravelibroService.http({
           url: adminURL + "/country/getAll",
           method: "POST"
         }).success(callback).error(errCallback);
       },
 
       getAllCities: function (formData, callback, errCallback) {
-        $http.post(adminURL + "/city/locationSearch", formData).success(callback).error(errCallback);
+        TravelibroService.post(adminURL + "/city/locationSearch", formData).success(callback).error(errCallback);
       },
       searchCityByCountry: function (formData, callback) {
         var arr = {};
@@ -147,81 +152,113 @@ var navigationservice = angular.module('navigationservice', [])
         arr = _.omit(formData, ['cityVisited']);
         console.log(arr);
 
-        $http({
+        TravelibroService.http({
           url: adminURL + "/city/searchCity",
           data: formData,
           method: "POST"
-        }).success(callback);
+        }).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       saveUserData: function (formData, callback, errorCallback) {
-        $http.post(adminURL + "/user/editUserWeb", formData).success(callback).error(errorCallback);
+        TravelibroService.post(adminURL + "/user/editUserWeb", formData).success(callback).error(errorCallback);
       },
 
       travelCount: function (callback, errorCallback) {
-        $http.post(adminURL + "/user/getOneDataWeb").success(callback).error(errorCallback);
+        TravelibroService.post(adminURL + "/user/getOneDataWeb").success(callback).error(errorCallback);
       },
 
       getBucketListWeb: function (callback, errorCallback) {
-        $http.post(adminURL + "/user/getBucketListWeb").success(callback).error(errorCallback);
+        TravelibroService.post(adminURL + "/user/getBucketListWeb").success(callback).error(errorCallback);
       },
 
       updateCountriesVisitedWeb: function (formData, callback, errCallback) {
-        $http.post(adminURL + "/user/updateCountriesVisitedWeb", formData).success(callback).error(errCallback);
+        TravelibroService.post(adminURL + "/user/updateCountriesVisitedWeb", formData).success(callback).error(errCallback);
       },
       getSearchData: function (formData, callback) {
-        $http.post(adminURL + "/country/getSearchDataWeb", formData).success(callback);
+        TravelibroService.post(adminURL + "/country/getSearchDataWeb", formData).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       getSearchCityData: function (formData, callback) {
-        $http.post(adminURL + "/city/getCity", formData).success(callback);
+        TravelibroService.post(adminURL + "/city/getCity", formData).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       getSearchCountryData: function (formData, callback) {
-        $http.post(adminURL + "/country/getCountry", formData).success(callback);
+        TravelibroService.post(adminURL + "/country/getCountry", formData).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       getSearchItineraryData: function (formData, callback) {
-        $http.post(adminURL + "/itinerary/getItineraryWeb", formData).success(callback);
+        TravelibroService.post(adminURL + "/itinerary/getItineraryWeb", formData).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       getSearchHashData: function (formData, callback) {
-        $http.post(adminURL + "/post/getHashDataWeb", formData).success(callback);
+        TravelibroService.post(adminURL + "/post/getHashDataWeb", formData).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       getSearchUserData: function (formData, callback) {
-        $http.post(adminURL + "/user/getUserWeb", formData).success(callback);
+        TravelibroService.post(adminURL + "/user/getUserWeb", formData).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       notificationWeb: function (formData, callback) {
-        $http.post(adminURL + "/notification/getNotificationWeb", formData).success(callback);
+        TravelibroService.post(adminURL + "/notification/getNotificationWeb", formData).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       checkToken: function (formData, callback) {
-        $http.post(adminURL + "/user/checkToken", formData).success(callback);
+        TravelibroService.post(adminURL + "/user/checkToken", formData).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       changePasswordEmail: function (formData, callback) {
-        $http.post(adminURL + "/user/changePasswordEmail", formData).success(callback);
+        TravelibroService.post(adminURL + "/user/changePasswordEmail", formData).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       getCitySearch: function (formData, callback) {
-        $http.post(adminURL + "/city/search", formData).success(callback);
+        TravelibroService.post(adminURL + "/city/search", formData).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       getDestination: function (formData, callback) {
-        $http.post(adminURL + "/country/getDestination", formData).success(function (data) {
+        TravelibroService.post(adminURL + "/country/getDestination", formData).success(function (data) {
           data.count = formData.count;
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       getCountryDestination: function (formData, callback) {
-        $http.post(adminURL + "/country/getOneCountry", formData).success(function (data) {
+        TravelibroService.post(adminURL + "/country/getOneCountry", formData).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       getCityDestination: function (formData, callback) {
-        $http.post(adminURL + "/city/getOneCity", formData).success(function (data) {
+        TravelibroService.post(adminURL + "/city/getOneCity", formData).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
-      acceptJourneyNotify:function (formData, callback){
-        $http.post(adminURL + "/journey/buddyAcceptWeb",formData).success(function(data){
+      acceptJourneyNotify: function (formData, callback) {
+        TravelibroService.post(adminURL + "/journey/buddyAcceptWeb", formData).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
-      declineJourneyNotify:function (formData, callback){
-        $http.post(adminURL + "/journey/buddyRejectWeb",formData).success(function(data){
+      declineJourneyNotify: function (formData, callback) {
+        TravelibroService.post(adminURL + "/journey/buddyRejectWeb", formData).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       // getDestinationBooking: function (formData, callback) {
@@ -236,7 +273,9 @@ var navigationservice = angular.module('navigationservice', [])
             'Content-Type': undefined
           },
           transformRequest: angular.identity
-        }).success(callback);
+        }).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       editUserData: function (userData, status, callback) {
         // console.log(userData, status);

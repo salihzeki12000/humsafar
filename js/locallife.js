@@ -1,10 +1,10 @@
 var viewlocalLife = angular.module('locallife', [])
-  .factory('localLife', function ($http, $filter) {
+  .factory('localLife', function (TravelibroService, $filter) {
     return {
       getLocalJourney: function (callback, localData, errorCallback) {
         // console.log(localData,'data kya hai');
         console.log(localData);
-        $http({
+        TravelibroService.http({
           url: adminURL + "/journey/myLocalLifeWeb",
           method: "POST",
           data: {
@@ -24,11 +24,13 @@ var viewlocalLife = angular.module('locallife', [])
           var localLifeData = data;
           callback(localLifeData);
           console.log(localLifeData, 'localLife');
+        }).error(function (data) {
+          console.log(data);
         });
       }
     }
   });
-viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$window', '$timeout', 'localLife', 'LikesAndComments', function ($http, $filter, $uibModal, $window, $timeout, localLife, LikesAndComments) {
+viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$window', '$timeout', 'localLife', 'LikesAndComments', 'TravelibroService', function ($http, $filter, $uibModal, $window, $timeout, localLife, LikesAndComments, TravelibroService) {
   return {
     restrict: 'E',
     scope: {
@@ -175,7 +177,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
           "review": values.review,
           "rating": values.rating
         };
-        $http({
+        TravelibroService.http({
           url: adminURL + "/review/saveWeb",
           method: "POST",
           data: formData
@@ -184,6 +186,8 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
             postData.review[0] = $scope.ratingValue;
             console.log(postData.review, 'review');
           }
+        }).error(function (data) {
+          console.log(data);
         });
       };
       $scope.showRating = 1;
@@ -277,7 +281,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
       // geo location
       $scope.showLocation = false;
       $scope.viewLocation = function () {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/placeSearch",
           method: "POST",
           data: {
@@ -290,12 +294,14 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
             o.name = o.name + ", " + o.vicinity;
           });
           $scope.nearByLocation = location.data;
+        }).error(function (data) {
+          console.log(data);
         });
       };
       $scope.getLocation = function () {
         if ($scope.localongo.checkIn.location !== "") {
           $scope.showLocation = true;
-          $http({
+          TravelibroService.http({
             url: adminURL + "/post/checkInPlaceSearch",
             method: "POST",
             data: {
@@ -308,6 +314,8 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
               o.name = o.description;
             });
             $scope.nearByLocation = location.data;
+          }).error(function (data) {
+            console.log(data);
           });
         } else {
           $scope.localongo.checkIn.category = "";
@@ -317,7 +325,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
       };
       $scope.locationId = function (id) {
         console.log(id);
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/getGooglePlaceDetail",
           method: "POST",
           data: {
@@ -333,7 +341,9 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
             category: locationData.data
           };
           $scope.showLocation = false;
-        })
+        }).error(function (data) {
+          console.log(data);
+        });
       }
       // geo location end
       $scope.categoryList = ['Beaches', 'Airport', 'Hotels', 'Restaurants', 'Nature & parks', 'Sights & Landmarks', 'Museums & Galleries', 'Religious', 'Shopping', 'Adventure & Excursion', 'Zoos & Aqua', 'Cinema & Theatre'];
@@ -343,7 +353,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
       $scope.listTagfriend = function () {
         if ($scope.localongo.getSearchedList.length > 3) {
           $scope.viewListFriend = true;
-          $http({
+          TravelibroService.http({
             url: adminURL + "/user/searchBuddyWeb",
             method: "POST",
             data: {
@@ -371,7 +381,9 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
                 n.noEdit = "";
               }
             });
-          })
+          }).error(function (data) {
+            console.log(data);
+          });
         } else {
           console.log($scope.newBuddies, 'total-array');
           $scope.viewListFriend = false;
@@ -473,7 +485,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
           editedData.checkInChange = false;
         }
         console.log(editedData, "dataEdited hai");
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/editLocalWeb",
           method: "POST",
           data: editedData,
@@ -482,7 +494,9 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
             $window.location.reload();
             modal.close();
           }
-        })
+        }).error(function (data) {
+          console.log(data);
+        });
         console.log($scope.localongo, "journey ka arrray");
       }
       // edit save data end
@@ -617,7 +631,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
           _id: $scope.localongo._id,
           buddies: $scope.localongo.buddies
         }
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/editLocalWeb",
           method: "POST",
           data: formData
@@ -630,6 +644,8 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
           }
           $scope.otgPhoto = [];
           $scope.otgPhotoArray = [];
+        }).error(function (data) {
+          console.log(data);
         });
       }
       // save local add photo vidoes end
@@ -677,7 +693,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
         result.type = "changeDateTime";
         result.date = new Date(date + " " + time);
         result._id = localPost._id;
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/editLocalWeb",
           method: "POST",
           data: result
@@ -685,6 +701,8 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
           console.log(data, 'date');
           localPost.UTCModified = result.date;
           modal.close();
+        }).error(function (data) {
+          console.log(data);
         });
       };
 
@@ -696,7 +714,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
           _id: postId
         }
         console.log(formData);
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/editLocalWeb",
           method: "POST",
           data: formData
@@ -705,7 +723,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
           document.getElementById(postId).remove();
         }).error(function () {
           console.log("failed to delete");
-        })
+        });
       }
       // delete local journey post end
       // local journey edit end

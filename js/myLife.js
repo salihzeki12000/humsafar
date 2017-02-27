@@ -1,15 +1,15 @@
 var bl = [];
 var mylife = angular.module('mylife', [])
 
-  .factory('MyLife', function ($http) {
+  .factory('MyLife', function (TravelibroService) {
     return {
       getAllCountries: function (callback, errCallback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/country/getAll",
           method: "POST"
         }).success(function (data) {
-          $http.post(adminURL + "/user/getBucketListWeb").success(function (data2) {
-            $http.post(adminURL + "/user/getCountryVisitedListWeb").success(function (data3) {
+          TravelibroService.post(adminURL + "/user/getBucketListWeb").success(function (data2) {
+            TravelibroService.post(adminURL + "/user/getCountryVisitedListWeb").success(function (data3) {
               var countries = data.data;
               var bucketList = data2.data.bucketList;
               var countryVisited = data3.data.countriesVisited;
@@ -38,33 +38,39 @@ var mylife = angular.module('mylife', [])
         if (country.bucketList === false) {
           obj.delete = true;
         }
-        $http.post(adminURL + "/user/updateBucketListWeb", obj).success(callback).error(errCallback);
+        TravelibroService.post(adminURL + "/user/updateBucketListWeb", obj).success(callback).error(errCallback);
       },
       updateCountriesVisited: function (obj, callback, errCallback) {
-        $http.post(adminURL + "/user/updateCountriesVisitedWeb", obj).success(callback).error(errCallback);
+        TravelibroService.post(adminURL + "/user/updateCountriesVisitedWeb", obj).success(callback).error(errCallback);
       },
       getCountryVisitedListWeb: function (callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/user/getCountryVisitedListWeb",
           method: "POST"
         }).success(function (data) {
           callback(data.data.countriesVisited);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       getCountryVisitedListExpanded: function (callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/user/getCountryVisitedListExpanded",
           method: "POST"
         }).success(function (data) {
           callback(data.data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       getOneBucketList: function (callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/user/getBucketListWeb", ///////////////////use getOneBucketList
           method: "POST"
         }).success(function (data) {
           callback(data.data.bucketList);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       updateBucketListWeb: function (countryId, callback) {
@@ -72,65 +78,77 @@ var mylife = angular.module('mylife', [])
           "bucketList": countryId,
           "delete": true
         };
-        $http({
+        TravelibroService.http({
           url: adminURL + "/user/updateBucketListWeb",
           method: "POST",
           data: obj
         }).success(function () {
           callback(countryId);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       getFollowingWeb: function (callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/user/getFollowingWeb",
           method: "POST"
-        }).success(callback);
+        }).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       getFollowersWeb: function (callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/user/getFollowersWeb",
           method: "POST"
-        }).success(callback);
+        }).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       followUser: function (userId, name, callback) {
         var obj = {
           "_id": userId,
           "toName": name
         }
-        $http({
+        TravelibroService.http({
           url: adminURL + "/user/followUserWeb",
           method: "POST",
           data: obj
         }).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       unFollowUser: function (userId, callback) {
         var obj = {
           "_id": userId,
         }
-        $http({
+        TravelibroService.http({
           url: adminURL + "/user/unFollowUserWeb",
           method: "POST",
           data: obj
         }).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       searchAllUser: function (searchUser, callback) {
         var obj = {
           search: searchUser
         };
-        $http({
+        TravelibroService.http({
           url: adminURL + "/user/getFollowingWeb",
           method: "POST",
           data: obj
         }).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       getAllJourney: function (callback, pageNo, errorCallback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/journey/myLifeJourneyWeb",
           method: "POST",
           data: {
@@ -175,6 +193,8 @@ var mylife = angular.module('mylife', [])
             console.log(journeys);
             callback(journeys);
           }
+        }).error(function (data) {
+          console.log(data);
         });
       },
       getAllMoments: function (token, limit, type, times, successCallback, errorCallback) { //for all and locallife
@@ -184,7 +204,7 @@ var mylife = angular.module('mylife', [])
           "type": type,
           "times": times
         };
-        $http({
+        TravelibroService.http({
           url: adminURL + "/journey/myLifeMomentWeb",
           data: obj,
           method: "POST"
@@ -195,7 +215,7 @@ var mylife = angular.module('mylife', [])
           "type": type,
           "pagenumber": pageNo
         };
-        $http({
+        TravelibroService.http({
           url: adminURL + "/journey/myLifeMomentWeb",
           data: obj,
           method: "POST"
@@ -214,11 +234,11 @@ var mylife = angular.module('mylife', [])
 
         }
         console.log(obj);
-        $http({
+        TravelibroService.http({
           url: adminURL + "/journey/getTokenMomentWeb",
           data: obj,
           method: "POST"
-        }).success(successCallback, errorCallback);
+        }).success(successCallback).error(errorCallback);
       },
       getJournItiMoments: function (_id, pagenumber, limit, flag, successCallback, errorCallback) {
         var url = "";
@@ -232,7 +252,7 @@ var mylife = angular.module('mylife', [])
         } else if (flag == 'journey') {
           url = "/journey/getMediaWeb";
         }
-        $http({
+        TravelibroService.http({
           url: adminURL + url,
           data: obj,
           method: "POST"
@@ -243,20 +263,22 @@ var mylife = angular.module('mylife', [])
           "type": type,
           "pagenumber": pageNo
         };
-        $http({
+        TravelibroService.http({
           url: adminURL + "/journey/myLifeReviewWeb",
           data: obj,
           method: "POST"
         }).success(successCallback).error(errorCallback);
       },
       getCities: function (countryId, callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/getReviewByLocWeb",
           data: {
             'country': countryId
           },
           method: "POST"
-        }).success(callback);
+        }).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       getReviewsByCities: function (countryId, cityId, pageNo, successCallback, errorCallback) {
         var obj = {
@@ -264,20 +286,22 @@ var mylife = angular.module('mylife', [])
           "city": cityId,
           "pagenumber": pageNo
         };
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/getReviewsWeb",
           data: obj,
           method: "POST"
         }).success(successCallback).error(errorCallback);
       },
       getCategories: function (cityId, callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/getReviewByLocWeb",
           data: {
             'city': cityId
           },
           method: "POST"
-        }).success(callback);
+        }).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       getReviewsByCategories: function (cityId, category, pageNo, successCallback, errorCallback) {
         var obj = {
@@ -285,18 +309,22 @@ var mylife = angular.module('mylife', [])
           "category": category,
           "pagenumber": pageNo
         };
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/getReviewsWeb",
           data: obj,
           method: "POST"
         }).success(successCallback).error(errorCallback);
       },
       savePostReview: function (obj, callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/review/saveWeb",
           method: "POST",
           data: obj
-        }).success(callback);
+        }).success(callback).error(function (data) {
+          console.log(data);
+        }).error(function (data) {
+          console.log(data);
+        });
       }
     };
   });

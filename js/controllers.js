@@ -1,23 +1,13 @@
 var globalGetProfile = function (data, status) {
-  if (data._id) {
+  if (data.data._id) {
     $.jStorage.set("isLoggedIn", true);
-    $.jStorage.set("profile", data);
+    $.jStorage.set("profile", data.data);
     // console.log($.jStorage.get('profile'));
     console.log("Profile successfully set on jStorage");
   } else {
     $.jStorage.flush();
   }
 };
-
-// var setProfile = function (data) {
-//   if (data.value) {
-//     NavigationService.getProfile(globalGetProfile, function (err) {
-//       $.jStorage.set("profile", data);
-//     });
-//   } else {
-
-//   }
-// }
 
 var pointsForLine = function () {};
 var line = [];
@@ -29,7 +19,7 @@ var map;
 var center = {};
 var centers = [];
 markers[0] = {};
-angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'commontask', 'activity', 'infinite-scroll', 'navigationservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'commontask', 'activity', 'infinite-scroll', 'navigationservice', 'travelibroservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
 
   .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar) {
     //Used to name the .html file
@@ -164,26 +154,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var checktwitter = function (data, status) {
       var repdata = {};
-      if (data._id) {
+      if (data.accessToken) {
         $interval.cancel(stopinterval);
         ref.close();
-        $.jStorage.set("isLoggedIn", true);
-        $.jStorage.set("profile", data);
-        var alreadyLoggedIn = data.alreadyLoggedIn;
-        if (alreadyLoggedIn === true) {
-          $state.go("mylife", {
-            name: 'journey'
-          });
-        } else if (alreadyLoggedIn === false) {
-          $state.go('mainpage');
-        }
-      } else {
+        $.jStorage.set("accessToken", data.accessToken);
+        // acsToken = data.accessToken;
+        NavigationService.getProfile(function (data) {
+          if (data.data._id) {
+            $.jStorage.set("isLoggedIn", true);
+            $.jStorage.set("profile", data.data);
+            var alreadyLoggedIn = data.data.alreadyLoggedIn;
+            if (alreadyLoggedIn === true) {
+              $state.go("mylife", {
+                name: 'journey'
+              });
+            } else if (alreadyLoggedIn === false) {
+              $state.go('mainpage');
+            }
+          } else {
 
+          }
+        }, function (err) {
+          console.log(err);
+        });
       }
     };
 
     var callAtIntervaltwitter = function () {
-      NavigationService.getProfile(checktwitter, function (err) {
+      NavigationService.getAccessToken(checktwitter, function (err) {
         console.log(err);
       });
     };
@@ -782,9 +780,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var saveDataCallback = function (data, status) {
       if (data.value === true) {
         NavigationService.getProfile(function (data, status) {
-          if (data._id) {
+          if (data.data._id) {
             $.jStorage.set("isLoggedIn", true);
-            $.jStorage.set("profile", data);
+            $.jStorage.set("profile", data.data);
             $state.go("mylife", {
               name: 'journey'
             });
@@ -2571,8 +2569,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         if ($scope.i === data.count) {
           $scope.destinationList = data.data;
           $scope.i = 0;
-        } else {
-          $scope.destinationList = [];
         }
       });
     }
@@ -2639,17 +2635,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
     $scope.urlDestinationCountry = $state.params.url;
 
+    $scope.countryDestData = [];
+    $scope.pagenumber = 1;
+    $scope.scroll = {};
+    $scope.scroll.busy = false;
+    $scope.scroll.stopCallingApi = false;
     $scope.getCountryInfo = function (type, urlSlug) {
+      $scope.scroll.busy = false;
       NavigationService.getCountryDestination({
-        pagenumber: 1,
+        pagenumber: $scope.pagenumber,
         type: type,
-        urlSlug: $scope.urlDestinationCountry
+        urlSlug: $scope.urlDestinationCountry,
+        city: $scope.destinationCityFilter,
+        itineraryType: $scope.destinationItineraryType,
+        itineraryBy: $scope.destinationItineraryBy
       }, function (data) {
-        $scope.countryDestData = data.data;
-        console.log($scope.countryDestData, 'what is cadat');
+        console.log(data.data.itinerary, 'itineray');
+        if (data.data.itinerary.length == 0) {
+          $scope.scroll.stopCallingApi = true;
+        } else {
+          console.log(data, 'data');
+          _.each(data.data, function (newData) {
+            $scope.countryDestData.push(newData);
+          })
+        }
+        // console.log($scope.countryDestData, 'what is cadat');
       });
     };
-    // $scope.getCountryInfo("featuredCities",$scope.urlDestinationCountry);
+
+    $scope.itineraryLoadMore = function () {
+      $scope.pagenumber++;
+      $scope.scroll.busy = true;
+      console.log($scope.pagenumber, 'pagenumber');
+      // $scope.getCountryInfo("itinerary",$scope.urlDestinationCountry);
+      if ($scope.scroll.stopCallingApi == false) {
+        $scope.getCountryInfo("itinerary", $scope.urlDestinationCountry);
+      }
+    };
 
     // FILTER ITINERARY DESTINATION
     $scope.itinerary = {};
@@ -2727,18 +2749,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     // filter sorting end
-    $scope.getFiltertedItinerary = function () {
-      NavigationService.getFilterItineraryData({
-        type: "itinerary",
-        pagenumber: 1,
-        city: [],
-        itineraryType: [],
-        itineraryBy: []
-      }, function (data) {
-        console.log(data);
-        $scope.countryDestData = data.data;
-      })
-    };
+    // $scope.getFiltertedItinerary = function () {
+    //   NavigationService.getFilterItineraryData({
+    //     type: "itinerary",
+    //     pagenumber: 1,
+    //     city: [],
+    //     itineraryType: [],
+    //     itineraryBy: []
+    //   }, function (data) {
+    //     console.log(data);
+    //     $scope.countryDestData = data.data;
+    //   })
+    // };
     // FILTER ITINERARY DESTINATION END
 
     // destination city
@@ -4261,7 +4283,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     })
   })
 
-  .controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, $filter, MyLife, OnGoJourney, localLife, LikesAndComments) {
+  .controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, TravelibroService, $timeout, $uibModal, $location, $filter, MyLife, OnGoJourney, localLife, LikesAndComments) {
     //Used to name the .html file
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("mylife");
@@ -6780,9 +6802,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         NavigationService.editUserData(userData, status, function (data) {
           if (data.value) {
             NavigationService.getProfile(function (data, status) {
-              if (data._id) {
+              if (data.data._id) {
                 $.jStorage.set("isLoggedIn", true);
-                $.jStorage.set("profile", data);
+                $.jStorage.set("profile", data.data);
                 // console.log($.jStorage.get('profile'));
                 console.log("Profile successfully set on jStorage");
               } else {
@@ -11483,9 +11505,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.search.searchType = "";
     $scope.search.viewData = false;
     NavigationService.getProfile(function (data, status) {
-      if (data._id) {
+      if (data.data._id) {
         $.jStorage.set("isLoggedIn", true);
-        $.jStorage.set("profile", data);
+        $.jStorage.set("profile", data.data);
       } else {
         // $state.go('login');
         $.jStorage.flush();
@@ -11533,6 +11555,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.logout = function () {
       NavigationService.logout(function () {
           $.jStorage.flush();
+          acsToken = "";
           $state.go('login');
         },
         function (err) {
@@ -14663,8 +14686,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // };
     // END JOURNEY FUNCTION END
   })
-
-
 
   .controller('SearchresultCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
     $scope.template = TemplateService.changecontent("search-result"); //Use same name of .html file

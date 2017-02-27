@@ -1,9 +1,9 @@
 var ongojourney = angular.module('ongojourney', [])
 
-  .factory('OnGoJourney', function ($http, $filter) {
+  .factory('OnGoJourney', function (TravelibroService, $filter) {
     return {
       getOneJourney: function (formData, callback, errorCallback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/journey/getOneWeb",
           // url: "/demo.json",
           method: "POST",
@@ -43,80 +43,98 @@ var ongojourney = angular.module('ongojourney', [])
           }
           // header integration ends
           callback(journey);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       editJourneyName: function (formData, callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/journey/editData",
           method: "POST",
           data: formData
         }).success(function (data) {
           callback(formData.name)
+        }).error(function (data) {
+          console.log(data);
         });
       },
       rateThisCountry: function (formData, callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/review/saveWeb",
           method: "POST",
           data: formData
-        }).success(callback);
+        }).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       getTripSummary: function (formData, callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/journey/getCountData",
           method: "POST",
           data: formData
         }).success(function (data) {
           callback(data.data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       getJourneyCoverPhoto: function (formData, callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/journey/getCountDataWeb",
           method: "POST",
           data: formData
         }).success(function (data) {
           callback(data.data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       setJourneyCoverPhoto: function (formData, callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/journey/editData",
           method: "POST",
           data: formData
         }).success(function (data) {
           console.log(data);
           callback();
+        }).error(function (data) {
+          console.log(data);
         });
       },
       updateBannerDateTime: function (formData, callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/journey/editData/",
           method: "POST",
           data: formData
         }).success(function (data) {
           callback();
+        }).error(function (data) {
+          console.log(data);
         });
       },
       endDateJourney: function (formData, callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/journey/editData/",
           method: "POST",
           data: formData
         }).success(function (data) {
           callback();
+        }).error(function (data) {
+          console.log(data);
         });
       },
       getPostsComment: function (id, callback) {
         var formData = {
           "_id": id
         };
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/getPostCommentWeb",
           method: "POST",
           data: formData
         }).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       postComment: function (uniqueId, comment, type, postId, callback) {
@@ -126,7 +144,7 @@ var ongojourney = angular.module('ongojourney', [])
           "type": type,
           "post": postId
         };
-        $http({
+        TravelibroService.http({
           url: adminURL + "/comment/addCommentWeb",
           method: "POST",
           data: formData
@@ -134,13 +152,17 @@ var ongojourney = angular.module('ongojourney', [])
           formData = {
             "_id": postId
           }
-          $http({
+          TravelibroService.http({
             url: adminURL + "/post/getPostCommentWeb",
             method: "POST",
             data: formData
           }).success(function (data) {
             callback(data);
+          }).error(function (data) {
+            console.log(data);
           });
+        }).error(function (data) {
+          console.log(data);
         });
 
       }
@@ -296,7 +318,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       //   var formData = {
       //     "_id": id
       //   }
-      //   $http({
+      //  TravelibroService.http({
       //     url: adminURL + "/post/getPostLikes",
       //     method: "POST",
       //     data: formData
@@ -327,7 +349,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       // geo location
       $scope.showLocation = false;
       $scope.viewLocation = function () {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/placeSearch",
           method: "POST",
           data: {
@@ -340,12 +362,14 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
             o.name = o.name + ", " + o.vicinity;
           });
           $scope.nearByLocation = location.data;
+        }).error(function (data) {
+          console.log(data);
         });
       };
       $scope.getLocation = function () {
         if ($scope.ongo.checkIn.location !== "") {
           $scope.showLocation = true;
-          $http({
+          TravelibroService.http({
             url: adminURL + "/post/checkInPlaceSearch",
             method: "POST",
             data: {
@@ -358,6 +382,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
               o.name = o.description;
             });
             $scope.nearByLocation = location.data;
+          }).error(function (data) {
+            console.log(data);
           });
         } else {
           $scope.ongo.checkIn.category = "";
@@ -367,7 +393,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       };
       $scope.locationId = function (id) {
         console.log(id);
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/getGooglePlaceDetail",
           method: "POST",
           data: {
@@ -383,7 +409,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
             category: locationData.data
           };
           $scope.showLocation = false;
-        })
+        }).error(function (data) {
+          console.log(data);
+        });
       }
       // geo location end
       $scope.categoryList = ['Beaches', 'Airport', 'Hotels', 'Restaurants', 'Nature & parks', 'Sights & Landmarks', 'Museums & Galleries', 'Religious', 'Shopping', 'Adventure & Excursion', 'Zoos & Aqua', 'Cinema & Theatre'];
@@ -529,7 +557,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
           uniqueId: $scope.ongo.uniqueId,
           buddies: $scope.ongo.buddies
         }
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/editDataWeb",
           method: "POST",
           data: formData
@@ -542,6 +570,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
           }
           $scope.otgPhoto = [];
           $scope.otgPhotoArray = [];
+        }).error(function (data) {
+          console.log(data);
         });
       }
       // edit otg start
@@ -550,7 +580,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       $scope.listTagfriend = function () {
         if ($scope.ongo.getSearchedList.length > 3) {
           $scope.viewListFriend = true;
-          $http({
+          TravelibroService.http({
             url: adminURL + "/user/searchBuddyWeb",
             method: "POST",
             data: {
@@ -578,7 +608,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
                 n.noEdit = "";
               }
             });
-          })
+          }).error(function (data) {
+            console.log(data);
+          });
         } else {
           console.log($scope.newBuddies, 'total-array');
           $scope.viewListFriend = false;
@@ -816,7 +848,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
           editedData.checkInChange = false;
         }
         console.log(editedData, "dataEdited hai");
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/editDataWeb",
           method: "POST",
           data: editedData,
@@ -833,7 +865,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
             // $scope.ongo.thoughts = editedData.thoughts;
           }
           // $scope.editedData = {};
-        })
+        }).error(function (data) {
+          console.log(data);
+        });
         console.log($scope.ongo, "journey ka arrray");
       }
       // edit save data end
@@ -919,7 +953,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
         result.type = "changeDateTime";
         result.date = new Date(date + " " + time);
         result.uniqueId = id;
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/editDataWeb/",
           method: "POST",
           data: result
@@ -932,6 +966,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
           }, function (err) {
             console.log(err);
           });
+        }).error(function (data) {
+          console.log(data);
         });
       };
 
@@ -961,7 +997,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
           uniqueId: journeyId
         };
         console.log(formData);
-        $http({
+        TravelibroService.http({
           url: adminURL + "/post/editDataWeb/",
           method: "POST",
           data: formData
@@ -992,7 +1028,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
           "review": values.review,
           "rating": values.rating
         };
-        $http({
+        TravelibroService.http({
           url: adminURL + "/review/saveWeb",
           method: "POST",
           data: formData
@@ -1006,8 +1042,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
           }, function (err) {
             console.log(err);
           });
-
           modal.close();
+        }).error(function (data) {
+          console.log(data);
         });
       };
 

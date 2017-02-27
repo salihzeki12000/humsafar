@@ -1,10 +1,10 @@
 var activity = angular.module('activity', [])
 
-  .factory('Activity', function ($http, $filter) {
+  .factory('Activity', function (TravelibroService, $filter) {
 
     return {
       getAllActivities: function (pageNum, successCallback, errorCallback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/activityFeed/getDataWeb",
           method: "POST",
           data: {

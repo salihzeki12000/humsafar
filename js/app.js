@@ -648,6 +648,8 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout) {
           //    $scope.callback({'data':$scope.model});
           // }, 100);
 
+        }).error(function (data) {
+          console.log(data);
         });
       };
     }
@@ -739,10 +741,8 @@ firstapp.directive('uploadImageOtg', function ($http, $filter, $timeout) {
           },
           transformRequest: angular.identity
         }).success(function (data) {
-
           $scope.uploadStatus = "uploaded";
           if ($scope.isMultiple) {
-
             if ($scope.inObject) {
               $scope.model.push({
                 "image": data.data[0]
@@ -769,8 +769,9 @@ firstapp.directive('uploadImageOtg', function ($http, $filter, $timeout) {
           // $timeout(function () {
           //    $scope.callback({'data':$scope.model});
           // }, 100);
-
-        });
+        }).error(function (data) {
+          console.log(data);
+        });;
       };
     }
   };

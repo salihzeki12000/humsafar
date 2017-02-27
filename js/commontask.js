@@ -1,6 +1,6 @@
 var commontask = angular.module('commontask', [])
 
-  .factory('LikesAndComments', function ($http, $filter, $uibModal) {
+  .factory('LikesAndComments', function (TravelibroService, $filter, $uibModal) {
 
     var returnVal = {
       getHashTags: function (commentString, callback) {
@@ -81,12 +81,14 @@ var commontask = angular.module('commontask', [])
             getCommentId = "";
             break;
         }
-        $http({
+        TravelibroService.http({
           url: adminURL + "/comment/addCommentWeb",
           method: "POST",
           data: obj
         }).success(function (data) {
           returnVal.getComments(type, getCommentId, callback);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       getComments: function (type, _id, callback) {
@@ -112,12 +114,14 @@ var commontask = angular.module('commontask', [])
             url = "/journey/getJourneyCommentWeb";
             break;
         }
-        $http({
+        TravelibroService.http({
           url: adminURL + url,
           method: "POST",
           data: obj
         }).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       likeUnlike: function (type, task, uniqueId, type_id, additionalId) {
@@ -152,23 +156,28 @@ var commontask = angular.module('commontask', [])
         switch (type) {
           case "travel-life":
           case "local-life":
+            console.log("like type:----post");
             url = "/post/updateLikePostWeb";
             break;
           case "on-the-go-journey":
           case "ended-journey":
+            console.log("like type:----start/end journey");
             obj.journey = type_id;
             url = "/journey/likeJourneyWeb";
             break;
           case "quick-itinerary":
           case "detail-itinerary":
+            console.log("like type:----itinerary");
             obj.itinerary = type_id;
             url = "/itinerary/updateLikeItineraryWeb";
             break;
           case "photo":
+            console.log("like type:----photo");
             obj.photoId = additionalId;
             url = "/postphotos/updateLikePostWeb";
             break;
           case "video":
+            console.log("like type:----video");
             obj.videoId = additionalId;
             url = "/postvideos/updateLikePostWeb";
             break;
@@ -176,11 +185,13 @@ var commontask = angular.module('commontask', [])
         if (task == "unlike") {
           obj.unlike = true;
         }
-        $http({
+        TravelibroService.http({
           url: adminURL + url,
           method: "POST",
           data: obj
         }).success(function (data) {
+          console.log(data);
+        }).error(function (data) {
           console.log(data);
         });
       },
@@ -207,12 +218,14 @@ var commontask = angular.module('commontask', [])
             url = "/journey/getJourneyLikesWeb";
             break;
         }
-        $http({
+        TravelibroService.http({
           url: adminURL + url,
           method: "POST",
           data: obj
         }).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       getPhotoBannerDetails: function (_id, pagenumber, successCallback, errorCallback) {
@@ -221,7 +234,7 @@ var commontask = angular.module('commontask', [])
           "_id": _id,
           "pagenumber": pagenumber
         };
-        $http({
+        TravelibroService.http({
           url: adminURL + "/postPhotos/getOneWeb",
           data: obj,
           method: "POST"
@@ -246,7 +259,7 @@ var commontask = angular.module('commontask', [])
         });
       },
       searchTags: function (tag, callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/hashtag/findHash",
           method: "POST",
           data: {
@@ -254,10 +267,12 @@ var commontask = angular.module('commontask', [])
           }
         }).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       searchBuddies: function (buddy, callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/user/searchBuddyWeb",
           method: "POST",
           data: {
@@ -266,6 +281,8 @@ var commontask = angular.module('commontask', [])
           }
         }).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       followFollowing: function (flag, id, name) {
@@ -276,24 +293,28 @@ var commontask = angular.module('commontask', [])
           "_id": userId,
           "toName": name
         }
-        $http({
+        TravelibroService.http({
           url: adminURL + "/user/followUserWeb",
           method: "POST",
           data: obj
         }).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       unFollowUser: function (userId, callback) {
         var obj = {
           "_id": userId,
         }
-        $http({
+        TravelibroService({
           url: adminURL + "/user/unFollowUserWeb",
           method: "POST",
           data: obj
         }).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       }
     };

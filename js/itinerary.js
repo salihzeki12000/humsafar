@@ -1,10 +1,10 @@
 var itinerary = angular.module('itinerary', [])
 
-  .factory('Itinerary', function ($http, $filter) {
+  .factory('Itinerary', function (TravelibroService, $filter) {
 
     return {
       getOneItinerary: function (slug, callback) { //get Quick/detail itinerary
-        $http({
+        TravelibroService.http({
           url: adminURL + "/itinerary/getOneWeb",
           method: "POST",
           data: {
@@ -12,6 +12,8 @@ var itinerary = angular.module('itinerary', [])
           }
         }).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       postItineraryComment: function (_id, uniqueId, text, callback) {
@@ -22,12 +24,14 @@ var itinerary = angular.module('itinerary', [])
           "type": "itinerary",
           "hashtag": []
         };
-        $http({
+        TravelibroService.http({
           url: adminURL + "/comment/addCommentWeb",
           method: "POST",
           data: obj
         }).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       updateLikeItinerary: function (flag, _id, uniqueId, callback) {
@@ -44,7 +48,7 @@ var itinerary = angular.module('itinerary', [])
           result = true;
         }
         console.log(obj);
-        $http({
+        TravelibroService.http({
           url: adminURL + "/itinerary/updateLikeItineraryWeb",
           method: "POST",
           data: obj
@@ -52,19 +56,23 @@ var itinerary = angular.module('itinerary', [])
           if (data.value) {
             callback(result);
           }
+        }).error(function (data) {
+          console.log(data);
         });
       },
       getGooglePlaceDetail: function (obj, callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/itinerary/getGooglePlaceDetail",
           method: "POST",
           data: obj
         }).success(function (data) {
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       searchFollowers: function (searchText, callback) {
-        $http({
+        TravelibroService.http({
           url: adminURL + "/user/searchBuddyWeb",
           method: "POST",
           data: {
@@ -72,7 +80,9 @@ var itinerary = angular.module('itinerary', [])
           }
         }).success(function (data) {
           callback(data);
-        })
+        }).error(function (data) {
+          console.log(data);
+        });
       },
       uploadQuickItinerary: function (obj, flag, callback) {
         if (flag == 'new') {
@@ -80,7 +90,7 @@ var itinerary = angular.module('itinerary', [])
         } else if (flag == 'edit') {
           var url = "/itinerary/editQuickItineraryWeb"
         }
-        $http({
+        TravelibroService.http({
           url: adminURL + url,
           method: "POST",
           data: obj
@@ -89,6 +99,8 @@ var itinerary = angular.module('itinerary', [])
             console.log("Qitinerary saved successfully");
           }
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       },
       uploadDetailedItinerary: function (obj, flag, callback) {
@@ -98,7 +110,7 @@ var itinerary = angular.module('itinerary', [])
         } else if (flag == 'edit') {
           var url = "/itinerary/editData"
         }
-        $http({
+        TravelibroService.http({
           url: adminURL + url,
           method: "POST",
           data: obj
@@ -107,6 +119,8 @@ var itinerary = angular.module('itinerary', [])
             console.log("Qitinerary saved successfully");
           }
           callback(data);
+        }).error(function (data) {
+          console.log(data);
         });
       }
     };
