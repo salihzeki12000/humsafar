@@ -66,6 +66,24 @@
                           <source src="img/libro-home/video/Travel_life.mp4" type="video/mp4">
                         </video>
                       </div>
+                      <div class="journey-downloadicon">
+                        <ul class="list-unstyled list-inline text-center color-pink">
+                          <li class="">
+                            Download App
+                          </li>
+                          <li>
+                            <a href="#" target="_blank" class="color-pink">
+                              <i class="fa fa-apple"></i>
+                            </a>
+                          </li>
+                          <li>|</li>
+                          <li>
+                            <a href="#" class="color-pink" target="_blank">
+                              <i class="fa fa-android"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-6">
@@ -76,8 +94,7 @@
                       <h3 class="color-pink">My Tales &amp; Trails</h3>
                       <div class="empty-ongo">
                         <h4>On-the-Go Journeys</h4>
-                        <p class="empty-descp">Capture your journeys and activities whether local or global, creating a beautiful timeline and relive
-                          these treasured experiences of your past.</p>
+                        <p class="empty-descp">Capture your journeys and activities whether local or global, creating a beautiful timeline and relive these treasured experiences of your past.</p>
                       </div>
                       <div class="empty-chronicling">
                         <h4>Chronicling Past Travels</h4>
@@ -99,11 +116,11 @@
                     <div class="journey-masonry-brick" ng-if="life.type=='ended-journey' || life.type=='on-the-go-journey'">
                       <div class="travel-life-part avenir-roman">
                         <div class="travel-journey-heading">
-                          <p ng-if="life.type=='ended-journey'">Has ended <span ng-if="life.user.gender=='male'">his</span><span ng-if="life.user.gender=='female'">her</span>                            Journey</p>
-                          <p ng-if="life.type=='on-the-go-journey'">Has started <span ng-if="life.user.gender=='male'">his</span><span ng-if="life.user.gender=='female'">her</span>                            Journey</p>
+                          <p ng-if="life.type=='ended-journey'">Has ended <span ng-if="life.user.gender=='male'">his</span><span ng-if="life.user.gender=='female'">her</span> Journey</p>
+                          <p ng-if="life.type=='on-the-go-journey'">Has started <span ng-if="life.user.gender=='male'">his</span><span ng-if="life.user.gender=='female'">her</span> Journey</p>
                           <p ng-hide="life.onJourney">{{life.heading}}</p>
                           <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
-                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p>
+                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span> <span>{{life.timestampHour}}</span></p>
                         </div>
                         <!--jounrey main detail card-->
                         <div class="travelled-journey relate" ng-click="routeTO(life.type,life.urlSlug)">
@@ -179,15 +196,15 @@
                           <div class="user-social-item clearfix">
                             <div class="pull-left">
                               <ul>
-                                <li ng-click="likeUnlikeActivity(life)" >
-                                  <a href="" class="relate" >
+                                <li ng-click="likeUnlikeActivity(life)">
+                                  <a href="" class="relate">
                                     <i class="fa color-blue card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound></i>
-                                <span></span>
-                                <audio id="like-play">
+                                    <span></span>
+                                    <audio id="like-play">
                                   <source src="img/tiny1.mp3" type="audio/mp3">
                                 </audio>
-                              </a>
-                            </li>
+                                  </a>
+                                </li>
                                 <li>
                                   <a href=""><img src="img/comments.png" alt="" height="18"></a>
                                 </li>
@@ -245,7 +262,7 @@
                         <div class="travel-journey-heading">
                           <p ng-hide="life.onJourney">{{life.heading}}</p>
                           <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
-                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p>
+                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span> <span>{{life.timestampHour}}</span></p>
                         </div>
                         <!--for itinerary card main-->
                         <div class="onway-journey relate" ng-click="routeTO(life.type,life.urlSlug)">
@@ -301,14 +318,15 @@
                           <div class="user-social-item clearfix">
                             <div class="pull-left">
                               <ul>
-                                <li ng-click="likeUnlikeActivity(life)" >
-                                  <a href="" class="relate" >
+                                <li ng-click="likeUnlikeActivity(life)">
+                                  <a href="" class="relate">
                                     <i class="fa color-blue card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound></i>
                                     <span></span>
                                     <audio id="like-play">
                                       <source src="img/tiny1.mp3" type="audio/mp3">
                                     </audio>
-                                  </a></li>
+                                  </a>
+                                </li>
                                 <li>
                                   <a href=""><img src="img/comments.png" alt="" height="18"></a>
                                 </li>
@@ -419,6 +437,24 @@
                           <source src="img/libro-home/video/Local_life.mp4" type="video/mp4">
                         </video>
                       </div>
+                      <div class="journey-downloadicon">
+                        <ul class="list-unstyled list-inline text-center color-cyan">
+                          <li class="">
+                            Download App
+                          </li>
+                          <li>
+                            <a href="#" target="_blank" class="color-cyan">
+                              <i class="fa fa-apple"></i>
+                            </a>
+                          </li>
+                          <li>|</li>
+                          <li>
+                            <a href="#" class="color-cyan" target="_blank">
+                              <i class="fa fa-android"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -426,9 +462,8 @@
                       <div class="journey-cycle">
                         <img src="img/profile-empty/local-empty.png" alt="" class="img-responsive inline-block">
                       </div>
-                      <h3 class="color-pink">Life In The City</h3>
-                      <p class="empty-descp">Candid, fun moments with friends, happy family get-togethers, some precious ‘me-time’…share your love
-                        for your city and inspire others to do the same. Cherish your local life memories eternally.</p>
+                      <h3 class="color-cyan">Life In The City</h3>
+                      <p class="empty-descp">Candid, fun moments with friends, happy family get-togethers, some precious ‘me-time’…share your love for your city and inspire others to do the same. Cherish your local life memories eternally.</p>
                     </div>
                   </div>
                 </div>
@@ -595,8 +630,7 @@
                 <div class="scroll-local-life scrollme" ng-scrollbar rebuild-on="rebuild:me" rebuild-on-resize ng-if="viewLocal">
                   <div class="local-post" infinite-scroll="getMoreLocalPost();" infinite-scroll-disabled='scroll2.busy' infinite-scroll-distance='1'>
                     <!-- local life data -->
-                    <post-local-life ng-repeat="localPost in localLifeJourney track by $index" ongolocal="localPost" open-comment-section="openCommentSection(ongolocal)"
-                      open-like-section="openLikeSection(ongolocal)">
+                    <post-local-life ng-repeat="localPost in localLifeJourney track by $index" ongolocal="localPost" open-comment-section="openCommentSection(ongolocal)" open-like-section="openLikeSection(ongolocal)">
                     </post-local-life>
                     <!-- local life data end-->
                   </div>
@@ -678,7 +712,7 @@
                           <div class="like-reply-line">
                             <!--<span class="color-blue avenir-roman mr5 pointer">Like</span>-->
                             <!--<span class="color-blue avenir-roman mr5 pointer">Reply</span>-->
-                            <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                            | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
+                            <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span> | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
                           </div>
                         </div>
                       </div>

@@ -801,7 +801,7 @@ header {
 // Set Profile process
 
 .background-login {
-  background-color: #fff;
+  background-color: rgba(255,255,255,0.9);
 }
 
 .city,
@@ -1526,6 +1526,10 @@ header {
     font-family: "AvenirLTStd-Medium";
   }
 }
+
+.journey-downloadicon{
+  margin: 10px 0;
+}
 // journey emptytab end
 // Empty profile end
 // visited list
@@ -1792,6 +1796,7 @@ header {
 .travel-life-part {
   border-radius: 6px;
   background-color: transparent;
+  box-shadow: 2px 3px 10px #a0a0a0;
 
   ul {
     padding: 0;
@@ -2629,6 +2634,7 @@ header {
   border: 1px solid $brand-lighter-grey;
   border-radius: 6px;
   margin-bottom: 20px;
+  box-shadow: 2px 3px 10px #a0a0a0;
 
   .heading-local-life {
     padding: 10px;
@@ -2970,6 +2976,7 @@ header {
   cursor: pointer;
   background-color: $brand-lighter-grey;
   overflow: hidden;
+  margin: 2px 0;
 
   img {
     max-height: 100%;
