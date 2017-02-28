@@ -102,7 +102,7 @@ var commontask = angular.module('commontask', [])
             url = "/post/getPostCommentWeb";
             break;
           case "photo":
-            url = "/postphotos/getPostCommentWeb";
+            url = "/postphotos/getOneWeb";
             break;
           case "video":
             url = "/postvideos/getPostCommentWeb";
@@ -367,7 +367,7 @@ commontask.directive('findTags', function (LikesAndComments) {
         $scope.endTagIndex = null;
         $scope.hashTag;
         currentPosition = ctl.selectionStart - 1;
-        console.log(currentPosition);
+        // console.log(currentPosition);
         var counter = currentPosition;
 
         //for finding hashtags
@@ -422,7 +422,7 @@ commontask.directive('findTags', function (LikesAndComments) {
             }
           }
         } else {
-          console.log("invalid currentPosition");
+          // console.log("invalid currentPosition");
         }
       });
 

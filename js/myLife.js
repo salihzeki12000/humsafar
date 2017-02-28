@@ -8,8 +8,12 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/country/getAll",
           method: "POST"
         }).success(function (data) {
-          TravelibroService.post(adminURL + "/user/getBucketListWeb").success(function (data2) {
-            TravelibroService.post(adminURL + "/user/getCountryVisitedListWeb").success(function (data3) {
+          TravelibroService.post(adminURL + "/user/getBucketListWeb", {
+            "urlSlug": $.jStorage.get("activeUrlSlug")
+          }).success(function (data2) {
+            TravelibroService.post(adminURL + "/user/getCountryVisitedListWeb", {
+              "urlSlug": $.jStorage.get("activeUrlSlug")
+            }).success(function (data3) {
               var countries = data.data;
               var bucketList = data2.data.bucketList;
               var countryVisited = data3.data.countriesVisited;
@@ -153,6 +157,7 @@ var mylife = angular.module('mylife', [])
           method: "POST",
           data: {
             "type": "travel-life",
+            "urlSlug": $.jStorage.get("activeUrlSlug"),
             "pagenumber": pageNo
           }
         }).success(function (data) {
@@ -170,7 +175,7 @@ var mylife = angular.module('mylife', [])
                 journeys[i].onJourney = false;
               }
               journeys[i].showRemainingCount = false;
-              console.log(n);
+              // console.log(n);
               if (n.countryVisited.length >= 3) {
                 journeys[i].showRemainingCount = true;
               }
@@ -190,7 +195,7 @@ var mylife = angular.module('mylife', [])
                   break;
               }
             });
-            console.log(journeys);
+            // console.log(journeys);
             callback(journeys);
           }
         }).error(function (data) {
