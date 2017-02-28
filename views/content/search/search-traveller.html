@@ -2,7 +2,7 @@
   <div class="following-container" ng-repeat="list in viewSearchedUser track by $index">
     <div class="following-holder">
       <div class="follow-imgholder">
-        <img ng-src="{{list.profilePicture|uploadpath}}" class="img-responsive">
+        <img ng-src="{{list.profilePicture|uploadpath:80:80:'cover'}}" class="img-responsive">
       </div>
       <div class="following-detail text-center">
         <h4 class="color-blue avenir-heavy">{{list.name}}</h4>

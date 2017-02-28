@@ -22,7 +22,7 @@
           <div class="moments-tab review-tab">
             <!-- back button -->
             <!--<div class="pull-right">
-              <button class="btn btn-blue-outline btn-more" ng-click="showMonthView();">Back</button> 
+              <button class="btn btn-blue-outline btn-more" ng-click="showMonthView();">Back</button>
             </div>-->
             <!-- back button end -->
             <div class="btn-view-moments btn-view-review pointer" ng-click="changeReviewTypeView(1)">
@@ -65,7 +65,7 @@
                   <div class="review-travel-life">
                     <div class="heading-review clearfix">
                       <h3 class="place-name pull-left m-clear color-blue">{{view.checkIn.location}}</h3>
-                      <img ng-src="{{view.travelType}}" alt="" height="30" class="pull-right">
+                      <img ng-src="{{view.checkIn.category|kindOfReviewCheckIn}}" alt=""  class="pull-right">
                     </div>
                     <div class="rate-location">
                       <p class=" m-clear inline-block avenir-light pointer" ng-click="getReview(view);" ng-if="view.review.length==0" ng-class="{'color-cyan':view.type=='local-life','color-pink':view.type=='travel-life'}">Rate this now</p>
@@ -156,7 +156,7 @@
                                 <div class="review-local-life">
                                   <div class="heading-review clearfix">
                                     <h3 class="place-name pull-left m-clear color-blue">{{visit.checkIn.location}}</h3>
-                                    <img ng-src="{{visit.travelType}}" alt="" height="30" class="pull-right">
+                                    <img ng-src="{{view.checkIn.category|kindOfReviewCheckIn}}" alt=""  class="pull-right">
                                   </div>
                                   <div class="rate-location">
                                     <p class="color-pink m-clear inline-block avenir-light pointer" ng-click="getReview(visit);" ng-if="visit.review.length==0">Rate this now</p>
@@ -227,7 +227,7 @@
                               <div class="review-local-life">
                                 <div class="heading-review clearfix">
                                   <h3 class="place-name pull-left m-clear color-blue">{{visit.checkIn.location}}</h3>
-                                  <img ng-src="{{visit.travelType}}" alt="" height="30" class="pull-right">
+                                  <img ng-src="{{view.checkIn.category|kindOfReviewCheckIn}}" alt="" class="pull-right">
                                 </div>
                                 <div class="rate-location">
                                   <p class="color-cyan pointer m-clear inline-block avenir-light" ng-click="getReview(visit);" ng-if="visit.review.length==0">Rate this now</p>

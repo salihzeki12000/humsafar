@@ -9,21 +9,23 @@
         <span class="close pop-close-btn" ng-click="$dismiss();"><i class="fa fa-times color-white"></i></span>
       </div>
     </div>
-    <div class="cover-content">
-      <div class="cover-gallery-grid  bg-white" ng-hide="cropImage">
-        <div class="choose-cover-pic inline-block" ng-repeat="img in journeyCoverPhotos.photos track by $index">
-          <img ng-src="{{img.name|uploadpath}}" alt="Gallery" class="img-responsive" id="fileGallery" ng-click="cropCover(img.name);">
-        </div>
-      </div>
-      <div class="crop-cover-container">
-        <div class="selected-img-gallery" ng-show="cropImage">
-          <div class="cropped-Image">
-            <!-- <img-crop image="myImage" result-image="myCroppedImage"></img-crop> -->
-            <img ng-src="{{showCover|uploadpath}}" alt="" class="img-responsive">
+    <div class="coverpic-scroll bg-white">
+      <div class="cover-content">
+        <div class="cover-gallery-grid" ng-hide="cropImage">
+          <div class="choose-cover-pic inline-block" ng-repeat="img in journeyCoverPhotos.photos track by $index">
+            <img ng-src="{{img.name|uploadpath:150:150:'cover'}}" alt="Gallery" class="img-responsive" id="fileGallery" ng-click="cropCover(img.name);">
           </div>
-          <div class="cropped-save">
-            <span ng-click="viewPrev();">Cancel</span>
-            <button class="btn btn-pink btn-more btn-cover-save" ng-click="setJourneyCoverPhoto(journey._id,showCover)">Save</button>
+        </div>
+        <div class="crop-cover-container">
+          <div class="selected-img-gallery" ng-show="cropImage">
+            <div class="cropped-Image">
+              <!-- <img-crop image="myImage" result-image="myCroppedImage"></img-crop> -->
+              <img ng-src="{{showCover|uploadpath}}" alt="" class="img-responsive">
+            </div>
+            <div class="cropped-save">
+              <span ng-click="viewPrev();">Cancel</span>
+              <button class="btn btn-pink btn-more btn-cover-save" ng-click="setJourneyCoverPhoto(journey._id,showCover)">Save</button>
+            </div>
           </div>
         </div>
       </div>

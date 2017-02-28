@@ -656,6 +656,10 @@ header {
   z-index: 10;
   @include transition(all 100ms linear);
 
+   &.nav-up {
+   @include transform(translateY(-100%));
+}
+
   &.addfixed {
     @extend .bg-dark-blue;
   }
@@ -793,7 +797,7 @@ header {
 .user-img {
   width: 40px;
   height: 42px;
-  border: 2px solid #fff;
+  border: 2px solid #868686;
   border-radius: 15px;
   overflow: hidden;
 }
@@ -1468,8 +1472,8 @@ header {
 
   .travel-badge {
     position: absolute;
-    bottom: 70px;
-    left: 30px;
+    top: 10px;
+    right: 10px;
 
     img {
       height: 80px;
@@ -2762,6 +2766,9 @@ header {
   @include square(136px);
   border: 1px solid $brand-cyan;
   overflow: hidden;
+  &:first-child{
+    margin-left: 10px;
+  }
 }
 
 .post-imgholder-related .related-postholder {
@@ -3129,6 +3136,13 @@ header {
   }
 }
 
+.heading-review{
+  img{
+    max-width: 30px;
+    max-height: 35px;
+  }
+}
+
 .rate-location {
   p {
     font-style: italic;
@@ -3192,7 +3206,6 @@ header {
   }
 
   .review-frontimgholder {
-    background-color: $brand-lighter-grey;
     img{
       width: 100%;
     }
@@ -3563,7 +3576,7 @@ header {
 .setting-prof-imgholder {
   width: 63px;
   height: 65px;
-  border: 2px solid $brand-grey;
+  border: 2px solid #868686;
   border-radius: 25px;
   background-color: $brand-lighter-grey;
   box-shadow: 0 3px 1px #e3e3e3;
@@ -4326,7 +4339,7 @@ header {
   width: 65px;
   height: 70px;
   overflow: hidden;
-  border: 2px solid #ddd;
+  border: 2px solid #868686;
   border-radius: 28%;
 
   img {
@@ -5513,6 +5526,7 @@ header {
   }
 
   .card-img {
+    height: 100%;
     @extend .get-center;
   }
 }
@@ -5771,10 +5785,12 @@ header {
 // change journey card
 
 .ongo-journey-change {
-  width: 350px;
+  max-width: 350px;
   margin: 30px auto;
 
   .journey-change {
+    display: inline-block;
+    min-width: 120px;
     padding: 15px 10px;
     border-radius: 6px;
     @include transform(rotate(-2deg));
@@ -6108,10 +6124,27 @@ header {
   .modal-dialog {
     width: 1100px;
   }
-}
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
 
-.cover-gallery-grid {
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $brand-pink;
+  }
+}
+.coverpic-scroll{
   padding: 10px;
+}
+.cover-content {
+  height: calc(100vh - 130px);
+  overflow-y: auto;
+}
+.cover-gallery-grid {
+  // padding: 10px;
 
   .choose-cover-pic {
     width: 148px;
@@ -6127,12 +6160,16 @@ header {
 }
 
 .crop-cover-container {
-  // width: 700px;
-  // margin: 0 auto;
+.selected-img-gallery{
+  text-align: center;
+}
   .cropped-Image {
-    width: 550px;
+    width: auto;
     display: inline-block;
     vertical-align: bottom;
+    img{
+      max-height: calc( 100vh - 130px);
+    }
   }
 }
 
@@ -7577,6 +7614,9 @@ header {
       @extend .pointer;
     }
   }
+  .selectize-dropdown .active{
+    color: $brand-blue;
+  }
 }
 
 .itinerary-inputholder .month-year-select {
@@ -7837,6 +7877,10 @@ header {
 
     .caret {
       display: none;
+    }
+
+    .btn-primary{
+      background-color: $brand-blue;
     }
   }
 
@@ -8989,6 +9033,8 @@ header {
 }
 
 .travelled-withselect .ui-select-multiple.ui-select-bootstrap .btn-default {
+  border-color: #ccc;
+  background-color: #fff;
   color: $brand-blue !important;
 }
 //sagar css end
@@ -9318,7 +9364,7 @@ header {
     .user-imgholder {
       width: 85px;
       height: 90px;
-      border: 2px solid #fff;
+      border: 2px solid #868686;
       border-radius: 30px;
       margin: 0 auto;
       overflow: hidden;
@@ -9638,7 +9684,7 @@ header {
     width: 34px;
     height: 37px;
     border-radius: 13px;
-    border: 2px solid #fff;
+    border: 2px solid #868686;
     display: inline-block;
     overflow: hidden;
     text-align: center;
@@ -11365,7 +11411,17 @@ ng-map {
 
 .travelibro-loader {
   @include square(100%);
-  @include position(absolute, 0);
+  @include position(fixed, 0);
+  background-color: rgba(0,0,0,0.7);
+  overflow: hidden;
   z-index: 100;
+  img{
+    @extend .get-center;
+  }
+}
+.loader-blur .repeated-item{
+  height: 100vh;
+ @include filter(blur(7px));
+ overflow: hidden;
 }
 // travelibro loader end
