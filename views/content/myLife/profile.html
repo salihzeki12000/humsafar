@@ -10,7 +10,7 @@
       </div>
       <div class="profile-more-detail text-center">
         <h3 class="color-blue m-clear font-bold avenir-medium ">{{userData.name}}</h3>
-        <h5 class="color-pink avenir-roman">Lives In : <i class="fa fa-map-marker mr5"></i><span>{{homeCity}}</span></h5>
+        <h5 class="color-pink avenir-roman">Lives In : <i class="fa fa-map-marker mr5"></i><span>{{userData.homeCity}}</span></h5>
       </div>
     </div>
     <div class="user-travel-detail relate">
@@ -18,55 +18,55 @@
         <ul>
           <li class="text-center pointer" ui-sref="ProfileList({active:'following'})">
             <div class="travel-inside">
-              <span class="avenir-heavy color-blue">{{count.following_count}}</span>
+              <span class="avenir-heavy color-blue">{{userData.following_count}}</span>
               <span class="block avenir-roman color-blue mt5">Following</span>
             </div>
           </li>
           <li class="text-center pointer" ui-sref="ProfileList({active:'followers'})">
             <div class="travel-inside">
-              <span class="avenir-heavy color-blue">{{count.followers_count}}</span>
+              <span class="avenir-heavy color-blue">{{userData.followers_count}}</span>
               <span class="block avenir-roman color-blue mt5">Followers</span>
             </div>
           </li>
           <li class="text-center pointer" ui-sref="ProfileList({active:'countriesVisited'})">
             <div class="travel-inside">
-              <span class="avenir-heavy color-blue">{{count.countriesVisited_count}}</span>
+              <span class="avenir-heavy color-blue">{{userData.countriesVisited_count}}</span>
               <span class="block avenir-roman color-blue mt5">Countries Visited</span>
             </div>
           </li>
           <li class="text-center pointer" ui-sref="ProfileList({active:'bucketList'})">
             <div class="travel-inside">
-              <span class="avenir-heavy color-blue">{{count.bucketList_count}}</span>
+              <span class="avenir-heavy color-blue">{{userData.bucketList_count}}</span>
               <span class="block avenir-roman color-blue mt5">Bucket List</span>
             </div>
           </li>
           <li class="text-center pointer">
             <div class="travel-inside">
-              <span class="avenir-heavy color-blue">{{count.journeysCreated_count}}</span>
+              <span class="avenir-heavy color-blue">{{userData.journeysCreated_count}}</span>
               <span class="block avenir-roman color-blue mt5">Journeys Created</span>
             </div>
           </li>
           <li class="text-center pointer">
             <div class="travel-inside">
-              <span class="avenir-heavy color-blue">{{count.checkins_count}}</span>
+              <span class="avenir-heavy color-blue">{{userData.checkins_count}}</span>
               <span class="block avenir-roman color-blue mt5">Check-Ins</span>
             </div>
           </li>
           <li class="text-center pointer">
             <div class="travel-inside">
-              <span class="avenir-heavy color-blue">{{count.photos_count}}</span>
+              <span class="avenir-heavy color-blue">{{userData.photos_count}}</span>
               <span class="block avenir-roman color-blue mt5">Photos</span>
             </div>
           </li>
           <li class="text-center pointer">
             <div class="travel-inside">
-              <span class="avenir-heavy color-blue">{{count.reviews_count}}</span>
+              <span class="avenir-heavy color-blue">{{userData.reviews_count}}</span>
               <span class="block avenir-roman color-blue mt5">Reviews</span>
             </div>
           </li>
           <li class="text-center pointer">
             <div class="travel-inside">
-              <span class="avenir-heavy color-blue">{{count.reviews_count}}</span>
+              <span class="avenir-heavy color-blue">{{userData.itineray_count}}</span>
               <span class="block avenir-roman color-blue mt5">Itineraries</span>
             </div>
           </li>

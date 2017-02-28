@@ -1,11 +1,12 @@
 var adminURL = "";
+
 if (isproduction) {
   adminURL = "http://www.wohlig.co.in/demo/index.php";
 } else {
   adminURL = "http://travelibro.com/api";
 }
-var imgurl = adminURL + "/upload/";
 
+var imgurl = adminURL + "/upload/";
 var imgpath = imgurl + "readFile";
 var uploadurl = imgurl;
 var navigationservice = angular.module('navigationservice', [])
@@ -124,9 +125,21 @@ var navigationservice = angular.module('navigationservice', [])
           method: "POST"
         }).success(callback).error(errCallback);
       },
-      getProfile: function (callback, errCallback) {
+      getProfile: function (slug, callback, errCallback) {
         return TravelibroService.http({
-          url: adminURL + "/user/getProfile",
+          url: adminURL + "/user/getOneDataWeb",
+          data: {
+            'urlSlug': slug
+          },
+          method: "POST"
+        }).success(callback).error(errCallback);
+      },
+      getOthersProfile: function (slug, callback, errCallback) {
+        TravelibroService.http({
+          url: adminURL + "/user/getOneDataWeb",
+          data: {
+            'urlSlug': slug
+          },
           method: "POST"
         }).success(callback).error(errCallback);
       },
@@ -142,7 +155,6 @@ var navigationservice = angular.module('navigationservice', [])
           method: "POST"
         }).success(callback).error(errCallback);
       },
-
       getAllCities: function (formData, callback, errCallback) {
         TravelibroService.post(adminURL + "/city/locationSearch", formData).success(callback).error(errCallback);
       },

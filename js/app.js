@@ -67,7 +67,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
   cfpLoadingBarProvider.includeSpinner = true;
   cfpLoadingBarProvider.latencyThreshold = 2000;
   cfpLoadingBarProvider.includeBar = true;
-  cfpLoadingBarProvider.spinnerTemplate = '<div class="travelibro-loader"><img src="img/travelibro-loader.gif" alt="Travelibro" class="img-responsive" /></div>';
+  cfpLoadingBarProvider.spinnerTemplate = '<div id="loader" class="travelibro-loader"><img src="img/loader.gif" width="180px" alt="Travelibro" class="img-responsive" /></div>';
 
   $stateProvider
     .state('header', {
@@ -131,7 +131,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       reloadOnSearch: false
     })
     .state('mylife', {
-      url: "/mylife/:name",
+      url: "/mylife/:name/:urlSlug",
       templateUrl: "views/template.html",
       controller: 'MylifeCtrl',
       reloadOnSearch: false
@@ -771,7 +771,7 @@ firstapp.directive('uploadImageOtg', function ($http, $filter, $timeout) {
           // }, 100);
         }).error(function (data) {
           console.log(data);
-        });;
+        });
       };
     }
   };
@@ -1313,3 +1313,23 @@ firstapp.directive("fileread", [function () {
     }
   }
 }]);
+
+firstapp.directive('hideOnScroll', function ($document) {
+  return {
+    restrict: 'EA',
+    replace: false,
+    link: function (scope, element, attr) {
+      var $element = $(element);
+      var lastScrollTop = 0;
+      $(window).scroll(function (event) {
+        var st = $(this).scrollTop();
+        if (st > lastScrollTop) {
+          $(element).addClass('nav-up');
+        } else {
+          $(element).removeClass('nav-up');
+        }
+        lastScrollTop = st;
+      });
+    }
+  };
+});
