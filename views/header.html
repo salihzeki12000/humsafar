@@ -1,4 +1,4 @@
-<header class="bg-dark-blue {{isLoggedIn}}" ng-controller="headerctrl" ng-show="isLoggedIn">
+<header class="bg-dark-blue {{isLoggedIn}}" hide-on-scroll ng-controller="headerctrl" ng-show="isLoggedIn">
   <nav class="navbar">
     <div class="container-fluid">
       <!-- <div class="navbar-header">
@@ -133,12 +133,12 @@
           <div class="user-detail text-right">
             <ul class="list-inline">
               <!--logout BUTTON -->
-              <li>
+              <!--<li>
                 <a ng-click="logout()">Logout</a>
-              </li>
+              </li>-->
               <!--End OF logout BUTTON -->
-              <li ui-sref="mylife({name:'journey'})">
-                <a href="">
+              <li ui-sref="mylife({name:'journey,'urlSlug:userData.urlSlug'})">
+                <a>
                   <div class="user-img inline-block v-mid">
                     <img src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" width="40" class="img-responsive">
                   </div>
@@ -172,7 +172,7 @@
       <div class="visible-xs">
         <div class="mobile-header">
           <div class="profile-mobile">
-            <a ui-sref="mylife({name:'journey'})">
+            <a ui-sref="mylife({name:'journey,'urlSlug:userData.urlSlug'})">
               <div class="user-img inline-block v-mid">
                 <img src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" width="40" class="img-responsive">
               </div>
@@ -390,7 +390,7 @@
     </div>
   </section>
 </header>
-<header class="libro-header {{isLoggedIn}}" ng-controller="headerctrl" ng-hide="isLoggedIn" scrolladd1class>
+<header class="libro-header {{isLoggedIn}}" ng-controller="headerctrl" hide-on-scroll ng-hide="isLoggedIn" scrolladd1class>
   <section class="bg-black custom-search pd20 " ng-class="{ 'open': isopen} ">
     <div class="container-fluid ">
       <div class="row ">

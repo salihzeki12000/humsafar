@@ -1314,7 +1314,7 @@ header {
 a.volume-off-on {
     position: absolute;
     bottom: 20%;
-    left: 38%;
+    left: 35%;
     font-size: 24px;
     color: #fff;
     @include transition (all ease 300ms);
@@ -1325,7 +1325,7 @@ a.volume-off-on {
 a.full-screen {
     position: absolute;
     bottom: 20%;
-    right: 38%;
+    right: 35%;
     @include transition (all ease 300ms);
     &:hover{
       @include opacity(0.7);
