@@ -76,11 +76,11 @@
           <div class="edit-otg-thought otg-color-cyan otg-bg-all">
             <img src="img/localjourney/local-thought.png" alt="" class="img-responsive icon-thought" width="20">
             <div class="otg-thought otg-color-cyan" ng-init="localongo.editArea={};localongo.editArea.backgroundClick = false">
-              <textarea maxlength="150" class="form-control edit-textarea" id="editTextarea" ng-model="localongo.thoughts" ng-click="editOption(localongo.editArea);" ng-class="{'opened-editarea': localongo.editArea.backgroundClick == true, '': localongo.editArea.backgroundClick == false}">{{localongo.thoughts}}</textarea>
+              <textarea maxlength="180" class="form-control edit-textarea" id="editTextarea" ng-model="localongo.thoughts" ng-click="editOption(localongo.editArea);" ng-class="{'opened-editarea': localongo.editArea.backgroundClick == true, '': localongo.editArea.backgroundClick == false}">{{localongo.thoughts}}</textarea>
               <!-- hashtag in edit -->
                 <find-tags class="hashtag-edit" ng-model="localongo.thoughts" element-id="editTextarea" enable="hashTag" ng-show="localongo.editArea.backgroundClick;"></find-tags>
               <!-- hashtag in edit end-->
-              <div class="thoughtCount"><span>{{localongo.thoughts.length}}</span><span> / 150</span></div>
+              <div class="thoughtCount"><span>{{localongo.thoughts.length}}</span><span> / 180</span></div>
             </div>
           </div>
         </div>

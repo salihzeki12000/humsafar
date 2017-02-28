@@ -137,7 +137,7 @@
                 <a ng-click="logout()">Logout</a>
               </li>-->
               <!--End OF logout BUTTON -->
-              <li ui-sref="mylife({name:'journey,'urlSlug:userData.urlSlug'})">
+              <li ui-sref="mylife({name:'journey','urlSlug':userData.urlSlug})">
                 <a>
                   <div class="user-img inline-block v-mid">
                     <img src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" width="40" class="img-responsive">
@@ -172,7 +172,7 @@
       <div class="visible-xs">
         <div class="mobile-header">
           <div class="profile-mobile">
-            <a ui-sref="mylife({name:'journey,'urlSlug:userData.urlSlug'})">
+            <a ui-sref="mylife({name:'journey','urlSlug':userData.urlSlug})">
               <div class="user-img inline-block v-mid">
                 <img src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" width="40" class="img-responsive">
               </div>

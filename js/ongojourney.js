@@ -169,7 +169,7 @@ var ongojourney = angular.module('ongojourney', [])
     };
   });
 
-ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout', '$uibModal', 'OnGoJourney', 'LikesAndComments', function ($http, $filter, $window, $timeout, $uibModal, OnGoJourney, LikesAndComments) {
+ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout', '$uibModal', 'OnGoJourney', 'LikesAndComments','TravelibroService', function ($http, $filter, $window, $timeout, $uibModal, OnGoJourney, LikesAndComments,TravelibroService) {
   return {
     restrict: 'E',
     scope: {
@@ -184,6 +184,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
     link: function ($scope, element, attrs) {
       // var counter = 0
       $scope.userData = $.jStorage.get("profile");
+      $scope.ongoCard = true;
       $scope.flexShow = true;
       $scope.videoFlex = true;
       $scope.indexPhotoCaption = -1;

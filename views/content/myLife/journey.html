@@ -628,11 +628,13 @@
                   </div>
                 </div>
                 <div class="scroll-local-life scrollme" ng-scrollbar rebuild-on="rebuild:me" rebuild-on-resize ng-if="viewLocal">
-                  <div class="local-post" infinite-scroll="getMoreLocalPost();" infinite-scroll-disabled='scroll2.busy' infinite-scroll-distance='1'>
-                    <!-- local life data -->
-                    <post-local-life ng-repeat="localPost in localLifeJourney track by $index" ongolocal="localPost" open-comment-section="openCommentSection(ongolocal)" open-like-section="openLikeSection(ongolocal)">
-                    </post-local-life>
-                    <!-- local life data end-->
+                  <div class="local-post" infinite-scroll="getMoreLocalPost();" infinite-scroll-disabled='scroll2.busy' infinite-scroll-distance='1' >
+                    <div class="" ng-if="localView.view">
+                      <!-- local life data -->
+                      <post-local-life ng-repeat="localPost in localLifeJourney track by $index" ongolocal="localPost" local-view="localView" open-comment-section="openCommentSection(ongolocal)" open-like-section="openLikeSection(ongolocal)">
+                      </post-local-life>
+                      <!-- local life data end-->
+                    </div>
                   </div>
                   <!-- </div> -->
                 </div>

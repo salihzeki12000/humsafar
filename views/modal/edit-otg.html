@@ -76,11 +76,11 @@
           <div class="edit-otg-thought otg-bg-all">
             <img src="img/ongojourney/otg-thought.png" alt="" class="img-responsive icon-thought" width="20">
             <div class="otg-thought" ng-init="ongo.editArea={};ongo.editArea.backgroundClick = false">
-              <textarea maxlength="150" class="form-control edit-textarea" id="editTextarea" ng-model="ongo.thoughts" ng-click="editOption(ongo.editArea);" ng-class="{'opened-editarea': ongo.editArea.backgroundClick == true, '': ongo.editArea.backgroundClick == false}">{{ongo.thoughts}}</textarea>
+              <textarea maxlength="180" class="form-control edit-textarea" id="editTextarea" ng-model="ongo.thoughts" ng-click="editOption(ongo.editArea);" ng-class="{'opened-editarea': ongo.editArea.backgroundClick == true, '': ongo.editArea.backgroundClick == false}">{{ongo.thoughts}}</textarea>
               <!-- hashtag in edit -->
                 <find-tags class="hashtag-edit" ng-model="ongo.thoughts" element-id="editTextarea" enable="hashTag" ng-show="ongo.editArea.backgroundClick;"></find-tags>
               <!-- hashtag in edit end-->
-              <div class="thoughtCount"><span>{{ongo.thoughts.length}}</span><span> / 150</span></div>
+              <div class="thoughtCount"><span>{{ongo.thoughts.length}}</span><span> / 180</span></div>
             </div>
           </div>
         </div>

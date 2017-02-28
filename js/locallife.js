@@ -36,11 +36,13 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
     scope: {
       localongo: "=ongolocal",
       openCommentSection: '&',
-      openLikeSection: '&'
+      openLikeSection: '&',
+      localView: '=localView'
     },
     templateUrl: 'views/directive/local-post.html',
     link: function ($scope, element, attrs) {
       var getLocation = {};
+      $scope.localView.view = true;
       $scope.flexShow = true;
       $scope.videoFlex = true;
       $scope.indexPhotoCaption = -1;
@@ -434,6 +436,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
       // caption edit end
       // edit save data
       $scope.saveLocalEdit = function () {
+        // $scope.localView.view = false;
         // get photos id
         $scope.photosId = _.map($scope.localongo.photos, "_id");
         // get photos id end
@@ -491,8 +494,12 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
           data: editedData,
         }).success(function (data) {
           if (data.value === true) {
-            $window.location.reload();
+            // $window.location.reload();
             modal.close();
+            // $timeout(function(){
+            //   $scope.localView.view = true;
+            // },100);
+            alert($scope.localView.view);
           }
         }).error(function (data) {
           console.log(data);
@@ -622,6 +629,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
       // tag selected buddy end
       // save local add photo vidoes
       $scope.saveLocalPhotosVideos = function () {
+        $scope.localView.view = false;
         _.filter($scope.localongo.buddies, ['selected', true]);
         // console.log(photos,uniqueId);
         var formData = {
@@ -638,12 +646,14 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
         }).success(function (data) {
           console.log(data, 'the added one');
           if (data.value === true) {
-            // setTimeout(function () {
-            //   $window.location.reload();
-            // }, 100);
+            $scope.localongo.photosVideos = _.concat($scope.localongo.photosVideos,$scope.otgPhoto);
+            // $window.location.reload();
+            $timeout(function(){
+              $scope.localView.view = true;
+            },100);
+            alert($scope.localView.view);
+
           }
-          $scope.otgPhoto = [];
-          $scope.otgPhotoArray = [];
         }).error(function (data) {
           console.log(data);
         });

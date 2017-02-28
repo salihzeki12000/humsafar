@@ -23,7 +23,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar) {
     //Used to name the .html file
-    // cfpLoadingBar.start();
+    cfpLoadingBar.start();
     $scope.template = TemplateService.changecontent("home");
     $scope.menutitle = NavigationService.makeactive("Home");
     TemplateService.title = $scope.menutitle;
@@ -119,9 +119,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $("video").prop('muted', true);
       }
     }
+    cfpLoadingBar.complete();
   })
 
-  .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, $state) {
+  .controller('LoginCtrl', function ($scope, TemplateService, NavigationService,cfpLoadingBar, $timeout, $uibModal, $interval, $state) {
     //Used to name the .html file
     var stopinterval;
     $scope.userData = $.jStorage.get("profile");
@@ -159,14 +160,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         ref.close();
         $.jStorage.set("accessToken", data.accessToken);
         // acsToken = data.accessToken;
-        NavigationService.getProfile(function (data) {
+        NavigationService.getProfile(" ",function (data) {
           if (data.data._id) {
             $.jStorage.set("isLoggedIn", true);
             $.jStorage.set("profile", data.data);
             var alreadyLoggedIn = data.data.alreadyLoggedIn;
             if (alreadyLoggedIn === true) {
               $state.go("mylife", {
-                name: 'journey'
+                name: 'journey',
+                urlSlug: data.data.urlSlug
               });
             } else if (alreadyLoggedIn === false) {
               $state.go('mainpage');
@@ -203,7 +205,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       };
     };
   })
-  .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $stateParams) {
+  .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService,cfpLoadingBar, $timeout, $uibModal, $stateParams) {
     //Used to name the .html file
     console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("forgot-password");
@@ -348,7 +350,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
   })
 
-  .controller('MainPageCtrl', ['$scope', 'TemplateService', 'NavigationService', '$timeout', '$http', '$state', 'FileUploadService', 'FileUploader', 'DataUriToBlob', '$window', function ($scope, TemplateService, NavigationService, $timeout, $http, $state, FileUploadService, FileUploader, DataUriToBlob, $window) {
+  .controller('MainPageCtrl', ['$scope', 'TemplateService', 'NavigationService','cfpLoadingBar', '$timeout', '$http', '$state', 'FileUploadService', 'FileUploader', 'DataUriToBlob', '$window', function ($scope, TemplateService, NavigationService,cfpLoadingBar, $timeout, $http, $state, FileUploadService, FileUploader, DataUriToBlob, $window) {
     //Used to name the .html file
     // console.log("Testing Consoles");
     $scope.form = {};
@@ -425,16 +427,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     $scope.searchByKey = function (searchCity) {
+      cfpLoadingBar.start();
       NavigationService.getAllCities({
         "search": searchCity
       }, getAllCities, function (err) {
         console.log(err);
       });
+      cfpLoadingBar.complete();
     };
     //End-Of get all the cities from database
 
     $scope.uploadFile = function (data, fileName, userData) {
       // Base64 to Blob
+      cfpLoadingBar.start();
       console.log(fileName, userData);
       var imageBase64 = data;
       console.log(imageBase64);
@@ -456,6 +461,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         } else {
           toastr.warning('Error Uploading Image!');
         }
+        cfpLoadingBar.complete();
       });
     };
 
@@ -806,7 +812,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // Integration Section Ends here
 
   })
-  .controller('TripSummaryCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, OnGoJourney) {
+  .controller('TripSummaryCtrl', function ($scope, TemplateService, NavigationService,cfpLoadingBar, $timeout, $stateParams, OnGoJourney) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -863,74 +869,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     // scroll end
 
-
-    // $scope.trip = {
-    //   date: "12 Feb, 2016",
-    //   dayNo: "8",
-    //   mileage: "14700",
-    //   tripJourneyType: [{
-    //     imgTrip: "img/trip-summary/bar.png",
-    //     tripType: "Restaurants <br> & Bars",
-    //     tripTypeCount: 8
-    //   }, {
-    //     imgTrip: "img/trip-summary/park.png",
-    //     tripType: "Nature <br> & Parks",
-    //     tripTypeCount: 8
-    //   }, {
-    //     imgTrip: "img/trip-summary/beaches.png",
-    //     tripType: "Beaches",
-    //     tripTypeCount: 8
-    //   }, ],
-    //   countryVisited: [{
-    //     countryImg: "img/trip-summary/korea.png",
-    //     countryName: "Korea"
-    //   }, {
-    //     countryImg: "img/flag.png",
-    //     countryName: "India"
-    //   }, ],
-    //   visitedCountry: "2"
-    // }
-
-    //   $scope.visitedCountry = [{
-    //     day: "01",
-    //     status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
-    //     timestampDate: "14 Jan,2014",
-    //     timestampHour: "01:20 pm",
-    //     travelTypeIcon: "img/ongojourney/location.png"
-    //   }, {
-    //     day: "02",
-    //     status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
-    //     photoAdd: "Added 20+ Photos",
-    //     timestampDate: "14 Jan, 2014",
-    //     timestampHour: "01:20 pm",
-    //     travelTypeIcon: "img/ongojourney/location.png"
-    //   }, {
-    //     day: "01",
-    //     status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
-    //     // photoAdd: "Added 20+ Photos",
-    //     timestampDate: "14 Jan, 2014",
-    //     timestampHour: "01:20 pm",
-    //     travelTypeIcon: "img/ongojourney/location.png"
-    //   }, {
-    //     day: "02",
-    //     status: "Evening by the beach! :)  with Sarvesh Bramhe  & Gayatri Sakalkar <img src='img/island.png' / >- at Girgaon",
-    //     photoAdd: "Added 20+ Photos",
-    //     timestampDate: "14 Jan, 2014",
-    //     timestampHour: "01:20 pm",
-    //     travelTypeIcon: "img/ongojourney/location.png"
-    //   }];
-
-
-
-
-
-
   })
-  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $interval, OnGoJourney, LikesAndComments, $state, $stateParams, $filter, $http) {
+  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService,cfpLoadingBar, $timeout, $uibModal, $interval, OnGoJourney, LikesAndComments, $state, $stateParams, $filter, $http) {
     var didScroll;
     var lastScrollTop = 0;
     var delta = 5;
     var journeyInfoStrip = $('.journey-info-strip').outerHeight();
+
+    $scope.ongoCard = true;
 
     $(window).scroll(function (event) {
       didScroll = true;
@@ -2546,7 +2492,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
   })
 
-  .controller('DestinationCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+  .controller('DestinationCtrl', function ($scope, $state, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -2555,6 +2501,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Destination");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    cfpLoadingBar.start();
     $scope.destinationList = [];
     $scope.viewListByKey = "A";
     $scope.countryDestList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -2570,6 +2517,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.destinationList = data.data;
           $scope.i = 0;
         }
+        cfpLoadingBar.complete();
       });
     }
     $scope.callCountry("a", "");
@@ -2581,6 +2529,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewListByKey = searchVal.charAt(0);
         $scope.callCountry(searchVal, searchVal);
       }
+      cfpLoadingBar.complete();
     };
 
     // destination country city
@@ -2601,6 +2550,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // get booking data
     $scope.getBooking = function (dest) {
+      cfpLoadingBar.start();
       console.log(dest);
       $scope.destCityName = dest.name;
       $scope.destCountryName = dest.country[0].name;
@@ -2611,6 +2561,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $.jStorage.set("booking", data);
         // $scope.bookingData = data.hotels;
         // console.log($scope.bookingData,'booking ka data');
+        cfpLoadingBar.complete();
       });
     };
     // get booking data end
@@ -2624,7 +2575,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('DestinationCountryCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+  .controller('DestinationCountryCtrl', function ($scope, $state, TemplateService, NavigationService,cfpLoadingBar, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -2634,6 +2585,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.urlDestinationCountry = $state.params.url;
+    cfpLoadingBar.start();
 
     $scope.countryDestData = [];
     $scope.pagenumber = 1;
@@ -2641,6 +2593,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.scroll.busy = false;
     $scope.scroll.stopCallingApi = false;
     $scope.getCountryInfo = function (type, urlSlug) {
+      cfpLoadingBar.start();
       $scope.scroll.busy = false;
       NavigationService.getCountryDestination({
         pagenumber: $scope.pagenumber,
@@ -2650,15 +2603,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         itineraryType: $scope.destinationItineraryType,
         itineraryBy: $scope.destinationItineraryBy
       }, function (data) {
-        console.log(data.data.itinerary, 'itineray');
-        if (data.data.itinerary.length == 0) {
-          $scope.scroll.stopCallingApi = true;
-        } else {
-          console.log(data, 'data');
-          _.each(data.data, function (newData) {
-            $scope.countryDestData.push(newData);
-          })
+        if(type=='itinerary'){
+          if (data.data.itinerary.length == 0) {
+            $scope.scroll.stopCallingApi = true;
+          } else {
+            console.log(data, 'data');
+            _.each(data.data, function (newData) {
+              $scope.countryDestData.push(newData);
+            });
+            console.log($scope.countryDestData,'data');
+          };
+        }else {
+          $scope.countryDestData = data.data;
         }
+        cfpLoadingBar.complete();
         // console.log($scope.countryDestData, 'what is cadat');
       });
     };
@@ -2786,27 +2744,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         case "featured":
           $scope.countryoptions.active = "featured";
           $scope.destination.innerView = alldestination[0];
+          $scope.countryDestData=[];
           $scope.getCountryInfo("featuredCities", $scope.urlDestinationCountry);
           break;
         case "mustdo":
           $scope.countryoptions.active = "mustdo";
           $scope.destination.innerView = alldestination[1];
+          $scope.countryDestData=[];
           $scope.getCountryInfo("mustDo", $scope.urlDestinationCountry);
           break;
         case "itineraries":
           $scope.countryoptions.active = "itineraries";
           $scope.destination.innerView = alldestination[2];
+          $scope.countryDestData=[];
           $scope.getCountryInfo("itinerary", $scope.urlDestinationCountry);
           break;
         case "booking":
           $scope.countryoptions.active = "booking";
+          $scope.countryDestData=[];
           $scope.destination.innerView = alldestination[3];
           break;
         case "visit":
           $scope.countryoptions.active = "visit";
+          $scope.countryDestData=[];
           $scope.destination.innerView = alldestination[4];
           break;
         default:
+        $scope.countryDestData=[];
           $scope.destination.innerView = alldestination[0];
       }
     };
@@ -2963,7 +2927,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     })
 
   })
-  .controller('DestinationCityCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+  .controller('DestinationCityCtrl', function ($scope, $state, TemplateService, NavigationService,cfpLoadingBar, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -2997,12 +2961,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.urlDestinationCity = $state.params.url;
     $scope.getCityInfo = function (type, urlSlug) {
+      cfpLoadingBar.start();
       NavigationService.getCityDestination({
         type: type,
         urlSlug: $scope.urlDestinationCity
       }, function (data) {
         $scope.cityDestData = data.data;
         console.log($scope.cityDestData, "destination city ka data");
+        cfpLoadingBar.complete();
       })
     }
 
@@ -3234,6 +3200,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.getFilterData = function (urlSlug, budget, cuisine, type) {
+      cfpLoadingBar.start();
       NavigationService.getCityDestination({
         urlSlug: $scope.urlDestinationCity,
         budget: budget,
@@ -3242,6 +3209,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, function (data) {
         $scope.cityDestData = data.data;
         console.log($scope.cityDestData, "budget");
+        cfpLoadingBar.complete();
       });
     };
 
@@ -4283,13 +4251,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     })
   })
 
-  .controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService, TravelibroService, $timeout, $uibModal, $location, $filter, MyLife, OnGoJourney, localLife, LikesAndComments) {
+  .controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService,cfpLoadingBar, TravelibroService, $timeout, $uibModal, $location, $filter, MyLife, OnGoJourney, localLife, LikesAndComments) {
     //Used to name the .html file
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("mylife");
     $scope.menutitle = NavigationService.makeactive("Mylife");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+
+
+    $scope.localView= {};
+    $scope.localView.view= true;
 
     $scope.userData = $.jStorage.get("profile");
     $scope.showTravellife = false;
@@ -4323,15 +4296,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       backgroundClick.scope = $scope;
     };
     //backgroundClick
-
-    var arr = ($scope.userData.homeCity).split(",");
-    $scope.homeCity = arr[0];
-
     var reloadCount = function () {
       NavigationService.travelCount(function (data, status) {
         $scope.count = data.data;
         var len = $scope.count.countriesVisited_count;
-        // updateBadge(len);
         updateBadgeBar(len);
       }, function (err) {
         console.log(err);
@@ -4401,8 +4369,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
 
     $scope.updateBucketList = function (country) {
+      cfpLoadingBar.start();
       MyLife.updateBucketList(country, function (data, status) {
         reloadCount();
+        cfpLoadingBar.complete();
       }, function () {});
       $scope.getMap();
     };
@@ -4470,6 +4440,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       //remove country visited and all its count starts
       $scope.removeCountryVisited = function () {
+        cfpLoadingBar.start();
         var obj = {
           "countryId": country._id,
           "visited": []
@@ -4477,6 +4448,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         MyLife.updateCountriesVisited(obj, function (data, status) {
           reloadCount();
           modal.close();
+          cfpLoadingBar.complete();
         }, function () {});
         arr = [];
         $scope.getMap();
@@ -4745,6 +4717,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       "type": "local-life"
     };
     var getMoments = function () {
+      cfpLoadingBar.start();
       $scope.allMoments.scrollBusy = true;
       $scope.travelLifeMoments.scrollBusy = true;
       $scope.localLifeMoments.scrollBusy = true;
@@ -4756,10 +4729,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           "stopCallingApi": false,
           "type": "all"
         };
+        cfpLoadingBar.complete();
       }, function (data) {
         console.log(data);
       });
       MyLife.getTravelLifeMoments("travel-life", 1, function (data) {
+        cfpLoadingBar.start();
         $scope.travelLifeMoments = {
           "arr": data.data,
           "scrollBusy": false,
@@ -4767,23 +4742,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           "type": "travel-life",
           "pageNo": 1
         };
+        cfpLoadingBar.complete();
         // $scope.travelLifeMoments = data.data;
       }, function (data) {
         console.log(data);
       });
       MyLife.getAllMoments("", 5, "local-life", 3, function (data) {
+        cfpLoadingBar.start();
         $scope.localLifeMoments = {
           "arr": data.data,
           "scrollBusy": false,
           "stopCallingApi": false,
           "type": "local-life"
         };
+        cfpLoadingBar.complete();
         // $scope.localLifeMoments = data.data;
       }, function (data) {
         console.log(data);
       })
     };
     $scope.getMoreMoments = function (moment) {
+      cfpLoadingBar.start();
       if (moment.scrollBusy) {
         return;
       } else {
@@ -4815,6 +4794,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   }, function (data) {
                     moment.scrollBusy = false;
                     moment.stopCallingApi = false;
+                    cfpLoadingBar.complete();
                   });
                 }
               }
@@ -4837,6 +4817,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 moment.scrollBusy = false;
                 moment.stopCallingApi = false;
                 --moment.pageNo;
+                cfpLoadingBar.complete();
               });
               break;
             default:
@@ -4846,6 +4827,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     $scope.getMorePhotos = function (album) {
+      cfpLoadingBar.start();
       console.log(album);
       if (album.scrollBusy) {
         return;
@@ -4872,6 +4854,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 album.scrollBusy = false;
                 album.stopCallingApi = false;
                 --album.pageNo;
+                cfpLoadingBar.complete();
               });
               break;
             case 'all':
@@ -4891,6 +4874,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 album.scrollBusy = false;
                 album.stopCallingApi = false;
                 --album.PageNo;
+                cfpLoadingBar.complete();
               });
               break;
           }
@@ -4920,6 +4904,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log($scope.album.perMonthMoments);
     };
     $scope.getPerMonthMoments = function (obj, type) {
+      cfpLoadingBar.start();
       console.log("getPerMonthMoments called by ng-click");
       $scope.token = obj.token;
       $scope.count = obj.count;
@@ -4934,6 +4919,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // $scope.perMonthMoments = [];
       MyLife.getPerMonthMoments($scope.album.token, 1, 24, $scope.album.type, viewMonthDataCallback, function (data) {
         console.log(data);
+        cfpLoadingBar.complete();
       });
       $scope.showMonthView();
     };
@@ -5040,6 +5026,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Photo comment popup end
 
     $scope.getJournItiMoments = function (obj) {
+      cfpLoadingBar.start();
       // $scope.perMonthMoments = [];
       console.log("getJournItiMoments called by ng-click");
       $scope.token = obj.name;
@@ -5061,6 +5048,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // $scope.albumPageNo = 1;
       MyLife.getJournItiMoments(obj._id, 1, 24, $scope.album.type, viewMonthDataCallback, function (data) {
         console.log(data);
+        cfpLoadingBar.complete();
       });
       $scope.showMonthView();
     };
@@ -5172,6 +5160,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       "pageNo": 1
     };
     var getReviews = function () {
+      // cfpLoadingBar.start();
       console.log("getAllReviews called after loading");
       $scope.reviewAll.scrollBusy = true;
       MyLife.getAllReviews("all", 1, function (data) {
@@ -5186,6 +5175,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log($scope.allMoments);
       }, function (data) {
         console.log(data);
+        // cfpLoadingBar.complete();
       });
       MyLife.getAllReviews("travel-life", 1, function (data) {
         console.log(data);
@@ -5200,6 +5190,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log($scope.travelLifeMoments);
       }, function (data) {
         console.log(data);
+        // cfpLoadingBar.complete();
       });
       MyLife.getAllReviews("local-life", 1, function (data) {
         console.log(data);
@@ -5213,10 +5204,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         // $scope.localLifeMoments = data.data;
       }, function (data) {
         console.log(data);
+        // cfpLoadingBar.complete();
       })
     };
 
     $scope.getAllReviews = function (review) {
+      // cfpLoadingBar.start();
       console.log("getAllReviews called after scrolling");
       console.log(review);
       if (review.scrollBusy) {
@@ -5243,12 +5236,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             review.scrollBusy = false;
             review.stopCallingApi = false;
             --review.pageNo;
+            // cfpLoadingBar.complete();
           });
         }
       }
     };
 
     $scope.getMoreReviews = function (object, flag) {
+      cfpLoadingBar.start();
       console.log("getReviews called from getMoreReviews");
       if (object.country && object._id && object.pageNo) {
         if (object.scrollBusy) {
@@ -5276,6 +5271,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   object.scrollBusy = false;
                   object.stopCallingApi = false;
                   --object.pageNo;
+                  cfpLoadingBar.complete();
                 });
                 break;
               case 'local-life':
@@ -5295,6 +5291,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   object.scrollBusy = false;
                   object.stopCallingApi = false;
                   --object.pageNo;
+                  cfpLoadingBar.complete();
                 });
                 break;
             }
@@ -5307,6 +5304,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     $scope.goToAccordian = function (review, showType) {
+      cfpLoadingBar.start();
       $scope[showType] = true;
       switch (showType) {
         case 'viewTravelCountry':
@@ -5316,6 +5314,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           MyLife.getCities(review._id, function (data) {
             // review.cities = data.data;
             $scope.citiesTravelled.cities = data.data;
+            cfpLoadingBar.complete();
           });
           break;
         case 'viewLocalCountry':
@@ -5325,6 +5324,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           MyLife.getCategories(review._id, function (data) {
             // review.categories = data.data;
             $scope.categoryList.categories = data.data;
+            cfpLoadingBar.complete();
           });
           console.log($scope.categoryList);
           break;
@@ -5355,6 +5355,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   }
     // };
     $scope.openAccordian = function (object, openAccordian, flag) {
+      cfpLoadingBar.start();
       console.log("getReviewsWeb called from openAccordian");
       object.pageNo = 1;
       object.scrollBusy = false;
@@ -5365,17 +5366,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           case 'travel-life':
             MyLife.getReviewsByCities(object.country, object._id, object.pageNo, function (data) {
               object.accordReview = data.data;
+              cfpLoadingBar.complete();
             });
             break;
           case 'local-life':
             MyLife.getReviewsByCategories(object.city, object._id, object.pageNo, function (data) {
               object.accordReview = data.data;
+              cfpLoadingBar.complete();
             });
             break;
         }
       } else {}
     };
     $scope.savePostReview = function (values) {
+      cfpLoadingBar.start();
       console.log(values, wholePost);
       var obj = {
         "post": wholePost._id,
@@ -5395,6 +5399,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           console.log(wholePost);
           modal.close();
         } else {}
+        cfpLoadingBar.complete();
       })
     };
 
@@ -5964,7 +5969,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // local life end
   })
 
-  .controller('JourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+  .controller('JourneyCtrl', function ($scope, TemplateService, NavigationService,cfpLoadingBar, $timeout, $uibModal) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("journey");
@@ -6442,7 +6447,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
 
   })
-  .controller('SettingCtrl', function ($scope, TemplateService, NavigationService, $timeout, DataUriToBlob) {
+  .controller('SettingCtrl', function ($scope, TemplateService, NavigationService,cfpLoadingBar, $timeout, DataUriToBlob) {
     //Used to name the .html file
     $scope.profile = $.jStorage.get("profile");
     $scope.userData = _.clone($scope.profile);
@@ -6702,11 +6707,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     $scope.searchByKey = function (searchCity) {
+      // cfpLoadingBar.start();
       NavigationService.getAllCities({
         "search": searchCity
       }, getAllCities, function (err) {
         console.log(err);
       });
+      // cfpLoadingBar.complete();
     };
     //End-Of get all the cities ends
     //get all countries
@@ -6797,6 +6804,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // page 2 integration ends
 
     $scope.editUserData = function (userData, status, valid) {
+      cfpLoadingBar.start();
       console.log(valid);
       if (valid) {
         NavigationService.editUserData(userData, status, function (data) {
@@ -6816,6 +6824,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           } else {
 
           }
+          cfpLoadingBar.complete();
         });
       } else {
         alert("fields invalid");
@@ -6823,6 +6832,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.uploadProfilePicture = function (imageBase64) {
+      // cfpLoadingBar.start();
       var file = imageTestingCallback(imageBase64, 'image/png');
       console.log(file);
       NavigationService.uploadFile(file, function (response) {
@@ -6971,195 +6981,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("BlogDetail");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    $scope.popularBlog = [{
-      img: "img/blog/popular-blog.jpg",
-      descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO",
-      postType: "Luxury",
-      postPink: true
-    }, {
-      img: "img/blog/popular-blog1.jpg",
-      descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO",
-      postType: "Luxury",
-      postPink: false
-    }, {
-      img: "img/blog/popular-blog2.jpg",
-      descp: "CHIC AND CHEERFUL: 10 OFFICEHOLIDAY PARTY OUTFIT IDEAS",
-      postType: "Luxury",
-      postPink: true
-    }, {
-      img: "img/blog/popular-blog1.jpg",
-      descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO"
-    }, {
-      img: "img/blog/popular-blog2.jpg",
-      descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO"
-    }, ];
 
-    $scope.blogPostDetail = [{
-      heading: "Best Holiday Destinations For Girl - Gangs",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      journeyType: "Luxury",
-      journeyList: [{
-        journeyImg: "img/blog/journey-post.jpg",
-        cityName: "Dublin",
-        countryName: "Ireland",
-        journeyDescp: "Going on a holiday with family is always fun. But sometimes you need to get way from all that family drama and have a girls-only weekend. Going on a shopping spree, enjoying spas together, drinking & partying all night or just lazing on the beach – nothing can beat that when you are with your girl-gang. So ladies, grab your lipstick and heels and get ready for some seriously sassy getaway with our list of 10 best holiday destinations for girl-gangs:"
-      }, {
-        journeyImg: "img/blog/journey-post2.jpg",
-        cityName: "Dublin",
-        countryName: "Ireland",
-        journeyDescp: "Going on a holiday with family is always fun. But sometimes you need to get way from all that family drama and have a girls-only weekend. Going on a shopping spree, enjoying spas together, drinking & partying all night or just lazing on the beach – nothing can beat that when you are with your girl-gang. So ladies, grab your lipstick and heels and get ready for some seriously sassy getaway with our list of 10 best holiday destinations for girl-gangs:"
-      }, {
-        journeyImg: "img/blog/journey-post3.jpg",
-        cityName: "Dublin",
-        countryName: "Ireland",
-        journeyDescp: "Going on a holiday with family is always fun. But sometimes you need to get way from all that family drama and have a girls-only weekend. Going on a shopping spree, enjoying spas together, drinking & partying all night or just lazing on the beach – nothing can beat that when you are with your girl-gang. So ladies, grab your lipstick and heels and get ready for some seriously sassy getaway with our list of 10 best holiday destinations for girl-gangs:"
-      }, {
-        journeyImg: "img/blog/journey-post4.jpg",
-        cityName: "Dublin",
-        countryName: "Ireland",
-        journeyDescp: "Going on a holiday with family is always fun. But sometimes you need to get way from all that family drama and have a girls-only weekend. Going on a shopping spree, enjoying spas together, drinking & partying all night or just lazing on the beach – nothing can beat that when you are with your girl-gang. So ladies, grab your lipstick and heels and get ready for some seriously sassy getaway with our list of 10 best holiday destinations for girl-gangs:"
-      }, ]
-    }];
 
-    $scope.blogPost = [{
-      img: "img/blog/blog-post.jpg",
-      postType: "Luxury",
-      title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post2.jpg",
-      postType: "Luxury",
-      title: "Best cycling tours in the world",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post3.jpg",
-      postType: "Road Trip",
-      title: "Ten Gorgeous European Summer Island Holidays",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post4.jpg",
-      postType: "Adventure",
-      title: "Museums And Cathedrals To Cover In Eastern Europe",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }];
-    $scope.travelLife = [{
-      heading: "Editor",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Editor",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Editor",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Editor",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }];
   })
   .controller('ActivityCtrl', function ($scope, TemplateService, NavigationService, Activity, $timeout) {
     //Used to name the .html file
@@ -7794,7 +7617,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('ActivityTestCtrl', function ($scope, TemplateService, NavigationService, Activity, LikesAndComments, $timeout, $http, $uibModal) {
+  .controller('ActivityTestCtrl', function ($scope, TemplateService, NavigationService,cfpLoadingBar, Activity, LikesAndComments, $timeout, $http, $uibModal) {
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("activitytest");
     $scope.menutitle = NavigationService.makeactive("Activity");
@@ -7824,6 +7647,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
 
     $scope.getMoreActivities = function () {
+      cfpLoadingBar.start();
       console.log("scroll event");
       if (scroll.scrollBusy) {
         return;
@@ -7846,6 +7670,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             scroll.scrollBusy = false;
             scroll.stopCallingApi = false;
             --scroll.pageNo;
+            cfpLoadingBar.complete();
           })
         }
       }
@@ -11504,6 +11329,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.search = {};
     $scope.search.searchType = "";
     $scope.search.viewData = false;
+
+    $(window).load(function(){
+    var loading =  setInterval(function(){
+        var elementExists = document.getElementById("loader");
+        if(elementExists){
+          $('.travelibro-loader').parent().addClass('loader-blur');
+        }else {
+          $('body').removeClass('loader-blur');
+          clearInterval(loading);
+        };
+      },200);
+    });
+
+
+
     NavigationService.getProfile(function (data, status) {
       if (data.data._id) {
         $.jStorage.set("isLoggedIn", true);
