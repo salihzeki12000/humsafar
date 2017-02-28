@@ -160,7 +160,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         ref.close();
         $.jStorage.set("accessToken", data.accessToken);
         // acsToken = data.accessToken;
-        NavigationService.getProfile(" ",function (data) {
+        NavigationService.getProfile("",function (data) {
           if (data.data._id) {
             $.jStorage.set("isLoggedIn", true);
             $.jStorage.set("profile", data.data);
@@ -4859,6 +4859,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               break;
             case 'all':
             case 'local':
+            // cfpLoadingBar.start();
               console.log("getPerMonthMoments called by scrolling");
               MyLife.getPerMonthMoments(album.token, album.pageNo, 24, album.type, function (data) {
                 album.scrollBusy = false;
@@ -4874,7 +4875,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 album.scrollBusy = false;
                 album.stopCallingApi = false;
                 --album.PageNo;
-                cfpLoadingBar.complete();
+                // cfpLoadingBar.complete();
               });
               break;
           }
@@ -4904,7 +4905,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log($scope.album.perMonthMoments);
     };
     $scope.getPerMonthMoments = function (obj, type) {
-      cfpLoadingBar.start();
+      // cfpLoadingBar.start();
       console.log("getPerMonthMoments called by ng-click");
       $scope.token = obj.token;
       $scope.count = obj.count;
@@ -4919,7 +4920,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // $scope.perMonthMoments = [];
       MyLife.getPerMonthMoments($scope.album.token, 1, 24, $scope.album.type, viewMonthDataCallback, function (data) {
         console.log(data);
-        cfpLoadingBar.complete();
+        // cfpLoadingBar.complete();
       });
       $scope.showMonthView();
     };
