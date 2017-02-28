@@ -905,6 +905,57 @@ firstapp.filter('kindOfCheckIn', function () {
   };
 });
 
+firstapp.filter('kindOfReviewCheckIn', function () {
+  return function (input) {
+    var returnVal = "";
+    switch (input) {
+      case "Cinema & Theatre":
+        returnVal = "img/icons/cinematrans.png";
+        break;
+      case "Restaurants & Bars":
+        returnVal = "img/icons/restaurantsandbars.png";
+        break;
+      case "Shopping":
+        returnVal = "img/icons/shopping.png";
+        break;
+      case "Transportation":
+        returnVal = "img/icons/airport.png";
+        break;
+      case "Nature and Parks":
+        returnVal = "img/icons/nature.png";
+        break;
+      case "Sights and Landmarks":
+        returnVal = "img/icons/sightstrans.png";
+        break;
+      case "Museums and Galleries":
+        returnVal = "img/icons/museumstrans.png";
+        break;
+      case "Zoo and Aquariums":
+        returnVal = "img/icons/zootrans.png";
+        break;
+      case "Religious":
+        returnVal = "img/icons/religious.png";
+        break;
+      case "Hotels & Accomodations":
+        returnVal = "img/icons/hotels.png";
+        break;
+      case "Others":
+        returnVal = "img/icons/othersdottrans.png";
+        break;
+      case "Other":
+        returnVal = "img/othersdottrans.png";
+        break;
+      case "City":
+        returnVal = "img/icons/city.png";
+        break;
+      default:
+        returnVal = "img/icons/othersdottrans.png";
+    }
+    console.log(input, returnVal);
+    return returnVal;
+  };
+});
+
 firstapp.filter('typeOfPost', function () {
   return function (post, type) {
     var returnVal = "";
