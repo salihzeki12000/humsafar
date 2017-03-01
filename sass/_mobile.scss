@@ -736,7 +736,8 @@
 }
 .local-info {
   h4 {
-    font-size: 16px;
+    // font-size: 16px;
+    margin-top: 20px;
     span{
       float: right;
       padding-right: 5px;
@@ -1612,12 +1613,12 @@ img {
     bottom: 20%;
         line-height: 1;
 }
-.moment-localimgholder,
-.moment-travelimgholder{ 
-  .img-backholder {
-    min-height: inherit;
-} 
-}
+// .moment-localimgholder,
+// .moment-travelimgholder{ 
+//   .img-backholder {
+//     min-height: inherit;
+// } 
+// }
 //error 404
 .error-msg {
     left: 50%;
@@ -1679,16 +1680,6 @@ img {
       font-size: 40px;
     }
   }
-
-//moments
-.travel-info,.local-info {h4{
-        font-size: 14px;
-        span{
-              font-size: 12px;
-        }
-}
-}
-//moments ended
 
   .more-about-me {
     .more-detail {
