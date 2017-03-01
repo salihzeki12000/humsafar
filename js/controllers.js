@@ -54,6 +54,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $('video').get(nextIndex - 1).play();
               $('video').get(nextIndex - 2).pause();
               $('video').get(nextIndex).pause();
+              $scope.pauseVideo = function () {
+                if ($("video").get(nextIndex - 1).play()) {
+                  $("video").get(nextIndex - 1).pause();
+                } else {
+                  $("video").get(nextIndex - 1).prop('play');
+                }
+              }
             }, 500);
 
           }
@@ -1798,7 +1805,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.countryReview = function () {
       $scope.reviewCountryCount = 0;
-      if ($scope.journey.review[$scope.reviewCountryCount] !== undefined) {
+      console.log($scope.journey);
+      var len = $scope.journey.countryVisited.length;
+      console.log(len);
+      if (len !== 0 && ($scope.reviewCountryCount < len)) {
         $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
         $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
       }
@@ -1808,11 +1818,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         scope: $scope,
         backdropClass: "review-backdrop",
       });
+      modal.closed.then(function () {
+
+      })
     };
 
     // country modal ends
 
-    $scope.rateThisCountry = function (journeyId, countryId, formData, index) {
+    $scope.rateThisCountry = function (journeyId, countryId, formData, currentIndex) {
+      console.log(currentIndex);
       var result = {
         journey: journeyId,
         country: countryId,
@@ -1820,15 +1834,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         rating: formData.rate.toString()
       };
       var callback = function () {
-        $scope.journey.review[index].review = result.review;
-        $scope.journey.review[index].rating = result.rating;
+        $scope.journey.review[currentIndex].review = result.review;
+        $scope.journey.review[currentIndex].rating = result.rating;
       };
       OnGoJourney.rateThisCountry(result, callback);
       $scope.reviewCountryCount = $scope.reviewCountryCount + 1;
       var len = $scope.journey.countryVisited.length;
       if ($scope.reviewCountryCount < len) {
-        $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
-        $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
+        if (($scope.journey.review.length > $scope.reviewCountryCount)) {
+          $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
+          $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
+        } else {
+          $scope.review.fillMeIn = "";
+          $scope.review.rate = 1;
+        }
       } else {
         console.log(modal);
         modal.close();
@@ -4297,9 +4316,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $.jStorage.set("activeUrlSlug", "");
       $scope.activeUrlSlug = $.jStorage.get("profile").urlSlug;
       allowAccess = true;
+      setMoreAboutMe();
       reloadCount();
     } else {
-      alert("not yours");
+      // alert("not yours");
       console.log($stateParams.urlSlug);
       allowAccess = false;
       $.jStorage.set("activeUrlSlug", $stateParams.urlSlug);
