@@ -36,9 +36,9 @@
                   </div>
                   </div> -->
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made city-select">
-                    <input type="text" ng-model="itinerary.citySearch" class="form-control" ng-change="getItinerayCity();" placeholder="City">
-                    <div class="city-dropdow itinerary-dropdown">
+                  <div class="select-all-made city-select relate">
+                    <input type="text" ng-model="itinerary.citySearch" class="form-control" ng-change="getItinerayCity();" placeholder="City" ng-click="showCityDrop();">
+                    <div class="city-dropdow itinerary-dropdown" ng-show="viewCityDrop">
                       <ul>
                         <li ng-repeat="city in cityList | filter:itinerary.citySearch track by $index">
                           <div class="select-city custom-checkbox">
@@ -51,9 +51,9 @@
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made itinerary-select">
-                    <input type="text" ng-model="itinerary.type" class="form-control" ng-change="getItineraryType();" placeholder="Type">
-                    <div class="city-dropdow itinerary-dropdown">
+                  <div class="select-all-made itinerary-select relate">
+                    <input type="text" ng-model="itinerary.type" class="form-control" ng-change="getItineraryType();" placeholder="Type" ng-click="showTypeDrop();">
+                    <div class="city-dropdow itinerary-dropdown" ng-show="viewTypeDrop">
                       <ul>
                         <li ng-repeat="type in itineraryType| filter:itinerary.type track by $index">
                           <div class="select-city custom-checkbox">
@@ -66,9 +66,9 @@
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made by-select">
-                    <input type="text" ng-model="itinerary.by" class="form-control" ng-change="getItineraryType();" placeholder="By">
-                    <div class="city-dropdow itinerary-dropdown">
+                  <div class="select-all-made by-select relate">
+                    <input type="text" ng-model="itinerary.by" class="form-control" ng-change="getItineraryType();" placeholder="By" ng-click="showByDrop();">
+                    <div class="city-dropdow itinerary-dropdown" ng-show="viewByDrop">
                       <ul>
                         <li ng-repeat="by in itineraryBy| filter:itinerary.by track by $index">
                           <div class="select-city custom-checkbox">

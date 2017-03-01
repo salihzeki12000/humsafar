@@ -340,6 +340,7 @@ a.color-white {
   }
   .img-holder {
     min-height: 250px;
+    max-height: 250px;
     margin-bottom: 20px;
     border-radius: 5px;
     overflow: hidden;
@@ -1669,4 +1670,34 @@ ul{
     padding: 6px 20px;
     @extend .avenir-heavy;
 }
+}
+
+.libro-filter{
+  .itinerary-dropdown{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255,255,255,0.9);
+    box-shadow: 0px 7px 10px 0 rgba(0,0,0,0.7);
+    
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: $brand-lighter-grey;
+    }
+    ul{
+      max-height: 180px;
+      overflow-y: auto;
+    }
+    .select-city{
+      padding: 5px;
+    }
+  }
 }

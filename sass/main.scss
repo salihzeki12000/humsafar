@@ -656,9 +656,9 @@ header {
   z-index: 10;
   @include transition(all 100ms linear);
 
-   &.nav-up {
-   @include transform(translateY(-100%));
-}
+//    &.nav-up {
+//    @include transform(translateY(-100%));
+// }
 
   &.addfixed {
     @extend .bg-dark-blue;
@@ -791,6 +791,10 @@ header {
 
   a {
     color: #80879a;
+    @include transition(all ease 300ms);
+    &:hover{
+      color: lighten(#80879a , 15%);
+    }
   }
 }
 
@@ -2137,7 +2141,7 @@ header {
   top: 35px;
   right: -15px;
   background-color: #f6fafc;
-  z-index: 4;
+  z-index: 6;
 
   &:before {
     content: '';
@@ -2601,6 +2605,10 @@ header {
   border-right: 1px solid $brand-lighter-grey;
   border-left: 1px solid $brand-lighter-grey;
   overflow-x: auto;
+  direction: rtl;
+}
+
+.local-postbox{
   direction: ltr;
 }
 
@@ -2771,10 +2779,8 @@ header {
   }
 }
 
-.post-imgholder-related .related-postholder {
-  &:last-child {
-    margin-right: 0;
-  }
+.slides .related-postholder:first-child{
+  margin-left: 0;
 }
 
 .post-video-holder {
@@ -2799,6 +2805,7 @@ header {
 
   .flexslider .slides > li {
     width: 136px !important;
+    margin-right: 10px !important;
   }
 
   .flex-direction-nav a {
@@ -2823,16 +2830,18 @@ header {
 
   .flex-direction-nav .flex-prev {
     left: auto;
-    right: -27px;
+    right: -35px;
     opacity: 1;
     top: 45%;
+    z-index: 1;
   }
 
   .flex-direction-nav .flex-next {
     left: auto;
-    right: -27px;
+    right: -35px;
     opacity: 1;
     top: 65%;
+    z-index: 1;
   }
 
   .flexslider:hover {
@@ -2918,6 +2927,11 @@ header {
     border-left: 1px solid #fff;
     display: inline-block;
     vertical-align: top;
+  }
+}
+.local-editdatepop{
+  .date-time-picker .uib-daypicker .btn.active, .date-time-picker .uib-monthpicker .btn.active, .date-time-picker .uib-yearpicker .btn.active{
+    background-color: $brand-cyan;
   }
 }
 // local life end
@@ -3221,6 +3235,17 @@ header {
 
 .city-accordion {
   margin-top: 10px;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $brand-pink;
+  }
 
   .panel-title a {
     // padding: 10px 30px;
@@ -3273,6 +3298,7 @@ header {
     //   background-color: #fff;
     // }
   }
+
 
   .panel-default > .panel-heading+.panel-collapse > .panel-body {
     max-height: 607px;
@@ -5160,7 +5186,7 @@ header {
 .user-img-ongo {
   width: 35px;
   height: 37px;
-  border: 2px solid #fff;
+  border: 2px solid #868686;
   border-radius: 15px;
   box-shadow: 0 2px 5px #ccc;
   display: inline-block;
@@ -5374,7 +5400,7 @@ header {
     border-top-right-radius: 15px;
     box-shadow: -1px 1px 10px 0 rgba(0, 0, 0, 0.35), inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
     background-color: #f6fafc;
-    z-index: 5;
+    z-index: 11;
 
     &:after,
     &:before {
@@ -6003,7 +6029,7 @@ header {
       width: 40px;
       height: 42px;
       border-radius: 15px;
-      border: 2px solid #fff;
+      border: 2px solid #868686;
       margin-left: 5px;
       display: inline-block;
       overflow: hidden;
@@ -6059,7 +6085,7 @@ header {
 
 .whole-card-comment.view-whole-card {
   right: 0;
-  z-index: 5;
+  z-index: 11;
   @include transition(all 300ms linear);
 }
 // comment whole card end
@@ -7032,6 +7058,7 @@ header {
   position: absolute;
   top: 5px;
   right: 5px;
+  @extend .pointer;
 
   i {
     font-size: 15px;
@@ -7142,6 +7169,10 @@ header {
   }
 }
 
+.local-add-photovideo .putmore-photo-video{
+  background-color: $brand-cyan;
+}
+
 .save-cancel-otg {
   margin-top: 30px;
 
@@ -7175,6 +7206,14 @@ header {
         background-color: rgba(255, 255, 255, 0.5);
       }
       color: $brand-pink;
+    }
+  }
+}
+
+.local-add-photovideo{
+  .select-buddy{
+    &.active .checked-friend{
+      color: $brand-cyan;
     }
   }
 }
@@ -7301,7 +7340,7 @@ header {
   height: 50px;
   overflow: hidden;
   border-radius: 19px;
-  border: 2px solid #fff;
+  border: 2px solid #868686;
   vertical-align: middle;
 }
 
@@ -10513,6 +10552,21 @@ header {
   }
 }
 
+.notify-control-nav{
+  i{
+    position: absolute;
+    top: 50px;
+    @include transform(translateY(-50%));
+    z-index: 10;
+  }
+  .next-slide{
+    right: 0;
+  }
+  .prev-slide{
+    left: 0;
+  }
+}
+
 .notify-like {
   li {
     margin-right: 20px;
@@ -10611,7 +10665,7 @@ header {
     .commenter-imgholder {
       width: 34px;
       height: 37px;
-      border: 2px solid #fff;
+      border: 2px solid #868686;
       border-radius: 13px;
       box-shadow: 0 2px 3px #ccc;
       overflow: hidden;
@@ -10840,7 +10894,7 @@ ng-map {
 
   .hotel-card-holder {
     max-height: 290px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     position: relative;
     @include perspective(1000px);
     // &:last-child {
@@ -11410,6 +11464,7 @@ ng-map {
 }
 
 .travelibro-loader {
+  display: none;
   @include square(100%);
   @include position(fixed, 0);
   background-color: rgba(0,0,0,0.7);
@@ -11423,5 +11478,6 @@ ng-map {
   height: 100vh;
  @include filter(blur(7px));
  overflow: hidden;
+ display: none;
 }
 // travelibro loader end
