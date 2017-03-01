@@ -17,7 +17,8 @@ var viewlocalLife = angular.module('locallife', [])
             "photos": localData.photos,
             "videos": localData.videos,
             "thoughts": localData.thoughts,
-            "rating": localData.rating
+            "rating": localData.rating,
+            "urlSlug": $.jStorage.get("activeUrlSlug")
             // "rating": []
           }
         }).success(function (data) {
