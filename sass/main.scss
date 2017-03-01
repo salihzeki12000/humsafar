@@ -1773,8 +1773,8 @@ header {
 // travel life
 
 .travelled-imgholder {
-  min-height: 430px;
-  max-height: 440px;
+  min-height: 360px;
+  max-height: 360px;
   background-color: $brand-lighter-grey;
   overflow: hidden;
 }
@@ -1940,7 +1940,6 @@ header {
   width: 210px;
   padding: 15px 20px;
   border-radius: 12px;
-  border: 1px solid $brand-blue;
   background-color: $brand-pink;
   @include position(absolute, -15px 35px null null);
   z-index: 10;
@@ -1954,18 +1953,18 @@ header {
     @include position(absolute, 22px -18px null null);
   }
 
-  &:before {
-    content: "";
-    border-top: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-left: 10px solid $brand-blue;
-    @include position(absolute, 21px -20px null null);
-  }
+  // &:before {
+  //   content: "";
+  //   border-top: 10px solid transparent;
+  //   border-right: 10px solid transparent;
+  //   border-bottom: 10px solid transparent;
+  //   border-left: 10px solid $brand-blue;
+  //   @include position(absolute, 21px -20px null null);
+  // }
 
   li {
     padding: 8px 0;
-    border-bottom: 1px solid $brand-blue;
+    border-bottom: 1px solid #fff;
 
     &:last-child {
       border: none;
@@ -3115,11 +3114,13 @@ header {
     // @include square(150px);
     width: 100%;
     min-height: 250px;
+    margin-top: 10px;
     // @include position(absolute, 30px null null 15px);
     overflow: hidden;
    img {
     width: 100%;
-    padding: 35px 15px;
+    padding: 10px 0px;
+    margin-left: 10px;
     }
   }
 
@@ -5314,12 +5315,12 @@ header {
   border-radius: 8px;
   // box-shadow: 1px 4px 5px #ccc;
   box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.19);
-  background-color: rgba(255, 255, 255, 0.90);
+  background-color: rgba(255, 255, 255, 0.84);
 
   .user-social-item {
     padding: 8px 2px;
     border-top: 1px solid #b5b5b5;
-    border-bottom: 1px solid #b5b5b5;
+    // border-bottom: 1px solid #b5b5b5;
   }
 
   .journey-rate {
@@ -5897,9 +5898,9 @@ header {
 
       &:before {
         content: "";
-        width: 1px;
+        width: 2px;
         height: 80%;
-        border-right: 2px dashed $brand-dark-pink;
+        border-right: 4px dashed $brand-dark-pink;
         position: absolute;
         bottom: 25px;
         left: 50%;
@@ -5908,9 +5909,9 @@ header {
 
       &:after {
         content: '';
-        width: 1px;
+        width: 2px;
         height: 70%;
-        border-right: 2px dashed $brand-dark-pink;
+        border-right: 4px dashed $brand-dark-pink;
         position: absolute;
         bottom: -18px;
         left: 50%;
@@ -6013,7 +6014,7 @@ header {
 
   .travelling-journey-type {
     padding: 10px 10px 0;
-    background-color: rgba(255, 255, 255, 0.90);
+    background-color: rgba(255, 255, 255, 0.84);
 
     li {
       margin-right: 10px;
@@ -6044,7 +6045,7 @@ header {
 
   .journey-with {
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.84);
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
 
@@ -6056,9 +6057,9 @@ header {
 
 .dot-line {
   position: absolute;
-  width: 1px;
+  width: 2px;
   height: 100%;
-  border-right: 2px dashed $brand-dark-pink;
+  border-right: 4px dashed $brand-dark-pink;
   left: 50%;
   bottom: 80px;
   @include transform(translateX(-50%));
@@ -10634,7 +10635,9 @@ header {
 }
 
 .comment-tag {
-  padding: 15px;
+  p{
+    padding: 15px;
+  }
 }
 
 .notify-main {
@@ -10709,7 +10712,7 @@ header {
 
       textarea {
         border: none;
-        border-bottom: 2px solid $brand-dark-blue;
+        border-bottom: 1px solid $brand-dark-blue;
         padding: 0 10px;
         color: #787878;
         line-height: 100%;
@@ -10782,7 +10785,7 @@ header {
   position: fixed;
   top: 0;
   z-index: 2;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.2);
 
   &:before {
     content: '';
