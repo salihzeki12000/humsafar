@@ -1,172 +1,173 @@
 <section class="login-bg rl img-holder mt-60" auto-height>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 hidden-sm hidden-xs">
-                <div class="login-ht">
-                    <div class="text-cont ab">
-                        <div class="pull-right">
-                            <div class="android-ios">
-                                <img src="img/libro-home/android-ios.png" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 hidden-sm hidden-xs">
+        <div class="login-ht">
+          <div class="text-cont ab">
+            <div class="pull-right">
+              <div class="android-ios">
+                <img src="img/libro-home/android-ios.png" alt="">
+              </div>
             </div>
-            <div class="col-md-5">
-                <div class="login-ht">
-                    <div class="pt30">
-                        <div class="login-signup-tab">
-                            <uib-tabset active="activeJustified">
-                                <uib-tab index="0" heading="Login">
-                                    <div class="ptb20">
-                                        <div class="login-form">
-                                            <form action="">
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="login-ht">
+          <div class="pt30">
+            <div class="login-signup-tab">
+              <uib-tabset active="activeJustified">
+                <uib-tab index="0" heading="Login">
+                  <div class="ptb20">
+                    <div class="login-form">
+                      <form ng-submit="submit()">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span class="input-group-addon">
                                                           <i class="fa fa-envelope color-white" aria-hidden="true"></i>
                                                         </span>
-                                                        <input type="email" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Emaild Id" placeholder="Email Id">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
+                            <input type="email" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Emaild Id" placeholder="Email Id"
+                              ng-model="formData.email">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span class="input-group-addon">
                                                             <i class="fa fa-lock color-white fnt-20" aria-hidden="true"></i>
                                                         </span>
-                                                        <input type="password" class="form-control color-white" placeholder="Password">
-                                                    </div>
-                                                    <div class="forgot-link pt10 text-right">
-                                                        <a ng-click="openforgot()" class="color-white avenir-roman">Forgot Password?</a>
-                                                    </div>
-                                                </div>
-                                                <div class="btn-login">
-                                                    <button class="btn btn-outline color-white avenir-roman">
+                            <input type="password" class="form-control color-white" placeholder="Password" ng-model="formData.password">
+                          </div>
+                          <div class="forgot-link pt10 text-right">
+                            <a ng-click="openforgot()" class="color-white avenir-roman">Forgot Password?</a>
+                          </div>
+                        </div>
+                        <div class="btn-login">
+                          <button type="submit" class="btn btn-outline color-white avenir-roman">
                                                         Login
                                                     </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="social-login pt10">
-                                            <ul class="unstyled-list list-inline color-white avenir-roman">
-                                                <li>Or Login Via</li>
-                                                <!--<li class="login-social-img">
+                        </div>
+                      </form>
+                    </div>
+                    <div class="social-login pt10">
+                      <ul class="unstyled-list list-inline color-white avenir-roman">
+                        <li>Or Login Via</li>
+                        <!--<li class="login-social-img">
                                                     <a ng-click="openalreadyexist()"><img src="img/libro-home/facebook.png" alt="Travelibro" ng-click="socialLogin('loginFacebook')"></a>
                                                 </li>-->
-                                                <li class="login-social-img">
-                                                    <a ng-click="socialLogin('loginFacebook')"><img src="img/libro-home/facebook.png" alt="Travelibro"></a>
-                                                </li>
-                                                <!-- <li class="login-social-img">
+                        <li class="login-social-img">
+                          <a ng-click="socialLogin('loginFacebook')"><img src="img/libro-home/facebook.png" alt="Travelibro"></a>
+                        </li>
+                        <!-- <li class="login-social-img">
                                                     <a ng-click="socialLogin('loginTwitter')"><img src="img/libro-home/twitter.png" alt="Travelibro"></a>
                                                 </li> -->
-                                                <!-- <li class="login-social-img">
+                        <!-- <li class="login-social-img">
                                                     <a ng-click="socialLogin('loginInstagram')"><img src="img/libro-home/instagram.png" alt="Travelibro"></a>
                                                 </li> -->
-                                                <li class="login-social-img">
-                                                    <a ng-click="socialLogin('loginGoogle')"><img src="img/libro-home/google.png" alt="Travelibro"></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </uib-tab>
-                                <uib-tab index="1" heading="Sign Up">
-                                    <div class="min-hght ptb20">
-                                        <div class="social-login">
-                                            <div class="color-white avenir-roman">
-                                                Sign Up Via
-                                            </div>
-                                            <ul class="unstyled-list list-inline color-white avenir-roman">
-                                                <!--Initial html for all starts here-->
-                                                <!--<li>
+                        <li class="login-social-img">
+                          <a ng-click="socialLogin('loginGoogle')"><img src="img/libro-home/google.png" alt="Travelibro"></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </uib-tab>
+                <uib-tab index="1" heading="Sign Up">
+                  <div class="min-hght ptb20">
+                    <div class="social-login">
+                      <div class="color-white avenir-roman">
+                        Sign Up Via
+                      </div>
+                      <ul class="unstyled-list list-inline color-white avenir-roman">
+                        <!--Initial html for all starts here-->
+                        <!--<li>
                                                     <a ng-click="openalreadyexist()"><img src="img/libro-home/facebook.png" alt="Travelibro"></a>
                                                 </li>-->
-                                                <!--Initial html for all ends here-->
-                                                <li>
-                                                    <a ng-click="socialLogin('loginFacebook')"><img src="img/libro-home/facebook.png" alt="Travelibro"></a>
-                                                </li>
-                                                <!-- <li>
+                        <!--Initial html for all ends here-->
+                        <li>
+                          <a ng-click="socialLogin('loginFacebook')"><img src="img/libro-home/facebook.png" alt="Travelibro"></a>
+                        </li>
+                        <!-- <li>
                                                     <a ng-click="socialLogin('loginTwitter')"><img src="img/libro-home/twitter.png" alt="Travelibro"></a>
                                                 </li> -->
-                                                <!-- <li>
+                        <!-- <li>
                                                     <a ng-click="socialLogin('loginInstagram')"><img src="img/libro-home/instagram.png" alt="Travelibro"></a>
                                                 </li> -->
-                                                <li>
-                                                    <a ng-click="socialLogin('loginGoogle')"><img src="img/libro-home/google.png" alt="Travelibro"></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </uib-tab>
-                                <uib-tab index="2" heading="Register As Partner" data-toggle="tooltip" title="Travel Agent | Tour Operator | Local Guide" class="pointer login-partner-tooltip">
-                                    <div class="min-hght ptb20">
-                                        <div class="login-form">
-                                            <form action="">
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
+                        <li>
+                          <a ng-click="socialLogin('loginGoogle')"><img src="img/libro-home/google.png" alt="Travelibro"></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </uib-tab>
+                <uib-tab index="2" heading="Register As Partner" data-toggle="tooltip" title="Travel Agent | Tour Operator | Local Guide"
+                  class="pointer login-partner-tooltip">
+                  <div class="min-hght ptb20">
+                    <div class="login-form">
+                      <form action="">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span class="input-group-addon">
                                                             <i class="fa fa-user color-white" aria-hidden="true"></i>
                                                         </span>
-                                                        <input type="text" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Company Name" placeholder="Company Name">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
+                            <input type="text" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Company Name" placeholder="Company Name">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span class="input-group-addon">
                                                           <i class="fa fa-envelope color-white" aria-hidden="true"></i>
                                                         </span>
-                                                        <input type="email" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Emaild Id" placeholder="Email Id">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
+                            <input type="email" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Emaild Id" placeholder="Email Id">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span class="input-group-addon">
                                                             <i class="fa fa-lock color-white fnt-20" aria-hidden="true"></i>
                                                         </span>
-                                                        <input type="password" class="form-control color-white" placeholder="Password">
-                                                    </div>
-                                                </div>
-                                                <div class="terms-condt">
-                                                    <div class="checkbox">
-                                                        <label class="color-white">
+                            <input type="password" class="form-control color-white" placeholder="Password">
+                          </div>
+                        </div>
+                        <div class="terms-condt">
+                          <div class="checkbox">
+                            <label class="color-white">
                                                             <input type="checkbox" id="tnc"/>
                                                             <label for="tnc" class="avenir-roman">I accept the Terms &amp; Conditions and Privacy Policy of the website.</label>
-
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="btn-login mt25">
-                                                    <button class="btn btn-outline color-white avenir-roman">
+                            </label>
+                          </div>
+                        </div>
+                        <div class="btn-login mt25">
+                          <button class="btn btn-outline color-white avenir-roman">
                                                         Login
                                                     </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </uib-tab>
-                            </uib-tabset>
                         </div>
+                      </form>
                     </div>
-                </div>
+                  </div>
+                </uib-tab>
+              </uib-tabset>
             </div>
+          </div>
         </div>
-        <div class="menu-contact ab">
-            <ul class="list-unstyled list-inline avenir-black">
-                <li>
-                    <a ui-sref="destination" class="color-white">Destinations</a>
-                </li>
-                <li>
-                    <a ui-sref="booking" class="color-white">Bookings</a>
-                </li>
-                <li>
-                    <a ui-sref="detailitinerary" class="color-white">Itineraries</a>
-                </li>
-                <li>
-                    <a ui-sref="blog" class="color-white">Blogs</a>
-                </li>
-                <li>
-                    <a ui-sref="about" class="color-white">About Us</a>
-                </li>
-            </ul>
-        </div>
+      </div>
     </div>
+    <div class="menu-contact ab">
+      <ul class="list-unstyled list-inline avenir-black">
+        <li>
+          <a ui-sref="destination" class="color-white">Destinations</a>
+        </li>
+        <li>
+          <a ui-sref="booking" class="color-white">Bookings</a>
+        </li>
+        <li>
+          <a ui-sref="detailitinerary" class="color-white">Itineraries</a>
+        </li>
+        <li>
+          <a ui-sref="blog" class="color-white">Blogs</a>
+        </li>
+        <li>
+          <a ui-sref="about" class="color-white">About Us</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </section>

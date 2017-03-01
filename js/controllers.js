@@ -140,6 +140,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
     $scope.headerfixed = "fixed-header";
     $scope.animationsEnabled = true;
+    $scope.formData = {};
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
     }
@@ -174,8 +175,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             if (alreadyLoggedIn === true) {
               var slug = $.jStorage.get("activeUrlSlug");
               console.log(slug);
-              if (slug === null) {
-                slug = "";
+              if (slug === null || slug === "") {
+                slug = $.jStorage.get("profile").urlSlug;
               }
               $state.go("mylife", {
                 name: 'journey',
@@ -214,6 +215,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $interval.cancel(stopinterval);
         authenticatesuccess(stopinterval);
       };
+    };
+
+    $scope.submit = function () {
+      console.log($scope.formData);
+      Navigation
     };
   })
   // .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $stateParams) {
@@ -4313,14 +4319,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.visited = [];
     if ($.jStorage.get("isLoggedIn") && ($.jStorage.get("profile").urlSlug == $stateParams.urlSlug)) {
       $scope.userData = $.jStorage.get("profile");
-      $.jStorage.set("activeUrlSlug", "");
+      $.jStorage.set("activeUrlSlug", $.jStorage.get("profile").urlSlug);
       $scope.activeUrlSlug = $.jStorage.get("profile").urlSlug;
       allowAccess = true;
       setMoreAboutMe();
       reloadCount();
     } else {
       // alert("not yours");
-      console.log($stateParams.urlSlug);
+      // console.log($stateParams.urlSlug);
       allowAccess = false;
       $.jStorage.set("activeUrlSlug", $stateParams.urlSlug);
       $scope.activeUrlSlug = $stateParams.urlSlug;
@@ -10190,21 +10196,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.nextPhotoSlide = function (slideData) {
       console.log(slideData);
-      slideData.photoSliderIndex++;
-      var nextId = slideData.newArray[slideData.photoSliderIndex]._id;
-      console.log(nextId, 'next id');
-      console.log(slideData.photoSliderIndex, 'next slide');
-      LikesAndComments.openPhotoPopup(nextId, $scope);
-      // $scope.getPhotosCommentData = function(nextId,index,length,array) {
-      // };
+      if (slideData.photoSliderIndex == slideData.photoSliderLength - 1) {
+        slideData.photoSliderIndex = 0;
+        console.log(slideData.photoSliderIndex, 'naya index');
+        var nextId = slideData.newArray[slideData.photoSliderIndex]._id;
+        console.log(nextId, 'next id');
+        console.log(slideData.photoSliderIndex, 'next slide');
+        LikesAndComments.openPhotoPopup(nextId, $scope);
+      } else {
+        slideData.photoSliderIndex++;
+        var nextId = slideData.newArray[slideData.photoSliderIndex]._id;
+        console.log(nextId, 'next id');
+        console.log(slideData.photoSliderIndex, 'next slide');
+        LikesAndComments.openPhotoPopup(nextId, $scope);
+      }
+
     };
     $scope.prevPhotoSlide = function (slideData) {
-      console.log(slideData);
-      slideData.photoSliderIndex--;
-      var prevId = slideData.newArray[slideData.photoSliderIndex]._id;
-      console.log(prevId, 'prev id');
-      console.log(slideData.photoSliderIndex, 'prev slide');
-      LikesAndComments.openPhotoPopup(prevId, $scope);
+      if (slideData.photoSliderIndex == 0) {
+        slideData.photoSliderIndex = slideData.photoSliderLength - 1;
+        var prevId = slideData.newArray[slideData.photoSliderIndex]._id;
+        console.log(slideData.photoSliderIndex, 'prev slide');
+        LikesAndComments.openPhotoPopup(prevId, $scope);
+      } else {
+        console.log(slideData);
+        slideData.photoSliderIndex--;
+        var prevId = slideData.newArray[slideData.photoSliderIndex]._id;
+        console.log(prevId, 'prev id');
+        console.log(slideData.photoSliderIndex, 'prev slide');
+        LikesAndComments.openPhotoPopup(prevId, $scope);
+      }
     }
   })
 

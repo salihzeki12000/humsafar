@@ -84,7 +84,6 @@ var navigationservice = angular.module('navigationservice', [])
       name: "About Us",
       classis: "active",
       disabled: false,
-      anchor: "about",
       subnav: [{
         name: "About TraveLibro",
         classis: "active",
@@ -175,15 +174,12 @@ var navigationservice = angular.module('navigationservice', [])
       saveUserData: function (formData, callback, errorCallback) {
         TravelibroService.post(adminURL + "/user/editUserWeb", formData).success(callback).error(errorCallback);
       },
-
       travelCount: function (callback, errorCallback) {
         TravelibroService.post(adminURL + "/user/getOneDataWeb").success(callback).error(errorCallback);
       },
-
       getBucketListWeb: function (callback, errorCallback) {
         TravelibroService.post(adminURL + "/user/getBucketListWeb").success(callback).error(errorCallback);
       },
-
       updateCountriesVisitedWeb: function (formData, callback, errCallback) {
         TravelibroService.post(adminURL + "/user/updateCountriesVisitedWeb", formData).success(callback).error(errCallback);
       },
