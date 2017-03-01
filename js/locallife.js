@@ -119,20 +119,20 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
       }
       // concating of photos & video of life end
       // localpost like and unlike
-      $scope.likeLocalPost = function (uniqueId, _id) {
-        console.log(uniqueId, 'un', _id, 'id');
-        console.log($scope.localongo.likeDone + "this call is from journey-post.html");
-        $scope.localongo.likeDone = !$scope.localongo.likeDone;
-        if ($scope.localongo.likeDone) {
-          if ($scope.localongo.likeCount === undefined) {
-            $scope.localongo.likeCount = 1;
+      $scope.likeLocalPost = function (localongo) {
+        console.log(localongo);
+        // console.log(localongo.likeDone + "this call is from local-post.html");
+        localongo.likeDone = !localongo.likeDone;
+        if (localongo.likeDone) {
+          if (localongo.likeCount === undefined) {
+            localongo.likeCount = 1;
           } else {
-            $scope.localongo.likeCount = $scope.localongo.likeCount + 1;
+            localongo.likeCount = localongo.likeCount + 1;
           }
-          LikesAndComments.likeUnlike("post", "like", uniqueId, _id, null)
+          LikesAndComments.likeUnlike(localongo.type, "like", localongo.uniqueId, localongo._id, null)
         } else {
-          $scope.localongo.likeCount = $scope.localongo.likeCount - 1;
-          LikesAndComments.likeUnlike("post", "unlike", uniqueId, _id, null)
+          localongo.likeCount = localongo.likeCount - 1;
+          LikesAndComments.likeUnlike(localongo.type, "unlike", localongo.uniqueId, localongo._id, null)
         }
       };
       // localpost like and unlike end
@@ -267,7 +267,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
           backdrop: 'static',
           backdropClass: "review-backdrop"
         });
-        modal.closed.then(function () {});
+        modal.close();
         console.log("local", $scope.localongo);
         // geo location
         if (navigator.geolocation) {
@@ -436,7 +436,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
       // caption edit end
       // edit save data
       $scope.saveLocalEdit = function () {
-        // $scope.localView.view = false;
+        $scope.localView.view = false;
         // get photos id
         $scope.photosId = _.map($scope.localongo.photos, "_id");
         // get photos id end
@@ -496,10 +496,9 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
           if (data.value === true) {
             // $window.location.reload();
             modal.close();
-            // $timeout(function(){
-            //   $scope.localView.view = true;
-            // },100);
-            alert($scope.localView.view);
+            $timeout(function () {
+              $scope.localView.view = true;
+            }, 100);
           }
         }).error(function (data) {
           console.log(data);
@@ -520,12 +519,21 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
         });
         console.log($scope.localongo, "add wala");
         modal.closed.then(function () {
-          $scope.otgPhotoArray = [];
+          // $scope.otgPhotoArray = [];
           $scope.photoSec = false;
-          $scope.otgPhoto = [];
+          // $scope.otgPhoto = [];
         });
       };
       // local journey add photo videos end
+      // photo array edit
+      $scope.addMoreCaption = function (index) {
+        if ($scope.indexPhotoCaption === index) {
+          $scope.indexPhotoCaption = -1;
+        } else {
+          $scope.indexPhotoCaption = index;
+        }
+      }
+      // photo array edit end
       // add photos start
       $scope.photoSec = false;
       $scope.addOtgPhotos = function (detail, length) {
@@ -629,7 +637,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
       // tag selected buddy end
       // save local add photo vidoes
       $scope.saveLocalPhotosVideos = function () {
-        $scope.localView.view = false;
+        // $scope.localView.view = false;
         _.filter($scope.localongo.buddies, ['selected', true]);
         // console.log(photos,uniqueId);
         var formData = {
@@ -646,13 +654,8 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
         }).success(function (data) {
           console.log(data, 'the added one');
           if (data.value === true) {
-            $scope.localongo.photosVideos = _.concat($scope.localongo.photosVideos,$scope.otgPhoto);
+            $scope.localongo.photosVideos = _.concat($scope.localongo.photosVideos, $scope.otgPhoto);
             // $window.location.reload();
-            $timeout(function(){
-              $scope.localView.view = true;
-            },100);
-            alert($scope.localView.view);
-
           }
         }).error(function (data) {
           console.log(data);
@@ -690,6 +693,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
           templateUrl: "views/modal/local-date-time.html",
           scope: $scope,
           backdropClass: "review-backdrop",
+          windowClass: 'local-editdatepop'
         })
       };
       $scope.updateLocalTime = function (localPost, formData, dt) {
@@ -718,6 +722,13 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
 
       // change date and time local journey end
       // delete local journey post
+      $scope.confirmDelete = function () {
+        modal = $uibModal.open({
+          animation: true,
+          templateUrl: 'views/modal/delete-localpost.html',
+          scope: $scope
+        })
+      };
       $scope.deleteLocalPost = function (postId) {
         var formData = {
           type: "deletePost",
@@ -735,10 +746,21 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
           console.log("failed to delete");
         });
       }
+
       // delete local journey post end
-      // local journey edit end
-      $scope.getPhotosCommentData = function (photoId) {
+      $scope.allPhotos = {};
+      $scope.allPhotos.photoSliderIndex = "";
+      $scope.allPhotos.photoSliderLength = "";
+      $scope.allPhotos.newArray = [];
+      //local journey edit end
+      $scope.getPhotosCommentData = function (photoId, index, length, array) {
+        console.log(index);
+        console.log(length);
+        console.log(array);
         console.log(photoId, "click function called");
+        $scope.allPhotos.photoSliderIndex = index;
+        $scope.allPhotos.photoSliderLength = length;
+        $scope.allPhotos.newArray = array;
         modal = $uibModal.open({
           templateUrl: "views/modal/notify.html",
           animation: true,

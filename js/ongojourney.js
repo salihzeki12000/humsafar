@@ -11,14 +11,8 @@ var ongojourney = angular.module('ongojourney', [])
           data: formData
         }).success(function (data) {
           var journey = data.data;
-          // header integration starts
           journey.kindOfJourneyIconsAddr = [];
           journey.buddiesCount = journey.buddies.length;
-          journey.showRemainingCount = false;
-          if (journey.buddiesCount >= 4) {
-            journey.showRemainingCount = true;
-            journey.remainingCount = journey.buddiesCount - 3;
-          }
           journey.buddiesString = "";
           if (journey.buddiesCount == 1) {
             journey.buddiesString = " and " + journey.buddies[0].name.bold();
@@ -41,7 +35,6 @@ var ongojourney = angular.module('ongojourney', [])
           } else {
             journey.startJourneyString = "Trip Traveller - " + journey.user.name.bold();
           }
-          // header integration ends
           callback(journey);
         }).error(function (data) {
           console.log(data);
@@ -169,7 +162,7 @@ var ongojourney = angular.module('ongojourney', [])
     };
   });
 
-ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout', '$uibModal', 'OnGoJourney', 'LikesAndComments','TravelibroService', function ($http, $filter, $window, $timeout, $uibModal, OnGoJourney, LikesAndComments,TravelibroService) {
+ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout', '$uibModal', 'OnGoJourney', 'LikesAndComments', 'TravelibroService', function ($http, $filter, $window, $timeout, $uibModal, OnGoJourney, LikesAndComments, TravelibroService) {
   return {
     restrict: 'E',
     scope: {
@@ -294,19 +287,19 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       // type of post ends
       makePostString();
 
-      $scope.likePost = function (uniqueId, _id) {
-        console.log($scope.ongo.likeDone + "this call is from journey-post.html");
-        $scope.ongo.likeDone = !$scope.ongo.likeDone;
-        if ($scope.ongo.likeDone) {
-          if ($scope.ongo.likeCount == undefined) {
-            $scope.ongo.likeCount = 1;
+      $scope.likePost = function (ongo) {
+        console.log(ongo, "this call is from journey-post.html");
+        ongo.likeDone = !ongo.likeDone;
+        if (ongo.likeDone) {
+          if (ongo.likeCount == undefined) {
+            ongo.likeCount = 1;
           } else {
-            $scope.ongo.likeCount = $scope.ongo.likeCount + 1;
+            ongo.likeCount = ongo.likeCount + 1;
           }
-          LikesAndComments.likeUnlike("post", "like", uniqueId, _id, null)
+          LikesAndComments.likeUnlike(ongo.type, "like", ongo.uniqueId, ongo._id, null)
         } else {
-          $scope.ongo.likeCount = $scope.ongo.likeCount - 1;
-          LikesAndComments.likeUnlike("post", "unlike", uniqueId, _id, null)
+          ongo.likeCount = ongo.likeCount - 1;
+          LikesAndComments.likeUnlike(ongo.type, "unlike", ongo.uniqueId, ongo._id, null)
         }
       };
 
@@ -569,8 +562,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
               $window.location.reload();
             }, 100);
           }
-          $scope.otgPhoto = [];
-          $scope.otgPhotoArray = [];
+          // $scope.otgPhoto = [];
+          // $scope.otgPhotoArray = [];
         }).error(function (data) {
           console.log(data);
         });
@@ -1090,8 +1083,19 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
         }
       };
 
-      $scope.getPhotosCommentData = function (photoId) {
-        console.log(photoId, "mdmdsdsdmks");
+      $scope.allPhotos = {};
+      $scope.allPhotos.photoSliderIndex = "";
+      $scope.allPhotos.photoSliderLength = "";
+      $scope.allPhotos.newArray = [];
+      //Photo comment popup
+      $scope.getPhotosCommentData = function (photoId, index, length, array) {
+        console.log(index);
+        console.log(length);
+        console.log(array);
+        console.log(photoId, "click function called");
+        $scope.allPhotos.photoSliderIndex = index;
+        $scope.allPhotos.photoSliderLength = length;
+        $scope.allPhotos.newArray = array;
         modal = $uibModal.open({
           templateUrl: "views/modal/notify.html",
           animation: true,
@@ -1121,7 +1125,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
         LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, photoId, callback);
       };
     }
-  }
+  };
 }]);
 
 ongojourney.filter('formatDateCalender', function () {

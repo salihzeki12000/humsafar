@@ -42,7 +42,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // console.log(length);
       // console.log($(".fp-section"));
       if (length === 0) {
-        $('.fullpage').fullpage();
+        $('.fullpage').fullpage({
+          //Navigation
+
+          onLeave: function (index, nextIndex, direction) {
+
+            $timeout(function () {
+              swiper.slideTo(nextIndex - 1);
+              //playing the video
+              $('video').get(nextIndex - 1).load();
+              $('video').get(nextIndex - 1).play();
+              $('video').get(nextIndex - 2).pause();
+              $('video').get(nextIndex).pause();
+            }, 500);
+
+          }
+        });
       }
       // console.log(text);
       $scope.homeval = text;
@@ -75,22 +90,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
     setTimeout(function () {
       $('.scene').parallax();
-      $('.fullpage').fullpage({
-        //Navigation
-
-        onLeave: function (index, nextIndex, direction) {
-
-          $timeout(function () {
-            swiper.slideTo(nextIndex - 1);
-            //playing the video
-            $('video').get(nextIndex - 1).load();
-            $('video').get(nextIndex - 1).play();
-            $('video').get(nextIndex - 2).pause();
-            $('video').get(nextIndex).pause();
-          }, 0);
-
-        }
-      });
 
       swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
@@ -112,6 +111,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.changePage($stateParams.id);
       }, 1000);
     });
+    cfpLoadingBar.complete();
     $scope.muteVolume = function () {
       if ($("video").prop('muted')) {
         $("video").prop('muted', false);
@@ -119,10 +119,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $("video").prop('muted', true);
       }
     }
-    cfpLoadingBar.complete();
   })
 
-  .controller('LoginCtrl', function ($scope, TemplateService, NavigationService,cfpLoadingBar, $timeout, $uibModal, $interval, $state) {
+
+
+  .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $interval, $state) {
     //Used to name the .html file
     var stopinterval;
     $scope.userData = $.jStorage.get("profile");
@@ -139,8 +140,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $(window).load(function () {
       console.log("tooltip");
       $('[data-toggle="tooltip"]').tooltip();
-    })
-
+    });
 
     $scope.openalreadyexist = function (size) {
       $uibModal.open({
@@ -159,16 +159,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $interval.cancel(stopinterval);
         ref.close();
         $.jStorage.set("accessToken", data.accessToken);
-        // acsToken = data.accessToken;
-        NavigationService.getProfile("",function (data) {
+        NavigationService.getProfile("", function (data) {
           if (data.data._id) {
             $.jStorage.set("isLoggedIn", true);
             $.jStorage.set("profile", data.data);
             var alreadyLoggedIn = data.data.alreadyLoggedIn;
             if (alreadyLoggedIn === true) {
+              var slug = $.jStorage.get("activeUrlSlug");
+              console.log(slug);
+              if (slug === null) {
+                slug = "";
+              }
               $state.go("mylife", {
                 name: 'journey',
-                urlSlug: data.data.urlSlug
+                urlSlug: slug
               });
             } else if (alreadyLoggedIn === false) {
               $state.go('mainpage');
@@ -205,85 +209,85 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       };
     };
   })
-  .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService,cfpLoadingBar, $timeout, $uibModal, $stateParams) {
-    //Used to name the .html file
-    console.log("Testing Consoles");
-    $scope.template = TemplateService.changecontent("forgot-password");
-    $scope.menutitle = NavigationService.makeactive("Login");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-    $scope.animationsEnabled = true;
-    $scope.template.header = "";
-    $scope.template.footer = "";
-    $scope.showErr = false;
-    $scope.showErr1 = false;
-    $scope.formData = {};
-    $scope.formData.password = "";
-    $scope.formData.confirmPassword = "";
-    $scope.userData = {};
-    if (typeof $.fn.fullpage.destroy == 'function') {
-      $.fn.fullpage.destroy('all');
-    }
-    if ($stateParams.token && $stateParams.email) {
-      NavigationService.checkToken({
-        token: decodeURIComponent($stateParams.token),
-        email: $stateParams.email
-      }, function (data) {
-        if (data.value) {
-          $scope.showErr = false;
-        } else {
-          $scope.showErr = true;
-        }
-      });
-    } else {
-      $scope.showErr = true;
-    }
-    $scope.type = function () {
-      if ($scope.formData.password === "" && $scope.formData.confirmPassword === "") {
-        $scope.showErr1 = false;
-      } else {
-        if ($scope.formData.password !== "" && $scope.formData.confirmPassword === "") {
-          $scope.showErr1 = false;
-        } else if ($scope.formData.password === $scope.formData.confirmPassword) {
-          $scope.showErr1 = false;
-        } else {
-          $scope.showErr1 = true;
-        }
-      }
-    }
-    $scope.change = function () {
-      if ($scope.formData.password === $scope.formData.confirmPassword && $scope.showErr === false && $scope.showErr1 === false) {
-        $scope.formData.token = decodeURIComponent($stateParams.token);
-        $scope.formData.email = $stateParams.email;
-        NavigationService.changePasswordEmail($scope.formData, function (data) {
-          if (data.value) {
-            $scope.opensucessfull();
-            NavigationService.getProfile(globalGetProfile, function (err) {
-              $.jStorage.set("profile", data);
-            });
-          } else {
-            $scope.showErr = true;
-          }
-        });
-      } else {
-        $scope.showErr1 = true;
-      }
-    }
-    if (!_.isEmpty($.jStorage.get("profile"))) {
-      $scope.userData = $.jStorage.get("profile");
-    }
-    $scope.opensucessfull = function (size) {
-      $uibModal.open({
-        animation: true,
-        templateUrl: 'views/modal/sucessfull.html',
-        controller: 'ForgotPasswordCtrl',
-        scope: $scope,
-        windowClass: "notexist",
-        size: "sm"
-      });
-    };
+  // .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $stateParams) {
+  //Used to name the .html file
+  //   console.log("Testing Consoles");
+  //   $scope.template = TemplateService.changecontent("forgot-password");
+  //   $scope.menutitle = NavigationService.makeactive("Login");
+  //   TemplateService.title = $scope.menutitle;
+  //   $scope.navigation = NavigationService.getnav();
+  //   $scope.animationsEnabled = true;
+  //   $scope.template.header = "";
+  //   $scope.template.footer = "";
+  //   $scope.showErr = false;
+  //   $scope.showErr1 = false;
+  //   $scope.formData = {};
+  //   $scope.formData.password = "";
+  //   $scope.formData.confirmPassword = "";
+  //   $scope.userData = {};
+  //   if (typeof $.fn.fullpage.destroy == 'function') {
+  //     $.fn.fullpage.destroy('all');
+  //   }
+  //   if ($stateParams.token && $stateParams.email) {
+  //     NavigationService.checkToken({
+  //       token: decodeURIComponent($stateParams.token),
+  //       email: $stateParams.email
+  //     }, function (data) {
+  //       if (data.value) {
+  //         $scope.showErr = false;
+  //       } else {
+  //         $scope.showErr = true;
+  //       }
+  //     });
+  //   } else {
+  //     $scope.showErr = true;
+  //   }
+  //   $scope.type = function () {
+  //     if ($scope.formData.password === "" && $scope.formData.confirmPassword === "") {
+  //       $scope.showErr1 = false;
+  //     } else {
+  //       if ($scope.formData.password !== "" && $scope.formData.confirmPassword === "") {
+  //         $scope.showErr1 = false;
+  //       } else if ($scope.formData.password === $scope.formData.confirmPassword) {
+  //         $scope.showErr1 = false;
+  //       } else {
+  //         $scope.showErr1 = true;
+  //       }
+  //     }
+  //   }
+  //   $scope.change = function () {
+  //     if ($scope.formData.password === $scope.formData.confirmPassword && $scope.showErr === false && $scope.showErr1 === false) {
+  //       $scope.formData.token = decodeURIComponent($stateParams.token);
+  //       $scope.formData.email = $stateParams.email;
+  //       NavigationService.changePasswordEmail($scope.formData, function (data) {
+  //         if (data.value) {
+  //           $scope.opensucessfull();
+  //           NavigationService.getProfile("", globalGetProfile, function (err) {
+  //             $.jStorage.set("profile", data);
+  //           });
+  //         } else {
+  //           $scope.showErr = true;
+  //         }
+  //       });
+  //     } else {
+  //       $scope.showErr1 = true;
+  //     }
+  //   }
+  //   if (!_.isEmpty($.jStorage.get("profile"))) {
+  //     $scope.userData = $.jStorage.get("profile");
+  //   }
+  //   $scope.opensucessfull = function (size) {
+  //     $uibModal.open({
+  //       animation: true,
+  //       templateUrl: 'views/modal/sucessfull.html',
+  //       controller: 'ForgotPasswordCtrl',
+  //       scope: $scope,
+  //       windowClass: "notexist",
+  //       size: "sm"
+  //     });
+  //   };
 
-  })
+  // })
   .controller('ForgotPasswordEmailCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
@@ -350,7 +354,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
   })
 
-  .controller('MainPageCtrl', ['$scope', 'TemplateService', 'NavigationService','cfpLoadingBar', '$timeout', '$http', '$state', 'FileUploadService', 'FileUploader', 'DataUriToBlob', '$window', function ($scope, TemplateService, NavigationService,cfpLoadingBar, $timeout, $http, $state, FileUploadService, FileUploader, DataUriToBlob, $window) {
+  .controller('MainPageCtrl', ['$scope', 'TemplateService', 'NavigationService', 'cfpLoadingBar', '$timeout', '$http', '$state', 'FileUploadService', 'FileUploader', 'DataUriToBlob', '$window', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $http, $state, FileUploadService, FileUploader, DataUriToBlob, $window) {
     //Used to name the .html file
     // console.log("Testing Consoles");
     $scope.form = {};
@@ -469,7 +473,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var saveDataCallback = function (data, status) {
       if (data.value === true) {
         console.log(data);
-        NavigationService.getProfile(globalGetProfile, function (err) {
+        NavigationService.getProfile($.jStorage.get("profile").urlSlug, globalGetProfile, function (err) {
           console.log(err);
         });
         $window.location.reload();
@@ -785,7 +789,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var saveDataCallback = function (data, status) {
       if (data.value === true) {
-        NavigationService.getProfile(function (data, status) {
+        NavigationService.getProfile($.jStorage.get("profile").urlSlug, function (data, status) {
           if (data.data._id) {
             $.jStorage.set("isLoggedIn", true);
             $.jStorage.set("profile", data.data);
@@ -812,7 +816,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // Integration Section Ends here
 
   })
-  .controller('TripSummaryCtrl', function ($scope, TemplateService, NavigationService,cfpLoadingBar, $timeout, $stateParams, OnGoJourney) {
+  .controller('TripSummaryCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $stateParams, OnGoJourney) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -870,7 +874,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // scroll end
 
   })
-  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService,cfpLoadingBar, $timeout, $uibModal, $interval, OnGoJourney, LikesAndComments, $state, $stateParams, $filter, $http) {
+  .controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $interval, OnGoJourney, LikesAndComments, $state, $stateParams, $filter, $http) {
     var didScroll;
     var lastScrollTop = 0;
     var delta = 5;
@@ -891,10 +895,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     function hasScrolled() {
       var st = $(this).scrollTop();
-
       if (Math.abs(lastScrollTop - st) <= delta)
         return;
-
       if (st > lastScrollTop && st > journeyInfoStrip) {
         // Scroll Down
         $('.journey-info-strip').addClass('remove-otgstrip').removeClass('get-otgstrip');
@@ -904,7 +906,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $('.journey-info-strip').addClass('get-otgstrip').removeClass('remove-otgstrip');
         }
       }
-
       lastScrollTop = st;
     }
 
@@ -945,7 +946,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     OnGoJourney.getOneJourney({
-      "urlSlug": slug
+      "urlSlug": slug,
     }, getOneJourneyCallback, function (err) {
       console.log(err);
     });
@@ -2575,7 +2576,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('DestinationCountryCtrl', function ($scope, $state, TemplateService, NavigationService,cfpLoadingBar, $timeout, $uibModal, $location) {
+  .controller('DestinationCountryCtrl', function ($scope, $state, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -2603,7 +2604,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         itineraryType: $scope.destinationItineraryType,
         itineraryBy: $scope.destinationItineraryBy
       }, function (data) {
-        if(type=='itinerary'){
+        if (type == 'itinerary') {
           if (data.data.itinerary.length == 0) {
             $scope.scroll.stopCallingApi = true;
           } else {
@@ -2611,9 +2612,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             _.each(data.data, function (newData) {
               $scope.countryDestData.push(newData);
             });
-            console.log($scope.countryDestData,'data');
+            console.log($scope.countryDestData, 'data');
           };
-        }else {
+        } else {
           $scope.countryDestData = data.data;
         }
         cfpLoadingBar.complete();
@@ -2744,33 +2745,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         case "featured":
           $scope.countryoptions.active = "featured";
           $scope.destination.innerView = alldestination[0];
-          $scope.countryDestData=[];
+          $scope.countryDestData = [];
           $scope.getCountryInfo("featuredCities", $scope.urlDestinationCountry);
           break;
         case "mustdo":
           $scope.countryoptions.active = "mustdo";
           $scope.destination.innerView = alldestination[1];
-          $scope.countryDestData=[];
+          $scope.countryDestData = [];
           $scope.getCountryInfo("mustDo", $scope.urlDestinationCountry);
           break;
         case "itineraries":
           $scope.countryoptions.active = "itineraries";
           $scope.destination.innerView = alldestination[2];
-          $scope.countryDestData=[];
+          $scope.countryDestData = [];
           $scope.getCountryInfo("itinerary", $scope.urlDestinationCountry);
           break;
         case "booking":
           $scope.countryoptions.active = "booking";
-          $scope.countryDestData=[];
+          $scope.countryDestData = [];
           $scope.destination.innerView = alldestination[3];
           break;
         case "visit":
           $scope.countryoptions.active = "visit";
-          $scope.countryDestData=[];
+          $scope.countryDestData = [];
           $scope.destination.innerView = alldestination[4];
           break;
         default:
-        $scope.countryDestData=[];
+          $scope.countryDestData = [];
           $scope.destination.innerView = alldestination[0];
       }
     };
@@ -2926,8 +2927,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, 500);
     })
 
+    //SHOW HIDE FILTER DROPDOWNS
+    $scope.viewCityDrop = false;
+    $scope.showCityDrop = function () {
+      if ($scope.viewCityDrop == false) {
+        $scope.viewCityDrop = true;
+      } else {
+        $scope.viewCityDrop = false;
+      }
+    };
+    $scope.viewTypeDrop = false;
+    $scope.showTypeDrop = function () {
+      if ($scope.viewTypeDrop == false) {
+        $scope.viewTypeDrop = true;
+      } else {
+        $scope.viewTypeDrop = false;
+      }
+    };
+    $scope.viewByDrop = false;
+    $scope.showByDrop = function () {
+      if ($scope.viewByDrop == false) {
+        $scope.viewByDrop = true;
+      } else {
+        $scope.viewByDrop = false;
+      }
+    };
+    //SHOW HIDE FILTER DROPDOWNS END
+
   })
-  .controller('DestinationCityCtrl', function ($scope, $state, TemplateService, NavigationService,cfpLoadingBar, $timeout, $uibModal, $location) {
+  .controller('DestinationCityCtrl', function ($scope, $state, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -4251,7 +4279,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     })
   })
 
-  .controller('MylifeCtrl', function ($scope, $state, TemplateService, NavigationService,cfpLoadingBar, TravelibroService, $timeout, $uibModal, $location, $filter, MyLife, OnGoJourney, localLife, LikesAndComments) {
+  .controller('MylifeCtrl', function ($scope, $state, $stateParams, TemplateService, NavigationService, cfpLoadingBar, TravelibroService, $timeout, $uibModal, $location, $filter, MyLife, OnGoJourney, localLife, LikesAndComments) {
     //Used to name the .html file
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("mylife");
@@ -4259,15 +4287,40 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    $scope.localView = {};
+    $scope.localView.view = true;
 
-
-    $scope.localView= {};
-    $scope.localView.view= true;
-
-    $scope.userData = $.jStorage.get("profile");
     $scope.showTravellife = false;
     $scope.visited = [];
-
+    if ($.jStorage.get("isLoggedIn") && ($.jStorage.get("profile").urlSlug == $stateParams.urlSlug)) {
+      $scope.userData = $.jStorage.get("profile");
+      $.jStorage.set("activeUrlSlug", "");
+      $scope.activeUrlSlug = $.jStorage.get("profile").urlSlug;
+      allowAccess = true;
+      reloadCount();
+    } else {
+      alert("not yours");
+      console.log($stateParams.urlSlug);
+      allowAccess = false;
+      $.jStorage.set("activeUrlSlug", $stateParams.urlSlug);
+      $scope.activeUrlSlug = $stateParams.urlSlug;
+      NavigationService.getProfile($stateParams.urlSlug, function (data) {
+        console.log(data);
+        if (data.value) {
+          $scope.userData = data.data;
+          allowAccess = false;
+          setMoreAboutMe();
+          reloadCount();
+        } else {
+          // $state.go("errorpage");
+        }
+      }, function (data) {
+        console.log(data);
+      });
+    }
+    console.log($scope.activeUrlSlug);
+    $scope.allowAccess = allowAccess;
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.likeUnlikeActivity = function (activity) {
       console.log(activity.likeUnlikeFlag, activity.uniqueId, activity._id);
       console.log(activity.likeDone + "this call is from activitytest.html");
@@ -4286,7 +4339,64 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    //Integration Section Starts here
+    function setMoreAboutMe() {
+      console.log("entered if");
+      $scope.pronoun; //for he and she
+      $scope.pronoun1; //for him and her
+      $scope.userName = titleCase($scope.userData.firstName);
+      $scope.kindOfHoliday = $scope.userData.travelConfig.kindOfHoliday[0];
+      $scope.usuallyGo = $scope.userData.travelConfig.usuallyGo[0];
+      $scope.flag = false;
+
+      var blogIndex = $scope.userData.travelConfig.preferToTravel.indexOf("Blogger");
+      var photoIndex = $scope.userData.travelConfig.preferToTravel.indexOf("Photographer");
+
+      if (blogIndex != -1) {
+        $scope.preferToTravel = $scope.userData.travelConfig.preferToTravel[blogIndex];
+      } else if (photoIndex != -1) {
+        $scope.preferToTravel = $scope.userData.travelConfig.preferToTravel[photoIndex];
+      } else {
+        $scope.preferToTravel = $scope.userData.travelConfig.preferToTravel[0];
+      }
+
+      $scope.idealHoliday = $scope.userData.travelConfig.holidayType[0];
+
+      if ($scope.userData.gender == "male") {
+        $scope.pronoun = "he";
+        $scope.pronoun1 = "him";
+      } else {
+        $scope.pronoun = "she";
+        $scope.pronoun1 = "her";
+      }
+
+      if ($scope.usuallyGo == "By the map ") {
+        $scope.usuallyGo = "by the map";
+      } else if ($scope.usuallyGo == "Where the road takes you") {
+        $scope.usuallyGo = "where the road takes " + $scope.pronoun1;
+      } else if ($scope.usuallyGo == "A little bit of both") {
+        $scope.flag = true;
+        $scope.usuallyGo = "by the map or ";
+        $scope.usuallyGo1 = "where the road takes " + $scope.pronoun1;
+      }
+
+      if (($scope.preferToTravel == "Blogger") || ($scope.preferToTravel == "Photographer")) {
+        $scope.intermediate = "is a ";
+      } else {
+        if (($scope.preferToTravel == "Family") || ($scope.preferToTravel == "Friends")) {
+          $scope.intermediate = "prefers to travel with "
+        } else if ($scope.preferToTravel == "Business") {
+          $scope.intermediate = "prefers to travel on ";
+        } else if ($scope.preferToTravel == "Group Tour") {
+          $scope.intermediate = "prefers to travel on a ";
+        } else if ($scope.preferToTravel == "Partner/Spouse") {
+          $scope.intermediate = "prefers to travel with their";
+          $scope.preferToTravel = "Partner";
+        } else if ($scope.preferToTravel == "Solo") {
+          $scope.intermediate = "prefers to travel ";
+        }
+      }
+
+    };
     // backgroundClick
     $scope.editOption = function (model) {
       $timeout(function () {
@@ -4296,16 +4406,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       backgroundClick.scope = $scope;
     };
     //backgroundClick
-    var reloadCount = function () {
-      NavigationService.travelCount(function (data, status) {
-        $scope.count = data.data;
-        var len = $scope.count.countriesVisited_count;
-        updateBadgeBar(len);
+    function reloadCount() {
+      NavigationService.getProfile($.jStorage.get("activeUrlSlug"), function (data, status) {
+        $scope.userData = data.data;
+        console.log($scope.userData.countriesVisited_count);
+        updateBadgeBar($scope.userData.countriesVisited_count);
       }, function (err) {
         console.log(err);
       });
     };
-    reloadCount();
+
 
     $scope.data = {
       'bucketList': {
@@ -4369,10 +4479,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
 
     $scope.updateBucketList = function (country) {
-      cfpLoadingBar.start();
+      // cfpLoadingBar.start();
       MyLife.updateBucketList(country, function (data, status) {
         reloadCount();
-        cfpLoadingBar.complete();
+        // cfpLoadingBar.complete();
       }, function () {});
       $scope.getMap();
     };
@@ -4404,29 +4514,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.obj.countryId = country._id;
       if (country.countryVisited === true) {
         arr = [{}];
-
-        //for getting all the visited years  of that respective country starts
-        // var callback = function (data) {
-        //   var a = _.filter(data, ["countryId._id", country._id]);
-        //   var visitedArr = [];
-        //   _.each(a[0].visited, function (n, index) {
-        //     visitedArr[n.year] = {
-        //       "times": n.times,
-        //       "year": n.year
-        //     };
-        //   });
-        //   console.log(visitedArr);
-        //   $scope.visited = visitedArr;
-        //   arr = visitedArr;
-        // };
-        // MyLife.getCountryVisitedListWeb(callback);
-        //for getting all the visited years  of that respective country ends
-
         modal = $uibModal.open({
           scope: $scope,
           animation: true,
           templateUrl: "views/modal/delete-visited-country.html"
-          // templateUrl: "views/modal/country-visited.html"
         });
       } else {
         $scope.visited = [];
@@ -4440,7 +4531,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       //remove country visited and all its count starts
       $scope.removeCountryVisited = function () {
-        cfpLoadingBar.start();
+        // cfpLoadingBar.start();
         var obj = {
           "countryId": country._id,
           "visited": []
@@ -4448,7 +4539,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         MyLife.updateCountriesVisited(obj, function (data, status) {
           reloadCount();
           modal.close();
-          cfpLoadingBar.complete();
+          // cfpLoadingBar.complete();
         }, function () {});
         arr = [];
         $scope.getMap();
@@ -4496,81 +4587,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     function titleCase(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
-    if ($scope.userData) {
-      $scope.pronoun; //for he and she
-      $scope.pronoun1; //for him and her
-      $scope.userName = titleCase($scope.userData.firstName);
-      $scope.kindOfHoliday = $scope.userData.travelConfig.kindOfHoliday[0];
-      $scope.usuallyGo = $scope.userData.travelConfig.usuallyGo[0];
-      $scope.flag = false;
+    console.log("aagaya change karvane");
 
-      var blogIndex = $scope.userData.travelConfig.preferToTravel.indexOf("Blogger");
-      var photoIndex = $scope.userData.travelConfig.preferToTravel.indexOf("Photographer");
-
-      if (blogIndex != -1) {
-        $scope.preferToTravel = $scope.userData.travelConfig.preferToTravel[blogIndex];
-      } else if (photoIndex != -1) {
-        $scope.preferToTravel = $scope.userData.travelConfig.preferToTravel[photoIndex];
-      } else {
-        $scope.preferToTravel = $scope.userData.travelConfig.preferToTravel[0];
-      }
-
-      $scope.idealHoliday = $scope.userData.travelConfig.holidayType[0];
-
-      if ($scope.userData.gender == "male") {
-        $scope.pronoun = "he";
-        $scope.pronoun1 = "him";
-      } else {
-        $scope.pronoun = "she";
-        $scope.pronoun1 = "her";
-      }
-
-      if ($scope.usuallyGo == "By the map ") {
-        $scope.usuallyGo = "by the map";
-      } else if ($scope.usuallyGo == "Where the road takes you") {
-        $scope.usuallyGo = "where the road takes " + $scope.pronoun1;
-      } else if ($scope.usuallyGo == "A little bit of both") {
-        $scope.flag = true;
-        $scope.usuallyGo = "by the map or ";
-        $scope.usuallyGo1 = "where the road takes " + $scope.pronoun1;
-      }
-
-      if (($scope.preferToTravel == "Blogger") || ($scope.preferToTravel == "Photographer")) {
-        $scope.intermediate = "is a ";
-      } else {
-        if (($scope.preferToTravel == "Family") || ($scope.preferToTravel == "Friends")) {
-          $scope.intermediate = "prefers to travel with "
-        } else if ($scope.preferToTravel == "Business") {
-          $scope.intermediate = "prefers to travel on ";
-        } else if ($scope.preferToTravel == "Group Tour") {
-          $scope.intermediate = "prefers to travel on a ";
-        } else if ($scope.preferToTravel == "Partner/Spouse") {
-          $scope.intermediate = "prefers to travel with their";
-          $scope.preferToTravel = "Partner";
-        } else if ($scope.preferToTravel == "Solo") {
-          $scope.intermediate = "prefers to travel ";
-        }
+    // Little more about me ends here
+    //userBadge starts here
+    var updateBadge = function (len) {
+      if (len < 4) {
+        $scope.userBadgeName = "img/newbie.png";
+      } else if ((len > 3) && (len < 8)) {
+        $scope.userBadgeName = "img/Just-got-wings.png";
+      } else if ((len > 8) && (len < 16)) {
+        $scope.userBadgeName = "img/Globe-Trotter.png";
+      } else if ((len > 16) && (len < 25)) {
+        $scope.userBadgeName = "img/wayfarer.png";
+      } else if (len >= 25) {
+        $scope.userBadgeName = "img/nomad.png";
       }
     }
-    // Little more about me ends here
-
-    //userBadge starts here
-    // var updateBadge = function (len) {
-    //   if (len < 4) {
-    //     $scope.userBadgeName = "img/newbie.png";
-    //   } else if ((len > 3) && (len < 8)) {
-    //     $scope.userBadgeName = "img/Just-got-wings.png";
-    //   } else if ((len > 8) && (len < 16)) {
-    //     $scope.userBadgeName = "img/Globe-Trotter.png";
-    //   } else if ((len > 16) && (len < 25)) {
-    //     $scope.userBadgeName = "img/wayfarer.png";
-    //   } else if (len >= 25) {
-    //     $scope.userBadgeName = "img/nomad.png";
-    //   }
-    // }
     //userBadge ends here
-
-    //badge-bar starts here
 
 
     $scope.level = "";
@@ -4717,7 +4751,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       "type": "local-life"
     };
     var getMoments = function () {
-      cfpLoadingBar.start();
+      // cfpLoadingBar.start();
       $scope.allMoments.scrollBusy = true;
       $scope.travelLifeMoments.scrollBusy = true;
       $scope.localLifeMoments.scrollBusy = true;
@@ -4729,12 +4763,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           "stopCallingApi": false,
           "type": "all"
         };
-        cfpLoadingBar.complete();
+        // cfpLoadingBar.complete();
       }, function (data) {
         console.log(data);
       });
       MyLife.getTravelLifeMoments("travel-life", 1, function (data) {
-        cfpLoadingBar.start();
+        // cfpLoadingBar.start();
         $scope.travelLifeMoments = {
           "arr": data.data,
           "scrollBusy": false,
@@ -4742,7 +4776,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           "type": "travel-life",
           "pageNo": 1
         };
-        cfpLoadingBar.complete();
+        // cfpLoadingBar.complete();
         // $scope.travelLifeMoments = data.data;
       }, function (data) {
         console.log(data);
@@ -4762,7 +4796,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       })
     };
     $scope.getMoreMoments = function (moment) {
-      cfpLoadingBar.start();
+      // cfpLoadingBar.start();
       if (moment.scrollBusy) {
         return;
       } else {
@@ -4794,7 +4828,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   }, function (data) {
                     moment.scrollBusy = false;
                     moment.stopCallingApi = false;
-                    cfpLoadingBar.complete();
+                    // cfpLoadingBar.complete();
                   });
                 }
               }
@@ -4817,7 +4851,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 moment.scrollBusy = false;
                 moment.stopCallingApi = false;
                 --moment.pageNo;
-                cfpLoadingBar.complete();
+                // cfpLoadingBar.complete();
               });
               break;
             default:
@@ -4827,7 +4861,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     $scope.getMorePhotos = function (album) {
-      cfpLoadingBar.start();
+      // cfpLoadingBar.start();
       console.log(album);
       if (album.scrollBusy) {
         return;
@@ -4854,12 +4888,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 album.scrollBusy = false;
                 album.stopCallingApi = false;
                 --album.pageNo;
-                cfpLoadingBar.complete();
+                // cfpLoadingBar.complete();
               });
               break;
             case 'all':
             case 'local':
-            // cfpLoadingBar.start();
+              // cfpLoadingBar.start();
               console.log("getPerMonthMoments called by scrolling");
               MyLife.getPerMonthMoments(album.token, album.pageNo, 24, album.type, function (data) {
                 album.scrollBusy = false;
@@ -4925,93 +4959,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.showMonthView();
     };
 
+    $scope.allPhotos = {};
+    $scope.allPhotos.photoSliderIndex = "";
+    $scope.allPhotos.photoSliderLength = "";
+    $scope.allPhotos.newArray = [];
     //Photo comment popup
-    // var scroll = {
-    //   'scrollBusy': false,
-    //   'stopCallingApi': false
-    // };
-    // $scope.listOfComments = {};
-    // $scope.getPhotosCommentData = function (photoId) {
-    //   console.log(photoId, "click function called");
-    //   modal = $uibModal.open({
-    //     templateUrl: "views/modal/notify.html",
-    //     animation: true,
-    //     scope: $scope,
-    //     windowClass: "notify-popup"
-    //   });
-    //   modal.closed.then(function () {
-    //     $scope.listOfComments = {};
-    //   });
-    //   var callback = function (data) {
-    //     $scope.listOfComments = data.data;
-    //     scroll.scrollBusy = false;
-    //     scroll.pageNo = 1;
-    //     if (data.data && data.data.comment.length == 0) {
-    //       scroll.stopCallingApi = true;
-    //     };
-    //   };
-    //   scroll.scrollBusy = true;
-    // LikesAndComments.getPhotoBannerDetails(photoId, 1, callback);
-    // };
-
-    // $scope.postPhotosComment = function (uniqueId, comment, postId, photoId) {
-    //   console.log(uniqueId, comment, postId, photoId);
-    //   var type = "photo";
-    //   var hashTag = [];
-    //   var callback = function (data) {
-    //     $scope.listOfComments.comment = data.data.comment;
-    //     document.getElementById('enterComment').value = "";
-    //   }
-    //   LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, photoId, callback);
-    // };
-
-    // $scope.getMoreComments = function (photoId) {
-    //   console.log(scroll, photoId);
-    //   if (scroll.scrollBusy) {
-    //     return;
-    //   } else {
-    //     if (scroll.stopCallingApi) {
-    //       return;
-    //     } else {
-    //       scroll.scrollBusy = true;
-    //       LikesAndComments.getPhotoBannerDetails(photoId, ++scroll.pageNo, function (data) {
-    //         scroll.scrollBusy = false;
-    //         if (data.value) {
-    //           if (data.data && data.data.comment.length != 0) {
-    //             _.each(data.data.comment, function (n) {
-    //               $scope.listOfComments.comment.push(n);
-    //             });
-    //           } else {
-    //             scroll.stopCallingApi = true;
-    //           }
-    //         } else {
-    //           console.log("Error:", data.data);
-    //         }
-    //       });
-    //     }
-    //   }
-    // };
-    //Photo comment popup end
-
-    // $scope.likePhoto = function (uniqueId, _id, additionalId) {
-    //   console.log(uniqueId, _id, additionalId);
-    //   $scope.listOfComments.likeDone = !$scope.listOfComments.likeDone;
-    //   if ($scope.listOfComments.likeDone) {
-    //     if ($scope.listOfComments.likeCount == undefined) {
-    //       $scope.listOfComments.likeCount = 1;
-    //     } else {
-    //       $scope.listOfComments.likeCount = $scope.listOfComments.likeCount + 1;
-    //     }
-    //     LikesAndComments.likeUnlike("photo", "like", uniqueId, _id, additionalId)
-    //   } else {
-    //     $scope.listOfComments.likeCount = $scope.listOfComments.likeCount - 1;
-    //     LikesAndComments.likeUnlike("photo", "unlike", uniqueId, _id, additionalId)
-    //   }
-    // };
-
-    //Photo comment popup
-    $scope.getPhotosCommentData = function (photoId) {
+    $scope.getPhotosCommentData = function (photoId, index, length, array) {
+      console.log(index);
+      console.log(length);
+      console.log(array);
       console.log(photoId, "click function called");
+      $scope.allPhotos.photoSliderIndex = index;
+      $scope.allPhotos.photoSliderLength = length;
+      $scope.allPhotos.newArray = array;
       modal = $uibModal.open({
         templateUrl: "views/modal/notify.html",
         animation: true,
@@ -5027,7 +4987,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Photo comment popup end
 
     $scope.getJournItiMoments = function (obj) {
-      cfpLoadingBar.start();
+      // cfpLoadingBar.start();
       // $scope.perMonthMoments = [];
       console.log("getJournItiMoments called by ng-click");
       $scope.token = obj.name;
@@ -5049,7 +5009,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // $scope.albumPageNo = 1;
       MyLife.getJournItiMoments(obj._id, 1, 24, $scope.album.type, viewMonthDataCallback, function (data) {
         console.log(data);
-        cfpLoadingBar.complete();
+        // cfpLoadingBar.complete();
       });
       $scope.showMonthView();
     };
@@ -5244,7 +5204,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.getMoreReviews = function (object, flag) {
-      cfpLoadingBar.start();
+      // cfpLoadingBar.start();
       console.log("getReviews called from getMoreReviews");
       if (object.country && object._id && object.pageNo) {
         if (object.scrollBusy) {
@@ -5272,7 +5232,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   object.scrollBusy = false;
                   object.stopCallingApi = false;
                   --object.pageNo;
-                  cfpLoadingBar.complete();
+                  // cfpLoadingBar.complete();
                 });
                 break;
               case 'local-life':
@@ -5292,7 +5252,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   object.scrollBusy = false;
                   object.stopCallingApi = false;
                   --object.pageNo;
-                  cfpLoadingBar.complete();
+                  // cfpLoadingBar.complete();
                 });
                 break;
             }
@@ -5305,7 +5265,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     $scope.goToAccordian = function (review, showType) {
-      cfpLoadingBar.start();
+      // cfpLoadingBar.start();
       $scope[showType] = true;
       switch (showType) {
         case 'viewTravelCountry':
@@ -5315,7 +5275,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           MyLife.getCities(review._id, function (data) {
             // review.cities = data.data;
             $scope.citiesTravelled.cities = data.data;
-            cfpLoadingBar.complete();
+            // cfpLoadingBar.complete();
           });
           break;
         case 'viewLocalCountry':
@@ -5325,7 +5285,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           MyLife.getCategories(review._id, function (data) {
             // review.categories = data.data;
             $scope.categoryList.categories = data.data;
-            cfpLoadingBar.complete();
+            // cfpLoadingBar.complete();
           });
           console.log($scope.categoryList);
           break;
@@ -5356,7 +5316,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   }
     // };
     $scope.openAccordian = function (object, openAccordian, flag) {
-      cfpLoadingBar.start();
+      // cfpLoadingBar.start();
       console.log("getReviewsWeb called from openAccordian");
       object.pageNo = 1;
       object.scrollBusy = false;
@@ -5367,20 +5327,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           case 'travel-life':
             MyLife.getReviewsByCities(object.country, object._id, object.pageNo, function (data) {
               object.accordReview = data.data;
-              cfpLoadingBar.complete();
+              // cfpLoadingBar.complete();
             });
             break;
           case 'local-life':
             MyLife.getReviewsByCategories(object.city, object._id, object.pageNo, function (data) {
               object.accordReview = data.data;
-              cfpLoadingBar.complete();
+              // cfpLoadingBar.complete();
             });
             break;
         }
       } else {}
     };
     $scope.savePostReview = function (values) {
-      cfpLoadingBar.start();
+      // cfpLoadingBar.start();
       console.log(values, wholePost);
       var obj = {
         "post": wholePost._id,
@@ -5400,7 +5360,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           console.log(wholePost);
           modal.close();
         } else {}
-        cfpLoadingBar.complete();
+        // cfpLoadingBar.complete();
       })
     };
 
@@ -5498,8 +5458,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.$on('scrollbar.show', function () {
       // console.log('Scrollbar show');
     });
-
-
     $scope.openLocalimg = function (getVal) {
       // $scope.showimgData = $scope.localLife[getVal];
       $scope.showimgData = getVal;
@@ -5523,6 +5481,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.scroll.busy = false;
         }, 500);
       });
+      console.log($scope.travelLife);
       if ($scope.travelLife.length == 0) {
         $scope.hasJourney = false;
       } else {
@@ -5970,7 +5929,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // local life end
   })
 
-  .controller('JourneyCtrl', function ($scope, TemplateService, NavigationService,cfpLoadingBar, $timeout, $uibModal) {
+  .controller('JourneyCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("journey");
@@ -6448,7 +6407,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
 
   })
-  .controller('SettingCtrl', function ($scope, TemplateService, NavigationService,cfpLoadingBar, $timeout, DataUriToBlob) {
+  .controller('SettingCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, DataUriToBlob) {
     //Used to name the .html file
     $scope.profile = $.jStorage.get("profile");
     $scope.userData = _.clone($scope.profile);
@@ -6805,12 +6764,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // page 2 integration ends
 
     $scope.editUserData = function (userData, status, valid) {
-      cfpLoadingBar.start();
+      // cfpLoadingBar.start();
       console.log(valid);
       if (valid) {
         NavigationService.editUserData(userData, status, function (data) {
           if (data.value) {
-            NavigationService.getProfile(function (data, status) {
+            NavigationService.getProfile($.jStorage.get("profile").urlSlug, function (data, status) {
               if (data.data._id) {
                 $.jStorage.set("isLoggedIn", true);
                 $.jStorage.set("profile", data.data);
@@ -6825,7 +6784,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           } else {
 
           }
-          cfpLoadingBar.complete();
+          // cfpLoadingBar.complete();
         });
       } else {
         alert("fields invalid");
@@ -6843,7 +6802,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             'profilePicture': $scope.userData.profilePicture
           }, function (data) {
             $scope.showImage = false;
-            NavigationService.getProfile(globalGetProfile, function () {
+            NavigationService.getProfile($.jStorage.get("profile").urlSlug, globalGetProfile, function () {
               console.log("error");
             });
           });
@@ -7618,7 +7577,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('ActivityTestCtrl', function ($scope, TemplateService, NavigationService,cfpLoadingBar, Activity, LikesAndComments, $timeout, $http, $uibModal) {
+  .controller('ActivityTestCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, Activity, LikesAndComments, $timeout, $http, $uibModal) {
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("activitytest");
     $scope.menutitle = NavigationService.makeactive("Activity");
@@ -7648,7 +7607,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
 
     $scope.getMoreActivities = function () {
-      cfpLoadingBar.start();
+      // cfpLoadingBar.start();
       console.log("scroll event");
       if (scroll.scrollBusy) {
         return;
@@ -7671,15 +7630,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             scroll.scrollBusy = false;
             scroll.stopCallingApi = false;
             --scroll.pageNo;
-            cfpLoadingBar.complete();
+            // cfpLoadingBar.complete();
           })
         }
       }
     };
 
     //Photo comment popup
-    $scope.getPhotosCommentData = function (photoId) {
+    $scope.allPhotos = {};
+    $scope.allPhotos.photoSliderIndex = "";
+    $scope.allPhotos.photoSliderLength = "";
+    $scope.allPhotos.newArray = [];
+    //Photo comment popup
+    $scope.getPhotosCommentData = function (photoId, index, length, array) {
+      console.log(index);
+      console.log(length);
+      console.log(array);
       console.log(photoId, "click function called");
+      $scope.allPhotos.photoSliderIndex = index;
+      $scope.allPhotos.photoSliderLength = length;
+      $scope.allPhotos.newArray = array;
       modal = $uibModal.open({
         templateUrl: "views/modal/notify.html",
         animation: true,
@@ -8486,7 +8456,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, MyLife, $uibModal) {
+  .controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, MyLife, $uibModal, $state) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -8495,6 +8465,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("ProfileList");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.allowAccess = $.jStorage.get("allowAccess");
+    if ($.jStorage.get("activeUrlSlug") != "" && $.jStorage.get("activeUrlSlug") != null) {
+      $scope.activeUrlSlug = $.jStorage.get("activeUrlSlug");
+    } else {
+      $scope.activeUrlSlug = $.jStorage.get("profile").urlSlug;
+    }
+    console.log($scope.activeUrlSlug);
 
     // click background close
     $scope.getDropdown = function (model) {
@@ -8654,9 +8631,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.visited = [];
     };
 
-
-
-
     $scope.searchList = [];
     $scope.searchFriend = {
       'name': ''
@@ -8668,13 +8642,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       'open': ''
     };
     $scope.changeStatus = function (status, results) {
-      $stateParams.active = status;
       $scope.activeMenu = status;
       $scope.searchList = results;
       $scope.searchFriend.name = "";
       $scope.searchCard.name = "";
       $scope.searchUser.open = false;
-      console.log(results);
+      // console.log(results);
+      // $state.go('ProfileList', {
+      //   active: status
+      // });
+      $state.go("ProfileList", {
+        active: status,
+        urlSlug: $scope.activeUrlSlug
+      }, {
+        location: true,
+        notify: false,
+        reload: false
+      })
     };
 
     $scope.testingDropDown = function (name) {
@@ -10183,6 +10167,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       }
     };
+
+    $scope.nextPhotoSlide = function (slideData) {
+      console.log(slideData);
+      slideData.photoSliderIndex++;
+      var nextId = slideData.newArray[slideData.photoSliderIndex]._id;
+      console.log(nextId, 'next id');
+      console.log(slideData.photoSliderIndex, 'next slide');
+      LikesAndComments.openPhotoPopup(nextId, $scope);
+      // $scope.getPhotosCommentData = function(nextId,index,length,array) {
+      // };
+    };
+    $scope.prevPhotoSlide = function (slideData) {
+      console.log(slideData);
+      slideData.photoSliderIndex--;
+      var prevId = slideData.newArray[slideData.photoSliderIndex]._id;
+      console.log(prevId, 'prev id');
+      console.log(slideData.photoSliderIndex, 'prev slide');
+      LikesAndComments.openPhotoPopup(prevId, $scope);
+    }
   })
 
   .controller('UserQuickItineraryCtrl', function ($scope, TemplateService, NavigationService, LikesAndComments, $timeout, $stateParams, $uibModal, Itinerary) {
@@ -10232,8 +10235,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Itinerary Options List Show End
 
     //Photo comment popup
-    $scope.getPhotosCommentData = function (photoId) {
+    $scope.allPhotos = {};
+    $scope.allPhotos.photoSliderIndex = "";
+    $scope.allPhotos.photoSliderLength = "";
+    $scope.allPhotos.newArray = [];
+    //Photo comment popup
+    $scope.getPhotosCommentData = function (photoId, index, length, array) {
+      console.log(index);
+      console.log(length);
+      console.log(array);
       console.log(photoId, "click function called");
+      $scope.allPhotos.photoSliderIndex = index;
+      $scope.allPhotos.photoSliderLength = length;
+      $scope.allPhotos.newArray = array;
       modal = $uibModal.open({
         templateUrl: "views/modal/notify.html",
         animation: true,
@@ -10601,8 +10615,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     //Photo comment popup
-    $scope.getPhotosCommentData = function (photoId) {
+    $scope.allPhotos = {};
+    $scope.allPhotos.photoSliderIndex = "";
+    $scope.allPhotos.photoSliderLength = "";
+    $scope.allPhotos.newArray = [];
+    //Photo comment popup
+    $scope.getPhotosCommentData = function (photoId, index, length, array) {
+      console.log(index);
+      console.log(length);
+      console.log(array);
       console.log(photoId, "click function called");
+      $scope.allPhotos.photoSliderIndex = index;
+      $scope.allPhotos.photoSliderLength = length;
+      $scope.allPhotos.newArray = array;
       modal = $uibModal.open({
         templateUrl: "views/modal/notify.html",
         animation: true,
@@ -11331,36 +11356,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.search.searchType = "";
     $scope.search.viewData = false;
 
-    $(window).load(function(){
-    var loading =  setInterval(function(){
+    $(window).load(function () {
+      var loading = setInterval(function () {
         var elementExists = document.getElementById("loader");
-        if(elementExists){
+        if (elementExists) {
           $('.travelibro-loader').parent().addClass('loader-blur');
-        }else {
+        } else {
           $('body').removeClass('loader-blur');
           clearInterval(loading);
         };
-      },200);
+      }, 200);
     });
 
 
+    if ($.jStorage.get("profile") != null && $.jStorage.get("profile") != "") {
+      console.log("found");
+      NavigationService.getProfile($.jStorage.get("profile").urlSlug, function (data, status) {
+        if (data.data._id) {
+          $.jStorage.set("isLoggedIn", true);
+          $.jStorage.set("profile", data.data);
+          $scope.userData = $.jStorage.get("profile");
+        } else {
+          // $state.go('login');
+          $.jStorage.set("profile", "");
+        }
+      }, function (err) {
+        console.log(err);
+      });
+    } else {
+      console.log("not found");
+    }
 
-    NavigationService.getProfile(function (data, status) {
-      if (data.data._id) {
-        $.jStorage.set("isLoggedIn", true);
-        $.jStorage.set("profile", data.data);
-      } else {
-        // $state.go('login');
-        $.jStorage.flush();
-      }
-    }, function (err) {
-      console.log(err);
-    });
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
-    // if (!$scope.isLoggedIn) {
-    //   $state.go('login');
-    // }
-    $scope.userData = $.jStorage.get("profile");
     $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
       $(window).scrollTop(0);
     });

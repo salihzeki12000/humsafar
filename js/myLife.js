@@ -167,20 +167,11 @@ var mylife = angular.module('mylife', [])
           } else {
             hasJourney = true;
             var journeys = data.data;
-
-            var i = 0;
-            _.each(journeys, function (n) {
-              journeys[i].start_Time = {};
+            _.each(journeys, function (n, index) {
+              journeys[index].start_Time = {};
               if (n.onGoing === true || n.onGoing === false) {
-                journeys[i].onJourney = false;
+                journeys[index].onJourney = false;
               }
-              journeys[i].showRemainingCount = false;
-              // console.log(n);
-              if (n.countryVisited.length >= 3) {
-                journeys[i].showRemainingCount = true;
-              }
-              journeys[i].remainingCount = n.countryVisited.length - 3;
-              i++;
               switch (journeys.type) {
                 case "travel-life":
                   activity.likeUnlikeFlag = "post";
@@ -195,7 +186,6 @@ var mylife = angular.module('mylife', [])
                   break;
               }
             });
-            // console.log(journeys);
             callback(journeys);
           }
         }).error(function (data) {
@@ -207,7 +197,8 @@ var mylife = angular.module('mylife', [])
           "token": token,
           "limit": limit,
           "type": type,
-          "times": times
+          "times": times,
+          "urlSlug": $.jStorage.get("activeUrlSlug")
         };
         TravelibroService.http({
           url: adminURL + "/journey/myLifeMomentWeb",
@@ -218,7 +209,8 @@ var mylife = angular.module('mylife', [])
       getTravelLifeMoments: function (type, pageNo, successCallback, errorCallback) { //for travel-life
         var obj = {
           "type": type,
-          "pagenumber": pageNo
+          "pagenumber": pageNo,
+          "urlSlug": $.jStorage.get("activeUrlSlug")
         };
         TravelibroService.http({
           url: adminURL + "/journey/myLifeMomentWeb",
@@ -231,7 +223,8 @@ var mylife = angular.module('mylife', [])
         var obj = {
           "token": token,
           "pagenumber": pageNo,
-          "limit": limit
+          "limit": limit,
+          "urlSlug": $.jStorage.get("activeUrlSlug")
         };
         if (flag == 'local') {
           obj.type = true;
@@ -250,7 +243,8 @@ var mylife = angular.module('mylife', [])
         var obj = {
           "_id": _id,
           "pagenumber": pagenumber,
-          "limit": limit
+          "limit": limit,
+          "urlSlug": $.jStorage.get("activeUrlSlug")
         };
         if (flag == 'itinerary') {
           url = "/itinerary/getMedia";
@@ -266,7 +260,8 @@ var mylife = angular.module('mylife', [])
       getAllReviews: function (type, pageNo, successCallback, errorCallback) {
         var obj = {
           "type": type,
-          "pagenumber": pageNo
+          "pagenumber": pageNo,
+          "urlSlug": $.jStorage.get("activeUrlSlug")
         };
         TravelibroService.http({
           url: adminURL + "/journey/myLifeReviewWeb",
@@ -278,7 +273,8 @@ var mylife = angular.module('mylife', [])
         TravelibroService.http({
           url: adminURL + "/post/getReviewByLocWeb",
           data: {
-            'country': countryId
+            'country': countryId,
+            "urlSlug": $.jStorage.get("activeUrlSlug")
           },
           method: "POST"
         }).success(callback).error(function (data) {
@@ -289,7 +285,8 @@ var mylife = angular.module('mylife', [])
         var obj = {
           "country": countryId,
           "city": cityId,
-          "pagenumber": pageNo
+          "pagenumber": pageNo,
+          "urlSlug": $.jStorage.get("activeUrlSlug")
         };
         TravelibroService.http({
           url: adminURL + "/post/getReviewsWeb",
@@ -301,7 +298,8 @@ var mylife = angular.module('mylife', [])
         TravelibroService.http({
           url: adminURL + "/post/getReviewByLocWeb",
           data: {
-            'city': cityId
+            'city': cityId,
+            "urlSlug": $.jStorage.get("activeUrlSlug")
           },
           method: "POST"
         }).success(callback).error(function (data) {
@@ -312,7 +310,8 @@ var mylife = angular.module('mylife', [])
         var obj = {
           "city": cityId,
           "category": category,
-          "pagenumber": pageNo
+          "pagenumber": pageNo,
+          "urlSlug": $.jStorage.get("activeUrlSlug")
         };
         TravelibroService.http({
           url: adminURL + "/post/getReviewsWeb",

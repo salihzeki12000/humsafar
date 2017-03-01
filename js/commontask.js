@@ -4,43 +4,47 @@ var commontask = angular.module('commontask', [])
 
     var returnVal = {
       getHashTags: function (commentString, callback) {
-        var len = commentString.length;
-        var counter = 0;
-        var startIndex = null;
-        var endIndex = null;
-        var i;
-        var tag;
-        var hashTag = [];
-        while (counter != len - 1) {
-          if (commentString[counter] == "#") {
-            startIndex = counter;
-            i = startIndex + 1;
-            while (i <= len) {
-              if (commentString[i] == " " || commentString[i] == "#" || commentString[i] == "@") {
-                endIndex = i - 1;
-                console.log(startIndex, endIndex);
-                tag = commentString.substring(startIndex, endIndex + 1);
-                hashTag.push(tag);
-                console.log(tag);
-                break;
-              } else if (i == commentString.length - 1) {
-                endIndex = i;
-                console.log(startIndex, endIndex);
-                tag = commentString.substring(startIndex, endIndex + 1);
-                hashTag.push(tag);
-                console.log(tag);
-                break;
+        if (_.trim(commentString) != "") {
+          var len = commentString.length;
+          var counter = 0;
+          var startIndex = null;
+          var endIndex = null;
+          var i;
+          var tag;
+          var hashTag = [];
+          while (counter != len - 1) {
+            if (commentString[counter] == "#") {
+              startIndex = counter;
+              i = startIndex + 1;
+              while (i <= len) {
+                if (commentString[i] == " " || commentString[i] == "#" || commentString[i] == "@") {
+                  endIndex = i - 1;
+                  console.log(startIndex, endIndex);
+                  tag = commentString.substring(startIndex, endIndex + 1);
+                  hashTag.push(tag);
+                  console.log(tag);
+                  break;
+                } else if (i == commentString.length - 1) {
+                  endIndex = i;
+                  console.log(startIndex, endIndex);
+                  tag = commentString.substring(startIndex, endIndex + 1);
+                  hashTag.push(tag);
+                  console.log(tag);
+                  break;
+                }
+                i++;
               }
-              i++;
+              // console.log(hashTag);
             }
-            // console.log(hashTag);
+            counter++;
           }
-          counter++;
+          hashTag = _.remove(hashTag, function (n) {
+            return !(n == "#" || n == "@");
+          });
+          callback(hashTag);
+        } else {
+          callback([]);
         }
-        hashTag = _.remove(hashTag, function (n) {
-          return !(n == "#" || n == "@");
-        });
-        callback(hashTag);
       },
       postComment: function (type, uniqueId, type_Id, comment, hashTag, additionalId, callback) { //type_id=postId,journeyId,ItineraryId
         console.log("inside LikesAndComments");
@@ -157,6 +161,7 @@ var commontask = angular.module('commontask', [])
           case "travel-life":
           case "local-life":
             console.log("like type:----post");
+            obj.post = type_id;
             url = "/post/updateLikePostWeb";
             break;
           case "on-the-go-journey":

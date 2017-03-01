@@ -1,5 +1,5 @@
 var adminURL = "";
-
+var allowAccess = "";
 if (isproduction) {
   adminURL = "http://www.wohlig.co.in/demo/index.php";
 } else {
@@ -46,7 +46,6 @@ var navigationservice = angular.module('navigationservice', [])
       name: "Bookings",
       classis: "active",
       disabled: false,
-      anchor: "booking",
       subnav: [{
         name: "Flights",
         classis: "active",
@@ -126,6 +125,7 @@ var navigationservice = angular.module('navigationservice', [])
         }).success(callback).error(errCallback);
       },
       getProfile: function (slug, callback, errCallback) {
+        console.log(slug);
         return TravelibroService.http({
           url: adminURL + "/user/getOneDataWeb",
           data: {
@@ -258,6 +258,15 @@ var navigationservice = angular.module('navigationservice', [])
         }).error(function (data) {
           console.log(data);
         });
+      },
+      getSendEmail: function (emailid, callback, errCallback) {
+        TravelibroService.http({
+          url: adminURL + "/user/forgotPassword",
+          data: {
+            'email': emailid
+          },
+          method: "POST"
+        }).success(callback).error(errCallback);
       },
       acceptJourneyNotify: function (formData, callback) {
         TravelibroService.post(adminURL + "/journey/buddyAcceptWeb", formData).success(function (data) {

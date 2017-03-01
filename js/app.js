@@ -368,7 +368,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'ComingSoonCtrl'
     })
     .state('ProfileList', {
-      url: "/profile-list/:active",
+      url: "/profile-list/:active/:urlSlug",
       templateUrl: "views/template.html",
       controller: 'ProfileListCtrl'
     });
@@ -964,6 +964,8 @@ firstapp.filter('typeOfPost', function () {
       color = 'red_';
     } else if (type == 'local-life') {
       color = "cyan_";
+    } else if (type == 'local-post') {
+      color = "local-";
     }
     if (post && post.checkIn && post.checkIn.location) {
       return "img/typeOfPost/" + color + "location.png";
@@ -1384,3 +1386,27 @@ firstapp.directive('hideOnScroll', function ($document) {
     }
   };
 });
+
+firstapp.directive('uiSrefIf', function ($compile) {
+  return {
+    scope: {
+      val: '@uiSrefVal',
+      if: '=uiSrefIf'
+    },
+    link: function ($scope, $element, $attrs) {
+      $element.removeAttr('ui-sref-if');
+      // $compile($element)($scope);
+
+      $scope.$watch('if', function (bool) {
+        console.log(bool);
+        if (bool) {
+          $element.attr('ui-sref', $scope.val);
+        } else {
+          $element.removeAttr('ui-sref');
+          $element.removeAttr('href');
+        }
+        $compile($element)($scope);
+      });
+    }
+  };
+})

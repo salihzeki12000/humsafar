@@ -4,7 +4,7 @@
     <div class="all-profile-detail">
       <div class="bg-white">
         <!-- journey travel-life -->
-        <div class="journey-tabs" ng-show="showTravellife">
+        <div class="journey-tabs" ng-if="showTravellife">
           <!-- tabs -->
           <div class="profile-tabs" id="tabs">
             <span class="first-strip"></span>
@@ -52,7 +52,7 @@
           </div>
           <!--End of switch Travel life and local life-->
           <!-- user logged for first time -->
-          <div class="empty-profile-journey" ng-hide="hasJourney">
+          <div class="empty-profile-journey" ng-if="!hasJourney">
             <div class="row">
               <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10">
                 <div class="row">
@@ -94,7 +94,8 @@
                       <h3 class="color-pink">My Tales &amp; Trails</h3>
                       <div class="empty-ongo">
                         <h4>On-the-Go Journeys</h4>
-                        <p class="empty-descp">Capture your journeys and activities whether local or global, creating a beautiful timeline and relive these treasured experiences of your past.</p>
+                        <p class="empty-descp">Capture your journeys and activities whether local or global, creating a beautiful timeline and relive
+                          these treasured experiences of your past.</p>
                       </div>
                       <div class="empty-chronicling">
                         <h4>Chronicling Past Travels</h4>
@@ -116,11 +117,11 @@
                     <div class="journey-masonry-brick" ng-if="life.type=='ended-journey' || life.type=='on-the-go-journey'">
                       <div class="travel-life-part avenir-roman">
                         <div class="travel-journey-heading">
-                          <p ng-if="life.type=='ended-journey'">Has ended <span ng-if="life.user.gender=='male'">his</span><span ng-if="life.user.gender=='female'">her</span> Journey</p>
-                          <p ng-if="life.type=='on-the-go-journey'">Has started <span ng-if="life.user.gender=='male'">his</span><span ng-if="life.user.gender=='female'">her</span> Journey</p>
+                          <p ng-if="life.type=='ended-journey'">Has ended <span ng-if="life.user.gender=='male'">his</span><span ng-if="life.user.gender=='female'">her</span>                            Journey</p>
+                          <p ng-if="life.type=='on-the-go-journey'">Has started <span ng-if="life.user.gender=='male'">his</span><span ng-if="life.user.gender=='female'">her</span>                            Journey</p>
                           <p ng-hide="life.onJourney">{{life.heading}}</p>
                           <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
-                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span> <span>{{life.timestampHour}}</span></p>
+                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p>
                         </div>
                         <!--jounrey main detail card-->
                         <div class="travelled-journey relate" ng-click="routeTO(life.type,life.urlSlug)">
@@ -131,7 +132,6 @@
                           <div class="country-badges">
                             <div class="country-visited" ng-repeat="visit in life.countryVisited | limitTo : 3">
                               <img ng-src="{{visit.country.flag|uploadpath:30:30:'cover'}}" alt="" height="30">
-                              <!--<span ng-show="life.showRemainingCount" class="">+{{life.remainingCount}}</span>-->
                             </div>
                             <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
                           </div>
@@ -201,8 +201,8 @@
                                     <i class="fa color-blue card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound></i>
                                     <span></span>
                                     <audio id="like-play">
-                                  <source src="img/tiny1.mp3" type="audio/mp3">
-                                </audio>
+                                      <source src="img/tiny1.mp3" type="audio/mp3">
+                                    </audio>
                                   </a>
                                 </li>
                                 <li>
@@ -262,7 +262,7 @@
                         <div class="travel-journey-heading">
                           <p ng-hide="life.onJourney">{{life.heading}}</p>
                           <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
-                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span> <span>{{life.timestampHour}}</span></p>
+                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p>
                         </div>
                         <!--for itinerary card main-->
                         <div class="onway-journey relate" ng-click="routeTO(life.type,life.urlSlug)">
@@ -275,7 +275,6 @@
                           <div class="country-badges">
                             <div class="country-visited" ng-repeat="visit in life.countryVisited | limitTo : 3">
                               <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30">
-                              <!--<span ng-show="life.showRemainingCount" class="">+{{life.remainingCount}}</span>-->
                             </div>
                             <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
                             <!-- <div class="country-visited">
@@ -376,7 +375,7 @@
         </div>
         <!-- end journey travel-life -->
         <!-- journey local life -->
-        <div class="journey-tabs" ng-hide="showTravellife">
+        <div class="journey-tabs" ng-if="!showTravellife">
           <!-- tabs -->
           <div class="profile-tabs">
             <span class="first-strip"></span>
@@ -423,7 +422,7 @@
             </div>
           </div>
           <!-- user logged for first time local life-->
-          <div class="empty-profile-journey" ng-show="showLocalLife">
+          <div class="empty-profile-journey" ng-if="showLocalLife">
             <div class="row">
               <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10">
                 <div class="row">
@@ -463,7 +462,8 @@
                         <img src="img/profile-empty/local-empty.png" alt="" class="img-responsive inline-block">
                       </div>
                       <h3 class="color-cyan">Life In The City</h3>
-                      <p class="empty-descp">Candid, fun moments with friends, happy family get-togethers, some precious ‘me-time’…share your love for your city and inspire others to do the same. Cherish your local life memories eternally.</p>
+                      <p class="empty-descp">Candid, fun moments with friends, happy family get-togethers, some precious ‘me-time’…share your love
+                        for your city and inspire others to do the same. Cherish your local life memories eternally.</p>
                     </div>
                   </div>
                 </div>
@@ -628,10 +628,11 @@
                   </div>
                 </div>
                 <div class="scroll-local-life scrollme" ng-scrollbar rebuild-on="rebuild:me" rebuild-on-resize ng-if="viewLocal">
-                  <div class="local-post" infinite-scroll="getMoreLocalPost();" infinite-scroll-disabled='scroll2.busy' infinite-scroll-distance='1' >
-                    <div class="" ng-if="localView.view">
+                  <div class="local-post" infinite-scroll="getMoreLocalPost();" infinite-scroll-disabled='scroll2.busy' infinite-scroll-distance='1'>
+                    <div class="local-postbox" ng-if="localView.view">
                       <!-- local life data -->
-                      <post-local-life ng-repeat="localPost in localLifeJourney track by $index" ongolocal="localPost" local-view="localView" open-comment-section="openCommentSection(ongolocal)" open-like-section="openLikeSection(ongolocal)">
+                      <post-local-life ng-repeat="localPost in localLifeJourney track by $index" ongolocal="localPost" local-view="localView" open-comment-section="openCommentSection(ongolocal)"
+                        open-like-section="openLikeSection(ongolocal)">
                       </post-local-life>
                       <!-- local life data end-->
                     </div>
@@ -714,7 +715,7 @@
                           <div class="like-reply-line">
                             <!--<span class="color-blue avenir-roman mr5 pointer">Like</span>-->
                             <!--<span class="color-blue avenir-roman mr5 pointer">Reply</span>-->
-                            <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span> | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
+                            <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                            | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
                           </div>
                         </div>
                       </div>
