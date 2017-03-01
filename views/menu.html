@@ -1,12 +1,5 @@
 <div class="accordion-custom">
   <uib-accordion close-others="oneAtATime">
-    <!--<uib-accordion-group>
-      <uib-accordion-heading>
-        <a class="color-white main-menu-anchor" ng-click="getnav();">
-          <i class="fa fa-close"></i>
-        </a>
-      </uib-accordion-heading>
-    </uib-accordion-group>-->
         <uib-accordion-group is-disabled="menu.disabled" class="visible-xs" ng-hide="isLoggedIn">
       <uib-accordion-heading>
         <a class="color-white main-menu-anchor" ui-sref="login">
@@ -16,7 +9,10 @@
     </uib-accordion-group>
     <uib-accordion-group is-open="status.open" ng-repeat="menu in navigation track by $index" class="{{menu.classis}}" is-disabled="menu.disabled">
       <uib-accordion-heading>
-        <a ui-sref="{{menu.anchor}}" class="color-white main-menu-anchor">{{menu.name}}
+        <a ui-sref="{{menu.anchor}}" class="color-white main-menu-anchor" ng-if="menu.anchor">{{menu.name}}
+                    <i class="pull-right fa icon color-white" ng-class="{'fa-caret-up':( status.open && !menu.disabled), 'fa-caret-down': (!status.open && !menu.disabled)}"></i>
+        </a>
+                <a  class="color-white main-menu-anchor" ng-if="menu.subnav">{{menu.name}}
                     <i class="pull-right fa icon color-white" ng-class="{'fa-caret-up':( status.open && !menu.disabled), 'fa-caret-down': (!status.open && !menu.disabled)}"></i>
         </a>
       </uib-accordion-heading>

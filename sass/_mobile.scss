@@ -569,6 +569,10 @@
     min-height: 140px;
 } 
 }
+
+.local-post {
+    padding: 30px;
+}
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -1613,6 +1617,16 @@ img {
   .img-backholder {
     min-height: inherit;
 } 
+}
+//error 404
+.error-msg {
+    left: 50%;
+    width: 80%;
+    text-align: center;
+}
+//comingsoon
+.comingsoon-content {
+  width: 90%;
 }
 }
 // media query for 767px to 480px end

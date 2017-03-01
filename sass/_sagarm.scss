@@ -4432,6 +4432,9 @@ q {
 .email-form{
   // border: 1px solid #fff;
   border-radius: 5px;
+  input{
+    color: #fff;
+  }
   .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group{
     margin-left: 0;
   }
@@ -4444,6 +4447,9 @@ q {
 .btn-comingsoon{
   background-color: transparent;
   color: $brand-grey;
+  i{
+      color: $brand-grey;
+  }
   &:active, &:focus, &:hover{
     background-color: transparent;
     color: $brand-grey;

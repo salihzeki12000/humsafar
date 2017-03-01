@@ -61,9 +61,9 @@
                       <div class="mobile-gif">
                         <img src="img/profile-empty/gif-mobile.png" alt="GIF Travelibro" class="img-responsive">
                       </div>
-                      <div class="videoplay-empty-journey">
-                        <video width="238px" height="100%" ng-if="showTravellife == false" autoplay>
-                          <source src="img/libro-home/video/Travel_life.mp4" type="video/mp4">
+                        <div class="videoplay-empty-journey">
+                        <video width="238px" height="100%" autoplay>
+                          <source src="https://storage.googleapis.com/intro-videos/locallife.mp4" type="video/mp4">
                         </video>
                       </div>
                       <div class="journey-downloadicon">
@@ -431,9 +431,9 @@
                       <div class="mobile-gif">
                         <img src="img/profile-empty/gif-mobile.png" alt="GIF Travelibro" class="img-responsive">
                       </div>
-                      <div class="videoplay-empty-journey">
-                        <video width="238px" height="100%" ng-if="showTravellife == true" autoplay>
-                          <source src="img/libro-home/video/Local_life.mp4" type="video/mp4">
+                      <div class="videoplay-empty-journey" ng-if="!hasJourney">
+                        <video width="238px" height="100%"  autoplay id="video">
+                          <source src="https://storage.googleapis.com/intro-videos/travellife.mp4" type="video/mp4">
                         </video>
                       </div>
                       <div class="journey-downloadicon">
