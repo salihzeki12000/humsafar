@@ -1,9 +1,9 @@
 <div class="user-itinerary-page user-detailitinerary-page relate">
-  <div class="user-banner-holder relate" scrolldown style="background-image: url('{{itinerary.itineraryType|itineraryType}}')">
+  <div class="user-banner-holder relate" scrolldown style="background-image: url('../{{itinerary.itineraryType[0]|itineraryType}}')">
     <div class="overlay-itinerary-bg"></div>
-    <div class="publish-notification-strip">
+    <div class="publish-notification-strip" hidden>
       <div class="">
-        <p class="noti-strip-txt">Mohnish added you to this itinerary. Accept the itinerary to publish as your own </p>
+        <p class="noti-strip-txt">Monish added you to this itinerary. Accept the itinerary to publish as your own </p>
         <button class="btn btn-white-outline">Accept</button>
         <button class="btn btn-white-outline">Decline</button>
       </div>
@@ -104,7 +104,7 @@
                   <div class="status-indot relate">
                     <!-- city name of dot and img -->
                     <div class="status-city-name ">
-                      <span>{{city.city.name}}</span>
+                      <span class="text-ellipsis">{{city.city.name}}</span>
                     </div>
                     <!-- city name of dot and img end-->
                   </div>
