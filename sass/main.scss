@@ -2847,14 +2847,14 @@ header {
   .flexslider:hover {
     .flex-direction-nav .flex-prev {
       left: auto;
-      right: -27px;
+      right: -35px;
       opacity: 1;
       top: 45%;
     }
 
     .flex-direction-nav .flex-next {
       left: auto;
-      right: -27px;
+      right: -35px;
       opacity: 1;
       top: 65%;
     }
@@ -10555,7 +10555,7 @@ header {
 .notify-control-nav{
   i{
     position: absolute;
-    top: 50px;
+    top: 50%;
     @include transform(translateY(-50%));
     z-index: 10;
   }

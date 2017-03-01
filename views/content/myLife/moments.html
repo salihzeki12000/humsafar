@@ -63,9 +63,10 @@
                       <div class="flex-wrap-container">
                         <div class="row">
                           <div class="col-xs-1" ng-repeat="img in singleObject.data track by $index">
-                            <div class="moment-imgholder">
+                            <div class="moment-imgholder relate">
                               <img ng-src="{{img.name|uploadpath:80:80:'cover'}}" alt="" class="img-responsive" ng-if="img.type=='photo'">
                               <img ng-src="{{img.thumbnail|uploadpath:80:80:'cover'}}" alt="" class="img-responsive" ng-if="img.type=='video'">
+                              <span ng-if="img.type=='video'" class="get-center"><i class="fa fa-youtube-play fa-2x color-cyan"></i></span>
                             </div>
                           </div>
                         </div>
@@ -175,11 +176,12 @@
                   <div class="flex-wrap-container">
                     <div class="row">
                       <div class="col-xs-2" ng-repeat="monthMoments in album.perMonthMoments track by $index">
-                        <div class="singleMonth-imgholder">
+                        <div class="singleMonth-imgholder relate">
                           <img ng-src="{{monthMoments.name|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="monthMoments.type=='photo'"
                             ng-click="getPhotosCommentData(monthMoments._id, $index, album.perMonthMoments.length,album.perMonthMoments)">
                           <img ng-src="{{monthMoments.thumbnail|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="monthMoments.type=='video'"
                             ng-click="getPhotosCommentData(monthMoments._id, $index, album.perMonthMoments.length,album.perMonthMoments)">
+                            <span ng-if="monthMoments.type=='video'" class="get-center"><i class="fa fa-youtube-play fa-3x color-cyan"></i></span>
                         </div>
                       </div>
                     </div>
