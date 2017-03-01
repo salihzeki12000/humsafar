@@ -1,4 +1,4 @@
-``<div class="activity-main tint-bg mt-60">
+<div class="activity-main tint-bg mt-60">
   <div class="container pt-60">
     <div class="activity-container">
       <div class="text-center">
@@ -108,7 +108,7 @@
                       <img src="{{activity.imageUrl}}" alt="" class="img-responsive">
                     </div>
                     <div class="post-img card-imgholder pointer relate" ng-if="activity.photos.length>0 && activity.type!='quick-itinerary' && activity.type!='detail-itinerary'"
-                      ng-init="activity.index=0" ng-click="getPhotosCommentData(activity.photos[activity.index]._id)">
+                      ng-init="activity.index=0" ng-click="getPhotosCommentData(activity.photos[activity.index]._id, activity.index ,activity.photos.length, activity.photos)">
                       <div class="blur-img">
                         <img ng-src="{{activity.photos[activity.index].name|uploadpath}}" alt="">
                       </div>

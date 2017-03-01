@@ -177,9 +177,9 @@
                       <div class="col-xs-2" ng-repeat="monthMoments in album.perMonthMoments track by $index">
                         <div class="singleMonth-imgholder">
                           <img ng-src="{{monthMoments.name|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="monthMoments.type=='photo'"
-                            ng-click="getPhotosCommentData(monthMoments._id)">
+                            ng-click="getPhotosCommentData(monthMoments._id, $index, album.perMonthMoments.length,album.perMonthMoments)">
                           <img ng-src="{{monthMoments.thumbnail|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="monthMoments.type=='video'"
-                            ng-click="getPhotosCommentData(monthMoments._id)">
+                            ng-click="getPhotosCommentData(monthMoments._id, $index, album.perMonthMoments.length,album.perMonthMoments)">
                         </div>
                       </div>
                     </div>

@@ -6,10 +6,11 @@
       <span class="mr5">{{localongo.UTCModified | date : 'hh:mm a'}}</span>
     </p>
     <div class="location circle-rounded pointer">
-      <img src="img/location-cyan.png" alt="" height="18">
+      <!-- <img src="img/location-cyan.png" alt="" height="18">
       <img src="img/thought-cyan.png" alt="" height="18">
       <img src="img/video-cyan.png" alt="" height="18">
-      <img src="img/camera-cyan.png" alt="" height="18">
+      <img src="img/camera-cyan.png" alt="" height="18"> -->
+      <img ng-src="{{localongo|typeOfPost:'local-post'}}" alt="">
     </div>
   </div>
   <!-- header local life end-->
@@ -18,7 +19,7 @@
     <!-- post img and video img holder -->
     <div class="hide" ng-if="localongo.photos && localongo.photos.length == 0 && localongo.showMap && localongo.checkIn && localongo.checkIn.lat">
     </div>
-    <div class="localpost-imgholder" ng-click="getPhotosCommentData(localongo.photosVideos[index]._id)" ng-if="localongo.photos.length>0 && localongo.onDisplay=='photos'">
+    <div class="localpost-imgholder" ng-click="getPhotosCommentData(localongo.photosVideos[index]._id,index,localongo.photosVideos.length,localongo.photosVideos)" ng-if="localongo.photos.length>0 && localongo.onDisplay=='photos'">
       <div class="localpost-imgblur">
         <img ng-src="{{localongo.photosVideos[index].name|uploadpath}}" alt="" class="img-responsive">
       </div>
