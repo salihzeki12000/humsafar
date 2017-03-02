@@ -4456,3 +4456,29 @@ q {
   }
 }
 // COMING SOON PAGE END
+
+// LOGIN FLOW PAGE
+.loginflow-page{
+  height: 100vh;
+  padding-top: 60px;
+  margin-top: -60px;
+  background: url('../img/libro-home/forgot-password.jpg') no-repeat;
+  background-size: cover;
+  color: #fff;
+  .loginflow-content{
+    margin: 20px 0;
+    .img-holder{
+      width: 100px;
+      height: 100px;
+      border: 2px solid #868686;
+      border-radius: 37px;
+      background-color: $brand-lighter-grey;
+      margin: 0 auto 15px;
+      overflow: hidden;
+    }
+  }
+  .social-login-button{
+    margin: 20px 0;
+  }
+}
+// LOGIN FLOW PAGE END
