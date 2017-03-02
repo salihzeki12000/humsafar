@@ -144,6 +144,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.headerfixed = "fixed-header";
     $scope.animationsEnabled = true;
     $scope.formData = {};
+
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
     }
@@ -181,11 +182,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               if (slug === null || slug === "") {
                 slug = $.jStorage.get("profile").urlSlug;
               }
-
-              $state.go("mylife", {
-                name: 'journey',
-                urlSlug: slug
-              });
+              if ($.jStorage.get("history") === 'TravelBlog') {
+                $state.go("blog");
+              } else {
+                $state.go("mylife", {
+                  name: 'journey',
+                  urlSlug: slug
+                });
+              }
             }
           } else {
 
@@ -4814,7 +4818,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.travelLifeMoments.scrollBusy = true;
       $scope.localLifeMoments.scrollBusy = true;
       console.log("getAllMoments called");
-      MyLife.getAllMoments("", 26, "all", 3, function (data) {
+      MyLife.getAllMoments("", 36, "all", 3, function (data) {
         $scope.allMoments = {
           "arr": data.data,
           "scrollBusy": false,
@@ -4874,7 +4878,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   console.log("no data so calling api is closed");
                 } else {
                   moment.scrollBusy = true;
-                  MyLife.getAllMoments(lastToken, 26, moment.type, 3, function (data) {
+                  MyLife.getAllMoments(lastToken, 36, moment.type, 3, function (data) {
                     moment.scrollBusy = false;
                     _.each(data.data, function (n) {
                       if (n.token == -1) {
@@ -7708,6 +7712,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.allPhotos.newArray = [];
     //Photo comment popup
     $scope.getPhotosCommentData = function (photoId, index, length, array) {
+      $scope.userProfilePic = $.jStorage.get("profile").profilePicture;
       console.log(index);
       console.log(length);
       console.log(array);
@@ -8598,7 +8603,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // update country Visited end
 
     //remove counytry visitede starts
-    $scope.removeCountryVisit = function () {
+    $scope.removeCountryVisit = function (data) {
+      $scope.removeCountry = data;
       modal = $uibModal.open({
         scope: $scope,
         animation: true,
@@ -8628,21 +8634,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
       }
 
-      //remove country visited and all its count starts
-      $scope.removeCountryVisited = function () {
-        var obj = {
-          "countryId": country._id,
-          "visited": []
-        }
-        MyLife.updateCountriesVisited(obj, function (data, status) {
-          reloadCount();
-          console.log(data);
-          MyLife.getCountryVisitedListExpanded(callbackGetCountriesVisited);
-          modal.close();
-        }, function () {});
-        arr = [];
-      };
-      //remove country visited and all its count ends
+
       modal.closed.then(function () {
         console.log(_.isEmpty(arr));
         if (_.isEmpty(arr)) {
@@ -8654,6 +8646,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       });
     };
+
+    //remove country visited and all its count starts
+    $scope.removeCountryVisited = function (remove) {
+      var obj = {
+        "countryId": remove.countryId._id,
+        "year": remove.year
+      }
+      MyLife.removeCountryList(obj, function (data, status) {
+        reloadCount();
+        console.log(data);
+        MyLife.getCountryVisitedListExpanded(callbackGetCountriesVisited);
+        modal.close();
+      }, function () {});
+      arr = [];
+    };
+    //remove country visited and all its count ends
 
     $scope.checkIfSelected = function (list) {
       console.log(list);
@@ -10321,6 +10329,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.allPhotos.newArray = [];
     //Photo comment popup
     $scope.getPhotosCommentData = function (photoId, index, length, array) {
+      $scope.userProfilePic = $.jStorage.get("profile").profilePicture;
       console.log(index);
       console.log(length);
       console.log(array);
@@ -10701,6 +10710,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.allPhotos.newArray = [];
     //Photo comment popup
     $scope.getPhotosCommentData = function (photoId, index, length, array) {
+      $scope.userProfilePic = $.jStorage.get("profile").profilePicture;
       console.log(index);
       console.log(length);
       console.log(array);
@@ -14621,18 +14631,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // DECLINE JOURNEY FUNCTION END
     // End JOURNEY FUNCTION
-    // $scope.endJourney = function (notifyOb) {
-    //   console.log(notifyOb, "accept yeh kar");
-    //
-    //   NavigationService.endJourneyNotify({
-    //     uniqueId: notifyOb.data.journeyUnique,
-    //     _id: notifyOb._id,
-    //     inMiddle: notifyOb.data.inMiddle
-    //   }, function (data) {
-    //     console.log(data,'end ka jawab');
-    //   });
-    // };
+    $scope.endJourney = function (notifyOb) {
+      console.log(notifyOb, "journey end kar be");
+
+      NavigationService.endJourneyNotify({
+        _id: notifyOb.data._id,
+        notifyId: notifyOb._id
+      }, function (data) {
+        console.log(data, 'end ka jawab');
+      });
+    };
     // END JOURNEY FUNCTION END
+    // DECLINE END JOURNEY FUNCTION
+    $scope.declineEndJourney = function (notifyOb) {
+      console.log(notifyOb, "journey end decline yeh kar");
+
+      NavigationService.declineJourneyNotify({
+        _id: notifyOb._id,
+        answeredStatus: "reject"
+      }, function (data) {
+        console.log(data, 'journey end decline ka jawab');
+      });
+    };
+    // DECLINE END JOURNEY FUNCTION END
   })
 
   .controller('SearchresultCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
