@@ -1416,3 +1416,13 @@ firstapp.directive('uiSrefIf', function ($compile) {
     }
   };
 })
+firstapp.directive('videoend', [function () {
+    return {
+        restrict: 'A',
+        link: function (scope, elem, attr) {
+          $elem = $(elem);
+          console.log($elem);
+          $attrs=$(attr);
+        }
+    };
+}])
