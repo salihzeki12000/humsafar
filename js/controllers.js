@@ -211,7 +211,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.socialLogin = function (loginTo) {
-      ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
+      ref = window.open(adminURL + "/user/" + loginTo + "OldUser", '_blank', 'location=no');
       console.log(ref);
       stopinterval = $interval(callAtIntervaltwitter, 2000);
       ref.onbeforeunload = function (e) {
@@ -233,9 +233,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               NavigationService.getProfile("", function (succ3) {
                 $.jStorage.set("isLoggedIn", false);
                 $.jStorage.set("oldUserData", succ3.data);
-                $state.go("login-flow", {
-                  'accessToken': succ2.accessToken
-                });
+                // $state.go("login-flow", {
+                //   'accessToken': succ2.accessToken
+                // });
+                window.location = "http://travelibro.net/blog"
               }, function (err3) {
                 console.log(err3);
               });
@@ -4577,6 +4578,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         modal = $uibModal.open({
           scope: $scope,
           animation: true,
+          windowClass: "delete-visited-country",
           templateUrl: "views/modal/delete-visited-country.html"
         });
       } else {
@@ -8575,6 +8577,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log(id);
       modal = $uibModal.open({
         animation: true,
+        windowClass: "delete-visited-country",
         templateUrl: "views/modal/country-visited.html",
         scope: $scope
       });
