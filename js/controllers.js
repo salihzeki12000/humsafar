@@ -182,14 +182,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               if (slug === null || slug === "") {
                 slug = $.jStorage.get("profile").urlSlug;
               }
-              if ($.jStorage.get("history") === 'TravelBlog') {
-                $state.go("blog");
-              } else {
-                $state.go("mylife", {
-                  name: 'journey',
-                  urlSlug: slug
-                });
-              }
+              $state.go("mylife", {
+                name: 'journey',
+                urlSlug: slug
+              });
+            } else if (alreadyLoggedIn === false) {
+              $state.go('mainpage');
             }
           } else {
 
@@ -14967,10 +14965,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               if (slug === null || slug === "") {
                 slug = $.jStorage.get("profile").urlSlug;
               }
-              $state.go("mylife", {
-                name: 'journey',
-                urlSlug: slug
-              });
+              if ($.jStorage.get("history") === 'TravelBlog') {
+                $state.go("blog");
+              } else {
+                $state.go("mylife", {
+                  name: 'journey',
+                  urlSlug: slug
+                });
+              }
             } else if (alreadyLoggedIn === false) {
               $state.go('mainpage');
             }
