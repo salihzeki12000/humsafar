@@ -272,7 +272,21 @@ var navigationservice = angular.module('navigationservice', [])
         });
       },
       declineJourneyNotify: function (formData, callback) {
-        TravelibroService.post(adminURL + "/journey/buddyRejectWeb", formData).success(function (data) {
+       TravelibroService.post(adminURL + "/journey/buddyRejectWeb", formData).success(function (data) {
+         callback(data);
+       }).error(function (data) {
+         console.log(data);
+       });
+     },
+      endJourneyNotify: function (formData, callback) {
+        TravelibroService.post(adminURL + "/journey/endJourneyWeb", formData).success(function (data) {
+          callback(data);
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
+      declineEndJourneyNotify: function (formData, callback) {
+        TravelibroService.post(adminURL + "/notification/updateNotification", formData).success(function (data) {
           callback(data);
         }).error(function (data) {
           console.log(data);

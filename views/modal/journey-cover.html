@@ -9,7 +9,7 @@
         <span class="close pop-close-btn" ng-click="$dismiss();"><i class="fa fa-times color-white"></i></span>
       </div>
     </div>
-    <div class="coverpic-scroll bg-white">
+    <div class="coverpic-scroll" ng-class="{'bg-white': cropImage==false,'':cropImage==true}">
       <div class="cover-content">
         <div class="cover-gallery-grid" ng-hide="cropImage">
           <div class="choose-cover-pic inline-block" ng-repeat="img in journeyCoverPhotos.photos track by $index">
