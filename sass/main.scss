@@ -1512,6 +1512,11 @@ header {
   text-align: right;
 }
 
+.journey-parachute{
+  margin-right: 60px;
+  margin-bottom: -70px;
+}
+
 .journey-parachute img {
   width: 140px;
 }
@@ -1756,8 +1761,9 @@ header {
 
 .delete-your-country {
   padding: 20px 0 0;
+  border-radius: 15px;
   margin-top: 20px;
-  background-color: #fff;
+  background-color: #f6fafc;
   text-align: center;
   @extend .avenir-roman;
 
@@ -1765,9 +1771,13 @@ header {
     padding: 10px;
     display: block;
     margin-top: 10px;
-    border: 1px solid $brand-light-grey;
+    border-right: 1px solid $brand-light-grey;
+    border-top: 1px solid $brand-light-grey;
     @extend .avenir-roman;
     cursor: pointer;
+  }
+  .br0{
+    border-right: 0px;
   }
 }
 // travel life
@@ -2803,10 +2813,10 @@ header {
     background-color: transparent;
   }
 
-  .flexslider .slides > li {
-    width: 136px !important;
-    margin-right: 10px !important;
-  }
+  // .flexslider .slides > li {
+  //   width: 136px !important;
+  //   margin-right: 10px !important;
+  // }
 
   .flex-direction-nav a {
     @include square(20px);
@@ -2964,6 +2974,9 @@ header {
 
 .month-collage {
   margin-bottom: 30px;
+  .monthname-count{
+    font-size: 12px;
+  }
 }
 
 .collage-month-view {
@@ -3116,7 +3129,7 @@ header {
     min-height: 250px;
     margin-top: 10px;
     // @include position(absolute, 30px null null 15px);
-    overflow: hidden;
+    // overflow: hidden;
    img {
     width: 100%;
     padding: 10px 0px;
@@ -3264,7 +3277,7 @@ header {
   .panel-default > .panel-heading {
     padding: 0;
     border-radius: 0;
-    border-bottom: 4px solid $brand-dark-pink;
+    border-bottom: 3px solid $brand-dark-pink;
     background-color: transparent;
 
     h3 {
@@ -3325,6 +3338,17 @@ header {
 
   .panel-collapse {
     @include transition(all 0.20s ease);
+  }
+}
+
+.reviewlocal-countryaccordion{
+  .city-accordion{
+    ::-webkit-scrollbar-thumb {
+      background-color: $brand-cyan;
+    }
+  }
+  .panel-default > .panel-heading{
+    border-color: $brand-cyan;
   }
 }
 
@@ -9995,7 +10019,7 @@ header {
     display: inline-block;
     vertical-align: bottom;
 
-    textarea {
+    textarea, input {
       border: none;
       border-bottom: 2px solid $brand-dark-blue;
       padding: 0 10px;
@@ -10299,6 +10323,7 @@ header {
     margin: 5px;
     position: relative;
     top: 0;
+    background-color: $brand-light-grey;
     z-index: 1;
     overflow: hidden;
     @include transition(all 200ms linear);
@@ -10385,6 +10410,7 @@ header {
     margin: 5px;
     position: relative;
     top: 0;
+    background-color: $brand-light-grey;
     z-index: 1;
     overflow: hidden;
     @include transition(all 200ms linear);
@@ -10488,6 +10514,7 @@ header {
   height: 82px;
   border: 2px solid #fff;
   border-radius: 30px;
+  background-color: $brand-light-grey;
   box-shadow: 1px 4px 4px #888;
   margin: -40px auto 0;
   overflow: hidden;
@@ -10507,9 +10534,20 @@ header {
   right: 10px;
 }
 
+.notify-closeimg{
+  width: 20px;
+  top: -30px;
+  right: 15px;
+}
+
 .notify-popup {
   .modal-dialog {
     width: 100%;
+    margin-top: 40px
+  }
+
+  .notify-main{
+    max-height: calc( 100vh - 70px);
   }
 
   .notify-imgsec {
@@ -10559,13 +10597,14 @@ header {
     position: absolute;
     top: 50%;
     @include transform(translateY(-50%));
+    text-shadow: 1px 3px 3px #424242;
     z-index: 10;
   }
   .next-slide{
-    right: 0;
+    right: 10px;
   }
   .prev-slide{
-    left: 0;
+    left: 10px;
   }
 }
 
@@ -10710,7 +10749,7 @@ header {
       // display: inline-block;
       // vertical-align: bottom;
 
-      textarea {
+      textarea, input {
         border: none;
         border-bottom: 1px solid $brand-dark-blue;
         padding: 0 10px;
