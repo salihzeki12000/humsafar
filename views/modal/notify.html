@@ -1,12 +1,16 @@
 <div class="notify-main">
-  <span class="close pop-close-btn notify-close" ng-click="$dismiss();"><i class="fa fa-times color-white"></i></span>
+  <!-- <span class="close pop-close-btn notify-close" ng-click="$dismiss();"><i class="fa fa-times color-white"></i></span> -->
+  <div class="close pop-close-btn notify-close notify-closeimg" ng-click="$dismiss();">
+    <img src="img/cancel.png" alt="Cancel" class="img-responsive">
+  </div>
   <div class="container-fluid">
     <div class="bg-white">
       <div class="notify-imgsec">
         <div class="notify-imgholder">
           <div class="notify-control-nav">
-            <a href=""><i class="fa fa-angle-left prev-slide fa-5x color-white" ng-click="prevPhotoSlide(allPhotos);"></i></a>
-            <a href=""><i class="fa fa-angle-right next-slide fa-5x color-white" ng-click="nextPhotoSlide(allPhotos);"></i></a>
+            {{allPhotos}}
+            <a href="" ng-if="allPhotos.photoSliderLength!==1"><i class="fa fa-angle-left prev-slide fa-3x color-white" ng-click="prevPhotoSlide(allPhotos);"></i></a>
+            <a href="" ng-if="allPhotos.photoSliderLength!==1"><i class="fa fa-angle-right next-slide fa-3x color-white" ng-click="nextPhotoSlide(allPhotos);"></i></a>
           </div>
           {{$scope.allPhotos}}
           <div class="blurnotify-imgholder" ng-if="listOfComments.type=='photo'">
@@ -29,9 +33,9 @@
                   <source src="img/tiny1.mp3" type="audio/mp3">
                 </audio>
               </a></li>
-                <li>
+                <!-- <li>
                   <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve"></a>
-                </li>
+                </li> -->
                 <li>
                   <a href=""><img src="img/share.png" alt="" height="20" class="img-responisve"></a>
                 </li>
@@ -54,6 +58,7 @@
         </div>
         <!-- comment section -->
         <div class="comment-sec">
+          <form ng-submit="postPhotosComment(listOfComments.name,text,listOfComments.post,listOfComments._id)">
           <div class="write-comment-text">
             <div class="commenter-img">
               <div class="commenter-imgholder">
@@ -61,15 +66,18 @@
               </div>
             </div>
             <div class="comment-ur-text">
-              <textarea name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="text"></textarea>
+              <!-- <textarea name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="text"></textarea> -->
+              <input type="text" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="text">
               <find-tags ng-model="text" element-id="enterComment" enable="bothTagging">
             </div>
           </div>
           <div class="clearfix comment-post">
             <div class="pull-right">
-              <button class="btn btn-pink post-btn" ng-click=postPhotosComment(listOfComments.name,text,listOfComments.post,listOfComments._id)>Post</button>
+              <!-- <button class="btn btn-pink post-btn" ng-click="postPhotosComment(listOfComments.name,text,listOfComments.post,listOfComments._id)">Post</button> -->
+              <button class="btn btn-pink post-btn" type="submit">Post</button>
             </div>
           </div>
+          </form>
           <div class="view-comment-scroll">
             <div infinite-scroll="getMoreComments(listOfComments._id)" infinite-scroll-parent="true">
               <div class="view-comment-list" ng-repeat="list in listOfComments.comment">
@@ -85,8 +93,8 @@
                   vel, nesciunt fugit odio nobis modi earum nisi iste soluta deserunt at.</p>-->
                     <p class="avenir-roman"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name|whoIsThis:list.user._id:userData._id}}</span>{{list.text}}</p>
                     <div class="like-reply-line">
-                      <span class="color-blue avenir-roman mr5 pointer">Like</span>
-                      <span class="color-blue avenir-roman mr5 pointer">Reply</span>
+                      <!-- <span class="color-blue avenir-roman mr5 pointer">Like</span> -->
+                      <!-- <span class="color-blue avenir-roman mr5 pointer">Reply</span> -->
                       <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                      | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
                     </div>
                   </div>
@@ -100,6 +108,7 @@
       <div class="comment-tag color-blue">
         <!--<p class="m-clear avenir-roman" >Evening by the beach! :) with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon</p>-->
         <p class="m-clear avenir-roman" ng-bind-html="ongo.postString"></p>
+        <p class="m-clear avenir-roman" ng-bind-html="localongo.localpostString"></p>
       </div>
     </div>
   </div>

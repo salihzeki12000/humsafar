@@ -589,8 +589,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
               });
               if (buddyIndex !== -1) {
                 n.checked = true;
-                n.noEdit = "un-tag";
-                $("#" + n._id).prop('disabled', true);
+                // n.noEdit = "un-tag";
+                // $("#" + n._id).prop('disabled', true);
               } else {
                 n.checked = false;
               }
@@ -598,22 +598,22 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
                 return z.taggedFriend === true;
               });
               if (checkedIndex !== -1) {
-                $("#" + n._id).prop('disabled', false);
-                n.noEdit = "";
+                // $("#" + n._id).prop('disabled', false);
+                // n.noEdit = "";
               }
             });
           }).error(function (data) {
             console.log(data);
           });
         } else {
-          console.log($scope.newBuddies, 'total-array');
+          console.log($scope.ongo.buddies, 'total-array');
           $scope.viewListFriend = false;
         }
       }
       // tag friend list end
 
       $scope.editTagFriends = function (list) {
-        var getBuddy = _.findIndex($scope.newBuddies, function (id) {
+        var getBuddy = _.findIndex($scope.ongo.buddies, function (id) {
           return id._id === list._id;
         });
         console.log(getBuddy);
@@ -626,17 +626,17 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
             taggedFriend: true,
           });
           console.log($scope.ongo.buddies, "buddies ka list");
-          $scope.newBuddies.push({
-            _id: list._id,
-            name: list.name,
-            email: list.email
-          })
+          // $scope.newBuddies.push({
+          //   _id: list._id,
+          //   name: list.name,
+          //   email: list.email
+          // })
           $scope.ongo.buddiesCount = $scope.ongo.buddiesCount + 1;
           console.log($scope.newBuddies, "new buddies");
         } else {
-          _.remove($scope.newBuddies, function (newId) {
-            return newId._id === list._id;
-          });
+          // _.remove($scope.newBuddies, function (newId) {
+          //   return newId._id === list._id;
+          // });
           _.remove($scope.ongo.buddies, function (newId) {
             return newId._id === list._id;
           })
@@ -721,6 +721,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       var modal = "";
       // edit otg checkin
       $scope.editCheckIn = function () {
+        $scope.oldBuddies=_.cloneDeep($scope.ongo.buddies);
         console.log();
         $scope.alreadyTagFrnd = true;
         modal = $uibModal.open({
@@ -790,6 +791,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
 
       // edit save data
       $scope.saveEditOtg = function () {
+        console.log($scope.oldBuddies,'old buddies');
         // get photos id
         $scope.photosId = _.map($scope.ongo.photos, "_id");
         // get photos id end
@@ -812,7 +814,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
           journeyUniqueId: $scope.json.uniqueId,
           "uniqueId": $scope.ongo.uniqueId,
           "_id": $scope.ongo._id,
-          buddiesArr: $scope.newBuddies,
+          oldBuddies: $scope.oldBuddies,
+          newBuddies: $scope.ongo.buddies,
           hashtag: hashTag,
           addHashtag: hashTag,
           removeHashtag: $scope.removedHashTag,

@@ -259,6 +259,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
       };
       // edit otg checkin
       $scope.editCheckIn = function () {
+        $scope.oldBuddies = _.cloneDeep($scope.localongo.buddies);
         $scope.alreadyTagFrnd = true;
         modal = $uibModal.open({
           animation: true,
@@ -371,8 +372,8 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
               });
               if (buddyIndex !== -1) {
                 n.checked = true;
-                n.noEdit = "un-tag";
-                $("#" + n._id).prop('disabled', true);
+                // n.noEdit = "un-tag";
+                // $("#" + n._id).prop('disabled', true);
               } else {
                 n.checked = false;
               }
@@ -380,8 +381,8 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
                 return z.taggedFriend === true;
               });
               if (checkedIndex !== -1) {
-                $("#" + n._id).prop('disabled', false);
-                n.noEdit = "";
+                // $("#" + n._id).prop('disabled', false);
+                // n.noEdit = "";
               }
             });
           }).error(function (data) {
@@ -393,6 +394,40 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
         }
       }
       // tag friend list end
+      $scope.editTagFriends = function (list) {
+        var getBuddy = _.findIndex($scope.localongo.buddies, function (id) {
+          return id._id === list._id;
+        });
+        console.log(getBuddy);
+        if (getBuddy === -1) {
+          $scope.localongo.buddies.push({
+            _id: list._id,
+            name: list.name,
+            email: list.email,
+            profilePicture: list.profilePicture,
+            taggedFriend: true,
+          });
+          console.log($scope.localongo.buddies, "buddies ka list");
+          // $scope.newBuddies.push({
+          //   _id: list._id,
+          //   name: list.name,
+          //   email: list.email
+          // })
+          $scope.localongo.buddiesCount = $scope.localongo.buddiesCount + 1;
+        } else {
+          // _.remove($scope.newBuddies, function (newId) {
+          //   return newId._id === list._id;
+          // });
+          _.remove($scope.localongo.buddies, function (newId) {
+            return newId._id === list._id;
+          })
+          $scope.localongo.buddiesCount = $scope.localongo.buddiesCount - 1;
+        }
+        $scope.viewListFriend = false;
+        list.checked = "";
+        $scope.localongo.getSearchedList = "";
+      }
+
       // edit more caption
       $scope.editMoreCaption = function (index) {
         console.log(index, 'photo ka index');
@@ -437,6 +472,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
       // caption edit end
       // edit save data
       $scope.saveLocalEdit = function () {
+        console.log($scope.oldBuddies,'old local buddies');
         $scope.localView.view = false;
         // get photos id
         $scope.photosId = _.map($scope.localongo.photos, "_id");
@@ -459,7 +495,8 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
           checkInChange: true,
           "uniqueId": $scope.localongo.uniqueId,
           "_id": $scope.localongo._id,
-          buddiesArr: $scope.newBuddies,
+          oldBuddies: $scope.oldBuddies,
+          newBuddies: $scope.localongo.buddies,
           hashtag: hashTag,
           addHashtag: hashTag,
           removeHashtag: $scope.removedHashTag,
