@@ -8,11 +8,9 @@
       <div class="notify-imgsec">
         <div class="notify-imgholder">
           <div class="notify-control-nav">
-            {{allPhotos}}
             <a href="" ng-if="allPhotos.photoSliderLength!==1"><i class="fa fa-angle-left prev-slide fa-3x color-white" ng-click="prevPhotoSlide(allPhotos);"></i></a>
             <a href="" ng-if="allPhotos.photoSliderLength!==1"><i class="fa fa-angle-right next-slide fa-3x color-white" ng-click="nextPhotoSlide(allPhotos);"></i></a>
           </div>
-          {{$scope.allPhotos}}
           <div class="blurnotify-imgholder" ng-if="listOfComments.type=='photo'">
             <img ng-src="{{listOfComments.name|uploadpath}}" alt="" class="img-responsive">
           </div>
@@ -62,7 +60,7 @@
           <div class="write-comment-text">
             <div class="commenter-img">
               <div class="commenter-imgholder">
-                <img ng-src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
+                <img ng-src="{{userProfilePic|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
               </div>
             </div>
             <div class="comment-ur-text">
@@ -107,8 +105,8 @@
       </div>
       <div class="comment-tag color-blue">
         <!--<p class="m-clear avenir-roman" >Evening by the beach! :) with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon</p>-->
-        <p class="m-clear avenir-roman" ng-bind-html="ongo.postString"></p>
-        <p class="m-clear avenir-roman" ng-bind-html="localongo.localpostString"></p>
+        <p class="m-clear avenir-roman" ng-if="ongo.postString" ng-bind-html="ongo.postString"></p>
+        <p class="m-clear avenir-roman" ng-if="localongo.localpostString" ng-bind-html="localongo.localpostString"></p>
       </div>
     </div>
   </div>

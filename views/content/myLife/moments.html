@@ -34,6 +34,7 @@
             </div>
             <!-- back button -->
             <div class="pull-right" ng-if="viewMonth">
+              <button class="btn btn-outline-blue btn-more" ng-click="showMonthView();" ng-if="momentView==1">Back</button>
               <button class="btn btn-pink btn-more" ng-click="showMonthView();" ng-if="momentView==2">Back</button>
                <button class="btn btn-cyan btn-more" ng-click="showMonthView();" ng-if="momentView==3">Back</button>
             </div>
@@ -81,8 +82,8 @@
                     <h4 class="month-name"><span class="avenir-heavy">{{singleObject.token|momentsDate}}</span> <span class="monthname-count">({{singleObject.count}})</span></h4>
                     <div class="collage-month-view">
                       <div class="flex-wrap-container">
-                        <div class="row">
-                          <div class="col-xs-1" ng-repeat="img in singleObject.data track by $index">
+                        <div class="row" ng-init="len=singleObject.data.length">
+                          <div class="col-xs-1" ng-repeat="img in singleObject.data|limitTo:len-len%12  track by $index">
                             <div class="moment-imgholder relate">
                               <img ng-src="{{img.name|uploadpath:80:80:'cover'}}" alt="" class="img-responsive" ng-if="img.type=='photo'">
                               <img ng-src="{{img.thumbnail|uploadpath:80:80:'cover'}}" alt="" class="img-responsive" ng-if="img.type=='video'">

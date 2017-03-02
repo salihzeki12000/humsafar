@@ -792,6 +792,7 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
       $scope.allPhotos.newArray = [];
       //local journey edit end
       $scope.getPhotosCommentData = function (photoId, index, length, array) {
+          $scope.userProfilePic  = $.jStorage.get("profile").profilePicture;
         console.log(index);
         console.log(length);
         console.log(array);

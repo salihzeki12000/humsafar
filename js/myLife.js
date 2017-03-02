@@ -47,6 +47,9 @@ var mylife = angular.module('mylife', [])
       updateCountriesVisited: function (obj, callback, errCallback) {
         TravelibroService.post(adminURL + "/user/updateCountriesVisitedWeb", obj).success(callback).error(errCallback);
       },
+      removeCountryList: function(obj, callback,errCallback){
+        TravelibroService.post(adminURL + "/user/removeCountriesVisitedWeb", obj).success(callback).error(errCallback);
+      },
       getCountryVisitedListWeb: function (callback) {
         TravelibroService.http({
           url: adminURL + "/user/getCountryVisitedListWeb",

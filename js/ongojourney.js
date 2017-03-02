@@ -1092,6 +1092,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       $scope.allPhotos.newArray = [];
       //Photo comment popup
       $scope.getPhotosCommentData = function (photoId, index, length, array) {
+          $scope.userProfilePic  = $.jStorage.get("profile").profilePicture;
         console.log(index);
         console.log(length);
         console.log(array);
@@ -1102,6 +1103,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
         modal = $uibModal.open({
           templateUrl: "views/modal/notify.html",
           animation: true,
+          controller: "photoCommentModalCtrl",
           scope: $scope,
           windowClass: "notify-popup"
         });
