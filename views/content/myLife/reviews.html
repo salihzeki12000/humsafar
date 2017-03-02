@@ -1,4 +1,4 @@
-<div class="profile-main">
+<div class="profile-main" id="reviews">
   <!-- <div class="" ng-include="profile.profileMain"></div> -->
   <div class="review-main">
     <div class="container-fluid">
@@ -21,9 +21,14 @@
           <!-- reviews view tab -->
           <div class="moments-tab review-tab">
             <!-- back button -->
-            <!--<div class="pull-right">
-              <button class="btn btn-blue-outline btn-more" ng-click="showMonthView();">Back</button>
-            </div>-->
+            <div class="pull-right" ng-if="viewTravelCountry">
+              <button class="btn btn-pink" ng-click="changeReviewTypeView(2,'viewTravelCountry')">Back</button>
+            </div>
+            <!-- back button end -->
+                    <!-- back button -->
+            <div class="pull-right" ng-if="viewLocalCountry">
+              <button class="btn btn-cyan" ng-click="changeReviewTypeView(3,'viewLocalCountry')">Back</button>
+            </div>
             <!-- back button end -->
             <div class="btn-view-moments btn-view-review pointer" ng-click="changeReviewTypeView(1)">
               <span class="btn-tab" ng-class="{'active-btn-all': reviewView ==1}"></span>
@@ -68,7 +73,7 @@
                       <img ng-src="{{view.checkIn.category|kindOfReviewCheckIn}}" alt=""  class="pull-right">
                     </div>
                     <div class="rate-location">
-                      <p class=" m-clear inline-block avenir-light pointer" ng-click="getReview(view);" ng-if="view.review.length==0" ng-class="{'color-cyan':view.type=='local-life','color-pink':view.type=='travel-life'}">Rate this now</p>
+                      <p class=" m-clear inline-block avenir-heavy pointer" ng-click="getReview(view);" ng-if="view.review.length==0" ng-class="{'color-cyan':view.type=='local-life','color-pink':view.type=='travel-life'}">Rate this now</p>
                       <div class="travel-life-rating" ng-if="!(view.review.length==0)" ng-click="getReview(view)" ;>
                         <span class="star-rating pointer" ng-repeat="time in view.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':view.type=='local-life','color-pink':view.type=='travel-life'}"></i></span>
                         <span class="star-rating pointer color-grey" ng-repeat="time in view.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
@@ -159,7 +164,7 @@
                                     <img ng-src="{{view.checkIn.category|kindOfReviewCheckIn}}" alt=""  class="pull-right">
                                   </div>
                                   <div class="rate-location">
-                                    <p class="color-pink m-clear inline-block avenir-light pointer" ng-click="getReview(visit);" ng-if="visit.review.length==0">Rate this now</p>
+                                    <p class="color-pink m-clear inline-block avenir-heavy pointer" ng-click="getReview(visit);" ng-if="visit.review.length==0">Rate this now</p>
                                     <div class="travel-life-rating local-life-rating" ng-if="!(visit.review.length==0)" ng-click="getReview(visit);">
                                       <span class="star-rating pointer" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':visit.type=='local-life','color-pink':visit.type=='travel-life'}"></i></span>
                                       <span class="star-rating pointer color-grey" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
@@ -208,12 +213,12 @@
               </div>
             </div>
                 <!-- inside country -->
-                <div class="" ng-if="viewLocalCountry">
+                <div class="reviewlocal-countryaccordion" ng-if="viewLocalCountry">
                   <div class="travel-single-view">
                     <div class="heading-single-view">
                       <h2 class="color-pink font-bold m-clear color-cyan">{{categoryList.cityName}}</h2>
                     </div>
-                    <div class="city-accordion">
+                    <div class="city-accordion city-local-home">
                       <uib-accordion close-others="oneAtATime">
                         <uib-accordion-group ng-repeat="category in categoryList.categories" is-open="status.open1">
                           <uib-accordion-heading class="clearfix">
@@ -230,7 +235,7 @@
                                   <img ng-src="{{view.checkIn.category|kindOfReviewCheckIn}}" alt="" class="pull-right">
                                 </div>
                                 <div class="rate-location">
-                                  <p class="color-cyan pointer m-clear inline-block avenir-light" ng-click="getReview(visit);" ng-if="visit.review.length==0">Rate this now</p>
+                                  <p class="color-cyan pointer m-clear inline-block avenir-heavy" ng-click="getReview(visit);" ng-if="visit.review.length==0">Rate this now</p>
                                   <div class="travel-life-rating local-life-rating" ng-if="!(visit.review.length==0)" ng-click="getReview(visit);">
                                     <span class="star-rating pointer" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':visit.type=='local-life','color-pink':visit.type=='travel-life'}"></i></span>
                                     <span class="star-rating pointer color-grey" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>

@@ -1342,21 +1342,28 @@ a.full-screen {
 // MyLife Journey
 
 .video-gif-journey {
-      width: 320px;
-    position: relative;
-    margin:0 auto;
-  .mobile-gif {
-   img {
-    height: 450px;
-    display: block;
-    margin: 0 auto;
-    }
-    }
-    .videoplay-empty-journey {
-    position: absolute;
-    top: 25px;
-    left: 40px;
+            width: 320px;
+            position: relative;
+            margin:0 auto;
+        .mobile-gif {
+        img {
+          height: 450px;
+          display: block;
+          margin: 0 auto;
+        }
       }
+      .videoplay-empty-journey {
+        position: absolute;
+        top: 25px;
+        left: 40px;
+          }
+      a.volume-off-on-mylife {
+        position: absolute;
+        right: -10px;
+        font-size: 24px;
+        color: $brand-grey;
+        @include transition(all ease 300ms);
+        }
 }
 
 

@@ -2,9 +2,16 @@
   <div class="container-fluid">
     <div class="profile-photo-section relate">
       <div class="profile-pic relate">
+        <a ui-sref="setting"  ng-if="allowAccess=true">
         <div class="profile-imgholder ">
-          <img ng-src="{{userData.profilePicture|uploadpath:135:145}}" alt="{{userData.name}}" class="img-responsive" style="border-radius='55px';">
+          <img ng-src="{{userData.profilePicture|uploadpath:135:145}}" alt="{{userData.name}}" class="img-responsive" style="border-radius:'55px';">
         </div>
+        </a>
+      <a href="{{userData.profilePicture|uploadpath}}" fancybox-box class="fancybox" ng-if="allowAccess=false">
+        <div class="profile-imgholder ">
+          <img ng-src="{{userData.profilePicture|uploadpath:135:145}}" alt="{{userData.name}}" class="img-responsive" style="border-radius:'55px';">
+        </div>
+        </a>
         <img src="{{userData.homeCountry.flag|uploadpath:40}}" alt="" class="flag img-responsive">
         <img src="img/wave-profile.png" alt="" width="40" class="wave img-responsive">
       </div>
@@ -40,31 +47,31 @@
               <span class="block avenir-roman color-blue mt5">Bucket List</span>
             </div>
           </li>
-          <li class="text-center pointer">
+          <li class="text-center pointer" ng-click="getTab(0); ">
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.journeysCreated_count}}</span>
               <span class="block avenir-roman color-blue mt5">Journeys Created</span>
             </div>
           </li>
-          <li class="text-center pointer">
+          <li class="text-center pointer" ng-click="getTab(0);">
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.checkins_count}}</span>
               <span class="block avenir-roman color-blue mt5">Check-Ins</span>
             </div>
           </li>
-          <li class="text-center pointer">
+          <li class="text-center pointer" ng-click="getTab(1); ">
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.photos_count}}</span>
               <span class="block avenir-roman color-blue mt5">Photos</span>
             </div>
           </li>
-          <li class="text-center pointer">
+          <li class="text-center pointer" ng-click="getTab(2); ">
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.reviews_count}}</span>
               <span class="block avenir-roman color-blue mt5">Reviews</span>
             </div>
           </li>
-          <li class="text-center pointer">
+          <li class="text-center pointer" ng-click="getTab(0);">
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.itineray_count}}</span>
               <span class="block avenir-roman color-blue mt5">Itineraries</span>
@@ -79,8 +86,8 @@
           <div class="col-md-offset-2 col-md-8">
             <div class="text-center">
               <div class="more-detail" ng-init="getMore=false" ng-show="getMore">
-                <p class="avenir-roman">{{userName}} loves to travel and explore {{kindOfHoliday}}. {{pronoun | capitalize}} usually goes {{usuallyGo}}{{usuallyGo1}},
-                  {{pronoun}} {{intermediate}}{{preferToTravel}}. {{userName}}'s ideal holiday type is {{idealHoliday}}.</p>
+                <p class="avenir-roman"><span class="avenir-heavy">{{userName}}</span> loves to travel and explore <span class="avenir-heavy">{{kindOfHoliday}}</span>. {{pronoun | capitalize}} usually goes <span class="avenir-heavy">{{usuallyGo}}{{usuallyGo1}}</span>,
+                 {{pronoun}} {{intermediate}}<span class="avenir-heavy">{{preferToTravel}}</span>. <span class="avenir-heavy">{{userName}}'s</span> ideal holiday type is <span class="avenir-heavy">{{idealHoliday}}</span>.</p>
               </div>
               <span class="djb-font get-more pointer" ng-click="getMore = !getMore">more about me... <img src="img/more-about-me.png" alt="" height="35" class="" ng-class="{'abt-me': getMore == true}"></span>
             </div>

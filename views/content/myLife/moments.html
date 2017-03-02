@@ -1,4 +1,4 @@
-<div class="profile-main">
+<div class="profile-main" id="moments">
   <!-- <div class="" ng-include="profile.profileMain"></div> -->
   <div class="moments-main">
     <div class="container-fluid">
@@ -34,7 +34,8 @@
             </div>
             <!-- back button -->
             <div class="pull-right" ng-if="viewMonth">
-              <button class="btn btn-blue-outline btn-more" ng-click="showMonthView();">Back</button>
+              <button class="btn btn-pink btn-more" ng-click="showMonthView();" ng-if="momentView==2">Back</button>
+               <button class="btn btn-cyan btn-more" ng-click="showMonthView();" ng-if="momentView==3">Back</button>
             </div>
             <!-- back button end -->
           </div>
@@ -51,6 +52,7 @@
                       <p class="empty-descp">Revisit and reminisce the days gone by through brilliant pictures and videos of your travel and local
                         life.
                       </p>
+                        <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
                     </div>
                   </div>
                 </div>
@@ -58,7 +60,7 @@
                 <div ng-if="allMoments.arr.length!==0">
                   <div class="month-collage" ng-repeat="singleObject in allMoments.arr track by $index" ng-click="getPerMonthMoments(singleObject,'all');"
                     ng-if="singleObject.token!=-1 && viewMonth == false">
-                    <h4 class="month-name">{{singleObject.token|momentsDate}} <span>({{singleObject.count}})</span></h4>
+                    <h4 class="month-name"><span class="avenir-heavy">{{singleObject.token|momentsDate}}</span> <span class="monthname-count">({{singleObject.count}})</span></h4>
                     <div class="collage-month-view">
                       <div class="flex-wrap-container">
                         <div class="row">
@@ -66,7 +68,7 @@
                             <div class="moment-imgholder relate">
                               <img ng-src="{{img.name|uploadpath:80:80:'cover'}}" alt="" class="img-responsive" ng-if="img.type=='photo'">
                               <img ng-src="{{img.thumbnail|uploadpath:80:80:'cover'}}" alt="" class="img-responsive" ng-if="img.type=='video'">
-                              <span ng-if="img.type=='video'" class="get-center"><i class="fa fa-youtube-play fa-2x color-cyan"></i></span>
+                              <span ng-if="img.type=='video'" class="get-center"><i class="fa fa-youtube-play fa-2x color-blue"></i></span>
                             </div>
                           </div>
                         </div>
@@ -85,6 +87,7 @@
                       <h3 class="color-pink empty-title">Travel Becomes A Reason To Take Pictures And Store Them</h3>
                       <p class="empty-descp">Some memories are worth sharing, travel surely tops the list. Your travels will not only inspire you
                         to explore more of the world, you may just move another soul or two!</p>
+                         <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
                     </div>
                   </div>
                 </div>
@@ -112,7 +115,7 @@
                         </div>
                         <div class="travel-info avenir-roman">
                           <span class="pull-right">({{view.mediaCount}})</span>
-                          <h4>{{view.name}} </h4>
+                          <h4 class="text-capitailize">{{view.name}} </h4>
                           <span class="color-light-grey">{{view.startTime|formatDate:'date'}}</span>
                         </div>
                         <!--</div>
@@ -133,6 +136,7 @@
                       <h3 class="color-pink empty-title">Suspended In Time</h3>
                       <p class="empty-descp">Beautiful memories created through fabulous pictures and videos of those precious moments shared with
                         family, friends and yourself.</p>
+                         <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
                     </div>
                   </div>
                 </div>
@@ -177,9 +181,9 @@
                     <div class="row">
                       <div class="col-xs-2" ng-repeat="monthMoments in album.perMonthMoments track by $index">
                         <div class="singleMonth-imgholder relate" ng-click="getPhotosCommentData(monthMoments._id, $index, album.perMonthMoments.length,album.perMonthMoments)">
-                          <img ng-src="{{monthMoments.name|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="monthMoments.type=='photo'">                           >
+                          <img ng-src="{{monthMoments.name|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="monthMoments.type=='photo'"> 
                           <img ng-src="{{monthMoments.thumbnail|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="monthMoments.type=='video'">
-                            <span ng-if="monthMoments.type=='video'" class="get-center"><i class="fa fa-youtube-play fa-3x color-cyan"></i></span>
+                            <span ng-if="monthMoments.type=='video'" class="get-center"><i class="fa fa-youtube-play fa-3x color-blue"></i></span>
                         </div>
                       </div>
                     </div>
