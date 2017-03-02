@@ -53,6 +53,24 @@
                         life.
                       </p>
                         <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
+                        <div class="journey-downloadicon">
+                          <ul class="list-unstyled list-inline text-center color-pink">
+                            <li class="">
+                              Download App
+                            </li>
+                            <li>
+                              <a href="#" target="_blank" class="color-pink">
+                                <i class="fa fa-apple"></i>
+                              </a>
+                            </li>
+                            <li>|</li>
+                            <li>
+                              <a href="#" class="color-pink" target="_blank">
+                                <i class="fa fa-android"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -88,6 +106,24 @@
                       <p class="empty-descp">Some memories are worth sharing, travel surely tops the list. Your travels will not only inspire you
                         to explore more of the world, you may just move another soul or two!</p>
                          <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
+                         <div class="journey-downloadicon">
+                           <ul class="list-unstyled list-inline text-center color-pink">
+                             <li class="">
+                               Download App
+                             </li>
+                             <li>
+                               <a href="#" target="_blank" class="color-pink">
+                                 <i class="fa fa-apple"></i>
+                               </a>
+                             </li>
+                             <li>|</li>
+                             <li>
+                               <a href="#" class="color-pink" target="_blank">
+                                 <i class="fa fa-android"></i>
+                               </a>
+                             </li>
+                           </ul>
+                         </div>
                     </div>
                   </div>
                 </div>
@@ -115,7 +151,7 @@
                         </div>
                         <div class="travel-info avenir-roman">
                           <span class="pull-right">({{view.mediaCount}})</span>
-                          <h4 class="text-capitailize">{{view.name}} </h4>
+                          <h4 class="avenir-heavy text-capitailize">{{view.name}} </h4>
                           <span class="color-light-grey">{{view.startTime|formatDate:'date'}}</span>
                         </div>
                         <!--</div>
@@ -137,6 +173,24 @@
                       <p class="empty-descp">Beautiful memories created through fabulous pictures and videos of those precious moments shared with
                         family, friends and yourself.</p>
                          <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
+                         <div class="journey-downloadicon">
+                           <ul class="list-unstyled list-inline text-center color-pink">
+                             <li class="">
+                               Download App
+                             </li>
+                             <li>
+                               <a href="#" target="_blank" class="color-pink">
+                                 <i class="fa fa-apple"></i>
+                               </a>
+                             </li>
+                             <li>|</li>
+                             <li>
+                               <a href="#" class="color-pink" target="_blank">
+                                 <i class="fa fa-android"></i>
+                               </a>
+                             </li>
+                           </ul>
+                         </div>
                     </div>
                   </div>
                 </div>
@@ -172,16 +226,18 @@
                 </div>
               </div>
               <div class="month-view-moments" ng-if="viewMonth">
-                <span ng-if="momentView!=2"><h4>{{token|momentsDate}} <span>({{count}})</span></h4>
+                <span ng-if="momentView!=2">
+                  <h4><span class="avenir-heavy">{{token|momentsDate}}</span> <span class="monthname-count">({{count}})</span></h4>
                 </span>
-                <span ng-if="momentView==2"><h4>{{token}} <span>({{count}})</span></h4>
+                <span ng-if="momentView==2">
+                  <h4><span class="avenir-heavy">{{token}}</span> <span class="monthname-count">({{count}})</span></h4>
                 </span>
                 <div class="month-view-pic collage-month-view" infinite-scroll="getMorePhotos(album)">
                   <div class="flex-wrap-container">
                     <div class="row">
                       <div class="col-xs-2" ng-repeat="monthMoments in album.perMonthMoments track by $index">
                         <div class="singleMonth-imgholder relate" ng-click="getPhotosCommentData(monthMoments._id, $index, album.perMonthMoments.length,album.perMonthMoments)">
-                          <img ng-src="{{monthMoments.name|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="monthMoments.type=='photo'"> 
+                          <img ng-src="{{monthMoments.name|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="monthMoments.type=='photo'">
                           <img ng-src="{{monthMoments.thumbnail|uploadpath:170:170:'cover'}}" alt="" class="img-responsive" ng-if="monthMoments.type=='video'">
                             <span ng-if="monthMoments.type=='video'" class="get-center"><i class="fa fa-youtube-play fa-3x color-blue"></i></span>
                         </div>

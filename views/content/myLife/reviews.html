@@ -61,6 +61,25 @@
                       <h3 class="color-pink empty-title">Relive Y​our Storyline</h3>
                       <p class="empty-descp">Rate the places, restaurants, cuisines, theatres, parks, museums, and more, when you check-in. Jot
                         down your thoughts and feelings about them.</p>
+                        <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
+                        <div class="journey-downloadicon">
+                          <ul class="list-unstyled list-inline text-center color-pink">
+                            <li class="">
+                              Download App
+                            </li>
+                            <li>
+                              <a href="#" target="_blank" class="color-pink">
+                                <i class="fa fa-apple"></i>
+                              </a>
+                            </li>
+                            <li>|</li>
+                            <li>
+                              <a href="#" class="color-pink" target="_blank">
+                                <i class="fa fa-android"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
                     </div>
                   </div>
                   {{reviewAll.length}}
@@ -80,7 +99,7 @@
                         <!--<span class="star-rating"><i class="fa fa-star"></i></span>
                         <span class="star-rating"><i class="fa fa-star"></i></span>
                         <span class="star-rating"><i class="fa fa-star"></i></span>-->
-                        <p class="color-blue">{{view.review[0].review | truncate:100}}</p>
+                        <p class="color-blue">{{view.review[0].review | truncate:50}}</p>
                       </div>
                     </div>
                     <div class="mt10 review-time">
@@ -119,6 +138,25 @@
                       <h3 class="color-pink empty-title">The World I​s Your Oyster</h3>
                       <p class="empty-descp">A five star or a four star? What does that historical monument qualify for? Rate it and write a review.
                         Help others with your rating and review.</p>
+                        <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
+                        <div class="journey-downloadicon">
+                          <ul class="list-unstyled list-inline text-center color-pink">
+                            <li class="">
+                              Download App
+                            </li>
+                            <li>
+                              <a href="#" target="_blank" class="color-pink">
+                                <i class="fa fa-apple"></i>
+                              </a>
+                            </li>
+                            <li>|</li>
+                            <li>
+                              <a href="#" class="color-pink" target="_blank">
+                                <i class="fa fa-android"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -169,7 +207,7 @@
                                     <div class="travel-life-rating local-life-rating" ng-if="!(visit.review.length==0)" ng-click="getReview(visit);">
                                       <span class="star-rating pointer" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':visit.type=='local-life','color-pink':visit.type=='travel-life'}"></i></span>
                                       <span class="star-rating pointer color-grey" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
-                                      <p class="color-blue">{{visit.review[0].review | truncate:100}}</p>
+                                      <p class="color-blue">{{visit.review[0].review | truncate:50}}</p>
                                     </div>
                                   </div>
                                   <div class="mt10 review-time">
@@ -195,6 +233,25 @@
                       <h3 class="color-pink empty-title">A Touch Of Your Daily Dose</h3>
                       <p class="empty-descp">Now how about rating and writing a super review for that newly-opened restaurant in your town? Wherever
                         you go, click on a star and pen down your experiences. </p>
+                        <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
+                        <div class="journey-downloadicon">
+                          <ul class="list-unstyled list-inline text-center color-pink">
+                            <li class="">
+                              Download App
+                            </li>
+                            <li>
+                              <a href="#" target="_blank" class="color-pink">
+                                <i class="fa fa-apple"></i>
+                              </a>
+                            </li>
+                            <li>|</li>
+                            <li>
+                              <a href="#" class="color-pink" target="_blank">
+                                <i class="fa fa-android"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -241,7 +298,7 @@
                                   <div class="travel-life-rating local-life-rating" ng-if="!(visit.review.length==0)" ng-click="getReview(visit);">
                                     <span class="star-rating pointer" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':visit.type=='local-life','color-pink':visit.type=='travel-life'}"></i></span>
                                     <span class="star-rating pointer color-grey" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
-                                    <p class="color-blue">{{visit.review[0].review | truncate:100}}</p>
+                                    <p class="color-blue">{{visit.review[0].review | truncate:50}}</p>
                                   </div>
                                 </div>
                                 <div class="mt10">

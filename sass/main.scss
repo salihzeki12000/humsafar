@@ -2974,9 +2974,10 @@ header {
 
 .month-collage {
   margin-bottom: 30px;
-  .monthname-count{
-    font-size: 12px;
-  }
+}
+
+.monthname-count{
+  font-size: 12px;
 }
 
 .collage-month-view {
@@ -5216,6 +5217,7 @@ header {
   height: 37px;
   border: 2px solid #868686;
   border-radius: 15px;
+  background-color: $brand-light-grey;
   box-shadow: 0 2px 5px #ccc;
   display: inline-block;
   vertical-align: middle;
@@ -6060,6 +6062,7 @@ header {
       border: 2px solid #868686;
       margin-left: 5px;
       display: inline-block;
+      background-color: $brand-light-grey;
       overflow: hidden;
       box-shadow: 0 2px 5px #ccc;
 
