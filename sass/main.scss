@@ -2968,7 +2968,7 @@ header {
 }
 
 .moment-view {
-  padding: 0 40px 60px;
+  padding: 10px 40px 60px;
   min-height: 500px;
 }
 
@@ -3128,6 +3128,7 @@ header {
     width: 100%;
     min-height: 250px;
     margin-top: 10px;
+    padding: 10px;
     // @include position(absolute, 30px null null 15px);
     // overflow: hidden;
    img {
@@ -3142,6 +3143,7 @@ header {
     @include position(absolute, 0 null null 0);
      img {
     width: 100%;
+    padding: 10px;
     }
   }
 }
@@ -3277,7 +3279,7 @@ header {
   .panel-default > .panel-heading {
     padding: 0;
     border-radius: 0;
-    border-bottom: 3px solid $brand-dark-pink;
+    border-bottom: 2px solid $brand-dark-pink;
     background-color: transparent;
 
     h3 {
@@ -5394,7 +5396,7 @@ header {
 .journey-post {
   .post {
     color: #424242;
-    word-break: break-all;
+    // word-break: break-all;
     @extend .avenir-roman;
 
     b {
@@ -7507,11 +7509,11 @@ header {
 
   .trip-type-icon {
     position: absolute;
-    top: -20px;
-    right: 15px;
+    right: 10px;
+    bottom: 10px;
 
     img {
-      width: 40px;
+      width: 30px;
     }
   }
 
@@ -10567,6 +10569,8 @@ header {
   .notify-imgholder {
     height: 550px;
     position: relative;
+    background: url('../img/default_Images_2.jpg') no-repeat 50% 50%;
+    background-size: cover;
     overflow: hidden;
     video{
       width: 100%;

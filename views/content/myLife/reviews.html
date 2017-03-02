@@ -70,7 +70,7 @@
                   <div class="review-travel-life">
                     <div class="heading-review clearfix">
                       <h3 class="place-name pull-left m-clear color-blue avenir-heavy">{{view.checkIn.location}}</h3>
-                      <img ng-src="{{view.checkIn.category|kindOfReviewCheckIn}}" alt=""  class="pull-right">
+                      <img ng-src="{{view.checkIn.category|kindOfCheckIn}}" alt=""  class="pull-right">
                     </div>
                     <div class="rate-location">
                       <p class=" m-clear inline-block avenir-heavy pointer" ng-click="getReview(view);" ng-if="view.review.length==0" ng-class="{'color-cyan':view.type=='local-life','color-pink':view.type=='travel-life'}">Rate this now</p>
@@ -80,6 +80,7 @@
                         <!--<span class="star-rating"><i class="fa fa-star"></i></span>
                         <span class="star-rating"><i class="fa fa-star"></i></span>
                         <span class="star-rating"><i class="fa fa-star"></i></span>-->
+                        <p class="color-blue">{{view.review[0].review | truncate:100}}</p>
                       </div>
                     </div>
                     <div class="mt10 review-time">
@@ -161,13 +162,14 @@
                                 <div class="review-local-life">
                                   <div class="heading-review clearfix">
                                     <h3 class="place-name pull-left m-clear color-blue avenir-heavy">{{visit.checkIn.location}}</h3>
-                                    <img ng-src="{{view.checkIn.category|kindOfReviewCheckIn}}" alt=""  class="pull-right">
+                                    <img ng-src="{{view.checkIn.category|kindOfCheckIn}}" alt=""  class="pull-right">
                                   </div>
                                   <div class="rate-location">
                                     <p class="color-pink m-clear inline-block avenir-heavy pointer" ng-click="getReview(visit);" ng-if="visit.review.length==0">Rate this now</p>
                                     <div class="travel-life-rating local-life-rating" ng-if="!(visit.review.length==0)" ng-click="getReview(visit);">
                                       <span class="star-rating pointer" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':visit.type=='local-life','color-pink':visit.type=='travel-life'}"></i></span>
                                       <span class="star-rating pointer color-grey" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
+                                      <p class="color-blue">{{visit.review[0].review | truncate:100}}</p>
                                     </div>
                                   </div>
                                   <div class="mt10 review-time">
@@ -232,13 +234,14 @@
                               <div class="review-local-life">
                                 <div class="heading-review clearfix">
                                   <h3 class="place-name pull-left m-clear color-blue avenir-heavy">{{visit.checkIn.location}}</h3>
-                                  <img ng-src="{{view.checkIn.category|kindOfReviewCheckIn}}" alt="" class="pull-right">
+                                  <img ng-src="{{view.checkIn.category|kindOfCheckIn}}" alt="" class="pull-right">
                                 </div>
                                 <div class="rate-location">
                                   <p class="color-cyan pointer m-clear inline-block avenir-heavy" ng-click="getReview(visit);" ng-if="visit.review.length==0">Rate this now</p>
                                   <div class="travel-life-rating local-life-rating" ng-if="!(visit.review.length==0)" ng-click="getReview(visit);">
                                     <span class="star-rating pointer" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':visit.type=='local-life','color-pink':visit.type=='travel-life'}"></i></span>
                                     <span class="star-rating pointer color-grey" ng-repeat="time in visit.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
+                                    <p class="color-blue">{{visit.review[0].review | truncate:100}}</p>
                                   </div>
                                 </div>
                                 <div class="mt10">
