@@ -372,6 +372,15 @@ var navigationservice = angular.module('navigationservice', [])
         returnVal.saveUserData(object, callback, function (data) {
           console.log(data);
         });
+      },
+      oldUsersLogin: function (formData, callback) {
+        TravelibroService.http({
+          url: adminURL + "/user/loginWeb",
+          data: formData,
+          method: "POST"
+        }).success(callback).error(function (data) {
+          console.log(data);
+        });
       }
     };
     return returnVal;

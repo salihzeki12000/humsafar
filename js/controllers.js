@@ -20,6 +20,9 @@ var center = {};
 var centers = [];
 markers[0] = {};
 angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'commontask', 'activity', 'infinite-scroll', 'navigationservice', 'travelibroservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce'])
+  .run(['$anchorScroll', function ($anchorScroll) {
+    $anchorScroll.yOffset = 50; // always scroll by 50 extra pixels
+  }])
 
   .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar) {
     //Used to name the .html file
@@ -178,12 +181,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               if (slug === null || slug === "") {
                 slug = $.jStorage.get("profile").urlSlug;
               }
+
               $state.go("mylife", {
                 name: 'journey',
                 urlSlug: slug
               });
-            } else if (alreadyLoggedIn === false) {
-              $state.go('mainpage');
             }
           } else {
 
@@ -219,7 +221,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.submit = function () {
       console.log($scope.formData);
-      Navigation
+      NavigationService.oldUsersLogin($scope.formData, function (succ1) {
+        if (succ1.value) {
+          console.log(succ1);
+          NavigationService.getAccessToken(function (succ2) {
+            console.log(succ2);
+            $.jStorage.set("accessToken", succ2.accessToken);
+            if (succ2.accessToken && succ2.accessToken !== "") {
+              NavigationService.getProfile("", function (succ3) {
+                $.jStorage.set("isLoggedIn", false);
+                $.jStorage.set("oldUserData", succ3.data);
+                $state.go("login-flow", {
+                  'accessToken': succ2.accessToken
+                });
+              }, function (err3) {
+                console.log(err3);
+              });
+            } else {
+
+            }
+          }, function (err2) {
+            console.log(err2);
+          });
+        } else {
+          console.log(data);
+          //things to do when user email or password is wrong 
+        }
+      });
     };
   })
   // .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $stateParams) {
@@ -1043,8 +1071,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       console.log($scope.journey.post[$scope.journey.post.length - 1].UTCModified);
       $scope.options = {
-        minDate: new Date(1 / 1 / 1970),
-        maxDate: new Date($scope.journey.post[$scope.journey.post.length - 1].UTCModified),
+        minDate: new Date($scope.journey.post[$scope.journey.post.length - 1].UTCModified),
+        maxDate: new Date(date),
         showWeeks: false
       };
       modal = $uibModal.open({
@@ -1260,7 +1288,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
         {
-          //Grey static dotted-polylines starts here
+          // Grey static dotted - polylines starts here
           // travelPath = new google.maps.Polyline({
           //   path: centers,
           //   geodesic: true,
@@ -1274,7 +1302,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           //   }],
           // });
           // travelPath.setMap(map);
-          //Grey static polylines ends here
+          // Grey static polylines ends here
 
         }
 
@@ -1345,6 +1373,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           var timePerStep = frac1; //Change this to alter animation speed
           var lineSymbol = {
             path: 'M 0,-1 0,1',
+            // path: google.maps.SymbolPath.map - icon - airport,
             strokeOpacity: 1,
             scale: 3
           };
@@ -1368,13 +1397,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               // strokeColor: "#f2675b", //orange
               // strokeColor: "#263757", //navy-blue
               strokeColor: "#11d3cb", //navy-blue
-              strokeOpacity: 1,
-              // icons: [{
-              //   icon: lineSymbol,
-              //   offset: '0',
-              //   repeat: '25px'
-              // }],
+              // strokeOpacity: 1,
+              //   strokeWeight: 3,
+              strokeOpacity: 0, //fir dotted lines
               strokeWeight: 3,
+              icons: [{
+                icon: lineSymbol,
+                offset: '0', //set +ve val for moving trails
+                repeat: '20px'
+              }],
+
               geodesic: true, //set to false if you want straight line instead of arc
               map: map,
             });
@@ -4304,7 +4336,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     })
   })
 
-  .controller('MylifeCtrl', function ($scope, $state, $stateParams, TemplateService, NavigationService, cfpLoadingBar, TravelibroService, $timeout, $uibModal, $location, $filter, MyLife, OnGoJourney, localLife, LikesAndComments) {
+  .controller('MylifeCtrl', function ($scope, $state, $stateParams, TemplateService, NavigationService, cfpLoadingBar, TravelibroService, $timeout, $uibModal, $location, $filter, MyLife, OnGoJourney, localLife, LikesAndComments, $anchorScroll, $location) {
     //Used to name the .html file
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("mylife");
@@ -5428,17 +5460,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       switch (view) {
         case 0:
           url = "journey";
+          $location.hash(url);
+          $anchorScroll();
           break;
         case 1:
           url = "moments";
+          $location.hash(url);
           getMoments();
+          $anchorScroll();
           break;
         case 2:
           url = "reviews";
+          $location.hash(url);
           getReviews();
+          $anchorScroll();
           break;
         case 3:
           url = "holidayplanner";
+          $location.hash(url);
+          $anchorScroll();
           break;
       }
       $state.go("mylife", {
@@ -5447,7 +5487,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         notify: false
       });
     }
-
 
     $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
     $scope.mapDataHumanizeFn = function (val) {
@@ -14880,6 +14919,71 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Coming Soon"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+  })
+
+  .controller('LoginFlowCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state, $interval) {
+    $scope.template = TemplateService.changecontent("login-flow"); //Use same name of .html file
+    $scope.menutitle = NavigationService.makeactive("Login Flow"); //This is the Title of the Website
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    $scope.userData = $.jStorage.get("oldUserData");
+    console.log($scope.userData);
+
+    var checktwitter = function (data, status) {
+      var repdata = {};
+      if (data.accessToken) {
+        $interval.cancel(stopinterval);
+        ref.close();
+        $.jStorage.set("accessToken", data.accessToken);
+        NavigationService.getProfile("", function (data) {
+          if (data.data._id) {
+            $.jStorage.set("isLoggedIn", true);
+            $.jStorage.set("profile", data.data);
+            var alreadyLoggedIn = data.data.alreadyLoggedIn;
+            if (alreadyLoggedIn === true) {
+              var slug = $.jStorage.get("activeUrlSlug");
+              console.log(slug);
+              if (slug === null || slug === "") {
+                slug = $.jStorage.get("profile").urlSlug;
+              }
+              $state.go("mylife", {
+                name: 'journey',
+                urlSlug: slug
+              });
+            } else if (alreadyLoggedIn === false) {
+              $state.go('mainpage');
+            }
+          } else {
+
+          }
+        }, function (err) {
+          console.log(err);
+        });
+      }
+    };
+
+    var callAtIntervaltwitter = function () {
+      NavigationService.getAccessToken(checktwitter, function (err) {
+        console.log(err);
+      });
+    };
+
+    var authenticatesuccess = function (stopinterval) {
+      console.log("login window closed");
+      $ionicLoading.hide();
+      $interval.cancel(stopinterval);
+    };
+
+    $scope.socialLogin = function (loginTo) {
+      ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
+      console.log(ref);
+      stopinterval = $interval(callAtIntervaltwitter, 2000);
+      ref.onbeforeunload = function (e) {
+        console.log("window closed");
+        $interval.cancel(stopinterval);
+        authenticatesuccess(stopinterval);
+      };
+    };
   })
 
   .controller('languageCtrl', function ($scope, TemplateService, $translate, $rootScope) {

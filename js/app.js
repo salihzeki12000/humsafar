@@ -9,7 +9,6 @@ var backgroundClick = {
 };
 
 var imageTestingCallback = function (dataURI, type) {
-
   // convert base64 to raw binary data held in a string
   var byteString = atob(dataURI.split(',')[1]);
 
@@ -366,6 +365,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       url: "/coming-soon",
       templateUrl: "views/template.html",
       controller: 'ComingSoonCtrl'
+    })
+    .state('login-flow', {
+      url: "/login-flow",
+      templateUrl: "views/template.html",
+      controller: 'LoginFlowCtrl'
     })
     .state('ProfileList', {
       url: "/profile-list/:active/:urlSlug",
@@ -966,6 +970,8 @@ firstapp.filter('typeOfPost', function () {
       color = "cyan_";
     } else if (type == 'local-post') {
       color = "local-";
+    } else if (type == 'otg-post') {
+      color = 'otg-';
     }
     if (post && post.checkIn && post.checkIn.location) {
       return "img/typeOfPost/" + color + "location.png";
