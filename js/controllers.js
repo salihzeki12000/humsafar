@@ -211,7 +211,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.socialLogin = function (loginTo) {
-      ref = window.open(adminURL + "/user/" + loginTo , '_blank', 'location=no');
+      ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
       console.log(ref);
       stopinterval = $interval(callAtIntervaltwitter, 2000);
       ref.onbeforeunload = function (e) {
@@ -233,10 +233,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               NavigationService.getProfile("", function (succ3) {
                 $.jStorage.set("isLoggedIn", false);
                 $.jStorage.set("oldUserData", succ3.data);
-                // $state.go("login-flow", {
-                //   'accessToken': succ2.accessToken
-                // });
-                window.location = "http://travelibro.net/blog"
+                $state.go("login-flow", {
+                  'accessToken': succ2.accessToken
+                });
+                // window.location = "http://travelibro.net/blog"
               }, function (err3) {
                 console.log(err3);
               });
@@ -925,24 +925,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var journeyInfoStrip = $('.journey-info-strip').outerHeight();
 
 
-    function calcWidth(){
+    function calcWidth() {
       var width = $(window).width();
       var percent = 35;
-      var newPadding = width*percent/100;
-      var newCarHolderWidth = (newPadding-30);
-      var newZoomCarHolder = newCarHolderWidth/550;
+      var newPadding = width * percent / 100;
+      var newCarHolderWidth = (newPadding - 30);
+      var newZoomCarHolder = newCarHolderWidth / 550;
 
-      $scope.mapJourneyCss = {"padding-left":newPadding};
-      $scope.cardHolderCss = {zoom:newZoomCarHolder}
-      console.log(newPadding,width);
+      $scope.mapJourneyCss = {
+        "padding-left": newPadding
+      };
+      $scope.cardHolderCss = {
+        zoom: newZoomCarHolder
+      }
+      console.log(newPadding, width);
     };
 
-    $(window).resize(function(){
-      if($(window).width() > 991){
-        calcWidth();
-      }
-    });
+    // $(window).resize(function(){
 
+    // });
+    if ($(window).width() > 991) {
+      calcWidth();
+    }
     $scope.ongoCard = true;
 
     $(window).scroll(function (event) {
@@ -1694,19 +1698,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         LikesAndComments.likeUnlike("post", "unlike", uniqueId, _id, null);
       }
     };
-
-    // $scope.getLikes = function (id) {
-    //   var formData = {
-    //     "_id": id
-    //   }
-    //   $http({
-    //     url: adminURL + "/post/getPostLikes",
-    //     method: "POST",
-    //     data: formData
-    //   }).success(function (data) {
-    //     $scope.listOfLikes = data.data;
-    //   });
-    // };
 
     $scope.focus = function (id) {
       console.log(id, "focus called");
@@ -5046,6 +5037,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.allPhotos.newArray = [];
     //Photo comment popup
     $scope.getPhotosCommentData = function (photoId, index, length, array) {
+      $scope.userProfilePic = $.jStorage.get("profile").profilePicture;
       console.log(index);
       console.log(length);
       console.log(array);
@@ -10280,20 +10272,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     };
     $scope.prevPhotoSlide = function (slideData) {
-      if (slideData.photoSliderIndex == 0) {
-        slideData.photoSliderIndex = slideData.photoSliderLength - 1;
-        var prevId = slideData.newArray[slideData.photoSliderIndex]._id;
-        console.log(slideData.photoSliderIndex, 'prev slide');
-        LikesAndComments.openPhotoPopup(prevId, $scope);
-      } else {
-        console.log(slideData);
-        slideData.photoSliderIndex--;
-        var prevId = slideData.newArray[slideData.photoSliderIndex]._id;
-        console.log(prevId, 'prev id');
-        console.log(slideData.photoSliderIndex, 'prev slide');
-        LikesAndComments.openPhotoPopup(prevId, $scope);
-      }
-    }
+        if (slideData.photoSliderIndex == 0) {
+          slideData.photoSliderIndex = slideData.photoSliderLength - 1;
+          var prevId = slideData.newArray[slideData.photoSliderIndex]._id;
+          console.log(slideData.photoSliderIndex, 'prev slide');
+          LikesAndComments.openPhotoPopup(prevId, $scope);
+        } else {
+          console.log(slideData);
+          slideData.photoSliderIndex--;
+          var prevId = slideData.newArray[slideData.photoSliderIndex]._id;
+          console.log(prevId, 'prev id');
+          console.log(slideData.photoSliderIndex, 'prev slide');
+          LikesAndComments.openPhotoPopup(prevId, $scope);
+        }
+      },
+      // photo likes
+      $scope.getLikes = function (id) {
+        LikesAndComments.getLikes('photo', id, function (data) {
+          $scope.listOfLikes = data.data;
+          console.log($scope.listOfLikes);
+        });
+      };
+    // photo likes end
   })
 
   .controller('UserQuickItineraryCtrl', function ($scope, TemplateService, NavigationService, LikesAndComments, $timeout, $stateParams, $uibModal, Itinerary) {
@@ -14988,7 +14988,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 slug = $.jStorage.get("profile").urlSlug;
               }
               if ($.jStorage.get("history") === 'TravelBlog') {
-                $state.go("blog");
+                window.location = "http://travelibro.net/blog";
               } else {
                 $state.go("mylife", {
                   name: 'journey',
@@ -15020,8 +15020,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.socialLogin = function (loginTo) {
-      var userId=$.jStorage.get("profile")._id;
-      ref = window.open(adminURL + "/user/" + loginTo+"OldUser?userId="+userId,'_blank', 'location=no');
+      var userId = $.jStorage.get("oldUserData")._id;
+      ref = window.open(adminURL + "/user/" + loginTo + "OldUser?userId=" + userId, '_blank', 'location=no');
       console.log(ref);
       stopinterval = $interval(callAtIntervaltwitter, 2000);
       ref.onbeforeunload = function (e) {
