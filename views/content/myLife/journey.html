@@ -57,14 +57,19 @@
               <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10">
                 <div class="row">
                   <div class="col-md-6 col-sm-6">
-                    <div class="video-gif-journey">
+                    <div class="video-gif-journey videoplays">
                       <div class="mobile-gif">
                         <img src="img/profile-empty/gif-mobile.png" alt="GIF Travelibro" class="img-responsive">
                       </div>
                         <div class="videoplay-empty-journey">
-                        <video width="238px" height="100%" autoplay id="video" muted>
+                        <video width="238px" height="100%" autoplay id="video" muted videoend>
                           <source src="img/libro-home/videos/travellife.mp4" type="video/mp4">
                         </video>
+                           <div class="play-show">
+                            <a class="various color-pink fancybox.iframe vimeo" href="http://player.vimeo.com/video/34792993?title=0&amp;byline=0&amp;portrait=0" fancybox-box  width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen ng-click="pauseVideo();">
+                                <i class="fa fa-play-circle" aria-hidden="true"></i>
+                            </a>
+                          </div>
                       </div>
                         <a class="volume-off-on-mylife" id="mute-video" ng-click="muteVolume()">
                             <i class="fa fa-microphone-slash" aria-hidden="true"></i>
@@ -431,7 +436,7 @@
               <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10">
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="video-gif-journey">
+                    <div class="video-gif-journey videoplays">
                       <div class="mobile-gif">
                         <img src="img/profile-empty/gif-mobile.png" alt="GIF Travelibro" class="img-responsive">
                       </div>
@@ -439,6 +444,11 @@
                         <video width="238px" height="100%"  autoplay id="video" muted>
                           <source src="img/libro-home/videos/locallife.mp4" type="video/mp4">
                         </video>
+                           <div class="play-show">
+                            <a class="various color-cyan fancybox.iframe vimeo" href="http://player.vimeo.com/video/34792993?title=0&amp;byline=0&amp;portrait=0" fancybox-box  width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen ng-click="pauseVideo();">
+                                <i class="fa fa-play-circle" aria-hidden="true"></i>
+                            </a>
+                          </div>
                       </div>
                             <a class="volume-off-on-mylife" id="mute-video" ng-click="muteVolume()">
                               <i class="fa fa-microphone-slash" aria-hidden="true"></i>

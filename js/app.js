@@ -1421,8 +1421,13 @@ firstapp.directive('videoend', [function () {
         restrict: 'A',
         link: function (scope, elem, attr) {
           $elem = $(elem);
-          console.log($elem);
-          $attrs=$(attr);
+          var aud = $elem.get(0);
+          aud.onended = function() {
+              $(".videoplays").addClass('playbutton');
+          };
+          aud.onplay = function() {
+              $(".videoplays").removeClass('playbutton');
+          };
         }
     };
 }])
