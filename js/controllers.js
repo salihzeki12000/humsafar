@@ -15020,7 +15020,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.socialLogin = function (loginTo) {
-      ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
+      var userId=$.jStorage.get("profile")._id;
+      ref = window.open(adminURL + "/user/" + loginTo+"OldUser?userId="+userId,'_blank', 'location=no');
       console.log(ref);
       stopinterval = $interval(callAtIntervaltwitter, 2000);
       ref.onbeforeunload = function (e) {
