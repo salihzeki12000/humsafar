@@ -1369,6 +1369,13 @@ a.full-screen {
         color: $brand-grey;
         @include transition(all ease 300ms);
         }
+          a.full-screen-mylife {
+        position: absolute;
+        right: -10px;
+        font-size: 24px;
+        color: $brand-grey;
+        @include transition(all ease 300ms);
+        }
 }
 
 
