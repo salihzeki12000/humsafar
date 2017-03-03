@@ -135,7 +135,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $interval, $state) {
     //Used to name the .html file
-    var stopinterval;
     $scope.userData = $.jStorage.get("profile");
     $scope.template = TemplateService.changecontent("login");
     $scope.menutitle = NavigationService.makeactive("Login");
@@ -164,37 +163,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         size: "sm"
       });
     };
-
+    var ref = "";
     var checktwitter = function (data, status) {
       var repdata = {};
-      if (data.accessToken) {
+      console.log(ref.closed);
+      if (ref.closed) {
         $interval.cancel(stopinterval);
-        ref.close();
-        $.jStorage.set("accessToken", data.accessToken);
-        NavigationService.getProfile("", function (data) {
-          if (data.data._id) {
-            $.jStorage.set("isLoggedIn", true);
-            $.jStorage.set("profile", data.data);
-            var alreadyLoggedIn = data.data.alreadyLoggedIn;
-            if (alreadyLoggedIn === true) {
-              var slug = $.jStorage.get("activeUrlSlug");
-              console.log(slug);
-              if (slug === null || slug === "") {
-                slug = $.jStorage.get("profile").urlSlug;
+      } else {
+        if (data.accessToken) {
+          $interval.cancel(stopinterval);
+          ref.close();
+          $.jStorage.set("accessToken", data.accessToken);
+          NavigationService.getProfile("", function (data) {
+            if (data.data._id) {
+              $.jStorage.set("isLoggedIn", true);
+              $.jStorage.set("profile", data.data);
+              var alreadyLoggedIn = data.data.alreadyLoggedIn;
+              if (alreadyLoggedIn === true) {
+                var slug = $.jStorage.get("activeUrlSlug");
+                console.log(slug);
+                if (slug === null || slug === "") {
+                  slug = $.jStorage.get("profile").urlSlug;
+                }
+                $state.go("mylife", {
+                  name: 'journey',
+                  urlSlug: slug
+                });
+              } else if (alreadyLoggedIn === false) {
+                $state.go('mainpage');
               }
-              $state.go("mylife", {
-                name: 'journey',
-                urlSlug: slug
-              });
-            } else if (alreadyLoggedIn === false) {
-              $state.go('mainpage');
-            }
-          } else {
+            } else {
 
-          }
-        }, function (err) {
-          console.log(err);
-        });
+            }
+          }, function (err) {
+            console.log(err);
+          });
+        }
       }
     };
 
@@ -214,15 +218,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
       console.log(ref);
       stopinterval = $interval(callAtIntervaltwitter, 2000);
-      ref.onbeforeunload = function (e) {
-        console.log("window closed");
-        $interval.cancel(stopinterval);
-        authenticatesuccess(stopinterval);
-      };
+      // ref.onbeforeunload = function (e) {
+      //   alert("window closed");
+      //   $interval.cancel(stopinterval);
+      //   authenticatesuccess(stopinterval);
+      // };
     };
 
     $scope.submit = function () {
-      console.log($scope.formData);
+      console.log("sndasdjsdjsa", $scope.formData);
       NavigationService.oldUsersLogin($scope.formData, function (succ1) {
         if (succ1.value) {
           console.log(succ1);
@@ -1303,12 +1307,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // styles: mapStyle
         });
 
-
         var step = 0;
         var numSteps = 100; //Change this to set animation resolution
         var lineSymbol = {
           path: 'M 0,-1 0,1',
-          strokeOpacity: 1,
+          strokeOpacity: 0,
           scale: 3
         };
 
@@ -14972,38 +14975,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var checktwitter = function (data, status) {
       var repdata = {};
-      if (data.accessToken) {
+      if (ref.closed) {
         $interval.cancel(stopinterval);
-        ref.close();
-        $.jStorage.set("accessToken", data.accessToken);
-        NavigationService.getProfile("", function (data) {
-          if (data.data._id) {
-            $.jStorage.set("isLoggedIn", true);
-            $.jStorage.set("profile", data.data);
-            var alreadyLoggedIn = data.data.alreadyLoggedIn;
-            if (alreadyLoggedIn === true) {
-              var slug = $.jStorage.get("activeUrlSlug");
-              console.log(slug);
-              if (slug === null || slug === "") {
-                slug = $.jStorage.get("profile").urlSlug;
+      } else {
+        if (data.accessToken) {
+          $interval.cancel(stopinterval);
+          ref.close();
+          $.jStorage.set("accessToken", data.accessToken);
+          NavigationService.getProfile("", function (data) {
+            if (data.data._id) {
+              $.jStorage.set("isLoggedIn", true);
+              $.jStorage.set("profile", data.data);
+              var alreadyLoggedIn = data.data.alreadyLoggedIn;
+              if (alreadyLoggedIn === true) {
+                var slug = $.jStorage.get("activeUrlSlug");
+                console.log(slug);
+                if (slug === null || slug === "") {
+                  slug = $.jStorage.get("profile").urlSlug;
+                }
+                if ($.jStorage.get("history") === 'TravelBlog') {
+                  window.location = "http://travelibro.net/blog";
+                } else {
+                  $state.go("mylife", {
+                    name: 'journey',
+                    urlSlug: slug
+                  });
+                }
+              } else if (alreadyLoggedIn === false) {
+                $state.go('mainpage');
               }
-              if ($.jStorage.get("history") === 'TravelBlog') {
-                window.location = "http://travelibro.net/blog";
-              } else {
-                $state.go("mylife", {
-                  name: 'journey',
-                  urlSlug: slug
-                });
-              }
-            } else if (alreadyLoggedIn === false) {
-              $state.go('mainpage');
-            }
-          } else {
+            } else {
 
-          }
-        }, function (err) {
-          console.log(err);
-        });
+            }
+          }, function (err) {
+            console.log(err);
+          });
+        }
       }
     };
 
