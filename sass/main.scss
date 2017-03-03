@@ -1525,12 +1525,15 @@ header {
   width: 200px;
 }
 
-.empty-profile-journey,
+
 .empty-profile-moment,
 .empty-profile-review {
   margin: 5% 0;
 }
 
+.empty-profile-journey{
+  padding: 5% 0;
+}
 .empty-chronicling,
 .empty-ongo {
   margin: 15px 0 0;
@@ -5667,6 +5670,11 @@ header {
 
 .video-ongo-journey {
   position: relative;
+  max-height: 350px;
+  overflow: hidden;
+  video{
+    height: 100%;
+  }
 
   &:after {
     content: '';
@@ -10649,7 +10657,7 @@ header {
 
 .like-dropdown {
   width: 155px;
-  padding: 10px;
+  // padding: 10px;
   position: absolute;
   top: 28px;
   right: -5px;
@@ -10661,15 +10669,15 @@ header {
   }
 
   ::-webkit-scrollbar-track {
-    background-color: #fff;
+    background-color: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: $brand-pink;
+    background-color: #fff;
   }
 
   ul {
-    max-height: 230px;
+    max-height: 165px;
     overflow-y: auto;
   }
 
@@ -10677,6 +10685,7 @@ header {
     padding: 8px 10px;
     display: block;
     color: #fff;
+    font-size: 12px;
   }
 }
 

@@ -102,7 +102,7 @@
               <flex-slider flex-slide="video in otgVideo track by $index" class="carsouel"  control-nav="false" slideshow="false">
                 <li>
                   <div class="holder-otg-video">
-                    <img ng-src="{{video.thumbnail|uploadpath}}" alt="" class="img-responsive">
+                    <img ng-src="{{video.thumbnail|uploadpath:335:334:'cover'}}" alt="" class="img-responsive">
                     <!-- video front caption -->
                     <div class="video-caption otg-photo-caption" ng-click="addVideoCaption(video._id);" ng-hide="video._id == indexVideoCaption">
                       <p class="color-white avenir-roman m-clear" ng-if="!video.caption || video.caption==''">Add Caption</p>
