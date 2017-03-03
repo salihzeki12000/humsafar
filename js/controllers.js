@@ -248,7 +248,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           });
         } else {
           console.log(data);
-          //things to do when user email or password is wrong 
+          //things to do when user email or password is wrong
         }
       });
     };
@@ -923,6 +923,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var lastScrollTop = 0;
     var delta = 5;
     var journeyInfoStrip = $('.journey-info-strip').outerHeight();
+
+
+    function calcWidth(){
+      var width = $(window).width();
+      var percent = 35;
+      var newPadding = width*percent/100;
+      var newCarHolderWidth = (newPadding-30);
+      var newZoomCarHolder = newCarHolderWidth/550;
+
+      $scope.mapJourneyCss = {"padding-left":newPadding};
+      $scope.cardHolderCss = {zoom:newZoomCarHolder}
+      console.log(newPadding,width);
+    };
+
+    $(window).resize(function(){
+      if($(window).width() > 991){
+        calcWidth();
+      }
+    });
 
     $scope.ongoCard = true;
 
