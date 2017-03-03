@@ -914,46 +914,46 @@ firstapp.filter('kindOfReviewCheckIn', function () {
     var returnVal = "";
     switch (input) {
       case "Cinema & Theatre":
-        returnVal = "img/icons/cinematrans.png";
+        returnVal = "img/kindOfReviewCheckIn/grey-cinema.png";
         break;
       case "Restaurants & Bars":
-        returnVal = "img/icons/restaurantsandbars.png";
+        returnVal = "img/kindOfReviewCheckIn/grey-cinema.png";
         break;
       case "Shopping":
-        returnVal = "img/icons/shopping.png";
+        returnVal = "img/kindOfReviewCheckIn/grey-shopping.png";
         break;
       case "Transportation":
-        returnVal = "img/icons/airport.png";
+        returnVal = "img/kindOfReviewCheckIn/grey-airport.png";
         break;
       case "Nature and Parks":
-        returnVal = "img/icons/nature.png";
+        returnVal = "img/kindOfReviewCheckIn/grey-nature.png";
         break;
       case "Sights and Landmarks":
-        returnVal = "img/icons/sightstrans.png";
+        returnVal = "img/kindOfReviewCheckIn/grey-sights.png";
         break;
       case "Museums and Galleries":
-        returnVal = "img/icons/museumstrans.png";
+        returnVal = "img/kindOfReviewCheckIn/grey-museums.png";
         break;
       case "Zoo and Aquariums":
-        returnVal = "img/icons/zootrans.png";
+        returnVal = "img/kindOfReviewCheckIn/grey-zoo.png";
         break;
       case "Religious":
-        returnVal = "img/icons/religious.png";
+        returnVal = "img/kindOfReviewCheckIn/grey-religious.png";
         break;
       case "Hotels & Accomodations":
-        returnVal = "img/icons/hotels.png";
+        returnVal = "img/kindOfReviewCheckIn/grey-hotels.png";
         break;
       case "Others":
-        returnVal = "img/icons/othersdottrans.png";
+        returnVal = "img/kindOfReviewCheckIn/grey-others.png";
         break;
       case "Other":
-        returnVal = "img/othersdottrans.png";
+        returnVal = "img/kindOfReviewCheckIn/grey-others.png";
         break;
       case "City":
-        returnVal = "img/icons/city.png";
+        returnVal = "img/kindOfReviewCheckIn/grey-city.png";
         break;
       default:
-        returnVal = "img/icons/othersdottrans.png";
+        returnVal = "img/kindOfReviewCheckIn/grey-others.png";
     }
     console.log(input, returnVal);
     return returnVal;
