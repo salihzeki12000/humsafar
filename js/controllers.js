@@ -149,7 +149,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     $(window).load(function () {
-      console.log("tooltip");
+      // console.log("tooltip");
       $('[data-toggle="tooltip"]').tooltip();
     });
 
@@ -166,7 +166,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var ref = "";
     var checktwitter = function (data, status) {
       var repdata = {};
-      console.log(ref.closed);
+      console.log(ref.closed, ref);
       if (ref.closed) {
         $interval.cancel(stopinterval);
       } else {
@@ -185,10 +185,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 if (slug === null || slug === "") {
                   slug = $.jStorage.get("profile").urlSlug;
                 }
-                $state.go("mylife", {
-                  name: 'journey',
-                  urlSlug: slug
-                });
+                if ($.jStorage.get("history") === 'TravelBlog') {
+                  window.location = "http://travelibro.net/blog";
+                } else {
+                  $state.go("mylife", {
+                    name: 'journey',
+                    urlSlug: slug
+                  });
+                }
               } else if (alreadyLoggedIn === false) {
                 $state.go('mainpage');
               }
@@ -208,21 +212,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
 
-    var authenticatesuccess = function (stopinterval) {
-      console.log("login window closed");
-      $ionicLoading.hide();
-      $interval.cancel(stopinterval);
-    };
+    // var authenticatesuccess = function (stopinterval) {
+    //   console.log("login window closed");
+    //   $ionicLoading.hide();
+    //   $interval.cancel(stopinterval);
+    // };
 
     $scope.socialLogin = function (loginTo) {
       ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
       console.log(ref);
       stopinterval = $interval(callAtIntervaltwitter, 2000);
-      // ref.onbeforeunload = function (e) {
-      //   alert("window closed");
-      //   $interval.cancel(stopinterval);
-      //   authenticatesuccess(stopinterval);
-      // };
     };
 
     $scope.submit = function () {
@@ -11497,7 +11496,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log(err);
       });
     } else {
-      console.log("not found");
+
     }
 
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
@@ -14975,6 +14974,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var checktwitter = function (data, status) {
       var repdata = {};
+      console.log(ref);
       if (ref.closed) {
         $interval.cancel(stopinterval);
       } else {
@@ -15031,11 +15031,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       ref = window.open(adminURL + "/user/" + loginTo + "OldUser?userId=" + userId, '_blank', 'location=no');
       console.log(ref);
       stopinterval = $interval(callAtIntervaltwitter, 2000);
-      ref.onbeforeunload = function (e) {
-        console.log("window closed");
-        $interval.cancel(stopinterval);
-        authenticatesuccess(stopinterval);
-      };
     };
   })
 
