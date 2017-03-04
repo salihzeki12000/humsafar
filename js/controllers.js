@@ -185,8 +185,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 if (slug === null || slug === "") {
                   slug = $.jStorage.get("profile").urlSlug;
                 }
-                if ($.jStorage.get("history") === 'TravelBlog') {
-                  window.location = "http://travelibro.net/blog";
+                if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
+                  window.location = $.jStorage.get("url");
                 } else {
                   $state.go("mylife", {
                     name: 'journey',
@@ -7668,6 +7668,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    $scope.openThankYouModal = function () {
+      $uibModal.open({
+        templateUrl: "views/modal/report.html",
+        animation: true,
+        scope: $scope,
+        windowClass: "report-modal"
+      });
+    };
+
     $scope.userData = $.jStorage.get("profile");
     var scroll = {
       'pageNo': 1,
@@ -7752,11 +7761,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.changeImage = function (index, activity) {
       console.log(index, activity);
       activity.index = index;
+      activity.display = activity.activityPhotosVideos[index].type;
     };
 
     $scope.likeUnlikeActivity = function (activity) {
-      console.log(activity.likeUnlikeFlag, activity.uniqueId, activity._id);
-      console.log(activity.likeDone + "this call is from activitytest.html");
+      console.log(activity);
       activity.likeDone = !activity.likeDone;
       if (activity.likeDone) {
         if (activity.likeCount == undefined) {
@@ -7773,15 +7782,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.getLikes = function (activity) {
       console.log(activity);
-      $scope.listLikesDropDown(activity.listLike);
-      var formData = {
-        "_id": activity._id
-      }
-      var callback = function (data) {
+      LikesAndComments.getLikes(activity.type, activity._id, function (data) {
         $scope.listOfLikes = data.data;
         console.log($scope.listOfLikes);
-      };
-      LikesAndComments.getLikes(activity.likeUnlikeFlag, activity._id, callback);
+      });
     };
 
     $scope.listLikesDropDown = function (model) {
@@ -7796,6 +7800,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log(activity);
       $scope.previousId;
       $scope.post = activity;
+      $scope.comment = {
+        "test": ""
+      }
+
       var callback = function (data) {
         $scope.uniqueArr = [];
         $scope.listOfComments = data.data;
@@ -7838,7 +7846,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewCardLike = true;
         // $scope.journey.journeyHighLight = activity._id;
         $scope.showLikeShow = "show-like-side-sec";
-        LikesAndComments.getLikes("post", activity._id, callback);
+        LikesAndComments.getLikes(activity.type, activity._id, callback);
       } else {
         if ($scope.viewCardLike) {
           $scope.viewCardLike = false;
@@ -7850,7 +7858,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // $scope.focus('enterComment');
           // $scope.journey.journeyHighLight = activity._id;
           $scope.showLikeShow = "show-like-side-sec";
-          LikesAndComments.getLikes("post", activity._id, callback);
+          LikesAndComments.getLikes(activity.type, activity._id, callback);
         }
       }
       $scope.previousLikeId = activity._id;
@@ -10198,7 +10206,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('photoCommentModalCtrl', function ($scope, $uibModalInstance, LikesAndComments) {
+  .controller('photoCommentModalCtrl', function ($scope, $uibModalInstance, LikesAndComments, $timeout) {
 
     $scope.likePhoto = function (listOfComments, uniqueId, _id, additionalId) {
       // console.log(uniqueId, _id, additionalId);
@@ -10299,6 +10307,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           console.log($scope.listOfLikes);
         });
       };
+    $scope.editOption = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
     // photo likes end
   })
 
@@ -14992,8 +15007,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             if (slug === null || slug === "") {
               slug = $.jStorage.get("profile").urlSlug;
             }
-            if ($.jStorage.get("history") === 'TravelBlog') {
-              window.location = "http://travelibro.net/blog";
+            if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
+              window.location = $.jStorage.get("url");
             } else {
               $state.go("mylife", {
                 name: 'journey',

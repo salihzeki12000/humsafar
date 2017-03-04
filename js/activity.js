@@ -142,12 +142,14 @@ var activity = angular.module('activity', [])
               }
               activity.thoughts = "Has ended " + pronoun + " " + activity.name + " Journey";
             }
-            // concat photos and videos
-            activity.activityPhotosVideos = _.concat(activity.videos, activity.photos);
-            // console.log(activity.activityPhotosVideos,'new array');
-            console.log(activity.photos,'photos');
-            console.log(activity.videos,'videos');
-            // concat photos and videos end
+            if (activity && activity.photos && activity.videos) {
+              activity.activityPhotosVideos = _.concat(activity.videos, activity.photos);
+              if (activity && activity.activityPhotosVideos[0] && activity.activityPhotosVideos[0].thumbnail) {
+                activity.display = 'video';
+              } else {
+                activity.display = 'photo';
+              }
+            };
           });
           successCallback(activities);
         }).error(errorCallback);
