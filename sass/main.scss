@@ -10446,6 +10446,7 @@ header {
     z-index: 1;
     overflow: hidden;
     @include transition(all 200ms linear);
+     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
   }
 
   .list-imgholder {
