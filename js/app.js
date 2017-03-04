@@ -965,14 +965,15 @@ firstapp.filter('typeOfPost', function () {
     var returnVal = "";
     var color;
     if (type == 'travel-life') {
-      color = 'red_';
-    } else if (type == 'local-life') {
-      color = "cyan_";
-    } else if (type == 'local-post') {
-      color = "local-";
-    } else if (type == 'otg-post') {
       color = 'otg-';
+    } else if (type == 'local-life') {
+      color = "local-";
     }
+    // else if (type == 'local-post') {
+    //   color = "red_";
+    // } else if (type == 'otg-post') {
+    //   color = 'cyan_';
+    // }
     if (post && post.checkIn && post.checkIn.location) {
       return "img/typeOfPost/" + color + "location.png";
     } else if (post && post.photos && post.photos.length != 0) {

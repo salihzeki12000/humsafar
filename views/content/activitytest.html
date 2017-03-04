@@ -53,7 +53,7 @@
                   <!-- post type icon -->
                   <div class="post-icon" ng-if="activity.type=='travel-life' || activity.type=='local-life'">
                     <div class="location circle-rounded pointer">
-                      <img ng-src="{{activity|typeOfPost:activity.type}}" alt="" width="38" height="38" class="">
+                      <img ng-src="{{activity|typeOfPost:activity.type}}" alt=""  class="img-responsive m-center">
                     </div>
                   </div>
                   <!-- post type icon end -->
@@ -256,7 +256,7 @@
                           </span>
                           <div class="inline-block v-mid" ng-if="!(activity.type=='editor')">
                             <span class="pointer mr5"><img src="img/comments.png" alt="" height="19" ng-click="getCommentsData(activity)"></span>
-                            <span class="pointer mr5"><img src="img/reviews.png" alt="" height="19" ng-if="activity.type =='ended-journey' || activity.type =='detail-itinerary' || activity.type =='quick-itinerary'"></span>
+                            <!-- <span class="pointer mr5"><img src="img/reviews.png" alt="" height="19" ng-if="activity.type =='ended-journey' || activity.type =='detail-itinerary' || activity.type =='quick-itinerary'"></span> -->
                             <span class="pointer mr5"><img src="img/share.png" alt="" height="19"></span>
                           </div>
                           <div class="inline-block v-mid" ng-if="activity.type=='editor'">
@@ -311,7 +311,7 @@
                           </span>
                           <div class="activity-edit-option" ng-show="activity.option.backgroundClick">
                             <ul>
-                              <li ng-if="activity.owner._id==userData._id">Hide From All</li>
+                              <li ng-if="activity.owner._id==userData._id">Hide From All Activity Feed <span class="hide-hover">? <span class="info-div">This activity will be hidden from all your followers Feed.</span> </span></li>
                               <li ng-if="activity.owner._id!=userData._id">Report</li>
                             </ul>
                           </div>
@@ -320,7 +320,7 @@
                     </div>
                     <div class="social-likes-reviews" ng-if="!(((activity.likeCount==0)||(activity.likeCount==undefined))&&(activity.commentCount==0))">
                       <div class="clearfix">
-                        <div class="pull-left" ng-init="activity.listLike={}" ng-click="getLikesData(activity);">
+                        <div class="pull-left" ng-init="activity.listLike={}; likeShow='false';" ng-click="getLikesData(activity); showLikeClick();">
                           <span class="color-blue mr10 card-like avenir-heavy"><i class="fa fa-heart color-blue mr5"></i><b>{{activity.likeCount}}</b> {{activity.likeCount|singularPlural:'Likes'}}
                            <div class="card-like-dropdown" ng-show="activity.listLike.backgroundClick;">
                               <ul>
@@ -329,10 +329,11 @@
                             </div>
                           </span>
                           <!--<span class="color-blue mr10 card-like avenir-heavy" ng-click="getLikes(ongo._id);editOption(ongo.like)"><i class="fa fa-heart color-blue mr5"></i><b>{{ongo.likeCount|filterCount}}</b> {{ongo.likeCount|singularOrPlural:'like'}}-->
-                          <span class="color-blue">
+                          <!-- <span class="color-blue">
                             <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue" ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">
                             <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white" ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">
-                            <span ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">354 Reviews (4.5/5)</span></span>
+                            <span ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">354 Reviews (4.5/5)</span>
+                          </span> -->
                         </div>
                         <div class="pull-right">
                           <div class="post-travel-icon">
@@ -452,12 +453,12 @@
                               <img src="img/comments-white.png" alt="" height="18" class="if-white">
                             </a>
                           </li>
-                          <li>
+                          <!-- <li>
                             <a href="">
                               <img src="img/reviews.png" alt="" height="18" class="if-blue">
                               <img src="img/reviews-white.png" alt="" height="18" class="if-white">
                             </a>
-                          </li>
+                          </li> -->
                           <li>
                             <a href="">
                               <img src="img/share.png" alt="" height="18" class="if-blue">
@@ -532,6 +533,7 @@
         </div>
         <!-- comment section -->
         <div class="comment-sec">
+          <form ng-submit="ng-click=postPostsComment(post,comment.text)">
           <div class="write-comment-text">
             <div class="commenter-img">
               <div class="commenter-imgholder">
@@ -539,7 +541,8 @@
               </div>
             </div>
             <div class="comment-ur-text relate" ng-init="hashtag={};">
-              <textarea name="" class="findTags" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="comment.text"></textarea>
+              <!-- <textarea name="" class="findTags" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="comment.text"></textarea> -->
+              <input type="text" class="form-control findTags" placeholder="Write a comment" ng-model="comment.text" id="enterComment">
               <find-tags ng-model="comment.text" element-id="enterComment" enable="bothTagging">
                 <!--<div class="dropdown-hashtag" ng-show="hashtag.backgroundClick;">
                 <ul ng-repeat="tag in hashTags">
@@ -550,9 +553,10 @@
           </div>
           <div class="clearfix comment-post">
             <div class="pull-right">
-              <button class="btn btn-pink post-btn" ng-click=postPostsComment(post,comment.text)>Post</button>
+              <button class="btn btn-pink post-btn" type="submit">Post</button>
             </div>
           </div>
+          </form>
           <div class="listing-comment">
             <div class="view-comment-list" ng-repeat="list in listOfComments.comment">
               <div class="commenter-img">
@@ -578,7 +582,7 @@
     </div>
     <!--comment activity end-->
     <!--like activity-->
-    <div class="like-side-sec  {{showLikeShow}}" ng-show="viewCardLike">
+    <div class="like-side-sec" ng-class="{'show-like-side-sec': viewCardLike==true,'':viewCardLike==false}">
       <div class="like-section">
         <ul>
           <!-- REPEAT BUDDY LIST -->
