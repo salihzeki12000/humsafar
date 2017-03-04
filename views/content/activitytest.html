@@ -52,7 +52,7 @@
                   <!-- post status end -->
                   <!-- post type icon -->
                   <div class="post-icon" ng-if="activity.type=='travel-life' || activity.type=='local-life'">
-                    <div class="location circle-rounded pointer">
+                    <div class="pointer">
                       <img ng-src="{{activity|typeOfPost:activity.type}}" alt=""  class="img-responsive m-center">
                     </div>
                   </div>
@@ -107,21 +107,40 @@
                     <div class="post-img relate" ng-if="activity.showMap && activity.imageUrl">
                       <img src="{{activity.imageUrl}}" alt="" class="img-responsive">
                     </div>
-                    <div class="post-img card-imgholder pointer relate" ng-if="activity.photos.length>0 && activity.type!='quick-itinerary' && activity.type!='detail-itinerary'"
-                      ng-init="activity.index=0" ng-click="getPhotosCommentData(activity.photos[activity.index]._id, activity.index ,activity.photos.length, activity.photos)">
-                      <div class="blur-img">
-                        <img ng-src="{{activity.photos[activity.index].name|uploadpath}}" alt="">
+                    <div class="photo-video-holder" ng-init="activity.index=0">
+                      <!-- photos -->
+                      <div class="post-img card-imgholder pointer relate" ng-if="activity.photos.length>0  && activity.display==='photo' && activity.type!='quick-itinerary' && activity.type!='detail-itinerary'"
+                         ng-click="getPhotosCommentData(activity.activityPhotosVideos[activity.index]._id, activity.index ,activity.activityPhotosVideos.length, activity.activityPhotosVideos)">
+                        <div class="blur-img">
+                          <img ng-src="{{activity.activityPhotosVideos[activity.index].name|uploadpath}}" alt="">
+                        </div>
+                        <img ng-src="{{activity.activityPhotosVideos[activity.index].name|uploadpath}}" alt="" class="card-img">
                       </div>
-                      <img ng-src="{{activity.photos[activity.index].name|uploadpath}}" alt="" class="card-img">
+                      <!-- photos end-->
+                      <!-- video -->
+                    <div class="video-sec" ng-if="activity.videos.length>0 && activity.display==='video' && activity.type!='quick-itinerary' && activity.type!='detail-itinerary'">
+                        <div class="post-img card-imgholder pointer relate"                         ng-click="getPhotosCommentData(activity.activityPhotosVideos[activity.index]._id, activity.index ,activity.activityPhotosVideos.length, activity.activityPhotosVideos)">
+                        <video poster="{{activity.activityPhotosVideos[activity.index].thumbnail|uploadpath}}" controls="controls" width="100%">
+                          <source src="{{activity.activityPhotosVideos[activity.index].name| trusted}}" type="video/mp4">
+                        </video>
+                        <!-- <div class="youtube-icon get-center">
+                          <span><i class="fa fa-youtube-play fa-4x color-white"></i></span>
+                        </div> -->
+                      </div>
                     </div>
+                      <!-- video end--></div>
                     <!-- img post end -->
                     <!-- img post slider -->
-                    <div class="imgpost-relatedslider" ng-if="activity.photos.length>1 && activity.type!='quick-itinerary' && activity.type!='detail-itinerary'">
-                      <flex-slider class="carousel" flex-slide="photo in activity.photos track by $index" item-width="80" animation="slide" item-margin="5"
+                    <div class="imgpost-relatedslider" ng-if="activity.activityPhotosVideos.length>1 && activity.type!='quick-itinerary' && activity.type!='detail-itinerary'">
+                      <flex-slider class="carousel" flex-slide="photo in activity.activityPhotosVideos track by $index" item-width="80" animation="slide" item-margin="5"
                         direction-nav="true" control-nav="false" mousewheel="true">
                         <li>
-                          <div class="related-postimgholder" ng-click="changeImage($index,activity)">
+                          <!-- <div class="related-postimgholder" ng-click="changeImage($index,activity)">
                             <img ng-src="{{photo.name|uploadpath:85:85:'cover'}}" alt="" class="img-responsive">
+                          </div> -->
+                          <div class="related-postimgholder">
+                            <img ng-src="{{photo.thumbnail|uploadpath:85:85:'cover'}}" alt="" class="img-responsive" ng-if="activity.activityPhotosVideos[$index] && activity.activityPhotosVideos[$index].thumbnail" ng-click="changeImage($index,activity)">
+                            <img ng-src="{{photo.name|uploadpath:85:85:'cover'}}" alt="" class="img-responsive" ng-if="!(activity.activityPhotosVideos[$index] && activity.activityPhotosVideos[$index].thumbnail)" ng-click="changeImage($index,activity)">
                           </div>
                         </li>
                       </flex-slider>
@@ -312,7 +331,7 @@
                           <div class="activity-edit-option" ng-show="activity.option.backgroundClick">
                             <ul>
                               <li ng-if="activity.owner._id==userData._id">Hide From All Activity Feed <span class="hide-hover">? <span class="info-div">This activity will be hidden from all your followers Feed.</span> </span></li>
-                              <li ng-if="activity.owner._id!=userData._id">Report</li>
+                              <li ng-if="activity.owner._id!=userData._id" ng-click="openThankYouModal();">Report</li>
                             </ul>
                           </div>
                         </div>
@@ -493,6 +512,7 @@
         </div>
       </div>
     </div>
+  <div class="comment-like-sec">
     <!--comment activity-->
     <div class="notify-main whole-card-comment {{getCard}}" ng-show="viewCardComment">
       <div class="comment-like-notify">
@@ -500,7 +520,7 @@
           <div class="clearfix">
             <div class="pull-left">
               <ul class="notify-like">
-                <li><a href="" class="relate"><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"  ng-click="likeUnlikeActivity(activity)" like-sound></i>
+                <li><a href="" class="relate"><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"  ng-click="likeUnlikeActivity(post)" like-sound></i>
               <span></span>
               <audio id="like-play">
                 <source src="img/tiny1.mp3" type="audio/mp3">
@@ -517,15 +537,15 @@
             <div class="pull-right">
               <div class="notification-like" ng-init="commentLike={};">
                 <!-- showLikes=!showLikes; -->
-                <span class="notify-like-holder pointer avenir-roman" ng-click="getLikes(activity);editOption(commentLike)">
+                <span class="notify-like-holder pointer avenir-roman" ng-click="getLikes(post);editOption(commentLike)">
                   <i class="fa fa-heart color-blue" ng-class="{'view-like' : commentLike.backgroundClick == true , '' : commentLike.backgroundClick == false}" ></i>
                  <span>{{post.likeCount|filterCount}}   </span>{{post.likeCount|singularPlural:'Likes'}}
                 <!-- ng-show="showLikes" -->
-                <!--<div class="like-dropdown" ng-show="commentLike.backgroundClick;">
+                <div class="like-dropdown" ng-show="commentLike.backgroundClick;">
                 <ul>
                   <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
                 </ul>
-              </div>-->
+              </div>
                 </span>
               </div>
             </div>
@@ -533,7 +553,7 @@
         </div>
         <!-- comment section -->
         <div class="comment-sec">
-          <form ng-submit="ng-click=postPostsComment(post,comment.text)">
+          <form ng-submit="postPostsComment(post,comment.text)">
           <div class="write-comment-text">
             <div class="commenter-img">
               <div class="commenter-imgholder">
@@ -543,7 +563,7 @@
             <div class="comment-ur-text relate" ng-init="hashtag={};">
               <!-- <textarea name="" class="findTags" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="comment.text"></textarea> -->
               <input type="text" class="form-control findTags" placeholder="Write a comment" ng-model="comment.text" id="enterComment">
-              <find-tags ng-model="comment.text" element-id="enterComment" enable="bothTagging">
+              <find-tags ng-model="comment.text" element-id="enterComment" enable="bothTagging"></find-tags>
                 <!--<div class="dropdown-hashtag" ng-show="hashtag.backgroundClick;">
                 <ul ng-repeat="tag in hashTags">
                   <li ng-click="appendComment(comment,tag.title,hashTag,startTagIndex,endTagIndex)"><a href="">{{tag.title}} <span class="tag-count ml10">{{tag.count}}</span></a></li>
@@ -605,4 +625,6 @@
       </div>
     </div>
     <!--like activity end-->
+  </div>
+  <div class="activity-backdrop"></div>
   </div>
