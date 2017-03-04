@@ -4,7 +4,7 @@
   </div>
   <div class="clearfix mt10 mb10">
     <div class="pull-right">
-      <div class="close pop-close-btn" ng-click="$dismiss();"><i class="fa fa-times"></i></div>
+      <div class="close pop-close-btn" ng-click="$dismiss();"><img src="img/cancel.png" alt="Cancel" class="img-responsive"></div>
     </div>
   </div>
   <div class="checkin-main">

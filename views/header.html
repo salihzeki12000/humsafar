@@ -137,12 +137,15 @@
                 <a ng-click="logout()">Logout</a>
               </li>-->
               <!--End OF logout BUTTON -->
+              <li>
+                  <a class="color-white ml10" ui-sref="activitytest">Activity Feed</a>
+              </li>
               <li ui-sref="mylife({name:'journey','urlSlug':userData.urlSlug})">
                 <a>
                   <div class="user-img inline-block v-mid">
                     <img src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" width="40" class="img-responsive">
                   </div>
-                  <span class="color-white ml10 fz13">{{userData.name}}</span>
+                  <span class="color-white ml10 fz13 usermade">{{userData.name}}</span>
                 </a>
               </li>
               <!--<li>

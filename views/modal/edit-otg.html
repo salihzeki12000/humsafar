@@ -6,7 +6,7 @@
     <div class="edit-otg-title">
       <h4 class="avenir-roman text-center color-white">Edit Activity</h4>
       <div class="pull-right">
-        <div class="close pop-close-btn notify-close" ng-click="$dismiss();"><i class="fa fa-times"></i></div>
+        <span class="close pop-close-btn notify-close" ng-click="$dismiss();"><img src="img/cancel.png" alt="Cancel" class="img-responsive"></span>
       </div>
     </div>
     <!-- edit otg title end-->
@@ -41,8 +41,8 @@
           <div class="tag-journey-friend otg-bg-all">
             <img src="img/ongojourney/otg-tag.png" alt="" class="img-responsive icon-tag" width="25">
             <div class="tag-otg-friend">
-              <input type="text" class="form-control" placeholder="Tag/Untag Friends" ng-model="ongo.getSearchedList" ng-change="listTagfriend();">
-              <div class="tagfriend-count avenir-roman"><span>{{ongo.buddiesCount}}</span> Friends</div>
+              <input type="text" class="form-control" placeholder="Search to Tag/Untag Friends" ng-model="ongo.getSearchedList" ng-change="listTagfriend();">
+              <!--<div class="tagfriend-count avenir-roman"><span>{{ongo.buddiesCount}}</span> Friends</div>-->
               <div class="dropdown-tagfriend tagfriend-list" ng-show="viewListFriend">
                 <ul>
                   <li ng-repeat="list in tagFriends track by $index">

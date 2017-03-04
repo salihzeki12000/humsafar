@@ -982,6 +982,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       $scope.confirmDelete = function () {
         modal = $uibModal.open({
           animation: true,
+          windowClass: "delete-visited-country",
           templateUrl: 'views/modal/delete-post.html',
           scope: $scope
         })
