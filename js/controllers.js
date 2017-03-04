@@ -193,6 +193,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     urlSlug: slug
                   });
                 }
+
               } else if (alreadyLoggedIn === false) {
                 $state.go('mainpage');
               }
@@ -339,7 +340,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Used to name the .html file
 
     console.log("Testing Consoles");
-
     $scope.template = TemplateService.changecontent("forgot-password-email");
     $scope.menutitle = NavigationService.makeactive("Forgot Password");
     TemplateService.title = $scope.menutitle;
@@ -351,7 +351,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $.fn.fullpage.destroy('all');
     }
 
-
+    $scope.editUserData = function (obj) {
+      NavigationService.sendOtpToReset(obj.email);
+    };
   })
   .controller('ContactCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
@@ -8590,7 +8592,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log(id);
       modal = $uibModal.open({
         animation: true,
-        windowClass: "delete-visited-country",
+        // windowClass: "delete-visited-country",
         templateUrl: "views/modal/country-visited.html",
         scope: $scope
       });
@@ -8619,9 +8621,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //remove counytry visitede starts
     $scope.removeCountryVisit = function (data) {
       $scope.removeCountry = data;
+      $scope.removeText = true;
       modal = $uibModal.open({
         scope: $scope,
         animation: true,
+        windowClass: "delete-visited-country",
         templateUrl: "views/modal/delete-visited-country.html"
         // templateUrl: "views/modal/country-visited.html"
       });
@@ -11449,9 +11453,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   .controller('AboutCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife, OnGoJourney) {
     //Used to name the .html file
-
     // console.log("Testing Consoles");
-
     $scope.template = TemplateService.changecontent("about-travelibro");
     $scope.menutitle = NavigationService.makeactive("About TraveLibro");
     TemplateService.title = $scope.menutitle;
@@ -14978,44 +14980,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       if (ref.closed) {
         $interval.cancel(stopinterval);
       } else {
-        if (data.accessToken) {
+        if (data.data.provider && data.data.provider !== "") {
           $interval.cancel(stopinterval);
           ref.close();
-          $.jStorage.set("accessToken", data.accessToken);
-          NavigationService.getProfile("", function (data) {
-            if (data.data._id) {
-              $.jStorage.set("isLoggedIn", true);
-              $.jStorage.set("profile", data.data);
-              var alreadyLoggedIn = data.data.alreadyLoggedIn;
-              if (alreadyLoggedIn === true) {
-                var slug = $.jStorage.get("activeUrlSlug");
-                console.log(slug);
-                if (slug === null || slug === "") {
-                  slug = $.jStorage.get("profile").urlSlug;
-                }
-                if ($.jStorage.get("history") === 'TravelBlog') {
-                  window.location = "http://travelibro.net/blog";
-                } else {
-                  $state.go("mylife", {
-                    name: 'journey',
-                    urlSlug: slug
-                  });
-                }
-              } else if (alreadyLoggedIn === false) {
-                $state.go('mainpage');
-              }
-            } else {
-
+          $.jStorage.set("isLoggedIn", true);
+          $.jStorage.set("profile", data.data);
+          var alreadyLoggedIn = data.data.alreadyLoggedIn;
+          if (alreadyLoggedIn === true) {
+            var slug = $.jStorage.get("activeUrlSlug");
+            console.log(slug);
+            if (slug === null || slug === "") {
+              slug = $.jStorage.get("profile").urlSlug;
             }
-          }, function (err) {
-            console.log(err);
-          });
+            if ($.jStorage.get("history") === 'TravelBlog') {
+              window.location = "http://travelibro.net/blog";
+            } else {
+              $state.go("mylife", {
+                name: 'journey',
+                urlSlug: slug
+              });
+            }
+          } else if (alreadyLoggedIn === false) {
+            $state.go('mainpage');
+          }
+        } else {
+
         }
       }
-    };
+    }
+
 
     var callAtIntervaltwitter = function () {
-      NavigationService.getAccessToken(checktwitter, function (err) {
+      NavigationService.getProfile("", checktwitter, function (err) {
         console.log(err);
       });
     };
