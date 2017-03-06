@@ -22,11 +22,11 @@
           <div class="moments-tab review-tab">
             <!-- back button -->
             <div class="pull-right" ng-if="viewTravelCountry">
-               <button class="btn btn-pink btn-more"  ng-click="changeReviewTypeView(2,'viewTravelCountry')" ng-if="reviewView==2">Back</button>
+              <button class="btn btn-pink btn-more" ng-click="changeReviewTypeView(2,'viewTravelCountry')" ng-if="reviewView==2">Back</button>
             </div>
-             <div class="pull-right" ng-if="viewLocalCountry">
-                  <button class="btn btn-cyan btn-more"  ng-click="changeReviewTypeView(3,'viewLocalCountry')" ng-if="reviewView==3">Back</button>
-                  </div>
+            <div class="pull-right" ng-if="viewLocalCountry">
+              <button class="btn btn-cyan btn-more" ng-click="changeReviewTypeView(3,'viewLocalCountry')" ng-if="reviewView==3">Back</button>
+            </div>
             <!-- back button end -->
             <div class="btn-view-moments btn-view-review pointer" ng-click="changeReviewTypeView(1)">
               <span class="btn-tab" ng-class="{'active-btn-all': reviewView ==1}"></span>
@@ -59,35 +59,34 @@
                       <h3 class="color-pink empty-title">Relive Y​our Storyline</h3>
                       <p class="empty-descp">Rate the places, restaurants, cuisines, theatres, parks, museums, and more, when you check-in. Jot
                         down your thoughts and feelings about them.</p>
-                        <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
-                        <div class="journey-downloadicon">
-                          <ul class="list-unstyled list-inline text-center color-pink">
-                            <li class="">
-                              Download App
-                            </li>
-                            <li>
-                              <a href="#" target="_blank" class="color-pink">
-                                <i class="fa fa-apple"></i>
-                              </a>
-                            </li>
-                            <li>|</li>
-                            <li>
-                              <a href="#" class="color-pink" target="_blank">
-                                <i class="fa fa-android"></i>
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
+                      <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
+                      <div class="journey-downloadicon">
+                        <ul class="list-unstyled list-inline text-center color-pink">
+                          <li class="">
+                            Download App
+                          </li>
+                          <li>
+                            <a href="#" target="_blank" class="color-pink">
+                              <i class="fa fa-apple"></i>
+                            </a>
+                          </li>
+                          <li>|</li>
+                          <li>
+                            <a href="#" class="color-pink" target="_blank">
+                              <i class="fa fa-android"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                  {{reviewAll.length}}
                 </div>
                 <!-- review empty all view profile user login for first time -->
                 <div class="review-all-life" ng-repeat="view in reviewAll.arr" ng-if="reviewAll.arr.length!==0">
                   <div class="review-travel-life">
                     <div class="heading-review clearfix">
                       <h3 class="place-name pull-left m-clear color-blue avenir-heavy">{{view.checkIn.location}}</h3>
-                      <img ng-src="{{view.checkIn.category|kindOfReviewCheckIn}}" alt=""  class="pull-right">
+                      <img ng-src="{{view.checkIn.category|kindOfReviewCheckIn}}" alt="" class="pull-right">
                     </div>
                     <div class="rate-location">
                       <p class=" m-clear inline-block avenir-heavy pointer" ng-click="getReview(view);" ng-if="view.review.length==0" ng-class="{'color-cyan':view.type=='local-life','color-pink':view.type=='travel-life'}">Rate this now</p>
@@ -136,25 +135,25 @@
                       <h3 class="color-pink empty-title">The World I​s Your Oyster</h3>
                       <p class="empty-descp">A five star or a four star? What does that historical monument qualify for? Rate it and write a review.
                         Help others with your rating and review.</p>
-                        <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
-                        <div class="journey-downloadicon">
-                          <ul class="list-unstyled list-inline text-center color-pink">
-                            <li class="">
-                              Download App
-                            </li>
-                            <li>
-                              <a href="#" target="_blank" class="color-pink">
-                                <i class="fa fa-apple"></i>
-                              </a>
-                            </li>
-                            <li>|</li>
-                            <li>
-                              <a href="#" class="color-pink" target="_blank">
-                                <i class="fa fa-android"></i>
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
+                      <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
+                      <div class="journey-downloadicon">
+                        <ul class="list-unstyled list-inline text-center color-pink">
+                          <li class="">
+                            Download App
+                          </li>
+                          <li>
+                            <a href="#" target="_blank" class="color-pink">
+                              <i class="fa fa-apple"></i>
+                            </a>
+                          </li>
+                          <li>|</li>
+                          <li>
+                            <a href="#" class="color-pink" target="_blank">
+                              <i class="fa fa-android"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -162,20 +161,19 @@
                 <div ng-if="reviewTravelLife.arr!==0">
                   <div class="row">
                     <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="review in reviewTravelLife.arr" ng-if="!viewTravelCountry">
-                  <div class="list-travel-view">
-                    <div class="review-travel-main relate pointer" ng-click="goToAccordian(review,'viewTravelCountry');">
-                      <!--<div class="review-backimgholder">
+                      <div class="list-travel-view">
+                        <div class="review-travel-main relate pointer" ng-click="goToAccordian(review,'viewTravelCountry');">
+                          <!--<div class="review-backimgholder">
                         <img ng-src="{{review.countryCoverPhoto|uploadpath}}" alt="" class="img-responsive">
                       </div>-->
-                      <div class="review-frontimgholder relate" style="background:url('{{review.countryCoverPhoto|uploadpath}}')no-repeat; background-size: cover;">
-                        <img ng-src="img/review-travel.png" alt="" class="pointer img-responsive">
+                          <div class="review-frontimgholder relate" style="background:url('{{review.countryCoverPhoto|uploadpath}}')no-repeat; background-size: cover;">
+                            <img ng-src="img/review-travel.png" alt="" class="pointer img-responsive">
+                          </div>
+                          <h3 class="country-name avenir-heavy">{{review.name}}</h3>
+                        </div>
                       </div>
-                      <h3 class="country-name avenir-heavy">{{review.name}}</h3>
                     </div>
                   </div>
-                    </div>
-                  </div>
-
                   <!-- inside country -->
                   <div class="" ng-if="viewTravelCountry">
                     <div class="travel-single-view">
@@ -198,7 +196,7 @@
                                 <div class="review-local-life">
                                   <div class="heading-review clearfix">
                                     <h3 class="place-name pull-left m-clear color-blue avenir-heavy">{{visit.checkIn.location}}</h3>
-                                    <img ng-src="{{view.checkIn.category|kindOfReviewCheckIn}}" alt=""  class="pull-right">
+                                    <img ng-src="{{view.checkIn.category|kindOfReviewCheckIn}}" alt="" class="pull-right">
                                   </div>
                                   <div class="rate-location">
                                     <p class="color-pink m-clear inline-block avenir-heavy pointer" ng-click="getReview(visit);" ng-if="visit.review.length==0">Rate this now</p>
@@ -231,44 +229,44 @@
                       <h3 class="color-pink empty-title">A Touch Of Your Daily Dose</h3>
                       <p class="empty-descp">Now how about rating and writing a super review for that newly-opened restaurant in your town? Wherever
                         you go, click on a star and pen down your experiences. </p>
-                        <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
-                        <div class="journey-downloadicon">
-                          <ul class="list-unstyled list-inline text-center color-pink">
-                            <li class="">
-                              Download App
-                            </li>
-                            <li>
-                              <a href="#" target="_blank" class="color-pink">
-                                <i class="fa fa-apple"></i>
-                              </a>
-                            </li>
-                            <li>|</li>
-                            <li>
-                              <a href="#" class="color-pink" target="_blank">
-                                <i class="fa fa-android"></i>
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
+                      <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
+                      <div class="journey-downloadicon">
+                        <ul class="list-unstyled list-inline text-center color-pink">
+                          <li class="">
+                            Download App
+                          </li>
+                          <li>
+                            <a href="#" target="_blank" class="color-pink">
+                              <i class="fa fa-apple"></i>
+                            </a>
+                          </li>
+                          <li>|</li>
+                          <li>
+                            <a href="#" class="color-pink" target="_blank">
+                              <i class="fa fa-android"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <!-- review empty local view profile user login for first time -->
-            <div class="row">
-              <div class="col-md-3 col-sm-4 col-xs-12"ng-repeat="review in reviewLocalLife.arr" ng-if="!viewLocalCountry && reviewLocalLife.arr.length!==0">
-                <div class="list-travel-view list-local-view" >
-                  <div class="review-travel-main pointer relate" ng-click="goToAccordian(review,'viewLocalCountry');">
-                    <!--<div class="review-backimgholder">
+                <div class="row">
+                  <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="review in reviewLocalLife.arr" ng-if="!viewLocalCountry && reviewLocalLife.arr.length!==0">
+                    <div class="list-travel-view list-local-view">
+                      <div class="review-travel-main pointer relate" ng-click="goToAccordian(review,'viewLocalCountry');">
+                        <!--<div class="review-backimgholder">
                       <img ng-src="{{review.cityCoverPhoto|uploadpath:234:234:'cover'}}" alt="" class="img-responsive">
                     </div>-->
-                    <div class="review-frontimgholder relate" style="background:url('{{review.cityCoverPhoto|uploadpath}}')no-repeat; background-size: cover;">
-                      <img ng-src="img/review-local.png" alt="" class="img-responsive">
-                      <h3 class="country-name avenir-heavy">{{review.name}}</h3>
+                        <div class="review-frontimgholder relate" style="background:url('{{review.cityCoverPhoto|uploadpath}}')no-repeat; background-size: cover;">
+                          <img ng-src="img/review-local.png" alt="" class="img-responsive">
+                          <h3 class="country-name avenir-heavy">{{review.name}}</h3>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
                 <!-- inside country -->
                 <div class="reviewlocal-countryaccordion" ng-if="viewLocalCountry">
                   <div class="travel-single-view">

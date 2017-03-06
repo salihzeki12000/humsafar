@@ -105,7 +105,7 @@
                       <img ng-src="{{activity.photos[activity.index].name|uploadpath}}" alt="" class="img-responsive">
                   </div>-->
                     <div class="post-img relate" ng-if="activity.showMap && activity.imageUrl">
-                      <img src="{{activity.imageUrl:722:750:'cover'}}" alt="" class="img-responsive">
+                      <img src="{{activity.imageUrl}}" alt="" class="img-responsive">
                     </div>
                     <div class="photo-video-holder" ng-init="activity.index=0">
                       <!-- photos -->
@@ -147,14 +147,16 @@
                           </div>
                         </li>
                       </flex-slider>
-                      <div ng-if="activity.canRate && activity.review && activity.review.rating">Rate This Now</div>
-                      <div class="post-rating" ng-if="rated">
-                        <span class="avenir-heavy color-blue">Rating : <i class="fa fa-star color-pink"></i>
+                      <div ng-if="activity.canRate" ng-init="rated=activity.review && activity.review.rating">
+                        <div ng-if="!rated">Rate This Now</div>{{rated}}
+                        <div class="post-rating" ng-if="rated">
+                          <span class="avenir-heavy color-blue">Rating : <i class="fa fa-star color-pink"></i>
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star"></i>
                         </span>
+                        </div>
                       </div>
                     </div>
                     <!-- img post slider end -->
