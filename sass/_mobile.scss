@@ -611,14 +611,21 @@
 
     .mobile-nofity {
       ul {
-        text-align: right;
+        // text-align: right;
         margin: 10px 0 0;
         font-size: 30px;
 
-        li a {
+        li {
+          text-align: right;
+          .mobile-feedlink{
+            font-size: 18px;
+            text-align: center;
+          }
+          a {
           color: #fff;
           font-size: 22px;
-          padding-right: 20px;
+          padding-right: 15px;
+        }
         }
       }
     }

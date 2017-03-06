@@ -671,7 +671,7 @@ header {
       height: 100%;
       margin: 0 auto;
       position: absolute;
-      z-index: 2;
+      z-index: 9;
   }
   video {
     width: 100%;
@@ -1426,6 +1426,14 @@ width: 100%;
   opacity: 1;
   }
 }
+}
+
+video[poster]{
+object-fit:cover;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size:cover;
 }
 @import "fancybox-override";
 // @import "animation";
