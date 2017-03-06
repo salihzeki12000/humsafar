@@ -149,12 +149,11 @@
                 <div class="photo-loc">
                   <img src="img/camera-blue.png" alt="Photos" width="20" class="v-mid">
                   <span class="avenir-heavy color-dark-blue v-mid">{{list.count.photoCount}}</span> |
-                  <img src="img/location-blue.png"
-                    alt="Location" width="19" class="v-mid"> <span class="avenir-heavy color-dark-blue v-mid">{{list.count.checkInCount}}</span>
+                  <img src="img/location-blue.png" alt="Location" width="19" class="v-mid"> <span class="avenir-heavy color-dark-blue v-mid">{{list.count.checkInCount}}</span>
                 </div>
               </div>
               <div class="pull-right">
-                <button class="btn btn-pink following-btn" ng-click="followUnFollowUser('fromFollowing',list._id,list.name,list.status)">{{list.status}}</button>
+                <button class="btn btn-pink following-btn" ng-click="followUnFollowUser(list,'fromFollowing')">{{list.following|followFollowingStatus}}</button>
               </div>
             </div>
             <div class="following-user-info">
@@ -193,14 +192,13 @@
                 <div class="photo-loc">
                   <img src="img/camera-blue.png" alt="Photos" width="20" class="v-mid">
                   <span class="avenir-heavy color-dark-blue v-mid">{{list.count.photoCount}}</span> |
-                  <img src="img/location-blue.png"
-                    alt="Location" width="19" class="v-mid"> <span class="avenir-heavy color-dark-blue v-mid">{{list.count.checkInCount}}</span>
+                  <img src="img/location-blue.png" alt="Location" width="19" class="v-mid"> <span class="avenir-heavy color-dark-blue v-mid">{{list.count.checkInCount}}</span>
                 </div>
               </div>
               <div class="pull-right">
                 <!--<button class="btn btn-pink following-btn" ng-if="!list.following" ng-click="followUser(list._id,list.name)">Follow</button>
                 <button class="btn btn-pink following-btn" ng-if="list.following" ng-click="unFollowUser(list._id)">Following</button>-->
-                <button class="btn btn-pink following-btn" ng-click="followUnFollowUser('fromFollowers',list._id,list.name,list.status)">{{list.status}}</button>
+                <button class="btn btn-pink following-btn" ng-click="followUnFollowUser(list,'fromFollowers')">{{list.following|followFollowingStatus}}</button>
               </div>
             </div>
             <div class="following-user-info">
@@ -301,4 +299,4 @@
     </div>
   </div>
   <!-- profile tab main end -->
-  </div>
+</div>

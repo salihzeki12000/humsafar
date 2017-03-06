@@ -3,7 +3,7 @@ var activity = angular.module('activity', [])
   .factory('Activity', function (TravelibroService, $filter) {
 
     return {
-      getAllActivities: function (pageNum, successCallback, errorCallback) {
+      getAllActivities: function (pageNum, successCallback, errorCallback, userData) {
         TravelibroService.http({
           url: adminURL + "/activityFeed/getDataWeb",
           method: "POST",
@@ -149,7 +149,20 @@ var activity = angular.module('activity', [])
               } else {
                 activity.display = 'photo';
               }
-            };
+            }
+            console.log(activity);
+            if (userData._id !== activity.user._id) {
+              activity.canRate = false;
+              var index = _.findIndex(activity.buddies, ['_id', userData._id]);
+              if (index == -1) {
+                activity.canRate = false;
+              } else {
+                activity.canRate = true;
+              }
+            } else {
+              activity.canRate = true;
+            }
+            console.log(activity);
           });
           successCallback(activities);
         }).error(errorCallback);

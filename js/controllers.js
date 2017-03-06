@@ -179,24 +179,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $.jStorage.set("isLoggedIn", true);
               $.jStorage.set("profile", data.data);
               var alreadyLoggedIn = data.data.alreadyLoggedIn;
-              if (alreadyLoggedIn === true) {
-                var slug = $.jStorage.get("activeUrlSlug");
-                console.log(slug);
-                if (slug === null || slug === "") {
-                  slug = $.jStorage.get("profile").urlSlug;
-                }
-                if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
-                  window.location = $.jStorage.get("url");
-                } else {
-                  $state.go("mylife", {
-                    name: 'journey',
-                    urlSlug: slug
-                  });
-                }
-
-              } else if (alreadyLoggedIn === false) {
-                $state.go('mainpage');
+              // if (alreadyLoggedIn === true) {
+              var slug = $.jStorage.get("activeUrlSlug");
+              console.log(slug);
+              if (slug === null || slug === "") {
+                slug = $.jStorage.get("profile").urlSlug;
               }
+              if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
+                window.location = $.jStorage.get("url") + "?accessToken=" + $.jStorage.get("accessToken");
+              } else {
+                $state.go("mylife", {
+                  name: 'journey',
+                  urlSlug: slug
+                });
+              }
+              // }else if (alreadyLoggedIn === false) {
+              //   $state.go('mainpage');
+              // }
             } else {
 
             }
@@ -1934,7 +1933,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
 
     $scope.followFollowing = function (user) {
-      console.log(user.following, user._id, user.name);
+      // console.log(user.following, user._id, user.name);
       if (user.following) {
         LikesAndComments.unFollowUser(user._id, function (data) {
           if (data.value) {
@@ -5989,7 +5988,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.followFollowing = function (user) {
-      console.log(user.following, user._id, user.name);
+      // console.log(user.following, user._id, user.name);
       if (user.following) {
         LikesAndComments.unFollowUser(user._id, function (data) {
           console.log(data);
@@ -7676,16 +7675,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         windowClass: "report-modal"
       });
     };
-
     $scope.userData = $.jStorage.get("profile");
     var scroll = {
       'pageNo': 1,
       'scrollBusy': false,
       'stopCallingApi': false
     }
-    var firstListCallback =
-
-      scroll.scrollBusy = true;
+    var firstListCallback = scroll.scrollBusy = true;
     Activity.getAllActivities(1, function (data) {
       scroll.scrollBusy = false;
       if (data.length == 0) {
@@ -7697,7 +7693,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, function (data) {
       console.log(data);
       getMoreActivities();
-    });
+    }, $scope.userData);
 
     $scope.getMoreActivities = function () {
       // cfpLoadingBar.start();
@@ -7724,9 +7720,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             scroll.stopCallingApi = false;
             --scroll.pageNo;
             // cfpLoadingBar.complete();
-          })
+          }, $scope.userData)
         }
       }
+    };
+
+    $scope.closeActivityDrop = function () {
+      $scope.viewCardComment = false;
+      $scope.viewCardLike = false;
+      $scope.getCard = "";
     };
 
     //Photo comment popup
@@ -7865,44 +7867,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.followFollowing = function (user) {
-      console.log($scope.activities);
-      console.log("object", user);
-      console.log(user.following, user._id, user.name);
-      if (user.following) {
-        LikesAndComments.unFollowUser(user._id, function (data) {
-          console.log(data, "unfollow now");
-          if (data.value) {
-            user.following = false;
-            _.each($scope.activities, function (n) {
-              if (n.owner._id == user._id) {
-                n.owner.following = false;
-              }
-              console.log(n);
-            });
-          } else {
-            console.log(data.data);
-          }
-          // _.each($scope.activities, function (n) {
-          //   console.log(n);
-          // });
-        })
-      } else {
-        LikesAndComments.followUser(user._id, user.name, function (data) {
-          console.log(data, "follow now");
-          if (data.value) {
-            user.following = true;
-            _.each($scope.activities, function (n) {
-              console.log(n);
-              if (n.owner._id == user._id) {
-                n.owner.following = true;
-              }
-            });
-          } else {
-            console.log(data.data);
-
-          }
-        });
-      }
+      console.log("from activity");
+      LikesAndComments.followUnFollow(user, function (data) {
+        if (data.value) {
+          _.each($scope.activities, function (n) {
+            if (n.owner._id == user._id) {
+              n.owner.following = data.data.responseValue;
+            }
+            console.log(n);
+          });
+          user.following = data.data.responseValue;
+        } else {
+          console.log("error updating data");
+        }
+      });
     }
 
     $scope.editOption = function (model) {
@@ -8549,7 +8527,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, MyLife, $uibModal, $state) {
+  .controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, MyLife, $uibModal, $state, LikesAndComments) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -8792,13 +8770,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var callbackFollowers = function (data) {
       $scope.followersList = data.data.followers;
-      _.each($scope.followersList, function (n) {
-        if (n.following) {
-          n.status = "Following";
-        } else {
-          n.status = "Follow";
-        }
-      });
+      // _.each($scope.followersList, function (n) {
+      //   if (n.following) {
+      //     n.status = "Following";
+      //   } else {
+      //     n.status = "Follow";
+      //   }
+      // });
       reloadCount();
       if ($scope.activeMenu == 'followers') {
         $scope.searchList = $scope.followersList;
@@ -8807,13 +8785,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var callbackFollowings = function (data) {
       $scope.followingList = data.data.following;
-      _.each($scope.followingList, function (n) {
-        if (n.following) {
-          n.status = "Following";
-        } else {
-          n.status = "Follow";
-        }
-      });
+      // _.each($scope.followingList, function (n) {
+      //   if (n.following) {
+      //     n.status = "Following";
+      //   } else {
+      //     n.status = "Follow";
+      //   }
+      // });
       reloadCount();
       if ($scope.activeMenu == 'following') {
         $scope.searchList = $scope.followingList;
@@ -8847,57 +8825,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     //follow unfollow user starts
-    $scope.followUnFollowUser = function (status, userId, name, flag) {
-      console.log(flag);
-      if (status == 'fromFollowers') {
-        if (flag == "Follow") {
-          console.log("requested to follow");
-          MyLife.followUser(userId, name, function (data) {
-            if (data.value) {
-              var index = _.findIndex($scope.followersList, ['_id', userId]);
-              console.log(index);
-              $scope.followersList[index].following = true;
-              $scope.followersList[index].status = "Following";
-              MyLife.getFollowingWeb(callbackFollowings);
-            }
-          });
-        } else if (flag == "Following") {
-          console.log("requested to unfollow");
-          MyLife.unFollowUser(userId, function (data) {
-            if (data.value) {
-              var index = _.findIndex($scope.followersList, ['_id', userId]);
-              console.log(index);
-              $scope.followersList[index].following = false;
-              $scope.followersList[index].status = "Follow";
-              MyLife.getFollowingWeb(callbackFollowings);
-            }
-          });
+    $scope.followUnFollowUser = function (obj, flag) {
+      console.log(obj);
+      LikesAndComments.followUnFollow(obj, function (data) {
+        if (data.value) {
+          if (flag == "fromFollowing") {
+            MyLife.getFollowingWeb(callbackFollowings);
+          } else if (flag == "fromFollowers") {
+            MyLife.getFollowersWeb(callbackFollowers);
+          }
+        } else {
+          console.log("error updating data");
         }
-      } else if (status == "fromFollowing") {
-        if (flag == "Follow") {
-          console.log("requested to follow");
-          MyLife.followUser(userId, name, function (data) {
-            if (data.value) {
-              var index = _.findIndex($scope.followingList, ['_id', userId]);
-              console.log(index);
-              $scope.followingList[index].following = true;
-              $scope.followingList[index].status = "Following";
-              MyLife.getFollowersWeb(callbackFollowers);
-            }
-          });
-        } else if (flag == "Following") {
-          console.log("requested to unfollow");
-          MyLife.unFollowUser(userId, function (data) {
-            if (data.value) {
-              var index = _.findIndex($scope.followingList, ['_id', userId]);
-              console.log(index);
-              $scope.followingList[index].following = false;
-              $scope.followingList[index].status = "Follow";
-              MyLife.getFollowersWeb(callbackFollowers);
-            }
-          });
-        }
-      }
+      });
     };
     //follow unfollow user ends
     $scope.searchFriend = {};
@@ -13478,6 +13418,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //status character counter
     $scope.$on('$viewContentLoaded', function () {
+      gulp
       $timeout(function () {
         $('#postStatus').keyup(updateCount);
         $('#postStatus').keydown(updateCount);
@@ -15001,23 +14942,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $.jStorage.set("isLoggedIn", true);
           $.jStorage.set("profile", data.data);
           var alreadyLoggedIn = data.data.alreadyLoggedIn;
-          if (alreadyLoggedIn === true) {
-            var slug = $.jStorage.get("activeUrlSlug");
-            console.log(slug);
-            if (slug === null || slug === "") {
-              slug = $.jStorage.get("profile").urlSlug;
-            }
-            if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
-              window.location = $.jStorage.get("url");
-            } else {
-              $state.go("mylife", {
-                name: 'journey',
-                urlSlug: slug
-              });
-            }
-          } else if (alreadyLoggedIn === false) {
-            $state.go('mainpage');
+          // if (alreadyLoggedIn === true) {
+          var slug = $.jStorage.get("activeUrlSlug");
+          console.log(slug);
+          if (slug === null || slug === "") {
+            slug = $.jStorage.get("profile").urlSlug;
           }
+          if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
+            window.location = $.jStorage.get("url") + "?accessToken=" + $.jStorage.get("accessToken");
+          } else {
+            $state.go("mylife", {
+              name: 'journey',
+              urlSlug: slug
+            });
+          }
+          // } else if (alreadyLoggedIn === false) {
+          //   $state.go('mainpage');
+          // }
         } else {
 
         }
