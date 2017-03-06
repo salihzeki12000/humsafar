@@ -27,7 +27,7 @@ var activity = angular.module('activity', [])
                 if (activity.following) {
                   activity.owner.following = activity.following;
                 } else {
-                  activity.owner.following = false;
+                  activity.owner.following = activity.following;
                 }
                 // owner of the card
                 break;
@@ -39,7 +39,7 @@ var activity = angular.module('activity', [])
                 if (activity.following) {
                   activity.owner.following = activity.following;
                 } else {
-                  activity.owner.following = false;
+                  activity.owner.following = activity.following;
                 }
                 // owner of the card
                 break;
@@ -50,11 +50,11 @@ var activity = angular.module('activity', [])
                 var randomNum = Math.floor((Math.random() * len) + 0);
                 activity.coverPhoto = activity.coverPhoto;
                 // owner of the card
-                activity.owner = activity.creator;
+                activity.owner = activity.user;
                 if (activity.following) {
                   activity.owner.following = activity.following;
                 } else {
-                  activity.owner.following = false;
+                  activity.owner.following = activity.following;
                 }
                 // owner of the card
                 break;
@@ -69,7 +69,7 @@ var activity = angular.module('activity', [])
                 if (activity.following) {
                   activity.owner.following = activity.following;
                 } else {
-                  activity.owner.following = false;
+                  activity.owner.following = activity.following;
                 }
                 // owner of the card
                 break;
@@ -81,7 +81,7 @@ var activity = angular.module('activity', [])
                 if (activity.following) {
                   activity.owner.following = activity.following;
                 } else {
-                  activity.owner.following = false;
+                  activity.owner.following = activity.following;
                 }
                 // owner of the card
                 break;
@@ -97,7 +97,7 @@ var activity = angular.module('activity', [])
                 if (activity.following) {
                   activity.owner.following = activity.following;
                 } else {
-                  activity.owner.following = false;
+                  activity.owner.following = activity.following;
                 }
                 // owner of the card
                 break;
