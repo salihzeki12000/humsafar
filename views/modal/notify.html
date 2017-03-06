@@ -15,7 +15,7 @@
                         <img ng-src="{{listOfComments.name|uploadpath}}" alt="" class="img-responsive">
                     </div>
                     <img ng-src="{{listOfComments.name|uploadpath}}" alt="" class="img-reponsive" ng-if="listOfComments.type=='photo'">
-                    <video controls="controls" ng-if="listOfComments.type=='video'">
+                    <video controls="controls" autoplay ng-if="listOfComments.type=='video'">
                         <source src="{{listOfComments.name|trusted}}" type="video/mp4">
                     </video>
                 </div>
