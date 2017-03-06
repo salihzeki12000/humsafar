@@ -232,6 +232,7 @@ a:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .login-bg {
@@ -1245,11 +1246,11 @@ header {
 .slide-video {
   position: absolute;
   margin: 0 auto;
-  width: 235px;
-  height: 380px;
+  width: 225px;
+  height: 385px;
   z-index: 2;
   left: 50%;
-  top: 47%;
+  top: 46%;
   @include transform(translate(-50%,
   -50%));
   .swiper-slide {
@@ -1398,7 +1399,7 @@ a.full-screen {
 .agthome-activitycard {
     color: #000;
 }
-.modal.fade.delete-visited-country.in{
+
  .modal-dialog {
  height: 100%;
  margin:0 auto;
@@ -1407,8 +1408,7 @@ position: absolute;
 top:50%;
 width: 100%;
 @include transform (translateY(-50%));
-}
-}
+    }
 }
 .videoplays{
   .play-show {
