@@ -16,24 +16,21 @@
    <div class="popular-journey mt20 second blog-itineraries-main">
      <div masonry preserve-order>
         <div class="row">
-          <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="post in activityPost">
+          <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="post in popularJourneyData track by $index">
             <div class="activity-post {{post.class}}">
               <div class="activity-post-main">
                 <!-- post header -->
                 <div class="post-header relate">
                   <div class="inline-block picture-section">
-                    <div class="editor-logo" ng-if="post.editor">
-                      <img src="img/blog/editor-logo.png" alt="" class="img-responsive">
-                    </div>
-                    <div class="user-pic" ng-if="post.userPic">
-                      <img ng-src="{{post.profilePic}}" alt="" class="img-responsive">
+                    <div class="user-pic" ng-if="post.user">
+                      <img ng-src="{{post.journeyCreator.profilePicture | uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
                     </div>
                   </div>
                   <div class="user-detail width74 inline-block">
-                    <h4 class="font-bold color-dark-blue m-clear mb5">{{post.userName}}</h4>
+                    <h4 class="font-bold color-dark-blue m-clear mb5">{{post.journeyCreator.name}}</h4>
                     <div class="clearfix user-more-detail">
                       <div class="pull-left">
-                        <p class="m-clear"><span class="fnt-12">{{post.timestampDate}}</span> | <span class="fnt-12">{{post.timestampHour}}</span></p>
+                        <p class="m-clear"><span class="fnt-12">{{post.startTime|formatDate:'date'}}</span> | <span class="fnt-12">{{post.startTime|formatDate:'time'}}</span></p>
                       </div>
                       <div class="pull-right">
                         <div class="follow-or-following">
@@ -45,18 +42,11 @@
                   </div>
                   <!-- post status -->
                   <div class="post-your-status">
-                    <p class="your-post">{{post.status}}</p>
+                    <p class="your-post" ng-if="post.onGoing==false">Has ended <span ng-if="post.journeyCreator.gender=='male'"> his </span><span ng-if="post.journeyCreator.gender=='female'"> her </span> Journey</p>
+                    <p class="your-post" ng-if="post.onGoing==true">Has started <span ng-if="post.journeyCreator.gender=='male'"> his </span><span ng-if="post.journeyCreator.gender=='female'"> her </span> Journey</p>
                   </div>
                   <!-- post status end -->
                   <!-- post type icon -->
-                  <div class="post-icon" ng-if="post.postIcon">
-                    <div class="location circle-rounded pointer">
-                      <img src="img/location-blue.png" alt="" height="18" class="">
-                      <!-- <img src="img/camera.png" alt="" height="18" class=""> -->
-                      <!-- <img src="img/video.png" alt="" height="18" class=""> -->
-                      <!-- <img src="img/pin.png" alt="" height="18" class=""> -->
-                    </div>
-                  </div>
                   <!-- post type icon end -->
                 </div>
                 <!-- post header end -->
@@ -65,8 +55,8 @@
                   <div class="relate">
                     <!-- flag country -->
                     <div class="flag-section">
-                      <div class="country-visited" ng-repeat="visit in post.countryVisit track by $index">
-                        <img ng-src="{{visit.imgFlag}}" alt="" height="30">
+                      <div class="country-visited" ng-repeat="visit in post.countryVisited.country | limitTo : 3">
+                        <img ng-src="{{visit.flag|uploadpath:30:30:'cover'}}" alt="" height="30">
                       </div>
                     </div>
                     <!-- flag country end -->
@@ -108,15 +98,17 @@
                     </div>
                     <!-- img post slider end -->
                     <!-- post travelled journey -->
-                    <div class="travelled-journey" ng-if="post.travelledJourney">
+                    <!-- ng-if="post.travelledJourney" -->
+                    <div class="travelled-journey" >
                       <div class="travelled-imgholder">
-                        <img ng-src="{{post.imgTravelled}}" alt="" class="img-responsive m-center">
+                        <img ng-if="post.coverPhoto" ng-src="{{post.coverPhoto|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center">
+                        <img ng-if="!post.coverPhoto" ng-src="{{post.startLocationPic|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center">
                       </div>
                       <div class="journey-tag-holder">
                             <div class="days-spent pull-right">
-                              <p><span class="block">{{post.travelledDay}}</span> Days</p>
+                              <p><span class="block">{{post.duration}}</span> Days</p>
                             </div>
-                        <h4 class="m-clear text-capitalize">{{post.Travelledtag}}</h4>
+                        <h4 class="m-clear text-capitalize">{{post.name}}</h4>
                         <div class="clearfix journey-travelling-type">
                           <div class="row">
                             <div class="col-xs-6">
@@ -143,7 +135,7 @@
                                   <a href="">
                                     <div class="">
                                       <img src="img/location.png" alt="Location" width="15" class="mr5">
-                                      <span class="inline-block v-mid">{{post.locationVisited}}</span>
+                                      <span class="inline-block v-mid">{{post.checkInCount}}</span>
                                     </div>
                                   </a>
                                 </li>
@@ -155,15 +147,15 @@
                           <div class="pull-right">
                             <div class="journey-type">
                               <ul>
-                                <li>
-                                  <a href=""><img ng-src="{{post.itineraryType1}}" alt="" height="15"></a>
+                                <li ng-repeat="list in post.kindOfJourney|limitTo:3">
+                                  <a href=""><img ng-src="{{list|kindOfJourney:'white'}}" alt="" height="15"></a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                   <a href=""><img ng-src="{{post.itineraryType2}}" alt="" height="15"></a>
                                 </li>
                                 <li>
                                   <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="15"></a>
-                                </li>
+                                </li> -->
                               </ul>
                             </div>
                           </div>
@@ -225,20 +217,18 @@
                         </a></li>
                           <li>
                             <a href="">
-                              <img src="img/comments.png" alt="" height="18" class="if-blue">
-                              <img src="img/comments-white.png" alt="" height="18" class="if-white">
+                              <img src="img/comments.png" alt="" height="18" class="color-blue">
                             </a>
                           </li>
-                          <li>
+                          <!-- <li>
                             <a href="">
-                              <img src="img/reviews.png" alt="" height="18" class="if-blue">
-                              <img src="img/reviews-white.png" alt="" height="18" class="if-white">
+                              <img src="img/reviews.png" alt="" height="18" class="color-blue">
+
                             </a>
-                          </li>
+                          </li> -->
                           <li>
                             <a href="">
-                              <img src="img/share.png" alt="" height="18" class="if-blue">
-                              <img src="img/share-white.png" alt="" height="18" class="if-white">
+                              <img src="img/share.png" alt="" height="18" class="color-blue">
                             </a>
                           </li>
                         </ul>
@@ -246,25 +236,26 @@
                       <div class="pull-right">
                         <div class="">
                           <span>
-                            <img src="img/options.png" alt="" width="3" class="if-blue">
-                            <img src="img/options-white.png" alt="" width="3" class="if-white">
+                            <img src="img/options.png" alt="" width="3" class="color-blue">
                           </span>
                         </div>
                       </div>
                     </div>
-                    <div class="social-likes-reviews">
+                    <div class="social-likes-reviews" ng-if="!(((post.likeCount==0)||(post.likeCount==undefined))&&(post.commentCount==0))">
                       <div class="clearfix">
                         <div class="pull-left">
-                          <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">15660</b>Likes</span>
-                          <span class="color-blue">
+                          <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{post.likeCount}}</b>{{post.likeCount|singularPlural:'Likes'}}</span>
+                          <!-- <span class="color-blue">
                             <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue">
                             <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white">
-                            354 Reviews (4.5/5)</span>
+                            354 Reviews (4.5/5)</span> -->
+                          <span class="color-blue">
+                            <img src="img/comments.png" alt="" height="15" class="mr5 v-top if-blue"><b>
+                            {{post.commentCount}} </b>{{post.commentCount |singularPlural:'Comments'}}</span>
                         </div>
                         <div class="pull-right">
                           <div class="post-travel-icon">
                             <img src="img/travel.png" alt="" class="activity-travel-icon">
-                            <img src="img/cycle-cyan.png" alt="" height="20" class="activity-local-icon">
                           </div>
                         </div>
                       </div>

@@ -292,6 +292,20 @@ var navigationservice = angular.module('navigationservice', [])
           console.log(data);
         });
       },
+      popularJourney: function (formData, callback) {
+        TravelibroService.post(adminURL + "/journey/getPopularJourneyWeb", formData).success(function (data) {
+          callback(data);
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
+      popularBlogger: function (formData, callback) {
+        TravelibroService.post(adminURL + "/user/getPopularUserWeb", formData).success(function (data) {
+          callback(data);
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
       // getDestinationBooking: function (formData, callback) {
       //   $http.get("http://192.168.0.119:3000/migrations/city_bookings.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
       //     callback(data);

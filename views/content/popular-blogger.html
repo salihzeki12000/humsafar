@@ -15,10 +15,10 @@
 <div class="container">
   <div class="popular-blogger second">
     <div masonry preserve-order class="masonry-main pt20 side-scroll-direction">
-      <div class="masonry-brick" ng-repeat="photoblogger in photobloggers track by $index">
+      <div class="masonry-brick" ng-repeat="photoblogger in popularBloggerData track by $index">
         <div class="blogger-cover">
           <div class="gallery-imgholder">
-            <img ng-src="{{photoblogger.img}}" alt="Travelibro">
+            <img ng-src="{{photoblogger.profilePicture|uploadpath:220:350:'cover'}}" alt="Travelibro">
           </div>
           <div class="blogger-cont-holder relate">
             <div class="overlay-imgholder">
