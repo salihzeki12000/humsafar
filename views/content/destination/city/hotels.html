@@ -1,51 +1,63 @@
 <div class="container-fluid">
-<div class="min-hght">
-  <div class="relate destin-fixednav2" ng-class="{'openfilter': isopenfilter}">
-    <div class="pt10 pb10 head-title-all bg-white mb20">
-      <div class="row m-clear">
-        <div class="col-md-3">
-          <div class="pad-btn">
-            <button class="btn btn-pink" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i> Filter
+  <div class="min-hght">
+    <div class="relate destin-fixednav2" ng-class="{'openfilter': isopenfilter}">
+      <div class="pt10 pb10 head-title-all bg-white mb20">
+        <div class="row m-clear">
+          <div class="col-md-3">
+            <div class="pad-btn">
+              <button class="btn btn-pink" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i> Filter
           </button>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h4 class="text-center fnt-24">TraveLibro Recommended Hotels</h4>
+            <p class="text-center avenir-roman m-clear"><span class="pr20">$$$ - Luxury</span> <span class="pr20">$$ - Mid Range    </span> <span>$ - Place To Crash</span></p>
           </div>
         </div>
-        <div class="col-md-6">
-          <h4 class="text-center fnt-24">TraveLibro Recommended Hotels</h4>
-          <p class="text-center avenir-roman m-clear"><span class="pr20">$$$ - Luxury</span> <span class="pr20">$$ - Mid Range    </span> <span>$ - Place To Crash</span></p>
-        </div>
       </div>
-    </div>
 
-    <div class="libro-filter filterclose">
-      <form>
-        <div class="pt20 pb10 head-title-all bg-white">
+      <div class="libro-filter filterclose">
+        <form>
+          <div class="pt20 pb10 head-title-all bg-white">
             <div class="pad-btn">
               <div class="row">
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-mouseleave="showCategory=false">
-                    <span class="btn btn-default form-control" ng-click="showCategory=true" ng-hide="showCategory">Category
-                  <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                    <input type="type" placeholder="Cuisine" ng-model="searchFilter" ng-show="showCategory" class="form-control input-tab avenir-roman">
-                    <div class="check-box-panel" ng-show="showCategory">
+                  <div class="select-all-made">
+                    <input type="text" placeholder="City" class="form-control" ng-click="cityCategory=!cityCategory;" ng-model="searchFilter">
+                    <div class="check-box-panel" ng-show="cityCategory">
                       <ul>
-                        <li ng-repeat="country in countries | filter:searchFilter">
-                          <input type="checkbox" id="{{country.code}} " ng-show="showCategory" class="form-control">
-                          <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
+                        <li ng-repeat="category in cityDestData.subType | filter:searchFilter">
+                          <div class="custom-checkbox">
+                            <input type="checkbox" id="{{category}}" ng-click="cityHotelFilter(category,'categoryType')">
+                            <label for="{{category}}" class="avenir-roman">{{category}}</label>
+                          </div>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-mouseleave="showbudget=false">
-                    <span class="btn btn-default form-control" ng-click="showbudget=true" ng-hide="showbudget">Budget
-                  <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                    <input type="type" placeholder="Budget" ng-model="hotelsBudget" ng-show="showbudget" class="form-control input-tab avenir-roman">
-                    <div class="check-box-panel" ng-show="showbudget">
+                  <div class="select-all-made">
+                    <input type="text" class="form-control" placeholder="Budget" ng-model="budgetHotel" ng-click="hotelBudget= !hotelBudget">
+                    <div class="budget-hotel-dropdown" ng-show="hotelBudget">
                       <ul>
-                        <li ng-repeat="country in countries | filter:hotelsBudget">
-                          <input type="checkbox" id="{{country.code}} " ng-model="hotelsBudget" ng-show="showbudget" class="form-control">
-                          <label for="{{country.code}} " class="avenir-roman " ng-model="hotelsBudget">{{country.name}}</label>
+                        <li>
+                          <div class="custom-checkbox">
+                            <input type="checkbox" id="three-budget" ng-click="cityHotelFilter('$$$','categoryBudget')">
+                            <label for="three-budget">$$$</label>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="custom-checkbox">
+                            <input type="checkbox" id="two-budget" ng-click="cityHotelFilter('$$','categoryBudget')">
+                            <label for="two-budget">$$</label>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="custom-checkbox">
+                            <input type="checkbox" id="one-budget" ng-click="cityHotelFilter('$','categoryBudget')">
+                            <label for="one-budget">$</label>
+                          </div>
                         </li>
                       </ul>
                     </div>
@@ -59,129 +71,21 @@
               </div>
             </div>
           </div>
-                  <div class="pt10 pb10 head-title-all bg-grey mb20 ">
+          <div class="pt10 pb10 head-title-all bg-grey mb20 ">
             <div class="plr30 ">
               <div class="close-all ">
                 <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
-                <span class="tags avenir-roman">{{hotelsBudget}} <span>X</span></span>
+                <!-- <span class="tags avenir-roman">{{hotelsBudget}} <span>X</span></span> -->
+                <a class="btn btn-pink avenir-roman " ng-click="getCityInfo('hotel',$scope.urlDestinationCity) ">Submit</a>
               </div>
             </div>
           </div>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
     <div class="destination-featured plr30">
       <div class="hotels">
         <div class="row">
-          <div class="col-md-4 col-sm-6  col-xs-12 mb20" hidden>
-            <div class="hotel-card">
-              <div class="brdbtm">
-                <div class="title-head-inside">
-                  <span class="pull-right fnt-20 color-grey-dollar avenir-roman">$$$</span>
-                  <h4 class="avenir-heavy fnt-22">The Oberoi Amarvilas</h4>
-                </div>
-                <div class="rating-localpost inline-block pb10 pt10">
-                  <!-- <span class="color-blue font-bold mr5">Rating:</span> -->
-                  <i class="fa fa-star color-pink"></i>
-                  <i class="fa fa-star color-pink"></i>
-                  <i class="fa fa-star color-pink"></i>
-                  <i class="fa fa-star-o color-pink"></i>
-                  <i class="fa fa-star-o color-pink"></i>
-                </div>
-                <div class="category pb10">
-                  <span>Category :</span> Resort
-                </div>
-              </div>
-              <div class="review pointer pb20 pt20 brdbtm">
-                <!-- <div class="pull-right">
-                  <p><i class="fa fa-circle" aria-hidden="true"></i></p>
-                  <p><i class="fa fa-circle" aria-hidden="true"></i></p>
-                  <p><i class="fa fa-circle" aria-hidden="true"></i></p>
-                </div> -->
-                <span class="icon-read pointer">Read Reviews :</span> <span class="font-bold">5</span>
-              </div>
-              <div class="review pt10">
-                <div class="pull-right">
-                  <a>Suggest An Edit</a>
-                </div>
-                <span>Been Here :</span> <span class="italic pointer">Write Review</span>
-              </div>
-              <div class=" review-box text-center">
-                <form action="">
-                  <div class="smiley">
-                    <img ng-src="img/sad-post.png" alt="" class="smiley-face pt10 pb10">
-                    <p>Disappointed</p>
-                  </div>
-                  <p class="title-review"> Add your Review</p>
-                  <textarea name="name" class="form-control" rows="2" placeholder="Fill me in .."></textarea>
-                  <div class="button pt10">
-                    <button class="btn button-review uppercase">Post</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12 mb20" hidden>
-            <div class="hotel-card">
-              <div class="brdbtm">
-                <div class="title-head-inside">
-                  <span class="pull-right fnt-20 color-grey-dollar avenir-roman">$$</span>
-                  <h4 class="avenir-heavy fnt-22">The Oberoi Amarvilas</h4>
-                </div>
-                <div class="rating-localpost inline-block pb10 pt10">
-                  <!-- <span class="color-blue font-bold mr5">Rating:</span> -->
-                  <i class="fa fa-star color-pink"></i>
-                  <i class="fa fa-star color-pink"></i>
-                  <i class="fa fa-star color-pink"></i>
-                  <i class="fa fa-star-o color-pink"></i>
-                  <i class="fa fa-star-o color-pink"></i>
-                </div>
-                <div class="category pb10">
-                  <span>Category :</span> Resort
-                </div>
-              </div>
-              <div class="review pointer pb20 pt20 brdbtm">
-                <!-- <div class="pull-right">
-                  <p><i class="fa fa-circle" aria-hidden="true"></i></p>
-                  <p><i class="fa fa-circle" aria-hidden="true"></i></p>
-                  <p><i class="fa fa-circle" aria-hidden="true"></i></p>
-                </div> -->
-                <span class="icon-read pointer">Read Reviews :</span> <span class="font-bold">5</span>
-              </div>
-              <div class=" review-list pt20">
-                <div class="profile-img-review">
-                  <img src="img/adrena.jpg" alt="">
-                </div>
-                <div class="review-content-destination">
-                  <b>Andrea Christina</b>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
-                  <div class="mt10">
-                    <p class="m-clear color-light-grey">
-                      <i class="fa fa-calendar mr5"></i><span class="mr5">14 Jan, 2014</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span class="">1:20 pm</span>
-                      <span class="">Mumbai</span>, <span class="">India</span></p>
-                  </div>
-                </div>
-              </div>
-              <div class=" review-list pt20">
-                <div class="profile-img-review">
-                  <img src="img/adrena.jpg" alt="">
-                </div>
-                <div class="review-content-destination">
-                  <b>Andrea Christina</b>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
-                  <div class="mt10">
-                    <p class="m-clear color-light-grey">
-                      <i class="fa fa-calendar mr5"></i><span class="mr5">14 Jan, 2014</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span class="">1:20 pm</span>
-                      <span class="">Mumbai</span>, <span class="">India</span></p>
-                  </div>
-                </div>
-              </div>
-              <div class="review pt10">
-                <div class="pull-right">
-                  <a>Suggest An Edit</a>
-                </div>
-                <span>Been Here :</span> <span class="italic pointer">Write Review</span>
-              </div>
-            </div>
-          </div>
           <div class="col-md-4 col-sm-6 col-xs-12 mb20" ng-repeat="hotels in cityDestData.hotel">
             <div class="hotel-card">
               <div class="brdbtm">
@@ -222,4 +126,3 @@
     </div>
   </div>
 </div>
-

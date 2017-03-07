@@ -42,7 +42,7 @@
                       <ul>
                         <li ng-repeat="city in cityList | filter:itinerary.citySearch track by $index">
                           <div class="select-city custom-checkbox">
-                            <input type="checkbox" id="{{city.name}}" ng-click="itineraryFilter(city.name,'itineraryCity')">
+                            <input type="checkbox" id="{{city.name}}" ng-click="itineraryFilter(city._id,'itineraryCity')">
                             <label for="{{city.name}}">{{city.name}}</label>
                           </div>
                         </li>
