@@ -104,7 +104,7 @@
             <div class="clearfix share-option-main">
               <div class="task-holder pull-left">
                 <ul class="list-inline">
-                  <li>
+                  <li ng-if="itinerary.status == true">
                     <a href="" class="relate" ng-click="likeUnlikeItinerary(itinerary.likeDone,itinerary._id,itinerary.uniqueId);"><i class="fa like-button-icon color-blue" ng-class="{'fa-heart-o': itinerary.likeDone == null, 'fa-heart like-animate': itinerary.likeDone == true}" like-sound></i>
                       <span></span>
                       <audio id="like-play">
@@ -112,12 +112,12 @@
                       </audio>
                     </a>
                   </li>
-                  <li>
+                  <li ng-if="itinerary.status == true">
                     <a href=""><img src="img/comments.png" alt="Comments" height="22" class="agent-iti-comment-icon"></a>
                   </li>
-                  <li>
+                  <!-- <li>
                     <a href=""><img src="img/reviews.png" alt="Review" height="22" class="agent-iti-review-icon"></a>
-                  </li>
+                  </li> -->
                   <li>
                     <a href=""><img src="img/print.png" alt="Print" height="22" class="agent-iti-print-icon"></a>
                   </li>
@@ -140,19 +140,19 @@
                 </div>
               </div>
             </div>
-            <div class="clearfix like-review-main">
+            <div class="clearfix like-review-main" ng-if="itinerary.status == true">
               <!-- like and review -->
               <div class="like-review-holder pull-left">
                 <div class="like-holder">
                   <p class="m-clear"><i class="fa fa-heart color-blue mr5"></i><span class="like-count avenir-medium">{{itinerary.likeCount}}</span>                    <span class="color-blue avenir-roman" ng-if="itinerary.likeCount==1">Like</span><span class="color-blue avenir-roman"
                       ng-if="itinerary.likeCount> 1|| itinerary.likeCount==0">Like</span></p>
                 </div>
-                <div class="review-holder">
+                <!-- <div class="review-holder">
                   <p class="avenir-heavy color-blue m-clear">
                     <img src="img/reviews.png" alt="" height="16">
                     <span class="review-count">354</span> Reviews <span>(4.5/5)</span>
                   </p>
-                </div>
+                </div> -->
               </div>
               <!-- like and review end-->
               <!-- share  -->
@@ -163,14 +163,14 @@
                   <li><a href="" class="twi-icon color-blue"><i class="fa fa-twitter-square fa-2x"></i></a></li>
                   <li><a href="" class="google-icon color-blue"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
                   <li><a href="" class="pin-icon color-blue"><i class="fa fa-pinterest-square fa-2x"></i></a></li>
-                  <li><a href="" class="linkedin-icon color-blue"><i class="fa fa-instagram fa-2x"></i></a></li>
+                  <!-- <li><a href="" class="linkedin-icon color-blue"><i class="fa fa-instagram fa-2x"></i></a></li> -->
                   <li><a href="" class="mail-icon color-blue"><i class="fa fa-envelope-square fa-2x"></i></a></li>
                 </ul>
               </div>
               <!-- share end -->
             </div>
             <!-- comment list -->
-            <div class="comment-list-holder">
+            <div class="comment-list-holder" ng-if="itinerary.status == true">
               <div class="view-comment-list" ng-repeat="comment in itinerary.comment track by $index">
                 <div class="commenter-img">
                   <div class="commenter-imgholder">
@@ -210,7 +210,7 @@
       </div>
       <!-- comment and like panel main end -->
       <!-- other itineraries main -->
-      <div class="other-itineraries-main">
+      <div class="other-itineraries-main" ng-if="itinerary.status == true">
         <div class="blog-popular-itineraries">
           <div class="">
             <h4 class="color-blue avenir-roman text-center">You Can Also View Other Popular Itineraries</h4>
@@ -292,9 +292,9 @@
                             <li>
                               <a href=""><img src="img/comments.png" alt="" height="18"></a>
                             </li>
-                            <li>
+                            <!-- <li>
                               <a href=""><img src="img/reviews.png" alt="" height="18"></a>
-                            </li>
+                            </li> -->
                             <li>
                               <a href=""><img src="img/share.png" alt="" height="18"></a>
                             </li>
@@ -310,7 +310,7 @@
                         <div class="clearfix">
                           <div class="pull-left">
                             <span class="color-blue mr10 like-block"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{life.likes}}</b>Likes</span>
-                            <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>
+                            <!-- <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span> -->
                           </div>
                           <div class="pull-right user-card-ballon">
                             <img src="img/travel.png" alt="">
@@ -400,12 +400,12 @@
                                     <img src="img/comments-white.png" alt="" height="18" class="if-white">
                                   </a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                   <a href="">
                                     <img src="img/reviews.png" alt="" height="18" class="if-blue">
                                     <img src="img/reviews-white.png" alt="" height="18" class="if-white">
                                   </a>
-                                </li>
+                                </li> -->
                                 <li>
                                   <a href="">
                                     <img src="img/share.png" alt="" height="18" class="if-blue">
