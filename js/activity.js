@@ -151,17 +151,22 @@ var activity = angular.module('activity', [])
               }
             }
             console.log(activity);
-            if (userData._id !== activity.user._id) {
-              activity.canRate = false;
-              var index = _.findIndex(activity.buddies, ['_id', userData._id]);
-              if (index == -1) {
+            if (userData.type === 'travel-life' || userData.type === 'local-life') {
+              if (userData._id !== activity.user._id) {
                 activity.canRate = false;
+                var index = _.findIndex(activity.buddies, ['_id', userData._id]);
+                if (index == -1) {
+                  activity.canRate = false;
+                } else {
+                  activity.canRate = true;
+                }
               } else {
                 activity.canRate = true;
               }
             } else {
-              activity.canRate = true;
+
             }
+
             console.log(activity);
           });
           successCallback(activities);

@@ -578,6 +578,7 @@ commontask.filter("singularPlural", function () {
 
 commontask.filter("getArrayOfSize", function () {
   return function (input, flag) {
+    // console.log(input, flag);
     if (flag == "marked") {
       input = parseInt(input);
       return new Array(input);
