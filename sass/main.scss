@@ -9667,6 +9667,7 @@ height: 100%;
 
   .masonry-main {
     height: 540px !important;
+    padding: 10px 20px;
     border: 1px solid #ccc;
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
@@ -9680,11 +9681,16 @@ height: 100%;
     direction: rtl;
   }
 
+  .brick1{
+    display: inline-block;
+  }
+
   .gallery-imgholder {
-    width: 450px;
-    max-width: 450px;
-    max-height: 550px;
+    width: 300px;
+    height: 300px;
     margin: 3px;
+    background-color: $brand-light-grey;
+    overflow: hidden;
 
     img {
       max-width: 100%;
@@ -11700,7 +11706,7 @@ video::-webkit-media-controls-fullscreen-button {
     margin: 0;
     background: $brand-dark-pink;
     border-top-left-radius:15px;
-    border-top-right-radius:15px; 
+    border-top-right-radius:15px;
   }
   .outer-report-cont{
         padding: 20px;

@@ -13,7 +13,7 @@
         <span class="color-white avenir-roman">Jan 2016</span>
       </div> -->
       <div class="journey-travel-heading color-white">
-        <h3 class="avenir-heavy m-clear">{{itinerary.title}}</h3>
+        <h3 class="avenir-heavy text-capitalize m-clear">{{itinerary.name}}</h3>
       </div>
       <div class="itinerary-trip-day">
         <p><span class="days block avenir-heavy">{{itinerary.duration}}</span> <span class="block avenir-roman">Days Trip</span></p>
@@ -48,10 +48,10 @@
     <div class="trip-pic-holder relate">
       <div class="trip-pic-view {{showClass}}">
         <p class="color-pink heading-gallery-name"><i class="fa fa-picture-o mr5"></i>{{itinerary.title}} Photos</p>
-        <div masonry preserve-order class="masonry-main side-scroll-direction">
-          <div class="masonry-brick" ng-repeat="pic in itinerary.photos track by $index">
+        <div  class="masonry-main side-scroll-direction">
+          <div class="brick1" ng-repeat="pic in itinerary.photos track by $index">
             <div class="gallery-imgholder pointer" ng-click="getPhotosCommentData(pic._id)">
-              <img ng-src="{{pic.name|uploadpath}}" alt="">
+              <img ng-src="{{pic.name|uploadpath:320:320:'cover'}}" alt="">
               <!-- <span class="color-blue">{{pic.caption}}</span> -->
             </div>
           </div>
