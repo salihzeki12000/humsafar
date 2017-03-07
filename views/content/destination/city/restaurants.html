@@ -21,54 +21,57 @@
             <div class="pad-btn">
               <div class="row">
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-mouseleave="showCuisine=false">
-                    <span class="btn btn-default form-control" ng-click="showCuisine=true" ng-hide="showCuisine">Cuisine
-                  <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                    <input type="type" placeholder="Cuisine" ng-model="searchFilter" ng-show="showCuisine" class="form-control input-tab avenir-roman">
-                    <div class="check-box-panel" ng-show="showCuisine">
+                  <div class="select-all-made">
+                    <input type="text" placeholder="Cuisine" class="form-control" ng-model="cityCuisine">
+                    <div class="view-cuisine">
                       <ul>
-                        <li ng-repeat="country in countries | filter:searchFilter">
-                          <input type="checkbox" id="{{country.code}} " ng-show="showCuisine" class="form-control">
-                          <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
+                        <li ng-repeat="cuisine in cityDestData.cuisine track by $index">
+                          <div class="custom-checkbox">
+                            <input type="checkbox" id="{{cuisine}}" ng-click="hotelRestaurantFilter(cuisine,'restaurantCuisine')">
+                            <label for="{{cuisine}}">{{cuisine}}</label>
+                          </div>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-mouseleave="showType=false">
-                    <form action="#">
-                      <span class="btn btn-default form-control" ng-click="showType=true" ng-hide="showType">Type
-                  <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                      <input type="type" placeholder="Type" ng-model="searchFilter" ng-show="showType" class="form-control input-tab avenir-roman">
-                      <div class="check-box-panel" ng-show="showType">
+                  <div class="select-all-made">
+                      <input type="text" class="form-control" placeholder="Type" ng-click="showType=!showType" ng-model="cityTypeRestaurant">
+                      <div class="" ng-show="showType">
                         <ul>
-                          <li ng-repeat="country in countries | filter:searchFilter">
-                            <input type="checkbox" id="{{country.code}} " ng-show="showme" class="form-control">
-                            <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
+                          <li ng-repeat="restaurant in restaurantType track by $index">
+                            <div class="custom-checkbox">
+                              <input type="checkbox" id="{{restaurant}}Resto" ng-click="hotelRestaurantFilter(restaurant,'typeRestaurant')">
+                              <label for="{{restaurant}}Resto">{{restaurant}}</label>
+                            </div>
                           </li>
                         </ul>
                       </div>
                   </div>
-                  </form>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-click="showBudget=!showBudget">
-                    <span class="btn btn-default form-control" data-target="#restaurantBudegt" data-toggle="collapse">Budget
-                  <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                    <div class="check-box-panel collapse" id="restaurantBudegt">
+                  <div class="select-all-made">
+                    <input type="text" placeholder="Budget" class="form-control" ng-model="cityRestoBudget" ng-click="showBudget=!showBudget">
+                    <div class="" ng-show="showBudget">
                       <ul>
-                        <li ng-click="filterByBudget('$')">
-                          <input type="checkbox" id="budget-one" class="form-control">
-                          <label for="budget-one" class="avenir-roman ">$</label>
+                        <li>
+                          <div class="custom-checkbox">
+                            <input type="checkbox" id="budget-three"  ng-click="hotelRestaurantFilter('$$$','restaurantBudget')">
+                            <label for="budget-three">$$$</label>
+                          </div>
                         </li>
-                        <li ng-click="filterByBudget('$$')">
-                          <input type="checkbox" id="budget-two" class="form-control">
-                          <label for="budget-two" class="avenir-roman ">$$</label>
+                        <li>
+                        <div class="custom-checkbox">
+                            <input type="checkbox" id="budget-two"  ng-click="hotelRestaurantFilter('$$','restaurantBudget')">
+                          <label for="budget-two">$$</label>
+                        </div>
                         </li>
-                        <li ng-click="filterByBudget('$$$')">
-                          <input type="checkbox" id="budget-three" class="form-control">
-                          <label for="budget-three" class="avenir-roman ">$$$</label>
+                        <li >
+                        <div class="custom-checkbox">
+                            <input type="checkbox" id="budget-one" ng-click="hotelRestaurantFilter('$','restaurantBudget')">
+                          <label for="budget-one">$</label>
+                        </div>
                         </li>
                       </ul>
                     </div>
@@ -101,6 +104,9 @@
             <div class="plr30 ">
               <div class="close-all ">
                 <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
+                  <!-- <a class="btn btn-pink avenir-roman " ng-click="getCityInfo() ">X Close</a>
+               -->
+                 <!-- abhi iska api mai dekhna hai -->
                 <span class="tags avenir-roman" ng-repeat="item in country">{{item}} <span>X</span></span>
               </div>
             </div>
