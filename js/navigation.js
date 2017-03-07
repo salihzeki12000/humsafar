@@ -79,7 +79,7 @@ var navigationservice = angular.module('navigationservice', [])
       name: "Blogs",
       classis: "active",
       disabled: true,
-      anchor: "popularblogger",
+      link: "http://travelibro.net/blog",
     }, {
       name: "About Us",
       classis: "active",
@@ -294,6 +294,13 @@ var navigationservice = angular.module('navigationservice', [])
       },
       popularJourney: function (formData, callback) {
         TravelibroService.post(adminURL + "/journey/getPopularJourneyWeb", formData).success(function (data) {
+          callback(data);
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
+      popularItinerary: function (formData, callback) {
+        TravelibroService.post(adminURL + "/itinerary/getPopularItineraryWeb", formData).success(function (data) {
           callback(data);
         }).error(function (data) {
           console.log(data);

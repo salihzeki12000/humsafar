@@ -105,7 +105,7 @@
                       <img ng-src="{{activity.photos[activity.index].name|uploadpath}}" alt="" class="img-responsive">
                   </div>-->
                     <div class="post-img relate" ng-if="activity.showMap && activity.imageUrl">
-                      <img src="{{activity.imageUrl}}" alt="" class="img-responsive">
+                      <img src="{{activity.imageUrl|uploadpath}}" alt="" class="img-responsive">
                     </div>
                     <div class="photo-video-holder" ng-init="activity.index=0">
                       <!-- photos -->
