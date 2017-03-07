@@ -53,7 +53,7 @@
                   <!-- post type icon -->
                   <div class="post-icon" ng-if="activity.type=='travel-life' || activity.type=='local-life'">
                     <div class="pointer">
-                      <img ng-src="{{activity|typeOfPost:activity.type}}" alt="" class="img-responsive m-center">
+                      <img ng-src="{{activity|typeOfPost:activity.type}}" width="24" class="img-responsive m-center">
                     </div>
                   </div>
                   <!-- post type icon end -->
@@ -336,7 +336,7 @@
                           </span>
                           <div class="activity-edit-option" ng-show="activity.option.backgroundClick">
                             <ul>
-                              <li ng-if="activity.owner._id==userData._id">Hide From All Activity Feed <span class="hide-hover">? <span class="info-div">This activity will be hidden from all your followers Feed.</span>                                </span>
+                              <li ng-if="activity.owner._id==userData._id">Hide From All Activity Feed <span class="hide-hover">? <span class="info-div">This activity will be hidden from all your followers "Activity Feed".</span>                                </span>
                               </li>
                               <li ng-if="activity.owner._id!=userData._id" ng-click="openThankYouModal();">Report</li>
                             </ul>
