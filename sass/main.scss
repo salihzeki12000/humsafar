@@ -4640,8 +4640,11 @@ height: 100%;
 }
 
 .post-rating {
-  padding: 10px 5px 0;
+  padding: 10px 10px 0;
   border-top: 1px solid #b5b5b5;
+  span{
+    padding-right: 3px;
+  }
 }
 
 .post-footer {
@@ -5538,6 +5541,7 @@ height: 100%;
 
 .options {
   position: relative;
+  padding-left: 5px;
 
   .other-trip,
   .own-trip {

@@ -126,7 +126,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="options pull-right relate" ng-click="viewItineraryOptions()">
+              <div class="options pointer pull-right relate" ng-click="viewItineraryOptions()">
                 <img src="img/options.png" alt="Options" height="22" class="agent-iti-options-icon">
                 <div class="itinerary-edit-option" ng-show="showItineraryEditOptions">
                   <ul>
@@ -171,7 +171,8 @@
             </div>
             <!-- comment list -->
             <div class="comment-list-holder" ng-if="itinerary.status == true">
-              <div class="view-comment-list" ng-repeat="comment in itinerary.comment track by $index">
+              <form ng-submit="postItineraryComment(itinerary._id,itinerary.uniqueId,commentText.text)">
+              <div class="view-comment-list" ng-repeat="comment in itinerary.comment | orderBy:$index:true | limitTo:1">
                 <div class="commenter-img">
                   <div class="commenter-imgholder">
                     <img ng-src="{{comment.user.profilePicture|uploadpath}}" alt="" class="img-responsive">
@@ -195,14 +196,16 @@
                   </div>
                 </div>
                 <div class="comment-ur-text">
-                  <textarea name="" id="" placeholder="Write a comment" class="form-control" ng-model="commentText.text"></textarea>
+                  <input type="text" placeholder="Write a comment" class="form-control" ng-model="commentText.text">
+                  <find-tags ng-model="commentText.text" element-id="enterComment" enable="bothTagging">
                 </div>
               </div>
               <div class="clearfix comment-post">
                 <div class="pull-right">
-                  <button class="btn btn-pink post-btn" ng-click="postItineraryComment(itinerary._id,itinerary.uniqueId,commentText.text)">Post</button>
+                  <button class="btn btn-pink post-btn" type="submit">Post</button>
                 </div>
               </div>
+              </form>
             </div>
             <!-- comment list end -->
           </div>
@@ -415,7 +418,7 @@
                               </ul>
                             </div>
                             <div class="pull-right">
-                              <div class="">
+                              <div class="pointer">
                                 <span>
                                   <img src="img/options.png" alt="" width="3" class="if-blue">
                                   <img src="img/options-white.png" alt="" width="3" class="if-white">
