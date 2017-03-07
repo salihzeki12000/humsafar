@@ -150,8 +150,8 @@ var activity = angular.module('activity', [])
                 activity.display = 'photo';
               }
             }
-            console.log(activity);
-            if (userData.type === 'travel-life' || userData.type === 'local-life') {
+
+            if ((activity.type === 'travel-life') || (activity.type === 'local-life')) {
               if (userData._id !== activity.user._id) {
                 activity.canRate = false;
                 var index = _.findIndex(activity.buddies, ['_id', userData._id]);
@@ -163,11 +163,9 @@ var activity = angular.module('activity', [])
               } else {
                 activity.canRate = true;
               }
-            } else {
+            } else {}
+            console.log();
 
-            }
-
-            console.log(activity);
           });
           successCallback(activities);
         }).error(errorCallback);

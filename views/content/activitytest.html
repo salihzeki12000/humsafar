@@ -147,7 +147,7 @@
                           </div>
                         </li>
                       </flex-slider>
-                      </div>
+                    </div>
                     <div ng-if="activity.canRate" ng-init="activity.rated=activity.review.length==1">
                       <div ng-if="!activity.rated" ng-click="getReview(activity);" ng-class="{'color-cyan':activity.type=='local-life','color-pink':activity.type=='travel-life'}">Rate This Now</div>
                       <div class="post-rating" ng-if="activity.rated" ng-click="getReview(activity)">
@@ -155,8 +155,8 @@
                         <span class="star-rating pointer" ng-repeat="time in activity.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':activity.type=='local-life','color-pink':activity.type=='travel-life'}"></i></span>
                         <span class="star-rating pointer color-grey" ng-repeat="time in activity.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
                         </span>
-                        </div>
                       </div>
+                    </div>
                     <!-- img post slider end -->
                     <!-- post travelled journey -->
                     <div class="travelled-journey" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey'">
