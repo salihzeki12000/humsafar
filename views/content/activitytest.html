@@ -17,13 +17,13 @@
                       <img src="img/blog/editor-logo.png" alt="" class="img-responsive">
                     </div>
                     <div class="user-pic" ng-if="activity.type=='travel-life' || activity.type=='local-life'">
-                      <img ng-src="{{activity.postCreator.profilePicture|uploadpath:62:67}}" alt="" class="img-responsive">
+                      <img ng-src="{{activity.postCreator.profilePicture|uploadpath:65:67}}" alt="" class="img-responsive">
                     </div>
                     <!--<div class="user-pic" ng-if="activity.type=='quick-itinerary'">
-                      <img ng-src="{{activity.creator.profilePicture|uploadpath:62:67}}" alt="" class="img-responsive">
+                      <img ng-src="{{activity.creator.profilePicture|uploadpath:65:67}}" alt="" class="img-responsive">
                     </div>-->
                     <div class="user-pic" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey' || activity.type=='quick-itinerary' || activity.type=='detail-itinerary'">
-                      <img ng-src="{{activity.user.profilePicture|uploadpath:62:67}}" alt="" class="img-responsive">
+                      <img ng-src="{{activity.user.profilePicture|uploadpath:65:67}}" alt="" class="img-responsive">
                     </div>
                   </div>
                   <div class="user-detail width74 inline-block">
@@ -147,18 +147,16 @@
                           </div>
                         </li>
                       </flex-slider>
-                      <div ng-if="activity.canRate" ng-init="rated=activity.review && activity.review.rating">
-                        <div ng-if="!rated">Rate This Now</div>{{rated}}
-                        <div class="post-rating" ng-if="rated">
-                          <span class="avenir-heavy color-blue">Rating : <i class="fa fa-star color-pink"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
+                      </div>
+                    <div ng-if="activity.canRate" ng-init="activity.rated=activity.review.length==1">
+                      <div ng-if="!activity.rated" ng-click="getReview(activity);" ng-class="{'color-cyan':activity.type=='local-life','color-pink':activity.type=='travel-life'}">Rate This Now</div>
+                      <div class="post-rating" ng-if="activity.rated" ng-click="getReview(activity)">
+                        <span class="avenir-heavy color-blue">Rating :
+                        <span class="star-rating pointer" ng-repeat="time in activity.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':activity.type=='local-life','color-pink':activity.type=='travel-life'}"></i></span>
+                        <span class="star-rating pointer color-grey" ng-repeat="time in activity.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
                         </span>
                         </div>
                       </div>
-                    </div>
                     <!-- img post slider end -->
                     <!-- post travelled journey -->
                     <div class="travelled-journey" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey'">
