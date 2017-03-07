@@ -122,7 +122,20 @@ var itinerary = angular.module('itinerary', [])
         }).error(function (data) {
           console.log(data);
         });
+      },
+      publishQuickItinerary: function (_id, oldStatus, status, callback) {
+        var obj = {
+          "_id": _id,
+          "oldStatus": oldStatus,
+          "status": status
+        };
+        TravelibroService.http({
+          url: adminURL + "/itinerary/changeItineraryStatusWeb",
+          data: obj,
+          method: "POST"
+        }).success(callback)
       }
+
     };
   });
 

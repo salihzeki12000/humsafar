@@ -39,7 +39,7 @@
     </div>
     <div class="edit-publish-userdetail">
       <button class="btn btn-white-outline btn-more mr5" ui-sref="quickitinerary({flag:'edit',urlSlug:itinerary.urlSlug})">Edit</button>
-      <button class="btn btn-white-outline btn-more" ng-click="uploadDetailedItinerary(true)" ng-if="itinerary.status== false">Publish</button>
+      <button class="btn btn-white-outline btn-more" ng-click="uploadQuickItinerary(true)" ng-if="itinerary.status== false">Publish</button>
       <button class="btn btn-white-outline btn-more" ng-click="" ng-if="itinerary.status == true">Delete</button>
     </div>
   </div>
@@ -48,11 +48,13 @@
     <div class="trip-pic-holder relate">
       <div class="trip-pic-view {{showClass}}">
         <p class="color-pink heading-gallery-name"><i class="fa fa-picture-o mr5"></i>{{itinerary.title}} Photos</p>
-        <div  class="masonry-main side-scroll-direction">
-          <div class="brick1" ng-repeat="pic in itinerary.photos track by $index">
-            <div class="gallery-imgholder pointer" ng-click="getPhotosCommentData(pic._id)">
-              <img ng-src="{{pic.name|uploadpath:320:320:'cover'}}" alt="">
-              <!-- <span class="color-blue">{{pic.caption}}</span> -->
+        <div class="masonry-main side-scroll-direction">
+          <div class="gallery-itiscroll">
+            <div class="gallery-brick" ng-repeat="pic in itinerary.photos track by $index">
+              <div class="gallery-imgholder pointer" ng-click="getPhotosCommentData(pic._id)">
+                <img ng-src="{{pic.name|uploadpath:320:320:'cover'}}" alt="">
+                <!-- <span class="color-blue">{{pic.caption}}</span> -->
+              </div>
             </div>
           </div>
         </div>
@@ -113,7 +115,7 @@
                     </a>
                   </li>
                   <li ng-if="itinerary.status == true">
-                    <a href=""><img src="img/comments.png" alt="Comments" height="22" class="agent-iti-comment-icon"></a>
+                    <a href=""><img src="img/comments.png" alt="Comments" height="22" class="agent-iti-comment-icon" ng-click="getCommentsData(itinerary);"></a>
                   </li>
                   <!-- <li>
                     <a href=""><img src="img/reviews.png" alt="Review" height="22" class="agent-iti-review-icon"></a>
@@ -143,9 +145,13 @@
             <div class="clearfix like-review-main" ng-if="itinerary.status == true">
               <!-- like and review -->
               <div class="like-review-holder pull-left">
-                <div class="like-holder">
-                  <p class="m-clear"><i class="fa fa-heart color-blue mr5"></i><span class="like-count avenir-medium">{{itinerary.likeCount}}</span>                    <span class="color-blue avenir-roman" ng-if="itinerary.likeCount==1">Like</span><span class="color-blue avenir-roman"
+                <div class="like-holder pointer">
+                  <p class="m-clear" ng-click="getLikesData(itinerary);"><i class="fa fa-heart color-blue mr5"></i><span class="like-count avenir-medium">{{itinerary.likeCount}}</span>                    <span class="color-blue avenir-roman" ng-if="itinerary.likeCount==1">Like</span><span class="color-blue avenir-roman"
                       ng-if="itinerary.likeCount> 1|| itinerary.likeCount==0">Like</span></p>
+                </div>
+                <div class="like-holder pointer">
+                  <p class="m-clear" ng-click="getCommentsData(itinerary);"><img src="img/comments.png" alt="Comments" height="16" class="agent-iti-comment-icon"><span class="like-count avenir-medium"> {{itinerary.likeCount}} </span><span class="color-blue avenir-roman" ng-if="itinerary.likeCount==1"> Comment </span><span class="color-blue avenir-roman"
+                      ng-if="itinerary.likeCount> 1|| itinerary.likeCount==0"> Comments </span></p>
                 </div>
                 <!-- <div class="review-holder">
                   <p class="avenir-heavy color-blue m-clear">
@@ -172,39 +178,39 @@
             <!-- comment list -->
             <div class="comment-list-holder" ng-if="itinerary.status == true">
               <form ng-submit="postItineraryComment(itinerary._id,itinerary.uniqueId,commentText.text)">
-              <div class="view-comment-list" ng-repeat="comment in itinerary.comment | orderBy:$index:true | limitTo:1">
-                <div class="commenter-img">
-                  <div class="commenter-imgholder">
-                    <img ng-src="{{comment.user.profilePicture|uploadpath}}" alt="" class="img-responsive">
+                <div class="view-comment-list" ng-repeat="comment in itinerary.comment | orderBy:$index:true | limitTo:1">
+                  <div class="commenter-img">
+                    <div class="commenter-imgholder">
+                      <img ng-src="{{comment.user.profilePicture|uploadpath}}" alt="" class="img-responsive">
+                    </div>
                   </div>
-                </div>
-                <div class="comment-container">
-                  <div class="commenter-text">
-                    <p><span class="commenter-name avenir-heavy color-blue mr5">{{comment.user.name|whoIsThis:comment.user._id:userData._id}}</span>{{comment.text}}</p>
-                    <div class="like-reply-line">
-                      <span class="color-blue avenir-roman mr5 pointer">Like</span>
-                      <span class="color-blue avenir-roman mr5 pointer">Reply</span>
-                      <span class="time-stamp ml5"><i class="fa fa-calendar color-grey mr5"></i><span>{{comment.date|formatDate:"date"}}</span>                      | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{comment.date|formatDate:"time"}}</span></span>
+                  <div class="comment-container">
+                    <div class="commenter-text">
+                      <p><span class="commenter-name avenir-heavy color-blue mr5">{{comment.user.name|whoIsThis:comment.user._id:userData._id}}</span>{{comment.text}}</p>
+                      <div class="like-reply-line">
+                        <!-- <span class="color-blue avenir-roman mr5 pointer">Like</span>
+                      <span class="color-blue avenir-roman mr5 pointer">Reply</span> -->
+                        <span class="time-stamp ml5"><i class="fa fa-calendar color-grey mr5"></i><span>{{comment.date|formatDate:"date"}}</span>                        | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{comment.date|formatDate:"time"}}</span></span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="write-comment-text">
-                <div class="commenter-img">
-                  <div class="commenter-imgholder">
-                    <img src="{{userData.profilePicture|uploadpath}}" alt="" class="img-responsive">
+                <div class="write-comment-text">
+                  <div class="commenter-img">
+                    <div class="commenter-imgholder">
+                      <img src="{{userData.profilePicture|uploadpath}}" alt="" class="img-responsive">
+                    </div>
+                  </div>
+                  <div class="comment-ur-text">
+                    <input type="text" placeholder="Write a comment" class="form-control" ng-model="commentText.text">
+                    <find-tags ng-model="commentText.text" element-id="enterComment" enable="bothTagging">
                   </div>
                 </div>
-                <div class="comment-ur-text">
-                  <input type="text" placeholder="Write a comment" class="form-control" ng-model="commentText.text">
-                  <find-tags ng-model="commentText.text" element-id="enterComment" enable="bothTagging">
+                <div class="clearfix comment-post">
+                  <div class="pull-right">
+                    <button class="btn btn-pink post-btn" type="submit">Post</button>
+                  </div>
                 </div>
-              </div>
-              <div class="clearfix comment-post">
-                <div class="pull-right">
-                  <button class="btn btn-pink post-btn" type="submit">Post</button>
-                </div>
-              </div>
               </form>
             </div>
             <!-- comment list end -->
@@ -541,7 +547,7 @@
                   <div class="like-reply-line">
                     <!--<span class="color-blue avenir-roman mr5 pointer">Like</span>-->
                     <!--<span class="color-blue avenir-roman mr5 pointer">Reply</span>-->
-                    <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                      | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
+                    <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                    | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
                   </div>
                 </div>
               </div>
@@ -576,6 +582,7 @@
       </div>
     </div>
     <!--like activity end-->
+    <div class="close-comment-like" ng-class="{'backdrop':viewCardComment==true || viewCardLike==true ,'':viewCardComment==false || viewCardLike == false}" ng-click="closeBackdrop();"></div>
   </div>
   <!-- SIDE COMMENT CARD END -->
   <div class="photo-open-backdrop {{dispBackDrop}}" ng-click="viewGallery();"></div>
