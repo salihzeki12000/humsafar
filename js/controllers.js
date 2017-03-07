@@ -7551,7 +7551,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.postPostsComment = function (activity, comment) {
-      // console.log(uniqueId, comment, postId);
+      console.log("activity comments");
       console.log(activity, comment);
       console.log("controller se comment hua");
       var type = activity.likeUnlikeFlag;

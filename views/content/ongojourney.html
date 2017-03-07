@@ -1,5 +1,5 @@
 <div class="relate" auto-height>
-  <div class="map-journey" ng-style = "mapJourneyCss">
+  <div class="map-journey" ng-style="mapJourneyCss">
     <div id="map" class="get-map-height">
     </div>
   </div>
@@ -118,7 +118,7 @@
                   </div>
                 </div>
               </div>
-              <div class="box-start-journey hasLatLng">
+              <div class="box-start-journey" ng-class="{'hasLatLng':journey.location && journey.latlong.lat}">
                 <!-- header started -->
                 <div class="started-heading relate text-center clearfix" ng-init="ongo.kindOf = {};">
                   <div class="start-card-options" ng-click="editOption(ongo.kindOf);">

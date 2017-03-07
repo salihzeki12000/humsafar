@@ -53,7 +53,7 @@
                   <!-- post type icon -->
                   <div class="post-icon" ng-if="activity.type=='travel-life' || activity.type=='local-life'">
                     <div class="pointer">
-                      <img ng-src="{{activity|typeOfPost:activity.type}}" width="24" class="img-responsive m-center">
+                      <img ng-src="{{activity|typeOfPost:activity.type}}" width="22" class="img-responsive m-center">
                     </div>
                   </div>
                   <!-- post type icon end -->
@@ -148,9 +148,10 @@
                         </li>
                       </flex-slider>
                     </div>
-                    <div ng-if="activity.canRate" ng-init="activity.rated=activity.review.length==1">
-                      <div ng-if="!activity.rated" ng-click="getReview(activity);" ng-class="{'color-cyan':activity.type=='local-life','color-pink':activity.type=='travel-life'}">Rate This Now</div>
-                      <div class="post-rating" ng-if="activity.rated" ng-click="getReview(activity)">
+                    <div class="post-rating" ng-if="activity.canRate" ng-init="activity.rated=activity.review.length==1">
+                      <div ng-if="!activity.rated" ng-click="getReview(activity);" ng-class="{'color-cyan':activity.type=='local-life','color-pink':activity.type=='travel-life'}"
+                        class="avenir-heavy pointer">Rate This Now</div>
+                      <div ng-if="activity.rated" ng-click="getReview(activity)">
                         <span class="avenir-heavy color-blue">Rating :
                         <span class="star-rating pointer" ng-repeat="time in activity.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':activity.type=='local-life','color-pink':activity.type=='travel-life'}"></i></span>
                         <span class="star-rating pointer color-grey" ng-repeat="time in activity.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
@@ -164,8 +165,8 @@
                         <img ng-src="{{activity.startLocationPic|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center">
                       </div>
                       <div class="journey-tag-holder">
-                        <div class="days-spent pull-right">
-                          <p><span class="block">{{activity.endTime|dateDifference: activity.startTime}}</span> Days</p>
+                        <div class="days-spent pull-right" ng-init="days=(activity.endTime|dateDifference: activity.startTime)">
+                          <p><span class="block">{{days}}</span> {{days | singularPlural:'Days'}}</p>
                         </div>
                         <h4 class="m-clear text-capitalize activity-travel-title">{{activity.name}}</h4>
                         <div class="clearfix journey-travelling-type">
@@ -225,7 +226,7 @@
                       </div>
                       <div class="journey-tag-holder">
                         <div class="days-spent pull-right" ng-if="activity.type!='editor-blog'">
-                          <p><span class="block">{{activity.duration}}</span>Days</p>
+                          <p><span class="block">{{activity.duration}}</span>{{activity.duration | singularPlural: 'Days'}}</p>
                         </div>
                         <h3 class="m-clear text-capitalize activity-journey-title">{{activity.name}}</h3>
                         <div class="clearfix journey-travelling-type">

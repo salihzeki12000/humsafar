@@ -78,11 +78,11 @@ var commontask = angular.module('commontask', [])
             break;
           case "itinerary":
             obj.itinerary = type_Id;
-            getCommentId = "";
+            getCommentId = type_Id;
             break;
           case "journey":
             obj.journey = type_Id;
-            getCommentId = "";
+            getCommentId = type_Id;
             break;
         }
         TravelibroService.http({
@@ -96,6 +96,7 @@ var commontask = angular.module('commontask', [])
         });
       },
       getComments: function (type, _id, callback) {
+        console.log(type, _id);
         var obj = {
           "_id": _id,
           "pagenumber": 1
