@@ -13,12 +13,11 @@
           <div class="photo-loc">
             <img src="img/camera-blue.png" alt="Photos" width="16" class="v-mid">
             <span class="avenir-heavy color-dark-blue v-mid">{{list.count.photoCount}}</span> |
-            <img src="img/location-blue.png"
-              alt="Location" width="14" class="v-mid"> <span class="avenir-heavy color-dark-blue v-mid">{{list.count.checkInCount}}</span>
+            <img src="img/location-blue.png" alt="Location" width="14" class="v-mid"> <span class="avenir-heavy color-dark-blue v-mid">{{list.count.checkInCount}}</span>
           </div>
         </div>
         <div class="pull-right">
-          <button class="btn btn-pink following-btn">Following</button>
+          <button class="btn btn-pink following-btn" ng-click="followFollowing(list)">{{list.following|followFollowingStatus}}</button>
         </div>
       </div>
       <div class="following-user-info">

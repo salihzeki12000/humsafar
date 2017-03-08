@@ -134,30 +134,6 @@ var commontask = angular.module('commontask', [])
         var obj = {
           "uniqueId": uniqueId
         };
-        // switch (type) {
-        //   case "post":
-        //     obj.post = type_id;
-        //     url = "/post/updateLikePostWeb";
-        //     break;
-        //   case "photo":
-        //     // obj.postId = type_id;
-        //     obj.photoId = additionalId;
-        //     url = "/postphotos/updateLikePostWeb";
-        //     break;
-        //   case "video":
-        //     // obj.postId = type_id;
-        //     obj.videoId = additionalId;
-        //     url = "/postvideos/updateLikePostWeb";
-        //     break;
-        //   case "itinerary":
-        //     obj.itinerary = type_id;
-        //     url = "/itinerary/updateLikeItineraryWeb";
-        //     break;
-        //   case "journey":
-        //     obj.journey = type_id;
-        //     url = "/journey/likeJourneyWeb";
-        //     break;
-        // }
         switch (type) {
           case "travel-life":
           case "local-life":
@@ -207,23 +183,6 @@ var commontask = angular.module('commontask', [])
           "_id": _id,
           "pagenumber": 1
         };
-        // switch (type) {
-        //   case "post":
-        //     url = "/post/getPostLikesWeb";
-        //     break;
-        //   case "photo":
-        //     url = "/postphotos/getPostLikesWeb";
-        //     break;
-        //   case "video":
-        //     url = "/postvideos/getPostLikesWeb";
-        //     break;
-        //   case "itinerary":
-        //     url = "/itinerary/getItineraryLikesWeb";
-        //     break;
-        //   case "journey":
-        //     url = "/journey/getJourneyLikesWeb";
-        //     break;
-        // }
         switch (type) {
           case "travel-life":
           case "local-life":

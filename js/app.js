@@ -83,6 +83,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'AboutCtrl'
     })
+       .state('termscondition', {
+      url: "/terms-conditions",
+      templateUrl: "views/template.html",
+      controller: 'TermsConditionsCtrl'
+    })
     .state('forgot-password', {
       url: "/forgot-password/:token/:email",
       templateUrl: "views/template.html",
@@ -659,7 +664,7 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout) {
     }
   };
 });
-firstapp.directive('uploadImageOtg', function ($http, $filter, $timeout) {
+firstapp.directive('uploadImageCount', function ($http, $filter, $timeout) {
   return {
     templateUrl: 'views/directive/uploadFile.html',
     scope: {

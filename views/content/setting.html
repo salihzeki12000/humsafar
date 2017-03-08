@@ -170,9 +170,16 @@
                       <div class="form-group date-pick">
                         <label for="dob" class="color-blue">DOB</label>
                         <!-- <input type="date" class="form-control" id="dob"> -->
-                        <input type="text" class="form-control" placeholder="DOB" ng-click="open1();" uib-datepicker-popup="{{format}}" ng-model="userData.dob"
+                        <!--<input type="text" class="form-control" placeholder="DOB" ng-click="open1();" uib-datepicker-popup="{{format}}" ng-model="userData.dob"
                           is-open="popup1.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
-                        />
+                        />-->
+                        <div class="itinerary-inputholder">
+                          <!-- <input type="date" class="form-control text-center" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'"> -->
+                          <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="open1();" uib-datepicker-popup="{{format}}"
+                            is-open="popup1.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="false"
+                            id="From_{{countryPanel}}{{cityPanel}}" ng-model="userData.dob" />{{userData.dob}}
+                          <!--ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'"-->
+                        </div>
                       </div>
                     </div>
                   </div>
