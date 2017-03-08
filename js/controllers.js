@@ -2699,6 +2699,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.cityBudgetData = [];
     $scope.cityItineraryType = [];
     $scope.cityItineraryBy = [];
+    $scope.cityRestaurantCuisine = [];
+    $scope.pagenumber = 1;
     console.log($scope.hotelsData, 'hotel ka data');
     console.log($scope.toursData, 'tourData ka data');
     console.log($scope.vacationsData, 'vacationData ka data');
@@ -2726,7 +2728,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         budget: $scope.cityBudgetData,
         cuisine: $scope.cityRestaurantCuisine,
         itineraryType: $scope.cityItineraryType,
-        itineraryBy: $scope.cityItineraryBy
+        itineraryBy: $scope.cityItineraryBy,
+        pagenumber : $scope.pagenumber
       }, function (data) {
         $scope.cityDestData = data.data;
         console.log('bc log hoja', $scope.cityDestData);
@@ -3046,6 +3049,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           url = "itineraries";
           $scope.cityoptions.active = "itineraries";
           $scope.getCityInfo("itinerary", $scope.urlDestinationCity);
+          $scope.cityRestaurantCuisine = [];
+          $scope.citySubTypeData = [];
+          $scope.cityBudgetData = [];
           break;
         case 4:
           url = "booking";
@@ -10307,7 +10313,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
       $scope.previousLikeId = itinerary._id;
     };
-    // comment and like end                                                                           
+    // comment and like end
 
     $scope.getItineraryType = [{
       img: "img/itinerary/family.png",
