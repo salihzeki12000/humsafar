@@ -207,6 +207,10 @@ a.mail-icon:hover {
   @include box-shadow(none);
 }
 
+.help-inline{
+  color: darken($brand-dark-pink, 20%);
+}
+
 ul {
   padding: 0;
   margin: 0;

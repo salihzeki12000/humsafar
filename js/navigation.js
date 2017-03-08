@@ -79,6 +79,7 @@ var navigationservice = angular.module('navigationservice', [])
       name: "Blogs",
       classis: "active",
       disabled: true,
+      linkAccess:true,
       link: "http://travelibro.net/blog",
     }, {
       name: "About Us",
@@ -99,7 +100,7 @@ var navigationservice = angular.module('navigationservice', [])
       }, {
         name: "Terms & Conditions",
         classis: "active",
-        anchor: "home"
+        anchor: "termscondition"
       }, ]
     }];
 

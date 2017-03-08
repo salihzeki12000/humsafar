@@ -50,15 +50,19 @@
       <div class="container">
         <div class="fill-detail-itinerary">
           <h4 class="color-blue avenir-roman mb20">Input Trip Details</h4>
-          <form>
+          <form validate name="detailItinerary">
             <div class="fill-itinerary-detail" ng-init="countryIndex">
               <div class="itinerary-title">
                 <div class="row">
                   <div class="col-md-6 col-sm-6">
-                    <div class="itinerary-inputholder">
-                      <input type="text" class="avenir-roman form-control" placeholder="Trip Title" ng-model="dItinerary.name">
+                    <div class="form-group">
+                    <div class="itinerary-inputholder" ng-class="{'form-invalid': detailItinerary.name.$invalid && detailItinerary.name.$touched}">
+                      <input type="text" class="avenir-roman form-control" name="name" placeholder="Trip Title" ng-model="dItinerary.name" ng-required="true">
                     </div>
-                  </div>
+                     <span ng-show="detailItinerary.name.$touched && detailItinerary.name.$invalid" class="help-inline">The Trip Title is required.</span>
+                     </div>
+                    </div>
+               
                   <!-- <div class="col-md-6">
                     <div class="itinerary-inputholder relate">
                       <input type="text" class="form-control" placeholder="Travelled With" ng-model="getSearchedList" ng-change="listFollowers(getSearchedList);">
@@ -85,7 +89,7 @@
                   <!-- new travelled with -->
                   <div class="col-md-6 col-sm-6">
                     <div class="itinerary-inputholder input-city-visited travelled-withselect">
-                      <ui-select multiple ng-model="dItinerary.buddies" theme="bootstrap" ng-click="updateBuddiesArr($select.selected._id)">
+                      <ui-select multiple ng-model="dItinerary.buddies" name="buddies" theme="bootstrap" ng-click="updateBuddiesArr($select.selected._id)">
                         <ui-select-match placeholder="Travelled With">{{$item.name}}</ui-select-match>
                         <ui-select-choices repeat="{'_id':list._id,'name':list.name,'email':list.email,'urlSlug':list.urlSlug} as list in followersList"
                           refresh="listFollowers($select.search)" refresh-delay="0">
@@ -127,28 +131,36 @@
                     <div class="row">
                       <!-- new ui select dropdown country -->
                       <div class="col-md-5 col-lg-6">
-                        <div class="itinerary-inputholder input-country-visited">
-                          <input type="text" class="form-control" ng-model="editCountry.name" ng-change="showCountry[countryPanel]=true" placeholder="Country Visited"></input>
+                        <div class="form-group">
+                        <div class="itinerary-inputholder input-country-visited" ng-class="{'form-invalid': detailItinerary.country.$invalid && detailItinerary.country.$touched}">
+                          <input type="text" class="form-control" ng-model="editCountry.name" name="country" ng-change="showCountry[countryPanel]=true" placeholder="Country Visited" ng-required="true"></input>
                           <span class="itinerary-dropdown-icon">
                           <i class="fa fa-chevron-down"></i>
                         </span>
                           <div class="dropdown-country" ng-show="showCountry[countryPanel]">
                             <ul>
                               <li ng-repeat="nation in countries | filter: editCountry.name">
-                                <a href="" ng-click="updateCountryDetail(editCountry,nation,countryPanel,cityPanel)" class="country-drop v-mid"><img ng-src="{{nation.flag|uploadpath}}" width="30" class="mr10 v-mid" alt="{{nation.name}}">{{nation.name}}</a>
+                                <a href="" ng-click="updateCountryDetail(editCountry,nation,countryPanel,cityPanel)" class="country-drop v-mid">
+                                  <img ng-src="{{nation.flag|uploadpath}}" width="30" class="mr10 v-mid" alt="{{nation.name}}">
+                                  {{nation.name}}
+                                  </a>
                               </li>
                             </ul>
                           </div>
+                        </div>
+                        <span ng-show="detailItinerary.country.$touched && detailItinerary.country.$invalid" class="help-inline">The Country is required.</span>
+                        </div>
+
                           <!--<ui-select ng-model="addCountry[countryPanel]" theme="bootstrap" ng-click="updateCountriesArr($select.selected._id)">
                             <ui-select-match placeholder="Country Visited ">{{$select.selected.name}}</ui-select-match>
                             <ui-select-choices repeat="{'country':nation._id,'flag':nation.flag,'name':nation.name,'cityVisited':[{}]} as nation in countries | filter: $select.search">
                               <span ng-bind="nation.name"></span>
                             </ui-select-choices>
                           </ui-select>-->
-                        </div>
                       </div>
                       <div class="col-md-7 col-lg-6">
-                        <div class="itinerary-country-detail">
+                        <div class="form-group">
+                        <div class="itinerary-country-detail" ng-class="{'form-invalid': detailItinerary.from.$invalid && detailItinerary.from.$touched}">
                           <div class="itinerary-from itinerary-month">
                             <label for="From">From</label>
                             <div class="itinerary-inputholder">
@@ -156,27 +168,29 @@
                               <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="ifNotChanged(editCountry)"
                                 uib-datepicker-popup="{{format}}" is-open="editCountry.datePopUp.from.openCalender" datepicker-options="editCountry.datePopUp.from"
                                 close-text="Close" alt-input-formats="false" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from"
-                                ng-change="getDays(editCountry);" />
+                                ng-change="getDays(editCountry);" name="from" ng-required="true"/>
                               <!--ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'"-->
                             </div>
                           </div>
                           <div class="itinerary-to itinerary-year">
                             <label for="to">To</label>
-                            <div class="itinerary-inputholder">
+                            <div class="itinerary-inputholder" ng-class="{'form-invalid': detailItinerary.to.$invalid && detailItinerary.to.$touched}">
                               <!-- <input type="date" class="form-control text-center" id="To_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.to" ng-change="getDays(editCountry)"> -->
                               <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="editCountry.datePopUp.to.openCalender=true"
                                 uib-datepicker-popup="{{format}}" is-open="editCountry.datePopUp.to.openCalender" datepicker-options="editCountry.datePopUp.to"
                                 close-text="Close" alt-input-formats="altInputFormats" id="To_{{countryPanel}}{{cityPanel}}"
-                                ng-model="editCountry.to" init-date="editCountry.from" ng-change="getDays(editCountry)" />
+                                ng-model="editCountry.to" init-date="editCountry.from" ng-change="getDays(editCountry)" name="to" ng-required="true"/>
                             </div>
                           </div>
                           <div class="itinerary-duration">
                             <label for="Duration">Days</label>
                             <div class="itinerary-inputholder">
-                              <input type="text" class="form-control text-center" id="Duration" ng-model="editCountry.duration">
+                              <input type="text" class="form-control text-center" id="Duration" ng-model="editCountry.duration" name="duration" ng-required="true">
                               <!--<span>{{(city.to | dateDifference:city.from)-1}}</span>-->
                             </div>
                           </div>
+                        </div> 
+                        <span ng-show="detailItinerary.from.$touched && detailItinerary.from.$invalid || detailItinerary.to.$touched && detailItinerary.to.$invalid || detailItinerary.duration.$touched && detailItinerary.duration.$invalid" class="help-inline">The From Month, To Month and Days are required.</span>
                         </div>
                       </div>
                     </div>
@@ -186,8 +200,9 @@
                   <div class="itinerary-country-visited itinerary-city-visited">
                     <div class="row relate" ng-repeat="editCity in editCountry.cityVisited track by $index" ng-init="cityPanel=$index">
                       <div class="col-md-6">
+                        <div class="form-group">
                         <div class="itinerary-inputholder input-country-visited">
-                          <input type="text" class="form-control mb10" ng-model="editCity.name" ng-change="searchCity(editCountry.country,editCity.name,editCountry.cityVisited);showCity[countryPanel][cityPanel]=true"
+                          <input type="text" class="form-control" ng-model="editCity.name" ng-change="searchCity(editCountry.country,editCity.name,editCountry.cityVisited);showCity[countryPanel][cityPanel]=true"
                             placeholder="City Visited"></input>
                           <span class="itinerary-dropdown-icon">
                           <i class="fa fa-chevron-down"></i>
@@ -197,6 +212,8 @@
                               <li ng-repeat="city in cities" ng-click="updateCityDetail(editCity,city);showCity[countryPanel][cityPanel]=false;"><a class="city-drop" href="">{{city.name}}</a></li>
                             </ul>
                           </div>
+                          </div>
+                           <!--<span ng-show="detailItinerary.city.$touched && detailItinerary.city.$invalid" class="help-inline">The City is required.</span>-->
                           <!--<ui-select ng-model="editCountry.cityVisited[cityPanel]" theme="bootstrap" ng-click="updateCitiesArr($select.selected._id)">
                             <ui-select-match placeholder="Country Visited ">{{$select.selected.name}}</ui-select-match>
                             <ui-select-choices repeat="{'name':citi.name,placeId:citi.placeId} as citi in cities" refresh="searchCity(editCountry.country,$select.search)"
@@ -204,9 +221,9 @@
                               <span ng-bind="citi.name"></span>
                             </ui-select-choices>
                           </ui-select>-->
-                        </div>
                         <!-- <i class="avenir-roman color-light-grey">Add other cities visited in this country on this trip</i> -->
                       </div>
+                        </div>
                       <!--<div class="col-md-6">
                         <div class="itinerary-country-detail">
                           <div class="itinerary-from itinerary-month">
@@ -242,6 +259,7 @@
                         </div>
                       </div>-->
                       <div class="col-md-6">
+                        <div class="form-group">
                         <div class="itinerary-country-detail">
                           <div class="itinerary-from itinerary-month">
                             <label for="Day">From</label>
@@ -249,12 +267,14 @@
                               <input type="number" class="form-control text-center" ng-model="editCity.from" min=1 placeholder="Day">
                             </div>
                           </div>
-                          <div class="itinerary-to itinerary-year">
+                          <div class="itinerary-to itinerary-year" ng-class="{'form-invalid': detailItinerary.cityTo.$invalid && detailItinerary.cityTo.$touched}">
                             <label for="to">To</label>
                             <div class="itinerary-inputholder">
                               <input type="number" class="form-control text-center" ng-model="editCity.to" min=1 placeholder="Day">
                             </div>
                           </div>
+                        </div>
+                         <!--<span ng-show="detailItinerary.cityFrom.$touched && detailItinerary.cityFrom.$invalid || detailItinerary.cityTo.$touched && detailItinerary.cityTo.$invalid" class="help-inline">The From Month and To Month is required.</span>                          -->
                         </div>
                       </div>
                       <span class="close-city-x" ng-click="removeCity(countryPanel,cityPanel)"><i class="fa fa-times" ng-if="cityPanel>0"></i></span>
@@ -460,7 +480,13 @@
             <!-- trip descp end -->
             <!-- upload trip photo -->
             <div class="upload-trip-photo-sec detailed-trip-photo">
+               <div class="clearfix">
               <label for="trip-photo">Upload Trip Photo</label>
+              <div class="pull-right">
+                <span>
+                  {{qItinerary.photos.length}}/{{totalUploadCount}}
+                </span>
+              </div>
               <div class="trip-photo-holder">
                 <div class="trip-view-photo" ng-repeat="photo in dItinerary.photos track by $index">
                   <span class="delete-detail-pic" ng-hide="photo.name==index"><i ng-click="removePhoto($index,city)" class="fa fa-times"></i></span>
@@ -486,14 +512,14 @@
                 </div>
                 <div class="trip-upload text-center">
                   <div class="upload-section">
-                    <div ng-if="dItinerary.photos.length==0">
+                    <!--<div ng-if="dItinerary.photos.length==0">
                       <img src="img/upload-transparent.png" alt="" class="m-center img-responsive">
                       <p class="text-center color-grey avenir-roman">Drag a your itinerary photos here</p>
                       <span class="block color-grey avenir-roman">- or -</span>
-                    </div>
+                    </div>-->
                     <div class="upload-btn relate">
                       <button class="btn btn-dark-blue pointer avenir-light pointer">Select photos from your computer</button>
-                      <upload-image ng-model="formData.photo" ng-callback="addPhotosCallback(data)" multiple="true" class="quick-upload-photos"></upload-image>
+                      <upload-image-count ng-model="formData.photo" ng-callback="addPhotosCallback(data,length)" multiple="true" class="quick-upload-photos"></upload-image-count>
                     </div>
                   </div>
                 </div>
@@ -505,10 +531,11 @@
               <div class="clearfix">
                 <div class="pull-left">
                   <label for="budget">Trip Budget</label>
-                  <div class="select-currency-holder">
+                  <div class="form-group">
+                    <div class="select-currency-holder">
                     <div class="currency-holder">
-                      <div class="itinerary-inputholder relate">
-                        <input type="text" placeholder="Select Currency" ng-model="dItinerary.currency" ng-change="currency.showCurrency=true" ng-click="currency.showCurrency=!currency.showCurrency">
+                      <div class="itinerary-inputholder relate" ng-class="{'form-invalid': detailItinerary.currency.$invalid && detailItinerary.currency.$touched}">
+                        <input type="text" placeholder="Select Currency" ng-model="dItinerary.currency" name="currency" ng-required="true" ng-change="currency.showCurrency=true" ng-click="currency.showCurrency=!currency.showCurrency">
                         <span class="itinerary-dropdown-icon">
                           <i class="fa fa-chevron-down"></i>
                         </span>
@@ -522,17 +549,20 @@
                       </div>
                     </div>
                     <div class="currency-amount">
-                      <div class="itinerary-inputholder">
+                      <div class="itinerary-inputholder" ng-class="{'form-invalid': detailItinerary.cost.$invalid && detailItinerary.cost.$touched}">
                         <!--<input type="number" class="text-center" ng-model="dItinerary.cost">-->
-                        <input id="id" type="number" ng-model="dItinerary.cost" placeholder="000"><label for="id">{{dItinerary.cost | number}}</label><br>
+                        <input id="id" type="number" ng-model="dItinerary.cost" placeholder="000" ng-required="true" name="cost"><label for="id">{{dItinerary.cost | number}}</label><br>
                       </div>
                     </div>
                   </div>
+                   <span ng-show="detailItinerary.currency.$touched && detailItinerary.currency.$invalid || detailItinerary.cost.$touched && detailItinerary.cost.$invalid" class="help-inline">The Currency and Budget is required.</span>
+                  </div>
+          
                 </div>
                 <div class="pull-right">
                   <div class="save-publish-detail">
-                    <button class="btn btn-pink btn-more mr5" ng-click="uploadDetailedItinerary(false)">Save</button>
-                    <button class="btn btn-pink btn-more" ng-click="uploadDetailedItinerary(true)">Publish</button>
+                    <button class="btn btn-pink btn-more mr5" ng-click="uploadDetailedItinerary(false)"  ng-disabled="detailItinerary.$invalid">Save</button>
+                    <button class="btn btn-pink btn-more" ng-click="uploadDetailedItinerary(true)"  ng-disabled="detailItinerary.$invalid">Publish</button>
                   </div>
                 </div>
               </div>
