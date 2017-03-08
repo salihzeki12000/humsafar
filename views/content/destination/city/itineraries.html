@@ -19,68 +19,50 @@
         <div class="pt20 pb10 head-title-all fliter-min-hght bg-white">
             <div class="pad-btn">
                 <div class="row">
-                  <div class="col-md-2 col-sm-3">
-                    <div class="select-all-made" ng-mouseleave="showAll=false">
-                        <span class="btn btn-default form-control" ng-click="showAll=true" ng-hide="showAll">All
-                      <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                        <input type="type" placeholder="Show All" ng-model="searchFilter" ng-show="showAll" class="form-control input-tab avenir-roman">
-                        <div class="check-box-panel" ng-show="showAll">
-                          <ul>
-                            <li ng-repeat="country in countries | filter:searchFilter">
-                              <input type="checkbox" id="{{country.code}} " class="form-control">
-                              <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
-                            </li>
-                          </ul>
-                        </div>
-                  </div>
-                  </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-mouseleave="showcities=false">
-                      <span class="btn btn-default form-control" ng-click="showcities=true" ng-hide="showcities">Cities
-                  <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                      <input type="type" placeholder="Cities" ng-model="searchFilter" ng-show="showcities" class="form-control input-tab avenir-roman">
-                      <div class="check-box-panel" ng-show="showcities">
+                  <div class="select-all-made">
+                      <input type="type" placeholder="Type" ng-model="cityItineraryType" class="form-control" ng-click="showCityItinerary = !showCityItinerary">
+                      <div class="" ng-show="showCityItinerary">
                         <ul>
-                          <li ng-repeat="country in countries | filter:searchFilter">
-                            <input type="checkbox" id="{{country.code}} " class="form-control">
-                            <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
+                          <li ng-repeat="type in cityType track by $index">
+                            <div class="custom-checkbox">
+                              <input type="checkbox" id="{{type}}" ng-click="cityItineraryFilter(type,'cityItineraryType')">
+                              <label for="{{type}}">{{type}}</label>
+                            </div>
                           </li>
                         </ul>
                       </div>
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-mouseleave="showtype=false">
-                      <span class="btn btn-default form-control" ng-click="showtype=true" ng-hide="showtype">Type
-                  <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                      <input type="type" placeholder="Type" ng-model="searchFilter" ng-show="showtype" class="form-control input-tab avenir-roman">
-                      <div class="check-box-panel" ng-show="showtype">
-                        <ul>
-                          <li ng-repeat="country in countries | filter:searchFilter">
-                            <input type="checkbox" id="{{country.code}} " ng-show="showtype" class="form-control">
-                            <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
-                          </li>
-                        </ul>
-                      </div>
-                  </div>
-                </div>
-                <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made" ng-mouseleave="showby=false">
-                    <span class="btn btn-default form-control" ng-click="showby=true" ng-hide="showby">By
-                  <i class="fa fa-angle-down pull-right" aria-hidden="true"></i></span>
-                    <input type="type" placeholder="By" ng-model="searchFilter" ng-show="showby" class="form-control input-tab avenir-roman">
-                    <div class="check-box-panel" ng-show="showby">
+                  <div class="select-all-made">
+                    <input type="type" placeholder="By" ng-model="cityItineraryBy" ng-click="showItineraryBy = !showItineraryBy" class="form-control">
+                    <div class="check-box-panel" ng-show="showItineraryBy">
                       <ul>
-                        <li ng-repeat="country in countries | filter:searchFilter">
-                          <input type="checkbox" id="{{country.code}} " ng-show="showby" class="form-control" ng-model="testCtrl.myText">
-                          <label for="{{country.code}} " class="avenir-roman ">{{country.name}}</label>
+                        <li>
+                          <div class="custom-checkbox">
+                            <input type="checkbox" id="user" ng-click="cityItineraryFilter('user','cityItineraryBy')">
+                            <label for="user">User</label>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="custom-checkbox">
+                            <input type="checkbox" id="TravelAgent" ng-click="cityItineraryFilter('TravelAgent','cityItineraryBy')">
+                            <label for="TravelAgent">TravelAgent</label>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="custom-checkbox">
+                            <input type="checkbox" id="Editor" ng-click="cityItineraryFilter('Editor','cityItineraryBy')">
+                            <label for="Editor">Editor</label>
+                          </div>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-offset-1 col-md-3  col-sm-3 ">
-                  <div class="txt-clear text-right ">
+                  <div class="txt-clear text-right">
                     <a>Clear All</a>
                   </div>
                 </div>
@@ -92,7 +74,8 @@
             <div class="plr30 ">
               <div class="close-all ">
                 <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
-                <span class="tags avenir-roman" ng-repeat="item in country">{{item}} <span>X</span></span>
+                <a class="btn btn-pink avenir-roman " ng-click="getCityInfo('itinerary', urlDestinationCity)">Submit</a>
+                <!-- <span class="tags avenir-roman" ng-repeat="item in country">{{item}} <span>X</span></span> -->
               </div>
             </div>
           </div>

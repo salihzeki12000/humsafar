@@ -23,10 +23,10 @@
               <div class="row">
                 <div class="col-md-2 col-sm-3">
                   <div class="select-all-made">
-                    <input type="text" placeholder="City" class="form-control" ng-click="cityCategory=!cityCategory;" ng-model="searchFilter">
+                    <input type="text" placeholder="City" class="form-control" ng-click="cityCategory=!cityCategory;" ng-model="cityHotelCategory">
                     <div class="check-box-panel" ng-show="cityCategory">
                       <ul>
-                        <li ng-repeat="category in cityDestData.subType | filter:searchFilter">
+                        <li ng-repeat="category in cityDestData.subType track by $index">
                           <div class="custom-checkbox">
                             <input type="checkbox" id="{{category}}" ng-click="cityHotelFilter(category,'categoryType')">
                             <label for="{{category}}" class="avenir-roman">{{category}}</label>
@@ -38,8 +38,8 @@
                 </div>
                 <div class="col-md-2 col-sm-3">
                   <div class="select-all-made">
-                    <input type="text" class="form-control" placeholder="Budget" ng-model="budgetHotel" ng-click="hotelBudget= !hotelBudget">
-                    <div class="budget-hotel-dropdown" ng-show="hotelBudget">
+                    <input type="text" class="form-control" placeholder="Budget" ng-model="cityHotelBudget" ng-click="hotelBudget= !hotelBudget">
+                    <div class="" ng-show="hotelBudget">
                       <ul>
                         <li>
                           <div class="custom-checkbox">
@@ -76,7 +76,7 @@
               <div class="close-all ">
                 <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
                 <!-- <span class="tags avenir-roman">{{hotelsBudget}} <span>X</span></span> -->
-                <a class="btn btn-pink avenir-roman " ng-click="getCityInfo('hotel',$scope.urlDestinationCity) ">Submit</a>
+                <a class="btn btn-pink avenir-roman " ng-click="getCityInfo('hotel',urlDestinationCity)">Submit</a>
               </div>
             </div>
           </div>

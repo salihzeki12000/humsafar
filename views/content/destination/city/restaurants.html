@@ -40,7 +40,7 @@
                       <input type="text" class="form-control" placeholder="Type" ng-click="showType=!showType" ng-model="cityTypeRestaurant">
                       <div class="" ng-show="showType">
                         <ul>
-                          <li ng-repeat="restaurant in restaurantType track by $index">
+                          <li ng-repeat="restaurant in cityDestData.subType track by $index">
                             <div class="custom-checkbox">
                               <input type="checkbox" id="{{restaurant}}Resto" ng-click="hotelRestaurantFilter(restaurant,'typeRestaurant')">
                               <label for="{{restaurant}}Resto">{{restaurant}}</label>
@@ -104,10 +104,10 @@
             <div class="plr30 ">
               <div class="close-all ">
                 <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
-                  <!-- <a class="btn btn-pink avenir-roman " ng-click="getCityInfo() ">X Close</a>
-               -->
+                  <a class="btn btn-pink avenir-roman " ng-click="getCityInfo('restaurant', urlDestinationCity)">Submit</a>
+
                  <!-- abhi iska api mai dekhna hai -->
-                <span class="tags avenir-roman" ng-repeat="item in country">{{item}} <span>X</span></span>
+                <!-- <span class="tags avenir-roman" ng-repeat="item in country">{{item}} <span>X</span></span> -->
               </div>
             </div>
           </div>
