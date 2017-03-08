@@ -134,7 +134,7 @@
                     <!-- img post slider -->
                     <div class="imgpost-relatedslider" ng-if="activity.activityPhotosVideos.length>1 && activity.type!='quick-itinerary' && activity.type!='detail-itinerary'">
                       <flex-slider class="carousel" flex-slide="photo in activity.activityPhotosVideos track by $index" item-width="80" animation="slide"
-                        item-margin="5" direction-nav="true" control-nav="false" mousewheel="true">
+                        item-margin="5" direction-nav="true" control-nav="false">
                         <li>
                           <!-- <div class="related-postimgholder" ng-click="changeImage($index,activity)">
                             <img ng-src="{{photo.name|uploadpath:85:85:'cover'}}" alt="" class="img-responsive">
@@ -252,7 +252,8 @@
                               </div>
                               <div class="text-right">
                                 <div class="journey-cost">
-                                  <span>{{activity.cost}}</span>
+                                    <span>{{activity.currency}}</span>
+                                  <span>{{activity.cost | number}}</span>
                                 </div>
                               </div>
                             </div>
