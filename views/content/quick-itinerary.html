@@ -116,7 +116,7 @@
                     </ui-select>
                   </div>
                   <span ng-show="quickItinerary.cityVisited.$touched && quickItinerary.cityVisited.$invalid" class="help-inline">The City is required.</span>
-                  <span class="add-city-quick">Add other cities visited in this country on this trip</span>
+                  <span class="add-city-quick pull-right">Add other cities visited in this country on this trip</span>
                 </div>
                 <!-- new ui select dropdown for city end-->
                 <!--temporary-->
@@ -216,7 +216,7 @@
               </div> -->
               <div class="pull-right mob-quicktrip-btn">
                 <div class="save-publish-detail">
-                  <button class="btn btn-pink btn-more mr5" ng-click="uploadQuickItinerary(false)" ng-disabled="quickItinerary.$invalid">Save</button>
+                  <button class="btn btn-pink btn-more mr5" ng-click="uploadQuickItinerary(false)" ng-disabled="quickItinerary.$invalid" ng-if="!(qItinerary.status ||  (qItinerary.status == true))">Save</button>
                   <button class="btn btn-pink btn-more" ng-click="uploadQuickItinerary(true)" ng-disabled="quickItinerary.$invalid">Publish</button>
                 </div>
               </div>
