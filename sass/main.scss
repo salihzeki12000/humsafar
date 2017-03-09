@@ -5353,6 +5353,7 @@ header {
   overflow: hidden;
   video {
     height: 100%;
+    max-height: 350px;
   }
   &:after {
     content: '';
