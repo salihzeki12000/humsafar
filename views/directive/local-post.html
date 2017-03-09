@@ -19,7 +19,8 @@
     <!-- post img and video img holder -->
     <div class="hide" ng-if="localongo.photos && localongo.photos.length == 0 && localongo.showMap && localongo.checkIn && localongo.checkIn.lat">
     </div>
-    <div class="localpost-imgholder" ng-click="getPhotosCommentData(localongo.photosVideos[index]._id,index,localongo.photosVideos.length,localongo.photosVideos)" ng-if="localongo.photos.length>0 && localongo.onDisplay=='photos'">
+    <div class="localpost-imgholder" ng-click="getPhotosCommentData(localongo.photosVideos[index]._id,index,localongo.photosVideos.length,localongo.photosVideos)"
+      ng-if="localongo.photos.length>0 && localongo.onDisplay=='photos'">
       <div class="localpost-imgblur">
         <img ng-src="{{localongo.photosVideos[index].name|uploadpath}}" alt="" class="img-responsive">
       </div>
@@ -66,13 +67,15 @@
           <ul>
             <li>
               <a href="" class="relate">
-                <i class="fa color-blue" ng-class="localongo.likeDone ? 'fa-heart like-animate like-animate-cyan' : 'fa-heart-o'" ng-click="likeLocalPost(localongo)" like-sound>
+                <i class="fa color-blue" ng-class="localongo.likeDone ? 'fa-heart like-animate like-animate-cyan' : 'fa-heart-o'" ng-click="likeLocalPost(localongo)"
+                  like-sound>
                 </i>
                 <span></span>
                 <audio id="like-play">
                   <source src="img/tiny1.mp3" type="audio/mp3">
                 </audio>
-              </a></li>
+              </a>
+            </li>
             <li>
               <a href="" ng-click="openCommentSection({'ongolocal':localongo})"><img src="img/comments.png" alt="" height="22"></a>
             </li>
@@ -84,7 +87,7 @@
       </div>
       <div class="pull-right">
         <div class="relate options" ng-init="localongo.edit={};">
-          <div class="pull-right mt5">
+          <div class="mt5">
             <div class="rating-localpost inline-block mt10" ng-if="localongo.checkIn && localongo.checkIn.location!='' && localongo.review && localongo.review==''">
               <span class="pointer bold italic" ng-click="rateLocalJourney(localongo);">Rate This Now</span>
             </div>
@@ -111,9 +114,6 @@
     </div>
     <div class="post-socail-reviews">
       <div class="clearfix">
-        <div class="pull-right">
-          <span class="color-blue mr20"></span>
-        </div>
         <div class="pull-left">
           <span class="color-blue mr20 pointer" ng-click="openLikeSection({'ongolocal':localongo})"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{localongo.likeCount}}</b>Likes</span>
           <!--<div class="rating-localpost inline-block" ng-if="localongo.checkIn && localongo.checkIn.location!='' && localongo.review && localongo.review==''">
