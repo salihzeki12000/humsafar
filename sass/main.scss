@@ -209,6 +209,7 @@ a.mail-icon:hover {
 
 .help-inline{
   color: darken($brand-dark-pink, 20%);
+  position: absolute;
 }
 
 ul {
@@ -7122,7 +7123,7 @@ header {
 }
 
 .fill-quick-itinerary .itinerary-country-visited .itinerary-inputholder {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .add-city-quick {

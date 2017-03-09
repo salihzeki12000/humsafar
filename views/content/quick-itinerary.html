@@ -8,13 +8,16 @@
             <div class="itinerary-title">
               <div class="row">
                 <div class="col-lg-6 col-md-5 col-sm-12">
-                  <div class="itinerary-inputholder form-group" ng-class="{'form-invalid': quickItinerary.name.$invalid && quickItinerary.name.$touched}">
+                  <div class="form-group">
+                  <div class="itinerary-inputholder" ng-class="{'form-invalid': quickItinerary.name.$invalid && quickItinerary.name.$touched}">
                     <input type="text" name="name" class="form-control" placeholder="Trip Title" ng-model="qItinerary.name" ng-required="true">
                   </div>
                    <span ng-show="quickItinerary.name.$touched && quickItinerary.name.$invalid" class="help-inline">The Trip Title is required.</span>
+                  </div>
                 </div>
                 <div class="col-lg-6 col-md-7 col-sm-12">
-                  <div class="itinerary-fill-info form-group">
+                  <div class="form-group">
+                                      <div class="itinerary-fill-info">
                     <div class="itinerary-month relate" ng-class="{'form-invalid': quickItinerary.month.$invalid && quickItinerary.month.$touched}">
                       <label for="month">Month</label>
                       <!-- <div class="itinerary-inputholder">
@@ -63,6 +66,7 @@
                     </div>
                   </div>
                    <span ng-show="quickItinerary.month.$touched && quickItinerary.month.$invalid || quickItinerary.year.$touched && quickItinerary.year.$invalid || quickItinerary.duration.$touched && quickItinerary.duration.$invalid" class="help-inline">The Month, Year and Days are required.</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -86,7 +90,8 @@
               <div class="row relate" ng-repeat="add in addCountry track by $index" ng-init="countryPanel=$index">
                 <!-- new ui select dropdown country -->
                 <div class="col-md-6 col-sm-6">
-                  <div class="itinerary-inputholder input-country-visited" ng-class="{'form-invalid': quickItinerary.duration.$invalid && quickItinerary.duration.$touched}">
+                  <div class="form-group">
+                   <div class="itinerary-inputholder input-country-visited" ng-class="{'form-invalid': quickItinerary.duration.$invalid && quickItinerary.duration.$touched}">
                     <ui-select ng-model="add.country" name="country" theme="bootstrap" on-select="updateCountryPanel(countryPanel,add.country)" ng-click="updateCountriesArr($select.selected._id)"  ng-required="true">
                       <ui-select-match placeholder="Country Visited ">{{$select.selected.name}}</ui-select-match>
                       <ui-select-choices repeat="nation._id as nation in countries | filter: $select.search"><img ng-src="{{nation.flag|uploadpath}}" width="30" class="mr10 v-mid" alt="{{nation.name}}">
@@ -95,6 +100,7 @@
                     </ui-select>
                   </div>
                    <span ng-show="quickItinerary.country.$touched && quickItinerary.country.$invalid" class="help-inline">The Country is required.</span>
+                  </div>
                 </div>
                 <!-- new ui select dropdown country end-->
                 <!-- new ui select dropdown for city -->
