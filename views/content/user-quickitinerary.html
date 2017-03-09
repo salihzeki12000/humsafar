@@ -30,7 +30,7 @@
         </ul>
       </div>
       <div class="button-holder mt20" ng-if="userData._id!=itinerary.creator._id">
-        <button class="btn btn-white-outline btn-more avenir-medium"></button>
+        <button class="btn btn-white-outline btn-more avenir-medium" ng-click="followFollowing(itinerary.user);">{{itinerary.user.following|followFollowingStatus}}</button>
       </div>
     </div>
     <div class="mouse-scrolldown color-white text-center pointer" ng-click="scrollDown();">

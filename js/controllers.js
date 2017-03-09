@@ -2729,7 +2729,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         cuisine: $scope.cityRestaurantCuisine,
         itineraryType: $scope.cityItineraryType,
         itineraryBy: $scope.cityItineraryBy,
-        pagenumber : $scope.pagenumber
+        pagenumber: $scope.pagenumber
       }, function (data) {
         $scope.cityDestData = data.data;
         console.log('bc log hoja', $scope.cityDestData);
@@ -8821,7 +8821,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       Itinerary.getOneItinerary(urlSlug, function (data) {
         $scope.dItinerary = data.data;
         $scope.addCountry = $scope.dItinerary.countryVisited;
-
+        $scope.totalUploadCount = $scope.dItinerary.photos.length;
         //setting up qItineraryType variable starts
         _.each($scope.dItinerary.itineraryType, function (n) {
           var index = _.findIndex($scope.dItineraryType, function (type) {
@@ -9172,8 +9172,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //travelled with starts
     $scope.listFollowers = function (searchList) {
-      if (searchList.length > 3) {
-        $scope.viewFollowers = true;
+      if (searchList.length > 2) {
+        // $scope.viewFollowers = true;
         var callback = function (data) {
           $scope.followersList = data.data;
 
@@ -9191,7 +9191,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           _.each($scope.dItinerary.buddies, function (buddy) {
             buddy.flag = true;
           });
-          $scope.followersList = _.uniqBy($scope.followersList, $scope.dItinerary.buddies, "_id");
+          $scope.followersList = _.differenceBy($scope.followersList, $scope.dItinerary.buddies, '_id');
+          // $scope.followersList = _.uniqBy($scope.followersList, $scope.dItinerary.buddies, "_id");
           console.log($scope.followersList);
           // _.each($scope.dItinerary.buddies, function (n1) {
           //   _.each($scope.followersList, function (n2) {
@@ -9442,6 +9443,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.qItinerary.oldStatus = $scope.qItinerary.status;
         $scope.qItinerary.oldPhotos = _.cloneDeep($scope.qItinerary.photos);
         $scope.addCountry = $scope.qItinerary.countryVisited;
+        $scope.totalUploadCount = $scope.qItinerary.oldPhotos.length;
 
         //setting up qItineraryType variable starts
         _.each($scope.qItinerary.itineraryType, function (n) {
@@ -9671,6 +9673,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.removePhoto = function (index) {
       $scope.qItinerary.photos.splice(index, 1);
       console.log($scope.qItinerary.photos);
+      $scope.totalUploadCount = $scope.totalUploadCount - 1;
     };
 
     $scope.uploadQuickItinerary = function (status) {
@@ -10197,12 +10200,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log("from activity");
       LikesAndComments.followUnFollow(user, function (data) {
         if (data.value) {
-          _.each($scope.activities, function (n) {
-            if (n.owner._id == user._id) {
-              n.owner.following = data.data.responseValue;
-            }
-            console.log(n);
-          });
           user.following = data.data.responseValue;
         } else {
           console.log("error updating data");
@@ -11482,7 +11479,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   })
 
   .controller('headerctrl', function ($scope, TemplateService, NavigationService, $state, $interval, $timeout) {
-    var currentUrl = window.location.href;
     $scope.template = TemplateService;
     $scope.getAllSearched = [];
     $scope.search = {};
@@ -11501,27 +11497,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, 200);
     });
 
+    NavigationService.getAccessToken(function (data) {
+      if (data.accessToken) {
+        NavigationService.getProfile("", function (data, status) {
+          if (data.data._id) {
+            $.jStorage.set("isLoggedIn", true);
+            $.jStorage.set("profile", data.data);
+            $scope.userData = $.jStorage.get("profile");
+            $scope.accessToken = $.jStorage.get("accessToken");
+          } else {
 
-    if ($.jStorage.get("profile") != null && $.jStorage.get("profile") != "") {
-      console.log("found");
-      NavigationService.getProfile($.jStorage.get("profile").urlSlug, function (data, status) {
-        if (data.data._id) {
-          $.jStorage.set("isLoggedIn", true);
-          $.jStorage.set("profile", data.data);
-          $scope.userData = $.jStorage.get("profile");
-          $scope.accessToken = $.jStorage.get("accessToken");
-        } else {
-          // $state.go('login');
-          $.jStorage.set("profile", "");
-        }
-      }, function (err) {
-        console.log(err);
-      });
-    } else {
-
-    }
-
+          }
+        }, function (err) {
+          console.log(err);
+        });
+      } else {
+        // debugger;
+        $.jStorage.flush();
+        // $scope.isLoggedIn = false;
+      }
+    }, function (data) {
+      console.log(data);
+    });
+    // debugger;
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+    // alert($scope.isLoggedIn);
     $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
       $(window).scrollTop(0);
     });

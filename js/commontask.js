@@ -281,14 +281,14 @@ var commontask = angular.module('commontask', [])
           TravelibroService.http({
             url: adminURL + "/user/followUserWeb",
             method: "POST",
-            data: obj
+            data: formData
           }).success(callback);
         } else if (obj.following == 1) {
           console.log("requested to unfollow");
           TravelibroService.http({
             url: adminURL + "/user/unFollowUserWeb",
             method: "POST",
-            data: obj
+            data: formData
           }).success(callback);
         }
       },
