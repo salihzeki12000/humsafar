@@ -8817,7 +8817,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.cities = [];
     };
     if (flag == 'edit' && urlSlug != '') {
-
       Itinerary.getOneItinerary(urlSlug, function (data) {
         $scope.dItinerary = data.data;
         $scope.addCountry = $scope.dItinerary.countryVisited;
@@ -9054,13 +9053,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         country.datePopUp.to.minDate = country.from;
       } else {
         if (country.from.getTime() > country.to.getTime()) {
-          alert("from greater than To");
+          // alert("from greater than To");
           country.datePopUp.to.initDate = country.from;
           country.to = country.from;
           country.datePopUp.to.openCalender = true;
           country.datePopUp.to.minDate = country.from;
         } else {
-          alert("from is smaller or equal to  TO");
+          // alert("from is smaller or equal to  TO");
+          country.datePopUp.to.minDate = country.from;
         }
       }
 
@@ -9074,7 +9074,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.ifNotChanged = function (country) {
       country.datePopUp.from.openCalender = true;
-
     };
     $scope.tagHandler = function (tag) {
       return {
@@ -9364,7 +9363,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         "new": "add",
         "datePopUp": {
           "from": {
-            'openCalender': true,
+            'openCalender': false,
             'showWeeks': false,
             'maxDate': maxDate,
             "initDate": new Date(newDate)
@@ -9379,6 +9378,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // $scope.addCountry[prevIndex + 1].from = new Date(newDate);
       $scope.addClass = "city-country-holder";
       console.log($scope.addCountry);
+    };
+
+    $scope.flushArray = function () {
+      $scope.google.hotels = [];
+      $scope.google.restaurants = [];
+      $scope.google.mustDos = [];
     };
 
     $scope.removeCountry = function (countryPanel) {
