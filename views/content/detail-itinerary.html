@@ -58,8 +58,8 @@
                     <div class="form-group">
                     <div class="itinerary-inputholder" ng-class="{'form-invalid': detailItinerary.name.$invalid && detailItinerary.name.$touched}">
                       <input type="text" class="avenir-roman form-control" name="name" placeholder="Trip Title" ng-model="dItinerary.name" ng-required="true">
+                      <span ng-show="detailItinerary.name.$touched && detailItinerary.name.$invalid" class="help-inline">The Trip Title is required.</span>
                     </div>
-                     <span ng-show="detailItinerary.name.$touched && detailItinerary.name.$invalid" class="help-inline">The Trip Title is required.</span>
                      </div>
                     </div>
                
@@ -147,8 +147,8 @@
                               </li>
                             </ul>
                           </div>
+                                                  <span ng-show="detailItinerary.country.$touched && detailItinerary.country.$invalid" class="help-inline">The Country is required.</span>
                         </div>
-                        <span ng-show="detailItinerary.country.$touched && detailItinerary.country.$invalid" class="help-inline">The Country is required.</span>
                         </div>
 
                           <!--<ui-select ng-model="addCountry[countryPanel]" theme="bootstrap" ng-click="updateCountriesArr($select.selected._id)">
@@ -189,8 +189,8 @@
                               <!--<span>{{(city.to | dateDifference:city.from)-1}}</span>-->
                             </div>
                           </div>
+                            <span ng-show="detailItinerary.from.$touched && detailItinerary.from.$invalid || detailItinerary.to.$touched && detailItinerary.to.$invalid || detailItinerary.duration.$touched && detailItinerary.duration.$invalid" class="help-inline">The From Month, To Month and Days are required.</span>
                         </div> 
-                        <span ng-show="detailItinerary.from.$touched && detailItinerary.from.$invalid || detailItinerary.to.$touched && detailItinerary.to.$invalid || detailItinerary.duration.$touched && detailItinerary.duration.$invalid" class="help-inline">The From Month, To Month and Days are required.</span>
                         </div>
                       </div>
                     </div>
@@ -531,7 +531,7 @@
               <div class="clearfix">
                 <div class="pull-left">
                   <label for="budget">Trip Budget</label>
-                  <div class="form-group">
+                  <div class="form-group itinerary-inputholder">
                     <div class="select-currency-holder">
                     <div class="currency-holder">
                       <div class="itinerary-inputholder relate" ng-class="{'form-invalid': detailItinerary.currency.$invalid && detailItinerary.currency.$touched}">
@@ -554,10 +554,9 @@
                         <input id="id" type="number" ng-model="dItinerary.cost" placeholder="000" ng-required="true" name="cost"><label for="id">{{dItinerary.cost | number}}</label><br>
                       </div>
                     </div>
+                     <span ng-show="detailItinerary.currency.$touched && detailItinerary.currency.$invalid || detailItinerary.cost.$touched && detailItinerary.cost.$invalid" class="help-inline">The Currency and Budget is required.</span>
                   </div>
-                   <span ng-show="detailItinerary.currency.$touched && detailItinerary.currency.$invalid || detailItinerary.cost.$touched && detailItinerary.cost.$invalid" class="help-inline">The Currency and Budget is required.</span>
-                  </div>
-          
+               </div>
                 </div>
                 <div class="pull-right">
                   <div class="save-publish-detail">

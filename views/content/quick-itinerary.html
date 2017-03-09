@@ -11,8 +11,8 @@
                   <div class="form-group">
                   <div class="itinerary-inputholder" ng-class="{'form-invalid': quickItinerary.name.$invalid && quickItinerary.name.$touched}">
                     <input type="text" name="name" class="form-control" placeholder="Trip Title" ng-model="qItinerary.name" ng-required="true">
+                      <span ng-show="quickItinerary.name.$touched && quickItinerary.name.$invalid" class="help-inline">The Trip Title is required.</span>
                   </div>
-                   <span ng-show="quickItinerary.name.$touched && quickItinerary.name.$invalid" class="help-inline">The Trip Title is required.</span>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-7 col-sm-12">
@@ -64,8 +64,8 @@
                         <input type="number" class="form-control text-center" id="Day" name="duration" placeholder="e.g. 20" ng-model="qItinerary.duration" ng-required="true">
                       </div>
                     </div>
+                    <span ng-show="quickItinerary.month.$touched && quickItinerary.month.$invalid || quickItinerary.year.$touched && quickItinerary.year.$invalid || quickItinerary.duration.$touched && quickItinerary.duration.$invalid" class="help-inline">The Month, Year and Days are required.</span>
                   </div>
-                   <span ng-show="quickItinerary.month.$touched && quickItinerary.month.$invalid || quickItinerary.year.$touched && quickItinerary.year.$invalid || quickItinerary.duration.$touched && quickItinerary.duration.$invalid" class="help-inline">The Month, Year and Days are required.</span>
                   </div>
                 </div>
               </div>
@@ -98,8 +98,9 @@
                         <span class="color-light-grey" ng-bind="nation.name"></span>
                       </ui-select-choices>
                     </ui-select>
+                                       <span ng-show="quickItinerary.country.$touched && quickItinerary.country.$invalid" class="help-inline">The Country is required.</span>
                   </div>
-                   <span ng-show="quickItinerary.country.$touched && quickItinerary.country.$invalid" class="help-inline">The Country is required.</span>
+
                   </div>
                 </div>
                 <!-- new ui select dropdown country end-->
@@ -114,9 +115,9 @@
                         <span ng-bind="city.name"></span>
                       </ui-select-choices>
                     </ui-select>
-                  </div>
                   <span ng-show="quickItinerary.cityVisited.$touched && quickItinerary.cityVisited.$invalid" class="help-inline">The City is required.</span>
                   <span class="add-city-quick pull-right">Add other cities visited in this country on this trip</span>
+                  </div>
                 </div>
                 <!-- new ui select dropdown for city end-->
                 <!--temporary-->

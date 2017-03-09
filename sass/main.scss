@@ -210,6 +210,7 @@ a.mail-icon:hover {
 .help-inline{
   color: darken($brand-dark-pink, 20%);
   position: absolute;
+  bottom:-22px;
 }
 
 ul {
@@ -7217,6 +7218,7 @@ header {
 }
 
 .itinerary-fill-info {
+  position: relative;
   label {
     font-size: 15px;
     @extend .avenir-light;
