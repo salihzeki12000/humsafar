@@ -20,9 +20,9 @@
             <div class="pad-btn">
                 <div class="row">
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made">
+                  <div class="select-all-made destination-filterscroll">
                       <input type="type" placeholder="Type" ng-model="cityItineraryType" class="form-control" ng-click="showCityItinerary = !showCityItinerary">
-                      <div class="" ng-show="showCityItinerary">
+                      <div class="destination-filterdrop" ng-show="showCityItinerary">
                         <ul>
                           <li ng-repeat="type in cityType track by $index">
                             <div class="custom-checkbox">
@@ -35,9 +35,9 @@
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made">
+                  <div class="select-all-made destination-filterscroll">
                     <input type="type" placeholder="By" ng-model="cityItineraryBy" ng-click="showItineraryBy = !showItineraryBy" class="form-control">
-                    <div class="check-box-panel" ng-show="showItineraryBy">
+                    <div class="destination-filterdrop" ng-show="showItineraryBy">
                       <ul>
                         <li>
                           <div class="custom-checkbox">

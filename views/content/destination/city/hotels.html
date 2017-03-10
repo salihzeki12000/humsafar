@@ -22,9 +22,9 @@
             <div class="pad-btn">
               <div class="row">
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made">
+                  <div class="select-all-made destination-filterscroll">
                     <input type="text" placeholder="City" class="form-control" ng-click="cityCategory=!cityCategory;" ng-model="cityHotelCategory">
-                    <div class="check-box-panel" ng-show="cityCategory">
+                    <div class="destination-filterdrop" ng-show="cityCategory">
                       <ul>
                         <li ng-repeat="category in cityDestData.subType track by $index">
                           <div class="custom-checkbox">
@@ -37,9 +37,9 @@
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made">
+                  <div class="select-all-made destination-filterscroll">
                     <input type="text" class="form-control" placeholder="Budget" ng-model="cityHotelBudget" ng-click="hotelBudget= !hotelBudget">
-                    <div class="" ng-show="hotelBudget">
+                    <div class="destination-filterdrop" ng-show="hotelBudget">
                       <ul>
                         <li>
                           <div class="custom-checkbox">
