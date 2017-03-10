@@ -3628,14 +3628,14 @@ q {
 
 .notification-content {
   position: relative;
-  padding: 15px;
+  padding: 15px 15px 0;
 }
 
 .read-notification {
   position: absolute;
-  right: 20px;
-  bottom: 10px;
-  font-size: 16px;
+  top: 15px;
+  right: 24px;
+  font-size: 22px;
 }
 
 .remove-notification {
@@ -3651,7 +3651,7 @@ q {
   display: inline-block;
   width: 40px;
   height: 40px;
-  border: 2px solid #868686;
+  border: 1px solid $brand-dark-grey;
   border-radius: 16px;
   margin-top: -10px;
   background-color: $brand-light-grey;
@@ -3792,14 +3792,14 @@ q {
 
   .notifcation-follower-count {
     display: block;
-    color: $brand-dark-grey;
+    color: $brand-blue;
     font-size: 20px;
     @extend .avenir-heavy;
   }
 
   .notifcation-follower-property {
     display: block;
-    color: $brand-dark-grey;
+    color: #424242;
   }
 }
 
@@ -4150,8 +4150,8 @@ q {
 
 .search-navigation {
   padding: 0 20px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent, transparent, transparent, transparent, transparent);
-  color: #424242;
+  // background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent, transparent, transparent, transparent, transparent);
+  color: #fff;
 
   ::-webkit-scrollbar {
     height: 5px;
@@ -4166,7 +4166,7 @@ q {
   }
 
   ul{
-    width: 525px;
+    width: 600px;
     .active {
       &:after {
         content: '';
@@ -4187,6 +4187,7 @@ q {
     position: relative;
     font-size: 16px;
     @extend .pointer;
+    @extend .avenir-heavy;
   }
 }
 
@@ -4266,11 +4267,7 @@ q {
   border-radius: 4px;
 }
 .search-city-title {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 10px;
-    width: 70%;
+  padding: 5px 0;
 }
 // SEARCH CITY END
 
@@ -4328,6 +4325,9 @@ q {
 }
 .search-hashtag-post{
   margin: 10px 0 20px;
+  .user-detail{
+    margin-top: 5px;
+  }
   .post-post-main{
     border-radius: 5px;
     box-shadow: 0px 0px 6px #888;
@@ -4344,6 +4344,10 @@ q {
   .post-rating{
     margin-top: 10px;
   }
+  .post-icon{
+    top: 0;
+    right: -5px;
+  }
 }
 .search-traveller{
   .photos-location-sec .following-btn{
@@ -4355,7 +4359,6 @@ q {
   }
 }
 // SEARCH HASHTAG END
-
 // SEARCH RESULT PAGE END
 
 
@@ -4484,3 +4487,32 @@ q {
   }
 }
 // LOGIN FLOW PAGE END
+
+// DESTINATION FILTERS
+.destination-filterscroll{
+  position: relative;
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $brand-light-grey;
+  }
+}
+.destination-filterdrop{
+  width: 100%;
+  max-height: 190px;
+  border-radius: 0 0 5px 5px;
+  position: absolute;
+  left: 0;
+  background-color: #fff;
+  overflow-y: auto;
+  .custom-checkbox{
+    padding: 5px 10px;
+  }
+}
+// DESTINATION FILTERS END

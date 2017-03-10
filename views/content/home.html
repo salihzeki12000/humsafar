@@ -64,6 +64,11 @@
           </div>
         </div>
       </div>
+      <div>
+      <a class="volume-off-on" id="mute-video" ng-click="muteVolume()">
+        <i class="fa on-off" aria-hidden="true" ng-class="{'fa-microphone':(audioStatus.on), 'fa-microphone-slash': (!audioStatus.on)}"></i>
+      </a>
+      </div>
     </div>
   </div>
   <div class="navigation-dots hidden-xs">

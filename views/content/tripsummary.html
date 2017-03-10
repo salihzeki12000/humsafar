@@ -92,7 +92,7 @@
         <div class="text-center">
           <ul>
             <li>
-              <div class="days-count" ng-init="count=('current'|dateDifference: trip.startTime)">
+              <div class="days-count" ng-init="count=(trip.endTime|dateDifference: trip.startTime)">
                 <span class="color-blue avenir-roman block">{{trip.startTime|formatDate:'date'}}</span>
                 <p class="m-clear"><span class="color-blue avenir-black">{{count}}</span> <span>{{count|singularPlural:'Days'}}</span></p>
               </div>
