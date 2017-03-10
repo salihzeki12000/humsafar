@@ -124,7 +124,7 @@ var activity = angular.module('activity', [])
               } else if (activity.user.gender == 'female') {
                 pronoun = "her";
               }
-              activity.thoughts = "Has started " + pronoun + " " + activity.name + " Journey";
+              activity.thoughts = "Has started a Journey";
             } else if (activity.type == "quick-itinerary" || activity.type == 'detail-itinerary') {
               pronoun = "his";
               if (activity.creator.gender == 'male') {
@@ -140,7 +140,7 @@ var activity = angular.module('activity', [])
               } else if (activity.user.gender == 'female') {
                 pronoun = "her";
               }
-              activity.thoughts = "Has ended " + pronoun + " " + activity.name + " Journey";
+              activity.thoughts = "Has ended the Journey";
             }
             if (activity && activity.photos && activity.videos) {
               activity.activityPhotosVideos = _.concat(activity.videos, activity.photos);

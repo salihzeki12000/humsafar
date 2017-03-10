@@ -4,7 +4,7 @@
       <div class="col-md-4 col-sm-6 col-xs-12 masonry-brick" ng-repeat="post in viewSearchedHashtag track by $index">
         <!-- post-post -->
         <div class="post-post search-hashtag-post">
-          <div class="post-post-main">
+          <div class="post-post-main bg-white">
             <!-- post header -->
             <div class="post-header relate">
               <div class="inline-block picture-section">
@@ -48,7 +48,7 @@
               <!-- post type icon -->
               <div class="post-icon" ng-if="post.type=='travel-life' || post.type=='local-life'">
                 <div class="location circle-rounded pointer">
-                  <img ng-src="{{post|typeOfPost:post.type}}" alt="" width="38" height="38" class="">
+                  <img ng-src="{{post|typeOfPost:post.type}}" alt="" width="22" class="">
                 </div>
               </div>
               <!-- post type icon end -->

@@ -38,7 +38,7 @@
                     </div>
                   </div>
                 </li>
-                <li ng-click="setting(3)" ng-class="{'bg-white active-setting' : showSetting == 3}">
+                <!-- <li ng-click="setting(3)" ng-class="{'bg-white active-setting' : showSetting == 3}">
                   <div class="password-heading clearfix">
                     <div class="row">
                       <div class="col-md-2 col-sm-1 col-xs-2">
@@ -48,13 +48,13 @@
                       </div>
                       <div class="col-md-10 col-sm-11 col-xs-10">
                         <div class="tab-list">
-                          <h5 class="color-blue inline-block m-clear">Change Password</h5>
+                          <h5 class="color-blue inline-block m-clear">Change Passw</h5>
                           <i class="fa fa-chevron-right pull-right"></i>
                         </div>
                       </div>
                     </div>
                   </div>
-                </li>
+                </li> -->
                 <li ng-click="setting(4)" ng-class="{'bg-white active-setting' : showSetting == 4}">
                   <div class="upload-heading clearfix">
                     <div class="row">
@@ -121,7 +121,7 @@
                       <img-crop image="myImage" result-image="myCroppedImage">
                       </img-crop>
                       <div class="btn-upload">
-                        <button class="btn btn-pink btn-more" ng-click="uploadProfilePicture(myCroppedImage)">Upload</button>
+                        <button class="btn btn-pink btn-more" ng-click="uploadProfilePicture(myCroppedImage)">Done</button>
                       </div>
                     </div>
                     <div class="upload-section text-center" ng-hide="showImage">
@@ -133,15 +133,15 @@
                       </div>
                       <div class="upload-btn">
                         <div class="relate inline-block mr10 form-file">
-                          <button class="btn btn-dark-blue pointer avenir-light ">Select a photo from your computer</button>
+                          <button class="btn btn-dark-blue pointer avenir-light ">Upload Photo</button>
                           <input type="file" id="fileInput" class="getfile pointer" />
                         </div>
-                        <div class="inline-block from-photogallery">
+                        <!-- <div class="inline-block from-photogallery">
                           <button class="btn btn-dark-blue pointer avenir-light">Your Photos</button>
-                        </div>
-                        <div class="inline-block ml10 from-webcamera">
+                        </div> -->
+                        <!-- <div class="inline-block ml10 from-webcamera">
                           <button class="btn btn-dark-blue pointer avenir-light">Web Camera</button>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -173,7 +173,7 @@
                         <!--<input type="text" class="form-control" placeholder="DOB" ng-click="open1();" uib-datepicker-popup="{{format}}" ng-model="userData.dob"
                           is-open="popup1.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
                         />-->
-                        <div class="itinerary-inputholder">
+                        <div class="itinerary-inputholder setting-datepicker">
                           <!-- <input type="date" class="form-control text-center" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'"> -->
                           <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="open1();" uib-datepicker-popup="{{format}}"
                             is-open="popup1.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="false"
@@ -249,14 +249,14 @@
                     <div class="col-md-12">
                       <div class="travel-blogger">
                         <h4 class="color-blue setting-tab-heading">Are You A Travel Blogger?</h4>
-                        <div class="button-group djb-font">
-                          <button class="btn btn-grey-pink " ng-class="{'active':userData.isPhotographer}" ng-click="setPhotographer();">
-                            <img src="img/travel-photographer.png" alt="" height="25" class="mr5"> travel Photographer
+                        <div class="button-group avenir-roman">
+                          <button class="btn btn-grey-pink text-capitalize" ng-class="{'active':userData.isPhotographer}" ng-click="setPhotographer();">
+                            <img src="img/travel-photographer.png" alt="" height="21" class="mr5"> travel Photographer
                           </button>
-                          <button class="btn btn-grey-pink" ng-class="{'active':userData.isBlogger}" ng-click="setBlogger();">
-                            <img src="img/travel-blogger.png" alt="" height="25" class="mr5"> travel Blogger
+                          <button class="btn btn-grey-pink text-capitalize" ng-class="{'active':userData.isBlogger}" ng-click="setBlogger();">
+                            <img src="img/travel-blogger.png" alt="" height="21" class="mr5"> travel Blogger
                           </button>
-                          <button class="btn btn-grey-pink avenir-roman btn-more" ng-class="{'active':userData.isPhotographer==false && userData.isBlogger==false}"
+                          <button class="btn btn-grey-pink avenir-roman btn-more text-capitalize" ng-class="{'active':userData.isPhotographer==false && userData.isBlogger==false}"
                             ng-click="setNone();">
                         None
                         </button>
@@ -264,7 +264,7 @@
                       </div>
                       <div class="blog-link">
                         <div class="form-group">
-                          <input id="inputUrl" type="url" name="url" class="form-control" placeholder="Blog Link" ng-model='blog_link'>
+                          <input id="inputUrl" type="url" name="url" class="form-control" placeholder="Website Link" ng-model='blog_link'>
                           <span ng-show="profile.url.$touched && profile.url.$invalid">The email is invalid.</span>
                         </div>
                       </div>
@@ -371,7 +371,7 @@
               </div>
               <!-- more profile detail end -->
               <!-- change password -->
-              <div class="change-password-detail" ng-if="showSetting == 3">
+              <!-- <div class="change-password-detail" ng-if="showSetting == 3">
                 <form>
                   <h4 class="color-blue setting-tab-heading">Password</h4>
                   <div class="row">
@@ -397,14 +397,14 @@
                     </div>
                   </div>
                 </form>
-              </div>
+              </div> -->
               <!-- change password -->
               <!-- data upload -->
               <div class="data-upload-detail" ng-if="showSetting == 4">
                 <h4 class="color-blue setting-tab-heading">Data Upload</h4>
                 <form>
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                       <div class="form-group">
                         <div class="radio-select">
                           <input type="radio" id="cellular-wifi" name="data-upload">
@@ -414,7 +414,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                       <div class="form-group">
                         <div class="radio-select">
                           <input type="radio" id="wifi" name="data-upload">
@@ -424,7 +424,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <!-- <div class="col-md-4">
                       <div class="form-group">
                         <div class="radio-select">
                           <input type="radio" id="Cellular" name="data-upload">
@@ -433,7 +433,7 @@
                           </label>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="clearfix mt20">
                     <div class="pull-right">
@@ -465,7 +465,7 @@
                       </div>
                     </div>
                   </div>
-                  <p class="avenir-medium color-grey fz12 mt20">When you select your account to be private only, your followers can view your My Life - Journeys, Moments
+                  <p class="avenir-medium color-grey fz12 mt20">When you select your account to be private, only your followers can view your My Life - Journeys, Moments
                     and Reviews.</p>
                   <div class="clearfix mt20">
                     <div class="pull-right">

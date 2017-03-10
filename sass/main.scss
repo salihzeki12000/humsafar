@@ -1519,6 +1519,7 @@ header {
 
 .journey-downloadicon {
   margin: 15px 0;
+  font-size: 16px;
 }
 
 // journey emptytab end
@@ -2864,6 +2865,14 @@ header {
   }
 }
 
+.moment-imgholder,.singleMonth-imgholder {
+  span{
+    i{
+      text-shadow: 1px 3px 1px rgba(0,0,0,0.25);
+     }
+  }
+}
+
 .singleMonth-imgholder {
   // margin-right: 5px;
   // @include square(169px);
@@ -3376,7 +3385,7 @@ header {
 // setting tab
 .setting {
   padding: 20px 40px;
-  background-color: #f1f2f2;
+  @extend .bg-white;
   .setting-heading {
     font-size: 20px;
   }
@@ -3450,6 +3459,117 @@ header {
   margin-bottom: 5px;
   i {
     margin-top: 25px;
+  }
+}
+
+.setting-datepicker{
+  .uib-datepicker-popup {
+    @extend .avenir-roman;
+    padding: 10px;
+    .uib-daypicker:focus {
+      outline: none;
+    }
+    .uib-daypicker {
+      thead {
+        tr:first-child {
+          th {
+            height: auto;
+            border: none;
+          }
+        }
+      }
+      th {
+        @extend .avenir-roman;
+        height: 40px;
+        border-top: 1px solid #ebebeb;
+        border-bottom: 1px solid #ebebeb;
+        color: $brand-light-grey;
+      }
+    }
+    .uib-datepicker {
+      .btn-default {
+        border: none;
+        border-radius: 100%;
+        margin-top: 5px;
+      }
+    }
+    .uib-year .btn-default {
+      border-radius: 0;
+    }
+    .uib-monthpicker .btn-default {
+      border-radius: 0;
+    }
+    .uib-left {
+      border-radius: 0;
+      padding: 10px 0;
+      i {
+        &:hover:before {
+          color: $brand-pink;
+        }
+        &:before {
+          content: "\f053";
+          color: $brand-light-grey;
+          font: normal normal normal 14px/1 FontAwesome;
+        }
+      }
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: #fff;
+      }
+    }
+    .uib-right {
+      border-radius: 0;
+      padding: 10px 0;
+      i {
+        &:hover:before {
+          color: $brand-pink;
+        }
+        &:before {
+          content: "\f054";
+          color: $brand-light-grey;
+          font: normal normal normal 14px/1 FontAwesome;
+        }
+      }
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: #fff;
+      }
+    }
+    .uib-title {
+      padding: 5px 0;
+      border-radius: 0;
+      font-size: 14px;
+      color: $brand-light-grey;
+      &:hover {
+        color: $brand-pink;
+        background-color: #fff;
+      }
+    }
+    .uib-datepicker:focus,
+    li:focus {
+      outline: none;
+    }
+    .uib-day button,
+    .uib-month button,
+    .uib-year button {
+      min-width: 34px;
+      min-height: 34px;
+      border: none;
+      border-radius: 100%;
+    }
+    .btn-default-focus,
+    .btn.active {
+      color: #fff;
+      background-color: $brand-pink;
+      .text-info {
+        color: #fff;
+      }
+    }
+    .uib-button-bar {
+      display: none;
+    }
   }
 }
 
@@ -3591,7 +3711,7 @@ header {
   margin-bottom: 20px;
   .button-group {
     .btn {
-      font-size: 18px;
+      font-size: 14px;
       &.active {
         background-color: $brand-pink;
       }
@@ -4043,15 +4163,15 @@ header {
   margin-top: -30px;
   margin-right: 15px;
   display: inline-block;
-  width: 70px;
-  height: 70px;
+  width: 45px;
+  height: 45px;
   overflow: hidden;
   border: 1px solid #fff;
   border-radius: 35%;
 }
 
 .editor-subdetail {
-  width: 70%;
+  width: 80%;
   font-size: 12px;
 }
 
@@ -4132,6 +4252,9 @@ header {
   background-color: rgba(255, 255, 255, 0.8);
   li {
     display: inline-block;
+  }
+  .post-icon{
+    top: 10px;
   }
 }
 
@@ -5677,6 +5800,7 @@ header {
     width: 100%;
     max-height: 260px;
     margin-top: -2px;
+    background-color: $brand-light-grey;
     overflow: hidden;
     img {
       width: 100%;
@@ -5837,6 +5961,7 @@ header {
     width: 148px;
     height: 148px;
     margin: 0 3px;
+    background-color: $brand-light-grey;
     display: inline-block;
     overflow: hidden;
     img {
@@ -5853,6 +5978,7 @@ header {
     width: auto;
     max-width: 700px;
     display: inline-block;
+    background-color: $brand-light-grey;
     vertical-align: top;
     img {
       max-height: calc( 100vh - 130px);
@@ -7041,6 +7167,7 @@ header {
     position: absolute;
     right: 10px;
     bottom: 10px;
+    width: 22px;
     img {
       width: 30px;
     }
@@ -9320,7 +9447,6 @@ header {
 
 .profile-tab-strip {
   padding: 0 20px;
-  background-color: #ebebeb;
 }
 
 .list-profile-tab {
@@ -10609,7 +10735,7 @@ video::-webkit-media-controls-fullscreen-button {
   }
   .notify-close {
     position: absolute;
-    top: 10px;
+    top: -30px;
     right: 10px;
   }
 }
