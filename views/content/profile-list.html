@@ -19,9 +19,9 @@
             <!-- search friend -->
             <div class="search-friend" ng-if="activeMenu == 'following' || activeMenu == 'followers'">
               <div class="follow-followers-holder">
-                <input type="text" placeholder="Search To Follow" ng-model="searchFriend.name" ng-change="searchToFollow(searchFriend.name,viewDropdown);"
+                <input type="text" placeholder="Search To Follow" ng-model="searchUsers.name" ng-change="searchToFollow(searchUsers.name,viewDropdown);"
                   ng-if="activeMenu == 'following'" />
-                <input type="text" placeholder="Search Friend" ng-model="searchFriend.name" ng-change="getDropdown(viewDropdown)" ng-if="activeMenu == 'followers'"
+                <input type="text" placeholder="Search Followers" ng-model="searchFriend.name" ng-change="getDropdown(viewDropdown)" ng-if="activeMenu == 'followers'"
                 />
                 <!--<input type="text" placeholder="Search Friend" ng-model="searchUser.name" ng-if="activeMenu=='followers'">-->
                 <span class="search-follow"><i class="fa fa-search"></i></span>
@@ -45,7 +45,7 @@
                     <!--</div>
                     </li>-->
                     <!--ng-click="searchUser.open=false;searchFriend.name=list.name;searchCard.name=list.name"-->
-                    <li class="pointer" ng-repeat="list in searchList| filter:searchFriend.name">
+                    <li class="pointer" ng-repeat="list in searchList| filter:searchUsers.name">
                       <div class="clearfix">
                         <div class="pull-left">
                           <div class="profile-picholder v-mid">
@@ -182,7 +182,7 @@
       <!-- following tab end-->
       <!-- follower tab -->
       <div class="follow-tab-main" ng-if="activeMenu == 'followers'">
-        <div class="following-container" ng-repeat="list in followersList | filter:searchCard.name">
+        <div class="following-container" ng-repeat="list in followersList | filter:searchFriend.name">
           <div class="following-holder">
             <div class="follow-imgholder">
               <img ng-src="{{list.profilePicture|uploadpath:104:108:'cover'}}" alt="{{list.nameFollow}}" class="img-responsive">
