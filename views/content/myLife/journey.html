@@ -39,10 +39,10 @@
               <div class="pull-right">
                 <div class="add-journey" ng-init="closeJourney={}">
                   <!--<span class="pointer" ng-click="false||(showMore = !showMore); editOption(closeJourney)" remove-link my-profile='false' element-event="$event" ng-class="{'close-more' : showMore == true}"><i class="fa fa-plus"></i></span>-->
-                  <span class="pointer" ng-click="false||(showMore = !showMore); editOption(closeJourney)" remove-link my-profile='false' element-event="$event" ><i class="fa fa-plus"></i></span>
-                  <div class="add-more-journey"  ng-show="closeJourney.backgroundClick">
+                  <span class="pointer" ng-click="false||(showMore = !showMore); editOption(closeJourney)" remove-link my-profile='false' element-event="$event"><i class="fa fa-plus"></i></span>
+                  <div class="add-more-journey" ng-show="closeJourney.backgroundClick">
                     <ul>
-                      <li><a href="">On The Go Journeys</a></li>
+                      <li><a ui-sref="popularjourney">On The Go Journeys</a></li>
                       <li><a ui-sref="itinerary">Upload An Itinerary</a></li>
                       <!--<li><a href="">Holiday Planner</a></li>-->
                     </ul>
@@ -61,41 +61,29 @@
                     <div class="video-gif-journey videoplays">
                       <div class="mobile-gif">
                         <img src="img/profile-empty/gif-mobile.png" alt="GIF Travelibro" class="img-responsive">
+                        <a class="volume-off-on-mylife" id="mute-video" ng-click="muteVolume()">
+                          <i class="fa" aria-hidden="true" ng-class="{'fa-microphone':(audioStatus.on), 'fa-microphone-slash': (!audioStatus.on)}"></i>
+                        </a>
                       </div>
-                        <div class="videoplay-empty-journey">
+                      <div class="videoplay-empty-journey">
                         <video width="238px" height="100%" autoplay id="video" muted videoend>
                           <source src="img/libro-home/videos/travellife.mp4" type="video/mp4">
                         </video>
-                           <div class="play-show">
-                            <a class="various color-pink fancybox.iframe vimeo" href="http://player.vimeo.com/video/34792993?title=0&amp;byline=0&amp;portrait=0" fancybox-box  width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen ng-click="pauseVideo();">
-                                <i class="fa fa-play-circle" aria-hidden="true"></i>
-                            </a>
-                          </div>
+                        <div class="play-show">
+                          <a class="various color-pink fancybox.iframe vimeo" href="http://player.vimeo.com/video/34792993?title=0&amp;byline=0&amp;portrait=0"
+                            fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen
+                            ng-click="pauseVideo();">
+                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                          </a>
+                        </div>
                       </div>
-                       <a class="full-screen-mylife various fancybox.iframe vimeo" href="http://player.vimeo.com/video/34792993?title=0&amp;byline=0&amp;portrait=0" fancybox-box  width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen ng-click="pauseVideo();">
-                            <img src="img/icons/fullscreen-grey.png" alt="TravelLibro" height="25">
-                        </a>
-                        <a class="volume-off-on-mylife" id="mute-video" ng-click="muteVolume()">
-                            <i class="fa fa-microphone-slash" aria-hidden="true"></i>
-                        </a>
-                      <div class="journey-downloadicon">
-                        <ul class="list-unstyled list-inline text-center color-pink">
-                          <li class="">
-                            Download App
-                          </li>
-                          <li>
-                            <a href="#" target="_blank" class="color-pink">
-                              <i class="fa fa-apple"></i>
-                            </a>
-                          </li>
-                          <li>|</li>
-                          <li>
-                            <a href="#" class="color-pink" target="_blank">
-                              <i class="fa fa-android"></i>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
+                      <!--<a class="full-screen-mylife various fancybox.iframe vimeo" href="http://player.vimeo.com/video/34792993?title=0&amp;byline=0&amp;portrait=0"
+                        fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen ng-click="pauseVideo();">
+                        <img src="img/icons/fullscreen-grey.png" alt="TravelLibro" height="25">
+                      </a>
+                      <a class="volume-off-on-mylife" id="mute-video" ng-click="muteVolume()">
+                        <i class="fa fa-microphone-slash" aria-hidden="true"></i>
+                      </a>-->
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-6">
@@ -113,7 +101,25 @@
                         <h4>Chronicling Past Travels</h4>
                         <p class="empty-descp">Revisit the treasured moments of your past travels by creating a beautiful memoir of your trip.</p>
                       </div>
-                        <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
+                      <p class="empty-descp">This space will get populated when you capture your Travel and Local Life using the TraveLibro App.</p>
+                    </div>
+                    <div class="journey-downloadicon">
+                      <ul class="list-unstyled list-inline text-center color-pink">
+                        <li class="">
+                          Download App
+                        </li>
+                        <li>
+                          <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank" class="color-pink">
+                            <i class="fa fa-apple"></i>
+                          </a>
+                        </li>
+                        <li>|</li>
+                        <li>
+                          <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" class="color-pink" target="_blank">
+                            <i class="fa fa-android"></i>
+                          </a>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -130,8 +136,8 @@
                     <div class="journey-masonry-brick" ng-if="life.type=='ended-journey' || life.type=='on-the-go-journey'">
                       <div class="travel-life-part avenir-roman">
                         <div class="travel-journey-heading">
-                          <p ng-if="life.type=='ended-journey'">Has ended <span ng-if="life.user.gender=='male'">his</span><span ng-if="life.user.gender=='female'">her</span>                            Journey</p>
-                          <p ng-if="life.type=='on-the-go-journey'">Has started <span ng-if="life.user.gender=='male'">his</span><span ng-if="life.user.gender=='female'">her</span>                            Journey</p>
+                          <p ng-if="life.type=='ended-journey'">Has ended the Journey</p>
+                          <p ng-if="life.type=='on-the-go-journey'">Has started a Journey</p>
                           <p ng-hide="life.onJourney">{{life.heading}}</p>
                           <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
                             <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p>
@@ -443,24 +449,30 @@
                     <div class="video-gif-journey videoplays">
                       <div class="mobile-gif">
                         <img src="img/profile-empty/gif-mobile.png" alt="GIF Travelibro" class="img-responsive">
+                        <a class="volume-off-on-mylife" id="mute-video" ng-click="muteVolume()">
+                          <i class="fa" aria-hidden="true" ng-class="{'fa-microphone':(audioStatus.on), 'fa-microphone-slash': (!audioStatus.on)}"></i>
+                        </a>
                       </div>
                       <div class="videoplay-empty-journey" ng-if="!hasJourney">
-                        <video width="238px" height="100%"  autoplay id="video" muted>
+                        <video width="238px" height="100%" autoplay id="video" muted>
                           <source src="img/libro-home/videos/locallife.mp4" type="video/mp4">
                         </video>
-                           <div class="play-show">
-                            <a class="various color-cyan fancybox.iframe vimeo" href="http://player.vimeo.com/video/34792993?title=0&amp;byline=0&amp;portrait=0" fancybox-box  width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen ng-click="pauseVideo();">
-                                <i class="fa fa-play-circle" aria-hidden="true"></i>
-                            </a>
-                          </div>
+                        <div class="play-show">
+                          <a class="various color-cyan fancybox.iframe vimeo" href="http://player.vimeo.com/video/34792993?title=0&amp;byline=0&amp;portrait=0"
+                            fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen
+                            ng-click="pauseVideo();">
+                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                          </a>
+                        </div>
                       </div>
-                            <a class="volume-off-on-mylife" id="mute-video" ng-click="muteVolume()">
-                              <i class="fa fa-microphone-slash" aria-hidden="true"></i>
-                            </a>
-                            <a class="full-screen-mylife various fancybox.iframe vimeo" href="http://player.vimeo.com/video/34792993?title=0&amp;byline=0&amp;portrait=0" fancybox-box  width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen ng-click="pauseVideo();">
-                                <img src="img/icons/fullscreen-grey.png" alt="TravelLibro" height="25">
-                            </a>
-                      <div class="journey-downloadicon">
+                      <!--<a class="volume-off-on-mylife" id="mute-video" ng-click="muteVolume()">
+                        <i class="fa fa-microphone-slash" aria-hidden="true"></i>
+                      </a>
+                      <a class="full-screen-mylife various fancybox.iframe vimeo" href="http://player.vimeo.com/video/34792993?title=0&amp;byline=0&amp;portrait=0"
+                        fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen ng-click="pauseVideo();">
+                        <img src="img/icons/fullscreen-grey.png" alt="TravelLibro" height="25">
+                      </a>-->
+                      <!--<div class="journey-downloadicon">
                         <ul class="list-unstyled list-inline text-center color-cyan">
                           <li class="">
                             Download App
@@ -477,7 +489,7 @@
                             </a>
                           </li>
                         </ul>
-                      </div>
+                      </div>-->
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -487,8 +499,26 @@
                       </div>
                       <h3 class="color-cyan avenir-heavy">Life In The City</h3>
                       <p class="empty-descp">Candid, fun moments with friends, happy family get-togethers, some precious ‘me-time’…share your love
-                        for your city and inspire others to do the same. Cherish your local life memories eternally.</p>
-                        <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
+                        for your city and inspire others to do the same. Cherish your Local Life memories eternally.</p>
+                      <p class="empty-descp">This space will get populated when you capture your Travel and Local Life using the TraveLibro App.</p>
+                    </div>
+                    <div class="journey-downloadicon">
+                      <ul class="list-unstyled list-inline text-center color-pink">
+                        <li class="">
+                          Download App
+                        </li>
+                        <li>
+                          <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank" class="color-cyan">
+                            <i class="fa fa-apple"></i>
+                          </a>
+                        </li>
+                        <li>|</li>
+                        <li>
+                          <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" class="color-cyan" target="_blank">
+                            <i class="fa fa-android"></i>
+                          </a>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -667,115 +697,8 @@
               </div>
             </div>
           </div>
-          <!-- whole window comment -->
-          <div class="notify-main whole-card-comment {{getCard}}" ng-show="viewCardComment">
-            <div class="container-fluid">
-              <div class="comment-like-notify">
-                <div class="like-comment-mainsec">
-                  <div class="clearfix">
-                    <div class="pull-left">
-                      <ul class="notify-like">
-                        <li>
-                          <a href="" class="relate"><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate like-animate-cyan' : 'fa-heart-o'" ng-click="likePost(post.uniqueId,post._id)" like-sound></i>
-                          <span></span>
-                          <audio id="like-play">
-                            <source src="img/tiny1.mp3" type="audio/mp3">
-                          </audio>
-                        </a>
-                        </li>
-                        <li>
-                          <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve" ng-click="focus('enterComment');"></a>
-                        </li>
-                        <li>
-                          <a href=""><img src="img/share.png" alt="" height="20" class="img-responisve"></a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="pull-right">
-                      <div class="notification-like" ng-init="commentLike={};">
-                        <!-- showLikes=!showLikes; -->
-                        <span class="notify-like-holder pointer avenir-roman" ng-click="getLikes(post._id);editOption(commentLike)">
-                  <i class="fa fa-heart color-blue card-like-animation"  ng-click="likeUnlikeActivity(life)" ng-class="{'view-like' : commentLike.backgroundClick == true , '' : commentLike.backgroundClick == false}" ></i>
-                 <span>{{post.likeCount|filterCount}}   </span>{{post.likeCount|singularPlural:'Likes'}}
-                        <!-- ng-show="showLikes" -->
-                        <!--<div class="like-dropdown" ng-show="commentLike.backgroundClick;">
-                          <ul>
-                            <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
-                          </ul>
-                        </div>-->
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- comment section -->
-                <div class="comment-sec">
-                  <div class="write-comment-text">
-                    <div class="commenter-img">
-                      <div class="commenter-imgholder">
-                        <img ng-src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
-                      </div>
-                    </div>
-                    <div class="comment-ur-text relate">
-                      <textarea name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="comment.text">
-                    </textarea>
-                      <find-tags ng-model="comment.text" element-id="enterComment" enable="bothTagging">
-                    </div>
-                  </div>
-                  <div class="clearfix comment-post">
-                    <div class="pull-right">
-                      <button class="btn btn-pink post-btn" ng-click=postPostsComment(post.uniqueId,comment.text,post._id)>Post</button>
-                    </div>
-                  </div>
-                  <div class="listing-comment">
-                    <div class="view-comment-list" ng-repeat="list in listOfComments.comment">
-                      <div class="commenter-img">
-                        <div class="commenter-imgholder">
-                          <img ng-src="{{list.user.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
-                        </div>
-                      </div>
-                      <div class="comment-container">
-                        <div class="commenter-text">
-                          <p class="avenir-roman"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name}}</span>{{list.text}}</p>
-                          <div class="like-reply-line">
-                            <!--<span class="color-blue avenir-roman mr5 pointer">Like</span>-->
-                            <!--<span class="color-blue avenir-roman mr5 pointer">Reply</span>-->
-                            <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                            | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- comment section end` -->
-              </div>
-            </div>
-          </div>
-          <!-- whole window comment end-->
-          <!-- whole window LIKE -->
-          <div class="like-side-sec  {{showLikeShow}}" ng-show="viewCardLike">
-            <div class="like-section">
-              <ul>
-                <!-- REPEAT BUDDY LIST -->
-                <li ng-repeat="like in listOfLikes.like">
-                  <div class="like-notify-buddy clearfix">
-                    <div class="like-buddy-pic">
-                      <img ng-src="{{like.profilePicture|uploadpath:51:51}}" alt="" class="img-responsive">
-                    </div>
-                    <div class="like-buddy-name">
-                      <p class="like-buddy-user">{{like.name}}</p>
-                      <p class="like-buddy-attag">@ <span>{{like.urlSlug}}</span></p>
-                    </div>
-                    <div class="like-buddy-follow-btn pull-right" ng-if="like._id!=userData._id">
-                      <button class=" btn btn-pink following-btn" ng-click=followFollowing(like);>{{like.following|followFollowingStatus}}</button>
-                    </div>
-                  </div>
-                </li>
-                <!-- REPEAT BUDDY LIST END -->
-              </ul>
-            </div>
-          </div>
-          <!-- whole window LIKE end-->
+          <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike'
+            list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
           <!-- end journey local life -->
         </div>
       </div>

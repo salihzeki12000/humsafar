@@ -47,7 +47,7 @@ var mylife = angular.module('mylife', [])
       updateCountriesVisited: function (obj, callback, errCallback) {
         TravelibroService.post(adminURL + "/user/updateCountriesVisitedWeb", obj).success(callback).error(errCallback);
       },
-      removeCountryList: function(obj, callback,errCallback){
+      removeCountryList: function (obj, callback, errCallback) {
         TravelibroService.post(adminURL + "/user/removeCountriesVisitedWeb", obj).success(callback).error(errCallback);
       },
       getCountryVisitedListWeb: function (callback) {
@@ -140,7 +140,7 @@ var mylife = angular.module('mylife', [])
           console.log(data);
         });
       },
-      searchAllUser: function (searchUser, callback) {
+      searchAllUser: function (searchUser, counter, callback) {
         var obj = {
           search: searchUser
         };
@@ -149,6 +149,7 @@ var mylife = angular.module('mylife', [])
           method: "POST",
           data: obj
         }).success(function (data) {
+          data.data.counter = counter;
           callback(data);
         }).error(function (data) {
           console.log(data);

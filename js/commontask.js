@@ -137,29 +137,24 @@ var commontask = angular.module('commontask', [])
         switch (type) {
           case "travel-life":
           case "local-life":
-            console.log("like type:----post");
             obj.post = type_id;
             url = "/post/updateLikePostWeb";
             break;
           case "on-the-go-journey":
           case "ended-journey":
-            console.log("like type:----start/end journey");
             obj.journey = type_id;
             url = "/journey/likeJourneyWeb";
             break;
           case "quick-itinerary":
           case "detail-itinerary":
-            console.log("like type:----itinerary");
             obj.itinerary = type_id;
             url = "/itinerary/updateLikeItineraryWeb";
             break;
           case "photo":
-            console.log("like type:----photo");
             obj.photoId = additionalId;
             url = "/postphotos/updateLikePostWeb";
             break;
           case "video":
-            console.log("like type:----video");
             obj.videoId = additionalId;
             url = "/postvideos/updateLikePostWeb";
             break;
@@ -292,34 +287,39 @@ var commontask = angular.module('commontask', [])
           }).success(callback);
         }
       },
-      //   followUser: function (userId, name, callback) {
-      //     var obj = {
-      //       "_id": userId,
-      //     }
-      //     TravelibroService.http({
-      //       url: adminURL + "/user/followUserWeb",
-      //       method: "POST",
-      //       data: obj
-      //     }).success(function (data) {
-      //       callback(data);
-      //     }).error(function (data) {
-      //       console.log(data);
-      //     });
-      //   },
-      // unFollowUser: function (userId, callback) {
-      //   var obj = {
-      //     "_id": userId,
-      //   }
-      //   TravelibroService.http({
-      //     url: adminURL + "/user/unFollowUserWeb",
-      //     method: "POST",
-      //     data: obj
-      //   }).success(function (data) {
-      //     callback(data);
-      //   }).error(function (data) {
-      //     console.log(data);
-      //   });
-      // }
+      commentDelete: function (commentId, commentType, callback) {
+        console.log(callback, 'callback');
+        console.log(commentId, 'comment ka id');
+        TravelibroService.http({
+          url: adminURL + "/comment/deletePostComment",
+          method: "POST",
+          data: {
+            _id: commentId,
+            type: commentType
+          }
+        }).success(function (data) {
+          callback(data);
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
+      commentEdit: function (commentId, commentText, commentType, callback) {
+        TravelibroService.http({
+          url: adminURL + "/comment/editCommentWeb",
+          method: "POST",
+          data: {
+            _id: commentId,
+            text: commentText,
+            type: commentType,
+            addHashtag: [],
+            removeHashtag: []
+          }
+        }).success(function (data) {
+          callback(data);
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
     };
     return returnVal;
   })
@@ -465,15 +465,27 @@ commontask.directive('findTags', function (LikesAndComments) {
   }
 });
 
-commontask.directive('likeSound', function () {
+commontask.directive('commentLikeSection', function (LikesAndComments, $timeout) {
   return {
-    restrict: 'A',
-    link: function (scope, element, attrs) {
-      element.bind('click', function () {
+    restrict: 'E',
+    scope: {
+      'userData': '=',
+      'post': '=',
+      'viewCardComment': '=',
+      'viewCardLike': '=',
+      'listOfComments': '=',
+      'listOfLikes': '=',
+      'getCard': '=',
+      'showLikeShow': '='
+    },
+    controller: 'commentLikeSectionCtrl',
+    templateUrl: "views/directive/commonLikesAndComments.html",
+    link: function ($scope, element, attrs) {
+      console.log($scope.post, "bhai ander ghus gya");
 
-      });
+
     }
-  };
+  }
 });
 
 commontask.directive('likeSound', function () {

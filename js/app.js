@@ -8,6 +8,16 @@ var backgroundClick = {
   }
 };
 
+$(document).ready(function () {
+  $("body").click(function () {
+    if (backgroundClick.object) {
+      backgroundClick.close();
+    }
+  });
+});
+
+
+
 var imageTestingCallback = function (dataURI, type) {
   // convert base64 to raw binary data held in a string
   var byteString = atob(dataURI.split(',')[1]);
@@ -37,15 +47,6 @@ var imageTestingCallback = function (dataURI, type) {
   console.log(formData, "after appending");
   return formData;
 };
-
-$(document).ready(function () {
-  $("body").click(function () {
-    if (backgroundClick.object) {
-      backgroundClick.close();
-    }
-  });
-
-});
 
 var firstapp = angular.module('firstapp', [
   'ui.router',
@@ -83,7 +84,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'AboutCtrl'
     })
-       .state('termscondition', {
+    .state('termscondition', {
       url: "/terms-conditions",
       templateUrl: "views/template.html",
       controller: 'TermsConditionsCtrl'
@@ -922,7 +923,7 @@ firstapp.filter('kindOfReviewCheckIn', function () {
         returnVal = "img/kindOfReviewCheckIn/grey-cinema.png";
         break;
       case "Restaurants & Bars":
-        returnVal = "img/kindOfReviewCheckIn/grey-cinema.png";
+        returnVal = "img/kindOfReviewCheckIn/grey-restaraunt.png";
         break;
       case "Shopping":
         returnVal = "img/kindOfReviewCheckIn/grey-shopping.png";
@@ -1423,17 +1424,17 @@ firstapp.directive('uiSrefIf', function ($compile) {
   };
 })
 firstapp.directive('videoend', [function () {
-    return {
-        restrict: 'A',
-        link: function (scope, elem, attr) {
-          $elem = $(elem);
-          var aud = $elem.get(0);
-          aud.onended = function() {
-              $(".videoplays").addClass('playbutton');
-          };
-          aud.onplay = function() {
-              $(".videoplays").removeClass('playbutton');
-          };
-        }
-    };
+  return {
+    restrict: 'A',
+    link: function (scope, elem, attr) {
+      $elem = $(elem);
+      var aud = $elem.get(0);
+      aud.onended = function () {
+        $(".videoplays").addClass('playbutton');
+      };
+      aud.onplay = function () {
+        $(".videoplays").removeClass('playbutton');
+      };
+    }
+  };
 }])

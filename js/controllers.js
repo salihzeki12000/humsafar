@@ -58,13 +58,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $('video').get(nextIndex - 1).play();
               $('video').get(nextIndex - 2).pause();
               $('video').get(nextIndex).pause();
-              $scope.pauseVideo = function () {
-                if ($("video").get(nextIndex - 1).play()) {
-                  $("video").get(nextIndex - 1).pause();
-                } else {
-                  $("video").get(nextIndex - 1).prop('play');
-                }
-              }
+              // $scope.pauseVideo = function () {
+              //   if ($("video").get(nextIndex - 1).play()) {
+              //     $("video").get(nextIndex - 1).pause();
+              //   } else {
+              //     $("video").get(nextIndex - 1).prop('play');
+              //   }
+              // }
             }, 500);
 
           }
@@ -123,10 +123,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, 1000);
     });
     cfpLoadingBar.complete();
+
+    $scope.audioStatus={
+          on:true
+        }
     $scope.muteVolume = function () {
       if ($("video").prop('muted')) {
+        $scope.audioStatus={
+          on:true
+        }
         $("video").prop('muted', false);
       } else {
+        $scope.audioStatus={}
         $("video").prop('muted', true);
       }
     }
@@ -931,7 +939,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var delta = 5;
     var journeyInfoStrip = $('.journey-info-strip').outerHeight();
 
-
     function calcWidth() {
       var width = $(window).width();
       var percent = 35;
@@ -1657,7 +1664,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewCardLike = true;
         $scope.journey.journeyHighLight = ongo._id;
         $scope.showLikeShow = "show-like-side-sec";
-        LikesAndComments.getLikes("post", ongo._id, callback);
+        LikesAndComments.getLikes(ongo.type, ongo._id, callback);
       } else {
         if ($scope.viewCardLike) {
           $scope.viewCardLike = false;
@@ -1670,40 +1677,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // $scope.focus('enterComment');
           $scope.journey.journeyHighLight = ongo._id;
           $scope.showLikeShow = "show-like-side-sec";
-          LikesAndComments.getLikes("post", ongo._id, callback);
+          LikesAndComments.getLikes(ongo.type, ongo._id, callback);
         }
       }
       $scope.previousLikeId = ongo._id;
     };
 
-    $scope.postPostsComment = function (uniqueId, comment, postId) {
-      console.log(uniqueId, comment, postId);
-      console.log("controller se comment hua");
-      var type = "post";
-      var additionalId = null;
-      var hashTag = [];
-      var callback = function (data) {
-        $scope.listOfComments = data.data;
-        document.getElementById('enterComment').value = "";
-      };
-      LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, additionalId, callback);
-    };
-
-    $scope.likePost = function (uniqueId, _id) {
-      console.log($scope.post.likeDone + "this call is from ongojourney.html");
-      $scope.post.likeDone = !$scope.post.likeDone;
-      if ($scope.post.likeDone) {
-        if ($scope.post.likeCount === undefined) {
-          $scope.post.likeCount = 1;
-        } else {
-          $scope.post.likeCount = $scope.post.likeCount + 1;
-        }
-        LikesAndComments.likeUnlike("post", "like", uniqueId, _id, null);
-      } else {
-        $scope.post.likeCount = $scope.post.likeCount - 1;
-        LikesAndComments.likeUnlike("post", "unlike", uniqueId, _id, null);
-      }
-    };
 
     $scope.focus = function (id) {
       console.log(id, "focus called");
@@ -1935,27 +1914,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       stateOff: 'fa fa-star'
     }];
 
-    $scope.followFollowing = function (user) {
-      // console.log(user.following, user._id, user.name);
-      if (user.following) {
-        LikesAndComments.unFollowUser(user._id, function (data) {
-          if (data.value) {
-            user.following = false;
-          } else {
-            console.log(data.data);
-          }
-        })
-      } else {
-        LikesAndComments.followUser(user._id, user.name, function (data) {
-          console.log(data);
-          if (data.value) {
-            user.following = true;
-          } else {
-            console.log(data.data);
-          }
-        });
-      }
-    }
+    // $scope.followFollowing = function (user) {
+    //   if (user.following) {
+    //     LikesAndComments.unFollowUser(user._id, function (data) {
+    //       if (data.value) {
+    //         user.following = false;
+    //       } else {
+    //         console.log(data.data);
+    //       }
+    //     })
+    //   } else {
+    //     LikesAndComments.followUser(user._id, user.name, function (data) {
+    //       console.log(data);
+    //       if (data.value) {
+    //         user.following = true;
+    //       } else {
+    //         console.log(data.data);
+    //       }
+    //     });
+    //   }
+    // }
+
+    // $scope.followFollowing = function (user) {
+    //   console.log("from ongojourney");
+    //   LikesAndComments.followUnFollow(user, function (data) {
+    //     if (data.value) {
+    //       user.following = data.data.responseValue;
+    //     } else {
+    //       console.log("error updating data");
+    //     }
+    //   });
+    // }
+
+
   })
 
   .controller('PopularBloggerCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
@@ -5700,7 +5691,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.listOfComments = [];
         $scope.viewCardComment = true;
         $scope.getCard = "view-whole-card";
-        LikesAndComments.getComments("post", $scope.post._id, callback);
+        LikesAndComments.getComments(ongo.type, $scope.post._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
@@ -5712,24 +5703,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.viewCardComment = true;
           // $scope.focus('enterComment');
           $scope.getCard = "view-whole-card";
-          LikesAndComments.getComments("post", $scope.post._id, callback);
+          LikesAndComments.getComments(ongo.type, $scope.post._id, callback);
         }
       }
       $scope.previousId = $scope.post._id;
     };
 
-    $scope.postPostsComment = function (uniqueId, comment, postId) {
-      console.log(uniqueId, comment, postId);
-      console.log("controller se comment hua");
-      var type = "post";
-      var additionalId = null;
-      var hashTag = [];
-      var callback = function (data) {
-        $scope.listOfComments = data.data;
-        document.getElementById('enterComment').value = "";
-      };
-      LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, additionalId, callback);
-    };
+    // $scope.postPostsComment = function (uniqueId, comment, postId) {
+    //   console.log(uniqueId, comment, postId);
+    //   console.log("controller se comment hua");
+    //   var type = "post";
+    //   var additionalId = null;
+    //   var hashTag = [];
+    //   var callback = function (data) {
+    //     $scope.listOfComments = data.data;
+    //     document.getElementById('enterComment').value = "";
+    //   };
+    //   LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, additionalId, callback);
+    // };
 
     $scope.openLikeSection = function (ongo) {
       $scope.listOfComments = false;
@@ -5746,7 +5737,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewCardLike = true;
         // $scope.journey.journeyHighLight = ongo._id;
         $scope.showLikeShow = "show-like-side-sec";
-        LikesAndComments.getLikes("post", ongo._id, callback);
+        LikesAndComments.getLikes(ongo.type, ongo._id, callback);
       } else {
         if ($scope.viewCardLike) {
           $scope.viewCardLike = false;
@@ -5759,50 +5750,64 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // $scope.focus('enterComment');
           // $scope.journey.journeyHighLight = ongo._id;
           $scope.showLikeShow = "show-like-side-sec";
-          LikesAndComments.getLikes("post", ongo._id, callback);
+          LikesAndComments.getLikes(ongo.type, ongo._id, callback);
         }
       }
       $scope.previousLikeId = ongo._id;
     };
-
-    $scope.likePost = function (uniqueId, _id) {
-      console.log($scope.post.likeDone + "this call is from ongojourney.html");
-      $scope.post.likeDone = !$scope.post.likeDone;
-      if ($scope.post.likeDone) {
-        if ($scope.post.likeCount == undefined) {
-          $scope.post.likeCount = 1;
-        } else {
-          $scope.post.likeCount = $scope.post.likeCount + 1;
+     $scope.audioStatus={
+          on:true
         }
-        LikesAndComments.likeUnlike("post", "like", uniqueId, _id, null)
+    $scope.muteVolume = function () {
+      if ($("video").prop('muted')) {
+        $scope.audioStatus={
+          on:true
+        }
+        $("video").prop('muted', false);
       } else {
-        $scope.post.likeCount = $scope.post.likeCount - 1;
-        LikesAndComments.likeUnlike("post", "unlike", uniqueId, _id, null)
-      }
-    };
-
-    $scope.followFollowing = function (user) {
-      // console.log(user.following, user._id, user.name);
-      if (user.following) {
-        LikesAndComments.unFollowUser(user._id, function (data) {
-          console.log(data);
-          if (data.value) {
-            user.following = false;
-          } else {
-            console.log(data.data);
-          }
-        })
-      } else {
-        LikesAndComments.followUser(user._id, user.name, function (data) {
-          console.log(data);
-          if (data.value) {
-            user.following = true;
-          } else {
-            console.log(data.data);
-          }
-        });
+        $scope.audioStatus={}
+        $("video").prop('muted', true);
       }
     }
+
+    // $scope.likePost = function (uniqueId, _id) {
+    //   console.log($scope.post.likeDone + "this call is from ongojourney.html");
+    //   $scope.post.likeDone = !$scope.post.likeDone;
+    //   if ($scope.post.likeDone) {
+    //     if ($scope.post.likeCount == undefined) {
+    //       $scope.post.likeCount = 1;
+    //     } else {
+    //       $scope.post.likeCount = $scope.post.likeCount + 1;
+    //     }
+    //     LikesAndComments.likeUnlike("post", "like", uniqueId, _id, null)
+    //   } else {
+    //     $scope.post.likeCount = $scope.post.likeCount - 1;
+    //     LikesAndComments.likeUnlike("post", "unlike", uniqueId, _id, null)
+    //   }
+    // };
+
+    // $scope.followFollowing = function (user) {
+    //   // console.log(user.following, user._id, user.name);
+    //   if (user.following) {
+    //     LikesAndComments.unFollowUser(user._id, function (data) {
+    //       console.log(data);
+    //       if (data.value) {
+    //         user.following = false;
+    //       } else {
+    //         console.log(data.data);
+    //       }
+    //     })
+    //   } else {
+    //     LikesAndComments.followUser(user._id, user.name, function (data) {
+    //       console.log(data);
+    //       if (data.value) {
+    //         user.following = true;
+    //       } else {
+    //         console.log(data.data);
+    //       }
+    //     });
+    //   }
+    // }
     // local life end
   })
 
@@ -6313,7 +6318,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     $scope.dateOptions = {
       "initDate": $scope.userData.dob,
+      showWeeks: false
     }
+
     // datepicker end
     $scope.myImage = '';
     $scope.myCroppedImage = '';
@@ -7704,613 +7711,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       LikesAndComments.postComment(type, activity.uniqueId, activity._id, comment, hashTag, additionalId, callback);
     };
 
-    $scope.activityPost = [{
-        class: "travel-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        countryVisit: [{
-          imgFlag: "img/india-visit.png"
-        }, {
-          imgFlag: "img/england-visit.png"
-        }, {
-          imgFlag: "img/canada-visit.png",
-        }, ],
-        editor: false,
-        userPic: true,
-        follow: true,
-        following: false,
-        postIcon: false,
-        video: false,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: true,
-        onJourney: false,
-        getpopularPost: false,
-        activitySec: true,
-        visitPost: false
-      }, {
-        class: "travel-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. #hagtags,#hagtags1,#hagtags2,",
-        relatedPhoto: [
-          'img/blog/blog-post.jpg',
-          'img/blog/blog-post2.jpg',
-          'img/blog/blog-post3.jpg',
-          'img/blog/blog-post4.jpg',
-          'img/blog/blog-post.jpg',
-          'img/blog/blog-post2.jpg',
-          'img/blog/blog-post3.jpg',
-          'img/blog/blog-post4.jpg',
-        ],
-        editor: false,
-        userPic: true,
-        follow: false,
-        following: true,
-        postIcon: true,
-        video: false,
-        photo: true,
-        photoSlider: true,
-        travelledJourney: false,
-        onJourney: false,
-        getpopularPost: false,
-        activitySec: true,
-        visitPost: false
-      }, {
-        class: "travel-taught",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-        hashtag: [{
-          tag: "#hagtags"
-        }, {
-          tag: "#hagtags1"
-        }, {
-          tag: "#hagtags2",
-        }, ],
-        editor: false,
-        userPic: true,
-        follow: true,
-        following: false,
-        postIcon: true,
-        video: false,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      }, {
-        class: "travel-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        editor: false,
-        userPic: true,
-        follow: false,
-        following: true,
-        postIcon: true,
-        video: false,
-        photo: true,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        activitySec: true
-      }, {
-        class: "travel-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has started his London Journey",
-        editor: false,
-        userPic: true,
-        follow: true,
-        following: false,
-        postIcon: true,
-        video: true,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        activitySec: true
-      }, {
-        class: "user-detail-itinerary",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has uploaded a new Itinerary",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        countryVisit: [{
-          imgFlag: "img/india-visit.png"
-        }, {
-          imgFlag: "img/england-visit.png"
-        }, {
-          imgFlag: "img/canada-visit.png",
-        }, ],
-        pointReview: "4.5",
-        editor: false,
-        userPic: true,
-        follow: false,
-        following: true,
-        postIcon: false,
-        video: false,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: true,
-        getpopularPost: false,
-        visitPost: false,
-        activitySec: true
-      }, , {
-        class: "user-quick-itinerary",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has uploaded a new Itinerary",
-        photoCount: "28",
-        videoCount: "5",
-        dateitinerary: "Jan 2016",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        countryVisit: [{
-          imgFlag: "img/india-visit.png"
-        }, {
-          imgFlag: "img/england-visit.png"
-        }, {
-          imgFlag: "img/canada-visit.png",
-        }, ],
-        pointReview: "4.5",
-        editor: false,
-        userPic: true,
-        follow: false,
-        following: true,
-        postIcon: false,
-        video: false,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: true,
-        getpopularPost: false,
-        visitPost: false,
-        activitySec: true
-      }, {
-        class: "editor-blog",
-        profilePic: "img/profile-main.png",
-        userName: "Editor - blog",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has uploaded a new blog",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "",
-        itineraryType2: "",
-        itineraryType3: "",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        editor: true,
-        userPic: false,
-        follow: false,
-        following: false,
-        postIcon: false,
-        video: false,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: true,
-        getpopularPost: false,
-        visitPost: false,
-        activitySec: true
-      }, {
-        class: "editor",
-        profilePic: "img/profile-main.png",
-        userName: "Editor - Itinerary",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Has uploaded a new Itinerary",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        countryVisit: [{
-          imgFlag: "img/india-visit.png"
-        }, {
-          imgFlag: "img/england-visit.png"
-        }, {
-          imgFlag: "img/canada-visit.png",
-        }, ],
-        editor: true,
-        userPic: false,
-        follow: false,
-        following: false,
-        postIcon: false,
-        video: false,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: true,
-        getpopularPost: false,
-        visitPost: false,
-        activitySec: true
-      },
-      // {
-      //   class: "local-life",
-      //   profilePic: "img/profile-main.png",
-      //   userName: "John Doe",
-      //   timestampDate: "14 Jan, 2014",
-      //   timestampHour: "01:20 pm",
-      //   status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      //   imgTravelled: "img/london.jpg",
-      //   Travelledtag: "London Eye",
-      //   photoCount: "28",
-      //   videoCount: "5",
-      //   locationVisited: "9",
-      //   itineraryType1: "img/sunset.png",
-      //   itineraryType2: "img/bag-journey.png",
-      //   itineraryType3: "img/luxury-journey.png",
-      //   travelledDay: "75",
-      //   onwayTag: "love in paris",
-      //   imgOnway: "img/paris.jpg",
-      //   cost: "$10,000",
-      //   spendingDay: "75",
-      //   likes: "15660",
-      //   reviews: "354",
-      //   pointReview: "4.5",
-      //   countryVisit: [{
-      //     imgFlag: "img/india-visit.png"
-      //   }, {
-      //     imgFlag: "img/england-visit.png"
-      //   }, {
-      //     imgFlag: "img/canada-visit.png",
-      //   }, ],
-      //   editor: false,
-      //   userPic: true,
-      //   follow: false,
-      //   following: true,
-      //   postIcon: true,
-      //   video: false,
-      //   photo: false,
-      //   photoSlider: false,
-      //   travelledJourney: true,
-      //   onJourney: false,
-      //   visitPost: false,
-      //   getpopularPost: false,
-      //   activitySec: true
-      // },
-      {
-        class: "local-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-        relatedPhoto: [
-          'img/blog/blog-post.jpg',
-          'img/blog/blog-post2.jpg',
-          'img/blog/blog-post3.jpg',
-          'img/blog/blog-post4.jpg',
-          'img/blog/blog-post.jpg',
-          'img/blog/blog-post2.jpg',
-          'img/blog/blog-post3.jpg',
-          'img/blog/blog-post4.jpg',
-        ],
-        editor: false,
-        userPic: true,
-        follow: false,
-        following: true,
-        postIcon: true,
-        video: false,
-        photo: true,
-        photoSlider: true,
-        travelledJourney: false,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        activitySec: true
-      }, {
-        class: "local-life-taught",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-        editor: false,
-        userPic: true,
-        follow: false,
-        following: true,
-        postIcon: true,
-        video: false,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      }, {
-        class: "local-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-        editor: false,
-        userPic: true,
-        follow: true,
-        following: false,
-        postIcon: true,
-        video: false,
-        photo: true,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: false,
-        visitPost: false,
-        getpopularPost: false,
-        activitySec: true
-      }, {
-        class: "local-life",
-        profilePic: "img/profile-main.png",
-        userName: "John Doe",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        status: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-        editor: false,
-        userPic: true,
-        follow: false,
-        following: true,
-        postIcon: true,
-        video: true,
-        photo: false,
-        photoSlider: false,
-        travelledJourney: false,
-        onJourney: false,
-        getpopularPost: false,
-        visitPost: false,
-        activitySec: true
-      }, {
-        class: "popular-activity",
-        visitPost: false,
-        getpopularPost: true,
-        activitySec: false,
-        postPopular: [{
-          heading: "Popular Travelers",
-          listPopular: [{
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }],
-        }],
-      }, {
-        class: "popular-activity",
-        visitPost: false,
-        getpopularPost: true,
-        activitySec: false,
-        postPopular: [{
-          heading: "Popular Agents",
-          listPopular: [{
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }, {
-            profile: "img/profile-main.png",
-            name: "Rolandia Travel",
-            location: "London",
-            follower: "1994",
-          }],
-        }],
-      }, {
-        class: "visiting-post local-visit",
-        visitPost: true,
-        getpopularPost: false,
-        activitySec: false,
-        getvisitPost: [{
-          imgVisit: "img/india-gate.jpg",
-          locationLocal: "Mumbai",
-          tag: "Must Do's in Mumbai,India",
-          travelVisit: false,
-          localVisit: true,
-          cityTag: true,
-          rating: false,
-          flag: false,
-          visitSlider: true,
-          visitImg: false,
-          localLifeMain: true,
-          visitedPost: [{
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, ],
-        }, ],
-      }, {
-        class: "visiting-post local-visit",
-        visitPost: true,
-        getpopularPost: false,
-        activitySec: false,
-        getvisitPost: [{
-          imgVisit: "img/india-gate.jpg",
-          locationLocal: "India",
-          travelVisit: false,
-          localVisit: true,
-          cityTag: false,
-          rating: true,
-          peopleBeen: 33,
-          flag: true,
-          visitSlider: true,
-          visitImg: false,
-          localLifeMain: true,
-          visitedPost: [{
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, {
-            imgSlider: "img/small-activity-slider.jpg",
-            visitName: "#1 Shree Siddhivinayak",
-          }, ],
-        }, ],
-      }, {
-        class: "visiting-post travel-visit",
-        visitPost: true,
-        getpopularPost: false,
-        activitySec: false,
-        getvisitPost: [{
-          imgVisit: "img/india-gate.jpg",
-          locationLocal: "Mumbai",
-          tagTravel: "Book Your Travel form take off to touchdown!",
-          travelVisit: true,
-          localVisit: false,
-          visitSlider: false,
-          visitImg: true,
-          localLifeMain: false,
-        }, ],
-      },
-    ];
+    $scope.editYourComment = function () {
+      $scope.viewEditBox = true;
+      console.log(viewEditBox, 'edit wala box');
+    }
+    // edit comment
+    $scope.editComment = function (commentId, commentText, commentType) {
+      console.log($scope.listOfComments.comment, 'comment ka arrray');
+      LikesAndComments.commentEdit(commentId, commentText, commentType, function (data) {
+        if (data.value == true) {
+          var commentedIndex = _.findIndex($scope.listOfComments.comment, function (commentData) {
+            return commentData._id == commentId;
+          });
+          $scope.listOfComments.comment[commentedIndex].text = commentText;
+          $scope.viewEditBox = false;
+        }
+      })
+    }
+    // edit comment end
+    // delete comment
+    $scope.deleteComment = function (commentId, commentType) {
+      console.log($scope.listOfComments, 'lof');
+      console.log(commentId, 'id');
+      LikesAndComments.commentDelete(commentId, commentType, function (data) {
+        if (data.value == true) {
+          _.remove($scope.listOfComments.comment, function (list) {
+            return list._id == commentId;
+          })
+          console.log($scope.listOfComments.comment, 'total nikla kya');
+        }
+      });
+    };
+    // delete comment end
 
     $scope.getReview = function (post) {
       wholePost = post; //this is to set post_id in savePostReview() function
@@ -8438,6 +7870,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.allowAccess = $.jStorage.get("allowAccess");
+    $scope.viewDropdown = {
+      'showDropdown': false
+    }
     if ($.jStorage.get("activeUrlSlug") != "" && $.jStorage.get("activeUrlSlug") != null) {
       $scope.activeUrlSlug = $.jStorage.get("activeUrlSlug");
     } else {
@@ -8446,14 +7881,37 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     console.log($scope.activeUrlSlug);
 
     // click background close
-    $scope.getDropdown = function (model) {
-      $timeout(function () {
-        model.backgroundClick = true;
-        backgroundClick.object = model;
-      }, 200);
-      backgroundClick.scope = $scope;
+    var searchCounter = 0;
+    $scope.searchToFollow = function (userName, model) {
+      console.log(userName);
+      model.showDropdown = true;
+      searchCounter++;
+      MyLife.searchAllUser(userName, searchCounter, function (data) {
+        if (data.value && searchCounter === data.data.counter) {
+          $scope.searchList = data.data.following;
+          searchCounter = 0;
+        } else {
+
+        }
+
+      });
+
     };
     // click background close end
+
+    // $scope.editOption = function (model) {
+    //   model.showDropdown = true;
+    // };
+
+    $("body").click(function (e) {
+      if ($(e.target).hasClass('entry-content')) {
+        return false;
+      } else {
+        console.log("closenow");
+        $scope.viewDropdown.showDropdown = false;
+        $scope.$apply();
+      }
+    });
 
     var getAllCountries = function (countries) {
       $scope.nationality = countries;
@@ -8694,9 +8152,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       //   }
       // });
       reloadCount();
-      if ($scope.activeMenu == 'following') {
-        $scope.searchList = $scope.followingList;
-      }
+      // if ($scope.activeMenu == 'following') {
+      //   $scope.searchList = $scope.followingList;
+      // }
     };
 
     var callbackGetCountriesVisited = function (data) {
@@ -8726,31 +8184,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     //follow unfollow user starts
-    $scope.followUnFollowUser = function (obj, flag) {
+    $scope.followUnFollowUser = function (obj, flag, model) {
       console.log(obj);
       LikesAndComments.followUnFollow(obj, function (data) {
         if (data.value) {
           if (flag == "fromFollowing") {
+            obj.following = data.data.responseValue;
             MyLife.getFollowingWeb(callbackFollowings);
           } else if (flag == "fromFollowers") {
+            obj.following = data.data.responseValue;
             MyLife.getFollowersWeb(callbackFollowers);
           }
         } else {
           console.log("error updating data");
         }
       });
+      backgroundClick.scope = $scope;
     };
     //follow unfollow user ends
     $scope.searchFriend = {};
-    $scope.searchAllUser = function (searchUser) {
-      var len = searchUser.length;
-      if (len > 3) {
-        console.log(searchUser);
-        MyLife.searchAllUser(searchUser, function (data) {
-          console.log(data);
-        });
-      }
-    };
+
 
 
     // following and followers end
@@ -14489,21 +13942,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         switch (notification.type) {
           case 'journeyRequest':
             if (notification.userFrom.gender == 'male') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> wants to tag you in his <span class="avenir-heavy">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy">' + notification.data.name + '</span>';
+              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> wants to tag you in his <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> wants to tag you in her <span class="avenir-heavy">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy">' + notification.data.name + '</span>';
+              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> wants to tag you in her <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             }
             break;
           case 'journeyLeft':
             if (notification.userFrom.gender == 'male') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has ended his <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="avenir-heavy color-pink">' + notification.data.name + '</span>';
+              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has ended his <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="avenir-heavy color-pink text-capitalize">' + notification.data.name + '</span>';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has ended her <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="avenir-heavy color-pink">' + notification.data.name + '</span>';
+              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has ended her <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="avenir-heavy color-pink text-capitalize">' + notification.data.name + '</span>';
             }
             break;
           case 'postLike':
             if (notification.data.type == 'travel-life') {
-              notification.notifyString = '<span class="avenir-heavy isblue">' + notification.userFrom.name + '</span> has liked your <span class="avenir-heavy color-blue">On The Go Activity</span>';
+              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked your <span class="avenir-heavy color-blue">On The Go Activity</span>';
             } else {
               notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked your <span class="avenir-heavy color-blue">Local Life Activity</span>';
             }
@@ -14525,7 +13978,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             break;
           case 'postComment':
             if (notification.data.type == 'travel-life') {
-              notification.notifyString = '<span class="avenir-heavycolor-blue">' + notification.userFrom.name + '</span> has commented on your <span class="avenir-heavy color-blue">On The Go Activity</span>';
+              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has commented on your <span class="avenir-heavy color-blue">On The Go Activity</span>';
             } else {
               notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has commented on your <span class="avenir-heavy color-blue">Local Life Activity</span>';
             }
@@ -14561,25 +14014,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             }
             break;
           case 'itineraryRequest':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has tagged you in an Itinerary - ' + '<span class="avenir-heavy color-blue">' + notification.data.name + '</span>';
+            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has tagged you in an Itinerary - ' + '<span class="avenir-heavy color-blue text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'itineraryComment':
-            notification.notifyString = '<span class="color-blue avenir-heavy">' + notification.userFrom.name + '</span> has commented on the Itinerary - ' + '<span class= "color-pink avenir-heavy">' + notification.data.name + '</span>';
+            notification.notifyString = '<span class="color-blue avenir-heavy">' + notification.userFrom.name + '</span> has commented on the Itinerary - ' + '<span class= "color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'itineraryLike':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked the Itinerary - <span class ="color-pink avenir-heavy">' + notification.data.name + '</span>';
+            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked the Itinerary - <span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'itineraryMentionComment':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has mentioned you in a comment on the Ititnerary - <span class ="color-pink avenir-heavy">' + notification.data.name + '</span>';
+            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has mentioned you in a comment on the Ititnerary - <span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'journeyComment':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has commented on the <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="color-pink avenir-heavy">' + notification.data.name + '</span>';
+            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has commented on the <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'journeyLike':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked the <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="color-pink avenir-heavy">' + notification.data.name + '</span>';
+            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked the <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'journeyMentionComment':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has mentioned you in a comment on the  <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="avenir-heavy color-pink">' + notification.data.name + '</span>';
+            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has mentioned you in a comment on the  <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="avenir-heavy color-pink text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'userFollowing':
             notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has started following you.';
@@ -14615,10 +14068,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             notification.notifyString = 'Congratulations! You have moved from <span class="avenir-heavy color-blue">' + notification.data.from + '</span> to <span class="avenir-heavy color-blue">' + notification.data.to + '</span> . <br>Hope you enjoy your status and grow in your journeys.';
             break;
           case 'journeyAccept':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has accepted your request to join the <span class="avenir-heavy color-blue">On The Go Activity</span> -<span class ="color-pink avenir-heavy">' + notification.data.name + '</span>';
+            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has accepted your request to join the <span class="avenir-heavy color-blue">On The Go Activity</span> -<span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'journeyReject':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has rejected your request to join the <span class="avenir-heavy color-blue">On Go Activity</span> -' + '<span class ="color-pink avenir-heavy">' + notification.data.name + '</span>';
+            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has rejected your request to join the <span class="avenir-heavy color-blue">On Go Activity</span> -' + '<span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           default:
             break;
@@ -14838,12 +14291,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log("from activity");
       LikesAndComments.followUnFollow(user, function (data) {
         if (data.value) {
-          // _.each($scope.activities, function (n) {
-          //   if (n.owner._id == user._id) {
-          //     n.owner.following = data.data.responseValue;
-          //   }
-          //   console.log(n);
-          // });
           user.following = data.data.responseValue;
         } else {
           console.log("error updating data");
@@ -14907,26 +14354,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       case "search-traveller":
         $scope.searchresult.innerView = allsearchresult[0];
         $scope.searchresultoptions.active = "search-traveller";
+        $scope.viewSearchedUser = [];
         $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-traveller');
         break;
       case "search-itinerary":
         $scope.searchresult.innerView = allsearchresult[1];
         $scope.searchresultoptions.active = "search-itinerary";
+        $scope.viewSearchedItinerary = [];
         $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-itinerary');
         break;
       case "search-hashtag":
         $scope.searchresult.innerView = allsearchresult[2];
         $scope.searchresultoptions.active = "search-hashtag";
+        $scope.viewSearchedHashtag = [];
         $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-hashtag');
         break;
       case "search-country":
         $scope.searchresult.innerView = allsearchresult[3];
         $scope.searchresultoptions.active = "search-country";
+        $scope.viewSearchedCountry = [];
         $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-country');
         break;
       case "search-city":
         $scope.searchresult.innerView = allsearchresult[4];
         $scope.searchresultoptions.active = "search-city";
+        $scope.viewSearchedCity = [];
         $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-city');
         break;
       case "search-travelagent":
@@ -14952,30 +14404,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           url = "search-traveller";
           $scope.searchresultoptions.active = "search-traveller";
           $scope.searchresultTraveller = true;
+          $scope.viewSearchedUser = [];
+
           $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-traveller');
           break;
         case 1:
           url = "search-itinerary";
           $scope.searchresultoptions.active = "search-itinerary";
           $scope.searchresultTraveller = false;
+          $scope.viewSearchedItinerary = [];
+
           $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-itinerary');
           break;
         case 2:
           url = "search-hashtag";
           $scope.searchresultoptions.active = "search-hashtag";
           $scope.searchresultTraveller = false;
+          $scope.viewSearchedHashtag = [];
+
           $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-hashtag');
           break;
         case 3:
           url = "search-country";
           $scope.searchresultoptions.active = "search-country";
           $scope.searchresultTraveller = false;
+          $scope.viewSearchedCountry = [];
+
           $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-country');
           break;
         case 4:
           url = "search-city";
           $scope.searchresultoptions.active = "search-city";
           $scope.searchresultTraveller = false;
+          $scope.viewSearchedCity = [];
           $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-city');
           break;
         case 5:
@@ -15283,3 +14744,61 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
   })
+
+  .controller('commentLikeSectionCtrl', function ($scope, $timeout, LikesAndComments) {
+    $scope.likePost = function (uniqueId, _id) {
+      console.log($scope.post.likeDone + "this call is from directive");
+      $scope.post.likeDone = !$scope.post.likeDone;
+      if ($scope.post.likeDone) {
+        if ($scope.post.likeCount === undefined) {
+          $scope.post.likeCount = 1;
+        } else {
+          $scope.post.likeCount = $scope.post.likeCount + 1;
+        }
+        LikesAndComments.likeUnlike($scope.post.type, "like", uniqueId, _id, null);
+      } else {
+        $scope.post.likeCount = $scope.post.likeCount - 1;
+        LikesAndComments.likeUnlike($scope.post.type, "unlike", uniqueId, _id, null);
+      }
+    };
+
+    $scope.postPostsComment = function (uniqueId, comment, postId) {
+      console.log(uniqueId, comment, postId);
+      console.log("controller se comment hua");
+      var type = "post";
+      var additionalId = null;
+      var hashTag = [];
+      var callback = function (data) {
+        $scope.listOfComments = data.data;
+        document.getElementById('enterComment').value = "";
+      };
+      LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, additionalId, callback);
+    };
+
+    $scope.getLikes = function (activity) {
+      console.log(activity);
+      LikesAndComments.getLikes(activity.type, activity._id, function (data) {
+        $scope.listOfLikes = data.data;
+        console.log($scope.listOfLikes);
+      });
+    };
+
+    $scope.editOption = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+
+    $scope.followFollowing = function (user) {
+      console.log("from ongojourney");
+      LikesAndComments.followUnFollow(user, function (data) {
+        if (data.value) {
+          user.following = data.data.responseValue;
+        } else {
+          console.log("error updating data");
+        }
+      });
+    }
+  });

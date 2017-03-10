@@ -1,7 +1,7 @@
 <div class="profile-list-main" ng-class="{'bg-black white-full' : activeMenu == 'countriesVisited' || activeMenu == 'bucketList', '' : activeMenu !== 'countriesVisited' || activeMenu !== 'bucketList'}"
   ng-init="searchCard.name=''">
   <!-- profile tab strip -->
-  <div class="profile-tab-strip">
+  <div class="profile-tab-strip bg-white">
     <div class="container-fluid">
       <div class="clearfix">
         <div class="pull-left">
@@ -18,11 +18,14 @@
           <form action="">
             <!-- search friend -->
             <div class="search-friend" ng-if="activeMenu == 'following' || activeMenu == 'followers'">
-              <div class="follow-followers-holder" ng-init="viewDropdown={};">
-                <input type="text" placeholder="Search Friend" ng-model="searchFriend.name" ng-change="getDropdown(viewDropdown)" />
+              <div class="follow-followers-holder">
+                <input type="text" placeholder="Search To Follow" ng-model="searchFriend.name" ng-change="searchToFollow(searchFriend.name,viewDropdown);"
+                  ng-if="activeMenu == 'following'" />
+                <input type="text" placeholder="Search Friend" ng-model="searchFriend.name" ng-change="getDropdown(viewDropdown)" ng-if="activeMenu == 'followers'"
+                />
                 <!--<input type="text" placeholder="Search Friend" ng-model="searchUser.name" ng-if="activeMenu=='followers'">-->
                 <span class="search-follow"><i class="fa fa-search"></i></span>
-                <div class="dropdown-follow-followers" ng-show="viewDropdown.backgroundClick;">
+                <div class="dropdown-follow-followers" ng-if="viewDropdown.showDropdown;">
                   <ul>
                     <!--ng-repeat="list in searchList"-->
                     <!--<li>
@@ -41,7 +44,8 @@
                         </div>-->
                     <!--</div>
                     </li>-->
-                    <li class="pointer" ng-repeat="list in searchList| filter:searchFriend.name" ng-click="searchUser.open=false;searchFriend.name=list.name;searchCard.name=list.name">
+                    <!--ng-click="searchUser.open=false;searchFriend.name=list.name;searchCard.name=list.name"-->
+                    <li class="pointer" ng-repeat="list in searchList| filter:searchFriend.name">
                       <div class="clearfix">
                         <div class="pull-left">
                           <div class="profile-picholder v-mid">
@@ -49,12 +53,12 @@
                           </div>
                           <div class="profile-detailed v-mid">
                             <h4 class="profile-name avenir-roman color-dark-blue m-clear">{{list.name}}</h4>
-                            <!--<span class="color-light-grey avenir-roman profile-tag">@monish-shah</span>-->
+                            <span class="color-light-grey avenir-roman profile-tag">@{{list.urlSlug}}</span>
                           </div>
                         </div>
-                        <!--<div class="pull-right">
-                          <button class="btn btn-pink following-btn"></i>Following</button>
-                        </div>-->
+                        <div class="pull-right">
+                          <button class="btn btn-pink following-btn entry-content" ng-click="followUnFollowUser(list,'fromFollowing',viewDropdown);"></i>{{list.following|followFollowingStatus}}</button>
+                        </div>
                       </div>
                     </li>
                   </ul>
