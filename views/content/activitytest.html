@@ -149,8 +149,8 @@
                       </flex-slider>
                     </div>
                     <div class="post-rating" ng-if="activity.canRate" ng-init="activity.rated=activity.review.length==1">
-                      <div ng-if="!activity.rated" ng-click="getReview(activity);" ng-class="{'color-cyan':activity.type=='local-life','color-pink':activity.type=='travel-life'}"
-                        class="avenir-heavy pointer">Rate This Now</div>
+                      <div ng-if="!activity.rated" ng-click="getReview(activity);" ng-class="{'color-blue':activity.type=='local-life','color-pink':activity.type=='travel-life'}"
+                        class="avenir-heavy pointer"><span class="italic">Rate This Now</span></div>
                       <div ng-if="activity.rated" ng-click="getReview(activity)">
                         <span class="avenir-heavy color-blue">Rating :
                         <span class="star-rating pointer" ng-repeat="time in activity.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':activity.type=='local-life','color-pink':activity.type=='travel-life'}"></i></span>
@@ -247,7 +247,7 @@
                                   <p>Itinerary</p>
                                 </div>
                                 <div class="date-quick-itinerary">
-                                  {{activity.dateitinerary}}
+                                  {{activity.month}} {{activity.year}}
                                 </div>
                               </div>
                               <div class="text-right">
@@ -593,10 +593,15 @@
                 </div>
                 <div class="comment-container">
                   <div class="commenter-text">
-                    <p class="avenir-roman"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name}}</span>{{list.text}}</p>
+                    <p class="avenir-roman" ng-hide="viewEditBox"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name}}</span>{{list.text}}</p>
+                    <div class="edit-comment" ng-show="viewEditBox">
+                      <input type="text" ng-model="list.text">
+                      <a class="" ng-click="viewEditBox=false;">cancel</a>
+                      <a ng-click="editComment(list._id,list.text,list.type);" class="btn btn-pink post-btn">Done</a>
+                    </div>
                     <div class="like-reply-line">
-                      <!--<span class="color-blue avenir-roman mr5 pointer">Like</span>-->
-                      <!--<span class="color-blue avenir-roman mr5 pointer">Reply</span>-->
+                      <span class="color-blue avenir-roman mr5 pointer" ng-click="editYourComment();">Edit</span>
+                      <span class="color-blue avenir-roman mr5 pointer" ng-click="deleteComment(list._id,list.type);">Delete</span>
                       <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                      | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
                     </div>
                   </div>
