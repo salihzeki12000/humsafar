@@ -145,7 +145,7 @@
                   </div>-->
                   <div class="min-hght ptb20">
                     <div class="login-form">
-                      <div class="login-comming-soon">
+                      <div class="login-comming-soon" ng-hide="showme">
                         <h4 class="color-white avenir-roman">
                           We are enhancing the experience for our partners. We will notify you via email soon.
                         </h4>
@@ -153,15 +153,21 @@
                           <form class="ng-pristine ng-valid">
                             <div class="email-form">
                               <div class="input-group">
-                                <input type="text" class="form-control coming-email" placeholder="Enter your email  and we will contact you when ready">
+                                <input type="text" class="form-control coming-email" placeholder="Enter Email">
                                 <div class="input-group-btn btn-coming">
-                                  <button class="btn btn-comingsoon"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                  <button class="btn btn-comingsoon" ng-click="showme=true"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                                 </div>
                               </div>
                             </div>
                           </form>
                         </div>
                       </div>
+                      <div class="login-comming-soon" ng-show="showme">
+                        <h4 class="color-white avenir-roman">
+                          Thank You. <br>
+                          We will notify you via email soon.
+                        </h4>
+                        </div>
                     </div>
                   </div>
                 </uib-tab>
@@ -180,7 +186,7 @@
           <a ui-sref="booking" class="color-white">Bookings</a>
         </li>
         <li>
-          <a ui-sref="detailitinerary" class="color-white">Itineraries</a>
+          <a ui-sref="popularitinerary" class="color-white">Itineraries</a>
         </li>
         <li>
               <a href="http://travelibro.net/blog" class="color-white">Blogs</a>
