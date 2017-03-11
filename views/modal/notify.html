@@ -18,6 +18,9 @@
                     <video controls="controls" autoplay ng-if="listOfComments.type=='video'">
                         <source src="{{listOfComments.name|trusted}}" type="video/mp4">
                     </video>
+                    <div class="blurnotify-imgholder" ng-if="listOfComments.type=='video'">
+                      <img ng-src="{{listOfComments.thumbnail|uploadpath}}" alt="" class="img-responsive">
+                    </div>
                 </div>
             </div>
             <div class="comment-like-notify">
@@ -56,7 +59,7 @@
                 </div>
                 <!-- comment section -->
                 <div class="comment-sec">
-                    <form ng-submit="postPhotosComment(listOfComments.name,text,listOfComments.post,listOfComments._id)">
+                    <form autocomplete="off" ng-submit="postPhotosComment(listOfComments.name,text,listOfComments.post,listOfComments._id)">
                         <div class="write-comment-text">
                             <div class="commenter-img">
                                 <div class="commenter-imgholder">

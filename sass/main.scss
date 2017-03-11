@@ -4335,12 +4335,12 @@ header {
   // margin-top: -30px;
   // margin-right: 15px;
   display: inline-block;
-  width: 42px;
+  width: 45px;
   height: 45px;
   background-color: $brand-light-grey;
   overflow: hidden;
   border: 2px solid $brand-light-grey;
-  border-radius: 16px;
+  border-radius: 14px;
   img {
     max-height: 100%;
     padding: 0;
@@ -9865,6 +9865,8 @@ header {
     video {
       width: 100%;
       height: 100%;
+      position: relative;
+      z-index: 2;
     }
     .blurnotify-imgholder {
       width: 100%;
@@ -10047,6 +10049,14 @@ header {
     height: calc(100vh - 226px);
     overflow-x: hidden;
     overflow-y: auto;
+  }
+  .edit-text {
+    input {
+      border: none;
+      border-bottom: 1px solid $brand-blue;
+      margin-bottom: 10px;
+    }
+    button { margin: 0px 5px; }
   }
   // dropdown comment otg
   .dropdown-hashtag {

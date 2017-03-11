@@ -23,7 +23,7 @@
                   <i class="fa fa-heart color-blue" ng-class="{'view-like' : commentLike.backgroundClick == true , '' : commentLike.backgroundClick == false}" ></i>
                  <span>{{post.likeCount|filterCount}}   </span>{{post.likeCount|singularPlural:'Likes'}}
               <!-- ng-show="showLikes" -->
-              <div class="like-dropdown" ng-show="commentLike.backgroundClick;">
+              <div class="like-dropdown" ng-show="commentLike.backgroundClick && listOfLikes.like.length>0">
                 <ul>
                   <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
                 </ul>
@@ -35,6 +35,7 @@
       </div>
       <!-- comment section -->
       <div class="comment-sec">
+        <form autocomplete="off" ng-submit="postPostsComment(post.uniqueId,comment.text,post._id)">
         <div class="write-comment-text">
           <div class="commenter-img">
             <div class="commenter-imgholder">
@@ -48,11 +49,12 @@
         </div>
         <div class="clearfix comment-post">
           <div class="pull-right">
-            <button class="btn btn-pink post-btn" ng-click=postPostsComment(post.uniqueId,comment.text,post._id)>Post</button>
+            <button class="btn btn-pink post-btn" type="submit">Post</button>
           </div>
         </div>
+        </form>
         <div class="listing-comment">
-          <div class="view-comment-list" ng-repeat="list in listOfComments.comment">
+          <div class="view-comment-list" ng-repeat="list in listOfComments.comment track by $index">
             <div class="commenter-img">
               <div class="commenter-imgholder">
                 <img ng-src="{{list.user.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
@@ -60,15 +62,15 @@
             </div>
             <div class="comment-container">
               <div class="commenter-text">
-                <p class="avenir-roman"  ng-hide="viewEditBox"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name}}</span>{{list.text}}</p>
-                <div class="edit-text" ng-show="viewEditBox">
-                  <input type="text" ng-model="list.text" >
-                  <span ng-click="editBox();">Cancel</span>
+                <p class="avenir-roman"  ng-hide="$index==index"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name}}</span>{{list.text}}</p>
+                <div class="edit-text" ng-show="$index==index">
+                  <input type="text" ng-model="list.text" class="form-control">
+                  <span ng-click="editBox(-1);">Cancel</span>
                   <button class="btn btn-pink" ng-click="editComment(list._id,list.text,list.type);">Done</button>
                 </div>
                 <div class="like-reply-line">
-                  <span class="color-blue avenir-roman mr5 pointer" ng-click="editBox();"><i class="fa fa-pencil"></i></span>
-                  <span class="color-blue avenir-roman mr5 pointer" ng-click="deleteComment(list._id,list.type);"><i class="fa fa-trash"></i></span>
+                  <span class="color-blue avenir-roman mr5 pointer" ng-click="editBox($index);" ng-if="userData._id == list.user._id"><i class="fa fa-pencil"></i></span>
+                  <span class="color-blue avenir-roman mr5 pointer" ng-click="deleteComment(list._id,list.type);" ng-if="userData._id == list.user._id"><i class="fa fa-trash"></i></span>
                   <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                  | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
                 </div>
               </div>
