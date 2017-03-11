@@ -10069,7 +10069,14 @@ header {
     overflow-y: scroll;
   }
 }
-
+// notify backdrop
+.backdrop-close.view-backdrop {
+@include square(100%);
+@include position(fixed, 0);
+z-index: 5;
+background-color: rgba(0,0,0,0.7);
+}
+// notify backdrop end
 // Notify end
 @import "sohan.scss";
 @import "fancybox-override";
