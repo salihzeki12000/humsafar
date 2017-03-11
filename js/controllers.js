@@ -50,23 +50,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           //Navigation
 
           onLeave: function (index, nextIndex, direction) {
-
             $timeout(function () {
               swiper.slideTo(nextIndex - 1);
               //playing the video
-              $('video').get(nextIndex - 1).load();
-              $('video').get(nextIndex - 1).play();
-              $('video').get(nextIndex - 2).pause();
-              $('video').get(nextIndex).pause();
-              // $scope.pauseVideo = function () {
-              //   if ($("video").get(nextIndex - 1).play()) {
-              //     $("video").get(nextIndex - 1).pause();
-              //   } else {
-              //     $("video").get(nextIndex - 1).prop('play');
-              //   }
-              // }
-            }, 500);
-
+              // $('video').get(nextIndex - 1).load();
+              for (i = 1; i < 4; i++) {
+                if (i == nextIndex - 1) {
+                  // console.log(index);
+                  $('video').get(nextIndex - 1).load();
+                  $('video').get(nextIndex - 1).play();
+                } else {
+                  // console.log(i);
+                  $('video').get(i).pause();
+                }
+              }
+            }, 300);
           }
         });
       }
@@ -124,17 +122,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
     cfpLoadingBar.complete();
 
-    $scope.audioStatus={
-          on:true
-        }
+    $scope.audioStatus = {
+      on: true
+    }
     $scope.muteVolume = function () {
       if ($("video").prop('muted')) {
-        $scope.audioStatus={
-          on:true
+        $scope.audioStatus = {
+          on: true
         }
         $("video").prop('muted', false);
       } else {
-        $scope.audioStatus={}
+        $scope.audioStatus = {}
         $("video").prop('muted', true);
       }
     }
@@ -200,7 +198,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     urlSlug: slug
                   });
                 }
-              }else if (alreadyLoggedIn === false) {
+              } else if (alreadyLoggedIn === false) {
                 $state.go('mainpage');
               }
             } else {
@@ -5755,17 +5753,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
       $scope.previousLikeId = ongo._id;
     };
-     $scope.audioStatus={
-          on:true
-        }
+    $scope.audioStatus = {
+      on: true
+    }
     $scope.muteVolume = function () {
       if ($("video").prop('muted')) {
-        $scope.audioStatus={
-          on:true
+        $scope.audioStatus = {
+          on: true
         }
         $("video").prop('muted', false);
       } else {
-        $scope.audioStatus={}
+        $scope.audioStatus = {}
         $("video").prop('muted', true);
       }
     }
