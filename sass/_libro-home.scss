@@ -1433,8 +1433,9 @@ width: 100%;
     font-size: 60px;
     display: none;
     @include transition(all ease 300ms);
-    a{
+    i{
       align-self: center;
+          margin: 0 auto;
     }
 }
 &.playbutton{
