@@ -42,8 +42,7 @@
             </div>
           </div>
           <div class="comment-ur-text relate">
-            <textarea name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="comment.text">
-                    </textarea>
+            <input name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="comment.text">
             <find-tags ng-model="comment.text" element-id="enterComment" enable="bothTagging">
           </div>
         </div>
@@ -61,10 +60,15 @@
             </div>
             <div class="comment-container">
               <div class="commenter-text">
-                <p class="avenir-roman"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name}}</span>{{list.text}}</p>
+                <p class="avenir-roman"  ng-hide="viewEditBox"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name}}</span>{{list.text}}</p>
+                <div class="edit-text" ng-show="viewEditBox">
+                  <input type="text" ng-model="list.text" >
+                  <span ng-click="editBox();">Cancel</span>
+                  <button class="btn btn-pink" ng-click="editComment(list._id,list.text,list.type);">Done</button>
+                </div>
                 <div class="like-reply-line">
-                  <!--<span class="color-blue avenir-roman mr5 pointer">Like</span>-->
-                  <!--<span class="color-blue avenir-roman mr5 pointer">Reply</span>-->
+                  <span class="color-blue avenir-roman mr5 pointer" ng-click="editBox();"><i class="fa fa-pencil"></i></span>
+                  <span class="color-blue avenir-roman mr5 pointer" ng-click="deleteComment(list._id,list.type);"><i class="fa fa-trash"></i></span>
                   <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                  | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
                 </div>
               </div>
@@ -100,9 +104,3 @@
     </ul>
   </div>
 </div>
-
-<!--<div class="close-comment-backdrop" ng-click="closeBackDrop();"></div>-->
-<!-- close comment wala backdrop div end-->
-<!--close like wala backdrop div-->
-<!--<div class="close-like-backdrop" ng-click="getLikesData({'post':ongo})"></div>-->
-<div class="backdrop-close"></div>
