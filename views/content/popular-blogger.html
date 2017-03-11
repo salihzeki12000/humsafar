@@ -25,12 +25,12 @@
               <!-- <img ng-src="{{photoblogger.img}}" alt="Travelibro"> -->
             </div>
             <div class="flag-holder">
-              <img ng-src="{{photoblogger.flagimg}}" alt="Travelibro" />
+              <img ng-src="{{photoblogger.homeCountry.flag| uploadpath}}" alt="Travelibro" />
             </div>
             <div class="bloggerholder-made">
               <div class="country-holder color-white">
-                <span class="pull-right"><i class="fa fa-map-marker" aria-hidden="true"></i> {{photoblogger.city}}</span>
-                <span class="pl40">{{photoblogger.country}}</span>
+                <span class="pull-right"><i class="fa fa-map-marker" aria-hidden="true"></i> {{photoblogger.homeCity}}</span>
+                <span class="pl40">{{photoblogger.homeCountry.name}}</span>
               </div>
               <div class="name-holder brd-btm">
                 <h4 class="color-white text-center fnt-20">{{photoblogger.name}}</h4>
@@ -39,21 +39,21 @@
                 <ul class="list-unstyled list-inline text-center">
                   <li class="color-white">
                     <img src="img/popularblogger/camera.png" alt="Travelibro">
-                    <span>{{photoblogger.nophoto}}</span>
+                    <span>{{photoblogger.photos_count}}</span>
                   </li>
                   <li class="color-white pad-zero">
                     |
                   </li>
                   <li class="color-white">
                     <img src="img/popularblogger/videocamera.png" alt="Travelibro">
-                    <span>{{photoblogger.novideo}}</span>
+                    <span>{{photoblogger.videos_count}}</span>
                   </li>
                   <li class="color-white pad-zero">
                     |
                   </li>
                   <li class="color-white">
                     <img src="img/popularblogger/location.png" alt="Travelibro">
-                    <span>{{photoblogger.nolocation}}</span>
+                    <span>{{photoblogger.checkins_count}}</span>
                   </li>
                 </ul>
                  <ul class="list-unstyled text-center mt10">
@@ -72,15 +72,15 @@
               <div class="cfj-holder pbt-15">
                 <ul class="list-unstyled text-center list-inline">
                   <li class="color-white">
-                    <h5 class="text-center fnt-16">{{photoblogger.followers}}m</h5>
+                    <h5 class="text-center fnt-16">{{photoblogger.followers_count}}</h5>
                     <p class="text-center">Followers</p>
                   </li>
-                                    <li class="color-white">
-                    <h5 class="text-center fnt-16">{{photoblogger.countryvisit}}</h5>
+                  <li class="color-white">
+                    <h5 class="text-center fnt-16">{{photoblogger.countriesVisited_count}}</h5>
                     <p class="text-center">Countries Visited</p>
                   </li>
                   <li class="color-white">
-                    <h5 class="text-center fnt-16">{{photoblogger.journey}}</h5>
+                    <h5 class="text-center fnt-16">{{photoblogger.journeysCreated_count}}</h5>
                     <p class="text-center">Journeys</p>
                   </li>
                 </ul>

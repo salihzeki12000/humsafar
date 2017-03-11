@@ -4487,3 +4487,32 @@ q {
   }
 }
 // LOGIN FLOW PAGE END
+
+// DESTINATION FILTERS
+.destination-filterscroll{
+  position: relative;
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $brand-light-grey;
+  }
+}
+.destination-filterdrop{
+  width: 100%;
+  max-height: 190px;
+  border-radius: 0 0 5px 5px;
+  position: absolute;
+  left: 0;
+  background-color: #fff;
+  overflow-y: auto;
+  .custom-checkbox{
+    padding: 5px 10px;
+  }
+}
+// DESTINATION FILTERS END
