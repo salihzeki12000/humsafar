@@ -238,7 +238,8 @@
               <div class="task-holder pull-left" ng-init="getClicked = false;">
                 <ul class="list-inline">
                   <li ng-if="itinerary.status == true">
-                    <a href="" class="relate inline-block" ng-click="likeUnlikeItinerary(itinerary.likeDone,itinerary._id,itinerary.uniqueId);"><i class="fa like-button-icon color-blue" ng-class="{'fa-heart-o': itinerary.likeDone == null, 'fa-heart like-animate': itinerary.likeDone == true}" like-sound></i>
+                    <a href="" class="relate inline-block" ng-click="likeUnlikeItinerary(itinerary.likeDone,itinerary._id,itinerary.uniqueId);"><i class="fa like-button-icon color-blue" ng-class="{'fa-heart-o': itinerary.likeDone == null, 'fa-heart like-animate': itinerary.likeDone == true}"
+                        like-sound></i>
                       <span></span>
                       <audio id="like-play">
                         <source src="img/tiny1.mp3" type="audio/mp3">
@@ -280,7 +281,9 @@
                   <p class="m-clear pointer" ng-click="getLikesData(itinerary);"><i class="fa fa-heart color-blue mr5"></i><span class="like-count avenir-roman">{{itinerary.likeCount}}</span>                    <span class="color-blue avenir-roman">Likes</span></p>
                 </div>
                 <div class="like-holder" ng-if="itinerary.likeCount>0">
-                  <p class="m-clear pointer" ng-click="getCommentsData(itinerary);"><img src="img/comments.png" alt="Comments" height="16" class="agent-iti-comment-icon"><span class="like-count avenir-roman"> {{itinerary.commentCount}} </span><span class="color-blue avenir-roman" ng-if="itinerary.commentCount==1"> Comment </span><span class="color-blue avenir-roman"                 ng-if="itinerary.commentCount> 1|| itinerary.commentCount==0"> Comments </span></p>
+                  <p class="m-clear pointer" ng-click="getCommentsData(itinerary);"><img src="img/comments.png" alt="Comments" height="16" class="agent-iti-comment-icon"><span class="like-count avenir-roman"> {{itinerary.commentCount}} </span>
+                    <span
+                      class="color-blue avenir-roman" ng-if="itinerary.commentCount==1"> Comment </span><span class="color-blue avenir-roman" ng-if="itinerary.commentCount> 1|| itinerary.commentCount==0"> Comments </span></p>
                 </div>
                 <!-- <div class="review-holder">
                   <p class="avenir-heavy color-blue m-clear">
@@ -307,42 +310,42 @@
             <!-- comment list -->
             <div class="comment-list-holder" ng-if="itinerary.status == true">
               <form ng-submit="postItineraryComment(itinerary._id,itinerary.uniqueId,commentText.text)">
-              <div class="view-comment-list" ng-repeat="comment in itinerary.comment | orderBy:$index:true | limitTo:1">
-                <div class="commenter-img">
-                  <div class="commenter-imgholder">
-                    <img ng-src="{{comment.user.profilePicture|uploadpath:40:45:'cover'}}" alt="" class="img-responsive">
+                <div class="view-comment-list" ng-repeat="comment in itinerary.comment | orderBy:$index:true | limitTo:1">
+                  <div class="commenter-img">
+                    <div class="commenter-imgholder">
+                      <img ng-src="{{comment.user.profilePicture|uploadpath:40:45:'cover'}}" alt="" class="img-responsive">
+                    </div>
                   </div>
-                </div>
-                <div class="comment-container">
-                  <div class="commenter-text">
-                    <p class="avenir-roman"><span class="commenter-name avenir-heavy color-blue mr5">{{comment.user.name|whoIsThis:comment.user._id:userData._id}}</span>{{comment.text}}</p>
-                    <div class="like-reply-line">
-                      <!-- <span class="color-blue avenir-roman mr5 pointer">Like</span>
+                  <div class="comment-container">
+                    <div class="commenter-text">
+                      <p class="avenir-roman"><span class="commenter-name avenir-heavy color-blue mr5">{{comment.user.name|whoIsThis:comment.user._id:userData._id}}</span>{{comment.text}}</p>
+                      <div class="like-reply-line">
+                        <!-- <span class="color-blue avenir-roman mr5 pointer">Like</span>
                       <span class="color-blue avenir-roman mr5 pointer">Reply</span> -->
-                      <span class="time-stamp ml5"><i class="fa fa-calendar color-grey mr5"></i><span>{{comment.date|formatDate:"date"}}</span>                      | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{comment.date|formatDate:"time"}}</span></span>
+                        <span class="time-stamp ml5"><i class="fa fa-calendar color-grey mr5"></i><span>{{comment.date|formatDate:"date"}}</span>                        | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{comment.date|formatDate:"time"}}</span></span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="write-comment-text">
-                <div class="commenter-img">
-                  <div class="commenter-imgholder">
-                    <img src="{{userData.profilePicture|uploadpath:40:45:'cover'}}" alt="" class="img-responsive">
+                <div class="write-comment-text">
+                  <div class="commenter-img">
+                    <div class="commenter-imgholder">
+                      <img src="{{userData.profilePicture|uploadpath:40:45:'cover'}}" alt="" class="img-responsive">
+                    </div>
+                  </div>
+                  <div class="comment-ur-text">
+                    <!-- <textarea name="" id="" placeholder="Write a comment" class="form-control avenir-roman" ng-model="commentText.text"></textarea> -->
+                    <input type="text" placeholder="Write a comment" class="form-control" ng-model="commentText.text">
+                    <find-tags ng-model="commentText.text" element-id="enterComment" enable="bothTagging">
                   </div>
                 </div>
-                <div class="comment-ur-text">
-                  <!-- <textarea name="" id="" placeholder="Write a comment" class="form-control avenir-roman" ng-model="commentText.text"></textarea> -->
-                  <input type="text" placeholder="Write a comment" class="form-control" ng-model="commentText.text">
-                  <find-tags ng-model="commentText.text" element-id="enterComment" enable="bothTagging">
+                <div class="clearfix comment-post">
+                  <div class="pull-right">
+                    <button class="btn btn-pink post-btn" type="submit">Post</button>
+                  </div>
                 </div>
-              </div>
-              <div class="clearfix comment-post">
-                <div class="pull-right">
-                  <button class="btn btn-pink post-btn" type="submit">Post</button>
-                </div>
-              </div>
-            </form>
-          </div>
+              </form>
+            </div>
             <!-- comment list end -->
           </div>
         </div>
@@ -599,7 +602,9 @@
     </div>
   </div>
   <!-- SIDE COMMENT CARD -->
-  <div class="comment-like-sec">
+  <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike'
+    list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+  <div class="comment-like-sec" hidden>
     <!--comment activity-->
     <div class="notify-main whole-card-comment {{getCard}}" ng-show="viewCardComment">
       <div class="comment-like-notify">
@@ -712,7 +717,8 @@
       </div>
     </div>
     <!--like activity end-->
-    <div class="close-comment-like" ng-class="{'backdrop':viewCardComment==true || viewCardLike==true ,'':viewCardComment==false || viewCardLike == false}" ng-click="closeBackdrop();"></div>
+    <div class="close-comment-like" ng-class="{'backdrop':viewCardComment==true || viewCardLike==true ,'':viewCardComment==false || viewCardLike == false}"
+      ng-click="closeBackdrop();"></div>
   </div>
   <!-- SIDE COMMENT CARD END -->
   <div class="photo-open-backdrop {{dispBackDrop}}" ng-click="viewGallery();"></div>

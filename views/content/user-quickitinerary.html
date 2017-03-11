@@ -470,7 +470,9 @@
     </div>
   </div>
   <!-- SIDE COMMENT CARD -->
-  <div class="comment-like-sec">
+  <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike'
+    list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+  <div class="comment-like-sec" hidden>
     <!--comment activity-->
     <div class="notify-main whole-card-comment {{getCard}}" ng-show="viewCardComment">
       <div class="comment-like-notify">

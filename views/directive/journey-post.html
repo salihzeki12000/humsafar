@@ -103,7 +103,8 @@
             <ul>
               <li>
                 <a href="" class="relate">
-                  <i class="fa color-blue card-like-animation" ng-class="ongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(ongo);playAudio();" like-sound></i>
+                  <i class="fa color-blue card-like-animation" ng-class="ongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(ongo);playAudio();"
+                    like-sound></i>
                   <span></span>
                   <audio id="like-play">
                     <source src="img/tiny1.mp3" type="audio/mp3">
@@ -260,5 +261,5 @@
 <div class="close-comment-backdrop" ng-click="closeBackDrop();"></div>
 <!-- close comment wala backdrop div end-->
 <!--close like wala backdrop div-->
-<div class="close-like-backdrop" ng-click="getLikesData({'post':ongo})"></div>
+<!--<div class="close-like-backdrop" ng-click="getLikesData({'post':ongo})"></div>-->
 <!--close like wala backdrop div end-->

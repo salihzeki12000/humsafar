@@ -16,8 +16,6 @@ $(document).ready(function () {
   });
 });
 
-
-
 var imageTestingCallback = function (dataURI, type) {
   // convert base64 to raw binary data held in a string
   var byteString = atob(dataURI.split(',')[1]);
