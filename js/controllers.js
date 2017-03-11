@@ -171,7 +171,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     var ref = "";
-    var checktwitter = function (data, status) {
+    var checktwitter = function (data, status) { //for getting accessToken
       var repdata = {};
       console.log(ref.closed, ref);
       if (ref.closed) {
@@ -186,23 +186,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $.jStorage.set("isLoggedIn", true);
               $.jStorage.set("profile", data.data);
               var alreadyLoggedIn = data.data.alreadyLoggedIn;
-              // if (alreadyLoggedIn === true) {
-              var slug = $.jStorage.get("activeUrlSlug");
-              console.log(slug);
-              if (slug === null || slug === "") {
-                slug = $.jStorage.get("profile").urlSlug;
+              if (alreadyLoggedIn === true) {
+                var slug = $.jStorage.get("activeUrlSlug");
+                console.log(slug);
+                if (slug === null || slug === "") {
+                  slug = $.jStorage.get("profile").urlSlug;
+                }
+                if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
+                  window.location = $.jStorage.get("url") + "?accessToken=" + $.jStorage.get("accessToken");
+                } else {
+                  $state.go("mylife", {
+                    name: 'journey',
+                    urlSlug: slug
+                  });
+                }
+              }else if (alreadyLoggedIn === false) {
+                $state.go('mainpage');
               }
-              if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
-                window.location = $.jStorage.get("url") + "?accessToken=" + $.jStorage.get("accessToken");
-              } else {
-                $state.go("mylife", {
-                  name: 'journey',
-                  urlSlug: slug
-                });
-              }
-              // }else if (alreadyLoggedIn === false) {
-              //   $state.go('mainpage');
-              // }
             } else {
 
             }
@@ -14495,23 +14495,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $.jStorage.set("isLoggedIn", true);
           $.jStorage.set("profile", data.data);
           var alreadyLoggedIn = data.data.alreadyLoggedIn;
-          // if (alreadyLoggedIn === true) {
-          var slug = $.jStorage.get("activeUrlSlug");
-          console.log(slug);
-          if (slug === null || slug === "") {
-            slug = $.jStorage.get("profile").urlSlug;
+          if (alreadyLoggedIn === true) {
+            var slug = $.jStorage.get("activeUrlSlug");
+            console.log(slug);
+            if (slug === null || slug === "") {
+              slug = $.jStorage.get("profile").urlSlug;
+            }
+            if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
+              window.location = $.jStorage.get("url") + "?accessToken=" + $.jStorage.get("accessToken");
+            } else {
+              $state.go("mylife", {
+                name: 'journey',
+                urlSlug: slug
+              });
+            }
+          } else if (alreadyLoggedIn === false) {
+            $state.go('mainpage');
           }
-          if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
-            window.location = $.jStorage.get("url") + "?accessToken=" + $.jStorage.get("accessToken");
-          } else {
-            $state.go("mylife", {
-              name: 'journey',
-              urlSlug: slug
-            });
-          }
-          // } else if (alreadyLoggedIn === false) {
-          //   $state.go('mainpage');
-          // }
         } else {
 
         }
