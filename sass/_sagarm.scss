@@ -3810,7 +3810,7 @@ q {
 .notification-social-list {}
 
 .notification-social-btn {
-  margin: 25px 0;
+  margin: 25px 0 0;
 
   .fb-icon {
     background-color: #3b5998;
@@ -4422,6 +4422,7 @@ q {
 .comingsoon-content{
   color: #fff;
   text-align: center;
+  width: 60%;
   @extend .get-center;
 
   h1{
@@ -4516,3 +4517,28 @@ q {
   }
 }
 // DESTINATION FILTERS END
+// NOTIFICATION BADGE
+.notification-badge{
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 20px;
+  height: 20px;
+  padding-top: 3px;
+  border-radius: 100%;
+  background-color: #80879a;
+  color: $brand-blue;
+  font-size: 10px;
+  text-align: center;
+  vertical-align: middle;
+  @extend .avenir-heavy;
+  // &:hover{
+  //   background-color: #abafbc;
+  // }
+}
+.user-detail a:hover{
+  .notification-badge{
+    background-color: #abafbc;
+  }
+}
+// NOTIFICATION BADGE END

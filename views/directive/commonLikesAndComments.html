@@ -6,11 +6,16 @@
           <div class="pull-left">
             <ul class="notify-like">
               <li>
-                <a href=""><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(post.uniqueId,post._id)" like-sound></i></a>
+                <a href="" class="relate"><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(post.uniqueId,post._id)" like-sound></i>
+                  <span></span>
+                  <audio id="like-play">
+                    <source src="img/tiny1.mp3" type="audio/mp3">
+                  </audio>
+                </a>
               </li>
-              <li>
+              <!-- <li>
                 <a href=""><img src="img/comments.png" alt="" height="20" class="img-responisve" ng-click="focus('enterComment');"></a>
-              </li>
+              </li> -->
               <li>
                 <a href=""><img src="img/share.png" alt="" height="20" class="img-responisve"></a>
               </li>
@@ -84,7 +89,8 @@
 </div>
 <!-- whole window comment end-->
 <!-- whole window LIKE -->
-<div class="like-side-sec  {{showLikeShow}}" ng-show="viewCardLike">
+<!-- ng-show="viewCardLike" -->
+<div class="like-side-sec "  ng-class="{'show-like-side-sec': viewCardLike==true,'':viewCardLike==false}">
   <div class="like-section">
     <ul>
       <!-- REPEAT BUDDY LIST -->

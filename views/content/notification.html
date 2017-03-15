@@ -15,7 +15,8 @@
 
             <!-- PROFILE PIC AND TIMESTAMP  user from detail-->
             <div class="notification-profile">
-              <img ng-src="{{notify.userFrom.profilePicture|uploadpath:50:50:'cover'}}" alt="{{notify.userFrom.name}}" class="img-responsive">
+              <img ng-src="{{notify.userFrom.profilePicture|uploadpath:50:50:'cover'}}" alt="{{notify.userFrom.name}}" class="img-responsive" ng-if="notify.type!='userBadge'">
+              <img ng-src="{{notify.userTo.profilePicture|uploadpath:50:50:'cover'}}" alt="{{notify.userTo.name}}" class="img-responsive" ng-if="notify.type=='userBadge'">
             </div>
             <p class="notification-timestamp"><i class="fa fa-calendar"></i><span class="ml5 ">{{notify.createdAt | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o "></i> {{notify.createdAt | date: 'hh.mm a'}}<span></span></p>
             <!-- PROFILE PIC AND TIMESTAMP END user from detail-->

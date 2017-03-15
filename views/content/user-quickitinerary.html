@@ -128,9 +128,9 @@
                   </li>
                 </ul>
               </div>
-              <div class="options pointer pull-right relate" ng-click="viewItineraryOptions()">
+              <div class="options pointer pull-right relate" ng-init="user.editOption={};" ng-click="editOption(user.editOption);">
                 <img src="img/options.png" alt="Options" height="22" class="agent-iti-options-icon">
-                <div class="itinerary-edit-option" ng-show="showItineraryEditOptions">
+                <div class="itinerary-edit-option" ng-show="user.editOption.backgroundClick;">
                   <ul>
                     <li>
                       <a ui-sref="quickitinerary({flag:'edit',urlSlug:itinerary.urlSlug})">Edit</a>
@@ -445,7 +445,7 @@
                     </div>
                   </div>
                   <!-- visit local and travel post end-->
-                  <div class="view-other-profile relate" ng-if="life.otherProfile">
+                  <!-- <div class="view-other-profile relate" ng-if="life.otherProfile">
                     <div class="" ng-repeat="view in life.viewProfile">
                       <div class="profile-pic-follower">
                         <img ng-src="{{view.imgBg}}" alt="" class="img-responsive">
@@ -459,7 +459,7 @@
                         <button class="btn btn-white-outline">View This Profile</button>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
