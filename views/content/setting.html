@@ -149,13 +149,13 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <input type="text" class="form-control" name='firstName' placeholder="Firstname" ng-model="userData.firstName" required>
-                        <span ng-show="profile.firstName.$touched && profile.firstName.$invalid">The firstName cannot be Empty.</span>
+                        <span ng-show="profile.firstName.$touched && profile.firstName.$invalid" class="help-inline">The firstName is required.</span>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <input type="text" class="form-control" name="lastName" placeholder="Lastname" ng-model="userData.lastName" required>
-                        <span ng-show="profile.firstName.$touched && profile.firstName.$invalid">The lastName cannot be Empty.</span>
+                        <span ng-show="profile.firstName.$touched && profile.firstName.$invalid" class="help-inline">The lastName is required.</span>
                       </div>
                     </div>
                   </div>
@@ -177,7 +177,8 @@
                           <!-- <input type="date" class="form-control text-center" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'"> -->
                           <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="open1();" uib-datepicker-popup="{{format}}"
                             is-open="popup1.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="false"
-                            id="From_{{countryPanel}}{{cityPanel}}" ng-model="userData.dob" />
+                            id="From_{{countryPanel}}{{cityPanel}}" ng-model="userData.dob" required name="dob" />
+                             <span ng-show="profile.dob.$touched && profile.dob.$invalid" class="help-inline">The DOB is required.</span>
                           <!--ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'"-->
                         </div>
                       </div>
@@ -219,11 +220,12 @@
                       </div>-->
                           <ui-select ng-model="userData.homeCountry" theme="bootstrap" name="nationality" required>
                             <ui-select-match placeholder="Search">{{$select.selected.name}}</ui-select-match>
-                            <ui-select-choices repeat="nation._id as nation in nationality | filter:$select.search" track by $index><img ng-src="{{nation.flag|uploadpath:30}}" width="30" class="mr10 v-mid inline-block" alt="{{nation.name}}">
+                            <ui-select-choices repeat="nation._id as nation in nationality | filter:$select.search" track by $index>
+                              <img ng-src="{{nation.flag|uploadpath:30}}" width="30" class="mr10 v-mid inline-block" alt="{{nation.name}}">
                               <span class="color-light-grey" ng-bind="nation.name"></span>
                             </ui-select-choices>
                           </ui-select>
-                          <span ng-show="profile.nationality.$touched && profile.nationality.$invalid">Nationality cannot be Empty.</span>
+                          <span ng-show="profile.nationality.$touched && profile.nationality.$invalid" class="help-inline">Nationality cannot be Empty.</span>
                         </div>
                       </div>
                       <div class="col-md-6">

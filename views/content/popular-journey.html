@@ -2,9 +2,46 @@
   <div class="img-holder-destination bg-journey relate">
     <div class="overlay-landing"></div>
     <div class="get-center country-title">
-      <h4 class="color-white title-head">Popular Journey</h4>
+      <h4 class="color-white title-head">Popular Journeys</h4>
     </div>
- <div ng-include="template.footer" class="template footer"></div>
+ <!--<div ng-include="template.footer" class="template footer"></div>-->
+ <div class="footer">
+   <footer ng-controller=headerctrl>
+<div class="hidden-xs app-icons ab">
+    <div class="container-fluid">
+            <div class="col-md-12">
+                    <ul class="list-unstyled list-inline text-right color-white">
+                        <li class="">
+                           To Create Journeys Download App
+                        </li>
+                        <li>
+                            <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank" class="color-white">
+                                <i class="fa fa-apple"></i>
+                            </a>
+                        </li>
+                        <li>|</li>
+                        <li>
+                            <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" class="color-white" target="_blank">
+                                <i class="fa fa-android"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+</div>
+
+<div class="visible-xs">
+    <div class="download-app text-center uppercase download-app-footer visible-xs" ng-class="{ 'close-download': isopen} ">
+  <div class="pull-right">
+    <a ng-click="opendownload();"><i class="fa fa-times color-white" aria-hidden="true"></i></a>
+  </div>
+  <a href="#" target="_blank">
+  Download App
+</a>
+</div>
+</div>
+</footer>
+ </div>
     <div class="mouse-scrolldown color-white text-center" ng-click="scrollDown();">
       <img src="img/mouse-scroll.png" alt="Travelibro">
       <p>Scroll Down</p>
@@ -40,15 +77,15 @@
                       </div>
                     </div>
                   </div>
-                  <!-- post status -->
+                  <!-- post type icon -->
+                  <!-- post type icon end -->
+                </div>
+                                 <!-- post status -->
                   <div class="post-your-status">
                     <p class="your-post" ng-if="post.onGoing==false">Has ended <span ng-if="post.journeyCreator.gender=='male'"> his </span><span ng-if="post.journeyCreator.gender=='female'"> her </span> Journey</p>
                     <p class="your-post" ng-if="post.onGoing==true">Has started <span ng-if="post.journeyCreator.gender=='male'"> his </span><span ng-if="post.journeyCreator.gender=='female'"> her </span> Journey</p>
                   </div>
                   <!-- post status end -->
-                  <!-- post type icon -->
-                  <!-- post type icon end -->
-                </div>
                 <!-- post header end -->
                 <!-- post-main-section -->
                 <div class="post-main-section">
@@ -61,9 +98,9 @@
                     </div>
                     <!-- flag country end -->
                     <!-- tag on journey -->
-                    <div class="tag-ongo-journey">
+                    <!--<div class="tag-ongo-journey">
                       <span class="inline-block color-white">On The Go</span>
-                    </div>
+                    </div>-->
                     <!-- tag on journey end-->
                     <!-- video post -->
                     <div class="video-post relate" ng-if="post.video">

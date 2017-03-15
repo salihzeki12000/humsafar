@@ -58,7 +58,9 @@
                     <div class="form-group">
                       <div class="itinerary-inputholder" ng-class="{'form-invalid': detailItinerary.name.$invalid && detailItinerary.name.$touched}">
                         <input type="text" class="avenir-roman form-control" name="name" placeholder="Trip Title" ng-model="dItinerary.name" ng-required="true">
-                        <span ng-show="detailItinerary.name.$touched && detailItinerary.name.$invalid" class="help-inline">The Trip Title is required.</span>
+                        <span ng-show="detailItinerary.$submitted || detailItinerary.name.$touched">
+                          <span ng-show="detailItinerary.name.$error.required" class="help-inline">The Trip Title is required.</span>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -148,6 +150,9 @@
                               </ul>
                             </div>
                             <!--<span ng-show="detailItinerary.country.$touched && detailItinerary.country.$invalid" class="help-inline">The Country is required.</span>-->
+                            <span ng-show="detailItinerary.$submitted || detailItinerary.country.$touched">
+                                <span ng-show="detailItinerary.country.$error.required" class="help-inline">The Country is required.</span>
+                            </span>
                           </div>
                         </div>
 
@@ -190,8 +195,11 @@
                                 <!--<span>{{(city.to | dateDifference:city.from)-1}}</span>-->
                               </div>
                             </div>
-                            <span ng-show="detailItinerary.from.$touched && detailItinerary.from.$invalid || detailItinerary.to.$touched && detailItinerary.to.$invalid || detailItinerary.duration.$touched && detailItinerary.duration.$invalid"
-                              class="help-inline">The From Month, To Month and Days are required.</span>
+                          <span ng-show="detailItinerary.$submitted || detailItinerary.from.$touched || detailItinerary.to.$touched || detailItinerary.duration.$touched">
+                            <span ng-show="detailItinerary.from.$error.required || detailItinerary.to.$error.required || detailItinerary.duration.$error.required" class="help-inline">The From Month, To Month and Days are required.</span>
+                          </span>
+                            <!--<span ng-show="detailItinerary.from.$touched && detailItinerary.from.$invalid || detailItinerary.to.$touched && detailItinerary.to.$invalid || detailItinerary.duration.$touched && detailItinerary.duration.$invalid"
+                              class="help-inline">The From Month, To Month and Days are required.</span>-->
                           </div>
                         </div>
                       </div>
@@ -559,16 +567,19 @@
                               for="id">{{dItinerary.cost | number}}</label>
                           </div>
                         </div>
-                        <span ng-show="detailItinerary.currency.$touched && detailItinerary.currency.$invalid || detailItinerary.cost.$touched && detailItinerary.cost.$invalid"
+                            <span ng-show="detailItinerary.$submitted || detailItinerary.currency.$touched || detailItinerary.cost.$touched">
+                                <span ng-show="detailItinerary.currency.$error.required || detailItinerary.cost.$error.required" class="help-inline">The Currency and Budget is required.</span>
+                            </span>
+                        <!--<span ng-show=" && detailItinerary.currency.$invalid ||  && detailItinerary.cost.$invalid"
                           class="help-inline">The Currency and Budget is required.</span>
-                      </div>
+                      </div>-->
                     </div>
                   </div>
                   <div class="pull-right">
                     <div class="save-publish-detail">
                       <!--<button class="btn btn-pink btn-more mr5" ng-click="uploadDetailedItinerary(false)" ng-disabled="detailItinerary.$invalid">Save</button>-->
-                      <button class="btn btn-pink btn-more mr5" ng-click="uploadDetailedItinerary(false)">Save</button>
-                      <button class="btn btn-pink btn-more" ng-click="uploadDetailedItinerary(true)">Publish</button>
+                      <button class="btn btn-pink btn-more mr5" ng-click="detailItinerary.$valid && uploadDetailedItinerary(false)">Save</button>
+                      <button class="btn btn-pink btn-more" ng-click="detailItinerary.$valid && uploadDetailedItinerary(true)">Publish</button>
                     </div>
                   </div>
                 </div>

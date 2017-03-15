@@ -11,7 +11,9 @@
                   <div class="form-group">
                   <div class="itinerary-inputholder" ng-class="{'form-invalid': quickItinerary.name.$invalid && quickItinerary.name.$touched}">
                     <input type="text" name="name" class="form-control" placeholder="Trip Title" ng-model="qItinerary.name" ng-required="true">
-                      <span ng-show="quickItinerary.name.$touched && quickItinerary.name.$invalid" class="help-inline">The Trip Title is required.</span>
+                    <span ng-show="quickItinerary.$submitted || quickItinerary.name.$touched">
+                        <span ng-show="quickItinerary.name.$error.required" class="help-inline">The Trip Title is required.</span>
+                    </span>
                   </div>
                   </div>
                 </div>
@@ -64,8 +66,10 @@
                         <input type="number" class="form-control text-center" id="Day" name="duration" placeholder="e.g. 20" ng-model="qItinerary.duration" ng-required="true">
                       </div>
                     </div>
-                    <span ng-show="quickItinerary.month.$touched && quickItinerary.month.$invalid || quickItinerary.year.$touched && quickItinerary.year.$invalid || quickItinerary.duration.$touched && quickItinerary.duration.$invalid" class="help-inline">The Month, Year and Days are required.</span>
-                  </div>
+                     <span ng-show="quickItinerary.$submitted || quickItinerary.month.$invalid || quickItinerary.year.$touched || quickItinerary.duration.$touched">
+                        <span ng-show="quickItinerary.month.$error.required || quickItinerary.year.$error.required || quickItinerary.duration.$error.required" class="help-inline">The Month, Year and Days are required.</span>     
+                    </span>
+                     </div>
                   </div>
                 </div>
               </div>
@@ -217,8 +221,8 @@
               </div> -->
               <div class="pull-right mob-quicktrip-btn">
                 <div class="save-publish-detail">
-                  <button class="btn btn-pink btn-more mr5" ng-click="uploadQuickItinerary(false)" ng-disabled="quickItinerary.$invalid" ng-if="!(qItinerary.status ||  (qItinerary.status == true))">Save</button>
-                  <button class="btn btn-pink btn-more" ng-click="uploadQuickItinerary(true)" ng-disabled="quickItinerary.$invalid">Publish</button>
+                  <button class="btn btn-pink btn-more mr5" ng-click="quickItinerary.$valid && uploadQuickItinerary(false)"  ng-if="!(qItinerary.status ||  (qItinerary.status == true))">Save</button>
+                  <button class="btn btn-pink btn-more" ng-click="quickItinerary.$valid &&  uploadQuickItinerary(true)">Publish</button>
                 </div>
               </div>
             </div>
