@@ -2,15 +2,15 @@
   <div class="container-fluid">
     <div class="profile-photo-section relate">
       <div class="profile-pic relate">
-        <a ui-sref="setting"  ng-if="allowAccess=true">
-        <div class="profile-imgholder ">
-          <img ng-src="{{userData.profilePicture|uploadpath:135:145:cover}}" alt="{{userData.name}}" class="img-responsive" style="border-radius:'50px';">
-        </div>
+        <a ui-sref="setting" ng-if="allowAccess=true">
+          <div class="profile-imgholder ">
+            <img ng-src="{{userData.profilePicture|uploadpath:135:145:cover}}" alt="{{userData.name}}" class="img-responsive" style="border-radius:'50px';">
+          </div>
         </a>
-      <a href="{{userData.profilePicture|uploadpath}}" fancybox-box class="fancybox" ng-if="allowAccess=false">
-        <div class="profile-imgholder ">
-          <img ng-src="{{userData.profilePicture|uploadpath:135:145:cover}}" alt="{{userData.name}}" class="img-responsive" style="border-radius:'50px';">
-        </div>
+        <a href="{{userData.profilePicture|uploadpath}}" fancybox-box class="fancybox" ng-if="allowAccess=false">
+          <div class="profile-imgholder ">
+            <img ng-src="{{userData.profilePicture|uploadpath:135:145:cover}}" alt="{{userData.name}}" class="img-responsive" style="border-radius:'50px';">
+          </div>
         </a>
         <img src="{{userData.homeCountry.flag|uploadpath:40}}" alt="" class="flag img-responsive">
         <img src="img/wave-profile.png" alt="" width="40" class="wave img-responsive">
@@ -23,25 +23,25 @@
     <div class="user-travel-detail relate">
       <div class="scroll-user-travel">
         <ul>
-          <li class="text-center pointer" ui-sref-if="isLoggedIn" ui-sref-val="ProfileList({'active':'following','urlSlug':activeUrlSlug})">
+          <li class="text-center pointer" ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'following'})">
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.following_count}}</span>
               <span class="block avenir-roman color-blue mt5">Following</span>
             </div>
           </li>
-          <li class="text-center pointer" ui-sref-if="isLoggedIn" ui-sref-val="ProfileList({active:'followers',urlSlug:activeUrlSlug})">
+          <li class="text-center pointer" ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'followers'})">
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.followers_count}}</span>
               <span class="block avenir-roman color-blue mt5">Followers</span>
             </div>
           </li>
-          <li class="text-center pointer" ui-sref-if="isLoggedIn" ui-sref-val="ProfileList({active:'countriesVisited',urlSlug:activeUrlSlug})">
+          <li class="text-center pointer" ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'countries-visited'})">
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.countriesVisited_count}}</span>
               <span class="block avenir-roman color-blue mt5">Countries Visited</span>
             </div>
           </li>
-          <li class="text-center pointer" ui-sref-if="isLoggedIn" ui-sref-val="ProfileList({active:'bucketList',urlSlug:activeUrlSlug})">
+          <li class="text-center pointer" ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'bucket-list'})">
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.bucketList_count}}</span>
               <span class="block avenir-roman color-blue mt5">Bucket List</span>
@@ -86,8 +86,10 @@
           <div class="col-md-offset-2 col-md-8">
             <div class="text-center">
               <div class="more-detail" ng-init="getMore=false" ng-show="getMore">
-                <p class="avenir-roman"><span class="avenir-heavy">{{userName}}</span> loves to travel and explore <span class="avenir-heavy">{{kindOfHoliday}}</span>. {{pronoun | capitalize}} usually goes <span class="avenir-heavy">{{usuallyGo}}{{usuallyGo1}}</span>,
-                 {{pronoun}} {{intermediate}}<span class="avenir-heavy">{{preferToTravel}}</span>. <span class="avenir-heavy">{{userName}}'s</span> ideal holiday type is <span class="avenir-heavy">{{idealHoliday}}</span>.</p>
+                <p class="avenir-roman"><span class="avenir-heavy">{{userName}}</span> loves to travel and explore <span class="avenir-heavy">{{kindOfHoliday}}</span>.
+                  {{pronoun | capitalize}} usually goes <span class="avenir-heavy">{{usuallyGo}}{{usuallyGo1}}</span>, {{pronoun}}
+                  {{intermediate}}
+                  <span class="avenir-heavy">{{preferToTravel}}</span>. <span class="avenir-heavy">{{userName}}'s</span>                  ideal holiday type is <span class="avenir-heavy">{{idealHoliday}}</span>.</p>
               </div>
               <span class="djb-font get-more pointer" ng-click="getMore = !getMore">more about me... <img src="img/more-about-me.png" alt="" height="35" class="" ng-class="{'abt-me': getMore == true}"></span>
             </div>

@@ -66,7 +66,6 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
   cfpLoadingBarProvider.latencyThreshold = 2000;
   cfpLoadingBarProvider.includeBar = true;
   cfpLoadingBarProvider.spinnerTemplate = '<div id="loader" class="travelibro-loader"><img src="img/loader.gif" width="180px" alt="Travelibro" class="img-responsive" /></div>';
-
   $stateProvider
     .state('header', {
       templateUrl: "views/template.html",
@@ -112,8 +111,13 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'AdvertiseCtrl'
     })
-    .state('login', {
+    .state('loginwithout', {
       url: "/login",
+      templateUrl: "views/template.html",
+      controller: 'LoginCtrl'
+    })
+    .state('login', {
+      url: "/main/:name",
       templateUrl: "views/template.html",
       controller: 'LoginCtrl'
     })
@@ -134,28 +138,35 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       reloadOnSearch: false
     })
     .state('mylife', {
-      url: "/mylife/:name/:urlSlug",
+      url: "/users/:urlSlug",
       templateUrl: "views/template.html",
       controller: 'MylifeCtrl',
       reloadOnSearch: false
     })
+    .state('mylife1', {
+      url: "/users/:urlSlug/{name:(?:journeys|moments|reviews)}",
+      templateUrl: "views/template.html",
+      controller: 'MylifeCtrl',
+      reloadOnSearch: false
+    })
+
     .state('popularblogger', {
       url: "/popular-blogger",
       templateUrl: "views/template.html",
       controller: 'PopularBloggerCtrl'
     })
     .state('popularjourney', {
-      url: "/popular-journey",
+      url: "/popular-journeys",
       templateUrl: "views/template.html",
       controller: 'PopularJourneyCtrl'
     })
     .state('popularagent', {
-      url: "/popular-agent",
+      url: "/popular-agents",
       templateUrl: "views/template.html",
       controller: 'PopularAgentCtrl'
     })
     .state('popularitinerary', {
-      url: "/popular-itinerary",
+      url: "/popular-itineraries",
       templateUrl: "views/template.html",
       controller: 'PopularItineraryCtrl'
     })
@@ -248,7 +259,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'ActivityCtrl'
     })
     .state('activitytest', {
-      url: "/activity-test",
+      url: "/users/:urlSlug/activity-feed",
       templateUrl: "views/template.html",
       controller: 'ActivityTestCtrl'
     })
@@ -258,7 +269,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'HolidayCtrl'
     })
     .state('ongojourney', {
-      url: "/ongojourney/:id",
+      url: "/users/:urlSlug/journeys/:id",
       templateUrl: "views/template.html",
       controller: 'OnGoJourneyCtrl'
     })
@@ -283,7 +294,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'EditorItineraryCtrl'
     })
     .state('userquickitinerary', {
-      url: "/user-quickitinerary/:id",
+      url: "/users/:urlSlug/quick-itineraries/:id",
       templateUrl: "views/template.html",
       controller: 'UserQuickItineraryCtrl'
     })
@@ -298,7 +309,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'AgentItineraryCtrl'
     })
     .state('itinerary', {
-      url: "/itinerary",
+      url: "/itineraries/new",
       templateUrl: "views/template.html",
       controller: 'ItineraryCtrl'
     })
@@ -375,10 +386,20 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'LoginFlowCtrl'
     })
+    // .state('ProfileList', {
+    //   url: "/users/:urlSlug/:active",
+    //   templateUrl: "views/template.html",
+    //   controller: 'ProfileListCtrl',
+    // });
     .state('ProfileList', {
-      url: "/profile-list/:active/:urlSlug",
+      url: "/users/:urlSlug/{active:(?:following|followers|countries-visited|bucket-list)}",
       templateUrl: "views/template.html",
-      controller: 'ProfileListCtrl'
+      controller: 'ProfileListCtrl',
+      // params: {
+      //   active: {
+      //     value: "following"
+      //   }
+      // }
     });
   $urlRouterProvider.otherwise("/");
   $locationProvider.html5Mode(isproduction);
@@ -1420,7 +1441,8 @@ firstapp.directive('uiSrefIf', function ($compile) {
       });
     }
   };
-})
+});
+
 firstapp.directive('videoend', [function () {
   return {
     restrict: 'A',
@@ -1435,4 +1457,55 @@ firstapp.directive('videoend', [function () {
       };
     }
   };
-}])
+}]);
+
+firstapp.filter('trafficType', function () {
+  return function (input) {
+    input = input.trim();
+    console.log(input, 'trafficType');
+    var returnVal = "";
+    switch (input) {
+      case "Off Season":
+        returnVal = "img/destination/off-season.png";
+        break;
+      case "Shoulder Season":
+        returnVal = "img/destination/shoulder-season.png";
+        break;
+      case "Peak Season":
+        returnVal = "img/destination/peak-season.png";
+        break;
+      default:
+    };
+    return returnVal;
+  }
+});
+
+firstapp.filter('seasonType', function () {
+  return function (input) {
+    input = input.trim();
+    console.log(input, 'seasonType');
+    var returnVal = "";
+    switch (input) {
+      case "Spring":
+        returnVal = "img/destination/spring.png";
+        break;
+      case "Summer":
+        returnVal = "img/destination/summer.png";
+        break;
+      case "Winter":
+        returnVal = "img/destination/winter.png";
+        break;
+      case "Autumn":
+        returnVal = "img/destination/autumn.png";
+        break;
+      case "Monsoon":
+        returnVal = "img/destination/monsoon.png";
+        break;
+      case "Wet Season":
+        returnVal = "img/destination/wet-season.png";
+        break;
+      default:
+    };
+    return returnVal;
+  }
+});
