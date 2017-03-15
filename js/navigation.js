@@ -38,7 +38,7 @@ var navigationservice = angular.module('navigationservice', [])
       disabled: true,
       anchor: "popularagent",
     }, {
-      name: "Popular Itinerary",
+      name: "Popular Itineraries",
       classis: "active",
       disabled: true,
       anchor: "popularitinerary",
@@ -314,11 +314,11 @@ var navigationservice = angular.module('navigationservice', [])
           console.log(data);
         });
       },
-      // getDestinationBooking: function (formData, callback) {
-      //   $http.get("http://192.168.0.119:3000/migrations/city_bookings.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
-      //     callback(data);
-      //   });
-      // },
+      getDestinationBooking: function (formData, callback) {
+        $http.get("http://52.76.210.40:6090/migrations/city_bookings.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
+          callback(data);
+        });
+      },
       uploadFile: function (formData, callback) {
         console.log(formData);
         $http.post(uploadurl, formData, {

@@ -35,8 +35,8 @@
           <div class="row">
             <div class="col-sm-6"  ng-repeat="dest in destinationList track by $index">
               <div class="city-view" ng-if="dest.isCity==true">
-                <div class="img-holder relate" ng-click="countryView(dest.urlSlug,dest.isCity);getBooking(dest);">
-                  <img src="{{dest.cityCoverPhoto|uploadpath:600:250:'cover'}}" alt="travelibro" class="full-width">
+                <div class="img-holder relate" ng-click="countryView(dest.urlSlug,dest.isCity);">
+                  <img src="{{dest.cityDisplayPhoto|uploadpath}}" alt="travelibro" class="img-responsive full-width">
                   <div class="title-head-left color-white">
                     {{dest.name}}
                   </div>
@@ -46,7 +46,7 @@
 
                   <div class="read-more left-bottom">
                     <ul class="list-inline">
-                      <li class="avenir-roman color-white">Cities: <span class="avenir-heavy">{{dest.cityCount}}</span> </li>
+                      <li class="avenir-roman color-white">Must Do : <span class="avenir-heavy">{{dest.mustDoCount}}</span> </li>
                       <li class="avenir-heavy color-white">|</li>
                       <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">{{dest.itineraryCount}}</span> </li>
                     </ul>
@@ -54,12 +54,12 @@
                 </div>
               </div>
               <div class="country-view" ng-if="dest.isCity==false">
-                <div class="img-holder relate" ng-click="countryView(dest.urlSlug,dest.isCity)" style="background:url('{{dest.countryCoverPhoto|uploadpath}}');">
-                  <!-- <img ng-src="{{dest.countryCoverPhoto|uploadpath}}" alt="travel-libro" class="full-width"> -->
+                <div class="img-holder relate" ng-click="countryView(dest.urlSlug,dest.isCity)">
+                  <img ng-src="{{dest.countryCoverPhoto|uploadpath}}" alt="travel-libro" class="img-responsive full-width">
                   <div class="title-head-left color-white">
                     {{dest.name}}
                   </div>
-                  <div class="title-head-right color-white">
+                <div class="title-head-right color-white">
                     <img ng-src="{{dest.flag|uploadpath}}"   alt="Travelibro">
                   </div>
                   <div class="read-more left-bottom">
