@@ -79,7 +79,7 @@ var navigationservice = angular.module('navigationservice', [])
       name: "Blogs",
       classis: "active",
       disabled: true,
-      linkAccess:true,
+      linkAccess: true,
       link: "http://travelibro.net/blog",
     }, {
       name: "About Us",
@@ -175,8 +175,8 @@ var navigationservice = angular.module('navigationservice', [])
       saveUserData: function (formData, callback, errorCallback) {
         TravelibroService.post(adminURL + "/user/editUserWeb", formData).success(callback).error(errorCallback);
       },
-      travelCount: function (callback, errorCallback) {
-        TravelibroService.post(adminURL + "/user/getOneDataWeb").success(callback).error(errorCallback);
+      travelCount: function (formData, callback, errorCallback) {
+        TravelibroService.post(adminURL + "/user/getOneDataWeb", formData).success(callback).error(errorCallback);
       },
       getBucketListWeb: function (callback, errorCallback) {
         TravelibroService.post(adminURL + "/user/getBucketListWeb").success(callback).error(errorCallback);

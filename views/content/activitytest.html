@@ -36,10 +36,9 @@
                         <p class="m-clear"><span>{{activity.startTime|formatDate:'date'}}</span> | <span>{{activity.startTime|formatDate:'time'}}</span></p>
                       </div>
                       <div class="pull-right" ng-if="activity.owner._id!=userData._id">
-                        <div class="follow-or-following pointer" ng-click="followFollowing(activity.owner)">
-                          <!--<span class="color-dark-blue ml5" ng-if="activity.follow">Follow</span>-->
+                        <!--<div class="follow-or-following pointer" ng-click="followFollowing(activity.owner)">
                           <span class="color-dark-blue ml5">{{activity.owner.following|followFollowingStatus}}</span>
-                        </div>
+                        </div>-->
                       </div>
                     </div>
                   </div>
@@ -161,8 +160,8 @@
                     <!-- img post slider end -->
                     <!-- post travelled journey -->
                     <div class="travelled-journey" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey'">
-                      <div class="travelled-imgholder">
-                        <img ng-src="{{activity.startLocationPic|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center">
+                      <div class="travelled-imgholder" ng-init="banner=activity.coverPhoto && activity.coverPhoto!=''?activity.coverPhoto:activity.startLocationPic">
+                        <img ng-src="{{banner|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center">
                       </div>
                       <div class="journey-tag-holder">
                         <div class="days-spent pull-right" ng-init="days=(activity.endTime|dateDifference: activity.startTime)">
@@ -346,7 +345,7 @@
                     </div>
                     <div class="social-likes-reviews" ng-if="!(((activity.likeCount==0)||(activity.likeCount==undefined))&&(activity.commentCount==0))">
                       <div class="clearfix">
-                        <div class="pull-left" ng-init="activity.listLike={}; likeShow='false';" >
+                        <div class="pull-left" ng-init="activity.listLike={}; likeShow='false';">
                           <span class="color-blue mr10 card-like avenir-heavy" ng-click="getLikesData(activity); showLikeClick();"><i class="fa fa-heart color-blue mr5"></i><b>{{activity.likeCount}}</b> {{activity.likeCount|singularPlural:'Likes'}}
                            <div class="card-like-dropdown" ng-show="activity.listLike.backgroundClick;">
                               <ul>

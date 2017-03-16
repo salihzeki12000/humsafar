@@ -95,18 +95,24 @@ var mylife = angular.module('mylife', [])
           console.log(data);
         });
       },
-      getFollowingWeb: function (callback) {
+      getFollowingWeb: function (urlSlug, callback) {
         TravelibroService.http({
           url: adminURL + "/user/getFollowingWeb",
-          method: "POST"
+          method: "POST",
+          data: {
+            "urlSlug": urlSlug
+          }
         }).success(callback).error(function (data) {
           console.log(data);
         });
       },
-      getFollowersWeb: function (callback) {
+      getFollowersWeb: function (urlSlug, callback) {
         TravelibroService.http({
           url: adminURL + "/user/getFollowersWeb",
-          method: "POST"
+          method: "POST",
+          data: {
+            "urlSlug": urlSlug
+          }
         }).success(callback).error(function (data) {
           console.log(data);
         });
