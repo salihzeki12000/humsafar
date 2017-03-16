@@ -939,7 +939,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     function calcWidth() {
       var width = $(window).width();
-      var percent = 35;
+      var percent = 40;
       var newPadding = width * percent / 100;
       var newCarHolderWidth = (newPadding - 30);
       var newZoomCarHolder = newCarHolderWidth / 550;
@@ -2652,8 +2652,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
     $scope.cityDestData = [];
     $scope.cityHotelCategoryData = [];
-    $scope.bookingCityName="";
-    $scope.bookingCountryName="";
+    $scope.bookingCityName = "";
+    $scope.bookingCountryName = "";
     $scope.citySubTypeData = [];
     $scope.cityBudgetData = [];
     $scope.cityItineraryType = [];
@@ -2699,16 +2699,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // get booking data
     $scope.getBooking = function (cityName, countryName) {
-      console.log(cityName,countryName);
+      console.log(cityName, countryName);
       $scope.bookingCityName = cityName;
       $scope.bookingCountryName = countryName;
       NavigationService.getDestinationBooking({
         cityName: $scope.bookingCityName,
         countryName: $scope.bookingCountryName
       }, function (data) {
-        console.log(data,'booking data');
+        console.log(data, 'booking data');
         $scope.bookingData = data;
-        console.log($scope.bookingData,'booking ka data');
+        console.log($scope.bookingData, 'booking ka data');
       });
     };
     // get booking data end
@@ -2983,7 +2983,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       case "booking":
         $scope.destination.innerView = alldestination[4];
         $scope.cityoptions.active = "booking";
-        $scope.getBooking($scope.bookingCityName,$scope.bookingCountryName);
+        $scope.getBooking($scope.bookingCityName, $scope.bookingCountryName);
         break;
       case "visit":
         $scope.destination.innerView = alldestination[5];
@@ -3006,7 +3006,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         case 1:
           url = "hotels";
           $scope.cityoptions.active = "hotels";
-           $scope.citySubTypeData = [];
+          $scope.citySubTypeData = [];
           $scope.cityBudgetData = [];
           $scope.getCityInfo("hotel", $scope.urlDestinationCity);
           break;
@@ -3028,7 +3028,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         case 4:
           url = "booking";
           $scope.cityoptions.active = "booking";
-        $scope.getBooking($scope.bookingCityName,$scope.bookingCountryName);          
+          $scope.getBooking($scope.bookingCityName, $scope.bookingCountryName);
           break;
         case 5:
           url = "visit";
@@ -7240,21 +7240,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Used to name the .html file
 
     // console.log("Testing Consoles");
-    $scope.activeMenu = $stateParams.active;
     $scope.template = TemplateService.changecontent("profile-list");
     $scope.menutitle = NavigationService.makeactive("ProfileList");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    $scope.userData = $.jStorage.get("profile");
+    $scope.activeMenu = $stateParams.active;
+
     $scope.allowAccess = $.jStorage.get("allowAccess");
     $scope.viewDropdown = {
       'showDropdown': false
     }
+
     if ($.jStorage.get("activeUrlSlug") != "" && $.jStorage.get("activeUrlSlug") != null) {
       $scope.activeUrlSlug = $.jStorage.get("activeUrlSlug");
     } else {
       $scope.activeUrlSlug = $.jStorage.get("profile").urlSlug;
     }
-    console.log($scope.activeUrlSlug);
 
     // click background close
     var searchCounter = 0;
@@ -7269,45 +7272,48 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         } else {
 
         }
-
       });
-
     };
     // click background close end
 
-    // $scope.editOption = function (model) {
-    //   model.showDropdown = true;
-    // };
-
     $("body").click(function (e) {
+      // console.log($(e.target).hasClass('entry-content'));
       if ($(e.target).hasClass('entry-content')) {
         return false;
       } else {
-        console.log("closenow");
         $scope.viewDropdown.showDropdown = false;
         $scope.$apply();
       }
     });
 
-    var getAllCountries = function (countries) {
-      $scope.nationality = countries;
-      // $scope.getMap();
+    var getAllCountries = function () {
+      MyLife.getAllCountries(function (countries) {
+        $scope.nationality = countries;
+      }, function (err) {
+        console.log(err);
+      });
     };
-
-    MyLife.getAllCountries(getAllCountries, function (err) {
-      console.log(err);
-    });
 
     $scope.updateBucketList = function (country) {
-      MyLife.updateBucketList(country, function (data, status) {
-        MyLife.getOneBucketList(callbackBucketList);
-        reloadCount();
-
-      }, function () {});
-      // $scope.getMap();
+      // console.log(country, country.bucketList, country.bucketList && country.bucketList == true);
+      if (country.bucketList && country.bucketList == true) {
+        console.log("if");
+        MyLife.updateBucketList(country, function (data, status) {
+          MyLife.getOneBucketList(function (data) {
+            $scope.bucketList = data;
+            reloadCount();
+          });
+        }, function () {});
+      } else {
+        console.log('else');
+        MyLife.updateBucketList(country, function (data) {
+          document.getElementById(country._id).remove();
+          reloadCount();
+        }, function () {});
+      }
     };
+
     $scope.obj = {};
-    // update country Visited
     $scope.updateCountryVisited = function (id) {
       $scope.obj.countryId = id;
       console.log(id);
@@ -7372,8 +7378,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           templateUrl: "views/modal/country-visited.html"
         });
       }
-
-
       modal.closed.then(function () {
         console.log(_.isEmpty(arr));
         if (_.isEmpty(arr)) {
@@ -7447,117 +7451,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.searchFriend = {
       'name': ''
     };
+
     $scope.searchCard = {
       'name': ''
     };
+
     $scope.searchUser = {
       'open': ''
     };
-    $scope.changeStatus = function (status, results) {
-      $scope.activeMenu = status;
-      $scope.searchList = results;
-      $scope.searchFriend.name = "";
-      $scope.searchCard.name = "";
-      $scope.searchUser.open = false;
-      // console.log(results);
-      // $state.go('ProfileList', {
-      //   active: status
-      // });
-      $state.go("ProfileList", {
-        active: status,
-        urlSlug: $scope.activeUrlSlug
-      }, {
-        location: true,
-        notify: false,
-        reload: false
-      })
-    };
-
-    $scope.testingDropDown = function (name) {
-      $scope.searchUser.open = true;
-      if (name.length == 0) {
-        $scope.searchCard.name = "";
-      }
-    };
-
-    $scope.userData = $.jStorage.get("profile");
-    var travelCountCallback = function (data, status) {
-      $scope.count = data.data;
-    };
-
-    var reloadCount = function () {
-      NavigationService.travelCount(travelCountCallback, function (err) {
-        console.log(err);
-      });
-    };
-
-    var years = function (startYear) {
-      var currentYear = new Date().getFullYear(),
-        years = [];
-      startYear = startYear || 1980;
-      while (startYear <= currentYear) {
-        years.push(currentYear--);
-      }
-      return years;
-    }
-    $scope.listOfYears = years(1950);
-    reloadCount();
-
-    var callbackFollowers = function (data) {
-      $scope.followersList = data.data.followers;
-      // _.each($scope.followersList, function (n) {
-      //   if (n.following) {
-      //     n.status = "Following";
-      //   } else {
-      //     n.status = "Follow";
-      //   }
-      // });
-      reloadCount();
-      if ($scope.activeMenu == 'followers') {
-        $scope.searchList = $scope.followersList;
-      }
-    };
-
-    var callbackFollowings = function (data) {
-      $scope.followingList = data.data.following;
-      // _.each($scope.followingList, function (n) {
-      //   if (n.following) {
-      //     n.status = "Following";
-      //   } else {
-      //     n.status = "Follow";
-      //   }
-      // });
-      reloadCount();
-      // if ($scope.activeMenu == 'following') {
-      //   $scope.searchList = $scope.followingList;
-      // }
-    };
-
-    var callbackGetCountriesVisited = function (data) {
-      $scope.countryVisitedList = data;
-      reloadCount();
-    };
-
-    var callbackBucketList = function (data) {
-      $scope.bucketList = data;
-      reloadCount();
-    };
-
-    var callbackRemoveFromBucketList = function (countryId) {
-      reloadCount();
-      document.getElementById(countryId).remove();
-    };
-    $scope.removeFromBucketList = function (id) {
-      MyLife.updateBucketListWeb(id, callbackRemoveFromBucketList);
-    }
-
-    MyLife.getFollowingWeb(callbackFollowings);
-    MyLife.getFollowersWeb(callbackFollowers);
-    MyLife.getCountryVisitedListExpanded(callbackGetCountriesVisited);
-    MyLife.getOneBucketList(callbackBucketList);
-
-    MyLife.getOneBucketList(callbackBucketList);
-
 
     //follow unfollow user starts
     $scope.followUnFollowUser = function (obj, flag, model) {
@@ -7578,11 +7479,138 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       backgroundClick.scope = $scope;
     };
     //follow unfollow user ends
+
+    //close dropDown on background click
+    $scope.editOption = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+    //close dropDown on background click end
+
+    $scope.testingDropDown = function (name) {
+      $scope.searchUser.open = true;
+      if (name.length == 0) {
+        $scope.searchCard.name = "";
+      }
+    };
+
+
+    var travelCountCallback = function (data, status) {
+      $scope.count = data.data;
+    };
+
+    var reloadCount = function () {
+      NavigationService.travelCount(travelCountCallback, function (err) {
+        console.log(err);
+      });
+    };
+
+    var years = function (startYear) {
+      var currentYear = new Date().getFullYear(),
+        years = [];
+      startYear = startYear || 1980;
+      while (startYear <= currentYear) {
+        years.push(currentYear--);
+      }
+      return years;
+    }
+
+    $scope.listOfYears = years(1950);
+    reloadCount();
+
+    var callbackFollowers = function (data) {
+      $scope.followersList = data.data.followers;
+      reloadCount();
+      if ($scope.activeMenu == 'followers') {
+        $scope.searchList = $scope.followersList;
+      }
+    };
+
+    var callbackFollowings = function (data) {
+      $scope.followingList = data.data.following;
+      reloadCount();
+    };
+
+    var callbackGetCountriesVisited = function (data) {
+      $scope.countryVisitedList = data;
+      reloadCount();
+    };
+
+    var callbackBucketList = function (data) {
+      $scope.bucketList = data;
+      reloadCount();
+    };
+
+    var callbackRemoveFromBucketList = function (countryId) {
+      reloadCount();
+      getAllCountries();
+      document.getElementById(countryId).remove();
+    };
+
+    $scope.removeFromBucketList = function (id) {
+      MyLife.updateBucketListWeb(id, callbackRemoveFromBucketList);
+    }
+
+    var getFollowings = function () {
+      MyLife.getFollowingWeb(callbackFollowings);
+    }
+
+    var getFollowers = function () {
+      MyLife.getFollowersWeb(callbackFollowers);
+    }
+
+    var getCountriesVisited = function () {
+      MyLife.getCountryVisitedListExpanded(callbackGetCountriesVisited);
+      getAllCountries();
+    }
+
+    var getBucketList = function () {
+      MyLife.getOneBucketList(callbackBucketList);
+      getAllCountries();
+    }
+
+    var getDatas = function () {
+      switch ($scope.activeMenu) {
+        case "followers":
+          getFollowers();
+          break;
+        case "following":
+          getFollowings();
+          break;
+        case "countries-visited":
+          getCountriesVisited();
+          break;
+        case "bucket-list":
+          getBucketList();
+          break;
+      }
+    }
+    getDatas();
     $scope.searchFriend = {};
 
-
-
-    // following and followers end
+    $scope.changeStatus = function (status, results) {
+      $scope.activeMenu = status;
+      $scope.searchList = results;
+      $scope.searchFriend.name = "";
+      $scope.searchCard.name = "";
+      $scope.searchUser.open = false;
+      // console.log(results);
+      // $state.go('ProfileList', {
+      //   active: status
+      // });
+      getDatas();
+      $state.go("ProfileList", {
+        active: status,
+        urlSlug: $scope.activeUrlSlug
+      }, {
+        location: true,
+        notify: false,
+        reload: false
+      })
+    };
 
   })
 
@@ -8056,7 +8084,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     //travelled with ends
 
-    $scope.uploadDetailedItinerary = function (detailItinerary, status) {
+    $scope.uploadDetailedItinerary = function (status) {
       $scope.dItinerary.status = status;
       $scope.dItinerary.cost = parseInt($scope.dItinerary.cost);
       $scope.dItinerary.countryVisited = $scope.addCountry;

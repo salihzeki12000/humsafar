@@ -37,17 +37,17 @@
       <img src="img/mouse-scroll.png" alt="Travelibro" class="doneLoading">
       <p>Scroll Down</p>
     </div>
-    <div class="edit-publish-userdetail">
+    <div class="edit-publish-userdetail" ng-init="stats=itinerary.status?'Delete':'Publish'">
       <button class="btn btn-white-outline btn-more mr5" ui-sref="quickitinerary({flag:'edit',urlSlug:itinerary.urlSlug})">Edit</button>
-      <button class="btn btn-white-outline btn-more" ng-click="uploadQuickItinerary(true)" ng-if="itinerary.status== false">Publish</button>
-      <button class="btn btn-white-outline btn-more" ng-click="" ng-if="itinerary.status == true">Delete</button>
+      <button class="btn btn-white-outline btn-more" ng-click="uploadQuickItinerary(true)">{{stats}}</button>
+      <!--<button class="btn btn-white-outline btn-more" ng-click="" ng-if="itinerary.status == true">Delete</button>-->
     </div>
   </div>
   <div class="user-quick-itinerary second bg-white-95">
     <!-- trip side pic holder -->
     <div class="trip-pic-holder relate">
       <div class="trip-pic-view {{showClass}}">
-        <p class="color-pink heading-gallery-name text-capitalize"><i class="fa fa-picture-o mr5"></i>{{itinerary.name}} Photos</p>
+        <p class="color-pink heading-gallery-name text-capitalize"><i class="fa fa-picture-o mr5"></i> Photos ( {{itinerary.photos.length}} )</p>
         <div class="masonry-main side-scroll-direction">
           <div class="gallery-itiscroll">
             <div class="gallery-brick" ng-repeat="pic in itinerary.photos track by $index">
@@ -220,7 +220,7 @@
       </div>
       <!-- comment and like panel main end -->
       <!-- other itineraries main -->
-      <div class="other-itineraries-main" ng-if="itinerary.status == true">
+      <div class="other-itineraries-main" hidden ng-if="itinerary.status == true">
         <div class="blog-popular-itineraries">
           <div class="">
             <h4 class="color-blue avenir-roman text-center">You Can Also View Other Popular Itineraries</h4>
