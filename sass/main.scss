@@ -601,8 +601,12 @@ textarea {
 
 .btn-pink {
   @include button-variant( white,
-  $brand-dark-pink,
-  $brand-dark-pink);
+  $brand-pink,
+  $brand-pink);
+  &:hover{
+    border-color: $brand-dark-pink;
+    background-color: $brand-dark-pink;
+  }
 }
 
 .btn-pink-outline {
@@ -2134,9 +2138,9 @@ header {
   // border-bottom: 1px solid #b5b5b5;
   li {
     display: inline-block;
-    padding: 0 10px;
+    padding: 0 5px;
     &:first-child {
-      padding: 0 10px 0 0;
+      padding: 0 5px 0 0;
       i {
         font-size: 18px;
         vertical-align: bottom;
@@ -2320,6 +2324,9 @@ header {
   p {
     padding-bottom: 5px;
     margin: 0;
+  }
+  .journey-timestamp{
+    font-size: 10px;
   }
 }
 
@@ -3025,7 +3032,7 @@ header {
 }
 
 .review-all-life {
-  padding: 15px 10px 25px;
+  padding: 15px 10px 15px;
   // border-bottom: 1px solid $brand-lighter-grey;
   .place-name {
     font-size: 22px;
@@ -3034,21 +3041,27 @@ header {
 
 .heading-review {
   img {
-    max-width: 40px;
-    max-height: 40px;
+    max-width: 30px;
+    max-height: 30px;
   }
 }
 
 .rate-location {
   p {
     font-style: italic;
-    font-size: 17px;
+    font-size: 15px;
   }
   .travel-life-rating {
     .star-rating {
       font-size: 20px;
       margin-right: 7px;
     }
+  }
+}
+
+.review-time{
+  p{
+    font-size: 12px;
   }
 }
 
@@ -3189,7 +3202,7 @@ header {
     overflow-x: hidden;
   }
   .review-local-life {
-    padding: 20px 10px;
+    padding: 15px 10px;
     border-bottom: 1px solid $brand-grey;
     .place-name {
       font-size: 20px;
@@ -4348,7 +4361,7 @@ header {
   height: 45px;
   background-color: $brand-light-grey;
   overflow: hidden;
-  border: 2px solid $brand-light-grey;
+  border: 1px solid $brand-light-grey;
   border-radius: 16px;
   img {
     max-height: 100%;
@@ -4965,7 +4978,7 @@ header {
 
 .journey-info-strip {
   width: 100%;
-  padding: 15px 30px 10px;
+  padding: 10px 30px 7px;
   position: fixed;
   top: 60px;
   left: 0;
@@ -4987,17 +5000,20 @@ header {
   .trip-list {
     display: inline-block;
     vertical-align: middle;
+    .btn-trip{
+      font-size: 12px;
+    }
   }
   .trip-list {
     li {
       // border-right: 2px solid $brand-dark-blue;
       border-right: 2px solid #fff;
-      padding: 0 15px;
+      padding: 0 10px;
       display: inline-block;
       line-height: 100%;
       vertical-align: middle;
       &:first-child {
-        padding: 0 15px 0 0;
+        padding: 0 10px 0 0;
       }
       &:last-child {
         border-right: none;
@@ -5013,10 +5029,10 @@ header {
       display: inline-block;
       // color: $brand-dark-blue;
       color: #fff;
-      font-size: 16px;
+      font-size: 14px;
     }
     img {
-      height: 20px;
+      height: 15px;
       display: inline-block;
       vertical-align: top;
     }
@@ -5024,8 +5040,8 @@ header {
 }
 
 .edit-journey-dropdown {
-  width: 240px;
-  padding: 20px 25px;
+  width: 210px;
+  padding: 10px 15px;
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -5076,14 +5092,15 @@ header {
 .profile-info h4 {
   margin: 0 0 0 15px;
   display: inline-block;
+  font-size: 14px;
   vertical-align: middle;
 }
 
 .user-img-ongo {
-  width: 35px;
-  height: 37px;
+  width: 32px;
+  height: 34px;
   border: 2px solid #868686;
-  border-radius: 15px;
+  border-radius: 12px;
   background-color: $brand-light-grey;
   box-shadow: 0 2px 5px #ccc;
   display: inline-block;
@@ -5095,12 +5112,12 @@ header {
 .following {
   margin-top: 7px;
   display: inline-block;
-  font-size: 15px;
+  font-size: 14px;
   font-family: "AvenirLTStd-Heavy";
 }
 
 .share-trip-journey {
-  margin-right: 20px;
+  margin-right: 15px;
   display: inline-block;
   cursor: pointer;
   img,
@@ -5112,7 +5129,7 @@ header {
     margin-right: 3px;
   }
   span {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 100%;
   }
 }
@@ -5762,8 +5779,8 @@ header {
     cursor: pointer;
   }
   .edit-kind-journey {
-    width: 205px;
-    padding: 20px 25px;
+    width: 190px;
+    padding: 10px 15px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.35), inset 0 0 250px 0 rgba(0, 113, 184, 0.15);
@@ -8651,7 +8668,7 @@ header {
   }
   .panel-body {
     // position: relative;
-    padding: 15px 15px 70px;
+    padding: 15px 15px 25px;
     // overflow: hidden;
   }
   .panel-title {
@@ -8833,6 +8850,10 @@ header {
 
 // editor itinerary end
 // user itinerary
+.itinerary-content{
+  min-height: calc(100vh - 60px);
+  padding-bottom: 40px;
+}
 .user-itinerary-page {
   .user-banner-holder {
     width: 100%;
@@ -9548,6 +9569,7 @@ header {
     height: 27px;
     border-radius: 10px;
     border: 1px solid $brand-light-grey;
+    margin-right: 5px;
     box-shadow: 1px 2px 3px $brand-grey;
     display: inline-block;
     overflow: hidden;
@@ -9766,11 +9788,13 @@ header {
 }
 
 .following-detail {
+  min-height: 40px;
+  margin-bottom: 10px;
   h4 {
     margin: 15px 0 5px;
   }
   h5 {
-    margin: 5px 0 10px;
+    margin: 5px 0 0px;
     font-family: "AvenirLTStd-Medium";
   }
 }
@@ -9789,8 +9813,8 @@ header {
 }
 
 .following-user-info {
-  padding: 10px 0;
-  border-bottom: 1px solid #c2c8cf;
+  padding: 10px 0 0;
+  // border-bottom: 1px solid #c2c8cf;
   ul {
     @include display (flex);
   }
@@ -9820,7 +9844,7 @@ header {
 .follow-imgholder {
   width: 78px;
   height: 82px;
-  border: 2px solid #fff;
+  border: 2px solid #868686;
   border-radius: 30px;
   background-color: $brand-light-grey;
   box-shadow: 1px 4px 4px #888;

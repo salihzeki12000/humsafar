@@ -139,7 +139,7 @@
                           <p ng-if="life.type=='ended-journey'">Has ended the Journey</p>
                           <p ng-if="life.type=='on-the-go-journey'">Has started a Journey</p>
                           <p ng-hide="life.onJourney">{{life.heading}}</p>
-                          <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
+                          <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
                             <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p>
                         </div>
                         <!--jounrey main detail card-->
@@ -264,7 +264,7 @@
                               <div class="pull-left">
                                 <span class="color-blue mr10 avenir-heavy"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
                                 <!--<span class="color-blue avenir-heavy" ng-if="life.pointReview.length>0"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
-                                <span class="color-blue mr10 card-comment avenir-heavy pointer"><img src="img/comments.png" alt="" class="mr5" height="18"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
+                                <span class="color-blue mr10 card-comment avenir-heavy pointer"><img src="img/comments.png" alt="" class="mr5 v-mid" height="13"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
                               </div>
                               <div class="pull-right">
                                 <img src="img/travel.png" alt="">
@@ -281,7 +281,7 @@
                       <div class="travel-life-part avenir-roman">
                         <div class="travel-journey-heading">
                           <p ng-hide="life.onJourney">{{life.heading}}</p>
-                          <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
+                          <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
                             <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p>
                         </div>
                         <!--for itinerary card main-->
@@ -362,7 +362,7 @@
                                     </audio>
                                   </a>
                                 </li>
-                                <li>
+                                <li ng-click="openCommentSection(life)">
                                   <a href=""><img src="img/comments.png" alt="" height="18"></a>
                                 </li>
                                 <!--<li>
@@ -390,9 +390,9 @@
                           <div class="social-likes-reviews" ng-if="!(((life.likeCount==0)||(life.likeCount==undefined))&&(life.commentCount==0))">
                             <div class="clearfix">
                               <div class="pull-left">
-                                <span class="color-blue mr10 avenir-heavy"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
+                                <span ng-click="openLikeSection(life)" class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
                                 <!--<span class="color-blue avenir-heavy"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
-                                <span class="color-blue mr10 card-comment avenir-heavy pointer"><img src="img/comments.png" alt="" class="mr5" height="18"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
+                                <span class="color-blue mr10 card-comment avenir-heavy pointer" ng-click="openCommentSection(life)"><img src="img/comments.png" alt="" class="mr5" height="12"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
                               </div>
                               <div class="pull-right">
                                 <img src="img/travel.png" alt="">
@@ -405,6 +405,10 @@
                     <!--itinerary card end-->
                   </div>
                 </div>
+                <!-- comment and like-->
+                <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike'
+                  list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+                <!-- comment and like end-->
               </div>
             </div>
           </div>

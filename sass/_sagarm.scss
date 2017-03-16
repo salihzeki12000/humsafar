@@ -4518,7 +4518,7 @@ q {
 }
 // DESTINATION FILTERS END
 // NOTIFICATION BADGE
-.notification-badge{
+.notification-countbadge{
   position: absolute;
   top: -12px;
   right: -12px;
@@ -4526,8 +4526,8 @@ q {
   height: 20px;
   padding-top: 3px;
   border-radius: 100%;
-  background-color: #80879a;
-  color: $brand-blue;
+  background-color: $brand-pink;
+  color: #fff;
   font-size: 10px;
   text-align: center;
   vertical-align: middle;
@@ -4537,8 +4537,8 @@ q {
   // }
 }
 .user-detail a:hover{
-  .notification-badge{
-    background-color: #abafbc;
+  .notification-countbadge{
+    background-color: $brand-pink;
   }
 }
 // NOTIFICATION BADGE END
