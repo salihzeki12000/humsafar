@@ -24,7 +24,7 @@
       <div class="itinerary-trip-day">
         <p><span class="days block avenir-heavy">{{itinerary.endTime|dateDifference : itinerary.startTime}}</span> <span class="block avenir-roman">{{count|singularPlural:'Days'}} Trip</span></p>
       </div>
-      <div class="journey-travelled-with">
+      <div class="journey-travelled-with" ng-if="itinerary.buddies.length>0">
         <span class="color-white avenir-light with">With</span>
         <figure class="traveller-list pointer" ng-repeat="list in itinerary.buddies track by $index">
           <div class="journey-travelled-holder">
@@ -35,7 +35,7 @@
       </div>
       <!-- start and end date -->
       <div class="journey-start-end">
-        <p class="m-clear color-white avenir-roman"><span class="start-date">{{itinerary.startTime | date : "dd/MM/yyyy"}}</span> to <span class="end-date">{{itinerary.endTime | date : "dd/MM/yyyy"}}</span></p>
+        <p class="m-clear color-white avenir-roman"><span class="start-date">{{itinerary.startTime | date : "dd MMM, yyyy"}}</span> to <span class="end-date">{{itinerary.endTime | date : "dd MMM, yyyy"}}</span></p>
       </div>
       <!-- start and end date end -->
       <div class="journey-type-icon">
@@ -60,15 +60,15 @@
       <button class="btn btn-white-outline btn-more" ng-click="" ng-if="itinerary.status == true">Delete</button>
     </div>
   </div>
-  <div class="second bg-white-95">
+  <div class="second bg-white-95 itinerary-content">
     <!-- trip side pic holder -->
     <div class="trip-pic-holder relate">
       <div class="trip-pic-view {{showClass}}" ng-if="itinerary.photos.length > 0">
-        <p class="color-pink heading-gallery-name text-capitalize"><i class="fa fa-picture-o mr5"></i>{{itinerary.name}} Photos</p>
+        <p class="color-pink heading-gallery-name text-capitalize"><i class="fa fa-picture-o mr5"></i>Photos ({{itinerary.photos.length}})</p>
         <div class="masonry-main side-scroll-direction">
           <div class="gallery-itiscroll">
             <div class="gallery-brick" ng-repeat="pic in itinerary.photos track by $index">
-              <div class="gallery-imgholder pointer" ng-click="getPhotosCommentData(pic._id)">
+              <div class="gallery-imgholder pointer" ng-click="getPhotosCommentData(pic._id,$index,itinerary.photos.length,itinerary.photos)">
                 <img ng-src="{{pic.name|uploadpath:320:320:'cover'}}" alt="" class "img-responsive full-width">
               </div>
             </div>
@@ -352,7 +352,8 @@
       </div>
       <!-- comment and like panel main end -->
       <!-- other itineraries main -->
-      <div class="other-itineraries-main" ng-if="itinerary.status == true">
+      <!-- temporary hidden -->
+      <div class="other-itineraries-main" hidden ng-if="itinerary.status == true">
         <div class="blog-popular-itineraries">
           <div class="">
             <h4 class="color-blue avenir-roman text-center">You Can Also View Other Popular Itineraries</h4>
