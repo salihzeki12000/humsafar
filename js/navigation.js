@@ -101,7 +101,11 @@ var navigationservice = angular.module('navigationservice', [])
         name: "Terms & Conditions",
         classis: "active",
         anchor: "termscondition"
-      }, ]
+      }, {
+        name: "Privacy Policy",
+        classis: "active",
+        anchor: "privacypolicy"
+      }]
     }];
 
     var returnVal = {

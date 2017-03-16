@@ -10344,11 +10344,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.accessToken = $.jStorage.get("accessToken");
-  }).controller('TermsConditionsCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife, OnGoJourney) {
+  })
+  .controller('PrivacyPolicyCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife, OnGoJourney) {
     //Used to name the .html file
     // console.log("Testing Consoles");
-    $scope.template = TemplateService.changecontent("terms-conditions");
-    $scope.menutitle = NavigationService.makeactive("Terms & Conditions");
+    $scope.template = TemplateService.changecontent("privacy-policy");
+    $scope.menutitle = NavigationService.makeactive("Privacy Policy");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.accessToken = $.jStorage.get("accessToken");

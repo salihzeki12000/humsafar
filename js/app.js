@@ -86,6 +86,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'TermsConditionsCtrl'
     })
+    .state('privacypolicy', {
+      url: "/privacy-policy",
+      templateUrl: "views/template.html",
+      controller: 'PrivacyPolicyCtrl'
+    })
     .state('forgot-password', {
       url: "/forgot-password/:token/:email",
       templateUrl: "views/template.html",
