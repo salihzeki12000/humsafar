@@ -49,7 +49,7 @@
                       <div class="clearfix">
                         <div class="pull-left">
                           <div class="profile-picholder v-mid">
-                            <img ng-src="{{list.profilePicture|uploadpath:25:27:'cover'}}" alt="" class="img-responsive">
+                            <img ng-src="{{list.profilePicture|uploadpath:28:28:'cover'}}" alt="" class="img-responsive">
                           </div>
                           <div class="profile-detailed v-mid">
                             <h4 class="profile-name avenir-roman color-dark-blue m-clear text-capitalize">{{list.name}}</h4>
@@ -139,7 +139,7 @@
               <img ng-src="{{list.profilePicture|uploadpath:104:108:'cover'}}" class="img-responsive">
             </div>
             <div class="following-detail text-center">
-              <h4 class="color-blue avenir-heavy">{{list.name}}</h4>
+              <h4 class="color-blue avenir-heavy text-ellipsis" title="{{list.name}}">{{list.name}}</h4>
               <h5 class="color-pink avenir-medium text-ellipsis" ng-if="list.homeCity && list.homeCountry.name"><i class="fa fa-map-marker mr5 color-pink"></i> <span>{{list.homeCity}},</span>
                 <span>{{list.homeCountry.name}}</span>
               </h5>
@@ -184,7 +184,7 @@
               <img ng-src="{{list.profilePicture|uploadpath:104:108:'cover'}}" alt="{{list.nameFollow}}" class="img-responsive">
             </div>
             <div class="following-detail text-center">
-              <h4 class="color-blue avenir-heavy">{{list.name}}</h4>
+              <h4 class="color-blue avenir-heavy text-ellipsis" title="{{list.name}}">{{list.name}}</h4>
               <h5 ng-if="list.homeCity && list.homeCountry.name" class="color-pink avenir-medium text-ellipsis"><i class="fa fa-map-marker mr5 color-pink"></i> <span>{{list.homeCity}}</span>, <span>{{list.homeCountry.name}}</span></h5>
             </div>
             <div class="photos-location-sec clearfix">
@@ -227,7 +227,7 @@
           <div class="row">
             <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="country in countryVisitedList">
               <div class="country-list-holder">
-                <div class="list-imgholder" style="background-image: url('{{country.countryId.countryBagroundImage|uploadpath}}');">
+                <div class="list-imgholder" style="background-image: url('{{country.countryId.countryBackgroundImage|uploadpath}}');">
                   <!-- <img ng-src="{{country.countryId.countryCoverPhoto|uploadpath}}" alt="" class="img-responsive country-img">  -->
                   <div class="list-info">
                     <div class="clearfix">

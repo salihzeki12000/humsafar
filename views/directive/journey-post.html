@@ -175,7 +175,7 @@
                           </ul>
                         </div>-->
                         </span>
-              <span class="color-blue mr10 card-comment avenir-heavy pointer" ng-click="getCommentsData({'post':ongo});"><img src="img/comments.png" alt="" class="mr5" height="18"><b>{{ongo.commentCount|filterCount}}</b> {{ongo.commentCount|singularPlural:'Comments'}}
+              <span class="color-blue mr10 card-comment avenir-heavy pointer" ng-click="getCommentsData({'post':ongo});"><img src="img/comments.png" alt="" class="mr5" height="14"><b>{{ongo.commentCount|filterCount}}</b> {{ongo.commentCount|singularPlural:'Comments'}}
                         <div class="card-comment-dropdown" ng-show="cardCommentList">
                           <ul>
                             <li ng-repeat="listComments in uniqueArr"><a href="">{{listComments.user.name}}</a></li>

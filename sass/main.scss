@@ -2326,6 +2326,7 @@ header {
     margin: 0;
   }
   .journey-timestamp{
+    padding-bottom: 0;
     font-size: 10px;
   }
 }
@@ -3032,10 +3033,10 @@ header {
 }
 
 .review-all-life {
-  padding: 15px 10px 15px;
+  padding: 10px;
   // border-bottom: 1px solid $brand-lighter-grey;
   .place-name {
-    font-size: 22px;
+    font-size: 20px;
   }
 }
 
@@ -3202,7 +3203,7 @@ header {
     overflow-x: hidden;
   }
   .review-local-life {
-    padding: 15px 10px;
+    padding: 10px;
     border-bottom: 1px solid $brand-grey;
     .place-name {
       font-size: 20px;
@@ -4271,6 +4272,7 @@ header {
   margin: 10px 0 20px;
   border: 1px solid #ccc;
   border-radius: 6px;
+  box-shadow: 2px 3px 3px #4a4a4a;
   background-color: rgba(255, 255, 255, 0.8);
   li {
     display: inline-block;
@@ -4346,6 +4348,7 @@ header {
 .activity-post .user-detail {
   margin-top: 5px;
   width: 82%;
+  h4 { font-size: 16px; }
 }
 
 .user-more-detail {
@@ -5102,7 +5105,7 @@ header {
   border: 2px solid #868686;
   border-radius: 12px;
   background-color: $brand-light-grey;
-  box-shadow: 0 2px 5px #ccc;
+  box-shadow: 0 2px 3px #ccc;
   display: inline-block;
   vertical-align: middle;
   overflow: hidden;
@@ -5259,6 +5262,9 @@ header {
   width: 7%;
   display: inline-block;
   vertical-align: top;
+}
+.ongo-journey-icon {
+  img { height: 20px; }
 }
 
 .journey-post {
@@ -9001,7 +9007,7 @@ header {
     border-bottom: none;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    @include box-shadow(0px -2px 4px #ccc);
+    @include box-shadow(0px -2px 4px #424242);
     position: absolute;
     left: 0;
     bottom: 0;
@@ -9187,7 +9193,7 @@ header {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.85);
   z-index: 5;
   display: none;
 }
@@ -9565,8 +9571,8 @@ header {
     border-bottom: 1px solid #ebebeb;
   }
   .profile-picholder {
-    width: 25px;
-    height: 27px;
+    width: 28px;
+    height: 28px;
     border-radius: 10px;
     border: 1px solid $brand-light-grey;
     margin-right: 5px;
@@ -9813,7 +9819,7 @@ header {
 }
 
 .following-user-info {
-  padding: 10px 0 0;
+  padding: 8px 0 0;
   // border-bottom: 1px solid #c2c8cf;
   ul {
     @include display (flex);
@@ -9826,9 +9832,9 @@ header {
     &:last-child {
       margin-right: 0;
     }
-    &:first-child {
-      @include flex(1.5);
-    }
+    // &:first-child {
+    //   @include flex(1.5);
+    // }
   }
   .user-count {
     color: $brand-pink;

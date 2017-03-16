@@ -138,7 +138,7 @@
                         <div class="travel-journey-heading">
                           <p ng-if="life.type=='ended-journey'">Has ended the Journey</p>
                           <p ng-if="life.type=='on-the-go-journey'">Has started a Journey</p>
-                          <p ng-hide="life.onJourney">{{life.heading}}</p>
+                          <!-- <p ng-hide="life.onJourney">{{life.heading}}</p> -->
                           <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
                             <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p>
                         </div>
@@ -264,7 +264,7 @@
                               <div class="pull-left">
                                 <span class="color-blue mr10 avenir-heavy"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
                                 <!--<span class="color-blue avenir-heavy" ng-if="life.pointReview.length>0"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
-                                <span class="color-blue mr10 card-comment avenir-heavy pointer"><img src="img/comments.png" alt="" class="mr5 v-mid" height="13"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
+                                <span class="color-blue mr10 card-comment avenir-heavy pointer"><img src="img/comments.png" alt="" class="mr5 v-mid" height="14"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
                               </div>
                               <div class="pull-right">
                                 <img src="img/travel.png" alt="">
@@ -280,7 +280,7 @@
                     <div class="journey-masonry-brick {{life.type}}" ng-if="life.type=='quick-itinerary' || life.type=='detail-itinerary'">
                       <div class="travel-life-part avenir-roman">
                         <div class="travel-journey-heading">
-                          <p ng-hide="life.onJourney">{{life.heading}}</p>
+                          <!-- <p ng-hide="life.onJourney">{{life.heading}}</p> -->
                           <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
                             <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p>
                         </div>

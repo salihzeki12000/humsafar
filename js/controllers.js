@@ -7467,10 +7467,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         if (data.value) {
           if (flag == "fromFollowing") {
             obj.following = data.data.responseValue;
-            MyLife.getFollowingWeb(callbackFollowings);
+            MyLife.getFollowingWeb($stateParams.urlSlug,callbackFollowings);
           } else if (flag == "fromFollowers") {
             obj.following = data.data.responseValue;
-            MyLife.getFollowersWeb(callbackFollowers);
+            MyLife.getFollowersWeb($stateParams.urlSlug,callbackFollowers);
           }
         } else {
           console.log("error updating data");
@@ -7555,11 +7555,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     var getFollowings = function () {
-      MyLife.getFollowingWeb(callbackFollowings);
+      MyLife.getFollowingWeb($stateParams.urlSlug,callbackFollowings);
     }
 
     var getFollowers = function () {
-      MyLife.getFollowersWeb(callbackFollowers);
+      MyLife.getFollowersWeb($stateParams.urlSlug,callbackFollowers);
     }
 
     var getCountriesVisited = function () {
@@ -8960,6 +8960,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    $scope.closeBackDrop = function () {
+      $scope.viewCardComment = false;
+      $scope.viewCardLike = false;
+      $scope.getCard = "";
+    };
+
     //Integration starts here
     $scope.userData = $.jStorage.get("profile");
     //get quick-itinerary details starts
@@ -9443,6 +9449,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("User-DetailItinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    $scope.closeBackDrop = function () {
+      $scope.viewCardComment = false;
+      $scope.viewCardLike = false;
+      $scope.getCard = "";
+    };
 
     //Integration starts here
 
