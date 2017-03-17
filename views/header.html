@@ -95,7 +95,7 @@
                     <ul class="searchdrop-options">
                       <li class="search-option" ng-repeat="city in getAllSearched.city track by $index ">
                         <div class="search-option-img">
-                          <img src="{{city.cityCoverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
+                          <img ng-src="{{city.cityCoverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
                         </div>
                         <span class="search-optiontxt">{{city.name}}</span>
                       </li>
@@ -304,7 +304,7 @@
                     <ul class="searchdrop-options">
                       <li class="search-option" ng-repeat="city in getAllSearched.city track by $index ">
                         <div class="search-option-img">
-                          <img src="{{city.cityCoverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
+                          <img ng-src="{{city.cityCoverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
                         </div>
                         <span class="search-optiontxt">{{city.name}}</span>
                       </li>
@@ -410,7 +410,7 @@
                       <ul class="searchdrop-options">
                         <li class="search-option" ng-repeat="city in getAllSearched.city track by $index ">
                           <div class="search-option-img">
-                            <img src="{{city.cityCoverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
+                            <img ng-src="{{city.cityCoverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
                           </div>
                           <span class="search-optiontxt">{{city.name}}</span>
                         </li>
