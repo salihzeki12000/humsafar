@@ -73,12 +73,17 @@
               <div class="itinerary-quick-imgholder">
                 <img ng-src="{{itinerary.countryVisited[0].cityVisited[0].city.cityCoverPhoto|uploadpath}}" alt="" class="img-responsive get-center">
                 <div class="itinerary-heading-detail">
-                  <p class="m-clear mb5"><span class="avenir-roman color-pink">
-                    <span ng-if="itinerary.countryVisited.length==1">Country</span>
-                    <span ng-if="itinerary.countryVisited.length>1">Countries</span> Visited : </span><span class="color-white country-visited-name avenir-heavy" ng-repeat="country in itinerary.countryVisited track by $index">{{country.country.name}}<span ng-if="$index<(itinerary.countryVisited.length-1)"> | </span></span>
+                  <p class="m-clear mb5">
+                    <span class="avenir-roman color-pink">
+                    <span class="sizeof-country">
+                      <span ng-if="itinerary.countryVisited.length==1">Country</span>
+                      <span ng-if="itinerary.countryVisited.length>1">Countries</span> 
+                      Visited</span>
+                      : </span>
+                      <span class="color-white country-visited-name avenir-heavy" ng-repeat="country in itinerary.countryVisited track by $index">{{country.country.name}}<span ng-if="$index<(itinerary.countryVisited.length-1)"> | </span></span>
                   </p>
                   <p class="m-clear">
-                    <span class="avenir-roman color-pink">Cities Visited : </span>
+                    <span class="avenir-roman color-pink"><span class="sizeof-country">Cities Visited</span> : </span>
                     <span ng-repeat="countryObj in itinerary.countryVisited">
                       <span class="color-white avenir-roman" ng-repeat="city in countryObj.cityVisited track by $index">{{city.city.name}}<span ng-if="$index<(countryObj.cityVisited.length-1)"> | </span></span>
                     <span ng-if="$index<(itinerary.countryVisited.length-1)" class="color-white"> | </span>

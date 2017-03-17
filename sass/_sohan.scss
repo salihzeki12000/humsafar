@@ -727,6 +727,26 @@ a.color-white {
       bottom: -13px;
     }
   }
+
+  .col-md-3:nth-child(even){
+    .head-btv{
+      background-color: $brand-cyan;
+    }
+    .brd{
+      border: 1px solid darken($brand-dark-cyan, 20%);
+    }
+    .red-pins{
+      display: none;
+    }
+    .cyan-pins{
+      display: block;
+    }
+  }
+
+  .cyan-pins{
+    display: none;
+  }
+
   .red-box {
     .head-btv {
       background: #f88076;
@@ -735,6 +755,7 @@ a.color-white {
       border: 1px solid #da4734;
     }
   }
+
   .green-box {
     .head-btv {
       background: #3ad6d1;
@@ -1337,6 +1358,10 @@ a.color-white {
 }
 
 .booking-sec-card {
+  .agt-usr-tourpackages{
+    background-color: transparent;
+  }
+
   .title-head-left {
     color: #838383;
     @extend .avenir-heavy;

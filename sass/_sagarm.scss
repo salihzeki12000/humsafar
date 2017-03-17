@@ -3693,6 +3693,10 @@ q {
   margin-top: 20px;
 }
 
+.noti-follow-btn{
+  margin-top: 30px;
+}
+
 .btn-notification-card {
   padding: 6px 25px;
   border-radius: 5px;
@@ -4524,11 +4528,11 @@ q {
   right: -12px;
   width: 20px;
   height: 20px;
-  padding-top: 3px;
   border-radius: 100%;
   background-color: $brand-pink;
   color: #fff;
   font-size: 10px;
+  line-height: 20px;
   text-align: center;
   vertical-align: middle;
   @extend .avenir-heavy;
@@ -4542,3 +4546,8 @@ q {
   }
 }
 // NOTIFICATION BADGE END
+
+.sizeof-country{
+  width: 115px;
+  display: inline-block;
+}
