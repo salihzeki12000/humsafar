@@ -36,7 +36,7 @@
             <div class="col-sm-6"  ng-repeat="dest in destinationList track by $index">
               <div class="city-view" ng-if="dest.isCity==true">
                 <div class="img-holder relate" ng-click="countryView(dest.urlSlug,dest.isCity);">
-                  <img src="{{dest.cityDisplayPhoto|uploadpath}}" alt="travelibro" class="img-responsive full-width">
+                  <img src="{{dest.cityDisplayPhoto|uploadpath:600:400:'cover'}}" alt="travelibro" class="img-responsive full-width">
                   <div class="title-head-left color-white">
                     {{dest.name}}
                   </div>

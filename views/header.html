@@ -156,7 +156,7 @@
               <li>
                 <a class="relate" ui-sref="notification">
                   <i class="fa fa-bell"></i>
-                  <span class="notification-countbadge">{{userData.notification_count}}</span>
+                  <span class="notification-countbadge" ng-if="userData.notification_count>0">{{userData.notification_count}}</span>
                 </a>
               </li>
               <li>
@@ -192,7 +192,7 @@
                 <li>
                   <a class="relate" ui-sref="notification">
                     <i class="fa fa-bell"></i>
-                    <span class="notification-countbadge">{{userData.notification_count}}</span>
+                    <span class="notification-countbadge" ng-if="userData.notification_count>0">{{userData.notification_count}}</span>
                   </a>
                 </li>
                 <li>

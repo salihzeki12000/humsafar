@@ -7,7 +7,7 @@
           <div class="img-holder card relate">
             <!-- <div class="flip-holder" ng-class="($index==index)?'flipped':''" style="background:url('{{mustdo.mainPhoto}}')"> -->
             <div class="flip-holder" ng-class="($index==index)?'flipped':''">
-              <img ng-src="{{mustdo.mainPhoto}}" alt="travel-libro" class="full-width">
+              <img ng-src="{{mustdo.mainPhoto:600:400:'cover'}}" alt="travel-libro" class="full-width">
               <div class="front">
                 <div class="pop-hover-css" ng-click="openCountry($index);">
                   <div class="title-head-left color-white">
