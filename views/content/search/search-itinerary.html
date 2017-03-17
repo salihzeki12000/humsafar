@@ -1,7 +1,7 @@
 <div class="search-itinerary" infinite-scroll="loadMoreSearch('search-itinerary');" infinite-scroll-disabled='searchScroll.busy'>
   <div class="row" masonry preserve-order>
     <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="itinerary in viewSearchedItinerary track by $index">
-      <div class="agt-itinerarycard search-itinerary-card ">
+      <div class="agt-itinerarycard search-itinerary-card bg-white">
         <div class="itinerary-cardhead avenir-roman clearfix">
           <div class="search-itineraryhead-imgholder">
             <img src="{{itinerary.user.profilePicture|uploadpath}}" class="img-responsive get-center">

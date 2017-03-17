@@ -135,7 +135,8 @@
                   <span>(345)</span>
                 </div>
                 <div class="category pb10 ">
-                  <span>Cuisine: </span> Indian, Chinese, Mexican +4</span>
+                  <span>Cuisine: </span>
+                  <p ng-repeat="cuisine in rest.cuisine track by $index"> {{cuisine}},</p>
                 </div>
                 <div class="tag-made category ">
                   <span>Vegan</span>
