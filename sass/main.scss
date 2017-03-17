@@ -761,10 +761,10 @@ header {
 
 .search-dropheader {
   padding: 10px 0;
+  background-color: transparent;
   border-top: 1px solid #fff;
   border-bottom: 1px solid #fff;
-  margin: 0px 10px;
-  background-color: transparent;
+  margin: 0 10px;
   span {
     font-size: 14px;
     @extend .color-cyan;
@@ -777,13 +777,13 @@ header {
   }
 }
 
-.search-dropheader-travel{
-  border-top: 0px;
+.search-dropheader-travel {
+  border-top: none;
 }
 
 .search-option {
   padding: 10px 0;
-  margin: 0px 10px;
+  margin: 0 10px;
   border-bottom: 1px solid #fff;
   color: #fff;
   @extend .avenir-heavy;
@@ -4439,6 +4439,17 @@ header {
   // .country-visited {
   //   left: 20px;
   // }
+  span {
+    margin-left: -18px;
+    display: inline-block;
+    font-size: 19px;
+    color: #fcfcfc;
+    text-shadow: 1px 1px 1px #000;
+    vertical-align: middle;
+    z-index: 4;
+    position: relative;
+    @extend .avenir-heavy;
+  }
 }
 
 .video-sec .post-img.card-imgholder {
@@ -9887,7 +9898,7 @@ header {
   border: 2px solid #868686;
   border-radius: 30px;
   background-color: $brand-light-grey;
-  // box-shadow: 1px 4px 4px #888;
+  box-shadow: 1px 4px 4px #888;
   margin: -40px auto 0;
   overflow: hidden;
   img {
@@ -10772,6 +10783,14 @@ ng-map {
   }
 }
 
+// single post local and travel
+.single-local-post {
+  .post-main {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+// single post local and travel end
 // destination homestay end
 @import "_sagarmobile.scss";
 @import "fancybox-override";

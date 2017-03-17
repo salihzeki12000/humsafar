@@ -721,7 +721,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       var modal = "";
       // edit otg checkin
       $scope.editCheckIn = function () {
-        $scope.oldBuddies=_.cloneDeep($scope.ongo.buddies);
+        $scope.oldBuddies = _.cloneDeep($scope.ongo.buddies);
         console.log();
         $scope.alreadyTagFrnd = true;
         modal = $uibModal.open({
@@ -791,7 +791,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
 
       // edit save data
       $scope.saveEditOtg = function () {
-        console.log($scope.oldBuddies,'old buddies');
+        console.log($scope.oldBuddies, 'old buddies');
         // get photos id
         $scope.photosId = _.map($scope.ongo.photos, "_id");
         // get photos id end
@@ -1093,7 +1093,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       $scope.allPhotos.newArray = [];
       //Photo comment popup
       $scope.getPhotosCommentData = function (photoId, index, length, array) {
-          $scope.userProfilePic  = $.jStorage.get("profile").profilePicture;
+        $scope.userProfilePic = $.jStorage.get("profile").profilePicture;
         console.log(index);
         console.log(length);
         console.log(array);

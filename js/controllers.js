@@ -2284,6 +2284,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.scroll = {};
     $scope.scroll.busy = false;
     $scope.scroll.stopCallingApi = false;
+    $scope.itinerary = {};
+    $scope.itinerary.citySearch = "";
+    $scope.itinerary.type = "";
+    $scope.itinerary.by = "";
+    $scope.cityList = [];
+    $scope.destinationItineraryType = [];
+    $scope.destinationItineraryBy = [];
+    $scope.destinationCityFilter = [];
     $scope.getCountryInfo = function (type, urlSlug) {
       $scope.scroll.busy = false;
       NavigationService.getCountryDestination({
@@ -2331,14 +2339,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     // FILTER ITINERARY DESTINATION
-    $scope.itinerary = {};
-    $scope.itinerary.citySearch = "";
-    $scope.itinerary.type = "";
-    $scope.itinerary.by = "";
-    $scope.cityList = [];
-    $scope.destinationItineraryType = [];
-    $scope.destinationItineraryBy = [];
-    $scope.destinationCityFilter = [];
     $scope.getItinerayCity = function (searchText) {
       console.log('hihsjk');
       NavigationService.getCitySearch({
@@ -2660,6 +2660,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.cityItineraryBy = [];
     $scope.cityRestaurantCuisine = [];
     $scope.pagenumber = 1;
+    $scope.cityDestIti = [];
+    $scope.scroll = {
+      "busy": false,
+      "stopCallingApi": false
+    }
 
     $scope.star = function (starCount, type) {
       if (type == "marked") {
@@ -2674,7 +2679,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.urlDestinationCity = $state.params.url;
     $scope.getCityInfo = function (type, urlSlug) {
-      // cfpLoadingBar.start();
+      $scope.scroll.busy = false;
       NavigationService.getCityDestination({
         type: type,
         urlSlug: $scope.urlDestinationCity,
@@ -2685,15 +2690,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         itineraryBy: $scope.cityItineraryBy,
         pagenumber: $scope.pagenumber
       }, function (data) {
-        $scope.cityDestData = data.data;
-        console.log('bc log hoja', $scope.cityDestData);
-        // if(type=='hotel'){
-        //   $scope.cityDestData = data.data
-        // }else {
-        //   $scope.cityDestData = data.data;
-        //   console.log($scope.cityDestData, "destination city ka data");
-        //   cfpLoadingBar.complete();
-        // }
+        if (type === 'itinerary') {
+          _.each(data.data.itinerary, function (newData) {
+            if (data.data.itinerary.length == 0) {
+              $scope.scroll.stopCallingApi = true;
+            } else {
+              $scope.cityDestIti.push(newData);
+              console.log($scope.cityDestIti, 'city ka itinerary');
+            }
+          })
+        } else {
+          _.each(data.data.bestTime, function (newVal) {
+            newVal.month = moment(newVal.month, "M").format('MMMM');
+          });
+          $scope.cityDestData = data.data;
+          // console.log('bc log hoja', $scope.cityDestData);
+        }
       })
     };
 
@@ -13342,7 +13354,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('NotificationCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('NotificationCtrl', function ($scope, TemplateService, NavigationService, $timeout, LikesAndComments, $state) {
     $scope.template = TemplateService.changecontent("notification"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Notification"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
@@ -13497,7 +13509,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
 
-
+    //update notification status
+    var updateNotificationStatus = function (not_id, callback) {
+      NavigationService.updateNotificationStatus(not_id, callback);
+    };
+    //update notifiction status end
     // PAGINATION FOR INFINITE SCROLL
     $scope.getNotification = function (pageNo) {
       $scope.notifyScroll.busy = false;
@@ -13538,7 +13554,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, function (data) {
         // console.log(data,'accept ka jawab');
         $state.go('ongojourney', {
-          id: urlSlug
+          "id": urlSlug,
+          "urlSlug": notifyOb.data.urlSlug
         });
       });
     };
@@ -13579,6 +13596,122 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     // DECLINE END JOURNEY FUNCTION END
+
+    // FOLLOW UNFOLLOW USER
+    $scope.followFollowing = function (user) {
+      console.log("from activity");
+      LikesAndComments.followUnFollow(user, function (data) {
+        if (data.value) {
+          user.following = data.data.responseValue;
+        } else {
+          console.log("error updating data");
+        }
+      });
+    }
+    // FOLLOW UNFOLLOW USER ENDS
+
+    $scope.redirectToPost = function (obj) {
+      updateNotificationStatus(obj._id, function (data) {
+        if (data.value) {
+          $state.go('single-notification', {
+            "postId": obj.data._id
+          });
+        }
+      });
+    }
+
+  })
+
+  .controller('singleNotification', function ($scope, TemplateService, NavigationService, $timeout, $state, $stateParams, LikesAndComments) {
+    $scope.template = TemplateService.changecontent("single-post"); //Use same name of .html file
+    // $scope.menutitle = NavigationService.makeactive("single-notification"); //This is the Title of the Website
+    // TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    console.log($stateParams.postId);
+
+    $scope.localView = {};
+    $scope.localView.view = true;
+    $scope.userData = $.jStorage.get("profile");
+    LikesAndComments.getOnePost($stateParams.postId, function (data) {
+      if (data.value) {
+        console.log(data);
+        $scope.post = data.data;
+      }
+    });
+
+    $scope.comment = {
+      "text": ""
+    }
+
+    $scope.openCommentSection = function (ongo) {
+      $scope.listOfLikes = false;
+      console.log(ongo, 'ongo');
+      $scope.post = ongo; //for using it in comment section
+      $scope.previousId;
+      var callback = function (data) {
+        console.log(data);
+        $scope.uniqueArr = [];
+        $scope.listOfComments = data.data;
+        $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+      }
+      if ($scope.previousId != $scope.post._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfComments = [];
+        $scope.viewCardComment = true;
+        $scope.getCard = "view-whole-card";
+        LikesAndComments.getComments("post", $scope.post._id, callback);
+      } else {
+        if ($scope.viewCardComment) {
+          $scope.viewCardComment = false;
+          // $scope.journey.journeyHighLight = "";
+          $scope.getCard = "";
+          $scope.comment.text = "";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardComment = true;
+          // $scope.focus('enterComment');
+          $scope.getCard = "view-whole-card";
+          LikesAndComments.getComments("post", $scope.post._id, callback);
+        }
+      }
+      $scope.previousId = $scope.post._id;
+    };
+
+    $scope.openLikeSection = function (ongo) {
+      $scope.listOfComments = false;
+      console.log(ongo);
+      $scope.viewCardComment = false;
+      var callback = function (data) {
+        $scope.listOfLikes = data.data;
+        console.log($scope.listOfLikes);
+      };
+      console.log($scope.post);
+      if ($scope.previousLikeId != ongo._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfLikes = [];
+        $scope.viewCardLike = true;
+        // $scope.journey.journeyHighLight = ongo._id;
+        $scope.showLikeShow = "show-like-side-sec";
+        LikesAndComments.getLikes(ongo.type, ongo._id, callback);
+      } else {
+        if ($scope.viewCardLike) {
+          $scope.viewCardLike = false;
+          // $scope.journey.journeyHighLight = "";
+          $scope.getCard = "";
+          $scope.showLikeShow = "";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardLike = true;
+          // $scope.focus('enterComment');
+          // $scope.journey.journeyHighLight = ongo._id;
+          $scope.showLikeShow = "show-like-side-sec";
+          LikesAndComments.getLikes(ongo.type, ongo._id, callback);
+        }
+      }
+      $scope.previousLikeId = ongo._id;
+    };
+
+
   })
 
   .controller('SearchresultCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state, LikesAndComments) {

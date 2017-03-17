@@ -297,6 +297,11 @@ var navigationservice = angular.module('navigationservice', [])
           console.log(data);
         });
       },
+      updateNotificationStatus: function (id, callback) {
+        TravelibroService.post(adminURL + "/notification/updateNotification", {
+          "_id": id
+        }).success(callback);
+      },
       popularJourney: function (formData, callback) {
         TravelibroService.post(adminURL + "/journey/getPopularJourneyWeb", formData).success(function (data) {
           callback(data);

@@ -391,6 +391,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'LoginFlowCtrl'
     })
+    .state('single-notification', {
+      url: "/single-notification/:postId",
+      templateUrl: "views/template.html",
+      controller: 'singleNotification'
+    })
     // .state('ProfileList', {
     //   url: "/users/:urlSlug/:active",
     //   templateUrl: "views/template.html",

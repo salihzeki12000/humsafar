@@ -15,10 +15,12 @@
 
             <!-- PROFILE PIC AND TIMESTAMP  user from detail-->
             <div class="notification-profile">
-              <img ng-src="{{notify.userFrom.profilePicture|uploadpath:50:50:'cover'}}" alt="{{notify.userFrom.name}}" class="img-responsive" ng-if="notify.type!='userBadge'">
-              <img ng-src="{{notify.userTo.profilePicture|uploadpath:50:50:'cover'}}" alt="{{notify.userTo.name}}" class="img-responsive" ng-if="notify.type=='userBadge'">
+              <img ng-src="{{notify.userFrom.profilePicture|uploadpath:50:50:'cover'}}" alt="{{notify.userFrom.name}}" class="img-responsive"
+                ng-if="notify.type!='userBadge'">
+              <img ng-src="{{notify.userTo.profilePicture|uploadpath:50:50:'cover'}}" alt="{{notify.userTo.name}}" class="img-responsive"
+                ng-if="notify.type=='userBadge'">
             </div>
-            <p class="notification-timestamp"><i class="fa fa-calendar"></i><span class="ml5 ">{{notify.createdAt | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o "></i> {{notify.createdAt | date: 'hh.mm a'}}<span></span></p>
+            <p class="notification-timestamp"><i class="fa fa-calendar"></i><span class="ml5 ">{{notify.createdAt | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o "></i>              {{notify.createdAt | date: 'hh.mm a'}}<span></span></p>
             <!-- PROFILE PIC AND TIMESTAMP END user from detail-->
 
             <!-- NOTIFICATION DETAIL -->
@@ -32,7 +34,8 @@
             <div class="notification-action">
               <!-- TAG ON GO -->
               <div class="notification-tagongo-action" ng-if="notify.type=='journeyRequest' && notify.status=='unread'">
-                <p class="">Accept <span class="avenir-heavy color-blue">{{notify.userFrom.name}}</span>'s request to create your travel memories together.</p>
+                <p class="">Accept <span class="avenir-heavy color-blue">{{notify.userFrom.name}}</span>'s request to create your travel
+                  memories together.</p>
                 <!-- ACCEPT DECLINE BUTTONS -->
                 <div class="notification-btn text-center">
                   <button type="button" name="button" class="btn btn-notification-card" ng-click="acceptJourney(notify)">Accept</button>
@@ -46,7 +49,7 @@
               <div class="notification-endongo-action" ng-if="notify.type == 'journeyLeft' && notify.status=='unread'">
                 <p class="">Would you like to end your journey as well?</p>
                 <!-- END DECLINE BUTTONS -->
-                <div class="notification-btn text-center" >
+                <div class="notification-btn text-center">
                   <button type="button" name="button" class="btn btn-notification-card" ng-click="endJourney(notify)">End</button>
                   <button type="button" name="button" class="btn btn-notification-card" ng-click="cancelJourney(notify)">Decline</button>
                 </div>
@@ -98,7 +101,7 @@
 
                 <!-- FOLLOW BUTTON -->
                 <div class="notification-btn noti-follow-btn">
-                  <button type="button" name="button" class="btn btn-notificationpink-card">Follow</button>
+                  <button type="button" name="button" class="btn btn-notificationpink-card" ng-click="followFollowing(notify)">{{notify.following|followFollowingStatus}}</button>
                 </div>
                 <!-- FOLLOW BUTTON END -->
               </div>
@@ -125,7 +128,8 @@
               <!-- photoLike, photoComment, photoMentionComment END -->
 
               <!-- postLike || postTag || postComment || postMentionComment -->
-              <div class="notify-post-type" ng-if="notify.type=='postLike' || notify.type=='postTag' || notify.type=='postComment' || notify.type=='postMentionComment' || notify.type=='postFirstTime'">
+              <div class="notify-post-type" ng-if="notify.type=='postLike' || notify.type=='postTag' || notify.type=='postComment' || notify.type=='postMentionComment' || notify.type=='postFirstTime'"
+                ng-click="redirectToPost(notify);">
                 <!-- if video present -->
                 <div class="video-notify notification-addvideo-ongo-photo" ng-if="notify.data.videos.length>0">
                   <img ng-src="{{notify.data.videos[0]|uploadpath:250:125:'cover'}}" alt="" class="img-responsive">

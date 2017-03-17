@@ -320,6 +320,15 @@ var commontask = angular.module('commontask', [])
           console.log(data);
         });
       },
+      getOnePost: function (id, callback) {
+        TravelibroService.http({
+          url: adminURL + "/post/getoneweb",
+          data: {
+            "_id": id
+          },
+          method: "POST"
+        }).success(callback);
+      }
     };
     return returnVal;
   })
