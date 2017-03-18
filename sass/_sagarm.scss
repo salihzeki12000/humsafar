@@ -3658,7 +3658,7 @@ q {
   overflow: hidden;
 }
 
-.notify-pictint{
+.notify-pictint {
   @include position(absolute, 0);
   background-color: rgba(0,0,0,0.3);
 }
@@ -3693,7 +3693,7 @@ q {
   margin-top: 20px;
 }
 
-.noti-follow-btn{
+.noti-follow-btn {
   margin-top: 30px;
 }
 
@@ -3735,7 +3735,8 @@ q {
   width: 48%;
   height: 120px;
   overflow: hidden;
-  img{
+
+  img {
     height: 100%;
   }
 
@@ -3859,16 +3860,16 @@ q {
     color: #fff;
   }
 }
-.notification-social-btn{
+
+.notification-social-btn {
   .fb-icon:hover,
-  .twi-icon:hover,
   .google-icon:hover,
-  .pin-icon:hover,
   .instagram-icon:hover,
-  .linkedin-icon:hover {
+  .linkedin-icon:hover,
+  .pin-icon:hover,
+  .twi-icon:hover {
     color: #fff;
   }
-
 }
 //NOTIFICATION PAGE END
 //DETAILED ITINERARY SHOW LISTED POPUP
@@ -4169,8 +4170,9 @@ q {
     background-color: $brand-pink;
   }
 
-  ul{
+  ul {
     width: 600px;
+
     .active {
       &:after {
         content: '';
@@ -4206,15 +4208,17 @@ q {
 // SEARCH TRAVELLER END
 // SEARCH COUNTRY
 
-.search-country-tab .country-list-holder{
+.search-country-tab .country-list-holder {
   border-radius: 4px;
-  &:hover{
+
+  &:hover {
     box-shadow: 6px 7px 4px #a0a0a0;
   }
 }
 
 .search-country {
   padding: 30px 0;
+
   .search-countrydetails {
     width: 100%;
     padding: 10px 10px 5px;
@@ -4230,11 +4234,11 @@ q {
 }
 
 .search-country-title {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 10px;
-    width: 85%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  width: 85%;
 }
 // SEARCH COUNTRY END
 // SEARCH CITY
@@ -4267,22 +4271,24 @@ q {
   }
 }
 
-.search-city-tab .country-list-holder{
+.search-city-tab .country-list-holder {
   border-radius: 4px;
 }
+
 .search-city-title {
   padding: 5px 0;
 }
 // SEARCH CITY END
-
 // SEARCH ITINERARY
 .search-itinerary {
   padding: 0;
 }
-.search-itinerary-card{
+
+.search-itinerary-card {
   margin: 30px 0 0;
   background-color: #fff;
-  .country-holder{
+
+  .country-holder {
     width: 30px;
     height: 30px;
     overflow: hidden;
@@ -4294,7 +4300,7 @@ q {
   }
 }
 
-.search-itineraryhead-imgholder{
+.search-itineraryhead-imgholder {
   width: 60px;
   height: 60px;
   border: 1px solid #000;
@@ -4306,66 +4312,77 @@ q {
   overflow: hidden;
   position: relative;
 }
-.search-itineraryhead-detail{
+
+.search-itineraryhead-detail {
   display: inline-block;
-  h4{
+
+  h4 {
     margin: 0;
   }
-  p{
+
+  p {
     font-size: 12px;
   }
 }
-.searchitinerary-follow{
+
+.searchitinerary-follow {
   font-size: 10px;
   @extend .pull-right;
   @extend .color-blue;
   @extend .avenir-roman;
 }
 // SEARCH ITINERARY END
-
 // SEARCH HASHTAG
-.search-hasshtag{
+.search-hasshtag {
   padding: 30px 0;
 }
-.search-hashtag-post{
+
+.search-hashtag-post {
   margin: 10px 0 20px;
-  .user-detail{
+
+  .user-detail {
     margin-top: 5px;
   }
-  .post-post-main{
+
+  .post-post-main {
     border-radius: 5px;
-    box-shadow: 0px 0px 6px #888;
+    box-shadow: 0 0 6px #888;
   }
-  .user-social-item{
+
+  .user-social-item {
     border-top: 1px solid #b5b5b5;
   }
-  .tag-ongo-journey{
+
+  .tag-ongo-journey {
     @include transform(translateY(-50%));
   }
-  .tag-local-hashtag-journey{
+
+  .tag-local-hashtag-journey {
     background-color: $brand-cyan;
   }
-  .post-rating{
+
+  .post-rating {
     margin-top: 10px;
   }
-  .post-icon{
+
+  .post-icon {
     top: 0;
     right: -5px;
   }
 }
-.search-traveller{
-  .photos-location-sec .following-btn{
+
+.search-traveller {
+  .photos-location-sec .following-btn {
     padding: 5px 10px;
     font-size: 12px;
   }
-  .photo-loc{
+
+  .photo-loc {
     font-size: 12px;
   }
 }
 // SEARCH HASHTAG END
 // SEARCH RESULT PAGE END
-
-
 // DELETE POST POPUP
 .delete-post {
   padding: 20px 0 0;
@@ -4384,9 +4401,8 @@ q {
   }
 }
 // DELETE POST POPUP END
-
 //404 ERROR PAGE
-.error-page{
+.error-page {
   width: 100%;
   height: calc( 100vh - 60px);
   position: relative;
@@ -4394,90 +4410,103 @@ q {
   background-size: cover;
 }
 
-.error-msg{
+.error-msg {
   position: absolute;
   top: 50%;
   left: 60%;
   @include transform(translate(-50%,-50%));
   color: #fff;
-  .error-head{
+
+  .error-head {
     margin: 0;
     font-size: 90px;
     line-height: 1;
   }
-  h4{
+
+  h4 {
     margin: 0;
     line-height: 1;
   }
-  .error-btn{
+
+  .error-btn {
     margin: 20px 0;
   }
 }
 //404 ERROR PAGE END
-
 // COMING SOON PAGE
-.coming-soon-page{
+.coming-soon-page {
   width: 100%;
   height: calc( 100vh - 60px);
   position: relative;
   background: url('../img/coming-soon.jpg') 50% 50% no-repeat;
   background-size: cover;
 }
-.comingsoon-content{
+
+.comingsoon-content {
   color: #fff;
   text-align: center;
   width: 60%;
   @extend .get-center;
 
-  h1{
+  h1 {
     font-size: 48px;
   }
 }
-.coming-email{
+
+.coming-email {
   border: 1px solid #fff;
-  border-radius:4px 0 0 4px;
+  border-radius: 4px 0 0 4px;
   background-color: transparent;
 }
 
-.email-form{
+.email-form {
   // border: 1px solid #fff;
   border-radius: 5px;
-  input{
+
+  input {
     color: #fff;
   }
-  .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group{
+
+  .input-group-btn:last-child > .btn,
+  .input-group-btn:last-child > .btn-group {
     margin-left: 0;
   }
 }
 
-.btn-coming{
+.btn-coming {
   background-color: #fff;
-  border-radius: 0px 4px 4px 0;
+  border-radius: 0 4px 4px 0;
 }
-.btn-comingsoon{
+
+.btn-comingsoon {
   background-color: transparent;
   color: $brand-grey;
-  i{
-      color: $brand-grey;
+
+  i {
+    color: $brand-grey;
   }
-  &:active, &:focus, &:hover{
+
+  &:active,
+  &:focus,
+  &:hover {
     background-color: transparent;
     color: $brand-grey;
   }
 }
 // COMING SOON PAGE END
-
 // LOGIN FLOW PAGE
-.loginflow-page{
+.loginflow-page {
   height: 100vh;
   padding-top: 60px;
   margin-top: -60px;
   background: url('../img/libro-home/forgot-password.jpg') no-repeat;
   background-size: cover;
   color: #fff;
-  .loginflow-content{
+
+  .loginflow-content {
     margin: 20px 0;
-    .img-holder{
+
+    .img-holder {
       width: 100px;
       height: 100px;
       border: 2px solid #868686;
@@ -4487,15 +4516,16 @@ q {
       overflow: hidden;
     }
   }
-  .social-login-button{
+
+  .social-login-button {
     margin: 20px 0;
   }
 }
 // LOGIN FLOW PAGE END
-
 // DESTINATION FILTERS
-.destination-filterscroll{
+.destination-filterscroll {
   position: relative;
+
   ::-webkit-scrollbar {
     width: 4px;
   }
@@ -4508,7 +4538,8 @@ q {
     background-color: $brand-light-grey;
   }
 }
-.destination-filterdrop{
+
+.destination-filterdrop {
   width: 100%;
   max-height: 190px;
   border-radius: 0 0 5px 5px;
@@ -4516,13 +4547,15 @@ q {
   left: 0;
   background-color: #fff;
   overflow-y: auto;
-  .custom-checkbox{
+
+  .custom-checkbox {
     padding: 5px 10px;
   }
 }
 // DESTINATION FILTERS END
 // NOTIFICATION BADGE
-.notification-countbadge{
+
+.notification-countbadge {
   position: absolute;
   top: -12px;
   right: -12px;
@@ -4540,14 +4573,39 @@ q {
   //   background-color: #abafbc;
   // }
 }
-.user-detail a:hover{
-  .notification-countbadge{
+
+.user-detail a:hover {
+  .notification-countbadge {
     background-color: $brand-pink;
   }
 }
 // NOTIFICATION BADGE END
 
-.sizeof-country{
+.sizeof-country {
   width: 115px;
   display: inline-block;
+}
+
+.blog-post .quick-itinerary-tag {
+  position: absolute;
+  right: 10px;
+  bottom: -16px;
+  background: $brand-pink;
+  padding: 7px 15px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+  h4{
+    margin: 0;
+    padding: 0;
+  }
+  p{
+    margin: 0;
+  }
+}
+
+.blog-post .date-quick-itinerary{
+  position: absolute;
+  right: 110px;
+  bottom: -10px;
 }
