@@ -330,7 +330,7 @@ a.color-white {
   }
   .img-holder {
     @include transition(all ease 300ms);
-    &:hover img {
+    &:hover .city-img {
       @include transform (scale(1.1));
     }
   }
@@ -342,7 +342,7 @@ a.color-white {
     }
   }
   .img-holder {
-    min-height: 400px;
+    // min-height: 400px;
     max-height: 400px;
     margin-bottom: 20px;
     border-radius: 5px;
@@ -404,19 +404,13 @@ a.color-white {
       text-decoration: underline;
     }
     .title-head-left {
-      font-size: 24px;
+      padding: 8px 60px 8px 15px;
+      margin: 0;
       position: absolute;
       top: 0;
       left: 0;
-      padding: 8px 60px 8px 15px;
-      @include background(linear-gradient(rgba(0,
-      0,
-      0,
-      0.50),
-      rgba(0,
-      0,
-      0,
-      0)));
+      font-size: 24px;
+      @include background(linear-gradient(rgba(0,0,0,0.50),rgba(0,0,0,0)));
       width: 100%;
       @extend .avenir-heavy;
       border-radius: 5px;
@@ -442,7 +436,7 @@ a.color-white {
     }
     .right-bottom {
       position: absolute;
-      bottom: 0;
+      bottom: 8px;
       right: 0;
       padding: 8px 15px;
       @include background(linear-gradient(rgba(0,
@@ -477,7 +471,7 @@ a.color-white {
       z-index: 5;
       ul {
         li {
-          font-size: 16px;
+          font-size: 15px;
         }
       }
     }
@@ -809,9 +803,8 @@ a.color-white {
 .hotels {
   .hotel-card {
     background: rgba(255, 255, 255, 0.8);
-    padding: 20px 15px;
+    padding: 15px;
     border-radius: 6px;
-    min-height: 250px;
     .review-box {
       textarea {
         background: transparent;
@@ -847,21 +840,22 @@ a.color-white {
         border-bottom: 1px solid #fff;
       }
     }
-    .pb10 {
-      padding-bottom: 10px;
+    .rating-localpost {
+      padding: 5px 0;
     }
     .brdbtm {
       border-bottom: 1px solid #fff;
     }
     .category {
+      padding: 0 0 5px;
       color: #868686;
       @extend .avenir-roman;
     }
     .title-head-inside {
-      color: #1a2345;
-      height: 40px;
+      color: $brand-dark-blue;
       h4 {
-        margin: 0 0 10px;
+        margin: 0;
+        font-size: 16px;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -886,6 +880,7 @@ a.color-white {
       display: inline-block;
     }
     .review {
+      padding: 10px 0;
       @extend .avenir-roman;
       p {
         margin: 0;
@@ -1683,7 +1678,7 @@ a.color-white {
   }
 .our-story {
 .title-head {
-h4{
+h4 {
       padding: 15px 0;
       font-size: 18px;
       @extend .avenir-heavy;
@@ -1715,15 +1710,12 @@ ul{
     width: 100%;
     background-color: rgba(255,255,255,0.9);
     box-shadow: 0px 7px 10px 0 rgba(0,0,0,0.7);
-
     ::-webkit-scrollbar {
       width: 5px;
     }
-
     ::-webkit-scrollbar-track {
       background-color: transparent;
     }
-
     ::-webkit-scrollbar-thumb {
       background-color: $brand-lighter-grey;
     }

@@ -75,7 +75,6 @@
             <div class="plr30 ">
               <div class="close-all ">
                 <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
-                <!-- <span class="tags avenir-roman">{{hotelsBudget}} <span>X</span></span> -->
                 <a class="btn btn-pink avenir-roman " ng-click="getCityInfo('hotel',urlDestinationCity)">Submit</a>
               </div>
             </div>
@@ -93,7 +92,7 @@
                   <span class="pull-right fnt-20 color-grey-dollar avenir-roman">{{hotels.budget}}</span>
                   <h4 class="avenir-heavy fnt-22">{{hotels.name}}</h4>
                 </div>
-                <div class="rating-localpost inline-block pb10 pt10">
+                <div class="rating-localpost inline-block">
                   <!-- <span class="color-blue font-bold mr5">Rating:</span> -->
                   <i class="fa fa-star color-pink"></i>
                   <i class="fa fa-star color-pink"></i>
@@ -101,17 +100,12 @@
                   <i class="fa fa-star-o color-pink"></i>
                   <i class="fa fa-star-o color-pink"></i>
                 </div>
-                <div class="category pb10">
+                <div class="category">
                   <span>Category :</span>
                   <span ng-repeat="category in hotels.type track by $index">{{category}}</span>
                 </div>
               </div>
-              <div class="review pointer pb20 pt20 brdbtm">
-                <!-- <div class="pull-right">
-                  <p><i class="fa fa-circle" aria-hidden="true"></i></p>
-                  <p><i class="fa fa-circle" aria-hidden="true"></i></p>
-                  <p><i class="fa fa-circle" aria-hidden="true"></i></p>
-                </div> -->
+              <div class="review pointer brdbtm">
                 <span class="icon-read pointer">Read Reviews :</span> <span class="font-bold">5</span>
               </div>
               <div class="review pt10">

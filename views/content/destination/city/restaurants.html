@@ -121,11 +121,11 @@
           <div class="col-md-4 col-sm-6 col-xs-12 mb20 " ng-repeat="rest in cityDestData.restaurant track by $index">
             <div class="hotel-card ">
               <div class="brdbtm pb10 ">
-                <div class="title-head-inside ">
-                  <span class="pull-right color-grey-dollar fnt-20 avenir-roman ">{{rest.budget}}</span>
-                  <h4 class="avenir-heavy inline-block fnt-22 ">{{rest.name}}</h4>
+                <div class="title-head-inside clearfix">
+                  <h3 class="pull-right color-grey-dollar m-clear avenir-roman ">{{rest.budget}}</h3>
+                  <h4 class="avenir-heavy inline-block">{{rest.name}}</h4>
                 </div>
-                <div class="rating-localpost inline-block pb10 pr20 pt10">
+                <div class="rating-localpost inline-block">
                   <!-- <span class="color-blue font-bold mr5 ">Rating:</span> -->
                   <i class="fa fa-star color-pink "></i>
                   <i class="fa fa-star color-pink "></i>
@@ -134,9 +134,9 @@
                   <i class="fa fa-star-o color-pink "></i>
                   <span>(345)</span>
                 </div>
-                <div class="category pb10 ">
+                <div class="category ">
                   <span>Cuisine: </span>
-                  <p ng-repeat="cuisine in rest.cuisine track by $index"> {{cuisine}},</p>
+                  <span ng-repeat="cuisine in rest.cuisine track by $index"> {{cuisine}}</span>
                 </div>
                 <div class="tag-made category ">
                   <span>Vegan</span>
@@ -144,19 +144,20 @@
                   <span>Non Vegetarian</span>
                 </div>
               </div>
-              <div class="review pointer pb20 pt20 brdbtm ">
+              <div class="review pointer brdbtm clearfix">
                 <div class="pull-right ">
-                  <p><i class="fa fa-circle"></i></p>
-                  <p><i class="fa fa-circle"></i></p>
-                  <p><i class="fa fa-circle"></i></p>
+                  <div class="options">
+                    <img src="img/options.png" alt="Options" height="18">
+                  </div>
                 </div>
-                <!-- <span class="icon-read pointer ">Read Reviews :</span> <span class="font-bold ">5</span> -->
+                <span class="icon-read pointer ">Read Reviews :</span> <span class="font-bold ">5</span>
               </div>
-              <div class="review pt20 ">
+              <div class="review clearfix">
                 <div class="pull-right ">
                   <a>Suggest An Edit</a>
                 </div>
-                <span>Been Here :</span> <span class="italic pointer ">Rate This</span>
+                <span>Been Here :</span>
+                <span class="italic pointer color-blue">Rate This Now</span>
               </div>
             </div>
           </div>

@@ -5505,7 +5505,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           break;
         case 'checkIn':
           console.log(filterdData, "-----------------------------------------");
-          if (filterdData.checked === false) {
+          var getCheckInIndex = _.findIndex($scope.localFilterPost.checkInType, function(newData){
+            return newData == filterdData;
+          });
+          if (getCheckInIndex === -1) {
             $scope.localFilterPost.checkInType.push(filterdData.name);
             console.log($scope.localFilterPost.checkInType, 'array');
           } else {
