@@ -244,7 +244,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'OtherReviewsCtrl'
     })
     .state('setting', {
-      url: "/setting",
+      url: "/settings",
       templateUrl: "views/template.html",
       controller: 'SettingCtrl'
     })
@@ -304,7 +304,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'UserQuickItineraryCtrl'
     })
     .state('userdetailitinerary', {
-      url: "/user-detailitinerary/:id",
+      url: "/users/:urlSlug/itineraries/:id",
       templateUrl: "views/template.html",
       controller: 'UserDetailItineraryCtrl'
     })
@@ -372,7 +372,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'MessageCtrl'
     })
     .state('notification', {
-      url: "/notification",
+      url: "/notifications",
       templateUrl: "views/template.html",
       controller: 'NotificationCtrl'
     })

@@ -1021,6 +1021,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       } else {
         alert("Location of Banner not found");
       }
+      console.log(centers);
       initMap();
 
     };
@@ -1471,6 +1472,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // i=currennt card comming from bottom / arrival card
           //value=true for identifyng current departure and arrival
           //flag=true only when percentComplete reaches 100
+          console.log(i);
           var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
           var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
           step = 0;
@@ -5505,7 +5507,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           break;
         case 'checkIn':
           console.log(filterdData, "-----------------------------------------");
-          var getCheckInIndex = _.findIndex($scope.localFilterPost.checkInType, function(newData){
+          var getCheckInIndex = _.findIndex($scope.localFilterPost.checkInType, function (newData) {
             return newData == filterdData;
           });
           if (getCheckInIndex === -1) {
@@ -7003,12 +7005,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.listOfComments = [];
       $scope.post = activity;
       $scope.comment = {
-        "test": ""
+        "text": ""
       }
-
       var callback = function (data) {
         $scope.uniqueArr = [];
         $scope.listOfComments = data.data;
+        console.log($scope.listOfComments);
+
         $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
       }
       if ($scope.previousId != activity._id) {
@@ -7834,11 +7837,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
 
-
-
     //Photo caption function end
-
-
     // tinymce
     $scope.tinymceOptions = {
       onChange: function (e) {
@@ -8129,8 +8128,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log($scope.dItinerary);
 
       Itinerary.uploadDetailedItinerary($scope.dItinerary, flag, function (data) {
+        if (flag == 'new') {
+          urlSlug = data.data.message;
+        }
         $state.go('userdetailitinerary', {
-          id: data.data.message
+          'id': urlSlug,
+          'urlSlug': $.jStorage.get("profile").urlSlug
         });
         console.log(data);
       });
@@ -8598,7 +8601,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           urlSlug = data.data.message;
         }
         $state.go('userquickitinerary', {
-          id: urlSlug
+          "id": urlSlug,
+          "urlSlug": $.jStorage.get("profile").urlSlug
         });
       });
     };
@@ -9133,9 +9137,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log(itinerary);
       $scope.previousId;
       $scope.comment = {
-        "test": ""
+        "text": ""
       }
-
       var callback = function (data) {
         $scope.uniqueArr = [];
         $scope.listOfComments = data.data;
@@ -9591,9 +9594,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.previousId;
       $scope.post = activity;
       $scope.comment = {
-        "test": ""
+        "text": ""
       }
-
       var callback = function (data) {
         $scope.uniqueArr = [];
         $scope.listOfComments = data.data;

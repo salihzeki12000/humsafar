@@ -491,7 +491,13 @@ commontask.directive('commentLikeSection', function (LikesAndComments, $timeout)
     templateUrl: "views/directive/commonLikesAndComments.html",
     link: function ($scope, element, attrs) {
       console.log($scope.post, "bhai ander ghus gya");
-
+      $scope.$watch('viewCardComment', function (newVal, oldVal) {
+        if (newVal == false) {
+          // $scope.listOfComments = [];
+        } else {
+          console.log($scope.listOfComments);
+        }
+      })
 
     }
   }

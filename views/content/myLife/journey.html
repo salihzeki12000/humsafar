@@ -69,7 +69,8 @@
                         <video width="238px" height="100%" autoplay id="video" muted videoend>
                           <source src="img/libro-home/videos/travellife.mp4" type="video/mp4">
                         </video>
-                        <a class="various color-pink fancybox.iframe vimeo" href="https://player.vimeo.com/video/207906010" fancybox-box width='500' height='281' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ng-click="pauseVideo();">
+                        <a class="various color-pink fancybox.iframe vimeo" href="https://player.vimeo.com/video/207906010" fancybox-box width='500'
+                          height='281' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ng-click="pauseVideo();">
                           <div class="play-show">
                             <i class="fa fa-play-circle" aria-hidden="true"></i>
                           </div>
@@ -92,7 +93,8 @@
                       <h3 class="color-pink avenir-heavy">My Tales &amp; Trails</h3>
                       <div class="empty-ongo">
                         <h4>On-the-Go Journeys</h4>
-                        <p class="empty-descp">Capture your journeys and activities whether local or global, creating a beautiful timeline and relive these treasured experiences of your past.</p>
+                        <p class="empty-descp">Capture your journeys and activities whether local or global, creating a beautiful timeline and relive
+                          these treasured experiences of your past.</p>
                       </div>
                       <div class="empty-chronicling">
                         <h4>Chronicling Past Travels</h4>
@@ -137,7 +139,7 @@
                           <p ng-if="life.type=='on-the-go-journey'">Has started a Journey</p> -->
                           <!-- <p ng-hide="life.onJourney">{{life.heading}}</p> -->
                           <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
-                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span> <span>{{life.timestampHour}}</span></p>
+                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p>
                         </div>
                         <!--jounrey main detail card-->
                         <div class="travelled-journey relate" ng-click="routeTO(life.type,life.urlSlug,life.user.urlSlug)">
@@ -284,13 +286,13 @@
                         <div class="travel-journey-heading">
                           <!-- <p ng-hide="life.onJourney">{{life.heading}}</p> -->
                           <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
-                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span> <span>{{life.timestampHour}}</span></p>
+                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p>
                         </div>
                         <!--for itinerary card main-->
                         <div class="onway-journey relate" ng-click="routeTO(life.type,life.urlSlug,life.user.urlSlug)">
                           <!-- ONGO BADGE BADGE -->
                           <div class="tag-ongo-journey" ng-if="life.type=='detail-itinerary' && life.status==true">
-                            <span class="inline-block color-white" >Itinerary</span>
+                            <span class="inline-block color-white">Itinerary</span>
                           </div>
                           <!-- ONGO BADGE BADGE -->
                           <div class="onway-imgholder relate">
@@ -338,7 +340,7 @@
                                     </div>
                                   </div>
                                   <div class="text-right">
-                                    <div class="journey-cost">
+                                    <div class="journey-cost" ng-if="life.currency!='' && life.cost!='' && life.currency!='0'">
                                       <span>{{life.currency}}</span>
                                       <span>{{life.cost | number}}</span>
                                     </div>
@@ -365,8 +367,8 @@
                                   <i class="fa color-blue card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound></i>
                                   <span></span>
                                   <audio id="like-play">
-                                      <source src="img/tiny1.mp3" type="audio/mp3">
-                                    </audio>
+                                    <source src="img/tiny1.mp3" type="audio/mp3">
+                                  </audio>
                                 </a>
                               </li>
                               <li ng-click="openCommentSection(life)">
@@ -413,7 +415,8 @@
                 </div>
               </div>
               <!-- comment and like-->
-              <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike' list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+              <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike'
+                list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
               <!-- comment and like end-->
             </div>
           </div>
@@ -482,9 +485,10 @@
                     </div>
                     <div class="videoplay-empty-journey" ng-if="!hasJourney">
                       <video width="238px" height="100%" autoplay id="video" muted>
-                          <source src="img/libro-home/videos/locallife.mp4" type="video/mp4">
-                        </video>
-                      <a class="various color-cyan fancybox.iframe vimeo" href="http://player.vimeo.com/video/207905802?title=0&amp;byline=0&amp;portrait=0" fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen ng-click="pauseVideo();">
+                        <source src="img/libro-home/videos/locallife.mp4" type="video/mp4">
+                      </video>
+                      <a class="various color-cyan fancybox.iframe vimeo" href="http://player.vimeo.com/video/207905802?title=0&amp;byline=0&amp;portrait=0"
+                        fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen ng-click="pauseVideo();">
                         <div class="play-show">
                           <i class="fa fa-play-circle" aria-hidden="true"></i>
                         </div>
@@ -523,7 +527,8 @@
                       <img src="img/profile-empty/local-empty.png" alt="" class="img-responsive inline-block">
                     </div>
                     <h3 class="color-cyan avenir-heavy">Life In The City</h3>
-                    <p class="empty-descp">Candid, fun moments with friends, happy family get-togethers, some precious ‘me-time’…share your love for your city and inspire others to do the same. Cherish your Local Life memories eternally.</p>
+                    <p class="empty-descp">Candid, fun moments with friends, happy family get-togethers, some precious ‘me-time’…share your love
+                      for your city and inspire others to do the same. Cherish your Local Life memories eternally.</p>
                     <p class="empty-descp">This space will get populated when you capture your Travel and Local Life using the TraveLibro App.</p>
                   </div>
                   <div class="journey-downloadicon">
@@ -710,7 +715,8 @@
                 <div class="local-post" infinite-scroll="getMoreLocalPost();" infinite-scroll-disabled='scroll2.busy' infinite-scroll-distance='1'>
                   <div class="local-postbox" ng-if="localView.view">
                     <!-- local life data -->
-                    <post-local-life ng-repeat="localPost in localLifeJourney track by $index" ongolocal="localPost" local-view="localView" open-comment-section="openCommentSection(ongolocal)" open-like-section="openLikeSection(ongolocal)">
+                    <post-local-life ng-repeat="localPost in localLifeJourney track by $index" ongolocal="localPost" local-view="localView" open-comment-section="openCommentSection(ongolocal)"
+                      open-like-section="openLikeSection(ongolocal)">
                     </post-local-life>
                     <!-- local life data end-->
                   </div>
@@ -720,10 +726,12 @@
             </div>
           </div>
         </div>
-        <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike' list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+        <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike'
+          list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
         <!-- end journey local life -->
       </div>
     </div>
   </div>
 </div>
-<div class="backdrop-close" ng-class="{'view-backdrop':viewCardComment==true || viewCardLike==true,'':viewCardComment==false || viewCardLike==false}" ng-click="closeBackDrop();"></div>
+<div class="backdrop-close" ng-class="{'view-backdrop':viewCardComment==true || viewCardLike==true,'':viewCardComment==false || viewCardLike==false}"
+  ng-click="closeBackDrop();"></div>
