@@ -1,10 +1,6 @@
 var adminURL = "";
 var allowAccess = "";
-if (isproduction) {
-  adminURL = "http://www.wohlig.co.in/demo/index.php";
-} else {
-  adminURL = "http://travelibro.wohlig.com/api";
-}
+adminURL = "http://travelibro.wohlig.com/api";
 
 var imgurl = adminURL + "/upload/";
 var imgpath = imgurl + "readFile";

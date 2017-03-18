@@ -283,7 +283,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       // } else if ($scope.ongo && $scope.ongo.thoughts) {
       //   $scope.ongo.journeyTypeicon = "img/ongojourney/thought.png";
       //   $scope.ongo.typeOfPost = 'thought';
-      // }
+      // } 
       // type of post ends
       makePostString();
 
