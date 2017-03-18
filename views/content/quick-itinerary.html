@@ -102,7 +102,10 @@
                         <span class="color-light-grey" ng-bind="nation.name"></span>
                       </ui-select-choices>
                     </ui-select>
-                                       <span ng-show="quickItinerary.country.$touched && quickItinerary.country.$invalid" class="help-inline">The Country is required.</span>
+                     <span ng-show="quickItinerary.$submitted || quickItinerary.country.$touched">
+                                <span ng-show="quickItinerary.country.$error.required" class="help-inline">The Country is required.</span>
+                            </span>
+                                       <!--<span ng-show="quickItinerary.country.$touched && quickItinerary.country.$invalid" class="help-inline">The Country is required.</span>-->
                   </div>
 
                   </div>
