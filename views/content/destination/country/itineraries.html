@@ -36,9 +36,9 @@
                   </div>
                   </div> -->
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made city-select relate">
-                    <input type="text" ng-model="itinerary.citySearch" class="form-control" ng-change="getItinerayCity();" placeholder="City" ng-click="showCityDrop();">
-                    <div class="city-dropdow itinerary-dropdown" ng-show="viewCityDrop">
+                  <div class="select-all-made city-select relate" ng-init="viewItineraryCity={'outerClass':'outerCity','innerClass':'innerCity'}">
+                    <input type="text" ng-model="itinerary.citySearch" class="form-control outerCity" ng-change="getItinerayCity();" placeholder="City" ng-click="editOption(viewItineraryCity,'outerCity','innerCity')">
+                    <div class="city-dropdow itinerary-dropdown innerCity" ng-show="viewItineraryCity.backgroundClick">
                       <ul>
                         <li ng-repeat="city in cityList | filter:itinerary.citySearch track by $index">
                           <div class="select-city custom-checkbox">
@@ -51,9 +51,9 @@
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made itinerary-select relate">
-                    <input type="text" ng-model="itinerary.type" class="form-control" ng-change="getItineraryType();" placeholder="Type" ng-click="showTypeDrop();">
-                    <div class="city-dropdow itinerary-dropdown" ng-show="viewTypeDrop">
+                  <div class="select-all-made itinerary-select relate" ng-init="viewItineraryType={'outerClass':'outerIti','innerClass':'innerouterIti'}">
+                    <input type="text" ng-model="itinerary.type" class="form-control outerIti" ng-change="getItineraryType();" placeholder="Type" ng-click="editOption(viewItineraryType,'outerIti','innerouterIti')">
+                    <div class="city-dropdow itinerary-dropdown innerouterIti" ng-show="viewItineraryType.backgroundClick">
                       <ul>
                         <li ng-repeat="type in itineraryType| filter:itinerary.type track by $index">
                           <div class="select-city custom-checkbox">
@@ -66,9 +66,9 @@
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made by-select relate">
-                    <input type="text" ng-model="itinerary.by" class="form-control" ng-change="getItineraryType();" placeholder="By" ng-click="showByDrop();">
-                    <div class="city-dropdow itinerary-dropdown" ng-show="viewByDrop">
+                  <div class="select-all-made by-select relate" ng-init="viewItineraryBy={'outerClass':'outerItiBy','innerClass':'innerouterItiBy'}">
+                    <input type="text" ng-model="itinerary.by" class="form-control outerItiBy" ng-change="getItineraryType();" placeholder="By" ng-click="editOption(viewItineraryBy,'outerItiBy','innerouterItiBy')">
+                    <div class="city-dropdow itinerary-dropdown innerouterItiBy" ng-show="viewItineraryBy.backgroundClick">
                       <ul>
                         <li ng-repeat="by in itineraryBy| filter:itinerary.by track by $index">
                           <div class="select-city custom-checkbox">
@@ -163,12 +163,12 @@
                               {{post.month}} {{post.year}}
                             </div>
                           </div>
-                            <div class="text-right">
-                              <div class="journey-cost" ng-if="post.currency!='' && post.cost!='' && post.currency!='0'">
-                                <span>{{post.currency}}</span>
-                                <span>{{post.cost | number}}</span>
-                              </div>
+                          <div class="text-right">
+                            <div class="journey-cost" ng-if="post.currency!='' && post.cost!='' && post.currency!='0'">
+                              <span>{{post.currency}}</span>
+                              <span>{{post.cost | number}}</span>
                             </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -178,13 +178,13 @@
                   <div class="user-social-item clearfix">
                     <div class="pull-left">
                       <ul>
-                        <li><a href="" class="relate"><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="" like-sound></i>
+                        <li ng-click="likeUnlikeActivity(post);" like-sound><a href="" class="relate pointer"><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i>
                         <span></span>
                         <audio id="like-play">
                           <source src="img/tiny1.mp3" type="audio/mp3">
                         </audio>
                       </a></li>
-                        <li>
+                        <li class="pointer" ng-click="getCommentsData(post)">
                           <a href=""><img src="img/comments.png" alt="" height="18"></a>
                         </li>
                         <!-- <li>
@@ -204,8 +204,8 @@
                   <div class="social-likes-reviews avenir-heavy">
                     <div class="clearfix">
                       <div class="pull-left">
-                        <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{post.likeCount}}</b>Likes</span>
-                        <span class="color-blue mr10"><img src="img/comments.png" alt="" height="14"><b class="mr5">{{post.comment}}</b>Comments</span>
+                        <span class="color-blue mr10 pointer" ng-click="getLikesData(post);"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{post.likeCount}}</b>Likes</span>
+                        <span class="color-blue mr10 pointer" ng-click="getCommentsData(post)"><img src="img/comments.png" alt="" height="14"><b class=""> {{post.commentCount}} </b> Comments</span>
                         <!-- <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{post.userReviewCount}} Reviews ({{post.userReviewCount}}/5)</span> -->
                       </div>
                       <div class="pull-right">
@@ -221,5 +221,9 @@
         </div>
       </div>
     </div>
+    <!-- COMMENT LIKE SECTION -->
+    <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike' list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+    <div class="backdrop-close" ng-class="{'view-backdrop':viewCardComment==true || viewCardLike==true,'':viewCardComment==false || viewCardLike==false}" ng-click="closeBackDrop();"></div>
+    <!-- COMMENT LIKE SECTION END -->
   </div>
 </div>

@@ -1,42 +1,45 @@
 <div class="dest-btv">
   <div class="container-fluid">
-  <div class="">
-    <div class="head-title-all pt20 pb10 bg-white">
-      <h4 class="text-center fnt-22">Best Time to Visit</h4>
+    <div class="">
+      <div class="head-title-all pt20 pb10 bg-white">
+        <h4 class="text-center fnt-22">Best Time to Visit</h4>
+      </div>
     </div>
-  </div>
-  <div class="plr30">
-    <div class="row">
-      <div class="col-lg-2 col-md-3 col-sm-3" ng-repeat="visit in countryDestData.bestTime track by $index">
-        <div class="red-box common-box">
-          <div class="head-btv text-center color-white fnt-22 relate">
-            {{visit.month}}
-            <div class="cover-border">
-              <div class="brd"></div>
-              <img src="img/destination/ovel-circle-red.png" class="right-circle" alt="" />
-              <img src="img/destination/ovel-circle-red.png" class="left-circle" alt="" />
+    <div class="plr30">
+      <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-3" ng-repeat="visit in countryDestData.bestTime track by $index">
+          <div class="red-box common-box">
+            <div class="head-btv text-center color-white fnt-22 relate">
+              {{visit.month}}
+              <div class="cover-border">
+                <div class="brd"></div>
+                <img src="img/destination/ovel-circle-red.png" class="right-circle red-pins" alt="" />
+                <img src="img/destination/ovel-circle-red.png" class="left-circle red-pins" alt="" />
+                <img src="img/destination/ovel-circle-green.png" class="right-circle cyan-pins" alt="" />
+                <img src="img/destination/ovel-circle-green.png" class="left-circle cyan-pins" alt="" />
+              </div>
             </div>
-          </div>
 
-          <div class="cont-btv-white">
-            <div class="row">
-              <div class="col-xs-6">
-                <div class="cont-btv">
-                  <div class="img-holder-btv">
-                    <img ng-src="{{visit.season|seasonType}}" alt="" class="img-responsive" />
-                  </div>
-                  <div class="season text-center">
-                    <span>{{visit.season}}</span>
+            <div class="cont-btv-white">
+              <div class="row">
+                <div class="col-xs-6">
+                  <div class="cont-btv">
+                    <div class="img-holder-btv">
+                      <img ng-src="{{visit.season|seasonType}}" alt="" class="img-responsive" />
+                    </div>
+                    <div class="season text-center">
+                      <span>{{visit.season}}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-xs-6">
-                <div class="cont-btv">
-                  <div class="img-holder-btv">
-                    <img ng-src="{{visit.traffic|trafficType}}" alt="" class="img-responsive" />
-                  </div>
-                  <div class="season text-center">
-                    <span>{{visit.traffic}}</span>
+                <div class="col-xs-6">
+                  <div class="cont-btv">
+                    <div class="img-holder-btv">
+                      <img ng-src="{{visit.traffic|trafficType}}" alt="" class="img-responsive" />
+                    </div>
+                    <div class="season text-center">
+                      <span>{{visit.traffic}}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -45,6 +48,5 @@
         </div>
       </div>
     </div>
-  </div>
   </div>
 </div>

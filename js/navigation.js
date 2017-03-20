@@ -14,7 +14,7 @@ var navigationservice = angular.module('navigationservice', [])
       disabled: true,
       anchor: "home",
     }, {
-      name: "Destination",
+      name: "Destinations",
       classis: "active",
       disabled: true,
       anchor: "destination",

@@ -2290,6 +2290,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.countryDestinationView = false;
     $scope.userData = $.jStorage.get("profile");
 
+    $scope.editOption = function (model, class1, class2) {
+      LikesAndComments.onClickDropDown(model, $scope, class1, class2);
+    };
+
     // search destination
     $scope.callDestination = function () {
       $scope.i++;
@@ -2821,6 +2825,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.cityRestaurantCuisine = [];
     $scope.pagenumber = 1;
     $scope.cityDestIti = [];
+    $scope.ntMustdo = "ntMustdo";
     $scope.scroll = {
       "busy": false,
       "stopCallingApi": false
