@@ -1,5 +1,40 @@
 <div class=" min-hght">
+
 <div class="container-fluid">
+  <div class="destination-nav second destin-fixednav-country bg-grey">
+    <div class="row">
+        <div class="col-md-8 col-sm-8">
+        <div class="destination-scroll pl20">
+          <ul class="list-inline">
+            <li ng-click="getTab('featured')" ng-class="{'active': countryoptions.active=='featured'}">Featured Cities</li>
+            <li ng-click="getTab('mustdo')" ng-class="{'active': countryoptions.active=='mustdo'}">Must Do’s</li>
+            <li ng-click="getTab('itineraries')" ng-class="{'active': countryoptions.active=='itineraries'}">Itineraries</li>
+            <li ng-click="getTab('visit')" ng-class="{'active': countryoptions.active=='visit'}">Best Time To Visit</li>
+          </ul>
+        </div>
+      </div>
+        <div class="col-md-4 col-sm-4">
+          <div class="pr20">
+            <form action="">
+              <div class="input-search relate">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search Destination" ng-model="dest.viewDestination" ng-change="callDestination();">
+                  <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                </div>
+                <div class="dropdown-destination">
+                  <ul>
+                    <li ng-repeat="dest in destinationList  track by $index">
+                      <span ng-if="dest.isCity==true" ng-click="countryView(dest.urlSlug,dest.isCity);">{{dest.name}}</span>
+                      <span ng-if="dest.isCity==false" ng-click="countryView(dest.urlSlug,dest.isCity);">{{dest.name}}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+  </div>
   <div class="destination-featured">
     <div class="head-title-all bg-white pt20 pb10">
       <h4 class="text-center fnt-22">Featured Cities</h4>

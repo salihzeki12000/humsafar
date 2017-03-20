@@ -302,7 +302,7 @@ a.color-white {
   }
 
   .dropdown-destination{
-    width: 100px;
+    width: 100%;
     // max-height: 150px;
     position: absolute;
     top: 34px;
@@ -322,11 +322,23 @@ a.color-white {
     cursor: pointer;
   }
   &.mustdo-not {
-    margin-top: 60px;
+    top: 60px;
+    position: fixed;
+    width: 100%;
     }
 }
+.ntMustdo{
+.mustdo-not{
+display: none;
+}
+.destination-content {
+margin:0;
+}
+}
+
 
 .destination-content {
+  margin-top:103px;
   .pad-btn {
     padding: 0 0 10px 30px;
   }
@@ -877,9 +889,7 @@ a.color-white {
         font-size: 16px;
         overflow: hidden;
         text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
+        white-space: nowrap;
       }
     }
     .color-dark-green {
@@ -1388,274 +1398,16 @@ a.color-white {
   }
 }
 
-@media screen and (max-width: 1200px) {
-      .destination-content .img-holder .title-head-left {
-    font-size: 24px;
-}
-  .cover-modal1 .modal-dialog {
-    width: 95%;
-    border: 3px solid #2c3757;
-    .musto-thumbnail {
-      left: -235px;
-      .img-holder-place img {
-        width: 150px;
-      }
-    }
-  }
-  .hotels .hotel-card .title-head-inside h4 {
-    font-size: 20px;
-  }
-  .text-left-ab {
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
-    .dot-icon li {
-      font-size: 22px;
-    }
-    .fnt-22 {
-      font-size: 18px;
-    }
-    .fnt-60 {
-      font-size: 50px;
-    }
-  }
-  .text-sec2 {
-    right: 8%;
-  }
-  .home-slide {
-    .img-section1 img {
-      height: 20px;
-    }
-    .fnt-22 {
-      font-size: 16px;
-    }
-    .slide2 .life-icon img {
-      width: 28px;
-    }
-  }
-  .home-slide {
-    section {
-      background-position: center !important;
-    }
-  }
-}
+// @media screen and (max-width: 1200px) {
 
-@media screen and (max-width: 991px) {
-  .destination-nav ul li {
-    margin: 0 5px;
-  }
-    .destination-content .img-holder .title-head-left {
-    font-size: 20px;
-}
-  .text-left-ab {
-    .dot-icon li {
-      font-size: 18px;
-    }
-    &.text-sec-left {
-      left: 15%;
-    }
-  }
-  .text-sec2 {
-    right: 6%;
-    width: 210px;
-    .description br {
-      display: none;
-    }
-  }
-  .home-slide .img-section1 img {
-    height: 16px;
-  }
-  .cover-modal1 .modal-dialog .musto-thumbnail {
-    width: 405px;
-    top: 115px;
-    left: -115px;
-  }
-  .destination-content {
-    .img-holder.card {
-      .back .flipped-cont {
-        width: 100%;
-    padding: 0 20px;
-        overflow: scroll;
-        &::-webkit-scrollbar {
-          display: none;
-        }
-      }
-    }
-  }
-}
+// }
 
-@media screen and (max-width: 767px) {
-  .navigation-dots {
-    display: none;
-  }
-  .fp-{
-    .fancybox-skin {
-    background: transparent;
-        padding: 0!important;
-    }
-    .fancybox-type-iframe .fancybox-inner {
-    width: 100% !important;
-}
-.videoplay video {
-    display: none;
-}
-  }
-  .popular-blogger .bloggerholder-made .cfj-holder li {
-    float: none;
-}
-  .download-app-footer {
-    background: #000;
-    padding: 0px 15px;
-    position: absolute;
-    bottom: 0;
-    left:0;
-    letter-spacing: 1.5px;
-    width: 100%;
-    @include transition (all ease 300ms);
-    &.close-download{
-      @include transform (translateY(100%));
-    }
-    a {
-      color: #fff;
-      display: block;
-      padding: 6px 0;
-    }
-  }
-  .text-left-ab {
-    top: auto;
-    bottom: 1%;
-    left: 50%;
-    width: 100%;
-    text-align: center;
-  }
-  .cover-modal1 {
-    padding-right: 20px;
-    .modal-dialog {
-      .musto-thumbnail {
-        width: 98%;
-        width: 100%;
-        top: 0;
-        left: 0;
-        position: static;
-        transform: rotate(0deg) translate(0, 0);
-        .img-holder-place {
-          width: 100%;
-          height: auto;
-          overflow: auto;
-          img {
-            transform: rotate(0deg) translate(0, 0);
-            position: static;
-            width: 100%;
-          }
-        }
-      }
-    }
-  }
-  .destination-desc-modal {
-    display: none;
-  }
-  .home-slide {
-    .slide2 .life-icon img {
-      width: 25px;
-    }
-    .fnt-60 {
-      font-size: 50px;
-    }
-    .contact {
-      .content-left {
-        width: 100%;
-      }
-      .contact-ab {
-        top: 100px;
-        left: 0;
-        width: 100%;
-        padding: 0 25px;
-        .contact-decrp {
-          position: relative;
-          padding: 0;
-          width: 100%;
-          text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
-          img {
-            right: 0;
-            height: 40px;
-            margin: -8px -8px 0;
-            position: static;
-          }
-        }
-      }
-      .contact-ab {
-        .social-icons {
-          margin-top: 40px;
-          padding: 0 10px;
-          li {
-            width: 60px;
-            height: 55px;
-            padding: 0;
-            margin: 0 -2.6px;
-            border: 1px dotted #fff;
-            a {
-              padding: 11px 0;
-            }
-          }
-        }
-      }
-    }
-    .text-left-ab.text-sec-left {
-      left: 20%;
-      top: 24%;
-      bottom: auto;
-      width: 100%;
-      padding: 0 25px;
-    }
-    .mobile-travellife ul {
-      padding: 10px 0;
-      font-weight: bold;
-    }
-    .mobile-home-travel-cont {
-      border-bottom: 1px solid #ddd;
-      margin: 0;
-      line-height: 2.5;
-      padding: 6px 0;
-    }
-    .mobile-home-travel-life {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      .img-travel-life img {
-        margin: 0 auto;
-        height: 55vh;
-      }
-      .play-mobile {
-        position: absolute;
-        bottom: 20%;
-        color: #fff;
-        left: 50%;
-        @include transform (translate(-50%,
-        -50%));
-        border: 7px solid #fff;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        font-size: 35px;
-        text-align: center;
-        padding: 0 12px;
-      }
-    }
-    .person-section4 {
-      height: 50px;
-    }
-    .life-icon3 {
-      margin-left: 3px;
-    }
-    .cycle-section3 {
-      height: 38px;
-    }
-  }
-  .home-slide {
-    .section.one {
-      background: url('../img/home-mobile-1.jpg');
-    }
-  }
-}
+// @media screen and (max-width: 991px) {
+// }
+
+// @media screen and (max-width: 767px) {
+
+// }
 
 .popular-journey{
   .country-badges {

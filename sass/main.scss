@@ -3142,7 +3142,7 @@ header {
       width: 100%;
     }
     h3 {
-      width: 50%;
+      width: 70%;
       overflow: hidden;
       @include position(absolute,
       2% 10px null null);
@@ -7107,12 +7107,12 @@ header {
 
 .like-buddy-pic {
   display: inline-block;
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   margin-right:5px;
   overflow: hidden;
-  border-radius: 19px;
-  border: 2px solid #868686;
+  border-radius: 16px;
+  border: 1px solid #868686;
   vertical-align: middle;
 }
 

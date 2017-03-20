@@ -1,6 +1,6 @@
 <div class="destination {{getBackdrop}} relate mt-60" scrolladdclass ng-init="openCont=false">
-  <div scrolldown>
-    <div class="img-holder-destination bg-destination-cc-img relate" id="blur" style="background:url('{{countryDestData.countryBackgroundImage|uploadpath}}')">
+  <div ng-class="ntMustdo"  scrolldown>
+    <div class="img-holder-destination bg-destination-cc-img relate" id="blur" style="background:url('{{countryDestData.countryBackgroundImage|uploadpath}}')" ng-if="countryDestinationView">
       <!-- <div class="overlay"></div> -->
       <div class="get-center country-title">
         <h4 class="color-white title-head">{{countryDestData.name}}</h4>
@@ -80,8 +80,7 @@
     </div>
   </div>
 
-    <div class="container-fluid">
-  <div class="destination-nav second destin-fixednav-country bg-grey">
+  <div class="destination-nav second mustdo-not bg-grey">
     <div class="row">
         <div class="col-md-8 col-sm-8">
         <div class="destination-scroll pl20">
@@ -113,7 +112,6 @@
             </form>
           </div>
         </div>
-    </div>
     </div>
   </div>
   <div class="destination-content-box">
