@@ -261,7 +261,6 @@ a.color-white {
 }
 
 .destination-nav {
-  // background: #ebebeb;
   padding: 10px 0 0;
   position: relative;
   z-index: 3;
@@ -322,6 +321,9 @@ a.color-white {
     color: #232d4a;
     cursor: pointer;
   }
+  &.mustdo-not {
+    margin-top: 60px;
+    }
 }
 
 .destination-content {
