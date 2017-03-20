@@ -43,10 +43,10 @@
       <!--<button class="btn btn-white-outline btn-more" ng-click="" ng-if="itinerary.status == true">Delete</button>-->
     </div>
   </div>
-  <div class="user-quick-itinerary second bg-white-95">
+  <div class="user-quick-itinerary second bg-white-95  itinerary-content">
     <!-- trip side pic holder -->
     <div class="trip-pic-holder relate">
-      <div class="trip-pic-view {{showClass}}">
+      <div class="trip-pic-view {{showClass}}" ng-if="itinerary.photos.length > 0">
         <p class="color-pink heading-gallery-name text-capitalize"><i class="fa fa-picture-o mr5"></i> Photos ( {{itinerary.photos.length}} )</p>
         <div class="masonry-main side-scroll-direction">
           <div class="gallery-itiscroll">
@@ -59,7 +59,7 @@
           </div>
         </div>
         <div class="user-button-holder">
-          <a class="photos btn-pink photo-button text-capitalize" ng-click="viewGallery();"><i class="fa fa-picture-o mr5"></i>{{itinerary.name}} Photos</a>
+          <a class="photos btn-pink photo-button text-capitalize" ng-click="viewGallery();"><i class="fa fa-picture-o mr5"></i>Photos ({{itinerary.photos.length}})</a>
           <a class="photos btn-dark-blue close-button" ng-click="viewGallery();"><i class="fa fa-chevron-down mr5"></i>Close</a>
         </div>
       </div>
@@ -77,7 +77,7 @@
                     <span class="avenir-roman color-pink">
                     <span class="sizeof-country">
                       <span ng-if="itinerary.countryVisited.length==1">Country</span>
-                      <span ng-if="itinerary.countryVisited.length>1">Countries</span> 
+                      <span ng-if="itinerary.countryVisited.length>1">Countries</span>
                       Visited</span>
                       : </span>
                       <span class="color-white country-visited-name avenir-heavy" ng-repeat="country in itinerary.countryVisited track by $index">{{country.country.name}}<span ng-if="$index<(itinerary.countryVisited.length-1)"> | </span></span>
