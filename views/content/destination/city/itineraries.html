@@ -20,9 +20,9 @@
             <div class="pad-btn">
               <div class="row">
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made destination-filterscroll">
-                    <input type="type" placeholder="Type" ng-model="cityItineraryType" class="form-control" ng-click="showCityItinerary = !showCityItinerary">
-                    <div class="destination-filterdrop" ng-show="showCityItinerary">
+                  <div class="select-all-made destination-filterscroll" ng-init="viewItiType={'outerClass':' itiTypeOutter','innerClass':'itiTypeInner'}">
+                    <input type="type" placeholder="Type" ng-model="cityItineraryType" class="form-control itiTypeOutter" ng-click="editOption(viewItiType,'itiTypeInner','itiTypeOutter')">
+                    <div class="destination-filterdrop itiTypeInner" ng-show="viewItiType.backgroundClick;">
                       <ul>
                         <li ng-repeat="type in cityType track by $index">
                           <div class="custom-checkbox">
@@ -35,9 +35,10 @@
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made destination-filterscroll">
-                    <input type="type" placeholder="By" ng-model="cityItineraryBy" ng-click="showItineraryBy = !showItineraryBy" class="form-control">
-                    <div class="destination-filterdrop" ng-show="showItineraryBy">
+                  <div class="select-all-made destination-filterscroll" ng-init="viewItiBy={'outerClass':'itiByOutter','innerClass':'itiByInner'}">
+                    <input type="type" placeholder="By" ng-model="cityItineraryBy" ng-click="editOption(viewItiBy,'itiByInner','itiByOutter')"
+                      class="form-control itiByOutter">
+                    <div class="destination-filterdrop itiByInner" ng-show="viewItiBy.backgroundClick">
                       <ul>
                         <li>
                           <div class="custom-checkbox">
@@ -93,7 +94,7 @@
                 <div class="travel-life-part bg-white blog-post {{post.type}} avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
                   <div class="travel-journey-heading">
                     <div class="editor-logo user-logo">
-                      <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}"  class="img-responsive">
+                      <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="img-responsive">
                     </div>
                     <div class="inline-block editor-subdetail">
                       <div class="clearfix">
@@ -102,7 +103,7 @@
                         </div>
                         <h4 class="font-bold color-dark-blue m-clear mb5 heading-name text-capitalize">{{post.user.name}}</h4>
                       </div>
-                      <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.startTime | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.startTime | date :'hh:mm a'}}</span></p>
+                      <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.startTime | date : 'dd MMM, yyyy'}}</span>                        | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.startTime | date :'hh:mm a'}}</span></p>
                     </div>
                   </div>
                   <div class="onway-journey relate">
@@ -144,12 +145,12 @@
                                 {{post.month}} {{post.year}}
                               </div>
                             </div>
-                              <div class="text-right">
-                                <div class="journey-cost" ng-if="post.currency!='' && post.cost!='' && post.currency!='0'">
-                                  <span>{{post.currency}}</span>
-                                  <span>{{post.cost | number}}</span>
-                                </div>
+                            <div class="text-right">
+                              <div class="journey-cost" ng-if="post.currency!='' && post.cost!='' && post.currency!='0'">
+                                <span>{{post.currency}}</span>
+                                <span>{{post.cost | number}}</span>
                               </div>
+                            </div>
                           </div>
                         </div>
                       </div>

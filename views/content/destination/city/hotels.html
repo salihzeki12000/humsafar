@@ -22,9 +22,10 @@
             <div class="pad-btn">
               <div class="row">
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made destination-filterscroll">
-                    <input type="text" placeholder="City" class="form-control" ng-click="cityCategory=!cityCategory;" ng-model="cityHotelCategory">
-                    <div class="destination-filterdrop" ng-show="cityCategory">
+                  <div class="select-all-made destination-filterscroll" ng-init="viewHotelcity={'outerClass':'outerHotelCity','innerClass':'innerHotelCity'}">
+                    <input type="text" placeholder="City" class="form-control outerHotelCity" ng-click="editOption(viewHotelcity,'outerHotelCity','innerHotelCity')"
+                      ng-model="cityHotelCategory">
+                    <div class="destination-filterdrop innerHotelCity" ng-show="viewHotelcity.backgroundClick">
                       <ul>
                         <li ng-repeat="category in cityDestData.subType track by $index">
                           <div class="custom-checkbox">
@@ -37,9 +38,9 @@
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made destination-filterscroll">
-                    <input type="text" class="form-control" placeholder="Budget" ng-model="cityHotelBudget" ng-click="hotelBudget= !hotelBudget">
-                    <div class="destination-filterdrop" ng-show="hotelBudget">
+                  <div class="select-all-made destination-filterscroll" ng-init="viewHotelBudget={'outerClass':'outerHotelBudget','innerClass':'innerHotelBudget'}">
+                    <input type="text" class="form-control outerHotelBudget" placeholder="Budget" ng-model="cityHotelBudget" ng-click="editOption(viewHotelBudget,'outerHotelBudget','innerHotelBudget')">
+                    <div class="destination-filterdrop innerHotelBudget" ng-show="viewHotelBudget.backgroundClick ">
                       <ul>
                         <li>
                           <div class="custom-checkbox">
@@ -102,8 +103,8 @@
                   </span>
                   <span ng-if="hotels.rating>0">
                     <span class="rated-star"><i class="fa fa-star color-pink" ng-repeat="a in getRating(hotels.rating,'marked') track by $index"></i></span>
-                    <span class="non-rated-star"><i class="fa fa-star-o color-pink" ng-repeat="b in getRating(hotels.rating,'unmarked') track by $index"></i></span>
-                    </span>
+                  <span class="non-rated-star"><i class="fa fa-star-o color-pink" ng-repeat="b in getRating(hotels.rating,'unmarked') track by $index"></i></span>
+                  </span>
                   <span ng-if="hotels.rating>0">({{hotels.ratingCount}})</span>
                 </div>
                 <div class="category">
