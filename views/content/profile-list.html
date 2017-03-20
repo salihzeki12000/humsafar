@@ -99,10 +99,10 @@
             <!-- add country end-->
             <!-- search bucketList -->
             <div class="list-add-country" ng-if="activeMenu == 'bucket-list'">
-              <div class="bucket-visited-holder" ng-init="visitedBucketCountry={};">
-                <input type="text" placeholder="Add To BucketList" ng-model="visitedCountry" ng-change="viewDropdown.showDropdown=true">
+              <div class="bucket-visited-holder" ng-init="visitedBucketCountry={'outerClass':'outerBucket','innerClass':'innerBucket'};">
+                <input class="outerBucket" type="text" placeholder="Add To BucketList" ng-model="visitedCountry" ng-change="editOption(visitedBucketCountry,'outerBucket','innerBucket')">
                 <span class="search-icon"><i class="fa fa-search"></i></span>
-                <div class="bucket-dropdown entry-content" ng-show="viewDropdown.showDropdown">
+                <div class="bucket-dropdown entry-content innerBucket" ng-show="visitedBucketCountry.backgroundClick">
                   <ul>
                     <li ng-repeat="list in nationality | filter: visitedCountry">
                       <div class="country-list clearfix relate">
