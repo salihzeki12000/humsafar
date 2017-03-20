@@ -2470,6 +2470,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.countryDestData = [];
           $scope.getCountryInfo("featuredCities", $scope.urlDestinationCountry);
           $scope.countryDestinationView = true;
+           $scope.ntMustdo = "ntMustdo";
           break;
         case "mustdo":
           $scope.countryoptions.active = "mustdo";
@@ -2477,7 +2478,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.countryDestData = [];
           $scope.getCountryInfo("mustDo", $scope.urlDestinationCountry);
           $scope.countryDestinationView = false;
-           $scope.ntMustdo = "ntMustdo";
+           $scope.ntMustdo = "";
           break;
         case "itineraries":
           $scope.countryoptions.active = "itineraries";
