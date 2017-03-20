@@ -304,11 +304,16 @@ a.color-white {
 
   .dropdown-destination{
     width: 100px;
-    border-bottom: 1px solid #424242;
     // max-height: 150px;
     position: absolute;
     top: 34px;
     background-color: #fff;
+    li{
+      border-bottom: 1px solid #424242;
+      &:last-child{
+        border: none;
+      }
+    }
   }
   .input-group-addon {
     background-color: transparent;
