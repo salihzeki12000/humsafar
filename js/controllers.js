@@ -2477,6 +2477,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.countryDestData = [];
           $scope.getCountryInfo("mustDo", $scope.urlDestinationCountry);
           $scope.countryDestinationView = false;
+           $scope.ntMustdo = "ntMustdo";
           break;
         case "itineraries":
           $scope.countryoptions.active = "itineraries";
@@ -2484,18 +2485,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.countryDestData = [];
           $scope.getCountryInfo("itinerary", $scope.urlDestinationCountry);
           $scope.countryDestinationView = false;
+            $scope.ntMustdo = "";
           break;
         case "booking":
           $scope.countryoptions.active = "booking";
           // $scope.countryDestData = [];
           $scope.destination.innerView = alldestination[3];
           $scope.countryDestinationView = false;
+            $scope.ntMustdo = "";          
           break;
         case "visit":
           $scope.countryoptions.active = "visit";
           // $scope.countryDestData = [];
           $scope.destination.innerView = alldestination[4];
           $scope.countryDestinationView = false;
+            $scope.ntMustdo = "";          
           break;
         default:
           $scope.countryDestData = [];
@@ -3384,35 +3388,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.cityDestinationView = true;
         $scope.getCityInfo("mustDo", $scope.urlDestinationCity);
         $scope.cityoptions.active = "mustdo";
+         $scope.ntMustdo = "ntMustdo";
         break;
       case "hotels":
         $scope.destination.innerView = alldestination[1];
         $scope.cityDestinationView = false;
         $scope.cityoptions.active = "hotels";
         $scope.getCityInfo("hotel", $scope.urlDestinationCity);
+         $scope.ntMustdo = "";
         break;
       case "restaurants":
         $scope.destination.innerView = alldestination[2];
         $scope.cityDestinationView = false;
         $scope.cityoptions.active = "restaurants";
         $scope.getCityInfo("restaurant", $scope.urlDestinationCity);
+            $scope.ntMustdo = "";
         break;
       case "itineraries":
         $scope.destination.innerView = alldestination[3];
         $scope.cityDestinationView = false;
         $scope.cityoptions.active = "itineraries";
         $scope.getCityInfo("itinerary", $scope.urlDestinationCity);
+            $scope.ntMustdo = "";
         break;
       case "booking":
         $scope.destination.innerView = alldestination[4];
         $scope.cityDestinationView = false;
         $scope.cityoptions.active = "booking";
         $scope.getBooking($scope.bookingCityName, $scope.bookingCountryName);
+            $scope.ntMustdo = "";
         break;
       case "visit":
         $scope.destination.innerView = alldestination[5];
         $scope.cityDestinationView = false;
         $scope.cityoptions.active = "visit";
+            $scope.ntMustdo = "";
         break;
       default:
         $scope.destination.innerView = alldestination[0];
