@@ -2252,7 +2252,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // destination country city end
   })
 
-  .controller('DestinationCountryCtrl', function ($scope, $state, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $location) {
+  .controller('DestinationCountryCtrl', function ($scope, $state, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $location, LikesAndComments) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -2286,6 +2286,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.i = 0;
     $scope.dest = {};
     $scope.dest.viewDestination = "";
+    $scope.ntMustdo = "ntMustdo";
+    $scope.countryDestinationView = false;
+    $scope.userData = $.jStorage.get("profile");
 
     // search destination
     $scope.callDestination = function () {
@@ -2334,6 +2337,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             if (data.data.itinerary.length == 0) {
               $scope.scroll.stopCallingApi = true;
             } else {
+              _.each(data.data.bestTime, function (newVal) {
+                newVal.month = moment(newVal.month, "M").format('MMMM');
+              });
               $scope.countryDestIti.push(newData);
               console.log($scope.countryDestIti, 'data itinerary wala');
             }
@@ -2459,36 +2465,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.destination.innerView = alldestination[0];
           $scope.countryDestData = [];
           $scope.getCountryInfo("featuredCities", $scope.urlDestinationCountry);
+          $scope.countryDestinationView = true;
           break;
         case "mustdo":
           $scope.countryoptions.active = "mustdo";
           $scope.destination.innerView = alldestination[1];
           $scope.countryDestData = [];
           $scope.getCountryInfo("mustDo", $scope.urlDestinationCountry);
+          $scope.countryDestinationView = false;
           break;
         case "itineraries":
           $scope.countryoptions.active = "itineraries";
           $scope.destination.innerView = alldestination[2];
           $scope.countryDestData = [];
           $scope.getCountryInfo("itinerary", $scope.urlDestinationCountry);
+          $scope.countryDestinationView = false;
           break;
         case "booking":
           $scope.countryoptions.active = "booking";
-          $scope.countryDestData = [];
+          // $scope.countryDestData = [];
           $scope.destination.innerView = alldestination[3];
+          $scope.countryDestinationView = false;
           break;
         case "visit":
           $scope.countryoptions.active = "visit";
-          $scope.countryDestData = [];
+          // $scope.countryDestData = [];
           $scope.destination.innerView = alldestination[4];
+          $scope.countryDestinationView = false;
           break;
         default:
           $scope.countryDestData = [];
+          $scope.countryDestinationView = true;
           $scope.destination.innerView = alldestination[0];
       }
     };
     $scope.destinationTabView($state.params.name);
     $scope.getTab = function (view) {
+      if (view === 'featured') {
+        $scope.countryDestinationView = true;
+        $scope.ntMustdo = "ntMustdo";
+      } else {
+        $scope.countryDestinationView = false;
+        $scope.ntMustdo = "";
+      }
       console.log(view);
       $scope.destinationTabView(view);
       console.log(view);
@@ -2608,6 +2627,121 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     //contact us end
 
+    // COMMENT LIKE SECTION FUNCTIONS
+    $scope.likeUnlikeActivity = function (post) {
+      console.log(post);
+      post.likeDone = !post.likeDone;
+      if (post.likeDone) {
+        if (post.likeCount == undefined) {
+          post.likeCount = 1;
+        } else {
+          post.likeCount = post.likeCount + 1;
+        }
+        LikesAndComments.likeUnlike(post.type, "like", post.uniqueId, post._id, null)
+      } else {
+        post.likeCount = post.likeCount - 1;
+        LikesAndComments.likeUnlike(post.type, "unlike", post.uniqueId, post._id, null)
+      }
+    };
+
+    $scope.getLikes = function (post) {
+      console.log(post);
+      LikesAndComments.getLikes(post.type, post._id, function (data) {
+        $scope.listOfLikes = data.data;
+        console.log($scope.listOfLikes);
+      });
+    };
+
+    $scope.listLikesDropDown = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+
+    $scope.getCommentsData = function (post) {
+      console.log(post);
+      $scope.previousId;
+      $scope.listOfLikes = [];
+      $scope.listOfComments = [];
+      $scope.post = post;
+      $scope.comment = {
+        "text": ""
+      }
+      var callback = function (data) {
+        $scope.uniqueArr = [];
+        $scope.listOfComments = data.data;
+        console.log($scope.listOfComments);
+
+        $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+      }
+      if ($scope.previousId != post._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfComments = [];
+        $scope.viewCardComment = true;
+        // $scope.journey.journeyHighLight = activity._id;
+        $scope.getCard = "view-whole-card";
+        LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+      } else {
+        if ($scope.viewCardComment) {
+          $scope.viewCardComment = false;
+          // $scope.journey.journeyHighLight = "";
+          $scope.getCard = "";
+          $scope.comment.text = "";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardComment = true;
+          // $scope.focus('enterComment');
+          // $scope.journey.journeyHighLight = activity._id;
+          $scope.getCard = "view-whole-card";
+          LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+        }
+      }
+      $scope.previousId = post._id;
+    };
+
+    $scope.getLikesData = function (post) {
+      var callback = function (data) {
+        $scope.listOfLikes = data.data;
+        console.log($scope.listOfLikes);
+      };
+      console.log($scope.post);
+      if ($scope.previousLikeId != post._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfLikes = [];
+        $scope.viewCardLike = true;
+        // $scope.journey.journeyHighLight = activity._id;
+        $scope.showLikeShow = "show-like-side-sec";
+        LikesAndComments.getLikes(post.type, post._id, callback);
+      } else {
+        if ($scope.viewCardLike) {
+          $scope.viewCardLike = false;
+          // $scope.journey.journeyHighLight = "";
+          $scope.getCard = "";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardLike = true;
+          // $scope.focus('enterComment');
+          // $scope.journey.journeyHighLight = activity._id;
+          $scope.showLikeShow = "show-like-side-sec";
+          LikesAndComments.getLikes(post.type, post._id, callback);
+        }
+      }
+      $scope.previousLikeId = post._id;
+    };
+
+    $scope.closeBackDrop = function () {
+      $scope.viewCardComment = false;
+      $scope.viewCardLike = false;
+      $scope.getCard = "";
+      $scope.listOfLikes = [];
+      $scope.listOfComments = [];
+    };
+
+    // COMMENT LIKE SECTION FUNCTIONS END
+
+
 
     //bookings photos
     $scope.bookingPhoto = [{
@@ -2668,7 +2802,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('DestinationCityCtrl', function ($scope, $state, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $location) {
+  .controller('DestinationCityCtrl', function ($scope, $state, TemplateService, TravelibroService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $location, LikesAndComments) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -2690,41 +2824,145 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.scroll = {
       "busy": false,
       "stopCallingApi": false
-    }
+    };
+    $scope.userData = $.jStorage.get("profile");
+    $scope.modelType = "";
+    $scope.rateType = "";
+    $scope.editOption = function (model, class1, class2) {
+      LikesAndComments.onClickDropDown(model, $scope, class1, class2);
+    };
 
+    $scope.resetFilters = function (id) {
+      $scope.cityRestaurantCuisine = [];
+      $scope.citySubTypeData = [];
+      $scope.cityBudgetData = [];
+    };
 
-    // $("body").click(function (e) {
-    //   console.log(e);
-    //   console.log(e.target.offsetParent);
-    // if ($(e.target.offsetParent).hasClass('entry-content')) {
+    var modal = "";
+    $scope.rateDestination = function (destRate, type) {
+      console.log(destRate, 'check in');
+      $scope.destReview = destRate;
+      if (destRate.userReview.length !== 0) {
+        console.log("Edit Rating");
+        if (destRate.userReview[0].rating != undefined) {
+          $scope.starRating(parseInt(destRate.userReview[0].rating));
+        } else {
 
-    // } else {
+        }
+      } else {
+        console.log("Rate Us");
+      }
+      modal = $uibModal.open({
+        animation: true,
+        templateUrl: 'views/modal/destination-review.html',
+        scope: $scope
+      });
+      modal.closed.then(function () {
+        console.log('alert');
+        $scope.postReview.review = "";
+        $scope.starRating(1);
+      });
+      if (type == 'hotel') {
+        $scope.modelType = "hotel";
+        $scope.rateType = "saveHotel";
+      } else {
+        $scope.modelType = "restaurant";
+        $scope.rateType = "saveRestaurant";
+      }
+    };
+    $scope.ratingValue = {};
+    $scope.ratingValue.review = "";
+    $scope.ratingValue.rating = "";
+    $scope.savePostReview = function (values, postData) {
+      console.log(values, postData);
+      $scope.ratingValue.review = values.review;
+      $scope.ratingValue.rating = values.rating;
+      console.log(postData, 'post data kya hai');
+      var formData = {
+        // "hotel": postData._id,
+        "review": values.review,
+        "rating": values.rating
+      };
+      if ($scope.modelType == "hotel") {
+        formData.hotel = postData._id;
+      } else {
+        formData.restaurant = postData._id;
+      }
+      console.log(formData);
+      TravelibroService.http({
+        url: adminURL + "/review/" + $scope.rateType,
+        method: "POST",
+        data: formData
+      }).success(function (data) {
+        if (data.value == true) {
+          postData.userReview[0] = $scope.ratingValue;
+          console.log(postData.userReview, 'review');
+          modal.close();
+        }
+      }).error(function (data) {
+        console.log(data);
+      });
+    };
+    $scope.showRating = 1;
+    $scope.fillColor = "";
+    $scope.postReview = {};
+    $scope.postReview.rating = 1;
+    $scope.starRating = function (val) {
+      $scope.postReview.rating = val;
+      if (val == 1) {
+        $scope.showRating = 1;
+        $scope.fillColor2 = "";
+        $scope.fillColor3 = "";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 2) {
+        $scope.showRating = 2;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 3) {
+        $scope.showRating = 3;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "";
+        $scope.fillColor5 = "";
+      } else if (val == 4) {
+        $scope.showRating = 4;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "fa-star";
+        $scope.fillColor5 = "";
+      } else if (val == 5) {
+        $scope.showRating = 5;
+        $scope.fillColor2 = "fa-star";
+        $scope.fillColor3 = "fa-star";
+        $scope.fillColor4 = "fa-star";
+        $scope.fillColor5 = "fa-star";
+      } else {
+        $scope.showRating = 1;
+      }
+    };
+    // rating local life end
 
-    // }
-    // });
-
-    $scope.viewDropdown = {
-      "showDropdown": false
-    }
-
-    $("body").click(function (e) {
-      // console.log($(e.target).hasClass('entry-content'));
-      // if ($(e.target).hasClass('entry-content')) {
-      //   return false;
-      // } else {
-      //   $scope.viewDropdown.showDropdown = false;
-      //   $scope.$apply();
-      // }
-      console.log($(e.target).parent().hasClass('entry-content'));
-    });
-
-    $scope.star = function (starCount, type) {
+    // $scope.star = function (starCount, type) {
+    //   if (type == "marked") {
+    //     starCount = parseInt(starCount);
+    //     return new Array(starCount);
+    //   } else if (type == "unmarked") {
+    //     starCount = parseInt(starCount);
+    //     var remainCount = 5 - starCount;
+    //     return new Array(remainCount);
+    //   }
+    // };
+    $scope.getRating = function (n, type) {
+      console.log(n, type, 'rating');
       if (type == "marked") {
-        starCount = parseInt(starCount);
-        return new Array(starCount);
+        n = parseInt(n);
+        return new Array(n);
       } else if (type == "unmarked") {
-        starCount = parseInt(starCount);
-        var remainCount = 5 - starCount;
+        n = parseInt(n);
+        var remainCount = 5 - n;
         return new Array(remainCount);
       }
     };
@@ -2791,6 +3029,120 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         scope: $scope
       });
     };
+
+    // COMMENT LIKE SECTION FUNCTIONS
+    $scope.likeUnlikeActivity = function (post) {
+      console.log(post);
+      post.likeDone = !post.likeDone;
+      if (post.likeDone) {
+        if (post.likeCount == undefined) {
+          post.likeCount = 1;
+        } else {
+          post.likeCount = post.likeCount + 1;
+        }
+        LikesAndComments.likeUnlike(post.type, "like", post.uniqueId, post._id, null)
+      } else {
+        post.likeCount = post.likeCount - 1;
+        LikesAndComments.likeUnlike(post.type, "unlike", post.uniqueId, post._id, null)
+      }
+    };
+
+    $scope.getLikes = function (post) {
+      console.log(post);
+      LikesAndComments.getLikes(post.type, post._id, function (data) {
+        $scope.listOfLikes = data.data;
+        console.log($scope.listOfLikes);
+      });
+    };
+
+    $scope.listLikesDropDown = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+
+    $scope.getCommentsData = function (post) {
+      console.log(post);
+      $scope.previousId;
+      $scope.listOfLikes = [];
+      $scope.listOfComments = [];
+      $scope.post = post;
+      $scope.comment = {
+        "text": ""
+      }
+      var callback = function (data) {
+        $scope.uniqueArr = [];
+        $scope.listOfComments = data.data;
+        console.log($scope.listOfComments);
+
+        $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+      }
+      if ($scope.previousId != post._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfComments = [];
+        $scope.viewCardComment = true;
+        // $scope.journey.journeyHighLight = activity._id;
+        $scope.getCard = "view-whole-card";
+        LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+      } else {
+        if ($scope.viewCardComment) {
+          $scope.viewCardComment = false;
+          // $scope.journey.journeyHighLight = "";
+          $scope.getCard = "";
+          $scope.comment.text = "";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardComment = true;
+          // $scope.focus('enterComment');
+          // $scope.journey.journeyHighLight = activity._id;
+          $scope.getCard = "view-whole-card";
+          LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+        }
+      }
+      $scope.previousId = post._id;
+    };
+
+    $scope.getLikesData = function (post) {
+      var callback = function (data) {
+        $scope.listOfLikes = data.data;
+        console.log($scope.listOfLikes);
+      };
+      console.log($scope.post);
+      if ($scope.previousLikeId != post._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfLikes = [];
+        $scope.viewCardLike = true;
+        // $scope.journey.journeyHighLight = activity._id;
+        $scope.showLikeShow = "show-like-side-sec";
+        LikesAndComments.getLikes(post.type, post._id, callback);
+      } else {
+        if ($scope.viewCardLike) {
+          $scope.viewCardLike = false;
+          // $scope.journey.journeyHighLight = "";
+          $scope.getCard = "";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardLike = true;
+          // $scope.focus('enterComment');
+          // $scope.journey.journeyHighLight = activity._id;
+          $scope.showLikeShow = "show-like-side-sec";
+          LikesAndComments.getLikes(post.type, post._id, callback);
+        }
+      }
+      $scope.previousLikeId = post._id;
+    };
+
+    $scope.closeBackDrop = function () {
+      $scope.viewCardComment = false;
+      $scope.viewCardLike = false;
+      $scope.getCard = "";
+      $scope.listOfLikes = [];
+      $scope.listOfComments = [];
+    };
+
+    // COMMENT LIKE SECTION FUNCTIONS END
 
 
     //OpenFilter
@@ -3072,6 +3424,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.cityDestinationView = true;
           $scope.cityoptions.active = "mustdo";
           $scope.getCityInfo("mustDo", $scope.urlDestinationCity);
+          $scope.ntMustdo = "ntMustdo";
           break;
         case 1:
           url = "hotels";
@@ -3080,6 +3433,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.citySubTypeData = [];
           $scope.cityBudgetData = [];
           $scope.getCityInfo("hotel", $scope.urlDestinationCity);
+          $scope.ntMustdo = "";
           break;
         case 2:
           url = "restaurants";
@@ -3088,6 +3442,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.citySubTypeData = [];
           $scope.cityBudgetData = [];
           $scope.getCityInfo("restaurant", $scope.urlDestinationCity);
+          $scope.ntMustdo = "";
           break;
         case 3:
           url = "itineraries";
@@ -3097,17 +3452,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.citySubTypeData = [];
           $scope.cityBudgetData = [];
           $scope.getCityInfo("itinerary", $scope.urlDestinationCity);
+          $scope.ntMustdo = "";
           break;
         case 4:
           url = "booking";
           $scope.cityDestinationView = false;
           $scope.cityoptions.active = "booking";
           $scope.getBooking($scope.bookingCityName, $scope.bookingCountryName);
+          $scope.ntMustdo = "";
           break;
         case 5:
           url = "visit";
           $scope.cityDestinationView = false;
           $scope.cityoptions.active = "visit";
+          $scope.ntMustdo = "";
           break;
       }
       console.log(url);
@@ -3416,736 +3774,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   }
     // }
 
-    $scope.countries = [{
-      name: 'Afghanistan',
-      code: 'AF'
-    }, {
-      name: 'Åland Islands',
-      code: 'AX'
-    }, {
-      name: 'Albania',
-      code: 'AL'
-    }, {
-      name: 'Algeria',
-      code: 'DZ'
-    }, {
-      name: 'American Samoa',
-      code: 'AS'
-    }, {
-      name: 'Andorra',
-      code: 'AD'
-    }, {
-      name: 'Angola',
-      code: 'AO'
-    }, {
-      name: 'Anguilla',
-      code: 'AI'
-    }, {
-      name: 'Antarctica',
-      code: 'AQ'
-    }, {
-      name: 'Antigua and Barbuda',
-      code: 'AG'
-    }, {
-      name: 'Argentina',
-      code: 'AR'
-    }, {
-      name: 'Armenia',
-      code: 'AM'
-    }, {
-      name: 'Aruba',
-      code: 'AW'
-    }, {
-      name: 'Australia',
-      code: 'AU'
-    }, {
-      name: 'Austria',
-      code: 'AT'
-    }, {
-      name: 'Azerbaijan',
-      code: 'AZ'
-    }, {
-      name: 'Bahamas',
-      code: 'BS'
-    }, {
-      name: 'Bahrain',
-      code: 'BH'
-    }, {
-      name: 'Bangladesh',
-      code: 'BD'
-    }, {
-      name: 'Barbados',
-      code: 'BB'
-    }, {
-      name: 'Belarus',
-      code: 'BY'
-    }, {
-      name: 'Belgium',
-      code: 'BE'
-    }, {
-      name: 'Belize',
-      code: 'BZ'
-    }, {
-      name: 'Benin',
-      code: 'BJ'
-    }, {
-      name: 'Bermuda',
-      code: 'BM'
-    }, {
-      name: 'Bhutan',
-      code: 'BT'
-    }, {
-      name: 'Bolivia',
-      code: 'BO'
-    }, {
-      name: 'Bosnia and Herzegovina',
-      code: 'BA'
-    }, {
-      name: 'Botswana',
-      code: 'BW'
-    }, {
-      name: 'Bouvet Island',
-      code: 'BV'
-    }, {
-      name: 'Brazil',
-      code: 'BR'
-    }, {
-      name: 'British Indian Ocean Territory',
-      code: 'IO'
-    }, {
-      name: 'Brunei Darussalam',
-      code: 'BN'
-    }, {
-      name: 'Bulgaria',
-      code: 'BG'
-    }, {
-      name: 'Burkina Faso',
-      code: 'BF'
-    }, {
-      name: 'Burundi',
-      code: 'BI'
-    }, {
-      name: 'Cambodia',
-      code: 'KH'
-    }, {
-      name: 'Cameroon',
-      code: 'CM'
-    }, {
-      name: 'Canada',
-      code: 'CA'
-    }, {
-      name: 'Cape Verde',
-      code: 'CV'
-    }, {
-      name: 'Cayman Islands',
-      code: 'KY'
-    }, {
-      name: 'Central African Republic',
-      code: 'CF'
-    }, {
-      name: 'Chad',
-      code: 'TD'
-    }, {
-      name: 'Chile',
-      code: 'CL'
-    }, {
-      name: 'China',
-      code: 'CN'
-    }, {
-      name: 'Christmas Island',
-      code: 'CX'
-    }, {
-      name: 'Cocos (Keeling) Islands',
-      code: 'CC'
-    }, {
-      name: 'Colombia',
-      code: 'CO'
-    }, {
-      name: 'Comoros',
-      code: 'KM'
-    }, {
-      name: 'Congo',
-      code: 'CG'
-    }, {
-      name: 'Congo, The Democratic Republic of the',
-      code: 'CD'
-    }, {
-      name: 'Cook Islands',
-      code: 'CK'
-    }, {
-      name: 'Costa Rica',
-      code: 'CR'
-    }, {
-      name: 'Cote D\'Ivoire',
-      code: 'CI'
-    }, {
-      name: 'Croatia',
-      code: 'HR'
-    }, {
-      name: 'Cuba',
-      code: 'CU'
-    }, {
-      name: 'Cyprus',
-      code: 'CY'
-    }, {
-      name: 'Czech Republic',
-      code: 'CZ'
-    }, {
-      name: 'Denmark',
-      code: 'DK'
-    }, {
-      name: 'Djibouti',
-      code: 'DJ'
-    }, {
-      name: 'Dominica',
-      code: 'DM'
-    }, {
-      name: 'Dominican Republic',
-      code: 'DO'
-    }, {
-      name: 'Ecuador',
-      code: 'EC'
-    }, {
-      name: 'Egypt',
-      code: 'EG'
-    }, {
-      name: 'El Salvador',
-      code: 'SV'
-    }, {
-      name: 'Equatorial Guinea',
-      code: 'GQ'
-    }, {
-      name: 'Eritrea',
-      code: 'ER'
-    }, {
-      name: 'Estonia',
-      code: 'EE'
-    }, {
-      name: 'Ethiopia',
-      code: 'ET'
-    }, {
-      name: 'Falkland Islands (Malvinas)',
-      code: 'FK'
-    }, {
-      name: 'Faroe Islands',
-      code: 'FO'
-    }, {
-      name: 'Fiji',
-      code: 'FJ'
-    }, {
-      name: 'Finland',
-      code: 'FI'
-    }, {
-      name: 'France',
-      code: 'FR'
-    }, {
-      name: 'French Guiana',
-      code: 'GF'
-    }, {
-      name: 'French Polynesia',
-      code: 'PF'
-    }, {
-      name: 'French Southern Territories',
-      code: 'TF'
-    }, {
-      name: 'Gabon',
-      code: 'GA'
-    }, {
-      name: 'Gambia',
-      code: 'GM'
-    }, {
-      name: 'Georgia',
-      code: 'GE'
-    }, {
-      name: 'Germany',
-      code: 'DE'
-    }, {
-      name: 'Ghana',
-      code: 'GH'
-    }, {
-      name: 'Gibraltar',
-      code: 'GI'
-    }, {
-      name: 'Greece',
-      code: 'GR'
-    }, {
-      name: 'Greenland',
-      code: 'GL'
-    }, {
-      name: 'Grenada',
-      code: 'GD'
-    }, {
-      name: 'Guadeloupe',
-      code: 'GP'
-    }, {
-      name: 'Guam',
-      code: 'GU'
-    }, {
-      name: 'Guatemala',
-      code: 'GT'
-    }, {
-      name: 'Guernsey',
-      code: 'GG'
-    }, {
-      name: 'Guinea',
-      code: 'GN'
-    }, {
-      name: 'Guinea-Bissau',
-      code: 'GW'
-    }, {
-      name: 'Guyana',
-      code: 'GY'
-    }, {
-      name: 'Haiti',
-      code: 'HT'
-    }, {
-      name: 'Heard Island and Mcdonald Islands',
-      code: 'HM'
-    }, {
-      name: 'Holy See (Vatican City State)',
-      code: 'VA'
-    }, {
-      name: 'Honduras',
-      code: 'HN'
-    }, {
-      name: 'Hong Kong',
-      code: 'HK'
-    }, {
-      name: 'Hungary',
-      code: 'HU'
-    }, {
-      name: 'Iceland',
-      code: 'IS'
-    }, {
-      name: 'India',
-      code: 'IN'
-    }, {
-      name: 'Indonesia',
-      code: 'ID'
-    }, {
-      name: 'Iran, Islamic Republic Of',
-      code: 'IR'
-    }, {
-      name: 'Iraq',
-      code: 'IQ'
-    }, {
-      name: 'Ireland',
-      code: 'IE'
-    }, {
-      name: 'Isle of Man',
-      code: 'IM'
-    }, {
-      name: 'Israel',
-      code: 'IL'
-    }, {
-      name: 'Italy',
-      code: 'IT'
-    }, {
-      name: 'Jamaica',
-      code: 'JM'
-    }, {
-      name: 'Japan',
-      code: 'JP'
-    }, {
-      name: 'Jersey',
-      code: 'JE'
-    }, {
-      name: 'Jordan',
-      code: 'JO'
-    }, {
-      name: 'Kazakhstan',
-      code: 'KZ'
-    }, {
-      name: 'Kenya',
-      code: 'KE'
-    }, {
-      name: 'Kiribati',
-      code: 'KI'
-    }, {
-      name: 'Korea, Democratic People\'s Republic of',
-      code: 'KP'
-    }, {
-      name: 'Korea, Republic of',
-      code: 'KR'
-    }, {
-      name: 'Kuwait',
-      code: 'KW'
-    }, {
-      name: 'Kyrgyzstan',
-      code: 'KG'
-    }, {
-      name: 'Lao People\'s Democratic Republic',
-      code: 'LA'
-    }, {
-      name: 'Latvia',
-      code: 'LV'
-    }, {
-      name: 'Lebanon',
-      code: 'LB'
-    }, {
-      name: 'Lesotho',
-      code: 'LS'
-    }, {
-      name: 'Liberia',
-      code: 'LR'
-    }, {
-      name: 'Libyan Arab Jamahiriya',
-      code: 'LY'
-    }, {
-      name: 'Liechtenstein',
-      code: 'LI'
-    }, {
-      name: 'Lithuania',
-      code: 'LT'
-    }, {
-      name: 'Luxembourg',
-      code: 'LU'
-    }, {
-      name: 'Macao',
-      code: 'MO'
-    }, {
-      name: 'Macedonia, The Former Yugoslav Republic of',
-      code: 'MK'
-    }, {
-      name: 'Madagascar',
-      code: 'MG'
-    }, {
-      name: 'Malawi',
-      code: 'MW'
-    }, {
-      name: 'Malaysia',
-      code: 'MY'
-    }, {
-      name: 'Maldives',
-      code: 'MV'
-    }, {
-      name: 'Mali',
-      code: 'ML'
-    }, {
-      name: 'Malta',
-      code: 'MT'
-    }, {
-      name: 'Marshall Islands',
-      code: 'MH'
-    }, {
-      name: 'Martinique',
-      code: 'MQ'
-    }, {
-      name: 'Mauritania',
-      code: 'MR'
-    }, {
-      name: 'Mauritius',
-      code: 'MU'
-    }, {
-      name: 'Mayotte',
-      code: 'YT'
-    }, {
-      name: 'Mexico',
-      code: 'MX'
-    }, {
-      name: 'Micronesia, Federated States of',
-      code: 'FM'
-    }, {
-      name: 'Moldova, Republic of',
-      code: 'MD'
-    }, {
-      name: 'Monaco',
-      code: 'MC'
-    }, {
-      name: 'Mongolia',
-      code: 'MN'
-    }, {
-      name: 'Montserrat',
-      code: 'MS'
-    }, {
-      name: 'Morocco',
-      code: 'MA'
-    }, {
-      name: 'Mozambique',
-      code: 'MZ'
-    }, {
-      name: 'Myanmar',
-      code: 'MM'
-    }, {
-      name: 'Namibia',
-      code: 'NA'
-    }, {
-      name: 'Nauru',
-      code: 'NR'
-    }, {
-      name: 'Nepal',
-      code: 'NP'
-    }, {
-      name: 'Netherlands',
-      code: 'NL'
-    }, {
-      name: 'Netherlands Antilles',
-      code: 'AN'
-    }, {
-      name: 'New Caledonia',
-      code: 'NC'
-    }, {
-      name: 'New Zealand',
-      code: 'NZ'
-    }, {
-      name: 'Nicaragua',
-      code: 'NI'
-    }, {
-      name: 'Niger',
-      code: 'NE'
-    }, {
-      name: 'Nigeria',
-      code: 'NG'
-    }, {
-      name: 'Niue',
-      code: 'NU'
-    }, {
-      name: 'Norfolk Island',
-      code: 'NF'
-    }, {
-      name: 'Northern Mariana Islands',
-      code: 'MP'
-    }, {
-      name: 'Norway',
-      code: 'NO'
-    }, {
-      name: 'Oman',
-      code: 'OM'
-    }, {
-      name: 'Pakistan',
-      code: 'PK'
-    }, {
-      name: 'Palau',
-      code: 'PW'
-    }, {
-      name: 'Palestinian Territory, Occupied',
-      code: 'PS'
-    }, {
-      name: 'Panama',
-      code: 'PA'
-    }, {
-      name: 'Papua New Guinea',
-      code: 'PG'
-    }, {
-      name: 'Paraguay',
-      code: 'PY'
-    }, {
-      name: 'Peru',
-      code: 'PE'
-    }, {
-      name: 'Philippines',
-      code: 'PH'
-    }, {
-      name: 'Pitcairn',
-      code: 'PN'
-    }, {
-      name: 'Poland',
-      code: 'PL'
-    }, {
-      name: 'Portugal',
-      code: 'PT'
-    }, {
-      name: 'Puerto Rico',
-      code: 'PR'
-    }, {
-      name: 'Qatar',
-      code: 'QA'
-    }, {
-      name: 'Reunion',
-      code: 'RE'
-    }, {
-      name: 'Romania',
-      code: 'RO'
-    }, {
-      name: 'Russian Federation',
-      code: 'RU'
-    }, {
-      name: 'Rwanda',
-      code: 'RW'
-    }, {
-      name: 'Saint Helena',
-      code: 'SH'
-    }, {
-      name: 'Saint Kitts and Nevis',
-      code: 'KN'
-    }, {
-      name: 'Saint Lucia',
-      code: 'LC'
-    }, {
-      name: 'Saint Pierre and Miquelon',
-      code: 'PM'
-    }, {
-      name: 'Saint Vincent and the Grenadines',
-      code: 'VC'
-    }, {
-      name: 'Samoa',
-      code: 'WS'
-    }, {
-      name: 'San Marino',
-      code: 'SM'
-    }, {
-      name: 'Sao Tome and Principe',
-      code: 'ST'
-    }, {
-      name: 'Saudi Arabia',
-      code: 'SA'
-    }, {
-      name: 'Senegal',
-      code: 'SN'
-    }, {
-      name: 'Serbia and Montenegro',
-      code: 'CS'
-    }, {
-      name: 'Seychelles',
-      code: 'SC'
-    }, {
-      name: 'Sierra Leone',
-      code: 'SL'
-    }, {
-      name: 'Singapore',
-      code: 'SG'
-    }, {
-      name: 'Slovakia',
-      code: 'SK'
-    }, {
-      name: 'Slovenia',
-      code: 'SI'
-    }, {
-      name: 'Solomon Islands',
-      code: 'SB'
-    }, {
-      name: 'Somalia',
-      code: 'SO'
-    }, {
-      name: 'South Africa',
-      code: 'ZA'
-    }, {
-      name: 'South Georgia and the South Sandwich Islands',
-      code: 'GS'
-    }, {
-      name: 'Spain',
-      code: 'ES'
-    }, {
-      name: 'Sri Lanka',
-      code: 'LK'
-    }, {
-      name: 'Sudan',
-      code: 'SD'
-    }, {
-      name: 'Suriname',
-      code: 'SR'
-    }, {
-      name: 'Svalbard and Jan Mayen',
-      code: 'SJ'
-    }, {
-      name: 'Swaziland',
-      code: 'SZ'
-    }, {
-      name: 'Sweden',
-      code: 'SE'
-    }, {
-      name: 'Switzerland',
-      code: 'CH'
-    }, {
-      name: 'Syrian Arab Republic',
-      code: 'SY'
-    }, {
-      name: 'Taiwan, Province of China',
-      code: 'TW'
-    }, {
-      name: 'Tajikistan',
-      code: 'TJ'
-    }, {
-      name: 'Tanzania, United Republic of',
-      code: 'TZ'
-    }, {
-      name: 'Thailand',
-      code: 'TH'
-    }, {
-      name: 'Timor-Leste',
-      code: 'TL'
-    }, {
-      name: 'Togo',
-      code: 'TG'
-    }, {
-      name: 'Tokelau',
-      code: 'TK'
-    }, {
-      name: 'Tonga',
-      code: 'TO'
-    }, {
-      name: 'Trinidad and Tobago',
-      code: 'TT'
-    }, {
-      name: 'Tunisia',
-      code: 'TN'
-    }, {
-      name: 'Turkey',
-      code: 'TR'
-    }, {
-      name: 'Turkmenistan',
-      code: 'TM'
-    }, {
-      name: 'Turks and Caicos Islands',
-      code: 'TC'
-    }, {
-      name: 'Tuvalu',
-      code: 'TV'
-    }, {
-      name: 'Uganda',
-      code: 'UG'
-    }, {
-      name: 'Ukraine',
-      code: 'UA'
-    }, {
-      name: 'United Arab Emirates',
-      code: 'AE'
-    }, {
-      name: 'United Kingdom',
-      code: 'GB'
-    }, {
-      name: 'United States',
-      code: 'US'
-    }, {
-      name: 'United States Minor Outlying Islands',
-      code: 'UM'
-    }, {
-      name: 'Uruguay',
-      code: 'UY'
-    }, {
-      name: 'Uzbekistan',
-      code: 'UZ'
-    }, {
-      name: 'Vanuatu',
-      code: 'VU'
-    }, {
-      name: 'Venezuela',
-      code: 'VE'
-    }, {
-      name: 'Vietnam',
-      code: 'VN'
-    }, {
-      name: 'Virgin Islands, British',
-      code: 'VG'
-    }, {
-      name: 'Virgin Islands, U.S.',
-      code: 'VI'
-    }, {
-      name: 'Wallis and Futuna',
-      code: 'WF'
-    }, {
-      name: 'Western Sahara',
-      code: 'EH'
-    }, {
-      name: 'Yemen',
-      code: 'YE'
-    }, {
-      name: 'Zambia',
-      code: 'ZM'
-    }, {
-      name: 'Zimbabwe',
-      code: 'ZW'
-    }];
+
 
     //contact us
     $scope.viewContact = false;

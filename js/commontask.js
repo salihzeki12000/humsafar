@@ -1,6 +1,6 @@
 var commontask = angular.module('commontask', [])
 
-  .factory('LikesAndComments', function (TravelibroService, $filter, $uibModal) {
+  .factory('LikesAndComments', function (TravelibroService, $filter, $uibModal, $timeout) {
 
     var returnVal = {
       getHashTags: function (commentString, callback) {
@@ -328,6 +328,18 @@ var commontask = angular.module('commontask', [])
           },
           method: "POST"
         }).success(callback);
+      },
+      onClickDropDown: function (model, scope, class1, class2) {
+        console.log("clicked");
+        $timeout(function () {
+          if (model.backgroundClick == null || model.backgroundClick == undefined) {
+            model.backgroundClick = true;
+          }
+          model.outerClass = class1;
+          model.innerClass = class2;
+          backgroundClick.object = model;
+        }, 0);
+        backgroundClick.scope = scope;
       }
     };
     return returnVal;
