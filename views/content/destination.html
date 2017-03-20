@@ -33,10 +33,10 @@
         </div>
         <div class="destination-holder main-destination-page relate pt20 pr20">
           <div class="row">
-            <div class="col-sm-6"  ng-repeat="dest in destinationList track by $index">
+            <div class="col-md-4"  ng-repeat="dest in destinationList track by $index">
               <div class="city-view" ng-if="dest.isCity==true">
                 <div class="img-holder relate" ng-click="countryView(dest.urlSlug,dest.isCity);">
-                  <img src="{{dest.cityDisplayPhoto|uploadpath:620:420:'cover'}}" alt="travelibro" class="img-responsive full-width city-img">
+                  <img ng-src="{{dest.cityDisplayPhoto|uploadpath:400:400:'cover'}}" alt="travelibro" class="img-responsive full-width city-img">
                   <h4 class="title-head-left color-white">
                     {{dest.name}}
                   </h4>
@@ -55,7 +55,7 @@
               </div>
               <div class="country-view" ng-if="dest.isCity==false">
                 <div class="img-holder relate" ng-click="countryView(dest.urlSlug,dest.isCity)">
-                  <img ng-src="{{dest.countryCoverPhoto|uploadpath}}" alt="travel-libro" class="img-responsive full-width">
+                  <img ng-src="{{dest.countryBackgroundImage|uploadpath:400:400:'cover'}}" alt="travel-libro" class="img-responsive full-width">
                   <div class="title-head-left color-white">
                     {{dest.name}}
                   </div>

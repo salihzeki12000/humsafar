@@ -1,12 +1,12 @@
 <div class=" min-hght">
 <div class="container-fluid">
   <div class="destination-featured">
-    <div class="head-title-all bg-white pt20 pb10 destin-fixednav1">
+    <div class="head-title-all bg-white pt20 pb10">
       <h4 class="text-center fnt-22">Featured Cities</h4>
     </div>
       <div class="destination-holder bg-white plr30">
         <div class="row">
-          <div class="col-md-6 col-sm-6" ng-repeat="feature in countryDestData.featuredCities ">
+          <div class="col-md-4 col-sm-6" ng-repeat="feature in countryDestData.featuredCities ">
             <div class="img-holder relate" ng-click="countryView(feature.urlSlug,dest.isCity)">
               <img alt="travel-libro" ng-src="{{feature.cityCoverPhoto|uploadpath}}" class="full-width">
               <div class="title-head-left color-white text-uppercase">

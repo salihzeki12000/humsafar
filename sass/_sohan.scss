@@ -301,6 +301,15 @@ a.color-white {
       }
     }
   }
+
+  .dropdown-destination{
+    width: 100px;
+    border-bottom: 1px solid #424242;
+    // max-height: 150px;
+    position: absolute;
+    top: 34px;
+    background-color: #fff;
+  }
   .input-group-addon {
     background-color: transparent;
     border: 0;
@@ -334,18 +343,19 @@ a.color-white {
       @include transform (scale(1.1));
     }
   }
-  .destination-holder {
-    &.main-destination-page {
-      .col-sm-6:nth-of-type(5n) {
-        width: 100%;
-      }
-    }
-  }
+  // .destination-holder {
+  //   &.main-destination-page {
+  //     .col-sm-6:nth-of-type(5n) {
+  //       width: 100%;
+  //     }
+  //   }
+  // }
   .img-holder {
-    // min-height: 400px;
+    height: 385px;
     max-height: 400px;
     margin-bottom: 20px;
     border-radius: 5px;
+    background-color: $brand-light-grey;
     overflow: hidden;
     cursor: pointer;
     @include perspective(1000px);
@@ -436,7 +446,7 @@ a.color-white {
     }
     .right-bottom {
       position: absolute;
-      bottom: 8px;
+      bottom: 0px;
       right: 0;
       padding: 8px 15px;
       @include background(linear-gradient(rgba(0,
@@ -761,15 +771,17 @@ a.color-white {
   .cont-btv-white {
     background: rgba(210, 216, 225, 0.85);
     padding: 20px 10px;
-    height: 140px;
+    height: 130px;
     @extend .avenir-roman;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
   }
   .img-holder-btv {
-    height: 65px;
+    height: 45px;
     overflow: hidden;
     img {
+      height:100%;
+      width: auto;
       margin: 0 auto;
     }
   }

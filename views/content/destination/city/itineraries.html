@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="activity-main min-hght">
-    <div class="relate  destin-fixednav2" ng-class="{'openfilter': isopenfilter}">
+    <div class="relate " ng-class="{'openfilter': isopenfilter}">
       <div class="pt20 pb10 head-title-all bg-white mb20">
         <div class="row m-clear">
           <div class="col-md-3">
@@ -10,7 +10,7 @@
             </div>
           </div>
           <div class="col-md-6">
-            <h4 class="text-center  fnt-24 p-clear">Itineraries and Journeys</h4>
+            <h4 class="text-center  fnt-24 p-clear">Itineraries</h4>
           </div>
         </div>
       </div>
@@ -120,23 +120,6 @@
                         <p><span class="block">{{post.duration}}</span>Days</p>
                       </div>
                       <h3 class="m-clear text-capitalize">{{post.name}}</h3>
-                      <!-- <div class="clearfix journey-travelling-type">
-                        <div class="pull-left">
-                          <div class="journey-type m0">
-                            <ul>
-                              <li ng-repeat="type in post.itineraryType|limitTo:3">
-                                <a href=""><img ng-src="{{type|kindOfJourney:'white'}}" alt="" height="20"></a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="pull-right">
-                          <div class="journey-cost" ng-if="post.currency!='' && post.cost!='' || post.currency>0">
-                            <span>{{post.currency}}</span>
-                            <span>{{post.cost}}</span>
-                          </div>
-                        </div>
-                      </div> -->
 
                       <div class="clearfix journey-travelling-type">
                         <div class="row">
@@ -203,7 +186,7 @@
                       <div class="clearfix">
                         <div class="pull-left">
                           <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{post.likeCount}}</b>Likes</span>
-                          <span class="color-blue mr10"><img src="img/comments.png" alt="" height="14"><b class="mr5">{{post.comment}}</b>comments</span>
+                          <span class="color-blue mr10"><img src="img/comments.png" alt="" height="14"><b class="mr5">{{post.comment}}</b>Comments</span>
                           <!-- <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{post.userReviewCount}} Reviews ({{post.userReviewCount}}/5)</span> -->
                         </div>
                         <div class="pull-right">

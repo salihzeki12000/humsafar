@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <div class="booking-sec-card bg-white plr30">
     <!-- Tours and Excursions End  -->
-    <div class="title-head-left pt20">
+    <div class="title-head-left pt20" hidden>
       <h4 class="uppercase">Popular Tours</h4>
     </div>
-    <div class="agt-usr-tourpackages">
+    <div class="agt-usr-tourpackages" hidden>
       <div class="row">
         <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="tourcard in usrTourPackageCard track by $index">
           <div class="agt-itinerarycard">
@@ -40,9 +40,9 @@
                   <button class="btn btn-pink btn-book">Book</button>
                 </div>
               </div>
-              <div class="call-btn" ng-click="showContact();">
+              <!-- <div class="call-btn" ng-click="showContact();">
                 <i class="fa fa-phone" aria-hidden="true"></i>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
