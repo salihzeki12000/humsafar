@@ -1309,14 +1309,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           disableDefaultUI: true
         });
 
-        commingMap = new google.maps.Map('', {
-          draggable: true,
-          animation: google.maps.Animation.DROP,
-          center: center,
-          zoom: 4
-          // styles: mapStyle
-        });
-
         var step = 0;
         var numSteps = 100; //Change this to set animation resolution
         var lineSymbol = {
@@ -1324,27 +1316,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           strokeOpacity: 0,
           scale: 3
         };
-
-
-        {
-          // Grey static dotted - polylines starts here
-          // travelPath = new google.maps.Polyline({
-          //   path: centers,
-          //   geodesic: true,
-          //   strokeColor: '#D3D3D3',
-          //   strokeOpacity: 0,
-          //   strokeWeight: -3,
-          //   icons: [{
-          //     icon: lineSymbol,
-          //     offset: '0',
-          //     repeat: '20px'
-          //   }],
-          // });
-          // travelPath.setMap(map);
-          // Grey static polylines ends here
-
-        }
-
+        // Grey static dotted - polylines starts here
+        travelPath = new google.maps.Polyline({
+          path: centers,
+          geodesic: true,
+          strokeColor: '#D3D3D3',
+          strokeOpacity: 0,
+          strokeWeight: -3,
+          icons: [{
+            icon: lineSymbol,
+            offset: '0',
+            repeat: '20px'
+          }],
+        });
+        travelPath.setMap(map);
+        // Grey static polylines ends here
 
         var myVar = setInterval(myTimer, 1000);
 
@@ -1353,9 +1339,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             _.each(centers, function (n, index) {
               setMarker(null, n, null, index + 1);
             });
-            // setMarker("green-marker", centers[0], null, 1);
-            // markers[1].setMap(map);
-            // markers[1].setIcon("img/maps/green-marker.png");
+            if ($scope.journey && $scope.journey.location && $scope.journey.location.lat) {
+              setMarker("green-marker", centers[0], null, 1);
+              markers[1].setMap(map);
+              markers[1].setIcon("img/maps/green-marker.png");
+            }
             clearInterval(myVar);
           } else {
             console.log("didnt got center");
@@ -1436,16 +1424,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               // strokeColor: "#f2675b", //orange
               // strokeColor: "#263757", //navy-blue
               strokeColor: "#11d3cb", //navy-blue
-              // strokeOpacity: 1,
+              // strokeOpacity: 1, --for continuous line
               //   strokeWeight: 3,
-              strokeOpacity: 0, //fir dotted lines
+              strokeOpacity: 0, //for dotted lines
               strokeWeight: 3,
               icons: [{
                 icon: lineSymbol,
                 offset: '0', //set +ve val for moving trails
                 repeat: '20px'
               }],
-
               geodesic: true, //set to false if you want straight line instead of arc
               map: map,
             });
@@ -2217,7 +2204,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Destination");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    cfpLoadingBar.start();
+    // cfpLoadingBar.start();
     $scope.destinationList = [];
     $scope.viewListByKey = "A";
     $scope.countryDestList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -2233,7 +2220,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.destinationList = data.data;
           $scope.i = 0;
         }
-        cfpLoadingBar.complete();
+        // cfpLoadingBar.complete();
       });
     }
     $scope.callCountry("a", "");
@@ -2245,7 +2232,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewListByKey = searchVal.charAt(0);
         $scope.callCountry(searchVal, searchVal);
       }
-      cfpLoadingBar.complete();
+      // cfpLoadingBar.complete();
     };
 
     // destination country city
@@ -2275,7 +2262,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.urlDestinationCountry = $state.params.url;
-    cfpLoadingBar.start();
+    // cfpLoadingBar.start();
     $scope.hotelsData = [];
     $scope.toursData = [];
     $scope.vacationsData = [];
@@ -2294,6 +2281,44 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.destinationItineraryType = [];
     $scope.destinationItineraryBy = [];
     $scope.destinationCityFilter = [];
+
+    $scope.destinationList = [];
+    $scope.i = 0;
+    $scope.dest = {};
+    $scope.dest.viewDestination = "";
+
+    // search destination
+    $scope.callDestination = function () {
+      $scope.i++;
+      NavigationService.getDestination({
+        search: $scope.dest.viewDestination,
+        searchText: $scope.dest.viewDestination,
+        count: $scope.i
+      }, function (data) {
+        if ($scope.i === data.count) {
+          $scope.destinationList = data.data;
+          console.log($scope.destinationList, 'log');
+          $scope.i = 0;
+        }
+      });
+    }
+    // search destination end
+    // destination country city
+    $scope.countryView = function (url, isCity) {
+      if (isCity === false) {
+        $state.go("destinationcountry", {
+          name: "featured",
+          url: url
+        });
+      } else {
+        $state.go("destinationcity", {
+          name: "mustdo",
+          url: url
+        })
+      }
+    }
+    // destination country city end
+
     $scope.getCountryInfo = function (type, urlSlug) {
       $scope.scroll.busy = false;
       NavigationService.getCountryDestination({
@@ -2647,7 +2672,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Used to name the .html file
 
     // console.log("Testing Consoles");
-
     $scope.template = TemplateService.changecontent("destination-city");
     $scope.menutitle = NavigationService.makeactive("Destination");
     TemplateService.title = $scope.menutitle;
@@ -2667,6 +2691,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       "busy": false,
       "stopCallingApi": false
     }
+
+
+    // $("body").click(function (e) {
+    //   console.log(e);
+    //   console.log(e.target.offsetParent);
+    // if ($(e.target.offsetParent).hasClass('entry-content')) {
+
+    // } else {
+
+    // }
+    // });
+
+    $scope.viewDropdown = {
+      "showDropdown": false
+    }
+
+    $("body").click(function (e) {
+      // console.log($(e.target).hasClass('entry-content'));
+      // if ($(e.target).hasClass('entry-content')) {
+      //   return false;
+      // } else {
+      //   $scope.viewDropdown.showDropdown = false;
+      //   $scope.$apply();
+      // }
+      console.log($(e.target).parent().hasClass('entry-content'));
+    });
 
     $scope.star = function (starCount, type) {
       if (type == "marked") {
@@ -2727,9 +2777,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // get booking data end
 
-
     $scope.cityType = ['Adventure', 'Business', 'Family', 'Romance', 'Budget', 'Luxury', 'Religious', 'Friends', 'Shopping', 'Solo', 'Festival', 'Backpacking'];
-
 
     $scope.openCountry = function (index) {
       $scope.mustDoArr = _.cloneDeep($scope.cityDestData.mustDo);
@@ -2976,35 +3024,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     switch ($state.params.name) {
       case "mustdo":
         $scope.destination.innerView = alldestination[0];
+        $scope.cityDestinationView = true;
         $scope.getCityInfo("mustDo", $scope.urlDestinationCity);
         $scope.cityoptions.active = "mustdo";
         break;
       case "hotels":
         $scope.destination.innerView = alldestination[1];
+        $scope.cityDestinationView = false;
         $scope.cityoptions.active = "hotels";
         $scope.getCityInfo("hotel", $scope.urlDestinationCity);
         break;
       case "restaurants":
         $scope.destination.innerView = alldestination[2];
+        $scope.cityDestinationView = false;
         $scope.cityoptions.active = "restaurants";
         $scope.getCityInfo("restaurant", $scope.urlDestinationCity);
         break;
       case "itineraries":
         $scope.destination.innerView = alldestination[3];
+        $scope.cityDestinationView = false;
         $scope.cityoptions.active = "itineraries";
         $scope.getCityInfo("itinerary", $scope.urlDestinationCity);
         break;
       case "booking":
         $scope.destination.innerView = alldestination[4];
+        $scope.cityDestinationView = false;
         $scope.cityoptions.active = "booking";
         $scope.getBooking($scope.bookingCityName, $scope.bookingCountryName);
         break;
       case "visit":
         $scope.destination.innerView = alldestination[5];
+        $scope.cityDestinationView = false;
         $scope.cityoptions.active = "visit";
         break;
       default:
         $scope.destination.innerView = alldestination[0];
+        $scope.cityDestinationView = true;
     }
     $scope.getTab = function (view) {
       $scope.destination.innerView = alldestination[view];
@@ -3014,11 +3069,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       switch (view) {
         case 0:
           url = "mustdo";
+          $scope.cityDestinationView = true;
           $scope.cityoptions.active = "mustdo";
           $scope.getCityInfo("mustDo", $scope.urlDestinationCity);
           break;
         case 1:
           url = "hotels";
+          $scope.cityDestinationView = false;
           $scope.cityoptions.active = "hotels";
           $scope.citySubTypeData = [];
           $scope.cityBudgetData = [];
@@ -3026,6 +3083,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           break;
         case 2:
           url = "restaurants";
+          $scope.cityDestinationView = false;
           $scope.cityoptions.active = "restaurants";
           $scope.citySubTypeData = [];
           $scope.cityBudgetData = [];
@@ -3033,6 +3091,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           break;
         case 3:
           url = "itineraries";
+          $scope.cityDestinationView = false;
           $scope.cityoptions.active = "itineraries";
           $scope.cityRestaurantCuisine = [];
           $scope.citySubTypeData = [];
@@ -3041,11 +3100,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           break;
         case 4:
           url = "booking";
+          $scope.cityDestinationView = false;
           $scope.cityoptions.active = "booking";
           $scope.getBooking($scope.bookingCityName, $scope.bookingCountryName);
           break;
         case 5:
           url = "visit";
+          $scope.cityDestinationView = false;
           $scope.cityoptions.active = "visit";
           break;
       }

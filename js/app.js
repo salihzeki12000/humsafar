@@ -1126,6 +1126,7 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
           var ith = 1;
           var percentage = 0;
           //manipulating map based on divPositions starts
+          console.log(divPositions);
           _.each(divPositions, function (n, index) {
             if (n <= currentScroll && divPositions[index + 1] > currentScroll) { //would work for  1st checkIn till second last checkin coz divPositions[index + 1] would return false
               ith = index;

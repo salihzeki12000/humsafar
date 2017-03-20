@@ -1,42 +1,42 @@
-  <div class="container-fluid ">
-<div class="min-hght">
-  <div class="relate destin-fixednav2" ng-class="{'openfilter': isopenfilter}">
-    <div class="pt10 pb10 head-title-all bg-white mb20">
-      <div class="row m-clear">
-        <div class="col-md-3">
-          <div class="pad-btn">
-            <button class="btn btn-pink avenir-roman" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i>Filter</button>
+<div class="container-fluid ">
+  <div class="min-hght">
+    <div class="relate" ng-class="{'openfilter': isopenfilter}">
+      <div class="pt10 pb10 head-title-all bg-white mb20">
+        <div class="row m-clear">
+          <div class="col-md-3">
+            <div class="pad-btn">
+              <button class="btn btn-pink avenir-roman" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i>Filter</button>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h4 class="text-center fnt-24">TraveLibro Recommended Restaurants</h4>
+            <p class="text-center avenir-roman m-clear"><span class="pr20">$$$ - Luxury</span> <span class="pr20">$$ - Mid Range    </span> <span>$ - Place To Crash</span></p>
           </div>
         </div>
-        <div class="col-md-6">
-          <h4 class="text-center fnt-24">TraveLibro Recommended Restaurants</h4>
-          <p class="text-center avenir-roman m-clear"><span class="pr20">$$$ - Luxury</span> <span class="pr20">$$ - Mid Range    </span> <span>$ - Place To Crash</span></p>
-        </div>
       </div>
-    </div>
-    <div class="libro-filter filterclose">
-      <form>
-        <div class="pt20 pb10 head-title-all fliter-min-hght bg-white">
-          <div class="container-fluid">
-            <div class="pad-btn">
-              <div class="row">
-                <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made destination-filterscroll">
-                    <input type="text" placeholder="Cuisine" class="form-control" ng-model="cityCuisine" ng-click="showCuisine=!showCuisine">
-                    <div class="view-cuisine destination-filterdrop" ng-show="showCuisine">
-                      <ul>
-                        <li ng-repeat="cuisine in cityDestData.cuisine track by $index">
-                          <div class="custom-checkbox">
-                            <input type="checkbox" id="{{cuisine}}" ng-click="hotelRestaurantFilter(cuisine,'restaurantCuisine')">
-                            <label for="{{cuisine}}">{{cuisine}}</label>
-                          </div>
-                        </li>
-                      </ul>
+      <div class="libro-filter filterclose">
+        <form>
+          <div class="pt20 pb10 head-title-all fliter-min-hght bg-white">
+            <div class="container-fluid">
+              <div class="pad-btn">
+                <div class="row">
+                  <div class="col-md-2 col-sm-3">
+                    <div class="select-all-made destination-filterscroll entry-content">
+                      <input type="text" placeholder="Cuisine" class="form-control" ng-model="cityCuisine" ng-click="viewDropdown.showDropdown=!viewDropdown.show">
+                      <div class="view-cuisine destination-filterdrop" ng-show="viewDropdown.showDropdown">
+                        <ul>
+                          <li ng-repeat="cuisine in cityDestData.cuisine track by $index">
+                            <div class="custom-checkbox">
+                              <input type="checkbox" id="{{cuisine}}" ng-click="hotelRestaurantFilter(cuisine,'restaurantCuisine')">
+                              <label class="entry-content" for="{{cuisine}}">{{cuisine}}</label>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made destination-filterscroll">
+                  <div class="col-md-2 col-sm-3">
+                    <div class="select-all-made destination-filterscroll">
                       <input type="text" class="form-control" placeholder="Type" ng-click="showType=!showType" ng-model="cityTypeRestaurant">
                       <div class="destination-filterdrop" ng-show="showType">
                         <ul>
@@ -48,36 +48,36 @@
                           </li>
                         </ul>
                       </div>
-                  </div>
-                </div>
-                <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made destination-filterscroll">
-                    <input type="text" placeholder="Budget" class="form-control" ng-model="cityRestoBudget" ng-click="showBudget=!showBudget">
-                    <div class="destination-filterdrop" ng-show="showBudget">
-                      <ul>
-                        <li>
-                          <div class="custom-checkbox">
-                            <input type="checkbox" id="budget-three"  ng-click="hotelRestaurantFilter('$$$','restaurantBudget')">
-                            <label for="budget-three">$$$</label>
-                          </div>
-                        </li>
-                        <li>
-                        <div class="custom-checkbox">
-                            <input type="checkbox" id="budget-two"  ng-click="hotelRestaurantFilter('$$','restaurantBudget')">
-                          <label for="budget-two">$$</label>
-                        </div>
-                        </li>
-                        <li >
-                        <div class="custom-checkbox">
-                            <input type="checkbox" id="budget-one" ng-click="hotelRestaurantFilter('$','restaurantBudget')">
-                          <label for="budget-one">$</label>
-                        </div>
-                        </li>
-                      </ul>
                     </div>
                   </div>
-                </div>
-                <!--<div class="col-md-2 col-sm-3 ">
+                  <div class="col-md-2 col-sm-3">
+                    <div class="select-all-made destination-filterscroll">
+                      <input type="text" placeholder="Budget" class="form-control" ng-model="cityRestoBudget" ng-click="showBudget=!showBudget">
+                      <div class="destination-filterdrop" ng-show="showBudget">
+                        <ul>
+                          <li>
+                            <div class="custom-checkbox">
+                              <input type="checkbox" id="budget-three" ng-click="hotelRestaurantFilter('$$$','restaurantBudget')">
+                              <label for="budget-three">$$$</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="custom-checkbox">
+                              <input type="checkbox" id="budget-two" ng-click="hotelRestaurantFilter('$$','restaurantBudget')">
+                              <label for="budget-two">$$</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="custom-checkbox">
+                              <input type="checkbox" id="budget-one" ng-click="hotelRestaurantFilter('$','restaurantBudget')">
+                              <label for="budget-one">$</label>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!--<div class="col-md-2 col-sm-3 ">
                 <div class="select-all-made ">
                   <ui-select ng-model="selectedItem ">
                     <ui-select-match placeholder="Budget ">
@@ -89,32 +89,32 @@
                   </ui-select>
                 </div>
               </div>-->
-                <div class="col-md-offset-1 col-md-5  col-sm-3 ">
-                  <!--<button type="submit">Add</button>-->
-                  <div class="txt-clear text-right ">
-                    <a>Clear All</a>
+                  <div class="col-md-offset-1 col-md-5  col-sm-3 ">
+                    <!--<button type="submit">Add</button>-->
+                    <div class="txt-clear text-right ">
+                      <a>Clear All</a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="pt10 pb10 head-title-all bg-grey mb20 ">
-          <div class="container-fluid ">
-            <div class="plr30 ">
-              <div class="close-all ">
-                <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
+          <div class="pt10 pb10 head-title-all bg-grey mb20 ">
+            <div class="container-fluid ">
+              <div class="plr30 ">
+                <div class="close-all ">
+                  <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
                   <a class="btn btn-pink avenir-roman " ng-click="getCityInfo('restaurant', urlDestinationCity)">Submit</a>
 
-                 <!-- abhi iska api mai dekhna hai -->
-                <!-- <span class="tags avenir-roman" ng-repeat="item in country">{{item}} <span>X</span></span> -->
+                  <!-- abhi iska api mai dekhna hai -->
+                  <!-- <span class="tags avenir-roman" ng-repeat="item in country">{{item}} <span>X</span></span> -->
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
     <div class="destination-featured plr30 ">
       <div class="hotels">
         <div class="row ">

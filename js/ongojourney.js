@@ -266,25 +266,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
           $scope.ongo.onDisplay = "photos";
         }
       }
-
-      // $scope.ongo.journeyTypeicon = "";
-
-      // type of post starts
-      // $scope.ongo.typeOfPost = "";
-      // if ($scope.ongo && $scope.ongo.checkIn && $scope.ongo.checkIn.location) {
-      //   $scope.ongo.journeyTypeicon = "img/ongojourney/location.png";
-      //   $scope.ongo.typeOfPost = 'checkIn';
-      // } else if ($scope.ongo && $scope.ongo.photos && $scope.ongo.photos.length != 0) {
-      //   $scope.ongo.journeyTypeicon = "img/ongojourney/camera.png";
-      //   $scope.ongo.typeOfPost = 'photo';
-      // } else if ($scope.ongo && $scope.ongo.videos && $scope.ongo.videos.length != 0) {
-      //   $scope.ongo.journeyTypeicon = "img/ongojourney/video.png";
-      //   $scope.ongo.typeOfPost = 'video';
-      // } else if ($scope.ongo && $scope.ongo.thoughts) {
-      //   $scope.ongo.journeyTypeicon = "img/ongojourney/thought.png";
-      //   $scope.ongo.typeOfPost = 'thought';
-      // } 
-      // type of post ends
       makePostString();
 
       $scope.likePost = function (ongo) {
@@ -307,19 +288,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
         var audio = document.getElementById('like-play');
         audio.play();
       }
-
-      // $scope.getLikes = function (id) {
-      //   var formData = {
-      //     "_id": id
-      //   }
-      //  TravelibroService.http({
-      //     url: adminURL + "/post/getPostLikes",
-      //     method: "POST",
-      //     data: formData
-      //   }).success(function (data) {
-      //     $scope.listOfLikes = data.data;
-      //   });
-      // };
 
       $scope.likePhoto = function (uniqueId, _id, additionalId) {
         console.log(uniqueId, _id, additionalId);
