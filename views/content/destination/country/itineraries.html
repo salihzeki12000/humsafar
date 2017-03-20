@@ -36,9 +36,9 @@
                   </div>
                   </div> -->
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made city-select relate">
-                    <input type="text" ng-model="itinerary.citySearch" class="form-control" ng-change="getItinerayCity();" placeholder="City" ng-click="showCityDrop();">
-                    <div class="city-dropdow itinerary-dropdown" ng-show="viewCityDrop">
+                  <div class="select-all-made city-select relate" ng-init="viewItineraryCity={'outerClass':'outerCity','innerClass':'innerCity'}">
+                    <input type="text" ng-model="itinerary.citySearch" class="form-control outerCity" ng-change="getItinerayCity();" placeholder="City" ng-click="editOption(viewItineraryCity,'outerCity','innerCity')">
+                    <div class="city-dropdow itinerary-dropdown innerCity" ng-show="viewItineraryCity.backgroundClick">
                       <ul>
                         <li ng-repeat="city in cityList | filter:itinerary.citySearch track by $index">
                           <div class="select-city custom-checkbox">
@@ -51,9 +51,9 @@
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made itinerary-select relate">
-                    <input type="text" ng-model="itinerary.type" class="form-control" ng-change="getItineraryType();" placeholder="Type" ng-click="showTypeDrop();">
-                    <div class="city-dropdow itinerary-dropdown" ng-show="viewTypeDrop">
+                  <div class="select-all-made itinerary-select relate" ng-init="viewItineraryType={'outerClass':'outerIti','innerClass':'innerouterIti'}">
+                    <input type="text" ng-model="itinerary.type" class="form-control outerIti" ng-change="getItineraryType();" placeholder="Type" ng-click="editOption(viewItineraryType,'outerIti','innerouterIti')">
+                    <div class="city-dropdow itinerary-dropdown innerouterIti" ng-show="viewItineraryType.backgroundClick">
                       <ul>
                         <li ng-repeat="type in itineraryType| filter:itinerary.type track by $index">
                           <div class="select-city custom-checkbox">
@@ -66,9 +66,9 @@
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made by-select relate">
-                    <input type="text" ng-model="itinerary.by" class="form-control" ng-change="getItineraryType();" placeholder="By" ng-click="showByDrop();">
-                    <div class="city-dropdow itinerary-dropdown" ng-show="viewByDrop">
+                  <div class="select-all-made by-select relate" ng-init="viewItineraryBy={'outerClass':'outerItiBy','innerClass':'innerouterItiBy'}">
+                    <input type="text" ng-model="itinerary.by" class="form-control outerItiBy" ng-change="getItineraryType();" placeholder="By" ng-click="editOption(viewItineraryBy,'outerItiBy','innerouterItiBy')">
+                    <div class="city-dropdow itinerary-dropdown innerouterItiBy" ng-show="viewItineraryBy.backgroundClick">
                       <ul>
                         <li ng-repeat="by in itineraryBy| filter:itinerary.by track by $index">
                           <div class="select-city custom-checkbox">
