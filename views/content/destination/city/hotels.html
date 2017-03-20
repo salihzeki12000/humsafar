@@ -93,12 +93,18 @@
                   <h4 class="avenir-heavy fnt-22">{{hotels.name}}</h4>
                 </div>
                 <div class="rating-localpost inline-block">
-                  <!-- <span class="color-blue font-bold mr5">Rating:</span> -->
-                  <i class="fa fa-star color-pink"></i>
-                  <i class="fa fa-star color-pink"></i>
-                  <i class="fa fa-star color-pink"></i>
-                  <i class="fa fa-star-o color-pink"></i>
-                  <i class="fa fa-star-o color-pink"></i>
+                  <span ng-if="hotels.rating==null">
+                    <i class="fa fa-star-o color-pink"></i>
+                    <i class="fa fa-star-o color-pink"></i>
+                    <i class="fa fa-star-o color-pink"></i>
+                    <i class="fa fa-star-o color-pink"></i>
+                    <i class="fa fa-star-o color-pink"></i>
+                  </span>
+                  <span ng-if="hotels.rating>0">
+                    <span class="rated-star"><i class="fa fa-star color-pink" ng-repeat="a in getRating(hotels.rating,'marked') track by $index"></i></span>
+                    <span class="non-rated-star"><i class="fa fa-star-o color-pink" ng-repeat="b in getRating(hotels.rating,'unmarked') track by $index"></i></span>
+                    </span>
+                  <span ng-if="hotels.rating>0">({{hotels.ratingCount}})</span>
                 </div>
                 <div class="category">
                   <span>Category :</span>
@@ -112,7 +118,7 @@
                 <div class="pull-right">
                   <a>Suggest An Edit</a>
                 </div>
-                <span>Been Here :</span> <span class="italic pointer">Write Review</span>
+                <span>Been Here :</span> <span class="italic pointer" ng-click="rateDestination(hotels,'hotel')">Rate this now</span>
               </div>
             </div>
           </div>
