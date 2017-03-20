@@ -205,7 +205,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'PopularItineraryCtrl'
     })
     .state('destination', {
-      url: "/destination",
+      url: "/destinations",
       templateUrl: "views/template.html",
       controller: 'DestinationCtrl'
     })
