@@ -13,13 +13,21 @@
               </ul>
             </div>
           </div>
-          <div class="col-md-4 col-sm-4 hide">
+          <div class="col-md-4 col-sm-4">
             <div class="pr20">
               <form action="">
-                <div class="input-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search Destination">
-                    <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                <div class="input-search relate" ng-init="viewDestinationCity={'outerClass':'outerDestCity','innerClass':'innerDestCity'}">
+                  <div class="input-group outerDestCity">
+                    <input type="text" class="form-control" placeholder="Search Destination" ng-model="dest.viewDestination" ng-change="callDestination();" ng-click="editOption(viewDestinationCity,'outerDestCity','innerDestCity')">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                  </div>
+                  <div class="dropdown-destination innerDestCity" ng-show="viewDestinationCity.backgroundClick">
+                    <ul>
+                      <li ng-repeat="dest in destinationList  track by $index">
+                        <span ng-if="dest.isCity==true" ng-click="countryView(dest.urlSlug,dest.isCity);">{{dest.name}}</span>
+                        <span ng-if="dest.isCity==false" ng-click="countryView(dest.urlSlug,dest.isCity);">{{dest.name}}</span>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </form>

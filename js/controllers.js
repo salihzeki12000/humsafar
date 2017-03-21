@@ -2217,7 +2217,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Destination");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    // cfpLoadingBar.start();
     $scope.destinationList = [];
     $scope.viewListByKey = "A";
     $scope.countryDestList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -2233,9 +2232,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.destinationList = data.data;
           $scope.i = 0;
         }
-        // cfpLoadingBar.complete();
       });
-    }
+        }
     $scope.callCountry("a", "");
     $scope.searchDestination = function (searchVal) {
       if (searchVal === "") {
@@ -2245,7 +2243,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewListByKey = searchVal.charAt(0);
         $scope.callCountry(searchVal, searchVal);
       }
-      // cfpLoadingBar.complete();
     };
 
     $scope.editOption = function (model, class1, class2) {
@@ -2279,7 +2276,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.urlDestinationCountry = $state.params.url;
-    // cfpLoadingBar.start();
     $scope.hotelsData = [];
     $scope.toursData = [];
     $scope.vacationsData = [];
@@ -3588,7 +3584,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.getFilterData = function (urlSlug, budget, cuisine, type) {
-      cfpLoadingBar.start();
       NavigationService.getCityDestination({
         urlSlug: $scope.urlDestinationCity,
         budget: budget,
@@ -3597,7 +3592,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, function (data) {
         $scope.cityDestData = data.data;
         console.log($scope.cityDestData, "budget");
-        cfpLoadingBar.complete();
       });
     };
 
@@ -4116,10 +4110,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
 
     $scope.updateBucketList = function (country) {
-      // cfpLoadingBar.start();
       MyLife.updateBucketList(country, function (data, status) {
         reloadCount();
-        // cfpLoadingBar.complete();
+
       }, function () {});
       $scope.getMap();
     };
@@ -4169,7 +4162,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       //remove country visited and all its count starts
       $scope.removeCountryVisited = function () {
-        // cfpLoadingBar.start();
         var obj = {
           "countryId": country._id,
           "visited": []
@@ -4177,7 +4169,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         MyLife.updateCountriesVisited(obj, function (data, status) {
           reloadCount();
           modal.close();
-          // cfpLoadingBar.complete();
         }, function () {});
         arr = [];
         $scope.getMap();
@@ -4392,7 +4383,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       "type": "local-life"
     };
     var getMoments = function () {
-      // cfpLoadingBar.start();
       $scope.allMoments.scrollBusy = true;
       $scope.travelLifeMoments.scrollBusy = true;
       $scope.localLifeMoments.scrollBusy = true;
@@ -4404,12 +4394,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           "stopCallingApi": false,
           "type": "all"
         };
-        // cfpLoadingBar.complete();
       }, function (data) {
         console.log(data);
       });
       MyLife.getTravelLifeMoments("travel-life", 1, function (data) {
-        // cfpLoadingBar.start();
         $scope.travelLifeMoments = {
           "arr": data.data,
           "scrollBusy": false,
@@ -4417,27 +4405,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           "type": "travel-life",
           "pageNo": 1
         };
-        // cfpLoadingBar.complete();
         // $scope.travelLifeMoments = data.data;
       }, function (data) {
         console.log(data);
       });
       MyLife.getAllMoments("", 5, "local-life", 3, function (data) {
-        cfpLoadingBar.start();
         $scope.localLifeMoments = {
           "arr": data.data,
           "scrollBusy": false,
           "stopCallingApi": false,
           "type": "local-life"
         };
-        cfpLoadingBar.complete();
         // $scope.localLifeMoments = data.data;
       }, function (data) {
         console.log(data);
       })
     };
     $scope.getMoreMoments = function (moment) {
-      // cfpLoadingBar.start();
       if (moment.scrollBusy) {
         return;
       } else {
@@ -4469,7 +4453,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   }, function (data) {
                     moment.scrollBusy = false;
                     moment.stopCallingApi = false;
-                    // cfpLoadingBar.complete();
                   });
                 }
               }
@@ -4492,7 +4475,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 moment.scrollBusy = false;
                 moment.stopCallingApi = false;
                 --moment.pageNo;
-                // cfpLoadingBar.complete();
               });
               break;
             default:
@@ -4502,7 +4484,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     $scope.getMorePhotos = function (album) {
-      // cfpLoadingBar.start();
       console.log(album);
       if (album.scrollBusy) {
         return;
@@ -4529,12 +4510,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 album.scrollBusy = false;
                 album.stopCallingApi = false;
                 --album.pageNo;
-                // cfpLoadingBar.complete();
               });
               break;
             case 'all':
             case 'local':
-              // cfpLoadingBar.start();
               console.log("getPerMonthMoments called by scrolling");
               MyLife.getPerMonthMoments(album.token, album.pageNo, 24, album.type, function (data) {
                 album.scrollBusy = false;
@@ -4550,7 +4529,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 album.scrollBusy = false;
                 album.stopCallingApi = false;
                 --album.PageNo;
-                // cfpLoadingBar.complete();
               });
               break;
           }
@@ -4580,7 +4558,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log($scope.album.perMonthMoments);
     };
     $scope.getPerMonthMoments = function (obj, type) {
-      // cfpLoadingBar.start();
       console.log("getPerMonthMoments called by ng-click");
       $scope.token = obj.token;
       $scope.count = obj.count;
@@ -4595,7 +4572,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // $scope.perMonthMoments = [];
       MyLife.getPerMonthMoments($scope.album.token, 1, 24, $scope.album.type, viewMonthDataCallback, function (data) {
         console.log(data);
-        // cfpLoadingBar.complete();
       });
       $scope.showMonthView();
     };
@@ -4629,7 +4605,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Photo comment popup end
 
     $scope.getJournItiMoments = function (obj) {
-      // cfpLoadingBar.start();
       // $scope.perMonthMoments = [];
       console.log("getJournItiMoments called by ng-click");
       $scope.token = obj.name;
@@ -4651,7 +4626,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // $scope.albumPageNo = 1;
       MyLife.getJournItiMoments(obj._id, 1, 24, $scope.album.type, viewMonthDataCallback, function (data) {
         console.log(data);
-        // cfpLoadingBar.complete();
       });
       $scope.showMonthView();
     };
@@ -4763,7 +4737,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       "pageNo": 1
     };
     var getReviews = function () {
-      // cfpLoadingBar.start();
       console.log("getAllReviews called after loading");
       $scope.reviewAll.scrollBusy = true;
       MyLife.getAllReviews("all", 1, function (data) {
@@ -4778,7 +4751,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log($scope.allMoments);
       }, function (data) {
         console.log(data);
-        // cfpLoadingBar.complete();
       });
       MyLife.getAllReviews("travel-life", 1, function (data) {
         console.log(data);
@@ -4793,7 +4765,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log($scope.travelLifeMoments);
       }, function (data) {
         console.log(data);
-        // cfpLoadingBar.complete();
       });
       MyLife.getAllReviews("local-life", 1, function (data) {
         console.log(data);
@@ -4807,12 +4778,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         // $scope.localLifeMoments = data.data;
       }, function (data) {
         console.log(data);
-        // cfpLoadingBar.complete();
       })
     };
 
     $scope.getAllReviews = function (review) {
-      // cfpLoadingBar.start();
       console.log("getAllReviews called after scrolling");
       console.log(review);
       if (review.scrollBusy) {
@@ -4839,14 +4808,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             review.scrollBusy = false;
             review.stopCallingApi = false;
             --review.pageNo;
-            // cfpLoadingBar.complete();
           });
         }
       }
     };
 
     $scope.getMoreReviews = function (object, flag) {
-      // cfpLoadingBar.start();
       console.log("getReviews called from getMoreReviews");
       if (object.country && object._id && object.pageNo) {
         if (object.scrollBusy) {
@@ -4874,7 +4841,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   object.scrollBusy = false;
                   object.stopCallingApi = false;
                   --object.pageNo;
-                  // cfpLoadingBar.complete();
                 });
                 break;
               case 'local-life':
@@ -4894,7 +4860,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   object.scrollBusy = false;
                   object.stopCallingApi = false;
                   --object.pageNo;
-                  // cfpLoadingBar.complete();
                 });
                 break;
             }
@@ -4907,7 +4872,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     $scope.goToAccordian = function (review, showType) {
-      // cfpLoadingBar.start();
       $scope[showType] = true;
       switch (showType) {
         case 'viewTravelCountry':
@@ -4917,7 +4881,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           MyLife.getCities(review._id, function (data) {
             // review.cities = data.data;
             $scope.citiesTravelled.cities = data.data;
-            // cfpLoadingBar.complete();
           });
           break;
         case 'viewLocalCountry':
@@ -4927,7 +4890,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           MyLife.getCategories(review._id, function (data) {
             // review.categories = data.data;
             $scope.categoryList.categories = data.data;
-            // cfpLoadingBar.complete();
           });
           console.log($scope.categoryList);
           break;
@@ -4958,7 +4920,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   }
     // };
     $scope.openAccordian = function (object, openAccordian, flag) {
-      // cfpLoadingBar.start();
       console.log("getReviewsWeb called from openAccordian");
       object.pageNo = 1;
       object.scrollBusy = false;
@@ -4969,20 +4930,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           case 'travel-life':
             MyLife.getReviewsByCities(object.country, object._id, object.pageNo, function (data) {
               object.accordReview = data.data;
-              // cfpLoadingBar.complete();
             });
             break;
           case 'local-life':
             MyLife.getReviewsByCategories(object.city, object._id, object.pageNo, function (data) {
               object.accordReview = data.data;
-              // cfpLoadingBar.complete();
             });
             break;
         }
       } else {}
     };
     $scope.savePostReview = function (values) {
-      // cfpLoadingBar.start();
       console.log(values, wholePost);
       var obj = {
         "post": wholePost._id,
@@ -5002,7 +4960,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           console.log(wholePost);
           modal.close();
         } else {}
-        // cfpLoadingBar.complete();
       })
     };
 

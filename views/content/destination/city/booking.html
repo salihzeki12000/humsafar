@@ -79,8 +79,8 @@
                       <div class="tour-star-rate rate-by-star">
                         <ul class="list-inline">
                           <li>
-                            <span class="star-marked" ng-repeat="marked in star(tour.star_rating,'marked') track by $index"><i class="fa fa-star color-white"></i></span>
-                            <span class="star-unmarked" ng-repeat="unmarked in star(tour.star_rating,'unmarked') track by $index"><i class="fa fa-star-o color-white"></i></span>
+                            <span class="star-marked" ng-repeat="marked in getRating(tour.star_rating,'marked') track by $index"><i class="fa fa-star color-white"></i></span>
+                            <span class="star-unmarked" ng-repeat="unmarked in getRating(tour.star_rating,'unmarked') track by $index"><i class="fa fa-star-o color-white"></i></span>
                           </li>
                         </ul>
                         <span class="tour-review">
@@ -153,8 +153,8 @@
                         <div class="rate-by-star">
                           <ul class="list-inline">
                             <li>
-                              <span class="star-marked" ng-repeat="marked in star(hotel.star_rating,'marked') track by $index"><i class="fa fa-star color-white"></i></span>
-                              <span class="star-unmarked" ng-repeat="unmarked in star(hotel.star_rating,'unmarked') track by $index"><i class="fa fa-star-o color-white"></i></span>
+                              <span class="star-marked" ng-repeat="marked in getRating(hotel.star_rating,'marked') track by $index"><i class="fa fa-star color-white"></i></span>
+                              <span class="star-unmarked" ng-repeat="unmarked in getRating(hotel.star_rating,'unmarked') track by $index"><i class="fa fa-star-o color-white"></i></span>
                             </li>
                           </ul>
                         </div>
@@ -361,8 +361,8 @@
                           <div class="rate-by-star">
                             <ul class="list-inline">
                               <li>
-                                <span class="star-marked" ng-repeat="marked in star(vacation.star_rating,'marked') track by $index"><i class="fa fa-star color-white"></i></span>
-                                <span class="star-unmarked" ng-repeat="unmarked in star(vacation.star_rating,'unmarked') track by $index"><i class="fa fa-star-o color-white"></i></span>
+                                <span class="star-marked" ng-repeat="marked in getRating(vacation.star_rating,'marked') track by $index"><i class="fa fa-star color-white"></i></span>
+                                <span class="star-unmarked" ng-repeat="unmarked in getRating(vacation.star_rating,'unmarked') track by $index"><i class="fa fa-star-o color-white"></i></span>
                               </li>
                             </ul>
                           </div>
@@ -555,8 +555,8 @@
                         <div class="rate-by-star">
                           <ul class="list-inline">
                             <li>
-                              <span class="star-marked" ng-repeat="marked in star(homestay.star_rating,'marked') track by $index"><i class="fa fa-star color-white"></i></span>
-                              <span class="star-unmarked" ng-repeat="unmarked in star(homestay.star_rating,'unmarked') track by $index"><i class="fa fa-star-o color-white"></i></span>
+                              <span class="star-marked" ng-repeat="marked in getRating(homestay.star_rating,'marked') track by $index"><i class="fa fa-star color-white"></i></span>
+                              <span class="star-unmarked" ng-repeat="unmarked in getRating(homestay.star_rating,'unmarked') track by $index"><i class="fa fa-star-o color-white"></i></span>
                             </li>
                           </ul>
                           <!-- <span class="hotel-review ml10">12 <span>Reviews</span></span> -->
