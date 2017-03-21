@@ -126,13 +126,13 @@
                           <div class="get-right pull-right">
                             <div class="relate inline-block mr10">
                               <div class="custom-checkbox">
-                                <input type="checkbox" id="{{list._id}}" ng-model="list.countryVisited">
-                                <label for=" {{list._id}} " ng-click="updateCountryVisited(list);"></label>
+                                <input type="checkbox" id="{{list._id}}" ng-model="list.countryVisited" ng-disabled="!isMine">
+                                <label for="{{list._id}}" ng-click="!isMine||updateCountryVisited(list);"></label>
                               </div>
                             </div>
                             <div class="relate inline-block mr10 ">
                               <div class="bucket-list custom-checkbox-heart ">
-                                <input type="checkbox" id="wish{{list._id}}" ng-model="list.bucketList" ng-click="updateBucketList(list) ">
+                                <input type="checkbox" id="wish{{list._id}}" ng-model="list.bucketList" ng-click="!isMine||updateBucketList(list)" ng-disabled="!isMine">
                                 <label for="wish{{list._id}}"></label>
                               </div>
                             </div>

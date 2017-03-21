@@ -100,7 +100,7 @@
             <!-- search bucketList -->
             <div class="list-add-country" ng-if="activeMenu == 'bucket-list'">
               <div class="bucket-visited-holder" ng-init="visitedBucketCountry={'outerClass':'outerBucket','innerClass':'innerBucket'};">
-                <input class="outerBucket" type="text" placeholder="Add To BucketList" ng-model="visitedCountry" ng-change="editOption(visitedBucketCountry,'outerBucket','innerBucket')">
+                <input class="outerBucket" type="text" placeholder="Add To BucketList" ng-model="visitedCountry" ng-change="editOption1(visitedBucketCountry,'outerBucket','innerBucket')">
                 <span class="search-icon"><i class="fa fa-search"></i></span>
                 <div class="bucket-dropdown entry-content innerBucket" ng-show="visitedBucketCountry.backgroundClick">
                   <ul>
@@ -111,7 +111,7 @@
                           <div class="relate inline-block">
                             <div class="bucket-list custom-checkbox-heart">
                               <input type="checkbox" id="wish{{list._id}}" ng-model="list.bucketList" ng-click="updateBucketList(list)">
-                              <label class="" for="wish{{list._id}}"></label>
+                              <label for="wish{{list._id}}"></label>
                             </div>
                           </div>
                         </div>

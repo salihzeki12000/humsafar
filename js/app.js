@@ -27,8 +27,6 @@ $(document).ready(function () {
   });
 });
 
-
-
 $("body").click(function (e) {
   console.log($(e.target).parent().hasClass('drop-content'));
   console.log($(e.target).hasClass('toggle-dropDown'));
@@ -151,7 +149,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'LoginCtrl'
     })
     .state('login', {
-      url: "/main/:name",
+      url: "/login",
       templateUrl: "views/template.html",
       controller: 'LoginCtrl'
     })

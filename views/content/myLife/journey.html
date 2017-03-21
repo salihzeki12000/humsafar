@@ -37,7 +37,7 @@
                 </div>
               </div>
               <div class="pull-right">
-                <div class="add-journey" ng-init="closeJourney={}">
+                <div class="add-journey" ng-init="closeJourney={}" ng-if="isMine">
                   <!--<span class="pointer" ng-click="false||(showMore = !showMore); editOption(closeJourney)" remove-link my-profile='false' element-event="$event" ng-class="{'close-more' : showMore == true}"><i class="fa fa-plus"></i></span>-->
                   <span class="pointer" ng-click="false||(showMore = !showMore); editOption(closeJourney)" remove-link my-profile='false' element-event="$event"><i class="fa fa-plus"></i></span>
                   <div class="add-more-journey" ng-show="closeJourney.backgroundClick">
@@ -239,7 +239,7 @@
                                 </li>-->
                               </ul>
                             </div>
-                            <div class="pull-right">
+                            <div class="pull-right" ng-if="isMine">
                               <div class="relate options pointer" ng-init="life.dropdown = {};">
                                 <div class="options" ng-click="editOption(life.dropdown)">
                                   <span class="pl10"><img src="img/options.png" alt="" height="18"></span>

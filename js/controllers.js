@@ -2341,9 +2341,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             if (data.data.itinerary.length == 0) {
               $scope.scroll.stopCallingApi = true;
             } else {
-              _.each(data.data.bestTime, function (newVal) {
-                newVal.month = moment(newVal.month, "M").format('MMMM');
-              });
               $scope.countryDestIti.push(newData);
               console.log($scope.countryDestIti, 'data itinerary wala');
             }
@@ -2360,6 +2357,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // };
         } else {
           $scope.countryDestData = data.data;
+          _.each(data.data.bestTime, function (newVal) {
+            newVal.month = moment(newVal.month, "M").format('MMMM');
+          });
         }
         // console.log($scope.countryDestData, 'what is cadat');
       });
@@ -2467,43 +2467,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         case "featured":
           $scope.countryoptions.active = "featured";
           $scope.destination.innerView = alldestination[0];
-          $scope.countryDestData = [];
+          // $scope.countryDestData = [];
           $scope.getCountryInfo("featuredCities", $scope.urlDestinationCountry);
           $scope.countryDestinationView = true;
-           $scope.ntMustdo = "ntMustdo";
+          $scope.ntMustdo = "ntMustdo";
           break;
         case "mustdo":
           $scope.countryoptions.active = "mustdo";
           $scope.destination.innerView = alldestination[1];
-          $scope.countryDestData = [];
+          // $scope.countryDestData = [];
           $scope.getCountryInfo("mustDo", $scope.urlDestinationCountry);
           $scope.countryDestinationView = false;
-           $scope.ntMustdo = "";
+          $scope.ntMustdo = "";
           break;
         case "itineraries":
           $scope.countryoptions.active = "itineraries";
           $scope.destination.innerView = alldestination[2];
-          $scope.countryDestData = [];
+          // $scope.countryDestData = [];
           $scope.getCountryInfo("itinerary", $scope.urlDestinationCountry);
           $scope.countryDestinationView = false;
-            $scope.ntMustdo = "";
+          $scope.ntMustdo = "";
           break;
         case "booking":
           $scope.countryoptions.active = "booking";
           // $scope.countryDestData = [];
           $scope.destination.innerView = alldestination[3];
           $scope.countryDestinationView = false;
-            $scope.ntMustdo = "";          
+          $scope.ntMustdo = "";
           break;
         case "visit":
           $scope.countryoptions.active = "visit";
           // $scope.countryDestData = [];
           $scope.destination.innerView = alldestination[4];
           $scope.countryDestinationView = false;
-            $scope.ntMustdo = "";          
+          $scope.ntMustdo = "";
           break;
         default:
-          $scope.countryDestData = [];
+          // $scope.countryDestData = [];
           $scope.countryDestinationView = true;
           $scope.destination.innerView = alldestination[0];
       }
@@ -2831,6 +2831,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.pagenumber = 1;
     $scope.cityDestIti = [];
     $scope.ntMustdo = "ntMustdo";
+    $scope.callReview = "";
+    $scope.listOfReviews = [];
     $scope.scroll = {
       "busy": false,
       "stopCallingApi": false
@@ -3065,6 +3067,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
 
+    $scope.viewReviews = function (review, type) {
+      if ($scope.viewCardReview) {
+        $scope.viewCardReview = false;
+        $scope.callReview = "";
+      } else {
+        $scope.viewCardReview = true;
+        $scope.viewCardComment = false;
+        $scope.viewCardLike = false;
+        $scope.callReview = 'review-slide';
+        console.log(review);
+        LikesAndComments.getReviews(review._id, type, function (data) {
+          $scope.listOfReviews = data.data;
+          console.log($scope.listOfReviews, 'get review');
+        });
+      }
+    }
+
     $scope.listLikesDropDown = function (model) {
       $timeout(function () {
         model.backgroundClick = true;
@@ -3147,14 +3166,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.closeBackDrop = function () {
       $scope.viewCardComment = false;
       $scope.viewCardLike = false;
+      $scope.viewCardReview = false;
       $scope.getCard = "";
+      $scope.callReview = "";
       $scope.listOfLikes = [];
       $scope.listOfComments = [];
+      $scope.listOfReviews = [];
     };
 
     // COMMENT LIKE SECTION FUNCTIONS END
-
-
     //OpenFilter
     $scope.isopenfilter = false;
     $scope.openFilter = function () {
@@ -3389,41 +3409,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.cityDestinationView = true;
         $scope.getCityInfo("mustDo", $scope.urlDestinationCity);
         $scope.cityoptions.active = "mustdo";
-         $scope.ntMustdo = "ntMustdo";
+        $scope.ntMustdo = "ntMustdo";
         break;
       case "hotels":
         $scope.destination.innerView = alldestination[1];
         $scope.cityDestinationView = false;
         $scope.cityoptions.active = "hotels";
         $scope.getCityInfo("hotel", $scope.urlDestinationCity);
-         $scope.ntMustdo = "";
+        $scope.ntMustdo = "";
         break;
       case "restaurants":
         $scope.destination.innerView = alldestination[2];
         $scope.cityDestinationView = false;
         $scope.cityoptions.active = "restaurants";
         $scope.getCityInfo("restaurant", $scope.urlDestinationCity);
-            $scope.ntMustdo = "";
+        $scope.ntMustdo = "";
         break;
       case "itineraries":
         $scope.destination.innerView = alldestination[3];
         $scope.cityDestinationView = false;
         $scope.cityoptions.active = "itineraries";
         $scope.getCityInfo("itinerary", $scope.urlDestinationCity);
-            $scope.ntMustdo = "";
+        $scope.ntMustdo = "";
         break;
       case "booking":
         $scope.destination.innerView = alldestination[4];
         $scope.cityDestinationView = false;
         $scope.cityoptions.active = "booking";
         $scope.getBooking($scope.bookingCityName, $scope.bookingCountryName);
-            $scope.ntMustdo = "";
+        $scope.ntMustdo = "";
         break;
       case "visit":
         $scope.destination.innerView = alldestination[5];
         $scope.cityDestinationView = false;
         $scope.cityoptions.active = "visit";
-            $scope.ntMustdo = "";
+        $scope.ntMustdo = "";
         break;
       default:
         $scope.destination.innerView = alldestination[0];
@@ -3852,19 +3872,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.showTravellife = false;
     $scope.visited = [];
+
     if ($.jStorage.get("isLoggedIn") && ($.jStorage.get("profile").urlSlug == $stateParams.urlSlug)) {
+      //its your own profile so no need to call profile again
       $scope.userData = $.jStorage.get("profile");
       $.jStorage.set("activeUrlSlug", $.jStorage.get("profile").urlSlug);
       $scope.activeUrlSlug = $.jStorage.get("profile").urlSlug;
-      allowAccess = true;
+      // allowAccess = true;
+      $scope.isMine = true;
       setMoreAboutMe();
       reloadCount();
     } else {
-      // alert("not yours");
-      // console.log($stateParams.urlSlug);
+      //someone elses profile so get his/her data
       allowAccess = false;
       $.jStorage.set("activeUrlSlug", $stateParams.urlSlug);
       $scope.activeUrlSlug = $stateParams.urlSlug;
+      $scope.isMine = false;
       NavigationService.getProfile($stateParams.urlSlug, function (data) {
         console.log(data);
         if (data.value) {
@@ -3873,18 +3896,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           setMoreAboutMe();
           reloadCount();
         } else {
-          // $state.go("errorpage");
+          $state.go("errorpage");
         }
       }, function (data) {
         console.log(data);
       });
     }
+
     console.log($scope.activeUrlSlug);
     $scope.allowAccess = allowAccess;
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+
     $scope.likeUnlikeActivity = function (activity) {
       console.log(activity.likeUnlikeFlag, activity.uniqueId, activity._id);
-      console.log(activity.likeDone + "this call is from activitytest.html");
+      console.log(activity.likeDone + "this call is from journey.html");
       activity.likeDone = !activity.likeDone;
       console.log(activity.likeUnlikeFlag);
       if (activity.likeDone) {
@@ -6159,7 +6184,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       img: "img/countryside.png",
       caption: "Countryside",
-      storeCaption: "Countryside"
+      storeCaption: "Countrysides"
     }];
 
     $scope.travelConfig.usuallyGo = [{
@@ -7213,6 +7238,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       backgroundClick.scope = $scope;
     };
     //close dropDown on background click end
+
+    $scope.editOption1 = function (model, class1, class2) {
+      LikesAndComments.onClickDropDown(model, $scope, class1, class2);
+    };
 
     $scope.testingDropDown = function (name) {
       $scope.searchUser.open = true;
@@ -10085,6 +10114,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.search.searchType = "";
     $scope.search.viewData = false;
 
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+
     $(window).load(function () {
       var loading = setInterval(function () {
         var elementExists = document.getElementById("loader");
@@ -10096,34 +10127,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         };
       }, 200);
     });
-    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
-    NavigationService.getAccessToken(function (data) {
-      if (data.accessToken) {
-        NavigationService.getProfile("", function (data, status) {
-          if (data.data._id) {
-            $.jStorage.set("isLoggedIn", true);
-            $.jStorage.set("profile", data.data);
-            $scope.userData = $.jStorage.get("profile");
-            $scope.accessToken = $.jStorage.get("accessToken");
-            $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
-          } else {
+    if ($.jStorage.get('accessToken') && $.jStorage.get('accessToken') != '') {
+      $scope.userData = $.jStorage.get("profile");
+      $scope.accessToken = $.jStorage.get("accessToken");
+    } else {
+      $.jStorage.flush();
+    }
 
-          }
-        }, function (err) {
-          console.log(err);
-        });
-      } else {
-        $.jStorage.set("isLoggedIn", false);
-        $.jStorage.set("profile", null);
-        $scope.isLoggedIn = false;
-      }
-    }, function (data) {
-      console.log(data);
-    });
+    // NavigationService.getAccessToken(function (data) {
+    //   if (data.accessToken) {
+    //     NavigationService.getProfile("", function (data, status) {
+    //       if (data.data._id) {
+    //         $.jStorage.set("isLoggedIn", true);
+    //         $.jStorage.set("profile", data.data);
+    //         $scope.userData = $.jStorage.get("profile");
+    //         $scope.accessToken = $.jStorage.get("accessToken");
+    //         $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+    //       } else {
+
+    //       }
+    //     }, function (err) {
+    //       console.log(err);
+    //     });
+    //   } else {
+    //     $.jStorage.set("isLoggedIn", false);
+    //     $.jStorage.set("profile", null);
+    //     $scope.isLoggedIn = false;
+    //   }
+    // }, function (data) {
+    //   console.log(data);
+    // });
 
     $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
       $(window).scrollTop(0);
     });
+
     $scope.oneAtATime = true;
     $.fancybox.close(true);
     $scope.getslide = "menu-out";
@@ -10142,13 +10180,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.buttonpos = "buttonpos";
       }
     };
+
     $scope.isopen = false;
     $scope.opensearch = function () {
       $scope.isopen = !$scope.isopen;
     };
+
     $scope.opendownload = function () {
       $scope.isopen = !$scope.isopen;
     };
+
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
     }
@@ -10163,6 +10204,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           console.log(err);
         });
     };
+
     // backgroundClick
     $scope.editOption = function (model) {
       $timeout(function () {
@@ -10176,6 +10218,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       backgroundClick.scope = $scope;
     };
     //backgroundClick
+
     $scope.searchType = function () {
       console.log($scope.search.searchType, 'search type');
       if ($scope.search.searchType !== '') {
