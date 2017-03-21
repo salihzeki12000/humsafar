@@ -118,7 +118,7 @@
 <div class="review-main {{callReview}}" ng-show="viewCardReview">
   <div class="review-list" ng-repeat="review in listOfReviews.userReview track by $index">
     <div class="reviewer-imgholder">
-      <img ng-src="{{review.user.profilePicture|uploadpath}}" alt="{{review.user.name}}" class="img-responsive">
+      <img ng-src="{{review.user.profilePicture|uploadpath:45:50:'cover'}}" alt="{{review.user.name}}" class="img-responsive">
     </div>
     <div class="reviewer-content">
       <p><span class="reviewer-name avenir-heavy">{{review.user.name}}</span> <span class="reviewer-msg">{{review.review}}</span></p>

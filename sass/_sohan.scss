@@ -282,9 +282,21 @@ a.color-white {
 .destination-nav {
   padding: 10px 0 0;
   position: relative;
+  border: 0 0 8px 8px;
   z-index: 3;
+  ::-webkit-scrollbar {
+   width: 4px;
+ }
+  ::-webkit-scrollbar-track {
+   background-color: transparent;
+ }
+  ::-webkit-scrollbar-thumb {
+   background-color: $brand-pink;
+ }
 
   ul {
+    max-height: 250px;
+    overflow-y: auto;
     li {
       line-height: 150%;
       padding: 5px 0 4px;
@@ -334,6 +346,9 @@ a.color-white {
 
     li {
       border-bottom: 1px solid #424242;
+      span{
+        display: block;
+      }
 
       &:last-child {
         border: none;
@@ -356,6 +371,25 @@ a.color-white {
   }
 }
 
+
+.destination-nav .destination-main{
+  top: 51px;
+  border-radius: 0 0 8px 8px;
+  padding-right: 5px;
+  ::-webkit-scrollbar {
+   width: 4px;
+ }
+  ::-webkit-scrollbar-track {
+   background-color: transparent;
+ }
+  ::-webkit-scrollbar-thumb {
+   background-color: $brand-pink;
+ }
+  ul{
+    max-height: 250px;
+    overflow-y: auto;
+  }
+}
 .ntMustdo {
   .mustdo-not {
     display: none;

@@ -10852,7 +10852,7 @@ ng-map {
 @import "mobile.scss"; // header { display: none; }
 // travelibro loader
 .travelibro-loader {
-  display: none;
+  // display: none;
   @include square(100%);
   @include position(fixed,
   0);
@@ -10868,7 +10868,7 @@ ng-map {
   height: 100vh;
   @include filter(blur(7px));
   overflow: hidden;
-  display: none;
+  // display: none;
 }
 
 //video .form-control
