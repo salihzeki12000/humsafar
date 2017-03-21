@@ -2195,7 +2195,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // POPULAR JOURNEY INTEGRATION END
   })
 
-  .controller('DestinationCtrl', function ($scope, $state, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $location) {
+  .controller('DestinationCtrl', function ($scope, $state, TemplateService, NavigationService,LikesAndComments,cfpLoadingBar, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -2224,6 +2224,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
     $scope.callCountry("a", "");
+
     $scope.searchDestination = function (searchVal) {
       if (searchVal === "") {
         $scope.callCountry("a", "");
@@ -2234,7 +2235,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
       // cfpLoadingBar.complete();
     };
-
+    $scope.editOption = function (model, class1, class2) {
+      LikesAndComments.onClickDropDown(model, $scope, class1, class2);
+    };
     // destination country city
     $scope.countryView = function (url, isCity) {
       if (isCity === false) {
@@ -2833,6 +2836,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.ntMustdo = "ntMustdo";
     $scope.callReview = "";
     $scope.listOfReviews = [];
+    $scope.destinationList = [];
+    $scope.i = 0;
+    $scope.dest = {};
+    $scope.dest.viewDestination = "";
     $scope.scroll = {
       "busy": false,
       "stopCallingApi": false
@@ -2843,6 +2850,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.editOption = function (model, class1, class2) {
       LikesAndComments.onClickDropDown(model, $scope, class1, class2);
     };
+
+    // destination search dropdown
+    $scope.callDestination = function () {
+      $scope.i++;
+      NavigationService.getDestination({
+        search: $scope.dest.viewDestination,
+        searchText: $scope.dest.viewDestination,
+        count: $scope.i
+      }, function (data) {
+        if ($scope.i === data.count) {
+          $scope.destinationList = data.data;
+          console.log($scope.destinationList, 'log');
+          $scope.i = 0;
+        }
+      });
+    }
+    $scope.countryView = function (url, isCity) {
+      if (isCity === false) {
+        $state.go("destinationcountry", {
+          name: "featured",
+          url: url
+        });
+      } else {
+        $state.go("destinationcity", {
+          name: "mustdo",
+          url: url
+        })
+      }
+    }
+    // destination search dropdown end
 
     $scope.resetFilters = function (id) {
       $scope.cityRestaurantCuisine = [];
@@ -5137,50 +5174,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.localStar.oneStar = false;
     $scope.showTravellife = true;
     $scope.showLocalLife = true;
-    $scope.localCategory = [{
-      name: "Beaches",
-      checked: false
-    }, {
-      name: "Airport",
-      checked: false
-    }, {
-      name: "Hotels & Accommodation",
-      checked: false
-    }, {
-      name: "Restaurants & Bars",
-      checked: false
-    }, {
-      name: "Natures & Parks",
-      checked: false
-    }, {
-      name: "Sights & Landmarks",
-      checked: false
-    }, {
-      name: "Museums & Galleries",
-      checked: false
-    }, {
-      name: "Religious",
-      checked: false
-    }, {
-      name: "Shopping",
-      checked: false
-    }, {
-      name: "Spa & Wellness",
-      checked: false
-    }, {
-      name: "Adventure & Excursions",
-      checked: false
-    }, {
-      name: "Zoos & Aquariums",
-      checked: false
-    }, {
-      name: "Others",
-      checked: false
-    }];
+    $scope.localCategory = [];
+    $scope.localPostCount ={};
     $scope.viewLocal = true;
     var viewLocalLife = function (dataLocal) {
       $scope.localLifeJourney = dataLocal.data;
       $scope.localDate = dataLocal.datesArr;
+      $scope.localPostCount = dataLocal.count;
+      $scope.localCategory = dataLocal.categories;
       $scope.scroll2.busy = false;
       if ($scope.localLifeJourney.length == 0) {
         $scope.showLocalLife = true;
@@ -5242,11 +5243,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             return newData == filterdData;
           });
           if (getCheckInIndex === -1) {
-            $scope.localFilterPost.checkInType.push(filterdData.name);
+            $scope.localFilterPost.checkInType.push(filterdData);
             console.log($scope.localFilterPost.checkInType, 'array');
           } else {
             _.remove($scope.localFilterPost.checkInType, function (newArr) {
-              return newArr == filterdData.name;
+              return newArr == filterdData;
             })
             console.log($scope.localFilterPost.checkInType, 'removed data');
           }

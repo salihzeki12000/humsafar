@@ -17,7 +17,8 @@
   <!-- mainpost local life -->
   <div class="local-post-main">
     <!-- post img and video img holder -->
-    <div class="hide" ng-if="localongo.photos && localongo.photos.length == 0 && localongo.showMap && localongo.checkIn && localongo.checkIn.lat">
+    <div class="localpost-imgholder localpost-map" ng-if="localongo.photos && localongo.photos.length == 0 && localongo.showMap && localongo.checkIn && localongo.checkIn.lat">
+      <img ng-src="{{localongo.imageUrl|uploadpath}}" alt="" class="img-responsive full-width"><!---remove class full-width if layout is 3 or 2 -->
     </div>
     <div class="localpost-imgholder" ng-click="getPhotosCommentData(localongo.photosVideos[index]._id,index,localongo.photosVideos.length,localongo.photosVideos)"
       ng-if="localongo.photos.length>0 && localongo.onDisplay=='photos'">
