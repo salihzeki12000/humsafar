@@ -7161,6 +7161,39 @@ header {
     @extend .show-like-side-sec;
   }
 }
+
+.review-list{
+  position: relative;
+}
+
+.reviewer-imgholder{
+  position: absolute;
+  top: 0;
+  width: 34px;
+  height: 37px;
+  border: 1px solid #868686;
+  border-radius: 13px;
+  box-shadow: 0 2px 3px #ccc;
+  overflow: hidden;
+  vertical-align: middle;
+}
+.reviewer-content{
+  padding-left: 40px;
+  vertical-align: middle;
+  p{
+    margin-bottom: 5px;
+  }
+  .reviewer-name{
+    color: $brand-blue;
+  }
+  .reviewer-msg{
+    color: #424242;
+  }
+  .reviewer-time{
+    font-size: 12px;
+    color: #b2b2b2;
+  }
+}
 // REVIEWs SIDE TAB END
 // on go journey end
 // trip summary
@@ -10098,7 +10131,7 @@ header {
     .commenter-imgholder {
       width: 34px;
       height: 37px;
-      border: 2px solid #868686;
+      border: 1px solid #868686;
       border-radius: 13px;
       box-shadow: 0 2px 3px #ccc;
       overflow: hidden;

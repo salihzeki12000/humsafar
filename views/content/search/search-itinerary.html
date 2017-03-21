@@ -2,7 +2,7 @@
   <div class="row" masonry preserve-order>
     <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="itinerary in viewSearchedItinerary track by $index">
       <!-- itinerary FINAL CARD -->
-      <div class="travel-life-part blog-post bg-white avenir-roman overflow search-itinerary-card {{post.type}}" ng-if="itinerary.type=='quick-itinerary' || itinerary.type=='detail-itinerary'">
+      <div class="travel-life-part blog-post bg-white avenir-roman overflow search-itinerary-card {{itinerary.type}}" ng-if="itinerary.type=='quick-itinerary' || itinerary.type=='detail-itinerary'">
         <div class="travel-journey-heading">
           <div class="editor-logo user-logo">
             <img ng-src="{{itinerary.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{itinerary.user.name}}" class="img-responsive">

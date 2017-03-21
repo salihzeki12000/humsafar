@@ -121,8 +121,7 @@
       <img ng-src="{{review.user.profilePicture|uploadpath}}" alt="{{review.user.name}}" class="img-responsive">
     </div>
     <div class="reviewer-content">
-      <h4>{{review.user.name}}</h4>
-      <p>{{review.review}}</p>
+      <p><span class="reviewer-name avenir-heavy">{{review.user.name}}</span> <span class="reviewer-msg">{{review.review}}</span></p>
       <div class="reviewer-time">
         <span class="time-stamp ml5 avenir-roman">
           <i class="fa fa-calendar color-grey mr5"></i>
