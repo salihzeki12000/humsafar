@@ -937,6 +937,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var delta = 5;
     var journeyInfoStrip = $('.journey-info-strip').outerHeight();
 
+    if ($.jStorage.get("isLoggedIn")) {
+      $scope.isLoggedIn = true;
+      if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
+        $scope.isMine = true;
+      } else {
+        $scope.isMine = false;
+      }
+    } else {
+      $scope.isLoggedIn = false;
+      $scope.isMine = false;
+    }
+
+
     function calcWidth() {
       var width = $(window).width();
       var percent = 40;
@@ -2195,7 +2208,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // POPULAR JOURNEY INTEGRATION END
   })
 
-  .controller('DestinationCtrl', function ($scope, $state, TemplateService, NavigationService,LikesAndComments,cfpLoadingBar, $timeout, $uibModal, $location) {
+  .controller('DestinationCtrl', function ($scope, $state, TemplateService, NavigationService, LikesAndComments, cfpLoadingBar, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -2224,7 +2237,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
     $scope.callCountry("a", "");
-
     $scope.searchDestination = function (searchVal) {
       if (searchVal === "") {
         $scope.callCountry("a", "");
@@ -2235,9 +2247,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
       // cfpLoadingBar.complete();
     };
+
     $scope.editOption = function (model, class1, class2) {
       LikesAndComments.onClickDropDown(model, $scope, class1, class2);
-    };
+    }
+
     // destination country city
     $scope.countryView = function (url, isCity) {
       if (isCity === false) {
@@ -4592,7 +4606,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.allPhotos.newArray = [];
     //Photo comment popup
     $scope.getPhotosCommentData = function (photoId, index, length, array) {
-      $scope.userProfilePic = $.jStorage.get("profile").profilePicture;
+      // $scope.userProfilePic = $.jStorage.get("profile").profilePicture;
       console.log(index);
       console.log(length);
       console.log(array);
@@ -5175,7 +5189,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.showTravellife = true;
     $scope.showLocalLife = true;
     $scope.localCategory = [];
-    $scope.localPostCount ={};
+    $scope.localPostCount = {};
     $scope.viewLocal = true;
     var viewLocalLife = function (dataLocal) {
       $scope.localLifeJourney = dataLocal.data;
@@ -6670,7 +6684,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.allPhotos.newArray = [];
     //Photo comment popup
     $scope.getPhotosCommentData = function (photoId, index, length, array) {
-      $scope.userProfilePic = $.jStorage.get("profile").profilePicture;
+      // $scope.userProfilePic = $.jStorage.get("profile").profilePicture;
       console.log(index);
       console.log(length);
       console.log(array);
@@ -8770,7 +8784,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.allPhotos.newArray = [];
     //Photo comment popup
     $scope.getPhotosCommentData = function (photoId, index, length, array) {
-      $scope.userProfilePic = $.jStorage.get("profile").profilePicture;
+      // $scope.userProfilePic = $.jStorage.get("profile").profilePicture;
       console.log(index);
       console.log(length);
       console.log(array);
@@ -9284,7 +9298,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.allPhotos.newArray = [];
     //Photo comment popup
     $scope.getPhotosCommentData = function (photoId, index, length, array) {
-      $scope.userProfilePic = $.jStorage.get("profile").profilePicture;
+      // $scope.userProfilePic = $.jStorage.get("profile").profilePicture;
       console.log(index);
       console.log(length);
       console.log(array);
@@ -10132,7 +10146,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.userData = $.jStorage.get("profile");
       $scope.accessToken = $.jStorage.get("accessToken");
     } else {
-      $.jStorage.flush();
+      $.jStorage.set("profile", null);
     }
 
     // NavigationService.getAccessToken(function (data) {
