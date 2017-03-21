@@ -1,6 +1,6 @@
 var commontask = angular.module('commontask', [])
 
-  .factory('LikesAndComments', function (TravelibroService, $filter, $uibModal, $timeout) {
+  .factory('LikesAndComments', function (TravelibroService, $filter, $uibModal, $timeout, $state) {
 
     var returnVal = {
       getHashTags: function (commentString, callback) {
@@ -48,6 +48,9 @@ var commontask = angular.module('commontask', [])
       },
       postComment: function (type, uniqueId, type_Id, comment, hashTag, additionalId, callback) { //type_id=postId,journeyId,ItineraryId
         console.log("inside LikesAndComments");
+        if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+        }
         console.log(type, uniqueId, type_Id, comment, hashTag, additionalId, callback);
         var getCommentId = "";
         hashtag = [];
@@ -131,6 +134,9 @@ var commontask = angular.module('commontask', [])
       },
       likeUnlike: function (type, task, uniqueId, type_id, additionalId) {
         console.log(type, task, uniqueId, type_id, additionalId);
+        if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+        }
         var obj = {
           "uniqueId": uniqueId
         };
@@ -209,7 +215,7 @@ var commontask = angular.module('commontask', [])
           console.log(data);
         });
       },
-      getReviews: function(id, type ,callback){
+      getReviews: function (id, type, callback) {
         switch (type) {
           case 'hotel':
             url = "/hotel/getReview"

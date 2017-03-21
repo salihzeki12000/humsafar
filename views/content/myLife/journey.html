@@ -228,7 +228,7 @@
                                     </audio>
                                   </a>
                                 </li>
-                                <li>
+                                <li ng-click="!isLoggedIn||openCommentSection(life)">
                                   <a href=""><img src="img/comments.png" alt="" height="18"></a>
                                 </li>
                                 <!--<li>
@@ -266,7 +266,7 @@
                           <div class="social-likes-reviews" ng-if="!(((life.likeCount==0)||(life.likeCount==undefined))&&(life.commentCount==0))">
                             <div class="clearfix">
                               <div class="pull-left">
-                                <span class="color-blue mr10 avenir-heavy"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
+                                <span class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
                                 <!--<span class="color-blue avenir-heavy" ng-if="life.pointReview.length>0"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
                                 <span class="color-blue mr10 card-comment avenir-heavy pointer"><img src="img/comments.png" alt="" class="mr5 v-mid" height="14"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
                               </div>
@@ -399,9 +399,9 @@
                         <div class="social-likes-reviews" ng-if="!(((life.likeCount==0)||(life.likeCount==undefined))&&(life.commentCount==0))">
                           <div class="clearfix">
                             <div class="pull-left">
-                              <span ng-click="openLikeSection(life)" class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
+                              <span ng-click="!isLoggedIn||openLikeSection(life)" class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
                               <!--<span class="color-blue avenir-heavy"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
-                              <span class="color-blue mr10 card-comment avenir-heavy pointer" ng-click="openCommentSection(life)"><img src="img/comments.png" alt="" class="mr5" height="12"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
+                              <span class="color-blue mr10 card-comment avenir-heavy pointer" ng-click="!isLoggedIn||openCommentSection(life)"><img src="img/comments.png" alt="" class="mr5" height="12"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
                             </div>
                             <div class="pull-right">
                               <img src="img/travel.png" alt="">
@@ -594,8 +594,8 @@
               <div class="checkin-filter">
                 <span>Check In's</span>
                 <div class="local-filter-checkbox custom-checkbox" ng-repeat="catType in localCategory track by $index">
-                  <input type="checkbox" id="{{catType.name}}" ng-model="catType.checked" ng-click="getByFilter(catType,'checkIn')">
-                  <label for="{{catType.name}}">{{catType.name}}</label>
+                  <input type="checkbox" id="{{catType}}" ng-model="categoryType.checked" ng-click="getByFilter(catType,'checkIn')">
+                  <label for="{{catType}}">{{catType}}</label>
                 </div>
                 <!-- <span class="checkin-more pointer">More</span> -->
               </div>
@@ -691,16 +691,16 @@
                   <div class="pull-left">
                     <div class="post-list-view">
                       <ul class="list-inline">
-                        <li><img src="img/camera-blue.png" alt="" height="18" class="v-mid"><span class="font-bold inline-block v-mid">28</span></li>
-                        <li><img src="img/video-blue.png" alt="" height="18" class="v-mid"><span class="font-bold inline-block v-mid">28</span></li>
-                        <li><img src="img/location-blue.png" alt="" height="18" class="v-mid"><span class="font-bold inline-block v-mid">28</span></li>
-                        <li><img src="img/thought.png" alt="" height="18" class="v-mid"><span class="font-bold inline-block v-mid">28</span></li>
+                        <li><img src="img/camera-blue.png" alt="" height="18" class="v-mid"><span class="font-bold inline-block v-mid">{{localPostCount.photoCount}}</span></li>
+                        <li><img src="img/video-blue.png" alt="" height="18" class="v-mid"><span class="font-bold inline-block v-mid">{{localPostCount.videoCount}}</span></li>
+                        <li><img src="img/location-blue.png" alt="" height="18" class="v-mid"><span class="font-bold inline-block v-mid">{{localPostCount.checkInCount}}</span></li>
+                        <li><img src="img/thought.png" alt="" height="18" class="v-mid"><span class="font-bold inline-block v-mid">{{localPostCount.thoughtCount}}</span></li>
                       </ul>
                     </div>
                   </div>
                   <div class="pull-right hidden-xs">
                     <div class="total-post">
-                      <span>Total Post's <b>128</b></span>
+                      <span>Total Post's <b>{{localPostCount.totalCount}}</b></span>
                     </div>
                   </div>
                   <div class="clearfix"> </div>

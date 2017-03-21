@@ -20,9 +20,9 @@
             <div class="pad-btn">
               <div class="row">
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made destination-filterscroll" ng-init="viewItiType={'outerClass':' itiTypeOutter','innerClass':'itiTypeInner'}">
-                    <input type="type" placeholder="Type" ng-model="cityItineraryType" class="form-control itiTypeOutter" ng-click="editOption(viewItiType,'itiTypeInner','itiTypeOutter')">
-                    <div class="destination-filterdrop itiTypeInner" ng-show="viewItiType.backgroundClick;">
+                  <div class="select-all-made destination-filterscroll" ng-init="viewCityItiType={'outerClass':' itiTypeOuter','innerClass':'itiTypeInner'}">
+                    <input type="type" placeholder="Type" ng-model="cityItiType" class="form-control itiTypeOuter" ng-click="editOption(viewCityItiType,'itiTypeOuter','itiTypeInner')">
+                    <div class="destination-filterdrop itiTypeInner" ng-show="viewCityItiType.backgroundClick;">
                       <ul>
                         <li ng-repeat="type in cityType track by $index">
                           <div class="custom-checkbox">
@@ -35,9 +35,9 @@
                   </div>
                 </div>
                 <div class="col-md-2 col-sm-3">
-                  <div class="select-all-made destination-filterscroll" ng-init="viewItiBy={'outerClass':'itiByOutter','innerClass':'itiByInner'}">
-                    <input type="type" placeholder="By" ng-model="cityItineraryBy" ng-click="editOption(viewItiBy,'itiByInner','itiByOutter')"
-                      class="form-control itiByOutter">
+                  <div class="select-all-made destination-filterscroll" ng-init="viewItiBy={'outerClass':'itiByOuter','innerClass':'itiByInner'}">
+                    <input type="type" placeholder="By" ng-model="cityItiBy" ng-click="editOption(viewItiBy,'itiByOuter','itiByInner')"
+                      class="form-control itiByOuter">
                     <div class="destination-filterdrop itiByInner" ng-show="viewItiBy.backgroundClick">
                       <ul>
                         <li>

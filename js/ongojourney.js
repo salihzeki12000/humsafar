@@ -168,6 +168,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
     scope: {
       ongo: "=post",
       json: "=json",
+      isMine: "=",
+      isLoggedIn: "=",
       getCommentsData: '&',
       getLikesData: '&',
       closeBackDrop: '&'
@@ -1061,7 +1063,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       $scope.allPhotos.newArray = [];
       //Photo comment popup
       $scope.getPhotosCommentData = function (photoId, index, length, array) {
-        $scope.userProfilePic = $.jStorage.get("profile").profilePicture;
         console.log(index);
         console.log(length);
         console.log(array);

@@ -17,19 +17,19 @@
         <div class="row">
           <div class="col-md-offset-8 col-md-4 col-sm-offset-6 col-sm-6">
             <form action="">
-              <div class="input-search dest-chnge pt20 relate">
-                <div class="input-group">
-                  <input type="text" class="form-control fnt-16" placeholder="Search Destination" ng-model="destination" ng-change="searchDestination(destination)">
+              <div class="input-search dest-chnge pt20 relate" ng-init="seeDestination={'outerClass':'destinationOuter','innerClass':'destinationInner'}">
+                <div class="input-group destinationOuter">
+                  <input type="text" class="form-control fnt-16" placeholder="Search Destination" ng-model="destination" ng-change="searchDestination(destination)" ng-click="editOption(seeDestination,'destinationOuter','destinationInner')">
                   <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
                 </div>
-                <!-- <div class="dropdown-destination">
+                <div class="dropdown-destination destination-main destinationInner" ng-show="seeDestination.backgroundClick">
                   <ul>
                     <li ng-repeat="dest in destinationList  track by $index">
                       <span ng-if="dest.isCity==true" ng-click="countryView(dest.urlSlug,dest.isCity);">{{dest.name}}</span>
                       <span ng-if="dest.isCity==false" ng-click="countryView(dest.urlSlug,dest.isCity);">{{dest.name}}</span>
                     </li>
                   </ul>
-                </div> -->
+                </div>
               </div>
             </form>
           </div>
@@ -53,11 +53,7 @@
                   </div>
 
                   <div class="read-more left-bottom">
-                    <ul class="list-inline">
-                      <li class="avenir-roman color-white">Must Do : <span class="avenir-heavy">{{dest.mustDoCount}}</span> </li>
-                      <li class="avenir-heavy color-white">|</li>
-                      <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">{{dest.itineraryCount}}</span> </li>
-                    </ul>
+                  <p class="itinerary-must-count m-clear color-white avenir-roman">Must Do : <span class="avenir-heavy">{{dest.mustDoCount}}</span> | Itineraries : <span class="avenir-heavy">{{dest.itineraryCount}}</span></p>
                   </div>
                 </div>
               </div>
@@ -71,11 +67,7 @@
                     <img ng-src="{{dest.flag|uploadpath}}"   alt="Travelibro">
                   </div>
                   <div class="read-more left-bottom">
-                    <ul class="list-inline">
-                      <li class="avenir-roman color-white">Cities: <span class="avenir-heavy">{{dest.cityCount}}</span> </li>
-                      <li class="avenir-heavy color-white">|</li>
-                      <li class="avenir-roman color-white">Itineraries: <span class="avenir-heavy">{{dest.itineraryCount}}</span> </li>
-                    </ul>
+                    <p class="itinerary-must-count m-clear color-white avenir-roman">Must Do : <span class="avenir-heavy">{{dest.mustDoCount}}</span> | Itineraries : <span class="avenir-heavy">{{dest.itineraryCount}}</span></p>
                   </div>
                 </div>
               </div>

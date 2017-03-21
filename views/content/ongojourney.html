@@ -88,7 +88,7 @@
             <!--<div class="following hide">
               <span class="color-white avenir-medium">Following</span>
             </div>-->
-            <div class="edit-journey relate" ng-init='ongo.editThisJrny={}'>
+            <div class="edit-journey relate" ng-init='ongo.editThisJrny={}' ng-if="isMine">
               <span class="color-white pointer" ng-click="editOption(ongo.editThisJrny);">Edit This Journey</span>
               <div class="edit-journey-dropdown" ng-show="ongo.editThisJrny.backgroundClick">
                 <ul>
@@ -121,7 +121,7 @@
               <div class="box-start-journey" ng-class="{'hasLatLng':journey.location && journey.location.lat}">
                 <!-- header started -->
                 <div class="started-heading relate text-center clearfix" ng-init="ongo.kindOf = {};">
-                  <div class="start-card-options" ng-click="editOption(ongo.kindOf);" ng-if- "isMine">
+                  <div class="start-card-options" ng-click="editOption(ongo.kindOf);" ng-if="isMine">
                     <img src="img/options-white.png" alt="Edit Journey" width="3" class="img-responsive">
                     <div class="edit-kind-journey" ng-show="ongo.kindOf.backgroundClick;">
                       <ul>
@@ -177,8 +177,8 @@
           <div class="relate">
             <div class="dot-line"></div>
             <div class="card-relate-holder functionmap" ng-if="journey.post">
-              <journey-post post="ongo" json=journey get-comments-data="getCommentsData(post)" close-back-drop="closeBackDrop()" get-likes-data="getLikesData(post)"
-                ng-repeat="ongo in journey.post"></journey-post>
+              <journey-post post="ongo" is-mine="isMine" is-logged-in="isLoggedIn" json=journey get-comments-data="getCommentsData(post)"
+                close-back-drop="closeBackDrop()" get-likes-data="getLikesData(post)" ng-repeat="ongo in journey.post"></journey-post>
               <!-- ongo journey-end -->
               <div class="ongo-journey-end" ng-if="journey.onGoing==false">
                 <div class="journey-end text-center">
