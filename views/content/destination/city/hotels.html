@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="min-hght">
     <div class="relate" ng-class="{'openfilter': isopenfilter}">
-      <div class="pt10 pb10 head-title-all bg-white mb20">
+      <div class="pt10 pb10 head-title-all mb20">
         <div class="row m-clear">
           <div class="col-md-3">
             <div class="pad-btn">
@@ -10,7 +10,7 @@
             </div>
           </div>
           <div class="col-md-6">
-            <h4 class="text-center fnt-24">TraveLibro Recommended Hotels</h4>
+            <h4 class="text-center fnt-24 color-white">TraveLibro Recommended Hotels</h4>
             <p class="text-center avenir-roman m-clear"><span class="pr20">$$$ - Luxury</span> <span class="pr20">$$ - Mid Range    </span> <span>$ - Place To Crash</span></p>
           </div>
         </div>
@@ -91,7 +91,7 @@
               <div class="brdbtm">
                 <div class="title-head-inside">
                   <span class="pull-right fnt-20 color-grey-dollar avenir-roman">{{hotels.budget}}</span>
-                  <h4 class="avenir-heavy fnt-22">{{hotels.name}}</h4>
+                  <h4 class="avenir-heavy fnt-22"><a href="{{hotels.website}}" target="_blank">{{hotels.name}}</a></h4>
                 </div>
                 <div class="rating-localpost inline-block">
                   <span ng-if="hotels.rating==null">
@@ -107,13 +107,14 @@
                   </span>
                   <span ng-if="hotels.rating>0">({{hotels.ratingCount}})</span>
                 </div>
-                <div class="category">
+                <div class="category text-ellipsis">
                   <span>Category :</span>
-                  <span ng-repeat="category in hotels.type track by $index">{{category}}</span>
+                  <span ng-repeat="category in hotels.type track by $index" title="{{category}}">{{category}}{{$last ? '' : ', '}}</span>
                 </div>
               </div>
               <div class="review pointer brdbtm">
-                <span class="icon-read pointer">Read Reviews :</span> <span class="font-bold">5</span>
+                <span class="icon-read pointer" ng-click="viewReviews(hotels,
+                'hotel')">Read Reviews : <span class="font-bold">{{hotels.readReviewCount}}</span></span>
               </div>
               <div class="review pt10">
                 <div class="pull-right">
@@ -128,3 +129,7 @@
     </div>
   </div>
 </div>
+<!-- COMMENT LIKE  REVIEWS SECTION -->
+<comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike' list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow' call-review = "callReview" view-card-review="viewCardReview" list-of-reviews="listOfReviews"></comment-like-section>
+<div class="backdrop-close" ng-class="{'view-backdrop':viewCardComment==true || viewCardLike==true || viewCardReview==true,'':viewCardComment==false || viewCardLike==false || viewCardReview==false}" ng-click="closeBackDrop();"></div>
+<!-- COMMENT LIKE REVIEWS SECTION END -->

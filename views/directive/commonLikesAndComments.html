@@ -112,3 +112,25 @@
     </ul>
   </div>
 </div>
+
+
+<!-- review backdrop -->
+<div class="review-main {{callReview}}" ng-show="viewCardReview">
+  <div class="review-list" ng-repeat="review in listOfReviews.userReview track by $index">
+    <div class="reviewer-imgholder">
+      <img ng-src="{{review.user.profilePicture|uploadpath}}" alt="{{review.user.name}}" class="img-responsive">
+    </div>
+    <div class="reviewer-content">
+      <h4>{{review.user.name}}</h4>
+      <p>{{review.review}}</p>
+      <div class="reviewer-time">
+        <span class="time-stamp ml5 avenir-roman">
+          <i class="fa fa-calendar color-grey mr5"></i>
+          <span>{{review.createdAt|formatDate:'date'}}</span> | <i class="fa fa-clock-o mr5 color-grey"></i>
+          <span>{{review.createdAt|formatDate:'time'}}</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- review backdrop end-->

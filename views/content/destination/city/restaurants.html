@@ -1,15 +1,15 @@
 <div class="container-fluid ">
   <div class="min-hght">
     <div class="relate" ng-class="{'openfilter': isopenfilter}">
-      <div class="pt10 pb10 head-title-all bg-white mb20">
+      <div class="pt10 pb10 head-title-all mb20">
         <div class="row m-clear">
           <div class="col-md-3">
             <div class="pad-btn">
-              <button class="btn btn-pink avenir-roman" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i>Filter</button>
+              <button class="btn btn-pink avenir-roman" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
             </div>
           </div>
           <div class="col-md-6">
-            <h4 class="text-center fnt-24">TraveLibro Recommended Restaurants</h4>
+            <h4 class="text-center fnt-24 color-white">TraveLibro Recommended Restaurants</h4>
             <p class="text-center avenir-roman m-clear"><span class="pr20">$$$ - Luxury</span> <span class="pr20">$$ - Mid Range    </span> <span>$ - Place To Crash</span></p>
           </div>
         </div>
@@ -123,7 +123,7 @@
               <div class="brdbtm pb10 ">
                 <div class="title-head-inside clearfix">
                   <h3 class="pull-right color-grey-dollar m-clear avenir-roman ">{{rest.budget}}</h3>
-                  <h4 class="avenir-heavy inline-block">{{rest.name}}</h4>
+                  <h4 class="avenir-heavy inline-block"><a href="{{rest.website}}" target="_blank">{{rest.name}}</a></h4>
                 </div>
                 <div class="rating-localpost inline-block">
                   <span ng-if="rest.rating==null">
@@ -139,23 +139,22 @@
                   </span>
                   <span ng-if="rest.rating>0">({{rest.ratingCount}})</span>
                 </div>
-                <div class="category ">
+                <div class="category text-ellipsis">
                   <span>Cuisine: </span>
-                  <span ng-repeat="cuisine in rest.cuisine|limitTo:3 track by $index"> {{cuisine}}</span>
+                  <span ng-repeat="cuisine in rest.cuisine track by $index" class="cuisine-list" title="{{cuisine}}">{{cuisine}}{{$last ? '' : ', '}}</span>
                 </div>
                 <div class="tag-made category ">
-                  <span>Vegan</span>
-                  <span>Vegetarian</span>
-                  <span>Non Vegetarian</span>
+                  <span ng-repeat="type in rest.type track by $index">{{type}}</span>
                 </div>
               </div>
               <div class="review pointer brdbtm clearfix">
-                <div class="pull-right ">
+                <!-- <div class="pull-right ">
                   <div class="options">
                     <img src="img/options.png" alt="Options" height="18">
                   </div>
-                </div>
-                <span class="icon-read pointer ">Read Reviews :</span> <span class="font-bold ">5</span>
+                </div> -->
+                <span class="icon-read pointer " ng-click="viewReviews(rest,
+                'restaurant')">Read Reviews : <span class="font-bold ">{{rest.readReviewCount}}</span></span>
               </div>
               <div class="review clearfix">
                 <div class="pull-right ">
@@ -171,3 +170,7 @@
     </div>
   </div>
 </div>
+<!-- COMMENT LIKE  REVIEWS SECTION -->
+<comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike' list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow' call-review = "callReview" view-card-review="viewCardReview" list-of-reviews="listOfReviews"></comment-like-section>
+<div class="backdrop-close" ng-class="{'view-backdrop':viewCardComment==true || viewCardLike==true || viewCardReview==true,'':viewCardComment==false || viewCardLike==false || viewCardReview==false}" ng-click="closeBackDrop();"></div>
+<!-- COMMENT LIKE REVIEWS SECTION END -->

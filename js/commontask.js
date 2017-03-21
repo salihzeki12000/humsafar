@@ -209,6 +209,29 @@ var commontask = angular.module('commontask', [])
           console.log(data);
         });
       },
+      getReviews: function(id, type ,callback){
+        switch (type) {
+          case 'hotel':
+            url = "/hotel/getReview"
+            break;
+          case 'restaurant':
+            url = "/restaurant/getReview"
+            break;
+          default:
+        }
+        var formData = {
+          "_id": id
+        }
+        TravelibroService.http({
+          url: adminURL + url,
+          method: "POST",
+          data: formData
+        }).success(function (data) {
+          callback(data);
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
       getPhotoBannerDetails: function (_id, pagenumber, successCallback, errorCallback) {
         console.log(_id, pagenumber);
         var obj = {
@@ -497,7 +520,10 @@ commontask.directive('commentLikeSection', function (LikesAndComments, $timeout)
       'listOfComments': '=',
       'listOfLikes': '=',
       'getCard': '=',
-      'showLikeShow': '='
+      'showLikeShow': '=',
+      'callReview': '=',
+      'viewCardReview': '=',
+      'listOfReviews': '=',
     },
     controller: 'commentLikeSectionCtrl',
     templateUrl: "views/directive/commonLikesAndComments.html",
