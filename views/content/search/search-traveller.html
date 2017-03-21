@@ -5,8 +5,8 @@
         <img ng-src="{{list.profilePicture|uploadpath:80:80:'cover'}}" class="img-responsive">
       </div>
       <div class="following-detail text-center">
-        <h4 class="color-blue avenir-heavy">{{list.name | truncate:15}}</h4>
-        <h5 class="color-pink avenir-medium text-ellipsis"><i class="fa fa-map-marker mr5 color-pink"></i> <span>{{list.homeCity}}, {{list.homeCountry.name}}</span></h5>
+        <h4 class="color-blue avenir-heavy text-capitalize pointer" title="{{list.name}}">{{list.name | truncate:15}}</h4>
+        <h5 class="color-pink avenir-medium text-capitalize text-ellipsis" ng-if="list.homeCity && list.homeCountry.name"><i class="fa fa-map-marker mr5 color-pink"></i> <span title="{{list.homeCity}}, {{list.homeCountry.name}}">{{list.homeCity}}, {{list.homeCountry.name}}</span></h5>
       </div>
       <div class="photos-location-sec clearfix">
         <div class="pull-left">

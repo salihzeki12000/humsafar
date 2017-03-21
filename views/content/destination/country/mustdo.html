@@ -3,20 +3,20 @@
   <div class="destination-featured">
     <div class="">
       <div class="head-title-all pt20 pb10 bg-white">
-        <h4 class="text-center fnt-22">Top 10 In {{countryDestData.name}}</h4>
+        <h4 class="text-center fnt-22 color-pink">Top 10 In {{countryDestData.name}}</h4>
       </div>
     </div>
       <div class="plr30 bg-white">
         <div class="row" ng-init="index=-1">
           <div class="col-md-4 col-sm-6" ng-repeat="must in countryDestData.mustDo track by $index">
             <div class="img-holder card relate">
-              <div class="flip-holder" ng-class="($index==index)?'flipped':''" style="background:url('{{mustdo.mainPhoto | uploadpath}}')">
+              <div class="flip-holder" ng-class="($index==index)?'flipped':''" style="background:url('{{must.mainPhoto | uploadpath}}')">
                 <!-- <img src="{{must.mainPhoto|uploadpath:400:400:'cover'}}" alt="travel-libro" class="full-width"> -->
                 <div class="front">
                   <div class="pop-hover-css" ng-click="openCountry($index);">
-                    <div class="title-head-left color-white">
+                    <h4 class="title-head-left color-white">
                       {{must.name}}
-                    </div>
+                    </h4>
                   </div>
                   <div class="read-more right-bottom filpup">
                     <a class="color-white" ng-click="index=$index">Read</a>

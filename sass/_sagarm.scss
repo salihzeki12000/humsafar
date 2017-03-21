@@ -4212,7 +4212,7 @@ q {
   border-radius: 4px;
 
   &:hover {
-    box-shadow: 6px 7px 4px #a0a0a0;
+    box-shadow: 1px 7px 4px rgba(0, 0, 0, 0.35);
   }
 }
 
@@ -4250,11 +4250,12 @@ q {
     color: #fff;
     font-size: 12px;
     text-shadow: 2px 2px 2px #000;
-    vertical-align: top;
+    vertical-align: middle;
   }
 
   .bucket-flag {
     display: inline-block;
+    vertical-align: middle;
   }
 
   .search-citydetails {

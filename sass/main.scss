@@ -3317,8 +3317,18 @@ header {
 
 .fill-post {
   text-align: center;
+  ::-webkit-scrollbar {
+   width: 5px;
+ }
+  ::-webkit-scrollbar-track {
+   background-color: transparent;
+ }
+  ::-webkit-scrollbar-thumb {
+   background-color: $brand-pink;
+ }
   textarea {
     width: 300px;
+    height: 150px;
     border: none;
     margin: 15px auto 0;
     font-size: 16px;
@@ -7143,6 +7153,15 @@ header {
 }
 
 //LIKE SIDE  TAB END
+
+// REVIEWs SIDE TAB
+.review-main{
+  @extend .like-side-sec;
+  &.review-slide{
+    @extend .show-like-side-sec;
+  }
+}
+// REVIEWs SIDE TAB END
 // on go journey end
 // trip summary
 .trip-summary-strip {
