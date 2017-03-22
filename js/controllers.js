@@ -10183,9 +10183,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     if ($.jStorage.get('accessToken') && $.jStorage.get('accessToken') != '') {
       $scope.userData = $.jStorage.get("profile");
       $scope.accessToken = $.jStorage.get("accessToken");
-      if ($scope.userData.alreadyLoggedIn == false) {
-        $state.go('mainpage');
-      }
+      // if ($scope.userData.alreadyLoggedIn == false) {
+      //   $state.go('mainpage');
+      // }
     } else {
       $.jStorage.set("profile", null);
     }
