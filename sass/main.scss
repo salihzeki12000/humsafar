@@ -10852,7 +10852,7 @@ ng-map {
 @import "mobile.scss"; // header { display: none; }
 // travelibro loader
 .travelibro-loader {
-  display: none;
+  // display: none;
   @include square(100%);
   @include position(fixed,
   0);
