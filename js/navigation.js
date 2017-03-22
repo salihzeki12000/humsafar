@@ -45,7 +45,8 @@ var navigationservice = angular.module('navigationservice', [])
       subnav: [{
         name: "Flights",
         classis: "active",
-        link: "http://flights.travelibro.com/en-GB/flights/#/result?originplace=&destinationplace="
+        link: "http://flights.travelibro.com/en-GB/flights/#/result?originplace=&destinationplace=",
+        target:"_blank"
       }, {
         name: "Hotels",
         classis: "active",
@@ -61,7 +62,8 @@ var navigationservice = angular.module('navigationservice', [])
       }, {
         name: "Car Rentals",
         classis: "active",
-        link: "http://flights.travelibro.com/en-GB/carhire/#/result?originplace=&destinationplace="
+        link: "http://flights.travelibro.com/en-GB/carhire/#/result?originplace=&destinationplace=",
+        target:"_blank"
       }, {
         name: "Tours & Excursions",
         classis: "active",

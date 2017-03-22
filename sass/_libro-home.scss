@@ -1231,17 +1231,6 @@ header {
   }
 }
 
-.profile-imgholder {
-  @include size(135px,
-  145px);
-  border: 3px solid #fff;
-  border-radius: 55px;
-  margin: 0 auto;
-  background-color: $brand-lighter-grey;
-  overflow: hidden;
-  box-shadow: 0 2px 3px #636363;
-}
-
 .notexist {
   background: rgba(0, 0, 0, 0.7);
   .modal-content {

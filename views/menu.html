@@ -23,7 +23,8 @@
       <ul class="nav-submenu list-unstyled">
         <li ng-repeat="submenu in menu.subnav">
           <a ui-sref="{{submenu.anchor}}" class="color-white" ng-if="submenu.anchor">{{submenu.name}}</a>
-            <a href="{{submenu.link}}" class="color-white" ng-if="submenu.link">{{submenu.name}}</a>
+            <a href="{{submenu.link}}{{'?accessToken=' + accessToken}}" class="color-white"  ng-if="submenu.link && accessToken" target="{{submenu.target}}">{{submenu.name}}</a>
+            <a href="{{submenu.link}}" class="color-white" ng-if="submenu.link && !accessToken" target="{{submenu.target}}">{{submenu.name}}</a>
         </li>
       </ul>
     </uib-accordion-group>
