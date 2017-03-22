@@ -530,7 +530,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         NavigationService.getProfile($.jStorage.get("profile").urlSlug, globalGetProfile, function (err) {
           console.log(err);
         });
-        $window.location.reload();
+        // $window.location.reload();
         $state.go('holiday');
       } else {
         console.log(data);
