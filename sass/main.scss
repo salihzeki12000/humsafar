@@ -7070,7 +7070,7 @@ header {
 .like-side-sec {
   width: 400px;
   height: 100%;
-  padding: 40px 25px 0;
+  padding: 30px 10px 0 25px;
   position: fixed;
   top: 60px;
   right: -400px;
@@ -7102,7 +7102,7 @@ header {
 
 .like-section {
   max-height: calc(100vh - 120px);
-  padding-right: 5px;
+  padding-right: 10px;
   overflow-y: auto;
   li {
     padding: 5px 0;
@@ -10852,7 +10852,7 @@ ng-map {
 @import "mobile.scss"; // header { display: none; }
 // travelibro loader
 .travelibro-loader {
-  // display: none;
+  display: none;
   @include square(100%);
   @include position(fixed,
   0);
@@ -10868,7 +10868,7 @@ ng-map {
   height: 100vh;
   @include filter(blur(7px));
   overflow: hidden;
-  // display: none;
+  display: none;
 }
 
 //video .form-control

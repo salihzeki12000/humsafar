@@ -5,7 +5,7 @@
         <!-- Notification Card -->
         <div class="notification-card">
           <!-- UNREAD / READ NOTIFICATION CHECK -->
-          <span class="read-notification color-pink" ng-if="notify.status=='read'"><i class="fa fa-check"></i></span>
+          <span class="read-notification color-pink" ng-if="notify.answeredStatus!=''"><i class="fa fa-check"></i></span>
           <!-- UNREAD / READ NOTIFICATION CHECK END -->
           <!-- notification Content -->
           <div class="notification-content">
@@ -33,7 +33,7 @@
             <!-- NOTIFICATION TAG ON GO ACTION  -->
             <div class="notification-action">
               <!-- TAG ON GO -->
-              <div class="notification-tagongo-action" ng-if="notify.type=='journeyRequest' && notify.status=='unread'">
+              <div class="notification-tagongo-action" ng-if="notify.type=='journeyRequest' && notify.answeredStatus==''">
                 <p class="">Accept <span class="avenir-heavy color-blue">{{notify.userFrom.name}}</span>'s request to create your travel
                   memories together.</p>
                 <!-- ACCEPT DECLINE BUTTONS -->
@@ -46,7 +46,7 @@
               <!-- TAG ON GO END -->
 
               <!-- END ON GO -->
-              <div class="notification-endongo-action" ng-if="notify.type == 'journeyLeft' && notify.status=='unread'">
+              <div class="notification-endongo-action" ng-if="notify.type == 'journeyLeft' && notify.answeredStatus=='unread'">
                 <p class="">Would you like to end your journey as well?</p>
                 <!-- END DECLINE BUTTONS -->
                 <div class="notification-btn text-center">

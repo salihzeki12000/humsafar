@@ -345,9 +345,15 @@ a.color-white {
     background-color: #fff;
 
     li {
-      border-bottom: 1px solid #424242;
+      border-bottom: 1px solid $brand-lighter-grey;
+      color: #424242;
       span{
         display: block;
+      }
+
+      &:hover, &:active{
+        border-bottom: 1px solid $brand-lighter-grey;
+        color: #424242;
       }
 
       &:last-child {

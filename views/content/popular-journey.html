@@ -4,44 +4,44 @@
     <div class="get-center country-title">
       <h4 class="color-white title-head">Popular Journeys</h4>
     </div>
- <!--<div ng-include="template.footer" class="template footer"></div>-->
- <div class="footer">
-   <footer ng-controller=headerctrl>
-<div class="hidden-xs app-icons ab">
-    <div class="container-fluid">
+    <!--<div ng-include="template.footer" class="template footer"></div>-->
+    <div class="footer">
+      <footer ng-controller=headerctrl>
+        <div class="hidden-xs app-icons ab">
+          <div class="container-fluid">
             <div class="col-md-12">
-                    <ul class="list-unstyled list-inline text-right color-white">
-                        <li class="">
-                           To Create Journeys Download App
-                        </li>
-                        <li>
-                            <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank" class="color-white">
-                                <i class="fa fa-apple"></i>
-                            </a>
-                        </li>
-                        <li>|</li>
-                        <li>
-                            <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" class="color-white" target="_blank">
-                                <i class="fa fa-android"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+              <ul class="list-unstyled list-inline text-right color-white">
+                <li class="">
+                  To Create Journeys Download App
+                </li>
+                <li>
+                  <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank" class="color-white">
+                    <i class="fa fa-apple"></i>
+                  </a>
+                </li>
+                <li>|</li>
+                <li>
+                  <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" class="color-white" target="_blank">
+                    <i class="fa fa-android"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-</div>
 
-<div class="visible-xs">
-    <div class="download-app text-center uppercase download-app-footer visible-xs" ng-class="{ 'close-download': isopen} ">
-  <div class="pull-right">
-    <a ng-click="opendownload();"><i class="fa fa-times color-white" aria-hidden="true"></i></a>
-  </div>
-  <a href="#" target="_blank">
+        <div class="visible-xs">
+          <div class="download-app text-center uppercase download-app-footer visible-xs" ng-class="{ 'close-download': isopen} ">
+            <div class="pull-right">
+              <a ng-click="opendownload();"><i class="fa fa-times color-white" aria-hidden="true"></i></a>
+            </div>
+            <a href="#" target="_blank">
   Download App
 </a>
-</div>
-</div>
-</footer>
- </div>
+          </div>
+        </div>
+      </footer>
+    </div>
     <div class="mouse-scrolldown color-white text-center" ng-click="scrollDown();">
       <img src="img/mouse-scroll.png" alt="Travelibro">
       <p>Scroll Down</p>
@@ -49,9 +49,9 @@
   </div>
 </div>
 <div class="tint-bg">
- <div class="container">
-   <div class="popular-journey mt20 second blog-itineraries-main">
-     <div masonry preserve-order>
+  <div class="container">
+    <div class="popular-journey mt20 second blog-itineraries-main">
+      <div masonry preserve-order>
         <div class="row">
           <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="post in popularJourneyData track by $index">
             <div class="activity-post {{post.class}}">
@@ -60,7 +60,7 @@
                 <div class="post-header relate">
                   <div class="inline-block picture-section">
                     <div class="user-pic" ng-if="post.user">
-                      <img ng-src="{{post.journeyCreator.profilePicture | uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
+                      <img ng-src="{{post.journeyCreator.profilePicture | uploadpath:50:50:'cover'}}" alt="" class="img-responsive">
                     </div>
                   </div>
                   <div class="user-detail width74 inline-block">
@@ -80,12 +80,12 @@
                   <!-- post type icon -->
                   <!-- post type icon end -->
                 </div>
-                                 <!-- post status -->
-                  <div class="post-your-status">
-                    <p class="your-post" ng-if="post.onGoing==false">Has ended <span ng-if="post.journeyCreator.gender=='male'"> his </span><span ng-if="post.journeyCreator.gender=='female'"> her </span> Journey</p>
-                    <p class="your-post" ng-if="post.onGoing==true">Has started <span ng-if="post.journeyCreator.gender=='male'"> his </span><span ng-if="post.journeyCreator.gender=='female'"> her </span> Journey</p>
-                  </div>
-                  <!-- post status end -->
+                <!-- post status -->
+                <div class="post-your-status">
+                  <p class="your-post" ng-if="post.onGoing==false">Has ended the Journey</p>
+                  <p class="your-post" ng-if="post.onGoing==true">Has started a Journey</p>
+                </div>
+                <!-- post status end -->
                 <!-- post header end -->
                 <!-- post-main-section -->
                 <div class="post-main-section">
@@ -136,66 +136,66 @@
                     <!-- img post slider end -->
                     <!-- post travelled journey -->
                     <!-- ng-if="post.travelledJourney" -->
-                    <div class="travelled-journey" >
+                    <div class="travelled-journey">
                       <div class="travelled-imgholder">
                         <img ng-if="post.coverPhoto" ng-src="{{post.coverPhoto|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center">
                         <img ng-if="!post.coverPhoto" ng-src="{{post.startLocationPic|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center">
                       </div>
                       <div class="journey-tag-holder">
-                            <div class="days-spent pull-right">
-                              <p><span class="block">{{post.duration}}</span> Days</p>
-                            </div>
+                        <div class="days-spent pull-right">
+                          <p><span class="block">{{post.duration}}</span> Days</p>
+                        </div>
                         <h4 class="m-clear text-capitalize">{{post.name}}</h4>
                         <div class="clearfix journey-travelling-type">
                           <div class="row">
                             <div class="col-xs-6">
-                          <div class="pull-left">
-                            <div class="journey-collection">
-                              <ul>
-                                <li>
-                                  <a href="">
-                                    <div class="">
-                                      <img src="img/camera.png" alt="Camera" width="15" class="mr5">
-                                      <span class="inline-block v-mid">{{post.photoCount}}</span>
-                                    </div>
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="">
-                                    <div class="">
-                                      <img src="img/video.png" alt="Video" width="15" class="mr5">
-                                      <span class="inline-block v-mid">{{post.videoCount}}</span>
-                                    </div>
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="">
-                                    <div class="">
-                                      <img src="img/location.png" alt="Location" width="15" class="mr5">
-                                      <span class="inline-block v-mid">{{post.checkInCount}}</span>
-                                    </div>
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
+                              <div class="pull-left">
+                                <div class="journey-collection">
+                                  <ul>
+                                    <li>
+                                      <a href="">
+                                        <div class="">
+                                          <img src="img/camera.png" alt="Camera" width="15" class="mr5">
+                                          <span class="inline-block v-mid">{{post.photoCount}}</span>
+                                        </div>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a href="">
+                                        <div class="">
+                                          <img src="img/video.png" alt="Video" width="15" class="mr5">
+                                          <span class="inline-block v-mid">{{post.videoCount}}</span>
+                                        </div>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a href="">
+                                        <div class="">
+                                          <img src="img/location.png" alt="Location" width="15" class="mr5">
+                                          <span class="inline-block v-mid">{{post.checkInCount}}</span>
+                                        </div>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
                             </div>
                             <div class="col-xs-6">
-                          <div class="pull-right">
-                            <div class="journey-type">
-                              <ul>
-                                <li ng-repeat="list in post.kindOfJourney|limitTo:3">
-                                  <a href=""><img ng-src="{{list|kindOfJourney:'white'}}" alt="" height="15"></a>
-                                </li>
-                                <!-- <li>
+                              <div class="pull-right">
+                                <div class="journey-type">
+                                  <ul>
+                                    <li ng-repeat="list in post.kindOfJourney|limitTo:3">
+                                      <a href=""><img ng-src="{{list|kindOfJourney:'white'}}" alt="" height="15"></a>
+                                    </li>
+                                    <!-- <li>
                                   <a href=""><img ng-src="{{post.itineraryType2}}" alt="" height="15"></a>
                                 </li>
                                 <li>
                                   <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="15"></a>
                                 </li> -->
-                              </ul>
-                            </div>
-                          </div>
+                                  </ul>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -246,14 +246,14 @@
                     <div class="user-social-item clearfix">
                       <div class="pull-left">
                         <ul>
-                          <li><a href="" class="relate"><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="" like-sound></i>
+                          <li class="" like-sound ng-click="likeUnlikeActivity(post);"><a href="" class="relate pointer" ><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i>
                           <span></span>
                           <audio id="like-play">
                             <source src="img/tiny1.mp3" type="audio/mp3">
                           </audio>
                         </a></li>
-                          <li>
-                            <a href="">
+                          <li ng-click="getCommentsData(post)">
+                            <a class="pointer">
                               <img src="img/comments.png" alt="" height="18" class="color-blue">
                             </a>
                           </li>
@@ -281,12 +281,12 @@
                     <div class="social-likes-reviews" ng-if="!(((post.likeCount==0)||(post.likeCount==undefined))&&(post.commentCount==0))">
                       <div class="clearfix">
                         <div class="pull-left">
-                          <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{post.likeCount}}</b>{{post.likeCount|singularPlural:'Likes'}}</span>
+                          <span class="color-blue mr10 pointer" ng-click="getLikesData(post);"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{post.likeCount}}</b>{{post.likeCount|singularPlural:'Likes'}}</span>
                           <!-- <span class="color-blue">
                             <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue">
                             <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white">
                             354 Reviews (4.5/5)</span> -->
-                          <span class="color-blue">
+                          <span class="color-blue pointer" ng-click="getCommentsData(post)">
                             <img src="img/comments.png" alt="" height="15" class="mr5 v-top if-blue"><b>
                             {{post.commentCount}} </b>{{post.commentCount |singularPlural:'Comments'}}</span>
                         </div>
@@ -306,7 +306,10 @@
           </div>
         </div>
       </div>
-
-        </div>
     </div>
+    <!-- COMMENT LIKE SECTION -->
+    <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike' list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+    <div class="backdrop-close" ng-class="{'view-backdrop':viewCardComment==true || viewCardLike==true,'':viewCardComment==false || viewCardLike==false}" ng-click="closeBackDrop();"></div>
+    <!-- COMMENT LIKE SECTION END -->
+  </div>
 </div>

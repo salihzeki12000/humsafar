@@ -3652,7 +3652,7 @@ q {
   width: 40px;
   height: 40px;
   border: 1px solid $brand-dark-grey;
-  border-radius: 16px;
+  border-radius: 14px;
   margin-top: -10px;
   background-color: $brand-light-grey;
   overflow: hidden;
@@ -4437,7 +4437,7 @@ q {
 // COMING SOON PAGE
 .coming-soon-page {
   width: 100%;
-  height: calc( 100vh - 60px);
+  min-height: 100vh;
   position: relative;
   background: url('../img/coming-soon.jpg') 50% 50% no-repeat;
   background-size: cover;
@@ -4583,7 +4583,7 @@ q {
 // NOTIFICATION BADGE END
 
 .sizeof-country {
-  width: 115px;
+  width: 125px;
   display: inline-block;
 }
 
