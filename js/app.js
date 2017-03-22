@@ -1062,6 +1062,9 @@ firstapp.filter('truncate', function () {
 
 firstapp.filter('itineraryType', function () {
   return function (input) {
+    if(input) {
+      var input = input.toLowerCase();
+    }
     var returnVal = "";
 
     function getRandomInt(min, max) {
@@ -1517,7 +1520,14 @@ firstapp.filter('trafficType', function () {
     return returnVal;
   }
 });
-
+// get attribute in html
+firstapp.filter('safe',function($sce){
+  return function(input){
+    console.log(input,'input');
+    return $sce.trustAsHtml(input);
+  }
+})
+// get attribute in html end
 firstapp.filter('seasonType', function () {
   return function (input) {
     input = input.trim();

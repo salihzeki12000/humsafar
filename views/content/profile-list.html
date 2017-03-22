@@ -135,11 +135,11 @@
       <div class="follower-tab-main" ng-if="activeMenu == 'following'">
         <div class="following-container" ng-repeat="list in followingList | filter:searchCard.name">
           <div class="following-holder">
-            <div class="follow-imgholder">
+            <div class="follow-imgholder pointer" ui-sref="mylife({'urlSlug':list.urlSlug})">
               <img ng-src="{{list.profilePicture|uploadpath:104:108:'cover'}}" class="img-responsive">
             </div>
             <div class="following-detail text-center">
-              <h4 class="color-blue avenir-heavy text-ellipsis" title="{{list.name}}">{{list.name}}</h4>
+              <h4 class="color-blue avenir-heavy text-ellipsis pointer" title="{{list.name}}" ui-sref="mylife({'urlSlug':list.urlSlug})">{{list.name}}</h4>
               <h5 class="color-pink avenir-medium text-ellipsis" ng-if="list.homeCity && list.homeCountry.name"><i class="fa fa-map-marker mr5 color-pink"></i> <span>{{list.homeCity}},</span>
                 <span>{{list.homeCountry.name}}</span>
               </h5>
@@ -180,11 +180,11 @@
       <div class="follow-tab-main" ng-if="activeMenu == 'followers'">
         <div class="following-container" ng-repeat="list in followersList | filter:searchFriend.name">
           <div class="following-holder">
-            <div class="follow-imgholder">
+            <div class="follow-imgholder pointer" ui-sref="mylife({'urlSlug':list.urlSlug})">
               <img ng-src="{{list.profilePicture|uploadpath:104:108:'cover'}}" alt="{{list.nameFollow}}" class="img-responsive">
             </div>
             <div class="following-detail text-center">
-              <h4 class="color-blue avenir-heavy text-ellipsis" title="{{list.name}}">{{list.name}}</h4>
+              <h4 class="color-blue avenir-heavy text-ellipsis pointer" title="{{list.name}}" ui-sref="mylife({'urlSlug':list.urlSlug})">{{list.name}}</h4>
               <h5 ng-if="list.homeCity && list.homeCountry.name" class="color-pink avenir-medium text-ellipsis"><i class="fa fa-map-marker mr5 color-pink"></i> <span>{{list.homeCity}}</span>, <span>{{list.homeCountry.name}}</span></h5>
             </div>
             <div class="photos-location-sec clearfix">
@@ -225,7 +225,7 @@
       <div class="country-visited-tab" ng-if="activeMenu == 'countries-visited'">
         <div class="list-country-visited">
           <div class="row">
-            <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="country in countryVisitedList">
+            <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="country in countryVisitedList track by $index">
               <div class="country-list-holder">
                 <div class="list-imgholder" style="background-image: url('{{country.countryId.countryBackgroundImage|uploadpath}}');">
                   <!-- <img ng-src="{{country.countryId.countryCoverPhoto|uploadpath}}" alt="" class="img-responsive country-img">  -->

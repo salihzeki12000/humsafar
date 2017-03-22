@@ -4,10 +4,10 @@
     <div class="overlay-itinerary-bg"></div>
     <div class="user-banner-detail full-width text-center">
       <div class="user-tag color-white">
-        <div class="user-imgholder">
-          <img ng-src="{{itinerary.creator.profilePicture|uploadpath:90:95:'cover'}}" alt="" class="img-responsive">
+        <div class="user-imgholder pointer" ui-sref="mylife({'urlSlug':itinerary.user.urlSlug})">
+          <img ng-src="{{itinerary.user.profilePicture|uploadpath:90:95:'cover'}}" alt="" class="img-responsive">
         </div>
-        <h4 class="user-name avenir-medium">{{itinerary.creator.name}}</h4>
+        <h4 class="user-name avenir-medium pointer" ui-sref="mylife({'urlSlug':itinerary.user.urlSlug})">{{itinerary.user.name}}</h4>
       </div>
       <!-- <div class="journey-day">
         <span class="color-white avenir-roman">Jan 2016</span>

@@ -155,8 +155,8 @@
                     </div>
                     <div class="pull-right relate full-width">
                       <div class="journey-travelling-buddies">
-                        <div class="img-buddies pointer" ng-repeat="img in journey.buddies|limitTo:3">
-                          <img ng-src="{{img.profilePicture|uploadpath:50}}" alt="" class="img-responsive">
+                        <div class="img-buddies pointer" ng-repeat="img in journey.buddies|limitTo:3 track by $index">
+                          <img ng-src="{{img.profilePicture|uploadpath:50}}" alt="" class="img-responsive" ui-sref="mylife({'urlSlug':img.urlSlug})">
                         </div>
                         <span ng-show="journey.showRemainingCount" class="">+{{journey.remainingCount}}</span>
                       </div>
@@ -166,7 +166,7 @@
                 <div class="journey-with">
                   <!--<p class="avenir-roman m-clear">{{journey.startLocation}} {{journey.start_Time.year}} <b>{{journey.user.name}}</b> with <b>Monish Shah</b>,
                     <b>Malhar Gala</b> &amp; <b>Nida Kapadia</b></p>-->
-                  <p class="avenir-roman m-clear" ng-bind-html="journey.startJourneyString"></p>
+                  <p class="avenir-roman m-clear" ng-bind-html="journey.startJourneyString | safe"></p>
                 </div>
               </div>
             </div>

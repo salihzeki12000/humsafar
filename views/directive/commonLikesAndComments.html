@@ -30,7 +30,8 @@
               <!-- ng-show="showLikes" -->
               <div class="like-dropdown" ng-show="commentLike.backgroundClick && listOfLikes.like.length>0">
                 <ul>
-                  <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
+                  <li ng-repeat="listLikes in listOfLikes.like">
+                    <a href="" ui-sref="mylife({'urlSlug':listLikes.urlSlug})">{{listLikes.name}}</a></li>
                 </ul>
               </div>
               </span>
@@ -61,13 +62,13 @@
         <div class="listing-comment">
           <div class="view-comment-list" ng-repeat="list in listOfComments.comment track by $index">
             <div class="commenter-img">
-              <div class="commenter-imgholder">
+              <div class="commenter-imgholder pointer" ui-sref="mylife({'urlSlug':list.user.urlSlug})">
                 <img ng-src="{{list.user.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
               </div>
             </div>
             <div class="comment-container">
               <div class="commenter-text">
-                <p class="avenir-roman"  ng-hide="$index==index"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name}}</span>{{list.text}}</p>
+                <p class="avenir-roman"  ng-hide="$index==index"><span class="commenter-name color-blue avenir-heavy mr5 pointer" ui-sref="mylife({'urlSlug':list.user.urlSlug})">{{list.user.name}}</span>{{list.text}}</p>
                 <div class="edit-text" ng-show="$index==index">
                   <input type="text" ng-model="list.text" class="form-control">
                   <span ng-click="editBox(-1);">Cancel</span>
@@ -96,11 +97,11 @@
       <!-- REPEAT BUDDY LIST -->
       <li ng-repeat="like in listOfLikes.like">
         <div class="like-notify-buddy clearfix">
-          <div class="like-buddy-pic">
+          <div class="like-buddy-pic pointer" ui-sref="mylife({'urlSlug':like.urlSlug})">
             <img ng-src="{{like.profilePicture|uploadpath:51:51}}" alt="" class="img-responsive">
           </div>
           <div class="like-buddy-name">
-            <p class="like-buddy-user">{{like.name}}</p>
+            <p class="like-buddy-user pointer" ui-sref="mylife({'urlSlug':like.urlSlug})">{{like.name}}</p>
             <p class="like-buddy-attag">@ <span>{{like.urlSlug}}</span></p>
           </div>
           <div class="like-buddy-follow-btn pull-right" ng-if="like._id!=userData._id">

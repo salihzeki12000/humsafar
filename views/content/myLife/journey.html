@@ -203,7 +203,7 @@
                                   <div class="pull-right">
                                     <div class="journey-type">
                                       <ul>
-                                        <li ng-repeat="list in life.kindOfJourney|limitTo:3">
+                                        <li ng-repeat="list in life.kindOfJourney|limitTo:3 track by $index">
                                           <a href=""><img ng-src="{{list|kindOfJourney:'white'}}" alt="" height="18"></a>
                                         </li>
                                       </ul>
@@ -584,7 +584,7 @@
                   <ui-select ng-model="month" theme="selectize" ng-disabled="ctrl.disabled" title="Month" class="">
                     <ui-select-match class="" placeholder="Month">{{$select.selected}}</ui-select-match>
                     <ui-select-choices repeat="month in localDate | filter: $select.search">
-                      <span ng-bind-html="month | highlight: $select.search" class=""></span>
+                      <span ng-bind-html="month | highlight: $select.search" class="" ng-click="getByFilter(month,'date')"></span>
                     </ui-select-choices>
                   </ui-select>
                   <!-- MONTH FILTER UI SELECT END -->

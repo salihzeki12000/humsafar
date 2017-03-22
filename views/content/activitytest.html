@@ -16,21 +16,21 @@
                     <div class="editor-logo" ng-if="activity.type=='editor'">
                       <img src="img/blog/editor-logo.png" alt="" class="img-responsive">
                     </div>
-                    <div class="user-pic" ng-if="activity.type=='travel-life' || activity.type=='local-life'">
-                      <img ng-src="{{activity.postCreator.profilePicture|uploadpath:50:50:cover}}" alt="" class="img-responsive">
+                    <div class="user-pic pointer" ng-if="activity.type=='travel-life' || activity.type=='local-life'" ui-sref="mylife({'urlSlug':activity.postCreator.urlSlug})">
+                      <img ng-src="{{activity.postCreator.profilePicture|uploadpath:50:50:'cover'}}" alt="" class="img-responsive">
                     </div>
                     <!--<div class="user-pic" ng-if="activity.type=='quick-itinerary'">
                       <img ng-src="{{activity.creator.profilePicture|uploadpath:65:67}}" alt="" class="img-responsive">
                     </div>-->
-                    <div class="user-pic" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey' || activity.type=='quick-itinerary' || activity.type=='detail-itinerary'">
-                      <img ng-src="{{activity.user.profilePicture|uploadpath:50:50:cover}}" alt="" class="img-responsive">
+                    <div class="user-pic pointer" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey' || activity.type=='quick-itinerary' || activity.type=='detail-itinerary'">
+                      <img ui-sref="mylife({'urlSlug':activity.user.urlSlug})" ng-src="{{activity.user.profilePicture|uploadpath:50:50:'cover'}}" alt="" class="img-responsive">
                     </div>
                   </div>
-                  <div class="user-detail width74 inline-block">
-                    <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="activity.type=='editor'">{{activity.userName}}</h4>
-                    <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="activity.type=='travel-life' || activity.type=='local-life'">{{activity.postCreator.name}}</h4>
-                    <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="activity.type=='quick-itinerary'">{{activity.creator.name}}</h4>
-                    <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey' ||  activity.type=='detail-itinerary'">{{activity.user.name}}</h4>
+                  <div class="user-detail width74 inline-block pointer">
+                    <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="activity.type=='editor'" ui-sref="mylife({'urlSlug':activity.userName.urlSlug})">{{activity.userName}}</h4>
+                    <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="activity.type=='travel-life' || activity.type=='local-life'" ui-sref="mylife({'urlSlug':activity.postCreator.urlSlug})">{{activity.postCreator.name}}</h4>
+                    <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="activity.type=='quick-itinerary'" ui-sref="mylife({'urlSlug':activity.creator.urlSlug})">{{activity.creator.name}}</h4>
+                    <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey' ||  activity.type=='detail-itinerary'" ui-sref="mylife({'urlSlug':activity.user.urlSlug})">{{activity.user.name}}</h4>
                     <div class="clearfix user-more-detail">
                       <div class="pull-left">
                         <p class="m-clear"><span>{{activity.startTime|formatDate:'date'}}</span> | <span>{{activity.startTime|formatDate:'time'}}</span></p>
@@ -77,7 +77,7 @@
                     </div>
                     <!-- flag country end -->
                     <!-- tag on journey -->
-                    <div class="tag-ongo-journey" ng-if="((activity.type =='travel-life') || (activity.type =='on-the-go-journey'))">
+                    <div class="tag-ongo-journey pointer" ng-if="((activity.type =='travel-life') || (activity.type =='on-the-go-journey'))" ng-click="routeOngo(activity)">
                       <span class="inline-block color-white">On The Go</span>
                     </div>
                     <div class="tag-ongo-journey" ng-if="activity.type =='local-life'">
@@ -160,7 +160,7 @@
                     <!-- img post slider end -->
                     <!-- post travelled journey -->
                     <div class="travelled-journey" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey'">
-                      <div class="travelled-imgholder" ng-init="banner=activity.coverPhoto && activity.coverPhoto!=''?activity.coverPhoto:activity.startLocationPic">
+                      <div class="travelled-imgholder" ng-init="banner=activity.coverPhoto && activity.coverPhoto!=''?activity.coverPhoto:activity.startLocationPic" ng-click="routeOngo(activity)">
                         <img ng-src="{{banner|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center">
                       </div>
                       <div class="journey-tag-holder">
@@ -220,7 +220,7 @@
                     <!-- post travelled journey end-->
                     <!-- post onway journey -->
                     <div class="onway-journey relate" ng-if="activity.type=='quick-itinerary' || activity.type=='detail-itinerary'">
-                      <div class="onway-imgholder">
+                      <div class="onway-imgholder pointer" ng-click="routeItinerary(activity)">
                         <img ng-src="{{activity.coverPhoto|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center">
                       </div>
                       <div class="journey-tag-holder">

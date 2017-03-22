@@ -10,10 +10,10 @@
     </div>
     <div class="user-banner-detail full-width text-center">
       <div class="user-tag color-white">
-        <div class="user-imgholder">
+        <div class="user-imgholder pointer" ui-sref="mylife({'urlSlug':itinerary.user.urlSlug})">
           <img ng-src="{{itinerary.user.profilePicture|uploadpath:115:125:'cover'}}" alt="" class="img-responsive">
         </div>
-        <h4 class="user-name avenir-roman">{{itinerary.user.firstName}}</h4>
+        <h4 class="user-name avenir-roman pointer" ui-sref="mylife({'urlSlug':itinerary.user.urlSlug})">{{itinerary.user.firstName}}</h4>
       </div>
       <!-- <div class="journey-day">
         <span class="color-white avenir-roman">Jan 2016</span>
@@ -27,10 +27,10 @@
       <div class="journey-travelled-with" ng-if="itinerary.buddies.length>0">
         <span class="color-white avenir-light with">With</span>
         <figure class="traveller-list pointer" ng-repeat="list in itinerary.buddies track by $index">
-          <div class="journey-travelled-holder">
+          <div class="journey-travelled-holder pointer" ui-sref="mylife({'urlSlug':list.urlSlug})">
             <img ng-src="{{list.profilePicture|uploadpath:37:40:'cover'}}" alt="" class="img-responsive">
           </div>
-          <figcaption class="traveller-name avenir-roman color-white">{{list.firstName}}</figcaption>
+          <figcaption class="traveller-name avenir-roman color-white pointer" ui-sref="mylife({'urlSlug':list.urlSlug})">{{list.firstName}}</figcaption>
         </figure>
       </div>
       <!-- start and end date -->

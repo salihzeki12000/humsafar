@@ -5,8 +5,7 @@
         <div class="row m-clear">
           <div class="col-md-3">
             <div class="pad-btn">
-              <button class="btn btn-pink" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i> Filter
-          </button>
+              <button class="btn btn-pink" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i> Filter </button>
             </div>
           </div>
           <!-- <div class="col-md-6">
@@ -93,7 +92,7 @@
                 <!-- user-iternarys -->
                 <div class="travel-life-part bg-white blog-post {{post.type}} avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
                   <div class="travel-journey-heading">
-                    <div class="editor-logo user-logo">
+                    <div class="editor-logo user-logo pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})">
                       <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="img-responsive">
                     </div>
                     <div class="inline-block editor-subdetail">
@@ -101,13 +100,13 @@
                         <div class="pull-right">
                           <span class="follow-following color-blue text-capitalize">follow</span>
                         </div>
-                        <h4 class="font-bold color-dark-blue m-clear mb5 heading-name text-capitalize">{{post.user.name}}</h4>
+                        <h4 class="font-bold color-dark-blue m-clear mb5 heading-name text-capitalize pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.user.name}}</h4>
                       </div>
                       <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.startTime | date : 'dd MMM, yyyy'}}</span>                        | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.startTime | date :'hh:mm a'}}</span></p>
                     </div>
                   </div>
-                  <div class="onway-journey relate">
-                    <div class="onway-imgholder">
+                  <div class="onway-journey relate pointer" ng-init="itinerary=post.type=='quick-itinerary'?'userquickitinerary':'userdetailitinerary'">
+                    <div class="onway-imgholder pointer" ui-sref="{{itinerary}}({'urlSlug':post.user.urlSlug,'id':post.urlSlug})">
                       <img ng-src="{{post.coverPhoto|uploadpath:370:340:'cover'}}" alt="" class="full-width m-center">
                     </div>
                     <!-- <div class="flag-section">
@@ -208,3 +207,5 @@
         <!-- COMMENT LIKE SECTION END -->
       </div>
     </div>
+  </div>
+</div>

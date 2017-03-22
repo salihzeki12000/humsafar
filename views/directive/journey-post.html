@@ -11,7 +11,7 @@
         </div>
         <div class="card-journeypost">
           <div class="journey-post">
-            <p class="post mb5" ng-bind-html="ongo.postString"></p>
+            <p class="post mb5" ng-bind-html="ongo.postString | safe"></p>
             <p class="journey-date avenir-heavy m-clear">
               <span class="mr5 day-journey">Day {{ongo.UTCModified|dateDifference: json.startTime}}</span>-
               <!-- <i class="fa fa-calendar mr5 ml5"></i> -->
