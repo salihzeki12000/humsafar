@@ -16,12 +16,12 @@
         <div class="col-md-4 col-sm-4">
           <div class="pr20">
             <form action="">
-              <div class="input-search relate">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search Destination" ng-model="dest.viewDestination" ng-change="callDestination();">
+              <div class="input-search relate" ng-init="viewDestinationCountry={'outerClass':'outerDestCountry','innerClass':'innerDestCountry'}">
+                <div class="input-group outerDestCountry">
+                  <input type="text" class="form-control" placeholder="Search Destination" ng-model="dest.viewDestination" ng-change="callDestination();" ng-click="editOption(viewDestinationCountry,'outerDestCountry','innerDestCountry')">
                   <span class="input-group-addon"><i class="fa fa-search"></i></span>
                 </div>
-                <div class="dropdown-destination">
+                <div class="dropdown-destination innerDestCountry" ng-show="viewDestinationCountry.backgroundClick;">
                   <ul>
                     <li ng-repeat="dest in destinationList  track by $index">
                       <span ng-if="dest.isCity==true" ng-click="countryView(dest.urlSlug,dest.isCity);">{{dest.name}}</span>
