@@ -10864,12 +10864,12 @@ ng-map {
   }
 }
 
-.loader-blur .repeated-item {
-  height: 100vh;
-  @include filter(blur(7px));
-  overflow: hidden;
-  // display: none;
-}
+// .loader-blur .repeated-item {
+//   height: 100vh;
+//   @include filter(blur(7px));
+//   overflow: hidden;
+//   // display: none;
+// }
 
 //video .form-control
 video::-webkit-media-controls-fullscreen-button {
