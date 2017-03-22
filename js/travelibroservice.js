@@ -1,7 +1,6 @@
-var travelibroservice = angular.module('travelibroservice', [])
+var travelibroservice = angular.module('travelibroservice', ['cfp.loadingBar'])
 
-  .factory('TravelibroService', function ($http) {
-
+  .factory('TravelibroService', function ($http, cfpLoadingBar) {
     return {
       http: function (obj) {
         var accessToken = $.jStorage.get("accessToken");
@@ -12,7 +11,13 @@ var travelibroservice = angular.module('travelibroservice', [])
           obj.data = {};
         }
         obj.data.accessToken = accessToken;
-        var callbackFor = $http(obj);
+        cfpLoadingBar.start();
+        console.log("start http");
+        var callbackFor = $http(obj).success(function (data) {
+          cfpLoadingBar.complete();
+          console.log("end http");
+          return data;
+        });
         return callbackFor;
       },
       post: function (callApiUrl, formData) {
@@ -21,10 +26,16 @@ var travelibroservice = angular.module('travelibroservice', [])
           formData = {};
         }
         formData.accessToken = accessToken;
+        cfpLoadingBar.start();
+        console.log("start post");
         var callbackFor = $http({
           url: callApiUrl,
           data: formData,
           method: "POST",
+        }).success(function (data) {
+          cfpLoadingBar.complete();
+          console.log("end post");
+          return data;
         });
         return callbackFor;
       },

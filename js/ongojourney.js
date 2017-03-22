@@ -162,7 +162,7 @@ var ongojourney = angular.module('ongojourney', [])
     };
   });
 
-ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout', '$uibModal', 'OnGoJourney', 'LikesAndComments', 'TravelibroService', function ($http, $filter, $window, $timeout, $uibModal, OnGoJourney, LikesAndComments, TravelibroService) {
+ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout', '$uibModal', 'OnGoJourney', 'LikesAndComments', 'TravelibroService', '$sce', function ($http, $filter, $window, $timeout, $uibModal, OnGoJourney, LikesAndComments, TravelibroService, $sce) {
   return {
     restrict: 'E',
     scope: {
@@ -217,11 +217,11 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
         if ($scope.ongo.buddiesCount == undefined) {
 
         } else if ($scope.ongo.buddiesCount == 1) {
-          $scope.ongo.buddiesString = $scope.ongo.buddies[0].name.bold();
+          $scope.ongo.buddiesString = "<b ui-sref='mylife'>" + $scope.ongo.buddies[0].name + "</b>";
         } else if ($scope.ongo.buddiesCount == 2) {
-          $scope.ongo.buddiesString = $scope.ongo.buddies[0].name.bold() + " and " + $scope.ongo.buddies[1].name.bold();
+          $scope.ongo.buddiesString = "<b ui-sref='mylife'>" + $scope.ongo.buddies[0].name + "</b>" + " and " + $scope.ongo.buddies[1].name;
         } else if ($scope.ongo.buddiesCount >= 2) {
-          $scope.ongo.buddiesString = $scope.ongo.buddies[0].name.bold() + " and " + "<b>" + ($scope.ongo.buddiesCount - 1) + " others." + "</b>";
+          $scope.ongo.buddiesString = "<b ui-sref='mylife'>" + $scope.ongo.buddies[0].name + "</b>" + " and " + "<b>" + ($scope.ongo.buddiesCount - 1) + " others." + "</b>";
         }
         var postString = "";
 

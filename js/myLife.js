@@ -60,20 +60,26 @@ var mylife = angular.module('mylife', [])
           console.log(data);
         });
       },
-      getCountryVisitedListExpanded: function (callback) {
+      getCountryVisitedListExpanded: function (urlSlug, callback) {
         TravelibroService.http({
           url: adminURL + "/user/getCountryVisitedListExpanded",
-          method: "POST"
+          method: "POST",
+          data: {
+            "urlSlug": urlSlug
+          }
         }).success(function (data) {
           callback(data.data);
         }).error(function (data) {
           console.log(data);
         });
       },
-      getOneBucketList: function (callback) {
+      getOneBucketList: function (urlSlug, callback) {
         TravelibroService.http({
           url: adminURL + "/user/getBucketListWeb", ///////////////////use getOneBucketList
-          method: "POST"
+          method: "POST",
+          data: {
+            "urlSlug": urlSlug
+          }
         }).success(function (data) {
           callback(data.data.bucketList);
         }).error(function (data) {
