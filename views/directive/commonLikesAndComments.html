@@ -42,22 +42,22 @@
       <!-- comment section -->
       <div class="comment-sec">
         <form autocomplete="off" ng-submit="postPostsComment(post.uniqueId,comment.text,post._id)">
-        <div class="write-comment-text">
-          <div class="commenter-img">
-            <div class="commenter-imgholder">
-              <img ng-src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
+          <div class="write-comment-text">
+            <div class="commenter-img">
+              <div class="commenter-imgholder">
+                <img ng-src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
+              </div>
+            </div>
+            <div class="comment-ur-text relate">
+              <input name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="comment.text">
+              <find-tags ng-model="comment.text" element-id="enterComment" enable="bothTagging">
             </div>
           </div>
-          <div class="comment-ur-text relate">
-            <input name="" id="enterComment" placeholder="Write a comment" class="form-control" ng-model="comment.text">
-            <find-tags ng-model="comment.text" element-id="enterComment" enable="bothTagging">
+          <div class="clearfix comment-post">
+            <div class="pull-right">
+              <button class="btn btn-pink post-btn" type="submit">Post</button>
+            </div>
           </div>
-        </div>
-        <div class="clearfix comment-post">
-          <div class="pull-right">
-            <button class="btn btn-pink post-btn" type="submit">Post</button>
-          </div>
-        </div>
         </form>
         <div class="listing-comment">
           <div class="view-comment-list" ng-repeat="list in listOfComments.comment track by $index">
@@ -68,7 +68,7 @@
             </div>
             <div class="comment-container">
               <div class="commenter-text">
-                <p class="avenir-roman"  ng-hide="$index==index"><span class="commenter-name color-blue avenir-heavy mr5 pointer" ui-sref="mylife({'urlSlug':list.user.urlSlug})">{{list.user.name}}</span>{{list.text}}</p>
+                <p class="avenir-roman" ng-hide="$index==index"><span class="commenter-name color-blue avenir-heavy mr5 pointer" ui-sref="mylife({'urlSlug':list.user.urlSlug})">{{list.user.name}}</span>{{list.text}}</p>
                 <div class="edit-text" ng-show="$index==index">
                   <input type="text" ng-model="list.text" class="form-control">
                   <span ng-click="editBox(-1);">Cancel</span>
@@ -91,7 +91,7 @@
 <!-- whole window comment end-->
 <!-- whole window LIKE -->
 <!-- ng-show="viewCardLike" -->
-<div class="like-side-sec "  ng-class="{'show-like-side-sec': viewCardLike==true,'':viewCardLike==false}">
+<div class="like-side-sec " ng-class="{'show-like-side-sec': viewCardLike==true,'':viewCardLike==false}">
   <div class="like-section">
     <ul>
       <!-- REPEAT BUDDY LIST -->
@@ -127,7 +127,7 @@
         <span class="time-stamp ml5 avenir-roman">
           <i class="fa fa-calendar color-grey mr5"></i>
           <span>{{review.createdAt|formatDate:'date'}}</span> | <i class="fa fa-clock-o mr5 color-grey"></i>
-          <span>{{review.createdAt|formatDate:'time'}}</span>
+        <span>{{review.createdAt|formatDate:'time'}}</span>
         </span>
       </div>
     </div>
