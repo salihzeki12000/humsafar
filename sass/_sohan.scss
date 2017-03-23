@@ -259,7 +259,7 @@ a.color-white {
 .alphabhates {
   &.right-end {
     position: fixed;
-    right: 20px;
+    right: 7px;
     top: 100px;
     z-index: 0;
     opacity: 0;
@@ -339,10 +339,12 @@ a.color-white {
 
   .dropdown-destination {
     width: 100%;
+    border-radius: 0 0 8px 8px;
     // max-height: 150px;
     position: absolute;
     top: 34px;
     background-color: #fff;
+    box-shadow: 0 2px 3px #424242;
 
     li {
       border-bottom: 1px solid $brand-lighter-grey;
@@ -380,7 +382,6 @@ a.color-white {
 
 .destination-nav .destination-main{
   top: 51px;
-  border-radius: 0 0 8px 8px;
   padding-right: 5px;
   ::-webkit-scrollbar {
    width: 4px;
@@ -1168,28 +1169,37 @@ a.color-white {
 
 .popular-bloggerpage {
   min-height: 100vh;
+  padding: 20px 0 40px;;
 }
 
 .popular-blogger {
+  margin-top: 60px;
   .blogger-cover {
-    width: 220px;
-    max-width: 220px;
-    margin: 0 4px;
+    border-radius: 4px;
+    margin: 10px 0;
+    box-shadow:1px 7px 4px rgba(0, 0, 0, 0.35);
 
     .gallery-imgholder {
-      width: 220px;
-      max-width: 220px;
-      max-height: 350px;
       border-radius: 5px 5px 0 0;
       background-color: $brand-lighter-grey;
       z-index: 1;
       position: relative;
       overflow: hidden;
+    }
 
-      img {
-        max-width: 100%;
-        max-height: 100%;
+    .socialize-holder{
+      .list-inline{
+        margin-left: 0;
       }
+
+      .social-counters{
+        margin-right: 10px;
+      }
+    }
+
+    .blogger-cont-holder{
+      border-radius: 0 0 4px 4px;
+      background: rgba(0, 0, 0, 0.6);
     }
 
     .overlay-imgholder {
@@ -1215,19 +1225,13 @@ a.color-white {
     position: absolute;
     top: -8px;
     left: 10px;
+    width: 36px;
+    border: 1px solid #fff;
+    overflow: hidden;
     z-index: 2;
-
-    img {
-      width: 36px;
-      border: 2px solid #fff;
-    }
   }
 
   .bloggerholder-made {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     padding: 0 12px 15px;
 
     .socialize-holder {
@@ -1274,9 +1278,12 @@ a.color-white {
     }
 
     .cfj-holder {
+      padding: 15px 0px 5px;
+      ul{
+        display: flex;
+      }
       li {
-        float: left;
-
+        flex: 1;
         h5 {
           margin: 0 5px;
           @extend .avenir-heavy;
@@ -1304,10 +1311,10 @@ a.color-white {
 
       span {
         font-size: 10px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        width: 95px;
+        // white-space: nowrap;
+        // overflow: hidden;
+        // text-overflow: ellipsis;
+        // width: 95px;
         display: inline-block;
         @extend .avenir-roman;
         @extend .text-shadow;

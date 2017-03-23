@@ -7155,7 +7155,7 @@ header {
 //LIKE SIDE  TAB END
 
 // REVIEWs SIDE TAB
-.review-main{
+.review-side-sec {
   @extend .like-side-sec;
   &.review-slide{
     @extend .show-like-side-sec;
@@ -10690,7 +10690,7 @@ ng-map {
     border-top: 1px solid #fff;
     border-bottom: 1px solid #fff;
     .tour-descp {
-      min-height: 120px;
+      min-height: 100px;
     }
   }
   .tour-see-detail {
@@ -10862,6 +10862,11 @@ ng-map {
   img {
     @extend .get-center;
   }
+}
+
+#loading-bar .bar{
+  height: 4px;
+  background-color: $brand-pink;
 }
 
 // .loader-blur .repeated-item {

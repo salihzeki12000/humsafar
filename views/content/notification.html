@@ -14,7 +14,7 @@
             <!-- CLOSE / REMOVE NOTIFICATION END -->
 
             <!-- PROFILE PIC AND TIMESTAMP  user from detail-->
-            <div class="notification-profile">
+            <div class="notification-profile pointer" ui-sref="mylife({'urlSlug':notify.userFrom.urlSlug})">
               <img ng-src="{{notify.userFrom.profilePicture|uploadpath:50:50:'cover'}}" alt="{{notify.userFrom.name}}" class="img-responsive"
                 ng-if="notify.type!='userBadge'">
               <img ng-src="{{notify.userTo.profilePicture|uploadpath:50:50:'cover'}}" alt="{{notify.userTo.name}}" class="img-responsive"
@@ -74,9 +74,9 @@
                   </div>
                 </div>
                 <!-- ACCEPT DECLINE BUTTONS -->
-                <div class="notification-btn text-center">
-                  <button type="button" name="button" class="btn btn-notification-card">Accept</button>
-                  <button type="button" name="button" class="btn btn-notification-card">Decline</button>
+                <div class="notification-btn text-center" ng-if="notify.answeredStatus==''">
+                  <button type="button" name="button" class="btn btn-notification-card" ng-click="acceptRejectFollow(notify,1)">Accept</button>
+                  <button type="button" name="button" class="btn btn-notification-card" ng-click="acceptRejectFollow(notify,0)">Decline</button>
                 </div>
                 <!-- ACCEPT DECLINE BUTTONS END -->
               </div>
@@ -101,7 +101,7 @@
 
                 <!-- FOLLOW BUTTON -->
                 <div class="notification-btn noti-follow-btn">
-                  <button type="button" name="button" class="btn btn-notificationpink-card" ng-click="followFollowing(notify)">{{notify.following|followFollowingStatus}}</button>
+                  <button type="button" name="button" class="btn btn-notificationpink-card" ng-click="followFollowing(notify.userFrom)">{{notify.userFrom.following|followFollowingStatus}}</button>
                 </div>
                 <!-- FOLLOW BUTTON END -->
               </div>

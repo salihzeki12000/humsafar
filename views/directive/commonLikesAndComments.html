@@ -98,7 +98,7 @@
       <li ng-repeat="like in listOfLikes.like">
         <div class="like-notify-buddy clearfix">
           <div class="like-buddy-pic pointer" ui-sref="mylife({'urlSlug':like.urlSlug})">
-            <img ng-src="{{like.profilePicture|uploadpath:51:51}}" alt="" class="img-responsive">
+            <img ng-src="{{like.profilePicture|uploadpath:50:50:'cover'}}" alt="" class="img-responsive">
           </div>
           <div class="like-buddy-name">
             <p class="like-buddy-user pointer" ui-sref="mylife({'urlSlug':like.urlSlug})">{{like.name}}</p>
@@ -116,10 +116,10 @@
 
 
 <!-- review backdrop -->
-<div class="review-main {{callReview}}" ng-show="viewCardReview">
+<div class="review-side-sec {{callReview}}" ng-show="viewCardReview">
   <div class="review-list" ng-repeat="review in listOfReviews.userReview track by $index">
     <div class="reviewer-imgholder">
-      <img ng-src="{{review.user.profilePicture|uploadpath:45:50:'cover'}}" alt="{{review.user.name}}" class="img-responsive">
+      <img ng-src="{{review.user.profilePicture|uploadpath:50:50:'cover'}}" alt="{{review.user.name}}" class="img-responsive">
     </div>
     <div class="reviewer-content">
       <p><span class="reviewer-name avenir-heavy">{{review.user.name}}</span> <span class="reviewer-msg">{{review.review}}</span></p>

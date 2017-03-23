@@ -59,22 +59,19 @@
                 <!-- post header -->
                 <div class="post-header relate">
                   <div class="inline-block picture-section">
-                    <div class="user-pic" ng-if="post.user">
+                    <div class="user-pic pointer" ng-if="post.user" ui-sref="mylife({'urlSlug':post.user.urlSlug})">
                       <img ng-src="{{post.journeyCreator.profilePicture | uploadpath:50:50:'cover'}}" alt="" class="img-responsive">
                     </div>
                   </div>
-                  <div class="user-detail width74 inline-block">
-                    <h4 class="font-bold color-dark-blue m-clear mb5">{{post.journeyCreator.name}}</h4>
-                    <div class="clearfix user-more-detail">
-                      <div class="pull-left">
+                  <div class="user-detail clearfix width74 inline-block">
+                    <div class="pull-right">
+                      <div class="follow-or-following pointer" ng-click="followFollowing(post.user)">
+                        <span class="color-dark-blue ml5">{{post.user.following | followFollowingStatus}}</span>
+                      </div>
+                    </div>
+                    <h4 class="font-bold color-dark-blue pointer m-clear mb5" ng-if="post.user" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.journeyCreator.name}}</h4>
+                    <div class=" user-more-detail">
                         <p class="m-clear"><span class="fnt-12">{{post.startTime|formatDate:'date'}}</span> | <span class="fnt-12">{{post.startTime|formatDate:'time'}}</span></p>
-                      </div>
-                      <div class="pull-right">
-                        <div class="follow-or-following">
-                          <span class="color-dark-blue ml5" ng-if="post.follow">Follow</span>
-                          <span class="color-dark-blue ml5" ng-if="post.following">Following</span>
-                        </div>
-                      </div>
                     </div>
                   </div>
                   <!-- post type icon -->
@@ -88,7 +85,7 @@
                 <!-- post status end -->
                 <!-- post header end -->
                 <!-- post-main-section -->
-                <div class="post-main-section">
+                <div class="post-main-section pointer"  ng-click="routeOngo(post)">
                   <div class="relate">
                     <!-- flag country -->
                     <div class="flag-section">
