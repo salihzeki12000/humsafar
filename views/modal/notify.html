@@ -81,7 +81,7 @@
           </form>
           <div class="view-comment-scroll">
             <div infinite-scroll="getMoreComments(listOfComments._id)" infinite-scroll-parent="true">
-              <div class="view-comment-list" ng-repeat="list in listOfComments.comment">
+              <div class="view-comment-list" ng-repeat="list in listOfComments.comment track by $index">
                 <div class="commenter-img">
                   <div class="commenter-imgholder">
                     <img ng-src="{{list.user.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
@@ -89,14 +89,16 @@
                 </div>
                 <div class="comment-container">
                   <div class="commenter-text">
-                    <!--<p class="avenir-roman"><span class="commenter-name color-blue avenir-heavy mr5">Andreas Christina</span>Lorem ipsum dolor sit amet,
-                  consectetur adipisicing elit. Qui consectetur, iste asperiores similique et veniam tempora nisi. Dignissimos
-                  vel, nesciunt fugit odio nobis modi earum nisi iste soluta deserunt at.</p>-->
-                    <p class="avenir-roman"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name|whoIsThis:list.user._id:userData._id}}</span>{{list.text}}</p>
+                    <p class="avenir-roman" ng-hide="$index==index"><span class="commenter-name color-blue avenir-heavy mr5">{{list.user.name|whoIsThis:list.user._id:userData._id}}</span>{{list.text}}</p>
+                    <div class="edit-text" ng-show="$index==index">
+                      <input type="text" ng-model="list.text" class="form-control">
+                      <span ng-click="editBox(-1);">Cancel</span>
+                      <button class="btn btn-pink" ng-click="editComment(list._id,list.text,list.type);">Done</button>
+                    </div>
                     <div class="like-reply-line">
-                      <!-- <span class="color-blue avenir-roman mr5 pointer">Like</span> -->
-                      <!-- <span class="color-blue avenir-roman mr5 pointer">Reply</span> -->
-                      <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                      | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
+                      <span class="color-blue avenir-roman mr5 pointer" ng-click="editBox($index);" ng-if="userData._id == list.user._id"><i class="fa fa-pencil"></i></span>
+                      <span class="color-blue avenir-roman mr5 pointer" ng-click="deleteComment(list._id,list.type);" ng-if="userData._id == list.user._id"><i class="fa fa-trash"></i></span>
+                      <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                  | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
                     </div>
                   </div>
                 </div>

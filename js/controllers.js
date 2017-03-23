@@ -3224,6 +3224,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     // get booking data
+    $scope.viewLoader = false;
     $scope.getBooking = function (cityName, countryName) {
       console.log(cityName, countryName);
       $scope.bookingCityName = cityName;
@@ -3232,9 +3233,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         cityName: $scope.bookingCityName,
         countryName: $scope.bookingCountryName
       }, function (data) {
-        console.log(data, 'booking data');
-        $scope.bookingData = data;
-        console.log($scope.bookingData, 'booking ka data');
+        if(data.tours.tours_data){
+          console.log(data, 'booking data');
+          $scope.bookingData = data;
+          console.log($scope.bookingData, 'booking ka data');
+          $scope.viewLoader = false;
+        }else {
+          $scope.viewLoader =  true;
+        }
       });
     };
     // get booking data end
@@ -10501,6 +10507,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
 
+    $scope.customLink = function() {
+    if( (navigator.platform.indexOf("iPhone") != -1)
+       || (navigator.platform.indexOf("iPod") != -1)
+       || (navigator.platform.indexOf("iPad") != -1)){
+        window.open("https://itunes.apple.com/in/app/travelibro/id1056641759");
+       }
+   else{
+        window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
+   }
+ };
+
   })
 
   .controller('AgentloginCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -14119,7 +14136,7 @@ $scope.acceptRejectFollow = function (notifyOb,status) {
   })
 
   .controller('photoCommentModalCtrl', function ($scope, $uibModalInstance, LikesAndComments, $timeout) {
-
+    $scope.index = -1;
     $scope.likePhoto = function (listOfComments, uniqueId, _id, additionalId) {
       // console.log(uniqueId, _id, additionalId);
       console.log(listOfComments);
@@ -14227,6 +14244,44 @@ $scope.acceptRejectFollow = function (notifyOb,status) {
       backgroundClick.scope = $scope;
     };
     // photo likes end
+
+        $scope.editBox = function (index) {
+          console.log(index,'what is indez');
+          if ($scope.index == index) {
+            $scope.index = -1;
+          } else {
+            $scope.index = index;
+          }
+        };
+        // edit comment
+        $scope.editComment = function (commentId, commentText, commentType) {
+          console.log($scope.listOfComments.comment, 'comment ka arrray');
+          LikesAndComments.commentEdit(commentId, commentText, commentType, function (data) {
+            if (data.value == true) {
+              var commentedIndex = _.findIndex($scope.listOfComments.comment, function (commentData) {
+                return commentData._id == commentId;
+              });
+              $scope.listOfComments.comment[commentedIndex].text = commentText;
+              $scope.index = -1;
+            }
+          })
+        }
+        // edit comment end
+        // delete comment
+        $scope.deleteComment = function (commentId, commentType) {
+          console.log(commentId, 'id',commentType, 'type' );
+          console.log($scope.listOfComments, 'lof');
+          console.log(commentId, 'id');
+          LikesAndComments.commentDelete(commentId, commentType, function (data) {
+            if (data.value == true) {
+              _.remove($scope.listOfComments.comment, function (list) {
+                return list._id == commentId;
+              })
+              console.log($scope.listOfComments.comment, 'total nikla kya');
+            }
+          });
+        };
+        // delete comment end
   })
 
   .controller('reviewPostModalCtrl', function ($scope, $uibModalInstance, LikesAndComments, $timeout) {
@@ -14365,6 +14420,7 @@ $scope.acceptRejectFollow = function (notifyOb,status) {
     };
 
     $scope.editBox = function (index) {
+      console.log(index,'what is indez');
       if ($scope.index == index) {
         $scope.index = -1;
       } else {
@@ -14387,6 +14443,7 @@ $scope.acceptRejectFollow = function (notifyOb,status) {
     // edit comment end
     // delete comment
     $scope.deleteComment = function (commentId, commentType) {
+      console.log(commentId, 'id',commentType, 'type' );
       console.log($scope.listOfComments, 'lof');
       console.log(commentId, 'id');
       LikesAndComments.commentDelete(commentId, commentType, function (data) {
