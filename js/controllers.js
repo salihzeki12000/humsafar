@@ -4526,6 +4526,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // routing to on-the-go,detailed-iti,quick-iti ends here
 
+    // followFollowing  Function
+    $scope.followFollowing = function (user) {
+      console.log("from popularBloggerData");
+      LikesAndComments.followUnFollow(user, function (data) {
+        if (data.value) {
+          user.following = data.data.responseValue;
+        } else {
+          console.log("error updating data");
+        }
+      });
+    }
+    // followFollowing  Function END
+
     //moment Integration starts here
     $scope.allMoments = {
       "arr": [],
@@ -10311,7 +10324,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.accessToken = $.jStorage.get("accessToken");
   })
 
-  .controller('headerctrl', function ($scope, TemplateService, NavigationService, $state, $interval, $timeout) {
+  .controller('headerctrl', function ($scope, TemplateService, NavigationService,LikesAndComments, $state, $interval, $timeout) {
     $scope.template = TemplateService;
     $scope.getAllSearched = [];
     $scope.search = {};
@@ -10330,6 +10343,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     } else {
       $.jStorage.set("profile", null);
     }
+    // edit option
+    $scope.editOption = function (model, class1, class2) {
+      LikesAndComments.onClickDropDown(model, $scope, class1, class2);
+    };
+    // edit option end
+
+    // route to itinerary
+    $scope.routeSearchItinerary = function(itinerary){
+      if(itinerary.type == "quick-itinerary"){
+        $state.go('userquickitinerary', {
+          'id' : itinerary.urlSlug,
+          'urlSlug': itinerary.user.urlSlug
+        })
+      }else {
+        $state.go('userdetailitinerary', {
+          'id' : itinerary.urlSlug,
+          'urlSlug': itinerary.user.urlSlug
+        })
+      }
+    }
+    // route to itinerary end
 
     $(window).load(function () {
       var loading = setInterval(function () {
@@ -10414,19 +10448,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
     };
 
-    // backgroundClick
-    $scope.editOption = function (model) {
-      $timeout(function () {
-        if ($scope.search.searchType.length > 0) {
-          model.backgroundClick = true;
-        } else {
-          model.backgroundClick = false;
-        }
-        backgroundClick.object = model;
-      }, 200);
-      backgroundClick.scope = $scope;
-    };
-    //backgroundClick
 
     $scope.searchType = function () {
       console.log($scope.search.searchType, 'search type');
@@ -13494,7 +13515,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         // $scope.notificationCard = data.data;
         makeNotifyString();
         _.each( data.data, function(n){
-          n.user.following = n.following;
+          n.userFrom.following = n.following;
         })
       });
     };

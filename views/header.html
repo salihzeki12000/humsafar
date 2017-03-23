@@ -16,11 +16,11 @@
               <span class="icon-bar box-shadow {{secondbar}}"></span>
               <span class="icon-bar box-shadow {{thirdbar}}"></span>
             </div>
-            <div class="search inline-block relate v-top hidden-xs" ng-init="viewSearch={};" ng-click="editOption(viewSearch);">
+            <div class="search inline-block relate v-top hidden-xs" ng-init="viewSearch={'outerClass':' searchOuter','innerClass':'searchInner'}">
               <form autocomplete="off">
-                <input type="text " class="form-control color-white avenir-light " id="search " ng-model="search.searchType" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags "
-                  ng-change="searchType();">
-                <div class="search-result-dropdown" ng-show="viewSearch.backgroundClick;">
+                <input type="text " class="form-control color-white avenir-light searchOuter" id="search " ng-model="search.searchType" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags "
+                  ng-change="searchType();" ng-click="editOption(viewSearch,'searchOuter','searchInner')">
+                <div class="search-result-dropdown searchInner" ng-show="viewSearch.backgroundClick;">
                   <div class="search-traveller-drop" ng-if="getAllSearched.user.length>0">
                     <div class="search-dropheader search-dropheader-travel">
                       <div class="clearfix">
@@ -34,10 +34,10 @@
                     </div>
                     <ul class="searchdrop-options">
                       <li class="search-option" ng-repeat="user in getAllSearched.user track by $index">
-                        <div class="search-option-img">
-                          <img ng-src="{{user.profilePicture|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
+                        <div class="search-option-img pointer" ui-sref="mylife({'urlSlug':user.urlSlug})">
+                          <img ng-src="{{user.profilePicture|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
                         </div>
-                        <span class="search-optiontxt">{{user.name}}</span>
+                        <span class="search-optiontxt pointer" ui-sref="mylife({'urlSlug':user.urlSlug})">{{user.name}}</span>
                       </li>
                     </ul>
                   </div>
@@ -48,10 +48,10 @@
                     </div>
                     <ul class="searchdrop-options">
                       <li class="search-option" ng-repeat="itinerary in getAllSearched.itinerary track by $index">
-                        <div class="search-option-img">
-                          <img ng-src="{{itinerary.coverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
+                        <div class="search-option-img" ng-click="routeSearchItinerary(itinerary)">
+                          <img ng-src="{{itinerary.coverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
                         </div>
-                        <span class="search-optiontxt">{{itinerary.name}}</span>
+                        <span class="search-optiontxt pointer" ng-click="routeSearchItinerary(itinerary)">{{itinerary.name}}</span>
                       </li>
                     </ul>
                   </div>
@@ -64,7 +64,7 @@
                       <li class="search-option" ng-repeat="hashtag in getAllSearched.hashtag track by $index ">
                         <div class="clearfix">
                           <div class="pull-left">
-                            <span>{{hashtag.title}}</span>
+                            <span class="pointer" ng-click="viewResult('search-hashtag',search.searchType)">{{hashtag.title}}</span>
                           </div>
                           <div class="pull-right">
                             <span class="search-optiontxt count">{{hashtag.count}}</span>
@@ -80,10 +80,10 @@
                     </div>
                     <ul class="searchdrop-options">
                       <li class="search-option" ng-repeat="country in getAllSearched.country track by $index ">
-                        <div class="search-option-img">
-                          <img ng-src="{{country.flag|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
+                        <div class="search-option-img" ui-sref="destinationcountry({'name':'featured','url':country.urlSlug})">
+                          <img ng-src="{{country.flag|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
                         </div>
-                        <span class="search-optiontxt">{{country.name}}</span>
+                        <span class="search-optiontxt" ui-sref="destinationcountry({'name':'featured','url':country.urlSlug})">{{country.name}}</span>
                       </li>
                     </ul>
                   </div>
@@ -94,10 +94,10 @@
                     </div>
                     <ul class="searchdrop-options">
                       <li class="search-option" ng-repeat="city in getAllSearched.city track by $index ">
-                        <div class="search-option-img">
-                          <img ng-src="{{city.cityCoverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
+                        <div class="search-option-img pointer" ui-sref="destinationcity({'name':'mustdo','url':city.urlSlug})">
+                          <img ng-src="{{city.cityCoverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
                         </div>
-                        <span class="search-optiontxt">{{city.name}}</span>
+                        <span class="search-optiontxt pointer" ui-sref="destinationcity({'name':'mustdo','url':city.urlSlug})">{{city.name}}</span>
                       </li>
                     </ul>
                   </div>
@@ -219,101 +219,94 @@
     <div class="container-fluid ">
       <div class="row ">
         <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
-          <form autocomplete="off">
-            <div class="form-group ">
-              <div class="input-group " ng-init="viewSearch={};" ng-click="editOption(viewSearch);">
-                <span class="input-group-addon ">
-                  <a class="color-white fnt-22 ">
-                      <i class="fa fa-search "></i>
-                  </a>
-                </span>
-                <input type="text " class="form-control color-white avenir-light " id="search " ng-model="search.searchType" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags "
-                  ng-change="searchType();">
-                <div class="search-result-dropdown" ng-show="viewSearch.backgroundClick;">
-                  <div class="search-traveller-drop" ng-if="getAllSearched.user.length>0">
-                    <div class="search-dropheader search-dropheader-travel">
-                      <div class="clearfix">
-                        <div class="pull-left">
-                          <span>Traveller</span>
-                        </div>
-                        <div class="pull-right">
-                          <a ng-click="viewResult('search-traveller',search.searchType)">View All</a>
-                        </div>
+          <div class="search inline-block relate v-top" ng-init="viewSearch={'outerClass':' searchOuter','innerClass':'searchInner'}">
+            <form autocomplete="off">
+              <input type="text " class="form-control color-white avenir-light searchOuter" id="search " ng-model="search.searchType" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags "
+                ng-change="searchType();" ng-click="editOption(viewSearch,'searchOuter','searchInner')">
+              <div class="search-result-dropdown searchInner" ng-show="viewSearch.backgroundClick;">
+                <div class="search-traveller-drop" ng-if="getAllSearched.user.length>0">
+                  <div class="search-dropheader search-dropheader-travel">
+                    <div class="clearfix">
+                      <div class="pull-left">
+                        <span>Traveller</span>
+                      </div>
+                      <div class="pull-right">
+                        <a ng-click="viewResult('search-traveller',search.searchType)">View All</a>
                       </div>
                     </div>
-                    <ul class="searchdrop-options">
-                      <li class="search-option" ng-repeat="user in getAllSearched.user track by $index">
-                        <div class="search-option-img">
-                          <img ng-src="{{user.profilePicture|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
-                        </div>
-                        <span class="search-optiontxt">{{user.name}}</span>
-                      </li>
-                    </ul>
                   </div>
-                  <div class="search-itinerary-drop" ng-if="getAllSearched.itinerary.length>0">
-                    <div class="search-dropheader clearfix">
-                      <span class="pull-left">Itinerary</span>
-                      <a class="pull-right" ng-click="viewResult('search-itinerary',search.searchType)">View All</a>
-                    </div>
-                    <ul class="searchdrop-options">
-                      <li class="search-option" ng-repeat="itinerary in getAllSearched.itinerary track by $index">
-                        <div class="search-option-img">
-                          <img ng-src="{{itinerary.coverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
-                        </div>
-                        <span class="search-optiontxt">{{itinerary.name}}</span>
-                      </li>
-                    </ul>
+                  <ul class="searchdrop-options">
+                    <li class="search-option" ng-repeat="user in getAllSearched.user track by $index">
+                      <div class="search-option-img pointer" ui-sref="mylife({'urlSlug':user.urlSlug})">
+                        <img ng-src="{{user.profilePicture|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
+                      </div>
+                      <span class="search-optiontxt pointer" ui-sref="mylife({'urlSlug':user.urlSlug})">{{user.name}}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="search-itinerary-drop" ng-if="getAllSearched.itinerary.length>0">
+                  <div class="search-dropheader clearfix">
+                    <span class="pull-left">Itinerary</span>
+                    <a class="pull-right" ng-click="viewResult('search-itinerary',search.searchType)">View All</a>
                   </div>
-                  <div class="search-hashtag-drop" ng-if="getAllSearched.hashtag.length>0">
-                    <div class="search-dropheader clearfix">
-                      <span class="pull-left">Hashtags</span>
-                      <a class="pull-right" ng-click="viewResult('search-hashtag',search.searchType)">View All</a>
-                    </div>
-                    <ul class="searchdrop-options">
-                      <li class="search-option" ng-repeat="hashtag in getAllSearched.hashtag track by $index ">
-                        <div class="clearfix">
-                          <div class="pull-left">
-                            <span>{{hashtag.title}}</span>
-                          </div>
-                          <div class="pull-right">
-                            <span class="search-optiontxt count">{{hashtag.count}}</span>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
+                  <ul class="searchdrop-options">
+                    <li class="search-option" ng-repeat="itinerary in getAllSearched.itinerary track by $index">
+                      <div class="search-option-img" ng-click="routeSearchItinerary(itinerary)">
+                        <img ng-src="{{itinerary.coverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
+                      </div>
+                      <span class="search-optiontxt pointer" ng-click="routeSearchItinerary(itinerary)">{{itinerary.name}}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="search-hashtag-drop" ng-if="getAllSearched.hashtag.length>0">
+                  <div class="search-dropheader clearfix">
+                    <span class="pull-left">Hashtags</span>
+                    <a class="pull-right" ng-click="viewResult('search-hashtag',search.searchType)">View All</a>
                   </div>
-                  <div class="search-country-drop" ng-if="getAllSearched.country.length>0">
-                    <div class="search-dropheader clearfix">
-                      <span class="pull-left">Country</span>
-                      <a class="pull-right" ng-click="viewResult('search-country',search.searchType)">View All</a>
-                    </div>
-                    <ul class="searchdrop-options">
-                      <li class="search-option" ng-repeat="country in getAllSearched.country track by $index ">
-                        <div class="search-option-img">
-                          <img ng-src="{{country.flag|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
+                  <ul class="searchdrop-options">
+                    <li class="search-option" ng-repeat="hashtag in getAllSearched.hashtag track by $index ">
+                      <div class="clearfix">
+                        <div class="pull-left">
+                          <span class="pointer" ng-click="viewResult('search-hashtag',search.searchType)">{{hashtag.title}}</span>
                         </div>
-                        <span class="search-optiontxt">{{country.name}}</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="search-city-drop" ng-if="getAllSearched.city.length>0">
-                    <div class="search-dropheader clearfix">
-                      <span class="pull-left">City</span>
-                      <a class="pull-right" ng-click="viewResult('search-city',search.searchType)">View All</a>
-                    </div>
-                    <ul class="searchdrop-options">
-                      <li class="search-option" ng-repeat="city in getAllSearched.city track by $index ">
-                        <div class="search-option-img">
-                          <img ng-src="{{city.cityCoverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
+                        <div class="pull-right">
+                          <span class="search-optiontxt count">{{hashtag.count}}</span>
                         </div>
-                        <span class="search-optiontxt">{{city.name}}</span>
-                      </li>
-                    </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="search-country-drop" ng-if="getAllSearched.country.length>0">
+                  <div class="search-dropheader clearfix">
+                    <span class="pull-left">Country</span>
+                    <a class="pull-right" ng-click="viewResult('search-country',search.searchType)">View All</a>
                   </div>
+                  <ul class="searchdrop-options">
+                    <li class="search-option" ng-repeat="country in getAllSearched.country track by $index ">
+                      <div class="search-option-img" ui-sref="destinationcountry({'name':'featured','url':country.urlSlug})">
+                        <img ng-src="{{country.flag|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
+                      </div>
+                      <span class="search-optiontxt" ui-sref="destinationcountry({'name':'featured','url':country.urlSlug})">{{country.name}}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="search-city-drop" ng-if="getAllSearched.city.length>0">
+                  <div class="search-dropheader clearfix">
+                    <span class="pull-left">City</span>
+                    <a class="pull-right" ng-click="viewResult('search-city',search.searchType)">View All</a>
+                  </div>
+                  <ul class="searchdrop-options">
+                    <li class="search-option" ng-repeat="city in getAllSearched.city track by $index ">
+                      <div class="search-option-img pointer" ui-sref="destinationcity({'name':'mustdo','url':city.urlSlug})">
+                        <img ng-src="{{city.cityCoverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
+                      </div>
+                      <span class="search-optiontxt pointer" ui-sref="destinationcity({'name':'mustdo','url':city.urlSlug})">{{city.name}}</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -324,99 +317,90 @@
     <div class="container-fluid ">
       <div class="row ">
         <div class="col-md-offset-3 col-md-6 ">
-          <div class="" ng-init="viewSearch={};" ng-click="editOption(viewSearch);">
+          <div class="search inline-block relate v-top" ng-init="viewSearch={'outerClass':' searchOuter','innerClass':'searchInner'}">
             <form autocomplete="off">
-              <div class="form-group ">
-                <div class="input-group ">
-                  <span class="input-group-addon ">
-                    <a class="color-white fnt-22 ">
-                        <i class="fa fa-search "></i>
-                    </a>
-                  </span>
-                  <input type="text " class="form-control color-white avenir-light " id="search " ng-model="search.searchType" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags "
-                    ng-change="searchType();">
-                  <div class="search-result-dropdown" ng-show="viewSearch.backgroundClick;">
-                    <div class="search-traveller-drop" ng-if="getAllSearched.user.length>0">
-                      <div class="search-dropheader search-dropheader-travel">
-                        <div class="clearfix">
-                          <div class="pull-left">
-                            <span>Traveller</span>
-                          </div>
-                          <div class="pull-right">
-                            <a ng-click="viewResult('search-traveller',search.searchType)">View All</a>
-                          </div>
-                        </div>
+              <input type="text " class="form-control color-white avenir-light searchOuter" id="search " ng-model="search.searchType" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags "
+                ng-change="searchType();" ng-click="editOption(viewSearch,'searchOuter','searchInner')">
+              <div class="search-result-dropdown searchInner" ng-show="viewSearch.backgroundClick;">
+                <div class="search-traveller-drop" ng-if="getAllSearched.user.length>0">
+                  <div class="search-dropheader search-dropheader-travel">
+                    <div class="clearfix">
+                      <div class="pull-left">
+                        <span>Traveller</span>
                       </div>
-                      <ul class="searchdrop-options">
-                        <li class="search-option" ng-repeat="user in getAllSearched.user track by $index">
-                          <div class="search-option-img">
-                            <img ng-src="{{user.profilePicture|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
-                          </div>
-                          <span class="search-optiontxt">{{user.name}}</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="search-itinerary-drop" ng-if="getAllSearched.itinerary.length>0">
-                      <div class="search-dropheader clearfix">
-                        <span class="pull-left">Itinerary</span>
-                        <a class="pull-right" ng-click="viewResult('search-itinerary',search.searchType)">View All</a>
+                      <div class="pull-right">
+                        <a ng-click="viewResult('search-traveller',search.searchType)">View All</a>
                       </div>
-                      <ul class="searchdrop-options">
-                        <li class="search-option" ng-repeat="itinerary in getAllSearched.itinerary track by $index">
-                          <div class="search-option-img">
-                            <img ng-src="{{itinerary.coverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
-                          </div>
-                          <span class="search-optiontxt">{{itinerary.name}}</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="search-hashtag-drop" ng-if="getAllSearched.hashtag.length>0">
-                      <div class="search-dropheader clearfix">
-                        <span class="pull-left">Hashtags</span>
-                        <a class="pull-right" ng-click="viewResult('search-hashtag',search.searchType)">View All</a>
-                      </div>
-                      <ul class="searchdrop-options">
-                        <li class="search-option" ng-repeat="hashtag in getAllSearched.hashtag track by $index ">
-                          <div class="clearfix">
-                            <div class="pull-left">
-                              <span>{{hashtag.title}}</span>
-                            </div>
-                            <div class="pull-right">
-                              <span class="search-optiontxt count">{{hashtag.count}}</span>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="search-country-drop" ng-if="getAllSearched.country.length>0">
-                      <div class="search-dropheader clearfix">
-                        <span class="pull-left">Country</span>
-                        <a class="pull-right" ng-click="viewResult('search-country',search.searchType)">View All</a>
-                      </div>
-                      <ul class="searchdrop-options">
-                        <li class="search-option" ng-repeat="country in getAllSearched.country track by $index ">
-                          <div class="search-option-img">
-                            <img ng-src="{{country.flag|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
-                          </div>
-                          <span class="search-optiontxt">{{country.name}}</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="search-city-drop" ng-if="getAllSearched.city.length>0">
-                      <div class="search-dropheader clearfix">
-                        <span class="pull-left">City</span>
-                        <a class="pull-right" ng-click="viewResult('search-city',search.searchType)">View All</a>
-                      </div>
-                      <ul class="searchdrop-options">
-                        <li class="search-option" ng-repeat="city in getAllSearched.city track by $index ">
-                          <div class="search-option-img">
-                            <img ng-src="{{city.cityCoverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive get-center" alt="">
-                          </div>
-                          <span class="search-optiontxt">{{city.name}}</span>
-                        </li>
-                      </ul>
                     </div>
                   </div>
+                  <ul class="searchdrop-options">
+                    <li class="search-option" ng-repeat="user in getAllSearched.user track by $index">
+                      <div class="search-option-img pointer" ui-sref="mylife({'urlSlug':user.urlSlug})">
+                        <img ng-src="{{user.profilePicture|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
+                      </div>
+                      <span class="search-optiontxt pointer" ui-sref="mylife({'urlSlug':user.urlSlug})">{{user.name}}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="search-itinerary-drop" ng-if="getAllSearched.itinerary.length>0">
+                  <div class="search-dropheader clearfix">
+                    <span class="pull-left">Itinerary</span>
+                    <a class="pull-right" ng-click="viewResult('search-itinerary',search.searchType)">View All</a>
+                  </div>
+                  <ul class="searchdrop-options">
+                    <li class="search-option" ng-repeat="itinerary in getAllSearched.itinerary track by $index">
+                      <div class="search-option-img" ng-click="routeSearchItinerary(itinerary)">
+                        <img ng-src="{{itinerary.coverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
+                      </div>
+                      <span class="search-optiontxt pointer" ng-click="routeSearchItinerary(itinerary)">{{itinerary.name}}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="search-hashtag-drop" ng-if="getAllSearched.hashtag.length>0">
+                  <div class="search-dropheader clearfix">
+                    <span class="pull-left">Hashtags</span>
+                    <a class="pull-right" ng-click="viewResult('search-hashtag',search.searchType)">View All</a>
+                  </div>
+                  <ul class="searchdrop-options">
+                    <li class="search-option" ng-repeat="hashtag in getAllSearched.hashtag track by $index ">
+                      <div class="clearfix">
+                        <div class="pull-left">
+                          <span class="pointer" ng-click="viewResult('search-hashtag',search.searchType)">{{hashtag.title}}</span>
+                        </div>
+                        <div class="pull-right">
+                          <span class="search-optiontxt count">{{hashtag.count}}</span>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="search-country-drop" ng-if="getAllSearched.country.length>0">
+                  <div class="search-dropheader clearfix">
+                    <span class="pull-left">Country</span>
+                    <a class="pull-right" ng-click="viewResult('search-country',search.searchType)">View All</a>
+                  </div>
+                  <ul class="searchdrop-options">
+                    <li class="search-option" ng-repeat="country in getAllSearched.country track by $index ">
+                      <div class="search-option-img" ui-sref="destinationcountry({'name':'featured','url':country.urlSlug})">
+                        <img ng-src="{{country.flag|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
+                      </div>
+                      <span class="search-optiontxt" ui-sref="destinationcountry({'name':'featured','url':country.urlSlug})">{{country.name}}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="search-city-drop" ng-if="getAllSearched.city.length>0">
+                  <div class="search-dropheader clearfix">
+                    <span class="pull-left">City</span>
+                    <a class="pull-right" ng-click="viewResult('search-city',search.searchType)">View All</a>
+                  </div>
+                  <ul class="searchdrop-options">
+                    <li class="search-option" ng-repeat="city in getAllSearched.city track by $index ">
+                      <div class="search-option-img pointer" ui-sref="destinationcity({'name':'mustdo','url':city.urlSlug})">
+                        <img ng-src="{{city.cityCoverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
+                      </div>
+                      <span class="search-optiontxt pointer" ui-sref="destinationcity({'name':'mustdo','url':city.urlSlug})">{{city.name}}</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </form>
