@@ -95,7 +95,19 @@
                   </div>
                 </div>
                 <!-- empty all view profile user login for first time -->
-                <div ng-if="allMoments.arr.length!==0">
+                <!-- PRIVATE PROFILE EMPTY SCREEN -->
+                <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+                  <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                      <div class="private-accountcover text-center">
+                        <h3>This account is Private.</h3>
+                        <p>Follow to view their interesting stories.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- PRIVATE PROFILE EMPTY SCREEN END -->
+                <div ng-if="allMoments.arr.length!==0 && (isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
                   <div class="month-collage" ng-repeat="singleObject in allMoments.arr track by $index" ng-click="getPerMonthMoments(singleObject,'all');"
                     ng-if="singleObject.token!=-1 && viewMonth == false">
                     <h4 class="month-name"><span class="avenir-heavy">{{singleObject.token|momentsDate}}</span> <span class="monthname-count">({{singleObject.count}})</span></h4>
@@ -148,10 +160,25 @@
                   </div>
                 </div>
                 <!-- empty travel view profile user login for first time-->
+
+                <!-- PRIVATE PROFILE EMPTY SCREEN -->
+                <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+                  <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                      <div class="private-accountcover text-center">
+                        <h3>This account is Private.</h3>
+                        <p>Follow to view their interesting stories.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- PRIVATE PROFILE EMPTY SCREEN END -->
+
+
                 <!--<div class="container-fluid">
                 <div class="row">
                   <div class="col-md-3 col-sm-4" >-->
-                <div ng-if="travelLifeMoments.arr.length!==0">
+                <div ng-if="travelLifeMoments.arr.length!==0 && (isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
                   <div class="row">
                     <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="view in travelLifeMoments.arr" ng-click="getJournItiMoments(view);" ng-if="!viewMonth">
                       <div class="moment-travel-view">
@@ -215,10 +242,23 @@
                   </div>
                 </div>
                 <!-- empty local view profile user login for first time-->
+
+                <!-- PRIVATE PROFILE EMPTY SCREEN -->
+                <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+                  <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                      <div class="private-accountcover text-center">
+                        <h3>This account is Private.</h3>
+                        <p>Follow to view their interesting stories.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- PRIVATE PROFILE EMPTY SCREEN END -->
                 <!--<div class="container-fluid">
                 <div class="row">
                   <div class="col-md-3 col-sm-4" >-->
-                <div ng-if="localLifeMoments.arr.length!==0">
+                <div ng-if="localLifeMoments.arr.length!==0 && (isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
                   <div class="row">
                     <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="moment in localLifeMoments.arr" ng-click="getPerMonthMoments(moment,'local');"
                       ng-if="moment.token!=-1 && viewMonth==false">

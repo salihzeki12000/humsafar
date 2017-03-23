@@ -126,7 +126,20 @@
             </div>
           </div>
           <!-- user logged for first time end -->
-          <div class="container">
+          <!-- PRIVATE PROFILE EMPTY SCREEN -->
+          <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+            <div class="row">
+              <div class="col-md-offset-2 col-md-8">
+                <div class="private-accountcover text-center">
+                  <h3>This account is Private.</h3>
+                  <p>Follow to view their interesting stories.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- PRIVATE PROFILE EMPTY SCREEN END -->
+          <div class="container" ng-if="isMine || (userData.following==1 && userData.status=='private') || userData.status=='public'">
+
             <div class="masonry-detail" ng-show="hasJourney" infinite-scroll="getMore()" infinite-scroll-disabled="scroll.busy" infinite-scroll-distance='1'>
               <div masonry preserve-order>
                 <div class="row">
@@ -555,7 +568,19 @@
           </div>
         </div>
         <!-- user logged for first time local life end -->
-        <div class="local-life-main" ng-hide="showLocalLife">
+        <!-- PRIVATE PROFILE EMPTY SCREEN -->
+        <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+          <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+              <div class="private-accountcover text-center">
+                <h3>This account is Private.</h3>
+                <p>Follow to view their interesting stories.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRIVATE PROFILE EMPTY SCREEN END -->
+        <div class="local-life-main" ng-hide="showLocalLife" ng-if="isMine || (userData.following==1 && userData.status=='private') || userData.status=='public'">
           <div class="overlay-filter" ng-class="{ 'fliter-open': isopen}" ng-click="openMyLifeFilter()"></div>
           <div class="inline-block filter-local-life avenir-roman" ng-class="{ 'fliter-open': isopen} ">
             <form action="">

@@ -2,12 +2,12 @@
   <div class="container-fluid">
     <div class="profile-photo-section relate">
       <div class="profile-pic relate">
-        <a ui-sref="setting" ng-if="allowAccess=true">
+        <a ui-sref="setting" ng-if="isMine">
           <div class="profile-imgholder ">
             <img ng-src="{{userData.profilePicture|uploadpath:140:150:'cover'}}" alt="{{userData.name}}" class="img-responsive" style="border-radius:'50px';">
           </div>
         </a>
-        <a href="{{userData.profilePicture|uploadpath}}" fancybox-box class="fancybox" ng-if="allowAccess=false">
+        <a href="{{userData.profilePicture|uploadpath}}" fancybox-box class="fancybox" ng-if="!isMine">
           <div class="profile-imgholder ">
             <img ng-src="{{userData.profilePicture|uploadpath:140:150:'cover'}}" alt="{{userData.name}}" class="img-responsive" style="border-radius:'50px';">
           </div>
@@ -18,6 +18,7 @@
       <div class="profile-more-detail text-center">
         <h3 class="color-blue m-clear font-bold avenir-medium ">{{userData.name}}</h3>
         <h5 class="color-pink avenir-roman">Lives In : <i class="fa fa-map-marker mr5"></i><span>{{userData.homeCity}}</span></h5>
+        <button ng-if="!isMine" class="btn btn-pink btn-more" ng-click="followFollowing(userData)">{{userData.following | followFollowingStatus}}</button>
       </div>
     </div>
     <div class="user-travel-detail relate">
@@ -108,7 +109,7 @@
               </div>
             </div>
             <div class="col-lg-3 col-md-4">
-              <div class="wish-country-visit">
+              <div class="wish-country-visit" ng-if="isMine">
                 <div class="text-right">
                   <span class="color-blue fz12 mr10 avenir-roman"><i class="fa fa-check color-pink mr5"></i> Been There {{wishCountry}}</span>
                   <span class="color-blue fz12 ml10 avenir-roman"><i class="fa fa-heart color-blue mr5"></i> Would Love To Go</span>

@@ -83,7 +83,22 @@
                   {{reviewAll.length}}
                 </div>
                 <!-- review empty all view profile user login for first time -->
-                <div class="review-all-life" ng-repeat="view in reviewAll.arr" ng-if="reviewAll.arr.length!==0">
+
+                <!-- PRIVATE PROFILE EMPTY SCREEN -->
+                <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+                  <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                      <div class="private-accountcover text-center">
+                        <h3>This account is Private.</h3>
+                        <p>Follow to view their interesting stories.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- PRIVATE PROFILE EMPTY SCREEN END -->
+
+
+                <div class="review-all-life" ng-repeat="view in reviewAll.arr" ng-if="reviewAll.arr.length!==0 && (isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
                   <div class="review-travel-life">
                     <div class="heading-review clearfix">
                       <h3 class="place-name pull-left m-clear color-blue avenir-heavy">{{view.checkIn.location}}</h3>
@@ -159,7 +174,21 @@
                   </div>
                 </div>
                 <!-- review empty travel view profile user login for first time -->
-                <div ng-if="reviewTravelLife.arr!==0">
+
+                <!-- PRIVATE PROFILE EMPTY SCREEN -->
+                <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+                  <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                      <div class="private-accountcover text-center">
+                        <h3>This account is Private.</h3>
+                        <p>Follow to view their interesting stories.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- PRIVATE PROFILE EMPTY SCREEN END -->
+
+                <div ng-if="reviewTravelLife.arr!==0 && (isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
                   <div class="row">
                     <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="review in reviewTravelLife.arr" ng-if="!viewTravelCountry">
                       <div class="list-travel-view">
@@ -253,8 +282,22 @@
                   </div>
                 </div>
                 <!-- review empty local view profile user login for first time -->
+
+                <!-- PRIVATE PROFILE EMPTY SCREEN -->
+                <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+                  <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                      <div class="private-accountcover text-center">
+                        <h3>This account is Private.</h3>
+                        <p>Follow to view their interesting stories.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- PRIVATE PROFILE EMPTY SCREEN END -->
+
                 <div class="row">
-                  <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="review in reviewLocalLife.arr" ng-if="!viewLocalCountry && reviewLocalLife.arr.length!==0">
+                  <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="review in reviewLocalLife.arr" ng-if="!viewLocalCountry && reviewLocalLife.arr.length!==0 && (isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
                     <div class="list-travel-view list-local-view">
                       <div class="review-travel-main pointer relate" ng-click="goToAccordian(review,'viewLocalCountry');">
                         <!--<div class="review-backimgholder">
