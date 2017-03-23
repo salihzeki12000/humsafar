@@ -29,7 +29,9 @@
   .user-detail .list-inline > li {
     padding: 0 8px;
   }
-
+.socialize-holder ul {
+    display: block;
+}
   .search {
     width: 75%;
 
@@ -269,6 +271,10 @@
     section {
       background-position: center !important;
     }
+  }
+  .destination-content .img-holder {
+    min-height: 280px;
+    max-height: 362px;
   }
 }
 // media query for 991px to 768px
@@ -686,6 +692,9 @@
       }
     }
   }
+  .socialize-holder ul {
+    display: inline-block;
+}
 }
 // media query for 991px to 768px end
 // media query for 767px to 480px
@@ -1922,6 +1931,21 @@ img {
       background: url('../img/home-mobile-1.jpg');
     }
   }
+  .destination-nav.mustdo-not {
+    top: 55px;
+}
+.destination-content {
+    margin-top: 130px;
+ .pad-btn {
+    padding: 0px 30px;
+}
+.destination-filterscroll {
+    margin-bottom: 10px;
+}
+}
+.addfixed2 .destin-fixednav {
+    top: 55px;
+}
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px

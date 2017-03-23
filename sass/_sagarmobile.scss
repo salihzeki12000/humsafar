@@ -1781,11 +1781,7 @@
 
     .destination-content {
       .container-fluid {
-        padding: 0;
-
-        .container-fluid {
-          padding: 0;
-        }
+        padding: 0 15px;
       }
     }
 
@@ -2091,6 +2087,12 @@
   .destination-featured {
     padding: 0;
   }
+  .dest-btv.plr30 {
+    padding: 0;
+}
+  .activity-container {
+    padding: 10px 0 0;
+}
   //Destination country page end
   //POPULAR AGENT PAGE
   .agent-07 .agent-box .overlay-down {
