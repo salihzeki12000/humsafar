@@ -9,12 +9,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
+
+  <!-- SEO -->
+  <meta name="author" content="">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Facebook -->
+  <meta property="og:url"           content="http://travelibro.com/" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="TraveLibro" />
+  <meta property="og:description"   content="TraveLibro" />
+  <meta property="og:image"         content="img/fb-banner.jpg" />  
+
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="">
+  <meta name="twitter:title" content="">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="img/tw-banner.jpg">
   <title ng-bind="'TraveLibro | '+template.title">TraveLibro</title>
   <link rel="shortcut icon" href="img/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="css/main.css" />
+  
   <script>
     var isproduction = false;
-
   </script>
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="js/jquery.parallax.js"></script>
@@ -86,9 +106,15 @@
   <div class="repeated-item" ui-view></div>
   <!-- put auto-height if needed -->
   <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&libraries=geometry&key=AIzaSyDPH6EYKMW97XMTJzqYqA0CR4fk5l2gzE4&callback=initMap">
-
-
   </script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 </body>
 
 </html>
