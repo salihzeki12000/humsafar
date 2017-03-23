@@ -228,7 +228,7 @@ var navigationservice = angular.module('navigationservice', [])
         });
       },
       getCitySearch: function (formData, callback) {
-        TravelibroService.post(adminURL + "/city/search", formData).success(callback).error(function (data) {
+        TravelibroService.post(adminURL + "/city/searchDestCity", formData).success(callback).error(function (data) {
           console.log(data);
         });
       },
@@ -296,6 +296,13 @@ var navigationservice = angular.module('navigationservice', [])
           "_id": id
         }).success(callback);
       },
+      acceptFollowRequest: function (formData, callback) {
+        TravelibroService.post(adminURL + "/user/acceptFollowerWeb", formData).success(function (data) {
+          callback(data);
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
       popularJourney: function (formData, callback) {
         TravelibroService.post(adminURL + "/journey/getPopularJourneyWeb", formData).success(function (data) {
           callback(data);
@@ -334,6 +341,7 @@ var navigationservice = angular.module('navigationservice', [])
         });
       },
       editUserData: function (userData, status, callback) {
+        console.log(userData,'userData', status, 'status');
         // console.log(userData, status);
         var formData = _.cloneDeep(userData);
         var object = {};
@@ -404,7 +412,7 @@ var navigationservice = angular.module('navigationservice', [])
           case 5:
             console.log('on switch 5');
             console.log(userData);
-            object.status = "public";
+            object.status = userData;
             console.log(object);
             break;
         }

@@ -19,7 +19,7 @@
             <form action="">
               <div class="input-search dest-chnge pt20 relate" ng-init="seeDestination={'outerClass':'destinationOuter','innerClass':'destinationInner'}">
                 <div class="input-group destinationOuter">
-                  <input type="text" class="form-control fnt-16" placeholder="Search Destination" ng-model="destination" ng-change="searchDestination(destination)" ng-click="editOption(seeDestination,'destinationOuter','destinationInner')">
+                  <input type="text" class="form-control fnt-16" placeholder="Search Destination" ng-model="destination" ng-change="searchDestination(destination,'searchDest')" ng-click="editOption(seeDestination,'destinationOuter','destinationInner')">
                   <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
                 </div>
                 <div class="dropdown-destination destination-main destinationInner" ng-show="seeDestination.backgroundClick">
@@ -75,7 +75,7 @@
           </div>
           <div class="alphabhates right-end" scrolladdclass>
             <ul class="list-unstyle">
-              <li ng-repeat="countryKey in countryDestList track by $index" ng-click="searchDestination(countryKey)">
+              <li ng-repeat="countryKey in countryDestList track by $index" ng-click="searchDestination(countryKey,'clickDest')">
                 <a href="" class="color-grey-apha">{{countryKey}}</a>
               </li>
             </ul>

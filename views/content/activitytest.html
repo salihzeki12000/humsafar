@@ -63,7 +63,7 @@
                   <p class="your-post">{{activity.thoughts}}</p>
                 </div>
                 <div class="post-your-status" ng-if="activity.type=='travel-life' || activity.type=='local-life'">
-                  <p class="your-post" ng-bind-html="activity | postString"></p>
+                  <p class="your-post" ng-bind-html="activity | postString | safe"></p>
                 </div>
                 <!-- post status end -->
                 <!-- post-main-section -->

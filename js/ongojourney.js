@@ -15,25 +15,25 @@ var ongojourney = angular.module('ongojourney', [])
           journey.buddiesCount = journey.buddies.length;
           journey.buddiesString = "";
           if (journey.buddiesCount == 1) {
-            journey.buddiesString = " and " + journey.buddies[0].name.bold();
+            journey.buddiesString = " and " + "<a href='#/users/"+journey.buddies[0].urlSlug+"'>" + journey.buddies[0].name.bold() + "</a>";
           } else if (journey.buddiesCount == 2) {
-            journey.buddiesString = ", " + journey.buddies[0].name.bold() + " and " + journey.buddies[1].name.bold() + ".";
+            journey.buddiesString = ", " + "<a href='#/users/"+journey.buddies[0].urlSlug+"'>" + journey.buddies[0].name.bold() + "</a>" + " and " + "<a href='#/users/"+journey.buddies[1].urlSlug+"'>" + journey.buddies[1].name.bold()+ "</a>" + ".";
           } else if (journey.buddiesCount >= 2) {
             var i = 0;
             journey.buddiesString = ", ";
             while (i <= journey.buddiesCount - 1) {
               if (i < journey.buddiesCount - 1) {
-                journey.buddiesString = journey.buddiesString + journey.buddies[i].name.bold() + ", ";
+                journey.buddiesString = journey.buddiesString + "<a href='#/users/"+journey.buddies[i].urlSlug+"'>" + journey.buddies[i].name.bold()+ "</a>" + ", ";
               } else if (i == journey.buddiesCount - 1) {
-                journey.buddiesString = journey.buddiesString + " and " + journey.buddies[i].name.bold() + ".";
+                journey.buddiesString = journey.buddiesString + " and " + "<a href='#/users/"+journey.buddies[i].urlSlug+"'>" + journey.buddies[i].name.bold() + "</a>" + ".";
               }
               i++;
             }
           }
           if (journey.buddiesString != undefined) {
-            journey.startJourneyString = "Trip Travellers - " + journey.user.name.bold() + journey.buddiesString;
+            journey.startJourneyString = "Trip Travellers - " + "<a href='#/users/"+journey.user.urlSlug+"'>" +journey.user.name.bold() + "</a>" + journey.buddiesString;
           } else {
-            journey.startJourneyString = "Trip Traveller - " + journey.user.name.bold();
+            journey.startJourneyString = "Trip Traveller - " + "<a href='#/users/"+journey.user.urlSlug+"'>" + journey.user.name.bold() + "</a>";
           }
           callback(journey);
         }).error(function (data) {
@@ -217,11 +217,11 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
         if ($scope.ongo.buddiesCount == undefined) {
 
         } else if ($scope.ongo.buddiesCount == 1) {
-          $scope.ongo.buddiesString = "<b ui-sref='mylife'>" + $scope.ongo.buddies[0].name + "</b>";
+          $scope.ongo.buddiesString = "<a href='#/users/"+$scope.ongo.buddies[0].urlSlug+"'>" + $scope.ongo.buddies[0].name.bold() + "</a>";
         } else if ($scope.ongo.buddiesCount == 2) {
-          $scope.ongo.buddiesString = "<b ui-sref='mylife'>" + $scope.ongo.buddies[0].name + "</b>" + " and " + $scope.ongo.buddies[1].name;
+          $scope.ongo.buddiesString = "<a href='#/users/"+$scope.ongo.buddies[0].urlSlug+"'>" + $scope.ongo.buddies[0].name.bold() + "</a>" + " and " + "<a href='#/users/"+$scope.ongo.buddies[1].urlSlug+"'>" +$scope.ongo.buddies[1].name.bold() + "</a>";
         } else if ($scope.ongo.buddiesCount >= 2) {
-          $scope.ongo.buddiesString = "<b ui-sref='mylife'>" + $scope.ongo.buddies[0].name + "</b>" + " and " + "<b>" + ($scope.ongo.buddiesCount - 1) + " others." + "</b>";
+          $scope.ongo.buddiesString = "<a href='#/users/"+$scope.ongo.buddies[0].urlSlug+"'>" + $scope.ongo.buddies[0].name.bold() + "</a>" + " and " + "<b>" + ($scope.ongo.buddiesCount - 1) + " others." + "</b>";
         }
         var postString = "";
 
@@ -232,9 +232,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
           } else if ($scope.ongo.thoughts) {
             $scope.ongo.postString = $scope.ongo.thoughts + " with " + $scope.ongo.buddiesString;
           } else if ($scope.ongo.checkIn && $scope.ongo.checkIn.location) {
-            $scope.ongo.postString = $scope.ongo.user.name.bold() + " with " + $scope.ongo.buddiesString + " at " + $scope.ongo.checkIn.location.bold();
+            $scope.ongo.postString = "<a href='#/users/"+$scope.ongo.user.urlSlug+"'>" + $scope.ongo.user.name.bold() + "</a>" + " with " + $scope.ongo.buddiesString + " at " + $scope.ongo.checkIn.location.bold();
           } else {
-            $scope.ongo.postString = $scope.ongo.user.name.bold() + " with " + $scope.ongo.buddiesString;
+            $scope.ongo.postString = "<a href='#/users/"+$scope.ongo.user.urlSlug+"'>" + $scope.ongo.user.name.bold()+ "</a>" + " with " + $scope.ongo.buddiesString;
           }
         } else {
           if ($scope.ongo.thoughts && $scope.ongo.checkIn.location) {
@@ -242,9 +242,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
           } else if ($scope.ongo.thoughts) {
             $scope.ongo.postString = $scope.ongo.thoughts;
           } else if ($scope.ongo.checkIn && $scope.ongo.checkIn.location) {
-            $scope.ongo.postString = $scope.ongo.user.name.bold() + " at " + $scope.ongo.checkIn.location.bold();
+            $scope.ongo.postString = "<a href='#/users/"+$scope.ongo.user.urlSlug+"'>" +$scope.ongo.user.name.bold() + "</a>" + " at " + $scope.ongo.checkIn.location.bold();
           } else {
-            $scope.ongo.postString = $scope.ongo.user.name.bold() + " with " + $scope.ongo.buddiesString;
+            $scope.ongo.postString = "<a href='#/users/"+$scope.ongo.user.urlSlug+"'>" + $scope.ongo.user.name.bold() + "</a>" + " with " + $scope.ongo.buddiesString;
           }
         }
       };
@@ -1099,6 +1099,12 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
         }
         LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, photoId, callback);
       };
+
+      // routing to profile
+      $scope.linkToProfile = function(obj){
+        console.log(obj,'what is obj');
+      }
+      // routing to profile end
     }
   };
 }]);

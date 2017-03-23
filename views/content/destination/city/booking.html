@@ -117,6 +117,9 @@
           </div>
         </div>
       </div>
+      <div class="button load-more text-center ptb20">
+        <a class="btn" target="_blank" href="http://52.76.210.40:6090/bookings/tours-and-excursions?city_name={{cityDestData.name}}&country_name={{cityDestData.country.name}}">Load More..</a>
+      </div>
     </div>
     <!-- Tours and Excursions End  -->
     <!-- destination hotel card -->
@@ -325,7 +328,8 @@
         </div>
       </div>
       <div class="button load-more text-center ptb20">
-        <button class="btn">Load More..</button>
+        {{cityDestData.name}} & {{cityDestData.country.name}}
+        <a class="btn" target="_blank" href="http://52.76.210.40:6090/bookings/hotels?city_name={{cityDestData.name}}&country_name={{cityDestData.country.name}}">Load More..</a>
       </div>
     </div>
     <!-- destination hotel card end-->
@@ -511,7 +515,8 @@
         </div>
       </div>
       <div class="button load-more text-center ptb20">
-        <button class="btn">Load More..</button>
+        {{cityDestData.name}} & {{cityDestData.country.name}}
+        <a class="btn" target="_blank" href="http://52.76.210.40:6090/bookings/vacation-rentals?city_name={{cityDestData.name}}&country_name={{cityDestData.country.name}}">Load More..</a>
       </div>
     </div>
     <!-- vacation rentals end-->
@@ -696,7 +701,8 @@
         </div>
       </div>
       <div class="button load-more text-center ptb20">
-        <button class="btn">Load More..</button>
+        {{cityDestData.name}} & {{cityDestData.country.name}}
+        <a class="btn" target="_blank" href="http://52.76.210.40:6090/bookings/home-stays?city_name={{cityDestData.name}}&country_name={{cityDestData.country.name}}&link=true">Load More..</a>
       </div>
     </div>
     <!-- homestay card end-->

@@ -531,6 +531,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           console.log(err);
         });
         // $window.location.reload();
+        $.jStorage.set('qualifiedForNextStep', true);
         $state.go('holiday');
       } else {
         console.log(data);
@@ -848,8 +849,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           if (data.data._id) {
             $.jStorage.set("isLoggedIn", true);
             $.jStorage.set("profile", data.data);
+            $.jStorage.set("qualifiedForNextStep", null);
             $state.go("mylife", {
-              name: 'journey'
+              // name: 'journey',
+              urlSlug: $.jStorage.get("profile").urlSlug
             });
           } else {
             $.jStorage.flush();
@@ -1950,7 +1953,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('PopularBloggerCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
+  .controller('PopularBloggerCtrl', function ($scope, $state, TemplateService, NavigationService,LikesAndComments, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -1972,6 +1975,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     $scope.getPopularBlogger($scope.pagenumber);
     // POPULAR BLOGGER INTEGRATION END
+    // followFollowing  Function
+    $scope.followFollowing = function (user) {
+      console.log("from popularBloggerData");
+      LikesAndComments.followUnFollow(user, function (data) {
+        if (data.value) {
+          user.following = data.data.responseValue;
+        } else {
+          console.log("error updating data");
+        }
+      });
+    }
+    // followFollowing  Function END
   })
 
   .controller('PopularAgentCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
@@ -2122,6 +2137,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     // COMMENT LIKE SECTION FUNCTIONS END
+    // route to itinerary
+    $scope.routeItinerary = function (post) {
+      console.log(post, 'user');
+      if (post.type == 'quick-itinerary') {
+        $state.go('userquickitinerary', {
+          'id': post.urlSlug,
+          'urlSlug': post.user.urlSlug
+        });
+      } else {
+        $state.go('userdetailitinerary', {
+          'id': post.urlSlug,
+          'urlSlug': post.user.urlSlug
+        });
+      }
+    }
+    // route to itinerary end
+    // followFollowing  Function
+    $scope.followFollowing = function (user) {
+      console.log("from popularBloggerData");
+      LikesAndComments.followUnFollow(user, function (data) {
+        if (data.value) {
+          user.following = data.data.responseValue;
+        } else {
+          console.log("error updating data");
+        }
+      });
+    }
+    // followFollowing  Function END
+
     // other itineraries main end
   })
 
@@ -2141,6 +2185,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       NavigationService.popularJourney({
         pagenumber: pageNo
       }, function (data) {
+        _.each( data.data, function(n){
+          n.user.following = n.following;
+        })
         console.log(data);
         $scope.popularJourneyData = data.data;
       });
@@ -2260,6 +2307,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     // COMMENT LIKE SECTION FUNCTIONS END
+    // route to on go journey
+    $scope.routeOngo = function (post) {
+      console.log(post, 'user');
+      if (post.type == 'ended-journey' || post.type == 'on-the-go-journey') {
+        $state.go('ongojourney', {
+          'id': post.urlSlug,
+          'urlSlug': post.user.urlSlug
+        });
+      }
+    }
+    // route to on go journey end
+
+    // followFollowing  Function
+    $scope.followFollowing = function (user) {
+      console.log("from popular journey Data");
+      LikesAndComments.followUnFollow(user, function (data) {
+        if (data.value) {
+          user.following = data.data.responseValue;
+        } else {
+          console.log("error updating data");
+        }
+      });
+    }
+    // followFollowing  Function END
+
     // POPULAR JOURNEY INTEGRATION END
   })
 
@@ -2290,13 +2362,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
     $scope.callCountry("a", "");
-    $scope.searchDestination = function (searchVal) {
-      if (searchVal === "") {
-        $scope.callCountry("a", "");
-        $scope.viewListByKey = "A";
-      } else {
-        $scope.viewListByKey = searchVal.charAt(0);
-        $scope.callCountry(searchVal, searchVal);
+    $scope.searchDestination = function (searchVal,searchType) {
+      switch (searchType) {
+        case 'searchDest':
+        console.log(searchType,'hk');
+        if (searchVal === "") {
+          $scope.callCountry("a", "");
+          $scope.viewListByKey = "A";
+        } else {
+          if(searchVal.length>2){
+            $scope.viewListByKey = searchVal.charAt(0);
+            $scope.callCountry(searchVal, searchVal);
+          }
+        }
+          break;
+        case 'clickDest':
+            if(searchVal){
+              $scope.viewListByKey = searchVal.charAt(0);
+              $scope.callCountry(searchVal, searchVal);
+            }else {
+              $scope.callCountry("a", "");
+              $scope.viewListByKey = "A";
+            }
+          break;
+        default:
+        break;
       }
     };
 
@@ -2365,17 +2455,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // search destination
     $scope.callDestination = function () {
       $scope.i++;
-      NavigationService.getDestination({
-        search: $scope.dest.viewDestination,
-        searchText: $scope.dest.viewDestination,
-        count: $scope.i
-      }, function (data) {
-        if ($scope.i === data.count) {
-          $scope.destinationList = data.data;
-          console.log($scope.destinationList, 'log');
-          $scope.i = 0;
-        }
-      });
+      if($scope.dest.viewDestination.length>2){
+        NavigationService.getDestination({
+          search: $scope.dest.viewDestination,
+          searchText: $scope.dest.viewDestination,
+          count: $scope.i
+        }, function (data) {
+          if ($scope.i === data.count) {
+            $scope.destinationList = data.data;
+            console.log($scope.destinationList, 'log');
+            $scope.i = 0;
+          }
+        });
+      }else {
+
+      }
     }
     // search destination end
     // destination country city
@@ -2429,7 +2523,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             newVal.month = moment(newVal.month, "M").format('MMMM');
           });
         }
-        // console.log($scope.countryDestData, 'what is cadat');
+        console.log($scope.countryDestData, 'what is cadat');
       });
     };
 
@@ -2444,17 +2538,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     // FILTER ITINERARY DESTINATION
-    $scope.getItinerayCity = function (searchText) {
+    $scope.getItinerayCity = function (id) {
+      console.log($scope.countryDestData._id,'country id');
       console.log('hihsjk');
       NavigationService.getCitySearch({
-        keyword: $scope.itinerary.citySearch
+        keyword: $scope.itinerary.citySearch,
+        country : id
       }, function (data) {
         $scope.cityList = data.data.results;
         console.log($scope.cityList, 'cityList');
       })
     };
-
-    $scope.getItinerayCity('a');
     $scope.itineraryType = ['Adventure', 'Business', 'Family', 'Romance', 'Budget', 'Luxury', 'Religious', 'Friends', 'Shopping', 'Solo', 'Festival', 'Backpacking'];
     $scope.itineraryBy = ['User', 'TravelAgent', 'Editor']
 
@@ -2916,20 +3010,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       LikesAndComments.onClickDropDown(model, $scope, class1, class2);
     };
 
+
+    // SUGGEST EDIT POPUP MODAL
+    $scope.openSuggestModal = function () {
+      $uibModal.open({
+        templateUrl: "views/modal/suggest-edit.html",
+        animation: true,
+        scope: $scope,
+        windowClass: "report-modal"
+      });
+    };
+    // SUGGEST EDIT POPUP MODAL END
+
     // destination search dropdown
     $scope.callDestination = function () {
       $scope.i++;
-      NavigationService.getDestination({
-        search: $scope.dest.viewDestination,
-        searchText: $scope.dest.viewDestination,
-        count: $scope.i
-      }, function (data) {
-        if ($scope.i === data.count) {
-          $scope.destinationList = data.data;
-          console.log($scope.destinationList, 'log');
-          $scope.i = 0;
-        }
-      });
+      if($scope.dest.viewDestination.length > 2){
+        NavigationService.getDestination({
+          search: $scope.dest.viewDestination,
+          searchText: $scope.dest.viewDestination,
+          count: $scope.i
+        }, function (data) {
+          if ($scope.i === data.count) {
+            $scope.destinationList = data.data;
+            console.log($scope.destinationList, 'log');
+            $scope.i = 0;
+          }
+        });
+      }else {
+
+      }
     }
     $scope.countryView = function (url, isCity) {
       if (isCity === false) {
@@ -5020,6 +5130,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //reviews integration ends here
 
+    var smoothScroll = function (url) {
+      setTimeout(function () {
+        $location.hash(url);
+        anchorSmoothScroll.scrollTo(url);
+      }, 3000);
+    };
+
     var allMyLife = [
       "views/content/myLife/journey.html",
       "views/content/myLife/moments.html",
@@ -5034,20 +5151,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.viewTab = 1;
     switch ($state.params.name) {
       case "journeys":
+        console.log("scrolling to journeys");
         $scope.myLife.innerView = allMyLife[0];
-        $location.hash("journeys");
+        // $location.hash("journeys");
         // anchorSmoothScroll.scrollTo("journeys");
+        smoothScroll($state.params.name);
         break;
       case "moments":
         getMoments();
+        console.log("scrolling to moments");
         $scope.myLife.innerView = allMyLife[1];
-        $location.hash("moments");
+        smoothScroll($state.params.name);
+        // $location.hash("moments");
         // anchorSmoothScroll.scrollTo("moments");
         break;
       case "reviews":
         getReviews();
+        console.log("scrolling to reviews");
         $scope.myLife.innerView = allMyLife[2];
-        $location.hash("reviews");
+        smoothScroll($state.params.name);
+        // $location.hash("reviews");
         // anchorSmoothScroll.scrollTo("reviews");
         break;
       case "holidayplanner":
@@ -5056,36 +5179,51 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       default:
         $scope.myLife.innerView = allMyLife[0];
     }
+
+
     $scope.getTab = function (view) {
+      //   alert(view);
       $scope.myLife.innerView = allMyLife[view];
       var url = "journeys";
       switch (view) {
         case 0:
-          $stateParams.name = "journeys";
+          //   $stateParams.name = "journeys";
           url = "journeys";
-          $location.hash(url);
-          anchorSmoothScroll.scrollTo(url);
+          //   alert("before hash ");
+          //   $location.hash(url);
+          //   alert("after hash ");
+          //   anchorSmoothScroll.scrollTo(url);
           break;
         case 1:
-          $stateParams.name = "moments";
+          //   $stateParams.name = "moments";
           url = "moments";
-          $location.hash(url);
+          //   alert("before hash ");
+          //   $location.hash(url);
+          //   alert("after hash ");
           getMoments();
-          anchorSmoothScroll.scrollTo(url);
+          //   anchorSmoothScroll.scrollTo(url);
           break;
         case 2:
-          $stateParams.name = "reviews";
+          console.log("reviews m hu bhai");
+          //   $stateParams.name = "reviews";
           url = "reviews";
-          $location.hash(url);
+          //   alert("before hash ");
+          //   $location.hash(url);
+          //   alert("after hash ");
           getReviews();
-          anchorSmoothScroll.scrollTo(url);
+          //   anchorSmoothScroll.scrollTo(url);
           break;
       }
+      //   alert(url);
       $state.go("mylife1", {
         urlSlug: $.jStorage.get("activeUrlSlug"),
         name: url
       }, {
+        reload: true,
         notify: false
+      }).then(function () {
+        $location.hash(url);
+        anchorSmoothScroll.scrollTo(url);
       });
     }
 
@@ -6429,6 +6567,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // page 2 integration ends
 
     $scope.editUserData = function (userData, status, valid) {
+      console.log(userData,'user data', status, 'status');
       // cfpLoadingBar.start();
       console.log(valid);
       if (valid) {
@@ -10183,9 +10322,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     if ($.jStorage.get('accessToken') && $.jStorage.get('accessToken') != '') {
       $scope.userData = $.jStorage.get("profile");
       $scope.accessToken = $.jStorage.get("accessToken");
-      // if ($scope.userData.alreadyLoggedIn == false) {
-      //   $state.go('mainpage');
-      // }
+      if ($.jStorage.get('qualifiedForNextStep')) {
+        $state.go('holiday');
+      } else if ($scope.userData && $scope.userData.alreadyLoggedIn == false) {
+        $state.go('mainpage');
+      }
     } else {
       $.jStorage.set("profile", null);
     }
@@ -13352,6 +13493,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log(data, 'what is data');
         // $scope.notificationCard = data.data;
         makeNotifyString();
+        _.each( data.data, function(n){
+          n.user.following = n.following;
+        })
       });
     };
     $scope.getNotification($scope.pageNo);
@@ -13432,11 +13576,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     // FOLLOW UNFOLLOW USER ENDS
 
+    // ACCEPT FOLLOW REQUEST
+$scope.acceptRejectFollow = function (notifyOb,status) {
+  console.log(notifyOb, "accept karo follow");
+  if( status==1){
+    NavigationService.acceptFollowRequest({
+      token: notifyOb.data.token,
+      answeredStatus: 'accept'
+    }, function (data) {
+      console.log(data, 'accept follow ans');
+    });
+  } else {
+    NavigationService.acceptFollowRequest({
+      token: notifyOb.data.token,
+      answeredStatus: 'reject'
+    }, function (data) {
+      console.log(data, 'reject follow ans');
+    });
+  }
+};
+// ACCEPT FOLLOW REQUEST END
+
     $scope.redirectToPost = function (obj) {
       updateNotificationStatus(obj._id, function (data) {
         if (data.value) {
           $state.go('single-notification', {
-            "postId": obj.data._id
+            "postId": obj.data._id,
+            "urlSlug" : obj.userFrom.urlSlug
           });
         }
       });
