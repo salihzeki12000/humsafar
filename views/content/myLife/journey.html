@@ -53,7 +53,7 @@
           </div>
           <!--End of switch Travel life and local life-->
           <!-- user logged for first time -->
-          <div class="empty-profile-journey" ng-if="!hasJourney">
+          <div class="empty-profile-journey" ng-if="!hasJourney && (isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
             <div class="row">
               <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10">
                 <div class="row">
@@ -132,7 +132,7 @@
               <div class="col-md-offset-2 col-md-8">
                 <div class="private-accountcover text-center">
                   <h3>This account is Private.</h3>
-                  <p>Follow to view their interesting stories.</p>
+                  <p>Follow to view their Travel and Local Life.</p>
                 </div>
               </div>
             </div>
@@ -574,7 +574,7 @@
             <div class="col-md-offset-2 col-md-8">
               <div class="private-accountcover text-center">
                 <h3>This account is Private.</h3>
-                <p>Follow to view their interesting stories.</p>
+                <p>Follow to view their Travel and Local Life.</p>
               </div>
             </div>
           </div>

@@ -133,6 +133,18 @@
     <div class="container-fluid">
       <!-- following tab -->
       <div class="follower-tab-main" ng-if="activeMenu == 'following'">
+        <!-- PRIVATE PROFILE EMPTY SCREEN -->
+        <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+          <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+              <div class="private-accountcover text-center">
+                <h3>This account is Private.</h3>
+                <p>Follow to view their Travel and Local Life.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRIVATE PROFILE EMPTY SCREEN END -->
         <div class="following-container" ng-repeat="list in followingList | filter:searchCard.name">
           <div class="following-holder">
             <div class="follow-imgholder pointer" ui-sref="mylife({'urlSlug':list.urlSlug})">
@@ -178,6 +190,18 @@
       <!-- following tab end-->
       <!-- follower tab -->
       <div class="follow-tab-main" ng-if="activeMenu == 'followers'">
+        <!-- PRIVATE PROFILE EMPTY SCREEN -->
+        <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+          <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+              <div class="private-accountcover text-center">
+                <h3>This account is Private.</h3>
+                <p>Follow to view their Travel and Local Life.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRIVATE PROFILE EMPTY SCREEN END -->
         <div class="following-container" ng-repeat="list in followersList | filter:searchFriend.name">
           <div class="following-holder">
             <div class="follow-imgholder pointer" ui-sref="mylife({'urlSlug':list.urlSlug})">
@@ -223,6 +247,18 @@
       <!-- follower tab end -->
       <!-- country visited -->
       <div class="country-visited-tab" ng-if="activeMenu == 'countries-visited'">
+        <!-- PRIVATE PROFILE EMPTY SCREEN -->
+        <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+          <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+              <div class="private-accountcover text-center">
+                <h3>This account is Private.</h3>
+                <p>Follow to view their Travel and Local Life.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRIVATE PROFILE EMPTY SCREEN END -->
         <div class="list-country-visited">
           <div class="row">
             <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="country in countryVisitedList track by $index">
@@ -262,6 +298,18 @@
       <!-- country visited end -->
       <!-- bucket list -->
       <div class="bucket-tab-main" ng-if="activeMenu == 'bucket-list'">
+        <!-- PRIVATE PROFILE EMPTY SCREEN -->
+        <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+          <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+              <div class="private-accountcover text-center">
+                <h3>This account is Private.</h3>
+                <p>Follow to view their Travel and Local Life.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRIVATE PROFILE EMPTY SCREEN END -->
         <div class="bucket-list-main">
           <div class="row">
             <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="bucket in bucketList track by $index" id="{{bucket._id}}">
