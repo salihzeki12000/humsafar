@@ -14734,14 +14734,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, additionalId, callback);
     };
 
-    $scope.getLikes = function (activity) {
-      console.log(activity);
-      $scope.listOfLikes = [];
-      LikesAndComments.getLikes(activity.type, activity._id, function (data) {
-        $scope.listOfLikes = data.data;
-        console.log($scope.listOfLikes);
-      });
-    };
+
 
     $scope.editOption = function (model) {
       $timeout(function () {
@@ -14749,6 +14742,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         backgroundClick.object = model;
       }, 200);
       backgroundClick.scope = $scope;
+    };
+
+    $scope.getLikes = function (activity) {
+      console.log(activity);
+      $scope.listOfLikes = [];
+      LikesAndComments.getLikes(activity.type, activity._id, function (data) {
+        $scope.listOfLikes = data.data;
+        console.log($scope.listOfLikes);
+      });
     };
 
     $scope.followFollowing = function (user) {
