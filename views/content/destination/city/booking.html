@@ -58,8 +58,8 @@
     </div>
     <div class="destination-tour-booking destination-hotel-card tour-card-container">
       <div class="row">
-        <div class="col-md-6" ng-repeat="tour in bookingData.tours.tours_data track by $index">
-          <div class="tour-card-holder">
+        <div class="col-md-6" ng-repeat="tour in bookingData.tours.tours_data|limitTo:6 track by $index">
+          <div class="tour-card-holder" ng-if="bookingData.tours.status==true">
             <div class="blur-overlay-bg-div"></div>
             <div class="tour-view">
               <div class="row m-clear">
@@ -128,8 +128,8 @@
         <h4 class="uppercase">Hotels</h4>
       </div>
       <div class="row">
-        <div class="col-md-6" ng-repeat="hotel in bookingData.hotels.hotels_data track by $index">
-          <div class="hotel-card-holder mt10 relate" ng-init="backView=-1;">
+        <div class="col-md-6" ng-repeat="hotel in bookingData.hotels.hotels_data|limitTo:6 track by $index">
+          <div class="hotel-card-holder mt10 relate" ng-if="bookingData.hotels.status==true" ng-init="backView=-1;">
             <div class="blur-overlay-bg-div"></div>
             <!-- flipper holder -->
             <div class="hotel-flipper-holder" ng-class="{'flip-card': backView==hotel.hotel_record_rails_id,'': backView!==hotel.hotel_record_rails_id}">
@@ -218,7 +218,9 @@
                                     </span>
                           </div>
                           <div class="pull-right">
-                            <a href="http:/{{hotel.link}}" target="_blank"><button class="btn btn-deal">View Deal</button></a>
+                            <a href="https://{{hotel.link}}" target="_blank">
+                              <button class="btn btn-deal">View Deal</button>
+                            </a>
                           </div>
                         </div>
                       </div>
@@ -291,7 +293,7 @@
                                 </td>
                                 <td>
                                   <div class="text-center">
-                                    <a href="{{hotel.link}}" target="_blank">
+                                    <a href="https://{{hotel.link}}" target="_blank">
                                       <button class="btn btn-deal">View Deal</button>
                                     </a>
                                   </div>
@@ -328,7 +330,7 @@
         </div>
       </div>
       <div class="button load-more text-center ptb20">
-        {{cityDestData.name}} & {{cityDestData.country.name}}
+
         <a class="btn" target="_blank" href="http://52.76.210.40:6090/bookings/hotels?city_name={{cityDestData.name}}&country_name={{cityDestData.country.name}}">Load More..</a>
       </div>
     </div>
@@ -339,8 +341,8 @@
         <h4 class="uppercase">Vaction Rentals</h4>
       </div>
       <div class="row" ng-init="vacationBackView=-1;">
-        <div class="col-md-6" ng-repeat="vacation in bookingData.vacation_rentals.vacation_rentals_data track by $index">
-          <div class="vacation-card-list mt10">
+        <div class="col-md-6" ng-repeat="vacation in bookingData.vacation_rentals.vacation_rentals_data|limitTo:6 track by $index">
+          <div class="vacation-card-list mt10" ng-if="bookingData.vacation_rentals.status==true">
             <div class="hotel-card-holder relate">
               <div class="blur-overlay-bg-div"></div>
               <div class="hotel-flipper-holder" ng-class="{'flip-card': vacationBackView==vacation.id,'': vacationBackView!==vacation.id}">
@@ -515,7 +517,7 @@
         </div>
       </div>
       <div class="button load-more text-center ptb20">
-        {{cityDestData.name}} & {{cityDestData.country.name}}
+
         <a class="btn" target="_blank" href="http://52.76.210.40:6090/bookings/vacation-rentals?city_name={{cityDestData.name}}&country_name={{cityDestData.country.name}}">Load More..</a>
       </div>
     </div>
@@ -526,8 +528,8 @@
         <h4 class="uppercase">Homestays</h4>
       </div>
       <div class="row" ng-init="backHomestayView = -1">
-        <div class="col-md-6" ng-repeat="homestay in bookingData.home_stays.home_stays_data track by $index">
-          <div class="hotel-card-holder mt10 relate">
+        <div class="col-md-6" ng-repeat="homestay in bookingData.home_stays.home_stays_data|limitTo:6 track by $index">
+          <div class="hotel-card-holder mt10 relate" ng-if="bookingData.home_stays.status==true">
             <div class="blur-overlay-bg-div"></div>
             <div class="hotel-flipper-holder" ng-class="{'flip-card': backHomestayView==homestay.host._id,'': backHomestayView!==homestay.host._id}">
               <div class="hotel-front-view">
@@ -701,10 +703,12 @@
         </div>
       </div>
       <div class="button load-more text-center ptb20">
-        {{cityDestData.name}} & {{cityDestData.country.name}}
         <a class="btn" target="_blank" href="http://52.76.210.40:6090/bookings/home-stays?city_name={{cityDestData.name}}&country_name={{cityDestData.country.name}}&link=true">Load More..</a>
       </div>
     </div>
     <!-- homestay card end-->
   </div>
+</div>
+<div class="loading-booking travelibro-loader" ng-show="viewBookingLoader">
+  <img src="img/loader.gif" width="180px" alt="TraveLibro" class="img-responsive">
 </div>

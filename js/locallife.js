@@ -784,7 +784,18 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
           console.log("failed to delete");
         });
       }
-
+      // sharing local life modal
+      var shareModal = "";
+      $scope.sharePost = function(url){
+        $scope.shareUrl = url;
+        console.log($scope.shareUrl,'share ka url');
+        shareModal = $uibModal.open({
+          animation: true,
+          templateUrl: "views/modal/sharing.html",
+          scope: $scope
+        });
+      }
+      // sharing local life modal end
       // delete local journey post end
       $scope.allPhotos = {};
       $scope.allPhotos.photoSliderIndex = "";
