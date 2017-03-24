@@ -296,6 +296,9 @@ var commontask = angular.module('commontask', [])
         });
       },
       followUnFollow: function (obj, callback) {
+        if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+        }
         console.log(obj);
         var formData = {
           "_id": obj._id,
@@ -568,6 +571,8 @@ commontask.filter("followFollowingStatus", function () {
       return "Follow";
     } else if (input === 2) {
       return "Requested";
+    } else if (input === null || input === undefined) {
+      return "Follow";
     }
   }
 });

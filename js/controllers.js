@@ -7657,6 +7657,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       Itinerary.getOneItinerary(urlSlug, function (data) {
         $scope.dItinerary = data.data;
         $scope.addCountry = $scope.dItinerary.countryVisited;
+        $scope.dItinerary.oldStatus = $scope.dItinerary.status;
+        $scope.dItinerary.oldPhotos = _.cloneDeep($scope.dItinerary.photos);
+        $scope.dItinerary.oldBuddies = _.cloneDeep($scope.dItinerary.buddies);
         $scope.totalUploadCount = $scope.dItinerary.photos.length;
         //setting up qItineraryType variable starts
         _.each($scope.dItinerary.itineraryType, function (n) {
@@ -8086,7 +8089,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
       //removing unwanted values from countryVisited starts
       console.log($scope.dItinerary);
-
+      $scope.dItinerary = _.omit($scope.dItinerary, ['createdAt', 'updatedAt', 'user', 'urlSlug', 'comment', 'creator', 'review', 'uniqueId']);
       Itinerary.uploadDetailedItinerary($scope.dItinerary, flag, function (data) {
         if (flag == 'new') {
           urlSlug = data.data.message;
@@ -10538,6 +10541,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       }
     }
+
+    $scope.customLink = function () {
+      if ((navigator.platform.indexOf("iPhone") != -1) ||
+        (navigator.platform.indexOf("iPod") != -1) ||
+        (navigator.platform.indexOf("iPad") != -1)) {
+        window.open("https://itunes.apple.com/in/app/travelibro/id1056641759");
+      } else {
+        window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
+      }
+    };
 
   })
 
@@ -14182,7 +14195,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         LikesAndComments.likeUnlike(listOfComments.type, "unlike", listOfComments.name, listOfComments.post, listOfComments._id)
       }
     };
-     $scope.editBox = function (index) {
+    $scope.editBox = function (index) {
       if ($scope.index == index) {
         $scope.index = -1;
       } else {
