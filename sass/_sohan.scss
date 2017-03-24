@@ -1027,6 +1027,7 @@ a.color-white {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        display: block;
         a{
           color: $brand-blue;
         }

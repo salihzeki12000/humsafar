@@ -108,7 +108,7 @@
               <!-- userFollowing FOLLOWER DETAILS END -->
 
               <!-- TAG ITINERARY -->
-              <div class="notification-checkin-ongo-photo notification-tagitinerary-action " ng-if="notify.type == 'itineraryRequest'">
+              <div class="notification-checkin-ongo-photo notification-tagitinerary-action" ng-if="notify.type == 'itineraryRequest'" ui-sref="userdetailitinerary({'urlSlug':notify.userFrom.urlSlug, 'id':notify.data.urlSlug})">
                 <p class="">View to add to your My Life.</p>
                 <div class="notification-tagitinerary-photo">
                   <img ng-src="{{notify.data.coverPhoto|uploadpath:250:100:'cover'}}" alt="" class="img-responsive get-center">
