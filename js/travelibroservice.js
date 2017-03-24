@@ -33,7 +33,6 @@ var travelibroservice = angular.module('travelibroservice', ['cfp.loadingBar'])
         }
         formData.accessToken = accessToken;
         if(status!=true){
-          alert("post");
           cfpLoadingBar.start();
         }
         console.log("start post");
