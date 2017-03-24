@@ -183,7 +183,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
     })
 
     .state('popularblogger', {
-      url: "/popular-blogger",
+      url: "/popular-bloggers",
       templateUrl: "views/template.html",
       controller: 'PopularBloggerCtrl'
     })

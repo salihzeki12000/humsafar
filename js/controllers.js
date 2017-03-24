@@ -2463,7 +2463,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
 
     $scope.template = TemplateService.changecontent("destination");
-    $scope.menutitle = NavigationService.makeactive("Destination");
+    $scope.menutitle = NavigationService.makeactive("Destinations");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.destinationList = [];
