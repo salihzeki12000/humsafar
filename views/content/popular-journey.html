@@ -268,10 +268,17 @@
                         </ul>
                       </div>
                       <div class="pull-right">
-                        <div class="">
-                          <span>
+                        <div class="relate" ng-init="post.option={}">
+                          <span class="pointer" ng-click="editOption(post.option)">
                             <img src="img/options.png" alt="" width="3" class="color-blue">
                           </span>
+                          <div class="activity-edit-option" ng-show="post.option.backgroundClick">
+                            <ul>
+                              <li class="pointer" ng-if="post.user._id==userData._id">Hide From All Activity Feed <span class="hide-hover">? <span class="info-div pointer">This activity will be hidden from all your followers "Activity Feed".</span>                                </span>
+                              </li>
+                              <li class="pointer" ng-if="post.user._id!=userData._id" ng-click="openThankYouModal();">Report</li>
+                            </ul>
+                          </div>
                         </div>
                       </div>
                     </div>

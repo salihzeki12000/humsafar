@@ -2,31 +2,38 @@
   <div class="overlay colorblue ab"></div>
   <div class="text-cont ab text-center top10">
     <h3 class="color-white avenir-heavy text-shadow fnt-60 no-margin">
-      Booking
+      Bookings
     </h3>
   </div>
   <div class="container">
     <div class="menu-booking ab">
       <ul class="list-unstyled avenir-medium">
-        <li>
-          <a ui-sref="home" class="color-white">Flights</a>
-        </li>
-        <li>
-          <a ui-sref="home" class="color-white">Hotels</a>
-        </li>
-        <li>
-          <a ui-sref="home" class="color-white">Cars</a>
-        </li>
-        <li>
-          <a ui-sref="home" class="color-white">Homestay</a>
-        </li>
-        <li>
-          <a ui-sref="home" class="color-white">Parking Space</a>
-        </li>
-        <li>
-          <a ui-sref="home" class="color-white">Vacation Rentals</a>
+        <li ng-repeat="submenu in bookingnav track by $index">
+          <a ui-sref="{{submenu.anchor}}" class="color-white" ng-if="submenu.anchor">{{submenu.name}}</a>
+            <a ng-href="{{submenu.link}}{{'?accessToken=' + accessToken}}" class="color-white"  ng-if="submenu.link && accessToken" target="{{submenu.target}}">{{submenu.name}}</a>
+            <a ng-href="{{submenu.link}}" class="color-white" ng-if="submenu.link && !accessToken" target="{{submenu.target}}">{{submenu.name}}</a>
         </li>
       </ul>
+      <!-- <ul class="list-unstyled avenir-medium">
+        <li>
+          <a href="http://flights.travelibro.com/en-GB/flights/#/result?originplace=&destinationplace=" target="_blank" class="color-white">Flights</a>
+        </li>
+        <li>
+          <a href="http://travelibro.net/bookings/hotels" class="color-white">Hotels</a>
+        </li>
+        <li>
+          <a href="http://flights.travelibro.com/en-GB/carhire/#/result?originplace=&destinationplace=" target="_blank" class="color-white">Cars</a>
+        </li>
+        <li>
+          <a href="http://travelibro.net/bookings/home-stays" class="color-white">Homestay</a>
+        </li>
+        <li>
+          <a href="http://travelibro.net/bookings/tours-and-excursions" class="color-white">Tours and Excursions</a>
+        </li>
+        <li>
+          <a href="http://travelibro.net/bookings/vacation-rentals" class="color-white">Vacation Rentals</a>
+        </li>
+      </ul> -->
     </div>
     <div class="menu-contact ab wid90">
       <ul class="list-unstyled list-inline avenir-black text-center">

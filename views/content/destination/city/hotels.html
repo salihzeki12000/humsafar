@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <div class="min-hght">
     <div class="relate" ng-class="{'openfilter': isopenfilter}">
-      <div class="pt10 pb10 head-title-all mb20">
+      <div class="pt10 pb10 head-title-all">
         <div class="row m-clear">
           <div class="col-md-3">
-            <div class="pad-btn">
+            <div class="btn-destinationfilter">
               <button class="btn btn-pink" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i> Filter
           </button>
             </div>
@@ -21,7 +21,7 @@
           <div class="pt20 pb10 head-title-all bg-white">
             <div class="pad-btn">
               <div class="row">
-                <div class="col-md-2 col-sm-3">
+                <div class="col-md-3 col-sm-3">
                   <div class="select-all-made destination-filterscroll" ng-init="viewHotelcity={'outerClass':'outerHotelCity','innerClass':'innerHotelCity'}">
                     <input type="text" placeholder="Category" class="form-control outerHotelCity" ng-click="editOption(viewHotelcity,'outerHotelCity','innerHotelCity')"
                       ng-model="cityHotelCategory">
@@ -37,7 +37,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-2 col-sm-3">
+                <div class="col-md-3 col-sm-3">
                   <div class="select-all-made destination-filterscroll" ng-init="viewHotelBudget={'outerClass':'outerHotelBudget','innerClass':'innerHotelBudget'}">
                     <input type="text" class="form-control outerHotelBudget" placeholder="Budget" ng-model="cityHotelBudget" ng-click="editOption(viewHotelBudget,'outerHotelBudget','innerHotelBudget')">
                     <div class="destination-filterdrop innerHotelBudget" ng-show="viewHotelBudget.backgroundClick ">
@@ -64,7 +64,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-offset-1 col-md-7 col-sm-5">
+                <div class="col-md-6 col-sm-5">
                   <div class="txt-clear text-right ">
                     <a>Clear All</a>
                   </div>

@@ -1,10 +1,10 @@
 <div class="container-fluid ">
   <div class="min-hght">
     <div class="relate" ng-class="{'openfilter': isopenfilter}">
-      <div class="pt10 pb10 head-title-all mb20">
+      <div class="pt10 pb10 head-title-all">
         <div class="row m-clear">
           <div class="col-md-3">
-            <div class="pad-btn">
+            <div class="btn-destinationfilter">
               <button class="btn btn-pink avenir-roman" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
             </div>
           </div>
@@ -20,7 +20,7 @@
             <div class="container-fluid">
               <div class="pad-btn">
                 <div class="row">
-                  <div class="col-md-2 col-sm-3">
+                  <div class="col-md-3 col-sm-3">
                     <div class="select-all-made destination-filterscroll" ng-init="viewRestoCuisine={'outerClass':'toggle-dropDown_1','innerClass':'drop-content_1'}">
                       <input type="text" placeholder="Cuisine" class="form-control toggle-dropDown_1" ng-model="cityCuisine" ng-click="editOption(viewRestoCuisine,'toggle-dropDown_1','drop-content_1')">
                       <div class="view-cuisine destination-filterdrop drop-content_1" ng-show="viewRestoCuisine.backgroundClick">
@@ -35,7 +35,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-2 col-sm-3">
+                  <div class="col-md-3 col-sm-3">
                     <div class="select-all-made destination-filterscroll" ng-init="viewRestoType={'outerClass':'toggle-dropDown_2','innerClass':'drop-content_2'}">
                       <input type="text" class="form-control toggle-dropDown_2" placeholder="Type" ng-model="cityTypeRestaurant" ng-click="editOption(viewRestoType,'toggle-dropDown_2','drop-content_2')">
                       <div class="destination-filterdrop drop-content_2" ng-show="viewRestoType.backgroundClick">
@@ -50,7 +50,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-2 col-sm-3">
+                  <div class="col-md-3 col-sm-3">
                     <div class="select-all-made destination-filterscroll" ng-init="viewRestoBudget={'outerClass':'toggle-dropDown_3','innerClass':'drop-content_3'}">
                       <input type="text" placeholder="Budget" class="form-control toggle-dropDown_3" ng-model="cityRestoBudget" ng-click="editOption(viewRestoBudget,'toggle-dropDown_3','drop-content_3')">
                       <div class="destination-filterdrop drop-content_3" ng-show="viewRestoBudget.backgroundClick">
@@ -89,7 +89,7 @@
                   </ui-select>
                 </div>
               </div>-->
-                  <div class="col-md-offset-1 col-md-5  col-sm-3 ">
+                  <div class="col-md-3  col-sm-3 ">
                     <!--<button type="submit">Add</button>-->
                     <div class="txt-clear text-right " ng-click="resetFilters()">
                       <a>Clear All</a>

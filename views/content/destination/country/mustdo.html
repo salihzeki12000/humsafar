@@ -1,12 +1,7 @@
 <div class="min-hght">
-      <div class="container-fluid">
-  <div class="destination-featured">
-    <div class="">
-      <div class="head-title-all pt20 pb10 bg-white">
+  <div class="container-fluid">
+    <div class="destination-featured bg-white">
         <h4 class="text-center fnt-22 color-pink">Top 10 In {{countryDestData.name}}</h4>
-      </div>
-    </div>
-      <div class="plr30 bg-white">
         <div class="row" ng-init="index=-1">
           <div class="col-md-4 col-sm-6" ng-repeat="must in countryDestData.mustDo track by $index">
             <div class="img-holder card relate">
@@ -36,7 +31,6 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </div>

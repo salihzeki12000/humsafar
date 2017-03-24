@@ -2,7 +2,7 @@
   <div class="img-holder-destination bg-itinerary relate">
     <div class="overlay-landing"></div>
     <div class="get-center country-title">
-      <h4 class="color-white title-head">Popular Itinerary</h4>
+      <h4 class="color-white title-head">Popular Itineraries</h4>
     </div>
  <div ng-include="template.footer" class="template footer"></div>
     <div class="mouse-scrolldown color-white text-center" ng-click="scrollDown();">
@@ -111,8 +111,17 @@
                           </ul>
                         </div>
                         <div class="pull-right">
-                          <div class="">
-                            <span><img src="img/options.png" alt="" height="18" class="pointer"></span>
+                          <div class="relate" ng-init="post.option={}">
+                            <span class="pointer" ng-click="editOption(post.option)">
+                              <img src="img/options.png" alt="" height="18" class="pointer">
+                            </span>
+                            <div class="activity-edit-option" ng-show="post.option.backgroundClick">
+                              <ul>
+                                <li class="pointer" ng-if="post.user._id==userData._id">Hide From All Activity Feed <span class="hide-hover">? <span class="info-div pointer">This activity will be hidden from all your followers "Activity Feed".</span>                                </span>
+                                </li>
+                                <li class="pointer" ng-if="post.user._id!=userData._id" ng-click="openThankYouModal();">Report</li>
+                              </ul>
+                            </div>
                           </div>
                         </div>
                       </div>
