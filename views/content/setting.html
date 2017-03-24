@@ -479,15 +479,18 @@
               <!-- privacy policy end -->
               <!-- report a problem -->
               <div class="problem-detail" ng-if="showSetting == 6">
-                <form>
+                <form name='profile' ng-hide="showme">
                   <label for="problem">Report A Problem</label>
-                  <textarea name="" id="problem" class="form-control" placeholder="Comment"></textarea>
+                  <textarea name="problem" id="problem" class="form-control" placeholder="Comment" ng-model="problem"></textarea>
                   <div class="clearfix mt20">
                     <div class="pull-right">
-                      <button class="btn btn-pink btn-more">Submit</button>
+                      <button class="btn btn-pink btn-more" type="submit" ng-click="showme=true">Submit</button>
                     </div>
                   </div>
                 </form>
+                  <div class="outer-report-cont" ng-show="showme">
+                    <p class="color-darkgrey"> Your Report Has Been Submitted</p>
+                  </div>
               </div>
               <!-- report a problem end -->
             </div>

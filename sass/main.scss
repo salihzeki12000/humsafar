@@ -90,7 +90,42 @@ a {
   cursor: pointer;
   @include transition(all ease 300ms);
 }
-
+.share-facebook {
+  color: #3b5998;
+  &:hover {
+  color: #3b5998;
+  }
+}
+.share-twitter {
+  color: #55acee;
+  &:hover {
+  color: #55acee;
+  }
+}
+.share-google {
+  color: #d34836;
+  &:hover {
+  color: #d34836;
+  }
+}
+.share-pinterest {
+  color: #cb2027;
+  &:hover {
+  color: #cb2027;
+  }
+}
+.share-linkedin {
+  color: #007bb5;
+  &:hover {
+  color: #007bb5;
+  }
+}
+.share-mail {
+  color: #161b2b;
+  &:hover {
+  color: #161b2b;
+  }
+}
 a:focus,
 a:hover {
   text-decoration: none;
@@ -859,13 +894,13 @@ header {
   }
 }
 
-.select-photo {
-  position: static;
+// .select-photo {
+//   position: static;
 
-  input {
-    left: 0;
-  }
-}
+//   input {
+//     left: 0;
+//   }
+// }
 
 .button-panel {
   margin-top: 80px;
@@ -1228,6 +1263,7 @@ header {
   position: absolute;
   top: 0;
   opacity: 0;
+  left: 0;
 }
 
 .upload-btn {
@@ -12166,7 +12202,12 @@ video::-webkit-media-controls-fullscreen-button {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
   }
-
+  .notify-close {
+    position: absolute;
+    top: -30px;
+    right: 10px;
+  }
+}
   .outer-report-cont {
     padding: 20px;
 
@@ -12174,13 +12215,6 @@ video::-webkit-media-controls-fullscreen-button {
       font-size: 22px;
     }
   }
-
-  .notify-close {
-    position: absolute;
-    top: -30px;
-    right: 10px;
-  }
-}
 // .report-modal {
 //   .modal.in .modal-dialog {
 //     @include transform(translate(initial));
