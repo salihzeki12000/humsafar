@@ -23,14 +23,16 @@
                       <img ng-src="{{activity.creator.profilePicture|uploadpath:65:67}}" alt="" class="img-responsive">
                     </div>-->
                     <div class="user-pic pointer" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey' || activity.type=='quick-itinerary' || activity.type=='detail-itinerary'">
-                      <img ui-sref="mylife({'urlSlug':activity.user.urlSlug})" ng-src="{{activity.user.profilePicture|uploadpath:50:50:'cover'}}" alt="" class="img-responsive">
+                      <img ui-sref="mylife({'urlSlug':activity.user.urlSlug})" ng-src="{{activity.user.profilePicture|uploadpath:50:50:'cover'}}"
+                        alt="" class="img-responsive">
                     </div>
                   </div>
                   <div class="user-detail width74 inline-block pointer">
                     <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="activity.type=='editor'" ui-sref="mylife({'urlSlug':activity.userName.urlSlug})">{{activity.userName}}</h4>
                     <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="activity.type=='travel-life' || activity.type=='local-life'" ui-sref="mylife({'urlSlug':activity.postCreator.urlSlug})">{{activity.postCreator.name}}</h4>
                     <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="activity.type=='quick-itinerary'" ui-sref="mylife({'urlSlug':activity.creator.urlSlug})">{{activity.creator.name}}</h4>
-                    <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey' ||  activity.type=='detail-itinerary'" ui-sref="mylife({'urlSlug':activity.user.urlSlug})">{{activity.user.name}}</h4>
+                    <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey' ||  activity.type=='detail-itinerary'"
+                      ui-sref="mylife({'urlSlug':activity.user.urlSlug})">{{activity.user.name}}</h4>
                     <div class="clearfix user-more-detail">
                       <div class="pull-left">
                         <p class="m-clear"><span>{{activity.startTime|formatDate:'date'}}</span> | <span>{{activity.startTime|formatDate:'time'}}</span></p>
@@ -77,11 +79,12 @@
                     </div>
                     <!-- flag country end -->
                     <!-- tag on journey -->
-                    <div class="tag-ongo-journey pointer" ng-if="((activity.type =='travel-life') || (activity.type =='on-the-go-journey'))" ng-click="routeOngo(activity)">
-                      <span class="inline-block color-white">On The Go</span>
+                    <div class="tag-ongo-journey pointer" ng-if="((activity.type =='travel-life') || (activity.type =='on-the-go-journey'))"
+                      ng-click="routeOngo(activity)">
+                      <span class="inline-block">On The Go</span>
                     </div>
                     <div class="tag-ongo-journey" ng-if="activity.type =='local-life'">
-                      <span class="inline-block color-blue">Local Life</span>
+                      <span class="inline-block">Local Life</span>
                     </div>
                     <div class="tag-ongo-journey" ng-if="((activity.type =='editor-blog'))">
                       <span class="inline-block color-blue">Cagtegory</span>
@@ -160,7 +163,8 @@
                     <!-- img post slider end -->
                     <!-- post travelled journey -->
                     <div class="travelled-journey" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey'">
-                      <div class="travelled-imgholder" ng-init="banner=activity.coverPhoto && activity.coverPhoto!=''?activity.coverPhoto:activity.startLocationPic" ng-click="routeOngo(activity)">
+                      <div class="travelled-imgholder" ng-init="banner=activity.coverPhoto && activity.coverPhoto!=''?activity.coverPhoto:activity.startLocationPic"
+                        ng-click="routeOngo(activity)">
                         <img ng-src="{{banner|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center">
                       </div>
                       <div class="journey-tag-holder">
@@ -518,8 +522,10 @@
         </div>
       </div>
     </div>
-    <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike'
-      list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+    <div class="" ng-if="showLikeCommentCard">
+      <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike'
+        list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+    </div>
     <div class="backdrop-close" ng-class="{'view-backdrop':viewCardComment==true || viewCardLike==true,'':viewCardComment==false || viewCardLike==false}"
       ng-click="closeBackDrop();"></div>
   </div>

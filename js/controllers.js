@@ -383,15 +383,44 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     console.log("Testing Consoles");
 
     $scope.template = TemplateService.changecontent("booking");
-    $scope.menutitle = NavigationService.makeactive("Booking");
+    $scope.menutitle = NavigationService.makeactive("Bookings");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.animationsEnabled = true;
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
     }
-
-
+    $scope.bookingnav = [{
+      name: "Flights",
+      classis: "active",
+      link: "http://flights.travelibro.com/en-GB/flights/#/result?originplace=&destinationplace=",
+      target: "_blank"
+    }, {
+      name: "Hotels",
+      classis: "active",
+      link: "http://travelibro.net/bookings/hotels",
+      target: "_self"
+    }, {
+      name: "Vacation Rentals",
+      classis: "active",
+      link: "http://travelibro.net/bookings/vacation-rentals",
+      target: "_self"
+    }, {
+      name: "Homestays",
+      classis: "active",
+      link: "http://travelibro.net/bookings/home-stays",
+      target: "_self"
+    }, {
+      name: "Car Rentals",
+      classis: "active",
+      link: "http://flights.travelibro.com/en-GB/carhire/#/result?originplace=&destinationplace=",
+      target: "_blank"
+    }, {
+      name: "Tours & Excursions",
+      classis: "active",
+      link: "http://travelibro.net/bookings/tours-and-excursions",
+      target: "_self"
+    }]
   })
   .controller('AdvertiseCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
@@ -1959,7 +1988,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
 
     $scope.template = TemplateService.changecontent("popular-blogger");
-    $scope.menutitle = NavigationService.makeactive("Popular Blogger");
+    $scope.menutitle = NavigationService.makeactive("Popular Bloggers");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
@@ -1987,6 +2016,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
     // followFollowing  Function END
+
+    // OPTIONS NG CLICK FUNCTION
+    $scope.editOption = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+    // OPTIONS NG CLICK FUNCTION END
+
+    // THANK YOU MODAL
+    $scope.openThankYouModal = function () {
+      $uibModal.open({
+        templateUrl: "views/modal/report.html",
+        animation: true,
+        scope: $scope,
+        windowClass: "report-modal"
+      });
+    };
+    // THANK YOU MODAL END
   })
 
   .controller('PopularAgentCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location) {
@@ -1996,7 +2046,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // $scope.template = TemplateService.changecontent("popular-agent");
     $scope.template = TemplateService.changecontent("coming-soon");
-    $scope.menutitle = NavigationService.makeactive("Popular Agent");
+    $scope.menutitle = NavigationService.makeactive("Popular Agents");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
   })
@@ -2007,7 +2057,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
 
     $scope.template = TemplateService.changecontent("popular-itinerary");
-    $scope.menutitle = NavigationService.makeactive("Popular Itinerary");
+    $scope.menutitle = NavigationService.makeactive("Popular Itineraries");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
@@ -2167,6 +2217,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // followFollowing  Function END
 
     // other itineraries main end
+
+    // OPTIONS NG CLICK FUNCTION
+    $scope.editOption = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+    // OPTIONS NG CLICK FUNCTION END
+
+    // THANK YOU MODAL
+    $scope.openThankYouModal = function () {
+      $uibModal.open({
+        templateUrl: "views/modal/report.html",
+        animation: true,
+        scope: $scope,
+        windowClass: "report-modal"
+      });
+    };
+    // THANK YOU MODAL END
   })
 
   .controller('PopularJourneyCtrl', function ($scope, $state, TemplateService, LikesAndComments, NavigationService, $timeout, $uibModal, $location) {
@@ -2175,7 +2246,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
 
     $scope.template = TemplateService.changecontent("popular-journey");
-    $scope.menutitle = NavigationService.makeactive("Popular Journey");
+    $scope.menutitle = NavigationService.makeactive("Popular Journeys");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.userData = $.jStorage.get("profile")
@@ -2333,6 +2404,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // followFollowing  Function END
 
     // POPULAR JOURNEY INTEGRATION END
+
+    // OPTIONS NG CLICK FUNCTION
+    $scope.editOption = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+    // OPTIONS NG CLICK FUNCTION END
+
+    // THANK YOU MODAL
+    $scope.openThankYouModal = function () {
+      $uibModal.open({
+        templateUrl: "views/modal/report.html",
+        animation: true,
+        scope: $scope,
+        windowClass: "report-modal"
+      });
+    };
+    // THANK YOU MODAL END
   })
 
   .controller('DestinationCtrl', function ($scope, $state, TemplateService, NavigationService, LikesAndComments, cfpLoadingBar, $timeout, $uibModal, $location) {
@@ -2605,6 +2697,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     // FILTER ITINERARY DESTINATION END
+
+    // OPTIONS NG CLICK FUNCTION
+    $scope.editOption = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+    // OPTIONS NG CLICK FUNCTION END
+
+    // THANK YOU MODAL
+    $scope.openThankYouModal = function () {
+      $uibModal.open({
+        templateUrl: "views/modal/report.html",
+        animation: true,
+        scope: $scope,
+        windowClass: "report-modal"
+      });
+    };
+    // THANK YOU MODAL END
 
     // destination city
     $scope.countryView = function (url, isCity) {
@@ -3022,6 +3135,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // SUGGEST EDIT POPUP MODAL END
 
+    // OPTIONS NG CLICK FUNCTION
+    $scope.editOption = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+    // OPTIONS NG CLICK FUNCTION END
+
+    // THANK YOU MODAL
+    $scope.openThankYouModal = function () {
+      $uibModal.open({
+        templateUrl: "views/modal/report.html",
+        animation: true,
+        scope: $scope,
+        windowClass: "report-modal"
+      });
+    };
+    // THANK YOU MODAL END
+
     // destination search dropdown
     $scope.callDestination = function () {
       $scope.i++;
@@ -3224,6 +3358,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     // get booking data
+    $scope.viewBookingLoader = false;
     $scope.getBooking = function (cityName, countryName) {
       console.log(cityName, countryName);
       $scope.bookingCityName = cityName;
@@ -3232,9 +3367,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         cityName: $scope.bookingCityName,
         countryName: $scope.bookingCountryName
       }, function (data) {
-        console.log(data, 'booking data');
-        $scope.bookingData = data;
-        console.log($scope.bookingData, 'booking ka data');
+        if (data.tours.status == false) {
+          $scope.viewBookingLoader = true;
+        } else {
+          $scope.viewBookingLoader = false;
+          console.log(data, 'booking data');
+          $scope.bookingData = data;
+          console.log($scope.bookingData, 'booking ka data');
+        }
       });
     };
     // get booking data end
@@ -3649,6 +3789,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.cityDestinationView = false;
         $scope.cityoptions.active = "booking";
         $scope.getBooking($scope.bookingCityName, $scope.bookingCountryName);
+        $scope.viewBookingLoader = true;
         $scope.ntMustdo = "";
         break;
       case "visit":
@@ -3706,6 +3847,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           url = "booking";
           $scope.cityDestinationView = false;
           $scope.cityoptions.active = "booking";
+          $scope.viewBookingLoader = true;
           $scope.getBooking($scope.bookingCityName, $scope.bookingCountryName);
           $scope.ntMustdo = "";
           break;
@@ -5608,13 +5750,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.comment = {
       "text": ""
     }
+    $scope.showLikeCommentCard = true;
     $scope.openCommentSection = function (ongo) {
-      var type = "";
-      if (ongo.type === 'on-the-go-journey' || ongo.type === 'ended-journey') {
-        type = "journey";
-      } else if (ongo.type === 'quick-itinerary' || ongo.type === 'detail-itinerary') {
-        type = "itinerary";
-      }
+      $scope.showLikeCommentCard = false;
+      // var type = "";
+      // if (ongo.type === 'on-the-go-journey' || ongo.type === 'ended-journey') {
+      //   type = "journey";
+      // } else if (ongo.type === 'quick-itinerary' || ongo.type === 'detail-itinerary') {
+      //   type = "itinerary";
+      // }
       $scope.listOfLikes = false;
       console.log(ongo, 'ongo');
       $scope.post = ongo; //for using it in comment section
@@ -5629,7 +5773,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.listOfComments = [];
         $scope.viewCardComment = true;
         $scope.getCard = "view-whole-card";
-        LikesAndComments.getComments(type, $scope.post._id, callback);
+        LikesAndComments.getComments(ongo.type, $scope.post._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
@@ -5641,10 +5785,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.viewCardComment = true;
           // $scope.focus('enterComment');
           $scope.getCard = "view-whole-card";
-          LikesAndComments.getComments(type, $scope.post._id, callback);
+          LikesAndComments.getComments(ongo.type, $scope.post._id, callback);
         }
       }
       $scope.previousId = $scope.post._id;
+      $timeout(function () {
+        $scope.showLikeCommentCard = true;
+      }, 1000);
     };
 
     // $scope.postPostsComment = function (uniqueId, comment, postId) {
@@ -6799,6 +6946,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Activity");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.showLikeCommentCard = true;
 
     $scope.openThankYouModal = function () {
       $uibModal.open({
@@ -6926,6 +7074,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.getCommentsData = function (activity) {
+      $scope.showLikeCommentCard = false;
       console.log(activity);
       $scope.previousId;
       $scope.listOfLikes = [];
@@ -6947,7 +7096,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewCardComment = true;
         // $scope.journey.journeyHighLight = activity._id;
         $scope.getCard = "view-whole-card";
-        LikesAndComments.getComments(activity.likeUnlikeFlag, activity._id, callback);
+        LikesAndComments.getComments(activity.type, activity._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
@@ -6960,16 +7109,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // $scope.focus('enterComment');
           // $scope.journey.journeyHighLight = activity._id;
           $scope.getCard = "view-whole-card";
-          LikesAndComments.getComments(activity.likeUnlikeFlag, activity._id, callback);
+          LikesAndComments.getComments(activity.type, activity._id, callback);
         }
       }
       $scope.previousId = activity._id;
+      $timeout(function () {
+        $scope.showLikeCommentCard = true;
+      }, 1000)
     };
 
     $scope.getLikesData = function (activity) {
+      $scope.showLikeCommentCard = false;
       var callback = function (data) {
         $scope.listOfLikes = data.data;
         console.log($scope.listOfLikes);
+        $timeout(function () {
+          $scope.showLikeCommentCard = true;
+        }, 1000)
       };
       console.log($scope.post);
       if ($scope.previousLikeId != activity._id) {
@@ -7040,7 +7196,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.listOfComments = data.data;
         document.getElementById('enterComment').value = "";
       }
-      LikesAndComments.postComment(type, activity.uniqueId, activity._id, comment, hashTag, additionalId, callback);
+      LikesAndComments.postComment(activity.type, activity.uniqueId, activity._id, comment, hashTag, additionalId, callback);
     };
 
     $scope.editYourComment = function () {
@@ -7675,6 +7831,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         _.each(data.data.countryVisited, function (n1, key1) {
           $scope.addCountry.push({
             "country": n1.country._id,
+            'rating': n1.rating,
             "name": n1.country.name,
             "flag": n1.country.flag,
             "from": new Date(n1.from),
@@ -10363,9 +10520,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.userData = $.jStorage.get("profile");
           $scope.accessToken = $.jStorage.get("accessToken");
           $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+
           if ($.jStorage.get('qualifiedForNextStep')) {
             $state.go('holiday');
           } else if ($scope.userData && $scope.userData.alreadyLoggedIn == false) {
+            // if () {
+
+            // } else {
+            //   $state.go('mainpage');
+            // }
             $state.go('mainpage');
           }
         } else {
@@ -13704,6 +13867,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     $scope.openCommentSection = function (ongo) {
+      $scope.showLikeCommentCard = false;
       $scope.listOfLikes = false;
       console.log(ongo, 'ongo');
       $scope.post = ongo; //for using it in comment section
@@ -13719,7 +13883,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.listOfComments = [];
         $scope.viewCardComment = true;
         $scope.getCard = "view-whole-card";
-        LikesAndComments.getComments("post", $scope.post._id, callback);
+        LikesAndComments.getComments(ongo.type, $scope.post._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
@@ -13731,10 +13895,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.viewCardComment = true;
           // $scope.focus('enterComment');
           $scope.getCard = "view-whole-card";
-          LikesAndComments.getComments("post", $scope.post._id, callback);
+          LikesAndComments.getComments(ongo.type, $scope.post._id, callback);
         }
       }
       $scope.previousId = $scope.post._id;
+      $timeout(function () {
+        $scope.showLikeCommentCard = true;
+      }, 1000);
     };
 
     $scope.closeBackDrop = function () {
@@ -14420,10 +14587,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.postPostsComment = function (uniqueId, comment, postId) {
-      console.log(uniqueId, comment, postId);
+    $scope.postPostsComment = function (uniqueId, comment, postId, type) {
+      console.log(uniqueId, comment, postId, type);
       console.log("controller se comment hua");
-      var type = "post";
       var additionalId = null;
       var hashTag = [];
       var callback = function (data) {

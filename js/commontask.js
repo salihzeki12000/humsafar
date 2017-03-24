@@ -60,33 +60,61 @@ var commontask = angular.module('commontask', [])
         });
         // console.log(hashTag);
         var obj = {
-          "type": type,
           "uniqueId": uniqueId,
           "text": comment,
           "hashtag": hashTag
         };
         switch (type) {
-          case "post":
+          case "travel-life":
+          case "local-life":
+            obj.type = "post";
             obj.post = type_Id;
             getCommentId = type_Id;
             break;
+          case "on-the-go-journey":
+          case "ended-journey":
+            obj.type = "journey";
+            obj.journey = type_Id;
+            getCommentId = type_Id;
+            break;
+          case "quick-itinerary":
+          case "detail-itinerary":
+            obj.type = "itinerary";
+            obj.itinerary = type_Id;
+            getCommentId = type_Id;
+            break;
           case "photo":
+            obj.type = "photo";
             obj.post = type_Id;
             obj.photo = additionalId; //this var is initialized only when commenting for photo,video or itinerary
             getCommentId = additionalId;
             break;
           case "video":
+            obj.type = "video";
             obj.video = additionalId;
             getCommentId = "";
             break;
-          case "itinerary":
-            obj.itinerary = type_Id;
-            getCommentId = type_Id;
-            break;
-          case "journey":
-            obj.journey = type_Id;
-            getCommentId = type_Id;
-            break;
+            // case "post":
+            //   obj.post = type_Id;
+            //   getCommentId = type_Id;
+            //   break;
+            // case "photo":
+            //   obj.post = type_Id;
+            //   obj.photo = additionalId; //this var is initialized only when commenting for photo,video or itinerary
+            //   getCommentId = additionalId;
+            //   break;
+            // case "video":
+            //   obj.video = additionalId;
+            //   getCommentId = "";
+            //   break;
+            // case "itinerary":
+            //   obj.itinerary = type_Id;
+            //   getCommentId = type_Id;
+            //   break;
+            // case "journey":
+            //   obj.journey = type_Id;
+            //   getCommentId = type_Id;
+            //   break;
         }
         TravelibroService.http({
           url: adminURL + "/comment/addCommentWeb",
@@ -106,8 +134,17 @@ var commontask = angular.module('commontask', [])
         };
         var url;
         switch (type) {
-          case "post":
+          case "travel-life":
+          case "local-life":
             url = "/post/getPostCommentWeb";
+            break;
+          case "on-the-go-journey":
+          case "ended-journey":
+            url = "/journey/getJourneyCommentWeb";
+            break;
+          case "quick-itinerary":
+          case "detail-itinerary":
+            url = "/itinerary/getItineraryCommentWeb";
             break;
           case "photo":
             url = "/postphotos/getOneWeb";
@@ -115,12 +152,21 @@ var commontask = angular.module('commontask', [])
           case "video":
             url = "/postvideos/getPostCommentWeb";
             break;
-          case "itinerary":
-            url = "/itinerary/getItineraryCommentWeb";
-            break;
-          case "journey":
-            url = "/journey/getJourneyCommentWeb";
-            break;
+            // case "post":
+            //   url = "/post/getPostCommentWeb";
+            //   break;
+            // case "photo":
+            //   url = "/postphotos/getOneWeb";
+            //   break;
+            // case "video":
+            //   url = "/postvideos/getPostCommentWeb";
+            //   break;
+            // case "itinerary":
+            //   url = "/itinerary/getItineraryCommentWeb";
+            //   break;
+            // case "journey":
+            //   url = "/journey/getJourneyCommentWeb";
+            //   break;
         }
         TravelibroService.http({
           url: adminURL + url,

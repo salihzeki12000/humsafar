@@ -134,7 +134,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'ContactCtrl'
     })
     .state('booking', {
-      url: "/booking",
+      url: "/bookings",
       templateUrl: "views/template.html",
       controller: 'BookingCtrl'
     })
@@ -1062,7 +1062,7 @@ firstapp.filter('truncate', function () {
 
 firstapp.filter('itineraryType', function () {
   return function (input) {
-    if(input) {
+    if (input) {
       var input = input.toLowerCase();
     }
     var returnVal = "";
@@ -1209,11 +1209,11 @@ firstapp.filter('postString', function () {
     var buddiesString = "";
     var buddiesCount = checkIn.buddies.length;
     if (buddiesCount == 1) {
-      buddiesString = "<a href='#/users/"+checkIn.buddies[0].urlSlug+"'>" + checkIn.buddies[0].name.bold() + "</a>";
+      buddiesString = "<a href='#/users/" + checkIn.buddies[0].urlSlug + "'>" + checkIn.buddies[0].name.bold() + "</a>";
     } else if (buddiesCount == 2) {
-      buddiesString = "<a href='#/users/"+checkIn.buddies[0].urlSlug+"'>" + checkIn.buddies[0].name.bold() + "</a>" + " and " + "<a href='#/users/"+checkIn.buddies[1].urlSlug+"'>" + checkIn.buddies[1].name.bold() + "</a>";
+      buddiesString = "<a href='#/users/" + checkIn.buddies[0].urlSlug + "'>" + checkIn.buddies[0].name.bold() + "</a>" + " and " + "<a href='#/users/" + checkIn.buddies[1].urlSlug + "'>" + checkIn.buddies[1].name.bold() + "</a>";
     } else if (buddiesCount >= 2) {
-      buddiesString = "<a href='#/users/"+checkIn.buddies[0].urlSlug+"'>" + checkIn.buddies[0].name.bold() + "</a>" + " and " + (buddiesCount - 1) + " others ";
+      buddiesString = "<a href='#/users/" + checkIn.buddies[0].urlSlug + "'>" + checkIn.buddies[0].name.bold() + "</a>" + " and " + (buddiesCount - 1) + " others ";
     }
     var postString = "";
     if (buddiesString != "") {
@@ -1222,9 +1222,9 @@ firstapp.filter('postString', function () {
       } else if (checkIn.thoughts) {
         postString = checkIn.thoughts + " with " + buddiesString;
       } else if (checkIn && checkIn.location) {
-        postString = "<a href='#/users/"+checkIn.postCreator.urlSlug+"'>" + checkIn.postCreator.name.bold() + "</a>" + " with " + buddiesString + " at " + checkIn.location.bold();
+        postString = "<a href='#/users/" + checkIn.postCreator.urlSlug + "'>" + checkIn.postCreator.name.bold() + "</a>" + " with " + buddiesString + " at " + checkIn.location.bold();
       } else {
-        postString = "<a href='#/users/"+checkIn.postCreator.urlSlug+"'>" + checkIn.postCreator.name.bold() + "</a>" + " with " + buddiesString;
+        postString = "<a href='#/users/" + checkIn.postCreator.urlSlug + "'>" + checkIn.postCreator.name.bold() + "</a>" + " with " + buddiesString;
       }
     } else {
       if (checkIn.thoughts && checkIn.location) {
@@ -1232,7 +1232,7 @@ firstapp.filter('postString', function () {
       } else if (checkIn.thoughts) {
         postString = checkIn.thoughts;
       } else if (checkIn && checkIn.location) {
-        postString = "<a href='#/users/"+checkIn.postCreator.urlSlug+"'>"+checkIn.postCreator.name.bold()+ "</a>" + " at " + checkIn.location.bold();
+        postString = "<a href='#/users/" + checkIn.postCreator.urlSlug + "'>" + checkIn.postCreator.name.bold() + "</a>" + " at " + checkIn.location.bold();
       } else {
         postString = "";
       }
@@ -1521,9 +1521,9 @@ firstapp.filter('trafficType', function () {
   }
 });
 // get attribute in html
-firstapp.filter('safe',function($sce){
-  return function(input){
-    console.log(input,'input');
+firstapp.filter('safe', function ($sce) {
+  return function (input) {
+    // console.log(input,'input');
     return $sce.trustAsHtml(input);
   }
 })
