@@ -312,6 +312,11 @@ a:focus {
   position: relative;
 }
 
+.login-error-veri{
+  color: $brand-pink;
+  text-align: center;
+}
+
 .djb-font {
   font-family: "djb";
 }
@@ -910,7 +915,7 @@ header {
     position: relative;
     width: 400px;
     height: 100vh;
-    .social-icons { 
+    .social-icons {
       text-align: center;
     }
   }
@@ -1184,6 +1189,15 @@ header {
   }
   [type="checkbox"]:disabled+label {
     color: #aaa;
+  }
+}
+
+
+.forgot-login-redirect{
+  margin: 20px 0;
+  span{
+    margin: 0px 5px;
+    font-size: 20px;
   }
 }
 
