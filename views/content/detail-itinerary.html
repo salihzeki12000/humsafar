@@ -214,7 +214,8 @@
                         <div class="form-group">
                           <div class="itinerary-inputholder input-country-visited">
                             <input type="text" class="form-control" ng-model="editCity.name" ng-change="searchCity(editCountry.country,editCity.name,editCountry.cityVisited);showCity[countryPanel][cityPanel]=true"
-                              placeholder="City Visited" name="city{{$parent.$index}}{{$index}}" ng-required="true"></input>
+                              placeholder="City Visited" name="city{{$parent.$index}}{{$index}}" ng-required="true">
+                              </input>
                               <span class="itinerary-dropdown-icon">
                                 <i class="fa fa-chevron-down"></i>
                               </span>
@@ -275,7 +276,7 @@
                         </div>
                       </div>-->
                       <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group relate">
                           <div class="itinerary-country-detail">
                             <div class="itinerary-from itinerary-month">
                               <label for="Day">From</label>
@@ -290,13 +291,13 @@
                               </div>
                             </div> 
                           </div>
-                            <span ng-show="detailItinerary.$submitted || detailItinerary.to{{$parent.$index}}{{$index}}.$touched || detailItinerary.from{{$parent.$index}}{{$index}}.$touched">
-                              <span ng-show="detailItinerary.to{{$parent.$index}}{{$index}}.$error.required || detailItinerary.from{{$parent.$index}}{{$index}}.$error.required" class="help-inline">
+                            <span ng-show="detailItinerary.$submitted || detailItinerary.to{{$parent.$index}}{{$index}}.$touched || detailItinerary.from{{$parent.$index}}{{$index}}.$touched" class="help-inline">
+                              <span ng-show="detailItinerary.to{{$parent.$index}}{{$index}}.$error.required || detailItinerary.from{{$parent.$index}}{{$index}}.$error.required" >
                                 The From Day &amp; To Day is required.
                               </span>
                           </span>
                         </div>
-                      </div>
+                        </div>
                       <span class="close-city-x" ng-click="removeCity(countryPanel,cityPanel)"><i class="fa fa-times" ng-if="cityPanel>0"></i></span>
                     </div>
                     <div class="row">
