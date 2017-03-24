@@ -241,9 +241,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               NavigationService.getProfile("", function (succ3) {
                 $.jStorage.set("isLoggedIn", false);
                 $.jStorage.set("oldUserData", succ3.data);
-                $state.go("login-flow", {
-                  'accessToken': succ2.accessToken
-                });
+                $.jStorage.set("qualifiedForLoginFlow", true);
+                // $state.go("login-flow", {
+                //   'accessToken': succ2.accessToken
+                // });
+                $state.go("login-flow");
                 // window.location = "http://travelibro.net/blog"
               }, function (err3) {
                 console.log(err3);
@@ -526,7 +528,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.uploadFile = function (data, fileName, userData) {
       // Base64 to Blob
-      cfpLoadingBar.start();
+      // cfpLoadingBar.start();
       console.log(fileName, userData);
       var imageBase64 = data;
       console.log(imageBase64);
@@ -548,7 +550,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         } else {
           toastr.warning('Error Uploading Image!');
         }
-        cfpLoadingBar.complete();
+        // cfpLoadingBar.complete();
       });
     };
 
@@ -560,7 +562,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           console.log(err);
         });
         // $window.location.reload();
-        $.jStorage.set('qualifiedForNextStep', true);
+        $.jStorage.set('qualifiedForHoliday', true);
         $state.go('holiday');
       } else {
         console.log(data);
@@ -878,7 +880,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           if (data.data._id) {
             $.jStorage.set("isLoggedIn", true);
             $.jStorage.set("profile", data.data);
-            $.jStorage.set("qualifiedForNextStep", null);
+            $.jStorage.set("qualifiedForHoliday", null);
             $state.go("mylife", {
               // name: 'journey',
               urlSlug: $.jStorage.get("profile").urlSlug
@@ -2238,6 +2240,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     // THANK YOU MODAL END
+
+    // sharing local life modal
+    var shareModal = "";
+    $scope.sharePost = function (url) {
+      $scope.shareUrl = url;
+      console.log($scope.shareUrl, 'share ka url');
+      shareModal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/sharing.html",
+        scope: $scope
+      });
+    }
+    // sharing local life modal end
+
   })
 
   .controller('PopularJourneyCtrl', function ($scope, $state, TemplateService, LikesAndComments, NavigationService, $timeout, $uibModal, $location) {
@@ -2425,6 +2441,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     // THANK YOU MODAL END
+
+    // sharing local life modal
+    var shareModal = "";
+    $scope.sharePost = function (url) {
+      $scope.shareUrl = url;
+      console.log($scope.shareUrl, 'share ka url');
+      shareModal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/sharing.html",
+        scope: $scope
+      });
+    }
+    // sharing local life modal end
+
   })
 
   .controller('DestinationCtrl', function ($scope, $state, TemplateService, NavigationService, LikesAndComments, cfpLoadingBar, $timeout, $uibModal, $location) {
@@ -3084,6 +3114,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     //SHOW HIDE FILTER DROPDOWNS END
 
+    // sharing local life modal
+    var shareModal = "";
+    $scope.sharePost = function (url) {
+      $scope.shareUrl = url;
+      console.log($scope.shareUrl, 'share ka url');
+      shareModal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/sharing.html",
+        scope: $scope
+      });
+    }
+    // sharing local life modal end
+
+
   })
 
   .controller('DestinationCityCtrl', function ($scope, $state, TemplateService, TravelibroService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $location, LikesAndComments) {
@@ -3134,6 +3178,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     // SUGGEST EDIT POPUP MODAL END
+
+    // sharing local life modal
+    var shareModal = "";
+    $scope.sharePost = function (url) {
+      $scope.shareUrl = url;
+      console.log($scope.shareUrl, 'share ka url');
+      shareModal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/sharing.html",
+        scope: $scope
+      });
+    }
+    // sharing local life modal end
+
 
     // OPTIONS NG CLICK FUNCTION
     $scope.editOption = function (model) {
@@ -7363,6 +7421,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     // route to itinerary end
 
+    // sharing local life modal
+    var shareModal = "";
+    $scope.sharePost = function (url) {
+      $scope.shareUrl = url;
+      console.log($scope.shareUrl, 'share ka url');
+      shareModal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/sharing.html",
+        scope: $scope
+      });
+    }
+    // sharing local life modal end
+
+
   })
 
   .controller('ProfileListCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, MyLife, $uibModal, $state, LikesAndComments) {
@@ -8293,13 +8365,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // select detail itinerary type
     $scope.selectItinerary = function (val) {
       console.log(val);
-      if ($scope.dItineraryType[val].activeClass == "active-itinerary") {
-        $scope.dItineraryType[val].activeClass = "";
+      atleastOne = _.filter($scope.dItineraryType, ['class', "active-itinerary"]);
+      length = atleastOne.length;
+      console.log(length);
+      if (length == 1) {
+        $scope.dItineraryTypey[val].class = "active-itinerary"
       } else {
-        $scope.dItineraryType[val].activeClass = "active-itinerary";
+        if ($scope.dItineraryType[val].activeClass == "active-itinerary") {
+          $scope.dItineraryType[val].activeClass = "";
+        } else {
+          $scope.dItineraryType[val].activeClass = "active-itinerary";
+        }
       }
     };
     // select detail itinerary type end
+
+    // $scope.holidayType = function (val) {
+    //   atleastOne = _.filter($scope.travelConfig.chooseHoliday, ['class', "active-holiday"]);
+    //   length = atleastOne.length;
+    //   console.log(length);
+    //   if (length == 1) {
+    //     $scope.travelConfig.chooseHoliday[val].class = "active-holiday"
+    //   } else {
+    //     if ($scope.travelConfig.chooseHoliday[val].class == "active-holiday") {
+    //       $scope.travelConfig.chooseHoliday[val].class = "";
+    //     } else {
+    //       $scope.travelConfig.chooseHoliday[val].class = "active-holiday";
+    //     }
+    //   }
+
+    // };
 
     // country list
     $scope.countryList = [{
@@ -10503,7 +10598,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // if ($.jStorage.get('accessToken') && $.jStorage.get('accessToken') != '') {
     //   $scope.userData = $.jStorage.get("profile");
     //   $scope.accessToken = $.jStorage.get("accessToken");
-    //   if ($.jStorage.get('qualifiedForNextStep')) {
+    //   if ($.jStorage.get('qualifiedForHoliday')) {
     //     $state.go('holiday');
     //   } else if ($scope.userData && $scope.userData.alreadyLoggedIn == false) {
     //     $state.go('mainpage');
@@ -10521,14 +10616,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.accessToken = $.jStorage.get("accessToken");
           $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
 
-          if ($.jStorage.get('qualifiedForNextStep')) {
+          if ($.jStorage.get('qualifiedForLoginFlow')) {
+            $state.go('login-flow');
+          } else if ($.jStorage.get('qualifiedForHoliday')) {
             $state.go('holiday');
           } else if ($scope.userData && $scope.userData.alreadyLoggedIn == false) {
-            // if () {
-
-            // } else {
-            //   $state.go('mainpage');
-            // }
             $state.go('mainpage');
           }
         } else {
@@ -10550,7 +10642,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //         $scope.userData = $.jStorage.get("profile");
     //         $scope.accessToken = $.jStorage.get("accessToken");
     //         $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
-    //         if ($.jStorage.get('qualifiedForNextStep')) {
+    //         if ($.jStorage.get('qualifiedForHoliday')) {
     //           $state.go('holiday');
     //         } else if ($scope.userData && $scope.userData.alreadyLoggedIn == false) {
     //           $state.go('mainpage');
@@ -13949,7 +14041,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('SearchresultCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state, LikesAndComments) {
+  .controller('SearchresultCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $state, LikesAndComments) {
     $scope.template = TemplateService.changecontent("search-result"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Search Results"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
@@ -14245,6 +14337,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     // tab change end
+
+    // sharing local life modal
+    var shareModal = "";
+    $scope.sharePost = function (url) {
+      $scope.shareUrl = url;
+      console.log($scope.shareUrl, 'share ka url');
+      shareModal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/sharing.html",
+        scope: $scope
+      });
+    }
+    // sharing local life modal end
+
   })
 
   .controller('ErrorCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
@@ -14280,6 +14386,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           ref.close();
           $.jStorage.set("isLoggedIn", true);
           $.jStorage.set("profile", data.data);
+          $.jStorage.set("qualifiedForLoginFlow", null);
           var alreadyLoggedIn = data.data.alreadyLoggedIn;
           if (alreadyLoggedIn === true) {
             var slug = $.jStorage.get("activeUrlSlug");

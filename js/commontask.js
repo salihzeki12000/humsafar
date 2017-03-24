@@ -172,7 +172,7 @@ var commontask = angular.module('commontask', [])
           url: adminURL + url,
           method: "POST",
           data: obj
-        }).success(function (data) {
+        }, true).success(function (data) {
           callback(data);
         }).error(function (data) {
           console.log(data);
