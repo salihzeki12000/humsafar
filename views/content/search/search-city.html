@@ -3,7 +3,7 @@
     <div class="country-visited-tab search-city-tab">
       <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="city in viewSearchedCity track by $index">
         <div class="country-list-holder">
-          <div class="list-imgholder" style="background-image: url('{{city.cityCoverPhoto|uploadpath}}');">
+          <div class="list-imgholder" ui-sref="destinationcity({'name':'mustdo','url':city.urlSlug})" style="background-image: url('{{city.cityCoverPhoto|uploadpath}}');">
             <!-- <img ng-src="{{country.countryId.countryCoverPhoto|uploadpath}}" alt="" class="img-responsive country-img">  -->
             <div class="list-info">
               <div class="clearfix">

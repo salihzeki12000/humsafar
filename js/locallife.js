@@ -76,11 +76,11 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
         if ($scope.localongo.buddiesCount == undefined) {
 
         } else if ($scope.localongo.buddiesCount == 1) {
-          $scope.localongo.buddiesString = "<a href='#/users/" + $scope.localongo.buddies[0].urlSlug + "'>" + $scope.localongo.buddies[0].name.bold() + "</a>";
+          $scope.localongo.buddiesString = "<a href='/users/" + $scope.localongo.buddies[0].urlSlug + "'>" + $scope.localongo.buddies[0].name.bold() + "</a>";
         } else if ($scope.localongo.buddiesCount == 2) {
-          $scope.localongo.buddiesString = "<a href='#/users/" + $scope.localongo.buddies[0].urlSlug + "'>" + $scope.localongo.buddies[0].name.bold() + "</a>" + " and " + "<a href='#/users/" + $scope.localongo.buddies[1].urlSlug + "'>" + $scope.localongo.buddies[1].name.bold() + "</a>";
+          $scope.localongo.buddiesString = "<a href='/users/" + $scope.localongo.buddies[0].urlSlug + "'>" + $scope.localongo.buddies[0].name.bold() + "</a>" + " and " + "<a href='/users/" + $scope.localongo.buddies[1].urlSlug + "'>" + $scope.localongo.buddies[1].name.bold() + "</a>";
         } else if ($scope.localongo.buddiesCount >= 2) {
-          $scope.localongo.buddiesString = "<a href='#/users/" + $scope.localongo.buddies[0].urlSlug + "'>" + $scope.localongo.buddies[0].name.bold() + "</a>" + " and " + "<b>" + ($scope.localongo.buddiesCount - 1) + " others." + "</b>";
+          $scope.localongo.buddiesString = "<a href='/users/" + $scope.localongo.buddies[0].urlSlug + "'>" + $scope.localongo.buddies[0].name.bold() + "</a>" + " and " + "<b>" + ($scope.localongo.buddiesCount - 1) + " others." + "</b>";
         }
         var localpostString = "";
 
@@ -91,9 +91,9 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
           } else if ($scope.localongo.thoughts) {
             $scope.localongo.localpostString = $scope.localongo.thoughts + " with " + $scope.localongo.buddiesString;
           } else if ($scope.localongo.checkIn && $scope.localongo.checkIn.location) {
-            $scope.localongo.localpostString = "<a href='#/users/" + $scope.localongo.user.urlSlug + "'>" + $scope.localongo.user.name.bold() + "</a>" + " with " + $scope.localongo.buddiesString + " - at " + $scope.localongo.checkIn.location.bold();
+            $scope.localongo.localpostString = "<a href='/users/" + $scope.localongo.user.urlSlug + "'>" + $scope.localongo.user.name.bold() + "</a>" + " with " + $scope.localongo.buddiesString + " - at " + $scope.localongo.checkIn.location.bold();
           } else {
-            $scope.localongo.localpostString = "<a href='#/users/" + $scope.localongo.user.urlSlug + "'>" + $scope.localongo.user.name.bold() + "</a>" + " with " + $scope.localongo.buddiesString;
+            $scope.localongo.localpostString = "<a href='/users/" + $scope.localongo.user.urlSlug + "'>" + $scope.localongo.user.name.bold() + "</a>" + " with " + $scope.localongo.buddiesString;
           }
         } else {
           if ($scope.localongo.thoughts && $scope.localongo.checkIn.location) {
@@ -101,9 +101,9 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
           } else if ($scope.localongo.thoughts) {
             $scope.localongo.localpostString = $scope.localongo.thoughts;
           } else if ($scope.localongo.checkIn && $scope.localongo.checkIn.location) {
-            $scope.localongo.localpostString = "<a href='#/users/" + $scope.localongo.user.urlSlug + "'>" + $scope.localongo.user.name.bold() + "</a>" + " - at " + $scope.localongo.checkIn.location.bold();
+            $scope.localongo.localpostString = "<a href='/users/" + $scope.localongo.user.urlSlug + "'>" + $scope.localongo.user.name.bold() + "</a>" + " - at " + $scope.localongo.checkIn.location.bold();
           } else {
-            $scope.localongo.localpostString = "<a href='#/users/" + $scope.localongo.user.urlSlug + "'>" + $scope.localongo.user.name.bold() + "</a>" + " with " + $scope.localongo.buddiesString;
+            $scope.localongo.localpostString = "<a href='/users/" + $scope.localongo.user.urlSlug + "'>" + $scope.localongo.user.name.bold() + "</a>" + " with " + $scope.localongo.buddiesString;
           }
         }
       };

@@ -257,7 +257,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             console.log(err2);
           });
         } else {
-          console.log(data);
+          // console.log(data);
+          $scope.showError=true;
           //things to do when user email or password is wrong
         }
       });
@@ -6584,7 +6585,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       img: "img/countryside.png",
       caption: "Countryside",
-      storeCaption: "Countrysides"
+      storeCaption: "Countryside"
     }];
 
     $scope.travelConfig.usuallyGo = [{
@@ -6757,7 +6758,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               return n1 == n2.storeCaption;
             });
             console.log(index);
-            $scope.travelConfig.chooseHoliday[index].class = "active-holiday"
+            $scope.travelConfig.chooseHoliday[index].class = "active-holiday";
           });
           break;
         case 1:
@@ -6765,7 +6766,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             var index = _.findIndex($scope.travelConfig.usuallyGo, function (n2) {
               return n1 == n2.storeCaption;
             });
-            $scope.travelConfig.usuallyGo[index].class = "active-holiday"
+            $scope.travelConfig.usuallyGo[index].class = "active-holiday";
           });
           break;
         case 2:
@@ -6773,7 +6774,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             var index = _.findIndex($scope.travelConfig.preferTravel, function (n2) {
               return n1 == n2.storeCaption;
             });
-            $scope.travelConfig.preferTravel[index].class = "active-holiday"
+            $scope.travelConfig.preferTravel[index].class = "active-holiday";
           });
           break;
         case 3:
@@ -6783,7 +6784,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               // console.log(n1, n2.storeCaption);
             });
             // console.log(index);
-            $scope.travelConfig.idealSelect[index].class = "active-holiday"
+            $scope.travelConfig.idealSelect[index].class = "active-holiday";
           });
           break;
       }
@@ -14095,7 +14096,58 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       stopCallingApiCountry: false,
       stopCallingApiCity: false,
     };
-
+    // search profile page
+    $scope.searchItiProfile = function(searchObj, searchedType){
+      console.log(searchObj, 'what is ');
+      switch (searchedType) {
+        case 'travellerType':
+        if(searchObj.itineraryBy=="Admin" || searchObj.itineraryBy == "TravelAgent"){
+          $state.go('comingsoonpage',{
+            'url':'coming-soon'
+          })
+        }else {
+          $state.go('mylife',{
+            'urlSlug': searchObj.urlSlug
+          })
+        }
+          break;
+        case 'itineraryType':
+        if(searchObj.itineraryBy=="Admin" || searchObj.itineraryBy == "TravelAgent"){
+          $state.go('comingsoonpage',{
+            'url':'coming-soon'
+          })
+        }else {
+          $state.go('mylife',{
+            'urlSlug': searchObj.user.urlSlug
+          })
+        }
+          break;
+        default:
+        break;
+      }
+    };
+    // search profile page end
+    // search itinerary
+    $scope.searchIti = function(itinerary){
+      if(itinerary.itineraryBy=="Admin" || itinerary.itineraryBy=="TravelAgent"){
+        $state.go('comingsoonpage',{
+          'url':'coming-soon'
+        })
+      }else {
+        if (itinerary.type == 'quick-itinerary') {
+          $state.go('userquickitinerary', {
+            'id': itinerary.urlSlug,
+            'urlSlug': itinerary.user.urlSlug
+          });
+        } else {
+          $state.go('userdetailitinerary', {
+            'id': itinerary.urlSlug,
+            'urlSlug': itinerary.user.urlSlug
+          });
+        }
+      }
+    }
+    // search itinerary end
     // change url
     $scope.searchresultoptions = {};
     $scope.searchresultoptions.active = "";

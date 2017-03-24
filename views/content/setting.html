@@ -220,7 +220,7 @@
                       </div>-->
                           <ui-select ng-model="userData.homeCountry" theme="bootstrap" name="nationality" required>
                             <ui-select-match placeholder="Search">{{$select.selected.name}}</ui-select-match>
-                            <ui-select-choices repeat="nation._id as nation in nationality | filter:$select.search" track by $index>
+                            <ui-select-choices repeat="nation._id as nation in nationality | filter:$select.search track by $index" >
                               <img ng-src="{{nation.flag|uploadpath:30}}" width="30" class="mr10 v-mid inline-block" alt="{{nation.name}}">
                               <span class="color-light-grey" ng-bind="nation.name"></span>
                             </ui-select-choices>
@@ -238,7 +238,7 @@
                       </div>-->
                           <ui-select ng-model="userData.homeCity" theme="bootstrap">
                             <ui-select-match placeholder="Search City">{{$select.selected.description}}</ui-select-match>
-                            <ui-select-choices repeat="city.description as city in cities | filter:$select.search" track by $index refresh="searchByKey($select.search)"
+                            <ui-select-choices repeat="city.description as city in cities | filter:$select.search track by $index"  refresh="searchByKey($select.search)"
                               refresh-delay="0">
                               <span class="color-light-grey">{{city.description}}</span>
                             </ui-select-choices>
