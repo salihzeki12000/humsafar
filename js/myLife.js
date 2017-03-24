@@ -42,10 +42,10 @@ var mylife = angular.module('mylife', [])
         if (country.bucketList === false) {
           obj.delete = true;
         }
-        TravelibroService.post(adminURL + "/user/updateBucketListWeb", obj).success(callback).error(errCallback);
+        TravelibroService.post(adminURL + "/user/updateBucketListWeb", obj, true).success(callback).error(errCallback);
       },
       updateCountriesVisited: function (obj, callback, errCallback) {
-        TravelibroService.post(adminURL + "/user/updateCountriesVisitedWeb", obj).success(callback).error(errCallback);
+        TravelibroService.post(adminURL + "/user/updateCountriesVisitedWeb", obj, true).success(callback).error(errCallback);
       },
       removeCountryList: function (obj, callback, errCallback) {
         TravelibroService.post(adminURL + "/user/removeCountriesVisitedWeb", obj).success(callback).error(errCallback);
@@ -95,7 +95,7 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/user/updateBucketListWeb",
           method: "POST",
           data: obj
-        }).success(function () {
+        }, true).success(function () {
           callback(countryId);
         }).error(function (data) {
           console.log(data);

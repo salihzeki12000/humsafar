@@ -76,11 +76,11 @@
               <span class="color-white avenir-heavy" ng-click="editOption(ongo.shareJrny);">Share</span>
               <div class="share-dropdown" ng-show="ongo.shareJrny.backgroundClick">
                 <ul>
-                  <li><a href="" class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>
-                  <li><a href="" class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>
-                  <li><a href="" class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
-                  <li><a href="" class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a></li>
-                  <li><a href="" class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
+                  <li><a ng-href="https://www.facebook.com/sharer/sharer.php?u={{journey.sharingUrl}}/&title=TraveLibro" target="_blank" class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>
+                  <li><a ng-href="https://twitter.com/intent/tweet?url={{journey.sharingUrl}}/&title=TraveLibro" target="_blank" class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>
+                  <li><a ng-href="https://plus.google.com/share?url=={{journey.sharingUrl}}/&title=TraveLibro" target="_blank" class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
+                  <li><a ng-href="http://pinterest.com/pin/create/button/?url={{journey.sharingUrl}}" target="_blank" class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a></li>
+                  <li><a ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{journey.sharingUrl}}" target="_blank" class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
                   <li><a href="" class="mail-icon"><i class="fa fa-envelope-square fa-2x"></i></a></li>
                 </ul>
               </div>
