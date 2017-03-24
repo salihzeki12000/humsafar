@@ -254,7 +254,7 @@
                                 </div>
                               </div>
                               <div class="text-right">
-                                <div class="journey-cost">
+                                <div class="journey-cost" ng-if="activity.currency!='' && activity.cost!='' && activity.currency!='0'">
                                   <span>{{activity.currency}}</span>
                                   <span>{{activity.cost | number}}</span>
                                 </div>
@@ -285,12 +285,12 @@
                           <div class="inline-block v-mid" ng-if="!(activity.type=='editor')">
                             <span class="pointer mr5"><img src="img/comments.png" alt="" height="19" ng-click="getCommentsData(activity)"></span>
                             <!-- <span class="pointer mr5"><img src="img/reviews.png" alt="" height="19" ng-if="activity.type =='ended-journey' || activity.type =='detail-itinerary' || activity.type =='quick-itinerary'"></span> -->
-                            <span class="pointer mr5"><img src="img/share.png" alt="" height="19"></span>
+                            <span class="pointer mr5" ng-click="sharePost(activity.sharingUrl)"><img src="img/share.png" alt="" height="19"></span>
                           </div>
-                          <div class="inline-block v-mid" ng-if="activity.type=='editor'">
+                          <div class="inline-block v-mid" ng-if="activity.type=='editor'" >
                             <span class="pointer mr5"><img src="img/comments-white.png" alt="" height="19"></span>
                             <span class="pointer mr5"><img src="img/reviews-white.png" alt="" height="19"></span>
-                            <span class="pointer mr5"><img src="img/share-white.png" alt="" height="19"></span>
+                            <span class="pointer mr5" ng-click="sharePost(activity.sharingUrl)"><img src="img/share-white.png" alt="" height="19"></span>
                           </div>
                         </div>
                         <!--<ul>
@@ -489,7 +489,7 @@
                             </a>
                           </li> -->
                           <li>
-                            <a href="">
+                            <a ng-click="sharePost(activity.sharingUrl)">
                               <img src="img/share.png" alt="" height="18" class="if-blue">
                               <img src="img/share-white.png" alt="" height="18" class="if-white">
                             </a>

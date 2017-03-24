@@ -248,7 +248,7 @@
                     <div class="inline-block v-mid" ng-if="!(post.type=='editor')">
                       <span class="pointer mr5"><img src="img/comments.png" alt="" height="19" ng-click="getCommentsData(post)"></span>
                       <span class="pointer mr5"><img src="img/reviews.png" alt="" height="19" ng-if="post.type =='ended-journey' || post.type =='detail-itinerary' || post.type =='quick-itinerary'"></span>
-                      <span class="pointer mr5"><img src="img/share.png" alt="" height="19"></span>
+                      <span class="pointer mr5" ng-click="sharePost(post.sharingUrl)"><img src="img/share.png" alt="" height="19"></span>
                     </div>
                     <div class="inline-block v-mid" ng-if="post.type=='editor'">
                       <span class="pointer mr5"><img src="img/comments-white.png" alt="" height="19"></span>
