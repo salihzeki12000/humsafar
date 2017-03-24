@@ -9673,6 +9673,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
 
+    // sharing local life modal
+    var shareModal = "";
+    $scope.sharePost = function (url) {
+      $scope.shareUrl = url;
+      console.log($scope.shareUrl, 'share ka url');
+      shareModal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/sharing.html",
+        scope: $scope
+      });
+    }
+    // sharing local life modal end
+
+
   })
 
   .controller('UserDetailItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, LikesAndComments, $timeout, $uibModal, $stateParams) {
@@ -9692,6 +9706,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     //Integration starts here
+
+    // sharing local life modal
+    var shareModal = "";
+    $scope.sharePost = function (url) {
+      $scope.shareUrl = url;
+      console.log($scope.shareUrl, 'share ka url');
+      shareModal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/sharing.html",
+        scope: $scope
+      });
+    }
+    // sharing local life modal end
+
 
     $scope.userData = $.jStorage.get("profile");
 
@@ -14676,7 +14704,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
   })
 
-  .controller('commentLikeSectionCtrl', function ($scope, $timeout, LikesAndComments) {
+  .controller('commentLikeSectionCtrl', function ($scope, $timeout, $uibModal, LikesAndComments) {
     $scope.index = -1;
     $scope.likePost = function (uniqueId, _id) {
       console.log($scope.post.likeDone + "this call is from directive");
@@ -14769,4 +14797,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     // delete comment end
+
+    // sharing local life modal
+    var shareModal = "";
+    $scope.sharePost = function (url) {
+      $scope.shareUrl = url;
+      console.log($scope.shareUrl, 'share ka url');
+      shareModal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/sharing.html",
+        scope: $scope
+      });
+    }
+    // sharing local life modal end
+
   });

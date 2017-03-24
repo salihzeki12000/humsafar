@@ -46,32 +46,32 @@ var navigationservice = angular.module('navigationservice', [])
         name: "Flights",
         classis: "active",
         link: "http://flights.travelibro.com/en-GB/flights/#/result?originplace=&destinationplace=",
-        target:"_blank"
+        target: "_blank"
       }, {
         name: "Hotels",
         classis: "active",
         link: "http://travelibro.net/bookings/hotels",
-        target:"_self"
+        target: "_self"
       }, {
         name: "Vacation Rentals",
         classis: "active",
         link: "http://travelibro.net/bookings/vacation-rentals",
-        target:"_self"
+        target: "_self"
       }, {
         name: "Homestays",
         classis: "active",
         link: "http://travelibro.net/bookings/home-stays",
-        target:"_self"
+        target: "_self"
       }, {
         name: "Car Rentals",
         classis: "active",
         link: "http://flights.travelibro.com/en-GB/carhire/#/result?originplace=&destinationplace=",
-        target:"_blank"
+        target: "_blank"
       }, {
         name: "Tours & Excursions",
         classis: "active",
         link: "http://travelibro.net/bookings/tours-and-excursions",
-        target:"_self"
+        target: "_self"
       }]
     }, {
       name: "Blogs",
@@ -124,7 +124,7 @@ var navigationservice = angular.module('navigationservice', [])
         return TravelibroService.http({
           url: adminURL + "/user/profile",
           method: "POST"
-        }).success(callback).error(errCallback);
+        }, true).success(callback).error(errCallback);
       },
       getProfile: function (slug, callback, errCallback) {
         console.log(slug);
@@ -134,7 +134,7 @@ var navigationservice = angular.module('navigationservice', [])
             'urlSlug': slug
           },
           method: "POST"
-        }).success(callback).error(errCallback);
+        }, true).success(callback).error(errCallback);
       },
       getOthersProfile: function (slug, callback, errCallback) {
         TravelibroService.http({
@@ -143,7 +143,7 @@ var navigationservice = angular.module('navigationservice', [])
             'urlSlug': slug
           },
           method: "POST"
-        }).success(callback).error(errCallback);
+        }, true).success(callback).error(errCallback);
       },
       logout: function (callback, errCallback) {
         return TravelibroService.http({
@@ -178,7 +178,7 @@ var navigationservice = angular.module('navigationservice', [])
         TravelibroService.post(adminURL + "/user/editUserWeb", formData).success(callback).error(errorCallback);
       },
       travelCount: function (formData, callback, errorCallback) {
-        TravelibroService.post(adminURL + "/user/getOneDataWeb", formData).success(callback).error(errorCallback);
+        TravelibroService.post(adminURL + "/user/getOneDataWeb", formData, true).success(callback).error(errorCallback);
       },
       getBucketListWeb: function (callback, errorCallback) {
         TravelibroService.post(adminURL + "/user/getBucketListWeb").success(callback).error(errorCallback);
@@ -345,7 +345,7 @@ var navigationservice = angular.module('navigationservice', [])
         });
       },
       editUserData: function (userData, status, callback) {
-        console.log(userData,'userData', status, 'status');
+        console.log(userData, 'userData', status, 'status');
         // console.log(userData, status);
         var formData = _.cloneDeep(userData);
         var object = {};

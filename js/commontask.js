@@ -218,7 +218,7 @@ var commontask = angular.module('commontask', [])
           url: adminURL + url,
           method: "POST",
           data: obj
-        }).success(function (data) {
+        }, true).success(function (data) {
           console.log(data);
         }).error(function (data) {
           console.log(data);
@@ -355,14 +355,14 @@ var commontask = angular.module('commontask', [])
             url: adminURL + "/user/followUserWeb",
             method: "POST",
             data: formData
-          }).success(callback);
+          }, true).success(callback);
         } else if (obj.following == 1) {
           console.log("requested to unfollow");
           TravelibroService.http({
             url: adminURL + "/user/unFollowUserWeb",
             method: "POST",
             data: formData
-          }).success(callback);
+          }, true).success(callback);
         }
       },
       commentDelete: function (commentId, commentType, callback) {
