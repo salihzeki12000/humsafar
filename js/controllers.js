@@ -8365,11 +8365,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // select detail itinerary type
     $scope.selectItinerary = function (val) {
       console.log(val);
-      atleastOne = _.filter($scope.dItineraryType, ['class', "active-itinerary"]);
+      atleastOne = _.filter($scope.dItineraryType, ['activeClass', "active-itinerary"]);
       length = atleastOne.length;
       console.log(length);
-      if (length == 1) {
-        $scope.dItineraryTypey[val].class = "active-itinerary"
+      if (length === 1) {
+        $scope.dItineraryType[val].activeClass = "active-itinerary"
       } else {
         if ($scope.dItineraryType[val].activeClass == "active-itinerary") {
           $scope.dItineraryType[val].activeClass = "";

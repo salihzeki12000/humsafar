@@ -111,7 +111,7 @@
               <!-- itinerary type -->
               <!--ng-mouseover="selectItinerary($index)"-->
               <div class="fill-itinerary-type">
-                <h4 class="detail-itinerary-type">Itineraries Type</h4>
+                <h4 class="detail-itinerary-type">Itineraries Type</h4>{{dItineraryType}}
                 <div class="select-itinerary-type" ng-repeat="itinerary in dItineraryType">
                   <figure class="pointer" ng-click="selectItinerary($index)">
                     <div class="itinerary-iconholder {{itinerary.activeClass}}">
@@ -149,7 +149,7 @@
                                 </li>
                               </ul>
                             </div>
-                            
+
                             <!--<span ng-show="detailItinerary.country.$touched && detailItinerary.country.$invalid" class="help-inline">The Country is required.</span>-->
                             <span ng-show="detailItinerary.$submitted || detailItinerary.country{{$index}}.$touched">
                                 <span ng-show="detailItinerary.country{{$index}}.$error.required" class="help-inline">The Country is required.</span>
@@ -192,13 +192,14 @@
                             <div class="itinerary-duration">
                               <label for="Duration">Days</label>
                               <div class="itinerary-inputholder">
-                                <input type="text" class="form-control text-center" id="Duration" ng-model="editCountry.duration" name="duration{{$index}}" ng-required="true">
+                                <input type="text" class="form-control text-center" id="Duration" ng-model="editCountry.duration" name="duration{{$index}}"
+                                  ng-required="true">
                                 <!--<span>{{(city.to | dateDifference:city.from)-1}}</span>-->
                               </div>
                             </div>
-                          <span ng-show="detailItinerary.$submitted || detailItinerary.from{{$index}}.$touched || detailItinerary.to{{$index}}.$touched || detailItinerary.duration{{$index}}.$touched">
+                            <span ng-show="detailItinerary.$submitted || detailItinerary.from{{$index}}.$touched || detailItinerary.to{{$index}}.$touched || detailItinerary.duration{{$index}}.$touched">
                             <span ng-show="detailItinerary.from{{$index}}.$error.required || detailItinerary.to{{$index}}.$error.required || detailItinerary.duration{{$index}}.$error.required" class="help-inline">The From Month, To Month and Days are required.</span>
-                          </span>
+                            </span>
                             <!--<span ng-show="detailItinerary.from.$touched && detailItinerary.from.$invalid || detailItinerary.to.$touched && detailItinerary.to.$invalid || detailItinerary.duration.$touched && detailItinerary.duration.$invalid"
                               class="help-inline">The From Month, To Month and Days are required.</span>-->
                           </div>
@@ -215,8 +216,8 @@
                           <div class="itinerary-inputholder input-country-visited">
                             <input type="text" class="form-control" ng-model="editCity.name" ng-change="searchCity(editCountry.country,editCity.name,editCountry.cityVisited);showCity[countryPanel][cityPanel]=true"
                               placeholder="City Visited" name="city{{$parent.$index}}{{$index}}" ng-required="true">
-                              </input>
-                              <span class="itinerary-dropdown-icon">
+                            </input>
+                            <span class="itinerary-dropdown-icon">
                                 <i class="fa fa-chevron-down"></i>
                               </span>
                             <div class="dropdown-city" ng-show="showCity[countryPanel][cityPanel]">
@@ -230,17 +231,17 @@
                               </span>
                             </span>
                           </div>
-                            </div>
+                        </div>
                       </div>
-                          <!--<span ng-show="detailItinerary.city.$touched && detailItinerary.city.$invalid" class="help-inline">The City is required.</span>-->
-                          <!--<ui-select ng-model="editCountry.cityVisited[cityPanel]" theme="bootstrap" ng-click="updateCitiesArr($select.selected._id)">
+                      <!--<span ng-show="detailItinerary.city.$touched && detailItinerary.city.$invalid" class="help-inline">The City is required.</span>-->
+                      <!--<ui-select ng-model="editCountry.cityVisited[cityPanel]" theme="bootstrap" ng-click="updateCitiesArr($select.selected._id)">
                             <ui-select-match placeholder="Country Visited ">{{$select.selected.name}}</ui-select-match>
                             <ui-select-choices repeat="{'name':citi.name,placeId:citi.placeId} as citi in cities" refresh="searchCity(editCountry.country,$select.search)"
                               refresh-delay="0">
                               <span ng-bind="citi.name"></span>
                             </ui-select-choices>
                           </ui-select>-->
-                          <!-- <i class="avenir-roman color-light-grey">Add other cities visited in this country on this trip</i> -->
+                      <!-- <i class="avenir-roman color-light-grey">Add other cities visited in this country on this trip</i> -->
                       <!--<div class="col-md-6">
                         <div class="itinerary-country-detail">
                           <div class="itinerary-from itinerary-month">
@@ -287,17 +288,19 @@
                             <div class="itinerary-to itinerary-year" ng-class="{'form-invalid': detailItinerary.cityTo.$invalid && detailItinerary.cityTo.$touched}">
                               <label for="to">To</label>
                               <div class="itinerary-inputholder">
-                                <input type="number" class="form-control text-center"  ng-model="editCity.to" min=1 placeholder="Day" name="to{{$parent.$index}}{{$index}}" ng-required="true">
+                                <input type="number" class="form-control text-center" ng-model="editCity.to" min=1 placeholder="Day" name="to{{$parent.$index}}{{$index}}"
+                                  ng-required="true">
                               </div>
-                            </div> 
+                            </div>
                           </div>
-                            <span ng-show="detailItinerary.$submitted || detailItinerary.to{{$parent.$index}}{{$index}}.$touched || detailItinerary.from{{$parent.$index}}{{$index}}.$touched" class="help-inline">
+                          <span ng-show="detailItinerary.$submitted || detailItinerary.to{{$parent.$index}}{{$index}}.$touched || detailItinerary.from{{$parent.$index}}{{$index}}.$touched"
+                            class="help-inline">
                               <span ng-show="detailItinerary.to{{$parent.$index}}{{$index}}.$error.required || detailItinerary.from{{$parent.$index}}{{$index}}.$error.required" >
                                 The From Day &amp; To Day is required.
                               </span>
                           </span>
                         </div>
-                        </div>
+                      </div>
                       <span class="close-city-x" ng-click="removeCity(countryPanel,cityPanel)"><i class="fa fa-times" ng-if="cityPanel>0"></i></span>
                     </div>
                     <div class="row">
@@ -556,7 +559,7 @@
                       <div class="select-currency-holder">
                         <div class="currency-holder">
                           <div class="itinerary-inputholder relate" ng-class="{'form-invalid': detailItinerary.currency.$invalid && detailItinerary.currency.$touched}">
-                            <input type="text" placeholder="Select Currency" ng-model="dItinerary.currency" name="currency"  ng-change="currency.showCurrency=true"
+                            <input type="text" placeholder="Select Currency" ng-model="dItinerary.currency" name="currency" ng-change="currency.showCurrency=true"
                               ng-click="currency.showCurrency=!currency.showCurrency">
                             <span class="itinerary-dropdown-icon">
                           <i class="fa fa-chevron-down"></i>
@@ -574,16 +577,15 @@
                           <div class="itinerary-inputholder" ng-class="{'form-invalid': detailItinerary.cost.$invalid && detailItinerary.cost.$touched}">
                             <!--<input type="number" class="text-center" ng-model="dItinerary.cost">-->
                             <input id="id" type="number" ng-model="dItinerary.cost" placeholder="000" name="cost">
-                            <label
-                              for="id">{{dItinerary.cost | number}}</label>
+                            <label for="id">{{dItinerary.cost | number}}</label>
                           </div>
                         </div>
-                            <!--<span ng-show="detailItinerary.$submitted || detailItinerary.currency.$touched || detailItinerary.cost.$touched">
+                        <!--<span ng-show="detailItinerary.$submitted || detailItinerary.currency.$touched || detailItinerary.cost.$touched">
                                 <span ng-show="detailItinerary.currency.$error.required || detailItinerary.cost.$error.required" class="help-inline">The Currency and Budget is required.</span>
                             </span>-->
+                      </div>
                     </div>
                   </div>
-                </div>
                   <div class="pull-right">
                     <div class="save-publish-detail">
                       <!--<button class="btn btn-pink btn-more mr5" ng-click="uploadDetailedItinerary(false)" ng-disabled="detailItinerary.$invalid">Save</button>-->
