@@ -1342,7 +1342,7 @@ a.full-screen {
     right: 35%;
     @include transition (all ease 300ms);
     &:hover{
-      @include opacity(0.7);
+      @include opacity(0.9);
     }
 }
 // MyLife Journey
