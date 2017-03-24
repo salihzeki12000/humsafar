@@ -703,7 +703,16 @@
   .sidemenu.mobile-menu .nav-list {
     padding-top: 5px;
   }
-
+.search {
+    width: 100%;
+    padding: 6px 0px;
+    font-size: 8px;
+    margin: 2px 0px;
+     input {
+    padding: 6px 10px;
+    font-size: 8px;
+    }
+}
   header {
     padding: 4px 0 0;
   }
@@ -923,8 +932,8 @@
   }
 
   .custom-search {
-    padding: 65px 0 0;
-
+    padding: 45px 0 0;
+    height: 110px;
     .input-group-addon {
       padding: 3px 0;
     }
@@ -1788,6 +1797,7 @@ img {
     @include transition (all ease 300ms);
     &.close-download{
       @include transform (translateY(100%));
+      display: none;
     }
     a {
       color: #fff;
@@ -1945,6 +1955,9 @@ img {
 }
 .addfixed2 .destin-fixednav {
     top: 55px;
+}
+.blog-itineraries-main {
+    padding-top: 20px;
 }
 }
 // media query for 767px to 480px end

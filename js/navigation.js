@@ -50,15 +50,18 @@ var navigationservice = angular.module('navigationservice', [])
       }, {
         name: "Hotels",
         classis: "active",
-        link: "http://travelibro.net/bookings/hotels"
+        link: "http://travelibro.net/bookings/hotels",
+        target:"_self"
       }, {
         name: "Vacation Rentals",
         classis: "active",
-        link: "http://travelibro.net/bookings/vacation-rentals"
+        link: "http://travelibro.net/bookings/vacation-rentals",
+        target:"_self"
       }, {
         name: "Homestays",
         classis: "active",
-        link: "http://travelibro.net/bookings/home-stays"
+        link: "http://travelibro.net/bookings/home-stays",
+        target:"_self"
       }, {
         name: "Car Rentals",
         classis: "active",
@@ -67,7 +70,8 @@ var navigationservice = angular.module('navigationservice', [])
       }, {
         name: "Tours & Excursions",
         classis: "active",
-        link: "http://travelibro.net/bookings/tours-and-excursions"
+        link: "http://travelibro.net/bookings/tours-and-excursions",
+        target:"_self"
       }]
     }, {
       name: "Blogs",
