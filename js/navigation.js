@@ -1,6 +1,6 @@
 var adminURL = "";
 var allowAccess = "";
-adminURL = "http://travelibro.wohlig.com/api";
+adminURL = "https://travelibro.net/api";
 
 var imgurl = adminURL + "/upload/";
 var imgpath = imgurl + "readFile";
