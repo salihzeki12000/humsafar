@@ -1797,7 +1797,7 @@ img {
     @include transition (all ease 300ms);
     &.close-download{
       @include transform (translateY(100%));
-      display: none;
+      display: none !important;
     }
     a {
       color: #fff;
@@ -1954,6 +1954,11 @@ img {
 }
 .blog-itineraries-main {
     padding-top: 20px;
+}
+  .fp-section,
+.fp-slide,
+.fp-tableCell{
+    height: auto !important;
 }
 }
 // media query for 767px to 480px end
