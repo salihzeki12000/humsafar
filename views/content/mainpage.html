@@ -192,9 +192,12 @@
           <div class="upload-profile" ng-show="goNext==5">
             <div class="text-center">
               <h3 class="color-blue avenir-black">Upload Profile Photo</h3>
-              <div class="cropArea" ng-show="showImage.val || closeCam">
+              <div class="current-profilepicture" ng-show="((profile.profilePicture) && (showImage.val==false))">
+                <img ng-src="{{profile.profilePicture|uploadpath}}" alt="" class="img-responsive">
+              </div>
+              <div class="cropArea" ng-show="showImage.val && profile.profilePicture">
                 <div class="text-right">
-                  <span class="color-dark-blue pointer" ng-click="showImage.val=false;">Cancel</span>
+                  <span class="color-dark-blue pointer" ng-click="removePhoto()">Cancel</span>
                 </div>
                 <img-crop image="myImage" result-image="uploadme.src" /></img-crop>
               </div>
@@ -202,8 +205,9 @@
                 <img ng-src="{{uploadme.src}}" />
               </div>
               <div class="upload-section" ng-hide="showImage.val">
-                <img src="img/upload-transparent.png" class="m-center img-responsive doneLoading">
-                <p class="text-center color-grey avenir-roman">Upload a profile photo here</p>
+
+                <p class="text-center color-grey avenir-roman" ng-show="((profile.profilePicture) && (showImage.val==false))"> - or -</p>
+                <img src="img/upload-transparent.png" class="m-center img-responsive doneLoading" ng-show="!((profile.profilePicture) && (showImage.val==false))">
                 <div class="upload-btn">
                   <div class="relate inline-block mr10 select-photo">
                     <button class="btn btn-dark-blue pointer avenir-roman">Upload photo</button>
@@ -236,7 +240,7 @@
               <div class="button-panel clearfix">
                 <button class="btn btn-outline-blue btn-more pull-left" ng-click="goNext=4">Previous</button>
                 <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
-                <button class="btn btn-outline-blue btn-more pull-right" ng-click="uploadFile(uploadme.src,imageFileName,userData)">Done</button>
+                <button class="btn btn-outline-blue btn-more pull-right" ng-click="uploadFile(uploadme.src,userData,showImage.val)">Done</button>
               </div>
             </div>
           </div>

@@ -54,7 +54,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               swiper.slideTo(nextIndex - 1);
               //playing the video
               // $('video').get(nextIndex - 1).load();
-              for (i = 1; i < 4; i++) {
+
+              if($(window).width()>=767){
+                for (i = 1; i < 4; i++) {
                 if (i == nextIndex - 1) {
                   // console.log(index);
                   $('video').get(nextIndex - 1).load();
@@ -64,6 +66,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   $('video').get(i).pause();
                 }
               }
+              }
+              
             }, 300);
           }
         });
@@ -207,6 +211,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           }, function (err) {
             console.log(err);
           });
+        }else{
+          console.log(data);
         }
       }
     };
@@ -258,7 +264,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           });
         } else {
           // console.log(data);
-          $scope.showError=true;
+          $scope.showError = true;
           //things to do when user email or password is wrong
         }
       });
@@ -357,9 +363,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
     }
-
+    $scope.resend=false;
     $scope.editUserData = function (obj) {
-      NavigationService.sendOtpToReset(obj.email);
+      NavigationService.sendOtpToReset(obj.email,function(data){
+        console.log(data);
+        if(data.data.comment){
+          console.log("Mail sent");
+          $scope.resend=true;
+        }
+      });
     };
   })
 
@@ -401,27 +413,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       name: "Hotels",
       classis: "active",
-      link: "http://travelibro.net/bookings/hotels",
+      link: "https://travelibro.com/bookings/hotels",
       target: "_self"
     }, {
       name: "Vacation Rentals",
       classis: "active",
-      link: "http://travelibro.net/bookings/vacation-rentals",
+      link: "https://travelibro.com/bookings/vacation-rentals",
       target: "_self"
     }, {
       name: "Homestays",
       classis: "active",
-      link: "http://travelibro.net/bookings/home-stays",
+      link: "https://travelibro.com/bookings/home-stays",
       target: "_self"
     }, {
       name: "Car Rentals",
       classis: "active",
-      link: "http://flights.travelibro.com/en-GB/carhire/#/result?originplace=&destinationplace=",
+      link: "https://flights.travelibro.com/en-GB/carhire/#/result?originplace=&destinationplace=",
       target: "_blank"
     }, {
       name: "Tours & Excursions",
       classis: "active",
-      link: "http://travelibro.net/bookings/tours-and-excursions",
+      link: "https://travelibro.com/bookings/tours-and-excursions",
       target: "_self"
     }]
   })
@@ -440,7 +452,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
   })
 
-  .controller('MainPageCtrl', ['$scope', 'TemplateService', 'NavigationService', 'cfpLoadingBar', '$timeout', '$http', '$state', 'FileUploadService', 'FileUploader', 'DataUriToBlob', '$window', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $http, $state, FileUploadService, FileUploader, DataUriToBlob, $window) {
+  .controller('MainPageCtrl', ['$scope', 'TemplateService', 'NavigationService', 'cfpLoadingBar', '$timeout', '$http', '$state', 'FileUploadService', 'FileUploader', 'DataUriToBlob', '$window', '$filter', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $http, $state, FileUploadService, FileUploader, DataUriToBlob, $window, $filter) {
     //Used to name the .html file
     // console.log("Testing Consoles");
     $scope.form = {};
@@ -451,6 +463,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
     $scope.userData = {};
     $scope.profile = $.jStorage.get("profile");
+    $scope.myImage = '';
+    if ($scope.profile.profilePicture) {
+      NavigationService.getImageFromServer($scope.profile.profilePicture, function (data) {
+        // $scope.myImage=data;
+        $scope.myImage = $window.URL.createObjectURL(new Blob([data], {
+          type: 'image/png'
+        }));
+        console.log($scope.myImage);
+      });
+    }
     $scope.userData.gender = $scope.profile.gender;
     $scope.image = null;
     $scope.imageFileName = '';
@@ -527,32 +549,52 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     //End-Of get all the cities from database
 
-    $scope.uploadFile = function (data, fileName, userData) {
+
+    $timeout(function () {
+      document.getElementById('fileInput1').onchange = function () {
+        alert('Selected file: ' + this.value);
+      }
+    });
+    $scope.fileName=null;
+    $scope.uploadFile = function (data, userData,ppSelected) {
       // Base64 to Blob
-      // cfpLoadingBar.start();
-      console.log(fileName, userData);
-      var imageBase64 = data;
-      console.log(imageBase64);
-      var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
-      console.log(blob);
-      // Blob to File
-      var file = new File([blob], 'photo-' + "1" + '.png');
-      console.log(file);
-      // File to FormData
-      var formData = new FormData();
-      console.log(formData, "before appending");
-      formData.append('file', file, file.name);
-      console.log(formData, "after appending");
-      NavigationService.uploadFile(formData, function (response) {
-        if (response.value) {
-          $scope.userData.profilePicture = response.data[0];
-          console.log($scope.userData);
+      if (ppSelected) {
+        console.log(data, userData);
+        var imageBase64 = data;
+        console.log(imageBase64);
+        var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
+        console.log(blob);
+        // Blob to File
+        var file = new File([blob], $scope.fileName + '.png');
+        console.log(file);
+        // File to FormData
+        var formData = new FormData();
+        console.log(formData, "before appending");
+        formData.append('file', file, file.name);
+        console.log(formData, "after appending");
+        alert("mila");
+        NavigationService.uploadFile(formData, function (response) {
+          if (response.value) {
+            $scope.userData.profilePicture = response.data[0];
+            console.log($scope.userData);
+          } else {
+            toastr.warning('Error Uploading Image!');
+          }
           $scope.saveUserData($scope.userData);
-        } else {
-          toastr.warning('Error Uploading Image!');
-        }
-        // cfpLoadingBar.complete();
-      });
+        });
+      } else {
+        alert("nai mila");
+         $scope.userData=_.omit($scope.userData, ['profilePicture']);
+         $scope.saveUserData($scope.userData);
+      }
+    };
+
+    $scope.removePhoto=function(){
+      $scope.userData=_.omit($scope.userData, ['profilePicture']);
+      $scope.fileName=null;
+      console.log($scope.userData);
+
+      $scope.showImage.val=false;
     };
 
 
@@ -579,7 +621,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
 
-    $scope.myImage = '';
+    // $scope.myImage = '';
+
     // $scope.myCroppedImage = '';
     $scope.showImage = {
       "val": false
@@ -588,8 +631,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var got1 = setInterval(function () {
       if (document.getElementById('fileInput1')) {
         document.getElementById('fileInput1').onchange = function (evt) {
+          // alert("change hua");
           var file = evt.currentTarget.files[0];
           console.log(file);
+          $scope.fileName = file.name;
+          console.log($scope.fileName);
           var formData = new FormData();
           formData.append('file', file, "file.jpg");
           var reader = new FileReader();
@@ -598,6 +644,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $scope.showImage.val = true;
               console.log($scope.showImage.val);
               $scope.myImage = evt.target.result;
+              // alert($scope.myImage);
             });
           };
           reader.readAsDataURL(file);
@@ -634,7 +681,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     //angular file upload ends here
-
     // $scope.getImage = function(){
     //   if() {
     //     $scope.showImage = true;
@@ -2468,6 +2514,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.destinationList = [];
+     console.log($scope.searchLoader,'search loader');
+    setInterval(function() {
+      $scope.searchLoader = TemplateService.searchLoader;
+    },3000);
     $scope.viewListByKey = "A";
     $scope.countryDestList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     $scope.i = 0;
@@ -2521,12 +2571,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.countryView = function (url, isCity) {
       if (isCity === false) {
         $state.go("destinationcountry", {
-          name: "featured",
+          name: "features-cities",
           url: url
         });
       } else {
         $state.go("destinationcity", {
-          name: "mustdo",
+          name: "must-dos",
           url: url
         })
       }
@@ -2599,12 +2649,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.countryView = function (url, isCity) {
       if (isCity === false) {
         $state.go("destinationcountry", {
-          name: "featured",
+          name: "features-cities",
           url: url
         });
       } else {
         $state.go("destinationcity", {
-          name: "mustdo",
+          name: "must-dos",
           url: url
         })
       }
@@ -2770,16 +2820,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.viewTab = 1;
     $scope.destinationTabView = function (destinationType) {
       switch (destinationType) {
-        case "featured":
-          $scope.countryoptions.active = "featured";
+        case "features-cities":
+          $scope.countryoptions.active = "features-cities";
           $scope.destination.innerView = alldestination[0];
           // $scope.countryDestData = [];
           $scope.getCountryInfo("featuredCities", $scope.urlDestinationCountry);
           $scope.countryDestinationView = true;
           $scope.ntMustdo = "ntMustdo";
           break;
-        case "mustdo":
-          $scope.countryoptions.active = "mustdo";
+        case "must-dos":
+          $scope.countryoptions.active = "must-dos";
           $scope.destination.innerView = alldestination[1];
           // $scope.countryDestData = [];
           $scope.getCountryInfo("mustDo", $scope.urlDestinationCountry);
@@ -2794,15 +2844,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.countryDestinationView = false;
           $scope.ntMustdo = "";
           break;
-        case "booking":
-          $scope.countryoptions.active = "booking";
+        case "bookings":
+          $scope.countryoptions.active = "bookings";
           // $scope.countryDestData = [];
           $scope.destination.innerView = alldestination[3];
           $scope.countryDestinationView = false;
           $scope.ntMustdo = "";
           break;
-        case "visit":
-          $scope.countryoptions.active = "visit";
+        case "best-time-to-visit":
+          $scope.countryoptions.active = "best-time-to-visit";
           // $scope.countryDestData = [];
           $scope.destination.innerView = alldestination[4];
           $scope.countryDestinationView = false;
@@ -3237,12 +3287,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.countryView = function (url, isCity) {
       if (isCity === false) {
         $state.go("destinationcountry", {
-          name: "featured",
+          name: "features-cities",
           url: url
         });
       } else {
         $state.go("destinationcity", {
-          name: "mustdo",
+          name: "must-dos",
           url: url
         })
       }
@@ -3818,8 +3868,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       case "mustdo":
         $scope.destination.innerView = alldestination[0];
         $scope.cityDestinationView = true;
-        $scope.getCityInfo("mustDo", $scope.urlDestinationCity);
-        $scope.cityoptions.active = "mustdo";
+        $scope.getCityInfo("must-dos", $scope.urlDestinationCity);
+        $scope.cityoptions.active = "must-dos";
         $scope.ntMustdo = "ntMustdo";
         break;
       case "hotels":
@@ -3843,18 +3893,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.getCityInfo("itinerary", $scope.urlDestinationCity);
         $scope.ntMustdo = "";
         break;
-      case "booking":
+      case "bookings":
         $scope.destination.innerView = alldestination[4];
         $scope.cityDestinationView = false;
-        $scope.cityoptions.active = "booking";
+        $scope.cityoptions.active = "bookings";
         $scope.getBooking($scope.bookingCityName, $scope.bookingCountryName);
         $scope.viewBookingLoader = true;
         $scope.ntMustdo = "";
         break;
-      case "visit":
+      case "best-time-to-visit":
         $scope.destination.innerView = alldestination[5];
         $scope.cityDestinationView = false;
-        $scope.cityoptions.active = "visit";
+        $scope.cityoptions.active = "best-time-to-visit";
         $scope.ntMustdo = "";
         break;
       default:
@@ -3863,14 +3913,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     $scope.getTab = function (view) {
       $scope.destination.innerView = alldestination[view];
-      var url = "featured";
+      var url = "features-cities";
       var active = "";
       console.log(view);
       switch (view) {
         case 0:
-          url = "mustdo";
+          url = "must-dos";
           $scope.cityDestinationView = true;
-          $scope.cityoptions.active = "mustdo";
+          $scope.cityoptions.active = "must-dos";
           $scope.getCityInfo("mustDo", $scope.urlDestinationCity);
           $scope.ntMustdo = "ntMustdo";
           break;
@@ -3903,17 +3953,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.ntMustdo = "";
           break;
         case 4:
-          url = "booking";
+          url = "bookings";
           $scope.cityDestinationView = false;
-          $scope.cityoptions.active = "booking";
+          $scope.cityoptions.active = "bookings";
           $scope.viewBookingLoader = true;
           $scope.getBooking($scope.bookingCityName, $scope.bookingCountryName);
           $scope.ntMustdo = "";
           break;
         case 5:
-          url = "visit";
+          url = "best-time-to-visit";
           $scope.cityDestinationView = false;
-          $scope.cityoptions.active = "visit";
+          $scope.cityoptions.active = "best-time-to-visit";
           $scope.ntMustdo = "";
           break;
       }
@@ -7006,6 +7056,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.showLikeCommentCard = true;
+      setInterval(function(){
+      $scope.paginationLoader = TemplateService.paginationLoader;
+      console.log($scope.paginationLoader,'value');
+    },3000);
 
     $scope.openThankYouModal = function () {
       $uibModal.open({
@@ -7449,11 +7503,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.userData = $.jStorage.get("profile");
     $scope.activeMenu = $stateParams.active;
+     setInterval(function(){
+      $scope.searchLoader = TemplateService.searchLoader;
+    }, 3000);
 
     $scope.allowAccess = $.jStorage.get("allowAccess");
     $scope.viewDropdown = {
       'showDropdown': false
     }
+
+    // ISMINE FUNCTION
+    if ($.jStorage.get("isLoggedIn")) {
+      $scope.isLoggedIn = true;
+      if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
+        $scope.isMine = true;
+      } else {
+        $scope.isMine = false;
+      }
+    } else {
+      $scope.isLoggedIn = false;
+      $scope.isMine = false;
+    }
+    // ISMINE FUNCTION END
 
     if ($.jStorage.get("activeUrlSlug") != "" && $.jStorage.get("activeUrlSlug") != null) {
       $scope.activeUrlSlug = $.jStorage.get("activeUrlSlug");
@@ -9213,6 +9284,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
     //get quick-itinerary details ends
 
+    // ISMINE FUNCTION
+    if ($.jStorage.get("isLoggedIn")) {
+      $scope.isLoggedIn = true;
+      if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
+        $scope.isMine = true;
+      } else {
+        $scope.isMine = false;
+      }
+    } else {
+      $scope.isLoggedIn = false;
+      $scope.isMine = false;
+    }
+    // ISMINE FUNCTION END
+
     //post quick-itinerary comments starts
     $scope.commentText = {};
 
@@ -9721,6 +9806,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     // sharing local life modal end
 
+    // ISMINE FUNCTION
+    if ($.jStorage.get("isLoggedIn")) {
+      $scope.isLoggedIn = true;
+      if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
+        $scope.isMine = true;
+      } else {
+        $scope.isMine = false;
+      }
+    } else {
+      $scope.isLoggedIn = false;
+      $scope.isMine = false;
+    }
+    // ISMINE FUNCTION END
 
     $scope.userData = $.jStorage.get("profile");
 
@@ -10624,6 +10722,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.search.viewData = false;
 
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+     setInterval(function(){
+      $scope.searchHeaderLoad = TemplateService.searchLoader;
+    },3000);
     // if ($.jStorage.get('accessToken') && $.jStorage.get('accessToken') != '') {
     //   $scope.userData = $.jStorage.get("profile");
     //   $scope.accessToken = $.jStorage.get("accessToken");
@@ -14097,43 +14198,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       stopCallingApiCity: false,
     };
     // search profile page
-    $scope.searchItiProfile = function(searchObj, searchedType){
+    $scope.searchItiProfile = function (searchObj, searchedType) {
       console.log(searchObj, 'what is ');
       switch (searchedType) {
         case 'travellerType':
-        if(searchObj.itineraryBy=="Admin" || searchObj.itineraryBy == "TravelAgent"){
-          $state.go('comingsoonpage',{
-            'url':'coming-soon'
-          })
-        }else {
-          $state.go('mylife',{
-            'urlSlug': searchObj.urlSlug
-          })
-        }
+          if (searchObj.itineraryBy == "Admin" || searchObj.itineraryBy == "TravelAgent") {
+            $state.go('comingsoonpage', {
+              'url': 'coming-soon'
+            })
+          } else {
+            $state.go('mylife', {
+              'urlSlug': searchObj.urlSlug
+            })
+          }
           break;
         case 'itineraryType':
-        if(searchObj.itineraryBy=="Admin" || searchObj.itineraryBy == "TravelAgent"){
-          $state.go('comingsoonpage',{
-            'url':'coming-soon'
-          })
-        }else {
-          $state.go('mylife',{
-            'urlSlug': searchObj.user.urlSlug
-          })
-        }
+          if (searchObj.itineraryBy == "Admin" || searchObj.itineraryBy == "TravelAgent") {
+            $state.go('comingsoonpage', {
+              'url': 'coming-soon'
+            })
+          } else {
+            $state.go('mylife', {
+              'urlSlug': searchObj.user.urlSlug
+            })
+          }
           break;
         default:
-        break;
+          break;
       }
     };
     // search profile page end
     // search itinerary
-    $scope.searchIti = function(itinerary){
-      if(itinerary.itineraryBy=="Admin" || itinerary.itineraryBy=="TravelAgent"){
-        $state.go('comingsoonpage',{
-          'url':'coming-soon'
+    $scope.searchIti = function (itinerary) {
+      if (itinerary.itineraryBy == "Admin" || itinerary.itineraryBy == "TravelAgent") {
+        $state.go('comingsoonpage', {
+          'url': 'coming-soon'
         })
-      }else {
+      } else {
         if (itinerary.type == 'quick-itinerary') {
           $state.go('userquickitinerary', {
             'id': itinerary.urlSlug,

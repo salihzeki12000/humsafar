@@ -175,7 +175,9 @@ var navigationservice = angular.module('navigationservice', [])
         });
       },
       saveUserData: function (formData, callback, errorCallback) {
-        TravelibroService.post(adminURL + "/user/editUserWeb", formData).success(callback).error(errorCallback);
+        var data = _.cloneDeep(formData);
+        console.log(data);
+        TravelibroService.post(adminURL + "/user/editUserWeb", data).success(callback).error(errorCallback);
       },
       travelCount: function (formData, callback, errorCallback) {
         TravelibroService.post(adminURL + "/user/getOneDataWeb", formData, true).success(callback).error(errorCallback);
@@ -433,7 +435,7 @@ var navigationservice = angular.module('navigationservice', [])
           console.log(data);
         });
       },
-      sendOtpToReset: function (email) {
+      sendOtpToReset: function (email, callback) {
         var obj = {
           "email": email
         };
@@ -441,10 +443,11 @@ var navigationservice = angular.module('navigationservice', [])
           url: adminURL + "/user/forgotPassword",
           data: obj,
           method: "POST"
-        }).success(function (data) {
-          console.log(data);
-        });
+        }).success(callback);
+      },
+      getImageFromServer: function (name, callback) {
+        $http.get(adminURL + "/upload/readFile?file=" + name).success(callback);
       }
-    };
+    }
     return returnVal;
   });
