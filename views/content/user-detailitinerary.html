@@ -1,4 +1,4 @@
-<div class="user-itinerary-page user-detailitinerary-page relate">
+<div class="user-itinerary-page user-detailitinerary-page relate mt-60">
   <div class="user-banner-holder relate" scrolldown style="background-image: url('../{{itinerary.itineraryType[0]|itineraryType}}')">
     <div class="overlay-itinerary-bg"></div>
     <div class="publish-notification-strip" hidden>
@@ -54,7 +54,7 @@
       <img src="img/mouse-scroll.png" alt="Travelibro" class="doneLoading">
       <p>Scroll Down</p>
     </div>
-    <div class="edit-publish-userdetail">
+    <div class="edit-publish-userdetail" ng-if="isMine">
       <button class="btn btn-white-outline btn-more mr5" ui-sref="detailitinerary({flag:'edit',urlSlug:itinerary.urlSlug})">Edit</button>
       <button class="btn btn-white-outline btn-more" ng-click="uploadDetailedItinerary(true)" ng-if="itinerary.status== false">Publish</button>
       <button class="btn btn-white-outline btn-more" ng-click="" ng-if="itinerary.status == true">Delete</button>
@@ -161,7 +161,7 @@
                     class="city-accordion-back">
                     <uib-accordion-heading class="relate city-coverphoto">
                       <!-- <img ng-src="{{city.city.cityCoverPhoto|uploadpath}}" alt="" class="img-responsive"> -->
-                      <div class="journey-accordion-heading color-white" style="background: url('{{city.city.cityCoverPhoto|uploadpath}}') 0 no-repeat; background-size: cover;background-attachment: fixed;">
+                      <div class="journey-accordion-heading color-white" style="background: url('{{city.city.cityDisplayPhoto|uploadpath}}') 0 no-repeat; background-size: cover;background-attachment: fixed;">
                         <a name="{{city.city._id}}" class="journey-head">
                           <div class="clearfix">
                             <p class="city-heading avenir-heavy m-clear pull-left">Day <span>{{city.from}}</span> to Day <span>{{city.to}}</span> In <span class="trip-city-name">{{city.city.name}}</span></p>

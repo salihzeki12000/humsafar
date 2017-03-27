@@ -1,6 +1,6 @@
 var adminURL = "";
 var allowAccess = "";
-adminURL = "https://travelibro.net/api";
+adminURL = "https://travelibro.wohlig.com/api";
 
 var imgurl = adminURL + "/upload/";
 var imgpath = imgurl + "readFile";
@@ -50,17 +50,17 @@ var navigationservice = angular.module('navigationservice', [])
       }, {
         name: "Hotels",
         classis: "active",
-        link: "http://travelibro.net/bookings/hotels",
+        link: "https://travelibro.com/bookings/hotels",
         target: "_self"
       }, {
         name: "Vacation Rentals",
         classis: "active",
-        link: "http://travelibro.net/bookings/vacation-rentals",
+        link: "https://travelibro.com/bookings/vacation-rentals",
         target: "_self"
       }, {
         name: "Homestays",
         classis: "active",
-        link: "http://travelibro.net/bookings/home-stays",
+        link: "https://travelibro.com/bookings/home-stays",
         target: "_self"
       }, {
         name: "Car Rentals",
@@ -70,7 +70,7 @@ var navigationservice = angular.module('navigationservice', [])
       }, {
         name: "Tours & Excursions",
         classis: "active",
-        link: "http://travelibro.net/bookings/tours-and-excursions",
+        link: "https://travelibro.com/bookings/tours-and-excursions",
         target: "_self"
       }]
     }, {
@@ -78,7 +78,7 @@ var navigationservice = angular.module('navigationservice', [])
       classis: "active",
       disabled: true,
       linkAccess: true,
-      link: "http://travelibro.net/blog",
+      link: "https://travelibro.com/blog",
     }, {
       name: "About Us",
       classis: "active",
@@ -174,7 +174,7 @@ var navigationservice = angular.module('navigationservice', [])
           console.log(data);
         });
       },
-      saveUserData: function (formData, callback, errorCallback) {
+     saveUserData: function (formData, callback, errorCallback) {
         var data = _.cloneDeep(formData);
         console.log(data);
         TravelibroService.post(adminURL + "/user/editUserWeb", data).success(callback).error(errorCallback);
@@ -189,7 +189,7 @@ var navigationservice = angular.module('navigationservice', [])
         TravelibroService.post(adminURL + "/user/updateCountriesVisitedWeb", formData).success(callback).error(errCallback);
       },
       getSearchData: function (formData, callback) {
-        TravelibroService.post(adminURL + "/country/getSearchDataWeb", formData).success(callback).error(function (data) {
+        TravelibroService.post(adminURL + "/country/getSearchDataWeb", formData, 'searchHeaderLoad').success(callback).error(function (data) {
           console.log(data);
         });
       },
@@ -239,7 +239,7 @@ var navigationservice = angular.module('navigationservice', [])
         });
       },
       getDestination: function (formData, callback) {
-        TravelibroService.post(adminURL + "/country/getDestination", formData).success(function (data) {
+        TravelibroService.post(adminURL + "/country/getDestination", formData, 'searchLoad').success(function (data) {
           data.count = formData.count;
           callback(data);
         }).error(function (data) {
@@ -435,7 +435,7 @@ var navigationservice = angular.module('navigationservice', [])
           console.log(data);
         });
       },
-      sendOtpToReset: function (email, callback) {
+  sendOtpToReset: function (email, callback) {
         var obj = {
           "email": email
         };
@@ -448,6 +448,6 @@ var navigationservice = angular.module('navigationservice', [])
       getImageFromServer: function (name, callback) {
         $http.get(adminURL + "/upload/readFile?file=" + name).success(callback);
       }
-    }
+    };
     return returnVal;
   });

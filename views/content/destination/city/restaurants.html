@@ -107,7 +107,9 @@
                   <a class="btn btn-pink avenir-roman " ng-click="getCityInfo('restaurant', urlDestinationCity)">Submit</a>
 
                   <!-- abhi iska api mai dekhna hai -->
-                  <!-- <span class="tags avenir-roman" ng-repeat="item in country">{{item}} <span>X</span></span> -->
+                  <span class="tags avenir-roman" ng-repeat="item in cityRestaurantCuisine track by $index">{{item | capitalize}} <span ng-click="hotelRestaurantFilter(item,'restaurantCuisine')">X</span></span>
+                  <span class="tags avenir-roman" ng-repeat="item in citySubTypeData track by $index">{{item | capitalize}} <span ng-click="hotelRestaurantFilter(item,'typeRestaurant','toggle-dropDown_2')">X</span></span>
+                  <span class="tags avenir-roman" ng-repeat="item in cityBudgetData track by $index">{{item | capitalize}} <span ng-click="editOption(item,'toggle-dropDown_3','drop-content_3')">X</span></span>
                 </div>
               </div>
             </div>

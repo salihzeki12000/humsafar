@@ -740,9 +740,8 @@ header {
 .fullscreen-bg {
   video {
     position: absolute;
-    min-width: 100%;
-    min-height: 100%;
-    height: auto;
+    width: 100%;
+    height: 100%;
     top: 50%;
     left: 50%;
     @include transform(translate(-50%,

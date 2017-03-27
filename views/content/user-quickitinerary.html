@@ -37,7 +37,7 @@
       <img src="img/mouse-scroll.png" alt="Travelibro" class="doneLoading">
       <p>Scroll Down</p>
     </div>
-    <div class="edit-publish-userdetail" ng-init="stats=itinerary.status?'Delete':'Publish'">
+    <div class="edit-publish-userdetail" ng-if="isMine" ng-init="stats=itinerary.status?'Delete':'Publish'">
       <button class="btn btn-white-outline btn-more mr5" ui-sref="quickitinerary({flag:'edit',urlSlug:itinerary.urlSlug})">Edit</button>
       <button class="btn btn-white-outline btn-more" ng-click="uploadQuickItinerary(true)">{{stats}}</button>
       <!--<button class="btn btn-white-outline btn-more" ng-click="" ng-if="itinerary.status == true">Delete</button>-->

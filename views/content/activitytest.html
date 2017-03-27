@@ -35,7 +35,8 @@
                       ui-sref="mylife({'urlSlug':activity.user.urlSlug})">{{activity.user.name}}</h4>
                     <div class="clearfix user-more-detail">
                       <div class="pull-left">
-                        <p class="m-clear"><span>{{activity.startTime|formatDate:'date'}}</span> | <span>{{activity.startTime|formatDate:'time'}}</span></p>
+                        <p class="m-clear">
+                          <span ng-if="activity.type=='ended-journey'">{{activity.endTime|formatDate:'date'}}</span> <span ng-if="activity.type!='ended-journey'">{{activity.startTime|formatDate:'date'}}</span> | <span ng-if="activity.type=='ended-journey'">{{activity.endTime|formatDate:'time'}}</span> <span ng-if="activity.type!='ended-journey'">{{activity.startTime|formatDate:'time'}}</span></p>
                       </div>
                       <div class="pull-right" ng-if="activity.owner._id!=userData._id">
                         <!--<div class="follow-or-following pointer" ng-click="followFollowing(activity.owner)">
@@ -87,10 +88,7 @@
                       <span class="inline-block">On The Go</span>
                     </div>
                     <div class="tag-ongo-journey pointer" ng-if="activity.type =='on-the-go-journey' || activity.type=='ended-journey'"
-                    ui-sref="single-notification({
-                      'postId': activity._id,
-                      'urlSlug': activity.user.urlSlug
-                    })">
+                    ng-click="routeOngo(activity);">
                       <span class="inline-block">On The Go</span>
                     </div>
                     <div class="tag-ongo-journey" ng-if="activity.type =='local-life'" ui-sref="single-notification({
@@ -187,7 +185,7 @@
                         <h4 class="m-clear text-capitalize activity-travel-title">{{activity.name}}</h4>
                         <div class="clearfix journey-travelling-type">
                           <div class="row">
-                            <div class="col-xs-6">
+                            <div class="col-xs-7">
                               <div class="pull-left">
                                 <div class="journey-collection">
                                   <ul ng-if="activity.type!='on-the-go-journey'">
@@ -219,7 +217,7 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-5">
                               <div class="pull-right">
                                 <div class="journey-type" ng-if="activity.class != 'editor-blog'">
                                   <ul>
@@ -370,7 +368,7 @@
                               </ul>
                             </div>
                           </span>
-                          <span class="color-blue mr10 card-like avenir-heavy" ng-click="getCommentsData(activity)"><img src="img/comments.png" alt="" height="14"><b> {{activity.commentCount|filterCount}} </b> {{activity.commentCount|singularPlural:'Comments'}} </span>
+                          <span class="color-blue mr10 card-like avenir-heavy" ng-click="getCommentsData(activity)"><img src="img/comments.png" alt="" height="14"><b> {{activity.commentCount}} </b> {{activity.commentCount|singularPlural:'Comments'}} </span>
                           <!-- <span class="color-blue">
                             <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue" ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">
                             <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white" ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">
@@ -534,6 +532,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="pagination-loader" ng-if="paginationLoader">
+      <img src="img/page.gif" alt="Loading..." class="img-responsive m-center">
     </div>
     <div class="" ng-if="showLikeCommentCard">
       <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike'

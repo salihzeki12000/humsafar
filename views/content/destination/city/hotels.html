@@ -77,6 +77,9 @@
               <div class="close-all ">
                 <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
                 <a class="btn btn-pink avenir-roman " ng-click="getCityInfo('hotel',urlDestinationCity)">Submit</a>
+
+                <span class="tags avenir-roman" ng-repeat="item in citySubTypeData track by $index">{{item | capitalize}} <span ng-click="cityHotelFilter(item,'categoryType')">X</span></span>
+                <span class="tags avenir-roman" ng-repeat="item in cityBudgetData track by $index">{{item | capitalize}} <span ng-click="">X</span></span>
               </div>
             </div>
           </div>
