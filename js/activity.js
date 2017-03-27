@@ -10,7 +10,7 @@ var activity = angular.module('activity', [])
           data: {
             "pagenumber": pageNum
           }
-        }).success(function (data) {
+        }, 'paginationLoad').success(function (data) {
           var activities = data.data;
           _.each(data.data, function (activity) {
             switch (activity.type) {

@@ -214,13 +214,13 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       reloadOnSearch: false
     })
     .state('destinationcountry', {
-      url: "/destination-country/:name/:url",
+      url: "/destinations/:url/:name",
       templateUrl: "views/template.html",
       controller: 'DestinationCountryCtrl',
       reloadOnSearch: false
     })
     .state('destinationcity', {
-      url: "/destination-city/:name/:url",
+      url: "/cities/:url/:name",
       templateUrl: "views/template.html",
       controller: 'DestinationCityCtrl',
       reloadOnSearch: false
@@ -442,6 +442,23 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
   $locationProvider.html5Mode(isproduction);
 });
 
+
+firstapp.directive('loadingText', function ($document) {
+  return {
+    restrict: 'EA',
+    replace: false,
+    link: function ($scope, element, attrs) {
+      var $element = $(element);
+      dem = $element;
+      $element.typed({
+        strings: ["Capture | Inspire | Relive...", "Travel Life | Local Life...","Loading...","Almost There..."],
+        startDelay: 20,
+        typeSpeed: 100,
+        loop: true
+      });
+    }
+  }
+});
 
 // firstapp.directive('img', function ($compile, $parse) {
 //   return {
@@ -1205,6 +1222,7 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
 
 firstapp.filter('postString', function () {
   return function (checkIn) {
+    var location = checkIn.checkIn;
     var postString = "";
     var buddiesString = "";
     var buddiesCount = checkIn.buddies.length;
@@ -1217,22 +1235,22 @@ firstapp.filter('postString', function () {
     }
     var postString = "";
     if (buddiesString != "") {
-      if (checkIn.thoughts && checkIn.location) {
-        postString = checkIn.thoughts + " with " + buddiesString + " at " + checkIn.location.bold();
+      if (checkIn.thoughts && location.location) {
+        postString = checkIn.thoughts + " with " + buddiesString + " at " + location.location.bold();
       } else if (checkIn.thoughts) {
-        postString = checkIn.thoughts + " with " + buddiesString;
-      } else if (checkIn && checkIn.location) {
-        postString = "<a href='/users/" + checkIn.postCreator.urlSlug + "'>" + checkIn.postCreator.name.bold() + "</a>" + " with " + buddiesString + " at " + checkIn.location.bold();
+        postString = checkIn.thoughts + " with " + buddiesString ;
+      } else if (checkIn && location.location) {
+        postString = "<a href='/users/" + checkIn.postCreator.urlSlug + "'>" + checkIn.postCreator.name.bold() + "</a>" + " with " + buddiesString + " at " + location.location.bold();
       } else {
         postString = "<a href='/users/" + checkIn.postCreator.urlSlug + "'>" + checkIn.postCreator.name.bold() + "</a>" + " with " + buddiesString;
       }
     } else {
-      if (checkIn.thoughts && checkIn.location) {
-        postString = checkIn.thoughts + " at " + checkIn.location.bold();
+      if (checkIn.thoughts && location.location) {
+        postString = checkIn.thoughts + " at " + location.location.bold();
       } else if (checkIn.thoughts) {
         postString = checkIn.thoughts;
-      } else if (checkIn && checkIn.name) {
-        postString = "<a href='/users/" + checkIn.postCreator.urlSlug + "'>" + checkIn.postCreator.name.bold() + "</a>" + " at " + checkIn.location.bold();
+      } else if (checkIn && location.location) {
+        postString = "<a href='/users/" + checkIn.postCreator.urlSlug + "'>" + checkIn.postCreator.name.bold() + "</a>" + " at " + location.location.bold();
       } else {
         postString = "";
       }
