@@ -97,7 +97,7 @@ a {
   }
 }
 .share-twitter {
-  color: #55acee;  
+  color: #55acee;
   &:hover {
   color: #55acee;
   }
@@ -5132,6 +5132,22 @@ header {
   }
 }
 
+.activity-main .local-life .tag-ongo-journey {
+  border: 1px solid transparent;
+
+  &:hover {
+    border: 1px solid transparent;
+    background-color: $brand-blue;
+    @include transition( all 300ms linear);
+
+    span {
+      color: $brand-cyan;
+      @include transition( all 300ms linear);
+    }
+  }
+}
+
+
 .local-life {
   .tag-ongo-journey {
     background-color: $brand-cyan;
@@ -9211,7 +9227,7 @@ header {
     position: absolute;
     top: -11px;
     right: 33px;
-    // z-index: 5;
+    z-index: 2;
     @include transition(all 300ms linear);
 
     &:before {
@@ -12210,6 +12226,7 @@ video::-webkit-media-controls-fullscreen-button {
 }
   .outer-report-cont {
     padding: 20px;
+    text-align: center;
 
     p {
       font-size: 22px;
