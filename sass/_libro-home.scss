@@ -664,7 +664,7 @@ header {
 
 // slide1
 .videoplay {
-  width: 100%;
+  width: 87%;
   height: 100%;
   margin: 0 auto;
   position: absolute;
@@ -729,7 +729,7 @@ header {
   height: 385px;
   z-index: 2;
   left: 50%;
-  top: 46%;
+  top: 46.5%;
   @include transform(translate(-50%,
   -50%));
   .swiper-slide {
