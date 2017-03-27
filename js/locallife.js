@@ -21,7 +21,7 @@ var viewlocalLife = angular.module('locallife', [])
             "urlSlug": $.jStorage.get("activeUrlSlug")
             // "rating": []
           }
-        }).success(function (data) {
+        },'paginationLoad').success(function (data) {
           var localLifeData = data;
           callback(localLifeData);
           console.log(localLifeData, 'localLife');

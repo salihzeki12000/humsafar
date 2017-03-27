@@ -21,6 +21,7 @@
                 <div class="input-group destinationOuter">
                   <input type="text" class="form-control fnt-16" placeholder="Search Destination" ng-model="destination" ng-change="searchDestination(destination,'searchDest')" ng-click="editOption(seeDestination,'destinationOuter','destinationInner')">
                   <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                  <span ng-if="searchLoader && seeDestination.backgroundClick" class="small-loader"><img src="img/loading.gif" alt="" class="img-responsive"></span>
                 </div>
                 <div class="dropdown-destination destination-main destinationInner" ng-show="seeDestination.backgroundClick">
                   <ul>
@@ -67,7 +68,7 @@
                     <img ng-src="{{dest.flag|uploadpath}}"   alt="Travelibro">
                   </div>
                   <div class="read-more left-bottom">
-                    <p class="itinerary-must-count m-clear color-white avenir-roman">Must Do : <span class="avenir-heavy">{{dest.mustDoCount}}</span> | Itineraries : <span class="avenir-heavy">{{dest.itineraryCount}}</span></p>
+                    <p class="itinerary-must-count m-clear color-white avenir-roman">Featured Cities : <span class="avenir-heavy">{{dest.cityCount}}</span> | Itineraries : <span class="avenir-heavy">{{dest.itineraryCount}}</span></p>
                   </div>
                 </div>
               </div>

@@ -160,7 +160,7 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/user/getFollowingWeb",
           method: "POST",
           data: obj
-        }).success(function (data) {
+        },'searchLoad').success(function (data) {
           data.data.counter = counter;
           callback(data);
         }).error(function (data) {
@@ -176,7 +176,7 @@ var mylife = angular.module('mylife', [])
             "urlSlug": $.jStorage.get("activeUrlSlug"),
             "pagenumber": pageNo
           }
-        }).success(function (data) {
+        },'paginationLoad').success(function (data) {
           var hasJourney = "";
           if (_.isEmpty(data.data)) {
             hasJourney = false;

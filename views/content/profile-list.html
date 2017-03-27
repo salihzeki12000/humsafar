@@ -25,6 +25,9 @@
                 />
                 <!--<input type="text" placeholder="Search Friend" ng-model="searchUser.name" ng-if="activeMenu=='followers'">-->
                 <span class="search-follow"><i class="fa fa-search"></i></span>
+                <span class="small-loader" ng-if="searchLoader && viewDropdown.showDropdown">
+                  <img src="img/loading.gif" alt="" class="img-responsive">
+                </span>
                 <div class="dropdown-follow-followers" ng-if="viewDropdown.showDropdown;">
                   <ul>
                     <!--ng-repeat="list in searchList"-->
@@ -278,7 +281,7 @@
                     </div>
                   </div>
                   <!-- hover -->
-                  <div class="country-list">
+                  <div class="country-list" ng-if="isMine">
                     <div class="get-center full-width text-center">
                       <span class="year-remove avenir-medium" ng-click="updateCountryVisited(country.countryId._id);"><i class="fa fa-calendar block mb5"></i>
                         Add Year
@@ -314,7 +317,7 @@
           <div class="row">
             <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="bucket in bucketList track by $index" id="{{bucket._id}}">
               <div class="bucket-list-holder">
-                <div class="list-imgholder" style="background-image: url('{{bucket.countryCoverPhoto|uploadpath}}');">
+                <div class="list-imgholder" style="background-image: url('{{bucket.countryBackgroundImage|uploadpath}}');">
                   <!-- <img ng-src="{{bucket.countryCoverPhoto|uploadpath:405:225:'cover'}}" alt="{{bucket.name}}" class="img-responsive country-img"> -->
                   <div class="list-info">
                     <div class="clearfix">
@@ -329,7 +332,7 @@
                     </div>
                   </div>
                   <!-- hover -->
-                  <div class="country-list">
+                  <div class="country-list" ng-if="isMine">
                     <div class="get-center">
                       <span class="year-remove" ng-click="removeFromBucketList(bucket._id)"><i class="fa fa-trash-o block mb5"></i>
                         Remove

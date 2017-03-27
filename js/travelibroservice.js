@@ -1,9 +1,8 @@
 var travelibroservice = angular.module('travelibroservice', ['cfp.loadingBar'])
 
-  .factory('TravelibroService', function ($http, cfpLoadingBar) {
+  .factory('TravelibroService', function ($http, cfpLoadingBar,TemplateService) {
     return {
       http: function (obj,status) {
-        console.log(status, 'what is status');
         var accessToken = $.jStorage.get("accessToken");
         if (!obj) {
           obj = {};
@@ -12,13 +11,53 @@ var travelibroservice = angular.module('travelibroservice', ['cfp.loadingBar'])
           obj.data = {};
         }
         obj.data.accessToken = accessToken;
-        if(status!=true){
-          cfpLoadingBar.start();
+        switch (status) {
+          case 'searchHeaderLoad':
+            TemplateService.searchLoader =  false;
+            break;
+          case 'searchLoad':
+            TemplateService.searchLoader = true;
+            break;
+          case 'paginationLoad':
+          if(obj.data.pagenumber == 1){
+            cfpLoadingBar.start();
+          }else {
+            TemplateService.paginationLoader = true;
+          }
+            break;
+          case 'allLoader':
+            cfpLoadingBar.start();
+            break;
+          default:
+
         }
+        // if(status!=true){
+        //   cfpLoadingBar.start();
+        // }
         console.log("start http");
+        console.log(obj,'obj');
         var callbackFor = $http(obj).success(function (data){
-          if(status!=true){
-            cfpLoadingBar.complete();
+          // if(status!=true){
+          //   cfpLoadingBar.complete();
+          // }
+          switch (status) {
+            case 'searchHeaderLoad':
+              TemplateService.searchLoader =  false;
+              break;
+            case 'searchLoad':
+              TemplateService.searchLoader =  false;
+              break;
+            case 'paginationLoad':
+            if(obj.data.pagenumber == 1){
+              cfpLoadingBar.complete();
+            }else {
+              TemplateService.paginationLoader = false;
+            }
+              break;
+            case 'allLoader':
+              cfpLoadingBar.complete();
+              break;
+            default:
           }
           console.log("end http");
           return data;
@@ -32,18 +71,57 @@ var travelibroservice = angular.module('travelibroservice', ['cfp.loadingBar'])
           formData = {};
         }
         formData.accessToken = accessToken;
-        if(status!=true){
-          cfpLoadingBar.start();
+        switch (status) {
+          case 'searchHeaderLoad':
+            TemplateService.searchLoader =  true;
+            break;
+          case 'searchLoad':
+            TemplateService.searchLoader = true;
+            break;
+          case 'paginationLoad':
+          if(obj.data.pagenumber == 1){
+            cfpLoadingBar.start();
+          }else {
+            TemplateService.paginationLoader = true;
+          }
+          case 'allLoader':
+            cfpLoadingBar.complete();
+            break;
+          default:
+
         }
+        // if(status!=true){
+        //   cfpLoadingBar.start();
+        // }
         console.log("start post");
         var callbackFor = $http({
           url: callApiUrl,
           data: formData,
           method: "POST",
         }).success(function (data) {
-          if(status!=true){
-            cfpLoadingBar.complete();
+          switch (status) {
+            case 'searchHeaderLoad':
+              TemplateService.searchLoader =  false;
+              break;
+            case 'searchLoad':
+              TemplateService.searchLoader = false;
+              break;
+            case 'paginationLoad':
+            if(obj.data.pagenumber == 1){
+              cfpLoadingBar.complete();
+            }else {
+              TemplateService.paginationLoader = false;
+            }
+            break;
+            case 'allLoader':
+              cfpLoadingBar.complete();
+              break;
+            default:
+
           }
+          // if(status!=true){
+          //   cfpLoadingBar.complete();
+          // }
           console.log("end post");
           return data;
         });
