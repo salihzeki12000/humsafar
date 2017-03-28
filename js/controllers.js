@@ -6500,7 +6500,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('SettingCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, DataUriToBlob) {
+  .controller('SettingCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, DataUriToBlob, $stateParams, $state) {
     //Used to name the .html file
     $scope.profile = $.jStorage.get("profile");
     $scope.userData = _.clone($scope.profile);
@@ -6510,6 +6510,53 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Setting");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+
+    $scope.showSetting = 1;
+    var url=$stateParams.path;
+    $scope.setting = function (val) {
+      if (val == 1) {
+        $scope.showSetting = 1;
+        url="settings";
+      } else if (val == 2) {
+        $scope.showSetting = 2;
+        url="edit-profile";        
+      } else if (val == 3) {
+        $scope.showSetting = 3;
+      } else if (val == 4) {
+        $scope.showSetting = 4;
+      } else if (val == 5) {
+        $scope.showSetting = 5;
+        url="privacy-settings";        
+      } else if (val == 6) {
+        $scope.showSetting = 6;
+        url="report";                
+      } else {
+        $scope.showSetting = 1;
+        url="settings";
+      }
+      $state.go("setting",{
+        "path":url
+      }, {
+        location: true,
+        notify: false,
+        reload: false
+      });
+    };
+
+    switch ($stateParams.path) {
+      case "settings":
+        $scope.showSetting = 1;
+        break;
+      case "privacy-settings":
+        $scope.showSetting = 5;
+        break;
+      case "edit-profile":
+        $scope.showSetting = 2;
+        break;
+      case "report":
+        $scope.showSetting = 6;
+        break;
+    }
 
     // datepicker
     $scope.format = 'dd-MM-yyyy';
@@ -6545,27 +6592,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         clearInterval(got);
       }
     }, 1000);
-
-    $scope.showSetting = 1;
-    $scope.setting = function (val) {
-      if (val == 1) {
-        $scope.showSetting = 1;
-      } else if (val == 2) {
-        $scope.showSetting = 2;
-      } else if (val == 3) {
-        $scope.showSetting = 3;
-      } else if (val == 4) {
-        $scope.showSetting = 4;
-      } else if (val == 5) {
-        $scope.showSetting = 5;
-      } else if (val == 6) {
-        $scope.showSetting = 6;
-      } else {
-        $scope.showSetting = 1;
-      }
-    };
-
-
 
     $scope.travelConfig = {};
     var atleastOne = "";
@@ -6903,6 +6929,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
   })
+
 
   .controller('BlogCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
