@@ -20,7 +20,7 @@
               <form autocomplete="off">
                 <input type="text " class="form-control color-white avenir-light searchOuter" id="search " ng-model="search.searchType" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags "
                   ng-change="searchType();" ng-click="editOption(viewSearch,'searchOuter','searchInner')">
-                  <span ng-if="searchHeaderLoad" class="small-loader">
+                <span ng-if="searchHeaderLoad" class="small-loader">
                     <img src="img/page.svg" width="25px" alt="" class="img-responsive">
                   </span>
                 <div class="search-result-dropdown searchInner" ng-show="viewSearch.backgroundClick;">
@@ -164,7 +164,7 @@
                 </a>
               </li>
               <li>
-                <a ui-sref="setting">
+                <a ui-sref="setting({'path':'settings'})">
                   <i class="fa fa-cog"></i>
                 </a>
               </li>
@@ -200,7 +200,7 @@
                   </a>
                 </li>
                 <li>
-                  <a ui-sref="setting">
+                  <a ui-sref="setting({'path':'settings'})">
                     <i class="fa fa-cog"></i>
                   </a>
                 </li>
@@ -227,7 +227,7 @@
             <form autocomplete="off">
               <input type="text " class="form-control color-white avenir-light searchOuter" id="search " ng-model="search.searchType" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags "
                 ng-change="searchType();" ng-click="editOption(viewSearch,'searchOuter','searchInner')">
-                   <span ng-if="searchHeaderLoad" class="small-loader">
+              <span ng-if="searchHeaderLoad" class="small-loader">
                     <img src="img/page.svg" width="25px" alt="" class="img-responsive">
                   </span>
               <div class="search-result-dropdown searchInner" ng-show="viewSearch.backgroundClick;">
@@ -328,7 +328,7 @@
             <form autocomplete="off">
               <input type="text " class="form-control color-white avenir-light searchOuter" id="search " ng-model="search.searchType" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags "
                 ng-change="searchType();" ng-click="editOption(viewSearch,'searchOuter','searchInner')">
-                   <span ng-if="searchHeaderLoad" class="small-loader">
+              <span ng-if="searchHeaderLoad" class="small-loader">
                     <img src="img/page.svg" width="25px" alt="" class="img-responsive">
                   </span>
               <div class="search-result-dropdown searchInner" ng-show="viewSearch.backgroundClick;">
