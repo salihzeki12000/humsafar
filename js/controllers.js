@@ -55,19 +55,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               //playing the video
               // $('video').get(nextIndex - 1).load();
 
-              if($(window).width()>=767){
+              if ($(window).width() >= 767) {
                 for (i = 1; i < 4; i++) {
-                if (i == nextIndex - 1) {
-                  // console.log(index);
-                  $('video').get(nextIndex - 1).load();
-                  $('video').get(nextIndex - 1).play();
-                } else {
-                  // console.log(i);
-                  $('video').get(i).pause();
+                  if (i == nextIndex - 1) {
+                    // console.log(index);
+                    $('video').get(nextIndex - 1).load();
+                    $('video').get(nextIndex - 1).play();
+                  } else {
+                    // console.log(i);
+                    $('video').get(i).pause();
+                  }
                 }
               }
-              }
-              
+
             }, 300);
           }
         });
@@ -211,7 +211,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           }, function (err) {
             console.log(err);
           });
-        }else{
+        } else {
           console.log(data);
         }
       }
@@ -363,13 +363,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
     }
-    $scope.resend=false;
+    $scope.resend = false;
     $scope.editUserData = function (obj) {
-      NavigationService.sendOtpToReset(obj.email,function(data){
+      NavigationService.sendOtpToReset(obj.email, function (data) {
         console.log(data);
-        if(data.data.comment){
+        if (data.data.comment) {
           console.log("Mail sent");
-          $scope.resend=true;
+          $scope.resend = true;
         }
       });
     };
@@ -555,8 +555,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         alert('Selected file: ' + this.value);
       }
     });
-    $scope.fileName=null;
-    $scope.uploadFile = function (data, userData,ppSelected) {
+    $scope.fileName = null;
+    $scope.uploadFile = function (data, userData, ppSelected) {
       // Base64 to Blob
       if (ppSelected) {
         console.log(data, userData);
@@ -584,17 +584,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
       } else {
         alert("nai mila");
-         $scope.userData=_.omit($scope.userData, ['profilePicture']);
-         $scope.saveUserData($scope.userData);
+        $scope.userData = _.omit($scope.userData, ['profilePicture']);
+        $scope.saveUserData($scope.userData);
       }
     };
 
-    $scope.removePhoto=function(){
-      $scope.userData=_.omit($scope.userData, ['profilePicture']);
-      $scope.fileName=null;
+    $scope.removePhoto = function () {
+      $scope.userData = _.omit($scope.userData, ['profilePicture']);
+      $scope.fileName = null;
       console.log($scope.userData);
 
-      $scope.showImage.val=false;
+      $scope.showImage.val = false;
     };
 
 
@@ -1705,7 +1705,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewCardComment = true;
         $scope.journey.journeyHighLight = ongo._id;
         $scope.getCard = "view-whole-card";
-        LikesAndComments.getComments("post", $scope.post._id, callback);
+        LikesAndComments.getComments(ongo.type, $scope.post._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
@@ -1718,7 +1718,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // $scope.focus('enterComment');
           $scope.journey.journeyHighLight = ongo._id;
           $scope.getCard = "view-whole-card";
-          LikesAndComments.getComments("post", $scope.post._id, callback);
+          LikesAndComments.getComments(ongo.type, $scope.post._id, callback);
         }
       }
       $scope.previousId = $scope.post._id;
@@ -2178,7 +2178,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewCardComment = true;
         // $scope.journey.journeyHighLight = activity._id;
         $scope.getCard = "view-whole-card";
-        LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+        LikesAndComments.getComments(post.type, post._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
@@ -2191,7 +2191,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // $scope.focus('enterComment');
           // $scope.journey.journeyHighLight = activity._id;
           $scope.getCard = "view-whole-card";
-          LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+          LikesAndComments.getComments(post.type, post._id, callback);
         }
       }
       $scope.previousId = post._id;
@@ -2383,7 +2383,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewCardComment = true;
         // $scope.journey.journeyHighLight = activity._id;
         $scope.getCard = "view-whole-card";
-        LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+        LikesAndComments.getComments(post.type, post._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
@@ -2396,7 +2396,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // $scope.focus('enterComment');
           // $scope.journey.journeyHighLight = activity._id;
           $scope.getCard = "view-whole-card";
-          LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+          LikesAndComments.getComments(post.type, post._id, callback);
         }
       }
       $scope.previousId = post._id;
@@ -2514,15 +2514,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.destinationList = [];
-     console.log($scope.searchLoader,'search loader');
-    setInterval(function() {
+    console.log($scope.searchLoader, 'search loader');
+    setInterval(function () {
       $scope.searchLoader = TemplateService.searchLoader;
-    },3000);
+    }, 300);
     $scope.viewListByKey = "A";
     $scope.countryDestList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     $scope.i = 0;
     $scope.callCountry = function (search, searchText) {
       $scope.i++;
+      $scope.destinationList = [];
       NavigationService.getDestination({
         search: search,
         searchText: searchText,
@@ -2624,6 +2625,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.editOption = function (model, class1, class2) {
       LikesAndComments.onClickDropDown(model, $scope, class1, class2);
     };
+
+    setInterval(function () {
+      $scope.searchLoader = TemplateService.searchLoader;
+    }, 300);
 
     // search destination
     $scope.callDestination = function () {
@@ -2803,7 +2808,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // destination city
     $scope.countryView = function (url, isCity) {
       $state.go("destinationcity", {
-        name: "mustdo",
+        name: "must-dos",
         url: url
       })
     }
@@ -3047,7 +3052,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewCardComment = true;
         // $scope.journey.journeyHighLight = activity._id;
         $scope.getCard = "view-whole-card";
-        LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+        LikesAndComments.getComments(post.type, post._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
@@ -3060,7 +3065,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // $scope.focus('enterComment');
           // $scope.journey.journeyHighLight = activity._id;
           $scope.getCard = "view-whole-card";
-          LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+          LikesAndComments.getComments(post.type, post._id, callback);
         }
       }
       $scope.previousId = post._id;
@@ -3218,6 +3223,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       LikesAndComments.onClickDropDown(model, $scope, class1, class2);
     };
 
+    setInterval(function () {
+      $scope.searchLoader = TemplateService.searchLoader;
+    }, 300)
 
     // SUGGEST EDIT POPUP MODAL
     $scope.openSuggestModal = function () {
@@ -3575,7 +3583,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewCardComment = true;
         // $scope.journey.journeyHighLight = activity._id;
         $scope.getCard = "view-whole-card";
-        LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+        LikesAndComments.getComments(post.type, post._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
@@ -3588,7 +3596,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // $scope.focus('enterComment');
           // $scope.journey.journeyHighLight = activity._id;
           $scope.getCard = "view-whole-card";
-          LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+          LikesAndComments.getComments(post.type, post._id, callback);
         }
       }
       $scope.previousId = post._id;
@@ -3865,10 +3873,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.cityoptions.active = "";
     $scope.viewTab = 1;
     switch ($state.params.name) {
-      case "mustdo":
+      case "must-dos":
         $scope.destination.innerView = alldestination[0];
         $scope.cityDestinationView = true;
-        $scope.getCityInfo("must-dos", $scope.urlDestinationCity);
+        $scope.getCityInfo("mustDo", $scope.urlDestinationCity);
         $scope.cityoptions.active = "must-dos";
         $scope.ntMustdo = "ntMustdo";
         break;
@@ -3963,8 +3971,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         case 5:
           url = "best-time-to-visit";
           $scope.cityDestinationView = false;
+          $scope.getCityInfo("mustDo", $scope.urlDestinationCity);
           $scope.cityoptions.active = "best-time-to-visit";
           $scope.ntMustdo = "";
+          break;
+        default:
+          $scope.getCityInfo("mustDo", $scope.urlDestinationCity);
           break;
       }
       console.log(url);
@@ -6490,7 +6502,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('SettingCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, DataUriToBlob) {
+  .controller('SettingCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, DataUriToBlob, $stateParams) {
     //Used to name the .html file
     $scope.profile = $.jStorage.get("profile");
     $scope.userData = _.clone($scope.profile);
@@ -6501,6 +6513,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
+    alert($stateParams.path);
     // datepicker
     $scope.format = 'dd-MM-yyyy';
     $scope.open1 = function () {
@@ -7056,10 +7069,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.showLikeCommentCard = true;
-      setInterval(function(){
+    setInterval(function () {
       $scope.paginationLoader = TemplateService.paginationLoader;
-      console.log($scope.paginationLoader,'value');
-    },3000);
+      console.log($scope.paginationLoader, 'value');
+    }, 300);
 
     $scope.openThankYouModal = function () {
       $uibModal.open({
@@ -7503,7 +7516,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.userData = $.jStorage.get("profile");
     $scope.activeMenu = $stateParams.active;
-     setInterval(function(){
+    setInterval(function () {
       $scope.searchLoader = TemplateService.searchLoader;
     }, 3000);
 
@@ -9313,7 +9326,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           document.getElementById(elemId).value = "";
         }
       }
-      LikesAndComments.postComment("itinerary", itinerary.uniqueId, itinerary._id, comment, hashTag, additionalId, callback);
+      LikesAndComments.postComment(itinerary.type, itinerary.uniqueId, itinerary._id, comment, hashTag, additionalId, callback);
     };
     //post quick-itinerary comments ends
 
@@ -9451,7 +9464,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewCardComment = true;
         // $scope.journey.journeyHighLight = itinerary._id;
         $scope.getCard = "view-whole-card";
-        LikesAndComments.getComments("itinerary", itinerary._id, callback);
+        LikesAndComments.getComments(itinerary.type, itinerary._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
@@ -9464,7 +9477,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // $scope.focus('enterComment');
           // $scope.journey.journeyHighLight = itinerary._id;
           $scope.getCard = "view-whole-card";
-          LikesAndComments.getComments("itinerary", itinerary._id, callback);
+          LikesAndComments.getComments(itinerary.type, itinerary._id, callback);
         }
       }
       $scope.previousId = itinerary._id;
@@ -9949,7 +9962,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewCardComment = true;
         // $scope.journey.journeyHighLight = activity._id;
         $scope.getCard = "view-whole-card";
-        LikesAndComments.getComments(activity.likeUnlikeFlag, activity._id, callback);
+        LikesAndComments.getComments(activity.type, activity._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
@@ -9962,7 +9975,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // $scope.focus('enterComment');
           // $scope.journey.journeyHighLight = activity._id;
           $scope.getCard = "view-whole-card";
-          LikesAndComments.getComments(activity.likeUnlikeFlag, activity._id, callback);
+          LikesAndComments.getComments(activity.type, activity._id, callback);
         }
       }
       $scope.previousId = activity._id;
@@ -10722,9 +10735,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.search.viewData = false;
 
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
-     setInterval(function(){
+    setInterval(function () {
       $scope.searchHeaderLoad = TemplateService.searchLoader;
-    },3000);
+    }, 300);
     // if ($.jStorage.get('accessToken') && $.jStorage.get('accessToken') != '') {
     //   $scope.userData = $.jStorage.get("profile");
     //   $scope.accessToken = $.jStorage.get("accessToken");
@@ -14054,6 +14067,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // ACCEPT FOLLOW REQUEST END
 
+    // ACCEPT REJECT ITINERARY
+    $scope.acceptDeclineItinerary = function (notifyOb, status) {
+      console.log(notifyOb, "accept karo follow");
+      if (status == 1) {
+        NavigationService.acceptRejectItinerary({
+          _id: notifyOb.data._id,
+          notifyId: notifyOb._id,
+          answeredStatus: 'accept'
+        }, function (data) {
+          console.log(data, 'accept itit ans');
+        });
+      } else {
+        NavigationService.acceptRejectItinerary({
+          _id: notifyOb.data.id,
+          notifyId: notifyOb._id,
+          answeredStatus: 'reject'
+        }, function (data) {
+          console.log(data, 'reject itinerarytype ans');
+        });
+      }
+    };
+    // ACCEPT REJECT ITINERARY END
+
     $scope.redirectToPost = function (obj) {
       updateNotificationStatus(obj._id, function (data) {
         if (data.value) {
@@ -14198,36 +14234,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       stopCallingApiCity: false,
     };
     // search profile page
-    $scope.searchItiProfile = function (searchObj, searchedType) {
+    $scope.searchItiProfile = function (searchObj) {
       console.log(searchObj, 'what is ');
-      switch (searchedType) {
-        case 'travellerType':
-          if (searchObj.itineraryBy == "Admin" || searchObj.itineraryBy == "TravelAgent") {
-            $state.go('comingsoonpage', {
-              'url': 'coming-soon'
-            })
-          } else {
-            $state.go('mylife', {
-              'urlSlug': searchObj.urlSlug
-            })
-          }
-          break;
-        case 'itineraryType':
-          if (searchObj.itineraryBy == "Admin" || searchObj.itineraryBy == "TravelAgent") {
-            $state.go('comingsoonpage', {
-              'url': 'coming-soon'
-            })
-          } else {
-            $state.go('mylife', {
-              'urlSlug': searchObj.user.urlSlug
-            })
-          }
-          break;
-        default:
-          break;
+      if (searchObj.itineraryBy == "Admin" || searchObj.itineraryBy == "TravelAgent") {
+        $state.go('comingsoonpage', {
+          'url': 'coming-soon'
+        })
+      } else {
+        $state.go('mylife', {
+          'urlSlug': searchObj.urlSlug
+        })
       }
     };
     // search profile page end
+
+    setInterval(function () {
+      $scope.paginationLoader = TemplateService.paginationLoader;
+    }, 300);
     // search itinerary
     $scope.searchIti = function (itinerary) {
       if (itinerary.itineraryBy == "Admin" || itinerary.itineraryBy == "TravelAgent") {

@@ -104,12 +104,12 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'HomeCtrl'
     })
     .state('about', {
-      url: "/about-travelibro",
+      url: "/about-us",
       templateUrl: "views/template.html",
       controller: 'AboutCtrl'
     })
     .state('termscondition', {
-      url: "/terms-conditions",
+      url: "/terms-conditions.pdf",
       templateUrl: "views/template.html",
       controller: 'TermsConditionsCtrl'
     })
@@ -129,7 +129,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'ForgotPasswordEmailCtrl'
     })
     .state('contact', {
-      url: "/contact",
+      url: "/contact-us",
       templateUrl: "views/template.html",
       controller: 'ContactCtrl'
     })
@@ -139,7 +139,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'BookingCtrl'
     })
     .state('advertise', {
-      url: "/advertise",
+      url: "/advertise-with-us",
       templateUrl: "views/template.html",
       controller: 'AdvertiseCtrl'
     })
@@ -193,9 +193,22 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'PopularJourneyCtrl'
     })
     .state('popularagent', {
-      url: "/popular-agents",
+      url: "/popular-travel-agents",
       templateUrl: "views/template.html",
       controller: 'PopularAgentCtrl'
+    })
+    // //travel-agents/{path:[a-z]*}
+    // /travel-agents{fn:(?:/[^/]+)?}
+    .state('travel-agents', {
+      url: "/travel-agents/{path:[a-z]*}",
+      params: {
+        path: {
+          squash: true,
+          value: null
+        }
+      },
+      templateUrl: "views/template.html",
+      controller: 'ComingSoonCtrl'
     })
     .state('popularitinerary', {
       url: "/popular-itineraries",
@@ -271,7 +284,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'OtherReviewsCtrl'
     })
     .state('setting', {
-      url: "/settings",
+      url: "/{path:(?:settings|privacy-settings|edit-profile|report)}",
       templateUrl: "views/template.html",
       controller: 'SettingCtrl'
     })
@@ -451,7 +464,7 @@ firstapp.directive('loadingText', function ($document) {
       var $element = $(element);
       dem = $element;
       $element.typed({
-        strings: ["Capture | Inspire | Relive...", "Travel Life | Local Life...","Loading...","Almost There..."],
+        strings: ["Capture | Inspire | Relive...", "Travel Life | Local Life...", "Loading...", "Almost There..."],
         startDelay: 20,
         typeSpeed: 100,
         loop: true
@@ -1238,7 +1251,7 @@ firstapp.filter('postString', function () {
       if (checkIn.thoughts && location.location) {
         postString = checkIn.thoughts + " with " + buddiesString + " at " + location.location.bold();
       } else if (checkIn.thoughts) {
-        postString = checkIn.thoughts + " with " + buddiesString ;
+        postString = checkIn.thoughts + " with " + buddiesString;
       } else if (checkIn && location.location) {
         postString = "<a href='/users/" + checkIn.postCreator.urlSlug + "'>" + checkIn.postCreator.name.bold() + "</a>" + " with " + buddiesString + " at " + location.location.bold();
       } else {
