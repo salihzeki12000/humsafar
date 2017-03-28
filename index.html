@@ -16,11 +16,11 @@
   <meta name="keywords" content="">
 
   <!-- Facebook -->
-  <meta property="og:url"           content="http://travelibro.com/" />
-  <meta property="og:type"          content="website" />
-  <meta property="og:title"         content="TraveLibro" />
-  <meta property="og:description"   content="TraveLibro" />
-  <meta property="og:image"         content="img/fb-banner.jpg" />
+  <meta property="og:url" content="http://travelibro.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="TraveLibro" />
+  <meta property="og:description" content="TraveLibro" />
+  <meta property="og:image" content="img/fb-banner.jpg" />
 
 
   <!-- Twitter -->
@@ -35,6 +35,7 @@
 
   <script>
     var isproduction = false;
+
   </script>
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="js/jquery.parallax.js"></script>
@@ -108,14 +109,14 @@
   <div class="repeated-item loadedContent" ui-view></div>
 
   <!--home page Loader-->
-  	<div class="loaders" style="background:#303557;z-index:999;text-align: center;position:fixed;top:0;left:0;bottom:0;right:0">
-	<div style="position: absolute ;top: 50%;left:50%;transform: translate(-50%,-50%);">
-			<h1 noloading = "true" style="color:#fff;" class="avenir-medium">
-						<span loading-text></span>
-					</h1>
-				</div>
-	</div>
-      <!--home page Loader ended-->
+  <div class="loaders" style="background:#303557;z-index:999;text-align: center;position:fixed;top:0;left:0;bottom:0;right:0">
+    <div style="position: absolute ;top: 50%;left:50%;transform: translate(-50%,-50%);">
+      <h1 noloading="true" style="color:#fff;" class="avenir-medium">
+        <span class="element"></span>
+      </h1>
+    </div>
+  </div>
+  <!--home page Loader ended-->
 
   <div class="hidden">
     <video poster="img/libro-home/slide/1.jpg" class='videoPlayer' muted>
@@ -127,27 +128,33 @@
     <img src="img/libro-home/slide/5.jpg" alt="">
   </div>
 
-    <!--//loader-->
-  	<script>
-		$(window).load(function() {
-			console.log("Loaded");
-			$("body > .loaders").hide();
-			$("body > .loadedContent").fadeIn(1000);
-		});
-	</script>
+  <!--//loader-->
+  <script>
+    $(window).load(function () {
+      console.log("Loaded");
+      $("body > .loaders").hide();
+      $("body > .loadedContent").fadeIn(1000);
+    });
+
+  </script>
   <!--//loader end-->
   <!-- put auto-height if needed -->
   <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&libraries=geometry&key=AIzaSyDPH6EYKMW97XMTJzqYqA0CR4fk5l2gzE4&callback=initMap">
+
+
   </script>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
+  <div id="fb-root"></div>
+  <script>
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+  </script>
 </body>
 
 </html>

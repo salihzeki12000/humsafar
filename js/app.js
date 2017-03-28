@@ -456,22 +456,22 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
 });
 
 
-firstapp.directive('loadingText', function ($compile, $parse,$document) {
-  return {
-    restrict: 'EA',
-    replace: false,
-    link: function ($scope, element, attrs) {
-      var $element = $(element);
-      dem = $element;
-      dem.typed({
-        strings: ["Capture | Inspire | Relive...", "Travel Life | Local Life...", "Loading...", "Almost There..."],
-        startDelay: 20,
-        typeSpeed: 100,
-        loop: true
-      });
-    }
-  }
-});
+// firstapp.directive('loadingText', function ($compile, $parse,$document) {
+//   return {
+//     restrict: 'EA',
+//     replace: false,
+//     link: function ($scope, element, attrs) {
+//       var $element = $(element);
+//       dem = $element;
+//       dem.typed({
+//         strings: ["Capture | Inspire | Relive...", "Travel Life | Local Life...", "Loading...", "Almost There..."],
+//         startDelay: 20,
+//         typeSpeed: 100,
+//         loop: true
+//       });
+//     }
+//   }
+// });
 
 // firstapp.directive('img', function ($compile, $parse) {
 //   return {
@@ -1587,4 +1587,12 @@ firstapp.filter('seasonType', function () {
     };
     return returnVal;
   }
+});
+$(document).ready(function () {
+  $(".element").typed({
+    strings: ["Capture | Inspire | Relive...", "Travel Life | Local Life...", "Loading...", "Almost There..."],
+    startDelay: 20,
+    typeSpeed: 100,
+    loop: true
+  });
 });

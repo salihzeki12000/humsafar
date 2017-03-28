@@ -572,7 +572,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log(formData, "before appending");
         formData.append('file', file, file.name);
         console.log(formData, "after appending");
-        alert("mila");
+        // alert("mila");
         NavigationService.uploadFile(formData, function (response) {
           if (response.value) {
             $scope.userData.profilePicture = response.data[0];
@@ -583,7 +583,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.saveUserData($scope.userData);
         });
       } else {
-        alert("nai mila");
+        // alert("nai mila");
          $scope.userData=_.omit($scope.userData, ['profilePicture']);
          $scope.saveUserData($scope.userData);
       }
@@ -6910,7 +6910,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // cfpLoadingBar.complete();
         });
       } else {
-        alert("fields invalid");
+        // alert("fields invalid");
       }
     };
 
