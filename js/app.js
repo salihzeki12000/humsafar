@@ -456,14 +456,14 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
 });
 
 
-firstapp.directive('loadingText', function ($document) {
+firstapp.directive('loadingText', function ($compile, $parse,$document) {
   return {
     restrict: 'EA',
     replace: false,
     link: function ($scope, element, attrs) {
       var $element = $(element);
       dem = $element;
-      $element.typed({
+      dem.typed({
         strings: ["Capture | Inspire | Relive...", "Travel Life | Local Life...", "Loading...", "Almost There..."],
         startDelay: 20,
         typeSpeed: 100,
