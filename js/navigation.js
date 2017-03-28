@@ -1,6 +1,6 @@
 var adminURL = "";
 var allowAccess = "";
-adminURL = "https://travelibro.wohlig.com/api";
+adminURL = "https://travelibro.com/api";
 
 var imgurl = adminURL + "/upload/";
 var imgpath = imgurl + "readFile";
@@ -194,27 +194,27 @@ var navigationservice = angular.module('navigationservice', [])
         });
       },
       getSearchCityData: function (formData, callback) {
-        TravelibroService.post(adminURL + "/city/getCity", formData).success(callback).error(function (data) {
+        TravelibroService.post(adminURL + "/city/getCity", formData,'paginationLoad').success(callback).error(function (data) {
           console.log(data);
         });
       },
       getSearchCountryData: function (formData, callback) {
-        TravelibroService.post(adminURL + "/country/getCountry", formData).success(callback).error(function (data) {
+        TravelibroService.post(adminURL + "/country/getCountry", formData,'paginationLoad').success(callback).error(function (data) {
           console.log(data);
         });
       },
       getSearchItineraryData: function (formData, callback) {
-        TravelibroService.post(adminURL + "/itinerary/getItineraryWeb", formData).success(callback).error(function (data) {
+        TravelibroService.post(adminURL + "/itinerary/getItineraryWeb", formData,'paginationLoad').success(callback).error(function (data) {
           console.log(data);
         });
       },
       getSearchHashData: function (formData, callback) {
-        TravelibroService.post(adminURL + "/post/getHashDataWeb", formData).success(callback).error(function (data) {
+        TravelibroService.post(adminURL + "/post/getHashDataWeb", formData,'paginationLoad').success(callback).error(function (data) {
           console.log(data);
         });
       },
       getSearchUserData: function (formData, callback) {
-        TravelibroService.post(adminURL + "/user/getUserWeb", formData).success(callback).error(function (data) {
+        TravelibroService.post(adminURL + "/user/getUserWeb", formData,'paginationLoad').success(callback).error(function (data) {
           console.log(data);
         });
       },
@@ -247,14 +247,14 @@ var navigationservice = angular.module('navigationservice', [])
         });
       },
       getCountryDestination: function (formData, callback) {
-        TravelibroService.post(adminURL + "/country/getOneCountry", formData).success(function (data) {
+        TravelibroService.post(adminURL + "/country/getOneCountry", formData,'paginationLoad').success(function (data) {
           callback(data);
         }).error(function (data) {
           console.log(data);
         });
       },
       getCityDestination: function (formData, callback) {
-        TravelibroService.post(adminURL + "/city/getOneCity", formData).success(function (data) {
+        TravelibroService.post(adminURL + "/city/getOneCity", formData,'paginationLoad').success(function (data) {
           callback(data);
         }).error(function (data) {
           console.log(data);
@@ -309,22 +309,29 @@ var navigationservice = angular.module('navigationservice', [])
           console.log(data);
         });
       },
+      acceptRejectItinerary: function (formData, callback) {
+        TravelibroService.post(adminURL + "/itinerary/itineraryStatusWeb", formData).success(function (data) {
+          callback(data);
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
       popularJourney: function (formData, callback) {
-        TravelibroService.post(adminURL + "/journey/getPopularJourneyWeb", formData).success(function (data) {
+        TravelibroService.post(adminURL + "/journey/getPopularJourneyWeb", formData,'paginationLoad').success(function (data) {
           callback(data);
         }).error(function (data) {
           console.log(data);
         });
       },
       popularItinerary: function (formData, callback) {
-        TravelibroService.post(adminURL + "/itinerary/getPopularItineraryWeb", formData).success(function (data) {
+        TravelibroService.post(adminURL + "/itinerary/getPopularItineraryWeb", formData,'paginationLoad').success(function (data) {
           callback(data);
         }).error(function (data) {
           console.log(data);
         });
       },
       popularBlogger: function (formData, callback) {
-        TravelibroService.post(adminURL + "/user/getPopularUserWeb", formData).success(function (data) {
+        TravelibroService.post(adminURL + "/user/getPopularUserWeb", formData,'paginationLoad').success(function (data) {
           callback(data);
         }).error(function (data) {
           console.log(data);

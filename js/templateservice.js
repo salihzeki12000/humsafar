@@ -3,6 +3,7 @@ templateservicemod.service('TemplateService', function() {
   this.title = "Home";
   this.meta = "Google";
   this.metadesc = "Home";
+  this.searchHeaderLoad  = false;
   this.searchLoader  = false;
   this.paginationLoader = false;
   this.allLoader  = false;

@@ -4,13 +4,13 @@
       <!-- itinerary FINAL CARD -->
       <div class="travel-life-part blog-post bg-white avenir-roman overflow search-itinerary-card {{itinerary.type}}" ng-if="itinerary.type=='quick-itinerary' || itinerary.type=='detail-itinerary'">
         <div class="travel-journey-heading">
-          <div class="editor-logo user-logo pointer" ng-click="searchRoute(itinerary);">
+          <div class="editor-logo user-logo pointer" ng-click="searchProfile(itinerary);">
             <img ng-src="{{itinerary.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{itinerary.user.name}}" class="img-responsive">
           </div>
           <div class="inline-block editor-subdetail">
             <div class="clearfix">
               <div class="pull-left">
-                <h4 class="font-bold color-dark-blue text-capitalize m-clear mb5 heading-name" ng-click="searchRoute(itinerary);">{{itinerary.user.name}}</h4>
+                <h4 class="font-bold color-dark-blue text-capitalize m-clear mb5 heading-name" ng-click="searchProfile(itinerary);">{{itinerary.user.name}}</h4>
               </div>
               <div class="pull-right">
                 <span class="follow-following color-blue text-capitalize">{{itinerary.follower}}</span>
@@ -111,5 +111,8 @@
       </div>
       <!--  itinerary FINAL CARD END -->
     </div>
+  </div>
+  <div class="pagination-loader" ng-if="paginationLoader">
+    <img src="img/page.svg" alt="Loading..." width="50px" class="img-responsive m-center">
   </div>
 </div>

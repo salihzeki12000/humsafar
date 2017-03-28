@@ -13,7 +13,7 @@ var travelibroservice = angular.module('travelibroservice', ['cfp.loadingBar'])
         obj.data.accessToken = accessToken;
         switch (status) {
           case 'searchHeaderLoad':
-            TemplateService.searchLoader =  false;
+            TemplateService.searchHeaderLoad =  true;
             break;
           case 'searchLoad':
             TemplateService.searchLoader = true;
@@ -42,9 +42,10 @@ var travelibroservice = angular.module('travelibroservice', ['cfp.loadingBar'])
           // }
           switch (status) {
             case 'searchHeaderLoad':
-              TemplateService.searchLoader =  false;
+              TemplateService.searchHeaderLoad =  false;
               break;
             case 'searchLoad':
+            //  alert('TemplateService');
               TemplateService.searchLoader =  false;
               break;
             case 'paginationLoad':
@@ -73,13 +74,14 @@ var travelibroservice = angular.module('travelibroservice', ['cfp.loadingBar'])
         formData.accessToken = accessToken;
         switch (status) {
           case 'searchHeaderLoad':
-            TemplateService.searchLoader =  true;
+            TemplateService.searchHeaderLoad =  true;
             break;
           case 'searchLoad':
+          // alert('chaalu');
             TemplateService.searchLoader = true;
             break;
           case 'paginationLoad':
-          if(obj.data.pagenumber == 1){
+          if(formData.pagenumber == 1){
             cfpLoadingBar.start();
           }else {
             TemplateService.paginationLoader = true;
@@ -101,13 +103,14 @@ var travelibroservice = angular.module('travelibroservice', ['cfp.loadingBar'])
         }).success(function (data) {
           switch (status) {
             case 'searchHeaderLoad':
-              TemplateService.searchLoader =  false;
+              TemplateService.searchHeaderLoad =  false;
               break;
             case 'searchLoad':
+            // alert('baaand');
               TemplateService.searchLoader = false;
               break;
             case 'paginationLoad':
-            if(obj.data.pagenumber == 1){
+            if(formData.pagenumber == 1){
               cfpLoadingBar.complete();
             }else {
               TemplateService.paginationLoader = false;

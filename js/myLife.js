@@ -108,7 +108,7 @@ var mylife = angular.module('mylife', [])
           data: {
             "urlSlug": urlSlug
           }
-        }).success(callback).error(function (data) {
+        },'allLoader').success(callback).error(function (data) {
           console.log(data);
         });
       },
@@ -119,7 +119,7 @@ var mylife = angular.module('mylife', [])
           data: {
             "urlSlug": urlSlug
           }
-        }).success(callback).error(function (data) {
+        },'allLoader').success(callback).error(function (data) {
           console.log(data);
         });
       },

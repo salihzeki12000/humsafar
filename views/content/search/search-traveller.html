@@ -1,11 +1,11 @@
 <div class="search-traveller clearfix" infinite-scroll="loadMoreSearch('search-traveller');" infinite-scroll-disabled='searchScroll.busy'>
   <div class="following-container" ng-repeat="list in viewSearchedUser track by $index">
     <div class="following-holder">
-      <div class="follow-imgholder pointer" ng-click="searchRoute(list);">
+      <div class="follow-imgholder pointer" ng-click="searchProfile(list);">
         <img ng-src="{{list.profilePicture|uploadpath:80:80:'cover'}}" class="img-responsive">
       </div>
       <div class="following-detail text-center">
-        <h4 class="color-blue avenir-heavy text-capitalize pointer" title="{{list.name}}" ng-click="searchRoute(list);">{{list.name | truncate:15}}</h4>
+        <h4 class="color-blue avenir-heavy text-capitalize pointer" title="{{list.name}}" ng-click="searchProfile(list);">{{list.name | truncate:15}}</h4>
         <h5 class="color-pink avenir-medium text-capitalize text-ellipsis" ng-if="list.homeCity && list.homeCountry.name"><i class="fa fa-map-marker mr5 color-pink"></i> <span title="{{list.homeCity}}, {{list.homeCountry.name}}">{{list.homeCity}}, {{list.homeCountry.name}}</span></h5>
       </div>
       <div class="photos-location-sec clearfix">
@@ -38,4 +38,7 @@
       </div>
     </div>
   </div>
+</div>
+<div class="pagination-loader" ng-if="paginationLoader">
+  <img src="img/page.svg" alt="Loading..." width="50px" class="img-responsive m-center">
 </div>

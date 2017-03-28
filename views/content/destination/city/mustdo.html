@@ -20,6 +20,7 @@
                   <div class="input-group outerDestCity">
                     <input type="text" class="form-control" placeholder="Search Destination" ng-model="dest.viewDestination" ng-change="callDestination();" ng-click="editOption(viewDestinationCity,'outerDestCity','innerDestCity')">
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <span class="small-loader" ng-if="searchLoader"><img src="img/page.svg" width="25px" alt="" class="img-responsive"></span>
                   </div>
                   <div class="dropdown-destination innerDestCity" ng-show="viewDestinationCity.backgroundClick">
                     <ul>

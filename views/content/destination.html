@@ -21,7 +21,9 @@
                 <div class="input-group destinationOuter">
                   <input type="text" class="form-control fnt-16" placeholder="Search Destination" ng-model="destination" ng-change="searchDestination(destination,'searchDest')" ng-click="editOption(seeDestination,'destinationOuter','destinationInner')">
                   <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
-                  <span ng-if="searchLoader && seeDestination.backgroundClick" class="small-loader"><img src="img/loading.gif" alt="" class="img-responsive"></span>
+                  <span ng-if="searchLoader" class="small-loader">
+                    <img src="img/page.svg" width="20px" alt="" class="img-responsive">
+                  </span>
                 </div>
                 <div class="dropdown-destination destination-main destinationInner" ng-show="seeDestination.backgroundClick">
                   <ul>
