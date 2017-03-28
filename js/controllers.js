@@ -2100,7 +2100,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
   })
 
-  .controller('popularBloggerCtrl', function ($scope, $state, TemplateService, LikesAndComments, NavigationService, $timeout, $uibModal, $location) {
+  .controller('PopularItineraryCtrl', function ($scope, $state, TemplateService, LikesAndComments, NavigationService, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -6519,17 +6519,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         url="settings";
       } else if (val == 2) {
         $scope.showSetting = 2;
-        url="edit-profile";        
+        url="edit-profile";
       } else if (val == 3) {
         $scope.showSetting = 3;
       } else if (val == 4) {
         $scope.showSetting = 4;
       } else if (val == 5) {
         $scope.showSetting = 5;
-        url="privacy-settings";        
+        url="privacy-settings";
       } else if (val == 6) {
         $scope.showSetting = 6;
-        url="report";                
+        url="report";
       } else {
         $scope.showSetting = 1;
         url="settings";
