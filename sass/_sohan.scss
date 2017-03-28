@@ -153,7 +153,9 @@ a.color-white {
       }
     }
   }
-
+  .destination-head {
+    min-height: 100vh;
+  }
   .bg-destination-city-img {
     background: url('../img/destination/bg-city.jpg') no-repeat;
     height: 425px;

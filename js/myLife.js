@@ -220,7 +220,7 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/journey/myLifeMomentWeb",
           data: obj,
           method: "POST"
-        }).success(successCallback).error(errorCallback);
+        },'paginationLoad').success(successCallback).error(errorCallback);
       },
       getTravelLifeMoments: function (type, pageNo, successCallback, errorCallback) { //for travel-life
         var obj = {
@@ -232,7 +232,7 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/journey/myLifeMomentWeb",
           data: obj,
           method: "POST"
-        }).success(successCallback).error(errorCallback);
+        },'paginationLoad').success(successCallback).error(errorCallback);
       },
       getPerMonthMoments: function (token, pageNo, limit, flag, successCallback, errorCallback) {
         console.log();
@@ -252,7 +252,7 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/journey/getTokenMomentWeb",
           data: obj,
           method: "POST"
-        }).success(successCallback).error(errorCallback);
+        },'paginationLoad').success(successCallback).error(errorCallback);
       },
       getJournItiMoments: function (_id, pagenumber, limit, flag, successCallback, errorCallback) {
         var url = "";
@@ -271,7 +271,7 @@ var mylife = angular.module('mylife', [])
           url: adminURL + url,
           data: obj,
           method: "POST"
-        }).success(successCallback).error(errorCallback);
+        },'paginationLoad').success(successCallback).error(errorCallback);
       },
       getAllReviews: function (type, pageNo, successCallback, errorCallback) {
         var obj = {
@@ -283,7 +283,7 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/journey/myLifeReviewWeb",
           data: obj,
           method: "POST"
-        }).success(successCallback).error(errorCallback);
+        },'paginationLoad').success(successCallback).error(errorCallback);
       },
       getCities: function (countryId, callback) {
         TravelibroService.http({
@@ -293,7 +293,7 @@ var mylife = angular.module('mylife', [])
             "urlSlug": $.jStorage.get("activeUrlSlug")
           },
           method: "POST"
-        }).success(callback).error(function (data) {
+        },'allLoader').success(callback).error(function (data) {
           console.log(data);
         });
       },
@@ -308,7 +308,7 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/post/getReviewsWeb",
           data: obj,
           method: "POST"
-        }).success(successCallback).error(errorCallback);
+        },'paginationLoad').success(successCallback).error(errorCallback);
       },
       getCategories: function (cityId, callback) {
         TravelibroService.http({
@@ -318,7 +318,7 @@ var mylife = angular.module('mylife', [])
             "urlSlug": $.jStorage.get("activeUrlSlug")
           },
           method: "POST"
-        }).success(callback).error(function (data) {
+        },'allLoader').success(callback).error(function (data) {
           console.log(data);
         });
       },
@@ -333,7 +333,7 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/post/getReviewsWeb",
           data: obj,
           method: "POST"
-        }).success(successCallback).error(errorCallback);
+        },'paginationLoad').success(successCallback).error(errorCallback);
       },
       savePostReview: function (obj, callback) {
         TravelibroService.http({

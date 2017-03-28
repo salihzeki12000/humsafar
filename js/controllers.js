@@ -3871,10 +3871,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.cityoptions.active = "";
     $scope.viewTab = 1;
     switch ($state.params.name) {
-      case "mustdo":
+      case "must-dos":
         $scope.destination.innerView = alldestination[0];
         $scope.cityDestinationView = true;
-        $scope.getCityInfo("must-dos", $scope.urlDestinationCity);
+        $scope.getCityInfo("mustDo", $scope.urlDestinationCity);
         $scope.cityoptions.active = "must-dos";
         $scope.ntMustdo = "ntMustdo";
         break;
@@ -4343,6 +4343,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.showTravellife = false;
     $scope.visited = [];
+
+    // loader pagination
+      setInterval(function(){
+        $scope.paginationLoader = TemplateService.paginationLoader;
+      },300);
+    // loader pagination end
 
     if ($.jStorage.get("isLoggedIn") && ($.jStorage.get("profile").urlSlug == $stateParams.urlSlug)) {
       //its your own profile so no need to call profile again
