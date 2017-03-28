@@ -60,16 +60,16 @@
               <!-- userFollowingRequest FOLLOWER DETAILS -->
               <div class="" ng-if="notify.type == 'userFollowingRequest'">
                 <div class="follower-details">
-                  <div class="notification-follower-detail">
-                    <span class="notifcation-follower-count">1.4m</span>
+                  <div class="notification-follower-detail" ng-if="notify.userFrom.followers_count  || notify.userFrom.checkins_count || notify.userFrom.countriesVisited_count">
+                    <span class="notifcation-follower-count">{{notify.userFrom.followers_count}}</span>
                     <span class="notifcation-follower-property">Followers</span>
                   </div>
                   <div class="notification-follower-detail">
-                    <span class="notifcation-follower-count">30</span>
+                    <span class="notifcation-follower-count">{{notify.userFrom.checkins_count}}</span>
                     <span class="notifcation-follower-property">Countries Visited</span>
                   </div>
                   <div class="notification-follower-detail">
-                    <span class="notifcation-follower-count">20</span>
+                    <span class="notifcation-follower-count">{{notify.userFrom.followers_count}}</span>
                     <span class="notifcation-follower-property">Journeys</span>
                   </div>
                 </div>
@@ -84,17 +84,17 @@
 
               <!-- userFollowing  FOLLOWER DETAILS -->
               <div class="" ng-if="notify.type == 'userFollowing'">
-                <div class="follower-details">
+                <div class="follower-details" ng-if="notify.userFrom.followers_count  || notify.userFrom.checkins_count  || notify.userFrom.countriesVisited_count ">
                   <div class="notification-follower-detail">
-                    <span class="notifcation-follower-count">1.4m</span>
+                    <span class="notifcation-follower-count">{{notify.userFrom.followers_count}}</span>
                     <span class="notifcation-follower-property">Followers</span>
                   </div>
                   <div class="notification-follower-detail">
-                    <span class="notifcation-follower-count">30</span>
+                    <span class="notifcation-follower-count">{{notify.userFrom.countriesVisited_count}}</span>
                     <span class="notifcation-follower-property">Countries Visited</span>
                   </div>
                   <div class="notification-follower-detail">
-                    <span class="notifcation-follower-count">20</span>
+                    <span class="notifcation-follower-count">{{notify.userFrom.checkins_count}}</span>
                     <span class="notifcation-follower-property">Journeys</span>
                   </div>
                 </div>
@@ -110,9 +110,15 @@
               <!-- TAG ITINERARY -->
               <div class="notification-checkin-ongo-photo notification-tagitinerary-action" ng-if="notify.type == 'itineraryRequest'" ui-sref="userdetailitinerary({'urlSlug':notify.userFrom.urlSlug, 'id':notify.data.urlSlug}) ">
                 <p class="">View to add to your My Life.</p>
-                <div class="notification-tagitinerary-photo">
+                <!-- <div class="notification-tagitinerary-photo">
                   <img ng-src="{{notify.data.coverPhoto|uploadpath:250:100:'cover'}}" alt="" class="img-responsive get-center">
+                </div> -->
+                <!-- ACCEPT DECLINE BUTTONS -->
+                <div class="notification-btn text-center">
+                  <button type="button" name="button" class="btn btn-notification-card" ng-click="acceptDeclineItinerary(notify,1)">Accept</button>
+                  <button type="button" name="button" class="btn btn-notification-card" ng-click="acceptDeclineItinerary(notify,0)">Decline</button>
                 </div>
+                <!-- ACCEPT DECLINE BUTTONS END -->
               </div>
               <!-- TAG ITINERARY END -->
 
