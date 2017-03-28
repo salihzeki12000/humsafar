@@ -21,7 +21,7 @@
                 <input type="text " class="form-control color-white avenir-light searchOuter" id="search " ng-model="search.searchType" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags "
                   ng-change="searchType();" ng-click="editOption(viewSearch,'searchOuter','searchInner')">
                   <span ng-if="searchHeaderLoad" class="small-loader">
-                    <img src="img/loading.gif" alt="" class="img-responsive">
+                    <img src="img/page.svg" width="25px" alt="" class="img-responsive">
                   </span>
                 <div class="search-result-dropdown searchInner" ng-show="viewSearch.backgroundClick;">
                   <div class="search-traveller-drop" ng-if="getAllSearched.user.length>0">
@@ -83,10 +83,10 @@
                     </div>
                     <ul class="searchdrop-options">
                       <li class="search-option" ng-repeat="country in getAllSearched.country track by $index ">
-                        <div class="search-option-img" ui-sref="destinationcountry({'name':'featured','url':country.urlSlug})">
+                        <div class="search-option-img" ui-sref="destinationcountry({'url':country.urlSlug,'name':'features-cities'})">
                           <img ng-src="{{country.flag|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
                         </div>
-                        <span class="search-optiontxt" ui-sref="destinationcountry({'name':'featured','url':country.urlSlug})">{{country.name}}</span>
+                        <span class="search-optiontxt" ui-sref="destinationcountry({'url':country.urlSlug','name':'features-cities'})">{{country.name}}</span>
                       </li>
                     </ul>
                   </div>
@@ -97,10 +97,11 @@
                     </div>
                     <ul class="searchdrop-options">
                       <li class="search-option" ng-repeat="city in getAllSearched.city track by $index ">
-                        <div class="search-option-img pointer" ui-sref="destinationcity({'name':'mustdo','url':city.urlSlug})">
+                        {{city.urlSlug}}
+                        <div class="search-option-img pointer" ui-sref="destinationcity({'url':city.urlSlug,'name':'must-dos'})">
                           <img ng-src="{{city.cityCoverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
                         </div>
-                        <span class="search-optiontxt pointer" ui-sref="destinationcity({'name':'mustdo','url':city.urlSlug})">{{city.name}}</span>
+                        <span class="search-optiontxt pointer" ui-sref="destinationcity({'url':city.urlSlug,'name':'must-dos'})">{{city.name}}</span>
                       </li>
                     </ul>
                   </div>
@@ -226,6 +227,9 @@
             <form autocomplete="off">
               <input type="text " class="form-control color-white avenir-light searchOuter" id="search " ng-model="search.searchType" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags "
                 ng-change="searchType();" ng-click="editOption(viewSearch,'searchOuter','searchInner')">
+                   <span ng-if="searchHeaderLoad" class="small-loader">
+                    <img src="img/page.svg" width="25px" alt="" class="img-responsive">
+                  </span>
               <div class="search-result-dropdown searchInner" ng-show="viewSearch.backgroundClick;">
                 <div class="search-traveller-drop" ng-if="getAllSearched.user.length>0">
                   <div class="search-dropheader search-dropheader-travel">
@@ -286,10 +290,10 @@
                   </div>
                   <ul class="searchdrop-options">
                     <li class="search-option" ng-repeat="country in getAllSearched.country track by $index ">
-                      <div class="search-option-img" ui-sref="destinationcountry({'name':'featured','url':country.urlSlug})">
+                      <div class="search-option-img" ui-sref="destinationcountry({'url':country.urlSlug,'name':'features-cities'})">
                         <img ng-src="{{country.flag|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
                       </div>
-                      <span class="search-optiontxt" ui-sref="destinationcountry({'name':'featured','url':country.urlSlug})">{{country.name}}</span>
+                      <span class="search-optiontxt" ui-sref="destinationcountry({'url':country.urlSlug,'name':'features-cities'})">{{country.name}}</span>
                     </li>
                   </ul>
                 </div>
@@ -300,10 +304,10 @@
                   </div>
                   <ul class="searchdrop-options">
                     <li class="search-option" ng-repeat="city in getAllSearched.city track by $index ">
-                      <div class="search-option-img pointer" ui-sref="destinationcity({'name':'mustdo','url':city.urlSlug})">
+                      <div class="search-option-img pointer" ui-sref="destinationcity({'url':city.urlSlug,'name':'must-dos'})">
                         <img ng-src="{{city.cityCoverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
                       </div>
-                      <span class="search-optiontxt pointer" ui-sref="destinationcity({'name':'mustdo','url':city.urlSlug})">{{city.name}}</span>
+                      <span class="search-optiontxt pointer" ui-sref="destinationcity({'url':city.urlSlug,'name':'must-dos'})">{{city.name}}</span>
                     </li>
                   </ul>
                 </div>
@@ -324,6 +328,9 @@
             <form autocomplete="off">
               <input type="text " class="form-control color-white avenir-light searchOuter" id="search " ng-model="search.searchType" placeholder="Search Travellers, Destinations, Itineraries, Agents &amp; Tags "
                 ng-change="searchType();" ng-click="editOption(viewSearch,'searchOuter','searchInner')">
+                   <span ng-if="searchHeaderLoad" class="small-loader">
+                    <img src="img/page.svg" width="25px" alt="" class="img-responsive">
+                  </span>
               <div class="search-result-dropdown searchInner" ng-show="viewSearch.backgroundClick;">
                 <div class="search-traveller-drop" ng-if="getAllSearched.user.length>0">
                   <div class="search-dropheader search-dropheader-travel">
@@ -384,10 +391,10 @@
                   </div>
                   <ul class="searchdrop-options">
                     <li class="search-option" ng-repeat="country in getAllSearched.country track by $index ">
-                      <div class="search-option-img" ui-sref="destinationcountry({'name':'featured','url':country.urlSlug})">
+                      <div class="search-option-img" ui-sref="destinationcountry({'url':country.urlSlug,'name':'features-cities'})">
                         <img ng-src="{{country.flag|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
                       </div>
-                      <span class="search-optiontxt" ui-sref="destinationcountry({'name':'featured','url':country.urlSlug})">{{country.name}}</span>
+                      <span class="search-optiontxt" ui-sref="destinationcountry({'url':country.urlSlug,'name':'features-cities'})">{{country.name}}</span>
                     </li>
                   </ul>
                 </div>
@@ -398,10 +405,10 @@
                   </div>
                   <ul class="searchdrop-options">
                     <li class="search-option" ng-repeat="city in getAllSearched.city track by $index ">
-                      <div class="search-option-img pointer" ui-sref="destinationcity({'name':'mustdo','url':city.urlSlug})">
+                      <div class="search-option-img pointer" ui-sref="destinationcity({'name':'must-dos','url':city.urlSlug})">
                         <img ng-src="{{city.cityCoverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
                       </div>
-                      <span class="search-optiontxt pointer" ui-sref="destinationcity({'name':'mustdo','url':city.urlSlug})">{{city.name}}</span>
+                      <span class="search-optiontxt pointer" ui-sref="destinationcity({'name':'must-dos','url':city.urlSlug})">{{city.name}}</span>
                     </li>
                   </ul>
                 </div>

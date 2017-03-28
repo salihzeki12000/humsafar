@@ -393,6 +393,8 @@ a.color-white {
 .sidemenu {
   overflow-y: scroll;
   padding: 0 30px;
+  @include transform(translateX(-400px));
+  @include transition(all 300ms linear);
   &::-webkit-scrollbar {
     width: 0;
   }
@@ -402,6 +404,14 @@ a.color-white {
   &::-webkit-scrollbar-thumb {
     background-color: #282b2d;
     outline: 1px solid #282b2d;
+  }
+  &.menu-out {
+    @include transform(translateX(-400px));
+    @include transition(all 300ms linear);
+  }
+  &.menu-in {
+    @include transform(translateX(0));
+    @include transition(all 300ms linear);
   }
   ul.nav-submenu {
     margin: -1px 0;
@@ -565,14 +575,6 @@ a.color-white {
       background: rgba(0, 0, 0, 0.85);
   color: #fff;
 }
-
-header {
-  .menu-out {
-    @include transform(translateX(-400px));
-    @include transition(all 300ms linear);
-  }
-}
-
 .menu-auto-slide {
   .content {
     @include transform(translateX(00px));
@@ -582,6 +584,7 @@ header {
     @include transform(translateX(400px));
   }
 }
+
 
 .fixed-close {
   position: fixed;
@@ -595,13 +598,6 @@ header {
   @include transition(all 300ms linear);
   &.menu-in {
     @include transform(translateX(00%));
-  }
-}
-
-header {
-  .menu-in {
-    @include transform(translateX(0));
-    @include transition(all 300ms linear);
   }
 }
 

@@ -177,8 +177,8 @@
                           <!-- <input type="date" class="form-control text-center" id="From_{{countryPanel}}{{cityPanel}}" ng-model="editCountry.from" ng-change="getDays(editCountry);" ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'"> -->
                           <input type="text" placeholder="Month" class="form-control text-center detail-date" ng-click="open1();" uib-datepicker-popup="{{format}}"
                             is-open="popup1.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="false"
-                            id="From_{{countryPanel}}{{cityPanel}}" ng-model="userData.dob" required name="dob" />
-                             <span ng-show="profile.dob.$touched && profile.dob.$invalid" class="help-inline">The DOB is required.</span>
+                            id="From_{{countryPanel}}{{cityPanel}}" ng-model="userData.dob" name="dob" />
+                             <!--<span ng-show="profile.dob.$touched && profile.dob.$invalid" class="help-inline">The DOB is required.</span>-->
                           <!--ng-value="editCountry.cityVisited[cityPanel-1].to | date:'yyyy-MM-dd'"-->
                         </div>
                       </div>
