@@ -59,8 +59,8 @@
 
               <!-- userFollowingRequest FOLLOWER DETAILS -->
               <div class="" ng-if="notify.type == 'userFollowingRequest'">
-                <div class="follower-details">
-                  <div class="notification-follower-detail" ng-if="notify.userFrom.followers_count  || notify.userFrom.checkins_count || notify.userFrom.countriesVisited_count">
+                <div class="follower-details" ng-if="notify.userFrom.followers_count  || notify.userFrom.checkins_count || notify.userFrom.countriesVisited_count">
+                  <div class="notification-follower-detail" >
                     <span class="notifcation-follower-count">{{notify.userFrom.followers_count}}</span>
                     <span class="notifcation-follower-property">Followers</span>
                   </div>
@@ -84,7 +84,7 @@
 
               <!-- userFollowing  FOLLOWER DETAILS -->
               <div class="" ng-if="notify.type == 'userFollowing'">
-                <div class="follower-details" ng-if="notify.userFrom.followers_count  || notify.userFrom.checkins_count  || notify.userFrom.countriesVisited_count ">
+                <div class="follower-details" ng-if="notify.userFrom.followers_count  || notify.userFrom.checkins_count  || notify.userFrom.countriesVisited_count">
                   <div class="notification-follower-detail">
                     <span class="notifcation-follower-count">{{notify.userFrom.followers_count}}</span>
                     <span class="notifcation-follower-property">Followers</span>

@@ -50,7 +50,7 @@
 </div>
 <div class="tint-bg">
   <div class="container">
-    <div class="popular-journey mt20 second blog-itineraries-main">
+    <div class="popular-journey mt20 second blog-itineraries-main"  infinite-scroll="getMoreJourney()" infinite-scroll-disabled="scroll.busy">
       <div masonry preserve-order>
         <div class="row">
           <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="post in popularJourneyData track by $index">
@@ -315,5 +315,8 @@
     <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike' list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
     <div class="backdrop-close" ng-class="{'view-backdrop':viewCardComment==true || viewCardLike==true,'':viewCardComment==false || viewCardLike==false}" ng-click="closeBackDrop();"></div>
     <!-- COMMENT LIKE SECTION END -->
+  </div>
+  <div class="" ng-if="template.paginationLoader">
+    <img src="img/page.svg" alt="" class="m-center img-responsive" width="25px">
   </div>
 </div>

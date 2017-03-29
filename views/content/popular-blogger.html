@@ -13,7 +13,7 @@
 </div>
 <div class="tint-bg popular-bloggerpage second">
 <div class="container">
-  <div class="popular-blogger ">
+  <div class="popular-blogger"  infinite-scroll="getMoreBlogger()" infinite-scroll-disabled="scroll.busy">
     <div class="row">
       <div class="col-md-3 col-sm-6" ng-repeat="photoblogger in popularBloggerData track by $index">
         <div class="blogger-cover">
@@ -86,5 +86,8 @@
       </div>
     </div>
   </div>
+</div>
+<div class="" ng-if="template.paginationLoader">
+  <img src="img/page.svg" alt="" class="m-center img-responsive" width="25px">
 </div>
 </div>

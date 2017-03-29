@@ -727,6 +727,12 @@ a.color-white {
   }
 }
 
+.mustdo-modal{
+  .flexslider{
+    max-height: 650px;
+  }
+}
+
 .musto-thumbnail {
   width: 600px;
   @include transform(rotate(90deg) translate(0, 0));
