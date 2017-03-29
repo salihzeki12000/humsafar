@@ -86,7 +86,7 @@
                         <div class="search-option-img" ui-sref="destinationcountry({'url':country.urlSlug,'name':'features-cities'})">
                           <img ng-src="{{country.flag|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
                         </div>
-                        <span class="search-optiontxt" ui-sref="destinationcountry({'url':country.urlSlug','name':'features-cities'})">{{country.name}}</span>
+                        <span class="search-optiontxt" ui-sref="destinationcountry({'url':country.urlSlug,'name':'features-cities'})">{{country.name}}</span>
                       </li>
                     </ul>
                   </div>
@@ -97,7 +97,6 @@
                     </div>
                     <ul class="searchdrop-options">
                       <li class="search-option" ng-repeat="city in getAllSearched.city track by $index ">
-                        {{city.urlSlug}}
                         <div class="search-option-img pointer" ui-sref="destinationcity({'url':city.urlSlug,'name':'must-dos'})">
                           <img ng-src="{{city.cityCoverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
                         </div>
