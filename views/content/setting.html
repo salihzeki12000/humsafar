@@ -479,12 +479,18 @@
               <!-- privacy policy end -->
               <!-- report a problem -->
               <div class="problem-detail" ng-if="showSetting == 6">
-                <form name='profile' ng-hide="showme">
+                <form name='reportData' ng-hide="showme">
                   <label for="problem">Report A Problem</label>
-                  <textarea name="problem" id="problem" class="form-control" placeholder="Comment" ng-model="problem"></textarea>
+                  <div class="form-group relate">  
+                  <textarea name="problem" id="problem" class="form-control" placeholder="Comment" ng-model="reportData.problem" required></textarea>
+                  <span ng-show="reportData.$submitted || reportData.problem.$touched">
+                      <span ng-show="reportData.problem.$error.required" class="help-inline">Comment is required.</span>
+                  </span>
+                  </div>
                   <div class="clearfix mt20">
                     <div class="pull-right">
-                      <button class="btn btn-pink btn-more" type="submit" ng-click="showme=true">Submit</button>
+                      <!--<button class="btn btn-pink btn-more" type="submit" ng-click="showme=true">Submit</button>-->
+                      <button class="btn btn-pink btn-more" type="submit">Submit</button>
                     </div>
                   </div>
                 </form>

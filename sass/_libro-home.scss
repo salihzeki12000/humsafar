@@ -660,7 +660,7 @@ a.color-white {
 
 // slide1
 .videoplay {
-  width: 87%;
+  width: 95%;
   height: 100%;
   margin: 0 auto;
   position: absolute;
@@ -712,11 +712,13 @@ a.color-white {
   position: relative;
   width: 275px;
   .iphone-image {
+        position: relative;
+    z-index: 3;
     img {
       width: 100%;
     }
   }
-}
+  }
 
 .slide-video {
   position: absolute;
@@ -1218,7 +1220,7 @@ a.color-white {
   @include transform(translate(-50%,
   -50%));
   width: 275px;
-  z-index: 9;
+  z-index: 12;
   @include transition(all ease 300ms);
 }
 
