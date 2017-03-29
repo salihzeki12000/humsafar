@@ -338,7 +338,7 @@ var navigationservice = angular.module('navigationservice', [])
         });
       },
       getDestinationBooking: function (formData, callback) {
-        $http.get("http://52.76.210.40:6090/migrations/city_bookings.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
+        $http.get("https://blog.travelibro.com/migrations/city_bookings.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
           callback(data);
         });
       },

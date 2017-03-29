@@ -127,6 +127,9 @@ var commontask = angular.module('commontask', [])
         });
       },
       getComments: function (type, _id, callback) {
+        if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+        }
         console.log(type, _id);
         var obj = {
           "_id": _id,
@@ -225,6 +228,9 @@ var commontask = angular.module('commontask', [])
         });
       },
       getLikes: function (type, _id, callback) {
+        if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+        }
         console.log(type, _id);
         var obj = {
           "_id": _id,

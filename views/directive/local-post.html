@@ -18,7 +18,8 @@
   <div class="local-post-main">
     <!-- post img and video img holder -->
     <div class="localpost-imgholder localpost-map" ng-if="localongo.photos && localongo.photos.length == 0 && localongo.showMap && localongo.checkIn && localongo.checkIn.lat">
-      <img ng-src="{{localongo.imageUrl|uploadpath}}" alt="" class="img-responsive full-width"><!---remove class full-width if layout is 3 or 2 -->
+      <img ng-src="{{localongo.imageUrl|uploadpath}}" alt="" class="img-responsive full-width">
+      <!---remove class full-width if layout is 3 or 2 -->
     </div>
     <div class="localpost-imgholder" ng-click="getPhotosCommentData(localongo.photosVideos[index]._id,index,localongo.photosVideos.length,localongo.photosVideos)"
       ng-if="localongo.photos.length>0 && localongo.onDisplay=='photos'">
@@ -89,16 +90,16 @@
       <div class="pull-right">
         <div class="relate options" ng-init="localongo.edit={};">
           <div class="mt5">
-            <div class="rating-localpost inline-block mt10" ng-if="localongo.checkIn && localongo.checkIn.location!='' && localongo.review && localongo.review==''">
+            <div class="rating-localpost inline-block mt10" ng-if="localongo.checkIn && localongo.checkIn.location!='' && localongo.review && localongo.review=='' && template.isMine">
               <span class="pointer bold italic" ng-click="rateLocalJourney(localongo);">Rate This Now</span>
             </div>
             <div class="get-rating inline-block" ng-if="localongo.checkIn && localongo.checkIn.location!='' && localongo.review && localongo.review!=''">
               <span class="color-blue font-bold mr5">Rating:</span>
-              <span class="pointer" ng-click="rateLocalJourney(localongo);">
+              <span class="pointer" ng-click="!template.isMine||rateLocalJourney(localongo);">
                 <span class="rated-star"><i class="fa fa-star color-cyan" ng-repeat="a in getLocalRating(localongo.review[0].rating,'marked') track by $index"></i></span>
               <span class="non-rated-star"><i class="fa fa-star-o" ng-repeat="b in getLocalRating(localongo.review[0].rating,'unmarked') track by $index"></i></span></span>
             </div>
-            <span ng-click="editOption(localongo.edit);" class="pl10 inline-block pointer">
+            <span ng-click="editOption(localongo.edit);" class="pl10 inline-block pointer" ng-if="template.isMine">
             <img src="img/options.png" alt="" height="18">
             </span>
           </div>

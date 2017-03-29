@@ -85,7 +85,7 @@
                 <!-- review empty all view profile user login for first time -->
 
                 <!-- PRIVATE PROFILE EMPTY SCREEN -->
-                <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+                <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 || userData.following==undefined || userData.following==null) && userData.status=='private'">
                   <div class="row">
                     <div class="col-md-offset-2 col-md-8">
                       <div class="private-accountcover text-center">
@@ -176,7 +176,7 @@
                 <!-- review empty travel view profile user login for first time -->
 
                 <!-- PRIVATE PROFILE EMPTY SCREEN -->
-                <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+                <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 || userData.following==undefined || userData.following==null) && userData.status=='private'">
                   <div class="row">
                     <div class="col-md-offset-2 col-md-8">
                       <div class="private-accountcover text-center">
@@ -284,7 +284,7 @@
                 <!-- review empty local view profile user login for first time -->
 
                 <!-- PRIVATE PROFILE EMPTY SCREEN -->
-                <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+                <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 || userData.following==undefined || userData.following==null) && userData.status=='private'">
                   <div class="row">
                     <div class="col-md-offset-2 col-md-8">
                       <div class="private-accountcover text-center">

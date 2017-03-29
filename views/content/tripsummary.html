@@ -94,7 +94,7 @@
             <li>
               <div class="days-count" ng-init="count=(trip.endTime|dateDifference: trip.startTime)">
                 <span class="color-blue avenir-roman block">{{trip.startTime|formatDate:'date'}}</span>
-                <p class="m-clear"><span class="color-blue avenir-black">{{count}}</span> <span>{{count|singularPlural:'Days'}}</span></p>
+                <p class="m-clear"><span class="color-blue avenir-black">{{trip.endTime|dateDifference: trip.startTime}}</span> <span>{{(trip.endTime|dateDifference: trip.startTime)|singularPlural:'Days'}}</span></p>
               </div>
             </li>
             <!-- <li>
@@ -159,7 +159,7 @@
                 <img src="img/ongojourney/otg-location.png" alt="CheckIn" class="img-responsive">
               </div>
               <div class="trip-status">
-                <span class="color-blue avenir-roman status" ng-bind-html="checkIns|postString"></span>
+                <span class="color-blue avenir-roman status" ng-bind-html="checkIns|postString:true"></span>
                 <span class="avenir-roman trip-photo-added pointer">{{trip.photoAdd}}</span>
                 <p class="avenir-roman trip-time-day"><i class="fa fa-calendar mr5"></i><span>{{checkIns.UTCModified|formatDate:"date"}}</span> | <i class="fa fa-clock-o mr5"></i><span>{{checkIns.UTCModified|formatDate:"time"}}</span></p>
               </div>

@@ -76,11 +76,17 @@
               <span class="color-white avenir-heavy" ng-click="editOption(ongo.shareJrny);">Share</span>
               <div class="share-dropdown" ng-show="ongo.shareJrny.backgroundClick">
                 <ul>
-                  <li><a ng-href="https://www.facebook.com/sharer/sharer.php?u={{journey.sharingUrl}}/&title=TraveLibro" target="_blank" class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>
-                  <li><a ng-href="https://twitter.com/intent/tweet?url={{journey.sharingUrl}}/&title=TraveLibro" target="_blank" class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>
-                  <li><a ng-href="https://plus.google.com/share?url=={{journey.sharingUrl}}/&title=TraveLibro" target="_blank" class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
-                  <li><a ng-href="http://pinterest.com/pin/create/button/?url={{journey.sharingUrl}}" target="_blank" class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a></li>
-                  <li><a ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{journey.sharingUrl}}" target="_blank" class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
+                  <li><a ng-href="https://www.facebook.com/sharer/sharer.php?u={{journey.sharingUrl}}/&title=TraveLibro" target="_blank"
+                      class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>
+                  <li><a ng-href="https://twitter.com/intent/tweet?url={{journey.sharingUrl}}/&title=TraveLibro" target="_blank"
+                      class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>
+                  <li><a ng-href="https://plus.google.com/share?url=={{journey.sharingUrl}}/&title=TraveLibro" target="_blank"
+                      class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
+                  <li>
+                    <a ng-href="http://pinterest.com/pin/create/button/?url={{journey.sharingUrl}}" target="_blank" class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a>
+                  </li>
+                  <li><a ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{journey.sharingUrl}}" target="_blank"
+                      class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
                   <li><a href="" class="mail-icon"><i class="fa fa-envelope-square fa-2x"></i></a></li>
                 </ul>
               </div>
@@ -88,7 +94,7 @@
             <!--<div class="following hide">
               <span class="color-white avenir-medium">Following</span>
             </div>-->
-            <div class="edit-journey relate" ng-init='ongo.editThisJrny={}' ng-if="isMine">
+            <div class="edit-journey relate" ng-init='ongo.editThisJrny={}' ng-if="template.isMine">
               <span class="color-white pointer" ng-click="editOption(ongo.editThisJrny);">Edit This Journey</span>
               <div class="edit-journey-dropdown" ng-show="ongo.editThisJrny.backgroundClick">
                 <ul>
@@ -121,7 +127,7 @@
               <div class="box-start-journey" ng-class="{'hasLatLng':journey.location && journey.location.lat}">
                 <!-- header started -->
                 <div class="started-heading relate text-center clearfix" ng-init="ongo.kindOf = {};">
-                  <div class="start-card-options" ng-click="editOption(ongo.kindOf);" ng-if="isMine">
+                  <div class="start-card-options" ng-click="editOption(ongo.kindOf);" ng-if="template.isMine">
                     <img src="img/options-white.png" alt="Edit Journey" width="3" class="img-responsive">
                     <div class="edit-kind-journey" ng-show="ongo.kindOf.backgroundClick;">
                       <ul>
@@ -177,7 +183,7 @@
           <div class="relate">
             <div class="dot-line"></div>
             <div class="card-relate-holder functionmap" ng-if="journey.post">
-              <journey-post post="ongo" is-mine="isMine" is-logged-in="isLoggedIn" json=journey get-comments-data="getCommentsData(post)"
+              <journey-post post="ongo" is-mine="template.isMine" is-logged-in="isLoggedIn" json=journey get-comments-data="getCommentsData(post)"
                 close-back-drop="closeBackDrop()" get-likes-data="getLikesData(post)" ng-repeat="ongo in journey.post"></journey-post>
               <!-- ongo journey-end -->
               <div class="ongo-journey-end" ng-if="journey.onGoing==false">

@@ -26,7 +26,7 @@
                 <div class="travel-life-btn inline-block mt5 ml20 mr20">
                   <div class="pointer">
                     <span class="btn-tab active-btn-travel"></span>
-                    <span>Travel Life</span>
+                    <span>Travel Life{{!template.isMine && (userData.following==0 || userData.following==2 || userData.following==undefined || userData.following==null) && userData.status=='private'}}</span>
                   </div>
                 </div>
                 <div class="travel-life-btn inline-block mt5 ml20 mr20">
@@ -37,7 +37,7 @@
                 </div>
               </div>
               <div class="pull-right">
-                <div class="add-journey" ng-init="closeJourney={}" ng-if="isMine">
+                <div class="add-journey" ng-init="closeJourney={}" ng-if="template.isMine">
                   <!--<span class="pointer" ng-click="false||(showMore = !showMore); editOption(closeJourney)" remove-link my-profile='false' element-event="$event" ng-class="{'close-more' : showMore == true}"><i class="fa fa-plus"></i></span>-->
                   <span class="pointer" ng-click="false||(showMore = !showMore); editOption(closeJourney)" remove-link my-profile='false' element-event="$event"><i class="fa fa-plus"></i></span>
                   <div class="add-more-journey" ng-show="closeJourney.backgroundClick">
@@ -53,7 +53,7 @@
           </div>
           <!--End of switch Travel life and local life-->
           <!-- user logged for first time -->
-          <div class="empty-profile-journey" ng-if="!hasJourney && (isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
+          <div class="empty-profile-journey" ng-if="!hasJourney && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
             <div class="row">
               <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10">
                 <div class="row">
@@ -127,7 +127,7 @@
           </div>
           <!-- user logged for first time end -->
           <!-- PRIVATE PROFILE EMPTY SCREEN -->
-          <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+          <div class="empty-profile-journey private-accountempty" ng-if="!template.isMine && (userData.following==0 || userData.following==2 || userData.following==undefined ||userData.following==null) && userData.status=='private'">
             <div class="row">
               <div class="col-md-offset-2 col-md-8">
                 <div class="private-accountcover text-center">
@@ -138,7 +138,7 @@
             </div>
           </div>
           <!-- PRIVATE PROFILE EMPTY SCREEN END -->
-          <div class="container" ng-if="isMine || (userData.following==1 && userData.status=='private') || userData.status=='public'">
+          <div class="container" ng-if="template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public'">
 
             <div class="masonry-detail" ng-show="hasJourney" infinite-scroll="getMore()" infinite-scroll-disabled="scroll.busy" infinite-scroll-distance='1'>
               <div masonry preserve-order>
@@ -252,7 +252,7 @@
                                 </li>-->
                               </ul>
                             </div>
-                            <div class="pull-right" ng-if="isMine">
+                            <div class="pull-right" ng-if="template.isMine">
                               <div class="relate options pointer" ng-init="life.dropdown = {};">
                                 <div class="options" ng-click="editOption(life.dropdown)">
                                   <span class="pl10"><img src="img/options.png" alt="" height="18"></span>
@@ -571,7 +571,7 @@
         </div>
         <!-- user logged for first time local life end -->
         <!-- PRIVATE PROFILE EMPTY SCREEN -->
-        <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+        <div class="empty-profile-journey private-accountempty" ng-if="!template.isMine && (userData.following==0 || userData.following==2 || userData.following==undefined || userData.following==null) && userData.status=='private'">
           <div class="row">
             <div class="col-md-offset-2 col-md-8">
               <div class="private-accountcover text-center">
@@ -582,7 +582,7 @@
           </div>
         </div>
         <!-- PRIVATE PROFILE EMPTY SCREEN END -->
-        <div class="local-life-main" ng-hide="showLocalLife" ng-if="isMine || (userData.following==1 && userData.status=='private') || userData.status=='public'">
+        <div class="local-life-main" ng-hide="showLocalLife" ng-if="template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public'">
           <div class="overlay-filter" ng-class="{ 'fliter-open': isopen}" ng-click="openMyLifeFilter()"></div>
           <div class="inline-block filter-local-life avenir-roman" ng-class="{ 'fliter-open': isopen} ">
             <form action="">

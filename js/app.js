@@ -134,7 +134,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'ContactCtrl'
     })
     .state('booking', {
-      url: "/bookings",
+      url: "/bookings-notRequired",
       templateUrl: "views/template.html",
       controller: 'BookingCtrl'
     })
@@ -1234,8 +1234,14 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
 }]);
 
 firstapp.filter('postString', function () {
-  return function (checkIn) {
-    var location = checkIn.checkIn;
+  return function (checkIn, tripSummary) {
+    var location = {};
+    if (tripSummary) {
+      location = checkIn;
+    } else {
+      location = checkIn.checkIn;
+    }
+    // var location = checkIn.checkIn;
     var postString = "";
     var buddiesString = "";
     var buddiesCount = checkIn.buddies.length;
@@ -1445,6 +1451,7 @@ firstapp.filter('dateDifference', function () {
 
     var days = current.diff(previous, 'days') + 1;
     // var returnVal = moment(current).diff(moment(previous), 'days')+1;
+    // alert(days);
     return days;
   };
 });
@@ -1588,11 +1595,11 @@ firstapp.filter('seasonType', function () {
     return returnVal;
   }
 });
-$(document).ready(function () {
-  $(".element").typed({
-    strings: ["Capture | Inspire | Relive...", "Travel Life | Local Life...", "Loading...", "Almost There..."],
-    startDelay: 20,
-    typeSpeed: 100,
-    loop: true
-  });
-});
+// $(document).ready(function () {
+//   $(".element").typed({
+//     strings: ["Capture | Inspire | Relive...", "Travel Life | Local Life...", "Loading...", "Almost There..."],
+//     startDelay: 20,
+//     typeSpeed: 100,
+//     loop: true
+//   });
+// });

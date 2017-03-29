@@ -2,23 +2,23 @@
   <div class="container-fluid">
     <div class="profile-photo-section relate">
       <div class="profile-pic relate">
-        <a ui-sref="setting" ng-if="isMine">
+        <a ui-sref="setting" ng-if="template.isMine">
           <div class="profile-imgholder ">
             <img ng-src="{{userData.profilePicture|uploadpath:140:150:'cover'}}" alt="{{userData.name}}" class="img-responsive" style="border-radius:'50px';">
           </div>
         </a>
-        <a href="{{userData.profilePicture|uploadpath}}" fancybox-box class="fancybox" ng-if="!isMine">
+        <a href="{{userData.profilePicture|uploadpath}}" fancybox-box class="fancybox" ng-if="!template.isMine">
           <div class="profile-imgholder ">
             <img ng-src="{{userData.profilePicture|uploadpath:140:150:'cover'}}" alt="{{userData.name}}" class="img-responsive" style="border-radius:'50px';">
           </div>
         </a>
-        <img src="{{userData.homeCountry.flag|uploadpath:40}}"  alt="" width="40" class="flag img-responsive">
+        <img src="{{userData.homeCountry.flag|uploadpath:40}}" alt="" width="40" class="flag img-responsive">
         <img src="img/wave-profile.png" alt="" width="40" class="wave img-responsive">
       </div>
       <div class="profile-more-detail text-center">
         <h3 class="color-blue m-clear font-bold avenir-medium ">{{userData.name}}</h3>
         <h5 class="color-pink avenir-roman">Lives In : <i class="fa fa-map-marker mr5"></i><span>{{userData.homeCity}}</span></h5>
-        <button ng-if="!isMine" class="btn btn-pink btn-more" ng-click="followFollowing(userData)">{{userData.following | followFollowingStatus}}</button>
+        <button ng-if="!template.isMine" class="btn btn-pink btn-more" ng-click="followFollowing(userData)">{{userData.following | followFollowingStatus}}</button>
       </div>
     </div>
     <div class="user-travel-detail relate">
@@ -87,11 +87,11 @@
           <div class="col-md-offset-2 col-md-8">
             <div class="text-center">
               <div class="more-detail" ng-init="getMore=false" ng-show="getMore">
-                <p class="avenir-roman"  ng-if="userData.alreadyLoggedIn==true"><span class="avenir-heavy">{{userName}}</span> loves to travel and explore <span class="avenir-heavy">{{kindOfHoliday}}</span>.
+                <p class="avenir-roman" ng-if="userData.alreadyLoggedIn==true"><span class="avenir-heavy">{{userName}}</span> loves to travel and explore <span class="avenir-heavy">{{kindOfHoliday}}</span>.
                   {{pronoun | capitalize}} usually goes <span class="avenir-heavy">{{usuallyGo}}{{usuallyGo1}}</span>, {{pronoun}}
                   {{intermediate}}
                   <span class="avenir-heavy">{{preferToTravel}}</span>. <span class="avenir-heavy">{{userName}}'s</span>                  ideal holiday type is <span class="avenir-heavy">{{idealHoliday}}</span>.</p>
-                  <p ng-if="userData.alreadyLoggedIn==false"> - </p>
+                <p ng-if="userData.alreadyLoggedIn==false"> - </p>
               </div>
               <span class="djb-font get-more pointer" ng-click="getMore = !getMore">more about me... <img src="img/more-about-me.png" alt="" height="35" class="" ng-class="{'abt-me': getMore == true}"></span>
             </div>
@@ -110,7 +110,7 @@
               </div>
             </div>
             <div class="col-lg-3 col-md-4">
-              <div class="wish-country-visit" ng-if="isMine">
+              <div class="wish-country-visit" ng-if="template.isMine">
                 <div class="text-right">
                   <span class="color-blue fz12 mr10 avenir-roman"><i class="fa fa-check color-pink mr5"></i> Been There {{wishCountry}}</span>
                   <span class="color-blue fz12 ml10 avenir-roman"><i class="fa fa-heart color-blue mr5"></i> Would Love To Go</span>
@@ -128,13 +128,14 @@
                           <div class="get-right pull-right">
                             <div class="relate inline-block mr10">
                               <div class="custom-checkbox">
-                                <input type="checkbox" id="{{list._id}}" ng-model="list.countryVisited" ng-disabled="!isMine">
-                                <label for="{{list._id}}" ng-click="!isMine||updateCountryVisited(list);"></label>
+                                <input type="checkbox" id="{{list._id}}" ng-model="list.countryVisited" ng-disabled="!template.isMine">
+                                <label for="{{list._id}}" ng-click="!template.isMine||updateCountryVisited(list);"></label>
                               </div>
                             </div>
                             <div class="relate inline-block mr10 ">
                               <div class="bucket-list custom-checkbox-heart ">
-                                <input type="checkbox" id="wish{{list._id}}" ng-model="list.bucketList" ng-click="!isMine||updateBucketList(list)" ng-disabled="!isMine">
+                                <input type="checkbox" id="wish{{list._id}}" ng-model="list.bucketList" ng-click="!template.isMine||updateBucketList(list)"
+                                  ng-disabled="!template.isMine">
                                 <label for="wish{{list._id}}"></label>
                               </div>
                             </div>

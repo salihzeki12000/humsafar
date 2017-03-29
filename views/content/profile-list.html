@@ -137,7 +137,7 @@
       <!-- following tab -->
       <div class="follower-tab-main" ng-if="activeMenu == 'following'">
         <!-- PRIVATE PROFILE EMPTY SCREEN -->
-        <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+        <div class="empty-profile-journey private-accountempty" ng-if="!template.isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
           <div class="row">
             <div class="col-md-offset-2 col-md-8">
               <div class="private-accountcover text-center">
@@ -194,7 +194,7 @@
       <!-- follower tab -->
       <div class="follow-tab-main" ng-if="activeMenu == 'followers'">
         <!-- PRIVATE PROFILE EMPTY SCREEN -->
-        <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+        <div class="empty-profile-journey private-accountempty" ng-if="!template.isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
           <div class="row">
             <div class="col-md-offset-2 col-md-8">
               <div class="private-accountcover text-center">
@@ -251,7 +251,7 @@
       <!-- country visited -->
       <div class="country-visited-tab" ng-if="activeMenu == 'countries-visited'">
         <!-- PRIVATE PROFILE EMPTY SCREEN -->
-        <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+        <div class="empty-profile-journey private-accountempty" ng-if="!template.isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
           <div class="row">
             <div class="col-md-offset-2 col-md-8">
               <div class="private-accountcover text-center">
@@ -281,7 +281,7 @@
                     </div>
                   </div>
                   <!-- hover -->
-                  <div class="country-list" ng-if="isMine">
+                  <div class="country-list" ng-if="template.isMine">
                     <div class="get-center full-width text-center">
                       <span class="year-remove avenir-medium" ng-click="updateCountryVisited(country.countryId._id);"><i class="fa fa-calendar block mb5"></i>
                         Add Year
@@ -302,7 +302,7 @@
       <!-- bucket list -->
       <div class="bucket-tab-main" ng-if="activeMenu == 'bucket-list'">
         <!-- PRIVATE PROFILE EMPTY SCREEN -->
-        <div class="empty-profile-journey private-accountempty" ng-if="!isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
+        <div class="empty-profile-journey private-accountempty" ng-if="!template.isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
           <div class="row">
             <div class="col-md-offset-2 col-md-8">
               <div class="private-accountcover text-center">
@@ -332,7 +332,7 @@
                     </div>
                   </div>
                   <!-- hover -->
-                  <div class="country-list" ng-if="isMine">
+                  <div class="country-list" ng-if="template.isMine">
                     <div class="get-center">
                       <span class="year-remove" ng-click="removeFromBucketList(bucket._id)"><i class="fa fa-trash-o block mb5"></i>
                         Remove
