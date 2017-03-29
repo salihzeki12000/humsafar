@@ -68,7 +68,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               }
               }
 
-            }, 300);
+            }, 500);
           }
         });
       }
@@ -137,7 +137,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $("video").prop('muted', false);
       } else {
         $scope.audioStatus = {}
-        $("video").prop('muted', true);
+        $("video").prop('muted');
       }
     }
   })
@@ -2806,7 +2806,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // destination city
     $scope.countryView = function (url, isCity) {
       $state.go("destinationcity", {
-        name: "mustdo",
+        name: "must-dos",
         url: url
       })
     }
