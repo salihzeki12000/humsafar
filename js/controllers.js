@@ -47,33 +47,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // console.log($(".fp-section"));
       if (length === 0) {
         $('.fullpage').fullpage({
-          //Navigation
-
-          onLeave: function (index, nextIndex, direction) {
-            $timeout(function () {
-                         swiper.slideTo(nextIndex - 1);
-                         console.log(nextIndex - 1);
-                         //playing the video
-                         // $('video').get(nextIndex - 1).load();
-                         if ($(window).width() >= 767) {
-                           for (i = 1; i < 4; i++) {
-                             // $('video').each(function () {
-                             //   allVideos.push($(this).get(0));
-                             // });
-                               if (i == nextIndex - 1) {
-                                //  console.log($('video'));
-                                $('video').get(nextIndex - 1).load();
-                                $('video').get(nextIndex - 1).play();
-                               }
-                               else {
-                                //  console.log(i);
-                                 $('.video').get(i).pause();
-                               }
-                           }
-                         }
-          }, 500);
-          }
-        });
+                  //Navigation
+                  onLeave: function (index, nextIndex, direction) {
+                    $timeout(function () {
+                      swiper.slideTo(nextIndex - 1);
+                      //playing the video
+                      // $('video').get(nextIndex - 1).load();
+                      if ($(window).width() >= 767) {
+                        for (i = 1; i < 4; i++) {
+                          // $('video').each(function () {
+                          //   allVideos.push($(this).get(0));
+                          // });
+                            if (i == nextIndex - 1) {
+                              console.log($('video'));
+                              $('#video' + i).get(0).load();
+                              $('#video' + i).get(0).play();
+                            }
+                            else {
+                              console.log(i);
+                              $('#video' + i).get(0).pause();
+                            }
+                        }
+                      }
+                    }, 500);
+                  }
+                });
       }
       // console.log(text);
       $scope.homeval = text;
