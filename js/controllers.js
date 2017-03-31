@@ -40,7 +40,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       four: "views/section/mylife.html",
       five: "views/section/share.html",
     };
-                         $scope.$on('$viewContentLoaded', function(){
     $scope.changePage = function (text) {
       // console.log(text);
       var length = $(".fp-section").length;
@@ -57,8 +56,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                          //playing the video
                          // $('video').get(nextIndex - 1).load();
                          if ($(window).width() >= 767) {
-                                $("video").each(function(){
-                           for (i = 1; i <= 3; i++) {
+                           for (i = 1; i < 4; i++) {
                              // $('video').each(function () {
                              //   allVideos.push($(this).get(0));
                              // });
@@ -68,11 +66,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                                 $('video').get(nextIndex - 1).play();
                                }
                                else {
-
-      $('video').get(i).pause();
+                                //  console.log(i);
+                                 $('.video').get(i).pause();
                                }
                            }
-                              });
                          }
           }, 500);
           }
@@ -101,7 +98,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           break;
       }
     };
-      }); 
     $(window).load(function () {
       document.getElementById('movie1').play();
       if ($(window).width() < 767) {
