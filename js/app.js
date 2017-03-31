@@ -33,11 +33,11 @@ $("body").click(function (e) {
   if ($(e.target).parent().hasClass('drop-content')) {
     return;
   } else if ($(e.target).hasClass('toggle-dropDown')) {
-    $scope.viewDropdown.showDropdown = !$scope.viewDropdown.showDropdown;
-    $scope.$apply();
+    // $scope.viewDropdown.showDropdown = !$scope.viewDropdown.showDropdown;
+    // $scope.$apply();
   } else {
-    $scope.viewDropdown.showDropdown = false;
-    $scope.$apply();
+    // $scope.viewDropdown.showDropdown = false;
+    // $scope.$apply();
   }
 });
 
