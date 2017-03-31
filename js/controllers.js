@@ -73,6 +73,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   }
                 });
       }
+      
       // console.log(text);
       $scope.homeval = text;
       switch (text) {
