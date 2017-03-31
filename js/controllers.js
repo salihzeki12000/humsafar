@@ -56,6 +56,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                          //playing the video
                          // $('video').get(nextIndex - 1).load();
                          if ($(window).width() >= 767) {
+                                $("video").each(function(){
                            for (i = 1; i <= 3; i++) {
                              // $('video').each(function () {
                              //   allVideos.push($(this).get(0));
@@ -66,12 +67,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                                 $('video').get(nextIndex - 1).play();
                                }
                                else {
-                                 $("video").each(function(){
-      $('video').get(i).pause();
-   });
 
+      $('video').get(i).pause();
                                }
                            }
+                              });
                          }
           }, 500);
           }
