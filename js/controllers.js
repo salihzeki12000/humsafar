@@ -52,21 +52,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           onLeave: function (index, nextIndex, direction) {
             $timeout(function () {
                          swiper.slideTo(nextIndex - 1);
+                         console.log(nextIndex - 1);
                          //playing the video
                          // $('video').get(nextIndex - 1).load();
                          if ($(window).width() >= 767) {
-                           for (i = 1; i < 4; i++) {
+                           for (i = 1; i <= 3; i++) {
                              // $('video').each(function () {
                              //   allVideos.push($(this).get(0));
                              // });
                                if (i == nextIndex - 1) {
-                                 console.log($('video'));
-                                 $('#video' + i).get(0).load();
-                                 $('#video' + i).get(0).play();
+                                //  console.log($('video'));
+                                $('video').get(nextIndex - 1).load();
+                                $('video').get(nextIndex - 1).play();
                                }
                                else {
-                                 console.log(i);
-                                 $('#video' + i).get(0).pause();
+                                 $("video").each(function(){
+      $('video').get(i).pause();
+   });
+
                                }
                            }
                          }
