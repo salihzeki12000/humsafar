@@ -51,24 +51,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
           onLeave: function (index, nextIndex, direction) {
             $timeout(function () {
-              swiper.slideTo(nextIndex - 1);
-              //playing the video
-              // $('video').get(nextIndex - 1).load();
-
-              if ($(window).width() >= 767) {
-                for (i = 1; i < 4; i++) {
-                  if (i == nextIndex - 1) {
-                    // console.log(index);
-                    $('video').get(nextIndex - 1).load();
-                    $('video').get(nextIndex - 1).play();
-                  } else {
-                    // console.log(i);
-                    $('video').get(i).pause();
-                  }
-                }
-              }
-
-            }, 500);
+                         swiper.slideTo(nextIndex - 1);
+                         //playing the video
+                         // $('video').get(nextIndex - 1).load();
+                         if ($(window).width() >= 767) {
+                           for (i = 1; i < 4; i++) {
+                             // $('video').each(function () {
+                             //   allVideos.push($(this).get(0));
+                             // });
+                               if (i == nextIndex - 1) {
+                                 console.log($('video'));
+                                 $('#video' + i).get(0).load();
+                                 $('#video' + i).get(0).play();
+                               }
+                               else {
+                                 console.log(i);
+                                 $('#video' + i).get(0).pause();
+                               }
+                           }
+                         }
+          }, 500);
           }
         });
       }
@@ -10885,7 +10887,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           } else if ($scope.userData && $scope.userData.alreadyLoggedIn == false) {
             $state.go('mainpage');
           }
-          //restrict user who has not followed starings steps end          
+          //restrict user who has not followed starings steps end
         } else {
 
         }
