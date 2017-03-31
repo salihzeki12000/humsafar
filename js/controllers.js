@@ -40,6 +40,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       four: "views/section/mylife.html",
       five: "views/section/share.html",
     };
+                         $scope.$on('$viewContentLoaded', function(){
     $scope.changePage = function (text) {
       // console.log(text);
       var length = $(".fp-section").length;
@@ -100,6 +101,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           break;
       }
     };
+      }); 
     $(window).load(function () {
       document.getElementById('movie1').play();
       if ($(window).width() < 767) {
