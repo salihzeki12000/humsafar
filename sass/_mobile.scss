@@ -1,214 +1,183 @@
 @media screen and (min-width: 1400px) {
-.fixed-mobile {
+  .fixed-mobile {
     width: 375px;
     .mobile-video {
-    width: 375px;
-}
-}
-.videoplay {
-  width: 88%;
-}
-.slide-video {
+      width: 375px;
+    }
+  }
+  .videoplay {
+    width: 88%;
+  }
+  .slide-video {
     width: 345px;
     height: 520px;
-}
-.volume-off-on {
-  right: 60px;
+  }
+  .volume-off-on {
+    right: 60px;
     bottom: 150px;
-}
-  //vectormap
+  } //vectormap
   .vector-map {
     padding: 40px 20px 30px;
-
     mappy svg {
       zoom: 0.8;
     }
   }
 }
+
 @media screen and (max-width: 1200px) {
   //header
-  .user-detail .list-inline > li {
+  .user-detail .list-inline>li {
     padding: 0 8px;
   }
-.socialize-holder ul {
+  .socialize-holder ul {
     display: block;
-}
+  }
   .search {
     width: 100%;
-
     input {
       width: 100%;
     }
-  }
-  //header end
+  } //header end
   // holiday page
   .usually-go {
     margin-bottom: 20%;
-  }
-  // holiday page end
+  } // holiday page end
   // ongo journey page
   .journey-info-strip {
     .own-journey {
       margin: 0;
       display: block;
     }
-
     .btn-summary,
     .trip-list {
       margin-top: 10px;
     }
   }
-
   .journey-type img {
     height: 15px;
   }
-
   .journey-collection {
     .mr5 {
       margin-right: 0;
     }
-
     img {
-      width: 14px !important;
+      width: 12px !important;
+      line-height: 0.4;
     }
-
     li {
       padding: 0 3px !important;
-
       img {
         width: 12px !important;
       }
     }
   }
-  .options .own-trip{
+  .options .own-trip {
     padding: 15px;
-  }
-  // ongo journey page end
+  } // ongo journey page end
   .list-travel-view {
     margin-right: 2px;
   }
-  // my life
-  .star-post-rating .list-inline > li{
-    padding-left: 0;  
+  .travelled-imgholder {
+    min-height: 290px;
+    max-height: 330px;
+  } // my life
+  .star-post-rating .list-inline>li {
+    padding-left: 0;
   }
   .user-travel-detail {
     ul li {
       padding: 0 15px;
     }
   }
-
   .travel-inside {
     font-size: 14px;
   }
-
-  .all-profile-detail{
+  .all-profile-detail {
     padding: 0;
   }
-  .journey-tabs .onway-imgholder{
+  .journey-tabs .onway-imgholder {
     height: 330px;
-  }
-  // my life end
+  } // my life end
   // LOCAL LIFE
-  .related-postholder{
+  .related-postholder {
     width: 105px;
     height: 105px;
   }
-
-  .local-post-slider .flexslider .slides > li{
+  .local-post-slider .flexslider .slides>li {
     width: 115px !important;
     margin-right: 0 !important;
-  }
-  // LOCAL LIFE END
+  } // LOCAL LIFE END
   // setting
   .setting-menu-tab {
     padding: 0;
   }
-
   .setting-typeholder {
     margin-top: 3px;
-
     img {
       width: 30px;
     }
   }
-
   .setting-list {
     .tab-list {
       padding: 10px 5px 15px 0;
     }
-
     i {
       margin-top: 2px;
       font-size: 16px;
     }
   }
-
   .setting-prof-imgholder {
     width: 55px;
     height: 58px;
     border-radius: 22px;
   }
-
   .profile-detail h4 {
     font-size: 17px;
   }
-
   .setting-main-detail {
     margin-left: 10px;
   }
-
   .setting-profile-list i {
     margin-top: 8%;
   }
-
   .form-file,
   .from-photogallery,
   .from-webcamera {
     margin: 5px;
   }
-
   .travel-blogger {
     .button-group {
       img {
         height: 20px;
       }
-
       .btn {
         font-size: 15px;
-
         &:first-child {
           padding: 8px 20px;
         }
-
         &:nth-child(2) {
           padding: 8px 20px;
           margin: 0 15px;
         }
-
         &:last-child {
           padding: 8px 60px;
         }
       }
     }
-  }
-  // setting end
+  } // setting end
   // profile list
   .following-container {
     width: 33.33%;
   }
-
   .list-profile-tab li {
     margin-right: 25px;
-
     &:last-child {
       margin-right: 0;
     }
   }
-
   .follow-followers-holder input {
     width: 300px;
-  }
-  // profile list end
+  } // profile list end
   //vectormap
   .vector-map mappy svg {
     zoom: 0.6;
@@ -217,18 +186,17 @@
     width: 82px;
     top: 10px;
     right: 16px;
-}
-.moment-localimgholder,
-.moment-travelimgholder{ 
-  .img-backholder {
-    min-height: 220px;
-} 
-}
-
-//sohan.scss mobile 1200px
-      .destination-content .img-holder .title-head-left {
+  }
+  .moment-localimgholder,
+  .moment-travelimgholder {
+    .img-backholder {
+      min-height: 220px;
+    }
+  }
+  //sohan.scss mobile 1200px
+  .destination-content .img-holder .title-head-left {
     font-size: 24px;
-}
+  }
   .cover-modal1 .modal-dialog {
     width: 95%;
     border: 3px solid #2c3757;
@@ -277,263 +245,224 @@
     min-height: 280px;
     max-height: 362px;
   }
+  .blog-itineraries-main .masonry-brick {
+    margin-bottom: 0;
+    padding: 0 10px;
 }
+.user-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+}
+.activity-post .user-detail h4 {
+    margin-bottom: 2px;
+}
+}
+
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
   //header
   .user-detail .list-inline {
     li {
       padding: 0 2px;
-
       a {
         font-size: 12px;
       }
     }
-
     li:last-child {
       padding: 0 0 0 4px;
     }
   }
-
   .user-img {
     width: 30px;
     height: 30px;
     border-radius: 10px;
-
     .ml10 {
       margin-left: 3px;
     }
-  }
-  //headerend
+  } //headerend
   // login page
   .login-bg {
     padding-top: 13%;
-  }
-  // login page end
+  } // login page end
   // on the go journey page
   .map-journey {
     display: none;
   }
-
   .on-go-journey {
-    background-color: rgba(0,0,0,0.4);
-
+    background-color: rgba(0, 0, 0, 0.4);
     .container-fluid {
       padding: 0;
     }
   }
-
   .started-journey-card {
     margin-bottom: 50px;
-
     .journey-with,
     .travelling-journey-type {
-      background-color: rgba(255,255,255,0.75);
+      background-color: rgba(255, 255, 255, 0.75);
     }
-
     .journey-start {
       background: url('../img/ongojourney/bg-start-white.png') no-repeat 50% 50%;
       background-size: contain;
-
       h4 {
         color: #fff;
         text-shadow: 2px 2px 2px #020202;
       }
     }
   }
-
   .related-imgslider {
     .flexslider {
       background-color: transparent;
     }
   }
-
   .ongo-journey-card {
     margin-bottom: 50px;
-    background-color: rgba(255,255,255,0.75);
+    background-color: rgba(255, 255, 255, 0.75);
   }
-
   .ongo-journey-change {
     .journey-change {
-      background-color: rgba(242,103,91,0.75);
+      background-color: rgba(242, 103, 91, 0.75);
     }
-
     p {
       color: #fff;
       text-shadow: 2px 1px 1px #000;
       font-size: 13px;
     }
   }
-
   .ongo-journey-join .join-card {
-    background-color: rgba(242,103,91,0.75);
+    background-color: rgba(242, 103, 91, 0.75);
   }
-
   .ongo-journey-left .journey-left {
-    background-color: rgba(44,55,87,0.75);
+    background-color: rgba(44, 55, 87, 0.75);
   }
-
   .ongo-journey-end {
     .journey-end {
-      background-color: rgba(242,103,91,0.75);
+      background-color: rgba(242, 103, 91, 0.75);
     }
-
     .end-journey-flag {
       span {
         color: #fff;
       }
     }
   }
-
   .ongo-card-holder {
     margin: 0 auto;
   }
-
   .card-imgholder {
     height: 300px;
-  }
-  // journey info strip
+  } // journey info strip
   .journey-info-strip.get-otgstrip {
     top: 0;
   }
-
   .journey-info-strip {
     padding: 10px 15px;
     position: relative;
-
     .pull-left {
       float: none !important;
     }
-
     .pull-right {
       position: absolute;
       right: 30px;
       top: 10px;
       float: none !important;
     }
-  }
-  // journey info strip end
+  } // journey info strip end
   // on the go journey page end
   // trip summary
   .trip-day-detail {
     max-height: initial;
     min-height: initial;
-
     .day {
       min-height: initial;
     }
   }
-
   .trip-summary-detail {
     margin-top: 0;
-  }
-  // trip summary end
+  } // trip summary end
   // My Life
   .my-life {
     .container-fluid {
       padding: 0;
     }
   }
-
   .user-travel-detail {
     background-position: 50% 50%;
     background-size: cover;
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       height: 0;
     }
-
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: #2c3757;
     }
-
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       background-color: #fff;
     }
-
     .scroll-user-travel {
       overflow-x: scroll;
       overflow-y: hidden;
     }
-
     ul {
       width: 950px;
     }
   }
-
   .travel-life-level {
     padding: 20px 30px 0 15px;
   }
-
   .travel-life-btn {
     margin-left: 0;
   }
-
   .all-profile-detail {
     padding: 0;
-
     .row {
       margin: 0;
     }
-  }
-  // journey empty screen first user
+  } // journey empty screen first user
   .mobile-gif {
     text-align: right;
-
     img {
       height: 450px;
       display: block;
       margin: 0 auto;
     }
   }
-
   .journey-parachute {
     img {
       width: 110px;
     }
   }
-
   .empty-descp {
     font-size: 15px;
-  }
-  // journey empty screen first user end
-
-  .journey-tabs{
-    .container{
+  } // journey empty screen first user end
+  .journey-tabs {
+    .container {
       padding: 0;
-      .masonry-detail{
+      .masonry-detail {
         padding: 0 5px;
       }
     }
-  }
-  // My Life end
+  } // My Life end
   // LOCAL LIFE
-  .related-postholder{
+  .related-postholder {
     width: 75px;
     height: 75px;
   }
-  .local-post-slider .flexslider .slides > li{
+  .local-post-slider .flexslider .slides>li {
     width: 85px !important;
     margin-right: 0 !important;
-  }
-  // LOCAL LIFE END
+  } // LOCAL LIFE END
   // setting
   .setting {
     padding: 20px;
   }
-
   .setting-menu-tab {
     padding: 0 15px;
   }
-
   .setting-tab-info {
     padding: 0 15px;
   }
-
   .setting-main-detail {
     margin-left: 0;
     margin-top: 15px;
-
     .holiday-section,
     .setting-ideal-holiday,
     .setting-prefer-travel,
@@ -543,85 +472,71 @@
       }
     }
   }
-
   .setting-list i {
     display: none;
-  }
-  // setting end
+  } // setting end
   // profile list
   .follow-followers-holder {
     width: 300px;
   }
-
   .profile-tab-strip {
     padding: 0 0 10px;
-
     .pull-left {
       float: none !important;
     }
-
     .pull-right {
       float: none !important;
     }
   }
-
   .following-container {
     width: 50%;
-  }
-  // profile list end
+  } // profile list end
   // popular agent
   .popular-agent-sec {
     .country-title h4 {
       font-size: 40px;
     }
-  }
-  // popular agent end
+  } // popular agent end
   //vectormap
   .vector-map mappy svg {
     zoom: 0.75;
-  }
-
-  // .moment-local-view,
+  } // .moment-local-view,
   // .moment-travel-view {
   //   margin: 15px 20px 15px 0;
   // }
-
   .post-main .post-imgholder {
     height: auto;
-  }
-
-  //modal moments
-.notify-main .comment-sec .comment-ur-text {
+  } //modal moments
+  .notify-main .comment-sec .comment-ur-text {
     width: 88%;
     margin-left: 0;
-}
-
-.notify-popup{ .comment-like-notify {
-    width: 100%;
-    display: block;
-}
-.notify-imgsec {
-    width: 100%;
-    display: block;
   }
-}
-.notify-main .comment-sec .comment-container {
+  .notify-popup {
+    .comment-like-notify {
+      width: 100%;
+      display: block;
+    }
+    .notify-imgsec {
+      width: 100%;
+      display: block;
+    }
+  }
+  .notify-main .comment-sec .comment-container {
     width: 88%;
     margin-left: 2px;
-}
-.review-all-life .place-name {
+  }
+  .review-all-life .place-name {
     font-size: 18px;
-}
-.travel-star-rating,
-.local-star-rating {
-  .list-inline > li {
-    padding: 0 10px;
-}
-}
-.comment-like-notify {
+  }
+  .travel-star-rating,
+  .local-star-rating {
+    .list-inline>li {
+      padding: 0 10px;
+    }
+  }
+  .comment-like-notify {
     padding: 10px;
-}
-  // MYLIFE MOMENTS
+  } // MYLIFE MOMENTS
   // .singleMonth-imgholder {
   //   width: 155px;
   //   height: 155px;
@@ -631,33 +546,30 @@
     width: 80px;
     top: 6px;
     right: 14px;
-}
-.moment-travelimgholder .img-backholder {
+  }
+  .moment-travelimgholder .img-backholder {
     min-height: 200px;
-}
-.moment-localimgholder,
-.moment-travelimgholder{ 
-  .img-backholder {
-    min-height: 140px;
-} 
-}
-
-.local-post {
+  }
+  .moment-localimgholder,
+  .moment-travelimgholder {
+    .img-backholder {
+      min-height: 140px;
+    }
+  }
+  .local-post {
     padding: 30px;
-}
-.add-city-quick {
+  }
+  .add-city-quick {
     float: left!important;
     margin-top: 20px;
-}
-
-//sohan scss 991px
-
+  }
+  //sohan scss 991px
   .destination-nav ul li {
     margin: 0 5px;
   }
-    .destination-content .img-holder .title-head-left {
+  .destination-content .img-holder .title-head-left {
     font-size: 20px;
-}
+  }
   .text-left-ab {
     .dot-icon li {
       font-size: 18px;
@@ -685,7 +597,7 @@
     .img-holder.card {
       .back .flipped-cont {
         width: 100%;
-    padding: 0 20px;
+        padding: 0 20px;
         overflow: scroll;
         &::-webkit-scrollbar {
           display: none;
@@ -695,8 +607,9 @@
   }
   .socialize-holder ul {
     display: inline-block;
+  }
 }
-}
+
 // media query for 991px to 768px end
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
@@ -704,121 +617,102 @@
   .sidemenu.mobile-menu .nav-list {
     padding-top: 5px;
   }
-.search {
+  .search {
     width: 100%;
     padding: 6px 0px;
     font-size: 8px;
     margin: 2px 0px;
-     input {
-    padding: 6px 10px;
-    font-size: 8px;
+    input {
+      padding: 6px 10px;
+      font-size: 8px;
     }
-}
+  }
   header {
     padding: 4px 0 0;
   }
-
   .mobile-header {
     border-bottom: 1px dotted #ddd;
-
     .profile-mobile {
       padding: 25px 0 10px;
-
       .user-img {
         width: 50px;
         height: 50px;
         border-radius: 15px;
-
         img {
           width: 50px !important;
         }
       }
-
       a span {
         font-size: 18px;
         line-height: 1;
         font-weight: 700;
       }
     }
-
     .mobile-nofity {
       ul {
         // text-align: right;
         margin: 10px 0 0;
         font-size: 30px;
-
         li {
           text-align: right;
-          .mobile-feedlink{
+          .mobile-feedlink {
             font-size: 18px;
             text-align: center;
           }
           a {
-          color: #fff;
-          font-size: 22px;
-          padding-right: 15px;
-        }
+            color: #fff;
+            font-size: 22px;
+            padding-right: 15px;
+          }
         }
       }
     }
-  }
-
-  //libro-header
-  .libro-header .navbar-default .navbar-toggle{
+  } //libro-header
+  .libro-header .navbar-default .navbar-toggle {
     margin-top: 2px;
     left: 20px;
   }
-  .navbar-default .navbar-toggle{
+  .navbar-default .navbar-toggle {
     margin-top: 2px;
     left: 20px;
-  }
-  //libro-header end
+  } //libro-header end
   // main page
   .upload-section {
     img {
       width: 80px;
     }
   }
-
   .upload-profile {
     .cropArea {
       height: 200px;
     }
   }
-
   .upload-btn {
     margin: 0;
-
     .web-camera {
       margin: 10px 0 0;
     }
-
     .select-photo {
       margin: 10px 0 0;
     }
-  }
-  //homepage
+  } //homepage
   .mobile-hide-footer {
     footer {
       display: none;
     }
-  }
-  //homepageend
+  } //homepageend
   // main page end
   // holiday
   .button-pane {
     margin-top: 30px;
-
     button {
       padding: 6px 20px;
     }
   }
-
   .travel-row-main {
     .kind-holiday {
       width: 120px;
       margin: 10px 0 20px;
-
       &:nth-child(4),
       &:nth-child(5),
       &:nth-child(6) {
@@ -826,130 +720,111 @@
       }
     }
   }
-
-  .post-list-view .list-inline > li {
+  .post-list-view .list-inline>li {
     padding: 0 5px;
     font-size: 14px;
   }
-
   .total-post {
     font-size: 14px;
     padding: 15px 0 0;
   }
-
   .local-post-slider {
     .flex-direction-nav .flex-prev {
       right: -20px;
     }
-
     .flex-direction-nav .flex-next {
       right: -20px;
     }
-
     .flexslider:hover {
       .flex-direction-nav .flex-prev {
         top: 70%;
         right: -20px;
       }
-
       .flex-direction-nav .flex-next {
         right: -20px;
       }
     }
   }
-//Moments
-.moment-local-main,
-.moment-travel-main {
-.row{
-  margin: 0;
-  .col-xs-4{
-    padding: 2px;
-  }
-}
-}
-.moment-localimgholder .img-backholder img {
-    padding: 10px 8px;
-}
-.moment-localimgholder .img-frontholder img {
-     padding: 0px;
-}
-.local-info {
-  h4 {
-    // font-size: 16px;
-    margin-top: 20px;
-    span{
-      float: right;
-      padding-right: 5px;
+  //Moments
+  .moment-local-main,
+  .moment-travel-main {
+    .row {
+      margin: 0;
+      .col-xs-4 {
+        padding: 2px;
+      }
     }
   }
-}
-//moments end
+  .moment-localimgholder .img-backholder img {
+    padding: 10px 8px;
+  }
+  .moment-localimgholder .img-frontholder img {
+    padding: 0px;
+  }
+  .local-info {
+    h4 {
+      // font-size: 16px;
+      margin-top: 20px;
+      span {
+        float: right;
+        padding-right: 5px;
+      }
+    }
+  }
+  //moments end
   .scroll-local-life .ngsb-wrap .ngsb-scrollbar {
     left: 4px;
   }
-
   .select-holiday {
     background-size: 35% auto;
-
     &:hover {
       background-size: 35% auto;
     }
   }
-
   .holiday-imgholder {
     min-height: 50px;
-
     img {
       height: 45px;
     }
   }
-
   .usually-go-holiday {
     width: 120px;
   }
-
   .travel-row-main {
     .preference-travel {
       width: 120px;
       margin: 10px 0 20px;
     }
-
     .preference-travel:nth-last-of-type(2) {
       width: 120px;
     }
-
     .preference-travel:last-child {
       width: 120px;
     }
   }
-
   .travel-row-main .ideal-holiday {
     width: 120px;
-  }
-  // holiday end
+  } // holiday end
   // login
   .search-icon-header {
     font-size: 20px;
   }
-
   .custom-search {
     padding: 45px 0 0;
     height: 110px;
     .input-group-addon {
       padding: 3px 0;
     }
-
     .fa-search {
       font-size: 16px;
     }
-
     .form-control {
       @include placeholder {
         font-size: 13px;
-      };
+      }
+      ;
     }
-  }
-  // login end
+  } // login end
   // footer
   .menu-contact {
     width: 100%;
@@ -958,172 +833,136 @@
     text-align: center;
     padding: 0 15px;
   }
-
   .app-icons {
     width: 100%;
     right: auto;
     left: 0;
-
     ul {
       text-align: center;
     }
   }
-
   .login-ht {
     height: 100%;
-  }
-  // footer end
+  } // footer end
   .journey-cycle img {
     width: 100px;
-  }
-  // on the go journey page
+  } // on the go journey page
   .on-go-journey .container-fluid {
     padding: 0;
   }
-
   .ongo-card-holder {
     width: 100%;
     margin-top: 20px;
   }
-
-  .journey-start > img {
+  .journey-start>img {
     width: 45px;
   }
-
   .you-in img {
     width: 150px;
   }
-
   .started-journey-card {
     margin-bottom: 70px;
-
     .journey-start h4 {
       font-size: 25px;
-
       &:before {
         height: 67%;
         bottom: 50px;
       }
     }
-
     .journey-travelling-buddies {
       bottom: 2px;
-
       .img-buddies {
         width: 42px;
         height: 45px;
         border-radius: 16px;
       }
     }
-
     .edit-kind-journey {
       width: 190px;
       padding: 15px;
       right: -8px;
-
       &:before {
         right: 2px;
       }
-
       &:after {
         right: 3px;
       }
     }
   }
-
   .related-imgslider {
-    .flexslider .slides > li {
+    .flexslider .slides>li {
       width: 70px !important;
     }
-
     .flex-direction-nav .flex-next {
       top: 80%;
     }
-
     .flexslider:hover .flex-direction-nav .flex-next {
       top: 80%;
     }
   }
-
   .related-ongo-slider {
     @include square(70px);
   }
-
   .ongo-journey-change {
     width: 250px;
     margin: 0 auto 50px;
-
     h4 {
       font-size: 20px;
     }
-
     .journey-change {
       padding: 15px 5px;
     }
-  }
-  // journey join
+  } // journey join
   .ongo-journey-join {
     width: 250px;
     margin: 0 auto 50px;
-
     h4 {
       font-size: 20px;
     }
-
     .profile-imgholder {
       width: 115px;
       height: 125px;
       border-radius: 42px;
     }
-
     .join-tag {
       top: 85px;
       right: 0;
     }
   }
-
   .join-tag img {
     width: 85px;
-  }
-  // journey join end
+  } // journey join end
   .post-local-life {
     width: 100%;
-        padding: 0 2px 0 10px;
-  }
-  // journey left
+    padding: 0 2px 0 10px;
+  } // journey left
   .ongo-journey-left {
     width: 250px;
     margin: 0 auto 50px;
-
     .journey-left h4 {
       margin: 0 0 7px;
       font-size: 20px;
     }
-
     .profile-imgholder {
       width: 115px;
       height: 125px;
       border-radius: 42px;
     }
-
     .left-tag {
       left: 8px;
       bottom: 5px;
     }
   }
-
   .left-tag img {
     width: 85px;
-  }
-  // journey left
+  } // journey left
   // journey end
   .ongo-journey-end {
     width: 250px;
-
     .end-journey-flag span {
       font-size: 40px;
     }
-  }
+  } 
   // journey end
   // edit options
   .options {
@@ -1132,45 +971,35 @@
       width: 190px;
       padding: 15px;
       right: -8px;
-
       &:before {
         right: 2px;
       }
-
       &:after {
         right: 1px;
       }
     }
-
     li a {
       font-size: 14px;
     }
-  }
-  // edit options end
+  } // edit options end
   .share-single-trip {
     width: 235px;
     padding: 10px;
-
     ul li {
       padding: 0 5px;
-
       &:first-child {
         padding: 0 5px 0 0;
       }
-
       &:last-child {
         padding: 0 0 0 5px;
       }
     }
-  }
-  // jounrey info strip
+  } // jounrey info strip
   .journey-info-strip {
     padding: 10px;
-
     .pull-right {
       right: 15px;
     }
-
     .trip-list {
       li {
         &:first-child {
@@ -1179,49 +1008,40 @@
         padding: 0 5px;
       }
     }
-
     .trip-info {
       span {
         font-size: 15px;
       }
-
       img {
         height: 17px;
       }
     }
   }
-
   .btn-summary {
     button {
       padding: 6px 8px;
       font-size: 14px;
     }
   }
-
   .profile-info h4 {
     margin: 0 0 0 10px;
   }
-
   .share-trip-journey {
     margin-right: 15px;
     vertical-align: middle;
-
     span {
       font-size: 15px;
     }
   }
-
   .edit-journey,
   .following {
     font-size: 15px;
   }
-
   .share-dropdown {
     width: 235px;
     padding: 7px;
     top: 27px;
     z-index: 1;
-
     &:before {
       border-top: 10px solid transparent;
       border-right: 10px solid transparent;
@@ -1230,7 +1050,6 @@
       top: -22px;
       right: 30px;
     }
-
     &:after {
       border-top: 13px solid transparent;
       border-right: 13px solid transparent;
@@ -1239,19 +1058,16 @@
       top: -23px;
       right: 27px;
     }
-
     ul li {
       margin-right: 9px;
     }
   }
-
   .edit-journey-dropdown {
     width: 210px;
     padding: 10px 15px;
     right: 0;
     top: 30px;
     z-index: 1;
-
     &:before {
       border-top: 10px solid transparent;
       border-right: 10px solid transparent;
@@ -1260,7 +1076,6 @@
       top: -22px;
       right: 30px;
     }
-
     &:after {
       border-top: 13px solid transparent;
       border-right: 13px solid transparent;
@@ -1269,20 +1084,17 @@
       top: -23px;
       right: 27px;
     }
-  }
-  // jounrey info strip end
+  } // jounrey info strip end
   // journey video
   .video-ongo-journey {
     video {
       width: 100%;
     }
-  }
-  // journey video end
+  } // journey video end
   // comment and like Side Section
   .like-side-sec {
     padding: 25px 25px 0;
-  }
-  // comment and like Side Section END
+  } // comment and like Side Section END
   // on the go journey page end
   // trip summary
   .tripsummary-main {
@@ -1291,284 +1103,228 @@
       padding: 0;
     }
   }
-
   .trip-country {
     li {
       margin-bottom: 10px;
     }
   }
-
   .trip-day-detail .trip-status {
     padding: 20px 10px 1px;
-  }
-  // trip summary end
+  } // trip summary end
   .wish-country-visit {
     padding: 20px 0 0;
   }
-
   .masonry-detail {
     .masonry-brick {
       width: 100%;
     }
-
     .journey-masonry-brick {
       margin: 10px 0;
     }
   }
-
   .travel-life-level {
     padding: 30px 20px 0;
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       height: 0;
     }
-
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: $brand-lighter-grey;
     }
-
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       background-color: $brand-pink;
     }
   }
-
   .scroll-travel-level {
     overflow-x: auto;
   }
-
   .travel-progress-bar {
     width: 700px;
-  }
-  // journey empty screen first user
+  } // journey empty screen first user
   .empty-travel-journey {
     text-align: center;
   }
-
   .journey-parachute {
     margin-bottom: -80px;
-
     img {
       width: 90px;
     }
   }
-
   .empty-title {
     font-size: 16px;
   }
-
   .empty-descp {
     font-size: 14px;
-  }
-  // journey empty screen first user end
+  } // journey empty screen first user end
   .profile-tabs {
     .tab-heading {
       font-size: 15px;
     }
-
     ul {
       li {
         &:nth-child(1) .tab-heading {
           padding: 17px 20px;
         }
-
         &:nth-child(2) .tab-heading {
           padding: 13px 20px;
         }
-
         &:nth-child(3) .tab-heading {
           padding: 9px 20px;
         }
       }
     }
   }
-
   .moments-active {
     ul li {
       &:nth-child(1) .tab-heading {
         padding: 12px 20px;
       }
-
       &:nth-child(2) .tab-heading {
         padding: 17px 20px;
       }
-
       &:nth-child(3) .tab-heading {
         padding: 9px 20px;
       }
     }
   }
-
   .reviews-active {
     ul li {
       &:nth-child(1) .tab-heading {
         padding: 9px 20px;
       }
-
       &:nth-child(2) .tab-heading {
         padding: 12px 20px;
       }
-
       &:nth-child(3) .tab-heading {
         padding: 17px 20px;
       }
     }
-  }
-  // LOCAL LIFE
-  .heading-localtitle{
+  } // LOCAL LIFE
+  .heading-localtitle {
     font-size: 12px;
   }
-  .heading-localtimestamp{
+  .heading-localtimestamp {
     font-size: 10px;
   }
-  .related-postholder{
+  .related-postholder {
     width: 87px;
     height: 87px;
   }
-
-  .local-post-slider .flexslider .slides > li{
+  .local-post-slider .flexslider .slides>li {
     width: 97px !important;
     margin-right: 0 !important;
-  }
-  // LOCAL LIFE END
+  } // LOCAL LIFE END
   // setting page
-
   .setting-main {
     .container {
       padding: 0;
     }
   }
-
   .travel-blogger .button-group .btn {
     margin: 5px;
-  }
-  // setting page end
+  } // setting page end
   // profile list
-
   .follow-followers-holder {
     width: 100%;
-
     input {
       width: 100%;
     }
   }
-
   .profile-tab-strip {
     .pull-left {
-      ::-webkit-scrollbar {
+       ::-webkit-scrollbar {
         height: 1px;
       }
     }
   }
-
   .list-profile-tab {
     overflow-x: scroll;
     overflow-y: auto;
-
     ul {
       width: 526px;
     }
-
     li {
       margin-right: 15px;
     }
   }
-
   .following-container {
     width: 100%;
-  }
-  // profile list end
-
+  } // profile list end
   .popular-agent-sec {
     .country-title {
       width: 100%;
       top: 50%;
-      @include transform(translate(-50%,-50%));
+      @include transform(translate(-50%, -50%));
       text-align: center;
-
       h4 {
         font-size: 30px;
       }
     }
   }
-
-  .user-pic {
-    margin-top: -30px;
-    margin-right: 15px;
-    display: inline-block;
-    width: 50px;
-    height: 53px;
-    border-radius: 30%;
-
-    img {
-      border-radius: 30%;
-    }
-  }
-
+  // .user-pic {
+  //   margin-top: -30px;
+  //   margin-right: 15px;
+  //   display: inline-block;
+  //   width: 50px;
+  //   height: 53px;
+  //   border-radius: 30%;
+  //   img {
+  //     border-radius: 30%;
+  //   }
+  // }
   .picture-section {
     width: 15%;
   }
-
   .user-detail {
     width: 80%;
   }
-
   .moment-view {
     padding: 0 10px 60px;
-  }
-
-  // .moment-local-view,
+  } // .moment-local-view,
   // .moment-travel-view {
   //   display: block;
   // }
-
   .moment-local-view,
   .moment-localimgholder,
   .moment-travelimgholder {
     margin: 0 auto;
   }
-
   .empty-profile-journey,
   .empty-profile-moment,
   .empty-profile-review {
     margin: 2% 0;
   }
-
   .moments-tab {
     padding: 20px 20px 0;
   }
-
   .local-post {
     padding: 0;
     border: none;
   }
-
-  .local-life-main{
+  .local-life-main {
     padding: 0;
   }
-
-  post-local-life{
+  post-local-life {
     width: 100%;
-    .post-main .post-social-item{
+    .post-main .post-social-item {
       padding: 10px 0 15px;
-      li{
+      li {
         padding: 0 10px;
-        img{
+        img {
           height: 17px;
         }
-        i{
+        i {
           font-size: 17px;
         }
-        &:first-child{
+        &:first-child {
           padding: 0 5px 0 0;
         }
       }
     }
-    .post-main .post-socail-reviews{
+    .post-main .post-socail-reviews {
       padding: 5px 0 10px;
       font-size: 14px;
     }
   }
-
   .overlay-filter {
     width: 100%;
     height: calc(100vh - 55px);
@@ -1577,12 +1333,10 @@
     @include transition (all ease 300ms);
     @include transform(translatex(-115%));
     z-index: 4;
-
     &.fliter-open {
       @include transform(translatex(0%));
     }
   }
-
   .filter-local-life {
     width: 240px;
     position: fixed;
@@ -1594,99 +1348,81 @@
     overflow-y: scroll;
     @include transition (all ease 300ms);
     @include transform(translatex(-115%));
-
     &.fliter-open {
       @include transform(translatex(-10%));
     }
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 5px;
     }
-
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: transparent;
     }
-
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       background-color: transparent;
     }
-  }
-  // mylife journey sidefilter
-
+  } // mylife journey sidefilter
   .filter-local-life {
     span {
       font-size: 16px;
       color: #a0a0a0;
     }
   }
-
   .custom-select-local select {
     font-size: 14px;
     height: 30px;
-
     &:after {
       height: 0;
       line-height: 30px;
       font-size: 18px;
     }
   }
-
   .checkin-filter .local-filter-checkbox label,
   .filter-month .local-filter-checkbox label,
   .more-filter .local-filter-checkbox label,
   .rating-filter .local-filter-checkbox label {
     font-size: 12px;
   }
-
-  .custom-checkbox [type="checkbox"]:checked + label:before,
-  .custom-checkbox [type="checkbox"]:not(:checked) + label:before,
-  .custom-checkbox-heart [type="checkbox"]:checked + label:before,
-  .custom-checkbox-heart [type="checkbox"]:not(:checked) + label:before {
+  .custom-checkbox [type="checkbox"]:checked+label:before,
+  .custom-checkbox [type="checkbox"]:not(:checked)+label:before,
+  .custom-checkbox-heart [type="checkbox"]:checked+label:before,
+  .custom-checkbox-heart [type="checkbox"]:not(:checked)+label:before {
     width: 15px;
     height: 15px;
   }
-
-  .custom-checkbox [type="checkbox"]:checked + label:after,
-  .custom-checkbox [type="checkbox"]:not(:checked) + label:after,
-  .custom-checkbox-heart [type="checkbox"]:checked + label:after,
-  .custom-checkbox-heart [type="checkbox"]:not(:checked) + label:after {
+  .custom-checkbox [type="checkbox"]:checked+label:after,
+  .custom-checkbox [type="checkbox"]:not(:checked)+label:after,
+  .custom-checkbox-heart [type="checkbox"]:checked+label:after,
+  .custom-checkbox-heart [type="checkbox"]:not(:checked)+label:after {
     width: 15px;
     height: 15px;
     font-size: 11px;
     line-height: 16px;
   }
-
   .custom-select-local.custom-select:after {
     line-height: 30px;
     font-size: 15px;
     height: 30px;
   }
-
   .heading-single-view {
     padding: 10px;
-
     h2 {
       font-size: 24px;
     }
   }
-
   .city-accordion {
     .panel-default {
       .panel-heading {
         padding: 6px 10px;
         border-bottom: 2px solid #f2675b;
-
         h3 {
           font-size: 16px;
           text-transform: uppercase;
         }
-
         .panel-title {
           font-size: 15px;
         }
       }
-
-      .panel-heading + .panel-collapse > .panel-body {
+      .panel-heading+.panel-collapse>.panel-body {
         padding: 0;
         border: none;
       }
@@ -1697,21 +1433,17 @@
       }
     }
   }
-
   .activity-main {
     .col-md-4.masonry-brick {
       width: 100%;
       padding: 0;
     }
   }
-
   .activity-popular-main,
   .visit-post {
     margin-left: 0;
     margin-right: 0;
-  }
-  // MYLIFE MOMENTS
-
+  } // MYLIFE MOMENTS
   // .collage-month-view .moment-imgholder {
   //   width: 75px;
   //   height: 75px;
@@ -1720,83 +1452,81 @@
   //   width: 130px;
   //   height: 130px;
   // }
-  .month-view-moments{
-      margin-top: 10px;
+  .month-view-moments {
+    margin-top: 10px;
   }
-  .moments-tab{
-    .btn-view-moments{
+  .moments-tab {
+    .btn-view-moments {
       margin-bottom: 10px;
     }
-    .btn-more{
+    .btn-more {
       padding: 6px 25px;
     }
-  }
-  // MYLIFE MOMENTS END
+  } // MYLIFE MOMENTS END
   //scroll unshow
   .ngsb-wrap .ngsb-scrollbar .ngsb-thumb-container {
-      display: none;
-}
-  //scroll unshow ended
+    display: none;
+  } //scroll unshow ended
   .comment-like-notify {
     padding: 0 10px;
-}
-.review-travel-view .list-travel-view .review-backimgholder {
+  }
+  .review-travel-view .list-travel-view .review-backimgholder {
     width: 44%;
     top: 8%;
     right: 8%;
-img {
-  width: 100%;
-}
-}
-.list-travel-view .review-frontimgholder h3{
+    img {
+      width: 100%;
+    }
+  }
+  .list-travel-view .review-frontimgholder h3 {
     bottom: 20%;
-        line-height: 1;
-}
-// .moment-localimgholder,
-// .moment-travelimgholder{ 
-//   .img-backholder {
-//     min-height: inherit;
-// } 
-// }
-//error 404
-.error-msg {
+    line-height: 1;
+  }
+  // .moment-localimgholder,
+  // .moment-travelimgholder{ 
+  //   .img-backholder {
+  //     min-height: inherit;
+  // } 
+  // }
+  //error 404
+  .error-msg {
     left: 50%;
     width: 80%;
     text-align: center;
-}
-//comingsoon
-.comingsoon-content {
-  width: 90%;
-}
-//sohan.scss mobile 767px
+  }
+  //comingsoon
+  .comingsoon-content {
+    width: 90%;
+  }
+  //sohan.scss mobile 767px
   .navigation-dots {
     display: none;
   }
-  .fp-{
+  .fp- {
     .fancybox-skin {
-    background: transparent;
-        padding: 0!important;
+      background: transparent;
+      padding: 0!important;
     }
     .fancybox-type-iframe .fancybox-inner {
-    width: 100% !important;
-}
-.videoplay video {
-    display: none;
-}
+      width: 100% !important;
+    }
+    .videoplay video {
+      display: none;
+    }
   }
   .popular-blogger .bloggerholder-made .cfj-holder li {
     float: none;
-}
+  }
   .download-app-footer {
     background: #000;
     padding: 0px 15px;
     position: absolute;
     bottom: 0;
-    left:0;
+    left: 0;
     letter-spacing: 1.5px;
     width: 100%;
     @include transition (all ease 300ms);
-    &.close-download{
+    &.close-download {
       @include transform (translateY(100%));
       display: none !important;
     }
@@ -1915,7 +1645,7 @@ img {
         position: absolute;
         bottom: 20%;
         left: 50%;
-        @include transform (translate(-50%,-50%));
+        @include transform (translate(-50%, -50%));
         font-size: 60px;
         width: 60px;
         height: 60px;
@@ -1940,28 +1670,32 @@ img {
   }
   .destination-nav.mustdo-not {
     top: 55px;
-}
-.destination-content {
+  }
+  .destination-content {
     margin-top: 130px;
- .pad-btn {
-    padding: 0px 30px;
-}
-.destination-filterscroll {
-    margin-bottom: 10px;
-}
-}
-.addfixed2 .destin-fixednav {
+    .pad-btn {
+      padding: 0px 30px;
+    }
+    .destination-filterscroll {
+      margin-bottom: 10px;
+    }
+  }
+  .addfixed2 .destin-fixednav {
     top: 55px;
-}
-.blog-itineraries-main {
-    padding-top: 20px;
-}
+  }
+  .blog-itineraries-main {
+    padding-top: 0px;
+  }
   .fp-section,
-.fp-slide,
-.fp-tableCell{
+  .fp-slide,
+  .fp-tableCell {
     height: auto !important;
+  }
+.activity-post-main {
+    margin: 10px 0 10px;
 }
 }
+
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
@@ -1971,83 +1705,67 @@ img {
         .social-icons li {
           width: 50px;
           height: 50px;
-
           a {
             padding: 8px 0;
           }
         }
-
         .contact-decrp img {
           height: 35px;
           margin: -15px -8px 0;
         }
       }
     }
-
     .line-height90 {
       line-height: 85%;
     }
-
     .mobile-travellife ul {
       font-size: 14px;
     }
-
     .slide2 .life-icon img {
       width: 19px;
     }
-
     .cycle-section3 {
       height: 30px;
     }
-
     .person-section4 {
       height: 40px;
     }
-
     .text-left-ab.text-sec-left {
       top: 27%;
     }
-
     .fnt-60 {
       font-size: 40px;
     }
   }
-
   .more-about-me {
     .more-detail {
       margin-bottom: 15px;
       font-size: 14px;
     }
-
     p {
       font-size: 16px;
     }
   }
-
   .journey-tabs .btn-tab,
   .moments-tab .btn-tab {
     width: 16px;
     height: 16px;
     margin-right: 2px;
   }
-
   .moments-tab {
     .btn-view-moments span {
       color: #2c3757;
       font-size: 12px;
     }
-
     .btn-view-moments {
       margin: 0 10px 10px;
       display: inline-block;
     }
   }
-
   .moment-local-view,
   .moment-travel-view {
     display: block;
-  }
-  // main page
+  } // main page
   .city,
   .gender,
   .nationality,
@@ -2057,201 +1775,159 @@ img {
       margin: 0 0 20px;
     }
   }
-
   .select-your-nation ul li {
     padding: 10px 5px;
-
     span {
       font-size: 13px;
     }
   }
-
   .female,
   .male {
     @include square(100px);
     margin: 0 10px;
-
     img {
       height: 80px;
     }
   }
-
   .upload-section img {
     width: 60px;
   }
-
   .upload-btn {
     button {
       padding: 6px 14px;
       font-size: 12px;
     }
   }
-
   .web-camera {
     margin: 10px 0 0;
     display: block;
   }
-
   .login-process {
     button {
       padding: 6px 20px;
       font-size: 13px;
     }
   }
-
   .col-md-4.col-sm-6.masonry-brick {
     padding: 0;
-  }
-
-  // .journey-type {
+  } // .journey-type {
   //   display: none;
   // }
-
   .local-life-main {
-        padding: 0 0px 0px 20px;
-
+    padding: 0 0px 0px 20px;
     .post-list-view {
-      .list-inline > li span {
+      .list-inline>li span {
         font-size: 14px;
       }
     }
-
     .post-local-life .post-header-view {
       padding: 15px 10px;
     }
   }
-
   .empty-travel-journey {
     text-align: justify;
     padding-top: 20px;
   }
-
   .journey-cycle img {
     width: 50px;
   }
-
   .journey-parachute img {
     width: 45px;
   }
-
   .review-time {
     p {
       font-size: 12px;
     }
   }
-
   .review-all-life {
     padding: 15px 0;
   }
-
-  .post-list-view .list-inline > li img {
+  .post-list-view .list-inline>li img {
     margin-right: 5px;
     height: 14px;
   }
-
   .travel-row-main {
     .kind-holiday {
       width: 100px;
     }
   }
-
   .select-holiday {
     background-size: 45% auto;
-
     figcaption {
       font-size: 14px;
     }
-
     &:hover {
       background-size: 45% auto;
     }
-
     figcaption {
       font-size: 14px;
     }
   }
-
   .holiday-imgholder {
     min-height: 50px;
-
     img {
       height: 45px;
     }
   }
-
   .usually-go-holiday {
     width: 100px;
     margin: 10px 5px;
   }
-
   .travel-row-main {
     .preference-travel {
       width: 100px;
     }
-
     .preference-travel:nth-last-of-type(2) {
       width: 100px;
     }
-
     .preference-travel:last-child {
       width: 100px;
     }
   }
-
   .travel-row-main .ideal-holiday {
     width: 100px;
-  }
-  // holiday end
+  } // holiday end
   // login
   .libro-header {
     padding: 0;
-
     .navbar-default .navbar-toggle {
       margin-top: 2px;
       left: 20px;
     }
   }
-
   .login-bg {
     padding-top: 20%;
   }
-
   .login-signup-tab {
-    .nav-tabs > li > a,
-    .nav-tabs > li.active > a,
-    .nav-tabs > li.active > a:focus,
-    .nav-tabs > li.active > a:hover {
+    .nav-tabs>li>a,
+    .nav-tabs>li.active>a,
+    .nav-tabs>li.active>a:focus,
+    .nav-tabs>li.active>a:hover {
       padding: 10px 7px;
       font-size: 13px;
     }
-
     .social-login {
       .login-social-img img {
         width: 35px;
       }
-
       img {
         width: 35px;
       }
     }
-  }
-  // login end
+  } // login end
   // on the go journey page
-  .journey-start > img {
+  .journey-start>img {
     width: 40px;
   }
-
   .you-in img {
     width: 130px;
   }
-
   .started-journey-card {
     .journey-start {
       h4 {
         font-size: 22px;
       }
     }
-
     .journey-travelling-buddies {
       .img-buddies {
         width: 37px;
@@ -2259,68 +1935,54 @@ img {
         border-radius: 13px;
       }
     }
-
     .edit-kind-journey {
       width: 165px;
       padding: 10px;
-
       a {
         font-size: 13px;
       }
     }
   }
-
   .ongo-journey-change {
     width: 200px;
-
     h4 {
       font-size: 17px;
     }
-
     p {
       margin: 10px 0;
       font-size: 13px;
     }
-  }
-  //card
+  } //card
   .days-spent {
     width: 40px;
     height: 45px;
     border-radius: 16px;
     bottom: 5px;
   }
-
   .user-social-item {
     padding: 20px 0;
-  }
-  // journey join
+  } // journey join
   .ongo-journey-join {
     width: 200px;
-
     h4 {
       font-size: 17px;
     }
-
     p {
       font-size: 13px;
     }
-
     .profile-imgholder {
       width: 80px;
       height: 85px;
       border-radius: 30px;
     }
-
     .join-tag {
       top: 60px;
       right: 40px;
     }
   }
-
   .join-tag img {
     width: 65px;
-  }
-  // journey join end
+  } // journey join end
   // journey left
   .ongo-journey-left {
     .profile-imgholder {
@@ -2328,98 +1990,78 @@ img {
       height: 85px;
       border-radius: 30px;
     }
-
     .left-tag {
       left: 32px;
       bottom: 2px;
     }
-
     .journey-left {
       h4 {
         font-size: 17px;
       }
-
       p {
         font-size: 13px;
       }
     }
   }
-
   .left-tag img {
     width: 65px;
-  }
-  // journey left end
+  } // journey left end
   // journey end
   .ongo-journey-end {
     width: 200px;
     padding: 15px 5px;
-
     .journey-end {
       p {
         font-size: 13px;
       }
     }
-
     .end-journey-flag {
       img {
         width: 40px;
       }
-
       span {
         font-size: 33px;
       }
     }
-  }
-  // journey end
+  } // journey end
   .card-imgholder {
     height: 230px;
   }
-
   .card-user-imgholder {
     width: 12%;
   }
-
   .card-journeypost {
     width: 74%;
   }
-
   .card-iconholder {
     width: 12%;
     margin-left: -4px;
   }
-
-
   .journey-post {
     .post {
       font-size: 13px;
     }
   }
-
   .journey-date {
     i,
     span {
       margin: 0 2px;
     }
   }
-
   .ongo-journey-icon {
     float: right;
-
     img {
       width: 30px;
     }
   }
-
   .related-ongo-slider {
     @include square(57px);
   }
-
   .related-imgslider {
-    .flexslider .slides > li {
+    .flexslider .slides>li {
       width: 57px !important;
     }
   }
-
   .user-social-item {
     li {
       &:first-child {
@@ -2427,105 +2069,85 @@ img {
       }
       padding: 0 8px;
     }
-  }
-  // edit options
+  } // edit options
   .options {
     .other-trip,
     .own-trip {
       width: 165px;
       padding: 10px;
-
       li {
         &:first-child {
           padding: 7px 5px;
         }
-
         a {
           font-size: 13px;
         }
       }
     }
-  }
-  // edit options end
+  } // edit options end
   .share-single-trip {
     width: 200px;
     padding: 7px 5px;
     bottom: 34px;
     left: -9px;
-
     li {
       &:first-child i {
         font-size: 22px;
         vertical-align: baseline;
       }
-
       i {
         font-size: 22px;
       }
     }
   }
-
   .share-trip-journey {
     margin-right: 5px;
-
     img {
       width: 10px;
     }
-
     span {
       font-size: 13px;
       margin-top: 2px;
     }
   }
-
   .edit-journey,
   .following {
     font-size: 13px;
   }
-
   .journey-info-strip {
     .pull-right {
       top: auto;
       bottom: 14px;
     }
-
     .trip-list {
       display: block;
-
       li:first-child {
         border: none;
         margin-bottom: 10px;
         display: block;
       }
-
       li:nth-child(2) {
         padding: 0 10px 0 0;
       }
     }
   }
-
   .btn-summary {
     button {
       font-size: 13px;
     }
   }
-
   .share-dropdown {
     width: 190px;
-
     i {
       font-size: 20px;
     }
   }
-
   .edit-journey-dropdown {
     width: 185px;
-  }
-  // comment and like Side Section
+  } // comment and like Side Section
   .whole-card-comment {
     width: 290px;
   }
-
   .comment-container .commenter-text {
     p {
       span {
@@ -2533,259 +2155,212 @@ img {
       }
     }
   }
-
   .like-side-sec {
     width: 290px;
     padding: 20px 15px 0;
-  }
-  // comment and like Side Section END
+  } // comment and like Side Section END
   // on the go journey page end
   // trip summary
   .trip-day-detail {
     .day {
       width: 14%;
     }
-
     .trip-status {
       width: 76%;
-
       .status {
         font-size: 14px;
       }
-
       .trip-time-day {
         margin: 10px 0 0;
       }
     }
-  }
-  // trip summary end
+  } // trip summary end
   .profile-photo-section {
     width: 250px;
   }
-
   .profile-more-detail {
     h3 {
       font-size: 18px;
     }
   }
-
   .profile-imgholder {
     width: 100px;
     height: 105px;
     border-radius: 35px;
   }
-
   .wave {
     width: 30px;
     left: 45px;
   }
-
   .flag {
     width: 35px;
     right: 55px;
-  }
-  // my life
+  } // my life
   .profile-tabs {
     margin: 0 5px;
-
     .sec-strip {
       bottom: 3px;
     }
-
     .tab-heading {
       font-size: 14px;
     }
-
     ul li {
       &:nth-child(1) .tab-heading {
         padding: 15px 20px;
       }
-
       &:nth-child(2) .tab-heading {
         padding: 11px 20px;
       }
-
       &:nth-child(3) .tab-heading {
         padding: 8px 20px;
       }
     }
   }
-
   .moments-active {
     ul li {
       &:nth-child(1) .tab-heading {
         padding: 11px 20px;
       }
-
       &:nth-child(2) .tab-heading {
         padding: 15px 20px;
       }
-
       &:nth-child(3) .tab-heading {
         padding: 8px 20px;
       }
     }
   }
-
   .reviews-active {
     ul li {
       &:nth-child(1) .tab-heading {
         padding: 8px 20px;
       }
-
       &:nth-child(2) .tab-heading {
         padding: 11px 20px;
       }
-
       &:nth-child(3) .tab-heading {
         padding: 15px 20px;
       }
     }
   }
-
   .travel-life-btn span {
     font-size: 14px;
   }
-
   .add-journey,
   .add-more-life {
     span {
       width: 25px;
       height: 25px;
       line-height: 2;
-
       i {
         font-size: 13px;
       }
     }
-  }
-  // my life\
+  } // my life\
   // LOCAL LIFE
-  .related-postholder{
+  .related-postholder {
     width: 55px;
     height: 55px;
   }
-  .local-post-slider .flexslider .slides > li{
+  .local-post-slider .flexslider .slides>li {
     width: 65px !important;
     margin-right: 0 !important;
-  }
-  // LOCAL LIFE END
+  } // LOCAL LIFE END
   // setting
   .setting {
     padding: 20px 10px;
   }
-
   .setting-main-detail {
     padding: 20px 15px;
   }
-
   .setting-user-detail {
-    > .row {
+    >.row {
       margin: 0;
     }
-
     .setting-menu-tab,
     .setting-tab-info {
       padding: 0;
     }
   }
-
   .setting-tab-gender {
     text-align: center;
   }
-
   .travel-blogger {
     .button-group {
       text-align: center;
-
       .btn {
         margin: 5px;
-
         &:nth-child(2) {
           padding: 8px 39px;
           margin: 5px;
         }
-
         &:last-child {
           padding: 8px 76px;
         }
       }
     }
-  }
-  // setting end
+  } // setting end
   // profile list
   .list-profile-tab {
     ul {
       width: 482px;
     }
-
     li {
       margin-right: 10px;
     }
-
     a {
       font-size: 14px;
     }
   }
-
   .profile-tab-main {
     padding: 60px 0 0;
   }
-
   .following-holder {
     margin: 0;
-  }
-  // profile list end
+  } // profile list end
   // popular agent
   .popular-agent-sec .country-title h4 {
     font-size: 22px;
-  }
-  // popular agent end
-
+  } // popular agent end
   .list-travel-view:nth-child(4n+4) {
     margin-right: auto;
   }
-
   .itinerary-main .itinerary-holder .row-flex .col-flex .itinerary-imgholder.itinerary-detailed {
     min-height: 210px;
   }
-
   .video-gif-journey {
     width: 260px;
-
     .videoplay-empty-journey {
       left: 12px;
     }
   }
-
   .activity-post {
     .user-detail {
       margin-left: 5px;
+      width: 80%;
     }
   }
   .notify-main .comment-sec .comment-container {
     width: 85%;
     margin-left: 2px;
-}
-// .review-travel-view {
-//   .row{
-//     margin:0;
-//   .col-xs-6{
-//     padding: 0;
-//   }
-//   }
-//    .list-travel-view .review-backimgholder {
-//     width: 44%;
-//     top: 6px;
-//     right: 8%;
-// }
-//    .review-frontimgholder h3 {
-//     font-size: 14px;
-//     bottom: 8px;
-//     left: 5px;
-// }
-// }
-
+  }
+  // .review-travel-view {
+  //   .row{
+  //     margin:0;
+  //   .col-xs-6{
+  //     padding: 0;
+  //   }
+  //   }
+  //    .list-travel-view .review-backimgholder {
+  //     width: 44%;
+  //     top: 6px;
+  //     right: 8%;
+  // }
+  //    .review-frontimgholder h3 {
+  //     font-size: 14px;
+  //     bottom: 8px;
+  //     left: 5px;
+  // }
+  // }
   // MYLIFE MOMENTS
   // .singleMonth-imgholder {
   //   width: 120px;
@@ -2793,4 +2368,5 @@ img {
   // }
   // MYLIFE MOMENTS END
 }
+
 // media query for 480px to 320px end
