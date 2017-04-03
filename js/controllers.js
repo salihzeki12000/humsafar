@@ -75,7 +75,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           //Navigation
           onLeave: function (index, nextIndex, direction) {
             $timeout(function () {
-              console.log("ChangePage in Full Page");
               swiper.slideTo(nextIndex - 1);
               if ($(window).width() >= 767) {
                 for (i = 1; i < 4; i++) {

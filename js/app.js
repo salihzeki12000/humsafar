@@ -621,6 +621,7 @@ firstapp.directive("scrolladd2class", function ($window) {
   };
 });
 
+
 firstapp.directive('imageonload', function () {
   return {
     restrict: 'A',
@@ -1494,6 +1495,17 @@ firstapp.directive('hideOnScroll', function ($document) {
         }
         lastScrollTop = st;
       });
+    }
+  };
+});
+
+firstapp.directive('fullPage', function ($document) {
+  return {
+    restrict: 'EA',
+    replace: false,
+    link: function (scope, element, attr) {
+      var $element = $(element);
+       $element.fullpage();
     }
   };
 });
