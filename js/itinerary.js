@@ -1,6 +1,6 @@
 var itinerary = angular.module('itinerary', [])
 
-  .factory('Itinerary', function (TravelibroService, $filter) {
+  .factory('Itinerary', function (TravelibroService, $filter, $state) {
 
     return {
       getOneItinerary: function (slug, callback) { //get Quick/detail itinerary
@@ -35,6 +35,9 @@ var itinerary = angular.module('itinerary', [])
         });
       },
       updateLikeItinerary: function (flag, _id, uniqueId, callback) {
+        if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+        }
         var callback;
         var result;
         var obj = {

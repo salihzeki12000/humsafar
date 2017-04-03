@@ -2169,7 +2169,7 @@ header {
   z-index: 6;
   &:before {
     content: '';
-    border-top: 13px solid #f6fafc;
+    border-top: 13px solid #e5e8f3;
     border-right: 13px solid transparent;
     border-bottom: 13px solid transparent;
     border-left: 13px solid transparent;
@@ -4349,6 +4349,12 @@ header {
   }
   .masonry-brick {
     margin-bottom: 15px;
+  }
+}
+
+.popular-itinerary , .popular-journeypage{
+  .blog-itineraries-main .masonry-brick{
+    margin-bottom: 0;
   }
 }
 

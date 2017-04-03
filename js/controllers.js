@@ -33,6 +33,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
     $scope.accessToken = $.jStorage.get("accessToken");
+    $scope.videoPlay = [{
+      videourl: "",
+      vimeourl: "",
+      imgurl: "img/libro-home/transparent-home.png",
+      id: "0"
+    }, {
+      videourl: "img/libro-home/videos/travellife.mp4",
+      vimeourl: "https://player.vimeo.com/video/207906141",
+      imgurl: "img/libro-home/videos/travel-life.jpg",
+      id: "1"
+    }, {
+      videourl: "img/libro-home/videos/locallife.mp4",
+      vimeourl: "https://player.vimeo.com/video/207905802",
+      imgurl: "img/libro-home/videos/local-life.jpg",
+      id: "2"
+    }, {
+      videourl: "img/libro-home/videos/mylife.mp4",
+      vimeourl: "https://player.vimeo.com/video/207906010",
+      imgurl: "img/libro-home/videos/my-life.jpg",
+      id: "3"
+    }, {
+      videourl: "",
+      vimeourl: "",
+      imgurl: "img/libro-home/transparent-home.png",
+      id: "4"
+    }]
     $scope.section = {
       one: "views/section/mainhome.html",
       two: "views/section/travellife.html",
@@ -43,27 +69,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.changePage = function (text) {
       // console.log(text);
       var length = $(".fp-section").length;
-      // console.log(length);
-      // console.log($(".fp-section"));
       if (length === 0) {
         $('.fullpage').fullpage({
           //Navigation
           onLeave: function (index, nextIndex, direction) {
             $timeout(function () {
               swiper.slideTo(nextIndex - 1);
-              //playing the video
-              // $('video').get(nextIndex - 1).load();
               if ($(window).width() >= 767) {
                 for (i = 1; i < 4; i++) {
-                  // $('video').each(function () {
-                  //   allVideos.push($(this).get(0));
-                  // });
                   if (i == nextIndex - 1) {
-                    console.log($('video'));
                     $('#video' + i).get(0).load();
                     $('#video' + i).get(0).play();
                   } else {
-                    console.log(i);
                     $('#video' + i).get(0).pause();
                   }
                 }
@@ -126,19 +143,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }, 1000);
     });
     cfpLoadingBar.complete();
-
     $scope.audioStatus = {
       on: true
     }
     $scope.muteVolume = function () {
-      if ($("video").prop('muted')) {
-        $scope.audioStatus = {
-          on: true
+      for (i = 1; i <= 3; i++) {
+        if ($("#video" + i)[0].muted) {
+          $("#video" + i)[0].muted= false;
+          $scope.audioStatus = {
+             on: true
+          }
+        } else {
+          $("#video" + i)[0].muted= true;
+          $scope.audioStatus = {}
         }
-        $("video").prop('muted', false);
-      } else {
-        $scope.audioStatus = {}
-        $("video").prop('muted');
       }
     }
   })
@@ -2744,6 +2762,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             })
             console.log($scope.destinationCityFilter, 'city');
           }
+          $scope.pagenumber=1;
           break;
         case 'itineraryType':
           var typeIndex = _.findIndex($scope.destinationItineraryType, function (type) {
@@ -2759,6 +2778,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
             console.log($scope.destinationItineraryType, 'type');
           }
+          $scope.pagenumber=1;
           break;
         case 'itineraryBy':
           var byIndex = _.findIndex($scope.destinationItineraryBy, function (type) {
@@ -2773,6 +2793,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             })
             console.log($scope.destinationItineraryBy, 'by');
           }
+          $scope.pagenumber=1;
           break;
         default:
 
@@ -9368,6 +9389,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     //Itinerary Options List Show End
 
+    // THANK YOU MODAL
+    $scope.openThankYouModal = function () {
+      $uibModal.open({
+        templateUrl: "views/modal/report.html",
+        animation: true,
+        scope: $scope,
+        windowClass: "report-modal"
+      });
+    };
+    // THANK YOU MODAL END
+
     //Photo comment popup
     $scope.allPhotos = {};
     $scope.allPhotos.photoSliderIndex = "";
@@ -9922,6 +9954,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     }
 
+    // THANK YOU MODAL
+    $scope.openThankYouModal = function () {
+      $uibModal.open({
+        templateUrl: "views/modal/report.html",
+        animation: true,
+        scope: $scope,
+        windowClass: "report-modal"
+      });
+    };
+    // THANK YOU MODAL END
 
     //Photo comment popup
     $scope.allPhotos = {};
@@ -10770,6 +10812,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // ISMINE FUNCTION
     if ($.jStorage.get("isLoggedIn")) {
       $scope.isLoggedIn = true;
+      $scope.template.isLoggedIn = true;
       if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
         // $.jStorage.set("isMine", true);
         $scope.template.isMine = true;
@@ -10779,6 +10822,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     } else {
       $scope.isLoggedIn = false;
+      $scope.template.isLoggedIn = false;
       // $scope.isMine = false;
       $scope.template.isMine = false;
     }

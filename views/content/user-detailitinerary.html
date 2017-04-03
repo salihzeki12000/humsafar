@@ -263,12 +263,17 @@
               <div class="options pointer pull-right relate" ng-click="viewItineraryOptions()">
                 <img src="img/options.png" alt="Options" height="22" class="agent-iti-options-icon">
                 <div class="itinerary-edit-option" ng-show="showItineraryEditOptions">
-                  <ul>
+                  <ul ng-if="template.isMine">
                     <li>
                       <a ui-sref="detailitinerary({flag:'edit',urlSlug:itinerary.urlSlug})">Edit</a>
                     </li>
                     <li>
                       <a class="">Delete</a>
+                    </li>
+                  </ul>
+                  <ul ng-if="!template.isMine">
+                    <li>
+                      <a ng-click="openThankYouModal();"> Report </a>
                     </li>
                   </ul>
                 </div>
@@ -308,7 +313,7 @@
               <!-- share end -->
             </div>
             <!-- comment list -->
-            <div class="comment-list-holder" ng-if="itinerary.status == true">
+            <div class="comment-list-holder" ng-if="itinerary.status == true && template.isLoggedIn">
               <form ng-submit="postItineraryComment(itinerary._id,itinerary.uniqueId,commentText.text)">
                 <div class="view-comment-list" ng-repeat="comment in itinerary.comment | orderBy:$index:true | limitTo:1">
                   <div class="commenter-img">
