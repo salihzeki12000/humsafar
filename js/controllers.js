@@ -2702,11 +2702,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.itineraryLoadMore = function () {
-      $scope.pagenumber++;
       $scope.scroll.busy = true;
       console.log($scope.pagenumber, 'pagenumber');
       // $scope.getCountryInfo("itinerary",$scope.urlDestinationCountry);
       if ($scope.scroll.stopCallingApi == false) {
+        $scope.pagenumber++;
         $scope.getCountryInfo("itinerary", $scope.urlDestinationCountry);
       }
     };
