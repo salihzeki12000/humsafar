@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="profile-photo-section relate">
       <div class="profile-pic relate">
-        <a ui-sref="setting" ng-if="template.isMine">
+        <a ui-sref="setting({'path':'settings'})" ng-if="template.isMine">
           <div class="profile-imgholder ">
             <img ng-src="{{userData.profilePicture|uploadpath:140:150:'cover'}}" alt="{{userData.name}}" class="img-responsive" style="border-radius:'50px';">
           </div>
