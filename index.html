@@ -30,19 +30,36 @@
   <meta name="twitter:description" content="TraveLibro">
   <meta name="twitter:image" content="img/tw-banner.jpg">
   <title ng-bind="'TraveLibro | '+template.title">TraveLibro</title>
+
+  <link rel="manifest" href="/manifest.json">
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+  <script>
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(["init", {
+      appId: "bf8baf0a-dcfb-4a30-a0c1-ee67cae2feb1",
+      autoRegister: true,
+      notifyButton: {
+        enable: true /* Set to false to hide */
+      }
+    }]);
+
+  </script>
+
   <link rel="shortcut icon" href="img/favicon.ico" />
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/typed.js/dist/typed.min.js"></script>
   <style>
     @font-face {
-  font-family: "AvenirLTStd-Medium";
-  src: url('../fonts/AvenirLTStd-Medium.otf');
+      font-family: "AvenirLTStd-Medium";
+      src: url('../fonts/AvenirLTStd-Medium.otf');
     }
-.avenir-medium {
-  font-family: "AvenirLTStd-Medium";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    
+    .avenir-medium {
+      font-family: "AvenirLTStd-Medium";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
+
   </style>
 
   <!--[if IE]>
@@ -92,9 +109,9 @@
     var isproduction = false;
 
   </script>
-  
+
   <script src="js/jquery.parallax.js"></script>
-  
+
   <script src="bower_components/fullpage.js/dist/jquery.fullpage.min.js"></script>
   <script src="bower_components/flexslider/jquery.flexslider-min.js"></script>
   <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
