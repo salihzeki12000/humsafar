@@ -219,7 +219,7 @@ var navigationservice = angular.module('navigationservice', [])
         });
       },
       notificationWeb: function (formData, callback) {
-        TravelibroService.post(adminURL + "/notification/getNotificationWeb", formData, paginationLoad).success(callback).error(function (data) {
+        TravelibroService.post(adminURL + "/notification/getNotificationWeb", formData, 'paginationLoad').success(callback).error(function (data) {
           console.log(data);
         });
       },
