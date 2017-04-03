@@ -613,6 +613,10 @@
 // media query for 991px to 768px end
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
+  //loader
+  .loaders{
+    font-size: 16px !important;
+  }
   //header
   .sidemenu.mobile-menu .nav-list {
     padding-top: 5px;
@@ -1514,8 +1518,11 @@
       display: none;
     }
   }
-  .popular-blogger .bloggerholder-made .cfj-holder li {
+  .popular-blogger{
+    margin-top: 0px;
+  .bloggerholder-made .cfj-holder li {
     float: none;
+  }
   }
   .download-app-footer {
     background: #000;
@@ -1684,6 +1691,7 @@
     top: 55px;
   }
   .blog-itineraries-main {
+    margin-bottom: 10px;
     padding-top: 0px;
   }
   .fp-section,
@@ -1954,13 +1962,13 @@
     }
   } //card
   .days-spent {
-    width: 40px;
+    width: 45px;
     height: 45px;
     border-radius: 16px;
-    bottom: 5px;
+    bottom: 15px;
   }
   .user-social-item {
-    padding: 20px 0;
+    padding: 10px 0;
   } // journey join
   .ongo-journey-join {
     width: 200px;

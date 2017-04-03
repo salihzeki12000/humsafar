@@ -1057,11 +1057,18 @@
     padding: 10px;
   }
   // popular blogger
-  .popular-blogger .blogger-cover {
+  .popular-blogger{
+    .socialize-holder{
+    text-align: center;
+    }
+    .blogger-cover {
     width: 100%;
     max-width: 100%;
-    margin: 5px 0;
-  }
+    }
+    .pbt-15 {
+    padding: 10px 0;
+    }
+  } 
 
   .popular-blogger .blogger-cover .gallery-imgholder {
     width: 100%;
@@ -2071,7 +2078,7 @@
   //Destination city page
   .journey-travelling-type {
     .pull-right {
-      margin-top: 20px;
+      margin-top: 2px;
     }
   }
   //Destination city page end
