@@ -1062,6 +1062,7 @@
     text-align: center;
     }
     .blogger-cover {
+      margin: 12px 0;
     width: 100%;
     max-width: 100%;
     }
@@ -1085,6 +1086,18 @@
     @include transform (translateX(-50%));
   }
   // popular blogger end
+  //coming soon
+  .coming-soon-page {
+h1 {
+    font-size: 30px;
+}
+h4{
+    font-size: 16px;
+}
+  }
+    .email-form {
+    width: 95%;
+}
   // AGENT ITINERARY PAGE
   .agent-itinerary-page .close-gallery,
   .user-itinerary-page .close-gallery {
