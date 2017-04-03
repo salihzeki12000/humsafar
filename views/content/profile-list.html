@@ -271,7 +271,8 @@
                   <div class="list-info">
                     <div class="clearfix">
                       <div class="pull-left">
-                        <h4 class="avenir-heavy">{{country.countryId.name}} <span>({{country.year}})</span></h4>
+                        <h4 class="avenir-heavy">{{country.countryId.name}} <span ng-if="!(country.year && (country.year===null || country.year===undefined || country.year===-1))">({{country.year}})</span></h4>
+                        <span ng-if="country.year && (country.year===null || country.year===undefined || country.year===-1)">(----)</span></h4>
                       </div>
                       <div class="pull-right">
                         <div class="bucket-flag">
