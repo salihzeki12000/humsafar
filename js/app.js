@@ -1499,16 +1499,16 @@ firstapp.directive('hideOnScroll', function ($document) {
   };
 });
 
-firstapp.directive('fullPage', function ($document) {
-  return {
-    restrict: 'EA',
-    replace: false,
-    link: function (scope, element, attr) {
-      var $element = $(element);
-       $element.fullpage();
-    }
-  };
-});
+// firstapp.directive('fullPage', function ($document) {
+//   return {
+//     restrict: 'EA',
+//     replace: false,
+//     link: function (scope, element, attr) {
+//       var $element = $(element);
+//        $element.fullpage();
+//     }
+//   };
+// });
 
 firstapp.directive('uiSrefIf', function ($compile) {
   return {

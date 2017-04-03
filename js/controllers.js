@@ -71,24 +71,40 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log("ChangePage");
       var length = $(".fp-section").length;
       if (length === 0) {
-        // $('.fullpage').fullpage({
-        //   //Navigation
-        //   onLeave: function (index, nextIndex, direction) {
-        //     $timeout(function () {
-        //       swiper.slideTo(nextIndex - 1);
-        //       if ($(window).width() >= 767) {
-        //         for (i = 1; i < 4; i++) {
-        //           if (i == nextIndex - 1) {
-        //             $('#video' + i).get(0).load();
-        //             $('#video' + i).get(0).play();
-        //           } else {
-        //             $('#video' + i).get(0).pause();
-        //           }
-        //         }
-        //       }
-        //     }, 500);
-        //   }
-        // });
+        $('.fullpage').fullpage({
+          //Navigation
+  // 
+          onLeave: function (index, nextIndex, direction) {
+            $timeout(function () {
+                    $('.scene').parallax();
+
+      swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        direction: 'vertical',
+        slidesPerView: 1,
+        paginationClickable: true,
+        spaceBetween: 0,
+        mousewheelControl: false,
+        mousewheelForceToAxis: false,
+        keyboardControl: false,
+        parallax: true,
+        hashnav: true
+      });
+              console.log("ChangePage in Full Page");
+              swiper.slideTo(nextIndex - 1);
+              if ($(window).width() >= 767) {
+                for (i = 1; i < 4; i++) {
+                  if (i == nextIndex - 1) {
+                    $('#video' + i).get(0).load();
+                    $('#video' + i).get(0).play();
+                  } else {
+                    $('#video' + i).get(0).pause();
+                  }
+                }
+              }
+            }, 500);
+          }
+        });
       }
 
       // console.log(text);
@@ -120,22 +136,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $('video').remove();
       }
     });
-    setTimeout(function () {
-      $('.scene').parallax();
+    // setTimeout(function () {
 
-      swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        direction: 'vertical',
-        slidesPerView: 1,
-        paginationClickable: true,
-        spaceBetween: 0,
-        mousewheelControl: false,
-        mousewheelForceToAxis: false,
-        keyboardControl: false,
-        parallax: true,
-        hashnav: true
-      });
-    }, 500);
+    // }, 500);
 
     $scope.$on('$viewContentLoaded', function () {
       $timeout(function () {
