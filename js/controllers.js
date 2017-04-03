@@ -33,32 +33,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
     $scope.accessToken = $.jStorage.get("accessToken");
-    $scope.videoPlay = [{
-      videourl: "",
-      vimeourl: "",
-      imgurl: "img/libro-home/transparent-home.png",
-      id: "0"
-    }, {
-      videourl: "img/libro-home/videos/travellife.mp4",
-      vimeourl: "https://player.vimeo.com/video/207906141",
-      imgurl: "img/libro-home/videos/travel-life.jpg",
-      id: "1"
-    }, {
-      videourl: "img/libro-home/videos/locallife.mp4",
-      vimeourl: "https://player.vimeo.com/video/207905802",
-      imgurl: "img/libro-home/videos/local-life.jpg",
-      id: "2"
-    }, {
-      videourl: "img/libro-home/videos/mylife.mp4",
-      vimeourl: "https://player.vimeo.com/video/207906010",
-      imgurl: "img/libro-home/videos/my-life.jpg",
-      id: "3"
-    }, {
-      videourl: "",
-      vimeourl: "",
-      imgurl: "img/libro-home/transparent-home.png",
-      id: "4"
-    }]
     $scope.section = {
       one: "views/section/mainhome.html",
       two: "views/section/travellife.html",
@@ -76,21 +50,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   // 
           onLeave: function (index, nextIndex, direction) {
             $timeout(function () {
-                    $('.scene').parallax();
-
-      swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        direction: 'vertical',
-        slidesPerView: 1,
-        paginationClickable: true,
-        spaceBetween: 0,
-        mousewheelControl: false,
-        mousewheelForceToAxis: false,
-        keyboardControl: false,
-        parallax: true,
-        hashnav: true
-      });
-              console.log("ChangePage in Full Page");
               swiper.slideTo(nextIndex - 1);
               if ($(window).width() >= 767) {
                 for (i = 1; i < 4; i++) {
@@ -136,9 +95,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $('video').remove();
       }
     });
-    // setTimeout(function () {
+    setTimeout(function () {
+      $('.scene').parallax();
 
-    // }, 500);
+      swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        direction: 'vertical',
+        slidesPerView: 1,
+        paginationClickable: true,
+        spaceBetween: 0,
+        mousewheelControl: false,
+        mousewheelForceToAxis: false,
+        keyboardControl: false,
+        parallax: true,
+        hashnav: true
+      });
+    }, 500);
 
     $scope.$on('$viewContentLoaded', function () {
       $timeout(function () {
