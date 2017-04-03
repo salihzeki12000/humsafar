@@ -29,7 +29,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     cfpLoadingBar.start();
     $scope.template = TemplateService.changecontent("home");
     $scope.menutitle = NavigationService.makeactive("Home");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.accessToken = $.jStorage.get("accessToken");
@@ -47,33 +47,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // console.log($(".fp-section"));
       if (length === 0) {
         $('.fullpage').fullpage({
-                  //Navigation
-                  onLeave: function (index, nextIndex, direction) {
-                    $timeout(function () {
-                      swiper.slideTo(nextIndex - 1);
-                      //playing the video
-                      // $('video').get(nextIndex - 1).load();
-                      if ($(window).width() >= 767) {
-                        for (i = 1; i < 4; i++) {
-                          // $('video').each(function () {
-                          //   allVideos.push($(this).get(0));
-                          // });
-                            if (i == nextIndex - 1) {
-                              console.log($('video'));
-                              $('#video' + i).get(0).load();
-                              $('#video' + i).get(0).play();
-                            }
-                            else {
-                              console.log(i);
-                              $('#video' + i).get(0).pause();
-                            }
-                        }
-                      }
-                    }, 500);
+          //Navigation
+          onLeave: function (index, nextIndex, direction) {
+            $timeout(function () {
+              swiper.slideTo(nextIndex - 1);
+              //playing the video
+              // $('video').get(nextIndex - 1).load();
+              if ($(window).width() >= 767) {
+                for (i = 1; i < 4; i++) {
+                  // $('video').each(function () {
+                  //   allVideos.push($(this).get(0));
+                  // });
+                  if (i == nextIndex - 1) {
+                    console.log($('video'));
+                    $('#video' + i).get(0).load();
+                    $('#video' + i).get(0).play();
+                  } else {
+                    console.log(i);
+                    $('#video' + i).get(0).pause();
                   }
-                });
+                }
+              }
+            }, 500);
+          }
+        });
       }
-      
+
       // console.log(text);
       $scope.homeval = text;
       switch (text) {
@@ -149,7 +148,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.userData = $.jStorage.get("profile");
     $scope.template = TemplateService.changecontent("login");
     $scope.menutitle = NavigationService.makeactive("Login");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.headerfixed = "fixed-header";
     $scope.animationsEnabled = true;
@@ -272,92 +271,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
   })
-  // .controller('ForgotPasswordCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $stateParams) {
-  //Used to name the .html file
-  //   console.log("Testing Consoles");
-  //   $scope.template = TemplateService.changecontent("forgot-password");
-  //   $scope.menutitle = NavigationService.makeactive("Login");
-  //   TemplateService.title = $scope.menutitle;
-  //   $scope.navigation = NavigationService.getnav();
-  //   $scope.animationsEnabled = true;
-  //   $scope.template.header = "";
-  //   $scope.template.footer = "";
-  //   $scope.showErr = false;
-  //   $scope.showErr1 = false;
-  //   $scope.formData = {};
-  //   $scope.formData.password = "";
-  //   $scope.formData.confirmPassword = "";
-  //   $scope.userData = {};
-  //   if (typeof $.fn.fullpage.destroy == 'function') {
-  //     $.fn.fullpage.destroy('all');
-  //   }
-  //   if ($stateParams.token && $stateParams.email) {
-  //     NavigationService.checkToken({
-  //       token: decodeURIComponent($stateParams.token),
-  //       email: $stateParams.email
-  //     }, function (data) {
-  //       if (data.value) {
-  //         $scope.showErr = false;
-  //       } else {
-  //         $scope.showErr = true;
-  //       }
-  //     });
-  //   } else {
-  //     $scope.showErr = true;
-  //   }
-  //   $scope.type = function () {
-  //     if ($scope.formData.password === "" && $scope.formData.confirmPassword === "") {
-  //       $scope.showErr1 = false;
-  //     } else {
-  //       if ($scope.formData.password !== "" && $scope.formData.confirmPassword === "") {
-  //         $scope.showErr1 = false;
-  //       } else if ($scope.formData.password === $scope.formData.confirmPassword) {
-  //         $scope.showErr1 = false;
-  //       } else {
-  //         $scope.showErr1 = true;
-  //       }
-  //     }
-  //   }
-  //   $scope.change = function () {
-  //     if ($scope.formData.password === $scope.formData.confirmPassword && $scope.showErr === false && $scope.showErr1 === false) {
-  //       $scope.formData.token = decodeURIComponent($stateParams.token);
-  //       $scope.formData.email = $stateParams.email;
-  //       NavigationService.changePasswordEmail($scope.formData, function (data) {
-  //         if (data.value) {
-  //           $scope.opensucessfull();
-  //           NavigationService.getProfile("", globalGetProfile, function (err) {
-  //             $.jStorage.set("profile", data);
-  //           });
-  //         } else {
-  //           $scope.showErr = true;
-  //         }
-  //       });
-  //     } else {
-  //       $scope.showErr1 = true;
-  //     }
-  //   }
-  //   if (!_.isEmpty($.jStorage.get("profile"))) {
-  //     $scope.userData = $.jStorage.get("profile");
-  //   }
-  //   $scope.opensucessfull = function (size) {
-  //     $uibModal.open({
-  //       animation: true,
-  //       templateUrl: 'views/modal/sucessfull.html',
-  //       controller: 'ForgotPasswordCtrl',
-  //       scope: $scope,
-  //       windowClass: "notexist",
-  //       size: "sm"
-  //     });
-  //   };
 
-  // })
   .controller('ForgotPasswordEmailCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
     console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("forgot-password-email");
     $scope.menutitle = NavigationService.makeactive("Forgot Password");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.animationsEnabled = true;
     $scope.template.header = "";
@@ -384,7 +305,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("contact");
     $scope.menutitle = NavigationService.makeactive("Contact");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.animationsEnabled = true;
     if (typeof $.fn.fullpage.destroy == 'function') {
@@ -401,7 +322,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("booking");
     $scope.menutitle = NavigationService.makeactive("Bookings");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.animationsEnabled = true;
     if (typeof $.fn.fullpage.destroy == 'function') {
@@ -446,7 +367,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("advertise");
     $scope.menutitle = NavigationService.makeactive("Advertise");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.animationsEnabled = true;
     if (typeof $.fn.fullpage.destroy == 'function') {
@@ -460,7 +381,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.form = {};
     $scope.template = TemplateService.changecontent("mainpage");
     $scope.menutitle = NavigationService.makeactive("Home");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     TemplateService.footer = "";
     $scope.navigation = NavigationService.getnav();
     $scope.userData = {};
@@ -708,7 +629,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     $scope.template = TemplateService.changecontent("holiday");
     $scope.menutitle = NavigationService.makeactive("Holiday");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.viewHoliday = 1;
@@ -972,7 +893,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("tripsummary");
     $scope.menutitle = NavigationService.makeactive("TripSummary");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     // start scroll
@@ -1609,7 +1530,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("ongojourney");
     $scope.menutitle = NavigationService.makeactive("OnGoJourney");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     // EDIT KIND OF JOURNEY POPUP
@@ -2040,7 +1961,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("popular-blogger");
     $scope.menutitle = NavigationService.makeactive("Popular Bloggers");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     // POPULAR BLOGGER INTEGRATION START
@@ -2122,7 +2043,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // $scope.template = TemplateService.changecontent("popular-agent");
     $scope.template = TemplateService.changecontent("coming-soon");
     $scope.menutitle = NavigationService.makeactive("Popular Agents");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
   })
 
@@ -2133,7 +2054,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("popular-itinerary");
     $scope.menutitle = NavigationService.makeactive("Popular Itineraries");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.userData = $.jStorage.get("profile");
@@ -2361,7 +2282,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("popular-journey");
     $scope.menutitle = NavigationService.makeactive("Popular Journeys");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.userData = $.jStorage.get("profile")
     // POPULAR JOURNEY INTEGRATION START
@@ -2588,7 +2509,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("destination");
     $scope.menutitle = NavigationService.makeactive("Destinations");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.destinationList = [];
     console.log($scope.searchLoader, 'search loader');
@@ -2669,7 +2590,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("destination-country");
     $scope.menutitle = NavigationService.makeactive("Destination");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.urlDestinationCountry = $state.params.url;
     $scope.hotelsData = [];
@@ -3267,7 +3188,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("destination-city");
     $scope.menutitle = NavigationService.makeactive("Destination");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.cityDestData = [];
     $scope.cityHotelCategoryData = [];
@@ -4412,7 +4333,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("mylife");
     $scope.menutitle = NavigationService.makeactive("Mylife");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.localView = {};
@@ -6102,7 +6023,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("journey");
     $scope.menutitle = NavigationService.makeactive("Journey");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.$watch('masonryContainer', function () {
@@ -6188,7 +6109,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("moments");
     $scope.menutitle = NavigationService.makeactive("Moments");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
 
@@ -6199,7 +6120,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("reviews");
     $scope.menutitle = NavigationService.makeactive("Reviews");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
 
@@ -6210,7 +6131,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("holidayplanner");
     $scope.menutitle = NavigationService.makeactive("HolidayPlanner");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
   })
@@ -6221,7 +6142,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("profile");
     $scope.menutitle = NavigationService.makeactive("Profile");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
   })
 
@@ -6232,7 +6153,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("otherprofile");
     $scope.menutitle = NavigationService.makeactive("OtherProfile");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
   })
@@ -6242,7 +6163,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("otherjourney");
     $scope.menutitle = NavigationService.makeactive("OtherJourney");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $(document).ready(function () {
@@ -6590,7 +6511,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("setting");
     $scope.menutitle = NavigationService.makeactive("Setting");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.showSetting = 1;
@@ -7017,7 +6938,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("blog");
     $scope.menutitle = NavigationService.makeactive("Blog");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.blogPost = [{
@@ -7141,7 +7062,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("blogdetail");
     $scope.menutitle = NavigationService.makeactive("BlogDetail");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
 
@@ -7151,7 +7072,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("activity");
     $scope.menutitle = NavigationService.makeactive("Activity");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     setTimeout(function () {
@@ -7172,7 +7093,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("activitytest");
     $scope.menutitle = NavigationService.makeactive("Activity");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.showLikeCommentCard = true;
     setInterval(function () {
@@ -7617,7 +7538,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("profile-list");
     $scope.menutitle = NavigationService.makeactive("ProfileList");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.userData = $.jStorage.get("profile");
@@ -8020,7 +7941,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("itinerary");
     $scope.menutitle = NavigationService.makeactive("Itinerary");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
   })
@@ -8032,7 +7953,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("detail-itinerary");
     $scope.menutitle = NavigationService.makeactive("DetailedItinerary");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.totalUploadCount = 0;
@@ -8702,7 +8623,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("quick-itinerary");
     $scope.menutitle = NavigationService.makeactive("QuickItinerary");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.addClass = "";
@@ -9034,7 +8955,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("editor-itinerary");
     $scope.menutitle = NavigationService.makeactive("Editor-Itinerary");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.getItineraryType = [{
@@ -9384,7 +9305,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("user-quickitinerary");
     $scope.menutitle = NavigationService.makeactive("User-QuickItinerary");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.closeBackDrop = function () {
@@ -9901,7 +9822,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("user-detailitinerary");
     $scope.menutitle = NavigationService.makeactive("User-DetailItinerary");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.closeBackDrop = function () {
@@ -10476,7 +10397,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("agent-itinerary");
     $scope.menutitle = NavigationService.makeactive("Agent-Itinerary");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.getItineraryType = [{
@@ -10808,7 +10729,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("about-travelibro");
     $scope.menutitle = NavigationService.makeactive("About TraveLibro");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.accessToken = $.jStorage.get("accessToken");
@@ -10819,7 +10740,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("terms-conditions");
     $scope.menutitle = NavigationService.makeactive("Terms & Conditions");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.accessToken = $.jStorage.get("accessToken");
   })
@@ -10828,7 +10749,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("privacy-policy");
     $scope.menutitle = NavigationService.makeactive("Privacy Policy");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.accessToken = $.jStorage.get("accessToken");
   })
@@ -11081,7 +11002,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   .controller('AgentloginCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     $scope.template = TemplateService.changecontent("agent-login"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Login"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.oneAtATime = true;
     //about textarea counter
@@ -11195,7 +11116,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   .controller('AgentsettingCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     $scope.template = TemplateService.changecontent("agent-setting"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Settings"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.oneAtATime = true;
 
@@ -11306,7 +11227,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   .controller('AgentupgradeCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     $scope.template = TemplateService.changecontent("agent-upgrade"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Upgrade"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.variables = {};
     $scope.variables.tooltips = {};
@@ -11415,7 +11336,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   .controller('AgentuserCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
     $scope.template = TemplateService.changecontent("agent-user"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent User"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.oneAtATime = true;
 
@@ -12796,7 +12717,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   .controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
     $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.oneAtATime = true;
 
@@ -13613,7 +13534,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   .controller('MessageCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     $scope.template = TemplateService.changecontent("message"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Message"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     //showNewMessage box
@@ -13916,7 +13837,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   .controller('NotificationCtrl', function ($scope, TemplateService, NavigationService, $timeout, LikesAndComments, $state) {
     $scope.template = TemplateService.changecontent("notification"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Notification"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.pageNo = 1;
     $scope.notifyScroll = {
@@ -14209,7 +14130,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   .controller('singleNotification', function ($scope, TemplateService, NavigationService, $timeout, $state, $stateParams, LikesAndComments) {
     $scope.template = TemplateService.changecontent("single-post"); //Use same name of .html file
     // $scope.menutitle = NavigationService.makeactive("single-notification"); //This is the Title of the Website
-    // TemplateService.title = $scope.menutitle;
+    TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     console.log($stateParams.postId);
 
@@ -14313,7 +14234,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   .controller('SearchresultCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal, $state, LikesAndComments) {
     $scope.template = TemplateService.changecontent("search-result"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Search Results"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.pagenumber = 1;
     $scope.limit = 20;
@@ -14664,21 +14585,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   .controller('ErrorCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
     $scope.template = TemplateService.changecontent("404error"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("404 Error"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
   })
 
   .controller('ComingSoonCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
     $scope.template = TemplateService.changecontent("coming-soon"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Coming Soon"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
   })
 
   .controller('LoginFlowCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state, $interval) {
     $scope.template = TemplateService.changecontent("login-flow"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Login Flow"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.userData = $.jStorage.get("oldUserData");
     console.log($scope.userData);
