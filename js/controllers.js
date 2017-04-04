@@ -8,6 +8,7 @@ var globalGetProfile = function (data, status) {
     $.jStorage.flush();
   }
 };
+var abc = {};
 
 var pointsForLine = function () {};
 var line = [];
@@ -40,6 +41,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       four: "views/section/mylife.html",
       five: "views/section/share.html",
     };
+
     $scope.changePage = function (text) {
       // console.log(text);
       console.log("ChangePage");
@@ -64,6 +66,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           }
         });
       }
+
+      abc = $scope;
 
       // console.log(text);
       $scope.homeval = text;
