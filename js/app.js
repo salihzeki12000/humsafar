@@ -81,9 +81,9 @@ var firstapp = angular.module('firstapp', [
   'pascalprecht.translate',
   'imageupload',
   'angulartics',
-  'angulartics.google.analytics',
   'fileuploadservicemod',
   'angularFileUpload',
+  'angular-google-analytics'
 ]);
 
 firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, cfpLoadingBarProvider) {
