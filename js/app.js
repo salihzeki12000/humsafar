@@ -28,8 +28,8 @@ $(document).ready(function () {
 });
 
 $("body").click(function (e) {
-  console.log($(e.target).parent().hasClass('drop-content'));
-  console.log($(e.target).hasClass('toggle-dropDown'));
+  // console.log($(e.target).parent().hasClass('drop-content'));
+  // console.log($(e.target).hasClass('toggle-dropDown'));
   if ($(e.target).parent().hasClass('drop-content')) {
     return;
   } else if ($(e.target).hasClass('toggle-dropDown')) {

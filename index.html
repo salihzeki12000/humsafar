@@ -33,17 +33,19 @@
 
   <link rel="manifest" href="/manifest.json">
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-  <script>
+  <script src="js/pushnotification.js"></script>
+  <!--<script>
     var OneSignal = window.OneSignal || [];
     OneSignal.push(["init", {
       appId: "bf8baf0a-dcfb-4a30-a0c1-ee67cae2feb1",
       autoRegister: true,
       notifyButton: {
         enable: true /* Set to false to hide */
-      }
+      },
+      allowLocalhostAsSecureOrigin: true
     }]);
 
-  </script>
+  </script>-->
 
   <link rel="shortcut icon" href="img/favicon.ico" />
   <script src="bower_components/jquery/dist/jquery.js"></script>
