@@ -81,13 +81,15 @@ var firstapp = angular.module('firstapp', [
   'pascalprecht.translate',
   'imageupload',
   'angulartics',
-  'angulartics.google.analytics',
+  // 'angulartics.google.analytics',
   'fileuploadservicemod',
   'angularFileUpload',
+  'angular-google-analytics'
 ]);
 
-firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, cfpLoadingBarProvider) {
+firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, cfpLoadingBarProvider, AnalyticsProvider) {
   // for http request with session
+  AnalyticsProvider.setAccount('UA-73461827-3');
   $httpProvider.defaults.withCredentials = true;
   cfpLoadingBarProvider.includeSpinner = true;
   cfpLoadingBarProvider.latencyThreshold = 2000;
@@ -453,7 +455,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
     });
   $urlRouterProvider.otherwise("/");
   $locationProvider.html5Mode(isproduction);
-});
+}).run(['Analytics', function (Analytics) {}]);;
 
 
 // firstapp.directive('loadingText', function ($compile, $parse,$document) {
