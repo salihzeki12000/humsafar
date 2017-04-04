@@ -45,9 +45,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log("ChangePage");
       var length = $(".fp-section").length;
       if (length === 0) {
-        $('.fullpage').fullpage({
+        $('.fullpage').fullpage({ 
           //Navigation
-  // 
           onLeave: function (index, nextIndex, direction) {
             $timeout(function () {
               swiper.slideTo(nextIndex - 1);
@@ -61,7 +60,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   }
                 }
               }
-            }, 5000);
+            }, 500);
           }
         });
       }
@@ -2800,12 +2799,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // THANK YOU MODAL END
 
     // destination city
-    $scope.countryView = function (url, isCity) {
-      $state.go("destinationcity", {
-        name: "must-dos",
-        url: url
-      })
-    }
+    // $scope.countryView = function (url, isCity) {
+    //   $state.go("destinationcity", {
+    //     name: "must-dos",
+    //     url: url
+    //   })
+    // }
 
     // destination city end
 
