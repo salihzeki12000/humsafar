@@ -8,6 +8,7 @@ var globalGetProfile = function (data, status) {
     $.jStorage.flush();
   }
 };
+var abc = {};
 
 var pointsForLine = function () {};
 var line = [];
@@ -58,7 +59,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       vimeourl: "",
       imgurl: "img/libro-home/transparent-home.png",
       id: "4"
-    }]
+    }];
+    abc = $scope;
     $scope.section = {
       one: "views/section/mainhome.html",
       two: "views/section/travellife.html",
@@ -149,12 +151,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.muteVolume = function () {
       for (i = 1; i <= 3; i++) {
         if ($("#video" + i)[0].muted) {
-          $("#video" + i)[0].muted= false;
+          $("#video" + i)[0].muted = false;
           $scope.audioStatus = {
-             on: true
+            on: true
           }
         } else {
-          $("#video" + i)[0].muted= true;
+          $("#video" + i)[0].muted = true;
           $scope.audioStatus = {}
         }
       }
@@ -2762,7 +2764,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             })
             console.log($scope.destinationCityFilter, 'city');
           }
-          $scope.pagenumber=1;
+          $scope.pagenumber = 1;
           break;
         case 'itineraryType':
           var typeIndex = _.findIndex($scope.destinationItineraryType, function (type) {
@@ -2778,7 +2780,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
             console.log($scope.destinationItineraryType, 'type');
           }
-          $scope.pagenumber=1;
+          $scope.pagenumber = 1;
           break;
         case 'itineraryBy':
           var byIndex = _.findIndex($scope.destinationItineraryBy, function (type) {
@@ -2793,7 +2795,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             })
             console.log($scope.destinationItineraryBy, 'by');
           }
-          $scope.pagenumber=1;
+          $scope.pagenumber = 1;
           break;
         default:
 
