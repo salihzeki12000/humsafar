@@ -86,8 +86,9 @@ var firstapp = angular.module('firstapp', [
   'angular-google-analytics'
 ]);
 
-firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, cfpLoadingBarProvider) {
+firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, cfpLoadingBarProvider, AnalyticsProvider) {
   // for http request with session
+  AnalyticsProvider.setAccount('UA-73461827-3');
   $httpProvider.defaults.withCredentials = true;
   cfpLoadingBarProvider.includeSpinner = true;
   cfpLoadingBarProvider.latencyThreshold = 2000;
