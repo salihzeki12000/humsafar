@@ -32,7 +32,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Home");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
+    var swiper = {};
     $scope.accessToken = $.jStorage.get("accessToken");
     $scope.videoPlay = [{
       videourl: "",
@@ -76,6 +76,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           //Navigation
           onLeave: function (index, nextIndex, direction) {
             $timeout(function () {
+              $('.scene').parallax();
+              swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                direction: 'vertical',
+                slidesPerView: 1,
+                paginationClickable: true,
+                spaceBetween: 0,
+                mousewheelControl: false,
+                mousewheelForceToAxis: false,
+                keyboardControl: false,
+                parallax: true,
+                hashnav: true
+              });
               swiper.slideTo(nextIndex - 1);
               if ($(window).width() >= 767) {
                 for (i = 1; i < 4; i++) {
@@ -122,20 +135,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     });
     setTimeout(function () {
-      $('.scene').parallax();
 
-      swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        direction: 'vertical',
-        slidesPerView: 1,
-        paginationClickable: true,
-        spaceBetween: 0,
-        mousewheelControl: false,
-        mousewheelForceToAxis: false,
-        keyboardControl: false,
-        parallax: true,
-        hashnav: true
-      });
+
     }, 500);
 
     $scope.$on('$viewContentLoaded', function () {
