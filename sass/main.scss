@@ -253,6 +253,7 @@ a.mail-icon:hover {
   color: darken($brand-dark-pink, 20%);
   position: absolute;
   bottom: -22px;
+  left: 0;
 }
 
 ul {
@@ -9118,7 +9119,7 @@ header {
     background-image: url('../img/itinerary/family-whole-bg.jpg');
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    background-size: 100%;
+    background-size: cover;
   }
   .user-banner-detail {
     position: absolute;

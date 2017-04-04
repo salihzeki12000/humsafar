@@ -174,9 +174,9 @@
   // QUICK ITNERARY PAGE
   .quick-itinerary-page .quick-itinerary-detail {
     padding: 30px;
-    .itinerary-inputholder{
-      margin-bottom: 10px;
-    }
+    // .itinerary-inputholder{
+    //   margin-bottom: 10px;
+    // }
   }
 
   .quick-itinerary-page .trip-photo-holder .trip-view-photo {
@@ -2337,6 +2337,13 @@ h4{
       font-size: 12px;
     }
   }
+  .itinerary-content {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.view-quick-itinerary .itinerary-heading-detail .country-visited-name {
+    display: block;
+}
   // USER-DETAIL ITINERARY PAGE END
   // EDITOR ITINERARY PAGE
   .editor-itinerary-page .listing-accordion .gallery-image-holder {
