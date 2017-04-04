@@ -33,7 +33,7 @@
     display: block;
   }
   .search {
-    width: 100%;
+    width: 80%;
     input {
       width: 100%;
     }
@@ -1708,6 +1708,10 @@
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
+  .mobile-header .mobile-nofity ul li a {
+    font-size: 18px;
+    padding-right: 4px;
+}
   .home-slide {
     .contact {
       .contact-ab {
