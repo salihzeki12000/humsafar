@@ -58,8 +58,8 @@
     </div>
     <div class="destination-tour-booking destination-hotel-card tour-card-container">
       <div class="row">
-        <div class="col-md-6" ng-repeat="tour in bookingData.tours.tours_data|limitTo:6 track by $index">
-          <div class="tour-card-holder" ng-if="bookingData.tours.status==true">
+        <div class="col-md-6" ng-repeat="tour in bookingTourData|limitTo:6 track by $index">
+          <div class="tour-card-holder">
             <div class="blur-overlay-bg-div"></div>
             <div class="tour-view">
               <div class="row m-clear">
@@ -128,8 +128,8 @@
         <h4 class="uppercase">Hotels</h4>
       </div>
       <div class="row">
-        <div class="col-md-6" ng-repeat="hotel in bookingData.hotels.hotels_data|limitTo:6 track by $index">
-          <div class="hotel-card-holder mt10 relate" ng-if="bookingData.hotels.status==true" ng-init="backView=-1;">
+        <div class="col-md-6" ng-repeat="hotel in bookingHotelData|limitTo:6 track by $index">
+          <div class="hotel-card-holder mt10 relate" ng-init="backView=-1;">
             <div class="blur-overlay-bg-div"></div>
             <!-- flipper holder -->
             <div class="hotel-flipper-holder" ng-class="{'flip-card': backView==hotel.hotel_record_rails_id,'': backView!==hotel.hotel_record_rails_id}">
@@ -341,7 +341,7 @@
         <h4 class="uppercase">Vaction Rentals</h4>
       </div>
       <div class="row" ng-init="vacationBackView=-1;">
-        <div class="col-md-6" ng-repeat="vacation in bookingData.vacation_rentals.vacation_rentals_data|limitTo:6 track by $index">
+        <div class="col-md-6" ng-repeat="vacation in bookingVacData|limitTo:6 track by $index">
           <div class="vacation-card-list mt10" ng-if="bookingData.vacation_rentals.status==true">
             <div class="hotel-card-holder relate">
               <div class="blur-overlay-bg-div"></div>
@@ -528,8 +528,8 @@
         <h4 class="uppercase">Homestays</h4>
       </div>
       <div class="row" ng-init="backHomestayView = -1">
-        <div class="col-md-6" ng-repeat="homestay in bookingData.home_stays.home_stays_data|limitTo:6 track by $index">
-          <div class="hotel-card-holder mt10 relate" ng-if="bookingData.home_stays.status==true">
+        <div class="col-md-6" ng-repeat="homestay in bookingHomeData|limitTo:6 track by $index">
+          <div class="hotel-card-holder mt10 relate">
             <div class="blur-overlay-bg-div"></div>
             <div class="hotel-flipper-holder" ng-class="{'flip-card': backHomestayView==homestay.host._id,'': backHomestayView!==homestay.host._id}">
               <div class="hotel-front-view">

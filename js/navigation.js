@@ -338,8 +338,29 @@ var navigationservice = angular.module('navigationservice', [])
           console.log(data);
         });
       },
-      getDestinationBooking: function (formData, callback) {
-        $http.get("https://blog.travelibro.com/migrations/city_bookings.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
+      // getDestinationBooking: function (formData, callback) {
+      //   $http.get("https://blog.travelibro.com/migrations/city_bookings.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
+      //     callback(data);
+      //   });
+      // },
+
+      getBookingTour: function (formData, callback) {
+        $http.get("https://blog.travelibro.com/migrations/city_tours.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
+          callback(data);
+        });
+      },
+      getBookingVaction: function (formData, callback) {
+        $http.get("https://blog.travelibro.com/migrations/city_vacation_rentals.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
+          callback(data);
+        });
+      },
+      getBookingHomeStay: function (formData, callback) {
+        $http.get("https://blog.travelibro.com/migrations/city_home_stays.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
+          callback(data);
+        });
+      },
+      getBookingHotel: function (formData, callback) {
+        $http.get("https://blog.travelibro.com/migrations/city_hotels.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
           callback(data);
         });
       },

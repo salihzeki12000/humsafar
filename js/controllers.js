@@ -32,8 +32,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Home");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
+    var swiper = {};
     $scope.accessToken = $.jStorage.get("accessToken");
+    $scope.videoPlay = [{
+      videourl: "",
+      vimeourl: "",
+      imgurl: "img/libro-home/transparent-home.png",
+      id: "0"
+    }, {
+      videourl: "img/libro-home/videos/travellife.mp4",
+      vimeourl: "https://player.vimeo.com/video/207906141",
+      imgurl: "img/libro-home/videos/travel-life.jpg",
+      id: "1"
+    }, {
+      videourl: "img/libro-home/videos/locallife.mp4",
+      vimeourl: "https://player.vimeo.com/video/207905802",
+      imgurl: "img/libro-home/videos/local-life.jpg",
+      id: "2"
+    }, {
+      videourl: "img/libro-home/videos/mylife.mp4",
+      vimeourl: "https://player.vimeo.com/video/207906010",
+      imgurl: "img/libro-home/videos/my-life.jpg",
+      id: "3"
+    }, {
+      videourl: "",
+      vimeourl: "",
+      imgurl: "img/libro-home/transparent-home.png",
+      id: "4"
+    }];
+    abc = $scope;
     $scope.section = {
       one: "views/section/mainhome.html",
       two: "views/section/travellife.html",
@@ -41,16 +68,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       four: "views/section/mylife.html",
       five: "views/section/share.html",
     };
-
     $scope.changePage = function (text) {
       // console.log(text);
-      console.log("ChangePage");
       var length = $(".fp-section").length;
       if (length === 0) {
         $('.fullpage').fullpage({
           //Navigation
           onLeave: function (index, nextIndex, direction) {
             $timeout(function () {
+              $('.scene').parallax();
+              swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                direction: 'vertical',
+                slidesPerView: 1,
+                paginationClickable: true,
+                spaceBetween: 0,
+                mousewheelControl: false,
+                mousewheelForceToAxis: false,
+                keyboardControl: false,
+                parallax: true,
+                hashnav: true
+              });
               swiper.slideTo(nextIndex - 1);
               if ($(window).width() >= 767) {
                 for (i = 1; i < 4; i++) {
@@ -59,7 +97,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     $('#video' + i).get(0).play();
                   } else {
                     $('#video' + i).get(0).pause();
-                    console.log("this is wokign");
                   }
                 }
               }
@@ -67,8 +104,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           }
         });
       }
-
-      abc = $scope;
 
       // console.log(text);
       $scope.homeval = text;
@@ -100,26 +135,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     });
     setTimeout(function () {
-      $('.scene').parallax();
 
-      swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        direction: 'vertical',
-        slidesPerView: 1,
-        paginationClickable: true,
-        spaceBetween: 0,
-        mousewheelControl: false,
-        mousewheelForceToAxis: false,
-        keyboardControl: false,
-        parallax: true,
-        hashnav: true
-      });
+
     }, 500);
 
     $scope.$on('$viewContentLoaded', function () {
       $timeout(function () {
         $('body').addClass('fp-');
-        console.log("Change page is called");
         $scope.changePage($stateParams.id);
       }, 1000);
     });
@@ -304,7 +326,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("contact");
     $scope.menutitle = NavigationService.makeactive("Contact");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Contact Us - TraveLibro";
     $scope.navigation = NavigationService.getnav();
     $scope.animationsEnabled = true;
     if (typeof $.fn.fullpage.destroy == 'function') {
@@ -366,7 +388,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("advertise");
     $scope.menutitle = NavigationService.makeactive("Advertise");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Advertise With Us - TraveLibro";
     $scope.navigation = NavigationService.getnav();
     $scope.animationsEnabled = true;
     if (typeof $.fn.fullpage.destroy == 'function') {
@@ -1016,6 +1038,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var getOneJourneyCallback = function (journeys) {
       $scope.journey = journeys;
+      TemplateService.title = $scope.journey.name + " - Travel Life | TraveLibro";
       var postsWithLatLng = [];
       postsWithLatLng = _.filter($scope.journey.post,  'latlong');
       _.each(postsWithLatLng, function (n, $index) {
@@ -1960,7 +1983,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("popular-blogger");
     $scope.menutitle = NavigationService.makeactive("Popular Bloggers");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Popular Bloggers - TraveLibro";
     $scope.navigation = NavigationService.getnav();
 
     // POPULAR BLOGGER INTEGRATION START
@@ -2042,7 +2065,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // $scope.template = TemplateService.changecontent("popular-agent");
     $scope.template = TemplateService.changecontent("coming-soon");
     $scope.menutitle = NavigationService.makeactive("Popular Agents");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Popular Agents - TraveLibro";
     $scope.navigation = NavigationService.getnav();
   })
 
@@ -2053,7 +2076,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("popular-itinerary");
     $scope.menutitle = NavigationService.makeactive("Popular Itineraries");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Popular Itineraries - TraveLibro";
     $scope.navigation = NavigationService.getnav();
 
     $scope.userData = $.jStorage.get("profile");
@@ -2281,7 +2304,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("popular-journey");
     $scope.menutitle = NavigationService.makeactive("Popular Journeys");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Popular Journeys - TraveLibro";
     $scope.navigation = NavigationService.getnav();
     $scope.userData = $.jStorage.get("profile")
     // POPULAR JOURNEY INTEGRATION START
@@ -2508,7 +2531,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("destination");
     $scope.menutitle = NavigationService.makeactive("Destinations");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Travel Destinations - TraveLibro";
     $scope.navigation = NavigationService.getnav();
     $scope.destinationList = [];
     console.log($scope.searchLoader, 'search loader');
@@ -2589,7 +2612,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("destination-country");
     $scope.menutitle = NavigationService.makeactive("Destination");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.urlDestinationCountry = $state.params.url;
     $scope.hotelsData = [];
@@ -2663,14 +2686,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.getCountryInfo = function (type, urlSlug) {
       $scope.scroll.busy = false;
-      NavigationService.getCountryDestination({
+      var sendCityData = {
         pagenumber: $scope.pagenumber,
-        type: type,
+        type: _.cloneDeep(type),
         urlSlug: $scope.urlDestinationCountry,
         city: $scope.destinationCityFilter,
         itineraryType: $scope.destinationItineraryType,
         itineraryBy: $scope.destinationItineraryBy
-      }, function (data) {
+      };
+      if(type === "bestTime"){
+        sendCityData.type = "mustDo";
+      }
+      NavigationService.getCountryDestination(sendCityData, function (data) {
         if (type == 'itinerary') {
           _.each(data.data.itinerary, function (newData) {
             if (data.data.itinerary.length == 0) {
@@ -2680,6 +2707,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               console.log($scope.countryDestIti, 'data itinerary wala');
             }
           })
+          TemplateService.title = "Itineraries for " + $scope.countryDestData.name + " - TraveLibro";
           // if (data.data.itinerary.length == 0) {
           //   $scope.scroll.stopCallingApi = true;
           // }else {
@@ -2695,8 +2723,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           _.each(data.data.bestTime, function (newVal) {
             newVal.month = moment(newVal.month, "M").format('MMMM');
           });
+          console.log($scope.countryDestData, 'what is cadat');
+          // switch case for title only
+          console.log(type);
+          switch (type) {
+            case 'featuredCities':
+              TemplateService.title = "Popular Cities in " + $scope.countryDestData.name + " - TraveLibro"
+              break;
+            case 'mustDo':
+              TemplateService.title = "Top 10 Things to Do in " + $scope.countryDestData.name + " - TraveLibro"
+              break;
+              case "bestTime":
+              TemplateService.title = "Best Time To Visit " + $scope.countryDestData.name + " - TraveLibro";
+                break;
+            default:
+              break;
+          }
+          // switch case for title only end
         }
-        console.log($scope.countryDestData, 'what is cadat');
+
       });
     };
 
@@ -2743,7 +2788,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             })
             console.log($scope.destinationCityFilter, 'city');
           }
-          $scope.pagenumber = 1;
+          $scope.pagenumber=1;
           break;
         case 'itineraryType':
           var typeIndex = _.findIndex($scope.destinationItineraryType, function (type) {
@@ -2759,7 +2804,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
             console.log($scope.destinationItineraryType, 'type');
           }
-          $scope.pagenumber = 1;
+          $scope.pagenumber=1;
           break;
         case 'itineraryBy':
           var byIndex = _.findIndex($scope.destinationItineraryBy, function (type) {
@@ -2774,7 +2819,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             })
             console.log($scope.destinationItineraryBy, 'by');
           }
-          $scope.pagenumber = 1;
+          $scope.pagenumber=1;
           break;
         default:
 
@@ -2803,15 +2848,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // THANK YOU MODAL END
 
-    // destination city
+    // // destination city
     // $scope.countryView = function (url, isCity) {
     //   $state.go("destinationcity", {
     //     name: "must-dos",
     //     url: url
     //   })
     // }
-
-    // destination city end
+    //
+    // // destination city end
 
     var alldestination = ["views/content/destination/country/featured.html", "views/content/destination/country/mustdo.html", "views/content/destination/country/itineraries.html", "views/content/destination/country/booking.html", "views/content/destination/country/visit.html"];
     $scope.destination = {
@@ -2860,6 +2905,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.destination.innerView = alldestination[4];
           $scope.countryDestinationView = false;
           $scope.ntMustdo = "";
+          $scope.getCountryInfo("bestTime", $scope.urlDestinationCountry);
           break;
         default:
           // $scope.countryDestData = [];
@@ -3190,7 +3236,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("destination-city");
     $scope.menutitle = NavigationService.makeactive("Destination");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.cityDestData = [];
     $scope.cityHotelCategoryData = [];
@@ -3227,12 +3273,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // SUGGEST EDIT POPUP MODAL
     $scope.openSuggestModal = function () {
-      $uibModal.open({
-        templateUrl: "views/modal/suggest-edit.html",
-        animation: true,
-        scope: $scope,
-        windowClass: "report-modal"
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
+      } else{
+        $uibModal.open({
+          templateUrl: "views/modal/suggest-edit.html",
+          animation: true,
+          scope: $scope,
+          windowClass: "report-modal"
+        });
+      }
     };
     // SUGGEST EDIT POPUP MODAL END
 
@@ -3313,6 +3363,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var modal = "";
     $scope.rateDestination = function (destRate, type) {
+      if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+       }
       console.log(destRate, 'check in');
       $scope.destReview = destRate;
       if (destRate.userReview.length !== 0) {
@@ -3443,8 +3496,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.urlDestinationCity = $state.params.url;
     $scope.getCityInfo = function (type, urlSlug) {
       $scope.scroll.busy = false;
-      NavigationService.getCityDestination({
-        type: type,
+      var sendData={
+        type: _.cloneDeep(type),
         urlSlug: $scope.urlDestinationCity,
         subType: $scope.citySubTypeData,
         budget: $scope.cityBudgetData,
@@ -3452,7 +3505,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         itineraryType: $scope.cityItineraryType,
         itineraryBy: $scope.cityItineraryBy,
         pagenumber: $scope.pagenumber
-      }, function (data) {
+      };
+      if(type === "bestTime"){
+         sendData.type="mustDo";
+      }
+      NavigationService.getCityDestination(sendData, function (data) {
         if (type === 'itinerary') {
           _.each(data.data.itinerary, function (newData) {
             if (data.data.itinerary.length == 0) {
@@ -3462,12 +3519,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               console.log($scope.cityDestIti, 'city ka itinerary');
             }
           })
+          TemplateService.title = "Travel Itinerary For " + $scope.cityDestData.name + " | TraveLibro"
         } else {
           _.each(data.data.bestTime, function (newVal) {
             newVal.month = moment(newVal.month, "M").format('MMMM');
           });
           $scope.cityDestData = data.data;
           // console.log('bc log hoja', $scope.cityDestData);
+          // switch case for title only
+
+          switch (type) {
+            case 'mustDo':
+              TemplateService.title = $scope.cityDestData.name + " Travel Guide | Top Things To Do In " + $scope.cityDestData.name + "- TraveLibro";
+              break;
+            case 'hotel':
+              TemplateService.title = $scope.cityDestData.name + " Hotels | TraveLibro";
+              break;
+            case 'restaurant':
+              TemplateService.title = "Recommended Restaurants In " + $scope.cityDestData.name + " | TraveLibro ";
+              break;
+            case 'bookings':
+              TemplateService.title = "Best Deals For " + $scope.cityDestData.name + " -   TraveLibro";
+              break;
+            case 'bestTime':
+            TemplateService.title = "Best Time To Visit " + $scope.cityDestData.name + " -   TraveLibro";
+              break;
+            default:
+            break;
+          }
+          // switch case for title only end
         }
       })
     };
@@ -3478,20 +3558,66 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log(cityName, countryName);
       $scope.bookingCityName = cityName;
       $scope.bookingCountryName = countryName;
-      NavigationService.getDestinationBooking({
+      NavigationService.getBookingTour({
         cityName: $scope.bookingCityName,
         countryName: $scope.bookingCountryName
       }, function (data) {
-        if (data.tours.status == false) {
+        if (data.status == false) {
           $scope.viewBookingLoader = true;
         } else {
           $scope.viewBookingLoader = false;
           console.log(data, 'booking data');
-          $scope.bookingData = data;
-          console.log($scope.bookingData, 'booking ka data');
+          $scope.bookingTourData = data.tours;
+          console.log($scope.bookingTourData, 'booking ka data');
+          $scope.getVacation($scope.bookingCityName,$scope.bookingCountryName)
         }
       });
     };
+    $scope.getVacation = function(cityVacation, countryVacation){
+      NavigationService.getBookingVaction({
+        cityName: cityVacation,
+        countryName: countryVacation
+      }, function(data) {
+        if(data.status == false){
+          $scope.viewBookingLoader = true;
+        }else {
+          $scope.viewBookingLoader = false;
+          console.log(data, 'booking data');
+          $scope.bookingVacData = data.vacation_rentals;
+          console.log($scope.bookingVacData, 'booking ka data');
+          $scope.getHomeStay($scope.bookingCityName,$scope.bookingCountryName)
+        }
+      })
+    };
+    $scope.getHomeStay = function(cityHomeStay, countryHomeStay){
+      NavigationService.getBookingHomeStay({
+        cityName: cityHomeStay,
+        countryName: countryHomeStay
+      }, function(data){
+        if(data.status == false){
+          $scope.viewBookingLoader = true;
+        }else {
+          $scope.viewBookingLoader = false;
+          console.log(data, 'booking data');
+          $scope.bookingHomeData = data.home_stays;
+          console.log($scope.bookingHomeData, 'booking ka data');
+          $scope.getHotel($scope.bookingCityName,$scope.bookingCountryName);
+        }
+      });
+    };
+    $scope.getHotel = function(cityHotel, countryHotel){
+      NavigationService.getBookingHotel({
+        cityName: cityHotel,
+        countryName: countryHotel
+      }, function(data){
+        if(data.status == false){
+          $scope.viewBookingLoader = true;
+        }else {
+          $scope.viewBookingLoader = false;
+          $scope.bookingHotelData = data.hotels;
+        }
+      })
+    }
     // get booking data end
 
     $scope.cityType = ['Adventure', 'Business', 'Family', 'Romance', 'Budget', 'Luxury', 'Religious', 'Friends', 'Shopping', 'Solo', 'Festival', 'Backpacking'];
@@ -3912,6 +4038,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.cityDestinationView = false;
         $scope.cityoptions.active = "best-time-to-visit";
         $scope.ntMustdo = "";
+        $scope.getCityInfo("bestTime", $scope.urlDestinationCity);
         break;
       default:
         $scope.destination.innerView = alldestination[0];
@@ -3970,8 +4097,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           url = "best-time-to-visit";
           $scope.cityDestinationView = false;
           $scope.cityoptions.active = "best-time-to-visit";
-          $scope.getCityInfo("mustDo", $scope.urlDestinationCity);
           $scope.ntMustdo = "";
+            $scope.getCityInfo("itinerary", $scope.urlDestinationCity);
+          TemplateService.title = "Best Time To Visit " + $scope.cityDestData.name + " -   TraveLibro";
           break;
         default:
           $scope.getCityInfo("mustDo", $scope.urlDestinationCity);
@@ -4335,7 +4463,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("mylife");
     $scope.menutitle = NavigationService.makeactive("Mylife");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.localView = {};
@@ -4353,6 +4481,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     if ($.jStorage.get("isLoggedIn") && ($.jStorage.get("profile").urlSlug == $stateParams.urlSlug)) {
       //its your own profile so no need to call profile again
       $scope.userData = $.jStorage.get("profile");
+      TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
       $.jStorage.set("activeUrlSlug", $.jStorage.get("profile").urlSlug);
       $scope.activeUrlSlug = $.jStorage.get("profile").urlSlug;
       // allowAccess = true;
@@ -4369,6 +4498,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log(data);
         if (data.value) {
           $scope.userData = data.data;
+            TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
           allowAccess = false;
           setMoreAboutMe();
           reloadCount();
@@ -5876,6 +6006,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     $scope.showLikeCommentCard = true;
     $scope.openCommentSection = function (ongo) {
+      if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+       }
       $scope.showLikeCommentCard = false;
       // var type = "";
       // if (ongo.type === 'on-the-go-journey' || ongo.type === 'ended-journey') {
@@ -5932,6 +6065,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // };
 
     $scope.openLikeSection = function (ongo) {
+      if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+       }
       $scope.listOfComments = false;
       console.log(ongo);
       $scope.viewCardComment = false;
@@ -9323,6 +9459,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     Itinerary.getOneItinerary(slug, function (data) {
       $scope.itinerary = data.data;
       console.log($scope.itinerary);
+        TemplateService.title =  $scope.itinerary.name + " - Travel Life | TraveLibro";
     });
     //get quick-itinerary details ends
 
@@ -9835,7 +9972,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("user-detailitinerary");
     $scope.menutitle = NavigationService.makeactive("User-DetailItinerary");
-    TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.closeBackDrop = function () {
@@ -9879,6 +10015,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var slug = $stateParams.id;
     Itinerary.getOneItinerary(slug, function (data) {
       $scope.itinerary = data.data;
+      console.log($scope.itinerary);
+      if($scope.itinerary.itineraryBy == "Admin"){
+        TemplateService.title =  $scope.itinerary.name + " - " + $scope.itinerary.itineraryType[0] + " Itinerary - TraveLibro";
+      }else {
+        TemplateService.title = $scope.itinerary.name + " - " + $scope.itinerary.user.name + " | TraveLibro";
+      }
     });
     //get quick-itinerary details ends
 
@@ -10752,7 +10894,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("about-travelibro");
     $scope.menutitle = NavigationService.makeactive("About TraveLibro");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "About Us - TraveLibro";
     $scope.navigation = NavigationService.getnav();
 
     $scope.accessToken = $.jStorage.get("accessToken");
@@ -10763,7 +10905,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("terms-conditions");
     $scope.menutitle = NavigationService.makeactive("Terms & Conditions");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Terms & Conditions - TraveLibro";
     $scope.navigation = NavigationService.getnav();
     $scope.accessToken = $.jStorage.get("accessToken");
   })
@@ -10772,7 +10914,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("privacy-policy");
     $scope.menutitle = NavigationService.makeactive("Privacy Policy");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Privacy Policy - TraveLibro";
     $scope.navigation = NavigationService.getnav();
     $scope.accessToken = $.jStorage.get("accessToken");
   })
@@ -14155,7 +14297,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   .controller('singleNotification', function ($scope, TemplateService, NavigationService, $timeout, $state, $stateParams, LikesAndComments) {
     $scope.template = TemplateService.changecontent("single-post"); //Use same name of .html file
     // $scope.menutitle = NavigationService.makeactive("single-notification"); //This is the Title of the Website
-    // TemplateService.title = $scope.menutitle;
+    TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     console.log($stateParams.postId);
 

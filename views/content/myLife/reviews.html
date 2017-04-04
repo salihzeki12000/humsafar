@@ -196,7 +196,7 @@
                           <!--<div class="review-backimgholder">
                         <img ng-src="{{review.countryCoverPhoto|uploadpath}}" alt="" class="img-responsive">
                       </div>-->
-                          <div class="review-frontimgholder relate" style="background:url('{{review.countryCoverPhoto|uploadpath}}')no-repeat; background-size: cover;">
+                          <div class="review-frontimgholder relate" style="background:url('{{review.countryCoverPhoto|uploadpath:250:400:'cover'}}')no-repeat; background-size: cover;">
                             <img ng-src="img/review-travel.png" alt="" class="pointer img-responsive">
                           </div>
                           <h3 class="country-name avenir-heavy">{{review.name}}</h3>
