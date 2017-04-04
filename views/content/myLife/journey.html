@@ -241,7 +241,7 @@
                                     </audio>
                                   </a>
                                 </li>
-                                <li ng-click="!isLoggedIn||openCommentSection(life)">
+                                <li ng-click="openCommentSection(life)">
                                   <a href=""><img src="img/comments.png" alt="" height="18"></a>
                                 </li>
                                 <!--<li>
@@ -279,9 +279,9 @@
                           <div class="social-likes-reviews" ng-if="!(((life.likeCount==0)||(life.likeCount==undefined))&&(life.commentCount==0))">
                             <div class="clearfix">
                               <div class="pull-left">
-                                <span class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
+                                <span ng-click="openLikeSection(life)" class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
                                 <!--<span class="color-blue avenir-heavy" ng-if="life.pointReview.length>0"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
-                                <span class="color-blue mr10 card-comment avenir-heavy pointer"><img src="img/comments.png" alt="" class="mr5 v-mid" height="14"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
+                                <span ng-click="openCommentSection(life)" class="color-blue mr10 card-comment avenir-heavy pointer"><img src="img/comments.png" alt="" class="mr5 v-mid" height="14"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
                               </div>
                               <div class="pull-right">
                                 <img src="img/travel.png" alt="">
@@ -412,9 +412,9 @@
                         <div class="social-likes-reviews" ng-if="!(((life.likeCount==0)||(life.likeCount==undefined))&&(life.commentCount==0))">
                           <div class="clearfix">
                             <div class="pull-left">
-                              <span ng-click="!isLoggedIn||openLikeSection(life)" class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
+                              <span ng-click="openLikeSection(life)" class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
                               <!--<span class="color-blue avenir-heavy"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
-                              <span class="color-blue mr10 card-comment avenir-heavy pointer" ng-click="!isLoggedIn||openCommentSection(life)"><img src="img/comments.png" alt="" class="mr5" height="12"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
+                              <span class="color-blue mr10 card-comment avenir-heavy pointer" ng-click="openCommentSection(life)"><img src="img/comments.png" alt="" class="mr5" height="12"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
                             </div>
                             <div class="pull-right">
                               <img src="img/travel.png" alt="">
