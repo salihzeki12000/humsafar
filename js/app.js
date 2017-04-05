@@ -20,7 +20,7 @@ var backgroundClick = {
 
 $(document).ready(function () {
   $("body").click(function (e) {
-    console.log(backgroundClick.object);
+    // console.log(backgroundClick.object);
     if (backgroundClick.object) {
       backgroundClick.close(e);
     }
