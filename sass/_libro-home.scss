@@ -761,6 +761,10 @@ a.color-white {
 }
 
 .fp-viewing-0 {
+  .slide-video .swiper-slide
+  {
+    opacity: 0;
+  }
   .navigation-dots .one {
     background: #fff;
   }
