@@ -30,7 +30,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     cfpLoadingBar.start();
     $scope.template = TemplateService.changecontent("home");
     $scope.menutitle = NavigationService.makeactive("Home");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "TraveLibro - Your Travel Life | Local Life";
     $scope.navigation = NavigationService.getnav();
     var swiper = {};
     $scope.accessToken = $.jStorage.get("accessToken");
@@ -71,11 +71,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.changePage = function (text) {
       // console.log(text);
       var length = $(".fp-section").length;
-      if (length === 0) {
-        $('.fullpage').fullpage({
-          //Navigation
-          onLeave: function (index, nextIndex, direction) {
-            $timeout(function () {
+      $timeout(function () {
               $('.scene').parallax();
               swiper = new Swiper('.swiper-container', {
                 pagination: '.swiper-pagination',
@@ -89,6 +85,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 parallax: true,
                 hashnav: true
               });
+            }, 500);
+      if (length === 0) {
+        $('.fullpage').fullpage({
+          //Navigation
+          onLeave: function (index, nextIndex, direction) {
+            $timeout(function () {
               swiper.slideTo(nextIndex - 1);
               if ($(window).width() >= 767) {
                 for (i = 1; i < 4; i++) {
@@ -3553,7 +3555,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     // get booking data
-    $scope.viewBookingLoader = false;
+    $scope.viewTourLoader = true;
+    $scope.viewNoTourData = false;
+    $scope.viewHotelLoader = true;
+    $scope.viewNoHotelData = false;
+    $scope.viewVacationLoader = true;
+    $scope.viewNoVacData = false;
+    $scope.viewHomeStayLoader = true;
+    $scope.viewNoHomeData = false;
     $scope.getBooking = function (cityName, countryName) {
       console.log(cityName, countryName);
       $scope.bookingCityName = cityName;
@@ -3562,14 +3571,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         cityName: $scope.bookingCityName,
         countryName: $scope.bookingCountryName
       }, function (data) {
-        if (data.status == false) {
-          $scope.viewBookingLoader = true;
+        if (data.status == false || data.tours == "") {
+          $scope.viewNoTourData = true;
+          $scope.viewTourLoader = false;
+          $scope.getHomeStay($scope.bookingCityName,$scope.bookingCountryName);
         } else {
-          $scope.viewBookingLoader = false;
+          $scope.viewNoTourData = false;
+          $scope.viewTourLoader = false;
           console.log(data, 'booking data');
           $scope.bookingTourData = data.tours;
           console.log($scope.bookingTourData, 'booking ka data');
-          $scope.getVacation($scope.bookingCityName,$scope.bookingCountryName)
+          $scope.getHomeStay($scope.bookingCityName,$scope.bookingCountryName);
+        }
+      });
+    };
+    $scope.getHomeStay = function(cityHomeStay, countryHomeStay){
+      NavigationService.getBookingHomeStay({
+        cityName: cityHomeStay,
+        countryName: countryHomeStay
+      }, function(data){
+        if(data.status == false || data.home_stays == ""){
+          $scope.viewNoHomeData = true;
+          $scope.viewHomeStayLoader = false;
+          $scope.getVacation($scope.bookingCityName,$scope.bookingCountryName);
+        }else {
+          $scope.viewHomeStayLoader = false;
+          $scope.viewNoHomeData = false;
+          $scope.bookingHomeData = data.home_stays;
+          $scope.getVacation($scope.bookingCityName,$scope.bookingCountryName);
         }
       });
     };
@@ -3578,42 +3607,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         cityName: cityVacation,
         countryName: countryVacation
       }, function(data) {
-        if(data.status == false){
-          $scope.viewBookingLoader = true;
+        if(data.status == false || data.vacation_rentals == ""){
+          $scope.viewVacationLoader = false;
+          $scope.viewNoVacData = true;
+          $scope.getHotel($scope.bookingCityName,$scope.bookingCountryName);
         }else {
-          $scope.viewBookingLoader = false;
+          $scope.viewVacationLoader =false;
+          $scope.viewNoVacData = false;
           console.log(data, 'booking data');
           $scope.bookingVacData = data.vacation_rentals;
-          console.log($scope.bookingVacData, 'booking ka data');
-          $scope.getHomeStay($scope.bookingCityName,$scope.bookingCountryName)
-        }
-      })
-    };
-    $scope.getHomeStay = function(cityHomeStay, countryHomeStay){
-      NavigationService.getBookingHomeStay({
-        cityName: cityHomeStay,
-        countryName: countryHomeStay
-      }, function(data){
-        if(data.status == false){
-          $scope.viewBookingLoader = true;
-        }else {
-          $scope.viewBookingLoader = false;
-          console.log(data, 'booking data');
-          $scope.bookingHomeData = data.home_stays;
-          console.log($scope.bookingHomeData, 'booking ka data');
           $scope.getHotel($scope.bookingCityName,$scope.bookingCountryName);
         }
       });
     };
+
     $scope.getHotel = function(cityHotel, countryHotel){
       NavigationService.getBookingHotel({
         cityName: cityHotel,
         countryName: countryHotel
       }, function(data){
-        if(data.status == false){
-          $scope.viewBookingLoader = true;
+        if(data.status == false || data.hotels == ""){
+          $scope.viewHotelLoader = false;
+          $scope.viewNoHotelData = true;
         }else {
-          $scope.viewBookingLoader = false;
+          $scope.viewNoHotelData = false;
+          $scope.viewHotelLoader = false;
           $scope.bookingHotelData = data.hotels;
         }
       })
@@ -15074,6 +15092,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   .controller('commentLikeSectionCtrl', function ($scope, $timeout, $uibModal, LikesAndComments) {
     $scope.index = -1;
+    $scope.indexDelete = -1;
     $scope.likePost = function (uniqueId, _id) {
       console.log($scope.post.likeDone + "this call is from directive");
       $scope.post.likeDone = !$scope.post.likeDone;
@@ -15139,6 +15158,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.index = index;
       }
     };
+    $scope.showDeletePop = function (indexDelete) {
+      if ($scope.indexDelete == indexDelete) {
+        $scope.indexDelete = -1;
+      } else {
+        $scope.indexDelete = indexDelete;
+      }
+    };
     // edit comment
     $scope.editComment = function (commentId, commentText, commentType) {
       console.log($scope.listOfComments.comment, 'comment ka arrray');
@@ -15162,6 +15188,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           _.remove($scope.listOfComments.comment, function (list) {
             return list._id == commentId;
           })
+          $scope.indexDelete = -1;
           console.log($scope.listOfComments.comment, 'total nikla kya');
         }
       });

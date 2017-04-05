@@ -9,7 +9,7 @@ var ongojourney = angular.module('ongojourney', [])
           method: "POST",
           // method: "GET",
           data: formData
-        }).success(function (data) {
+        },'allLoader').success(function (data) {
           var journey = data.data;
           journey.kindOfJourneyIconsAddr = [];
           journey.buddiesCount = journey.buddies.length;

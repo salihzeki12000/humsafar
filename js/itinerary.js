@@ -10,7 +10,7 @@ var itinerary = angular.module('itinerary', [])
           data: {
             "urlSlug": slug
           }
-        }).success(function (data) {
+        },'allLoader').success(function (data) {
           callback(data);
         }).error(function (data) {
           console.log(data);
