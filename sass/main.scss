@@ -734,7 +734,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: 15;
   @include transition(all 100ms linear);
   //    &.nav-up {
   //    @include transform(translateY(-100%));
@@ -10341,6 +10341,9 @@ header {
     }
     .commenter-text {
       color: #787878;
+      .text-comment{
+        word-break: break-all;
+      }
       @extend .avenir-roman;
     }
     .like-reply-line {
@@ -10383,6 +10386,33 @@ header {
   .view-comment-scroll {
     max-height: 400px;
     overflow-y: scroll;
+  }
+
+  .delete-comment-confirmation{
+    position: absolute;
+    left: 0;
+    bottom: -65px;
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #a0a0a0;
+    border-radius: 4px;
+    margin: 0 5px 5px 0px;
+    background-color: $brand-blue;
+    color: #fff;
+    text-align: center;
+    z-index: 10;
+    &:after{
+      position: absolute;
+      top: -10px;
+      left: 15px;
+      content: '';
+      border-left: 10px solid transparent;
+      border-bottom: 10px solid #272b49;
+      border-right: 10px solid transparent;
+    }
+    p{
+      margin-bottom: 5px;
+    }
   }
 }
 
@@ -10551,6 +10581,11 @@ ng-map {
 // }
 // destination booking
 .destination-hotel-card {
+  position: relative;
+  min-height: 290px;
+  .no-booking-found{
+    font-size: 22px;
+  }
   .hotel-card-list {
     margin-top: 5px;
     margin-right: 5px;
