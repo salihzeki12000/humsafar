@@ -12,7 +12,7 @@ templateservicemod.service('TemplateService', function ($http) {
     //   enable: true /* Set to false to hide */
     // },
     persistNotification: false,
-    allowLocalhostAsSecureOrigin: true,
+    // allowLocalhostAsSecureOrigin: true,
     promptOptions: {
       /* Change bold title, limited to 30 characters */
       siteName: 'TraveLibro',
