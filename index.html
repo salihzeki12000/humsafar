@@ -9,7 +9,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
-
   <!-- SEO -->
   <meta name="author" content="">
   <meta name="description" content="">
@@ -82,6 +81,16 @@
       </h1>
     </div>
   </div>
+  <script>
+
+$(".loaders .element").typed({
+        strings: ["Capture | Inspire | Relive...", "Travel Life | Local Life...", "Loading...", "Almost There..."],
+        startDelay: 20,
+        typeSpeed: 100,
+        loop: true
+      });
+    
+    </script>
   <!--home page Loader ended-->
 
   <div style="display: none">
@@ -96,17 +105,17 @@
 
   <!--//loader-->
   <script>
-    $(window).load(function () {
-      console.log("Loaded");
+    // $(window).load(function () {
+    //   console.log("Loaded");
      
-    if(abc && abc.changePage) {
-     abc.changePage("home");
-    }
+    // if(abc && abc.changePage) {
+    //  abc.changePage("home");
+    // }
      
-      $("body > .loaders").hide();
-      jQuery('.loadedContent').fadeIn(2000);
-      $("body > .loadedContent").fadeIn(1000);
-    });
+    //   $("body > .loaders").hide();
+    //   jQuery('.loadedContent').fadeIn(2000);
+    //   $("body > .loadedContent").fadeIn(1000);
+    // });
 
   </script>
   <!--//loader end-->
