@@ -59,7 +59,7 @@
         </div>
         <!-- comment section -->
         <div class="comment-sec">
-          <form ng-if="template.isLoggedIn" autocomplete="off" ng-submit="postPhotosComment(listOfComments.name,text,listOfComments.post,listOfComments._id)">
+          <form autocomplete="off" ng-submit="postPhotosComment(listOfComments.name,text,listOfComments.post,listOfComments._id)"  ng-if="!template.isLoggedIn">
             <div class="write-comment-text">
               <div class="commenter-img">
                 <div class="commenter-imgholder">
