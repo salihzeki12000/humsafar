@@ -129,57 +129,58 @@ var commontask = angular.module('commontask', [])
       getComments: function (type, _id, callback) {
         if (!($.jStorage.get("isLoggedIn"))) {
           $state.go('login');
+        } else {
+          console.log(type, _id);
+          var obj = {
+            "_id": _id,
+            "pagenumber": 1
+          };
+          var url;
+          switch (type) {
+            case "travel-life":
+            case "local-life":
+              url = "/post/getPostCommentWeb";
+              break;
+            case "on-the-go-journey":
+            case "ended-journey":
+              url = "/journey/getJourneyCommentWeb";
+              break;
+            case "quick-itinerary":
+            case "detail-itinerary":
+              url = "/itinerary/getItineraryCommentWeb";
+              break;
+            case "photo":
+              url = "/postphotos/getOneWeb";
+              break;
+            case "video":
+              url = "/postvideos/getPostCommentWeb";
+              break;
+              // case "post":
+              //   url = "/post/getPostCommentWeb";
+              //   break;
+              // case "photo":
+              //   url = "/postphotos/getOneWeb";
+              //   break;
+              // case "video":
+              //   url = "/postvideos/getPostCommentWeb";
+              //   break;
+              // case "itinerary":
+              //   url = "/itinerary/getItineraryCommentWeb";
+              //   break;
+              // case "journey":
+              //   url = "/journey/getJourneyCommentWeb";
+              //   break;
+          }
+          TravelibroService.http({
+            url: adminURL + url,
+            method: "POST",
+            data: obj
+          }, true).success(function (data) {
+            callback(data);
+          }).error(function (data) {
+            console.log(data);
+          });
         }
-        console.log(type, _id);
-        var obj = {
-          "_id": _id,
-          "pagenumber": 1
-        };
-        var url;
-        switch (type) {
-          case "travel-life":
-          case "local-life":
-            url = "/post/getPostCommentWeb";
-            break;
-          case "on-the-go-journey":
-          case "ended-journey":
-            url = "/journey/getJourneyCommentWeb";
-            break;
-          case "quick-itinerary":
-          case "detail-itinerary":
-            url = "/itinerary/getItineraryCommentWeb";
-            break;
-          case "photo":
-            url = "/postphotos/getOneWeb";
-            break;
-          case "video":
-            url = "/postvideos/getPostCommentWeb";
-            break;
-            // case "post":
-            //   url = "/post/getPostCommentWeb";
-            //   break;
-            // case "photo":
-            //   url = "/postphotos/getOneWeb";
-            //   break;
-            // case "video":
-            //   url = "/postvideos/getPostCommentWeb";
-            //   break;
-            // case "itinerary":
-            //   url = "/itinerary/getItineraryCommentWeb";
-            //   break;
-            // case "journey":
-            //   url = "/journey/getJourneyCommentWeb";
-            //   break;
-        }
-        TravelibroService.http({
-          url: adminURL + url,
-          method: "POST",
-          data: obj
-        }, true).success(function (data) {
-          callback(data);
-        }).error(function (data) {
-          console.log(data);
-        });
       },
       likeUnlike: function (type, task, uniqueId, type_id, additionalId) {
         console.log(type, task, uniqueId, type_id, additionalId);
@@ -589,12 +590,12 @@ commontask.directive('commentLikeSection', function (LikesAndComments, $timeout)
     controller: 'commentLikeSectionCtrl',
     templateUrl: "views/directive/commonLikesAndComments.html",
     link: function ($scope, element, attrs) {
-      console.log($scope.post, "bhai ander ghus gya");
+      // console.log($scope.post, "bhai ander ghus gya");
       $scope.$watch('viewCardComment', function (newVal, oldVal) {
         if (newVal == false) {
           // $scope.listOfComments = [];
         } else {
-          console.log($scope.listOfComments);
+          // console.log($scope.listOfComments);
         }
       })
 

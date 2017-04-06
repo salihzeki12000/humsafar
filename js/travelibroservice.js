@@ -95,7 +95,7 @@ var travelibroservice = angular.module('travelibroservice', ['cfp.loadingBar'])
         // if(status!=true){
         //   cfpLoadingBar.start();
         // }
-        console.log("start post");
+        // console.log("start post");
         var callbackFor = $http({
           url: callApiUrl,
           data: formData,

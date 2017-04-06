@@ -197,7 +197,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var ref = "";
     var checktwitter = function (data, status) { //for getting accessToken
       var repdata = {};
-      console.log(ref.closed, ref);
       if (ref.closed) {
         $interval.cancel(stopinterval);
       } else {
@@ -234,7 +233,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             console.log(err);
           });
         } else {
-          console.log(data);
+
         }
       }
     };
@@ -253,7 +252,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.socialLogin = function (loginTo) {
       ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
-      console.log(ref);
       stopinterval = $interval(callAtIntervaltwitter, 2000);
     };
 
@@ -4402,7 +4400,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
 
-    console.log($scope.activeUrlSlug);
+    // console.log($scope.activeUrlSlug);
     $scope.allowAccess = allowAccess;
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
 
@@ -4425,7 +4423,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     function setMoreAboutMe() {
-      console.log("entered if");
+      // console.log("entered if");
       $scope.pronoun; //for he and she
       $scope.pronoun1; //for him and her
       $scope.userName = titleCase($scope.userData.firstName);
@@ -4494,7 +4492,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     function reloadCount() {
       NavigationService.getProfile($.jStorage.get("activeUrlSlug"), function (data, status) {
         $scope.userData = data.data;
-        console.log($scope.userData.countriesVisited_count);
+        // console.log($scope.userData.countriesVisited_count);
         updateBadgeBar($scope.userData.countriesVisited_count);
       }, function (err) {
         console.log(err);
@@ -4669,7 +4667,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     function titleCase(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
-    console.log("aagaya change karvane");
+    // console.log("aagaya change karvane");
 
     // Little more about me ends here
     //userBadge starts here
@@ -5586,7 +5584,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.scroll.busy = false;
         }, 500);
       });
-      console.log($scope.travelLife);
+      // console.log($scope.travelLife);
       if ($scope.travelLife.length == 0) {
         $scope.hasJourney = false;
       } else {
@@ -10799,7 +10797,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.accessToken = $.jStorage.get("accessToken");
   })
 
-  .controller('headerctrl', function ($scope, TemplateService, NavigationService, LikesAndComments, $state, $interval, $timeout, $stateParams) {
+  .controller('headerctrl', function ($scope, TemplateService, NavigationService, LikesAndComments, $state, $interval, $timeout, $stateParams, $http) {
     $scope.template = TemplateService;
     $scope.getAllSearched = [];
     $scope.search = {};
@@ -10971,7 +10969,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     $scope.logout = function () {
+      var accessToken = $.jStorage.get("accessToken");
       NavigationService.logout(function () {
+          // NavigationService.disablePushNotification();
+          OneSignal.getUserId(function (data) {
+            console.log(data);
+            $http({
+              "url": adminURL + "/user/updateDeviceId",
+              "method": "POST",
+              "data": {
+                'accessToken': accessToken,
+                'deviceId': data,
+                'remove': true
+              }
+            });
+            // NavigationService.disablePushNotification(data);
+          });
           $.jStorage.flush();
           acsToken = "";
           $state.go('login');
