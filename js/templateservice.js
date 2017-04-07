@@ -7,7 +7,7 @@ templateservicemod.service('TemplateService', function ($http) {
     appId: "bf8baf0a-dcfb-4a30-a0c1-ee67cae2feb1", //libros
     // appId: "34d28a83-b284-4cee-8069-585c1342b8855", //testing
     autoRegister: false,
-    // path: "js/",
+    path: "js/",
     // notifyButton: {
     //   enable: true /* Set to false to hide */
     // },
