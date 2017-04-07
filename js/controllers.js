@@ -164,7 +164,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
   })
 
-  .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $interval, $state) {
+  .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $interval, $state, $http) {
     //Used to name the .html file
     $scope.userData = $.jStorage.get("profile");
     $scope.template = TemplateService.changecontent("login");
@@ -206,6 +206,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $.jStorage.set("accessToken", data.accessToken);
           NavigationService.getProfile("", function (data) {
             if (data.data._id) {
+
+              //register deviceId if notification is enabled in browser starts
+              OneSignal.getUserId(function (data) {
+                console.log(data);
+                $http({
+                  "url": adminURL + "/user/updateDeviceId",
+                  "method": "POST",
+                  "data": {
+                    'accessToken': $.jStorage.get("accessToken"),
+                    'deviceId': data,
+                  }
+                });
+                // NavigationService.disablePushNotification(data);
+              });
+              //register deviceId if notification is enabled in browser ends
+
               $.jStorage.set("isLoggedIn", true);
               $.jStorage.set("profile", data.data);
               var alreadyLoggedIn = data.data.alreadyLoggedIn;

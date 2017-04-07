@@ -1,7 +1,6 @@
 var templateservicemod = angular.module('templateservicemod', []);
 templateservicemod.service('TemplateService', function ($http) {
 
-
   var OneSignal = window.OneSignal || [];
   OneSignal.push(["init", {
     appId: "bf8baf0a-dcfb-4a30-a0c1-ee67cae2feb1", //libros
@@ -12,7 +11,7 @@ templateservicemod.service('TemplateService', function ($http) {
     //   enable: true /* Set to false to hide */
     // },
     persistNotification: false,
-    // allowLocalhostAsSecureOrigin: true,
+    allowLocalhostAsSecureOrigin: true,
     promptOptions: {
       /* Change bold title, limited to 30 characters */
       siteName: 'TraveLibro',
@@ -31,9 +30,9 @@ templateservicemod.service('TemplateService', function ($http) {
     }
 
   }]);
-
+  console.log($.jStorage.get("isLoggedIn") && $.jStorage.get('profile').alreadyLoggedIn);
   if ($.jStorage.get("isLoggedIn") && $.jStorage.get('profile').alreadyLoggedIn) {
-
+    console.log("initializing OneSignal");
     // OneSignal.getNotificationPermission(function (permission) {
     //   console.log("Site Notification Permission", permission);
     //   if (permission == 'default') {
@@ -117,8 +116,21 @@ templateservicemod.service('TemplateService', function ($http) {
             }
           });
         });
-      } else {
+      } else if (permissionChange.to == 'denied') {
         OneSignal.setSubscription(false);
+        OneSignal.getUserId(function (data) {
+          console.log(data);
+          $http({
+            "url": adminURL + "/user/updateDeviceId",
+            "method": "POST",
+            "data": {
+              'accessToken': $.jStorage.get("accessToken"),
+              'deviceId': data,
+              'remove': true
+            }
+          });
+          // NavigationService.disablePushNotification(data);
+        });
       }
     });
 
