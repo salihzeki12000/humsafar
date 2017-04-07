@@ -29,7 +29,7 @@
                       <ul>
                         <li ng-repeat="category in cityDestData.subType track by $index">
                           <div class="custom-checkbox">
-                            <input type="checkbox" id="{{category.name}}" ng-model="category.checked" ng-click="cityHotelFilter(category,'categoryType')">
+                            <input type="checkbox" id="{{category.name}}" value="{{category.checked}}" ng-model="category.checked" ng-click="cityHotelFilter(category,'categoryType')">
                             <label for="{{category.name}}" class="avenir-roman">{{category.name}}</label>
                           </div>
                         </li>
@@ -39,13 +39,13 @@
                 </div>
                 <div class="col-md-3 col-sm-3">
                   <div class="select-all-made destination-filterscroll" ng-init="viewHotelBudget={'outerClass':'outerHotelBudget','innerClass':'innerHotelBudget'}">
-                    <input type="text" class="form-control outerHotelBudget" placeholder="Budget" ng-model="cityHotelBudget" ng-click="editOption(viewHotelBudget,'outerHotelBudget','innerHotelBudget')">
-                    <div class="destination-filterdrop innerHotelBudget" ng-show="viewHotelBudget.backgroundClick ">
+                    <input type="text" class="form-control outerHotelBudget" placeholder="Budget"  ng-click="editOption(viewHotelBudget,'outerHotelBudget','innerHotelBudget')">
+                    <div class="destination-filterdrop innerHotelBudget" ng-show="viewHotelBudget.backgroundClick;">
                       <ul>
                         <li ng-repeat="budHotel in hotelBudget track by $index">
                           <div class="custom-checkbox">
-                            <input type="checkbox" id="{{budHotel.id}}{{$index}}" ng-model="budHotel.checked" ng-click="cityHotelFilter(budHotel,'categoryBudget')">
-                            <label for="{{budHotel.id}}{{$index}}" class="avenir-roman">{{budHotel.name}}</label>
+                            <input type="checkbox" id="{{budHotel.id}}" ng-model="budHotel.checked" ng-click="cityHotelFilter(budHotel,'categoryBudget')" value="{{budHotel.checked}}">
+                            <label for="{{budHotel.id}}" class="avenir-roman">{{budHotel.name}}</label>
                           </div>
                         </li>
                       </ul>

@@ -2734,51 +2734,46 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         sendCityData.type = "mustDo";
       }
       NavigationService.getCountryDestination(sendCityData, function (data) {
-        if (type == 'itinerary') {
-          $scope.countryDestData = data.data;
-          $scope.countryDestIti = [];
-          _.each(data.data.itinerary, function (newData) {
-            newData.user.following = newData.following;
-            if (data.data.itinerary.length == 0) {
-              $scope.scroll.stopCallingApi = true;
-            } else {
-              $scope.countryDestIti.push(newData);
-              console.log($scope.countryDestIti, 'data itinerary wala');
-            }
-          });
-          TemplateService.title = "Itineraries for " + $scope.countryDestData.name + " - TraveLibro";
-          // if (data.data.itinerary.length == 0) {
-          //   $scope.scroll.stopCallingApi = true;
-          // }else {
-          //   console.log(data, 'data');
-          //
-          //   _.each(data.data, function (newData) {
-          //     $scope.countryDestData.push(newData);
-          //   });
-          //   console.log($scope.countryDestData, 'data');
-          // };
-        } else {
-          $scope.countryDestData = data.data;
-          _.each(data.data.bestTime, function (newVal) {
-            newVal.month = moment(newVal.month, "M").format('MMMM');
-          });
-          console.log($scope.countryDestData, 'what is cadat');
-          // switch case for title only
-          console.log(type);
-          switch (type) {
-            case 'featuredCities':
-              TemplateService.title = "Popular Cities in " + $scope.countryDestData.name + " - TraveLibro"
-              break;
-            case 'mustDo':
-              TemplateService.title = "Top 10 Things to Do in " + $scope.countryDestData.name + " - TraveLibro"
-              break;
-              case "bestTime":
-              TemplateService.title = "Best Time To Visit " + $scope.countryDestData.name + " - TraveLibro";
+        if(data.value == true){
+          $scope.isopenfilter = false;
+          if (type == 'itinerary') {
+            $scope.countryDestData = data.data;
+            $scope.countryDestIti = [];
+            _.each(data.data.itinerary, function (newData) {
+              newData.user.following = newData.following;
+              if (data.data.itinerary.length == 0) {
+                $scope.scroll.stopCallingApi = true;
+              } else {
+                $scope.countryDestIti.push(newData);
+                console.log($scope.countryDestIti, 'data itinerary wala');
+              }
+            });
+            TemplateService.title = "Itineraries for " + $scope.countryDestData.name + " - TraveLibro";
+          } else {
+            $scope.countryDestData = data.data;
+            _.each(data.data.bestTime, function (newVal) {
+              newVal.month = moment(newVal.month, "M").format('MMMM');
+            });
+            console.log($scope.countryDestData, 'what is cadat');
+            // switch case for title only
+            console.log(type);
+            switch (type) {
+              case 'featuredCities':
+                TemplateService.title = "Popular Cities in " + $scope.countryDestData.name + " - TraveLibro"
                 break;
-            default:
-              break;
+              case 'mustDo':
+                TemplateService.title = "Top 10 Things to Do in " + $scope.countryDestData.name + " - TraveLibro"
+                break;
+                case "bestTime":
+                TemplateService.title = "Best Time To Visit " + $scope.countryDestData.name + " - TraveLibro";
+                  break;
+              default:
+                break;
+            }
+            // switch case for title only end
           }
-          // switch case for title only end
+        }else {
+
         }
 
       });
@@ -3704,6 +3699,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
       NavigationService.getCityDestination(sendData, function (data) {
         if(data.value==true){
+          $scope.isopenfilter = false;
           if (type === 'itinerary') {
               $scope.cityDestIti = [];
             _.each(data.data.itinerary, function (newData) {
@@ -4131,7 +4127,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             var getBudgetHotel = _.findIndex($scope.hotelBudget, function(checkedCat){
               return checkedCat.name == cityHotelData.name;
             })
-            $scope.hotelBudget[getBudgetHotel].checked = false;
+            $scope.hotelBudget[getBudgetHotel].checked = true;
             console.log($scope.cityBudgetData, 'budget add ');
           } else {
             _.remove($scope.cityBudgetData, function (removeBudget) {
@@ -4156,15 +4152,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       _.each($scope.cityDestData.subType, function(getChecked){
           getChecked.checked = false;
       });
-      // $scope.cityDestData.subType = false;
-      $scope.hotelBudget.checked = false;
+      _.each($scope.hotelBudget, function(getChecked){
+          getChecked.checked = false;
+      });
       $scope.citySubTypeData = [];
       $scope.cityBudgetData = [];
-      // console.log($scope.cityDestData.subType.checked, 'check type');
-      console.log($scope.cityDestData.subType, 'subtype');
-      console.log($scope.hotelBudget.checked, 'check budget');
-      console.log($scope.citySubTypeData,'type');
-      console.log($scope.cityBudgetData,'budget');
     }
     // city clear all function end
 
