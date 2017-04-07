@@ -9,7 +9,7 @@
       <div class="ongo-journey-main">
         <!-- strip journey -->
         <div class="journey-info-strip get-otgstrip clearfix">
-         <div class="dots-mobile color-white">
+         <div class="dots-mobile color-white" ng-click="openTravelTrip();">
              <i class="fa fa-plus-square-o" aria-hidden="true"></i>
          </div>
           <div class="pull-left">
@@ -24,7 +24,7 @@
             </div>
             <!-- own journey end -->
             <!-- trip list -->
-            <div class="trip-list">
+            <div class="trip-list {{getslide}}">
               <ul>
                 <li>
                   <a href="">

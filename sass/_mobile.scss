@@ -1723,6 +1723,17 @@
         padding: 12px;
 }
  }
+ .trip-list{
+       @include transition(all ease 300ms);
+  &.travel-out {
+    height: 0;
+    overflow: hidden;
+}
+  &.travel-in {
+    height: 59px;
+    overflow: hidden;
+}
+}
 }
 
 // media query for 767px to 480px end

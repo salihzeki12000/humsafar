@@ -1955,7 +1955,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       stateOn: 'fa fa-star-o',
       stateOff: 'fa fa-star'
     }];
-
+    $scope.getslide = "travel-out";
+    $scope.openTravelTrip = function () {
+      if ($scope.getslide == "travel-in") {
+        $scope.getslide = "travel-out";
+      } else {
+        $scope.getslide = "travel-in";
+      }
+    };
     // $scope.followFollowing = function (user) {
     //   if (user.following) {
     //     LikesAndComments.unFollowUser(user._id, function (data) {
