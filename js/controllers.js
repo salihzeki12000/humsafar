@@ -2955,7 +2955,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     // FILTER ITINERARY DESTINATION END
-
+    // clear country itinerary filter
+    $scope.clearCountryItinerary = function(){
+      _.each($scope.cityList, function(listCityChecked){
+        listCityChecked.checked = false;
+      })
+      _.each($scope.itineraryType, function(listItiChecked){
+        listItiChecked.checked = false;
+      })
+      _.each($scope.itineraryByCountry, function(listByChecked){
+        listByChecked.checked = false;
+      })
+      $scope.destinationCityFilter = [];
+      $scope.destinationItineraryType = [];
+      $scope.destinationItineraryBy = [];
+    };
+    // clear country itinerary filter end
     // OPTIONS NG CLICK FUNCTION
     $scope.editOption = function (model) {
       $timeout(function () {
@@ -4135,6 +4150,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     // city hotel filter end
+
+    // city clear all function
+    $scope.clearHotel = function(){
+      _.each($scope.cityDestData.subType, function(getChecked){
+          getChecked.checked = false;
+      });
+      // $scope.cityDestData.subType = false;
+      $scope.hotelBudget.checked = false;
+      $scope.citySubTypeData = [];
+      $scope.cityBudgetData = [];
+      // console.log($scope.cityDestData.subType.checked, 'check type');
+      console.log($scope.cityDestData.subType, 'subtype');
+      console.log($scope.hotelBudget.checked, 'check budget');
+      console.log($scope.citySubTypeData,'type');
+      console.log($scope.cityBudgetData,'budget');
+    }
+    // city clear all function end
+
     // city restaurant filter
     $scope.hotelRestaurantFilter = function (restaurantData, restaurantFilterType) {
       console.log(restaurantData);
@@ -4210,14 +4243,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     // city restaurant filter end
-
+    // clear hotel restuarnt
+    $scope.clearCityRest = function(){
+      _.each($scope.cityDestData.cuisine, function(clearChecked){
+        clearChecked.checked = false;
+      })
+      _.each($scope.cityDestData.subType, function(clearSubTypeChecked){
+        clearSubTypeChecked.checked = false;
+      })
+      _.each($scope.restuarntBudget, function(clearRestoChecked){
+        clearRestoChecked.checked = false;
+      })
+      $scope.cityRestaurantCuisine = [];
+      $scope.citySubTypeData = [];
+      $scope.cityBudgetData = [];
+    }
+    // clear hotel restuarnt end
     // city itinerary filter
     $scope.cityItineraryFilter = function (cityFilterData, cityFilterType) {
-      // if($('.city-type').is(':checked')){
-      //   $(this).attr('checked', true);
-      // }else {
-      //   $(this).attr('checked', false);
-      // }
       console.log(cityFilterData);
       switch (cityFilterType) {
         case 'cityItineraryType':
@@ -4269,6 +4312,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     // city itinerary filter end
+    // clear city itinerary
+    $scope.clearCityItinerary = function(){
+      _.each($scope.cityType, function(cityTypeChecked){
+        cityTypeChecked.checked = false;
+      });
+      _.each($scope.cityByIti, function(cityItiChecked){
+        cityItiChecked.checked = false;
+      });
+      $scope.cityItineraryType = [];
+      $scope.cityItineraryBy = [];
+    }
+    // clear city itinerary end
     // tour packages card
     $scope.usrTourPackageCard = [{
       tourImg: 'img/paris.jpg',

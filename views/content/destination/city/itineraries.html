@@ -43,26 +43,14 @@
                             <input type="checkbox" id="{{by.name}}" ng-model="by.checked" ng-click="cityItineraryFilter(by,'cityItineraryBy')">
                             <label for="{{by.name}}">{{by.name}}</label>
                           </div>
-                        </li>
-                        <!-- <li>
-                          <div class="custom-checkbox">
-                            <input type="checkbox" id="TravelAgent" ng-click="cityItineraryFilter('TravelAgent','cityItineraryBy')">
-                            <label for="TravelAgent">TravelAgent</label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="custom-checkbox">
-                            <input type="checkbox" id="Editor" ng-click="cityItineraryFilter('Editor','cityItineraryBy')">
-                            <label for="Editor">Editor</label>
-                          </div>
-                        </li> -->
+                        </li>                        
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-3 ">
                   <div class="txt-clear text-right">
-                    <a>Clear All</a>
+                    <a ng-click="clearCityItinerary();">Clear All</a>
                   </div>
                 </div>
               </div>
