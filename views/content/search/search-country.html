@@ -2,8 +2,8 @@
   <div class="row">
     <div class="country-visited-tab search-country-tab">
       <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="country in viewSearchedCountry track by $index">
-        <div class="country-list-holder">
-          <div class="list-imgholder" ui-sref="destinationcountry({'name':'featured','url':country.urlSlug})" style="background-image: url('{{country.countryCoverPhoto|uploadpath}}');">
+        <div class="country-list-holder pointer">
+          <div class="list-imgholder" ui-sref="destinationcountry({'name':'features-cities','url':country.urlSlug})" style="background-image: url('{{country.countryCoverPhoto|uploadpath}}');">
             <!-- <img ng-src="{{country.countryId.countryCoverPhoto|uploadpath}}" alt="" class="img-responsive country-img">  -->
             <div class="list-info">
               <div class="clearfix">

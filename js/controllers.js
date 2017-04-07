@@ -2663,6 +2663,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.destinationItineraryType = [];
     $scope.destinationItineraryBy = [];
     $scope.destinationCityFilter = [];
+    $scope.destinationCityFilterName= [];
+    $scope.destinationItineraryTypeName= [];
+    $scope.destinationItineraryByName= [];
 
     $scope.destinationList = [];
     $scope.i = 0;
@@ -2716,13 +2719,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.getCountryInfo = function (type, urlSlug) {
       $scope.scroll.busy = false;
+      $scope.destinationCityFilterName = _.map($scope.destinationCityFilter, 'name');
+      $scope.destinationItineraryTypeName = _.map($scope.destinationItineraryType, 'name');
+      $scope.destinationItineraryByName = _.map($scope.destinationItineraryBy, 'name');
       var sendCityData = {
         pagenumber: $scope.pagenumber,
         type: _.cloneDeep(type),
         urlSlug: $scope.urlDestinationCountry,
-        city: $scope.destinationCityFilter,
-        itineraryType: $scope.destinationItineraryType,
-        itineraryBy: $scope.destinationItineraryBy
+        city: $scope.destinationCityFilterName,
+        itineraryType: $scope.destinationItineraryTypeName,
+        itineraryBy: $scope.destinationItineraryByName
       };
       if(type === "bestTime"){
         sendCityData.type = "mustDo";
@@ -2730,6 +2736,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       NavigationService.getCountryDestination(sendCityData, function (data) {
         if (type == 'itinerary') {
           $scope.countryDestData = data.data;
+          $scope.countryDestIti = [];
           _.each(data.data.itinerary, function (newData) {
             newData.user.following = newData.following;
             if (data.data.itinerary.length == 0) {
