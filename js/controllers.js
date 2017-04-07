@@ -899,7 +899,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('TripSummaryCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $stateParams, OnGoJourney) {
+  .controller('TripSummaryCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $stateParams, OnGoJourney,$state) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -955,6 +955,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       lastScrollTop = st;
     }
     // scroll end
+
+    // route to on go journey
+    $scope.routeOngo = function(trip) {
+        $state.go('ongojourney', {
+          'id': trip.urlSlug,
+          'urlSlug': trip.user.urlSlug
+        });
+    }
+    // route to on go journey end
 
   })
 
@@ -1751,11 +1760,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // share whole trip social
     $scope.viewSocialShare = false;
     $scope.shareSocial = function () {
-      if ($scope.viewSocialShare == false) {
-        $scope.viewSocialShare = true;
-      } else {
-        $scope.viewSocialShare = false;
-      }
+      if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+       }else {
+         if ($scope.viewSocialShare == false) {
+           $scope.viewSocialShare = true;
+         } else {
+           $scope.viewSocialShare = false;
+         }
+       }
     };
     // share whole trip social end
 
@@ -2275,12 +2288,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // THANK YOU MODAL
     $scope.openThankYouModal = function () {
-      $uibModal.open({
-        templateUrl: "views/modal/report.html",
-        animation: true,
-        scope: $scope,
-        windowClass: "report-modal"
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+       }else {
+         $uibModal.open({
+           templateUrl: "views/modal/report.html",
+           animation: true,
+           scope: $scope,
+           windowClass: "report-modal"
+         });
+       }
     };
     // THANK YOU MODAL END
 
@@ -2289,11 +2306,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.sharePost = function (url) {
       $scope.shareUrl = url;
       console.log($scope.shareUrl, 'share ka url');
-      shareModal = $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/sharing.html",
-        scope: $scope
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+       }else {
+         shareModal = $uibModal.open({
+           animation: true,
+           templateUrl: "views/modal/sharing.html",
+           scope: $scope
+         });
+       }
     }
     // sharing local life modal end
 
@@ -2502,12 +2523,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // THANK YOU MODAL
     $scope.openThankYouModal = function () {
-      $uibModal.open({
-        templateUrl: "views/modal/report.html",
-        animation: true,
-        scope: $scope,
-        windowClass: "report-modal"
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+       }else {
+         $uibModal.open({
+           templateUrl: "views/modal/report.html",
+           animation: true,
+           scope: $scope,
+           windowClass: "report-modal"
+         });
+       }
     };
     // THANK YOU MODAL END
 
@@ -2515,12 +2540,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var shareModal = "";
     $scope.sharePost = function (url) {
       $scope.shareUrl = url;
-      console.log($scope.shareUrl, 'share ka url');
-      shareModal = $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/sharing.html",
-        scope: $scope
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+       }else {
+         shareModal = $uibModal.open({
+           animation: true,
+           templateUrl: "views/modal/sharing.html",
+           scope: $scope
+         });
+       }
     }
     // sharing local life modal end
 
@@ -2701,14 +2729,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
       NavigationService.getCountryDestination(sendCityData, function (data) {
         if (type == 'itinerary') {
+          $scope.countryDestData = data.data;
           _.each(data.data.itinerary, function (newData) {
+            newData.user.following = newData.following;
             if (data.data.itinerary.length == 0) {
               $scope.scroll.stopCallingApi = true;
             } else {
               $scope.countryDestIti.push(newData);
               console.log($scope.countryDestIti, 'data itinerary wala');
             }
-          })
+          });
           TemplateService.title = "Itineraries for " + $scope.countryDestData.name + " - TraveLibro";
           // if (data.data.itinerary.length == 0) {
           //   $scope.scroll.stopCallingApi = true;
@@ -2759,18 +2789,85 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // FILTER ITINERARY DESTINATION
     $scope.getItinerayCity = function (id) {
-      console.log($scope.countryDestData._id, 'country id');
-      console.log('hihsjk');
+      $scope.cityList = [];
+      console.log('hihsjk',id);
       NavigationService.getCitySearch({
         keyword: $scope.itinerary.citySearch,
         country: id
       }, function (data) {
         $scope.cityList = data.data.results;
-        console.log($scope.cityList, 'cityList');
+        $scope.cityList = _.map($scope.cityList, function(cityListData){
+          cityListData.checked = false;
+          return cityListData;
+        });
+        console.log($scope.cityList,'get Data');
       })
     };
-    $scope.itineraryType = ['Adventure', 'Business', 'Family', 'Romance', 'Budget', 'Luxury', 'Religious', 'Friends', 'Shopping', 'Solo', 'Festival', 'Backpacking'];
-    $scope.itineraryBy = ['User', 'TravelAgent', 'Editor']
+
+    $scope.itineraryType = [
+    {
+      name: "Adventure",
+      checked: false
+    },
+    {
+      name: "Business",
+      checked: false
+    },
+    {
+      name: "Family",
+      checked: false
+    },
+    {
+      name: "Romance",
+      checked: false
+    },
+    {
+      name: "Budget",
+      checked: false
+    },
+    {
+      name: "Luxury",
+      checked: false
+    },
+    {
+      name: "Religious",
+      checked: false
+    },
+    {
+      name: "Friends",
+      checked: false
+    },
+    {
+      name: "Shopping",
+      checked: false
+    },
+    {
+      name: "Solo",
+      checked: false
+    },
+    {
+      name: "Festival",
+      checked: false
+    },
+    {
+      name: "Backpacking",
+      checked: false
+    }
+  ];
+    $scope.itineraryByCountry = [
+      {
+        name: "User",
+        checked: false
+      },
+      {
+        name: "Travel Agent",
+        checked: false
+      },
+      {
+        name: "Editor",
+        checked: false
+      }
+    ];
 
     // filter sorting
 
@@ -2779,46 +2876,69 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       switch (filterType) {
         case 'itineraryCity':
           var cityIndex = _.findIndex($scope.destinationCityFilter, function (type) {
-            return type == filterItinerary;
+            return type.name == filterItinerary.name;
           });
           if (cityIndex == -1) {
             $scope.destinationCityFilter.push(filterItinerary);
+            var cityItiIndex = _.findIndex($scope.cityList, function(cityCheck){
+              return cityCheck.name == filterItinerary.name
+            });
+            $scope.cityList[cityItiIndex].checked = true;
             console.log($scope.destinationCityFilter, 'city');
           } else {
-            _.remove($scope.destinationCityFilter, function (remove) {
-              return remove == filterItinerary;
-            })
+            _.remove($scope.destinationCityFilter, function(remove) {
+              return remove.name == filterItinerary.name;
+            });
+            var cityItiIndex = _.findIndex($scope.cityList, function(cityCheck){
+              return cityCheck.name == filterItinerary.name
+            });
+            $scope.cityList[cityItiIndex].checked = false;
             console.log($scope.destinationCityFilter, 'city');
           }
-          $scope.pagenumber=1;
+          $scope.pagenumber = 1;
           break;
         case 'itineraryType':
-          var typeIndex = _.findIndex($scope.destinationItineraryType, function (type) {
-            return type == filterItinerary;
+          var typeIndex = _.findIndex($scope.destinationItineraryType, function(type) {
+            return type.name == filterItinerary.name;
           });
           if (typeIndex == -1) {
             $scope.destinationItineraryType.push(filterItinerary);
+            var countryItiTypeIndex = _.findIndex($scope.itineraryType, function(getIndexCountry){
+              return getIndexCountry.name == filterItinerary.name;
+            })
+            $scope.itineraryType[countryItiTypeIndex].checked = true;
             console.log($scope.destinationItineraryType, 'type');
           } else {
             _.remove($scope.destinationItineraryType, function (remove) {
-              return remove == filterItinerary;
+              return remove.name == filterItinerary.name;
             })
-
+            var countryItiTypeIndex = _.findIndex($scope.itineraryType, function(getIndexCountry){
+              return getIndexCountry.name == filterItinerary.name;
+            })
+            $scope.itineraryType[countryItiTypeIndex].checked = false;
             console.log($scope.destinationItineraryType, 'type');
           }
           $scope.pagenumber=1;
           break;
         case 'itineraryBy':
           var byIndex = _.findIndex($scope.destinationItineraryBy, function (type) {
-            return type == filterItinerary;
+            return type.name == filterItinerary.name;
           });
           if (byIndex == -1) {
             $scope.destinationItineraryBy.push(filterItinerary);
+            var countryItiByIndex = _.findIndex($scope.itineraryByCountry, function(getIndexBy){
+              return getIndexBy.name == filterItinerary.name;
+            })
+            $scope.itineraryByCountry[countryItiByIndex].checked = true;
             console.log($scope.destinationItineraryBy, 'by');
           } else {
             _.remove($scope.destinationItineraryBy, function (remove) {
-              return remove == filterItinerary;
+              return remove.name == filterItinerary.name;
             })
+            var countryItiByIndex = _.findIndex($scope.itineraryByCountry, function(getIndexBy){
+              return getIndexBy.name == filterItinerary.name;
+            })
+            $scope.itineraryByCountry[countryItiByIndex].checked = false;
             console.log($scope.destinationItineraryBy, 'by');
           }
           $scope.pagenumber=1;
@@ -2841,12 +2961,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // THANK YOU MODAL
     $scope.openThankYouModal = function () {
-      $uibModal.open({
-        templateUrl: "views/modal/report.html",
-        animation: true,
-        scope: $scope,
-        windowClass: "report-modal"
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+       }else {
+         $uibModal.open({
+           templateUrl: "views/modal/report.html",
+           animation: true,
+           scope: $scope,
+           windowClass: "report-modal"
+         });
+       }
     };
     // THANK YOU MODAL END
 
@@ -3220,15 +3344,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var shareModal = "";
     $scope.sharePost = function (url) {
       $scope.shareUrl = url;
-      console.log($scope.shareUrl, 'share ka url');
-      shareModal = $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/sharing.html",
-        scope: $scope
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+       }else {
+         shareModal = $uibModal.open({
+           animation: true,
+           templateUrl: "views/modal/sharing.html",
+           scope: $scope
+         });
+       }
     }
     // sharing local life modal end
 
+    // followFollowing  Function
+    $scope.followFollowing = function (user) {
+      LikesAndComments.followUnFollow(user, function (data) {
+        if (data.value) {
+          user.following = data.data.responseValue;
+        } else {
+          console.log("error updating data");
+        }
+      });
+    }
+    // followFollowing  Function END
 
   })
 
@@ -3245,10 +3383,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.bookingCityName = "";
     $scope.bookingCountryName = "";
     $scope.citySubTypeData = [];
+    $scope.citySubTypeDataName = [];
     $scope.cityBudgetData = [];
+    $scope.cityBudgetDataName = [];
     $scope.cityItineraryType = [];
+    $scope.cityItineraryTypeName = [];
     $scope.cityItineraryBy = [];
+    $scope.cityItineraryByName = [];
     $scope.cityRestaurantCuisine = [];
+    $scope.cityRestaurantCuisineName = [];
     $scope.pagenumber = 1;
     $scope.cityDestIti = [];
     $scope.ntMustdo = "ntMustdo";
@@ -3292,15 +3435,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var shareModal = "";
     $scope.sharePost = function (url) {
       $scope.shareUrl = url;
+      if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+       }else {
+         shareModal = $uibModal.open({
+           animation: true,
+           templateUrl: "views/modal/sharing.html",
+           scope: $scope
+         });
+       }
       console.log($scope.shareUrl, 'share ka url');
-      shareModal = $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/sharing.html",
-        scope: $scope
-      });
     }
     // sharing local life modal end
 
+
+    // followFollowing  Function
+    $scope.followFollowing = function (user) {
+      LikesAndComments.followUnFollow(user, function (data) {
+        if (data.value) {
+          user.following = data.data.responseValue;
+        } else {
+          console.log("error updating data");
+        }
+      });
+    }
+    // followFollowing  Function END
 
     // OPTIONS NG CLICK FUNCTION
     $scope.editOption = function (model) {
@@ -3314,12 +3473,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // THANK YOU MODAL
     $scope.openThankYouModal = function () {
-      $uibModal.open({
-        templateUrl: "views/modal/report.html",
-        animation: true,
-        scope: $scope,
-        windowClass: "report-modal"
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+       }else {
+         $uibModal.open({
+           templateUrl: "views/modal/report.html",
+           animation: true,
+           scope: $scope,
+           windowClass: "report-modal"
+         });
+       }
     };
     // THANK YOU MODAL END
 
@@ -3367,7 +3530,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.rateDestination = function (destRate, type) {
       if (!($.jStorage.get("isLoggedIn"))) {
           $state.go('login');
-       }
+       }else {
       console.log(destRate, 'check in');
       $scope.destReview = destRate;
       if (destRate.userReview.length !== 0) {
@@ -3397,7 +3560,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.modelType = "restaurant";
         $scope.rateType = "saveRestaurant";
       }
-    };
+    }
+  };
     $scope.ratingValue = {};
     $scope.ratingValue.review = "";
     $scope.ratingValue.rating = "";
@@ -3498,58 +3662,67 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.urlDestinationCity = $state.params.url;
     $scope.getCityInfo = function (type, urlSlug) {
       $scope.scroll.busy = false;
-      var sendData={
+      $scope.citySubTypeDataName = _.map($scope.citySubTypeData,'name');
+      $scope.cityBudgetDataName = _.map($scope.cityBudgetData,'name');
+      $scope.cityRestaurantCuisineName = _.map($scope.cityRestaurantCuisine,'name');
+      $scope.cityItineraryTypeName = _.map($scope.cityItineraryType,"name");
+      $scope.cityItineraryByName = _.map($scope.cityItineraryBy,'name');
+      var sendData = {
         type: _.cloneDeep(type),
         urlSlug: $scope.urlDestinationCity,
-        subType: $scope.citySubTypeData,
-        budget: $scope.cityBudgetData,
-        cuisine: $scope.cityRestaurantCuisine,
-        itineraryType: $scope.cityItineraryType,
-        itineraryBy: $scope.cityItineraryBy,
+        subType: $scope.citySubTypeDataName,
+        budget: $scope.cityBudgetDataName,
+        cuisine: $scope.cityRestaurantCuisineName,
+        itineraryType: $scope.cityItineraryTypeName,
+        itineraryBy: $scope.cityItineraryByName,
         pagenumber: $scope.pagenumber
       };
       if(type === "bestTime"){
          sendData.type="mustDo";
       }
       NavigationService.getCityDestination(sendData, function (data) {
-        if (type === 'itinerary') {
-          _.each(data.data.itinerary, function (newData) {
-            if (data.data.itinerary.length == 0) {
-              $scope.scroll.stopCallingApi = true;
-            } else {
-              $scope.cityDestIti.push(newData);
-              console.log($scope.cityDestIti, 'city ka itinerary');
-            }
-          })
-          TemplateService.title = "Travel Itinerary For " + $scope.cityDestData.name + " | TraveLibro"
-        } else {
-          _.each(data.data.bestTime, function (newVal) {
-            newVal.month = moment(newVal.month, "M").format('MMMM');
-          });
-          $scope.cityDestData = data.data;
-          // console.log('bc log hoja', $scope.cityDestData);
-          // switch case for title only
+        if(data.value==true){
+          if (type === 'itinerary') {
+              $scope.cityDestIti = [];
+            _.each(data.data.itinerary, function (newData) {
+              newData.user.following = newData.following;
+              if (data.data.itinerary.length == 0) {
+                $scope.scroll.stopCallingApi = true;
+              } else {
+                $scope.cityDestIti.push(newData);
+                console.log($scope.cityDestIti, 'city ka itinerary');
+              }
+            })
+            TemplateService.title = "Travel Itinerary For " + $scope.cityDestData.name + " | TraveLibro"
+          } else {
+            _.each(data.data.bestTime, function (newVal) {
+              newVal.month = moment(newVal.month, "M").format('MMMM');
+            });
+            $scope.cityDestData = data.data;
+            // console.log('bc log hoja', $scope.cityDestData);
+            // switch case for title only
 
-          switch (type) {
-            case 'mustDo':
-              TemplateService.title = $scope.cityDestData.name + " Travel Guide | Top Things To Do In " + $scope.cityDestData.name + "- TraveLibro";
+            switch (type) {
+              case 'mustDo':
+                TemplateService.title = $scope.cityDestData.name + " Travel Guide | Top Things To Do In " + $scope.cityDestData.name + "- TraveLibro";
+                break;
+              case 'hotel':
+                TemplateService.title = $scope.cityDestData.name + " Hotels | TraveLibro";
+                break;
+              case 'restaurant':
+                TemplateService.title = "Recommended Restaurants In " + $scope.cityDestData.name + " | TraveLibro ";
+                break;
+              case 'bookings':
+                TemplateService.title = "Best Deals For " + $scope.cityDestData.name + " -   TraveLibro";
+                break;
+              case 'bestTime':
+              TemplateService.title = "Best Time To Visit " + $scope.cityDestData.name + " -   TraveLibro";
+                break;
+              default:
               break;
-            case 'hotel':
-              TemplateService.title = $scope.cityDestData.name + " Hotels | TraveLibro";
-              break;
-            case 'restaurant':
-              TemplateService.title = "Recommended Restaurants In " + $scope.cityDestData.name + " | TraveLibro ";
-              break;
-            case 'bookings':
-              TemplateService.title = "Best Deals For " + $scope.cityDestData.name + " -   TraveLibro";
-              break;
-            case 'bestTime':
-            TemplateService.title = "Best Time To Visit " + $scope.cityDestData.name + " -   TraveLibro";
-              break;
-            default:
-            break;
+            }
+            // switch case for title only end
           }
-          // switch case for title only end
         }
       })
     };
@@ -3638,7 +3811,107 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     // get booking data end
 
-    $scope.cityType = ['Adventure', 'Business', 'Family', 'Romance', 'Budget', 'Luxury', 'Religious', 'Friends', 'Shopping', 'Solo', 'Festival', 'Backpacking'];
+    $scope.cityType = [ {
+        name: 'Adventure',
+        checked: false
+      },
+      {
+        name: 'Business',
+        checked: false
+      },
+      {
+        name: 'Family',
+        checked: false
+      },
+      {
+        name: 'Romance',
+        checked: false
+      },
+      {
+        name: 'Budget',
+        checked: false
+      },
+      {
+        name: 'Luxury',
+        checked: false
+      },
+      {
+        name: 'Religious',
+        checked: false
+      },
+      {
+        name: 'Friends',
+        checked: false
+      },
+      {
+        name: 'Shopping',
+        checked: false
+      },
+      {
+        name: 'Solo',
+        checked: false
+      },
+      {
+        name: 'Festival',
+        checked: false
+      },
+      {
+        name: 'Backpacking',
+        checked: false
+      }
+    ];
+    $scope.cityByIti = [
+      {
+        name: "User",
+        checked: false
+      },
+      {
+        name: "Travel Agent",
+        checked: false
+      },
+      {
+        name: "Editor",
+        checked: false
+      }
+    ];
+
+    // restuarnt budget
+    $scope.restuarntBudget = [
+      {
+        name: "$$$",
+        checked: false
+      },
+      {
+        name: "$$",
+        checked: false
+      },
+      {
+        name: "$",
+        checked: false
+      }
+    ];
+    // restuarnt budget end
+
+    // hotel budget
+    $scope.hotelBudget = [
+      {
+        name: "$$$",
+        id: "dollar-three",
+        checked: false
+      },
+      {
+        name: "$$",
+        id: "dollar-two",
+        checked: false
+      },
+      {
+        name: "$",
+        id: "dollar-one",
+        checked: false
+      }
+    ];
+    // hotel budget end
+
 
     $scope.openCountry = function (index) {
       $scope.mustDoArr = _.cloneDeep($scope.cityDestData.mustDo);
@@ -3679,20 +3952,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.viewReviews = function (review, type) {
-      if ($scope.viewCardReview) {
-        $scope.viewCardReview = false;
-        $scope.callReview = "";
-      } else {
-        $scope.viewCardReview = true;
-        $scope.viewCardComment = false;
-        $scope.viewCardLike = false;
-        $scope.callReview = 'review-slide';
-        console.log(review);
-        LikesAndComments.getReviews(review._id, type, function (data) {
-          $scope.listOfReviews = data.data;
-          console.log($scope.listOfReviews, 'get review');
-        });
-      }
+      if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+       }else {
+         if ($scope.viewCardReview) {
+           $scope.viewCardReview = false;
+           $scope.callReview = "";
+         } else {
+           $scope.viewCardReview = true;
+           $scope.viewCardComment = false;
+           $scope.viewCardLike = false;
+           $scope.callReview = 'review-slide';
+           console.log(review);
+           LikesAndComments.getReviews(review._id, type, function (data) {
+             $scope.listOfReviews = data.data;
+             console.log($scope.listOfReviews, 'get review');
+           });
+         }
+       }
     }
 
     $scope.listLikesDropDown = function (model) {
@@ -3802,29 +4079,47 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       switch (filterCityType) {
         case 'categoryType':
           var getcategory = _.findIndex($scope.citySubTypeData, function (subtype) {
-            return subtype == cityHotelData;
+            return subtype.name == cityHotelData.name;
           });
           if (getcategory == -1) {
             $scope.citySubTypeData.push(cityHotelData);
+            var getCategoryHotel = _.findIndex($scope.cityDestData.subType, function(checkedCat){
+              return checkedCat.name == cityHotelData.name;
+            })
+            $scope.cityDestData.subType[getCategoryHotel].checked = true;
             console.log($scope.citySubTypeData, 'city add ');
           } else {
             _.remove($scope.citySubTypeData, function (removeCategory) {
-              return removeCategory == cityHotelData;
+              return removeCategory.name == cityHotelData.name;
             })
+            var getCategoryHotel = _.findIndex($scope.cityDestData.subType, function(checkedCat){
+              return checkedCat.name == cityHotelData.name;
+            })
+            $scope.cityDestData.subType[getCategoryHotel].checked = false;
+
             console.log($scope.citySubTypeData, 'city remove');
           }
           break;
         case 'categoryBudget':
           var getBudget = _.findIndex($scope.cityBudgetData, function (budget) {
-            return budget == cityHotelData;
+            return budget.name == cityHotelData.name;
           });
           if (getBudget == -1) {
             $scope.cityBudgetData.push(cityHotelData);
+            var getBudgetHotel = _.findIndex($scope.hotelBudget, function(checkedCat){
+              return checkedCat.name == cityHotelData.name;
+            })
+            $scope.hotelBudget[getBudgetHotel].checked = false;
             console.log($scope.cityBudgetData, 'budget add ');
           } else {
             _.remove($scope.cityBudgetData, function (removeBudget) {
-              return removeBudget == cityHotelData;
+              return removeBudget.name == cityHotelData.name;
             })
+            var getBudgetHotel = _.findIndex($scope.hotelBudget, function(checkedCat){
+              return checkedCat.name == cityHotelData.name;
+            })
+
+            $scope.hotelBudget[getBudgetHotel].checked = false;
             console.log($scope.cityBudgetData, 'budget remove');
           }
           break;
@@ -3839,43 +4134,67 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       switch (restaurantFilterType) {
         case "restaurantCuisine":
           var getCuisine = _.findIndex($scope.cityRestaurantCuisine, function (cuisine) {
-            return cuisine == restaurantData;
+            return cuisine.name == restaurantData.name;
           })
           if (getCuisine == -1) {
             $scope.cityRestaurantCuisine.push(restaurantData);
+            var getCuisineResto = _.findIndex($scope.cityDestData.cuisine, function(newCuisine){
+              return newCuisine.name == restaurantData.name;
+            });
+            $scope.cityDestData.cuisine[getCuisineResto].checked = true;
             console.log($scope.cityRestaurantCuisine, 'cuisine add');
           } else {
             _.remove($scope.cityRestaurantCuisine, function (removeCuisine) {
-              return removeCuisine == restaurantData;
+              return removeCuisine.name == restaurantData.name;
             });
+            var getCuisineResto = _.findIndex($scope.cityDestData.cuisine, function(newCuisine){
+              return newCuisine.name == restaurantData.name;
+            });
+            $scope.cityDestData.cuisine[getCuisineResto].checked = false;
             console.log($scope.cityRestaurantCuisine, 'cuisine removeCuisine');
           }
           break;
         case "typeRestaurant":
           var getRestaurant = _.findIndex($scope.citySubTypeData, function (restaurantType) {
-            return restaurantType == restaurantData;
+            return restaurantType.name == restaurantData.name;
           })
           if (getRestaurant == -1) {
             $scope.citySubTypeData.push(restaurantData);
+            var citySubIndex = _.findIndex($scope.cityDestData.subType , function(checkSubType){
+              return checkSubType.name == restaurantData.name;
+            })
+            $scope.cityDestData.subType[citySubIndex].checked = true;
             console.log($scope.citySubTypeData, 'Type add');
           } else {
             _.remove($scope.citySubTypeData, function (removeRestaurantType) {
-              return removeRestaurantType == restaurantData;
+              return removeRestaurantType.name == restaurantData.name;
             });
+            var citySubIndex = _.findIndex($scope.cityDestData.subType , function(checkSubType){
+              return checkSubType.name == restaurantData.name;
+            })
+            $scope.cityDestData.subType[citySubIndex].checked = false;
             console.log($scope.citySubTypeData, 'Type remove');
           }
           break;
         case "restaurantBudget":
           var getRestBudget = _.findIndex($scope.cityBudgetData, function (restaurantBudget) {
-            return restaurantBudget == restaurantData;
+            return restaurantBudget.name == restaurantData.name;
           })
           if (getRestBudget == -1) {
             $scope.cityBudgetData.push(restaurantData);
+            var restoBudget = _.findIndex($scope.restuarntBudget, function(checkedBudget){
+              return checkedBudget.name == restaurantData.name;
+            });
+            $scope.restuarntBudget[restoBudget].checked = true;
             console.log($scope.cityBudgetData, 'budget add');
           } else {
             _.remove($scope.cityBudgetData, function (removeBudget) {
-              return removeBudget == restaurantData;
+              return removeBudget.name == restaurantData.name;
             });
+            var restoBudget = _.findIndex($scope.restuarntBudget, function(checkedBudget){
+              return checkedBudget.name == restaurantData.name;
+            });
+            $scope.restuarntBudget[restoBudget].checked = false;
             console.log($scope.cityBudgetData, 'budget removeBudget');
           }
           break;
@@ -3887,32 +4206,54 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // city itinerary filter
     $scope.cityItineraryFilter = function (cityFilterData, cityFilterType) {
+      // if($('.city-type').is(':checked')){
+      //   $(this).attr('checked', true);
+      // }else {
+      //   $(this).attr('checked', false);
+      // }
+      console.log(cityFilterData);
       switch (cityFilterType) {
         case 'cityItineraryType':
           var cityTypeIndex = _.findIndex($scope.cityItineraryType, function (cityType) {
-            return cityType == cityFilterData;
+            return cityType.name == cityFilterData.name;
           });
           if (cityTypeIndex == -1) {
             $scope.cityItineraryType.push(cityFilterData);
             console.log($scope.cityItineraryType, 'type add');
+            var cityItineraryIndex = _.findIndex($scope.cityType, function(getCityIndex){
+              return getCityIndex.name == cityFilterData.name;
+            })
+            $scope.cityType[cityItineraryIndex].checked = true;
           } else {
             _.remove($scope.cityItineraryType, function (removeType) {
-              return removeType == cityFilterData;
+              return removeType.name == cityFilterData.name;
             });
+            var cityItineraryIndex = _.findIndex($scope.cityType, function(getCityIndex){
+              return getCityIndex.name == cityFilterData.name;
+            })
+            $scope.cityType[cityItineraryIndex].checked = false;
             console.log($scope.cityItineraryType, 'removed once');
           }
           break;
         case 'cityItineraryBy':
           var cityBy = _.findIndex($scope.cityItineraryBy, function (cityBy) {
-            return cityBy == cityFilterData;
+            return cityBy.name == cityFilterData.name;
           });
           if (cityBy == -1) {
             $scope.cityItineraryBy.push(cityFilterData);
             console.log($scope.cityItineraryBy, 'by add');
+            var getCityBy = _.findIndex($scope.cityByIti, function(getCityBy){
+              return getCityBy.name == cityFilterData.name;
+            })
+            $scope.cityByIti[getCityBy].checked = true;
           } else {
             _.remove($scope.cityItineraryBy, function (removeBy) {
               return removeBy == cityFilterData;
             });
+            var getCityBy = _.findIndex($scope.cityByIti, function(getCityBy){
+              return getCityBy.name == cityFilterData.name;
+            })
+            $scope.cityByIti[getCityBy].checked = false;
             console.log($scope.cityItineraryBy, 'removed once');
           }
           break;
@@ -4014,6 +4355,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.cityoptions = {};
     $scope.cityoptions.active = "";
     $scope.viewTab = 1;
+    console.log($state.params.country);
     switch ($state.params.name) {
       case "must-dos":
         $scope.destination.innerView = alldestination[0];
@@ -4047,7 +4389,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.destination.innerView = alldestination[4];
         $scope.cityDestinationView = false;
         $scope.cityoptions.active = "bookings";
-        $scope.getBooking($scope.bookingCityName, $scope.bookingCountryName);
+        $scope.getBooking($scope.bookingCityName, $state.params.country);
         $scope.viewBookingLoader = true;
         $scope.ntMustdo = "";
         break;
@@ -4063,6 +4405,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.cityDestinationView = true;
     }
     $scope.getTab = function (view) {
+      console.log($state.params.name,'name');
+      console.log($state.params.country,'country');
+      console.log($state.params.url,'url');
       $scope.destination.innerView = alldestination[view];
       var url = "features-cities";
       var active = "";
@@ -4108,7 +4453,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.cityDestinationView = false;
           $scope.cityoptions.active = "bookings";
           $scope.viewBookingLoader = true;
-          $scope.getBooking($scope.bookingCityName, $scope.bookingCountryName);
+          $scope.getBooking($state.params.url.toLowerCase(), $scope.bookingCountryName);
           $scope.ntMustdo = "";
           break;
         case 5:
@@ -4124,11 +4469,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           break;
       }
       console.log(url);
-      $state.go("destinationcity", {
-        name: url
-      }, {
-        notify: false
-      });
+      if(view == 4){
+        $state.go("cityBooking",{
+          name: url,
+          url: $state.params.url.toLowerCase(),
+          country: $scope.cityDestData.country.name.toLowerCase()
+        },{
+          notify: false
+        })
+      }else {
+        $state.go("destinationcity", {
+          name: url,
+          url: $state.params.url.toLowerCase(),
+        }, {
+          notify: false
+        });
+      }
     };
     //openCont
     $scope.isopencont = false;
@@ -4204,204 +4560,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       stateOn: 'fa fa-star-o',
       stateOff: 'fa fa-star'
     }];
-    //itineraries
-    $scope.activityPost = [{
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey photo slider",
-      relatedPhoto: [
-        'img/blog/blog-post.jpg',
-        'img/blog/blog-post2.jpg',
-        'img/blog/blog-post3.jpg',
-        'img/blog/blog-post4.jpg',
-        'img/blog/blog-post.jpg',
-        'img/blog/blog-post2.jpg',
-        'img/blog/blog-post3.jpg',
-        'img/blog/blog-post4.jpg',
-      ],
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: true,
-      postIcon: true,
-      video: false,
-      photo: true,
-      photoSlider: true,
-      travelledJourney: false,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: false,
-      postIcon: true,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      visitPost: false,
-      getpopularPost: false,
-      activitySec: true
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: false,
-      postIcon: true,
-      video: false,
-      photo: true,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      getpopularPost: false,
-      visitPost: false,
-      activitySec: true
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: false,
-      postIcon: false,
-      video: true,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      visitPost: false,
-      getpopularPost: false,
-      activitySec: true
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: true,
-      getpopularPost: false,
-      visitPost: false,
-      activitySec: true
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "follow",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, ];
     //OpenFilter
     $scope.isopenfilter = false;
     $scope.openFilter = function () {
@@ -4942,7 +5100,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // followFollowing  Function
     $scope.followFollowing = function (user) {
-      console.log("from popularBloggerData");
       LikesAndComments.followUnFollow(user, function (data) {
         if (data.value) {
           user.following = data.data.responseValue;
@@ -6311,351 +6468,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("OtherProfile");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
-  })
-
-  .controller('OtherJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
-    //Used to name the .html file
-
-    $scope.template = TemplateService.changecontent("otherjourney");
-    $scope.menutitle = NavigationService.makeactive("OtherJourney");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-
-    $(document).ready(function () {
-      setTimeout(function () {
-        $('html, body').animate({
-          scrollTop: $("#tabs").offset().top
-        }, 1000);
-      }, 100);
-    });
-    $scope.buildNow = function () {
-      $scope.$broadcast('rebuild:me');
-    }
-    $scope.$on('scrollbar.hide', function () {
-      // console.log('Scrollbar hide');
-    });
-    $scope.$on('scrollbar.show', function () {
-      // console.log('Scrollbar show');
-    });
-
-    $scope.bucketList = [{
-      countryName: "United States Of America"
-    }, {
-      countryName: "Germany"
-    }, {
-      countryName: "United Kingdom"
-    }, {
-      countryName: "Switzerland"
-    }, {
-      countryName: "Australia"
-    }, {
-      countryName: "India"
-    }, {
-      countryName: "Italy"
-    }, {
-      countryName: "Canada"
-    }, ];
-
-    $scope.data = {
-      'GB': {
-        metric: 4
-      },
-      'US': {
-        metric: 40
-      },
-      'FR': {
-        metric: 29
-      },
-      'IN': {
-        metric: 500
-      }
-    };
-    $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
-
-    $scope.heatmapColors = ['#2c3757', '#ff6759'];
-
-    $scope.travelLife = [{
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: false,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: true,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: false,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: false,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: true,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: true,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }];
-
-    $scope.localLife = [{
-      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgWall: "img/local-life-post.jpg",
-      likes: "15660",
-      travelledIcon: "img/cycle-cyan.png",
-      postSlider: [{
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }]
-    }, {
-      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgWall: "img/local-life-post.jpg",
-      likes: "15660",
-      travelledIcon: "img/cycle-cyan.png",
-      postSlider: [{
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }]
-    }, {
-      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgWall: "img/local-life-post.jpg",
-      likes: "15660",
-      travelledIcon: "img/cycle-cyan.png",
-      postSlider: [{
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }]
-    }, {
-      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgWall: "img/local-life-post.jpg",
-      likes: "15660",
-      travelledIcon: "img/cycle-cyan.png",
-      postSlider: [{
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }]
-    }, {
-      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgWall: "img/local-life-post.jpg",
-      likes: "15660",
-      travelledIcon: "img/cycle-cyan.png",
-      postSlider: [{
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }]
-    }];
 
   })
 
@@ -9454,7 +9266,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('UserQuickItineraryCtrl', function ($scope, TemplateService, NavigationService, LikesAndComments, $timeout, $stateParams, $uibModal, Itinerary) {
+  .controller('UserQuickItineraryCtrl', function ($scope, TemplateService, NavigationService, LikesAndComments, $timeout, $stateParams, $uibModal, Itinerary,$state) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -9527,12 +9339,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // THANK YOU MODAL
     $scope.openThankYouModal = function () {
-      $uibModal.open({
-        templateUrl: "views/modal/report.html",
-        animation: true,
-        scope: $scope,
-        windowClass: "report-modal"
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+       }else {
+         $uibModal.open({
+           templateUrl: "views/modal/report.html",
+           animation: true,
+           scope: $scope,
+           windowClass: "report-modal"
+         });
+       }
     };
     // THANK YOU MODAL END
 
@@ -9723,236 +9539,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       width: "20",
     }];
 
-    $scope.photoGallery = [
-      '../img/uploaded-pic.jpg',
-      '../img/slider2.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-      '../img/uploaded-pic.jpg',
-      '../img/slider2.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-    ];
-    // other itineraries main
-    $scope.travelLife = [{
-      otherProfile: true,
-      viewProfile: [{
-        imgBg: "img/itinerary/religious.jpg",
-        profileImg: "img/profile-main.png",
-        name: "Andrea Christina",
-        location: "London",
-        follower: "2090"
-      }],
-    }, {
-      class: "visiting-post travel-visit",
-      popItinerary: false,
-      visitPost: true,
-      getvisitPost: [{
-        travelVisit: true,
-        imgVisit: "img/india-gate.jpg",
-        locationLocal: "Mumbai",
-        tagTravel: "Book Your Travel form take off to touchdown!",
-        visitImg: true,
-      }, ],
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "follow",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "follow",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-    }, ];
-    // other itineraries main end
 
     $scope.uploadQuickItinerary = function () {
       console.log($scope.itinerary);
@@ -9983,7 +9569,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('UserDetailItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, LikesAndComments, $timeout, $uibModal, $stateParams) {
+  .controller('UserDetailItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, LikesAndComments, $timeout, $uibModal, $stateParams,$state) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -10097,12 +9683,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // THANK YOU MODAL
     $scope.openThankYouModal = function () {
-      $uibModal.open({
-        templateUrl: "views/modal/report.html",
-        animation: true,
-        scope: $scope,
-        windowClass: "report-modal"
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+       }else {
+         $uibModal.open({
+           templateUrl: "views/modal/report.html",
+           animation: true,
+           scope: $scope,
+           windowClass: "report-modal"
+         });
+       }
     };
     // THANK YOU MODAL END
 
@@ -10225,13 +9815,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //Integration starts here
 
-    $scope.journeyItinerary = [{
-      img: "img/ongojourney/monish.jpg",
-      name: "Monish"
-    }, {
-      img: "img/ongojourney/malhar.jpg",
-      name: "Malhar"
-    }, ];
     $scope.getItineraryType = [{
       img: "img/itinerary/family.png",
       width: "40",
@@ -10246,120 +9829,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       width: "20",
     }];
 
-    $scope.photoGallery = [
-      '../img/uploaded-pic.jpg',
-      '../img/slider2.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-      '../img/uploaded-pic.jpg',
-      '../img/slider2.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-    ];
-    // country list
-    $scope.countryList = [{
-      img: "img/singapore.png",
-      countryName: "Singapore",
-      cityList: [{
-        cityName: "Bukit Timah"
-      }, {
-        cityName: "Sin Ming"
-      }, {
-        cityName: "czechoslovakia"
-      }]
-    }, {
-      img: "img/singapore.png",
-      countryName: "Singapore",
-      cityList: [{
-        cityName: "Bukit Timah"
-      }, {
-        cityName: "Sin Ming"
-      }]
-    }, ];
-    // country list end
-    // accordion
-    $scope.countryTripList = [{
-      countryImg: "img/singapore.png",
-      countryName: "Singapore",
-      cityList: [{
-        dayInput1: "1",
-        dayInput2: "2",
-        cityName: "Singapore",
-        stayedAt: "Friends House",
-        ateAt: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-        mustDo: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-        aboutTrip: "<p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. <br><br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p><br><p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.<br> <br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p>",
-      }, {
-        dayInput1: "1",
-        dayInput2: "2",
-        cityName: "Singapore",
-        stayedAt: "Friends House",
-        ateAt: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-        mustDo: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-        aboutTrip: "<p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. <br><br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p><br><p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.<br> <br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p>",
-      }, ],
-    }, {
-      countryImg: "img/singapore.png",
-      countryName: "Singapore",
-      cityList: [{
-        dayInput1: "1",
-        dayInput2: "2",
-        cityName: "Singapore",
-        stayedAt: "Friends House",
-        ateAt: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-        mustDo: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-        aboutTrip: "<p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. <br><br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p><br><p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.<br> <br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p>",
-      }, ],
-    }, ];
-    // accordion end
-    $scope.editorGallery = [
-      '../img/uploaded-pic.jpg',
-      '../img/slider2.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-      '../img/uploaded-pic.jpg',
-      '../img/slider2.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-    ];
-
     //photo gallery backdrop
     $scope.showClass = "close-gallery";
     $scope.dispBackDrop = "";
@@ -10373,203 +9842,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     //photo gallery backdrop end
-    // other itineraries main
-    $scope.travelLife = [{
-      otherProfile: true,
-      viewProfile: [{
-        imgBg: "img/itinerary/religious.jpg",
-        profileImg: "img/profile-main.png",
-        name: "Andrea Christina",
-        location: "London",
-        follower: "2090"
-      }],
-    }, {
-      class: "visiting-post travel-visit",
-      popItinerary: false,
-      visitPost: true,
-      getvisitPost: [{
-        travelVisit: true,
-        imgVisit: "img/india-gate.jpg",
-        locationLocal: "Mumbai",
-        tagTravel: "Book Your Travel form take off to touchdown!",
-        visitImg: true,
-      }, ],
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "follow",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "follow",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-    }, ];
-    // other itineraries main end
 
   })
 
@@ -14463,7 +13735,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // search profile page end
     // search itinerary
     $scope.searchIti = function (itinerary) {
-      if (itinerary.itineraryBy == "Admin" || itinerary.itineraryBy == "TravelAgent") {
+      if (itinerary.itineraryBy == "TravelAgent") {
         $state.go('comingsoonpage', {
           'url': 'coming-soon'
         })
@@ -14756,14 +14028,130 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var shareModal = "";
     $scope.sharePost = function (url) {
       $scope.shareUrl = url;
-      console.log($scope.shareUrl, 'share ka url');
-      shareModal = $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/sharing.html",
-        scope: $scope
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+       }else {
+         shareModal = $uibModal.open({
+           animation: true,
+           templateUrl: "views/modal/sharing.html",
+           scope: $scope
+         });
+       }
     }
     // sharing local life modal end
+    // COMMENT LIKE SECTION FUNCTIONS
+    $scope.likeUnlikeActivity = function (post) {
+      console.log(post);
+      post.likeDone = !post.likeDone;
+      if (post.likeDone) {
+        if (post.likeCount == undefined) {
+          post.likeCount = 1;
+        } else {
+          post.likeCount = post.likeCount + 1;
+        }
+        LikesAndComments.likeUnlike(post.type, "like", post.uniqueId, post._id, null)
+      } else {
+        post.likeCount = post.likeCount - 1;
+        LikesAndComments.likeUnlike(post.type, "unlike", post.uniqueId, post._id, null)
+      }
+    };
+
+    $scope.getLikes = function (post) {
+      console.log(post);
+      LikesAndComments.getLikes(post.type, post._id, function (data) {
+        $scope.listOfLikes = data.data;
+        console.log($scope.listOfLikes);
+      });
+    };
+
+    $scope.listLikesDropDown = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+
+    $scope.getCommentsData = function (post) {
+      console.log(post);
+      $scope.previousId;
+      $scope.listOfLikes = [];
+      $scope.listOfComments = [];
+      $scope.post = post;
+      $scope.comment = {
+        "text": ""
+      }
+      var callback = function (data) {
+        $scope.uniqueArr = [];
+        $scope.listOfComments = data.data;
+        console.log($scope.listOfComments);
+
+        $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+      }
+      if ($scope.previousId != post._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfComments = [];
+        $scope.viewCardComment = true;
+        // $scope.journey.journeyHighLight = activity._id;
+        $scope.getCard = "view-whole-card";
+        LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+      } else {
+        if ($scope.viewCardComment) {
+          $scope.viewCardComment = false;
+          // $scope.journey.journeyHighLight = "";
+          $scope.getCard = "";
+          $scope.comment.text = "";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardComment = true;
+          // $scope.focus('enterComment');
+          // $scope.journey.journeyHighLight = activity._id;
+          $scope.getCard = "view-whole-card";
+          LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+        }
+      }
+      $scope.previousId = post._id;
+    };
+
+    $scope.getLikesData = function (post) {
+      var callback = function (data) {
+        $scope.listOfLikes = data.data;
+        console.log($scope.listOfLikes);
+      };
+      console.log($scope.post);
+      if ($scope.previousLikeId != post._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfLikes = [];
+        $scope.viewCardLike = true;
+        // $scope.journey.journeyHighLight = activity._id;
+        $scope.showLikeShow = "show-like-side-sec";
+        LikesAndComments.getLikes(post.type, post._id, callback);
+      } else {
+        if ($scope.viewCardLike) {
+          $scope.viewCardLike = false;
+          // $scope.journey.journeyHighLight = "";
+          $scope.getCard = "";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardLike = true;
+          // $scope.focus('enterComment');
+          // $scope.journey.journeyHighLight = activity._id;
+          $scope.showLikeShow = "show-like-side-sec";
+          LikesAndComments.getLikes(post.type, post._id, callback);
+        }
+      }
+      $scope.previousLikeId = post._id;
+    };
+
+    $scope.closeBackDrop = function () {
+      $scope.viewCardComment = false;
+      $scope.viewCardLike = false;
+      $scope.getCard = "";
+      $scope.listOfLikes = [];
+      $scope.listOfComments = [];
+    };
+
+    // COMMENT LIKE SECTION FUNCTIONS END
 
   })
 
@@ -14867,6 +14255,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   .controller('photoCommentModalCtrl', function ($scope, $uibModalInstance, LikesAndComments, $timeout) {
     $scope.index = -1;
+    $scope.indexDelete = -1;
     $scope.likePhoto = function (listOfComments, uniqueId, _id, additionalId) {
       // console.log(uniqueId, _id, additionalId);
       console.log(listOfComments);
@@ -14888,6 +14277,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.index = -1;
       } else {
         $scope.index = index;
+      }
+    };
+    $scope.showDeletePop = function (indexDelete) {
+      if ($scope.indexDelete == indexDelete) {
+        $scope.indexDelete = -1;
+      } else {
+        $scope.indexDelete = indexDelete;
       }
     };
     // edit comment

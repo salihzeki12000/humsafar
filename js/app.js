@@ -239,6 +239,12 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'DestinationCityCtrl',
       reloadOnSearch: false
     })
+    .state('cityBooking', {
+      url: "/cities/:url/:country/:name",
+      templateUrl: "views/template.html",
+      controller: 'DestinationCityCtrl',
+      reloadOnSearch: false
+    })
     .state('destinationcityWithOut', {
       url: "/destination-city",
       templateUrl: "views/template.html",

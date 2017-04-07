@@ -27,8 +27,8 @@
                         <ul>
                           <li ng-repeat="cuisine in cityDestData.cuisine track by $index">
                             <div class="custom-checkbox">
-                              <input type="checkbox" id="{{cuisine}}" ng-click="hotelRestaurantFilter(cuisine,'restaurantCuisine')">
-                              <label for="{{cuisine}}">{{cuisine}}</label>
+                              <input type="checkbox" id="{{cuisine.name}}" ng-model="cuisine.checked" ng-click="hotelRestaurantFilter(cuisine,'restaurantCuisine')">
+                              <label for="{{cuisine.name}}">{{cuisine.name}}</label>
                             </div>
                           </li>
                         </ul>
@@ -42,8 +42,8 @@
                         <ul>
                           <li ng-repeat="restaurant in cityDestData.subType track by $index">
                             <div class="custom-checkbox">
-                              <input type="checkbox" id="{{restaurant}}Resto" ng-click="hotelRestaurantFilter(restaurant,'typeRestaurant','toggle-dropDown_2')">
-                              <label for="{{restaurant}}Resto">{{restaurant}}</label>
+                              <input type="checkbox" id="{{restaurant.name}}Resto" ng-model="restaurant.checked" ng-click="hotelRestaurantFilter(restaurant,'typeRestaurant','toggle-dropDown_2')">
+                              <label for="{{restaurant.name}}Resto">{{restaurant.name}}</label>
                             </div>
                           </li>
                         </ul>
@@ -55,24 +55,13 @@
                       <input type="text" placeholder="Budget" class="form-control toggle-dropDown_3" ng-model="cityRestoBudget" ng-click="editOption(viewRestoBudget,'toggle-dropDown_3','drop-content_3')">
                       <div class="destination-filterdrop drop-content_3" ng-show="viewRestoBudget.backgroundClick">
                         <ul>
-                          <li>
+                          <li ng-repeat="budget in restuarntBudget track by $index">
                             <div class="custom-checkbox ">
-                              <input type="checkbox" id="budget-three" ng-click="hotelRestaurantFilter('$$$','restaurantBudget')">
-                              <label for="budget-three">$$$</label>
+                              <input type="checkbox" id="{{budget.name}}" ng-model="budget.checked" ng-click="hotelRestaurantFilter(budget,'restaurantBudget')">
+                              <label for="{{budget.name}}">{{budget.name}}</label>
                             </div>
                           </li>
-                          <li>
-                            <div class="custom-checkbox">
-                              <input type="checkbox" id="budget-two" ng-click="hotelRestaurantFilter('$$','restaurantBudget')">
-                              <label for="budget-two">$$</label>
-                            </div>
-                          </li>
-                          <li>
-                            <div class="custom-checkbox">
-                              <input type="checkbox" id="budget-one" ng-click="hotelRestaurantFilter('$','restaurantBudget')">
-                              <label for="budget-one">$</label>
-                            </div>
-                          </li>
+
                         </ul>
                       </div>
                     </div>
@@ -107,9 +96,9 @@
                   <a class="btn btn-pink avenir-roman " ng-click="getCityInfo('restaurant', urlDestinationCity)">Submit</a>
 
                   <!-- abhi iska api mai dekhna hai -->
-                  <span class="tags avenir-roman" ng-repeat="item in cityRestaurantCuisine track by $index">{{item | capitalize}} <span ng-click="hotelRestaurantFilter(item,'restaurantCuisine')">X</span></span>
-                  <span class="tags avenir-roman" ng-repeat="item in citySubTypeData track by $index">{{item | capitalize}} <span ng-click="hotelRestaurantFilter(item,'typeRestaurant','toggle-dropDown_2')">X</span></span>
-                  <span class="tags avenir-roman" ng-repeat="item in cityBudgetData track by $index">{{item | capitalize}} <span ng-click="editOption(item,'toggle-dropDown_3','drop-content_3')">X</span></span>
+                  <span class="tags avenir-roman" ng-repeat="item in cityRestaurantCuisine track by $index">{{item.name | capitalize}} <span ng-click="hotelRestaurantFilter(item,'restaurantCuisine')">X</span></span>
+                  <span class="tags avenir-roman" ng-repeat="item in citySubTypeData track by $index">{{item.name | capitalize}} <span ng-click="hotelRestaurantFilter(item,'typeRestaurant')">X</span></span>
+                  <span class="tags avenir-roman" ng-repeat="item in cityBudgetData track by $index">{{item.name | capitalize}} <span ng-click="hotelRestaurantFilter(item,'restaurantBudget')">X</span></span>
                 </div>
               </div>
             </div>

@@ -25,8 +25,8 @@
                       <ul>
                         <li ng-repeat="type in cityType track by $index">
                           <div class="custom-checkbox">
-                            <input type="checkbox" id="{{type}}" ng-click="cityItineraryFilter(type,'cityItineraryType')">
-                            <label for="{{type}}">{{type}}</label>
+                            <input type="checkbox" id="{{type.name}}" class="city-type" ng-click="cityItineraryFilter(type,'cityItineraryType')" ng-model="type.checked">
+                            <label for="{{type.name}}">{{type.name}}</label>
                           </div>
                         </li>
                       </ul>
@@ -38,13 +38,13 @@
                     <input type="type" placeholder="By" ng-model="cityItiBy" ng-click="editOption(viewItiBy,'itiByOuter','itiByInner')" class="form-control itiByOuter">
                     <div class="destination-filterdrop itiByInner" ng-show="viewItiBy.backgroundClick">
                       <ul>
-                        <li>
+                        <li ng-repeat="by in cityByIti track by $index">
                           <div class="custom-checkbox">
-                            <input type="checkbox" id="user" ng-click="cityItineraryFilter('user','cityItineraryBy')">
-                            <label for="user">User</label>
+                            <input type="checkbox" id="{{by.name}}" ng-model="by.checked" ng-click="cityItineraryFilter(by,'cityItineraryBy')">
+                            <label for="{{by.name}}">{{by.name}}</label>
                           </div>
                         </li>
-                        <li>
+                        <!-- <li>
                           <div class="custom-checkbox">
                             <input type="checkbox" id="TravelAgent" ng-click="cityItineraryFilter('TravelAgent','cityItineraryBy')">
                             <label for="TravelAgent">TravelAgent</label>
@@ -55,7 +55,7 @@
                             <input type="checkbox" id="Editor" ng-click="cityItineraryFilter('Editor','cityItineraryBy')">
                             <label for="Editor">Editor</label>
                           </div>
-                        </li>
+                        </li> -->
                       </ul>
                     </div>
                   </div>
@@ -74,8 +74,8 @@
                 <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
                 <a class="btn btn-pink avenir-roman " ng-click="getCityInfo('itinerary', urlDestinationCity)">Submit</a>
 
-                <span class="tags avenir-roman" ng-repeat="item in cityItineraryType track by $index">{{item | capitalize}} <span ng-click="cityItineraryFilter(item,'cityItineraryType')">X</span></span>
-                <span class="tags avenir-roman" ng-repeat="item in cityItineraryBy track by $index">{{item | capitalize}} <span ng-click="">X</span></span>
+                <span class="tags avenir-roman" ng-repeat="item in cityItineraryType track by $index">{{item.name | capitalize}} <span ng-click="cityItineraryFilter(item,'cityItineraryType')" id="{{item}}">X</span></span>
+                <span class="tags avenir-roman" ng-repeat="item in cityItineraryBy track by $index">{{item.name | capitalize}} <span ng-click="cityItineraryFilter(item,'cityItineraryBy')">X</span></span>
               </div>
             </div>
           </div>
@@ -94,8 +94,8 @@
                 </div>
                 <div class="inline-block editor-subdetail">
                   <div class="clearfix">
-                    <div class="pull-right">
-                      <span class="follow-following color-blue text-capitalize">follow</span>
+                    <div class="pull-right" ng-if="post.itineraryBy!='Admin'" ng-click="followFollowing(post.user);">
+                      <span class="follow-following pointer color-blue text-capitalize">{{post.user.following|followFollowingStatus}}</span>
                     </div>
                     <h4 class="font-bold color-dark-blue m-clear mb5 heading-name text-capitalize pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.user.name}}</h4>
                   </div>
