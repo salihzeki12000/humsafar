@@ -101,8 +101,8 @@
           <div class="pull-left">
             <ul>
               <li>
-                <a href="" class="relate">
-                  <i class="fa color-blue card-like-animation" ng-class="ongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="likePost(ongo);playAudio();"
+                <a href="" class="relate" ng-click="likePost(ongo);">
+                  <i class="fa color-blue card-like-animation" ng-class="ongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"
                     like-sound></i>
                   <span></span>
                   <audio id="like-play">
@@ -111,13 +111,13 @@
                 </a>
               </li>
               <li>
-                <a href="">
-                  <img src="img/comments.png" alt="" height="18" ng-click="getCommentsData({'post':ongo});">
+                <a href="" ng-click="getCommentsData({'post':ongo});">
+                  <img src="img/comments.png" alt="" height="18" >
                 </a>
               </li>
               <li class="relate">
-                <a href="">
-                  <img src="img/share.png" alt="" height="18" ng-init="ongo.share={};" ng-click="editOption(ongo.share)">
+                <a href=""  ng-click="editOption(ongo.share)">
+                  <img src="img/share.png" alt="" height="18" ng-init="ongo.share={};">
                 </a>
                 <div class="share-single-trip" ng-show="ongo.share.backgroundClick">
                   <ul>
@@ -174,14 +174,14 @@
           <div class="clearfix">
             <div class="pull-left">
               <!-- cardLikeList = !cardLikeList -->
-              <span class="color-blue mr10 card-like avenir-heavy" ng-click="!isLoggedIn||getLikesData({'post':ongo})"><i class="fa fa-heart color-blue mr5"></i><b>{{ongo.likeCount|filterCount}}</b> {{ongo.likeCount|singularPlural:'Likes'}}
+              <span class="color-blue mr10 card-like avenir-heavy" ng-click="getLikesData({'post':ongo})"><i class="fa fa-heart color-blue mr5"></i><b>{{ongo.likeCount|filterCount}}</b> {{ongo.likeCount|singularPlural:'Likes'}}
                         <!--<div class="card-like-dropdown" ng-show="ongo.like.backgroundClick;">
                           <ul>
                             <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
                           </ul>
                         </div>-->
                         </span>
-              <span class="color-blue mr10 card-comment avenir-heavy pointer" ng-click="!isLoggedIn||getCommentsData({'post':ongo});"><img src="img/comments.png" alt="" class="mr5" height="14"><b>{{ongo.commentCount|filterCount}}</b> {{ongo.commentCount|singularPlural:'Comments'}}
+              <span class="color-blue mr10 card-comment avenir-heavy pointer" ng-click="getCommentsData({'post':ongo});"><img src="img/comments.png" alt="" class="mr5" height="14"><b>{{ongo.commentCount|filterCount}}</b> {{ongo.commentCount|singularPlural:'Comments'}}
                         <div class="card-comment-dropdown" ng-show="cardCommentList">
                           <ul>
                             <li ng-repeat="listComments in uniqueArr"><a href="">{{listComments.user.name}}</a></li>

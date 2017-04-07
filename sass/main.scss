@@ -5293,6 +5293,7 @@ header {
 }
 
 .share-trip-journey {
+  margin-top: 10px;
   margin-right: 15px;
   display: inline-block;
   cursor: pointer;
@@ -10384,7 +10385,7 @@ header {
   }
   // dropdown comment otg end
   .view-comment-scroll {
-    max-height: 400px;
+    height: 300px;
     overflow-y: scroll;
   }
 
