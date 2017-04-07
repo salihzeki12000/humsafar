@@ -1,1 +1,1 @@
-importScripts('https://cdn.onesignal.com/sdks/OneSignalSDK.js');
+$.getScript('https://cdn.onesignal.com/sdks/OneSignalSDK.js');
