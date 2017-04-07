@@ -5171,6 +5171,9 @@ header {
     top: 0;
     @include transition(all 200ms linear);
   }
+  .dots-mobile{
+    display: none;
+  }
   .btn-summary,
   .own-journey,
   .trip-list {
@@ -5389,7 +5392,7 @@ header {
   border-radius: 8px;
   // box-shadow: 1px 4px 5px #ccc;
   box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.19);
-  background-color: rgba(255, 255, 255, 0.84);
+  background-color: rgba(255, 255, 255, 0.95);
   .user-social-item {
     padding: 8px 2px;
     border-top: 1px solid #b5b5b5;
@@ -6026,7 +6029,7 @@ header {
   }
   .travelling-journey-type {
     padding: 10px 10px 0;
-    background-color: rgba(255, 255, 255, 0.84);
+    background-color: rgba(255, 255, 255, 0.95);
     li {
       margin-right: 10px;
       display: inline-block;
@@ -8387,6 +8390,7 @@ header {
   position: relative;
   .trip-status-main {
     padding: 20px 12px 10px;
+    min-width: 54px;
     position: absolute;
     right: 0;
     top: 0;
@@ -9084,6 +9088,7 @@ header {
       padding: 25px 20px;
       position: absolute;
       bottom: 0;
+      left: 0;
       width: 100%;
       background: rgba(0, 0, 0, 0.6);
       @include transition(all 300ms linear);
@@ -10331,9 +10336,10 @@ header {
       // vertical-align: bottom;
       input,
       textarea {
+        padding: 0 10px;
+        width: 100% !important;
         border: none;
         border-bottom: 1px solid $brand-dark-blue;
-        padding: 0 10px;
         color: #787878;
         line-height: 100%;
         @extend .avenir-roman;
@@ -10375,12 +10381,31 @@ header {
     box-shadow: 0 2px 7px #a0a0a0;
     position: absolute;
     background-color: #fff;
+    z-index: 2;
     li {
       padding: 5px 10px;
       border-bottom: 1px solid #ebebeb;
     }
     a {
       color: #a0a0a0;
+    }
+    .ui-select-choices-row{
+      &:last-child{
+        border-radius: 0 0 6px 6px;
+      }
+      &:hover{
+      background-color: #fff;
+    }
+  }
+  .selectize-dropdown .active{
+      background-color: #fff;
+      color: #a0a0a0;
+    }
+  .hashtag-option{
+      padding: 5px 0;
+      border-bottom: 1px solid #ebebeb;
+      margin: 0px 5px;
+      cursor: pointer;
     }
   }
   // dropdown comment otg end
@@ -10815,6 +10840,7 @@ ng-map {
   }
   .slider-hotel {
     height: 290px;
+    background-color: $brand-light-grey;
     overflow: hidden;
     position: relative;
     .item {
@@ -10897,6 +10923,7 @@ ng-map {
     height: 290px;
     overflow: hidden;
     position: relative;
+    background-color: $brand-light-grey;
     .item {
       height: 100%;
       background-repeat: no-repeat;
@@ -10912,8 +10939,8 @@ ng-map {
   .tour-list-heading {
     .tour-name {
       margin: 0;
-      font-family: "AvenirLTStd-Medium";
       font-size: 18px;
+      @extend .avenir-roman;
       @extend.text-ellipsis;
     }
   }
@@ -11051,6 +11078,7 @@ ng-map {
   border-radius: 100%;
   border-width: 3px;
   border-style: solid;
+  background-color: $brand-light-grey;
   box-shadow: 3px 3px 3px #212121;
   overflow: hidden;
   img {
