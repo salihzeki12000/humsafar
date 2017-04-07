@@ -43,16 +43,6 @@
     margin-bottom: 20%;
   } // holiday page end
   // ongo journey page
-  .journey-info-strip {
-    .own-journey {
-      margin: 0;
-      display: block;
-    }
-    .btn-summary,
-    .trip-list {
-      margin-top: 10px;
-    }
-  }
   .journey-type img {
     height: 15px;
   }
@@ -73,7 +63,8 @@
   }
   .options .own-trip {
     padding: 15px;
-  } // ongo journey page end
+  } 
+  // ongo journey page end
   .list-travel-view {
     margin-right: 2px;
   }
@@ -315,9 +306,20 @@
       background-color: transparent;
     }
   }
+    // ongo journey page
+  .journey-info-strip {
+    .own-journey {
+      margin: 0;
+      display: block;
+    }
+    .btn-summary,
+    .trip-list {
+      margin-top: 10px;
+    }
+  }
   .ongo-journey-card {
     margin-bottom: 50px;
-    background-color: rgba(255, 255, 255, 0.75);
+    // background-color: rgba(255, 255, 255, 0.75);
   }
   .ongo-journey-change {
     .journey-change {
@@ -608,6 +610,9 @@
   .socialize-holder ul {
     display: inline-block;
   }
+  .city-accordion-back .panel-title a a.journey-head {
+    padding: 15px 20px;
+  }
 }
 
 // media query for 991px to 768px end
@@ -851,6 +856,9 @@
   .journey-cycle img {
     width: 100px;
   } // on the go journey page
+  .ongo-journey-main {
+    margin-top: -4px;
+}
   .on-go-journey .container-fluid {
     padding: 0;
   }
@@ -1703,6 +1711,18 @@
     margin: 15px 0;
     width: 100%;
 }
+ // ongo journey page
+ .started-journey-card .journey-with, .started-journey-card .travelling-journey-type {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+ // ongo journey page end 
+ .city-accordion-back {.journey-accordion-heading {
+    height: 39px;
+ }
+ .panel-title a a.journey-head {
+        padding: 12px;
+}
+ }
 }
 
 // media query for 767px to 480px end
@@ -2063,9 +2083,9 @@
   }
   .ongo-journey-icon {
     float: right;
-    img {
-      width: 30px;
-    }
+    // img {
+    //   width: 30px;
+    // }
   }
   .related-ongo-slider {
     @include square(57px);
@@ -2356,6 +2376,24 @@
     width: 85%;
     margin-left: 2px;
   }
+  .video-gif-journey a.volume-off-on-mylife {
+    right: 25px;
+  }
+  .journey-info-strip .dots-mobile {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 20px;
+    display: block;
+}
+ .listing-accordion .city-heading {
+    width: 221px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.share-modal.share-main-modal .modal-title h3 {
+    font-size: 30px;
+}
   // .review-travel-view {
   //   .row{
   //     margin:0;
