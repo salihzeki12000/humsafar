@@ -6,6 +6,7 @@ templateservicemod.service('TemplateService', function ($http) {
     appId: "bf8baf0a-dcfb-4a30-a0c1-ee67cae2feb1", //libros
     // appId: "34d28a83-b284-4cee-8069-585c1342b8855", //testing
     autoRegister: false,
+    notificationClickHandlerAction: 'focus',
     // path: "js/",
     // notifyButton: {
     //   enable: true /* Set to false to hide */
@@ -33,23 +34,6 @@ templateservicemod.service('TemplateService', function ($http) {
   console.log($.jStorage.get("isLoggedIn") && $.jStorage.get('profile').alreadyLoggedIn);
   if ($.jStorage.get("isLoggedIn") && $.jStorage.get('profile').alreadyLoggedIn) {
     console.log("initializing OneSignal");
-    // OneSignal.getNotificationPermission(function (permission) {
-    //   console.log("Site Notification Permission", permission);
-    //   if (permission == 'default') {
-    //     OneSignal.setSubscription(true);
-    //     // OneSignal.showHttpPrompt();
-    //     OneSignal.push(function () {
-    //       // OneSignal.registerForPushNotifications();
-    //       OneSignal.registerForPushNotifications({
-    //         modalPrompt: true
-    //       });
-    //       // event.preventDefault();
-    //     });
-    //   } else {
-    //     console.log("Push Notification is either granted or its blocked by user");
-    //   }
-    // });
-
 
     OneSignal.push(function () {
       // If we're on an unsupported browser, do nothing
@@ -98,7 +82,6 @@ templateservicemod.service('TemplateService', function ($http) {
         // });
       }
     });
-
 
     OneSignal.on('notificationPermissionChange', function (permissionChange) {
       console.log(permissionChange.to);
@@ -150,6 +133,25 @@ templateservicemod.service('TemplateService', function ($http) {
         });
       }
     });
+
+    OneSignal.on('notificationDismiss', function (event) {
+      console.warn('OneSignal notification dismissed:', event);
+      /*
+      {
+          "id": "ce31de29-e1b0-4961-99ee-080644677cd7",
+          "heading": "OneSignal Test Message",
+          "content": "This is an example notification.",
+          "url": "https://onesignal.com?_osp=do_not_open",
+          "icon": "https://onesignal.com/images/notification_logo.png"
+      }
+      */
+    });
+
+    OneSignal.push(["addListenerForNotificationOpened", function (data) {
+      alert();
+      console.log("Received NotificationOpened:");
+      console.log(data);
+    }]);
   } else {
 
   }
