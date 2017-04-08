@@ -1151,6 +1151,9 @@ firstapp.filter('itineraryType', function () {
       case "friends":
         returnVal = "img/banner-itinerary/friends" + random + ".jpg";
         break;
+      default:
+        returnVal = "img/banner-itinerary/all1.jpg";
+      break;
     }
     console.log(returnVal, 'return wla kya hai');
     return returnVal;

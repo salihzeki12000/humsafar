@@ -9126,6 +9126,7 @@ header {
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: cover;
+    .overlay-itinerary-bg { background-color: rgba(0,0,0,.35); }
   }
   .user-banner-detail {
     position: absolute;
