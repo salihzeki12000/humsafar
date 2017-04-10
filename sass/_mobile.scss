@@ -1690,8 +1690,14 @@
   .destination-nav.mustdo-not {
     top: 55px;
   }
+  .btn-destinationfilter {
+    padding: 10px 0 0px 0px;
+}
   .destination-content {
-    // margin-top: 0px;
+    margin-top: 140px;
+    &.mt0{
+    margin-top: 0px;
+    }
     .pad-btn {
       padding: 0px 30px;
     }
