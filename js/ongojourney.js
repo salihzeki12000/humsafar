@@ -162,7 +162,7 @@ var ongojourney = angular.module('ongojourney', [])
     };
   });
 
-ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout', '$uibModal', 'OnGoJourney', 'LikesAndComments', 'TravelibroService', '$sce', function ($http, $filter, $window, $timeout, $uibModal, OnGoJourney, LikesAndComments, TravelibroService, $sce) {
+ongojourney.directive('journeyPost', ['$http', '$filter', '$window','$state', '$timeout', '$uibModal', 'OnGoJourney', 'LikesAndComments', 'TravelibroService', '$sce', function ($http, $filter, $window, $state, $timeout, $uibModal, OnGoJourney, LikesAndComments, TravelibroService, $sce) {
   return {
     restrict: 'E',
     scope: {
@@ -1063,30 +1063,34 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$timeout',
       $scope.allPhotos.newArray = [];
       //Photo comment popup
       $scope.getPhotosCommentData = function (photoId, index, length, array) {
-        console.log(index);
-        console.log(length);
-        console.log(array);
-        console.log(photoId, "click function called");
-        $scope.allPhotos.photoSliderIndex = index;
-        $scope.allPhotos.photoSliderLength = length;
-        $scope.allPhotos.newArray = array;
-        modal = $uibModal.open({
-          templateUrl: "views/modal/notify.html",
-          animation: true,
-          controller: "photoCommentModalCtrl",
-          scope: $scope,
-          windowClass: "notify-popup"
-        });
-        modal.closed.then(function () {
-          $scope.listOfComments = {};
-        });
-        var callback = function (data) {
-          $scope.uniqueArr = [];
-          $scope.listOfComments = data.data;
-          console.log($scope.listOfComments);
-          $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
-        };
-        LikesAndComments.getComments("photo", photoId, callback);
+        if (!($.jStorage.get("isLoggedIn"))) {
+          $state.go('login');
+        }else {
+          console.log(index);
+          console.log(length);
+          console.log(array);
+          console.log(photoId, "click function called");
+          $scope.allPhotos.photoSliderIndex = index;
+          $scope.allPhotos.photoSliderLength = length;
+          $scope.allPhotos.newArray = array;
+          modal = $uibModal.open({
+            templateUrl: "views/modal/notify.html",
+            animation: true,
+            controller: "photoCommentModalCtrl",
+            scope: $scope,
+            windowClass: "notify-popup"
+          });
+          modal.closed.then(function () {
+            $scope.listOfComments = {};
+          });
+          var callback = function (data) {
+            $scope.uniqueArr = [];
+            $scope.listOfComments = data.data;
+            console.log($scope.listOfComments);
+            $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+          };
+          LikesAndComments.getComments("photo", photoId, callback);
+        }
       };
 
       $scope.postPhotosComment = function (uniqueId, comment, postId, photoId) {
