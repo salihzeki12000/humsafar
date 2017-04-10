@@ -842,7 +842,7 @@
   }
 
   .destination .destination-nav {
-    padding: 10px 35px;
+    padding: 10px 5px;
   }
 
   .enquirytab-btn {
@@ -1020,7 +1020,7 @@
   }
 
   .destination .slide-cont-dest {
-    padding: 20px;
+    padding: 70px 20px 20px;
   }
 
   .destination .list-horizontal ul li {
@@ -1859,6 +1859,17 @@ h4{
     margin-bottom: 10px;
   }
   // SEARCH PAGE END
+  .destination-nav{ 
+    .pr20 {
+    padding-right: 0px;
+      }
+      .input-search .input-group {
+    margin-top: 10px;
+        }
+    .destination-main {
+    top: 38px;
+  }
+}
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -2108,6 +2119,7 @@ h4{
 
   .destination-featured {
     padding: 0;
+    padding-top: 20px;
   }
   .dest-btv.plr30 {
     padding: 0;

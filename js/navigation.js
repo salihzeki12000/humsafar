@@ -1,7 +1,7 @@
 var adminURL = "";
 var allowAccess = "";
-adminURL = "https://travelibro.com/api";
-// adminURL = "http://travelibro.wohlig.com/api";
+// adminURL = "https://travelibro.com/api";
+adminURL = "https://travelibro.wohlig.com/api";
 
 var imgurl = adminURL + "/upload/";
 var imgpath = imgurl + "readFile";
@@ -452,6 +452,14 @@ var navigationservice = angular.module('navigationservice', [])
             break;
         }
         returnVal.saveUserData(object, callback, function (data) {
+          console.log(data);
+        });
+      },ReportProblems: function (formData, callback) {
+        TravelibroService.http({
+          url: adminURL + "/ReportProblems/save",
+          data: formData,
+          method: "POST"
+        }).success(callback).error(function (data) {
           console.log(data);
         });
       },

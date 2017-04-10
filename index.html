@@ -62,7 +62,7 @@
 
   <!--home page Loader-->
   <div class="loaders" style="background:#303557;z-index:999;text-align: center;position:fixed;top:0;left:0;bottom:0;right:0">
-    <div style="position: absolute ;top: 50%;left:50%;transform: translate(-50%,-50%);">
+    <div style="position: absolute ;top: 50%;left:50%;transform: translate(-50%,-50%);width:100%;text-align: center;">
       <h1 noloading="true" style="color:#fff;" class="avenir-medium">
         <span class="element"></span>
       </h1>
@@ -98,13 +98,10 @@
   <script>
     $(window).load(function () {
       console.log("Loaded");
-
     if(abc && abc.changePage) {
      abc.changePage("home");
     }
-
-      $("body > .loaders").hide();
-      jQuery('.loadedContent').fadeIn(2000);
+      $("body > .loaders").remove();
       $("body > .loadedContent").fadeIn(1000);
     });
 
