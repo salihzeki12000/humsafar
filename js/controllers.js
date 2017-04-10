@@ -10828,13 +10828,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // ISMINE FUNCTION
     if ($.jStorage.get("isLoggedIn")) {
-<<<<<<< HEAD
       NavigationService.initializeOneSignal(function () {
-
       });
       NavigationService.requestForPushNotification();
-=======
->>>>>>> parent of aeec3c2... changes
       $scope.isLoggedIn = true;
       $scope.template.isLoggedIn = true;
       if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
