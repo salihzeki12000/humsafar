@@ -117,13 +117,14 @@
                 <div class="notification-btn text-center">
                   <button type="button" name="button" class="btn btn-notification-card" ng-click="acceptDeclineItinerary(notify,1)">Accept</button>
                   <button type="button" name="button" class="btn btn-notification-card" ng-click="acceptDeclineItinerary(notify,0)">Decline</button>
+                  <button type="button" name="button" class="btn btn-notification-card" ng-click="routeItinerary(notify);"> View </button>
                 </div>
                 <!-- ACCEPT DECLINE BUTTONS END -->
               </div>
               <!-- TAG ITINERARY END -->
 
               <!-- photoLike, photoComment, photoMentionComment START -->
-              <div class="notification-checkin-ongo-photo" ng-if="notify.type == 'photoLike' || notify.type == 'photoComment' || notify.type == 'photoMentionComment'">
+              <div class="notification-checkin-ongo-photo pointer" ng-if="notify.type == 'photoLike' || notify.type == 'photoComment' || notify.type == 'photoMentionComment'" ng-click="redirectPhotoPost(notify);">
                 <img ng-src="{{notify.data.name|uploadpath:250:125:'cover'}}" alt="" class="img-responsive" />
 
                 <!-- IF TYPE.VIDEO LIKE -->
@@ -166,7 +167,7 @@
               <!-- postLike || postTag || postComment || postMentionComment END -->
 
               <!-- journeyLike, journeyComment,journeyMentionComment START -->
-              <div class="notification-joureny-like" ng-if="notify.type == 'journeyLike' || notify.type == 'journeyComment' || notify.type == 'journeyMentionComment'">
+              <div class="notification-joureny-like pointer" ng-if="notify.type == 'journeyLike' || notify.type == 'journeyComment' || notify.type == 'journeyMentionComment'" ng-click="routeOngo(notify)">
                 <div class="notification-checkin-ongo-photo" ng-if="notify.data.coverPhoto">
                   <img ng-src="{{notify.data.coverPhoto|uploadpath:250:125:'cover'}}" alt="" class="img-responsive" />
                 </div>
@@ -179,7 +180,7 @@
 
               <!-- ALL USER BADGE  -->
               <div class="notification-social-btn text-center" ng-if="notify.type == 'userBadge'">
-                <a class="btn btn-notification-social fb-icon"><i class="fa fa-facebook"></i></a>
+                <a class="btn btn-notification-social fb-icon"><i class="fa fa-facebook" ></i></a>
                 <a class="btn btn-notification-social twi-icon"><i class="fa fa-twitter"></i></a>
                 <a class="btn btn-notification-social google-icon"><i class="fa fa-google-plus"></i></a>
                 <a class="btn btn-notification-social pin-icon"><i class="fa fa-pinterest-p"></i></a>
@@ -189,7 +190,7 @@
               <!-- ALL USER BADGE END -->
 
               <!-- ITINERARY LIKE, COMMENT, MENTION COMMENT Start -->
-              <div class="notification-addpic-ongo-action" ng-if="notify.type == 'itineraryLike' || notify.type == 'itineraryComment' ||  notify.type ==  'itineraryMentionComment' ">
+              <div class="notification-addpic-ongo-action pointer" ng-if="notify.type == 'itineraryLike' || notify.type == 'itineraryComment' ||  notify.type ==  'itineraryMentionComment' " ng-click="routeItinerary(notify);">
                 <div class="notification-checkin-ongo-photo notification-itinerary-pics">
                   <img ng-src="{{notify.data.coverPhoto|uploadpath:250:125:'cover'}}" alt="" class="img-responsive" />
                 </div>

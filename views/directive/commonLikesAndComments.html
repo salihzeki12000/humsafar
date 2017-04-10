@@ -118,7 +118,8 @@
             <p class="like-buddy-attag">@ <span>{{like.urlSlug}}</span></p>
           </div>
           <div class="like-buddy-follow-btn pull-right" ng-if="like._id!=userData._id">
-            <button class=" btn btn-pink following-btn" ng-click=followFollowing(like);>{{like.following|followFollowingStatus}}</button>
+            <!-- <button class=" btn btn-pink following-btn" ng-click=followFollowing(like);>{{like.following|followFollowingStatus}}</button> -->
+            <span class="avenir-heavy color-blue pointer" ng-click=followFollowing(like);> {{like.following|followFollowingStatus}} </span>
           </div>
         </div>
       </li>

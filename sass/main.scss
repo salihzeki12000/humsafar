@@ -2077,6 +2077,9 @@ header {
     @extend .text-ellipsis;
     @extend .avenir-heavy;
   }
+  h3{
+    padding: 10px 40px 7px 0;
+  }
   .journey-travelling-type {
     margin-bottom: -20px;
   }
@@ -3789,6 +3792,12 @@ header {
   }
 }
 
+.date-pick .setting-datepicker{
+  &:before, &:after{
+    height: 0px;
+  }
+}
+
 .setting-tab-gender {
   .female,
   .male {
@@ -4757,7 +4766,7 @@ header {
   }
 }
 
-.local-life-taught {
+.local-life-taught, .local-life {
   .location {
     background-color: $brand-cyan !important;
   }
@@ -4890,8 +4899,9 @@ header {
     }
   }
   .date-quick-itinerary {
+    width: 100px;
     position: absolute;
-    right: 110px;
+    right: 90px;
     bottom: -10px;
   }
 }
@@ -9197,7 +9207,7 @@ header {
 
 .trip-pic-view {
   width: 1000px;
-  padding: 20px;
+  padding: 15px;
   position: absolute;
   top: 0;
   z-index: 6;
@@ -9211,7 +9221,7 @@ header {
     background: rgba(255, 255, 255, 0.95);
   }
   .masonry-main {
-    height: 540px !important;
+    height: 500px !important;
     padding: 10px;
     border: 1px solid #ccc;
     border-top-right-radius: 6px;

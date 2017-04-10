@@ -2313,15 +2313,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.sharePost = function (url) {
       $scope.shareUrl = url;
       console.log($scope.shareUrl, 'share ka url');
-      if (!($.jStorage.get("isLoggedIn"))) {
-          $state.go('login');
-       }else {
          shareModal = $uibModal.open({
            animation: true,
            templateUrl: "views/modal/sharing.html",
            scope: $scope
          });
-       }
     }
     // sharing local life modal end
 
@@ -2547,15 +2543,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var shareModal = "";
     $scope.sharePost = function (url) {
       $scope.shareUrl = url;
-      if (!($.jStorage.get("isLoggedIn"))) {
-          $state.go('login');
-       }else {
          shareModal = $uibModal.open({
            animation: true,
            templateUrl: "views/modal/sharing.html",
            scope: $scope
          });
-       }
     }
     // sharing local life modal end
 
@@ -13642,6 +13634,45 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       });
     }
+
+    // REDIRECT PHOTOS
+    $scope.redirectPhotoPost = function (obj) {
+      updateNotificationStatus(obj._id, function (data) {
+        if (data.value) {
+          $state.go('single-notification', {
+            "postId": obj.data.post,
+            "urlSlug": obj.userFrom.urlSlug
+          });
+        }
+      });
+    }
+    // REDIRECT PHOTOS END
+
+    // route to on go journey
+    $scope.routeOngo = function(notifyOb) {
+        $state.go('ongojourney', {
+          'id': notifyOb.data.urlSlug,
+          'urlSlug': notifyOb.userTo.urlSlug
+        });
+    }
+    // route to on go journey end
+
+    // route to itinerary
+    $scope.routeItinerary = function (notifyOb) {
+      console.log(notifyOb, 'user');
+      if (notifyOb.data.type == 'quick-itinerary') {
+        $state.go('userquickitinerary', {
+          'id': notifyOb.data.urlSlug,
+          'urlSlug': notifyOb.userTo.urlSlug
+        });
+      } else {
+        $state.go('userdetailitinerary', {
+          'id': notifyOb.data.urlSlug,
+          'urlSlug': notifyOb.userTo.urlSlug
+        });
+      }
+    }
+    // route to itinerary end
 
   })
 

@@ -4405,7 +4405,7 @@ q {
 //404 ERROR PAGE
 .error-page {
   width: 100%;
-  height: calc( 100vh - 60px);
+  height: 100vh;
   position: relative;
   background: url('../img/error.jpg') 50% 50% no-repeat;
   background-size: cover;
