@@ -9,7 +9,7 @@ var globalGetProfile = function (data, status) {
   }
 };
 var abc = {};
-
+var OneSignal;
 var pointsForLine = function () {};
 var line = [];
 var markers = [];
@@ -206,20 +206,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $.jStorage.set("accessToken", data.accessToken);
           NavigationService.getProfile("", function (data) {
             if (data.data._id) {
-
               //register deviceId if notification is enabled in browser starts
-              OneSignal.getUserId(function (data) {
-                console.log(data);
-                $http({
-                  "url": adminURL + "/user/updateDeviceId",
-                  "method": "POST",
-                  "data": {
-                    'accessToken': $.jStorage.get("accessToken"),
-                    'deviceId': data,
-                  }
+              NavigationService.initializeOneSignal(function () {
+                OneSignal.getUserId(function (data) {
+                  NavigationService.enablePushNotification(data);
+                  // $http({
+                  //   "url": adminURL + "/user/updateDeviceId",
+                  //   "method": "POST",
+                  //   "data": {
+                  //     'accessToken': $.jStorage.get("accessToken"),
+                  //     'deviceId': data,
+                  //   }
+                  // });
+                  // NavigationService.disablePushNotification(data);
                 });
-                // NavigationService.disablePushNotification(data);
               });
+
               //register deviceId if notification is enabled in browser ends
 
               $.jStorage.set("isLoggedIn", true);
@@ -10819,7 +10821,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.search = {};
     $scope.search.searchType = "";
     $scope.search.viewData = false;
-
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
 
     setInterval(function () {
@@ -10828,6 +10829,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // ISMINE FUNCTION
     if ($.jStorage.get("isLoggedIn")) {
+      NavigationService.requestForPushNotification();
       $scope.isLoggedIn = true;
       $scope.template.isLoggedIn = true;
       if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
@@ -14070,6 +14072,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       NavigationService.updateNotificationStatus(not_id, callback);
     };
     //update notifiction status end
+
     // PAGINATION FOR INFINITE SCROLL
     $scope.getNotification = function (pageNo) {
       $scope.notifyScroll.busy = false;
