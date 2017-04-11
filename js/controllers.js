@@ -13528,10 +13528,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.getNotification($scope.pageNo);
 
     $scope.loadMoreNotification = function () {
-      $scope.pageNo++;
       $scope.notifyScroll.busy = true;
       if ($scope.notifyScroll.stopCallingApi == false) {
-        $scope.getNotification($scope.pageNo);
+        $scope.getNotification(++$scope.pageNo);
+        console.log($scope.pageNo,'pagenumber');
       };
     }
     // PAGINATION FOR INFINITE SCROLL END
