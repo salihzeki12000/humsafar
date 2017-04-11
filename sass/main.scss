@@ -5191,6 +5191,7 @@ header {
     background-color: $brand-cyan;
 
     span {
+      color:$brand-blue;
       @extend .avenir-heavy;
     }
   }
@@ -10136,7 +10137,7 @@ header {
 
 .trip-pic-view {
   width: 1000px;
-  padding: 20px;
+  padding: 15px;
   position: absolute;
   top: 0;
   z-index: 6;
@@ -10152,7 +10153,7 @@ header {
   }
 
   .masonry-main {
-    height: 540px !important;
+    height: 500px !important;
     padding: 10px;
     border: 1px solid #ccc;
     border-top-right-radius: 6px;
@@ -10205,7 +10206,7 @@ header {
   padding: 0 20px;
   position: absolute;
   top: 55%;
-  right: -240px;
+  right: -200px;
   @include transform(translateY(-50%)rotate(90deg));
 
   &:after {
@@ -10226,7 +10227,7 @@ header {
 }
 
 .photos {
-  width: 450px;
+  width: 350px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   padding: 15px;

@@ -524,7 +524,7 @@
     }
   }
   .notify-main .comment-sec .comment-container {
-    width: 88%;
+    width: 100%;
     margin-left: 2px;
   }
   .review-all-life .place-name {
@@ -2481,8 +2481,23 @@ display: block;
 }
 }
 }
-.hotels .hotel-card .title-head-inside h4 {
+.hotels .hotel-card .title-head-inside{
+ h4 {
     font-size: 18px;
+}
+h3{
+  font-size: 16px;
+}
+
+}
+.fnt-20 {
+    font-size: 16px;
+}
+.m-p0{
+padding: 0!important;
+}
+.m-m0{
+margin: 0!important;
 }
 }
 

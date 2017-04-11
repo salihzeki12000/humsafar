@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid m-p0">
   <div class="min-hght">
     <div class="relate" ng-class="{'openfilter': isopenfilter}">
       <div class="pt10 pb10 head-title-all">
@@ -21,7 +21,8 @@
       <div class="libro-filter filterclose">
         <form>
           <div class="pt20 pb10 head-title-all bg-white">
-            <div class="pad-btn">
+            <div class="pad-btn m-p0">
+              <div class="container-fluid">
               <div class="row">
                 <div class="col-md-3 col-sm-3">
                   <div class="select-all-made destination-filterscroll" ng-init="viewHotelcity={'outerClass':'outerHotelCity','innerClass':'innerHotelCity'}">
@@ -59,6 +60,7 @@
                     <a ng-click="clearHotel();">Clear All</a>
                   </div>
                 </div>
+              </div>
               </div>
             </div>
           </div>
