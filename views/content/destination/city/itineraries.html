@@ -6,10 +6,10 @@
           <div class="col-md-3">
             <div class="btn-destinationfilter">
               <button class="btn btn-pink" ng-click="openFilter()">
-                <i class="fa fa-filter" aria-hidden="true"></i> 
+                <i class="fa fa-filter" aria-hidden="true"></i>
                 <span class="hidden-xs">
                   Filter
-                  </span> 
+                  </span>
                   </button>
             </div>
           </div>
@@ -65,7 +65,7 @@
             <div class="plr30 ">
               <div class="close-all ">
                 <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
-                <a class="btn btn-pink avenir-roman " ng-click="getCityInfo('itinerary', urlDestinationCity)">Submit</a>
+                <a class="btn btn-pink avenir-roman " ng-click="getCityItiSubmit();">Submit</a>
 
                 <span class="tags avenir-roman" ng-repeat="item in cityItineraryType track by $index">{{item.name | capitalize}} <span ng-click="cityItineraryFilter(item,'cityItineraryType')" id="{{item}}">X</span></span>
                 <span class="tags avenir-roman" ng-repeat="item in cityItineraryBy track by $index">{{item.name | capitalize}} <span ng-click="cityItineraryFilter(item,'cityItineraryBy')">X</span></span>
@@ -198,6 +198,11 @@
           </div>
         </div>
       </div>
+      <!-- pagination loader -->
+      <div class="pagination-loader" ng-if="template.paginationLoader">
+        <img src="img/page.svg" alt="Loading..." width="50px" class="img-responsive m-center">
+      </div>
+      <!-- pagination loader end -->
       <!-- COMMENT LIKE SECTION -->
       <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike' list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
       <div class="backdrop-close" ng-class="{'view-backdrop':viewCardComment==true || viewCardLike==true,'':viewCardComment==false || viewCardLike==false}" ng-click="closeBackDrop();"></div>

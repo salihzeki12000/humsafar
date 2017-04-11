@@ -6,7 +6,7 @@
           <div class="col-sm-3 col-sm-3 col-xs-2">
             <div class="btn-destinationfilter">
               <button class="btn btn-pink" ng-click="openFilter()">
-                <i class="fa fa-filter" aria-hidden="true"></i> 
+                <i class="fa fa-filter" aria-hidden="true"></i>
                <span class="hidden-xs">Filter</span>
             </button>
             </div>
@@ -95,7 +95,7 @@
               <div class="plr30 ">
                 <div class="close-all ">
                   <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
-                  <a class="btn btn-pink avenir-roman" ng-click="getCountryInfo('itinerary',$scope.urlDestinationCountry);">Submit</a>
+                  <a class="btn btn-pink avenir-roman" ng-click="getCountyItiSubmit();">Submit</a>
                   <span class="tags avenir-roman" ng-repeat="item in destinationCityFilter track by $index">{{item.name}}<span ng-click="itineraryFilter(item,'itineraryCity')">X</span></span>
                   <span class="tags avenir-roman" ng-repeat="item in destinationItineraryType track by $index">{{item.name}} <span ng-click="itineraryFilter(item,'itineraryType')">X</span></span>
                   <span class="tags avenir-roman" ng-repeat="item in destinationItineraryBy track by $index">{{item.name}} <span ng-click="itineraryFilter(item,'itineraryBy')">X</span></span>
@@ -231,6 +231,11 @@
           </div>
         </div>
       </div>
+      <!-- pagination loader -->
+      <div class="pagination-loader" ng-if="template.paginationLoader">
+        <img src="img/page.svg" alt="Loading..." width="50px" class="img-responsive m-center">
+      </div>
+      <!-- pagination loader end -->
     </div>
 
     <!-- COMMENT LIKE SECTION -->

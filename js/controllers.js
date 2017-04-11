@@ -2717,7 +2717,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // destination country city end
 
     $scope.getCountryInfo = function (type, urlSlug) {
-      $scope.scroll.busy = false;
       $scope.destinationCityFilterName = _.map($scope.destinationCityFilter, 'name');
       $scope.destinationItineraryTypeName = _.map($scope.destinationItineraryType, 'name');
       $scope.destinationItineraryByName = _.map($scope.destinationItineraryBy, 'name');
@@ -2733,20 +2732,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         sendCityData.type = "mustDo";
       }
       NavigationService.getCountryDestination(sendCityData, function (data) {
+        $scope.scroll.busy = false;
         if(data.value == true){
           $scope.isopenfilter = false;
           if (type == 'itinerary') {
             $scope.countryDestData = data.data;
-            $scope.countryDestIti = [];
-            _.each(data.data.itinerary, function (newData) {
-              newData.user.following = newData.following;
-              if (data.data.itinerary.length == 0) {
-                $scope.scroll.stopCallingApi = true;
-              } else {
-                $scope.countryDestIti.push(newData);
-                console.log($scope.countryDestIti, 'data itinerary wala');
-              }
-            });
+            if (data.data.itinerary.length == 0) {
+              $scope.scroll.stopCallingApi = true;
+            }else {
+              _.each(data.data.itinerary, function (newData) {
+                newData.user.following = newData.following;
+                  $scope.countryDestIti.push(newData);
+                  console.log($scope.countryDestIti, 'data itinerary wala');
+              });
+            }
             TemplateService.title = "Itineraries for " + $scope.countryDestData.name + " - TraveLibro";
           } else {
             $scope.countryDestData = data.data;
@@ -2778,9 +2777,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
 
+    $scope.getCountyItiSubmit = function(){
+      $scope.countryDestIti = [];
+      $scope.pagenumber = 1;
+      $scope.getCountryInfo("itinerary", $scope.urlDestinationCountry);
+    }
+
     $scope.itineraryLoadMore = function () {
       $scope.scroll.busy = true;
       console.log($scope.pagenumber, 'pagenumber');
+      console.log($scope.scroll.stopCallingApi,'stop call country');
       // $scope.getCountryInfo("itinerary",$scope.urlDestinationCountry);
       if ($scope.scroll.stopCallingApi == false) {
         $scope.pagenumber++;
@@ -3677,7 +3683,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.urlDestinationCity = $state.params.url;
     $scope.getCityInfo = function (type, urlSlug) {
-      $scope.scroll.busy = false;
       $scope.citySubTypeDataName = _.map($scope.citySubTypeData,'name');
       $scope.cityBudgetDataName = _.map($scope.cityBudgetData,'name');
       $scope.cityRestaurantCuisineName = _.map($scope.cityRestaurantCuisine,'name');
@@ -3697,19 +3702,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
          sendData.type="mustDo";
       }
       NavigationService.getCityDestination(sendData, function (data) {
+        $scope.scroll.busy = false;
         if(data.value==true){
           $scope.isopenfilter = false;
           if (type === 'itinerary') {
-              $scope.cityDestIti = [];
-            _.each(data.data.itinerary, function (newData) {
-              newData.user.following = newData.following;
-              if (data.data.itinerary.length == 0) {
-                $scope.scroll.stopCallingApi = true;
-              } else {
+            if (data.data.itinerary.length == 0) {
+              $scope.scroll.stopCallingApi = true;
+            }else {
+              _.each(data.data.itinerary, function (newData) {
+                newData.user.following = newData.following;
                 $scope.cityDestIti.push(newData);
                 console.log($scope.cityDestIti, 'city ka itinerary');
-              }
-            })
+              })
+            };
             TemplateService.title = "Travel Itinerary For " + $scope.cityDestData.name + " | TraveLibro"
           } else {
             _.each(data.data.bestTime, function (newVal) {
@@ -3742,6 +3747,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           }
         }
       })
+    };
+
+    $scope.getCityItiSubmit = function(){
+      $scope.cityDestIti = [];
+      $scope.pagenumber = 1;
+      console.log($scope.cityDestIti,'city dest ');
+      $scope.getCityInfo('itinerary', $scope.urlDestinationCity);
+    }
+
+    $scope.cityItineraryLoadMore = function () {
+      $scope.scroll.busy = true;
+      console.log($scope.pagenumber, 'pagenumber');
+      console.log($scope.scroll.stopCallingApi,'stop call city');
+      // $scope.getCountryInfo("itinerary",$scope.urlDestinationCountry);
+      if ($scope.scroll.stopCallingApi == false) {
+        $scope.pagenumber++;
+        $scope.getCityInfo('itinerary', $scope.urlDestinationCity);
+      }
     };
 
     // get booking data
@@ -7117,10 +7140,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.showLikeCommentCard = true;
-    setInterval(function () {
-      $scope.paginationLoader = TemplateService.paginationLoader;
-      console.log($scope.paginationLoader, 'value');
-    }, 300);
+    // setInterval(function () {
+    //   $scope.paginationLoader = TemplateService.paginationLoader;
+    //   console.log($scope.paginationLoader, 'value');
+    // }, 300);
 
     $scope.openThankYouModal = function () {
       $uibModal.open({
@@ -7964,6 +7987,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Itinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.createItinerary = function(status){
+     // $scope.itiType = status;
+     if (!($.jStorage.get("isLoggedIn"))) {
+         $state.go('login');
+      } else {
+        if(status=='detailitinerary'){
+          $state.go('detailitinerary',{
+            'flag':'new',
+             'urlSlug':''
+          });
+        }else {
+          $state.go('quickitinerary',{
+              'flag':'new',
+               'urlSlug':''
+            });
+        }
+      }
+   };
 
   })
 
@@ -10498,14 +10539,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     $scope.customLink = function () {
-      if ((navigator.platform.indexOf("iPhone") != -1) ||
-        (navigator.platform.indexOf("iPod") != -1) ||
-        (navigator.platform.indexOf("iPad") != -1)) {
-        window.open("https://itunes.apple.com/in/app/travelibro/id1056641759");
-      } else {
-        window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
-      }
-    };
+          if ((navigator.platform.indexOf("iPhone") != -1) ||
+            (navigator.platform.indexOf("iPod") != -1) ||
+            (navigator.platform.indexOf("iPad") != -1)) {
+            window.open("https://itunes.apple.com/in/app/travelibro/id1056641759");
+          } else {
+            window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
+          }
+        };
 
   })
 

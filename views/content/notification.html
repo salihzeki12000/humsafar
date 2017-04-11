@@ -1,6 +1,6 @@
 <div class="notification-page">
-  <div class="container" infinite-scroll="loadMoreNotification()" infinite-scroll-disabled="notifyScroll.busy">
-    <div class="row">
+  <div class="container">
+    <div class="row" infinite-scroll="loadMoreNotification()" infinite-scroll-disabled="notifyScroll.busy">
       <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="notify in notificationCard track by $index">
         <!-- Notification Card -->
         <div class="notification-card">
@@ -204,6 +204,9 @@
         <!-- Notification Card End -->
       </div>
       <!-- col-md-3 end -->
+      <div class="pagination-loader" ng-if="template.paginationLoader">
+        <img src="img/page.svg" alt="Loading..." width="50px" class="img-responsive m-center">
+      </div>
     </div>
     <!-- row end -->
   </div>
