@@ -616,6 +616,41 @@
   .quick-itinerary .quick-itinerary-tag, .user-quick-itinerary .quick-itinerary-tag {
     right: 0px;
 }
+//destination bookings
+.destination-hotel-card {
+  .no-booking-found {
+    font-size: 22px;
+    width: 100%;
+    } 
+    .hotel-back-view{
+      min-height: 380px;
+      .tab-content{
+         height: 380px;
+       .scroll-content {
+        height: 320px;
+    .amenities-holder ul li {
+          width: 100%;
+          }
+          .deal-list {
+            table {th,td{
+              min-width: 100px;
+            }
+            }
+            }
+        }
+      }
+      }
+      .score-round-holder {
+        width: 68px;
+        height: 68px;
+      }
+    .chart-type-title {
+    span{
+display: block;
+      }
+    }
+  }
+//destinaiton bookings end
 }
 
 // media query for 991px to 768px end
@@ -2445,6 +2480,9 @@
     height: 35px;
 }
 }
+}
+.hotels .hotel-card .title-head-inside h4 {
+    font-size: 18px;
 }
 }
 
