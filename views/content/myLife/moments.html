@@ -1,7 +1,7 @@
 <div class="profile-main" id="moments">
   <!-- <div class="" ng-include="profile.profileMain"></div> -->
   <div class="moments-main">
-    <div class="container-fluid">
+    <div class="container-fluid m-p0">
       <div class="all-profile-detail">
         <div class="bg-white">
           <!-- tabs -->
@@ -47,7 +47,7 @@
               <div class="moment-all-view" ng-if="momentView == 1 && viewMonth==false" infinite-scroll="getMoreMoments(allMoments)">
                 <!-- empty all view profile user login for first time  -->
                 <div class="empty-moment-all empty-profile-moment text-center" ng-if="allMoments.arr[0].token==-1">
-                  <div class="row">
+                  <div class="row m-m0">
                     <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
                       <h3 class="color-pink empty-title">Unwind​ B​y Rewinding</h3>
                       <p class="empty-descp">Revisit and reminisce the days gone by through brilliant pictures and videos of your travel and local
@@ -97,7 +97,7 @@
                 <!-- empty all view profile user login for first time -->
                 <!-- PRIVATE PROFILE EMPTY SCREEN -->
                 <div class="empty-profile-journey private-accountempty" ng-if="!template.isMine && (userData.following==0 || userData.following==2 ||userData.following==undefined || userData.following==null) && userData.status=='private'">
-                  <div class="row">
+                  <div class="row m-m0">
                     <div class="col-md-offset-2 col-md-8">
                       <div class="private-accountcover text-center">
                         <h3>This account is Private.</h3>

@@ -1634,8 +1634,25 @@ h4{
 
   // EDIT DATE TIME MODAL
     .notify-close{
-        top: 0;
-    }
+            top: -17px;
+            z-index: 999;
+            right: 0;
+            img{
+              max-width: 15px;
+            }
+      }
+      .notify-popup .notify-imgholder{
+        .notify-imgholder {
+              height: auto;
+              overflow: initial;
+              img {
+              height: auto;
+              width: 100%;
+              position: static;
+              @include transform(translate(0));
+            }
+          }
+      } 
     .date-holder input{
       width: 60px;
       padding: 0px 8px;
