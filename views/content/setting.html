@@ -113,7 +113,7 @@
             <div class="setting-main-detail bg-white avenir-roman">
               <!-- profile detail -->
               <div class="profile-detail-main" ng-if="showSetting == 1">
-                <form action="" name='profile' ng-submit="editUserData(userData,1,profile.$valid);">
+                <form name='profile' ng-submit="editUserData(userData,1,profile.$valid);">
                   <div class="profile-photo-sec upload-profile">
                     <label for="profile" class="color-blue">Profile Photo</label>
                     <div class="cropArea relate" ng-show="showImage" id="profile">
@@ -481,9 +481,9 @@
               <div class="problem-detail" ng-if="showSetting == 6">
                 <form name="reportData" ng-hide="showme" method="post">
                   <label for="problem">Report A Problem</label>
-                  <div class="form-group relate">  
+                  <div class="form-group relate">
                   <!--<textarea name="problem" id="problem" class="form-control" placeholder="Comment" ng-model="reportData.problem" required></textarea>-->
-                  <textarea name="problem" id="problem" class="form-control" placeholder="Comment" required></textarea>                  
+                  <textarea name="problem" id="problem" class="form-control" placeholder="Comment" required></textarea>
                   <span ng-show="reportData.$submitted || reportData.problem.$touched">
                       <span ng-show="reportData.problem.$error.required" class="help-inline">Comment is required.</span>
                   </span>
