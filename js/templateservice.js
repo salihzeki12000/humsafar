@@ -34,62 +34,7 @@ templateservicemod.service('TemplateService', function ($http, $state) {
       var promptClickResult = permissionChange.result;
       console.log('Fullscreen Permission Message click result:', promptClickResult);
       if (promptClickResult == 'granted') {
-        // OneSignal.setSubscription(true);
-        // OneSignal.registerForPushNotifications();
-        // OneSignal.getUserId(function (data) {
-        //   console.log(data);
-        //   $http({
-        //     "url": "https://onesignal.com/api/v1/players",
-        //     "method": "POST",
-        //     "data": {
-        //       'app_id': data,
-        //       'device_type': 4
-        //     }
-        //   }).success(function (data) {
-        //     console.log(data);
-        //   });
-        // });
-      }
-    });
-
-    // OneSignal.on('notificationPermissionChange', function (permissionChange) {
-    //   console.log("The user's subscription state is now:", permissionChange.to);
-    //   if (permissionChange.to == 'granted') {
-    //     OneSignal.setSubscription(true);
-    //     // OneSignal.registerForPushNotifications();
-    //     OneSignal.getUserId(function (data) {
-    //       console.log(data);
-    //       $http({
-    //         "url": adminURL + "/user/updateDeviceId",
-    //         "method": "POST",
-    //         "data": {
-    //           'accessToken': $.jStorage.get("accessToken"),
-    //           'deviceId': data
-    //         }
-    //       });
-    //     });
-    //   } else if (permissionChange.to == 'denied') {
-    //     OneSignal.setSubscription(false);
-    //     OneSignal.getUserId(function (data) {
-    //       console.log(data);
-    //       $http({
-    //         "url": adminURL + "/user/updateDeviceId",
-    //         "method": "POST",
-    //         "data": {
-    //           'accessToken': $.jStorage.get("accessToken"),
-    //           'deviceId': data,
-    //           'remove': true
-    //         }
-    //       });
-    //       // NavigationService.disablePushNotification(data);
-    //     });
-    //   }
-    // });
-
-    OneSignal.on('subscriptionChange', function (isSubscribed) {
-      console.log("The user's subscription state is now:", isSubscribed);
-      if (isSubscribed) {
-        // OneSignal.setSubscription(true);
+        OneSignal.setSubscription(true);
         // OneSignal.registerForPushNotifications();
         OneSignal.getUserId(function (data) {
           console.log(data);
@@ -102,7 +47,7 @@ templateservicemod.service('TemplateService', function ($http, $state) {
             }
           });
         });
-      } else {
+      } else if (promptClickResult == 'denied' || promptClickResult == 'default') {
         OneSignal.setSubscription(false);
         OneSignal.getUserId(function (data) {
           console.log(data);
@@ -117,8 +62,76 @@ templateservicemod.service('TemplateService', function ($http, $state) {
           });
           // NavigationService.disablePushNotification(data);
         });
-      };
+      }
     });
+
+    OneSignal.on('notificationPermissionChange', function (permissionChange) {
+      console.log("The user's subscription state is now:", permissionChange.to);
+      if (permissionChange.to == 'granted') {
+        OneSignal.setSubscription(true);
+        // OneSignal.registerForPushNotifications();
+        OneSignal.getUserId(function (data) {
+          console.log(data);
+          $http({
+            "url": adminURL + "/user/updateDeviceId",
+            "method": "POST",
+            "data": {
+              'accessToken': $.jStorage.get("accessToken"),
+              'deviceId': data
+            }
+          });
+        });
+      } else if (permissionChange.to == 'denied' || permissionChange.to == 'default') {
+        OneSignal.setSubscription(false);
+        OneSignal.getUserId(function (data) {
+          console.log(data);
+          $http({
+            "url": adminURL + "/user/updateDeviceId",
+            "method": "POST",
+            "data": {
+              'accessToken': $.jStorage.get("accessToken"),
+              'deviceId': data,
+              'remove': true
+            }
+          });
+          // NavigationService.disablePushNotification(data);
+        });
+      }
+    });
+
+    // OneSignal.on('subscriptionChange', function (isSubscribed) {
+    //   console.log("The user's subscription state is now:", isSubscribed);
+    //   if (isSubscribed) {
+    //     OneSignal.setSubscription(true);
+    //     // OneSignal.registerForPushNotifications();
+    //     OneSignal.getUserId(function (data) {
+    //       console.log(data);
+    //       $http({
+    //         "url": adminURL + "/user/updateDeviceId",
+    //         "method": "POST",
+    //         "data": {
+    //           'accessToken': $.jStorage.get("accessToken"),
+    //           'deviceId': data
+    //         }
+    //       });
+    //     });
+    //   } else {
+    //     OneSignal.setSubscription(false);
+    //     OneSignal.getUserId(function (data) {
+    //       console.log(data);
+    //       $http({
+    //         "url": adminURL + "/user/updateDeviceId",
+    //         "method": "POST",
+    //         "data": {
+    //           'accessToken': $.jStorage.get("accessToken"),
+    //           'deviceId': data,
+    //           'remove': true
+    //         }
+    //       });
+    //       // NavigationService.disablePushNotification(data);
+    //     });
+    //   };
+    // });
 
     OneSignal.addListenerForNotificationOpened(function (data) {
       console.log("Received NotificationOpened:");
@@ -136,6 +149,7 @@ templateservicemod.service('TemplateService', function ($http, $state) {
           $state.go('notification');
           break;
         case 'postLike':
+        case 'photoLike':
         case 'postFirstTime':
         case 'postComment':
         case 'postMentionComment':
@@ -146,28 +160,28 @@ templateservicemod.service('TemplateService', function ($http, $state) {
           })
           break;
         case 'itineraryComment':
-          break;
         case 'itineraryLike':
-          break;
         case 'itineraryMentionComment':
+          $state.go('userquickitinerary', {
+            'urlSlug': data.data.userTo.urlSlug,
+            'id': data.data.data.urlSlug
+          })
           break;
         case 'journeyComment':
-          break;
         case 'journeyLike':
-          break;
         case 'journeyMentionComment':
+          $state.go('ongojourney', {
+            'urlSlug': data.data.userTo.urlSlug,
+            'id': data.data.data.urlSlug
+          })
           break;
-
         case 'photoComment':
-          if (notification.data.type == 'travel-life') {} else {}
-          break;
         case 'photoMentionComment':
-          if (notification.data.type == 'travel-life') {} else {}
+          $state.go('single-notification', {
+            'urlSlug': data.data.userFrom.urlSlug,
+            'postId': data.data.data.post
+          })
           break;
-        case 'photoLike':
-          if (notification.data.type == 'travel-life') {} else {}
-          break;
-
         default:
           break;
       }
@@ -197,20 +211,27 @@ templateservicemod.service('TemplateService', function ($http, $state) {
         return;
       }
       OneSignal.isPushNotificationsEnabled(function (isEnabled) {
+        console.log("isPushNotificationsEnabled", isEnabled);
         if (isEnabled) {
           // The user is subscribed to notifications
           // Don't show anything
+          OneSignal.setSubscription(true);
         } else {
           OneSignal.getNotificationPermission(function (permission) {
             console.log("Site Notification Permission", permission);
-            if (permission == 'default') {
-              OneSignal.setSubscription(false);
+            if (permission == 'default' || permission == "granted") {
+              console.log("Inside Default");
+              OneSignal.setSubscription(true);
               // OneSignal.showHttpPrompt();
               OneSignal.registerForPushNotifications({
                 modalPrompt: true
               });
               OneSignal.showHttpPermissionRequest();
               // event.preventDefault();
+            } else if (permission == "granteds") {
+              console.log("Inside Granted");
+            } else if (permission == "denied") {
+              console.log("Inside Denied");
             }
           });
         }
