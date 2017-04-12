@@ -1053,7 +1053,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var getOneJourneyCallback = function (journeys) {
       $scope.journey = journeys;
       var postsWithLatLng = [];
-      postsWithLatLng = _.filter($scope.journey.post,  'latlong');
+      postsWithLatLng = _.filter($scope.journey.post,  'latlong');
       _.each(postsWithLatLng, function (n, $index) {
         if (n && n.latlong && n.latlong.lat && n.latlong.long) {
           centers[$index] = {
