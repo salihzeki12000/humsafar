@@ -613,7 +613,7 @@
   .city-accordion-back .panel-title a a.journey-head {
     padding: 15px 20px;
   }
-  .quick-itinerary .quick-itinerary-tag, .user-quick-itinerary .quick-itinerary-tag {
+ .user-quick-itinerary .quick-itinerary-tag {
     right: 0px;
 }
 //destination bookings
@@ -903,6 +903,7 @@ display: block;
   .ongo-card-holder {
     width: 100%;
     margin-top: 20px;
+    padding: 0 15px;
   }
   .journey-start>img {
     width: 45px;
@@ -2498,6 +2499,15 @@ padding: 0!important;
 }
 .m-m0{
 margin: 0!important;
+}
+.destination-content .head-title-all p {
+    color: #fff;
+    .pr20{
+      padding-right: 5px;
+    }
+}
+.outer-report .notify-close {
+    top: 0px;
 }
 }
 

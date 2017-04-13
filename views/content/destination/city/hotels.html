@@ -13,7 +13,7 @@
           </div>
           <div class="col-md-6 col-sm-6 col-xs-10">
             <h4 class="text-center fnt-24 color-white">TraveLibro Recommended Hotels</h4>
-            <p class="text-center avenir-roman m-clear"><span class="pr20">$$$ - Luxury</span> <span class="pr20">$$ - Mid Range    </span> <span>$ - Place To Crash</span></p>
+            <p class="text-center avenir-roman m-clear m-white"><span class="pr20">$$$ - Luxury</span> <span class="pr20">$$ - Mid Range    </span> <span>$ - Place To Crash</span></p>
           </div>
         </div>
       </div>
@@ -65,10 +65,10 @@
             </div>
           </div>
           <div class="pt10 pb10 head-title-all bg-grey mb20 ">
-            <div class="plr30 ">
-              <div class="close-all ">
-                <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
-                <a class="btn btn-pink avenir-roman " ng-click="getCityInfo('hotel',urlDestinationCity)">Submit</a>
+            <div class="plr30 m-p0">
+              <div class="close-all">
+                <a class="btn btn-pink avenir-roman" ng-click="openFilter() ">X Close</a>
+                <a class="btn btn-pink avenir-roman" ng-click="getCityInfo('hotel',urlDestinationCity)">Submit</a>
 
                 <span class="tags avenir-roman" ng-repeat="item in citySubTypeData track by $index">{{item.name | capitalize}} <span ng-click="cityHotelFilter(item,'categoryType')">X</span></span>
                 <span class="tags avenir-roman" ng-repeat="item in cityBudgetData track by $index">{{item.name | capitalize}} <span ng-click="cityHotelFilter(item,'categoryBudget')">X</span></span>

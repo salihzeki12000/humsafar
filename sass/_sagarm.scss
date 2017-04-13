@@ -4551,6 +4551,7 @@ q {
   border-radius: 0 0 5px 5px;
   position: absolute;
   left: 0;
+  z-index: 5;
   background-color: #fff;
   overflow-y: auto;
 
@@ -4570,8 +4571,8 @@ q {
   border-radius: 100%;
   background-color: $brand-pink;
   color: #fff;
-  font-size: 10px;
-  line-height: 20px;
+  font-size: 10px !important;
+  line-height: 20px !important;
   text-align: center;
   vertical-align: middle;
   @extend .avenir-heavy;

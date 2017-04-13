@@ -842,7 +842,7 @@
   }
 
   .destination .destination-nav {
-    padding: 10px 5px;
+    padding: 10px;
   }
 
   .enquirytab-btn {
@@ -1634,9 +1634,9 @@ h4{
 
   // EDIT DATE TIME MODAL
     .notify-close{
-            top: -17px;
-            z-index: 999;
-            right: 0;
+                    top: 7px;
+                    z-index: 999;
+                    right: 10px;
             img{
               max-width: 15px;
             }
@@ -1889,6 +1889,11 @@ h4{
     .destination-main {
     top: 38px;
   }
+}
+// modal 
+.modal-dialog .modal-content {
+    top: 0;
+    @include transform(translateY(0));
 }
 }
 // media query for 767px to 480px end
@@ -2547,7 +2552,7 @@ h4{
 
   .view-photo-sec,
   .view-video-sec {
-    padding: 25px 10px;
+    padding: 50px 10px 25px 10px;
   }
   // EDIT ACTIVITY MODAL END
   // EDIT JOURNEY NAME MODAL

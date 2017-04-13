@@ -1,5 +1,3 @@
-<div class="container-fluid">
-  <div class="activity-main min-hght">
     <div class="relate " ng-class="{'openfilter': isopenfilter}">
       <div class="pt20 pb10 head-title-all">
         <div class="row m-clear">
@@ -62,19 +60,22 @@
             </div>
           </div>
           <div class="pt10 pb10 head-title-all bg-grey mb20 ">
-            <div class="plr30 ">
+            <div class="container-fluid">
+            <div class="plr30 m-p0">
               <div class="close-all ">
                 <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
                 <a class="btn btn-pink avenir-roman " ng-click="getCityItiSubmit();">Submit</a>
-
                 <span class="tags avenir-roman" ng-repeat="item in cityItineraryType track by $index">{{item.name | capitalize}} <span ng-click="cityItineraryFilter(item,'cityItineraryType')" id="{{item}}">X</span></span>
                 <span class="tags avenir-roman" ng-repeat="item in cityItineraryBy track by $index">{{item.name | capitalize}} <span ng-click="cityItineraryFilter(item,'cityItineraryBy')">X</span></span>
               </div>
+            </div>
             </div>
           </div>
         </form>
       </div>
     </div>
+<div class="container-fluid">
+  <div class="activity-main min-hght">
     <div class="activity-container destination-itinerary-holder">
       <div class="" masonry preserve-order infinite-scroll="cityItineraryLoadMore();" infinite-scroll-disabled="scroll.busy">
         <div class="row">
