@@ -2567,41 +2567,106 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     setInterval(function () {
       $scope.searchLoader = TemplateService.searchLoader;
     }, 300);
+    $scope.scroll = {
+      busy: false,
+      stopCallingApi: false
+    }
+    $scope.pagenumber = 1;
+    $scope.destinationPagination = false;
     $scope.viewListByKey = "A";
     $scope.countryDestList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     $scope.i = 0;
-    $scope.callCountry = function (search, searchText) {
+    $scope.showCountry = function (search, searchText) {
       $scope.i++;
-      $scope.destinationList = [];
+      $scope.scroll.busy = false;
       NavigationService.getDestination({
         search: search,
         searchText: searchText,
         count: $scope.i
       }, function (data) {
         if ($scope.i === data.count) {
-          $scope.destinationList = data.data;
-          $scope.i = 0;
+          if(data.data.length==0){
+            $scope.scroll.stopCallingApi = true;
+          }else {
+            _.each(data.data, function(newData){
+              $scope.destinationList.push(newData);
+              $scope.i = 0;
+            })
+          }
         }
       });
     }
-    $scope.callCountry("a", "");
+    $scope.callCountry = function(search,searchText){
+      NavigationService.getDestination({
+        search: search,
+        searchText: searchText
+       }, function (data) {
+          if(data.value==true){
+            $scope.scroll.busy = false;
+            $scope.destinationPagination = false;
+            if (data.data.length==0) {
+              $scope.scroll.stopCallingApi = true;
+            }else {
+              _.each(data.data, function(newData){
+                $scope.destinationList.push(newData);
+              })
+            }
+          }
+      })
+    }
+    $scope.callCountry($scope.countryDestList[0], "");
+    // get more list destination
+    $scope.getMoreDestination = function(){
+      $scope.destinationPagination = true;
+      console.log($scope.countryDestList[$scope.pagenumber]);
+      if ($scope.pagenumber>25) {
+        $scope.scroll.stopCallingApi = true;
+        console.log($scope.scroll.stopCallingApi);
+        $scope.destinationPagination =  false;
+      }else {
+        $scope.scroll.busy = true;
+        if($scope.scroll.stopCallingApi== false ){
+          $scope.pagenumber++;
+          $scope.callCountry($scope.countryDestList[$scope.pagenumber-1],"");
+        }
+        // if($scope.scroll.busy==false){
+        //   $scope.scroll.busy = true;
+        //   if($scope.scroll.stopCallingApi== false ){
+        //     $scope.pagenumber++;
+        //     $scope.callCountry($scope.countryDestList[$scope.pagenumber-1],"");
+        //   }
+        // }
+
+      }
+    }
+    // get more list destination end
     $scope.searchDestination = function (searchVal, searchType) {
+      $scope.destinationList = [];
       switch (searchType) {
         case 'searchDest':
           console.log(searchType, 'hk');
           if (searchVal === "") {
-            $scope.callCountry("a", "");
+            // $scope.destinationList = [];
+            $scope.showCountry("a", "");
             $scope.viewListByKey = "A";
           } else {
             if (searchVal.length > 2) {
               $scope.viewListByKey = searchVal.charAt(0);
-              $scope.callCountry(searchVal, searchVal);
+              $scope.showCountry(searchVal, searchVal);
+              $scope.scroll.stopCallingApi = true;
             }
           }
           break;
         case 'clickDest':
           if (searchVal) {
+            console.log(searchVal,'new Val');
+            var getIndexVal = _.findIndex($scope.countryDestList,function(index){
+              return index == searchVal;
+            });
+            console.log(getIndexVal,'get index');
+            $scope.destinationPagination = true;
             $scope.viewListByKey = searchVal.charAt(0);
+            $scope.pagenumber = getIndexVal + 1;
             $scope.callCountry(searchVal, searchVal);
           } else {
             $scope.callCountry("a", "");
@@ -7978,7 +8043,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('ItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('ItineraryCtrl', function ($scope,$state, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -9416,7 +9481,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           document.getElementById(elemId).value = "";
         }
       }
-      LikesAndComments.postComment("itinerary", itinerary.uniqueId, itinerary._id, comment, hashTag, additionalId, callback);
+      LikesAndComments.postComment(itinerary.type, itinerary.uniqueId, itinerary._id, comment, hashTag, additionalId, callback);
     };
     //post quick-itinerary comments ends
 

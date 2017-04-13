@@ -43,7 +43,7 @@
           <h4 class="fnt-42 brdbtm alpha-color mt-clear text-uppercase">{{viewListByKey}}</h4>
         </div>
         <div class="destination-holder main-destination-page relate pt20 pr20">
-          <div class="row">
+          <div class="row" infinite-scroll="getMoreDestination()" infinite-scroll-disabled="scroll.busy">
             <div class="col-md-4 col-sm-6"  ng-repeat="dest in destinationList track by $index">
               <div class="city-view" ng-if="dest.isCity==true">
                 <div class="img-holder relate" ng-click="countryView(dest.urlSlug,dest.isCity);">
@@ -75,6 +75,9 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="pagination-loader" ng-if="destinationPagination">
+            <img src="img/page.svg" alt="Loading..." width="50px" class="img-responsive m-center">
           </div>
           <div class="alphabhates right-end" scrolladdclass>
             <ul class="list-unstyle">
