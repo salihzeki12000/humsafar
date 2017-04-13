@@ -291,6 +291,7 @@
                     <div class="pull-right">
                       <button type="submit" class="btn btn-pink btn-more" ng-class="{'disabled' : !profile.$valid }">Save</button>
                     </div>
+                    <span ng-if="saveSetting" class="pull-right setting-save-load"><img src="img/default.svg" alt="" width="25px" class="img-responsive"></span>
                   </div>
                 </form>
               </div>
@@ -479,11 +480,11 @@
               <!-- privacy policy end -->
               <!-- report a problem -->
               <div class="problem-detail" ng-if="showSetting == 6">
-                <form name="reportData" ng-hide="showme" method="post">
+                <form name="reportData" ng-hide="showme" ng-submit="saveReport(settingReport)">
                   <label for="problem">Report A Problem</label>
                   <div class="form-group relate">
                   <!--<textarea name="problem" id="problem" class="form-control" placeholder="Comment" ng-model="reportData.problem" required></textarea>-->
-                  <textarea name="problem" id="problem" class="form-control" placeholder="Comment" required></textarea>
+                  <textarea ng-model="settingReport" name="problem" id="problem" class="form-control" placeholder="Comment" required></textarea>
                   <span ng-show="reportData.$submitted || reportData.problem.$touched">
                       <span ng-show="reportData.problem.$error.required" class="help-inline">Comment is required.</span>
                   </span>
@@ -491,8 +492,9 @@
                   <div class="clearfix mt20">
                     <div class="pull-right">
                       <!--<button class="btn btn-pink btn-more" type="submit" ng-click="showme=true">Submit</button>-->
-                      <button class="btn btn-pink btn-more" type="submit" ng-click="showme=true">Submit</button>
+                      <button class="btn btn-pink btn-more" type="submit">Submit</button>
                     </div>
+                    <span ng-if="saveSetting" class="pull-right setting-save-load"><img src="img/default.svg" alt="" width="25px" class="img-responsive"></span>
                   </div>
                 </form>
                   <div class="outer-report-cont" ng-show="showme">
