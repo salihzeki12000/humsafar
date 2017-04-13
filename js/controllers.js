@@ -6612,7 +6612,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('SettingCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, DataUriToBlob, $stateParams, $state) {
+    .controller('SettingCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, DataUriToBlob, $stateParams, $state) {
     //Used to name the .html file
     $scope.profile = $.jStorage.get("profile");
     $scope.userData = _.clone($scope.profile);
@@ -6622,6 +6622,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Setting");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.saveSetting = false;
 
     $scope.showSetting = 1;
     var url = $stateParams.path;
@@ -6992,12 +6993,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // page 2 integration ends
 
     $scope.editUserData = function (userData, status, valid) {
+      $scope.saveSetting = true;
       console.log(userData, 'user data', status, 'status');
       // cfpLoadingBar.start();
       console.log(valid);
       if (valid) {
         NavigationService.editUserData(userData, status, function (data) {
           if (data.value) {
+            $scope.saveSetting = false;
             NavigationService.getProfile($.jStorage.get("profile").urlSlug, function (data, status) {
               if (data.data._id) {
                 $.jStorage.set("isLoggedIn", true);
@@ -7040,8 +7043,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       });
     }
-  })
 
+    // REPORT PROBLEM
+    $scope.saveReport = function(settingReport){
+      NavigationService.ReportProblems({
+        // userId: $scope.userData._id,
+        problem: settingReport
+      },function(data){
+        if (data.value == true){
+          $scope.showme = true;
+        }else {
+          $scope.showme = false;
+        }
+      })
+    };
+    // REPORT PROBLEM END
+  })
 
   .controller('BlogCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file

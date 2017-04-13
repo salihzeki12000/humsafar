@@ -270,9 +270,10 @@
                   <!-- <img ng-src="{{country.countryId.countryCoverPhoto|uploadpath}}" alt="" class="img-responsive country-img">  -->
                   <div class="list-info">
                     <div class="clearfix">
-                      <div class="pull-left">
-                        <h4 class="avenir-heavy">{{country.countryId.name}} <span ng-if="!(country.year && (country.year===null || country.year===undefined || country.year===-1))">({{country.year}})</span></h4>
-                        <span ng-if="country.year && (country.year===null || country.year===undefined || country.year===-1)">(----)</span></h4>
+                      <div class="pull-left" ng-init="isEmpty=(country.year==-1)?true:((!country.year)?true:false)">
+                        <h4 class="avenir-heavy">{{country.countryId.name}} <span ng-if="!isEmpty">( {{country.year}} )</span>
+                        <span ng-if="isEmpty">( - )</span>
+                      </h4>
                       </div>
                       <div class="pull-right">
                         <div class="bucket-flag">
