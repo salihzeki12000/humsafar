@@ -460,7 +460,7 @@ a.color-white {
       @include transform-style(preserve-3d);
       @include transition(all 300ms linear);
       @include transform(rotateY(0deg));
-      min-height: 385px;
+      min-height: 400px;
       max-height: 400px;
       background-position: center center !important;
       background-size: cover !important;

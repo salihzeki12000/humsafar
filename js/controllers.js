@@ -7226,7 +7226,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   $scope.paginationLoader = TemplateService.paginationLoader;
     //   console.log($scope.paginationLoader, 'value');
     // }, 300);
-
+    $scope.noActivity = false;
     $scope.openThankYouModal = function () {
       $uibModal.open({
         templateUrl: "views/modal/report.html",
@@ -7246,8 +7246,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       scroll.scrollBusy = false;
       if (data.length == 0) {
         scroll.stopCallingApi = true;
+        $scope.noActivity = true;
       } else {
         $scope.activities = data;
+        $scope.noActivity = false;
         scroll.pageNo = 1;
       }
     }, function (data) {
@@ -13483,6 +13485,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var makeNotifyString = function () {
       _.each($scope.notificationCard, function (notification) {
         switch (notification.type) {
+          case 'userWelcome':
+            notification.notifyString = '<span class="text-justify"><span class="block color-blue avenir-heavy">Welcome to TraveLibro!</span>TraveLibro lets you capture your travel journeys live, local life activities and document past journeys. It also allows you to share these activities with other travellers to inspire their wanderlust. Lastly, it also its a great way to archive your personal history by reliving your moments, activities and reviews.</span>'
+            break;
           case 'journeyRequest':
             if (notification.userFrom.gender == 'male') {
               notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> wants to tag you in his <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
