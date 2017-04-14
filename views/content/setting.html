@@ -11,7 +11,7 @@
                 <div class="profile-heading clearfix">
                   <i class="fa fa-chevron-right pull-right"></i>
                   <div class="setting-prof-imgholder">
-                    <img ng-src="{{userData.profilePicture|uploadpath:60:64}}" alt="" class="img-responsive">
+                    <img ng-src="{{userData.profilePicture|uploadpath:60:64:'cover'}}" alt="" class="img-responsive">
                   </div>
                   <div class="profile-detail inline-block v-top">
                     <h4 class="color-blue m-clear">{{userData.name}}</h4>
@@ -126,7 +126,7 @@
                     </div>
                     <div class="upload-section text-center" ng-hide="showImage">
                       <div>
-                        <img ng-src="{{userData.profilePicture|uploadpath:200:200}}" alt="" class="m-center img-responsive">
+                        <img ng-src="{{userData.profilePicture|uploadpath:200:200:'cover'}}" alt="" class="m-center img-responsive">
                         <!--<img ng-src="img/upload-icon.jpg" alt="" class="m-center img-responsive">-->
                         <!--<p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
                         <span class="block mt10 color-grey avenir-roman">-or-</span>-->
