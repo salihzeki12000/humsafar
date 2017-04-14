@@ -9471,6 +9471,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
     //get quick-itinerary details ends
 
+    // route to user profile
+    $scope.routeProfile = function(){
+      if($scope.itinerary.itineraryBy == "TravelAgent"){
+        $state.go('comingsoonpage',{
+          'url': 'coming-soon'
+        })
+      }else {
+        $state.go('mylife',{
+          'urlSlug' : $itinerary.user.urlSlug
+        })
+      }
+    }
+    // route to user profile  end
+
     // ISMINE FUNCTION
     if ($.jStorage.get("isLoggedIn")) {
       $scope.isLoggedIn = true;
@@ -9805,6 +9819,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     });
     //get quick-itinerary details ends
+
+    // route to user profile
+    $scope.routeProfile = function(){
+      if($scope.itinerary.itineraryBy == "TravelAgent"){
+        $state.go('comingsoonpage',{
+          'url': 'coming-soon'
+        })
+      }else {
+        $state.go('mylife',{
+          'urlSlug' : $itinerary.user.urlSlug
+        })
+      }
+    }
+    // route to user profile  end
 
     //like-unlike itinerary starts
 

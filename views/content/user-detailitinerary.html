@@ -10,10 +10,10 @@
     </div>
     <div class="user-banner-detail full-width text-center">
       <div class="user-tag color-white">
-        <div class="user-imgholder pointer" ui-sref="mylife({'urlSlug':itinerary.user.urlSlug})">
+        <div class="user-imgholder pointer" ng-click="routeProfile();">
           <img ng-src="{{itinerary.user.profilePicture|uploadpath:115:125:'cover'}}" alt="" class="img-responsive">
         </div>
-        <h4 class="user-name avenir-roman pointer" ui-sref="mylife({'urlSlug':itinerary.user.urlSlug})">{{itinerary.user.firstName}}</h4>
+        <h4 class="user-name avenir-roman pointer" ng-click="routeProfile();">{{itinerary.user.firstName}}</h4>
       </div>
       <!-- <div class="journey-day">
         <span class="color-white avenir-roman">Jan 2016</span>
