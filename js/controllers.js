@@ -13486,7 +13486,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       _.each($scope.notificationCard, function (notification) {
         switch (notification.type) {
           case 'userWelcome':
-            notification.notifyString = '<span class="text-justify"><span class="block color-blue avenir-heavy">Welcome to TraveLibro!</span>TraveLibro lets you capture your travel journeys live, local life activities and document past journeys. It also allows you to share these activities with other travellers to inspire their wanderlust. Lastly, it also its a great way to archive your personal history by reliving your moments, activities and reviews.</span>'
+            notification.notifyString = '<span class="text-justify"><span class="block color-blue avenir-heavy">Welcome to TraveLibro!</span>TraveLibro lets you capture your travel journeys live, local life activities and document past journeys. It also allows you to share these activities with other travellers to inspire their wanderlust. Lastly, its a great way to archive your personal history by reliving your moments, activities and reviews.</span>'
             break;
           case 'journeyRequest':
             if (notification.userFrom.gender == 'male') {
