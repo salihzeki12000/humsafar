@@ -134,7 +134,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'ContactCtrl'
     })
-    .state('booking', {
+    .state('booking-notRequired', {
       url: "/bookings-notRequired",
       templateUrl: "views/template.html",
       controller: 'BookingCtrl'
