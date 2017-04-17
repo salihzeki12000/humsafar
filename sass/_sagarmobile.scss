@@ -1633,7 +1633,7 @@ h4{
   // EDIT JOURNEY NAME MODAL END
 
   // EDIT DATE TIME MODAL
-    .outer-report .notify-close,.notify-close{
+    .outer-report .notify-close,.edit-kindof-popup-close,.notify-close{
                     top: 7px !important;
                     z-index: 999;
                     right: 10px;
@@ -2288,8 +2288,12 @@ h4{
 
   .journey-tag-holder h3 {
     font-size: 18px;
+    padding: 10px 40px 7px 0;
+    text-align: right;
   }
-
+.share-trip-journey {
+    margin-top: 0;
+}
   .journey-cost span {
     margin: 0;
   }
@@ -2628,8 +2632,11 @@ h4{
   // DESTINATION BOOKING PAGE  END
 
   // PROFILE LIST PAGE
-  .bucket-visited-holder input{
-    width: 290px;
+  .bucket-visited-holder{
+    display: block;
+    input{
+    width: 100%;
+  }
   }
   // PROFILE LIST PAGE END
 }

@@ -27,7 +27,7 @@
 @media screen and (max-width: 1200px) {
   //header
   .user-detail .list-inline>li {
-    padding: 0 8px;
+    padding: 0 5px;
   }
   .socialize-holder ul {
     display: block;
@@ -651,6 +651,13 @@ display: block;
     }
   }
 //destinaiton bookings end
+
+//Modal
+.travel-bg{
+  .modal-dialog{
+    width:100%;
+  }
+}
 }
 
 // media query for 991px to 768px end
@@ -1078,6 +1085,7 @@ display: block;
     margin: 0 0 0 10px;
   }
   .share-trip-journey {
+    margin-top: 5px;
     margin-right: 15px;
     vertical-align: middle;
     span {
@@ -1519,9 +1527,9 @@ display: block;
   .ngsb-wrap .ngsb-scrollbar .ngsb-thumb-container {
     display: none;
   } //scroll unshow ended
-  .comment-like-notify {
-    padding: 0;
-  }
+  // .comment-like-notify {
+  //   padding: 0;
+  // }
   .review-travel-view .list-travel-view .review-backimgholder {
     width: 44%;
     top: 8%;
@@ -1777,17 +1785,6 @@ display: block;
         padding: 12px;
 }
  }
- .trip-list{
-       @include transition(all ease 300ms);
-  &.travel-out {
-    height: 0;
-    overflow: hidden;
-}
-  &.travel-in {
-    height: 59px;
-    overflow: hidden;
-}
-}
 
 .trip-descp-itinerary #mceu_2 {
     padding: 5px 0px;
@@ -2400,9 +2397,9 @@ display: block;
   } // setting end
   // profile list
   .list-profile-tab {
-    ul {
-      width: 482px;
-    }
+    // ul {
+    //   width: 482px;
+    // }
     li {
       margin-right: 10px;
     }
@@ -2411,7 +2408,7 @@ display: block;
     }
   }
   .profile-tab-main {
-    padding: 60px 0 0;
+    padding: 40px 0 0;
   }
   .following-holder {
     margin: 0;
@@ -2439,7 +2436,7 @@ display: block;
     }
   }
   .notify-main .comment-sec .comment-container {
-    width: 85%;
+    width: 100%;
     margin-left: 2px;
   }
   .video-gif-journey a.volume-off-on-mylife {
@@ -2519,6 +2516,34 @@ margin: 0!important;
 }
 .outer-report .notify-close {
     top: 0px;
+}
+.travel-star-rating .list-inline > li, .local-star-rating .list-inline > li {
+    padding: 0 5px;
+}
+.moment-localimgholder .img-backholder img {
+    padding: 8px 0px 0 0;
+}
+.quick-itinerary .date-quick-itinerary, .user-quick-itinerary .date-quick-itinerary {
+    right: 100px;
+    width: 95px;
+}
+.select-itinerary-type{
+  figure{
+    figcaption{
+      font-size: 11px;
+    }
+  }
+}
+ .trip-list{
+       @include transition(all ease 300ms);
+  &.travel-out {
+    height: 0;
+    overflow: hidden;
+}
+  &.travel-in {
+    height: 59px;
+    overflow: hidden;
+}
 }
 }
 
