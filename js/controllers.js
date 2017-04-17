@@ -338,51 +338,51 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('BookingCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
-    //Used to name the .html file
+  // .controller('BookingCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+  //   //Used to name the .html file
 
-    console.log("Testing Consoles");
+  //   console.log("Testing Consoles");
 
-    $scope.template = TemplateService.changecontent("booking");
-    $scope.menutitle = NavigationService.makeactive("Bookings");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-    $scope.animationsEnabled = true;
-    if (typeof $.fn.fullpage.destroy == 'function') {
-      $.fn.fullpage.destroy('all');
-    }
-    $scope.bookingnav = [{
-      name: "Flights",
-      classis: "active",
-      link: "http://flights.travelibro.com/en-GB/flights/#/result?originplace=&destinationplace=",
-      target: "_blank"
-    }, {
-      name: "Hotels",
-      classis: "active",
-      link: "https://travelibro.com/bookings/hotels",
-      target: "_self"
-    }, {
-      name: "Vacation Rentals",
-      classis: "active",
-      link: "https://travelibro.com/bookings/vacation-rentals",
-      target: "_self"
-    }, {
-      name: "Homestays",
-      classis: "active",
-      link: "https://travelibro.com/bookings/home-stays",
-      target: "_self"
-    }, {
-      name: "Car Rentals",
-      classis: "active",
-      link: "https://flights.travelibro.com/en-GB/carhire/#/result?originplace=&destinationplace=",
-      target: "_blank"
-    }, {
-      name: "Tours & Excursions",
-      classis: "active",
-      link: "https://travelibro.com/bookings/tours-and-excursions",
-      target: "_self"
-    }]
-  })
+  //   $scope.template = TemplateService.changecontent("booking");
+  //   $scope.menutitle = NavigationService.makeactive("Bookings");
+  //   TemplateService.title = $scope.menutitle;
+  //   $scope.navigation = NavigationService.getnav();
+  //   $scope.animationsEnabled = true;
+  //   if (typeof $.fn.fullpage.destroy == 'function') {
+  //     $.fn.fullpage.destroy('all');
+  //   }
+  //   $scope.bookingnav = [{
+  //     name: "Flights",
+  //     classis: "active",
+  //     link: "http://flights.travelibro.com/en-GB/flights/#/result?originplace=&destinationplace=",
+  //     target: "_blank"
+  //   }, {
+  //     name: "Hotels",
+  //     classis: "active",
+  //     link: "https://travelibro.com/bookings/hotels",
+  //     target: "_self"
+  //   }, {
+  //     name: "Vacation Rentals",
+  //     classis: "active",
+  //     link: "https://travelibro.com/bookings/vacation-rentals",
+  //     target: "_self"
+  //   }, {
+  //     name: "Homestays",
+  //     classis: "active",
+  //     link: "https://travelibro.com/bookings/home-stays",
+  //     target: "_self"
+  //   }, {
+  //     name: "Car Rentals",
+  //     classis: "active",
+  //     link: "https://flights.travelibro.com/en-GB/carhire/#/result?originplace=&destinationplace=",
+  //     target: "_blank"
+  //   }, {
+  //     name: "Tours & Excursions",
+  //     classis: "active",
+  //     link: "https://travelibro.com/bookings/tours-and-excursions",
+  //     target: "_self"
+  //   }]
+  // })
   .controller('AdvertiseCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 

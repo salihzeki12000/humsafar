@@ -134,11 +134,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'ContactCtrl'
     })
-    .state('booking-notRequired', {
-      url: "/bookings-notRequired",
-      templateUrl: "views/template.html",
-      controller: 'BookingCtrl'
-    })
+    // .state('booking-notRequired', {
+    //   url: "/bookings-notRequired",
+    //   templateUrl: "views/template.html",
+    //   controller: 'BookingCtrl'
+    // })
     .state('advertise', {
       url: "/advertise-with-us",
       templateUrl: "views/template.html",
