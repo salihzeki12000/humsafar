@@ -25,7 +25,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $anchorScroll.yOffset = 50; // always scroll by 50 extra pixels
   }])
 
-  .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar) {
+  .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar,$location) {
     //Used to name the .html file
     cfpLoadingBar.start();
     $scope.template = TemplateService.changecontent("home");
@@ -33,6 +33,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = "TraveLibro - Your Travel Life | Local Life";
     $scope.navigation = NavigationService.getnav();
     var swiper = {};
+    $scope.bookingLink= function(){
+      // $location.href = "https://travelibro.com/bookings/";
+      window.location.href = "https://travelibro.com/bookings/";
+    }
     $scope.accessToken = $.jStorage.get("accessToken");
     $scope.videoPlay = [{
       videourl: "",
