@@ -4109,6 +4109,22 @@ header {
       right: 8px;
     }
   }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $brand-light-grey;
+  }
+
+  .ui-select-bootstrap .ui-select-choices-row.active>span{
+    background-color: $brand-lighter-grey;
+  }
 }
 
 .travel-blogger {
@@ -12309,8 +12325,8 @@ ng-map {
   }
 }
 // single post local and travel
-.single-local-post {
-  .post-main {
+.single-local-post, .single-journey-post {
+  .post-main, .ongo-journey-card {
     width: 550px;
     margin: 25px auto;
     zoom: 0.8;

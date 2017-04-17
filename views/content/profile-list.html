@@ -136,18 +136,6 @@
     <div class="container-fluid">
       <!-- following tab -->
       <div class="follower-tab-main" ng-if="activeMenu == 'following'">
-        <!-- PRIVATE PROFILE EMPTY SCREEN -->
-        <div class="empty-profile-journey private-accountempty" ng-if="!template.isMine && (userData.following==0 || userData.following==2 ) && userData.status=='private'">
-          <div class="row">
-            <div class="col-md-offset-2 col-md-8">
-              <div class="private-accountcover text-center">
-                <h3>This account is Private.</h3>
-                <p>Follow to view their Travel and Local Life.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- PRIVATE PROFILE EMPTY SCREEN END -->
         <div class="following-container" ng-repeat="list in followingList | filter:searchCard.name">
           <div class="following-holder">
             <div class="follow-imgholder pointer" ui-sref="mylife({'urlSlug':list.urlSlug})">

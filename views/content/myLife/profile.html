@@ -24,25 +24,29 @@
     <div class="user-travel-detail relate">
       <div class="scroll-user-travel">
         <ul>
-          <li class="text-center pointer" ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'following'})">
+          <li class="text-center pointer" ng-click="profileListRedirect('following',activeUrlSlug)" >
+            <!-- ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'following'})" -->
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.following_count}}</span>
               <span class="block avenir-roman color-blue mt5">Following</span>
             </div>
           </li>
-          <li class="text-center pointer" ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'followers'})">
+          <li class="text-center pointer" ng-click="profileListRedirect('followers',activeUrlSlug)">
+            <!-- ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'followers'})" -->
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.followers_count}}</span>
               <span class="block avenir-roman color-blue mt5">Followers</span>
             </div>
           </li>
-          <li class="text-center pointer" ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'countries-visited'})">
+          <li class="text-center pointer" ng-click="profileListRedirect('countries-visited',activeUrlSlug)">
+            <!-- ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'countries-visited'})" -->
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.countriesVisited_count}}</span>
               <span class="block avenir-roman color-blue mt5">Countries Visited</span>
             </div>
           </li>
-          <li class="text-center pointer" ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'bucket-list'})">
+          <li class="text-center pointer" ng-click="profileListRedirect('bucket-list',activeUrlSlug)">
+            <!-- ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'bucket-list'})" -->
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.bucketList_count}}</span>
               <span class="block avenir-roman color-blue mt5">Bucket List</span>

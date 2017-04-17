@@ -53,7 +53,7 @@
               <!-- review all view -->
               <div class="see-review" ng-if="reviewView == 1" infinite-scroll="getAllReviews(reviewAll)">
                 <!-- review empty all view profile user login for first time  -->
-                <div class="empty-review-all empty-profile-review text-center" ng-if="reviewAll.arr.length==0">
+                <div class="empty-review-all empty-profile-review text-center" ng-if="reviewAll.arr.length==0 && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
                   <div class="row">
                     <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
                       <h3 class="color-pink empty-title">Relive Y​our Storyline</h3>
@@ -145,7 +145,7 @@
               <!-- review travel-life-->
               <div class="review-travel-view" ng-if="reviewView == 2">
                 <!-- review empty travel view profile user login for first time  -->
-                <div class="empty-review-travel empty-profile-review text-center" ng-if="reviewTravelLife.arr==0">
+                <div class="empty-review-travel empty-profile-review text-center" ng-if="reviewTravelLife.arr==0 && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
                   <div class="row">
                     <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
                       <h3 class="color-pink empty-title">The World I​s Your Oyster</h3>
@@ -253,7 +253,7 @@
               <!-- review local-life-->
               <div class="review-travel-view review-local-view" ng-if="reviewView == 3">
                 <!-- review empty local view profile user login for first time  -->
-                <div class="empty-review-local empty-profile-review text-center" ng-if="reviewLocalLife.arr.length==0">
+                <div class="empty-review-local empty-profile-review text-center" ng-if="reviewLocalLife.arr.length==0 && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
                   <div class="row">
                     <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
                       <h3 class="color-cyan empty-title">A Touch Of Your Daily Dose</h3>

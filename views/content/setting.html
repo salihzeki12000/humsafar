@@ -368,7 +368,8 @@
                 <!-- ideal holiday type end -->
                 <div class="clearfix mt20">
                   <div class="pull-right">
-                    <button class="btn btn-pink btn-more" ng-click="editUserData(travelConfig, 2,true)" ;>Save</button>
+                    <button class="btn btn-pink btn-more" ng-click="editUserData(travelConfig, 2,true)";>Save</button>
+                    <span ng-if="saveSetting" class="pull-right setting-save-load"><img src="img/default.svg" alt="" width="25px" class="img-responsive"></span>
                   </div>
                 </div>
               </div>
@@ -472,7 +473,8 @@
                     and Reviews.</p>
                   <div class="clearfix mt20">
                     <div class="pull-right">
-                      <button class="btn btn-pink btn-more" ng-click="editUserData(userData.status, 5,true)" ;>Save</button>
+                      <button class="btn btn-pink btn-more" ng-click="editUserData(userData.status, 5,true)";>Save</button>
+                      <span ng-if="saveSetting" class="pull-right setting-save-load"><img src="img/default.svg" alt="" width="25px" class="img-responsive"></span>
                     </div>
                   </div>
                 </form>
