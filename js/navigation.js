@@ -159,7 +159,7 @@ var navigationservice = angular.module('navigationservice', [])
         }).success(callback).error(errCallback);
       },
       getAllCities: function (formData, callback, errCallback) {
-        TravelibroService.post(adminURL + "/city/locationSearch", formData).success(callback).error(errCallback);
+        TravelibroService.post(adminURL + "/city/locationSearch", formData,true).success(callback).error(errCallback);
       },
       searchCityByCountry: function (formData, callback) {
         var arr = {};
@@ -171,7 +171,7 @@ var navigationservice = angular.module('navigationservice', [])
           url: adminURL + "/city/searchCity",
           data: formData,
           method: "POST"
-        }).success(callback).error(function (data) {
+        },true).success(callback).error(function (data) {
           console.log(data);
         });
       },
