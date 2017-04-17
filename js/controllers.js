@@ -485,13 +485,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     $scope.searchByKey = function (searchCity) {
-      cfpLoadingBar.start();
       NavigationService.getAllCities({
         "search": searchCity
       }, getAllCities, function (err) {
         console.log(err);
       });
-      cfpLoadingBar.complete();
     };
     //End-Of get all the cities from database
 
@@ -6431,45 +6429,48 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
 
-    // $scope.likePost = function (uniqueId, _id) {
-    //   console.log($scope.post.likeDone + "this call is from ongojourney.html");
-    //   $scope.post.likeDone = !$scope.post.likeDone;
-    //   if ($scope.post.likeDone) {
-    //     if ($scope.post.likeCount == undefined) {
-    //       $scope.post.likeCount = 1;
-    //     } else {
-    //       $scope.post.likeCount = $scope.post.likeCount + 1;
-    //     }
-    //     LikesAndComments.likeUnlike("post", "like", uniqueId, _id, null)
-    //   } else {
-    //     $scope.post.likeCount = $scope.post.likeCount - 1;
-    //     LikesAndComments.likeUnlike("post", "unlike", uniqueId, _id, null)
-    //   }
-    // };
-
-    // $scope.followFollowing = function (user) {
-    //   // console.log(user.following, user._id, user.name);
-    //   if (user.following) {
-    //     LikesAndComments.unFollowUser(user._id, function (data) {
-    //       console.log(data);
-    //       if (data.value) {
-    //         user.following = false;
-    //       } else {
-    //         console.log(data.data);
-    //       }
-    //     })
-    //   } else {
-    //     LikesAndComments.followUser(user._id, user.name, function (data) {
-    //       console.log(data);
-    //       if (data.value) {
-    //         user.following = true;
-    //       } else {
-    //         console.log(data.data);
-    //       }
-    //     });
-    //   }
-    // }
-    // local life end
+    // PROFILE LIST REDIRECT
+   $scope.profileListRedirect = function(pageStyle,activeUrlSlug) {
+     console.log('bantas');
+     if( TemplateService.isMine || ($scope.userData.following==1 && $scope.userData.status=='private') || $scope.userData.status=='public' ){
+       console.log('santa mein hai');
+       if (pageStyle == 'following'){
+         console.log('pageStyle following');
+         $state.go('ProfileList', {
+           'urlSlug': activeUrlSlug,
+           'active': 'following'
+         });
+       } else if (pageStyle == 'followers'){
+         console.log('pageStyle followers');
+         $state.go('ProfileList', {
+           'urlSlug': activeUrlSlug,
+           'active': 'followers'
+         });
+       } else if(pageStyle == 'countries-visited'){
+         console.log('pageStyle countries');
+         $state.go('ProfileList', {
+           'urlSlug': activeUrlSlug,
+           'active': 'countries-visited'
+         });
+       } else if(pageStyle == 'bucket-list') {
+         console.log('pageStyle bucket');
+         $state.go('ProfileList', {
+           'urlSlug': activeUrlSlug,
+           'active': 'bucket-list'
+         });
+       } else {
+         $state.go('ProfileList', {
+           'urlSlug': activeUrlSlug,
+           'active': 'following'
+         });
+       }
+     } else{
+       $location.hash('journeys');
+       anchorSmoothScroll.scrollTo('journeys');
+       // console.log('karan arjun console mein aayenge');
+     }
+   };
+   // PROFILE LIST REDIRECT END
   })
 
   .controller('JourneyCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal) {
@@ -6488,13 +6489,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
 
 
-    // $(document).ready(function() {
-    //   setTimeout(function() {
-    //     $('html, body').animate({
-    //       scrollTop: $("#tabs").offset().top
-    //     }, 1000);
-    //   }, 100);
-    // });
     $scope.buildNow = function () {
       $scope.$broadcast('rebuild:me');
     }
@@ -6505,23 +6499,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // console.log('Scrollbar show');
     });
 
-    $scope.bucketList = [{
-      countryName: "United States Of America"
-    }, {
-      countryName: "Germany"
-    }, {
-      countryName: "United Kingdom"
-    }, {
-      countryName: "Switzerland"
-    }, {
-      countryName: "Australia"
-    }, {
-      countryName: "India"
-    }, {
-      countryName: "Italy"
-    }, {
-      countryName: "Canada"
-    }, ];
 
     $scope.data = {
       'GB': {
@@ -7066,122 +7043,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Blog");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
-    $scope.blogPost = [{
-      img: "img/blog/blog-post.jpg",
-      postType: "Luxury",
-      title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post2.jpg",
-      postType: "Luxury",
-      title: "Best cycling tours in the world",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post3.jpg",
-      postType: "Road Trip",
-      title: "Ten Gorgeous European Summer Island Holidays",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post4.jpg",
-      postType: "Adventure",
-      title: "Museums And Cathedrals To Cover In Eastern Europe",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post.jpg",
-      postType: "Luxury",
-      title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post2.jpg",
-      postType: "Luxury",
-      title: "Best cycling tours in the world",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post3.jpg",
-      postType: "Road Trip",
-      title: "Ten Gorgeous European Summer Island Holidays",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post4.jpg",
-      postType: "Adventure",
-      title: "Museums And Cathedrals To Cover In Eastern Europe",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post.jpg",
-      postType: "Luxury",
-      title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post2.jpg",
-      postType: "Luxury",
-      title: "Best cycling tours in the world",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post3.jpg",
-      postType: "Road Trip",
-      title: "Ten Gorgeous European Summer Island Holidays",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post4.jpg",
-      postType: "Adventure",
-      title: "Museums And Cathedrals To Cover In Eastern Europe",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post4.jpg",
-      postType: "Romance",
-      title: "Museums And Cathedrals To Cover In Eastern Europe",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }];
-
-    $scope.popularBlog = [{
-      img: "img/blog/popular-blog.jpg",
-      descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO",
-      postType: "Luxury",
-      postPink: true
-    }, {
-      img: "img/blog/popular-blog1.jpg",
-      descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO",
-      postType: "Luxury",
-      postPink: false
-    }, {
-      img: "img/blog/popular-blog2.jpg",
-      descp: "CHIC AND CHEERFUL: 10 OFFICEHOLIDAY PARTY OUTFIT IDEAS",
-      postType: "Luxury",
-      postPink: true
-    }, {
-      img: "img/blog/popular-blog1.jpg",
-      descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO"
-    }, {
-      img: "img/blog/popular-blog2.jpg",
-      descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO"
-    }, ];
   })
 
   .controller('BlogDetailCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -7679,20 +7540,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.viewDropdown = {
       'showDropdown': false
     }
-
-    // // ISMINE FUNCTION
-    // if ($.jStorage.get("isLoggedIn")) {
-    //   $scope.isLoggedIn = true;
-    //   if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
-    //     $scope.isMine = true;
-    //   } else {
-    //     $scope.isMine = false;
-    //   }
-    // } else {
-    //   $scope.isLoggedIn = false;
-    //   $scope.isMine = false;
-    // }
-    // // ISMINE FUNCTION END
 
     if ($.jStorage.get("activeUrlSlug") != "" && $.jStorage.get("activeUrlSlug") != null) {
       $scope.activeUrlSlug = $.jStorage.get("activeUrlSlug");
@@ -13662,10 +13509,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //update notifiction status end
     // PAGINATION FOR INFINITE SCROLL
     $scope.getNotification = function (pageNo) {
-      $scope.notifyScroll.busy = false;
       NavigationService.notificationWeb({
         pagenumber: pageNo
       }, function (data) {
+        $scope.notifyScroll.busy = false;
         if (data.data.length == 0) {
           $scope.notifyScroll.stopCallingApi = true;
         } else {
