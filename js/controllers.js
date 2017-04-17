@@ -33,11 +33,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = "TraveLibro - Your Travel Life | Local Life";
     $scope.navigation = NavigationService.getnav();
     var swiper = {};
+    $scope.accessToken = $.jStorage.get("accessToken");
     $scope.bookingLink= function(){
-      // $location.href = "https://travelibro.com/bookings/";
       window.location.href = "https://travelibro.com/bookings/";
     }
-    $scope.accessToken = $.jStorage.get("accessToken");
     $scope.videoPlay = [{
       videourl: "",
       vimeourl: "",
@@ -181,6 +180,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.animationsEnabled = true;
     $scope.formData = {};
 
+    $scope.bookingLink= function(){
+      window.location.href = "https://travelibro.com/bookings/";
+    }
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
     }
@@ -10245,6 +10247,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
     $scope.accessToken = $.jStorage.get("accessToken");
+    $scope.bookingLink= function(){
+      window.location.href = "https://travelibro.com/bookings/";
+    }
   })
 
   .controller('TermsConditionsCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife, OnGoJourney) {

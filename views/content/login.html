@@ -186,8 +186,8 @@
           <a ui-sref="destination" class="color-white">Destinations</a>
         </li>
         <li>
-                <a href="https://travelibro.com/bookings/{{'?accessToken=' + accessToken}}" ng-if="accessToken" class="color-white">Bookings</a>
-                <a href="https://travelibro.com/bookings/"  ng-if="!accessToken" class="color-white">Bookings</a>
+                <!--<a href="https://travelibro.com/bookings/{{'?accessToken=' + accessToken}}" ng-if="accessToken" class="color-white">Bookings</a>-->
+                <a ng-click="bookingLink();"  class="color-white">Bookings</a>
         </li>
         <li>
           <a ui-sref="popularitinerary" class="color-white">Itineraries</a>
