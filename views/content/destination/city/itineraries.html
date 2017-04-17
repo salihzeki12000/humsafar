@@ -16,51 +16,53 @@
           </div> -->
         </div>
       </div>
-      <div class="libro-filter filterclose">
+    <div class="libro-filter filterclose">
+      <div class="container-fluid">
         <form>
           <div class="pt20 pb10 head-title-all fliter-min-hght bg-white">
-            <div class="pad-btn">
-              <div class="row">
-                <div class="col-md-3 col-sm-3">
-                  <div class="select-all-made destination-filterscroll" ng-init="viewCityItiType={'outerClass':' itiTypeOuter','innerClass':'itiTypeInner'}">
-                    <input type="type" placeholder="Type" ng-model="cityItiType" class="form-control itiTypeOuter" ng-click="editOption(viewCityItiType,'itiTypeOuter','itiTypeInner')">
-                    <div class="destination-filterdrop itiTypeInner" ng-show="viewCityItiType.backgroundClick;">
-                      <ul>
-                        <li ng-repeat="type in cityType track by $index">
-                          <div class="custom-checkbox">
-                            <input type="checkbox" id="{{type.name}}" class="city-type" ng-click="cityItineraryFilter(type,'cityItineraryType')" ng-model="type.checked">
-                            <label for="{{type.name}}">{{type.name}}</label>
-                          </div>
-                        </li>
-                      </ul>
+            <div class="container-fluid">
+              <div class="pad-btn">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3">
+                    <div class="select-all-made destination-filterscroll" ng-init="viewCityItiType={'outerClass':' itiTypeOuter','innerClass':'itiTypeInner'}">
+                      <input type="type" placeholder="Type" ng-model="cityItiType" class="form-control itiTypeOuter" ng-click="editOption(viewCityItiType,'itiTypeOuter','itiTypeInner')">
+                      <div class="destination-filterdrop itiTypeInner" ng-show="viewCityItiType.backgroundClick;">
+                        <ul>
+                          <li ng-repeat="type in cityType track by $index">
+                            <div class="custom-checkbox">
+                              <input type="checkbox" id="{{type.name}}" class="city-type" ng-click="cityItineraryFilter(type,'cityItineraryType')" ng-model="type.checked">
+                              <label for="{{type.name}}">{{type.name}}</label>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-md-3 col-sm-3">
-                  <div class="select-all-made destination-filterscroll" ng-init="viewItiBy={'outerClass':'itiByOuter','innerClass':'itiByInner'}">
-                    <input type="type" placeholder="By" ng-model="cityItiBy" ng-click="editOption(viewItiBy,'itiByOuter','itiByInner')" class="form-control itiByOuter">
-                    <div class="destination-filterdrop itiByInner" ng-show="viewItiBy.backgroundClick">
-                      <ul>
-                        <li ng-repeat="by in cityByIti track by $index">
-                          <div class="custom-checkbox">
-                            <input type="checkbox" id="{{by.name}}" ng-model="by.checked" ng-click="cityItineraryFilter(by,'cityItineraryBy')">
-                            <label for="{{by.name}}">{{by.name}}</label>
-                          </div>
-                        </li>
-                      </ul>
+                  <div class="col-md-3 col-sm-3">
+                    <div class="select-all-made destination-filterscroll" ng-init="viewItiBy={'outerClass':'itiByOuter','innerClass':'itiByInner'}">
+                      <input type="type" placeholder="By" ng-model="cityItiBy" ng-click="editOption(viewItiBy,'itiByOuter','itiByInner')" class="form-control itiByOuter">
+                      <div class="destination-filterdrop itiByInner" ng-show="viewItiBy.backgroundClick">
+                        <ul>
+                          <li ng-repeat="by in cityByIti track by $index">
+                            <div class="custom-checkbox">
+                              <input type="checkbox" id="{{by.name}}" ng-model="by.checked" ng-click="cityItineraryFilter(by,'cityItineraryBy')">
+                              <label for="{{by.name}}">{{by.name}}</label>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-md-6 col-sm-3 ">
-                  <div class="txt-clear text-right">
-                    <a ng-click="clearCityItinerary();">Clear All</a>
+                  <div class="col-md-6 col-sm-3 ">
+                    <div class="txt-clear text-right">
+                      <a ng-click="clearCityItinerary();">Clear All</a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="pt10 pb10 head-title-all bg-grey mb20 ">
-            <div class="container-fluid">
             <div class="plr30 m-p0">
               <div class="close-all ">
                 <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
@@ -69,11 +71,11 @@
                 <span class="tags avenir-roman" ng-repeat="item in cityItineraryBy track by $index">{{item.name | capitalize}} <span ng-click="cityItineraryFilter(item,'cityItineraryBy')">X</span></span>
               </div>
             </div>
-            </div>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
+  </div>
 <div class="container-fluid">
   <div class="activity-main min-hght">
     <div class="activity-container destination-itinerary-holder">

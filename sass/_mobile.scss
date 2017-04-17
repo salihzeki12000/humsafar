@@ -1602,7 +1602,6 @@ display: block;
     padding-right: 20px;
     .modal-dialog {
       .musto-thumbnail {
-        width: 98%;
         width: 100%;
         top: 0;
         left: 0;
@@ -1618,7 +1617,16 @@ display: block;
             width: 100%;
           }
         }
+        .flexslider .flex-direction-nav a:before{
+              transform: translateY(-25%);
+        }
       }
+    }
+    .destination-desc-modal{
+          padding: 10px 10px 0;
+          p{
+            margin-bottom: 5px;
+          }
     }
   }
   .destination-desc-modal {
@@ -2504,6 +2512,9 @@ margin: 0!important;
     color: #fff;
     .pr20{
       padding-right: 5px;
+    }
+    span{
+      display: inline-block;
     }
 }
 .outer-report .notify-close {

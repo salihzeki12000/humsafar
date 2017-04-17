@@ -1633,8 +1633,8 @@ h4{
   // EDIT JOURNEY NAME MODAL END
 
   // EDIT DATE TIME MODAL
-    .notify-close{
-                    top: 7px;
+    .outer-report .notify-close,.notify-close{
+                    top: 7px !important;
                     z-index: 999;
                     right: 10px;
             img{
@@ -1886,9 +1886,9 @@ h4{
       .input-search .input-group {
     margin-top: 10px;
         }
-    .destination-main {
-    top: 38px;
-  }
+  //   .destination-main {
+  //   top: 38px;
+  // }
 }
 // modal 
 .modal-dialog .modal-content {
