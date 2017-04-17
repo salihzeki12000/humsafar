@@ -1063,7 +1063,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             "lng": parseFloat(n.latlong.long)
           };
         } else {
-          alert("no latlong found");
+          // alert("no latlong found");
         }
       });
       if (journeys && journeys.location && journeys.location.lat) {
@@ -1073,7 +1073,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
         centers.unshift(obj);
       } else {
-        alert("Location of Banner not found");
+        // alert("Location of Banner not found");
       }
       console.log(centers);
       initMap();
