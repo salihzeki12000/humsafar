@@ -255,7 +255,7 @@
   //header
   .user-detail .list-inline {
     li {
-      padding: 1px;
+      padding: 0px;
       a {
         font-size: 12px;
       }
@@ -663,6 +663,12 @@ display: block;
 width: 100%;
 text-align: center;
   }
+}
+.popular-blogger .socialize-holder {
+    text-align: center;
+}
+.destination-featured {
+    padding: 20px 10px;
 }
 }
 
