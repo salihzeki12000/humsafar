@@ -1,4 +1,6 @@
-    <div class="relate " ng-class="{'openfilter': isopenfilter}">
+    <div class="container-fluid m-p0">
+        <div class="min-hght">
+    <div class="relate zindex2" ng-class="{'openfilter': isopenfilter}" style="z-index: 2;">
       <div class="pt20 pb10 head-title-all">
         <div class="row m-clear">
           <div class="col-md-3">
@@ -17,11 +19,10 @@
         </div>
       </div>
     <div class="libro-filter filterclose">
-      <div class="container-fluid">
         <form>
-          <div class="pt20 pb10 head-title-all fliter-min-hght bg-white">
-            <div class="container-fluid">
-              <div class="pad-btn">
+          <div class="pt20 pb10 head-title-all bg-white">
+              <div class="pad-btn m-plr0">
+                <div class="container-fluid">
                 <div class="row">
                   <div class="col-md-3 col-sm-3">
                     <div class="select-all-made destination-filterscroll" ng-init="viewCityItiType={'outerClass':' itiTypeOuter','innerClass':'itiTypeInner'}">
@@ -59,11 +60,8 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="pt10 pb10 head-title-all bg-grey mb20 ">
-            <div class="plr30 m-p0">
+                          <div class="pt10 pb10 head-title-all bg-grey mb20 ">
+            <div class="plr30 m-plr0">
               <div class="close-all ">
                 <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
                 <a class="btn btn-pink avenir-roman " ng-click="getCityItiSubmit();">Submit</a>
@@ -72,11 +70,13 @@
               </div>
             </div>
           </div>
-        </div>
+              </div>
+              </div>
+          </div>
+
       </form>
-    </div>
   </div>
-<div class="container-fluid">
+    </div>
   <div class="activity-main min-hght">
     <div class="activity-container destination-itinerary-holder">
       <div class="" masonry preserve-order infinite-scroll="cityItineraryLoadMore();" infinite-scroll-disabled="scroll.busy">
@@ -205,11 +205,13 @@
       <div class="pagination-loader" ng-if="template.paginationLoader">
         <img src="img/page.svg" alt="Loading..." width="50px" class="img-responsive m-center">
       </div>
-      <!-- pagination loader end -->
+ 
+    </div>
+  </div>
+</div>
+</div>
+     <!-- pagination loader end -->
       <!-- COMMENT LIKE SECTION -->
       <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike' list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
       <div class="backdrop-close" ng-class="{'view-backdrop':viewCardComment==true || viewCardLike==true,'':viewCardComment==false || viewCardLike==false}" ng-click="closeBackDrop();"></div>
       <!-- COMMENT LIKE SECTION END -->
-    </div>
-  </div>
-</div>

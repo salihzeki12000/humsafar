@@ -61,28 +61,28 @@
                   </div>
                 </div>
               </div>
-              </div>
-            <div class="pt10 pb10 head-title-all bg-grey mb20 ">
-            <div class="plr30 m-p0">
-              <div class="close-all">
-                <a class="btn btn-pink avenir-roman" ng-click="openFilter() ">X Close</a>
-                <a class="btn btn-pink avenir-roman" ng-click="getCityInfo('hotel',urlDestinationCity)">Submit</a>
+              <div class="pt10 pb10 head-title-all bg-grey mb20 ">
+                <div class="plr30 m-p0">
+                  <div class="close-all">
+                    <a class="btn btn-pink avenir-roman" ng-click="openFilter() ">X Close</a>
+                    <a class="btn btn-pink avenir-roman" ng-click="getCityInfo('hotel',urlDestinationCity)">Submit</a>
 
-                <span class="tags avenir-roman" ng-repeat="item in citySubTypeData track by $index">{{item.name | capitalize}} <span ng-click="cityHotelFilter(item,'categoryType')">X</span></span>
-                <span class="tags avenir-roman" ng-repeat="item in cityBudgetData track by $index">{{item.name | capitalize}} <span ng-click="cityHotelFilter(item,'categoryBudget')">X</span></span>
+                    <span class="tags avenir-roman" ng-repeat="item in citySubTypeData track by $index">{{item.name | capitalize}} <span ng-click="cityHotelFilter(item,'categoryType')">X</span></span>
+                    <span class="tags avenir-roman" ng-repeat="item in cityBudgetData track by $index">{{item.name | capitalize}} <span ng-click="cityHotelFilter(item,'categoryBudget')">X</span></span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+              </div>
             </div>
           </div>
 
         </form>
       </div>
     </div>
-    <div class="destination-featured plr30">
+    <div class="destination-featured plr30 m-plr0">
       <div class="hotels">
-        <div class="row">
-          <div class="col-md-4 col-sm-6 col-xs-12 mb20" ng-repeat="hotels in cityDestData.hotel">
+        <div class="row m-m0">
+          <div class="col-md-4 col-sm-6 col-xs-12 m-p0 mb20" ng-repeat="hotels in cityDestData.hotel">
             <div class="hotel-card">
               <div class="brdbtm">
                 <div class="title-head-inside">
