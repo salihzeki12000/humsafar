@@ -2023,17 +2023,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.paginationLoader = TemplateService.paginationLoader;
     }, 300);
     $scope.getPopularBlogger = function (pageNo) {
-      $scope.scroll.busy = false;
       NavigationService.popularBlogger({
         pagenumber: pageNo
       }, function (data) {
+        $scope.scroll.busy = false;
         if (data.data.length == 0) {
           $scope.scroll.stopCallingApi = true;
         } else {
           _.each(data.data, function (newArr) {
             $scope.popularBloggerData.push(newArr);
           })
-          $scope.scroll.busy = false;
         }
       });
     };
@@ -2043,7 +2042,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // $scope.pagenumber++;
       console.log($scope.pagenumber, 'pagenum yo');
       $scope.scroll.busy = true;
-      if ($scope.scroll.stopCallingApi == false && $scope.scroll.busy == false) {
+      if ($scope.scroll.stopCallingApi == false) {
         $scope.getPopularBlogger(++$scope.pagenumber);
       }
     };
@@ -2116,17 +2115,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   $scope.paginationLoader=TemplateService.paginationLoader;
     // },300);
     $scope.getPopularIternary = function (pageNo) {
-      $scope.scroll.busy = true;
       NavigationService.popularItinerary({
         pagenumber: pageNo
       }, function (data) {
+        $scope.scroll.busy = false;
         if (data.data.length == 0) {
           $scope.scroll.stopCallingApi = true;
         } else {
           _.each(data.data, function (newArr) {
             $scope.popularIternaryData.push(newArr);
           });
-          $scope.scroll.busy = false;
         }
         console.log(data);
       });
@@ -2134,11 +2132,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.getPopularIternary($scope.pagenumber);
 
     $scope.getMoreItinerary = function () {
-
+      $scope.scroll.busy = true;
       console.log('jhjljlf');
       // $scope.pagenumber++;
       console.log($scope.pagenumber, 'pagenum yo');
-      if ($scope.scroll.stopCallingApi == false && $scope.scroll.busy == false) {
+      if ($scope.scroll.stopCallingApi == false) {
         $scope.getPopularIternary(++$scope.pagenumber);
       }
     };
@@ -2348,23 +2346,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.paginationLoader = TemplateService.paginationLoader;
     }, 300);
     $scope.getPopularJourney = function (pageNo) {
-      $scope.scroll.busy = false;
       NavigationService.popularJourney({
         pagenumber: pageNo
       }, function (data) {
-        $scope.scroll.busy = true;
-        _.each(data.data, function (n) {
-          n.user.following = n.following;
-        })
+        $scope.scroll.busy = false;
         if (data.data.length == 0) {
           $scope.scroll.stopCallingApi = true;
         } else {
           _.each(data.data, function (newArr) {
             $scope.popularJourneyData.push(newArr);
+            newArr.user.following = newArr.following;
           })
-          $scope.scroll.busy = false;
+          // $scope.scroll.busy = false;
         }
-
+        // $scope.scroll.busy = true;
+        // _.each(data.data, function (n) {
+        //   n.user.following = n.following;
+        // })
       });
     };
     $scope.getPopularJourney($scope.pagenumber);
@@ -2373,7 +2371,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.scroll.busy = true;
       // $scope.pagenumber++;
       console.log($scope.pagenumber, 'pagenum yo');
-      if ($scope.scroll.stopCallingApi == false && $scope.scroll.busy == false) {
+      if ($scope.scroll.stopCallingApi == false) {
         $scope.getPopularJourney(++$scope.pagenumber);
       }
     };
@@ -12234,821 +12232,619 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   })
 
   .controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
-    $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
-    $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-    $scope.oneAtATime = true;
+      $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
+      $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
+      TemplateService.title = $scope.menutitle;
+      $scope.navigation = NavigationService.getnav();
+      $scope.oneAtATime = true;
 
-    // on load modal
-    // $(window).load(function(){
-    //   $('#getModal').modal('show');
-    // });
-    // on load modal end
+      // on load modal
+      // $(window).load(function(){
+      //   $('#getModal').modal('show');
+      // });
+      // on load modal end
 
-    // ADD BUTTTON BACKDROP AND CLICK
+      // ADD BUTTTON BACKDROP AND CLICK
 
-    $scope.showItinerary = false;
-    $scope.addHomeBackdrop = "";
-    $scope.addItinerary = function () {
-      // console.log("click");
-      if ($scope.showItinerary == false) {
-        $scope.showItinerary = true;
-        $scope.addHomeBackdrop = "backdrop-addhome";
-      } else {
-        $scope.showItinerary = false;
-        $scope.addHomeBackdrop = "";
-      }
-    };
-    // ADD BUTTTON BACKDROP AND CLICK END
-
-    // agent add photo edit
-    $scope.agentPhotos = [{
-      agentImg: "img/ongojourney/winter.jpg"
-    }, {
-      agentImg: "img/ongojourney/fire.jpg"
-    }, {
-      agentImg: "img/ongojourney/jitu-sofa.jpg"
-    }, {
-      agentImg: "img/ongojourney/andrea-santa.jpg"
-    }, {
-      agentImg: "img/ongojourney/window.jpg"
-    }];
-    $scope.agentPhotos = _.chunk($scope.agentPhotos, 4);
-    for (i = 0; i < $scope.agentPhotos.length; i++) {
-      $scope.agentPhotos[i] = _.chunk($scope.agentPhotos[i], 2);
-    }
-    $scope.index = -1;
-    $scope.putCaptionAgent = function (index) {
-      if ($scope.index == index) {
-        $scope.index = -1;
-      } else {
-        $scope.index = index;
-      }
-    }
-
-    //photo caption textarea counter
-    $scope.$on('$viewContentLoaded', function () {
-      $timeout(function () {
-        $('#captionArea').keyup(updateCount);
-        $('#captionArea').keydown(updateCount);
-        $('#remainCaption').text(0 + '/150');
-
-        function updateCount() {
-          var count = $('#captionArea').val().length;
-          $('#remainCaption').text(count + '/150');
+      $scope.showItinerary = false;
+      $scope.addHomeBackdrop = "";
+      $scope.addItinerary = function () {
+        // console.log("click");
+        if ($scope.showItinerary == false) {
+          $scope.showItinerary = true;
+          $scope.addHomeBackdrop = "backdrop-addhome";
+        } else {
+          $scope.showItinerary = false;
+          $scope.addHomeBackdrop = "";
         }
-      }, 200);
-    });
+      };
+      // ADD BUTTTON BACKDROP AND CLICK END
 
-    //photo caption textarea counter end
-    // agent add photo edit end
-
-    //lead monitor accordion
-    $scope.leadMonAgent = [{
-      leadStatus: 'new',
-      leadImg: 'img/follower.jpg',
-      leadName: 'Andrea Christina',
-      leadDate: '02/12/2016',
-      leadDestination: 'India',
-      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-      leadPhone: '91961845656',
-      leadMail: 'leads@leads.com',
-      leadItinerary: 'Incredible India'
-    }, {
-      leadStatus: 'actioned',
-      leadImg: 'img/follower.jpg',
-      leadName: 'Andrea Christina',
-      leadDate: '02/12/2016',
-      leadDestination: 'India',
-      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-      leadPhone: '91961845656',
-      leadMail: 'leads@leads.com',
-      leadItinerary: 'Incredible India'
-    }, {
-      leadStatus: 'new',
-      leadImg: 'img/follower.jpg',
-      leadName: 'Andrea Christina',
-      leadDate: '02/12/2016',
-      leadDestination: 'India',
-      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-      leadPhone: '91961845656',
-      leadMail: 'leads@leads.com',
-      leadItinerary: 'Incredible India'
-    }, {
-      leadStatus: 'actioned',
-      leadImg: 'img/follower.jpg',
-      leadName: 'Andrea Christina',
-      leadDate: '02/12/2016',
-      leadDestination: 'India',
-      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-      leadPhone: '91961845656',
-      leadMail: 'leads@leads.com',
-      leadItinerary: 'Incredible India'
-    }, {
-      leadStatus: 'new',
-      leadImg: 'img/follower.jpg',
-      leadName: 'Andrea Christina',
-      leadDate: '02/12/2016',
-      leadDestination: 'India',
-      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-      leadPhone: '91961845656',
-      leadMail: 'leads@leads.com',
-      leadItinerary: 'Incredible India'
-    }];
-    //lead monitor accordion end
-
-    //scroll change
-    $(window).scroll(function () {
-      var scroll = $(window).scrollTop();
-      //console.log(scroll);
-      if (scroll >= 370) {
-        //console.log('a');
-        $(".agent-home-nav").addClass("change-blue");
-      } else {
-        //console.log('a');
-        $(".agent-home-nav").removeClass("change-blue");
-      }
-    });
-    //scroll change end
-
-    //status character counter
-    $scope.$on('$viewContentLoaded', function () {
-      gulp
-      $timeout(function () {
-        $('#postStatus').keyup(updateCount);
-        $('#postStatus').keydown(updateCount);
-        $('#postcount').text(0 + '/350');
-
-        function updateCount() {
-          var count = $('#postcount').val().length;
-          $('#postcount').text(count + '/350');
+      //scroll change
+      $(window).scroll(function () {
+        var scroll = $(window).scrollTop();
+        //console.log(scroll);
+        if (scroll >= 370) {
+          //console.log('a');
+          $(".agent-home-nav").addClass("change-blue");
+        } else {
+          //console.log('a');
+          $(".agent-home-nav").removeClass("change-blue");
         }
-      }, 100);
-    });
-    //status character counter end
-
-    // tab change
-    var allagthome = ["views/content/agent/agt-home/agthome-itinerary.html", "views/content/agent/agt-home/agthome-tourpackages.html", "views/content/agent/agt-home/agthome-photovideos.html", "views/content/agent/agt-home/agthome-testimonialreviews.html",
-      "views/content/agent/agt-home/agthome-travelactivity.html",
-      "views/content/agent/agt-home/agthome-leadmonitor.html", "views/content/agent/agt-home/agthome-analytics.html",
-      "views/content/agent/agt-home/agthome-aboutus.html"
-    ];
-    $scope.agthome = {
-      innerView: allagthome[0]
-    };
-    // change url
-    $scope.agthomeoptions = {};
-    $scope.agthomeoptions.active = "";
-    $scope.viewTab = 1;
-    switch ($state.params.name) {
-      case "agthome-itinerary":
-        $scope.agthome.innerView = allagthome[0];
-        $scope.agthomeoptions.active = "agthome-itinerary";
-        break;
-      case "agthome-tourpackages":
-        $scope.agthome.innerView = allagthome[1];
-        $scope.agthomeoptions.active = "agthome-tourpackages";
-        break;
-      case "agthome-photovideos":
-        $scope.agthome.innerView = allagthome[2];
-        $scope.agthomeoptions.active = "agthome-photovideos";
-        break;
-      case "agthome-testimonialreviews":
-        $scope.agthome.innerView = allagthome[3];
-        $scope.agthomeoptions.active = "agthome-testimonialreviews";
-        break;
-      case "agthome-travelactivity":
-        $scope.agthome.innerView = allagthome[4];
-        $scope.agthomeoptions.active = "agthome-travelactivity";
-        break;
-      case "agthome-leadmonitor":
-        $scope.agthome.innerView = allagthome[5];
-        $scope.agthomeoptions.active = "agthome-leadmonitor";
-        break;
-      case "agthome-analytics":
-        $scope.agthome.innerView = allagthome[6];
-        $scope.agthomeoptions.active = "agthome-analytics";
-        break;
-      case "agthome-aboutus":
-        $scope.agthome.innerView = allagthome[7];
-        $scope.agthomeoptions.active = "agthome-aboutus";
-        break;
-      default:
-        $scope.agthome.innerView = allagthome[0];
-    }
-    $scope.agenthomeItinerary = true;
-    $scope.agentFixednav = ""
-    $scope.getTab = function (view) {
-      $scope.agthome.innerView = allagthome[view];
-      var url = "agthome-itinerary";
-      var active = "";
-      console.log(view);
-      switch (view) {
-        case 0:
-          url = "agthome-itinerary";
-          $scope.agthomeoptions.active = "agthome-itinerary";
-          $scope.agenthomeItinerary = true;
-          $scope.agentFixednav = "";
-          break;
-        case 1:
-          url = "agthome-tourpackages";
-          $scope.agthomeoptions.active = "agthome-tourpackages";
-          $scope.agenthomeItinerary = false;
-          $scope.agentFixednav = "change-blue";
-          break;
-        case 2:
-          url = "agthome-photovideos";
-          $scope.agthomeoptions.active = "agthome-photovideos";
-          $scope.agenthomeItinerary = false;
-          $scope.agentFixednav = "change-blue";
-          break;
-        case 3:
-          url = "agthome-testimonialreviews";
-          $scope.agthomeoptions.active = "agthome-testimonialreviews";
-          $scope.agenthomeItinerary = false;
-          $scope.agentFixednav = "change-blue";
-          break;
-        case 4:
-          url = "agthome-travelactivity";
-          $scope.agthomeoptions.active = "agthome-travelactivity";
-          $scope.agenthomeItinerary = false;
-          $scope.agentFixednav = "change-blue";
-          break;
-        case 5:
-          url = "agthome-leadmonitor";
-          $scope.agthomeoptions.active = "agthome-leadmonitor";
-          $scope.agenthomeItinerary = false;
-          $scope.agentFixednav = "change-blue";
-          break;
-        case 6:
-          url = "agthome-analytics";
-          $scope.agthomeoptions.active = "agthome-analytics";
-          $scope.agenthomeItinerary = false;
-          $scope.agentFixednav = "change-blue";
-          break;
-        case 7:
-          url = "agthome-aboutus";
-          $scope.agthomeoptions.active = "agthome-aboutus";
-          $scope.agenthomeItinerary = false;
-          $scope.agentFixednav = "change-blue";
-          break;
-
-        default:
-          url = "agthome-itinerary";
-          $scope.agthomeoptions.active = "agthome-itinerary";
-          $scope.agenthomeItinerary = true;
-      }
-      console.log(url);
-      $state.go("agent-home", {
-        name: url
-      }, {
-        notify: false
       });
-    };
-    // tab change end
+      //scroll change end
 
-    // category type
-    $scope.categoryType = [{
-      img: "img/itinerary/adventure.png",
-      caption: "Adventure",
-      width: "25"
-    }, {
-      img: "img/itinerary/business.png",
-      caption: "Business",
-      width: "24"
-    }, {
-      img: "img/itinerary/family.png",
-      caption: "Family",
-      width: "30"
-    }, {
-      img: "img/itinerary/romance.png",
-      caption: "Romance",
-      width: "26"
-    }, {
-      img: "img/itinerary/backpacking.png",
-      caption: "Backpacking",
-      width: "23"
-    }, {
-      img: "img/itinerary/budget.png",
-      caption: "Budget",
-      width: "22"
-    }, {
-      img: "img/itinerary/luxury.png",
-      caption: "Luxury",
-      width: "21"
-    }, {
-      img: "img/itinerary/religious.png",
-      caption: "Religious",
-      width: "26"
-    }, {
-      img: "img/itinerary/friend.png",
-      caption: "Friends",
-      width: "24"
-    }];
-    // category type end
+      //status character counter
+      $scope.$on('$viewContentLoaded', function () {
+        $timeout(function () {
+          $('#postStatus').keyup(updateCount);
+          $('#postStatus').keydown(updateCount);
+          $('#postcount').text(0 + '/350');
 
-    // itinerary popover
-    $scope.viewdetailInfo = false;
-    $scope.showdetailInfo = function () {
-      if ($scope.viewdetailInfo == false) {
-        $scope.viewdetailInfo = true;
-        console.log("true");
-      } else {
-        $scope.viewdetailInfo = false;
+          function updateCount() {
+            var count = $('#postcount').val().length;
+            $('#postcount').text(count + '/350');
+          }
+        }, 100);
+      });
+      //status character counter end
+
+      // tab change
+      var allagthome = ["views/content/agent/agt-home/agthome-itinerary.html", "views/content/agent/agt-home/agthome-tourpackages.html", "views/content/agent/agt-home/agthome-photovideos.html", "views/content/agent/agt-home/agthome-testimonialreviews.html",
+        "views/content/agent/agt-home/agthome-travelactivity.html",
+        "views/content/agent/agt-home/agthome-leadmonitor.html", "views/content/agent/agt-home/agthome-analytics.html",
+        "views/content/agent/agt-home/agthome-aboutus.html"
+      ];
+      $scope.agthome = {
+        innerView: allagthome[0]
+      };
+      // change url
+      $scope.agthomeoptions = {};
+      $scope.agthomeoptions.active = "";
+      $scope.viewTab = 1;
+      switch ($state.params.name) {
+        case "agthome-itinerary":
+          $scope.agthome.innerView = allagthome[0];
+          $scope.agthomeoptions.active = "agthome-itinerary";
+          break;
+        case "agthome-tourpackages":
+          $scope.agthome.innerView = allagthome[1];
+          $scope.agthomeoptions.active = "agthome-tourpackages";
+          break;
+        case "agthome-photovideos":
+          $scope.agthome.innerView = allagthome[2];
+          $scope.agthomeoptions.active = "agthome-photovideos";
+          break;
+        case "agthome-testimonialreviews":
+          $scope.agthome.innerView = allagthome[3];
+          $scope.agthomeoptions.active = "agthome-testimonialreviews";
+          break;
+        case "agthome-travelactivity":
+          $scope.agthome.innerView = allagthome[4];
+          $scope.agthomeoptions.active = "agthome-travelactivity";
+          break;
+        case "agthome-leadmonitor":
+          $scope.agthome.innerView = allagthome[5];
+          $scope.agthomeoptions.active = "agthome-leadmonitor";
+          break;
+        case "agthome-analytics":
+          $scope.agthome.innerView = allagthome[6];
+          $scope.agthomeoptions.active = "agthome-analytics";
+          break;
+        case "agthome-aboutus":
+          $scope.agthome.innerView = allagthome[7];
+          $scope.agthomeoptions.active = "agthome-aboutus";
+          break;
+        default:
+          $scope.agthome.innerView = allagthome[0];
       }
-    };
+      $scope.agenthomeItinerary = true;
+      $scope.agentFixednav = ""
+      $scope.getTab = function (view) {
+        $scope.agthome.innerView = allagthome[view];
+        var url = "agthome-itinerary";
+        var active = "";
+        console.log(view);
+        switch (view) {
+          case 0:
+            url = "agthome-itinerary";
+            $scope.agthomeoptions.active = "agthome-itinerary";
+            $scope.agenthomeItinerary = true;
+            $scope.agentFixednav = "";
+            break;
+          case 1:
+            url = "agthome-tourpackages";
+            $scope.agthomeoptions.active = "agthome-tourpackages";
+            $scope.agenthomeItinerary = false;
+            $scope.agentFixednav = "change-blue";
+            break;
+          case 2:
+            url = "agthome-photovideos";
+            $scope.agthomeoptions.active = "agthome-photovideos";
+            $scope.agenthomeItinerary = false;
+            $scope.agentFixednav = "change-blue";
+            break;
+          case 3:
+            url = "agthome-testimonialreviews";
+            $scope.agthomeoptions.active = "agthome-testimonialreviews";
+            $scope.agenthomeItinerary = false;
+            $scope.agentFixednav = "change-blue";
+            break;
+          case 4:
+            url = "agthome-travelactivity";
+            $scope.agthomeoptions.active = "agthome-travelactivity";
+            $scope.agenthomeItinerary = false;
+            $scope.agentFixednav = "change-blue";
+            break;
+          case 5:
+            url = "agthome-leadmonitor";
+            $scope.agthomeoptions.active = "agthome-leadmonitor";
+            $scope.agenthomeItinerary = false;
+            $scope.agentFixednav = "change-blue";
+            break;
+          case 6:
+            url = "agthome-analytics";
+            $scope.agthomeoptions.active = "agthome-analytics";
+            $scope.agenthomeItinerary = false;
+            $scope.agentFixednav = "change-blue";
+            break;
+          case 7:
+            url = "agthome-aboutus";
+            $scope.agthomeoptions.active = "agthome-aboutus";
+            $scope.agenthomeItinerary = false;
+            $scope.agentFixednav = "change-blue";
+            break;
 
-    $scope.viewquickInfo = false;
-    $scope.showquickInfo = function () {
-      if ($scope.viewquickInfo == false) {
-        $scope.viewquickInfo = true;
-      } else {
-        $scope.viewquickInfo = false;
+          default:
+            url = "agthome-itinerary";
+            $scope.agthomeoptions.active = "agthome-itinerary";
+            $scope.agenthomeItinerary = true;
+        }
+        console.log(url);
+        $state.go("agent-home", {
+          name: url
+        }, {
+          notify: false
+        });
+      };
+      // tab change end
+
+      //user itinerary cards
+      $scope.usrItineraryCard = [{
+        type:"detail-itinerary",
+        itineraryBy:"Admin",
+        startTime:"2015-05-01T06:50:41.000Z",
+        coverPhoto:"img/banner-itinerary/friends3.jpg",
+        duration:19,
+        name:"Canada Adventure",
+        itineraryType:["Adventure"],
+        currency:null,
+        cost:0,
+        likeCount:2,
+        commentCount:0,
+        user:{
+        name:"Editor",
+        profilePicture:"img/default_images_2.jp",
+        urlSlug:"editor" }
+      },{
+        type:"quick-itinerary",
+        itineraryBy:"User",
+        startTime:"2015-05-01T06:50:41.000Z",
+        coverPhoto:"img/banner-itinerary/friends3.jpg",
+        duration:19,
+        name:"Canada Adventure",
+        itineraryType:["Adventure"],
+        currency:null,
+        cost:0,
+        likeCount:2,
+        commentCount:0,
+        month: "June",
+        year: "2015",
+        user:{
+        name:"Editor",
+        profilePicture:"img/default_images_2.jpg",
+        urlSlug:"editor",
+        following: 1 }
+      }];
+      //user itinerary cards end
+
+      // itinerary popover
+      $scope.viewdetailInfo = false;
+      $scope.showdetailInfo = function () {
+        if ($scope.viewdetailInfo == false) {
+          $scope.viewdetailInfo = true;
+          console.log("true");
+        } else {
+          $scope.viewdetailInfo = false;
+        }
+      };
+
+      $scope.viewquickInfo = false;
+      $scope.showquickInfo = function () {
+        if ($scope.viewquickInfo == false) {
+          $scope.viewquickInfo = true;
+        } else {
+          $scope.viewquickInfo = false;
+        }
+      };
+      // itinerary popover end
+
+      // tour packages card
+      $scope.usrTourPackageCard = [{
+        tourImg: 'img/default_Images_2.jpg',
+        agttourTitle: 'Love In Paris',
+        agttourCost: '25000',
+        tourDayC: '4',
+        tourNightC: '3',
+        tourcategoryTitle: 'Adventure',
+        tourcategoryImg: 'img/kindofjourney/white-adventure.png',
+        tourDate: '26 Dec, 2016',
+        tourTime: '1.20 pm',
+        tourcountryBadgesFlag: ['img/default_Images_2.jpg','img/default_Images_2.jpg']
+      }, {
+        tourImg: 'img/default_Images_2.jpg',
+        agttourTitle: 'Love In Paris',
+        agttourCost: '25000',
+        tourDayC: '4',
+        tourNightC: '3',
+        tourcategoryImg: 'img/kindofjourney/white-backpacking.png',
+        tourcategoryTitle: 'Backpacking',
+        tourDate: '26 Dec, 2016',
+        tourTime: '1.20 pm',
+        tourcountryBadgesFlag: ['img/default_Images_2.jpg','img/default_Images_2.jpg']
+      }, {
+        tourImg: 'img/default_Images_2.jpg',
+        agttourTitle: 'Love In Paris',
+        agttourCost: '25000',
+        tourDayC: '4',
+        tourNightC: '3',
+        tourcategoryImg: 'img/kindofjourney/white-romance.png',
+        tourcategoryTitle: 'Romance',
+        tourDate: '26 Dec, 2016',
+        tourTime: '1.20 pm',
+        tourcountryBadgesFlag: ['img/default_Images_2.jpg','img/default_Images_2.jpg']
+      }];
+      // tour packages card end
+
+      // gallery card
+      $scope.agenPhotogallery = [
+        'img/banner-itinerary/adventure1.jpg',
+        'img/banner-itinerary/budget3.jpg',
+        'img/banner-itinerary/all1.jpg',
+        'img/banner-itinerary/luxury3.jpg',
+        'img/banner-itinerary/all3.jpg',
+        'img/banner-itinerary/friends3.jpg',
+      ];
+
+      // agent add photo edit
+      $scope.agentPhotos = [{
+        agentImg: "img/banner-itinerary/adventure1.jpg"
+      }, {
+        agentImg: "img/banner-itinerary/budget3.jpg"
+      }, {
+        agentImg: "img/banner-itinerary/business1.jpg"
+      }, {
+        agentImg: "img/banner-itinerary/luxury3.jpg"
+      }, {
+        agentImg: "img/banner-itinerary/friends3.jpg"
+      }, {
+        agentImg: "img/banner-itinerary/luxury3.jpg"
+      }];
+      $scope.agentPhotos = _.chunk($scope.agentPhotos, 4);
+      for (i = 0; i < $scope.agentPhotos.length; i++) {
+        $scope.agentPhotos[i] = _.chunk($scope.agentPhotos[i], 2);
       }
-    };
-    // itinerary popover end
+      $scope.index = -1;
+      $scope.putCaptionAgent = function (index) {
+        if ($scope.index == index) {
+          $scope.index = -1;
+        } else {
+          $scope.index = index;
+        }
+      }
 
-    //user itinerary cards
-    $scope.usrItineraryCard = [{
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '35000',
-      noDays: '55',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '1505',
-      agtRating: '3.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '15 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '75000',
-      noDays: '15',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '342',
-      agtRating: '4.0',
-      agtLikesCount: '199',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }];
-    //user itinerary cards end
+      //photo caption textarea counter
+      $scope.$on('$viewContentLoaded', function () {
+        $timeout(function () {
+          $('#captionArea').keyup(updateCount);
+          $('#captionArea').keydown(updateCount);
+          $('#remainCaption').text(0 + '/150');
 
-    // tour packages card
-    $scope.usrTourPackageCard = [{
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryTitle: 'Adventure',
-      tourcategoryImg: 'img/agt-cat1.png',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat5.png',
-      tourcategoryTitle: 'Backpacking',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat4.png',
-      tourcategoryTitle: 'Romance',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat9.png',
-      tourcategoryTitle: 'Friends',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat1.png',
-      tourcategoryTitle: 'Adventure',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat7.png',
-      tourcategoryTitle: 'Luxury',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat1.png',
-      tourcategoryTitle: 'Adventure',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat4.png',
-      tourcategoryTitle: 'Romance',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }];
-    // tour packages card end
+          function updateCount() {
+            var count = $('#captionArea').val().length;
+            $('#remainCaption').text(count + '/150');
+          }
+        }, 200);
+      });
+      //photo caption textarea counter end
+      // agent add photo edit end
+      // gallery card end
 
-    // category of Specialisation array
-    $scope.categoriesSpecial = [{
-      tourImgCat: "img/agt-cat1.png",
-      catwidth: "25px",
-      tourCat: "Adventure"
-    }, {
-      tourImgCat: "img/agt-cat2.png",
-      catwidth: "25px",
-      tourCat: "Business"
-    }, {
-      tourImgCat: "img/agt-cat3.png",
-      catwidth: "33px",
-      tourCat: "Family"
-    }, {
-      tourImgCat: "img/agt-cat4.png",
-      catwidth: "28px",
-      tourCat: "Romance"
-    }, {
-      tourImgCat: "img/agt-cat5.png",
-      catwidth: "25px",
-      tourCat: "Backpacking"
-    }, {
-      tourImgCat: "img/agt-cat6.png",
-      catwidth: "24px",
-      tourCat: "Budget"
-    }, {
-      tourImgCat: "img/agt-cat7.png",
-      catwidth: "22px",
-      tourCat: "Luxury"
-    }, {
-      tourImgCat: "img/agt-cat8.png",
-      catwidth: "28px",
-      tourCat: "Religious"
-    }, {
-      tourImgCat: "img/agt-cat9.png",
-      catwidth: "25px",
-      tourCat: "Friends"
-    }];
-    // category of Specialisation array end
+      //gallery filter list
+      $scope.picFilterList = ['India', 'Malaysia', 'Singapore', 'Dubai', 'London', 'USA', 'Abu Dhabi', 'Kenya', 'South Africa', 'Cuba', 'Cambodia', 'China', 'England', 'Russia', 'Kazakhstan', 'Iran', 'Iraq', 'Bolivia'];
+      //gallery filter list end
 
-    //tourCurrency start
-    $scope.tourCurrency = [{
-      currencyCountry: 'Indian',
-      currencyCode: 'INR'
-    }, {
-      currencyCountry: 'Indian',
-      currencyCode: 'INR'
-    }, {
-      currencyCountry: 'Indian',
-      currencyCode: 'INR'
-    }, {
-      currencyCountry: 'Indian',
-      currencyCode: 'INR'
-    }, {
-      currencyCountry: 'Indian',
-      currencyCode: 'INR'
-    }, {
-      currencyCountry: 'Indian',
-      currencyCode: 'INR'
-    }, {
-      currencyCountry: 'Indian',
-      currencyCode: 'INR'
-    }];
-    //tourCurrency end
+      // testimonial card
+      $scope.testimonialreview = [{
+        testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+        usrprofileImgholder: 'img/default_Images_2.jpg',
+        usrName: 'Randy & Victoria',
+        usrLoc: 'New-York, USA',
+        usrRating: '9'
+      }, {
+        testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and',
+        usrprofileImgholder: 'img/default_Images_2.jpg',
+        usrName: 'Randy & Victoria',
+        usrLoc: 'New-York, USA',
+        usrRating: '9'
+      }, {
+        testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, text ever since the 1500s,',
+        usrprofileImgholder: 'img/default_Images_2.jpg',
+        usrName: 'Randy & Victoria',
+        usrLoc: 'New-York, USA',
+        usrRating: '9'
+      }];
+      // testimonial card end
 
-    // gallery card
-    $scope.agenPhotogallery = [
-      'img/uploaded-pic.jpg',
-      'img/slider2.jpg',
-      'img/moment-travel1.jpg',
-      'img/moment-travel2.jpg',
-      'img/local-life-post.jpg',
-      'img/destination/goldentemple.jpg',
-      'img/destination/list1.jpg',
-      'img/destination/list2.jpg',
-      'img/destination/info.jpg',
-      'img/destination/taj-featured.jpg',
-      'img/itinerary/itinerary.jpg',
-      'img/india-gate.jpg',
-      'img/notify-adrena.jpg',
-      'img/paris.jpg',
-      'img/bg-popular.jpg',
-      'img/bg-blur.jpg',
-      'img/blog-banner.jpg',
-      'img/follower.jpg'
-    ];
-    // gallery card end
+      // travel activity json
+      $scope.travelActivity = [{
+        header: true,
+        footer: true,
+        agentHeader: true,
+        travellerAgent: true,
+        agentName: "Holiday Travallers",
+        agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
+        travellerProfile: "img/default_Images_2.jpg",
+        travelDate: "26 dec, 2016",
+        travelTime: "1:20pm"
+      }, {
+        header: false,
+        footer: false,
+        tourPackage: true,
+        packageType: "Adventure",
+        packageImg: "img/kindofjourney/white-adventure.png",
+        tourFlag: [{
+          flagImg: "img/default_Images_2.jpg"
+        }],
+        tourTitle: "Love in Paris",
+        tourCost: "25000",
+        tourNight: "4",
+        tourDay: "5",
+        tourPic: "img/banner-itinerary/friends1.jpg",
+        tourDate: "26 dec, 2016",
+        tourTime: "1:20pm"
+      }, {
+        header: true,
+        footer: true,
+        itineraryHeader: true,
+        itinerary: true,
+        itineraryDate: "26 Dec, 2016",
+        itineraryTime: "1:20 pm",
+        itineraryCat: "img/kindofjourney/white-adventure.png",
+        itineraryPic: "img/banner-itinerary/friends1.jpg",
+        itineraryTitle: "Love In Paris",
+        itineraryCost: "25000",
+        itineraryDays: "75",
+        itineraryFlag: [{
+          itineraryImg: "img/default_Images_2.jpg"
+        }, {
+          itineraryImg: "img/default_Images_2.jpg"
+        }],
+        itineraryJourney: [{
+          journeyImg: "img/sunset.png"
+        }, {
+          journeyImg: "img/bag-journey.png"
+        }, {
+          journeyImg: "img/luxury-journey.png"
+        }]
+      }, {
+        header: true,
+        footer: true,
+        agentHeader: true,
+        travellerAgent: true,
+        agentName: "Holiday Travallers",
+        agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
+        travellerProfile: "img/default_Images_2.jpg",
+        travelDate: "26 dec, 2016",
+        travelTime: "1:20pm"
+      }, {
+        header: true,
+        footer: true,
+        itineraryHeader: true,
+        itinerary: true,
+        itineraryDate: "26 Dec, 2016",
+        itineraryTime: "1:20 pm",
+        itineraryCat: "img/kindofjourney/white-adventure.png",
+        itineraryPic: "img/banner-itinerary/friends1.jpg",
+        itineraryTitle: "Love In Paris",
+        itineraryCost: "25000",
+        itineraryDays: "75",
+        itineraryFlag: [{
+          itineraryImg: "img/default_Images_2.jpg"
+        }],
+        itineraryJourney: [{
+          journeyImg: "img/sunset.png"
+        }, {
+          journeyImg: "img/bag-journey.png"
+        }, {
+          journeyImg: "img/luxury-journey.png"
+        }]
+      }, {
+        header: false,
+        footer: false,
+        tourPackage: true,
+        packageType: "Adventure",
+        packageImg: "img/kindofjourney/white-adventure.png",
+        tourFlag: [{
+          flagImg: "img/default_Images_2.jpg"
+        }],
+        tourTitle: "Love in Paris",
+        tourCost: "25000",
+        tourNight: "4",
+        tourDay: "5",
+        tourPic: "img/banner-itinerary/friends1.jpg",
+        tourDate: "26 dec, 2016",
+        tourTime: "1:20pm"
+      }, {
+        header: false,
+        footer: false,
+        tourPackage: true,
+        packageType: "Adventure",
+        packageImg: "img/kindofjourney/white-romance.png",
+        tourFlag: [{
+          flagImg: "img/default_Images_2.jpg"
+        }, {
+          flagImg: "img/default_Images_2.jpg"
+        }],
+        tourTitle: "Love in Paris",
+        tourCost: "25000",
+        tourNight: "4",
+        tourDay: "5",
+        tourPic: "img/banner-itinerary/friends1.jpg",
+        tourDate: "26 dec, 2016",
+        tourTime: "1:20pm"
+      }];
+      // travel activity json end
 
-    //gallery filter list
-    $scope.picFilterList = ['India', 'Malaysia', 'Singapore', 'Dubai', 'London', 'USA', 'Abu Dhabi', 'Kenya', 'South Africa', 'Cuba', 'Cambodia', 'China', 'England', 'Russia', 'Kazakhstan', 'Iran', 'Iraq', 'Bolivia'];
-    //gallery filter list end
+      //lead monitor accordion
+      $scope.leadMonAgent = [{
+        leadStatus: 'new',
+        leadImg: 'img/default_Images_2.jpg',
+        leadName: 'Andrea Christina',
+        leadDate: '02/12/2016',
+        leadDestination: 'India',
+        leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+        leadPhone: '91961845656',
+        leadMail: 'leads@leads.com',
+        leadItinerary: 'Incredible India'
+      }, {
+        leadStatus: 'actioned',
+        leadImg: 'img/default_Images_2.jpg',
+        leadName: 'Andrea Christina',
+        leadDate: '02/12/2016',
+        leadDestination: 'India',
+        leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+        leadPhone: '91961845656',
+        leadMail: 'leads@leads.com',
+        leadItinerary: 'Incredible India'
+      }, {
+        leadStatus: 'new',
+        leadImg: 'img/default_Images_2.jpg',
+        leadName: 'Andrea Christina',
+        leadDate: '02/12/2016',
+        leadDestination: 'India',
+        leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+        leadPhone: '91961845656',
+        leadMail: 'leads@leads.com',
+        leadItinerary: 'Incredible India'
+      }];
+      //lead monitor accordion end
 
-    // testimonial card
-    $scope.testimonialreview = [{
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text evers,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }];
-    // testimonial card end
+      // category type
+      $scope.categoryType = [{
+        img: "img/itinerary/adventure.png",
+        caption: "Adventure",
+        width: "25"
+      }, {
+        img: "img/itinerary/business.png",
+        caption: "Business",
+        width: "24"
+      }, {
+        img: "img/itinerary/family.png",
+        caption: "Family",
+        width: "30"
+      }, {
+        img: "img/itinerary/romance.png",
+        caption: "Romance",
+        width: "26"
+      }, {
+        img: "img/itinerary/backpacking.png",
+        caption: "Backpacking",
+        width: "23"
+      }, {
+        img: "img/itinerary/budget.png",
+        caption: "Budget",
+        width: "22"
+      }, {
+        img: "img/itinerary/luxury.png",
+        caption: "Luxury",
+        width: "21"
+      }, {
+        img: "img/itinerary/religious.png",
+        caption: "Religious",
+        width: "26"
+      }, {
+        img: "img/itinerary/friend.png",
+        caption: "Friends",
+        width: "24"
+      }];
+      // category type end
 
+      // category of Specialisation array
+      $scope.categoriesSpecial = [{
+        tourImgCat: "img/agt-cat1.png",
+        catwidth: "25px",
+        tourCat: "Adventure"
+      }, {
+        tourImgCat: "img/agt-cat2.png",
+        catwidth: "25px",
+        tourCat: "Business"
+      }, {
+        tourImgCat: "img/agt-cat3.png",
+        catwidth: "33px",
+        tourCat: "Family"
+      }, {
+        tourImgCat: "img/agt-cat4.png",
+        catwidth: "28px",
+        tourCat: "Romance"
+      }, {
+        tourImgCat: "img/agt-cat5.png",
+        catwidth: "25px",
+        tourCat: "Backpacking"
+      }, {
+        tourImgCat: "img/agt-cat6.png",
+        catwidth: "24px",
+        tourCat: "Budget"
+      }, {
+        tourImgCat: "img/agt-cat7.png",
+        catwidth: "22px",
+        tourCat: "Luxury"
+      }, {
+        tourImgCat: "img/agt-cat8.png",
+        catwidth: "28px",
+        tourCat: "Religious"
+      }, {
+        tourImgCat: "img/agt-cat9.png",
+        catwidth: "25px",
+        tourCat: "Friends"
+      }];
+      // category of Specialisation array end
 
-
-    // travel activity json
-    $scope.travelActivity = [{
-      header: true,
-      footer: true,
-      agentHeader: true,
-      travellerAgent: true,
-      agentName: "Holiday Travallers",
-      agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
-      travellerProfile: "img/profile-main.png",
-      travelDate: "26 dec, 2016",
-      travelTime: "1:20pm"
-    }, {
-      header: false,
-      footer: false,
-      tourPackage: true,
-      packageType: "Adventure",
-      packageImg: "img/agt-cat1.png",
-      tourFlag: [{
-        flagImg: "img/canada-visit.png"
+      //tourCurrency start
+      $scope.tourCurrency = [{
+        currencyCountry: 'Indian',
+        currencyCode: 'INR'
       }, {
-        flagImg: "img/england-visit.png"
+        currencyCountry: 'Indian',
+        currencyCode: 'INR'
       }, {
-        flagImg: "img/india-visit.png"
-      }],
-      tourTitle: "Love in Paris",
-      tourCost: "25000",
-      tourNight: "4",
-      tourDay: "5",
-      tourPic: "img/paris.jpg",
-      tourDate: "26 dec, 2016",
-      tourTime: "1:20pm"
-    }, {
-      header: true,
-      footer: true,
-      itineraryHeader: true,
-      itinerary: true,
-      itineraryDate: "26 Dec, 2016",
-      itineraryTime: "1:20 pm",
-      itineraryCat: "img/agt-cat1.png",
-      itineraryPic: "img/paris.jpg",
-      itineraryTitle: "Love In Paris",
-      itineraryCost: "25000",
-      itineraryDays: "75",
-      itineraryFlag: [{
-        itineraryImg: "img/canada-visit.png"
+        currencyCountry: 'Indian',
+        currencyCode: 'INR'
       }, {
-        itineraryImg: "img/england-visit.png"
+        currencyCountry: 'Indian',
+        currencyCode: 'INR'
       }, {
-        itineraryImg: "img/india-visit.png"
-      }],
-      itineraryJourney: [{
-        journeyImg: "img/sunset.png"
+        currencyCountry: 'Indian',
+        currencyCode: 'INR'
       }, {
-        journeyImg: "img/bag-journey.png"
+        currencyCountry: 'Indian',
+        currencyCode: 'INR'
       }, {
-        journeyImg: "img/luxury-journey.png"
-      }]
-    }, {
-      header: true,
-      footer: true,
-      agentHeader: true,
-      travellerAgent: true,
-      agentName: "Holiday Travallers",
-      agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
-      travellerProfile: "img/profile-main.png",
-      travelDate: "26 dec, 2016",
-      travelTime: "1:20pm"
-    }, {
-      header: true,
-      footer: true,
-      itineraryHeader: true,
-      itinerary: true,
-      itineraryDate: "26 Dec, 2016",
-      itineraryTime: "1:20 pm",
-      itineraryCat: "img/agt-cat1.png",
-      itineraryPic: "img/paris.jpg",
-      itineraryTitle: "Love In Paris",
-      itineraryCost: "25000",
-      itineraryDays: "75",
-      itineraryFlag: [{
-        itineraryImg: "img/canada-visit.png"
-      }, {
-        itineraryImg: "img/england-visit.png"
-      }, {
-        itineraryImg: "img/india-visit.png"
-      }],
-      itineraryJourney: [{
-        journeyImg: "img/sunset.png"
-      }, {
-        journeyImg: "img/bag-journey.png"
-      }, {
-        journeyImg: "img/luxury-journey.png"
-      }]
-    }, {
-      header: false,
-      footer: false,
-      tourPackage: true,
-      packageType: "Adventure",
-      packageImg: "img/agt-cat1.png",
-      tourFlag: [{
-        flagImg: "img/canada-visit.png"
-      }, {
-        flagImg: "img/england-visit.png"
-      }, {
-        flagImg: "img/india-visit.png"
-      }],
-      tourTitle: "Love in Paris",
-      tourCost: "25000",
-      tourNight: "4",
-      tourDay: "5",
-      tourPic: "img/paris.jpg",
-      tourDate: "26 dec, 2016",
-      tourTime: "1:20pm"
-    }, {
-      header: false,
-      footer: false,
-      tourPackage: true,
-      packageType: "Adventure",
-      packageImg: "img/agt-cat1.png",
-      tourFlag: [{
-        flagImg: "img/canada-visit.png"
-      }, {
-        flagImg: "img/england-visit.png"
-      }, {
-        flagImg: "img/india-visit.png"
-      }],
-      tourTitle: "Love in Paris",
-      tourCost: "25000",
-      tourNight: "4",
-      tourDay: "5",
-      tourPic: "img/paris.jpg",
-      tourDate: "26 dec, 2016",
-      tourTime: "1:20pm"
-    }];
-    // travel activity json end
-  })
+        currencyCountry: 'Indian',
+        currencyCode: 'INR'
+      }];
+      //tourCurrency end
+    })
 
   .controller('MessageCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     $scope.template = TemplateService.changecontent("message"); //Use same name of .html file
@@ -13374,136 +13170,136 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             break;
           case 'journeyRequest':
             if (notification.userFrom.gender == 'male') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> wants to tag you in his <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> wants to tag you in his <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> wants to tag you in her <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> wants to tag you in her <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             }
             break;
           case 'journeyLeft':
             if (notification.userFrom.gender == 'male') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has ended his <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="avenir-heavy color-pink text-capitalize">' + notification.data.name + '</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has ended his <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="avenir-heavy color-pink text-capitalize">' + notification.data.name + '</span>';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has ended her <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="avenir-heavy color-pink text-capitalize">' + notification.data.name + '</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has ended her <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="avenir-heavy color-pink text-capitalize">' + notification.data.name + '</span>';
             }
             break;
           case 'postLike':
             if (notification.data.type == 'travel-life') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked your <span class="avenir-heavy color-blue">On The Go Activity</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has liked your <span class="avenir-heavy color-blue">On The Go Activity</span>';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked your <span class="avenir-heavy color-blue">Local Life Activity</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has liked your <span class="avenir-heavy color-blue">Local Life Activity</span>';
             }
             break;
           case 'postFirstTime':
             if (notification.data.type == 'travel-life') {
               if (notification.userFrom.gender == 'male') {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to his <span class="avenir-heavy color-blue">On The Go Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has added a post to his <span class="avenir-heavy color-blue">On The Go Activity</span>';
               } else {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to her <span class="avenir-heavy color-blue">On The Go Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has added a post to her <span class="avenir-heavy color-blue">On The Go Activity</span>';
               }
             } else {
               if (notification.userFrom.gender == 'male') {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to his <span class="avenir-heavy color-blue"> Local Life </span> for the first time.';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has added a post to his <span class="avenir-heavy color-blue"> Local Life </span> for the first time.';
               } else {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to her <span class="avenir-heavy color-blue"> Local Life </span> for the first time.';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has added a post to her <span class="avenir-heavy color-blue"> Local Life </span> for the first time.';
               }
             }
             break;
           case 'postComment':
             if (notification.data.type == 'travel-life') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has commented on your <span class="avenir-heavy color-blue">On The Go Activity</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has commented on your <span class="avenir-heavy color-blue">On The Go Activity</span>';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has commented on your <span class="avenir-heavy color-blue">Local Life Activity</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has commented on your <span class="avenir-heavy color-blue">Local Life Activity</span>';
             }
             break;
           case 'postMentionComment':
             if (notification.data.type == 'travel-life') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has mentioned you in a comment';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has mentioned you in a comment';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has mentioned you in a comment';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has mentioned you in a comment';
             }
             break;
           case 'postTag':
             if (notification.data.type == 'travel-life') {
               if (notification.data.videos.length > 0) {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a video of you\'ll to the <span class="avenir-heavy color-blue">On The Go Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has added a video of you\'ll to the <span class="avenir-heavy color-blue">On The Go Activity</span>';
               } else if (notification.data.videos.length == 0 && notification.data.photos.length > 0) {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added photos to the <span class="avenir-heavy color-blue">On The Go Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has added photos to the <span class="avenir-heavy color-blue">On The Go Activity</span>';
               } else if (notification.data.videos.length == 0 && notification.data.photos.length == 0 && notification.data.checkIn.lat !== '') {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has checked-in with you in an <span class="avenir-heavy color-blue">On The Go Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has checked-in with you in an <span class="avenir-heavy color-blue">On The Go Activity</span>';
               } else if (notification.data.videos.length == 0 && notification.data.photos.length == 0 && notification.data.checkIn.lat == '' && notification.data.thoughts !== '') {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has tagged you in thought in an <span class="avenir-heavy color-blue">On The Go Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has tagged you in thought in an <span class="avenir-heavy color-blue">On The Go Activity</span>';
               }
             } else {
               if (notification.data.videos.length > 0) {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a video of you\'ll to a <span class="avenir-heavy color-blue">Local Life Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has added a video of you\'ll to a <span class="avenir-heavy color-blue">Local Life Activity</span>';
               } else if (notification.data.videos.length == 0 && notification.data.photos.length > 0) {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added photos to a <span class="avenir-heavy color-blue">Local Life Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has added photos to a <span class="avenir-heavy color-blue">Local Life Activity</span>';
               } else if (notification.data.videos.length == 0 && notification.data.photos.length == 0 && notification.data.checkIn.lat !== '') {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has checked-in with you in a <span class="avenir-heavy color-blue">Local Life Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has checked-in with you in a <span class="avenir-heavy color-blue">Local Life Activity</span>';
               } else if (notification.data.videos.length == 0 && notification.data.photos.length == 0 && notification.data.checkIn == '' && notification.data.thoughts !== '') {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has tagged you in thought in a <span class="avenir-heavy color-blue">Local Life Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has tagged you in thought in a <span class="avenir-heavy color-blue">Local Life Activity</span>';
               }
             }
             break;
           case 'itineraryRequest':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has tagged you in an Itinerary - ' + '<span class="avenir-heavy color-blue text-capitalize">' + notification.data.name + '</span>';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has tagged you in an Itinerary - ' + '<span class="avenir-heavy color-blue text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'itineraryComment':
             notification.notifyString = '<span class="color-blue avenir-heavy">' + notification.userFrom.name + '</span> has commented on the Itinerary - ' + '<span class= "color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'itineraryLike':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked the Itinerary - <span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has liked the Itinerary - <span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'itineraryMentionComment':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has mentioned you in a comment on the Ititnerary - <span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has mentioned you in a comment on the Ititnerary - <span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'journeyComment':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has commented on the <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has commented on the <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'journeyLike':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked the <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has liked the <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'journeyMentionComment':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has mentioned you in a comment on the  <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="avenir-heavy color-pink text-capitalize">' + notification.data.name + '</span>';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has mentioned you in a comment on the  <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="avenir-heavy color-pink text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'userFollowing':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has started following you.';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has started following you.';
             break;
           case 'userFollowingRequest':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has requested to follow your travel and local activities.';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has requested to follow your travel and local activities.';
             break;
           case 'userFollowingResponse':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has accepted your follow request.';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has accepted your follow request.';
             break;
           case 'photoComment':
             if (notification.data.type == 'travel-life') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has commented on a photo in your <span class="avenir-heavy color-blue">On The Go Activity</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has commented on a photo in your <span class="avenir-heavy color-blue">On The Go Activity</span>';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has commented on a photo in your <span class="avenir-heavy color-blue">Local Life Activity</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has commented on a photo in your <span class="avenir-heavy color-blue">Local Life Activity</span>';
             }
             break;
           case 'photoMentionComment':
             if (notification.data.type == 'travel-life') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has mentioned you in a comment';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has mentioned you in a comment';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has mentioned you in a comment';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has mentioned you in a comment';
             }
             break;
           case 'photoLike':
             if (notification.data.type == 'travel-life') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked a photo in your <span class="avenir-heavy color-blue">On The Go Activity</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has liked a photo in your <span class="avenir-heavy color-blue">On The Go Activity</span>';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked a photo in your <span class= "avenir-heavy color-blue">Local Life Activity</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has liked a photo in your <span class= "avenir-heavy color-blue">Local Life Activity</span>';
             }
             break;
           case 'userBadge':
             notification.notifyString = 'Congratulations! You have moved from <span class="avenir-heavy color-blue">' + notification.data.from + '</span> to <span class="avenir-heavy color-blue">' + notification.data.to + '</span> . <br>Hope you enjoy your status and grow in your journeys.';
             break;
           case 'journeyAccept':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has accepted your request to join the <span class="avenir-heavy color-blue">On The Go Activity</span> -<span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has accepted your request to join the <span class="avenir-heavy color-blue">On The Go Activity</span> -<span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'journeyReject':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has rejected your request to join the <span class="avenir-heavy color-blue">On Go Activity</span> -' + '<span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/'+notification.userFrom.urlSlug+'">' + notification.userFrom.name + '</a> has rejected your request to join the <span class="avenir-heavy color-blue">On Go Activity</span> -' + '<span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           default:
             break;
