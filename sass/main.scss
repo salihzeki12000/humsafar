@@ -2064,8 +2064,17 @@ header {
   background: rgba(0, 0, 0, 0.15);
 }
 
-.activity-main.tint-bg {
+.activity-main {
   min-height: 100vh;
+  &:before{
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.15);
+  }
 }
 
 .add-more-journey {
@@ -4698,6 +4707,20 @@ header {
 .popular-journeypage {
   .blog-itineraries-main .masonry-brick {
     margin-bottom: 0;
+  }
+}
+
+.popular-itinerarypage,
+.popular-journeypage,
+.popular-bloggerpage{
+  &:before{
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.15);
   }
 }
 // blog detail end

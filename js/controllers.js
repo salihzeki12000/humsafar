@@ -12630,13 +12630,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }, {
           itineraryImg: "img/default_Images_2.jpg"
         }],
-        itineraryJourney: [{
-          journeyImg: "img/sunset.png"
-        }, {
-          journeyImg: "img/bag-journey.png"
-        }, {
-          journeyImg: "img/luxury-journey.png"
-        }]
+        itineraryJourney: ['Adventure']
       }, {
         header: true,
         footer: true,
@@ -12662,13 +12656,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         itineraryFlag: [{
           itineraryImg: "img/default_Images_2.jpg"
         }],
-        itineraryJourney: [{
-          journeyImg: "img/sunset.png"
-        }, {
-          journeyImg: "img/bag-journey.png"
-        }, {
-          journeyImg: "img/luxury-journey.png"
-        }]
+        itineraryJourney: ['Adventure']
       }, {
         header: false,
         footer: false,
