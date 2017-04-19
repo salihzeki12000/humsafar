@@ -190,7 +190,7 @@
 
                 <div ng-if="reviewTravelLife.arr!==0 && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
                   <div class="row">
-                    <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="review in reviewTravelLife.arr" ng-if="!viewTravelCountry">
+                    <div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="review in reviewTravelLife.arr" ng-if="!viewTravelCountry">
                       <div class="list-travel-view">
                         <div class="review-travel-main relate pointer" ng-click="goToAccordian(review,'viewTravelCountry');">
                           <!--<div class="review-backimgholder">
@@ -297,7 +297,7 @@
                 <!-- PRIVATE PROFILE EMPTY SCREEN END -->
 
                 <div class="row">
-                  <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="review in reviewLocalLife.arr" ng-if="!viewLocalCountry && reviewLocalLife.arr.length!==0 && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
+                  <div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="review in reviewLocalLife.arr" ng-if="!viewLocalCountry && reviewLocalLife.arr.length!==0 && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
                     <div class="list-travel-view list-local-view">
                       <div class="review-travel-main pointer relate" ng-click="goToAccordian(review,'viewLocalCountry');">
                         <!--<div class="review-backimgholder">
