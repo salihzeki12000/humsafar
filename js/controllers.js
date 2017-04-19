@@ -7620,6 +7620,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
       //for getting all the visited years  of that respective country starts
       var callback = function (data) {
+        console.log(data,'data kya chee');
         var a = _.filter(data, ["countryId._id", id]);
         var visitedArr = [];
         _.each(a[0].visited, function (n, index) {

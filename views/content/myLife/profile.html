@@ -9,7 +9,7 @@
         </a>
         <a href="{{userData.profilePicture|uploadpath}}" fancybox-box class="fancybox" ng-if="!template.isMine">
           <div class="profile-imgholder ">
-            <img ng-src="{{userData.profilePicture|uploadpath:140:150:'cover'}}" alt="{{userData.name}}" class="img-responsive" style="border-radius:'50px';">
+            <img ng-src="{{userData.profilePicture|uploadpath:140:150:'cover'}}" alt="{{userData.name}}" class="img-responsive">
           </div>
         </a>
         <img src="{{userData.homeCountry.flag|uploadpath:40}}" alt="" width="40" class="flag img-responsive">

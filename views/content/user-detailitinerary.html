@@ -139,8 +139,13 @@
     <div class="container">
       <!-- accordion main -->
       <div class="accordion-holder">
+        <!-- view side photos button in mobile -->
+          <div class="view-side-photos visible-xs text-right" ng-if="itinerary.photos.length > 0">
+            <button class="btn btn-pink" ng-click="viewGallery();">Photos ({{itinerary.photos.length}})</button>
+          </div>
+        <!-- view side photos button in mobile end-->
         <div class="row">
-          <div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-11">
+          <div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12">
             <div class="accordion-list" ng-repeat="country in itinerary.countryVisited track by $index">
               <!-- trip accordion heading -->
               <div class="trip-heading-accordion">
@@ -161,7 +166,7 @@
                     class="city-accordion-back">
                     <uib-accordion-heading class="relate city-coverphoto">
                       <!-- <img ng-src="{{city.city.cityCoverPhoto|uploadpath}}" alt="" class="img-responsive"> -->
-                      <div class="journey-accordion-heading color-white" style="background: url('{{city.city.cityDisplayPhoto|uploadpath}}') 0 no-repeat; background-size: cover;background-attachment: fixed;">
+                      <div class="journey-accordion-heading color-white" style="background: url('{{city.city.cityDisplayPhoto|uploadpath}}') 50% 50% no-repeat; background-size: cover;background-attachment: fixed;">
                         <a name="{{city.city._id}}" class="journey-head">
                           <div class="clearfix">
                             <p class="city-heading avenir-heavy m-clear pull-left">Day <span>{{city.from}}</span> to Day <span>{{city.to}}</span> In <span class="trip-city-name">{{city.city.name}}</span></p>
@@ -232,7 +237,7 @@
       <!-- accordion main end-->
       <!-- comment and like panel main -->
       <div class="row">
-        <div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-11">
+        <div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12">
           <div class="share-comment-main">
             <div class="clearfix share-option-main">
               <div class="task-holder pull-left" ng-init="getClicked = false;">

@@ -746,6 +746,9 @@
   .mob-ml5 {
     margin-left: 5px;
   }
+  .itinerary-content {
+    padding: 0;
+  }
   // agent upgrade page
   .package-img {
     width: 50px;
@@ -1071,7 +1074,7 @@
     .pbt-15 {
     padding: 10px 0;
     }
-  } 
+  }
 
   .popular-blogger .blogger-cover .gallery-imgholder {
     width: 100%;
@@ -1103,7 +1106,7 @@ h4{
   // AGENT ITINERARY PAGE
   .agent-itinerary-page .close-gallery,
   .user-itinerary-page .close-gallery {
-    left: -435px;
+    left: -475px;
   }
 
   .agent-itinerary-page .trip-pic-view,
@@ -1216,9 +1219,10 @@ h4{
     }
 
     .user-trip-descp {
-      width: 100%;
+      width: auto;
       text-align: justify;
       font-size: 14px;
+      display: inline-block;
     }
   }
 
@@ -1652,7 +1656,7 @@ h4{
               @include transform(translate(0));
             }
           }
-      } 
+      }
     .date-holder input{
       width: 60px;
       padding: 0px 8px;
@@ -1879,7 +1883,7 @@ h4{
     margin-bottom: 10px;
   }
   // SEARCH PAGE END
-  .destination-nav{ 
+  .destination-nav{
     .pr20 {
     padding-right: 0px;
       }
@@ -1890,7 +1894,7 @@ h4{
   //   top: 38px;
   // }
 }
-// modal 
+// modal
 .modal-dialog .modal-content {
     top: 0;
     @include transform(translateY(0));
@@ -2333,7 +2337,7 @@ h4{
   }
 
   .user-itinerary-page .close-gallery {
-    left: -280px;
+    left: -310px;
   }
 
   .user-itinerary-page .photos {
@@ -2379,10 +2383,6 @@ h4{
       font-size: 12px;
     }
   }
-  .itinerary-content {
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
 .view-quick-itinerary .itinerary-heading-detail .country-visited-name {
     display: block;
 }
