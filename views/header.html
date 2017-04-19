@@ -1,4 +1,4 @@
-<header class="bg-dark-blue {{isLoggedIn}}" hide-on-scroll ng-controller="headerctrl" ng-show="isLoggedIn">
+<header class="bg-dark-blue {{template.isLoggedIn}}" hide-on-scroll ng-controller="headerctrl" ng-show="template.isLoggedIn">
   <nav class="navbar">
     <div class="container-fluid">
       <!-- <div class="navbar-header">
@@ -323,7 +323,8 @@
     </div>
   </section>
 </header>
-<header class="libro-header {{isLoggedIn}}" ng-controller="headerctrl" hide-on-scroll ng-hide="isLoggedIn" scrolladd1class>
+<header class="libro-header {{template.isLoggedIn}}" ng-controller="headerctrl" hide-on-scroll ng-hide="template.isLoggedIn"
+  scrolladd1class>
   <section class="bg-black custom-search pd20 " ng-class="{ 'open': isopen} ">
     <div class="container-fluid ">
       <div class="row ">

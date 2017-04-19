@@ -21,7 +21,7 @@ var viewlocalLife = angular.module('locallife', [])
             "urlSlug": $.jStorage.get("activeUrlSlug")
             // "rating": []
           }
-        },'paginationLoad').success(function (data) {
+        }, 'paginationLoad').success(function (data) {
           var localLifeData = data;
           callback(localLifeData);
           console.log(localLifeData, 'localLife');
@@ -38,7 +38,8 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
       localongo: "=ongolocal",
       openCommentSection: '&',
       openLikeSection: '&',
-      localView: '=localView'
+      localView: '=localView',
+      template: '='
     },
     templateUrl: 'views/directive/local-post.html',
     link: function ($scope, element, attrs) {
@@ -786,9 +787,9 @@ viewlocalLife.directive('postLocalLife', ['$http', '$filter', '$uibModal', '$win
       }
       // sharing local life modal
       var shareModal = "";
-      $scope.sharePost = function(url){
+      $scope.sharePost = function (url) {
         $scope.shareUrl = url;
-        console.log($scope.shareUrl,'share ka url');
+        console.log($scope.shareUrl, 'share ka url');
         shareModal = $uibModal.open({
           animation: true,
           templateUrl: "views/modal/sharing.html",

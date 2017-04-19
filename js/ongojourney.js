@@ -9,7 +9,7 @@ var ongojourney = angular.module('ongojourney', [])
           method: "POST",
           // method: "GET",
           data: formData
-        },'allLoader').success(function (data) {
+        }, 'allLoader').success(function (data) {
           var journey = data.data;
           journey.kindOfJourneyIconsAddr = [];
           journey.buddiesCount = journey.buddies.length;
@@ -162,7 +162,7 @@ var ongojourney = angular.module('ongojourney', [])
     };
   });
 
-ongojourney.directive('journeyPost', ['$http', '$filter', '$window','$state', '$timeout', '$uibModal', 'OnGoJourney', 'LikesAndComments', 'TravelibroService', '$sce', function ($http, $filter, $window, $state, $timeout, $uibModal, OnGoJourney, LikesAndComments, TravelibroService, $sce) {
+ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '$timeout', '$uibModal', 'OnGoJourney', 'LikesAndComments', 'TravelibroService', '$sce', function ($http, $filter, $window, $state, $timeout, $uibModal, OnGoJourney, LikesAndComments, TravelibroService, $sce) {
   return {
     restrict: 'E',
     scope: {
@@ -172,7 +172,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window','$state', '$
       isLoggedIn: "=",
       getCommentsData: '&',
       getLikesData: '&',
-      closeBackDrop: '&'
+      closeBackDrop: '&',
+      template: "="
     },
     // controller: 'OnGoJourneyCtrl',
     templateUrl: 'views/directive/journey-post.html',
@@ -1065,7 +1066,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window','$state', '$
       $scope.getPhotosCommentData = function (photoId, index, length, array) {
         if (!($.jStorage.get("isLoggedIn"))) {
           $state.go('login');
-        }else {
+        } else {
           console.log(index);
           console.log(length);
           console.log(array);

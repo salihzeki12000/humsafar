@@ -9,9 +9,9 @@
       <div class="ongo-journey-main">
         <!-- strip journey -->
         <div class="journey-info-strip get-otgstrip clearfix">
-         <div class="dots-mobile color-white" ng-click="openTravelTrip();">
-             <i class="fa fa-plus-square-o" aria-hidden="true"></i>
-         </div>
+          <div class="dots-mobile color-white" ng-click="openTravelTrip();">
+            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+          </div>
           <div class="pull-left">
             <!-- own journey -->
             <div class="own-journey">
@@ -187,7 +187,7 @@
             <div class="dot-line"></div>
             <div class="card-relate-holder functionmap" ng-if="journey.post">
               <journey-post post="ongo" is-mine="template.isMine" is-logged-in="isLoggedIn" json=journey get-comments-data="getCommentsData(post)"
-                close-back-drop="closeBackDrop()" get-likes-data="getLikesData(post)" ng-repeat="ongo in journey.post"></journey-post>
+                close-back-drop="closeBackDrop()" get-likes-data="getLikesData(post)" template="template" ng-repeat="ongo in journey.post"></journey-post>
               <!-- ongo journey-end -->
               <div class="ongo-journey-end" ng-if="journey.onGoing==false">
                 <div class="journey-end text-center">
