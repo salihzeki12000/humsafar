@@ -148,14 +148,14 @@
               </h5>
             </div>
             <div class="photos-location-sec clearfix">
-              <div class="pull-left">
+              <div class="pull-left photo-countlist">
                 <div class="photo-loc">
                   <img src="img/camera-blue.png" alt="Photos" height="15" class="v-mid">
                   <span class="avenir-heavy color-dark-blue v-mid">{{list.count.photoCount}}</span> |
                   <img src="img/location-blue.png" alt="Location" height="15" class="v-mid"> <span class="avenir-heavy color-dark-blue v-mid">{{list.count.checkInCount}}</span>
                 </div>
               </div>
-              <div class="pull-right">
+              <div class="pull-right photo-countfollow">
                 <button class="btn btn-pink following-btn" ng-click="followUnFollowUser(list,'fromFollowing')">{{list.following|followFollowingStatus}}</button>
               </div>
             </div>
@@ -203,14 +203,14 @@
               <h5 ng-if="list.homeCity && list.homeCountry.name" class="color-pink avenir-medium text-ellipsis"><i class="fa fa-map-marker mr5 color-pink"></i> <span>{{list.homeCity}}</span>, <span>{{list.homeCountry.name}}</span></h5>
             </div>
             <div class="photos-location-sec clearfix">
-              <div class="pull-left">
+              <div class="pull-left photo-countlist">
                 <div class="photo-loc">
                   <img src="img/camera-blue.png" alt="Photos" height="15" class="v-mid">
                   <span class="avenir-heavy color-dark-blue v-mid">{{list.count.photoCount}}</span> |
                   <img src="img/location-blue.png" alt="Location" height="15" class="v-mid"> <span class="avenir-heavy color-dark-blue v-mid">{{list.count.checkInCount}}</span>
                 </div>
               </div>
-              <div class="pull-right">
+              <div class="pull-right photo-countfollow">
                 <!--<button class="btn btn-pink following-btn" ng-if="!list.following" ng-click="followUser(list._id,list.name)">Follow</button>
                 <button class="btn btn-pink following-btn" ng-if="list.following" ng-click="unFollowUser(list._id)">Following</button>-->
                 <button class="btn btn-pink following-btn" ng-click="followUnFollowUser(list,'fromFollowers')">{{list.following|followFollowingStatus}}</button>

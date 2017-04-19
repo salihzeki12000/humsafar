@@ -1049,7 +1049,7 @@ q {
 
 .add-agtitinerary {
   position: relative;
-  z-index: 2;
+  z-index: 5;
 
   span {
     @include square(30px);
@@ -1122,7 +1122,7 @@ q {
   right: 0;
   bottom: 0;
   background-color: rgba(0,0,0,0.7);
-  z-index: 8;
+  z-index: 4;
 }
 
 .add-more-itinerary {
@@ -1425,6 +1425,7 @@ q {
       border-bottom: 1px solid $brand-grey;
 
       label {
+        padding-left: 0;
         font-weight: 500;
       }
 
@@ -1436,9 +1437,10 @@ q {
 
       [type="checkbox"]:checked+label:before,
       [type="checkbox"]:not(:checked)+label:before {
-        right: 0;
         position: absolute;
         top: 0;
+        right: 0;
+        left: auto;
       }
     }
   }
@@ -2500,9 +2502,10 @@ q {
 
         [type="checkbox"]:checked+label:before,
         [type="checkbox"]:not(:checked)+label:before {
-          right: 0;
           position: absolute;
           top: 0;
+          right: 0;
+          left: auto;
         }
 
         [type="checkbox"]:checked+label:after {
