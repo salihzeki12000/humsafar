@@ -1862,6 +1862,9 @@ width: 150px;
 .bg-black.footer-about ul {
     text-align: center
 }
+  .masonry-brick {
+    position: static !important;
+  }
 }
 
 // media query for 767px to 480px end
@@ -1976,7 +1979,7 @@ width: 150px;
       font-size: 13px;
     }
   }
-  .col-md-4.col-sm-6.masonry-brick {
+  .masonry-brick {
     padding: 0;
     position: static !important;
   } // .journey-type {
