@@ -1863,17 +1863,17 @@ q {
 .contact-sidetab,
 .enquiry-sidetab {
   width: 450px;
-  top: 100px;
   right: -450px;
-  z-index: 3;
-  background-color: #fff;
   padding: 10px 20px 20px;
-  @include transition(all 300ms linear);
   border-radius: 5px 0 0 5px;
+  background-color: #fff;
+  @include transition(all 300ms linear);
+  z-index: 3;
 }
 
 .enquiry-sidetab {
   position: absolute;
+  top: 40px;
 }
 
 .enquirytab-head {
@@ -1881,8 +1881,9 @@ q {
 }
 
 .contact-sidetab {
-  background-color: $brand-blue;
   position: fixed;
+  top: 150px;
+  background-color: $brand-blue;
 }
 
 .contacttab-head {
@@ -2085,7 +2086,7 @@ q {
 
 .enquirytab-btn {
   position: absolute;
-  top: 130px;
+  top: 80px;
   right: -29px;
   z-index: 4;
   @include transform(rotate(-90deg));
@@ -2129,7 +2130,7 @@ q {
 
   + .enquirytab-btn {
     right: 370px;
-    top: 200px;
+    top: 140px;
     @include transition(all 300ms linear);
   }
 }
@@ -2140,7 +2141,7 @@ q {
 
   + .contacttab-btn {
     right: 369px;
-    top: 200px;
+    top: 250px;
     @include transition(all 300ms linear);
   }
 }
@@ -4450,7 +4451,7 @@ q {
 .comingsoon-content {
   color: #fff;
   text-align: center;
-  width: 60%;
+  width: 480px;
   @extend .get-center;
 
   h1 {
