@@ -749,6 +749,9 @@
   .itinerary-content {
     padding: 0;
   }
+      .travelibro-loader img{
+      width:130px;
+    }
   // agent upgrade page
   .package-img {
     width: 50px;
@@ -1907,7 +1910,9 @@ h4{
   .agt-verification-code {
     padding: 30px 20px 15px;
   }
-
+    .travelibro-loader img{
+      width:100px;
+    }
   .sidemenu {
     overflow-y: scroll;
     padding: 0 20px;
@@ -2329,7 +2334,7 @@ h4{
   }
 
   .user-itinerary-page .close-gallery {
-    left: -310px;
+    left: -340px;
   }
 
   .user-itinerary-page .photos {
