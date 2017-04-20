@@ -1,9 +1,9 @@
 <div class="activity-main min-hght">
-  <div class="container-fluid">
+  <div class="container-fluid m-plr0">
     <div class="relate " ng-class="{'openfilter': isopenfilter}">
       <div class="pt20 pb10 head-title-all">
         <div class="row m-clear">
-          <div class="col-sm-3 col-sm-3 col-xs-2">
+          <div class="col-sm-3 col-sm-3 col-xs-2 m-plr0">
             <div class="btn-destinationfilter">
               <button class="btn btn-pink" ng-click="openFilter()">
                 <i class="fa fa-filter" aria-hidden="true"></i>
@@ -20,8 +20,10 @@
       <div class="libro-filter filterclose">
         <form>
           <div class="pt20 pb10 head-title-all fliter-min-hght bg-white">
-            <div class="pad-btn">
+            <div class="pad-btn m-plr0">
+              <div class="container-fluid">
               <div class="row">
+
                 <!-- <div class="col-md-2 col-sm-3">
                     <div class="select-all-made" ng-mouseleave="showAll=false">
                         <span class="btn btn-default form-control" ng-click="showAll=true" ng-hide="showAll">All
@@ -38,7 +40,7 @@
                   </div>
                   </div> -->
                 <div class="col-md-3 col-sm-3">
-                  <div class="select-all-made city-select relate" ng-init="viewItineraryCity={'outerClass':'outerCity','innerClass':'innerCity'}">
+                  <div class="select-all-made city-select destination-filterscroll relate" ng-init="viewItineraryCity={'outerClass':'outerCity','innerClass':'innerCity'}">
                     <input type="text" ng-model="itinerary.citySearch" class="form-control outerCity" ng-change="getItinerayCity(countryDestData._id);" placeholder="City" ng-click="editOption(viewItineraryCity,'outerCity','innerCity');">
                     <div class="city-dropdow itinerary-dropdown innerCity" ng-show="viewItineraryCity.backgroundClick">
                       <ul>
@@ -53,7 +55,7 @@
                   </div>
                 </div>
                 <div class="col-md-3 col-sm-3">
-                  <div class="select-all-made itinerary-select relate" ng-init="viewItineraryType={'outerClass':'outerIti','innerClass':'innerouterIti'}">
+                  <div class="select-all-made itinerary-select destination-filterscroll relate" ng-init="viewItineraryType={'outerClass':'outerIti','innerClass':'innerouterIti'}">
                     <input type="text" ng-model="itinerary.type" class="form-control outerIti" ng-change="getItineraryType();" placeholder="Type" ng-click="editOption(viewItineraryType,'outerIti','innerouterIti')">
                     <div class="city-dropdow itinerary-dropdown innerouterIti" ng-show="viewItineraryType.backgroundClick">
                       <ul>
@@ -68,7 +70,7 @@
                   </div>
                 </div>
                 <div class="col-md-3 col-sm-3">
-                  <div class="select-all-made by-select relate" ng-init="viewItineraryBy={'outerClass':'outerItiBy','innerClass':'innerouterItiBy'}">
+                  <div class="select-all-made by-select relate destination-filterscroll" ng-init="viewItineraryBy={'outerClass':'outerItiBy','innerClass':'innerouterItiBy'}">
                     <input type="text" ng-model="itinerary.by" class="form-control outerItiBy" ng-change="getItineraryType();" placeholder="By" ng-click="editOption(viewItineraryBy,'outerItiBy','innerouterItiBy')">
                     <div class="city-dropdow itinerary-dropdown innerouterItiBy" ng-show="viewItineraryBy.backgroundClick">
                       <ul>
@@ -87,6 +89,7 @@
                     <a ng-click="clearCountryItinerary();">Clear All</a>
                   </div>
                 </div>
+              </div>
               </div>
             </div>
           </div>

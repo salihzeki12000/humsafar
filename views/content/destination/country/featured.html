@@ -37,13 +37,13 @@
         </div>
     </div>
   </div>
-  <div class="destination-featured">
+  <div class="destination-featured m-p0">
     <div class="head-title-all pt20 bg-white">
       <!-- <h4 class="text-center fnt-22">Featured Cities</h4> -->
     </div>
       <div class="destination-holder bg-white plr30 pt20">
-        <div class="row">
-          <div class="col-md-4 col-sm-6" ng-repeat="feature in countryDestData.featuredCities ">
+        <div class="row m-m0">
+          <div class="col-md-4 col-sm-6 m-plr0" ng-repeat="feature in countryDestData.featuredCities ">
             <div class="img-holder relate" ng-click="countryView(feature.urlSlug,dest.isCity)" style="background:url('{{feature.cityDisplayPhoto | uploadpath}}') #a0a0a0">
               <!-- <img alt="travel-libro" ng-src="{{feature.cityCoverPhoto|uploadpath:400:400:'cover'}}" class="full-width"> -->
               <h4 class="title-head-left country-featured-title color-white text-capitalize">

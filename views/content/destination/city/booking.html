@@ -1,12 +1,12 @@
 <div class="container-fluid m-p0">
-  <div class="booking-sec-card bg-white plr30">
+  <div class="booking-sec-card m-m0 m-plr0 bg-white plr30">
     <!-- Tours and Excursions End  -->
     <div class="title-head-left pt20" hidden>
       <h4 class="uppercase">Popular Tours</h4>
     </div>
     <div class="agt-usr-tourpackages" hidden>
-      <div class="row">
-        <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="tourcard in usrTourPackageCard track by $index">
+      <div class="row m-m0">
+        <div class="col-md-4 col-sm-6 col-xs-12 m-plr0" ng-repeat="tourcard in usrTourPackageCard track by $index">
           <div class="agt-itinerarycard">
             <div class="itinerary-img">
               <div class="logo-booking-card">
@@ -61,8 +61,8 @@
         <img src="img/page.svg" width="60px" alt="TraveLibro" class="img-responsive">
       </div>
       <div class="get-center no-booking-found" ng-if="viewNoTourData">No Data Found For Tours &amp; Excursions</div>
-      <div class="row">
-        <div class="col-md-6" ng-repeat="tour in bookingTourData|limitTo:6 track by $index">
+      <div class="row m-m0">
+        <div class="col-md-6 m-plr0" ng-repeat="tour in bookingTourData|limitTo:6 track by $index">
           <div class="tour-card-holder">
             <div class="blur-overlay-bg-div"></div>
             <div class="tour-view">

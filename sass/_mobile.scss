@@ -24,7 +24,7 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1204px) {
   //header
   .user-detail .list-inline>li {
     padding: 0 5px;
@@ -171,7 +171,7 @@
   } // profile list end
   //vectormap
   .vector-map mappy svg {
-    zoom: 0.6;
+    zoom: 0.63;
   }
   .list-travel-view .review-backimgholder {
     width: 82px;
@@ -1789,7 +1789,7 @@ text-align: center;
     top: 55px;
   }
   .btn-destinationfilter {
-    padding: 10px 0 0px 0px;
+    padding: 0 0 0 20px;
 }
   .destination-content {
     margin-top: 140px;
