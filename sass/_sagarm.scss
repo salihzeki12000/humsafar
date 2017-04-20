@@ -376,6 +376,45 @@
   }
 }
 
+// Agent nav analytics dropdown
+.analytics-dropoptions {
+  display: none;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 150px;
+    background-color: $brand-dark-blue;
+    padding: 10px;
+    border-radius: 5px;
+    &:after{
+      content: '';
+      position: absolute;
+      top: -10px;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid $brand-dark-blue;
+      border-left: 10px solid transparent;
+    }
+
+    ul li{
+      padding: 5px;
+      border: none;
+      border-bottom: 1px solid #a0a0a0;
+      margin: initial;
+      color: #fff;
+      font-size: 13px;
+      vertical-align: middle;
+
+      &:last-child{
+        border-bottom: 0px;
+        padding-bottom: 0;
+      }
+      &:hover, &:active{
+        color: $brand-pink;
+      }
+    }
+}
+// Agent nav analytics dropdown enD
+
 .agent-itinerary-filter {
   .openfilter {
     // min-height: 120px;
@@ -1561,7 +1600,7 @@ q {
 }
 
 .agt-setting-profimg {
-  width: 63px;
+  width: 65px;
   height: 65px;
   border: 2px solid $brand-grey;
   border-radius: 25px;
@@ -1811,6 +1850,7 @@ q {
     display: inline-block;
     width: 30px;
     height: 20px;
+    vertical-align: middle;
   }
 
   .switch input {
@@ -2593,8 +2633,20 @@ q {
 //AGENT HOME ANALYTICS
 
 .agt-home-analytics {
-  background-color: $brand-blue;
-  min-height: 500px;
+  min-height: 100vh;
+}
+
+.analytics-profileviews, .analytics-follower, .analytics-download {
+    padding: 40px;
+    background-color: #fff;
+}
+.analytics-emptyprofile, .analytics-emptyfollower, .analytics-emptydownload {
+    text-align: center;
+    padding: 20px;
+}
+.emptyprofile-analytics, .emptyfollower-analytics, .emptydownload-analytics {
+  width: 50%;
+  margin: 0px auto;
 }
 //AGENT HOME ANALYTICS END
 // tour package dropdown
@@ -2777,11 +2829,21 @@ q {
 }
 
 .agent-modal-bg {
-  background-color: rgba(45,54,85,0.8);
+  height: auto;
   border-radius: 10px;
+  margin: 40px auto;
+  background-color: rgba(45,54,85,0.8);
   color: #fff;
   font-size: 16px;
   text-align: justify;
+
+  .modal-content{
+    position: static;
+    top: auto;
+    width: auto;
+    padding: initial;
+    @include transform(initial);
+  }
 }
 
 .agtmodal-title {

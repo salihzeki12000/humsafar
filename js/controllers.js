@@ -10709,39 +10709,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // choose category Specialisation
     $scope.chooseCategorySpcl = [{
-      img: "img/agt-cat1.png",
+      img: "img/kindofjourney/white-adventure.png",
       caption: "Adventure",
       catWidth: "30px"
     }, {
-      img: "img/agt-cat2.png",
+      img: "img/kindofjourney/white-business.png",
       caption: "Business",
       catWidth: "30px"
     }, {
-      img: "img/agt-cat3.png",
+      img: "img/kindofjourney/white-family.png",
       caption: "Family",
-      catWidth: "42px"
+      catWidth: "32px"
     }, {
-      img: "img/agt-cat4.png",
+      img: "img/kindofjourney/white-romance.png",
       caption: "Romance",
       catWidth: "33px"
     }, {
-      img: "img/agt-cat5.png",
+      img: "img/kindofjourney/white-backpacking.png",
       caption: "Backpacking",
       catWidth: "30px"
     }, {
-      img: "img/agt-cat6.png",
+      img: "img/kindofjourney/white-budget.png",
       caption: "Budget",
       catWidth: "28px"
     }, {
-      img: "img/agt-cat7.png",
+      img: "img/kindofjourney/white-luxury.png",
       caption: "Luxury",
       catWidth: "28px"
     }, {
-      img: "img/agt-cat8.png",
+      img: "img/kindofjourney/white-religious.png",
       caption: "Religious",
       catWidth: "33px"
     }, {
-      img: "img/agt-cat9.png",
+      img: "img/kindofjourney/white-friends.png",
       caption: "Friends",
       catWidth: "30px"
     }];
