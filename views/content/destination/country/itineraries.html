@@ -111,8 +111,8 @@
     </div>
     <div class="activity-container destination-itinerary-holder">
       <div masonry preserve-order infinite-scroll="itineraryLoadMore();" infinite-scroll-disabled="scroll.busy">
-        <div class="row">
-          <div class="col-md-4 col-sm-6 col-xs-12 masonry-brick" ng-repeat="post in countryDestIti track by $index">
+        <div class="row m-m0">
+          <div class="col-md-4 col-sm-6 col-xs-12 m-plr0 masonry-brick" ng-repeat="post in countryDestIti track by $index">
             <!-- user-iternarys -->
             <div class="travel-life-part blog-post bg-white avenir-roman overflow {{post.type}}" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
               <div class="travel-journey-heading">

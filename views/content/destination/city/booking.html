@@ -135,14 +135,14 @@
         <img src="img/page.svg" width="60px" alt="TraveLibro" class="img-responsive">
       </div>
       <div class="get-center no-booking-found" ng-if="viewNoHomeData">No Data Found For HomeStays</div>
-      <div class="row" ng-init="backHomestayView = -1">
-        <div class="col-md-6" ng-repeat="homestay in bookingHomeData|limitTo:6 track by $index">
+      <div class="row m-m0" ng-init="backHomestayView = -1">
+        <div class="col-md-6 m-plr0" ng-repeat="homestay in bookingHomeData|limitTo:6 track by $index">
           <div class="hotel-card-holder mt10 relate">
             <div class="blur-overlay-bg-div"></div>
             <div class="hotel-flipper-holder" ng-class="{'flip-card': backHomestayView==homestay.host._id,'': backHomestayView!==homestay.host._id}">
               <div class="hotel-front-view">
                 <div class="row m-clear">
-                  <div class="col-md-5 col-sm-5 col-pad-zero ">
+                  <div class="col-md-5 col-sm-5 col-pad-zero">
                     <div class="slider-hotel homestay-slider">
                       <div class="item active" style="background-image: url('{{homestay.pic_url}}')">
                       </div>
@@ -323,9 +323,9 @@
       <div class="loader-booking get-center" ng-if="viewVacationLoader">
         <img src="img/page.svg" width="60px" alt="TraveLibro" class="img-responsive">
       </div>
-      <div class="get-center no-booking-found" ng-if="viewNoVacData">No Data Found For Vacations &amp; Rentals</div>
-      <div class="row" ng-init="vacationBackView=-1;">
-        <div class="col-md-6" ng-repeat="vacation in bookingVacData|limitTo:6 track by $index">
+      <div class="get-center no-booking-found" ng-if="viewNoVacData">No Data Found For Vacations Rentals</div>
+      <div class="row m-m0" ng-init="vacationBackView=-1;">
+        <div class="col-md-6 m-plr0" ng-repeat="vacation in bookingVacData|limitTo:6 track by $index">
           <div class="vacation-card-list mt10">
             <div class="hotel-card-holder relate">
               <div class="blur-overlay-bg-div"></div>

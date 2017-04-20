@@ -42,8 +42,8 @@
           </div>
           <!-- moments view tab end -->
           <!-- moment all view -->
-          <div class="container">
-            <div class="moment-view m-plr0">
+          <div class="container m-plr0">
+            <div class="moment-view">
               <div class="moment-all-view m-plr0" ng-if="momentView == 1 && viewMonth==false" infinite-scroll="getMoreMoments(allMoments)">
                 <!-- empty all view profile user login for first time  -->
                 <div class="empty-moment-all empty-profile-moment text-center" ng-if="allMoments.arr[0].token==-1 && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
