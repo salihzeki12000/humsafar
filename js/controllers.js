@@ -3735,7 +3735,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   }
     // };
     $scope.getRating = function (n, type) {
-      console.log(n, type, 'rating');
+      // console.log(n, type, 'rating');
       if (type == "marked") {
         n = parseInt(n);
         return new Array(n);
@@ -4493,7 +4493,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.cityoptions = {};
     $scope.cityoptions.active = "";
     $scope.viewTab = 1;
-    console.log($state.params.country);
+    // console.log($state.params.name);
     switch ($state.params.name) {
       case "must-dos":
         $scope.destination.innerView = alldestination[0];
@@ -4527,7 +4527,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.destination.innerView = alldestination[4];
         $scope.cityDestinationView = false;
         $scope.cityoptions.active = "bookings";
-        $scope.getBooking($scope.bookingCityName, $state.params.country);
+        $scope.getBooking($state.params.url.toLowerCase(), $state.params.country);
         $scope.viewBookingLoader = true;
         $scope.ntMustdo = "";
         break;
@@ -4678,6 +4678,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // });
 
     }
+
+    // booking slider
+        setTimeout(function(){
+          $('.flexslider').flexslider({
+            animation: 'slide',
+            itemWidth: 280,
+            itemMargin: 5,
+            controlNav: false
+          })
+        },100);
+    // booking slider end
 
     $scope.hoveringOver = function (value) {
       $scope.overStar = value;
@@ -10279,7 +10290,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.searchHeaderLoad = TemplateService.searchHeaderLoad;
     }, 300);
 
-    // ISMINE FUNCTION 
+    // ISMINE FUNCTION
     if ($.jStorage.get("isLoggedIn")) {
       $scope.isLoggedIn = true;
       $scope.template.isLoggedIn = true; ///////////////////////////////////////////////////////////////////////
