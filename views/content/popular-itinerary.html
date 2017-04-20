@@ -12,14 +12,14 @@
   </div>
 </div>
 <div class="popular-itinerarypage">
-  <div class="container">
+  <div class="container m-plr0">
   <div class="popular-itinerary second">
            <!-- other itineraries main -->
       <div class="other-itineraries-main">
         <div class="blog-popular-itineraries" infinite-scroll="getMoreItinerary()" infinite-scroll-disabled="scroll.busy">
             <div masonry preserve-order class="blog-itineraries-main">
-              <div class="row">
-                <div class="masonry-brick travelLife col-md-4 col-sm-6" ng-repeat="post in popularIternaryData track by $index" >
+              <div class="row m-m0">
+                <div class="masonry-brick travelLife col-md-4 col-sm-6 m-plr0" ng-repeat="post in popularIternaryData track by $index" >
                   <div class="travel-life-part bg-white blog-post {{post.type}} avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
                     <div class="travel-journey-heading">
                       <div class="editor-logo user-logo pointer" ng-if="post.itineraryBy=='Admin'">
