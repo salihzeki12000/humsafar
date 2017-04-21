@@ -11936,6 +11936,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       currencyCode: 'INR'
     }];
     //tourCurrency end
+
+    // ANALYTICS LEAD FILTER
+    // MONTH FILTER JSON
+    $scope.leadmonth = [
+      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    // MONTH FILTER JSON END
+    // MONTH FILTER JSON
+    $scope.leadyear = [
+      '2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010'];
+    // MONTH FILTER JSON END
+    // ANALYTICS LEAD FILTER END
+    // PROFILE VIIEWS JSON
+    $scope.followingList =[
+      {
+        profilePicture: 'img/default_Images_2.jpg',
+        name: 'Changu Mangu'
+      },{
+        profilePicture: 'img/default_Images_2.jpg',
+        name: 'Anwar Hatela'
+      },{
+        profilePicture: 'img/default_Images_2.jpg',
+        name: 'John Snow'
+      }
+    ]
+    // PROFILE VIIEWS JSON END
   })
 
   .controller('MessageCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
