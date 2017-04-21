@@ -746,6 +746,9 @@ a.color-white {
     -50%));
     z-index: -99;
   }
+  video[poster] {
+    object-fit:cover;
+  }
 }
 
 // slide2
