@@ -48,7 +48,7 @@
       </div>
       <div class="video-ongo-journey relate {{removeVideoButton}}" ng-if="ongo.videos.length>0 && ongo.onDisplay=='videos'" ng-click="playVideo(ongo._id,$parent.index);">
         <video id="{{ongo._id}}_{{index}}" ng-src="{{ongo.photosVideos[index].thumbnail|uploadpath}}" controls="controls" width="550">
-          <source src="{{ongo.photosVideos[index].name| trusted}}" type="video/mp4">
+          <source ng-src="{{ongo.photosVideos[index].name| trusted}}" type="video/mp4">
         </video>
         <div class="youtube-icon get-center">
           <span><i class="fa fa-youtube-play fa-4x color-pink"></i></span>

@@ -30,7 +30,7 @@
     </div>
     <div class="post-video-holder" ng-if="localongo.videos.length>0 && localongo.onDisplay=='videos'">
       <video ng-src="{{localongo.photosVideos[index].thumbnail|uploadpath}}" controls="controls">
-        <source src="{{localongo.photosVideos[index].name|trusted}}" type="video/mp4">
+        <source ng-src="{{localongo.photosVideos[index].name|trusted}}" type="video/mp4">
       </video>
     </div>
     <!-- post img and video img holder -->
