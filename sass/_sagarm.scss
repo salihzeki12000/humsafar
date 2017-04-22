@@ -378,7 +378,6 @@
 
 // Agent nav analytics dropdown
 .analytics-dropoptions {
-  display: none;
     position: absolute;
     top: 30px;
     left: 0;
@@ -386,6 +385,7 @@
     background-color: $brand-dark-blue;
     padding: 10px;
     border-radius: 5px;
+    z-index: 5;
     &:after{
       content: '';
       position: absolute;
@@ -2697,6 +2697,7 @@ q {
     }
     .ui-select-dropdown{
       max-height: 170px;
+      z-index: 3;
     }
     input[type="search"]{
       border: none;
@@ -2754,6 +2755,7 @@ q {
     padding: 5px 8px;
     border: 1px solid $brand-cyan;
     border-radius: 4px;
+    margin-right: 5px;
     color: $brand-cyan;
     p{
       margin: 0;

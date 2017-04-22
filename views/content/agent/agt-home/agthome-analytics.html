@@ -1,7 +1,7 @@
 <div class="agt-home-analytics">
 
   <!-- PROFILE VIEWS SECTION -->
-  <div class="analytics-profileviews hide">
+  <div class="analytics-profileviews " ng-show="profileview">
     <!-- FILTER -->
       <div class="analytics-filter analyticsprofile-filter">
         <div class="container-fluid">
@@ -109,7 +109,7 @@
   <!-- PROFILE VIEWS SECTION END -->
 
   <!-- FOLLOWERS SECTION -->
-  <div class="analytics-follower hide">
+  <div class="analytics-follower " ng-show="follower">
     <!-- FILTER -->
       <div class="analytics-filter analyticsleads-filter">
         <div class="container-fluid">
@@ -223,7 +223,7 @@
   <!-- FOLLOWERS SECTION END -->
 
   <!-- LEADS SECTION -->
-  <div class="analytics-leads hide">
+  <div class="analytics-leads " ng-show="leads">
     <!-- FILTER -->
     <div class="analytics-filter analyticsleads-filter">
       <div class="container-fluid">
@@ -283,7 +283,7 @@
   <!-- LEADS SECTION END -->
 
   <!-- VIEWS DOWNLOADS SECTION -->
-  <div class="analytics-download">
+  <div class="analytics-download " ng-show="viewsdownload">
     <!-- FILTER -->
     <div class="analytics-filter analyticsleads-filter ">
         <div class="container-fluid">

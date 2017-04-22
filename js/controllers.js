@@ -11333,12 +11333,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // category type end
   })
 
-  .controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+  .controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state,$anchorScroll,anchorSmoothScroll,$location) {
     $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.oneAtATime = true;
+
+    $scope.profileview = false;
+    $scope.follower = false;
+    $scope.leads = false;
+    $scope.viewsdownload = false;
 
     // on load modal
     // $(window).load(function(){
@@ -11432,6 +11437,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       case "agthome-analytics":
         $scope.agthome.innerView = allagthome[6];
         $scope.agthomeoptions.active = "agthome-analytics";
+        $scope.profileview = true;
         break;
       case "agthome-aboutus":
         $scope.agthome.innerView = allagthome[7];
@@ -11443,6 +11449,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.agenthomeItinerary = true;
     $scope.agentFixednav = ""
     $scope.getTab = function (view) {
+      console.log(view,'view of agentang');
       $scope.agthome.innerView = allagthome[view];
       var url = "agthome-itinerary";
       var active = "";
@@ -11488,6 +11495,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           url = "agthome-analytics";
           $scope.agthomeoptions.active = "agthome-analytics";
           $scope.agenthomeItinerary = false;
+          $scope.profileview = true;
           $scope.agentFixednav = "change-blue";
           break;
         case 7:
@@ -11510,6 +11518,44 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     // tab change end
+
+    //Show OPTIONS
+    $scope.viewOption = false;
+    console.log($scope.showOption, 'lolwa');
+    $scope.showOptions = function(){
+      if($scope.viewOption == false){
+        $scope.viewOption = true;
+        console.log($scope.viewOption, 'lolwa true');
+      } else {
+        $scope.viewOption = false;
+      }
+    }
+    //Show OPTIONS END
+    $scope.getAgentScroll = function(getId){
+      $scope.getTab(6);
+      $scope.profileview = false;
+      $scope.follower = false;
+      $scope.leads = false;
+      $scope.viewsdownload = false;
+      switch (getId) {
+        case 'profileview':
+            $scope.profileview = true;
+        break;
+        case 'follower':
+            $scope.follower = true;
+        break;
+        case 'leads':
+            $scope.leads = true;
+        break;
+        case 'viewsdownload':
+            $scope.viewsdownload = true;
+        break;
+        default:
+            $scope.profileview = true;
+        break;
+      }
+      // anchorSmoothScroll.scrollTo(getId);
+    }
 
     //user itinerary cards
     $scope.usrItineraryCard = [{
