@@ -1363,6 +1363,22 @@ a.full-screen {
       @include opacity(0.9);
     }
 }
+
+// AGENT LOGIN SIGNUP TOGGLE
+.loginsign-toggle {
+  margin: 30px 0;
+  color: #fff;
+  a {
+    margin: 0 10px;
+    font-size: 15px;
+    color: #fff;
+    @extend .avenir-heavy;
+    &:hover, &:focus, &:active{
+      color: #fff;
+    }
+  }
+}
+// AGENT LOGIN SIGNUP TOGGLE END
 // MyLife Journey
 
 .video-gif-journey {

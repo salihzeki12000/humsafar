@@ -179,6 +179,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.headerfixed = "fixed-header";
     $scope.animationsEnabled = true;
     $scope.formData = {};
+    $scope.agentSignup = false;
 
     $scope.bookingLink = function () {
       window.location.href = "https://travelibro.com/bookings/";
@@ -299,6 +300,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       });
     };
+
+    // AGENT LOGIN SIGN UP TOGGLE
+    $scope.toggleAgentSign = function(){
+      if ($scope.agentSignup == false){
+        $scope.agentSignup = true;
+      } else{
+        $scope.agentSignup = false;
+      }
+    };
+    // AGENT LOGIN SIGN UP TOGGLE END
   })
 
   .controller('ForgotPasswordEmailCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
