@@ -1090,7 +1090,7 @@ q {
   position: relative;
   z-index: 5;
 
-  span {
+  .add-holder {
     @include square(30px);
     padding: 1px;
     display: inline-block;
@@ -2847,8 +2847,9 @@ q {
 
   ul {
     li {
-      margin: 0 8px;
       width: 25%;
+      border: none;
+      margin: 0 8px;
     }
   }
 }
@@ -2864,6 +2865,12 @@ q {
   ul li {
     padding: 0;
     border-bottom: 1px solid $brand-cyan;
+
+    span{
+      padding: 5px;
+      background-color: transparent;
+      color: #fff;
+    }
   }
 }
 

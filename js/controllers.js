@@ -11931,39 +11931,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // category of Specialisation array
     $scope.categoriesSpecial = [{
-      tourImgCat: "img/agt-cat1.png",
+      tourImgCat: "img/kindofjourney/white-adventure.png",
       catwidth: "25px",
       tourCat: "Adventure"
     }, {
-      tourImgCat: "img/agt-cat2.png",
+      tourImgCat: "img/kindofjourney/white-business.png",
       catwidth: "25px",
       tourCat: "Business"
     }, {
-      tourImgCat: "img/agt-cat3.png",
+      tourImgCat: "img/kindofjourney/white-family.png",
       catwidth: "33px",
       tourCat: "Family"
     }, {
-      tourImgCat: "img/agt-cat4.png",
+      tourImgCat: "img/kindofjourney/white-romance.png",
       catwidth: "28px",
       tourCat: "Romance"
     }, {
-      tourImgCat: "img/agt-cat5.png",
+      tourImgCat: "img/kindofjourney/white-backpacking.png",
       catwidth: "25px",
       tourCat: "Backpacking"
     }, {
-      tourImgCat: "img/agt-cat6.png",
+      tourImgCat: "img/kindofjourney/white-budget.png",
       catwidth: "24px",
       tourCat: "Budget"
     }, {
-      tourImgCat: "img/agt-cat7.png",
+      tourImgCat: "img/kindofjourney/white-luxury.png",
       catwidth: "22px",
       tourCat: "Luxury"
     }, {
-      tourImgCat: "img/agt-cat8.png",
+      tourImgCat: "img/kindofjourney/white-religious.png",
       catwidth: "28px",
       tourCat: "Religious"
     }, {
-      tourImgCat: "img/agt-cat9.png",
+      tourImgCat: "img/kindofjourney/white-friends.png",
       catwidth: "25px",
       tourCat: "Friends"
     }];
