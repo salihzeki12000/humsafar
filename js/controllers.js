@@ -687,28 +687,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.holidayKindType = [{
       img: "img/beach.png",
-      caption: "Island & Beach",
+      caption: "Islands & Beaches",
       storeCaption: "Islands & Beaches",
     }, {
       img: "img/city.png",
-      caption: "City",
+      caption: "Cities",
       storeCaption: "Cities"
     }, {
       img: "img/safari.png",
-      caption: "Safari",
-      storeCaption: "Safari"
+      caption: "Safaris",
+      storeCaption: "Safaris"
     }, {
       img: "img/mountain.png",
       caption: "Mountains",
       storeCaption: "Mountains"
     }, {
       img: "img/cruise.png",
-      caption: "Cruise",
+      caption: "Cruises",
       storeCaption: "Cruises"
     }, {
       img: "img/countryside.png",
-      caption: "Countryside",
-      storeCaption: "Countryside"
+      caption: "Countrysides",
+      storeCaption: "Countrysides"
     }];
     $scope.usuallygoHoliday = [{
       img: "img/map.png",
@@ -763,7 +763,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.idealHoliday = [{
       img: "img/luxury.png",
-      caption1: "luxury",
+      caption1: "Luxury",
       storeCaption: "Luxury"
     }, {
       img: "img/backpacking.png",
@@ -772,7 +772,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       img: "img/greentravelling.png",
       caption1: "Green",
-      caption2: "travelling",
+      caption2: "Travelling",
       storeCaption: "Green Travelling"
     }, {
       img: "img/pocketfriendly.png",
@@ -808,8 +808,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       storeCaption: "Food & Wine"
     }, {
       img: "img/festival.png",
-      caption1: "Festivals",
-      storeCaption: "Festivals"
+      caption1: "Festival",
+      storeCaption: "Festival"
     }];
 
     _.each()
@@ -6761,28 +6761,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.travelConfig.chooseHoliday = [{
       img: "img/beach.png",
-      caption: "Island & Beach",
+      caption: "Islands & Beaches",
       storeCaption: "Islands & Beaches",
     }, {
       img: "img/city.png",
-      caption: "City",
+      caption: "Cities",
       storeCaption: "Cities"
     }, {
       img: "img/safari.png",
-      caption: "Safari",
-      storeCaption: "Safari"
+      caption: "Safaris",
+      storeCaption: "Safaris"
     }, {
       img: "img/mountain.png",
       caption: "Mountains",
       storeCaption: "Mountains"
     }, {
       img: "img/cruise.png",
-      caption: "Cruise",
+      caption: "Cruises",
       storeCaption: "Cruises"
     }, {
       img: "img/countryside.png",
-      caption: "Countryside",
-      storeCaption: "Countryside"
+      caption: "Countrysides",
+      storeCaption: "Countrysides"
     }];
 
     $scope.travelConfig.usuallyGo = [{
@@ -6837,7 +6837,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.travelConfig.idealSelect = [{
       img: "img/luxury.png",
-      caption1: "luxury",
+      caption1: "Luxury",
       storeCaption: "Luxury"
     }, {
       img: "img/backpacking.png",
@@ -6882,8 +6882,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       storeCaption: "Food & Wine"
     }, {
       img: "img/festival.png",
-      caption1: "Festivals",
-      storeCaption: "Festivals"
+      caption1: "Festival",
+      storeCaption: "Festival"
     }];
 
     var selectedCity = $scope.userData.homeCity;
@@ -6948,9 +6948,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // page 2 integration starts
     _.each(new Array(4), function (value, key) {
+      // console.log(value,'value',key,'key');
       switch (key) {
         case 0:
+        console.log($scope.userData.travelConfig.kindOfHoliday,'kind of holiday');
           _.each($scope.userData.travelConfig.kindOfHoliday, function (n1) {
+            if(n1=='Countryside'){
+              n1='Countrysides'
+            }
             var index = _.findIndex($scope.travelConfig.chooseHoliday, function (n2) {
               return n1 == n2.storeCaption;
             });
@@ -6989,7 +6994,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     })
 
     // page 2 integration ends
-
+    console.log($scope.travelConfig,'what is travelConfig');
     $scope.editUserData = function (userData, status, valid) {
       $scope.saveSetting = true;
       console.log(userData, 'user data', status, 'status');
@@ -11092,6 +11097,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       name: 'Zimbabwe',
       code: 'ZW'
     }];
+
+    // FILTER CLICK
+    $scope.showme = false;
+    $scope.showAgentFilter = function(){
+      if($scope.showme == false){
+        $scope.showme = true;
+      } else {
+        $scope.showme = false;
+      }
+    };
+    // FILTER CLICK END
     //ITINERARY FILTER END
 
     // tour packages card
