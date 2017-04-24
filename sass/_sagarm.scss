@@ -653,6 +653,38 @@
   @include transform(translateX(-50%));
 }
 //AGENT USER ITENERARY END
+
+// AGENT USER FILTER
+.agentfilter-drop {
+  position: absolute;
+  top: 34px;
+  left: 0;
+  width: 100%;
+  border-radius: 0 0 4px 4px;
+  background-color: #fff;
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $brand-lighter-grey;
+  }
+
+  ul{
+    max-height: 175px;
+    overflow-y: auto;
+
+    li{
+      padding: 5px;
+    }
+  }
+}
+// AGENT USER FILTER END
 //AGENT USER ITENERARY END
 
 .agt-home-aboutus,
