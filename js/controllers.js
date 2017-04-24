@@ -179,6 +179,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.headerfixed = "fixed-header";
     $scope.animationsEnabled = true;
     $scope.formData = {};
+    $scope.agentSignup = false;
 
     $scope.bookingLink = function () {
       window.location.href = "https://travelibro.com/bookings/";
@@ -299,6 +300,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       });
     };
+
+    // AGENT LOGIN SIGN UP TOGGLE
+    $scope.toggleAgentSign = function(){
+      if ($scope.agentSignup == false){
+        $scope.agentSignup = true;
+      } else{
+        $scope.agentSignup = false;
+      }
+    };
+    // AGENT LOGIN SIGN UP TOGGLE END
   })
 
   .controller('ForgotPasswordEmailCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
@@ -10709,39 +10720,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // choose category Specialisation
     $scope.chooseCategorySpcl = [{
-      img: "img/agt-cat1.png",
+      img: "img/kindofjourney/white-adventure.png",
       caption: "Adventure",
       catWidth: "30px"
     }, {
-      img: "img/agt-cat2.png",
+      img: "img/kindofjourney/white-business.png",
       caption: "Business",
       catWidth: "30px"
     }, {
-      img: "img/agt-cat3.png",
+      img: "img/kindofjourney/white-family.png",
       caption: "Family",
-      catWidth: "42px"
+      catWidth: "32px"
     }, {
-      img: "img/agt-cat4.png",
+      img: "img/kindofjourney/white-romance.png",
       caption: "Romance",
       catWidth: "33px"
     }, {
-      img: "img/agt-cat5.png",
+      img: "img/kindofjourney/white-backpacking.png",
       caption: "Backpacking",
       catWidth: "30px"
     }, {
-      img: "img/agt-cat6.png",
+      img: "img/kindofjourney/white-budget.png",
       caption: "Budget",
       catWidth: "28px"
     }, {
-      img: "img/agt-cat7.png",
+      img: "img/kindofjourney/white-luxury.png",
       caption: "Luxury",
       catWidth: "28px"
     }, {
-      img: "img/agt-cat8.png",
+      img: "img/kindofjourney/white-religious.png",
       caption: "Religious",
       catWidth: "33px"
     }, {
-      img: "img/agt-cat9.png",
+      img: "img/kindofjourney/white-friends.png",
       caption: "Friends",
       catWidth: "30px"
     }];
@@ -11333,12 +11344,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // category type end
   })
 
-  .controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+  .controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state,$anchorScroll,anchorSmoothScroll,$location) {
     $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.oneAtATime = true;
+
+    $scope.profileview = false;
+    $scope.follower = false;
+    $scope.leads = false;
+    $scope.viewsdownload = false;
 
     // on load modal
     // $(window).load(function(){
@@ -11432,6 +11448,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       case "agthome-analytics":
         $scope.agthome.innerView = allagthome[6];
         $scope.agthomeoptions.active = "agthome-analytics";
+        $scope.profileview = true;
         break;
       case "agthome-aboutus":
         $scope.agthome.innerView = allagthome[7];
@@ -11443,6 +11460,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.agenthomeItinerary = true;
     $scope.agentFixednav = ""
     $scope.getTab = function (view) {
+      console.log(view,'view of agentang');
       $scope.agthome.innerView = allagthome[view];
       var url = "agthome-itinerary";
       var active = "";
@@ -11488,6 +11506,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           url = "agthome-analytics";
           $scope.agthomeoptions.active = "agthome-analytics";
           $scope.agenthomeItinerary = false;
+          $scope.profileview = true;
           $scope.agentFixednav = "change-blue";
           break;
         case 7:
@@ -11510,6 +11529,44 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     // tab change end
+
+    //Show OPTIONS
+    $scope.viewOption = false;
+    console.log($scope.showOption, 'lolwa');
+    $scope.showOptions = function(){
+      if($scope.viewOption == false){
+        $scope.viewOption = true;
+        console.log($scope.viewOption, 'lolwa true');
+      } else {
+        $scope.viewOption = false;
+      }
+    }
+    //Show OPTIONS END
+    $scope.getAgentScroll = function(getId){
+      $scope.getTab(6);
+      $scope.profileview = false;
+      $scope.follower = false;
+      $scope.leads = false;
+      $scope.viewsdownload = false;
+      switch (getId) {
+        case 'profileview':
+            $scope.profileview = true;
+        break;
+        case 'follower':
+            $scope.follower = true;
+        break;
+        case 'leads':
+            $scope.leads = true;
+        break;
+        case 'viewsdownload':
+            $scope.viewsdownload = true;
+        break;
+        default:
+            $scope.profileview = true;
+        break;
+      }
+      // anchorSmoothScroll.scrollTo(getId);
+    }
 
     //user itinerary cards
     $scope.usrItineraryCard = [{
@@ -11936,6 +11993,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       currencyCode: 'INR'
     }];
     //tourCurrency end
+
+    // ANALYTICS LEAD FILTER
+    // MONTH FILTER JSON
+    $scope.leadmonth = [
+      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    // MONTH FILTER JSON END
+    // MONTH FILTER JSON
+    $scope.leadyear = [
+      '2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010'];
+    // MONTH FILTER JSON END
+    // ANALYTICS LEAD FILTER END
+    // PROFILE VIIEWS JSON
+    $scope.followingList =[
+      {
+        profilePicture: 'img/default_Images_2.jpg',
+        name: 'Changu Mangu'
+      },{
+        profilePicture: 'img/default_Images_2.jpg',
+        name: 'Anwar Hatela'
+      },{
+        profilePicture: 'img/default_Images_2.jpg',
+        name: 'John Snow'
+      }
+    ]
+    // PROFILE VIIEWS JSON END
   })
 
   .controller('MessageCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
