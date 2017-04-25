@@ -673,9 +673,6 @@ text-align: center;
 .destination-featured {
     padding: 20px 10px;
 }
-  .travel-bg, .holiday-step {
-    background-attachment: inherit;
-}
 }
 
 // media query for 991px to 768px end
@@ -1876,6 +1873,9 @@ width: 150px;
     line-height: 1;
     margin: 0 auto;
   }
+    .travel-bg, .holiday-step {
+    background-attachment: inherit;
+}
 }
 
 // media query for 767px to 480px end
