@@ -551,11 +551,11 @@
         </div>
         <!-- PRIVATE PROFILE EMPTY SCREEN END -->
         <div class="local-life-main" ng-hide="showLocalLife" ng-if="template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public'">
-          <div class="overlay-filter" ng-class="{ 'fliter-open': isopen}" ng-click="openMyLifeFilter()"></div>
+          <div class="overlay-filter ml5" ng-class="{ 'fliter-open': isopen}" ng-click="openMyLifeFilter()"></div>
           <div class="inline-block filter-local-life avenir-roman" ng-class="{ 'fliter-open': isopen} ">
             <form action="">
               <div class="clearfix pt10 pl20 pr20">
-                <div class="pull-right visible-xs" ng-click="openMyLifeFilter()">
+                <div class="pull-right" ng-click="openMyLifeFilter()">
                   <span class="clear-all pointer pl20">
                       <i class="fa fa-times-circle-o fnt-20"></i>
                     </span>
@@ -680,7 +680,7 @@
             <div class="relate">
               <div class="bg-dark-cyan post-header-view">
                 <div class="clearfix">
-                  <div class="pull-right mylife-filter font-bold inline-block v-mid pointer visible-xs" ng-click="openMyLifeFilter()">
+                  <div class="pull-right mylife-filter font-bold inline-block ml5 v-mid pointer" ng-click="openMyLifeFilter()">
                     Filter <i class="fa fa-filter"></i>
                   </div>
                   <div class="pull-left">
@@ -701,7 +701,7 @@
                   <div class="clearfix"> </div>
                   <div class="visible-xs">
                     <div class="total-post">
-                      <span>Total Post's <b>128</b></span>
+                      <span>Total Post's <b>{{localPostCount.totalCount}}</b></span>
                     </div>
                   </div>
                 </div>
@@ -710,9 +710,11 @@
                 <div class="local-post" infinite-scroll="getMoreLocalPost();" infinite-scroll-disabled='scroll2.busy' infinite-scroll-distance='1'>
                   <div class="local-postbox" ng-if="localView.view">
                     <!-- local life data -->
+                    <div class="row">
                     <post-local-life ng-repeat="localPost in localLifeJourney track by $index" ongolocal="localPost" local-view="localView" open-comment-section="openCommentSection(ongolocal)"
                       open-like-section="openLikeSection(ongolocal)" template="template">
                     </post-local-life>
+                    </div>
                     <!-- local life data end-->
                   </div>
                 </div>
@@ -721,7 +723,7 @@
             </div>
           </div>
         </div>
-        <div class="" ng-if="showLikeCommentCard">
+        <div ng-if="showLikeCommentCard">
           <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike'
             list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
         </div>

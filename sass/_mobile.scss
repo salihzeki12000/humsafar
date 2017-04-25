@@ -1473,9 +1473,9 @@ width: 150px;
     height: calc(100vh - 55px);
     overflow-y: scroll;
     @include transition (all ease 300ms);
-    @include transform(translatex(-115%));
+    @include transform(translatex(-300));
     &.fliter-open {
-      @include transform(translatex(-10%));
+      @include transform(translatex(0));
     }
      ::-webkit-scrollbar {
       width: 5px;
