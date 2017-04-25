@@ -378,7 +378,6 @@
 
 // Agent nav analytics dropdown
 .analytics-dropoptions {
-  display: none;
     position: absolute;
     top: 30px;
     left: 0;
@@ -386,6 +385,7 @@
     background-color: $brand-dark-blue;
     padding: 10px;
     border-radius: 5px;
+    z-index: 5;
     &:after{
       content: '';
       position: absolute;
@@ -653,6 +653,38 @@
   @include transform(translateX(-50%));
 }
 //AGENT USER ITENERARY END
+
+// AGENT USER FILTER
+.agentfilter-drop {
+  position: absolute;
+  top: 34px;
+  left: 0;
+  width: 100%;
+  border-radius: 0 0 4px 4px;
+  background-color: #fff;
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $brand-lighter-grey;
+  }
+
+  ul{
+    max-height: 175px;
+    overflow-y: auto;
+
+    li{
+      padding: 5px;
+    }
+  }
+}
+// AGENT USER FILTER END
 //AGENT USER ITENERARY END
 
 .agt-home-aboutus,
@@ -1090,7 +1122,7 @@ q {
   position: relative;
   z-index: 5;
 
-  span {
+  .add-holder {
     @include square(30px);
     padding: 1px;
     display: inline-block;
@@ -2631,22 +2663,139 @@ q {
 }
 // USER TRAVEL ACTIVITY CARD END
 //AGENT HOME ANALYTICS
-
-.agt-home-analytics {
-  min-height: 100vh;
+.agt-home-analytics{
+  @extend .avenir-roman;
 }
-
-.analytics-profileviews, .analytics-follower, .analytics-download {
-    padding: 40px;
-    background-color: #fff;
-}
+.analytics-profileviews, .analytics-follower, .analytics-download{}
 .analytics-emptyprofile, .analytics-emptyfollower, .analytics-emptydownload {
-    text-align: center;
-    padding: 20px;
+  min-height: 100vh;
+  padding: 60px;
+  background-color: #fff;
+  text-align: center;
 }
 .emptyprofile-analytics, .emptyfollower-analytics, .emptydownload-analytics {
   width: 50%;
   margin: 0px auto;
+  color: $brand-blue;
+  @extend .avenir-roman;
+}
+
+.emptyleads-analytics{
+  width: 100%;
+  height: 450px;
+  margin: 30px 0px;
+  background-color: #fff;
+}
+.analytics-filter{
+  padding: 10px;
+  background-color: rgba(255,255,255,0.5);
+  color: #fff;
+}
+.analyticsfilter-head{
+  p{
+    margin: 10px 0px 0;
+    @extend .avenir-heavy;
+  }
+}
+.filterlead-count{
+  display: inline-block;
+  margin: 10px 10px 0;
+  vertical-align: middle;
+  @extend .avenir-heavy;
+}
+.analytics-filterui{
+  display: inline-block;
+  width: 190px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  margin: 0px 5px;
+  vertical-align: middle;
+  .form-group{
+    margin: 0;
+  }
+  .ui-select-bootstrap{
+    background-color: transparent;
+    color: #424242;
+    &:hover, &:active, &:focus{
+      outline: 0;
+    }
+    .ui-select-toggle{
+      border: none;
+      background-color: transparent;
+      &:hover, &:active, &:focus{
+        background-color: transparent;
+        outline: 0;
+      }
+    }
+    .ui-select-dropdown{
+      max-height: 170px;
+      z-index: 3;
+    }
+    input[type="search"]{
+      border: none;
+      background-color: transparent;
+    }
+    .btn-default-focus{
+      color: #424242;
+      background-color: transparent;
+      border: none;
+    }
+
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: $brand-lighter-grey;
+    }
+    .ui-select-bootstrap .ui-select-choices-row>span{
+      color: #424242;
+      &:hover{
+        background-color: $brand-lighter-grey;
+      }
+    }
+    .ui-select-choices-row.active>span{
+      background-color: $brand-lighter-grey;
+      color: #424242;
+    }
+  }
+}
+.leadfilter-btn{
+  display: inline-block;
+  vertical-align: top;
+}
+
+.analytics-profilecontent, .analytics-followercontent, .analytics-downloadcontent{
+  min-height: 100vh;
+  padding: 60px 0;
+}
+.follower-connectbtn {
+  margin-bottom: -25px;
+  text-align: center;
+}
+
+.analytics-downloadcontent .footer-travel-sec{
+  padding: 15px 10px;
+  border-radius: 0 0 5px 5px;
+  background-color: $brand-blue;
+  .footertravel-count{
+    display: inline-block;
+    padding: 5px 8px;
+    border: 1px solid $brand-cyan;
+    border-radius: 4px;
+    margin-right: 5px;
+    color: $brand-cyan;
+    p{
+      margin: 0;
+    }
+  }
+  .footertravel-downloadcount{
+    font-size: 16px;
+  }
 }
 //AGENT HOME ANALYTICS END
 // tour package dropdown
@@ -2730,8 +2879,9 @@ q {
 
   ul {
     li {
-      margin: 0 8px;
       width: 25%;
+      border: none;
+      margin: 0 8px;
     }
   }
 }
@@ -2747,6 +2897,12 @@ q {
   ul li {
     padding: 0;
     border-bottom: 1px solid $brand-cyan;
+
+    span{
+      padding: 5px;
+      background-color: transparent;
+      color: #fff;
+    }
   }
 }
 

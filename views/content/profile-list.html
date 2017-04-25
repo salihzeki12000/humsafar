@@ -7,15 +7,15 @@
         <div class="pull-left">
           <div class="list-profile-tab">
             <ul>
-              <li><a href="" ng-click="changeStatus('following',followingList);" ng-class="{'active-list': activeMenu == 'following'}">Following - <span class="avenir-heavy">{{count.following_count}}</span></a></li>
-              <li><a href="" ng-click="changeStatus('followers',followersList);" ng-class="{'active-list': activeMenu == 'followers'}">Followers - <span class="avenir-heavy">{{count.followers_count}}</span></a></li>
-              <li><a href="" ng-click="changeStatus('countries-visited')" ng-class="{'active-list': activeMenu == 'countries-visited'}">Countries Visited - <span class="avenir-heavy">{{count.countriesVisited_count}}</span></a></li>
-              <li><a href="" ng-click="changeStatus('bucket-list')" ng-class="{'active-list': activeMenu == 'bucket-list'}">Bucket List - <span class="avenir-heavy">{{count.bucketList_count}}</span></a></li>
+              <li><a ng-click="changeStatus('following',followingList);" ng-class="{'active-list': activeMenu == 'following'}">Following - <span class="avenir-heavy">{{count.following_count}}</span></a></li>
+              <li><a ng-click="changeStatus('followers',followersList);" ng-class="{'active-list': activeMenu == 'followers'}">Followers - <span class="avenir-heavy">{{count.followers_count}}</span></a></li>
+              <li><a ng-click="changeStatus('countries-visited')" ng-class="{'active-list': activeMenu == 'countries-visited'}">Countries Visited - <span class="avenir-heavy">{{count.countriesVisited_count}}</span></a></li>
+              <li><a ng-click="changeStatus('bucket-list')" ng-class="{'active-list': activeMenu == 'bucket-list'}">Bucket List - <span class="avenir-heavy">{{count.bucketList_count}}</span></a></li>
             </ul>
           </div>
         </div>
         <div class="pull-right">
-          <form action="">
+          <form>
             <!-- search friend -->
             <div class="search-friend" ng-if="activeMenu == 'following' || activeMenu == 'followers'">
               <div class="follow-followers-holder">
@@ -133,7 +133,7 @@
   <!-- profile tab strip end -->
   <!-- profile tab main -->
   <div class="profile-tab-main">
-    <div class="container-fluid">
+    <div class="container-fluid m-plr0">
       <!-- following tab -->
       <div class="follower-tab-main" ng-if="activeMenu == 'following'">
         <div class="following-container" ng-repeat="list in followingList | filter:searchCard.name">
@@ -251,7 +251,7 @@
         </div>
         <!-- PRIVATE PROFILE EMPTY SCREEN END -->
         <div class="list-country-visited">
-          <div class="row">
+          <div class="row m-m0">
             <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="country in countryVisitedList track by $index">
               <div class="country-list-holder">
                 <div class="list-imgholder" style="background-image: url('{{country.countryId.countryBackgroundImage|uploadpath}}');">
@@ -304,7 +304,7 @@
         </div>
         <!-- PRIVATE PROFILE EMPTY SCREEN END -->
         <div class="bucket-list-main">
-          <div class="row">
+          <div class="row m-m0">
             <div class="col-md-3 col-sm-6 col-pad-zero" ng-repeat="bucket in bucketList track by $index" id="{{bucket._id}}">
               <div class="bucket-list-holder">
                 <div class="list-imgholder" style="background-image: url('{{bucket.countryBackgroundImage|uploadpath}}');">

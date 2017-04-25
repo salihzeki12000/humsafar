@@ -1328,11 +1328,22 @@ firstapp.filter('fromCalculation', function () {
     }
   };
 });
+// firstapp.filter('trusted',function () {
+//   return function (url) {
+//     console.log(url,'url');
+//     url = url.split("storage.googleapis.com").join("travelibro.com");
+//     console.log(url,'libro');
+//     return url;
+//   };
+// });
+
+// for trusted url
 firstapp.filter('trusted', ['$sce', function ($sce) {
   return function (url) {
     return $sce.trustAsResourceUrl(url);
   };
 }]);
+// for trusted url end
 
 firstapp.filter('toCalculation', function () {
   return function (country, countryIndex, cityIndex) {

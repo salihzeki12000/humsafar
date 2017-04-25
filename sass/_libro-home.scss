@@ -746,6 +746,9 @@ a.color-white {
     -50%));
     z-index: -99;
   }
+  video[poster] {
+    object-fit:cover;
+  }
 }
 
 // slide2
@@ -1360,6 +1363,22 @@ a.full-screen {
       @include opacity(0.9);
     }
 }
+
+// AGENT LOGIN SIGNUP TOGGLE
+.loginsign-toggle {
+  margin: 30px 0;
+  color: #fff;
+  a {
+    margin: 0 10px;
+    font-size: 15px;
+    color: #fff;
+    @extend .avenir-heavy;
+    &:hover, &:focus, &:active{
+      color: #fff;
+    }
+  }
+}
+// AGENT LOGIN SIGNUP TOGGLE END
 // MyLife Journey
 
 .video-gif-journey {
@@ -1454,7 +1473,7 @@ width: 100%;
 }
 
 video[poster]{
-object-fit:cover;
+// object-fit:cover;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;

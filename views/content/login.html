@@ -26,8 +26,7 @@
                             <span class="input-group-addon">
                                                           <i class="fa fa-envelope color-white" aria-hidden="true"></i>
                                                         </span>
-                            <input type="email" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Emaild Id" placeholder="Email Id"
-                              ng-model="formData.email">
+                            <input type="email" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Emaild Id" placeholder="Email Id" ng-model="formData.email">
                           </div>
                         </div>
                         <div class="form-group">
@@ -42,7 +41,7 @@
                           </div>
                         </div>
                         <div class="login-error-veri" ng-if="showError">
-<p>*Incorrect Email or Password entered.</p>
+                          <p>*Incorrect Email or Password entered.</p>
                         </div>
                         <div class="btn-login">
                           <button type="submit" class="btn btn-outline color-white avenir-roman">
@@ -101,51 +100,83 @@
                     </div>
                   </div>
                 </uib-tab>
-                <uib-tab index="2" heading="Register As Partner" data-toggle="tooltip" title="Travel Agent | Tour Operator | Local Guide"
-                  class="pointer login-partner-tooltip">
-                  <!--<div class="min-hght ptb20">
-                    <div class="login-form">
+                <uib-tab index="2" heading="Register As Partner" data-toggle="tooltip" title="Travel Agent | Tour Operator | Local Guide" class="pointer login-partner-tooltip">
+                  <!-- <div class="min-hght ptb20"> -->
+                    <!-- AGENT LOGIN -->
+                    <!-- <div class="login-form agent-signup" ng-hide="agentSignup">
                       <form action="">
                         <div class="form-group">
                           <div class="input-group">
                             <span class="input-group-addon">
-                                                            <i class="fa fa-user color-white" aria-hidden="true"></i>
-                                                        </span>
-                            <input type="text" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Company Name" placeholder="Company Name">
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <div class="input-group">
-                            <span class="input-group-addon">
-                                                          <i class="fa fa-envelope color-white" aria-hidden="true"></i>
-                                                        </span>
+                              <i class="fa fa-envelope color-white" aria-hidden="true"></i>
+                            </span>
                             <input type="email" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Emaild Id" placeholder="Email Id">
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="input-group">
                             <span class="input-group-addon">
-                                                            <i class="fa fa-lock color-white fnt-20" aria-hidden="true"></i>
-                                                        </span>
+                              <i class="fa fa-lock color-white fnt-20" aria-hidden="true"></i>
+                            </span>
+                            <input type="password" class="form-control color-white" placeholder="Password">
+                          </div>
+                        </div>
+                        <div class="btn-login mt25">
+                          <button class="btn btn-outline color-white avenir-roman"> Login </button>
+                        </div>
+                        <div class="loginsign-toggle">
+                          <span>or</span>
+                          <a ng-click="toggleAgentSign();">Register As Partner</a>
+                        </div>
+                      </form>
+                    </div> -->
+                    <!-- AGENT LOGIN END -->
+
+                    <!-- AGENT SIGNUP -->
+                    <!-- <div class="login-form agent-signup" ng-show="agentSignup">
+                      <form action="">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span class="input-group-addon">
+                              <i class="fa fa-user color-white" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Company Name" placeholder="Company Name">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span class="input-group-addon">
+                              <i class="fa fa-envelope color-white" aria-hidden="true"></i>
+                            </span>
+                            <input type="email" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Emaild Id" placeholder="Email Id">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span class="input-group-addon">
+                              <i class="fa fa-lock color-white fnt-20" aria-hidden="true"></i>
+                            </span>
                             <input type="password" class="form-control color-white" placeholder="Password">
                           </div>
                         </div>
                         <div class="terms-condt">
                           <div class="checkbox">
                             <label class="color-white">
-                                                            <input type="checkbox" id="tnc"/>
-                                                            <label for="tnc" class="avenir-roman">I accept the Terms &amp; Conditions and Privacy Policy of the website.</label>
+                            <input type="checkbox" id="tnc"/>
+                            <label for="tnc" class=" avenir-roman">I accept the Terms &amp; Conditions and Privacy Policy of the website.</label>
                             </label>
                           </div>
                         </div>
                         <div class="btn-login mt25">
-                          <button class="btn btn-outline color-white avenir-roman">
-                                                        Login
-                                                    </button>
+                          <button class="btn btn-outline color-white avenir-roman"> Register </button>
+                        </div>
+                        <div class="loginsign-toggle">
+                          <a ng-click="toggleAgentSign();">Go To Login</a>
                         </div>
                       </form>
-                    </div>
-                  </div>-->
+                    </div> -->
+                    <!-- AGENT SIGNUP END -->
+                  <!-- </div> -->
                   <div class="min-hght ptb20">
                     <div class="login-form">
                       <div class="login-comming-soon" ng-hide="showme">
@@ -186,14 +217,14 @@
           <a ui-sref="destination" class="color-white">Destinations</a>
         </li>
         <li>
-                <!--<a href="https://travelibro.com/bookings/{{'?accessToken=' + accessToken}}" ng-if="accessToken" class="color-white">Bookings</a>-->
-                <a ng-click="bookingLink();"  class="color-white">Bookings</a>
+          <!--<a href="https://travelibro.com/bookings/{{'?accessToken=' + accessToken}}" ng-if="accessToken" class="color-white">Bookings</a>-->
+          <a ng-click="bookingLink();" class="color-white">Bookings</a>
         </li>
         <li>
           <a ui-sref="popularitinerary" class="color-white">Itineraries</a>
         </li>
         <li>
-              <a href="https://travelibro.com/blog" class="color-white">Blogs</a>
+          <a href="https://travelibro.com/blog" class="color-white">Blogs</a>
         </li>
         <li>
           <a ui-sref="about" class="color-white">About Us</a>
