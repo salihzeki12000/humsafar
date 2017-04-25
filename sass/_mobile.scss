@@ -248,6 +248,9 @@
 .activity-post .user-detail h4 {
     margin-bottom: 2px;
 }
+.destination-featured {
+    padding: 20px 0px;
+}
 }
 
 // media query for 991px to 768px
@@ -1865,6 +1868,11 @@ width: 150px;
   .masonry-brick {
     position: static !important;
   }
+  .score-round-holder .review{
+    max-width: 64px;
+    line-height: 1;
+    margin: 0 auto;
+  }
 }
 
 // media query for 767px to 480px end
@@ -2689,6 +2697,11 @@ margin: 0!important;
 }
 }
 //destination bookings end
+.country-visited-tab .country-list-holder,
+.bucket-tab-main .bucket-list-holder {
+    margin: 0;
+    margin-bottom: 15px;
+  }
 }
 
 // media query for 480px to 320px end
