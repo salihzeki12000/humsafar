@@ -2702,6 +2702,10 @@ margin: 0!important;
     margin: 0;
     margin-bottom: 15px;
   }
+
+  .travel-bg, .holiday-step {
+    background-attachment: inherit;
+}
 }
 
 // media query for 480px to 320px end
