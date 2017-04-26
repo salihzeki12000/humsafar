@@ -1,17 +1,13 @@
-<div id="{{localongo._id}}" class="post-main col-md-4">
+<div id="{{localongo._id}}" class="post-main">
   <!-- header local life-->
   <div class="heading-local-life avenir-roman">
     <p class="color-light-grey heading-localtitle" ng-bind-html="localongo.localpostString"></p>
     <p class="color-light-grey m-clear heading-localtimestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{localongo.UTCModified | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i>
       <span class="mr5">{{localongo.UTCModified | date : 'hh:mm a'}}</span>
     </p>
-    <div class="location circle-rounded pointer">
-      <!-- <img src="img/location-cyan.png" alt="" height="18">
-      <img src="img/thought-cyan.png" alt="" height="18">
-      <img src="img/video-cyan.png" alt="" height="18">
-      <img src="img/camera-cyan.png" alt="" height="18"> -->
+    <!-- <div class="location circle-rounded pointer">
       <img ng-src="{{localongo|typeOfPost:'local-life'}}" alt="">
-    </div>
+    </div> -->
   </div>
   <!-- header local life end-->
   <!-- mainpost local life -->
@@ -138,4 +134,3 @@
   </div>
   <!-- footer local life end-->
 </div>
-

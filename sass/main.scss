@@ -2785,11 +2785,12 @@ header {
     width: 240px;
     position: fixed;
     top: 55px;
-    z-index: 4;
-    background: #fff;
-    padding: 0 30px;
+    left: 0;
     height: calc(100vh - 55px);
+    padding: 0 30px;
+    background: #fff;
     overflow-y: scroll;
+    z-index: 4;
     @include transition (all ease 300ms);
     @include transform(translatex(-350px));
     &.fliter-open {
@@ -2833,14 +2834,18 @@ header {
   font-size: 16px;
 }
 
+.mylife-filter{
+  margin: 0px 15px;
+}
+
 .local-post {
   // height: calc( 100vh - 175px);
-  height: 940px;
-  padding: 30px 60px;
-  border-right: 1px solid $brand-lighter-grey;
-  border-left: 1px solid $brand-lighter-grey;
-  overflow-x: auto;
-  direction: rtl;
+  // height: 940px;
+  padding: 30px 0px;
+  // border-right: 1px solid $brand-lighter-grey;
+  // border-left: 1px solid $brand-lighter-grey;
+  // overflow-x: auto;
+  // direction: rtl;
 }
 
 .local-postbox {
@@ -2889,7 +2894,7 @@ header {
     font-size: 15px;
 
     p {
-      padding-right: 60px;
+      // padding-right: 60px;
 
       a {
         color: $brand-blue;
