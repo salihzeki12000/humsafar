@@ -712,7 +712,7 @@
                     <div class="local-postbox" ng-if="localView.view" masonry preserve-order>
                       <!-- local life data -->
                       <div class="row">
-                        <div class="col-md-4 masonry-brick" ng-repeat="localPost in localLifeJourney track by $index">
+                        <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="localPost in localLifeJourney track by $index">
                           <post-local-life ongolocal="localPost" local-view="localView" open-comment-section="openCommentSection(ongolocal)" open-like-section="openLikeSection(ongolocal)"
                             template="template">
                           </post-local-life>
