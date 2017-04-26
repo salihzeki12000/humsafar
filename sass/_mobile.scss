@@ -15,15 +15,18 @@
   .volume-off-on {
     right: 60px;
     bottom: 150px;
-  } //vectormap
+  } 
+}
+@media screen and (max-width: 1400px) {
+  //vectormap
   .vector-map {
     padding: 40px 20px 30px;
-    mappy svg {
-      zoom: 0.8;
-    }
+       //vectormap
+ mappy svg {
+    zoom: 0.75;
+  }
   }
 }
-
 @media screen and (max-width: 1204px) {
   //header
   .user-detail .list-inline>li {
@@ -97,7 +100,8 @@
   .local-post-slider .flexslider .slides>li {
     width: 115px !important;
     margin-right: 0 !important;
-  } // LOCAL LIFE END
+  } 
+  // LOCAL LIFE END
   // setting
   .setting-menu-tab {
     padding: 0;
@@ -502,10 +506,7 @@
       font-size: 40px;
     }
   } // popular agent end
-  //vectormap
-  .vector-map mappy svg {
-    zoom: 0.75;
-  } // .moment-local-view,
+ // .moment-local-view,
   // .moment-travel-view {
   //   margin: 15px 20px 15px 0;
   // }
