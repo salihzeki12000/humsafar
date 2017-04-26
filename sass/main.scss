@@ -2724,65 +2724,21 @@ header {
     padding: 15px 30px;
   }
 }
-
-
 //filter mylife
-  .overlay-filter {
+    .overlay-filter {
     width: 100%;
     height: calc(100vh - 55px);
     position: fixed;
     top: 55px;
-    @include transition (all ease 300ms);
-    @include transform(translatex(350px));
-    z-index: 4;
-    &.fliter-open {
-      @include transform(translatex(0px));
-    }
-  }
-  .filter-local-life {
-    width: 240px;
-    position: fixed;
-    top: 55px;
-    z-index: 4;
-    background: #fff;
-    padding: 0 30px;
-    height: calc(100vh - 55px);
-    overflow-y: scroll;
     @include transition (all ease 300ms);
     @include transform(translatex(-115%));
-    &.fliter-open {
-      @include transform(translatex(-10%));
-    }
-     ::-webkit-scrollbar {
-      width: 5px;
-    }
-     ::-webkit-scrollbar-track {
-      background-color: transparent;
-    }
-     ::-webkit-scrollbar-thumb {
-      background-color: transparent;
-    }
-  } // mylife journey sidefilter
-  .filter-local-life {
-    span {
-      font-size: 16px;
-      color: #a0a0a0;
-    }
-  }//filter mylife
-  .overlay-filter {
-    width: 100%;
-    height: calc(100vh - 55px);
-    position: fixed;
-    top: 55px;
-    @include transition (all ease 300ms);
-    @include transform(translatex(-350px));
     z-index: 4;
     &.fliter-open {
-      @include transform(translatex(0px));
+      @include transform(translatex(0%));
     }
   }
   .filter-local-life {
-    width: 240px;
+    width: 300px;
     position: fixed;
     top: 55px;
     left: 0;
