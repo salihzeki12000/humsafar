@@ -2985,7 +2985,7 @@ header {
 
 .related-postholder {
   margin: 10px 10px 0 0;
-  @include square(136px);
+  @include square(65px);
   border: 1px solid $brand-light-grey;
   overflow: hidden;
 
@@ -3042,7 +3042,7 @@ header {
 
   .flex-direction-nav .flex-prev {
     left: auto;
-    right: -35px;
+    right: -20px;
     opacity: 1;
     top: 45%;
     z-index: 1;
@@ -3050,7 +3050,7 @@ header {
 
   .flex-direction-nav .flex-next {
     left: auto;
-    right: -35px;
+    right: -20px;
     opacity: 1;
     top: 65%;
     z-index: 1;

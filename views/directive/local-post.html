@@ -31,7 +31,7 @@
     </div>
     <!-- post img and video img holder -->
     <!-- related images if less then 5 -->
-    <div class="post-imgholder-related" ng-if="localongo.photosVideos.length>1 && localongo.photosVideos.length <=5">
+    <div class="post-imgholder-related" ng-if="localongo.photosVideos.length>1 && localongo.photosVideos.length <=4">
       <div class="related-postholder inline-block" ng-repeat="related in localongo.photosVideos track by $index">
         <img ng-src="{{related.thumbnail|uploadpath:140:140:'cover'}}" alt="" class="img-responsive pointer" ng-if="localongo.photosVideos[$index] && localongo.photosVideos[$index].thumbnail"
           ng-click="changeView($index,'videos')">
@@ -41,8 +41,8 @@
     </div>
     <!-- related images if less then 5 end -->
     <!-- related images flexslider more then 5 -->
-    <div class="local-post-slider" ng-if="localongo.photosVideos.length >5">
-      <flex-slider class="carousel" flex-slide="relatedslide in localongo.photosVideos track by $index" item-width="136" animation="slide"
+    <div class="local-post-slider" ng-if="localongo.photosVideos.length >4">
+      <flex-slider class="carousel" flex-slide="relatedslide in localongo.photosVideos track by $index" item-width="65" animation="slide"
         item-margin="15" control-nav="false" mousewheel="false">
         <li>
           <div class="related-postholder">
