@@ -2255,11 +2255,15 @@ header {
   min-height: 20px;
 
   li {
-    padding: 0 10px;
+    padding: 0 5px;
     line-height: 12px;
 
     &:first-child {
-      padding: 0 10px 0 0;
+      padding: 0 5px 0 0;
+    }
+
+    img{
+      width: 15px;
     }
   }
 

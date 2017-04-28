@@ -11379,7 +11379,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // on load modal end
 
     // ADD BUTTTON BACKDROP AND CLICK
-
     $scope.showItinerary = false;
     $scope.addHomeBackdrop = "";
     $scope.addItinerary = function () {
@@ -11545,6 +11544,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     // tab change end
+
+    //enquiry & contact card initialisation
+    // enquiry
+    $scope.viewEnquiry = false;
+    $scope.getBackdrop = "";
+    $scope.showEnquiry = function () {
+      // console.log("click");
+      if ($scope.viewEnquiry == false) {
+        $scope.getBackdrop = "backdrop-enquiry";
+        $scope.viewEnquiry = true;
+      } else {
+        $scope.viewEnquiry = false;
+        $scope.getBackdrop = "";
+      }
+    };
+    //enquiry end
+
+    //contact us
+    $scope.viewContact = false;
+    $scope.getBackdrop = "";
+    $scope.showContact = function () {
+      // console.log("click");
+      if ($scope.viewContact == false) {
+        $scope.getBackdrop = "backdrop-enquiry";
+        $scope.viewContact = true;
+      } else {
+        $scope.viewContact = false;
+        $scope.getBackdrop = "";
+      }
+    };
+    //contact us end
+    //enquiry & contact card initialisation
 
     //Show OPTIONS
     $scope.viewOption = false;
