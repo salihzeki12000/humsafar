@@ -2847,7 +2847,7 @@ header {
   .heading-local-life {
     padding: 10px;
     position: relative;
-    font-size: 15px;
+    font-size: 14px;
 
     p {
       // padding-right: 60px;
@@ -2865,6 +2865,9 @@ header {
 
     .location {
       @include position(absolute, 10px 10px null null);
+    }
+    .heading-localtimestamp {
+      font-size: 12px;
     }
   }
 
@@ -2893,7 +2896,7 @@ header {
       }
 
       i {
-        font-size: 22px;
+        font-size: 20px;
       }
 
       &:first-child {
@@ -2953,8 +2956,8 @@ header {
 }
 // local post main section
 .localpost-imgholder {
-  min-height: 300px;
-  max-height: 500px;
+  min-height: 250px;
+  max-height: 300px;
   position: relative;
   background-color: $brand-lighter-grey;
   overflow: hidden;
@@ -2999,15 +3002,23 @@ header {
 }
 
 .post-video-holder {
+  height: 400px;
+  position: relative;
+  overflow: hidden;
   video {
+    position: relative;
     width: 100%;
     height: auto;
-    max-height: 500px;
+    max-height: 400px;
+  }
+  .local-blur-videoimg {
+    width: 100%;
+    @include filter(blur(4px));
   }
 }
 // local post main section end
 .local-post-slider {
-  padding: 10px;
+  padding: 0px 10px;
 
   .carousel {
     width: 95%;
@@ -3021,7 +3032,7 @@ header {
   //   margin-right: 10px !important;
   // }
   .flex-direction-nav a {
-    @include square(20px);
+    @include square(15px);
     color: transparent;
     text-shadow: none;
 
@@ -3044,7 +3055,7 @@ header {
     left: auto;
     right: -20px;
     opacity: 1;
-    top: 45%;
+    top: 55%;
     z-index: 1;
   }
 
@@ -3052,23 +3063,23 @@ header {
     left: auto;
     right: -20px;
     opacity: 1;
-    top: 65%;
+    top: 80%;
     z-index: 1;
   }
 
   .flexslider:hover {
     .flex-direction-nav .flex-prev {
       left: auto;
-      right: -35px;
+      right: -20px;
       opacity: 1;
-      top: 45%;
+      top: 55%;
     }
 
     .flex-direction-nav .flex-next {
       left: auto;
-      right: -35px;
+      right: -20px;
       opacity: 1;
-      top: 65%;
+      top: 80%;
     }
   }
 }

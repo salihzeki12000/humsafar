@@ -25,7 +25,10 @@
       <img ng-src="{{localongo.photosVideos[index].name|uploadpath}}" alt="" class="img-responsive get-center post-single-photo">
     </div>
     <div class="post-video-holder" ng-if="localongo.videos.length>0 && localongo.onDisplay=='videos'">
-      <video poster="{{localongo.photosVideos[index].thumbnail|uploadpath}}" controls="controls">
+      <div class="local-blur-videoimg get-center">
+        <img ng-src="{{localongo.photosVideos[index].thumbnail|uploadpath}}" alt="Video" class="img-responsive">
+      </div>
+      <video controls="controls">
         <source src="{{localongo.photosVideos[index].name|trusted}}" type="video/mp4">
       </video>
     </div>
@@ -75,10 +78,10 @@
               </a>
             </li>
             <li>
-              <a href="" ng-click="openCommentSection({'ongolocal':localongo})"><img src="img/comments.png" alt="" height="22"></a>
+              <a href="" ng-click="openCommentSection({'ongolocal':localongo})"><img src="img/comments.png" alt="" height="20"></a>
             </li>
             <li>
-              <a href=""><img src="img/share.png" alt="" height="22" ng-click="sharePost(localongo.sharingUrl)"></a>
+              <a href=""><img src="img/share.png" alt="" height="20" ng-click="sharePost(localongo.sharingUrl)"></a>
             </li>
           </ul>
         </div>
@@ -127,7 +130,7 @@
           </div>
         </div>-->
         <div class="pull-right">
-          <img src="/img/libro-home/cycle-green.png" alt="" height="25">
+          <img src="/img/libro-home/cycle-green.png" alt="" height="20">
         </div>
       </div>
     </div>
