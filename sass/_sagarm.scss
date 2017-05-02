@@ -319,7 +319,6 @@
 }
 
 .empty-intro {
-  background-color: #fff;
   min-height: 100vh;
 }
 
@@ -740,6 +739,16 @@
   @extend .avenir-roman;
 }
 
+.agt-home-testimonialreiewsintro{
+  padding: 50px 0;
+  margin-top: -50px;
+}
+
+.agttravel-intro{
+  padding: 50px 0;
+  margin-top: -50px;
+}
+
 .agt-home-photovideos .agt-home-photo-card {
   margin-top: -50px;
   // TO ALIGN WITH ADD PHOTO BUTTON
@@ -751,6 +760,10 @@
 .agt-usr-testimonialreviews,
 .agt-usr-touractivity {
   background-color: rgba(45,54,85,0.5);
+}
+
+.agent-cardsection{
+  min-height: 100vh;
 }
 
 .rt-foot-marg {
@@ -2160,7 +2173,7 @@ q {
   position: absolute;
   top: 80px;
   right: -29px;
-  z-index: 4;
+  z-index: 6;
   @include transform(rotate(-90deg));
   @include transition(all 300ms linear);
 
@@ -2233,7 +2246,7 @@ q {
   position: absolute;
   right: 0;
   top: 0;
-  z-index: 4;
+  z-index: 6;
 }
 
 .backdrop-enquiry:after {
@@ -2244,7 +2257,7 @@ q {
   right: 0;
   bottom: 0;
   background-color: rgba(0,0,0,0.7);
-  z-index: 3;
+  z-index: 5;
 }
 
 .change {
