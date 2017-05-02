@@ -661,15 +661,15 @@
                 </div>
                 <!-- more-filter-photo video thought -->
                 <div class="more-filter">
-                  <div class="local-filter-checkbox custom-checkbox">
+                  <div class="local-filter-checkbox custom-checkbox" ng-if="localPostCount.photoCount>0">
                     <input type="checkbox" id="photo" ng-model="localFilterPost.photos" ng-click="getByFilter(localFilterPost,'photos')">
                     <label for="photo">Photos</label>
                   </div>
-                  <div class="local-filter-checkbox custom-checkbox">
+                  <div class="local-filter-checkbox custom-checkbox" ng-if="localPostCount.videoCount>0">
                     <input type="checkbox" id="video" ng-model="localFilterPost.videos" ng-click="getByFilter(localFilterPost,'videos')">
                     <label for="video">Videos</label>
                   </div>
-                  <div class="local-filter-checkbox custom-checkbox">
+                  <div class="local-filter-checkbox custom-checkbox" ng-if="localPostCount.thoughtCount>0">
                     <input type="checkbox" id="thought" ng-model="localFilterPost.thoughts" ng-click="getByFilter(localFilterPost,'thoughts')">
                     <label for="thought">Thoughts</label>
                   </div>

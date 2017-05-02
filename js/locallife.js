@@ -13,13 +13,11 @@ var viewlocalLife = angular.module('locallife', [])
             "month": localData.month,
             "year": localData.year,
             "categories": localData.checkInType,
-            // "categories": [],
             "photos": localData.photos,
             "videos": localData.videos,
             "thoughts": localData.thoughts,
             "rating": localData.rating,
             "urlSlug": $.jStorage.get("activeUrlSlug")
-            // "rating": []
           }
         }, 'paginationLoad').success(function (data) {
           var localLifeData = data;
