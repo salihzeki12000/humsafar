@@ -303,6 +303,15 @@ var navigationservice = angular.module('navigationservice', [])
           "_id": id
         }).success(callback);
       },
+      deleteItinerary: function (id, callback) {
+        TravelibroService.post(adminURL + "/itinerary/deleteItineraryWeb", {
+          "_id": id
+        }).success(function (data) {
+          callback(data);
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
       acceptFollowRequest: function (formData, callback) {
         TravelibroService.post(adminURL + "/user/acceptFollowerWeb", formData).success(function (data) {
           callback(data);

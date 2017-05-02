@@ -7972,7 +7972,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
 
     $scope.template = TemplateService.changecontent("detail-itinerary");
-    $scope.menutitle = NavigationService.makeactive("DetailedItinerary");
+    $scope.menutitle = NavigationService.makeactive("Detailed Itinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
@@ -8642,7 +8642,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
 
     $scope.template = TemplateService.changecontent("quick-itinerary");
-    $scope.menutitle = NavigationService.makeactive("QuickItinerary");
+    $scope.menutitle = NavigationService.makeactive("Quick Itinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
@@ -9632,6 +9632,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     // sharing local life modal end
 
+    // DELETE ITINERARY
+    var deleteModal = "";
+    $scope.deletePop = function(id){
+      $scope.itineraryId = id;
+      deleteModal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/delete-itinerary.html",
+        scope: $scope
+      });
+    }
+    $scope.deleteItinerary = function(postId){
+      console.log(postId, 'delete post');
+      NavigationService.deleteItinerary(
+        postId
+      , function (data) {
+        $state.go('mylife', {
+          'urlSlug': $scope.userData.urlSlug
+        })
+      })
+    };
+    // DELETE ITINERARY END
+
 
   })
 
@@ -9922,6 +9944,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     //photo gallery backdrop end
+
+    // DELETE ITINERARY
+    var deleteModal = "";
+    $scope.deletePop = function(id){
+      $scope.itineraryId = id;
+      deleteModal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/delete-itinerary.html",
+        scope: $scope
+      });
+    }
+    $scope.deleteItinerary = function(postId){
+      console.log(postId, 'delete post');
+      NavigationService.deleteItinerary(
+        postId
+      , function (data) {
+        $state.go('mylife', {
+          'urlSlug': $scope.userData.urlSlug
+        })
+      })
+    };
+    // DELETE ITINERARY END
 
   })
 
