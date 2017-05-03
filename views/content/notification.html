@@ -1,4 +1,4 @@
-<div class="notification-page"> 
+<div class="notification-page">
   <div class="container m-plr0">
     <div class="row m-m0" infinite-scroll="loadMoreNotification()" infinite-scroll-disabled="notifyScroll.busy">
       <div class="col-md-3 col-sm-4 col-xs-12 m-plr0" ng-repeat="notify in notificationCard track by $index">
@@ -114,7 +114,7 @@
                   <img ng-src="{{notify.data.coverPhoto|uploadpath:250:100:'cover'}}" alt="" class="img-responsive get-center">
                 </div> -->
                 <!-- ACCEPT DECLINE BUTTONS -->
-                <div class="notification-btn text-center">
+                <div class="notification-btn btn-notificationitinerary">
                   <button type="button" name="button" class="btn btn-notification-card" ng-click="acceptDeclineItinerary(notify,1)">Accept</button>
                   <button type="button" name="button" class="btn btn-notification-card" ng-click="acceptDeclineItinerary(notify,0)">Decline</button>
                   <button type="button" name="button" class="btn btn-notification-card" ng-click="routeItinerary(notify);"> View </button>
