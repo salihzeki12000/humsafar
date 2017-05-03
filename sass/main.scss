@@ -3006,7 +3006,8 @@ header {
 }
 
 .post-video-holder {
-  height: 400px;
+  min-height: 200px;
+  max-height: 400px;
   position: relative;
   overflow: hidden;
   video {
