@@ -15,7 +15,7 @@
   .volume-off-on {
     right: 60px;
     bottom: 150px;
-  } 
+  }
 }
 @media screen and (max-width: 1400px) {
   //vectormap
@@ -100,7 +100,7 @@
   .local-post-slider .flexslider .slides>li {
     width: 115px !important;
     margin-right: 0 !important;
-  } 
+  }
   // LOCAL LIFE END
   // setting
   .setting-menu-tab {
@@ -1871,6 +1871,15 @@ width: 150px;
     line-height: 1;
     margin: 0 auto;
   }
+
+  // single post local and travel
+  .single-local-post, .single-journey-post {
+    .post-main, .ongo-journey-card {
+      width: 100%;
+      zoom: 1;
+    }
+  }
+  // single post local and travel end
 }
 
 // media query for 767px to 480px end
@@ -2632,7 +2641,7 @@ margin: 0!important;
     padding: 5px;
     .panel-title a h3{
     padding: 5px 0;
-    } 
+    }
     .fa {
     margin-right: 0;
     margin-top: 5px;
