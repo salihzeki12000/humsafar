@@ -4148,7 +4148,9 @@ header {
     @include position(absolute, null 5px 7px null);
   }
 }
-
+.setting-save-load {
+  margin: 9px 5px;
+}
 .setting-tab-gender {
   .female,
   .male {
