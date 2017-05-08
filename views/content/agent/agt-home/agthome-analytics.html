@@ -15,17 +15,18 @@
                 <div class="analytics-filterui profilefilter-month">
                   <div class="form-group">
                     <ui-select ng-model="profileMonthFilter" theme="bootstrap">
-                      <ui-select-match placeholder="From">{{$select.selected.name}}</ui-select-match>
+                      <ui-select-match placeholder="From">{{$select.month}}</ui-select-match>
                       <ui-select-choices repeat="month in leadmonth | filter: $select.search track by $index">
                         <div>
                           {{month}}
                         </div>
                       </ui-select-choices>
                     </ui-select>
+                    <span class="filter-droparrow"><i class="fa fa-chevron-down" ></i></span>
                   </div>
                 </div>
                   <!-- MONTH FILTER END  -->
-                  <!-- YEAR FILTER  -->
+                  <!-- YEAR FILTER -->
                 <div class="analytics-filterui profilefilter-year">
                   <div class="form-group">
                     <ui-select ng-model="profileYearFilter" theme="bootstrap">
@@ -36,6 +37,7 @@
                         </div>
                       </ui-select-choices>
                     </ui-select>
+                    <span class="filter-droparrow"><i class="fa fa-chevron-down" ></i></span>
                   </div>
                 </div>
                 <!-- YEAR FILTER END  -->
@@ -131,6 +133,7 @@
                         </div>
                       </ui-select-choices>
                     </ui-select>
+                    <span class="filter-droparrow"><i class="fa fa-chevron-down" ></i></span>
                   </div>
                 </div>
                   <!-- MONTH FILTER END  -->
@@ -145,6 +148,7 @@
                         </div>
                       </ui-select-choices>
                     </ui-select>
+                    <span class="filter-droparrow"><i class="fa fa-chevron-down" ></i></span>
                   </div>
                 </div>
                 <!-- YEAR FILTER END  -->
@@ -245,6 +249,7 @@
                       </div>
                     </ui-select-choices>
                   </ui-select>
+                  <span class="filter-droparrow"><i class="fa fa-chevron-down" ></i></span>
                 </div>
               </div>
                 <!-- MONTH FILTER END  -->
@@ -259,6 +264,7 @@
                       </div>
                     </ui-select-choices>
                   </ui-select>
+                  <span class="filter-droparrow"><i class="fa fa-chevron-down" ></i></span>
                 </div>
               </div>
               <!-- YEAR FILTER END  -->
@@ -301,6 +307,7 @@
                         </div>
                       </ui-select-choices>
                     </ui-select>
+                    <span class="filter-droparrow"><i class="fa fa-chevron-down" ></i></span>
                   </div>
                 </div>
                   <!-- MONTH FILTER END  -->
@@ -315,6 +322,7 @@
                         </div>
                       </ui-select-choices>
                     </ui-select>
+                    <span class="filter-droparrow"><i class="fa fa-chevron-down" ></i></span>
                   </div>
                 </div>
                 <!-- YEAR FILTER END  -->

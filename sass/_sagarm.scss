@@ -2717,6 +2717,7 @@ q {
   @extend .avenir-heavy;
 }
 .analytics-filterui{
+  position: relative;
   display: inline-block;
   width: 190px;
   border: 1px solid #fff;
@@ -2775,6 +2776,17 @@ q {
       background-color: $brand-lighter-grey;
       color: #424242;
     }
+  }
+  .caret{
+    display: none;
+  }
+
+  .filter-droparrow{
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    color: #fff;
+    @include transform(translateY(-50%));
   }
 }
 .leadfilter-btn{
