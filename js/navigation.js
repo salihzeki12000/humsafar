@@ -1,7 +1,9 @@
 var adminURL = "";
 var allowAccess = "";
-adminURL = "https://travelibro.wohlig.com/api";
-// adminURL = "http://travelibro.wohlig.com/api";
+
+adminURL = "https://travelibro.com/api";
+// adminURL = "https://travelibro.wohlig.com/api";
+
 
 var imgurl = adminURL + "/upload/";
 var imgpath = imgurl + "readFile";
@@ -137,6 +139,16 @@ var navigationservice = angular.module('navigationservice', [])
           method: "POST"
         }, true).success(callback).error(errCallback);
       },
+      getAgentsProfile: function (slug, callback, errCallback) {
+        console.log(slug);
+        return TravelibroService.http({
+          url: adminURL + "/agent/getOneDataWeb",
+          data: {
+            'urlSlug': slug
+          },
+          method: "POST"
+        }, true).success(callback).error(errCallback);
+      },
       getOthersProfile: function (slug, callback, errCallback) {
         TravelibroService.http({
           url: adminURL + "/user/getOneDataWeb",
@@ -180,8 +192,15 @@ var navigationservice = angular.module('navigationservice', [])
           method: "POST"
         }).success(callback).error(errCallback);
       },
+      getCountriesByContinent: function (callback, errCallback) {
+        TravelibroService.http({
+          url: adminURL + "/agent/getCountriesByContinentWeb",
+          method: "POST"
+        }).success(callback).error(errCallback);
+
+      },
       getAllCities: function (formData, callback, errCallback) {
-        TravelibroService.post(adminURL + "/city/locationSearch", formData).success(callback).error(errCallback);
+        TravelibroService.post(adminURL + "/city/locationSearch", formData,true).success(callback).error(errCallback);
       },
       searchCityByCountry: function (formData, callback) {
         var arr = {};
@@ -193,7 +212,7 @@ var navigationservice = angular.module('navigationservice', [])
           url: adminURL + "/city/searchCity",
           data: formData,
           method: "POST"
-        }).success(callback).error(function (data) {
+        },true).success(callback).error(function (data) {
           console.log(data);
         });
       },
@@ -325,6 +344,15 @@ var navigationservice = angular.module('navigationservice', [])
           "_id": id
         }).success(callback);
       },
+      deleteItinerary: function (id, callback) {
+        TravelibroService.post(adminURL + "/itinerary/deleteItineraryWeb", {
+          "_id": id
+        }).success(function (data) {
+          callback(data);
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
       acceptFollowRequest: function (formData, callback) {
         TravelibroService.post(adminURL + "/user/acceptFollowerWeb", formData).success(function (data) {
           callback(data);
@@ -360,8 +388,29 @@ var navigationservice = angular.module('navigationservice', [])
           console.log(data);
         });
       },
-      getDestinationBooking: function (formData, callback) {
-        $http.get("https://blog.travelibro.com/migrations/city_bookings.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
+      // getDestinationBooking: function (formData, callback) {
+      //   $http.get("https://blog.travelibro.com/migrations/city_bookings.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
+      //     callback(data);
+      //   });
+      // },
+
+      getBookingTour: function (formData, callback) {
+        $http.get("https://blog.travelibro.com/migrations/city_tours.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
+          callback(data);
+        });
+      },
+      getBookingVaction: function (formData, callback) {
+        $http.get("https://blog.travelibro.com/migrations/city_vacation_rentals.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
+          callback(data);
+        });
+      },
+      getBookingHomeStay: function (formData, callback) {
+        $http.get("https://blog.travelibro.com/migrations/city_home_stays.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
+          callback(data);
+        });
+      },
+      getBookingHotel: function (formData, callback) {
+        $http.get("https://blog.travelibro.com/migrations/city_hotels.json?city_name=" + formData.cityName + "&country_name=" + formData.countryName + "&withCredentials=true", formData).success(function (data) {
           callback(data);
         });
       },
@@ -455,6 +504,14 @@ var navigationservice = angular.module('navigationservice', [])
         returnVal.saveUserData(object, callback, function (data) {
           console.log(data);
         });
+      },ReportProblems: function (formData, callback) {
+        TravelibroService.http({
+          url: adminURL + "/ReportProblems/save",
+          data: formData,
+          method: "POST"
+        }).success(callback).error(function (data) {
+          console.log(data);
+        });
       },
       oldUsersLogin: function (formData, callback) {
         TravelibroService.http({
@@ -463,6 +520,30 @@ var navigationservice = angular.module('navigationservice', [])
           method: "POST"
         }).success(callback).error(function (data) {
           console.log(data);
+        });
+      },
+      registerAsAgent: function (formData, callback) {
+        console.log(formData);
+        // formData.accessToken = "Ob3m4K6ka7Iw39Mc";
+        TravelibroService.http({
+          url: adminURL + "/agent/signUpWeb",
+          data: formData,
+          method: "POST"
+        }).success(function (data) {
+          if (data.value) {
+            callback(data);
+          } else {
+            console.log(data);
+          }
+        });
+      },
+      loginAsAgent: function (formData, callback) {
+        TravelibroService.http({
+          url: adminURL + "/agent/loginWeb",
+          data: formData,
+          method: "POST"
+        }).success(function (data) {
+          callback(data);
         });
       },
       sendOtpToReset: function (email, callback) {

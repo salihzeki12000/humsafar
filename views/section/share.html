@@ -62,13 +62,14 @@
       <div class="menu-contact share ab">
         <div class="row">
           <div class="col-sm-8">
-            <div class="hidden-xs">
+            <div>
             <ul class="list-unstyled list-inline avenir-black">
               <li>
                 <a ui-sref="destination" class="color-white">Destinations</a>
               </li>
               <li>
-                <a href="https://travelibro.com/bookings/" class="color-white">Bookings</a>
+                                <!--<a href="https://travelibro.com/bookings/{{'?accessToken=' + accessToken}}" ng-if="accessToken" class="color-white">Bookings</a>-->
+                <a class="color-white" ng-click="bookingLink();">Bookings</a>
               </li>
               <li>
                 <a ui-sref="popularitinerary" class="color-white">Itineraries</a>

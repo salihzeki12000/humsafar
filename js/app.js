@@ -81,7 +81,7 @@ var firstapp = angular.module('firstapp', [
   'pascalprecht.translate',
   'imageupload',
   'angulartics',
-  // 'angulartics.google.analytics',
+
   'fileuploadservicemod',
   'angularFileUpload',
   'angular-google-analytics'
@@ -135,11 +135,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'ContactCtrl'
     })
-    .state('booking', {
-      url: "/bookings-notRequired",
-      templateUrl: "views/template.html",
-      controller: 'BookingCtrl'
-    })
+    // .state('booking-notRequired', {
+    //   url: "/bookings-notRequired",
+    //   templateUrl: "views/template.html",
+    //   controller: 'BookingCtrl'
+    // })
     .state('advertise', {
       url: "/advertise-with-us",
       templateUrl: "views/template.html",
@@ -236,6 +236,12 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
     })
     .state('destinationcity', {
       url: "/cities/:url/:name",
+      templateUrl: "views/template.html",
+      controller: 'DestinationCityCtrl',
+      reloadOnSearch: false
+    })
+    .state('cityBooking', {
+      url: "/cities/:url/:country/:name",
       templateUrl: "views/template.html",
       controller: 'DestinationCityCtrl',
       reloadOnSearch: false
@@ -361,7 +367,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'ItineraryCtrl'
     })
     .state('agent-login', {
-      url: "/agent-login",
+      url: "/agent-login/",
       templateUrl: "views/template.html",
       controller: 'AgentloginCtrl'
     })
@@ -376,7 +382,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'AgentuserCtrl'
     })
     .state('agent-home-without', {
-      url: "/agent-home",
+      url: "/agent/:urlSlug",
       templateUrl: "views/template.html",
       controller: 'AgenthomeCtrl'
     })
@@ -622,6 +628,7 @@ firstapp.directive("scrolladd2class", function ($window) {
     });
   };
 });
+
 
 firstapp.directive('imageonload', function () {
   return {
@@ -1145,6 +1152,9 @@ firstapp.filter('itineraryType', function () {
       case "friends":
         returnVal = "img/banner-itinerary/friends" + random + ".jpg";
         break;
+      default:
+        returnVal = "img/banner-itinerary/all1.jpg";
+      break;
     }
     console.log(returnVal, 'return wla kya hai');
     return returnVal;
@@ -1188,7 +1198,7 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
           var ith = 1;
           var percentage = 0;
           //manipulating map based on divPositions starts
-          console.log(divPositions);
+          // console.log(divPositions);
           _.each(divPositions, function (n, index) {
             if (n <= currentScroll && divPositions[index + 1] > currentScroll) { //would work for  1st checkIn till second last checkin coz divPositions[index + 1] would return false
               ith = index;
@@ -1319,11 +1329,22 @@ firstapp.filter('fromCalculation', function () {
     }
   };
 });
+// firstapp.filter('trusted',function () {
+//   return function (url) {
+//     console.log(url,'url');
+//     url = url.split("storage.googleapis.com").join("travelibro.com");
+//     console.log(url,'libro');
+//     return url;
+//   };
+// });
+
+// for trusted url
 firstapp.filter('trusted', ['$sce', function ($sce) {
   return function (url) {
     return $sce.trustAsResourceUrl(url);
   };
 }]);
+// for trusted url end
 
 firstapp.filter('toCalculation', function () {
   return function (country, countryIndex, cityIndex) {
@@ -1499,6 +1520,17 @@ firstapp.directive('hideOnScroll', function ($document) {
     }
   };
 });
+
+// firstapp.directive('fullPage', function ($document) {
+//   return {
+//     restrict: 'EA',
+//     replace: false,
+//     link: function (scope, element, attr) {
+//       var $element = $(element);
+//        $element.fullpage();
+//     }
+//   };
+// });
 
 firstapp.directive('uiSrefIf', function ($compile) {
   return {

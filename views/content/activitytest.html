@@ -1,12 +1,12 @@
-<div class="activity-main tint-bg mt-60">
-  <div class="container pt-60">
+<div class="activity-main mt-60">
+  <div class="container m-plr0 pt-60">
     <div class="activity-container">
       <div class="text-center">
         <h3 class="color-white heading-activity avenir-heavy text-shadow">Activity Feed</h3>
       </div>
       <div class="" masonry preserve-order infinite-scroll="getMoreActivities()" infinite-scroll-distance="3">
-        <div class="row">
-          <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="activity in activities">
+        <div class="row m-m0">
+          <div class="col-md-4 col-sm-6 m-plr0 masonry-brick" ng-repeat="activity in activities">
             <!-- activity-post -->
             <div class="activity-post {{activity.class}}" ng-if="activity.activityPerformed">
               <div class="activity-post-main">
@@ -124,9 +124,9 @@
                       <!-- photos -->
                       <div class="post-img card-imgholder pointer relate" ng-if="activity.photos.length>0  && activity.display==='photo' && activity.type!='quick-itinerary' && activity.type!='detail-itinerary'"
                         ng-click="getPhotosCommentData(activity.activityPhotosVideos[activity.index]._id, activity.index ,activity.activityPhotosVideos.length, activity.activityPhotosVideos)">
-                        <!--<div class="blur-img">
+                        <div class="blur-img visible-xs">
                           <img ng-src="{{activity.activityPhotosVideos[activity.index].name|uploadpath:722:750:'cover'}}" alt="">
-                        </div>-->
+                        </div>
                         <img ng-src="{{activity.activityPhotosVideos[activity.index].name|uploadpath:722:750:'cover'}}" alt="" class="card-img">
                       </div>
                       <!-- photos end-->
@@ -532,8 +532,18 @@
           </div>
         </div>
       </div>
+      <!-- no activity text -->
+      <div class="no-activity" ng-if="noActivity">
+        <div class="row">
+          <div class="col-md-offset-2 col-md-8">
+        <h4>Draw inspiration from others.</h4>
+        <p>Currently you are not following anybody. Search interesting people to follow their journeys and activities.</p>
+      </div>
     </div>
-    <div class="pagination-loader" ng-if="paginationLoader">
+      </div>
+      <!-- no activity text end-->
+    </div>
+    <div class="pagination-loader" ng-if="template.paginationLoader">
       <img src="img/page.svg" alt="Loading..." width="50px" class="img-responsive m-center">
     </div>
     <div class="" ng-if="showLikeCommentCard">

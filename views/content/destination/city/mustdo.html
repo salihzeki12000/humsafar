@@ -1,7 +1,7 @@
-<div class="container-fluid">
+<div class="container-fluid m-p0">
       <div class="destination-nav second destin-fixednav bg-grey">
-        <div class="row">
-          <div class="col-md-8 col-sm-8">
+        <div class="row m-m0">
+          <div class="col-md-8 col-sm-8 m-plr0">
             <div class="destination-scroll pl20">
               <ul class="list-inline">
                 <li ng-click="getTab(0)" ng-class="{'active': cityoptions.active=='must-dos'}">Must Dos</li>
@@ -37,18 +37,18 @@
         </div>
       </div>
   <div class="bg-white pt20 min-hght">
-    <div class="destination-featured">
+    <div class="destination-featured m-p0">
       <div class="plr30">
-      <div class="row">
-        <div class="col-md-4 col-sm-6" ng-repeat="mustdo in cityDestData.mustDo track by $index">
+      <div class="row m-m0">
+        <div class="col-md-4 col-sm-6 m-plr0" ng-repeat="mustdo in cityDestData.mustDo track by $index">
           <div class="img-holder card relate">
             <!-- <div class="flip-holder" ng-class="($index==index)?'flipped':''" style="background:url('{{mustdo.mainPhoto | uploadpath}}')"> -->
             <div class="flip-holder" ng-class="($index==index)?'flipped':''"
-            style="background:url('{{mustdo.mainPhoto|uploadpath}}')">
+            style="background:url('{{mustdo.mainPhoto|uploadpath}}') #a0a0a0">
               <!-- <img ng-src="{{mustdo.mainPhoto|uploadpath:600:600:'cover'}}" alt="travel-libro" class="full-width"> -->
               <div class="front">
                 <div class="pop-hover-css" ng-click="openCountry($index);">
-                  <h4 class="title-head-left color-white">
+                  <h4 class="title-head-left city-mustdo-title color-white">
                     {{$index+1}}. {{mustdo.name}}
                   </h4>
                 </div>

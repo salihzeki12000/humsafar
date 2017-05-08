@@ -10,7 +10,7 @@
           <div class="inline-block editor-subdetail">
             <div class="clearfix">
               <div class="pull-left">
-                <h4 class="font-bold color-dark-blue text-capitalize m-clear mb5 heading-name" ng-click="searchProfile(itinerary);">{{itinerary.user.name}}</h4>
+                <h4 class="font-bold color-dark-blue text-capitalize m-clear mb5 heading-name pointer" ng-click="searchProfile(itinerary);">{{itinerary.user.name}}</h4>
               </div>
               <div class="pull-right">
                 <span class="follow-following color-blue text-capitalize">{{itinerary.follower}}</span>
@@ -72,14 +72,14 @@
           <div class="user-social-item clearfix">
             <div class="pull-left">
               <ul>
-                <li ng-click="likeUnlikeActivity(itinerary);" like-sound><a href="" class="relate pointer"><i class="fa color-blue" ng-class="itinerary.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i>
+                <li><a href="" class="relate pointer"  ng-click="likeUnlikeActivity(itinerary);"><i class="fa color-blue" ng-class="itinerary.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"  like-sound></i>
                 <span></span>
                 <audio id="like-play">
                   <source src="img/tiny1.mp3" type="audio/mp3">
                 </audio>
               </a></li>
-                <li class="pointer" ng-click="getCommentsData(itinerary)">
-                  <a href=""><img src="img/comments.png" alt="" height="18"></a>
+                <li class="pointer">
+                  <a href="" ng-click="getCommentsData(itinerary)"><img src="img/comments.png" alt="" height="18"></a>
                 </li>
                 <!-- <li>
                   <a href=""><img src="img/reviews.png" alt="" height="18"></a>

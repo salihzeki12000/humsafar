@@ -1,13 +1,13 @@
-<div class="user-itinerary-page relate">
+<div class="user-itinerary-page relate mt-60">
   <div class="user-banner-holder relate" scrolldown style="background-image: url('../{{itinerary.itineraryType[0]|itineraryType}}')">
     <!-- {{itinerary.itineraryType[0]}} -->
     <div class="overlay-itinerary-bg"></div>
     <div class="user-banner-detail full-width text-center">
       <div class="user-tag color-white">
-        <div class="user-imgholder pointer" ui-sref="mylife({'urlSlug':itinerary.user.urlSlug})">
+        <div class="user-imgholder pointer" ng-click="routeProfile();">
           <img ng-src="{{itinerary.user.profilePicture|uploadpath:90:95:'cover'}}" alt="" class="img-responsive">
         </div>
-        <h4 class="user-name avenir-medium pointer" ui-sref="mylife({'urlSlug':itinerary.user.urlSlug})">{{itinerary.user.name}}</h4>
+        <h4 class="user-name avenir-medium pointer" ng-click="routeProfile();">{{itinerary.user.name}}</h4>
       </div>
       <!-- <div class="journey-day">
         <span class="color-white avenir-roman">Jan 2016</span>
@@ -37,10 +37,10 @@
       <img src="img/mouse-scroll.png" alt="Travelibro" class="doneLoading">
       <p>Scroll Down</p>
     </div>
-    <div class="edit-publish-userdetail" ng-if="isMine" ng-init="stats=itinerary.status?'Delete':'Publish'">
+    <div class="edit-publish-userdetail" ng-if="isMine">
       <button class="btn btn-white-outline btn-more mr5" ui-sref="quickitinerary({flag:'edit',urlSlug:itinerary.urlSlug})">Edit</button>
-      <button class="btn btn-white-outline btn-more" ng-click="uploadQuickItinerary(true)">{{stats}}</button>
-      <!--<button class="btn btn-white-outline btn-more" ng-click="" ng-if="itinerary.status == true">Delete</button>-->
+      <button class="btn btn-white-outline btn-more" ng-if="itinerary.status == false" ng-click="uploadQuickItinerary(true)">Publish</button>
+      <button class="btn btn-white-outline btn-more" ng-click="deletePop(itinerary._id);" ng-if="itinerary.status == true">Delete</button>
     </div>
   </div>
   <div class="user-quick-itinerary second bg-white-95  itinerary-content">
@@ -66,12 +66,17 @@
     </div>
     <!-- trip side pic holder end -->
     <div class="container">
+      <!-- view side photos  -->
+      <div class="quick-side-photos text-right visible-xs"  ng-if="itinerary.photos.length > 0">
+        <span class="color-pink text-capitalize" ng-click="viewGallery();">Photos ({{itinerary.photos.length}})</span>
+      </div>
+      <!-- view side photos end -->
       <div class="row">
-        <div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
+        <div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12">
           <div class="view-quick-itinerary">
             <div class="itinerary-header">
               <div class="itinerary-quick-imgholder">
-                <img ng-src="{{itinerary.countryVisited[0].cityVisited[0].city.cityCoverPhoto|uploadpath}}" alt="" class="img-responsive get-center">
+                <img ng-src="{{itinerary.countryVisited[0].cityVisited[0].city.cityDisplayPhoto|uploadpath}}" alt="" class="img-responsive get-center">
                 <div class="itinerary-heading-detail">
                   <p class="m-clear mb5">
                     <span class="avenir-roman color-pink">
@@ -105,7 +110,7 @@
       </div>
       <!-- comment and like panel main -->
       <div class="row">
-        <div class="col-md-offset-1 col-md-10 col-ms-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
+        <div class="col-md-offset-1 col-md-10 col-ms-offset-1 col-sm-10 col-xs-12">
           <div class="share-comment-main">
             <div class="clearfix share-option-main">
               <div class="task-holder pull-left">
@@ -124,12 +129,12 @@
                   <!-- <li>
                     <a href=""><img src="img/reviews.png" alt="Review" height="22" class="agent-iti-review-icon"></a>
                   </li> -->
-                  <li>
+                  <!-- <li>
                     <a href=""><img src="img/print.png" alt="Print" height="22" class="agent-iti-print-icon"></a>
                   </li>
                   <li>
                     <a href=""><img src="img/download.png" alt="Download" height="22" class="agent-iti-download-icon"></a>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
               <div class="options pointer pull-right relate" ng-init="user.editOption={};" ng-click="editOption(user.editOption);">

@@ -174,9 +174,9 @@
   // QUICK ITNERARY PAGE
   .quick-itinerary-page .quick-itinerary-detail {
     padding: 30px;
-    .itinerary-inputholder{
-      margin-bottom: 10px;
-    }
+    // .itinerary-inputholder{
+    //   margin-bottom: 10px;
+    // }
   }
 
   .quick-itinerary-page .trip-photo-holder .trip-view-photo {
@@ -259,7 +259,7 @@
   }
   .notification-btn .btn-notification-card{
     padding: 5px 20px;
-    margin: 0 5px 0 0;
+    margin: 0 5px 10px 0;
   }
   .notification-follower-detail{
     margin: 10px 2px;
@@ -461,9 +461,9 @@
   .listing-accordion .panel-heading {
     height: 50px;
 
-    a {
-      padding: 15px 20px;
-    }
+    // a {
+    //   padding: 15px 20px;
+    // }
   }
 
   .share-comment-main .like-holder,
@@ -746,6 +746,12 @@
   .mob-ml5 {
     margin-left: 5px;
   }
+  .itinerary-content {
+    padding: 0;
+  }
+      .travelibro-loader img{
+      width:130px;
+    }
   // agent upgrade page
   .package-img {
     width: 50px;
@@ -827,7 +833,7 @@
 
   .destination-featured {
     .plr30 {
-      padding: 0 20px;
+      padding: 0px;
     }
   }
 
@@ -842,7 +848,7 @@
   }
 
   .destination .destination-nav {
-    padding: 10px 35px;
+    padding: 10px;
   }
 
   .enquirytab-btn {
@@ -1020,7 +1026,7 @@
   }
 
   .destination .slide-cont-dest {
-    padding: 20px;
+    padding: 70px 20px 20px;
   }
 
   .destination .list-horizontal ul li {
@@ -1038,6 +1044,8 @@
   .destination-content .head-title-all {
     h4 {
       font-size: 16px;
+      padding-bottom: 0;
+      margin-bottom: 0px;
     }
 
     p {
@@ -1062,13 +1070,14 @@
     text-align: center;
     }
     .blogger-cover {
+      margin: 15px 0;
     width: 100%;
     max-width: 100%;
     }
     .pbt-15 {
     padding: 10px 0;
     }
-  } 
+  }
 
   .popular-blogger .blogger-cover .gallery-imgholder {
     width: 100%;
@@ -1085,10 +1094,22 @@
     @include transform (translateX(-50%));
   }
   // popular blogger end
+  //coming soon
+  .coming-soon-page {
+h1 {
+    font-size: 30px;
+}
+h4{
+    font-size: 16px;
+}
+  }
+    .email-form {
+    width: 95%;
+}
   // AGENT ITINERARY PAGE
   .agent-itinerary-page .close-gallery,
   .user-itinerary-page .close-gallery {
-    left: -435px;
+    left: -475px;
   }
 
   .agent-itinerary-page .trip-pic-view,
@@ -1134,9 +1155,9 @@
   .listing-accordion .panel-open .panel-heading {
     height: 120px;
 
-    a {
-      padding: 10px;
-    }
+    // a {
+    //   padding: 10px;
+    // }
   }
 
   .listing-accordion .panel-heading {
@@ -1167,7 +1188,7 @@
     font-size: 12px;
 
     .trip-city-name {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 
@@ -1201,9 +1222,10 @@
     }
 
     .user-trip-descp {
-      width: 100%;
+      width: auto;
       text-align: justify;
       font-size: 14px;
+      display: inline-block;
     }
   }
 
@@ -1326,6 +1348,8 @@
     padding: 5px 8px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     li{
       padding: 2px;
       a{
@@ -1616,9 +1640,26 @@
   // EDIT JOURNEY NAME MODAL END
 
   // EDIT DATE TIME MODAL
-    .notify-close{
-        top: 0;
-    }
+    .outer-report .notify-close,.edit-kindof-popup-close,.notify-close{
+                    top: 7px !important;
+                    z-index: 999;
+                    right: 10px;
+            img{
+              max-width: 15px;
+            }
+      }
+      .notify-popup .notify-imgholder{
+        .notify-imgholder {
+              height: auto;
+              overflow: initial;
+              img {
+              height: auto;
+              width: 100%;
+              position: static;
+              @include transform(translate(0));
+            }
+          }
+      }
     .date-holder input{
       width: 60px;
       padding: 0px 8px;
@@ -1793,7 +1834,8 @@
     }
 
     .booking-sec-card {
-      padding: 0 10px;
+      margin-top: 20px;
+      padding: 0 15px;
     }
   }
 
@@ -1833,6 +1875,9 @@
       width: 100%;
     }
   }
+  .btn-notificationitinerary{
+    text-align: center;
+  }
   // NOTIFICATION PAGE END
   // SEARCH PAGE
   .search-navigation .searchnav-scroll{
@@ -1844,6 +1889,26 @@
     margin-bottom: 10px;
   }
   // SEARCH PAGE END
+  .destination-nav{
+    .pr20 {
+    padding-right: 0px;
+      }
+      .input-search .input-group {
+    margin-top: 10px;
+        }
+  //   .destination-main {
+  //   top: 38px;
+  // }
+}
+// modal
+.modal-dialog .modal-content {
+    top: 0;
+    @include transform(translateY(0));
+}
+
+.notification-checkin-ongo-photo{
+  height: auto;
+}
 }
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -1852,7 +1917,9 @@
   .agt-verification-code {
     padding: 30px 20px 15px;
   }
-
+    .travelibro-loader img{
+      width:100px;
+    }
   .sidemenu {
     overflow-y: scroll;
     padding: 0 20px;
@@ -2083,16 +2150,8 @@
   }
   //Destination city page end
   //Destination country page
-  .destination-content-box {
-    .container-fluid {
-      .row {
-        margin: 0;
-      }
-    }
-  }
-
   .destination-featured {
-    padding: 0;
+    padding: 15px;
   }
   .dest-btv.plr30 {
     padding: 0;
@@ -2237,8 +2296,11 @@
 
   .journey-tag-holder h3 {
     font-size: 18px;
+    padding: 10px 40px 7px 0;
   }
-
+.share-trip-journey {
+    margin-top: 0;
+}
   .journey-cost span {
     margin: 0;
   }
@@ -2278,7 +2340,7 @@
   }
 
   .user-itinerary-page .close-gallery {
-    left: -280px;
+    left: -340px;
   }
 
   .user-itinerary-page .photos {
@@ -2324,6 +2386,9 @@
       font-size: 12px;
     }
   }
+.view-quick-itinerary .itinerary-heading-detail .country-visited-name {
+    display: block;
+}
   // USER-DETAIL ITINERARY PAGE END
   // EDITOR ITINERARY PAGE
   .editor-itinerary-page .listing-accordion .gallery-image-holder {
@@ -2494,7 +2559,7 @@
 
   .view-photo-sec,
   .view-video-sec {
-    padding: 25px 10px;
+    padding: 50px 10px 25px 10px;
   }
   // EDIT ACTIVITY MODAL END
   // EDIT JOURNEY NAME MODAL
@@ -2570,8 +2635,11 @@
   // DESTINATION BOOKING PAGE  END
 
   // PROFILE LIST PAGE
-  .bucket-visited-holder input{
-    width: 290px;
+  .bucket-visited-holder{
+    display: block;
+    input{
+    width: 100%;
+  }
   }
   // PROFILE LIST PAGE END
 }

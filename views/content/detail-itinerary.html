@@ -50,7 +50,7 @@
       <div class="container">
         <div class="fill-detail-itinerary">
           <h4 class="color-blue avenir-roman mb20">Input Trip Details</h4>
-          <form validate name="detailItinerary">
+          <form validate name="detailItinerary" autocomplete="off">
             <div class="fill-itinerary-detail" ng-init="countryIndex">
               <div class="itinerary-title">
                 <div class="row">
@@ -104,6 +104,7 @@
                         </ui-select-choices>
                       </ui-select>
                     </div>
+                    <span class="travelled-withtag">You can only add buddies who follow you, to this Itinerary.</span>
                   </div>
                   <!-- new travelled with end -->
                 </div>
@@ -555,7 +556,7 @@
                 <div class="clearfix">
                   <div class="pull-left">
                     <label for="budget">Trip Budget</label>
-                    <div class="form-group itinerary-inputholder">
+                    <div class="form-group">
                       <div class="select-currency-holder">
                         <div class="currency-holder">
                           <div class="itinerary-inputholder relate" ng-class="{'form-invalid': detailItinerary.currency.$invalid && detailItinerary.currency.$touched}">

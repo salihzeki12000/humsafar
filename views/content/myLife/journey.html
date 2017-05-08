@@ -1,6 +1,6 @@
 <div class="profile-main" id="journeys">
   <!-- <div class="" ng-include="profile.profileMain"></div> -->
-  <div class="container-fluid">
+  <div class="container-fluid m-p0">
     <div class="all-profile-detail">
       <div class="bg-white">
         <!-- journey travel-life -->
@@ -54,7 +54,7 @@
           <!--End of switch Travel life and local life-->
           <!-- user logged for first time -->
           <div class="empty-profile-journey" ng-if="!hasJourney && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
-            <div class="row">
+            <div class="row m-m0">
               <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10">
                 <div class="row">
                   <div class="col-md-6 col-sm-6">
@@ -69,20 +69,13 @@
                         <video width="238px" height="100%" autoplay id="video" muted videoend>
                           <source src="img/libro-home/videos/travellife.mp4" type="video/mp4">
                         </video>
-                        <a class="various color-pink fancybox.iframe vimeo" href="https://player.vimeo.com/video/207906010" fancybox-box width='500'
-                          height='281' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ng-click="pauseVideo();">
+                        <a class="various color-pink fancybox.iframe vimeo" href="https://player.vimeo.com/video/207906141?title=0&amp;byline=0&amp;portrait=0"
+                          fancybox-box width='500' height='281' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
                           <div class="play-show">
                             <i class="fa fa-play-circle" aria-hidden="true"></i>
                           </div>
                         </a>
                       </div>
-                      <!--<a class="full-screen-mylife various fancybox.iframe vimeo" href="http://player.vimeo.com/video/34792993?title=0&amp;byline=0&amp;portrait=0"
-                        fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen ng-click="pauseVideo();">
-                        <img src="img/icons/fullscreen-grey.png" alt="TravelLibro" height="25">
-                      </a>
-                      <a class="volume-off-on-mylife" id="mute-video" ng-click="muteVolume()">
-                        <i class="fa fa-microphone-slash" aria-hidden="true"></i>
-                      </a>-->
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-6">
@@ -179,7 +172,7 @@
                             <h4 class="m-clear text-capitalize">{{life.name}}</h4>
                             <div class="clearfix journey-travelling-type">
                               <div class="row">
-                                <div class="col-xs-8">
+                                <div class="col-xs-7">
                                   <div class="pull-left">
                                     <div class="journey-collection">
                                       <!--<ul ng-if="life.photos.length">-->
@@ -212,7 +205,7 @@
                                     </div>
                                   </div>
                                 </div>
-                                <div class="col-xs-4">
+                                <div class="col-xs-5">
                                   <div class="pull-right">
                                     <div class="journey-type">
                                       <ul>
@@ -232,8 +225,8 @@
                           <div class="user-social-item clearfix">
                             <div class="pull-left">
                               <ul>
-                                <li ng-click="likeUnlikeActivity(life)">
-                                  <a href="" class="relate">
+                                <li>
+                                  <a href="" class="relate" ng-click="likeUnlikeActivity(life)">
                                     <i class="fa color-blue card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound></i>
                                     <span></span>
                                     <audio id="like-play">
@@ -241,7 +234,7 @@
                                     </audio>
                                   </a>
                                 </li>
-                                <li ng-click="!isLoggedIn||openCommentSection(life)">
+                                <li ng-click="openCommentSection(life)">
                                   <a href=""><img src="img/comments.png" alt="" height="18"></a>
                                 </li>
                                 <!--<li>
@@ -279,9 +272,9 @@
                           <div class="social-likes-reviews" ng-if="!(((life.likeCount==0)||(life.likeCount==undefined))&&(life.commentCount==0))">
                             <div class="clearfix">
                               <div class="pull-left">
-                                <span class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
+                                <span ng-click="openLikeSection(life)" class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
                                 <!--<span class="color-blue avenir-heavy" ng-if="life.pointReview.length>0"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
-                                <span class="color-blue mr10 card-comment avenir-heavy pointer"><img src="img/comments.png" alt="" class="mr5 v-mid" height="14"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
+                                <span ng-click="openCommentSection(life)" class="color-blue mr10 card-comment avenir-heavy pointer"><img src="img/comments.png" alt="" class="mr5 v-mid" height="14"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
                               </div>
                               <div class="pull-right">
                                 <img src="img/travel.png" alt="">
@@ -412,9 +405,9 @@
                         <div class="social-likes-reviews" ng-if="!(((life.likeCount==0)||(life.likeCount==undefined))&&(life.commentCount==0))">
                           <div class="clearfix">
                             <div class="pull-left">
-                              <span ng-click="!isLoggedIn||openLikeSection(life)" class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
+                              <span ng-click="openLikeSection(life)" class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
                               <!--<span class="color-blue avenir-heavy"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
-                              <span class="color-blue mr10 card-comment avenir-heavy pointer" ng-click="!isLoggedIn||openCommentSection(life)"><img src="img/comments.png" alt="" class="mr5" height="12"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
+                              <span class="color-blue mr10 card-comment avenir-heavy pointer" ng-click="openCommentSection(life)"><img src="img/comments.png" alt="" class="mr5" height="12"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
                             </div>
                             <div class="pull-right">
                               <img src="img/travel.png" alt="">
@@ -486,11 +479,11 @@
           </div>
         </div>
         <!-- user logged for first time local life-->
-        <div class="empty-profile-journey" ng-if="showLocalLife">
-          <div class="row">
+        <div class="empty-profile-journey" ng-if="showLocalLife && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
+          <div class="row m-m0">
             <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10">
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-6">
                   <div class="video-gif-journey videoplays">
                     <div class="mobile-gif">
                       <img src="img/profile-empty/gif-mobile.png" alt="GIF Travelibro" class="img-responsive">
@@ -498,45 +491,20 @@
                         <i class="fa on-off" aria-hidden="true" ng-class="{'fa-microphone':(audioStatus.on), 'fa-microphone-slash': (!audioStatus.on)}"></i>
                       </a>
                     </div>
-                    <div class="videoplay-empty-journey" ng-if="!hasJourney">
-                      <video width="238px" height="100%" autoplay id="video" muted>
+                    <div class="videoplay-empty-journey">
+                      <video width="238px" height="100%" autoplay id="video" muted videoend>
                         <source src="img/libro-home/videos/locallife.mp4" type="video/mp4">
                       </video>
                       <a class="various color-cyan fancybox.iframe vimeo" href="http://player.vimeo.com/video/207905802?title=0&amp;byline=0&amp;portrait=0"
-                        fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen ng-click="pauseVideo();">
+                        fancybox-box width='500' height='281' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
                         <div class="play-show">
                           <i class="fa fa-play-circle" aria-hidden="true"></i>
                         </div>
                       </a>
                     </div>
-                    <!--<a class="volume-off-on-mylife" id="mute-video" ng-click="muteVolume()">
-                        <i class="fa fa-microphone-slash" aria-hidden="true"></i>
-                      </a>
-                      <a class="full-screen-mylife various fancybox.iframe vimeo" href="http://player.vimeo.com/video/34792993?title=0&amp;byline=0&amp;portrait=0"
-                        fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen ng-click="pauseVideo();">
-                        <img src="img/icons/fullscreen-grey.png" alt="TravelLibro" height="25">
-                      </a>-->
-                    <!--<div class="journey-downloadicon">
-                        <ul class="list-unstyled list-inline text-center color-cyan">
-                          <li class="">
-                            Download App
-                          </li>
-                          <li>
-                            <a href="#" target="_blank" class="color-cyan">
-                              <i class="fa fa-apple"></i>
-                            </a>
-                          </li>
-                          <li>|</li>
-                          <li>
-                            <a href="#" class="color-cyan" target="_blank">
-                              <i class="fa fa-android"></i>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>-->
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-6">
                   <div class="empty-travel-journey">
                     <div class="journey-cycle">
                       <img src="img/profile-empty/local-empty.png" alt="" class="img-responsive inline-block">
@@ -582,178 +550,184 @@
           </div>
         </div>
         <!-- PRIVATE PROFILE EMPTY SCREEN END -->
-        <div class="local-life-main" ng-hide="showLocalLife" ng-if="template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public'">
-          <div class="overlay-filter" ng-class="{ 'fliter-open': isopen}" ng-click="openMyLifeFilter()"></div>
-          <div class="inline-block filter-local-life avenir-roman" ng-class="{ 'fliter-open': isopen} ">
-            <form action="">
-              <div class="clearfix pt10 pl20 pr20">
-                <div class="pull-right visible-xs" ng-click="openMyLifeFilter()">
-                  <span class="clear-all pointer pl20">
+        <div class="container">
+          <div class="local-life-main" ng-hide="showLocalLife" ng-if="template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public'">
+            <div class="overlay-filter ml5" ng-class="{ 'fliter-open': isopen}" ng-click="openMyLifeFilter()"></div>
+            <div class="inline-block filter-local-life avenir-roman" ng-class="{ 'fliter-open': isopen} ">
+              <form action="">
+                <div class="clearfix pt10 pl20 pr20">
+                  <div class="pull-right" ng-click="openMyLifeFilter()">
+                    <span class="clear-all pointer pl20">
                       <i class="fa fa-times-circle-o fnt-20"></i>
                     </span>
+                  </div>
+                  <div class="pull-right">
+                    <span class="clear-all pointer" ng-click="clearLocalFilter();">Clear All</span>
+                  </div>
                 </div>
-                <div class="pull-right">
-                  <span class="clear-all pointer" ng-click="clearLocalFilter();">Clear All</span>
-                </div>
-              </div>
-              <!-- filter-month -->
-              <div class="filter-month">
-                <span>Month's</span>
-                <div class=" custom-select custom-select-local">
-                  <!-- <select class="" name="">
+                <!-- filter-month -->
+                <div class="filter-month">
+                  <span>Month's</span>
+                  <div class=" custom-select custom-select-local">
+                    <!-- <select class="" name="">
                       <option value="" selected>Select Month</option>
                       <option ng-repeat="month in localDate track by $index" ng-click="getByFilter(month,'date')">{{month}}</option>
                     </select>
                     <ul>
                       <li ng-repeat="month in localDate track by $index" ng-click=" getByFilter(month,'date')">{{month}}</li>
                     </ul> -->
-                  <!-- MONTH FILTER UI SELECT -->
-                  <ui-select ng-model="month" theme="selectize" ng-disabled="ctrl.disabled" title="Month" class="">
-                    <ui-select-match class="" placeholder="Month">{{$select.selected}}</ui-select-match>
-                    <ui-select-choices repeat="month in localDate | filter: $select.search">
-                      <span ng-bind-html="month | highlight: $select.search" class="" ng-click="getByFilter(month,'date')"></span>
-                    </ui-select-choices>
-                  </ui-select>
-                  <!-- MONTH FILTER UI SELECT END -->
-                </div>
-              </div>
-              <!-- filter-checkin -->
-              <div class="checkin-filter">
-                <span>Check In's</span>
-                <div class="local-filter-checkbox custom-checkbox" ng-repeat="catType in localCategory track by $index">
-                  <input type="checkbox" id="{{catType}}" ng-model="categoryType.checked" ng-click="getByFilter(catType,'checkIn')">
-                  <label for="{{catType}}">{{catType}}</label>
-                </div>
-                <!-- <span class="checkin-more pointer">More</span> -->
-              </div>
-              <!-- rating-filter -->
-              <div class="rating-filter">
-                <span>Rating</span>
-                <div class="local-filter-checkbox custom-checkbox">
-                  <input type="checkbox" id="five-star" ng-model="localStar.fiveStar" ng-click="getByFilter('5','rating');">
-                  <label for="five-star">
-                      <span>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </span>
-                    </label>
-                </div>
-                <div class="local-filter-checkbox custom-checkbox">
-                  <input type="checkbox" id="four-star" ng-click="getByFilter('4','rating')" ng-model="localStar.fourStar">
-                  <label for="four-star">
-                      <span>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                      </span>
-                    </label>
-                </div>
-                <div class="local-filter-checkbox custom-checkbox">
-                  <input type="checkbox" id="three-star" ng-click="getByFilter('3','rating')" ng-model="localStar.threeStar">
-                  <label for="three-star">
-                      <span>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                      </span>
-                    </label>
-                </div>
-                <div class="local-filter-checkbox custom-checkbox">
-                  <input type="checkbox" id="two-star" ng-click="getByFilter('2','rating')" ng-model="localStar.twoStar">
-                  <label for="two-star">
-                      <span>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                      </span>
-                    </label>
-                </div>
-                <div class="local-filter-checkbox custom-checkbox">
-                  <input type="checkbox" id="one-star" ng-model="localStar.OneStar" ng-click="getByFilter('1','rating')">
-                  <label for="one-star">
-                      <span>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                      </span>
-                    </label>
-                </div>
-              </div>
-              <!-- more-filter-photo video thought -->
-              <div class="more-filter">
-                <div class="local-filter-checkbox custom-checkbox">
-                  <input type="checkbox" id="photo" ng-model="localFilterPost.photos" ng-click="getByFilter(localFilterPost,'photos')">
-                  <label for="photo">Photos</label>
-                </div>
-                <div class="local-filter-checkbox custom-checkbox">
-                  <input type="checkbox" id="video" ng-model="localFilterPost.videos" ng-click="getByFilter(localFilterPost,'videos')">
-                  <label for="video">Videos</label>
-                </div>
-                <div class="local-filter-checkbox custom-checkbox">
-                  <input type="checkbox" id="thought" ng-model="localFilterPost.thoughts" ng-click="getByFilter(localFilterPost,'thoughts')">
-                  <label for="thought">Thoughts</label>
-                </div>
-              </div>
-            </form>
-          </div>
-          <!-- post local-life -->
-          <div class="inline-block post-local-life">
-            <div class="relate">
-              <div class="bg-dark-cyan post-header-view">
-                <div class="clearfix">
-                  <div class="pull-right mylife-filter font-bold inline-block v-mid pointer visible-xs" ng-click="openMyLifeFilter()">
-                    Filter <i class="fa fa-filter"></i>
+                    <!-- MONTH FILTER UI SELECT -->
+                    <ui-select ng-model="month" theme="selectize" ng-disabled="ctrl.disabled" title="Month" class="">
+                      <ui-select-match class="" placeholder="Month">{{$select.selected}}</ui-select-match>
+                      <ui-select-choices repeat="month in localDate | filter: $select.search">
+                        <span ng-bind-html="month | highlight: $select.search" class="" ng-click="getByFilter(month,'date')"></span>
+                      </ui-select-choices>
+                    </ui-select>
+                    <!-- MONTH FILTER UI SELECT END -->
                   </div>
-                  <div class="pull-left">
-                    <div class="post-list-view">
-                      <ul class="list-inline">
-                        <li><img src="img/camera-blue.png" alt="" height="18" class="v-mid"><span class="font-bold inline-block v-mid">{{localPostCount.photoCount}}</span></li>
-                        <li><img src="img/video-blue.png" alt="" height="18" class="v-mid"><span class="font-bold inline-block v-mid">{{localPostCount.videoCount}}</span></li>
-                        <li><img src="img/location-blue.png" alt="" height="18" class="v-mid"><span class="font-bold inline-block v-mid">{{localPostCount.checkInCount}}</span></li>
-                        <li><img src="img/thought.png" alt="" height="18" class="v-mid"><span class="font-bold inline-block v-mid">{{localPostCount.thoughtCount}}</span></li>
-                      </ul>
+                </div>
+                <!-- filter-checkin -->
+                <div class="checkin-filter">
+                  <span>Check In's</span>
+                  <div class="local-filter-checkbox custom-checkbox" ng-repeat="catType in localCategory track by $index">
+                    <input type="checkbox" id="{{catType}}" ng-model="categoryType.checked" ng-click="getByFilter(catType,'checkIn')">
+                    <label for="{{catType}}">{{catType}}</label>
+                  </div>
+                  <!-- <span class="checkin-more pointer">More</span> -->
+                </div>
+                <!-- rating-filter -->
+                <div class="rating-filter">
+                  <span>Rating</span>
+                  <div class="local-filter-checkbox custom-checkbox">
+                    <input type="checkbox" id="five-star" ng-model="localStar.fiveStar" ng-click="getByFilter('5','rating');">
+                    <label for="five-star">
+                      <span>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="local-filter-checkbox custom-checkbox">
+                    <input type="checkbox" id="four-star" ng-click="getByFilter('4','rating')" ng-model="localStar.fourStar">
+                    <label for="four-star">
+                      <span>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="local-filter-checkbox custom-checkbox">
+                    <input type="checkbox" id="three-star" ng-click="getByFilter('3','rating')" ng-model="localStar.threeStar">
+                    <label for="three-star">
+                      <span>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="local-filter-checkbox custom-checkbox">
+                    <input type="checkbox" id="two-star" ng-click="getByFilter('2','rating')" ng-model="localStar.twoStar">
+                    <label for="two-star">
+                      <span>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="local-filter-checkbox custom-checkbox">
+                    <input type="checkbox" id="one-star" ng-model="localStar.OneStar" ng-click="getByFilter('1','rating')">
+                    <label for="one-star">
+                      <span>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <!-- more-filter-photo video thought -->
+                <div class="more-filter">
+                  <div class="local-filter-checkbox custom-checkbox" ng-if="localPostCount.photoCount>0">
+                    <input type="checkbox" id="photo" ng-model="localFilterPost.photos" ng-click="getByFilter(localFilterPost,'photos')">
+                    <label for="photo">Photos</label>
+                  </div>
+                  <div class="local-filter-checkbox custom-checkbox" ng-if="localPostCount.videoCount>0">
+                    <input type="checkbox" id="video" ng-model="localFilterPost.videos" ng-click="getByFilter(localFilterPost,'videos')">
+                    <label for="video">Videos</label>
+                  </div>
+                  <div class="local-filter-checkbox custom-checkbox" ng-if="localPostCount.thoughtCount>0">
+                    <input type="checkbox" id="thought" ng-model="localFilterPost.thoughts" ng-click="getByFilter(localFilterPost,'thoughts')">
+                    <label for="thought">Thoughts</label>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!-- post local-life -->
+            <div class="inline-block post-local-life">
+              <div class="relate">
+                <div class="bg-dark-cyan post-header-view">
+                  <div class="clearfix">
+                    <div class="pull-left">
+                      <div class="post-list-view">
+                        <ul class="list-inline">
+                          <li><img src="img/camera-blue.png" alt="" height="18" class="v-mid"><span class="font-bold inline-block v-mid">{{localPostCount.photoCount}}</span></li>
+                          <li><img src="img/video-blue.png" alt="" height="18" class="v-mid"><span class="font-bold inline-block v-mid">{{localPostCount.videoCount}}</span></li>
+                          <li><img src="img/location-blue.png" alt="" height="18" class="v-mid"><span class="font-bold inline-block v-mid">{{localPostCount.checkInCount}}</span></li>
+                          <li><img src="img/thought.png" alt="" height="18" class="v-mid"><span class="font-bold inline-block v-mid">{{localPostCount.thoughtCount}}</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="pull-right">
+                      <div class="mylife-filter font-bold inline-block v-mid pointer" ng-click="openMyLifeFilter()">
+                        Filter <i class="fa fa-filter"></i>
+                      </div>
+                      <div class="total-post inline-block hidden-xs">
+                        <span>Total Post's <b>{{localPostCount.totalCount}}</b></span>
+                      </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                    <div class="visible-xs">
+                      <div class="total-post">
+                        <span>Total Post's <b>{{localPostCount.totalCount}}</b></span>
+                      </div>
                     </div>
                   </div>
-                  <div class="pull-right hidden-xs">
-                    <div class="total-post">
-                      <span>Total Post's <b>{{localPostCount.totalCount}}</b></span>
+                </div>
+                <div class="scroll-local-life" ng-if="viewLocal">
+                  <div class="local-post" infinite-scroll="getMoreLocalPost();" infinite-scroll-disabled='scroll2.busy' infinite-scroll-distance='1'>
+                    <div class="local-postbox" ng-if="localView.view" masonry preserve-order>
+                      <!-- local life data -->
+                      <div class="row">
+                        <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="localPost in localLifeJourney track by $index">
+                          <post-local-life ongolocal="localPost" local-view="localView" open-comment-section="openCommentSection(ongolocal)" open-like-section="openLikeSection(ongolocal)"
+                            template="template">
+                          </post-local-life>
+                        </div>
+                      </div>
+                      <!-- local life data end-->
                     </div>
                   </div>
-                  <div class="clearfix"> </div>
-                  <div class="visible-xs">
-                    <div class="total-post">
-                      <span>Total Post's <b>128</b></span>
-                    </div>
-                  </div>
+                  <!-- </div> -->
                 </div>
-              </div>
-              <div class="scroll-local-life scrollme" ng-scrollbar rebuild-on="rebuild:me" rebuild-on-resize ng-if="viewLocal">
-                <div class="local-post" infinite-scroll="getMoreLocalPost();" infinite-scroll-disabled='scroll2.busy' infinite-scroll-distance='1'>
-                  <div class="local-postbox" ng-if="localView.view">
-                    <!-- local life data -->
-                    <post-local-life ng-repeat="localPost in localLifeJourney track by $index" ongolocal="localPost" local-view="localView" open-comment-section="openCommentSection(ongolocal)"
-                      open-like-section="openLikeSection(ongolocal)">
-                    </post-local-life>
-                    <!-- local life data end-->
-                  </div>
-                </div>
-                <!-- </div> -->
               </div>
             </div>
           </div>
         </div>
-        <div class="" ng-if="showLikeCommentCard">
+        <div ng-if="showLikeCommentCard">
           <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike'
             list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
         </div>

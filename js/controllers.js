@@ -25,15 +25,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $anchorScroll.yOffset = 50; // always scroll by 50 extra pixels
   }])
 
-  .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar) {
+  .controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar, $location) {
     //Used to name the .html file
     cfpLoadingBar.start();
     $scope.template = TemplateService.changecontent("home");
     $scope.menutitle = NavigationService.makeactive("Home");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "TraveLibro - Your Travel Life | Local Life";
     $scope.navigation = NavigationService.getnav();
     var swiper = {};
     $scope.accessToken = $.jStorage.get("accessToken");
+    $scope.bookingLink = function () {
+      window.location.href = "https://travelibro.com/bookings/";
+    }
     $scope.videoPlay = [{
       videourl: "",
       vimeourl: "",
@@ -71,6 +74,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.changePage = function (text) {
       // console.log(text);
       var length = $(".fp-section").length;
+      $timeout(function () {
+        $('.scene').parallax();
+        swiper = new Swiper('.swiper-container', {
+          pagination: '.swiper-pagination',
+          direction: 'vertical',
+          slidesPerView: 1,
+          paginationClickable: true,
+          spaceBetween: 0,
+          mousewheelControl: false,
+          mousewheelForceToAxis: false,
+          keyboardControl: false,
+          parallax: true,
+          hashnav: true
+        });
+      }, 500);
       if (length === 0) {
         $('.fullpage').fullpage({
           //Navigation
@@ -174,7 +192,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.headerfixed = "fixed-header";
     $scope.animationsEnabled = true;
     $scope.formData = {};
+    $scope.agentSignup = false;
 
+    $scope.bookingLink = function () {
+      window.location.href = "https://travelibro.com/bookings/";
+    }
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
     }
@@ -305,6 +327,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       });
     };
+
+    // AGENT LOGIN SIGN UP TOGGLE
+    $scope.toggleAgentSign = function(){
+      if ($scope.agentSignup == false){
+        $scope.agentSignup = true;
+      } else{
+        $scope.agentSignup = false;
+      }
+    };
+    // AGENT LOGIN SIGN UP TOGGLE END
   })
 
   .controller('ForgotPasswordEmailCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
@@ -340,7 +372,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("contact");
     $scope.menutitle = NavigationService.makeactive("Contact");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Contact Us - TraveLibro";
     $scope.navigation = NavigationService.getnav();
     $scope.animationsEnabled = true;
     if (typeof $.fn.fullpage.destroy == 'function') {
@@ -350,51 +382,51 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('BookingCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
-    //Used to name the .html file
+  // .controller('BookingCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+  //   //Used to name the .html file
 
-    console.log("Testing Consoles");
+  //   console.log("Testing Consoles");
 
-    $scope.template = TemplateService.changecontent("booking");
-    $scope.menutitle = NavigationService.makeactive("Bookings");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-    $scope.animationsEnabled = true;
-    if (typeof $.fn.fullpage.destroy == 'function') {
-      $.fn.fullpage.destroy('all');
-    }
-    $scope.bookingnav = [{
-      name: "Flights",
-      classis: "active",
-      link: "http://flights.travelibro.com/en-GB/flights/#/result?originplace=&destinationplace=",
-      target: "_blank"
-    }, {
-      name: "Hotels",
-      classis: "active",
-      link: "https://travelibro.com/bookings/hotels",
-      target: "_self"
-    }, {
-      name: "Vacation Rentals",
-      classis: "active",
-      link: "https://travelibro.com/bookings/vacation-rentals",
-      target: "_self"
-    }, {
-      name: "Homestays",
-      classis: "active",
-      link: "https://travelibro.com/bookings/home-stays",
-      target: "_self"
-    }, {
-      name: "Car Rentals",
-      classis: "active",
-      link: "https://flights.travelibro.com/en-GB/carhire/#/result?originplace=&destinationplace=",
-      target: "_blank"
-    }, {
-      name: "Tours & Excursions",
-      classis: "active",
-      link: "https://travelibro.com/bookings/tours-and-excursions",
-      target: "_self"
-    }]
-  })
+  //   $scope.template = TemplateService.changecontent("booking");
+  //   $scope.menutitle = NavigationService.makeactive("Bookings");
+  //   TemplateService.title = $scope.menutitle;
+  //   $scope.navigation = NavigationService.getnav();
+  //   $scope.animationsEnabled = true;
+  //   if (typeof $.fn.fullpage.destroy == 'function') {
+  //     $.fn.fullpage.destroy('all');
+  //   }
+  //   $scope.bookingnav = [{
+  //     name: "Flights",
+  //     classis: "active",
+  //     link: "http://flights.travelibro.com/en-GB/flights/#/result?originplace=&destinationplace=",
+  //     target: "_blank"
+  //   }, {
+  //     name: "Hotels",
+  //     classis: "active",
+  //     link: "https://travelibro.com/bookings/hotels",
+  //     target: "_self"
+  //   }, {
+  //     name: "Vacation Rentals",
+  //     classis: "active",
+  //     link: "https://travelibro.com/bookings/vacation-rentals",
+  //     target: "_self"
+  //   }, {
+  //     name: "Homestays",
+  //     classis: "active",
+  //     link: "https://travelibro.com/bookings/home-stays",
+  //     target: "_self"
+  //   }, {
+  //     name: "Car Rentals",
+  //     classis: "active",
+  //     link: "https://flights.travelibro.com/en-GB/carhire/#/result?originplace=&destinationplace=",
+  //     target: "_blank"
+  //   }, {
+  //     name: "Tours & Excursions",
+  //     classis: "active",
+  //     link: "https://travelibro.com/bookings/tours-and-excursions",
+  //     target: "_self"
+  //   }]
+  // })
   .controller('AdvertiseCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
@@ -402,7 +434,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("advertise");
     $scope.menutitle = NavigationService.makeactive("Advertise");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Advertise With Us - TraveLibro";
     $scope.navigation = NavigationService.getnav();
     $scope.animationsEnabled = true;
     if (typeof $.fn.fullpage.destroy == 'function') {
@@ -497,13 +529,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     $scope.searchByKey = function (searchCity) {
-      cfpLoadingBar.start();
       NavigationService.getAllCities({
         "search": searchCity
       }, getAllCities, function (err) {
         console.log(err);
       });
-      cfpLoadingBar.complete();
     };
     //End-Of get all the cities from database
 
@@ -684,28 +714,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.holidayKindType = [{
       img: "img/beach.png",
-      caption: "Island & Beach",
+      caption: "Islands & Beaches",
       storeCaption: "Islands & Beaches",
     }, {
       img: "img/city.png",
-      caption: "City",
+      caption: "Cities",
       storeCaption: "Cities"
     }, {
       img: "img/safari.png",
-      caption: "Safari",
-      storeCaption: "Safari"
+      caption: "Safaris",
+      storeCaption: "Safaris"
     }, {
       img: "img/mountain.png",
       caption: "Mountains",
       storeCaption: "Mountains"
     }, {
       img: "img/cruise.png",
-      caption: "Cruise",
+      caption: "Cruises",
       storeCaption: "Cruises"
     }, {
       img: "img/countryside.png",
-      caption: "Countryside",
-      storeCaption: "Countryside"
+      caption: "Countrysides",
+      storeCaption: "Countrysides"
     }];
     $scope.usuallygoHoliday = [{
       img: "img/map.png",
@@ -760,7 +790,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.idealHoliday = [{
       img: "img/luxury.png",
-      caption1: "luxury",
+      caption1: "Luxury",
       storeCaption: "Luxury"
     }, {
       img: "img/backpacking.png",
@@ -769,7 +799,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       img: "img/greentravelling.png",
       caption1: "Green",
-      caption2: "travelling",
+      caption2: "Travelling",
       storeCaption: "Green Travelling"
     }, {
       img: "img/pocketfriendly.png",
@@ -805,8 +835,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       storeCaption: "Food & Wine"
     }, {
       img: "img/festival.png",
-      caption1: "Festivals",
-      storeCaption: "Festivals"
+      caption1: "Festival",
+      storeCaption: "Festival"
     }];
 
     _.each()
@@ -911,7 +941,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('TripSummaryCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $stateParams, OnGoJourney) {
+  .controller('TripSummaryCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $stateParams, OnGoJourney, $state) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -967,6 +997,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       lastScrollTop = st;
     }
     // scroll end
+
+    // route to on go journey
+    $scope.routeOngo = function (trip) {
+      $state.go('ongojourney', {
+        'id': trip.urlSlug,
+        'urlSlug': trip.user.urlSlug
+      });
+    }
+    // route to on go journey end
 
   })
 
@@ -1052,6 +1091,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var getOneJourneyCallback = function (journeys) {
       $scope.journey = journeys;
+      TemplateService.title = $scope.journey.name + " - Travel Life | TraveLibro";
       var postsWithLatLng = [];
       postsWithLatLng = _.filter($scope.journey.post, 'latlong');
       _.each(postsWithLatLng, function (n, $index) {
@@ -1061,7 +1101,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             "lng": parseFloat(n.latlong.long)
           };
         } else {
-          alert("no latlong found");
+          // alert("no latlong found");
         }
       });
       if (journeys && journeys.location && journeys.location.lat) {
@@ -1071,7 +1111,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
         centers.unshift(obj);
       } else {
-        alert("Location of Banner not found");
+        // alert("Location of Banner not found");
       }
       console.log(centers);
       initMap();
@@ -1762,10 +1802,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // share whole trip social
     $scope.viewSocialShare = false;
     $scope.shareSocial = function () {
-      if ($scope.viewSocialShare == false) {
-        $scope.viewSocialShare = true;
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
       } else {
-        $scope.viewSocialShare = false;
+        if ($scope.viewSocialShare == false) {
+          $scope.viewSocialShare = true;
+        } else {
+          $scope.viewSocialShare = false;
+        }
       }
     };
     // share whole trip social end
@@ -1953,7 +1997,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       stateOn: 'fa fa-star-o',
       stateOff: 'fa fa-star'
     }];
-
+    $scope.getslide = "travel-out";
+    $scope.openTravelTrip = function () {
+      if ($scope.getslide == "travel-in") {
+        $scope.getslide = "travel-out";
+      } else {
+        $scope.getslide = "travel-in";
+      }
+    };
     // $scope.followFollowing = function (user) {
     //   if (user.following) {
     //     LikesAndComments.unFollowUser(user._id, function (data) {
@@ -1996,7 +2047,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("popular-blogger");
     $scope.menutitle = NavigationService.makeactive("Popular Bloggers");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Popular Bloggers - TraveLibro";
     $scope.navigation = NavigationService.getnav();
 
     // POPULAR BLOGGER INTEGRATION START
@@ -2010,17 +2061,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.paginationLoader = TemplateService.paginationLoader;
     }, 300);
     $scope.getPopularBlogger = function (pageNo) {
-      $scope.scroll.busy = false;
       NavigationService.popularBlogger({
         pagenumber: pageNo
       }, function (data) {
+        $scope.scroll.busy = false;
         if (data.data.length == 0) {
           $scope.scroll.stopCallingApi = true;
         } else {
           _.each(data.data, function (newArr) {
             $scope.popularBloggerData.push(newArr);
           })
-          $scope.scroll.busy = false;
         }
       });
     };
@@ -2030,7 +2080,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // $scope.pagenumber++;
       console.log($scope.pagenumber, 'pagenum yo');
       $scope.scroll.busy = true;
-      if ($scope.scroll.stopCallingApi == false && $scope.scroll.busy == false) {
+      if ($scope.scroll.stopCallingApi == false) {
         $scope.getPopularBlogger(++$scope.pagenumber);
       }
     };
@@ -2078,7 +2128,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // $scope.template = TemplateService.changecontent("popular-agent");
     $scope.template = TemplateService.changecontent("coming-soon");
     $scope.menutitle = NavigationService.makeactive("Popular Agents");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Popular Agents - TraveLibro";
     $scope.navigation = NavigationService.getnav();
   })
 
@@ -2089,7 +2139,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("popular-itinerary");
     $scope.menutitle = NavigationService.makeactive("Popular Itineraries");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Popular Itineraries - TraveLibro";
     $scope.navigation = NavigationService.getnav();
 
     $scope.userData = $.jStorage.get("profile");
@@ -2103,17 +2153,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   $scope.paginationLoader=TemplateService.paginationLoader;
     // },300);
     $scope.getPopularIternary = function (pageNo) {
-      $scope.scroll.busy = true;
       NavigationService.popularItinerary({
         pagenumber: pageNo
       }, function (data) {
+        $scope.scroll.busy = false;
         if (data.data.length == 0) {
           $scope.scroll.stopCallingApi = true;
         } else {
           _.each(data.data, function (newArr) {
             $scope.popularIternaryData.push(newArr);
           });
-          $scope.scroll.busy = false;
         }
         console.log(data);
       });
@@ -2121,11 +2170,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.getPopularIternary($scope.pagenumber);
 
     $scope.getMoreItinerary = function () {
-
+      $scope.scroll.busy = true;
       console.log('jhjljlf');
       // $scope.pagenumber++;
       console.log($scope.pagenumber, 'pagenum yo');
-      if ($scope.scroll.stopCallingApi == false && $scope.scroll.busy == false) {
+      if ($scope.scroll.stopCallingApi == false) {
         $scope.getPopularIternary(++$scope.pagenumber);
       }
     };
@@ -2286,12 +2335,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // THANK YOU MODAL
     $scope.openThankYouModal = function () {
-      $uibModal.open({
-        templateUrl: "views/modal/report.html",
-        animation: true,
-        scope: $scope,
-        windowClass: "report-modal"
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
+      } else {
+        $uibModal.open({
+          templateUrl: "views/modal/report.html",
+          animation: true,
+          scope: $scope,
+          windowClass: "report-modal"
+        });
+      }
     };
     // THANK YOU MODAL END
 
@@ -2317,7 +2370,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("popular-journey");
     $scope.menutitle = NavigationService.makeactive("Popular Journeys");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Popular Journeys - TraveLibro";
     $scope.navigation = NavigationService.getnav();
     $scope.userData = $.jStorage.get("profile")
     // POPULAR JOURNEY INTEGRATION START
@@ -2331,23 +2384,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.paginationLoader = TemplateService.paginationLoader;
     }, 300);
     $scope.getPopularJourney = function (pageNo) {
-      $scope.scroll.busy = false;
       NavigationService.popularJourney({
         pagenumber: pageNo
       }, function (data) {
-        $scope.scroll.busy = true;
-        _.each(data.data, function (n) {
-          n.user.following = n.following;
-        })
+        $scope.scroll.busy = false;
         if (data.data.length == 0) {
           $scope.scroll.stopCallingApi = true;
         } else {
           _.each(data.data, function (newArr) {
             $scope.popularJourneyData.push(newArr);
+            newArr.user.following = newArr.following;
           })
-          $scope.scroll.busy = false;
+          // $scope.scroll.busy = false;
         }
-
+        // $scope.scroll.busy = true;
+        // _.each(data.data, function (n) {
+        //   n.user.following = n.following;
+        // })
       });
     };
     $scope.getPopularJourney($scope.pagenumber);
@@ -2356,7 +2409,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.scroll.busy = true;
       // $scope.pagenumber++;
       console.log($scope.pagenumber, 'pagenum yo');
-      if ($scope.scroll.stopCallingApi == false && $scope.scroll.busy == false) {
+      if ($scope.scroll.stopCallingApi == false) {
         $scope.getPopularJourney(++$scope.pagenumber);
       }
     };
@@ -2513,12 +2566,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // THANK YOU MODAL
     $scope.openThankYouModal = function () {
-      $uibModal.open({
-        templateUrl: "views/modal/report.html",
-        animation: true,
-        scope: $scope,
-        windowClass: "report-modal"
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
+      } else {
+        $uibModal.open({
+          templateUrl: "views/modal/report.html",
+          animation: true,
+          scope: $scope,
+          windowClass: "report-modal"
+        });
+      }
     };
     // THANK YOU MODAL END
 
@@ -2526,7 +2583,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var shareModal = "";
     $scope.sharePost = function (url) {
       $scope.shareUrl = url;
-      console.log($scope.shareUrl, 'share ka url');
       shareModal = $uibModal.open({
         animation: true,
         templateUrl: "views/modal/sharing.html",
@@ -2544,48 +2600,113 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("destination");
     $scope.menutitle = NavigationService.makeactive("Destinations");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Travel Destinations - TraveLibro";
     $scope.navigation = NavigationService.getnav();
     $scope.destinationList = [];
     console.log($scope.searchLoader, 'search loader');
     setInterval(function () {
       $scope.searchLoader = TemplateService.searchLoader;
     }, 300);
+    $scope.scroll = {
+      busy: false,
+      stopCallingApi: false
+    }
+    $scope.pagenumber = 1;
+    $scope.destinationPagination = false;
     $scope.viewListByKey = "A";
     $scope.countryDestList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     $scope.i = 0;
-    $scope.callCountry = function (search, searchText) {
+    $scope.showCountry = function (search, searchText) {
       $scope.i++;
-      $scope.destinationList = [];
+      $scope.scroll.busy = false;
       NavigationService.getDestination({
         search: search,
         searchText: searchText,
         count: $scope.i
       }, function (data) {
         if ($scope.i === data.count) {
-          $scope.destinationList = data.data;
-          $scope.i = 0;
+          if (data.data.length == 0) {
+            $scope.scroll.stopCallingApi = true;
+          } else {
+            _.each(data.data, function (newData) {
+              $scope.destinationList.push(newData);
+              $scope.i = 0;
+            })
+          }
         }
       });
     }
-    $scope.callCountry("a", "");
+    $scope.callCountry = function (search, searchText) {
+      NavigationService.getDestination({
+        search: search,
+        searchText: searchText
+      }, function (data) {
+        if (data.value == true) {
+          $scope.scroll.busy = false;
+          $scope.destinationPagination = false;
+          if (data.data.length == 0) {
+            $scope.scroll.stopCallingApi = true;
+          } else {
+            _.each(data.data, function (newData) {
+              $scope.destinationList.push(newData);
+            })
+          }
+        }
+      })
+    }
+    $scope.callCountry($scope.countryDestList[0], "");
+    // get more list destination
+    $scope.getMoreDestination = function () {
+      $scope.destinationPagination = true;
+      console.log($scope.countryDestList[$scope.pagenumber]);
+      if ($scope.pagenumber > 25) {
+        $scope.scroll.stopCallingApi = true;
+        console.log($scope.scroll.stopCallingApi);
+        $scope.destinationPagination = false;
+      } else {
+        $scope.scroll.busy = true;
+        if ($scope.scroll.stopCallingApi == false) {
+          $scope.pagenumber++;
+          $scope.callCountry($scope.countryDestList[$scope.pagenumber - 1], "");
+        }
+        // if($scope.scroll.busy==false){
+        //   $scope.scroll.busy = true;
+        //   if($scope.scroll.stopCallingApi== false ){
+        //     $scope.pagenumber++;
+        //     $scope.callCountry($scope.countryDestList[$scope.pagenumber-1],"");
+        //   }
+        // }
+
+      }
+    }
+    // get more list destination end
     $scope.searchDestination = function (searchVal, searchType) {
+      $scope.destinationList = [];
       switch (searchType) {
         case 'searchDest':
           console.log(searchType, 'hk');
           if (searchVal === "") {
-            $scope.callCountry("a", "");
+            // $scope.destinationList = [];
+            $scope.showCountry("a", "");
             $scope.viewListByKey = "A";
           } else {
             if (searchVal.length > 2) {
               $scope.viewListByKey = searchVal.charAt(0);
-              $scope.callCountry(searchVal, searchVal);
+              $scope.showCountry(searchVal, searchVal);
+              $scope.scroll.stopCallingApi = true;
             }
           }
           break;
         case 'clickDest':
           if (searchVal) {
+            console.log(searchVal, 'new Val');
+            var getIndexVal = _.findIndex($scope.countryDestList, function (index) {
+              return index == searchVal;
+            });
+            console.log(getIndexVal, 'get index');
+            $scope.destinationPagination = true;
             $scope.viewListByKey = searchVal.charAt(0);
+            $scope.pagenumber = getIndexVal + 1;
             $scope.callCountry(searchVal, searchVal);
           } else {
             $scope.callCountry("a", "");
@@ -2625,7 +2746,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("destination-country");
     $scope.menutitle = NavigationService.makeactive("Destination");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.urlDestinationCountry = $state.params.url;
     $scope.hotelsData = [];
@@ -2646,6 +2767,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.destinationItineraryType = [];
     $scope.destinationItineraryBy = [];
     $scope.destinationCityFilter = [];
+    $scope.destinationCityFilterName = [];
+    $scope.destinationItineraryTypeName = [];
+    $scope.destinationItineraryByName = [];
 
     $scope.destinationList = [];
     $scope.i = 0;
@@ -2698,47 +2822,76 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // destination country city end
 
     $scope.getCountryInfo = function (type, urlSlug) {
-      $scope.scroll.busy = false;
-      NavigationService.getCountryDestination({
+      $scope.destinationCityFilterName = _.map($scope.destinationCityFilter, 'name');
+      $scope.destinationItineraryTypeName = _.map($scope.destinationItineraryType, 'name');
+      $scope.destinationItineraryByName = _.map($scope.destinationItineraryBy, 'name');
+      var sendCityData = {
         pagenumber: $scope.pagenumber,
-        type: type,
+        type: _.cloneDeep(type),
         urlSlug: $scope.urlDestinationCountry,
-        city: $scope.destinationCityFilter,
-        itineraryType: $scope.destinationItineraryType,
-        itineraryBy: $scope.destinationItineraryBy
-      }, function (data) {
-        if (type == 'itinerary') {
-          _.each(data.data.itinerary, function (newData) {
+        city: $scope.destinationCityFilterName,
+        itineraryType: $scope.destinationItineraryTypeName,
+        itineraryBy: $scope.destinationItineraryByName
+      };
+      if (type === "bestTime") {
+        sendCityData.type = "mustDo";
+      }
+      NavigationService.getCountryDestination(sendCityData, function (data) {
+        $scope.scroll.busy = false;
+        if (data.value == true) {
+          $scope.isopenfilter = false;
+          if (type == 'itinerary') {
+            $scope.countryDestData = data.data;
             if (data.data.itinerary.length == 0) {
               $scope.scroll.stopCallingApi = true;
             } else {
-              $scope.countryDestIti.push(newData);
-              console.log($scope.countryDestIti, 'data itinerary wala');
+              _.each(data.data.itinerary, function (newData) {
+                newData.user.following = newData.following;
+                $scope.countryDestIti.push(newData);
+                console.log($scope.countryDestIti, 'data itinerary wala');
+              });
             }
-          })
-          // if (data.data.itinerary.length == 0) {
-          //   $scope.scroll.stopCallingApi = true;
-          // }else {
-          //   console.log(data, 'data');
-          //
-          //   _.each(data.data, function (newData) {
-          //     $scope.countryDestData.push(newData);
-          //   });
-          //   console.log($scope.countryDestData, 'data');
-          // };
+            TemplateService.title = "Itineraries for " + $scope.countryDestData.name + " - TraveLibro";
+          } else {
+            $scope.countryDestData = data.data;
+            _.each(data.data.bestTime, function (newVal) {
+              newVal.month = moment(newVal.month, "M").format('MMMM');
+            });
+            console.log($scope.countryDestData, 'what is cadat');
+            // switch case for title only
+            console.log(type);
+            switch (type) {
+              case 'featuredCities':
+                TemplateService.title = "Popular Cities in " + $scope.countryDestData.name + " - TraveLibro"
+                break;
+              case 'mustDo':
+                TemplateService.title = "Top 10 Things to Do in " + $scope.countryDestData.name + " - TraveLibro"
+                break;
+              case "bestTime":
+                TemplateService.title = "Best Time To Visit " + $scope.countryDestData.name + " - TraveLibro";
+                break;
+              default:
+                break;
+            }
+            // switch case for title only end
+          }
         } else {
-          $scope.countryDestData = data.data;
-          _.each(data.data.bestTime, function (newVal) {
-            newVal.month = moment(newVal.month, "M").format('MMMM');
-          });
+
         }
-        console.log($scope.countryDestData, 'what is cadat');
+
       });
     };
+
+    $scope.getCountyItiSubmit = function () {
+      $scope.countryDestIti = [];
+      $scope.pagenumber = 1;
+      $scope.getCountryInfo("itinerary", $scope.urlDestinationCountry);
+    }
 
     $scope.itineraryLoadMore = function () {
       $scope.scroll.busy = true;
       console.log($scope.pagenumber, 'pagenumber');
+      console.log($scope.scroll.stopCallingApi, 'stop call country');
       // $scope.getCountryInfo("itinerary",$scope.urlDestinationCountry);
       if ($scope.scroll.stopCallingApi == false) {
         $scope.pagenumber++;
@@ -2748,18 +2901,83 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // FILTER ITINERARY DESTINATION
     $scope.getItinerayCity = function (id) {
-      console.log($scope.countryDestData._id, 'country id');
-      console.log('hihsjk');
+      $scope.cityList = [];
+      console.log('hihsjk', id);
       NavigationService.getCitySearch({
         keyword: $scope.itinerary.citySearch,
         country: id
       }, function (data) {
         $scope.cityList = data.data.results;
-        console.log($scope.cityList, 'cityList');
+        $scope.cityList = _.map($scope.cityList, function (cityListData) {
+          cityListData.checked = false;
+          return cityListData;
+        });
+        console.log($scope.cityList, 'get Data');
       })
     };
-    $scope.itineraryType = ['Adventure', 'Business', 'Family', 'Romance', 'Budget', 'Luxury', 'Religious', 'Friends', 'Shopping', 'Solo', 'Festival', 'Backpacking'];
-    $scope.itineraryBy = ['User', 'TravelAgent', 'Editor']
+
+    $scope.itineraryType = [{
+        name: "Adventure",
+        checked: false
+      },
+      {
+        name: "Business",
+        checked: false
+      },
+      {
+        name: "Family",
+        checked: false
+      },
+      {
+        name: "Romance",
+        checked: false
+      },
+      {
+        name: "Budget",
+        checked: false
+      },
+      {
+        name: "Luxury",
+        checked: false
+      },
+      {
+        name: "Religious",
+        checked: false
+      },
+      {
+        name: "Friends",
+        checked: false
+      },
+      {
+        name: "Shopping",
+        checked: false
+      },
+      {
+        name: "Solo",
+        checked: false
+      },
+      {
+        name: "Festival",
+        checked: false
+      },
+      {
+        name: "Backpacking",
+        checked: false
+      }
+    ];
+    $scope.itineraryByCountry = [{
+        name: "User",
+        checked: false
+      },
+      {
+        name: "Travel Agent",
+        checked: false
+      },
+      {
+        name: "Editor",
+        checked: false
+      }
+    ];
 
     // filter sorting
 
@@ -2768,46 +2986,69 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       switch (filterType) {
         case 'itineraryCity':
           var cityIndex = _.findIndex($scope.destinationCityFilter, function (type) {
-            return type == filterItinerary;
+            return type.name == filterItinerary.name;
           });
           if (cityIndex == -1) {
             $scope.destinationCityFilter.push(filterItinerary);
+            var cityItiIndex = _.findIndex($scope.cityList, function (cityCheck) {
+              return cityCheck.name == filterItinerary.name
+            });
+            $scope.cityList[cityItiIndex].checked = true;
             console.log($scope.destinationCityFilter, 'city');
           } else {
             _.remove($scope.destinationCityFilter, function (remove) {
-              return remove == filterItinerary;
-            })
+              return remove.name == filterItinerary.name;
+            });
+            var cityItiIndex = _.findIndex($scope.cityList, function (cityCheck) {
+              return cityCheck.name == filterItinerary.name
+            });
+            $scope.cityList[cityItiIndex].checked = false;
             console.log($scope.destinationCityFilter, 'city');
           }
           $scope.pagenumber = 1;
           break;
         case 'itineraryType':
           var typeIndex = _.findIndex($scope.destinationItineraryType, function (type) {
-            return type == filterItinerary;
+            return type.name == filterItinerary.name;
           });
           if (typeIndex == -1) {
             $scope.destinationItineraryType.push(filterItinerary);
+            var countryItiTypeIndex = _.findIndex($scope.itineraryType, function (getIndexCountry) {
+              return getIndexCountry.name == filterItinerary.name;
+            })
+            $scope.itineraryType[countryItiTypeIndex].checked = true;
             console.log($scope.destinationItineraryType, 'type');
           } else {
             _.remove($scope.destinationItineraryType, function (remove) {
-              return remove == filterItinerary;
+              return remove.name == filterItinerary.name;
             })
-
+            var countryItiTypeIndex = _.findIndex($scope.itineraryType, function (getIndexCountry) {
+              return getIndexCountry.name == filterItinerary.name;
+            })
+            $scope.itineraryType[countryItiTypeIndex].checked = false;
             console.log($scope.destinationItineraryType, 'type');
           }
           $scope.pagenumber = 1;
           break;
         case 'itineraryBy':
           var byIndex = _.findIndex($scope.destinationItineraryBy, function (type) {
-            return type == filterItinerary;
+            return type.name == filterItinerary.name;
           });
           if (byIndex == -1) {
             $scope.destinationItineraryBy.push(filterItinerary);
+            var countryItiByIndex = _.findIndex($scope.itineraryByCountry, function (getIndexBy) {
+              return getIndexBy.name == filterItinerary.name;
+            })
+            $scope.itineraryByCountry[countryItiByIndex].checked = true;
             console.log($scope.destinationItineraryBy, 'by');
           } else {
             _.remove($scope.destinationItineraryBy, function (remove) {
-              return remove == filterItinerary;
+              return remove.name == filterItinerary.name;
             })
+            var countryItiByIndex = _.findIndex($scope.itineraryByCountry, function (getIndexBy) {
+              return getIndexBy.name == filterItinerary.name;
+            })
+            $scope.itineraryByCountry[countryItiByIndex].checked = false;
             console.log($scope.destinationItineraryBy, 'by');
           }
           $scope.pagenumber = 1;
@@ -2817,7 +3058,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     // FILTER ITINERARY DESTINATION END
-
+    // clear country itinerary filter
+    $scope.clearCountryItinerary = function () {
+      _.each($scope.cityList, function (listCityChecked) {
+        listCityChecked.checked = false;
+      })
+      _.each($scope.itineraryType, function (listItiChecked) {
+        listItiChecked.checked = false;
+      })
+      _.each($scope.itineraryByCountry, function (listByChecked) {
+        listByChecked.checked = false;
+      })
+      $scope.destinationCityFilter = [];
+      $scope.destinationItineraryType = [];
+      $scope.destinationItineraryBy = [];
+    };
+    // clear country itinerary filter end
     // OPTIONS NG CLICK FUNCTION
     $scope.editOption = function (model) {
       $timeout(function () {
@@ -2830,24 +3086,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // THANK YOU MODAL
     $scope.openThankYouModal = function () {
-      $uibModal.open({
-        templateUrl: "views/modal/report.html",
-        animation: true,
-        scope: $scope,
-        windowClass: "report-modal"
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
+      } else {
+        $uibModal.open({
+          templateUrl: "views/modal/report.html",
+          animation: true,
+          scope: $scope,
+          windowClass: "report-modal"
+        });
+      }
     };
     // THANK YOU MODAL END
 
-    // destination city
-    $scope.countryView = function (url, isCity) {
-      $state.go("destinationcity", {
-        name: "must-dos",
-        url: url
-      })
-    }
-
-    // destination city end
+    // // destination city
+    // $scope.countryView = function (url, isCity) {
+    //   $state.go("destinationcity", {
+    //     name: "must-dos",
+    //     url: url
+    //   })
+    // }
+    //
+    // // destination city end
 
     var alldestination = ["views/content/destination/country/featured.html", "views/content/destination/country/mustdo.html", "views/content/destination/country/itineraries.html", "views/content/destination/country/booking.html", "views/content/destination/country/visit.html"];
     $scope.destination = {
@@ -2896,6 +3156,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.destination.innerView = alldestination[4];
           $scope.countryDestinationView = false;
           $scope.ntMustdo = "";
+          $scope.getCountryInfo("bestTime", $scope.urlDestinationCountry);
           break;
         default:
           // $scope.countryDestData = [];
@@ -3208,15 +3469,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var shareModal = "";
     $scope.sharePost = function (url) {
       $scope.shareUrl = url;
-      console.log($scope.shareUrl, 'share ka url');
-      shareModal = $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/sharing.html",
-        scope: $scope
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
+      } else {
+        shareModal = $uibModal.open({
+          animation: true,
+          templateUrl: "views/modal/sharing.html",
+          scope: $scope
+        });
+      }
     }
     // sharing local life modal end
 
+    // followFollowing  Function
+    $scope.followFollowing = function (user) {
+      LikesAndComments.followUnFollow(user, function (data) {
+        if (data.value) {
+          user.following = data.data.responseValue;
+        } else {
+          console.log("error updating data");
+        }
+      });
+    }
+    // followFollowing  Function END
 
   })
 
@@ -3226,17 +3501,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("destination-city");
     $scope.menutitle = NavigationService.makeactive("Destination");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.cityDestData = [];
     $scope.cityHotelCategoryData = [];
     $scope.bookingCityName = "";
     $scope.bookingCountryName = "";
     $scope.citySubTypeData = [];
+    $scope.citySubTypeDataName = [];
     $scope.cityBudgetData = [];
+    $scope.cityBudgetDataName = [];
     $scope.cityItineraryType = [];
+    $scope.cityItineraryTypeName = [];
     $scope.cityItineraryBy = [];
+    $scope.cityItineraryByName = [];
     $scope.cityRestaurantCuisine = [];
+    $scope.cityRestaurantCuisineName = [];
     $scope.pagenumber = 1;
     $scope.cityDestIti = [];
     $scope.ntMustdo = "ntMustdo";
@@ -3263,12 +3543,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // SUGGEST EDIT POPUP MODAL
     $scope.openSuggestModal = function () {
-      $uibModal.open({
-        templateUrl: "views/modal/suggest-edit.html",
-        animation: true,
-        scope: $scope,
-        windowClass: "report-modal"
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
+      } else {
+        $uibModal.open({
+          templateUrl: "views/modal/suggest-edit.html",
+          animation: true,
+          scope: $scope,
+          windowClass: "report-modal"
+        });
+      }
     };
     // SUGGEST EDIT POPUP MODAL END
 
@@ -3276,15 +3560,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var shareModal = "";
     $scope.sharePost = function (url) {
       $scope.shareUrl = url;
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
+      } else {
+        shareModal = $uibModal.open({
+          animation: true,
+          templateUrl: "views/modal/sharing.html",
+          scope: $scope
+        });
+      }
       console.log($scope.shareUrl, 'share ka url');
-      shareModal = $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/sharing.html",
-        scope: $scope
-      });
     }
     // sharing local life modal end
 
+
+    // followFollowing  Function
+    $scope.followFollowing = function (user) {
+      LikesAndComments.followUnFollow(user, function (data) {
+        if (data.value) {
+          user.following = data.data.responseValue;
+        } else {
+          console.log("error updating data");
+        }
+      });
+    }
+    // followFollowing  Function END
 
     // OPTIONS NG CLICK FUNCTION
     $scope.editOption = function (model) {
@@ -3298,12 +3598,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // THANK YOU MODAL
     $scope.openThankYouModal = function () {
-      $uibModal.open({
-        templateUrl: "views/modal/report.html",
-        animation: true,
-        scope: $scope,
-        windowClass: "report-modal"
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
+      } else {
+        $uibModal.open({
+          templateUrl: "views/modal/report.html",
+          animation: true,
+          scope: $scope,
+          windowClass: "report-modal"
+        });
+      }
     };
     // THANK YOU MODAL END
 
@@ -3349,34 +3653,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var modal = "";
     $scope.rateDestination = function (destRate, type) {
-      console.log(destRate, 'check in');
-      $scope.destReview = destRate;
-      if (destRate.userReview.length !== 0) {
-        console.log("Edit Rating");
-        if (destRate.userReview[0].rating != undefined) {
-          $scope.starRating(parseInt(destRate.userReview[0].rating));
-        } else {
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
+      } else {
+        console.log(destRate, 'check in');
+        $scope.destReview = destRate;
+        if (destRate.userReview.length !== 0) {
+          console.log("Edit Rating");
+          if (destRate.userReview[0].rating != undefined) {
+            $scope.starRating(parseInt(destRate.userReview[0].rating));
+          } else {
 
+          }
+        } else {
+          console.log("Rate Us");
         }
-      } else {
-        console.log("Rate Us");
-      }
-      modal = $uibModal.open({
-        animation: true,
-        templateUrl: 'views/modal/destination-review.html',
-        scope: $scope
-      });
-      modal.closed.then(function () {
-        console.log('alert');
-        $scope.postReview.review = "";
-        $scope.starRating(1);
-      });
-      if (type == 'hotel') {
-        $scope.modelType = "hotel";
-        $scope.rateType = "saveHotel";
-      } else {
-        $scope.modelType = "restaurant";
-        $scope.rateType = "saveRestaurant";
+        modal = $uibModal.open({
+          animation: true,
+          templateUrl: 'views/modal/destination-review.html',
+          scope: $scope
+        });
+        modal.closed.then(function () {
+          console.log('alert');
+          $scope.postReview.review = "";
+          $scope.starRating(1);
+        });
+        if (type == 'hotel') {
+          $scope.modelType = "hotel";
+          $scope.rateType = "saveHotel";
+        } else {
+          $scope.modelType = "restaurant";
+          $scope.rateType = "saveRestaurant";
+        }
       }
     };
     $scope.ratingValue = {};
@@ -3465,7 +3773,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   }
     // };
     $scope.getRating = function (n, type) {
-      console.log(n, type, 'rating');
+      // console.log(n, type, 'rating');
       if (type == "marked") {
         n = parseInt(n);
         return new Array(n);
@@ -3478,59 +3786,272 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.urlDestinationCity = $state.params.url;
     $scope.getCityInfo = function (type, urlSlug) {
-      $scope.scroll.busy = false;
-      NavigationService.getCityDestination({
-        type: type,
+      $scope.citySubTypeDataName = _.map($scope.citySubTypeData, 'name');
+      $scope.cityBudgetDataName = _.map($scope.cityBudgetData, 'name');
+      $scope.cityRestaurantCuisineName = _.map($scope.cityRestaurantCuisine, 'name');
+      $scope.cityItineraryTypeName = _.map($scope.cityItineraryType, "name");
+      $scope.cityItineraryByName = _.map($scope.cityItineraryBy, 'name');
+      var sendData = {
+        type: _.cloneDeep(type),
         urlSlug: $scope.urlDestinationCity,
-        subType: $scope.citySubTypeData,
-        budget: $scope.cityBudgetData,
-        cuisine: $scope.cityRestaurantCuisine,
-        itineraryType: $scope.cityItineraryType,
-        itineraryBy: $scope.cityItineraryBy,
+        subType: $scope.citySubTypeDataName,
+        budget: $scope.cityBudgetDataName,
+        cuisine: $scope.cityRestaurantCuisineName,
+        itineraryType: $scope.cityItineraryTypeName,
+        itineraryBy: $scope.cityItineraryByName,
         pagenumber: $scope.pagenumber
-      }, function (data) {
-        if (type === 'itinerary') {
-          _.each(data.data.itinerary, function (newData) {
+      };
+      if (type === "bestTime") {
+        sendData.type = "mustDo";
+      }
+      NavigationService.getCityDestination(sendData, function (data) {
+        $scope.scroll.busy = false;
+        if (data.value == true) {
+          $scope.isopenfilter = false;
+          if (type === 'itinerary') {
             if (data.data.itinerary.length == 0) {
               $scope.scroll.stopCallingApi = true;
             } else {
-              $scope.cityDestIti.push(newData);
-              console.log($scope.cityDestIti, 'city ka itinerary');
+              _.each(data.data.itinerary, function (newData) {
+                newData.user.following = newData.following;
+                $scope.cityDestIti.push(newData);
+                console.log($scope.cityDestIti, 'city ka itinerary');
+              })
+            };
+            TemplateService.title = "Travel Itinerary For " + $scope.cityDestData.name + " | TraveLibro"
+          } else {
+            _.each(data.data.bestTime, function (newVal) {
+              newVal.month = moment(newVal.month, "M").format('MMMM');
+            });
+            $scope.cityDestData = data.data;
+            // console.log('bc log hoja', $scope.cityDestData);
+            // switch case for title only
+
+            switch (type) {
+              case 'mustDo':
+                TemplateService.title = $scope.cityDestData.name + " Travel Guide | Top Things To Do In " + $scope.cityDestData.name + "- TraveLibro";
+                break;
+              case 'hotel':
+                TemplateService.title = $scope.cityDestData.name + " Hotels | TraveLibro";
+                break;
+              case 'restaurant':
+                TemplateService.title = "Recommended Restaurants In " + $scope.cityDestData.name + " | TraveLibro ";
+                break;
+              case 'bookings':
+                TemplateService.title = "Best Deals For " + $scope.cityDestData.name + " -   TraveLibro";
+                break;
+              case 'bestTime':
+                TemplateService.title = "Best Time To Visit " + $scope.cityDestData.name + " -   TraveLibro";
+                break;
+              default:
+                break;
             }
-          })
-        } else {
-          _.each(data.data.bestTime, function (newVal) {
-            newVal.month = moment(newVal.month, "M").format('MMMM');
-          });
-          $scope.cityDestData = data.data;
-          // console.log('bc log hoja', $scope.cityDestData);
+            // switch case for title only end
+          }
         }
       })
     };
 
+    $scope.getCityItiSubmit = function () {
+      $scope.cityDestIti = [];
+      $scope.pagenumber = 1;
+      console.log($scope.cityDestIti, 'city dest ');
+      $scope.getCityInfo('itinerary', $scope.urlDestinationCity);
+    }
+
+    $scope.cityItineraryLoadMore = function () {
+      $scope.scroll.busy = true;
+      console.log($scope.pagenumber, 'pagenumber');
+      console.log($scope.scroll.stopCallingApi, 'stop call city');
+      // $scope.getCountryInfo("itinerary",$scope.urlDestinationCountry);
+      if ($scope.scroll.stopCallingApi == false) {
+        $scope.pagenumber++;
+        $scope.getCityInfo('itinerary', $scope.urlDestinationCity);
+      }
+    };
+
     // get booking data
-    $scope.viewBookingLoader = false;
+    $scope.viewTourLoader = true;
+    $scope.viewNoTourData = false;
+    $scope.viewHotelLoader = true;
+    $scope.viewNoHotelData = false;
+    $scope.viewVacationLoader = true;
+    $scope.viewNoVacData = false;
+    $scope.viewHomeStayLoader = true;
+    $scope.viewNoHomeData = false;
     $scope.getBooking = function (cityName, countryName) {
       console.log(cityName, countryName);
       $scope.bookingCityName = cityName;
       $scope.bookingCountryName = countryName;
-      NavigationService.getDestinationBooking({
+      NavigationService.getBookingTour({
         cityName: $scope.bookingCityName,
         countryName: $scope.bookingCountryName
       }, function (data) {
-        if (data.tours.status == false) {
-          $scope.viewBookingLoader = true;
+        if (data.status == false || data.tours == "") {
+          $scope.viewNoTourData = true;
+          $scope.viewTourLoader = false;
+          $scope.getHomeStay($scope.bookingCityName, $scope.bookingCountryName);
         } else {
-          $scope.viewBookingLoader = false;
+          $scope.viewNoTourData = false;
+          $scope.viewTourLoader = false;
           console.log(data, 'booking data');
-          $scope.bookingData = data;
-          console.log($scope.bookingData, 'booking ka data');
+          $scope.bookingTourData = data.tours;
+          console.log($scope.bookingTourData, 'booking ka data');
+          $scope.getHomeStay($scope.bookingCityName, $scope.bookingCountryName);
         }
       });
     };
+    $scope.getHomeStay = function (cityHomeStay, countryHomeStay) {
+      NavigationService.getBookingHomeStay({
+        cityName: cityHomeStay,
+        countryName: countryHomeStay
+      }, function (data) {
+        if (data.status == false || data.home_stays == "") {
+          $scope.viewNoHomeData = true;
+          $scope.viewHomeStayLoader = false;
+          $scope.getVacation($scope.bookingCityName, $scope.bookingCountryName);
+        } else {
+          $scope.viewHomeStayLoader = false;
+          $scope.viewNoHomeData = false;
+          $scope.bookingHomeData = data.home_stays;
+          $scope.getVacation($scope.bookingCityName, $scope.bookingCountryName);
+        }
+      });
+    };
+    $scope.getVacation = function (cityVacation, countryVacation) {
+      NavigationService.getBookingVaction({
+        cityName: cityVacation,
+        countryName: countryVacation
+      }, function (data) {
+        if (data.status == false || data.vacation_rentals == "") {
+          $scope.viewVacationLoader = false;
+          $scope.viewNoVacData = true;
+          $scope.getHotel($scope.bookingCityName, $scope.bookingCountryName);
+        } else {
+          $scope.viewVacationLoader = false;
+          $scope.viewNoVacData = false;
+          console.log(data, 'booking data');
+          $scope.bookingVacData = data.vacation_rentals;
+          $scope.getHotel($scope.bookingCityName, $scope.bookingCountryName);
+        }
+      });
+    };
+
+    $scope.getHotel = function (cityHotel, countryHotel) {
+      NavigationService.getBookingHotel({
+        cityName: cityHotel,
+        countryName: countryHotel
+      }, function (data) {
+        if (data.status == false || data.hotels == "") {
+          $scope.viewHotelLoader = false;
+          $scope.viewNoHotelData = true;
+        } else {
+          $scope.viewNoHotelData = false;
+          $scope.viewHotelLoader = false;
+          $scope.bookingHotelData = data.hotels;
+        }
+      })
+    }
     // get booking data end
 
-    $scope.cityType = ['Adventure', 'Business', 'Family', 'Romance', 'Budget', 'Luxury', 'Religious', 'Friends', 'Shopping', 'Solo', 'Festival', 'Backpacking'];
+    $scope.cityType = [{
+        name: 'Adventure',
+        checked: false
+      },
+      {
+        name: 'Business',
+        checked: false
+      },
+      {
+        name: 'Family',
+        checked: false
+      },
+      {
+        name: 'Romance',
+        checked: false
+      },
+      {
+        name: 'Budget',
+        checked: false
+      },
+      {
+        name: 'Luxury',
+        checked: false
+      },
+      {
+        name: 'Religious',
+        checked: false
+      },
+      {
+        name: 'Friends',
+        checked: false
+      },
+      {
+        name: 'Shopping',
+        checked: false
+      },
+      {
+        name: 'Solo',
+        checked: false
+      },
+      {
+        name: 'Festival',
+        checked: false
+      },
+      {
+        name: 'Backpacking',
+        checked: false
+      }
+    ];
+    $scope.cityByIti = [{
+        name: "User",
+        checked: false
+      },
+      {
+        name: "Travel Agent",
+        checked: false
+      },
+      {
+        name: "Editor",
+        checked: false
+      }
+    ];
+
+    // restuarnt budget
+    $scope.restuarntBudget = [{
+        name: "$$$",
+        checked: false
+      },
+      {
+        name: "$$",
+        checked: false
+      },
+      {
+        name: "$",
+        checked: false
+      }
+    ];
+    // restuarnt budget end
+
+    // hotel budget
+    $scope.hotelBudget = [{
+        name: "$$$",
+        id: "dollar-three",
+        checked: false
+      },
+      {
+        name: "$$",
+        id: "dollar-two",
+        checked: false
+      },
+      {
+        name: "$",
+        id: "dollar-one",
+        checked: false
+      }
+    ];
+    // hotel budget end
+
 
     $scope.openCountry = function (index) {
       $scope.mustDoArr = _.cloneDeep($scope.cityDestData.mustDo);
@@ -3571,19 +4092,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.viewReviews = function (review, type) {
-      if ($scope.viewCardReview) {
-        $scope.viewCardReview = false;
-        $scope.callReview = "";
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
       } else {
-        $scope.viewCardReview = true;
-        $scope.viewCardComment = false;
-        $scope.viewCardLike = false;
-        $scope.callReview = 'review-slide';
-        console.log(review);
-        LikesAndComments.getReviews(review._id, type, function (data) {
-          $scope.listOfReviews = data.data;
-          console.log($scope.listOfReviews, 'get review');
-        });
+        if ($scope.viewCardReview) {
+          $scope.viewCardReview = false;
+          $scope.callReview = "";
+        } else {
+          $scope.viewCardReview = true;
+          $scope.viewCardComment = false;
+          $scope.viewCardLike = false;
+          $scope.callReview = 'review-slide';
+          console.log(review);
+          LikesAndComments.getReviews(review._id, type, function (data) {
+            $scope.listOfReviews = data.data;
+            console.log($scope.listOfReviews, 'get review');
+          });
+        }
       }
     }
 
@@ -3694,29 +4219,47 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       switch (filterCityType) {
         case 'categoryType':
           var getcategory = _.findIndex($scope.citySubTypeData, function (subtype) {
-            return subtype == cityHotelData;
+            return subtype.name == cityHotelData.name;
           });
           if (getcategory == -1) {
             $scope.citySubTypeData.push(cityHotelData);
+            var getCategoryHotel = _.findIndex($scope.cityDestData.subType, function (checkedCat) {
+              return checkedCat.name == cityHotelData.name;
+            })
+            $scope.cityDestData.subType[getCategoryHotel].checked = true;
             console.log($scope.citySubTypeData, 'city add ');
           } else {
             _.remove($scope.citySubTypeData, function (removeCategory) {
-              return removeCategory == cityHotelData;
+              return removeCategory.name == cityHotelData.name;
             })
+            var getCategoryHotel = _.findIndex($scope.cityDestData.subType, function (checkedCat) {
+              return checkedCat.name == cityHotelData.name;
+            })
+            $scope.cityDestData.subType[getCategoryHotel].checked = false;
+
             console.log($scope.citySubTypeData, 'city remove');
           }
           break;
         case 'categoryBudget':
           var getBudget = _.findIndex($scope.cityBudgetData, function (budget) {
-            return budget == cityHotelData;
+            return budget.name == cityHotelData.name;
           });
           if (getBudget == -1) {
             $scope.cityBudgetData.push(cityHotelData);
+            var getBudgetHotel = _.findIndex($scope.hotelBudget, function (checkedCat) {
+              return checkedCat.name == cityHotelData.name;
+            })
+            $scope.hotelBudget[getBudgetHotel].checked = true;
             console.log($scope.cityBudgetData, 'budget add ');
           } else {
             _.remove($scope.cityBudgetData, function (removeBudget) {
-              return removeBudget == cityHotelData;
+              return removeBudget.name == cityHotelData.name;
             })
+            var getBudgetHotel = _.findIndex($scope.hotelBudget, function (checkedCat) {
+              return checkedCat.name == cityHotelData.name;
+            })
+
+            $scope.hotelBudget[getBudgetHotel].checked = false;
             console.log($scope.cityBudgetData, 'budget remove');
           }
           break;
@@ -3725,49 +4268,87 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     // city hotel filter end
+
+    // city clear all function
+    $scope.clearHotel = function () {
+      _.each($scope.cityDestData.subType, function (getChecked) {
+        getChecked.checked = false;
+      });
+      _.each($scope.hotelBudget, function (getChecked) {
+        getChecked.checked = false;
+      });
+      $scope.citySubTypeData = [];
+      $scope.cityBudgetData = [];
+    }
+    // city clear all function end
+
     // city restaurant filter
     $scope.hotelRestaurantFilter = function (restaurantData, restaurantFilterType) {
       console.log(restaurantData);
       switch (restaurantFilterType) {
         case "restaurantCuisine":
           var getCuisine = _.findIndex($scope.cityRestaurantCuisine, function (cuisine) {
-            return cuisine == restaurantData;
+            return cuisine.name == restaurantData.name;
           })
           if (getCuisine == -1) {
             $scope.cityRestaurantCuisine.push(restaurantData);
+            var getCuisineResto = _.findIndex($scope.cityDestData.cuisine, function (newCuisine) {
+              return newCuisine.name == restaurantData.name;
+            });
+            $scope.cityDestData.cuisine[getCuisineResto].checked = true;
             console.log($scope.cityRestaurantCuisine, 'cuisine add');
           } else {
             _.remove($scope.cityRestaurantCuisine, function (removeCuisine) {
-              return removeCuisine == restaurantData;
+              return removeCuisine.name == restaurantData.name;
             });
+            var getCuisineResto = _.findIndex($scope.cityDestData.cuisine, function (newCuisine) {
+              return newCuisine.name == restaurantData.name;
+            });
+            $scope.cityDestData.cuisine[getCuisineResto].checked = false;
             console.log($scope.cityRestaurantCuisine, 'cuisine removeCuisine');
           }
           break;
         case "typeRestaurant":
           var getRestaurant = _.findIndex($scope.citySubTypeData, function (restaurantType) {
-            return restaurantType == restaurantData;
+            return restaurantType.name == restaurantData.name;
           })
           if (getRestaurant == -1) {
             $scope.citySubTypeData.push(restaurantData);
+            var citySubIndex = _.findIndex($scope.cityDestData.subType, function (checkSubType) {
+              return checkSubType.name == restaurantData.name;
+            })
+            $scope.cityDestData.subType[citySubIndex].checked = true;
             console.log($scope.citySubTypeData, 'Type add');
           } else {
             _.remove($scope.citySubTypeData, function (removeRestaurantType) {
-              return removeRestaurantType == restaurantData;
+              return removeRestaurantType.name == restaurantData.name;
             });
+            var citySubIndex = _.findIndex($scope.cityDestData.subType, function (checkSubType) {
+              return checkSubType.name == restaurantData.name;
+            })
+            $scope.cityDestData.subType[citySubIndex].checked = false;
             console.log($scope.citySubTypeData, 'Type remove');
           }
           break;
         case "restaurantBudget":
           var getRestBudget = _.findIndex($scope.cityBudgetData, function (restaurantBudget) {
-            return restaurantBudget == restaurantData;
+            return restaurantBudget.name == restaurantData.name;
           })
           if (getRestBudget == -1) {
             $scope.cityBudgetData.push(restaurantData);
+            var restoBudget = _.findIndex($scope.restuarntBudget, function (checkedBudget) {
+              return checkedBudget.name == restaurantData.name;
+            });
+            $scope.restuarntBudget[restoBudget].checked = true;
             console.log($scope.cityBudgetData, 'budget add');
           } else {
             _.remove($scope.cityBudgetData, function (removeBudget) {
-              return removeBudget == restaurantData;
+              return removeBudget.name == restaurantData.name;
             });
+            var restoBudget = _.findIndex($scope.restuarntBudget, function (checkedBudget) {
+              return checkedBudget.name == restaurantData.name;
+            });
+            $scope.restuarntBudget[restoBudget].checked = false;
             console.log($scope.cityBudgetData, 'budget removeBudget');
           }
           break;
@@ -3776,35 +4357,67 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     // city restaurant filter end
-
+    // clear hotel restuarnt
+    $scope.clearCityRest = function () {
+      _.each($scope.cityDestData.cuisine, function (clearChecked) {
+        clearChecked.checked = false;
+      })
+      _.each($scope.cityDestData.subType, function (clearSubTypeChecked) {
+        clearSubTypeChecked.checked = false;
+      })
+      _.each($scope.restuarntBudget, function (clearRestoChecked) {
+        clearRestoChecked.checked = false;
+      })
+      $scope.cityRestaurantCuisine = [];
+      $scope.citySubTypeData = [];
+      $scope.cityBudgetData = [];
+    }
+    // clear hotel restuarnt end
     // city itinerary filter
     $scope.cityItineraryFilter = function (cityFilterData, cityFilterType) {
+      console.log(cityFilterData);
       switch (cityFilterType) {
         case 'cityItineraryType':
           var cityTypeIndex = _.findIndex($scope.cityItineraryType, function (cityType) {
-            return cityType == cityFilterData;
+            return cityType.name == cityFilterData.name;
           });
           if (cityTypeIndex == -1) {
             $scope.cityItineraryType.push(cityFilterData);
             console.log($scope.cityItineraryType, 'type add');
+            var cityItineraryIndex = _.findIndex($scope.cityType, function (getCityIndex) {
+              return getCityIndex.name == cityFilterData.name;
+            })
+            $scope.cityType[cityItineraryIndex].checked = true;
           } else {
             _.remove($scope.cityItineraryType, function (removeType) {
-              return removeType == cityFilterData;
+              return removeType.name == cityFilterData.name;
             });
+            var cityItineraryIndex = _.findIndex($scope.cityType, function (getCityIndex) {
+              return getCityIndex.name == cityFilterData.name;
+            })
+            $scope.cityType[cityItineraryIndex].checked = false;
             console.log($scope.cityItineraryType, 'removed once');
           }
           break;
         case 'cityItineraryBy':
           var cityBy = _.findIndex($scope.cityItineraryBy, function (cityBy) {
-            return cityBy == cityFilterData;
+            return cityBy.name == cityFilterData.name;
           });
           if (cityBy == -1) {
             $scope.cityItineraryBy.push(cityFilterData);
             console.log($scope.cityItineraryBy, 'by add');
+            var getCityBy = _.findIndex($scope.cityByIti, function (getCityBy) {
+              return getCityBy.name == cityFilterData.name;
+            })
+            $scope.cityByIti[getCityBy].checked = true;
           } else {
             _.remove($scope.cityItineraryBy, function (removeBy) {
               return removeBy == cityFilterData;
             });
+            var getCityBy = _.findIndex($scope.cityByIti, function (getCityBy) {
+              return getCityBy.name == cityFilterData.name;
+            })
+            $scope.cityByIti[getCityBy].checked = false;
             console.log($scope.cityItineraryBy, 'removed once');
           }
           break;
@@ -3813,6 +4426,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     // city itinerary filter end
+    // clear city itinerary
+    $scope.clearCityItinerary = function () {
+      _.each($scope.cityType, function (cityTypeChecked) {
+        cityTypeChecked.checked = false;
+      });
+      _.each($scope.cityByIti, function (cityItiChecked) {
+        cityItiChecked.checked = false;
+      });
+      $scope.cityItineraryType = [];
+      $scope.cityItineraryBy = [];
+    }
+    // clear city itinerary end
     // tour packages card
     $scope.usrTourPackageCard = [{
       tourImg: 'img/paris.jpg',
@@ -3906,6 +4531,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.cityoptions = {};
     $scope.cityoptions.active = "";
     $scope.viewTab = 1;
+    // console.log($state.params.name);
     switch ($state.params.name) {
       case "must-dos":
         $scope.destination.innerView = alldestination[0];
@@ -3939,7 +4565,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.destination.innerView = alldestination[4];
         $scope.cityDestinationView = false;
         $scope.cityoptions.active = "bookings";
-        $scope.getBooking($scope.bookingCityName, $scope.bookingCountryName);
+        $scope.getBooking($state.params.url.toLowerCase(), $state.params.country);
         $scope.viewBookingLoader = true;
         $scope.ntMustdo = "";
         break;
@@ -3948,12 +4574,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.cityDestinationView = false;
         $scope.cityoptions.active = "best-time-to-visit";
         $scope.ntMustdo = "";
+        $scope.getCityInfo("bestTime", $scope.urlDestinationCity);
         break;
       default:
         $scope.destination.innerView = alldestination[0];
         $scope.cityDestinationView = true;
     }
     $scope.getTab = function (view) {
+      console.log($state.params.name, 'name');
+      console.log($state.params.country, 'country');
+      console.log($state.params.url, 'url');
       $scope.destination.innerView = alldestination[view];
       var url = "features-cities";
       var active = "";
@@ -3999,26 +4629,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.cityDestinationView = false;
           $scope.cityoptions.active = "bookings";
           $scope.viewBookingLoader = true;
-          $scope.getBooking($scope.bookingCityName, $scope.bookingCountryName);
+          $scope.getBooking($state.params.url.toLowerCase(), $scope.bookingCountryName);
           $scope.ntMustdo = "";
           break;
         case 5:
           url = "best-time-to-visit";
           $scope.cityDestinationView = false;
           $scope.cityoptions.active = "best-time-to-visit";
-          $scope.getCityInfo("mustDo", $scope.urlDestinationCity);
           $scope.ntMustdo = "";
+          $scope.getCityInfo("itinerary", $scope.urlDestinationCity);
+          TemplateService.title = "Best Time To Visit " + $scope.cityDestData.name + " -   TraveLibro";
           break;
         default:
           $scope.getCityInfo("mustDo", $scope.urlDestinationCity);
           break;
       }
       console.log(url);
-      $state.go("destinationcity", {
-        name: url
-      }, {
-        notify: false
-      });
+      if (view == 4) {
+        $state.go("cityBooking", {
+          name: url,
+          url: $state.params.url.toLowerCase(),
+          country: $scope.cityDestData.country.name.toLowerCase()
+        }, {
+          notify: false
+        })
+      } else {
+        $state.go("destinationcity", {
+          name: url,
+          url: $state.params.url.toLowerCase(),
+        }, {
+          notify: false
+        });
+      }
     };
     //openCont
     $scope.isopencont = false;
@@ -4075,6 +4717,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     }
 
+    // booking slider
+        setTimeout(function(){
+          $('.flexslider').flexslider({
+            animation: 'slide',
+            itemWidth: 280,
+            itemMargin: 5,
+            controlNav: false
+          })
+        },100);
+    // booking slider end
+
     $scope.hoveringOver = function (value) {
       $scope.overStar = value;
     };
@@ -4094,204 +4747,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       stateOn: 'fa fa-star-o',
       stateOff: 'fa fa-star'
     }];
-    //itineraries
-    $scope.activityPost = [{
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-      editor: false,
-      userPic: true,
-      follow: true,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: true,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey photo slider",
-      relatedPhoto: [
-        'img/blog/blog-post.jpg',
-        'img/blog/blog-post2.jpg',
-        'img/blog/blog-post3.jpg',
-        'img/blog/blog-post4.jpg',
-        'img/blog/blog-post.jpg',
-        'img/blog/blog-post2.jpg',
-        'img/blog/blog-post3.jpg',
-        'img/blog/blog-post4.jpg',
-      ],
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: true,
-      postIcon: true,
-      video: false,
-      photo: true,
-      photoSlider: true,
-      travelledJourney: false,
-      onJourney: false,
-      getpopularPost: false,
-      activitySec: true,
-      visitPost: false
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: false,
-      postIcon: true,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      visitPost: false,
-      getpopularPost: false,
-      activitySec: true
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: false,
-      postIcon: true,
-      video: false,
-      photo: true,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      getpopularPost: false,
-      visitPost: false,
-      activitySec: true
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: false,
-      postIcon: false,
-      video: true,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: false,
-      visitPost: false,
-      getpopularPost: false,
-      activitySec: true
-    }, {
-      class: "travel-life",
-      profilePic: "img/profile-main.png",
-      userName: "John Doe",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      status: "Has started his London Journey",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      editor: false,
-      userPic: true,
-      follow: false,
-      following: false,
-      postIcon: false,
-      video: false,
-      photo: false,
-      photoSlider: false,
-      travelledJourney: false,
-      onJourney: true,
-      getpopularPost: false,
-      visitPost: false,
-      activitySec: true
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "follow",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, ];
     //OpenFilter
     $scope.isopenfilter = false;
     $scope.openFilter = function () {
@@ -4371,7 +4826,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("mylife");
     $scope.menutitle = NavigationService.makeactive("Mylife");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.localView = {};
@@ -4389,6 +4844,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     if ($.jStorage.get("isLoggedIn") && ($.jStorage.get("profile").urlSlug == $stateParams.urlSlug)) {
       //its your own profile so no need to call profile again
       $scope.userData = $.jStorage.get("profile");
+      TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
       $.jStorage.set("activeUrlSlug", $.jStorage.get("profile").urlSlug);
       $scope.activeUrlSlug = $.jStorage.get("profile").urlSlug;
       // allowAccess = true;
@@ -4405,6 +4861,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log(data);
         if (data.value) {
           $scope.userData = data.data;
+          TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
           allowAccess = false;
           setMoreAboutMe();
           reloadCount();
@@ -4830,7 +5287,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // followFollowing  Function
     $scope.followFollowing = function (user) {
-      console.log("from popularBloggerData");
       LikesAndComments.followUnFollow(user, function (data) {
         if (data.value) {
           user.following = data.data.responseValue;
@@ -5912,6 +6368,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     $scope.showLikeCommentCard = true;
     $scope.openCommentSection = function (ongo) {
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
+      }
       $scope.showLikeCommentCard = false;
       // var type = "";
       // if (ongo.type === 'on-the-go-journey' || ongo.type === 'ended-journey') {
@@ -5968,6 +6427,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // };
 
     $scope.openLikeSection = function (ongo) {
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
+      }
       $scope.listOfComments = false;
       console.log(ongo);
       $scope.viewCardComment = false;
@@ -6015,45 +6477,48 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
 
-    // $scope.likePost = function (uniqueId, _id) {
-    //   console.log($scope.post.likeDone + "this call is from ongojourney.html");
-    //   $scope.post.likeDone = !$scope.post.likeDone;
-    //   if ($scope.post.likeDone) {
-    //     if ($scope.post.likeCount == undefined) {
-    //       $scope.post.likeCount = 1;
-    //     } else {
-    //       $scope.post.likeCount = $scope.post.likeCount + 1;
-    //     }
-    //     LikesAndComments.likeUnlike("post", "like", uniqueId, _id, null)
-    //   } else {
-    //     $scope.post.likeCount = $scope.post.likeCount - 1;
-    //     LikesAndComments.likeUnlike("post", "unlike", uniqueId, _id, null)
-    //   }
-    // };
-
-    // $scope.followFollowing = function (user) {
-    //   // console.log(user.following, user._id, user.name);
-    //   if (user.following) {
-    //     LikesAndComments.unFollowUser(user._id, function (data) {
-    //       console.log(data);
-    //       if (data.value) {
-    //         user.following = false;
-    //       } else {
-    //         console.log(data.data);
-    //       }
-    //     })
-    //   } else {
-    //     LikesAndComments.followUser(user._id, user.name, function (data) {
-    //       console.log(data);
-    //       if (data.value) {
-    //         user.following = true;
-    //       } else {
-    //         console.log(data.data);
-    //       }
-    //     });
-    //   }
-    // }
-    // local life end
+    // PROFILE LIST REDIRECT
+    $scope.profileListRedirect = function (pageStyle, activeUrlSlug) {
+      console.log('bantas');
+      if (TemplateService.isMine || ($scope.userData.following == 1 && $scope.userData.status == 'private') || $scope.userData.status == 'public') {
+        console.log('santa mein hai');
+        if (pageStyle == 'following') {
+          console.log('pageStyle following');
+          $state.go('ProfileList', {
+            'urlSlug': activeUrlSlug,
+            'active': 'following'
+          });
+        } else if (pageStyle == 'followers') {
+          console.log('pageStyle followers');
+          $state.go('ProfileList', {
+            'urlSlug': activeUrlSlug,
+            'active': 'followers'
+          });
+        } else if (pageStyle == 'countries-visited') {
+          console.log('pageStyle countries');
+          $state.go('ProfileList', {
+            'urlSlug': activeUrlSlug,
+            'active': 'countries-visited'
+          });
+        } else if (pageStyle == 'bucket-list') {
+          console.log('pageStyle bucket');
+          $state.go('ProfileList', {
+            'urlSlug': activeUrlSlug,
+            'active': 'bucket-list'
+          });
+        } else {
+          $state.go('ProfileList', {
+            'urlSlug': activeUrlSlug,
+            'active': 'following'
+          });
+        }
+      } else {
+        $location.hash('journeys');
+        anchorSmoothScroll.scrollTo('journeys');
+        // console.log('karan arjun console mein aayenge');
+      }
+    };
+    // PROFILE LIST REDIRECT END
   })
 
   .controller('JourneyCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal) {
@@ -6072,13 +6537,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
 
 
-    // $(document).ready(function() {
-    //   setTimeout(function() {
-    //     $('html, body').animate({
-    //       scrollTop: $("#tabs").offset().top
-    //     }, 1000);
-    //   }, 100);
-    // });
     $scope.buildNow = function () {
       $scope.$broadcast('rebuild:me');
     }
@@ -6089,23 +6547,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // console.log('Scrollbar show');
     });
 
-    $scope.bucketList = [{
-      countryName: "United States Of America"
-    }, {
-      countryName: "Germany"
-    }, {
-      countryName: "United Kingdom"
-    }, {
-      countryName: "Switzerland"
-    }, {
-      countryName: "Australia"
-    }, {
-      countryName: "India"
-    }, {
-      countryName: "Italy"
-    }, {
-      countryName: "Canada"
-    }, ];
 
     $scope.data = {
       'GB': {
@@ -6196,351 +6637,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('OtherJourneyCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
-    //Used to name the .html file
-
-    $scope.template = TemplateService.changecontent("otherjourney");
-    $scope.menutitle = NavigationService.makeactive("OtherJourney");
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-
-    $(document).ready(function () {
-      setTimeout(function () {
-        $('html, body').animate({
-          scrollTop: $("#tabs").offset().top
-        }, 1000);
-      }, 100);
-    });
-    $scope.buildNow = function () {
-      $scope.$broadcast('rebuild:me');
-    }
-    $scope.$on('scrollbar.hide', function () {
-      // console.log('Scrollbar hide');
-    });
-    $scope.$on('scrollbar.show', function () {
-      // console.log('Scrollbar show');
-    });
-
-    $scope.bucketList = [{
-      countryName: "United States Of America"
-    }, {
-      countryName: "Germany"
-    }, {
-      countryName: "United Kingdom"
-    }, {
-      countryName: "Switzerland"
-    }, {
-      countryName: "Australia"
-    }, {
-      countryName: "India"
-    }, {
-      countryName: "Italy"
-    }, {
-      countryName: "Canada"
-    }, ];
-
-    $scope.data = {
-      'GB': {
-        metric: 4
-      },
-      'US': {
-        metric: 40
-      },
-      'FR': {
-        metric: 29
-      },
-      'IN': {
-        metric: 500
-      }
-    };
-    $scope.mapPathData = window._mapPathData; // defined in _mapdata.js
-
-    $scope.heatmapColors = ['#2c3757', '#ff6759'];
-
-    $scope.travelLife = [{
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: false,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: true,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: false,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: false,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: true,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      heading: "Manan Vora has ended his London Journey",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      onJourney: true,
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }];
-
-    $scope.localLife = [{
-      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgWall: "img/local-life-post.jpg",
-      likes: "15660",
-      travelledIcon: "img/cycle-cyan.png",
-      postSlider: [{
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }]
-    }, {
-      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgWall: "img/local-life-post.jpg",
-      likes: "15660",
-      travelledIcon: "img/cycle-cyan.png",
-      postSlider: [{
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }]
-    }, {
-      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgWall: "img/local-life-post.jpg",
-      likes: "15660",
-      travelledIcon: "img/cycle-cyan.png",
-      postSlider: [{
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }]
-    }, {
-      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgWall: "img/local-life-post.jpg",
-      likes: "15660",
-      travelledIcon: "img/cycle-cyan.png",
-      postSlider: [{
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }]
-    }, {
-      heading: "Evening by the beach! :)  with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgWall: "img/local-life-post.jpg",
-      likes: "15660",
-      travelledIcon: "img/cycle-cyan.png",
-      postSlider: [{
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }, {
-        imgRelated: "img/slider1.jpg"
-      }, {
-        imgRelated: "img/slider2.jpg"
-      }]
-    }];
-
-  })
-
   .controller('SettingCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, DataUriToBlob, $stateParams, $state) {
     //Used to name the .html file
     $scope.profile = $.jStorage.get("profile");
@@ -6551,6 +6647,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Setting");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.saveSetting = false;
 
     $scope.showSetting = 1;
     var url = $stateParams.path;
@@ -6691,28 +6788,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.travelConfig.chooseHoliday = [{
       img: "img/beach.png",
-      caption: "Island & Beach",
+      caption: "Islands & Beaches",
       storeCaption: "Islands & Beaches",
     }, {
       img: "img/city.png",
-      caption: "City",
+      caption: "Cities",
       storeCaption: "Cities"
     }, {
       img: "img/safari.png",
-      caption: "Safari",
-      storeCaption: "Safari"
+      caption: "Safaris",
+      storeCaption: "Safaris"
     }, {
       img: "img/mountain.png",
       caption: "Mountains",
       storeCaption: "Mountains"
     }, {
       img: "img/cruise.png",
-      caption: "Cruise",
+      caption: "Cruises",
       storeCaption: "Cruises"
     }, {
       img: "img/countryside.png",
-      caption: "Countryside",
-      storeCaption: "Countryside"
+      caption: "Countrysides",
+      storeCaption: "Countrysides"
     }];
 
     $scope.travelConfig.usuallyGo = [{
@@ -6767,7 +6864,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.travelConfig.idealSelect = [{
       img: "img/luxury.png",
-      caption1: "luxury",
+      caption1: "Luxury",
       storeCaption: "Luxury"
     }, {
       img: "img/backpacking.png",
@@ -6812,8 +6909,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       storeCaption: "Food & Wine"
     }, {
       img: "img/festival.png",
-      caption1: "Festivals",
-      storeCaption: "Festivals"
+      caption1: "Festival",
+      storeCaption: "Festival"
     }];
 
     var selectedCity = $scope.userData.homeCity;
@@ -6878,9 +6975,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // page 2 integration starts
     _.each(new Array(4), function (value, key) {
+      // console.log(value,'value',key,'key');
       switch (key) {
         case 0:
+        console.log($scope.userData.travelConfig.kindOfHoliday,'kind of holiday');
           _.each($scope.userData.travelConfig.kindOfHoliday, function (n1) {
+            if(n1=='Countryside'){
+              n1='Countrysides'
+            }
             var index = _.findIndex($scope.travelConfig.chooseHoliday, function (n2) {
               return n1 == n2.storeCaption;
             });
@@ -6919,14 +7021,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     })
 
     // page 2 integration ends
-
+    console.log($scope.travelConfig,'what is travelConfig');
     $scope.editUserData = function (userData, status, valid) {
+      $scope.saveSetting = true;
       console.log(userData, 'user data', status, 'status');
       // cfpLoadingBar.start();
       console.log(valid);
       if (valid) {
         NavigationService.editUserData(userData, status, function (data) {
           if (data.value) {
+            $scope.saveSetting = false;
             NavigationService.getProfile($.jStorage.get("profile").urlSlug, function (data, status) {
               if (data.data._id) {
                 $.jStorage.set("isLoggedIn", true);
@@ -6969,8 +7073,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       });
     }
-  })
 
+    // REPORT PROBLEM
+    $scope.saveReport = function (settingReport) {
+      NavigationService.ReportProblems({
+        // userId: $scope.userData._id,
+        problem: settingReport
+      }, function (data) {
+        if (data.value == true) {
+          $scope.showme = true;
+        } else {
+          $scope.showme = false;
+        }
+      })
+    };
+    // REPORT PROBLEM END
+  })
 
   .controller('BlogCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -6978,122 +7096,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Blog");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
-    $scope.blogPost = [{
-      img: "img/blog/blog-post.jpg",
-      postType: "Luxury",
-      title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post2.jpg",
-      postType: "Luxury",
-      title: "Best cycling tours in the world",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post3.jpg",
-      postType: "Road Trip",
-      title: "Ten Gorgeous European Summer Island Holidays",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post4.jpg",
-      postType: "Adventure",
-      title: "Museums And Cathedrals To Cover In Eastern Europe",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post.jpg",
-      postType: "Luxury",
-      title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post2.jpg",
-      postType: "Luxury",
-      title: "Best cycling tours in the world",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post3.jpg",
-      postType: "Road Trip",
-      title: "Ten Gorgeous European Summer Island Holidays",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post4.jpg",
-      postType: "Adventure",
-      title: "Museums And Cathedrals To Cover In Eastern Europe",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post.jpg",
-      postType: "Luxury",
-      title: "BEST HOLIDAY DESTINATIONS FOR GIRL-GANGS",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post2.jpg",
-      postType: "Luxury",
-      title: "Best cycling tours in the world",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post3.jpg",
-      postType: "Road Trip",
-      title: "Ten Gorgeous European Summer Island Holidays",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post4.jpg",
-      postType: "Adventure",
-      title: "Museums And Cathedrals To Cover In Eastern Europe",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }, {
-      img: "img/blog/blog-post4.jpg",
-      postType: "Romance",
-      title: "Museums And Cathedrals To Cover In Eastern Europe",
-      timestampDate: "14 Jan,2014",
-      timestampHour: "1:20 pm",
-      likes: "15660"
-    }];
-
-    $scope.popularBlog = [{
-      img: "img/blog/popular-blog.jpg",
-      descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO",
-      postType: "Luxury",
-      postPink: true
-    }, {
-      img: "img/blog/popular-blog1.jpg",
-      descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO",
-      postType: "Luxury",
-      postPink: false
-    }, {
-      img: "img/blog/popular-blog2.jpg",
-      descp: "CHIC AND CHEERFUL: 10 OFFICEHOLIDAY PARTY OUTFIT IDEAS",
-      postType: "Luxury",
-      postPink: true
-    }, {
-      img: "img/blog/popular-blog1.jpg",
-      descp: "PLACES TO SHOP FOR KIDS THATYOU’LL WISH YOU KNEW ABO"
-    }, {
-      img: "img/blog/popular-blog2.jpg",
-      descp: "A FASHION LOVER’S GUIDE: THEBEST PICKING SHOES FOR YO"
-    }, ];
   })
 
   .controller('BlogDetailCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -7134,11 +7136,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.showLikeCommentCard = true;
-    setInterval(function () {
-      $scope.paginationLoader = TemplateService.paginationLoader;
-      console.log($scope.paginationLoader, 'value');
-    }, 300);
-
+    // setInterval(function () {
+    //   $scope.paginationLoader = TemplateService.paginationLoader;
+    //   console.log($scope.paginationLoader, 'value');
+    // }, 300);
+    $scope.noActivity = false;
     $scope.openThankYouModal = function () {
       $uibModal.open({
         templateUrl: "views/modal/report.html",
@@ -7158,8 +7160,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       scroll.scrollBusy = false;
       if (data.length == 0) {
         scroll.stopCallingApi = true;
+        $scope.noActivity = true;
       } else {
         $scope.activities = data;
+        $scope.noActivity = false;
         scroll.pageNo = 1;
       }
     }, function (data) {
@@ -7590,20 +7594,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       'showDropdown': false
     }
 
-    // // ISMINE FUNCTION
-    // if ($.jStorage.get("isLoggedIn")) {
-    //   $scope.isLoggedIn = true;
-    //   if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
-    //     $scope.isMine = true;
-    //   } else {
-    //     $scope.isMine = false;
-    //   }
-    // } else {
-    //   $scope.isLoggedIn = false;
-    //   $scope.isMine = false;
-    // }
-    // // ISMINE FUNCTION END
-
     if ($.jStorage.get("activeUrlSlug") != "" && $.jStorage.get("activeUrlSlug") != null) {
       $scope.activeUrlSlug = $.jStorage.get("activeUrlSlug");
     } else {
@@ -7679,6 +7669,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
       //for getting all the visited years  of that respective country starts
       var callback = function (data) {
+        console.log(data, 'data kya chee');
         var a = _.filter(data, ["countryId._id", id]);
         var visitedArr = [];
         _.each(a[0].visited, function (n, index) {
@@ -7972,7 +7963,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('ItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('ItineraryCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -7981,6 +7972,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Itinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.createItinerary = function (status) {
+      // $scope.itiType = status;
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
+      } else {
+        if (status == 'detailitinerary') {
+          $state.go('detailitinerary', {
+            'flag': 'new',
+            'urlSlug': ''
+          });
+        } else {
+          $state.go('quickitinerary', {
+            'flag': 'new',
+            'urlSlug': ''
+          });
+        }
+      }
+    };
 
   })
 
@@ -7990,7 +7999,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
 
     $scope.template = TemplateService.changecontent("detail-itinerary");
-    $scope.menutitle = NavigationService.makeactive("DetailedItinerary");
+    $scope.menutitle = NavigationService.makeactive("Detailed Itinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
@@ -8660,7 +8669,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
 
     $scope.template = TemplateService.changecontent("quick-itinerary");
-    $scope.menutitle = NavigationService.makeactive("QuickItinerary");
+    $scope.menutitle = NavigationService.makeactive("Quick Itinerary");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
@@ -9336,7 +9345,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('UserQuickItineraryCtrl', function ($scope, TemplateService, NavigationService, LikesAndComments, $timeout, $stateParams, $uibModal, Itinerary) {
+  .controller('UserQuickItineraryCtrl', function ($scope, TemplateService, NavigationService, LikesAndComments, $timeout, $stateParams, $uibModal, Itinerary, $state) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -9359,8 +9368,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     Itinerary.getOneItinerary(slug, function (data) {
       $scope.itinerary = data.data;
       console.log($scope.itinerary);
+      TemplateService.title = $scope.itinerary.name + " - Travel Life | TraveLibro";
     });
     //get quick-itinerary details ends
+
+    // route to user profile
+    $scope.routeProfile = function () {
+      if ($scope.itinerary.itineraryBy == "TravelAgent") {
+        $state.go('comingsoonpage', {
+          'url': 'coming-soon'
+        })
+      } else {
+        $state.go('mylife', {
+          'urlSlug': $itinerary.user.urlSlug
+        })
+      }
+    }
+    // route to user profile  end
 
     // ISMINE FUNCTION
     if ($.jStorage.get("isLoggedIn")) {
@@ -9408,12 +9432,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // THANK YOU MODAL
     $scope.openThankYouModal = function () {
-      $uibModal.open({
-        templateUrl: "views/modal/report.html",
-        animation: true,
-        scope: $scope,
-        windowClass: "report-modal"
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
+      } else {
+        $uibModal.open({
+          templateUrl: "views/modal/report.html",
+          animation: true,
+          scope: $scope,
+          windowClass: "report-modal"
+        });
+      }
     };
     // THANK YOU MODAL END
 
@@ -9604,236 +9632,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       width: "20",
     }];
 
-    $scope.photoGallery = [
-      '../img/uploaded-pic.jpg',
-      '../img/slider2.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-      '../img/uploaded-pic.jpg',
-      '../img/slider2.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-    ];
-    // other itineraries main
-    $scope.travelLife = [{
-      otherProfile: true,
-      viewProfile: [{
-        imgBg: "img/itinerary/religious.jpg",
-        profileImg: "img/profile-main.png",
-        name: "Andrea Christina",
-        location: "London",
-        follower: "2090"
-      }],
-    }, {
-      class: "visiting-post travel-visit",
-      popItinerary: false,
-      visitPost: true,
-      getvisitPost: [{
-        travelVisit: true,
-        imgVisit: "img/india-gate.jpg",
-        locationLocal: "Mumbai",
-        tagTravel: "Book Your Travel form take off to touchdown!",
-        visitImg: true,
-      }, ],
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "follow",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "follow",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-    }, ];
-    // other itineraries main end
 
     $scope.uploadQuickItinerary = function () {
       console.log($scope.itinerary);
@@ -9861,17 +9659,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     // sharing local life modal end
 
+    // DELETE ITINERARY
+    var deleteModal = "";
+    $scope.deletePop = function(id){
+      $scope.itineraryId = id;
+      deleteModal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/delete-itinerary.html",
+        scope: $scope
+      });
+    }
+    $scope.deleteItinerary = function(postId){
+      console.log(postId, 'delete post');
+      NavigationService.deleteItinerary(
+        postId
+      , function (data) {
+        $state.go('mylife', {
+          'urlSlug': $scope.userData.urlSlug
+        })
+      })
+    };
+    // DELETE ITINERARY END
+
 
   })
 
-  .controller('UserDetailItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, LikesAndComments, $timeout, $uibModal, $stateParams) {
+  .controller('UserDetailItineraryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, LikesAndComments, $timeout, $uibModal, $stateParams, $state) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
 
     $scope.template = TemplateService.changecontent("user-detailitinerary");
     $scope.menutitle = NavigationService.makeactive("User-DetailItinerary");
-    TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     $scope.closeBackDrop = function () {
@@ -9915,8 +9734,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var slug = $stateParams.id;
     Itinerary.getOneItinerary(slug, function (data) {
       $scope.itinerary = data.data;
+      console.log($scope.itinerary);
+      if ($scope.itinerary.itineraryBy == "Admin") {
+        TemplateService.title = $scope.itinerary.name + " - " + $scope.itinerary.itineraryType[0] + " Itinerary - TraveLibro";
+      } else {
+        TemplateService.title = $scope.itinerary.name + " - " + $scope.itinerary.user.name + " | TraveLibro";
+      }
     });
     //get quick-itinerary details ends
+
+    // route to user profile
+    $scope.routeProfile = function () {
+      if ($scope.itinerary.itineraryBy == "TravelAgent") {
+        $state.go('comingsoonpage', {
+          'url': 'coming-soon'
+        })
+      } else {
+        $state.go('mylife', {
+          'urlSlug': $itinerary.user.urlSlug
+        })
+      }
+    }
+    // route to user profile  end
 
     //like-unlike itinerary starts
 
@@ -9973,12 +9812,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // THANK YOU MODAL
     $scope.openThankYouModal = function () {
-      $uibModal.open({
-        templateUrl: "views/modal/report.html",
-        animation: true,
-        scope: $scope,
-        windowClass: "report-modal"
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
+      } else {
+        $uibModal.open({
+          templateUrl: "views/modal/report.html",
+          animation: true,
+          scope: $scope,
+          windowClass: "report-modal"
+        });
+      }
     };
     // THANK YOU MODAL END
 
@@ -10101,13 +9944,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //Integration starts here
 
-    $scope.journeyItinerary = [{
-      img: "img/ongojourney/monish.jpg",
-      name: "Monish"
-    }, {
-      img: "img/ongojourney/malhar.jpg",
-      name: "Malhar"
-    }, ];
     $scope.getItineraryType = [{
       img: "img/itinerary/family.png",
       width: "40",
@@ -10122,120 +9958,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       width: "20",
     }];
 
-    $scope.photoGallery = [
-      '../img/uploaded-pic.jpg',
-      '../img/slider2.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-      '../img/uploaded-pic.jpg',
-      '../img/slider2.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-    ];
-    // country list
-    $scope.countryList = [{
-      img: "img/singapore.png",
-      countryName: "Singapore",
-      cityList: [{
-        cityName: "Bukit Timah"
-      }, {
-        cityName: "Sin Ming"
-      }, {
-        cityName: "czechoslovakia"
-      }]
-    }, {
-      img: "img/singapore.png",
-      countryName: "Singapore",
-      cityList: [{
-        cityName: "Bukit Timah"
-      }, {
-        cityName: "Sin Ming"
-      }]
-    }, ];
-    // country list end
-    // accordion
-    $scope.countryTripList = [{
-      countryImg: "img/singapore.png",
-      countryName: "Singapore",
-      cityList: [{
-        dayInput1: "1",
-        dayInput2: "2",
-        cityName: "Singapore",
-        stayedAt: "Friends House",
-        ateAt: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-        mustDo: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-        aboutTrip: "<p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. <br><br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p><br><p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.<br> <br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p>",
-      }, {
-        dayInput1: "1",
-        dayInput2: "2",
-        cityName: "Singapore",
-        stayedAt: "Friends House",
-        ateAt: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-        mustDo: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-        aboutTrip: "<p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. <br><br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p><br><p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.<br> <br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p>",
-      }, ],
-    }, {
-      countryImg: "img/singapore.png",
-      countryName: "Singapore",
-      cityList: [{
-        dayInput1: "1",
-        dayInput2: "2",
-        cityName: "Singapore",
-        stayedAt: "Friends House",
-        ateAt: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-        mustDo: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-        aboutTrip: "<p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. <br><br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p><br><p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.<br> <br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p>",
-      }, ],
-    }, ];
-    // accordion end
-    $scope.editorGallery = [
-      '../img/uploaded-pic.jpg',
-      '../img/slider2.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-      '../img/uploaded-pic.jpg',
-      '../img/slider2.jpg',
-      '../img/moment-travel1.jpg',
-      '../img/moment-travel2.jpg',
-      '../img/local-life-post.jpg',
-      '../img/destination/goldentemple.jpg',
-      '../img/destination/list1.jpg',
-      '../img/destination/list2.jpg',
-      '../img/destination/info.jpg',
-      '../img/destination/taj-featured.jpg',
-      '../img/itinerary/itinerary.jpg',
-    ];
-
     //photo gallery backdrop
     $scope.showClass = "close-gallery";
     $scope.dispBackDrop = "";
@@ -10249,203 +9971,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     //photo gallery backdrop end
-    // other itineraries main
-    $scope.travelLife = [{
-      otherProfile: true,
-      viewProfile: [{
-        imgBg: "img/itinerary/religious.jpg",
-        profileImg: "img/profile-main.png",
-        name: "Andrea Christina",
-        location: "London",
-        follower: "2090"
-      }],
-    }, {
-      class: "visiting-post travel-visit",
-      popItinerary: false,
-      visitPost: true,
-      getvisitPost: [{
-        travelVisit: true,
-        imgVisit: "img/india-gate.jpg",
-        locationLocal: "Mumbai",
-        tagTravel: "Book Your Travel form take off to touchdown!",
-        visitImg: true,
-      }, ],
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "follow",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "follow",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ]
-    }, {
-      popItinerary: true,
-      heading: "Editor",
-      follower: "following",
-      timestampDate: "14 Jan, 2014",
-      timestampHour: "01:20 pm",
-      imgTravelled: "img/london.jpg",
-      Travelledtag: "London Eye",
-      photoCount: "28",
-      videoCount: "5",
-      locationVisited: "9",
-      itineraryType1: "img/sunset.png",
-      itineraryType2: "img/bag-journey.png",
-      itineraryType3: "img/luxury-journey.png",
-      travelledDay: "75",
-      onwayTag: "love in paris",
-      imgOnway: "img/paris.jpg",
-      cost: "$10,000",
-      spendingDay: "75",
-      likes: "15660",
-      reviews: "354",
-      pointReview: "4.5",
-      countryVisit: [{
-        imgFlag: "img/india-visit.png"
-      }, {
-        imgFlag: "img/england-visit.png"
-      }, {
-        imgFlag: "img/canada-visit.png",
-      }, ],
-    }, ];
-    // other itineraries main end
+
+    // DELETE ITINERARY
+    var deleteModal = "";
+    $scope.deletePop = function(id){
+      $scope.itineraryId = id;
+      deleteModal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/delete-itinerary.html",
+        scope: $scope
+      });
+    }
+    $scope.deleteItinerary = function(postId){
+      console.log(postId, 'delete post');
+      NavigationService.deleteItinerary(
+        postId
+      , function (data) {
+        $state.go('mylife', {
+          'urlSlug': $scope.userData.urlSlug
+        })
+      })
+    };
+    // DELETE ITINERARY END
 
   })
 
@@ -10788,10 +10335,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("about-travelibro");
     $scope.menutitle = NavigationService.makeactive("About TraveLibro");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "About Us - TraveLibro";
     $scope.navigation = NavigationService.getnav();
 
     $scope.accessToken = $.jStorage.get("accessToken");
+    $scope.bookingLink = function () {
+      window.location.href = "https://travelibro.com/bookings/";
+    }
   })
 
   .controller('TermsConditionsCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife, OnGoJourney) {
@@ -10799,7 +10349,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("terms-conditions");
     $scope.menutitle = NavigationService.makeactive("Terms & Conditions");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Terms & Conditions - TraveLibro";
     $scope.navigation = NavigationService.getnav();
     $scope.accessToken = $.jStorage.get("accessToken");
   })
@@ -10808,19 +10358,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("privacy-policy");
     $scope.menutitle = NavigationService.makeactive("Privacy Policy");
-    TemplateService.title = $scope.menutitle;
+    TemplateService.title = "Privacy Policy - TraveLibro";
     $scope.navigation = NavigationService.getnav();
     $scope.accessToken = $.jStorage.get("accessToken");
   })
 
-  .controller('headerctrl', function ($scope, TemplateService, NavigationService, LikesAndComments, $state, $interval, $timeout, $stateParams, $http) {
+  .controller('headerctrl', function ($scope, TemplateService, NavigationService, LikesAndComments, $state, $interval, $timeout, $stateParams) {
     $scope.template = TemplateService;
     $scope.getAllSearched = [];
     $scope.search = {};
     $scope.search.searchType = "";
     $scope.search.viewData = false;
 
+
+   
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+    $scope.template.isLoggedIn = $.jStorage.get("isLoggedIn"); /////////////////////////////////////////////////
+
 
     setInterval(function () {
       $scope.searchHeaderLoad = TemplateService.searchHeaderLoad;
@@ -10829,7 +10383,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // ISMINE FUNCTION
     if ($.jStorage.get("isLoggedIn")) {
       $scope.isLoggedIn = true;
-      $scope.template.isLoggedIn = true;
+      $scope.template.isLoggedIn = true; ///////////////////////////////////////////////////////////////////////
       if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
         // $.jStorage.set("isMine", true);
         $scope.template.isMine = true;
@@ -10839,7 +10393,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     } else {
       $scope.isLoggedIn = false;
-      $scope.template.isLoggedIn = false;
+      $scope.template.isLoggedIn = false; //////////////////////////////////////////
       // $scope.isMine = false;
       $scope.template.isMine = false;
     }
@@ -11075,120 +10629,408 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('AgentloginCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
-    $scope.template = TemplateService.changecontent("agent-login"); //Use same name of .html file
-    $scope.menutitle = NavigationService.makeactive("Agent Login"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-    $scope.oneAtATime = true;
-    //about textarea counter
-    $scope.$on('$viewContentLoaded', function () {
-      $timeout(function () {
-        $('#textareaChars').keyup(updateCount);
-        $('#textareaChars').keydown(updateCount);
-        $('#remainingC').text(0 + '/ 500');
+  .controller('AgentloginCtrl', function ($scope, Agent, TemplateService, NavigationService, $timeout) {
+      $scope.template = TemplateService.changecontent("agent-login"); //Use same name of .html file
+      $scope.menutitle = NavigationService.makeactive("Agent Login"); //This is the Title of the Website
+      TemplateService.title = $scope.menutitle;
+      $scope.navigation = NavigationService.getnav();
+      $scope.oneAtATime = true;
+      $scope.userDetails = {
+        company: {}
+      };
 
-        function updateCount() {
-          var count = $('#textareaChars').val().length;
-          $('#remainingC').text(count + '/ 500');
-        }
-      }, 100);
-    });
-
-    //about textarea counter end
-    $scope.agentloginView = 1;
-    $scope.agentSec = function (val) {
-      if (val == 1) {
-        $scope.agentloginView = 1;
-      } else if (val == 2) {
-        $scope.agentloginView = 2;
-        console.log(2);
-      } else if (val == 3) {
-        $scope.agentloginView = 3;
-      } else if (val == 4) {
-        $scope.agentloginView = 4;
-      } else if (val == 5) {
-        $scope.agentloginView = 5;
-      } else if (val == 6) {
-        $scope.agentloginView = 6;
-      } else if (val == 7) {
-        $scope.agentloginView = 7;
-      } else if (val == 8) {
-        $scope.agentloginView = 8;
-      } else if (val == 9) {
-        $scope.agentloginView = 9;
-      } else {
-        $scope.agentloginView = 1;
+      $scope.userData = $.jStorage.get("profile");
+      if ($scope.userData.name) {
+        $scope.userDetails.company.name = $scope.userData.name;
       }
-    }
-    // category of Specialisation array
-    $scope.categoriesSpecial = [{
-      agtcatImg: "img/agt-cat1.png",
-      catwidth: "35px",
-      agtcatCap: "Adventure"
-    }, {
-      agtcatImg: "img/agt-cat2.png",
-      catwidth: "33px",
-      agtcatCap: "Business"
-    }, {
-      agtcatImg: "img/agt-cat3.png",
-      catwidth: "48px",
-      agtcatCap: "Family"
-    }, {
-      agtcatImg: "img/agt-cat4.png",
-      catwidth: "35px",
-      agtcatCap: "Romance"
-    }, {
-      agtcatImg: "img/agt-cat5.png",
-      catwidth: "35px",
-      agtcatCap: "Backpacking"
-    }, {
-      agtcatImg: "img/agt-cat6.png",
-      catwidth: "33px",
-      agtcatCap: "Budget"
-    }, {
-      agtcatImg: "img/agt-cat7.png",
-      catwidth: "33px",
-      agtcatCap: "Luxury"
-    }, {
-      agtcatImg: "img/agt-cat8.png",
-      catwidth: "38px",
-      agtcatCap: "Religious"
-    }, {
-      agtcatImg: "img/agt-cat9.png",
-      catwidth: "35px",
-      agtcatCap: "Friends"
-    }];
-    // category of Specialisation array end
-    //country of Specialisation accordion
-    $scope.agtRegionSpcl = [{
-      regionName: "Africa",
-      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-    }, {
-      regionName: "Asia",
-      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-    }, {
-      regionName: "Europe",
-      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-    }, {
-      regionName: "North America",
-      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-    }, {
-      regionName: "Ocenia",
-      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-    }, {
-      regionName: "South America",
-      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", ]
-    }];
-    //country of Specialisation accordion end
+      $scope.isVerified = $.jStorage.get("isVerified");
 
-    //Services
-    $scope.agtServicesSpcl = [
-      'Tours And Packages', 'Day Tours', 'Outdoors & Excursions', 'Flights', 'Cruise', 'MICE', 'Personal', 'Business Travel', 'Car Rentals', 'Visas', 'Fully Independent Traveller', 'Accomodation', 'Travel Insurance', 'Sports & Events', 'Forex', 'Holidays', 'Festival & Concerts', 'Transportation'
-    ];
-    //Services end
-  })
+      //about textarea counter
+      $scope.$on('$viewContentLoaded', function () {
+        $timeout(function () {
+          $('#textareaChars').keyup(updateCount);
+          $('#textareaChars').keydown(updateCount);
+          $('#remainingC').text(0 + '/ 500');
 
+          function updateCount() {
+            var count = $('#textareaChars').val().length;
+            $('#remainingC').text(count + '/ 500');
+          }
+        }, 100);
+      });
+      //about textarea counter end
+
+      //switching between cards
+      $scope.agentSec = function (val) {
+        switch (val) {
+          case 0:
+            $scope.agentloginView = 0;
+            window.onload = function () {
+              var container = document.getElementsByClassName("veri-box")[0];
+              container.onkeyup = function (e) {
+                var target = e.srcElement || e.target;
+                var maxLength = parseInt(target.attributes["maxlength"].value, 10);
+                var myLength = target.value.length;
+                if (myLength >= maxLength) {
+                  var next = target;
+                  while (next = next.nextElementSibling) {
+                    if (next == null)
+                      break;
+                    if (next.tagName.toLowerCase() === "input") {
+                      next.focus();
+                      break;
+                    }
+                  }
+                }
+                // Move to previous field if empty (user pressed backspace)
+                else if (myLength === 0) {
+                  var previous = target;
+                  while (previous = previous.previousElementSibling) {
+                    if (previous == null)
+                      break;
+                    if (previous.tagName.toLowerCase() === "input") {
+                      previous.focus();
+                      break;
+                    }
+                  }
+                }
+              }
+            }
+            break;
+          case 1:
+            $scope.agentloginView = 1;
+            break;
+          case 2:
+            $scope.agentloginView = 2;
+            break;
+          case 3:
+            $scope.agentloginView = 3;
+            //gets all the cities from database
+            var getAllCities = function (data, status) {
+              if (data.value) {
+                $scope.cities = data.data.predictions;
+              } else {
+                console.log("Eroor Fetching Data");
+              }
+            };
+            $scope.searchByKey = function (searchCity) {
+              NavigationService.getAllCities({
+                "search": searchCity
+              }, getAllCities, function (err) {
+                console.log(err);
+              });
+            };
+            //End-Of get all the cities from database
+            break;
+          case 4:
+            $scope.agentloginView = 4;
+            break;
+          case 5:
+            $scope.agentloginView = 5;
+            break;
+          case 6:
+            $scope.agentloginView = 6;
+            break;
+          case 7:
+            $scope.agentloginView = 7;
+            break;
+          case 8:
+            $scope.agentloginView = 8;
+            break;
+          case 9:
+            $scope.agentloginView = 9;
+            break;
+
+        }
+      }
+      //switching between cards ends
+
+      // category of Specialisation array
+      // $scope.isCategorySelected = false;
+      $scope.foundCategory = [];
+      $scope.selectCategory = function (obj) {
+        // $scope.isCategorySelected = true;
+        if (obj.class == "agt-imgholder-active") {
+          obj.class = "";
+          // $scope.foundCategory.push(obj.agtcatCap)
+        } else {
+          obj.class = "agt-imgholder-active";
+          // $scope.foundCategory = _.remove($scope.foundCategory, function (n) {
+          //   return n.agtcatCap == obj.agtcatCap;
+          // });
+        }
+        // $scope.selectedCategory('categoriesSpecial', 'holidayType');
+      };
+
+      $scope.categoriesSpecial = [{
+        agtcatImg: "img/kindofjourney/white-adventure.png",
+        catwidth: "35px",
+        name: "Adventure"
+      }, {
+        agtcatImg: "img/kindofjourney/white-business.png",
+        catwidth: "33px",
+        name: "Business"
+      }, {
+        agtcatImg: "img/kindofjourney/white-family.png",
+        catwidth: "48px",
+        name: "Family"
+      }, {
+        agtcatImg: "img/kindofjourney/white-romance.png",
+        catwidth: "35px",
+        name: "Romance"
+      }, {
+        agtcatImg: "img/kindofjourney/white-backpacking.png",
+        catwidth: "35px",
+        name: "Backpacking"
+      }, {
+        agtcatImg: "img/kindofjourney/white-budget.png",
+        catwidth: "33px",
+        name: "Budget"
+      }, {
+        agtcatImg: "img/kindofjourney/white-luxury.png",
+        catwidth: "33px",
+        name: "Luxury"
+      }, {
+        agtcatImg: "img/kindofjourney/white-religious.png",
+        catwidth: "38px",
+        name: "Religious"
+      }, {
+        agtcatImg: "img/kindofjourney/white-friends.png",
+        catwidth: "35px",
+        name: "Friends"
+      }];
+      // category of Specialisation array end
+      //country of Specialisation accordion
+
+      //gets all the countries from database
+      NavigationService.getCountriesByContinent(function (data, status) {
+        if (data.value) {
+          $scope.countriesByContinent = data.data;
+          // for (var property in countriesByContinent) {
+          //   if (countriesByContinent.hasOwnProperty(property)) {
+          //     // console.log(countriesByContinent[property]);
+
+          //   }
+          // }
+        } else {
+          console.log("Error Fetching Data");
+        }
+        console.log($scope.countriesByContinent);
+      }, function (err) {
+        console.log(err);
+      });
+      //End-Of get all the countries from database
+
+      $scope.selectCountry = function (obj) {
+        // $scope.isCategorySelected = true;
+        if (obj.class == "active") {
+          obj.class = "";
+        } else {
+          obj.class = "active";
+        }
+        // $scope.foundCategory = _.filter($scope.categoriesSpecial, ['class', 'agt-imgholder-active']);
+        // // $scope.selectedCategory('categoriesSpecial', 'holidayType');
+      };
+
+
+      //country of Specialisation accordion end
+
+      //Services
+      $scope.selectServices = function (obj) {
+        // $scope.isCategorySelected = true;
+        if (obj.class == "active") {
+          obj.class = "";
+        } else {
+          obj.class = "active";
+        }
+        $scope.foundCategory = _.filter($scope.categoriesSpecial, ['class', 'active']);
+
+      };
+      $scope.agtServicesSpcl = [{
+        name: 'Tours And Packages'
+      }, {
+        name: 'Day Tours'
+      }, {
+        name: 'Outdoors & Excursions'
+      }, {
+        name: 'Flights'
+      }, {
+        name: 'Cruise'
+      }, {
+        name: 'MICE'
+      }, {
+        name: 'Personal'
+      }, {
+        name: 'Business Travel'
+      }, {
+        name: 'Car Rentals'
+      }, {
+        name: 'Visas'
+      }, {
+        name: 'Fully Independent Traveller'
+      }, {
+        name: 'Accomodation'
+      }, {
+        name: 'Travel Insurance'
+      }, {
+        name: 'Sports & Events'
+      }, {
+        name: 'Forex'
+      }, {
+        name: 'Holidays'
+      }, {
+        name: 'Festival & Concerts'
+      }, {
+        name: 'Transportation'
+      }];
+      //Services end
+
+      //Integration starts here
+      $scope.verify = {};
+      if (!$scope.userData.isLoggedIn) {
+        if ($scope.userData.isVerified == false && $scope.isVerified != true) {
+          $scope.agentSec(0);
+        } else {
+          $scope.agentSec(3);
+        }
+      }
+
+      //upload agent profilePicture
+      // $timeout(function () {
+      //   document.getElementById('fileInput1').onchange = function () {
+      //     alert('Selected file: ' + this.value);
+      //   }
+      // });
+      $scope.fileName = null;
+      $scope.image = null;
+      $scope.imageFileName = '';
+      $scope.uploadme = {};
+      $scope.uploadme.src = '';
+      $scope.uploadFile = function (data, userData, ppSelected) {
+        // Base64 to Blob
+        if (ppSelected) {
+          console.log(data, userData);
+          var imageBase64 = data;
+          console.log(imageBase64);
+          var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
+          console.log(blob);
+          // Blob to File
+          var file = new File([blob], $scope.fileName + '.png');
+          console.log(file);
+          // File to FormData
+          var formData = new FormData();
+          console.log(formData, "before appending");
+          formData.append('file', file, file.name);
+          console.log(formData, "after appending");
+          // alert("mila");
+          NavigationService.uploadFile(formData, function (response) {
+            if (response.value) {
+              $scope.userData.profilePicture = response.data[0];
+              console.log($scope.userData);
+            } else {
+              toastr.warning('Error Uploading Image!');
+            }
+            $scope.saveUserData($scope.userData);
+          });
+        } else {
+          // alert("nai mila");
+          $scope.userData = _.omit($scope.userData, ['profilePicture']);
+          $scope.saveUserData($scope.userData);
+        }
+      };
+
+      $scope.removePhoto = function () {
+        $scope.userData = _.omit($scope.userData, ['profilePicture']);
+        $scope.fileName = null;
+        console.log($scope.userData);
+
+        $scope.showImage.val = false;
+      };
+
+      $scope.showImage = {
+        "val": false
+      };
+      var i = 1;
+      var got1 = setInterval(function () {
+        if (document.getElementById('fileInput1')) {
+          document.getElementById('fileInput1').onchange = function (evt) {
+            // alert("change hua");
+            var file = evt.currentTarget.files[0];
+            console.log(file);
+            $scope.fileName = file.name;
+            console.log($scope.fileName);
+            var formData = new FormData();
+            formData.append('file', file, "file.jpg");
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+              $scope.$apply(function ($scope) {
+                $scope.showImage.val = true;
+                console.log($scope.showImage.val);
+                $scope.myImage = evt.target.result;
+                // alert($scope.myImage);
+              });
+            };
+            reader.readAsDataURL(file);
+          };
+          clearInterval(got1);
+        }
+        i++;
+      }, 1000);
+      //upload agent profilePicture ends
+
+
+
+      //verify Users Account
+      $scope.submitOtp = function (obj) {
+        var otp = (obj.a).concat(obj.b, obj.c, obj.d);
+        Agent.verifyOtp(otp, function (data) {
+          console.log(data);
+          if (data.value) {
+            $scope.userData.isVerified = true;
+            $scope.showConfirmation = true;
+            $.jStorage.set("isVerified", true);
+            $scope.agentSec(1);
+          } else {
+            $scope.agentSec(2);
+          }
+        });
+      };
+      $scope.requestOtp = function () {
+        Agent.requestOtp();
+      }
+      //verify users account ends
+
+      $scope.saveAgentData = function () {
+        $scope.userDetails.company.categoryOfSpeacilization = [];
+        $scope.userDetails.company.countryOfSpecialization = [];
+        $scope.userDetails.company.services = [];
+        $scope.userDetails.company.categoryOfSpeacilization = _.filter($scope.categoriesSpecial, ['class', 'agt-imgholder-active']);
+        $scope.userDetails.company.services = _.filter($scope.agtServicesSpcl, ['class', 'active']);
+        $scope.userDetails.company.categoryOfSpeacilization = _.map($scope.userDetails.company.categoryOfSpeacilization, 'name');
+        $scope.userDetails.company.services = _.map($scope.userDetails.company.services, 'name');
+
+        $scope.userDetails.company.countryOfSpecialization = _.cloneDeep($scope.countriesByContinent);
+        _.each($scope.userDetails.company.countryOfSpecialization, function (n, key) {
+          n.country = [];
+          n.countries = _.filter(n.countries, ['class', 'active']);
+          n.country = _.map(n.countries, '_id');
+          $scope.userDetails.company.countryOfSpecialization[key] = _.omit(n, ['countries']);
+        });
+        _.remove($scope.userDetails.company.countryOfSpecialization,  function (n)  {
+          return  n.country.length == 0;
+        });
+        console.log($scope.userDetails);
+        Agent.saveAgentData($scope.userDetails, function (data) {
+          console.log(data);
+          if (data.value) {
+            $state.go('agent-home');
+          } else {
+
+          }
+        })
+      }
+      //Integration Ends here
+    })
   .controller('AgentsettingCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     $scope.template = TemplateService.changecontent("agent-setting"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Settings"); //This is the Title of the Website
@@ -11260,39 +11102,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // choose category Specialisation
     $scope.chooseCategorySpcl = [{
-      img: "img/agt-cat1.png",
+      img: "img/kindofjourney/white-adventure.png",
       caption: "Adventure",
       catWidth: "30px"
     }, {
-      img: "img/agt-cat2.png",
+      img: "img/kindofjourney/white-business.png",
       caption: "Business",
       catWidth: "30px"
     }, {
-      img: "img/agt-cat3.png",
+      img: "img/kindofjourney/white-family.png",
       caption: "Family",
-      catWidth: "42px"
+      catWidth: "32px"
     }, {
-      img: "img/agt-cat4.png",
+      img: "img/kindofjourney/white-romance.png",
       caption: "Romance",
       catWidth: "33px"
     }, {
-      img: "img/agt-cat5.png",
+      img: "img/kindofjourney/white-backpacking.png",
       caption: "Backpacking",
       catWidth: "30px"
     }, {
-      img: "img/agt-cat6.png",
+      img: "img/kindofjourney/white-budget.png",
       caption: "Budget",
       catWidth: "28px"
     }, {
-      img: "img/agt-cat7.png",
+      img: "img/kindofjourney/white-luxury.png",
       caption: "Luxury",
       catWidth: "28px"
     }, {
-      img: "img/agt-cat8.png",
+      img: "img/kindofjourney/white-religious.png",
       caption: "Religious",
       catWidth: "33px"
     }, {
-      img: "img/agt-cat9.png",
+      img: "img/kindofjourney/white-friends.png",
       caption: "Friends",
       catWidth: "30px"
     }];
@@ -11414,57 +11256,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Agent User"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-    $scope.oneAtATime = true;
-
-    //enquiry & contact card initialisation
-    // enquiry
-
-    $scope.viewEnquiry = false;
-    $scope.getBackdrop = "";
-    $scope.showEnquiry = function () {
-      // console.log("click");
-      if ($scope.viewEnquiry == false) {
-        $scope.getBackdrop = "backdrop-enquiry";
-        $scope.viewEnquiry = true;
-      } else {
-        $scope.viewEnquiry = false;
-        $scope.getBackdrop = "";
-      }
-    };
-    //enquiry end
-
-    //contact us
-    $scope.viewContact = false;
-    $scope.getBackdrop = "";
-    $scope.showContact = function () {
-      // console.log("click");
-      if ($scope.viewContact == false) {
-        $scope.getBackdrop = "backdrop-enquiry";
-        $scope.viewContact = true;
-      } else {
-        $scope.viewContact = false;
-        $scope.getBackdrop = "";
-      }
-    };
-    //contact us end
-    //enquiry & contact card initialisation
-
-
-
-    //scroll change
-    $(window).scroll(function () {
-      //  var navHeight = $('.img-holder-agent').height($(window).height() - 41);
-      var scroll = $(window).scrollTop();
-      //console.log(scroll);
-      if (scroll >= 300) {
-        //console.log('a');
-        $(".agent-user-nav").addClass("change");
-      } else {
-        //console.log('a');
-        $(".agent-user-nav").removeClass("change");
-      }
-    });
-    //scroll change end
+    $scope.oneAtATime = true
 
     // tab change
     var allagtuser = ["views/content/agent/agt-user/usr-itinerary.html", "views/content/agent/agt-user/usr-tourpackages.html", "views/content/agent/agt-user/usr-photovideos.html", "views/content/agent/agt-user/usr-testimonialreviews.html", "views/content/agent/agt-user/usr-travelactivity.html", "views/content/agent/agt-user/usr-aboutus.html"];
@@ -11548,436 +11340,94 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // tab change end
 
+    //scroll change
+    $(window).scroll(function () {
+      //  var navHeight = $('.img-holder-agent').height($(window).height() - 41);
+      var scroll = $(window).scrollTop();
+      //console.log(scroll);
+      if (scroll >= 300) {
+        //console.log('a');
+        $(".agent-user-nav").addClass("change");
+      } else {
+        //console.log('a');
+        $(".agent-user-nav").removeClass("change");
+      }
+    });
+    //scroll change end
 
+    //enquiry & contact card initialisation
+    // enquiry
+    $scope.viewEnquiry = false;
+    $scope.getBackdrop = "";
+    $scope.showEnquiry = function () {
+      // console.log("click");
+      if ($scope.viewEnquiry == false) {
+        $scope.getBackdrop = "backdrop-enquiry";
+        $scope.viewEnquiry = true;
+      } else {
+        $scope.viewEnquiry = false;
+        $scope.getBackdrop = "";
+      }
+    };
+    //enquiry end
+
+    //contact us
+    $scope.viewContact = false;
+    $scope.getBackdrop = "";
+    $scope.showContact = function () {
+      // console.log("click");
+      if ($scope.viewContact == false) {
+        $scope.getBackdrop = "backdrop-enquiry";
+        $scope.viewContact = true;
+      } else {
+        $scope.viewContact = false;
+        $scope.getBackdrop = "";
+      }
+    };
+    //contact us end
+    //enquiry & contact card initialisation
 
     //user itinerary cards
     $scope.usrItineraryCard = [{
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+      type: "detail-itinerary",
+      itineraryBy: "Admin",
+      startTime: "2015-05-01T06:50:41.000Z",
+      coverPhoto: "img/banner-itinerary/friends3.jpg",
+      duration: 19,
+      name: "Canada Adventure",
+      itineraryType: ["Adventure"],
+      currency: null,
+      cost: 0,
+      likeCount: 2,
+      commentCount: 0,
+      user: {
+        name: "Editor",
+        profilePicture: "img/default_images_2.jp",
+        urlSlug: "editor"
+      }
     }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '35000',
-      noDays: '55',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '1505',
-      agtRating: '3.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '15 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '75000',
-      noDays: '15',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '342',
-      agtRating: '4.0',
-      agtLikesCount: '199',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
+      type: "quick-itinerary",
+      itineraryBy: "User",
+      startTime: "2015-05-01T06:50:41.000Z",
+      coverPhoto: "img/banner-itinerary/friends3.jpg",
+      duration: 19,
+      name: "Canada Adventure",
+      itineraryType: ["Adventure"],
+      currency: null,
+      cost: 0,
+      likeCount: 2,
+      commentCount: 0,
+      month: "June",
+      year: "2015",
+      user: {
+        name: "Editor",
+        profilePicture: "img/default_images_2.jpg",
+        urlSlug: "editor",
+        following: 1
+      }
     }];
     //user itinerary cards end
 
-    // tour packages card
-    $scope.usrTourPackageCard = [{
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryTitle: 'Adventure',
-      tourcategoryImg: 'img/agt-cat1.png',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat5.png',
-      tourcategoryTitle: 'Backpacking',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat4.png',
-      tourcategoryTitle: 'Romance',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat9.png',
-      tourcategoryTitle: 'Friends',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat1.png',
-      tourcategoryTitle: 'Adventure',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat7.png',
-      tourcategoryTitle: 'Luxury',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat1.png',
-      tourcategoryTitle: 'Adventure',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat4.png',
-      tourcategoryTitle: 'Romance',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }];
-    // tour packages card end
-
-    // gallery card
-    $scope.agenPhotogallery = [
-      'img/uploaded-pic.jpg',
-      'img/slider2.jpg',
-      'img/moment-travel1.jpg',
-      'img/moment-travel2.jpg',
-      'img/local-life-post.jpg',
-      'img/destination/goldentemple.jpg',
-      'img/destination/list1.jpg',
-      'img/destination/list2.jpg',
-      'img/destination/info.jpg',
-      'img/destination/taj-featured.jpg',
-      'img/itinerary/itinerary.jpg',
-      'img/india-gate.jpg',
-      'img/notify-adrena.jpg',
-      'img/paris.jpg',
-      'img/bg-popular.jpg',
-      'img/bg-blur.jpg',
-      'img/blog-banner.jpg',
-      'img/follower.jpg'
-    ];
-    // gallery card end
-
-    //gallery filter list
-    $scope.picFilterList = ['India', 'Malaysia', 'Singapore', 'Dubai', 'London', 'USA', 'Abu Dhabi', 'Kenya', 'South Africa', 'Cuba', 'Cambodia', 'China', 'England', 'Russia', 'Kazakhstan', 'Iran', 'Iraq', 'Bolivia'];
-    //gallery filter list end
-
-    // testimonial card
-    $scope.testimonialreview = [{
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text evers,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }];
-    // testimonial card end
-
-
-    // review textarea counter
-    $scope.$on('$viewContentLoaded', function () {
-      $timeout(function () {
-        $('#textareaChars').keyup(updateCount);
-        $('#textareaChars').keydown(updateCount);
-        $('#reviewremainingC').text(0 + '/ 300');
-
-        function updateCount() {
-          var count = $('#textareaChars').val().length;
-          $('#reviewremainingC').text(count + '/ 300');
-        }
-      }, 100);
-    });
-
-    // review textarea counter end
-    // travel activity json
-    $scope.travelActivity = [{
-      header: true,
-      footer: true,
-      agentHeader: true,
-      travellerAgent: true,
-      agentName: "Holiday Travallers",
-      agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
-      travellerProfile: "img/profile-main.png",
-      travelDate: "26 dec, 2016",
-      travelTime: "1:20pm"
-    }, {
-      header: false,
-      footer: false,
-      tourPackage: true,
-      packageType: "Adventure",
-      packageImg: "img/agt-cat1.png",
-      tourFlag: [{
-        flagImg: "img/canada-visit.png"
-      }, {
-        flagImg: "img/england-visit.png"
-      }, {
-        flagImg: "img/india-visit.png"
-      }],
-      tourTitle: "Love in Paris",
-      tourCost: "25000",
-      tourNight: "4",
-      tourDay: "5",
-      tourPic: "img/paris.jpg",
-      tourDate: "26 dec, 2016",
-      tourTime: "1:20pm"
-    }, {
-      header: true,
-      footer: true,
-      itineraryHeader: true,
-      itinerary: true,
-      itineraryDate: "26 Dec, 2016",
-      itineraryTime: "1:20 pm",
-      itineraryCat: "img/agt-cat1.png",
-      itineraryPic: "img/paris.jpg",
-      itineraryTitle: "Love In Paris",
-      itineraryCost: "25000",
-      itineraryDays: "75",
-      itineraryFlag: [{
-        itineraryImg: "img/canada-visit.png"
-      }, {
-        itineraryImg: "img/england-visit.png"
-      }, {
-        itineraryImg: "img/india-visit.png"
-      }],
-      itineraryJourney: [{
-        journeyImg: "img/sunset.png"
-      }, {
-        journeyImg: "img/bag-journey.png"
-      }, {
-        journeyImg: "img/luxury-journey.png"
-      }]
-    }, {
-      header: true,
-      footer: true,
-      agentHeader: true,
-      travellerAgent: true,
-      agentName: "Holiday Travallers",
-      agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
-      travellerProfile: "img/profile-main.png",
-      travelDate: "26 dec, 2016",
-      travelTime: "1:20pm"
-    }, {
-      header: true,
-      footer: true,
-      itineraryHeader: true,
-      itinerary: true,
-      itineraryDate: "26 Dec, 2016",
-      itineraryTime: "1:20 pm",
-      itineraryCat: "img/agt-cat1.png",
-      itineraryPic: "img/paris.jpg",
-      itineraryTitle: "Love In Paris",
-      itineraryCost: "25000",
-      itineraryDays: "75",
-      itineraryFlag: [{
-        itineraryImg: "img/canada-visit.png"
-      }, {
-        itineraryImg: "img/england-visit.png"
-      }, {
-        itineraryImg: "img/india-visit.png"
-      }],
-      itineraryJourney: [{
-        journeyImg: "img/sunset.png"
-      }, {
-        journeyImg: "img/bag-journey.png"
-      }, {
-        journeyImg: "img/luxury-journey.png"
-      }]
-    }, {
-      header: false,
-      footer: false,
-      tourPackage: true,
-      packageType: "Adventure",
-      packageImg: "img/agt-cat1.png",
-      tourFlag: [{
-        flagImg: "img/canada-visit.png"
-      }, {
-        flagImg: "img/england-visit.png"
-      }, {
-        flagImg: "img/india-visit.png"
-      }],
-      tourTitle: "Love in Paris",
-      tourCost: "25000",
-      tourNight: "4",
-      tourDay: "5",
-      tourPic: "img/paris.jpg",
-      tourDate: "26 dec, 2016",
-      tourTime: "1:20pm"
-    }, {
-      header: false,
-      footer: false,
-      tourPackage: true,
-      packageType: "Adventure",
-      packageImg: "img/agt-cat1.png",
-      tourFlag: [{
-        flagImg: "img/canada-visit.png"
-      }, {
-        flagImg: "img/england-visit.png"
-      }, {
-        flagImg: "img/india-visit.png"
-      }],
-      tourTitle: "Love in Paris",
-      tourCost: "25000",
-      tourNight: "4",
-      tourDay: "5",
-      tourPic: "img/paris.jpg",
-      tourDate: "26 dec, 2016",
-      tourTime: "1:20pm"
-    }];
-    // travel activity json end
 
     // ITINERARY FILTER
     //OpenFilter
@@ -12009,717 +11459,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       name: 'Afghanistan',
       code: 'AF'
     }, {
-      name: 'Åland Islands',
-      code: 'AX'
-    }, {
-      name: 'Albania',
-      code: 'AL'
-    }, {
-      name: 'Algeria',
-      code: 'DZ'
-    }, {
-      name: 'American Samoa',
-      code: 'AS'
-    }, {
-      name: 'Andorra',
-      code: 'AD'
-    }, {
-      name: 'Angola',
-      code: 'AO'
-    }, {
-      name: 'Anguilla',
-      code: 'AI'
-    }, {
-      name: 'Antarctica',
-      code: 'AQ'
-    }, {
-      name: 'Antigua and Barbuda',
-      code: 'AG'
-    }, {
-      name: 'Argentina',
-      code: 'AR'
-    }, {
-      name: 'Armenia',
-      code: 'AM'
-    }, {
-      name: 'Aruba',
-      code: 'AW'
-    }, {
-      name: 'Australia',
-      code: 'AU'
-    }, {
-      name: 'Austria',
-      code: 'AT'
-    }, {
-      name: 'Azerbaijan',
-      code: 'AZ'
-    }, {
-      name: 'Bahamas',
-      code: 'BS'
-    }, {
-      name: 'Bahrain',
-      code: 'BH'
-    }, {
-      name: 'Bangladesh',
-      code: 'BD'
-    }, {
-      name: 'Barbados',
-      code: 'BB'
-    }, {
-      name: 'Belarus',
-      code: 'BY'
-    }, {
-      name: 'Belgium',
-      code: 'BE'
-    }, {
-      name: 'Belize',
-      code: 'BZ'
-    }, {
-      name: 'Benin',
-      code: 'BJ'
-    }, {
-      name: 'Bermuda',
-      code: 'BM'
-    }, {
-      name: 'Bhutan',
-      code: 'BT'
-    }, {
-      name: 'Bolivia',
-      code: 'BO'
-    }, {
-      name: 'Bosnia and Herzegovina',
-      code: 'BA'
-    }, {
-      name: 'Botswana',
-      code: 'BW'
-    }, {
-      name: 'Bouvet Island',
-      code: 'BV'
-    }, {
-      name: 'Brazil',
-      code: 'BR'
-    }, {
-      name: 'British Indian Ocean Territory',
-      code: 'IO'
-    }, {
-      name: 'Brunei Darussalam',
-      code: 'BN'
-    }, {
-      name: 'Bulgaria',
-      code: 'BG'
-    }, {
-      name: 'Burkina Faso',
-      code: 'BF'
-    }, {
-      name: 'Burundi',
-      code: 'BI'
-    }, {
-      name: 'Cambodia',
-      code: 'KH'
-    }, {
-      name: 'Cameroon',
-      code: 'CM'
-    }, {
-      name: 'Canada',
-      code: 'CA'
-    }, {
-      name: 'Cape Verde',
-      code: 'CV'
-    }, {
-      name: 'Cayman Islands',
-      code: 'KY'
-    }, {
-      name: 'Central African Republic',
-      code: 'CF'
-    }, {
-      name: 'Chad',
-      code: 'TD'
-    }, {
-      name: 'Chile',
-      code: 'CL'
-    }, {
-      name: 'China',
-      code: 'CN'
-    }, {
-      name: 'Christmas Island',
-      code: 'CX'
-    }, {
-      name: 'Cocos (Keeling) Islands',
-      code: 'CC'
-    }, {
-      name: 'Colombia',
-      code: 'CO'
-    }, {
-      name: 'Comoros',
-      code: 'KM'
-    }, {
-      name: 'Congo',
-      code: 'CG'
-    }, {
-      name: 'Congo, The Democratic Republic of the',
-      code: 'CD'
-    }, {
-      name: 'Cook Islands',
-      code: 'CK'
-    }, {
-      name: 'Costa Rica',
-      code: 'CR'
-    }, {
-      name: 'Cote D\'Ivoire',
-      code: 'CI'
-    }, {
-      name: 'Croatia',
-      code: 'HR'
-    }, {
-      name: 'Cuba',
-      code: 'CU'
-    }, {
-      name: 'Cyprus',
-      code: 'CY'
-    }, {
-      name: 'Czech Republic',
-      code: 'CZ'
-    }, {
-      name: 'Denmark',
-      code: 'DK'
-    }, {
-      name: 'Djibouti',
-      code: 'DJ'
-    }, {
-      name: 'Dominica',
-      code: 'DM'
-    }, {
-      name: 'Dominican Republic',
-      code: 'DO'
-    }, {
-      name: 'Ecuador',
-      code: 'EC'
-    }, {
-      name: 'Egypt',
-      code: 'EG'
-    }, {
-      name: 'El Salvador',
-      code: 'SV'
-    }, {
-      name: 'Equatorial Guinea',
-      code: 'GQ'
-    }, {
-      name: 'Eritrea',
-      code: 'ER'
-    }, {
-      name: 'Estonia',
-      code: 'EE'
-    }, {
-      name: 'Ethiopia',
-      code: 'ET'
-    }, {
-      name: 'Falkland Islands (Malvinas)',
-      code: 'FK'
-    }, {
-      name: 'Faroe Islands',
-      code: 'FO'
-    }, {
-      name: 'Fiji',
-      code: 'FJ'
-    }, {
-      name: 'Finland',
-      code: 'FI'
-    }, {
-      name: 'France',
-      code: 'FR'
-    }, {
-      name: 'French Guiana',
-      code: 'GF'
-    }, {
-      name: 'French Polynesia',
-      code: 'PF'
-    }, {
-      name: 'French Southern Territories',
-      code: 'TF'
-    }, {
-      name: 'Gabon',
-      code: 'GA'
-    }, {
-      name: 'Gambia',
-      code: 'GM'
-    }, {
-      name: 'Georgia',
-      code: 'GE'
-    }, {
-      name: 'Germany',
-      code: 'DE'
-    }, {
-      name: 'Ghana',
-      code: 'GH'
-    }, {
-      name: 'Gibraltar',
-      code: 'GI'
-    }, {
-      name: 'Greece',
-      code: 'GR'
-    }, {
-      name: 'Greenland',
-      code: 'GL'
-    }, {
-      name: 'Grenada',
-      code: 'GD'
-    }, {
-      name: 'Guadeloupe',
-      code: 'GP'
-    }, {
-      name: 'Guam',
-      code: 'GU'
-    }, {
-      name: 'Guatemala',
-      code: 'GT'
-    }, {
-      name: 'Guernsey',
-      code: 'GG'
-    }, {
-      name: 'Guinea',
-      code: 'GN'
-    }, {
-      name: 'Guinea-Bissau',
-      code: 'GW'
-    }, {
-      name: 'Guyana',
-      code: 'GY'
-    }, {
-      name: 'Haiti',
-      code: 'HT'
-    }, {
-      name: 'Heard Island and Mcdonald Islands',
-      code: 'HM'
-    }, {
-      name: 'Holy See (Vatican City State)',
-      code: 'VA'
-    }, {
-      name: 'Honduras',
-      code: 'HN'
-    }, {
-      name: 'Hong Kong',
-      code: 'HK'
-    }, {
-      name: 'Hungary',
-      code: 'HU'
-    }, {
-      name: 'Iceland',
-      code: 'IS'
-    }, {
-      name: 'India',
-      code: 'IN'
-    }, {
-      name: 'Indonesia',
-      code: 'ID'
-    }, {
-      name: 'Iran, Islamic Republic Of',
-      code: 'IR'
-    }, {
-      name: 'Iraq',
-      code: 'IQ'
-    }, {
-      name: 'Ireland',
-      code: 'IE'
-    }, {
-      name: 'Isle of Man',
-      code: 'IM'
-    }, {
-      name: 'Israel',
-      code: 'IL'
-    }, {
-      name: 'Italy',
-      code: 'IT'
-    }, {
-      name: 'Jamaica',
-      code: 'JM'
-    }, {
-      name: 'Japan',
-      code: 'JP'
-    }, {
-      name: 'Jersey',
-      code: 'JE'
-    }, {
-      name: 'Jordan',
-      code: 'JO'
-    }, {
-      name: 'Kazakhstan',
-      code: 'KZ'
-    }, {
-      name: 'Kenya',
-      code: 'KE'
-    }, {
-      name: 'Kiribati',
-      code: 'KI'
-    }, {
-      name: 'Korea, Democratic People\'s Republic of',
-      code: 'KP'
-    }, {
-      name: 'Korea, Republic of',
-      code: 'KR'
-    }, {
-      name: 'Kuwait',
-      code: 'KW'
-    }, {
-      name: 'Kyrgyzstan',
-      code: 'KG'
-    }, {
-      name: 'Lao People\'s Democratic Republic',
-      code: 'LA'
-    }, {
-      name: 'Latvia',
-      code: 'LV'
-    }, {
-      name: 'Lebanon',
-      code: 'LB'
-    }, {
-      name: 'Lesotho',
-      code: 'LS'
-    }, {
-      name: 'Liberia',
-      code: 'LR'
-    }, {
-      name: 'Libyan Arab Jamahiriya',
-      code: 'LY'
-    }, {
-      name: 'Liechtenstein',
-      code: 'LI'
-    }, {
-      name: 'Lithuania',
-      code: 'LT'
-    }, {
-      name: 'Luxembourg',
-      code: 'LU'
-    }, {
-      name: 'Macao',
-      code: 'MO'
-    }, {
-      name: 'Macedonia, The Former Yugoslav Republic of',
-      code: 'MK'
-    }, {
-      name: 'Madagascar',
-      code: 'MG'
-    }, {
-      name: 'Malawi',
-      code: 'MW'
-    }, {
-      name: 'Malaysia',
-      code: 'MY'
-    }, {
-      name: 'Maldives',
-      code: 'MV'
-    }, {
-      name: 'Mali',
-      code: 'ML'
-    }, {
-      name: 'Malta',
-      code: 'MT'
-    }, {
-      name: 'Marshall Islands',
-      code: 'MH'
-    }, {
-      name: 'Martinique',
-      code: 'MQ'
-    }, {
-      name: 'Mauritania',
-      code: 'MR'
-    }, {
-      name: 'Mauritius',
-      code: 'MU'
-    }, {
-      name: 'Mayotte',
-      code: 'YT'
-    }, {
-      name: 'Mexico',
-      code: 'MX'
-    }, {
-      name: 'Micronesia, Federated States of',
-      code: 'FM'
-    }, {
-      name: 'Moldova, Republic of',
-      code: 'MD'
-    }, {
-      name: 'Monaco',
-      code: 'MC'
-    }, {
-      name: 'Mongolia',
-      code: 'MN'
-    }, {
-      name: 'Montserrat',
-      code: 'MS'
-    }, {
-      name: 'Morocco',
-      code: 'MA'
-    }, {
-      name: 'Mozambique',
-      code: 'MZ'
-    }, {
-      name: 'Myanmar',
-      code: 'MM'
-    }, {
-      name: 'Namibia',
-      code: 'NA'
-    }, {
-      name: 'Nauru',
-      code: 'NR'
-    }, {
-      name: 'Nepal',
-      code: 'NP'
-    }, {
-      name: 'Netherlands',
-      code: 'NL'
-    }, {
-      name: 'Netherlands Antilles',
-      code: 'AN'
-    }, {
-      name: 'New Caledonia',
-      code: 'NC'
-    }, {
-      name: 'New Zealand',
-      code: 'NZ'
-    }, {
-      name: 'Nicaragua',
-      code: 'NI'
-    }, {
-      name: 'Niger',
-      code: 'NE'
-    }, {
-      name: 'Nigeria',
-      code: 'NG'
-    }, {
-      name: 'Niue',
-      code: 'NU'
-    }, {
-      name: 'Norfolk Island',
-      code: 'NF'
-    }, {
-      name: 'Northern Mariana Islands',
-      code: 'MP'
-    }, {
-      name: 'Norway',
-      code: 'NO'
-    }, {
-      name: 'Oman',
-      code: 'OM'
-    }, {
-      name: 'Pakistan',
-      code: 'PK'
-    }, {
-      name: 'Palau',
-      code: 'PW'
-    }, {
-      name: 'Palestinian Territory, Occupied',
-      code: 'PS'
-    }, {
-      name: 'Panama',
-      code: 'PA'
-    }, {
-      name: 'Papua New Guinea',
-      code: 'PG'
-    }, {
-      name: 'Paraguay',
-      code: 'PY'
-    }, {
-      name: 'Peru',
-      code: 'PE'
-    }, {
-      name: 'Philippines',
-      code: 'PH'
-    }, {
-      name: 'Pitcairn',
-      code: 'PN'
-    }, {
-      name: 'Poland',
-      code: 'PL'
-    }, {
-      name: 'Portugal',
-      code: 'PT'
-    }, {
-      name: 'Puerto Rico',
-      code: 'PR'
-    }, {
-      name: 'Qatar',
-      code: 'QA'
-    }, {
-      name: 'Reunion',
-      code: 'RE'
-    }, {
-      name: 'Romania',
-      code: 'RO'
-    }, {
-      name: 'Russian Federation',
-      code: 'RU'
-    }, {
-      name: 'Rwanda',
-      code: 'RW'
-    }, {
-      name: 'Saint Helena',
-      code: 'SH'
-    }, {
-      name: 'Saint Kitts and Nevis',
-      code: 'KN'
-    }, {
-      name: 'Saint Lucia',
-      code: 'LC'
-    }, {
-      name: 'Saint Pierre and Miquelon',
-      code: 'PM'
-    }, {
-      name: 'Saint Vincent and the Grenadines',
-      code: 'VC'
-    }, {
-      name: 'Samoa',
-      code: 'WS'
-    }, {
-      name: 'San Marino',
-      code: 'SM'
-    }, {
-      name: 'Sao Tome and Principe',
-      code: 'ST'
-    }, {
-      name: 'Saudi Arabia',
-      code: 'SA'
-    }, {
-      name: 'Senegal',
-      code: 'SN'
-    }, {
-      name: 'Serbia and Montenegro',
-      code: 'CS'
-    }, {
-      name: 'Seychelles',
-      code: 'SC'
-    }, {
-      name: 'Sierra Leone',
-      code: 'SL'
-    }, {
-      name: 'Singapore',
-      code: 'SG'
-    }, {
-      name: 'Slovakia',
-      code: 'SK'
-    }, {
-      name: 'Slovenia',
-      code: 'SI'
-    }, {
-      name: 'Solomon Islands',
-      code: 'SB'
-    }, {
-      name: 'Somalia',
-      code: 'SO'
-    }, {
-      name: 'South Africa',
-      code: 'ZA'
-    }, {
-      name: 'South Georgia and the South Sandwich Islands',
-      code: 'GS'
-    }, {
-      name: 'Spain',
-      code: 'ES'
-    }, {
-      name: 'Sri Lanka',
-      code: 'LK'
-    }, {
-      name: 'Sudan',
-      code: 'SD'
-    }, {
-      name: 'Suriname',
-      code: 'SR'
-    }, {
-      name: 'Svalbard and Jan Mayen',
-      code: 'SJ'
-    }, {
-      name: 'Swaziland',
-      code: 'SZ'
-    }, {
-      name: 'Sweden',
-      code: 'SE'
-    }, {
-      name: 'Switzerland',
-      code: 'CH'
-    }, {
-      name: 'Syrian Arab Republic',
-      code: 'SY'
-    }, {
-      name: 'Taiwan, Province of China',
-      code: 'TW'
-    }, {
-      name: 'Tajikistan',
-      code: 'TJ'
-    }, {
-      name: 'Tanzania, United Republic of',
-      code: 'TZ'
-    }, {
-      name: 'Thailand',
-      code: 'TH'
-    }, {
-      name: 'Timor-Leste',
-      code: 'TL'
-    }, {
-      name: 'Togo',
-      code: 'TG'
-    }, {
-      name: 'Tokelau',
-      code: 'TK'
-    }, {
-      name: 'Tonga',
-      code: 'TO'
-    }, {
-      name: 'Trinidad and Tobago',
-      code: 'TT'
-    }, {
-      name: 'Tunisia',
-      code: 'TN'
-    }, {
-      name: 'Turkey',
-      code: 'TR'
-    }, {
-      name: 'Turkmenistan',
-      code: 'TM'
-    }, {
-      name: 'Turks and Caicos Islands',
-      code: 'TC'
-    }, {
-      name: 'Tuvalu',
-      code: 'TV'
-    }, {
-      name: 'Uganda',
-      code: 'UG'
-    }, {
-      name: 'Ukraine',
-      code: 'UA'
-    }, {
-      name: 'United Arab Emirates',
-      code: 'AE'
-    }, {
-      name: 'United Kingdom',
-      code: 'GB'
-    }, {
-      name: 'United States',
-      code: 'US'
-    }, {
-      name: 'United States Minor Outlying Islands',
-      code: 'UM'
-    }, {
-      name: 'Uruguay',
-      code: 'UY'
-    }, {
-      name: 'Uzbekistan',
-      code: 'UZ'
-    }, {
-      name: 'Vanuatu',
-      code: 'VU'
-    }, {
-      name: 'Venezuela',
-      code: 'VE'
-    }, {
-      name: 'Vietnam',
-      code: 'VN'
-    }, {
-      name: 'Virgin Islands, British',
-      code: 'VG'
-    }, {
-      name: 'Virgin Islands, U.S.',
-      code: 'VI'
-    }, {
       name: 'Wallis and Futuna',
       code: 'WF'
     }, {
@@ -12735,7 +11474,215 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       name: 'Zimbabwe',
       code: 'ZW'
     }];
+
+    // FILTER CLICK
+    $scope.showme = false;
+    $scope.showAgentFilter = function(){
+      if($scope.showme == false){
+        $scope.showme = true;
+      } else {
+        $scope.showme = false;
+      }
+    };
+    // FILTER CLICK END
     //ITINERARY FILTER END
+
+    // tour packages card
+    $scope.usrTourPackageCard = [{
+      tourImg: 'img/default_Images_2.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryTitle: 'Adventure',
+      tourcategoryImg: 'img/kindofjourney/white-adventure.png',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/default_Images_2.jpg', 'img/default_Images_2.jpg']
+    }, {
+      tourImg: 'img/default_Images_2.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/kindofjourney/white-backpacking.png',
+      tourcategoryTitle: 'Backpacking',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/default_Images_2.jpg', 'img/default_Images_2.jpg']
+    }, {
+      tourImg: 'img/default_Images_2.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/kindofjourney/white-romance.png',
+      tourcategoryTitle: 'Romance',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/default_Images_2.jpg', 'img/default_Images_2.jpg']
+    }];
+    // tour packages card end
+
+    // gallery card
+    $scope.agenPhotogallery = [
+      'img/banner-itinerary/adventure1.jpg',
+      'img/banner-itinerary/budget3.jpg',
+      'img/banner-itinerary/all1.jpg',
+      'img/banner-itinerary/luxury3.jpg',
+      'img/banner-itinerary/all3.jpg',
+      'img/banner-itinerary/friends3.jpg',
+    ];
+
+    //gallery filter list
+    $scope.picFilterList = ['India', 'Malaysia', 'Singapore', 'Dubai', 'London', 'USA', 'Abu Dhabi', 'Kenya', 'South Africa', 'Cuba', 'Cambodia', 'China', 'England', 'Russia', 'Kazakhstan', 'Iran', 'Iraq', 'Bolivia'];
+    //gallery filter list end
+    // gallery card end
+
+    // testimonial card
+    $scope.testimonialreview = [{
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder: 'img/default_Images_2.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and',
+      usrprofileImgholder: 'img/default_Images_2.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, text ever since the 1500s,',
+      usrprofileImgholder: 'img/default_Images_2.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }];
+    // testimonial card end
+
+    // review textarea counter
+    $scope.$on('$viewContentLoaded', function () {
+      $timeout(function () {
+        $('#textareaChars').keyup(updateCount);
+        $('#textareaChars').keydown(updateCount);
+        $('#reviewremainingC').text(0 + '/ 300');
+
+        function updateCount() {
+          var count = $('#textareaChars').val().length;
+          $('#reviewremainingC').text(count + '/ 300');
+        }
+      }, 100);
+    });
+    // review textarea counter end
+
+    // travel activity json
+    $scope.travelActivity = [{
+      header: true,
+      footer: true,
+      agentHeader: true,
+      travellerAgent: true,
+      agentName: "Holiday Travallers",
+      agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
+      travellerProfile: "img/default_Images_2.jpg",
+      travelDate: "26 dec, 2016",
+      travelTime: "1:20pm"
+    }, {
+      header: false,
+      footer: false,
+      tourPackage: true,
+      packageType: "Adventure",
+      packageImg: "img/kindofjourney/white-adventure.png",
+      tourFlag: [{
+        flagImg: "img/default_Images_2.jpg"
+      }],
+      tourTitle: "Love in Paris",
+      tourCost: "25000",
+      tourNight: "4",
+      tourDay: "5",
+      tourPic: "img/banner-itinerary/friends1.jpg",
+      tourDate: "26 dec, 2016",
+      tourTime: "1:20pm"
+    }, {
+      header: true,
+      footer: true,
+      itineraryHeader: true,
+      itinerary: true,
+      itineraryDate: "26 Dec, 2016",
+      itineraryTime: "1:20 pm",
+      itineraryCat: "img/kindofjourney/white-adventure.png",
+      itineraryPic: "img/banner-itinerary/friends1.jpg",
+      itineraryTitle: "Love In Paris",
+      itineraryCost: "25000",
+      itineraryDays: "75",
+      itineraryFlag: [{
+        itineraryImg: "img/default_Images_2.jpg"
+      }, {
+        itineraryImg: "img/default_Images_2.jpg"
+      }],
+      itineraryJourney: ['Adventure']
+    }, {
+      header: true,
+      footer: true,
+      agentHeader: true,
+      travellerAgent: true,
+      agentName: "Holiday Travallers",
+      agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
+      travellerProfile: "img/default_Images_2.jpg",
+      travelDate: "26 dec, 2016",
+      travelTime: "1:20pm"
+    }, {
+      header: true,
+      footer: true,
+      itineraryHeader: true,
+      itinerary: true,
+      itineraryDate: "26 Dec, 2016",
+      itineraryTime: "1:20 pm",
+      itineraryCat: "img/kindofjourney/white-adventure.png",
+      itineraryPic: "img/banner-itinerary/friends1.jpg",
+      itineraryTitle: "Love In Paris",
+      itineraryCost: "25000",
+      itineraryDays: "75",
+      itineraryFlag: [{
+        itineraryImg: "img/default_Images_2.jpg"
+      }],
+      itineraryJourney: ['Adventure']
+    }, {
+      header: false,
+      footer: false,
+      tourPackage: true,
+      packageType: "Adventure",
+      packageImg: "img/kindofjourney/white-adventure.png",
+      tourFlag: [{
+        flagImg: "img/default_Images_2.jpg"
+      }],
+      tourTitle: "Love in Paris",
+      tourCost: "25000",
+      tourNight: "4",
+      tourDay: "5",
+      tourPic: "img/banner-itinerary/friends1.jpg",
+      tourDate: "26 dec, 2016",
+      tourTime: "1:20pm"
+    }, {
+      header: false,
+      footer: false,
+      tourPackage: true,
+      packageType: "Adventure",
+      packageImg: "img/kindofjourney/white-romance.png",
+      tourFlag: [{
+        flagImg: "img/default_Images_2.jpg"
+      }, {
+        flagImg: "img/default_Images_2.jpg"
+      }],
+      tourTitle: "Love in Paris",
+      tourCost: "25000",
+      tourNight: "4",
+      tourDay: "5",
+      tourPic: "img/banner-itinerary/friends1.jpg",
+      tourDate: "26 dec, 2016",
+      tourTime: "1:20pm"
+    }];
+    // travel activity json end
 
     //rating slider
     $scope.ratingSlide = {
@@ -12790,12 +11737,47 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // category type end
   })
 
-  .controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+  .controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state,$anchorScroll,anchorSmoothScroll, $stateParams,$location) {
     $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.oneAtATime = true;
+
+    $scope.profileview = false;
+    $scope.follower = false;
+    $scope.leads = false;
+    $scope.viewsdownload = false;
+
+    // PRATIK CONTROLLER
+    //isMine or someoneOthers profile
+    if ($.jStorage.get("isLoggedIn") && ($.jStorage.get("profile").urlSlug == $stateParams.urlSlug)) {
+      //its your own profile so no need to call profile again
+      $scope.userData = $.jStorage.get("profile");
+      TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
+      $.jStorage.set("activeUrlSlug", $.jStorage.get("profile").urlSlug);
+      $scope.activeUrlSlug = $.jStorage.get("profile").urlSlug;
+    } else {
+      //someone elses profile so get his/her data
+      allowAccess = false;
+      $.jStorage.set("activeUrlSlug", $stateParams.urlSlug);
+      $scope.activeUrlSlug = $stateParams.urlSlug;
+      // $scope.isMine = false;
+      NavigationService.getAgentsProfile($stateParams.urlSlug, function (data) {
+        console.log(data);
+        if (data.value) {
+          $scope.userData = data.data;
+          TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
+          allowAccess = false;
+        } else {
+          $state.go("errorpage");
+        }
+      }, function (data) {
+        console.log(data);
+      });
+    }
+    //isMine or someoneOthers profile Ends
+    // PRATIK CONTROLLER END
 
     // on load modal
     // $(window).load(function(){
@@ -12804,7 +11786,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // on load modal end
 
     // ADD BUTTTON BACKDROP AND CLICK
-
     $scope.showItinerary = false;
     $scope.addHomeBackdrop = "";
     $scope.addItinerary = function () {
@@ -12818,102 +11799,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     // ADD BUTTTON BACKDROP AND CLICK END
-
-    // agent add photo edit
-    $scope.agentPhotos = [{
-      agentImg: "img/ongojourney/winter.jpg"
-    }, {
-      agentImg: "img/ongojourney/fire.jpg"
-    }, {
-      agentImg: "img/ongojourney/jitu-sofa.jpg"
-    }, {
-      agentImg: "img/ongojourney/andrea-santa.jpg"
-    }, {
-      agentImg: "img/ongojourney/window.jpg"
-    }];
-    $scope.agentPhotos = _.chunk($scope.agentPhotos, 4);
-    for (i = 0; i < $scope.agentPhotos.length; i++) {
-      $scope.agentPhotos[i] = _.chunk($scope.agentPhotos[i], 2);
-    }
-    $scope.index = -1;
-    $scope.putCaptionAgent = function (index) {
-      if ($scope.index == index) {
-        $scope.index = -1;
-      } else {
-        $scope.index = index;
-      }
-    }
-
-    //photo caption textarea counter
-    $scope.$on('$viewContentLoaded', function () {
-      $timeout(function () {
-        $('#captionArea').keyup(updateCount);
-        $('#captionArea').keydown(updateCount);
-        $('#remainCaption').text(0 + '/150');
-
-        function updateCount() {
-          var count = $('#captionArea').val().length;
-          $('#remainCaption').text(count + '/150');
-        }
-      }, 200);
-    });
-
-    //photo caption textarea counter end
-    // agent add photo edit end
-
-    //lead monitor accordion
-    $scope.leadMonAgent = [{
-      leadStatus: 'new',
-      leadImg: 'img/follower.jpg',
-      leadName: 'Andrea Christina',
-      leadDate: '02/12/2016',
-      leadDestination: 'India',
-      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-      leadPhone: '91961845656',
-      leadMail: 'leads@leads.com',
-      leadItinerary: 'Incredible India'
-    }, {
-      leadStatus: 'actioned',
-      leadImg: 'img/follower.jpg',
-      leadName: 'Andrea Christina',
-      leadDate: '02/12/2016',
-      leadDestination: 'India',
-      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-      leadPhone: '91961845656',
-      leadMail: 'leads@leads.com',
-      leadItinerary: 'Incredible India'
-    }, {
-      leadStatus: 'new',
-      leadImg: 'img/follower.jpg',
-      leadName: 'Andrea Christina',
-      leadDate: '02/12/2016',
-      leadDestination: 'India',
-      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-      leadPhone: '91961845656',
-      leadMail: 'leads@leads.com',
-      leadItinerary: 'Incredible India'
-    }, {
-      leadStatus: 'actioned',
-      leadImg: 'img/follower.jpg',
-      leadName: 'Andrea Christina',
-      leadDate: '02/12/2016',
-      leadDestination: 'India',
-      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-      leadPhone: '91961845656',
-      leadMail: 'leads@leads.com',
-      leadItinerary: 'Incredible India'
-    }, {
-      leadStatus: 'new',
-      leadImg: 'img/follower.jpg',
-      leadName: 'Andrea Christina',
-      leadDate: '02/12/2016',
-      leadDestination: 'India',
-      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-      leadPhone: '91961845656',
-      leadMail: 'leads@leads.com',
-      leadItinerary: 'Incredible India'
-    }];
-    //lead monitor accordion end
 
     //scroll change
     $(window).scroll(function () {
@@ -12931,7 +11816,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //status character counter
     $scope.$on('$viewContentLoaded', function () {
-      gulp
       $timeout(function () {
         $('#postStatus').keyup(updateCount);
         $('#postStatus').keydown(updateCount);
@@ -12986,6 +11870,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       case "agthome-analytics":
         $scope.agthome.innerView = allagthome[6];
         $scope.agthomeoptions.active = "agthome-analytics";
+        $scope.profileview = true;
         break;
       case "agthome-aboutus":
         $scope.agthome.innerView = allagthome[7];
@@ -12997,6 +11882,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.agenthomeItinerary = true;
     $scope.agentFixednav = ""
     $scope.getTab = function (view) {
+      console.log(view,'view of agentang');
       $scope.agthome.innerView = allagthome[view];
       var url = "agthome-itinerary";
       var active = "";
@@ -13042,6 +11928,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           url = "agthome-analytics";
           $scope.agthomeoptions.active = "agthome-analytics";
           $scope.agenthomeItinerary = false;
+          $scope.profileview = true;
           $scope.agentFixednav = "change-blue";
           break;
         case 7:
@@ -13064,6 +11951,397 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     // tab change end
+
+    //enquiry & contact card initialisation
+    // enquiry
+    $scope.viewEnquiry = false;
+    $scope.getBackdrop = "";
+    $scope.showEnquiry = function () {
+      // console.log("click");
+      if ($scope.viewEnquiry == false) {
+        $scope.getBackdrop = "backdrop-enquiry";
+        $scope.viewEnquiry = true;
+      } else {
+        $scope.viewEnquiry = false;
+        $scope.getBackdrop = "";
+      }
+    };
+    //enquiry end
+
+    //contact us
+    $scope.viewContact = false;
+    $scope.getBackdrop = "";
+    $scope.showContact = function () {
+      // console.log("click");
+      if ($scope.viewContact == false) {
+        $scope.getBackdrop = "backdrop-enquiry";
+        $scope.viewContact = true;
+      } else {
+        $scope.viewContact = false;
+        $scope.getBackdrop = "";
+      }
+    };
+    //contact us end
+    //enquiry & contact card initialisation
+
+    //Show OPTIONS
+    $scope.viewOption = false;
+    console.log($scope.showOption, 'lolwa');
+    $scope.showOptions = function(){
+      if($scope.viewOption == false){
+        $scope.viewOption = true;
+        console.log($scope.viewOption, 'lolwa true');
+      } else {
+        $scope.viewOption = false;
+      }
+    }
+    //Show OPTIONS END
+    $scope.getAgentScroll = function(getId){
+      $scope.getTab(6);
+      $scope.profileview = false;
+      $scope.follower = false;
+      $scope.leads = false;
+      $scope.viewsdownload = false;
+      switch (getId) {
+        case 'profileview':
+            $scope.profileview = true;
+        break;
+        case 'follower':
+            $scope.follower = true;
+        break;
+        case 'leads':
+            $scope.leads = true;
+        break;
+        case 'viewsdownload':
+            $scope.viewsdownload = true;
+        break;
+        default:
+            $scope.profileview = true;
+        break;
+      }
+      // anchorSmoothScroll.scrollTo(getId);
+    }
+
+    //user itinerary cards
+    $scope.usrItineraryCard = [{
+      type: "detail-itinerary",
+      itineraryBy: "Admin",
+      startTime: "2015-05-01T06:50:41.000Z",
+      coverPhoto: "img/banner-itinerary/friends3.jpg",
+      duration: 19,
+      name: "Canada Adventure",
+      itineraryType: ["Adventure"],
+      currency: null,
+      cost: 0,
+      likeCount: 2,
+      commentCount: 0,
+      user: {
+        name: "Editor",
+        profilePicture: "img/default_images_2.jp",
+        urlSlug: "editor"
+      }
+    }, {
+      type: "quick-itinerary",
+      itineraryBy: "User",
+      startTime: "2015-05-01T06:50:41.000Z",
+      coverPhoto: "img/banner-itinerary/friends3.jpg",
+      duration: 19,
+      name: "Canada Adventure",
+      itineraryType: ["Adventure"],
+      currency: null,
+      cost: 0,
+      likeCount: 2,
+      commentCount: 0,
+      month: "June",
+      year: "2015",
+      user: {
+        name: "Editor",
+        profilePicture: "img/default_images_2.jpg",
+        urlSlug: "editor",
+        following: 1
+      }
+    }];
+    //user itinerary cards end
+
+    // itinerary popover
+    $scope.viewdetailInfo = false;
+    $scope.showdetailInfo = function () {
+      if ($scope.viewdetailInfo == false) {
+        $scope.viewdetailInfo = true;
+        console.log("true");
+      } else {
+        $scope.viewdetailInfo = false;
+      }
+    };
+
+    $scope.viewquickInfo = false;
+    $scope.showquickInfo = function () {
+      if ($scope.viewquickInfo == false) {
+        $scope.viewquickInfo = true;
+      } else {
+        $scope.viewquickInfo = false;
+      }
+    };
+    // itinerary popover end
+
+    // tour packages card
+    $scope.usrTourPackageCard = [{
+      tourImg: 'img/default_Images_2.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryTitle: 'Adventure',
+      tourcategoryImg: 'img/kindofjourney/white-adventure.png',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/default_Images_2.jpg', 'img/default_Images_2.jpg']
+    }, {
+      tourImg: 'img/default_Images_2.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/kindofjourney/white-backpacking.png',
+      tourcategoryTitle: 'Backpacking',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/default_Images_2.jpg', 'img/default_Images_2.jpg']
+    }, {
+      tourImg: 'img/default_Images_2.jpg',
+      agttourTitle: 'Love In Paris',
+      agttourCost: '25000',
+      tourDayC: '4',
+      tourNightC: '3',
+      tourcategoryImg: 'img/kindofjourney/white-romance.png',
+      tourcategoryTitle: 'Romance',
+      tourDate: '26 Dec, 2016',
+      tourTime: '1.20 pm',
+      tourcountryBadgesFlag: ['img/default_Images_2.jpg', 'img/default_Images_2.jpg']
+    }];
+    // tour packages card end
+
+    // gallery card
+    $scope.agenPhotogallery = [
+      'img/banner-itinerary/adventure1.jpg',
+      'img/banner-itinerary/budget3.jpg',
+      'img/banner-itinerary/all1.jpg',
+      'img/banner-itinerary/luxury3.jpg',
+      'img/banner-itinerary/all3.jpg',
+      'img/banner-itinerary/friends3.jpg',
+    ];
+
+    // agent add photo edit
+    $scope.agentPhotos = [{
+      agentImg: "img/banner-itinerary/adventure1.jpg"
+    }, {
+      agentImg: "img/banner-itinerary/budget3.jpg"
+    }, {
+      agentImg: "img/banner-itinerary/business1.jpg"
+    }, {
+      agentImg: "img/banner-itinerary/luxury3.jpg"
+    }, {
+      agentImg: "img/banner-itinerary/friends3.jpg"
+    }, {
+      agentImg: "img/banner-itinerary/luxury3.jpg"
+    }];
+    $scope.agentPhotos = _.chunk($scope.agentPhotos, 4);
+    for (i = 0; i < $scope.agentPhotos.length; i++) {
+      $scope.agentPhotos[i] = _.chunk($scope.agentPhotos[i], 2);
+    }
+    $scope.index = -1;
+    $scope.putCaptionAgent = function (index) {
+      if ($scope.index == index) {
+        $scope.index = -1;
+      } else {
+        $scope.index = index;
+      }
+    }
+
+    //photo caption textarea counter
+    $scope.$on('$viewContentLoaded', function () {
+      $timeout(function () {
+        $('#captionArea').keyup(updateCount);
+        $('#captionArea').keydown(updateCount);
+        $('#remainCaption').text(0 + '/150');
+
+        function updateCount() {
+          var count = $('#captionArea').val().length;
+          $('#remainCaption').text(count + '/150');
+        }
+      }, 200);
+    });
+    //photo caption textarea counter end
+    // agent add photo edit end
+    // gallery card end
+
+    //gallery filter list
+    $scope.picFilterList = ['India', 'Malaysia', 'Singapore', 'Dubai', 'London', 'USA', 'Abu Dhabi', 'Kenya', 'South Africa', 'Cuba', 'Cambodia', 'China', 'England', 'Russia', 'Kazakhstan', 'Iran', 'Iraq', 'Bolivia'];
+    //gallery filter list end
+
+    // testimonial card
+    $scope.testimonialreview = [{
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
+      usrprofileImgholder: 'img/default_Images_2.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and',
+      usrprofileImgholder: 'img/default_Images_2.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }, {
+      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, text ever since the 1500s,',
+      usrprofileImgholder: 'img/default_Images_2.jpg',
+      usrName: 'Randy & Victoria',
+      usrLoc: 'New-York, USA',
+      usrRating: '9'
+    }];
+    // testimonial card end
+
+    // travel activity json
+    $scope.travelActivity = [{
+      header: true,
+      footer: true,
+      agentHeader: true,
+      travellerAgent: true,
+      agentName: "Holiday Travallers",
+      agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
+      travellerProfile: "img/default_Images_2.jpg",
+      travelDate: "26 dec, 2016",
+      travelTime: "1:20pm"
+    }, {
+      header: false,
+      footer: false,
+      tourPackage: true,
+      packageType: "Adventure",
+      packageImg: "img/kindofjourney/white-adventure.png",
+      tourFlag: [{
+        flagImg: "img/default_Images_2.jpg"
+      }],
+      tourTitle: "Love in Paris",
+      tourCost: "25000",
+      tourNight: "4",
+      tourDay: "5",
+      tourPic: "img/banner-itinerary/friends1.jpg",
+      tourDate: "26 dec, 2016",
+      tourTime: "1:20pm"
+    }, {
+      header: true,
+      footer: true,
+      itineraryHeader: true,
+      itinerary: true,
+      itineraryDate: "26 Dec, 2016",
+      itineraryTime: "1:20 pm",
+      itineraryCat: "img/kindofjourney/white-adventure.png",
+      itineraryPic: "img/banner-itinerary/friends1.jpg",
+      itineraryTitle: "Love In Paris",
+      itineraryCost: "25000",
+      itineraryDays: "75",
+      itineraryFlag: [{
+        itineraryImg: "img/default_Images_2.jpg"
+      }, {
+        itineraryImg: "img/default_Images_2.jpg"
+      }],
+      itineraryJourney: ['Adventure']
+    }, {
+      header: true,
+      footer: true,
+      agentHeader: true,
+      travellerAgent: true,
+      agentName: "Holiday Travallers",
+      agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
+      travellerProfile: "img/default_Images_2.jpg",
+      travelDate: "26 dec, 2016",
+      travelTime: "1:20pm"
+    }, {
+      header: true,
+      footer: true,
+      itineraryHeader: true,
+      itinerary: true,
+      itineraryDate: "26 Dec, 2016",
+      itineraryTime: "1:20 pm",
+      itineraryCat: "img/kindofjourney/white-adventure.png",
+      itineraryPic: "img/banner-itinerary/friends1.jpg",
+      itineraryTitle: "Love In Paris",
+      itineraryCost: "25000",
+      itineraryDays: "75",
+      itineraryFlag: [{
+        itineraryImg: "img/default_Images_2.jpg"
+      }],
+      itineraryJourney: ['Adventure']
+    }, {
+      header: false,
+      footer: false,
+      tourPackage: true,
+      packageType: "Adventure",
+      packageImg: "img/kindofjourney/white-adventure.png",
+      tourFlag: [{
+        flagImg: "img/default_Images_2.jpg"
+      }],
+      tourTitle: "Love in Paris",
+      tourCost: "25000",
+      tourNight: "4",
+      tourDay: "5",
+      tourPic: "img/banner-itinerary/friends1.jpg",
+      tourDate: "26 dec, 2016",
+      tourTime: "1:20pm"
+    }, {
+      header: false,
+      footer: false,
+      tourPackage: true,
+      packageType: "Adventure",
+      packageImg: "img/kindofjourney/white-romance.png",
+      tourFlag: [{
+        flagImg: "img/default_Images_2.jpg"
+      }, {
+        flagImg: "img/default_Images_2.jpg"
+      }],
+      tourTitle: "Love in Paris",
+      tourCost: "25000",
+      tourNight: "4",
+      tourDay: "5",
+      tourPic: "img/banner-itinerary/friends1.jpg",
+      tourDate: "26 dec, 2016",
+      tourTime: "1:20pm"
+    }];
+    // travel activity json end
+
+    //lead monitor accordion
+    $scope.leadMonAgent = [{
+      leadStatus: 'new',
+      leadImg: 'img/default_Images_2.jpg',
+      leadName: 'Andrea Christina',
+      leadDate: '02/12/2016',
+      leadDestination: 'India',
+      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+      leadPhone: '91961845656',
+      leadMail: 'leads@leads.com',
+      leadItinerary: 'Incredible India'
+    }, {
+      leadStatus: 'actioned',
+      leadImg: 'img/default_Images_2.jpg',
+      leadName: 'Andrea Christina',
+      leadDate: '02/12/2016',
+      leadDestination: 'India',
+      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+      leadPhone: '91961845656',
+      leadMail: 'leads@leads.com',
+      leadItinerary: 'Incredible India'
+    }, {
+      leadStatus: 'new',
+      leadImg: 'img/default_Images_2.jpg',
+      leadName: 'Andrea Christina',
+      leadDate: '02/12/2016',
+      leadDestination: 'India',
+      leadComment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+      leadPhone: '91961845656',
+      leadMail: 'leads@leads.com',
+      leadItinerary: 'Incredible India'
+    }];
+    //lead monitor accordion end
 
     // category type
     $scope.categoryType = [{
@@ -13105,254 +12383,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
     // category type end
 
-    // itinerary popover
-    $scope.viewdetailInfo = false;
-    $scope.showdetailInfo = function () {
-      if ($scope.viewdetailInfo == false) {
-        $scope.viewdetailInfo = true;
-        console.log("true");
-      } else {
-        $scope.viewdetailInfo = false;
-      }
-    };
-
-    $scope.viewquickInfo = false;
-    $scope.showquickInfo = function () {
-      if ($scope.viewquickInfo == false) {
-        $scope.viewquickInfo = true;
-      } else {
-        $scope.viewquickInfo = false;
-      }
-    };
-    // itinerary popover end
-
-    //user itinerary cards
-    $scope.usrItineraryCard = [{
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '35000',
-      noDays: '55',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '1505',
-      agtRating: '3.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '15 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '75000',
-      noDays: '15',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '342',
-      agtRating: '4.0',
-      agtLikesCount: '199',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      timestampDate: '26 Jan, 2015',
-      timestampHour: '1:20 pm',
-      tripImg: 'img/paris.jpg',
-      itineraryTitle: 'Love In Paris',
-      tripCost: '25000',
-      noDays: '75',
-      tripCat: ['img/sunset.png', 'img/bag-journey.png', 'img/luxury-journey.png'],
-      agtReviewCount: '352',
-      agtRating: '4.5',
-      agtLikesCount: '99',
-      countryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }];
-    //user itinerary cards end
-
-    // tour packages card
-    $scope.usrTourPackageCard = [{
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryTitle: 'Adventure',
-      tourcategoryImg: 'img/agt-cat1.png',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat5.png',
-      tourcategoryTitle: 'Backpacking',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat4.png',
-      tourcategoryTitle: 'Romance',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat9.png',
-      tourcategoryTitle: 'Friends',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat1.png',
-      tourcategoryTitle: 'Adventure',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat7.png',
-      tourcategoryTitle: 'Luxury',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat1.png',
-      tourcategoryTitle: 'Adventure',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }, {
-      tourImg: 'img/paris.jpg',
-      agttourTitle: 'Love In Paris',
-      agttourCost: '25000',
-      tourDayC: '4',
-      tourNightC: '3',
-      tourcategoryImg: 'img/agt-cat4.png',
-      tourcategoryTitle: 'Romance',
-      tourDate: '26 Dec, 2016',
-      tourTime: '1.20 pm',
-      tourcountryBadgesFlag: ['img/england-visit.png', 'img/canada-visit.png', 'img/india-visit.png']
-    }];
-    // tour packages card end
-
     // category of Specialisation array
     $scope.categoriesSpecial = [{
-      tourImgCat: "img/agt-cat1.png",
+      tourImgCat: "img/kindofjourney/white-adventure.png",
       catwidth: "25px",
       tourCat: "Adventure"
     }, {
-      tourImgCat: "img/agt-cat2.png",
+      tourImgCat: "img/kindofjourney/white-business.png",
       catwidth: "25px",
       tourCat: "Business"
     }, {
-      tourImgCat: "img/agt-cat3.png",
+      tourImgCat: "img/kindofjourney/white-family.png",
       catwidth: "33px",
       tourCat: "Family"
     }, {
-      tourImgCat: "img/agt-cat4.png",
+      tourImgCat: "img/kindofjourney/white-romance.png",
       catwidth: "28px",
       tourCat: "Romance"
     }, {
-      tourImgCat: "img/agt-cat5.png",
+      tourImgCat: "img/kindofjourney/white-backpacking.png",
       catwidth: "25px",
       tourCat: "Backpacking"
     }, {
-      tourImgCat: "img/agt-cat6.png",
+      tourImgCat: "img/kindofjourney/white-budget.png",
       catwidth: "24px",
       tourCat: "Budget"
     }, {
-      tourImgCat: "img/agt-cat7.png",
+      tourImgCat: "img/kindofjourney/white-luxury.png",
       catwidth: "22px",
       tourCat: "Luxury"
     }, {
-      tourImgCat: "img/agt-cat8.png",
+      tourImgCat: "img/kindofjourney/white-religious.png",
       catwidth: "28px",
       tourCat: "Religious"
     }, {
-      tourImgCat: "img/agt-cat9.png",
+      tourImgCat: "img/kindofjourney/white-friends.png",
       catwidth: "25px",
       tourCat: "Friends"
     }];
@@ -13383,228 +12448,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
     //tourCurrency end
 
-    // gallery card
-    $scope.agenPhotogallery = [
-      'img/uploaded-pic.jpg',
-      'img/slider2.jpg',
-      'img/moment-travel1.jpg',
-      'img/moment-travel2.jpg',
-      'img/local-life-post.jpg',
-      'img/destination/goldentemple.jpg',
-      'img/destination/list1.jpg',
-      'img/destination/list2.jpg',
-      'img/destination/info.jpg',
-      'img/destination/taj-featured.jpg',
-      'img/itinerary/itinerary.jpg',
-      'img/india-gate.jpg',
-      'img/notify-adrena.jpg',
-      'img/paris.jpg',
-      'img/bg-popular.jpg',
-      'img/bg-blur.jpg',
-      'img/blog-banner.jpg',
-      'img/follower.jpg'
-    ];
-    // gallery card end
-
-    //gallery filter list
-    $scope.picFilterList = ['India', 'Malaysia', 'Singapore', 'Dubai', 'London', 'USA', 'Abu Dhabi', 'Kenya', 'South Africa', 'Cuba', 'Cambodia', 'China', 'England', 'Russia', 'Kazakhstan', 'Iran', 'Iraq', 'Bolivia'];
-    //gallery filter list end
-
-    // testimonial card
-    $scope.testimonialreview = [{
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text evers,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }, {
-      testimonialQuote: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      usrprofileImgholder: '../img/adrena.jpg',
-      usrName: 'Randy & Victoria',
-      usrLoc: 'New-York, USA',
-      usrRating: '9'
-    }];
-    // testimonial card end
-
-
-
-    // travel activity json
-    $scope.travelActivity = [{
-      header: true,
-      footer: true,
-      agentHeader: true,
-      travellerAgent: true,
-      agentName: "Holiday Travallers",
-      agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
-      travellerProfile: "img/profile-main.png",
-      travelDate: "26 dec, 2016",
-      travelTime: "1:20pm"
-    }, {
-      header: false,
-      footer: false,
-      tourPackage: true,
-      packageType: "Adventure",
-      packageImg: "img/agt-cat1.png",
-      tourFlag: [{
-        flagImg: "img/canada-visit.png"
-      }, {
-        flagImg: "img/england-visit.png"
-      }, {
-        flagImg: "img/india-visit.png"
-      }],
-      tourTitle: "Love in Paris",
-      tourCost: "25000",
-      tourNight: "4",
-      tourDay: "5",
-      tourPic: "img/paris.jpg",
-      tourDate: "26 dec, 2016",
-      tourTime: "1:20pm"
-    }, {
-      header: true,
-      footer: true,
-      itineraryHeader: true,
-      itinerary: true,
-      itineraryDate: "26 Dec, 2016",
-      itineraryTime: "1:20 pm",
-      itineraryCat: "img/agt-cat1.png",
-      itineraryPic: "img/paris.jpg",
-      itineraryTitle: "Love In Paris",
-      itineraryCost: "25000",
-      itineraryDays: "75",
-      itineraryFlag: [{
-        itineraryImg: "img/canada-visit.png"
-      }, {
-        itineraryImg: "img/england-visit.png"
-      }, {
-        itineraryImg: "img/india-visit.png"
-      }],
-      itineraryJourney: [{
-        journeyImg: "img/sunset.png"
-      }, {
-        journeyImg: "img/bag-journey.png"
-      }, {
-        journeyImg: "img/luxury-journey.png"
-      }]
-    }, {
-      header: true,
-      footer: true,
-      agentHeader: true,
-      travellerAgent: true,
-      agentName: "Holiday Travallers",
-      agentPost: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit error dolore, deleniti hic placeat debitis aperiam aliquid blanditiis autem voluptates libero veritatis excepturi ex corporis deserunt commodi. Aliquid, dolores, asperiores?",
-      travellerProfile: "img/profile-main.png",
-      travelDate: "26 dec, 2016",
-      travelTime: "1:20pm"
-    }, {
-      header: true,
-      footer: true,
-      itineraryHeader: true,
-      itinerary: true,
-      itineraryDate: "26 Dec, 2016",
-      itineraryTime: "1:20 pm",
-      itineraryCat: "img/agt-cat1.png",
-      itineraryPic: "img/paris.jpg",
-      itineraryTitle: "Love In Paris",
-      itineraryCost: "25000",
-      itineraryDays: "75",
-      itineraryFlag: [{
-        itineraryImg: "img/canada-visit.png"
-      }, {
-        itineraryImg: "img/england-visit.png"
-      }, {
-        itineraryImg: "img/india-visit.png"
-      }],
-      itineraryJourney: [{
-        journeyImg: "img/sunset.png"
-      }, {
-        journeyImg: "img/bag-journey.png"
-      }, {
-        journeyImg: "img/luxury-journey.png"
-      }]
-    }, {
-      header: false,
-      footer: false,
-      tourPackage: true,
-      packageType: "Adventure",
-      packageImg: "img/agt-cat1.png",
-      tourFlag: [{
-        flagImg: "img/canada-visit.png"
-      }, {
-        flagImg: "img/england-visit.png"
-      }, {
-        flagImg: "img/india-visit.png"
-      }],
-      tourTitle: "Love in Paris",
-      tourCost: "25000",
-      tourNight: "4",
-      tourDay: "5",
-      tourPic: "img/paris.jpg",
-      tourDate: "26 dec, 2016",
-      tourTime: "1:20pm"
-    }, {
-      header: false,
-      footer: false,
-      tourPackage: true,
-      packageType: "Adventure",
-      packageImg: "img/agt-cat1.png",
-      tourFlag: [{
-        flagImg: "img/canada-visit.png"
-      }, {
-        flagImg: "img/england-visit.png"
-      }, {
-        flagImg: "img/india-visit.png"
-      }],
-      tourTitle: "Love in Paris",
-      tourCost: "25000",
-      tourNight: "4",
-      tourDay: "5",
-      tourPic: "img/paris.jpg",
-      tourDate: "26 dec, 2016",
-      tourTime: "1:20pm"
-    }];
-    // travel activity json end
+    // ANALYTICS LEAD FILTER
+    // MONTH FILTER JSON
+    $scope.leadmonth = [
+      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    // MONTH FILTER JSON END
+    // MONTH FILTER JSON
+    $scope.leadyear = [
+      '2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010'];
+    // MONTH FILTER JSON END
+    // ANALYTICS LEAD FILTER END
+    // PROFILE VIIEWS JSON
+    $scope.followingList =[
+      {
+        profilePicture: 'img/default_Images_2.jpg',
+        name: 'Changu Mangu'
+      },{
+        profilePicture: 'img/default_Images_2.jpg',
+        name: 'Anwar Hatela'
+      },{
+        profilePicture: 'img/default_Images_2.jpg',
+        name: 'John Snow'
+      }
+    ]
+    // PROFILE VIIEWS JSON END
   })
 
   .controller('MessageCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
@@ -13926,138 +12793,141 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var makeNotifyString = function () {
       _.each($scope.notificationCard, function (notification) {
         switch (notification.type) {
+          case 'userWelcome':
+            notification.notifyString = '<span class="text-justify"><span class="block color-blue avenir-heavy">Welcome to TraveLibro!</span>TraveLibro lets you capture your travel journeys live, local life activities and document past journeys. It also allows you to share these activities with other travellers to inspire their wanderlust. Lastly, its a great way to archive your personal history by reliving your moments, activities and reviews.</span>'
+            break;
           case 'journeyRequest':
             if (notification.userFrom.gender == 'male') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> wants to tag you in his <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> wants to tag you in his <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> wants to tag you in her <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> wants to tag you in her <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             }
             break;
           case 'journeyLeft':
             if (notification.userFrom.gender == 'male') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has ended his <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="avenir-heavy color-pink text-capitalize">' + notification.data.name + '</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has ended his <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="avenir-heavy color-pink text-capitalize">' + notification.data.name + '</span>';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has ended her <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="avenir-heavy color-pink text-capitalize">' + notification.data.name + '</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has ended her <span class="avenir-heavy color-blue">On The Go Journey</span> - ' + '<span class="avenir-heavy color-pink text-capitalize">' + notification.data.name + '</span>';
             }
             break;
           case 'postLike':
             if (notification.data.type == 'travel-life') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked your <span class="avenir-heavy color-blue">On The Go Activity</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has liked your <span class="avenir-heavy color-blue">On The Go Activity</span>';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked your <span class="avenir-heavy color-blue">Local Life Activity</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has liked your <span class="avenir-heavy color-blue">Local Life Activity</span>';
             }
             break;
           case 'postFirstTime':
             if (notification.data.type == 'travel-life') {
               if (notification.userFrom.gender == 'male') {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to his <span class="avenir-heavy color-blue">On The Go Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has added a post to his <span class="avenir-heavy color-blue">On The Go Activity</span>';
               } else {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to her <span class="avenir-heavy color-blue">On The Go Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has added a post to her <span class="avenir-heavy color-blue">On The Go Activity</span>';
               }
             } else {
               if (notification.userFrom.gender == 'male') {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to his <span class="avenir-heavy color-blue"> Local Life </span> for the first time.';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has added a post to his <span class="avenir-heavy color-blue"> Local Life </span> for the first time.';
               } else {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a post to her <span class="avenir-heavy color-blue"> Local Life </span> for the first time.';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has added a post to her <span class="avenir-heavy color-blue"> Local Life </span> for the first time.';
               }
             }
             break;
           case 'postComment':
             if (notification.data.type == 'travel-life') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has commented on your <span class="avenir-heavy color-blue">On The Go Activity</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has commented on your <span class="avenir-heavy color-blue">On The Go Activity</span>';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has commented on your <span class="avenir-heavy color-blue">Local Life Activity</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has commented on your <span class="avenir-heavy color-blue">Local Life Activity</span>';
             }
             break;
           case 'postMentionComment':
             if (notification.data.type == 'travel-life') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has mentioned you in a comment';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has mentioned you in a comment';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has mentioned you in a comment';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has mentioned you in a comment';
             }
             break;
           case 'postTag':
             if (notification.data.type == 'travel-life') {
               if (notification.data.videos.length > 0) {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a video of you\'ll to the <span class="avenir-heavy color-blue">On The Go Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has added a video of you\'ll to the <span class="avenir-heavy color-blue">On The Go Activity</span>';
               } else if (notification.data.videos.length == 0 && notification.data.photos.length > 0) {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added photos to the <span class="avenir-heavy color-blue">On The Go Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has added photos to the <span class="avenir-heavy color-blue">On The Go Activity</span>';
               } else if (notification.data.videos.length == 0 && notification.data.photos.length == 0 && notification.data.checkIn.lat !== '') {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has checked-in with you in an <span class="avenir-heavy color-blue">On The Go Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has checked-in with you in an <span class="avenir-heavy color-blue">On The Go Activity</span>';
               } else if (notification.data.videos.length == 0 && notification.data.photos.length == 0 && notification.data.checkIn.lat == '' && notification.data.thoughts !== '') {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has tagged you in thought in an <span class="avenir-heavy color-blue">On The Go Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has tagged you in thought in an <span class="avenir-heavy color-blue">On The Go Activity</span>';
               }
             } else {
               if (notification.data.videos.length > 0) {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added a video of you\'ll to a <span class="avenir-heavy color-blue">Local Life Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has added a video of you\'ll to a <span class="avenir-heavy color-blue">Local Life Activity</span>';
               } else if (notification.data.videos.length == 0 && notification.data.photos.length > 0) {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has added photos to a <span class="avenir-heavy color-blue">Local Life Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has added photos to a <span class="avenir-heavy color-blue">Local Life Activity</span>';
               } else if (notification.data.videos.length == 0 && notification.data.photos.length == 0 && notification.data.checkIn.lat !== '') {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has checked-in with you in a <span class="avenir-heavy color-blue">Local Life Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has checked-in with you in a <span class="avenir-heavy color-blue">Local Life Activity</span>';
               } else if (notification.data.videos.length == 0 && notification.data.photos.length == 0 && notification.data.checkIn == '' && notification.data.thoughts !== '') {
-                notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has tagged you in thought in a <span class="avenir-heavy color-blue">Local Life Activity</span>';
+                notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has tagged you in thought in a <span class="avenir-heavy color-blue">Local Life Activity</span>';
               }
             }
             break;
           case 'itineraryRequest':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has tagged you in an Itinerary - ' + '<span class="avenir-heavy color-blue text-capitalize">' + notification.data.name + '</span>';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has tagged you in an Itinerary - ' + '<span class="avenir-heavy color-blue text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'itineraryComment':
             notification.notifyString = '<span class="color-blue avenir-heavy">' + notification.userFrom.name + '</span> has commented on the Itinerary - ' + '<span class= "color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'itineraryLike':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked the Itinerary - <span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has liked the Itinerary - <span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'itineraryMentionComment':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has mentioned you in a comment on the Ititnerary - <span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has mentioned you in a comment on the Ititnerary - <span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'journeyComment':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has commented on the <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has commented on the <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'journeyLike':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked the <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has liked the <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'journeyMentionComment':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has mentioned you in a comment on the  <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="avenir-heavy color-pink text-capitalize">' + notification.data.name + '</span>';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has mentioned you in a comment on the  <span class="avenir-heavy color-blue">On Go Journey</span> - <span class="avenir-heavy color-pink text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'userFollowing':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has started following you.';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has started following you.';
             break;
           case 'userFollowingRequest':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has requested to follow your travel and local activities.';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has requested to follow your travel and local activities.';
             break;
           case 'userFollowingResponse':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has accepted your follow request.';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has accepted your follow request.';
             break;
           case 'photoComment':
             if (notification.data.type == 'travel-life') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has commented on a photo in your <span class="avenir-heavy color-blue">On The Go Activity</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has commented on a photo in your <span class="avenir-heavy color-blue">On The Go Activity</span>';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has commented on a photo in your <span class="avenir-heavy color-blue">Local Life Activity</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has commented on a photo in your <span class="avenir-heavy color-blue">Local Life Activity</span>';
             }
             break;
           case 'photoMentionComment':
             if (notification.data.type == 'travel-life') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has mentioned you in a comment';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has mentioned you in a comment';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has mentioned you in a comment';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has mentioned you in a comment';
             }
             break;
           case 'photoLike':
             if (notification.data.type == 'travel-life') {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked a photo in your <span class="avenir-heavy color-blue">On The Go Activity</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has liked a photo in your <span class="avenir-heavy color-blue">On The Go Activity</span>';
             } else {
-              notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has liked a photo in your <span class= "avenir-heavy color-blue">Local Life Activity</span>';
+              notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has liked a photo in your <span class= "avenir-heavy color-blue">Local Life Activity</span>';
             }
             break;
           case 'userBadge':
             notification.notifyString = 'Congratulations! You have moved from <span class="avenir-heavy color-blue">' + notification.data.from + '</span> to <span class="avenir-heavy color-blue">' + notification.data.to + '</span> . <br>Hope you enjoy your status and grow in your journeys.';
             break;
           case 'journeyAccept':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has accepted your request to join the <span class="avenir-heavy color-blue">On The Go Activity</span> -<span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has accepted your request to join the <span class="avenir-heavy color-blue">On The Go Activity</span> -<span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           case 'journeyReject':
-            notification.notifyString = '<span class="avenir-heavy color-blue">' + notification.userFrom.name + '</span> has rejected your request to join the <span class="avenir-heavy color-blue">On Go Activity</span> -' + '<span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
+            notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has rejected your request to join the <span class="avenir-heavy color-blue">On Go Activity</span> -' + '<span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
             break;
           default:
             break;
@@ -14072,10 +12942,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //update notifiction status end
     // PAGINATION FOR INFINITE SCROLL
     $scope.getNotification = function (pageNo) {
-      $scope.notifyScroll.busy = false;
       NavigationService.notificationWeb({
         pagenumber: pageNo
       }, function (data) {
+        $scope.notifyScroll.busy = false;
         if (data.data.length == 0) {
           $scope.notifyScroll.stopCallingApi = true;
         } else {
@@ -14094,10 +12964,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.getNotification($scope.pageNo);
 
     $scope.loadMoreNotification = function () {
-      $scope.pageNo++;
       $scope.notifyScroll.busy = true;
       if ($scope.notifyScroll.stopCallingApi == false) {
-        $scope.getNotification($scope.pageNo);
+        $scope.getNotification(++$scope.pageNo);
+        console.log($scope.pageNo, 'pagenumber');
       };
     }
     // PAGINATION FOR INFINITE SCROLL END
@@ -14201,12 +13071,51 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
 
+    // REDIRECT PHOTOS
+    $scope.redirectPhotoPost = function (obj) {
+      updateNotificationStatus(obj._id, function (data) {
+        if (data.value) {
+          $state.go('single-notification', {
+            "postId": obj.data.post,
+            "urlSlug": obj.userFrom.urlSlug
+          });
+        }
+      });
+    }
+    // REDIRECT PHOTOS END
+
+    // route to on go journey
+    $scope.routeOngo = function (notifyOb) {
+      $state.go('ongojourney', {
+        'id': notifyOb.data.urlSlug,
+        'urlSlug': notifyOb.userTo.urlSlug
+      });
+    }
+    // route to on go journey end
+
+    // route to itinerary
+    $scope.routeItinerary = function (notifyOb) {
+      console.log(notifyOb, 'user');
+      if (notifyOb.data.type == 'quick-itinerary') {
+        $state.go('userquickitinerary', {
+          'id': notifyOb.data.urlSlug,
+          'urlSlug': notifyOb.userTo.urlSlug
+        });
+      } else {
+        $state.go('userdetailitinerary', {
+          'id': notifyOb.data.urlSlug,
+          'urlSlug': notifyOb.userTo.urlSlug
+        });
+      }
+    }
+    // route to itinerary end
+
   })
 
   .controller('singleNotification', function ($scope, TemplateService, NavigationService, $timeout, $state, $stateParams, LikesAndComments) {
     $scope.template = TemplateService.changecontent("single-post"); //Use same name of .html file
     // $scope.menutitle = NavigationService.makeactive("single-notification"); //This is the Title of the Website
-    // TemplateService.title = $scope.menutitle;
+    TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     console.log($stateParams.postId);
 
@@ -14354,7 +13263,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // search profile page end
     // search itinerary
     $scope.searchIti = function (itinerary) {
-      if (itinerary.itineraryBy == "Admin" || itinerary.itineraryBy == "TravelAgent") {
+      if (itinerary.itineraryBy == "TravelAgent") {
         $state.go('comingsoonpage', {
           'url': 'coming-soon'
         })
@@ -14647,14 +13556,130 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var shareModal = "";
     $scope.sharePost = function (url) {
       $scope.shareUrl = url;
-      console.log($scope.shareUrl, 'share ka url');
-      shareModal = $uibModal.open({
-        animation: true,
-        templateUrl: "views/modal/sharing.html",
-        scope: $scope
-      });
+      if (!($.jStorage.get("isLoggedIn"))) {
+        $state.go('login');
+      } else {
+        shareModal = $uibModal.open({
+          animation: true,
+          templateUrl: "views/modal/sharing.html",
+          scope: $scope
+        });
+      }
     }
     // sharing local life modal end
+    // COMMENT LIKE SECTION FUNCTIONS
+    $scope.likeUnlikeActivity = function (post) {
+      console.log(post);
+      post.likeDone = !post.likeDone;
+      if (post.likeDone) {
+        if (post.likeCount == undefined) {
+          post.likeCount = 1;
+        } else {
+          post.likeCount = post.likeCount + 1;
+        }
+        LikesAndComments.likeUnlike(post.type, "like", post.uniqueId, post._id, null)
+      } else {
+        post.likeCount = post.likeCount - 1;
+        LikesAndComments.likeUnlike(post.type, "unlike", post.uniqueId, post._id, null)
+      }
+    };
+
+    $scope.getLikes = function (post) {
+      console.log(post);
+      LikesAndComments.getLikes(post.type, post._id, function (data) {
+        $scope.listOfLikes = data.data;
+        console.log($scope.listOfLikes);
+      });
+    };
+
+    $scope.listLikesDropDown = function (model) {
+      $timeout(function () {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+
+    $scope.getCommentsData = function (post) {
+      console.log(post);
+      $scope.previousId;
+      $scope.listOfLikes = [];
+      $scope.listOfComments = [];
+      $scope.post = post;
+      $scope.comment = {
+        "text": ""
+      }
+      var callback = function (data) {
+        $scope.uniqueArr = [];
+        $scope.listOfComments = data.data;
+        console.log($scope.listOfComments);
+
+        $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+      }
+      if ($scope.previousId != post._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfComments = [];
+        $scope.viewCardComment = true;
+        // $scope.journey.journeyHighLight = activity._id;
+        $scope.getCard = "view-whole-card";
+        LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+      } else {
+        if ($scope.viewCardComment) {
+          $scope.viewCardComment = false;
+          // $scope.journey.journeyHighLight = "";
+          $scope.getCard = "";
+          $scope.comment.text = "";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardComment = true;
+          // $scope.focus('enterComment');
+          // $scope.journey.journeyHighLight = activity._id;
+          $scope.getCard = "view-whole-card";
+          LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+        }
+      }
+      $scope.previousId = post._id;
+    };
+
+    $scope.getLikesData = function (post) {
+      var callback = function (data) {
+        $scope.listOfLikes = data.data;
+        console.log($scope.listOfLikes);
+      };
+      console.log($scope.post);
+      if ($scope.previousLikeId != post._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfLikes = [];
+        $scope.viewCardLike = true;
+        // $scope.journey.journeyHighLight = activity._id;
+        $scope.showLikeShow = "show-like-side-sec";
+        LikesAndComments.getLikes(post.type, post._id, callback);
+      } else {
+        if ($scope.viewCardLike) {
+          $scope.viewCardLike = false;
+          // $scope.journey.journeyHighLight = "";
+          $scope.getCard = "";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardLike = true;
+          // $scope.focus('enterComment');
+          // $scope.journey.journeyHighLight = activity._id;
+          $scope.showLikeShow = "show-like-side-sec";
+          LikesAndComments.getLikes(post.type, post._id, callback);
+        }
+      }
+      $scope.previousLikeId = post._id;
+    };
+
+    $scope.closeBackDrop = function () {
+      $scope.viewCardComment = false;
+      $scope.viewCardLike = false;
+      $scope.getCard = "";
+      $scope.listOfLikes = [];
+      $scope.listOfComments = [];
+    };
+
+    // COMMENT LIKE SECTION FUNCTIONS END
 
   })
 
@@ -14758,6 +13783,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   .controller('photoCommentModalCtrl', function ($scope, $uibModalInstance, LikesAndComments, $timeout) {
     $scope.index = -1;
+    $scope.indexDelete = -1;
     $scope.likePhoto = function (listOfComments, uniqueId, _id, additionalId) {
       // console.log(uniqueId, _id, additionalId);
       console.log(listOfComments);
@@ -14779,6 +13805,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.index = -1;
       } else {
         $scope.index = index;
+      }
+    };
+    $scope.showDeletePop = function (indexDelete) {
+      if ($scope.indexDelete == indexDelete) {
+        $scope.indexDelete = -1;
+      } else {
+        $scope.indexDelete = indexDelete;
       }
     };
     // edit comment
@@ -14983,6 +14016,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   .controller('commentLikeSectionCtrl', function ($scope, $timeout, $uibModal, LikesAndComments) {
     $scope.index = -1;
+    $scope.indexDelete = -1;
     $scope.likePost = function (uniqueId, _id) {
       console.log($scope.post.likeDone + "this call is from directive");
       $scope.post.likeDone = !$scope.post.likeDone;
@@ -15048,6 +14082,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.index = index;
       }
     };
+    $scope.showDeletePop = function (indexDelete) {
+      if ($scope.indexDelete == indexDelete) {
+        $scope.indexDelete = -1;
+      } else {
+        $scope.indexDelete = indexDelete;
+      }
+    };
     // edit comment
     $scope.editComment = function (commentId, commentText, commentType) {
       console.log($scope.listOfComments.comment, 'comment ka arrray');
@@ -15071,6 +14112,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           _.remove($scope.listOfComments.comment, function (list) {
             return list._id == commentId;
           })
+          $scope.indexDelete = -1;
           console.log($scope.listOfComments.comment, 'total nikla kya');
         }
       });

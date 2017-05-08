@@ -3,13 +3,13 @@
     <div class="img-holder-agent bg-agent-home-img" ng-if="agenthomeItinerary">
       <div class="agt-card-posi">
         <div class="agt-title-card get-center">
-          <div class="circ-agtimg">
-            <img src="img/adrena.jpg" alt="" class="img-responsive">
+          <div class="circ-agtimg pointer" ui-sref="agent-setting">
+            <img src="img/default_Images_2.jpg" alt="" class="img-responsive">
           </div>
-          <h4 class="font-bold">Lifestyle Holidays</h4>
-          <p>Mumbai, India</p>
-          <button class="btn btn-white-outline mr5">Edit </button>
-          <span><span class="font-bold"> 255 </span> Followers </span>
+          <h4 class="font-bold">{{userData.name}}</h4>
+          <p>{{userData.homeCity}}</p>
+          <button class="btn btn-white-outline mr5" ui-sref="agent-setting">Edit </button>
+          <span><span class="font-bold"> {{userData.followers_count}} </span> Followers </span>
         </div>
       </div>
     </div>
@@ -25,16 +25,26 @@
                 <li ng-click="getTab(2)" ng-class="{'active': agthomeoptions.active=='agthome-photovideos'}"> Photos & Videos</li>
                 <li ng-click="getTab(3)" ng-class="{'active': agthomeoptions.active=='agthome-testimonialreviews'}">Testimonials & Reviews</li>
                 <li ng-click="getTab(4)" ng-class="{'active': agthomeoptions.active=='agthome-travelactivity'}">My Activity</li>
+                <li ng-click="getTab(4)" ng-class="{'active': agthomeoptions.active=='agthome-travelactivity'}">Travel Activity</li>
                 <li ng-click="getTab(5)" ng-class="{'active': agthomeoptions.active=='agthome-leadmonitor'}">Lead Monitor</li>
-                <li ng-click="getTab(6)" ng-class="{'active': agthomeoptions.active=='agthome-analytics'}">Analytics</li>
+                <li ng-click="showOptions();" ng-class="{'active': agthomeoptions.active=='agthome-analytics'}" class="relate">Analytics
+                  <div class="analytics-dropoptions" ng-show="viewOption">
+                    <ul class="list-unstyled">
+                      <li ng-click="getAgentScroll('profileview');">Profile Views</li>
+                      <li ng-click="getAgentScroll('follower');">Followers</li>
+                      <li ng-click="getAgentScroll('leads');">Leads</li>
+                      <li ng-click="getAgentScroll('viewsdownload');">Views & Downloads</li>
+                    </ul>
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
           <div class="col-md-3 col-sm-3">
             <div class="mob-ml5">
               <ul class="list-inline pull-right mob-left">
-                <li ng-click="getTab(7)" ng-class="{'active': agthomeoptions.active=='agthome-aboutus'}">About Us</li>
-                <li ng-click="getTab(7)" ng-class="{'active': agthomeoptions.active=='agthome-aboutus'}">Speciality</li>
+                <li ng-click="getTab(7)" ng-class="{'active': agthomeoptions.active=='agthome-aboutus'}">About Us | Speciality </li>
+                <!-- <li ng-click="getTab(7)" ng-class="{'active': agthomeoptions.active=='agthome-aboutus'}">Speciality</li> -->
               </ul>
             </div>
           </div>
@@ -42,6 +52,93 @@
       </div>
     </div>
     <div class="agent-home-content" ng-include="agthome.innerView"></div>
+    <!-- Enquiry side tab -->
+    <div class="side-enquiry">
+      <div class="enquiry-sidetab" ng-show="viewEnquiry" ng-class="{'view-enquiry-list' : viewEnquiry ,  ' ' : !viewEnquiry}">
+        <div class="enquirytab-head">
+          <h4 class="avenir-roman color-blue">Enquire</h4>
+        </div>
+        <div class="user-enquireform">
+          <form>
+            <div class="form-group">
+              <div class="enquirytab-cmpny-inputholder">
+                <input type="text" class="form-control color-blue" placeholder="Travelling To">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="enquirytab-cmpny-inputholder">
+                <input type="text" class="form-control color-blue" placeholder="Name">
+                <div class="enquirytab-input-icon">
+                  <i class="fa fa-user color-grey"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5 col-sm-5">
+                <div class="form-group">
+                  <div class="enquirytab-cmpny-inputholder">
+                    <input type="tel" class="form-control color-blue" placeholder="Contact No">
+                    <div class="enquirytab-input-icon">
+                      <i class="fa fa-phone color-grey"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-7 col-sm-7">
+                <div class="form-group">
+                  <div class="enquirytab-cmpny-inputholder">
+                    <input type="email" class="form-control color-blue" placeholder="Email">
+                    <div class="enquirytab-input-icon">
+                      <i class="fa fa-envelope color-grey"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="enquirytab-cmpny-inputholder">
+                <textarea class="form-control color-blue" placeholder="Further Instructions"></textarea>
+              </div>
+            </div>
+
+            <div class="enquirebutton">
+              <button class="btn btn-pink btn-more"><i class="fa fa-share"></i> Send
+          </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+      <div class="enquirytab-btn" ng-click="showEnquiry();">
+        <a class="btn-transparent-dark-blue btn" ng-class="{'hide' : viewEnquiry}">Enquire</a>
+        <a class="btn-dark-blue btn close-size" ng-class="{'hide': !viewEnquiry}"><i class="fa fa-chevron-down mr5"></i> Close</a>
+      </div>
+    </div>
+    <!-- Enquiry side tab enD-->
+
+    <!-- Contact Us side tab -->
+    <div class="side-contact avenir-roman">
+      <div class="contact-sidetab" ng-show="viewContact" ng-class="{'view-contact-list' : viewContact ,  ' ' : !viewContact}">
+        <div class="contacttab-head">
+          <h4 class="avenir-heavy color-white">Contact</h4>
+        </div>
+        <div class="user-contactdetail">
+          <h4 class="color-cyan avenir-heavy"> Andrea Travels</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit saepe architecto officia asperiores quod atque delectus nostrum dolore.</p>
+          <p><i class="fa fa-phone"></i> <a href="tel:+910224567890"> 022 456 7890 </a> | <a href="tel:+910224567320"> 022 456 7320</a> | <a href="tel:+9102224569823"> 0222 456 9823</a></p>
+          <p><i class="fa fa-envelope"></i> <a href="mailto:info@andreatravels.com"> info@andreatravels.com</a></p>
+          <p><i class="fa fa-globe" aria-hidden="true"></i> <a href="http://www.andreatravels.com" target="_blank"> www.andreatravels.com</a></p>
+        </div>
+      </div>
+      <div class="contacttab-btn" ng-click="showContact();">
+        <a class="btn-transparent-dark-blue btn" ng-class="{'hide' : viewContact}">Contact Us</a>
+        <a class="btn-dark-blue btn close-size" ng-class="{'hide': !viewContact}"><i class="fa fa-chevron-down mr5"></i> Close</a>
+      </div>
+    </div>
+    <!-- Contact Us tab enD-->
   </div>
   <!-- modal on load -->
   <!-- modal button -->
@@ -58,7 +155,7 @@
         <div class="modal-body">
           <div class="agtmodal-title text-center">
             <div class="agtmodal-imgholder">
-              <img src="img/follower.jpg" alt="" class="img-responsive">
+              <img src="img/default_Images_2.jpg" alt="" class="img-responsive">
             </div>
             <h4 class="modal-title">Lifestyle Holidays</h4>
           </div>

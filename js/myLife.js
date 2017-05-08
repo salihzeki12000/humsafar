@@ -68,7 +68,9 @@ var mylife = angular.module('mylife', [])
             "urlSlug": urlSlug
           }
         }).success(function (data) {
-          callback(data.data);
+          if(data.value==true){
+            callback(data.data);
+          }
         }).error(function (data) {
           console.log(data);
         });

@@ -1,6 +1,5 @@
 <div class="second min-hght">
-
-<div class="container-fluid">
+<div class="container-fluid m-p0">
   <div class="destination-nav second destin-fixednav-country bg-grey">
     <div class="row">
         <div class="col-md-8 col-sm-8">
@@ -38,16 +37,16 @@
         </div>
     </div>
   </div>
-  <div class="destination-featured">
+  <div class="destination-featured m-p0">
     <div class="head-title-all pt20 bg-white">
       <!-- <h4 class="text-center fnt-22">Featured Cities</h4> -->
     </div>
       <div class="destination-holder bg-white plr30 pt20">
-        <div class="row">
-          <div class="col-md-4 col-sm-6" ng-repeat="feature in countryDestData.featuredCities ">
-            <div class="img-holder relate" ng-click="countryView(feature.urlSlug,dest.isCity)" style="background:url('{{feature.cityDisplayPhoto | uploadpath}}')">
+        <div class="row m-m0">
+          <div class="col-md-4 col-sm-6 m-plr0" ng-repeat="feature in countryDestData.featuredCities ">
+            <div class="img-holder relate" ng-click="countryView(feature.urlSlug,dest.isCity)" style="background:url('{{feature.cityDisplayPhoto | uploadpath}}') #a0a0a0">
               <!-- <img alt="travel-libro" ng-src="{{feature.cityCoverPhoto|uploadpath:400:400:'cover'}}" class="full-width"> -->
-              <h4 class="title-head-left color-white text-capitalize">
+              <h4 class="title-head-left country-featured-title color-white text-capitalize">
                 {{feature.name}}
               </h4>
               <div class="read-more left-bottom">

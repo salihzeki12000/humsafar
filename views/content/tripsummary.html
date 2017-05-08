@@ -6,10 +6,10 @@
         <!-- own journey -->
         <div class="own-journey">
           <div class="profile-info">
-            <div class="user-img-ongo">
-              <img src="{{userData.profilePicture | uploadpath:35:37:'cover'}}" alt="{{userData.name}}" class="img-responsive">
+            <div class="user-img-ongo" ui-sref="mylife({'urlSlug':trip.user.urlSlug})">
+              <img src="{{trip.user.profilePicture | uploadpath:35:37:'cover'}}" alt="{{userData.name}}" class="img-responsive">
             </div>
-            <h4 class="avenir-heavy color-white">{{userData.name}}</h4>
+            <h4 class="avenir-heavy color-white" ui-sref="mylife({'urlSlug':trip.user.urlSlug})">{{trip.user.name}}</h4>
           </div>
         </div>
         <!-- own journey end -->
@@ -60,7 +60,9 @@
         </div>
         <!-- trip list end-->
         <div class="btn-summary">
-          <button class="btn btn-white-outline avenir-heavy btn-trip" ui-sref="ongojourney({id:trip.urlSlug})">Back To Journey</button>
+          <button class="btn btn-white-outline avenir-heavy btn-trip"
+          ng-click="routeOngo(trip);">Back To Journey</button>
+          <!-- ui-sref="ongojourney({id:trip.urlSlug})" -->
         </div>
       </div>
       <div class="pull-right">
@@ -154,12 +156,12 @@
                 <span class="watch-day">DAY</span>
                 <span class="travel-day">{{checkIns.UTCModified|dateDifference: trip.startTime}}</span>
               </div>
-              <div class="trip-type-icon">
-                <!-- <img ng-src="{{trip.travelTypeIcon}}" alt="" class="img-responsive"> -->
+              <!-- <div class="trip-type-icon">
+                <img ng-src="{{trip.travelTypeIcon}}" alt="" class="img-responsive">
                 <img src="img/ongojourney/otg-location.png" alt="CheckIn" class="img-responsive">
-              </div>
+              </div> -->
               <div class="trip-status">
-                <span class="color-blue avenir-roman status" ng-bind-html="checkIns|postString:true"></span>
+                <span class="color-blue avenir-roman status" ng-bind-html="checkIns|postString:true| truncate:310"></span>
                 <span class="avenir-roman trip-photo-added pointer">{{trip.photoAdd}}</span>
                 <p class="avenir-roman trip-time-day"><i class="fa fa-calendar mr5"></i><span>{{checkIns.UTCModified|formatDate:"date"}}</span> | <i class="fa fa-clock-o mr5"></i><span>{{checkIns.UTCModified|formatDate:"time"}}</span></p>
               </div>

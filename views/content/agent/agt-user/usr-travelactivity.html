@@ -95,7 +95,49 @@
                     <span class="country-count">+4</span>
                   </div>
                   <img ng-src="{{activity.itineraryPic}}" alt="" class="img-responsive doneLoading">
-                  <div class="itinerary-imgfoot ">
+                  <!-- new -->
+                  <div class="journey-tag-holder">
+                    <div class="days-spent pull-right" ng-if="activity.itineraryDays>0">
+                      <p><span class="block">{{activity.itineraryDays}}</span>Days</p>
+                    </div>
+                    <h3 class="m-clear text-capitalize">{{activity.itineraryTitle}}</h3>
+
+                    <div class="clearfix journey-travelling-type">
+                      <div class="row">
+                        <div class="col-xs-5">
+                          <div class="pull-left">
+                            <div class="journey-type m0">
+                              <ul>
+                                <li ng-repeat="type in activity.itineraryJourney|limitTo:3">
+                                  <a href=""><img ng-src="{{type|kindOfJourney:'white'}}" alt="" height="20"></a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xs-7">
+                          <div class="" ng-if="activity.itinerarytype=='quick-itinerary'">
+                            <div class="quick-itinerary-tag">
+                              <h4>Quick</h4>
+                              <p>Itinerary</p>
+                            </div>
+                            <div class="date-quick-itinerary">
+                              {{activity.month}} {{activity.year}}
+                            </div>
+                          </div>
+                          <div class="text-right">
+                            <div class="journey-cost" ng-if="activity.itineraryCost!=''">
+                              <span>$</span>
+                              <span>{{activity.itineraryCost | number}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- new -->
+                  <!-- old -->
+                  <!-- <div class="itinerary-imgfoot ">
                     <div class="imgfoot-top">
                       <h4 class="ng-binding avenir-heavy m-clear">{{activity.itineraryTitle}}</h4>
                     </div>
@@ -120,7 +162,8 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
+                  <!-- old -->
                 </div>
               </div>
               <!-- itinerary activity card end -->

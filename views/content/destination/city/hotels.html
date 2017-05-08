@@ -1,17 +1,19 @@
-<div class="container-fluid">
+<div class="container-fluid m-p0">
   <div class="min-hght">
     <div class="relate" ng-class="{'openfilter': isopenfilter}">
       <div class="pt10 pb10 head-title-all">
         <div class="row m-clear">
-          <div class="col-md-3">
+          <div class="col-md-3 col-sm-3 col-xs-2">
             <div class="btn-destinationfilter">
-              <button class="btn btn-pink" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i> Filter
+              <button class="btn btn-pink" ng-click="openFilter()">
+              <i class="fa fa-filter" aria-hidden="true"></i> 
+              <span class="hidden-xs">Filter</span>
           </button>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-6 col-xs-10">
             <h4 class="text-center fnt-24 color-white">TraveLibro Recommended Hotels</h4>
-            <p class="text-center avenir-roman m-clear"><span class="pr20">$$$ - Luxury</span> <span class="pr20">$$ - Mid Range    </span> <span>$ - Place To Crash</span></p>
+            <p class="text-center avenir-roman m-clear m-white"><span class="pr20">$$$ - Luxury</span> <span class="pr20">$$ - Mid Range    </span> <span>$ - Place To Crash</span></p>
           </div>
         </div>
       </div>
@@ -19,7 +21,8 @@
       <div class="libro-filter filterclose">
         <form>
           <div class="pt20 pb10 head-title-all bg-white">
-            <div class="pad-btn">
+            <div class="pad-btn m-p0">
+              <div class="container-fluid">
               <div class="row">
                 <div class="col-md-3 col-sm-3">
                   <div class="select-all-made destination-filterscroll" ng-init="viewHotelcity={'outerClass':'outerHotelCity','innerClass':'innerHotelCity'}">
@@ -29,8 +32,8 @@
                       <ul>
                         <li ng-repeat="category in cityDestData.subType track by $index">
                           <div class="custom-checkbox">
-                            <input type="checkbox" id="{{category}}" ng-click="cityHotelFilter(category,'categoryType')">
-                            <label for="{{category}}" class="avenir-roman">{{category}}</label>
+                            <input type="checkbox" id="{{category.name}}" value="{{category.checked}}" ng-model="category.checked" ng-click="cityHotelFilter(category,'categoryType')">
+                            <label for="{{category.name}}" class="avenir-roman">{{category.name}}</label>
                           </div>
                         </li>
                       </ul>
@@ -39,25 +42,13 @@
                 </div>
                 <div class="col-md-3 col-sm-3">
                   <div class="select-all-made destination-filterscroll" ng-init="viewHotelBudget={'outerClass':'outerHotelBudget','innerClass':'innerHotelBudget'}">
-                    <input type="text" class="form-control outerHotelBudget" placeholder="Budget" ng-model="cityHotelBudget" ng-click="editOption(viewHotelBudget,'outerHotelBudget','innerHotelBudget')">
-                    <div class="destination-filterdrop innerHotelBudget" ng-show="viewHotelBudget.backgroundClick ">
+                    <input type="text" class="form-control outerHotelBudget" placeholder="Budget"  ng-click="editOption(viewHotelBudget,'outerHotelBudget','innerHotelBudget')">
+                    <div class="destination-filterdrop innerHotelBudget" ng-show="viewHotelBudget.backgroundClick;">
                       <ul>
-                        <li>
+                        <li ng-repeat="budHotel in hotelBudget track by $index">
                           <div class="custom-checkbox">
-                            <input type="checkbox" id="three-budget" ng-click="cityHotelFilter('$$$','categoryBudget')">
-                            <label for="three-budget">$$$</label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="custom-checkbox">
-                            <input type="checkbox" id="two-budget" ng-click="cityHotelFilter('$$','categoryBudget')">
-                            <label for="two-budget">$$</label>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="custom-checkbox">
-                            <input type="checkbox" id="one-budget" ng-click="cityHotelFilter('$','categoryBudget')">
-                            <label for="one-budget">$</label>
+                            <input type="checkbox" id="{{budHotel.id}}" ng-model="budHotel.checked" ng-click="cityHotelFilter(budHotel,'categoryBudget')" value="{{budHotel.checked}}">
+                            <label for="{{budHotel.id}}" class="avenir-roman">{{budHotel.name}}</label>
                           </div>
                         </li>
                       </ul>
@@ -66,30 +57,32 @@
                 </div>
                 <div class="col-md-6 col-sm-5">
                   <div class="txt-clear text-right ">
-                    <a>Clear All</a>
+                    <a ng-click="clearHotel();">Clear All</a>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="pt10 pb10 head-title-all bg-grey mb20 ">
-            <div class="plr30 ">
-              <div class="close-all ">
-                <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
-                <a class="btn btn-pink avenir-roman " ng-click="getCityInfo('hotel',urlDestinationCity)">Submit</a>
+              <div class="pt10 pb10 head-title-all bg-grey mb20 ">
+                <div class="plr30 m-p0">
+                  <div class="close-all">
+                    <a class="btn btn-pink avenir-roman" ng-click="openFilter() ">X Close</a>
+                    <a class="btn btn-pink avenir-roman" ng-click="getCityInfo('hotel',urlDestinationCity)">Submit</a>
 
-                <span class="tags avenir-roman" ng-repeat="item in citySubTypeData track by $index">{{item | capitalize}} <span ng-click="cityHotelFilter(item,'categoryType')">X</span></span>
-                <span class="tags avenir-roman" ng-repeat="item in cityBudgetData track by $index">{{item | capitalize}} <span ng-click="">X</span></span>
+                    <span class="tags avenir-roman" ng-repeat="item in citySubTypeData track by $index">{{item.name | capitalize}} <span ng-click="cityHotelFilter(item,'categoryType')">X</span></span>
+                    <span class="tags avenir-roman" ng-repeat="item in cityBudgetData track by $index">{{item.name | capitalize}} <span ng-click="cityHotelFilter(item,'categoryBudget')">X</span></span>
+                  </div>
+                </div>
+              </div>
               </div>
             </div>
           </div>
+
         </form>
       </div>
     </div>
-    <div class="destination-featured plr30">
+    <div class="destination-featured plr30 m-plr0">
       <div class="hotels">
-        <div class="row">
-          <div class="col-md-4 col-sm-6 col-xs-12 mb20" ng-repeat="hotels in cityDestData.hotel">
+        <div class="row m-m0">
+          <div class="col-md-4 col-sm-6 col-xs-12 m-p0 mb20" ng-repeat="hotels in cityDestData.hotel">
             <div class="hotel-card">
               <div class="brdbtm">
                 <div class="title-head-inside">

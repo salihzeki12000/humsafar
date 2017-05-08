@@ -1,8 +1,8 @@
 <div class="dest-btv">
-  <div class="container-fluid">
+  <div class="container-fluid m-plr0">
     <div class="plr30">
-      <div class="row">
-        <div class="col-lg-2 col-md-3 col-sm-3" ng-repeat="visit in countryDestData.bestTime track by $index">
+      <div class="row m-m0 mobile-row-customise">
+        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6 mobile-col-customise " ng-repeat="visit in countryDestData.bestTime track by $index">
           <div class="red-box common-box">
             <div class="head-btv text-center color-white fnt-22 relate">
               {{visit.month}}
@@ -16,7 +16,7 @@
             </div>
             <div class="cont-btv-white">
               <div class="row">
-                <div class="col-xs-6">
+                <div class="col-xs-6 ">
                   <div class="cont-btv">
                     <div class="img-holder-btv">
                       <img ng-src="{{visit.season|seasonType}}" alt="" class="img-responsive" />

@@ -2,15 +2,19 @@
   <div class="relate destin-fixednav1 fliter-min-hght" ng-class="{'openfilter': isopenfilter}">
     <div class="pt10 pb10 head-title-all bg-white mb20">
       <div class="row m-clear">
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-3 col-xs-2">
           <div class="pad-btn">
-            <button class="btn btn-pink" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i> Filter
+            <button class="btn btn-pink" ng-click="openFilter()">
+              <i class="fa fa-filter" aria-hidden="true"></i>  <span class="hidden-xs">Filter</span>
           </button>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6 col-xs-10">
           <h4 class="text-center fnt-24">TraveLibro Recommended Hotels</h4>
-          <p class="text-center avenir-roman m-clear"><span class="pr20">$$$ - Luxury</span> <span class="pr20">$$ - Mid Range    </span> <span>$ - Place To Crash</span></p>
+          <p class="text-center avenir-roman m-clear">
+            <span class="pr20">$$$ - Luxury</span>
+            <span class="pr20">$$ - Mid Range</span> 
+            <span>$ - Place To Crash</span></p>
         </div>
       </div>
     </div>
@@ -18,8 +22,8 @@
     <div class="libro-filter filterclose">
       <form>
         <div class="pt20 pb10 head-title-all bg-white">
-          <div class="container-fluid">
-            <div class="pad-btn">
+          <div class="container-fluid m-p0">
+            <div class="pad-btn m-p0">
               <div class="row">
                 <div class="col-md-2 col-sm-3">
                   <div class="select-all-made" ng-mouseleave="showBookingCusine=false">
@@ -75,7 +79,7 @@
         </div>
         <div class="pt10 pb10 head-title-all bg-grey mb20 ">
           <div class="container-fluid ">
-            <div class="plr30 ">
+            <div class="plr30 m-p0">
               <div class="close-all ">
                 <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
                 <span class="tags avenir-roman" ng-repeat="item in country">{{item}} <span>X</span></span>
@@ -87,7 +91,7 @@
     </div>
   </div>
   <div class="container-fluid">
-    <div class="booking-sec-card bg-white plr30">
+    <div class="booking-sec-card bg-white plr30 m-p0">
       <!-- Tours and Excursions End  -->
       <div class="title-head-left pt20" hidden>
         <h4 class="uppercase">Popular Tours</h4>
@@ -194,8 +198,8 @@
         <div class="title-head-left">
           <h4 class="uppercase">Hotels</h4>
         </div>
-        <div class="row">
-          <div class="col-md-6">
+        <div class="row m-m0">
+          <div class="col-md-6 m-plr0">
             <div class="hotel-card-holder relate">
               <div class="blur-overlay-bg-div"></div>
               <!-- flipper holder -->
@@ -813,8 +817,8 @@
         <div class="title-head-left">
           <h4 class="uppercase">Vaction Rentals</h4>
         </div>
-        <div class="row">
-          <div class="col-md-6">
+        <div class="row m-m0">
+          <div class="col-md-6 m-plr0">
             <div class="vacation-card-list">
               <div class="hotel-card-holder relate">
                 <div class="blur-overlay-bg-div"></div>
@@ -913,8 +917,8 @@
         <div class="title-head-left">
           <h4 class="uppercase">Homestays</h4>
         </div>
-        <div class="row">
-          <div class="col-md-6">
+        <div class="row m-m0">
+          <div class="col-md-6 m-plr0">
             <div class="hotel-card-holder relate">
               <div class="blur-overlay-bg-div"></div>
               <div class="hotel-flipper-holder">

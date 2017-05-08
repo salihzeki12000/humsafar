@@ -1,7 +1,7 @@
 <div class="profile-main" id="reviews">
   <!-- <div class="" ng-include="profile.profileMain"></div> -->
   <div class="review-main">
-    <div class="container-fluid">
+    <div class="container-fluid m-p0">
       <div class="all-profile-detail">
         <div class="bg-white">
           <!-- tabs -->
@@ -53,7 +53,7 @@
               <!-- review all view -->
               <div class="see-review" ng-if="reviewView == 1" infinite-scroll="getAllReviews(reviewAll)">
                 <!-- review empty all view profile user login for first time  -->
-                <div class="empty-review-all empty-profile-review text-center" ng-if="reviewAll.arr.length==0">
+                <div class="empty-review-all empty-profile-review text-center" ng-if="reviewAll.arr.length==0 && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
                   <div class="row">
                     <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
                       <h3 class="color-pink empty-title">Relive Y​our Storyline</h3>
@@ -145,7 +145,7 @@
               <!-- review travel-life-->
               <div class="review-travel-view" ng-if="reviewView == 2">
                 <!-- review empty travel view profile user login for first time  -->
-                <div class="empty-review-travel empty-profile-review text-center" ng-if="reviewTravelLife.arr==0">
+                <div class="empty-review-travel empty-profile-review text-center" ng-if="reviewTravelLife.arr==0 && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
                   <div class="row">
                     <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
                       <h3 class="color-pink empty-title">The World I​s Your Oyster</h3>
@@ -190,13 +190,13 @@
 
                 <div ng-if="reviewTravelLife.arr!==0 && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
                   <div class="row">
-                    <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="review in reviewTravelLife.arr" ng-if="!viewTravelCountry">
+                    <div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="review in reviewTravelLife.arr" ng-if="!viewTravelCountry">
                       <div class="list-travel-view">
                         <div class="review-travel-main relate pointer" ng-click="goToAccordian(review,'viewTravelCountry');">
                           <!--<div class="review-backimgholder">
                         <img ng-src="{{review.countryCoverPhoto|uploadpath}}" alt="" class="img-responsive">
                       </div>-->
-                          <div class="review-frontimgholder relate" style="background:url('{{review.countryCoverPhoto|uploadpath}}')no-repeat; background-size: cover;">
+                          <div class="review-frontimgholder relate" style="background:url('{{review.countryCoverPhoto|uploadpath:250:400:'cover'}}')no-repeat; background-size: cover;">
                             <img ng-src="img/review-travel.png" alt="" class="pointer img-responsive">
                           </div>
                           <h3 class="country-name avenir-heavy">{{review.name}}</h3>
@@ -253,7 +253,7 @@
               <!-- review local-life-->
               <div class="review-travel-view review-local-view" ng-if="reviewView == 3">
                 <!-- review empty local view profile user login for first time  -->
-                <div class="empty-review-local empty-profile-review text-center" ng-if="reviewLocalLife.arr.length==0">
+                <div class="empty-review-local empty-profile-review text-center" ng-if="reviewLocalLife.arr.length==0 && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
                   <div class="row">
                     <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
                       <h3 class="color-cyan empty-title">A Touch Of Your Daily Dose</h3>
@@ -297,7 +297,7 @@
                 <!-- PRIVATE PROFILE EMPTY SCREEN END -->
 
                 <div class="row">
-                  <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="review in reviewLocalLife.arr" ng-if="!viewLocalCountry && reviewLocalLife.arr.length!==0 && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
+                  <div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="review in reviewLocalLife.arr" ng-if="!viewLocalCountry && reviewLocalLife.arr.length!==0 && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
                     <div class="list-travel-view list-local-view">
                       <div class="review-travel-main pointer relate" ng-click="goToAccordian(review,'viewLocalCountry');">
                         <!--<div class="review-backimgholder">

@@ -67,8 +67,8 @@
               </div>
             </div>
             <div class="comment-container">
-              <div class="commenter-text">
-                <p class="avenir-roman" ng-hide="$index==index"><span class="commenter-name color-blue avenir-heavy mr5 pointer" ui-sref="mylife({'urlSlug':list.user.urlSlug})">{{list.user.name}}</span>{{list.text}}</p>
+              <div class="commenter-text relate">
+                <p class="text-comment avenir-roman" ng-hide="$index==index"><span class="commenter-name color-blue avenir-heavy mr5 pointer" ui-sref="mylife({'urlSlug':list.user.urlSlug})">{{list.user.name}}</span>{{list.text}}</p>
                 <div class="edit-text" ng-show="$index==index">
                   <input type="text" ng-model="list.text" class="form-control">
                   <span ng-click="editBox(-1);">Cancel</span>
@@ -76,9 +76,22 @@
                 </div>
                 <div class="like-reply-line">
                   <span class="color-blue avenir-roman mr5 pointer" ng-click="editBox($index);" ng-if="userData._id == list.user._id"><i class="fa fa-pencil"></i></span>
-                  <span class="color-blue avenir-roman mr5 pointer" ng-click="deleteComment(list._id,list.type);" ng-if="userData._id == list.user._id"><i class="fa fa-trash"></i></span>
+                  <span class="color-blue avenir-roman mr5 pointer" ng-click="showDeletePop($index);" ng-if="userData._id == list.user._id"><i class="fa fa-trash"></i></span>
                   <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                  | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>
                 </div>
+                <!-- COMMENT DELETE CONFIRMATION -->
+                <div class="delete-comment-confirmation" ng-show="$index==indexDelete">
+                  <p>Do you want to Delete this Comment?</p>
+                  <div class="row-flex">
+                    <div class="col-flex">
+                    <span class="delete-confirmation pointer" ng-click="deleteComment(list._id,list.type);">YES</span>
+                                    </div>
+                    <div class="col-flex">
+                      <span class="delete-confirmation pointer"  ng-click="showDeletePop($index);">NO</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- COMMENT DELETE CONFIRMATION END -->
               </div>
             </div>
           </div>
@@ -105,7 +118,8 @@
             <p class="like-buddy-attag">@ <span>{{like.urlSlug}}</span></p>
           </div>
           <div class="like-buddy-follow-btn pull-right" ng-if="like._id!=userData._id">
-            <button class=" btn btn-pink following-btn" ng-click=followFollowing(like);>{{like.following|followFollowingStatus}}</button>
+            <!-- <button class=" btn btn-pink following-btn" ng-click=followFollowing(like);>{{like.following|followFollowingStatus}}</button> -->
+            <span class="avenir-heavy color-blue pointer" ng-click=followFollowing(like);> {{like.following|followFollowingStatus}} </span>
           </div>
         </div>
       </li>

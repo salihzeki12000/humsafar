@@ -48,19 +48,19 @@
     </div>
   </div>
 </div>
-<div class="tint-bg popular-journeypage">
-  <div class="container">
-    <div class="popular-journey mt20 second blog-itineraries-main"  infinite-scroll="getMoreJourney()" infinite-scroll-disabled="scroll.busy">
+<div class="popular-journeypage">
+  <div class="container m-plr0">
+    <div class="popular-journey second blog-itineraries-main"  infinite-scroll="getMoreJourney()" infinite-scroll-disabled="scroll.busy">
       <div masonry preserve-order>
-        <div class="row">
-          <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="post in popularJourneyData track by $index">
+        <div class="row m-m0">
+          <div class="col-md-4 col-sm-6 m-plr0 masonry-brick" ng-repeat="post in popularJourneyData track by $index">
             <div class="activity-post {{post.class}}">
               <div class="activity-post-main">
                 <!-- post header -->
                 <div class="post-header relate">
                   <div class="inline-block picture-section">
                     <div class="user-pic pointer" ng-if="post.user" ui-sref="mylife({'urlSlug':post.user.urlSlug})">
-                      <img ng-src="{{post.journeyCreator.profilePicture | uploadpath:50:50:'cover'}}" alt="" class="img-responsive">
+                      <img ng-src="{{post.user.profilePicture | uploadpath:50:50:'cover'}}" alt="" class="img-responsive">
                     </div>
                   </div>
                   <div class="user-detail clearfix width74 inline-block">
@@ -69,7 +69,7 @@
                         <span class="color-dark-blue ml5">{{post.user.following | followFollowingStatus}}</span>
                       </div>
                     </div>
-                    <h4 class="font-bold color-dark-blue pointer m-clear mb5" ng-if="post.user" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.journeyCreator.name}}</h4>
+                    <h4 class="font-bold color-dark-blue pointer m-clear mb5" ng-if="post.user" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.user.name}}</h4>
                     <div class=" user-more-detail">
                         <p class="m-clear"><span class="fnt-12">{{post.startTime|formatDate:'date'}}</span> | <span class="fnt-12">{{post.startTime|formatDate:'time'}}</span></p>
                     </div>

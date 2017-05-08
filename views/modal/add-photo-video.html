@@ -13,7 +13,7 @@
     <div class="otg-photo-video add-otg">
       <div class="row">
         <!-- photo sec -->
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6">
           <div class="view-photo-sec otg-bg-all">
             <div class="otg-photo-count">
               <img src="img/ongojourney/otg-photo.png" alt="" class="img-responsive" width="25">
@@ -21,11 +21,11 @@
             </div>
             <!-- photo upload -->
             <div class="uplad-otg-sec" ng-hide="photoSec">
-              <img src="img/upload-blue.png" alt="" class="m-center img-responsive" width="47px">
+              <!--<img src="img/upload-blue.png" alt="" class="m-center img-responsive" width="47px">
               <p class="text-center color-dark-blue avenir-roman">Drag photos here</p>
-              <span class="block text-center color-dark-blue avenir-roman">-or-</span>
+              <span class="block text-center color-dark-blue avenir-roman">-or-</span>-->
               <div class="otg-upload-btn relate text-center">
-                <button class="btn btn-pink btn-more pointer">Select photos from your computer</button>
+                <button class="btn btn-pink btn-more pointer">Upload Photos</button>
                 <upload-image multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data);" no-view class="pointer"></upload-image>
               </div>
             </div>
@@ -80,7 +80,7 @@
         </div>
         <!-- photo sec end-->
         <!-- video sec -->
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6">
           <div class="view-video-sec otg-bg-all">
             <div class="otg-video-count">
               <img src="img/ongojourney/otg-video.png" alt="" class="img-responsive" width="25px">
@@ -88,11 +88,11 @@
             </div>
             <!-- video upload -->
             <div class="uplad-otg-sec" ng-hide="videoSec">
-              <img src="img/upload-blue.png" alt="" class="m-center img-responsive"  width="47px">
+              <!--<img src="img/upload-blue.png" alt="" class="m-center img-responsive"  width="47px">
               <p class="text-center color-dark-blue avenir-roman">Drag a video here</p>
-              <span class="block text-center color-dark-blue avenir-roman">-or-</span>
+              <span class="block text-center color-dark-blue avenir-roman">-or-</span>-->
               <div class="otg-upload-btn text-center relate">
-                <button class="btn btn-pink btn-more">Select a videos from your computer</button>
+                <button class="btn btn-pink btn-more">Upload Photos</button>
                 <upload-image multiple="true" ng-model="uploadVid" ng-callback="addOtgVideo(data);" no-view class="pointer"></upload-image>
               </div>
             </div>

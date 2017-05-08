@@ -11,11 +11,11 @@
     </div>
   </div>
 </div>
-<div class="tint-bg popular-bloggerpage second">
-<div class="container">
+<div class="popular-bloggerpage second">
+<div class="container m-plr0">
   <div class="popular-blogger"  infinite-scroll="getMoreBlogger()" infinite-scroll-disabled="scroll.busy">
-    <div class="row">
-      <div class="col-md-3 col-sm-6" ng-repeat="photoblogger in popularBloggerData track by $index">
+    <div class="row m-m0">
+      <div class="col-md-3 col-sm-6 m-plr0" ng-repeat="photoblogger in popularBloggerData track by $index">
         <div class="blogger-cover">
           <div class="gallery-imgholder pointer" ui-sref="mylife({'urlSlug':photoblogger.urlSlug})">
             <img ng-src="{{photoblogger.profilePicture|uploadpath:300:300:'cover'}}" alt="{{photoblogger.name}}" class="full-width">

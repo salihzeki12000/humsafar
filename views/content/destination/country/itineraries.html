@@ -1,11 +1,13 @@
 <div class="activity-main min-hght">
-  <div class="container-fluid">
+  <div class="container-fluid m-plr0">
     <div class="relate " ng-class="{'openfilter': isopenfilter}">
       <div class="pt20 pb10 head-title-all">
         <div class="row m-clear">
-          <div class="col-sm-3 col-xs-3">
+          <div class="col-sm-3 col-sm-3 col-xs-2 m-plr0">
             <div class="btn-destinationfilter">
-              <button class="btn btn-pink" ng-click="openFilter()"><i class="fa fa-filter" aria-hidden="true"></i> Filter
+              <button class="btn btn-pink" ng-click="openFilter()">
+                <i class="fa fa-filter" aria-hidden="true"></i>
+               <span class="hidden-xs">Filter</span>
             </button>
             </div>
           </div>
@@ -18,8 +20,10 @@
       <div class="libro-filter filterclose">
         <form>
           <div class="pt20 pb10 head-title-all fliter-min-hght bg-white">
-            <div class="pad-btn">
+            <div class="pad-btn m-plr0">
+              <div class="container-fluid">
               <div class="row">
+
                 <!-- <div class="col-md-2 col-sm-3">
                     <div class="select-all-made" ng-mouseleave="showAll=false">
                         <span class="btn btn-default form-control" ng-click="showAll=true" ng-hide="showAll">All
@@ -36,13 +40,13 @@
                   </div>
                   </div> -->
                 <div class="col-md-3 col-sm-3">
-                  <div class="select-all-made city-select relate" ng-init="viewItineraryCity={'outerClass':'outerCity','innerClass':'innerCity'}">
+                  <div class="select-all-made city-select destination-filterscroll relate" ng-init="viewItineraryCity={'outerClass':'outerCity','innerClass':'innerCity'}">
                     <input type="text" ng-model="itinerary.citySearch" class="form-control outerCity" ng-change="getItinerayCity(countryDestData._id);" placeholder="City" ng-click="editOption(viewItineraryCity,'outerCity','innerCity');">
                     <div class="city-dropdow itinerary-dropdown innerCity" ng-show="viewItineraryCity.backgroundClick">
                       <ul>
-                        <li ng-repeat="city in cityList | filter:itinerary.citySearch track by $index">
+                        <li ng-repeat="city in cityList track by $index">
                           <div class="select-city custom-checkbox">
-                            <input type="checkbox" id="{{city.name}}" ng-click="itineraryFilter(city._id,'itineraryCity')">
+                            <input type="checkbox" id="{{city.name}}" ng-model="city.checked" ng-click="itineraryFilter(city,'itineraryCity')">
                             <label for="{{city.name}}">{{city.name}}</label>
                           </div>
                         </li>
@@ -51,14 +55,14 @@
                   </div>
                 </div>
                 <div class="col-md-3 col-sm-3">
-                  <div class="select-all-made itinerary-select relate" ng-init="viewItineraryType={'outerClass':'outerIti','innerClass':'innerouterIti'}">
+                  <div class="select-all-made itinerary-select destination-filterscroll relate" ng-init="viewItineraryType={'outerClass':'outerIti','innerClass':'innerouterIti'}">
                     <input type="text" ng-model="itinerary.type" class="form-control outerIti" ng-change="getItineraryType();" placeholder="Type" ng-click="editOption(viewItineraryType,'outerIti','innerouterIti')">
                     <div class="city-dropdow itinerary-dropdown innerouterIti" ng-show="viewItineraryType.backgroundClick">
                       <ul>
-                        <li ng-repeat="type in itineraryType| filter:itinerary.type track by $index">
+                        <li ng-repeat="type in itineraryType track by $index">
                           <div class="select-city custom-checkbox">
-                            <input type="checkbox" id="{{type}}" ng-click="itineraryFilter(type,'itineraryType')">
-                            <label for="{{type}}">{{type}}</label>
+                            <input type="checkbox" id="{{type.name}}" ng-model="type.checked" ng-click="itineraryFilter(type,'itineraryType')">
+                            <label for="{{type.name}}">{{type.name}}</label>
                           </div>
                         </li>
                       </ul>
@@ -66,14 +70,14 @@
                   </div>
                 </div>
                 <div class="col-md-3 col-sm-3">
-                  <div class="select-all-made by-select relate" ng-init="viewItineraryBy={'outerClass':'outerItiBy','innerClass':'innerouterItiBy'}">
+                  <div class="select-all-made by-select relate destination-filterscroll" ng-init="viewItineraryBy={'outerClass':'outerItiBy','innerClass':'innerouterItiBy'}">
                     <input type="text" ng-model="itinerary.by" class="form-control outerItiBy" ng-change="getItineraryType();" placeholder="By" ng-click="editOption(viewItineraryBy,'outerItiBy','innerouterItiBy')">
                     <div class="city-dropdow itinerary-dropdown innerouterItiBy" ng-show="viewItineraryBy.backgroundClick">
                       <ul>
-                        <li ng-repeat="by in itineraryBy| filter:itinerary.by track by $index">
+                        <li ng-repeat="by in itineraryByCountry track by $index">
                           <div class="select-city custom-checkbox">
-                            <input type="checkbox" id="{{by}}" ng-click="itineraryFilter(by,'itineraryBy')" />
-                            <label for="{{by}}">{{by}}</label>
+                            <input type="checkbox" id="{{by.name}}" ng-model="by.checked" ng-click="itineraryFilter(by,'itineraryBy')" />
+                            <label for="{{by.name}}">{{by.name}}</label>
                           </div>
                         </li>
                       </ul>
@@ -82,19 +86,22 @@
                 </div>
                 <div class="col-md-3  col-sm-3 ">
                   <div class="txt-clear text-right ">
-                    <a>Clear All</a>
+                    <a ng-click="clearCountryItinerary();">Clear All</a>
                   </div>
                 </div>
+              </div>
               </div>
             </div>
           </div>
           <div class="pt10 pb10 head-title-all bg-grey mb20 ">
             <div class="container-fluid ">
-              <div class="plr30 ">
-                <div class="close-all ">
+              <div class="plr30 m-p0">
+                <div class="close-all">
                   <a class="btn btn-pink avenir-roman " ng-click="openFilter() ">X Close</a>
-                  <a class="btn btn-pink avenir-roman" ng-click="getCountryInfo('itinerary',$scope.urlDestinationCountry);">Submit</a>
-                  <span class="tags avenir-roman" ng-repeat="item in country">{{item}} <span>X</span></span>
+                  <a class="btn btn-pink avenir-roman" ng-click="getCountyItiSubmit();">Submit</a>
+                  <span class="tags avenir-roman" ng-repeat="item in destinationCityFilter track by $index">{{item.name}}<span ng-click="itineraryFilter(item,'itineraryCity')">X</span></span>
+                  <span class="tags avenir-roman" ng-repeat="item in destinationItineraryType track by $index">{{item.name}} <span ng-click="itineraryFilter(item,'itineraryType')">X</span></span>
+                  <span class="tags avenir-roman" ng-repeat="item in destinationItineraryBy track by $index">{{item.name}} <span ng-click="itineraryFilter(item,'itineraryBy')">X</span></span>
                 </div>
               </div>
             </div>
@@ -104,8 +111,8 @@
     </div>
     <div class="activity-container destination-itinerary-holder">
       <div masonry preserve-order infinite-scroll="itineraryLoadMore();" infinite-scroll-disabled="scroll.busy">
-        <div class="row">
-          <div class="col-md-4 col-sm-6 col-xs-12 masonry-brick" ng-repeat="post in countryDestIti track by $index">
+        <div class="row m-m0">
+          <div class="col-md-4 col-sm-6 col-xs-12 m-plr0 masonry-brick" ng-repeat="post in countryDestIti track by $index">
             <!-- user-iternarys -->
             <div class="travel-life-part blog-post bg-white avenir-roman overflow {{post.type}}" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
               <div class="travel-journey-heading">
@@ -117,8 +124,8 @@
                     <div class="pull-left">
                       <h4 class="font-bold color-dark-blue text-capitalize m-clear mb5 heading-name pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.user.name}}</h4>
                     </div>
-                    <div class="pull-right">
-                      <span class="follow-following color-blue text-capitalize">{{post.follower}}</span>
+                    <div class="pull-right" ng-if="post.itineraryBy!='Admin'" ng-click="followFollowing(post.user);">
+                      <span class="follow-following pointer color-blue text-capitalize">{{post.user.following|followFollowingStatus}}</span>
                     </div>
                   </div>
                   <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.startTime | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.startTime | date :'hh:mm a'}}</span></p>
@@ -227,6 +234,11 @@
           </div>
         </div>
       </div>
+      <!-- pagination loader -->
+      <div class="pagination-loader" ng-if="template.paginationLoader">
+        <img src="img/page.svg" alt="Loading..." width="50px" class="img-responsive m-center">
+      </div>
+      <!-- pagination loader end -->
     </div>
 
     <!-- COMMENT LIKE SECTION -->

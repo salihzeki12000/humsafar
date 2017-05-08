@@ -9,19 +9,22 @@
       <div class="ongo-journey-main">
         <!-- strip journey -->
         <div class="journey-info-strip get-otgstrip clearfix">
+          <div class="dots-mobile color-white" ng-click="openTravelTrip();">
+            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+          </div>
           <div class="pull-left">
             <!-- own journey -->
             <div class="own-journey">
               <div class="profile-info">
-                <div class="user-img-ongo">
+                <div class="user-img-ongo pointer" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">
                   <img src="{{journey.user.profilePicture|uploadpath:35:37:'cover'}}" alt="" class="img-responsive">
                 </div>
-                <h4 class="avenir-heavy color-white">{{journey.user.name}}</h4>
+                <h4 class="avenir-heavy pointer color-white" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">{{journey.user.name}}</h4>
               </div>
             </div>
             <!-- own journey end -->
             <!-- trip list -->
-            <div class="trip-list">
+            <div class="trip-list {{getslide}}">
               <ul>
                 <li>
                   <a href="">
@@ -184,7 +187,7 @@
             <div class="dot-line"></div>
             <div class="card-relate-holder functionmap" ng-if="journey.post">
               <journey-post post="ongo" is-mine="template.isMine" is-logged-in="isLoggedIn" json=journey get-comments-data="getCommentsData(post)"
-                close-back-drop="closeBackDrop()" get-likes-data="getLikesData(post)" ng-repeat="ongo in journey.post"></journey-post>
+                close-back-drop="closeBackDrop()" get-likes-data="getLikesData(post)" template="template" ng-repeat="ongo in journey.post"></journey-post>
               <!-- ongo journey-end -->
               <div class="ongo-journey-end" ng-if="journey.onGoing==false">
                 <div class="journey-end text-center">

@@ -1,12 +1,12 @@
 <div class="agt-home-tourpackage">
 
   <!-- ADD BUTTON -->
-  <div class="">
+  <div class="add-agentbutton" >
     <div class="container">
       <div class="clearfix">
         <div class="pull-right">
           <div class="add-agtitinerary">
-            <span class="pointer" ng-click="addItinerary();" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
+            <span class="pointer add-holder" ng-click="addItinerary();" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
             <div class="add-more-itinerary" ng-show="showItinerary">
               <p class="color-cyan">Enter Details - Tours &amp; Packages</p>
               <div class="add-tourpackage">
@@ -161,8 +161,8 @@
   </div>
   <!-- ADD BUTTON END-->
 
-  <!-- EMPTY INTRO BOX -->
-  <div class="empty-intro" hidden>
+  <!-- EMPTY AGENT INTRO BOX -->
+  <div class="empty-intro bg-white" hidden>
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-sm-12">
@@ -185,45 +185,62 @@
       </div>
     </div>
   </div>
-  <!-- EMPTY INTRO BOX END -->
+  <!-- EMPTY AGENT INTRO BOX END -->
+
+  <!-- EMPTY USER INTRO -->
+  <div class="empty-intro bg-white  avenir-roman" hidden>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <div class="agt-user-intro">
+            <h3 class="color-blue avenir-heavy">Lifestyle Holidays</h3>
+            <p class="color-blue">is still to upload this space with interesting tours & packages</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- EMPTY USER INTRO END -->
 
   <!-- TOURS & PACKAGE CARDS -->
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4 col-sm-6" ng-repeat="tourcard in usrTourPackageCard track by $index">
-        <div class="agt-itinerarycard">
-          <div class="itinerary-img">
-            <div class="theme">
-              <div class="theme-img">
-                <img ng-src="{{tourcard.tourcategoryImg}}" class="img-responsive" alt="">
-              </div>
-              <div class="theme-name">
-                <p>{{tourcard.tourcategoryTitle}}</p>
-              </div>
-            </div>
-            <div class="country-badges">
-              <div class="country-holder" ng-repeat="tourcountryflagbadge in tourcard.tourcountryBadgesFlag track by $index">
-                <img ng-src="{{tourcountryflagbadge}}" alt="" class="img-responsive">
-              </div>
-              <span class="country-count">+4</span>
-            </div>
-            <img ng-src="{{tourcard.tourImg}}" alt="" class="img-responsive">
-            <div class="itinerary-imgfoot ">
-              <div class="imgfoot-top clearfix">
-                <div class="pull-left">
-                  <h4 class="font-sz18">{{tourcard.agttourTitle}}</h4>
-                  <p class="day-night"><span>{{tourcard.tourNightC}} Nights</span> | <span>{{tourcard.tourDayC}} Days</span></p>
-                  <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{tourcard.tourDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{tourcard.tourTime}}</span></p>
+  <div class="agent-cardsection">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-sm-6" ng-repeat="tourcard in usrTourPackageCard track by $index">
+          <div class="agt-itinerarycard">
+            <div class="itinerary-img">
+              <div class="theme">
+                <div class="theme-img">
+                  <img ng-src="{{tourcard.tourcategoryImg}}" class="img-responsive" alt="">
                 </div>
-                <div class="pull-right">
-                  <p class="font-sz18 cost-posi">${{tourcard.agttourCost}}</p>
+                <div class="theme-name">
+                  <p>{{tourcard.tourcategoryTitle}}</p>
                 </div>
-                <button class="btn btn-pink btn-download">Download</button>
-                <button class="btn btn-pink btn-book">Book</button>
               </div>
-            </div>
-            <div class="call-btn" ng-click="viewContact = !viewContact">
-              <i class="fa fa-phone" aria-hidden="true"></i>
+              <div class="country-badges">
+                <div class="country-holder" ng-repeat="tourcountryflagbadge in tourcard.tourcountryBadgesFlag track by $index">
+                  <img ng-src="{{tourcountryflagbadge}}" alt="" class="img-responsive">
+                </div>
+                <span class="country-count">+4</span>
+              </div>
+              <img ng-src="{{tourcard.tourImg}}" alt="" class="img-responsive">
+              <div class="itinerary-imgfoot ">
+                <div class="imgfoot-top clearfix">
+                  <div class="pull-left">
+                    <h4 class="font-sz18">{{tourcard.agttourTitle}}</h4>
+                    <p class="day-night"><span>{{tourcard.tourNightC}} Nights</span> | <span>{{tourcard.tourDayC}} Days</span></p>
+                    <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{tourcard.tourDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{tourcard.tourTime}}</span></p>
+                  </div>
+                  <div class="pull-right">
+                    <p class="font-sz18 cost-posi">${{tourcard.agttourCost}}</p>
+                  </div>
+                  <button class="btn btn-pink btn-download">Download</button>
+                  <button class="btn btn-pink btn-book">Book</button>
+                </div>
+              </div>
+              <div class="call-btn" ng-click="showContact();">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+              </div>
             </div>
           </div>
         </div>

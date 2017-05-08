@@ -1,5 +1,5 @@
 <div class="">
-  <div class="container-fluid">
+  <div class="container-fluid m-p0">
     <div class="profile-photo-section relate">
       <div class="profile-pic relate">
         <a ui-sref="setting({'path':'settings'})" ng-if="template.isMine">
@@ -9,7 +9,7 @@
         </a>
         <a href="{{userData.profilePicture|uploadpath}}" fancybox-box class="fancybox" ng-if="!template.isMine">
           <div class="profile-imgholder ">
-            <img ng-src="{{userData.profilePicture|uploadpath:140:150:'cover'}}" alt="{{userData.name}}" class="img-responsive" style="border-radius:'50px';">
+            <img ng-src="{{userData.profilePicture|uploadpath:140:150:'cover'}}" alt="{{userData.name}}" class="img-responsive">
           </div>
         </a>
         <img src="{{userData.homeCountry.flag|uploadpath:40}}" alt="" width="40" class="flag img-responsive">
@@ -24,25 +24,29 @@
     <div class="user-travel-detail relate">
       <div class="scroll-user-travel">
         <ul>
-          <li class="text-center pointer" ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'following'})">
+          <li class="text-center pointer" ng-click="profileListRedirect('following',activeUrlSlug)" >
+            <!-- ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'following'})" -->
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.following_count}}</span>
               <span class="block avenir-roman color-blue mt5">Following</span>
             </div>
           </li>
-          <li class="text-center pointer" ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'followers'})">
+          <li class="text-center pointer" ng-click="profileListRedirect('followers',activeUrlSlug)">
+            <!-- ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'followers'})" -->
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.followers_count}}</span>
               <span class="block avenir-roman color-blue mt5">Followers</span>
             </div>
           </li>
-          <li class="text-center pointer" ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'countries-visited'})">
+          <li class="text-center pointer" ng-click="profileListRedirect('countries-visited',activeUrlSlug)">
+            <!-- ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'countries-visited'})" -->
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.countriesVisited_count}}</span>
               <span class="block avenir-roman color-blue mt5">Countries Visited</span>
             </div>
           </li>
-          <li class="text-center pointer" ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'bucket-list'})">
+          <li class="text-center pointer" ng-click="profileListRedirect('bucket-list',activeUrlSlug)">
+            <!-- ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'bucket-list'})" -->
             <div class="travel-inside">
               <span class="avenir-heavy color-blue">{{userData.bucketList_count}}</span>
               <span class="block avenir-roman color-blue mt5">Bucket List</span>
@@ -83,7 +87,7 @@
     </div>
     <div class="all-profile-detail">
       <div class="more-about-me" ng-init="">
-        <div class="row">
+        <div class="row m-m0">
           <div class="col-md-offset-2 col-md-8">
             <div class="text-center">
               <div class="more-detail" ng-init="getMore=false" ng-show="getMore">
@@ -100,7 +104,7 @@
       </div>
       <div class="bg-white">
         <div class="vector-section ">
-          <div class="row">
+          <div class="row m-m0">
             <div class="col-lg-9 col-md-8">
               <div class="vector-map hidden-xs">
                 <mappy data="data" map-data="mapPathData" key="metric" colors="heatmapColors"></mappy>
@@ -152,7 +156,7 @@
         <!-- horizontal time line -->
         <div class="travel-life-level ">
           <div class="scroll-travel-level">
-            <div class="row ">
+            <div class="row m-m0">
               <div class="col-md-offset-1 col-md-10 ">
                 <div class="travel-progress-bar avenir-roman relate ">
                   <div class="row-flex ">

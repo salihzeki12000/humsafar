@@ -10,10 +10,10 @@
     </div>
     <div class="user-banner-detail full-width text-center">
       <div class="user-tag color-white">
-        <div class="user-imgholder pointer" ui-sref="mylife({'urlSlug':itinerary.user.urlSlug})">
+        <div class="user-imgholder pointer" ng-click="routeProfile();">
           <img ng-src="{{itinerary.user.profilePicture|uploadpath:115:125:'cover'}}" alt="" class="img-responsive">
         </div>
-        <h4 class="user-name avenir-roman pointer" ui-sref="mylife({'urlSlug':itinerary.user.urlSlug})">{{itinerary.user.firstName}}</h4>
+        <h4 class="user-name avenir-roman pointer" ng-click="routeProfile();">{{itinerary.user.firstName}}</h4>
       </div>
       <!-- <div class="journey-day">
         <span class="color-white avenir-roman">Jan 2016</span>
@@ -57,7 +57,7 @@
     <div class="edit-publish-userdetail" ng-if="isMine">
       <button class="btn btn-white-outline btn-more mr5" ui-sref="detailitinerary({flag:'edit',urlSlug:itinerary.urlSlug})">Edit</button>
       <button class="btn btn-white-outline btn-more" ng-click="uploadDetailedItinerary(true)" ng-if="itinerary.status== false">Publish</button>
-      <button class="btn btn-white-outline btn-more" ng-click="" ng-if="itinerary.status == true">Delete</button>
+      <button class="btn btn-white-outline btn-more" ng-click="deletePop(itinerary._id);" ng-if="itinerary.status == true">Delete</button>
     </div>
   </div>
   <div class="second bg-white-95 itinerary-content">
@@ -139,8 +139,13 @@
     <div class="container">
       <!-- accordion main -->
       <div class="accordion-holder">
+        <!-- view side photos button in mobile -->
+          <div class="view-side-photos visible-xs text-right" ng-if="itinerary.photos.length > 0">
+            <span class="color-pink" ng-click="viewGallery();">Photos ({{itinerary.photos.length}})</span>
+          </div>
+        <!-- view side photos button in mobile end-->
         <div class="row">
-          <div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
+          <div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12">
             <div class="accordion-list" ng-repeat="country in itinerary.countryVisited track by $index">
               <!-- trip accordion heading -->
               <div class="trip-heading-accordion">
@@ -161,7 +166,7 @@
                     class="city-accordion-back">
                     <uib-accordion-heading class="relate city-coverphoto">
                       <!-- <img ng-src="{{city.city.cityCoverPhoto|uploadpath}}" alt="" class="img-responsive"> -->
-                      <div class="journey-accordion-heading color-white" style="background: url('{{city.city.cityDisplayPhoto|uploadpath}}') 0 no-repeat; background-size: cover;background-attachment: fixed;">
+                      <div class="journey-accordion-heading color-white" style="background: url('{{city.city.cityDisplayPhoto|uploadpath}}') 50% 50% no-repeat; background-size: cover;background-attachment: fixed;">
                         <a name="{{city.city._id}}" class="journey-head">
                           <div class="clearfix">
                             <p class="city-heading avenir-heavy m-clear pull-left">Day <span>{{city.from}}</span> to Day <span>{{city.to}}</span> In <span class="trip-city-name">{{city.city.name}}</span></p>
@@ -230,9 +235,9 @@
         </div>
       </div>
       <!-- accordion main end-->
-      <!-- comment and like panel main --->
+      <!-- comment and like panel main -->
       <div class="row">
-        <div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-offset-1 col-xs-10">
+        <div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12">
           <div class="share-comment-main">
             <div class="clearfix share-option-main">
               <div class="task-holder pull-left" ng-init="getClicked = false;">
@@ -252,12 +257,12 @@
                   <!-- <li>
                     <a href=""><img src="img/reviews.png" alt="Review" height="22" class="agent-iti-review-icon"></a>
                   </li> -->
-                  <li>
+                  <!-- <li>
                     <a href=""><img src="img/print.png" alt="Print" height="22" class="agent-iti-print-icon"></a>
                   </li>
                   <li>
                     <a href=""><img src="img/download.png" alt="Download" height="22" class="agent-iti-download-icon"></a>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
               <div class="options pointer pull-right relate" ng-click="viewItineraryOptions()">
@@ -304,8 +309,8 @@
                 <ul class="list-inline inline-block v-mid social-logo-padd">
                   <li><a ng-href="https://www.facebook.com/sharer/sharer.php?u={{itinerary.sharingUrl}}/&title=TraveLibro"  target="_blank" class="fb-icon color-blue"><i class="fa fa-facebook-square fa-2x"></i></a></li>
                   <li><a ng-href="https://twitter.com/intent/tweet?url={{itinerary.sharingUrl}}/&title=TraveLibro" target="_blank"  class="twi-icon color-blue"><i class="fa fa-twitter-square fa-2x"></i></a></li>
-                  <li><a ng-href="https://plus.google.com/share?url=={{itinerary.sharingUrl}}/&title=TraveLibro" title="Google Plus" target="_blank" class="google-icon color-blue"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
-                  <li><a ng-href="http://pinterest.com/pin/create/button/?url={{itinerary.sharingUrl}}" title="Pinterest" target="_blank" class="pin-icon color-blue"><i class="fa fa-pinterest-square fa-2x"></i></a></li>
+                  <li><a ng-href="https://plus.google.com/share?url={{itinerary.sharingUrl}}/&title=TraveLibro" title="Google Plus" target="_blank" class="google-icon color-blue"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
+                  <li><a ng-href="http://pinterest.com/pin/create/button/?url={{itinerary.sharingUrl}}&description=TraveLibro" title="Pinterest" target="_blank" class="pin-icon color-blue"><i class="fa fa-pinterest-square fa-2x"></i></a></li>
                   <!-- <li><a href="" class="linkedin-icon color-blue"><i class="fa fa-instagram fa-2x"></i></a></li> -->
                   <li><a href="" class="mail-icon color-blue"><i class="fa fa-envelope-square fa-2x"></i></a></li>
                 </ul>
