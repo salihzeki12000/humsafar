@@ -1,12 +1,12 @@
 var jsArray = [
     './bower_components/jquery/dist/jquery.js',
+    './bower_components/typed.js/dist/typed.min.js',
     './js/jquery.parallax.js',
     './bower_components/fullpage.js/dist/jquery.fullpage.min.js',
+    './bower_components/swiper/dist/js/swiper.js',
     './bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
     './bower_components/flexslider/jquery.flexslider-min.js',
     './bower_components/fancyBox/source/jquery.fancybox.js',
-    './bower_components/swiper/dist/js/swiper.js',
-    './bower_components/typed.js/dist/typed.min.js',
     './bower_components/tinymce-dist/tinymce.js',
     './bower_components/angular/angular.min.js',
     './bower_components/angular-loading-bar/build/loading-bar.min.js',
@@ -21,7 +21,7 @@ var jsArray = [
     './bower_components/angular-translate/angular-translate.js',
     './bower_components/lodash/lodash.js',
     './bower_components/angulartics/dist/angulartics.min.js',
-    './bower_components/angulartics-google-analytics/dist/angulartics-google-analytics.min.js',
+    // './bower_components/angulartics-google-analytics/dist/angulartics-google-analytics.min.js',
     // './bower_components/angular-mappy/build/angular-mappy.js',
     './js/mapping.js',
     './js/map_data.js',
@@ -63,6 +63,7 @@ var jsArray = [
     './js/anchorSmoothScroll.js',
     //please do not change it
     './w/js/templates.js',
+
 ];
 var replacehostFrom = "http://localhost/demo/";
 var replacehostTo = "http://wohlig.co.in/demo2/";

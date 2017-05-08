@@ -94,6 +94,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           //Navigation
           onLeave: function (index, nextIndex, direction) {
             $timeout(function () {
+              $('.scene').parallax();
+              swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                direction: 'vertical',
+                slidesPerView: 1,
+                paginationClickable: true,
+                spaceBetween: 0,
+                mousewheelControl: false,
+                mousewheelForceToAxis: false,
+                keyboardControl: false,
+                parallax: true,
+                hashnav: true
+              });
               swiper.slideTo(nextIndex - 1);
               if ($(window).width() >= 767) {
                 for (i = 1; i < 4; i++) {
@@ -169,7 +182,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
   })
 
-  .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $interval, $state) {
+  .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $interval, $state, $http) {
     //Used to name the .html file
     $scope.userData = $.jStorage.get("profile");
     $scope.template = TemplateService.changecontent("login");
@@ -206,7 +219,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var ref = "";
     var checktwitter = function (data, status) { //for getting accessToken
       var repdata = {};
-      console.log(ref.closed, ref);
       if (ref.closed) {
         $interval.cancel(stopinterval);
       } else {
@@ -216,6 +228,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $.jStorage.set("accessToken", data.accessToken);
           NavigationService.getProfile("", function (data) {
             if (data.data._id) {
+
+              //register deviceId if notification is enabled in browser starts
+              OneSignal.getUserId(function (data) {
+                console.log(data);
+                $http({
+                  "url": adminURL + "/user/updateDeviceId",
+                  "method": "POST",
+                  "data": {
+                    'accessToken': $.jStorage.get("accessToken"),
+                    'deviceId': data,
+                  }
+                });
+                // NavigationService.disablePushNotification(data);
+              });
+              //register deviceId if notification is enabled in browser ends
+
               $.jStorage.set("isLoggedIn", true);
               $.jStorage.set("profile", data.data);
               var alreadyLoggedIn = data.data.alreadyLoggedIn;
@@ -243,7 +271,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             console.log(err);
           });
         } else {
-          console.log(data);
+
         }
       }
     };
@@ -262,7 +290,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.socialLogin = function (loginTo) {
       ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
-      console.log(ref);
       stopinterval = $interval(callAtIntervaltwitter, 2000);
     };
 
@@ -1066,7 +1093,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.journey = journeys;
       TemplateService.title = $scope.journey.name + " - Travel Life | TraveLibro";
       var postsWithLatLng = [];
-      postsWithLatLng = _.filter($scope.journey.post,  'latlong');
+      postsWithLatLng = _.filter($scope.journey.post, 'latlong');
       _.each(postsWithLatLng, function (n, $index) {
         if (n && n.latlong && n.latlong.lat && n.latlong.long) {
           centers[$index] = {
@@ -4846,7 +4873,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
 
-    console.log($scope.activeUrlSlug);
+    // console.log($scope.activeUrlSlug);
     $scope.allowAccess = allowAccess;
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
 
@@ -4869,7 +4896,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     function setMoreAboutMe() {
-      console.log("entered if");
+      // console.log("entered if");
       $scope.pronoun; //for he and she
       $scope.pronoun1; //for him and her
       $scope.userName = titleCase($scope.userData.firstName);
@@ -4938,7 +4965,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     function reloadCount() {
       NavigationService.getProfile($.jStorage.get("activeUrlSlug"), function (data, status) {
         $scope.userData = data.data;
-        console.log($scope.userData.countriesVisited_count);
+        // console.log($scope.userData.countriesVisited_count);
         updateBadgeBar($scope.userData.countriesVisited_count);
       }, function (err) {
         console.log(err);
@@ -5113,7 +5140,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     function titleCase(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
-    console.log("aagaya change karvane");
+    // console.log("aagaya change karvane");
 
     // Little more about me ends here
     //userBadge starts here
@@ -6029,7 +6056,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.scroll.busy = false;
         }, 500);
       });
-      console.log($scope.travelLife);
+      // console.log($scope.travelLife);
       if ($scope.travelLife.length == 0) {
         $scope.hasJourney = false;
       } else {
@@ -10343,8 +10370,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.search.searchType = "";
     $scope.search.viewData = false;
 
+
+   
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.template.isLoggedIn = $.jStorage.get("isLoggedIn"); /////////////////////////////////////////////////
+
 
     setInterval(function () {
       $scope.searchHeaderLoad = TemplateService.searchHeaderLoad;
@@ -10509,7 +10539,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     $scope.logout = function () {
+      var accessToken = $.jStorage.get("accessToken");
       NavigationService.logout(function () {
+          // NavigationService.disablePushNotification();
+          OneSignal.getUserId(function (data) {
+            console.log(data);
+            $http({
+              "url": adminURL + "/user/updateDeviceId",
+              "method": "POST",
+              "data": {
+                'accessToken': accessToken,
+                'deviceId': data,
+                'remove': true
+              }
+            });
+            // NavigationService.disablePushNotification(data);
+          });
           $.jStorage.flush();
           acsToken = "";
           $state.go('login');

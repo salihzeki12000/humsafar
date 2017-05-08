@@ -20,7 +20,7 @@ var backgroundClick = {
 
 $(document).ready(function () {
   $("body").click(function (e) {
-    console.log(backgroundClick.object);
+    // console.log(backgroundClick.object);
     if (backgroundClick.object) {
       backgroundClick.close(e);
     }
@@ -28,8 +28,8 @@ $(document).ready(function () {
 });
 
 $("body").click(function (e) {
-  console.log($(e.target).parent().hasClass('drop-content'));
-  console.log($(e.target).hasClass('toggle-dropDown'));
+  // console.log($(e.target).parent().hasClass('drop-content'));
+  // console.log($(e.target).hasClass('toggle-dropDown'));
   if ($(e.target).parent().hasClass('drop-content')) {
     return;
   } else if ($(e.target).hasClass('toggle-dropDown')) {
@@ -81,6 +81,7 @@ var firstapp = angular.module('firstapp', [
   'pascalprecht.translate',
   'imageupload',
   'angulartics',
+
   'fileuploadservicemod',
   'angularFileUpload',
   'angular-google-analytics'
@@ -460,7 +461,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
     });
   $urlRouterProvider.otherwise("/");
   $locationProvider.html5Mode(isproduction);
-});
+}).run(['Analytics', function (Analytics) {}]);;
 
 
 // firstapp.directive('loadingText', function ($compile, $parse,$document) {

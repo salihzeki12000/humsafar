@@ -9,7 +9,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
-
   <!-- SEO -->
   <meta name="author" content="">
   <meta name="description" content="">
@@ -29,7 +28,26 @@
   <meta name="twitter:title" content="TraveLibro">
   <meta name="twitter:description" content="TraveLibro">
   <meta name="twitter:image" content="img/tw-banner.jpg">
-  <title ng-bind="template.title">TraveLibro</title>
+
+  <title ng-bind="'TraveLibro | '+template.title">TraveLibro</title>
+
+  <link rel="manifest" href="/manifest.json">
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+  <script src="js/pushnotification.js"></script>
+  <!--<script>
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(["init", {
+      appId: "bf8baf0a-dcfb-4a30-a0c1-ee67cae2feb1",
+      autoRegister: true,
+      notifyButton: {
+        enable: true /* Set to false to hide */
+      },
+      allowLocalhostAsSecureOrigin: true
+    }]);
+
+  </script>-->
+
+
   <link rel="shortcut icon" href="img/favicon.ico" />
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/typed.js/dist/typed.min.js"></script>
@@ -78,7 +96,9 @@
       });
     </script>
 
+
   <div class="repeated-item loadedContent" ui-view></div>
+
   <!--home page Loader ended-->
 
   <div style="display: none">
@@ -97,11 +117,13 @@
   <!--//loader-->
   <script>
     $(window).load(function () {
+
       console.log("Loaded");
     if(abc && abc.changePage) {
      abc.changePage("home");
     }
       $("body > .loaders").remove();
+
       $("body > .loadedContent").fadeIn(1000);
     });
 
@@ -114,6 +136,7 @@
     var isproduction = false;
 
   </script>
+
   <script src="bower_components/flexslider/jquery.flexslider-min.js"></script>
   <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
   <script src="bower_components/fancyBox/source/jquery.fancybox.js"></script>
@@ -131,7 +154,9 @@
   <script src="bower_components/angular-translate/angular-translate.js"></script>
   <script src="bower_components/lodash/lodash.js"></script>
   <script src="bower_components/angulartics/dist/angulartics.min.js"></script>
+
   <!-- <script src="bower_components/angulartics-google-analytics/dist/angulartics-google-analytics.min.js"></script> -->
+
   <script src="bower_components/angular-google-analytics/dist/angular-google-analytics.js"></script>
   <!-- <script src="bower_components/angular-mappy/build/angular-mappy.js"></script> -->
   <script src="js/mapping.js"></script>

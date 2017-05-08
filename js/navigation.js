@@ -1,7 +1,9 @@
 var adminURL = "";
 var allowAccess = "";
+
 adminURL = "https://travelibro.com/api";
 // adminURL = "https://travelibro.wohlig.com/api";
+
 
 var imgurl = adminURL + "/upload/";
 var imgpath = imgurl + "readFile";
@@ -128,7 +130,7 @@ var navigationservice = angular.module('navigationservice', [])
         }, true).success(callback).error(errCallback);
       },
       getProfile: function (slug, callback, errCallback) {
-        console.log(slug);
+        // console.log(slug);
         return TravelibroService.http({
           url: adminURL + "/user/getOneDataWeb",
           data: {
@@ -162,6 +164,28 @@ var navigationservice = angular.module('navigationservice', [])
           method: "POST"
         }).success(callback).error(errCallback);
       },
+      enablePushNotification: function (deviceId) {
+        $http({
+          "url": adminURL + "/user/updateDeviceId",
+          "method": "POST",
+          "data": {
+            'accessToken': $.jStorage.get("accessToken"),
+            'deviceId': deviceId
+          }
+        });
+      },
+      disablePushNotification: function (deviceId) {
+        $http({
+          "url": adminURL + "/user/updateDeviceId",
+          "method": "POST",
+          "data": {
+            'accessToken': $.jStorage.get("accessToken"),
+            'deviceId': deviceId,
+            'remove': true
+          }
+        });
+      },
+
       getAllCountries: function (callback, errCallback) {
         return TravelibroService.http({
           url: adminURL + "/country/getAll",
