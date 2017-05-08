@@ -10584,120 +10584,408 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('AgentloginCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
-    $scope.template = TemplateService.changecontent("agent-login"); //Use same name of .html file
-    $scope.menutitle = NavigationService.makeactive("Agent Login"); //This is the Title of the Website
-    TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();
-    $scope.oneAtATime = true;
-    //about textarea counter
-    $scope.$on('$viewContentLoaded', function () {
-      $timeout(function () {
-        $('#textareaChars').keyup(updateCount);
-        $('#textareaChars').keydown(updateCount);
-        $('#remainingC').text(0 + '/ 500');
+  .controller('AgentloginCtrl', function ($scope, Agent, TemplateService, NavigationService, $timeout) {
+      $scope.template = TemplateService.changecontent("agent-login"); //Use same name of .html file
+      $scope.menutitle = NavigationService.makeactive("Agent Login"); //This is the Title of the Website
+      TemplateService.title = $scope.menutitle;
+      $scope.navigation = NavigationService.getnav();
+      $scope.oneAtATime = true;
+      $scope.userDetails = {
+        company: {}
+      };
 
-        function updateCount() {
-          var count = $('#textareaChars').val().length;
-          $('#remainingC').text(count + '/ 500');
-        }
-      }, 100);
-    });
-
-    //about textarea counter end
-    $scope.agentloginView = 1;
-    $scope.agentSec = function (val) {
-      if (val == 1) {
-        $scope.agentloginView = 1;
-      } else if (val == 2) {
-        $scope.agentloginView = 2;
-        console.log(2);
-      } else if (val == 3) {
-        $scope.agentloginView = 3;
-      } else if (val == 4) {
-        $scope.agentloginView = 4;
-      } else if (val == 5) {
-        $scope.agentloginView = 5;
-      } else if (val == 6) {
-        $scope.agentloginView = 6;
-      } else if (val == 7) {
-        $scope.agentloginView = 7;
-      } else if (val == 8) {
-        $scope.agentloginView = 8;
-      } else if (val == 9) {
-        $scope.agentloginView = 9;
-      } else {
-        $scope.agentloginView = 1;
+      $scope.userData = $.jStorage.get("profile");
+      if ($scope.userData.name) {
+        $scope.userDetails.company.name = $scope.userData.name;
       }
-    }
-    // category of Specialisation array
-    $scope.categoriesSpecial = [{
-      agtcatImg: "img/kindofjourney/white-adventure.png",
-      catwidth: "35px",
-      agtcatCap: "Adventure"
-    }, {
-      agtcatImg: "img/kindofjourney/white-business.png",
-      catwidth: "33px",
-      agtcatCap: "Business"
-    }, {
-      agtcatImg: "img/kindofjourney/white-family.png",
-      catwidth: "48px",
-      agtcatCap: "Family"
-    }, {
-      agtcatImg: "img/kindofjourney/white-romance.png",
-      catwidth: "35px",
-      agtcatCap: "Romance"
-    }, {
-      agtcatImg: "img/kindofjourney/white-backpacking.png",
-      catwidth: "35px",
-      agtcatCap: "Backpacking"
-    }, {
-      agtcatImg: "img/kindofjourney/white-budget.png",
-      catwidth: "33px",
-      agtcatCap: "Budget"
-    }, {
-      agtcatImg: "img/kindofjourney/white-luxury.png",
-      catwidth: "33px",
-      agtcatCap: "Luxury"
-    }, {
-      agtcatImg: "img/kindofjourney/white-religious.png",
-      catwidth: "38px",
-      agtcatCap: "Religious"
-    }, {
-      agtcatImg: "img/kindofjourney/white-friends.png",
-      catwidth: "35px",
-      agtcatCap: "Friends"
-    }];
-    // category of Specialisation array end
-    //country of Specialisation accordion
-    $scope.agtRegionSpcl = [{
-      regionName: "Africa",
-      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-    }, {
-      regionName: "Asia",
-      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-    }, {
-      regionName: "Europe",
-      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-    }, {
-      regionName: "North America",
-      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-    }, {
-      regionName: "Ocenia",
-      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait"]
-    }, {
-      regionName: "South America",
-      countryName: ["Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", "Afghanistan", "Dubai", "Iraq", "Iran", "India", "Kuwait", ]
-    }];
-    //country of Specialisation accordion end
+      $scope.isVerified = $.jStorage.get("isVerified");
 
-    //Services
-    $scope.agtServicesSpcl = [
-      'Tours And Packages', 'Day Tours', 'Outdoors & Excursions', 'Flights', 'Cruise', 'MICE', 'Personal', 'Business Travel', 'Car Rentals', 'Visas', 'Fully Independent Traveller', 'Accomodation', 'Travel Insurance', 'Sports & Events', 'Forex', 'Holidays', 'Festival & Concerts', 'Transportation'
-    ];
-    //Services end
-  })
+      //about textarea counter
+      $scope.$on('$viewContentLoaded', function () {
+        $timeout(function () {
+          $('#textareaChars').keyup(updateCount);
+          $('#textareaChars').keydown(updateCount);
+          $('#remainingC').text(0 + '/ 500');
 
+          function updateCount() {
+            var count = $('#textareaChars').val().length;
+            $('#remainingC').text(count + '/ 500');
+          }
+        }, 100);
+      });
+      //about textarea counter end
+
+      //switching between cards
+      $scope.agentSec = function (val) {
+        switch (val) {
+          case 0:
+            $scope.agentloginView = 0;
+            window.onload = function () {
+              var container = document.getElementsByClassName("veri-box")[0];
+              container.onkeyup = function (e) {
+                var target = e.srcElement || e.target;
+                var maxLength = parseInt(target.attributes["maxlength"].value, 10);
+                var myLength = target.value.length;
+                if (myLength >= maxLength) {
+                  var next = target;
+                  while (next = next.nextElementSibling) {
+                    if (next == null)
+                      break;
+                    if (next.tagName.toLowerCase() === "input") {
+                      next.focus();
+                      break;
+                    }
+                  }
+                }
+                // Move to previous field if empty (user pressed backspace)
+                else if (myLength === 0) {
+                  var previous = target;
+                  while (previous = previous.previousElementSibling) {
+                    if (previous == null)
+                      break;
+                    if (previous.tagName.toLowerCase() === "input") {
+                      previous.focus();
+                      break;
+                    }
+                  }
+                }
+              }
+            }
+            break;
+          case 1:
+            $scope.agentloginView = 1;
+            break;
+          case 2:
+            $scope.agentloginView = 2;
+            break;
+          case 3:
+            $scope.agentloginView = 3;
+            //gets all the cities from database
+            var getAllCities = function (data, status) {
+              if (data.value) {
+                $scope.cities = data.data.predictions;
+              } else {
+                console.log("Eroor Fetching Data");
+              }
+            };
+            $scope.searchByKey = function (searchCity) {
+              NavigationService.getAllCities({
+                "search": searchCity
+              }, getAllCities, function (err) {
+                console.log(err);
+              });
+            };
+            //End-Of get all the cities from database
+            break;
+          case 4:
+            $scope.agentloginView = 4;
+            break;
+          case 5:
+            $scope.agentloginView = 5;
+            break;
+          case 6:
+            $scope.agentloginView = 6;
+            break;
+          case 7:
+            $scope.agentloginView = 7;
+            break;
+          case 8:
+            $scope.agentloginView = 8;
+            break;
+          case 9:
+            $scope.agentloginView = 9;
+            break;
+
+        }
+      }
+      //switching between cards ends
+
+      // category of Specialisation array
+      // $scope.isCategorySelected = false;
+      $scope.foundCategory = [];
+      $scope.selectCategory = function (obj) {
+        // $scope.isCategorySelected = true;
+        if (obj.class == "agt-imgholder-active") {
+          obj.class = "";
+          // $scope.foundCategory.push(obj.agtcatCap)
+        } else {
+          obj.class = "agt-imgholder-active";
+          // $scope.foundCategory = _.remove($scope.foundCategory, function (n) {
+          //   return n.agtcatCap == obj.agtcatCap;
+          // });
+        }
+        // $scope.selectedCategory('categoriesSpecial', 'holidayType');
+      };
+
+      $scope.categoriesSpecial = [{
+        agtcatImg: "img/kindofjourney/white-adventure.png",
+        catwidth: "35px",
+        name: "Adventure"
+      }, {
+        agtcatImg: "img/kindofjourney/white-business.png",
+        catwidth: "33px",
+        name: "Business"
+      }, {
+        agtcatImg: "img/kindofjourney/white-family.png",
+        catwidth: "48px",
+        name: "Family"
+      }, {
+        agtcatImg: "img/kindofjourney/white-romance.png",
+        catwidth: "35px",
+        name: "Romance"
+      }, {
+        agtcatImg: "img/kindofjourney/white-backpacking.png",
+        catwidth: "35px",
+        name: "Backpacking"
+      }, {
+        agtcatImg: "img/kindofjourney/white-budget.png",
+        catwidth: "33px",
+        name: "Budget"
+      }, {
+        agtcatImg: "img/kindofjourney/white-luxury.png",
+        catwidth: "33px",
+        name: "Luxury"
+      }, {
+        agtcatImg: "img/kindofjourney/white-religious.png",
+        catwidth: "38px",
+        name: "Religious"
+      }, {
+        agtcatImg: "img/kindofjourney/white-friends.png",
+        catwidth: "35px",
+        name: "Friends"
+      }];
+      // category of Specialisation array end
+      //country of Specialisation accordion
+
+      //gets all the countries from database
+      NavigationService.getCountriesByContinent(function (data, status) {
+        if (data.value) {
+          $scope.countriesByContinent = data.data;
+          // for (var property in countriesByContinent) {
+          //   if (countriesByContinent.hasOwnProperty(property)) {
+          //     // console.log(countriesByContinent[property]);
+
+          //   }
+          // }
+        } else {
+          console.log("Error Fetching Data");
+        }
+        console.log($scope.countriesByContinent);
+      }, function (err) {
+        console.log(err);
+      });
+      //End-Of get all the countries from database
+
+      $scope.selectCountry = function (obj) {
+        // $scope.isCategorySelected = true;
+        if (obj.class == "active") {
+          obj.class = "";
+        } else {
+          obj.class = "active";
+        }
+        // $scope.foundCategory = _.filter($scope.categoriesSpecial, ['class', 'agt-imgholder-active']);
+        // // $scope.selectedCategory('categoriesSpecial', 'holidayType');
+      };
+
+
+      //country of Specialisation accordion end
+
+      //Services
+      $scope.selectServices = function (obj) {
+        // $scope.isCategorySelected = true;
+        if (obj.class == "active") {
+          obj.class = "";
+        } else {
+          obj.class = "active";
+        }
+        $scope.foundCategory = _.filter($scope.categoriesSpecial, ['class', 'active']);
+
+      };
+      $scope.agtServicesSpcl = [{
+        name: 'Tours And Packages'
+      }, {
+        name: 'Day Tours'
+      }, {
+        name: 'Outdoors & Excursions'
+      }, {
+        name: 'Flights'
+      }, {
+        name: 'Cruise'
+      }, {
+        name: 'MICE'
+      }, {
+        name: 'Personal'
+      }, {
+        name: 'Business Travel'
+      }, {
+        name: 'Car Rentals'
+      }, {
+        name: 'Visas'
+      }, {
+        name: 'Fully Independent Traveller'
+      }, {
+        name: 'Accomodation'
+      }, {
+        name: 'Travel Insurance'
+      }, {
+        name: 'Sports & Events'
+      }, {
+        name: 'Forex'
+      }, {
+        name: 'Holidays'
+      }, {
+        name: 'Festival & Concerts'
+      }, {
+        name: 'Transportation'
+      }];
+      //Services end
+
+      //Integration starts here
+      $scope.verify = {};
+      if (!$scope.userData.isLoggedIn) {
+        if ($scope.userData.isVerified == false && $scope.isVerified != true) {
+          $scope.agentSec(0);
+        } else {
+          $scope.agentSec(3);
+        }
+      }
+
+      //upload agent profilePicture
+      // $timeout(function () {
+      //   document.getElementById('fileInput1').onchange = function () {
+      //     alert('Selected file: ' + this.value);
+      //   }
+      // });
+      $scope.fileName = null;
+      $scope.image = null;
+      $scope.imageFileName = '';
+      $scope.uploadme = {};
+      $scope.uploadme.src = '';
+      $scope.uploadFile = function (data, userData, ppSelected) {
+        // Base64 to Blob
+        if (ppSelected) {
+          console.log(data, userData);
+          var imageBase64 = data;
+          console.log(imageBase64);
+          var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
+          console.log(blob);
+          // Blob to File
+          var file = new File([blob], $scope.fileName + '.png');
+          console.log(file);
+          // File to FormData
+          var formData = new FormData();
+          console.log(formData, "before appending");
+          formData.append('file', file, file.name);
+          console.log(formData, "after appending");
+          // alert("mila");
+          NavigationService.uploadFile(formData, function (response) {
+            if (response.value) {
+              $scope.userData.profilePicture = response.data[0];
+              console.log($scope.userData);
+            } else {
+              toastr.warning('Error Uploading Image!');
+            }
+            $scope.saveUserData($scope.userData);
+          });
+        } else {
+          // alert("nai mila");
+          $scope.userData = _.omit($scope.userData, ['profilePicture']);
+          $scope.saveUserData($scope.userData);
+        }
+      };
+
+      $scope.removePhoto = function () {
+        $scope.userData = _.omit($scope.userData, ['profilePicture']);
+        $scope.fileName = null;
+        console.log($scope.userData);
+
+        $scope.showImage.val = false;
+      };
+
+      $scope.showImage = {
+        "val": false
+      };
+      var i = 1;
+      var got1 = setInterval(function () {
+        if (document.getElementById('fileInput1')) {
+          document.getElementById('fileInput1').onchange = function (evt) {
+            // alert("change hua");
+            var file = evt.currentTarget.files[0];
+            console.log(file);
+            $scope.fileName = file.name;
+            console.log($scope.fileName);
+            var formData = new FormData();
+            formData.append('file', file, "file.jpg");
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+              $scope.$apply(function ($scope) {
+                $scope.showImage.val = true;
+                console.log($scope.showImage.val);
+                $scope.myImage = evt.target.result;
+                // alert($scope.myImage);
+              });
+            };
+            reader.readAsDataURL(file);
+          };
+          clearInterval(got1);
+        }
+        i++;
+      }, 1000);
+      //upload agent profilePicture ends
+
+
+
+      //verify Users Account
+      $scope.submitOtp = function (obj) {
+        var otp = (obj.a).concat(obj.b, obj.c, obj.d);
+        Agent.verifyOtp(otp, function (data) {
+          console.log(data);
+          if (data.value) {
+            $scope.userData.isVerified = true;
+            $scope.showConfirmation = true;
+            $.jStorage.set("isVerified", true);
+            $scope.agentSec(1);
+          } else {
+            $scope.agentSec(2);
+          }
+        });
+      };
+      $scope.requestOtp = function () {
+        Agent.requestOtp();
+      }
+      //verify users account ends
+
+      $scope.saveAgentData = function () {
+        $scope.userDetails.company.categoryOfSpeacilization = [];
+        $scope.userDetails.company.countryOfSpecialization = [];
+        $scope.userDetails.company.services = [];
+        $scope.userDetails.company.categoryOfSpeacilization = _.filter($scope.categoriesSpecial, ['class', 'agt-imgholder-active']);
+        $scope.userDetails.company.services = _.filter($scope.agtServicesSpcl, ['class', 'active']);
+        $scope.userDetails.company.categoryOfSpeacilization = _.map($scope.userDetails.company.categoryOfSpeacilization, 'name');
+        $scope.userDetails.company.services = _.map($scope.userDetails.company.services, 'name');
+
+        $scope.userDetails.company.countryOfSpecialization = _.cloneDeep($scope.countriesByContinent);
+        _.each($scope.userDetails.company.countryOfSpecialization, function (n, key) {
+          n.country = [];
+          n.countries = _.filter(n.countries, ['class', 'active']);
+          n.country = _.map(n.countries, '_id');
+          $scope.userDetails.company.countryOfSpecialization[key] = _.omit(n, ['countries']);
+        });
+        _.remove($scope.userDetails.company.countryOfSpecialization,  function (n)  {
+          return  n.country.length == 0;
+        });
+        console.log($scope.userDetails);
+        Agent.saveAgentData($scope.userDetails, function (data) {
+          console.log(data);
+          if (data.value) {
+            $state.go('agent-home');
+          } else {
+
+          }
+        })
+      }
+      //Integration Ends here
+    })
   .controller('AgentsettingCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     $scope.template = TemplateService.changecontent("agent-setting"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Settings"); //This is the Title of the Website
@@ -11404,7 +11692,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // category type end
   })
 
-  .controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state,$anchorScroll,anchorSmoothScroll,$location) {
+  .controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state,$anchorScroll,anchorSmoothScroll, $stateParams,$location) {
     $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
@@ -11415,6 +11703,36 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.follower = false;
     $scope.leads = false;
     $scope.viewsdownload = false;
+
+    // PRATIK CONTROLLER
+    //isMine or someoneOthers profile
+    if ($.jStorage.get("isLoggedIn") && ($.jStorage.get("profile").urlSlug == $stateParams.urlSlug)) {
+      //its your own profile so no need to call profile again
+      $scope.userData = $.jStorage.get("profile");
+      TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
+      $.jStorage.set("activeUrlSlug", $.jStorage.get("profile").urlSlug);
+      $scope.activeUrlSlug = $.jStorage.get("profile").urlSlug;
+    } else {
+      //someone elses profile so get his/her data
+      allowAccess = false;
+      $.jStorage.set("activeUrlSlug", $stateParams.urlSlug);
+      $scope.activeUrlSlug = $stateParams.urlSlug;
+      // $scope.isMine = false;
+      NavigationService.getAgentsProfile($stateParams.urlSlug, function (data) {
+        console.log(data);
+        if (data.value) {
+          $scope.userData = data.data;
+          TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
+          allowAccess = false;
+        } else {
+          $state.go("errorpage");
+        }
+      }, function (data) {
+        console.log(data);
+      });
+    }
+    //isMine or someoneOthers profile Ends
+    // PRATIK CONTROLLER END
 
     // on load modal
     // $(window).load(function(){

@@ -6,10 +6,10 @@
           <div class="circ-agtimg pointer" ui-sref="agent-setting">
             <img src="img/default_Images_2.jpg" alt="" class="img-responsive">
           </div>
-          <h4 class="font-bold">Lifestyle Holidays</h4>
-          <p>Mumbai, India</p>
+          <h4 class="font-bold">{{userData.name}}</h4>
+          <p>{{userData.homeCity}}</p>
           <button class="btn btn-white-outline mr5" ui-sref="agent-setting">Edit </button>
-          <span><span class="font-bold"> 255 </span> Followers </span>
+          <span><span class="font-bold"> {{userData.followers_count}} </span> Followers </span>
         </div>
       </div>
     </div>

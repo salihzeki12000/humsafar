@@ -100,17 +100,19 @@
                     </div>
                   </div>
                 </uib-tab>
-                <uib-tab index="2" heading="Register As Partner" data-toggle="tooltip" title="Travel Agent | Tour Operator | Local Guide" class="pointer login-partner-tooltip">
+                <uib-tab index="2" heading="Register As Partner" data-toggle="tooltip" title="Travel Agent | Tour Operator | Local Guide"
+                  class="pointer login-partner-tooltip">
                   <!-- <div class="min-hght ptb20"> -->
                     <!-- AGENT LOGIN -->
                     <!-- <div class="login-form agent-signup" ng-hide="agentSignup">
-                      <form action="">
+                      <form ng-submit="loginAsAgent(agentLoginForm)">
                         <div class="form-group">
                           <div class="input-group">
                             <span class="input-group-addon">
                               <i class="fa fa-envelope color-white" aria-hidden="true"></i>
                             </span>
-                            <input type="email" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Emaild Id" placeholder="Email Id">
+                            <input type="email" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Emaild Id" placeholder="Email Id"
+                              ng-model="agentLoginForm.email">
                           </div>
                         </div>
                         <div class="form-group">
@@ -118,11 +120,14 @@
                             <span class="input-group-addon">
                               <i class="fa fa-lock color-white fnt-20" aria-hidden="true"></i>
                             </span>
-                            <input type="password" class="form-control color-white" placeholder="Password">
+                            <input type="password" class="form-control color-white" placeholder="Password" ng-model="agentLoginForm.password">
                           </div>
                         </div>
+                        <div class="login-error-veri" ng-if="showError">
+                          <p>*Incorrect Email or Password entered.</p>
+                        </div>
                         <div class="btn-login mt25">
-                          <button class="btn btn-outline color-white avenir-roman"> Login </button>
+                          <input type="submit" class="btn btn-outline color-white avenir-roman" value="Login"></button>
                         </div>
                         <div class="loginsign-toggle">
                           <span>or</span>
@@ -134,13 +139,14 @@
 
                     <!-- AGENT SIGNUP -->
                     <!-- <div class="login-form agent-signup" ng-show="agentSignup">
-                      <form action="">
+                      <form ng-submit="registerAsAgent(agentSignUpForm)">
                         <div class="form-group">
                           <div class="input-group">
                             <span class="input-group-addon">
                               <i class="fa fa-user color-white" aria-hidden="true"></i>
                             </span>
-                            <input type="text" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Company Name" placeholder="Company Name">
+                            <input type="text" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Company Name" placeholder="Company Name"
+                              ng-model="agentSignUpForm.companyName">
                           </div>
                         </div>
                         <div class="form-group">
@@ -148,7 +154,8 @@
                             <span class="input-group-addon">
                               <i class="fa fa-envelope color-white" aria-hidden="true"></i>
                             </span>
-                            <input type="email" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Emaild Id" placeholder="Email Id">
+                            <input type="email" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Emaild Id" placeholder="Email Id"
+                              ng-model="agentSignUpForm.email">
                           </div>
                         </div>
                         <div class="form-group">
@@ -156,7 +163,7 @@
                             <span class="input-group-addon">
                               <i class="fa fa-lock color-white fnt-20" aria-hidden="true"></i>
                             </span>
-                            <input type="password" class="form-control color-white" placeholder="Password">
+                            <input type="password" class="form-control color-white" placeholder="Password" ng-model="agentSignUpForm.password">
                           </div>
                         </div>
                         <div class="terms-condt">
@@ -168,7 +175,7 @@
                           </div>
                         </div>
                         <div class="btn-login mt25">
-                          <button class="btn btn-outline color-white avenir-roman"> Register </button>
+                          <input type="submit" class="btn btn-outline color-white avenir-roman" value="Register"> </button>
                         </div>
                         <div class="loginsign-toggle">
                           <a ng-click="toggleAgentSign();">Go To Login</a>
@@ -201,7 +208,7 @@
                           We will notify you via email soon.
                         </h4>
                         <h3 class="color-white avenir-roman">Thank You.</h3>
-                        </div>
+                      </div>
                     </div>
                   </div>
                 </uib-tab>

@@ -223,13 +223,19 @@
   border-radius: 0;
 }
 
+.agt-imgholder-active{
+  background-image: url('../img/agt-bg-red.png');
+}
+
 .btn-catcountry {
   font-weight: 700;
   padding: 8px 30px;
 
   &:active,
-  &:hover {
+  &:hover,
+  &.active {
     background-color: $brand-blue !important;
+    color: #fff !important;
   }
 }
 
@@ -237,8 +243,10 @@
   background-color: transparent;
 
   &:active,
-  &:hover {
+  &:hover,
+  &.active {
     background-color: $brand-blue !important;
+    color: #fff !important;
   }
 }
 

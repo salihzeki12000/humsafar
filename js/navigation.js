@@ -137,6 +137,16 @@ var navigationservice = angular.module('navigationservice', [])
           method: "POST"
         }, true).success(callback).error(errCallback);
       },
+      getAgentsProfile: function (slug, callback, errCallback) {
+        console.log(slug);
+        return TravelibroService.http({
+          url: adminURL + "/agent/getOneDataWeb",
+          data: {
+            'urlSlug': slug
+          },
+          method: "POST"
+        }, true).success(callback).error(errCallback);
+      },
       getOthersProfile: function (slug, callback, errCallback) {
         TravelibroService.http({
           url: adminURL + "/user/getOneDataWeb",
@@ -157,6 +167,13 @@ var navigationservice = angular.module('navigationservice', [])
           url: adminURL + "/country/getAll",
           method: "POST"
         }).success(callback).error(errCallback);
+      },
+      getCountriesByContinent: function (callback, errCallback) {
+        TravelibroService.http({
+          url: adminURL + "/agent/getCountriesByContinentWeb",
+          method: "POST"
+        }).success(callback).error(errCallback);
+
       },
       getAllCities: function (formData, callback, errCallback) {
         TravelibroService.post(adminURL + "/city/locationSearch", formData,true).success(callback).error(errCallback);
@@ -479,6 +496,30 @@ var navigationservice = angular.module('navigationservice', [])
           method: "POST"
         }).success(callback).error(function (data) {
           console.log(data);
+        });
+      },
+      registerAsAgent: function (formData, callback) {
+        console.log(formData);
+        // formData.accessToken = "Ob3m4K6ka7Iw39Mc";
+        TravelibroService.http({
+          url: adminURL + "/agent/signUpWeb",
+          data: formData,
+          method: "POST"
+        }).success(function (data) {
+          if (data.value) {
+            callback(data);
+          } else {
+            console.log(data);
+          }
+        });
+      },
+      loginAsAgent: function (formData, callback) {
+        TravelibroService.http({
+          url: adminURL + "/agent/loginWeb",
+          data: formData,
+          method: "POST"
+        }).success(function (data) {
+          callback(data);
         });
       },
       sendOtpToReset: function (email, callback) {

@@ -366,7 +366,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'ItineraryCtrl'
     })
     .state('agent-login', {
-      url: "/agent-login",
+      url: "/agent-login/",
       templateUrl: "views/template.html",
       controller: 'AgentloginCtrl'
     })
@@ -381,7 +381,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'AgentuserCtrl'
     })
     .state('agent-home-without', {
-      url: "/agent-home",
+      url: "/agent/:urlSlug",
       templateUrl: "views/template.html",
       controller: 'AgenthomeCtrl'
     })
