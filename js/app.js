@@ -393,7 +393,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       reloadOnSearch: false
     })
     .state('agent-home', {
-      url: "/agent-home/:name",
+      url: "/agent/:urlSlug",
       templateUrl: "views/template.html",
       controller: 'AgenthomeCtrl',
       reloadOnSearch: false
