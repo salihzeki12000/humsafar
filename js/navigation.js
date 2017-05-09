@@ -1,9 +1,9 @@
 var adminURL = "";
 var allowAccess = "";
 
-adminURL = "https://travelibro.com/api";
+// adminURL = "https://travelibro.com/api";
 // adminURL = "https://travelibro.wohlig.com/api";
-
+adminURL = "http://192.168.2.19:1337/api"
 
 var imgurl = adminURL + "/upload/";
 var imgpath = imgurl + "readFile";
@@ -200,7 +200,7 @@ var navigationservice = angular.module('navigationservice', [])
 
       },
       getAllCities: function (formData, callback, errCallback) {
-        TravelibroService.post(adminURL + "/city/locationSearch", formData,true).success(callback).error(errCallback);
+        TravelibroService.post(adminURL + "/city/locationSearch", formData, true).success(callback).error(errCallback);
       },
       searchCityByCountry: function (formData, callback) {
         var arr = {};
@@ -212,7 +212,7 @@ var navigationservice = angular.module('navigationservice', [])
           url: adminURL + "/city/searchCity",
           data: formData,
           method: "POST"
-        },true).success(callback).error(function (data) {
+        }, true).success(callback).error(function (data) {
           console.log(data);
         });
       },
@@ -504,7 +504,8 @@ var navigationservice = angular.module('navigationservice', [])
         returnVal.saveUserData(object, callback, function (data) {
           console.log(data);
         });
-      },ReportProblems: function (formData, callback) {
+      },
+      ReportProblems: function (formData, callback) {
         TravelibroService.http({
           url: adminURL + "/ReportProblems/save",
           data: formData,

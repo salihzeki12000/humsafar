@@ -143,14 +143,14 @@
               <li>
                 <a class="color-white ml10" ui-sref="activitytest({'urlSlug':userData.urlSlug})">Activity Feed</a>
               </li>
-              <!-- <li ng-click="switchToProfile(userData);"></li> -->
-              <li ui-sref="mylife({'urlSlug':userData.urlSlug,'name':null})">
-                <a>
-                  <div class="user-img inline-block v-mid">
-                    <img src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" width="40" class="img-responsive">
-                  </div>
-                  <span class="color-white ml10 fz13 usermade">{{userData.name}}</span>
-                </a>
+              <li ng-click="switchToProfile(userData);"></li>
+              <!--<li ui-sref="mylife({'urlSlug':userData.urlSlug,'name':null})">-->
+              <a>
+                <div class="user-img inline-block v-mid">
+                  <img src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" width="40" class="img-responsive">
+                </div>
+                <span class="color-white ml10 fz13 usermade">{{userData.name}}</span>
+              </a>
               </li>
               <!--<li>
                 <a href="">
