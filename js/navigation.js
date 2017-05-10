@@ -182,7 +182,7 @@ var navigationservice = angular.module('navigationservice', [])
           "url": adminURL + "/user/updateDeviceId",
           "method": "POST",
           "data": {
-            'deviceId': data1
+            'deviceId': deviceId
           }
         });
       },
@@ -191,7 +191,7 @@ var navigationservice = angular.module('navigationservice', [])
           "url": adminURL + "/user/updateDeviceId",
           "method": "POST",
           "data": {
-            'deviceId': data1,
+            'deviceId': deviceId,
             'remove': true
           }
         });

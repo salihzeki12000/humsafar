@@ -232,15 +232,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               //register deviceId if notification is enabled in browser starts
               OneSignal.getUserId(function (data) {
                 console.log(data);
-                $http({
-                  "url": adminURL + "/user/updateDeviceId",
-                  "method": "POST",
-                  "data": {
-                    'accessToken': $.jStorage.get("accessToken"),
-                    'deviceId': data,
-                  }
-                });
-                // NavigationService.disablePushNotification(data);
+                NavigationService.enablePushNotification(data);
               });
               //register deviceId if notification is enabled in browser ends
 
