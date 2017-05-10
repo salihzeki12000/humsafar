@@ -68,7 +68,7 @@ templateservicemod.service('TemplateService', function ($http, $state) {
     OneSignal.on('notificationPermissionChange', function (permissionChange) {
       console.log("The user's subscription state is now:", permissionChange.to);
       if (permissionChange.to == 'granted') {
-        OneSignal.setSubscription(true);
+        // OneSignal.setSubscription(true);
         // OneSignal.registerForPushNotifications();
         OneSignal.getUserId(function (data) {
           console.log(data);
@@ -133,60 +133,7 @@ templateservicemod.service('TemplateService', function ($http, $state) {
     //   };
     // });
 
-    OneSignal.addListenerForNotificationOpened(function (data) {
-      alert();
-      console.log("Received NotificationOpened:");
-      console.log(data);
-      switch (data.data.type) {
-        case 'journeyRequest':
-        case 'journeyLeft':
-        case 'userBadge':
-        case 'journeyAccept':
-        case 'journeyReject':
-        case 'userFollowing':
-        case 'userFollowingRequest':
-        case 'userFollowingResponse':
-        case 'itineraryRequest':
-          $state.go('notification');
-          break;
-        case 'postLike':
-        case 'photoLike':
-        case 'postFirstTime':
-        case 'postComment':
-        case 'postMentionComment':
-        case 'postTag':
-          $state.go('single-notification', {
-            'urlSlug': data.data.userFrom.urlSlug,
-            'postId': data.data.data._id
-          })
-          break;
-        case 'itineraryComment':
-        case 'itineraryLike':
-        case 'itineraryMentionComment':
-          $state.go('userquickitinerary', {
-            'urlSlug': data.data.userTo.urlSlug,
-            'id': data.data.data.urlSlug
-          })
-          break;
-        case 'journeyComment':
-        case 'journeyLike':
-        case 'journeyMentionComment':
-          $state.go('ongojourney', {
-            'urlSlug': data.data.userTo.urlSlug,
-            'id': data.data.data.urlSlug
-          })
-          break;
-        case 'photoComment':
-        case 'photoMentionComment':
-          $state.go('single-notification', {
-            'urlSlug': data.data.userFrom.urlSlug,
-            'postId': data.data.data.post
-          })
-          break;
-        default:
-          break;
-      }
-    });
+
 
     OneSignal.on('notificationDismiss', function (event) {
       console.warn('OneSignal notification dismissed:', event);
@@ -202,62 +149,120 @@ templateservicemod.service('TemplateService', function ($http, $state) {
       */
     });
 
+    OneSignal.on('notificationDisplay', function (event) {
+      console.warn('OneSignal notification displayed:', event);
+      OneSignal.addListenerForNotificationOpened(function (data) {
+        alert();
+        console.log("Received NotificationOpened:");
+        console.log(data);
+        switch (data.data.type) {
+          case 'journeyRequest':
+          case 'journeyLeft':
+          case 'userBadge':
+          case 'journeyAccept':
+          case 'journeyReject':
+          case 'userFollowing':
+          case 'userFollowingRequest':
+          case 'userFollowingResponse':
+          case 'itineraryRequest':
+            $state.go('notification');
+            break;
+          case 'postLike':
+          case 'photoLike':
+          case 'postFirstTime':
+          case 'postComment':
+          case 'postMentionComment':
+          case 'postTag':
+            $state.go('single-notification', {
+              'urlSlug': data.data.userFrom.urlSlug,
+              'postId': data.data.data._id
+            })
+            break;
+          case 'itineraryComment':
+          case 'itineraryLike':
+          case 'itineraryMentionComment':
+            $state.go('userquickitinerary', {
+              'urlSlug': data.data.userTo.urlSlug,
+              'id': data.data.data.urlSlug
+            })
+            break;
+          case 'journeyComment':
+          case 'journeyLike':
+          case 'journeyMentionComment':
+            $state.go('ongojourney', {
+              'urlSlug': data.data.userTo.urlSlug,
+              'id': data.data.data.urlSlug
+            })
+            break;
+          case 'photoComment':
+          case 'photoMentionComment':
+            $state.go('single-notification', {
+              'urlSlug': data.data.userFrom.urlSlug,
+              'postId': data.data.data.post
+            })
+            break;
+          default:
+            break;
+        }
+      });
+    });
+
   });
-  OneSignal.push(["addListenerForNotificationOpened", function (data) {
-    alert();
+  // OneSignal.push(["addListenerForNotificationOpened", function (data) {
+  //   alert();
 
-    console.log(data);
-    switch (data.data.type) {
-      case 'journeyRequest':
-      case 'journeyLeft':
-      case 'userBadge':
-      case 'journeyAccept':
-      case 'journeyReject':
-      case 'userFollowing':
-      case 'userFollowingRequest':
-      case 'userFollowingResponse':
-      case 'itineraryRequest':
-        $state.go('notification');
-        break;
-      case 'postLike':
-      case 'photoLike':
-      case 'postFirstTime':
-      case 'postComment':
-      case 'postMentionComment':
-      case 'postTag':
-        $state.go('single-notification', {
-          'urlSlug': data.data.userFrom.urlSlug,
-          'postId': data.data.data._id
-        })
-        break;
-      case 'itineraryComment':
-      case 'itineraryLike':
-      case 'itineraryMentionComment':
-        $state.go('userquickitinerary', {
-          'urlSlug': data.data.userTo.urlSlug,
-          'id': data.data.data.urlSlug
-        })
-        break;
-      case 'journeyComment':
-      case 'journeyLike':
-      case 'journeyMentionComment':
-        $state.go('ongojourney', {
-          'urlSlug': data.data.userTo.urlSlug,
-          'id': data.data.data.urlSlug
-        })
-        break;
-      case 'photoComment':
-      case 'photoMentionComment':
-        $state.go('single-notification', {
-          'urlSlug': data.data.userFrom.urlSlug,
-          'postId': data.data.data.post
-        })
-        break;
-      default:
-        break;
-    }
+  //   console.log(data);
+  //   switch (data.data.type) {
+  //     case 'journeyRequest':
+  //     case 'journeyLeft':
+  //     case 'userBadge':
+  //     case 'journeyAccept':
+  //     case 'journeyReject':
+  //     case 'userFollowing':
+  //     case 'userFollowingRequest':
+  //     case 'userFollowingResponse':
+  //     case 'itineraryRequest':
+  //       $state.go('notification');
+  //       break;
+  //     case 'postLike':
+  //     case 'photoLike':
+  //     case 'postFirstTime':
+  //     case 'postComment':
+  //     case 'postMentionComment':
+  //     case 'postTag':
+  //       $state.go('single-notification', {
+  //         'urlSlug': data.data.userFrom.urlSlug,
+  //         'postId': data.data.data._id
+  //       })
+  //       break;
+  //     case 'itineraryComment':
+  //     case 'itineraryLike':
+  //     case 'itineraryMentionComment':
+  //       $state.go('userquickitinerary', {
+  //         'urlSlug': data.data.userTo.urlSlug,
+  //         'id': data.data.data.urlSlug
+  //       })
+  //       break;
+  //     case 'journeyComment':
+  //     case 'journeyLike':
+  //     case 'journeyMentionComment':
+  //       $state.go('ongojourney', {
+  //         'urlSlug': data.data.userTo.urlSlug,
+  //         'id': data.data.data.urlSlug
+  //       })
+  //       break;
+  //     case 'photoComment':
+  //     case 'photoMentionComment':
+  //       $state.go('single-notification', {
+  //         'urlSlug': data.data.userFrom.urlSlug,
+  //         'postId': data.data.data.post
+  //       })
+  //       break;
+  //     default:
+  //       break;
+  //   }
 
-  }]);
+  // }]);
 
   if ($.jStorage.get("isLoggedIn") && $.jStorage.get('profile').alreadyLoggedIn) {
     console.log("initializing OneSignal");
@@ -267,16 +272,19 @@ templateservicemod.service('TemplateService', function ($http, $state) {
         return;
       }
       OneSignal.isPushNotificationsEnabled(function (isEnabled) {
-        console.log("isPushNotificationsEnabled", isEnabled);
         if (isEnabled) {
           // The user is subscribed to notifications
           // Don't show anything
           OneSignal.setSubscription(true);
+
+          // OneSignal.registerForPushNotifications({
+          //   modalPrompt: true
+          // });
+
+
         } else {
           OneSignal.getNotificationPermission(function (permission) {
-            console.log("Site Notification Permission", permission);
             if (permission == 'default' || permission == "granted") {
-              console.log("Inside Default");
               OneSignal.setSubscription(true);
               // OneSignal.showHttpPrompt();
               OneSignal.registerForPushNotifications({
