@@ -10363,7 +10363,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.accessToken = $.jStorage.get("accessToken");
   })
 
-  .controller('headerctrl', function ($scope, TemplateService, NavigationService, LikesAndComments, $state, $interval, $timeout, $stateParams, $http) {
+  .controller('headerctrl', function ($scope, TemplateService, NavigationService, LikesAndComments, $state, $interval, $timeout, $stateParams) {
     $scope.template = TemplateService;
     $scope.getAllSearched = [];
     $scope.search = {};
@@ -10559,23 +10559,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // };
 
     $scope.logout = function () {
-      var accessToken = $.jStorage.get("accessToken");
-      OneSignal.getUserId(function (data1) {
-        console.log("uploaded");
-        TravelibroService.http({
-          "url": adminURL + "/user/updateDeviceId",
-          "method": "POST",
-          "data": {
-            'deviceId': data1,
-            'remove': true
-          }
-        }).success(function (data) {
-          NavigationService.logout(function (data) {
-            $.jStorage.flush();
-            acsToken = "";
-            $state.go('login');
-          });
-        });
+      NavigationService.logout(function (data) {
+        $.jStorage.flush();
+        acsToken = "";
+        $state.go('login');
       });
     };
 

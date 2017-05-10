@@ -159,33 +159,43 @@ var navigationservice = angular.module('navigationservice', [])
         }, true).success(callback).error(errCallback);
       },
       logout: function (callback) {
-        TravelibroService.http({
-          url: adminURL + "/user/logout",
-          method: "POST"
-        }).success(callback);
+        var accessToken = $.jStorage.get("accessToken");
+        OneSignal.getUserId(function (data1) {
+          console.log("uploaded");
+          TravelibroService.http({
+            "url": adminURL + "/user/updateDeviceId",
+            "method": "POST",
+            "data": {
+              'deviceId': data1,
+              'remove': true
+            }
+          }).success(function (data) {
+            TravelibroService.http({
+              url: adminURL + "/user/logout",
+              method: "POST"
+            }).success(callback);
+          });
+        });
       },
       enablePushNotification: function (deviceId) {
-        $http({
+        TravelibroService.http({
           "url": adminURL + "/user/updateDeviceId",
           "method": "POST",
           "data": {
-            'accessToken': $.jStorage.get("accessToken"),
-            'deviceId': deviceId
+            'deviceId': data1
           }
         });
       },
       disablePushNotification: function (deviceId) {
-        $http({
+        TravelibroService.http({
           "url": adminURL + "/user/updateDeviceId",
           "method": "POST",
           "data": {
-            'accessToken': $.jStorage.get("accessToken"),
-            'deviceId': deviceId,
+            'deviceId': data1,
             'remove': true
           }
         });
       },
-
       getAllCountries: function (callback, errCallback) {
         return TravelibroService.http({
           url: adminURL + "/country/getAll",
