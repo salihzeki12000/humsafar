@@ -10370,11 +10370,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.search.searchType = "";
     $scope.search.viewData = false;
 
-
-
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.template.isLoggedIn = $.jStorage.get("isLoggedIn"); /////////////////////////////////////////////////
-
 
     setInterval(function () {
       $scope.searchHeaderLoad = TemplateService.searchHeaderLoad;
@@ -10564,11 +10561,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.logout = function () {
       var accessToken = $.jStorage.get("accessToken");
       OneSignal.getUserId(function (data1) {
-        $http({
+        console.log("uploaded");
+        TravelibroService.http({
           "url": adminURL + "/user/updateDeviceId",
           "method": "POST",
           "data": {
-            'accessToken': accessToken,
             'deviceId': data1,
             'remove': true
           }
