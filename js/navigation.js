@@ -1,8 +1,8 @@
 var adminURL = "";
 var allowAccess = "";
 
-adminURL = "https://travelibro.com/api";
-// adminURL = "https://travelibro.wohlig.com/api";
+// adminURL = "https://travelibro.com/api";
+adminURL = "https://travelibro.wohlig.com/api";
 
 
 var imgurl = adminURL + "/upload/";
@@ -158,11 +158,11 @@ var navigationservice = angular.module('navigationservice', [])
           method: "POST"
         }, true).success(callback).error(errCallback);
       },
-      logout: function (callback, errCallback) {
-        return TravelibroService.http({
+      logout: function (callback) {
+        TravelibroService.http({
           url: adminURL + "/user/logout",
           method: "POST"
-        }).success(callback).error(errCallback);
+        }).success(callback);
       },
       enablePushNotification: function (deviceId) {
         $http({
@@ -200,7 +200,7 @@ var navigationservice = angular.module('navigationservice', [])
 
       },
       getAllCities: function (formData, callback, errCallback) {
-        TravelibroService.post(adminURL + "/city/locationSearch", formData,true).success(callback).error(errCallback);
+        TravelibroService.post(adminURL + "/city/locationSearch", formData, true).success(callback).error(errCallback);
       },
       searchCityByCountry: function (formData, callback) {
         var arr = {};
@@ -212,7 +212,7 @@ var navigationservice = angular.module('navigationservice', [])
           url: adminURL + "/city/searchCity",
           data: formData,
           method: "POST"
-        },true).success(callback).error(function (data) {
+        }, true).success(callback).error(function (data) {
           console.log(data);
         });
       },
@@ -504,7 +504,8 @@ var navigationservice = angular.module('navigationservice', [])
         returnVal.saveUserData(object, callback, function (data) {
           console.log(data);
         });
-      },ReportProblems: function (formData, callback) {
+      },
+      ReportProblems: function (formData, callback) {
         TravelibroService.http({
           url: adminURL + "/ReportProblems/save",
           data: formData,

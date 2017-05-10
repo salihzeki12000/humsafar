@@ -134,6 +134,7 @@ templateservicemod.service('TemplateService', function ($http, $state) {
     // });
 
     OneSignal.addListenerForNotificationOpened(function (data) {
+      alert();
       console.log("Received NotificationOpened:");
       console.log(data);
       switch (data.data.type) {
@@ -202,6 +203,61 @@ templateservicemod.service('TemplateService', function ($http, $state) {
     });
 
   });
+  OneSignal.push(["addListenerForNotificationOpened", function (data) {
+    alert();
+
+    console.log(data);
+    switch (data.data.type) {
+      case 'journeyRequest':
+      case 'journeyLeft':
+      case 'userBadge':
+      case 'journeyAccept':
+      case 'journeyReject':
+      case 'userFollowing':
+      case 'userFollowingRequest':
+      case 'userFollowingResponse':
+      case 'itineraryRequest':
+        $state.go('notification');
+        break;
+      case 'postLike':
+      case 'photoLike':
+      case 'postFirstTime':
+      case 'postComment':
+      case 'postMentionComment':
+      case 'postTag':
+        $state.go('single-notification', {
+          'urlSlug': data.data.userFrom.urlSlug,
+          'postId': data.data.data._id
+        })
+        break;
+      case 'itineraryComment':
+      case 'itineraryLike':
+      case 'itineraryMentionComment':
+        $state.go('userquickitinerary', {
+          'urlSlug': data.data.userTo.urlSlug,
+          'id': data.data.data.urlSlug
+        })
+        break;
+      case 'journeyComment':
+      case 'journeyLike':
+      case 'journeyMentionComment':
+        $state.go('ongojourney', {
+          'urlSlug': data.data.userTo.urlSlug,
+          'id': data.data.data.urlSlug
+        })
+        break;
+      case 'photoComment':
+      case 'photoMentionComment':
+        $state.go('single-notification', {
+          'urlSlug': data.data.userFrom.urlSlug,
+          'postId': data.data.data.post
+        })
+        break;
+      default:
+        break;
+    }
+
+  }]);
 
   if ($.jStorage.get("isLoggedIn") && $.jStorage.get('profile').alreadyLoggedIn) {
     console.log("initializing OneSignal");
