@@ -30,7 +30,7 @@ templateservicemod.service('TemplateService', function ($http, $state) {
     }
   }]);
   OneSignal.push(function () {
-    OneSignal.setDefaultNotificationUrl("localhost:8080");
+    // OneSignal.setDefaultNotificationUrl("localhost:8080");
     OneSignal.addListenerForNotificationOpened(function (data) {
       console.log("Received NotificationOpened:");
       console.log(data);
