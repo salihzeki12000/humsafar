@@ -7,8 +7,8 @@ templateservicemod.service('TemplateService', function ($http, $state) {
     appId: "bf8baf0a-dcfb-4a30-a0c1-ee67cae2feb1", //libros
     // appId: "34d28a83-b284-4cee-8069-585c1342b8855", //testing
     autoRegister: false,
-    // notificationClickHandlerMatch: 'origin',
-    notificationClickHandlerAction: 'focus',
+    notificationClickHandlerMatch: 'origin',
+    // notificationClickHandlerAction: 'focus',
     // path: "js/",
     persistNotification: false,
     allowLocalhostAsSecureOrigin: true,
@@ -30,11 +30,11 @@ templateservicemod.service('TemplateService', function ($http, $state) {
     }
   }]);
   OneSignal.push(function () {
-    // OneSignal.setDefaultNotificationUrl("localhost:8080");
-    OneSignal.addListenerForNotificationOpened(function (data) {
-      console.log("Received NotificationOpened:");
-      console.log(data);
-    });
+    OneSignal.setDefaultNotificationUrl("https://travelibro.wohlig.com");
+    // OneSignal.addListenerForNotificationOpened(function (data) {
+    //   console.log("Received NotificationOpened:");
+    //   console.log(data);
+    // });
     OneSignal.on('customPromptClick', function (permissionChange) {
       var promptClickResult = permissionChange.result;
       console.log('Fullscreen Permission Message click result:', promptClickResult);
@@ -104,68 +104,72 @@ templateservicemod.service('TemplateService', function ($http, $state) {
       }
     });
 
-    // OneSignal.on('notificationDisplay', function (event) {
-    //   console.warn('OneSignal notification displayed:', event.data);
-    //   OneSignal.addListenerForNotificationOpened(function (data) {
-    //     alert();
-    //     console.log("Received NotificationOpened:");
-    //     console.log(data);
-    //     switch (data.data.type) {
-    //       case 'journeyRequest':
-    //       case 'journeyLeft':
-    //       case 'userBadge':
-    //       case 'journeyAccept':
-    //       case 'journeyReject':
-    //       case 'userFollowing':
-    //       case 'userFollowingRequest':
-    //       case 'userFollowingResponse':
-    //       case 'itineraryRequest':
-    //         $state.go('notification');
-    //         break;
-    //       case 'postLike':
-    //       case 'photoLike':
-    //       case 'postFirstTime':
-    //       case 'postComment':
-    //       case 'postMentionComment':
-    //       case 'postTag':
-    //         $state.go('single-notification', {
-    //           'urlSlug': data.data.userFrom.urlSlug,
-    //           'postId': data.data.data._id
-    //         })
-    //         break;
-    //       case 'itineraryComment':
-    //       case 'itineraryLike':
-    //       case 'itineraryMentionComment':
-    //         $state.go('userquickitinerary', {
-    //           'urlSlug': data.data.userTo.urlSlug,
-    //           'id': data.data.data.urlSlug
-    //         })
-    //         break;
-    //       case 'journeyComment':
-    //       case 'journeyLike':
-    //       case 'journeyMentionComment':
-    //         $state.go('ongojourney', {
-    //           'urlSlug': data.data.userTo.urlSlug,
-    //           'id': data.data.data.urlSlug
-    //         })
-    //         break;
-    //       case 'photoComment':
-    //       case 'photoMentionComment':
-    //         $state.go('single-notification', {
-    //           'urlSlug': data.data.userFrom.urlSlug,
-    //           'postId': data.data.data.post
-    //         })
-    //         break;
-    //       default:
-    //         break;
-    //     }
-    //   });
-    // });
+    var notificationListener = function () {
+      OneSignal.addListenerForNotificationOpened(function (data) {
+        alert();
+        notificationListener();
+        console.log("Received NotificationOpened:");
+        console.log(data);
+        switch (data.data.type) {
+          case 'journeyRequest':
+          case 'journeyLeft':
+          case 'userBadge':
+          case 'journeyAccept':
+          case 'journeyReject':
+          case 'userFollowing':
+          case 'userFollowingRequest':
+          case 'userFollowingResponse':
+          case 'itineraryRequest':
+            $state.go('notification');
+            break;
+          case 'postLike':
+          case 'photoLike':
+          case 'postFirstTime':
+          case 'postComment':
+          case 'postMentionComment':
+          case 'postTag':
+            $state.go('single-notification', {
+              'urlSlug': data.data.userFrom.urlSlug,
+              'postId': data.data.data._id
+            })
+            break;
+          case 'itineraryComment':
+          case 'itineraryLike':
+          case 'itineraryMentionComment':
+            $state.go('userquickitinerary', {
+              'urlSlug': data.data.userTo.urlSlug,
+              'id': data.data.data.urlSlug
+            })
+            break;
+          case 'journeyComment':
+          case 'journeyLike':
+          case 'journeyMentionComment':
+            $state.go('ongojourney', {
+              'urlSlug': data.data.userTo.urlSlug,
+              'id': data.data.data.urlSlug
+            })
+            break;
+          case 'photoComment':
+          case 'photoMentionComment':
+            $state.go('single-notification', {
+              'urlSlug': data.data.userFrom.urlSlug,
+              'postId': data.data.data.post
+            })
+            break;
+          default:
+            break;
+
+        }
+      });
+
+    }
+    notificationListener();
+
+    OneSignal.on('notificationDisplay', function (event) {
+      console.warn('OneSignal notification displayed:', event.data);
+    });
 
   });
-
-
-
 
 
   if ($.jStorage.get("isLoggedIn") && $.jStorage.get('profile').alreadyLoggedIn) {
@@ -196,7 +200,7 @@ templateservicemod.service('TemplateService', function ($http, $state) {
               });
               OneSignal.showHttpPermissionRequest();
               // event.preventDefault();
-            } else if (permission == "granteds") {
+            } else if (permission == "granted") {
               console.log("Inside Granted");
             } else if (permission == "denied") {
               console.log("Inside Denied");
