@@ -30,7 +30,7 @@ templateservicemod.service('TemplateService', function ($http, $state) {
     }
   }]);
   OneSignal.push(function () {
-    OneSignal.setDefaultNotificationUrl("https://travelibro.wohlig.com");
+    // OneSignal.setDefaultNotificationUrl("https://travelibro.wohlig.com");
     // OneSignal.addListenerForNotificationOpened(function (data) {
     //   console.log("Received NotificationOpened:");
     //   console.log(data);
@@ -106,8 +106,6 @@ templateservicemod.service('TemplateService', function ($http, $state) {
 
     var notificationListener = function () {
       OneSignal.addListenerForNotificationOpened(function (data) {
-        alert();
-        notificationListener();
         console.log("Received NotificationOpened:");
         console.log(data);
         switch (data.data.type) {
@@ -160,6 +158,7 @@ templateservicemod.service('TemplateService', function ($http, $state) {
             break;
 
         }
+        notificationListener();
       });
 
     }
