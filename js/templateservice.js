@@ -186,7 +186,7 @@ templateservicemod.service('TemplateService', function ($http, $state) {
           OneSignal.setSubscription(true);
         } else {
           OneSignal.getNotificationPermission(function (permission) {
-            if (permission == 'default' || permission == "granted") {
+            if (permission == 'default') {
               OneSignal.setSubscription(true);
               // OneSignal.showHttpPrompt();
               OneSignal.registerForPushNotifications({
