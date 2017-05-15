@@ -20,7 +20,7 @@ templateservicemod.service('TemplateService', function ($http, $state) {
       /* Example notification title */
       exampleNotificationTitle: 'TraveLibro',
       /* Example notification message */
-      exampleNotificationMessage: 'This is an example notification',
+      exampleNotificationMessage: 'Capture | Inspire | Relive',
       /* Text below example notification, limited to 50 characters */
       // exampleNotificationCaption: false,
       /* Accept button text, limited to 15 characters */
