@@ -105,6 +105,7 @@ templateservicemod.service('TemplateService', function ($http, $state) {
     });
 
     var notificationListener = function () {
+      // alert();
       OneSignal.addListenerForNotificationOpened(function (data) {
         console.log("Received NotificationOpened:");
         console.log(data);
@@ -183,12 +184,6 @@ templateservicemod.service('TemplateService', function ($http, $state) {
           // The user is subscribed to notifications
           // Don't show anything
           OneSignal.setSubscription(true);
-
-          // OneSignal.registerForPushNotifications({
-          //   modalPrompt: true
-          // });
-
-
         } else {
           OneSignal.getNotificationPermission(function (permission) {
             if (permission == 'default' || permission == "granted") {

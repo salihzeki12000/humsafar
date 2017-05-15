@@ -10370,7 +10370,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, 300);
 
     // ISMINE FUNCTION
-    if ($.jStorage.get("isLoggedIn")) {
+    if ($.jStorage.get("isLoggedIn")) { 
       $scope.isLoggedIn = true;
       $scope.template.isLoggedIn = true; ///////////////////////////////////////////////////////////////////////
       if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
