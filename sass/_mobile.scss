@@ -681,7 +681,7 @@ text-align: center;
     font-size: 16px !important;
   }
 .travel-bg, .holiday-step {
-@include background(url(../img/mobile-bg.jpg) #39588f no-repeat 50% 50%);
+@include background(url(../img/mobile-bg.jpg) $brand-dark-blue no-repeat 50% 50%);
 background-attachment: initial;
 background-size: cover;
 }
@@ -1678,38 +1678,47 @@ width: 150px;
     text-align: center;
   }
   .cover-modal1 {
-    padding-right: 20px;
+    padding: 10px;
     .modal-dialog {
+.modal-content{
+  padding: 0;
+}
       .musto-thumbnail {
         width: 100%;
         top: 0;
         left: 0;
         position: static;
-        transform: rotate(0deg) translate(0, 0);
+        @include transform(rotate(0deg) translate(0, 0));
         .img-holder-place {
           width: 100%;
           height: auto;
           overflow: auto;
           img {
-            transform: rotate(0deg) translate(0, 0);
+            @include transform(rotate(0deg) translate(0, 0));
             position: static;
             width: 100%;
           }
         }
-        .flexslider .flex-direction-nav a:before{
-              transform: translateY(-25%);
+        .flexslider .flex-direction-nav a
+        {
+          top: 0;
+          &:before{
+              @include transform(translateY(-25%));
         }
+        }
+      }
+      .flex-direction-nav a {
+    top: 25%;
       }
     }
     .destination-desc-modal{
+      position: static;
+      margin: 0;
           padding: 10px 10px 0;
           p{
             margin-bottom: 5px;
           }
     }
-  }
-  .destination-desc-modal {
-    display: none;
   }
   .home-slide {
     .slide2 .life-icon img {
@@ -1814,10 +1823,10 @@ width: 150px;
     top: 55px;
   }
   .btn-destinationfilter {
-    padding: 0 0 0 20px;
+    padding: 8px 0 0 0;
 }
   .destination-content {
-    margin-top: 140px;
+    margin-top: 110px;
     &.mt0{
     margin-top: 0px;
     }
@@ -1827,6 +1836,9 @@ width: 150px;
     .destination-filterscroll {
       margin-bottom: 10px;
     }
+    .pt20.pb10.head-title-all {
+    padding: 20px 0 0;
+}
   }
   .addfixed2 .destin-fixednav {
     top: 55px;
@@ -1880,11 +1892,17 @@ width: 150px;
     }
   }
   // single post local and travel end
+  .comment-like-notify {
+    padding: 0px;
+}
 }
 
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
+  .bg-white, .setting ,.travel-life-part.bg-white, .travel-life-part.setting {
+    background-color:#fff;
+}
   .mobile-header .mobile-nofity ul li a {
     font-size: 18px;
     padding-right: 4px;

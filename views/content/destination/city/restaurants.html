@@ -33,6 +33,11 @@
                               <label for="{{cuisine.name}}">{{cuisine.name}}</label>
                             </div>
                           </li>
+                                 <li class="visible-xs">
+                            <div class="button-all text-right pr10 pb10">
+                              <a class="btn btn-pink avenir-roman" ng-click="getCityInfo('restaurant',urlDestinationCity)">Submit</a>
+                            </div>
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -46,6 +51,11 @@
                             <div class="custom-checkbox">
                               <input type="checkbox" id="{{restaurant.name}}Resto" ng-model="restaurant.checked" ng-click="hotelRestaurantFilter(restaurant,'typeRestaurant','toggle-dropDown_2')">
                               <label for="{{restaurant.name}}Resto">{{restaurant.name}}</label>
+                            </div>
+                          </li>
+                                 <li class="visible-xs">
+                            <div class="button-all text-right pr10 pb10">
+                              <a class="btn btn-pink avenir-roman" ng-click="getCityInfo('restaurant',urlDestinationCity)">Submit</a>
                             </div>
                           </li>
                         </ul>
@@ -63,7 +73,11 @@
                               <label for="{{budget.name}}">{{budget.name}}</label>
                             </div>
                           </li>
-
+                          <li class="visible-xs">
+                            <div class="button-all text-right pr10 pb10">
+                              <a class="btn btn-pink avenir-roman" ng-click="getCityInfo('restaurant',urlDestinationCity)">Submit</a>
+                            </div>
+                          </li>
                         </ul>
                       </div>
                     </div>

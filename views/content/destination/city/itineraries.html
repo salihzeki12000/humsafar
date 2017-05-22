@@ -3,7 +3,7 @@
     <div class="relate zindex2" ng-class="{'openfilter': isopenfilter}" style="z-index: 2;">
       <div class="pt20 pb10 head-title-all">
         <div class="row m-clear">
-          <div class="col-md-3 m-plr0">
+          <div class="col-md-3">
             <div class="btn-destinationfilter">
               <button class="btn btn-pink" ng-click="openFilter()">
                 <i class="fa fa-filter" aria-hidden="true"></i>
@@ -35,6 +35,11 @@
                               <label for="{{type.name}}">{{type.name}}</label>
                             </div>
                           </li>
+                            <li class="visible-xs">
+                            <div class="button-all text-right pr10 pb10">
+                              <a class="btn btn-pink avenir-roman " ng-click="getCityItiSubmit();">Submit</a>
+                            </div>
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -48,6 +53,11 @@
                             <div class="custom-checkbox">
                               <input type="checkbox" id="{{by.name}}" ng-model="by.checked" ng-click="cityItineraryFilter(by,'cityItineraryBy')">
                               <label for="{{by.name}}">{{by.name}}</label>
+                            </div>
+                          </li>
+                            <li class="visible-xs">
+                            <div class="button-all text-right pr10 pb10">
+                               <a class="btn btn-pink avenir-roman " ng-click="getCityItiSubmit();">Submit</a>
                             </div>
                           </li>
                         </ul>
@@ -86,7 +96,7 @@
             <div class="travel-life-part bg-white blog-post {{post.type}} avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
               <div class="travel-journey-heading">
                 <div class="editor-logo user-logo pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})">
-                  <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="img-responsive">
+                  <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="full-width">
                 </div>
                 <div class="inline-block editor-subdetail">
                   <div class="clearfix">
@@ -115,7 +125,7 @@
                   <h3 class="m-clear text-capitalize">{{post.name}}</h3>
 
                   <div class="clearfix journey-travelling-type">
-                    <div class="row">
+                    <div class="row  m-m0">
                       <div class="col-xs-5">
                         <div class="pull-left">
                           <div class="journey-type m0">
@@ -157,7 +167,8 @@
                         <audio id="like-play">
                           <source src="img/tiny1.mp3" type="audio/mp3">
                         </audio>
-                      </a></li>
+                      </a>
+                      </li>
                       <li class="pointer" ng-click="getCommentsData(post)">
                         <a href=""><img src="img/comments.png" alt="" height="18"></a>
                       </li>
@@ -187,7 +198,7 @@
                   <div class="clearfix">
                     <div class="pull-left">
                       <span class="color-blue mr10 pointer" ng-click="getLikesData(post);"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{post.likeCount}}</b>Likes</span>
-                      <span class="color-blue mr10 pointer" ng-click="getCommentsData(post)"><img src="img/comments.png" alt="" height="14"><b class=""> {{post.commentCount}} </b> Comments </span>
+                      <span class="color-blue mr10 pointer" ng-click="getCommentsData(post)"> <img src="img/comments.png" alt="" height="14"> <b> {{post.commentCount}} </b> Comments </span>
                       <!-- <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{post.userReviewCount}} Reviews ({{post.userReviewCount}}/5)</span> -->
                     </div>
                     <div class="pull-right">

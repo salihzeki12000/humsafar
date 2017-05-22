@@ -1641,11 +1641,11 @@ h4{
 
   // EDIT DATE TIME MODAL
     .outer-report .notify-close,.edit-kindof-popup-close,.notify-close{
-                    top: 7px !important;
+                    top: 28px !important;
                     z-index: 999;
-                    right: 10px;
+                    right: 20px !important;
             img{
-              max-width: 15px;
+              max-width: 12px;
             }
       }
       .notify-popup .notify-imgholder{
