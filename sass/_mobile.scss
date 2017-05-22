@@ -607,8 +607,7 @@
   }
   .user-quick-itinerary .quick-itinerary-tag {
     right: 8px;
-  }
-  //destination bookings
+  } //destination bookings
   .destination-hotel-card {
     .no-booking-found {
       font-size: 22px;
@@ -643,8 +642,7 @@
         display: block;
       }
     }
-  }
-  //destinaiton bookings end
+  } //destinaiton bookings end
   //Modal
   .travel-bg {
     .modal-dialog {
@@ -761,8 +759,7 @@
     .profile-photo-sec .upload-section img {
       width: 150px;
     }
-  }
-  // setting page end
+  } // setting page end
   // main page
   .upload-section {
     img {
@@ -932,8 +929,7 @@
   .journey-cycle img {
     width: 100px;
   } // on the go journey page
-
-  .started-journey-card .journey-start{
+  .started-journey-card .journey-start {
     background: transparent;
   }
   .ongo-journey-main {
@@ -1885,10 +1881,12 @@
   .comment-like-notify {
     padding: 0px;
   }
-
   .ongo-journey-card {
     background-color: #fff;
-}
+  }
+  .libro-filter .itinerary-dropdown {
+    z-index: 2;
+  }
 }
 
 // media query for 767px to 480px end
@@ -2033,8 +2031,7 @@
     .profile-photo-sec .upload-section img {
       width: 120px;
     }
-  }
-  // setting page end
+  } // setting page end
   .local-life-main {
     padding: 0;
     .post-list-view {
@@ -2726,8 +2723,7 @@
   }
   .blog-post {
     margin: 15px 0;
-  }
-  //destination bookings
+  } //destination bookings
   .dest-btv {
     .mobile-row-customise {
       padding: 0 2px !important;
@@ -2735,13 +2731,27 @@
         padding: 0 4px !important;
       }
     }
-  }
-  //destination bookings end
+  } //destination bookings end
   .country-visited-tab .country-list-holder,
   .bucket-tab-main .bucket-list-holder {
     margin: 0;
     margin-bottom: 15px;
   }
+  .dest-btv{
+    padding: 10px 0;
+    .common-box {
+    margin: 15px 0;
+}
+  } 
+  .user-social-item .activity-edit-option {
+        width: 110px;
+    position: absolute;
+    bottom: 35px;
+    right: -10px;
+    &:before,&:after{
+      right: 0;
+    }
+}
 }
 
 // media query for 480px to 320px end
