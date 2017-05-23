@@ -9,9 +9,9 @@
             <span class="pointer add-holder" ng-click="addItinerary();" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
             <div class="add-more-itinerary" ng-show="showItinerary">
               <ul>
-                <li class="clearfix relate"><a href="">Detailed Itinerary <span class="pull-right itinerary-info" ng-click="showdetailInfo()"><i class="fa fa-info-circle"></i></span>
+                <li class="clearfix relate"><a ui-sref="detailitinerary({flag:'new',urlSlug:''})">Detailed Itinerary</a> <a><span class="pull-right itinerary-info" ng-click="showdetailInfo()"><i class="fa fa-info-circle"></i></span>
               <div class="itinerary-infobox" ng-show="viewdetailInfo">Pen down day-to-day itinerary in every way-country to visit, cities to explore, places to stay at, things to do, landmarks to discover, and more.</div></a></li>
-                <li class="clearfix relate"><a href="">Quick Itinerary <span class="pull-right itinerary-info" ng-click="showquickInfo()"><i class="fa fa-info-circle"></i></span>
+                <li class="clearfix relate"><a ui-sref="quickitinerary({flag:'new',urlSlug:''})">Quick Itinerarya </a><a><span class="pull-right itinerary-info" ng-click="showquickInfo()"><i class="fa fa-info-circle"></i></span>
               <div class="itinerary-infobox "  ng-show="viewquickInfo">Short on time... simply paste your ready made itineraries in our section in as many words as you desire and you are good to go.</div></a></li>
               </ul>
             </div>
@@ -21,46 +21,6 @@
     </div>
   </div>
   <!-- ADD BUTTON END -->
-
-  <!-- EMPTY AGENT INTRO -->
-  <div class="empty-intro bg-white" hidden>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-sm-12 col-xs-12">
-          <div class="agthome-itinerary-youtube">
-            <iframe src="https://www.youtube.com/embed/IUNM1AeHOv4" frameborder="0" ssallowfullscreen width="100%" height="100%"></iframe>
-
-            <!-- <div class="youtube-placeholder">
-              <img src="img/paris.jpg" alt="" class="img-responsive">
-          </div> -->
-          </div>
-        </div>
-        <div class="col-md-5 col-sm-12 col-xs-12">
-          <div class="agt-home-itineraryintro">
-            <h3 class="color-blue">
-              Fill in this space to give travel lovers a better sense of what your agency has to offer.</h3>
-            <p class="color-blue">Regularly updating your library with new itineraries, keeps travellers interested and informed about how touring with your agency can make a good tour/trip, great!</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- EMPTY AGENT INTRO END-->
-
-  <!-- EMPTY USER PAGE -->
-  <div class="empty-intro bg-white avenir-roman" hidden>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-          <div class="agt-user-intro">
-            <h3 class="color-blue avenir-heavy">Lifestyle Holidays</h3>
-            <p class="color-blue">is still to upload this space with interesting itineraries</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- EMPTY USER PAGE END -->
 
   <!-- FILTER START -->
   <div class="agent-itinerary-filter" hidden>
@@ -163,6 +123,46 @@
     </div>
   </div>
   <!-- FILTER START  END-->
+
+  <!-- EMPTY AGENT INTRO -->
+  <div class="empty-intro bg-white" hidden>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <div class="agthome-itinerary-youtube">
+            <iframe src="https://www.youtube.com/embed/IUNM1AeHOv4" frameborder="0" ssallowfullscreen width="100%" height="100%"></iframe>
+
+            <!-- <div class="youtube-placeholder">
+              <img src="img/paris.jpg" alt="" class="img-responsive">
+          </div> -->
+          </div>
+        </div>
+        <div class="col-md-5 col-sm-12 col-xs-12">
+          <div class="agt-home-itineraryintro">
+            <h3 class="color-blue">
+              Fill in this space to give travel lovers a better sense of what your agency has to offer.</h3>
+            <p class="color-blue">Regularly updating your library with new itineraries, keeps travellers interested and informed about how touring with your agency can make a good tour/trip, great!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- EMPTY AGENT INTRO END-->
+
+  <!-- EMPTY USER PAGE -->
+  <div class="empty-intro bg-white avenir-roman" hidden>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <div class="agt-user-intro">
+            <h3 class="color-blue avenir-heavy">Lifestyle Holidays</h3>
+            <p class="color-blue">is still to upload this space with interesting itineraries</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- EMPTY USER PAGE END -->
 
   <!-- Itinerary cards -->
   <div class="agent-cardsection" >

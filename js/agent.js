@@ -38,5 +38,93 @@ var agent = angular.module('agent', [])
         });
       },
 
+      saveTour: function (formData, callback) {
+        console.log(formData,"tour api");
+        TravelibroService.http({
+          url: adminURL + "/toursPackages/saveWeb",
+          method: "POST",
+          data: formData
+        }).success(function (data) {
+          callback(data);
+        });
+      },
+      getAgentdata: function(formData, callback) {
+        console.log(formData,'agent ka data');
+        TravelibroService.http({
+          url: adminURL + "/agent/getAgentSection",
+          method: "POST",
+          data: formData
+        }).success(function(data){
+          callback(data);
+        })
+      },
+      saveAgentReview: function(formData, callback) {
+        console.log(formData, 'review Agaya');
+        TravelibroService.http({
+          url: adminURL + "/testimonials/save",
+          method: "POST",
+          data: formData
+        }).success(function(data){
+          callback(data);
+        })
+      },
+      getAgentDetails: function(callback){
+        TravelibroService.http({
+          url: adminURL + "/agent/getOneAgent",
+          method: "POST"
+        }).success(function(data){
+          callback(data);
+        })
+      },
+      saveSettings: function(formData, callback){
+        TravelibroService.http({
+          url: adminURL + "/agent/save",
+          method: "POST",
+          data: formData
+        }).success(function(data){
+          callback(data);
+        })
+      },
+      changePassword: function(formData, callback) {
+        TravelibroService.http({
+          url: adminURL + "/agent/changePassword",
+          method: "POST",
+          data: formData
+        }).success(function(data){
+          callback(data);
+        })
+      },
+      setLeads: function(formData, callback){
+        TravelibroService.http({
+          url: adminURL + "/leads/setLeads",
+          method: "POST",
+          data: formData
+        }).success(function(data){
+          callback(data);
+        })
+      },
+      agentStatusSave: function(formData, callback) {
+        TravelibroService.http({
+          url: adminURL + "/agentStatus/save",
+          method: "POST",
+          data: formData
+        }).success(function(data){
+          callback(data);
+        })
+      },
+      downloadTourPdf: function(formData,callback){
+        console.log(formData, 'PDF');
+        TravelibroService.http({
+          url: adminURL + "/download",
+          method: "GET",
+          params: {
+            id: formData._id,
+            filename: formData.pdf
+          }
+        }).success(function(data){
+          callback(data);
+        })
+      }
+
     }
   });

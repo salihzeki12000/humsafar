@@ -1,7 +1,7 @@
-<div class="agt-home-tourpackage">
+<div class="agt-home-tourpackage" >
 
   <!-- ADD BUTTON -->
-  <div class="add-agentbutton" >
+  <div class="add-agentbutton" ng-if="template.isLoggedIn && template.isMine">
     <div class="container">
       <div class="clearfix">
         <div class="pull-right">
@@ -13,7 +13,7 @@
                 <form>
                   <div class="">
                     <div class="a">
-                      <input type="text" class="form-control color-white" placeholder="Tour Title">
+                      <input type="text" class="form-control color-white" placeholder="Tour Title" ng-model="tour.title">
                     </div>
                   </div>￼
 
@@ -23,17 +23,17 @@
                       <div class="">
                         <div class="a collapsed" data-toggle="collapse" data-target="#demo">
                           <input type="text" class="form-control color-white" placeholder="Type of Holiday/Tour">
-                          <i class="fa fa-angle-down color-white type-tourarrow arrow-down down" ></i>
-                          <i class="fa fa-angle-up color-white type-tourarrow arrow-up up" ></i>
+                          <i class="fa fa-angle-down color-white type-tourarrow arrow-down down"></i>
+                          <i class="fa fa-angle-up color-white type-tourarrow arrow-up up"></i>
                         </div>
                       </div>
 
-                    </div>  ￼
+                    </div> ￼
                     <div class="collapse optiondiv" id="demo">
                       <div class="tour-typeoption">
                         <ul class="list-inline">
                           <li ng-repeat="tourtype in categoriesSpecial track by $index">
-                            <figure class="tourcategory">
+                            <figure class="tourcategory {{tourtype.class}}" ng-click="selectCategory(tourtype)">
                               <div class="tourcategory-img">
                                 <img ng-src="{{tourtype.tourImgCat}}" width="{{tourtype.catwidth}}" alt="" class="img-responsive">
                               </div>
@@ -47,110 +47,124 @@
                   <!-- tour-type end -->
 
                   <!-- currency list -->
-                  <div class="tour-type">
-                    <div class="tour-typeinput">
-                      <div class="">
-                        <div class="a collapsed" data-toggle="collapse" data-target="#currencyList">
-                          <input type="text" class="form-control color-white" placeholder="Currency">
-                          <i class="fa fa-angle-down color-white type-tourarrow arrow-down down" ></i>
-                          <i class="fa fa-angle-up color-white type-tourarrow arrow-up up" ></i>
-                        </div>
-                      </div>
-                    </div>  ￼
-                    <div class="collapse optiondiv" id="currencyList">
-                      <div class="tourcurrency-option">
-                        <ul class="">
-                          <li class="clearfix" ng-repeat="currency in tourCurrency track by $index">
-                            <span class="pull-left">{{currency.currencyCountry}}</span>
-                            <span class="pull-right">{{currency.currencyCode}}</span>
-                          </li>
-                        </ul>
-                      </div>
+                  <div class="form-group">
+                    <div class="tour-type tour-select">
+                      <ui-select ng-model="tour.currency" theme="bootstrap">
+                        <ui-select-match placeholder="Currency ">{{$select.selected.currency}}</ui-select-match>
+                        <ui-select-choices repeat="currency.currency as currency in countries | filter: $select.search track by $index">
+                          <div class="clearfix">
+                            <span class="tour-optionselect pull-left">{{currency.name}}</span>
+                            <span class="tour-optionselect pull-right">{{currency.currency}}</span>
+                          </div>
+                        </ui-select-choices>
+                      </ui-select>
                     </div>
                   </div>
                   <!-- currency list end -->
 
+                  <!-- TOUR PRICE -->
+                  <div class="form-group">
+                    <div class="a tour-price">
+                      <input type="number" class="form-control color-white" placeholder="Price" ng-model="tour.price">
+                    </div>
+                  </div>
+                  <!-- TOUR PRICE END -->
 
-                  <div class="form-group">
-                    <div class="a">
-                      <input type="text" class="form-control color-white" placeholder="Price">
-                    </div>
-                  </div>
+                  <!-- NIGHTS  DAYS -->
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="a">
-                          <input type="text" class="form-control color-white" placeholder="Nights">
+                          <input type="text" class="form-control color-white" placeholder="Nights" ng-model="tour.nights">
                         </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="a">
-                          <input type="text" class="form-control color-white" placeholder="Days">
+                          <input type="text" class="form-control color-white" placeholder="Days" ng-model="tour.days">
                         </div>
                       </div>
                     </div>
                   </div>
+                  <!-- NIGHTS  DAYS END -->
+
                   <p class="color-white avenir-roman text-center m-clear">OR</p>
+
+                  <!-- HOURS MINUTES -->
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="a">
-                          <input type="text" class="form-control color-white" placeholder="Hours">
+                          <input type="text" class="form-control color-white" placeholder="Hours" ng-model="tour.hours">
                         </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="a">
-                          <input type="text" class="form-control color-white" placeholder="Minutes">
+                          <input type="text" class="form-control color-white" placeholder="Minutes" ng-model="tour.minutes">
                         </div>
                       </div>
                     </div>
                   </div>
+                  <!-- HOURS MINUTES END -->
+
+                  <!-- COUNTRY UI SELECT -->
                   <div class="form-group">
-                    <div class="a select-div">
-                      <select class="form-control color-white" id="">
-                         <option disabled selected hidden>Select Country</option>
-                         <option>1</option>
-                         <option>2</option>
-                         <option>3</option>
-                      </select>
-                      <p><i class="fa fa-angle-down" aria-hidden="true"></i></p>
+                    <div class="tour-type tour-select">
+                      <ui-select multiple ng-model="tour.country" theme="bootstrap" title="Country">
+                        <ui-select-match placeholder="Country">{{$item.name}}</ui-select-match>
+                        <ui-select-choices repeat="country._id as country in countries | filter: $select.search track by $index">
+                          <div>
+                            <span class="color-white">{{country.name}}</span>
+                          </div>
+                        </ui-select-choices>
+                      </ui-select>
                     </div>
                   </div>
+                  <!-- COUNTRY UI SELECT END -->
+
+                  <!-- BOOKING URL -->
                   <div class="form-group">
                     <div class="a">
-                      <input type="text" class="form-control color-white" placeholder="Your Website Booking Link URL">
+                      <input type="text" class="form-control color-white" placeholder="Your Website Booking Link URL" ng-model="tour.bookingUrl">
                     </div>
                   </div>
-                  <p class="font-sz10 color-pink">Please Enter Missing Details</p>
+                  <!-- BOOKING URL END -->
+
+                  <p class="font-sz10 color-pink">* Please Enter Missing Details</p>
+
+                  <!-- upload buttons -->
+                  <div class="button-touruploads">
+                    <div class="tour-uploads tour-pdf relate" ng-hide="showTourPdf">
+                      <button class="btn btn-white-outline pointer">Upload Pdf</button>
+                      <upload-image ng-model="tour.pdf" ng-callback="tourPdf(data);" no-view class="tour-uploadinput pointer"></upload-image>
+                    </div>
+                    <div class="tour-uploads tour-pic relate" ng-hide="showTourPic">
+                      <button class="btn btn-white-outline pointer" >Upload Display Picture</button>
+                      <upload-image ng-model="tour.displayPic" ng-callback="tourPhoto(data);" no-view class="pointer tour-uploadinput"></upload-image>
+                    </div>
+                    <button class="btn btn-pink btn-more tourupload-position" ng-click="saveTour(tour);">SAVE</button>
+                  </div>
+                  <!-- upload buttons end -->
 
                   <!-- file preview holder -->
                   <div class="tourfile-preview">
-                    <div class="tour-pdf-preview">
+                    <div class="tour-pdf-preview" title="{{tour.pdf}}" ng-show="showTourPdf">
                       <div class="tour-pdf-holder">
-                        <img src="img/icons/pdf.png" alt="" class="img-responsive">
-                        <span class="remove-preview"><i class="fa fa-times color-white"></i></span>
+                        <img src="img/icons/pdf.png" alt="{{tour.pdf}}" class="img-responsive">
+                        <span class="remove-preview" ng-click="removeTourPdf();" title="Remove"><i class="fa fa-times color-white"></i></span>
                       </div>
                     </div>
-                    <div class="tour-dp-preview">
+                    <div class="tour-dp-preview" title="{{tour.displayPic}}" ng-show="showTourPic">
                       <div class="tour-dp-holder">
-                        <img src="img/ongojourney/window.jpg" alt="" class="img-responsive">
-                        <span class="remove-preview"><i class="fa fa-times color-white"></i></span>
+                        <img ng-src="{{tour.displayPic | uploadpath}}" alt="" class="img-responsive get-center">
+                        <span class="remove-preview" ng-click="removeTourPic();" title="Remove"><i class="fa fa-times color-white"></i></span>
                       </div>
                     </div>
                   </div>
                   <!-- file preview holder end -->
-
-                  <!-- upload buttons -->
-                  <div class="button-touruploads">
-                    <button class="btn btn-white-outline hide">Upload Pdf</button>
-                    <button class="btn btn-white-outline hide">Upload Display Picture</button>
-                    <button class="btn btn-pink btn-more tourupload-position">SAVE</button>
-                  </div>
-                  <!-- upload buttons end -->
                 </form>
               </div>
             </div>
@@ -162,7 +176,7 @@
   <!-- ADD BUTTON END-->
 
   <!-- EMPTY AGENT INTRO BOX -->
-  <div class="empty-intro bg-white" hidden>
+  <div class="empty-intro bg-white" ng-if="tourData.length==0 && template.isLoggedIn && template.isMine">
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-sm-12">
@@ -188,7 +202,7 @@
   <!-- EMPTY AGENT INTRO BOX END -->
 
   <!-- EMPTY USER INTRO -->
-  <div class="empty-intro bg-white  avenir-roman" hidden>
+  <div class="empty-intro bg-white  avenir-roman" ng-if="tourData.length==0 && !template.isLoggedIn">
     <div class="container">
       <div class="row">
         <div class="col-md-offset-2 col-md-8">
@@ -203,39 +217,39 @@
   <!-- EMPTY USER INTRO END -->
 
   <!-- TOURS & PACKAGE CARDS -->
-  <div class="agent-cardsection">
+  <div class="agent-cardsection" ng-if="tourData.length>0">
     <div class="container">
       <div class="row">
-        <div class="col-md-4 col-sm-6" ng-repeat="tourcard in usrTourPackageCard track by $index">
+        <div class="col-md-4 col-sm-6" ng-repeat="tourcard in tourData track by $index">
           <div class="agt-itinerarycard">
             <div class="itinerary-img">
               <div class="theme">
                 <div class="theme-img">
-                  <img ng-src="{{tourcard.tourcategoryImg}}" class="img-responsive" alt="">
+                  <img ng-src="{{tourcard.typeOfHoliday[0] | kindOfJourney:'white'}}" class="img-responsive" alt="{{tourcard.typeOfHoliday[0]}}">
                 </div>
                 <div class="theme-name">
-                  <p>{{tourcard.tourcategoryTitle}}</p>
+                  <p>{{tourcard.typeOfHoliday[0]}}</p>
                 </div>
               </div>
               <div class="country-badges">
-                <div class="country-holder" ng-repeat="tourcountryflagbadge in tourcard.tourcountryBadgesFlag track by $index">
-                  <img ng-src="{{tourcountryflagbadge}}" alt="" class="img-responsive">
+                <div class="country-holder" ng-repeat="tourcountryflagbadge in tourcard.country | limitTo : 3">
+                  <img ng-src="{{tourcountryflagbadge.flag|uploadpath}}" alt="tourcountryflagbadge.name" class="img-responsive"> {{tourcountryflagbadge.name}}
                 </div>
-                <span class="country-count">+4</span>
+                <span class="country-count color-blue" ng-if="tourcard.country.length>3">+{{tourcard.country.length-3}}</span>
               </div>
-              <img ng-src="{{tourcard.tourImg}}" alt="" class="img-responsive">
+              <img ng-src="{{tourcard.displayPic|uploadpath:380:250:'cover'}}" alt="{{tourcard.title}} | Travel Libro" class="img-responsive"/>
               <div class="itinerary-imgfoot ">
                 <div class="imgfoot-top clearfix">
                   <div class="pull-left">
-                    <h4 class="font-sz18">{{tourcard.agttourTitle}}</h4>
-                    <p class="day-night"><span>{{tourcard.tourNightC}} Nights</span> | <span>{{tourcard.tourDayC}} Days</span></p>
-                    <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{tourcard.tourDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{tourcard.tourTime}}</span></p>
+                    <h4 class="font-sz18 text-capitalize">{{tourcard.title}}</h4>
+                    <p class="day-night"><span>{{tourcard.nights}} Nights</span> | <span>{{tourcard.days}} Days</span></p>
+                    <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{tourcard.createdAt | formatDate:'date' }}</span> | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{tourcard.createdAt | formatDate:'time' }}</span></p>
                   </div>
                   <div class="pull-right">
-                    <p class="font-sz18 cost-posi">${{tourcard.agttourCost}}</p>
+                    <p class="font-sz18 cost-posi">${{tourcard.price}}</p>
                   </div>
-                  <button class="btn btn-pink btn-download">Download</button>
-                  <button class="btn btn-pink btn-book">Book</button>
+                  <button class="btn btn-pink btn-download"><a ng-click="downloadTourPdf(tourcard);" class="color-white" download>Download</a></button>
+                  <button class="btn btn-pink btn-book"><a href="{{tourcard.bookingUrl}}" target="_blank" class="color-white">Book</a></button>
                 </div>
               </div>
               <div class="call-btn" ng-click="showContact();">

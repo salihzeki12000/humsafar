@@ -1,15 +1,36 @@
 <div class="agt-home-photovideos">
 
-  <!-- ADD BUTTON START -->
+  <!-- ADD BUTTON AND FILTER START -->
   <div class="add-agentbutton">
     <div class="container">
       <div class="clearfix agt-moreholder">
-        <div class="pull-right">
+        <!-- ng-class={'filter-headagent':'userData.type=="User"'} -->
+        <div class="filter-head filter-headagent" >
+          <div class="photo-filter color-grey collapsed" data-toggle="collapse" data-target="#demo">
+            <span class="down">All</span>
+            <span class="up color-grey">Photos & Videos</span>
+            <i class="fa fa-chevron-up up arrow-big"></i>
+            <i class="fa fa-chevron-down color-grey down arrow-big"></i>
+          </div>
+          <div id="demo" class="collapse filter-data">
+            <div class="options">
+              <div class="opt custom-checkbox" ng-repeat="picfilter in picFilterList track by $index">
+                <input type="checkbox" id="{{picfilter}}">
+                <label for="{{picfilter}}">{{picfilter}}</label>
+              </div>
+            </div>
+            <div class="button-holder">
+              <a for="" class="clear-link">Clear</a>
+              <button class="btn btn-pink btn-apply">Apply</button>
+            </div>
+          </div>
+        </div>
+        <div class="pull-right ">
           <div class="add-agtitinerary">
             <span class="pointer add-holder photo-xbtn" ng-click="addItinerary();" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
             <div class="add-more-itinerary" ng-show="showItinerary">
               <p class="color-cyan bord-bot">Photos & Videos</p>
-              <div class="upload-photosec hide" ng-hide="showPhotoupload">
+              <div class="upload-photosec " ng-hide="showPhotoupload">
                 <form>
                   <div class="form-group">
                     <div class="a">
@@ -21,8 +42,8 @@
                   </div>
                 </form>
               </div>
-               <!-- ng-show="showPhotoupload" -->
-              <div class="agthome-photouploadbox">
+              <!-- ng-show="showPhotoupload" -->
+              <div class="agthome-photouploadbox" ng-show="showPhotoupload">
                 <div class="agthome-photo-slider">
                   <flex-slider class="carousel" flex-slide="agent in agentPhotos" slideshow="false" control-nav="false">
                     <li>
@@ -31,12 +52,11 @@
                           <div class="agent-pic-holder">
                             <span class="slider-agent-trash"><i class="fa fa-trash-o"></i></span>
                             <img ng-src="{{column.agentImg}}" alt="" class="img-responsive get-center">
-                            <div class="agent-caption" ng-click="putCaptionAgent(column.agentImg);"
-                            ng-hide="column.agentImg==index">
+                            <div class="agent-caption" ng-click="putCaptionAgent(column.agentImg);" ng-hide="column.agentImg==index">
                               <p ng-if="!column.editAgent || column.editAgent==''">Add Caption</p>
                               <p class="text-ellipsis" ng-if="column.editAgent && !column.editAgent==''">{{column.editAgent}}</p>
                             </div>
-                             <div class="agent-edit-caption" ng-show="column.agentImg==index" ng-class="{'showcaptionagent' : index==column.agentImg, '' : !index==column.agentImg}">
+                            <div class="agent-edit-caption" ng-show="column.agentImg==index" ng-class="{'showcaptionagent' : index==column.agentImg, '' : !index==column.agentImg}">
                               <textarea name="" id="captionArea" cols="30" rows="7" class="form-control" maxlength="150" ng-model="column.editAgent" placeholder="Add Caption"></textarea>
                               <div class="view-caption-onimg">
                                 <span ng-click="putCaptionAgent(column.agentImg);"><i class="fa fa-angle-down"></i></span>
@@ -62,7 +82,7 @@
       </div>
     </div>
   </div>
-  <!-- ADD BUTTON END -->
+  <!-- ADD BUTTON AND FILTER END -->
 
   <!-- EMPTY AGENT INTRO START -->
   <div class="empty-intro " hidden>
@@ -96,30 +116,8 @@
   <!-- EMPTY USER INTRO PAGE END -->
 
   <!-- PHOTO CARDS START -->
-  <div class="agt-home-photo-card" >
+  <div class="agt-home-photo-card">
     <div class="container">
-      <div class="clearfix">
-        <div class="filter-head  pull-left">
-          <div class="photo-filter color-grey collapsed" data-toggle="collapse" data-target="#demo">
-            <span class="down">All</span>
-            <span class="up color-grey">Photos & Videos</span>
-            <i class="fa fa-chevron-up up arrow-big"></i>
-            <i class="fa fa-chevron-down color-grey down arrow-big"></i>
-          </div>
-          <div id="demo" class="collapse filter-data">
-            <div class="options">
-              <div class="opt custom-checkbox" ng-repeat="picfilter in picFilterList track by $index">
-                <input type="checkbox" id="{{picfilter}}">
-                <label for="{{picfilter}}">{{picfilter}}</label>
-              </div>
-            </div>
-            <div class="button-holder">
-              <a for="" class="clear-link">Clear</a>
-              <button class="btn btn-pink btn-apply">Apply</button>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="m-center">
         <div masonry preserve-order class="masonry-main">
           <div class="masonry-brick" ng-repeat="photo in agenPhotogallery track by $index">

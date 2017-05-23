@@ -223,7 +223,7 @@
   border-radius: 0;
 }
 
-.agt-imgholder-active{
+.agt-imgholder-active {
   background-image: url('../img/agt-bg-red.png');
 }
 
@@ -231,9 +231,9 @@
   font-weight: 700;
   padding: 8px 30px;
 
+  &.active,
   &:active,
-  &:hover,
-  &.active {
+  &:hover {
     background-color: $brand-blue !important;
     color: #fff !important;
   }
@@ -242,9 +242,9 @@
 .btn-bluehover {
   background-color: transparent;
 
+  &.active,
   &:active,
-  &:hover,
-  &.active {
+  &:hover {
     background-color: $brand-blue !important;
     color: #fff !important;
   }
@@ -382,43 +382,45 @@
     color: $brand-pink !important;
   }
 }
-
 // Agent nav analytics dropdown
 .analytics-dropoptions {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  width: 150px;
+  background-color: $brand-dark-blue;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 5;
+
+  &:after {
+    content: '';
     position: absolute;
-    top: 30px;
-    left: 0;
-    width: 150px;
-    background-color: $brand-dark-blue;
-    padding: 10px;
-    border-radius: 5px;
-    z-index: 5;
-    &:after{
-      content: '';
-      position: absolute;
-      top: -10px;
-      border-right: 10px solid transparent;
-      border-bottom: 10px solid $brand-dark-blue;
-      border-left: 10px solid transparent;
+    top: -10px;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid $brand-dark-blue;
+    border-left: 10px solid transparent;
+  }
+
+  ul li {
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid #a0a0a0;
+    margin: initial;
+    color: #fff;
+    font-size: 13px;
+    vertical-align: middle;
+
+    &:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
     }
 
-    ul li{
-      padding: 5px;
-      border: none;
-      border-bottom: 1px solid #a0a0a0;
-      margin: initial;
-      color: #fff;
-      font-size: 13px;
-      vertical-align: middle;
-
-      &:last-child{
-        border-bottom: 0px;
-        padding-bottom: 0;
-      }
-      &:hover, &:active{
-        color: $brand-pink;
-      }
+    &:active,
+    &:hover {
+      color: $brand-pink;
     }
+  }
 }
 // Agent nav analytics dropdown enD
 
@@ -660,7 +662,6 @@
   @include transform(translateX(-50%));
 }
 //AGENT USER ITENERARY END
-
 // AGENT USER FILTER
 .agentfilter-drop {
   position: absolute;
@@ -682,11 +683,11 @@
     background-color: $brand-lighter-grey;
   }
 
-  ul{
+  ul {
     max-height: 175px;
     overflow-y: auto;
 
-    li{
+    li {
       padding: 5px;
     }
   }
@@ -698,7 +699,6 @@
 .agt-home-itinerary,
 .agt-home-leadmonitor,
 .agt-home-photovideos,
-.agt-home-testimonialreviews,
 .agt-home-tourpackage,
 .agt-home-travelactivity,
 .agt-usr-aboutus,
@@ -747,20 +747,19 @@
   @extend .avenir-roman;
 }
 
-.agt-home-testimonialreiewsintro{
+.agt-home-testimonialreiewsintro {
+  padding: 50px 0;
+}
+
+.agttravel-intro {
   padding: 50px 0;
   margin-top: -50px;
 }
 
-.agttravel-intro{
-  padding: 50px 0;
-  margin-top: -50px;
-}
-
-.agt-home-photovideos .agt-home-photo-card {
-  margin-top: -50px;
-  // TO ALIGN WITH ADD PHOTO BUTTON
-}
+// TO ALIGN WITH ADD PHOTO BUTTON
+// .agt-home-photovideos .agt-home-photo-card {
+//   margin-top: -50px;
+// }
 
 .agt-home-leadmonitor,
 .agt-home-testimonialreviews,
@@ -770,7 +769,7 @@
   background-color: rgba(45,54,85,0.5);
 }
 
-.agent-cardsection{
+.agent-cardsection {
   min-height: 100vh;
 }
 
@@ -884,11 +883,15 @@
   }
 }
 
+.testimonial-holder{
+  padding-bottom: 60px;
+}
+
 .testimonial-card {
   background-color: rgba(255,255,255,0.9);
   border-radius: 5px;
   padding: 20px 15px;
-  margin: 10px;
+  margin: 15px 0;
 
   img {
     max-width: 100%;
@@ -935,6 +938,7 @@
 
   span {
     font-style: italic;
+    font-size: 12px;
   }
 }
 
@@ -962,6 +966,10 @@ q {
   .col-md-4 {
     padding: 0;
   }
+}
+
+.write-testimonial{
+  padding: 20px 0;
 }
 
 .writetestimonial-card {
@@ -1173,7 +1181,9 @@ q {
 .add-agtitinerary .itinerary-info {
   line-height: 1;
   height: auto;
+  color: #fff;
   @extend .font-sz18;
+  @extend .pointer;
   z-index: 6;
   background: transparent;
 
@@ -1368,6 +1378,21 @@ q {
   }
 }
 
+.tour-uploads{
+  margin: 10px 0;
+  cursor: pointer;
+  .btn{
+    width: 100%;
+  }
+  .tour-uploadinput{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+  }
+}
+
 .agt-home-tourpackage,
 .agt-usr-tourpackages,
 .tour-package-card {
@@ -1402,6 +1427,28 @@ q {
   @extend .color-blue;
   @extend .font-sz18;
 }
+
+.agent-statustext {
+  border: none;
+  border-bottom: 1px solid #fff;
+  background-color: transparent;
+  color: #fff;
+  // ::-webkit-scrollbar {
+  //   width: 4px;
+  // }
+  //
+  // ::-webkit-scrollbar-track {
+  //   background-color: transparent;
+  // }
+  //
+  // ::-webkit-scrollbar-thumb {
+  //   background-color: $brand-lighter-grey;
+  // }
+
+  &:focus{
+    border-color: #fff !important;
+  }
+}
 // ------ yash scss ----------------
 
 .btn-download {
@@ -1414,7 +1461,7 @@ q {
 .call-btn {
   position: absolute;
   right: 10px;
-  top: 45%;
+  bottom: 45%;
   color: #fff;
   border: 1px solid $brand-cyan;
   border-radius: 50%;
@@ -1462,6 +1509,7 @@ q {
   margin-bottom: 20px;
   width: 270px;
   position: relative;
+  float: right;
 
   .clear-link {
     padding: 0 10px;
@@ -1478,6 +1526,13 @@ q {
     border: 1px solid #ccc;
     border-radius: 4px;
     @extend .pointer;
+    .arrow-big {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 21px;
+      font-weight: 700;
+    }
   }
 
   .down {
@@ -1495,13 +1550,15 @@ q {
   }
 
   .filter-data {
-    width: 100%;
     position: absolute;
     top: 34px;
-    z-index: 3;
-    background-color: #fff;
+    left: 0;
+    width: 100%;
     padding: 5px;
     border: 1px solid #ccc;
+    border-radius:  0 0 4px 4px;
+    background-color: #fff;
+    z-index: 3;
 
     .options {
       overflow-y: scroll;
@@ -1835,11 +1892,20 @@ q {
   }
 }
 
+.select-categoryspcl{
+  .category-active{
+    background: url("../img/icons/box7.png") no-repeat 50% 0;
+    background-size: contain;
+  }
+}
+
 .agtcountry-setting {
   .country-tabs {
-    text-align: justify;
     display: flex;
+    max-height: 200px;
     flex-wrap: wrap;
+    overflow-y: auto;
+    text-align: justify;
   }
 }
 
@@ -1966,7 +2032,7 @@ q {
 
 .enquiry-sidetab {
   position: absolute;
-  top: 40px;
+  top: 90px;
 }
 
 .enquirytab-head {
@@ -1975,7 +2041,7 @@ q {
 
 .contact-sidetab {
   position: fixed;
-  top: 150px;
+  top: 210px;
   background-color: $brand-blue;
 }
 
@@ -2179,7 +2245,7 @@ q {
 
 .enquirytab-btn {
   position: absolute;
-  top: 80px;
+  top: 140px;
   right: -29px;
   z-index: 6;
   @include transform(rotate(-90deg));
@@ -2197,7 +2263,7 @@ q {
 
 .contacttab-btn {
   position: fixed;
-  top: 250px;
+  top: 310px;
   right: -29px;
   z-index: 4;
   @include transform(rotate(-90deg));
@@ -2223,7 +2289,7 @@ q {
 
   + .enquirytab-btn {
     right: 370px;
-    top: 140px;
+    top: 200px;
     @include transition(all 300ms linear);
   }
 }
@@ -2234,7 +2300,7 @@ q {
 
   + .contacttab-btn {
     right: 369px;
-    top: 250px;
+    top: 310px;
     @include transition(all 300ms linear);
   }
 }
@@ -2514,14 +2580,19 @@ q {
   }
 }
 
-.agt-home-photovideos {
-  .filter-head {
+  .filter-headagent {
     margin-bottom: 20px;
     width: 270px;
     position: relative;
     color: #fff;
     background-color: $brand-blue;
     border-radius: 6px;
+    float: left;
+
+    .button-holder {
+      float: right;
+      padding: 10px 0;
+    }
 
     .clear-link {
       padding: 0 10px;
@@ -2609,18 +2680,6 @@ q {
       }
     }
   }
-
-  .button-holder {
-    float: right;
-    padding: 10px 0;
-
-    label {
-      margin-right: 15px;
-      text-decoration: underline;
-      color: #ccc;
-    }
-  }
-}
 // USER TRAVEL ACTIVITY CARD
 
 .travel-activity {
@@ -2684,80 +2743,106 @@ q {
 }
 // USER TRAVEL ACTIVITY CARD END
 //AGENT HOME ANALYTICS
-.agt-home-analytics{
+
+.agt-home-analytics {
   @extend .avenir-roman;
 }
-.analytics-profileviews, .analytics-follower, .analytics-download{}
-.analytics-emptyprofile, .analytics-emptyfollower, .analytics-emptydownload {
+
+.analytics-download,
+.analytics-follower,
+.analytics-profileviews {}
+
+.analytics-emptydownload,
+.analytics-emptyfollower,
+.analytics-emptyprofile {
   min-height: 100vh;
   padding: 60px;
   background-color: #fff;
   text-align: center;
 }
-.emptyprofile-analytics, .emptyfollower-analytics, .emptydownload-analytics {
+
+.emptydownload-analytics,
+.emptyfollower-analytics,
+.emptyprofile-analytics {
   width: 50%;
-  margin: 0px auto;
+  margin: 0 auto;
   color: $brand-blue;
   @extend .avenir-roman;
 }
 
-.emptyleads-analytics{
+.emptyleads-analytics {
   width: 100%;
   height: 450px;
-  margin: 30px 0px;
+  margin: 30px 0;
   background-color: #fff;
 }
-.analytics-filter{
+
+.analytics-filter {
   padding: 10px;
   background-color: rgba(255,255,255,0.5);
   color: #fff;
 }
-.analyticsfilter-head{
-  p{
-    margin: 10px 0px 0;
+
+.analyticsfilter-head {
+  p {
+    margin: 10px 0 0;
     @extend .avenir-heavy;
   }
 }
-.filterlead-count{
+
+.filterlead-count {
   display: inline-block;
   margin: 10px 10px 0;
   vertical-align: middle;
   @extend .avenir-heavy;
 }
-.analytics-filterui{
+
+.analytics-filterui {
   position: relative;
   display: inline-block;
   width: 190px;
   border: 1px solid #fff;
   border-radius: 4px;
-  margin: 0px 5px;
+  margin: 0 5px;
   vertical-align: middle;
-  .form-group{
+
+  .form-group {
     margin: 0;
   }
-  .ui-select-bootstrap{
+
+  .ui-select-bootstrap {
     background-color: transparent;
     color: #424242;
-    &:hover, &:active, &:focus{
+
+    &:active,
+    &:focus,
+    &:hover {
       outline: 0;
     }
-    .ui-select-toggle{
+
+    .ui-select-toggle {
       border: none;
       background-color: transparent;
-      &:hover, &:active, &:focus{
+
+      &:active,
+      &:focus,
+      &:hover {
         background-color: transparent;
         outline: 0;
       }
     }
-    .ui-select-dropdown{
+
+    .ui-select-dropdown {
       max-height: 170px;
       z-index: 3;
     }
-    input[type="search"]{
+
+    input[type="search"] {
       border: none;
       background-color: transparent;
     }
-    .btn-default-focus{
+
+    .btn-default-focus {
       color: #424242;
       background-color: transparent;
       border: none;
@@ -2774,22 +2859,26 @@ q {
     ::-webkit-scrollbar-thumb {
       background-color: $brand-lighter-grey;
     }
-    .ui-select-bootstrap .ui-select-choices-row>span{
+
+    .ui-select-bootstrap .ui-select-choices-row > span {
       color: #424242;
-      &:hover{
+
+      &:hover {
         background-color: $brand-lighter-grey;
       }
     }
-    .ui-select-choices-row.active>span{
+
+    .ui-select-choices-row.active > span {
       background-color: $brand-lighter-grey;
       color: #424242;
     }
   }
-  .caret{
+
+  .caret {
     display: none;
   }
 
-  .filter-droparrow{
+  .filter-droparrow {
     position: absolute;
     top: 50%;
     right: 5px;
@@ -2797,36 +2886,43 @@ q {
     @include transform(translateY(-50%));
   }
 }
-.leadfilter-btn{
+
+.leadfilter-btn {
   display: inline-block;
   vertical-align: top;
 }
 
-.analytics-profilecontent, .analytics-followercontent, .analytics-downloadcontent{
+.analytics-downloadcontent,
+.analytics-followercontent,
+.analytics-profilecontent {
   min-height: 100vh;
   padding: 60px 0;
 }
+
 .follower-connectbtn {
   margin-bottom: -25px;
   text-align: center;
 }
 
-.analytics-downloadcontent .footer-travel-sec{
+.analytics-downloadcontent .footer-travel-sec {
   padding: 15px 10px;
   border-radius: 0 0 5px 5px;
   background-color: $brand-blue;
-  .footertravel-count{
+
+  .footertravel-count {
     display: inline-block;
     padding: 5px 8px;
     border: 1px solid $brand-cyan;
     border-radius: 4px;
     margin-right: 5px;
     color: $brand-cyan;
-    p{
+
+    p {
       margin: 0;
     }
   }
-  .footertravel-downloadcount{
+
+  .footertravel-downloadcount {
     font-size: 16px;
   }
 }
@@ -2885,7 +2981,8 @@ q {
   background-repeat: no-repeat;
   @include transition(all ease 300ms);
 
-  &:active {
+  &.active,
+  &:active, &:hover {
     background-image: url('../img/icons/box7.png');
     @include transition(all ease 300ms);
   }
@@ -2896,14 +2993,22 @@ q {
   }
 }
 
+.category-active {
+  .tourcategory-img {
+    background-image: url('../img/icons/box7.png');
+    @include transition(all ease 300ms);
+  }
+}
+
 .optiondiv {
   position: absolute;
-  width: 100%;
-  z-index: 4;
-  background-color: $brand-dark-blue;
-  left: 0;
   top: 40px;
+  left: 0;
+  width: 100%;
+  border-radius: 0 0 6px 6px;
+  background-color: $brand-dark-blue;
   text-align: center;
+  z-index: 4;
 }
 
 .tour-typeoption {
@@ -2931,7 +3036,7 @@ q {
     padding: 0;
     border-bottom: 1px solid $brand-cyan;
 
-    span{
+    span {
       padding: 5px;
       background-color: transparent;
       color: #fff;
@@ -2989,9 +3094,10 @@ q {
   .remove-preview {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 4px;
     z-index: 3;
     background-color: transparent;
+    font-size: 15px;
     @extend .pointer;
   }
 }
@@ -3013,8 +3119,11 @@ q {
 // tour package dropdown end
 // AGENT ON LOAD MODAL
 
-.agent-home .modal-body {
-  padding: 20px 50px;
+.agent-home{
+  // margin-top: -60px;
+  .modal-body {
+    padding: 20px 50px;
+  }
 }
 
 .agent-modal-bg {
@@ -3026,7 +3135,7 @@ q {
   font-size: 16px;
   text-align: justify;
 
-  .modal-content{
+  .modal-content {
     position: static;
     top: auto;
     width: auto;
@@ -3251,6 +3360,144 @@ q {
   }
 }
 // AGENT HOME PHOTO UPLOAD SLIDER END
+// AGENT TOUR UI SELECT
+.tour-price {
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.tour-select {
+  border-bottom: 1px solid #b2b2b2;
+  border-radius: 0;
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $brand-lighter-grey;
+  }
+
+  .btn-default {
+    padding-left: 0;
+    border: none;
+    background-color: transparent;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  .caret {
+    display: none;
+  }
+
+  input[type="search"] {
+    width: 100%;
+    padding-left: 0;
+    border: none;
+    background-color: transparent;
+  }
+
+  .ui-select-dropdown {
+    background-color: $brand-blue;
+  }
+
+  .tour-optionselect {
+    color: #fff;
+  }
+
+  .btn-default-focus {
+    border: none;
+    background-color: transparent;
+    color: #fff;
+  }
+
+  .ui-select-match-text {
+    color: #fff;
+  }
+
+  .ui-select-choices-row {
+    border-bottom: 1px solid #b2b2b2;
+
+    &:last-child {
+      border: none;
+    }
+    &.active, &:focus{
+      background-color: $brand-light-grey;
+    }
+
+    span {
+      &:active,
+      &:hover,
+      &:focus,
+      &.active{
+        background-color: transparent;
+      }
+    }
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    &.active {
+      span {
+        background-color: transparent;
+      }
+    }
+  }
+  .ui-select-bootstrap .ui-select-choices-row>span:hover, .ui-select-bootstrap .ui-select-choices-row>span:focus{
+    background-color: $brand-light-grey;
+  }
+  // MULTY SELECT
+  .ui-select-multiple{
+    ::-webkit-scrollbar {
+      width: 0px;
+      height: 4px;
+    }
+  }
+  .ui-select-multiple > div:first-child {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: scroll;
+    white-space: nowrap;
+  }
+
+  .ui-select-multiple.ui-select-bootstrap {
+    border: none;
+    background-color: transparent;
+
+    input.ui-select-search {
+      width: auto !important;
+      border: none;
+      margin: 0;
+      background-color: transparent;
+    }
+
+    .ui-select-match-item {
+      padding: 3px 5px;
+      border: 1px solid #fff;
+      color: #fff;
+
+      .close {
+        color: #fff;
+        text-shadow: none;
+        opacity: 1;
+      }
+    }
+  }
+  // MULTY SELECT END
+}
+// AGENT TOUR UI SELECT END
 // MESSAGE PAGE
 
 .message-page {
@@ -4537,6 +4784,7 @@ q {
 }
 // SEARCH CITY END
 // SEARCH ITINERARY
+
 .search-itinerary {
   padding: 0;
 }
@@ -4590,6 +4838,7 @@ q {
 }
 // SEARCH ITINERARY END
 // SEARCH HASHTAG
+
 .search-hasshtag {
   padding: 30px 0;
 }
@@ -4641,6 +4890,7 @@ q {
 // SEARCH HASHTAG END
 // SEARCH RESULT PAGE END
 // DELETE POST POPUP
+
 .delete-post {
   padding: 20px 0 0;
   margin-top: 20px;
@@ -4659,6 +4909,7 @@ q {
 }
 // DELETE POST POPUP END
 //404 ERROR PAGE
+
 .error-page {
   width: 100%;
   height: 100vh;
@@ -4691,6 +4942,7 @@ q {
 }
 //404 ERROR PAGE END
 // COMING SOON PAGE
+
 .coming-soon-page {
   width: 100%;
   min-height: 100vh;
@@ -4714,7 +4966,10 @@ q {
   border: 1px solid #fff;
   border-radius: 4px 0 0 4px;
   background-color: transparent;
-  &:hover, &:active, &:focus{
+
+  &:active,
+  &:focus,
+  &:hover {
     border: 1px solid #fff;
   }
 }
@@ -4757,6 +5012,7 @@ q {
 }
 // COMING SOON PAGE END
 // LOGIN FLOW PAGE
+
 .loginflow-page {
   height: 100vh;
   padding-top: 60px;
@@ -4785,6 +5041,7 @@ q {
 }
 // LOGIN FLOW PAGE END
 // DESTINATION FILTERS
+
 .destination-filterscroll {
   position: relative;
 
@@ -4858,16 +5115,17 @@ q {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 
-  h4{
+  h4 {
     margin: 0;
     padding: 0;
   }
-  p{
+
+  p {
     margin: 0;
   }
 }
 
-.blog-post .date-quick-itinerary{
+.blog-post .date-quick-itinerary {
   position: absolute;
   right: 110px;
   bottom: -10px;

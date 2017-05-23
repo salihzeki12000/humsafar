@@ -12,7 +12,7 @@
                   <img src="img/default_Images_2.jpg" alt="" class="img-responsive">
                 </div>
                 <div class="agtprofile-detail inline-block v-top">
-                  <h4 class="color-blue m-clear">Amit Duxctronn</h4>
+                  <h4 class="color-blue m-clear text-capitalize">{{agentData.name}}</h4>
                 </div>
               </div>
               <ul>
@@ -156,7 +156,7 @@
             <div class="agtsetting-white">
               <!-- profile detail -->
               <div class="profile-detail-main" ng-if="showAgtSetting == 1">
-                <form action="">
+                <form>
                   <div class="profile-agtphoto-sec upload-profile">
                     <label for="profile" class="color-blue avenir-medium">Profile Photo</label>
                     <div class="cropArea relate" ng-show="showImage" id="profile">
@@ -186,13 +186,13 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="name" class="color-blue">Name</label>
-                        <input type="text" class="form-control" placeholder="Sai Travels">
+                        <input type="text" class="form-control" placeholder="Name" ng-model="agentData.company.name">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="contact-no" class="color-blue">Contact No</label>
-                        <input type="text" class="form-control" placeholder="02226565801">
+                        <input type="text" class="form-control" placeholder="Contact No" ng-model="agentData.company.contact">
                       </div>
                     </div>
                   </div>
@@ -200,13 +200,13 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="email" class="color-blue">Email</label>
-                        <input type="text" class="form-control" id="email" placeholder="amit@travelibro.com">
+                        <input type="text" class="form-control" id="email" placeholder="Email" ng-model="agentData.company.email">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="mobile-no" class="color-blue">Mobile No</label>
-                        <input type="text" class="form-control" placeholder="9619222222">
+                        <input type="text" class="form-control" placeholder="Mobile No" ng-model="agentData.company.mobile">
                       </div>
                     </div>
                   </div>
@@ -214,14 +214,19 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="office-location" class="color-blue">Head Office Location</label>
-                        <div class="custom-select">
-                          <select name="" id="Nationality">
-                              <option value="India" class="color-blue">India</option>
-                            </select>
+                        <div class="agentsetting-select">
+                          <ui-select ng-model="agentData.homeCity" theme="bootstrap">
+                            <ui-select-match placeholder="Head Office Location ">{{$select.selected.description}}</ui-select-match>
+                            <ui-select-choices repeat="cities.description as cities in cities | filter: $select.search track by $index" refresh="searchByKey($select.search)" refresh-delay="0">
+                              <div class="">
+                                <p class="">{{cities.description}}</p>
+                              </div>
+                            </ui-select-choices>
+                          </ui-select>
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                       <div class="agt-settingcity">
                         <div class="form-group">
                           <label for="" class="color-blue"></label>
@@ -232,39 +237,38 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="agt-settingaddr">
                         <div class="form-group">
                           <label for="" class="color-blue">Address</label>
-                          <textarea name="name"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse</textarea>
+                          <textarea name="name" ng-model="agentData.company.address"></textarea>
                         </div>
                       </div>
-
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="name" class="color-blue">Website</label>
-                        <input type="text" class="form-control" placeholder="www.travelibro.com">
+                        <input type="text" class="form-control" placeholder="Website" ng-model="agentData.company.website">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12">
                       <div class="agtsetting-abt">
-                        <div class="form-group">
+                        <div class="form-group" ng-init="agentData.company.about.length">
                           <label for="" class="color-blue">About</label>
-                          <textarea name="name" id="textareaChars"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse </textarea>
-                          <span class="pull-right font-sz10 mt10" id="remainAbt"></span>
+                          <textarea name="name" id="textareaChars" ng-model="agentData.company.about"> </textarea>
+                          <span class="pull-right font-sz10 mt10" >{{agenData.company.about.length}} / 500</span>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="clearfix mt20">
                     <div class="pull-right">
-                      <button type="submit" class="btn btn-pink btn-more">Save</button>
+                      <button class="btn btn-pink btn-more" ng-click="saveDetailsAgent('main',agentData);">Save</button>
                     </div>
                   </div>
                 </form>
@@ -273,17 +277,18 @@
 
               <!-- Edit Details  -->
               <div class="agtsetting-edit" ng-if="showAgtSetting == 2">
+                <form>
                 <!-- category of specialization -->
                 <div class="agtcategory-setting">
                   <h4 class="color-blue setting-tab-heading">Category of Specialization</h4>
                   <ul>
-                    <li ng-repeat="categgoryspcl in chooseCategorySpcl">
-                      <div class="select-categoryspcl">
-                        <figure>
-                          <div class="categoryspcl-imgholder">
-                            <img ng-src="{{categgoryspcl.img}}" alt="" class="img-responsive m-center" width="{{categgoryspcl.catWidth}}">
+                    <li ng-repeat="categoryspcl in chooseCategorySpcl">
+                      <div class="select-categoryspcl " >
+                        <figure ng-click="selectCategory(categoryspcl)">
+                          <div class="categoryspcl-imgholder {{categoryspcl.class}}">
+                            <img ng-src="{{categoryspcl.img}}" alt="" class="img-responsive m-center" width="{{categoryspcl.catWidth}}">
                           </div>
-                          <figcaption class="color-blue font-bold">{{categgoryspcl.caption}}</figcaption>
+                          <figcaption class="color-blue font-bold">{{categoryspcl.caption}}</figcaption>
                         </figure>
                       </div>
                     </li>
@@ -295,14 +300,14 @@
                   <h4 class="color-blue setting-tab-heading">Countries Of Specialization</h4>
                   <div class="country-acordian">
                     <uib-accordion close-others="oneAtATime">
-                      <uib-accordion-group class="panel-default" is-open="status.open" ng-repeat="agtsetnRegion in agtRegionSetting track by $index">
+                      <uib-accordion-group class="panel-default" is-open="status.open" ng-repeat="continent in countriesByContinent track by $index ">
                         <uib-accordion-heading>
-                          <div class="agtaccord-title color-blue avenir-medium">{{agtsetnRegion.settRegion}}
+                          <div class="agtaccord-title color-blue avenir-medium">{{continent.name}}
                             <i class="pull-right fa " ng-class="{'fa fa-chevron-up': status.open, 'fa fa-chevron-down': !status.open}"></i>
                           </div>
                         </uib-accordion-heading>
                         <div class="country-tabs">
-                          <button ng-repeat="settCountry in agtsetnRegion.settcountryName track by $index" class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry pull-left mr5 mb5 flex-auto">{{settCountry}}</button>
+                          <button ng-repeat="country in continent.countries track by $index" class="btn btn-blue-outline btn-more btn-zerorad btn-catcountry {{country.class}} pull-left mr5 mb5 flex-auto" ng-click="selectCountry(country)">{{country.name}}</button>
                         </div>
                       </uib-accordion-group>
                     </uib-accordion>
@@ -311,9 +316,10 @@
                 <!-- country Specialisation end -->
                 <div class="clearfix mt20">
                   <div class="pull-right">
-                    <button type="submit" class="btn btn-pink btn-more">Save</button>
+                    <button class="btn btn-pink btn-more" ng-click="saveDetailsAgent('profile',agentData)">Save</button>
                   </div>
                 </div>
+                </form>
               </div>
               <!-- Edit Details end -->
               <!-- change password -->
@@ -323,23 +329,28 @@
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Current Password">
+                        <input type="password" class="form-control" placeholder="Current Password" ng-model="passwords.oldPassword">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <input type="password" class="form-control" placeholder="New Password">
+                        <input type="password" class="form-control" placeholder="New Password" ng-model="passwords.newPassword">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Confirm Password">
+                        <input type="password" class="form-control" placeholder="Confirm Password" ng-model="passwords.confirmPassword">
                       </div>
+                    </div>
+                    <div class="text-right">
+                      <span class="color-pink" ng-show="newPasswordError">*New Password Mismatch</span>
+                      <span class="color-pink" ng-show="oldPasswordError">*Old Password Incorrect</span>
                     </div>
                   </div>
                   <div class="clearfix mt20">
                     <div class="pull-right">
-                      <button class="btn btn-pink btn-more">Save</button>
+                      <span ng-show="$scope.saveSuccess">Password saved successfully.</span>
+                      <button class="btn btn-pink btn-more" ng-click="changePassword(passwords);">Save</button>
                     </div>
                   </div>
                 </form>
@@ -353,7 +364,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="radio-select">
-                          <input type="radio" id="public" name="privacy">
+                          <input type="radio" id="public" name="privacy" ng-model="agentData.status" value="public">
                           <label for="public" class="color-blue">Public - Everyone</label>
                         </div>
                       </div>
@@ -361,7 +372,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="radio-select">
-                          <input type="radio" id="private" name="privacy">
+                          <input type="radio" id="private" name="privacy" ng-model="agentData.status" value="private">
                           <label for="private" class="color-blue">Private - My Followers</label>
                         </div>
                       </div>
@@ -370,7 +381,7 @@
                   <p class="avenir-medium color-grey fz12 mt20">When you select your account to be private only, your followers can view your My Life - Journeys, Moments and Reviews.</p>
                   <div class="clearfix mt20">
                     <div class="pull-right">
-                      <button class="btn btn-pink btn-more">Save</button>
+                      <button class="btn btn-pink btn-more" ng-click="saveDetailsAgent('privacy',agentData);">Save</button>
                     </div>
                   </div>
                 </form>
@@ -575,12 +586,12 @@
               <!-- purchase history end -->
               <!-- report a problem -->
               <div class="problem-detail" ng-if="showAgtSetting == 8">
-                <form>
+                <form name="reportData" ng-hide="showme" ng-submit="saveReport(settingReport)">
                   <label for="problem">Report A Problem</label>
-                  <textarea name="" id="problem" class="form-control" placeholder="Comment"></textarea>
+                  <textarea name="" id="problem" class="form-control" placeholder="Comment" ng-model="settingReport"></textarea>
                   <div class="clearfix mt20">
                     <div class="pull-right">
-                      <button class="btn btn-pink btn-more">Submit</button>
+                      <button class="btn btn-pink btn-more" type="submit">Submit</button>
                     </div>
                   </div>
                 </form>

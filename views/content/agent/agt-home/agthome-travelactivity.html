@@ -25,12 +25,13 @@
               <form>
                 <div class="form-group">
                   <div class="a">
-                    <input type="text" class="form-control color-white" placeholder="Status" id="postStatus">
-                    <span class="pull-right font-sz10" id="postcount"></span>
+                    <!-- <input type="text" class="form-control color-white" placeholder="Status" id="postStatus" ng-model="status.status"> -->
+                    <textarea id="postStatus" cols="30" class="agent-statustext form-control" placeholder="Status" ng-model="status.status" row="2"></textarea>
+                    <!-- <span class="pull-right font-sz10" id="postcount"></span> -->
                   </div>
                 </div>￼
+                <button class="btn btn-pink tourupload-position" ng-click="sendStatus(status);">POST</button>
               </form>
-              <button class="btn btn-pink tourupload-position">POST</button>
             </div>
           </div>
           <!-- ADD BUTTON END -->
