@@ -10609,15 +10609,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       }
     }
-
-    $scope.customLink = function () {
-      if ((navigator.platform.indexOf("iPhone") != -1) ||
+ if ((navigator.platform.indexOf("iPhone") != -1) ||
         (navigator.platform.indexOf("iPod") != -1) ||
         (navigator.platform.indexOf("iPad") != -1)) {
-        window.open("https://itunes.apple.com/in/app/travelibro/id1056641759");
-      } else {
-        window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
+        $(".download-app").addClass("hide");
       }
+    $scope.customLink = function (){
+        window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
     };
 
   })
