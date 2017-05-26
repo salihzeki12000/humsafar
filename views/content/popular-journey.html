@@ -181,7 +181,7 @@
                               <div class="pull-right">
                                 <div class="journey-type">
                                   <ul>
-                                    <li ng-repeat="list in post.kindOfJourney|limitTo:3">
+                                    <li ng-repeat="list in post.kindOfJourney|limitTo:3 track by $index">
                                       <a href=""><img ng-src="{{list|kindOfJourney:'white'}}" alt="" height="15"></a>
                                     </li>
                                     <!-- <li>

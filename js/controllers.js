@@ -180,6 +180,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       }
     }
+     if ((navigator.platform.indexOf("iPhone") != -1) ||
+        (navigator.platform.indexOf("iPod") != -1) ||
+        (navigator.platform.indexOf("iPad") != -1)) {
+        $(".download-app").addClass("hide");
+      }
+    $scope.customLink = function (){
+        window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
+    };
   })
 
   .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $interval, $state, $http) {
@@ -2047,6 +2055,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       busy: false,
       stopCallingApi: false,
     };
+        if ((navigator.platform.indexOf("iPhone") != -1) ||
+        (navigator.platform.indexOf("iPod") != -1) ||
+        (navigator.platform.indexOf("iPad") != -1)) {
+        $(".download-app").addClass("hide");
+      }
+    $scope.customLink = function (){
+        window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
+    };
+
     $scope.popularBloggerData = [];
     $scope.pagenumber = 1;
     setInterval(function () {
@@ -2122,6 +2139,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Popular Agents");
     TemplateService.title = "Popular Agents - TraveLibro";
     $scope.navigation = NavigationService.getnav();
+
   })
 
   .controller('PopularItineraryCtrl', function ($scope, $state, TemplateService, LikesAndComments, NavigationService, $timeout, $uibModal, $location) {
@@ -2138,6 +2156,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.scroll = {
       busy: false,
       stopCallingApi: false,
+    };
+             if ((navigator.platform.indexOf("iPhone") != -1) ||
+        (navigator.platform.indexOf("iPod") != -1) ||
+        (navigator.platform.indexOf("iPad") != -1)) {
+        $(".download-app").addClass("hide");
+      }
+    $scope.customLink = function (){
+        window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
     };
     $scope.pagenumber = 1;
     $scope.popularIternaryData = [];
@@ -2582,6 +2608,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
     // sharing local life modal end
+
+       if ((navigator.platform.indexOf("iPhone") != -1) ||
+        (navigator.platform.indexOf("iPod") != -1) ||
+        (navigator.platform.indexOf("iPad") != -1)) {
+        $(".download-app").addClass("hide");
+      }
+    $scope.customLink = function (){
+        window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
+    };
 
   })
 
@@ -6572,6 +6607,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         windowTopClass: "notify-popup"
       })
     };
+
+         if ((navigator.platform.indexOf("iPhone") != -1) ||
+        (navigator.platform.indexOf("iPod") != -1) ||
+        (navigator.platform.indexOf("iPad") != -1)) {
+        $(".download-app").addClass("hide");
+      }
+    $scope.customLink = function (){
+        window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
+    };
+
 
   })
 
