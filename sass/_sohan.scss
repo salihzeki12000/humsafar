@@ -427,7 +427,7 @@ a.color-white {
     }
 
     p {
-      color: #424242;
+      color: #fff;
     }
   }
 
@@ -1448,7 +1448,7 @@ a.color-white {
 
 .openfilter {
   .filterclose {
-    top: 0;
+    top: -2px;
     z-index: 2;
     opacity: 1;
   }

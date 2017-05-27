@@ -3010,6 +3010,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.itineraryFilter = function (filterItinerary, filterType) {
       console.log(filterItinerary);
+      console.log(filterType);      
       switch (filterType) {
         case 'itineraryCity':
           var cityIndex = _.findIndex($scope.destinationCityFilter, function (type) {

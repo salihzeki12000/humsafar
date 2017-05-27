@@ -1,8 +1,8 @@
 <div class="second min-hght">
 <div class="container-fluid m-p0">
   <div class="destination-nav second destin-fixednav-country bg-grey">
-    <div class="row">
-        <div class="col-md-8 col-sm-8">
+    <div class="row m-m0">
+        <div class="col-md-8 col-sm-8 m-plr0">
         <div class="destination-scroll pl20">
            <ul class="list-inline">
             <li ng-click="getTab('features-cities')" ng-class="{'active': countryoptions.active=='features-cities'}">Featured Cities</li>
@@ -12,7 +12,7 @@
           </ul>
         </div>
       </div>
-        <div class="col-md-4 col-sm-4 hidden-xs">
+        <div class="col-md-4 col-sm-4 hidden-xs m-plr0">
           <div class="pr20">
             <form action="">
               <div class="input-search relate" ng-init="viewDestinationCountry={'outerClass':'outerDestCountry','innerClass':'innerDestCountry'}">
@@ -38,7 +38,18 @@
     </div>
   </div>
   <div class="destination-featured m-p0">
-    <div class="head-title-all pt20 bg-white">
+             <div class="empty-travel-journey color-white" ng-if="countryDestData.featuredCities.length == 0">
+                     <div class="empty-ongo text-center">  
+                  <p class="empty-descp color-white">“I’m in love with cities I’ve never been to & people I’ve never met.”</p>
+                  <p class="empty-descp color-white">
+                    Like you, we can't wait to explore every corner of the globe; and do it all over again! While a lot has been experienced, we still have miles to go.
+                  </p>
+                                    <p class="empty-descp color-white">
+                    We can't wait to explore {{countryDestData.name}}, and be assured we'll keep you posted as soon as we do.
+                  </p>
+              </div>
+          </div>
+    <div class="head-title-all pt20 bg-white" ng-if="countryDestData.featuredCities.length > 0">
       <!-- <h4 class="text-center fnt-22">Featured Cities</h4> -->
     </div>
       <div class="destination-holder bg-white plr30 pt20">

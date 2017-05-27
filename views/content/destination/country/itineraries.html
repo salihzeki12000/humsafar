@@ -125,7 +125,16 @@
       </div>
     </div>
     <div class="activity-container destination-itinerary-holder">
-      <div masonry preserve-order infinite-scroll="itineraryLoadMore();" infinite-scroll-disabled="scroll.busy">
+            <div class="empty-travel-journey color-white" ng-if="countryDestIti.length == 0">
+                     <div class="empty-ongo text-center">  
+                  <p class="empty-descp color-white">We are yet to experience this country and give you our take on the best way to explore it.</p>
+                  <p class="empty-descp color-white">
+                   If you have visited this Country or in fact live there, do fill us in with your recommendations at 
+                    <a href="mailto:info@travelibro.com" class="color-white">info@travelibro.com</a>.
+                  </p>
+              </div>
+          </div>
+      <div masonry preserve-order infinite-scroll="itineraryLoadMore();" infinite-scroll-disabled="scroll.busy" ng-if="countryDestIti.length > 0">
         <div class="row m-m0">
           <div class="col-md-4 col-sm-6 col-xs-12 m-plr0 masonry-brick" ng-repeat="post in countryDestIti track by $index">
             <!-- user-iternarys -->

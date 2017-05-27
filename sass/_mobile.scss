@@ -2246,7 +2246,7 @@
     }
   } // journey end
   .card-imgholder {
-    height: 275px;
+    // height: 275px;
     .blur-img img {
       height: 100%;
     }
@@ -2752,6 +2752,9 @@
       right: 0;
     }
 }
+  .m-white{
+    color: #fff;
+  }
 }
 
 // media query for 480px to 320px end

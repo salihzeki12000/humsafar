@@ -124,6 +124,18 @@
     </div>
     <div class="destination-featured plr30 m-plr0">
       <div class="hotels">
+                    <div class="empty-travel-journey color-white" ng-if="cityDestData.restaurant.length == 0">
+                      <div class="empty-ongo text-center">
+                        <p class="empty-descp color-white">“One has not truly experienced a place, until he has dug into a plate of their food!”</p>
+                          <p class="empty-descp color-white">
+                            We will soon have a taste of the land and it’s food. And of course we will serve up a list of the Restaurants you must hit while in Hallstatt.
+                            </p>
+                            <p>
+                            If you have visited the city or in fact live there, do fill us in with your recommendations on 
+                            <a href="mailto:info@travelibro.com" class="color-white">info@travelibro.com</a>.
+                            </p>
+                      </div>
+                     </div>
         <div class="row m-m0">
           <div class="col-md-4 col-sm-6 col-xs-12 mb20 m-plr0" ng-repeat="rest in cityDestData.restaurant track by $index">
             <div class="hotel-card ">

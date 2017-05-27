@@ -92,8 +92,14 @@
     </div>
     <div class="destination-featured plr30 m-plr0">
       <div class="hotels">
+            <div class="empty-travel-journey color-white" ng-if="cityDestData.hotel.length == 0">
+                      <div class="empty-ongo text-center">
+                        <p class="empty-descp color-white">“Nothing speaks like experience.”</p>
+                        <p class="empty-descp color-white">A list of hotels we recommend, coming up soon.</p>
+                      </div>
+                     </div>
         <div class="row m-m0">
-          <div class="col-md-4 col-sm-6 col-xs-12 m-p0 mb20" ng-repeat="hotels in cityDestData.hotel">
+          <div class="col-md-4 col-sm-6 col-xs-12 m-p0 mb20" ng-repeat="hotels in cityDestData.hotel" ng-if="cityDestData.hotel.length > 0">
             <div class="hotel-card">
               <div class="brdbtm">
                 <div class="title-head-inside">

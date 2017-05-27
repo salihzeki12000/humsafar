@@ -6,6 +6,15 @@
       </div>
     </div>
   </div> -->
+                      <div class="empty-travel-journey color-white" ng-if="cityDestData.bestTime.length == 0">
+                      <div class="empty-ongo text-center">  
+                        <p class="empty-descp color-white">We will be still to update the details for the best time to visit {{cityDestData.name}}</p>
+                          <p class="empty-descp color-white">
+                            If you have visited this Country or in fact live there, do fill us in with your recommendations on
+                            <a href="mailto:info@travelibro.com" class="color-white">info@travelibro.com</a>.
+                            </p>
+                      </div>
+                     </div>
   <div class="dest-btv plr30">
     <div class="row m-m0 mobile-row-customise">
       <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6 mobile-col-customise" ng-repeat="visit in cityDestData.bestTime track by $index">

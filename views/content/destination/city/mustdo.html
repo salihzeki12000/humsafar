@@ -36,7 +36,15 @@
           </div>
         </div>
       </div>
-  <div class="bg-white pt20 min-hght">
+               <div class="empty-travel-journey color-white" ng-if="cityDestData.mustDo.length == 0">
+              <div class="empty-ongo text-center">  
+                  <p class="empty-descp color-white">I’m in love with cities I’ve never been to & people I’ve never met.”</p>
+                  <p class="empty-descp color-white">
+                    {{cityDestData.name}}. A journey we are yet to take and have things to ponder over, that one simply cannot miss.
+                  </p>
+              </div>
+          </div>
+  <div class="bg-white pt20 min-hght" ng-if="cityDestData.mustDo.length > 0">
     <div class="destination-featured m-p0">
       <div class="plr30">
       <div class="row m-m0">
