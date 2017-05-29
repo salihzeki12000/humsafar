@@ -1384,7 +1384,7 @@
   //   }
   // }
   .picture-section {
-    width: 15%;
+    width: 12%;
   }
   .user-detail {
     width: 80%;
@@ -1886,6 +1886,19 @@
   }
   .libro-filter .itinerary-dropdown {
     z-index: 2;
+  }
+
+   .ongo-journey-change {
+    p {
+      margin-left: -21px;
+          background-color: #171a2c;
+    }
+  }
+//   .post-travel-icon {
+//     display: none;
+// }
+.user-img-ongo {
+    border: 1px solid #868686;
   }
 }
 
