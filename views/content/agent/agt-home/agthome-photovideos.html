@@ -3,9 +3,9 @@
   <!-- ADD BUTTON AND FILTER START -->
   <div class="add-agentbutton">
     <div class="container">
-      <div class="clearfix agt-moreholder">
+      <div class="clearfix agt-moreholder" >
         <!-- ng-class={'filter-headagent':'userData.type=="User"'} -->
-        <div class="filter-head filter-headagent" >
+        <div class="filter-head " ng-class="{'filter-headagent': template.isMine}">
           <div class="photo-filter color-grey collapsed" data-toggle="collapse" data-target="#demo">
             <span class="down">All</span>
             <span class="up color-grey">Photos & Videos</span>
@@ -25,7 +25,7 @@
             </div>
           </div>
         </div>
-        <div class="pull-right ">
+        <div class="pull-right " ng-if="template.isMine">
           <div class="add-agtitinerary">
             <span class="pointer add-holder photo-xbtn" ng-click="addItinerary();" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
             <div class="add-more-itinerary" ng-show="showItinerary">

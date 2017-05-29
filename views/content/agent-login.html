@@ -162,14 +162,14 @@
           <div class="agent-logoupload text-center " ng-if="agentloginView==5 ">
             <h3 class="color-blue avenir-heavy ">Upload Company Logo</h3>
             <div class="text-center ">
-              <div class="cropArea" ng-show="showImage.val && profile.profilePicture">
+              <div class="cropArea" >
                 <div class="text-right">
                   <span class="color-dark-blue pointer" ng-click="removePhoto()">Cancel</span>
                 </div>
                 <img-crop image="myImage" result-image="uploadme.src" /></img-crop>
               </div>
               <div class="show ">
-                <img ng-src="{{myCroppedCompLogo}} " />
+                <img ng-src="{{myCroppedCompLogo}} "/>
               </div>
               <div class="upload-section " ng-hide="showImage.val">
                 <!-- <img src="{{userData.profilePicture|uploadpath}} " class="m-center img-responsive doneLoading "> -->
@@ -196,7 +196,7 @@
                 <button class="btn btn-blue-outline btn-more pull-left " ng-click="agentSec(4) ">Previous</button>
                 <!-- put in download btn -->
                 <!-- ng-click="uploadFile();saveUserData(userData) " -->
-                <button class="btn btn-blue-outline btn-more pull-right " ng-click="agentSec(6) ">Next</button>
+                <button class="btn btn-blue-outline btn-more pull-right " ng-click="uploadFile(uploadme.src,userData,showImage.val) ">Next</button>
               </div>
             </div>
           </div>

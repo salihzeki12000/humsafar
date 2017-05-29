@@ -1,6 +1,6 @@
 <div class="agt-home-aboutus">
   <div class="container">
-    <div class="clearfix">
+    <div class="clearfix" ng-if="template.isMine">
       <button ui-sref="agent-setting" class="btn btn-blue-outline btn-more pull-right">Edit</button>
     </div>
     <section>
@@ -26,14 +26,14 @@
 
     <section>
       <h3 class="color-pink">Speciality - Countries</h3>
-      <div class="row-flex">
-        <div class="col-flex" ng-repeat="specialcountry in userData.company.countryOf track by $index">
+      <div class="abtcountry-row">
+        <div class="abtcountry-col" ng-repeat="specialcountry in userData.company.countryOf track by $index">
           <div class="speciality-imgholder relate">
-            <img ng-src="{{specialcountry.countryCoverPhoto}}" alt="{{specialcountry.name | capitalize}}" class="img-responsive">
+            <img ng-src="{{specialcountry.countryCoverPhoto|uploadpath}}" alt="{{specialcountry.name | capitalize}}" class="img-responsive">
             <div class="country-textholder clearfix">
               <p class="pull-left spclcountry-name text-capitalize">{{specialcountry.name}}</p>
               <div class="pull-right spclcountry-stamp">
-                <img ng-src="{{specialcountry.flag}}" alt="{{specialcountry.name | capitalize}}" class="img-responsive">
+                <img ng-src="{{specialcountry.flag|uploadpath}}" alt="{{specialcountry.name | capitalize}}" class="img-responsive">
               </div>
             </div>
           </div>

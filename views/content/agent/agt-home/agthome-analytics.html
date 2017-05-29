@@ -63,15 +63,14 @@
     <!-- CONTENT SCREEN -->
     <div class="analytics-profilecontent">
       <div class="container">
-        <div class="following-container" ng-repeat="list in followingList track by $index">
+        <div class="following-container" ng-repeat="list in profileObj track by $index">
           <div class="following-holder">
             <div class="follow-imgholder pointer" ui-sref="mylife({'urlSlug':list.urlSlug})">
-              <img ng-src="{{list.profilePicture|uploadpath:104:108:'cover'}}" class="img-responsive">
+              <img ng-src="{{list.profilePicture|uploadpath:104:108:'cover'}}" class="img-responsive" alt="{{list.name}}">
             </div>
             <div class="following-detail text-center">
-              <h4 class="color-blue avenir-heavy text-ellipsis pointer" title="{{list.name}}" ui-sref="mylife({'urlSlug':list.urlSlug})">{{list.name}}</h4>
-              <h5 class="color-pink avenir-medium text-ellipsis" ng-if="list.homeCity && list.homeCountry.name"><i class="fa fa-map-marker mr5 color-pink"></i> <span>{{list.homeCity}}Mumbai,</span>
-                <span>{{list.homeCountry.name}}India</span>
+              <h4 class="color-blue avenir-heavy text-ellipsis pointer text-capitalize" title="{{list.name}}" ui-sref="mylife({'urlSlug':list.urlSlug})">{{list.name}}</h4>
+              <h5 class="color-pink avenir-medium text-ellipsis" ng-if="list.homeCity"><i class="fa fa-map-marker mr5 color-pink"></i> <span>{{list.homeCity}}</span>
               </h5>
             </div>
             <div class="photos-location-sec clearfix">

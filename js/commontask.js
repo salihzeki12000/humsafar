@@ -661,6 +661,13 @@ commontask.filter("singularPlural", function () {
           return 'Countries Visited';
         }
         break;
+        case "Reviews":
+        if (input == 1) {
+          return 'Review';
+        } else {
+          return 'Reviews';
+        }
+        break;
     }
   };
 });

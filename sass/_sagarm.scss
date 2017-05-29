@@ -417,8 +417,9 @@
     }
 
     &:active,
-    &:hover {
-      color: $brand-pink;
+    &:hover,
+    &.active {
+      color: $brand-pink !important;
     }
   }
 }
@@ -736,7 +737,7 @@
 .agt-itinerarycard {
   border: 1px solid #e3e3e3;
   border-radius: 4px;
-  margin: 30px 0;
+  margin: 15px 0;
 }
 
 .agt-home-itineraryintro,
@@ -1123,6 +1124,15 @@ q {
   @extend .avenir-heavy;
 }
 
+.abtcountry-row{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.abtcountry-col{
+  flex: 25%;
+}
+
 .spclcountry-name {
   font-size: 18px;
   color: #fff;
@@ -1456,6 +1466,14 @@ q {
   position: absolute;
   right: 105px;
   bottom: -10px;
+}
+
+.btn-link{
+  color: #fff;
+  &:hover, &:active, &:focus{
+    color: #fff;
+    text-decoration: none;
+  }
 }
 
 .call-btn {
@@ -2050,6 +2068,34 @@ q {
   border-bottom: 1px solid #fff;
 }
 
+.agt-home-leadmonitortab {
+  margin: 20px 0;
+}
+
+.lead-section{
+  min-height: calc(100vh - 60px);
+}
+
+.lead-title{
+  li{
+    padding: 0px 10px;
+    margin: 0px 20px;
+    &:first-child{
+      margin-left: 0;
+    }
+
+    span{
+      padding: 0px 5px;
+    }
+  }
+}
+
+.lead-tabselect{
+  &.active{
+    border-bottom: 3px solid $brand-pink;
+  }
+}
+
 .leadtab-accordionbox {
   margin: 10px 0;
 
@@ -2064,6 +2110,10 @@ q {
   .panel-group .panel {
     border-radius: 0;
   }
+}
+
+.actiontab-accordionbox{
+  margin: 10px 0;
 }
 
 .enquirytab-accordionbox::-webkit-scrollbar {
@@ -2108,6 +2158,10 @@ q {
 
   &:after {
     right: 0;
+  }
+
+  textarea:focus{
+    border-color: $brand-blue;
   }
 }
 

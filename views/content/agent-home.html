@@ -4,12 +4,17 @@
       <div class="agt-card-posi">
         <div class="agt-title-card get-center">
           <div class="circ-agtimg pointer" ui-sref="agent-setting">
-            <img src="img/default_Images_2.jpg" alt="" class="img-responsive">
+            <img ng-src="{{userData.profilePicture|uploadpath}}" alt="{{userData.name}}" class="img-responsive" ng-if="template.isMine">
           </div>
+            <a href="{{userData.profilePicture|uploadpath}}" fancybox-box class="fancybox" ng-if="!template.isMine">
+              <div class="circ-agtimg">
+                <img ng-src="{{userData.profilePicture|uploadpath}}" alt="{{userData.name}}" class="img-responsive">
+              </div>
+            </a>
           <h4 class="font-bold text-capitalize">{{userData.name}}</h4>
           <p>{{userData.homeCity}}</p>
           <button class="btn btn-white-outline mr5" ui-sref="agent-setting">Edit </button>
-          <span><span class="font-bold"> {{userData.followers_count}} </span> Followers </span>
+          <span><span class="font-bold"> {{userData.followers_count}}999 </span> Followers </span>
         </div>
       </div>
     </div>

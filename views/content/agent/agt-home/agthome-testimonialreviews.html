@@ -5,10 +5,10 @@
     <div class="container">
       <div class="color-white clearfix">
         <div class="pull-left avenir-heavy" ng-if="reviewData.length != 0">
-          <h2>9/10 <span class="font-sz18">({{reviewData.length}} Reviews)</span></h2>
+          <h2>{{avgRating.averageRating}} / 10 <span class="font-sz18">({{avgRating.totalReviews}} {{avgRating.totalReviews | singularPlural:'Reviews'}})</span></h2>
         </div>
         <!-- ng-if="!template.isMine" -->
-        <div class="pull-right" >
+        <div class="pull-right" ng-if="!template.isMine">
           <div class="writetestimonial-card">
             <div class="testimonial-closed" ng-click="addTestimonial();" ng-class="{'view-testimonial' : showTestimonial , '' : !showTestimonial}">
               <p class="posi-relative m-clear">Write A Testimonial<i class="testimonial-droparrow fa fa-angle-down" ng-class="{'fa-angle-up' : showTestimonial, 'fa-angle-down': !showTestimonial }"  aria-hidden="true"></i></p>
@@ -17,7 +17,7 @@
             <div class="testimonial-open range-custom" ng-show="showTestimonial" >
               <div class="give-rating text-center clearfix">
                 <span class="font-sz10 color-cyan">Rate This Agent</span>
-                <input ng-init="review.rating='1'" type="range" min="1" max="10" step="1" ng-model="review.rating">
+                <input ng-init="review.rating=1" type="range" min="1" max="10" step="1" ng-model="review.rating">
                 <span class="pull-left color-grey">1</span>
                 <span class="pull-right color-grey">10</span>
               </div>
@@ -91,10 +91,10 @@
             <div class="testimonial-details clearfix">
               <div class="pull-left">
                 <div class="testprofile-holder">
-                  <img ng-src="{{review.byUser.profilePicture}}" alt="{{review.byUser.name|uploadpath:200:200:'cover'}}" class="img-responsive">
+                  <img ng-src="{{review.byUser.profilePicture|uploadpath:200:200:'cover'}}" alt="{{review.byUser.name}}" class="img-responsive">
                 </div>
                 <div class="testprofile-name">
-                  <p>{{review.byUser.name}}</p>
+                  <p class="text-capitalize">{{review.byUser.name}}</p>
                   <span class="text-ellipsis">{{review.byUser.homeCity}}</span>
                 </div>
               </div>

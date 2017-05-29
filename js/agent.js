@@ -59,6 +59,7 @@ var agent = angular.module('agent', [])
         })
       },
       saveAgentReview: function(formData, callback) {
+        formData.rating = parseInt(formData.rating);
         console.log(formData, 'review Agaya');
         TravelibroService.http({
           url: adminURL + "/testimonials/save",
@@ -121,6 +122,34 @@ var agent = angular.module('agent', [])
             id: formData._id,
             filename: formData.pdf
           }
+        }).success(function(data){
+          callback(data);
+        })
+      },
+      getAvgRating: function(formData, callback){
+        TravelibroService.http({
+          url: adminURL + "/testimonials/getAvgRating",
+          method: "POST",
+          data: {
+            "urlSlug": formData
+          }
+        }).success(function(data){
+          callback(data);
+        })
+      },
+      getAllLeads: function(formData, callback){
+        TravelibroService.http({
+          url: adminURL + "/Leads/getAllLeads",
+          method: "POST",
+          data: formData
+        }).success(function(data){
+          callback(data);
+        })
+      },
+      getAllProfileViews: function(callback){
+        TravelibroService.http({
+          url: adminURL + "/agent/getAllProfileViews",
+          method: "POST"
         }).success(function(data){
           callback(data);
         })
