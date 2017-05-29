@@ -43,8 +43,8 @@
           <h4 class="fnt-42 brdbtm alpha-color mt-clear text-uppercase">{{viewListByKey}}</h4>
         </div>
         <div class="destination-holder main-destination-page relate pt20 pr20">
-          <div class="row" infinite-scroll="getMoreDestination()" infinite-scroll-disabled="scroll.busy">
-            <div class="col-md-4 col-sm-6"  ng-repeat="dest in destinationList track by $index">
+          <div class="row m-m0" infinite-scroll="getMoreDestination()" infinite-scroll-disabled="scroll.busy">
+            <div class="col-md-4 col-sm-6 m-plr0"  ng-repeat="dest in destinationList track by $index">
               <div class="city-view" ng-if="dest.isCity==true">
                 <div class="img-holder relate" ng-click="countryView(dest.urlSlug,dest.isCity);">
                   <img ng-src="{{dest.cityDisplayPhoto|uploadpath:600:600:'cover'}}" alt="travelibro" class="img-responsive full-width city-img">
