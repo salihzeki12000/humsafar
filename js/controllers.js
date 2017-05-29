@@ -6571,13 +6571,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $rootScope.$broadcast('masonry.reload');
       }, 200);
     });
-      $timeout(function () {
-      if ((navigator.platform.indexOf("iPhone") != -1) ||
-        (navigator.platform.indexOf("iPod") != -1) ||
-        (navigator.platform.indexOf("iPad") != -1)) {
-        $(".download-app").addClass("hide");
-      }
-      }, 200);
     $scope.buildNow = function () {
       $scope.$broadcast('rebuild:me');
     }
