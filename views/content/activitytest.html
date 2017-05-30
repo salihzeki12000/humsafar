@@ -294,9 +294,9 @@
                           </a>
                           </span>
                           <div class="inline-block v-mid" ng-if="!(activity.type=='editor')">
-                            <span class="pointer mr5"><img src="img/comments.png" alt="" height="19" ng-click="getCommentsData(activity)"></span>
+                            <span class="pointer mr5"><img src="img/comments.png" alt="" height="19" class="mr5" ng-click="getCommentsData(activity)"></span>
                             <!-- <span class="pointer mr5"><img src="img/reviews.png" alt="" height="19" ng-if="activity.type =='ended-journey' || activity.type =='detail-itinerary' || activity.type =='quick-itinerary'"></span> -->
-                            <span class="pointer mr5" ng-click="sharePost(activity.sharingUrl)"><img src="img/share.png" alt="" height="19"></span>
+                            <span class="pointer mr5" ng-click="sharePost(activity.sharingUrl)"><img src="img/share.png" class="mr5" alt="" height="19"></span>
                           </div>
                           <div class="inline-block v-mid" ng-if="activity.type=='editor'" >
                             <span class="pointer mr5"><img src="img/comments-white.png" alt="" height="19"></span>
@@ -368,7 +368,11 @@
                               </ul>
                             </div>
                           </span>
-                          <span class="color-blue mr10 card-like avenir-heavy" ng-click="getCommentsData(activity)"><img src="img/comments.png" alt="" height="14"><b> {{activity.commentCount}} </b> {{activity.commentCount|singularPlural:'Comments'}} </span>
+                          <span class="color-blue mr10 card-like avenir-heavy" ng-click="getCommentsData(activity)">
+                            <img src="img/comments.png" alt="" height="14" class="mr5">
+                            <b> {{activity.commentCount}} </b>
+                             {{activity.commentCount|singularPlural:'Comments'}} 
+                            </span>
                           <!-- <span class="color-blue">
                             <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue" ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">
                             <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white" ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">
