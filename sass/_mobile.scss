@@ -1911,7 +1911,9 @@
   .travel-life-part.setting {
     background-color: #fff;
   }
-  .notify-popup .notify-imgholder {
+  .notify-popup{ 
+        margin-left: 0;
+    .notify-imgholder {
     height: auto;
     img {
       height: auto;
@@ -1919,6 +1921,7 @@
       position: static;
       @include transform(translate(0));
     }
+  }
   }
   .card-imgholder .card-img {
     width: 100%;
