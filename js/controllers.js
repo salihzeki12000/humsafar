@@ -10653,9 +10653,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
+    // SWITCHING TO PROFILE
+    $scope.switchToProfile = function (userData) {
+      console.log(userData, 'data user ni');
+      if (userData.type == "user") {
+        $state.go("mylife", {
+          name: 'journey',
+          urlSlug: userData.urlSlug
+        });
+      } else {
+        $state.go("agent-home-without", {
+          urlSlug: userData.urlSlug
+        });
+      }
+    }
+    // SWITCHING TO PROFILE END
+
   })
 
-  .controller('AgentloginCtrl', function ($scope, Agent, TemplateService, NavigationService,FileUploadService, FileUploader, DataUriToBlob, $timeout) {
+  .controller('AgentloginCtrl', function ($scope, Agent, TemplateService, NavigationService, FileUploadService, FileUploader, DataUriToBlob, $timeout, $state) {
     $scope.template = TemplateService.changecontent("agent-login"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Login"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
@@ -10761,11 +10777,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.agentloginView = 7;
           break;
         case 8:
-        if((_.filter($scope.categoriesSpecial, ['class', 'agt-imgholder-active']).length>=1)){
-          $scope.agentloginView = 8;
-        }else{
+          if ((_.filter($scope.categoriesSpecial, ['class', 'agt-imgholder-active']).length >= 1)) {
+            $scope.agentloginView = 8;
+          } else {
 
-        }
+          }
 
           break;
         case 9:
@@ -10935,46 +10951,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.imageFileName = '';
     $scope.uploadme = {};
     $scope.uploadme.src = '';
-    $scope.uploadFile = function (data, userData, ppSelected) {
+    $scope.uploadFile = function (data, userDetails, ppSelected) {
       // Base64 to Blob
       if (ppSelected) {
-        console.log(data, userData);
         var imageBase64 = data;
-        console.log(imageBase64);
         var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
-        console.log(blob);
         // Blob to File
         var file = new File([blob], $scope.fileName + '.png');
-        console.log(file);
         // File to FormData
         var formData = new FormData();
-        console.log(formData, "before appending");
         formData.append('file', file, file.name);
-        console.log(formData, "after appending");
         // alert("mila");
         NavigationService.uploadFile(formData, function (response) {
           if (response.value) {
-            $scope.userData.profilePicture = response.data[0];
-            console.log($scope.userData);
+            $scope.userDetails.profilePicture = response.data[0];
           } else {
             toastr.warning('Error Uploading Image!');
           }
-          Agent.saveAgentData($scope.userData);
+          Agent.saveAgentData($scope.userDetails, function (data) {
+            console.log(data);
+          });
           $scope.agentSec(6);
         });
       } else {
         // alert("nai mila");
-        $scope.userData = _.omit($scope.userData, ['profilePicture']);
-        Agent.saveAgentData($scope.userData);
+        $scope.userDetails = _.omit($scope.userDetails, ['profilePicture']);
+        Agent.saveAgentData($scope.userDetails, function (data) {
+          console.log(data);
+        });
       }
       $scope.agentSec(6);
     };
 
     $scope.removePhoto = function () {
-      $scope.userData = _.omit($scope.userData, ['profilePicture']);
+      $scope.userDetails = _.omit($scope.userDetails, ['profilePicture']);
       $scope.fileName = null;
-      console.log($scope.userData);
-
+      console.log($scope.userDetails);
       $scope.showImage.val = false;
     };
 
@@ -11069,7 +11081,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
     $scope.oneAtATime = true;
 
-    $scope.passwords ={};
+    $scope.passwords = {};
     $scope.oldPasswordError = false;
     $scope.newPasswordError = false;
     $scope.saveSuccess = false;
@@ -11077,24 +11089,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // INTEGRATION START
     // GET CONTINENT END
     // SETTING DATA GET
-    function setAgent(){
-      Agent.getAgentDetails(function(data){
-        if(data.value=true){
+    function setAgent() {
+      Agent.getAgentDetails(function (data) {
+        if (data.value = true) {
           $scope.agentData = data.data;
-          _.each(data.data.company.categoryOfSpeacilization, function(n){
-            var index=_.findIndex($scope.chooseCategorySpcl, ['caption',n]);
-            $scope.chooseCategorySpcl[index].class="category-active";
+          _.each(data.data.company.categoryOfSpeacilization, function (n) {
+            var index = _.findIndex($scope.chooseCategorySpcl, ['caption', n]);
+            $scope.chooseCategorySpcl[index].class = "category-active";
           })
-          _.each(data.data.company.countryOfSpecialization,function(n){
-            var index = _.findIndex($scope.countriesByContinent,['name',n.name]);
-            console.log(index,'111');
-            _.each(n.country, function(m){
-              var index1 = _.findIndex($scope.countriesByContinent[index].countries,['_id',m]);
-              $scope.countriesByContinent[index].countries[index1].class="active";
+          _.each(data.data.company.countryOfSpecialization, function (n) {
+            var index = _.findIndex($scope.countriesByContinent, ['name', n.name]);
+            console.log(index, '111');
+            _.each(n.country, function (m) {
+              var index1 = _.findIndex($scope.countriesByContinent[index].countries, ['_id', m]);
+              $scope.countriesByContinent[index].countries[index1].class = "active";
             })
           })
           console.log($scope.agentData, 'agentdata');
-        }else{
+        } else {
           console.log('Error in agentdata Call!!!');
         }
       })
@@ -11142,7 +11154,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // GET CITY END
 
     $scope.selectCategory = function (obj) {
-      console.log(obj,"yeh select");
+      console.log(obj, "yeh select");
       // $scope.isCategorySelected = true;
       if (obj.class == "category-active") {
         obj.class = "";
@@ -11151,19 +11163,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    $scope.saveDetailsAgent = function(type, finalAgentData){
+    $scope.saveDetailsAgent = function (type, finalAgentData) {
       console.log(agentData, 'lalallalalalall');
-      var agentData=_.cloneDeep(finalAgentData);
+      var agentData = _.cloneDeep(finalAgentData);
       var agent = {};
       switch (type) {
         case 'main':
-          agent = _.pick(agentData,['company']); //_.pick(agentData,['name','phone','email','company.phone','homeCity','company.address','company.website','company.about']);
-          agent.company=_.omit(agent.company, ['categoryOfSpeacilization', 'countryOfSpecialization','services']);
-          console.log(agentData,'blah');
-        break;
+          agent = _.pick(agentData, ['company']); //_.pick(agentData,['name','phone','email','company.phone','homeCity','company.address','company.website','company.about']);
+          agent.company = _.omit(agent.company, ['categoryOfSpeacilization', 'countryOfSpecialization', 'services']);
+          console.log(agentData, 'blah');
+          break;
         case 'profile':
           agentData.company.categoryOfSpeacilization = _.filter($scope.chooseCategorySpcl, ['class', 'category-active']);
-          console.log(agentData.company.categoryOfSpeacilization,'buduk');
+          console.log(agentData.company.categoryOfSpeacilization, 'buduk');
           agentData.company.countryOfSpecialization = _.cloneDeep($scope.countriesByContinent);
           _.each(agentData.company.countryOfSpecialization, function (n, key) {
             n.country = [];
@@ -11175,20 +11187,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             return n.country.length == 0;
           });
           agentData.company.categoryOfSpeacilization = _.map(agentData.company.categoryOfSpeacilization, 'caption');
-          agent = _.pick(agentData,['company']);
-          agent.company=_.pick(agent.company,['categoryOfSpeacilization', 'countryOfSpecialization'])
+          agent = _.pick(agentData, ['company']);
+          agent.company = _.pick(agent.company, ['categoryOfSpeacilization', 'countryOfSpecialization'])
           console.log(agentData, 'bleh');
-        break;
+          break;
         case "privacy":
           agent.status = agentData.status;
           console.log(agent, 'status su');
-        break;
+          break;
         default:
       }
 
-      Agent.saveSettings(agent, function(data){
-        console.log(data,'save setting');
-        if(data.value==true){
+      Agent.saveSettings(agent, function (data) {
+        console.log(data, 'save setting');
+        if (data.value == true) {
           console.log('setting save success');
           NavigationService.getAgentsProfile($.jStorage.get("profile").urlSlug, function (data, status) {
             if (data.data._id) {
@@ -11202,31 +11214,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           }, function (err) {
             console.log("Error:", err);
           });
-        }else{
+        } else {
           console.log('setting save FAIL');
         }
       });
     }
 
     // CHANGE PASSWORDS
-    $scope.changePassword = function(passwords){
-      if(passwords.newPassword == passwords.confirmPassword){
+    $scope.changePassword = function (passwords) {
+      if (passwords.newPassword == passwords.confirmPassword) {
         var password = passwords;
         delete password.confirmPassword;
-        Agent.changePassword(password,function(data){
-          console.log(data,'save passw');
-          if(data.value === true){
+        Agent.changePassword(password, function (data) {
+          console.log(data, 'save passw');
+          if (data.value === true) {
             console.log('password saved successfully');
             $scope.saveSuccess = true;
-          }else{
+          } else {
             $scope.oldPasswordError = true;
             console.log('password save failed');
           }
         });
         $scope.newPasswordError = false;
-      } else{
+      } else {
         $scope.newPasswordError = true;
-        console.log(passwords.oldPassword,'oldie', passwords.newPassword,'newie');
+        console.log(passwords.oldPassword, 'oldie', passwords.newPassword, 'newie');
       }
     }
     // CHANGE PASSWORDS END
@@ -11960,10 +11972,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // ADD BUTTTON BACKDROP AND CLICK END
 
     // SHOW ADD TESTIMONIAL
-    $scope.addTestimonial = function(){
-      if ($scope.showTestimonial == false){
+    $scope.addTestimonial = function () {
+      if ($scope.showTestimonial == false) {
         $scope.showTestimonial = true;
-      } else{
+      } else {
         $scope.showTestimonial = false;
       }
     }
@@ -12003,22 +12015,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // ENQUIRY FORM FILL
     $scope.enquire.urlSlug = $scope.activeUrlSlug;
     console.log($scope.enquire.urlSlug, 'Active slug');
-    if($scope.userData){
+    if ($scope.userData) {
       $scope.enquire.name = $scope.userData.name;
       $scope.enquire.email = $scope.userData.email;
-    } else{
+    } else {
       $scope.enquire.name = '';
       $scope.enquire.email = '';
     }
 
-    $scope.sendEnquiry = function(enquire){
+    $scope.sendEnquiry = function (enquire) {
       console.log(enquire, 'Yo EnquirY!');
-      Agent.setLeads(enquire, function(data){
+      Agent.setLeads(enquire, function (data) {
         console.log(data, 'enquire response');
-        if(data.value == true){
+        if (data.value == true) {
           $scope.enquire = {};
           $scope.showEnquiry();
-        } else{
+        } else {
           console.log('enquiry ma error che!');
         }
       })
@@ -12026,7 +12038,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // ENQUIRY FORM FILL END
     // TOUR FORM SAVE
     $scope.selectCategory = function (obj) {
-      console.log(obj,"yeh select");
+      console.log(obj, "yeh select");
       // $scope.isCategorySelected = true;
       if (obj.class == "category-active") {
         obj.class = "";
@@ -12043,45 +12055,46 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log("error getting data");
     });
 
-    $scope.tourPhoto = function(data){
-      console.log(data,'tourPhoto');
+    $scope.tourPhoto = function (data) {
+      console.log(data, 'tourPhoto');
       $scope.tour.displayPic = data;
       console.log($scope.tour.displayPic, 'stour');
       $scope.showTourPic = true;
     };
 
-    $scope.tourPdf = function(data){
-      console.log(data,'tourpdf');
+    $scope.tourPdf = function (data) {
+      console.log(data, 'tourpdf');
       $scope.tour.pdf = data;
       console.log($scope.tour.pdf, 'spdf');
       $scope.showTourPdf = true;
     };
 
-    $scope.removeTourPic = function(){
+    $scope.removeTourPic = function () {
       $scope.tour.displayPic = '';
       console.log($scope.tour.displayPic, 'pic out');
       $scope.showTourPic = false;
     };
 
-    $scope.removeTourPdf = function(){
+    $scope.removeTourPdf = function () {
       $scope.tour.pdf = '';
       console.log($scope.tour.displayPic, 'pdf out');
       $scope.showTourPdf = false;
     };
 
-    $scope.saveTour = function(tour){
+    $scope.saveTour = function (tour) {
       // SAVE TOUR TYPE IN ARRAY
       $scope.tour.typeOfHoliday = [];
       $scope.tour.typeOfHoliday = _.filter($scope.categoriesSpecial, ['class', 'category-active']);
-      console.log($scope.tour.typeOfHoliday,'tourtype list');
+      console.log($scope.tour.typeOfHoliday, 'tourtype list');
       $scope.tour.typeOfHoliday = _.map($scope.tour.typeOfHoliday, 'tourCat');
       // SAVE TOUR TYPE IN ARRAY
-      console.log(tour,'tour save');
-      Agent.saveTour(tour,function(data){
-        console.log(data,'Tour saved Success');
-        if (data.value==true) {
+      console.log(tour, 'tour save');
+      Agent.saveTour(tour, function (data) {
+        console.log(data, 'Tour saved Success');
+        if (data.value == true) {
           $scope.addItinerary();
-        } else{
+          $scope.getAgentData('tours&packages', $scope.activeUrlSlug, $scope.pagenumber);
+        } else {
           console.log('data error');
         }
       });
@@ -12089,9 +12102,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // TOUR FORM SAVE END
 
     //TOUR PDF DOWNLOAD
-    $scope.downloadTourPdf = function(tour){
-      Agent.downloadTourPdf(tour,function(data){
-        if(data.value==true){
+    $scope.downloadTourPdf = function (tour) {
+      Agent.downloadTourPdf(tour, function (data) {
+        if (data.value == true) {
           console.log('hello');
         }
       });
@@ -12099,15 +12112,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //TOUR PDF DOWNLOAD END
 
     // SAVE TESTIMONIAL
-    $scope.saveTestimonial = function(review){
+    $scope.saveTestimonial = function (review) {
       $scope.review.user = $scope.userData.urlSlug;
-      console.log(review,'review save');
-      Agent.saveAgentReview(review, function(data){
-        console.log(data,'review aaya');
-        if( data.value==true){
+      console.log(review, 'review save');
+      Agent.saveAgentReview(review, function (data) {
+        console.log(data, 'review aaya');
+        if (data.value == true) {
           $scope.review = {};
           $scope.addTestimonial();
-        }else{
+          $scope.getAgentData('testimonials&reviews', $scope.activeUrlSlug, $scope.pagenumber);
+        } else {
           console.log('review save error');
         }
       })
@@ -12115,12 +12129,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // SAVE TESTIMONIAL END
 
     //STATUS SEND
-    $scope.sendStatus = function(status){
+    $scope.sendStatus = function (status) {
       console.log(status, 'status su che');
-      Agent.agentStatusSave(status,function(data){
-        if(data.value == true){
+      Agent.agentStatusSave(status, function (data) {
+        if (data.value == true) {
           console.log('status saved');
-        }else {
+          $scope.addItinerary();
+        } else {
           console.log('status error');
         }
       })
@@ -12128,32 +12143,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //STATUS SEND END
 
     // GET LEADS
-    $scope.getLeads = function(type, pagenumber){
+    $scope.getLeads = function (type, pagenumber) {
       var formAgentData = {
-        pagenumber : $scope.pagenumber,
+        pagenumber: $scope.pagenumber,
         type: type
       }
       switch (type) {
         case 'unActioned':
-          Agent.getAllLeads(formAgentData,function(data){
-            if(data.value == true){
+          Agent.getAllLeads(formAgentData, function (data) {
+            if (data.value == true) {
               $scope.unactionLeads = data.data;
-              console.log(data,'unActioned leads success');
-            } else{
+              console.log(data, 'unActioned leads success');
+            } else {
               console.log('unActioned leads failed');
             }
           })
-        break;
+          break;
         case 'actioned':
-          Agent.getAllLeads(formAgentData, function(data){
-            if(data.value == true){
+          Agent.getAllLeads(formAgentData, function (data) {
+            if (data.value == true) {
               $scope.actionLeads = data.data;
-              console.log(data,'actioned leads success');
-            } else{
+              console.log(data, 'actioned leads success');
+            } else {
               console.log('actioned leads failed');
             }
           })
-        break;
+          break;
         default:
 
       }
@@ -12183,42 +12198,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //status character counter end
 
     // GET AVERAGE AGENT RATING
-    $scope.getAvgRating = function(activeSlug){
-      Agent.getAvgRating(activeSlug, function(data){
-        console.log(data,'AVG rating');
+    $scope.getAvgRating = function (activeSlug) {
+      Agent.getAvgRating(activeSlug, function (data) {
+        console.log(data, 'AVG rating');
         $scope.avgRating = data.data;
       });
     };
     // GET AVERAGE AGENT RATING END
     // integration
-    $scope.getAgentData = function(type, activeSlug, pagenumber){
+    $scope.getAgentData = function (type, activeSlug, pagenumber) {
       var formAgentData = {
-        pagenumber : $scope.pagenumber,
+        pagenumber: $scope.pagenumber,
         urlSlug: activeSlug,
         type: type
       }
-      var callback = function(){};
+      var callback = function () {};
       switch (type) {
         case 'tours&packages':
-            callback = function(data){
-              if(data.value==true){
-                $scope.tourData = data.data;
-                console.log($scope.tourData, 'tourData');
-              }else {
-                console.log('tour data call error');
-              }
+          callback = function (data) {
+            if (data.value == true) {
+              $scope.tourData = data.data;
+              console.log($scope.tourData, 'tourData');
+            } else {
+              console.log('tour data call error');
             }
+          }
           break;
-          case 'testimonials&reviews':
-              callback = function(data){
-                if(data.value == true){
-                  $scope.reviewData = data.data;
-                  console.log($scope.reviewData, 'reviewDdata');
-                } else{
-                  console.log('review data call error');
-                }
-              }
-            break;
+        case 'testimonials&reviews':
+          callback = function (data) {
+            if (data.value == true) {
+              $scope.reviewData = data.data;
+              console.log($scope.reviewData, 'reviewDdata');
+            } else {
+              console.log('review data call error');
+            }
+          }
+          break;
         default:
           break;
 
@@ -12228,10 +12243,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // integration end
     // tab change
     var allagthome = ["views/content/agent/agt-home/agthome-itinerary.html",
-    "views/content/agent/agt-home/agthome-tourpackages.html", "views/content/agent/agt-home/agthome-photovideos.html", "views/content/agent/agt-home/agthome-testimonialreviews.html",
-    "views/content/agent/agt-home/agthome-travelactivity.html",
-    "views/content/agent/agt-home/agthome-leadmonitor.html", "views/content/agent/agt-home/agthome-analytics.html",
-    "views/content/agent/agt-home/agthome-aboutus.html"
+      "views/content/agent/agt-home/agthome-tourpackages.html", "views/content/agent/agt-home/agthome-photovideos.html", "views/content/agent/agt-home/agthome-testimonialreviews.html",
+      "views/content/agent/agt-home/agthome-travelactivity.html",
+      "views/content/agent/agt-home/agthome-leadmonitor.html", "views/content/agent/agt-home/agthome-analytics.html",
+      "views/content/agent/agt-home/agthome-aboutus.html"
     ];
     $scope.agthome = {
       innerView: allagthome[0]
@@ -12268,7 +12283,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agthome.innerView = allagthome[5];
         $scope.agthomeoptions.active = "lead-monitor";
         $scope.getAvgRating($scope.activeUrlSlug);
-        $scope.getLeads('unActioned',$scope.pagenumber);
+        $scope.getLeads('unActioned', $scope.pagenumber);
         break;
       case "agthome-analytics":
         $scope.agthome.innerView = allagthome[6];
@@ -12369,14 +12384,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       switch (getId) {
         case 'profileview':
           $scope.profileview = true;
-          Agent.getAllProfileViews(function(data){
-              if(data.value == true){
-                $scope.profileObj = data.data.profileView;
-                console.log($scope.profileObj,'profileview obj');
-              }else{
-                console.log('ERROR IN GET PROFILE VIEWS');
-              }
-            })
+          Agent.getAllProfileViews(function (data) {
+            if (data.value == true) {
+              $scope.profileObj = data.data.profileView;
+              console.log($scope.profileObj, 'profileview obj');
+            } else {
+              console.log('ERROR IN GET PROFILE VIEWS');
+            }
+          })
           break;
         case 'follower':
           $scope.follower = true;
@@ -12436,20 +12451,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     //Show OPTIONS END
     // LEAD MONITOR TABS
-    $scope.viewLeadTab = function(type){
+    $scope.viewLeadTab = function (type) {
       switch (type) {
         case 0:
           $scope.showLead = 0;
           $scope.getLeads('unActioned', $scope.pagenumber);
-        break;
+          break;
         case 1:
           $scope.showLead = 1;
           $scope.getLeads('actioned', $scope.pagenumber);
-        break;
+          break;
         default:
           $scope.showLead = 0;
           $scope.getLeads('unActioned', $scope.pagenumber);
-        break;
+          break;
       }
     }
     // LEAD MONITOR TABS END
