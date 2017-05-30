@@ -2997,6 +2997,11 @@ q {
   .a input {
     padding-right: 30px;
   }
+
+  .form-control[disabled]{
+    background-color: transparent;
+    cursor: pointer;
+  }
 }
 
 .form-control {

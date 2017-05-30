@@ -9,7 +9,7 @@
               <div class="agt-setting-profile clearfix pointer" ng-click="agtsetting(1)" ng-class="{'bg-white active-agtsetting' : showAgtSetting == 1}">
                 <i class="fa fa-chevron-right pull-right"></i>
                 <div class="agt-setting-profimg">
-                  <img src="img/default_Images_2.jpg" alt="" class="img-responsive">
+                  <img ng-src="{{agentData.profilePicture | uploadpath}}" alt="" class="img-responsive">
                 </div>
                 <div class="agtprofile-detail inline-block v-top">
                   <h4 class="color-blue m-clear text-capitalize">{{agentData.name}}</h4>

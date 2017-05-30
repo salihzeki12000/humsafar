@@ -13,7 +13,8 @@
             </a>
           <h4 class="font-bold text-capitalize">{{userData.name}}</h4>
           <p>{{userData.homeCity}}</p>
-          <button class="btn btn-white-outline mr5" ui-sref="agent-setting">Edit </button>
+          <button class="btn btn-white-outline mr5" ui-sref="agent-setting" ng-if="template.isMine">Edit </button>
+          <button class="btn btn-white-outline mr5" ng-if="!template.isMine">Following</button>
           <span><span class="font-bold"> {{userData.followers_count}}999 </span> Followers </span>
         </div>
       </div>
@@ -59,7 +60,7 @@
     <div class="agent-home-content" ng-include="agthome.innerView"></div>
     <!-- Enquiry side tab -->
     <!-- ng-if="!template.isMine" -->
-    <div class="side-enquiry" >
+    <div class="side-enquiry" ng-if="!template.isMine">
       <div class="enquiry-sidetab" ng-show="viewEnquiry" ng-class="{'view-enquiry-list' : viewEnquiry ,  ' ' : !viewEnquiry}">
         <div class="enquirytab-head">
           <h4 class="avenir-roman color-blue">Enquire</h4>
@@ -125,7 +126,7 @@
     <!-- Enquiry side tab enD-->
 <!-- ng-if="!template.isMine" -->
     <!-- Contact Us side tab -->
-    <div class="side-contact avenir-roman" >
+    <div class="side-contact avenir-roman" ng-if="!template.isMine">
       <div class="contact-sidetab" ng-show="viewContact" ng-class="{'view-contact-list' : viewContact ,  ' ' : !viewContact}">
         <div class="contacttab-head">
           <h4 class="avenir-heavy color-white">Contact</h4>
@@ -147,7 +148,9 @@
   </div>
   <!-- modal on load -->
   <!-- modal button -->
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#getModal">Open Modal</button>
+
+  <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#getModal">Open Modal</button> -->
+
   <!-- modal button end -->
 
 
