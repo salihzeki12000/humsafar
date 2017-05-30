@@ -381,10 +381,16 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'AgentuserCtrl'
     })
-    .state('agent-home-without', {
-      url: "/agent/:urlSlug",
+    // .state('agent-home-without', {
+    //   url: "/agent/:urlSlug",
+    //   templateUrl: "views/template.html",
+    //   controller: 'AgenthomeCtrl'
+    // })
+
+     .state('agent-home-without', {
+      url: "/agent",
       templateUrl: "views/template.html",
-      controller: 'AgenthomeCtrl'
+      controller: 'ComingSoonCtrl'
     })
     .state('agent-user', {
       url: "/agent-user/:name",
@@ -392,12 +398,12 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'AgentuserCtrl',
       reloadOnSearch: false
     })
-    .state('agent-home', {
-      url: "/agent/:urlSlug",
-      templateUrl: "views/template.html",
-      controller: 'AgenthomeCtrl',
-      reloadOnSearch: false
-    })
+    // .state('agent-home', {
+    //   url: "/agent/:urlSlug",
+    //   templateUrl: "views/template.html",
+    //   controller: 'AgenthomeCtrl',
+    //   reloadOnSearch: false
+    // })
     .state('agent-upgrade', {
       url: "/agent-upgrade",
       templateUrl: "views/template.html",
