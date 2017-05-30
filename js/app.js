@@ -647,9 +647,13 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout) {
     scope: {
       model: '=ngModel',
       type: "@type",
-      callback: "&ngCallback"
+      callback: "&ngCallback",
+      allowType: "@allowType"
     },
     link: function ($scope, element, attrs) {
+      if (!$scope.allowType) {
+        $scope.allowType = "image/*,application/pdf";
+      }
       $scope.showImage = function () {
         console.log($scope.image);
       };
@@ -1154,7 +1158,7 @@ firstapp.filter('itineraryType', function () {
         break;
       default:
         returnVal = "img/banner-itinerary/all1.jpg";
-      break;
+        break;
     }
     console.log(returnVal, 'return wla kya hai');
     return returnVal;
