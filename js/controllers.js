@@ -10967,6 +10967,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.userData = _.omit($scope.userData, ['profilePicture']);
         Agent.saveAgentData($scope.userData);
       }
+      $scope.agentSec(6);
     };
 
     $scope.removePhoto = function () {

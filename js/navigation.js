@@ -3,8 +3,9 @@ var allowAccess = "";
 
 // adminURL = "https://travelibro.com/api";
 // adminURL = "https://travelibro.wohlig.com/api";
-adminURL = "http://192.168.2.19:1337/api" //travelibro
-adminURL = "http://192.168.0.103:1337/api" //platinum
+// adminURL = "http://192.168.2.19:1337/api" //travelibro
+// adminURL = "http://192.168.0.103:1337/api" //platinum
+adminURL = "http://wohlig.io:1337/api" //
 
 var imgurl = adminURL + "/upload/";
 var imgpath = imgurl + "readFile";

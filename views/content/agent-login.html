@@ -68,7 +68,8 @@
               <h3 class="color-blue avenir-heavy">Head Office Location</h3>
               <div class="select-your-nation select-your-city">
                 <div class="search-nation select-city">
-                  <input type="text" class="form-control avenir-roman" placeholder="Search City" ng-model="searchCity" ng-value="userDetails.homeCity" ng-change="searchByKey(searchCity)">
+                  <input type="text" class="form-control avenir-roman" placeholder="Search City" ng-model="searchCity" ng-value="userDetails.homeCity"
+                    ng-change="searchByKey(searchCity)">
                 </div>
                 <ul class="avenir-roman ">
                   <li ng-repeat="city in cities | filter:searchCity track by $index">
@@ -97,7 +98,8 @@
                 <form name="userDetailsForm">
                   <div class="form-group">
                     <div class="agent-cmpny-inputholder">
-                      <input type="text" class="form-control color-blue" placeholder="Company Name" ng-model="userDetails.company.name" required name="name">
+                      <input type="text" class="form-control color-blue" placeholder="Company Name" ng-model="userDetails.company.name" required
+                        name="name">
                       <p ng-if="userDetailsForm.name.$invalid">Name cannot be empty</p>
                     </div>
                   </div>
@@ -131,7 +133,8 @@
 
                   <div class="form-group">
                     <div class="agent-cmpny-inputholder">
-                      <input type="email" class="form-control color-blue" placeholder="Email" ng-model="userDetails.company.email" name="email" required>
+                      <input type="email" class="form-control color-blue" placeholder="Email" ng-model="userDetails.company.email" name="email"
+                        required>
                       <span class="error" ng-show="userDetails.company.email=='' && userDetailsForm.email.$touched">Required!</span>
                       <span class="error" ng-show="userDetailsForm.email.$error.email && userDetailsForm.email.$touched">Not valid email!</span>
                       <div class="agent-input-icon">
@@ -162,14 +165,14 @@
           <div class="agent-logoupload text-center " ng-if="agentloginView==5 ">
             <h3 class="color-blue avenir-heavy ">Upload Company Logo</h3>
             <div class="text-center ">
-              <div class="cropArea" >
+              <div class="cropArea">
                 <div class="text-right">
                   <span class="color-dark-blue pointer" ng-click="removePhoto()">Cancel</span>
                 </div>
                 <img-crop image="myImage" result-image="uploadme.src" /></img-crop>
               </div>
               <div class="show ">
-                <img ng-src="{{myCroppedCompLogo}} "/>
+                <img ng-src="{{myCroppedCompLogo}} " />
               </div>
               <div class="upload-section " ng-hide="showImage.val">
                 <!-- <img src="{{userData.profilePicture|uploadpath}} " class="m-center img-responsive doneLoading "> -->
