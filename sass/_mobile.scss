@@ -1911,6 +1911,9 @@
   .travel-life-part.setting {
     background-color: #fff;
   }
+  .ongo-journey-card .user-social-item {
+    padding: 15px 2px;
+  }
   .notify-popup{ 
         margin-left: 0;
     .notify-imgholder {
@@ -2188,6 +2191,7 @@
     p {
       margin: 10px 0;
       font-size: 13px;
+      margin-left: -21px;
     }
   } //card
   .days-spent {
