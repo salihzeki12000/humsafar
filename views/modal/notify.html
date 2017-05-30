@@ -4,26 +4,26 @@
     <!--<img src="img/cancel.png" alt="Cancel" class="img-responsive">-->
     X
   </div>
-  <div class="bg-white">
+  <div class="text-center">
     <div class="notify-imgsec">
       <div class="notify-imgholder">
         <div class="notify-control-nav">
           <a href="" ng-if="allPhotos.photoSliderLength!==1"><i class="fa fa-angle-left prev-slide fa-3x color-white" ng-click="prevPhotoSlide(allPhotos);"></i></a>
           <a href="" ng-if="allPhotos.photoSliderLength!==1"><i class="fa fa-angle-right next-slide fa-3x color-white" ng-click="nextPhotoSlide(allPhotos);"></i></a>
         </div>
-        <div class="blurnotify-imgholder" ng-if="listOfComments.type=='photo'">
+        <!--<div class="blurnotify-imgholder" ng-if="listOfComments.type=='photo'">
           <img ng-src="{{listOfComments.name|uploadpath}}" alt="" class="img-responsive">
-        </div>
+        </div>-->
         <img ng-src="{{listOfComments.name|uploadpath}}" alt="" class="img-reponsive" ng-if="listOfComments.type=='photo'">
         <video controls="controls" autoplay ng-if="listOfComments.type=='video'">
           <source src="{{listOfComments.name|trusted}}" type="video/mp4">
         </video>
-        <div class="blurnotify-imgholder" ng-if="listOfComments.type=='video'">
+        <!--<div class="blurnotify-imgholder" ng-if="listOfComments.type=='video'">
           <img ng-src="{{listOfComments.thumbnail|uploadpath}}" alt="" class="img-responsive">
-        </div>
+        </div>-->
       </div>
     </div>
-    <div class="comment-like-notify">
+    <div class="comment-like-notify bg-white">
       <div class="like-comment-mainsec">
         <div class="clearfix">
           <div class="pull-left">
@@ -58,6 +58,11 @@
         </div>
       </div>
       <!-- comment section -->
+                <div class="comment-tag color-blue">
+      <!--<p class="m-clear avenir-roman" >Evening by the beach! :) with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon</p>-->
+      <p class="m-clear avenir-roman" ng-if="ongo.postString" ng-bind-html="ongo.postString"></p>
+      <p class="m-clear avenir-roman" ng-if="localongo.localpostString" ng-bind-html="localongo.localpostString"></p>
+    </div>
       <div class="comment-sec">
         <form autocomplete="off" ng-submit="postPhotosComment(listOfComments.name,text,listOfComments.post,listOfComments._id)" ng-if="template.isLoggedIn">
           <div class="write-comment-text">
@@ -121,10 +126,9 @@
       </div>
       <!-- comment section end` -->
     </div>
-    <div class="comment-tag color-blue">
-      <!--<p class="m-clear avenir-roman" >Evening by the beach! :) with Sarvesh Bramhe & Gayatri Sakalkar - at Girgaon</p>-->
+    <!--<div class="comment-tag color-blue">
       <p class="m-clear avenir-roman" ng-if="ongo.postString" ng-bind-html="ongo.postString"></p>
       <p class="m-clear avenir-roman" ng-if="localongo.localpostString" ng-bind-html="localongo.localpostString"></p>
-    </div>
+    </div>-->
   </div>
 </div>

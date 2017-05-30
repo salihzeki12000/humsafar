@@ -33,21 +33,21 @@
     <div class="ongo-card-main">
       <!--if checkin is done and no photos is uploaded then add map i.e.  if showMap is true  STARTS-->
       <div class="card-imgholder pointer" ng-if="ongo.photos && ongo.photos.length==0 && ongo.showMap && ongo.checkIn && ongo.checkIn.lat ">
-        <div class="blur-img">
+        <!--<div class="blur-img">
           <img ng-src="{{ongo.imgageUrl}}" alt="" class="img-responsive">
-        </div>
+        </div>-->
         <img ng-src="{{ongo.imageUrl}}" alt="" class="img-responsive card-img">
       </div>
       <!--if checkin is done and no photos is uploaded then add map i.e.  if showMap is true  ENDS-->
       <!-- ongo img -->
-      <div class="card-imgholder pointer" ng-if="ongo.photos.length>0 && ongo.onDisplay=='photos'" ng-click="getPhotosCommentData(ongo.photosVideos[index]._id, index, ongo.photosVideos.length, ongo.photosVideos)">
-        <div class="blur-img">
+      <div class="card-imgholder pointer" ng-if="ongo.photos.length>0 && ongo.onDisplay=='photos'" ng-click="getPhotosCommentData(ongo.photosVideos[index]._id, index, ongo.photosVideos.length, ongo.photosVideos)" style="background: url('{{ongo.photosVideos[index].name|uploadpath}}') no-repeat; background-size: cover;background-position: 50% 50%;">
+        <!--<div class="blur-img">
           <img ng-src="{{ongo.photosVideos[index].name|uploadpath}}" alt="" class="img-responsive">
-        </div>
-        <img ng-src="{{ongo.photosVideos[index].name|uploadpath}}" alt="" class="img-responsive card-img">
+        </div>-->
+        <!--<img ng-src="{{ongo.photosVideos[index].name|uploadpath}}" alt="" class="img-responsive card-img">-->
       </div>
       <div class="video-ongo-journey relate {{removeVideoButton}}" ng-if="ongo.videos.length>0 && ongo.onDisplay=='videos'" ng-click="playVideo(ongo._id,$parent.index);">
-        <video id="{{ongo._id}}_{{index}}" poster="{{ongo.photosVideos[index].thumbnail|uploadpath}}" controls="controls" width="550">
+        <video id="{{ongo._id}}_{{index}}"  poster="{{ongo.photosVideos[index].thumbnail|uploadpath}}" controls="controls" width="550">
           <source src="{{ongo.photosVideos[index].name|trusted}}" type="video/mp4">
         </video>
         <div class="youtube-icon get-center">
