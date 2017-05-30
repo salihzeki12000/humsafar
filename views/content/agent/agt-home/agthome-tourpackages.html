@@ -137,11 +137,11 @@
 
                   <!-- upload buttons -->
                   <div class="button-touruploads">
-                    <div class="tour-uploads tour-pdf relate" ng-hide="showTourPdf">
+                    <div class="tour-uploads tour-pdf relate pointer" ng-hide="showTourPdf">
                       <button class="btn btn-white-outline pointer">Upload Pdf</button>
                       <upload-image ng-model="tour.pdf" ng-callback="tourPdf(data);" allow-type="application/pdf" no-view class="tour-uploadinput pointer"></upload-image>
                     </div>
-                    <div class="tour-uploads tour-pic relate" ng-hide="showTourPic">
+                    <div class="tour-uploads tour-pic relate pointer" ng-hide="showTourPic">
                       <button class="btn btn-white-outline pointer">Upload Display Picture</button>
                       <upload-image ng-model="tour.displayPic" ng-callback="tourPhoto(data);" allow-type="image/*" no-view class="pointer tour-uploadinput"></upload-image>
                     </div>
@@ -241,6 +241,9 @@
               <img ng-src="{{tourcard.displayPic|uploadpath:380:250:'cover'}}" alt="{{tourcard.title}} | Travel Libro" class="img-responsive"
               />
               <div class="itinerary-imgfoot ">
+                <div class="call-btn" ng-click="showContact();" ng-if="!template.isMine">
+                  <i class="fa fa-phone" aria-hidden="true"></i>
+                </div>
                 <div class="imgfoot-top clearfix">
                   <div class="pull-left">
                     <h4 class="font-sz18 text-capitalize avenir-heavy">{{tourcard.title}}</h4>
@@ -251,12 +254,11 @@
                   <div class="pull-right">
                     <p class="font-sz18 cost-posi">${{tourcard.price}}</p>
                   </div>
-                  <button class="btn btn-pink btn-download"><a href="http://192.168.2.19:1337/api/download/{{tourcard.pdf}}/tours&packages/{{tourcard._id}}" class="btn-link" download>Download</a></button>
-                  <button class="btn btn-pink btn-book"><a href="{{tourcard.bookingUrl}}" target="_blank" class="btn-link">Book</a></button>
+                  <div class="tour-btns">
+                    <button class="btn btn-pink btn-download" ng-if="tourcard.pdf"><a href="http://192.168.2.12:1337/api/download/{{tourcard.pdf}}/tours&packages/{{tourcard._id}}" class="btn-link"  download>Download</a></button>
+                    <button class="btn btn-pink btn-book" ng-if="tourcard.bookingUrl"><a href="{{tourcard.bookingUrl}}" target="_blank" class="btn-link">Book</a></button>
+                  </div>
                 </div>
-              </div>
-              <div class="call-btn" ng-click="showContact();" ng-if="!template.isMine">
-                <i class="fa fa-phone" aria-hidden="true"></i>
               </div>
             </div>
           </div>

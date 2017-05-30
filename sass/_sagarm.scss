@@ -863,9 +863,6 @@
 
 .btn-book {
   padding: 5px 30px;
-  position: absolute;
-  right: 5px;
-  bottom: -10px;
 }
 
 .agent-photogallery {
@@ -1460,12 +1457,17 @@ q {
   }
 }
 // ------ yash scss ----------------
+.tour-btns{
+  position: absolute;
+  left: 0;
+  bottom: -15px;
+  width: 100%;
+  padding: 0 5px;
+  text-align: right;
+}
 
 .btn-download {
   padding: 5px 12px;
-  position: absolute;
-  right: 105px;
-  bottom: -10px;
 }
 
 .btn-link{
@@ -1479,7 +1481,7 @@ q {
 .call-btn {
   position: absolute;
   right: 10px;
-  bottom: 45%;
+  top: -30px;
   color: #fff;
   border: 1px solid $brand-cyan;
   border-radius: 50%;

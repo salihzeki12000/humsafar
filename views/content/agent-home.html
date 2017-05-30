@@ -32,8 +32,8 @@
                 <li ng-click="getTab(3)" ng-class="{'active': agthomeoptions.active=='agthome-testimonialreviews'}">Testimonials & Reviews</li>
                 <li ng-click="getTab(4)" ng-class="{'active': agthomeoptions.active=='agthome-travelactivity'}" ng-if="template.isMine">My Activity</li>
                 <li ng-click="getTab(4)" ng-class="{'active': agthomeoptions.active=='agthome-travelactivity'}" ng-if="!template.isMine">Travel Activity</li>
-                <li ng-click="getTab(5)" ng-class="{'active': agthomeoptions.active=='agthome-leadmonitor'}">Lead Monitor</li>
-                <li ng-click="showOptions();" ng-class="{'active': agthomeoptions.active=='agthome-analytics'}" class="relate">Analytics
+                <li ng-click="getTab(5)" ng-class="{'active': agthomeoptions.active=='agthome-leadmonitor'}" ng-if="template.isMine">Lead Monitor</li>
+                <li ng-click="showOptions();" ng-class="{'active': agthomeoptions.active=='agthome-analytics'}" class="relate" ng-if="template.isMine">Analytics
                   <div class="analytics-dropoptions" ng-show="viewOption">
                     <ul class="list-unstyled">
                       <li ng-click="getAgentScroll('profileview');">Profile Views</li>
