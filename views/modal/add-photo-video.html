@@ -35,11 +35,11 @@
             <!-- photo upload end-->
             <!-- flex slider for photo in 2 row -->
             <div class="otg-photo-slider" ng-show="photoSec" ng-if="flexShow">
-              <flex-slider id="flexslider"class="carousel" flex-slide="photo in otgPhotoArray track by $index" control-nav="false" slideshow="false">
+              <flex-slider id="flexslider" class="carousel" flex-slide="photo in otgPhotoArray track by $index" control-nav="false" slideshow="false">
                 <li>
                   <div class="otg-slider-row row-flex" ng-repeat="slide in photo track by $index">
                     <div class="otg-column col-flex" ng-repeat="column in slide track by $index">
-                      <div class="otg-photo-holder" >
+                      <div class="otg-photo-holder">
                         <img ng-src="{{column.name|uploadpath:300:300:'cover'}}" alt="" class="img-responsive get-center">
                         <!-- add front caption -->
                         <div class="otg-photo-caption" ng-hide="column.name==indexPhotoCaption" ng-click="addMoreCaption(column.name);">
@@ -95,14 +95,14 @@
               <p class="text-center color-dark-blue avenir-roman">Drag a video here</p>
               <span class="block text-center color-dark-blue avenir-roman">-or-</span>-->
               <div class="otg-upload-btn text-center relate">
-                <button class="btn btn-pink btn-more">Upload Photos</button>
+                <button class="btn btn-pink btn-more">Upload Videos</button>
                 <upload-image multiple="true" ng-model="uploadVid" ng-callback="addOtgVideo(data);" no-view class="pointer"></upload-image>
               </div>
             </div>
             <!-- video upload end-->
             <!-- flexslider for video -->
             <div class="video-otg-slider" ng-show="videoSec" ng-if="videoFlex">
-              <flex-slider flex-slide="video in otgVideo track by $index" class="carsouel"  control-nav="false" slideshow="false">
+              <flex-slider flex-slide="video in otgVideo track by $index" class="carsouel" control-nav="false" slideshow="false">
                 <li>
                   <div class="holder-otg-video">
                     <img ng-src="{{video.thumbnail|uploadpath:335:334:'cover'}}" alt="" class="img-responsive">
@@ -113,7 +113,8 @@
                     </div>
                     <!-- video front caption end-->
                     <!-- video back add caption -->
-                    <div class="video-otg-caption otg-add-caption" ng-class="{'show-otg-caption': video._id==indexVideoCaption, '': video._id!==index}" ng-show="video._id==indexVideoCaption">
+                    <div class="video-otg-caption otg-add-caption" ng-class="{'show-otg-caption': video._id==indexVideoCaption, '': video._id!==index}"
+                      ng-show="video._id==indexVideoCaption">
                       <textarea name="" id="" maxlength="150" class="form-control" ng-model="video.caption" placeholder="Enter Captions"></textarea>
                       <p class="text-center m-center" ng-click="addVideoCaption(video._id);"><i class="fa fa-angle-down color-white fa-2x pointer"></i></p>
                       <div class="text-typed-count">
@@ -135,9 +136,9 @@
             <!-- add more photo video part -->
             <div class="add-otg-more" ng-show="videoSec">
               <span class="putmore-photo-video"><i class="fa fa-plus"></i></span>
-                <div class="add-more-vid">
-                  <upload-image multiple="true" ng-model="uploadVid" ng-callback="addOtgVideo(data);" no-view class="pointer"></upload-image>
-                </div>
+              <div class="add-more-vid">
+                <upload-image multiple="true" ng-model="uploadVid" ng-callback="addOtgVideo(data);" no-view class="pointer"></upload-image>
+              </div>
             </div>
             <!-- add more photo video part end-->
           </div>
@@ -156,7 +157,7 @@
           </div>
         </div>
         <h5 class="color-white">{{buddy.firstName}}
-        <span class="block mt5">{{buddy.lastName}}</span></h5>
+          <span class="block mt5">{{buddy.lastName}}</span></h5>
       </div>
     </div>
     <!-- tag selected peoples end-->
