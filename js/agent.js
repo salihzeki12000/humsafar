@@ -153,6 +153,16 @@ var agent = angular.module('agent', [])
         }).success(function (data) {
           callback(data);
         })
+      },
+      changeStatus: function (data) {
+        TravelibroService.http({
+          url: adminURL + "/Leads/changeStatus",
+          data: {
+            "_id": data._id,
+            "status": true
+          },
+          method: "POST"
+        })
       }
 
     }

@@ -615,6 +615,30 @@ commontask.directive('likeSound', function () {
   };
 });
 
+commontask.directive('linkProfile', function ($compile, $parse, $state) {
+  return {
+    restrict: 'EA',
+    replace: false,
+    link: function ($scope, element, attrs) {
+      var $element = $(element);
+      $scope.redirectToProfile = function (obj) {
+        if (obj.urlSlug && obj.type) {
+          if (obj.type == "user") {
+            $state.go("mylife", {
+              "name": 'journey',
+              "urlSlug": obj.urlSlug
+            });
+          } else if (obj.type == "agent") {
+            $state.go("agent-home-without", {
+              "urlSlug": obj.urlSlug
+            });
+          }
+        }
+      };
+    }
+  };
+});
+
 commontask.filter("followFollowingStatus", function () {
   return function (input) {
     console.log(input, "---");
@@ -661,7 +685,7 @@ commontask.filter("singularPlural", function () {
           return 'Countries Visited';
         }
         break;
-        case "Reviews":
+      case "Reviews":
         if (input == 1) {
           return 'Review';
         } else {

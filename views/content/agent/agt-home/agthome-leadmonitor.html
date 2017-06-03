@@ -6,8 +6,10 @@
       <div class="row">
         <div class="col-md-offset-3 col-md-6">
           <h3 class="color-blue avenir-heavy">Open your business to the World ...</h3>
-          <p class="color-blue">People from world over have access to your Profile vis TraveLibro. The ones who are interested in availing your services, send you an enquiry from time to time which reflects on your Lead Monitor. The Lead Monitor shows you the most recent enquiries
-            and keeps a record of the old ones. get in touch with these potetial clients and convert leads to real business!</p>
+          <p class="color-blue">People from world over have access to your Profile vis TraveLibro. The ones who are interested in availing your
+            services, send you an enquiry from time to time which reflects on your Lead Monitor. The Lead Monitor shows you
+            the most recent enquiries and keeps a record of the old ones. get in touch with these potetial clients and convert
+            leads to real business!</p>
         </div>
       </div>
     </div>
@@ -20,7 +22,7 @@
             <h4 class="avenir-roman color-white">New Leads <span class="avenir-heavy font-sz24">{{avgRating.unActionedCount}}</span></h4>
           </li>
           <li class="pointer lead-tabselect" ng-click="viewLeadTab(1);" ng-class="{'active': showLead == 1}">
-            <h4 class="avenir-roman color-white">Actioned <span class="avenir-heavy font-sz24">{{avgRating.actionedCount}}</span></h4>
+            <h4 class="avenir-roman color-white">Seen <span class="avenir-heavy font-sz24">{{avgRating.actionedCount}}</span></h4>
           </li>
         </ul>
       </div>
@@ -32,11 +34,14 @@
         </div>
         <!-- NEW LEAD EMPTY END -->
         <!-- NEW LEAD ACCORDION -->
-        <div class="leadtab-accordionbox newlead-tab"  ng-if="unactionLeads.length != 0">
+
+        <div class="leadtab-accordionbox newlead-tab" ng-if="unactionLeads.length != 0">
           <uib-accordion close-others="oneAtATime">
-            <uib-accordion-group ng-repeat="agtlead in unactionLeads track by $index">
+            <!--is-open="status.open"-->
+            <uib-accordion-group ng-repeat="agtlead in unactionLeads track by $index" is-open="agtlead.open">
               <uib-accordion-heading>
-                <div class="lead-tab-title color-white avenir-medium clearfix">
+                <!--ng-click="leadRead(agtlead,$index,status.open)"-->
+                <div class="lead-tab-title color-white avenir-medium clearfix" ng-click="leadRead(agtlead,$index,agtlead.open)">
                   <div class="leadtab-profileholder pull-left">
                     <img ng-src="{{agtlead.byUser.profilePicture | uploadpath}}" alt="{{agtlead.byUser.name}}" class="img-responsive">
                   </div>
@@ -90,6 +95,7 @@
             </uib-accordion-group>
           </uib-accordion>
         </div>
+
         <!-- NEW LEAD ACCORDION END -->
       </div>
       <!-- LEAD ACCCORDION SECTION END -->
