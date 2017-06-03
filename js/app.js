@@ -155,6 +155,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       templateUrl: "views/template.html",
       controller: 'LoginCtrl'
     })
+    .state('partnerlogin', {
+      url: "/partner-login",
+      templateUrl: "views/template.html",
+      controller: 'PartnerLoginCtrl'
+    })
     .state('mainpage', {
       url: "/mainpage",
       templateUrl: "views/template.html",

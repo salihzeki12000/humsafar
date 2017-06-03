@@ -67,11 +67,20 @@
             <div class="text-center">
               <h3 class="color-blue avenir-heavy">Head Office Location</h3>
               <div class="select-your-nation select-your-city">
-                <div class="search-nation select-city">
+                <div class="nation-city">
+                  <ui-select ng-model="userDetails.homeCity" theme="bootstrap" ng-value="userDetails.homeCity">
+                    <ui-select-match placeholder="Search City">{{$select.selected.description}}</ui-select-match>
+                    <ui-select-choices repeat="city.description as city in cities | filter:searchCity" track by $index ng-click="$parent.goNext=4"
+                      refresh="searchByKey($select.search)" refresh-delay="0">
+                      <span class="color-light-grey">{{city.description}}</span>
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
+                <!-- <div class="search-nation select-city">
                   <input type="text" class="form-control avenir-roman" placeholder="Search City" ng-model="searchCity" ng-value="userDetails.homeCity"
                     ng-change="searchByKey(searchCity)">
-                </div>
-                <ul class="avenir-roman ">
+                </div> -->
+                <!-- <ul class="avenir-roman ">
                   <li ng-repeat="city in cities | filter:searchCity track by $index">
                     <div class="nation-select relate">
                       <input type="radio" id="{{city.id}}" name="city" ng-value="city.description" ng-model="userDetails.homeCity" />
@@ -80,7 +89,7 @@
                       </label>
                     </div>
                   </li>
-                </ul>
+                </ul> -->
               </div>
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-right" ng-click="agentSec(4)" ng-disabled="!userDetails.homeCity">Next</button>
@@ -133,6 +142,13 @@
 
                   <div class="form-group">
                     <div class="agent-cmpny-inputholder">
+                      <!-- <ui-select multiple ng-model="userDetails.company.email" theme="bootstrap" tagging="tagHandler">
+                        <ui-select-match placeholder="Emails">{{$item.email}}</ui-select-match>
+                        <ui-select-choices repeat="userDetails.company.email as email" refresh=""
+                          refresh-delay="0">
+                          <span>{{userDetails.company.email}}</span>
+                        </ui-select-choices>
+                      </ui-select> -->
                       <input type="email" class="form-control color-blue" placeholder="Email" ng-model="userDetails.company.email" name="email"
                         required>
                       <span class="error" ng-show="userDetails.company.email=='' && userDetailsForm.email.$touched">Required!</span>
@@ -175,14 +191,11 @@
                 <img ng-src="{{myCroppedCompLogo}} " />
               </div>
               <div class="upload-section " ng-hide="showImage.val">
-                <!-- <img src="{{userData.profilePicture|uploadpath}} " class="m-center img-responsive doneLoading "> -->
+                <img src="{{userDetails.profilePicture|uploadpath}} " class="m-center img-responsive doneLoading ">
                 <p class="text-center color-grey avenir-roman" ng-show="((profile.profilePicture) && (showImage.val==false))"> - or -</p>
-                <img src="img/upload-transparent.png " class="m-center img-responsive doneLoading ">
-                <p class="text-center color-grey avenir-roman ">Drag a profile photo here</p>
-                <span class="block mt10 color-grey avenir-roman ">- or -</span>
                 <div class="upload-btn ">
                   <div class="relate inline-block mr10 select-photo ">
-                    <button class="btn btn-dark-blue pointer avenir-roman ">Upload photo</button>
+                    <button class="btn btn-dark-blue pointer avenir-roman ">Upload Logo</button>
                     <input type="file" class="getfile pointer" id="fileInput1" class="getfile pointer" fileread="uploadme.src" />
                   </div>
                   <!--id=fileInput class="getfile pointer " for above code-->
@@ -201,13 +214,13 @@
           <!-- ABOUT AGENT -->
           <div class="agent-about " ng-if="agentloginView==6 ">
             <div class="text-center ">
-              <h3 class="color-blue avenir-heavy ">About Sai Travels</h3>
-              <div class="form-group ">
+              <h3 class="color-blue avenir-heavy text-capitalize">About {{userDetails.company.name}}</h3>
+              <div class="form-group " ng-init="userDetails.company.about = ''; userDetails.company.about.length = 0">
                 <div class="agent-about-inputholder ">
                   <textarea name=" " id="textareaChars " maxlength="500 " placeholder="Fill me in ... " class="form-control
                   color-blue" ng-model="userDetails.company.about"></textarea>
                 </div>
-                <span class="pull-right font-sz10 mt10 " id="remainingC "></span>
+                <span class="pull-right font-sz10 mt10 " id="remainingC ">{{userDetails.company.about.length}}/ 500</span>
               </div>
               <div class="button-panel clearfix ">
                 <button class="btn btn-blue-outline btn-more pull-left " ng-click="agentSec(5) ">Previous</button>
@@ -249,7 +262,7 @@
                             <div class="agt-imgholder {{agtcat.class}}">
                               <img ng-src="{{agtcat.agtcatImg}}" alt="{{agtcat.name}} " width="{{agtcat.catwidth}}" class="img-responsive m-center">
                             </div>
-                            <figcaption class="color-blue font-bold ">{{agtcat.name}}</figcaption>
+                            <figcaption class="color-blue avenir-heavy ">{{agtcat.name}}</figcaption>
                           </figure>
                         </div>
                       </div>

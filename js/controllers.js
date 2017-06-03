@@ -11935,6 +11935,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.showTestimonial = false;
     $scope.showTourPdf = false;
     $scope.showTourPic = false;
+    $scope.showCoverBtn = false;
     $scope.pagenumber = 1;
     $scope.avgRating = {};
     $scope.showLead = 0;
@@ -12012,6 +12013,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // PRATIK CONTROLLER END
 
     // SAGAR INTEGRATION
+
+    // CHANGE COVER PHOTO
+    $scope.agentCoverPic = function (data) {
+      console.log(data, 'coverPhoto');
+      $scope.userData.coverPhoto = data;
+      console.log($scope.userData.coverPhoto, 'coverpic');
+      $scope.showCoverBtn = true;
+    };
+
+    $scope.saveAgentCover = function(coverPhoto){
+      console.log(coverPhoto,'coverpic saved');
+    };
+    // CHANGE COVER PHOTO END
     // ENQUIRY FORM FILL
     $scope.enquire.urlSlug = $scope.activeUrlSlug;
     console.log($scope.enquire.urlSlug, 'Active slug');
@@ -12200,11 +12214,81 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // GET AVERAGE AGENT RATING
     $scope.getAvgRating = function (activeSlug) {
       Agent.getAvgRating(activeSlug, function (data) {
-        console.log(data, 'AVG rating');
         $scope.avgRating = data.data;
       });
     };
     // GET AVERAGE AGENT RATING END
+    $scope.status = {
+      'refreshArray': true
+    };
+    var prevIndex;
+    var prevLead;
+
+    // $scope.leadRead = function (currentLead, currentIndex, open) {
+    //   console.log(currentIndex, open);
+    //   if (prevIndex == undefined) {
+    //     prevIndex = currentIndex;
+    //     prevLead = currentLead;
+    //     Agent.changeStatus(currentLead, $scope.getAvgRating($scope.activeUrlSlug));
+    //   } else {
+    //     if (open == false) {
+    //       // call api to refresh
+    //       Agent.getAllLeads({
+    //         "pagenumber": 1,
+    //         "type": "unActioned"
+    //       }, function (data) {
+    //         if (data.value == true) {
+    //           $scope.unactionLeads = data.data;
+    //           Agent.changeStatus(currentLead, $scope.getAvgRating($scope.activeUrlSlug));
+    //         }
+    //       });
+    //       if (prevIndex != currentIndex) {
+    //         //call api to remove
+    //         Agent.changeStatus(currentLead, $scope.getAvgRating($scope.activeUrlSlug));
+    //       }
+    //     } else {
+    //       if (open == true) {
+    //         // call api to refresh
+    //         Agent.getAllLeads({
+    //           "pagenumber": 1,
+    //           "type": "unActioned"
+    //         }, function (data) {
+    //           if (data.value == true) {
+    //             $scope.unactionLeads = data.data;
+    //             Agent.changeStatus(currentLead, $scope.getAvgRating($scope.activeUrlSlug));
+    //           }
+    //         });
+    //       }
+    //     }
+    //     prevIndex = currentIndex;
+    //     prevLead = currentLead;
+    //   }
+    //   prevIndex = currentIndex;
+    //   prevLead = currentLead;
+    // };
+
+    $scope.leadRead = function (currentLead, currentIndex, open) {
+      console.log(currentIndex, open);
+      if (prevIndex == undefined) {
+        prevIndex = currentIndex;
+        prevLead = currentLead;
+        Agent.changeStatus(currentLead, $scope.getAvgRating($scope.activeUrlSlug));
+      } else if (prevIndex == currentIndex) {
+        if (open == false) {
+
+        } else {
+           Agent.changeStatus(currentLead, $scope.getAvgRating($scope.activeUrlSlug));
+          _.remove($scope.unactionLeads, {
+            "_id": currentLead._id
+          });
+          console.log($scope.unactionLeads);
+        }
+      } else if (prevIndex != currentIndex) {
+        if (open == false) {
+
+        }
+      }
+    }
     // integration
     $scope.getAgentData = function (type, activeSlug, pagenumber) {
       var formAgentData = {
@@ -12755,6 +12839,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
     // travel activity json end
 
+    // DOWNLOAD LIST
+    $scope.downloadList = [{
+      type: "tour",
+      pic: "img/banner-itinerary/friends1.jpg",
+      name: "Universal Studios 1 day"
+    },{
+      type: "itinerary",
+      pic: "img/banner-itinerary/friends1.jpg",
+      name: "Beautiful Bali"
+    }]
+    // DOWNLOAD LIST END
+
     //lead monitor accordion
     $scope.leadMonAgent = [{
       leadStatus: 'new',
@@ -12883,14 +12979,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // ANALYTICS LEAD FILTER END
     // PROFILE VIIEWS JSON
     $scope.followingList = [{
-      profilePicture: 'img/default_Images_2.jpg',
+      profilePicture: 'img/agent/dishapatani1.jpg',
       name: 'Changu Mangu'
     }, {
-      profilePicture: 'img/default_Images_2.jpg',
+      profilePicture: 'img/agent/nargis1.jpg',
       name: 'Anwar Hatela'
     }, {
-      profilePicture: 'img/default_Images_2.jpg',
+      profilePicture: 'img/agent/dishapatani1.jpg',
       name: 'John Snow'
+    }, {
+      profilePicture: 'img/agent/nargis1.jpg',
+      name: 'Ross Bing'
     }]
     // PROFILE VIIEWS JSON END
   })
@@ -14114,6 +14213,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   .controller('ComingSoonCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
     $scope.template = TemplateService.changecontent("coming-soon"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Coming Soon"); //This is the Title of the Website
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+  })
+
+  .controller('PartnerLoginCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
+    $scope.template = TemplateService.changecontent("partner-login"); //Use same name of .html file
+    $scope.menutitle = NavigationService.makeactive("Partner Login"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
   })

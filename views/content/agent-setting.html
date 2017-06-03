@@ -93,8 +93,8 @@
                 </li>
                 <!-- plans end -->
                 <!-- billing -->
-                <li class="pointer" ng-click="agtsetting(6)" ng-class="{'bg-white active-agtsetting' : showAgtSetting == 6}">
-                  <div class="upload-heading clearfix">
+                <li class="pointer" ng-click="agtsetting(6)" ng-class="{'bg-white active-agtsetting' : showAgtSetting == 6}" hidden>
+                  <div class="upload-heading clearfix" >
                     <div class="row">
                       <div class="col-md-2 col-sm-1 col-xs-2">
                         <div class="text-center agtsetting-typeholder">
@@ -112,7 +112,7 @@
                 </li>
                 <!-- billing end -->
                 <!-- purchase history -->
-                <li class="pointer" ng-click="agtsetting(7)" ng-class="{'bg-white active-agtsetting' : showAgtSetting == 7}">
+                <li class="pointer" ng-click="agtsetting(7)" ng-class="{'bg-white active-agtsetting' : showAgtSetting == 7}" hidden>
                   <div class="upload-heading clearfix">
                     <div class="row">
                       <div class="col-md-2 col-sm-1 col-xs-2">
@@ -216,8 +216,9 @@
                         <label for="office-location" class="color-blue">Head Office Location</label>
                         <div class="agentsetting-select">
                           <ui-select ng-model="agentData.homeCity" theme="bootstrap">
-                            <ui-select-match placeholder="Head Office Location ">{{$select.selected.description}}</ui-select-match>
-                            <ui-select-choices repeat="cities.description as cities in cities | filter: $select.search track by $index" refresh="searchByKey($select.search)" refresh-delay="0">
+                            <ui-select-match placeholder="Head Office Location ">{{agentData.homeCity}}</ui-select-match>
+                            <ui-select-choices repeat="cities.description as cities in cities | filter: $select.search track by $index" >
+                              <!-- refresh="searchByKey($select.search)" refresh-delay="0" -->
                               <div class="">
                                 <p class="">{{cities.description}}</p>
                               </div>

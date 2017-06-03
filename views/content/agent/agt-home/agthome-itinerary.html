@@ -9,10 +9,10 @@
             <span class="pointer add-holder" ng-click="addItinerary();" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
             <div class="add-more-itinerary" ng-show="showItinerary">
               <ul>
-                <li class="clearfix relate"><a ui-sref="detailitinerary({flag:'new',urlSlug:''})">Detailed Itinerary</a> <a><span class="pull-right itinerary-info" ng-click="showdetailInfo()"><i class="fa fa-info-circle"></i></span>
-              <div class="itinerary-infobox" ng-show="viewdetailInfo">Pen down day-to-day itinerary in every way-country to visit, cities to explore, places to stay at, things to do, landmarks to discover, and more.</div></a></li>
-                <li class="clearfix relate"><a ui-sref="quickitinerary({flag:'new',urlSlug:''})">Quick Itinerarya </a><a><span class="pull-right itinerary-info" ng-click="showquickInfo()"><i class="fa fa-info-circle"></i></span>
-              <div class="itinerary-infobox "  ng-show="viewquickInfo">Short on time... simply paste your ready made itineraries in our section in as many words as you desire and you are good to go.</div></a></li>
+                <li class="clearfix relate"><a ui-sref="detailitinerary({flag:'new',urlSlug:''})">Detailed Itinerary</a> <a class="itinerary-info"><span class="pull-right" ng-click="showdetailInfo()"><i class="fa fa-info-circle"></i></span>
+              <div class="itinerary-infobox">Pen down day-to-day itinerary in every way-country to visit, cities to explore, places to stay at, things to do, landmarks to discover, and more.</div></a></li>
+                <li class="clearfix relate"><a ui-sref="quickitinerary({flag:'new',urlSlug:''})">Quick Itinerarya </a><a class="itinerary-info"><span class="pull-right" ng-click="showquickInfo()"><i class="fa fa-info-circle"></i></span>
+              <div class="itinerary-infobox"  >Short on time... simply paste your ready made itineraries in our section in as many words as you desire and you are good to go.</div></a></li>
               </ul>
             </div>
           </div>
@@ -125,7 +125,7 @@
   <!-- FILTER START  END-->
 
   <!-- EMPTY AGENT INTRO -->
-  <div class="empty-intro bg-white" hidden>
+  <div class="empty-intro bg-white" >
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-sm-12 col-xs-12">
@@ -150,12 +150,12 @@
   <!-- EMPTY AGENT INTRO END-->
 
   <!-- EMPTY USER PAGE -->
-  <div class="empty-intro bg-white avenir-roman" hidden>
+  <div class="empty-intro bg-white avenir-roman" >
     <div class="container">
       <div class="row">
         <div class="col-md-offset-2 col-md-8">
           <div class="agt-user-intro">
-            <h3 class="color-blue avenir-heavy">Lifestyle Holidays</h3>
+            <h3 class="color-blue avenir-heavy text-capitalize">{{userData.name}}</h3>
             <p class="color-blue">is still to upload this space with interesting itineraries</p>
           </div>
         </div>
@@ -183,8 +183,8 @@
                   <div class="pull-right pointer" ng-if="post.itineraryBy!='Admin'" ng-click="followFollowing(post.user)">
                     <span class="follow-following color-blue text-capitalize">{{post.user.following | followFollowingStatus}}</span>
                   </div>
-                  <h4 class="font-bold color-dark-blue m-clear mb5 heading-name text-capitalize pointer" ng-if="post.itineraryBy=='Admin'">{{post.user.name}}</h4>
-                  <h4 class="font-bold color-dark-blue m-clear mb5 heading-name text-capitalize pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})" ng-if="post.itineraryBy!='Admin'">{{post.user.name}}</h4>
+                  <h4 class="avenir-heavy color-dark-blue m-clear mb5 heading-name text-capitalize pointer" ng-if="post.itineraryBy=='Admin'">{{post.user.name}}</h4>
+                  <h4 class="avenir-heavy color-dark-blue m-clear mb5 heading-name text-capitalize pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})" ng-if="post.itineraryBy!='Admin'">{{post.user.name}}</h4>
                 </div>
                 <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.startTime | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.startTime | date :'hh:mm a'}}</span></p>
               </div>

@@ -66,6 +66,16 @@
   .veri-error-btn {
     margin: 40px 0;
   }
+
+  .select-your-nation{
+    ul{
+      border: none;
+    }
+    label{
+      margin: 2px 0 !important;
+      font-weight: 500;
+    }
+  }
 }
 
 .category-countrylist {
@@ -332,7 +342,7 @@
 
 .agent-home-nav,
 .agent-user-nav {
-  background: $brand-pink;
+  background: $brand-blue;
   padding: 5px 0;
   z-index: 6;
   // position: absolute;
@@ -373,13 +383,13 @@
 
 .agent-home-nav ul {
   .active {
-    color: $brand-blue !important;
+    color: $brand-cyan !important;
   }
 }
 
 .change-blue ul {
   .active {
-    color: $brand-pink !important;
+    color: $brand-cyan !important;
   }
 }
 // Agent nav analytics dropdown
@@ -865,6 +875,10 @@
   padding: 5px 30px;
 }
 
+.agt-home-photo-card{
+  min-height: calc(100vh - 60px;)
+}
+
 .agent-photogallery {
   width: 275px;
   max-width: 275px;
@@ -888,7 +902,7 @@
 .testimonial-card {
   background-color: rgba(255,255,255,0.9);
   border-radius: 5px;
-  padding: 20px 15px;
+  padding: 20px 15px 5px;
   margin: 15px 0;
 
   img {
@@ -921,13 +935,14 @@
   border-radius: 100%;
   display: inline-block;
   overflow: hidden;
+  vertical-align: middle;
 }
 
 .testprofile-name {
   display: inline-block;
-  vertical-align: top;
   margin-left: 10px;
   color: #7b7b7b;
+  vertical-align: middle;
 
   p {
     margin: 0;
@@ -1197,9 +1212,15 @@ q {
   i {
     z-index: 6;
   }
+  &:hover{
+    .itinerary-infobox{
+      display: block;
+    }
+  }
 }
 
 .itinerary-infobox {
+  display: none;
   position: absolute;
   z-index: 5;
   right: -20px;
@@ -1408,6 +1429,7 @@ q {
 
     h4 {
       margin-top: 0;
+      margin-bottom: 5px;
     }
   }
 }
@@ -1481,7 +1503,7 @@ q {
 .call-btn {
   position: absolute;
   right: 10px;
-  top: -30px;
+  top: -40px;
   color: #fff;
   border: 1px solid $brand-cyan;
   border-radius: 50%;
@@ -1862,6 +1884,19 @@ q {
 
   .agtreport-problem-heading .tab-list {
     border-bottom: none;
+  }
+}
+
+.agentsetting-select{
+  .ui-select-bootstrap .ui-select-choices-row>span{
+    color: $brand-blue;
+    &:hover, &:focus{
+      background-color: $brand-lighter-grey;
+    }
+  }
+  .ui-select-bootstrap .ui-select-choices-row.active>span{
+    background-color: $brand-lighter-grey;
+    color: $brand-blue;
   }
 }
 
@@ -2796,7 +2831,7 @@ q {
 
 .imgfoot-top .day-night {
   font-size: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 // USER TRAVEL ACTIVITY CARD END
 //AGENT HOME ANALYTICS
@@ -2983,6 +3018,23 @@ q {
     font-size: 16px;
   }
 }
+
+// VIEWS DOWNLOADS
+.viewdownload-card{
+  .theme{
+    padding: 0px 10px;
+  }
+}
+.viewdownload-imgfoot{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+// VIEWS DOWNLOADS END
 //AGENT HOME ANALYTICS END
 // tour package dropdown
 
@@ -3118,17 +3170,17 @@ q {
 .tour-pdf-preview {
   display: inline-block;
   // width: 50%;
-  height: 80px;
+  height: 85px;
   float: left;
   position: relative;
 }
 
 .tour-pdf-preview {
-  width: 40%;
+  width: 50%;
 }
 
 .tour-dp-preview {
-  width: 60%;
+  width: 50%;
 }
 
 .tour-dp-holder,
@@ -3136,7 +3188,7 @@ q {
   margin: 5px;
   border: 1px solid #fff;
   border-radius: 4px;
-  height: 70px;
+  height: 85px;
   position: relative;
   overflow: hidden;
 
@@ -3166,7 +3218,7 @@ q {
 
 .tour-pdf-holder {
   img {
-    height: 60px;
+    height: 75px;
     width: auto;
     margin: 0 auto;
   }
@@ -3543,6 +3595,7 @@ q {
       border: none;
       margin: 0;
       background-color: transparent;
+      color: #fff;
     }
 
     .ui-select-match-item {
@@ -3551,9 +3604,12 @@ q {
       color: #fff;
 
       .close {
+        padding-top: 1px;
         color: #fff;
-        text-shadow: none;
+        font-size: 15px;
+        line-height: 1;
         opacity: 1;
+        text-shadow: none;
       }
     }
   }
@@ -5192,3 +5248,81 @@ q {
   right: 110px;
   bottom: -10px;
 }
+
+
+// NEW FOLLOWER CARD
+.followercard{
+  margin-bottom: 70px;
+  height: 350px;
+  border-radius: 5px;
+  background-position: 50% 50%;
+  background-size: cover;
+  overflow: hidden;
+}
+.followercard-content{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.followercard-details{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+}
+.followercard-list{
+  margin: 10px 0;
+  li{
+    padding: 0;
+    padding-left: 5px;
+  }
+}
+.followercard-counts{
+  display: block;
+  color: #fff;
+  font-size: 18px;
+  @extend .avenir-heavy;
+}
+.followercard-titles{
+  color: #fff;
+  font-size: 12px;
+}
+// NEW FOLLOWER CARD END
+
+// ADD COVER PIC
+.agent-coverpic{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
+
+.changecover-holder{
+  display: inline;
+  padding: 5px 0;
+  overflow: hidden;
+  .agentcover-uploadinput{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer !important;
+  }
+}
+
+.coversave-btn{
+  margin: 5px 0;
+  text-align: center;
+  .btn-white-outline{
+    padding: 2px 10px;
+    z-index: 15;
+  }
+}
+// ADD COVER PIC END

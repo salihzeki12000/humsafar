@@ -1373,12 +1373,12 @@ a.full-screen {
   margin: 30px 0;
   color: #fff;
   a {
-    margin: 0 10px;
+    // margin: 0 10px;
     font-size: 15px;
-    color: #fff;
+    color: $brand-pink;
     @extend .avenir-heavy;
     &:hover, &:focus, &:active{
-      color: #fff;
+      color: $brand-pink;
     }
   }
 }

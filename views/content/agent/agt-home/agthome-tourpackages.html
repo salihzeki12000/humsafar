@@ -194,7 +194,7 @@
               Fill in this space to give travel lovers a better sense of what your company has to offer.</h3>
             <p class="color-blue">Regularly updating your library with new deals, keeps travellers interedted and informed about how touring with
               your agency can make a good tour/trip, great!</p>
-            <button class="btn btn-pink btn-more"><i class="fa fa-lock color-white"></i> UPGRADE</button>
+            <button class="btn btn-pink btn-more"><i class="fa fa-lock color-white" hidden></i> UPGRADE</button>
           </div>
         </div>
       </div>
@@ -208,7 +208,7 @@
       <div class="row">
         <div class="col-md-offset-2 col-md-8">
           <div class="agt-user-intro">
-            <h3 class="color-blue avenir-heavy">Lifestyle Holidays</h3>
+            <h3 class="color-blue avenir-heavy text-capitalize">{{userData.name}}</h3>
             <p class="color-blue">is still to upload this space with interesting tours & packages</p>
           </div>
         </div>
@@ -249,7 +249,7 @@
                     <h4 class="font-sz18 text-capitalize avenir-heavy">{{tourcard.title}}</h4>
                     <p class="day-night" ng-if="tourcard.nights && tourcard.days"><span>{{tourcard.nights}} Nights</span> | <span>{{tourcard.days}} Days</span></p>
                     <p class="day-night" ng-if="tourcard.hours && tourcard.minutes"><span>{{tourcard.hours}} Hours</span> | <span>{{tourcard.minutes}} Minutes</span></p>
-                    <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{tourcard.createdAt | formatDate:'date' }}</span>                      | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{tourcard.createdAt | formatDate:'time' }}</span></p>
+                    <!-- <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{tourcard.createdAt | formatDate:'date' }}</span>                      | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{tourcard.createdAt | formatDate:'time' }}</span></p> -->
                   </div>
                   <div class="pull-right">
                     <p class="font-sz18 cost-posi">${{tourcard.price}}</p>
