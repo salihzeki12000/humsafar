@@ -22,7 +22,7 @@
                     <div class="tour-typeinput">
                       <div class="">
                         <div class="a collapsed" data-toggle="collapse" data-target="#demo">
-                          <input type="text" class="form-control color-white" placeholder="Type of Holiday/Tour" disabled>
+                          <input type="text" class="form-control color-white" placeholder="Type of Holiday/Tour" ng-model="tour.typeOfHoliday" disabled>
                           <i class="fa fa-angle-down color-white type-tourarrow arrow-down down"></i>
                           <i class="fa fa-angle-up color-white type-tourarrow arrow-up up"></i>
                         </div>
@@ -75,14 +75,14 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="a">
-                          <input type="text" class="form-control color-white" placeholder="Nights" ng-model="tour.nights">
+                          <input ng-disabled="tour.hours.length > 0||tour.minutes.length > 0" type="text" class="form-control color-white" placeholder="Nights" ng-model="tour.nights">
                         </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="a">
-                          <input type="text" class="form-control color-white" placeholder="Days" ng-model="tour.days">
+                          <input type="text" ng-disabled="tour.hours.length > 0||tour.minutes.length > 0" class="form-control color-white" placeholder="Days" ng-model="tour.days">
                         </div>
                       </div>
                     </div>
@@ -96,14 +96,14 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="a">
-                          <input type="text" class="form-control color-white" placeholder="Hours" ng-model="tour.hours">
+                          <input type="text" ng-disabled="tour.nights.length > 0||tour.days.length > 0" class="form-control color-white" placeholder="Hours" ng-model="tour.hours">
                         </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="a">
-                          <input type="text" class="form-control color-white" placeholder="Minutes" ng-model="tour.minutes">
+                          <input type="text" ng-disabled="tour.nights.length > 0||tour.days.length > 0" class="form-control color-white" placeholder="Minutes" ng-model="tour.minutes">
                         </div>
                       </div>
                     </div>
@@ -176,7 +176,7 @@
   <!-- ADD BUTTON END-->
 
   <!-- EMPTY AGENT INTRO BOX -->
-  <div class="empty-intro bg-white" ng-if="tourData.length==0 && template.isLoggedIn && template.isMine">
+  <div class="empty-intro " ng-if="tourData.length==0 && template.isLoggedIn && template.isMine">
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-sm-12">
@@ -203,7 +203,7 @@
   <!-- EMPTY AGENT INTRO BOX END -->
 
   <!-- EMPTY USER INTRO -->
-  <div class="empty-intro bg-white  avenir-roman" ng-if="tourData.length==0 && !templateUrl.isMine">
+  <div class="empty-intro   avenir-roman" ng-if="tourData.length==0 && !templateUrl.isMine">
     <div class="container">
       <div class="row">
         <div class="col-md-offset-2 col-md-8">
@@ -233,8 +233,8 @@
                 </div>
               </div>
               <div class="country-badges">
-                <div class="country-holder" ng-repeat="tourcountryflagbadge in tourcard.country | limitTo : 3">
-                  <img ng-src="{{tourcountryflagbadge.flag|uploadpath}}" alt="tourcountryflagbadge.name" class="img-responsive">                  {{tourcountryflagbadge.name}}
+                <div class="country-holder" ng-repeat="tourcountryflag in tourcard.country | limitTo : 3">
+                  <img ng-src="{{tourcountryflag.flag|uploadpath}}" alt="{{tourcountryflag.name}}" class="pointer img-responsive" title="{{tourcountryflag.name}}">
                 </div>
                 <span class="country-count color-blue" ng-if="tourcard.country.length>3">+{{tourcard.country.length-3}}</span>
               </div>

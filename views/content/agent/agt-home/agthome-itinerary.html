@@ -1,7 +1,7 @@
 <div class="agt-home-itinerary">
 
   <!-- ADD BUTTON -->
-  <div class="add-agentbutton" >
+  <div class="add-agentbutton" ng-if="template.isLoggedIn && template.isMine">
     <div class="container">
       <div class="clearfix">
         <div class="pull-right">
@@ -125,7 +125,7 @@
   <!-- FILTER START  END-->
 
   <!-- EMPTY AGENT INTRO -->
-  <div class="empty-intro bg-white" >
+  <div class="empty-intro " >
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-sm-12 col-xs-12">
@@ -150,7 +150,7 @@
   <!-- EMPTY AGENT INTRO END-->
 
   <!-- EMPTY USER PAGE -->
-  <div class="empty-intro bg-white avenir-roman" >
+  <div class="empty-intro avenir-roman" >
     <div class="container">
       <div class="row">
         <div class="col-md-offset-2 col-md-8">
@@ -170,15 +170,15 @@
       <div class="row">
         <!-- NEW CARD -->
         <div class="travelLife col-md-4 col-sm-6" ng-repeat="post in usrItineraryCard track by $index">
-          <div class="travel-life-part bg-white blog-post {{post.type}} avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
+          <div class="travel-life-part  blog-post {{post.type}} avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
             <div class="travel-journey-heading">
-              <div class="editor-logo user-logo pointer" ng-if="post.itineraryBy=='Admin'">
+              <div class="editor-logo user-logo pointer v-mid" ng-if="post.itineraryBy=='Admin'">
                 <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="img-responsive">
               </div>
-              <div class="editor-logo user-logo pointer" ng-if="post.itineraryBy!='Admin'" ui-sref="mylife({'urlSlug':post.user.urlSlug})">
+              <div class="editor-logo user-logo pointer  v-mid" ng-if="post.itineraryBy!='Admin'" ui-sref="mylife({'urlSlug':post.user.urlSlug})">
                 <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="img-responsive">
               </div>
-              <div class="inline-block editor-subdetail">
+              <div class="inline-block editor-subdetail v-mid">
                 <div class="clearfix">
                   <div class="pull-right pointer" ng-if="post.itineraryBy!='Admin'" ng-click="followFollowing(post.user)">
                     <span class="follow-following color-blue text-capitalize">{{post.user.following | followFollowingStatus}}</span>
@@ -186,7 +186,7 @@
                   <h4 class="avenir-heavy color-dark-blue m-clear mb5 heading-name text-capitalize pointer" ng-if="post.itineraryBy=='Admin'">{{post.user.name}}</h4>
                   <h4 class="avenir-heavy color-dark-blue m-clear mb5 heading-name text-capitalize pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})" ng-if="post.itineraryBy!='Admin'">{{post.user.name}}</h4>
                 </div>
-                <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.startTime | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.startTime | date :'hh:mm a'}}</span></p>
+                <!-- <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.startTime | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.startTime | date :'hh:mm a'}}</span></p> -->
               </div>
             </div>
             <div class="onway-journey relate pointer" ng-click="routeItinerary(post);">

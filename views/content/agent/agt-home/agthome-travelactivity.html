@@ -1,24 +1,10 @@
 <div class="agt-home-travelactivity">
-  <!-- EMPTY USER INTRO -->
-  <div class="empty-intro agttravel-intro bg-white avenir-roman" hidden>
+  <!-- ADD BUTTON -->
+  <div class="add-agentbutton travel-addbtn" >
     <div class="container">
-      <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-          <div class="agt-user-intro">
-            <h3 class="color-blue avenir-heavy text-capitalize">{{userData.name}}</h3>
-            <p class="color-blue">is still to post the first activity on their page</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- EMPTY USER INTRO END -->
-  <div class="empty-intro agttravel-intro bg-white">
-    <div class="container">
-      <div class="clearfix mb10">
+      <div class="clearfix">
         <div class="pull-right">
-          <!-- ADD BUTTON -->
-          <div class="add-agtitinerary">
+          <div class="add-agtitinerary" ng-if="template.isLoggedIn && template.isMine">
             <span class="pointer add-holder" ng-click="addItinerary();" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
             <div class="add-more-itinerary" ng-show="showItinerary">
               <p class="color-cyan bord-bot">Update</p>
@@ -34,12 +20,28 @@
               </form>
             </div>
           </div>
-          <!-- ADD BUTTON END -->
         </div>
       </div>
     </div>
-    <!-- EMPTY AGENT INTRO -->
-    <div class="text-center avenir-roman" hidden>
+  </div>
+  <!-- ADD BUTTON END -->
+  <!-- EMPTY USER INTRO -->
+  <div class="empty-intro emptyuser-travel bg-white avenir-roman" hidden>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <div class="agt-user-intro">
+            <h3 class="color-blue avenir-heavy text-capitalize">{{userData.name}}</h3>
+            <p class="color-blue">is still to post the first activity on their page</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- EMPTY USER INTRO END -->
+  <!-- EMPTY AGENT INTRO -->
+  <div class="empty-intro bg-white" hidden>
+    <div class="text-center avenir-roman">
       <div class="container">
         <div class="row">
           <div class="col-md-offset-3 col-md-6">
@@ -49,14 +51,15 @@
         </div>
       </div>
     </div>
-    <!-- EMPTY AGENT INTRO END -->
-
-    <!-- TRAVEL ACTIVITY CARD -->
+  </div>
+  <!-- EMPTY AGENT INTRO END -->
+  <!-- TRAVEL ACTIVITY CARD -->
+  <div class="agent-travelcards">
     <div class="container">
       <div class="sec-travel-activity masonry-main" masonry preserve-order>
         <div class="row">
           <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="activity in travelActivity track by $index">
-            <div class="travel-activity">
+            <div class="travel-activity bg-white">
               <!-- header travel sec -->
               <div class="header-travel-sec" ng-if="activity.header">
                 <!-- agent traveller part header -->
@@ -114,8 +117,10 @@
                         <div class="pull-right">
                           <p class="font-sz18 cost-posi ng-binding">${{activity.tourCost}}</p>
                         </div>
-                        <button class="btn btn-pink btn-download">Download</button>
-                        <button class="btn btn-pink btn-book">Book</button>
+                        <<div class="tour-btns">
+                          <button class="btn btn-pink btn-download"><a class="btn-link"  download>Download</a></button>
+                          <button class="btn btn-pink btn-book"><a class="btn-link">Book</a></button>
+                        </div>
                       </div>
                     </div>
                     <!-- <div class="call-btn" ng-click="viewContact = !viewContact">
@@ -174,7 +179,8 @@
                         </div>
                       </div>
                     </div>
-                    <!-- new -->1 </div>
+                    <!-- new -->
+                   </div>
                 </div>
                 <!-- itinerary activity card end -->
               </div>
@@ -221,6 +227,6 @@
         </div>
       </div>
     </div>
-    <!-- TRAVEL ACTIVITY CARD END -->
   </div>
+  <!-- TRAVEL ACTIVITY CARD END -->
 </div>

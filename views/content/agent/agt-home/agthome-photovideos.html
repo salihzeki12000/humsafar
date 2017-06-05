@@ -25,7 +25,7 @@
             </div>
           </div>
         </div>
-        <div class="pull-right " ng-if="template.isMine">
+        <div class="pull-right " ng-if="template.isLoggedIn && template.isMine">
           <div class="add-agtitinerary">
             <span class="pointer add-holder photo-xbtn" ng-click="addItinerary();" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
             <div class="add-more-itinerary" ng-show="showItinerary">

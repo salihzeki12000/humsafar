@@ -127,6 +127,9 @@
     line-height: 1;
     height: 30px;
     padding: 6px 12px 6px 30px;
+    &:focus{
+      border-color: $brand-blue;
+    }
   }
 
   input {
@@ -733,7 +736,7 @@
 .agt-usr-itinerary,
 .agt-usr-photosvideos,
 .agt-usr-tourpackages {
-  background-color: #fff;
+  @extend .bg-white;
 }
 
 .agt-usr-itinerary {
@@ -1567,6 +1570,7 @@ q {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: #fff;
     @extend .pointer;
     .arrow-big {
       position: absolute;
@@ -2773,11 +2777,21 @@ q {
     }
   }
 // USER TRAVEL ACTIVITY CARD
+.emptyuser-travel{
+  margin-top: -50px;
+  padding: 20px 0;
+}
+
+.travel-addbtn{
+  margin-top: -50px;
+  padding: 20px 0;
+}
 
 .travel-activity {
-  background-color: #fff;
+  // background-color: #fff;
   border-radius: 5px;
   margin: 20px 0;
+  // box-shadow: 2px 3px 10px #a0a0a0;
 }
 
 .agent-traveller-card {
@@ -2810,19 +2824,19 @@ q {
 
 .agent-traveller-imgholder {
   display: inline-block;
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   overflow: hidden;
-  border-radius: 33px;
-  border: 5px solid #fff;
-  position: absolute;
-  top: -30px;
+  border-radius: 15px;
+  border: 1px solid #a0a0a0;
+  // position: absolute;
+  // top: -30px;
   background-color: $brand-lighter-grey;
 }
 
 .agent-traveller-detail {
   display: inline-block;
-  margin-left: 80px;
+  margin-left: 10px;
 
   h4 {
     margin-bottom: 5px;
@@ -3038,6 +3052,13 @@ q {
 //AGENT HOME ANALYTICS END
 // tour package dropdown
 
+  .a{
+    .form-control[disabled]{
+      background-color: transparent;
+      opacity: 0.3;
+    }
+  }
+
 .tour-type {
   position: relative;
   background-color: transparent;
@@ -3055,6 +3076,7 @@ q {
   .form-control[disabled]{
     background-color: transparent;
     cursor: pointer;
+    opacity: 1;
   }
 }
 

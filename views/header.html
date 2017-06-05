@@ -164,7 +164,10 @@
                 </a>
               </li>
               <li>
-                <a ui-sref="setting({'path':'settings'})" title="Settings">
+                <a ui-sref="setting({'path':'settings'})" title="Settings" ng-if="userData.type=='User'">
+                  <i class="fa fa-cog"></i>
+                </a>
+                <a ui-sref="agent-setting" title="Settings" ng-if="userData.type=='TravelAgent'">
                   <i class="fa fa-cog"></i>
                 </a>
               </li>
