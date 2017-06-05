@@ -89,12 +89,13 @@
 
   <script>
     $(".loaders .element").typed({
-        strings: ["Capture | Inspire | Relive...", "Travel Life | Local Life...", "Loading...", "Almost There..."],
-        startDelay: 20,
-        typeSpeed: 100,
-        loop: true
-      });
-    </script>
+      strings: ["Capture | Inspire | Relive...", "Travel Life | Local Life...", "Loading...", "Almost There..."],
+      startDelay: 20,
+      typeSpeed: 100,
+      loop: true
+    });
+
+  </script>
 
 
   <div class="repeated-item loadedContent" ui-view></div>
@@ -119,9 +120,9 @@
     $(window).load(function () {
 
       console.log("Loaded");
-    if(abc && abc.changePage) {
-     abc.changePage("home");
-    }
+      if (abc && abc.changePage) {
+        abc.changePage("home");
+      }
       $("body > .loaders").remove();
 
       $("body > .loadedContent").fadeIn(1000);
@@ -131,6 +132,7 @@
   <!--//loader end-->
   <!-- put auto-height if needed -->
   <link rel="stylesheet" type="text/css" href="css/main.css" />
+  <link rel="stylesheet" href="bower_components/intl-tel-input/build/css/intlTelInput.css">
 
   <script>
     var isproduction = false;
@@ -182,6 +184,10 @@
   <script src="bower_components/angular-rangeslider/angular.rangeSlider.js"></script>
   <script src="bower_components/angular-file-upload/dist/angular-file-upload.js"></script>
   <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+  <script src="bower_components\intl-tel-input\build\js\intlTelInput.js"></script>  
+  <script src="bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"></script>
+  <script src="bower_components/international-phone-number/releases/international-phone-number.js"></script>
+
   <script src="js/app.js"></script>
   <script src="js/language.js"></script>
   <script src="js/controllers.js"></script>

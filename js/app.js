@@ -87,8 +87,12 @@ var firstapp = angular.module('firstapp', [
   'angular-google-analytics'
 ]);
 
-firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, cfpLoadingBarProvider, AnalyticsProvider) {
+firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, cfpLoadingBarProvider, AnalyticsProvider, ipnConfig) {
   // for http request with session
+  ipnConfig.defaultCountry = 'us';
+  ipnConfig.initialCountry = "auto";
+
+  ipnConfig.utilsScript = "../bower_components/intl-tel-input/lib/libphonenumber/build/utils.js";
   AnalyticsProvider.setAccount('UA-73461827-3');
   $httpProvider.defaults.withCredentials = true;
   cfpLoadingBarProvider.includeSpinner = true;

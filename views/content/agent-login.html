@@ -121,7 +121,10 @@
                     <div class="col-md-5 col-sm-5">
                       <div class="form-group">
                         <div class="agent-cmpny-inputholder">
-                          <input type="tel" class="form-control color-blue" placeholder="Contact No" ng-model="userDetails.company.contact">
+                          <input type="text" id="phone" name="phone" class="form-control color-blue" placeholder="Contact No" international-phone-number
+                            ng-model="userDetails.company.contact" ng-change="isValidNo(userDetails.company.contact)">
+                          <span id="valid-msg" class="hide">✓ Valid</span>
+                          <span id="error-msg" class="hide">Invalid number</span>
                           <div class="agent-input-icon">
                             <i class="fa fa-phone color-grey"></i>
                           </div>
@@ -141,18 +144,18 @@
                   </div>
 
                   <div class="form-group">
+                    {{userDetails.company.email}}
                     <div class="agent-cmpny-inputholder">
-                      <!-- <ui-select multiple ng-model="userDetails.company.email" theme="bootstrap" tagging="tagHandler">
-                        <ui-select-match placeholder="Emails">{{$item.email}}</ui-select-match>
-                        <ui-select-choices repeat="userDetails.company.email as email" refresh=""
-                          refresh-delay="0">
+                      <ui-select multiple ng-model="userDetails.company.email" theme="bootstrap" tagging="tagHandler" ng-pattern="validEmail">
+                        <ui-select-match placeholder="Emails">{{$item}}</ui-select-match>
+                        <ui-select-choices repeat="email in userDetails.company.email" refresh="" refresh-delay="0">
                           <span>{{userDetails.company.email}}</span>
                         </ui-select-choices>
-                      </ui-select> -->
-                      <input type="email" class="form-control color-blue" placeholder="Email" ng-model="userDetails.company.email" name="email"
-                        required>
-                      <span class="error" ng-show="userDetails.company.email=='' && userDetailsForm.email.$touched">Required!</span>
-                      <span class="error" ng-show="userDetailsForm.email.$error.email && userDetailsForm.email.$touched">Not valid email!</span>
+                      </ui-select>
+                      <!--<input type="email" class="form-control color-blue" placeholder="Email" ng-model="userDetails.company.email" name="email"
+                        required>-->
+                      <!--<span class="error" ng-show="userDetails.company.email=='' && userDetailsForm.email.$touched">Required!</span>
+                      <span class="error" ng-show="userDetailsForm.email.$error.email && userDetailsForm.email.$touched">Not valid email!</span>-->
                       <div class="agent-input-icon">
                         <i class="fa fa-envelope color-grey"></i>
                       </div>
@@ -171,7 +174,7 @@
               </div>
               <div class="button-panel clearfix">
                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="agentSec(3)">Previous</button>
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="agentSec(5)" ng-disabled="userDetailsForm.$invalid">Next</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="agentSec(5)" ng-disabled="userDetailsForm.name.$invalid ">Next</button>
               </div>
             </div>
           </div>
@@ -215,7 +218,7 @@
           <div class="agent-about " ng-if="agentloginView==6 ">
             <div class="text-center ">
               <h3 class="color-blue avenir-heavy text-capitalize">About {{userDetails.company.name}}</h3>
-              <div class="form-group " ng-init="userDetails.company.about = ''; userDetails.company.about.length = 0">
+              <div class="form-group " ng-init="userDetails.company.about = ''">
                 <div class="agent-about-inputholder ">
                   <textarea name=" " id="textareaChars " maxlength="500 " placeholder="Fill me in ... " class="form-control
                   color-blue" ng-model="userDetails.company.about"></textarea>
