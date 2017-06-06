@@ -3,7 +3,7 @@
   <!-- PROFILE VIEWS SECTION -->
   <div class="analytics-profileviews " ng-show="profileview">
     <!-- FILTER -->
-      <div class="analytics-filter analyticsprofile-filter">
+      <div class="analytics-filter analyticsprofile-filter" ng-if="profileObj && profileObj!=''">
         <div class="container-fluid">
           <div class="analyticsleads-filterhead clearfix">
             <div class="analyticsfilter-head pull-left">
@@ -51,7 +51,7 @@
       </div>
     <!-- FILTER END -->
     <!-- EMPTY SCREEN -->
-    <div class="analytics-emptyprofile hide">
+    <div class="analytics-emptyprofile " ng-if="!(profileObj && profileObj!='')">
       <div class="container">
         <div class="emptyprofile-analytics">
           <h3 class="color-blue avenir-heavy">Profile Views</h3>
@@ -61,7 +61,7 @@
     </div>
     <!-- EMPTY SCREEN END -->
     <!-- CONTENT SCREEN -->
-    <div class="analytics-profilecontent">
+    <div class="analytics-profilecontent" ng-if="profileObj && profileObj!=''">
       <div class="container">
         <div class="row">
           <div class="col-md-3" ng-repeat="list in profileObj track by $index">
