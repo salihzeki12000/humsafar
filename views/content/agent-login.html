@@ -70,7 +70,7 @@
                 <div class="nation-city">
                   <ui-select ng-model="userDetails.homeCity" theme="bootstrap" ng-value="userDetails.homeCity">
                     <ui-select-match placeholder="Search City">{{$select.selected.description}}</ui-select-match>
-                    <ui-select-choices repeat="city.description as city in cities | filter:searchCity" track by $index ng-click="$parent.goNext=4"
+                    <ui-select-choices repeat="city.description as city in cities | filter:searchCity" ng-click="agentSec(4);"
                       refresh="searchByKey($select.search)" refresh-delay="0">
                       <span class="color-light-grey">{{city.description}}</span>
                     </ui-select-choices>
@@ -120,35 +120,36 @@
                   <div class="row">
                     <div class="col-md-5 col-sm-5">
                       <div class="form-group">
-                        <div class="agent-cmpny-inputholder">
+                        <div class="agent-cmpny-inputholder agentcompany-phone">
                           <input type="text" id="phone" name="phone" class="form-control color-blue" placeholder="Contact No" international-phone-number
                             ng-model="userDetails.company.contact" ng-change="isValidNo(userDetails.company.contact)">
-                          <span id="valid-msg" class="hide">✓ Valid</span>
-                          <span id="error-msg" class="hide">Invalid number</span>
-                          <div class="agent-input-icon">
+                          <span id="valid-msg" class="hide intel-error"><i class="fa fa-check"></i> Valid</span>
+                          <span id="error-msg" class="hide intel-error">Invalid number</span>
+                          <!-- <div class="agent-input-icon">
                             <i class="fa fa-phone color-grey"></i>
-                          </div>
+                          </div> -->
                         </div>
                       </div>
                     </div>
                     <div class="col-md-7 col-sm-7">
                       <div class="form-group">
-                        <div class="agent-cmpny-inputholder">
-                          <input type="number" class="form-control color-blue" placeholder="Mobile No" ng-model="userDetails.company.mobile">
-                          <div class="agent-input-icon">
+                        <div class="agent-cmpny-inputholder agentcompany-phone">
+                          <input type="text" class="form-control color-blue" placeholder="Mobile No" ng-model="userDetails.company.mobile" international-phone-number ng-change="isValidNo(userDetails.company.mobile)">
+                          <span id="valid-msg" class="hide intel-error"><i class="fa fa-check"></i> Valid</span>
+                          <span id="error-msg" class="hide intel-error">Invalid number</span>
+                          <!-- <div class="agent-input-icon">
                             <i class="fa fa-phone color-grey"></i>
-                          </div>
+                          </div> -->
                         </div>
                       </div>
                     </div>
                   </div>
 
                   <div class="form-group">
-                    {{userDetails.company.email}}
                     <div class="agent-cmpny-inputholder">
-                      <ui-select multiple ng-model="userDetails.company.email" theme="bootstrap" tagging="tagHandler" ng-pattern="validEmail">
+                      <ui-select multiple ng-model="userDetails.company.email" theme="bootstrap" tagging="tagHandler">
                         <ui-select-match placeholder="Emails">{{$item}}</ui-select-match>
-                        <ui-select-choices repeat="email in userDetails.company.email" refresh="" refresh-delay="0">
+                        <ui-select-choices repeat="email in []" refresh="" refresh-delay="0" hidden>
                           <span>{{userDetails.company.email}}</span>
                         </ui-select-choices>
                       </ui-select>
@@ -190,18 +191,15 @@
                 </div>
                 <img-crop image="myImage" result-image="uploadme.src" /></img-crop>
               </div>
-              <div class="show ">
+              <!-- <div class="show ">
                 <img ng-src="{{myCroppedCompLogo}} " />
-              </div>
+              </div> -->
               <div class="upload-section " ng-hide="showImage.val">
-                <img src="{{userDetails.profilePicture|uploadpath}} " class="m-center img-responsive doneLoading ">
-                <p class="text-center color-grey avenir-roman" ng-show="((profile.profilePicture) && (showImage.val==false))"> - or -</p>
                 <div class="upload-btn ">
                   <div class="relate inline-block mr10 select-photo ">
                     <button class="btn btn-dark-blue pointer avenir-roman ">Upload Logo</button>
                     <input type="file" class="getfile pointer" id="fileInput1" class="getfile pointer" fileread="uploadme.src" />
                   </div>
-                  <!--id=fileInput class="getfile pointer " for above code-->
                 </div>
               </div>
               <div class="button-panel clearfix ">
@@ -309,7 +307,7 @@
                     <uib-accordion close-others="oneAtATime ">
                       <uib-accordion-group class="panel-default " is-open="status.open " ng-repeat="continent in countriesByContinent track by $index ">
                         <uib-accordion-heading>
-                          <div class="agtaccord-title color-blue avenir-medium ">{{ continent.name }}
+                          <div class="agtaccord-title color-blue avenir-roman ">{{ continent.name }}
                             <i class="pull-right fa " ng-class="{ 'fa fa-chevron-up': status.open, 'fa fa-chevron-down':
                   !status.open} "></i>
                           </div>

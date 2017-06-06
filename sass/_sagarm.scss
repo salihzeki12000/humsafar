@@ -159,6 +159,97 @@
   &:after {
     right: 0;
   }
+
+  .ui-select-multiple > div:first-child{
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+
+  .ui-select-multiple.ui-select-bootstrap{
+    padding-left: 30px;
+    padding-bottom: 5px;
+    border: none;
+    border-bottom: 1px solid $brand-blue;
+    background-color: transparent;
+
+    ::-webkit-scrollbar{
+      height: 4px;
+    }
+
+    ::-webkit-scrollbar-track{
+      background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background-color: $brand-light-grey;
+    }
+
+    .ui-select-search{
+      width: auto !important;
+      padding: 6px 12px;
+      background-color: transparent;
+    }
+
+    .ui-select-match-item{
+      border-color: $brand-blue;
+      background-color: transparent;
+      color: $brand-blue;
+    }
+
+    .close{
+      padding-top: 1px;
+      font-size: 15px;
+      line-height: 1;
+      opacity: 1;
+    }
+
+    .ui-select-dropdown{
+      opacity: 0;
+      display: none;
+    }
+  }
+}
+
+.agentcompany-phone{
+  margin-bottom: 20px;
+    .intl-tel-input{
+      width: 100%;
+      @extend .avenir-roman;
+
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: $brand-lighter-grey;
+      }
+
+      .country-list{
+        border: none;
+        border-radius: 0 0 4px 4px;
+        background-color: #fff;
+        color: $brand-blue;
+        text-align: left;
+      }
+      .country-name{
+        font-size: 12px;
+      }
+    }
+
+  .intel-error {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: #ef645e;
+    font-size: 12px;
+    @extend .avenir-roman;
+  }
 }
 
 .agent-input-icon {
