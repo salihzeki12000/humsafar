@@ -10692,11 +10692,47 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     $scope.isVerified = $.jStorage.get("isVerified");
 
-    $(".veri-code-box").keyup(function () {
-      if (this.value.length == this.maxLength) {
-        $(this).next('.veri-code-box').focus();
+    // $(document).ready(function() {
+    //   alert("poch gya");
+    //   $(".veri-code-box").keyup(function () {
+    //     if (this.value.length == this.maxLength) {
+    //       $(this).next('.veri-code-box').focus();
+    //     }
+    //   });
+    // });
+
+
+    $timeout(function () {
+      var container = document.getElementsByClassName("veri-box")[0];
+      container.onkeyup = function (e) {
+        var target = e.srcElement || e.target;
+        var maxLength = parseInt(target.attributes["maxlength"].value, 10);
+        var myLength = target.value.length;
+        if (myLength >= maxLength) {
+          var next = target;
+          while (next = next.nextElementSibling) {
+            if (next == null)
+              break;
+            if (next.tagName.toLowerCase() === "input") {
+              next.focus();
+              break;
+            }
+          }
+        }
+        // Move to previous field if empty (user pressed backspace)
+        else if (myLength === 0) {
+          var previous = target;
+          while (previous = previous.previousElementSibling) {
+            if (previous == null)
+              break;
+            if (previous.tagName.toLowerCase() === "input") {
+              previous.focus();
+              break;
+            }
+          }
+        }
       }
-    });
+    }, 2000);
 
     $("#phone").intlTelInput({
       initialCountry: "pl",
@@ -10770,37 +10806,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       switch (val) {
         case 0:
           $scope.agentloginView = 0;
-          window.onload = function () {
-            var container = document.getElementsByClassName("veri-box")[0];
-            container.onkeyup = function (e) {
-              var target = e.srcElement || e.target;
-              var maxLength = parseInt(target.attributes["maxlength"].value, 10);
-              var myLength = target.value.length;
-              if (myLength >= maxLength) {
-                var next = target;
-                while (next = next.nextElementSibling) {
-                  if (next == null)
-                    break;
-                  if (next.tagName.toLowerCase() === "input") {
-                    next.focus();
-                    break;
-                  }
-                }
-              }
-              // Move to previous field if empty (user pressed backspace)
-              else if (myLength === 0) {
-                var previous = target;
-                while (previous = previous.previousElementSibling) {
-                  if (previous == null)
-                    break;
-                  if (previous.tagName.toLowerCase() === "input") {
-                    previous.focus();
-                    break;
-                  }
-                }
-              }
-            }
-          }
+
           break;
         case 1:
           $scope.agentloginView = 1;
@@ -11050,7 +11056,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       var got1 = setInterval(function () {
         console.log(document.getElementById('fileInput1'));
         if (document.getElementById('fileInput1')) {
-          console.log("checking for image change",i);
+          console.log("checking for image change", i);
           document.getElementById('fileInput1').onchange = function (evt) {
             // alert("change hua");
             var file = evt.currentTarget.files[0];
@@ -12444,14 +12450,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agthome.innerView = allagthome[6];
         $scope.agthomeoptions.active = "agthome-analytics";
         $scope.profileview = true;
-          Agent.getAllProfileViews(function (data) {
-            if (data.value == true) {
-              $scope.profileObj = data.data.profileView;
-              console.log($scope.profileObj, 'profileview obj');
-            } else {
-              console.log('ERROR IN GET PROFILE VIEWS');
-            }
-          })
+        Agent.getAllProfileViews(function (data) {
+          if (data.value == true) {
+            $scope.profileObj = data.data.profileView;
+            console.log($scope.profileObj, 'profileview obj');
+          } else {
+            console.log('ERROR IN GET PROFILE VIEWS');
+          }
+        })
         break;
       case "about-us":
         $scope.agthome.innerView = allagthome[7];
