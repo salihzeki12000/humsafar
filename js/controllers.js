@@ -20,7 +20,7 @@ var map;
 var center = {};
 var centers = [];
 markers[0] = {};
-angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'agent', 'commontask', 'anchorSmoothScroll', 'activity', 'infinite-scroll', 'navigationservice', 'travelibroservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce','internationalPhoneNumber'])
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'agent', 'commontask', 'anchorSmoothScroll', 'activity', 'infinite-scroll', 'navigationservice', 'travelibroservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce', 'internationalPhoneNumber'])
   .run(['$anchorScroll', function ($anchorScroll) {
     $anchorScroll.yOffset = 50; // always scroll by 50 extra pixels
   }])
@@ -10678,12 +10678,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
     $scope.oneAtATime = true;
     $scope.validEmail = "/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/iv";
+
     $scope.userDetails = {
       company: {
         email: []
       },
-
     };
+
+    $scope.userData = $.jStorage.get("profile");
+    if ($scope.userData.name) {
+      $scope.userDetails.company.name = $scope.userData.name;
+      $scope.userDetails.company.email.push($scope.userData.email);
+    }
+    $scope.isVerified = $.jStorage.get("isVerified");
 
     $(".veri-code-box").keyup(function () {
       if (this.value.length == this.maxLength) {
@@ -10701,8 +10708,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       },
       utilsScript: "../../../..bower_components/intl-tel-input/lib/libphonenumber/build/utils.js",
     });
-
-
 
     $scope.isValidNo = function (num) {
       console.log(num);
@@ -10744,13 +10749,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // on keyup / change flag: reset
       telInput.on("keyup change", reset);
     }
-
-    $scope.userData = $.jStorage.get("profile");
-    if ($scope.userData.name) {
-      $scope.userDetails.company.name = $scope.userData.name;
-      $scope.userDetails.company.email.push($scope.userData.email);
-    }
-    $scope.isVerified = $.jStorage.get("isVerified");
 
     //about textarea counter
     $scope.$on('$viewContentLoaded', function () {
@@ -10918,12 +10916,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     NavigationService.getCountriesByContinent(function (data, status) {
       if (data.value) {
         $scope.countriesByContinent = data.data;
-        // for (var property in countriesByContinent) {
-        //   if (countriesByContinent.hasOwnProperty(property)) {
-        //     // console.log(countriesByContinent[property]);
-
-        //   }
-        // }
       } else {
         console.log("Error Fetching Data");
       }
@@ -11018,6 +11010,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.uploadme.src = '';
     $scope.uploadFile = function (data, userDetails, ppSelected) {
       // Base64 to Blob
+      console.log(userDetails);
       if (ppSelected) {
         var imageBase64 = data;
         var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
@@ -11048,44 +11041,51 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.agentSec(6);
     };
 
-    $scope.removePhoto = function () {
-      $scope.userDetails = _.omit($scope.userDetails, ['profilePicture']);
-      $scope.fileName = null;
-      console.log($scope.userDetails);
-      $scope.showImage.val = false;
-    };
 
     $scope.showImage = {
       "val": false
     };
     var i = 1;
-    var got1 = setInterval(function () {
-      if (document.getElementById('fileInput1')) {
-        document.getElementById('fileInput1').onchange = function (evt) {
-          // alert("change hua");
-          var file = evt.currentTarget.files[0];
-          console.log(file);
-          $scope.fileName = file.name;
-          console.log($scope.fileName);
-          var formData = new FormData();
-          formData.append('file', file, "file.jpg");
-          var reader = new FileReader();
-          reader.onload = function (evt) {
-            $scope.$apply(function ($scope) {
-              $scope.showImage.val = true;
-              console.log($scope.showImage.val);
-              $scope.myImage = evt.target.result;
-              // alert($scope.myImage);
-            });
+    var checkForImageChange = function () {
+      var got1 = setInterval(function () {
+        console.log(document.getElementById('fileInput1'));
+        if (document.getElementById('fileInput1')) {
+          console.log("checking for image change",i);
+          document.getElementById('fileInput1').onchange = function (evt) {
+            // alert("change hua");
+            var file = evt.currentTarget.files[0];
+
+            $scope.fileName = file.name;
+
+            var formData = new FormData();
+            formData.append('file', file, "file.jpg");
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+              $scope.$apply(function ($scope) {
+                $scope.showImage.val = true;
+                console.log($scope.showImage.val);
+                $scope.myImage = evt.target.result;
+                // alert($scope.myImage);
+              });
+            };
+            reader.readAsDataURL(file);
           };
-          reader.readAsDataURL(file);
-        };
-        clearInterval(got1);
-      }
-      i++;
-    }, 1000);
+          clearInterval(got1);
+        }
+        i++;
+      }, 1000);
+    }
+    checkForImageChange();
+
     //upload agent profilePicture ends
 
+    $scope.removePhoto = function () {
+      $scope.userDetails = _.omit($scope.userDetails, ['profilePicture']);
+      $scope.fileName = null;
+      console.log($scope.userDetails);
+      $scope.showImage.val = false;
+      checkForImageChange();
+    };
 
 
     //verify Users Account
@@ -11108,7 +11108,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     //verify users account ends
 
-    $scope.saveAgentData = function () {
+    $scope.saveAgentData = function (obj) {
+      console.log(obj);
       $scope.userDetails.company.categoryOfSpeacilization = [];
       $scope.userDetails.company.countryOfSpecialization = [];
       $scope.userDetails.company.services = [];
@@ -12008,7 +12009,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.review = {};
     $scope.enquire = {};
     $scope.status = {};
-          $scope.tour.typeOfHoliday = [];
+    $scope.tour.typeOfHoliday = [];
 
     //scroll change
     $(window).scroll(function () {
@@ -12088,8 +12089,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.showCoverBtn = true;
     };
 
-    $scope.saveAgentCover = function(coverPhoto){
-      console.log(coverPhoto,'coverpic saved');
+    $scope.saveAgentCover = function (coverPhoto) {
+      console.log(coverPhoto, 'coverpic saved');
     };
     // CHANGE COVER PHOTO END
     // ENQUIRY FORM FILL
@@ -12347,7 +12348,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         if (open == false) {
 
         } else {
-           Agent.changeStatus(currentLead, $scope.getAvgRating($scope.activeUrlSlug));
+          Agent.changeStatus(currentLead, $scope.getAvgRating($scope.activeUrlSlug));
           _.remove($scope.unactionLeads, {
             "_id": currentLead._id
           });
@@ -12443,6 +12444,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agthome.innerView = allagthome[6];
         $scope.agthomeoptions.active = "agthome-analytics";
         $scope.profileview = true;
+          Agent.getAllProfileViews(function (data) {
+            if (data.value == true) {
+              $scope.profileObj = data.data.profileView;
+              console.log($scope.profileObj, 'profileview obj');
+            } else {
+              console.log('ERROR IN GET PROFILE VIEWS');
+            }
+          })
         break;
       case "about-us":
         $scope.agthome.innerView = allagthome[7];
@@ -12500,6 +12509,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.agthomeoptions.active = "agthome-analytics";
           $scope.agenthomeItinerary = false;
           $scope.profileview = true;
+          Agent.getAllProfileViews(function (data) {
+            if (data.value == true) {
+              $scope.profileObj = data.data.profileView;
+              console.log($scope.profileObj, 'profileview obj');
+            } else {
+              console.log('ERROR IN GET PROFILE VIEWS');
+            }
+          })
           break;
         case 7:
           url = "about-us";
@@ -12511,8 +12528,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.agthomeoptions.active = "agthome-itinerary";
           $scope.agenthomeItinerary = true;
       }
-      console.log("userdata",$scope.userData.urlSlug);
-      console.log("url",url);
+      console.log("userdata", $scope.userData.urlSlug);
+      console.log("url", url);
       $state.go("agent-home", {
         urlSlug: $scope.userData.urlSlug,
         name: url
@@ -12908,7 +12925,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       type: "tour",
       pic: "img/banner-itinerary/friends1.jpg",
       name: "Universal Studios 1 day"
-    },{
+    }, {
       type: "itinerary",
       pic: "img/banner-itinerary/friends1.jpg",
       name: "Beautiful Bali"
