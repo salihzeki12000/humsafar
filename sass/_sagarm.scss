@@ -579,7 +579,7 @@
 
 .bg-agent-home-img,
 .bg-agent-user-img {
-  background: url('../img/agent/bg-user.jpg') no-repeat;
+  background: url('../img/agent/bg-user.jpg') $brand-light-grey no-repeat;
   height: 400px;
   position: relative;
   z-index: 3;
@@ -3350,6 +3350,13 @@ q {
   // margin-top: -60px;
   .modal-body {
     padding: 20px 50px;
+  }
+}
+.agent-contactmail{
+  &:last-child{
+    .email-separater{
+      display: none;
+    }
   }
 }
 

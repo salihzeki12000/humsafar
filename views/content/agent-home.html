@@ -1,6 +1,7 @@
 <div class="agent-home relate {{addHomeBackdrop}} {{getBackdrop}}" scrolladd1class>
   <div scrolldown link-profile>
-    <div class="img-holder-agent bg-agent-home-img">
+    <!-- ng-style="{ 'background-image' : (userData.company.coverPhoto != '') ? 'url(\'{{userData.company.coverPhoto|uploadpath}}\')' : 'url(\'../img/agent/bg-user.jpg\')' }" -->
+    <div class="img-holder-agent bg-agent-home-img" style="background-image:url('{{userData.company.coverPhoto|uploadpath}}');">
       <div class="agt-card-posi">
         <div class="agt-title-card get-center">
           <div class="circ-agtimg pointer" ui-sref="agent-setting">
@@ -20,13 +21,13 @@
       </div>
       <div class="agent-coverpic" ng-if="template.isMine">
         <span class="color-white mr5"><i class="fa fa-plus"></i></span>
-        <div class="relate changecover-holder" ng-hide="showCoverBtn">
+        <div class="relate changecover-holder" >
           <span class="color-white">Change cover photo</span>
           <upload-image ng-model="userData.coverPhoto" ng-callback="agentCoverPic(data);" allow-type="image/*" no-view class="pointer agentcover-uploadinput"></upload-image>
         </div>
-        <div class="coversave-btn" ng-show="showCoverBtn">
-          <button type="button" name="button" class="btn btn-white-outline" ng-click="saveAgentCover(userData.coverPhoto);">Save</button>
-        </div>
+        <!-- <div class="coversave-btn" ng-show="showCoverBtn">
+          <button type="button" name="button" class="btn btn-white-outline" ng-click="saveAgentCover(userData);">Save</button>
+        </div> -->
       </div>
     </div>
     <!-- agent-user-fixednav -->
@@ -145,7 +146,7 @@
           <h4 class="color-cyan avenir-heavy text-capitalize"> {{userData.name}}</h4>
           <p class="text-capitalize"> <span ng-if="userData.company.address != ''">{{userData.company.address}}</span> <span ng-if="userData.company.address == ''"> - </span></p>
           <p><i class="fa fa-phone mr5"></i><a href="tel:{{userData.company.contact}}" ng-if="userData.company.contact != ''">{{userData.company.contact}}</a> <span ng-if="userData.company.mobile != ''">|</span> <a href="tel:{{userData.company.mobile}}" ng-if="userData.company.mobile != ''">{{userData.company.mobile}}</a> <span ng-if="userData.company.contact == '' && userData.company.mobile ==''"> - </span></p>
-          <p><i class="fa fa-envelope mr5"></i> <a href="mailto:{{userData.company.email}}" ng-if="userData.company.email != ''"> {{userData.company.email}}</a> <span ng-if="userData.company.email == ''"> - </span></p>
+          <p><i class="fa fa-envelope mr5"></i> <a ng-repeat="mails in userData.company.email track by $index" href="mailto:{{mails}}" ng-if="userData.company.email != ''" class="agent-contactmail"> {{mails}} <span class="email-separater" ng-if="userData.company.email.length>1">| </span></a>  <span ng-if="userData.company.email == ''"> - </span></p>
           <p><i class="fa fa-globe mr5"></i> <a href="{{userData.company.website}}" target="_blank" ng-if="userData.company.website != ''"> {{userData.company.website}}</a> <span ng-if="userData.company.website == ''"> - </span></p>
         </div>
       </div>
