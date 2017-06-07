@@ -193,6 +193,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.animationsEnabled = true;
     $scope.formData = {};
     $scope.agentSignup = false;
+    $scope.alreadyExist = false;
 
     $scope.bookingLink = function () {
       window.location.href = "https://travelibro.com/bookings/";
@@ -296,6 +297,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             console.log(err);
           });
       };
+
+
     }
 
     var ref = "";
@@ -378,9 +381,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.agentSignUpForm = {};
     $scope.registerAsAgent = function (formData) {
       NavigationService.registerAsAgent(formData, function (data) {
-        NavigationService.getAccessToken(setLoginVariables, function (err) {
-          console.log(err);
-        });
+        if (data.value) {
+          $scope.alreadyExist = false;
+          NavigationService.getAccessToken(setLoginVariables, function (err) {
+            console.log(err);
+          });
+        } else {
+          $scope.alreadyExist = true;
+        }
+
       });
     }
     $scope.loginAsAgent = function (formData) {
@@ -10678,7 +10687,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
     $scope.oneAtATime = true;
     $scope.validEmail = "/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/iv";
-
+    $scope.showImage = {
+      "val": false
+    };
     $scope.userDetails = {
       company: {
         email: []
@@ -10733,6 +10744,78 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       }
     }, 2000);
+
+    //image crop 
+    var checkForImageChange = function () {
+      console.log(document.getElementById('fileInput1'));
+      $timeout(function () {
+        document.getElementById('fileInput1').onchange = function (evt) {
+          var file = evt.currentTarget.files[0];
+          $scope.fileName = file.name;
+          var formData = new FormData();
+          formData.append('file', file, "file.jpg");
+          var reader = new FileReader();
+          reader.onload = function (evt) {
+            $scope.$apply(function ($scope) {
+              $scope.showImage.val = true;
+              console.log($scope.showImage.val);
+              $scope.myImage = evt.target.result;
+              // alert($scope.myImage);
+            });
+          };
+          reader.readAsDataURL(file);
+        };
+      }, 2000);
+    };
+    $scope.fileName = null;
+    $scope.image = null;
+    $scope.imageFileName = '';
+    $scope.uploadme = {};
+    $scope.uploadme.src = '';
+    $scope.uploadFile = function (data, userDetails, ppSelected) {
+      // Base64 to Blob
+      console.log(userDetails);
+      if (ppSelected) {
+        var imageBase64 = data;
+        var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
+        // Blob to File
+        var file = new File([blob], $scope.fileName + '.png');
+        // File to FormData
+        var formData = new FormData();
+        formData.append('file', file, file.name);
+        // alert("mila");
+        NavigationService.uploadFile(formData, function (response) {
+          if (response.value) {
+            $scope.userDetails.profilePicture = response.data[0];
+          } else {
+            toastr.warning('Error Uploading Image!');
+          }
+          Agent.saveAgentData($scope.userDetails, function (data) {
+            console.log(data);
+          });
+          $scope.agentSec(6);
+        });
+      } else {
+        // alert("nai mila");
+        $scope.userDetails = _.omit($scope.userDetails, ['profilePicture']);
+        Agent.saveAgentData($scope.userDetails, function (data) {
+          console.log(data);
+        });
+      }
+      $scope.agentSec(6);
+    };
+
+    //upload agent profilePicture ends
+
+    $scope.removePhoto = function () {
+      angular.element("input[type='file']").val(null);
+      $scope.userDetails = _.omit($scope.userDetails, ['profilePicture']);
+      $scope.fileName = null;
+      $scope.showImage.val = false;
+      checkForImageChange();
+    };
+    //image crop end
+
 
     $("#phone").intlTelInput({
       initialCountry: "pl",
@@ -10837,6 +10920,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.agentloginView = 4;
           break;
         case 5:
+          checkForImageChange();
           $scope.agentloginView = 5;
           break;
         case 6:
@@ -10861,7 +10945,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     //switching between cards ends
 
-    // category of Specialisation array
+
     // $scope.isCategorySelected = false;
     $scope.foundCategory = [];
     $scope.selectCategory = function (obj) {
@@ -10878,45 +10962,45 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // $scope.selectedCategory('categoriesSpecial', 'holidayType');
     };
 
-    $scope.categoriesSpecial = [{
-      agtcatImg: "img/kindofjourney/white-adventure.png",
-      catwidth: "35px",
-      name: "Adventure"
-    }, {
-      agtcatImg: "img/kindofjourney/white-business.png",
-      catwidth: "33px",
-      name: "Business"
-    }, {
-      agtcatImg: "img/kindofjourney/white-family.png",
-      catwidth: "48px",
-      name: "Family"
-    }, {
-      agtcatImg: "img/kindofjourney/white-romance.png",
-      catwidth: "35px",
-      name: "Romance"
-    }, {
-      agtcatImg: "img/kindofjourney/white-backpacking.png",
-      catwidth: "35px",
-      name: "Backpacking"
-    }, {
-      agtcatImg: "img/kindofjourney/white-budget.png",
-      catwidth: "33px",
-      name: "Budget"
-    }, {
-      agtcatImg: "img/kindofjourney/white-luxury.png",
-      catwidth: "33px",
-      name: "Luxury"
-    }, {
-      agtcatImg: "img/kindofjourney/white-religious.png",
-      catwidth: "38px",
-      name: "Religious"
-    }, {
-      agtcatImg: "img/kindofjourney/white-friends.png",
-      catwidth: "35px",
-      name: "Friends"
-    }];
-    // category of Specialisation array end
-    //country of Specialisation accordion
+    {
+      $scope.categoriesSpecial = [{
+        agtcatImg: "img/kindofjourney/white-adventure.png",
+        catwidth: "35px",
+        name: "Adventure"
+      }, {
+        agtcatImg: "img/kindofjourney/white-business.png",
+        catwidth: "33px",
+        name: "Business"
+      }, {
+        agtcatImg: "img/kindofjourney/white-family.png",
+        catwidth: "48px",
+        name: "Family"
+      }, {
+        agtcatImg: "img/kindofjourney/white-romance.png",
+        catwidth: "35px",
+        name: "Romance"
+      }, {
+        agtcatImg: "img/kindofjourney/white-backpacking.png",
+        catwidth: "35px",
+        name: "Backpacking"
+      }, {
+        agtcatImg: "img/kindofjourney/white-budget.png",
+        catwidth: "33px",
+        name: "Budget"
+      }, {
+        agtcatImg: "img/kindofjourney/white-luxury.png",
+        catwidth: "33px",
+        name: "Luxury"
+      }, {
+        agtcatImg: "img/kindofjourney/white-religious.png",
+        catwidth: "38px",
+        name: "Religious"
+      }, {
+        agtcatImg: "img/kindofjourney/white-friends.png",
+        catwidth: "35px",
+        name: "Friends"
+      }];
+    }
 
     //gets all the countries from database
     NavigationService.getCountriesByContinent(function (data, status) {
@@ -10940,9 +11024,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-
-    //country of Specialisation accordion end
-
     //Services
     $scope.selectServices = function (obj) {
       // $scope.isCategorySelected = true;
@@ -10954,43 +11035,47 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.foundCategory = _.filter($scope.categoriesSpecial, ['class', 'active']);
 
     };
-    $scope.agtServicesSpcl = [{
-      name: 'Tours And Packages'
-    }, {
-      name: 'Day Tours'
-    }, {
-      name: 'Outdoors & Excursions'
-    }, {
-      name: 'Flights'
-    }, {
-      name: 'Cruise'
-    }, {
-      name: 'MICE'
-    }, {
-      name: 'Personal'
-    }, {
-      name: 'Business Travel'
-    }, {
-      name: 'Car Rentals'
-    }, {
-      name: 'Visas'
-    }, {
-      name: 'Fully Independent Traveller'
-    }, {
-      name: 'Accomodation'
-    }, {
-      name: 'Travel Insurance'
-    }, {
-      name: 'Sports & Events'
-    }, {
-      name: 'Forex'
-    }, {
-      name: 'Holidays'
-    }, {
-      name: 'Festival & Concerts'
-    }, {
-      name: 'Transportation'
-    }];
+
+    {
+      $scope.agtServicesSpcl = [{
+        name: 'Tours And Packages'
+      }, {
+        name: 'Day Tours'
+      }, {
+        name: 'Outdoors & Excursions'
+      }, {
+        name: 'Flights'
+      }, {
+        name: 'Cruise'
+      }, {
+        name: 'MICE'
+      }, {
+        name: 'Personal'
+      }, {
+        name: 'Business Travel'
+      }, {
+        name: 'Car Rentals'
+      }, {
+        name: 'Visas'
+      }, {
+        name: 'Fully Independent Traveller'
+      }, {
+        name: 'Accomodation'
+      }, {
+        name: 'Travel Insurance'
+      }, {
+        name: 'Sports & Events'
+      }, {
+        name: 'Forex'
+      }, {
+        name: 'Holidays'
+      }, {
+        name: 'Festival & Concerts'
+      }, {
+        name: 'Transportation'
+      }];
+    }
+
     //Services end
 
     //Integration starts here
@@ -11002,97 +11087,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agentSec(3);
       }
     }
-
-    //upload agent profilePicture
-    // $timeout(function () {
-    //   document.getElementById('fileInput1').onchange = function () {
-    //     alert('Selected file: ' + this.value);
-    //   }
-    // });
-    $scope.fileName = null;
-    $scope.image = null;
-    $scope.imageFileName = '';
-    $scope.uploadme = {};
-    $scope.uploadme.src = '';
-    $scope.uploadFile = function (data, userDetails, ppSelected) {
-      // Base64 to Blob
-      console.log(userDetails);
-      if (ppSelected) {
-        var imageBase64 = data;
-        var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
-        // Blob to File
-        var file = new File([blob], $scope.fileName + '.png');
-        // File to FormData
-        var formData = new FormData();
-        formData.append('file', file, file.name);
-        // alert("mila");
-        NavigationService.uploadFile(formData, function (response) {
-          if (response.value) {
-            $scope.userDetails.profilePicture = response.data[0];
-          } else {
-            toastr.warning('Error Uploading Image!');
-          }
-          Agent.saveAgentData($scope.userDetails, function (data) {
-            console.log(data);
-          });
-          $scope.agentSec(6);
-        });
-      } else {
-        // alert("nai mila");
-        $scope.userDetails = _.omit($scope.userDetails, ['profilePicture']);
-        Agent.saveAgentData($scope.userDetails, function (data) {
-          console.log(data);
-        });
-      }
-      $scope.agentSec(6);
-    };
-
-
-    $scope.showImage = {
-      "val": false
-    };
-    var i = 1;
-    var checkForImageChange = function () {
-      var got1 = setInterval(function () {
-        console.log(document.getElementById('fileInput1'));
-        if (document.getElementById('fileInput1')) {
-          console.log("checking for image change", i);
-          document.getElementById('fileInput1').onchange = function (evt) {
-            // alert("change hua");
-            var file = evt.currentTarget.files[0];
-
-            $scope.fileName = file.name;
-
-            var formData = new FormData();
-            formData.append('file', file, "file.jpg");
-            var reader = new FileReader();
-            reader.onload = function (evt) {
-              $scope.$apply(function ($scope) {
-                $scope.showImage.val = true;
-                console.log($scope.showImage.val);
-                $scope.myImage = evt.target.result;
-                // alert($scope.myImage);
-              });
-            };
-            reader.readAsDataURL(file);
-          };
-          clearInterval(got1);
-        }
-        i++;
-      }, 1000);
-    }
-    checkForImageChange();
-
-    //upload agent profilePicture ends
-
-    $scope.removePhoto = function () {
-      $scope.userDetails = _.omit($scope.userDetails, ['profilePicture']);
-      $scope.fileName = null;
-      console.log($scope.userDetails);
-      $scope.showImage.val = false;
-      checkForImageChange();
-    };
-
 
     //verify Users Account
     $scope.submitOtp = function (obj) {
@@ -12088,16 +12082,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // SAGAR INTEGRATION
 
     // CHANGE COVER PHOTO
-    $scope.agentCoverPic = function (data) {
+  $scope.agentCoverPic = function (data) {
       console.log(data, 'coverPhoto');
-      $scope.userData.coverPhoto = data;
-      console.log($scope.userData.coverPhoto, 'coverpic');
-      $scope.showCoverBtn = true;
+      var obj ={
+        'company':$scope.userData.company
+      }
+      obj.company.coverPhoto=data
+      console.log(obj, 'coverpic');
+      Agent.saveAgentData(obj, function(data){
+        console.log(data,'coverpic saved');
+      })
+      // $scope.showCoverBtn = true;
     };
 
-    $scope.saveAgentCover = function (coverPhoto) {
-      console.log(coverPhoto, 'coverpic saved');
-    };
     // CHANGE COVER PHOTO END
     // ENQUIRY FORM FILL
     $scope.enquire.urlSlug = $scope.activeUrlSlug;

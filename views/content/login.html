@@ -162,8 +162,8 @@
                               <i class="fa fa-envelope color-white" aria-hidden="true"></i>
                             </span>
                           <input type="email" name="email" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Emaild Id" placeholder="Email"
-                            ng-model="agentSignUpForm.email" required>
-                          <span ng-show="signUpForm.email.$error.email">Invalid email address.</span>
+                            ng-model="agentSignUpForm.email"  required>
+                            <!--ng-change="alreadyExist=false"-->
                         </div>
                       </div>
                       <div class="form-group">
@@ -180,11 +180,12 @@
                           <label class="color-white">
                             <input type="checkbox" id="tnc" ng-model="policy" required/>
                             <label for="tnc" class=" avenir-roman">I accept the Terms &amp; Conditions and Privacy Policy of the website.</label>
+                          <span ng-show="alreadyExist">* Email Already Exist </span>
                           </label>
                         </div>
                       </div>
                       <div class="btn-login mt25">
-                        <input type="submit" class="btn btn-outline color-white avenir-roman" value="Register"> </button>
+                        <input type="submit" class="btn btn-outline color-white avenir-roman" ng-disabled="signUpForm.$invalid" value="Register">                        </button>
                       </div>
                       <div class="loginsign-toggle">
                         <a ng-click="toggleAgentSign();">Go To Login</a>
