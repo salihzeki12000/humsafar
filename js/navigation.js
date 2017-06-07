@@ -3,6 +3,7 @@ var allowAccess = "";
 
 // adminURL = "https://travelibro.com/api";
 // adminURL = "https://travelibro.wohlig.com/api";
+ adminURL = "http://wohlig.io:1337/api";
 
 var imgurl = adminURL + "/upload/";
 var imgpath = imgurl + "readFile";
@@ -530,11 +531,7 @@ var navigationservice = angular.module('navigationservice', [])
           data: formData,
           method: "POST"
         }).success(function (data) {
-          if (data.value) {
             callback(data);
-          } else {
-            console.log(data);
-          }
         });
       },
       loginAsAgent: function (formData, callback) {
