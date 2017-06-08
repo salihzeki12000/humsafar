@@ -70,8 +70,8 @@
                 <div class="nation-city">
                   <ui-select ng-model="userDetails.homeCity" theme="bootstrap" ng-value="userDetails.homeCity">
                     <ui-select-match placeholder="Search City">{{$select.selected.description}}</ui-select-match>
-                    <ui-select-choices repeat="city.description as city in cities | filter:searchCity" ng-click="agentSec(4);"
-                      refresh="searchByKey($select.search)" refresh-delay="0">
+                    <ui-select-choices repeat="city.description as city in cities | filter:searchCity" ng-click="agentSec(4);" refresh="searchByKey($select.search)"
+                      refresh-delay="0">
                       <span class="color-light-grey">{{city.description}}</span>
                     </ui-select-choices>
                   </ui-select>
@@ -121,10 +121,10 @@
                     <div class="col-md-5 col-sm-5">
                       <div class="form-group">
                         <div class="agent-cmpny-inputholder agentcompany-phone">
-                          <input type="text" id="phone" name="phone" class="form-control color-blue" placeholder="Contact No" international-phone-number
-                            ng-model="userDetails.company.contact" ng-change="isValidNo(userDetails.company.contact)">
-                          <span id="valid-msg" class="hide intel-error"><i class="fa fa-check"></i> Valid</span>
-                          <span id="error-msg" class="hide intel-error">Invalid number</span>
+                          <input type="text" id="phone1" name="phone" class="form-control color-blue" placeholder="Contact No" ng-intl-tel-input ng-model="userDetails.company.contact"
+                            ng-change="isValidNo(userDetails.company.contact,'1')">
+                          <span id="valid-msg1" class="hide intel-error"><i class="fa fa-check"></i> Valid</span>
+                          <span id="error-msg1" class="hide intel-error">Invalid number</span>
                           <!-- <div class="agent-input-icon">
                             <i class="fa fa-phone color-grey"></i>
                           </div> -->
@@ -134,9 +134,10 @@
                     <div class="col-md-7 col-sm-7">
                       <div class="form-group">
                         <div class="agent-cmpny-inputholder agentcompany-phone">
-                          <input type="text" class="form-control color-blue" placeholder="Mobile No" ng-model="userDetails.company.mobile" international-phone-number ng-change="isValidNo(userDetails.company.mobile)">
-                          <span id="valid-msg" class="hide intel-error"><i class="fa fa-check"></i> Valid</span>
-                          <span id="error-msg" class="hide intel-error">Invalid number</span>
+                          <input type="text" id="phone2" class="form-control color-blue" placeholder="Mobile No" ng-model="userDetails.company.mobile"
+                            ng-intl-tel-input ng-change="isValidNo(userDetails.company.mobile,'2')">
+                          <span id="valid-msg2" class="hide intel-error"><i class="fa fa-check"></i> Valid</span>
+                          <span id="error-msg2" class="hide intel-error">Invalid number</span>
                           <!-- <div class="agent-input-icon">
                             <i class="fa fa-phone color-grey"></i>
                           </div> -->
@@ -144,11 +145,20 @@
                       </div>
                     </div>
                   </div>
-
                   <div class="form-group">
-                    <div class="agent-cmpny-inputholder">
+                    <div class="mail-register clearfix">
+                      <label class="avenir-roman"><span class="">Registered Email:</span> <span class="color-blue">{{userData.email}}</span></label>
+                      <a class="email-info"><span ng-click="showdetailInfo()"><i class="fa fa-info-circle"></i></span>
+                      <div class="agentemail-infobox">All communication mails will be delivered to Registered and Alternate Emails</div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="agent-cmpny-inputholder alternatemail">
+                      <label for="" class="alternate-mail avenir-roman">Alternate Emails for Commmunication</label>
+
                       <ui-select multiple ng-model="userDetails.company.email" theme="bootstrap" tagging="tagHandler">
-                        <ui-select-match placeholder="Emails">{{$item}}</ui-select-match>
+                        <ui-select-match placeholder="Alternate Emails">{{$item.name}}</ui-select-match>
                         <ui-select-choices repeat="email in []" refresh="" refresh-delay="0" hidden>
                           <span>{{userDetails.company.email}}</span>
                         </ui-select-choices>

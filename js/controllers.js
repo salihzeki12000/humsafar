@@ -20,7 +20,7 @@ var map;
 var center = {};
 var centers = [];
 markers[0] = {};
-angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'agent', 'commontask', 'anchorSmoothScroll', 'activity', 'infinite-scroll', 'navigationservice', 'travelibroservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce', 'internationalPhoneNumber'])
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'agent', 'commontask', 'anchorSmoothScroll', 'activity', 'infinite-scroll', 'navigationservice', 'travelibroservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce', 'internationalPhoneNumber', 'ngIntlTelInput'])
   .run(['$anchorScroll', function ($anchorScroll) {
     $anchorScroll.yOffset = 50; // always scroll by 50 extra pixels
   }])
@@ -10696,21 +10696,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       },
     };
 
+    $scope.tagHandler = function (tag) {
+      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      console.log(re.test(tag));
+      if (re.test(tag)) {
+        return {
+          'name': tag
+        };
+      }
+    };
+
     $scope.userData = $.jStorage.get("profile");
     if ($scope.userData.name) {
       $scope.userDetails.company.name = $scope.userData.name;
-      $scope.userDetails.company.email.push($scope.userData.email);
     }
     $scope.isVerified = $.jStorage.get("isVerified");
-
-    // $(document).ready(function() {
-    //   alert("poch gya");
-    //   $(".veri-code-box").keyup(function () {
-    //     if (this.value.length == this.maxLength) {
-    //       $(this).next('.veri-code-box').focus();
-    //     }
-    //   });
-    // });
 
 
     $timeout(function () {
@@ -10742,7 +10742,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             }
           }
         }
-      }
+      };
     }, 2000);
 
     //image crop 
@@ -10816,34 +10816,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     //image crop end
 
-
-    $("#phone").intlTelInput({
-      initialCountry: "pl",
-      geoIpLookup: function (callback) {
-        $.get('http://ipinfo.io', function () {}, "jsonp").always(function (resp) {
-          var countryCode = (resp && resp.country) ? resp.country : "";
-          callback(countryCode);
-        });
-      },
-      utilsScript: "../../../..bower_components/intl-tel-input/lib/libphonenumber/build/utils.js",
-    });
-
-    $scope.isValidNo = function (num) {
+    $scope.isValidNo = function (num, i) {
       console.log(num);
-      var telInput = $("#phone"),
-        errorMsg = $("#error-msg"),
-        validMsg = $("#valid-msg");
+      var telInput = $("#phone" + i),
+        errorMsg = $("#error-msg" + i),
+        validMsg = $("#valid-msg" + i);
 
-      // initialise plugin
       telInput.intlTelInput({
-        utilsScript: "../../../..bower_components/intl-tel-input/lib/libphonenumber/build/utils.js",
-        initialCountry: "pl",
+        initialCountry: "auto",
         geoIpLookup: function (callback) {
           $.get('http://ipinfo.io', function () {}, "jsonp").always(function (resp) {
             var countryCode = (resp && resp.country) ? resp.country : "";
             callback(countryCode);
           });
-        }
+        },
+        utilsScript: "../../../..bower_components/intl-tel-input/lib/libphonenumber/build/utils.js", // just for formatting/placeholders etc
       });
 
       var reset = function () {
@@ -10864,7 +10851,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           }
         }
       });
-
       // on keyup / change flag: reset
       telInput.on("keyup change", reset);
     }
@@ -10922,6 +10908,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         case 5:
           checkForImageChange();
           $scope.agentloginView = 5;
+          console.log( $scope.userDetails.company.email);
+          $scope.userDetails.company.email=_.map($scope.userDetails.company.email,'name');
+
+          console.log( $scope.userDetails.company.email);          
           break;
         case 6:
           $scope.agentloginView = 6;
@@ -11132,7 +11122,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       Agent.saveAgentData($scope.userDetails, function (data) {
         console.log(data);
         if (data.value) {
-          $state.go('agent-home');
+          $state.go('agent-home-without',{'urlSlug':$scope.userDetails.urlSlug});
         } else {
 
         }
@@ -11140,6 +11130,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     //Integration Ends here
   })
+
   .controller('AgentsettingCtrl', function ($scope, TemplateService, NavigationService, Agent, $timeout) {
     $scope.template = TemplateService.changecontent("agent-setting"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Settings"); //This is the Title of the Website
@@ -12082,14 +12073,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // SAGAR INTEGRATION
 
     // CHANGE COVER PHOTO
-  $scope.agentCoverPic = function (data) {
+   $scope.agentCoverPic = function (data) {
       console.log(data, 'coverPhoto');
       var obj ={
-        'company':$scope.userData.company
+        'coverPhoto':data
       }
-      obj.company.coverPhoto=data
       console.log(obj, 'coverpic');
-      Agent.saveAgentData(obj, function(data){
+      Agent.updateCoverPhoto(obj, function(data){
         console.log(data,'coverpic saved');
       })
       // $scope.showCoverBtn = true;
