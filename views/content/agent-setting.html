@@ -191,28 +191,6 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="contact-no" class="color-blue">Contact No</label>
-                        <input type="text" class="form-control" placeholder="Contact No" ng-model="agentData.company.contact">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="email" class="color-blue">Email</label>
-                        <input type="text" class="form-control" id="email" placeholder="Email" ng-model="agentData.company.email">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="mobile-no" class="color-blue">Mobile No</label>
-                        <input type="text" class="form-control" placeholder="Mobile No" ng-model="agentData.company.mobile">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
                         <label for="office-location" class="color-blue">Head Office Location</label>
                         <div class="agentsetting-select">
                           <ui-select ng-model="agentData.homeCity" theme="bootstrap">
@@ -227,18 +205,39 @@
                         </div>
                       </div>
                     </div>
-                    <!-- <div class="col-md-6">
-                      <div class="agt-settingcity">
-                        <div class="form-group">
-                          <label for="" class="color-blue"></label>
-                          <div class="custom-select">
-                            <select name="" id="city">
-                                <option value="India" class="color-blue">Mumbai</option>
-                              </select>
-                          </div>
-                        </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="contact-no" class="color-blue">Contact No</label>
+                        <input type="text" class="form-control" placeholder="Contact No" ng-model="agentData.company.contact">
                       </div>
-                    </div> -->
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="mobile-no" class="color-blue">Mobile No</label>
+                        <input type="text" class="form-control" placeholder="Mobile No" ng-model="agentData.company.mobile">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="reg-email" class="color-blue">Registered Email</label>
+                        <input type="text" class="form-control" id="reg-email" placeholder="Email" ng-model="agentData.email">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group setting-alternatemail">
+                        <label for="" class="color-blue">Alternate Emails</label>
+                        <ui-select multiple ng-model="agentData.company.email" theme="bootstrap" tagging="tagHandler">
+                          <ui-select-match placeholder="Alternate Emails">{{$item}}</ui-select-match>
+                          <ui-select-choices repeat="email in []" refresh="" refresh-delay="0" hidden>
+                            <span>{{agentData.company.email}}</span>
+                          </ui-select-choices>
+                        </ui-select>
+                      </div>
+                    </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6">

@@ -163,6 +163,15 @@ var agent = angular.module('agent', [])
           },
           method: "POST"
         })
+      },
+      updateCoverPhoto: function(formData,callback){
+        TravelibroService.http({
+          url: adminURL + "/agent/updateCoverPhoto",
+          method: "POST",
+          data: formData
+        }).success(function (data) {
+          callback(data)
+        });
       }
 
     }

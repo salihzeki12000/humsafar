@@ -1,7 +1,7 @@
 <div class="agent-home relate {{addHomeBackdrop}} {{getBackdrop}}" scrolladd1class>
   <div scrolldown link-profile>
     <!-- ng-style="{ 'background-image' : (userData.company.coverPhoto != '') ? 'url(\'{{userData.company.coverPhoto|uploadpath}}\')' : 'url(\'../img/agent/bg-user.jpg\')' }" -->
-    <div class="img-holder-agent bg-agent-home-img" style="background-image:url('{{userData.company.coverPhoto|uploadpath}}');">
+    <div class="img-holder-agent bg-agent-home-img" style="background-image:url('{{userData.coverPhoto|uploadpath}}');">
       <div class="agt-card-posi">
         <div class="agt-title-card get-center">
           <div class="circ-agtimg pointer" ui-sref="agent-setting">

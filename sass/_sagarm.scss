@@ -173,6 +173,7 @@
     border: none;
     border-bottom: 1px solid $brand-blue;
     background-color: transparent;
+    text-align: left;
 
     ::-webkit-scrollbar{
       height: 4px;
@@ -212,6 +213,67 @@
   }
 }
 
+.mail-register{
+  color: #424242;
+  text-align: left;
+  label{
+    font-weight: 500;
+  }
+}
+
+.alternatemail{
+  text-align: left;
+  label{
+    font-weight: 500;
+  }
+}
+
+.alternate-mail{
+  color: #424242;
+}
+
+.email-info{
+  position: relative;
+  height: auto;
+  margin: 0px 15px;
+  background-color: transparent;
+  color: $brand-pink;
+  font-size: 15px;
+  line-height: 1;
+  // z-index: 6;
+  &:hover{
+    color: $brand-pink;
+    .agentemail-infobox{
+      display: block;
+    }
+  }
+}
+
+.agentemail-infobox{
+  display: none;
+  position: absolute;
+  z-index: 5;
+  right: -20px;
+  top: 22px;
+  width: 300px;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: #11d3cb;
+  color: #303557;
+  font-size: 14px;
+  text-align: justify;
+
+  &:after{
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 17px;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #11d3cb;
+    border-left: 10px solid transparent;
+  }
+}
+
 .agentcompany-phone{
   margin-bottom: 20px;
     .intl-tel-input{
@@ -236,8 +298,15 @@
         background-color: #fff;
         color: $brand-blue;
         text-align: left;
+
+        .divider{
+          display: none;
+        }
       }
       .country-name{
+        font-size: 12px;
+      }
+      .dial-code{
         font-size: 12px;
       }
     }
@@ -1884,9 +1953,10 @@ q {
 .setting-card {
   input,
   textarea {
-    background-color: transparent;
     border: 1px solid $brand-blue;
     border-radius: 4px;
+    background-color: transparent;
+    color: $brand-blue;
   }
 
   .custom-select {
@@ -2001,10 +2071,60 @@ q {
   min-height: 365px;
 
   .form-control {
-    height: 40px;
+    min-height: 40px;
     border: 1px solid $brand-dark-blue;
     color: $brand-blue;
     border-radius: 6px;
+  }
+}
+
+.setting-alternatemail{
+  .ui-select-multiple > div:first-child{
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+
+  .ui-select-multiple.ui-select-bootstrap{
+    padding: 6px 12px;
+    background-color: transparent;
+
+    ::-webkit-scrollbar{
+      height: 4px;
+    }
+
+    ::-webkit-scrollbar-track{
+      background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background-color: $brand-light-grey;
+    }
+
+    .ui-select-search{
+      width: auto !important;
+      padding: 6px 12px;
+      background-color: transparent;
+    }
+
+    .ui-select-match-item{
+      border-color: $brand-blue;
+      background-color: transparent;
+      color: $brand-blue;
+    }
+
+    .close{
+      padding-top: 1px;
+      font-size: 15px;
+      line-height: 1;
+      opacity: 1;
+    }
+
+    .ui-select-dropdown{
+      opacity: 0;
+      display: none;
+    }
   }
 }
 

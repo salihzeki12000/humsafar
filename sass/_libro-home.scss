@@ -1209,6 +1209,11 @@ a.color-white {
   padding: 20px 0;
 }
 
+.agentlogin-error{
+  margin: 10px 0;
+  @extend .avenir-heavy;
+}
+
 .login-partner-tooltip+.tooltip .tooltip-inner {
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.7);
