@@ -60,6 +60,7 @@ var jsArray = [
     './js/activity.js',
     './js/locallife.js',
     './js/travelibroservice.js',
+    './js/agent.js',
     './js/anchorSmoothScroll.js',
     //please do not change it
     './w/js/templates.js',

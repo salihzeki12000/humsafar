@@ -64,7 +64,7 @@
     <div class="analytics-profilecontent" ng-if="profileObj && profileObj!=''">
       <div class="container">
         <div class="row">
-          <div class="col-md-3" ng-repeat="list in profileObj track by $index">
+          <div class="col-md-4" ng-repeat="list in profileObj track by $index">
             <div class="followercard"style="background-image:url('{{list.profilePicture|uploadpath}}');">
               <div class="followercard-content relate" >
                 <div class="followercard-details">
@@ -149,7 +149,7 @@
   <!-- FOLLOWERS SECTION -->
   <div class="analytics-follower " ng-show="follower">
     <!-- FILTER -->
-      <div class="analytics-filter analyticsleads-filter">
+      <div class="analytics-filter analyticsleads-filter bg-white">
         <div class="container-fluid">
           <div class="analyticsleads-filterhead clearfix">
             <div class="analyticsfilter-head pull-left">
@@ -302,7 +302,7 @@
   <!-- LEADS SECTION -->
   <div class="analytics-leads " ng-show="leads">
     <!-- FILTER -->
-    <div class="analytics-filter analyticsleads-filter">
+    <div class="analytics-filter analyticsleads-filter bg-white">
       <div class="container-fluid">
         <div class="analyticsleads-filterhead clearfix">
           <div class="analyticsfilter-head pull-left">
@@ -364,7 +364,7 @@
   <!-- VIEWS DOWNLOADS SECTION -->
   <div class="analytics-download " ng-show="viewsdownload">
     <!-- FILTER -->
-    <div class="analytics-filter analyticsleads-filter ">
+    <div class="analytics-filter analyticsleads-filter bg-white">
         <div class="container-fluid">
           <div class="analyticsleads-filterhead clearfix">
             <div class="pull-right filter-analyticslead">

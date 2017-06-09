@@ -33,10 +33,6 @@
   font-size: 24px;
 }
 
-.bg-agent {
-  background-color: rgba(255,255,255,0.8);
-}
-
 .marg-tp30 {
   margin-top: 30px;
 }
@@ -258,8 +254,8 @@
   width: 300px;
   padding: 10px;
   border-radius: 6px;
-  background-color: #11d3cb;
-  color: #303557;
+  background-color: $brand-pink;
+  color: #fff;
   font-size: 14px;
   text-align: justify;
 
@@ -269,7 +265,7 @@
     top: -10px;
     right: 17px;
     border-right: 10px solid transparent;
-    border-bottom: 10px solid #11d3cb;
+    border-bottom: 10px solid $brand-pink;
     border-left: 10px solid transparent;
   }
 }
@@ -592,7 +588,7 @@
     &:active,
     &:hover,
     &.active {
-      color: $brand-pink !important;
+      color: $brand-cyan !important;
     }
   }
 }
@@ -1196,7 +1192,7 @@ q {
   border-radius: 0 0 8px 8px;
 }
 
-.review-text {
+.review-textarea .review-text {
   background: transparent;
   border: none;
   border-bottom: 1px solid #fff;
@@ -1204,6 +1200,7 @@ q {
   line-height: 1;
   padding: 6px 0;
   resize: none;
+  height: 140px;
 }
 
 .post-review {
@@ -1288,6 +1285,21 @@ q {
       @extend .get-center;
     }
   }
+}
+
+.agentservices-list{
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 5px ;
+  background-color: transparent;
+  color: $brand-blue;
+  border: 1px solid $brand-blue;
+  border-radius: 4px;
+  // cursor: pointer;
+  // &:hover{
+  //   background-color: $brand-blue;
+  //   color: #fff;
+  // }
 }
 
 .country-textholder {
@@ -1620,6 +1632,12 @@ q {
   @extend .font-sz18;
 }
 
+.planexpiry-date{
+  margin: 10px 0;
+  color: $brand-pink;
+  font-size: 14px;
+}
+
 .agent-statustext {
   border: none;
   border-bottom: 1px solid #fff;
@@ -1945,7 +1963,7 @@ q {
   textarea {
     width: 100%;
     overflow: hidden;
-    height: 100px;
+    height: 140px;
     padding: 6px 12px;
   }
 }
@@ -1971,6 +1989,12 @@ q {
       content: "\f078";
       color: $brand-dark-blue;
       right: 8px;
+    }
+  }
+
+  .problem-detail{
+    textarea{
+      min-height: 230px;
     }
   }
 }
@@ -2109,7 +2133,7 @@ q {
     }
 
     .ui-select-match-item{
-      border-color: $brand-blue;
+      border-color: $brand-lighter-grey;
       background-color: transparent;
       color: $brand-blue;
     }
@@ -2167,6 +2191,14 @@ q {
     background: url("../img/icons/box7.png") no-repeat 50% 0;
     background-size: contain;
   }
+}
+
+.agentsetting-services{
+  margin-bottom: 20px;
+}
+
+.agentservice-btn{
+  margin: 10px 0;
 }
 
 .agtcountry-setting {
@@ -2312,6 +2344,7 @@ q {
 .contact-sidetab {
   position: fixed;
   top: 210px;
+  height: 230px;
   background-color: $brand-blue;
 }
 
@@ -3096,8 +3129,15 @@ q {
 
 .analytics-filter {
   padding: 10px;
-  background-color: rgba(255,255,255,0.5);
-  color: #fff;
+  color: #424242;
+  @extend .bg-white;
+}
+
+.analyticsfilter-fixed{
+  position: fixed;
+  top: 100px;
+  width: 100%;
+  z-index: 3;
 }
 
 .analyticsfilter-head {
@@ -3118,8 +3158,9 @@ q {
   position: relative;
   display: inline-block;
   width: 190px;
-  border: 1px solid #fff;
-  border-radius: 4px;
+  border: none;
+  border-bottom: 1px solid #a0a0a0;
+  // border-radius: 4px;
   margin: 0 5px;
   vertical-align: middle;
 
@@ -3199,7 +3240,7 @@ q {
     position: absolute;
     top: 50%;
     right: 5px;
-    color: #fff;
+    color: #a0a0a0;
     @include transform(translateY(-50%));
   }
 }
@@ -3213,7 +3254,7 @@ q {
 .analytics-followercontent,
 .analytics-profilecontent {
   min-height: 100vh;
-  padding: 60px 0;
+  padding: 100px 0;
 }
 
 .follower-connectbtn {
@@ -5516,8 +5557,9 @@ q {
 .followercard-list{
   margin: 10px 0;
   li{
-    padding: 0;
-    padding-left: 5px;
+    // padding: 0;
+    // padding-left: 5px;
+    padding: 0px 10px 0 5px;
   }
 }
 .followercard-counts{

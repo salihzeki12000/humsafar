@@ -25,6 +25,15 @@
     </section>
 
     <section>
+      <!-- Services type -->
+      <div class="agtcategory-type agentservices">
+        <h3 class="color-pink">Services</h3>
+        <p class="agentservices-list text-capitalize" ng-repeat="service in userData.company.services track by $index"> {{service}}</p>
+      </div>
+      <!-- Services end -->
+    </section>
+
+    <section>
       <h3 class="color-pink">Speciality - Countries</h3>
       <div class="abtcountry-row">
         <div class="abtcountry-col" ng-repeat="specialcountry in userData.company.countryOf track by $index">

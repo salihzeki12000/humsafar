@@ -1,5 +1,5 @@
-<div class="agent-home relate {{addHomeBackdrop}} {{getBackdrop}}" scrolladd1class>
-  <div scrolldown link-profile>
+<div class="agent-home relate {{addHomeBackdrop}} {{getBackdrop}}" scrolladd1class scrolldown>
+  <div link-profile>
     <!-- ng-style="{ 'background-image' : (userData.company.coverPhoto != '') ? 'url(\'{{userData.company.coverPhoto|uploadpath}}\')' : 'url(\'../img/agent/bg-user.jpg\')' }" -->
     <div class="img-holder-agent bg-agent-home-img" style="background-image:url('{{userData.coverPhoto|uploadpath}}');">
       <div class="agt-card-posi">
@@ -37,8 +37,8 @@
           <div class="col-md-9 col-sm-9">
             <div class="agent-scroll">
               <ul class="list-inline">
-                <li ng-click="getTab(0)" ng-class="{'active': agthomeoptions.active=='agthome-itinerary'}">Itineraries </li>
-                <li ng-click="getTab(1)" ng-class="{'active': agthomeoptions.active=='agthome-tourpackages'}">Tours & Packages</li>
+                <li ng-click="getTab(0);" ng-class="{'active': agthomeoptions.active=='agthome-itinerary'}">Itineraries </li>
+                <li ng-click="getTab(1);  scrollDown();" ng-class="{'active': agthomeoptions.active=='agthome-tourpackages'}">Tours & Packages</li>
                 <li ng-click="getTab(2)" ng-class="{'active': agthomeoptions.active=='agthome-photovideos'}"> Photos & Videos</li>
                 <li ng-click="getTab(3)" ng-class="{'active': agthomeoptions.active=='agthome-testimonialreviews'}">Testimonials & Reviews</li>
                 <li ng-click="getTab(4)" ng-class="{'active': agthomeoptions.active=='agthome-travelactivity'}" ng-if="template.isMine">My Activity</li>
@@ -68,7 +68,7 @@
         </div>
       </div>
     </div>
-    <div class="agent-home-content" ng-include="agthome.innerView"></div>
+    <div class="agent-home-content " ng-include="agthome.innerView"></div>
     <!-- Enquiry side tab -->
     <!-- ng-if="!template.isMine" -->
     <div class="side-enquiry" ng-if="!template.isMine">

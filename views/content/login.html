@@ -71,9 +71,9 @@
                         </li>
                       </ul>
                     </div>
-                    <div class="loginsign-toggle">
+                    <!-- <div class="loginsign-toggle">
                       <a ui-sref="partnerlogin" class="color-pink">Partner Login</a>
-                    </div>
+                    </div> -->
                   </div>
                 </uib-tab>
                 <uib-tab index="1" heading="Sign Up">
@@ -228,25 +228,32 @@
         </div>
       </div>
     </div>
-    <div class="menu-contact ab">
-      <ul class="list-unstyled list-inline avenir-black">
-        <li>
+    <div class="menu-contact ab ">
+      <ul class="list-unstyled list-inline avenir-black clearfix">
+        <li class="">
           <a ui-sref="destination" class="color-white">Destinations</a>
         </li>
-        <li>
+        <li class="">
           <!--<a href="https://travelibro.com/bookings/{{'?accessToken=' + accessToken}}" ng-if="accessToken" class="color-white">Bookings</a>-->
           <a ng-click="bookingLink();" class="color-white">Bookings</a>
         </li>
-        <li>
+        <li class="">
           <a ui-sref="popularitinerary" class="color-white">Itineraries</a>
         </li>
-        <li>
+        <li class="">
           <a href="https://travelibro.com/blog" class="color-white">Blogs</a>
         </li>
-        <li>
+        <li class="">
           <a ui-sref="about" class="color-white">About Us</a>
         </li>
+        <li class="pull-right text-center">
+          <a class="btn-partnerlogin" ui-sref="partnerlogin">Partner Login</a>
+          <p class="color-white travelagent-intro">Travel Agent | Tour Operator | Local Guide</p>
+        </li>
       </ul>
+      <!-- <div class="partner-loginbtn pull-right">
+        <button class="btn btn-pink" ui-sref="partnerlogin">Partner Login</button>
+      </div> -->
     </div>
   </div>
 </section>

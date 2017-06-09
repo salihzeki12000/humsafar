@@ -381,7 +381,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'AgentloginCtrl'
     })
     .state('agent-setting', {
-      url: "/agent-setting",
+      url: "/partner-setting",
       templateUrl: "views/template.html",
       controller: 'AgentsettingCtrl'
     })

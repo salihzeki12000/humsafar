@@ -1046,6 +1046,25 @@ a.color-white {
   font-size: 12px;
 }
 
+.btn-partnerlogin{
+  padding: 8px 15px;
+  border-radius: 4px;
+  background-color: $brand-cyan;
+  color: $brand-blue;
+  &:hover{
+    background-color: $brand-cyan;
+    color: $brand-blue;
+  }
+}
+
+.travelagent-intro{
+  margin: 0;
+  margin-top: 8px;
+  font-size: 10px;
+  vertical-align: middle;
+  @extend .avenir-roman;
+}
+
 .nav-tabs {
   border-color: transparent;
 }
