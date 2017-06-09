@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
-        <div class="bg-agent avenir-roman">
+        <div class="bg-agent bg-white avenir-roman">
 
           <!-- VERIFICATION CODE START -->
           <div class="agt-verification-code" ng-if="agentloginView==0 && isVerified != true">
@@ -121,9 +121,9 @@
                     <div class="col-md-5 col-sm-5">
                       <div class="form-group">
                         <div class="agent-cmpny-inputholder agentcompany-phone">
-                          <input type="text" id="phone1" name="phone" class="form-control color-blue" placeholder="Contact No" ng-intl-tel-input ng-model="userDetails.company.contact"
-                            ng-change="isValidNo(userDetails.company.contact,'1')">
-                          <span id="valid-msg1" class="hide intel-error"><i class="fa fa-check"></i> Valid</span>
+                          <input type="text" id="phone1" name="phone" class="form-control color-blue" placeholder="Contact No" ng-model="userDetails.company.contact"
+                            ng-intl-tel-input ng-change="isValidNo(userDetails.company.contact,'1')">
+                          <!--<span id="valid-msg1" class="hide intel-error"><i class="fa fa-check"></i> Valid</span>-->
                           <span id="error-msg1" class="hide intel-error">Invalid number</span>
                           <!-- <div class="agent-input-icon">
                             <i class="fa fa-phone color-grey"></i>
@@ -136,7 +136,6 @@
                         <div class="agent-cmpny-inputholder agentcompany-phone">
                           <input type="text" id="phone2" class="form-control color-blue" placeholder="Mobile No" ng-model="userDetails.company.mobile"
                             ng-intl-tel-input ng-change="isValidNo(userDetails.company.mobile,'2')">
-                          <span id="valid-msg2" class="hide intel-error"><i class="fa fa-check"></i> Valid</span>
                           <span id="error-msg2" class="hide intel-error">Invalid number</span>
                           <!-- <div class="agent-input-icon">
                             <i class="fa fa-phone color-grey"></i>
@@ -207,7 +206,7 @@
               <div class="upload-section " ng-hide="showImage.val">
                 <div class="upload-btn ">
                   <div class="relate inline-block mr10 select-photo ">
-                    <button class="btn btn-dark-blue pointer avenir-roman ">Upload Logo</button>
+                    <button class="btn btn-dark-blue pointer avenir-roman ">Add</button>
                     <input type="file" class="getfile pointer" id="fileInput1" class="getfile pointer" fileread="uploadme.src" />
                   </div>
                 </div>
@@ -283,7 +282,7 @@
                 <div class="button-panel loginbtn-panel clearfix ">
                   <button class="btn btn-blue-outline btn-more pull-left " ng-click="agentSec(6) ">Previous</button>
 
-                  <button class="btn btn-blue-outline btn-more pull-right " ng-click="agentSec(8)">Next</button>
+                  <button class="btn btn-blue-outline btn-more pull-right " ng-disabled="disableSpecialization" ng-click="agentSec(8)">Next</button>
                   <!-- put in done btn -->
                   <!-- ng-click="uploadFile();saveUserData(userData) " -->
                 </div>
@@ -334,7 +333,7 @@
                 <div class="button-panel loginbtn-panel clearfix ">
                   <button class="btn btn-blue-outline btn-more pull-left " ng-click="agentSec(7) ">Previous</button>
 
-                  <button class="btn btn-blue-outline btn-more pull-right " ng-click="agentSec(9) ">Next</button>
+                  <button class="btn btn-blue-outline btn-more pull-right " ng-disabled="disableCountries" ng-click="agentSec(9) ">Next</button>
                   <!-- add to Done btn  -->
                   <!-- ng-click="uploadFile();saveUserData(userData) " -->
                 </div>
@@ -375,7 +374,7 @@
                 <div class="button-panel loginbtn-panel clearfix ">
                   <button class="btn btn-blue-outline btn-more pull-left " ng-click="agentSec(8) ">Previous</button>
 
-                  <button class="btn btn-blue-outline btn-more pull-right " ng-click="saveAgentData(userDetails)">Done</button>
+                  <button class="btn btn-blue-outline btn-more pull-right " ng-disabled="disableServices" ng-click="saveAgentData(userDetails)">Done</button>
                 </div>
               </div>
             </div>
