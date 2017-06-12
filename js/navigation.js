@@ -170,11 +170,15 @@ var navigationservice = angular.module('navigationservice', [])
               'remove': true
             }
           }).success(function (data) {
+          console.log("Id Found");
             TravelibroService.http({
               url: adminURL + "/user/logout",
               method: "POST"
             }).success(callback);
           });
+        }).error(function(data){
+          console.log("Id Not Found");
+          console.log(data);
         });
       },
       enablePushNotification: function (deviceId) {

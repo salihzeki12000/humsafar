@@ -2493,7 +2493,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewCardComment = true;
         // $scope.journey.journeyHighLight = activity._id;
         $scope.getCard = "view-whole-card";
-        LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+        LikesAndComments.getComments(post.type, post._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
@@ -2506,7 +2506,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // $scope.focus('enterComment');
           // $scope.journey.journeyHighLight = activity._id;
           $scope.getCard = "view-whole-card";
-          LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+          LikesAndComments.getComments(post.type, post._id, callback);
         }
       }
       $scope.previousId = post._id;
