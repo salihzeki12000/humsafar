@@ -1,9 +1,9 @@
 var adminURL = "";
 var allowAccess = "";
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 // adminURL = "https://travelibro.com/api";
 // adminURL = "https://travelibro.wohlig.com/api";
- adminURL = "http://wohlig.io:1337/api";
+adminURL = "http://localhost:1337/api";
 
 var imgurl = adminURL + "/upload/";
 var imgpath = imgurl + "readFile";
@@ -158,34 +158,48 @@ var navigationservice = angular.module('navigationservice', [])
           method: "POST"
         }, true).success(callback).error(errCallback);
       },
-      logout: function (callback, errCallback) {
-        return TravelibroService.http({
-          url: adminURL + "/user/logout",
-          method: "POST"
-        }).success(callback).error(errCallback);
+      logout: function (callback) {
+        var accessToken = $.jStorage.get("accessToken");
+        OneSignal.getUserId(function (data1) {
+          console.log("uploaded");
+          TravelibroService.http({
+            "url": adminURL + "/user/updateDeviceId",
+            "method": "POST",
+            "data": {
+              'deviceId': data1,
+              'remove': true
+            }
+          }).success(function (data) {
+          console.log("Id Found");
+            TravelibroService.http({
+              url: adminURL + "/user/logout",
+              method: "POST"
+            }).success(callback);
+          });
+        }).error(function(data){
+          console.log("Id Not Found");
+          console.log(data);
+        });
       },
       enablePushNotification: function (deviceId) {
-        $http({
+        TravelibroService.http({
           "url": adminURL + "/user/updateDeviceId",
           "method": "POST",
           "data": {
-            'accessToken': $.jStorage.get("accessToken"),
             'deviceId': deviceId
           }
         });
       },
       disablePushNotification: function (deviceId) {
-        $http({
+        TravelibroService.http({
           "url": adminURL + "/user/updateDeviceId",
           "method": "POST",
           "data": {
-            'accessToken': $.jStorage.get("accessToken"),
             'deviceId': deviceId,
             'remove': true
           }
         });
       },
-
       getAllCountries: function (callback, errCallback) {
         return TravelibroService.http({
           url: adminURL + "/country/getAll",
@@ -531,7 +545,11 @@ var navigationservice = angular.module('navigationservice', [])
           data: formData,
           method: "POST"
         }).success(function (data) {
+          if (data.value) {
             callback(data);
+          } else {
+            console.log(data);
+          }
         });
       },
       loginAsAgent: function (formData, callback) {
