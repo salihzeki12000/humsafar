@@ -55,14 +55,11 @@
       margin-right: 0;
     }
     img {
-      width: 12px !important;
+      // width: 12px !important;
       line-height: 0.4;
     }
     li {
       padding: 0 3px !important;
-      img {
-        width: 12px !important;
-      }
     }
   }
   .options .own-trip {
@@ -513,6 +510,7 @@
     .comment-like-notify {
       width: 100%;
       display: block;
+      margin-left: 0px;
     }
     .notify-imgsec {
       width: 100%;
@@ -610,7 +608,7 @@
   } //destination bookings
   .destination-hotel-card {
     .no-booking-found {
-      font-size: 22px;
+      // font-size: 22px;
       width: 100%;
     }
     .hotel-back-view {
@@ -938,10 +936,14 @@
   .on-go-journey .container-fluid {
     padding: 0;
   }
+  .started-journey-card .travelling-journey-type li a img{
+    height: 20px !important;
+  }
   .ongo-card-holder {
     width: 100%;
     margin-top: 20px;
     padding: 0px;
+    zoom :1;
   }
   .journey-start>img {
     width: 45px;
@@ -1846,6 +1848,7 @@
   } // ongo journey page
   .started-journey-card .journey-with,
   .started-journey-card .travelling-journey-type {
+    padding: 10px 10px 5px;
     background-color: rgba(255, 255, 255, 0.95);
   } // ongo journey page end
   .city-accordion-back {
@@ -2145,11 +2148,8 @@
       font-size: 13px;
     }
     .social-login {
-      .login-social-img img {
-        width: 35px;
-      }
       img {
-        width: 35px;
+        width: 50px;
       }
     }
   } // login end
@@ -2191,7 +2191,7 @@
     p {
       margin: 10px 0;
       font-size: 13px;
-      margin-left: -16px;
+      margin-left: -18px;
     }
   } //card
   .days-spent {
@@ -2380,17 +2380,14 @@
     }
   }
   .share-dropdown {
-    width: 190px;
-    i {
-      font-size: 20px;
-    }
+    right: 0px;
   }
   .edit-journey-dropdown {
     width: 185px;
   } // comment and like Side Section
   .whole-card-comment {
     width: 280px;
-    padding: 10px 0 0;
+    padding: 10px;
   }
   .comment-container .commenter-text {
     p {
@@ -2631,7 +2628,10 @@
       }
       .commenter-imgholder {
         width: 30px;
-        height: 35px;
+        height: 31px;
+      }
+      .commenter-img {
+        top: 15px;
       }
     }
   }

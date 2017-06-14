@@ -60,7 +60,7 @@
       <div class="loader-booking get-center" ng-if="viewTourLoader">
         <img src="img/page.svg" width="60px" alt="TraveLibro" class="img-responsive">
       </div>
-      <div class="get-center no-booking-found" ng-if="viewNoTourData">No Data Found For Tours &amp; Excursions</div>
+      <div class="get-center text-center no-booking-found" ng-if="viewNoTourData">No Data Found For Tours &amp; Excursions</div>
       <div class="row m-m0">
         <div class="col-md-6 m-plr0" ng-repeat="tour in bookingTourData|limitTo:6 track by $index">
           <div class="tour-card-holder">
@@ -134,7 +134,7 @@
       <div class="loader-booking get-center" ng-if="viewHomeStayLoader">
         <img src="img/page.svg" width="60px" alt="TraveLibro" class="img-responsive">
       </div>
-      <div class="get-center no-booking-found" ng-if="viewNoHomeData">No Data Found For HomeStays</div>
+      <div class="get-center text-center no-booking-found" ng-if="viewNoHomeData">No Data Found For HomeStays</div>
       <div class="row m-m0" ng-init="backHomestayView = -1">
         <div class="col-md-6 m-plr0" ng-repeat="homestay in bookingHomeData|limitTo:6 track by $index">
           <div class="hotel-card-holder mt10 relate">
@@ -323,7 +323,7 @@
       <div class="loader-booking get-center" ng-if="viewVacationLoader">
         <img src="img/page.svg" width="60px" alt="TraveLibro" class="img-responsive">
       </div>
-      <div class="get-center no-booking-found" ng-if="viewNoVacData">No Data Found For Vacations Rentals</div>
+      <div class="get-center text-center no-booking-found" ng-if="viewNoVacData">No Data Found For Vacations Rentals</div>
       <div class="row m-m0" ng-init="vacationBackView=-1;">
         <div class="col-md-6 m-plr0" ng-repeat="vacation in bookingVacData|limitTo:6 track by $index">
           <div class="vacation-card-list mt10">
@@ -513,7 +513,7 @@
       <div class="loader-booking get-center" ng-if="viewHotelLoader">
         <img src="img/page.svg" width="60px" alt="TraveLibro" class="img-responsive">
       </div>
-      <div class="get-center no-booking-found" ng-if="viewNoHotelData">No Data Found For Hotel</div>
+      <div class="get-center text-center no-booking-found" ng-if="viewNoHotelData">No Data Found For Hotel</div>
       <div class="row m-m0">
         <div class="col-md-6 m-plr0" ng-repeat="hotel in bookingHotelData|limitTo:6 track by $index">
           <div class="hotel-card-holder mt10 relate" ng-init="backView=-1;">
