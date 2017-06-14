@@ -6153,6 +6153,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.localDate = dataLocal.datesArr;
       $scope.localPostCount = dataLocal.count;
       $scope.localCategory = dataLocal.categories;
+      $scope.localRating=dataLocal.rating;
       $scope.scroll2.busy = false;
       if ($scope.localLifeJourney.length == 0) {
         $scope.showLocalLife = true;
@@ -7928,7 +7929,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     var callbackGetCountriesVisited = function (data) {
-      $scope.countryVisitedList = data;
+      $scope.countryVisitedList = data.data;
       console.log($scope.countryVisitedList, 'give data');
       reloadCount();
     };
@@ -7956,8 +7957,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       MyLife.getFollowersWeb($stateParams.urlSlug, callbackFollowers);
     }
 
+    // var getCountriesVisited = function () {
+    //   MyLife.getCountryVisitedListExpanded($stateParams.urlSlug, callbackGetCountriesVisited);
+    //   getAllCountries();
+    // }
     var getCountriesVisited = function () {
-      MyLife.getCountryVisitedListExpanded($stateParams.urlSlug, callbackGetCountriesVisited);
+      MyLife.getCountryVisitedListExpandedWeb(callbackGetCountriesVisited);
       getAllCountries();
     }
 
@@ -8942,7 +8947,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log(length, 'total length');
       console.log($scope.uploadCount, 'uploadFile');
       $scope.qItinerary.photos.push({
-        "name": photo
+        "name": photo,
+        "photoTime":date
       });
       console.log($scope.qItinerary.photos.length, 'photos');
       if ($scope.uploadCount === 1) {
@@ -9409,13 +9415,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Integration starts here
     $scope.userData = $.jStorage.get("profile");
     //get quick-itinerary details starts
-    var slug = $stateParams.id;
-    Itinerary.getOneItinerary(slug, function (data) {
+    // var slug = $stateParams.id;
+    // Itinerary.getOneItinerary(slug, function (data) {
+    //   $scope.itinerary = data.data;
+    //   console.log($scope.itinerary);
+    //   TemplateService.title = $scope.itinerary.name + " - Travel Life | TraveLibro";
+    // });
+    //get quick-itinerary details ends
+
+     var slug = $stateParams.id;
+    Itinerary.getViewItinerary(slug, function (data) {
       $scope.itinerary = data.data;
       console.log($scope.itinerary);
       TemplateService.title = $scope.itinerary.name + " - Travel Life | TraveLibro";
     });
-    //get quick-itinerary details ends
 
     // route to user profile
     $scope.routeProfile = function () {

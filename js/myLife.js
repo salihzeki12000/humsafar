@@ -55,7 +55,8 @@ var mylife = angular.module('mylife', [])
           url: adminURL + "/user/getCountryVisitedListWeb",
           method: "POST"
         }).success(function (data) {
-          callback(data.data.countriesVisited);
+          // callback(data.data.countriesVisited);
+          callback(data);
         }).error(function (data) {
           console.log(data);
         });

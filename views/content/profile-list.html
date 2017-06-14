@@ -1,4 +1,4 @@
-<div class="profile-list-main" ng-class="{'bg-black white-full' : activeMenu == 'countries-visited' || activeMenu == 'bucket-list', '' : activeMenu !== 'countries-visited' || activeMenu !== 'bucketList'}"
+z<div class="profile-list-main" ng-class="{'bg-black white-full' : activeMenu == 'countries-visited' || activeMenu == 'bucket-list', '' : activeMenu !== 'countries-visited' || activeMenu !== 'bucketList'}"
   ng-init="searchCard.name=''">
   <!-- profile tab strip -->
   <div class="profile-tab-strip bg-white">
@@ -261,6 +261,7 @@
                       <div class="pull-left" ng-init="isEmpty=(country.year==-1)?true:((!country.year)?true:false)">
                         <h4 class="avenir-heavy">{{country.countryId.name}} <span ng-if="!isEmpty">( {{country.year}} )</span>
                         <span ng-if="isEmpty">( - )</span>
+                        <span>{{country.times}}</span>                        
                       </h4>
                       </div>
                       <div class="pull-right">

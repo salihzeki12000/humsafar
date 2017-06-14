@@ -780,6 +780,8 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout) {
       };
       $scope.check = true;
       $scope.length = 0;
+      $scope.imageDate = "";
+      
       if (!$scope.type) {
         $scope.type = "image";
       }
@@ -808,6 +810,7 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout) {
           $timeout(function () {
             console.log(oldVal, newVal);
             console.log(newVal.length);
+            $scope.imageDate=newVal[0].file.lastModifiedDate;
             $scope.length = newVal.length;
             _.each(newVal, function (newV, key) {
               if (newV && newV.file) {
@@ -875,7 +878,8 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout) {
           }
           $scope.callback({
             'data': data.data[0],
-            'length': $scope.length
+            'length': $scope.length,
+            'date':$scope.imageDate
           });
           // $timeout(function () {
           //    $scope.callback({'data':$scope.model});

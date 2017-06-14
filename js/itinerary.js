@@ -10,7 +10,20 @@ var itinerary = angular.module('itinerary', [])
           data: {
             "urlSlug": slug
           }
-        },'allLoader').success(function (data) {
+        }, 'allLoader').success(function (data) {
+          callback(data);
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
+      getViewItinerary: function (slug, callback) { //get Quick/detail itinerary
+        TravelibroService.http({
+          url: adminURL + "/itinerary/getViewChangedItitnerary",
+          method: "POST",
+          data: {
+            "urlSlug": slug
+          }
+        }, 'allLoader').success(function (data) {
           callback(data);
         }).error(function (data) {
           console.log(data);
@@ -90,6 +103,8 @@ var itinerary = angular.module('itinerary', [])
       uploadQuickItinerary: function (obj, flag, callback) {
         if (flag == 'new') {
           var url = "/itinerary/saveQuickItineraryWeb";
+          // var url = "/itinerary/getViewChangedItinerary";
+          
         } else if (flag == 'edit') {
           var url = "/itinerary/editQuickItineraryWeb"
         }

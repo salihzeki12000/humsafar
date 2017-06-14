@@ -67,7 +67,7 @@
     <!-- trip side pic holder end -->
     <div class="container">
       <!-- view side photos  -->
-      <div class="quick-side-photos text-right visible-xs"  ng-if="itinerary.photos.length > 0">
+      <div class="quick-side-photos text-right visible-xs" ng-if="itinerary.photos.length > 0">
         <span class="color-pink text-capitalize" ng-click="viewGallery();">Photos ({{itinerary.photos.length}})</span>
       </div>
       <!-- view side photos end -->
@@ -82,10 +82,10 @@
                     <span class="avenir-roman color-pink">
                     <span class="sizeof-country">
                       <span ng-if="itinerary.countryVisited.length==1">Country</span>
-                      <span ng-if="itinerary.countryVisited.length>1">Countries</span>
-                      Visited</span>
-                      : </span>
-                      <span class="color-white country-visited-name avenir-heavy" ng-repeat="country in itinerary.countryVisited track by $index">{{country.country.name}}<span ng-if="$index<(itinerary.countryVisited.length-1)"> | </span></span>
+                    <span ng-if="itinerary.countryVisited.length>1">Countries</span> Visited
+                    </span>
+                    : </span>
+                    <span class="color-white country-visited-name avenir-heavy" ng-repeat="country in itinerary.countryVisited track by $index">{{country.country.name}}<span ng-if="$index<(itinerary.countryVisited.length-1)"> | </span></span>
                   </p>
                   <p class="m-clear">
                     <span class="avenir-roman color-pink"><span class="sizeof-country">Cities Visited</span> : </span>
@@ -180,10 +180,14 @@
               <div class="share-social-holder pull-right">
                 <span class="color-blue avenir-heavy inline-block v-mid mr10">Share This Itinerary</span>
                 <ul class="list-inline inline-block v-mid social-logo-padd">
-                  <li><a ng-href="https://www.facebook.com/sharer/sharer.php?u={{itinerary.sharingUrl}}/&title=TraveLibro" target="_blank" class="fb-icon color-blue"><i class="fa fa-facebook-square fa-2x"></i></a></li>
-                  <li><a ng-href="https://twitter.com/intent/tweet?url={{itinerary.sharingUrl}}/&title=TraveLibro" target="_blank" class="twi-icon color-blue"><i class="fa fa-twitter-square fa-2x"></i></a></li>
-                  <li><a ng-href="https://plus.google.com/share?url=={{itinerary.sharingUrl}}/&title=TraveLibro" title="Google Plus" target="_blank" class="google-icon color-blue"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
-                  <li><a ng-href="http://pinterest.com/pin/create/button/?url={{itinerary.sharingUrl}}" title="Pinterest" target="_blank" class="pin-icon color-blue"><i class="fa fa-pinterest-square fa-2x"></i></a></li>
+                  <li><a ng-href="https://www.facebook.com/sharer/sharer.php?u={{itinerary.sharingUrl}}/&title=TraveLibro" target="_blank"
+                      class="fb-icon color-blue"><i class="fa fa-facebook-square fa-2x"></i></a></li>
+                  <li><a ng-href="https://twitter.com/intent/tweet?url={{itinerary.sharingUrl}}/&title=TraveLibro" target="_blank"
+                      class="twi-icon color-blue"><i class="fa fa-twitter-square fa-2x"></i></a></li>
+                  <li><a ng-href="https://plus.google.com/share?url=={{itinerary.sharingUrl}}/&title=TraveLibro" title="Google Plus"
+                      target="_blank" class="google-icon color-blue"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
+                  <li><a ng-href="http://pinterest.com/pin/create/button/?url={{itinerary.sharingUrl}}" title="Pinterest" target="_blank"
+                      class="pin-icon color-blue"><i class="fa fa-pinterest-square fa-2x"></i></a></li>
                   <!-- <li><a href="" class="linkedin-icon color-blue"><i class="fa fa-instagram fa-2x"></i></a></li> -->
                   <li><a href="" class="mail-icon color-blue"><i class="fa fa-envelope-square fa-2x"></i></a></li>
                 </ul>
@@ -205,7 +209,7 @@
                       <div class="like-reply-line">
                         <!-- <span class="color-blue avenir-roman mr5 pointer">Like</span>
                       <span class="color-blue avenir-roman mr5 pointer">Reply</span> -->
-                        <span class="time-stamp ml5"><i class="fa fa-calendar color-grey mr5"></i><span>{{comment.date|formatDate:"date"}}</span> | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{comment.date|formatDate:"time"}}</span></span>
+                        <span class="time-stamp ml5"><i class="fa fa-calendar color-grey mr5"></i><span>{{comment.date|formatDate:"date"}}</span>                        | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{comment.date|formatDate:"time"}}</span></span>
                       </div>
                     </div>
                   </div>
@@ -255,7 +259,7 @@
                             <span class="follow-following color-blue text-capitalize">{{life.follower}}</span>
                           </div>
                         </div>
-                        <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{life.timestampHour}}</span></p>
+                        <p class="m-clear"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.timestampDate}}</span> | <i class="fa fa-clock-o mr5 ml5"></i>                          <span>{{life.timestampHour}}</span></p>
                       </div>
                     </div>
                     <div class="onway-journey relate">
@@ -484,8 +488,185 @@
     </div>
   </div>
   <!-- SIDE COMMENT CARD -->
-  <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike' list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+  <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike'
+    list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
   <!-- SIDE COMMENT CARD END -->
   <div class="photo-open-backdrop {{dispBackDrop}}" ng-click="viewGallery();"></div>
-  <div class="backdrop-close" ng-class="{'view-backdrop':viewCardComment==true || viewCardLike==true,'':viewCardComment==false || viewCardLike==false}" ng-click="closeBackDrop();"></div>
+  <div class="backdrop-close" ng-class="{'view-backdrop':viewCardComment==true || viewCardLike==true,'':viewCardComment==false || viewCardLike==false}"
+    ng-click="closeBackDrop();"></div>
+</div>
+
+<!-- new thing -->
+<div class="quick-itinerary">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="itinerary-start-sec">
+          <img src="img/ongojourney/journey-step.png" alt="" class="img-responsive m-center" width="40">
+          <h4 class="itinerary-name text-center color-white">
+            {{itinerary.name}}
+          </h4>
+          <div class="itinerary-country-visited text-center">
+            <figure ng-repeat="country in itinerary.countryVisited track by $index">
+              <img ng-src="{{country.country.flag|uploadpath}}" alt="" class="img-responsive m-center" width="40">
+              <figcaption class="country-name color-white">{{country.country.name}}</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="itinerary-banner-sec">
+          <div class="itinerary-banner-holder">
+            <img ng-src="{{itinerary.coverPhoto|uploadpath}}" alt="Past Itinerary Banner" class="img-responsive">
+          </div>
+          <div class="itinerary-city-visited">
+            <span>Cities: </span>
+            <span ng-repeat="country in itinerary.countryVisited track by $index">
+              <span ng-repeat="city in country.cityVisited track by $index">
+                {{city.city.name}}
+              </span>
+            </span>
+          </div>
+        </div>
+        <!-- itinerary descp card -->
+        <div class="descp-itinerarycard">
+          <div class="user-imgholder">
+            <img ng-src="{{itinerary.user.profilePicture|uploadpath:40:42:'cover'}}" alt="" class="img-responsive">
+          </div>
+          <div class="user-name">
+            <h4>{{itinerary.user.name}}</h4>
+            <span>{{itinerary.startTime| date }} | {{itinerary.duration}}</span>
+          </div>
+          <div class="descp-holder">
+            <p class="text-justify" ng-bind-html="itinerary.description"></p>
+          </div>
+          <div class="itinerary-like-comment user-social-item clearfix">
+            <div class="pull-left">
+              <ul>
+                <li ng-click="likeUnlikeActivity(life)">
+                  <a href="" class="relate">
+                    <i class="fa color-blue card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound></i>
+                    <span></span>
+                    <audio id="like-play">
+                      <source src="img/tiny1.mp3" type="audio/mp3">
+                    </audio>
+                  </a>
+                </li>
+                <li ng-click="openCommentSection(life)">
+                  <a href=""><img src="img/comments.png" alt="" height="18"></a>
+                </li>
+                <li>
+                  <a href=""><img src="img/share.png" alt="" height="18"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="pull-right">
+              <div class="options">
+                <span class="pointer"><img src="img/options.png" alt="" height="18"></span>
+              </div>
+            </div>
+          </div>
+          <!-- social like comment -->
+          <div class="social-likes-reviews itinerary-social">
+            <div class="clearfix">
+              <div class="pull-left">
+                <span ng-click="openLikeSection(life)" class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
+                <span class="color-blue mr10 card-comment avenir-heavy pointer"><img src="img/comments.png" alt="" class="mr5" height="12">
+                  <!--<b>{{life.commentCount|filterCount}}</b>  {{life.commentCount|singularPlural:'Comments'}} -->
+                </span>
+              </div>
+              <div class="pull-right">
+                <img src="img/travel.png" alt="">
+              </div>
+            </div>
+          </div>
+          <!-- social like comment end-->
+        </div>
+        <!-- itinerary descp card end-->
+        <!-- itinerary main card -->
+        <div class="itinerary-cards" ng-repeat="card in itinerary.photos track by $index">
+          <div class="date-format">
+            <h4 class="color-white">{{card.date}}</h4>
+          </div>
+          <div class="itinerary-main-card">
+            <!-- itinerary photos card -->
+            <div class="itinerary-photo-card">
+              <div class="itinerary-imgdisplay-holder" ng-init="card.photoIndex=0">
+                <img ng-src="{{card.photos[card.photoIndex].name|uploadpath:532:350:'cover'}}" alt="" class="img-responsive">
+              </div>
+              <div class="related-itinerary-img" ng-if="card.photos.length>1 && card.photos.length<=5">
+                <div class="related-imgholder" ng-repeat="related in card.photos track by $index">
+                  <img ng-src="{{related.name|uploadpath:80:80:'cover'}}" alt="" class="img-responsive" ng-click="card.photoIndex=$index">
+                </div>
+              </div>
+              <!-- related img if more then five -->
+              <flex-slider flex-slide="s in card.photos track by $index" class="carousel" ng-if="card.photos.length>5">
+                <li>
+                  <div class="related-imgholder">
+                    <img ng-src="{{s.name|uploadpath:80:80:'cover'}}" alt="" class="img-responsive" ng-click="changeView($index)">
+                  </div>
+                </li>
+              </flex-slider>
+              <!-- related img if more then five end -->
+            </div>
+            <!-- itinerary photos card end-->
+            <!-- itinerary videos card -->
+            <div class="itinerary-video-holder">
+              <img src="" alt="" class="img-responsive">
+            </div>
+            <!-- itinerary videos card end-->
+            <!-- itinerary footer sec -->
+            <div class="itinerary-footer-sec social-field-types">
+              <div class="itinerary-like-comment user-social-item clearfix">
+                <div class="pull-left">
+                  <ul>
+                    <li ng-click="likeUnlikeActivity(life)">
+                      <a href="" class="relate">
+                      <i class="fa color-blue card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound></i>
+                      <span></span>
+                      <audio id="like-play">
+                        <source src="img/tiny1.mp3" type="audio/mp3">
+                      </audio>
+                    </a>
+                    </li>
+                    <li ng-click="openCommentSection(life)">
+                      <a href=""><img src="img/comments.png" alt="" height="18"></a>
+                    </li>
+                    <li>
+                      <a href=""><img src="img/share.png" alt="" height="18"></a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="pull-right">
+                  <div class="options">
+                    <span class="pointer"><img src="img/options.png" alt="" height="18"></span>
+                  </div>
+                </div>
+              </div>
+              <!-- social like comment -->
+              <div class="social-likes-reviews itinerary-social">
+                <div class="clearfix">
+                  <div class="pull-left">
+                    <span ng-click="openLikeSection(life)" class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
+                    <span class="color-blue mr10 card-comment avenir-heavy pointer"><img src="img/comments.png" alt="" class="mr5" height="12">
+                    <!--<b>{{life.commentCount|filterCount}}</b>  {{life.commentCount|singularPlural:'Comments'}} -->
+                  </span>
+                  </div>
+                  <div class="pull-right">
+                    <img src="img/travel.png" alt="">
+                  </div>
+                </div>
+              </div>
+              <!-- social like comment end-->
+            </div>
+            <!-- itinerary footer sec end-->
+          </div>
+        </div>
+        <!-- itinerary main card end-->
+      </div>
+      <div class="col-md-7">
+        <div class="itinerary-map-view">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

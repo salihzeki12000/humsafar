@@ -10396,6 +10396,106 @@ display:none;
 .quick-side-photos{
   margin: 20px 0 0;
 }
+
+  // new itinerary ui css
+.itinerary-city-visited {
+  padding: 5px 10px;
+  background-color: #fff;
+}
+.itinerary-banner-sec {
+  border-radius: 6px;
+  overflow: hidden;
+}
+.descp-itinerarycard {
+  border-radius: 4px;
+  padding: 10px 10px 0;
+  margin: 20px 0;
+  background-color: #fff;
+  .user-imgholder {
+    width: 40px;
+    height: 42px;
+    border: 2px solid #424242;
+    border-radius: 15px;
+    margin-right: 15px;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+  .user-name {
+    display: inline-block;
+    vertical-align: middle;
+    h4 {
+      margin: 0;
+      font-size: 16px;
+    }
+    span {
+      font-size: 12px;
+    }
+  }
+  .descp-holder {
+    margin: 10px 0;
+  }
+}
+.itinerary-main-card {
+  border-radius: 4px;
+  margin: 20px 0;
+  background-color: #fff;
+}
+.related-itinerary-img {
+  padding: 10px 10px 0;
+  .related-imgholder {
+    border: 1px solid #d0d0d0;
+    margin-right: 5px;
+    display: inline-block;
+  }
+}
+.date-format {
+  text-align: center;
+  h4 {
+    border-radius: 6px;
+    padding: 10px;
+    margin: 0;
+    font-size: 15px;
+    display: inline-block;
+    background-color: $brand-dark-pink;
+  }
+}
+.itinerary-map-view {
+  #map {
+    min-height: 100vh;
+  }
+}
+.itinerary-descp-card {
+  padding: 10px 10px 0;
+}
+.itinerary-start-sec {
+  .itinerary-name {
+    margin: 2.6em 0 1.5em;
+    position: relative;
+    &:after, &:before {
+      content: '';
+      width: 2px;
+      border: 2px dashed $brand-dark-pink;
+      position: absolute;
+      left: 50%;
+      @include transform(translateX(-50%));
+      display: block;
+    }
+    &:before {
+      height: 39px;
+      top: -42px;
+    }
+    &:after {
+      height: 20px;
+      bottom: -22px;
+    }
+  }
+  .itinerary-country-visited {
+    margin: 0 0 10px;
+  }
+}
+// new itinerary ui css end
+
 .view-quick-itinerary {
   border: 1px solid $brand-dark-blue;
   border-radius: 6px;
