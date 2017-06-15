@@ -10747,7 +10747,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       };
     }, 2000);
 
-    //image crop 
+    //image crop
     var checkForImageChange = function () {
       console.log(document.getElementById('fileInput1'));
       $timeout(function () {
@@ -12844,7 +12844,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.agthomeoptions.active = "agthome-travelactivity";
           $scope.agenthomeItinerary = false;
           $scope.agentScrollDown();
-          $scope.getAgentItinerary($scope.activeSlug, $scope.pagenumber);
+          $scope.getTravelActivity($scope.activeSlug, $scope.pagenumber);
           break;
         case 5:
           url = "lead-monitor";
@@ -13149,7 +13149,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       agentImg: "img/banner-itinerary/luxury3.jpg"
     }];
-   
+
     // agent add photo edit end
     // gallery card end
 
