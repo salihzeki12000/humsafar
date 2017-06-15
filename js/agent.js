@@ -172,6 +172,33 @@ var agent = angular.module('agent', [])
         }).success(function (data) {
           callback(data)
         });
+      },
+      savePhotoAlbum: function(formData, callback){
+        TravelibroService.http({
+          url: adminURL + "/album/saveWeb",
+          method: "POST",
+          data: formData
+        }).success(function(data){
+          callback(data)
+        });
+      },
+      getAgentItinerary: function(formData,callback){
+        TravelibroService.http({
+          url: adminURL + "/itinerary/getAgentItineraryWeb",
+          method: "POST",
+          data: formData
+        }).success(function(data){
+          callback(data)
+        });
+      },
+      getTravelActivity: function(formData, callback){
+        TravelibroService.http({
+          url: adminURL + "/activityfeed/getAgentDataWeb",
+          method: "POST",
+          data: formData
+        }).success(function(data){
+          callback(data)
+        });
       }
 
     }

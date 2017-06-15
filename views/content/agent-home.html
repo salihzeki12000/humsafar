@@ -15,8 +15,8 @@
           <h4 class="avenir-heavy text-capitalize" ng-click="redirectToProfile({'uslSlug':'sagar-wohlig','type':'agent'})">{{userData.name}}</h4>
           <p>{{userData.homeCity}}</p>
           <button class="btn btn-white-outline mr5" ui-sref="agent-setting" ng-if="template.isMine">Edit </button>
-          <button class="btn btn-white-outline mr5" ng-if="!template.isMine">Following</button>
-          <span><span class="avenir-heavy"> {{userData.followers_count}}999 </span> Followers </span>
+          <button class="btn btn-white-outline mr5" ng-click="followFollowing(userData)" ng-if="!template.isMine">{{userData.following | followFollowingStatus}}</button>
+          <span><span class="avenir-heavy"> {{userData.followers_count}} </span> Followers </span>
         </div>
       </div>
       <div class="agent-coverpic" ng-if="template.isMine">
@@ -144,10 +144,10 @@
         </div>
         <div class="user-contactdetail" >
           <h4 class="color-cyan avenir-heavy text-capitalize"> {{userData.name}}</h4>
-          <p class="text-capitalize"> <span ng-if="userData.company.address != ''">{{userData.company.address}}</span> <span ng-if="userData.company.address == ''"> - </span></p>
-          <p><i class="fa fa-phone mr5"></i><a href="tel:{{userData.company.contact}}" ng-if="userData.company.contact != ''">{{userData.company.contact}}</a> <span ng-if="userData.company.mobile != ''">|</span> <a href="tel:{{userData.company.mobile}}" ng-if="userData.company.mobile != ''">{{userData.company.mobile}}</a> <span ng-if="userData.company.contact == '' && userData.company.mobile ==''"> - </span></p>
-          <p><i class="fa fa-envelope mr5"></i> <a ng-repeat="mails in userData.company.email track by $index" href="mailto:{{mails}}" ng-if="userData.company.email != ''" class="agent-contactmail"> {{mails}} <span class="email-separater" ng-if="userData.company.email.length>1">| </span></a>  <span ng-if="userData.company.email == ''"> - </span></p>
-          <p><i class="fa fa-globe mr5"></i> <a href="{{userData.company.website}}" target="_blank" ng-if="userData.company.website != ''"> {{userData.company.website}}</a> <span ng-if="userData.company.website == ''"> - </span></p>
+          <p class="text-capitalize"> <span ng-if="userData.company.address != ''">{{userData.company.address}}</span> <span ng-if="userData.company.address == '' || !userData.company.address"> - </span></p>
+          <p><i class="fa fa-phone mr5"></i><a href="tel:{{userData.company.contact}}" ng-if="userData.company.contact != ''">{{userData.company.contact}}</a> <span ng-if="userData.company.mobile != '' && userData.company.mobile">|</span> <a href="tel:{{userData.company.mobile}}" ng-if="userData.company.mobile != ''">{{userData.company.mobile}}</a> <span ng-if="userData.company.contact == '' && userData.company.mobile =='' || !userData.company.contact && !userData.company.mobile"> - </span></p>
+          <p><i class="fa fa-envelope mr5"></i> <a ng-repeat="mails in userData.company.email track by $index" href="mailto:{{mails}}" ng-if="userData.company.email != ''" class="agent-contactmail"> {{mails}} <span class="email-separater" ng-if="userData.company.email.length>1" hide>| </span></a>  <span ng-if="userData.company.email == ''"> - </span></p>
+          <p><i class="fa fa-globe mr5"></i> <a href="{{userData.company.website}}" target="_blank" ng-if="userData.company.website != '' "> {{userData.company.website}}</a> <span ng-if="userData.company.website == '' || !userData.company.website"> - </span></p>
         </div>
       </div>
       <div class="contacttab-btn" ng-click="showContact();">

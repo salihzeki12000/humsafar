@@ -210,17 +210,21 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="contact-no" class="color-blue">Contact No</label>
-                        <input type="text" id="phone1" class="form-control" placeholder="Contact No" ng-model="agentData.company.contact" ng-intl-tel-input
-                          ng-change="isValidNo(agentData.company.contact,'1')">
-                        <span id="error-msg1" class="hide intel-error">Invalid number</span>
+                        <div class="agentsetting-phone">
+                          <input type="text" id="phone1" class="form-control" placeholder="Contact No" ng-model="agentData.company.contact" ng-intl-tel-input
+                            ng-change="isValidNo(agentData.company.contact,'1')">
+                          <span id="error-msg1" class="hide intel-error">Invalid number</span>
+                        </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="mobile-no" class="color-blue">Mobile No</label>
-                        <input type="text" id="phone2" class="form-control" placeholder="Mobile No" ng-model="agentData.company.mobile" ng-intl-tel-input
-                          ng-change="isValidNo(agentData.company.mobile,'2')">
-                        <span id="error-msg2" class="hide intel-error">Invalid number</span>
+                        <div class="agentsetting-phone">
+                          <input type="text" id="phone2" class="form-control" placeholder="Mobile No" ng-model="agentData.company.mobile" ng-intl-tel-input
+                            ng-change="isValidNo(agentData.company.mobile,'2')">
+                          <span id="error-msg2" class="hide intel-error">Invalid number</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -304,7 +308,7 @@
                     <h4 class="color-blue setting-tab-heading">Services of Specialization</h4>
                     <div class="service-box ">
                       <button ng-repeat="services in agtServices track by $index " class="btn btn-blue-outline btn-more
-                btn-bluehover flex-auto mr10 mb10 {{agtServices.class}}" ng-click="selectServices(services)">{{services.name}}</button>
+                btn-bluehover flex-auto mr10 mb10 {{services.class}}" ng-click="selectServices(services)">{{services.name}}</button>
                     </div>
                   </div>
                   <!-- SERVICES OF SPECIALIZATION END -->

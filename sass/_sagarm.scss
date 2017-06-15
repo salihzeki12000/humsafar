@@ -219,6 +219,7 @@
 
 .alternatemail{
   text-align: left;
+
   label{
     font-weight: 500;
   }
@@ -239,6 +240,7 @@
   // z-index: 6;
   &:hover{
     color: $brand-pink;
+
     .agentemail-infobox{
       display: block;
     }
@@ -272,40 +274,44 @@
 
 .agentcompany-phone{
   margin-bottom: 20px;
-    .intl-tel-input{
-      width: 100%;
-      @extend .avenir-roman;
 
-      ::-webkit-scrollbar {
-        width: 4px;
-      }
+  .intl-tel-input{
+    width: 100%;
+    @extend .avenir-roman;
 
-      ::-webkit-scrollbar-track {
-        background-color: transparent;
-      }
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
 
-      ::-webkit-scrollbar-thumb {
-        background-color: $brand-lighter-grey;
-      }
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
 
-      .country-list{
-        border: none;
-        border-radius: 0 0 4px 4px;
-        background-color: #fff;
-        color: $brand-blue;
-        text-align: left;
+    ::-webkit-scrollbar-thumb {
+      background-color: $brand-lighter-grey;
+    }
 
-        .divider{
-          display: none;
-        }
-      }
-      .country-name{
-        font-size: 12px;
-      }
-      .dial-code{
-        font-size: 12px;
+    .country-list{
+      border: none;
+      border-radius: 4px;
+      background-color: #fff;
+      color: $brand-blue;
+      text-align: left;
+
+      .divider{
+        display: none;
       }
     }
+
+    .country-name{
+      font-size: 12px;
+      vertical-align: middle;
+    }
+
+    .dial-code{
+      font-size: 12px;
+    }
+  }
 
   .intel-error {
     position: absolute;
@@ -552,6 +558,7 @@
   }
 }
 // Agent nav analytics dropdown
+
 .analytics-dropoptions {
   position: absolute;
   top: 30px;
@@ -585,9 +592,9 @@
       padding-bottom: 0;
     }
 
+    &.active,
     &:active,
-    &:hover,
-    &.active {
+    &:hover {
       color: $brand-cyan !important;
     }
   }
@@ -925,7 +932,6 @@
   padding: 50px 0;
   margin-top: -50px;
 }
-
 // TO ALIGN WITH ADD PHOTO BUTTON
 // .agt-home-photovideos .agt-home-photo-card {
 //   margin-top: -50px;
@@ -1035,7 +1041,7 @@
 }
 
 .agt-home-photo-card{
-  min-height: calc(100vh - 60px;)
+  min-height: calc(100vh - 60px);
 }
 
 .agent-photogallery {
@@ -1290,7 +1296,7 @@ q {
 .agentservices-list{
   display: inline-block;
   padding: 5px 10px;
-  margin: 5px ;
+  margin: 5px;
   background-color: transparent;
   color: $brand-blue;
   border: 1px solid $brand-blue;
@@ -1375,6 +1381,10 @@ q {
   }
 }
 
+.agent-itinerary-filter{
+  margin-top: -50px;
+}
+
 .add-agtitinerary .itinerary-info {
   line-height: 1;
   height: auto;
@@ -1387,6 +1397,7 @@ q {
   i {
     z-index: 6;
   }
+
   &:hover{
     .itinerary-infobox{
       display: block;
@@ -1584,9 +1595,11 @@ q {
 .tour-uploads{
   margin: 10px 0;
   cursor: pointer;
+
   .btn{
     width: 100%;
   }
+
   .tour-uploadinput{
     position: absolute;
     top: 0;
@@ -1654,12 +1667,12 @@ q {
   // ::-webkit-scrollbar-thumb {
   //   background-color: $brand-lighter-grey;
   // }
-
   &:focus{
     border-color: #fff !important;
   }
 }
 // ------ yash scss ----------------
+
 .tour-btns{
   position: absolute;
   left: 0;
@@ -1675,7 +1688,10 @@ q {
 
 .btn-link{
   color: #fff;
-  &:hover, &:active, &:focus{
+
+  &:active,
+  &:focus,
+  &:hover{
     color: #fff;
     text-decoration: none;
   }
@@ -1750,6 +1766,7 @@ q {
     border-radius: 4px;
     background-color: #fff;
     @extend .pointer;
+
     .arrow-big {
       position: absolute;
       top: 8px;
@@ -1780,7 +1797,7 @@ q {
     width: 100%;
     padding: 5px;
     border: 1px solid #ccc;
-    border-radius:  0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
     background-color: #fff;
     z-index: 3;
 
@@ -2077,13 +2094,16 @@ q {
 }
 
 .agentsetting-select{
-  .ui-select-bootstrap .ui-select-choices-row>span{
+  .ui-select-bootstrap .ui-select-choices-row > span {
     color: $brand-blue;
-    &:hover, &:focus{
+
+    &:focus,
+    &:hover{
       background-color: $brand-lighter-grey;
     }
   }
-  .ui-select-bootstrap .ui-select-choices-row.active>span{
+
+  .ui-select-bootstrap .ui-select-choices-row.active > span {
     background-color: $brand-lighter-grey;
     color: $brand-blue;
   }
@@ -2103,49 +2123,49 @@ q {
 }
 
 .setting-alternatemail{
-  .ui-select-multiple > div:first-child{
+  .ui-select-multiple > div:first-child {
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
   }
 
-  .ui-select-multiple.ui-select-bootstrap{
+  .ui-select-multiple.ui-select-bootstrap {
     padding: 6px 12px;
     background-color: transparent;
 
-    ::-webkit-scrollbar{
+    ::-webkit-scrollbar {
       height: 4px;
     }
 
-    ::-webkit-scrollbar-track{
+    ::-webkit-scrollbar-track {
       background-color: transparent;
     }
 
-    ::-webkit-scrollbar-thumb{
+    ::-webkit-scrollbar-thumb {
       background-color: $brand-light-grey;
     }
 
-    .ui-select-search{
+    .ui-select-search {
       width: auto !important;
       padding: 6px 12px;
       background-color: transparent;
     }
 
-    .ui-select-match-item{
+    .ui-select-match-item {
       border-color: $brand-lighter-grey;
       background-color: transparent;
       color: $brand-blue;
     }
 
-    .close{
+    .close {
       padding-top: 1px;
       font-size: 15px;
       line-height: 1;
       opacity: 1;
     }
 
-    .ui-select-dropdown{
+    .ui-select-dropdown {
       opacity: 0;
       display: none;
     }
@@ -2219,6 +2239,48 @@ q {
 
 .bord-bot {
   border-bottom: 1px solid $brand-lighter-grey;
+}
+
+.agentsetting-phone {
+  .intl-tel-input {
+    width: 100%;
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: $brand-lighter-grey;
+    }
+
+    .country-list {
+      border: none;
+      border-radius: 4px;
+      background-color: #fff;
+      color: $brand-blue;
+      text-align: left;
+
+      .country {
+        padding: 5px 10px;
+      }
+
+      .divider {
+        display: none;
+      }
+    }
+
+    .country-name {
+      font-size: 12px;
+      vertical-align: middle;
+    }
+
+    .dial-code {
+      font-size: 12px;
+    }
+  }
 }
 
 .purchase-table {
@@ -2363,14 +2425,15 @@ q {
 
 .lead-title{
   li{
-    padding: 0px 10px;
-    margin: 0px 20px;
+    padding: 0 10px;
+    margin: 0 20px;
+
     &:first-child{
       margin-left: 0;
     }
 
     span{
-      padding: 0px 5px;
+      padding: 0 5px;
       display: inline-block;
     }
   }
@@ -2540,7 +2603,7 @@ q {
 
 .actionlead-tab {
   .panel {
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255,255,255,0.95);
     color: $brand-blue;
     border-radius: 0;
   }
@@ -2920,106 +2983,106 @@ q {
   }
 }
 
-  .filter-headagent {
-    margin-bottom: 20px;
-    width: 270px;
-    position: relative;
+.filter-headagent {
+  margin-bottom: 20px;
+  width: 270px;
+  position: relative;
+  color: #fff;
+  background-color: $brand-blue;
+  border-radius: 6px;
+  float: left;
+
+  .button-holder {
+    float: right;
+    padding: 10px 0;
+  }
+
+  .clear-link {
+    padding: 0 10px;
+    text-decoration: underline;
     color: #fff;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .photo-filter {
+    padding: 10px;
     background-color: $brand-blue;
-    border-radius: 6px;
-    float: left;
+    color: #fff;
+    border-radius: 4px;
+    @extend .pointer;
 
-    .button-holder {
-      float: right;
-      padding: 10px 0;
+    .arrow-big {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 21px;
+      font-weight: 700;
     }
+  }
 
-    .clear-link {
-      padding: 0 10px;
-      text-decoration: underline;
-      color: #fff;
+  .down {
+    display: none;
+  }
 
-      &:hover {
-        color: #fff;
-      }
-    }
+  .collapsed {
+    color: $brand-blue;
+    background-color: #fff;
 
-    .photo-filter {
-      padding: 10px;
-      background-color: $brand-blue;
-      color: #fff;
-      border-radius: 4px;
-      @extend .pointer;
-
-      .arrow-big {
-        position: absolute;
-        top: 8px;
-        right: 10px;
-        font-size: 21px;
-        font-weight: 700;
-      }
-    }
-
-    .down {
+    .up {
       display: none;
     }
 
-    .collapsed {
-      color: $brand-blue;
-      background-color: #fff;
+    .down {
+      display: inline-block;
+    }
+  }
 
-      .up {
-        display: none;
-      }
+  .filter-data {
+    width: 100%;
+    position: absolute;
+    top: 34px;
+    z-index: 3;
+    background-color: $brand-blue;
+    padding: 5px;
+    border: 1px solid #ccc;
 
-      .down {
-        display: inline-block;
-      }
+    .options {
+      overflow-y: scroll;
+      height: 180px;
     }
 
-    .filter-data {
-      width: 100%;
-      position: absolute;
-      top: 34px;
-      z-index: 3;
-      background-color: $brand-blue;
+    .options::-webkit-scrollbar {
+      display: none;
+    }
+
+    .opt {
       padding: 5px;
-      border: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
 
-      .options {
-        overflow-y: scroll;
-        height: 180px;
+      [type="checkbox"]:checked+label:after,
+      [type="checkbox"]:not(:checked)+label:after {
+        right: 0;
+        left: auto;
       }
 
-      .options::-webkit-scrollbar {
-        display: none;
+      [type="checkbox"]:checked+label:before,
+      [type="checkbox"]:not(:checked)+label:before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: auto;
       }
 
-      .opt {
-        padding: 5px;
-        border-bottom: 1px solid #ccc;
-
-        [type="checkbox"]:checked+label:after,
-        [type="checkbox"]:not(:checked)+label:after {
-          right: 0;
-          left: auto;
-        }
-
-        [type="checkbox"]:checked+label:before,
-        [type="checkbox"]:not(:checked)+label:before {
-          position: absolute;
-          top: 0;
-          right: 0;
-          left: auto;
-        }
-
-        [type="checkbox"]:checked+label:after {
-          color: $brand-cyan;
-          @include transition(all 300ms linear);
-        }
+      [type="checkbox"]:checked+label:after {
+        color: $brand-cyan;
+        @include transition(all 300ms linear);
       }
     }
   }
+}
 // USER TRAVEL ACTIVITY CARD
 .emptyuser-travel{
   margin-top: -50px;
@@ -3284,13 +3347,13 @@ q {
     font-size: 16px;
   }
 }
-
 // VIEWS DOWNLOADS
 .viewdownload-card{
   .theme{
-    padding: 0px 10px;
+    padding: 0 10px;
   }
 }
+
 .viewdownload-imgfoot{
   position: absolute;
   bottom: 0;
@@ -3304,12 +3367,12 @@ q {
 //AGENT HOME ANALYTICS END
 // tour package dropdown
 
-  .a{
-    .form-control[disabled]{
-      background-color: transparent;
-      opacity: 0.3;
-    }
+.a{
+  .form-control[disabled]{
+    background-color: transparent;
+    opacity: 0.3;
   }
+}
 
 .tour-type {
   position: relative;
@@ -3370,7 +3433,8 @@ q {
   @include transition(all ease 300ms);
 
   &.active,
-  &:active, &:hover {
+  &:active,
+  &:hover {
     background-image: url('../img/icons/box7.png');
     @include transition(all ease 300ms);
   }
@@ -3513,6 +3577,7 @@ q {
     padding: 20px 50px;
   }
 }
+
 .agent-contactmail{
   &:last-child{
     .email-separater{
@@ -3624,6 +3689,19 @@ q {
 // AGENT ON LOAD MODAL END
 // AGENT HOME PHOTO UPLOAD SLIDER
 
+.agent-photoupload{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+}
+
+.photovideo-play{
+  color: #fff;
+  font-size: 30px;
+}
+
 .agthome-photouploadbox {
   background-color: $brand-blue;
 
@@ -3685,12 +3763,13 @@ q {
   .slider-agent-trash {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 4px;
     font-size: 16px;
     color: #fff;
     background: transparent;
     cursor: pointer;
     z-index: 5;
+    @extend .text-shadow;
   }
 
   .text-typed-count {
@@ -3756,6 +3835,7 @@ q {
 }
 // AGENT HOME PHOTO UPLOAD SLIDER END
 // AGENT TOUR UI SELECT
+
 .tour-price {
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {
@@ -3827,15 +3907,17 @@ q {
     &:last-child {
       border: none;
     }
-    &.active, &:focus{
+
+    &.active,
+    &:focus{
       background-color: $brand-light-grey;
     }
 
     span {
+      &.active,
       &:active,
-      &:hover,
       &:focus,
-      &.active{
+      &:hover{
         background-color: transparent;
       }
     }
@@ -3850,16 +3932,19 @@ q {
       }
     }
   }
-  .ui-select-bootstrap .ui-select-choices-row>span:hover, .ui-select-bootstrap .ui-select-choices-row>span:focus{
+
+  .ui-select-bootstrap .ui-select-choices-row > span:focus,
+  .ui-select-bootstrap .ui-select-choices-row > span:hover {
     background-color: $brand-light-grey;
   }
   // MULTY SELECT
-  .ui-select-multiple{
+  .ui-select-multiple {
     ::-webkit-scrollbar {
-      width: 0px;
+      width: 0;
       height: 4px;
     }
   }
+
   .ui-select-multiple > div:first-child {
     width: 100%;
     overflow-x: auto;
@@ -5529,8 +5614,6 @@ q {
   right: 110px;
   bottom: -10px;
 }
-
-
 // NEW FOLLOWER CARD
 .followercard{
   margin-bottom: 70px;
@@ -5556,10 +5639,11 @@ q {
 }
 .followercard-list{
   margin: 10px 0;
+
   li{
     // padding: 0;
     // padding-left: 5px;
-    padding: 0px 10px 0 5px;
+    padding: 0 10px 0 5px;
   }
 }
 .followercard-counts{
@@ -5573,7 +5657,6 @@ q {
   font-size: 12px;
 }
 // NEW FOLLOWER CARD END
-
 // ADD COVER PIC
 .agent-coverpic{
   position: absolute;

@@ -65,12 +65,12 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4" ng-repeat="list in profileObj track by $index">
-            <div class="followercard"style="background-image:url('{{list.profilePicture|uploadpath}}');">
+            <div class="followercard" style="background-image:url('{{list.profilePicture|uploadpath}}');">
               <div class="followercard-content relate" >
                 <div class="followercard-details">
                   <h4 class="color-white avenir-heavy text-capitalize">{{list.name}}</h4>
                   <p class="color-white text-capitalize" ng-if="list.homeCity">Lives In: {{list.homeCity}}</p>
-                  <button type="button" name="button" class="btn btn-white-outline"> Follow</button>
+                  <button type="button" name="button" class="btn btn-white-outline"ng-click="followFollowing(list)">{{list.following | followFollowingStatus}}</button>
                   <div class="followercard-list">
                     <ul class="list-inline list-unstyle">
                       <li>

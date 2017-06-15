@@ -43,10 +43,10 @@
                 <!--ng-click="leadRead(agtlead,$index,status.open)"-->
                 <div class="lead-tab-title color-white avenir-medium clearfix" ng-click="leadRead(agtlead,$index,agtlead.open)">
                   <div class="leadtab-profileholder pull-left">
-                    <img ng-src="{{agtlead.byUser.profilePicture | uploadpath}}" alt="{{agtlead.byUser.name}}" class="img-responsive">
+                    <img ng-src="{{agtlead.byUser.profilePicture | uploadpath}}" alt="{{agtlead.name}}" class="img-responsive">
                   </div>
                   <div class="leadtab-title">
-                    <p class="color-pink avenir-heavy text-capitalize">{{agtlead.byUser.name}}</p>
+                    <p class="color-pink avenir-heavy text-capitalize">{{agtlead.name}}</p>
                   </div>
                   <div class="leadtab-msgdiv color-white" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
                     <p class="leadtab-msg"><span class="ledadmsg-country text-capitalize">{{agtlead.travellingTo}} </span><span class="ledadmsg-comment">- {{agtlead.instructions}} </span></p>
@@ -114,13 +114,13 @@
               <uib-accordion-heading>
                 <div class="lead-tab-title color-blue avenir-medium clearfix">
                   <div class="leadtab-profileholder  pull-left">
-                    <img ng-src="{{agtlead.byUser.profilePicture | uploadpath}}" alt="{{agtlead.byUser.name}}" class="img-responsive">
+                    <img ng-src="{{agtlead.byUser.profilePicture | uploadpath}}" alt="{{agtlead.name}}" class="img-responsive">
                   </div>
                   <div class="leadtab-title">
-                    <p class="color-pink avenir-heavy text-capitalize">{{agtlead.byUser.name}}</p>
+                    <p class="color-pink avenir-heavy text-capitalize">{{agtlead.name}}</p>
                   </div>
                   <div class="leadtab-msgdiv color-blue" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
-                    <p class="leadtab-msg"><span class="ledadmsg-country text-capitalize">{{agtlead.travellingTo}} </span><span class="ledadmsg-comment">- {{agtlead.instructions}}</span></p>
+                    <p class="leadtab-msg"><span class="ledadmsg-country text-capitalize">{{agtlead.travellingTo}} </span><span class="ledadmsg-comment">- {{agtlead.instructions}}</span></p><span class="color-pink">{{status.open}}</span>
                   </div>
                   <i class="pull-right color-blue mt10 fa " ng-class="{'fa fa-chevron-up': status.open, 'fa fa-chevron-down': !status.open}"></i>
                   <div class="leadtab-title leadtab-date pull-right  color-blue" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">

@@ -11,7 +11,7 @@
               <ul>
                 <li class="clearfix relate"><a ui-sref="detailitinerary({flag:'new',urlSlug:''})">Detailed Itinerary</a> <a class="itinerary-info"><span class="pull-right" ng-click="showdetailInfo()"><i class="fa fa-info-circle"></i></span>
               <div class="itinerary-infobox">Pen down day-to-day itinerary in every way-country to visit, cities to explore, places to stay at, things to do, landmarks to discover, and more.</div></a></li>
-                <li class="clearfix relate"><a ui-sref="quickitinerary({flag:'new',urlSlug:''})">Quick Itinerarya </a><a class="itinerary-info"><span class="pull-right" ng-click="showquickInfo()"><i class="fa fa-info-circle"></i></span>
+                <li class="clearfix relate"><a ui-sref="quickitinerary({flag:'new',urlSlug:''})">Quick Itinerary </a><a class="itinerary-info"><span class="pull-right" ng-click="showquickInfo()"><i class="fa fa-info-circle"></i></span>
               <div class="itinerary-infobox"  >Short on time... simply paste your ready made itineraries in our section in as many words as you desire and you are good to go.</div></a></li>
               </ul>
             </div>
@@ -23,9 +23,9 @@
   <!-- ADD BUTTON END -->
 
   <!-- FILTER START -->
-  <div class="agent-itinerary-filter" hidden>
+  <div class="agent-itinerary-filter" ng-if="agentItinerary.length!=0 && !template.isMine">
     <div class="relate " ng-class="{'openfilter': isopenfilter}">
-      <div class="pt20 pb10 head-title-all bg-white pl35">
+      <div class="pt20 pb10 head-title-all pl35">
         <div class="row m-clear">
           <div class="col-md-3">
             <div class="pad-btn">
@@ -125,7 +125,7 @@
   <!-- FILTER START  END-->
 
   <!-- EMPTY AGENT INTRO -->
-  <div class="empty-intro " >
+  <div class="empty-intro " ng-if="agentItinerary.length==0 && template.isLoggedIn && template.isMine">
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-sm-12 col-xs-12">
@@ -150,7 +150,7 @@
   <!-- EMPTY AGENT INTRO END-->
 
   <!-- EMPTY USER PAGE -->
-  <div class="empty-intro avenir-roman" >
+  <div class="empty-intro avenir-roman" ng-if="!template.isMine && agentItinerary.length==0">
     <div class="container">
       <div class="row">
         <div class="col-md-offset-2 col-md-8">
@@ -165,15 +165,16 @@
   <!-- EMPTY USER PAGE END -->
 
   <!-- Itinerary cards -->
-  <div class="agent-cardsection" >
+  <div class="agent-cardsection" ng-if="agentItinerary.length!=0">
     <div class="container">
       <div class="row">
         <!-- NEW CARD -->
-        <div class="travelLife col-md-4 col-sm-6" ng-repeat="post in usrItineraryCard track by $index">
-          <div class="travel-life-part  blog-post {{post.type}} avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
+        <div class="travelLife col-md-4 col-sm-6" ng-repeat="post in agentItinerary track by $index">
+          <div class="travel-life-part  blog-post {{post.type}} avenir-roman overflow" >
+            <!-- ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'" -->
             <div class="travel-journey-heading">
               <div class="inline-block editor-subdetail v-mid">
-                <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.startTime | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.startTime | date :'hh:mm a'}}</span></p>
+                <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.createdAt | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.createdAt | date :'hh:mm a'}}</span></p>
               </div>
             </div>
             <div class="onway-journey relate pointer" ng-click="routeItinerary(post);">

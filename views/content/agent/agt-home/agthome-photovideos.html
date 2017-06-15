@@ -34,35 +34,38 @@
                 <form>
                   <div class="form-group">
                     <div class="a">
-                      <input type="text" class="form-control color-white" placeholder="Name Album">
+                      <input type="text" class="form-control color-white" placeholder="Name Album" ng-model="album.name" required>
                     </div>
                   </div>￼
-                  <div class="mb10  text-center">
+                  <div class="mb10  text-center relate" ng-hide="photoSec">
                     <button class="btn btn-white-outline" ng-click="showPhotoupload=!showPhotoupload">Upload Photos/Videos</button>
+                    <upload-image multiple="true" ng-model="agentPhotos" ng-callback="addAgentPhotos(data);" no-view class="pointer agent-photoupload"></upload-image>
                   </div>
                 </form>
               </div>
               <!-- ng-show="showPhotoupload" -->
-              <div class="agthome-photouploadbox" ng-show="showPhotoupload">
+              <div class="agthome-photouploadbox" ng-show="photoSec" ng-if="flexShow">
                 <div class="agthome-photo-slider">
-                  <flex-slider class="carousel" flex-slide="agent in agentPhotos" slideshow="false" control-nav="false">
+                  <flex-slider class="carousel" flex-slide="agent in agentPhotosArray" slideshow="false" control-nav="false">
                     <li>
                       <div class="slideragent-row row-flex" ng-repeat="slide in agent track by $index">
                         <div class="slideragent-column col-flex" ng-repeat="column in slide track by $index">
                           <div class="agent-pic-holder">
-                            <span class="slider-agent-trash"><i class="fa fa-trash-o"></i></span>
-                            <img ng-src="{{column.agentImg}}" alt="" class="img-responsive get-center">
-                            <div class="agent-caption" ng-click="putCaptionAgent(column.agentImg);" ng-hide="column.agentImg==index">
-                              <p ng-if="!column.editAgent || column.editAgent==''">Add Caption</p>
-                              <p class="text-ellipsis" ng-if="column.editAgent && !column.editAgent==''">{{column.editAgent}}</p>
+                            <span class="slider-agent-trash" ng-click="removePhoto(column)"><i class="fa fa-trash-o"></i></span>
+                            <span class="photovideo-play get-center" ng-if="column.type=='video'"><i class="fa fa-play-circle"></i></span>
+                            <img ng-if="column.type=='video'" ng-src="{{column.thumbnail|uploadpath:150:150:'cover'}}" alt="" class="img-responsive">
+                            <img ng-if="column.type=='photo'" ng-src="{{column.name|uploadpath:150:150:'cover'}}" alt="" class="img-responsive">
+                            <div class="agent-caption" ng-click="putCaptionAgent(column.name);" ng-hide="column.name==index">
+                              <p ng-if="!column.caption || column.caption==''">Add Caption</p>
+                              <p class="text-ellipsis" ng-if="column.caption && !column.caption==''">{{column.caption}}</p>
                             </div>
-                            <div class="agent-edit-caption" ng-show="column.agentImg==index" ng-class="{'showcaptionagent' : index==column.agentImg, '' : !index==column.agentImg}">
-                              <textarea name="" id="captionArea" cols="30" rows="7" class="form-control" maxlength="150" ng-model="column.editAgent" placeholder="Add Caption"></textarea>
+                            <div class="agent-edit-caption" ng-show="column.name==index" ng-class="{'showcaptionagent' : index==column.name, '' : !index==column.name}">
+                              <textarea name="" id="captionArea" cols="30" rows="7" class="form-control" maxlength="150" ng-model="column.caption" placeholder="Add Caption"></textarea>
                               <div class="view-caption-onimg">
-                                <span ng-click="putCaptionAgent(column.agentImg);"><i class="fa fa-angle-down"></i></span>
+                                <span ng-click="putCaptionAgent(column.caption);"><i class="fa fa-angle-down color-white"></i></span>
                               </div>
                               <div class="text-typed-count">
-                                <span id="remainCaption"></span>
+                                <span id="remainCaption">{{column.caption.length}}/150</span>
                               </div>
                             </div>
                           </div>
@@ -71,11 +74,12 @@
                     </li>
                   </flex-slider>
                 </div>
-                <div class="slider-addmore  text-center">
+                <div class="slider-addmore  text-center relate">
                   <button class="btn btn-white-outline btn-more">Add More</button>
+                  <upload-image multiple="true" ng-model="agentPhotos" ng-callback="addAgentPhotos(data);" no-view class="pointer agent-photoupload"></upload-image>
                 </div>
               </div>
-              <button class="btn btn-pink tourupload-position">POST</button>
+              <button class="btn btn-pink tourupload-position" ng-click="savePhotoVideo(album);">POST</button>
             </div>
           </div>
         </div>
@@ -85,7 +89,7 @@
   <!-- ADD BUTTON AND FILTER END -->
 
   <!-- EMPTY AGENT INTRO START -->
-  <div class="empty-intro " hidden>
+  <div class="empty-intro " ng-if="template.isLoggedIn && template.isMine">
     <div class="container">
       <div class="agt-home-photovideointro text-center">
         <div class="row">
@@ -101,7 +105,7 @@
   <!-- EMPTY AGENT INTRO END -->
 
   <!-- EMPTY USER INTRO PAGE -->
-  <div class="empty-intro  avenir-roman" hidden>
+  <div class="empty-intro  avenir-roman" ng-if="!template.isMine">
     <div class="container">
       <div class="row">
         <div class="col-md-offset-2 col-md-8">
