@@ -2258,7 +2258,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewCardComment = true;
         // $scope.journey.journeyHighLight = activity._id;
         $scope.getCard = "view-whole-card";
-        LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+        LikesAndComments.getComments(post.type, post._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
@@ -2271,7 +2271,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // $scope.focus('enterComment');
           // $scope.journey.journeyHighLight = activity._id;
           $scope.getCard = "view-whole-card";
-          LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+          LikesAndComments.getComments(post.type, post._id, callback);
         }
       }
       $scope.previousId = post._id;
@@ -3018,7 +3018,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.itineraryFilter = function (filterItinerary, filterType) {
       console.log(filterItinerary);
-      console.log(filterType);      
+      console.log(filterType);
       switch (filterType) {
         case 'itineraryCity':
           var cityIndex = _.findIndex($scope.destinationCityFilter, function (type) {
@@ -10436,7 +10436,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, 300);
 
     // ISMINE FUNCTION
-    if ($.jStorage.get("isLoggedIn")) { 
+    if ($.jStorage.get("isLoggedIn")) {
       $scope.isLoggedIn = true;
       $scope.template.isLoggedIn = true; ///////////////////////////////////////////////////////////////////////
       if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {

@@ -124,7 +124,7 @@ var activity = angular.module('activity', [])
               } else if (activity.user.gender == 'female') {
                 pronoun = "her";
               }
-              activity.thoughts = "Has started a Journey";
+              activity.thoughts = "Started a Journey - " + "<span class='text-capitalize'>" + activity.name + "</span>";
             } else if (activity.type == "quick-itinerary" || activity.type == 'detail-itinerary') {
               pronoun = "his";
               if (activity.creator.gender == 'male') {
@@ -132,7 +132,7 @@ var activity = angular.module('activity', [])
               } else if (activity.creator.gender == 'female') {
                 pronoun = "her";
               }
-              activity.thoughts = "Has uploaded a new Itinerary";
+              activity.thoughts = "<span class='text-capitalize'>" + activity.name + "</span> - Itinerary ( " + activity.duration + " " + $filter('singularPlural')(activity.duration,'Days') + " )";
             } else if (activity.type == "ended-journey") {
               pronoun = "his";
               if (activity.user.gender == 'male') {
@@ -140,7 +140,7 @@ var activity = angular.module('activity', [])
               } else if (activity.user.gender == 'female') {
                 pronoun = "her";
               }
-              activity.thoughts = "Has ended the Journey";
+              activity.thoughts = "<span class='text-capitalize'>" + activity.name + "</span>  - Journey ( " +  activity.duration + " " + $filter('singularPlural')(activity.duration,'Days') + " )";
             }
             if (activity && activity.photos && activity.videos) {
               activity.activityPhotosVideos = _.concat(activity.videos, activity.photos);
