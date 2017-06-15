@@ -246,6 +246,7 @@
   }
   .activity-post .user-detail h4 {
     margin-bottom: 2px;
+    margin-top: 2px;
   }
   .destination-featured {
     padding: 20px 0px;
@@ -936,14 +937,14 @@
   .on-go-journey .container-fluid {
     padding: 0;
   }
-  .started-journey-card .travelling-journey-type li a img{
+  .started-journey-card .travelling-journey-type li a img {
     height: 20px !important;
   }
   .ongo-card-holder {
     width: 100%;
     margin-top: 20px;
     padding: 0px;
-    zoom :1;
+    zoom: 1;
   }
   .journey-start>img {
     width: 45px;
@@ -1890,17 +1891,15 @@
   .libro-filter .itinerary-dropdown {
     z-index: 2;
   }
-
-   .ongo-journey-change {
+  .ongo-journey-change {
     p {
       margin-left: -21px;
-          background-color: #171a2c;
+      background-color: #171a2c;
     }
-  }
-//   .post-travel-icon {
-//     display: none;
-// }
-.user-img-ongo {
+  } //   .post-travel-icon {
+  //     display: none;
+  // }
+  .user-img-ongo {
     border: 1px solid #868686;
   }
 }
@@ -1917,17 +1916,17 @@
   .ongo-journey-card .user-social-item {
     padding: 15px 2px;
   }
-  .notify-popup{ 
-        margin-left: 0;
+  .notify-popup {
+    margin-left: 0;
     .notify-imgholder {
-    height: auto;
-    img {
       height: auto;
-      width: 100%;
-      position: static;
-      @include transform(translate(0));
+      img {
+        height: auto;
+        width: 100%;
+        position: static;
+        @include transform(translate(0));
+      }
     }
-  }
   }
   .card-imgholder .card-img {
     width: 100%;
@@ -2642,10 +2641,9 @@
     h3 {
       font-size: 16px;
     }
-  }
-  .fnt-20 {
-    font-size: 16px;
-  }
+  } // .fnt-20 {
+  //   font-size: 16px;
+  // }
   .m-p0 {
     padding: 0!important;
   }
@@ -2757,23 +2755,44 @@
     margin: 0;
     margin-bottom: 15px;
   }
-  .dest-btv{
+  .dest-btv {
     padding: 10px 0;
     .common-box {
-    margin: 15px 0;
-}
-  } 
+      margin: 15px 0;
+    }
+  }
   .user-social-item .activity-edit-option {
-        width: 110px;
+    width: 110px;
     position: absolute;
     bottom: 35px;
     right: -10px;
-    &:before,&:after{
+    &:before,
+    &:after {
       right: 0;
     }
-}
-  .m-white{
+  }
+  .m-white {
     color: #fff;
+  }
+  .share-comment-main .share-option-main {
+    padding-bottom: 5px;
+  }
+  .user-itinerary-page .accordion-holder,
+  .agent-itinerary-page .accordion-holder {
+    padding: 5px 0;
+  }
+  .share-comment-main .task-holder li:first-child {
+    padding: 0 5px;
+  }
+  .video-ongo-journey .youtube-icon {
+    display: none;
+  }
+  .notify-main .view-comment-scroll {
+    height: auto;
+    overflow-y: initial;
+  }
+  .notify-popup .notify-imgholder video {
+    max-height: intial;
   }
 }
 
