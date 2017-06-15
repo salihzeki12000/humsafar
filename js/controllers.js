@@ -2857,14 +2857,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // destination country city end
 
     $scope.getCountryInfo = function (type, urlSlug) {
-      $scope.destinationCityFilterName = _.map($scope.destinationCityFilter, 'name');
+      $scope.destinationCityFilterId = _.map($scope.destinationCityFilter, '_id');
       $scope.destinationItineraryTypeName = _.map($scope.destinationItineraryType, 'name');
       $scope.destinationItineraryByName = _.map($scope.destinationItineraryBy, 'name');
       var sendCityData = {
         pagenumber: $scope.pagenumber,
         type: _.cloneDeep(type),
         urlSlug: $scope.urlDestinationCountry,
-        city: $scope.destinationCityFilterName,
+        city: $scope.destinationCityFilterId,
         itineraryType: $scope.destinationItineraryTypeName,
         itineraryBy: $scope.destinationItineraryByName
       };
