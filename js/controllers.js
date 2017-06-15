@@ -12748,7 +12748,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agthome.innerView = allagthome[0];
         $scope.agthomeoptions.active = "agthome-itinerary";
         $scope.agentScrollClass = "";
-        $scope.getAgentItinerary($scope.activeSlug, $scope.pagenumber);
+        $scope.getAgentItinerary($scope.activeUrlSlug, $scope.pagenumber);
         break;
       case "tours-and-packages":
         $scope.agthome.innerView = allagthome[1];
@@ -12772,7 +12772,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agthome.innerView = allagthome[4];
         $scope.agthomeoptions.active = "agthome-travelactivity";
         $scope.agentScrollDown();
-        $scope.getTravelActivity($scope.activeSlug, $scope.pagenumber);
+        $scope.getTravelActivity($scope.activeUrlSlug, $scope.pagenumber);
         break;
       case "lead-monitor":
         $scope.agthome.innerView = allagthome[5];
@@ -12816,7 +12816,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           url = "itineraries";
           $scope.agthomeoptions.active = "agthome-itinerary";
           $scope.agenthomeItinerary = true;
-          $scope.getAgentItinerary($scope.activeSlug, $scope.pagenumber);
+          $scope.getAgentItinerary($scope.activeUrlSlug, $scope.pagenumber);
           break;
         case 1:
           url = "tours-and-packages";
@@ -12844,7 +12844,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.agthomeoptions.active = "agthome-travelactivity";
           $scope.agenthomeItinerary = false;
           $scope.agentScrollDown();
-          $scope.getTravelActivity($scope.activeSlug, $scope.pagenumber);
+          $scope.getTravelActivity($scope.activeUrlSlug, $scope.pagenumber);
           break;
         case 5:
           url = "lead-monitor";
