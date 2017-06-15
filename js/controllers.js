@@ -12891,7 +12891,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // tab change end
 
-    $scope.getAgentItinerary($scope.activeSlug, $scope.pagenumber);
+    $scope.getAgentItinerary($scope.activeUrlSlug, $scope.pagenumber);
 
     // GET ANALYTICS
     $scope.getAgentScroll = function (getId) {

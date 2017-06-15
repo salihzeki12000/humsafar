@@ -195,7 +195,7 @@
                         <div class="agentsetting-select">
                           <ui-select ng-model="agentData.homeCity" theme="bootstrap">
                             <ui-select-match placeholder="Head Office Location ">{{agentData.homeCity}}</ui-select-match>
-                            <ui-select-choices repeat="cities.description as cities in cities | filter: $select.search track by $index">
+                            <ui-select-choices repeat="cities.description as cities in cities | filter: $select.search track by $index" refresh="searchByKey($select.search)" refresh-delay="0">
                               <!-- refresh="searchByKey($select.search)" refresh-delay="0" -->
                               <div class="">
                                 <p class="">{{cities.description}}</p>
@@ -232,7 +232,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="reg-email" class="color-blue">Registered Email</label>
-                        <label type="text" class="form-control" id="reg-email" placeholder="Email">{{agentData.email}}</label>
+                        <label type="text" class="form-control setting-registeredmail" id="reg-email" placeholder="Email">{{agentData.email}}</label>
                       </div>
                     </div>
                     <div class="col-md-6">
