@@ -2558,7 +2558,7 @@ header {
 }
 
 .travel-journey-heading {
-  padding: 10px;
+  padding: 5px 8px;
   color: $brand-blue;
 
   p {
@@ -4724,16 +4724,26 @@ header {
 .blog-social-field {
   padding: 0 50px;
 }
-
+.itinerary-creator-detail {
+  width: 100%;
+  padding: 5px;
+  position: absolute;
+  @include background(linear-gradient(rgba(0,0,0,0.7), transparent));
+  .heading-name {
+    display: inline-block;
+    font-size: 14px;
+    color: #fff;
+    vertical-align: middle;
+  }
+}
 .editor-logo {
   // margin-top: -30px;
-  margin-right: 15px;
+  margin-right: 3px;
+  @include square(30px);
   display: inline-block;
-  width: 45px;
-  height: 45px;
   overflow: hidden;
   border: 1px solid #868686;
-  border-radius: 35%;
+  border-radius: 30%;
 }
 
 .editor-subdetail {

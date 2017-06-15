@@ -22,13 +22,14 @@
                 <div class="masonry-brick travelLife col-md-4 col-sm-6 m-plr0" ng-repeat="post in popularIternaryData track by $index" >
                   <div class="travel-life-part bg-white blog-post {{post.type}} avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
                     <div class="travel-journey-heading">
-                      <div class="editor-logo user-logo pointer" ng-if="post.itineraryBy=='Admin'">
+                      <p>{{post.name}} ({{post.duration}} {{post.duration|singularPlural:'Days'}})</p>
+                      <!-- <div class="editor-logo user-logo pointer" ng-if="post.itineraryBy=='Admin'">
                         <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="img-responsive">
                       </div>
                       <div class="editor-logo user-logo pointer" ng-if="post.itineraryBy!='Admin'" ui-sref="mylife({'urlSlug':post.user.urlSlug})">
                         <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="img-responsive">
-                      </div>
-                      <div class="inline-block editor-subdetail">
+                      </div> -->
+                      <!-- <div class="inline-block editor-subdetail">
                         <div class="clearfix">
                           <div class="pull-right pointer" ng-if="post.itineraryBy!='Admin'"  ng-click="followFollowing(post.user)">
                             <span class="follow-following color-blue text-capitalize">{{post.user.following | followFollowingStatus}}</span>
@@ -37,9 +38,19 @@
                           <h4 class="font-bold color-dark-blue m-clear mb5 heading-name text-capitalize pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})" ng-if="post.itineraryBy!='Admin'">{{post.user.name}}</h4>
                         </div>
                         <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.startTime | date : 'dd MMM, yyyy'}}</span>                        | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.startTime | date :'hh:mm a'}}</span></p>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="onway-journey relate pointer" ng-click="routeItinerary(post);">
+                      <div class="itinerary-creator-detail">
+                        <div class="editor-logo user-logo pointer inline-block v-mid" ng-if="post.itineraryBy=='Admin'">
+                          <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="img-responsive">
+                        </div>
+                        <div class="editor-logo user-logo pointer inline-block v-mid" ng-if="post.itineraryBy!='Admin'" ui-sref="mylife({'urlSlug':post.user.urlSlug})">
+                          <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="img-responsive">
+                        </div>
+                        <h4 class="font-bold color-dark-blue m-clear heading-name text-capitalize pointer" ng-if="post.itineraryBy=='Admin'">{{post.user.name}}</h4>
+                        <h4 class="font-bold color-dark-blue m-clear heading-name text-capitalize pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})" ng-if="post.itineraryBy!='Admin'">{{post.user.name}}</h4>
+                      </div>
                       <div class="onway-imgholder">
                         <img ng-src="{{post.coverPhoto|uploadpath:370:340:'cover'}}" alt="" class="full-width m-center">
                       </div>
@@ -49,7 +60,7 @@
                           <span class="" ng-if="visit.country.length > 3">+4</span>
                         </div>
                       </div> -->
-                      <div class="journey-tag-holder">
+                      <div class="journey-tag-holder" hidden>
                         <div class="days-spent pull-right" ng-if="post.duration>0">
                           <p><span class="block">{{post.duration}}</span>Days</p>
                         </div>
@@ -113,7 +124,7 @@
                         <div class="pull-right">
                           <div class="relate" ng-init="post.option={}">
                             <span class="pointer" ng-click="editOption(post.option)">
-                              <img src="img/options.png" alt="" height="18" class="pointer">
+                              <img src="img/options.png" alt="" class="pointer">
                             </span>
                             <div class="activity-edit-option" ng-show="post.option.backgroundClick">
                               <ul>
