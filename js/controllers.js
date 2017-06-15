@@ -222,6 +222,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $.jStorage.set("accessToken", data.accessToken);
       if (type == "TravelAgent") {
         NavigationService.getAgentsProfile("", function (data1) {
+            console.log("User Found");
             if (data1.data._id) {
               $.jStorage.set("isLoggedIn", true);
               $.jStorage.set("profile", data1.data);
@@ -264,6 +265,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $.jStorage.set("isLoggedIn", true);
               $.jStorage.set("profile", data1.data);
               var alreadyLoggedIn = data1.data.alreadyLoggedIn;
+              console.log(alreadyLoggedIn, "alereadyLoggedin");
               if (alreadyLoggedIn === true) {
                 var slug = $.jStorage.get("activeUrlSlug");
                 console.log(slug);
@@ -273,7 +275,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
                   window.location = $.jStorage.get("url") + "?accessToken=" + $.jStorage.get("accessToken");
                 } else {
-                  if ($.jStorage.get("profile").type == "user") {
+                  if ($.jStorage.get("profile").type == "User") {
                     $state.go("mylife", {
                       name: 'journey',
                       urlSlug: slug
@@ -297,8 +299,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             console.log(err);
           });
       };
-
-
     }
 
     var ref = "";
@@ -311,7 +311,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         if (data.accessToken) {
           $interval.cancel(stopinterval);
           ref.close();
-          setLoginVariables(data)
+          setLoginVariables(data, "User");
         } else {
           console.log(data);
         }
@@ -10473,7 +10473,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.template.isMine = false;
           }
           //restrict user who has not followed starings steps
-          if ($scope.userData.type == "user") {
+          if ($scope.userData.type == "User") {
             if ($.jStorage.get('qualifiedForLoginFlow')) {
               $state.go('login-flow');
             } else if ($.jStorage.get('qualifiedForHoliday')) {
@@ -10482,7 +10482,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $state.go('mainpage');
             }
           } else {
-            if ($scope.userData && $scope.userData.isLoggedIn == false) {
+            if ($scope.userData && $scope.userData.alreadyLoggedIn == false) {
               $state.go('agent-login');
             }
           }
@@ -10491,7 +10491,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
         }
       };
-      if ($.jStorage.get("profile").type === "user") {
+      if ($.jStorage.get("profile").type === "User") {
         NavigationService.getProfile("", callback, function (err) {
           console.log(err);
         });
@@ -10686,8 +10686,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.oneAtATime = true;
+    $scope.disableCountries = true;
     $scope.disableSpecialization = true;
-    $scope.disableServices = true;    
+    $scope.disableServices = true;
     $scope.validEmail = "/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/iv";
     $scope.showImage = {
       "val": false
@@ -10713,7 +10714,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.userDetails.company.name = $scope.userData.name;
     }
     $scope.isVerified = $.jStorage.get("isVerified");
-
 
     $timeout(function () {
       var container = document.getElementsByClassName("veri-box")[0];
@@ -10792,17 +10792,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           } else {
             toastr.warning('Error Uploading Image!');
           }
-          Agent.saveAgentData($scope.userDetails, function (data) {
-            console.log(data);
-          });
+          // Agent.saveAgentData($scope.userDetails, function (data) {
+          //   console.log(data);
+          // });
           $scope.agentSec(6);
         });
       } else {
         // alert("nai mila");
         $scope.userDetails = _.omit($scope.userDetails, ['profilePicture']);
-        Agent.saveAgentData($scope.userDetails, function (data) {
-          console.log(data);
-        });
+        // Agent.saveAgentData($scope.userDetails, function (data) {
+        //   console.log(data);
+        // });
       }
       $scope.agentSec(6);
     };
@@ -11012,7 +11012,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       } else {
         obj.class = "active";
       }
-      $scope.disableCountries=_.map(_.flatten(_.map($scope.countriesByContinent,'countries'),['class','active']),['class','active']);
+      $scope.disableCountries = !(_.filter(_.flatten(_.map($scope.countriesByContinent, 'countries'), ['class', 'active']), ['class', 'active']).length >= 1);
       console.log($scope.disableCountries);
     };
 
@@ -11025,7 +11025,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         obj.class = "active";
       }
       $scope.foundCategory = _.filter($scope.categoriesSpecial, ['class', 'active']);
-      $scope.disableServices = !(_.filter($scope.agtServicesSpcl , ['class', 'active']).length >= 1);
+      $scope.disableServices = !(_.filter($scope.agtServicesSpcl, ['class', 'active']).length >= 1);
       console.log($scope.disableServices);
     };
 
@@ -11114,7 +11114,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.userDetails.company.countryOfSpecialization = _.cloneDeep($scope.countriesByContinent);
       _.each($scope.userDetails.company.countryOfSpecialization, function (n, key) {
         n.country = [];
-        n.countries = _.filter(n.countries, ['class', 'active']); 
+        n.countries = _.filter(n.countries, ['class', 'active']);
         n.country = _.map(n.countries, '_id');
         $scope.userDetails.company.countryOfSpecialization[key] = _.omit(n, ['countries']);
       });
@@ -11160,6 +11160,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.chooseCategorySpcl[index].class = "category-active";
           });
 
+          _.each(data.data.company.services, function (n) {
+            var index = _.findIndex($scope.agtServices, ['name', n]);
+            $scope.agtServices[index].class = "active";
+            console.log($scope.agtServices, index);
+          });
+
+
           _.each(data.data.company.countryOfSpecialization, function (n) {
             var index = _.findIndex($scope.countriesByContinent, ['name', n.name]);
             console.log(index, '111');
@@ -11181,8 +11188,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       })
     }
-
     // SETTING DATA GET END
+
     // GET CONTINENT
     NavigationService.getCountriesByContinent(function (data, status) {
       if (data.value) {
@@ -11204,6 +11211,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
+    $scope.selectServices = function (obj) {
+      // $scope.isCategorySelected = true;
+      if (obj.class == "active") {
+        obj.class = "";
+      } else {
+        obj.class = "active";
+      }
+      console.log(obj);
+    };
 
     // GET CITY
     var getAllCities = function (data, status) {
@@ -11281,42 +11297,59 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 
     $scope.saveDetailsAgent = function (type, finalAgentData) {
-      console.log(agentData, 'lalallalalalall');
       var agentData = _.cloneDeep(finalAgentData);
       var agent = {};
-      switch (type) {
-        case 'main':
-          agentData.company.email = _.map(agentData.company.email, 'name');
-          agent = _.pick(agentData, ['company']); //_.pick(agentData,['name','phone','email','company.phone','homeCity','company.address','company.website','company.about']);
-          agent.company = _.omit(agent.company, ['categoryOfSpeacilization', 'countryOfSpecialization', 'services']);
-          console.log(agentData, 'blah');
-          break;
-        case 'profile':
-          agentData.company.categoryOfSpeacilization = _.filter($scope.chooseCategorySpcl, ['class', 'category-active']);
-          console.log(agentData.company.categoryOfSpeacilization, 'buduk');
-          agentData.company.countryOfSpecialization = _.cloneDeep($scope.countriesByContinent);
-          _.each(agentData.company.countryOfSpecialization, function (n, key) {
-            n.country = [];
-            n.countries = _.filter(n.countries, ['class', 'active']);
-            n.country = _.map(n.countries, '_id');
-            agentData.company.countryOfSpecialization[key] = _.omit(n, ['countries']);
-          });
-          _.remove(agentData.company.countryOfSpecialization, function (n) {
-            return n.country.length == 0;
-          });
-          agentData.company.categoryOfSpeacilization = _.map(agentData.company.categoryOfSpeacilization, 'caption');
-          agent = _.pick(agentData, ['company']);
-          agent.company = _.pick(agent.company, ['categoryOfSpeacilization', 'countryOfSpecialization'])
-          console.log(agentData, 'bleh');
-          break;
-        case "privacy":
-          agent.status = agentData.status;
-          console.log(agent, 'status su');
-          break;
-        default:
-      }
+      // switch (type) {
+      //   case 'main':
+      //     agentData.company.email = _.map(agentData.company.email, 'name');
+      //     agent = _.pick(agentData, ['company']); //_.pick(agentData,['name','phone','email','company.phone','homeCity','company.address','company.website','company.about']);
+      //     agent.company = _.omit(agent.company, ['categoryOfSpeacilization', 'countryOfSpecialization', 'services']);
+      //     console.log(agentData, 'blah');
+      //     break;
+      //   case 'profile':
+      //     agentData.company.categoryOfSpeacilization = _.filter($scope.chooseCategorySpcl, ['class', 'category-active']);
+      //     console.log(agentData.company.categoryOfSpeacilization, 'buduk');
+      //     agentData.company.countryOfSpecialization = _.cloneDeep($scope.countriesByContinent);
+      //     _.each(agentData.company.countryOfSpecialization, function (n, key) {
+      //       n.country = [];
+      //       n.countries = _.filter(n.countries, ['class', 'active']);
+      //       n.country = _.map(n.countries, '_id');
+      //       agentData.company.countryOfSpecialization[key] = _.omit(n, ['countries']);
+      //     });
+      //     _.remove(agentData.company.countryOfSpecialization, function (n) {
+      //       return n.country.length == 0;
+      //     });
+      //     agentData.company.categoryOfSpeacilization = _.map(agentData.company.categoryOfSpeacilization, 'caption');
+      //     agent = _.pick(agentData, ['company']);
+      //     agent.company = _.pick(agent.company, ['categoryOfSpeacilization', 'countryOfSpecialization'])
+      //     console.log(agentData, 'bleh');
+      //     break;
+      //   case "privacy":
+      //     agent.status = agentData.status;
+      //     console.log(agent, 'status su');
+      //     break;
+      //   default:
+      // }
 
-      Agent.saveSettings(agent, function (data) {
+
+      agentData.company.email = _.map(agentData.company.email, 'name');
+      agentData.company.services = _.map(_.filter($scope.agtServices, ['class', 'active']), 'name');
+      agentData.company.categoryOfSpeacilization = _.map(_.filter($scope.chooseCategorySpcl, ['class', 'category-active']), 'caption');
+      console.log(agentData);
+      agentData.company.countryOfSpecialization = _.cloneDeep($scope.countriesByContinent);
+      _.each(agentData.company.countryOfSpecialization, function (n, key) {
+        n.country = [];
+        n.countries = _.filter(n.countries, ['class', 'active']);
+        n.country = _.map(n.countries, '_id');
+        agentData.company.countryOfSpecialization[key] = _.omit(n, ['countries']);
+      });
+      _.remove(agentData.company.countryOfSpecialization, function (n) {
+        return n.country.length == 0;
+      });
+      console.log(agentData.company.countryOfSpecialization);
+
+
+      Agent.saveSettings(agentData, function (data) {
         console.log(data, 'save setting');
         if (data.value == true) {
           console.log('setting save success');
@@ -11467,7 +11500,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         obj.class = "active";
       }
       $scope.foundCategory = _.filter($scope.categoriesSpecial, ['class', 'active']);
-
     };
 
     {
@@ -12115,6 +12147,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.enquire = {};
     $scope.status = {};
     $scope.tour.typeOfHoliday = [];
+    $scope.agentItinerary = {};
+    $scope.album = {};
 
     //scroll agent navbar  change
     $(window).scroll(function () {
@@ -12145,7 +12179,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //scroll analytics filter change end
 
     // Tab SCROLLDOWN
-    $scope.agentScrollDown = function(){
+    $scope.agentScrollDown = function () {
       $('html,body').animate({
           scrollTop: 370
         },
@@ -12210,14 +12244,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // SAGAR INTEGRATION
 
     // CHANGE COVER PHOTO
-   $scope.agentCoverPic = function (data) {
+    $scope.agentCoverPic = function (data) {
       console.log(data, 'coverPhoto');
-      var obj ={
-        'coverPhoto':data
+      var obj = {
+        'coverPhoto': data
       }
       console.log(obj, 'coverpic');
-      Agent.updateCoverPhoto(obj, function(data){
-        console.log(data,'coverpic saved');
+      Agent.updateCoverPhoto(obj, function (data) {
+        console.log(data, 'coverpic saved');
       })
       // $scope.showCoverBtn = true;
     };
@@ -12365,6 +12399,127 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     //STATUS SEND END
 
+    // SAVE PHOTO VIDEOS
+    $scope.agentPhotosVideos = [];
+    $scope.agentPhotosArray = [];
+    $scope.agentPhotos = [];
+    $scope.agentVideos = [];
+
+    // SET PHOTO ARRAY
+    $scope.addAgentPhotos = function (detail, length) {
+      console.log(detail, 'photo upload return');
+      if (detail.thumbnail) {
+        $scope.agentVideos.push({
+          name: detail.name,
+          thumbnail: detail.thumbnail,
+          caption: '',
+          type: 'video'
+        });
+      } else {
+        $scope.agentPhotos.push({
+          name: detail,
+          caption: '',
+          type: 'photo'
+        });
+      }
+      console.log($scope.agentVideos, 'new video array');
+      console.log($scope.agentPhotos, 'new photo array');
+      $scope.agentPhotosVideos = _.concat($scope.agentPhotos, $scope.agentVideos);
+      //photo display
+      $scope.flexShow = false;
+      $scope.agentPhotosArray = $scope.agentPhotosVideos;
+      $scope.agentPhotosArray = _.chunk($scope.agentPhotosArray, 4);
+      for (var i = 0; i < $scope.agentPhotosArray.length; i++) {
+        $scope.agentPhotosArray[i] = _.chunk($scope.agentPhotosArray[i], 2);
+      }
+      y = 1;
+      // $('#flexslider').removeData("flexslider");
+      console.log($scope.agentPhotosArray, "agentPhotosArray");
+      if ($scope.agentPhotosArray.length > 0) {
+        $scope.photoSec = true;
+      } else {
+        $scope.photoSec = false;
+      }
+      $timeout(function () {
+        $scope.flexShow = true;
+      }, 200)
+
+      //photo display end
+    }
+    // SET PHOTO ARRAY END
+
+    //ADD PHOTO VIDEO CAPTION
+    $scope.index = -1;
+    $scope.putCaptionAgent = function (index) {
+      if ($scope.index == index) {
+        $scope.index = -1;
+      } else {
+        $scope.index = index;
+      }
+    }
+    //ADD PHOTO VIDEO CAPTION END
+    // REMOVE PHOTO VIDEO
+    $scope.removePhoto = function (data) {
+      if (data.type == 'video') {
+        _.remove($scope.agentVideos, function (videos) {
+          return videos.name === data.name;
+        })
+      } else {
+        _.remove($scope.agentPhotos, function (photos) {
+          return photos.name === data.name;
+        });
+      }
+
+      $scope.agentPhotosVideos = _.concat($scope.agentPhotos, $scope.agentVideos);
+      //photo display
+      $scope.flexShow = false;
+      $scope.agentPhotosArray = $scope.agentPhotosVideos;
+      $scope.agentPhotosArray = _.chunk($scope.agentPhotosArray, 4);
+      for (var i = 0; i < $scope.agentPhotosArray.length; i++) {
+        $scope.agentPhotosArray[i] = _.chunk($scope.agentPhotosArray[i], 2);
+      }
+      y = 1;
+      console.log($scope.agentPhotosArray, "Delete agentPhotosArray");
+      if ($scope.agentPhotosArray.length > 0) {
+        $scope.photoSec = true;
+      } else {
+        $scope.photoSec = false;
+      }
+      $timeout(function () {
+        $scope.flexShow = true;
+      }, 200)
+      if ($scope.agentPhotosArray.length > 0) {
+        $scope.photoSec = true;
+      } else {
+        $scope.photoSec = false;
+      }
+    }
+    // REMOVE PHOTO VIDEO END
+    // SAVE PHOTO VIDEO
+    $scope.savePhotoVideo = function (album) {
+      $scope.album.photos = $scope.agentPhotos;
+      $scope.album.videos = $scope.agentVideos;
+
+      console.log($scope.album, 'album');
+      Agent.savePhotoAlbum(album, function (data) {
+        if (data.value == true) {
+          console.log('album saved');
+          $scope.addItinerary();
+          $scope.photoSec = false;
+          $scope.album = {};
+          $scope.agentPhotosVideos = [];
+          $scope.agentPhotosArray = [];
+          $scope.agentPhotos = [];
+          $scope.agentVideos = [];
+        } else {
+          console.log('album error');
+        }
+      })
+    }
+    // SAVE PHOTO VIDEO END
+    // SAVE PHOTO VIDEOS END
+
+
     // GET LEADS
     $scope.getLeads = function (type, pagenumber) {
       var formAgentData = {
@@ -12490,7 +12645,55 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       }
     }
-    // integration
+
+    $scope.getAgentItinerary = function (activeSlug, pagenumber) {
+      var obj = {};
+      obj.urlSlug = activeSlug;
+      obj.pagenumber = $scope.pagenumber;
+      console.log(obj, 'itineraries call');
+
+      Agent.getAgentItinerary(obj, function (data) {
+        if (data.value == true) {
+          console.log(data, 'itineraries call success');
+          $scope.agentItinerary = data.data;
+        } else {
+          console.log('itineraries call fail');
+        }
+      })
+    }
+
+    $scope.getTravelActivity = function (activeSlug, pagenumber) {
+      var obj = {};
+      obj.urlSlug = activeSlug;
+      obj.pagenumber = $scope.pagenumber;
+      console.log(obj, 'Travelactivity call');
+      Agent.getTravelActivity(obj, function (data) {
+        if (data.value == true) {
+          console.log(data, 'travelactivity call success');
+          $scope.travelActivity = data.data;
+        } else {
+          console.log(data, 'travelactivity call fail');
+        }
+      })
+    }
+
+    $scope.getAgentItinerary($scope.activeUrlSlug, $scope.pagenumber);
+    // integration end
+
+    // <!!! COMMON TASKS !!!>
+    // followFollowing  Function
+    $scope.followFollowing = function (user) {
+      console.log("from popularBloggerData");
+      LikesAndComments.followUnFollow(user, function (data) {
+        if (data.value) {
+          user.following = data.data.responseValue;
+        } else {
+          console.log("error updating data");
+        }
+      });
+    }
+    // followFollowing  Function END
+    // <!!! COMMON TASKS END !!!>
     $scope.getAgentData = function (type, activeSlug, pagenumber) {
       var formAgentData = {
         pagenumber: $scope.pagenumber,
@@ -12545,6 +12748,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agthome.innerView = allagthome[0];
         $scope.agthomeoptions.active = "agthome-itinerary";
         $scope.agentScrollClass = "";
+        $scope.getAgentItinerary($scope.activeSlug, $scope.pagenumber);
         break;
       case "tours-and-packages":
         $scope.agthome.innerView = allagthome[1];
@@ -12568,6 +12772,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agthome.innerView = allagthome[4];
         $scope.agthomeoptions.active = "agthome-travelactivity";
         $scope.agentScrollDown();
+        $scope.getTravelActivity($scope.activeSlug, $scope.pagenumber);
         break;
       case "lead-monitor":
         $scope.agthome.innerView = allagthome[5];
@@ -12611,6 +12816,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           url = "itineraries";
           $scope.agthomeoptions.active = "agthome-itinerary";
           $scope.agenthomeItinerary = true;
+          $scope.getAgentItinerary($scope.activeSlug, $scope.pagenumber);
           break;
         case 1:
           url = "tours-and-packages";
@@ -12638,6 +12844,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.agthomeoptions.active = "agthome-travelactivity";
           $scope.agenthomeItinerary = false;
           $scope.agentScrollDown();
+          $scope.getAgentItinerary($scope.activeSlug, $scope.pagenumber);
           break;
         case 5:
           url = "lead-monitor";
@@ -12683,6 +12890,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     };
     // tab change end
+
+    $scope.getAgentItinerary($scope.activeSlug, $scope.pagenumber);
 
     // GET ANALYTICS
     $scope.getAgentScroll = function (getId) {
@@ -12778,6 +12987,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     // LEAD MONITOR TABS END
+
+    // ROUTE TO ITINERARY
+    $scope.routeItinerary = function (post) {
+      console.log(post, 'user');
+      if (post.type == 'quick-itinerary') {
+        $state.go('userquickitinerary', {
+          'id': post.urlSlug,
+          'urlSlug': post.user.urlSlug
+        });
+      } else {
+        $state.go('userdetailitinerary', {
+          'id': post.urlSlug,
+          'urlSlug': post.user.urlSlug
+        });
+      }
+    }
+    // ROUTE TO ITINERARY END
 
     //user itinerary cards
     $scope.usrItineraryCard = [{
@@ -12910,7 +13136,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     ];
 
     // agent add photo edit
-    $scope.agentPhotos = [{
+    $scope.agentPhoto = [{
       agentImg: "img/banner-itinerary/adventure1.jpg"
     }, {
       agentImg: "img/banner-itinerary/budget3.jpg"
@@ -12923,33 +13149,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
       agentImg: "img/banner-itinerary/luxury3.jpg"
     }];
-    $scope.agentPhotos = _.chunk($scope.agentPhotos, 4);
-    for (i = 0; i < $scope.agentPhotos.length; i++) {
-      $scope.agentPhotos[i] = _.chunk($scope.agentPhotos[i], 2);
-    }
-    $scope.index = -1;
-    $scope.putCaptionAgent = function (index) {
-      if ($scope.index == index) {
-        $scope.index = -1;
-      } else {
-        $scope.index = index;
-      }
-    }
-
-    //photo caption textarea counter
-    $scope.$on('$viewContentLoaded', function () {
-      $timeout(function () {
-        $('#captionArea').keyup(updateCount);
-        $('#captionArea').keydown(updateCount);
-        $('#remainCaption').text(0 + '/150');
-
-        function updateCount() {
-          var count = $('#captionArea').val().length;
-          $('#remainCaption').text(count + '/150');
-        }
-      }, 200);
-    });
-    //photo caption textarea counter end
+   
     // agent add photo edit end
     // gallery card end
 
@@ -12958,7 +13158,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //gallery filter list end
 
     // travel activity json
-    $scope.travelActivity = [{
+    $scope.travelActivityCard = [{
       header: true,
       footer: true,
       agentHeader: true,

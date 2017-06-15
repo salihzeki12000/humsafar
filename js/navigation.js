@@ -1,6 +1,6 @@
 var adminURL = "";
 var allowAccess = "";
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
 // adminURL = "https://travelibro.com/api";
 // adminURL = "https://travelibro.wohlig.com/api";
 adminURL = "http://localhost:1337/api";
@@ -161,7 +161,7 @@ var navigationservice = angular.module('navigationservice', [])
       logout: function (callback) {
         var accessToken = $.jStorage.get("accessToken");
         OneSignal.getUserId(function (data1) {
-          console.log("uploaded");
+          console.log("UserId:",data1);
           TravelibroService.http({
             "url": adminURL + "/user/updateDeviceId",
             "method": "POST",
@@ -170,16 +170,21 @@ var navigationservice = angular.module('navigationservice', [])
               'remove': true
             }
           }).success(function (data) {
-          console.log("Id Found");
+            console.log("Id Found");
+            console.log(data);
+            TravelibroService.http({
+              url: adminURL + "/user/logout",
+              method: "POST"
+            }).success(callback);
+          }).error(function (data) {
+            console.log("Id Not Found");
+            console.log(data);
             TravelibroService.http({
               url: adminURL + "/user/logout",
               method: "POST"
             }).success(callback);
           });
-        }).error(function(data){
-          console.log("Id Not Found");
-          console.log(data);
-        });
+        })
       },
       enablePushNotification: function (deviceId) {
         TravelibroService.http({

@@ -214,6 +214,10 @@ var commontask = angular.module('commontask', [])
             obj.videoId = additionalId;
             url = "/postvideos/updateLikePostWeb";
             break;
+          case "agentStatus":
+            obj.agentStatus = type_id;
+            url = "agentstatus/updateLikeStatusWeb";
+            break;
         }
         if (task == "unlike") {
           obj.unlike = true;
