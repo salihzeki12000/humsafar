@@ -82,7 +82,7 @@
             setTimeout(function(){
               _add();
               _layout();
-            },1000);
+            },3000);
           });
         }
       };

@@ -69,9 +69,9 @@
                         <span class="color-dark-blue ml5">{{post.user.following | followFollowingStatus}}</span>
                       </div>
                     </div>
-                    <h4 class="font-bold color-dark-blue pointer m-clear mb5" ng-if="post.user" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.user.name}}</h4>
+                    <h4 class="font-bold color-dark-blue pointer m-clear" ng-if="post.user" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.user.name}}</h4>
                     <div class=" user-more-detail">
-                        <p class="m-clear"><span class="fnt-12">{{post.startTime|formatDate:'date'}}</span> | <span class="fnt-12">{{post.startTime|formatDate:'time'}}</span></p>
+                        <p class="m-clear"><span class=""><i class="fa fa-calendar mr5"></i>{{post.startTime|formatDate:'date'}}</span> | <span class=""><i class="fa fa-clock-o mr5"></i>{{post.startTime|formatDate:'time'}}</span></p>
                     </div>
                   </div>
                   <!-- post type icon -->
@@ -79,8 +79,8 @@
                 </div>
                 <!-- post status -->
                 <div class="post-your-status">
-                  <p class="your-post" ng-if="post.onGoing==false">Has ended the Journey</p>
-                  <p class="your-post" ng-if="post.onGoing==true">Has started a Journey</p>
+                  <p class="your-post" ng-if="post.onGoing==false">{{post.name}} - Journey ({{post.duration}} {{post.duration|singularPlural:'Days'}})</p>
+                  <p class="your-post" ng-if="post.onGoing==true">Started a Journey - {{post.name}}</p>
                 </div>
                 <!-- post status end -->
                 <!-- post header end -->
@@ -138,7 +138,29 @@
                         <img ng-if="post.coverPhoto" ng-src="{{post.coverPhoto|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center">
                         <img ng-if="!post.coverPhoto" ng-src="{{post.startLocationPic|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center">
                       </div>
-                      <div class="journey-tag-holder">
+                      <div class="journey-overview">
+                        <ul>
+                          <li>
+                              <div class="">
+                                <img src="img/camera.png" alt="Camera" width="15" class="mr5">
+                                <span class="inline-block v-mid">{{post.photoCount}}</span>
+                              </div>
+                          </li>
+                          <li>
+                              <div class="">
+                                <img src="img/video.png" alt="Video" width="15" class="mr5">
+                                <span class="inline-block v-mid">{{post.videoCount}}</span>
+                              </div>
+                          </li>
+                          <li>
+                              <div class="">
+                                <img src="img/location.png" alt="Location" width="15" class="mr5">
+                                <span class="inline-block v-mid">{{post.checkInCount}}</span>
+                              </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="journey-tag-holder" hidden>
                         <div class="days-spent pull-right">
                           <p><span class="block">{{post.duration}}</span> Days</p>
                         </div>
@@ -270,7 +292,7 @@
                       <div class="pull-right">
                         <div class="relate" ng-init="post.option={}">
                           <span class="pointer" ng-click="editOption(post.option)">
-                            <img src="img/options.png" alt="" width="3" class="color-blue">
+                            <img src="img/options.png" alt="" class="color-blue">
                           </span>
                           <div class="activity-edit-option" ng-show="post.option.backgroundClick">
                             <ul>

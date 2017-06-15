@@ -2258,7 +2258,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewCardComment = true;
         // $scope.journey.journeyHighLight = activity._id;
         $scope.getCard = "view-whole-card";
-        LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+        LikesAndComments.getComments(post.type, post._id, callback);
       } else {
         if ($scope.viewCardComment) {
           $scope.viewCardComment = false;
@@ -2271,7 +2271,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // $scope.focus('enterComment');
           // $scope.journey.journeyHighLight = activity._id;
           $scope.getCard = "view-whole-card";
-          LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+          LikesAndComments.getComments(post.type, post._id, callback);
         }
       }
       $scope.previousId = post._id;
@@ -2868,14 +2868,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // destination country city end
 
     $scope.getCountryInfo = function (type, urlSlug) {
-      $scope.destinationCityFilterName = _.map($scope.destinationCityFilter, 'name');
+      $scope.destinationCityFilterId = _.map($scope.destinationCityFilter, '_id');
       $scope.destinationItineraryTypeName = _.map($scope.destinationItineraryType, 'name');
       $scope.destinationItineraryByName = _.map($scope.destinationItineraryBy, 'name');
       var sendCityData = {
         pagenumber: $scope.pagenumber,
         type: _.cloneDeep(type),
         urlSlug: $scope.urlDestinationCountry,
-        city: $scope.destinationCityFilterName,
+        city: $scope.destinationCityFilterId,
         itineraryType: $scope.destinationItineraryTypeName,
         itineraryBy: $scope.destinationItineraryByName
       };

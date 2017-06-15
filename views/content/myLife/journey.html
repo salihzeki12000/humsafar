@@ -143,16 +143,16 @@
                         <div class="travel-journey-heading">
                           <!-- <p ng-if="life.type=='ended-journey'">Has ended the Journey</p>
                           <p ng-if="life.type=='on-the-go-journey'">Has started a Journey</p> -->
-                          <!-- <p ng-hide="life.onJourney">{{life.heading}}</p> -->
-                          <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
-                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p>
+                          <p><span class="text-capitalize">{{life.name}}</span> - Journey (<span>{{life.duration}} {{life.duration | singularPlural: 'Days'}}</span>)</p>
+                          <!-- <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
+                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p> -->
                         </div>
                         <!--jounrey main detail card-->
                         <div class="travelled-journey relate" ng-click="routeTO(life.type,life.urlSlug,life.user.urlSlug)">
                           <!-- ONGO BADGE BADGE -->
-                          <div class="tag-ongo-journey">
+                          <!-- <div class="tag-ongo-journey">
                             <span class="inline-block color-white">On The Go</span>
-                          </div>
+                          </div> -->
                           <!-- ONGO BADGE BADGE -->
                           <div class="travelled-imgholder">
                             <img ng-src="{{life.coverPhoto|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto!=null">
@@ -160,11 +160,33 @@
                           </div>
                           <div class="flag-section">
                             <div class="country-visited" ng-repeat="visit in life.countryVisited | limitTo : 3">
-                              <img ng-src="{{visit.country.flag|uploadpath:30:30:'cover'}}" alt="" height="30">
+                              <img ng-src="{{visit.country.flag|uploadpath:20:20:'cover'}}" alt="" height="20">
                             </div>
                             <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
                           </div>
-                          <div class="journey-tag-holder">
+                          <div class="journey-overview">
+                            <ul>
+                              <li ng-if="life.photoCount!=0">
+                                  <div class="">
+                                    <img src="img/camera.png" alt="Camera" width="15">
+                                    <span class="inline-block v-mid">{{life.photoCount }}</span>
+                                  </div>
+                              </li>
+                              <li ng-if="life.videoCount!=0">
+                                  <div class="">
+                                    <img src="img/video.png" alt="Video" width="15">
+                                    <span class="inline-block v-mid">{{life.videoCount}}</span>
+                                  </div>
+                              </li>
+                              <li ng-if="life.checkInCount!=0">
+                                  <div class="">
+                                    <img src="img/location.png" alt="Location" width="15">
+                                    <span class="inline-block v-mid">{{life.checkInCount}}</span>
+                                  </div>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="journey-tag-holder" hidden>
                             <div class="days-spent pull-right" ng-init="count=(life.endTime|dateDifference: life.startTime)">
                               <!-- <p ng-if="life.type =='detail-itinerary'"><span class="block">{{count}}</span>{{count|singularPlural:'Days'}}</p> -->
                               <p><span class="block">{{life.duration}}</span> {{life.duration | singularPlural: 'Days'}}</p>
@@ -291,15 +313,17 @@
                       <div class="travel-life-part avenir-roman">
                         <div class="travel-journey-heading">
                           <!-- <p ng-hide="life.onJourney">{{life.heading}}</p> -->
-                          <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
-                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p>
+                          <p class="m-clear"><span class="text-capitalize">{{life.name}}</span> - <span ng-if="life.type=='detail-itinerary'">Itinerary</span>
+                            <span ng-if="life.type=='quick-itinerary'">Quick Itinerary</span> (<span>{{life.duration}} {{life.duration|singularPlural:'Days'}}</span>) </p>
+                          <!-- <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
+                            <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p> -->
                         </div>
                         <!--for itinerary card main-->
                         <div class="onway-journey relate" ng-click="routeTO(life.type,life.urlSlug,life.user.urlSlug)">
                           <!-- ONGO BADGE BADGE -->
-                          <div class="tag-ongo-journey" ng-if="life.type=='detail-itinerary' && life.status==true">
+                          <!-- <div class="tag-ongo-journey" ng-if="life.type=='detail-itinerary' && life.status==true">
                             <span class="inline-block color-white">Itinerary</span>
-                          </div>
+                          </div> -->
                           <!-- ONGO BADGE BADGE -->
                           <div class="onway-imgholder relate">
                             <div class="unpublish-banner" ng-if="life.status==false">
@@ -309,7 +333,7 @@
                           </div>
                           <div class="flag-section">
                             <div class="country-visited" ng-repeat="visit in life.countryVisited | limitTo : 3">
-                              <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30">
+                              <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="20">
                             </div>
                             <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
                             <!-- <div class="country-visited">
@@ -317,7 +341,12 @@
                             <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
                           </div> -->
                           </div>
-                          <div class="journey-tag-holder">
+                          <div class="date-itinerary">
+                            <span class="view-date text-center">
+                              {{life.startTime|date:'MMM'}}<br>{{life.startTime|date:'yyyy'}}
+                            </span>
+                          </div>
+                          <div class="journey-tag-holder" hidden>
                             <div class="days-spent pull-right">
                               <p><span class="block">{{life.duration}}</span>{{life.duration|singularPlural:'Days'}}</p>
                             </div>
@@ -362,59 +391,59 @@
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <!--for itinerary card main end-->
-                      <div class="social-field-types">
-                        <div class="user-social-item clearfix">
-                          <div class="pull-left">
-                            <ul>
-                              <li ng-click="likeUnlikeActivity(life)">
-                                <a href="" class="relate">
-                                  <i class="fa color-blue card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound></i>
-                                  <span></span>
-                                  <audio id="like-play">
-                                    <source src="img/tiny1.mp3" type="audio/mp3">
-                                  </audio>
-                                </a>
-                              </li>
-                              <li ng-click="openCommentSection(life)">
-                                <a href=""><img src="img/comments.png" alt="" height="18"></a>
-                              </li>
-                              <!--<li>
-                                  <a href=""><img src="img/reviews.png" alt="" height="18"></a>
-                                </li>
-                                <li>
-                                  <a href=""><img src="img/share.png" alt="" height="18"></a>
-                                </li>-->
-                            </ul>
-                          </div>
-                          <div class="pull-right">
-                            <!--<div class="" ng-click="editItinerary=!editItinerary">
-                                <span><img src="img/options.png" alt="" height="18"></span>
-                              </div>-->
-                            <!--temporary edit button dropdown-->
-                            <div class="edit-kind-journey" ng-show="editItinerary">
+                        <div class="social-field-types">
+                          <div class="user-social-item clearfix">
+                            <div class="pull-left">
                               <ul>
-                                <li ng-if="life.type=='quick-itinerary'"><a ui-sref="quickitinerary({flag:'edit',urlSlug:life.urlSlug})">Edit Itinerary</a></li>
-                                <li ng-if="life.type=='detail-itinerary'"><a ui-sref="detailitinerary({flag:'edit',urlSlug:life.urlSlug})">Edit Itinerary</a></li>
+                                <li ng-click="likeUnlikeActivity(life)">
+                                  <a href="" class="relate">
+                                    <i class="fa color-blue card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound></i>
+                                    <span></span>
+                                    <audio id="like-play">
+                                      <source src="img/tiny1.mp3" type="audio/mp3">
+                                    </audio>
+                                  </a>
+                                </li>
+                                <li ng-click="openCommentSection(life)">
+                                  <a href=""><img src="img/comments.png" alt="" height="18"></a>
+                                </li>
+                                <!--<li>
+                                    <a href=""><img src="img/reviews.png" alt="" height="18"></a>
+                                  </li>
+                                  <li>
+                                    <a href=""><img src="img/share.png" alt="" height="18"></a>
+                                  </li>-->
                               </ul>
                             </div>
-                            <!--temporary edit button dropdown-->
-                          </div>
-                        </div>
-                        <div class="social-likes-reviews" ng-if="!(((life.likeCount==0)||(life.likeCount==undefined))&&(life.commentCount==0))">
-                          <div class="clearfix">
-                            <div class="pull-left">
-                              <span ng-click="openLikeSection(life)" class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
-                              <!--<span class="color-blue avenir-heavy"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
-                              <span class="color-blue mr10 card-comment avenir-heavy pointer" ng-click="openCommentSection(life)"><img src="img/comments.png" alt="" class="mr5" height="12"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
-                            </div>
                             <div class="pull-right">
-                              <img src="img/travel.png" alt="">
+                              <!--<div class="" ng-click="editItinerary=!editItinerary">
+                                  <span><img src="img/options.png" alt="" height="18"></span>
+                                </div>-->
+                              <!--temporary edit button dropdown-->
+                              <div class="edit-kind-journey" ng-show="editItinerary">
+                                <ul>
+                                  <li ng-if="life.type=='quick-itinerary'"><a ui-sref="quickitinerary({flag:'edit',urlSlug:life.urlSlug})">Edit Itinerary</a></li>
+                                  <li ng-if="life.type=='detail-itinerary'"><a ui-sref="detailitinerary({flag:'edit',urlSlug:life.urlSlug})">Edit Itinerary</a></li>
+                                </ul>
+                              </div>
+                              <!--temporary edit button dropdown-->
+                            </div>
+                          </div>
+                          <div class="social-likes-reviews" ng-if="!(((life.likeCount==0)||(life.likeCount==undefined))&&(life.commentCount==0))">
+                            <div class="clearfix">
+                              <div class="pull-left">
+                                <span ng-click="openLikeSection(life)" class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
+                                <!--<span class="color-blue avenir-heavy"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
+                                <span class="color-blue mr10 card-comment avenir-heavy pointer" ng-click="openCommentSection(life)"><img src="img/comments.png" alt="" class="mr5" height="12"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
+                              </div>
+                              <div class="pull-right">
+                                <img src="img/travel.png" alt="">
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
+                      <!--for itinerary card main end-->
                     </div>
                   </div>
                   <!--itinerary card end-->
