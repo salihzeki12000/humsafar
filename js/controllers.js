@@ -12315,14 +12315,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // GET AVERAGE AGENT RATING END
     // TOUR FORM SAVE
     $scope.selectCategory = function (obj) {
+      console.log($scope.tour.typeOfHoliday);
       console.log(obj, "yeh select");
-      // $scope.isCategorySelected = true;
       if (obj.class == "category-active") {
         obj.class = "";
       } else {
         obj.class = "category-active";
       }
-
       $scope.tour.typeOfHoliday = _.filter($scope.categoriesSpecial, ['class', 'category-active']);
       console.log($scope.tour.typeOfHoliday, 'tourtype list');
       $scope.tour.typeOfHoliday = _.map($scope.tour.typeOfHoliday, 'tourCat');
@@ -12678,8 +12677,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       Agent.changeStatus(currentLead, $scope.getAvgRating($scope.activeUrlSlug));
     }
 
-
-
     $scope.getAgentItinerary = function (activeSlug, pagenumber) {
       var obj = {};
       obj.urlSlug = activeSlug;
@@ -12717,7 +12714,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // <!!! COMMON TASKS !!!>
     // followFollowing  Function
     $scope.followFollowing = function (user) {
-      console.log("from popularBloggerData");
+      console.log(user);
       LikesAndComments.followUnFollow(user, function (data) {
         if (data.value) {
           user.following = data.data.responseValue;

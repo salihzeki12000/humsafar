@@ -10,10 +10,11 @@
             <div class="add-more-itinerary" ng-show="showItinerary">
               <p class="color-cyan">Enter Details - Tours &amp; Packages</p>
               <div class="add-tourpackage">
-                <form>
+                <form name="toursForm" ng-submit="saveTour(tour);" novalidate>
                   <div class="">
                     <div class="a">
-                      <input type="text" class="form-control color-white" placeholder="Tour Title" ng-model="tour.title">
+                      <input type="text" name="title" class="form-control color-white" placeholder="Tour Title" ng-model="tour.title" required>
+                      <p ng-show="toursForm.title.$invalid && !toursForm.title.$pristine">Title Is Required</p>
                     </div>
                   </div>￼
 
@@ -43,6 +44,8 @@
                         </ul>
                       </div>
                     </div>
+                  <p ng-show="typeOfHoliday.length==0">Type Is Required</p>
+                    
                   </div>
                   <!-- tour-type end -->
 
@@ -65,7 +68,7 @@
                   <!-- TOUR PRICE -->
                   <div class="form-group">
                     <div class="a tour-price">
-                      <input type="number" class="form-control color-white" placeholder="Price" ng-model="tour.price">
+                      <input type="number" name="price" class="form-control color-white" placeholder="Price" ng-model="tour.price" required>
                     </div>
                   </div>
                   <!-- TOUR PRICE END -->
@@ -75,14 +78,14 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="a">
-                          <input ng-disabled="tour.hours.length > 0||tour.minutes.length > 0" type="text" class="form-control color-white" placeholder="Nights" ng-model="tour.nights">
+                          <input name="nights" ng-disabled="tour.hours.length > 0||tour.minutes.length > 0" type="text" class="form-control color-white" placeholder="Nights" ng-model="tour.nights">
                         </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="a">
-                          <input type="text" ng-disabled="tour.hours.length > 0||tour.minutes.length > 0" class="form-control color-white" placeholder="Days" ng-model="tour.days">
+                          <input name="days" type="text" ng-disabled="tour.hours.length > 0||tour.minutes.length > 0" class="form-control color-white" placeholder="Days" ng-model="tour.days" required>
                         </div>
                       </div>
                     </div>
@@ -92,18 +95,18 @@
                   <p class="color-white avenir-roman text-center m-clear">OR</p>
 
                   <!-- HOURS MINUTES -->
-                  <div class="row">
+                  <div class="row"> 
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="a">
-                          <input type="text" ng-disabled="tour.nights.length > 0||tour.days.length > 0" class="form-control color-white" placeholder="Hours" ng-model="tour.hours">
+                          <input name="hours" type="text" ng-disabled="tour.nights.length > 0||tour.days.length > 0" class="form-control color-white" placeholder="Hours" ng-model="tour.hours" required>
                         </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="a">
-                          <input type="text" ng-disabled="tour.nights.length > 0||tour.days.length > 0" class="form-control color-white" placeholder="Minutes" ng-model="tour.minutes">
+                          <input name="minutes" type="text" ng-disabled="tour.nights.length > 0||tour.days.length > 0" class="form-control color-white" placeholder="Minutes" ng-model="tour.minutes" required>
                         </div>
                       </div>
                     </div>
@@ -145,7 +148,7 @@
                       <button class="btn btn-white-outline pointer">Upload Display Picture</button>
                       <upload-image ng-model="tour.displayPic" ng-callback="tourPhoto(data);" allow-type="image/*" no-view class="pointer tour-uploadinput"></upload-image>
                     </div>
-                    <button class="btn btn-pink btn-more tourupload-position" ng-click="saveTour(tour);">SAVE</button>
+                    <button class="btn btn-pink btn-more tourupload-position" type="submit" ng-disabled="toursForm.$invalid ">SAVE</button>
                   </div>
                   <!-- upload buttons end -->
 
