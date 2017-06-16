@@ -41,7 +41,7 @@
             <uib-accordion-group ng-repeat="agtlead in unactionLeads track by $index" is-open="agtlead.open">
               <uib-accordion-heading>
                 <!--ng-click="leadRead(agtlead,$index,status.open)"-->
-                <div class="lead-tab-title color-white avenir-medium clearfix" ng-click="leadRead(agtlead,$index,agtlead.open)">
+                <div class="lead-tab-title color-white avenir-medium clearfix {{agtlead.class}}" ng-click="leadRead(agtlead,$index,agtlead.open)">
                   <div class="leadtab-profileholder pull-left">
                     <img ng-src="{{agtlead.byUser.profilePicture | uploadpath}}" alt="{{agtlead.name}}" class="img-responsive">
                   </div>

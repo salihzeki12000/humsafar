@@ -97,7 +97,8 @@
               <div class="col-md-5 col-sm-5">
                 <div class="form-group">
                   <div class="enquirytab-cmpny-inputholder">
-                    <input type="tel" class="form-control color-blue" placeholder="Contact No" ng-model="enquire.contactNo">
+                    <input type="tel" class="form-control color-blue" placeholder="Contact No" ng-model="enquire.contactNo" ng-intl-tel-input>
+                    <span id="error-msg1" class="hide intel-error" ng-if="!enquire.contactNo">Invalid number</span>
                     <div class="enquirytab-input-icon">
                       <i class="fa fa-phone color-grey"></i>
                     </div>
