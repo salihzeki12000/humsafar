@@ -917,6 +917,18 @@ firstapp.filter('uploadpath', function () {
   };
 });
 
+firstapp.filter('downloadLink', function () {
+  return function (filename,type,id,postname) {
+    if (id) {
+      var accessToken=$.jStorage.get("accessToken");
+      if(accessToken===null){
+        accessToken="";
+      }
+      return adminURL + "/download/" + filename +"/" + type + "/" + id + "/" + accessToken+ "/" + postname + ".pdf";
+    }
+  };
+});
+
 firstapp.filter('capitalize', function () {
   return function (input) {
     return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';

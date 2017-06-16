@@ -170,24 +170,30 @@
       <div class="row">
         <!-- NEW CARD -->
         <div class="travelLife col-md-4 col-sm-6" ng-repeat="post in agentItinerary track by $index">
-          <div class="travel-life-part  blog-post {{post.type}} avenir-roman overflow" >
+          <div class="travel-life-part  blog-post {{post.type}} avenir-roman overflow">
             <!-- ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'" -->
             <div class="travel-journey-heading">
               <div class="inline-block editor-subdetail v-mid">
-                <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.createdAt | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.createdAt | date :'hh:mm a'}}</span></p>
+                <p class="m-clear color-blue travelitinerary-title"><span class="text-capitalize">{{post.name|truncate:'30'}} </span> - <span><span ng-if="post.type == 'quick-itinerary'">Quick </span> Itinerary</span> <span>( {{post.duration}} {{post.duration| singularPlural: 'Days'}} )</span></p>
+                <!-- <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.createdAt | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.createdAt | date :'hh:mm a'}}</span></p> -->
               </div>
             </div>
             <div class="onway-journey relate pointer" ng-click="routeItinerary(post);">
               <div class="onway-imgholder">
                 <img ng-src="{{post.coverPhoto|uploadpath:370:340:'cover'}}" alt="" class="full-width m-center">
               </div>
-              <!-- <div class="flag-section">
-              <div class="country-visited">
-                <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30">
-                <span class="" ng-if="visit.country.length > 3">+4</span>
+              <div class="country-badges">
+                <div class="country-holder ng-scope" ng-repeat="flag in post.countryVisited|limitTo:3">
+                  <img ng-src="{{flag.country.flag|uploadpath}}" alt="{{flag.country.name}}" class="img-responsive doneLoading">
+                </div>
+                <span class="country-count" ng-if="post.countryVisited.length>3">+{{post.countryVisited.length-3}}</span>
               </div>
-            </div> -->
-              <div class="journey-tag-holder">
+              <div class="date-itinerary">
+                <span class="view-date text-center">
+                  {{activity.createdAt|date:'MMM'}}<br>{{activity.createdAt|date:'yyyy'}}
+                </span>
+              </div>
+              <div class="journey-tag-holder" hidden>
                 <div class="days-spent pull-right" ng-if="post.duration>0">
                   <p><span class="block">{{post.duration}}</span>Days</p>
                 </div>
@@ -270,9 +276,7 @@
                     <span class="color-blue mr10 pointer" ng-click="getCommentsData(post)"><img src="img/comments.png" alt="" height="14"><b class=""> {{post.commentCount}} </b> Comments </span>
                     <!-- <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{post.userReviewCount}} Reviews ({{post.userReviewCount}}/5)</span> -->
                   </div>
-                  <div class="pull-right">
-                    <img src="img/travel.png" alt="">
-                  </div>
+
                 </div>
               </div>
             </div>

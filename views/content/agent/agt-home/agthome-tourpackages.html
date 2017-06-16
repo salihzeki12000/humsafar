@@ -222,7 +222,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4 col-sm-6" ng-repeat="tourcard in tourData track by $index">
-          <div class="agt-itinerarycard">
+          <div class="agt-itinerarycard agent-tourcard">
             <div class="itinerary-img">
               <div class="theme">
                 <div class="theme-img">
@@ -252,10 +252,10 @@
                     <!-- <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{tourcard.createdAt | formatDate:'date' }}</span>                      | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{tourcard.createdAt | formatDate:'time' }}</span></p> -->
                   </div>
                   <div class="pull-right">
-                    <p class="font-sz18 cost-posi">${{tourcard.price}}</p>
+                    <p class="font-sz18 cost-posi">{{tourcard.currency}} {{tourcard.price}}</p>
                   </div>
                   <div class="tour-btns">
-                    <button class="btn btn-pink btn-download" ng-if="tourcard.pdf"><a href="http://192.168.2.12:1337/api/download/{{tourcard.pdf}}/tours&packages/{{tourcard._id}}" class="btn-link"  download>Download</a></button>
+                    <button class="btn btn-pink btn-download" ng-if="tourcard.pdf"><a ng-href="{{tourcard.pdf|downloadLink:'tours&packages':tourcard._id:tourcard.title}}" class="btn-link"  download>Download</a></button>
                     <button class="btn btn-pink btn-book" ng-if="tourcard.bookingUrl"><a href="{{tourcard.bookingUrl}}" target="_blank" class="btn-link">Book</a></button>
                   </div>
                 </div>
