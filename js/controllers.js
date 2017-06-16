@@ -12141,7 +12141,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // category type end
   })
 
-  .controller('AgenthomeCtrl', function ($scope, TemplateService, NavigationService, Agent, $timeout, $state, $anchorScroll, anchorSmoothScroll, $stateParams, $location) {
+  .controller('AgenthomeCtrl', function ($scope, TemplateService, LikesAndComments, NavigationService, Agent, $timeout, $state, $anchorScroll, anchorSmoothScroll, $stateParams, $location) {
     $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
