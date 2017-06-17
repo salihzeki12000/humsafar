@@ -107,10 +107,11 @@
               <!-- user-iternarys -->
               <div class="travel-life-part bg-white blog-post {{post.type}} avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
                 <div class="travel-journey-heading">
-                  <div class="editor-logo user-logo pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})">
+                  <p>{{post.name|truncate:'30'}} ({{post.duration}} {{post.duration|singularPlural:'Days'}})</p>
+                  <!-- <div class="editor-logo user-logo pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})">
                     <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="full-width">
-                  </div>
-                  <div class="inline-block editor-subdetail">
+                  </div> -->
+                  <!-- <div class="inline-block editor-subdetail">
                     <div class="clearfix">
                       <div class="pull-right" ng-if="post.itineraryBy!='Admin'" ng-click="followFollowing(post.user);">
                         <span class="follow-following pointer color-blue text-capitalize">{{post.user.following|followFollowingStatus}}</span>
@@ -118,9 +119,15 @@
                       <h4 class="font-bold color-dark-blue m-clear mb5 heading-name text-capitalize pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.user.name}}</h4>
                     </div>
                     <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.startTime | date : 'dd MMM, yyyy'}}</span>                      | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.startTime | date :'hh:mm a'}}</span></p>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="onway-journey relate pointer" ng-init="itinerary=post.type=='quick-itinerary'?'userquickitinerary':'userdetailitinerary'">
+                  <div class="itinerary-creator-detail">
+                    <div class="editor-logo user-logo pointer v-mid" ui-sref="mylife({'urlSlug':post.user.urlSlug})">
+                      <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="full-width">
+                    </div>
+                    <h4 class="font-bold color-dark-blue m-clear heading-name text-capitalize pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.user.name}}</h4>
+                  </div>
                   <div class="onway-imgholder pointer" ui-sref="{{itinerary}}({'urlSlug':post.user.urlSlug,'id':post.urlSlug})">
                     <img ng-src="{{post.coverPhoto|uploadpath:370:340:'cover'}}" alt="" class="full-width m-center">
                   </div>
@@ -130,7 +137,7 @@
                         <span class="" ng-if="visit.country.length > 3">+4</span>
                       </div>
                     </div> -->
-                  <div class="journey-tag-holder">
+                  <div class="journey-tag-holder" hidden>
                     <div class="days-spent pull-right" ng-if="post.duration>0">
                       <p><span class="block">{{post.duration}}</span>Days</p>
                     </div>
@@ -194,7 +201,7 @@
                     </div>
                     <div class="pull-right">
                       <div class="relate" ng-init="post.option={}">
-                        <span class="pointer" ng-click="editOption(post.option)"><img src="img/options.png" alt="" height="18" class="pointer">
+                        <span class="pointer" ng-click="editOption(post.option)"><img src="img/options.png" alt=""  class="pointer">
                       </span>
                         <div class="activity-edit-option" ng-show="post.option.backgroundClick">
                           <ul>

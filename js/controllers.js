@@ -7940,7 +7940,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     var callbackGetCountriesVisited = function (data) {
-      $scope.countryVisitedList = data.data;
+      // console.log(data,'data');
+      $scope.countryVisitedList = data;
       console.log($scope.countryVisitedList, 'give data');
       reloadCount();
     };
@@ -7968,14 +7969,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       MyLife.getFollowersWeb($stateParams.urlSlug, callbackFollowers);
     }
 
-    // var getCountriesVisited = function () {
-    //   MyLife.getCountryVisitedListExpanded($stateParams.urlSlug, callbackGetCountriesVisited);
-    //   getAllCountries();
-    // }
     var getCountriesVisited = function () {
-      MyLife.getCountryVisitedListExpandedWeb(callbackGetCountriesVisited);
+      MyLife.getCountryVisitedListExpanded($stateParams.urlSlug, callbackGetCountriesVisited);
       getAllCountries();
     }
+    // var getCountriesVisited = function () {
+    //   MyLife.getCountryVisitedListExpandedWeb(callbackGetCountriesVisited);
+    //   getAllCountries();
+    // }
 
     var getBucketList = function () {
       MyLife.getOneBucketList($stateParams.urlSlug, callbackBucketList);

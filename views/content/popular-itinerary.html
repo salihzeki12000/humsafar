@@ -22,7 +22,7 @@
                 <div class="masonry-brick travelLife col-md-4 col-sm-6 m-plr0" ng-repeat="post in popularIternaryData track by $index" >
                   <div class="travel-life-part bg-white blog-post {{post.type}} avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
                     <div class="travel-journey-heading">
-                      <p>{{post.name}} ({{post.duration}} {{post.duration|singularPlural:'Days'}})</p>
+                      <p>{{post.name|truncate:'30'}} ({{post.duration}} {{post.duration|singularPlural:'Days'}})</p>
                       <!-- <div class="editor-logo user-logo pointer" ng-if="post.itineraryBy=='Admin'">
                         <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="img-responsive">
                       </div>
@@ -54,12 +54,12 @@
                       <div class="onway-imgholder">
                         <img ng-src="{{post.coverPhoto|uploadpath:370:340:'cover'}}" alt="" class="full-width m-center">
                       </div>
-                      <!-- <div class="flag-section">
-                        <div class="country-visited">
-                          <img ng-src="{{visit.country.flag|uploadpath}}" alt="" height="30">
-                          <span class="" ng-if="visit.country.length > 3">+4</span>
+                      <div class="flag-section">
+                        <div class="country-visited" ng-repeat="country in post.countryVisited track by $index">
+                          <img ng-src="{{country.country.flag|uploadpath}}" alt="" height="30">
+                          <span class="" ng-if="post.country.length > 3">+4</span>
                         </div>
-                      </div> -->
+                      </div>
                       <div class="journey-tag-holder" hidden>
                         <div class="days-spent pull-right" ng-if="post.duration>0">
                           <p><span class="block">{{post.duration}}</span>Days</p>

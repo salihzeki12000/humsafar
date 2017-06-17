@@ -1188,7 +1188,11 @@
     video {
       width: 100%;
     }
-  } // journey video end
+  }
+  .video-ongo-journey .youtube-icon {
+    display: none;
+  }
+   // journey video end
   // comment and like Side Section
   .like-side-sec {
     padding: 25px 25px 0;
@@ -2783,9 +2787,6 @@
   }
   .share-comment-main .task-holder li:first-child {
     padding: 0 5px;
-  }
-  .video-ongo-journey .youtube-icon {
-    display: none;
   }
   .notify-main .view-comment-scroll {
     height: auto;

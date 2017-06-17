@@ -383,14 +383,14 @@
                     <div class="social-likes-reviews" ng-if="!(((activity.likeCount==0)||(activity.likeCount==undefined))&&(activity.commentCount==0))">
                       <div class="clearfix">
                         <div class="pull-left" ng-init="activity.listLike={}; likeShow='false';">
-                          <span class="color-blue mr10 card-like avenir-heavy" ng-click="getLikesData(activity); showLikeClick();"><i class="fa fa-heart color-blue mr5"></i><b>{{activity.likeCount}}</b> {{activity.likeCount|singularPlural:'Likes'}}
+                          <span class="color-blue mr10 card-like avenir-roman" ng-click="getLikesData(activity); showLikeClick();"><i class="fa fa-heart color-blue mr5"></i><b>{{activity.likeCount}}</b> {{activity.likeCount|singularPlural:'Likes'}}
                            <div class="card-like-dropdown" ng-show="activity.listLike.backgroundClick;">
                               <ul>
                                 <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
                               </ul>
                             </div>
                           </span>
-                          <span class="color-blue mr10 card-like avenir-heavy" ng-click="getCommentsData(activity)">
+                          <span class="color-blue mr10 card-like avenir-roman" ng-click="getCommentsData(activity)">
                             <img src="img/comments.png" alt="" height="14">
                             <b class=""> {{activity.commentCount}}</b>
                              {{activity.commentCount|singularPlural:'Comments'}}
