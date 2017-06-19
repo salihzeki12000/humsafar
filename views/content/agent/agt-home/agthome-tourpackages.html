@@ -44,8 +44,7 @@
                         </ul>
                       </div>
                     </div>
-                  <p ng-show="typeOfHoliday.length==0">Type Is Required</p>
-                    
+                  <p ng-show="tour.typeOfHoliday.length==0">Type Is Required</p>
                   </div>
                   <!-- tour-type end -->
 
@@ -62,6 +61,7 @@
                         </ui-select-choices>
                       </ui-select>
                     </div>
+                  <p ng-show="tour.currency==''">Currency Is Required</p>                    
                   </div>
                   <!-- currency list end -->
 
@@ -69,6 +69,7 @@
                   <div class="form-group">
                     <div class="a tour-price">
                       <input type="number" name="price" class="form-control color-white" placeholder="Price" ng-model="tour.price" required>
+                      <p ng-show="toursForm.price.$invalid && !toursForm.price.$pristine">Price Is Required</p>                      
                     </div>
                   </div>
                   <!-- TOUR PRICE END -->
@@ -78,14 +79,14 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="a">
-                          <input name="nights" ng-disabled="tour.hours.length > 0||tour.minutes.length > 0" type="text" class="form-control color-white" placeholder="Nights" ng-model="tour.nights">
+                          <input name="nights" ng-disabled="tour.hours.length > 0||tour.minutes.length > 0" type="text" class="form-control color-white" placeholder="Nights" ng-model="tour.nights" ng-required="true">
                         </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="a">
-                          <input name="days" type="text" ng-disabled="tour.hours.length > 0||tour.minutes.length > 0" class="form-control color-white" placeholder="Days" ng-model="tour.days" required>
+                          <input name="days" type="text" ng-disabled="tour.hours.length > 0||tour.minutes.length > 0" class="form-control color-white" placeholder="Days" ng-model="tour.days" ng-required="true">
                         </div>
                       </div>
                     </div>
@@ -99,14 +100,15 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="a">
-                          <input name="hours" type="text" ng-disabled="tour.nights.length > 0||tour.days.length > 0" class="form-control color-white" placeholder="Hours" ng-model="tour.hours" required>
+                          <input name="hours" type="text" ng-disabled="tour.nights.length > 0||tour.days.length > 0" class="form-control color-white" placeholder="Hours" ng-model="tour.hours">
+                          <!--ng-required="tour.nights.length > 0||tour.days.length > 0"-->
                         </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="a">
-                          <input name="minutes" type="text" ng-disabled="tour.nights.length > 0||tour.days.length > 0" class="form-control color-white" placeholder="Minutes" ng-model="tour.minutes" required>
+                          <input name="minutes" type="text" ng-disabled="tour.nights.length > 0||tour.days.length > 0" class="form-control color-white" placeholder="Minutes" ng-model="tour.minutes">
                         </div>
                       </div>
                     </div>
@@ -125,6 +127,7 @@
                         </ui-select-choices>
                       </ui-select>
                     </div>
+                      <p ng-show="tour.country==''">Country Is Required</p>                    
                   </div>
                   <!-- COUNTRY UI SELECT END -->
 

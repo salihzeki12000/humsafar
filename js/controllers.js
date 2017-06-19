@@ -12163,6 +12163,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.tour.typeOfHoliday = [];
     $scope.agentItinerary = {};
     $scope.album = {};
+    $scope.photoFilter = [];
     $scope.initialiseArray = function () {
       $scope.showItinerary = false;
       $scope.addHomeBackdrop = "";
@@ -12544,7 +12545,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // SAVE PHOTO VIDEO END
     // SAVE PHOTO VIDEOS END
 
-
     // GET LEADS
     $scope.getLeads = function (type, pagenumber) {
       var formAgentData = {
@@ -12708,7 +12708,88 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       })
     }
 
-    $scope.getAgentItinerary($scope.activeUrlSlug, $scope.pagenumber);
+    // GET PHOTOSVIDEOS
+    $scope.albumArray = [];
+    $scope.filterList = [];
+    $scope.filterList = _.each($scope.filterList, function (n) {
+      n.class = ""
+    })
+    var agentChecked = _.findIndex($scope.filterList, function (n) {
+      return n._id === data._id
+    });
+    $scope.filterList[agentChecked].class = "photo-checked";
+    // $scope.agentAlbum = {};
+    $scope.getPhotoVideo = function (activeSlug, pagenumber) {
+      var obj = {};
+      obj.urlSlug = activeSlug;
+      obj.pagenumber = $scope.pagenumber;
+      obj.album = $scope.albumArray;
+      console.log(obj, 'photovideo call');
+      Agent.getAlbum(obj, function (data) {
+        if (data.value == true) {
+          // console.log(data, 'travelactivity call success');
+          $scope.agentAlbum = data.data.media;
+          $scope.filterList = data.data.album;
+          $scope.filterList = _.each($scope.filterList, function (n) {
+            n.checked = false
+            // n.class = ""
+          })
+          console.log($scope.agentAlbum, "data list");
+          console.log($scope.filterList, "filter list");
+        } else {
+          console.log(data, 'travelactivity call fail');
+        }
+      })
+    }
+    // GET PHOTOSVIDEOS END
+
+    // PHOTOVIDEO FILTER
+    $scope.addFilterId = function (data) {
+      console.log(data);
+      var getAgentIndex = _.findIndex($scope.albumArray, function (n) {
+        return n === data._id;
+      });
+      var agentChecked = _.findIndex($scope.filterList, function (n) {
+        return n._id === data._id
+      });
+      if (getAgentIndex == -1) {
+        $scope.albumArray.push(data._id);
+        // $scope.filterList.checked = true;
+        console.log(agentChecked, 'agentChecked');
+        $scope.filterList[agentChecked].checked = true;
+        $scope.filterList[agentChecked].class = "photo-checked";
+        console.log($scope.filterList[agentChecked].checked, 'checked wala');
+      } else {
+        _.remove($scope.albumArray, function (remove) {
+          return remove === data._id;
+        })
+        $scope.filterList[agentChecked].checked = false;
+        $scope.filterList[agentChecked].class = "";
+      }
+      console.log($scope.filterList, "list true");
+      // $scope.albumArray.push(id);
+      console.log($scope.albumArray, 'albumArray');
+    }
+
+    $scope.filterPhotoAlbum = function () {
+      $scope.getPhotoVideo($scope.activeUrlSlug, $scope.pagenumber);
+
+    }
+
+    $scope.clearPhotoFilter = function () {
+      $scope.albumArray = [];
+      console.log($scope.albumArray, 'clearfilter');
+      _.each($scope.filterList, function (n) {
+        n.checked = false,
+          n.class = ""
+      })
+      console.log($scope.filterList, "filter lcer");
+      $scope.getPhotoVideo($scope.activeUrlSlug, $scope.pagenumber);
+    }
+    // PHOTOVIDEO FILTER END
+
+
+
     // integration end
 
     // <!!! COMMON TASKS !!!>
@@ -12794,6 +12875,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agthomeoptions.active = "agthome-photovideos";
         $scope.initialiseArray();
         $scope.agentScrollDown();
+        $scope.getPhotoVideo($scope.activeUrlSlug, $scope.pagenumber);
         break;
       case "testimonials-and-reviews":
         $scope.agthome.innerView = allagthome[3];
@@ -12840,8 +12922,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         break;
       default:
         $scope.agthome.innerView = allagthome[0];
-        $scope.getAgentItinerary($scope.activeUrlSlug,$scope.pagenumber);
-        
+        $scope.getAgentItinerary($scope.activeUrlSlug, $scope.pagenumber);
+
     }
     $scope.agenthomeItinerary = true;
     $scope.agentFixednav = ""
@@ -12853,7 +12935,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       switch (view) {
         case 0:
           url = "itineraries";
-          $scope.agthomeoptions.active = "agthome-itinerary";          
+          $scope.agthomeoptions.active = "agthome-itinerary";
           $scope.agenthomeItinerary = true;
           $scope.initialiseArray();
           $scope.getAgentItinerary($scope.activeUrlSlug, $scope.pagenumber);
@@ -12872,6 +12954,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.agenthomeItinerary = false;
           $scope.initialiseArray();
           $scope.agentScrollDown();
+          $scope.getPhotoVideo($scope.activeUrlSlug, $scope.pagenumber);
           break;
         case 3:
           url = "testimonials-and-reviews";
