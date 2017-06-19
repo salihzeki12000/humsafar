@@ -21,8 +21,16 @@
               <div class="row m-m0">
                 <div class="masonry-brick travelLife col-md-4 col-sm-6 m-plr0" ng-repeat="post in popularIternaryData track by $index" >
                   <div class="travel-life-part bg-white blog-post {{post.type}} avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
-                    <div class="travel-journey-heading">
+                    <div class="travel-journey-heading relate">
                       <p>{{post.name|truncate:'30'}} ({{post.duration}} {{post.duration|singularPlural:'Days'}})</p>
+                      <!-- flag section -->
+                      <div class="flag-section">
+                        <div class="country-visited" ng-repeat="country in post.countryVisited track by $index">
+                          <img ng-src="{{country.country.flag|uploadpath}}" alt="" height="30">
+                          <span class="" ng-if="post.country.length > 3">+4</span>
+                        </div>
+                      </div>
+                      <!-- flag section end-->
                       <!-- <div class="editor-logo user-logo pointer" ng-if="post.itineraryBy=='Admin'">
                         <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="img-responsive">
                       </div>
@@ -53,12 +61,6 @@
                       </div>
                       <div class="onway-imgholder">
                         <img ng-src="{{post.coverPhoto|uploadpath:370:340:'cover'}}" alt="" class="full-width m-center">
-                      </div>
-                      <div class="flag-section">
-                        <div class="country-visited" ng-repeat="country in post.countryVisited track by $index">
-                          <img ng-src="{{country.country.flag|uploadpath}}" alt="" height="30">
-                          <span class="" ng-if="post.country.length > 3">+4</span>
-                        </div>
                       </div>
                       <div class="journey-tag-holder" hidden>
                         <div class="days-spent pull-right" ng-if="post.duration>0">
@@ -136,18 +138,18 @@
                           </div>
                         </div>
                       </div>
-                      <div class="social-likes-reviews avenir-heavy">
+                      <div class="social-likes-reviews avenir-roman">
                         <div class="clearfix">
                           <div class="pull-left">
-                            <span class="color-blue mr10 pointer" ng-click="getLikesData(post);"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{post.likeCount}}</b>Likes</span>
+                            <span class="color-blue mr10 pointer" ng-click="getLikesData(post);"><i class="fa fa-heart color-blue mr5"></i><b class="">{{post.likeCount}}</b> Likes</span>
                             <span class="color-blue mr10 pointer" ng-click="getCommentsData(post)">
-                              <img src="img/comments.png" alt="" height="14" class="mr5">
-                              <b class="mr5"> {{post.commentCount}} </b>Comments </span>
+                              <img src="img/comments.png" alt="" height="14" class="">
+                              <b class=""> {{post.commentCount}} </b> Comments </span>
                             <!-- <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{post.userReviewCount}} Reviews ({{post.userReviewCount}}/5)</span> -->
                           </div>
-                          <div class="pull-right">
+                          <!-- <div class="pull-right">
                             <img src="img/travel.png" alt="">
-                          </div>
+                          </div> -->
                         </div>
                       </div>
                     </div>

@@ -140,10 +140,18 @@
                     <!--journey card -->
                     <div class="journey-masonry-brick" ng-if="life.type=='ended-journey' || life.type=='on-the-go-journey'">
                       <div class="travel-life-part avenir-roman">
-                        <div class="travel-journey-heading">
+                        <div class="travel-journey-heading relate">
                           <!-- <p ng-if="life.type=='ended-journey'">Has ended the Journey</p>
                           <p ng-if="life.type=='on-the-go-journey'">Has started a Journey</p> -->
                           <p><span class="text-capitalize">{{life.name}}</span> - Journey (<span>{{life.duration}} {{life.duration | singularPlural: 'Days'}}</span>)</p>
+                          <!-- flag section -->
+                          <div class="flag-section">
+                            <div class="country-visited" ng-repeat="visit in life.countryVisited | limitTo : 3">
+                              <img ng-src="{{visit.country.flag|uploadpath:20:20:'cover'}}" alt="" height="20">
+                            </div>
+                            <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
+                          </div>
+                          <!-- flag section end-->
                           <!-- <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{life.startTime|formatDate: 'date'}}</span>|
                             <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p> -->
                         </div>
@@ -157,12 +165,6 @@
                           <div class="travelled-imgholder">
                             <img ng-src="{{life.coverPhoto|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto!=null">
                             <img ng-src="{{life.startLocationPic|small|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center" ng-if="life.coverPhoto==null">
-                          </div>
-                          <div class="flag-section">
-                            <div class="country-visited" ng-repeat="visit in life.countryVisited | limitTo : 3">
-                              <img ng-src="{{visit.country.flag|uploadpath:20:20:'cover'}}" alt="" height="20">
-                            </div>
-                            <span ng-if="life.countryVisited.length>3" class="">+{{life.countryVisited.length-3}}</span>
                           </div>
                           <div class="journey-overview">
                             <ul>
@@ -294,9 +296,9 @@
                           <div class="social-likes-reviews" ng-if="!(((life.likeCount==0)||(life.likeCount==undefined))&&(life.commentCount==0))">
                             <div class="clearfix">
                               <div class="pull-left">
-                                <span ng-click="openLikeSection(life)" class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
+                                <span ng-click="openLikeSection(life)" class="color-blue mr10 avenir-roman pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
                                 <!--<span class="color-blue avenir-heavy" ng-if="life.pointReview.length>0"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
-                                <span ng-click="openCommentSection(life)" class="color-blue mr10 card-comment avenir-heavy pointer"><img src="img/comments.png" alt="" class="mr5 v-mid" height="14"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
+                                <span ng-click="openCommentSection(life)" class="color-blue mr10 card-comment avenir-roman pointer"><img src="img/comments.png" alt="" class="mr5 v-mid" height="14"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
                               </div>
                               <div class="pull-right">
                                 <img src="img/travel.png" alt="">

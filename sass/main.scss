@@ -2559,7 +2559,7 @@ header {
 }
 
 .travel-journey-heading {
-  padding: 5px 8px;
+  padding: 5px 50px 5px 8px;
   color: $brand-blue;
 
   p {
@@ -2571,6 +2571,7 @@ header {
     padding-bottom: 0;
     font-size: 10px;
   }
+  &.destination-itinerary { padding: 5px 8px; }
 }
 // masonry end
 // travel life end
@@ -4975,10 +4976,10 @@ header {
   color: #424242;
   word-wrap: break-word;
   p {
-    padding: 5px 8px;
+    padding: 5px 50px 5px 8px;
     margin: 0;
     // font-size: 13px;
-    font-size: 0.9em;
+    font-size: 13px;
   }
 
   a {
@@ -5049,7 +5050,7 @@ header {
 .flag-section {
   position: absolute;
   right: 10px;
-  top: -25px;
+  top: 5px;
   z-index: 1;
   // .country-visited {
   //   left: 20px;

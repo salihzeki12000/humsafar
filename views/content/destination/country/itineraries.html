@@ -142,8 +142,8 @@
           <div class="col-md-4 col-sm-6 col-xs-12 m-plr0 masonry-brick" ng-repeat="post in countryDestIti track by $index">
             <!-- user-iternarys -->
             <div class="travel-life-part blog-post bg-white avenir-roman overflow {{post.type}}" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
-              <div class="travel-journey-heading">
-                <p>{{post.name|truncate:'30'}} ({{post.duration}} {{post.duration|singularPlural:'Days'}})</p>
+              <div class="travel-journey-heading destination-itinerary">
+                <p>{{post.name}} ({{post.duration}} {{post.duration|singularPlural:'Days'}})</p>
                 <!-- <div class="editor-logo user-logo pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})">
                   <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="img-responsive">
                 </div> -->
@@ -251,10 +251,10 @@
                     </div>
                   </div>
                 </div>
-                <div class="social-likes-reviews avenir-heavy">
+                <div class="social-likes-reviews avenir-roman">
                   <div class="clearfix">
                     <div class="pull-left">
-                      <span class="color-blue mr10 pointer" ng-click="getLikesData(post);"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{post.likeCount}}</b>Likes</span>
+                      <span class="color-blue mr10 pointer" ng-click="getLikesData(post);"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{post.likeCount}}</b> Likes</span>
                       <span class="color-blue mr10 pointer" ng-click="getCommentsData(post)"> <img src="img/comments.png" alt="" height="14"> <b> {{post.commentCount}} </b> Comments</span>
                       <!-- <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{post.userReviewCount}} Reviews ({{post.userReviewCount}}/5)</span> -->
                     </div>

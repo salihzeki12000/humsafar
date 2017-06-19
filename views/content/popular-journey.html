@@ -78,23 +78,23 @@
                   <!-- post type icon end -->
                 </div>
                 <!-- post status -->
-                <div class="post-your-status">
+                <div class="post-your-status relate">
                   <p class="your-post" ng-if="post.onGoing==false">{{post.name}} - Journey ({{post.duration}} {{post.duration|singularPlural:'Days'}})</p>
                   <p class="your-post" ng-if="post.onGoing==true">Started a Journey - {{post.name}}</p>
+                  <!-- flag country -->
+                  <div class="flag-section">
+                    <div class="country-visited" ng-repeat="visit in post.countryVisited | limitTo:3 track by $index">
+                      <img ng-src="{{visit.country.flag|uploadpath:30:30:'cover'}}" alt="" height="30">
+                    </div>
+                    <span class="" ng-if="post.countryVisited.length>3">+{{post.countryVisited.length-3}}</span>
+                  </div>
+                  <!-- flag country end -->
                 </div>
                 <!-- post status end -->
                 <!-- post header end -->
                 <!-- post-main-section -->
                 <div class="post-main-section pointer"  ng-click="routeOngo(post)">
                   <div class="relate">
-                    <!-- flag country -->
-                    <div class="flag-section">
-                      <div class="country-visited" ng-repeat="visit in post.countryVisited | limitTo:3 track by $index">
-                        <img ng-src="{{visit.country.flag|uploadpath:30:30:'cover'}}" alt="" height="30">
-                      </div>
-                      <span class="" ng-if="post.countryVisited.length>3">+{{post.countryVisited.length-3}}</span>
-                    </div>
-                    <!-- flag country end -->
                     <!-- tag on journey -->
                     <!--<div class="tag-ongo-journey">
                       <span class="inline-block color-white">On The Go</span>
@@ -308,7 +308,7 @@
                     <div class="social-likes-reviews" ng-if="!(((post.likeCount==0)||(post.likeCount==undefined))&&(post.commentCount==0))">
                       <div class="clearfix">
                         <div class="pull-left">
-                          <span class="color-blue mr10 pointer" ng-click="getLikesData(post);"><i class="fa fa-heart color-blue mr5"></i><b class="">{{post.likeCount}}</b> {{post.likeCount|singularPlural:'Likes'}}</span>
+                          <span class="color-blue mr10 pointer" ng-click="getLikesData(post);"><i class="fa fa-heart color-blue mr5"></i><b class="">{{post.likeCount}}</b>  {{post.likeCount|singularPlural:'Likes'}}</span>
                           <!-- <span class="color-blue">
                             <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue">
                             <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white">
@@ -316,7 +316,7 @@
                           <span class="color-blue pointer" ng-click="getCommentsData(post)">
                             <img src="img/comments.png" alt="" height="13" class="v-top if-blue">
                             <b class="">
-                            {{post.commentCount}} </b>{{post.commentCount |singularPlural:'Comments'}}</span>
+                            {{post.commentCount}} </b> {{post.commentCount |singularPlural:'Comments'}}</span>
                         </div>
                         <!--<div class="pull-right">
                           <div class="post-travel-icon">
