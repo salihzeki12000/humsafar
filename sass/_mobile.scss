@@ -564,6 +564,12 @@
     font-size: 20px;
   }
   .text-left-ab {
+    .quote-one { font-size: 18px; }
+    .tagline {
+      font-size: 35px;
+      line-height: initial;
+    }
+    .quote-sec { font-size: 16px; }
     .dot-icon li {
       font-size: 18px;
     }
@@ -747,6 +753,19 @@
     margin-top: 2px;
     left: 20px;
   } //libro-header end
+  // home screen
+  .text-left-ab {
+    .quote-one {
+      font-size: 16px;
+      letter-spacing: 3px;
+    }
+    .tagline { font-size: 30px; }
+    .quote-sec {
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+  }
+  // home screen end
   // setting page
   .setting-main-detail {
     .btn-upload {
@@ -1973,6 +1992,17 @@
     .fnt-60 {
       font-size: 40px;
     }
+  }
+  .text-left-ab {
+    .quote-one {
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+    .tagline {
+      font-size: 22px;
+      margin: 0 auto;
+    }
+    .quote-sec { font-size: 12px; }
   }
   .more-about-me {
     .more-detail {
