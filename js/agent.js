@@ -199,6 +199,15 @@ var agent = angular.module('agent', [])
         }).success(function(data){
           callback(data)
         });
+      },
+      getAlbum: function(formData, callback){
+        TravelibroService.http({
+          url: adminURL + "/album/getAlbum",
+          method: "POST",
+          data: formData
+        }).success(function(data){
+          callback(data)
+        });
       }
 
     }

@@ -173,7 +173,7 @@
           <div class="travel-life-part  blog-post {{post.type}} avenir-roman overflow">
             <!-- ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'" -->
             <div class="travel-journey-heading">
-              <div class="inline-block editor-subdetail v-mid">
+              <div class="inline-block v-mid">
                 <p class="m-clear color-blue travelitinerary-title"><span class="text-capitalize">{{post.name|truncate:'30'}} </span> - <span><span ng-if="post.type == 'quick-itinerary'">Quick </span> Itinerary</span> <span>( {{post.duration}} {{post.duration| singularPlural: 'Days'}} )</span></p>
                 <!-- <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.createdAt | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.createdAt | date :'hh:mm a'}}</span></p> -->
               </div>
@@ -190,7 +190,7 @@
               </div>
               <div class="date-itinerary">
                 <span class="view-date text-center">
-                  {{activity.createdAt|date:'MMM'}}<br>{{activity.createdAt|date:'yyyy'}}
+                  {{post.createdAt|date:'MMM'}}<br>{{post.createdAt|date:'yyyy'}}
                 </span>
               </div>
               <div class="journey-tag-holder" hidden>
@@ -269,14 +269,13 @@
                   </div>
                 </div>
               </div>
-              <div class="social-likes-reviews avenir-heavy">
+              <div class="social-likes-reviews avenir-heavy" ng-if="post.likeCount!=0 || post.commentCount!=0">
                 <div class="clearfix">
                   <div class="pull-left">
                     <span class="color-blue mr10 pointer" ng-click="getLikesData(post);"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{post.likeCount}}</b>Likes</span>
                     <span class="color-blue mr10 pointer" ng-click="getCommentsData(post)"><img src="img/comments.png" alt="" height="14"><b class=""> {{post.commentCount}} </b> Comments </span>
                     <!-- <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{post.userReviewCount}} Reviews ({{post.userReviewCount}}/5)</span> -->
                   </div>
-
                 </div>
               </div>
             </div>
@@ -284,100 +283,6 @@
         </div>
       </div>
       <!-- NEW CARD END -->
-      <!-- OLD CARDS -->
-      <!-- <div class="col-md-4 col-sm-6" ng-repeat="usritinerary in usrItineraryCard track by $index">
-        <div class="agt-itinerarycard">
-          <div class="itinerary-cardhead avenir-roman">
-            <p class="m-clear color-darkgrey"><i class="fa fa-calendar"></i><span class="ml5 ">{{usritinerary.timestampDate}}</span> | <i class="fa fa-clock-o mr5"></i> <span>{{usritinerary.timestampHour}}</span></p>
-          </div>
-          <div class="itinerary-img">
-            <div class="country-badges">
-              <div class="country-holder" ng-repeat="countryflagbadge in usritinerary.countryBadgesFlag track by $index">
-                <img ng-src="{{countryflagbadge}}" alt="" class="img-responsive">
-              </div>
-
-
-              <span class="country-count">+4</span>
-            </div>
-            <img ng-src="{{usritinerary.tripImg}}" alt="" class="img-responsive">
-            <div class="itinerary-imgfoot ">
-              <div class="imgfoot-top">
-                <h4 class="m-clear">{{usritinerary.itineraryTitle}}</h4>
-              </div>
-              <div class="imgfoot-bottom clearfix">
-                <div class="pull-left">
-                  <div class="journey-type">
-                    <ul class="list-inline">
-                      <li ng-repeat="journeytype in usritinerary.tripCat">
-                        <a href=""><img src="img/sunset.png" ng-src="{{journeytype}}" alt="" height="20"></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="pull-right">
-                  <div class="rt-foot-marg">
-                    <div class="journey-cost">
-                      <span>$ {{usritinerary.tripCost}}</span>
-                    </div>
-                    <div class="days-spent">
-                      <p><span class="block">{{usritinerary.noDays}}</span>Days</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="itinerary-cardfoot">
-            <div class="social-field-types">
-              <div class="user-social-item clearfix">
-                <div class="pull-left">
-                  <ul>
-                    <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
-                    <li>
-                      <a href="">
-                        <img src="img/comments.png" alt="" height="18" class="if-blue">
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">
-                        <img src="img/reviews.png" alt="" height="18" class="if-blue">
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">
-                        <img src="img/share.png" alt="" height="18" class="if-blue">
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="pull-right">
-                  <div class="">
-                    <span>
-                    <img src="img/options.png" alt="" width="3" class="if-blue">
-                  </span>
-                  </div>
-                </div>
-              </div>
-              <div class="social-likes-reviews">
-                <div class="clearfix">
-                  <div class="pull-left">
-                    <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{usritinerary.agtLikesCount}}</b>Likes</span>
-                    <span class="color-blue">
-                    <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue">
-                    {{usritinerary.agtReviewCount}} Reviews ({{usritinerary.agtRating}}/5)</span>
-                  </div>
-                  <div class="pull-right">
-                    <div class="post-travel-icon">
-                      <img src="img/travel.png" alt="" class="activity-travel-icon">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- OLD CARDS END -->
     </div>
   </div>
   <!-- Itinerary cards end -->

@@ -1057,17 +1057,12 @@
 .agent-photogallery {
   width: 275px;
   max-width: 275px;
-  max-height: 350px;
+  // max-height: 350px;
   margin: 3px;
   padding: 5px;
   border: 1px solid #e3e3e3;
   border-radius: 4px;
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    width: 100%;
-  }
+  background-color: #fff;
 }
 
 .testimonial-holder{
@@ -2613,6 +2608,10 @@ q {
     color: #fff;
     padding: 5px 15px;
   }
+
+  .lead-read> .panel-heading{
+    // background-color: $brand-lighter-grey;
+  }
 }
 
 .actionlead-tab {
@@ -3138,9 +3137,12 @@ q {
   // }
 }
 .travelitinerary-title{
+  // padding: 0;
   font-size: 15px;
 }
-
+.travel-journey-heading .travelitinerary-title{
+  padding: 0;
+}
 .travel-albumfooter{
   padding: 5px;
 }
@@ -5743,3 +5745,43 @@ q {
   }
 }
 // REMOVE ON MERGE END
+
+
+.agent-checkbox{
+  label{
+    position: relative;
+    display: block;
+    &:before{
+      content: '';
+      width: 20px;
+      height: 20px;
+      border: 1px solid #11d3cb;
+      border-radius: 4px;
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: transparent;
+      @include transition(all 300ms linear);
+    }
+
+    &:after{
+      content: '\f00c';
+      font: normal normal normal 14px/1 FontAwesome;
+      width: 20px;
+      height: 20px;
+      color: #b7b7b7;
+      position: absolute;
+      top: 0;
+      right: 0;
+      line-height: 20px;
+      text-align: center;
+    }
+  }
+
+  .photo-checked{
+    &:after{
+      color: $brand-cyan;
+    }
+  }
+}
