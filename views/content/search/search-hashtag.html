@@ -297,8 +297,8 @@
                 <div class="pull-right" ng-if="!((post.type =='editor') || (post.type =='editor-blog'))">
                   <div class="three-dots relate pointer" ng-init="post.option={}">
                     <span ng-click="editOption(post.option)">
-                        <img src="img/options.png" alt="" width="3" class="if-blue" ng-if="!(post.type=='editor')">
-                        <img src="img/options-white.png" alt="" width="3" class="if-white" ng-if="post.type=='editor'">
+                        <img src="img/options.png" alt="" class="if-blue" ng-if="!(post.type=='editor')">
+                        <img src="img/options-white.png" alt="" class="if-white" ng-if="post.type=='editor'">
                       </span>
                     <div class="post-edit-option" ng-show="post.option.backgroundClick">
                       <ul>

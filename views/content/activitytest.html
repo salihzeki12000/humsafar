@@ -62,8 +62,15 @@
                 </div>
                 <!-- post header end -->
                 <!-- post status -->
-                <div class="post-your-status" ng-if="activity.type=='quick-itinerary' || activity.type=='detail-itinerary' || activity.type=='on-the-go-journey' || activity.type=='ended-journey'">
+                <div class="post-your-status relate" ng-if="activity.type=='quick-itinerary' || activity.type=='detail-itinerary' || activity.type=='on-the-go-journey' || activity.type=='ended-journey'">
                   <p class="your-post" ng-bind-html="activity.thoughts"></p>
+                  <!-- flag country -->
+                  <div class="flag-section" ng-if="activity.type =='on-the-go-journey' || activity.type=='ended-journey' || activity.type=='quick-itinerary' || activity.type=='detail-itinerary'">
+                    <div class="country-visited" ng-repeat="n in activity.countryVisited | limitTo:3">
+                      <img ng-src="{{n.country.flag|uploadpath:28:28:'cover'}}" alt="">
+                    </div>
+                  </div>
+                  <!-- flag country end -->
                 </div>
                 <div class="post-your-status" ng-if="activity.type=='travel-life' || activity.type=='local-life'">
                   <p class="your-post" ng-if="activity|postString" ng-bind-html="activity | postString | safe"></p>
@@ -72,13 +79,6 @@
                 <!-- post-main-section -->
                 <div class="post-main-section">
                   <div class="relate">
-                    <!-- flag country -->
-                    <div class="flag-section" ng-if="activity.type =='on-the-go-journey' || activity.type=='ended-journey' || activity.type=='quick-itinerary' || activity.type=='detail-itinerary'">
-                      <div class="country-visited" ng-repeat="n in activity.countryVisited | limitTo:3">
-                        <img ng-src="{{n.country.flag|uploadpath:28:28:'cover'}}" alt="" height="30">
-                      </div>
-                    </div>
-                    <!-- flag country end -->
                     <!-- tag on journey -->
                     <!-- <div class="tag-ongo-journey pointer" ng-if="activity.type =='travel-life'"
                     ui-sref="single-notification({
@@ -175,8 +175,8 @@
                     <!-- post travelled journey -->
                     <div class="travelled-journey" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey'">
                       <div class="travelled-imgholder" ng-init="banner=activity.coverPhoto && activity.coverPhoto!=''?activity.coverPhoto:activity.startLocationPic"
-                        ng-click="routeOngo(activity)">
-                        <img ng-src="{{banner|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center">
+                        ng-click="routeOngo(activity)" style="background: url('{{banner|uploadpath}}') no-repeat 50% 50%">
+                        <!-- <img ng-src="{{banner|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center"> -->
                       </div>
                       <div class="journey-overview">
                         <ul ng-if="activity.type!='on-the-go-journey'">
@@ -536,8 +536,8 @@
                       <div class="pull-right">
                         <div class="">
                           <span>
-                            <img src="img/options.png" alt="" width="3" class="if-blue">
-                            <img src="img/options-white.png" alt="" width="3" class="if-white">
+                            <img src="img/options.png" alt=""  class="if-blue">
+                            <img src="img/options-white.png" alt=""  class="if-white">
                           </span>
                         </div>
                       </div>
