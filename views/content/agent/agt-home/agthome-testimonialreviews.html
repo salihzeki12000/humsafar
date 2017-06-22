@@ -1,4 +1,4 @@
-<div class="agt-home-testimonialreviews">
+<div class="agt-home-testimonialreviews"  infinite-scroll="getMoreAgentData();" infinite-scroll-disabled="scroll.busy">
 
   <!-- WRITE TESTIMONIAL -->
   <div class="write-testimonial " ng-class="{'bg-white' : reviewData.length == 0}" >
@@ -17,7 +17,7 @@
             <div class="testimonial-open range-custom" ng-show="showTestimonial" >
               <div class="give-rating text-center clearfix">
                 <span class="font-sz10 color-cyan">Rate This Agent</span>
-                <input ng-init="review.rating=7" type="range" min="1" max="10" step="1" ng-model="review.rating">
+                <input ng-init="review.rating=7" type="range" min="1" max="10" step="1" ng-model="review.rating" required>
                 <span class="pull-left color-grey">1</span>
                 <span class="pull-right color-grey">10</span>
               </div>
@@ -27,16 +27,16 @@
                 <p class="color-pink font-sz24">{{review.rating}}/10</p>
               </div>
               <div class="review-textarea text-center">
-                <form>
+                <form name="agentReview">
                   <span class="color-cyan">Add Your review </span>
-                  <textarea ng-init="review.testimonial = ''" name="" id="textareaChars" maxlength="300" placeholder="Fill me in ..." class="form-control review-text" ng-model="review.testimonial"></textarea>
+                  <textarea ng-init="review.testimonial = ''" name="" id="textareaChars" maxlength="300" placeholder="Fill me in ..." class="form-control review-text" ng-model="review.testimonial" required></textarea>
                   <div class="review-count clearfix">
                     <span class="pull-left font-sz10">
                       Min 150 Characters
                     </span>
                     <span class="pull-right font-sz10" id="reviewremainingC" >{{review.testimonial.length}}/300</span>
                   </div>
-                  <button class="btn btn-dark-blue btn-more post-review" ng-click="saveTestimonial(review)">POST</button>
+                  <button class="btn btn-dark-blue btn-more post-review" ng-click="saveTestimonial(review)" ng-disabled="agentReview.$invalid">POST</button>
                 </form>
               </div>
             </div>

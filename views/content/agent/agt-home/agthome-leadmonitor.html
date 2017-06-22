@@ -1,4 +1,4 @@
-<div class="agt-home-leadmonitor">
+<div class="agt-home-leadmonitor" infinite-scroll="getMoreLeads();" infinite-scroll-disabled="scroll.busy">
   <div class="container">
 
     <!-- EMPTY DATA SECTION -->
@@ -48,7 +48,7 @@
                   <div class="leadtab-title">
                     <p class="color-pink avenir-heavy text-capitalize">{{agtlead.name}}</p>
                   </div>
-                  <div class="leadtab-msgdiv color-white" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
+                  <div class="leadtab-msgdiv color-white" ng-class="{'disp-none': agtlead.open, 'inline-block': !agtlead.open}">
                     <p class="leadtab-msg"><span class="ledadmsg-country text-capitalize">{{agtlead.travellingTo}} </span><span class="ledadmsg-comment">- {{agtlead.instructions}} </span></p>
                   </div>
                   <i class="pull-right color-white mt10 fa " ng-class="{'fa fa-chevron-up': status.open, 'fa fa-chevron-down': !status.open}"></i>
@@ -110,7 +110,7 @@
         <!-- ACTIONED ACCORDION -->
         <div class="actiontab-accordionbox actionlead-tab" ng-if="actionLeads.length != 0">
           <uib-accordion close-others="oneAtATime">
-            <uib-accordion-group ng-repeat="agtlead in actionLeads track by $index" is-open="status.open">
+            <uib-accordion-group ng-repeat="agtlead in actionLeads track by $index" is-open="agtlead.open">
               <uib-accordion-heading>
                 <div class="lead-tab-title color-blue avenir-medium clearfix">
                   <div class="leadtab-profileholder  pull-left">
@@ -119,8 +119,8 @@
                   <div class="leadtab-title">
                     <p class="color-pink avenir-heavy text-capitalize">{{agtlead.name}}</p>
                   </div>
-                  <div class="leadtab-msgdiv color-blue" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
-                    <p class="leadtab-msg"><span class="ledadmsg-country text-capitalize">{{agtlead.travellingTo}} </span><span class="ledadmsg-comment">- {{agtlead.instructions}}</span></p><span class="color-pink">{{status.open}}</span>
+                  <div class="leadtab-msgdiv color-blue" ng-class="{'disp-none': agtlead.open, 'inline-block': !agtlead.open}">
+                    <p class="leadtab-msg"><span class="ledadmsg-country text-capitalize">{{agtlead.travellingTo}} </span><span class="ledadmsg-comment">- {{agtlead.instructions}}</span></p>
                   </div>
                   <i class="pull-right color-blue mt10 fa " ng-class="{'fa fa-chevron-up': status.open, 'fa fa-chevron-down': !status.open}"></i>
                   <div class="leadtab-title leadtab-date pull-right  color-blue" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">

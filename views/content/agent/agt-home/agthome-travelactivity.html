@@ -1,6 +1,6 @@
-<div class="agt-home-travelactivity">
+<div class="agt-home-travelactivity"   infinite-scroll="getMoreTravelActivity();" infinite-scroll-disabled="scroll.busy">
   <!-- ADD BUTTON -->
-  <div class="add-agentbutton travel-addbtn" >
+  <div class="add-agentbutton travel-addbtn"ng-class="{'bg-white' : travelActivity.length==0}"  ng-if="template.isLoggedIn && template.isMine">
     <div class="container">
       <div class="clearfix">
         <div class="pull-right">
@@ -8,15 +8,15 @@
             <span class="pointer add-holder" ng-click="addItinerary();" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
             <div class="add-more-itinerary" ng-show="showItinerary">
               <p class="color-cyan bord-bot">Update</p>
-              <form>
+              <form name="agentStatus">
                 <div class="form-group">
                   <div class="a">
                     <!-- <input type="text" class="form-control color-white" placeholder="Status" id="postStatus" ng-model="status.status"> -->
-                    <textarea id="postStatus" cols="30" class="agent-statustext form-control" placeholder="Status" ng-model="status.status" row="2"></textarea>
+                    <textarea id="postStatus" cols="30" class="agent-statustext form-control" placeholder="Status" ng-model="status.status" row="2" required></textarea>
                     <!-- <span class="pull-right font-sz10" id="postcount"></span> -->
                   </div>
                 </div>￼
-                <button class="btn btn-pink tourupload-position" ng-click="sendStatus(status);">POST</button>
+                <button class="btn btn-pink tourupload-position" ng-click="sendStatus(status);" ng-disabled="agentStatus.$invalid">POST</button>
               </form>
             </div>
           </div>
@@ -26,7 +26,7 @@
   </div>
   <!-- ADD BUTTON END -->
   <!-- EMPTY USER INTRO -->
-  <div class="empty-intro emptyuser-travel bg-white avenir-roman" hidden>
+  <div class="empty-intro emptyuser-travel bg-white avenir-roman"  ng-if="!template.isMine && travelActivity.length==0">
     <div class="container">
       <div class="row">
         <div class="col-md-offset-2 col-md-8">
@@ -40,7 +40,7 @@
   </div>
   <!-- EMPTY USER INTRO END -->
   <!-- EMPTY AGENT INTRO -->
-  <div class="empty-intro bg-white" hidden>
+  <div class="empty-intro bg-white" ng-if="travelActivity.length==0 && template.isLoggedIn && template.isMine">
     <div class="text-center avenir-roman">
       <div class="container">
         <div class="row">

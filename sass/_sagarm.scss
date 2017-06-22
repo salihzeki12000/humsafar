@@ -1323,12 +1323,16 @@ q {
 }
 
 .abtcountry-row{
-  display: flex;
-  flex-wrap: wrap;
+  // display: flex;
+  // flex-wrap: wrap;
+  display: block;
+  // @extend .clearfix;
 }
 
 .abtcountry-col{
-  flex: 25%;
+  width: 25%;
+  display: inline-block;
+  float: left;
 }
 
 .spclcountry-name {
@@ -2508,6 +2512,7 @@ q {
     position: absolute;
     bottom: 0;
     background-color: $brand-blue;
+    z-index: 1;
   }
 
   &:before {

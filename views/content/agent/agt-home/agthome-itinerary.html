@@ -1,4 +1,4 @@
-<div class="agt-home-itinerary">
+<div class="agt-home-itinerary"  infinite-scroll="getMoreAgentItinerary();" infinite-scroll-disabled="scroll.busy">
 
   <!-- ADD BUTTON -->
   <div class="add-agentbutton" ng-if="template.isLoggedIn && template.isMine">
@@ -180,7 +180,7 @@
             </div>
             <div class="onway-journey relate pointer" ng-click="routeItinerary(post);">
               <div class="onway-imgholder">
-                <img ng-src="{{post.coverPhoto|uploadpath:370:340:'cover'}}" alt="" class="full-width m-center">
+                <img ng-src="{{post.coverPhoto|uploadpath:370:340:'cover'}}" alt="{{post.name}} | TraveLibro" class="full-width m-center">
               </div>
               <div class="country-badges">
                 <div class="country-holder ng-scope" ng-repeat="flag in post.countryVisited|limitTo:3">
@@ -254,10 +254,10 @@
                     </li>
                   </ul>
                 </div>
-                <div class="pull-right">
+                <div class="pull-right" hidden>
                   <div class="relate" ng-init="post.option={}">
-                    <span class="pointer" ng-click="editOption(post.option)">
-                    <img src="img/options.png" alt="" height="18" class="pointer">
+                    <span class="pointer" ng-click="editOption(post.option);">
+                    <img src="img/options.png" alt="Options" height="18" class="pointer">
                   </span>
                     <div class="activity-edit-option" ng-show="post.option.backgroundClick">
                       <ul>

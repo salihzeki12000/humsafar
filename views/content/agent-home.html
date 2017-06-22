@@ -36,7 +36,7 @@
         <div class="row">
           <div class="col-md-9 col-sm-9">
             <div class="agent-scroll">
-              <ul class="list-inline">
+              <ul class="list-inline" ng-init="analytics.option={};">
                 <li ng-click="getTab(0);" ng-class="{'active': agthomeoptions.active=='agthome-itinerary'}">Itineraries </li>
                 <li ng-click="getTab(1);  scrollDown();" ng-class="{'active': agthomeoptions.active=='agthome-tourpackages'}">Tours & Packages</li>
                 <li ng-click="getTab(2)" ng-class="{'active': agthomeoptions.active=='agthome-photovideos'}"> Photos & Videos</li>
@@ -44,8 +44,8 @@
                 <li ng-click="getTab(4)" ng-class="{'active': agthomeoptions.active=='agthome-travelactivity'}" ng-if="template.isMine">My Activity</li>
                 <li ng-click="getTab(4)" ng-class="{'active': agthomeoptions.active=='agthome-travelactivity'}" ng-if="!template.isMine">Travel Activity</li>
                 <li ng-click="getTab(5)" ng-class="{'active': agthomeoptions.active=='agthome-leadmonitor'}" ng-if="template.isMine">Lead Monitor</li>
-                <li ng-click="showOptions();" ng-class="{'active': agthomeoptions.active=='agthome-analytics'}" class="relate" ng-if="template.isMine">Analytics
-                  <div class="analytics-dropoptions" ng-show="viewOption">
+                <li ng-click="editOption(analytics.option);" ng-class="{'active': agthomeoptions.active=='agthome-analytics'}" class="relate" ng-if="template.isMine">Analytics
+                  <div class="analytics-dropoptions" ng-show="analytics.option.backgroundClick">
                     <ul class="list-unstyled">
                       <li ng-click="getAgentScroll('profileview');">Profile Views</li>
                       <li ng-click="getAgentScroll('follower');">Followers</li>
@@ -77,7 +77,7 @@
           <h4 class="avenir-roman color-blue">Enquire</h4>
         </div>
         <div class="user-enquireform">
-          <form>
+          <form name="agentEnquiry">
             <div class="form-group">
               <div class="enquirytab-cmpny-inputholder">
                 <input type="text" class="form-control color-blue" placeholder="Travelling To" ng-model="enquire.travellingTo">
@@ -86,7 +86,7 @@
 
             <div class="form-group">
               <div class="enquirytab-cmpny-inputholder">
-                <input type="text" class="form-control color-blue" placeholder="Name" ng-model="enquire.name">
+                <input type="text" class="form-control color-blue" placeholder="Name" ng-model="enquire.name" required="">
                 <div class="enquirytab-input-icon">
                   <i class="fa fa-user color-grey"></i>
                 </div>
@@ -96,10 +96,10 @@
             <div class="row">
               <div class="col-md-5 col-sm-5">
                 <div class="form-group">
-                  <div class="enquirytab-cmpny-inputholder">
-                    <input type="tel" class="form-control color-blue" placeholder="Contact No" ng-model="enquire.contactNo" ng-intl-tel-input>
+                  <div class="agentcompany-phone enquirytab-cmpny-inputholder ">
+                    <input type="tel" class="form-control color-blue" placeholder="Contact No" ng-model="enquire.contactNo" ng-intl-tel-input required>
                     <span id="error-msg1" class="hide intel-error" ng-if="!enquire.contactNo">Invalid number</span>
-                    <div class="enquirytab-input-icon">
+                    <div class="enquirytab-input-icon" hidden>
                       <i class="fa fa-phone color-grey"></i>
                     </div>
                   </div>
@@ -108,7 +108,7 @@
               <div class="col-md-7 col-sm-7">
                 <div class="form-group">
                   <div class="enquirytab-cmpny-inputholder">
-                    <input type="email" class="form-control color-blue" placeholder="Email" ng-model="enquire.email">
+                    <input type="email" class="form-control color-blue" placeholder="Email" ng-model="enquire.email" required>
                     <div class="enquirytab-input-icon">
                       <i class="fa fa-envelope color-grey"></i>
                     </div>
@@ -123,7 +123,7 @@
               </div>
             </div>
             <div class="enquirebutton">
-              <button class="btn btn-pink" ng-click="sendEnquiry(enquire);"><i class="fa fa-share"></i> Send
+              <button class="btn btn-pink" ng-click="sendEnquiry(enquire);"  ng-disabled="agentEnquiry.$invalid"><i class="fa fa-share"></i> Send
           </button>
             </div>
 

@@ -1,4 +1,4 @@
-<div class="agt-home-photovideos">
+<div class="agt-home-photovideos" infinite-scroll="getMoreAgentPhotos()" infinite-scroll-disabled="scroll.busy">
 
   <!-- ADD BUTTON AND FILTER START -->
   <div class="add-agentbutton">
@@ -19,10 +19,12 @@
                 <label for="all">All</label>
               </div> -->
               <div class="opt custom-checkbox " ng-repeat="picfilter in filterList track by $index">
-                <div class="agent-checkbox">
-                  <!-- <input type="checkbox" id="{{picfilter._id}}" ng-click = "addFilterId(picfilter)" ng-model="picFilter.checked"> -->
+                <div class="">
+                  <!-- agent-checkbox -->
+                  <input type="checkbox" id="{{picfilter._id}}" ng-click = "addFilterId(picfilter)" ng-model="picFilter.checked">
                   <!-- {{picFilter.checked}} -->
-                  <label for="{{picfilter._id}}" ng-click = "addFilterId(picfilter)" class="{{picfilter.class}}">{{picfilter.name}} <span class="color-pink">{{picfilter.class}}{{picfilter.checked}}</span></label>
+                  <label for="{{picfilter._id}}"  class="{{picfilter.class}}">{{picfilter.name}} <span class="color-pink" hidden>{{picfilter.class}}{{picfilter.checked}}</span></label>
+                  <!-- ng-click = "addFilterId(picfilter)" -->
                 </div>
               </div>
             </div>
@@ -38,7 +40,7 @@
             <div class="add-more-itinerary" ng-show="showItinerary">
               <p class="color-cyan bord-bot">Photos & Videos</p>
               <div class="upload-photosec " ng-hide="showPhotoupload">
-                <form>
+                <form name="albumForm">
                   <div class="form-group">
                     <div class="a">
                       <input type="text" class="form-control color-white" placeholder="Name Album" ng-model="album.name" required>
@@ -46,7 +48,7 @@
                   </div>￼
                   <div class="mb10  text-center relate" ng-hide="photoSec">
                     <button class="btn btn-white-outline" ng-click="showPhotoupload=!showPhotoupload">Upload Photos/Videos</button>
-                    <upload-image multiple="true" ng-model="agentPhotos" ng-callback="addAgentPhotos(data);" no-view="true" class="pointer agent-photoupload"></upload-image>
+                    <upload-image multiple="true" ng-model="agentPhotos" ng-callback="addAgentPhotos(data);" no-view="true" class="pointer agent-photoupload" required></upload-image>
                   </div>
                 </form>
               </div>
@@ -86,7 +88,8 @@
                   <upload-image multiple="true" ng-model="agentPhotos" ng-callback="addAgentPhotos(data);" no-view class="pointer agent-photoupload"></upload-image>
                 </div>
               </div>
-              <button class="btn btn-pink tourupload-position" ng-click="savePhotoVideo(album);">POST</button>
+              <p ng-show="showPhotoError">Please select atleast one photo or video.</p>
+              <button class="btn btn-pink tourupload-position" ng-click="savePhotoVideo(album);" ng-disabled="albumForm.$invalid">POST</button>
             </div>
           </div>
         </div>
@@ -127,9 +130,9 @@
   <!-- EMPTY USER INTRO PAGE END -->
 
   <!-- PHOTO CARDS START -->
-  <div class="agt-home-photo-card" ng-if="agentAlbum.length!=0">
+  <div class="agt-home-photo-card" ng-if="agentAlbum.length!=0" >
     <div class="container">
-      <div class="m-center">
+      <div class="m-center" >
         <div masonry preserve-order class="masonry-main">
           <div class="masonry-brick" ng-repeat="photo in agentAlbum track by $index">
             <div class="agent-photogallery relate">
