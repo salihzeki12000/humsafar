@@ -11557,6 +11557,7 @@ display:none;
     img {
       height: 100%;
       width: auto;
+      max-width: 58vw; //its temporary width
       // @extend .get-center;
     }
   }
