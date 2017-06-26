@@ -21,9 +21,9 @@
               <div class="opt custom-checkbox " ng-repeat="picfilter in filterList track by $index">
                 <div class="">
                   <!-- agent-checkbox -->
-                  <input type="checkbox" id="{{picfilter._id}}" ng-click = "addFilterId(picfilter)" ng-model="picFilter.checked">
+                  <input type="checkbox" id="{{picfilter._id}}" ng-click = "addFilterId(picfilter)" ng-model="picfilter.checked">
                   <!-- {{picFilter.checked}} -->
-                  <label for="{{picfilter._id}}"  class="{{picfilter.class}}">{{picfilter.name}} <span class="color-pink" hidden>{{picfilter.class}}{{picfilter.checked}}</span></label>
+                  <label for="{{picfilter._id}}"  class="{{picfilter.class}}">{{picfilter.name}} <span class="color-pink hide" >{{picfilter.class}}{{picfilter.checked}}</span></label>
                   <!-- ng-click = "addFilterId(picfilter)" -->
                 </div>
               </div>
@@ -88,7 +88,7 @@
                   <upload-image multiple="true" ng-model="agentPhotos" ng-callback="addAgentPhotos(data);" no-view class="pointer agent-photoupload"></upload-image>
                 </div>
               </div>
-              <p ng-show="showPhotoError">Please select atleast one photo or video.</p>
+              <p ng-show="showPhotoError" class="color-pink font-sz10 text-center">Please select atleast one photo or video.</p>
               <button class="btn btn-pink tourupload-position" ng-click="savePhotoVideo(album);" ng-disabled="albumForm.$invalid">POST</button>
             </div>
           </div>

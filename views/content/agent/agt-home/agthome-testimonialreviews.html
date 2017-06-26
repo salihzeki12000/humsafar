@@ -29,12 +29,12 @@
               <div class="review-textarea text-center">
                 <form name="agentReview">
                   <span class="color-cyan">Add Your review </span>
-                  <textarea ng-init="review.testimonial = ''" name="" id="textareaChars" maxlength="300" placeholder="Fill me in ..." class="form-control review-text" ng-model="review.testimonial" required></textarea>
+                  <textarea ng-init="review.testimonial = ''" id="textareaChars" minlength="150" maxlength="300" placeholder="Fill me in ..." class="form-control review-text" ng-model="review.testimonial" required></textarea>
                   <div class="review-count clearfix">
                     <span class="pull-left font-sz10">
                       Min 150 Characters
                     </span>
-                    <span class="pull-right font-sz10" id="reviewremainingC" >{{review.testimonial.length}}/300</span>
+                    <span class="pull-right font-sz10" >{{review.testimonial.length}}/300</span>
                   </div>
                   <button class="btn btn-dark-blue btn-more post-review" ng-click="saveTestimonial(review)" ng-disabled="agentReview.$invalid">POST</button>
                 </form>

@@ -11331,6 +11331,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           if (data.data._id) {
             $.jStorage.set("isLoggedIn", true);
             $.jStorage.set("profile", data.data);
+            $scope.agentData = data.data;
             // console.log($.jStorage.get('profile'));
             console.log("Profile successfully set on jStorage");
           } else {
@@ -11386,6 +11387,62 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     })
   };
   // REPORT PROBLEM END
+
+  // CHANGE PROFILE PICTURE
+  $scope.myImage = '';
+  $scope.agentCroppedImage = '';
+  $scope.showImage = false;
+  var got = setInterval(function() {
+    if (document.getElementById('agentProfilePic')) {
+      document.getElementById('agentProfilePic').onchange = function(evt) {
+        var file = evt.currentTarget.files[0];
+        var reader = new FileReader();
+        reader.onload = function(evt1) {
+          $scope.$apply(function($scope) {
+            $scope.showImage = true;
+            $scope.agentImage = evt1.target.result;
+          });
+        };
+        reader.readAsDataURL(file);
+      };
+      clearInterval(got);
+    }
+  }, 1000);
+
+  $scope.uploadAgentProfilePic = function(imageBase64) {
+    var agentData = _.cloneDeep($scope.agentData);;
+    var file = imageTestingCallback(imageBase64, 'image/png');
+    console.log(file);
+    NavigationService.uploadFile(file, function(response) {
+      if (response.value) {
+        agentData.profilePicture = response.data[0];
+        console.log(agentData.profilePicture,"profile save");
+        Agent.saveSettings(agentData, function(data) {
+          console.log(data, 'save setting');
+          if (data.value == true) {
+            console.log('setting save success');
+            NavigationService.getAgentsProfile($.jStorage.get("profile").urlSlug, function(data, status) {
+              if (data.data._id) {
+                $.jStorage.set("isLoggedIn", true);
+                $.jStorage.set("profile", data.data);
+                console.log("Profile successfully set on jStorage");
+                $scope.showImage = false;
+              } else {
+                $.jStorage.flush();
+              }
+            }, function(err) {
+              console.log("Error:", err);
+            });
+          } else {
+            console.log('setting save FAIL');
+          }
+        });
+      } else {
+        console.log("no img save");
+      }
+    });
+  }
+  // CHANGE PROFILE PICTURE END
 
   // INTEGRATION  END
 
@@ -12137,8 +12194,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.showItinerary = false;
     $scope.addHomeBackdrop = "";
     $scope.tour = {};
-    // $scope.tour.currency = [];
+    // $scope.tour.currency = "";
     $scope.album = {};
+    $scope.albumArray=[];
     $scope.status = {};
     $scope.agentPhotosVideos = [];
     $scope.agentPhotosArray = [];
@@ -12151,6 +12209,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     busy: false,
     stopCallingApi: false,
   };
+  setInterval(function() {
+    $scope.paginationLoader = TemplateService.paginationLoader;
+  }, 300);
 
 
   //scroll agent navbar  change
@@ -12346,7 +12407,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log(data, 'Tour saved Success');
         if (data.value == true) {
           $scope.addItinerary();
+          $scope.tour = {};
+          $scope.toursForm.$setPristine();
+          $scope.tour.displayPic = "";
+          $scope.showTourPdf = false;
+          $scope.showTourPic = false;
           $scope.getAgentData('tours&packages', $scope.activeUrlSlug, $scope.pagenumber);
+          // document.getElementById("toursForm").reset();
+          document.getElementById("toursForm").$setPristine();
         } else {
           console.log('data error');
         }
@@ -12505,7 +12573,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       console.log($scope.album, 'album');
       if($scope.agentPhotosVideos.length == 0){
-        $scope.shoePhotoError = true;
+        $scope.showPhotoError = true;
       } else {
         $scope.showPhotoError = false;
         Agent.savePhotoAlbum(album, function(data) {
@@ -12524,7 +12592,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       })
       }
-      
+
     }
     // SAVE PHOTO VIDEO END
     // SAVE PHOTO VIDEOS END
@@ -12536,26 +12604,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   // });
   // on load modal end
 
-  //status character counter
-  $scope.$on('$viewContentLoaded', function() {
-    $timeout(function() {
-      $('#postStatus').keyup(updateCount);
-      $('#postStatus').keydown(updateCount);
-      $('#postcount').text(0 + '/350');
-
-      function updateCount() {
-        var count = $('#postcount').val().length;
-        $('#postcount').text(count + '/350');
-      }
-    }, 100);
-  });
-  //status character counter end
   $scope.status = {
     'refreshArray': true
   };
   var prevIndex;
   var prevLead;
 
+  // LEADS UNREAD TO READ
   // $scope.leadRead = function (currentLead, currentIndex, open) {
   //   console.log(currentIndex, open);
   //   if (prevIndex == undefined) {
@@ -12621,6 +12676,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   //     }
   //   }
   // }
+  // LEADS UNREAD TO READ END
 
   $scope.leadRead = function(currentLead, currentIndex, open) {
     console.log(currentIndex, open);
@@ -12695,7 +12751,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     photoObj.urlSlug = activeSlug;
     photoObj.pagenumber = 0;
     photoObj.album = $scope.albumArray;
-    console.log(photoObj, 'photovideo call');
+    console.log('get photovideo');
     $scope.getMoreAgentPhotos();
   }
 
@@ -12709,6 +12765,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       } else {
         scroll.scrollBusy = true;
         ++photoObj.pagenumber;
+        console.log(photoObj, 'get more photovideo');
         Agent.getAlbum(photoObj, function(data) {
           scroll.scrollBusy = false;
           if (data.data.media.length == 0) {
@@ -12722,10 +12779,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               });
             }
             $scope.filterList = data.data.album;
-            $scope.filterList = _.each($scope.filterList, function(n) {
+            _.each($scope.filterList, function(n) {
               n.checked = false,
               n.class = ""
-            })
+            });
+            if($scope.albumArray.length != 0){
+              console.log("!0 enter");
+              _.each($scope.albumArray,function(n){
+                console.log("albumArray enter");
+                _.each($scope.filterList,function(n1){
+                  console.log("filterList enter");
+                  if(n1._id == n){
+                    console.log("id if enter");
+                    n1.checked = true,
+                    n1.class = "photo-checked"
+                }
+              });
+            });
+            }
             console.log($scope.filterList, "filterList false");
           }
         }, function(data, status) {
@@ -12773,6 +12844,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   $scope.filterPhotoAlbum = function() {
     $scope.getPhotoVideo($scope.activeUrlSlug);
+    // CLOSE FILTER ON APPLY
+    $("#demo").removeClass("in");
+    $(".photo-filter").addClass("collapsed");
+
+    // CLOSE FILTER ON APPLY  END
   }
 
   $scope.clearPhotoFilter = function() {
