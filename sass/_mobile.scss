@@ -370,6 +370,9 @@
       float: none !important;
     }
   } // journey info strip end
+  .notify-popup .notify-imgholder img {
+    max-width: initial;
+  }
   // on the go journey page end
   // trip summary
   .trip-day-detail {
