@@ -160,21 +160,21 @@
                   <div class="profile-agtphoto-sec upload-profile">
                     <label for="profile" class="color-blue avenir-medium">Profile Photo</label>
                     <div class="cropArea relate" ng-show="showImage" id="profile">
-                      <div class="cancel" ng-click="showImage"><span class="color-white pointer">Cancel</span></div>
-                      <img-crop image="myImage" result-image="myCroppedImage">
+                      <div class="cancel" ng-click="showImage=false"><span class="pointer">Cancel</span></div>
+                      <img-crop image="agentImage" result-image="agentCroppedImage">
                       </img-crop>
                       <div class="btn-upload">
-                        <button class="btn btn-pink btn-more">Upload</button>
+                        <button class="btn btn-pink btn-more" ng-click="uploadAgentProfilePic(agentCroppedImage)">Upload</button>
                       </div>
                     </div>
                     <div class="agtupload-section text-center" ng-hide="showImage">
-                      <!-- <img src="img/upload-transparent.png" alt="" class="m-center img-responsive">
-                      <p class="text-center color-grey avenir-roman">Drag Your Company Logo here</p>
-                      <span class="block mt10 color-grey avenir-roman">-or-</span> -->
+                      <div>
+                        <img ng-src="{{agentData.profilePicture|uploadpath:200:200:'cover'}}" alt="{{agentData.name}}" class="agentsetting-profilepreview m-center img-responsive">
+                      </div>
                       <div class="upload-btn">
                         <div class="relate inline-block mr10  agtform-file">
                           <button class="btn btn-dark-blue pointer avenir-light mob-paddupload"> Upload  Photo</button>
-                          <input type="file" id="fileInput" class="getfile pointer" />
+                          <input type="file" id="agentProfilePic" class="getfile pointer" />
                         </div>
                         <!-- <div class="inline-block agtfrom-photogallery">
                           <button class="btn btn-dark-blue pointer avenir-light">Your Photos</button>

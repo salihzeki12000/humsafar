@@ -2031,6 +2031,10 @@ q {
   padding: 15px;
 }
 
+.agentsetting-profilepreview{
+  border-radius: 100%;
+}
+
 .agent-upgrade {
   @extend .avenir-roman;
 }
@@ -2041,6 +2045,24 @@ q {
   .upload-profile {
     padding: 0 0 20px;
     box-shadow: none;
+
+    .cropArea{
+      max-height: 300px;
+      }
+
+      .cancel{
+        position: absolute;
+        top: 3px;
+        right: 7px;
+        z-index: 1;
+      }
+
+      .btn-upload{
+        position: absolute;
+        right: 5px;
+        bottom: 7px;
+        color: $brand-blue;
+      }
   }
 }
 
@@ -2984,6 +3006,14 @@ q {
   }
 }
 // Agent home
+
+.agentform-error{
+  position: absolute;
+  top: 100%;
+  left: 0;
+  color: $brand-pink;
+  font-size: 10px;
+}
 
 .agt-home-tourpackage {
   .down {
