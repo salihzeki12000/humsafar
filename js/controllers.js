@@ -12579,13 +12579,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         Agent.savePhotoAlbum(album, function(data) {
         if (data.value == true) {
           console.log('album saved');
-          $scope.addItinerary();
           $scope.photoSec = false;
           $scope.album = {};
           $scope.agentPhotosVideos = [];
           $scope.agentPhotosArray = [];
           $scope.agentPhotos = [];
           $scope.agentVideos = [];
+          $scope.addItinerary();
           $scope.getPhotoVideo($scope.activeUrlSlug);
         } else {
           console.log('album error');
@@ -12909,7 +12909,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   // GET TOURS AND TESTIMONIALS
   var formAgentData = {};
-  $scope.getAgentData = function(type, activeSlug, pagenumber) {
+  $scope.getAgentData = function(type, activeSlug) {
     scroll.scrollBusy = false;
     scroll.stopCallingApi = false;
     formAgentData = {
@@ -13143,13 +13143,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.agthomeoptions.active = "agthome-itinerary";
       $scope.initialiseArray();
       $scope.getAgentItinerary($scope.activeUrlSlug);
+      console.log("switch iti");
       break;
     case "tours-and-packages":
       $scope.agthome.innerView = allagthome[1];
       $scope.agthomeoptions.active = "agthome-tourpackages";
       $scope.initialiseArray();
       $scope.agentScrollDown();
-      $scope.getAgentData('tours&packages', $scope.activeUrlSlug, $scope.pagenumber);
+      $scope.getAgentData('tours&packages', $scope.activeUrlSlug);
+      console.log("switch tour");
       break;
     case "photos-and-videos":
       $scope.agthome.innerView = allagthome[2];
@@ -13157,6 +13159,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.initialiseArray();
       $scope.agentScrollDown();
       $scope.getPhotoVideo($scope.activeUrlSlug);
+      console.log("switch pic");
       break;
     case "testimonials-and-reviews":
       $scope.agthome.innerView = allagthome[3];
@@ -13164,13 +13167,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.initialiseArray();
       $scope.agentScrollDown();
       $scope.getAvgRating($scope.activeUrlSlug);
-      $scope.getAgentData('testimonials&reviews', $scope.activeUrlSlug, $scope.pagenumber);
+      $scope.getAgentData('testimonials&reviews', $scope.activeUrlSlug);
+      console.log("switch revi");
       break;
     case "travel-activity":
       $scope.agthome.innerView = allagthome[4];
       $scope.agthomeoptions.active = "agthome-travelactivity";
       $scope.agentScrollDown();
       $scope.getTravelActivity($scope.activeUrlSlug);
+      console.log("switch travel");
       break;
     case "lead-monitor":
       $scope.agthome.innerView = allagthome[5];
@@ -13179,6 +13184,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.agentScrollDown();
       $scope.getAvgRating($scope.activeUrlSlug);
       $scope.getLeads('unActioned');
+      console.log("switch lead");
       break;
     case "analytics":
       $scope.agthome.innerView = allagthome[6];
@@ -13194,16 +13200,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           console.log('ERROR IN GET PROFILE VIEWS');
         }
       })
+      console.log("switch ana");
       break;
     case "about-us":
       $scope.agthome.innerView = allagthome[7];
       $scope.agthomeoptions.active = "agthome-aboutus";
       $scope.initialiseArray();
       $scope.agentScrollDown();
+      console.log("switch abt");
       break;
     default:
       $scope.agthome.innerView = allagthome[0];
       $scope.getAgentItinerary($scope.activeUrlSlug);
+      console.log("switch def");
       break;
     }
 
@@ -13221,6 +13230,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agenthomeItinerary = true;
         $scope.initialiseArray();
         $scope.getAgentItinerary($scope.activeUrlSlug);
+        console.log("case iti");
         break;
       case 1:
         url = "tours-and-packages";
@@ -13228,7 +13238,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agenthomeItinerary = false;
         $scope.initialiseArray();
         $scope.agentScrollDown();
-        $scope.getAgentData('tours&packages', $scope.activeUrlSlug, $scope.pagenumber);
+        $scope.getAgentData('tours&packages', $scope.activeUrlSlug);
+        console.log("case tour");
         break;
       case 2:
         url = "photos-and-videos";
@@ -13237,6 +13248,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.initialiseArray();
         $scope.agentScrollDown();
         $scope.getPhotoVideo($scope.activeUrlSlug);
+        console.log("case pic");
         break;
       case 3:
         url = "testimonials-and-reviews";
@@ -13245,7 +13257,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.initialiseArray();
         $scope.agentScrollDown();
         $scope.getAvgRating($scope.activeUrlSlug);
-        $scope.getAgentData('testimonials&reviews', $scope.activeUrlSlug, $scope.pagenumber);
+        $scope.getAgentData('testimonials&reviews', $scope.activeUrlSlug);
+        console.log("case test");
         break;
       case 4:
         url = "travel-activity";
@@ -13254,6 +13267,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.initialiseArray();
         $scope.agentScrollDown();
         $scope.getTravelActivity($scope.activeUrlSlug);
+        console.log("case travel");
         break;
       case 5:
         url = "lead-monitor";
@@ -13263,6 +13277,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agentScrollDown();
         $scope.getAvgRating($scope.activeUrlSlug);
         $scope.getLeads('unActioned');
+        console.log("case lead");
         break;
       case 6:
         url = "analytics";
@@ -13279,6 +13294,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             console.log('ERROR IN GET PROFILE VIEWS');
           }
         })
+        console.log("case ana");
         break;
       case 7:
         url = "about-us";
@@ -13286,6 +13302,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agenthomeItinerary = false;
         $scope.initialiseArray();
         $scope.agentScrollDown();
+        console.log("case ana");
         break;
       default:
         url = "itineraries";
@@ -13293,6 +13310,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agenthomeItinerary = true;
         $scope.initialiseArray();
         $scope.getAgentItinerary($scope.activeUrlSlug);
+        console.log("case def");
         break;
     }
     console.log("userdata", $scope.userData.urlSlug);

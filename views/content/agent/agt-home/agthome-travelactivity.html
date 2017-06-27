@@ -113,8 +113,8 @@
                       <span class="country-count" ng-if="tourcard.country.length>3">+{{activity.country.length-3}}</span>
                     </div>
                     <img ng-src="{{activity.displayPic|uploadpath}}" alt="{{activity.name}} | Travel Libro" class="img-responsive">
-                    <div class="itinerary-imgfoot ">
-                      <div class="imgfoot-top tour-imgfoot clearfix">
+                    <div class="itinerary-imgfoot tour-imgfoot">
+                      <div class="imgfoot-top  clearfix">
                         <div class="pull-left">
                           <h4 class="avenir-heavy text-capitalize font-sz18 m-clear">{{activity.title}}</h4>
                           <p class="day-night" ng-if="activity.nights && activity.days"><span class="ng-binding">{{activity.nights}} Nights</span> | <span class="ng-binding">{{activity.days}} Days</span></p>

@@ -137,7 +137,8 @@
           <div class="masonry-brick" ng-repeat="photo in agentAlbum track by $index">
             <div class="agent-photogallery relate">
               <span ng-if="photo.type=='video'" class="get-center moment-videoicon"><i class="fa fa-play-circle fa-2x color-white"></i></span>
-              <img ng-src="{{photo.name|uploadpath:'275'}}" alt="{{photo.album}} | TraveLibro" class="img-responsive">
+              <img ng-if="photo.type=='photo'" ng-src="{{photo.name|uploadpath:'275'}}" alt="{{photo.album}} | TraveLibro" class="img-responsive">
+              <img ng-if="photo.type=='video'" ng-src="{{photo.thumbnail|uploadpath:'275'}}" alt="{{photo.album}} | TraveLibro" class="img-responsive">
             </div>
           </div>
         </div>
@@ -145,4 +146,8 @@
     </div>
   </div>
   <!-- PHOTO CARDS END -->
+</div>
+
+<div class="" ng-if="template.paginationLoader">
+  <img src="img/page.svg" alt="Loading..." class="m-center img-responsive" width="25px">
 </div>
