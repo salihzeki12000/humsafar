@@ -194,6 +194,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.formData = {};
   $scope.agentSignup = false;
   $scope.alreadyExist = false;
+  $scope.showError = {
+    'show': false,
+    'msg': ''
+  }
 
   $scope.bookingLink = function() {
     window.location.href = "https://travelibro.com/bookings/";
@@ -236,7 +240,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
                 window.location = $.jStorage.get("url") + "?accessToken=" + $.jStorage.get("accessToken");
               } else {
-                if ($.jStorage.get("profile").type == "user") {
+                if ($.jStorage.get("profile").type == "User") {
                   $state.go("mylife", {
                     name: 'journey',
                     urlSlug: slug
@@ -248,9 +252,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 }
               }
             } else {
-              if ($.jStorage.get("profile").type == "user") {
+              if ($.jStorage.get("profile").type == "User") {
                 $state.go('mainpage');
-              } else {
+              } else if( $.jStorage.get("profile").type=="TravelAgent"){
                 $state.go('agent-login');
               }
             }
@@ -259,7 +263,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         function(err) {
           console.log(err);
         });
-    } else {
+    } else if(type =="User") {
       NavigationService.getProfile("", function(data1) {
           if (data1.data._id) {
             $.jStorage.set("isLoggedIn", true);
@@ -287,7 +291,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 }
               }
             } else {
-              if ($.jStorage.get("profile").type == "user") {
+              if ($.jStorage.get("profile").type == "User") {
                 $state.go('mainpage');
               } else {
                 $state.go('agent-login');
@@ -337,18 +341,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log(succ1);
         NavigationService.getAccessToken(function(succ2) {
           console.log(succ2);
-          $.jStorage.set("accessToken", succ2.accessToken);
+          // $.jStorage.set("accessToken", succ2.accessToken);
           if (succ2.accessToken && succ2.accessToken !== "") {
-            NavigationService.getProfile("", function(succ3) {
-              $.jStorage.set("isLoggedIn", false);
-              $.jStorage.set("oldUserData", succ3.data);
-              $.jStorage.set("qualifiedForLoginFlow", true);
-              // $state.go("login-flow", {
-              //   'accessToken': succ2.accessToken
-              // });
-              $state.go("login-flow");
-              // window.location = "http://travelibro.net/blog"
-            }, function(err3) {
+            NavigationService.getProfile("", function (succ3) {
+                if (succ3.data && succ3.data.type == 'User') {
+                  $.jStorage.set("accessToken", succ2.accessToken);
+                  $.jStorage.set("isLoggedIn", false);
+                  $.jStorage.set("oldUserData", succ3.data);
+                  $.jStorage.set("qualifiedForLoginFlow", true);
+                  // $state.go("login-flow", {
+                  //   'accessToken': succ2.accessToken
+                  // });
+                  $state.go("login-flow");
+                  // window.location = "http://travelibro.net/blog"
+                } else {
+                  $scope.showError.show = true;
+                  $scope.showError.msg = 'Theres Another Page For Partners';
+                }
+
+              }, function(err3) {
               console.log(err3);
             });
           } else {
@@ -359,7 +370,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
       } else {
         // console.log(data);
-        $scope.showError = true;
+        $scope.showError.show = true;
+        $scope.showError.msg = 'Incorrect Email or Password entered';
         //things to do when user email or password is wrong
       }
     });
@@ -10454,7 +10466,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       }
     };
-    if ($.jStorage.get("profile").type === "User") {
+    if ($.jStorage.get("profile") && $.jStorage.get("profile").type === "User") {
       NavigationService.getProfile("", callback, function(err) {
         console.log(err);
       });
@@ -12162,7 +12174,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   // category type end
 })
 
-.controller('AgenthomeCtrl', function($scope, TemplateService, LikesAndComments, NavigationService, Agent, $timeout, $state, $anchorScroll, anchorSmoothScroll, $stateParams, $location) {
+.controller('AgenthomeCtrl', function($scope, TemplateService, TravelibroService, LikesAndComments, NavigationService, Agent, $timeout, $state, $anchorScroll, anchorSmoothScroll, $stateParams, $location) {
   $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
   $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
@@ -12205,14 +12217,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.photoSec = false;
   }
 
-  $scope.scroll = {
-    busy: false,
-    stopCallingApi: false,
-  };
   setInterval(function() {
     $scope.paginationLoader = TemplateService.paginationLoader;
   }, 300);
 
+  $scope.scroll = {
+    busy: false,
+    stopCallingApi: false,
+  };
 
   //scroll agent navbar  change
   $(window).scroll(function() {
@@ -13121,6 +13133,119 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
   }
   // followFollowing  Function END
+
+  // COMMENT LIKE SECTION FUNCTIONS
+  $scope.likeUnlikeActivity = function(post) {
+    console.log(post);
+    post.likeDone = !post.likeDone;
+    if (post.likeDone) {
+      if (post.likeCount == undefined) {
+        post.likeCount = 1;
+      } else {
+        post.likeCount = post.likeCount + 1;
+      }
+      LikesAndComments.likeUnlike(post.type, "like", post.uniqueId, post._id, null)
+    } else {
+      post.likeCount = post.likeCount - 1;
+      LikesAndComments.likeUnlike(post.type, "unlike", post.uniqueId, post._id, null)
+    }
+  };
+
+  $scope.getLikes = function(post) {
+    console.log(post);
+    LikesAndComments.getLikes(post.type, post._id, function(data) {
+      $scope.listOfLikes = data.data;
+      console.log($scope.listOfLikes);
+    });
+  };
+
+  $scope.listLikesDropDown = function(model) {
+    $timeout(function() {
+      model.backgroundClick = true;
+      backgroundClick.object = model;
+    }, 200);
+    backgroundClick.scope = $scope;
+  };
+
+  $scope.getCommentsData = function(post) {
+    console.log(post);
+    $scope.previousId;
+    $scope.listOfLikes = [];
+    $scope.listOfComments = [];
+    $scope.post = post;
+    $scope.comment = {
+      "text": ""
+    }
+    var callback = function(data) {
+      $scope.uniqueArr = [];
+      $scope.listOfComments = data.data;
+      console.log($scope.listOfComments);
+
+      $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+    }
+    if ($scope.previousId != post._id) {
+      // $scope.focus('enterComment');
+      $scope.listOfComments = [];
+      $scope.viewCardComment = true;
+      // $scope.journey.journeyHighLight = activity._id;
+      $scope.getCard = "view-whole-card";
+      LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+    } else {
+      if ($scope.viewCardComment) {
+        $scope.viewCardComment = false;
+        // $scope.journey.journeyHighLight = "";
+        $scope.getCard = "";
+        $scope.comment.text = "";
+      } else {
+        $scope.listOfComments = [];
+        $scope.viewCardComment = true;
+        // $scope.focus('enterComment');
+        // $scope.journey.journeyHighLight = activity._id;
+        $scope.getCard = "view-whole-card";
+        LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+      }
+    }
+    $scope.previousId = post._id;
+  };
+
+  $scope.getLikesData = function(post) {
+    var callback = function(data) {
+      $scope.listOfLikes = data.data;
+      console.log($scope.listOfLikes);
+    };
+    console.log($scope.post);
+    if ($scope.previousLikeId != post._id) {
+      // $scope.focus('enterComment');
+      $scope.listOfLikes = [];
+      $scope.viewCardLike = true;
+      // $scope.journey.journeyHighLight = activity._id;
+      $scope.showLikeShow = "show-like-side-sec";
+      LikesAndComments.getLikes(post.type, post._id, callback);
+    } else {
+      if ($scope.viewCardLike) {
+        $scope.viewCardLike = false;
+        // $scope.journey.journeyHighLight = "";
+        $scope.getCard = "";
+      } else {
+        $scope.listOfComments = [];
+        $scope.viewCardLike = true;
+        // $scope.focus('enterComment');
+        // $scope.journey.journeyHighLight = activity._id;
+        $scope.showLikeShow = "show-like-side-sec";
+        LikesAndComments.getLikes(post.type, post._id, callback);
+      }
+    }
+    $scope.previousLikeId = post._id;
+  };
+
+  $scope.closeBackDrop = function() {
+    $scope.viewCardComment = false;
+    $scope.viewCardLike = false;
+    $scope.getCard = "";
+    $scope.listOfLikes = [];
+    $scope.listOfComments = [];
+  };
+  // COMMENT LIKE SECTION FUNCTIONS END
   // <!!! COMMON TASKS END !!!>
 
   // tab change

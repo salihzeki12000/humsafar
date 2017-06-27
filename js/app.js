@@ -160,7 +160,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'LoginCtrl'
     })
     .state('partnerlogin', {
-      url: "/partner-login",
+      url: "/partnerlogin",
       templateUrl: "views/template.html",
       controller: 'PartnerLoginCtrl'
     })
@@ -376,12 +376,12 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
       controller: 'ItineraryCtrl'
     })
     .state('agent-login', {
-      url: "/agent-login/",
+      url: "/partnerdetails",
       templateUrl: "views/template.html",
       controller: 'AgentloginCtrl'
     })
     .state('agent-setting', {
-      url: "/partner-setting",
+      url: "/partner/settings",
       templateUrl: "views/template.html",
       controller: 'AgentsettingCtrl'
     })

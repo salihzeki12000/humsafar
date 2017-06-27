@@ -1,4 +1,7 @@
-<div class="agt-home-travelactivity"   infinite-scroll="getMoreTravelActivity();" infinite-scroll-disabled="scroll.busy">
+<div class="agt-home-travelactivity" >
+
+  <div class="" infinite-scroll="getMoreTravelActivity();" infinite-scroll-disabled="scroll.busy">
+
   <!-- ADD BUTTON -->
   <div class="add-agentbutton travel-addbtn"ng-class="{'bg-white' : travelActivity.length==0}"  ng-if="template.isLoggedIn && template.isMine">
     <div class="container">
@@ -25,6 +28,7 @@
     </div>
   </div>
   <!-- ADD BUTTON END -->
+
   <!-- EMPTY USER INTRO -->
   <div class="empty-intro emptyuser-travel bg-white avenir-roman"  ng-if="!template.isMine && travelActivity.length==0">
     <div class="container">
@@ -39,6 +43,7 @@
     </div>
   </div>
   <!-- EMPTY USER INTRO END -->
+
   <!-- EMPTY AGENT INTRO -->
   <div class="empty-intro bg-white" ng-if="travelActivity.length==0 && template.isLoggedIn && template.isMine">
     <div class="text-center avenir-roman">
@@ -53,6 +58,7 @@
     </div>
   </div>
   <!-- EMPTY AGENT INTRO END -->
+
   <!-- TRAVEL ACTIVITY CARD -->
   <div class="agent-travelcards">
     <div class="container">
@@ -243,4 +249,11 @@
     </div>
   </div>
   <!-- TRAVEL ACTIVITY CARD END -->
+  </div>
+
+  <!-- PAGINATION LOADER -->
+  <div class="" ng-if="template.paginationLoader">
+    <img src="img/page.svg" alt="" class="m-center img-responsive" width="25px">
+  </div>
+  <!-- PAGINATION LOADER END -->
 </div>

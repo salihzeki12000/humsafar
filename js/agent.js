@@ -54,7 +54,7 @@ var agent = angular.module('agent', [])
           url: adminURL + "/agent/getAgentSection",
           method: "POST",
           data: formData
-        }).success(function (data) {
+        },'paginationLoad').success(function (data) {
           callback(data);
         })
       },
@@ -142,7 +142,7 @@ var agent = angular.module('agent', [])
           url: adminURL + "/Leads/getAllLeads",
           method: "POST",
           data: formData
-        }).success(function (data) {
+        },'paginationLoad').success(function (data) {
           callback(data);
         })
       },
@@ -187,7 +187,7 @@ var agent = angular.module('agent', [])
           url: adminURL + "/itinerary/getAgentItineraryWeb",
           method: "POST",
           data: formData
-        }).success(function(data){
+        },'paginationLoad').success(function(data){
           callback(data)
         });
       },
@@ -196,7 +196,7 @@ var agent = angular.module('agent', [])
           url: adminURL + "/activityfeed/getAgentDataWeb",
           method: "POST",
           data: formData
-        }).success(function(data){
+        },'paginationLoad').success(function(data){
           callback(data)
         });
       },
@@ -205,7 +205,7 @@ var agent = angular.module('agent', [])
           url: adminURL + "/album/getAlbum",
           method: "POST",
           data: formData
-        }).success(function(data){
+        },'paginationLoad').success(function(data){
           callback(data)
         });
       }
