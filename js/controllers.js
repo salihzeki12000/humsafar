@@ -4887,8 +4887,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.paginationLoader = TemplateService.paginationLoader;
     }, 300);
     // loader pagination end
+    console.log($.jStorage.get('profile').urlSlug,'j storage wala');
+    console.log($stateParams.urlSlug,'state paramas');
     $scope.isMine = $.jStorage.get("isMine");
     if ($.jStorage.get("isLoggedIn") && ($.jStorage.get("profile").urlSlug == $stateParams.urlSlug)) {
+      $scope.myProfileData = $.jStorage.get('profile');
       //its your own profile so no need to call profile again
       $scope.userData = $.jStorage.get("profile");
       TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
@@ -4904,14 +4907,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $.jStorage.set("activeUrlSlug", $stateParams.urlSlug);
       $scope.activeUrlSlug = $stateParams.urlSlug;
       // $scope.isMine = false;
+      $scope.myProfileData = $.jStorage.get('profile');
       NavigationService.getProfile($stateParams.urlSlug, function (data) {
         console.log(data);
         if (data.value) {
           $scope.userData = data.data;
+          console.log($scope.userData);
           TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
           allowAccess = false;
           setMoreAboutMe();
-          reloadCount();
+          reloadCount(); 
         } else {
           $state.go("errorpage");
         }
