@@ -208,6 +208,15 @@ var agent = angular.module('agent', [])
         },'paginationLoad').success(function(data){
           callback(data)
         });
+      },
+      getViewDownloads: function(formData, callback){
+        TravelibroService.http({
+          url: adminURL + "/activityfeed/getViewsDownloads",
+          method: "POST",
+          data: formData
+        }).success(function(data){
+          callback(data)
+        });
       }
 
     }

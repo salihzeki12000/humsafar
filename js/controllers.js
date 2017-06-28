@@ -194,10 +194,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   $scope.formData = {};
   $scope.agentSignup = false;
   $scope.alreadyExist = false;
-  $scope.showError = {
-    'show': false,
-    'msg': ''
+
+  $scope.initialiseError = function(){
+    $scope.showError = {
+      'show': false,
+      'msg': ''
+    }
   }
+  $scope.initialiseError();
 
   $scope.bookingLink = function() {
     window.location.href = "https://travelibro.com/bookings/";
@@ -12174,7 +12178,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   // category type end
 })
 
-.controller('AgenthomeCtrl', function($scope, TemplateService, TravelibroService, LikesAndComments, NavigationService, Agent, $timeout, $state, $anchorScroll, anchorSmoothScroll, $stateParams, $location) {
+.controller('AgenthomeCtrl', function($scope, TemplateService, TravelibroService, NavigationService, MyLife, Agent,LikesAndComments, $timeout, $state, $anchorScroll, anchorSmoothScroll, $stateParams, $location) {
   $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
   $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
   TemplateService.title = $scope.menutitle;
@@ -12215,6 +12219,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.agentPhotos = [];
     $scope.agentVideos = [];
     $scope.photoSec = false;
+    $scope.profileobj=[];
   }
 
   setInterval(function() {
@@ -13117,24 +13122,52 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // GET LEADS END
 
+    // GET PROFILE VIEW
+    $scope.getProfileView = function(){
+    Agent.getAllProfileViews(function(data) {
+      if (data.value == true) {
+        $scope.profileObj = data.data.profileView;
+        _.each($scope.profileObj, function(n) {
+          n.user.following = n.following;
+        });
+        console.log($scope.profileObj, 'profileview obj');
+      } else {
+        console.log('ERROR IN GET PROFILE VIEWS');
+      }
+    })
+    }
+    // GET PROFILE VIEW END
+
+    // GET VIEWS AND DOWNLOADS
+    var viewDownloadObj = {};
+    $scope.getViewDownloads = function(urlSlug){
+      viewDownloadObj.urlSlug = urlSlug;
+      Agent.getViewDownloads(viewDownloadObj,function(data){
+        if(data.value == true) {
+          $scope.viewDownloads = data.data;
+          console.log($scope.viewDownloads, "$scope.viewDownloads");
+        } else {
+          console.log('ERROR IN GET viewDownloads');
+        }
+      })
+    }
+    // GET VIEWS AND DOWNLOADS END
 
   // integration end
 
   // <!!! COMMON TASKS !!!>
   // followFollowing  Function
   $scope.followFollowing = function(user) {
-    console.log(user);
-    LikesAndComments.followUnFollow(user, function(data) {
-      if (data.value) {
-        user.following = data.data.responseValue;
-      } else {
-        console.log("error updating data");
-      }
-    });
-  }
-  // followFollowing  Function END
-
-  // COMMENT LIKE SECTION FUNCTIONS
+    console.log('aaya in likecomment');
+      LikesAndComments.followUnFollow(user, function(data) {
+        if (data.value) {
+          user.following = data.data.responseValue;
+        } else {
+          console.log("error updating data");
+        }
+      });
+    }
+    // followFollowing  Function END
   $scope.likeUnlikeActivity = function(post) {
     console.log(post);
     post.likeDone = !post.likeDone;
@@ -13317,15 +13350,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.initialiseArray();
       $scope.agentScrollDown();
       $scope.profileview = true;
-      Agent.getAllProfileViews(function(data) {
-        if (data.value == true) {
-          $scope.profileObj = data.data.profileView;
-          console.log($scope.profileObj, 'profileview obj');
-        } else {
-          console.log('ERROR IN GET PROFILE VIEWS');
-        }
-      })
-      console.log("switch ana");
+      $scope.getProfileView();
       break;
     case "about-us":
       $scope.agthome.innerView = allagthome[7];
@@ -13411,14 +13436,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.initialiseArray();
         $scope.agentScrollDown();
         $scope.profileview = true;
-        Agent.getAllProfileViews(function(data) {
-          if (data.value == true) {
-            $scope.profileObj = data.data.profileView;
-            console.log($scope.profileObj, 'profileview obj');
-          } else {
-            console.log('ERROR IN GET PROFILE VIEWS');
-          }
-        })
+        $scope.getProfileView();
         console.log("case ana");
         break;
       case 7:
@@ -13456,29 +13474,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.follower = false;
     $scope.leads = false;
     $scope.viewsdownload = false;
+    // $scope.followersList = [];
     switch (getId) {
       case 'profileview':
         $scope.profileview = true;
-        Agent.getAllProfileViews(function(data) {
-          if (data.value == true) {
-            $scope.profileObj = data.data.profileView;
-            console.log($scope.profileObj, 'profileview obj');
-          } else {
-            console.log('ERROR IN GET PROFILE VIEWS');
-          }
-        })
+        $scope.getProfileView();
       break;
       case 'follower':
         $scope.follower = true;
+        $scope.getFollowers = function() {
+          console.log('calln followers');
+          MyLife.getFollowersWeb($scope.activeUrlSlug, function(data) {
+            $scope.followersList = data.data.followers;
+            console.log($scope.followersList,'followeragt');
+          });
+        }
+        $scope.getFollowers();
       break;
       case 'leads':
         $scope.leads = true;
       break;
       case 'viewsdownload':
         $scope.viewsdownload = true;
+        $scope.getViewDownloads($scope.activeUrlSlug);
       break;
       default:
         $scope.profileview = true;
+        $scope.getProfileView();
       break;
     }
   }

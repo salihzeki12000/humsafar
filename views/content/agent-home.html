@@ -12,7 +12,7 @@
                 <img ng-src="{{userData.profilePicture|uploadpath}}" alt="{{userData.name}}" class="img-responsive">
               </div>
             </a>
-          <h4 class="avenir-heavy text-capitalize" ng-click="redirectToProfile({'uslSlug':'sagar-wohlig','type':'agent'})">{{userData.name}}</h4>
+          <h4 class="avenir-heavy text-capitalize" ng-click="redirectToProfile({'urlSlug':'sagar-wohlig','type':'agent'})">{{userData.name}}</h4>
           <p>{{userData.homeCity}}</p>
           <button class="btn btn-white-outline mr5" ui-sref="agent-setting" ng-if="template.isMine">Edit </button>
           <button class="btn btn-white-outline mr5" ng-click="followFollowing(userData)" ng-if="!template.isMine">{{userData.following | followFollowingStatus}}</button>

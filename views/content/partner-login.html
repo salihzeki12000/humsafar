@@ -46,8 +46,8 @@
                           <a ui-sref="forgot-password-email" class="color-white avenir-roman">Forgot Password?</a>
                         </div>
                       </div>
-                      <div class="login-error-veri" ng-if="showError">
-                        <p>*Incorrect Email or Password entered.</p>
+                      <div class="login-error-veri" ng-if="showError.show">
+                        <p>*{{showError.msg}}.</p>
                       </div>
                       <div class="btn-login mt25">
                         <input type="submit" class="btn btn-outline color-white avenir-roman" value="Login"></button>
