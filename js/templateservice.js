@@ -230,10 +230,15 @@ templateservicemod.service('TemplateService', function ($http, $state) {
   };
 
   this.changecontent = function (page) {
+    if (page != "home") {
+      $("body > .loaders").remove();
+      $("body > .loadedContent").fadeIn(1000);
+    }
     this.init();
     var data = this;
     data.content = "views/content/" + page + ".html";
     return data;
+
   };
 
   this.init();
