@@ -7,8 +7,8 @@
         <div class="clearfix agt-moreholder">
           <div class="filter-head " ng-class="{'filter-headagent': template.isMine}">
             <div class="photo-filter color-grey collapsed" data-toggle="collapse" data-target="#demo">
-              <span class="down">All</span>
-              <!-- <span class="down" >{{albumArray}}</span> -->
+              <span class="down" ng-if="albumArray.length == 0">All</span>
+              <span class="down" ng-if="albumArray.length!=0">Photos</span>
               <span class="up color-grey">Photos & Videos</span>
               <i class="fa fa-chevron-up up arrow-big"></i>
               <i class="fa fa-chevron-down color-grey down arrow-big"></i>
