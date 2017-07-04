@@ -1803,16 +1803,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // share whole trip social
     $scope.viewSocialShare = false;
+    // $scope.shareSocial = function () {
+    //   if (!($.jStorage.get("isLoggedIn"))) {
+    //     $state.go('login');
+    //   } else {
+    //     if ($scope.viewSocialShare == false) {
+    //       $scope.viewSocialShare = true;
+    //     } else {
+    //       $scope.viewSocialShare = false;
+    //     }
+    //   }
+    // };
     $scope.shareSocial = function () {
-      if (!($.jStorage.get("isLoggedIn"))) {
-        $state.go('login');
-      } else {
         if ($scope.viewSocialShare == false) {
           $scope.viewSocialShare = true;
         } else {
           $scope.viewSocialShare = false;
         }
-      }
     };
     // share whole trip social end
 
