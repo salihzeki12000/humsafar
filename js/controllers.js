@@ -12194,6 +12194,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.review = {};
     $scope.enquire = {};
     $scope.status = {};
+    $scope.citySearch = "";
     $scope.tour.typeOfHoliday = [];
     $scope.agentItinerary = [];
     $scope.album = {};
@@ -13469,6 +13470,140 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
     };
     // tab change end
+    //  NavigationService.getAgentCitySearch({
+    //         keyword: "Delhi"
+    //     });
+//Agent Filter
+  $scope.cityList = [];
+  $scope.agentItinerary.citySearch={};
+    // FILTER ITINERARY DESTINATION
+    $scope.getAgentItiSubmit = function (id) {
+        $scope.cityList = [];
+        console.log('hihsjk', id);
+        NavigationService.getAgentCitySearch({
+            keyword: "Delhi"
+        }, function (data) {
+            $scope.cityList = data.data.results;
+            $scope.cityList = _.map($scope.cityList, function (cityListData) {
+                cityListData.checked = false;
+                return cityListData;
+            });
+            console.log($scope.cityList, 'get Data');
+        })
+    };
+
+    $scope.itineraryType = [{
+        name: "Adventure",
+        checked: false
+    }, {
+        name: "Business",
+        checked: false
+    }, {
+        name: "Family",
+        checked: false
+    }, {
+        name: "Romance",
+        checked: false
+    }, {
+        name: "Budget",
+        checked: false
+    }, {
+        name: "Luxury",
+        checked: false
+    }, {
+        name: "Religious",
+        checked: false
+    }, {
+        name: "Friends",
+        checked: false
+    }, {
+        name: "Shopping",
+        checked: false
+    }, {
+        name: "Solo",
+        checked: false
+    }, {
+        name: "Festival",
+        checked: false
+    }, {
+        name: "Backpacking",
+        checked: false
+    }];
+    $scope.itineraryByCountry = [{
+        name: "User",
+        checked: false
+    }, {
+        name: "Travel Agent",
+        checked: false
+    }, {
+        name: "Editor",
+        checked: false
+    }];
+
+    // filter sorting
+ $scope.agentCityFilter = [];
+  $scope.agentCityFilterName = [];
+    $scope.itineraryFilter = function (filterItinerary, filterType) {
+            console.log(filterItinerary);
+            switch (filterType) {
+                case 'itineraryCity':
+                    var cityIndex = _.findIndex($scope.agentCityFilter, function (type) {
+                        return type.name == filterItinerary.name;
+                    });
+                    if (cityIndex == -1) {
+                        $scope.agentCityFilter.push(filterItinerary);
+                        var cityItiIndex = _.findIndex($scope.cityList, function (cityCheck) {
+                            return cityCheck.name == filterItinerary.name
+                        });
+                        $scope.cityList[cityItiIndex].checked = true;
+                        console.log($scope.agentCityFilter, 'city');
+                    } else {
+                        _.remove($scope.agentCityFilter, function (remove) {
+                            return remove.name == filterItinerary.name;
+                        });
+                        var cityItiIndex = _.findIndex($scope.cityList, function (cityCheck) {
+                            return cityCheck.name == filterItinerary.name
+                        });
+                        $scope.cityList[cityItiIndex].checked = false;
+                        console.log($scope.agentCityFilter, 'city');
+                    }
+                    $scope.pagenumber = 1;
+                    break;
+                case 'itineraryType':
+                    var typeIndex = _.findIndex($scope.agentItineraryType, function (type) {
+                        return type.name == filterItinerary.name;
+                    });
+                    if (typeIndex == -1) {
+                        $scope.agentItineraryType.push(filterItinerary);
+                        var agentItiTypeIndex = _.findIndex($scope.itineraryType, function (getIndexAgent) {
+                            return getIndexAgent.name == filterItinerary.name;
+                        })
+                        $scope.itineraryType[agentItiTypeIndex].checked = true;
+                        console.log($scope.agentItineraryType, 'type');
+                    } else {
+                        _.remove($scope.agentItineraryType, function (remove) {
+                            return remove.name == filterItinerary.name;
+                        })
+                        var agentItiTypeIndex = _.findIndex($scope.itineraryType, function (getIndexCountry) {
+                            return getIndexCountry.name == filterItinerary.name;
+                        })
+                        $scope.itineraryType[agentItiTypeIndex].checked = false;
+                        console.log($scope.agentItineraryType, 'type');
+                    }
+                    $scope.pagenumber = 1;
+                    break;
+                default:
+            }
+        }
+        // FILTER ITINERARY DESTINATION END
+
+// End Agent Filter
+
+
+
+
+
+
 
     // GET ANALYTICS
     $scope.getAgentScroll = function (getId) {
