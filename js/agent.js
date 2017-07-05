@@ -223,11 +223,6 @@ var agent = angular.module('agent', [])
           console.log(data);
         });
       },
-      getAgentItineraryWeb: function (formData, callback) {
-        TravelibroService.post(adminURL + "/itinerary/getAgentItineraryWeb", formData).success(callback).error(function (data) {
-          console.log(data);
-        });
-      },
       updateLikeStatusWeb: function (formData, callback) {
         TravelibroService.post(adminURL + "/agentstatus/updateLikeStatusWeb", formData).success(callback).error(function (data) {
           console.log(data);

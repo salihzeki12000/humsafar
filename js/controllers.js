@@ -3139,6 +3139,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.destinationItineraryBy = [];
     };
     // clear country itinerary filter end
+
+        $scope.getCountyItiSubmit = function () {
+        $scope.countryDestIti = [];
+        $scope.pagenumber = 1;
+        $scope.getCountryInfo("itinerary", $scope.urlDestinationCountry);
+    }
     // OPTIONS NG CLICK FUNCTION
     $scope.editOption = function (model) {
         $timeout(function () {
@@ -12194,7 +12200,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.review = {};
     $scope.enquire = {};
     $scope.status = {};
-    $scope.citySearch = "";
+    $scope.itinerary = {};
+    $scope.itinerary.citySearch = "";
+    $scope.itinerary.type = "";
     $scope.tour.typeOfHoliday = [];
     $scope.agentItinerary = [];
     $scope.album = {};
@@ -12204,6 +12212,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.actionLeads = [];
     $scope.tourData = [];
     $scope.reviewData = [];
+    $scope.agentItineraryType = [];
+    $scope.agentCityFilter = [];
+    $scope.agentCityFilterName = [];
     $scope.initialiseArray = function () {
         $scope.showItinerary = false;
         $scope.addHomeBackdrop = "";
@@ -12701,11 +12712,137 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // GET AGENT ITINERARY
     var itineraryObj = {};
+//Agent Filter
+  $scope.cityList = [];
+  $scope.agentItinerary.citySearch={};
+    // FILTER ITINERARY DESTINATION
+    $scope.getItinerayCity = function (formData) {
+        $scope.cityList = [];
+        console.log('hihsjk', formData);
+        Agent.getAgentCitySearch({
+        keyword: $scope.itinerary.citySearch
+        }, function (data) {
+            $scope.cityList = data.data.results;
+            $scope.cityList = _.map($scope.cityList, function (cityListData) {
+                cityListData.checked = false;
+                return cityListData;
+            });
+            console.log($scope.cityList, 'get Data');
+        })
+    };
+
+    $scope.itineraryType = [{
+        name: "Adventure",
+        checked: false
+    }, {
+        name: "Business",
+        checked: false
+    }, {
+        name: "Family",
+        checked: false
+    }, {
+        name: "Romance",
+        checked: false
+    }, {
+        name: "Budget",
+        checked: false
+    }, {
+        name: "Luxury",
+        checked: false
+    }, {
+        name: "Religious",
+        checked: false
+    }, {
+        name: "Friends",
+        checked: false
+    }, {
+        name: "Shopping",
+        checked: false
+    }, {
+        name: "Solo",
+        checked: false
+    }, {
+        name: "Festival",
+        checked: false
+    }, {
+        name: "Backpacking",
+        checked: false
+    }];
+
+    // filter sorting
+
+    $scope.itineraryFilter = function (filterItinerary, filterType) {
+            console.log(filterItinerary);
+            switch (filterType) {
+                case 'itineraryCity':
+                    var cityIndex = _.findIndex($scope.agentCityFilter, function (type) {
+                        return type.name == filterItinerary.name;
+                    });
+                    if (cityIndex == -1) {
+                        $scope.agentCityFilter.push(filterItinerary._id);
+                        $scope.agentCityFilter.push(filterItinerary._id);
+                        var cityItiIndex = _.findIndex($scope.cityList, function (cityCheck) {
+                            return cityCheck.name == filterItinerary.name
+                        });
+                        $scope.cityList[cityItiIndex].checked = true;
+                        console.log($scope.agentCityFilter, 'city');
+                    } else {
+                        _.remove($scope.agentCityFilter, function (remove) {
+                            return remove.name == filterItinerary.name;
+                        });
+                        var cityItiIndex = _.findIndex($scope.cityList, function (cityCheck) {
+                            return cityCheck.name == filterItinerary.name
+                        });
+                        $scope.cityList[cityItiIndex].checked = false;
+                        console.log($scope.agentCityFilter, 'city');
+                    }
+                    $scope.pagenumber = 1;
+                    break;
+                case 'itineraryType':
+                    var typeIndex = _.findIndex($scope.agentItineraryType, function (type) {
+                        return type.name == filterItinerary.name;
+                    });
+                    if (typeIndex == -1) {
+                        $scope.agentItineraryType.push(filterItinerary);
+                        var countryItiTypeIndex = _.findIndex($scope.itineraryType, function (getIndexCountry) {
+                            return getIndexCountry.name == filterItinerary.name;
+                        })
+                        $scope.itineraryType[countryItiTypeIndex].checked = true;
+                        console.log($scope.agentItineraryType, 'type');
+                    } else {
+                        _.remove($scope.agentItineraryType, function (remove) {
+                            return remove.name == filterItinerary.name;
+                        })
+                        var countryItiTypeIndex = _.findIndex($scope.itineraryType, function (getIndexCountry) {
+                            return getIndexCountry.name == filterItinerary.name;
+                        })
+                        $scope.itineraryType[countryItiTypeIndex].checked = false;
+                        console.log($scope.agentItineraryType, 'type');
+                    }
+                    $scope.pagenumber = 1;
+                    break;
+            }
+        }
+        // FILTER ITINERARY agent END
+        // clear country itinerary filter
+    $scope.clearAgentItinerary = function () {
+        _.each($scope.cityList, function (listCityChecked) {
+            listCityChecked.checked = false;
+        })
+        _.each($scope.itineraryType, function (listItiChecked) {
+            listItiChecked.checked = false;
+        })
+        $scope.agentCityFilter = [];
+        $scope.agentItineraryType = [];
+    };
+
 
     $scope.getAgentItinerary = function (activeSlug) {
         console.log("console");
         itineraryObj.urlSlug = activeSlug;
         itineraryObj.pagenumber = 0;
+        itineraryObj.city = $scope.agentCityFilter;
+        itineraryObj.itineraryType = $scope.agentItineraryType;
         console.log(itineraryObj, 'itineraries call');
         $scope.getMoreAgentItinerary();
     }
@@ -13226,7 +13363,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.viewCardComment = true;
             // $scope.journey.journeyHighLight = activity._id;
             $scope.getCard = "view-whole-card";
-            LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+            LikesAndComments.getComments(post.type, post._id, callback);
         } else {
             if ($scope.viewCardComment) {
                 $scope.viewCardComment = false;
@@ -13239,7 +13376,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 // $scope.focus('enterComment');
                 // $scope.journey.journeyHighLight = activity._id;
                 $scope.getCard = "view-whole-card";
-                LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+                LikesAndComments.getComments(post.type, post._id, callback);
             }
         }
         $scope.previousId = post._id;
@@ -13297,55 +13434,56 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // change url
     $scope.agthomeoptions = {};
-    $scope.agthomeoptions.active = "";
+    $scope.agthomeoptions.active = "agthome-itinerary";
     $scope.viewTab = 1;
     switch ($state.params.name) {
         case "itineraries":
+            $scope.getAgentItinerary($scope.activeUrlSlug);
             $scope.agthome.innerView = allagthome[0];
             $scope.agthomeoptions.active = "agthome-itinerary";
             $scope.initialiseArray();
-            $scope.getAgentItinerary($scope.activeUrlSlug);
             console.log("switch iti");
             break;
         case "tours-and-packages":
+        $scope.getAgentData('tours&packages', $scope.activeUrlSlug);
             $scope.agthome.innerView = allagthome[1];
             $scope.agthomeoptions.active = "agthome-tourpackages";
             $scope.initialiseArray();
             $scope.agentScrollDown();
-            $scope.getAgentData('tours&packages', $scope.activeUrlSlug);
             console.log("switch tour");
             break;
         case "photos-and-videos":
+        $scope.getPhotoVideo($scope.activeUrlSlug);
             $scope.agthome.innerView = allagthome[2];
             $scope.agthomeoptions.active = "agthome-photovideos";
             $scope.initialiseArray();
             $scope.agentScrollDown();
-            $scope.getPhotoVideo($scope.activeUrlSlug);
+            
             console.log("switch pic");
             break;
         case "testimonials-and-reviews":
+            $scope.getAgentData('testimonials&reviews', $scope.activeUrlSlug);        
             $scope.agthome.innerView = allagthome[3];
             $scope.agthomeoptions.active = "agthome-testimonialreviews";
             $scope.initialiseArray();
             $scope.agentScrollDown();
             $scope.getAvgRating($scope.activeUrlSlug);
-            $scope.getAgentData('testimonials&reviews', $scope.activeUrlSlug);
             console.log("switch revi");
             break;
         case "travel-activity":
+            $scope.getTravelActivity($scope.activeUrlSlug);        
             $scope.agthome.innerView = allagthome[4];
             $scope.agthomeoptions.active = "agthome-travelactivity";
             $scope.agentScrollDown();
-            $scope.getTravelActivity($scope.activeUrlSlug);
             console.log("switch travel");
             break;
         case "lead-monitor":
+            $scope.getLeads('unActioned');        
+            $scope.getAvgRating($scope.activeUrlSlug);        
             $scope.agthome.innerView = allagthome[5];
             $scope.agthomeoptions.active = "agthome-leadmonitor";
             $scope.initialiseArray();
             $scope.agentScrollDown();
-            $scope.getAvgRating($scope.activeUrlSlug);
-            $scope.getLeads('unActioned');
             console.log("switch lead");
             break;
         case "analytics":
@@ -13364,8 +13502,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             console.log("switch abt");
             break;
         default:
+            $scope.getAgentItinerary($scope.activeUrlSlug);        
             $scope.agthome.innerView = allagthome[0];
-            $scope.getAgentItinerary($scope.activeUrlSlug);
             console.log("switch def");
             break;
     }
@@ -13380,57 +13518,57 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         switch (view) {
             case 0:
                 url = "itineraries";
+                $scope.getAgentItinerary($scope.activeUrlSlug);                
                 $scope.agthomeoptions.active = "agthome-itinerary";
                 $scope.agenthomeItinerary = true;
                 $scope.initialiseArray();
-                $scope.getAgentItinerary($scope.activeUrlSlug);
                 console.log("case iti");
                 break;
             case 1:
+                $scope.getAgentData('tours&packages', $scope.activeUrlSlug);            
                 url = "tours-and-packages";
                 $scope.agthomeoptions.active = "agthome-tourpackages";
                 $scope.agenthomeItinerary = false;
                 $scope.initialiseArray();
                 $scope.agentScrollDown();
-                $scope.getAgentData('tours&packages', $scope.activeUrlSlug);
                 console.log("case tour");
                 break;
             case 2:
+                $scope.getPhotoVideo($scope.activeUrlSlug);            
                 url = "photos-and-videos";
                 $scope.agthomeoptions.active = "agthome-photovideos";
                 $scope.agenthomeItinerary = false;
                 $scope.initialiseArray();
                 $scope.agentScrollDown();
-                $scope.getPhotoVideo($scope.activeUrlSlug);
                 console.log("case pic");
                 break;
             case 3:
+                $scope.getAgentData('testimonials&reviews', $scope.activeUrlSlug);            
                 url = "testimonials-and-reviews";
                 $scope.agthomeoptions.active = "agthome-testimonialreviews";
                 $scope.agenthomeItinerary = false;
                 $scope.initialiseArray();
                 $scope.agentScrollDown();
                 $scope.getAvgRating($scope.activeUrlSlug);
-                $scope.getAgentData('testimonials&reviews', $scope.activeUrlSlug);
                 console.log("case test");
                 break;
             case 4:
+                $scope.getTravelActivity($scope.activeUrlSlug);            
                 url = "travel-activity";
                 $scope.agthomeoptions.active = "agthome-travelactivity";
                 $scope.agenthomeItinerary = false;
                 $scope.initialiseArray();
                 $scope.agentScrollDown();
-                $scope.getTravelActivity($scope.activeUrlSlug);
                 console.log("case travel");
                 break;
             case 5:
+            $scope.getAvgRating($scope.activeUrlSlug);
+                $scope.getLeads('unActioned');
                 url = "lead-monitor";
                 $scope.agthomeoptions.active = "agthome-leadmonitor";
                 $scope.agenthomeItinerary = false;
                 $scope.initialiseArray();
                 $scope.agentScrollDown();
-                $scope.getAvgRating($scope.activeUrlSlug);
-                $scope.getLeads('unActioned');
                 console.log("case lead");
                 break;
             case 6:
@@ -13452,11 +13590,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 console.log("case ana");
                 break;
             default:
+                $scope.getAgentItinerary($scope.activeUrlSlug);
                 url = "itineraries";
                 $scope.agthomeoptions.active = "agthome-itinerary";
                 $scope.agenthomeItinerary = true;
                 $scope.initialiseArray();
-                $scope.getAgentItinerary($scope.activeUrlSlug);
                 console.log("case def");
                 break;
         }
@@ -13473,134 +13611,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //  NavigationService.getAgentCitySearch({
     //         keyword: "Delhi"
     //     });
-//Agent Filter
-  $scope.cityList = [];
-  $scope.agentItinerary.citySearch={};
-    // FILTER ITINERARY DESTINATION
-    $scope.getAgentItiSubmit = function (id) {
-        $scope.cityList = [];
-        console.log('hihsjk', id);
-        NavigationService.getAgentCitySearch({
-            keyword: "Delhi"
-        }, function (data) {
-            $scope.cityList = data.data.results;
-            $scope.cityList = _.map($scope.cityList, function (cityListData) {
-                cityListData.checked = false;
-                return cityListData;
-            });
-            console.log($scope.cityList, 'get Data');
-        })
-    };
-
-    $scope.itineraryType = [{
-        name: "Adventure",
-        checked: false
-    }, {
-        name: "Business",
-        checked: false
-    }, {
-        name: "Family",
-        checked: false
-    }, {
-        name: "Romance",
-        checked: false
-    }, {
-        name: "Budget",
-        checked: false
-    }, {
-        name: "Luxury",
-        checked: false
-    }, {
-        name: "Religious",
-        checked: false
-    }, {
-        name: "Friends",
-        checked: false
-    }, {
-        name: "Shopping",
-        checked: false
-    }, {
-        name: "Solo",
-        checked: false
-    }, {
-        name: "Festival",
-        checked: false
-    }, {
-        name: "Backpacking",
-        checked: false
-    }];
-    $scope.itineraryByCountry = [{
-        name: "User",
-        checked: false
-    }, {
-        name: "Travel Agent",
-        checked: false
-    }, {
-        name: "Editor",
-        checked: false
-    }];
-
-    // filter sorting
- $scope.agentCityFilter = [];
-  $scope.agentCityFilterName = [];
-    $scope.itineraryFilter = function (filterItinerary, filterType) {
-            console.log(filterItinerary);
-            switch (filterType) {
-                case 'itineraryCity':
-                    var cityIndex = _.findIndex($scope.agentCityFilter, function (type) {
-                        return type.name == filterItinerary.name;
-                    });
-                    if (cityIndex == -1) {
-                        $scope.agentCityFilter.push(filterItinerary);
-                        var cityItiIndex = _.findIndex($scope.cityList, function (cityCheck) {
-                            return cityCheck.name == filterItinerary.name
-                        });
-                        $scope.cityList[cityItiIndex].checked = true;
-                        console.log($scope.agentCityFilter, 'city');
-                    } else {
-                        _.remove($scope.agentCityFilter, function (remove) {
-                            return remove.name == filterItinerary.name;
-                        });
-                        var cityItiIndex = _.findIndex($scope.cityList, function (cityCheck) {
-                            return cityCheck.name == filterItinerary.name
-                        });
-                        $scope.cityList[cityItiIndex].checked = false;
-                        console.log($scope.agentCityFilter, 'city');
-                    }
-                    $scope.pagenumber = 1;
-                    break;
-                case 'itineraryType':
-                    var typeIndex = _.findIndex($scope.agentItineraryType, function (type) {
-                        return type.name == filterItinerary.name;
-                    });
-                    if (typeIndex == -1) {
-                        $scope.agentItineraryType.push(filterItinerary);
-                        var agentItiTypeIndex = _.findIndex($scope.itineraryType, function (getIndexAgent) {
-                            return getIndexAgent.name == filterItinerary.name;
-                        })
-                        $scope.itineraryType[agentItiTypeIndex].checked = true;
-                        console.log($scope.agentItineraryType, 'type');
-                    } else {
-                        _.remove($scope.agentItineraryType, function (remove) {
-                            return remove.name == filterItinerary.name;
-                        })
-                        var agentItiTypeIndex = _.findIndex($scope.itineraryType, function (getIndexCountry) {
-                            return getIndexCountry.name == filterItinerary.name;
-                        })
-                        $scope.itineraryType[agentItiTypeIndex].checked = false;
-                        console.log($scope.agentItineraryType, 'type');
-                    }
-                    $scope.pagenumber = 1;
-                    break;
-                default:
-            }
-        }
-        // FILTER ITINERARY DESTINATION END
-
-// End Agent Filter
-
-
-
 
 
 

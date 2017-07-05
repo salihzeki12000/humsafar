@@ -41,7 +41,7 @@
                   </div> -->
                 <div class="col-md-3 col-sm-3">
                   <div class="select-all-made city-select destination-filterscroll relate" ng-init="viewItineraryCity={'outerClass':'outerCity','innerClass':'innerCity'}">
-                    <input type="text" ng-model="itinerary.citySearch" class="form-control outerCity" ng-change="getItinerayCity(countryDestData._id);" placeholder="City" ng-click="editOption(viewItineraryCity,'outerCity','innerCity');">
+                    <input type="text" ng-model="itinerary.citySearch" class="form-control outerCity" ng-change="getItinerayCity(formData);" placeholder="City" ng-click="editOption(viewItineraryCity,'outerCity','innerCity');">
                     <div class="city-dropdow itinerary-dropdown innerCity" ng-show="viewItineraryCity.backgroundClick">
                       <ul>
                         <li ng-repeat="city in cityList track by $index">
