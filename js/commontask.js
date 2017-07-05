@@ -205,7 +205,7 @@ var commontask = angular.module('commontask', [])
             break;
           case "agentStatus":
             obj.agentStatus = type_id;
-            url = "agentstatus/updateLikeStatusWeb";
+            url = "/agentstatus/updateLikeStatusWeb";
             break;
         }
         if (task == "unlike") {
@@ -248,6 +248,9 @@ var commontask = angular.module('commontask', [])
             break;
           case "video":
             url = "/postvideos/getPostLikesWeb";
+            break;
+          case "agentStatus":
+            url = "/agentStatus/getAgentStatusLikesWeb";
             break;
         }
 
