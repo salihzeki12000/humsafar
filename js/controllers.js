@@ -12239,7 +12239,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         busy: false,
         stopCallingApi: false,
     };
-
+    $scope.closeBackDrop = function () {
+        $scope.viewCardComment = false;
+        $scope.viewCardLike = false;
+        $scope.getCard = "";
+        $scope.listOfLikes = [];
+        $scope.listOfComments = [];
+    };
     //scroll agent navbar  change
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
