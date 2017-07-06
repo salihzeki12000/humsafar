@@ -22,7 +22,7 @@
                 <div class="masonry-brick travelLife col-md-4 col-sm-6 m-plr0" ng-repeat="post in popularIternaryData track by $index" >
                   <div class="travel-life-part bg-white blog-post {{post.type}} avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
                     <div class="travel-journey-heading relate">
-                      <p>{{post.name|truncate:'30'}} ({{post.duration}} {{post.duration|singularPlural:'Days'}})</p>
+                      <p>{{post.name}} ({{post.duration}} {{post.duration|singularPlural:'Days'}})</p>
                       <!-- flag section -->
                       <div class="flag-section">
                         <div class="country-visited" ng-repeat="country in post.countryVisited track by $index">

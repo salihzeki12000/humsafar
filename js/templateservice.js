@@ -215,6 +215,7 @@ templateservicemod.service('TemplateService', function ($http, $state) {
   this.paginationLoader = false;
   this.allLoader = false;
   this.isMine = false;
+  this.uploadLoader =  false;
 
   var d = new Date();
   this.year = d.getFullYear();

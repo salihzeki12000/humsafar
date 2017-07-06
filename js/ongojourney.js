@@ -475,6 +475,30 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
         }
       }
       // add video end
+      // delete added videos
+      $scope.deleteVideo = function(videoName){
+        $scope.videoFlex = false;
+        console.log(videoName);
+        _.remove($scope.otgVideo, function(videoObj){
+          return videoObj.name === videoName;
+        })
+        console.log($scope.otgVideo, 'new video');
+        $timeout(function () {
+          $scope.videoFlex = true;
+          if ($scope.otgVideo.length > 0) {
+            $scope.videoSec = true;
+            $(".flexslider").flexslider({
+              directionNav: true
+            });
+          } else {
+            $scope.videoSec = false;
+            $(".flexslider").flexslider({
+              directionNav: false
+            });
+          }
+        }, 100);
+      }
+      // delete added videos end
       // delete added photos
       $scope.deletePhotos = function (name) {
         $scope.flexShow = false;

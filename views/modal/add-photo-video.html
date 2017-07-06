@@ -29,11 +29,16 @@
               <span class="block text-center color-dark-blue avenir-roman">-or-</span>-->
               <div class="otg-upload-btn relate text-center">
                 <button class="btn btn-pink btn-more pointer">Upload Photos</button>
-                <upload-image multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data);" no-view class="pointer"></upload-image>
+                <upload-image datatype="photo" multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data);" no-view class="pointer"></upload-image>
               </div>
             </div>
             <!-- photo upload end-->
             <!-- flex slider for photo in 2 row -->
+            <!-- img upload loader -->
+            <div class="image-upload-loader" ng-if="template.uploadLoader && template.type == 'photo'">
+              <img src="img/page.svg" alt="" class="get-center img-responsive" width="40px">
+            </div>
+            <!-- img upload loader end-->
             <div class="otg-photo-slider" ng-show="photoSec" ng-if="flexShow">
               <flex-slider id="flexslider" class="carousel" flex-slide="photo in otgPhotoArray track by $index" control-nav="false" slideshow="false">
                 <li>
@@ -74,8 +79,8 @@
             <div class="add-otg-more" ng-show="photoSec">
               <span class="putmore-photo-video"><i class="fa fa-plus"></i></span>
               <div class="add-more-pic">
-                <upload-image-otg multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data);" no-view>
-                </upload-image-otg>
+                <upload-image datatype="photo" multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data,type);" no-view>
+                </upload-image>
               </div>
             </div>
             <!-- add more photo video part end-->
@@ -96,10 +101,15 @@
               <span class="block text-center color-dark-blue avenir-roman">-or-</span>-->
               <div class="otg-upload-btn text-center relate">
                 <button class="btn btn-pink btn-more">Upload Videos</button>
-                <upload-image multiple="true" ng-model="uploadVid" ng-callback="addOtgVideo(data);" no-view class="pointer"></upload-image>
+                <upload-image datatype="video" multiple="true" ng-model="uploadVid" ng-callback="addOtgVideo(data);" no-view class="pointer"></upload-image>
               </div>
             </div>
             <!-- video upload end-->
+            <!-- video upload loader -->
+            <div class="image-upload-loader" ng-if="template.uploadLoader && template.type == 'video'">
+              <img src="img/page.svg" alt="" class="get-center img-responsive" width="40px">
+            </div>
+            <!-- video upload loader end-->
             <!-- flexslider for video -->
             <div class="video-otg-slider" ng-show="videoSec" ng-if="videoFlex">
               <flex-slider flex-slide="video in otgVideo track by $index" class="carsouel" control-nav="false" slideshow="false">
@@ -118,13 +128,13 @@
                       <textarea name="" id="" maxlength="150" class="form-control" ng-model="video.caption" placeholder="Enter Captions"></textarea>
                       <p class="text-center m-center" ng-click="addVideoCaption(video._id);"><i class="fa fa-angle-down color-white fa-2x pointer"></i></p>
                       <div class="text-typed-count">
-                        <span>({{video.caption.length}})</span>
+                        <span>{{video.caption.length}}</span>
                         <span>/ 150</span>
                       </div>
                     </div>
                     <!-- video back add caption end-->
                     <!-- delete video -->
-                    <div class="delete-otg-video delete-otg-photo">
+                    <div class="delete-otg-video delete-otg-photo" ng-click="deleteVideo(video.name)">
                       <i class="fa fa-trash-o"></i>
                     </div>
                     <!-- delete video end -->
@@ -137,7 +147,7 @@
             <div class="add-otg-more" ng-show="videoSec">
               <span class="putmore-photo-video"><i class="fa fa-plus"></i></span>
               <div class="add-more-vid">
-                <upload-image multiple="true" ng-model="uploadVid" ng-callback="addOtgVideo(data);" no-view class="pointer"></upload-image>
+                <upload-image datatype="video" multiple="true" ng-model="uploadVid" ng-callback="addOtgVideo(data);" no-view class="pointer"></upload-image>
               </div>
             </div>
             <!-- add more photo video part end-->

@@ -647,15 +647,17 @@ firstapp.directive('imageonload', function () {
   };
 });
 
-firstapp.directive('uploadImage', function ($http, $filter, $timeout) {
+firstapp.directive('uploadImage', function ($http, $filter, $timeout,TemplateService) {
   return {
     templateUrl: 'views/directive/uploadFile.html',
     scope: {
       model: '=ngModel',
       type: "@type",
+      dataValue: "@datatype",
       callback: "&ngCallback"
     },
     link: function ($scope, element, attrs) {
+      console.log($scope.dataValue,'qwerty');
       $scope.showImage = function () {
         console.log($scope.image);
       };
@@ -688,6 +690,8 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout) {
             console.log(newVal.length);
             _.each(newVal, function (newV, key) {
               if (newV && newV.file) {
+                TemplateService.uploadLoader = true;
+                TemplateService.type = $scope.dataValue;
                 $scope.uploadNow(newV);
               }
             });
@@ -729,7 +733,7 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout) {
           },
           transformRequest: angular.identity
         }).success(function (data) {
-
+          TemplateService.uploadLoader = false;
           $scope.uploadStatus = "uploaded";
           if ($scope.isMultiple) {
 
@@ -781,7 +785,7 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout) {
       $scope.check = true;
       $scope.length = 0;
       $scope.imageDate = "";
-      
+
       if (!$scope.type) {
         $scope.type = "image";
       }

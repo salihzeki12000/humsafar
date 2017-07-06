@@ -1803,7 +1803,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // share whole trip social
     $scope.viewSocialShare = false;
-    // $scope.shareSocial = function () {
+    // $scope. = function () {
     //   if (!($.jStorage.get("isLoggedIn"))) {
     //     $state.go('login');
     //   } else {
@@ -2283,9 +2283,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
       $scope.previousId = post._id;
     };
-
+    // $scope.likePageNumber = 1;
     $scope.getLikesData = function (post) {
       var callback = function (data) {
+        // console.log(data,'data kya hai');
+        // if(data.data.like.length > 0){
+        //   _.each(data.data.like, function(likeArr){
+        //     $scope.listOfLikes.push(likeArr);
+        //   })
+        //   console.log($scope.listOfLikes);
+        //   $scope.likePageNumber++;
+        //   LikesAndComments.getLikes(post.type, post._id, $scope.likePageNumber, callback);
+        // }else {
+        // }
         $scope.listOfLikes = data.data;
         console.log($scope.listOfLikes);
       };
@@ -2296,6 +2306,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.viewCardLike = true;
         // $scope.journey.journeyHighLight = activity._id;
         $scope.showLikeShow = "show-like-side-sec";
+        // LikesAndComments.getLikes(post.type, post._id, $scope.likePageNumber, callback);
         LikesAndComments.getLikes(post.type, post._id, callback);
       } else {
         if ($scope.viewCardLike) {
@@ -2320,6 +2331,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.getCard = "";
       $scope.listOfLikes = [];
       $scope.listOfComments = [];
+      // $scope.likePageNumber = 1;
     };
 
     // COMMENT LIKE SECTION FUNCTIONS END
@@ -8965,7 +8977,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.cities = [];
     };
 
-    $scope.addPhotosCallback = function (photo, length) {
+    $scope.addPhotosCallback = function (photo, length,date) {
       console.log(photo);
       console.log(length, 'total length');
       console.log($scope.uploadCount, 'uploadFile');
@@ -13194,7 +13206,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   })
 
-  .controller('singleNotification', function ($scope, TemplateService, NavigationService, $timeout, $state, $stateParams, LikesAndComments) {
+  .controller('singleNotification', function ($scope, TemplateService, NavigationService, $timeout, $state, $stateParams,OnGoJourney, LikesAndComments) {
     $scope.template = TemplateService.changecontent("single-post"); //Use same name of .html file
     // $scope.menutitle = NavigationService.makeactive("single-notification"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
@@ -13206,8 +13218,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.userData = $.jStorage.get("profile");
     LikesAndComments.getOnePost($stateParams.postId, function (data) {
       if (data.value) {
-        console.log(data);
-        $scope.post = data.data;
+        if(data.data.redirect == 'profile') {
+          $state.go('mylife',{
+            'urlSlug': data.data.user.urlSlug
+          });
+        }else {
+          console.log(data);
+          $scope.post = data.data;
+        }
       }
     });
 
@@ -14145,6 +14163,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log($scope.listOfLikes);
       });
     };
+    $scope.scrollLike = {
+      busy : false,
+      stopCallingApi: false
+    }
+    // get more likes
+    // $scope.getMoreLikes = function(){
+      // $scope.likeScroll.busy = true;
+      // if($scope.likeScroll.stopCallingApi == false){
+      //   LikesAndComments.getLikes(postScrollData.type, postScrollData._id, callback);
+      // }
+    // }
+    // get more likes end
 
     $scope.followFollowing = function (user) {
       console.log("from ongojourney");

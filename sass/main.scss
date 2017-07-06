@@ -7713,7 +7713,15 @@ display:none;
   padding: 15px 50px;
   position: relative;
 }
-
+.image-upload-loader {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  background-color: rgba(255,255,255,0.5);
+}
 .otg-photo-count,
 .otg-video-count {
   position: absolute;
@@ -7828,6 +7836,9 @@ display:none;
   .flexslider {
     border-radius: 0;
     background-color: transparent;
+  }
+  .flexslider .slides > li {
+    display: block !important;
   }
 }
 
@@ -12612,6 +12623,11 @@ ng-map {
     margin: 25px auto;
     zoom: 0.8;
     background-color: rgba(255, 255, 255, 0.9);
+  }
+  .journey-date {
+    span:nth-child(1), span:nth-child(2) {
+      display: none;
+    }
   }
 }
 // single post local and travel end
