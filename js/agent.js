@@ -232,6 +232,11 @@ var agent = angular.module('agent', [])
         TravelibroService.post(adminURL + "/leads/getLeadsData", formData).success(callback).error(function (data){
           console.log(data);
         })
+      },
+      getOneAlbum: function(formData, callback){
+        TravelibroService.post(adminURL + "/album/getOneAlbum",formData).success(callback).error(function(data){
+          console.log(data);
+        })
       }
     }
   });
