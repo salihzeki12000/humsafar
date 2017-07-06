@@ -13177,7 +13177,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     ];
     // MONTH FILTER JSON END
     // YEAR FILTER JSON
-    $scope.leadyear = _.range(parseInt(moment().format("YYYY")),2016);
+    $scope.leadyear = _.range(parseInt(moment().format("YYYY")), 2016);
     console.log($scope.leadyear, "leadyear");
     // YEAR FILTER JSON END
 
@@ -13190,16 +13190,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       year: ''
     }
 
-    $scope.getLeadsChart = function(activeSlug){
+    $scope.getLeadsChart = function (activeSlug) {
       leadChart.urlSlug = activeSlug;
+      console.log($scope.leadFilterData);
       leadChart.month = moment().month($scope.leadFilterData.month).format("MM");
       leadChart.year = $scope.leadFilterData.year;
 
+
+
+
       console.log(leadChart, "leads chart");
-      Agent.getLeadsData(leadChart, function(data){
+      Agent.getLeadsData(leadChart, function (data) {
         if (data.value == true) {
-          $scope.leadChartData = data.data
-          console.log($scope.leadChartData,"GET Leads chart");
+          $scope.leadChartData = data.data;
+          console.log($scope.leadChartData, "GET Leads chart");
+
+          var numberOfDaysInMonth = moment(leadChart.year + "-" + leadChart.month, "YYYY-MM").daysInMonth();
+          var yAxis = [];
+          var xAxis = _.times(numberOfDaysInMonth, function (n) {
+            yAxis.push(0);
+            return n + 1 + "";
+          });
+          console.log(xAxis);
+
+          _.each($scope.leadChartData, function (n) {
+            var value = 0;
+            var key;
+            _.each(n, function (m, k) {
+              value = m;
+              key = k;
+            });
+            console.log(value, key);
+            yAxis[parseInt(key) - 1] = value;
+          });
+          $scope.chartConfig.xAxis.categories = xAxis;
+          $scope.chartConfig.series[0].data = yAxis;
+          console.log("YAXIS", yAxis);
         } else {
           console.log('ERROR IN GET Leads chart');
         }
@@ -13209,38 +13235,42 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // ANALYTICS LEADS HIGHCHARTS
     //Chart
     $scope.chartConfig = {
-        chart: {
-          backgroundColor: '#000000',
-          borderRadius: 10,
-          type: 'line'
-        },
-        title:  {
+      chart: {
+        backgroundColor: '#000000',
+        borderRadius: 10,
+        type: 'line'
+      },
+      title: {
+        text: ''
+      },
+      legend: {
+        backgroundColor: 'transparent'
+      },
+      exporting: false,
+      xAxis: {
+        title: {
           text: ''
         },
-        legend: {
-          backgroundColor: 'transparent'
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      },
+      yAxis: {
+        // min: 0,
+        title: {
+          text: ''
         },
-        exporting: false,
-        xAxis:{
-          title: { text: ''},
-           categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        gridLineColor: 'transparent'
+      },
+      series: [{
+        name: 'Leads',
+        lineColor: '#ef645e',
+        marker: {
+          symbol: 'round',
+          fillColor: '#ef645e'
         },
-        yAxis: {
-          // min: 0,
-          title: {text: ''},
-          gridLineColor: 'transparent'
-        },
-        series: [{
-          name:'Leads',
-          lineColor: '#ef645e',
-          marker: {
-            symbol: 'round',
-            fillColor: '#ef645e'
-          },
         data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-    }],
-        loading: false,
-     };
+      }],
+      loading: false,
+    };
     //Chart End
     // ANALYTICS LEADS HIGHCHARTS END
 
@@ -13704,7 +13734,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // $scope.followersList = [];
       switch (getId) {
         case 'profileview':
-        $scope.getProfileView();
+          $scope.getProfileView();
           $scope.profileview = true;
           break;
         case 'follower':
