@@ -13369,13 +13369,38 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // GET LEADS END
 
+    // PING PONG
+    $scope.allPhotos = {};
+    $scope.allPhotos.photoSliderIndex = "";
+    $scope.allPhotos.photoSliderLength = "";
+    $scope.allPhotos.newArray = [];
+    //Photo comment popup
+    $scope.getPhotosCommentData = function (photoId, index, length, array) {
+      $scope.allPhotos.photoSliderIndex = index;
+      $scope.allPhotos.photoSliderLength = length;
+      $scope.allPhotos.newArray = array;
+      modal = $uibModal.open({
+        templateUrl: "views/modal/notify.html",
+        animation: true,
+        controller: 'photoCommentModalCtrl',
+        scope: $scope,
+        windowClass: "notify-popup"
+      });
+      modal.closed.then(function () {
+        $scope.listOfComments = {};
+      });
+      LikesAndComments.openPhotoPopup(photoId, $scope);
+    };
+    //Photo comment popup end
+    // PING PONG END
+
     // GET PHOTO POP
     var oneAlbum = {};
     $scope.getPhotoPopup = function(id){
       oneAlbum._id = id;
       Agent.getOneAlbum(oneAlbum, function(data){
         if(data.value == true){
-          $scope.
+          // $scope.
           console.log("onealbum true");
           $scope.allPhotos = {};
           $scope.allPhotos.photoSliderIndex = "";
