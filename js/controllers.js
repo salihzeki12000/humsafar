@@ -13400,29 +13400,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       oneAlbum._id = id;
       Agent.getOneAlbum(oneAlbum, function(data){
         if(data.value == true){
-          // $scope.
-          console.log("onealbum true");
-          $scope.allPhotos = {};
-          $scope.allPhotos.photoSliderIndex = "";
-          $scope.allPhotos.photoSliderLength = "";
-          $scope.allPhotos.newArray = [];
           //Photo comment popup
-          $scope.getPhotosCommentData = function (photoId, index, length, array) {
-            $scope.allPhotos.photoSliderIndex = index;
-            $scope.allPhotos.photoSliderLength = length;
-            $scope.allPhotos.newArray = array;
-            modal = $uibModal.open({
-              templateUrl: "views/modal/notify.html",
-              animation: true,
-              controller: 'photoCommentModalCtrl',
-              scope: $scope,
-              windowClass: "notify-popup"
-            });
-            modal.closed.then(function () {
-              $scope.listOfComments = {};
-            });
-            LikesAndComments.openPhotoPopup(photoId, $scope);
-          };
+          var picArray = data.data;
+          var pic = picArray[0];
+          $index = 0;
+          $scope.getPhotosCommentData(pic._id, $index, picArray.length, picArray);
           //Photo comment popup end
         }else{
           console.log("one album false");
