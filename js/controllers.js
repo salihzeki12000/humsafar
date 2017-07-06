@@ -13170,60 +13170,79 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     // GET TOURS AND TESTIMONIALS END
-    //Chart 
+    $scope.leadChartData = [];
+    // MONTH FILTER JSON
+    $scope.leadmonth = [
+      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    // MONTH FILTER JSON END
+    // YEAR FILTER JSON
+    $scope.leadyear = _.range(parseInt(moment().format("YYYY")),2016);
+    console.log($scope.leadyear, "leadyear");
+    // YEAR FILTER JSON END
+
+    $scope.leadFilterData = {
+      month: '',
+      year: moment().format("YYYY")
+    };
+    var leadChart = {
+      month: '',
+      year: ''
+    }
+
+    $scope.getLeadsChart = function(activeSlug){
+      leadChart.urlSlug = activeSlug;
+      leadChart.month = moment().month($scope.leadFilterData.month).format("MM");
+      leadChart.year = $scope.leadFilterData.year;
+
+      console.log(leadChart, "leads chart");
+      Agent.getLeadsData(leadChart, function(data){
+        if (data.value == true) {
+          $scope.leadChartData = data.data
+          console.log($scope.leadChartData,"GET Leads chart");
+        } else {
+          console.log('ERROR IN GET Leads chart');
+        }
+      });
+    }
+
+    // ANALYTICS LEADS HIGHCHARTS
+    //Chart
     $scope.chartConfig = {
-      options: {
         chart: {
-          type: 'spline'
+          backgroundColor: '#000000',
+          borderRadius: 10,
+          type: 'line'
         },
-        title: {
+        title:  {
           text: ''
         },
-        xAxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-          ]
+        legend: {
+          backgroundColor: 'transparent'
+        },
+        exporting: false,
+        xAxis:{
+          title: { text: ''},
+           categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         },
         yAxis: {
-          title: {
-            text: 'Number of Entries'
+          // min: 0,
+          title: {text: ''},
+          gridLineColor: 'transparent'
+        },
+        series: [{
+          name:'Leads',
+          lineColor: '#ef645e',
+          marker: {
+            symbol: 'round',
+            fillColor: '#ef645e'
           },
-          labels: {
-            formatter: function () {
-              return this.value + '°';
-            }
-          }
-        },
-        tooltip: {
-          crosshairs: true,
-          shared: true
-        },
-        plotOptions: {
-          spline: {
-            marker: {
-              radius: 4,
-              lineColor: '#ef645e',
-              lineWidth: 1
-            }
-          }
-        }
-      },
-      series: [{
-        name: 'Days',
-        marker: {
-          symbol: 'square'
-        },
-        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, {
-          y: 26.5,
-          // marker: {
-          //     symbol: 'url(https://www.highcharts.com/samples/graphics/sun.png)'
-          // }
-        }, 23.3, 18.3, 13.9, 9.6]
-
-      }],
-      loading: false
-    };
+        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+    }],
+        loading: false,
+     };
     //Chart End
+    // ANALYTICS LEADS HIGHCHARTS END
 
     // GET LEADS
     var formLeadData = {};
@@ -13685,8 +13704,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // $scope.followersList = [];
       switch (getId) {
         case 'profileview':
+        $scope.getProfileView();
           $scope.profileview = true;
-          $scope.getProfileView();
           break;
         case 'follower':
           $scope.follower = true;
@@ -13700,6 +13719,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           $scope.getFollowers();
           break;
         case 'leads':
+          $scope.getLeadsChart($scope.activeUrlSlug);
           $scope.leads = true;
           break;
         case 'viewsdownload':
@@ -13934,16 +13954,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // category of Specialisation array end
 
     // ANALYTICS LEAD FILTER
-    // MONTH FILTER JSON
-    $scope.leadmonth = [
-      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
-    ];
-    // MONTH FILTER JSON END
-    // MONTH FILTER JSON
-    $scope.leadyear = [
-      '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010'
-    ];
-    // MONTH FILTER JSON END
     // ANALYTICS LEAD FILTER END
     // PROFILE VIIEWS JSON
     $scope.followingList = [{
