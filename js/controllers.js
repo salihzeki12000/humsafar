@@ -12181,7 +12181,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // category type end
   })
 
-  .controller('AgenthomeCtrl', function ($scope, TemplateService, TravelibroService, NavigationService, MyLife, Agent, LikesAndComments, $timeout, $state, $anchorScroll, anchorSmoothScroll, $stateParams, $location) {
+  .controller('AgenthomeCtrl', function ($scope, TemplateService, TravelibroService, NavigationService, MyLife, Agent, LikesAndComments, $timeout, $uibModal, $state, $anchorScroll, anchorSmoothScroll, $stateParams, $location) {
     $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
@@ -13196,9 +13196,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       leadChart.month = moment().month($scope.leadFilterData.month).format("MM");
       leadChart.year = $scope.leadFilterData.year;
 
-
-
-
       console.log(leadChart, "leads chart");
       Agent.getLeadsData(leadChart, function (data) {
         if (data.value == true) {
@@ -13371,6 +13368,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     // GET LEADS END
+
+    // GET PHOTO POP
+    var oneAlbum = {};
+    $scope.getPhotoPopup = function(id){
+      oneAlbum._id = id;
+      Agent.getOneAlbum(oneAlbum, function(data){
+        if(data.value == true){
+          $scope.
+          console.log("onealbum true");
+          $scope.allPhotos = {};
+          $scope.allPhotos.photoSliderIndex = "";
+          $scope.allPhotos.photoSliderLength = "";
+          $scope.allPhotos.newArray = [];
+          //Photo comment popup
+          $scope.getPhotosCommentData = function (photoId, index, length, array) {
+            $scope.allPhotos.photoSliderIndex = index;
+            $scope.allPhotos.photoSliderLength = length;
+            $scope.allPhotos.newArray = array;
+            modal = $uibModal.open({
+              templateUrl: "views/modal/notify.html",
+              animation: true,
+              controller: 'photoCommentModalCtrl',
+              scope: $scope,
+              windowClass: "notify-popup"
+            });
+            modal.closed.then(function () {
+              $scope.listOfComments = {};
+            });
+            LikesAndComments.openPhotoPopup(photoId, $scope);
+          };
+          //Photo comment popup end
+        }else{
+          console.log("one album false");
+        }
+      })
+    };
+    // GET PHOTO POP END
 
     // GET PROFILE VIEW
     $scope.getProfileView = function () {

@@ -96,7 +96,7 @@
                       <p ng-if="activity.type == 'agentStatus'">{{activity.status}}</p>
                       <p ng-if="activity.type == 'album'" class="m-clear">Has uploaded an album - <span class="avenir-heavy text-capitalize">{{activity.name}}</span></p>
                     </div>
-                    <div class="travel-albumcover" ng-if="activity.type == 'album'">
+                    <div class="travel-albumcover pointer" ng-if="activity.type == 'album'" ng-click="getPhotoPopup(activity._id);">
                       <span class="get-center photovideo-play color-white" ng-if="activity.photos== ''"><i class="fa fa-play-circle"></i></span>
                       <img ng-src="{{activity.photos[0].name|uploadpath}}" alt="{{activity.name}}" class="img-responsive" ng-if="activity.photos!= ''">
                       <img ng-src="{{activity.videos[0].thumbnail|uploadpath}}" alt="{{activity.name}}" class="img-responsive" ng-if="activity.photos== ''">
