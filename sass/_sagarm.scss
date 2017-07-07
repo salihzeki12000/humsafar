@@ -590,6 +590,23 @@
   }
 }
 
+.agentshare-profilelink{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 5px 8px;
+  background-color: rgba(0,0,0,0.8);
+  color: #fff;
+  .btn-shareagentlink{
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+    &:hover, &:active, &:focus{
+      color: #fff;
+    }
+  }
+}
+
 .bg-agent-home-img,
 .bg-agent-user-img {
   background: url('../img/agent/bg-user.jpg') $brand-light-grey no-repeat;
@@ -861,6 +878,10 @@
   @extend .avenir-roman;
 }
 
+.agt-home-itineraryintro, .agt-home-tourintro{
+  padding: 60px 0;
+}
+
 .agt-home-testimonialreiewsintro {
   padding: 50px 0;
 }
@@ -1003,11 +1024,12 @@
 .agent-photogallery {
   width: 275px;
   max-width: 275px; // max-height: 350px;
-  margin: 3px;
-  padding: 5px;
+  padding: 2px;
   border: 1px solid #e3e3e3;
   border-radius: 4px;
+  margin: 3px;
   background-color: #fff;
+  box-shadow: 2px 2px 3px #888;
 }
 
 .testimonial-holder {
@@ -2323,6 +2345,15 @@ q {
 
 .actiontab-accordionbox {
   margin: 10px 0;
+  panel {
+    border: none;
+  }
+  .panel-default>.panel-heading {
+    border: none;
+  }
+  .panel-group .panel {
+    border-radius: 0;
+  }
 }
 
 .enquirytab-accordionbox::-webkit-scrollbar {
@@ -2440,6 +2471,7 @@ q {
   .panel {
     background-color: rgba(45, 54, 85, 0.8);
     color: #fff;
+    border: none;
   }
   .panel-default>.panel-heading {
     background-color: rgba(45, 54, 85, 0.9);
@@ -2453,14 +2485,16 @@ q {
 
 .actionlead-tab {
   .panel {
+    border: none;
+    border-radius: 0;
     background-color: rgba(255, 255, 255, 0.95);
     color: $brand-blue;
-    border-radius: 0;
   }
   .panel-default>.panel-heading {
-    background-color: rgba(255, 255, 255, 0.9);
-    color: $brand-blue;
     padding: 5px 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    color: $brand-blue;
   }
 }
 
@@ -2478,11 +2512,11 @@ q {
   @extend .avenir-light;
   padding: 10px 30px;
   .lead-content {
-    color: $brand-blue;
+    color: #fff;
     a {
-      color: $brand-blue;
+      color: #fff;
       &:hover {
-        color: $brand-blue;
+        color: #fff;
       }
     }
   }
@@ -5378,3 +5412,12 @@ q {
     }
   }
 }
+
+//PARTNER LOGIN PAGE
+.agentlogin-vimeo{
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  @include transform(translate(-50%,0));
+}
+//PARTNER LOGIN PAGE END

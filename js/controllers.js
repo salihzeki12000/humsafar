@@ -13459,6 +13459,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
     // followFollowing  Function END
+    // sharing local life modal
+    var shareModal = "";
+    $scope.sharePost = function (url) {
+      $scope.shareUrl = url;
+      shareModal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/sharing.html",
+        scope: $scope
+      });
+    }
+    // sharing local life modal end
     $scope.likeUnlikeActivity = function (post) {
       console.log(post);
       post.likeDone = !post.likeDone;
