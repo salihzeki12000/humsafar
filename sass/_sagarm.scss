@@ -1,5 +1,4 @@
 // AGENT LOGIN START
-
 .btn-cyan {
   @include button-variant( white, $brand-cyan, $brand-cyan);
 }
@@ -7,8 +6,8 @@
 .btn-transparent-dark-blue {
   @include button-variant( white, rgba(44, 55, 87, 0.8), rgba(44, 55, 87, 0.8));
 }
-// jfjrufb
 
+// jfjrufb
 .font-sz10 {
   font-size: 10px;
 }
@@ -44,7 +43,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .agent-login {
@@ -52,22 +51,19 @@
   textarea {
     background-color: transparent;
   }
-
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-
   .veri-error-btn {
     margin: 40px 0;
   }
-
-  .select-your-nation{
-    ul{
+  .select-your-nation {
+    ul {
       border: none;
     }
-    label{
+    label {
       margin: 2px 0 !important;
       font-weight: 500;
     }
@@ -78,11 +74,9 @@
   .panel {
     background-color: #ebebeb;
   }
-
-  .panel-default > .panel-heading {
+  .panel-default>.panel-heading {
     background-color: #ebebeb;
   }
-
   .panel-group .panel {
     border-radius: 0;
   }
@@ -91,7 +85,6 @@
 .bg-agent {
   .btn-blue-outline {
     @include button-variant( $brand-blue, transparent, $brand-blue);
-
     &:active,
     &:hover {
       background-color: $brand-pink;
@@ -107,7 +100,6 @@
 .agt-verification-code {
   padding: 30px 30px 15px;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.7);
-
   h3 {
     margin: 0 0 25px;
     font-size: 20px;
@@ -116,28 +108,24 @@
 
 .agent-cmpny-inputholder {
   position: relative;
-
   textarea {
     border: none;
     border-bottom: 1px solid #2d3655;
     line-height: 1;
     height: 30px;
     padding: 6px 12px 6px 30px;
-    &:focus{
-      border-color: $brand-blue;
-    }
-  }
-
-  input {
-    border: none;
-    border-bottom: 1px solid $brand-blue;
-    padding: 6px 12px 6px 30px;
-
     &:focus {
       border-color: $brand-blue;
     }
   }
-
+  input {
+    border: none;
+    border-bottom: 1px solid $brand-blue;
+    padding: 6px 12px 6px 30px;
+    &:focus {
+      border-color: $brand-blue;
+    }
+  }
   &:after,
   &:before {
     content: '';
@@ -147,107 +135,93 @@
     bottom: 0;
     background-color: $brand-blue;
   }
-
   &:before {
     left: 0;
   }
-
   &:after {
     right: 0;
   }
-
-  .ui-select-multiple > div:first-child{
+  .ui-select-multiple>div:first-child {
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
   }
-
-  .ui-select-multiple.ui-select-bootstrap{
+  .ui-select-multiple.ui-select-bootstrap {
     padding-left: 30px;
     padding-bottom: 5px;
     border: none;
     border-bottom: 1px solid $brand-blue;
     background-color: transparent;
     text-align: left;
-
-    ::-webkit-scrollbar{
+     ::-webkit-scrollbar {
       height: 4px;
     }
-
-    ::-webkit-scrollbar-track{
+     ::-webkit-scrollbar-track {
       background-color: transparent;
     }
-
-    ::-webkit-scrollbar-thumb{
+     ::-webkit-scrollbar-thumb {
       background-color: $brand-light-grey;
     }
-
-    .ui-select-search{
+    .ui-select-search {
       width: auto !important;
       padding: 6px 12px;
       background-color: transparent;
     }
-
-    .ui-select-match-item{
+    .ui-select-match-item {
       border-color: $brand-blue;
       background-color: transparent;
       color: $brand-blue;
     }
-
-    .close{
+    .close {
       padding-top: 1px;
       font-size: 15px;
       line-height: 1;
       opacity: 1;
     }
-
-    .ui-select-dropdown{
+    .ui-select-dropdown {
       opacity: 0;
       display: none;
     }
   }
 }
 
-.mail-register{
+.mail-register {
   color: #424242;
   text-align: left;
-  label{
+  label {
     font-weight: 500;
   }
 }
 
-.alternatemail{
+.alternatemail {
   text-align: left;
-
-  label{
+  label {
     font-weight: 500;
   }
 }
 
-.alternate-mail{
+.alternate-mail {
   color: #424242;
 }
 
-.email-info{
+.email-info {
   position: relative;
   height: auto;
   margin: 0px 15px;
   background-color: transparent;
   color: $brand-pink;
   font-size: 15px;
-  line-height: 1;
-  // z-index: 6;
-  &:hover{
+  line-height: 1; // z-index: 6;
+  &:hover {
     color: $brand-pink;
-
-    .agentemail-infobox{
+    .agentemail-infobox {
       display: block;
     }
   }
 }
 
-.agentemail-infobox{
+.agentemail-infobox {
   display: none;
   position: absolute;
   z-index: 5;
@@ -260,8 +234,7 @@
   color: #fff;
   font-size: 14px;
   text-align: justify;
-
-  &:after{
+  &:after {
     content: '';
     position: absolute;
     top: -10px;
@@ -272,47 +245,38 @@
   }
 }
 
-.agentcompany-phone{
+.agentcompany-phone {
   margin-bottom: 20px;
-
-  .intl-tel-input{
+  .intl-tel-input {
     width: 100%;
     @extend .avenir-roman;
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 4px;
     }
-
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: transparent;
     }
-
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       background-color: $brand-lighter-grey;
     }
-
-    .country-list{
+    .country-list {
       border: none;
       border-radius: 4px;
       background-color: #fff;
       color: $brand-blue;
       text-align: left;
-
-      .divider{
+      .divider {
         display: none;
       }
     }
-
-    .country-name{
+    .country-name {
       font-size: 12px;
       vertical-align: middle;
     }
-
-    .dial-code{
+    .dial-code {
       font-size: 12px;
     }
   }
-
   .intel-error {
     position: absolute;
     top: 100%;
@@ -338,17 +302,14 @@
 
 .agt-cat-indicators {
   margin-bottom: 10px;
-
   ul {
     padding: 0;
     list-style-type: none;
     text-align: center;
-
     li {
       padding: 0 3px;
       display: inline-block;
     }
-
     a {
       @include square(10px);
       border: 1px solid $brand-blue;
@@ -357,7 +318,6 @@
       @include transition(all 300ms linear);
     }
   }
-
   .one,
   .three,
   .two {
@@ -379,16 +339,13 @@
   background-size: contain;
   min-height: 60px;
   position: relative;
-
   img {
     @extend .get-center;
   }
-
   &:hover {
     background-image: url('../img/agt-bg-red.png');
     @include transition(background 300ms linear);
   }
-
   figcaption {
     font-size: 16px;
   }
@@ -405,7 +362,6 @@
 .btn-catcountry {
   font-weight: 700;
   padding: 8px 30px;
-
   &.active,
   &:active,
   &:hover {
@@ -416,7 +372,6 @@
 
 .btn-bluehover {
   background-color: transparent;
-
   &.active,
   &:active,
   &:hover {
@@ -434,8 +389,8 @@
     flex-wrap: wrap;
   }
 }
-// scroll style start
 
+// scroll style start
 .country-tabs::-webkit-scrollbar {}
 
 .country-tabs::-webkit-scrollbar-track {
@@ -450,11 +405,11 @@
 }
 
 .country-tabs::-webkit-scrollbar-thumb {
-  background-color: rgba(128,128,128,0.6);
+  background-color: rgba(128, 128, 128, 0.6);
   border-radius: 10px;
 }
-// scroll style start
 
+// scroll style start
 .service-box {
   text-align: justify;
   display: flex;
@@ -473,7 +428,6 @@
 
 .veri-box {
   display: block;
-
   input[type="number"] {
     background-color: #e3e3e3;
   }
@@ -490,9 +444,9 @@
   text-align: center;
   margin: 20px 10px 20px 0;
 }
+
 // AGENT LOGIN END
 //AGENT USER ITENERARY START
-
 .pl35 {
   padding-left: 35px;
 }
@@ -509,13 +463,11 @@
 .agent-user-nav {
   background: $brand-blue;
   padding: 5px 0;
-  z-index: 6;
-  // position: absolute;
+  z-index: 6; // position: absolute;
   // bottom: 0;
   // width: 100%;
   ul {
     @extend .avenir-roman;
-
     li {
       line-height: 150%;
       color: #fff;
@@ -526,7 +478,6 @@
       @include transition(all ease 300ms);
       border-right: 1px solid #fff;
     }
-
     li:last-child {
       border-right: none !important;
     }
@@ -538,6 +489,7 @@
     color: $brand-blue !important;
   }
 }
+
 // .change ul {
 //   li {
 //     .active {
@@ -545,7 +497,6 @@
 //     }
 //   }
 // }
-
 .agent-home-nav ul {
   .active {
     color: $brand-cyan !important;
@@ -557,8 +508,8 @@
     color: $brand-cyan !important;
   }
 }
-// Agent nav analytics dropdown
 
+// Agent nav analytics dropdown
 .analytics-dropoptions {
   position: absolute;
   top: 30px;
@@ -568,7 +519,6 @@
   padding: 10px;
   border-radius: 5px;
   z-index: 5;
-
   &:after {
     content: '';
     position: absolute;
@@ -577,7 +527,6 @@
     border-bottom: 10px solid $brand-dark-blue;
     border-left: 10px solid transparent;
   }
-
   ul li {
     padding: 5px;
     border: none;
@@ -586,12 +535,10 @@
     color: #fff;
     font-size: 13px;
     vertical-align: middle;
-
     &:last-child {
       border-bottom: 0;
       padding-bottom: 0;
     }
-
     &.active,
     &:active,
     &:hover {
@@ -599,8 +546,8 @@
     }
   }
 }
-// Agent nav analytics dropdown enD
 
+// Agent nav analytics dropdown enD
 .agent-itinerary-filter {
   .openfilter {
     // min-height: 120px;
@@ -608,12 +555,10 @@
       display: block;
     }
   }
-
   .libro-filter {
-    top: 0;
+    top: 0px;
     z-index: 1;
     display: none;
-
     .txt-clear {
       padding-right: 40px;
     }
@@ -626,25 +571,38 @@
   background-size: cover!important;
   background-position: center center!important;
   overflow: hidden;
-
   .right-label {
     @extend .text-shadow;
     @extend .avenir-roman;
-
     a {
       text-decoration: underline;
     }
   }
-
   .btm-right {
     position: absolute;
     bottom: 20px;
     right: 10px;
   }
-
   .download-app {
     i {
       padding: 0 5px;
+    }
+  }
+}
+
+.agentshare-profilelink{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 5px 8px;
+  background-color: rgba(0,0,0,0.8);
+  color: #fff;
+  .btn-shareagentlink{
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+    &:hover, &:active, &:focus{
+      color: #fff;
     }
   }
 }
@@ -662,42 +620,35 @@
   .pad-btn {
     padding: 0 0 10px 30px;
   }
-
   .head-title-all {
     &.fliter-min-hght {
       min-height: 74px;
     }
-
     h4 {
       color: $brand-pink;
       margin: 0;
       padding-bottom: 10px;
       @extend .avenir-heavy;
     }
-
     p {
       color: #424242;
     }
   }
-
   .img-holder {
     margin-bottom: 20px;
     border-radius: 5px;
     overflow: hidden;
     cursor: pointer;
     @include perspective(800px);
-
     &.card {
       position: absolute;
       @include transform-style(preserve-3d);
       @include transition(all ease 300ms);
       @include backface-visibility(hidden);
       @include transform-origin(50% 50%);
-
       .flipdown {
         display: none;
       }
-
       .back {
         position: absolute;
         top: 0;
@@ -706,7 +657,6 @@
         border-radius: 5px;
         z-index: -1;
         @include transform(rotateY( 180deg));
-
         .flipped-cont {
           color: #fff;
           position: absolute;
@@ -717,52 +667,51 @@
           text-align: justify;
           border-radius: 5px;
           @include transform(rotateY( 180deg));
-
           p {
             @extend .avenir-roman;
           }
         }
       }
-
       &.flipped {
         // @include transform(rotateY( 180deg));
         .back {
           z-index: 1;
         }
-
         .flipdown {
           display: block;
           @include transform(rotateY( 180deg));
         }
-
         .flipup {
           display: none;
         }
       }
     }
-
     .read-more {
       text-decoration: underline;
     }
-
     &:hover {
       img {
         @include transform(scale(1.1));
       }
     }
-
     .title-head-left {
       font-size: 30px;
       position: absolute;
       top: 0;
       left: 0;
       padding: 8px 15px;
-      @include background(linear-gradient(rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0)));
+      @include background(linear-gradient(rgba(0,
+      0,
+      0,
+      0.80),
+      rgba(0,
+      0,
+      0,
+      0)));
       width: 100%;
       @extend .avenir-heavy;
       border-radius: 5px;
     }
-
     .title-head-right {
       font-size: 12px;
       position: absolute;
@@ -771,34 +720,44 @@
       padding: 8px 15px;
       @extend .avenir-heavy;
       border-radius: 5px;
-
       img {
         margin: 0 0 0 10px;
       }
     }
-
     .right-bottom {
       position: absolute;
       bottom: 0;
       right: 0;
       padding: 8px 15px;
-      @include background(linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 90)));
+      @include background(linear-gradient(rgba(0,
+      0,
+      0,
+      0),
+      rgba(0,
+      0,
+      0,
+      90)));
       text-align: right;
       width: 100%;
       @extend .avenir-roman;
       border-radius: 5px;
     }
-
     .left-bottom {
       position: absolute;
       bottom: 0;
       left: 0;
       padding: 8px 15px;
-      @include background(linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 90)));
+      @include background(linear-gradient(rgba(0,
+      0,
+      0,
+      0),
+      rgba(0,
+      0,
+      0,
+      90)));
       width: 100%;
       @extend .avenir-roman;
       border-radius: 5px;
-
       ul {
         li {
           font-size: 16px;
@@ -822,8 +781,7 @@
 .agt-title-card {
   padding: 30px 50px;
   text-align: center;
-  color: #fff;
-  // background-color: #323719;
+  color: #fff; // background-color: #323719;
   background: rgba(0, 0, 0, 0.8);
   display: inline-block;
 }
@@ -838,6 +796,7 @@
   overflow: hidden;
   @include transform(translateX(-50%));
 }
+
 //AGENT USER ITENERARY END
 // AGENT USER FILTER
 .agentfilter-drop {
@@ -847,31 +806,26 @@
   width: 100%;
   border-radius: 0 0 4px 4px;
   background-color: #fff;
-
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 4px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: transparent;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-lighter-grey;
   }
-
   ul {
     max-height: 175px;
     overflow-y: auto;
-
     li {
       padding: 5px;
     }
   }
 }
+
 // AGENT USER FILTER END
 //AGENT USER ITENERARY END
-
 .agt-home-aboutus,
 .agt-home-itinerary,
 .agt-home-leadmonitor,
@@ -924,6 +878,10 @@
   @extend .avenir-roman;
 }
 
+.agt-home-itineraryintro, .agt-home-tourintro{
+  padding: 60px 0;
+}
+
 .agt-home-testimonialreiewsintro {
   padding: 50px 0;
 }
@@ -932,20 +890,20 @@
   padding: 50px 0;
   margin-top: -50px;
 }
+
 // TO ALIGN WITH ADD PHOTO BUTTON
 // .agt-home-photovideos .agt-home-photo-card {
 //   margin-top: -50px;
 // }
-
 .agt-home-leadmonitor,
 .agt-home-testimonialreviews,
 .agt-home-travelactivity,
 .agt-usr-testimonialreviews,
 .agt-usr-touractivity {
-  background-color: rgba(45,54,85,0.5);
+  background-color: rgba(45, 54, 85, 0.5);
 }
 
-.agt-usr-touractivity{
+.agt-usr-touractivity {
   padding-bottom: 0;
 }
 
@@ -963,7 +921,7 @@
   min-height: 225px;
 }
 
-.viewdownload-img{
+.viewdownload-img {
   min-height: 190px;
 }
 
@@ -980,24 +938,22 @@
   }
 }
 
-.viewdownload-card{
+.viewdownload-card {
   margin: 20px 0;
 }
 
 .imgfoot-top {
   padding: 10px 10px 0;
-  background-color: rgba(0,0,0,0.5);
-
+  background-color: rgba(0, 0, 0, 0.5);
   p {
     // margin: 0;
   }
 }
 
 .imgfoot-bottom {
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 10px 5px;
   position: relative;
-
   ul {
     margin-left: 5px;
   }
@@ -1031,7 +987,6 @@
     float: left;
     margin-left: -10px;
     border-radius: 100%;
-
     img {
       max-width: initial;
       max-height: 100%;
@@ -1043,8 +998,8 @@
   }
 }
 
-.agent-tourcard{
-  .country-badges{
+.agent-tourcard {
+  .country-badges {
     top: -10px;
   }
   .country-holder {
@@ -1062,31 +1017,30 @@
   padding: 5px 30px;
 }
 
-.agt-home-photo-card{
+.agt-home-photo-card {
   min-height: calc(100vh - 60px);
 }
 
 .agent-photogallery {
   width: 275px;
-  max-width: 275px;
-  // max-height: 350px;
-  margin: 3px;
-  padding: 5px;
+  max-width: 275px; // max-height: 350px;
+  padding: 2px;
   border: 1px solid #e3e3e3;
   border-radius: 4px;
+  margin: 3px;
   background-color: #fff;
+  box-shadow: 2px 2px 3px #888;
 }
 
-.testimonial-holder{
+.testimonial-holder {
   padding-bottom: 60px;
 }
 
 .testimonial-card {
-  background-color: rgba(255,255,255,0.9);
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 5px;
   padding: 20px 15px 5px;
   margin: 15px 0;
-
   img {
     max-width: 100%;
     max-height: 100%;
@@ -1125,12 +1079,10 @@
   margin-left: 10px;
   color: #7b7b7b;
   vertical-align: middle;
-
   p {
     margin: 0;
     font-weight: 600;
   }
-
   span {
     font-style: italic;
     font-size: 12px;
@@ -1145,7 +1097,6 @@
     margin: 0;
     @extend .avenir-heavy;
   }
-
   span {
     font-size: 14px;
     line-height: 1;
@@ -1163,7 +1114,7 @@ q {
   }
 }
 
-.write-testimonial{
+.write-testimonial {
   padding: 20px 0;
 }
 
@@ -1174,7 +1125,6 @@ q {
   border-radius: 12px;
   cursor: pointer;
   z-index: 4;
-
   .testimonial-droparrow {
     position: absolute;
     top: -6px;
@@ -1200,7 +1150,6 @@ q {
 .view-testimonial {
   background-color: $brand-blue;
   border-radius: 8px 8px 0 0;
-
   p {
     padding-bottom: 5px;
     border-bottom: 1px solid $brand-grey;
@@ -1250,32 +1199,28 @@ q {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 3;
 }
-// slider CSS
 
+// slider CSS
 .agt-usr-testimonialreviews {
   .ngrs-range-slider {
     border: none;
     background: transparent;
     box-shadow: none;
     margin: 10px 0 0;
-
     .ngrs-handle-max {
       border-radius: 100%;
       background-color: $brand-pink;
       border: none;
-
       i {
         background: none;
       }
     }
-
     .ngrs-runner {
       margin: 0;
     }
-
     .ngrs-join {
       background-color: #fff;
       background-image: none;
@@ -1285,17 +1230,15 @@ q {
     }
   }
 }
-// slider CSS end
 
+// slider CSS end
 .agtcategory-type {
   margin: 30px 0;
-
   .select-category-type {
     min-width: 80px;
     display: inline-block;
     text-align: center;
   }
-
   .category-iconholder {
     @include square(40px);
     background: url('../img/itinerary/bluebox.png');
@@ -1303,22 +1246,20 @@ q {
     display: inline-block;
     position: relative;
     @include transition(all 300ms linear);
-
     img {
       @extend .get-center;
     }
   }
 }
 
-.agentservices-list{
+.agentservices-list {
   display: inline-block;
   padding: 5px 10px;
   margin: 5px;
   background-color: transparent;
   color: $brand-blue;
   border: 1px solid $brand-blue;
-  border-radius: 4px;
-  // cursor: pointer;
+  border-radius: 4px; // cursor: pointer;
   // &:hover{
   //   background-color: $brand-blue;
   //   color: #fff;
@@ -1334,14 +1275,13 @@ q {
   @extend .avenir-heavy;
 }
 
-.abtcountry-row{
+.abtcountry-row {
   // display: flex;
   // flex-wrap: wrap;
-  display: block;
-  // @extend .clearfix;
+  display: block; // @extend .clearfix;
 }
 
-.abtcountry-col{
+.abtcountry-col {
   width: 25%;
   display: inline-block;
   float: left;
@@ -1361,8 +1301,7 @@ q {
 .agthome-itinerary-youtube,
 .agthome-tourpackage-youtube,
 .youtube-placeholder {
-  height: 300px;
-  // iframe {
+  height: 300px; // iframe {
   //   width: 550px;
   //   height: 360px;
   // }
@@ -1374,7 +1313,6 @@ q {
 .add-agtitinerary {
   position: relative;
   z-index: 5;
-
   .add-holder {
     @include square(30px);
     padding: 1px;
@@ -1385,16 +1323,13 @@ q {
     color: #fff;
     text-align: center;
     @include transition(all 300ms linear);
-
     i {
       @include transition(all 300ms linear);
     }
   }
-
   .close-more {
     background-color: $brand-grey;
     @include transition(all 300ms linear);
-
     i {
       @include transform(rotate(45deg));
       @include transition(all 300ms linear);
@@ -1402,7 +1337,7 @@ q {
   }
 }
 
-.agent-itinerary-filter{
+.agent-itinerary-filter {
   margin-top: -50px;
 }
 
@@ -1414,13 +1349,11 @@ q {
   @extend .pointer;
   z-index: 6;
   background: transparent;
-
   i {
     z-index: 6;
   }
-
-  &:hover{
-    .itinerary-infobox{
+  &:hover {
+    .itinerary-infobox {
       display: block;
     }
   }
@@ -1439,7 +1372,6 @@ q {
   color: $brand-blue;
   padding: 10px;
   text-align: justify;
-
   &:after {
     content: "";
     border-right: 10px solid transparent;
@@ -1458,7 +1390,7 @@ q {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 4;
 }
 
@@ -1467,27 +1399,25 @@ q {
   padding: 15px 20px;
   border-radius: 12px;
   border: none;
-  background-color: rgba(45,54,85,0.9);
-  @include position(absolute, -15px 35px null null);
+  background-color: rgba(45, 54, 85, 0.9);
+  @include position(absolute,
+  -15px 35px null null);
   z-index: 2;
-
   &:before {
     content: "";
     border-top: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 10px solid transparent;
-    border-left: 10px solid rgba(45,54,85,0.9);
-    @include position(absolute, 21px -20px null null);
+    border-left: 10px solid rgba(45, 54, 85, 0.9);
+    @include position(absolute,
+    21px -20px null null);
   }
-
   li {
     padding: 8px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.8);
-
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
     &:last-child {
       border: none;
     }
-
     a {
       color: #fff;
     }
@@ -1508,7 +1438,6 @@ q {
   background-color: $brand-blue;
   @extend .color-white;
   margin: 20px 0;
-
   .journey-cost span {
     margin: 0 5px;
     font-size: 15px;
@@ -1524,7 +1453,6 @@ q {
     top: -5px;
     left: 5px;
   }
-
   .country-holder {
     margin-left: 0;
     margin-right: -15px;
@@ -1538,7 +1466,6 @@ q {
 
 .agttravel-activity {
   padding-top: 5px;
-
   p {
     margin: 0;
   }
@@ -1549,7 +1476,7 @@ q {
   bottom: 0;
   width: 100%;
   padding: 0 10px;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .marg-actbt {
@@ -1564,7 +1491,6 @@ q {
   position: relative;
   bottom: 25px;
   background-color: #2c3757;
-
   p {
     padding-top: 5px;
     font-size: 10px;
@@ -1580,14 +1506,12 @@ q {
     border-bottom: 1px solid $brand-grey;
     padding: 0;
   }
-
   select {
     -webkit-appearance: none;
     background: transparent;
     border: none;
     border-bottom: 1px solid #fff;
     padding: 0;
-
     option {
       background-color: $brand-blue;
       border: none;
@@ -1597,7 +1521,6 @@ q {
 
 .select-div {
   position: relative;
-
   p {
     font-size: 30px;
     color: white;
@@ -1613,15 +1536,13 @@ q {
   }
 }
 
-.tour-uploads{
+.tour-uploads {
   margin: 10px 0;
   cursor: pointer;
-
-  .btn{
+  .btn {
     width: 100%;
   }
-
-  .tour-uploadinput{
+  .tour-uploadinput {
     position: absolute;
     top: 0;
     left: 0;
@@ -1635,7 +1556,6 @@ q {
 .tour-package-card {
   .imgfoot-top {
     padding: 10px;
-
     h4 {
       margin-top: 0;
       margin-bottom: 5px;
@@ -1651,7 +1571,7 @@ q {
 }
 
 .upgrade-card {
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   border: none;
   border-radius: 5px;
   padding: 40px 30px;
@@ -1666,7 +1586,7 @@ q {
   @extend .font-sz18;
 }
 
-.planexpiry-date{
+.planexpiry-date {
   margin: 10px 0;
   color: $brand-pink;
   font-size: 14px;
@@ -1676,8 +1596,7 @@ q {
   border: none;
   border-bottom: 1px solid #fff;
   background-color: transparent;
-  color: #fff;
-  // ::-webkit-scrollbar {
+  color: #fff; // ::-webkit-scrollbar {
   //   width: 4px;
   // }
   //
@@ -1688,13 +1607,13 @@ q {
   // ::-webkit-scrollbar-thumb {
   //   background-color: $brand-lighter-grey;
   // }
-  &:focus{
+  &:focus {
     border-color: #fff !important;
   }
 }
-// ------ yash scss ----------------
 
-.tour-btns{
+// ------ yash scss ----------------
+.tour-btns {
   position: absolute;
   left: 0;
   bottom: -15px;
@@ -1707,12 +1626,11 @@ q {
   padding: 5px 12px;
 }
 
-.btn-link{
+.btn-link {
   color: #fff;
-
   &:active,
   &:focus,
-  &:hover{
+  &:hover {
     color: #fff;
     text-decoration: none;
   }
@@ -1731,7 +1649,6 @@ q {
   padding-top: 6px;
   background-color: rgba(0, 0, 0, 0.6);
   cursor: pointer;
-
   i {
     font-weight: bold;
     font-size: 18px;
@@ -1746,48 +1663,41 @@ q {
   top: -10px;
   border: 1px solid #fff;
   border-radius: 4px;
-
   .theme-img {
     display: inline-block;
     width: 22px;
   }
-
   .theme-name {
     display: inline-block;
     color: #fff;
     vertical-align: top;
     padding-top: 4px;
-
     p {
       margin-bottom: 0;
     }
   }
 }
-//photo-videos
 
+//photo-videos
 .filter-head {
   margin-bottom: 20px;
   width: 270px;
   position: relative;
   float: right;
-
   .clear-link {
     padding: 0 10px;
     text-decoration: underline;
     color: $brand-grey;
-
     &:hover {
       color: $brand-grey;
     }
   }
-
   .photo-filter {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #fff;
     @extend .pointer;
-
     .arrow-big {
       position: absolute;
       top: 8px;
@@ -1796,21 +1706,17 @@ q {
       font-weight: 700;
     }
   }
-
   .down {
     display: none;
   }
-
   .collapsed {
     .up {
       display: none;
     }
-
     .down {
       display: inline-block;
     }
   }
-
   .filter-data {
     position: absolute;
     top: 34px;
@@ -1821,31 +1727,25 @@ q {
     border-radius: 0 0 4px 4px;
     background-color: #fff;
     z-index: 3;
-
     .options {
       overflow-y: scroll;
       height: 180px;
     }
-
     .options::-webkit-scrollbar {
       display: none;
     }
-
     .opt {
       padding: 5px;
       border-bottom: 1px solid $brand-grey;
-
       label {
         padding-left: 0;
         font-weight: 500;
       }
-
       [type="checkbox"]:checked+label:after,
       [type="checkbox"]:not(:checked)+label:after {
         right: 0;
         left: auto;
       }
-
       [type="checkbox"]:checked+label:before,
       [type="checkbox"]:not(:checked)+label:before {
         position: absolute;
@@ -1862,7 +1762,6 @@ q {
   .button-holder {
     float: right;
     padding: 10px 0;
-
     label {
       margin-right: 15px;
       text-decoration: underline;
@@ -1870,19 +1769,17 @@ q {
     }
   }
 }
-// ------ yash scss end ----------------
 
+// ------ yash scss end ----------------
 .upgrade-list,
 .upgradetable-head {
   border-bottom: 1px solid $brand-grey;
   padding: 10px 0;
-
   i.fa.fa-check {
     border: 1px solid red;
     border-radius: 100%;
     padding: 6px;
   }
-
   p {
     margin: 0;
   }
@@ -1897,7 +1794,6 @@ q {
   position: relative;
   display: inline-block;
   @extend .pointer;
-
   &:hover {
     .hover-tip {
       display: block;
@@ -1917,7 +1813,6 @@ q {
   background-color: $brand-blue;
   @include transform(translateX(-50%));
   border-radius: 4px;
-
   &::before {
     border-color: #2d3655 transparent transparent;
     @include transform(translateX(-50%));
@@ -1933,7 +1828,6 @@ q {
     vertical-align: middle;
     bottom: -10px;
   }
-
   p {
     @extend .mb10;
     line-height: 1.4;
@@ -1964,7 +1858,6 @@ q {
   background-color: #F1F2F2;
   padding: 20px 40px;
   background-color: #f1f2f2;
-
   .setting-heading {
     font-size: 20px;
     @extend .avenir-heavy;
@@ -1985,7 +1878,6 @@ q {
   label {
     display: block;
   }
-
   textarea {
     width: 100%;
     overflow: auto;
@@ -1997,7 +1889,6 @@ q {
   label {
     display: block;
   }
-
   textarea {
     width: 100%;
     overflow: hidden;
@@ -2014,7 +1905,6 @@ q {
     background-color: transparent;
     color: $brand-blue;
   }
-
   .custom-select {
     select {
       padding: 10px;
@@ -2022,16 +1912,14 @@ q {
       border-radius: 7px;
       color: $brand-dark-blue;
     }
-
     &:after {
       content: "\f078";
       color: $brand-dark-blue;
       right: 8px;
     }
   }
-
-  .problem-detail{
-    textarea{
+  .problem-detail {
+    textarea {
       min-height: 230px;
     }
   }
@@ -2043,7 +1931,7 @@ q {
   padding: 15px;
 }
 
-.agentsetting-profilepreview{
+.agentsetting-profilepreview {
   border-radius: 100%;
 }
 
@@ -2053,28 +1941,24 @@ q {
 
 .agent-setting {
   @extend .avenir-roman;
-
   .upload-profile {
     padding: 0 0 20px;
     box-shadow: none;
-
-    .cropArea{
+    .cropArea {
       max-height: 300px;
-      }
-
-      .cancel{
-        position: absolute;
-        top: 3px;
-        right: 7px;
-        z-index: 1;
-      }
-
-      .btn-upload{
-        position: absolute;
-        right: 5px;
-        bottom: 7px;
-        color: $brand-blue;
-      }
+    }
+    .cancel {
+      position: absolute;
+      top: 3px;
+      right: 7px;
+      z-index: 1;
+    }
+    .btn-upload {
+      position: absolute;
+      right: 5px;
+      bottom: 7px;
+      color: $brand-blue;
+    }
   }
 }
 
@@ -2089,64 +1973,52 @@ q {
     padding: 10px;
     border: 1px solid #ebebeb;
     margin-bottom: 5px;
-
     i {
       margin-top: 20px;
     }
   }
-
   .agtprofile-detail {
     margin: 20px 15px;
   }
-
   i {
     font-size: 20px;
     color: $brand-lighter-grey;
   }
-
   ul {
     border: 1px solid #ebebeb;
   }
-
   li {
     padding: 8px 15px 0;
     cursor: pointer;
   }
-
   .col-md-10,
   .col-md-2 {
     padding: 0;
   }
-
   .tab-list {
     padding: 10px 10px 15px;
     border-bottom: 1px solid #ebebeb;
-
     h5 {
       font-size: 15px;
-
       span {
         font-size: 13px;
       }
     }
   }
-
   .agtreport-problem-heading .tab-list {
     border-bottom: none;
   }
 }
 
-.agentsetting-select{
-  .ui-select-bootstrap .ui-select-choices-row > span {
+.agentsetting-select {
+  .ui-select-bootstrap .ui-select-choices-row>span {
     color: $brand-blue;
-
     &:focus,
-    &:hover{
+    &:hover {
       background-color: $brand-lighter-grey;
     }
   }
-
-  .ui-select-bootstrap .ui-select-choices-row.active > span {
+  .ui-select-bootstrap .ui-select-choices-row.active>span {
     background-color: $brand-lighter-grey;
     color: $brand-blue;
   }
@@ -2156,7 +2028,6 @@ q {
   background-color: #fff;
   padding: 20px 30px;
   min-height: 365px;
-
   .form-control {
     min-height: 40px;
     border: 1px solid $brand-dark-blue;
@@ -2165,53 +2036,45 @@ q {
   }
 }
 
-.setting-registeredmail{
+.setting-registeredmail {
   font-weight: 500;
 }
 
-.setting-alternatemail{
-  .ui-select-multiple > div:first-child {
+.setting-alternatemail {
+  .ui-select-multiple>div:first-child {
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
   }
-
   .ui-select-multiple.ui-select-bootstrap {
     padding: 6px 12px;
     background-color: transparent;
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       height: 4px;
     }
-
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: transparent;
     }
-
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       background-color: $brand-light-grey;
     }
-
     .ui-select-search {
       width: auto !important;
       padding: 6px 12px;
       background-color: transparent;
     }
-
     .ui-select-match-item {
       border-color: $brand-lighter-grey;
       background-color: transparent;
       color: $brand-blue;
     }
-
     .close {
       padding-top: 1px;
       font-size: 15px;
       line-height: 1;
       opacity: 1;
     }
-
     .ui-select-dropdown {
       opacity: 0;
       display: none;
@@ -2221,18 +2084,15 @@ q {
 
 .agtcategory-setting {
   margin-bottom: 20px;
-
   ul {
     margin: 0;
   }
-
   li {
     width: 90px;
     margin: 15px 3px;
     display: inline-block;
     vertical-align: top;
   }
-
   figcaption {
     margin-top: 10px;
     font-size: 13px;
@@ -2247,24 +2107,23 @@ q {
   cursor: pointer;
   background-size: contain;
   @include transition(background 300ms linear);
-
   img {
     // height: 30px;
   }
 }
 
-.select-categoryspcl{
-  .category-active{
+.select-categoryspcl {
+  .category-active {
     background: url("../img/icons/box7.png") no-repeat 50% 0;
     background-size: contain;
   }
 }
 
-.agentsetting-services{
+.agentsetting-services {
   margin-bottom: 20px;
 }
 
-.agentservice-btn{
+.agentservice-btn {
   margin: 10px 0;
 }
 
@@ -2291,39 +2150,32 @@ q {
 .agentsetting-phone {
   .intl-tel-input {
     width: 100%;
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 4px;
     }
-
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: transparent;
     }
-
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       background-color: $brand-lighter-grey;
     }
-
     .country-list {
       border: none;
       border-radius: 4px;
       background-color: #fff;
       color: $brand-blue;
       text-align: left;
-
       .country {
         padding: 5px 10px;
       }
-
       .divider {
         display: none;
       }
     }
-
     .country-name {
       font-size: 12px;
       vertical-align: middle;
     }
-
     .dial-code {
       font-size: 12px;
     }
@@ -2334,23 +2186,19 @@ q {
   width: 100%;
   padding: 0 10px;
   border: 1px solid $brand-grey;
-
   p {
     color: grey;
     @extend .avenir-light;
   }
-
   .reciept-link {
     @extend .color-pink;
     border-bottom: 1px solid $brand-pink;
     display: inline-block;
     @extend .pointer;
   }
-
   th {
     background-color: $brand-grey;
   }
-
   td,
   th {
     padding: 10px;
@@ -2374,7 +2222,6 @@ q {
       margin-left: 5px;
     }
   }
-
   .switch {
     position: relative;
     display: inline-block;
@@ -2382,11 +2229,9 @@ q {
     height: 20px;
     vertical-align: middle;
   }
-
   .switch input {
     display: none;
   }
-
   .slider {
     position: absolute;
     cursor: pointer;
@@ -2397,7 +2242,6 @@ q {
     background-color: #ccc;
     @include transition(0.4s);
   }
-
   .slider:before {
     position: absolute;
     content: "";
@@ -2408,23 +2252,19 @@ q {
     background-color: white;
     @include transition(0.4s);
   }
-
-  input:checked + .slider {
+  input:checked+.slider {
     background-color: $brand-pink;
   }
-
-  input:focus + .slider {
+  input:focus+.slider {
     box-shadow: 0 0 1px #2196F3;
   }
-
-  input:checked + .slider:before {
+  input:checked+.slider:before {
     @include transform(translateX(10px));
   }
   /* Rounded sliders */
   .slider.round {
     border-radius: 34px;
   }
-
   .slider.round:before {
     border-radius: 50%;
   }
@@ -2466,50 +2306,54 @@ q {
   margin: 20px 0;
 }
 
-.lead-section{
+.lead-section {
   min-height: calc(100vh - 60px);
 }
 
-.lead-title{
-  li{
+.lead-title {
+  li {
     padding: 0 10px;
     margin: 0 20px;
-
-    &:first-child{
+    &:first-child {
       margin-left: 0;
     }
-
-    span{
+    span {
       padding: 0 5px;
       display: inline-block;
     }
   }
 }
 
-.lead-tabselect{
-  &.active{
+.lead-tabselect {
+  &.active {
     border-bottom: 3px solid $brand-pink;
   }
 }
 
 .leadtab-accordionbox {
   margin: 10px 0;
-
   .panel {
     border: none;
   }
-
-  .panel-default > .panel-heading {
+  .panel-default>.panel-heading {
     border: none;
   }
-
   .panel-group .panel {
     border-radius: 0;
   }
 }
 
-.actiontab-accordionbox{
+.actiontab-accordionbox {
   margin: 10px 0;
+  panel {
+    border: none;
+  }
+  .panel-default>.panel-heading {
+    border: none;
+  }
+  .panel-group .panel {
+    border-radius: 0;
+  }
 }
 
 .enquirytab-accordionbox::-webkit-scrollbar {
@@ -2527,17 +2371,14 @@ q {
 
 .enquirytab-cmpny-inputholder {
   position: relative;
-
   input {
     border: none;
     border-bottom: 1px solid $brand-blue;
     padding: 6px 12px 6px 30px;
-
     &:focus {
       border-color: $brand-blue;
     }
   }
-
   &:after,
   &:before {
     content: '';
@@ -2548,16 +2389,13 @@ q {
     background-color: $brand-blue;
     z-index: 1;
   }
-
   &:before {
     left: 0;
   }
-
   &:after {
     right: 0;
   }
-
-  textarea:focus{
+  textarea:focus {
     border-color: $brand-blue;
   }
 }
@@ -2581,7 +2419,6 @@ q {
   margin: 10px 10px 5px;
   padding: 5px 0;
   vertical-align: top;
-
   p {
     margin: 0;
   }
@@ -2592,14 +2429,11 @@ q {
   padding: 10px 0;
   color: #fff;
   @extend .avenir-roman;
-
   .btn-pink-outline {
     margin: 5px 10px;
   }
-
   a {
     color: #fff;
-
     &:hover {
       color: #fff;
     }
@@ -2617,17 +2451,14 @@ q {
 .leadtab-msgdiv {
   width: 400px;
   @include transition(all 300ms linear);
-
   p {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-
     .ledadmsg-country {
       font-size: 16px;
       @extend .avenir-heavy;
     }
-
     .ledadmsg-comment {
       font-style: italic;
       font-size: 14px;
@@ -2638,32 +2469,32 @@ q {
 
 .newlead-tab {
   .panel {
-    background-color: rgba(45,54,85,0.8);
+    background-color: rgba(45, 54, 85, 0.8);
     color: #fff;
+    border: none;
   }
-
-  .panel-default > .panel-heading {
-    background-color: rgba(45,54,85,0.9);
+  .panel-default>.panel-heading {
+    background-color: rgba(45, 54, 85, 0.9);
     color: #fff;
     padding: 5px 15px;
   }
-
-  .lead-read> .panel-heading{
+  .lead-read>.panel-heading {
     // background-color: $brand-lighter-grey;
   }
 }
 
 .actionlead-tab {
   .panel {
-    background-color: rgba(255,255,255,0.95);
-    color: $brand-blue;
+    border: none;
     border-radius: 0;
-  }
-
-  .panel-default > .panel-heading {
-    background-color: rgba(255,255,255,0.9);
+    background-color: rgba(255, 255, 255, 0.95);
     color: $brand-blue;
+  }
+  .panel-default>.panel-heading {
     padding: 5px 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    color: $brand-blue;
   }
 }
 
@@ -2680,15 +2511,12 @@ q {
 .action-contentbox {
   @extend .avenir-light;
   padding: 10px 30px;
-
   .lead-content {
-    color: $brand-blue;
-
+    color: #fff;
     a {
-      color: $brand-blue;
-
+      color: #fff;
       &:hover {
-        color: $brand-blue;
+        color: #fff;
       }
     }
   }
@@ -2705,7 +2533,6 @@ q {
   z-index: 6;
   @include transform(rotate(-90deg));
   @include transition(all 300ms linear);
-
   a {
     width: 100px;
     padding: 10px 0;
@@ -2723,7 +2550,6 @@ q {
   z-index: 4;
   @include transform(rotate(-90deg));
   @include transition(all 300ms linear);
-
   a {
     width: 100px;
     padding: 10px 0;
@@ -2741,8 +2567,7 @@ q {
 .view-enquiry-list {
   right: 0;
   @include transition(all 300ms linear);
-
-  + .enquirytab-btn {
+  +.enquirytab-btn {
     right: 370px;
     top: 200px;
     @include transition(all 300ms linear);
@@ -2752,8 +2577,7 @@ q {
 .view-contact-list {
   right: 0;
   @include transition(all 300ms linear);
-
-  + .contacttab-btn {
+  +.contacttab-btn {
     right: 369px;
     top: 310px;
     @include transition(all 300ms linear);
@@ -2785,7 +2609,7 @@ q {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 5;
 }
 
@@ -2795,8 +2619,7 @@ q {
   position: fixed;
   width: 100%;
   bottom: auto;
-  top: 60px;
-  // top: 80px;
+  top: 60px; // top: 80px;
 }
 
 .change-blue {
@@ -2805,8 +2628,7 @@ q {
   position: fixed;
   width: 100%;
   bottom: auto;
-  top: 60px;
-  // top: 80px;
+  top: 60px; // top: 80px;
 }
 
 .range-custom {
@@ -2815,11 +2637,9 @@ q {
     margin: 10px 0;
     width: 100%;
   }
-
   input[type=range]:focus {
     outline: none;
   }
-
   input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
     height: 2px;
@@ -2830,7 +2650,6 @@ q {
     border-radius: 5px;
     border: 1px solid #fff;
   }
-
   input[type=range]::-webkit-slider-thumb {
     box-shadow: 1px 1px 1px #000000;
     border: 1px solid $brand-pink;
@@ -2842,11 +2661,9 @@ q {
     -webkit-appearance: none;
     margin-top: -8px;
   }
-
   input[type=range]:focus::-webkit-slider-runnable-track {
     background: #fff;
   }
-
   input[type=range]::-moz-range-track {
     width: 100%;
     height: 2px;
@@ -2857,7 +2674,6 @@ q {
     border-radius: 5px;
     border: 1px solid #ffffff;
   }
-
   input[type=range]::-moz-range-thumb {
     box-shadow: 1px 1px 1px #000000;
     border: 1px solid $brand-pink;
@@ -2867,7 +2683,6 @@ q {
     background: $brand-pink;
     cursor: pointer;
   }
-
   input[type=range]::-ms-track {
     width: 100%;
     height: 2px;
@@ -2877,21 +2692,18 @@ q {
     border-color: transparent;
     color: transparent;
   }
-
   input[type=range]::-ms-fill-lower {
     background: #ffffff;
     border: 1px solid #ffffff;
     border-radius: 10px;
     box-shadow: 1px 1px 1px #ffffff;
   }
-
   input[type=range]::-ms-fill-upper {
     background: #ffffff;
     border: 1px solid #ffffff;
     border-radius: 10px;
     box-shadow: 1px 1px 1px #ffffff;
   }
-
   input[type=range]::-ms-thumb {
     box-shadow: 1px 1px 1px #ffffff;
     border: 1px solid #ffffff;
@@ -2901,11 +2713,9 @@ q {
     background: #ffffff;
     cursor: pointer;
   }
-
   input[type=range]:focus::-ms-fill-lower {
     background: #000000;
   }
-
   input[type=range]:focus::-ms-fill-upper {
     background: #000000;
   }
@@ -2914,10 +2724,8 @@ q {
 .user-contactdetail {
   color: #fff;
   padding: 0 15px;
-
   a {
     color: #fff;
-
     &:hover {
       color: #fff;
     }
@@ -2933,8 +2741,8 @@ q {
     left: 40px;
   }
 }
-// --------travel activity-----------
 
+// --------travel activity-----------
 .yash {
   padding-top: 60px;
 }
@@ -2943,13 +2751,11 @@ q {
   border-radius: 8px;
   padding: 10px;
   background-color: #fff;
-
   .traveller-header {
     border-bottom: 1px solid #ccc;
     padding-left: 25%;
     padding-bottom: 10px;
     position: relative;
-
     .traveller-img {
       display: inline-block;
       position: absolute;
@@ -2959,17 +2765,14 @@ q {
       background-color: #fff;
       border-radius: 40%;
     }
-
     label {
       font-size: 18px;
     }
-
     .card-detail {
       color: #777777;
       font-size: 12px;
     }
   }
-
   .travel-data {
     border-bottom: 1px solid #ccc;
     padding: 6px 0;
@@ -2977,49 +2780,41 @@ q {
     height: 100px;
     color: #777777;
   }
-
   .social-icons {
     border-bottom: 1px solid #ccc;
     padding: 7px 0;
-
     img {
       width: 20px;
       margin-right: 12px;
       cursor: pointer;
     }
-
     .share-icon {
       width: 14px;
     }
-
     .opt-icon {
       height: 16px;
       width: 3px;
       float: right;
     }
   }
-
   .like-section {
     padding: 5px 0;
-
     img {
       width: 10px;
       padding-bottom: 5px;
     }
-
     .like-count {
       font-weight: bold;
     }
-
     span {
       color: $brand-dark-blue;
       font-size: 12px;
     }
   }
 }
-// Agent home
 
-.agentform-error{
+// Agent home
+.agentform-error {
   position: absolute;
   top: 100%;
   left: 0;
@@ -3031,12 +2826,10 @@ q {
   .down {
     display: none;
   }
-
   .collapsed {
     .up {
       display: none;
     }
-
     .down {
       display: inline-block;
     }
@@ -3051,29 +2844,24 @@ q {
   background-color: $brand-blue;
   border-radius: 6px;
   float: left;
-
   .button-holder {
     float: right;
     padding: 10px 0;
   }
-
   .clear-link {
     padding: 0 10px;
     text-decoration: underline;
     color: #fff;
-
     &:hover {
       color: #fff;
     }
   }
-
   .photo-filter {
     padding: 10px;
     background-color: $brand-blue;
     color: #fff;
     border-radius: 4px;
     @extend .pointer;
-
     .arrow-big {
       position: absolute;
       top: 8px;
@@ -3082,24 +2870,19 @@ q {
       font-weight: 700;
     }
   }
-
   .down {
     display: none;
   }
-
   .collapsed {
     color: $brand-blue;
     background-color: #fff;
-
     .up {
       display: none;
     }
-
     .down {
       display: inline-block;
     }
   }
-
   .filter-data {
     width: 100%;
     position: absolute;
@@ -3108,26 +2891,21 @@ q {
     background-color: $brand-blue;
     padding: 5px;
     border: 1px solid #ccc;
-
     .options {
       overflow-y: scroll;
       height: 180px;
     }
-
     .options::-webkit-scrollbar {
       display: none;
     }
-
     .opt {
       padding: 5px;
       border-bottom: 1px solid #ccc;
-
       [type="checkbox"]:checked+label:after,
       [type="checkbox"]:not(:checked)+label:after {
         right: 0;
         left: auto;
       }
-
       [type="checkbox"]:checked+label:before,
       [type="checkbox"]:not(:checked)+label:before {
         position: absolute;
@@ -3135,7 +2913,6 @@ q {
         right: 0;
         left: auto;
       }
-
       [type="checkbox"]:checked+label:after {
         color: $brand-cyan;
         @include transition(all 300ms linear);
@@ -3143,13 +2920,14 @@ q {
     }
   }
 }
+
 // USER TRAVEL ACTIVITY CARD
-.emptyuser-travel{
+.emptyuser-travel {
   margin-top: -50px;
   padding: 20px 0;
 }
 
-.travel-addbtn{
+.travel-addbtn {
   margin-top: -50px;
   padding: 20px 0;
 }
@@ -3157,8 +2935,7 @@ q {
 .travel-activity {
   // background-color: #fff;
   border-radius: 5px;
-  margin: 20px 0;
-  // box-shadow: 2px 3px 10px #a0a0a0;
+  margin: 20px 0; // box-shadow: 2px 3px 10px #a0a0a0;
 }
 
 .traveller-post {
@@ -3171,37 +2948,37 @@ q {
   padding: 10px 0;
   border-bottom: 1px solid $brand-grey;
   position: relative;
-
   p {
     font-size: 12px;
   }
 }
 
 .travel-itinerary-header {
-  padding: 10px;
-
-  // p {
+  padding: 10px; // p {
   //   font-size: 12px;
   // }
 }
-.travelitinerary-title{
+
+.travelitinerary-title {
   // padding: 0;
   font-size: 15px;
 }
-.travel-journey-heading .travelitinerary-title{
+
+.travel-journey-heading .travelitinerary-title {
   padding: 0;
 }
-.travel-albumfooter{
+
+.travel-albumfooter {
   padding: 5px;
 }
 
-.tour-imgfoot{
+.tour-imgfoot {
   border-radius: 0 0 5px 5px;
 }
 
-.traveltour-img{
+.traveltour-img {
   min-height: 200px;
-  .tour-img{
+  .tour-img {
     border-radius: 5px;
   }
 }
@@ -3217,8 +2994,7 @@ q {
   height: 50px;
   overflow: hidden;
   border-radius: 15px;
-  border: 1px solid #a0a0a0;
-  // position: absolute;
+  border: 1px solid #a0a0a0; // position: absolute;
   // top: -30px;
   background-color: $brand-lighter-grey;
 }
@@ -3226,7 +3002,6 @@ q {
 .agent-traveller-detail {
   display: inline-block;
   margin-left: 10px;
-
   h4 {
     margin-bottom: 5px;
   }
@@ -3236,9 +3011,9 @@ q {
   font-size: 12px;
   margin-bottom: 15px;
 }
+
 // USER TRAVEL ACTIVITY CARD END
 //AGENT HOME ANALYTICS
-
 .agt-home-analytics {
   @extend .avenir-roman;
 }
@@ -3266,10 +3041,14 @@ q {
 }
 
 .emptyleads-analytics {
-  width: 100%;
-  height: 450px;
-  margin: 30px 0;
-  background-color: #fff;
+  .highcharts-background {
+    // @include fill(rgba(255,255,255,0.9));
+  }
+  .highcharts-contextbutton,
+  .highcharts-button,
+  .highcharts-button-normal {
+    display: none;
+  }
 }
 
 .analytics-filter {
@@ -3278,7 +3057,7 @@ q {
   @extend .bg-white;
 }
 
-.analyticsfilter-fixed{
+.analyticsfilter-fixed {
   position: fixed;
   top: 100px;
   width: 100%;
@@ -3304,29 +3083,23 @@ q {
   display: inline-block;
   width: 190px;
   border: none;
-  border-bottom: 1px solid #a0a0a0;
-  // border-radius: 4px;
+  border-bottom: 1px solid #a0a0a0; // border-radius: 4px;
   margin: 0 5px;
   vertical-align: middle;
-
   .form-group {
     margin: 0;
   }
-
   .ui-select-bootstrap {
     background-color: transparent;
     color: #424242;
-
     &:active,
     &:focus,
     &:hover {
       outline: 0;
     }
-
     .ui-select-toggle {
       border: none;
       background-color: transparent;
-
       &:active,
       &:focus,
       &:hover {
@@ -3334,53 +3107,42 @@ q {
         outline: 0;
       }
     }
-
     .ui-select-dropdown {
       max-height: 170px;
       z-index: 3;
     }
-
     input[type="search"] {
       border: none;
       background-color: transparent;
     }
-
     .btn-default-focus {
       color: #424242;
       background-color: transparent;
       border: none;
     }
-
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 4px;
     }
-
-    ::-webkit-scrollbar-track {
+     ::-webkit-scrollbar-track {
       background-color: transparent;
     }
-
-    ::-webkit-scrollbar-thumb {
+     ::-webkit-scrollbar-thumb {
       background-color: $brand-lighter-grey;
     }
-
-    .ui-select-bootstrap .ui-select-choices-row > span {
+    .ui-select-bootstrap .ui-select-choices-row>span {
       color: #424242;
-
       &:hover {
         background-color: $brand-lighter-grey;
       }
     }
-
-    .ui-select-choices-row.active > span {
+    .ui-select-choices-row.active>span {
       background-color: $brand-lighter-grey;
       color: #424242;
     }
   }
-
   .caret {
     display: none;
   }
-
   .filter-droparrow {
     position: absolute;
     top: 50%;
@@ -3397,7 +3159,8 @@ q {
 
 .analytics-downloadcontent,
 .analytics-followercontent,
-.analytics-profilecontent {
+.analytics-profilecontent,
+.analytics-leadschart {
   min-height: 100vh;
   padding: 100px 0;
 }
@@ -3411,7 +3174,6 @@ q {
   padding: 15px 10px;
   border-radius: 0 0 5px 5px;
   background-color: $brand-blue;
-
   .footertravel-count {
     display: inline-block;
     padding: 5px 8px;
@@ -3419,24 +3181,23 @@ q {
     border-radius: 4px;
     margin-right: 5px;
     color: $brand-cyan;
-
     p {
       margin: 0;
     }
   }
-
   .footertravel-downloadcount {
     font-size: 16px;
   }
 }
+
 // VIEWS DOWNLOADS
-.viewdownload-card{
-  .theme{
+.viewdownload-card {
+  .theme {
     padding: 0 10px;
   }
 }
 
-.viewdownload-imgfoot{
+.viewdownload-imgfoot {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -3445,12 +3206,12 @@ q {
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
 }
+
 // VIEWS DOWNLOADS END
 //AGENT HOME ANALYTICS END
 // tour package dropdown
-
-.a{
-  .form-control[disabled]{
+.a {
+  .form-control[disabled] {
     background-color: transparent;
     opacity: 0.3;
   }
@@ -3465,12 +3226,10 @@ q {
 
 .tour-typeinput {
   position: relative;
-
   .a input {
     padding-right: 30px;
   }
-
-  .form-control[disabled]{
+  .form-control[disabled] {
     background-color: transparent;
     cursor: pointer;
     opacity: 1;
@@ -3495,7 +3254,6 @@ q {
 .tourcategory {
   text-align: center;
   color: #fff;
-
   figcaption {
     font-size: 13px;
   }
@@ -3513,17 +3271,14 @@ q {
   background-image: url('../img/icons/box9.png');
   background-repeat: no-repeat;
   @include transition(all ease 300ms);
-
   &.active,
   &:active,
   &:hover {
     background-image: url('../img/icons/box7.png');
     @include transition(all ease 300ms);
   }
-
   img {
-    margin: 0 auto;
-    // width: 25px;
+    margin: 0 auto; // width: 25px;
   }
 }
 
@@ -3548,7 +3303,6 @@ q {
 .tour-typeoption {
   overflow-y: scroll;
   max-height: 280px;
-
   ul {
     li {
       width: 25%;
@@ -3565,11 +3319,9 @@ q {
 .tourcurrency-option {
   overflow-y: scroll;
   max-height: 280px;
-
   ul li {
     padding: 0;
     border-bottom: 1px solid $brand-cyan;
-
     span {
       padding: 5px;
       background-color: transparent;
@@ -3588,8 +3340,7 @@ q {
 
 .tour-dp-preview,
 .tour-pdf-preview {
-  display: inline-block;
-  // width: 50%;
+  display: inline-block; // width: 50%;
   height: 85px;
   float: left;
   position: relative;
@@ -3611,20 +3362,18 @@ q {
   height: 85px;
   position: relative;
   overflow: hidden;
-
   &:before {
     content: "";
-    @include position(absolute, 0);
-    background-color: rgba(0,0,0,0.7);
+    @include position(absolute,
+    0);
+    background-color: rgba(0, 0, 0, 0.7);
     @include transition(all 300ms linear);
     opacity: 0;
   }
-
   &:hover:before {
     opacity: 1;
     @include transition(all 300ms linear);
   }
-
   .remove-preview {
     position: absolute;
     top: 0;
@@ -3650,19 +3399,19 @@ q {
     height: 100%;
   }
 }
+
 // tour package dropdown end
 // AGENT ON LOAD MODAL
-
-.agent-home{
+.agent-home {
   // margin-top: -60px;
   .modal-body {
     padding: 20px 50px;
   }
 }
 
-.agent-contactmail{
-  &:last-child{
-    .email-separater{
+.agent-contactmail {
+  &:last-child {
+    .email-separater {
       display: none;
     }
   }
@@ -3672,11 +3421,10 @@ q {
   height: auto;
   border-radius: 10px;
   margin: 40px auto;
-  background-color: rgba(45,54,85,0.8);
+  background-color: rgba(45, 54, 85, 0.8);
   color: #fff;
   font-size: 16px;
   text-align: justify;
-
   .modal-content {
     position: static;
     top: auto;
@@ -3730,13 +3478,11 @@ q {
 .modal-listholder {
   // width: 50%;
   float: left;
-  padding: 10px 10px 0;
-  // margin: 10px 0;
+  padding: 10px 10px 0; // margin: 10px 0;
 }
 
 .agtmodal-base {
   text-align: center;
-
   .btn {
     margin-bottom: -50px;
   }
@@ -3756,7 +3502,6 @@ q {
     li {
       position: relative;
       padding-left: 20px;
-
       &:before {
         content: "\f00c";
         position: absolute;
@@ -3768,10 +3513,10 @@ q {
     }
   }
 }
+
 // AGENT ON LOAD MODAL END
 // AGENT HOME PHOTO UPLOAD SLIDER
-
-.agent-photoupload{
+.agent-photoupload {
   position: absolute;
   top: 0;
   left: 0;
@@ -3779,34 +3524,29 @@ q {
   opacity: 0;
 }
 
-.photovideo-play{
+.photovideo-play {
   color: #fff;
   font-size: 30px;
 }
 
 .agthome-photouploadbox {
   background-color: $brand-blue;
-
   .flexslider {
     background-color: transparent;
-
     .flex-direction-nav {
       font-size: 0;
-
       a:before {
         font-size: 18px;
         color: #fff;
         text-shadow: none;
       }
     }
-
     &:hover {
       .flex-direction-nav {
         .flex-prev {
           opacity: 1;
           left: -15px;
         }
-
         .flex-next {
           opacity: 1;
           right: -15px;
@@ -3814,14 +3554,11 @@ q {
       }
     }
   }
-
   li {
     padding: 0;
   }
-
   .slider-addmore {
     margin: 10px 0;
-
     .btn {
       font-size: 12px;
     }
@@ -3840,8 +3577,7 @@ q {
   overflow: hidden;
   border: 1px solid #fff;
   border-radius: 4px;
-  @extend .avenir-roman;
-  // background-color: #fff;
+  @extend .avenir-roman; // background-color: #fff;
   .slider-agent-trash {
     position: absolute;
     top: 0;
@@ -3853,37 +3589,31 @@ q {
     z-index: 5;
     @extend .text-shadow;
   }
-
   .text-typed-count {
     font-size: 12px;
   }
-
   span {
     background-color: transparent;
   }
-
   .view-caption-onimg {
     position: absolute;
     bottom: 0;
     text-align: center;
     width: 100%;
-
     span {
       background: none;
       font-size: 20px;
       cursor: pointer;
     }
   }
-
   .agent-edit-caption {
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
     @include transition(all 300ms linear);
-
     textarea {
       background-color: transparent;
       border: none;
@@ -3891,15 +3621,14 @@ q {
       color: #fff;
       @include placeholder {
         color: #fff;
-      };
+      }
+      ;
     }
   }
-
   .showcaptionagent {
     top: 0;
     @include transition(all 300ms linear);
   }
-
   .agent-caption {
     position: absolute;
     bottom: 0;
@@ -3909,15 +3638,14 @@ q {
     color: #fff;
     padding: 5px;
     @extend .avenir-roman;
-
     p {
       margin: 0;
     }
   }
 }
+
 // AGENT HOME PHOTO UPLOAD SLIDER END
 // AGENT TOUR UI SELECT
-
 .tour-price {
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {
@@ -3929,115 +3657,93 @@ q {
 .tour-select {
   border-bottom: 1px solid #b2b2b2;
   border-radius: 0;
-
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 4px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: transparent;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-lighter-grey;
   }
-
   .btn-default {
     padding-left: 0;
     border: none;
     background-color: transparent;
-
     &:active,
     &:focus,
     &:hover {
       background-color: transparent;
     }
   }
-
   .caret {
     display: none;
   }
-
   input[type="search"] {
     width: 100%;
     padding-left: 0;
     border: none;
     background-color: transparent;
   }
-
   .ui-select-dropdown {
     background-color: $brand-blue;
   }
-
   .tour-optionselect {
     color: #fff;
   }
-
   .btn-default-focus {
     border: none;
     background-color: transparent;
     color: #fff;
   }
-
   .ui-select-match-text {
     color: #fff;
   }
-
   .ui-select-choices-row {
     border-bottom: 1px solid #b2b2b2;
-
     &:last-child {
       border: none;
     }
-
     &.active,
-    &:focus{
+    &:focus {
       background-color: $brand-light-grey;
     }
-
     span {
       &.active,
       &:active,
       &:focus,
-      &:hover{
+      &:hover {
         background-color: transparent;
       }
     }
-
     &:hover {
       background-color: transparent;
     }
-
     &.active {
       span {
         background-color: transparent;
       }
     }
   }
-
-  .ui-select-bootstrap .ui-select-choices-row > span:focus,
-  .ui-select-bootstrap .ui-select-choices-row > span:hover {
+  .ui-select-bootstrap .ui-select-choices-row>span:focus,
+  .ui-select-bootstrap .ui-select-choices-row>span:hover {
     background-color: $brand-light-grey;
-  }
-  // MULTY SELECT
+  } // MULTY SELECT
   .ui-select-multiple {
-    ::-webkit-scrollbar {
+     ::-webkit-scrollbar {
       width: 0;
       height: 4px;
     }
   }
-
-  .ui-select-multiple > div:first-child {
+  .ui-select-multiple>div:first-child {
     width: 100%;
     overflow-x: auto;
     overflow-y: scroll;
     white-space: nowrap;
   }
-
   .ui-select-multiple.ui-select-bootstrap {
     border: none;
     background-color: transparent;
-
     input.ui-select-search {
       width: auto !important;
       border: none;
@@ -4045,12 +3751,10 @@ q {
       background-color: transparent;
       color: #fff;
     }
-
     .ui-select-match-item {
       padding: 3px 5px;
       border: 1px solid #fff;
       color: #fff;
-
       .close {
         padding-top: 1px;
         color: #fff;
@@ -4060,19 +3764,18 @@ q {
         text-shadow: none;
       }
     }
-  }
-  // MULTY SELECT END
+  } // MULTY SELECT END
 }
+
 // AGENT TOUR UI SELECT END
 // MESSAGE PAGE
-
 .message-page {
   height: calc(100vh - 60px);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   @extend .avenir-roman;
 }
-// message page Header
 
+// message page Header
 .listfriend-header {
   // padding: 5px 15px;
   // position: fixed;
@@ -4086,7 +3789,6 @@ q {
 
 .message-inputholder {
   border-bottom: 1px solid #fff;
-
   .search-input {
     padding: 6px 0 6px 12px;
     border: none;
@@ -4094,7 +3796,6 @@ q {
     font-size: 14px;
     color: #c44332;
   }
-
   .form-control {
     width: 90%;
     border: none;
@@ -4104,21 +3805,19 @@ q {
       color: #c44332;
     }
   }
-
   &:after,
   &:before {
     content: "";
-    @include size(1px, 15px);
+    @include size(1px,
+    15px);
     position: absolute;
     bottom: 0;
     background-color: #fff;
     z-index: 1;
   }
-
   &:before {
     left: 0;
   }
-
   &:after {
     right: 0;
   }
@@ -4128,25 +3827,22 @@ q {
   color: #fff;
   font-size: 24px;
   cursor: pointer;
-
   i {
     // padding: 4px 0;
     vertical-align: middle;
   }
 }
+
 // message page Header end
 // Followers chat list
-
 .list-of-friends {
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 0;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: transparent;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: transparent;
   }
 }
@@ -4155,15 +3851,12 @@ q {
   height: calc(100vh - 60px);
   padding-top: 40px;
   overflow-y: scroll;
-
   .active {
     background-color: $brand-blue;
     color: #fff;
-
     .listfriend-follower {
       color: $brand-cyan;
     }
-
     .listfriend-message-timestamp,
     .listfriend-msg {
       color: #fff;
@@ -4174,29 +3867,24 @@ q {
 .listfriend-card {
   margin-left: 15px;
   border-top: 1px solid $brand-grey;
-  background-color: rgba(255,255,255,0.85);
+  background-color: rgba(255, 255, 255, 0.85);
   vertical-align: top;
   @extend .pointer;
-
   .active {
     background-color: $brand-blue;
     color: #fff;
-
     .listfriend-follower {
       color: $brand-cyan;
     }
-
     .listfriend-message-timestamp,
     .listfriend-msg {
       color: #fff;
     }
   }
-
   &:first-child {
     border-top: none;
   }
-
-  &:nth-child( even ) {
+  &:nth-child( even) {
     background-color: #fff;
   }
 }
@@ -4208,7 +3896,6 @@ q {
   vertical-align: top;
   position: relative;
   overflow: hidden;
-
   img {
     width: 100%;
     height: 100%;
@@ -4224,7 +3911,6 @@ q {
 .listfriend-countbadge {
   padding: 10px 5px 0;
   text-align: right;
-
   .msg-countbadge {
     // padding: 5px;
     border-radius: 100%;
@@ -4260,14 +3946,14 @@ q {
   @extend .avenir-roman;
   @extend .text-ellipsis;
 }
+
 // Followers chat list end
 // Message empty section
-
 .message-empty-section {
   padding: 20px;
   height: calc(100vh - 60px);
   position: relative;
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .empty-msg-box {
@@ -4275,23 +3961,22 @@ q {
   position: absolute;
   top: 50%;
   left: 50%;
-  @include transform(translate(-50%,-50%));
+  @include transform(translate(-50%,
+  -50%));
   text-align: center;
 }
+
 // Message empty section end
 // Message chat box
-
 .message-chat-section {
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 10px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: transparent;
   }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(0,0,0,0.7);
+   ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.7);
   }
 }
 
@@ -4312,7 +3997,6 @@ q {
   width: 50%;
   padding: 10px;
   color: #424242;
-
   .listfriend-message-timestamp {
     color: #424242;
   }
@@ -4321,23 +4005,20 @@ q {
 .message-sent-bubble {
   position: relative;
   border-radius: 10px 0 10px 10px;
-  background-color: rgba(17,211,203,0.7);
+  background-color: rgba(17, 211, 203, 0.7);
   color: $brand-blue;
   float: right;
-
   .listfriend-message-timestamp {
     color: $brand-blue;
   }
-
   &:after {
     content: "";
     border-bottom: 18px solid transparent;
-    border-left: 18px solid rgba(17,211,203,0.7);
+    border-left: 18px solid rgba(17, 211, 203, 0.7);
     position: absolute;
     top: 0;
     right: -18px;
   }
-
   .listfriend-message-timestamp {
     text-align: left;
   }
@@ -4346,20 +4027,19 @@ q {
 .message-recieved-bubble {
   position: relative;
   border-radius: 0 10px 10px 10px;
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   float: left;
-
   &:after {
     content: "";
-    border-top: 18px solid rgba(255,255,255,0.8);
+    border-top: 18px solid rgba(255, 255, 255, 0.8);
     border-left: 18px solid transparent;
     position: absolute;
     top: 0;
     left: -18px;
   }
 }
-// Message Type Box
 
+// Message Type Box
 .message-typebox-position {
   position: fixed;
   bottom: 0;
@@ -4377,39 +4057,33 @@ q {
   background-color: #fff;
   margin-right: 15px;
   padding: 10px;
-
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 4px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: transparent;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-pink;
   }
-
   .form-control {
     background-color: transparent;
     border: none;
     color: #424242;
   }
-
   .btn-message-send {
     padding: 4px 8px;
     border-radius: 100% !important;
     margin-left: 10px !important;
-
     i {
       font-size: 20px;
     }
   }
 }
+
 // Message Type Box end
 // Message chat box end
 // message header
-
 .message-header {
   padding: 5px 30px;
   position: fixed;
@@ -4426,7 +4100,6 @@ q {
   font-size: 18px;
   text-align: center;
   vertical-align: middle;
-
   h4 {
     margin: 0;
     display: inline-block;
@@ -4442,17 +4115,16 @@ q {
   border: 2px solid #fff;
   border-radius: 9px;
   margin: 0 5px;
-
   .chat-option-icons {
     padding: 0 5px;
     vertical-align: middle;
   }
 }
+
 // message header end
 // msg-delete-popup
-
 .backdrop-popup {
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   position: absolute;
   top: 0;
   left: 0;
@@ -4463,7 +4135,7 @@ q {
 
 .msg-delete-popup {
   border-radius: 5px;
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
   z-index: 15;
   @extend .get-center;
@@ -4491,7 +4163,6 @@ q {
   margin: 0 5px;
   background-color: $brand-dark-grey;
   color: #fff;
-
   &:active,
   &:focus,
   &:hover {
@@ -4499,15 +4170,14 @@ q {
     color: #fff;
   }
 }
+
 // msg-delete-popup end
 // new-message-header
-
 .new-message-header {
   padding: 5px 15px;
   width: 100%;
   margin: -5px -15px;
-  background-color: $brand-grey;
-  // height: 40px;
+  background-color: $brand-grey; // height: 40px;
 }
 
 .newmsg-header-content {
@@ -4516,44 +4186,38 @@ q {
   text-align: center;
   vertical-align: middle;
   @extend .avenir-roman;
-
   .newmsg-header-content {
     font-size: 16px;
     vertical-align: middle;
   }
-
   .newmsg-header-option {
     font-size: 12px;
     vertical-align: middle;
     @extend .pointer;
-
     i {
       margin: 0 5px;
     }
   }
 }
+
 // new-message-header end
 // NEW MESSAGE SECTION
-
 .newmessage-section {
   // padding-right: 10px;
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 0;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: transparent;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: transparent;
   }
 }
 
 .newmessage-listview {
   // height: calc(100vh - 60px);
-  padding-top: 40px;
-  // overflow-y: scroll;
+  padding-top: 40px; // overflow-y: scroll;
 }
 
 .follower-list-scroll {
@@ -4566,7 +4230,6 @@ q {
   background-color: #fff;
   color: #424242;
   @extend .avenir-roman;
-
   .form-control {
     border: none;
     background-color: transparent;
@@ -4577,16 +4240,14 @@ q {
   padding: 10px;
   margin-right: 2px;
   margin-bottom: 2px;
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   color: $brand-blue;
   @extend .avenir-roman;
-
   [type="checkbox"]:checked,
   [type="checkbox"]:not(:checked) {
     position: absolute;
     left: -9999px;
   }
-
   [type="checkbox"]:checked+label,
   [type="checkbox"]:not(:checked)+label {
     width: 100%;
@@ -4625,23 +4286,18 @@ q {
   }
   /* checked mark aspect changes */
   [type="checkbox"]:not(:checked)+label:after {
-    opacity: 1;
-    // transform: scale(1);
+    opacity: 1; // transform: scale(1);
   }
-
   [type="checkbox"]:checked+label:before {
     background-color: $brand-pink;
     border: 1px solid $brand-pink;
     color: $brand-blue;
     @include transition(all 300ms linear);
   }
-
   [type="checkbox"]:checked+label:after {
-    color: #fff;
-    // background-color: $brand-pink;
+    color: #fff; // background-color: $brand-pink;
     @include transition(all 300ms linear);
   }
-
   label img {
     border: 1px solid #ebebeb;
   }
@@ -4673,26 +4329,24 @@ q {
   background-color: $brand-lighter-grey;
   overflow: hidden;
   vertical-align: middle;
-
   img {
     height: 100%;
   }
 }
+
 // NEW MESSAGE SECTION END
 // MESSAGE PAGE END
 //NOTIFICATION PAGE
-
 .notification-page {
   padding: 30px 0;
   @extend .avenir-roman;
 }
 
 .notification-card {
-  min-height: 245px;
-  // max-height: 230px;
+  min-height: 245px; // max-height: 230px;
   border-radius: 5px;
   margin: 10px 0;
-  background-color: rgba(255,255,255,0.9);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .notification-content {
@@ -4728,8 +4382,9 @@ q {
 }
 
 .notify-pictint {
-  @include position(absolute, 0);
-  background-color: rgba(0,0,0,0.3);
+  @include position(absolute,
+  0);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .notification-timestamp {
@@ -4743,7 +4398,6 @@ q {
 .notification-detail {
   color: #424242;
   font-size: 12px;
-
   p {
     margin-bottom: 5px;
   }
@@ -4752,7 +4406,6 @@ q {
 .notification-action {
   color: #424242;
   font-size: 12px;
-
   p {
     margin-bottom: 5px;
   }
@@ -4773,7 +4426,6 @@ q {
   background-color: $brand-dark-grey;
   color: #fff;
   font-size: 12px;
-
   &:active,
   &:focus,
   &:hover {
@@ -4804,11 +4456,9 @@ q {
   width: 48%;
   height: 120px;
   overflow: hidden;
-
   img {
     height: 100%;
   }
-
   .addpic-count {
     color: #fff;
     font-size: 11px;
@@ -4863,14 +4513,12 @@ q {
   display: inline-block;
   margin: 10px 5px;
   text-align: center;
-
   .notifcation-follower-count {
     display: block;
     color: $brand-blue;
     font-size: 20px;
     @extend .avenir-heavy;
   }
-
   .notifcation-follower-property {
     display: block;
     color: #424242;
@@ -4885,28 +4533,22 @@ q {
 
 .notification-social-btn {
   margin: 25px 0 0;
-
   .fb-icon {
     background-color: #3b5998;
   }
-
   .twi-icon {
     background-color: #55acee;
   }
-
   .google-icon {
     background-color: #d34836;
   }
-
   .pin-icon {
     background-color: #cb2027;
   }
-
   .instagram-icon {
     background-color: #cd486b;
     font-size: 16px;
   }
-
   .linkedin-icon {
     background-color: #007bb5;
   }
@@ -4922,7 +4564,6 @@ q {
   color: #fff;
   line-height: 30px;
   text-align: center;
-
   &:active,
   &:focus,
   &:hover {
@@ -4940,25 +4581,22 @@ q {
     color: #fff;
   }
 }
+
 //NOTIFICATION PAGE END
 //DETAILED ITINERARY SHOW LISTED POPUP
-
 .show-listed-popup {}
 
 .listed-detail-page {
   padding: 30px;
   border-radius: 10px;
-  background-color: #fff;
-  // background-color: rgba(255,255,255,0.8);
-  ::-webkit-scrollbar {
+  background-color: #fff; // background-color: rgba(255,255,255,0.8);
+   ::-webkit-scrollbar {
     width: 4px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: transparent;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-pink;
     border-radius: 5px;
   }
@@ -4982,7 +4620,7 @@ q {
   position: absolute;
   top: 50%;
   right: 20px;
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   color: $brand-pink;
   font-size: 20px;
   text-align: center;
@@ -4994,10 +4632,9 @@ q {
 .hotel-mainlist {
   width: 50%;
   display: inline-block;
-
-  .hotel-listing:nth-child( even ) {
+  .hotel-listing:nth-child( even) {
     .listed-popup-select {
-      background-color: rgba(255,255,255,0.8);
+      background-color: rgba(255, 255, 255, 0.8);
     }
   }
 }
@@ -5025,13 +4662,11 @@ q {
   background-color: #fff;
   color: $brand-blue;
   @extend .avenir-roman;
-
   [type="checkbox"]:checked,
   [type="checkbox"]:not(:checked) {
     position: absolute;
     left: -9999px;
   }
-
   [type="checkbox"]:checked+label,
   [type="checkbox"]:not(:checked)+label {
     width: 100%;
@@ -5070,20 +4705,16 @@ q {
   }
   /* checked mark aspect changes */
   [type="checkbox"]:not(:checked)+label:after {
-    opacity: 1;
-    // transform: scale(1);
+    opacity: 1; // transform: scale(1);
   }
-
   [type="checkbox"]:checked+label:before {
     background-color: $brand-pink;
     border: 1px solid $brand-pink;
     color: $brand-blue;
     @include transition(all 300ms linear);
   }
-
   [type="checkbox"]:checked+label:after {
-    color: #fff;
-    // background-color: $brand-pink;
+    color: #fff; // background-color: $brand-pink;
     @include transition(all 300ms linear);
   }
 }
@@ -5096,9 +4727,9 @@ q {
   font-size: 12px;
   color: $brand-grey;
 }
+
 //DETAILED ITINERARY SHOW LISTED POPUP END
 // EDIT KIND OF JOURNEY POPUP
-
 .edit-kindof-popup {
   padding: 30px 0;
   background-color: transparent;
@@ -5117,8 +4748,7 @@ q {
   right: 0;
   width: 20px;
   color: #fff;
-  font-size: 15px;
-  // @include transform(translateY(-50%));
+  font-size: 15px; // @include transform(translateY(-50%));
   @extend .pointer;
 }
 
@@ -5126,16 +4756,14 @@ q {
   padding: 10px;
   border-radius: 10px;
   margin: 20px 0;
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
-
   .select-itinerary-type {
     margin: 10px 0;
     min-width: 74px;
     display: inline-block;
     text-align: center;
   }
-
   .itinerary-iconholder {
     @include square(40px);
     background: url('../img/itinerary/bluebox.png');
@@ -5143,27 +4771,24 @@ q {
     display: inline-block;
     position: relative;
     @include transition(all 300ms linear);
-
     img {
       @extend .get-center;
     }
-
     &:hover {
       background: url('../img/itinerary/orangebox.png');
       background-size: 100% 100%;
       @include transition(all 300ms linear);
     }
   }
-
   .active-itinerary {
     background: url('../img/itinerary/orangebox.png');
     background-size: 100% 100%;
     @include transition(all 300ms linear);
   }
 }
+
 // EDIT KIND OF JOURNEY POPUP END
 //ITINERARY OPTIONS DROPDOWN
-
 .itinerary-edit-option {
   width: 180px;
   padding: 15px 20px;
@@ -5174,7 +4799,6 @@ q {
   bottom: 35px;
   right: -25px;
   background-color: #f6fafc;
-
   &:before {
     content: '';
     border-top: 13px solid #e7f1f7;
@@ -5186,7 +4810,6 @@ q {
     bottom: -26px;
     z-index: 1;
   }
-
   &:after {
     content: '';
     position: absolute;
@@ -5198,50 +4821,41 @@ q {
     border-left: 12px solid transparent;
     z-index: 2;
   }
-
   li {
     padding: 7px 5px;
     border-bottom: 1px solid #b1b3b6;
     display: block;
-
     &:last-child {
       border: none;
     }
   }
-
   a {
     color: #6d6e71;
     font-size: 15px;
   }
 }
+
 //ITINERARY OPTIONS DROPDOWN END
 // SEARCH RESULT PAGE
-
 .search-result {
   margin: 40px 0;
   @extend .avenir-roman;
 }
 
 .search-navigation {
-  padding: 0 20px;
-  // background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent, transparent, transparent, transparent, transparent);
+  padding: 0 20px; // background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent, transparent, transparent, transparent, transparent);
   color: #fff;
-
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     height: 5px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: transparent;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-pink;
   }
-
   ul {
     width: 600px;
-
     .active {
       &:after {
         content: '';
@@ -5256,7 +4870,6 @@ q {
       }
     }
   }
-
   li {
     padding: 15px 20px 10px;
     position: relative;
@@ -5269,17 +4882,16 @@ q {
 .search-result-content {
   padding: 20px;
 }
-// SEARCH TRAVELLER
 
+// SEARCH TRAVELLER
 .search-traveller {
   padding: 30px 0;
 }
+
 // SEARCH TRAVELLER END
 // SEARCH COUNTRY
-
 .search-country-tab .country-list-holder {
   border-radius: 4px;
-
   &:hover {
     box-shadow: 1px 7px 4px rgba(0, 0, 0, 0.35);
   }
@@ -5287,7 +4899,6 @@ q {
 
 .search-country {
   padding: 30px 0;
-
   .search-countrydetails {
     width: 100%;
     padding: 10px 10px 5px;
@@ -5309,24 +4920,21 @@ q {
   padding: 10px;
   width: 85%;
 }
+
 // SEARCH COUNTRY END
 // SEARCH CITY
-
 .search-city {
   padding: 30px 0;
-
   .searchcity-country-name {
     color: #fff;
     font-size: 12px;
     text-shadow: 2px 2px 2px #000;
     vertical-align: middle;
   }
-
   .bucket-flag {
     display: inline-block;
     vertical-align: middle;
   }
-
   .search-citydetails {
     width: 100%;
     padding: 10px 10px 5px;
@@ -5348,9 +4956,9 @@ q {
 .search-city-title {
   padding: 5px 0;
 }
+
 // SEARCH CITY END
 // SEARCH ITINERARY
-
 .search-itinerary {
   padding: 0;
 }
@@ -5358,7 +4966,6 @@ q {
 .search-itinerary-card {
   margin: 30px 0 0;
   background-color: #fff;
-
   .country-holder {
     width: 30px;
     height: 30px;
@@ -5386,11 +4993,9 @@ q {
 
 .search-itineraryhead-detail {
   display: inline-block;
-
   h4 {
     margin: 0;
   }
-
   p {
     font-size: 12px;
   }
@@ -5402,41 +5007,34 @@ q {
   @extend .color-blue;
   @extend .avenir-roman;
 }
+
 // SEARCH ITINERARY END
 // SEARCH HASHTAG
-
 .search-hasshtag {
   padding: 30px 0;
 }
 
 .search-hashtag-post {
   margin: 10px 0 20px;
-
   .user-detail {
     margin-top: 5px;
   }
-
   .post-post-main {
     border-radius: 5px;
     box-shadow: 0 0 6px #888;
   }
-
   .user-social-item {
     border-top: 1px solid #b5b5b5;
   }
-
   .tag-ongo-journey {
     @include transform(translateY(-50%));
   }
-
   .tag-local-hashtag-journey {
     background-color: $brand-cyan;
   }
-
   .post-rating {
     margin-top: 10px;
   }
-
   .post-icon {
     top: 0;
     right: -5px;
@@ -5448,22 +5046,20 @@ q {
     padding: 5px 10px;
     font-size: 12px;
   }
-
   .photo-loc {
     font-size: 12px;
   }
 }
+
 // SEARCH HASHTAG END
 // SEARCH RESULT PAGE END
 // DELETE POST POPUP
-
 .delete-post {
   padding: 20px 0 0;
   margin-top: 20px;
   background-color: #fff;
   text-align: center;
   @extend .avenir-roman;
-
   .delete-confirmation {
     padding: 10px;
     display: block;
@@ -5473,9 +5069,9 @@ q {
     cursor: pointer;
   }
 }
+
 // DELETE POST POPUP END
 //404 ERROR PAGE
-
 .error-page {
   width: 100%;
   height: 100vh;
@@ -5488,27 +5084,25 @@ q {
   position: absolute;
   top: 50%;
   left: 60%;
-  @include transform(translate(-50%,-50%));
+  @include transform(translate(-50%,
+  -50%));
   color: #fff;
-
   .error-head {
     margin: 0;
     font-size: 90px;
     line-height: 1;
   }
-
   h4 {
     margin: 0;
     line-height: 1;
   }
-
   .error-btn {
     margin: 20px 0;
   }
 }
+
 //404 ERROR PAGE END
 // COMING SOON PAGE
-
 .coming-soon-page {
   width: 100%;
   min-height: 100vh;
@@ -5522,7 +5116,6 @@ q {
   text-align: center;
   width: 480px;
   @extend .get-center;
-
   h1 {
     font-size: 48px;
   }
@@ -5532,7 +5125,6 @@ q {
   border: 1px solid #fff;
   border-radius: 4px 0 0 4px;
   background-color: transparent;
-
   &:active,
   &:focus,
   &:hover {
@@ -5545,13 +5137,11 @@ q {
   width: 75%;
   border-radius: 5px;
   margin: 10px auto;
-
   input {
     color: #fff;
   }
-
-  .input-group-btn:last-child > .btn,
-  .input-group-btn:last-child > .btn-group {
+  .input-group-btn:last-child>.btn,
+  .input-group-btn:last-child>.btn-group {
     margin-left: 0;
   }
 }
@@ -5564,11 +5154,9 @@ q {
 .btn-comingsoon {
   background-color: transparent;
   color: $brand-grey;
-
   i {
     color: $brand-grey;
   }
-
   &:active,
   &:focus,
   &:hover {
@@ -5576,9 +5164,9 @@ q {
     color: $brand-grey;
   }
 }
+
 // COMING SOON PAGE END
 // LOGIN FLOW PAGE
-
 .loginflow-page {
   height: 100vh;
   padding-top: 60px;
@@ -5586,10 +5174,8 @@ q {
   background: url('../img/libro-home/forgot-password.jpg') no-repeat;
   background-size: cover;
   color: #fff;
-
   .loginflow-content {
     margin: 20px 0;
-
     .img-holder {
       width: 100px;
       height: 100px;
@@ -5600,26 +5186,22 @@ q {
       overflow: hidden;
     }
   }
-
   .social-login-button {
     margin: 20px 0;
   }
 }
+
 // LOGIN FLOW PAGE END
 // DESTINATION FILTERS
-
 .destination-filterscroll {
   position: relative;
-
-  ::-webkit-scrollbar {
+   ::-webkit-scrollbar {
     width: 4px;
   }
-
-  ::-webkit-scrollbar-track {
+   ::-webkit-scrollbar-track {
     background-color: transparent;
   }
-
-  ::-webkit-scrollbar-thumb {
+   ::-webkit-scrollbar-thumb {
     background-color: $brand-light-grey;
   }
 }
@@ -5633,14 +5215,13 @@ q {
   z-index: 5;
   background-color: #fff;
   overflow-y: auto;
-
   .custom-checkbox {
     padding: 5px 10px;
   }
 }
+
 // DESTINATION FILTERS END
 // NOTIFICATION BADGE
-
 .notification-countbadge {
   position: absolute;
   top: -12px;
@@ -5654,8 +5235,7 @@ q {
   line-height: 20px !important;
   text-align: center;
   vertical-align: middle;
-  @extend .avenir-heavy;
-  // &:hover{
+  @extend .avenir-heavy; // &:hover{
   //   background-color: #abafbc;
   // }
 }
@@ -5665,8 +5245,8 @@ q {
     background-color: $brand-pink;
   }
 }
-// NOTIFICATION BADGE END
 
+// NOTIFICATION BADGE END
 .sizeof-country {
   width: 125px;
   display: inline-block;
@@ -5680,12 +5260,10 @@ q {
   padding: 7px 15px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-
   h4 {
     margin: 0;
     padding: 0;
   }
-
   p {
     margin: 0;
   }
@@ -5696,8 +5274,9 @@ q {
   right: 110px;
   bottom: -10px;
 }
+
 // NEW FOLLOWER CARD
-.followercard{
+.followercard {
   margin: 10px 0;
   height: 350px;
   border-radius: 5px;
@@ -5705,13 +5284,14 @@ q {
   background-size: cover;
   overflow: hidden;
 }
-.followercard-content{
+
+.followercard-content {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.followercard-details{
+.followercard-details {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -5719,28 +5299,31 @@ q {
   padding: 10px 0;
   text-align: center;
 }
-.followercard-list{
-  margin: 10px 0;
 
-  li{
+.followercard-list {
+  margin: 10px 0;
+  li {
     // padding: 0;
     // padding-left: 5px;
     padding: 0 10px 0 5px;
   }
 }
-.followercard-counts{
+
+.followercard-counts {
   display: block;
   color: #fff;
   font-size: 18px;
   @extend .avenir-heavy;
 }
-.followercard-titles{
+
+.followercard-titles {
   color: #fff;
   font-size: 12px;
 }
+
 // NEW FOLLOWER CARD END
 // ADD COVER PIC
-.agent-coverpic{
+.agent-coverpic {
   position: absolute;
   top: 0;
   right: 0;
@@ -5749,11 +5332,11 @@ q {
   cursor: pointer;
 }
 
-.changecover-holder{
+.changecover-holder {
   display: inline;
   padding: 5px 0;
   overflow: hidden;
-  .agentcover-uploadinput{
+  .agentcover-uploadinput {
     position: absolute;
     top: 0;
     left: 0;
@@ -5764,42 +5347,40 @@ q {
   }
 }
 
-.coversave-btn{
+.coversave-btn {
   margin: 5px 0;
   text-align: center;
-  .btn-white-outline{
+  .btn-white-outline {
     padding: 2px 10px;
     z-index: 15;
   }
 }
-// ADD COVER PIC END
 
+// ADD COVER PIC END
 // REMOVE ON MERGE
-.date-itinerary{
+.date-itinerary {
   padding: 0px 5px;
   position: absolute;
   bottom: 5px;
-
-  .view-date{
+  .view-date {
     width: 40px;
     height: 40px;
     padding: 5px 0;
     border-radius: 100%;
     display: inline-block;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     color: #fff;
     font-size: 10px;
     text-align: center;
   }
 }
+
 // REMOVE ON MERGE END
-
-
-.agent-checkbox{
-  label{
+.agent-checkbox {
+  label {
     position: relative;
     display: block;
-    &:before{
+    &:before {
       content: '';
       width: 20px;
       height: 20px;
@@ -5812,8 +5393,7 @@ q {
       background-color: transparent;
       @include transition(all 300ms linear);
     }
-
-    &:after{
+    &:after {
       content: '\f00c';
       font: normal normal normal 14px/1 FontAwesome;
       width: 20px;
@@ -5826,10 +5406,18 @@ q {
       text-align: center;
     }
   }
-
-  .photo-checked{
-    &:after{
+  .photo-checked {
+    &:after {
       color: $brand-cyan;
     }
   }
 }
+
+//PARTNER LOGIN PAGE
+.agentlogin-vimeo{
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  @include transform(translate(-50%,0));
+}
+//PARTNER LOGIN PAGE END

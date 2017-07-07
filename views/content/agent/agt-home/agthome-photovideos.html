@@ -136,7 +136,7 @@
         <div class="m-center">
           <div masonry preserve-order class="masonry-main">
             <div class="masonry-brick" ng-repeat="photo in agentAlbum track by $index">
-              <div class="agent-photogallery relate">
+              <div class="agent-photogallery relate pointer" ng-click="getPhotosCommentData(photo._id,$index,agentAlbum.length,agentAlbum);">
                 <span ng-if="photo.type=='video'" class="get-center moment-videoicon"><i class="fa fa-play-circle fa-2x color-white"></i></span>
                 <img ng-if="photo.type=='photo'" ng-src="{{photo.name|uploadpath:'275'}}" alt="{{photo.album}} | TraveLibro" class="img-responsive">
                 <img ng-if="photo.type=='video'" ng-src="{{photo.thumbnail|uploadpath:'275'}}" alt="{{photo.album}} | TraveLibro" class="img-responsive">

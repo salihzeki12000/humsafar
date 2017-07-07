@@ -217,7 +217,26 @@ var agent = angular.module('agent', [])
         }).success(function(data){
           callback(data)
         });
+      },
+       getAgentCitySearch: function (formData, callback) {
+        TravelibroService.post(adminURL + "/city/searchDestCity", formData).success(callback).error(function (data) {
+          console.log(data);
+        });
+      },
+      updateLikeStatusWeb: function (formData, callback) {
+        TravelibroService.post(adminURL + "/agentstatus/updateLikeStatusWeb", formData).success(callback).error(function (data) {
+          console.log(data);
+        });
+      },
+      getLeadsData: function(formData, callback){
+        TravelibroService.post(adminURL + "/leads/getLeadsData", formData).success(callback).error(function (data){
+          console.log(data);
+        })
+      },
+      getOneAlbum: function(formData, callback){
+        TravelibroService.post(adminURL + "/album/getOneAlbum",formData).success(callback).error(function(data){
+          console.log(data);
+        })
       }
-
     }
   });

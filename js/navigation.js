@@ -149,6 +149,11 @@ var navigationservice = angular.module('navigationservice', [])
           method: "POST"
         }, true).success(callback).error(errCallback);
       },
+      // getAgentSearchData: function (formData, callback) {
+      //   TravelibroService.post(adminURL + "/itinerary/getAgentItineraryWeb", formData, 'searchHeaderLoad').success(callback).error(function (data) {
+      //     console.log(data);
+      //   });
+      // },
       getOthersProfile: function (slug, callback, errCallback) {
         TravelibroService.http({
           url: adminURL + "/user/getOneDataWeb",

@@ -81,10 +81,10 @@ var firstapp = angular.module('firstapp', [
   'pascalprecht.translate',
   'imageupload',
   'angulartics',
-
   'fileuploadservicemod',
   'angularFileUpload',
-  'angular-google-analytics'
+  'angular-google-analytics',
+  'highcharts-ng'
 ]);
 
 firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, cfpLoadingBarProvider, AnalyticsProvider, ipnConfig) {

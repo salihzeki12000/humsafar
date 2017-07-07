@@ -48,6 +48,7 @@ var commontask = angular.module('commontask', [])
       },
       postComment: function (type, uniqueId, type_Id, comment, hashTag, additionalId, callback) { //type_id=postId,journeyId,ItineraryId
         console.log("inside LikesAndComments");
+        // alert(type);
         if (!($.jStorage.get("isLoggedIn"))) {
           $state.go('login');
         }
@@ -94,37 +95,36 @@ var commontask = angular.module('commontask', [])
             obj.video = additionalId;
             getCommentId = "";
             break;
-            // case "post":
-            //   obj.post = type_Id;
-            //   getCommentId = type_Id;
-            //   break;
-            // case "photo":
-            //   obj.post = type_Id;
-            //   obj.photo = additionalId; //this var is initialized only when commenting for photo,video or itinerary
-            //   getCommentId = additionalId;
-            //   break;
-            // case "video":
-            //   obj.video = additionalId;
-            //   getCommentId = "";
-            //   break;
-            // case "itinerary":
-            //   obj.itinerary = type_Id;
-            //   getCommentId = type_Id;
-            //   break;
-            // case "journey":
-            //   obj.journey = type_Id;
-            //   getCommentId = type_Id;
-            //   break;
+          case "agentStatus":
+            obj.type = "agentStatus",
+            obj.agentStatus = type_Id;
+            getCommentId=type_Id;
+            break;
         }
-        TravelibroService.http({
-          url: adminURL + "/comment/addCommentWeb",
-          method: "POST",
-          data: obj
-        }).success(function (data) {
-          returnVal.getComments(type, getCommentId, callback);
-        }).error(function (data) {
-          console.log(data);
-        });
+        if (type == "agentStatus") {
+          delete obj.uniqueId; 
+          // obj.remove(uniqueId);
+          console.log(obj,"Status omment");
+          TravelibroService.http({
+            url: adminURL + "/comment/addCommentWeb",
+            method: "POST",
+            data: obj
+          }).success(function (data) {
+            returnVal.getComments(type, getCommentId, callback);
+          }).error(function (data) {
+            console.log(data);
+          });
+        } else {
+          TravelibroService.http({
+            url: adminURL + "/comment/addCommentWeb",
+            method: "POST",
+            data: obj
+          }).success(function (data) {
+            returnVal.getComments(type, getCommentId, callback);
+          }).error(function (data) {
+            console.log(data);
+          });
+        }
       },
       getComments: function (type, _id, callback) {
         if (!($.jStorage.get("isLoggedIn"))) {
@@ -155,21 +155,10 @@ var commontask = angular.module('commontask', [])
             case "video":
               url = "/postvideos/getPostCommentWeb";
               break;
-              // case "post":
-              //   url = "/post/getPostCommentWeb";
-              //   break;
-              // case "photo":
-              //   url = "/postphotos/getOneWeb";
-              //   break;
-              // case "video":
-              //   url = "/postvideos/getPostCommentWeb";
-              //   break;
-              // case "itinerary":
-              //   url = "/itinerary/getItineraryCommentWeb";
-              //   break;
-              // case "journey":
-              //   url = "/journey/getJourneyCommentWeb";
-              //   break;
+               case "agentStatus":
+              url = "/agentStatus/getAgentStatusCommentWeb";
+                    
+              break;
           }
           TravelibroService.http({
             url: adminURL + url,
@@ -216,7 +205,7 @@ var commontask = angular.module('commontask', [])
             break;
           case "agentStatus":
             obj.agentStatus = type_id;
-            url = "agentstatus/updateLikeStatusWeb";
+            url = "/agentstatus/updateLikeStatusWeb";
             break;
         }
         if (task == "unlike") {
@@ -259,6 +248,9 @@ var commontask = angular.module('commontask', [])
             break;
           case "video":
             url = "/postvideos/getPostLikesWeb";
+            break;
+          case "agentStatus":
+            url = "/agentStatus/getAgentStatusLikesWeb";
             break;
         }
 

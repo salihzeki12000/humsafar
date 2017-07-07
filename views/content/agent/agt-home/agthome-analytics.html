@@ -117,12 +117,12 @@
             </div>
             <div class="pull-right filter-analyticslead">
               <form>
-                <p class="filterlead-count">Total Leads: <span>0</span></p>
+                <p class="filterlead-count">Total Leads: <span> 0 </span></p>
                 <!-- MONTH FILTER -->
                 <div class="analytics-filterui followerfilter-month">
                   <div class="form-group">
-                    <ui-select ng-model="followerMonthFilter" theme="bootstrap">
-                      <ui-select-match placeholder="From">{{$select.selected.name}}</ui-select-match>
+                    <ui-select ng-model="leadChart.month" theme="bootstrap">
+                      <ui-select-match placeholder="From">{{$select.selected.month}}</ui-select-match>
                       <ui-select-choices repeat="month in leadmonth | filter: $select.search track by $index">
                         <div>
                           {{month}}
@@ -136,8 +136,8 @@
                   <!-- YEAR FILTER  -->
                 <div class="analytics-filterui followerfilter-year">
                   <div class="form-group">
-                    <ui-select ng-model="followerYearFilter" theme="bootstrap">
-                      <ui-select-match placeholder="Year">{{$select.selected.name}}</ui-select-match>
+                    <ui-select ng-model="leadChart.year" theme="bootstrap">
+                      <ui-select-match placeholder="Year">{{$select.selected.year}}</ui-select-match>
                       <ui-select-choices repeat="year in leadyear | filter: $select.search track by $index">
                         <div>
                           {{year}}
@@ -149,7 +149,7 @@
                 </div>
                 <!-- YEAR FILTER END  -->
                 <div class="leadfilter-btn">
-                  <button class="btn btn-pink"> Go </button>
+                  <button class="btn btn-pink" ng-click="getLeadsChart(userData.urlSlug)"> Go </button>
                 </div>
               </form>
             </div>
@@ -274,8 +274,8 @@
               <!-- MONTH FILTER -->
               <div class="analytics-filterui leadfilter-month">
                 <div class="form-group">
-                  <ui-select ng-model="leadMonthFilter" theme="bootstrap">
-                    <ui-select-match placeholder="From">{{$select.selected.name}}</ui-select-match>
+                  <ui-select ng-model="leadFilterData.month" theme="bootstrap">
+                    <ui-select-match placeholder="From">{{$select.selected}}</ui-select-match>
                     <ui-select-choices repeat="month in leadmonth | filter: $select.search track by $index">
                       <div>
                         {{month}}
@@ -289,8 +289,8 @@
                 <!-- YEAR FILTER  -->
               <div class="analytics-filterui leadfilter-year">
                 <div class="form-group">
-                  <ui-select ng-model="leadYearFilter" theme="bootstrap">
-                    <ui-select-match placeholder="Year">{{$select.selected.name}}</ui-select-match>
+                  <ui-select ng-model="leadFilterData.year" theme="bootstrap">
+                    <ui-select-match placeholder="Year">{{$select.selected}}</ui-select-match>
                     <ui-select-choices repeat="year in leadyear | filter: $select.search track by $index">
                       <div>
                         {{year}}
@@ -302,7 +302,7 @@
               </div>
               <!-- YEAR FILTER END  -->
               <div class="leadfilter-btn">
-                <button class="btn btn-pink"> Go </button>
+                <button class="btn btn-pink" ng-click="getLeadsChart(userData.urlSlug);"> Go </button>
               </div>
             </form>
           </div>
@@ -311,9 +311,10 @@
     </div>
     <!-- FILTER END -->
     <!-- EMPTY SCREEN -->
-    <div class="analytics-emptyleads">
+    <div class="analytics-leadschart">
       <div class="container">
         <div class="emptyleads-analytics">
+            <highchart config="chartConfig" style="height: 410px;"></highchart>
         </div>
       </div>
     </div>
