@@ -12333,6 +12333,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
     //isMine or someoneOthers profile Ends
+
+    // SET PROFILE SHARING URL
+    $scope.userData.sharingUrl = "https://travelibro.com/partners/" + $scope.activeUrlSlug;
+    console.log($scope.userData.sharingUrl, 'shareURl');
+    // SET PROFILE SHARING URL END
     // PRATIK CONTROLLER END
 
     // SAGAR INTEGRATION
