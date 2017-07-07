@@ -10704,8 +10704,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.isVerified = $.jStorage.get("isVerified");
 
     $timeout(function () {
-        var container = document.getElementsByClassName("veri-box")[0];
-        // var container = $('.veri-box').first();
+        var container = $('.veri-box').first().html();
         container.onkeyup = function (e) {
             var target = e.srcElement || e.target;
             var maxLength = parseInt(target.attributes["maxlength"].value, 10);
