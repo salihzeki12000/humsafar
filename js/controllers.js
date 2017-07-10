@@ -12217,6 +12217,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.agentItineraryType = [];
     $scope.agentCityFilter = [];
     $scope.agentCityFilterName = [];
+    $scope.userData = {};
     $scope.initialiseArray = function () {
         $scope.showItinerary = false;
         $scope.addHomeBackdrop = "";
