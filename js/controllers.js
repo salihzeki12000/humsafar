@@ -14519,6 +14519,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 case 'journeyReject':
                     notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> has rejected your request to join the <span class="avenir-heavy color-blue">On Go Activity</span> -' + '<span class ="color-pink avenir-heavy text-capitalize">' + notification.data.name + '</span>';
                     break;
+                case 'agentStatusLike':
+                    notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> liked your status.';
+                    break;
+                case 'agentStatusComment':
+                    notification.notifyString = '<a class="avenir-heavy color-blue" href="/users/' + notification.userFrom.urlSlug + '">' + notification.userFrom.name + '</a> commented on your status.';
+                    break;
                 default:
                     break;
             }
