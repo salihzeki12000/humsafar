@@ -10590,7 +10590,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 search: $scope.search.searchType
             }, function (data) {
                 $scope.getAllSearched = data.data;
-                console.log($scope.getAllSearched, 'data');
+                console.log($scope.getAllSearched.travelAgent, 'data');
             });
         } else {
             $scope.viewSearch.backgroundClick = false;
@@ -10602,6 +10602,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             case 'search-traveller':
                 $state.go('search-result', {
                     name: 'search-traveller',
+                    searchText: searchText
+                });
+                break;
+            case 'search-travelAgent':
+                $state.go('search-result', {
+                    name: 'search-travelAgent',
                     searchText: searchText
                 });
                 break;
@@ -12311,7 +12317,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // PRATIK CONTROLLER
     //isMine or someoneOthers profile
     console.log($.jStorage.get("isLoggedIn"));
-    console.log($.jStorage.get("profile").urlSlug);
     console.log($stateParams.urlSlug);
     if ($.jStorage.get("isLoggedIn") && ($.jStorage.get("profile").urlSlug == $stateParams.urlSlug)) {
         //its your own profile so no need to call profile again
@@ -14850,8 +14855,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $state.go('comingsoonpage', {
                 'url': 'coming-soon'
             })
-        } else {
+        } else if (searchObj.type === "User") {
             $state.go('mylife', {
+                'urlSlug': searchObj.urlSlug
+            });
+        } else if (searchObj.type === "TravelAgent") {
+            $state.go('agent-home-without', {
                 'urlSlug': searchObj.urlSlug
             })
         }
@@ -14891,6 +14900,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         switch (type) {
             case 'search-traveller':
                 NavigationService.getSearchUserData({
+                    userType: ["User"],
                     search: searchText,
                     pagenumber: pagenumber,
                     limit: limit
@@ -14903,6 +14913,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                         })
                     }
                     console.log($scope.viewSearchedUser, 'user');
+                });
+                break;
+            case 'search-travelAgent':
+                NavigationService.getSearchUserData({
+                    userType: ["TravelAgent"],
+                    search: searchText,
+                    pagenumber: pagenumber,
+                    limit: limit
+                }, function (data) {
+                    if (data.data.length == 0) {
+                        $scope.searchScroll.stopCallingApi = true;
+                    } else {
+                        _.each(data.data, function (newData) {
+                            $scope.viewSearchedAgent.push(newData);
+                        })
+                    }
                 });
                 break;
             case 'search-itinerary':
@@ -15025,8 +15051,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         if ($scope.searchScroll.stopCallingApi == false) {
             $scope.getSearch($scope.searchedUrl.searchText, ++$scope.pagenumber, $scope.limit, searchType);
         }
-        console.log($scope.searchedUrl.searchText, 'text');
-        console.log(searchType, 'name');
     };
 
     // tab change
@@ -15044,6 +15068,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.searchresultoptions.active = "search-traveller";
             $scope.viewSearchedUser = [];
             $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-traveller');
+            break;
+        case "search-travelAgent":
+            $scope.searchresult.innerView = allsearchresult[5];
+            $scope.searchresultoptions.active = "search-travelAgent";
+            $scope.viewSearchedAgent = [];
+            $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-travelAgent');
             break;
         case "search-itinerary":
             $scope.searchresult.innerView = allsearchresult[1];
@@ -15068,11 +15098,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.searchresultoptions.active = "search-city";
             $scope.viewSearchedCity = [];
             $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-city');
-            break;
-        case "search-travelagent":
-            $scope.searchresult.innerView = allsearchresult[5];
-            $scope.searchresultoptions.active = "search-travelagent";
-            $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-travelagent');
             break;
         default:
             $scope.searchresult.innerView = allsearchresult[0];
@@ -15128,10 +15153,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-city');
                 break;
             case 5:
-                url = "search-travelagent";
-                $scope.searchresultoptions.active = "search-travelagent";
+                url = "search-travelAgent";
+                $scope.searchresultoptions.active = "search-travelAgent";
                 $scope.searchresultTraveller = false;
-                $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-travelagent');
+                $scope.viewSearchedAgent = [];
+                $scope.getSearch($scope.searchedUrl.searchText, $scope.pagenumber, $scope.limit, 'search-travelAgent');
                 break;
             default:
                 url = "search-traveller";
