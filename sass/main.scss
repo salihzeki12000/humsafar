@@ -4876,6 +4876,14 @@ header {
   .post-icon {
     top: 10px;
   }
+  .post-your-status {
+    p {
+      padding: 5px 8px;
+    }
+    .flag-view {
+      padding: 5px 50px 5px 8px;
+    }
+  }
 }
 
 .activity-backdrop.view-backdrop {

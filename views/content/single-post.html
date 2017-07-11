@@ -5,8 +5,10 @@
         <journey-post post="post" ng-if="post.type=='travel-life'" get-comments-data="openCommentSection(post)" get-likes-data="openLikeSection(post)" class="single-journey-post"></journey-post>
         <post-local-life class="single-local-post" ongolocal="post" local-view="localView" ng-if="post.type=='local-life'" open-comment-section="openCommentSection(post)"
           open-like-section="openLikeSection(post)"></post-local-life>
-        <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike'
-          list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+        <div class="" ng-if="postScrollData.viewList">
+          <comment-like-section post="post" user-data='userData' post-scroll-data="postScrollData" view-card-comment="viewCardComment" view-card-like='viewCardLike'
+            list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+        </div>
       </div>
     </div>
   </div>

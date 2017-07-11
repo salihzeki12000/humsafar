@@ -63,7 +63,7 @@
                 <!-- post header end -->
                 <!-- post status -->
                 <div class="post-your-status relate" ng-if="activity.type=='quick-itinerary' || activity.type=='detail-itinerary' || activity.type=='on-the-go-journey' || activity.type=='ended-journey'">
-                  <p class="your-post" ng-bind-html="activity.thoughts"></p>
+                  <p class="your-post" ng-class="{'flag-view': activity.countryVisited, '': !activity.countryVisited}" ng-bind-html="activity.thoughts"></p>
                   <!-- flag country -->
                   <div class="flag-section" ng-if="activity.type =='on-the-go-journey' || activity.type=='ended-journey' || activity.type=='quick-itinerary' || activity.type=='detail-itinerary'">
                     <div class="country-visited" ng-repeat="n in activity.countryVisited | limitTo:3">
@@ -572,8 +572,9 @@
     <div class="pagination-loader" ng-if="template.paginationLoader">
       <img src="img/page.svg" alt="Loading..." width="50px" class="img-responsive m-center">
     </div>
-    <div class="" ng-if="showLikeCommentCard">
-      <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike'
+    <div class="" ng-if="postScrollData.viewList">
+      <!-- showLikeCommentCard || postScrollData.viewList -->
+      <comment-like-section post="post" user-data='userData' post-scroll-data="postScrollData" view-card-comment="viewCardComment" view-card-like='viewCardLike'
         list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
     </div>
     <div class="backdrop-close" ng-class="{'view-backdrop':viewCardComment==true || viewCardLike==true,'':viewCardComment==false || viewCardLike==false}"

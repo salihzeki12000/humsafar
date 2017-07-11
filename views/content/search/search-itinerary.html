@@ -3,11 +3,12 @@
     <div class="col-md-4 col-sm-6 masonry-brick" ng-repeat="itinerary in viewSearchedItinerary track by $index">
       <!-- itinerary FINAL CARD -->
       <div class="travel-life-part blog-post bg-white avenir-roman overflow search-itinerary-card {{itinerary.type}}" ng-if="itinerary.type=='quick-itinerary' || itinerary.type=='detail-itinerary'">
-        <div class="travel-journey-heading">
-          <div class="editor-logo user-logo pointer" ng-click="searchProfile(itinerary);">
+        <div class="travel-journey-heading relate">
+          <p class="text-capitalize">{{itinerary.name| capitalize}} ({{post.duration}} {{itinerary.duration|singularPlural:'Days'}})</p>
+          <!-- <div class="editor-logo user-logo pointer" ng-click="searchProfile(itinerary);">
             <img ng-src="{{itinerary.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{itinerary.user.name}}" class="img-responsive">
-          </div>
-          <div class="inline-block editor-subdetail">
+          </div> -->
+          <!-- <div class="inline-block editor-subdetail">
             <div class="clearfix">
               <div class="pull-left">
                 <h4 class="font-bold color-dark-blue text-capitalize m-clear mb5 heading-name pointer" ng-click="searchProfile(itinerary);">{{itinerary.user.name}}</h4>
@@ -17,9 +18,15 @@
               </div>
             </div>
             <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{itinerary.startTime | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{itinerary.startTime | date :'hh:mm a'}}</span></p>
-          </div>
+          </div> -->
         </div>
         <div class="onway-journey relate" ng-click="searchIti(itinerary);">
+          <div class="itinerary-creator-detail">
+            <div class="editor-logo user-logo pointer v-mid" ui-sref="mylife({'urlSlug':post.user.urlSlug})">
+              <img ng-src="{{itinerary.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{itinerary.user.name}}" class="full-width">
+            </div>
+            <h4 class="font-bold color-dark-blue m-clear heading-name text-capitalize pointer" ui-sref="mylife({'urlSlug':itinerary.user.urlSlug})">{{itinerary.user.name}}</h4>
+          </div>
           <div class="onway-imgholder">
             <img ng-src="{{itinerary.coverPhoto|uploadpath:370:340:'cover'}}" alt="" class="full-width m-center">
           </div>
@@ -29,7 +36,8 @@
               <span class="" ng-if="visit.country.length > 3">+4</span>
             </div>
           </div> -->
-          <div class="journey-tag-holder">
+          <!-- journey tag holder  -->
+          <!-- <div class="journey-tag-holder" hidden>
             <div class="days-spent pull-right">
               <p><span class="block">{{itinerary.duration}}</span>Days</p>
             </div>
@@ -66,7 +74,8 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
+          <!-- journey tag holder end -->
         </div>
         <div class="social-field-types">
           <div class="user-social-item clearfix">
@@ -102,9 +111,9 @@
                 <span class="color-blue mr10 pointer" ng-click="getCommentsData(itinerary)"><img src="img/comments.png" alt="" height="14"><b class=""> {{itinerary.commentCount}} </b> Comments</span>
                 <!-- <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{post.userReviewCount}} Reviews ({{post.userReviewCount}}/5)</span> -->
               </div>
-              <div class="pull-right">
+              <!-- <div class="pull-right">
                 <img src="img/travel.png" alt="">
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

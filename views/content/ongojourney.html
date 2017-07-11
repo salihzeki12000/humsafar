@@ -142,7 +142,7 @@
                   <h4 class="color-white avenir-light">{{journey.startLocation}}</h4>
                   <p class="color-white m-clear avenir-roman">
                     <!-- <i class="fa fa-calendar mr5"></i> -->
-                    <span class="mr5">{{journey.startTime|formatDate: 'date'}}</span> <span class="mr5">|</span> 
+                    <span class="mr5">{{journey.startTime|formatDate: 'date'}}</span> <span class="mr5">|</span>
                     <!-- <i class="fa fa-clock-o mr5"></i> -->
                     <span class="mr5">{{journey.startTime|formatDate: 'time'}}</span></p>
                 </div>
@@ -207,8 +207,10 @@
               <!-- ongo journey end -->
             </div>
           </div>
-          <comment-like-section post="post" user-data='userData' view-card-comment="viewCardComment" view-card-like='viewCardLike'
-            list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+          <div class="" ng-if="postScrollData.viewList">
+            <comment-like-section post="post" user-data='userData' post-scroll-data="postScrollData" view-card-comment="viewCardComment" view-card-like='viewCardLike'
+              list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+          </div>
         </div>
       </div>
       <!-- map -->

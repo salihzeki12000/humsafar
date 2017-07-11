@@ -106,7 +106,7 @@
 <!-- ng-show="viewCardLike" -->
 <div class="like-side-sec " ng-class="{'show-like-side-sec': viewCardLike==true,'':viewCardLike==false}">
   <div class="like-section">
-    <ul>
+    <ul infinite-scroll="getMoreLikes();" infinite-scroll-disabled="postScrollData.busy">
       <!-- REPEAT BUDDY LIST -->
       <li ng-repeat="like in listOfLikes.like">
         <div class="like-notify-buddy clearfix">

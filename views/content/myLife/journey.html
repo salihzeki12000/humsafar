@@ -452,8 +452,9 @@
                 </div>
               </div>
               <!-- comment and like-->
-              <div class="" ng-if="showLikeCommentCard">
-                <comment-like-section post="post" user-data='myProfileData' view-card-comment="viewCardComment" view-card-like='viewCardLike'
+              <div class="" ng-if="postScrollData.viewList">
+                <!-- showLikeCommentCard || postScrollData.viewList -->
+                <comment-like-section post="post" user-data='myProfileData' post-scroll-data="postScrollData" view-card-comment="viewCardComment" view-card-like='viewCardLike'
                   list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
               </div>
               <!-- comment and like end-->
@@ -758,8 +759,9 @@
             </div>
           </div>
         </div>
-        <div ng-if="showLikeCommentCard">
-          <comment-like-section post="post" user-data='myProfileData' view-card-comment="viewCardComment" view-card-like='viewCardLike'
+        <div ng-if="postScrollData.viewList">
+          <!-- showLikeCommentCard || postScrollData.viewList -->
+          <comment-like-section post="post" user-data='myProfileData' post-scroll-data="postScrollData" view-card-comment="viewCardComment" view-card-like='viewCardLike'
             list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
         </div>
         <!-- end journey local life -->
