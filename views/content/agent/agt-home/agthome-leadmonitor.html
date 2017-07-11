@@ -54,8 +54,8 @@
                     <div class="leadtab-msgdiv color-white" ng-class="{'disp-none': agtlead.open, 'inline-block': !agtlead.open}">
                       <p class="leadtab-msg"><span class="ledadmsg-country text-capitalize">{{agtlead.travellingTo}} </span><span class="ledadmsg-comment">- {{agtlead.instructions}} </span></p>
                     </div>
-                    <i class="pull-right color-white mt10 fa " ng-class="{'fa fa-chevron-up': status.open, 'fa fa-chevron-down': !status.open}"></i>
-                    <div class="leadtab-title leadtab-date pull-right  color-white" ng-class="{'disp-none': status.open, 'inline-block':!status.open}">
+                    <i class="pull-right color-white mt10 fa " ng-class="{'fa fa-chevron-up': agtlead.open, 'fa fa-chevron-down': !agtlead.open}"></i>
+                    <div class="leadtab-title leadtab-date pull-right  color-white" ng-class="{'disp-none': agtlead.open, 'inline-block':!agtlead.open}">
                       <p>{{agtlead.createdAt | formatDate:'date'}}</p>
                     </div>
                   </div>
@@ -125,8 +125,8 @@
                     <div class="leadtab-msgdiv color-white" ng-class="{'disp-none': agtlead.open, 'inline-block': !agtlead.open}">
                       <p class="leadtab-msg"><span class="ledadmsg-country text-capitalize">{{agtlead.travellingTo}} </span><span class="ledadmsg-comment">- {{agtlead.instructions}}</span></p>
                     </div>
-                    <i class="pull-right color-white mt10 fa " ng-class="{'fa fa-chevron-up': status.open, 'fa fa-chevron-down': !status.open}"></i>
-                    <div class="leadtab-title leadtab-date pull-right  color-white" ng-class="{'disp-none': status.open, 'inline-block': !status.open}">
+                    <i class="pull-right color-white mt10 fa " ng-class="{'fa fa-chevron-up': agtlead.open, 'fa fa-chevron-down': !agtlead.open}"></i>
+                    <div class="leadtab-title leadtab-date pull-right  color-white" ng-class="{'disp-none': agtlead.open, 'inline-block': !agtlead.open}">
                       <p>{{agtlead.createdAt | formatDate: 'date'}}</p>
                     </div>
                   </div>

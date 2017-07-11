@@ -61,14 +61,14 @@
                 </uib-tab>
                 <uib-tab index="1" heading="Sign Up">
                   <div class="login-form agent-signup">
-                    <form ng-submit="registerAsAgent(agentSignUpForm)">
+                    <form name="signUpForm" ng-submit="registerAsAgent(agentSignUpForm)">
                       <div class="form-group">
                         <div class="input-group">
                           <span class="input-group-addon">
                               <i class="fa fa-user color-white" aria-hidden="true"></i>
                             </span>
                           <input type="text" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Company Name" placeholder="Company Name"
-                            ng-model="agentSignUpForm.companyName">
+                            ng-model="agentSignUpForm.companyName" required>
                         </div>
                       </div>
                       <div class="form-group">
@@ -77,7 +77,7 @@
                               <i class="fa fa-envelope color-white" aria-hidden="true"></i>
                             </span>
                           <input type="email" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Emaild Id" placeholder="Email Id"
-                            ng-model="agentSignUpForm.email">
+                            ng-model="agentSignUpForm.email" required>
                         </div>
                       </div>
                       <div class="form-group">
@@ -85,19 +85,19 @@
                           <span class="input-group-addon">
                               <i class="fa fa-lock color-white fnt-20" aria-hidden="true"></i>
                             </span>
-                          <input type="password" class="form-control color-white" placeholder="Password" ng-model="agentSignUpForm.password">
+                          <input type="password" class="form-control color-white" placeholder="Password" ng-model="agentSignUpForm.password" required>
                         </div>
                       </div>
                       <div class="terms-condt">
                         <div class="checkbox">
                           <label class="color-white">
-                            <input type="checkbox" id="tnc"/>
+                            <input type="checkbox" id="tnc" required/>
                             <label for="tnc" class=" avenir-roman">I accept the Terms &amp; Conditions and Privacy Policy of the website.</label>
                           </label>
                         </div>
                       </div>
                       <div class="btn-login mt25">
-                        <input type="submit" class="btn btn-outline color-white avenir-roman" value="Register"> </button>
+                        <input type="submit" class="btn btn-outline color-white avenir-roman" value="Register" ng-disabled="signUpForm.$invalid">
                       </div>
                     </form>
                   </div>
