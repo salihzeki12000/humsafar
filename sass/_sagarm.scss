@@ -3956,6 +3956,14 @@ q {
   background-color: rgba(255, 255, 255, 0.8);
 }
 
+.white-link{
+  color: #fff;
+  &:hover, &:focus, &:active{
+    color: #fff;
+    text-decoration: underline;
+  }
+}
+
 .empty-msg-box {
   width: 100%;
   position: absolute;
