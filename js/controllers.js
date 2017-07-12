@@ -10653,7 +10653,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // SWITCHING TO PROFILE
     $scope.switchToProfile = function (userData) {
             console.log(userData, 'data user ni');
-            if (userData.type == "user") {
+            if (userData.type == "User") {
                 $state.go("mylife", {
                     name: 'journey',
                     urlSlug: userData.urlSlug
@@ -12859,7 +12859,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     $scope.getAgentItinerary = function (activeSlug) {
-        console.log("console");
+        scroll.scrollBusy = false;
+        scroll.stopCallingApi = false;
         itineraryObj.urlSlug = activeSlug;
         itineraryObj.pagenumber = 0;
         itineraryObj.city = $scope.agentCityFilter;
@@ -12923,6 +12924,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // }
 
     $scope.getPhotoVideo = function (activeSlug) {
+        scroll.scrollBusy = false;
+        scroll.stopCallingApi = false;
         photoObj.urlSlug = activeSlug;
         photoObj.pagenumber = 0;
         photoObj.album = $scope.albumArray;
@@ -13042,6 +13045,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // GET AGENT TRAVELACTIVITY
     var travelActivityObj = {};
     $scope.getTravelActivity = function (activeSlug) {
+        scroll.scrollBusy = false;
+        scroll.stopCallingApi = false;
         travelActivityObj.urlSlug = activeSlug;
         travelActivityObj.pagenumber = 0;
         console.log(travelActivityObj, 'Travelactivity call');
