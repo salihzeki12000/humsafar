@@ -13854,10 +13854,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //contact us
     $scope.viewContact = false;
     $scope.getBackdrop = "";
-    $scope.showContact = function () {
+    $scope.showContact = function (tourcard) {
         if ($scope.viewContact == false) {
             $scope.getBackdrop = "backdrop-enquiry";
             $scope.viewContact = true;
+            $scope.countAdder(tourcard);
         } else {
             $scope.viewContact = false;
             $scope.getBackdrop = "";
@@ -13962,6 +13963,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
     };
     // itinerary popover end
+
+
+    $scope.countAdder = function (tourcard) {
+        Agent.countAdder({ _id: tourcard._id }, function (data) {
+            console.log(data);
+            if (data.value == true) {
+                console.log("Added counter");
+            }
+        });
+    };
 
     // DOWNLOAD LIST
     $scope.downloadList = [{
