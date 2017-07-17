@@ -1688,15 +1688,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.comment = {
         'text': ""
     };
-
+    $scope.postScrollData = {};
+    $scope.postScrollData.likePageNumber = 1;
+    $scope.postScrollData.busy = false;
+    $scope.postScrollData.stopCallingApi = false;
+    $scope.postScrollData.viewList = false;
     $scope.getCommentsData = function(ongo) {
         console.log(ongo, 'ongo');
         $scope.post = ongo;
         $scope.previousId;
         $scope.viewCardLike = false;
+        $scope.postScrollData.type = ongo.type;
+        $scope.postScrollData._id = ongo._id;
         var callback = function(data) {
             $scope.uniqueArr = [];
             $scope.listOfComments = data.data;
+            $scope.postScrollData.viewList =  true;
             $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
         }
         if ($scope.previousId != $scope.post._id) {
@@ -1705,7 +1712,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.viewCardComment = true;
             $scope.journey.journeyHighLight = ongo._id;
             $scope.getCard = "view-whole-card";
-            LikesAndComments.getComments(ongo.type, $scope.post._id, callback);
+            LikesAndComments.getComments(ongo.type, $scope.post._id,$scope.postScrollData.likePageNumber,callback);
         } else {
             if ($scope.viewCardComment) {
                 $scope.viewCardComment = false;
@@ -1718,18 +1725,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 // $scope.focus('enterComment');
                 $scope.journey.journeyHighLight = ongo._id;
                 $scope.getCard = "view-whole-card";
-                LikesAndComments.getComments(ongo.type, $scope.post._id, callback);
+                LikesAndComments.getComments(ongo.type, $scope.post._id,$scope.postScrollData.likePageNumber,callback);
             }
         }
         $scope.previousId = $scope.post._id;
     };
 
 
-    $scope.postScrollData = {};
-    $scope.postScrollData.likePageNumber = 1;
-    $scope.postScrollData.busy = false;
-    $scope.postScrollData.stopCallingApi = false;
-    $scope.postScrollData.viewList = false;
+
     $scope.getLikesData = function(ongo) {
       console.log('post ka click');
       $scope.postScrollData.type = ongo.type;
@@ -10140,6 +10143,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.getLikesData = function(activity) {
+      console.log('user detail');
         $scope.postScrollData.type = activity.type;
         $scope.postScrollData._id = activity._id;
         var callback = function(data) {

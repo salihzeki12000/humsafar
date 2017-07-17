@@ -1114,7 +1114,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
             console.log($scope.listOfComments);
             $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
           };
-          LikesAndComments.getComments("photo", photoId, callback);
+          LikesAndComments.getComments("photo", photoId, 1, callback);
         }
       };
 
