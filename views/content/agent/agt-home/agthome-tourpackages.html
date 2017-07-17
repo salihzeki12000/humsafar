@@ -111,7 +111,7 @@
                                         <!-- COUNTRY UI SELECT -->
                                         <div class="form-group relate">
                                             <div class="tour-type tour-select">
-                                                <ui-select multiple ng-model="tour.country" theme="bootstrap" title="Country" ng-required="true">
+                                                <ui-select multiple ng-model="tour.country" theme="bootstrap" title="Country" ng-required="true" on-select="getCity();">
                                                     <ui-select-match placeholder="Country">{{$item.name}}</ui-select-match>
                                                     <ui-select-choices repeat="country._id as country in countries | filter: $select.search track by $index">
                                                         <div>
@@ -123,6 +123,19 @@
                                             <p ng-show="tour.country==''" class="agentform-error">Country Is Required</p>
                                         </div>
                                         <!-- COUNTRY UI SELECT END -->
+                                        <div class="form-group relate">
+                                            <div class="tour-type tour-select">
+                                                <ui-select multiple ng-model="tour.city" theme="bootstrap" title="City" ng-required="true">
+                                                    <ui-select-match placeholder="City">{{$item.name}}</ui-select-match>
+                                                    <ui-select-choices repeat="city._id as city in cities | filter: $select.search track by $index">
+                                                        <div>
+                                                            <span class="color-white">{{city.name}}</span>
+                                                        </div>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                            <p ng-show="tour.city==''" class="agentform-error">City Is Required</p>
+                                        </div>
                                         <!-- BOOKING URL -->
                                         <div class="form-group">
                                             <div class="a relate">

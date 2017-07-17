@@ -3950,6 +3950,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.viewNoVacData = false;
     $scope.viewHomeStayLoader = true;
     $scope.viewNoHomeData = false;
+
+    $scope.adder = 1;
+    $scope.usrTourPackageCard = [];
+
+    $scope.callTour = function (adder) {
+        NavigationService.getTourPackage({
+            city: $state.params.url,
+            pagenumber: adder
+        }, function (data) {
+            if (data.data.length > 0) {
+                _.each(data.data, function (each) {
+                    $scope.usrTourPackageCard.push(each);
+                });
+            }
+            $scope.getBooking($state.params.url.toLowerCase(), $state.params.country);
+        });
+    }
+
     $scope.getBooking = function (cityName, countryName) {
         console.log(cityName, countryName);
         $scope.bookingCityName = cityName;
@@ -4009,21 +4027,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.getHotel = function (cityHotel, countryHotel) {
-            NavigationService.getBookingHotel({
-                cityName: cityHotel,
-                countryName: countryHotel
-            }, function (data) {
-                if (data.status == false || data.hotels == "") {
-                    $scope.viewHotelLoader = false;
-                    $scope.viewNoHotelData = true;
-                } else {
-                    $scope.viewNoHotelData = false;
-                    $scope.viewHotelLoader = false;
-                    $scope.bookingHotelData = data.hotels;
-                }
-            })
-        }
-        // get booking data end
+        NavigationService.getBookingHotel({
+            cityName: cityHotel,
+            countryName: countryHotel
+        }, function (data) {
+            if (data.status == false || data.hotels == "") {
+                $scope.viewHotelLoader = false;
+                $scope.viewNoHotelData = true;
+            } else {
+                $scope.viewNoHotelData = false;
+                $scope.viewHotelLoader = false;
+                $scope.bookingHotelData = data.hotels;
+            }
+        });
+    }
+
+    // get booking data end
 
     $scope.cityType = [{
         name: 'Adventure',
@@ -4581,7 +4600,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.cityoptions = {};
     $scope.cityoptions.active = "";
     $scope.viewTab = 1;
-    // console.log($state.params.name);
+    console.log($state.params.name);
     switch ($state.params.name) {
         case "must-dos":
             $scope.destination.innerView = alldestination[0];
@@ -4615,7 +4634,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.destination.innerView = alldestination[4];
             $scope.cityDestinationView = false;
             $scope.cityoptions.active = "bookings";
-            $scope.getBooking($state.params.url.toLowerCase(), $state.params.country);
+            $scope.usrTourPackageCard = [];
+            $scope.callTour(1);
             $scope.viewBookingLoader = true;
             $scope.ntMustdo = "";
             break;
@@ -4679,6 +4699,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $scope.cityDestinationView = false;
                 $scope.cityoptions.active = "bookings";
                 $scope.viewBookingLoader = true;
+                $scope.usrTourPackageCard = [];
+                $scope.callTour(1);
                 $scope.getBooking($state.params.url.toLowerCase(), $scope.bookingCountryName);
                 $scope.ntMustdo = "";
                 break;
@@ -12212,6 +12234,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.itinerary.citySearch = "";
     $scope.itinerary.type = "";
     $scope.tour.typeOfHoliday = [];
+    $scope.tour.country = [];
+    $scope.tour.city = [];
     $scope.agentItinerary = [];
     $scope.album = {};
     $scope.photoFilter = [];
@@ -12419,6 +12443,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log("error getting  getAllCountries");
     });
 
+    $scope.getCity = function () {
+        NavigationService.getCitySearch({ country: $scope.tour.country, limit: "0" }, function (data) {
+            $scope.cities = data.data.results;
+        });
+    };
+
     $scope.tourPhoto = function (data) {
         $scope.tour.displayPic = data;
         console.log($scope.tour.displayPic, 'stour');
@@ -12455,7 +12485,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 if (data.value == true) {
                     $scope.addItinerary();
                     $scope.tour = {};
-                    $scope.toursForm.$setPristine();
+                    // $scope.toursForm.$setPristine();
                     $scope.tour.displayPic = "";
                     $scope.showTourPdf = false;
                     $scope.showTourPic = false;
