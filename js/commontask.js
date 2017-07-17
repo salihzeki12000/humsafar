@@ -126,14 +126,14 @@ var commontask = angular.module('commontask', [])
           console.log(data);
         });
       },
-      getComments: function (type, _id, callback) {
+      getComments: function (type, _id, pagenumber,callback) {
         if (!($.jStorage.get("isLoggedIn"))) {
           $state.go('login');
         } else {
           console.log(type, _id);
           var obj = {
             "_id": _id,
-            "pagenumber": 1
+            "pagenumber": pagenumber
           };
           var url;
           switch (type) {
@@ -592,8 +592,8 @@ commontask.directive('commentLikeSection', function (LikesAndComments, $timeout)
     templateUrl: "views/directive/commonLikesAndComments.html",
     link: function ($scope, element, attrs) {
       // console.log($scope.post, "bhai ander ghus gya");
-      console.log($scope.listOfLikes);
-      console.log("sk;mdsmkmksmdkm");
+      // console.log($scope.listOfLikes);
+      // console.log("sk;mdsmkmksmdkm");
       $scope.$watch('viewCardComment', function (newVal, oldVal) {
         if (newVal == false) {
           // $scope.listOfComments = [];

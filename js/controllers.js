@@ -1774,7 +1774,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.comment.text = "";
         $scope.showLikeShow = "";
         $scope.listOfLikes = [];
+        $scope.listOfComments = [];
         $scope.postScrollData.likePageNumber = 1;
+        $scope.postScrollData.busy = false;
+        $scope.postScrollData.stopCallingApi = false;
+        console.log($scope.postScrollData,'post scroll data');
+        $timeout(function(){
+          $scope.postScrollData.likePageNumber = 1;
+          $scope.listOfLikes = [];
+          $scope.listOfComments = [];
+          $scope.postScrollData.busy = false;
+          $scope.postScrollData.stopCallingApi = false;
+          $scope.postScrollData.viewList = false;
+          console.log($scope.postScrollData,'console wla post scroll data');
+        },100);
+
     };
     $scope.focus = function(id) {
         console.log(id, "focus called");
@@ -2178,6 +2192,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         busy: false,
         stopCallingApi: false,
     };
+    $scope.postScrollData = {};
+    $scope.postScrollData.likePageNumber = 1;
+    $scope.postScrollData.busy = false;
+    $scope.postScrollData.stopCallingApi = false;
+    $scope.postScrollData.viewList = false;
+
     $timeout(function() {
         if ((navigator.platform.indexOf("iPhone") != -1) ||
             (navigator.platform.indexOf("iPod") != -1) ||
@@ -2262,11 +2282,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.comment = {
             "text": ""
         }
+        $scope.postScrollData.type = post.type;
+        $scope.postScrollData._id = post._id;
         var callback = function(data) {
             $scope.uniqueArr = [];
             $scope.listOfComments = data.data;
             console.log($scope.listOfComments);
-
+            $scope.postScrollData.viewList = true;
             $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
         }
         if ($scope.previousId != post._id) {
@@ -2275,7 +2297,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.viewCardComment = true;
             // $scope.journey.journeyHighLight = activity._id;
             $scope.getCard = "view-whole-card";
-            LikesAndComments.getComments(post.type, post._id, callback);
+            LikesAndComments.getComments(post.type, post._id, $scope.postScrollData.likePageNumber, callback);
         } else {
             if ($scope.viewCardComment) {
                 $scope.viewCardComment = false;
@@ -2288,16 +2310,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 // $scope.focus('enterComment');
                 // $scope.journey.journeyHighLight = activity._id;
                 $scope.getCard = "view-whole-card";
-                LikesAndComments.getComments(post.type, post._id, callback);
+                LikesAndComments.getComments(post.type, post._id,$scope.postScrollData.likePageNumber, callback);
             }
         }
         $scope.previousId = post._id;
     };
-    $scope.postScrollData = {};
-    $scope.postScrollData.likePageNumber = 1;
-    $scope.postScrollData.busy = false;
-    $scope.postScrollData.stopCallingApi = false;
-    $scope.postScrollData.viewList = false;
+
     console.log($scope.scrollLike,'scroll like');
     $scope.getLikesData = function(post) {
       $scope.postScrollData.type = post.type;
@@ -2345,10 +2363,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.postScrollData.stopCallingApi = false;
         console.log($scope.postScrollData,'post scroll data');
         $timeout(function(){
+          $scope.postScrollData.busy = false;
+          $scope.postScrollData.stopCallingApi = false;
           $scope.postScrollData.likePageNumber = 1;
           $scope.postScrollData.viewList = false;
+          $scope.listOfLikes = [];
+          $scope.listOfComments = [];
           console.log($scope.postScrollData,'console wla post scroll data');
-        },100);
+        },500);
     };
 
     // COMMENT LIKE SECTION FUNCTIONS END
@@ -2443,7 +2465,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.customLink = function() {
         window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
     };
-
+    $scope.postScrollData = {};
+    $scope.postScrollData.likePageNumber = 1;
+    $scope.postScrollData.busy = false;
+    $scope.postScrollData.stopCallingApi = false;
+    $scope.postScrollData.viewList = false;
     // POPULAR JOURNEY INTEGRATION START
     $scope.scroll = {
         busy: false,
@@ -2527,8 +2553,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.comment = {
             "text": ""
         }
+        $scope.postScrollData.type = post.type;
+        $scope.postScrollData._id = post._id;
         var callback = function(data) {
             $scope.uniqueArr = [];
+            $scope.postScrollData.viewList = true;
             $scope.listOfComments = data.data;
             console.log($scope.listOfComments);
 
@@ -2540,7 +2569,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.viewCardComment = true;
             // $scope.journey.journeyHighLight = activity._id;
             $scope.getCard = "view-whole-card";
-            LikesAndComments.getComments(post.type, post._id, callback);
+            LikesAndComments.getComments(post.type, post._id,$scope.postScrollData.likePageNumber, callback);
         } else {
             if ($scope.viewCardComment) {
                 $scope.viewCardComment = false;
@@ -2553,16 +2582,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 // $scope.focus('enterComment');
                 // $scope.journey.journeyHighLight = activity._id;
                 $scope.getCard = "view-whole-card";
-                LikesAndComments.getComments(post.type, post._id, callback);
+                LikesAndComments.getComments(post.type, post._id,$scope.postScrollData.likePageNumber, callback);
             }
         }
         $scope.previousId = post._id;
     };
-    $scope.postScrollData = {};
-    $scope.postScrollData.likePageNumber = 1;
-    $scope.postScrollData.busy = false;
-    $scope.postScrollData.stopCallingApi = false;
-    $scope.postScrollData.viewList = false;
     $scope.getLikesData = function(post) {
       $scope.postScrollData.type = post.type;
       $scope.postScrollData._id = post._id;
@@ -2610,6 +2634,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $timeout(function(){
           $scope.postScrollData.likePageNumber = 1;
           $scope.postScrollData.viewList = false;
+          $scope.listOfLikes = [];
+          $scope.listOfComments = [];
+          $scope.postScrollData.busy = false;
+          $scope.postScrollData.stopCallingApi = false;
           console.log($scope.postScrollData,'console wla post scroll data');
         },100);
     };
@@ -3409,7 +3437,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }, 200);
         backgroundClick.scope = $scope;
     };
-
+    $scope.postScrollData = {};
+    $scope.postScrollData.likePageNumber = 1;
+    $scope.postScrollData.busy = false;
+    $scope.postScrollData.stopCallingApi = false;
+    $scope.postScrollData.viewList = false;
     $scope.getCommentsData = function(post) {
         console.log(post);
         $scope.previousId;
@@ -3419,9 +3451,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.comment = {
             "text": ""
         }
+        $scope.postScrollData.type = post.type;
+        $scope.postScrollData._id = post._id;
         var callback = function(data) {
             $scope.uniqueArr = [];
             $scope.listOfComments = data.data;
+            $scope.postScrollData.viewList = true;
             console.log($scope.listOfComments);
 
             $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
@@ -3432,7 +3467,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.viewCardComment = true;
             // $scope.journey.journeyHighLight = activity._id;
             $scope.getCard = "view-whole-card";
-            LikesAndComments.getComments(post.type, post._id, callback);
+            LikesAndComments.getComments(post.type, post._id,$scope.postScrollData.likePageNumber, callback);
         } else {
             if ($scope.viewCardComment) {
                 $scope.viewCardComment = false;
@@ -3445,16 +3480,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 // $scope.focus('enterComment');
                 // $scope.journey.journeyHighLight = activity._id;
                 $scope.getCard = "view-whole-card";
-                LikesAndComments.getComments(post.type, post._id, callback);
+                LikesAndComments.getComments(post.type, post._id,$scope.postScrollData.likePageNumber,callback);
             }
         }
         $scope.previousId = post._id;
     };
-    $scope.postScrollData = {};
-    $scope.postScrollData.likePageNumber = 1;
-    $scope.postScrollData.busy = false;
-    $scope.postScrollData.stopCallingApi = false;
-    $scope.postScrollData.viewList = false;
+
+
     $scope.getLikesData = function(post) {
       $scope.postScrollData.type = post.type;
       $scope.postScrollData._id = post._id;
@@ -4200,6 +4232,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         backgroundClick.scope = $scope;
     };
 
+    $scope.postScrollData = {};
+    $scope.postScrollData.likePageNumber = 1;
+    $scope.postScrollData.busy = false;
+    $scope.postScrollData.stopCallingApi = false;
+    $scope.postScrollData.viewList = false;
+
     $scope.getCommentsData = function(post) {
         console.log(post);
         $scope.previousId;
@@ -4209,6 +4247,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.comment = {
             "text": ""
         }
+        $scope.postScrollData.type = post.type;
+        $scope.postScrollData._id = post._id;
         var callback = function(data) {
             $scope.uniqueArr = [];
             $scope.listOfComments = data.data;
@@ -4222,7 +4262,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.viewCardComment = true;
             // $scope.journey.journeyHighLight = activity._id;
             $scope.getCard = "view-whole-card";
-            LikesAndComments.getComments(post.type, post._id, callback);
+            LikesAndComments.getComments(post.type, post._id,$scope.postScrollData.likePageNumber,callback);
         } else {
             if ($scope.viewCardComment) {
                 $scope.viewCardComment = false;
@@ -4235,16 +4275,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 // $scope.focus('enterComment');
                 // $scope.journey.journeyHighLight = activity._id;
                 $scope.getCard = "view-whole-card";
-                LikesAndComments.getComments(post.type, post._id, callback);
+                LikesAndComments.getComments(post.type, post._id, $scope.postScrollData.likePageNumber ,callback);
             }
         }
         $scope.previousId = post._id;
     };
-    $scope.postScrollData = {};
-    $scope.postScrollData.likePageNumber = 1;
-    $scope.postScrollData.busy = false;
-    $scope.postScrollData.stopCallingApi = false;
-    $scope.postScrollData.viewList = false;
+
     $scope.getLikesData = function(post) {
       $scope.postScrollData.type = post.type;
       $scope.postScrollData._id = post._id;
@@ -6462,6 +6498,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.comment = {
         "text": ""
     }
+    $scope.postScrollData = {};
+    $scope.postScrollData.busy = false;
+    $scope.postScrollData.stopCallingApi = false;
+    $scope.postScrollData.likePageNumber = 1;
+    $scope.postScrollData.viewList = false;
     $scope.showLikeCommentCard = true;
     $scope.openCommentSection = function(ongo) {
         if (!($.jStorage.get("isLoggedIn"))) {
@@ -6478,9 +6519,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log(ongo, 'ongo');
         $scope.post = ongo; //for using it in comment section
         $scope.previousId;
+        $scope.postScrollData.type = ongo.type;
+        $scope.postScrollData._id = ongo._id;
         var callback = function(data) {
             $scope.uniqueArr = [];
             $scope.listOfComments = data.data;
+            $scope.postScrollData.viewList = true;
             $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
         }
         if ($scope.previousId != $scope.post._id) {
@@ -6488,7 +6532,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.listOfComments = [];
             $scope.viewCardComment = true;
             $scope.getCard = "view-whole-card";
-            LikesAndComments.getComments(ongo.type, $scope.post._id, callback);
+            LikesAndComments.getComments(ongo.type, $scope.post._id, $scope.postScrollData.likePageNumber, callback);
         } else {
             if ($scope.viewCardComment) {
                 $scope.viewCardComment = false;
@@ -6500,7 +6544,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $scope.viewCardComment = true;
                 // $scope.focus('enterComment');
                 $scope.getCard = "view-whole-card";
-                LikesAndComments.getComments(ongo.type, $scope.post._id, callback);
+                LikesAndComments.getComments(ongo.type, $scope.post._id,$scope.postScrollData.likePageNumber,callback);
             }
         }
         $scope.previousId = $scope.post._id;
@@ -6521,11 +6565,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   };
     //   LikesAndComments.postComment(type, uniqueId, postId, comment, hashTag, additionalId, callback);
     // };
-    $scope.postScrollData = {};
-    $scope.postScrollData.busy = false;
-    $scope.postScrollData.stopCallingApi = false;
-    $scope.postScrollData.likePageNumber = 1;
-    $scope.postScrollData.viewList = false;
+
     $scope.openLikeSection = function(ongo) {
         if (!($.jStorage.get("isLoggedIn"))) {
             $state.go('login');
@@ -7109,6 +7149,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 _.each($scope.userData.travelConfig.kindOfHoliday, function(n1) {
                     if (n1 == 'Countryside') {
                         n1 = 'Countrysides'
+                    }else if (n1 == 'Safari') {
+                      n1 = 'Safaris'
                     }
                     var index = _.findIndex($scope.travelConfig.chooseHoliday, function(n2) {
                         return n1 == n2.storeCaption;
@@ -7267,6 +7309,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //   $scope.paginationLoader = TemplateService.paginationLoader;
     //   console.log($scope.paginationLoader, 'value');
     // }, 300);
+    $scope.postScrollData = {};
+    $scope.postScrollData.likePageNumber = 1;
+    $scope.postScrollData.busy = false;
+    $scope.postScrollData.stopCallingApi = false;
+    $scope.postScrollData.viewList = false;
     $scope.noActivity = false;
     $scope.openThankYouModal = function() {
         $uibModal.open({
@@ -7405,9 +7452,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.comment = {
             "text": ""
         }
+        $scope.postScrollData.type = activity.type;
+        $scope.postScrollData._id = activity._id;
         var callback = function(data) {
             $scope.uniqueArr = [];
             $scope.listOfComments = data.data;
+            $scope.postScrollData.viewList = true;
             console.log($scope.listOfComments);
 
             $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
@@ -7418,7 +7468,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.viewCardComment = true;
             // $scope.journey.journeyHighLight = activity._id;
             $scope.getCard = "view-whole-card";
-            LikesAndComments.getComments(activity.type, activity._id, callback);
+            LikesAndComments.getComments(activity.type, activity._id, $scope.postScrollData.likePageNumber, callback);
         } else {
             if ($scope.viewCardComment) {
                 $scope.viewCardComment = false;
@@ -7431,7 +7481,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 // $scope.focus('enterComment');
                 // $scope.journey.journeyHighLight = activity._id;
                 $scope.getCard = "view-whole-card";
-                LikesAndComments.getComments(activity.type, activity._id, callback);
+                LikesAndComments.getComments(activity.type, activity._id, $scope.postScrollData.likePageNumber,callback);
             }
         }
         $scope.previousId = activity._id;
@@ -7439,11 +7489,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.showLikeCommentCard = true;
         }, 1000)
     };
-    $scope.postScrollData = {};
-    $scope.postScrollData.likePageNumber = 1;
-    $scope.postScrollData.busy = false;
-    $scope.postScrollData.stopCallingApi = false;
-    $scope.postScrollData.viewList = false;
+
     $scope.getLikesData = function(activity) {
         // $scope.showLikeCommentCard = false;
         $scope.postScrollData.type = activity.type;
@@ -7493,6 +7539,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log($scope.postScrollData,'post scroll data');
         $timeout(function(){
           $scope.postScrollData.likePageNumber = 1;
+          $scope.listOfLikes = [];
+          $scope.listOfComments = [];
+          $scope.postScrollData.busy = false;
+          $scope.postScrollData.stopCallingApi = false;
           $scope.postScrollData.viewList = false;
           console.log($scope.postScrollData,'console wla post scroll data');
         },100);
@@ -9504,11 +9554,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-    $scope.closeBackDrop = function() {
-        $scope.viewCardComment = false;
-        $scope.viewCardLike = false;
-        $scope.getCard = "";
-    };
+    // $scope.closeBackDrop = function() {
+    //     $scope.viewCardComment = false;
+    //     $scope.viewCardLike = false;
+    //     $scope.getCard = "";
+    // };
+    $scope.postScrollData = {};
+    $scope.postScrollData.likePageNumber = 1;
+    $scope.postScrollData.viewList =  false;
+    $scope.postScrollData.busy = false;
+    $scope.postScrollData.stopCallingApi = false;
 
     //Integration starts here
     $scope.userData = $.jStorage.get("profile");
@@ -9700,11 +9755,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     //photo gallery backdrop end
 
-    $scope.closeBackdrop = function() {
-            $scope.getCard = "";
-            $scope.viewCardComment = false;
-            $scope.viewCardLike = false;
-        }
+
         // comment and like
 
     $scope.getCommentsData = function(itinerary) {
@@ -9713,9 +9764,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.comment = {
             "text": ""
         }
+        $scope.postScrollData.type = itinerary.type;
+        $scope.postScrollData._id = itinerary._id;
         var callback = function(data) {
             $scope.uniqueArr = [];
             $scope.listOfComments = data.data;
+            $scope.postScrollData.viewList = true;
             $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
         }
         if ($scope.previousId != itinerary._id) {
@@ -9724,7 +9778,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.viewCardComment = true;
             // $scope.journey.journeyHighLight = itinerary._id;
             $scope.getCard = "view-whole-card";
-            LikesAndComments.getComments(itinerary.type, itinerary._id, callback);
+            LikesAndComments.getComments(itinerary.type, itinerary._id,$scope.postScrollData.likePageNumber,callback);
         } else {
             if ($scope.viewCardComment) {
                 $scope.viewCardComment = false;
@@ -9737,15 +9791,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 // $scope.focus('enterComment');
                 // $scope.journey.journeyHighLight = itinerary._id;
                 $scope.getCard = "view-whole-card";
-                LikesAndComments.getComments(itinerary.type, itinerary._id, callback);
+                LikesAndComments.getComments(itinerary.type, itinerary._id,$scope.postScrollData.likePageNumber,callback);
             }
         }
         $scope.previousId = itinerary._id;
     };
 
     $scope.getLikesData = function(itinerary) {
+      $scope.postScrollData.type = itinerary.type;
+      $scope.postScrollData._id = itinerary._id;
         var callback = function(data) {
             $scope.listOfLikes = data.data;
+            $scope.postScrollData.viewList = true;
             console.log($scope.listOfLikes);
         };
         console.log($scope.post);
@@ -9755,7 +9812,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.viewCardLike = true;
             // $scope.journey.journeyHighLight = itinerary._id;
             $scope.showLikeShow = "show-like-side-sec";
-            LikesAndComments.getLikes(itinerary.type, itinerary._id, callback);
+            LikesAndComments.getLikes(itinerary.type, itinerary._id, $scope.postScrollData.likePageNumber,callback);
         } else {
             if ($scope.viewCardLike) {
                 $scope.viewCardLike = false;
@@ -9767,12 +9824,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 // $scope.focus('enterComment');
                 // $scope.journey.journeyHighLight = itinerary._id;
                 $scope.showLikeShow = "show-like-side-sec";
-                LikesAndComments.getLikes(itinerary.type, itinerary._id, callback);
+                LikesAndComments.getLikes(itinerary.type, itinerary._id,$scope.postScrollData.likePageNumber,callback);
             }
         }
         $scope.previousLikeId = itinerary._id;
     };
     // comment and like end
+
+    $scope.closeBackDrop = function() {
+        $scope.getCard = "";
+        $scope.viewCardComment = false;
+        $scope.viewCardLike = false;
+        $scope.listOfLikes = [];
+        $scope.listOfComments = [];
+        $scope.postScrollData.busy = false;
+        $scope.postScrollData.stopCallingApi = false;
+        $timeout(function(){
+          $scope.listOfLikes = [];
+          $scope.listOfComments = [];
+          $scope.postScrollData.busy = false;
+          $scope.postScrollData.stopCallingApi = false;
+          $scope.postScrollData.likePageNumber = 1;
+          $scope.postScrollData.viewList = false;
+        })
+      }
 
     $scope.getItineraryType = [{
         img: "img/itinerary/family.png",
@@ -9849,11 +9924,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("User-DetailItinerary");
     $scope.navigation = NavigationService.getnav();
 
-    $scope.closeBackDrop = function() {
-        $scope.viewCardComment = false;
-        $scope.viewCardLike = false;
-        $scope.getCard = "";
-    };
+    $scope.postScrollData = {};
+    $scope.postScrollData.likePageNumber = 1;
+    $scope.postScrollData.busy = false;
+    $scope.postScrollData.stopCallingApi = false;
+    $scope.postScrollData.viewList = false;
 
     //Integration starts here
 
@@ -10021,11 +10096,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
         //Itinerary Options List Show End
 
-    $scope.closeBackdrop = function() {
-        $scope.getCard = "";
-        $scope.viewCardComment = false;
-        $scope.viewCardLike = false;
-    }
 
     // comment and like side card
 
@@ -10036,9 +10106,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.comment = {
             "text": ""
         }
+        $scope.postScrollData.type = activity.type;
+        $scope.postScrollData._id = activity._id;
         var callback = function(data) {
             $scope.uniqueArr = [];
             $scope.listOfComments = data.data;
+            $scope.postScrollData.viewList = true;
             $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
         }
         if ($scope.previousId != activity._id) {
@@ -10047,7 +10120,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.viewCardComment = true;
             // $scope.journey.journeyHighLight = activity._id;
             $scope.getCard = "view-whole-card";
-            LikesAndComments.getComments(activity.type, activity._id, callback);
+            LikesAndComments.getComments(activity.type, activity._id,$scope.postScrollData.likePageNumber, callback);
         } else {
             if ($scope.viewCardComment) {
                 $scope.viewCardComment = false;
@@ -10060,15 +10133,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 // $scope.focus('enterComment');
                 // $scope.journey.journeyHighLight = activity._id;
                 $scope.getCard = "view-whole-card";
-                LikesAndComments.getComments(activity.type, activity._id, callback);
+                LikesAndComments.getComments(activity.type, activity._id,$scope.postScrollData.likePageNumber, callback);
             }
         }
         $scope.previousId = activity._id;
     };
 
     $scope.getLikesData = function(activity) {
+        $scope.postScrollData.type = activity.type;
+        $scope.postScrollData._id = activity._id;
         var callback = function(data) {
             $scope.listOfLikes = data.data;
+            $scope.postScrollData.viewList = true;
             console.log($scope.listOfLikes);
         };
         console.log($scope.post);
@@ -10078,7 +10154,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.viewCardLike = true;
             // $scope.journey.journeyHighLight = activity._id;
             $scope.showLikeShow = "show-like-side-sec";
-            LikesAndComments.getLikes(activity.type, activity._id, callback);
+            LikesAndComments.getLikes(activity.type, activity._id,$scope.postScrollData.likePageNumber, callback);
         } else {
             if ($scope.viewCardLike) {
                 $scope.viewCardLike = false;
@@ -10090,13 +10166,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 // $scope.focus('enterComment');
                 // $scope.journey.journeyHighLight = activity._id;
                 $scope.showLikeShow = "show-like-side-sec";
-                LikesAndComments.getLikes(activity.type, activity._id, callback);
+                LikesAndComments.getLikes(activity.type, activity._id,$scope.postScrollData.likePageNumber, callback);
             }
         }
         $scope.previousLikeId = activity._id;
     };
     // comment and like side card end
-
+    $scope.closeBackDrop = function() {
+      console.log('back');
+        $scope.getCard = "";
+        $scope.viewCardComment = false;
+        $scope.viewCardLike = false;
+        $scope.listOfLikes = [];
+        $scope.listOfComments = [];
+        $scope.postScrollData.busy = false;
+        $scope.postScrollData.stopCallingApi = false;
+        $scope.postScrollData.viewList = false;
+        $timeout(function(){
+          $scope.listOfLikes = [];
+          $scope.listOfComments = [];
+          $scope.postScrollData.busy = false;
+          $scope.postScrollData.stopCallingApi = false;
+          $scope.postScrollData.likePageNumber = 1;
+          $scope.postScrollData.viewList = false;
+        });
+    }
 
     //Integration starts here
 
@@ -13278,6 +13372,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.localView = {};
     $scope.localView.view = true;
+    $scope.postScrollData = {};
+    $scope.postScrollData.likePageNumber = 1;
+    $scope.postScrollData.busy = false;
+    $scope.postScrollData.stopCallingApi = false;
+    $scope.postScrollData.viewList = false;
     $scope.userData = $.jStorage.get("profile");
     LikesAndComments.getOnePost($stateParams.postId, function(data) {
         if (data.value) {
@@ -13302,10 +13401,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log(ongo, 'ongo');
         $scope.post = ongo; //for using it in comment section
         $scope.previousId;
+        $scope.postScrollData.type = ongo.type;
+        $scope.postScrollData._id = ongo._id;
         var callback = function(data) {
             console.log(data);
             $scope.uniqueArr = [];
             $scope.listOfComments = data.data;
+            $scope.postScrollData.viewList = true;
             $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
         }
         if ($scope.previousId != $scope.post._id) {
@@ -13313,7 +13415,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.listOfComments = [];
             $scope.viewCardComment = true;
             $scope.getCard = "view-whole-card";
-            LikesAndComments.getComments(ongo.type, $scope.post._id, callback);
+            LikesAndComments.getComments(ongo.type, $scope.post._id,$scope.postScrollData.likePageNumber, callback);
         } else {
             if ($scope.viewCardComment) {
                 $scope.viewCardComment = false;
@@ -13325,7 +13427,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $scope.viewCardComment = true;
                 // $scope.focus('enterComment');
                 $scope.getCard = "view-whole-card";
-                LikesAndComments.getComments(ongo.type, $scope.post._id, callback);
+                LikesAndComments.getComments(ongo.type, $scope.post._id,$scope.postScrollData.likePageNumber,callback);
             }
         }
         $scope.previousId = $scope.post._id;
@@ -13340,18 +13442,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.getCard = "";
         $scope.comment.text = "";
         $scope.showLikeShow = "";
+        $scope.listOfLikes = [];
+        $scope.listOfComments = [];
         $scope.postScrollData.busy = false;
         $scope.postScrollData.stopCallingApi = false;
         $timeout(function(){
+        $scope.listOfLikes = [];
+        $scope.listOfComments = [];
+        $scope.postScrollData.busy = false;
+        $scope.postScrollData.stopCallingApi = false;
         $scope.postScrollData.likePageNumber = 1;
-        $scope.postScrollData.viewList = true;
+        $scope.postScrollData.viewList = false;
         },100);
     };
-    $scope.postScrollData = {};
-    $scope.postScrollData.likePageNumber = 1;
-    $scope.postScrollData.busy = false;
-    $scope.postScrollData.stopCallingApi = false;
-    $scope.postScrollData.viewList = false;
+
     $scope.openLikeSection = function(ongo) {
       $scope.postScrollData.type = ongo.type;
       $scope.postScrollData._id = ongo._id;
@@ -13397,6 +13501,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Search Results"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.userData = $.jStorage.get("profile");
     $scope.pagenumber = 1;
     $scope.limit = 20;
     $scope.viewSearchedUser = [];
@@ -13775,7 +13880,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }, 200);
         backgroundClick.scope = $scope;
     };
-
+    $scope.postScrollData = {};
+    $scope.postScrollData.likePageNumber = 1;
+    $scope.postScrollData.busy = false;
+    $scope.postScrollData.stopCallingApi = false;
+    $scope.postScrollData.viewList = false;
     $scope.getCommentsData = function(post) {
         console.log(post);
         $scope.previousId;
@@ -13785,9 +13894,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.comment = {
             "text": ""
         }
+        $scope.postScrollData.type = post.type;
+        $scope.postScrollData._id = post._id;
         var callback = function(data) {
             $scope.uniqueArr = [];
             $scope.listOfComments = data.data;
+            $scope.postScrollData.viewList = true;
             console.log($scope.listOfComments);
 
             $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
@@ -13798,7 +13910,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.viewCardComment = true;
             // $scope.journey.journeyHighLight = activity._id;
             $scope.getCard = "view-whole-card";
-            LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+            // LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+            LikesAndComments.getComments(post.type, post._id,$scope.postScrollData.likePageNumber, callback);
         } else {
             if ($scope.viewCardComment) {
                 $scope.viewCardComment = false;
@@ -13811,16 +13924,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 // $scope.focus('enterComment');
                 // $scope.journey.journeyHighLight = activity._id;
                 $scope.getCard = "view-whole-card";
-                LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+                // LikesAndComments.getComments(post.likeUnlikeFlag, post._id, callback);
+                LikesAndComments.getComments(post.type, post._id,$scope.postScrollData.likePageNumber, callback);
             }
         }
         $scope.previousId = post._id;
     };
-    $scope.postScrollData = {};
-    $scope.postScrollData.likePageNumber = 1;
-    $scope.postScrollData.busy = false;
-    $scope.postScrollData.stopCallingApi = false;
-    $scope.postScrollData.viewList = false;
+
     $scope.getLikesData = function(post) {
       $scope.postScrollData.type = post.type;
       $scope.postScrollData._id = post._id;
@@ -13866,6 +13976,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log($scope.postScrollData,'post scroll data');
         $timeout(function(){
           $scope.postScrollData.likePageNumber = 1;
+          $scope.listOfLikes = [];
+          $scope.listOfComments = [];
+          $scope.postScrollData.busy = false;
+          $scope.postScrollData.stopCallingApi = false;
           $scope.postScrollData.viewList = false;
           console.log($scope.postScrollData,'console wla post scroll data');
         },100);
@@ -14250,7 +14364,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.getLikes = function(activity) {
         console.log(activity);
         $scope.listOfLikes = [];
-        LikesAndComments.getLikes(activity.type, activity._id, function(data) {
+        LikesAndComments.getLikes(activity.type, activity._id, 1, function(data) {
             $scope.listOfLikes = data.data;
             console.log($scope.listOfLikes);
         });
@@ -14259,6 +14373,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //     busy: false,
     //     stopCallingApi: false
     // }
+    if($scope.listOfLikes && $scope.listOfLikes.like && $scope.listOfLikes.like.length > 0){
     $scope.getMoreLikes = function(){
       console.log('scroll huwa kya');
       $scope.postScrollData.busy = true;
@@ -14290,6 +14405,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             LikesAndComments.getLikes($scope.postScrollData.type, $scope.postScrollData._id, $scope.postScrollData.likePageNumber, callback);
       }
     };
+  }
 
     $scope.followFollowing = function(user) {
         console.log("from ongojourney");
@@ -14316,6 +14432,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.indexDelete = indexDelete;
         }
     };
+    // get more comments
+    if($scope.listOfComments && $scope.listOfComments.comment && $scope.listOfComments.comment.length > 0){
+    $scope.getCommentsMore = function(){
+      console.log($scope.postScrollData,'first scroll ka value kya hai');
+      $scope.postScrollData.busy = true;
+      var callbackComment = function(data){
+        console.log(data,'data', $scope.postScrollData, 'post scroll data');
+        $scope.postScrollData.viewList = false;
+        $scope.postScrollData.busy = false;
+        if(data.data.comment.length === 0){
+          $scope.postScrollData.stopCallingApi = true;
+          $scope.postScrollData.viewList = true;
+        }else {
+          _.each(data.data.comment, function(commentList){
+            $scope.listOfComments.comment.push(commentList);
+          });
+          $scope.postScrollData.viewList = true;
+        }
+      }
+      if($scope.postScrollData.stopCallingApi == false){
+        $scope.postScrollData.likePageNumber++;
+        console.log($scope.postScrollData,'post scroll data');
+        LikesAndComments.getComments($scope.postScrollData.type, $scope.postScrollData._id, $scope.postScrollData.likePageNumber, callbackComment);
+      }
+    }
+  }
+    // get more comments end
     // edit comment
     $scope.editComment = function(commentId, commentText, commentType) {
             console.log($scope.listOfComments.comment, 'comment ka arrray');

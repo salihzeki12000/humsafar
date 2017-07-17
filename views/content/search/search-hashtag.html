@@ -22,10 +22,10 @@
                 </div>
               </div>
               <div class="user-detail width74 inline-block">
-                <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="post.type=='editor'">{{post.userName}}</h4>
-                <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="post.type=='travel-life' || post.type=='local-life'">{{post.postCreator.name}}</h4>
-                <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="post.type=='quick-itinerary'">{{post.creator.name}}</h4>
-                <h4 class="font-bold color-dark-blue m-clear mb5" ng-if="post.type=='on-the-go-journey' || post.type=='ended-journey' ||  post.type=='detail-itinerary'">{{post.user.name}}</h4>
+                <h4 class="font-bold color-dark-blue m-clear" ng-if="post.type=='editor'">{{post.userName}}</h4>
+                <h4 class="font-bold color-dark-blue m-clear" ng-if="post.type=='travel-life' || post.type=='local-life'">{{post.postCreator.name}}</h4>
+                <h4 class="font-bold color-dark-blue m-clear" ng-if="post.type=='quick-itinerary'">{{post.creator.name}}</h4>
+                <h4 class="font-bold color-dark-blue m-clear" ng-if="post.type=='on-the-go-journey' || post.type=='ended-journey' ||  post.type=='detail-itinerary'">{{post.user.name}}</h4>
                 <div class="clearfix user-more-detail">
                   <div class="pull-left">
                     <p class="m-clear"><span>{{post.UTCModified|formatDate:'date'}}</span> | <span>{{post.UTCModified|formatDate:'time'}}</span></p>
@@ -59,7 +59,7 @@
               <p class="your-post">{{post.thoughts}}</p>
             </div>
             <div class="post-your-status" ng-if="post.type=='travel-life' || post.type=='local-life'">
-              <p class="your-post" ng-bind-html="post | postString"></p>
+              <p class="your-post" ng-class="{'flag-view': post.countryVisited, '': !post.countryVisited}" ng-bind-html="post | postString"></p>
             </div>
             <!-- post status end -->
             <!-- post-main-section -->
@@ -73,7 +73,7 @@
                 </div>
                 <!-- flag country end -->
                 <!-- tag on journey -->
-                <div class="tag-ongo-journey" ng-if="((post.type =='travel-life') || (post.type =='on-the-go-journey'))">
+                <!-- <div class="tag-ongo-journey" ng-if="((post.type =='travel-life') || (post.type =='on-the-go-journey'))">
                   <span class="inline-block color-white">On The Go</span>
                 </div>
                 <div class="tag-ongo-journey tag-local-hashtag-journey " ng-if="post.type =='local-life'">
@@ -81,7 +81,7 @@
                 </div>
                 <div class="tag-ongo-journey" ng-if="((post.type =='editor-blog'))">
                   <span class="inline-block color-blue">Cagtegory</span>
-                </div>
+                </div> -->
                 <!-- tag on journey end-->
                 <!-- video post -->
                 <div class="video-post relate" ng-if="post.video">
@@ -113,7 +113,7 @@
               <!-- img post end -->
               <!-- img post slider -->
               <div class="imgpost-relatedslider" ng-if="post.photos.length>1 && post.type!='quick-itinerary' && post.type!='detail-itinerary'">
-                <flex-slider class="carousel" flex-slide="photo in post.photos track by $index" item-width="80" animation="slide" item-margin="5"
+                <flex-slider class="carousel" flex-slide="photo in post.photos track by $index" item-width="65" animation="slide" item-margin="5"
                   direction-nav="true" control-nav="false" mousewheel="false">
                   <li>
                     <div class="related-postimgholder" ng-click="changeImage($index,post)">
@@ -121,7 +121,7 @@
                     </div>
                   </li>
                   </flex-slider>
-                  <div class="post-rating">
+                  <div class="post-rating" hidden>
                     <span class="avenir-heavy color-blue">Rating : <i class="fa fa-star color-pink"></i>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
@@ -325,12 +325,12 @@
                         <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white" ng-if="!((post.class !='travel-taught') || (post.class !='local-life'))">
                         <span ng-if="!((post.class !='travel-taught') || (post.class !='local-life'))">354 Reviews (4.5/5)</span></span>
                   </div>
-                  <div class="pull-right">
+                  <!-- <div class="pull-right">
                     <div class="post-travel-icon">
                       <img src="img/travel.png" alt="" class="post-travel-icon" ng-if="post.type!='local-life'">
                       <img src="img/cycle-cyan.png" alt="" height="20" class="post-local-icon" ng-if="post.type=='local-life'">
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
