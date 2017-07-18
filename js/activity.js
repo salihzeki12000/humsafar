@@ -6,6 +6,7 @@ var activity = angular.module('activity', [])
       getAllActivities: function (pageNum, successCallback, errorCallback, userData) {
         TravelibroService.http({
           url: adminURL + "/activityFeed/getDataWeb",
+          // url: adminURL + "/activityfeed/getFeedWeb",
           method: "POST",
           data: {
             "pagenumber": pageNum

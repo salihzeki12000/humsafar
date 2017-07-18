@@ -188,6 +188,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
       $scope.indexEditPhotoCap = -1;
       $scope.indexEditVideoCap = -1;
       $scope.index = 0;
+      $scope.listOfComments = {};
+      $scope.listOfComments.scrollBusy = false;
+      $scope.listOfComments.stopCallingApi = false;
       $scope.changeImage = function (index, flag) {
         $scope.index = index;
         $scope.ongo.onDisplay = flag;
@@ -1088,6 +1091,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
       $scope.allPhotos.newArray = [];
       //Photo comment popup
       $scope.getPhotosCommentData = function (photoId, index, length, array) {
+        console.log('abhi log huwa kya');
         if (!($.jStorage.get("isLoggedIn"))) {
           $state.go('login');
         } else {

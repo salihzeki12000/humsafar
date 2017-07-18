@@ -2262,7 +2262,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.getLikes = function(post) {
         console.log(post);
-        LikesAndComments.getLikes(post.type, post._id, function(data) {
+        LikesAndComments.getLikes(post.type, post._id,1, function(data) {
             $scope.listOfLikes = data.data;
             console.log($scope.listOfLikes);
         });
@@ -2533,7 +2533,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.getLikes = function(post) {
         console.log(post);
-        LikesAndComments.getLikes(post.type, post._id, function(data) {
+        LikesAndComments.getLikes(post.type, post._id,1, function(data) {
             $scope.listOfLikes = data.data;
             console.log($scope.listOfLikes);
         });
@@ -3427,7 +3427,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.getLikes = function(post) {
         console.log(post);
-        LikesAndComments.getLikes(post.type, post._id, function(data) {
+        LikesAndComments.getLikes(post.type, post._id,1, function(data) {
             $scope.listOfLikes = data.data;
             console.log($scope.listOfLikes);
         });
@@ -4200,7 +4200,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.getLikes = function(post) {
         console.log(post);
-        LikesAndComments.getLikes(post.type, post._id, function(data) {
+        LikesAndComments.getLikes(post.type, post._id,1, function(data) {
             $scope.listOfLikes = data.data;
             console.log($scope.listOfLikes);
         });
@@ -7431,7 +7431,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.getLikes = function(activity) {
         console.log(activity);
-        LikesAndComments.getLikes(activity.type, activity._id, function(data) {
+        LikesAndComments.getLikes(activity.type, activity._id,1, function(data) {
             $scope.listOfLikes = data.data;
             console.log($scope.listOfLikes);
         });
@@ -9711,7 +9711,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //getLikes count for dropdown
     $scope.getLikes = function(itinerary) {
-        LikesAndComments.getLikes(itinerary.type, itinerary._id, function(data) {
+        LikesAndComments.getLikes(itinerary.type, itinerary._id,1, function(data) {
             $scope.listOfLikes = data.data;
             console.log($scope.listOfLikes);
         });
@@ -13871,7 +13871,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.getLikes = function(post) {
         console.log(post);
-        LikesAndComments.getLikes(post.type, post._id, function(data) {
+        LikesAndComments.getLikes(post.type, post._id,1, function(data) {
             $scope.listOfLikes = data.data;
             console.log($scope.listOfLikes);
         });
@@ -14168,6 +14168,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.getMoreComments = function(photoId) {
+      console.log($scope.listOfComments,'list comments');
         if ($scope.listOfComments.scrollBusy) {
             return;
         } else {
@@ -14233,7 +14234,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         },
         // photo likes
         $scope.getLikes = function(id) {
-            LikesAndComments.getLikes('photo', id, function(data) {
+            LikesAndComments.getLikes('photo', id, 1, function(data) {
                 $scope.listOfLikes = data.data;
                 console.log($scope.listOfLikes);
             });

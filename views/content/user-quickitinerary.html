@@ -488,8 +488,10 @@
     </div>
   </div>
   <!-- SIDE COMMENT CARD -->
-  <comment-like-section post="post" user-data='userData' post-scroll-data="postScrollData" view-card-comment="viewCardComment" view-card-like='viewCardLike'
-    list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+  <div class="" ng-if="postScrollData.viewList">
+    <comment-like-section post="post" user-data='userData' post-scroll-data="postScrollData" view-card-comment="viewCardComment" view-card-like='viewCardLike'
+      list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+  </div>
   <!-- SIDE COMMENT CARD END -->
   <div class="photo-open-backdrop {{dispBackDrop}}" ng-click="viewGallery();"></div>
   <div class="backdrop-close" ng-class="{'view-backdrop':viewCardComment==true || viewCardLike==true,'':viewCardComment==false || viewCardLike==false}"
