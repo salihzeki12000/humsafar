@@ -9570,14 +9570,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //Integration starts here
     $scope.userData = $.jStorage.get("profile");
-    get quick - itinerary details starts
+    // get quick-itinerary details starts
     var slug = $stateParams.id;
     Itinerary.getOneItinerary(slug, function (data) {
         $scope.itinerary = data.data;
         console.log($scope.itinerary);
         TemplateService.title = $scope.itinerary.name + " - Travel Life | TraveLibro";
     });
-    get quick - itinerary details ends
+    // get quick-itinerary details ends
 
     // var slug = $stateParams.id;
     // Itinerary.getViewItinerary(slug, function(data) {
