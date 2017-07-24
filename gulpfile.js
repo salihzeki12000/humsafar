@@ -48,7 +48,7 @@ var jsArray = [
     './bower_components/angular-rangeslider/angular.rangeSlider.js',
     './bower_components/angular-file-upload/dist/angular-file-upload.js',
     './bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
-    './bower_components\intl-tel-input\build\js\intlTelInput.js',
+    './bower_components/intl-tel-input/build/js/intlTelInput.js',
     './bower_components/intl-tel-input/lib/libphonenumber/build/utils.js',
     './bower_components/international-phone-number/releases/international-phone-number.js',
     './node_modules/ng-intl-tel-input/dist/ng-intl-tel-input.js',
