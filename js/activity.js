@@ -5,7 +5,8 @@ var activity = angular.module('activity', [])
     return {
       getAllActivities: function (pageNum, successCallback, errorCallback, userData) {
         TravelibroService.http({
-          url: adminURL + "/activityFeed/getDataWeb",
+          // url: adminURL + "/activityFeed/getDataWeb",
+          url: adminURL + "/activityfeed/getFeedWeb",
           method: "POST",
           data: {
             "pagenumber": pageNum
@@ -103,7 +104,7 @@ var activity = angular.module('activity', [])
                 break;
             }
 
-            if (activity.type == "travel-life" || activity.type == "on-the-go-journey" || activity.type == "ended-journey" || activity.type == "quick-itinerary" || activity.type == "detail-itinerary" || activity.type == "local-life") {
+            if (activity.type == "travel-life" || activity.type == "on-the-go-journey" || activity.type == "ended-journey" || activity.type == "quick-itinerary" || activity.type == "detail-itinerary" || activity.type == "local-life" || activity.type == "album" || activity.type == "agentStatus") {
               activity.activityPerformed = true;
               activity.isPopularType = false;
               activity.isToDoActivity = false;
@@ -115,6 +116,11 @@ var activity = angular.module('activity', [])
               activity.activityPerformed = false;
               activity.isPopularType = false;
               activity.isToDoActivity = true;
+            }else if(activity.type == "toursPackage") {
+              activity.toursPackageView = true;
+              activity.isPopularType = false;
+              activity.isToDoActivity = false;
+              activity.activityPerformed = false;
             }
             var pronoun = "";
             if (activity.type == "on-the-go-journey") {

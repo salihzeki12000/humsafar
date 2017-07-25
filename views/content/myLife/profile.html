@@ -12,7 +12,7 @@
             <img ng-src="{{userData.profilePicture|uploadpath:140:150:'cover'}}" alt="{{userData.name}}" class="img-responsive">
           </div>
         </a>
-        <img src="{{userData.homeCountry.flag|uploadpath:40}}" alt="" width="40" class="flag img-responsive">
+        <img src="{{userData.homeCountry.flag|uploadpath:40}}" alt="" width="40" class="flag img-responsive" ng-if="userData.homeCountry && userData.homeCountry.flag">
         <img src="img/wave-profile.png" alt="" width="40" class="wave img-responsive">
       </div>
       <div class="profile-more-detail text-center">

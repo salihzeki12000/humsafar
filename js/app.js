@@ -1240,7 +1240,7 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
                                         pointsForLine(ith, 100, true, flag);
                                         flag = false;
                                     }
-                                } else if (!_.isEmpty(line[1])) { //clearing 1st polyLine
+                                } else if (!_.isEmpty(line[1])) {
                                     line[1].setMap(null);
                                     line[1] = {};
                                 }

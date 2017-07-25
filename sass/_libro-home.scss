@@ -1315,6 +1315,9 @@ a.color-white {
       outline: none;
       outline-offset: 0;
     }
+    .btn.disabled:hover, .btn[disabled]:hover, fieldset[disabled] .btn:hover {
+      color: #fff;
+    }
   }
 }
 
