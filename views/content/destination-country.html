@@ -67,7 +67,7 @@
       <div class="slide-cont-dest" ng-class="{'open-cont': openCont==true, '':openCont==false}">
         <div class="blur-bg"></div>
         <div class="hght-destination-scroll color-white">
-          <p class="text-justify">{{countryDestData.description}}</p>
+          <p class="text-justify" ng-bind-html="countryDestData.description"></p>
           <div class="right-label text-right">
             <a class="color-white pad-40" ng-click="openCont=!openCont;">Close</a>
           </div>

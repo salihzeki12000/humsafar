@@ -326,6 +326,13 @@ var navigationservice = angular.module('navigationservice', [])
                 console.log(data);
             });
         },
+        saveSuggest: function (formData, callback) {
+           TravelibroService.post(adminURL + "/suggest/saveDataWeb", formData).success(function (data) {
+               callback(data);
+           }).error(function (data) {
+               console.log(data);
+           });
+       },
         getSendEmail: function (emailid, callback, errCallback) {
             TravelibroService.http({
                 url: adminURL + "/user/forgotPassword",
@@ -589,6 +596,16 @@ var navigationservice = angular.module('navigationservice', [])
         },
         getImageFromServer: function (name, callback) {
             $http.get(adminURL + "/upload/readFile?file=" + name).success(callback);
+        },
+        getPopularAgent: function(formData, callback){
+          TravelibroService.post(adminURL + "/user/getPopularAgentWeb", formData,'paginationLoad').success(callback).error(function(data){
+            console.log(data);
+          })
+        },
+        getAlbum: function (formData, callback) {
+            TravelibroService.post(adminURL + "/album/getOneAlbum", formData).success(callback).error(function (data) {
+                console.log(data);
+            });
         }
     };
     return returnVal;
