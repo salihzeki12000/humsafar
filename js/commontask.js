@@ -121,7 +121,7 @@ var commontask = angular.module('commontask', [])
           method: "POST",
           data: obj
         }).success(function (data) {
-          returnVal.getComments(type, getCommentId, callback);
+          returnVal.getComments(type, getCommentId, 1 , callback);
         }).error(function (data) {
           console.log(data);
         });
