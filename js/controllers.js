@@ -10867,6 +10867,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             NavigationService.uploadFile(formData, function (response) {
                 if (response.value) {
                     $scope.userDetails.profilePicture = response.data[0];
+                    var myUser = $.jStorage.get("profile");
+                    myUser.profilePicture = response.data[0];
+                    $.jStorage.set("profile", myUser);
                 } else {
                     toastr.warning('Error Uploading Image!');
                 }
@@ -12409,8 +12412,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // PRATIK CONTROLLER
     //isMine or someoneOthers profile
-    console.log($.jStorage.get("isLoggedIn"));
-    console.log($stateParams.urlSlug);
     if ($.jStorage.get("isLoggedIn") && ($.jStorage.get("profile").urlSlug == $stateParams.urlSlug)) {
         //its your own profile so no need to call profile again
         $scope.userData = $.jStorage.get("profile");
