@@ -20,10 +20,10 @@
         <div class="lead-title">
           <ul class="list-inline list-unstyled">
             <li class="pointer lead-tabselect" ng-click="viewLeadTab(0);" ng-class="{'active': showLead == 0}">
-              <h4 class="avenir-roman color-white">New Leads <span class="avenir-heavy font-sz24">{{avgRating.unActionedCount}}</span></h4>
+              <h4 class="avenir-roman color-blue">New Leads <span class="avenir-heavy font-sz24">{{avgRating.unActionedCount}}</span></h4>
             </li>
             <li class="pointer lead-tabselect" ng-click="viewLeadTab(1);" ng-class="{'active': showLead == 1}">
-              <h4 class="avenir-roman color-white">Seen <span class="avenir-heavy font-sz24">{{avgRating.actionedCount}}</span></h4>
+              <h4 class="avenir-roman color-blue">Seen <span class="avenir-heavy font-sz24">{{avgRating.actionedCount}}</span></h4>
             </li>
           </ul>
         </div>
@@ -33,7 +33,7 @@
         <div class="agt-home-leadmonitortab leadmonitor-unread" ng-show="showLead==0">
           <!-- NEW LEAD EMPTY -->
           <div class="empty-newlead text-center" ng-if="unactionLeads.length == 0">
-            <h4 class="color-white">NO NEW LEADS</h4>
+            <h4 class="color-blue">NO NEW LEADS</h4>
           </div>
           <!-- NEW LEAD EMPTY END -->
           <!-- NEW LEAD ACCORDION -->

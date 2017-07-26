@@ -1,4 +1,4 @@
-<div class="agt-home-testimonialreviews"  infinite-scroll="getMoreAgentData();" infinite-scroll-disabled="scroll.busy">
+<div class="agt-home-testimonialreviews bg-white"  infinite-scroll="getMoreAgentData();" infinite-scroll-disabled="scroll.busy">
 
   <div class="">
     <!-- WRITE TESTIMONIAL -->
@@ -6,7 +6,7 @@
       <div class="container">
         <div class="color-white clearfix">
           <div class="pull-left avenir-heavy" ng-if="reviewData.length != 0">
-            <h2>{{avgRating.averageRating}} / 10 <span class="font-sz18">({{avgRating.totalReviews}} {{avgRating.totalReviews | singularPlural:'Reviews'}})</span></h2>
+            <h2 class="color-blue">{{avgRating.averageRating}} / 10 <span class="font-sz18">({{avgRating.totalReviews}} {{avgRating.totalReviews | singularPlural:'Reviews'}})</span></h2>
           </div>
           <!-- ng-if="!template.isMine" -->
           <div class="pull-right" ng-if="!template.isMine">
