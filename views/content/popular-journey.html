@@ -135,10 +135,18 @@
                     <!-- post travelled journey -->
                     <!-- ng-if="post.travelledJourney" -->
                     <div class="travelled-journey">
-                      <div class="travelled-imgholder">
+                      <!-- <div class="travelled-imgholder">
                         <img ng-if="post.coverPhoto" ng-src="{{post.coverPhoto|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center">
                         <img ng-if="!post.coverPhoto" ng-src="{{post.startLocationPic|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center">
+                      </div> -->
+                      <!-- cover photo -->
+                      <div class="travelled-imgholder" ng-if="post.coverPhoto" style="background: url('{{post.coverPhoto|uploadpath:722:750:'cover'}}') no-repeat 50% 50%; background-size: cover;">
                       </div>
+                      <!-- cover photo end -->
+                      <!-- start locationpic -->
+                      <div class="travelled-imgholder" ng-if="!post.coverPhoto" style="background: url('{{post.startLocationPic|uploadpath:722:750:'cover'}}') no-repeat 50% 50%; background-size: cover;">
+                      </div>
+                      <!-- start locationpic end-->
                       <div class="journey-overview">
                         <ul>
                           <li>
