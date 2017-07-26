@@ -444,7 +444,7 @@
                                                 <div class="text-center mt10 mb10">
                                                     <!-- <button class="btn btn-cyan btn-more">Current</button> -->
                                                     <span class="color-cyan">Current</span>
-                                                    <p class="planexpiry-date">Expires On:{{agentData.expiry}}</p>
+                                                    <p class="planexpiry-date">Expires On:{{expiry}}</p>
                                                     <!--ui-sref="agent-upgrade"-->
                                                 </div>
                                             </div>
@@ -604,11 +604,12 @@
                             <!-- purchase history end -->
                             <!-- report a problem -->
                             <div class="problem-detail" ng-if="showAgtSetting == 8">
-                                <form name="reportData" ng-hide="showme" ng-submit="saveReport(settingReport)">
+                                <form name="reportData" ng-submit="saveReport(settingReport)">
                                     <label for="problem">Report A Problem</label>
-                                    <textarea name="" id="problem" class="form-control" placeholder="Comment" ng-model="settingReport"></textarea>
+                                    <textarea name="" id="problem" class="form-control" placeholder="Comment" ng-model="settingReport.status"></textarea>
                                     <div class="clearfix mt20">
                                         <div class="pull-right">
+                                            <span class="color-blue font-bold" ng-show="showme">Reported Successfully.</span>
                                             <button class="btn btn-pink btn-more" type="submit">Submit</button>
                                         </div>
                                     </div>

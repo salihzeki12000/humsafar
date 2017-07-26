@@ -11227,6 +11227,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.newPasswordError = false;
     $scope.saveSuccess = false;
     $scope.emailExist = false;
+    $scope.showme = false;
+    $scope.settingReport = {
+        status: ""
+    };
+    $scope.expiry = moment("11-26-2017").diff(moment(), "days");
     // INTEGRATION START
     // SETTING DATA GET
     function setAgent() {
@@ -11487,12 +11492,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.saveReport = function (settingReport) {
         NavigationService.ReportProblems({
             // userId: $scope.userData._id,
-            problem: settingReport
+            problem: settingReport.status
         }, function (data) {
-            if (data.value == true) {
+            if (data.value) {
                 $scope.showme = true;
+                $scope.settingReport = {};
             } else {
                 $scope.showme = false;
+                $scope.settingReport = {};
             }
         })
     };
@@ -12536,30 +12543,50 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.saveTour = function (tour) {
-            // SAVE TOUR TYPE IN ARRAY
-            $scope.tour.typeOfHoliday = _.filter($scope.categoriesSpecial, ['class', 'category-active']);
-            console.log($scope.tour.typeOfHoliday, 'tourtype list');
-            $scope.tour.typeOfHoliday = _.map($scope.tour.typeOfHoliday, 'tourCat');
-            // SAVE TOUR TYPE IN ARRAY
-            console.log(tour, 'tour save');
-            Agent.saveTour(tour, function (data) {
-                console.log(data, 'Tour saved Success');
-                if (data.value == true) {
-                    $scope.addItinerary();
-                    $scope.tour = {};
-                    // $scope.toursForm.$setPristine();
-                    $scope.tour.displayPic = "";
-                    $scope.showTourPdf = false;
-                    $scope.showTourPic = false;
-                    $scope.getAgentData('tours&packages', $scope.activeUrlSlug, $scope.pagenumber);
-                    // document.getElementById("toursForm").reset();
-                    document.getElementById("toursForm").$setPristine();
-                } else {
-                    console.log('data error');
-                }
-            });
+        // SAVE TOUR TYPE IN ARRAY
+        $scope.tour.typeOfHoliday = _.filter($scope.categoriesSpecial, ['class', 'category-active']);
+        console.log($scope.tour.typeOfHoliday, 'tourtype list');
+        $scope.tour.typeOfHoliday = _.map($scope.tour.typeOfHoliday, 'tourCat');
+        // SAVE TOUR TYPE IN ARRAY
+        console.log(tour, 'tour save');
+        Agent.saveTour(tour, function (data) {
+            console.log(data, 'Tour saved Success');
+            if (data.value == true) {
+                $scope.addItinerary();
+                $scope.tour = {};
+                $scope.toursForm.$setPristine();
+                $scope.tour.displayPic = "";
+                $scope.showTourPdf = false;
+                $scope.showTourPic = false;
+                $scope.getAgentData('tours&packages', $scope.activeUrlSlug, $scope.pagenumber);
+            } else {
+                console.log('data error');
+            }
+        });
+    }
+
+    $scope.checkDN = function () {
+        if ($scope.tour.nights === 0 && $scope.tour.days === 0) {
+            $scope.showDNErr = true;
+        } else if ($scope.tour.nights >= 0 || $scope.tour.days >= 0) {
+            if (($scope.tour.days - $scope.tour.nights) >= -1 && ($scope.tour.days - $scope.tour.nights) <= 1) {
+                $scope.showDNErr = false;
+            } else {
+                $scope.showDNErr = true;
+            }
+        } else {
+            $scope.showDNErr = false;
         }
-        // TOUR FORM SAVE END
+    }
+    $scope.checkHM = function () {
+        if ($scope.tour.minutes > 59) {
+            $scope.showHMErr = true;
+        } else {
+            $scope.showHMErr = false;
+        }
+    }
+
+    // TOUR FORM SAVE END
 
     //TOUR PDF DOWNLOAD
     $scope.downloadTourPdf = function (tour) {
@@ -12978,8 +13005,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     $scope.isopenfilter = false;
                     if (data.data.length == 0) {
                         scroll.stopCallingApi = true;
-                        if (itineraryObj.pagenumber === 1) {
+                        if (itineraryObj.pagenumber === 1 && itineraryObj.city.length === 0 && itineraryObj.itineraryType.length === 0) {
                             $scope.agentItinerary = [];
+                            $scope.showFilter = false;
                         } else if (itineraryObj.city.length > 0 || itineraryObj.itineraryType.length > 0 || itineraryObj.pagenumber > 1) {
                             $scope.showFilter = true;
                         } else {
