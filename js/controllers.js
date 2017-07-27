@@ -10641,28 +10641,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.logout = function () {
         var accessToken = $.jStorage.get("accessToken");
+        var profile = $.jStorage.get("profile");
         NavigationService.logout(function () {
-                // NavigationService.disablePushNotification();
-                OneSignal.getUserId(function (data) {
-                    console.log(data);
-                    $http({
-                        "url": adminURL + "/user/updateDeviceId",
-                        "method": "POST",
-                        "data": {
-                            'accessToken': accessToken,
-                            'deviceId': data,
-                            'remove': true
-                        }
-                    });
-                    // NavigationService.disablePushNotification(data);
+            // NavigationService.disablePushNotification();
+            OneSignal.getUserId(function (data) {
+                console.log(data);
+                $http({
+                    "url": adminURL + "/user/updateDeviceId",
+                    "method": "POST",
+                    "data": {
+                        'accessToken': accessToken,
+                        'deviceId': data,
+                        'remove': true
+                    }
                 });
-                $.jStorage.flush();
-                acsToken = "";
-                $state.go('login');
-            },
-            function (err) {
-                console.log(err);
+                // NavigationService.disablePushNotification(data);
             });
+            $.jStorage.flush();
+            acsToken = "";
+            accessToken = "";
+            if (profile.type == "User") {
+                $state.go('login');
+            } else {
+                $state.go('partnerlogin');
+            }
+        }, function (err) {
+            console.log(err);
+        });
     };
 
     $scope.searchType = function () {
@@ -12543,19 +12548,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.showTourPdf = false;
     };
 
-    $scope.saveTour = function (tour) {
-        // SAVE TOUR TYPE IN ARRAY
+    $scope.saveTour = function (toursForm) {
+        //SAVE TOUR TYPE IN ARRAY
         $scope.tour.typeOfHoliday = _.filter($scope.categoriesSpecial, ['class', 'category-active']);
         console.log($scope.tour.typeOfHoliday, 'tourtype list');
         $scope.tour.typeOfHoliday = _.map($scope.tour.typeOfHoliday, 'tourCat');
         // SAVE TOUR TYPE IN ARRAY
-        console.log(tour, 'tour save');
-        Agent.saveTour(tour, function (data) {
-            console.log(data, 'Tour saved Success');
+        Agent.saveTour($scope.tour, function (data) {
             if (data.value == true) {
                 $scope.addItinerary();
+                $scope.categoriesSpecial = _.map($scope.categoriesSpecial, function (each) {
+                    each.class = '';
+                    return each;
+                });
                 $scope.tour = {};
-                $scope.toursForm.$setPristine();
+                toursForm.$setPristine();
                 $scope.tour.displayPic = "";
                 $scope.showTourPdf = false;
                 $scope.showTourPic = false;
