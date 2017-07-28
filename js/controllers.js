@@ -317,6 +317,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $interval.cancel(stopinterval);
                 ref.close();
                 setLoginVariables(data);
+            } else if (data.toPartner) {
+                $state.go("partnerlogin");
             } else {
                 console.log(data);
             }
