@@ -12511,189 +12511,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
         // SHOW ADD TESTIMONIAL END
 
-    // PRATIK CONTROLLER
-    //isMine or someoneOthers profile
-    if ($.jStorage.get("isLoggedIn") && ($.jStorage.get("profile").urlSlug == $stateParams.urlSlug)) {
-        //its your own profile so no need to call profile again
-        $scope.userData = $.jStorage.get("profile");
-        if ($.jStorage.get("profile").type === "TravelAgent") {
-            TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
-            $.jStorage.set("activeUrlSlug", $.jStorage.get("profile").urlSlug);
-            $scope.activeUrlSlug = $.jStorage.get("profile").urlSlug;
-            switch ($state.params.name) {
-                case "itineraries":
-                    $scope.getAgentItinerary($scope.activeUrlSlug);
-                    $scope.agthome.innerView = allagthome[0];
-                    $scope.agthomeoptions.active = "agthome-itinerary";
-                    $scope.initialiseArray();
-                    console.log("switch iti");
-                    break;
-                case "tours-and-packages":
-                    $scope.getAgentData('tours&packages', $scope.activeUrlSlug);
-                    $scope.agthome.innerView = allagthome[1];
-                    $scope.agthomeoptions.active = "agthome-tourpackages";
-                    $scope.initialiseArray();
-                    $scope.agentScrollDown();
-                    console.log("switch tour");
-                    break;
-                case "photos-and-videos":
-                    $scope.getPhotoVideo($scope.activeUrlSlug);
-                    $scope.agthome.innerView = allagthome[2];
-                    $scope.agthomeoptions.active = "agthome-photovideos";
-                    $scope.initialiseArray();
-                    $scope.agentScrollDown();
-
-                    console.log("switch pic");
-                    break;
-                case "testimonials-and-reviews":
-                    $scope.getAgentData('testimonials&reviews', $scope.activeUrlSlug);
-                    $scope.agthome.innerView = allagthome[3];
-                    $scope.agthomeoptions.active = "agthome-testimonialreviews";
-                    $scope.initialiseArray();
-                    $scope.agentScrollDown();
-                    $scope.getAvgRating($scope.activeUrlSlug);
-                    console.log("switch revi");
-                    break;
-                case "travel-activity":
-                    $scope.getTravelActivity($scope.activeUrlSlug);
-                    $scope.agthome.innerView = allagthome[4];
-                    $scope.agthomeoptions.active = "agthome-travelactivity";
-                    $scope.agentScrollDown();
-                    console.log("switch travel");
-                    break;
-                case "lead-monitor":
-                    $scope.getLeads('unActioned');
-                    $scope.getAvgRating($scope.activeUrlSlug);
-                    $scope.agthome.innerView = allagthome[5];
-                    $scope.agthomeoptions.active = "agthome-leadmonitor";
-                    $scope.initialiseArray();
-                    $scope.agentScrollDown();
-                    console.log("switch lead");
-                    break;
-                case "analytics":
-                    $scope.agthome.innerView = allagthome[6];
-                    $scope.agthomeoptions.active = "agthome-analytics";
-                    $scope.initialiseArray();
-                    $scope.agentScrollDown();
-                    $scope.profileview = true;
-                    $scope.getProfileView();
-                    break;
-                case "about-us":
-                    $scope.agthome.innerView = allagthome[7];
-                    $scope.agthomeoptions.active = "agthome-aboutus";
-                    $scope.initialiseArray();
-                    $scope.agentScrollDown();
-                    console.log("switch abt");
-                    break;
-                default:
-                    $scope.getAgentItinerary($scope.activeUrlSlug);
-                    $scope.agthome.innerView = allagthome[0];
-                    console.log("switch def");
-                    break;
-            }
-        } else {
-            $state.go("mylife", {
-                urlSlug: $stateParams.urlSlug
-            });
-        }
-    } else {
-        //someone elses profile so get his/her data
-        allowAccess = false;
-        $.jStorage.set("activeUrlSlug", $stateParams.urlSlug);
-        $scope.activeUrlSlug = $stateParams.urlSlug;
-        // $scope.isMine = false;
-        NavigationService.getAgentsProfile($stateParams.urlSlug, function (data) {
-            console.log(data);
-            if (data.value) {
-                if (data.data.type === "TravelAgent") {
-                    $scope.userData = data.data;
-                    TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
-                    allowAccess = false;
-                    switch ($state.params.name) {
-                        case "itineraries":
-                            $scope.getAgentItinerary($scope.activeUrlSlug);
-                            $scope.agthome.innerView = allagthome[0];
-                            $scope.agthomeoptions.active = "agthome-itinerary";
-                            $scope.initialiseArray();
-                            console.log("switch iti");
-                            break;
-                        case "tours-and-packages":
-                            $scope.getAgentData('tours&packages', $scope.activeUrlSlug);
-                            $scope.agthome.innerView = allagthome[1];
-                            $scope.agthomeoptions.active = "agthome-tourpackages";
-                            $scope.initialiseArray();
-                            $scope.agentScrollDown();
-                            console.log("switch tour");
-                            break;
-                        case "photos-and-videos":
-                            $scope.getPhotoVideo($scope.activeUrlSlug);
-                            $scope.agthome.innerView = allagthome[2];
-                            $scope.agthomeoptions.active = "agthome-photovideos";
-                            $scope.initialiseArray();
-                            $scope.agentScrollDown();
-
-                            console.log("switch pic");
-                            break;
-                        case "testimonials-and-reviews":
-                            $scope.getAgentData('testimonials&reviews', $scope.activeUrlSlug);
-                            $scope.agthome.innerView = allagthome[3];
-                            $scope.agthomeoptions.active = "agthome-testimonialreviews";
-                            $scope.initialiseArray();
-                            $scope.agentScrollDown();
-                            $scope.getAvgRating($scope.activeUrlSlug);
-                            console.log("switch revi");
-                            break;
-                        case "travel-activity":
-                            $scope.getTravelActivity($scope.activeUrlSlug);
-                            $scope.agthome.innerView = allagthome[4];
-                            $scope.agthomeoptions.active = "agthome-travelactivity";
-                            $scope.agentScrollDown();
-                            console.log("switch travel");
-                            break;
-                        case "lead-monitor":
-                            $scope.getLeads('unActioned');
-                            $scope.getAvgRating($scope.activeUrlSlug);
-                            $scope.agthome.innerView = allagthome[5];
-                            $scope.agthomeoptions.active = "agthome-leadmonitor";
-                            $scope.initialiseArray();
-                            $scope.agentScrollDown();
-                            console.log("switch lead");
-                            break;
-                        case "analytics":
-                            $scope.agthome.innerView = allagthome[6];
-                            $scope.agthomeoptions.active = "agthome-analytics";
-                            $scope.initialiseArray();
-                            $scope.agentScrollDown();
-                            $scope.profileview = true;
-                            $scope.getProfileView();
-                            break;
-                        case "about-us":
-                            $scope.agthome.innerView = allagthome[7];
-                            $scope.agthomeoptions.active = "agthome-aboutus";
-                            $scope.initialiseArray();
-                            $scope.agentScrollDown();
-                            console.log("switch abt");
-                            break;
-                        default:
-                            $scope.getAgentItinerary($scope.activeUrlSlug);
-                            $scope.agthome.innerView = allagthome[0];
-                            console.log("switch def");
-                            break;
-                    }
-                } else {
-                    $state.go("mylife", {
-                        urlSlug: $stateParams.urlSlug
-                    });
-                }
-            } else {
-                $state.go("errorpage");
-            }
-        }, function (data) {
-            console.log(data);
-        });
-    }
-    //isMine or someoneOthers profile Ends
-
     // SET PROFILE SHARING URL
     $scope.userData.sharingUrl = "https://travelibro.com/partners/" + $scope.activeUrlSlug;
     // SET PROFILE SHARING URL END
@@ -14380,6 +14197,191 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             name: 'Ross Bing'
         }]
         // PROFILE VIIEWS JSON END
+
+
+
+    // PRATIK CONTROLLER
+    //isMine or someoneOthers profile
+    if ($.jStorage.get("isLoggedIn") && ($.jStorage.get("profile").urlSlug == $stateParams.urlSlug)) {
+        //its your own profile so no need to call profile again
+        $scope.userData = $.jStorage.get("profile");
+        if ($.jStorage.get("profile").type === "TravelAgent") {
+            TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
+            $.jStorage.set("activeUrlSlug", $.jStorage.get("profile").urlSlug);
+            $scope.activeUrlSlug = $.jStorage.get("profile").urlSlug;
+            switch ($state.params.name) {
+                case "itineraries":
+                    $scope.getAgentItinerary($scope.activeUrlSlug);
+                    $scope.agthome.innerView = allagthome[0];
+                    $scope.agthomeoptions.active = "agthome-itinerary";
+                    $scope.initialiseArray();
+                    console.log("switch iti");
+                    break;
+                case "tours-and-packages":
+                    $scope.getAgentData('tours&packages', $scope.activeUrlSlug);
+                    $scope.agthome.innerView = allagthome[1];
+                    $scope.agthomeoptions.active = "agthome-tourpackages";
+                    $scope.initialiseArray();
+                    $scope.agentScrollDown();
+                    console.log("switch tour");
+                    break;
+                case "photos-and-videos":
+                    $scope.getPhotoVideo($scope.activeUrlSlug);
+                    $scope.agthome.innerView = allagthome[2];
+                    $scope.agthomeoptions.active = "agthome-photovideos";
+                    $scope.initialiseArray();
+                    $scope.agentScrollDown();
+
+                    console.log("switch pic");
+                    break;
+                case "testimonials-and-reviews":
+                    $scope.getAgentData('testimonials&reviews', $scope.activeUrlSlug);
+                    $scope.agthome.innerView = allagthome[3];
+                    $scope.agthomeoptions.active = "agthome-testimonialreviews";
+                    $scope.initialiseArray();
+                    $scope.agentScrollDown();
+                    $scope.getAvgRating($scope.activeUrlSlug);
+                    console.log("switch revi");
+                    break;
+                case "travel-activity":
+                    $scope.getTravelActivity($scope.activeUrlSlug);
+                    $scope.agthome.innerView = allagthome[4];
+                    $scope.agthomeoptions.active = "agthome-travelactivity";
+                    $scope.agentScrollDown();
+                    console.log("switch travel");
+                    break;
+                case "lead-monitor":
+                    $scope.getLeads('unActioned');
+                    $scope.getAvgRating($scope.activeUrlSlug);
+                    $scope.agthome.innerView = allagthome[5];
+                    $scope.agthomeoptions.active = "agthome-leadmonitor";
+                    $scope.initialiseArray();
+                    $scope.agentScrollDown();
+                    console.log("switch lead");
+                    break;
+                case "analytics":
+                    $scope.agthome.innerView = allagthome[6];
+                    $scope.agthomeoptions.active = "agthome-analytics";
+                    $scope.initialiseArray();
+                    $scope.agentScrollDown();
+                    $scope.profileview = true;
+                    $scope.getProfileView();
+                    break;
+                case "about-us":
+                    $scope.agthome.innerView = allagthome[7];
+                    $scope.agthomeoptions.active = "agthome-aboutus";
+                    $scope.initialiseArray();
+                    $scope.agentScrollDown();
+                    console.log("switch abt");
+                    break;
+                default:
+                    $scope.getAgentItinerary($scope.activeUrlSlug);
+                    $scope.agthome.innerView = allagthome[0];
+                    console.log("switch def");
+                    break;
+            }
+        } else {
+            $state.go("mylife", {
+                urlSlug: $stateParams.urlSlug
+            });
+        }
+    } else {
+        //someone elses profile so get his/her data
+        allowAccess = false;
+        $.jStorage.set("activeUrlSlug", $stateParams.urlSlug);
+        $scope.activeUrlSlug = $stateParams.urlSlug;
+        // $scope.isMine = false;
+        NavigationService.getAgentsProfile($stateParams.urlSlug, function (data) {
+            console.log(data);
+            if (data.value) {
+                if (data.data.type === "TravelAgent") {
+                    $scope.userData = data.data;
+                    TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
+                    allowAccess = false;
+                    switch ($state.params.name) {
+                        case "itineraries":
+                            $scope.getAgentItinerary($scope.activeUrlSlug);
+                            $scope.agthome.innerView = allagthome[0];
+                            $scope.agthomeoptions.active = "agthome-itinerary";
+                            $scope.initialiseArray();
+                            console.log("switch iti");
+                            break;
+                        case "tours-and-packages":
+                            $scope.getAgentData('tours&packages', $scope.activeUrlSlug);
+                            $scope.agthome.innerView = allagthome[1];
+                            $scope.agthomeoptions.active = "agthome-tourpackages";
+                            $scope.initialiseArray();
+                            $scope.agentScrollDown();
+                            console.log("switch tour");
+                            break;
+                        case "photos-and-videos":
+                            $scope.getPhotoVideo($scope.activeUrlSlug);
+                            $scope.agthome.innerView = allagthome[2];
+                            $scope.agthomeoptions.active = "agthome-photovideos";
+                            $scope.initialiseArray();
+                            $scope.agentScrollDown();
+
+                            console.log("switch pic");
+                            break;
+                        case "testimonials-and-reviews":
+                            $scope.getAgentData('testimonials&reviews', $scope.activeUrlSlug);
+                            $scope.agthome.innerView = allagthome[3];
+                            $scope.agthomeoptions.active = "agthome-testimonialreviews";
+                            $scope.initialiseArray();
+                            $scope.agentScrollDown();
+                            $scope.getAvgRating($scope.activeUrlSlug);
+                            console.log("switch revi");
+                            break;
+                        case "travel-activity":
+                            $scope.getTravelActivity($scope.activeUrlSlug);
+                            $scope.agthome.innerView = allagthome[4];
+                            $scope.agthomeoptions.active = "agthome-travelactivity";
+                            $scope.agentScrollDown();
+                            console.log("switch travel");
+                            break;
+                        case "lead-monitor":
+                            $scope.getLeads('unActioned');
+                            $scope.getAvgRating($scope.activeUrlSlug);
+                            $scope.agthome.innerView = allagthome[5];
+                            $scope.agthomeoptions.active = "agthome-leadmonitor";
+                            $scope.initialiseArray();
+                            $scope.agentScrollDown();
+                            console.log("switch lead");
+                            break;
+                        case "analytics":
+                            $scope.agthome.innerView = allagthome[6];
+                            $scope.agthomeoptions.active = "agthome-analytics";
+                            $scope.initialiseArray();
+                            $scope.agentScrollDown();
+                            $scope.profileview = true;
+                            $scope.getProfileView();
+                            break;
+                        case "about-us":
+                            $scope.agthome.innerView = allagthome[7];
+                            $scope.agthomeoptions.active = "agthome-aboutus";
+                            $scope.initialiseArray();
+                            $scope.agentScrollDown();
+                            console.log("switch abt");
+                            break;
+                        default:
+                            $scope.getAgentItinerary($scope.activeUrlSlug);
+                            $scope.agthome.innerView = allagthome[0];
+                            console.log("switch def");
+                            break;
+                    }
+                } else {
+                    $state.go("mylife", {
+                        urlSlug: $stateParams.urlSlug
+                    });
+                }
+            } else {
+                $state.go("errorpage");
+            }
+        }, function (data) {
+            console.log(data);
+        });
+    }
+    //isMine or someoneOthers profile Ends
 })
 
 .controller('MessageCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
