@@ -98,7 +98,7 @@
                                     <!-- ALBUM AND STATUS end-->
                                     <!-- tour package card -->
                                     <div class="agent-tourcard tour-package-card" ng-if="activity.type=='toursPackage'">
-                                        <div class="itinerary-img traveltour-img">
+                                        <div class="itinerary-img traveltour-img" style="background: url('{{activity.displayPic|uploadpath}}') no-repeat 50% 50%; background-size: cover;">
                                             <div class="theme">
                                                 <div class="theme-img ">
                                                     <img ng-src="{{activity.typeOfHoliday[0]| kindOfJourney:'white'}}" class="img-responsive tour-img" alt="activity.typeOfHoliday[0]">
@@ -113,7 +113,8 @@
                                                 </div>
                                                 <span class="country-count" ng-if="tourcard.country.length>3">+{{activity.country.length-3}}</span>
                                             </div>
-                                            <img ng-src="{{activity.displayPic|uploadpath}}" alt="{{activity.name}} | TravelLibro" class="img-responsive">
+                                            <!-- <img ng-src="{{activity.displayPic|uploadpath}}" alt="{{activity.name}} | TravelLibro" class="img-responsive">
+ -->
                                             <div class="itinerary-imgfoot tour-imgfoot">
                                                 <div class="imgfoot-top  clearfix">
                                                     <div class="pull-left">
