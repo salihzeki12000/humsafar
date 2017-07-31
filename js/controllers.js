@@ -12420,9 +12420,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         month: '',
         year: ''
     }
-    $scope.agthome = {
-        innerView: allagthome[0]
-    };
     $scope.agthomeoptions = {};
     $scope.agthomeoptions.active = "agthome-itinerary";
     $scope.viewTab = 1;
@@ -12476,7 +12473,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         "views/content/agent/agt-home/agthome-leadmonitor.html", "views/content/agent/agt-home/agthome-analytics.html",
         "views/content/agent/agt-home/agthome-aboutus.html"
     ];
-
+    $scope.agthome = {
+        innerView: allagthome[0]
+    };
     $scope.categoryType = [{
         img: "img/itinerary/adventure.png",
         caption: "Adventure",
