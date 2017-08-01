@@ -133,7 +133,7 @@
                       <!-- video -->
                       <div class="video-sec" ng-if="activity.videos.length>0 && activity.display==='video' && activity.type!='quick-itinerary' && activity.type!='detail-itinerary'">
                         <div class="post-img card-imgholder pointer relate" ng-click="getPhotosCommentData(activity.activityPhotosVideos[activity.index]._id, activity.index ,activity.activityPhotosVideos.length, activity.activityPhotosVideos)">
-                          <video background="{{activity.activityPhotosVideos[activity.index].thumbnail|uploadpath}}" controls="controls" width="100%">
+                          <video poster="{{activity.activityPhotosVideos[activity.index].thumbnail|uploadpath}}" controls="controls" width="100%" preload="auto">
                             <source src="{{activity.activityPhotosVideos[activity.index].name| trusted}}" type="video/mp4">
                           </video>
                           <!-- <div class="youtube-icon get-center">
