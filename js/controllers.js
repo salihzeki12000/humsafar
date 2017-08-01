@@ -5010,7 +5010,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.allowAccess = allowAccess;
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.isopen = false;
-    $scope.listOfYears = years(1950);
     var modal = "";
     var arr = [];
     $scope.obj = {};
@@ -5306,7 +5305,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             years.push(currentYear--);
         }
         return years;
-    }
+    };
+    $scope.listOfYears = years(1950);
+
     $scope.checkIfSelected = function (list) {
         if (list.year) {
             list.times = 1;
@@ -5899,8 +5900,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.getAllReviews = function (review) {
-        console.log("getAllReviews called after scrolling");
-        console.log(review);
         if (review.scrollBusy) {
             return;
         } else {
