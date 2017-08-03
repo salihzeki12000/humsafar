@@ -144,6 +144,7 @@
                       </a>
                                         </div>
                                     </div>
+                                    <div class="form-group"></div>
                                     <div class="form-group">
                                         <div class="agent-cmpny-inputholder alternatemail">
                                             <label for="" class="alternate-mail avenir-roman">Alternate Emails for Commmunication</label>
@@ -171,6 +172,18 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- your bussiness model -->
+                                    <div class="business-model select-your-city select-your-nation">
+                                        <div class="nation-city">
+                                            <ui-select ng-model="userDetails.company.agentType" theme="bootstrap" ng-value="userDetails.company.agentType">
+                                                <ui-select-match placeholder="Select Your Business Model">{{$select.selected.name}}</ui-select-match>
+                                                <ui-select-choices repeat="model.name as model in businessModel | filter:searchModel">
+                                                    <span class="color-light-grey">{{model.name}}</span>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                    <!-- your bussiness model end-->
                                 </form>
                             </div>
                             <div class="button-panel clearfix">

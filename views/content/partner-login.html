@@ -39,7 +39,7 @@
                                                     <span class="input-group-addon">
                               <i class="fa fa-lock color-white fnt-20" aria-hidden="true"></i>
                             </span>
-                                                    <input type="password" class="form-control color-white" placeholder="Password" ng-model="agentLoginForm.password">
+                                                    <input type="password" class="form-control color-white" placeholder="Password or OTP from Email" ng-model="agentLoginForm.password">
                                                 </div>
                                                 <div class="forgot-link pt10 text-right">
                                                     <a ui-sref="forgot-password-email" class="color-white avenir-roman">Forgot Password?</a>
@@ -94,11 +94,11 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="btn-login color-white mt25" ng-class="{'not-allowed': signUpForm.$invalid, 'pointer': !signUpForm.$invalid}">
-                                                <input type="submit" class="btn btn-outline color-white avenir-roman inline-block" value="Register" ng-disabled="signUpForm.$invalid">
-                                            </div>
                                             <div class="login-error-veri" ng-if="showError.show">
                                                 <p>*{{showError.msg}}.</p>
+                                            </div>
+                                            <div class="btn-login color-white mt25" ng-class="{'not-allowed': signUpForm.$invalid, 'pointer': !signUpForm.$invalid}">
+                                                <input type="submit" class="btn btn-outline color-white avenir-roman inline-block" value="Register" ng-disabled="signUpForm.$invalid">
                                             </div>
                                         </form>
                                     </div>

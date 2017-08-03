@@ -140,7 +140,6 @@ var navigationservice = angular.module('navigationservice', [])
             }, true).success(callback).error(errCallback);
         },
         getAgentsProfile: function (slug, callback, errCallback) {
-            console.log(slug);
             return TravelibroService.http({
                 url: adminURL + "/agent/getOneDataWeb",
                 data: {

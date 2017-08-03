@@ -216,7 +216,7 @@
                     <div class="col-md-offset-2 col-md-8">
                         <div class="agt-user-intro">
                             <h3 class="color-blue avenir-heavy text-capitalize">{{userData.name}}</h3>
-                            <p class="color-blue">is still to upload this space with interesting tours & packages</p>
+                            <p class="color-blue">is still to upload this space with interesting tours & packages.</p>
                         </div>
                     </div>
                 </div>
@@ -260,8 +260,8 @@
                                             <p class="font-sz18 cost-posi">{{tourcard.currency}} {{tourcard.price}}</p>
                                         </div>
                                         <div class="tour-btns">
-                                            <button class="btn btn-pink btn-download" ng-if="tourcard.pdf"><a ng-href="{{tourcard.pdf|downloadLink:'tours&packages':tourcard._id:tourcard.title}}" class="btn-link" download>Download</a></button>
-                                            <button class="btn btn-pink btn-book" ng-if="tourcard.bookingUrl" ng-click="countAdder(tourcard);"><a href="{{tourcard.bookingUrl}}" target="_blank" class="btn-link">Book</a></button>
+                                            <a ng-href="{{tourcard.pdf|downloadLink:'tours&packages':tourcard._id:tourcard.title}}" class="btn-link btn btn-pink btn-download" ng-if="tourcard.pdf" download>Download</a>
+                                            <a href="{{tourcard.bookingUrl}}" target="_blank" class="btn-link btn btn-pink btn-book" ng-click="countAdder(tourcard);" ng-if="tourcard.bookingUrl">Book</a>
                                         </div>
                                     </div>
                                 </div>

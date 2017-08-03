@@ -30,14 +30,17 @@
                                 <div class="imgfoot-top clearfix">
                                     <div class="pull-left">
                                         <h4 class="font-sz18">{{tourcard.title}}</h4>
-                                        <p class="day-night"><span>{{tourcard.nights}} Nights</span> | <span>{{tourcard.days}} Days</span></p>
-                                        <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{tourcard.UTCModified|formatDate:'date'}}</span> | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{tourcard.UTCModified|formatDate:'time'}}</span></p>
+                                        <p class="day-night" ng-if="tourcard.nights || tourcard.days"><span>{{tourcard.nights}} Nights</span> | <span>{{tourcard.days}} Days</span></p>
+                                        <p class="day-night" ng-if="tourcard.hours || tourcard.minutes"><span>{{tourcard.hours}} Hours</span> | <span>{{tourcard.minutes}} Minutes</span></p>
+                                        <!-- <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{tourcard.UTCModified|formatDate:'date'}}</span> | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{tourcard.UTCModified|formatDate:'time'}}</span></p> -->
                                     </div>
                                     <div class="pull-right">
                                         <p class="font-sz18 cost-posi">{{tourcard.currency}} {{tourcard.price}}</p>
                                     </div>
-                                    <button class="btn btn-pink btn-download">Download</button>
-                                    <button class="btn btn-pink btn-book">Book</button>
+                                    <div class="tour-btns">
+                                        <a ng-href="{{tourcard.pdf|downloadLink:'tours&packages':tourcard._id:tourcard.title}}" class="btn-link btn btn-pink btn-download" ng-if="tourcard.pdf" download>Download</a>
+                                        <a href="{{tourcard.bookingUrl}}" target="_blank" class="btn-link btn btn-pink btn-book" ng-click="countAdder(tourcard);" ng-if="tourcard.bookingUrl">Book</a>
+                                    </div>
                                 </div>
                             </div>
                             <!-- <div class="call-btn" ng-click="showContact();">

@@ -248,10 +248,17 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="agt-settingaddr">
-                                                <div class="form-group">
-                                                    <label for="" class="color-blue">Address</label>
-                                                    <textarea name="name" ng-model="agentData.company.address"></textarea>
+                                            <div class="form-group">
+                                                <label for="office-location" class="color-blue">Your Business Model</label>
+                                                <div class="agentsetting-select">
+                                                    <ui-select ng-model="agentData.company.agentType" theme="bootstrap">
+                                                        <ui-select-match placeholder="Select Your Business Model">{{agentData.company.agentType}}</ui-select-match>
+                                                        <ui-select-choices repeat="model.name as model in businessModel | filter: $select.search track by $index">
+                                                            <div class="">
+                                                                <p class="">{{model.name}}</p>
+                                                            </div>
+                                                        </ui-select-choices>
+                                                    </ui-select>
                                                 </div>
                                             </div>
                                         </div>
@@ -262,15 +269,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="agtsetting-abt">
-                                                <div class="form-group" ng-init="agentData.company.about.length">
-                                                    <label for="" class="color-blue">About</label>
-                                                    <textarea name="name" maxlength="500" id="textareaChars" ng-model="agentData.company.about"> </textarea>
-                                                    <span class="pull-right font-sz10 mt10">{{agentData.company.about.length}} / 500</span>
-                                                </div>
-                                            </div>
+                                    <div class="agt-settingaddr">
+                                        <div class="form-group">
+                                            <label for="" class="color-blue">Address</label>
+                                            <textarea name="name" ng-model="agentData.company.address"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="agtsetting-abt">
+                                        <div class="form-group" ng-init="agentData.company.about.length">
+                                            <label for="" class="color-blue">About</label>
+                                            <textarea name="name" maxlength="500" id="textareaChars" ng-model="agentData.company.about"> </textarea>
+                                            <span class="pull-right font-sz10 mt10">{{agentData.company.about.length}} / 500</span>
                                         </div>
                                     </div>
                                     <div class="clearfix mt20">
@@ -364,7 +373,7 @@
                                     </div>
                                     <div class="clearfix mt20">
                                         <div class="pull-right">
-                                            <span class="color-blue font-bold" ng-show="saveSuccess">Password Saved Successfully.</span>
+                                            <span class="color-blue" ng-show="saveSuccess">Password Saved Successfully.</span>
                                             <button class="btn btn-pink btn-more" ng-click="changePassword(passwords);">Save</button>
                                         </div>
                                     </div>

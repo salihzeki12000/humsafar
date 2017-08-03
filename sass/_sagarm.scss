@@ -185,7 +185,15 @@
     }
   }
 }
-
+.business-model {
+  min-height: auto;
+  .ui-select-container:after,.ui-select-container:before {
+    background-color: $brand-blue;
+  }
+  .ui-select-match .btn {
+    border-bottom: 1px solid $brand-blue;
+  }
+}
 .mail-register {
   color: #424242;
   text-align: left;
@@ -478,7 +486,7 @@
       @extend .avenir-medium;
       cursor: pointer;
       @include transition(all ease 300ms);
-      border-right: 1px solid #fff;
+      border-right: 1px solid #ebebeb;
     }
     li:last-child {
       border-right: none !important;
@@ -1643,6 +1651,10 @@ q {
   width: 100%;
   padding: 0 5px;
   text-align: right;
+  .btn-pink:focus {
+    background-color: #ef645e;
+    border-color: #ef645e;
+  }
 }
 
 .btn-download {
@@ -1656,6 +1668,7 @@ q {
   &:hover {
     color: #fff;
     text-decoration: none;
+    background-colo
   }
 }
 

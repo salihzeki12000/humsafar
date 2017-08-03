@@ -33,7 +33,7 @@
                     <div class="col-md-offset-2 col-md-8">
                         <div class="agt-user-intro">
                             <h3 class="color-blue avenir-heavy text-capitalize">{{userData.name}}</h3>
-                            <p class="color-blue">is still to post the first activity on their page</p>
+                            <p class="color-blue">is still to post the first activity on their page.</p>
                         </div>
                     </div>
                 </div>
@@ -113,14 +113,14 @@
                                                 </div>
                                                 <span class="country-count" ng-if="tourcard.country.length>3">+{{activity.country.length-3}}</span>
                                             </div>
-                                            <!-- <img ng-src="{{activity.displayPic|uploadpath}}" alt="{{activity.name}} | TravelLibro" class="img-responsive">
- -->
+                                            <!-- <img ng-src="{{activity.displayPic|uploadpath}}" alt="{{activity.name}} | TravelLibro" class="img-responsive">-->
                                             <div class="itinerary-imgfoot tour-imgfoot">
                                                 <div class="imgfoot-top  clearfix">
                                                     <div class="pull-left">
                                                         <h4 class="avenir-heavy text-capitalize font-sz18 m-clear">{{activity.title}}</h4>
-                                                        <p class="day-night" ng-if="activity.nights && activity.days"><span class="ng-binding">{{activity.nights}} Nights</span> | <span class="ng-binding">{{activity.days}} Days</span></p>
-                                                        <p class="day-night" ng-if="activity.hours && activity.minutes"><span>{{activity.hours}} Hours</span> | <span>{{activity.minutes}} Minutes</span></p>
+                                                        <!-- <p class="day-night" ng-if="activity.nights && activity.days"><span class="ng-binding">{{activity.nights}} Nights</span> | <span class="ng-binding">{{activity.days}} Days</span></p>
+                                                        <p class="day-night" ng-if="activity.hours && activity.minutes"><span>{{activity.hours}} Hours</span> | <span>{{activity.minutes}} Minutes</span></p> -->
+                                                        <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{activity.UTCModified|formatDate:'date'}}</span> | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{activity.UTCModified|formatDate:'time'}}</span></p>
                                                     </div>
                                                     <div class="pull-right">
                                                         <p class="font-sz18 cost-posi ng-binding">{{activity.currency}} {{activity.price}}</p>

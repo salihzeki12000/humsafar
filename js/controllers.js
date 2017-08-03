@@ -182,7 +182,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
 })
 
-.controller('LoginCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $interval, $state, $http) {
+.controller('LoginCtrl', function ($scope, TemplateService, NavigationService, Agent, cfpLoadingBar, $timeout, $uibModal, $interval, $state, $http) {
     //Used to name the .html file
     $scope.userData = $.jStorage.get("profile");
     $scope.template = TemplateService.changecontent("login");
@@ -194,6 +194,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.formData = {};
     $scope.agentSignup = false;
     $scope.alreadyExist = false;
+    $scope.password = {};
 
     $scope.initialiseError = function () {
         $scope.showError = {
@@ -229,37 +230,76 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $.jStorage.set("accessToken", data.accessToken);
         if (data.type == "TravelAgent") {
             NavigationService.getAgentsProfile("", function (data1) {
-                console.log("User Found");
                 if (data1.data._id && data1.data.type == 'TravelAgent') {
                     $.jStorage.set("isLoggedIn", true);
                     $.jStorage.set("profile", data1.data);
                     var alreadyLoggedIn = data1.data.alreadyLoggedIn;
-                    if (alreadyLoggedIn === true) {
-                        var slug = $.jStorage.get("activeUrlSlug");
-                        console.log(slug);
-                        if (slug === null || slug === "") {
-                            slug = $.jStorage.get("profile").urlSlug;
-                        }
-                        if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
-                            window.location = $.jStorage.get("url") + "?accessToken=" + $.jStorage.get("accessToken");
+
+                    function callSetting() {
+                        if (alreadyLoggedIn === true) {
+                            var slug = $.jStorage.get("activeUrlSlug");
+                            if (slug === null || slug === "") {
+                                slug = $.jStorage.get("profile").urlSlug;
+                            }
+                            if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
+                                window.location = $.jStorage.get("url") + "?accessToken=" + $.jStorage.get("accessToken");
+                            } else {
+                                if ($.jStorage.get("profile").type == "User") {
+                                    $state.go("mylife", {
+                                        name: 'journey',
+                                        urlSlug: slug
+                                    });
+                                } else {
+                                    $state.go("agent-home", {
+                                        urlSlug: slug
+                                    });
+                                }
+                            }
                         } else {
                             if ($.jStorage.get("profile").type == "User") {
-                                $state.go("mylife", {
-                                    name: 'journey',
-                                    urlSlug: slug
-                                });
+                                $state.go('mainpage');
+                            } else if ($.jStorage.get("profile").type == "TravelAgent") {
+                                $state.go('agent-login');
+                            }
+                        }
+                    }
+                    if (data.loginType) {
+                        var modalPas = $uibModal.open({
+                            templateUrl: "views/modal/changePassword.html",
+                            animation: true,
+                            scope: $scope,
+                            windowClass: "report-modal",
+                            backdrop: "static"
+                        });
+                        $scope.changePassword = function () {
+                            if ($scope.password.passChange) {
+                                if ($scope.password.newPassword === $scope.password.confirmPassword) {
+                                    delete $scope.password.confirmPassword;
+                                    Agent.changePassword($scope.password, function (data) {
+                                        if (data.value === true) {
+                                            modalPas.close();
+                                            callSetting();
+                                        } else {
+                                            $scope.password.status = true;
+                                            $scope.password.msg = "*Old Password Mismatch.";
+                                            $timeout(function () {
+                                                $scope.password.status = false;
+                                            }, 10000);
+                                        }
+                                    });
+                                } else {
+                                    $scope.password.status = true;
+                                    $scope.password.msg = "*New Password Mismatch.";
+                                    $timeout(function () {
+                                        $scope.password.status = false;
+                                    }, 10000);
+                                }
                             } else {
-                                $state.go("agent-home", {
-                                    urlSlug: slug
-                                });
+                                callSetting();
                             }
                         }
                     } else {
-                        if ($.jStorage.get("profile").type == "User") {
-                            $state.go('mainpage');
-                        } else if ($.jStorage.get("profile").type == "TravelAgent") {
-                            $state.go('agent-login');
-                        }
+                        callSetting();
                     }
                 } else {}
             }, function (err) {
@@ -317,8 +357,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $interval.cancel(stopinterval);
                 ref.close();
                 setLoginVariables(data);
-            } else if (data.toPartner) {
-                $state.go("partnerlogin");
             } else {
                 console.log(data);
             }
@@ -410,7 +448,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                         show: "",
                         msg: ""
                     };
-                }, 3500);
+                }, 10000);
             }
 
         });
@@ -423,14 +461,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 });
             } else {
                 // $scope.showError = true;
-                $scope.showError.show = true;
-                $scope.showError.msg = "Incorrect Email or Password";
-                $timeout(function () {
-                    $scope.showError = {
-                        show: "",
-                        msg: ""
-                    };
-                }, 3500);
+                if (data.data.message === "Registered as User") {
+                    $scope.showError.show = true;
+                    $scope.showError.msg = "Email already registered as a user. Register with an alternate email address to login as Partner.";
+                    $timeout(function () {
+                        $scope.showError = {
+                            show: "",
+                            msg: ""
+                        };
+                    }, 10000);
+                } else {
+                    $scope.showError.show = true;
+                    $scope.showError.msg = "Incorrect Email or Password";
+                    $timeout(function () {
+                        $scope.showError = {
+                            show: "",
+                            msg: ""
+                        };
+                    }, 10000);
+                }
             }
         });
     };
@@ -470,7 +519,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                         status: "",
                         msg: ""
                     };
-                }, 3500);
+                }, 10000);
                 $scope.userData = {};
             } else {
                 $scope.showErr = {
@@ -482,7 +531,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                         status: "",
                         msg: ""
                     };
-                }, 3500);
+                }, 10000);
             }
         });
     };
@@ -3640,7 +3689,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 })
 
-.controller('DestinationCityCtrl', function ($scope, $state, TemplateService, TravelibroService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $location, LikesAndComments) {
+.controller('DestinationCityCtrl', function ($scope, $state, TemplateService, TravelibroService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $location, LikesAndComments, Agent) {
     //Used to name the .html file
 
     // console.log("Testing Consoles");
@@ -3705,6 +3754,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 backdrop: "static"
             });
         }
+    };
+    $scope.countAdder = function (tourcard) {
+        Agent.countAdder({ _id: tourcard._id }, function (data) {
+            console.log(data);
+            if (data.value == true) {
+                console.log("Added counter");
+            }
+        });
     };
     $scope.saveSuggest = function () {
             NavigationService.saveSuggest($scope.suggest, function (data) {
@@ -11028,6 +11085,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     {
+        $scope.businessModel = [{
+            name: "Tour Operator"
+        }, {
+            name: "Travel Agent"
+        }, {
+            name: "Local Guide"
+        }];
+    }
+
+    {
         $scope.categoriesSpecial = [{
             agtcatImg: "img/kindofjourney/white-adventure.png",
             catwidth: "35px",
@@ -11228,42 +11295,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.settingReport = {
         status: ""
     };
-    $scope.expiry = moment("11-26-2017").diff(moment(), "days");
     // INTEGRATION START
     // SETTING DATA GET
     function setAgent() {
         Agent.getAgentDetails(function (data) {
             if (data.value = true) {
                 $scope.agentData = data.data;
-
+                $scope.expiry = moment($scope.agentData.UTC).diff(moment(), "days");
                 _.each(data.data.company.categoryOfSpeacilization, function (n) {
                     var index = _.findIndex($scope.chooseCategorySpcl, ['caption', n]);
                     $scope.chooseCategorySpcl[index].class = "category-active";
                 });
-
                 _.each(data.data.company.services, function (n) {
                     var index = _.findIndex($scope.agtServices, ['name', n]);
                     $scope.agtServices[index].class = "active";
-                    console.log($scope.agtServices, index);
                 });
-
-
                 _.each(data.data.company.countryOfSpecialization, function (n) {
                     var index = _.findIndex($scope.countriesByContinent, ['name', n.name]);
-                    console.log(index, '111');
                     _.each(n.country, function (m) {
                         var index1 = _.findIndex($scope.countriesByContinent[index].countries, ['_id', m]);
                         $scope.countriesByContinent[index].countries[index1].class = "active";
                     })
                 });
-                console.log($scope.countriesByContinent);
-
                 $scope.agentData.company.email = _.zipWith($scope.agentData.company.email, function (a) {
                     return {
                         'name': a
                     };
                 });
-                console.log($scope.agentData, 'agentdata');
             } else {
                 console.log('Error in agentdata Call!!!');
             }
@@ -11436,16 +11494,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
         Agent.saveSettings(agentData, function (data) {
-            console.log(data, 'save setting');
             if (data.value == true) {
-                console.log('setting save success');
                 NavigationService.getAgentsProfile($.jStorage.get("profile").urlSlug, function (data, status) {
                     if (data.data._id) {
                         $.jStorage.set("isLoggedIn", true);
                         $.jStorage.set("profile", data.data);
                         $scope.agentData = data.data;
-                        // console.log($.jStorage.get('profile'));
-                        console.log("Profile successfully set on jStorage");
                     } else {
                         $.jStorage.flush();
                     }
@@ -11466,21 +11520,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 var password = passwords;
                 delete password.confirmPassword;
                 Agent.changePassword(password, function (data) {
-                    console.log(data, 'save passw');
                     if (data.value === true) {
                         $scope.passwords.oldPassword = "";
                         $scope.passwords.newPassword = "";
                         $scope.oldPasswordError = false;
-                        console.log('password saved successfully');
                         $scope.saveSuccess = true;
+                        $timeout(function () {
+                            $scope.saveSuccess = false;
+                        }, 10000);
                     } else {
                         $scope.oldPasswordError = true;
-                        console.log('password save failed');
+                        $timeout(function () {
+                            $scope.oldPasswordError = false;
+                        }, 10000);
                     }
                 });
             } else {
                 $scope.newPasswordError = true;
-                console.log(passwords.oldPassword, 'oldie', passwords.newPassword, 'newie');
+                $timeout(function () {
+                    $scope.newPasswordError = false;
+                }, 10000);
             }
         }
         // CHANGE PASSWORDS END
@@ -11493,6 +11552,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }, function (data) {
             if (data.value) {
                 $scope.showme = true;
+                $timeout(function () {
+                    $scope.showme = false;
+                }, 10000);
                 $scope.settingReport = {};
             } else {
                 $scope.showme = false;
@@ -11600,6 +11662,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     //setting tab navigation end
 
+
+    //Business Model
+    {
+        $scope.businessModel = [{
+            name: "Tour Operator"
+        }, {
+            name: "Travel Agent"
+        }, {
+            name: "Local Guide"
+        }];
+    }
+    //Business Model
     // choose category Specialisation
     $scope.chooseCategorySpcl = [{
         img: "img/kindofjourney/white-adventure.png",
@@ -12318,6 +12392,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.agentPhotosArray = [];
     $scope.agentPhotos = [];
     $scope.agentVideos = [];
+    $scope.coverPhotoObj = {};
     var prevIndex;
     var prevLead;
     var itineraryObj = {};
@@ -13546,6 +13621,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         LikesAndComments.followUnFollow(user, function (data) {
             if (data.value) {
                 user.following = data.data.responseValue;
+                if (data.data.responseValue == 1) {
+                    $scope.userData.followers_count = $scope.userData.followers_count + 1;
+                } else {
+                    $scope.userData.followers_count = $scope.userData.followers_count - 1;
+                }
             } else {
                 console.log("error updating data");
             }
@@ -13970,6 +14050,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     if ($.jStorage.get("isLoggedIn") && ($.jStorage.get("profile").urlSlug == $stateParams.urlSlug)) {
         //its your own profile so no need to call profile again
         $scope.userData = $.jStorage.get("profile");
+        if ($scope.userData.coverPhoto) {
+            console.log($scope.userData.coverPhoto);
+            $scope.coverPhotoObj = {
+                "background-image": "url('" + adminURL + "/upload/readFile?file=" + $scope.userData.coverPhoto + "')"
+            };
+        } else {
+            $scope.coverPhotoObj = {
+                "background-image": "url('../img/popularagent/bg-agent.jpg')"
+            };
+        }
         if ($scope.userData) {
             $scope.enquire.name = $scope.userData.name;
             $scope.enquire.email = $scope.userData.email;
@@ -14078,6 +14168,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             if (data.value) {
                 if (data.data.type === "TravelAgent") {
                     $scope.userData = data.data;
+                    if ($scope.userData.coverPhoto) {
+                        console.log('test');
+                        $scope.coverPhotoObj = {
+                            "background-image": "url('" + adminURL + "/upload/readFile?file=" + $scope.userData.coverPhoto + "')"
+                        };
+                    } else {
+                        $scope.coverPhotoObj = {
+                            "background-image": "url('../img/popularagent/bg-agent.jpg')"
+                        };
+                    }
                     TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
                     allowAccess = false;
                     switch ($state.params.name) {
