@@ -248,7 +248,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
           } else if ($scope.ongo.checkIn && $scope.ongo.checkIn.location) {
             $scope.ongo.postString = "<a href='/users/" + $scope.ongo.user.urlSlug + "'>" + $scope.ongo.user.name.bold() + "</a>" + " at " + $scope.ongo.checkIn.location.bold();
           } else {
-            $scope.ongo.postString = "<a href='/users/" + $scope.ongo.user.urlSlug + "'>" + $scope.ongo.user.name.bold() + "</a>" + " with " + $scope.ongo.buddiesString;
+            $scope.ongo.postString = "";
           }
         }
       };

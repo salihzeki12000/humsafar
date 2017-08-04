@@ -14,7 +14,8 @@
         <!--<div class="blurnotify-imgholder" ng-if="listOfComments.type=='photo'">
           <img ng-src="{{listOfComments.name|uploadpath}}" alt="" class="img-responsive">
         </div>-->
-        <img ng-src="{{listOfComments.name|uploadpath}}" alt="" class="img-reponsive" ng-if="listOfComments.type=='photo'">
+        <!-- <img ng-src="{{listOfComments.name|uploadpath}}" alt="" class="img-reponsive" ng-if="listOfComments.type=='photo'"> -->
+          <fade-img-loading blur="{{listOfComments.name|uploadpath:10:10:'cover'}}" image="{{listOfComments.name|uploadpath}}" ng-if="listOfComments.type=='photo'"></fade-img-loading>
         <video controls="controls" autoplay ng-if="listOfComments.type=='video'">
           <source src="{{listOfComments.name|trusted}}" type="video/mp4">
         </video>

@@ -397,7 +397,6 @@ textarea {
   @include position(absolute, 50% null null 50%);
   @include transform(translate(-50%, -50%));
 }
-
 .full-width {
   width: 100%;
 }
@@ -1904,6 +1903,20 @@ header {
   max-height: 350px;
   background-color: $brand-lighter-grey;
   overflow: hidden;
+  fade-img-loading {
+    .blur, .img-show {
+      width: 100%;
+      @include position(absolute, 50% null null 50%);
+      @include transform(translate(-50%,-50%));
+    }
+  }
+  // map image view
+  &.map-imageholder {
+    fade-img-loading {
+      .blur, .img-show { width: auto; }
+    }
+  }
+  // map image view end
 }
 
 .onway-imgholder {
@@ -1911,7 +1924,17 @@ header {
   max-height: 330px;
   background-color: $brand-lighter-grey;
   overflow: hidden;
-
+  // fade img loading
+  fade-img-loading {
+    .blur, .img-show {
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      @include transform(translate(-50%,-50%));
+    }
+  }
+  // fade img loading
   .unpublish-banner {
     padding: 8px 15px;
     border-radius: 0 6px 6px 0;
@@ -2074,7 +2097,8 @@ header {
     left: 0;
     bottom: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: -1;
   }
 }
 
@@ -4866,8 +4890,13 @@ header {
   margin: 10px 0 20px;
   // border: 1px solid #ccc;
   border-radius: 6px;
-  box-shadow: 2px 3px 3px #4a4a4a;
+  box-shadow: 2px 3px 10px #a0a0a0;
   background-color: rgba(255, 255, 255, 0.9);
+  @include transition(all 150ms linear);
+  &:hover {
+    box-shadow: 5px 6px 10px #a0a0a0, 2px 1px 10px #a0a0a0;
+    @include transition(all 150ms linear);
+  }
 
   li {
     display: inline-block;
@@ -5104,6 +5133,14 @@ header {
     margin: 0 auto;
   }
 }
+.post-img {
+  fade-img-loading {
+    .blur, .img-show {
+      @include position(absolute, 50% null null 50%);
+      @include transform(translate(-50%,-50%));
+    }
+  }
+}
 
 .imgpost-relatedslider {
   padding: 5px 5px 0;
@@ -5111,6 +5148,7 @@ header {
 
   .related-postimgholder {
     @include square(65px);
+    background-color: #efefef;
   }
 
   .flexslider {
@@ -5290,7 +5328,7 @@ header {
   // }
   .post-rating {
     i {
-      color: $brand-pink;
+      color: $brand-light-grey;
     }
   }
 
@@ -6255,6 +6293,15 @@ header {
   height: 350px;
   position: relative;
   overflow: hidden;
+  fade-img-loading {
+    .blur, .img-show {
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      @include transform(translate(-50%,-50%));
+    }
+  }
 
   .blur-img {
     width: 100%;
@@ -11551,7 +11598,7 @@ display:none;
   .notify-imgholder {
     height: 500px;
     position: relative;
-    background: url('../img/default_Images_2.jpg') no-repeat 50% 50%;
+    background-color: #ebebeb;
     background-size: cover;
     overflow: hidden;
     // max-width: 65%;
@@ -11579,6 +11626,12 @@ display:none;
       width: auto;
       max-width: 58vw; //its temporary width
       // @extend .get-center;
+    }
+    fade-img-loading {
+      .blur, .img-show {
+        position: static;
+        @include transform(translate(0,0));
+      }
     }
   }
 }

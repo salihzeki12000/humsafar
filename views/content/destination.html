@@ -47,7 +47,8 @@
             <div class="col-md-4 col-sm-6 m-plr0"  ng-repeat="dest in destinationList track by $index">
               <div class="city-view" ng-if="dest.isCity==true">
                 <div class="img-holder relate" ng-click="countryView(dest.urlSlug,dest.isCity);">
-                  <img ng-src="{{dest.cityDisplayPhoto|uploadpath:600:600:'cover'}}" alt="travelibro" class="img-responsive full-width city-img">
+                  <fade-img-loading blur="{{dest.cityDisplayPhoto|uploadpath:10:10:'cover'}}" image="{{dest.cityDisplayPhoto|uploadpath:600:600:'cover'}}"></fade-img-loading>
+                  <!-- <img ng-src="{{dest.cityDisplayPhoto|uploadpath:600:600:'cover'}}" alt="travelibro" class="img-responsive full-width city-img"> -->
                   <h4 class="title-head-left color-white">
                     {{dest.name}}
                   </h4>
@@ -62,7 +63,8 @@
               </div>
               <div class="country-view" ng-if="dest.isCity==false">
                 <div class="img-holder relate" ng-click="countryView(dest.urlSlug,dest.isCity)">
-                  <img ng-src="{{dest.countryBackgroundImage|uploadpath:400:400:'cover'}}" alt="travel-libro" class="img-responsive full-width">
+                  <!-- <img ng-src="{{dest.countryBackgroundImage|uploadpath:400:400:'cover'}}" alt="travel-libro" class="img-responsive full-width"> -->
+                  <fade-img-loading blur="{{dest.countryBackgroundImage|uploadpath:10:10:'cover'}}" image="{{dest.countryBackgroundImage|uploadpath:400:400:'cover'}}"></fade-img-loading>
                   <div class="title-head-left color-white">
                     {{dest.name}}
                   </div>

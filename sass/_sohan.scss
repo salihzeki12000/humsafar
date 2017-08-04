@@ -454,7 +454,13 @@ a.color-white {
     overflow: hidden;
     cursor: pointer;
     @include perspective(1000px);
-
+    fade-img-loading {
+      .blur, .img-show {
+        width: 100%;
+        @include position(absolute, 50% null null 50%);
+        @include transform(translate(-50%,-50%));
+      }
+    }
     .flip-holder {
       position: relative;
       @include transform-style(preserve-3d);
@@ -1198,7 +1204,7 @@ a.color-white {
     &:before {
       content: '';
       @include position(absolute, 0);
-      background-color: rgba(0,0,0,0.55);
+      background-color: rgba(0,0,0,0.35);
       z-index: 2;
     }
     .gallery-imgholder {
@@ -1208,6 +1214,9 @@ a.color-white {
       z-index: 1;
       position: relative;
       overflow: hidden;
+      fade-img-loading {
+        .blur, .img-show { width: 100%; }
+      }
     }
 
     .socialize-holder{

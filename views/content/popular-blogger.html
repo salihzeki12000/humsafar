@@ -18,7 +18,8 @@
       <div class="col-md-4 col-sm-6 m-plr0" ng-repeat="photoblogger in popularBloggerData track by $index">
         <div class="blogger-cover relate">
           <div class="gallery-imgholder pointer" ui-sref="mylife({'urlSlug':photoblogger.urlSlug})">
-            <img ng-src="{{photoblogger.profilePicture|uploadpath:400:400:'cover'}}" alt="{{photoblogger.name}}" class="full-width">
+            <!-- <img ng-src="{{photoblogger.profilePicture|uploadpath:400:400:'cover'}}" alt="{{photoblogger.name}}" class="full-width"> -->
+            <fade-img-loading blur="{{photoblogger.profilePicture|uploadpath:10:10:'cover'}}" image="{{photoblogger.profilePicture|uploadpath:400:400:'cover'}}"></fade-img-loading>
           </div>
           <div class="blogger-cont-holder text-center relate">
             <h4 class="color-white  fnt-20 pointer avenir-heavy" ui-sref="mylife({'urlSlug':photoblogger.urlSlug})">{{photoblogger.name}}</h4>

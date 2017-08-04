@@ -51,7 +51,7 @@
         <div class="masonry-main side-scroll-direction">
           <div class="gallery-itiscroll">
             <div class="gallery-brick" ng-repeat="pic in itinerary.photos track by $index">
-              <div class="gallery-imgholder pointer" ng-click="getPhotosCommentData(pic._id)">
+              <div class="gallery-imgholder pointer" ng-click="getPhotosCommentData(pic._id, $index, itinerary.photos.length, itinerary.photos)">
                 <img ng-src="{{pic.name|uploadpath:320:320:'cover'}}" alt="">
                 <!-- <span class="color-blue">{{pic.caption}}</span> -->
               </div>

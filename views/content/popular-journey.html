@@ -134,13 +134,15 @@
                     <!-- img post slider end -->
                     <!-- post travelled journey -->
                     <!-- ng-if="post.travelledJourney" -->
-                    <div class="travelled-journey">                      
+                    <div class="travelled-journey">
                       <!-- cover photo -->
-                      <div class="travelled-imgholder" ng-if="post.coverPhoto" style="background: url('{{post.coverPhoto|uploadpath:722:750:'cover'}}') no-repeat 50% 50%; background-size: cover;">
+                      <div class="travelled-imgholder relate"  ng-if="post.coverPhoto" >
+                        <fade-img-loading blur="{{post.coverPhoto|uploadpath:10:10:'cover'}}" image="{{post.coverPhoto|uploadpath:722:750:'cover'}}"></fade-img-loading>
                       </div>
                       <!-- cover photo end -->
                       <!-- start locationpic -->
-                      <div class="travelled-imgholder" ng-if="!post.coverPhoto" style="background: url('{{post.startLocationPic|uploadpath:722:750:'cover'}}') no-repeat 50% 50%; background-size: cover;">
+                      <div class="travelled-imgholder relate map-imageholder" ng-if="!post.coverPhoto">
+                        <fade-img-loading blur="{{post.startLocationPic|uploadpath:10:10:'cover'}}" image="{{post.startLocationPic|uploadpath:722:750:'cover'}}"></fade-img-loading>
                       </div>
                       <!-- start locationpic end-->
                       <div class="journey-overview">

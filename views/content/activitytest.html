@@ -2,7 +2,7 @@
   <div class="container m-plr0 pt-60">
     <div class="activity-container">
       <div class="text-center">
-        <h3 class="color-white heading-activity avenir-heavy text-shadow">Activity Feed</h3>
+        <h3 class="color-blue heading-activity avenir-heavy">Activity Feed</h3>
       </div>
       <div class="" masonry preserve-order infinite-scroll="getMoreActivities()" infinite-scroll-distance="3">
         <div class="row m-m0">
@@ -119,15 +119,14 @@
                   </div>-->
                     <div class="post-img relate" ng-if="activity.showMap && activity.imageUrl" style="background: url('{{activity.imageUrl|uploadpath}}') no-repeat 50% 50%;">
                       <!-- <img src="{{activity.imageUrl|uploadpath}}" alt="" class="img-responsive"> -->
+                      <fade-img-loading blur="{{activity.imageUrl|uploadpath:10:10:'cover'}}" image="{{activity.imageUrl|uploadpath}}"></fade-img-loading>
                     </div>
                     <div class="photo-video-holder" ng-init="activity.index=0">
                       <!-- photos -->
                       <div class="post-img card-imgholder pointer relate" ng-if="activity.photos.length>0  && activity.display==='photo' && activity.type!='quick-itinerary' && activity.type!='detail-itinerary'"
-                        ng-click="getPhotosCommentData(activity.activityPhotosVideos[activity.index]._id, activity.index ,activity.activityPhotosVideos.length, activity.activityPhotosVideos)" style="background: url({{activity.activityPhotosVideos[activity.index].name|uploadpath}}) no-repeat; background-size: cover;background-position: 50% 50%;">
-                        <!--<div class="blur-img visible-xs">
-                          <img ng-src="{{activity.activityPhotosVideos[activity.index].name|uploadpath:722:750:'cover'}}" alt="">
-                        </div>-->
-                        <!--<img ng-src="{{activity.activityPhotosVideos[activity.index].name|uploadpath:722:750:'cover'}}" alt="" class="card-img">-->
+                        ng-click="getPhotosCommentData(activity.activityPhotosVideos[activity.index]._id, activity.index ,activity.activityPhotosVideos.length, activity.activityPhotosVideos)">
+                        <fade-img-loading blur="{{activity.activityPhotosVideos[activity.index].name|uploadpath:10:10:'cover'}}" image="{{activity.activityPhotosVideos[activity.index].name|uploadpath:722:750:'cover'}}">
+                        </fade-img-loading>
                       </div>
                       <!-- photos end-->
                       <!-- video -->
@@ -163,19 +162,20 @@
                     </div>
                     <div class="post-rating" ng-if="activity.canRate" ng-init="activity.rated=activity.review.length==1">
                       <div ng-if="!activity.rated" ng-click="getReview(activity);" ng-class="{'color-blue':activity.type=='local-life','color-pink':activity.type=='travel-life'}"
-                        class="avenir-heavy pointer"><span class="italic">Rate This Now</span></div>
+                        class="avenir-heavy pointer"><span class="italic color-light-grey">Rate This Now</span></div>
                       <div ng-if="activity.rated" ng-click="getReview(activity)">
-                        <span class="avenir-heavy color-blue">Rating :
-                        <span class="star-rating pointer" ng-repeat="time in activity.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':activity.type=='local-life','color-pink':activity.type=='travel-life'}"></i></span>
-                        <span class="star-rating pointer color-grey" ng-repeat="time in activity.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
+                        <span class="avenir-heavy color-light-grey">Rating :
+                        <span class="star-rating pointer" ng-repeat="time in activity.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':activity.type=='local-life','color-light-grey':activity.type=='travel-life'}"></i></span>
+                        <span class="star-rating pointer color-light-grey" ng-repeat="time in activity.review[0].rating|getArrayOfSize:'unmarked' track by $index"><i class="fa fa-star-o"></i></span>
                         </span>
                       </div>
                     </div>
                     <!-- img post slider end -->
                     <!-- post travelled journey -->
                     <div class="travelled-journey" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey'">
-                      <div class="travelled-imgholder" ng-init="banner=activity.coverPhoto && activity.coverPhoto!=''?activity.coverPhoto:activity.startLocationPic"
-                        ng-click="routeOngo(activity)" style="background: url('{{banner|uploadpath}}') no-repeat 50% 50%">
+                      <div class="travelled-imgholder relate" ng-init="banner=activity.coverPhoto && activity.coverPhoto!=''?activity.coverPhoto:activity.startLocationPic"
+                        ng-click="routeOngo(activity)">
+                        <fade-img-loading blur="{{banner|uploadpath:10:10:'cover'}}" image="{{banner|uploadpath:722:750:'cover'}}"></fade-img-loading>
                         <!-- <img ng-src="{{banner|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center"> -->
                       </div>
                       <div class="journey-overview">
@@ -257,8 +257,8 @@
                     <!-- post travelled journey end-->
                     <!-- post onway journey -->
                     <div class="onway-journey relate" ng-if="activity.type=='quick-itinerary' || activity.type=='detail-itinerary'">
-                      <div class="onway-imgholder pointer" ng-click="routeItinerary(activity)">
-                        <img ng-src="{{activity.coverPhoto|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center">
+                      <div class="onway-imgholder relate pointer" ng-click="routeItinerary(activity)">
+                        <fade-img-loading blur="{{activity.coverPhoto|uploadpath:10:10:'cover'}}" image="{{activity.coverPhoto|uploadpath:722:750:'cover'}}"></fade-img-loading>
                       </div>
                       <div class="journey-tag-holder" hidden>
                         <div class="days-spent pull-right" ng-if="activity.type!='editor-blog'">

@@ -59,8 +59,9 @@
                         <h4 class="font-bold color-dark-blue m-clear heading-name text-capitalize pointer" ng-if="post.itineraryBy=='Admin'">{{post.user.name}}</h4>
                         <h4 class="font-bold color-dark-blue m-clear heading-name text-capitalize pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})" ng-if="post.itineraryBy!='Admin'">{{post.user.name}}</h4>
                       </div>
-                      <div class="onway-imgholder">
-                        <img ng-src="{{post.coverPhoto|uploadpath:370:340:'cover'}}" alt="" class="full-width m-center">
+                      <div class="onway-imgholder relate">
+                        <!-- <img ng-src="{{post.coverPhoto|uploadpath:370:340:'cover'}}" alt="" class="full-width m-center"> -->
+                        <fade-img-loading blur="{{post.coverPhoto|uploadpath:10:10:'cover'}}" image="{{post.coverPhoto|uploadpath:370:340:'cover'}}"></fade-img-loading>
                       </div>
                       <div class="journey-tag-holder" hidden>
                         <div class="days-spent pull-right" ng-if="post.duration>0">
