@@ -23,6 +23,7 @@
                 <span class="color-white mr5"><i class="fa fa-plus"></i></span>
                 <div class="relate changecover-holder">
                     <span class="color-white">Change cover photo</span>
+                    <span class="file-size">Min. Dimension (1200 x 500)</span>
                     <upload-image ng-model="userData.coverPhoto" ng-callback="agentCoverPic(data);" allow-type="image/*" no-view class="pointer agentcover-uploadinput"></upload-image>
                 </div>
                 <!-- <div class="coversave-btn" ng-show="showCoverBtn">
@@ -261,3 +262,8 @@
     </div>
 </div>
 <!-- modal on load end -->
+<!-- Enquiry request sents successfully -->
+<div class="request-successful" hidden>
+  <h4>Request Sent Successfully</h4>
+</div>
+<!-- Enquiry request sents successfully end-->

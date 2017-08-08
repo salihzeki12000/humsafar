@@ -8,10 +8,10 @@
             <div class="row m-m0">
                 <div class="col-md-4 col-sm-6 col-xs-12 m-plr0" ng-repeat="tourcard in usrTourPackageCard track by $index">
                     <div class="agt-itinerarycard">
-                        <div class="itinerary-img">
-                            <div class="logo-booking-card">
+                        <div class="itinerary-img" style="background: url('{{tourcard.displayPic|uploadpath}}'); background-size: cover;">
+                            <!-- <div class="logo-booking-card">
                                 <img ng-src="" alt="">
-                            </div>
+                            </div> -->
                             <div class="theme">
                                 <div class="theme-img">
                                     <img ng-src="{{tourcard.typeOfHoliday[0] | kindOfJourney:'white'}}" class="img-responsive" alt="">
@@ -25,7 +25,7 @@
                                     <img ng-src="{{tourcountryflagbadge.flag|uploadpath}}" alt="" class="img-responsive">
                                 </div>
                             </div>
-                            <img ng-src="{{tourcard.displayPic|uploadpath}}" alt="" class="img-responsive">
+                            <!-- <img ng-src="{{}}" alt="" class="img-responsive"> -->
                             <div class="itinerary-imgfoot ">
                                 <div class="imgfoot-top clearfix">
                                     <div class="pull-left">

@@ -972,7 +972,7 @@
 
 .country-badges {
   position: absolute;
-  top: -30px;
+  top: -10px;
   right: 0;
 }
 
@@ -990,8 +990,8 @@
 .agt-usr-touractivity,
 .agt-usr-tourpackages {
   .country-holder {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     overflow: hidden;
     position: relative;
     border: 1px solid #fff;
@@ -1091,7 +1091,9 @@
   color: $brand-blue;
   font-style: italic;
 }
-
+.testimonial-quote {
+  word-break: break-all;
+}
 .testimonial-details {
   margin: 10px 0;
 }
@@ -1266,7 +1268,7 @@ q {
 .agtcategory-type {
   margin: 30px 0;
   .select-category-type {
-    min-width: 80px;
+    // min-width: 80px;
     display: inline-block;
     text-align: center;
   }
@@ -1286,7 +1288,7 @@ q {
 .agentservices-list {
   display: inline-block;
   padding: 5px 10px;
-  margin: 5px;
+  margin: 5px 5px 5px 0;
   background-color: transparent;
   color: $brand-blue;
   border: 1px solid $brand-blue;
@@ -1579,6 +1581,13 @@ q {
     left: 0;
     width: 100%;
     opacity: 0;
+  }
+  .tour-filesize {
+    margin: 5px;
+    display: block;
+    color: #fff;
+    font-size: 11px;
+    text-align: center;
   }
 }
 
@@ -3444,7 +3453,17 @@ q {
     padding: 20px 50px;
   }
 }
-
+.request-successful {
+  width: 400px;
+  padding: 2%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  @include transform(translate(-50%,-50%));
+  background-color: #fff;
+  font-size: 20px;
+  text-align: center;
+}
 .agent-contactmail {
   &:last-child {
     .email-separater {
@@ -5387,6 +5406,12 @@ q {
     height: 100%;
     opacity: 0;
     cursor: pointer !important;
+  }
+  .file-size {
+    margin: 5px 10px 0;
+    display: block;
+    color: #fff;
+    font-size: 11px;
   }
 }
 
