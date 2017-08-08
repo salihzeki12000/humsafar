@@ -39,9 +39,17 @@ var agent = angular.module('agent', [])
         },
 
         saveTour: function (formData, callback) {
-            console.log(formData, "tour api");
             TravelibroService.http({
                 url: adminURL + "/toursPackages/saveWeb",
+                method: "POST",
+                data: formData
+            }).success(function (data) {
+                callback(data);
+            });
+        },
+        deleteTour: function (formData, callback) {
+            TravelibroService.http({
+                url: adminURL + "/toursPackages/deleteTour",
                 method: "POST",
                 data: formData
             }).success(function (data) {

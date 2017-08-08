@@ -12383,6 +12383,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.unactionLeads = [];
     $scope.actionLeads = [];
     $scope.tourData = [];
+    $scope.delete = false;
+    var modal = "";
+    $scope.tourDel = {};
     $scope.reviewData = [];
     $scope.agentItineraryType = [];
     $scope.agentCityFilter = [];
@@ -13404,6 +13407,32 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // GET TOURS AND TESTIMONIALS END
 
+    //DELETE TOUR
+    $scope.deleteTour = function (tour) {
+        $scope.tourDel = tour;
+        modal = $uibModal.open({
+            templateUrl: "views/modal/delete-tour.html",
+            animation: true,
+            scope: $scope,
+            windowClass: "report-modal",
+            backdrop: "static"
+        });
+    };
+    $scope.callDelete = function () {
+        Agent.deleteTour({ _id: $scope.tourDel._id }, function (data) {
+            if (data.value) {
+                $scope.delete = true;
+                $timeout(function () {
+                    modal.close();
+                }, 3000);
+                $scope.getAgentData('tours&packages', $scope.activeUrlSlug, 1);
+            } else {
+                console.log("err");
+            }
+        });
+    };
+    //DELETE TOUR END
+
     $scope.getLeadsChart = function (activeSlug) {
         leadChart.urlSlug = activeSlug;
         console.log($scope.leadFilterData);
@@ -13940,11 +13969,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //Show OPTIONS
     $scope.editOption = function (model) {
-        $timeout(function () {
-            model.backgroundClick = true;
-            backgroundClick.object = model;
-        }, 200);
-        backgroundClick.scope = $scope;
+        if (model.backgroundClick) {
+            model.backgroundClick = false;
+        } else {
+            $timeout(function () {
+                model.backgroundClick = true;
+                backgroundClick.object = model;
+            }, 200);
+            backgroundClick.scope = $scope;
+        }
     };
     //Show OPTIONS END
 
