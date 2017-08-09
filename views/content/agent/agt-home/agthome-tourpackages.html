@@ -117,9 +117,9 @@
                                         <!-- COUNTRY UI SELECT -->
                                         <div class="form-group relate">
                                             <div class="tour-type tour-select">
-                                                <ui-select multiple ng-model="tour.country" theme="bootstrap" title="Country" ng-required="true" on-select="getCity();">
+                                                <ui-select multiple ng-model="tour.country" theme="bootstrap" title="Country" ng-required="true" on-select="getCity();" on-remove="removeCity($item);">
                                                     <ui-select-match placeholder="Country">{{$item.name}}</ui-select-match>
-                                                    <ui-select-choices repeat="country._id as country in countries | filter: $select.search track by $index">
+                                                    <ui-select-choices repeat="country in countries | filter: $select.search track by $index">
                                                         <div>
                                                             <span class="color-white">{{country.name}}</span>
                                                         </div>
@@ -133,7 +133,7 @@
                                             <div class="tour-type tour-select">
                                                 <ui-select multiple ng-model="tour.city" theme="bootstrap" title="City" ng-required="true">
                                                     <ui-select-match placeholder="City">{{$item.name}}</ui-select-match>
-                                                    <ui-select-choices repeat="city._id as city in cities | filter: $select.search track by $index">
+                                                    <ui-select-choices repeat="city in cities | filter: $select.search track by $index">
                                                         <div>
                                                             <span class="color-white">{{city.name}}</span>
                                                         </div>
@@ -161,7 +161,8 @@
                                                 <span class="tour-filesize">Min. Dimension (800 x 600)</span>
                                                 <upload-image ng-model="tour.displayPic" ng-callback="tourPhoto(data);" allow-type="image/*" no-view class="pointer tour-uploadinput" required></upload-image>
                                             </div>
-                                            <button class="btn btn-pink btn-more tourupload-position" type="submit" ng-disabled="toursForm.$invalid || showDNErr || showHMErr">SAVE</button>
+                                            <button class="btn btn-pink btn-more tourupload-position" type="submit" ng-disabled="toursForm.$invalid || showDNErr || showHMErr" ng-if="!tour.fromEdit">SAVE</button>
+                                            <button class="btn btn-pink btn-more tourupload-position" type="submit" ng-disabled="toursForm.$invalid || showDNErr || showHMErr" ng-if="tour.fromEdit">UPDATE</button>
                                         </div>
                                         <!-- upload buttons end -->
                                         <!-- file preview holder -->
@@ -256,7 +257,7 @@
                                             <p class="day-night" ng-if="tourcard.nights && tourcard.days"><span>{{tourcard.nights}} Nights</span> | <span>{{tourcard.days}} Days</span></p>
                                             <p class="day-night" ng-if="tourcard.hours && tourcard.minutes"><span>{{tourcard.hours}} Hours</span> | <span>{{tourcard.minutes}} Minutes</span></p>
                                             <!-- <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{tourcard.createdAt | formatDate:'date' }}</span>                      | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{tourcard.createdAt | formatDate:'time' }}</span></p> -->
-                                            <a href="" class="day-night color-white" ng-if="template.isLoggedIn && template.isMine">
+                                            <a href="" class="day-night color-white" ng-click="editTour(tourcard);" ng-if="template.isLoggedIn && template.isMine">
                                                 <i class="fa fa-pencil color-white"></i>
                                             </a>|
                                             <a href="" class="day-night color-white" ng-click="deleteTour(tourcard);" ng-if="template.isLoggedIn && template.isMine">
