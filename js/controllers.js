@@ -442,7 +442,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             } else {
                 // $scope.alreadyExist = true;
                 $scope.showError.show = true;
-                $scope.showError.msg = "Email Already Exists"
+                if (data.data == "Registered as User") {
+                    $scope.showError.msg = "Email already registered as a user. Register with an alternate email address to login as Partner";
+                } else {
+                    $scope.showError.msg = "Email already exists as Partner";
+                }
                 $timeout(function () {
                     $scope.showError = {
                         show: "",
@@ -460,26 +464,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     console.log(err);
                 });
             } else {
-                // $scope.showError = true;
-                if (data.data.message === "Registered as User") {
-                    $scope.showError.show = true;
-                    $scope.showError.msg = "Email already registered as a user. Register with an alternate email address to login as Partner.";
-                    $timeout(function () {
-                        $scope.showError = {
-                            show: "",
-                            msg: ""
-                        };
-                    }, 10000);
-                } else {
-                    $scope.showError.show = true;
-                    $scope.showError.msg = "Incorrect Email or Password";
-                    $timeout(function () {
-                        $scope.showError = {
-                            show: "",
-                            msg: ""
-                        };
-                    }, 10000);
-                }
+                $scope.showError.show = true;
+                $scope.showError.msg = "Incorrect Email or Password";
+                $timeout(function () {
+                    $scope.showError = {
+                        show: "",
+                        msg: ""
+                    };
+                }, 10000);
             }
         });
     };
@@ -9872,12 +9864,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("User-DetailItinerary");
     $scope.navigation = NavigationService.getnav();
 
-    $scope.closeBackDrop = function () {
-        $scope.viewCardComment = false;
-        $scope.viewCardLike = false;
-        $scope.getCard = "";
-    };
-
     //Integration starts here
 
     // sharing local life modal
@@ -9911,15 +9897,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //get quick-itinerary details starts
     var slug = $stateParams.id;
-    Itinerary.getOneItinerary(slug, function (data) {
-        $scope.itinerary = data.data;
-        console.log($scope.itinerary);
-        if ($scope.itinerary.itineraryBy == "Admin") {
-            TemplateService.title = $scope.itinerary.name + " - " + $scope.itinerary.itineraryType[0] + " Itinerary - TraveLibro";
-        } else {
-            TemplateService.title = $scope.itinerary.name + " - " + $scope.itinerary.user.name + " | TraveLibro";
-        }
-    });
+    $scope.initialCall = function () {
+        Itinerary.getOneItinerary(slug, function (data) {
+            $scope.itinerary = data.data;
+            console.log($scope.itinerary);
+            if ($scope.itinerary.itineraryBy == "Admin") {
+                TemplateService.title = $scope.itinerary.name + " - " + $scope.itinerary.itineraryType[0] + " Itinerary - TraveLibro";
+            } else {
+                TemplateService.title = $scope.itinerary.name + " - " + $scope.itinerary.user.name + " | TraveLibro";
+            }
+        });
+    };
+    $scope.initialCall();
     //get quick-itinerary details ends
 
     // route to user profile
@@ -9941,13 +9930,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.likeUnlikeItinerary = function (flag, _id, uniqueId) {
         Itinerary.updateLikeItinerary(flag, _id, uniqueId, function (data) {
             if (data) {
-                if ($scope.itinerary.likeCount == null) {
-                    $scope.itinerary.likeCount = 1
+                if ($scope.itinerary.likeCount) {
+                    $scope.itinerary.likeCount = $scope.itinerary.likeCount + 1;
                 } else {
-                    $scope.itinerary.likeCount = $scope.likeCount + 1;
+                    $scope.itinerary.likeCount = 1
                 }
             } else {
-                $scope.itinerary.likeCount = $scope.likeCount - 1;
+                $scope.itinerary.likeCount = $scope.itinerary.likeCount - 1;
             }
             $scope.itinerary.likeDone = data;
             console.log($scope.itinerary.likeCount, $scope.itinerary.likeDone);
@@ -10044,10 +10033,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
         //Itinerary Options List Show End
 
-    $scope.closeBackdrop = function () {
+    $scope.closeBackDrop = function () {
         $scope.getCard = "";
         $scope.viewCardComment = false;
         $scope.viewCardLike = false;
+        console.log('test');
+        $scope.initialCall();
     }
 
     // comment and like side card
@@ -10150,6 +10141,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
     };
     //photo gallery backdrop end
+
+
+    //PUBLISH
+    $scope.uploadQuickItinerary = function (itinerary) {
+        console.log(itinerary);
+        Itinerary.publishQuickItinerary(itinerary._id, itinerary.status, true, function (data) {
+            if (data.value) {
+                Itinerary.getOneItinerary(slug, function (data) {
+                    $scope.itinerary = data.data;
+                });
+            } else {
+
+            }
+        });
+    };
+    //PUBLISH
 
     // DELETE ITINERARY
     var deleteModal = "";
@@ -11003,8 +11010,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }, 100);
     });
     //about textarea counter end
-
-    //switching between cards
+    $scope.checkme = function () {
+            console.log($scope.userDetails.company.agentType);
+        }
+        //switching between cards
     $scope.agentSec = function (val) {
             switch (val) {
                 case 0:
@@ -11040,6 +11049,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     $scope.agentloginView = 4;
                     break;
                 case 5:
+                    console.log($scope.userDetails.company.agentType);
                     checkForImageChange();
                     $scope.agentloginView = 5;
                     console.log($scope.userDetails.company.email);
@@ -11085,13 +11095,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     {
-        $scope.businessModel = [{
-            name: "Tour Operator"
-        }, {
-            name: "Travel Agent"
-        }, {
-            name: "Local Guide"
-        }];
+        $scope.businessModel = ["Tour Operator", "Travel Agent", "Local Guide"];
     }
 
     {
@@ -11665,13 +11669,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //Business Model
     {
-        $scope.businessModel = [{
-            name: "Tour Operator"
-        }, {
-            name: "Travel Agent"
-        }, {
-            name: "Local Guide"
-        }];
+        $scope.businessModel = ["Tour Operator", "Travel Agent", "Local Guide"];
     }
     //Business Model
     // choose category Specialisation
@@ -13040,20 +13038,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // GET AGENT ITINERARY
     // FILTER ITINERARY DESTINATION
-    $scope.getItinerayCity = function (formData) {
-        $scope.cityList = [];
-        console.log('hihsjk', formData);
-        Agent.getAgentCitySearch({
-            keyword: $scope.itinerary.citySearch
-        }, function (data) {
-            $scope.cityList = data.data.results;
-            $scope.cityList = _.map($scope.cityList, function (cityListData) {
-                cityListData.checked = false;
-                return cityListData;
-            });
-            console.log($scope.cityList, 'get Data');
-        })
-    };
+    // $scope.getItinerayCity = function (formData) {
+    //     $scope.cityList = [];
+    //     console.log('hihsjk', formData);
+    //     Agent.getAgentCitySearch({
+    //         keyword: $scope.itinerary.citySearch
+    //     }, function (data) {
+    //         $scope.cityList = data.data.results;
+    //         $scope.cityList = _.map($scope.cityList, function (cityListData) {
+    //             cityListData.checked = false;
+    //             return cityListData;
+    //         });
+    //         console.log($scope.cityList, 'get Data');
+    //     })
+    // };
     // filter sorting
 
     $scope.itineraryFilter = function (filterItinerary, filterType) {

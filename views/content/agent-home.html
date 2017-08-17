@@ -12,7 +12,7 @@
                             <img ng-src="{{userData.profilePicture|uploadpath}}" alt="{{userData.name}}" class="img-responsive">
                         </div>
                     </a>
-                    <h4 class="avenir-heavy text-capitalize">{{userData.name}}</h4><span ng-if="userData.company && userData.company.agentType">{{userData.company.agentType}}</span>
+                    <h4 class="avenir-heavy text-capitalize">{{userData.name}}</h4><span ng-if="userData.company && userData.company.agentType">{{userData.company.agentType|stringForm}}</span>
                     <p>{{userData.homeCity}}</p>
                     <button class="btn btn-white-outline mr5" ui-sref="agent-setting" ng-if="template.isMine">Edit </button>
                     <button class="btn btn-white-outline mr5" ng-click="followFollowing(userData)" ng-if="!template.isMine">{{userData.following | followFollowingStatus}}</button>
@@ -264,6 +264,6 @@
 <!-- modal on load end -->
 <!-- Enquiry request sents successfully -->
 <div class="request-successful" hidden>
-  <h4>Request Sent Successfully</h4>
+    <h4>Request Sent Successfully</h4>
 </div>
 <!-- Enquiry request sents successfully end-->

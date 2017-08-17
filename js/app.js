@@ -917,6 +917,19 @@ firstapp.filter('uploadpath', function () {
     };
 });
 
+firstapp.filter('stringForm', function () {
+    return function (input) {
+        if (input && input.length > 0) {
+            var arr = "";
+            _.each(input, function (each) {
+                arr = arr + ", " + each;
+            });
+            arr = arr.substring(1);
+            return arr;
+        }
+    };
+});
+
 firstapp.directive('onlyDigits', function () {
     return {
         require: 'ngModel',

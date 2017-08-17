@@ -166,21 +166,24 @@
                                     <span ng-hide="!emailExist">Email Already Entered</span>
                                     <div class="form-group">
                                         <div class="agent-cmpny-inputholder">
-                                            <input type="text" class="form-control color-blue" placeholder="Website (E.g: http://www.yoursite.com)" ng-model="userDetails.company.website">
+                                            <input type="url" class="form-control color-blue" placeholder="Website (E.g: http://www.yoursite.com)" ng-model="userDetails.company.website">
                                             <div class="agent-input-icon">
                                                 <i class="fa fa-globe color-grey"></i>
                                             </div>
+                                            <span ng-show="userDetailsForm.company.website.$touched && userDetailsForm.company.website.$invalid">This url is invalid.</span>
                                         </div>
                                     </div>
                                     <!-- your bussiness model -->
-                                    <div class="business-model select-your-city select-your-nation">
-                                        <div class="nation-city">
-                                            <ui-select ng-model="userDetails.company.agentType" theme="bootstrap" ng-value="userDetails.company.agentType">
-                                                <ui-select-match placeholder="Select Your Business Model">{{$select.selected.name}}</ui-select-match>
-                                                <ui-select-choices repeat="model.name as model in businessModel | filter:searchModel">
-                                                    <span class="color-light-grey">{{model.name}}</span>
+                                    <div class="">
+                                        <div class="">
+                                            <!-- <div class="nation-city"> -->
+                                            <ui-select multiple ng-model="userDetails.company.agentType" theme="bootstrap" on-select="checkme();">
+                                                <ui-select-match placeholder="Select Your Business Model">{{$item}}</ui-select-match>
+                                                <ui-select-choices repeat="model in businessModel | filter:searchModel">
+                                                    <span class="color-light-grey">{{model}}</span>
                                                 </ui-select-choices>
                                             </ui-select>
+                                            <!-- </div> -->
                                         </div>
                                     </div>
                                     <!-- your bussiness model end-->
@@ -188,7 +191,7 @@
                             </div>
                             <div class="button-panel clearfix">
                                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="agentSec(3)">Previous</button>
-                                <button class="btn btn-blue-outline btn-more pull-right" ng-click="agentSec(5)" ng-disabled="userDetailsForm.name.$invalid ">Next</button>
+                                <button class="btn btn-blue-outline btn-more pull-right" ng-click="agentSec(5)" ng-disabled="userDetailsForm.$invalid ">Next</button>
                             </div>
                         </div>
                     </div>
@@ -201,7 +204,7 @@
                                 <div class="text-right">
                                     <span class="color-dark-blue pointer" ng-click="removePhoto()">Cancel</span>
                                 </div>
-                                <img-crop image="myImage" result-image="uploadme.src" /></img-crop>
+                                <img-crop image="myImage" result-image="uploadme.src" area-type="square"></img-crop>
                             </div>
                             <!-- <div class="show ">
                 <img ng-src="{{myCroppedCompLogo}} " />

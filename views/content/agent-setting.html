@@ -160,8 +160,8 @@
                                     <div class="profile-agtphoto-sec upload-profile">
                                         <label for="profile" class="color-blue avenir-medium">Profile Photo</label>
                                         <div class="cropArea relate" ng-show="showImage" id="profile">
-                                            <div class="cancel" ng-click="showImage=false"><span class="pointer">Cancel</span></div>
-                                            <img-crop image="agentImage" result-image="agentCroppedImage">
+                                            <div class="cancel" ng-click="showImage=false"><span class="pointer color-white">Cancel</span></div>
+                                            <img-crop image="agentImage" result-image="agentCroppedImage" area-type="square" class="bg-dark-blue">
                                             </img-crop>
                                             <div class="btn-upload">
                                                 <button class="btn btn-pink btn-more" ng-click="uploadAgentProfilePic(agentCroppedImage)">Upload</button>
@@ -251,12 +251,10 @@
                                             <div class="form-group">
                                                 <label for="office-location" class="color-blue">Your Business Model</label>
                                                 <div class="agentsetting-select">
-                                                    <ui-select ng-model="agentData.company.agentType" theme="bootstrap">
-                                                        <ui-select-match placeholder="Select Your Business Model">{{agentData.company.agentType}}</ui-select-match>
-                                                        <ui-select-choices repeat="model.name as model in businessModel | filter: $select.search track by $index">
-                                                            <div class="">
-                                                                <p class="">{{model.name}}</p>
-                                                            </div>
+                                                    <ui-select multiple ng-model="agentData.company.agentType" theme="bootstrap">
+                                                        <ui-select-match placeholder="Select Your Business Model">{{$item}}</ui-select-match>
+                                                        <ui-select-choices repeat="model in businessModel | filter: $select.search track by $index">
+                                                            <span class="color-light-grey">{{model}}</span>
                                                         </ui-select-choices>
                                                     </ui-select>
                                                 </div>
