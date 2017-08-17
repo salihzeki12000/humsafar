@@ -1,8 +1,8 @@
 var adminURL = "";
 var allowAccess = "";
 
-adminURL = "https://travelibro.com/api";
-// adminURL = "https://travelibro.wohlig.com/api";
+// adminURL = "https://travelibro.com/api";
+adminURL = "https://travelibro.wohlig.com/api";
 
 
 var imgurl = adminURL + "/upload/";
@@ -451,6 +451,7 @@ var navigationservice = angular.module('navigationservice', [])
         var object = {};
         switch (status) {
           case 1:
+          formData.website = formData.company.website;
             console.log('on switch 1');
             var temp = "";
             if (userData.homeCity && userData.homeCity.description) {
@@ -467,7 +468,7 @@ var navigationservice = angular.module('navigationservice', [])
             }
 
             console.log(formData, "after formating");
-            object = _.pick(formData, 'firstName', 'lastName', 'gender', 'homeCountry', 'homeCity', 'isBlogger', 'isPhotographer', 'favorite_city', 'dream_destination', 'dob');
+            object = _.pick(formData, 'firstName', 'lastName', 'gender', 'homeCountry', 'homeCity', 'isBlogger', 'isPhotographer', 'favorite_city', 'dream_destination','dob','urlSlug','website');
             if (object.firstName !== "" || object.lastName !== "") {
               object.firstName = object.firstName.trim();
               object.lastName = object.lastName.trim();

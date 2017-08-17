@@ -6,7 +6,7 @@
           <div class="text-cont ab">
             <div class="pull-right">
               <div class="android-ios">
-                <img src="img/libro-home/android-ios.png" alt="">
+                <img src="img/libro-home/login-phone.png" alt="">
               </div>
             </div>
           </div>
@@ -18,22 +18,27 @@
             <div class="login-signup-tab">
               <uib-tabset active="activeJustified">
                 <uib-tab index="0" heading="Login">
-                  <div class="ptb20">
+                  <div class="pt10">
                     <div class="login-form">
-                      <form ng-submit="submit()">
+                      <h3 class="avenir-heavy m-clear">Capture and Relive Your Travel Stories</h3>
+                      <h4 class="avenir-medium text-uppercase">TraveLibro is your own personalised Travel Diary.</h4>
+                      <p class="avenir-roman text-justify">Now capture each trip live using the TraveLibro app and record every activity on-the-go to showcase a beautiful timeline of your journey. Here's a detailed travel log of your travel stories, moments and reviews to relive a lifetime of memories, which makes it a must-have travel tracker.</p>
+                      <p class="avenir-roman text-justify">Additionally, some of the world's best travel bloggers use our app as their travel journal. Discover their travel stories and get inspired to explore the world.</p>
+                      <h4 class="avenir-medium your-story text-uppercase">Login now to tell your stories differently.</h4>
+                      <!-- <form ng-submit="submit()">
                         <div class="form-group">
                           <div class="input-group">
                             <span class="input-group-addon">
-                                                          <i class="fa fa-envelope color-white" aria-hidden="true"></i>
-                                                        </span>
+                              <i class="fa fa-envelope color-white" aria-hidden="true"></i>
+                            </span>
                             <input type="email" class="form-control color-white" id="inputGroupSuccess4" aria-describedby="Emaild Id" placeholder="Email Id" ng-model="formData.email">
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="input-group">
                             <span class="input-group-addon">
-                                                            <i class="fa fa-lock color-white fnt-20" aria-hidden="true"></i>
-                                                        </span>
+                              <i class="fa fa-lock color-white fnt-20" aria-hidden="true"></i>
+                            </span>
                             <input type="password" class="form-control color-white" placeholder="Password" ng-model="formData.password">
                           </div>
                           <div class="forgot-link pt10 text-right">
@@ -48,9 +53,19 @@
                                                         Login
                                                     </button>
                         </div>
-                      </form>
+                      </form> -->
+                      <div class="social-login-btn">
+                        <a class="facebook-login-btn" ng-click="socialLogin('loginFacebook')">
+                          <i class="fa fa-facebook"></i>
+                          <span>Login Via Facebook</span>
+                        </a>
+                        <a class="google-login-btn" ng-click="socialLogin('loginGoogle')">
+                          <i class="fa fa-google-plus"></i>
+                          <span>Login Via Google</span>
+                        </a>
+                      </div>
                     </div>
-                    <div class="social-login pt10">
+                    <div class="social-login pt10" hidden>
                       <ul class="unstyled-list list-inline color-white avenir-roman">
                         <li>Or Login Via</li>
                         <!--<li class="login-social-img">
@@ -73,8 +88,25 @@
                   </div>
                 </uib-tab>
                 <uib-tab index="1" heading="Sign Up">
-                  <div class="min-hght ptb20">
-                    <div class="social-login">
+                  <div class="min-hght pt10">
+                    <div class="signup-form">
+                      <h3 class="avenir-heavy m-clear">Capture and Relive Your Travel Stories</h3>
+                      <h4 class="avenir-medium text-uppercase">TraveLibro is your own personalised Travel Diary.</h4>
+                      <p class="avenir-roman text-justify">Now capture each trip live using the TraveLibro app and record every activity on-the-go to showcase a beautiful timeline of your journey. Here's a detailed travel log of your travel stories, moments and reviews to relive a lifetime of memories, which makes it a must-have travel tracker.</p>
+                      <p class="avenir-roman text-justify">Additionally, some of the world's best travel bloggers use our app as their travel journal. Discover their travel stories and get inspired to explore the world.</p>
+                      <h4 class="avenir-medium your-story text-uppercase">Sign up now to tell your stories differently.</h4>
+                    </div>
+                    <div class="social-login-btn">
+                      <a class="facebook-login-btn" ng-click="socialLogin('loginFacebook')">
+                        <i class="fa fa-facebook"></i>
+                        <span>Sign Up Via Facebook</span>
+                      </a>
+                      <a class="google-login-btn" ng-click="socialLogin('loginGoogle')">
+                        <i class="fa fa-google-plus"></i>
+                        <span>Sign Up Via Google</span>
+                      </a>
+                    </div>
+                    <div class="social-login" hidden>
                       <div class="color-white avenir-roman">
                         Sign Up Via
                       </div>
@@ -101,7 +133,7 @@
                   </div>
                 </uib-tab>
                 <uib-tab index="2" heading="Register As Partner" data-toggle="tooltip" title="Travel Agent | Tour Operator | Local Guide"
-                  class="pointer login-partner-tooltip">
+                  class="pointer login-partner-tooltip hide">
                   <!-- <div class="min-hght ptb20"> -->
                     <!-- AGENT LOGIN -->
                     <!-- <div class="login-form agent-signup" ng-hide="agentSignup">
