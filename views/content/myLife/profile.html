@@ -86,20 +86,22 @@
             </div>
         </div>
         <div class="all-profile-detail">
-            <div class="more-about-me" ng-init="">
-                <div class="row m-m0">
-                    <div class="col-md-offset-2 col-md-8">
-                        <div class="text-center">
-                            <div class="more-detail" ng-init="getMore=false" ng-show="getMore">
-                                <p class="avenir-roman" ng-if="userData.alreadyLoggedIn==true"><span class="avenir-heavy">{{userName}}</span> loves to travel and explore <span class="avenir-heavy">{{kindOfHoliday}}</span>. {{pronoun | capitalize}} usually goes <span class="avenir-heavy">{{usuallyGo}}{{usuallyGo1}}</span>, {{pronoun}} {{intermediate}}
-                                    <span class="avenir-heavy">{{preferToTravel}}</span>. <span class="avenir-heavy">{{userName}}'s</span> ideal holiday type is <span class="avenir-heavy">{{idealHoliday}}</span>.</p>
-                                <p ng-if="userData.alreadyLoggedIn==false"> - </p>
-                            </div>
-                            <span class="djb-font get-more pointer" ng-click="getMore = !getMore">more about me... <img src="img/more-about-me.png" alt="" height="35" class="" ng-class="{'abt-me': getMore == true}"></span>
-                        </div>
-                    </div>
-                </div>
+            <!-- <div class="more-about-me" ng-if="userData.travelConfig.holidayType !='' && userData.travelConfig.kindOfHoliday != '' && userData.travelConfig.preferToTravel != '' && userData.travelConfig.usuallyGo !=''">
+        <div class="row m-m0">
+          <div class="col-md-offset-2 col-md-8">
+            <div class="text-center">
+              <div class="more-detail" ng-init="getMore=false" ng-show="getMore">
+                <p class="avenir-roman" ng-if="userData.alreadyLoggedIn==true"><span class="avenir-heavy">{{userName}}</span> loves to travel and explore <span class="avenir-heavy">{{kindOfHoliday}}</span>.
+                  {{pronoun | capitalize}} usually <span>{{pronoun ==='They'? 'go': 'goes' }}</span> <span class="avenir-heavy">{{usuallyGo}}{{usuallyGo1}}</span>, {{pronoun}}
+                  {{intermediate}}
+                  <span class="avenir-heavy">{{preferToTravel}}</span>. <span class="avenir-heavy">{{userName}}'s</span>                  ideal holiday type is <span class="avenir-heavy">{{idealHoliday}}</span>.</p>
+                <p ng-if="userData.alreadyLoggedIn==false"> - </p>
+              </div>
+              <span class="djb-font get-more pointer" ng-click="getMore = !getMore">more about me... <img src="img/more-about-me.png" alt="" height="35" class="" ng-class="{'abt-me': getMore == true}"></span>
             </div>
+          </div>
+        </div>
+      </div> -->
             <div class="bg-white">
                 <div class="vector-section ">
                     <div class="row m-m0">

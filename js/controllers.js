@@ -624,7 +624,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.userData = {};
     $scope.profile = $.jStorage.get("profile");
     $scope.myImage = '';
-    if ($scope.profile.profilePicture) {
+    $scope.showUserError = "";
+    if ($scope.profile && $scope.profile.profilePicture) {
         NavigationService.getImageFromServer($scope.profile.profilePicture, function (data) {
             // $scope.myImage=data;
             $scope.myImage = $window.URL.createObjectURL(new Blob([data], {
@@ -632,8 +633,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             }));
             console.log($scope.myImage);
         });
+    } else {
+        $state.go('login');
     }
-    $scope.userData.gender = $scope.profile.gender;
+    if ($scope.profile) {
+        $scope.userData.gender = $scope.profile.gender;
+    } else {
+        $state.go('login');
+    }
     $scope.image = null;
     $scope.imageFileName = '';
     $scope.uploadme = {};
@@ -753,23 +760,47 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     var saveDataCallback = function (data, status) {
+        console.log(data, 'what is data', status, 'status', 'first 3 steps');
         if (data.value === true) {
+            var profile = $.jStorage.get("profile");
+            profile.urlSlug = $scope.userData.urlSlug;
+            $.jStorage.set('profile', profile);
+            console.log($scope.userData.urlSlug, 'user data', $.jStorage.get("profile").urlSlug, 'j stoage');
             console.log(data);
-            NavigationService.getProfile($.jStorage.get("profile").urlSlug, globalGetProfile, function (err) {
+            NavigationService.getProfile($.jStorage.get("profile").urlSlug, function (data, status) {
+                if (data.data._id) {
+                    $.jStorage.set("isLoggedIn", true);
+                    $.jStorage.set("profile", data.data);
+                    $.jStorage.set("qualifiedForHoliday", null);
+                    $state.go("mylife", {
+                        // name: 'journey',
+                        urlSlug: $.jStorage.get("profile").urlSlug
+                    });
+                } else {
+                    $.jStorage.flush();
+                }
+            }, function (err) {
                 console.log(err);
             });
             // $window.location.reload();
-            $.jStorage.set('qualifiedForHoliday', true);
-            $state.go('holiday');
+            // $.jStorage.set('qualifiedForHoliday', true);
+            // $state.go('holiday');
+            // $state.go("mylife",{
+            //   urlSlug: $.jStorage.get("profile").urlSlug
+            // });
         } else {
             console.log(data);
+            $scope.showUserError = "error-username";
         }
     };
 
     $scope.saveUserData = function (userData) {
+        console.log(userData, 'what is user data');
         var str = userData.homeCity;
         var arr = str.split(",");
         userData.homeCity = arr[0];
+        userData.name = $scope.profile.name;
+        userData.urlSlug = $scope.profile.urlSlug;
         NavigationService.saveUserData(userData, saveDataCallback, function (err) {
             console.log(err);
         });
@@ -829,7 +860,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, 1000);
 
     $scope.file = {
-        myFile: "Chintan"
+        myFile: "myFile"
     };
 
     //angular file upload ends here
@@ -1003,7 +1034,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         storeCaption: "Festival"
     }];
 
-    _.each()
     $scope.getHoliday = function (val) {
         if ($scope.holidayKindType[val].class == "active-holiday") {
             $scope.holidayKindType[val].class = "";
@@ -1076,6 +1106,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var saveDataCallback = function (data, status) {
         if (data.value === true) {
             NavigationService.getProfile($.jStorage.get("profile").urlSlug, function (data, status) {
+                console.log(data, 'holiday wala data');
                 if (data.data._id) {
                     $.jStorage.set("isLoggedIn", true);
                     $.jStorage.set("profile", data.data);
@@ -5401,9 +5432,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         if ($scope.userData.gender == "male") {
             $scope.pronoun = "he";
             $scope.pronoun1 = "him";
-        } else {
+        } else if ($scope.userData.gender == "female") {
             $scope.pronoun = "she";
             $scope.pronoun1 = "her";
+        } else {
+            $scope.pronoun = "They";
+            $scope.pronoun1 = "Them";
         }
 
         if ($scope.usuallyGo == "By the map ") {
@@ -7230,7 +7264,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Used to name the .html file
     $scope.profile = $.jStorage.get("profile");
     $scope.userData = _.clone($scope.profile);
-
+    $scope.showUsernameError = false;
     // console.log("Testing Consoles");
     $scope.template = TemplateService.changecontent("setting");
     $scope.menutitle = NavigationService.makeactive("Setting");
@@ -7614,18 +7648,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // page 2 integration ends
     console.log($scope.travelConfig, 'what is travelConfig');
     $scope.editUserData = function (userData, status, valid) {
+        console.log(userData, 'userdata of setting');
+        console.log(valid);
         $scope.saveSetting = true;
         console.log(userData, 'user data', status, 'status');
         // cfpLoadingBar.start();
-        console.log(valid);
         if (valid) {
             NavigationService.editUserData(userData, status, function (data) {
+                console.log(userData, 'what is the userData');
                 if (data.value) {
+                    console.log($.jStorage.get('profile'), 'jStorage', userData.urlSlug, 'user ka urlSlug');
                     $scope.saveSetting = false;
-                    NavigationService.getProfile($.jStorage.get("profile").urlSlug, function (data, status) {
+                    NavigationService.getProfile(userData.urlSlug, function (data, status) {
                         if (data.data._id) {
                             $.jStorage.set("isLoggedIn", true);
                             $.jStorage.set("profile", data.data);
+                            location.reload();
                             // console.log($.jStorage.get('profile'));
                             console.log("Profile successfully set on jStorage");
                         } else {
@@ -7635,7 +7673,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                         console.log("Error:", err);
                     });
                 } else {
-
+                    console.log('error set');
+                    $scope.showUsernameError = true;
                 }
                 // cfpLoadingBar.complete();
             });
@@ -8739,7 +8778,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.popupTo.opened = true;
     };
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-    $scope.format = 'dd-MM-yyyy';
+    $scope.format = 'dd-MMMM-yyyy';
     $scope.altInputFormats = ['M!/d!/yyyy'];
     $scope.popupFrom = {
         opened: false
@@ -11102,9 +11141,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 if ($scope.userData.type == "User") {
                     if ($.jStorage.get('qualifiedForLoginFlow')) {
                         $state.go('login-flow');
-                    } else if ($.jStorage.get('qualifiedForHoliday')) {
-                        $state.go('holiday');
-                    } else if ($scope.userData && $scope.userData.alreadyLoggedIn == false) {
+                    }
+                    // else if ($.jStorage.get('qualifiedForHoliday')) {
+                    //     $state.go('holiday');
+                    // } 
+                    else if ($scope.userData && $scope.userData.alreadyLoggedIn == false) {
                         $state.go('mainpage');
                     }
                 } else {

@@ -118,7 +118,7 @@
                     <label for="profile" class="color-blue">Profile Photo</label>
                     <div class="cropArea relate" ng-show="showImage" id="profile">
                       <div class="cancel" ng-click="showImage=false"><span class="color-white pointer">Cancel</span></div>
-                      <img-crop image="myImage" result-image="myCroppedImage" result-image-size="700">
+                      <img-crop image="myImage" result-image="myCroppedImage" result-image-size="700" area-type="square">
                       </img-crop>
                       <div class="btn-upload">
                         <button class="btn btn-pink btn-more" ng-click="uploadProfilePicture(myCroppedImage)">Done</button>
@@ -155,7 +155,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <input type="text" class="form-control" name="lastName" placeholder="Lastname" ng-model="userData.lastName" required>
-                        <span ng-show="profile.firstName.$touched && profile.firstName.$invalid" class="help-inline">The lastName is required.</span>
+                        <span ng-show="profile.lastName.$touched && profile.lastName.$invalid" class="help-inline">The lastName is required.</span>
                       </div>
                     </div>
                   </div>
@@ -188,7 +188,10 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="username" class="color-blue">Username</label>
-                        <span type="text" class="setting-input" placeholder="" disabled>{{userData.urlSlug}}</span>
+                        <input type="text" class="setting-input form-control" placeholder="Username" id="username" ng-model="userData.urlSlug" required>
+                        <span class="help-inline username-error" ng-show="profile.urlSlug.$touched && profile.urlSlug.$invalid || showUsernameError">
+                          Please Choose a Unique Username
+                        </span>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -203,6 +206,10 @@
                             ng-click="userData.gender='female'">
                             <img src="img/female.png" alt="Gender" class="img-responsive">
                             <span class="color-blue avenir-medium">She</span>
+                          </div>
+                          <div class="they text-center pointer inline-block m120 mt20 mt20" ng-class="{'active-gender' : userData.gender=='they'}" ng-click="userData.gender='they'">
+                            <img src="img/they.png" alt="They" class="img-responsive">
+                            <span class="color-blue avenir-medium">They</span>
                           </div>
                         </div>
                       </div>
@@ -266,8 +273,8 @@
                       </div>
                       <div class="blog-link">
                         <div class="form-group">
-                          <input id="inputUrl" type="url" name="url" class="form-control" placeholder="Website Link" ng-model='blog_link'>
-                          <span ng-show="profile.url.$touched && profile.url.$invalid">The Link is invalid.</span>
+                          <input id="inputUrl" type="url" name="url" class="form-control" placeholder="Website Link" ng-model='userData.website'>
+                          <span class="help-inline" ng-show="profile.url.$touched && profile.url.$invalid">The Link is invalid.</span>
                         </div>
                       </div>
                     </div>

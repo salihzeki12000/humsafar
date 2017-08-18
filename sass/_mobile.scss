@@ -274,7 +274,16 @@
     .ml10 {
       margin-left: 3px;
     }
-  } //headerend
+  }
+  //headerend
+  // homepage
+  .know-more-modal .modal-main {
+    max-width: 700px;
+    text-align: center;
+  }
+  .modal-imgholder { display: none; }
+  .modal-descp { width: 100%; }
+  // homepage end
   // login page
   .login-bg {
     padding-top: 13%;
@@ -767,6 +776,9 @@
       font-size: 14px;
       letter-spacing: 1px;
     }
+  }
+  .know-more-modal .modal-main {
+    padding: 0 15px;
   }
   // home screen end
   // setting page
@@ -1689,8 +1701,6 @@
     }
   }
   .text-left-ab {
-    top: auto;
-    bottom: 1%;
     left: 50%;
     width: 100%;
     text-align: center;
@@ -2006,6 +2016,9 @@
       margin: 0 auto;
     }
     .quote-sec { font-size: 12px; }
+  }
+  .know-watch-more {
+    img { height: 40px; }
   }
   .more-about-me {
     .more-detail {

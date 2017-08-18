@@ -1111,7 +1111,7 @@ header {
       position: absolute;
       top: 19px;
       // background-color: $brand-pink;
-      background-color: $brand-lighter-grey;
+      background-color: $brand-blue;
       z-index: 1;
     }
 
@@ -1125,6 +1125,7 @@ header {
 
     input {
       width: 100% !important;
+      &:focus { border-color: $brand-blue; }
     }
   }
 
@@ -1154,10 +1155,9 @@ header {
 
     .btn {
       border: none;
-      border-bottom: 1px solid #e3e3e3;
+      border-bottom: 1px solid $brand-blue;
       border-radius: 0;
       background: url("../img/dropdown-icon.png") no-repeat 98% 50%;
-
       &:hover {
         background-color: transparent;
       }
@@ -1253,7 +1253,8 @@ header {
 // gender
 
 .female,
-.male {
+.male,
+.they {
   @include square(120px);
   border-radius: 100%;
   background-color: #c2c2c2;
@@ -1276,6 +1277,9 @@ header {
 
 .female:hover {
   background-color: $brand-cyan;
+}
+.they:hover {
+  background-color: $brand-blue;
 }
 // gender end
 .cropArea {
@@ -1308,6 +1312,35 @@ header {
   background-color: $brand-cyan;
   @include transition(all 300ms linear);
 }
+.active-gender.they {
+  background-color: $brand-blue;
+  @include transition(all 300ms linear);
+}
+.fulluser-name {
+  margin-bottom: 7%;
+  .error-username { color: red; }
+}
+
+.full-name, .user-name {
+  position: relative;
+  &:after, &:before {
+    content: '';
+    width: 1px;
+    height: 15px;
+    position: absolute;
+    bottom: 0;
+    background-color: $brand-blue;
+  }
+  &:after { right: 0; }
+  &:before { left: 0; }
+  input {
+    border: none;
+    border-bottom: 1px solid $brand-blue;
+    background-color: transparent;
+    &:focus { border-color: $brand-blue; }
+  }
+}
+
 // end set Profile process
 // holiday step
 
@@ -1533,11 +1566,11 @@ header {
 
 .all-profile-detail {
   padding: 0 25px;
+  margin-top: -5px;
 }
 
 .more-about-me {
   padding: 25px 20px 20px;
-  margin-top: -5px;
   background-color: rgba(255, 255, 255, 0.8);
 
   p {
@@ -4166,6 +4199,10 @@ header {
       vertical-align: top;
     }
   }
+  .username-error {
+    color: red;
+    left: 18px;
+  }
 
   .setting-input {
     display: block;
@@ -4187,7 +4224,7 @@ header {
       padding: 40px 0 30px;
       border: 1px solid $brand-dark-blue;
       border-radius: 7px;
-      img { border-radius: 100%; }
+      // img { border-radius: 100%; }
     }
   }
 
@@ -4214,14 +4251,16 @@ header {
 }
 .setting-tab-gender {
   .female,
-  .male {
-    @include square(100px);
-    margin: 0 20px 0 0;
+  .male,
+  .they {
+    @include square(90px);
+    margin: 0 15px 0 0;
 
     img {
-      height: 80px;
+      height: 70px;
     }
   }
+  .they { margin: 0; }
 }
 
 .setting-tab-heading {
