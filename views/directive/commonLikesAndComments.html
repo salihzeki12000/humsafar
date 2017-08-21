@@ -75,7 +75,7 @@
                     <span ng-click="editBox(-1);">Cancel</span>
                     <button class="btn btn-pink" ng-click="editComment(list._id,list.text,list.type);">Done</button>
                   </div>
-                  <div class="like-reply-line">
+                  <div class="like-reply-line" ng-hide="$index==index">
                     <span class="color-blue avenir-roman mr5 pointer" ng-click="editBox($index);" ng-if="userData._id == list.user._id"><i class="fa fa-pencil"></i></span>
                     <span class="color-blue avenir-roman mr5 pointer" ng-click="showDeletePop($index);" ng-if="userData._id == list.user._id"><i class="fa fa-trash"></i></span>
                     <span class="time-stamp ml5 avenir-roman"><i class="fa fa-calendar color-grey mr5"></i><span>{{list.date|formatDate:'date'}}</span>                  | <i class="fa fa-clock-o mr5 color-grey"></i><span>{{list.date|formatDate:'time'}}</span></span>

@@ -11099,7 +11099,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.search.searchType = "";
     $scope.search.viewData = false;
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
-    $scope.template.isLoggedIn = $.jStorage.get("isLoggedIn"); /////////////////////////////////////////////////
+    $scope.template.isLoggedIn = $.jStorage.get("isLoggedIn");
+    /////////////////////////////////////////////////
 
     setInterval(function () {
         $scope.searchHeaderLoad = TemplateService.searchHeaderLoad;
@@ -11144,7 +11145,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     }
                     // else if ($.jStorage.get('qualifiedForHoliday')) {
                     //     $state.go('holiday');
-                    // } 
+                    // }
                     else if ($scope.userData && $scope.userData.alreadyLoggedIn == false) {
                         $state.go('mainpage');
                     }
@@ -14435,7 +14436,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             notify: false
         });
     };
-    // tab change end 
+    // tab change end
 
     // GET ANALYTICS
     $scope.getAgentScroll = function (getId) {

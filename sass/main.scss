@@ -5196,10 +5196,6 @@ header {
     background-color: transparent;
 
     .flex-direction-nav {
-      width: 100%;
-      position: absolute;
-      top: 50%;
-      @include transform(translateY(-50%));
       .flex-prev {
         left: 4px;
       }
@@ -5209,8 +5205,9 @@ header {
       }
 
       a {
+        width: 15px;
+        height: 30px;
         font-size: 0;
-
         &:before {
           font-size: 20px;
           color: $brand-blue;
@@ -12724,7 +12721,7 @@ ng-map {
     width: 550px;
     margin: 25px auto;
     zoom: 0.8;
-    background-color: rgba(255, 255, 255, 0.9); 
+    background-color: rgba(255, 255, 255, 0.9);
   }
   .journey-date {
     span:nth-child(1), span:nth-child(2) {
