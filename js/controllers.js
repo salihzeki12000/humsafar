@@ -481,6 +481,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             }
         });
     };
+    if ($.jStorage.get("profile") && $.jStorage.get("profile").urlSlug) {
+        if ($.jStorage.get("profile").type === "User") {
+            $state.go("mylife", { urlSlug: $.jStorage.get("profile").urlSlug });
+        } else {
+            $state.go("agent-home-without", { urlSlug: $.jStorage.get("profile").urlSlug });
+        }
+    }
     //Agent Section End
 })
 
@@ -792,7 +799,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             console.log(data);
             $scope.showUserError = "error-username";
             $('html, body').animate({
-              scrollTop: $(".usererror").offset().top-220
+                scrollTop: $(".usererror").offset().top - 220
             });
         }
     };
@@ -9038,15 +9045,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log(length, 'total length');
         console.log($scope.uploadCount, 'uploadFile');
         if ($scope.uploadCount === 1) {
-          console.log('logif');
+            console.log('logif');
             $scope.totalUploadCount = $scope.totalUploadCount + length;
             $scope.uploadCount++;
             console.log($scope.totalUploadCount, 'totaluploadCount');
         } else if ($scope.uploadCount == length) {
-          console.log('elseif');
+            console.log('elseif');
             $scope.uploadCount = 1;
         } else {
-          console.log('else');
+            console.log('else');
             $scope.uploadCount++;
         }
         $scope.dItinerary.photos.push({
