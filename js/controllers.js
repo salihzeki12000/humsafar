@@ -363,8 +363,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $interval.cancel(stopinterval);
         } else {
             if (data.accessToken) {
-                $interval.cancel(stopinterval);
                 ref.close();
+                $interval.cancel(stopinterval);
                 setLoginVariables(data);
             } else {
                 console.log(data);
