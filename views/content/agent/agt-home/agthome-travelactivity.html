@@ -7,7 +7,7 @@
                     <div class="pull-right">
                         <div class="add-agtitinerary" ng-if="template.isLoggedIn && template.isMine">
                             <span class="pointer add-holder" ng-click="addItinerary();" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
-                            <div class="add-more-itinerary" ng-show="showItinerary">
+                            <div id="addStatus" class="add-more-itinerary" ng-if="showItinerary">
                                 <p class="color-cyan bord-bot">Update</p>
                                 <form name="agentStatus">
                                     <div class="form-group">
@@ -187,10 +187,16 @@
                                                 </ul>
                                             </div>
                                             <div class="pull-right">
-                                                <div class="pointer">
-                                                    <span>
-                      <img src="img/options.png" alt="" width="3" class="if-blue doneLoading">
-                    </span>
+                                                <div class="options inline-block">
+                                                    <span ng-click="editOption(activity);" class="inline-block pl10 pointer">
+                                                        <img src="img/options.png" alt="">
+                                                    </span>
+                                                    <div class="own-trip" ng-if="activity.backgroundClick">
+                                                        <ul>
+                                                            <li ng-click="editStatus(activity);"><a href="" title="Edit">Edit</a></li>
+                                                            <li><a href="" title="Delete">Delete</a></li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

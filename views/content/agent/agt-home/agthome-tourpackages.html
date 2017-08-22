@@ -7,7 +7,7 @@
                     <div class="pull-right">
                         <div class="add-agtitinerary">
                             <span class="pointer add-holder" ng-click="addItinerary();" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
-                            <div class="add-more-itinerary" ng-show="showItinerary">
+                            <div class="add-more-itinerary" ng-if="showItinerary">
                                 <p class="color-cyan">Enter Details - Tours &amp; Packages</p>
                                 <div class="add-tourpackage">
                                     <form name="toursForm" ng-submit="saveTour(toursForm);" novalidate>
@@ -49,7 +49,7 @@
                                         <div class="form-group relate">
                                             <div class="tour-type tour-select">
                                                 <ui-select ng-model="tour.currency" theme="bootstrap">
-                                                    <ui-select-match placeholder="Currency ">{{$select.selected.currency}}</ui-select-match>
+                                                    <ui-select-match placeholder="Currency">{{$select.selected.currency}}</ui-select-match>
                                                     <ui-select-choices repeat="currency.currency as currency in countries | filter: $select.search track by $index">
                                                         <div class="clearfix">
                                                             <span class="tour-optionselect pull-left">{{currency.name}}</span>

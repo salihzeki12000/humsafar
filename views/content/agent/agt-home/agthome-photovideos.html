@@ -48,7 +48,7 @@
                                         </div>￼
                                         <div class="mb10  text-center relate" ng-hide="photoSec">
                                             <button class="btn btn-white-outline" ng-click="showPhotoupload=!showPhotoupload">Upload Photos/Videos</button>
-                                            <upload-image multiple="true" ng-model="agentPhotos" ng-callback="addAgentPhotos(data);" no-view="true" class="pointer agent-photoupload" required></upload-image>
+                                            <upload-image-count multiple="true" ng-model="agentPhotos" ng-callback="addAgentPhotos(data,length);" no-view="true" class="pointer agent-photoupload" required></upload-image-count>
                                         </div>
                                     </form>
                                 </div>
@@ -85,11 +85,11 @@
                                     </div>
                                     <div class="slider-addmore  text-center relate">
                                         <button class="btn btn-white-outline btn-more">Add More</button>
-                                        <upload-image multiple="true" ng-model="agentPhotos" ng-callback="addAgentPhotos(data);" no-view class="pointer agent-photoupload"></upload-image>
+                                        <upload-image-count multiple="true" ng-model="agentPhotos" ng-callback="addAgentPhotos(data,length);" no-view class="pointer agent-photoupload"></upload-image-count>
                                     </div>
                                 </div>
                                 <p ng-show="showPhotoError" class="color-pink font-sz10 text-center">Please select atleast one photo or video.</p>
-                                <button class="btn btn-pink tourupload-position" ng-click="savePhotoVideo(album);" ng-disabled="albumForm.$invalid">POST</button>
+                                <button class="btn btn-pink tourupload-position" ng-click="savePhotoVideo(album);" ng-disabled="albumForm.$invalid || agentPhotosArray.length === 0 || template.uploading">POST{{template.uploading}}</button>
                             </div>
                         </div>
                     </div>

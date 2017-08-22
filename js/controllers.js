@@ -11853,7 +11853,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         Agent.getAgentDetails(function (data) {
             if (data.value = true) {
                 $scope.agentData = data.data;
-                $scope.expiry = moment($scope.agentData.UTC).diff(moment(), "days");
+                $scope.expiry = moment($scope.agentData.UTC).add("d", 90).diff(moment(), "days");
                 _.each(data.data.company.categoryOfSpeacilization, function (n) {
                     var index = _.findIndex($scope.chooseCategorySpcl, ['caption', n]);
                     $scope.chooseCategorySpcl[index].class = "category-active";
@@ -12907,6 +12907,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.agentPhotosArray = [];
     $scope.agentPhotos = [];
     $scope.agentVideos = [];
+    var lengthChecker = 0;
     $scope.coverPhotoObj = {};
     var prevIndex;
     var prevLead;
@@ -13131,10 +13132,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     $scope.initialiseArray = function () {
+        $scope.showTourPdf = false;
+        $scope.showTourPic = false;
         $scope.showItinerary = false;
         $scope.addHomeBackdrop = "";
         $scope.tour = {};
-        // $scope.tour.currency = "";
         $scope.album = {};
         $scope.albumArray = [];
         $scope.status = {};
@@ -13404,16 +13406,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     //STATUS SEND
     $scope.sendStatus = function (status) {
-        console.log(status, 'status su che');
         Agent.agentStatusSave(status, function (data) {
             if (data.value == true) {
-                console.log('status saved');
                 $scope.initialiseArray();
                 $scope.getTravelActivity($scope.activeUrlSlug, $scope.pagenumber);
             } else {
                 console.log('status error');
             }
         })
+    };
+    $scope.editStatus = function (status) {
+        $('html, body').animate({
+            scrollTop: $("#addStatus").top
+        });
+        $scope.status = status;
+        $scope.addItinerary();
     };
     //STATUS SEND END
 
@@ -13422,6 +13429,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // SET PHOTO ARRAY
     $scope.addAgentPhotos = function (detail, length) {
         console.log(detail, 'photo upload return');
+        lengthChecker++;
+        if (length === lengthChecker) {
+            $scope.template.uploading = false;
+        }
         $scope.showPhotoError = false;
         if (detail.thumbnail) {
             $scope.agentVideos.push({
@@ -13437,8 +13448,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 type: 'photo'
             });
         }
-        console.log($scope.agentVideos, 'new video array');
-        console.log($scope.agentPhotos, 'new photo array');
         $scope.agentPhotosVideos = _.concat($scope.agentPhotos, $scope.agentVideos);
         //photo display
         $scope.flexShow = false;
@@ -13659,6 +13668,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     scroll.scrollBusy = false;
                     console.log(data, "iti data scroll");
                     $scope.isopenfilter = false;
+                    $scope.cityList = data.city;
+                    $scope.cityList = _.map($scope.cityList, function (cityListData) {
+                        var index = _.findIndex($scope.agentCityFilter, function (each) {
+                            return cityListData.name == each.name;
+                        });
+                        if (index === -1) {
+                            cityListData.checked = false;
+                        } else {
+                            cityListData.checked = true;
+                        }
+                        return cityListData;
+                    });
                     if (data.data.length == 0) {
                         scroll.stopCallingApi = true;
                         if (itineraryObj.pagenumber === 1 && itineraryObj.city.length === 0 && itineraryObj.itineraryType.length === 0) {
@@ -13854,6 +13875,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             }
         }
     };
+
+    //Edit Activity
+    $scope.editOption = function (each) {
+        $timeout(function () {
+            each.backgroundClick = true;
+            backgroundClick.object = each;
+        }, 200);
+        backgroundClick.scope = $scope;
+    };
+    //Edit Activity End
+
     // GET AGENT TRAVELACTIVITY END
 
     // GET TOURS AND TESTIMONIALS

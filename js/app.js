@@ -761,7 +761,7 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout, TemplateSe
         }
     };
 });
-firstapp.directive('uploadImageCount', function ($http, $filter, $timeout) {
+firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, TemplateService) {
     return {
         templateUrl: 'views/directive/uploadFile.html',
         scope: {
@@ -838,6 +838,7 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout) {
             };
             $scope.uploadNow = function (image) {
                 $scope.uploadStatus = "uploading";
+                TemplateService.uploading = true;
 
                 var Template = this;
                 image.hide = true;
@@ -849,7 +850,7 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout) {
                     },
                     transformRequest: angular.identity
                 }).success(function (data) {
-                    TemplateService.uploadLoader = false;
+                    TemplateService.uploadLoader = true;
                     $scope.uploadStatus = "uploaded";
                     if ($scope.isMultiple) {
                         if ($scope.inObject) {
