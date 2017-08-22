@@ -9030,6 +9030,16 @@ display:none;
     padding: 40px 20px;
     border: 1px solid $brand-dark-blue;
     border-radius: 6px;
+    position: relative;
+  }
+  .loading-sec {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(150, 150, 150, 0.7);
+    z-index: 2;
   }
 }
 
@@ -10557,7 +10567,7 @@ display:none;
   // new itinerary ui css
 .itinerary-city-visited {
   padding: 5px 10px;
-  background-color: #fff;
+  // background-color: #fff;
 }
 .itinerary-banner-sec {
   border-radius: 6px;

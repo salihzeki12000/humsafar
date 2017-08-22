@@ -791,6 +791,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         } else {
             console.log(data);
             $scope.showUserError = "error-username";
+            $('html, body').animate({
+              scrollTop: $(".usererror").offset().top-220
+            });
         }
     };
 
@@ -9035,12 +9038,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log(length, 'total length');
         console.log($scope.uploadCount, 'uploadFile');
         if ($scope.uploadCount === 1) {
+          console.log('logif');
             $scope.totalUploadCount = $scope.totalUploadCount + length;
             $scope.uploadCount++;
             console.log($scope.totalUploadCount, 'totaluploadCount');
         } else if ($scope.uploadCount == length) {
+          console.log('elseif');
             $scope.uploadCount = 1;
         } else {
+          console.log('else');
             $scope.uploadCount++;
         }
         $scope.dItinerary.photos.push({
@@ -13128,10 +13134,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     //Chart End
 
-
-
-
-
     $scope.initialiseArray = function () {
         $scope.showTourPdf = false;
         $scope.showTourPic = false;
@@ -13415,13 +13417,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 console.log('status error');
             }
         })
-    };
-    $scope.editStatus = function (status) {
-        $('html, body').animate({
-            scrollTop: $("#addStatus").top
-        });
-        $scope.status = status;
-        $scope.addItinerary();
     };
     //STATUS SEND END
 
@@ -13878,6 +13873,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     //Edit Activity
+    $scope.editStatus = function (status) {
+        if (status.type === "agentStatus") {
+            $scope.status = status;
+            $scope.addItinerary();
+            setTimeout(function () {
+                $('html,body').animate({
+                    scrollTop: $("#addStatus").offset().top - 100
+                }, 1000);
+            }, 10);
+        } else if (status.type === "detail-itinerary") {
+            $state.go("detailitinerary", { flag: 'edit', urlSlug: status.urlSlug });
+        } else {
+            $state.go("quickitinerary", { flag: 'edit', urlSlug: status.urlSlug });
+        }
+    };
+    $scope.deleteStatus = function () {
+        if (status.type === "agentStatus") {
+            $scope.status = status;
+            $scope.addItinerary();
+        } else if (status.type === "detail-itinerary") {
+            $state.go("detailitinerary", { flag: 'edit', urlSlug: status.urlSlug });
+        } else {
+            $state.go("quickitinerary", { flag: 'edit', urlSlug: status.urlSlug });
+        }
+    };
     $scope.editOption = function (each) {
         $timeout(function () {
             each.backgroundClick = true;
@@ -13885,6 +13905,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }, 200);
         backgroundClick.scope = $scope;
     };
+
     //Edit Activity End
 
     // GET AGENT TRAVELACTIVITY END

@@ -67,7 +67,7 @@
                       </div>
                     </div>
                      <span ng-show="quickItinerary.$submitted || quickItinerary.month.$touched || quickItinerary.year.$touched || quickItinerary.duration.$touched">
-                        <span ng-show="quickItinerary.month.$error.required || quickItinerary.year.$error.required || quickItinerary.duration.$error.required" class="help-inline">The Month, Year and Days are required.</span>     
+                        <span ng-show="quickItinerary.month.$error.required || quickItinerary.year.$error.required || quickItinerary.duration.$error.required" class="help-inline">The Month, Year and Days are required.</span>
                     </span>
                      </div>
                   </div>
@@ -190,6 +190,11 @@
                     </div>
                   </div>
                 </div>
+                <!-- photo video loader -->
+                <div class="loading-sec" ng-if="template.uploadLoader">
+                  <img src="img/page.svg" alt="" class="get-center img-responsive" width="40px">
+                </div>
+                <!-- photo video loader end-->
               </div>
             </div>
             <!-- upload trip photo end-->

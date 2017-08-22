@@ -7,7 +7,7 @@
                     <div class="pull-right">
                         <div class="add-agtitinerary" ng-if="template.isLoggedIn && template.isMine">
                             <span class="pointer add-holder" ng-click="addItinerary();" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
-                            <div id="addStatus" class="add-more-itinerary" ng-if="showItinerary">
+                            <div id="addStatus" class="add-more-itinerary agentModal" ng-show="showItinerary">
                                 <p class="color-cyan bord-bot">Update</p>
                                 <form name="agentStatus">
                                     <div class="form-group">

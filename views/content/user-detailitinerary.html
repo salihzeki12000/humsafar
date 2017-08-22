@@ -56,7 +56,7 @@
         </div>
         <div class="edit-publish-userdetail" ng-if="isMine">
             <button class="btn btn-white-outline btn-more mr5" ui-sref="detailitinerary({flag:'edit',urlSlug:itinerary.urlSlug})">Edit</button>
-            <button class="btn btn-white-outline btn-more" ng-click="uploadQuickItinerary(true)" ng-if="itinerary.status== false">Publish</button>
+            <button class="btn btn-white-outline btn-more" ng-click="uploadQuickItinerary(itinerary)" ng-if="itinerary.status== false">Publish</button>
             <button class="btn btn-white-outline btn-more" ng-click="deletePop(itinerary._id);" ng-if="itinerary.status == true">Delete</button>
         </div>
     </div>

@@ -509,7 +509,7 @@
                 <label for="trip-photo">Upload Trip Photo</label>
                 <div class="pull-right">
                   <span>
-                  {{qItinerary.photos.length}}/{{totalUploadCount}}
+                  {{dItinerary.photos.length}}/{{totalUploadCount}}
                 </span>
                 </div>
                 <div class="trip-photo-holder">
@@ -548,6 +548,11 @@
                       </div>
                     </div>
                   </div>
+                  <!-- photo video loader -->
+                  <div class="loading-sec" ng-if="template.uploadLoader">
+                    <img src="img/page.svg" alt="" class="get-center img-responsive" width="40px">
+                  </div>
+                  <!-- photo video loader end-->
                 </div>
               </div>
               <!-- upload trip photo end-->
