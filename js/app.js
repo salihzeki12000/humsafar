@@ -838,7 +838,7 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, Templ
             };
             $scope.uploadNow = function (image) {
                 $scope.uploadStatus = "uploading";
-                TemplateService.uploading = true;
+                TemplateService.uploading = false;
 
                 var Template = this;
                 image.hide = true;
