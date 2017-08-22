@@ -41,7 +41,8 @@
     input {
       width: 100%;
     }
-  } //header end
+  }
+  //header end
   // holiday page
   .usually-go {
     margin-bottom: 20%;
@@ -273,6 +274,19 @@
     border-radius: 10px;
     .ml10 {
       margin-left: 3px;
+    }
+  }
+  .login-signup {
+    span {
+      margin: 0;
+    }
+    button {
+      padding: 6px 12px;
+      margin-left: 2px;
+      font-size: 13px;
+    }
+    .list-inline > li {
+      padding: 0px 3px;
     }
   }
   //headerend
@@ -958,6 +972,9 @@
   }
   .login-ht {
     height: 100%;
+    .pt30 {
+      padding: 0;
+    }
   } // footer end
   .journey-cycle img {
     width: 100px;
@@ -1952,6 +1969,40 @@
   .ongo-journey-card .user-social-item {
     padding: 15px 2px;
   }
+  // login page
+  .login-form {
+    h3 {
+      font-size: 15px;
+      letter-spacing: 0.5px;
+    }
+    h4 {
+      font-size: 12px;
+      letter-spacing: 1px;
+      word-spacing: 0px;
+    }
+    .your-story {
+      display: none;
+    }
+  }
+  .social-login-btn {
+    text-align: center;
+    .facebook-login-btn {
+      margin: 0 0 10px;
+      i {
+        padding: 10px 17px;
+      }
+    }
+    .google-login-btn {
+      span {
+        padding: 7px 18px;
+      }
+    }
+  }
+  .menu-contact {
+    // margin: 10px 0;
+    // position: static;
+  }
+  // login page end
   .notify-popup {
     margin-left: 0;
     .notify-imgholder {
@@ -2018,7 +2069,12 @@
     .quote-sec { font-size: 12px; }
   }
   .know-watch-more {
-    img { height: 40px; }
+    img { height: 50px; }
+  }
+  .modal-scroll-descp {
+    p:nth-child(1), p:nth-child(2), p:nth-child(5) {
+      display: none;
+    }
   }
   .more-about-me {
     .more-detail {
@@ -2186,7 +2242,8 @@
     }
   }
   .login-bg {
-    padding-top: 20%;
+    // padding-top: 20%;
+    padding-bottom: 65px;
   }
   .login-signup-tab {
     .nav-tabs>li>a,

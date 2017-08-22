@@ -1,11 +1,22 @@
 <div class="accordion-custom">
   <uib-accordion close-others="oneAtATime">
-        <uib-accordion-group is-disabled="menu.disabled" class="visible-xs" ng-hide="isLoggedIn">
+        <uib-accordion-group is-disabled="menu.disabled" class="visible-xs" ng-hide="isLoggedIn" ng-init="login.isFirstOpen = true" is-open="login.isFirstOpen">
       <uib-accordion-heading>
-        <a class="color-white main-menu-anchor" ui-sref="login">
+        <a class="color-white main-menu-anchor">
          Login / Sign Up
+         <i class="pull-right fa icon color-white" ng-class="{'fa-caret-up': login.isFirstOpen == true, 'fa-caret-down': login.isFirstOpen == false}"></i>
         </a>
       </uib-accordion-heading>
+      <div class="login-user-partner">
+        <ul class="nav-submenu list-unstyled">
+          <li>
+            <a ui-sref="login" class="color-white">User</a>
+          </li>
+          <li>
+            <a ui-sref="partnerlogin" class="color-white">Partners</a>
+          </li>
+        </ul>
+      </div>
     </uib-accordion-group>
     <uib-accordion-group is-open="status.open" ng-repeat="menu in navigation track by $index" class="{{menu.classis}}" is-disabled="menu.disabled">
       <uib-accordion-heading>
