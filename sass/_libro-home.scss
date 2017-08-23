@@ -313,7 +313,7 @@ a:focus {
 }
 
 .login-ht {
-  height: calc(100vh - 100px);
+  height: calc(100vh - 200px);
   position: relative;
 }
 
@@ -1110,13 +1110,17 @@ a.color-white {
   bottom: 20px;
   right: 0;
 }
+.login-bg {
+  .menu-contact {
+    background-color: rgba(44, 55, 87, 0.75);
+  }
+}
 
 .menu-contact {
   bottom: 0;
   left: 0;
   width: 100%;
   padding: 20px 40px;
-  background-color: rgba(44, 55, 87, 0.75);
   ul li a {
     font-size: 14px;
   }
@@ -1265,7 +1269,7 @@ a.color-white {
   [type="checkbox"]:checked+label,
   [type="checkbox"]:not(:checked)+label {
     position: relative;
-    padding-left: 0;
+    padding-left: 20px;
     cursor: pointer;
   }
   /* checkbox aspect */
@@ -1280,6 +1284,10 @@ a.color-white {
     -moz-osx-font-smoothing: grayscale;
     padding-right: 10px;
     vertical-align: middle;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0;
   }
   /* checked mark aspect */
   [type="checkbox"]:checked+label:after,
@@ -1294,6 +1302,7 @@ a.color-white {
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    padding: 0;
   }
   /* checked mark aspect changes */
   [type="checkbox"]:not(:checked)+label:after {
