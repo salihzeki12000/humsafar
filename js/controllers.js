@@ -736,7 +736,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
             console.log(blob);
             // Blob to File
-            var file = new File([blob], $scope.fileName.split('.')[0] + '.png');
+            // var file = new File([blob], $scope.fileName + '.png');
+            var file = new File([blob], $scope.fileName);
             console.log(file);
             // File to FormData
             var formData = new FormData();
@@ -11483,8 +11484,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             var imageBase64 = data;
             var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
             // Blob to File
-            var file = new File([blob], $scope.fileName.split('.')[0] + '.png');
-            console.log(file);
+            // var file = new File([blob], $scope.fileName + '.png');
+            var file = new File([blob], $scope.fileName);
             // File to FormData
             var formData = new FormData();
             formData.append('file', file, file.name);
