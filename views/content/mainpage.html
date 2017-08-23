@@ -205,10 +205,10 @@
                     <span class="color-dark-blue pointer pull-left" ng-click="removePhoto()">Cancel</span>
                     <span class="color-dark-blue pointer pull-right" ng-click="viewBlob=true">Ok</span>
                   </div>
-                  <img-crop image="myImage" result-image="uploadme.src" area-type="square" class="image-canvas" /></img-crop>
+                  <img-crop image="myImage" result-image="uploadme.src" area-type="square" result-image-size="500" class="image-canvas" /></img-crop>
                 </div>
               </div>
-              <div class="" ng-show="viewBlob">
+              <div class="current-profilepicture" ng-show="viewBlob">
                 <img ng-src="{{uploadme.src}}" class="img-responsive m-center"/>
               </div>
               <div class="upload-section" ng-hide="showImage.val">
