@@ -632,6 +632,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.profile = $.jStorage.get("profile");
     $scope.myImage = '';
     $scope.showUserError = "";
+    $scope.viewBlob = false;
     if ($scope.profile && $scope.profile.profilePicture) {
         NavigationService.getImageFromServer($scope.profile.profilePicture, function (data) {
             // $scope.myImage=data;
@@ -759,10 +760,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.removePhoto = function () {
         $scope.userData = _.omit($scope.userData, ['profilePicture']);
+        angular.element("input[type='file']").val(null);
         $scope.fileName = null;
         console.log($scope.userData);
-
         $scope.showImage.val = false;
+        $scope.viewBlob = false;
+        $scope.uploadme.src = '';
+        console.log($scope.uploadme.src);
     };
 
 

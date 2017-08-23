@@ -1318,7 +1318,12 @@ header {
 }
 .fulluser-name {
   margin-bottom: 7%;
-  .error-username { color: red; }
+  .usererror {
+    margin-top: -10px;
+    font-size: 12px;
+    color: #424242;
+    &.error-username { color: red; }
+  }
 }
 
 .full-name, .user-name {
