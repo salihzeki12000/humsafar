@@ -733,7 +733,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             console.log(data, userData);
             var imageBase64 = data;
             console.log(imageBase64);
-            var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/jpg');
+            var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/jpeg');
             console.log(blob);
             // Blob to File
             // var file = new File([blob], $scope.fileName + '.png');
