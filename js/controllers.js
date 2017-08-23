@@ -737,7 +737,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             console.log(blob);
             // Blob to File
             // var file = new File([blob], $scope.fileName + '.png');
-            var file = new File([blob], $scope.fileName);
+            var file = new File([blob], $scope.fileName.split('.')[0] + '.png');
             console.log(file);
             // File to FormData
             var formData = new FormData();
