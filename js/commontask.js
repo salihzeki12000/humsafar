@@ -443,10 +443,9 @@ var commontask = angular.module('commontask', [])
             }
 
             // write the ArrayBuffer to a blob, and you're done
-            var bb = new Blob([ab]);
-            // var bb = new Blob([ab], {
-            //     type: type
-            // });
+            var bb = new Blob([ab], {
+                type: type
+            });
             return bb;
         }
     };
