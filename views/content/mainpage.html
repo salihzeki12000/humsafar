@@ -207,7 +207,7 @@
                     <span class="color-dark-blue pointer pull-right" >Ok</span>
                     <!-- ng-click="viewBlob=true" -->
                   </div>
-                  <img-crop image="myImage" result-image="uploadme.src" area-type="square" result-image-size="500" class="image-canvas" /></img-crop>
+                  <img-crop image="myImage" result-image="uploadme.src" area-type="square" on-load-begin="on-load-begin" on-load-done="done" on-load-error="error" result-image-size="500" class="image-canvas" /></img-crop>
                 </div>
               </div>
               <!-- ng-show="viewBlob" -->
