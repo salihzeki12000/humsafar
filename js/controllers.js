@@ -732,11 +732,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         if (ppSelected) {
             console.log(data,'data', userData,'userdata',ppSelected,'pp selected');
             var imageBase64 = data;
-            var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/jpeg');
+            var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
             console.log(blob,'blob kya hai conversion after');
             // Blob to File
             // var file = new File([blob], $scope.fileName + '.png');
-            var file = new File([blob], $scope.fileName.split('.')[0] + '.jpg');
+            var file = new File([blob], $scope.fileName.split('.')[0] + '.png');
             console.log(file);
             // File to FormData
             var formData = new FormData();
