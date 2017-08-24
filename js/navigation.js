@@ -163,6 +163,7 @@ var navigationservice = angular.module('navigationservice', [])
         },
         logout: function (callback) {
             var accessToken = $.jStorage.get("accessToken");
+
             OneSignal.getUserId(function (data1) {
                 console.log("UserId:", data1);
                 TravelibroService.http({
@@ -175,19 +176,15 @@ var navigationservice = angular.module('navigationservice', [])
                 }).success(function (data) {
                     console.log("Id Found");
                     console.log(data);
-                    TravelibroService.http({
-                        url: adminURL + "/user/logout",
-                        method: "POST"
-                    }).success(callback);
                 }).error(function (data) {
                     console.log("Id Not Found");
                     console.log(data);
-                    TravelibroService.http({
-                        url: adminURL + "/user/logout",
-                        method: "POST"
-                    }).success(callback);
                 });
-            })
+            });
+            TravelibroService.http({
+                url: adminURL + "/user/logout",
+                method: "POST"
+            }).success(callback);
         },
         enablePushNotification: function (deviceId) {
             TravelibroService.http({
