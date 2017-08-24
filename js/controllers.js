@@ -13895,15 +13895,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $state.go("quickitinerary", { flag: 'edit', urlSlug: status.urlSlug });
         }
     };
-    $scope.deleteStatus = function () {
-        if (status.type === "agentStatus") {
-            $scope.status = status;
-            $scope.addItinerary();
-        } else if (status.type === "detail-itinerary") {
-            $state.go("detailitinerary", { flag: 'edit', urlSlug: status.urlSlug });
-        } else {
-            $state.go("quickitinerary", { flag: 'edit', urlSlug: status.urlSlug });
-        }
+    $scope.deleteStatus = function (status) {
+        $scope.status = status;
+        $socpe.deleteActivity = function () {
+            if (status.type === "agentStatus") {
+                Agent.deleteStatus(status, function (data) {
+                    if (data.value) {
+                        $scope.getTravelActivity($scope.activeUrlSlug);
+                    }
+                });
+            } else {
+                NavigationService.deleteItinerary(status._id, function (data) {
+                    if (data.value) {
+                        $scope.getTravelActivity($scope.activeUrlSlug);
+                    }
+                })
+            }
+        };
+        var delModal = $uibModal.open({
+            animation: true,
+            templateUrl: "views/modal/delete-activity.html",
+            scope: $scope
+        });
     };
     $scope.editOption = function (each) {
         $timeout(function () {

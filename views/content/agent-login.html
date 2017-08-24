@@ -102,13 +102,13 @@
                                 <form name="userDetailsForm">
                                     <div class="form-group">
                                         <div class="agent-cmpny-inputholder">
-                                            <input type="text" class="form-control color-blue" placeholder="Company Name" ng-model="userDetails.company.name" required name="name">
+                                            <input type="text" class="form-control color-blue" placeholder="Company Name*" ng-model="userDetails.company.name" required name="name">
                                             <p ng-if="userDetailsForm.name.$invalid">Name cannot be empty</p>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="agent-cmpny-inputholder">
-                                            <textarea class="form-control color-blue" placeholder="Address" ng-model="userDetails.company.address" required name="address"></textarea>
+                                            <textarea class="form-control color-blue" placeholder="Address*" ng-model="userDetails.company.address" required name="address"></textarea>
                                         </div>
                                         <p class="text-left mt5 color-pink" ng-if="userDetailsForm.address.$invalid && userDetailsForm.address.$touched">Address cannot be empty</p>
                                     </div>
@@ -116,14 +116,14 @@
                                         <div class="col-md-5 col-sm-5">
                                             <div class="form-group">
                                                 <div class="agent-cmpny-inputholder agentcompany-phone">
-                                                    <input type="text" id="phone1" name="phone" class="form-control color-blue" placeholder="Contact No" ng-model="userDetails.company.contact" ng-intl-tel-input ng-change="isValidNo(userDetails.company.contact,'1')" required>
+                                                    <input type="text" id="phone1" name="phone" class="form-control color-blue" placeholder="Contact No*" ng-model="userDetails.company.contact" ng-intl-tel-input ng-change="isValidNo(userDetails.company.contact,'1')" required>
                                                     <!--<span id="valid-msg1" class="hide intel-error"><i class="fa fa-check"></i> Valid</span>-->
-                                                    <span id="error-msg1" class="hide intel-error">Invalid number</span>
+                                                    <!-- <span id="error-msg1" class="hide intel-error">Invalid number</span> -->
                                                     <!-- <div class="agent-input-icon">
                             <i class="fa fa-phone color-grey"></i>
                           </div> -->
                                                 </div>
-                                                <span class="color-pink" ng-if="userDetailsForm.phone.$invalid && userDetailsForm.phone.$touched">Contact No. cannot be empty</span>
+                                                <span class="color-pink" ng-if="userDetailsForm.phone.$invalid && userDetailsForm.phone.$touched">Empty or Invalid Contact Number</span>
                                             </div>
                                         </div>
                                         <div class="col-md-7 col-sm-7">
@@ -179,8 +179,8 @@
                                     <div class="">
                                         <div class="">
                                             <!-- <div class="nation-city"> -->
-                                            <ui-select multiple ng-model="userDetails.company.agentType" theme="bootstrap" on-select="checkme();">
-                                                <ui-select-match placeholder="Select Your Business Model">{{$item}}</ui-select-match>
+                                            <ui-select multiple ng-model="userDetails.company.agentType" theme="bootstrap" on-select="checkme();" required>
+                                                <ui-select-match placeholder="Select Your Business Model*">{{$item}}</ui-select-match>
                                                 <ui-select-choices repeat="model in businessModel | filter:searchModel">
                                                     <span class="color-light-grey">{{model}}</span>
                                                 </ui-select-choices>

@@ -130,6 +130,15 @@ var agent = angular.module('agent', [])
                 callback(data);
             })
         },
+        deleteStatus: function (formData, callback) {
+            TravelibroService.http({
+                url: adminURL + "/agentStatus/deleteStatus",
+                method: "POST",
+                data: formData
+            }).success(function (data) {
+                callback(data);
+            })
+        },
         downloadTourPdf: function (formData, callback) {
             console.log(formData, 'PDF');
             TravelibroService.http({
