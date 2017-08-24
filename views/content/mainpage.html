@@ -204,14 +204,14 @@
                 <div class="cropArea" ng-show="showImage.val && profile.profilePicture" >
                   <div class="text-right clearfix">
                     <span class="color-dark-blue pointer pull-left" ng-click="removePhoto()">Cancel</span>
-                    <span class="color-dark-blue pointer pull-right" >Ok</span>
+                    <!-- <span class="color-dark-blue pointer pull-right" >Ok</span> -->
                     <!-- ng-click="viewBlob=true" -->
                   </div>
-                  <img-crop image="myImage" result-image="uploadme.src" area-type="square" on-load-begin="on-load-begin" on-load-done="done" on-load-error="error" result-image-size="500" class="image-canvas" /></img-crop>
+                  <img-crop image="myImage" result-image="uploadme.src" area-type="square" result-image-size="500" class="image-canvas" /></img-crop>
                 </div>
               </div>
               <!-- ng-show="viewBlob" -->
-              <div class="current-profilepicture" hidden>
+              <div class="current-profilepicture">
                 <img ng-src="{{uploadme.src}}" class="img-responsive m-center"/>
               </div>
               <div class="upload-section" ng-hide="showImage.val">
