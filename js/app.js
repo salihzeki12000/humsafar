@@ -1553,7 +1553,7 @@ firstapp.directive("fileread", [function () {
                 reader.onload = function (loadEvent) {
                     scope.$apply(function () {
                         scope.fileread = loadEvent.target.result;
-                        console.log(scope.fileread);
+                        // console.log(scope.fileread);
                     });
                 }
                 console.log(changeEvent.target.files);
