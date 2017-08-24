@@ -732,7 +732,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         if (ppSelected) {
             console.log(data,'data', userData,'userdata',ppSelected,'pp selected');
             var imageBase64 = data;
-            var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/jpg');
+            var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
             console.log(blob,'blob kya hai conversion after');
             // Blob to File
             // var file = new File([blob], $scope.fileName + '.png');
@@ -741,7 +741,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             // File to FormData
             var formData = new FormData();
             console.log(formData, "before appending");
-            formData.append('file', blob, file.name);
+            formData.append('file', blob,"abcd.png");
             console.log(formData, "after appending");
             NavigationService.uploadFile(formData, function (response) {
                 if (response.value) {
