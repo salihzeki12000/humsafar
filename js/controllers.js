@@ -7422,6 +7422,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             }
         }
     };
+    $scope.removeSameFile = function(){
+      angular.element("input[type='file']").val(null);
+    }
 
     $scope.travelConfig.chooseHoliday = [{
         img: "img/beach.png",
@@ -11484,10 +11487,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
             // Blob to File
             // var file = new File([blob], $scope.fileName + '.png');
-            var file = new File([blob], $scope.fileName);
+            // var file = new File([blob], $scope.fileName);
             // File to FormData
             var formData = new FormData();
-            formData.append('file', file, file.name);
+            formData.append('file', blob, 'abcd.png');
             // //alert("mila");
             NavigationService.uploadFile(formData, function (response) {
                 if (response.value) {
@@ -11867,6 +11870,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         status: ""
     };
     // INTEGRATION START
+    $scope.removeSameFile = function(){
+      angular.element("input[type='file']").val(null);
+    }
     // SETTING DATA GET
     function setAgent() {
         Agent.getAgentDetails(function (data) {
@@ -11899,7 +11905,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         })
     }
     // SETTING DATA GET END
-
     // GET CONTINENT
     NavigationService.getCountriesByContinent(function (data, status) {
         if (data.value) {
