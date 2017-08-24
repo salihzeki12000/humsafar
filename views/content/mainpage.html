@@ -247,6 +247,9 @@
                 <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
                 <button class="btn btn-outline-blue btn-more pull-right" ng-click="uploadFile(uploadme.src,userData,showImage.val)">Done</button>
               </div>
+              <div class="login-imgloader" ng-if="showImageLoader">
+                  <img src="img/page.svg" alt="Loading..." width="50px" class="img-responsive get-center">
+              </div>
             </div>
           </div>
         </div>
