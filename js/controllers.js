@@ -637,9 +637,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     if ($scope.profile && $scope.profile.profilePicture) {
         NavigationService.getImageFromServer($scope.profile.profilePicture, function (data) {
             // $scope.myImage=data;
-            $scope.myImage = $window.URL.createObjectURL(new Blob([data], {
-
-            }));
+            // $scope.myImage = $window.URL.createObjectURL(new Blob([data], {
+            //     type: 'image/png'
+            // }));
+            $scope.myImage = new Blob([data]);
             console.log($scope.myImage);
         });
     } else {
