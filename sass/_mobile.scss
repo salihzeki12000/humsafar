@@ -697,6 +697,7 @@
 // media query for 991px to 768px end
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
+
   //loader
   .loaders {
     font-size: 16px !important;
@@ -731,7 +732,7 @@
     }
   }
   header {
-    padding: 4px 0 0;
+    padding: 10px 0 0;
   }
   .mobile-header {
     border-bottom: 1px dotted #ddd;
@@ -818,6 +819,12 @@
       height: 200px;
     }
   }
+  // .image-canvas {
+  //   canvas {
+  //     width: 100%;
+  //     height: 100%;
+  //   }
+  // }
   .upload-btn {
     margin: 0;
     .web-camera {
@@ -970,8 +977,12 @@
       text-align: center;
     }
   }
+  .login-bg {
+    min-height: 100%;
+    padding: 0;
+  }
   .login-ht {
-    height: 100%;
+    height: 100vh;
     .pt30 {
       padding: 0;
     }
@@ -1969,8 +1980,10 @@
   .ongo-journey-card .user-social-item {
     padding: 15px 2px;
   }
+
   // login page
   .login-form {
+    text-align: center;
     h3 {
       font-size: 15px;
       letter-spacing: 0.5px;
@@ -1986,15 +1999,19 @@
   }
   .social-login-btn {
     text-align: center;
+    i {
+      padding: 10px 18px;
+    }
+    span { padding: 7px 18px; }
     .facebook-login-btn {
-      margin: 0 0 10px;
+      margin: 0 0 20px;
       i {
-        padding: 10px 17px;
+        padding: 10px 21px;
       }
     }
     .google-login-btn {
       span {
-        padding: 7px 18px;
+        padding: 7px 26px;
       }
     }
   }
@@ -2071,6 +2088,15 @@
   .know-watch-more {
     img { height: 50px; }
   }
+  .modal-descp {
+    h3 {
+      font-size: 16px;
+    }
+    h4 {
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+  }
   .modal-scroll-descp {
     p:nth-child(1), p:nth-child(2), p:nth-child(5) {
       display: none;
@@ -2121,9 +2147,10 @@
     }
   }
   .female,
-  .male {
+  .male,
+  .they {
     @include square(100px);
-    margin: 0 10px;
+    margin: 10px 20px;
     img {
       height: 80px;
     }
@@ -2243,15 +2270,26 @@
   }
   .login-bg {
     // padding-top: 20%;
-    padding-bottom: 65px;
+    // padding-bottom: 65px;
+    .menu-contact { display: none; }
   }
   .login-signup-tab {
+    .nav-tabs {
+      text-align: center;
+      li {
+        float: none;
+        display: inline-block;
+      }
+    }
+    .nav-tabs > li:first-child {
+      margin: 0;
+    }
     .nav-tabs>li>a,
     .nav-tabs>li.active>a,
     .nav-tabs>li.active>a:focus,
     .nav-tabs>li.active>a:hover {
       padding: 10px 7px;
-      font-size: 13px;
+      font-size: 20px;
     }
     .social-login {
       img {

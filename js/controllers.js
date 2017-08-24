@@ -632,6 +632,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.profile = $.jStorage.get("profile");
     $scope.myImage = '';
     $scope.showUserError = "";
+    $scope.viewBlob = false;
     if ($scope.profile && $scope.profile.profilePicture) {
         NavigationService.getImageFromServer($scope.profile.profilePicture, function (data) {
             // $scope.myImage=data;
@@ -729,18 +730,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.uploadFile = function (data, userData, ppSelected) {
         // Base64 to Blob
         if (ppSelected) {
-            console.log(data, userData);
+            console.log(data,'data', userData,'userdata',ppSelected,'pp selected');
             var imageBase64 = data;
-            console.log(imageBase64);
             var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
-            console.log(blob);
+            console.log(blob,'blob kya hai conversion after');
             // Blob to File
-            var file = new File([blob], $scope.fileName + '.png');
-            console.log(file);
+            // var file = new File([blob], $scope.fileName + '.png');
+            // var file = new File([blob], $scope.fileName.split('.')[0] + '.png');
+            // console.log(file);
             // File to FormData
             var formData = new FormData();
             console.log(formData, "before appending");
-            formData.append('file', file, file.name);
+            formData.append('file', blob,"abcd.png");
             console.log(formData, "after appending");
             NavigationService.uploadFile(formData, function (response) {
                 if (response.value) {
@@ -759,10 +760,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.removePhoto = function () {
         $scope.userData = _.omit($scope.userData, ['profilePicture']);
+        angular.element("input[type='file']").val(null);
         $scope.fileName = null;
         console.log($scope.userData);
-
         $scope.showImage.val = false;
+        $scope.viewBlob = false;
+        $scope.uploadme.src = '';
+        console.log($scope.uploadme.src);
     };
 
 
@@ -7418,6 +7422,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             }
         }
     };
+    $scope.removeSameFile = function(){
+      angular.element("input[type='file']").val(null);
+    }
 
     $scope.travelConfig.chooseHoliday = [{
         img: "img/beach.png",
@@ -11479,10 +11486,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             var imageBase64 = data;
             var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
             // Blob to File
-            var file = new File([blob], $scope.fileName + '.png');
+            // var file = new File([blob], $scope.fileName + '.png');
+            // var file = new File([blob], $scope.fileName);
             // File to FormData
             var formData = new FormData();
-            formData.append('file', file, file.name);
+            formData.append('file', blob, 'abcd.png');
             // //alert("mila");
             NavigationService.uploadFile(formData, function (response) {
                 if (response.value) {
@@ -11862,6 +11870,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         status: ""
     };
     // INTEGRATION START
+    $scope.removeSameFile = function(){
+      angular.element("input[type='file']").val(null);
+    }
     // SETTING DATA GET
     function setAgent() {
         Agent.getAgentDetails(function (data) {
@@ -11894,7 +11905,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         })
     }
     // SETTING DATA GET END
-
     // GET CONTINENT
     NavigationService.getCountriesByContinent(function (data, status) {
         if (data.value) {

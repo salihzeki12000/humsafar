@@ -63,12 +63,12 @@ var imageTestingCallback = function (dataURI, type) {
     });
     console.log(blob);
     // Blob to File
-    var file = new File([blob], 'photo-' + "1" + '.png');
+    // var file = new File([blob], 'photo-' + "1" + '.png');
     console.log(file);
     // File to FormData
     var formData = new FormData();
     console.log(formData, "before appending");
-    formData.append('file', file, file.name);
+    formData.append('file', blob, 'abcd.png');
     console.log(formData, "after appending");
     return formData;
 };
@@ -1553,7 +1553,7 @@ firstapp.directive("fileread", [function () {
                 reader.onload = function (loadEvent) {
                     scope.$apply(function () {
                         scope.fileread = loadEvent.target.result;
-                        console.log(scope.fileread);
+                        // console.log(scope.fileread);
                     });
                 }
                 console.log(changeEvent.target.files);

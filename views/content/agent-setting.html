@@ -160,7 +160,7 @@
                                     <div class="profile-agtphoto-sec upload-profile">
                                         <label for="profile" class="color-blue avenir-medium">Profile Photo</label>
                                         <div class="cropArea relate" ng-show="showImage" id="profile">
-                                            <div class="cancel" ng-click="showImage=false"><span class="pointer color-white">Cancel</span></div>
+                                            <div class="cancel" ng-click="showImage=false; removeSameFile();"><span class="pointer color-white">Cancel</span></div>
                                             <img-crop image="agentImage" result-image="agentCroppedImage" area-type="square" class="bg-dark-blue">
                                             </img-crop>
                                             <div class="btn-upload">

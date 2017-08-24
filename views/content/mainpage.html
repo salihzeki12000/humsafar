@@ -152,7 +152,7 @@
                 </div>
               </div>
               <div class="button-panel clearfix">
-                <button class="btn btn-outline-blue btn-more pull-left" ng-click="goNext=2">Previous</button>
+                <!-- <button class="btn btn-outline-blue btn-more pull-left" ng-click="goNext=2">Previous</button> -->
                 <button class="btn btn-outline-blue btn-more pull-right" ng-click="goNext=4" ng-disabled="!userData.homeCity">Next</button>
               </div>
             </div>
@@ -190,7 +190,7 @@
                   <label for="username">Username</label>
                   <input type="text" class="form-control" placeholder="User Name" id="username" ng-model="profile.urlSlug">
                 </div>
-                <span class="block usererror text-left" ng-class="showUserError">Choose a Unique User Name</span>
+                <span class="block usererror text-left" ng-class="showUserError">Choose a Unique Username</span>
               </form>
             </div>
             <!-- full name and user name section end-->
@@ -199,14 +199,17 @@
               <div class="current-profilepicture" ng-show="((profile.profilePicture) && (showImage.val==false))">
                 <img ng-src="{{profile.profilePicture|uploadpath}}" alt="" class="img-responsive">
               </div>
-              <div class="cropArea" ng-show="showImage.val && profile.profilePicture">
-                <div class="text-right">
-                  <span class="color-dark-blue pointer" ng-click="removePhoto()">Cancel</span>
+              <div class="" ng-hide="viewBlob">
+                <div class="cropArea" ng-show="showImage.val && profile.profilePicture" >
+                  <div class="text-right clearfix">
+                    <span class="color-dark-blue pointer pull-left" ng-click="removePhoto()">Cancel</span>
+                    <span class="color-dark-blue pointer pull-right" ng-click="viewBlob=true">Ok</span>
+                  </div>
+                  <img-crop image="myImage" result-image="uploadme.src" area-type="square" result-image-size="500" class="image-canvas" /></img-crop>
                 </div>
-                <img-crop image="myImage" result-image="uploadme.src" area-type="square" /></img-crop>
               </div>
-              <div class="hide">
-                <img ng-src="{{uploadme.src}}" />
+              <div class="current-profilepicture" ng-show="viewBlob">
+                <img ng-src="{{uploadme.src}}" class="img-responsive m-center"/>
               </div>
               <div class="upload-section" ng-hide="showImage.val">
 
@@ -217,9 +220,6 @@
                     <button class="btn btn-dark-blue pointer avenir-roman">Upload photo</button>
                     <input type="file" class="getfile pointer" id="fileInput1" class="getfile pointer" fileread="uploadme.src" />
                   </div>
-                  <!-- <div class="relate inline-block ml10 web-camera">
-                    <button class="btn btn-dark-blue pointer avenir-roman" ng-click="closeCam=false">Web Camera</button>
-                  </div> -->
                 </div>
               </div>
               <div ng-hide="closeCam">
