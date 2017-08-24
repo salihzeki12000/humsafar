@@ -199,16 +199,19 @@
               <div class="current-profilepicture" ng-show="((profile.profilePicture) && (showImage.val==false))">
                 <img ng-src="{{profile.profilePicture|uploadpath}}" alt="" class="img-responsive">
               </div>
-              <div class="" ng-hide="viewBlob">
+              <div class="" >
+                <!-- ng-hide="viewBlob" -->
                 <div class="cropArea" ng-show="showImage.val && profile.profilePicture" >
                   <div class="text-right clearfix">
                     <span class="color-dark-blue pointer pull-left" ng-click="removePhoto()">Cancel</span>
-                    <span class="color-dark-blue pointer pull-right" ng-click="viewBlob=true">Ok</span>
+                    <span class="color-dark-blue pointer pull-right" >Ok</span>
+                    <!-- ng-click="viewBlob=true" -->
                   </div>
                   <img-crop image="myImage" result-image="uploadme.src" area-type="square" result-image-size="500" class="image-canvas" /></img-crop>
                 </div>
               </div>
-              <div class="current-profilepicture" ng-show="viewBlob">
+              <!-- ng-show="viewBlob" -->
+              <div class="current-profilepicture" hidden>
                 <img ng-src="{{uploadme.src}}" class="img-responsive m-center"/>
               </div>
               <div class="upload-section" ng-hide="showImage.val">
