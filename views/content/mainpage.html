@@ -178,7 +178,7 @@
               </div>
             </div>
           </div>
-          <div class="upload-profile" ng-show="goNext==5">
+          <div class="upload-profile login-upload-temp" ng-show="goNext==5">
             <!-- full name and user name section -->
             <div class="fulluser-name">
               <form action="" autocomplete="off">
@@ -211,7 +211,7 @@
                 </div>
               </div>
               <!-- ng-show="viewBlob" -->
-              <div class="current-profilepicture">
+              <div class="current-profilepicture" ng-if="showImage.val==true">
                 <img ng-src="{{uploadme.src}}" class="img-responsive m-center"/>
               </div>
               <div class="upload-section" ng-hide="showImage.val">

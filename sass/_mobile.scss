@@ -809,6 +809,17 @@
     }
   } // setting page end
   // main page
+  // temporary
+    .login-upload-temp.upload-profile {
+      .cropArea {
+        height: auto;
+        span {
+          margin-bottom: 10px;
+        }
+      }
+      img-crop { display: none; }
+    }
+  // temporary end
   .upload-section {
     img {
       width: 80px;
