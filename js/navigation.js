@@ -1,8 +1,8 @@
 var adminURL = "";
 var allowAccess = "";
 
-adminURL = "https://travelibro.com/api";
-// adminURL = "https://travelibro.wohlig.com/api";
+// adminURL = "https://travelibro.com/api";
+adminURL = "https://travelibro.wohlig.com/api";
 
 var imgurl = adminURL + "/upload/";
 var imgpath = imgurl + "readFile";
@@ -184,7 +184,7 @@ var navigationservice = angular.module('navigationservice', [])
             TravelibroService.http({
                 url: adminURL + "/user/logout",
                 method: "POST"
-            }).success(callback);
+            },'allLoader').success(callback);
         },
         enablePushNotification: function (deviceId) {
             TravelibroService.http({
