@@ -732,10 +732,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.uploadFile = function (data, userData, ppSelected) {
         // Base64 to Blob
         if (ppSelected) {
-            console.log(data,'data', userData,'userdata',ppSelected,'pp selected');
             var imageBase64 = data;
             var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
-            console.log(blob,'blob kya hai conversion after');
             // Blob to File
             // var file = new File([blob], $scope.fileName + '.png');
             // var file = new File([blob], $scope.fileName.split('.')[0] + '.png');
@@ -7714,7 +7712,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         // cfpLoadingBar.start();
         // var file = imageTestingCallback(imageBase64, 'image/png');
         var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
-        console.log(blob,'blob kya hai conversion after');
         var formData = new FormData();
         console.log(formData, "before appending");
         formData.append('file', blob,"abcd.png");
