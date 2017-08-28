@@ -7295,7 +7295,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.saveSetting = false;
-
+    $scope.uploadingPic = false;
     $scope.showSetting = 1;
     var url = $stateParams.path;
     $scope.setting = function (val) {
@@ -7709,6 +7709,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.uploadProfilePicture = function (imageBase64) {
+      $scope.uploadingPic = true;
       // console.log(imageBase64,'what is imageBase 64');
         // cfpLoadingBar.start();
         // var file = imageTestingCallback(imageBase64, 'image/png');
@@ -7720,6 +7721,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log(formData, "after appending");
         NavigationService.uploadFile(formData, function (response) {
             if (response.value) {
+              $scope.uploadingPic = false;
                 $scope.userData.profilePicture = response.data[0];
                 NavigationService.saveUserData({
                     'profilePicture': $scope.userData.profilePicture
@@ -7734,7 +7736,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             }
         });
     }
-
+    // remove pic
+    $scope.removeSettingPic = function(){
+      angular.element("input[type='file']").val(null);
+      $scope.showImage = false;
+    }
+    // remove pic end
     // REPORT PROBLEM
     $scope.saveReport = function (settingReport) {
         NavigationService.ReportProblems({
