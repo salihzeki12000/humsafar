@@ -117,10 +117,10 @@
                   <label for="profile" class="color-blue">Profile Photo</label>
                   <div class="cropArea relate hidden-xs" ng-show="showImage" id="profile">
                     <div class="cancel" ng-click="showImage=false; removeSameFile();"><span class="color-white pointer">Cancel</span></div>
-                    <img-crop image="myImage" result-image="myCroppedImage" result-image-size="500" area-type="square">
+                    <img-crop image="myImage" result-image="myCroppedImage.src" result-image-size="500" area-type="square">
                     </img-crop>
                     <div class="btn-upload">
-                      <button class="btn btn-pink btn-more" ng-click="uploadProfilePicture(myCroppedImage)">Done</button>
+                      <button class="btn btn-pink btn-more" ng-click="uploadProfilePicture(myCroppedImage.src)">Done</button>
                     </div>
                     <!-- loading profile pic-->
                     <div class="upload-sett-loader" ng-if="uploadingPic">
@@ -152,7 +152,7 @@
                     <div class="upload-btn">
                       <div class="relate inline-block mr10 form-file">
                         <button class="btn btn-dark-blue pointer avenir-light ">Change Photo</button>
-                        <input type="file" id="fileInput" class="getfile pointer" />
+                        <input type="file" id="fileInput" class="getfile pointer" fileread="myCroppedImage"/>
                       </div>
                       <!-- <div class="inline-block from-photogallery">
                         <button class="btn btn-dark-blue pointer avenir-light">Your Photos</button>
