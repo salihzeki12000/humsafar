@@ -142,12 +142,14 @@
                   </li>
                 </ul> -->
                 <div class="nation-city">
-                  <ui-select ng-model="userData.homeCity" theme="bootstrap" on-select="$parent.goNext=4" ng-value="userData.homeCity">
+                  <ui-select ng-model="userData.homeCity" theme="bootstrap" ng-value="userData.homeCity">
+                    <!-- on-select="$parent.goNext=4"  -->
                     <ui-select-match placeholder="Search City">{{$select.selected.description}}</ui-select-match>
-                    <ui-select-choices repeat="city.description as city in cities | filter:searchCity" track by $index ng-click="$parent.goNext=4"
+                    <ui-select-choices repeat="city.description as city in cities | filter:searchCity" track by $index
                       refresh="searchByKey($select.search)" refresh-delay="0">
                       <span class="color-light-grey">{{city.description}}</span>
                     </ui-select-choices>
+                    <!-- ng-click="$parent.goNext=4" -->
                   </ui-select>
                 </div>
               </div>
@@ -160,21 +162,25 @@
           <div class="gender" ng-show="goNext==4">
             <div class="text-center">
               <h3 class="color-blue avenir-black">Gender</h3>
-              <div class="male inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': userData.gender=='male'}" ng-click="changeGender(1,'male');goNext=5">
+              <div class="male inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': userData.gender=='male'}" ng-click="changeGender(1,'male');">
+                <!-- goNext=5 -->
                 <img src="img/male.png" alt="Gender" class="img-responsive">
                 <span class="color-blue avenir-medium">He</span>
               </div>
-              <div class="female inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': userData.gender=='female'}" ng-click="changeGender(2,'female');goNext=5">
+              <div class="female inline-block pointer ml20 mr20 mt20" ng-class="{'active-gender': userData.gender=='female'}" ng-click="changeGender(2,'female');">
+                <!-- goNext=5 -->
                 <img src="img/female.png" alt="Gender" class="img-responsive">
                 <span class="color-blue avenir-medium">She</span>
               </div>
               <div class="they inline-block pointer ml20 mr20 mt20">
-                <img src="img/they.png" alt="They" class="img-responsive" ng-class="{'active-gender': userData.gender=='they'}" ng-click="changeGender(3,'they');goNext=5">
+                <img src="img/they.png" alt="They" class="img-responsive" ng-class="{'active-gender': userData.gender=='they'}" ng-click="changeGender(3,'they');">
+                <!-- goNext=5 -->
                 <span class="color-blue avenir-medium">They</span>
               </div>
               <div class="button-panel clearfix">
                 <button class="btn btn-outline-blue btn-more pull-left" ng-click="goNext=3">Previous</button>
-                <button class="btn btn-outline-blue btn-more pull-right" ng-click="goNext=5" ng-disabled="userData.gender">Next</button>
+                <button class="btn btn-outline-blue btn-more pull-right" ng-click="goNext=5" ng-disabled="!userData.gender">Next</button>
+                <!-- ng-disabled="userData.gender" -->
               </div>
             </div>
           </div>
