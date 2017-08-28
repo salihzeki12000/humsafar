@@ -113,38 +113,38 @@
             <div class="setting-main-detail bg-white avenir-roman">
               <!-- profile detail -->
               <div class="profile-detail-main" ng-if="showSetting == 1">
-                <form name='profile' ng-submit="editUserData(userData,1,profile.$valid);">
-                  <div class="profile-photo-sec upload-profile">
-                    <label for="profile" class="color-blue">Profile Photo</label>
-                    <div class="cropArea relate" ng-show="showImage" id="profile">
-                      <div class="cancel" ng-click="showImage=false; removeSameFile();"><span class="color-white pointer">Cancel</span></div>
-                      <img-crop image="myImage" result-image="myCroppedImage" result-image-size="700" area-type="square">
-                      </img-crop>
-                      <div class="btn-upload">
-                        <button class="btn btn-pink btn-more" ng-click="uploadProfilePicture(myCroppedImage)">Done</button>
-                      </div>
-                    </div>
-                    <div class="upload-section text-center" ng-hide="showImage">
-                      <div>
-                        <img ng-src="{{userData.profilePicture|uploadpath:200:200:'cover'}}" alt="" class="m-center img-responsive">
-                        <!--<img ng-src="img/upload-icon.jpg" alt="" class="m-center img-responsive">-->
-                        <!--<p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
-                        <span class="block mt10 color-grey avenir-roman">-or-</span>-->
-                      </div>
-                      <div class="upload-btn">
-                        <div class="relate inline-block mr10 form-file">
-                          <button class="btn btn-dark-blue pointer avenir-light ">Upload Photo</button>
-                          <input type="file" id="fileInput" class="getfile pointer" />
-                        </div>
-                        <!-- <div class="inline-block from-photogallery">
-                          <button class="btn btn-dark-blue pointer avenir-light">Your Photos</button>
-                        </div> -->
-                        <!-- <div class="inline-block ml10 from-webcamera">
-                          <button class="btn btn-dark-blue pointer avenir-light">Web Camera</button>
-                        </div> -->
-                      </div>
+                <div class="profile-photo-sec upload-profile">
+                  <label for="profile" class="color-blue">Profile Photo</label>
+                  <div class="cropArea relate" ng-show="showImage" id="profile">
+                    <div class="cancel" ng-click="showImage=false; removeSameFile();"><span class="color-white pointer">Cancel</span></div>
+                    <img-crop image="myImage" result-image="myCroppedImage" result-image-size="700" area-type="square">
+                    </img-crop>
+                    <div class="btn-upload">
+                      <button class="btn btn-pink btn-more" ng-click="uploadProfilePicture(myCroppedImage)">Done</button>
                     </div>
                   </div>
+                  <div class="upload-section text-center" ng-hide="showImage">
+                    <div>
+                      <img ng-src="{{userData.profilePicture|uploadpath:200:200:'cover'}}" alt="" class="m-center img-responsive">
+                      <!--<img ng-src="img/upload-icon.jpg" alt="" class="m-center img-responsive">-->
+                      <!--<p class="text-center color-grey avenir-roman">Drag a profile photo here</p>
+                      <span class="block mt10 color-grey avenir-roman">-or-</span>-->
+                    </div>
+                    <div class="upload-btn">
+                      <div class="relate inline-block mr10 form-file">
+                        <button class="btn btn-dark-blue pointer avenir-light ">Change Photo</button>
+                        <input type="file" id="fileInput" class="getfile pointer" />
+                      </div>
+                      <!-- <div class="inline-block from-photogallery">
+                        <button class="btn btn-dark-blue pointer avenir-light">Your Photos</button>
+                      </div> -->
+                      <!-- <div class="inline-block ml10 from-webcamera">
+                        <button class="btn btn-dark-blue pointer avenir-light">Web Camera</button>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+                <form name='profile' ng-submit="editUserData(userData,1,profile.$valid);">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">

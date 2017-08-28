@@ -7709,10 +7709,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.uploadProfilePicture = function (imageBase64) {
+      // console.log(imageBase64,'what is imageBase 64');
         // cfpLoadingBar.start();
-        var file = imageTestingCallback(imageBase64, 'image/png');
-        console.log(file);
-        NavigationService.uploadFile(file, function (response) {
+        // var file = imageTestingCallback(imageBase64, 'image/png');
+        var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
+        console.log(blob,'blob kya hai conversion after');
+        var formData = new FormData();
+        console.log(formData, "before appending");
+        formData.append('file', blob,"abcd.png");
+        console.log(formData, "after appending");
+        NavigationService.uploadFile(formData, function (response) {
             if (response.value) {
                 $scope.userData.profilePicture = response.data[0];
                 NavigationService.saveUserData({
@@ -13915,28 +13921,31 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $state.go("quickitinerary", { flag: 'edit', urlSlug: status.urlSlug });
         }
     };
+    var delModal = "";
     $scope.deleteStatus = function (status) {
         $scope.status = status;
-        $socpe.deleteActivity = function () {
-            if (status.type === "agentStatus") {
-                Agent.deleteStatus(status, function (data) {
-                    if (data.value) {
-                        $scope.getTravelActivity($scope.activeUrlSlug);
-                    }
-                });
-            } else {
-                NavigationService.deleteItinerary(status._id, function (data) {
-                    if (data.value) {
-                        $scope.getTravelActivity($scope.activeUrlSlug);
-                    }
-                })
-            }
-        };
-        var delModal = $uibModal.open({
+         delModal = $uibModal.open({
             animation: true,
             templateUrl: "views/modal/delete-activity.html",
             scope: $scope
         });
+    };
+    $socpe.deleteActivity = function () {
+        if (status.type === "agentStatus") {
+            Agent.deleteStatus(status, function (data) {
+                if (data.value) {
+                    $scope.getTravelActivity($scope.activeUrlSlug);
+                }
+            });
+        } else {
+            NavigationService.deleteItinerary(status._id, function (data) {
+                if (data.value) {
+                    $scope.getTravelActivity($scope.activeUrlSlug);
+                }
+            })
+        }
+        delModal.close();
+        $scope.status = {};
     };
     $scope.editOption = function (each) {
         $timeout(function () {

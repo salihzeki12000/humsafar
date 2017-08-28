@@ -58,17 +58,16 @@ var imageTestingCallback = function (dataURI, type) {
     }
 
     // write the ArrayBuffer to a blob, and you're done
-    var blob = new Blob([ab], {
+    var bbSetting = new Blob([ab], {
         type: type
     });
-    console.log(blob);
     // Blob to File
     // var file = new File([blob], 'photo-' + "1" + '.png');
-    console.log(file);
+    // console.log(file);
     // File to FormData
     var formData = new FormData();
     console.log(formData, "before appending");
-    formData.append('file', blob, 'abcd.png');
+    formData.append('file', bbSetting, 'abcd.png');
     console.log(formData, "after appending");
     return formData;
 };
