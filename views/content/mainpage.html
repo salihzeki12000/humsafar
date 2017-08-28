@@ -178,7 +178,7 @@
               </div>
             </div>
           </div>
-          <div class="upload-profile" ng-show="goNext==5">
+          <div class="upload-profile login-upload-temp" ng-show="goNext==5">
             <!-- full name and user name section -->
             <div class="fulluser-name">
               <form action="" autocomplete="off">
@@ -199,16 +199,19 @@
               <div class="current-profilepicture" ng-show="((profile.profilePicture) && (showImage.val==false))">
                 <img ng-src="{{profile.profilePicture|uploadpath}}" alt="" class="img-responsive">
               </div>
-              <div class="" ng-hide="viewBlob">
+              <div class="" >
+                <!-- ng-hide="viewBlob" -->
                 <div class="cropArea" ng-show="showImage.val && profile.profilePicture" >
                   <div class="text-right clearfix">
                     <span class="color-dark-blue pointer pull-left" ng-click="removePhoto()">Cancel</span>
-                    <span class="color-dark-blue pointer pull-right" ng-click="viewBlob=true">Ok</span>
+                    <!-- <span class="color-dark-blue pointer pull-right" >Ok</span> -->
+                    <!-- ng-click="viewBlob=true" -->
                   </div>
                   <img-crop image="myImage" result-image="uploadme.src" area-type="square" result-image-size="500" class="image-canvas" /></img-crop>
                 </div>
               </div>
-              <div class="current-profilepicture" ng-show="viewBlob">
+              <!-- ng-show="viewBlob" -->
+              <div class="current-profilepicture" ng-if="showImage.val==true">
                 <img ng-src="{{uploadme.src}}" class="img-responsive m-center"/>
               </div>
               <div class="upload-section" ng-hide="showImage.val">
@@ -246,6 +249,9 @@
                 <button class="btn btn-outline-blue btn-more pull-left" ng-click="goNext=4">Previous</button>
                 <!--<button class="btn btn-blue-outline btn-more pull-right" ui-sref="holiday" ng-click="saveUserData(userData)">Done</button>-->
                 <button class="btn btn-outline-blue btn-more pull-right" ng-click="uploadFile(uploadme.src,userData,showImage.val)">Done</button>
+              </div>
+              <div class="login-imgloader" ng-if="showImageLoader">
+                  <img src="img/page.svg" alt="Loading..." width="50px" class="img-responsive get-center">
               </div>
             </div>
           </div>

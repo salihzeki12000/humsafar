@@ -632,13 +632,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.profile = $.jStorage.get("profile");
     $scope.myImage = '';
     $scope.showUserError = "";
+    $scope.showImageLoader = false;
     $scope.viewBlob = false;
     if ($scope.profile && $scope.profile.profilePicture) {
         NavigationService.getImageFromServer($scope.profile.profilePicture, function (data) {
             // $scope.myImage=data;
-            $scope.myImage = $window.URL.createObjectURL(new Blob([data], {
-                type: 'image/png'
-            }));
+            // $scope.myImage = $window.URL.createObjectURL(new Blob([data], {
+            //     type: 'image/png'
+            // }));
+            $scope.myImage = new Blob([data]);
             console.log($scope.myImage);
         });
     } else {
@@ -743,18 +745,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             console.log(formData, "before appending");
             formData.append('file', blob,"abcd.png");
             console.log(formData, "after appending");
+            $scope.showImageLoader = true;
             NavigationService.uploadFile(formData, function (response) {
                 if (response.value) {
                     $scope.userData.profilePicture = response.data[0];
                     console.log($scope.userData);
+                    $scope.showImageLoader = false;
                 } else {
                     toastr.warning('Error Uploading Image!');
+                    setTimeout(function(){
+                      $scope.showImageLoader = false;
+                    },12000);
                 }
                 $scope.saveUserData($scope.userData);
             });
         } else {
             $scope.userData = _.omit($scope.userData, ['profilePicture']);
             $scope.saveUserData($scope.userData);
+            setTimeout(function(){
+              $scope.showImageLoader = false;
+            },12000);
         }
     };
 
@@ -2937,16 +2947,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             });
         }
         // sharing local life modal end
-    $timeout(function () {
-        if ((navigator.platform.indexOf("iPhone") != -1) ||
-            (navigator.platform.indexOf("iPod") != -1) ||
-            (navigator.platform.indexOf("iPad") != -1)) {
-            $(".download-app").addClass("hide");
-        }
-    }, 200);
-    $scope.customLink = function () {
-        window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
-    };
+    // $timeout(function () {
+    //     if ((navigator.platform.indexOf("iPhone") != -1) ||
+    //         (navigator.platform.indexOf("iPod") != -1) ||
+    //         (navigator.platform.indexOf("iPad") != -1)) {
+    //         $(".download-app").addClass("hide");
+    //     }
+    // }, 200);
+    // $scope.customLink = function () {
+    //     window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
+    // };
 })
 
 .controller('DestinationCtrl', function ($scope, $state, TemplateService, NavigationService, LikesAndComments, cfpLoadingBar, $timeout, $uibModal, $location) {
