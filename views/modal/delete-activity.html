@@ -9,7 +9,7 @@
                 <span class="delete-confirmation" ng-if="status.type==='agentStatus'" ng-click="deleteActivity();">YES</span>
             </div>
             <div class="col-flex">
-                <span class="delete-confirmation" ng-click="$dismiss();">NO</span>
+                <span class="delete-confirmation" ng-click="$dismiss();status={};">NO</span>
             </div>
         </div>
     </div>
