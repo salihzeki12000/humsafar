@@ -741,28 +741,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             // File to FormData
             var formData = new FormData();
             console.log(formData, "before appending");
-            formData.append('file', blob,"abcd.png");
+            formData.append('file', blob, "abcd.png");
             console.log(formData, "after appending");
             $scope.showImageLoader = true;
+            $scope.saveUserData($scope.userData);
             NavigationService.uploadFile(formData, function (response) {
                 if (response.value) {
-                    $scope.userData.profilePicture = response.data[0];
-                    console.log($scope.userData);
                     $scope.showImageLoader = false;
+                    NavigationService.saveUserData({ profilePicture: response.data[0] }, function (response) {
+                        if (response.value) {
+                            console.log("Uploaded");
+                        } else {
+                            console.log("Error");
+                        }
+                    });
                 } else {
                     toastr.warning('Error Uploading Image!');
-                    setTimeout(function(){
-                      $scope.showImageLoader = false;
-                    },12000);
+                    setTimeout(function () {
+                        $scope.showImageLoader = false;
+                    }, 12000);
                 }
-                $scope.saveUserData($scope.userData);
             });
         } else {
             $scope.userData = _.omit($scope.userData, ['profilePicture']);
             $scope.saveUserData($scope.userData);
-            setTimeout(function(){
-              $scope.showImageLoader = false;
-            },12000);
+            setTimeout(function () {
+                $scope.showImageLoader = false;
+            }, 12000);
         }
     };
 
@@ -2945,16 +2950,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             });
         }
         // sharing local life modal end
-    // $timeout(function () {
-    //     if ((navigator.platform.indexOf("iPhone") != -1) ||
-    //         (navigator.platform.indexOf("iPod") != -1) ||
-    //         (navigator.platform.indexOf("iPad") != -1)) {
-    //         $(".download-app").addClass("hide");
-    //     }
-    // }, 200);
-    // $scope.customLink = function () {
-    //     window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
-    // };
+        // $timeout(function () {
+        //     if ((navigator.platform.indexOf("iPhone") != -1) ||
+        //         (navigator.platform.indexOf("iPod") != -1) ||
+        //         (navigator.platform.indexOf("iPad") != -1)) {
+        //         $(".download-app").addClass("hide");
+        //     }
+        // }, 200);
+        // $scope.customLink = function () {
+        //     window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
+        // };
 })
 
 .controller('DestinationCtrl', function ($scope, $state, TemplateService, NavigationService, LikesAndComments, cfpLoadingBar, $timeout, $uibModal, $location) {
@@ -7430,8 +7435,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             }
         }
     };
-    $scope.removeSameFile = function(){
-      angular.element("input[type='file']").val(null);
+    $scope.removeSameFile = function () {
+        angular.element("input[type='file']").val(null);
     }
 
     $scope.travelConfig.chooseHoliday = [{
@@ -7707,39 +7712,39 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.uploadProfilePicture = function (imageBase64) {
-      $scope.uploadingPic = true;
-      // console.log(imageBase64,'what is imageBase 64');
-        // cfpLoadingBar.start();
-        // var file = imageTestingCallback(imageBase64, 'image/png');
-        var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
-        var formData = new FormData();
-        console.log(formData, "before appending");
-        formData.append('file', blob,"abcd.png");
-        console.log(formData, "after appending");
-        NavigationService.uploadFile(formData, function (response) {
-            if (response.value) {
-              $scope.uploadingPic = false;
-                $scope.userData.profilePicture = response.data[0];
-                NavigationService.saveUserData({
-                    'profilePicture': $scope.userData.profilePicture
-                }, function (data) {
-                    $scope.showImage = false;
-                    NavigationService.getProfile($.jStorage.get("profile").urlSlug, globalGetProfile, function () {
-                        console.log("error");
+            $scope.uploadingPic = true;
+            // console.log(imageBase64,'what is imageBase 64');
+            // cfpLoadingBar.start();
+            // var file = imageTestingCallback(imageBase64, 'image/png');
+            var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
+            var formData = new FormData();
+            console.log(formData, "before appending");
+            formData.append('file', blob, "abcd.png");
+            console.log(formData, "after appending");
+            NavigationService.uploadFile(formData, function (response) {
+                if (response.value) {
+                    $scope.uploadingPic = false;
+                    $scope.userData.profilePicture = response.data[0];
+                    NavigationService.saveUserData({
+                        'profilePicture': $scope.userData.profilePicture
+                    }, function (data) {
+                        $scope.showImage = false;
+                        NavigationService.getProfile($.jStorage.get("profile").urlSlug, globalGetProfile, function () {
+                            console.log("error");
+                        });
                     });
-                });
-            } else {
+                } else {
 
-            }
-        });
-    }
-    // remove pic
-    $scope.removeSettingPic = function(){
-      angular.element("input[type='file']").val(null);
-      $scope.showImage = false;
-    }
-    // remove pic end
-    // REPORT PROBLEM
+                }
+            });
+        }
+        // remove pic
+    $scope.removeSettingPic = function () {
+            angular.element("input[type='file']").val(null);
+            $scope.showImage = false;
+        }
+        // remove pic end
+        // REPORT PROBLEM
     $scope.saveReport = function (settingReport) {
         NavigationService.ReportProblems({
             // userId: $scope.userData._id,
@@ -11890,10 +11895,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         status: ""
     };
     // INTEGRATION START
-    $scope.removeSameFile = function(){
-      angular.element("input[type='file']").val(null);
-    }
-    // SETTING DATA GET
+    $scope.removeSameFile = function () {
+            angular.element("input[type='file']").val(null);
+        }
+        // SETTING DATA GET
     function setAgent() {
         Agent.getAgentDetails(function (data) {
             if (data.value = true) {
@@ -13928,7 +13933,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var delModal = "";
     $scope.deleteStatus = function (status) {
         $scope.status = status;
-         delModal = $uibModal.open({
+        delModal = $uibModal.open({
             animation: true,
             templateUrl: "views/modal/delete-activity.html",
             scope: $scope
