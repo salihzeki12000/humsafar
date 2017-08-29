@@ -13939,7 +13939,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             scope: $scope
         });
     };
-    $socpe.deleteActivity = function () {
+    $scope.deleteActivity = function () {
         if (status.type === "agentStatus") {
             Agent.deleteStatus(status, function (data) {
                 if (data.value) {
@@ -16277,7 +16277,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Partner Login"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
+    $scope.reset = function (form) {
+        $scope.showError.show = false;
+        $scope.agentLoginForm = {};
+        $scope.agentLoginForm.email = "";
+        $scope.agentSignUpForm = {};
+        $scope.agentSignUpForm.email = "";
+    };
 })
 
 .controller('LoginFlowCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state, $interval) {
