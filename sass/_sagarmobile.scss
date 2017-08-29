@@ -1576,6 +1576,14 @@
     height: auto;
   }
 }
+// activity
+.activity-container h3.heading-activity {
+  font-size: 28px;
+}
+.no-activity h4 {
+  font-size: 20px;
+}
+// activity end
 
 // media query for 767px to 480px end
 // media query for 480px to 320px
@@ -1781,7 +1789,16 @@
   }
   .activity-container {
     padding: 10px 0 0;
-  } //Destination country page end
+    h3.heading-activity {
+      font-size: 23px;
+      margin: 0 0 15px;
+    }
+  }
+  .no-activity {
+    font-size: 16px;
+    h4 { font-size: 16px; }
+  }
+  //Destination country page end
   //POPULAR AGENT PAGE
   .agent-07 .agent-box .overlay-down {
     height: auto;
