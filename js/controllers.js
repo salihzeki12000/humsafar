@@ -10814,75 +10814,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }]
     }, ];
     // country list end
-    // accordion
-    $scope.countryTripList = [{
-        countryImg: "img/singapore.png",
-        countryName: "Singapore",
-        cityList: [{
-            dayInput1: "1",
-            dayInput2: "2",
-            cityName: "Singapore",
-            stayedAt: "Friends House",
-            ateAt: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-            mustDo: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-            aboutTrip: "<p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. <br><br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p><br><p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.<br> <br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p>",
-        }, {
-            dayInput1: "1",
-            dayInput2: "2",
-            cityName: "Singapore",
-            stayedAt: "Friends House",
-            ateAt: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-            mustDo: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-            aboutTrip: "<p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. <br><br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p><br><p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.<br> <br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p>",
-        }, ],
-    }, {
-        countryImg: "img/singapore.png",
-        countryName: "Singapore",
-        cityList: [{
-            dayInput1: "1",
-            dayInput2: "2",
-            cityName: "Singapore",
-            stayedAt: "Friends House",
-            ateAt: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-            mustDo: "Bakerzin (Paragon)  |  Muchos Mexican Bar & Restaurant  |  Bora Bora Beach Bar (Palawan Beach)  |  Pita Pan (Marina Bay Sands)  |  Ku De Ta (Marina Bay Sands)",
-            aboutTrip: "<p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. <br><br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p><br><p>Day 1: Shopped on Orchard Road (ION Orchard / Paragon & Takashimaya) & strolled on Clarke Quay Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.<br> <br>Day 2: Spent the Day at the Universal Studios & Sentosa Islands, followed by Marina Bay Sands in the evening</p>",
-        }, ],
-    }, ];
-    // accordion end
 
-    $scope.photoGallery = [
-        '../img/uploaded-pic.jpg',
-        '../img/slider2.jpg',
-        '../img/moment-travel1.jpg',
-        '../img/moment-travel2.jpg',
-        '../img/local-life-post.jpg',
-        '../img/destination/goldentemple.jpg',
-        '../img/destination/list1.jpg',
-        '../img/destination/list2.jpg',
-        '../img/destination/info.jpg',
-        '../img/destination/taj-featured.jpg',
-        '../img/itinerary/itinerary.jpg',
-        '../img/uploaded-pic.jpg',
-        '../img/slider2.jpg',
-        '../img/moment-travel1.jpg',
-        '../img/moment-travel2.jpg',
-        '../img/local-life-post.jpg',
-        '../img/destination/goldentemple.jpg',
-        '../img/destination/list1.jpg',
-        '../img/destination/list2.jpg',
-        '../img/destination/info.jpg',
-        '../img/destination/taj-featured.jpg',
-        '../img/itinerary/itinerary.jpg',
-        '../img/moment-travel1.jpg',
-        '../img/moment-travel2.jpg',
-        '../img/local-life-post.jpg',
-        '../img/destination/goldentemple.jpg',
-        '../img/destination/list1.jpg',
-        '../img/destination/list2.jpg',
-        '../img/destination/info.jpg',
-        '../img/destination/taj-featured.jpg',
-        '../img/itinerary/itinerary.jpg',
-    ];
     $scope.showClass = "close-gallery";
     $scope.viewGallery = function () {
         if ($scope.showClass == "close-gallery") {
@@ -13007,6 +12939,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.showme = false;
     $scope.viewdetailInfo = false;
     $scope.viewquickInfo = false;
+
+    // likes and comment variable declartion
+    $scope.postScrollData = {};
+    $scope.postScrollData.likePageNumber = 1;
+    $scope.postScrollData.busy = false;
+    $scope.postScrollData.stopCallingApi = false;
+    $scope.postScrollData.viewList = false;
+    // likes and comment variable declartion end
     var travelActivityObj = {};
     var formAgentData = {};
     var formLeadData = {};
@@ -13940,14 +13880,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
     };
     $scope.deleteActivity = function () {
-        if (status.type === "agentStatus") {
-            Agent.deleteStatus(status, function (data) {
+        if ($scope.status.type === "agentStatus") {
+            Agent.deleteStatus($scope.status, function (data) {
                 if (data.value) {
                     $scope.getTravelActivity($scope.activeUrlSlug);
                 }
             });
         } else {
-            NavigationService.deleteItinerary(status._id, function (data) {
+            NavigationService.deleteItinerary($scope.status._id, function (data) {
                 if (data.value) {
                     $scope.getTravelActivity($scope.activeUrlSlug);
                 }
@@ -14376,9 +14316,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.comment = {
             "text": ""
         }
+        $scope.postScrollData.type = post.type;
+        $scope.postScrollData._id = post._id;
         var callback = function (data) {
             $scope.uniqueArr = [];
             $scope.listOfComments = data.data;
+            $scope.postScrollData.viewList =  true;
             console.log($scope.listOfComments);
 
             $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
@@ -14389,7 +14332,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.viewCardComment = true;
             // $scope.journey.journeyHighLight = activity._id;
             $scope.getCard = "view-whole-card";
-            LikesAndComments.getComments(post.type, post._id, callback);
+            LikesAndComments.getComments(post.type, post._id,$scope.postScrollData.likePageNumber,callback);
         } else {
             if ($scope.viewCardComment) {
                 $scope.viewCardComment = false;
@@ -14402,14 +14345,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 // $scope.focus('enterComment');
                 // $scope.journey.journeyHighLight = activity._id;
                 $scope.getCard = "view-whole-card";
-                LikesAndComments.getComments(post.type, post._id, callback);
+                LikesAndComments.getComments(post.type, post._id,$scope.postScrollData.likePageNumber, callback);
             }
         }
         $scope.previousId = post._id;
     };
 
     $scope.getLikesData = function (post) {
+      $scope.postScrollData.type = post.type;
+      $scope.postScrollData._id = post._id;
         var callback = function (data) {
+          $scope.postScrollData.viewList = true;
             $scope.listOfLikes = data.data;
             console.log($scope.listOfLikes);
         };
@@ -14420,7 +14366,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.viewCardLike = true;
             // $scope.journey.journeyHighLight = activity._id;
             $scope.showLikeShow = "show-like-side-sec";
-            LikesAndComments.getLikes(post.type, post._id, callback);
+            LikesAndComments.getLikes(post.type, post._id,$scope.postScrollData.likePageNumber, callback);
         } else {
             if ($scope.viewCardLike) {
                 $scope.viewCardLike = false;
@@ -14432,7 +14378,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 // $scope.focus('enterComment');
                 // $scope.journey.journeyHighLight = activity._id;
                 $scope.showLikeShow = "show-like-side-sec";
-                LikesAndComments.getLikes(post.type, post._id, callback);
+                LikesAndComments.getLikes(post.type, post._id, $scope.postScrollData.likePageNumber, callback);
             }
         }
         $scope.previousLikeId = post._id;
@@ -14444,6 +14390,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.getCard = "";
         $scope.listOfLikes = [];
         $scope.listOfComments = [];
+        $scope.postScrollData.likePageNumber = 1;
+        $scope.postScrollData.busy = false;
+        $scope.postScrollData.stopCallingApi = false;
+        $timeout(function(){
+          $scope.postScrollData.busy = false;
+            $scope.postScrollData.stopCallingApi = false;
+            $scope.postScrollData.likePageNumber = 1;
+            $scope.postScrollData.viewList = false;
+            $scope.listOfLikes = [];
+            $scope.listOfComments = [];
+        },500);
     };
     // COMMENT LIKE SECTION FUNCTIONS END
     // <!!! COMMON TASKS END !!!>

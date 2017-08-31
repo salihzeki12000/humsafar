@@ -5415,6 +5415,10 @@ q {
     height: 100%;
     opacity: 0;
     cursor: pointer !important;
+    input {
+      @include square(100%);
+      @include position(absolute,0 null null 0);
+    }
   }
   .file-size {
     margin: 5px 10px 0;
