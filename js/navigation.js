@@ -184,7 +184,7 @@ var navigationservice = angular.module('navigationservice', [])
             TravelibroService.http({
                 url: adminURL + "/user/logout",
                 method: "POST"
-            },'allLoader').success(callback);
+            }, 'allLoader').success(callback);
         },
         enablePushNotification: function (deviceId) {
             TravelibroService.http({

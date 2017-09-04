@@ -7042,6 +7042,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     if ($.jStorage.get("isLoggedIn") && $.jStorage.get("profile") && ($.jStorage.get("profile").urlSlug == $stateParams.urlSlug)) {
         //its your own profile so no need to call profile again
+        $scope.myProfileData = $.jStorage.get("profile");
         $scope.userData = $.jStorage.get("profile");
         if ($.jStorage.get("profile").type === "User") {
             TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
@@ -7101,6 +7102,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $.jStorage.set("activeUrlSlug", $stateParams.urlSlug);
         $scope.activeUrlSlug = $stateParams.urlSlug;
         // $scope.isMine = false;
+        $scope.myProfileData = $.jStorage.get("profile");
         NavigationService.getProfile($stateParams.urlSlug, function (data) {
             if (data.value) {
                 if (data.data.type === "User") {
