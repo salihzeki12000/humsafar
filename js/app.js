@@ -808,7 +808,7 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, Templ
                         $scope.length = newVal.length;
                         _.each(newVal, function (newV, key) {
                             if (newV && newV.file) {
-                              TemplateService.uploadLoader = true;
+                                TemplateService.uploadLoader = true;
                                 $scope.uploadNow(newV);
                             }
                         });
@@ -932,7 +932,7 @@ firstapp.directive('onlyDigits', function () {
             function inputValue(val) {
                 if (val) {
                     if (attr.type == "text") {
-                        digits = val.replace(/[^0-9]/g, '');
+                        digits = varal.replace(/[^0-9]/g, '');
                     } else {
                         digits = val.replace(/[^0-9]/g, '');
                     }
@@ -943,6 +943,24 @@ firstapp.directive('onlyDigits', function () {
                         ctrl.$render();
                     }
                     return parseInt(digits, 10);
+                }
+                return undefined;
+            }
+            ctrl.$parsers.push(inputValue);
+        }
+    };
+});
+
+firstapp.directive('checkText', function () {
+    return {
+        require: 'ngModel',
+        restrict: 'A',
+        link: function (scope, element, attr, ctrl) {
+
+            function inputValue(val) {
+                if (val) {
+                    val = val.replace(/[^a-z0-9-\d\s]+/ig, "");
+                    return val;
                 }
                 return undefined;
             }

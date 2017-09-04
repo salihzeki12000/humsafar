@@ -176,16 +176,15 @@
                                         </div>
                                     </div>
                                     <!-- your bussiness model -->
-                                    <div class="">
-                                        <div class="">
-                                            <!-- <div class="nation-city"> -->
-                                            <ui-select multiple ng-model="userDetails.company.agentType" theme="bootstrap" on-select="checkme();" required>
-                                                <ui-select-match placeholder="Select Your Business Model*">{{$item}}</ui-select-match>
-                                                <ui-select-choices repeat="model in businessModel | filter:searchModel">
-                                                    <span class="color-light-grey">{{model}}</span>
-                                                </ui-select-choices>
-                                            </ui-select>
-                                            <!-- </div> -->
+                                    <div class="agent-cmpny-inputholder business-model">
+                                        <ui-select multiple ng-model="userDetails.company.agentType" theme="bootstrap" on-select="checkme();" required>
+                                            <ui-select-match placeholder="Select Your Business Model*">{{$item}}</ui-select-match>
+                                            <ui-select-choices repeat="model in businessModel | filter:searchModel">
+                                                <span class="color-light-grey">{{model}}</span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <div class="agent-input-icon">
+                                            <i class="fa fa-suitcase color-grey"></i>
                                         </div>
                                     </div>
                                     <!-- your bussiness model end-->
