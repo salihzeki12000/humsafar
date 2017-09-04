@@ -114,13 +114,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-12 col-xs-12">
-                        <div class="agthome-itinerary-youtube">
+                      <div class="mockup-video relate">
++                            <img src="img/iMac.png" alt="" class="img-responsive">
+                        <div class="agthome-itinerary-youtube agentlogin-vimeo">
                             <iframe src="https://player.vimeo.com/video/224049673?color=11d3cb&title=0&byline=0&portrait=0" width="100%" height="308px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                         </div>
-                        <!--<div class="agthome-itinerary-youtube">
-              <iframe src="https://www.youtube.com/embed/IUNM1AeHOv4" frameborder="0" ssallowfullscreen width="100%" height="100%"></iframe>
-            </div>-->
                     </div>
+                  </div>
                     <div class="col-md-5 col-sm-12 col-xs-12">
                         <div class="agt-home-itineraryintro">
                             <h3 class="color-blue">
@@ -154,21 +154,22 @@
                     <div class="travelLife col-md-4 col-sm-6" ng-repeat="post in agentItinerary track by $index">
                         <div class="travel-life-part  blog-post {{post.type}} avenir-roman overflow">
                             <!-- ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'" -->
-                            <div class="travel-journey-heading">
+                            <div class="travel-journey-heading relate">
                                 <div class="inline-block v-mid">
                                     <p class="m-clear color-blue travelitinerary-title"><span class="text-capitalize">{{post.name|truncate:'30'}} </span> - <span><span ng-if="post.type == 'quick-itinerary'">Quick </span> Itinerary</span> <span>( {{post.duration}} {{post.duration| singularPlural: 'Days'}} )</span></p>
-                                    <!-- <p class="m-clear journey-timestamp"><i class="fa fa-calendar mr5"></i><span class="mr5">{{post.createdAt | date : 'dd MMM, yyyy'}}</span> | <i class="fa fa-clock-o mr5 ml5"></i> <span>{{post.createdAt | date :'hh:mm a'}}</span></p> -->
                                 </div>
+                                <!-- flag section -->
+                                <div class="flag-section">
+                                    <div class="country-visited ng-scope" ng-repeat="flag in post.countryVisited|limitTo:3">
+                                        <img ng-src="{{flag.country.flag|uploadpath}}" alt="{{flag.country.name}}" class="img-responsive doneLoading" height="30">
+                                    </div>
+                                    <span class="country-count" ng-if="post.countryVisited.length>3">+{{post.countryVisited.length-3}}</span>
+                                </div>
+                                <!-- flag section end-->
                             </div>
                             <div class="onway-journey relate pointer" ng-click="routeItinerary(post);">
                                 <div class="onway-imgholder">
                                     <img ng-src="{{post.coverPhoto|uploadpath:370:340:'cover'}}" alt="{{post.name}} | TraveLibro" class="full-width m-center">
-                                </div>
-                                <div class="country-badges">
-                                    <div class="country-holder ng-scope" ng-repeat="flag in post.countryVisited|limitTo:3">
-                                        <img ng-src="{{flag.country.flag|uploadpath}}" alt="{{flag.country.name}}" class="img-responsive doneLoading">
-                                    </div>
-                                    <span class="country-count" ng-if="post.countryVisited.length>3">+{{post.countryVisited.length-3}}</span>
                                 </div>
                                 <div class="date-itinerary">
                                     <span class="view-date text-center">

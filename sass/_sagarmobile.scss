@@ -610,7 +610,11 @@
     text-align: center;
   } // notification page End
 }
-
+// agent home all section
+.agt-home-itinerary {
+  padding: 20px 0;
+}
+// agent home all section end
 // media query for 991px to 768px end
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
@@ -1584,7 +1588,15 @@
   font-size: 20px;
 }
 // activity end
-
+.head-title-all {
+  padding-left: 0;
+}
+.agent-home-content .pad-btn {
+  padding: 0px 0px 10px 0;
+}
+.speciality-imgholder {
+  margin-bottom: 20px;
+}
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {

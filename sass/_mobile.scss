@@ -1985,6 +1985,11 @@
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
+  .travel-bg {
+    background-color: #fff;  
+  }
+
+
   .bg-white,
   .setting,
   .travel-life-part.bg-white,
