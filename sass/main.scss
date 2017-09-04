@@ -1548,10 +1548,10 @@ header {
 
 .user-travel-detail {
   padding: 15px 0;
+  margin-bottom: -4px;
   background: url('../img/travel-detail-bg.png') no-repeat;
   background-size: 100% 100%;
   text-align: center;
-
   ul {
     padding: 0;
     margin: 0;
@@ -1575,7 +1575,7 @@ header {
 
 .all-profile-detail {
   padding: 0 25px;
-  margin-top: -5px;
+  // margin-top: -5px;
 }
 
 .more-about-me {
