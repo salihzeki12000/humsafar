@@ -705,7 +705,7 @@
   .travel-bg,
   .holiday-step {
     @include background(url(../img/mobile-bg.jpg) $brand-dark-blue no-repeat 50% 50%);
-    background-attachment: initial;
+    background-attachment: fixed;
     background-size: cover;
   } //header
   .sidemenu.mobile-menu .nav-list {
@@ -1972,7 +1972,7 @@
   .ongo-journey-change {
     p {
       margin-left: -21px;
-      background-color: #171a2c;
+      /*background-color: #171a2c;*/
     }
   } //   .post-travel-icon {
   //     display: none;
