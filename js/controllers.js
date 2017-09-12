@@ -11298,7 +11298,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }else if(e.keyCode === 13){
           var redirectLink = $('.search-option.active').children().attr('href');
           window.open(redirectLink,'_self');
-        }        
+        }    
+        $('.search-result-dropdown').scrollTop(0);    
         $('.search-result-dropdown').scrollTop($('.search-option.active').offset().top - $('.search-result-dropdown').height());
     }
           // if($('.search-result-dropdown').children().children(':last-child').children(':first-child').hasClass('active')){

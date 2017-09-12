@@ -11627,25 +11627,33 @@ display:none;
 
 .notify-popup {
   .modal-dialog {
-    width: 100%;
+    /*width: 100%;*/
+    width: 1000px;
     // margin-top: 40px;
+  }
+  .modal-content {
+    padding: 0;
   }
 
   .notify-main {
     max-height: calc( 100vh - 70px);
+    /*temp*/
     &:focus {
       outline: none;
     }
   }
 
   .notify-imgsec {
-    // max-width: 65%;
+    /*max-width: 65%;*/
+    width: 50%;
+    height: 500px;
     display: inline-block;
     vertical-align: top;
   }
 
   .comment-like-notify {
-    width: 35%;
+    /*width: 35%;*/
+    width: 50%;
     padding: 10px 20px;
     margin-left: -5px;
     display: inline-block;
@@ -11664,6 +11672,7 @@ display:none;
   }
 
   .notify-imgholder {
+    width: 100%;
     height: 500px;
     position: relative;
     background-color: #ebebeb;
@@ -11673,8 +11682,10 @@ display:none;
     video {
       width: auto;
       height: auto;
+      max-width: 100%;
       max-height: 500px;
-      position: relative;
+      /*position: relative;*/
+      @extend.get-center;
       z-index: 2;
     }
 
@@ -11690,15 +11701,19 @@ display:none;
     // }
 
     img {
-      height: 100%;
+      height: auto;
       width: auto;
-      max-width: 58vw; //its temporary width
-      // @extend .get-center;
+      max-width: 100%; //its temporary width
+      max-height: 100%; //its temporary width
+      @extend .get-center;
     }
     fade-img-loading {
       .blur, .img-show {
-        position: static;
-        @include transform(translate(0,0));
+        @extend .get-center;
+      }
+      .blur {
+        width: 100%;
+        height: 100%;
       }
     }
   }

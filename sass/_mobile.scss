@@ -29,6 +29,22 @@
 }
 
 @media screen and (max-width: 1204px) {
+  .notify-popup {
+    .comment-like-notify {
+      width: 45%;
+      height: 450px;
+      /*display: block;*/
+      /*margin-left: 0px;*/
+    }
+    .notify-imgsec {
+      /*width: 45%;*/
+      height: 450px;
+      /*display: block;*/
+    }
+    .notify-imgholder {
+      height: 450px;
+    }
+  }
   //header
   .user-detail .list-inline>li {
     padding: 0 5px;
@@ -256,6 +272,9 @@
 
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
+  .image-display {
+    padding: 0 5%;
+  }
   //header
   .user-detail .list-inline {
     li {
@@ -697,7 +716,7 @@
 // media query for 991px to 768px end
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
-
+  
   //loader
   .loaders {
     font-size: 16px !important;
