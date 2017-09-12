@@ -7103,6 +7103,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.activeUrlSlug = $stateParams.urlSlug;
         // $scope.isMine = false;
         $scope.myProfileData = $.jStorage.get("profile");
+        $scope.fromMyLife = true;
         NavigationService.getProfile($stateParams.urlSlug, function (data) {
             if (data.value) {
                 if (data.data.type === "User") {
@@ -11262,12 +11263,47 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 search: $scope.search.searchType
             }, function (data) {
                 $scope.getAllSearched = data.data;
+                $timeout(function(){
+                      $('.search-result-dropdown').focus();
+                      $('.search-result-dropdown').children(':first-child').children('.searchdrop-options').children(':first-child').addClass('active');
+                      // $('.search-traveller-drop .search-option').first().addClass('active');
+                },1000);
+                
             });
         } else {
             $scope.viewSearch.backgroundClick = false;
         }
     };
-
+    $scope.mouseDown = function(e){
+      $('.search-result-dropdown').scrollTop(0);
+      console.log(e);
+        if(e.keyCode === 40){
+          $('.search-option.active').focus();
+           if($('.search-option.active').parent().children(':last-child').hasClass('active')){
+             $('.search-option.active').removeClass('active').parent().parent().next().children(':last-child').children(':first-child').addClass('active');
+           }else{
+              $('.search-option.active').removeClass('active').next().addClass('active');
+           }           
+        }else if(e.keyCode === 38){
+          if($('.search-option.active').parent().children(':first-child').hasClass('active')){
+            $('.search-option.active').removeClass('active').parent().parent().prev().children(':last-child').children(':last-child').addClass('active');
+          }else if($('.search-result-dropdown').children().children(':last-child').children(':first-child').hasClass('active')){
+              return false;
+              console.log('amit');
+              $('.search-result-dropdown').scrollTop(0);
+          }else {
+             $('.search-option.active').removeClass('active').prev().addClass('active');
+             console.log('amit2')
+          }
+        }else if(e.keyCode === 13){
+          var redirectLink = $('.search-option.active').children().attr('href');
+          window.open(redirectLink,'_self');
+        }        
+        $('.search-result-dropdown').scrollTop($('.search-option.active').offset().top - $('.search-result-dropdown').height());
+    }
+          // if($('.search-result-dropdown').children().children(':last-child').children(':first-child').hasClass('active')){
+          //    $('.search-result-dropdown').children(':first-child').children('.searchdrop-options').children(':first-child').addClass('active');
+          // }
     $scope.viewResult = function (state, searchText) {
         switch (state) {
             case 'search-traveller':
@@ -16354,6 +16390,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 .controller('photoCommentModalCtrl', function ($scope, $uibModalInstance, LikesAndComments, $timeout) {
     $scope.index = -1;
     $scope.indexDelete = -1;
+    $timeout(function(){
+        $('#notifyFocus').focus();
+    },1000);
     $scope.likePhoto = function (listOfComments, uniqueId, _id, additionalId) {
         // console.log(uniqueId, _id, additionalId);
         console.log(listOfComments);
@@ -16491,6 +16530,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 LikesAndComments.openPhotoPopup(prevId, $scope);
             }
         },
+         $scope.keyPress=function(e){
+        console.log(e);
+        if(e.keyCode === 37){
+            $scope.prevPhotoSlide($scope.allPhotos);
+        }else if(e.keyCode === 39){
+            $scope.nextPhotoSlide($scope.allPhotos);
+        }
+    }
+
         // photo likes
         $scope.getLikes = function (id) {
             LikesAndComments.getLikes('photo', id, 1, function (data) {
