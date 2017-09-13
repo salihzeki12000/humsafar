@@ -8458,6 +8458,92 @@ display:none;
   }
 }
 // trip summary end
+
+/*past itinerary*/
+  .main-paststory {
+    width: 550px;
+  }
+  .box-start-paststory {
+    overflow: hidden;
+  }
+  .pastjourney-start { margin-bottom: 20px; }
+  .past-story-detail {
+    padding: 10px;
+    background-color: rgba(255,255,255,0.95);
+  }
+  .start-end-date {
+    margin: 10px 0;
+  }
+  .past-startdate, .past-enddate {
+    margin: 0;
+    display: inline-block;
+    font-size: 15px; 
+    color: $brand-dark-blue;
+    .date {
+      margin: 0px 5px;
+      font-size: 17px;
+      color: $brand-grey;
+    }
+    .edit-date {
+      font-size: 12px;
+      color: $brand-light-grey;
+    }
+  }
+  .past-startdate {
+    margin-right: 5px;
+  }
+  .days-count {
+    font-size: 25px;
+    display: block;
+    line-height: 100%;
+  }
+  .pastdestination-visited {
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    background-color: rgba(255,255,255,0.95);
+    color: $brand-dark-blue;
+    overflow: hidden;
+  }
+  .dest-heading {
+    font-size: 17px;
+  }
+  .past-flag-holder {
+    @include square(30px);
+    border-radius: 100%;
+    border: 1px solid #fff;
+    margin-right: 10px;
+    position: relative;
+    box-shadow: 1px 2px 4px #424242;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: middle;
+    img {
+      max-height: 100%;
+    }
+  }
+  .list-holder { 
+    padding-top: 10px; 
+    border-top: 1px solid #ebebeb;
+    &:first-child {
+      border-top: none;
+    }
+  }
+  .dest-country-vist {
+    display: inline-block;
+    font-size: 15px;
+    vertical-align: top;    
+  }
+  .country-name-visited + .city-name-visited { border-left: none; }
+  .city-name-visited {
+    padding: 0px 5px;
+    border-left: 1px solid $brand-dark-blue;
+    display: inline-block;
+  }
+  .edit-delete-dest { margin: 10px 0; }
+  .edit-dest { margin: 0px 10px; }
+/*past itinerary end*/
+
 // itinerary
 
 .itinerary-holder {

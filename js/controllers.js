@@ -20,7 +20,7 @@ var map;
 var center = {};
 var centers = [];
 markers[0] = {};
-angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'agent', 'commontask', 'anchorSmoothScroll', 'activity', 'infinite-scroll', 'navigationservice', 'travelibroservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce', 'ngFadeImgLoading', 'internationalPhoneNumber', 'ngIntlTelInput'])
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'agent', 'commontask', 'anchorSmoothScroll', 'activity', 'pastjourney','infinite-scroll', 'navigationservice', 'travelibroservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce', 'ngFadeImgLoading', 'internationalPhoneNumber', 'ngIntlTelInput'])
 .run(['$anchorScroll', function ($anchorScroll) {
         $anchorScroll.yOffset = 50; // always scroll by 50 extra pixels
     }])
@@ -9705,7 +9705,7 @@ var ref = "";
     // month array end
 
 })
-.controller('PastStoryCtrl', function ($scope, TemplateService, NavigationService, Itinerary, $timeout, $stateParams, $state) {
+.controller('PastStoryCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, $state) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("past-story");
