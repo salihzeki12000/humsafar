@@ -368,8 +368,6 @@ gulp.task('renamePHP', function () {
         .pipe(gulp.dest("./"));
 });
 
-
-
 gulp.task('watch', ["sass:development", "watch:all"]);
 gulp.task('default', ["sass:development", "watch:all"]);
 gulp.task('development', ["sass:development", "watch:all"]);

@@ -1,20 +1,23 @@
 // JavaScript Document
 var initMap = {};
+
 var backgroundClick = {
     object: undefined,
     close: function (e) {
-        console.log(backgroundClick.object.backgroundClick);
-        // if the classes given below is not added in respective div elements, then it will work normally as it was previously
-        if ($(e.target).parents().hasClass(backgroundClick.object.innerClass)) {
-            return;
-        } else if ($(e.target).hasClass(backgroundClick.object.outerClass)) {
-            backgroundClick.object.backgroundClick = !backgroundClick.object.backgroundClick;
-            backgroundClick.scope.$apply();
-        } else {
-            backgroundClick.object.backgroundClick = false;
-            backgroundClick.object.backgroundClick = undefined;
-            backgroundClick.scope.$apply();
-        }
+        try {
+            // console.log(backgroundClick.object.backgroundClick);
+            // if the classes given below is not added in respective div elements, then it will work normally as it was previously
+            if ($(e.target).parents().hasClass(backgroundClick.object.innerClass)) {
+              return;
+            } else if ($(e.target).hasClass(backgroundClick.object.outerClass)) {
+              backgroundClick.object.backgroundClick = !backgroundClick.object.backgroundClick;
+              backgroundClick.scope.$apply();
+            } else {
+              backgroundClick.object.backgroundClick = false;
+              backgroundClick.object.backgroundClick = undefined;
+              backgroundClick.scope.$apply();
+            }
+        }catch (err){}
     }
 };
 
@@ -24,8 +27,17 @@ $(document).ready(function () {
         if (backgroundClick.object) {
             backgroundClick.close(e);
         }
+    }).bind('touchmove', function(e) {
+        // console.log(backgroundClick.object);
+        backgroundClick.close(e);
     });
+  $("#agent-scroll").on('scroll',function (e) {
+    console.log('horizontal scroll',e.currentTarget.scrollLeft);
+    // backgroundClick.close(e);
+  });
 });
+
+
 
 $("body").click(function (e) {
     // console.log($(e.target).parent().hasClass('drop-content'));
@@ -40,8 +52,6 @@ $("body").click(function (e) {
         // $scope.$apply();
     }
 });
-
-
 
 var imageTestingCallback = function (dataURI, type) {
     // convert base64 to raw binary data held in a string

@@ -34,7 +34,10 @@
     "ng-intl-tel-input": "^2.0.0",
     "vinyl-ftp": "^0.4.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "gulp-livereload": "^3.8.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -36,10 +36,10 @@
     <section>
       <h3 class="color-pink">Speciality - Countries</h3>
       <div class="row">
-        <div class="col-md-4 col-sm-6" ng-repeat="specialcountry in userData.company.countryOf track by $index">
+        <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="specialcountry in userData.company.countryOf track by $index">
           <div class="speciality-imgholder relate">
             <!-- <fade-img-loading blur="{{specialcountry.countryBackgroundImage|uploadpath:10:10:'cover'}}" image="{{specialcountry.countryBackgroundImage|uploadpath:750:750:'cover'}}"></fade-img-loading> -->
-            <img ng-src="{{specialcountry.countryBackgroundImage|uploadpath:600:600:'cover'}}" alt="{{specialcountry.name | capitalize}}" class="img-responsive">
+            <img ng-src="{{specialcountry.countryBackgroundImage|uploadpath:600:600:'cover'}}" alt="{{specialcountry.name | capitalize}}" class="img-responsive speciality-img">
             <div class="country-textholder clearfix">
               <p class="pull-left spclcountry-name text-capitalize">{{specialcountry.name}}</p>
               <div class="pull-right spclcountry-stamp">

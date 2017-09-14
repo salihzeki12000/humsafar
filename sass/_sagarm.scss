@@ -541,8 +541,8 @@
   border-radius: 5px;
   position: absolute;
   top: 30px;
-  left: 0;
-  z-index: 5;
+  right: 0;
+  z-index: 7;
   background-color: $brand-dark-blue;
   &:after {
     content: '';
@@ -582,10 +582,10 @@
   }
   .libro-filter {
     top: 0px;
-    z-index: 1;
+    z-index: 7;
     display: none;
     .txt-clear {
-      padding-right: 40px;
+      padding-right: 0px;
     }
   }
 }
@@ -863,7 +863,7 @@
 .agt-usr-testimonialreviews,
 .agt-usr-touractivity,
 .agt-usr-tourpackages {
-  padding: 50px 0;
+  padding: 25px 0;
   margin-bottom: 0;
   @extend .avenir-roman;
 }
@@ -944,11 +944,13 @@
 .activity-img,
 .itinerary-img {
   position: relative;
-  min-height: 225px;
+  //min-height: 225px;
 }
 
 .viewdownload-img {
-  min-height: 190px;
+  //position : relative;
+  min-height: 230px;
+  width : auto;
 }
 
 .itinerary-imgfoot {
@@ -1068,7 +1070,7 @@
   border: 1px solid #e3e3e3;
   box-shadow: 2px 2px 3px #888;
   border-radius: 4px;
-  margin: 3px;
+  margin: 5px 5px 5px 5px;
   background-color: #fff;
 }
 
@@ -1317,6 +1319,10 @@ q {
   margin-bottom: 20px;
 }
 
+.speciality-img {
+  width: 100%;
+}
+
 .country-textholder {
   position: absolute;
   top: 0;
@@ -1352,7 +1358,8 @@ q {
 .agthome-itinerary-youtube,
 .agthome-tourpackage-youtube,
 .youtube-placeholder {
-  height: 300px; // iframe {
+  height: 60%;
+  // iframe {
   //   width: 550px;
   //   height: 360px;
   // }
@@ -1361,6 +1368,14 @@ q {
   // }
 }
 
+.iframe-size{
+  height: 100%;
+  width: 100%;
+}
+
+.intourpackages > .add-agtitinerary{
+  padding-bottom: 10px;
+}
 .add-agtitinerary {
   position: relative;
   z-index: 5;
@@ -2990,8 +3005,7 @@ q {
 }
 
 .travel-addbtn {
-  margin-top: -50px;
-  padding: 20px 0;
+  padding: 3px 0px 10px 0px;
 }
 
 .travel-activity {
@@ -3089,7 +3103,7 @@ q {
 .analytics-emptyfollower,
 .analytics-emptyprofile {
   min-height: 100vh;
-  padding: 60px;
+  padding: 60px 0;
   background-color: #fff;
   text-align: center;
 }
@@ -3225,7 +3239,7 @@ q {
 .analytics-profilecontent,
 .analytics-leadschart {
   min-height: 100vh;
-  padding: 100px 0;
+  padding: 40px 0;
 }
 
 .follower-connectbtn {
@@ -4915,7 +4929,9 @@ q {
     font-size: 15px;
   }
 }
-
+.position-input{
+  margin-bottom: 10px;
+}
 //ITINERARY OPTIONS DROPDOWN END
 // SEARCH RESULT PAGE
 .search-result {
@@ -5516,9 +5532,20 @@ q {
 .agentlogin-vimeo{
   /*@extend .get-center;*/
     position: absolute;
-    top: 2%;
-    width: 92%;
-    left: 4%;
-
+    top: 6%;
+    width: 100%;
+    //left: 4%;
+    height : 60%;
 }
 //PARTNER LOGIN PAGE END
+
+//AGENT ITINERARY
+.itinereary-addfilter-holder{
+  margin-bottom: -10px;
+}
+
+//AGENT TOURS AND PACKAGES
+.iframe-video{
+  width: 100%;
+  height: 100%;
+}

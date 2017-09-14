@@ -91,14 +91,14 @@
                                         </div>
                                         <div class="travel-albumcover pointer" ng-if="activity.type == 'album'" ng-click="getPhotoPopup(activity._id);">
                                             <span class="get-center photovideo-play color-white" ng-if="activity.photos== ''"><i class="fa fa-play-circle"></i></span>
-                                            <img ng-src="{{activity.photos[0].name|uploadpath}}" alt="{{activity.name}}" class="img-responsive" ng-if="activity.photos!= ''">
-                                            <img ng-src="{{activity.videos[0].thumbnail|uploadpath}}" alt="{{activity.name}}" class="img-responsive" ng-if="activity.photos== ''">
+                                            <img ng-src="{{activity.photos[0].name|uploadpath}}" alt="{{activity.name}}" class="img-responsive" width="100%" ng-if="activity.photos!= ''">
+                                            <img ng-src="{{activity.videos[0].thumbnail|uploadpath}}" alt="{{activity.name}}" class="img-responsive" width="100%" ng-if="activity.photos== ''">
                                         </div>
                                     </div>
                                     <!-- ALBUM AND STATUS end-->
                                     <!-- tour package card -->
                                     <div class="agent-tourcard tour-package-card" ng-if="activity.type=='toursPackage'">
-                                        <div class="itinerary-img traveltour-img" style="background: url('{{activity.displayPic|uploadpath}}') no-repeat 50% 50%; background-size: cover;">
+                                        <div class="itinerary-img traveltour-img myactivity-holder" style="background: url('{{activity.displayPic|uploadpath}}') no-repeat 50% 50%; background-size: cover;">
                                             <div class="theme">
                                                 <div class="theme-img ">
                                                     <img ng-src="{{activity.typeOfHoliday[0]| kindOfJourney:'white'}}" class="img-responsive tour-img" alt="activity.typeOfHoliday[0]">
@@ -140,7 +140,7 @@
                                     <!-- itinerary activity card  -->
                                     <div class="itinerary-activity-card" ng-if="activity.type=='quick-itinerary' || activity.type == 'detail-itinerary'">
                                         <div class="itinerary-img">
-                                            <img ng-src="{{activity.coverPhoto|uploadpath}}" alt="{{activity.name}}" class="img-responsive">
+                                            <img ng-src="{{activity.coverPhoto|uploadpath}}" alt="{{activity.name}}" class="img-responsive" width="100%">
                                             <div class="country-badges">
                                                 <div class="country-holder ng-scope" ng-repeat="flag in activity.countryVisited|limitTo:3">
                                                     <img ng-src="{{flag.country.flag|uploadpath}}" alt="{{flag.country.name}}" class="img-responsive doneLoading">

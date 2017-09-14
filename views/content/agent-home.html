@@ -38,8 +38,8 @@
         <div class="agent-home-nav {{agentFixednav}}">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-9 col-sm-9">
-                        <div class="agent-scroll">
+                    <div class="col-lg-7 col-md-9 col-sm-9">
+                        <div class="agent-scroll" id="agent-scroll">
                             <ul class="list-inline" ng-init="analytics.option={};">
                                 <li ng-click="getTab(0);" ng-class="{'active': agthomeoptions.active=='agthome-itinerary'}">Itineraries </li>
                                 <li ng-click="getTab(1);  scrollDown();" ng-class="{'active': agthomeoptions.active=='agthome-tourpackages'}">Tours & Packages</li>
@@ -48,20 +48,21 @@
                                 <li ng-click="getTab(4)" ng-class="{'active': agthomeoptions.active=='agthome-travelactivity'}" ng-if="template.isMine">My Activity</li>
                                 <li ng-click="getTab(4)" ng-class="{'active': agthomeoptions.active=='agthome-travelactivity'}" ng-if="!template.isMine">Travel Activity</li>
                                 <li ng-click="getTab(5)" ng-class="{'active': agthomeoptions.active=='agthome-leadmonitor'}" ng-if="template.isMine">Lead Monitor</li>
-                                <li ng-click="editOption(analytics.option);" ng-class="{'active': agthomeoptions.active=='agthome-analytics'}" class="relate" ng-if="template.isMine">Analytics
-                                    <div class="analytics-dropoptions" ng-show="analytics.option.backgroundClick">
-                                        <ul class="list-unstyled">
-                                            <li ng-click="getAgentScroll('profileview');">Profile Views</li>
-                                            <li ng-click="getAgentScroll('follower');">Followers</li>
-                                            <li ng-click="getAgentScroll('leads');">Leads</li>
-                                            <li ng-click="getAgentScroll('viewsdownload');">Views & Downloads</li>
-                                        </ul>
-                                    </div>
+                                <li ng-click="editOption(analytics.option);" ng-class="{'active': agthomeoptions.active=='agthome-analytics'}" class="relate" ng-if="template.isMine">
+                                    Analytics
                                 </li>
                             </ul>
+                          <div class="analytics-dropoptions" ng-show="analytics.option.backgroundClick">
+                            <ul class="list-unstyled">
+                              <li ng-click="getAgentScroll('profileview');">Profile Views</li>
+                              <li ng-click="getAgentScroll('follower');">Followers</li>
+                              <li ng-click="getAgentScroll('leads');">Leads</li>
+                              <li ng-click="getAgentScroll('viewsdownload');">Views & Downloads</li>
+                            </ul>
+                          </div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-3">
+                    <div class="col-lg-5 col-md-3 col-sm-3">
                         <div class="mob-ml5">
                             <ul class="list-inline pull-right mob-left">
                                 <li ng-click="getTab(7)" ng-class="{'active': agthomeoptions.active=='agthome-aboutus'}">About Us | Speciality </li>

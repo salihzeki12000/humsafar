@@ -384,20 +384,32 @@
                     <div class="row ">
                         <div class="col-md-4 col-sm-6 masonry-brick " ng-repeat="activity in viewDownloads track by $index ">
                             <div class="viewdownload-card ">
-                                <div class="itinerary-img viewdownload-img ">
+                              <!--for tourpackage-->
+                                <div class="itinerary-img viewdownload-img" ng-if="activity.type=='toursPackage' " style="background: url('{{activity.displayPic|uploadpath}}') no-repeat 50% 50%; -webkit-background-size: cover;background-size: cover;">
                                     <div class="theme ">
                                         <div class="theme-name ">
-                                            <p class=" " ng-if="activity.type=='toursPackage' ">Tour and Packages</p>
-                                            <p class=" " ng-if="activity.type=='detail-itinerary' || activity.type=='quick-itinerary' "> <span ng-if="activity.type=='quick-itinerary' ">Quick </span> Itinerary</p>
+                                            <p class=" ">Tour and Packages</p>
                                         </div>
                                     </div>
-                                    <img ng-src="{{activity.displayPic|uploadpath:350}} " alt=" " class="img-responsive " ng-if="activity.type=='toursPackage' " />
-                                    <img ng-src="{{activity.coverPhoto|uploadpath:350}} " alt=" " class="img-responsive " ng-if="activity.type=='detail-itinerary' || activity.type=='quick-itinerary' " />
+                                    <!--<img ng-src="{{activity.displayPic|uploadpath:350}} " alt=" " class="img-responsive " ng-if="activity.type=='toursPackage' " />-->
                                     <div class="viewdownload-imgfoot ">
-                                        <h4 class="avenir-heavy font-sz18 m-clear text-capitalize " ng-if="activity.type=='toursPackage' ">{{activity.title}}</h4>
-                                        <h4 class="avenir-heavy font-sz18 m-clear text-capitalize " ng-if="activity.type=='detail-itinerary' || activity.type=='quick-itinerary' ">{{activity.name}}</h4>
+                                        <h4 class="avenir-heavy font-sz18 m-clear text-capitalize ">{{activity.title}}</h4>
                                     </div>
                                 </div>
+                              <!--for tourpackage end-->
+                              <!--for quick and detail itinerary-->
+                              <div class="itinerary-img viewdownload-img" ng-if="activity.type=='detail-itinerary' || activity.type=='quick-itinerary' " style="background: url('{{activity.coverPhoto|uploadpath}}') no-repeat 50% 50%; -webkit-background-size: cover;background-size: cover;">
+                                <div class="theme ">
+                                  <div class="theme-name ">
+                                    <p class=" "> <span ng-if="activity.type=='quick-itinerary' ">Quick </span> Itinerary</p>
+                                  </div>
+                                </div>
+                                <!--<img ng-src="{{activity.coverPhoto|uploadpath:350}} " alt=" " class="img-responsive " ng-if="activity.type=='detail-itinerary' || activity.type=='quick-itinerary' " />-->
+                                <div class="viewdownload-imgfoot ">
+                                  <h4 class="avenir-heavy font-sz18 m-clear text-capitalize ">{{activity.name}}</h4>
+                                </div>
+                              </div>
+                              <!--for quick and detail itinerary-->
                                 <div class="footer-travel-sec ">
                                     <div class="footertravel-count ">
                                         <p><span class="footertravel-downloadcount "> {{activity.viewCount}} </span> Views </p>

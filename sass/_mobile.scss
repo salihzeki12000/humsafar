@@ -1141,7 +1141,7 @@
   .options {
     .other-trip,
     .own-trip {
-      width: 190px;
+      //width: 190px;
       padding: 15px;
       right: -8px;
       &:before {
@@ -1153,6 +1153,12 @@
     }
     li a {
       font-size: 14px;
+    }
+    .own-trip{
+      width : 150px;
+    }
+    .other-trip{
+      width: 190px;
     }
   } // edit options end
   .share-single-trip {
@@ -1986,7 +1992,7 @@
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
   .travel-bg {
-    background-color: #fff;  
+    background-color: #fff;
   }
 
 
@@ -2194,7 +2200,7 @@
     }
   }
   .masonry-brick {
-    padding: 0;
+    //padding: 0;
     position: static !important;
   } // .journey-type {
   //   display: none;
@@ -2482,7 +2488,7 @@
   .options {
     .other-trip,
     .own-trip {
-      width: 165px;
+      width: 150px;
       padding: 10px;
       li {
         &:first-child {

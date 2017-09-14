@@ -34,8 +34,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="pull-right " ng-if="template.isLoggedIn && template.isMine">
-                        <div class="add-agtitinerary">
+                    <div class="pull-right add-photos" ng-if="template.isLoggedIn && template.isMine">
+                        <div class="add-agtitinerary add-photos">
                             <span class="pointer add-holder photo-xbtn" ng-click="addItinerary();" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
                             <div class="add-more-itinerary" ng-show="showItinerary">
                                 <p class="color-cyan bord-bot">Photos & Videos</p>
@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
                                 <p ng-show="showPhotoError" class="color-pink font-sz10 text-center">Please select atleast one photo or video.</p>
-                                <button class="btn btn-pink tourupload-position" ng-click="savePhotoVideo(album);" ng-disabled="albumForm.$invalid || agentPhotosArray.length === 0 || template.uploading">POST{{template.uploading}}</button>
+                                <button class="btn btn-pink tourupload-position" ng-click="savePhotoVideo(album);" ng-disabled="albumForm.$invalid || agentPhotosArray.length === 0 || template.uploading">POST</button>
                             </div>
                         </div>
                     </div>
@@ -130,7 +130,8 @@
         <div class="agt-home-photo-card" ng-if="agentAlbum.length!=0">
             <div class="container">
                 <div class="m-center">
-                    <div masonry preserve-order class="masonry-main">
+                  <div class="photo-video-holder">
+                    <div masonry preserve-order reload-on-resize class="masonry-main">
                         <div class="masonry-brick" ng-repeat="photo in agentAlbum track by $index">
                             <div class="agent-photogallery relate pointer" ng-click="getPhotosCommentData(photo._id,$index,agentAlbum.length,agentAlbum);">
                                 <span ng-if="photo.type=='video'" class="get-center moment-videoicon"><i class="fa fa-play-circle fa-2x color-white"></i></span>
@@ -139,6 +140,7 @@
                             </div>
                         </div>
                     </div>
+                  </div>
                 </div>
             </div>
         </div>

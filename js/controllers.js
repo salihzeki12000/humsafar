@@ -13196,6 +13196,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             'slow');
     };
     // Tab SCROLLDOWN END
+    var element = document.getElementsByClassName('an');
+    //GET POSITION OF ELEMENT
+
+
+
+  //GET POSITION OF ELEMENT END
 
     // ADD BUTTTON BACKDROP AND CLICK
     $scope.addItinerary = function () {
@@ -13374,7 +13380,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.showHMErr = false;
         }
     };
-
     // TOUR FORM SAVE END
 
     //TOUR PDF DOWNLOAD

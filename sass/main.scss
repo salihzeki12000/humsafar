@@ -837,8 +837,6 @@ header {
 }
 
 .user-detail {
-  a {}
-
   p {
     span {
       font-size: 10px;
@@ -6203,7 +6201,7 @@ header {
 
   .other-trip,
   .own-trip {
-    width: 205px;
+    width: 170px;
     position: absolute;
     bottom: 37px;
     right: -25px;
@@ -6248,7 +6246,7 @@ header {
 
       a {
         color: #424242;
-        font-size: 15px;
+        font-size: 13px;
         @extend .avenir-roman;
 
         &:hover {
