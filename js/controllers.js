@@ -9705,13 +9705,25 @@ var ref = "";
     // month array end
 
 })
-.controller('PastStoryCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, $state) {
+.controller('PastStoryCtrl', function ($scope, TemplateService, NavigationService, pastJourney, $timeout, $stateParams, $state) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("past-story");
     $scope.menutitle = NavigationService.makeactive("Past Story");
     TemplateService.title = $scope.menutitle;
-    $scope.navigation = NavigationService.getnav();    
+    $scope.navigation = NavigationService.getnav();  
+    $scope.pastJourneyArray = [];
+
+    var getPastJourney = function(){
+        var formData = {
+            'urlSlug': 'lonavala-2017'
+        }
+        pastJourney.getPastJourney(formData, function(pastStory){
+          $scope.pastJourneyArray = pastStory;
+        },function(error){
+          console.log(error);
+        })
+    }  
 
 })
 .controller('EditorItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
