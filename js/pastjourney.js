@@ -4,7 +4,7 @@ pastJourney.factory('pastJourney', function(TravelibroService, $filter){
 	return{
 		getPastJourney : function(formData, callback, errorCallback){
 			TravelibroService.http({
-				url: adminUrl + '/journey/getOneWeb',
+				url: adminURL + '/journey/getOneWeb',
 				method: "POST",
 				data: formData
 			}).success(function(data){

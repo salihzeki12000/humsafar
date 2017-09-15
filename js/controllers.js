@@ -9714,9 +9714,9 @@ var ref = "";
     $scope.navigation = NavigationService.getnav();  
     $scope.pastJourneyArray = [];
 
-    var getPastJourney = function(){
+    $scope.getPastJourney = function(){
         var formData = {
-            'urlSlug': 'lonavala-2017'
+            'urlSlug': 'greece-6'
         }
         pastJourney.getPastJourney(formData, function(pastStory){
           $scope.pastJourneyArray = pastStory;
@@ -9724,6 +9724,7 @@ var ref = "";
           console.log(error);
         })
     }  
+    $scope.getPastJourney();
 
 })
 .controller('EditorItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
