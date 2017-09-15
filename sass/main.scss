@@ -819,11 +819,11 @@ header {
   &:last-child {
     border: none;
   }
-  &.active { 
+  &.active {
     background-color: $brand-lighter-grey;
     .search-optiontxt {
       color: $brand-dark-blue;
-    } 
+    }
   }
   .search-option-img {
     width: 40px;

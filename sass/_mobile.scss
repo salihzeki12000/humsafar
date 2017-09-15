@@ -86,8 +86,8 @@
     margin-right: 2px;
   }
   .travelled-imgholder {
-    min-height: 290px;
-    max-height: 330px;
+    min-height: 300px;
+    max-height: 300px;
   } // my life
   .star-post-rating .list-inline>li {
     padding-left: 0;
@@ -716,7 +716,10 @@
 // media query for 991px to 768px end
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
-  
+  .travelled-imgholder {
+    min-height: 350px;
+    max-height: 350px;
+  }
   //loader
   .loaders {
     font-size: 16px !important;
@@ -2499,7 +2502,7 @@
   .user-social-item {
     li {
       &:first-child {
-        padding: 0 8px 0 0;
+        padding: 0 0px 0 0;
       }
       padding: 0 8px;
     }
