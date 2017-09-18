@@ -4417,7 +4417,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         // {
         //     name: "User",
         //     checked: false
-        // }, 
+        // },
         {
             name: "Travel Agent",
             checked: false
@@ -13768,7 +13768,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // GET AGENT ITINERARY END
 
     // GET PHOTOSVIDEOS
-
+    var promise;
     $scope.getPhotoVideo = function (activeSlug) {
         scroll.scrollBusy = false;
         scroll.stopCallingApi = false;
@@ -13776,17 +13776,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         photoObj.pagenumber = 0;
         photoObj.album = $scope.albumArray;
         console.log('get photovideo');
-        // var interval = $interval(function(){
-        //   $scope.getMoreAgentPhotos();
-        // },500); 
-        setTimeout(function () {
-            $scope.getMoreAgentPhotos();
-        }, 100);
+        $scope.start = function(){
+            $scope.stop();
+            promise = $interval($scope.getMoreAgentPhotos(),1000)
+        };
+        $scope.stop = function() {
+          $interval.cancel(promise);
+        };
+        $scope.start();
     };
 
     $scope.getMoreAgentPhotos = function () {
-        console.log("scroll event");
-        console.log(photoObj);
         if (scroll.scrollBusy) {
             return;
         } else {
@@ -13837,6 +13837,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 });
             }
         }
+      $scope.stop();
+      $scope.$on('$destroy', function() {
+        $scope.stop();
+      });
     };
 
     $scope.filterList = _.each($scope.filterList, function (n) {
@@ -16553,22 +16557,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 LikesAndComments.openPhotoPopup(prevId, $scope);
             }
         },
-        $scope.keyPress = function (e) {
-            console.log(e);
-            if (e.keyCode === 37) {
-                $scope.prevPhotoSlide($scope.allPhotos);
-            } else if (e.keyCode === 39) {
-                $scope.nextPhotoSlide($scope.allPhotos);
-            }
+         $scope.keyPress=function(e){
+        console.log(e);
+        if(e.keyCode === 37){
+            $scope.prevPhotoSlide($scope.allPhotos);
+        }else if(e.keyCode === 39){
+            $scope.nextPhotoSlide($scope.allPhotos);
         }
+    }
 
-    // photo likes
-    $scope.getLikes = function (id) {
-        LikesAndComments.getLikes('photo', id, 1, function (data) {
-            $scope.listOfLikes = data.data;
-            console.log($scope.listOfLikes);
-        });
-    };
+        // photo likes
+        $scope.getLikes = function (id) {
+            LikesAndComments.getLikes('photo', id, 1, function (data) {
+                $scope.listOfLikes = data.data;
+                console.log($scope.listOfLikes);
+            });
+        };
     $scope.editOption = function (model) {
         $timeout(function () {
             model.backgroundClick = true;
