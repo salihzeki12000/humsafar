@@ -727,8 +727,13 @@
   .travel-bg,
   .holiday-step {
     @include background(url(../img/mobile-bg.jpg) $brand-dark-blue no-repeat 50% 50%);
-    background-attachment: fixed;
+    /*background: url('../img/mobile-bg.jpg') $brand-dark-blue no-repeat 50% 50%;*/
+    /*background-image: url('../img/mobile-bg.jpg');*/
+    /*background-color: $brand-dark-blue;*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: 50% 50%;*/
     background-size: cover;
+    background-attachment: fixed;
   } //header
   .sidemenu.mobile-menu .nav-list {
     padding-top: 5px;
