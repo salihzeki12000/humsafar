@@ -284,6 +284,7 @@
                                         <div class="pull-right">
                                             <button class="btn btn-pink btn-more" ng-click="saveDetailsAgent('main',agentData);">Save</button>
                                         </div>
+                                        <span ng-if="saveSetting" class="pull-right setting-save-load"><img src="img/checked.gif" alt="" width="20px" class="img-responsive"></span>
                                     </div>
                                 </form>
                             </div>
@@ -340,6 +341,7 @@
                                         <div class="pull-right">
                                             <button class="btn btn-pink btn-more" ng-click="saveDetailsAgent('profile',agentData)">Save</button>
                                         </div>
+                                        <span ng-if="saveSetting" class="pull-right setting-save-load"><img src="img/checked.gif" alt="" width="20px" class="img-responsive"></span>
                                     </div>
                                 </form>
                             </div>
@@ -371,9 +373,9 @@
                                     </div>
                                     <div class="clearfix mt20">
                                         <div class="pull-right">
-                                            <span class="color-blue" ng-show="saveSuccess">Password Saved Successfully.</span>
                                             <button class="btn btn-pink btn-more" ng-click="changePassword(passwords);">Save</button>
                                         </div>
+                                        <span ng-if="saveSetting" class="pull-right setting-save-load"><img src="img/checked.gif" alt="" width="20px" class="img-responsive"></span>
                                     </div>
                                 </form>
                             </div>
@@ -405,6 +407,7 @@
                                         <div class="pull-right">
                                             <button class="btn btn-pink btn-more" ng-click="saveDetailsAgent('privacy',agentData);">Save</button>
                                         </div>
+                                        <span ng-if="saveSetting" class="pull-right setting-save-load"><img src="img/checked.gif" alt="" width="20px" class="img-responsive"></span>
                                     </div>
                                 </form>
                             </div>
@@ -616,9 +619,9 @@
                                     <textarea name="" id="problem" class="form-control" placeholder="Comment" ng-model="settingReport.status"></textarea>
                                     <div class="clearfix mt20">
                                         <div class="pull-right">
-                                            <span class="color-blue font-bold" ng-show="showme">Reported Successfully.</span>
                                             <button class="btn btn-pink btn-more" type="submit">Submit</button>
                                         </div>
+                                        <span ng-if="saveSetting" class="pull-right setting-save-load"><img src="img/checked.gif" alt="" width="20px" class="img-responsive"></span>
                                     </div>
                                 </form>
                             </div>
