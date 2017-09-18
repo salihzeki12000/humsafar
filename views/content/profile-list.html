@@ -1,36 +1,36 @@
 <div class="profile-list-main" ng-class="{'bg-black white-full' : activeMenu == 'countries-visited' || activeMenu == 'bucket-list', '' : activeMenu !== 'countries-visited' || activeMenu !== 'bucketList'}"
-  ng-init="searchCard.name=''">
-  <!-- profile tab strip -->
-  <div class="profile-tab-strip bg-white">
-    <div class="container-fluid">
-      <div class="clearfix">
-        <div class="pull-left">
-          <div class="list-profile-tab">
-            <ul>
-              <li><a ng-click="changeStatus('following',followingList);" ng-class="{'active-list': activeMenu == 'following'}">Following - <span class="avenir-heavy">{{count.following_count}}</span></a></li>
-              <li><a ng-click="changeStatus('followers',followersList);" ng-class="{'active-list': activeMenu == 'followers'}">Followers - <span class="avenir-heavy">{{count.followers_count}}</span></a></li>
-              <li><a ng-click="changeStatus('countries-visited')" ng-class="{'active-list': activeMenu == 'countries-visited'}">Countries Visited - <span class="avenir-heavy">{{count.countriesVisited_count}}</span></a></li>
-              <li><a ng-click="changeStatus('bucket-list')" ng-class="{'active-list': activeMenu == 'bucket-list'}">Bucket List - <span class="avenir-heavy">{{count.bucketList_count}}</span></a></li>
-            </ul>
-          </div>
+ng-init="searchCard.name=''">
+<!-- profile tab strip -->
+<div class="profile-tab-strip">
+  <div class="container-fluid">
+    <div class="clearfix">
+      <div class="pull-left">
+        <div class="list-profile-tab">
+          <ul>
+            <li><a ng-click="changeStatus('following',followingList);" ng-class="{'active-list': activeMenu == 'following'}">Following - <span class="avenir-heavy">{{count.following_count}}</span></a></li>
+            <li><a ng-click="changeStatus('followers',followersList);" ng-class="{'active-list': activeMenu == 'followers'}">Followers - <span class="avenir-heavy">{{count.followers_count}}</span></a></li>
+            <li><a ng-click="changeStatus('countries-visited')" ng-class="{'active-list': activeMenu == 'countries-visited'}">Countries Visited - <span class="avenir-heavy">{{count.countriesVisited_count}}</span></a></li>
+            <li><a ng-click="changeStatus('bucket-list')" ng-class="{'active-list': activeMenu == 'bucket-list'}">Bucket List - <span class="avenir-heavy">{{count.bucketList_count}}</span></a></li>
+          </ul>
         </div>
-        <div class="pull-right">
-          <form>
-            <!-- search friend -->
-            <div class="search-friend" ng-if="activeMenu == 'following' || activeMenu == 'followers'">
-              <div class="follow-followers-holder">
-                <input type="text" placeholder="Search To Follow" ng-model="searchUsers.name" ng-change="searchToFollow(searchUsers.name,viewDropdown);"
-                  ng-if="activeMenu == 'following'" />
-                <input type="text" placeholder="Search Followers" ng-model="searchFriend.name" ng-change="getDropdown(viewDropdown)" ng-if="activeMenu == 'followers'"
-                />
-                <!--<input type="text" placeholder="Search Friend" ng-model="searchUser.name" ng-if="activeMenu=='followers'">-->
-                <span class="search-follow"><i class="fa fa-search"></i></span>
-                <span class="small-loader" ng-if="searchLoader">
-                  <img src="img/page.svg" alt="" width="25px" class="img-responsive">
-                </span>
-                <div class="dropdown-follow-followers" ng-if="viewDropdown.showDropdown;">
-                  <ul>
-                    <!--ng-repeat="list in searchList"-->
+      </div>
+      <div class="pull-right">
+        <form>
+          <!-- search friend -->
+          <div class="search-friend" ng-if="activeMenu == 'following' || activeMenu == 'followers'">
+            <div class="follow-followers-holder">
+              <input type="text" placeholder="Search To Follow" ng-model="searchUsers.name" ng-change="searchToFollow(searchUsers.name,viewDropdown);"
+              ng-if="activeMenu == 'following'" />
+              <input type="text" placeholder="Search Followers" ng-model="searchFriend.name" ng-change="getDropdown(viewDropdown)" ng-if="activeMenu == 'followers'"
+              />
+              <!--<input type="text" placeholder="Search Friend" ng-model="searchUser.name" ng-if="activeMenu=='followers'">-->
+              <span class="search-follow"><i class="fa fa-search"></i></span>
+              <span class="small-loader" ng-if="searchLoader">
+                <img src="img/page.svg" alt="" width="25px" class="img-responsive">
+              </span>
+              <div class="dropdown-follow-followers" ng-if="viewDropdown.showDropdown;">
+                <ul>
+                  <!--ng-repeat="list in searchList"-->
                     <!--<li>
                       <div class="clearfix">
                         <div class="pull-left">
@@ -91,53 +91,53 @@
                                       <input type="checkbox" id="wish{{list._id}}" ng-model="list.bucketList" ng-click="updateBucketList(list) ">
                                       <label for="wish{{list._id}}"></label>
                                   </div>
-                              </div> -->
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <!-- add country end-->
-            <!-- search bucketList -->
-            <div class="list-add-country" ng-if="activeMenu == 'bucket-list'">
-              <div class="bucket-visited-holder" ng-init="visitedBucketCountry={'outerClass':'outerBucket','innerClass':'innerBucket'};">
-                <input class="outerBucket" type="text" placeholder="Add To BucketList" ng-model="visitedCountry" ng-change="editOption1(visitedBucketCountry,'outerBucket','innerBucket')">
-                <span class="search-icon"><i class="fa fa-search"></i></span>
-                <div class="bucket-dropdown entry-content innerBucket" ng-show="visitedBucketCountry.backgroundClick">
-                  <ul>
-                    <li ng-repeat="list in nationality | filter: visitedCountry">
-                      <div class="country-list clearfix relate">
-                        <span class="color-light-grey inline-block country-name pull-left">{{list.name}} </span>
-                        <div class="get-right pull-right">
-                          <div class="relate inline-block">
-                            <div class="bucket-list custom-checkbox-heart">
-                              <input type="checkbox" id="wish{{list._id}}" ng-model="list.bucketList" ng-click="updateBucketList(list)">
-                              <label for="wish{{list._id}}"></label>
+                                </div> -->
+                              </div>
                             </div>
-                          </div>
-                        </div>
+                          </li>
+                        </ul>
                       </div>
-                    </li>
-                  </ul>
-                </div>
+                    </div>
+                  </div>
+                  <!-- add country end-->
+                  <!-- search bucketList -->
+                  <div class="list-add-country" ng-if="activeMenu == 'bucket-list'">
+                    <div class="bucket-visited-holder" ng-init="visitedBucketCountry={'outerClass':'outerBucket','innerClass':'innerBucket'};">
+                      <input class="outerBucket" type="text" placeholder="Add To BucketList" ng-model="visitedCountry" ng-change="editOption1(visitedBucketCountry,'outerBucket','innerBucket')">
+                      <span class="search-icon"><i class="fa fa-search"></i></span>
+                      <div class="bucket-dropdown entry-content innerBucket" ng-show="visitedBucketCountry.backgroundClick">
+                        <ul>
+                          <li ng-repeat="list in nationality | filter: visitedCountry">
+                            <div class="country-list clearfix relate">
+                              <span class="color-light-grey inline-block country-name pull-left">{{list.name}} </span>
+                              <div class="get-right pull-right">
+                                <div class="relate inline-block">
+                                  <div class="bucket-list custom-checkbox-heart">
+                                    <input type="checkbox" id="wish{{list._id}}" ng-model="list.bucketList" ng-click="updateBucketList(list)">
+                                    <label for="wish{{list._id}}"></label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- search bucketList end-->
+                </form>
               </div>
             </div>
-            <!-- search bucketList end-->
-          </form>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <!-- profile tab strip end -->
-  <!-- profile tab main -->
-  <div class="profile-tab-main">
-    <div class="container-fluid m-plr0">
-      <!-- following tab -->
-      <div class="follower-tab-main" ng-if="activeMenu == 'following'">
-        <div class="following-container" ng-repeat="list in followingList | filter:searchCard.name">
-          <div class="following-holder" style="background: url('{{list.profilePicture|uploadpath}}') no-repeat 50% 50%; background-size: cover;">
+        <!-- profile tab strip end -->
+        <!-- profile tab main -->
+        <div class="profile-tab-main">
+          <div class="container-fluid m-plr0">
+            <!-- following tab -->
+            <div class="follower-tab-main" ng-if="activeMenu == 'following'">
+              <div class="following-container" ng-repeat="list in followingList | filter:searchCard.name">
+                <div class="following-holder" style="background: url('{{list.profilePicture|uploadpath}}') no-repeat 50% 50%; background-size: cover;">
             <!-- <div class="follow-imgholder pointer" ui-sref="mylife({'urlSlug':list.urlSlug})">
               <img ng-src="{{list.profilePicture|uploadpath}}" class="img-responsive">
             </div> -->
@@ -285,9 +285,9 @@
                     <div class="clearfix">
                       <div class="pull-left" ng-init="isEmpty=(country.year==-1)?true:((!country.year)?true:false)">
                         <h4 class="avenir-heavy">{{country.countryId.name}} <span ng-if="!isEmpty">( {{country.year}} )</span>
-                        <span ng-if="isEmpty">( - )</span>
-                        <span>{{country.times}}</span>
-                      </h4>
+                          <span ng-if="isEmpty">( - )</span>
+                          <span>{{country.times}}</span>
+                        </h4>
                       </div>
                       <div class="pull-right">
                         <div class="bucket-flag">

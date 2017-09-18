@@ -942,7 +942,7 @@ firstapp.directive('onlyDigits', function () {
             function inputValue(val) {
                 if (val) {
                     if (attr.type == "text") {
-                        digits = varal.replace(/[^0-9]/g, '');
+                        digits = val.replace(/[^0-9]/g, '');
                     } else {
                         digits = val.replace(/[^0-9]/g, '');
                     }

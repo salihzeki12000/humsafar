@@ -11169,7 +11169,14 @@ display:none;
   min-height: 100vh;
   height: 100%;
 }
-
+.profile-list-main {
+  &:before {
+    content: '';
+    @include position(fixed, 0);
+    z-index: -1;
+    background-color: rgba(255,255,255,0.95);
+  }
+}
 .profile-tab-strip {
   padding: 0 20px;
 }
@@ -11244,7 +11251,7 @@ display:none;
   left: 0;
   background-color: #fff;
   overflow: hidden;
-
+  z-index: 10;
   ::-webkit-scrollbar {
     width: 2px;
   }

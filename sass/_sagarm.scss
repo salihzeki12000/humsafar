@@ -468,6 +468,10 @@
   font-weight: 700;
   text-align: center;
 }
+.agent-form {
+  top: 30%;
+  transform: translate(-50%,-30%);
+}
 
 // AGENT LOGIN END
 //AGENT USER ITENERARY START
@@ -1405,6 +1409,9 @@ q {
 
 .agent-itinerary-filter {
   margin-top: -50px;
+  &.user-view {
+    margin-top: -20px;
+  }
 }
 
 .add-agtitinerary .itinerary-info {
@@ -3615,6 +3622,14 @@ q {
   color: #fff;
   font-size: 30px;
 }
+.album-slider-holder {
+  position: relative;
+  .loading-album {
+    @include position(absolute, 0);
+    background-color: rgba(255,255,255,0.7);
+    z-index: 5;
+  }
+}
 
 .agthome-photouploadbox {
   background-color: $brand-blue;
@@ -3783,6 +3798,10 @@ q {
     background-color: transparent;
     color: #fff;
   }
+  /*.ui-select-placeholder { 
+    color: #8b9999; 
+    display: block !important;
+  }*/
   .ui-select-match-text {
     color: #fff;
   }

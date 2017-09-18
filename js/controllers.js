@@ -2385,8 +2385,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // console.log("Testing Consoles");
 
     $scope.template = TemplateService.changecontent("popular-agent");
-    // $scope.template = TemplateService.changecontent("coming-soon");
-    $scope.menutitle = NavigationService.makeactive("Popular Agents");
+    $scope.template = TemplateService.changecontent("coming-soon");
+    // $scope.menutitle = NavigationService.makeactive("Popular Agents");
     TemplateService.title = "Popular Agents - TraveLibro";
     $scope.navigation = NavigationService.getnav();
     $scope.pageNumber = 1;
@@ -3324,10 +3324,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         name: "Backpacking",
         checked: false
     }];
-    $scope.itineraryByCountry = [{
-        name: "User",
-        checked: false
-    }, {
+    $scope.itineraryByCountry = [
+    // {
+    //     name: "User",
+    //     checked: false
+    // },
+     {
         name: "Travel Agent",
         checked: false
     }, {
@@ -4410,10 +4412,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         name: 'Backpacking',
         checked: false
     }];
-    $scope.cityByIti = [{
-        name: "User",
-        checked: false
-    }, {
+    $scope.cityByIti = [
+    // {
+    //     name: "User",
+    //     checked: false
+    // }, 
+    {
         name: "Travel Agent",
         checked: false
     }, {
@@ -8750,6 +8754,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.updateBuddiesArr = function () {
         $scope.cities = [];
     };
+    $scope.profileData = $.jStorage.get('profile');
     if (flag == 'edit' && urlSlug != '') {
         Itinerary.getOneItinerary(urlSlug, function (data) {
             $scope.dItinerary = data.data;
@@ -11702,15 +11707,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             catwidth: "35px",
             name: "Friends"
         }, {
-            agtcatImg: "img/kindofjourney/white-friends.png",
+            agtcatImg: "img/kindofjourney/white-logo.png",
             catwidth: "35px",
             name: "Cultural"
         }, {
-            agtcatImg: "img/kindofjourney/white-friends.png",
+            agtcatImg: "img/kindofjourney/white-logo.png",
             catwidth: "35px",
             name: "Educational"
         }, {
-            agtcatImg: "img/kindofjourney/white-friends.png",
+            agtcatImg: "img/kindofjourney/white-logo.png",
             catwidth: "35px",
             name: "LGBT"
         }];
@@ -13472,8 +13477,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // SET PHOTO ARRAY
     $scope.addAgentPhotos = function (detail, length) {
-        console.log(detail, 'photo upload return');
+        console.log(detail, 'photo upload return',length,'length');
         lengthChecker++;
+        console.log(lengthChecker,'total wala');
         if (length === lengthChecker) {
             $scope.template.uploading = false;
         }

@@ -48,7 +48,7 @@
                                         <!-- currency list -->
                                         <div class="form-group relate">
                                             <div class="tour-type tour-select">
-                                                <ui-select ng-model="tour.currency" theme="bootstrap">
+                                                <ui-select ng-model="tour.currency" theme="bootstrap" title="Currency">
                                                     <ui-select-match placeholder="Currency">{{$select.selected.currency}}</ui-select-match>
                                                     <ui-select-choices repeat="currency.currency as currency in countries | filter: $select.search track by $index">
                                                         <div class="clearfix">
@@ -198,14 +198,14 @@
                         <div class="mockup-video relate">
                             <img src="img/iMac.png" alt="" class="img-responsive">
                             <div class="agthome-itinerary-youtube agentlogin-vimeo">
-                                        <iframe src="https://player.vimeo.com/video/224047922?color=11d3cb&title=0&byline=0&portrait=0" class="iframe-size" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                              </div>
+                                <iframe src="https://player.vimeo.com/video/224047922?color=11d3cb&title=0&byline=0&portrait=0" class="iframe-size" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-5 col-sm-12">
                         <div class="agt-home-tourpackageintro agt-home-tourintro">
                             <h3 class="color-blue">
-              Fill in this space to give travel lovers a better sense of what your company has to offer.</h3>
+                            Fill in this space to give travel lovers a better sense of what your company has to offer.</h3>
                             <p class="color-blue">Regularly updating your library with new deals, keeps travellers interedted and informed about how touring with your agency can make a good tour/trip, great!</p>
                             <!-- <button class="btn btn-pink btn-more" hidden><i class="fa fa-lock color-white"></i> UPGRADE</button> -->
                         </div>
