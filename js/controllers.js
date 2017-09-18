@@ -3325,17 +3325,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         checked: false
     }];
     $scope.itineraryByCountry = [
-    // {
-    //     name: "User",
-    //     checked: false
-    // },
-     {
-        name: "Travel Agent",
-        checked: false
-    }, {
-        name: "Editor",
-        checked: false
-    }];
+        // {
+        //     name: "User",
+        //     checked: false
+        // },
+        {
+            name: "Travel Agent",
+            checked: false
+        }, {
+            name: "Editor",
+            checked: false
+        }
+    ];
 
     // filter sorting
 
@@ -4413,17 +4414,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         checked: false
     }];
     $scope.cityByIti = [
-    // {
-    //     name: "User",
-    //     checked: false
-    // },
-    {
-        name: "Travel Agent",
-        checked: false
-    }, {
-        name: "Editor",
-        checked: false
-    }];
+        // {
+        //     name: "User",
+        //     checked: false
+        // },
+        {
+            name: "Travel Agent",
+            checked: false
+        }, {
+            name: "Editor",
+            checked: false
+        }
+    ];
 
     // restuarnt budget
     $scope.restuarntBudget = [{
@@ -11268,48 +11270,48 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 search: $scope.search.searchType
             }, function (data) {
                 $scope.getAllSearched = data.data;
-                $timeout(function(){
-                      $('.search-result-dropdown').focus();
-                      $('.search-result-dropdown').children(':first-child').children('.searchdrop-options').children(':first-child').addClass('active');
-                      // $('.search-traveller-drop .search-option').first().addClass('active');
-                },1000);
+                $timeout(function () {
+                    $('.search-result-dropdown').focus();
+                    $('.search-result-dropdown').children(':first-child').children('.searchdrop-options').children(':first-child').addClass('active');
+                    // $('.search-traveller-drop .search-option').first().addClass('active');
+                }, 1000);
 
             });
         } else {
             $scope.viewSearch.backgroundClick = false;
         }
     };
-    $scope.mouseDown = function(e){
-      $('.search-result-dropdown').scrollTop(0);
-      console.log(e);
-        if(e.keyCode === 40){
-          $('.search-option.active').focus();
-           if($('.search-option.active').parent().children(':last-child').hasClass('active')){
-             $('.search-option.active').removeClass('active').parent().parent().next().children(':last-child').children(':first-child').addClass('active');
-           }else{
-              $('.search-option.active').removeClass('active').next().addClass('active');
-           }
-        }else if(e.keyCode === 38){
-          if($('.search-option.active').parent().children(':first-child').hasClass('active')){
-            $('.search-option.active').removeClass('active').parent().parent().prev().children(':last-child').children(':last-child').addClass('active');
-          }else if($('.search-result-dropdown').children().children(':last-child').children(':first-child').hasClass('active')){
-              return false;
-              console.log('amit');
-              $('.search-result-dropdown').scrollTop(0);
-          }else {
-             $('.search-option.active').removeClass('active').prev().addClass('active');
-             console.log('amit2')
-          }
-        }else if(e.keyCode === 13){
-          var redirectLink = $('.search-option.active').children().attr('href');
-          window.open(redirectLink,'_self');
+    $scope.mouseDown = function (e) {
+            $('.search-result-dropdown').scrollTop(0);
+            console.log(e);
+            if (e.keyCode === 40) {
+                $('.search-option.active').focus();
+                if ($('.search-option.active').parent().children(':last-child').hasClass('active')) {
+                    $('.search-option.active').removeClass('active').parent().parent().next().children(':last-child').children(':first-child').addClass('active');
+                } else {
+                    $('.search-option.active').removeClass('active').next().addClass('active');
+                }
+            } else if (e.keyCode === 38) {
+                if ($('.search-option.active').parent().children(':first-child').hasClass('active')) {
+                    $('.search-option.active').removeClass('active').parent().parent().prev().children(':last-child').children(':last-child').addClass('active');
+                } else if ($('.search-result-dropdown').children().children(':last-child').children(':first-child').hasClass('active')) {
+                    return false;
+                    console.log('amit');
+                    $('.search-result-dropdown').scrollTop(0);
+                } else {
+                    $('.search-option.active').removeClass('active').prev().addClass('active');
+                    console.log('amit2')
+                }
+            } else if (e.keyCode === 13) {
+                var redirectLink = $('.search-option.active').children().attr('href');
+                window.open(redirectLink, '_self');
+            }
+            $('.search-result-dropdown').scrollTop(0);
+            $('.search-result-dropdown').scrollTop($('.search-option.active').offset().top - $('.search-result-dropdown').height());
         }
-        $('.search-result-dropdown').scrollTop(0);
-        $('.search-result-dropdown').scrollTop($('.search-option.active').offset().top - $('.search-result-dropdown').height());
-    }
-          // if($('.search-result-dropdown').children().children(':last-child').children(':first-child').hasClass('active')){
-          //    $('.search-result-dropdown').children(':first-child').children('.searchdrop-options').children(':first-child').addClass('active');
-          // }
+        // if($('.search-result-dropdown').children().children(':last-child').children(':first-child').hasClass('active')){
+        //    $('.search-result-dropdown').children(':first-child').children('.searchdrop-options').children(':first-child').addClass('active');
+        // }
     $scope.viewResult = function (state, searchText) {
         switch (state) {
             case 'search-traveller':
@@ -12899,7 +12901,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // category type end
 })
 
-.controller('AgenthomeCtrl', function ($scope, TemplateService, TravelibroService, NavigationService, MyLife, Agent, LikesAndComments, $timeout,$interval, $uibModal, $state, $anchorScroll, anchorSmoothScroll, $stateParams, $location) {
+.controller('AgenthomeCtrl', function ($scope, TemplateService, TravelibroService, NavigationService, MyLife, Agent, LikesAndComments, $timeout, $interval, $uibModal, $state, $anchorScroll, anchorSmoothScroll, $stateParams, $location) {
     $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
@@ -13245,7 +13247,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
 
-  //GET POSITION OF ELEMENT END
+    //GET POSITION OF ELEMENT END
 
     // ADD BUTTTON BACKDROP AND CLICK
     $scope.addItinerary = function () {
@@ -13477,9 +13479,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // SET PHOTO ARRAY
     $scope.addAgentPhotos = function (detail, length) {
-        console.log(detail, 'photo upload return',length,'length');
+        console.log(detail, 'photo upload return', length, 'length');
         lengthChecker++;
-        console.log(lengthChecker,'total wala');
+        console.log(lengthChecker, 'total wala');
         if (length === lengthChecker) {
             $scope.template.uploading = false;
         }
@@ -13718,7 +13720,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     scroll.scrollBusy = false;
                     console.log(data, "iti data scroll");
                     $scope.isopenfilter = false;
-                    $scope.cityList = data.city;
+                    $scope.cityList = _.uniqBy(data.city, "name");
                     $scope.cityList = _.map($scope.cityList, function (cityListData) {
                         var index = _.findIndex($scope.agentCityFilter, function (each) {
                             return cityListData.name == each.name;
@@ -13735,8 +13737,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                         if (itineraryObj.pagenumber === 1 && itineraryObj.city.length === 0 && itineraryObj.itineraryType.length === 0) {
                             $scope.agentItinerary = [];
                             $scope.showFilter = false;
-                        } else if (itineraryObj.city.length > 0 || itineraryObj.itineraryType.length > 0 || itineraryObj.pagenumber > 1) {
+                        } else if (itineraryObj.city.length > 0 || itineraryObj.itineraryType.length > 0) {
                             $scope.showFilter = true;
+                            if (itineraryObj.pagenumber === 1) {
+                                $scope.agentItinerary = [];
+                            }
                         } else {
                             $scope.showFilter = false;
                             $scope.agentItinerary = [];
@@ -16411,9 +16416,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 .controller('photoCommentModalCtrl', function ($scope, $uibModalInstance, LikesAndComments, $timeout) {
     $scope.index = -1;
     $scope.indexDelete = -1;
-    $timeout(function(){
+    $timeout(function () {
         $('#notifyFocus').focus();
-    },1000);
+    }, 1000);
     $scope.likePhoto = function (listOfComments, uniqueId, _id, additionalId) {
         // console.log(uniqueId, _id, additionalId);
         console.log(listOfComments);
