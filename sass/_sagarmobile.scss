@@ -1,16 +1,15 @@
 @media screen and (max-width: 1200px) {
-  .mac-display-holder{
-    margin-top : 80px;
-  }
   //agent home page
   .agent-home-nav {
     .agent-scroll {
       overflow: auto;
+      position: static;
+      display: block;
       list-inline {
         margin: 0;
       }
       > ul {
-        width: 840px;
+        width: 802px;
         margin: 0;
       }
     }
@@ -305,7 +304,7 @@
     .agent-scroll {
       overflow: auto;
        > ul {
-        width: 740px;
+        width: 710px;
       }
     }
   }
