@@ -48,7 +48,7 @@
                                         <!-- currency list -->
                                         <div class="form-group relate">
                                             <div class="tour-type tour-select">
-                                                <ui-select ng-model="tour.currency" theme="bootstrap" title="Currency">
+                                                <ui-select ng-model="tour.currency" search-enabled="true"  theme="bootstrap" title="Currency">
                                                     <ui-select-match placeholder="Currency">{{$select.selected.currency}}</ui-select-match>
                                                     <ui-select-choices repeat="currency.currency as currency in countries | filter: $select.search track by $index">
                                                         <div class="clearfix">
