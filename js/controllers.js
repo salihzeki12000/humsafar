@@ -4416,7 +4416,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // {
     //     name: "User",
     //     checked: false
-    // }, 
+    // },
     {
         name: "Travel Agent",
         checked: false
@@ -11273,7 +11273,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                       $('.search-result-dropdown').children(':first-child').children('.searchdrop-options').children(':first-child').addClass('active');
                       // $('.search-traveller-drop .search-option').first().addClass('active');
                 },1000);
-                
+
             });
         } else {
             $scope.viewSearch.backgroundClick = false;
@@ -11288,7 +11288,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
              $('.search-option.active').removeClass('active').parent().parent().next().children(':last-child').children(':first-child').addClass('active');
            }else{
               $('.search-option.active').removeClass('active').next().addClass('active');
-           }           
+           }
         }else if(e.keyCode === 38){
           if($('.search-option.active').parent().children(':first-child').hasClass('active')){
             $('.search-option.active').removeClass('active').parent().parent().prev().children(':last-child').children(':last-child').addClass('active');
@@ -11303,8 +11303,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }else if(e.keyCode === 13){
           var redirectLink = $('.search-option.active').children().attr('href');
           window.open(redirectLink,'_self');
-        }    
-        $('.search-result-dropdown').scrollTop(0);    
+        }
+        $('.search-result-dropdown').scrollTop(0);
         $('.search-result-dropdown').scrollTop($('.search-option.active').offset().top - $('.search-result-dropdown').height());
     }
           // if($('.search-result-dropdown').children().children(':last-child').children(':first-child').hasClass('active')){
@@ -13762,7 +13762,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // GET AGENT ITINERARY END
 
     // GET PHOTOSVIDEOS
-
+    var promise;
     $scope.getPhotoVideo = function (activeSlug) {
         scroll.scrollBusy = false;
         scroll.stopCallingApi = false;
@@ -13770,17 +13770,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         photoObj.pagenumber = 0;
         photoObj.album = $scope.albumArray;
         console.log('get photovideo');
-        // var interval = $interval(function(){
-        //   $scope.getMoreAgentPhotos();
-        // },500); 
-        setTimeout(function(){
-          $scope.getMoreAgentPhotos();
-        },100);   
+        $scope.start = function(){
+            $scope.stop();
+            promise = $interval($scope.getMoreAgentPhotos(),1000)
+        };
+        $scope.stop = function() {
+          $interval.cancel(promise);
+        };
+        $scope.start();
     };
 
     $scope.getMoreAgentPhotos = function () {
-        console.log("scroll event");
-        console.log(photoObj);
         if (scroll.scrollBusy) {
             return;
         } else {
@@ -13831,6 +13831,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 });
             }
         }
+      $scope.stop();
+      $scope.$on('$destroy', function() {
+        $scope.stop();
+      });
     };
 
     $scope.filterList = _.each($scope.filterList, function (n) {
