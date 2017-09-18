@@ -45,15 +45,18 @@
                         <div class="a">
                             <input type="text" class="form-control color-white" placeholder="Name Album" ng-model="album.name" required>
                         </div>
-                    </div>￼
-                    <div class="mb10  text-center relate" ng-hide="photoSec">
+                    </div>
+                    <div class="mb10  text-center upload-album relate" ng-hide="photoSec">
+                        <div class="loading-album" ng-if="template.uploadLoader">
+                            <!-- <img src="img/page.svg" alt="" class="get-center img-responsive" width="25"> -->
+                        </div>
                         <button class="btn btn-white-outline" ng-click="showPhotoupload=!showPhotoupload">Upload Photos/Videos</button>
                         <upload-image-count multiple="true" ng-model="agentPhotos" ng-callback="addAgentPhotos(data,length);" no-view="true" class="pointer agent-photoupload" required></upload-image-count>
                     </div>
                 </form>
             </div>
             <!-- ng-show="showPhotoupload" -->
-            <div class="album-slider-holder">
+            <div class="album-slider-holder" ng-class="{'slider-view': photoSec == true, '': photoSec== false}">
                 <div class="loading-album" ng-if="template.uploadLoader">
                     <img src="img/page.svg" alt="" class="get-center img-responsive" width="25">
                 </div>
