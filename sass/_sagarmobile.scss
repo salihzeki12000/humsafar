@@ -1682,6 +1682,13 @@
 
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
+
+  .col-xxs {
+    display:block;
+    float:none;
+    width: 100%
+  }
+
   .filter-analyticslead{
     display: inline-block;
     float : none !important;

@@ -2019,7 +2019,7 @@ q {
 }
 
 .agentsetting-profilepreview {
-  border-radius: 100%;
+  //border-radius: 100%;
 }
 
 .agent-upgrade {
@@ -3806,8 +3806,8 @@ q {
     background-color: transparent;
     color: #fff;
   }
-  /*.ui-select-placeholder { 
-    color: #8b9999; 
+  /*.ui-select-placeholder {
+    color: #8b9999;
     display: block !important;
   }*/
   .ui-select-match-text {
@@ -5583,3 +5583,4 @@ q {
   padding-top: 4px;
   font-size: 9px;
 }
+

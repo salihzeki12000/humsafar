@@ -895,7 +895,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
         $scope.uploadImage = true;
       };
       $scope.checkinUpload = [{}, {}, {}];
-      ////////////////////////////
+      /////////////////////////////////
       $scope.editOption = function (model) {
         $timeout(function () {
           model.backgroundClick = true;
