@@ -13770,10 +13770,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         photoObj.pagenumber = 0;
         photoObj.album = $scope.albumArray;
         console.log('get photovideo');
-        var interval = $interval(function(){
+        // var interval = $interval(function(){
+        //   $scope.getMoreAgentPhotos();
+        // },500); 
+        setTimeout(function(){
           $scope.getMoreAgentPhotos();
-        },500); 
-        $interval.cancel(interval);     
+        },100);   
     };
 
     $scope.getMoreAgentPhotos = function () {
