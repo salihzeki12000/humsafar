@@ -12899,7 +12899,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // category type end
 })
 
-.controller('AgenthomeCtrl', function ($scope, TemplateService, TravelibroService, NavigationService, MyLife, Agent, LikesAndComments, $timeout, $uibModal, $state, $anchorScroll, anchorSmoothScroll, $stateParams, $location) {
+.controller('AgenthomeCtrl', function ($scope, TemplateService, TravelibroService, NavigationService, MyLife, Agent, LikesAndComments, $timeout,$interval, $uibModal, $state, $anchorScroll, anchorSmoothScroll, $stateParams, $location) {
     $scope.template = TemplateService.changecontent("agent-home"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
@@ -13770,7 +13770,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         photoObj.pagenumber = 0;
         photoObj.album = $scope.albumArray;
         console.log('get photovideo');
-        $scope.getMoreAgentPhotos();
+        var interval = $interval(function(){
+          $scope.getMoreAgentPhotos();
+        },500); 
+        $interval.cancel(interval);     
     };
 
     $scope.getMoreAgentPhotos = function () {
