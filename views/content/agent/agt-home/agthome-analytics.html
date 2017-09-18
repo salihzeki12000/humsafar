@@ -69,7 +69,10 @@
                                 <span class="color-white mt10 mr10 text-capitalize pull-right" ng-if="list.count ===1">Viewed {{list.count}} time</span>
                                 <span class="color-white mt10 mr10 text-capitalize pull-right" ng-if="list.count >1">Viewed {{list.count}} times</span>
                                 <div class=" followercard-details ">
-                                    <h4 class="color-white avenir-heavy text-capitalize ">{{list.user.name}}</h4>
+                                    <h4 class="color-white avenir-heavy text-capitalize ">
+                                        <a class="color-white" ui-sref="mylife({urlSlug:list.user.urlSlug})" ng-if="list.user.type==='User'">{{list.user.name}}</a>
+                                        <a class="color-white" ui-sref="agent-home-without({urlSlug:list.user.urlSlug})" ng-if="list.user.type==='TravelAgent'">{{list.user.name}}</a>
+                                    </h4>
                                     <p class="color-white text-capitalize " ng-if="list.user.homeCity ">Lives In: {{list.user.homeCity}}</p>
                                     <button type="button " name="button " class="btn btn-white-outline " ng-click="followFollowing(list.user) ">{{list.following | followFollowingStatus}}</button>
                                     <div class="followercard-list ">
@@ -409,7 +412,10 @@
                                     </div>
                                     <!--<img ng-src="{{activity.coverPhoto|uploadpath:350}} " alt=" " class="img-responsive " ng-if="activity.type=='detail-itinerary' || activity.type=='quick-itinerary' " />-->
                                     <div class="viewdownload-imgfoot ">
-                                        <h4 class="avenir-heavy font-sz18 m-clear text-capitalize ">{{activity.name}}</h4>
+                                        <h4 class="avenir-heavy font-sz18 m-clear text-capitalize ">
+                                            <a class="color-white" ui-sref="userquickitinerary({urlSlug:activity.user.urlSlug,id:activity.urlSlug})" ng-if="activity.type==='detail-itinerary'">{{activity.name}}</a>
+                                            <a class="color-white" ui-sref="userdetailitinerary({urlSlug:activity.user.urlSlug,id:activity.urlSlug})" ng-if="activity.type==='quick-itinerary'">{{activity.name}}</a>
+                                        </h4>
                                     </div>
                                 </div>
                                 <!--for quick and detail itinerary-->
