@@ -11221,6 +11221,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.isopen = false;
     $scope.opensearch = function () {
         $scope.isopen = !$scope.isopen;
+        $(".searchOuter").focus();
     };
 
     $scope.opendownload = function () {
