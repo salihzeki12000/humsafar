@@ -511,6 +511,10 @@
       border-right: none !important;
     }
   }
+  .agent-scroll {
+    position: relative;
+    display: inline-block;
+  }
 }
 
 .agent-user-nav ul {
@@ -544,7 +548,7 @@
   padding: 10px;
   border-radius: 5px;
   position: absolute;
-  top: 30px;
+  top: 33px;
   right: 0;
   z-index: 7;
   background-color: $brand-dark-blue;
@@ -552,6 +556,7 @@
     content: '';
     position: absolute;
     top: -10px;
+    right: 25px;
     border-right: 10px solid transparent;
     border-bottom: 10px solid $brand-dark-blue;
     border-left: 10px solid transparent;
@@ -2019,7 +2024,7 @@ q {
 }
 
 .agentsetting-profilepreview {
-  border-radius: 100%;
+  //border-radius: 100%;
 }
 
 .agent-upgrade {
@@ -3806,8 +3811,8 @@ q {
     background-color: transparent;
     color: #fff;
   }
-  /*.ui-select-placeholder { 
-    color: #8b9999; 
+  /*.ui-select-placeholder {
+    color: #8b9999;
     display: block !important;
   }*/
   .ui-select-match-text {
@@ -5583,3 +5588,4 @@ q {
   padding-top: 4px;
   font-size: 9px;
 }
+

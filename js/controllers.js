@@ -7688,8 +7688,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     console.log($scope.travelConfig, 'what is travelConfig');
     $scope.editUserData = function (userData, status, valid) {
         console.log(userData, 'userdata of setting');
-        console.log(valid);
-        $scope.saveSetting = true;
+        console.log(valid);        
         console.log(userData, 'user data', status, 'status');
         // cfpLoadingBar.start();
         if (valid) {
@@ -7697,7 +7696,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 console.log(userData, 'what is the userData');
                 if (data.value) {
                     console.log($.jStorage.get('profile'), 'jStorage', userData.urlSlug, 'user ka urlSlug');
-                    $scope.saveSetting = false;
+                    $scope.saveSetting = true;
+                    $timeout(function(){
+                     $scope.saveSetting = false;
+                    },3500);
                     NavigationService.getProfile(userData.urlSlug, function (data, status) {
                         if (data.data._id) {
                             $.jStorage.set("isLoggedIn", true);
@@ -11869,7 +11871,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         //Integration Ends here
 })
 
-.controller('AgentsettingCtrl', function ($scope, TemplateService, NavigationService, Agent, $timeout) {
+.controller('AgentsettingCtrl', function ($scope, TemplateService, NavigationService, Agent, $timeout,DataUriToBlob) {
     $scope.template = TemplateService.changecontent("agent-setting"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Partner Settings"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
@@ -11879,9 +11881,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.passwords = {};
     $scope.oldPasswordError = false;
     $scope.newPasswordError = false;
-    $scope.saveSuccess = false;
     $scope.emailExist = false;
-    $scope.showme = false;
+    $scope.saveSetting = false;
     $scope.settingReport = {
         status: ""
     };
@@ -12054,6 +12055,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
         Agent.saveSettings(agentData, function (data) {
             if (data.value == true) {
+                $scope.saveSetting = true;
+                    $timeout(function(){
+                     $scope.saveSetting = false;
+                    },3500);
                 NavigationService.getAgentsProfile($.jStorage.get("profile").urlSlug, function (data, status) {
                     if (data.data._id) {
                         $.jStorage.set("isLoggedIn", true);
@@ -12080,13 +12085,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 delete password.confirmPassword;
                 Agent.changePassword(password, function (data) {
                     if (data.value === true) {
+                        $scope.saveSetting = true;
+                    $timeout(function(){
+                     $scope.saveSetting = false;
+                    },3500);
                         $scope.passwords.oldPassword = "";
                         $scope.passwords.newPassword = "";
                         $scope.oldPasswordError = false;
-                        $scope.saveSuccess = true;
-                        $timeout(function () {
-                            $scope.saveSuccess = false;
-                        }, 10000);
                     } else {
                         $scope.oldPasswordError = true;
                         $timeout(function () {
@@ -12110,13 +12115,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             problem: settingReport.status
         }, function (data) {
             if (data.value) {
-                $scope.showme = true;
-                $timeout(function () {
-                    $scope.showme = false;
-                }, 10000);
+               $scope.saveSetting = true;
+                    $timeout(function(){
+                     $scope.saveSetting = false;
+                    },3500);
                 $scope.settingReport = {};
             } else {
-                $scope.showme = false;
                 $scope.settingReport = {};
             }
         })
@@ -12144,17 +12148,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
     }, 1000);
 
+
     $scope.uploadAgentProfilePic = function (imageBase64) {
-            var agentData = _.cloneDeep($scope.agentData);;
-            var file = imageTestingCallback(imageBase64, 'image/png');
-            console.log(file);
-            NavigationService.uploadFile(file, function (response) {
+            // var agentData = _.cloneDeep($scope.agentData);
+            // var file = imageTestingCallback(imageBase64, 'image/png');
+            var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
+            var formData = new FormData();
+            formData.append('file', blob, "abcd.png");
+            // console.log(file);
+            NavigationService.uploadFile(formData, function (response) {
                 if (response.value) {
-                    agentData.profilePicture = response.data[0];
-                    console.log(agentData.profilePicture, "profile save");
-                    Agent.saveSettings(agentData, function (data) {
+                    $scope.agentData.profilePicture = response.data[0];
+                    console.log($scope.agentData.profilePicture, "profile save");
+                    Agent.saveSettings($scope.agentData, function (data) {
                         console.log(data, 'save setting');
                         if (data.value == true) {
+                            $scope.saveSetting = true;
+                            $timeout(function(){
+                             $scope.saveSetting = false;
+                            },3500);
                             console.log('setting save success');
                             NavigationService.getAgentsProfile($.jStorage.get("profile").urlSlug, function (data, status) {
                                 if (data.data._id) {

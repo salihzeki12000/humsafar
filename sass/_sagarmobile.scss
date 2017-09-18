@@ -3,11 +3,13 @@
   .agent-home-nav {
     .agent-scroll {
       overflow: auto;
+      position: static;
+      display: block;
       list-inline {
         margin: 0;
       }
       > ul {
-        width: 840px;
+        width: 802px;
         margin: 0;
       }
     }
@@ -302,7 +304,7 @@
     .agent-scroll {
       overflow: auto;
        > ul {
-        width: 740px;
+        width: 710px;
       }
     }
   }
@@ -1679,6 +1681,13 @@
 
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
+
+  .col-xxs {
+    display:block;
+    float:none;
+    width: 100%
+  }
+
   .filter-analyticslead{
     display: inline-block;
     float : none !important;
