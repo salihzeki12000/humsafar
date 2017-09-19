@@ -1,31 +1,35 @@
 <div class="agent-home relate {{addHomeBackdrop}} {{getBackdrop}}" scrolladd1class>
-    <div link-profile>
+    <div link-profile> 
+
         <!-- ng-style="{ 'background-image' : (userData.company.coverPhoto != '') ? 'url(\'{{userData.company.coverPhoto|uploadpath}}\')' : 'url(\'../img/agent/bg-user.jpg\')' }" -->
         <div class="img-holder-agent bg-agent-home-img" ng-style="coverPhotoObj">
-            <div class="agt-card-posi">
-                <div class="agt-title-card get-center">
-                    <div class="circ-agtimg pointer" ui-sref="agent-setting">
-                        <img ng-src="{{userData.profilePicture|uploadpath}}" alt="{{userData.name}}" class="img-responsive" ng-if="template.isMine">
+           <div class="loading-cover-agent" ng-if="template.uploadLoader">
+            <img src="img/page.svg" alt="Loading ..." width="30" class="get-center">
+        </div>
+        <div class="agt-card-posi">
+            <div class="agt-title-card get-center">
+                <div class="circ-agtimg pointer" ui-sref="agent-setting">
+                    <img ng-src="{{userData.profilePicture|uploadpath}}" alt="{{userData.name}}" class="img-responsive" ng-if="template.isMine">
+                </div>
+                <a href="{{userData.profilePicture|uploadpath}}" fancybox-box class="fancybox" ng-if="!template.isMine">
+                    <div class="circ-agtimg">
+                        <img ng-src="{{userData.profilePicture|uploadpath}}" alt="{{userData.name}}" class="img-responsive">
                     </div>
-                    <a href="{{userData.profilePicture|uploadpath}}" fancybox-box class="fancybox" ng-if="!template.isMine">
-                        <div class="circ-agtimg">
-                            <img ng-src="{{userData.profilePicture|uploadpath}}" alt="{{userData.name}}" class="img-responsive">
-                        </div>
-                    </a>
-                    <h4 class="avenir-heavy text-capitalize">{{userData.name}}</h4><span ng-if="userData.company && userData.company.agentType">{{userData.company.agentType|stringForm}}</span>
-                    <p>{{userData.homeCity}}</p>
-                    <button class="btn btn-white-outline mr5" ui-sref="agent-setting" ng-if="template.isMine">Edit </button>
-                    <button class="btn btn-white-outline mr5" ng-click="followFollowing(userData)" ng-if="!template.isMine">{{userData.following | followFollowingStatus}}</button>
-                    <span><span class="avenir-heavy"> {{userData.followers_count}} </span> Followers </span>
-                </div>
+                </a>
+                <h4 class="avenir-heavy text-capitalize">{{userData.name}}</h4><span ng-if="userData.company && userData.company.agentType">{{userData.company.agentType|stringForm}}</span>
+                <p>{{userData.homeCity}}</p>
+                <button class="btn btn-white-outline mr5" ui-sref="agent-setting" ng-if="template.isMine">Edit </button>
+                <button class="btn btn-white-outline mr5" ng-click="followFollowing(userData)" ng-if="!template.isMine">{{userData.following | followFollowingStatus}}</button>
+                <span><span class="avenir-heavy"> {{userData.followers_count}} </span> Followers </span>
             </div>
-            <div class="agent-coverpic" ng-if="template.isMine">
-                <span class="color-white mr5"><i class="fa fa-plus"></i></span>
-                <div class="changecover-holder">
-                    <span class="color-white">Change cover photo</span>
-                    <span class="file-size">Min. Dimension (1200 x 500)</span>
-                    <upload-image ng-model="userData.coverPhoto" ng-callback="agentCoverPic(data);" allow-type="image/*" no-view class="pointer agentcover-uploadinput"></upload-image>
-                </div>
+        </div>
+        <div class="agent-coverpic" ng-if="template.isMine">
+            <span class="color-white mr5"><i class="fa fa-plus"></i></span>
+            <div class="changecover-holder">
+                <span class="color-white">Change cover photo</span>
+                <span class="file-size">Min. Dimension (1200 x 500)</span>
+                <upload-image ng-model="userData.coverPhoto" ng-callback="agentCoverPic(data);" allow-type="image/*" no-view class="pointer agentcover-uploadinput"></upload-image>
+            </div>
                 <!-- <div class="coversave-btn" ng-show="showCoverBtn">
           <button type="button" name="button" class="btn btn-white-outline" ng-click="saveAgentCover(userData);">Save</button>
       </div> -->
@@ -41,8 +45,8 @@
             <div class="col-lg-9 col-md-9 col-sm-9">
                 <div class="agent-scroll" id="agent-scroll">
                     <ul class="list-inline" ng-init="analytics.option={};">
-                        <li ng-click="getTab(0);" ng-class="{'active': agthomeoptions.active=='agthome-itinerary'}">Itineraries </li>
                         <li ng-click="getTab(1);  scrollDown();" ng-class="{'active': agthomeoptions.active=='agthome-tourpackages'}">Tours & Packages</li>
+                        <li ng-click="getTab(0);" ng-class="{'active': agthomeoptions.active=='agthome-itinerary'}">Itineraries </li>
                         <li ng-click="getTab(2)" ng-class="{'active': agthomeoptions.active=='agthome-photovideos'}"> Photos & Videos</li>
                         <li ng-click="getTab(3)" ng-class="{'active': agthomeoptions.active=='agthome-testimonialreviews'}">Testimonials & Reviews</li>
                         <li ng-click="getTab(4)" ng-class="{'active': agthomeoptions.active=='agthome-travelactivity'}" ng-if="template.isMine">My Activity</li>

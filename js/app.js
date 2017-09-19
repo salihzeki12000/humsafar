@@ -685,6 +685,7 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout, TemplateSe
                 isArr = _.isArray(newVal);
                 if (!isArr && newVal && newVal.file) {
                     $scope.uploadNow(newVal);
+                    TemplateService.uploadLoader = true;
                 } else if (isArr && newVal.length > 0 && newVal[0].file) {
                     $timeout(function () {
                         console.log(oldVal, newVal);
@@ -733,7 +734,7 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout, TemplateSe
                     },
                     transformRequest: angular.identity
                 }).success(function (data) {
-                    TemplateService.uploadLoader = true;
+                    TemplateService.uploadLoader = false;
                     $scope.uploadStatus = "uploaded";
                     if ($scope.isMultiple) {
 
@@ -954,7 +955,7 @@ firstapp.directive('onlyDigits', function () {
                     }
                     return parseInt(digits, 10);
                 }
-                return undefined;
+                return "";
             }
             ctrl.$parsers.push(inputValue);
         }
