@@ -10712,6 +10712,9 @@ display:none;
       font-size: 19px;
     }
   }
+  .country-spacing, .city-spacing {
+    margin: 0px 5px;
+  }
 }
 
 .quick-input-city {
@@ -11625,9 +11628,10 @@ display:none;
 .notify-closeimg {
   width: 20px;
   top: -30px;
-  right: 15px;
+  right: 0;
   text-shadow: 1px 2px 3px #424242;
   font-size: 18px;
+  text-align: right;
 }
 
 .notify-popup {

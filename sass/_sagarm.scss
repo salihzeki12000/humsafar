@@ -3884,7 +3884,17 @@ q {
       }
     }
   } // MULTY SELECT END
-  .showplaceholder { display: block !important;  }
+}
+.tour-currency {
+  .ui-select-placeholder {
+    position: absolute;
+    display: block !important;
+    color: #999;
+    z-index: -1;
+  }
+  .ui-select-bootstrap .ui-select-match-text span {
+    background-color: rgba(47, 55, 83, 0.95);
+  }
 }
 
 // AGENT TOUR UI SELECT END

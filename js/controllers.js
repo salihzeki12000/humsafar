@@ -13757,7 +13757,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                             }
                         } else {
                             $scope.showFilter = false;
-                            $scope.agentItinerary = [];
+                            // $scope.agentItinerary = [];
                         }
                     } else {
                         if (itineraryObj.pagenumber == 1) {

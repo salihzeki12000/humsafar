@@ -2074,8 +2074,11 @@
   // login page end
   .notify-popup {
     margin-left: 0;
+    .notify-imgsec {
+      height: 300px;
+    }
     .notify-imgholder {
-      height: auto;
+      height: 100%;
       img {
         height: auto;
         width: 100%;
