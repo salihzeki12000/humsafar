@@ -48,7 +48,7 @@
                                         <!-- currency list -->
                                         <div class="form-group relate">
                                             <div class="tour-type tour-select tour-currency">
-                                                <ui-select ng-model="tour.currency"  theme="bootstrap" title="Currency">
+                                                <ui-select ng-model="tour.currency" theme="bootstrap" title="Currency">
                                                     <ui-select-match placeholder="Currency">{{$select.selected.currency}}</ui-select-match>
                                                     <ui-select-choices repeat="currency.currency as currency in countries | filter: $select.search track by $index">
                                                         <div class="clearfix">
@@ -74,14 +74,14 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <div class="a relate">
-                                                        <input name="nights" ng-disabled="tour.hours >= 0||tour.minutes >= 0" type="text" class="form-control color-white" placeholder="Nights" ng-model="tour.nights" ng-required="(tour.hours==undefined && tour.minutes==undefined) || (tour.hours=='' && tour.minutes=='')" ng-change="checkDN()" only-digits>
+                                                        <input name="nights" ng-disabled="tour.hours || tour.minutes" type="text" class="form-control color-white" placeholder="Nights" ng-model="tour.nights" ng-change="checkDN()" ng-required="!tour.hours && !tour.minutes">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <div class="a relate">
-                                                        <input name="days" type="text" ng-disabled="tour.hours >= 0||tour.minutes >= 0" class="form-control color-white" placeholder="Days" ng-model="tour.days" ng-required="tour.hours==undefined || tour.hours=='' || tour.minutes==undefined || tour.minutes==''" ng-change="checkDN()" only-digits>
+                                                        <input name="days" type="text" ng-disabled="tour.hours || tour.minutes" class="form-control color-white" placeholder="Days" ng-model="tour.days" ng-change="checkDN()" ng-required="!tour.hours && !tour.minutes">
                                                     </div>
                                                 </div>
                                             </div>
@@ -96,7 +96,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <div class="a relate">
-                                                        <input name="hours" type="text" ng-disabled="tour.nights >= 0||tour.days >= 0" class="form-control color-white" placeholder="Hours" ng-model="tour.hours" ng-required="(tour.nights==undefined && tour.days==undefined) || (tour.nights=='' && tour.days=='')" only-digits>
+                                                        <input name="hours" type="text" ng-disabled="tour.nights || tour.days" class="form-control color-white" placeholder="Hours" ng-model="tour.hours" ng-required="!tour.nights && !tour.days">
                                                         <!--ng-required="tour.nights.length > 0||tour.days.length > 0"-->
                                                     </div>
                                                 </div>
@@ -104,8 +104,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <div class="a relate">
-                                                        <input name="minutes" type="text" ng-disabled="tour.nights >= 0||tour.days >= 0" class="form-control color-white" placeholder="Minutes" ng-model="tour.minutes" ng-required="tour.nights==undefined || tour.nights=='' || tour.days==undefined || tour.days==''" ng-change="checkHM()" only-digits>
-                                                        <!--ng-required="tour.nights.length < 0 && tour.days.length < 0"-->
+                                                        <input name="minutes" type="text" ng-disabled="tour.nights || tour.days" class="form-control color-white" placeholder="Minutes" ng-model="tour.minutes" ng-change="checkHM()" ng-required="!tour.nights && !tour.days">
                                                     </div>
                                                 </div>
                                             </div>

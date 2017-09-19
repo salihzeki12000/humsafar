@@ -156,7 +156,7 @@
                         <div class="agtsetting-white">
                             <!-- profile detail -->
                             <div class="profile-detail-main" ng-if="showAgtSetting == 1">
-                                <form>
+                                <form name="userEditForm">
                                     <div class="profile-agtphoto-sec upload-profile">
                                         <label for="profile" class="color-blue avenir-medium">Profile Photo</label>
                                         <div class="cropArea relate" ng-show="showImage" id="profile">
@@ -176,9 +176,6 @@
                                                     <button class="btn btn-dark-blue pointer avenir-light mob-paddupload"> Upload Photo</button>
                                                     <input type="file" id="agentProfilePic" class="getfile pointer" />
                                                 </div>
-                                                <!-- <div class="inline-block agtfrom-photogallery">
-                          <button class="btn btn-dark-blue pointer avenir-light">Your Photos</button>
-                        </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -212,7 +209,7 @@
                                                 <label for="contact-no" class="color-blue">Contact No</label>
                                                 <div class="agentsetting-phone">
                                                     <input type="text" id="phone1" class="form-control" placeholder="Contact No" ng-model="agentData.company.contact" ng-intl-tel-input ng-change="isValidNo(agentData.company.contact,'1')">
-                                                    <span id="error-msg1" class="hide intel-error">Invalid number</span>
+                                                    <span id="error-msg1" class="hide intel-error color-pink mt5">Invalid number</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -221,7 +218,7 @@
                                                 <label for="mobile-no" class="color-blue">Mobile No</label>
                                                 <div class="agentsetting-phone">
                                                     <input type="text" id="phone2" class="form-control" placeholder="Mobile No" ng-model="agentData.company.mobile" ng-intl-tel-input ng-change="isValidNo(agentData.company.mobile,'2')">
-                                                    <span id="error-msg2" class="hide intel-error">Invalid number</span>
+                                                    <span id="error-msg2" class="hide intel-error mt5 color-pink">Invalid number</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -251,7 +248,7 @@
                                             <div class="form-group">
                                                 <label for="office-location" class="color-blue">Your Business Model</label>
                                                 <div class="agentsetting-select">
-                                                    <ui-select multiple ng-model="agentData.company.agentType" theme="bootstrap">
+                                                    <ui-select multiple ng-model="agentData.company.agentType" theme="bootstrap" required>
                                                         <ui-select-match placeholder="Select Your Business Model">{{$item}}</ui-select-match>
                                                         <ui-select-choices repeat="model in businessModel | filter: $select.search track by $index">
                                                             <span class="color-light-grey">{{model}}</span>
@@ -270,7 +267,8 @@
                                     <div class="agt-settingaddr">
                                         <div class="form-group">
                                             <label for="" class="color-blue">Address</label>
-                                            <textarea name="name" ng-model="agentData.company.address"></textarea>
+                                            <textarea name="address" ng-model="agentData.company.address" required></textarea>
+                                            <p class="text-left mt5 color-pink" ng-if="userEditForm.address.$invalid && userEditForm.address.$touched">Address cannot be empty</p>
                                         </div>
                                     </div>
                                     <div class="agtsetting-abt">
@@ -282,7 +280,7 @@
                                     </div>
                                     <div class="clearfix mt20">
                                         <div class="pull-right">
-                                            <button class="btn btn-pink btn-more" ng-click="saveDetailsAgent('main',agentData);">Save</button>
+                                            <button class="btn btn-pink btn-more" ng-disabled="userEditForm.$invalid || agentData.clickedSave" ng-click="saveDetailsAgent('main',agentData);">Save</button>
                                         </div>
                                         <span ng-if="saveSetting" class="pull-right setting-save-load"><img src="img/checked.gif" alt="" width="20px" class="img-responsive"></span>
                                     </div>
