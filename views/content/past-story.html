@@ -5,7 +5,7 @@
 			<div class="relate text-center">
 				<div class="pastjourney-start">
 					<img src="img/ongojourney/journey-step.png" alt="" class="img-responsive m-center" width="40">
-					<h3 class="avenir-roman color-white"><span class="block">Your London Story</span></h3>
+					<h3 class="avenir-roman color-white"><span class="block">{{pastJourneyArray.name}}</span></h3>
 					<!-- <div class="you-in">
 						<img src="img/icons/at.png" alt="" class="img-responsive m-center" width="140">
 					</div> -->
@@ -23,8 +23,8 @@
 						<div class="clearfix">
 							<div class="pull-left">
 								<div class="start-end-date avenir-medium">
-									<p class="past-startdate">Start Date : <span class="date">05 July 2017</span><span class="edit-date pointer">Edit</span></p>
-									<p class="past-enddate">End Date : <span class="date">05 July 2017</span><span class="edit-date pointer">Edit</span></p>
+									<p class="past-startdate">Start Date : <span class="date">{{pastJourneyArray.startTime | formatDate : 'date'}}</span><span class="edit-date pointer">Edit</span></p>
+									<p class="past-enddate">End Date : <span class="date">{{pastJourneyArray.endTime | formatDate: 'date'}}</span><span class="edit-date pointer">Edit</span></p>
 								</div>
 							</div>
 							<div class="pull-right">
@@ -49,17 +49,17 @@
 				</div>
 				<div class="list-country-city">
 					<!-- list of country city visited -->
-					<div class="list-holder">
+					<div class="list-holder" ng-repeat="country in pastJourneyArray.countryVisited track by $index">
 						<div class="clearfix">
 							<div class="pull-left">
 								<div class="past-flag-holder">
-									<img src="https://travelibro.com/api/upload/readFile?file=58d41820f1d9302d29ea3cba.jpg" alt="" class="get-center" height="40">
+									<img ng-src="{{country.country.flag|uploadpath}}" alt="" class="get-center" height="40">
 								</div>
 								<h4 class="dest-country-vist avenir-roman">
-									<span class="country-name-visited">India :</span>
-									<span class="city-name-visited">Mumbai</span>
+									<span class="country-name-visited">{{country.country.name}} :</span>
+									<!-- <span class="city-name-visited">Mumbai</span>
 									<span class="city-name-visited">Chennai</span>
-									<span class="city-name-visited">Kolkata</span>
+									<span class="city-name-visited">Kolkata</span> -->
 								</h4>
 							</div>
 							<div class="pull-right">
@@ -67,27 +67,6 @@
 									<span class="edit-dest pointer" title="Edit"><i class="fa fa-pencil color-light-grey"></i></span>
 									<span class="delete-dest pointer" title="Delete"><i class="fa fa-trash color-light-grey"></i></span>
 								</div>
-							</div>
-						</div>
-					</div>
-					<!-- list of country city visited end-->
-					<!-- list of country city visited -->
-					<div class="list-holder">
-						<div class="clearfix">
-							<div class="pull-left">
-								<div class="past-flag-holder">
-									<img src="https://travelibro.com/api/upload/readFile?file=58d41820f1d9302d29ea3cba.jpg" alt="" class="get-center" height="40">
-								</div>
-								<h4 class="dest-country-vist avenir-roman">
-									<span class="country-name-visited">India :</span>
-									<span class="city-name-visited">Mumbai</span>
-									<span class="city-name-visited">Chennai</span>
-									<span class="city-name-visited">Kolkata</span>
-								</h4>
-							</div>
-							<div class="pull-right">
-								<span class="edit-dest pointer" title="Edit"><i class="fa fa-pencil color-light-grey"></i></span>
-								<span class="delete-dest pointer" title="Delete"><i class="fa fa-trash color-light-grey"></i></span>
 							</div>
 						</div>
 					</div>
