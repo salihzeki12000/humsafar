@@ -327,7 +327,7 @@
                                 </div>
                             </div>
                             <uib-accordion close-others="oneAtATime">
-                                <div class="panel-default" uib-accordion-group is-open="status.open" ng-repeat="city in country.cityVisited track by $index" ng-init="cityIndex=$index" ng-if="city.from && city.to && city.name">
+                                <div class="panel-default" uib-accordion-group ng-repeat="city in country.cityVisited track by $index" ng-init="status.open = $first" is-open="{{status.open}}" ng-if="city.from && city.to && city.name">
                                     <uib-accordion-heading>
                                         <div class="clearfix">
                                             <p class="city-heading pull-left m-clear">Day <span>{{city.from}}</span> to Day {{city.to}} <span></span> In <span class="trip-city-name color-pink">{{city.name}}</span></p>

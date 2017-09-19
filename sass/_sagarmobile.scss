@@ -225,6 +225,11 @@
       font-size: 10px;
     }
   } // NOTIFICATION PAGE END
+
+  //POPULAR JOURNEYS
+  .activity-post .user-detail {
+    padding-left: 8px;
+  }
 }
 
 // media query for 991px to 768px
@@ -623,6 +628,10 @@
   .noti-follow-btn {
     text-align: center;
   } // notification page End
+  //POPULAR JOURNEYS
+  .activity-post .user-detail {
+    padding-left: 0px;
+  }
 }
 // agent home all section
 .agt-home-itinerary {

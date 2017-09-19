@@ -240,6 +240,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $.jStorage.set("accessToken", data.accessToken);
         if (data.type == "TravelAgent") {
             NavigationService.getAgentsProfile("", function (data1) {
+                console.log('agent profile ',data1)
                 if (data1.data._id && data1.data.type == 'TravelAgent') {
                     $.jStorage.set("isLoggedIn", true);
                     $.jStorage.set("profile", data1.data);
@@ -465,6 +466,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     $scope.loginAsAgent = function (formData) {
         NavigationService.loginAsAgent(formData, function (data) {
+            console.log('loginasAgent ',data)
             if (data.value) {
                 NavigationService.getAccessToken(setLoginVariables, function (err) {
                     console.log(err);
@@ -7688,7 +7690,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     console.log($scope.travelConfig, 'what is travelConfig');
     $scope.editUserData = function (userData, status, valid) {
         console.log(userData, 'userdata of setting');
-        console.log(valid);        
+        console.log(valid);
         console.log(userData, 'user data', status, 'status');
         // cfpLoadingBar.start();
         if (valid) {
@@ -12450,7 +12452,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.oneAtATime = true
 
     // tab change
-    var allagtuser = ["views/content/agent/agt-user/usr-itinerary.html", "views/content/agent/agt-user/usr-tourpackages.html", "views/content/agent/agt-user/usr-photovideos.html", "views/content/agent/agt-user/usr-testimonialreviews.html", "views/content/agent/agt-user/usr-travelactivity.html", "views/content/agent/agt-user/usr-aboutus.html"];
+    var allagtuser = ["views/content/agent/agt-user/usr-tourpackages.html","views/content/agent/agt-user/usr-itinerary.html",  "views/content/agent/agt-user/usr-photovideos.html", "views/content/agent/agt-user/usr-testimonialreviews.html", "views/content/agent/agt-user/usr-travelactivity.html", "views/content/agent/agt-user/usr-aboutus.html"];
     $scope.agtuser = {
         innerView: allagtuser[0]
     };
@@ -12459,13 +12461,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.agtuseroptions.active = "";
     $scope.viewTab = 1;
     switch ($state.params.name) {
-        case "usr-itinerary":
-            $scope.agtuser.innerView = allagtuser[0];
-            $scope.agtuseroptions.active = "usr-itinerary";
-            break;
         case "usr-tourpackages":
-            $scope.agtuser.innerView = allagtuser[1];
+            $scope.agtuser.innerView = allagtuser[0];
             $scope.agtuseroptions.active = "usr-tourpackages";
+            break;
+        case "usr-itinerary":
+            $scope.agtuser.innerView = allagtuser[1];
+            $scope.agtuseroptions.active = "usr-itinerary";
             break;
         case "usr-photovideos":
             $scope.agtuser.innerView = allagtuser[2];
@@ -12487,23 +12489,22 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.agtuser.innerView = allagtuser[0];
     }
     $scope.getTab = function (view) {
-        console.log(view);
+        console.log('view',view);
         $scope.agtuser.innerView = allagtuser[view];
-        var url = "usr-itinerary";
+        var url = "usr-tourpackages";
         var active = "";
-        console.log(view);
         switch (view) {
             case 0:
-                url = "usr-itinerary";
-                $scope.agtuseroptions.active = "usr-itinerary";
-                break;
-            case 1:
                 url = "usr-tourpackages";
                 $scope.agtuseroptions.active = "usr-tourpackages";
                 break;
+            case 1:
+                url = "usr-itinerary";
+                $scope.agtuseroptions.active = "usr-itinerary";
+                break;
             case 2:
                 url = "usr-photovideos";
-                $scope.agtuseroptions.active = "usr-photovideos";;
+                $scope.agtuseroptions.active = "usr-photovideos";
                 break;
             case 3:
                 url = "usr-testimonialreviews";
@@ -12518,8 +12519,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $scope.agtuseroptions.active = "usr-aboutus";
                 break;
             default:
-                url = "usr-itinerary";
-                $scope.agtuseroptions.active = "usr-itinerary";
+                url = "usr-tourpackages";
+                $scope.agtuseroptions.active = "usr-tourpackages";
                 break;
         }
         console.log(url);
@@ -12970,7 +12971,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         year: ''
     }
     $scope.agthomeoptions = {};
-    $scope.agthomeoptions.active = "agthome-itinerary";
+    $scope.agthomeoptions.active = "agthome-tourpackages";
     $scope.viewTab = 1;
     $scope.scroll = {
         busy: false,
@@ -13024,8 +13025,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var oneAlbum = {};
     var viewDownloadObj = {};
     var shareModal = "";
-    var allagthome = ["views/content/agent/agt-home/agthome-itinerary.html",
-        "views/content/agent/agt-home/agthome-tourpackages.html", "views/content/agent/agt-home/agthome-photovideos.html", "views/content/agent/agt-home/agthome-testimonialreviews.html",
+    var allagthome = ["views/content/agent/agt-home/agthome-tourpackages.html", "views/content/agent/agt-home/agthome-itinerary.html", "views/content/agent/agt-home/agthome-photovideos.html", "views/content/agent/agt-home/agthome-testimonialreviews.html",
         "views/content/agent/agt-home/agthome-travelactivity.html",
         "views/content/agent/agt-home/agthome-leadmonitor.html", "views/content/agent/agt-home/agthome-analytics.html",
         "views/content/agent/agt-home/agthome-aboutus.html"
@@ -13756,8 +13756,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                                 $scope.agentItinerary = [];
                             }
                         } else {
-                            $scope.showFilter = false;
-                            $scope.agentItinerary = [];
+                            $scope.showFilter = true;
+                            // $scope.agentItinerary = [];
                         }
                     } else {
                         if (itineraryObj.pagenumber == 1) {
@@ -14508,26 +14508,26 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.getTab = function (view) {
         $scope.agthome.innerView = allagthome[view];
-        var url = "itineraries";
+        var url = "tours-and-packages";
         var active = "";
         console.log(view);
         switch (view) {
             case 0:
+              $scope.getAgentData('tours&packages', $scope.activeUrlSlug);
+              url = "tours-and-packages";
+              $scope.agthomeoptions.active = "agthome-tourpackages";
+              $scope.agenthomeItinerary = false;
+              $scope.initialiseArray();
+              $scope.agentScrollDown();
+              console.log("case tour");
+              break;
+            case 1:
                 url = "itineraries";
                 $scope.getAgentItinerary($scope.activeUrlSlug);
                 $scope.agthomeoptions.active = "agthome-itinerary";
                 $scope.agenthomeItinerary = true;
                 $scope.initialiseArray();
                 console.log("case iti");
-                break;
-            case 1:
-                $scope.getAgentData('tours&packages', $scope.activeUrlSlug);
-                url = "tours-and-packages";
-                $scope.agthomeoptions.active = "agthome-tourpackages";
-                $scope.agenthomeItinerary = false;
-                $scope.initialiseArray();
-                $scope.agentScrollDown();
-                console.log("case tour");
                 break;
             case 2:
                 $scope.getPhotoVideo($scope.activeUrlSlug);
@@ -14827,20 +14827,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.userData.sharingUrl = "https://travelibro.com/partners/" + $scope.activeUrlSlug;
             $scope.enquire.urlSlug = $scope.activeUrlSlug;
             switch ($state.params.name) {
-                case "itineraries":
-                    $scope.getAgentItinerary($scope.activeUrlSlug);
-                    $scope.agthome.innerView = allagthome[0];
-                    $scope.agthomeoptions.active = "agthome-itinerary";
-                    $scope.initialiseArray();
-                    console.log("switch iti");
-                    break;
+
                 case "tours-and-packages":
                     $scope.getAgentData('tours&packages', $scope.activeUrlSlug);
-                    $scope.agthome.innerView = allagthome[1];
+                    $scope.agthome.innerView = allagthome[0];
                     $scope.agthomeoptions.active = "agthome-tourpackages";
                     $scope.initialiseArray();
                     $scope.agentScrollDown();
                     console.log("switch tour");
+                    break;
+                case "itineraries":
+                    $scope.getAgentItinerary($scope.activeUrlSlug);
+                    $scope.agthome.innerView = allagthome[1];
+                    $scope.agthomeoptions.active = "agthome-itinerary";
+                    $scope.initialiseArray();
+                    console.log("switch iti");
                     break;
                 case "photos-and-videos":
                     $scope.getPhotoVideo($scope.activeUrlSlug);
@@ -14929,20 +14930,20 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     TemplateService.title = $scope.userData.name + " | Travel & Local Life | TraveLibro";
                     allowAccess = false;
                     switch ($state.params.name) {
-                        case "itineraries":
-                            $scope.getAgentItinerary($scope.activeUrlSlug);
-                            $scope.agthome.innerView = allagthome[0];
-                            $scope.agthomeoptions.active = "agthome-itinerary";
-                            $scope.initialiseArray();
-                            console.log("switch iti");
-                            break;
                         case "tours-and-packages":
                             $scope.getAgentData('tours&packages', $scope.activeUrlSlug);
-                            $scope.agthome.innerView = allagthome[1];
+                            $scope.agthome.innerView = allagthome[0];
                             $scope.agthomeoptions.active = "agthome-tourpackages";
                             $scope.initialiseArray();
                             $scope.agentScrollDown();
                             console.log("switch tour");
+                            break;
+                        case "itineraries":
+                            $scope.getAgentItinerary($scope.activeUrlSlug);
+                            $scope.agthome.innerView = allagthome[1];
+                            $scope.agthomeoptions.active = "agthome-itinerary";
+                            $scope.initialiseArray();
+                            console.log("switch iti");
                             break;
                         case "photos-and-videos":
                             $scope.getPhotoVideo($scope.activeUrlSlug);

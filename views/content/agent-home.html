@@ -41,8 +41,8 @@
             <div class="col-lg-9 col-md-9 col-sm-9">
                 <div class="agent-scroll" id="agent-scroll">
                     <ul class="list-inline" ng-init="analytics.option={};">
-                        <li ng-click="getTab(0);" ng-class="{'active': agthomeoptions.active=='agthome-itinerary'}">Itineraries </li>
-                        <li ng-click="getTab(1);  scrollDown();" ng-class="{'active': agthomeoptions.active=='agthome-tourpackages'}">Tours & Packages</li>
+                        <li ng-click="getTab(0);  scrollDown();" ng-class="{'active': agthomeoptions.active=='agthome-tourpackages'}">Tours & Packages</li>
+                        <li ng-click="getTab(1);" ng-class="{'active': agthomeoptions.active=='agthome-itinerary'}">Itineraries </li>
                         <li ng-click="getTab(2)" ng-class="{'active': agthomeoptions.active=='agthome-photovideos'}"> Photos & Videos</li>
                         <li ng-click="getTab(3)" ng-class="{'active': agthomeoptions.active=='agthome-testimonialreviews'}">Testimonials & Reviews</li>
                         <li ng-click="getTab(4)" ng-class="{'active': agthomeoptions.active=='agthome-travelactivity'}" ng-if="template.isMine">My Activity</li>

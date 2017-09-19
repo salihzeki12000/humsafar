@@ -1300,6 +1300,7 @@ q {
     // min-width: 80px;
     display: inline-block;
     text-align: center;
+    width : 100px;
   }
   .category-iconholder {
     @include square(40px);
@@ -5589,3 +5590,6 @@ q {
   font-size: 9px;
 }
 
+.comment-gray{
+  opacity: 0.6;
+}

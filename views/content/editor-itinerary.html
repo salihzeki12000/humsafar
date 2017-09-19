@@ -103,7 +103,7 @@
               <!-- trip accordion heading end-->
               <div class="listing-accordion">
                 <uib-accordion close-other="oneAtATime">
-                  <uib-accordion-group  is-open="status.open"  ng-repeat="detail in list.cityList">
+                  <uib-accordion-group  is-open="status.open"  ng-repeat="detail in list.cityList track by $index" ng-init="status.open = $first" is-open="status.open">
                     <uib-accordion-heading class="relate">
                       <div class="journey-accordion-heading color-white">
                         <div class="clearfix">
