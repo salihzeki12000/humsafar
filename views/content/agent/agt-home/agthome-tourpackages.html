@@ -9,12 +9,13 @@
                             <span class="pointer add-holder" ng-click="addItinerary();" ng-class="{'close-more' : showItinerary == true}"><i class="fa fa-plus"></i></span>
                             <div class="add-more-itinerary" ng-if="showItinerary">
                                 <p class="color-cyan">Enter Details - Tours &amp; Packages</p>
+                                <p class="color-pink">* Indicates Mandatory Fields</p>
                                 <div class="add-tourpackage">
                                     <form name="toursForm" ng-submit="saveTour(toursForm);" novalidate>
                                         <div class="">
                                             <div class="a relate">
-                                                <input type="text" name="title" class="form-control color-white" placeholder="Tour Title" ng-model="tour.title" required>
-                                                <p ng-show="toursForm.title.$invalid && !toursForm.title.$pristine" class="agentform-error">Title Is Required</p>
+                                                <input type="text" name="title" class="form-control color-white" placeholder="Tour Title *" ng-model="tour.title" required>
+                                                <!-- <p ng-show="toursForm.title.$invalid && !toursForm.title.$pristine" class="agentform-error">Title Is Required</p> -->
                                             </div>
                                         </div>￼
                                         <!-- tour-type -->
@@ -22,12 +23,12 @@
                                             <div class="tour-typeinput">
                                                 <div class="">
                                                     <div class="a collapsed" data-toggle="collapse" data-target="#demo">
-                                                        <input type="text" class="form-control color-white" placeholder="Type of Holiday/Tour" ng-model="tour.typeOfHoliday" disabled required>
+                                                        <input type="text" class="form-control color-white" placeholder="Type of Holiday/Tour *" ng-model="tour.typeOfHoliday" disabled required>
                                                         <i class="fa fa-angle-down color-white type-tourarrow arrow-down down"></i>
                                                         <i class="fa fa-angle-up color-white type-tourarrow arrow-up up"></i>
                                                     </div>
                                                 </div>
-                                                <p ng-show="tour.typeOfHoliday.length==0" class="agentform-error">Type Is Required</p>
+                                                <!-- <p ng-show="tour.typeOfHoliday.length==0" class="agentform-error">Type Is Required</p> -->
                                             </div> ￼
                                             <div class="collapse optiondiv" id="demo">
                                                 <div class="tour-typeoption">
@@ -49,7 +50,7 @@
                                         <div class="form-group relate">
                                             <div class="tour-type tour-select tour-currency">
                                                 <ui-select ng-model="tour.currency" theme="bootstrap" title="Currency">
-                                                    <ui-select-match placeholder="Currency">{{$select.selected.currency}}</ui-select-match>
+                                                    <ui-select-match placeholder="Currency *">{{$select.selected.currency}}</ui-select-match>
                                                     <ui-select-choices repeat="currency.currency as currency in countries | filter: $select.search track by $index">
                                                         <div class="clearfix">
                                                             <span class="tour-optionselect pull-left">{{currency.name}}</span>
@@ -58,13 +59,13 @@
                                                     </ui-select-choices>
                                                 </ui-select>
                                             </div>
-                                            <p ng-show="tour.currency==''" class="agentform-error">Currency Is Required</p>
+                                            <!-- <p ng-show="tour.currency==''" class="agentform-error">Currency Is Required</p> -->
                                         </div>
                                         <!-- currency list end -->
                                         <!-- TOUR PRICE -->
                                         <div class="form-group">
                                             <div class="a relate tour-price">
-                                                <input type="number" name="price" class="form-control color-white" placeholder="Price" ng-model="tour.price" required>
+                                                <input type="number" name="price" class="form-control color-white" placeholder="Price *" ng-model="tour.price" required>
                                                 <p ng-show="toursForm.price.$invalid && !toursForm.price.$pristine" class="agentform-error">Price Is Required</p>
                                             </div>
                                         </div>
@@ -90,7 +91,7 @@
                                             <span class="color-pink" ng-if="showDNErr">*Invalid Nights &amp; Days Entered.</span>
                                         </div>
                                         <!-- NIGHTS  DAYS END -->
-                                        <p class="color-white avenir-roman text-center m-clear">OR</p>
+                                        <p class="color-white avenir-roman text-center m-clear">OR <sup class="color-pink">*</sup></p>
                                         <!-- HOURS MINUTES -->
                                         <div class="row">
                                             <div class="col-md-6">
@@ -117,7 +118,7 @@
                                         <div class="form-group relate">
                                             <div class="tour-type tour-select">
                                                 <ui-select multiple ng-model="tour.country" theme="bootstrap" title="Country" ng-required="true" on-select="getCity();" on-remove="removeCity($item);">
-                                                    <ui-select-match placeholder="Country">{{$item.name}}</ui-select-match>
+                                                    <ui-select-match placeholder="Country *">{{$item.name}}</ui-select-match>
                                                     <ui-select-choices repeat="country in countries | filter: $select.search track by $index">
                                                         <div>
                                                             <span class="color-white">{{country.name}}</span>
@@ -125,13 +126,13 @@
                                                     </ui-select-choices>
                                                 </ui-select>
                                             </div>
-                                            <p ng-show="tour.country==''" class="agentform-error">Country Is Required</p>
+                                            <!-- <p ng-show="tour.country==''" class="agentform-error">Country Is Required</p> -->
                                         </div>
                                         <!-- COUNTRY UI SELECT END -->
                                         <div class="form-group relate">
                                             <div class="tour-type tour-select">
                                                 <ui-select multiple ng-model="tour.city" theme="bootstrap" title="City" ng-required="true">
-                                                    <ui-select-match placeholder="City">{{$item.name}}</ui-select-match>
+                                                    <ui-select-match placeholder="City *">{{$item.name}}</ui-select-match>
                                                     <ui-select-choices repeat="city in cities | filter: $select.search track by $index">
                                                         <div>
                                                             <span class="color-white">{{city.name}}</span>
@@ -139,7 +140,7 @@
                                                     </ui-select-choices>
                                                 </ui-select>
                                             </div>
-                                            <p ng-show="tour.city==''" class="agentform-error">City Is Required</p>
+                                            <!--  <p ng-show="tour.city==''" class="agentform-error">City Is Required</p> -->
                                         </div>
                                         <!-- BOOKING URL -->
                                         <div class="form-group">
@@ -156,7 +157,7 @@
                                                 <upload-image ng-model="tour.pdf" ng-callback="tourPdf(data);" allow-type="application/pdf" no-view class="tour-uploadinput pointer"></upload-image>
                                             </div>
                                             <div class="tour-uploads tour-pic relate pointer" ng-hide="showTourPic">
-                                                <button class="btn btn-white-outline pointer">Upload Display Picture</button>
+                                                <button class="btn btn-white-outline pointer">Upload Display Picture *</button>
                                                 <span class="tour-filesize">Min. Dimension (800 x 600)</span>
                                                 <upload-image ng-model="tour.displayPic" ng-callback="tourPhoto(data);" allow-type="image/*" no-view class="pointer tour-uploadinput" required></upload-image>
                                             </div>
