@@ -157,6 +157,9 @@
                                                 <upload-image ng-model="tour.pdf" ng-callback="tourPdf(data);" allow-type="application/pdf" no-view class="tour-uploadinput pointer"></upload-image>
                                             </div>
                                             <div class="tour-uploads tour-pic relate pointer" ng-hide="showTourPic">
+                                                <div class="pic-uploading" ng-if="template.uploadLoader">
+                                                    <img src="img/page.svg" alt="" class="img-responsive get-center" width="25">
+                                                </div>
                                                 <button class="btn btn-white-outline pointer">Upload Display Picture *</button>
                                                 <span class="tour-filesize">Min. Dimension (800 x 600)</span>
                                                 <upload-image ng-model="tour.displayPic" ng-callback="tourPhoto(data);" allow-type="image/*" no-view class="pointer tour-uploadinput" required></upload-image>
