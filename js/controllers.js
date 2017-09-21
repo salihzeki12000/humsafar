@@ -11899,7 +11899,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.oneAtATime = true;
-
+    $scope.disableSpecialization = false;
     $scope.passwords = {};
     $scope.oldPasswordError = false;
     $scope.newPasswordError = false;
@@ -13072,6 +13072,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.postScrollData.busy = false;
     $scope.postScrollData.stopCallingApi = false;
     $scope.postScrollData.viewList = false;
+    $scope.myProfileData = {};
     // likes and comment variable declartion end
     var travelActivityObj = {};
     var formAgentData = {};
@@ -14962,6 +14963,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     } else {
         //someone elses profile so get his/her data
         allowAccess = false;
+        $scope.myProfileData = $.jStorage.get("profile");
+        $scope.fromMyLife = true;
         $.jStorage.set("activeUrlSlug", $stateParams.urlSlug);
         $scope.activeUrlSlug = $stateParams.urlSlug;
         $scope.userData.sharingUrl = "https://travelibro.com/partners/" + $scope.activeUrlSlug;

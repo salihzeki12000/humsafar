@@ -1185,7 +1185,14 @@ q {
     padding: 0;
   }
 }
-
+.agt-home-testimonialreviews {
+  &:before {
+    content: '';
+    @include position(fixed, 0);
+    background-color: rgba(255,255,255,0.95);
+    z-index: -1;
+  }
+}
 .write-testimonial {
   padding: 20px 0;
 }
