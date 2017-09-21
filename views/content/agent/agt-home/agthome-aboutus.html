@@ -12,7 +12,7 @@
       <!-- itinerary type -->
       <div class="agtcategory-type">
         <h3 class="color-pink">Categories</h3>
-        <div class="select-category-type" ng-repeat="agtcategory in userData.company.categoryOfSpeacilization">
+        <div class="select-category-type" ng-repeat="agtcategory in userData.company.categoryOfSpeacilization track by $index">
           <figure class="pointer">
             <div class="category-iconholder {{agtcategory.activeClass}}" >
               <img ng-src="{{agtcategory|kindOfJourney:'white'}}" alt="{{agtcategory.caption}}" class="img-responsive" width="24px">

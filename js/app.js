@@ -1044,6 +1044,15 @@ firstapp.filter('kindOfJourney', function () {
             case "adventure":
                 returnVal = "img/kindofjourney/" + color + "-adventure.png";
                 break;
+            case "cultural":
+                returnVal = "img/kindofjourney/" + color + "-logo.png";
+                break;
+            case "educational":
+                returnVal = "img/kindofjourney/" + color + "-logo.png";
+                break;
+            case "lgbt":
+                returnVal = "img/kindofjourney/" + color + "-logo.png";
+                break;
         }
         return returnVal;
     };
