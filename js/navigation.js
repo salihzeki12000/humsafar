@@ -561,7 +561,7 @@ var navigationservice = angular.module('navigationservice', [])
                 url: adminURL + "/agent/signUpWeb",
                 data: formData,
                 method: "POST"
-            }).success(function (data) {
+            },'allLoader').success(function (data) {
                 if (data.value) {
                     callback(data);
                 } else {
