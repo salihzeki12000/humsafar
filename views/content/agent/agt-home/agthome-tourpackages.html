@@ -11,7 +11,7 @@
                                 <p class="color-cyan">Enter Details - Tours &amp; Packages</p>
                                 <p class="color-pink">* Indicates Mandatory Fields</p>
                                 <div class="add-tourpackage">
-                                    <form name="toursForm" ng-submit="saveTour(toursForm);" novalidate>
+                                    <form name="toursForm" novalidate>
                                         <div class="">
                                             <div class="a relate">
                                                 <input type="text" name="title" class="form-control color-white" placeholder="Tour Title *" ng-model="tour.title" required>
@@ -161,8 +161,8 @@
                                                 <span class="tour-filesize">Min. Dimension (800 x 600)</span>
                                                 <upload-image ng-model="tour.displayPic" ng-callback="tourPhoto(data);" allow-type="image/*" no-view class="pointer tour-uploadinput" required></upload-image>
                                             </div>
-                                            <button class="btn btn-pink btn-more tourupload-position" type="submit" ng-disabled="toursForm.$invalid || showDNErr || showHMErr" ng-if="!tour.fromEdit">SAVE</button>
-                                            <button class="btn btn-pink btn-more tourupload-position" type="submit" ng-disabled="toursForm.$invalid || showDNErr || showHMErr" ng-if="tour.fromEdit">UPDATE</button>
+                                            <button class="btn btn-pink btn-more tourupload-position" type="submit" ng-disabled="toursForm.$invalid || showDNErr || showHMErr" ng-if="!tour.fromEdit" ng-click="saveTour(toursForm);">SAVE</button>
+                                            <button class="btn btn-pink btn-more tourupload-position" type="submit" ng-disabled="toursForm.$invalid || showDNErr || showHMErr" ng-if="tour.fromEdit" ng-click="saveTour(toursForm);">UPDATE</button>
                                         </div>
                                         <!-- upload buttons end -->
                                         <!-- file preview holder -->
