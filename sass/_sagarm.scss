@@ -3500,7 +3500,7 @@ q {
 .tour-dp-holder {
   img {
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
   }
 }
 
@@ -3906,6 +3906,9 @@ q {
   }
   .ui-select-bootstrap .ui-select-match-text span {
     background-color: rgba(47, 55, 83, 0.95);
+  }
+  input[type="search"]{
+    color: #fff;
   }
 }
 

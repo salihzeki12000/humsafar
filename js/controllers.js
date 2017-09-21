@@ -11908,6 +11908,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.settingReport = {
         status: ""
     };
+    $scope.uploadingPic = false;
     $scope.chooseCategorySpcl = [];
     // INTEGRATION START
     $scope.removeSameFile = function () {
@@ -12093,6 +12094,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                         $.jStorage.set("isLoggedIn", true);
                         $.jStorage.set("profile", data.data);
                         $scope.agentData = data.data;
+                        $scope.agentData.company.email = _.map($scope.agentData.company.email, function(n){
+                            var m = {};
+                            m.name = n;
+                            console.log(m);
+                            return m;
+                        })
                     } else {
                         $.jStorage.flush();
                     }
@@ -12179,6 +12186,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
     $scope.uploadAgentProfilePic = function (imageBase64) {
+        $scope.uploadingPic = true;
             // var agentData = _.cloneDeep($scope.agentData);
             // var file = imageTestingCallback(imageBase64, 'image/png');
             var blob = DataUriToBlob.dataURItoBlob(imageBase64, 'image/png');
@@ -12192,6 +12200,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     Agent.saveSettings($scope.agentData, function (data) {
                         console.log(data, 'save setting');
                         if (data.value == true) {
+                            $scope.uploadingPic = false;
                             $scope.saveSetting = true;
                             $timeout(function(){
                              $scope.saveSetting = false;
@@ -12236,7 +12245,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }, 100);
     });
     // Textarea counter end
-
+    // remove pic
+    $scope.removeSettingPic = function () {
+       angular.element("input[type='file']").val(null);
+       $scope.showImage = false;
+    }
+        // remove pic end
     //setting tab navigation
     $scope.showAgtSetting = 1;
     $scope.agtsetting = function (val) {
@@ -12304,6 +12318,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }, {
         img: "img/kindofjourney/white-friends.png",
         caption: "Friends",
+        catWidth: "30px"
+    },{
+        img: "img/kindofjourney/white-logo.png",
+        caption: "Cultural",
+        catWidth: "30px"
+    }, {
+        img: "img/kindofjourney/white-logo.png",
+        caption: "Educational",
+        catWidth: "30px"
+    }, {
+        img: "img/kindofjourney/white-logo.png",
+        caption: "LGBT",
         catWidth: "30px"
     }];
     // choose category Specialisation end
