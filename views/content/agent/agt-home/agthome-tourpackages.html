@@ -263,7 +263,7 @@
                                             <p class="day-night" ng-if="tourcard.nights && tourcard.days"><span>{{tourcard.nights}} Nights</span> | <span>{{tourcard.days}} Days</span></p>
                                             <p class="day-night" ng-if="tourcard.hours && tourcard.minutes"><span>{{tourcard.hours}} Hours</span> | <span>{{tourcard.minutes}} Minutes</span></p>
                                             <!-- <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{tourcard.createdAt | formatDate:'date' }}</span>                      | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{tourcard.createdAt | formatDate:'time' }}</span></p> -->
-                                            <p ng-if="template.isLoggedIn && template.isMine">
+                                            <p class="m-clear" ng-if="template.isLoggedIn && template.isMine">
                                                 <a href="" class="day-night color-white" ng-click="editTour(tourcard);">
                                                     <i class="fa fa-pencil color-white"></i>
                                                 </a>
