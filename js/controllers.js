@@ -8958,7 +8958,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         if (str.length > 3) {
             NavigationService.searchCityByCountry(formData, function (data) {
                 cities = data.data;
-                var cities = _.differenceBy(cities, cityVisited, 'name');
+                // var cities = _.differenceBy(cities, cityVisited, 'name');
                 $scope.cities = cities;
             });
         }
@@ -10560,6 +10560,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     }
 
+    $scope.openStatus = function(status){
+        $('.city-accordion-back').removeClass('panel-open');
+        $('.panel-collapse.collapse').removeClass('in').css('height','0');
+        $('.listing-accordion').find('#'+status).parents('.city-accordion-back').addClass('panel-open');
+        $('.listing-accordion').find('#'+status).parents('.city-accordion-back').children(':last-child').addClass('in').css('height','auto');
+    }
+
     // THANK YOU MODAL
     $scope.openThankYouModal = function () {
         if (!($.jStorage.get("isLoggedIn"))) {
@@ -11278,7 +11285,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     $('.search-result-dropdown').children(':first-child').children('.searchdrop-options').children(':first-child').addClass('active');
                     // $('.search-traveller-drop .search-option').first().addClass('active');
                 }, 1000);
-
+                console.log($scope.getAllSearched,'searched');
             });
         } else {
             $scope.viewSearch.backgroundClick = false;
@@ -11306,8 +11313,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     console.log('amit2')
                 }
             } else if (e.keyCode === 13) {
-                var redirectLink = $('.search-option.active').children().attr('href');
-                window.open(redirectLink, '_self');
+            var redirectLink = $('.search-option.active').children().attr('href');
+                    window.open(redirectLink, '_self');                
+                if($('.search-option.active').parents('.search-itinerary-drop')){
+                    var urlSlug = $('.search-option.active').children().children().attr('aria-label');
+                    var userUrlSlug = $('.search-option.active').children().children().attr('id');
+                    if($('.search-option.active').children().children().attr('alt') == "quick-itinerary"){
+                        $state.go('userquickitinerary', {
+                        'id': urlSlug,
+                        'urlSlug': userUrlSlug
+                        })
+                    }else{
+                        $state.go('userdetailitinerary', {
+                        'id': urlSlug,
+                        'urlSlug': userUrlSlug
+                        })
+                    }
+                }
             }
             $('.search-result-dropdown').scrollTop(0);
             $('.search-result-dropdown').scrollTop($('.search-option.active').offset().top - $('.search-result-dropdown').height());
