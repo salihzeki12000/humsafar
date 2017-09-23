@@ -178,6 +178,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
     // controller: 'OnGoJourneyCtrl',
     templateUrl: 'views/directive/journey-post.html',
     link: function ($scope, element, attrs) {
+      $scope.viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
       // var counter = 0
       $scope.userData = $.jStorage.get("profile");
       $scope.ongoCard = true;
@@ -263,7 +264,6 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
           return new Array(remainCount);
         }
       };
-
       if ($scope.ongo && $scope.ongo.photos && $scope.ongo.videos) {
         $scope.ongo.photosVideos = $scope.ongo.videos.concat($scope.ongo.photos);
         if ($scope.ongo && $scope.ongo.photosVideos[0] && $scope.ongo.photosVideos[0].thumbnail) {

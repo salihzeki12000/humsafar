@@ -522,8 +522,21 @@ textarea {
   padding-left: 20px;
 }
 
+.color-username {
+  color: #424242;
+  font-family: AvenirLTStd-Heavy;
+}
+
 .color-white {
   color: #fff !important;
+}
+
+.color-darkestgrey {
+  color: #484848 !important;
+}
+
+.color-gray {
+  opacity: 0.8;
 }
 
 .fz12 {
@@ -560,6 +573,10 @@ textarea {
 
 .color-light-cyan {
   color: $brand-light-cyan;
+}
+
+.color-iphn-gray{
+  color : #868686;
 }
 
 .color-grey {
@@ -2436,11 +2453,11 @@ header {
 }
 
 .user-social-item {
-  padding: 5px 0;
+  padding: 8px 0;
   // border-bottom: 1px solid #b5b5b5;
   li {
     display: inline-block;
-    padding: 0 5px;
+    padding: 0 8px;
     vertical-align: middle;
 
     &:first-child {
@@ -5022,7 +5039,7 @@ header {
 }
 
 .post-header {
-  padding: 4px 0 0;
+  padding: 7px 0 0;
   border-bottom: 1px solid #e2e2e2;
   margin: 0 10px;
 }
@@ -5038,7 +5055,7 @@ header {
 
 .activity-post .user-detail {
   margin-top: 2px;
-  width: 82%;
+  width: 86%;
   h4 {
     font-size: 15px;
   }
@@ -5345,6 +5362,7 @@ header {
   span {
     font-size: 13px;
     @extend .avenir-heavy;
+    font-weight: 200;
   }
 }
 // traveller post end
@@ -5850,7 +5868,7 @@ header {
   z-index: 6;
   @include transition(all 200ms linear);
   // background: url('../img/ongo-strip.png') no-repeat;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 1);
   background-size: 100% 100%;
 
   &.get-otgstrip {
@@ -6117,7 +6135,8 @@ header {
 
   .user-social-item {
     padding: 8px 2px;
-    border-top: 1px solid #e2e2e2;
+    //border-top: 1px solid #e2e2e2;
+    //margin-top: -7px;
     // border-bottom: 1px solid #b5b5b5;
   }
 
@@ -6192,7 +6211,7 @@ header {
 }
 
 .journey-date {
-  color: #a0a0a0;
+  color: #868686;
   font-size: 12px;
 
   .day-journey {
@@ -6343,15 +6362,16 @@ header {
 // card header end
 
 .card-imgholder {
-  height: 350px;
+  min-height: 550px;
   position: relative;
   overflow: hidden;
   fade-img-loading {
     .blur, .img-show {
-      width: 100%;
+      //width: 100%;
       position: absolute;
       top: 50%;
       left: 50%;
+      //width: 100%;
       @include transform(translate(-50%,-50%));
     }
   }
@@ -6379,9 +6399,13 @@ header {
     @extend .get-center;
   }
 }
+.thumbnail-holder {
+  padding-top: 1px;
+  margin-left: -8px;
+}
 
 .related-imgslider {
-  padding: 10px 23px 10px 10px;
+  padding: 4px 23px 0px 10px;
 
   .flexslider {
     background-color: transparent;
@@ -6442,18 +6466,24 @@ display:none;
 }
 
 .related-ongo-slider {
-  width: 99px;
-  height: 99px;
+  width: 120px;
+  height: 120px;
   border: 1px solid #ebebeb;
   overflow: hidden;
+  padding-left: 4px;
+}
+
+.img-full-sqr{
+  height: 120px;
+  width: 120px;
 }
 
 .ongo-card-main {
   .relate-pic {
-    padding: 10px 10px 0;
+    //padding: 10px 10px 0;
 
     .related-ongo-slider {
-      margin-right: 3px;
+      //margin-right: 3px;
       display: inline-block;
       overflow: hidden;
     }
@@ -6462,12 +6492,12 @@ display:none;
 
 .video-ongo-journey {
   position: relative;
-  max-height: 350px;
+  //max-height: 350px;
   overflow: hidden;
 
   video {
-    height: 100%;
-    max-height: 350px;
+    height: 550px;
+    width: 100%;
     object-fit: cover;
   }
 
@@ -6767,6 +6797,9 @@ display:none;
     h4 {
       margin: 0;
       font-size: 16px;
+      //font-weight: 600;
+      padding-top: 3px;
+      font-family: AvenirLTStd-Heavy;
     }
 
     p {
@@ -6849,7 +6882,7 @@ display:none;
   }
 
   .travelling-journey-type {
-    padding: 10px 10px 0;
+    padding: 7px 10px 7px;
     background-color: rgba(255, 255, 255, 0.95);
 
     li {
@@ -6900,16 +6933,55 @@ display:none;
     }
   }
 }
-
-.dot-line {
-  position: absolute;
-  width: 2px;
-  height: 100%;
-  border-right: 4px dashed $brand-dark-pink;
+//
+//journey-post > div {
+//  &:before {
+//    content: "";
+//    width: 2px;
+//    height: 80%;
+//    border-right: 4px dashed $brand-dark-pink;
+//    position: absolute;
+//    bottom: 25px;
+//    left: 50%;
+//    @include transform(translateX(-50%));
+//  }
+//
+//  &:after {
+//    content: '';
+//    width: 2px;
+//    height: 70%;
+//    border-right: 4px dashed $brand-dark-pink;
+//    position: absolute;
+//    bottom: -18px;
+//    left: 50%;
+//    @include transform(translateX(-50%));
+//  //transform: translateX(-50%);
+//}
+//
+//.dot-line {
+//  position: absolute;
+//  width: 2px;
+//  height: 100%;
+//  border-right: 4px dashed $brand-dark-pink;
+//  left: 50%;
+//  bottom: 80px;
+//  @include transform(translateX(-50%));
+//  z-index: 1;
+//}
+.dash-up{
+  width: 4px;
+  height: 29px;
+  border-left: 4px dashed #f58b86;
+  position: relative;
+  bottom: 11px;
+  /* top: -5px; */
   left: 50%;
-  bottom: 80px;
-  @include transform(translateX(-50%));
-  z-index: 1;
+  //background-color: #f58b86;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 
 .card-relate-holder {
@@ -7946,8 +8018,9 @@ display:none;
     border-radius: 0;
     background-color: transparent;
   }
-  .flexslider .slides > li {
+  .flexslider .flex-viewport .slides > li {
     display: block !important;
+    width : 120px;
   }
 }
 
@@ -12874,3 +12947,23 @@ video::-webkit-media-controls-fullscreen-button {
 //   }
 // }
 // travelibro loader end
+
+//ongo journey
+
+.gray-line-bottom {
+  border-bottom: 1px solid #e2e2e2;
+  padding-bottom: 5px;
+}
+.ongo-card-status{
+  padding: 0 15px;
+}
+.flex-contain {
+  margin-left: -8px;
+}
+.like-journey{
+  font-size: 20px !important;
+  padding-left: 8px;
+}
+.comment-edit{
+  height: 18px;
+}

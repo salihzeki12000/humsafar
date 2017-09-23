@@ -66,10 +66,10 @@
                   <div class="user-detail clearfix width74 inline-block">
                     <div class="pull-right">
                       <div class="follow-or-following pointer" ng-click="followFollowing(post.user)">
-                        <span class="color-dark-blue ml5">{{post.user.following | followFollowingStatus}}</span>
+                        <span class="color-darkgrey  ml5">{{post.user.following | followFollowingStatus}}</span>
                       </div>
                     </div>
-                    <h4 class="font-bold color-dark-blue pointer m-clear" ng-if="post.user" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.user.name}}</h4>
+                    <h5 class="font-bold color-dark-blue pointer m-clear" ng-if="post.user" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.user.name}}</h5>
                     <div class=" user-more-detail">
                         <p class="m-clear"><span class=""><i class="fa fa-calendar mr5"></i>{{post.startTime|formatDate:'date'}}</span> | <span class=""><i class="fa fa-clock-o mr5"></i>{{post.startTime|formatDate:'time'}}</span></p>
                     </div>
@@ -150,20 +150,20 @@
                       <div class="journey-overview">
                         <ul>
                           <li>
-                              <div class="">
-                                <img src="img/camera.png" alt="Camera" width="13" class="mr5">
+                              <div class="symbol-up">
+                                <img src="img/camera.png" alt="Camera" width="15" class="mr5">
                                 <span class="inline-block v-mid count-reach">{{post.photoCount}}</span>
                               </div>
                           </li>
                           <li>
-                              <div class="">
-                                <img src="img/video.png" alt="Video" width="13" class="mr5">
+                              <div class="symbol-up">
+                                <img src="img/video.png" alt="Video" width="15" class="mr5">
                                 <span class="inline-block v-mid count-reach">{{post.videoCount}}</span>
                               </div>
                           </li>
                           <li>
-                              <div class="">
-                                <img src="img/location.png" alt="Location" width="13" class="mr5">
+                              <div class="symbol-up">
+                                <img src="img/location.png" alt="Location" width="15" class="mr5">
                                 <span class="inline-block v-mid count-reach">{{post.checkInCount}}</span>
                               </div>
                           </li>
@@ -274,7 +274,7 @@
                     <div class="user-social-item clearfix">
                       <div class="pull-left">
                         <ul>
-                          <li class="" like-sound ng-click="likeUnlikeActivity(post);"><a href="" class="relate pointer" ><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i>
+                          <li class="" like-sound ng-click="likeUnlikeActivity(post);"><a href="" class="relate pointer" ><i class="fa color-darkestgrey" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i>
                           <span></span>
                           <audio id="like-play">
                             <source src="img/tiny1.mp3" type="audio/mp3">
@@ -293,7 +293,7 @@
                           </li> -->
                           <li>
                             <a ng-click="sharePost(post.sharingUrl)">
-                              <img src="img/share.png" alt="" height="19" class="color-blue">
+                              <img src="img/share.png" alt="" height="19" class="color-darkestgrey">
                             </a>
                           </li>
                         </ul>

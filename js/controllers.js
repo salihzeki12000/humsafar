@@ -1768,7 +1768,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 // i=currennt card comming from bottom / arrival card
                 //value=true for identifyng current departure and arrival
                 //flag=true only when percentComplete reaches 100
-                console.log(i);
                 var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
                 var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
                 step = 0;

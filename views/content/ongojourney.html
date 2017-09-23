@@ -157,7 +157,7 @@
                       <ul>
                         <li ng-repeat="list in journey.kindOfJourney|limitTo:3">
                           <a href="">
-                            <img ng-src="{{list|kindOfJourney:'blue'}}" alt="" height="15">
+                            <img ng-src="{{list|kindOfJourney:'pink'}}" alt="" height="15">
                           </a>
                         </li>
                       </ul>
@@ -172,11 +172,11 @@
                     </div>
                   </div>
                 </div>
-                <div class="journey-with">
+                <!--<div class="journey-with">-->
                   <!--<p class="avenir-roman m-clear">{{journey.startLocation}} {{journey.start_Time.year}} <b>{{journey.user.name}}</b> with <b>Monish Shah</b>,
                     <b>Malhar Gala</b> &amp; <b>Nida Kapadia</b></p>-->
-                  <p class="avenir-roman m-clear" ng-bind-html="journey.startJourneyString | safe"></p>
-                </div>
+                  <!--<p class="avenir-roman m-clear" ng-bind-html="journey.startJourneyString | safe"></p>-->
+                <!--</div>-->
               </div>
             </div>
             <!-- journey started end-->

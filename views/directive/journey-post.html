@@ -1,9 +1,10 @@
-<div class="" ng-class="{'highlighted-post': json.journeyHighLight==ongo._id, '': json.journeyHighLight!==ongo._id}">
+<div class="ongo-card" ng-class="{'highlighted-post': json.journeyHighLight==ongo._id, '': json.journeyHighLight!==ongo._id}">
+  <div class="dash-up"></div>
   <!--{{ongo.class}}--Add this as class if any problem comes in in velow div-->
   <div id="{{ongo._id}}" class="ongo-journey-card" ng-if="ongo.type=='travel-life'" ng-class="{'hasLatLng':ongo.latlong && ongo.latlong.lat}">
     <!-- card header -->
     <div class="ongo-card-header">
-      <div class="clearfix">
+      <div class="clearfix gray-line-bottom">
         <div class="card-user-imgholder">
           <div class="journey-userimg user-img-ongo">
             <img ng-src="{{ongo.postCreator.profilePicture|uploadpath:45:47:'cover'}}" alt="" class="img-responsive">
@@ -11,9 +12,9 @@
         </div>
         <div class="card-journeypost">
           <div class="journey-post">
+            <h5 class="font-bold color-username pointer m-clear" ng-if="ongo.user" ui-sref="mylife({'urlSlug':ongo.user.urlSlug})">{{ongo.user.name}}</h5>
             <!-- <p class="post mb5" ng-bind-html="ongo.postString | safe" ng-if="!(ongo.buddies && ongo.buddies.length==0 && (ongo.thoughts=='' || ongo.thoughts==null || ongo.thoughts==undefined))"></p> -->
-            <p class="post mb5" ng-bind-html="ongo.postString | safe"></p>
-             <p class="journey-date avenir-heavy m-clear">
+            <p class="journey-date avenir-heavy m-clear">
             <span class="mr5 day-journey">Day {{ongo.UTCModified|dateDifference: json.startTime}}</span><span>-</span>
             <!-- <i class="fa fa-calendar mr5 ml5"></i> -->
             <span class="mr5 ml5">{{ongo.UTCModified|formatDate:'date'}}</span> |
@@ -22,17 +23,20 @@
             </p>
           </div>
         </div>
-        <div class="card-iconholder">
-          <div class="ongo-journey-icon">
-            <img ng-src="{{ongo|typeOfPost:'travel-life'}}" alt="" class="img-responsive m-center">
-          </div>
-        </div>
+        <!--<div class="card-iconholder">-->
+          <!--<div class="ongo-journey-icon">-->
+            <!--<img ng-src="{{ongo|typeOfPost:'travel-life'}}" alt="" class="img-responsive m-center">-->
+          <!--</div>-->
+        <!--</div>-->
       </div>
     </div>
     <!-- card header end -->
     <!-- card main -->
     <div class="ongo-card-main">
       <!--if checkin is done and no photos is uploaded then add map i.e.  if showMap is true  STARTS-->
+      <div class="ongo-card-status">
+        <p class="post mb5" ng-bind-html="ongo.postString | safe"></p>
+      </div>
       <div class="card-imgholder pointer" ng-if="ongo.photos && ongo.photos.length==0 && ongo.showMap && ongo.checkIn && ongo.checkIn.lat " >
         <!-- style="background: url('{{ongo.imageUrl}}') no-repeat 50% 50%;" -->
         <!--<div class="blur-img">
@@ -62,32 +66,65 @@
         </div>
       </div>
       <!-- ongo img end-->
-      <!-- related img if less then 5-->
-      <div class="relate-pic" ng-if="(ongo.photosVideos.length>1)&&(ongo.photosVideos.length<=5)">
-        <div class="related-ongo-slider" ng-repeat="relatePic in ongo.photosVideos track by $index">
-          <img ng-src="{{relatePic.thumbnail|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer" ng-if="ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail"
-            ng-click="changeImage($index,'videos')">
-          <img ng-src="{{relatePic.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer" ng-if="!(ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail)"
-            ng-click="changeImage($index,'photos')">
-        </div>
-      </div>
-      <!-- related img end if less then 5-->
+
       <!-- related img if more then 5 then slider-->
-      <div class="related-imgslider" ng-if="ongo.photosVideos.length>5">
-        <flex-slider flex-slide="slide in ongo.photosVideos track by $index" item-width="99" class="related-slide carousel" animation="true"
-          item-margin="5" control-nav="false">
+      <div ng-if="viewportWidth>480">
+      <div class="related-imgslider">
+        <!-- related img if less then 5-->
+        <div class="relate-pic thumbnail-holder" ng-if="(ongo.photosVideos.length>1)&&(ongo.photosVideos.length<=4)">
+          <div class="related-ongo-slider" ng-repeat="relatePic in ongo.photosVideos track by $index">
+            <img ng-src="{{relatePic.thumbnail|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer img-full-sqr" ng-if="ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail"
+                 ng-click="changeImage($index,'videos')">
+            <img ng-src="{{relatePic.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer img-full-sqr" ng-if="!(ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail)"
+                 ng-click="changeImage($index,'photos')">
+          </div>
+        </div>
+        <!-- related img end if less then 5-->
+        <div ng-if="ongo.photosVideos.length>4">
+        <flex-slider flex-slide="slide in ongo.photosVideos track by $index" item-width="120" class="related-slide carousel flex-contain" animation="true"
+          item-margin="1" control-nav="false">
           <!-- put/remove item width 99 if needed -->
           <li>
             <div class="related-ongo-slider">
               <!--<img ng-src="{{slide.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer">-->
-              <img ng-src="{{slide.thumbnail|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer" ng-if="ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail"
+              <img ng-src="{{slide.thumbnail|uploadpath:120:120:'cover'}}" alt="" class="img-responsive pointer" ng-if="ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail"
                 ng-click="changeImage($index,'videos')">
-              <img ng-src="{{slide.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer" ng-if="!(ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail)"
+              <img ng-src="{{slide.name|uploadpath:120:120:'cover'}}" alt="" class="img-responsive pointer" ng-if="!(ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail)"
                 ng-click="changeImage($index,'photos')">
             </div>
           </li>
         </flex-slider>
+        </div>
       </div>
+      </div>
+      <div ng-if="viewportWidth<=480" class="related-imgslider">
+        <!-- related img if less then 5-->
+        <div class="relate-pic thumbnail-holder" ng-if="(ongo.photosVideos.length>1)&&(ongo.photosVideos.length<=3)">
+          <div class="related-ongo-slider" ng-repeat="relatePic in ongo.photosVideos track by $index">
+            <img ng-src="{{relatePic.thumbnail|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer img-full-sqr" ng-if="ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail"
+                 ng-click="changeImage($index,'videos')">
+            <img ng-src="{{relatePic.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer img-full-sqr" ng-if="!(ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail)"
+                 ng-click="changeImage($index,'photos')">
+          </div>
+        </div>
+        <!-- related img end if less then 5-->
+        <div ng-if="ongo.photosVideos.length>3">
+        <flex-slider flex-slide="slide in ongo.photosVideos track by $index" item-width="120" class="related-slide carousel flex-contain" animation="true"
+          item-margin="42 " control-nav="false">
+          <!-- put/remove item width 99 if needed -->
+          <li>
+            <div class="related-ongo-slider">
+              <!--<img ng-src="{{slide.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer">-->
+              <img ng-src="{{slide.thumbnail|uploadpath:120:120:'cover'}}" alt="" class="img-responsive pointer" ng-if="ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail"
+                ng-click="changeImage($index,'videos')">
+              <img ng-src="{{slide.name|uploadpath:120:120:'cover'}}" alt="" class="img-responsive pointer" ng-if="!(ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail)"
+                ng-click="changeImage($index,'photos')">
+            </div>
+          </li>
+        </flex-slider>
+        </div>
+      </div>
+
       <!-- related img end if more then 5 then slider-->
       <!-- ongo journey video -->
       <!--<div class="" ng-if="ongo.videos.length>0">
@@ -111,7 +148,7 @@
             <ul>
               <li>
                 <a href="" class="relate" ng-click="likePost(ongo);">
-                  <i class="fa color-blue card-like-animation" ng-class="ongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"
+                  <i class="fa color-iphn-gray card-like-animation like-journey" ng-class="ongo.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"
                     like-sound></i>
                   <span></span>
                   <audio id="like-play">
@@ -121,12 +158,12 @@
               </li>
               <li>
                 <a href="" ng-click="getCommentsData({'post':ongo});">
-                  <img src="img/comments.png" alt="" height="18" >
+                  <img src="img/comments.png" alt="" class="color-gray comment-edit">
                 </a>
               </li>
               <li class="relate">
-                <a href=""  ng-click="editOption(ongo.share)">
-                  <img src="img/share.png" alt="" height="18" ng-init="ongo.share={};">
+                <a href=""  ng-click="editOption(ongo.share)" class="share-button">
+                  <img src="img/share.png" alt="" ng-init="ongo.share={};" class="color-gray comment-edit">
                 </a>
                 <div class="share-single-trip" ng-show="ongo.share.backgroundClick">
                   <ul>
@@ -150,9 +187,9 @@
           </div>
           <div class="pull-right">
             <span class="inline-block" ng-if="ongo.checkIn && ongo.checkIn.location!='' && ongo.review && ongo.review!=''">
-              <p class="inline-block avenir-heavy journey-rate"><span class="mr5">Rating:</span>
-            <span class="rated-star"><i class="fa fa-star color-pink" ng-repeat="a in getTimes(ongo.review[0].rating,'marked') track by $index"></i></span>
-            <span class="non-rated-star"><i class="fa fa-star-o" ng-repeat="b in getTimes(ongo.review[0].rating,'unmarked') track by $index"></i></span>
+              <p class="inline-block avenir-heavy journey-rate color-iphn-gray"><span class="mr5 color-iphn-gray">Rating:</span>
+            <span class="rated-star color-iphn-gray"><i class="fa fa-star" ng-repeat="a in getTimes(ongo.review[0].rating,'marked') track by $index"></i></span>
+            <span class="non-rated-star color-iphn-gray"><i class="fa fa-star-o" ng-repeat="b in getTimes(ongo.review[0].rating,'unmarked') track by $index"></i></span>
             </p>
             </span>
             <p class="inline-block pointer m-clear journey-rate" ng-click="giveReview(ongo.checkIn);" ng-if="ongo.checkIn && ongo.checkIn.location!='' && ongo.review && ongo.review=='' && isMine==true"><i class=" avenir-heavy">Rate This Now</i></p>
@@ -180,17 +217,17 @@
           </div>
         </div>
         <div class="social-likes-reviews" ng-if="!(((ongo.likeCount==0)||(ongo.likeCount==undefined))&&(ongo.comment.length==0))">
-          <div class="clearfix">
+          <div class="clearfix" style="font-size: 10px;padding: 3px 0">
             <div class="pull-left">
               <!-- cardLikeList = !cardLikeList -->
-              <span class="color-blue mr10 card-like avenir-heavy" ng-click="getLikesData({'post':ongo})"><i class="fa fa-heart color-blue mr5"></i><b>{{ongo.likeCount|filterCount}}</b> {{ongo.likeCount|singularPlural:'Likes'}}
+              <span class="color-iphn-gray mr10 card-like avenir-heavy" ng-click="getLikesData({'post':ongo})"><i class="fa fa-heart color-iphn-gray mr5"></i><b>{{ongo.likeCount|filterCount}}</b> {{ongo.likeCount|singularPlural:'Likes'}}
                         <!--<div class="card-like-dropdown" ng-show="ongo.like.backgroundClick;">
                           <ul>
                             <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
                           </ul>
                         </div>-->
                         </span>
-              <span class="color-blue mr10 card-comment avenir-heavy pointer" ng-click="getCommentsData({'post':ongo});"><img src="img/comments.png" alt="" class="mr5" height="14"><b>{{ongo.commentCount|filterCount}}</b> {{ongo.commentCount|singularPlural:'Comments'}}
+              <span class="color-iphn-gray mr10 card-comment avenir-heavy pointer" ng-click="getCommentsData({'post':ongo});"><img src="img/comments.png" alt="" class="mr5 color-gray" height="14"><b>{{ongo.commentCount|filterCount}}</b> {{ongo.commentCount|singularPlural:'Comments'}}
                         <div class="card-comment-dropdown" ng-show="cardCommentList">
                           <ul>
                             <li ng-repeat="listComments in uniqueArr"><a href="">{{listComments.user.name}}</a></li>
@@ -206,9 +243,9 @@
             <p class="inline-block pointer" ng-click="giveReview();" ng-if="ongo.checkIn && ongo.checkIn.location!='' && ongo.review && ongo.review==''"><i class="color-blue avenir-heavy">Rate This Now</i></p> -->
             </div>
             <div class="pull-right">
-              <div class="ongo-travel-icon hidden-xs">
-                <img src="img/travel.png" alt="" width="15">
-              </div>
+              <!--<div class="ongo-travel-icon hidden-xs">-->
+                <!--<img src="img/travel.png" alt="" width="15">-->
+              <!--</div>-->
             </div>
           </div>
         </div>

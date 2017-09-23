@@ -1,4 +1,7 @@
 @media screen and (min-width: 1400px) {
+  .ongo-card {
+    margin-top: -5px;
+  }
   .fixed-mobile {
     width: 350px;
     .mobile-video {
@@ -272,6 +275,9 @@
 
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
+  .ongo-card {
+    margin-top: -25px !important;
+  }
   .image-display {
     padding: 0 5%;
   }
@@ -332,7 +338,7 @@
     }
   }
   .started-journey-card {
-    margin-bottom: 50px;
+    margin-bottom: 35px;
     .journey-with,
     .travelling-journey-type {
       background-color: rgba(255, 255, 255, 0.75);
@@ -394,7 +400,7 @@
     margin: 0 auto;
   }
   .card-imgholder {
-    height: 300px;
+    min-height: 300px;
   } // journey info strip
   .journey-info-strip.get-otgstrip {
     top: -2px;
@@ -717,23 +723,43 @@
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
   .travelled-imgholder {
-    min-height: 350px;
+    min-height: 100vw;
     max-height: 350px;
   }
   //loader
   .loaders {
     font-size: 16px !important;
   }
+  .fixed-img{
+    @include background(url(../img/mobile-bg.jpg) $brand-dark-blue no-repeat);
+    background-size: cover;
+    position : fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    height: 100%;
+    width: 100%;
+    z-index: -999;
+    background-position: center center;
+  }
   .travel-bg,
   .holiday-step {
-    @include background(url(../img/mobile-bg.jpg) $brand-dark-blue no-repeat 50% 50%);
-    /*background: url('../img/mobile-bg.jpg') $brand-dark-blue no-repeat 50% 50%;*/
-    /*background-image: url('../img/mobile-bg.jpg');*/
-    /*background-color: $brand-dark-blue;*/
-    /*background-repeat: no-repeat;*/
-    /*background-position: 50% 50%;*/
-    background-size: cover;
-    background-attachment: fixed;
+    //@include background(url(../img/mobile-bg.jpg) $brand-dark-blue no-repeat);
+    ///*background: url('../img/mobile-bg.jpg') $brand-dark-blue no-repeat 50% 50%;*/
+    ///*background-image: url('../img/mobile-bg.jpg');*/
+    ///*background-color: $brand-dark-blue;*/
+    /////*background-repeat: no-repeat;*/
+    ///*background-position: 50% 50%;*/
+    //background-size: cover;
+    //position : fixed;
+    //-webkit-background-size: cover;
+    //-moz-background-size: cover;
+    //-o-background-size: cover;
+    //height: 100%;
+    //width: 100%;
+    //overflow: scroll;
+    ////background-attachment: fixed;
+    //background-position: center center;
   } //header
   .sidemenu.mobile-menu .nav-list {
     padding-top: 5px;
@@ -1056,12 +1082,12 @@
     width: 150px;
   }
   .started-journey-card {
-    margin-bottom: 70px;
+    margin-bottom: 50px;
     .journey-start h4 {
       font-size: 25px;
       &:before {
         height: 67%;
-        bottom: 50px;
+        bottom: 25px;
       }
     }
     .journey-travelling-buddies {
@@ -1096,7 +1122,7 @@
     }
   }
   .related-ongo-slider {
-    @include square(70px);
+    @include square(80px);
   }
   .ongo-journey-change {
     width: 250px;
@@ -1109,7 +1135,7 @@
     }
   } // journey join
   .card-imgholder {
-    height: 350px;
+    min-height: 100vw;
   }
   .started-journey-card .journey-imgholder {
     max-height: 350px;
@@ -1296,6 +1322,7 @@
   .video-ongo-journey {
     video {
       width: 100%;
+      height : 100vw;
     }
   }
   .video-ongo-journey .youtube-icon {
@@ -1960,7 +1987,7 @@
   } // ongo journey page
   .started-journey-card .journey-with,
   .started-journey-card .travelling-journey-type {
-    padding: 10px 10px 5px;
+    padding: 7px 10px 7px;
     background-color: rgba(255, 255, 255, 0.95);
   } // ongo journey page end
   .city-accordion-back {
@@ -2018,10 +2045,42 @@
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
+  .search-mobile {
+    margin-top: 10px;
+  }
+  .like-journey{
+    font-size: 24px !important;
+    //padding-left: 8px;
+  }
+  .comment-edit{
+    height: 20px;
+  }
+
+  .fa-2x {
+      font-size: 1em;
+  }
+  .dash-up {
+      height : 14px;
+      border-left: 4px solid #f58b86;
+  }
+  .thumbnail-holder{
+      padding-top: 0;
+  //    margin-top: -5px;
+  }
+  .flex-direction-nav a.flex-next,
+  .flex-direction-nav a.flex-prev{
+    display:none;
+  }
+
+  .flex-contain{
+      margin-right: -16px;
+  }
+  .share-button{
+    margin-left: -16px;
+  }
   .travel-bg {
     background-color: #fff;
   }
-
 
   .bg-white,
   .setting,
@@ -2029,8 +2088,11 @@
   .travel-life-part.setting {
     background-color: #fff;
   }
+  .ongo-card {
+    margin-top: -25px !important;
+  }
   .ongo-journey-card .user-social-item {
-    padding: 15px 2px;
+    padding: 8px 2px 13px;
   }
 
   // login page
@@ -2500,7 +2562,7 @@
     // }
   }
   .related-ongo-slider {
-    @include square(57px);
+    @include square(100px);
   }
   .related-imgslider {
     .flexslider .slides>li {
@@ -2512,7 +2574,10 @@
       &:first-child {
         padding: 0 0px 0 0;
       }
-      padding: 0 8px;
+      //&:last-child {
+      //  margin: 0 0 0 -7px;
+      //}
+      padding: 0 16px;
     }
   } // edit options
   .options {
@@ -2779,7 +2844,7 @@
   .activity-post {
     .user-detail {
       margin-left: 5px;
-      width: 80%;
+      width: 84%;
     }
   }
   .notify-main .comment-sec .comment-container {
@@ -2997,3 +3062,5 @@
 }
 
 // media query for 480px to 320px end
+
+
