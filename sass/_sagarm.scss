@@ -913,8 +913,13 @@
   border-radius: 4px;
   box-shadow: 2px 3px 10px #a0a0a0;
   margin: 15px 0;
+  @include transition(all 150ms linear);
   .itinerary-img {
     min-height: 300px;
+  }
+  &:hover {
+    box-shadow: 5px 6px 10px #a0a0a0, 2px 1px 10px #a0a0a0;
+    @include transition(all 150ms linear);
   }
 }
 
@@ -994,7 +999,7 @@
 
 .imgfoot-top {
   padding: 10px 10px 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.85);
   p {
     // margin: 0;
   }
@@ -1055,6 +1060,12 @@
   .country-holder {
     width: 30px;
     height: 30px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #fff;
+    float: left;
+    margin-left: -10px;
+    border-radius: 100%;
   }
 }
 
@@ -1185,7 +1196,14 @@ q {
     padding: 0;
   }
 }
-
+.agt-home-testimonialreviews {
+  &:before {
+    content: '';
+    @include position(fixed, 0);
+    background-color: rgba(255,255,255,0.95);
+    z-index: -1;
+  }
+}
 .write-testimonial {
   padding: 20px 0;
 }
@@ -1308,7 +1326,6 @@ q {
   margin: 30px 0;
   .select-category-type {
     // min-width: 80px;
-    margin-right: 15px;
     display: inline-block;
     text-align: center;
     width : 100px;
@@ -1649,6 +1666,11 @@ q {
     font-size: 11px;
     text-align: center;
   }
+  .pic-uploading {
+    width: 100%;
+    @include position(absolute,0);
+    background-color: rgba(255,255,255,0.95);
+  }
 }
 
 .agt-home-tourpackage,
@@ -1761,8 +1783,8 @@ q {
 
 .theme {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 4px 10px 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 4px 10px;
   left: 10px;
   top: -10px;
   border: 1px solid #fff;
@@ -1770,12 +1792,12 @@ q {
   .theme-img {
     display: inline-block;
     width: 22px;
+    vertical-align: middle;
   }
   .theme-name {
     display: inline-block;
     color: #fff;
-    vertical-align: top;
-    padding-top: 4px;
+    vertical-align: middle;
     p {
       margin-bottom: 0;
     }
@@ -3113,7 +3135,7 @@ q {
 
 .imgfoot-top .day-night {
   font-size: 12px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 // USER TRAVEL ACTIVITY CARD END
@@ -3501,7 +3523,7 @@ q {
 .tour-dp-holder {
   img {
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
   }
 }
 
@@ -3907,6 +3929,9 @@ q {
   }
   .ui-select-bootstrap .ui-select-match-text span {
     background-color: rgba(47, 55, 83, 0.95);
+  }
+  input[type="search"]{
+    color: #fff;
   }
 }
 
@@ -4991,8 +5016,13 @@ q {
 //ITINERARY OPTIONS DROPDOWN END
 // SEARCH RESULT PAGE
 .search-result {
-  margin: 40px 0;
+  padding: 40px 0;
   @extend .avenir-roman;
+  &:before {
+    content: '';
+    @include position(fixed, 0);
+    background-color: rgba(255,255,255,0.90);
+  }
 }
 
 .search-navigation {
@@ -5028,6 +5058,7 @@ q {
     font-size: 16px;
     @extend .pointer;
     @extend .avenir-heavy;
+    color: #424242;
   }
 }
 

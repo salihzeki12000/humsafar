@@ -99,7 +99,7 @@
                                 <ul class="searchdrop-options">
                                     <li class="search-option" ng-repeat="itinerary in getAllSearched.itinerary track by $index">
                                         <div class="search-option-img" ng-click="routeSearchItinerary(itinerary)">
-                                            <img ng-src="{{itinerary.coverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
+                                            <img ng-src="{{itinerary.coverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive" alt="{{itinerary.type}}" id="{{itinerary.user.urlSlug}}" aria-label="{{itinerary.urlSlug}}">
                                         </div>
                                         <span class="search-optiontxt pointer" ng-click="routeSearchItinerary(itinerary)">{{itinerary.name}}</span>
                                     </li>
@@ -164,13 +164,13 @@
                             </li>
                             <li ng-click="switchToProfile(userData);">
                                 <!--<li ui-sref="mylife({'urlSlug':userData.urlSlug,'name':null})">-->
-                                <a>
-                                    <div class="user-img inline-block v-mid">
-                                        <img src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" width="40" class="img-responsive">
-                                    </div>
-                                    <span class="color-white ml10 fz13 usermade text-capitalize">{{userData.name}}</span>
-                                </a>
-                            </li>
+                                    <a>
+                                        <div class="user-img inline-block v-mid">
+                                            <img src="{{userData.profilePicture|uploadpath:45:47:'cover'}}" alt="" width="40" class="img-responsive">
+                                        </div>
+                                        <span class="color-white ml10 fz13 usermade text-capitalize">{{userData.name}}</span>
+                                    </a>
+                                </li>
                             <!--<li>
                                 <a href="">
                                     <i class="fa fa-envelope"></i>
@@ -336,7 +336,7 @@
                                 <ul class="searchdrop-options">
                                     <li class="search-option" ng-repeat="itinerary in getAllSearched.itinerary track by $index">
                                         <div class="search-option-img" ng-click="routeSearchItinerary(itinerary)">
-                                            <img ng-src="{{itinerary.coverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
+                                            <img ng-src="{{itinerary.coverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive" alt="{{itinerary.type}}" id="{{itinerary.user.urlSlug}}" aria-label="{{itinerary.urlSlug}}">
                                         </div>
                                         <span class="search-optiontxt pointer" ng-click="routeSearchItinerary(itinerary)">{{itinerary.name}}</span>
                                     </li>
@@ -456,7 +456,7 @@
                                     <ul class="searchdrop-options">
                                         <li class="search-option" ng-repeat="itinerary in getAllSearched.itinerary track by $index">
                                             <div class="search-option-img" ng-click="routeSearchItinerary(itinerary)">
-                                                <img ng-src="{{itinerary.coverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive" alt="">
+                                                <img ng-src="{{itinerary.coverPhoto|uploadpath:45:45:'cover'}}" class="img-responsive" alt="{{itinerary.type}}" id="{{itinerary.user.urlSlug}}" aria-label="{{itinerary.urlSlug}}">
                                             </div>
                                             <span class="search-optiontxt pointer" ng-click="routeSearchItinerary(itinerary)">{{itinerary.name}}</span>
                                         </li>

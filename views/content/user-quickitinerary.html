@@ -144,9 +144,12 @@
                     <li>
                       <a ui-sref="quickitinerary({flag:'edit',urlSlug:itinerary.urlSlug})">Edit</a>
                     </li>
-                    <li>
+                    <li ng-click="deletePop(itinerary._id);" ng-if="itinerary.status == true">
                       <a class="">Delete</a>
                     </li>
+                    <li ng-if="itinerary.status == false" ng-click="uploadQuickItinerary(true)">
+                      <a>Publish</a>
+                    </li>                    
                   </ul>
                   <ul ng-if="!template.isMine">
                     <li>

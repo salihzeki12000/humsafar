@@ -686,6 +686,9 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout, TemplateSe
                 if (!isArr && newVal && newVal.file) {
                     $scope.uploadNow(newVal);
                     TemplateService.uploadLoader = true;
+                    $timeout(function(){
+                        TemplateService.uploadLoader = false;
+                    },36000);
                 } else if (isArr && newVal.length > 0 && newVal[0].file) {
                     $timeout(function () {
                         console.log(oldVal, newVal);
@@ -693,6 +696,9 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout, TemplateSe
                         _.each(newVal, function (newV, key) {
                             if (newV && newV.file) {
                                 TemplateService.uploadLoader = true;
+                                $timeout(function(){
+                                 TemplateService.uploadLoader = false;
+                                },36000);
                                 TemplateService.type = $scope.dataValue;
                                 $scope.uploadNow(newV);
                             }
@@ -1043,6 +1049,15 @@ firstapp.filter('kindOfJourney', function () {
                 break;
             case "adventure":
                 returnVal = "img/kindofjourney/" + color + "-adventure.png";
+                break;
+            case "cultural":
+                returnVal = "img/kindofjourney/" + color + "-logo.png";
+                break;
+            case "educational":
+                returnVal = "img/kindofjourney/" + color + "-logo.png";
+                break;
+            case "lgbt":
+                returnVal = "img/kindofjourney/" + color + "-logo.png";
                 break;
         }
         return returnVal;

@@ -22,6 +22,9 @@
                                         <u>Re-send</u>
                                     </a>
                                 </p>
+                                <p class="m-clear color-dark-cyan" ng-if="showConfirmation">
+                                    Verification code sent successfully.
+                                </p>
                                 <div class="marg-tp30 clearfix">
                                     <input type="submit" class="btn btn-blue-outline btn-more" ng-disabled="otp.a.$invalid || otp.b.$invalid || otp.c.$invalid || otp.d.$invalid">
                                     </button>
@@ -53,6 +56,9 @@
                                 <a class="color-blue" ng-click="requestOtp()">
                                     <u>Re-send</u>
                                 </a> Verification Code</p>
+                            <p class="m-clear color-dark-cyan" ng-if="showConfirmation">
+                                Verification code sent successfully.
+                            </p>
                             <div class="veri-error-btn text-center">
                                 <!--button-panel-->
                                 <button class="btn btn-more btn-pink" ng-click="agentSec(0)">Close</button>
@@ -103,14 +109,12 @@
                                     <div class="form-group">
                                         <div class="agent-cmpny-inputholder">
                                             <input type="text" class="form-control color-blue" placeholder="Company Name*" ng-model="userDetails.company.name" required name="name">
-                                            <p ng-if="userDetailsForm.name.$invalid">Name cannot be empty</p>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="agent-cmpny-inputholder">
                                             <textarea class="form-control color-blue" placeholder="Address*" ng-model="userDetails.company.address" required name="address"></textarea>
                                         </div>
-                                        <p class="text-left mt5 color-pink" ng-if="userDetailsForm.address.$invalid && userDetailsForm.address.$touched">Address cannot be empty</p>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-5 col-sm-5">
@@ -118,14 +122,12 @@
                                                 <div class="agent-cmpny-inputholder agentcompany-phone">
                                                     <input type="text" id="phone1" name="phone" class="form-control color-blue" placeholder="Contact No*" ng-model="userDetails.company.contact" ng-intl-tel-input ng-change="isValidNo(userDetails.company.contact,'1')" required>
                                                 </div>
-                                                <span class="color-pink" ng-if="userDetailsForm.phone.$invalid && userDetailsForm.phone.$touched">Empty or Invalid Contact Number</span>
                                             </div>
                                         </div>
                                         <div class="col-md-7 col-sm-7">
                                             <div class="form-group">
                                                 <div class="agent-cmpny-inputholder agentcompany-phone">
                                                     <input type="text" id="phone2" class="form-control color-blue" placeholder="Mobile No" ng-model="userDetails.company.mobile" ng-intl-tel-input ng-change="isValidNo(userDetails.company.mobile,'2')">
-                                                    <span id="error-msg2" class="hide intel-error">Invalid number</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -179,7 +181,7 @@
                                     </div>
                                     <!-- your bussiness model end-->
                                 </form>
-                                <p class="msg-note m-clear color-pink text-left">* Indicates mandatory field.</p>
+                                <p class="msg-note m-clear color-pink text-left">* Indicates mandatory fields.</p>
                             </div>
                             <div class="button-panel clearfix">
                                 <button class="btn btn-blue-outline btn-more pull-left" ng-click="agentSec(3)">Previous</button>

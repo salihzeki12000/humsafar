@@ -3,7 +3,8 @@ var itinerary = angular.module('itinerary', [])
   .factory('Itinerary', function (TravelibroService, $filter, $state) {
 
     return {
-      getOneItinerary: function (slug, callback) { //get Quick/detail itinerary
+      getOneItinerary: function (slug, callback) { 
+      //get Quick/detail itinerary
         TravelibroService.http({
           url: adminURL + "/itinerary/getOneWeb",
           method: "POST",

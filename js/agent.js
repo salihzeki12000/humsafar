@@ -19,12 +19,12 @@ var agent = angular.module('agent', [])
                 });
             }
         },
-        requestOtp: function () {
+        requestOtp: function (callback) {
             TravelibroService.http({
                 url: adminURL + "/agent/requestOtp",
                 method: "POST"
             }).success(function (data) {
-                console.log(data);
+                callback(data);
             });
         },
         saveAgentData: function (formData, callback) {
