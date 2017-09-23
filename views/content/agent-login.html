@@ -22,6 +22,9 @@
                                         <u>Re-send</u>
                                     </a>
                                 </p>
+                                <p class="m-clear color-dark-cyan" ng-if="showConfirmation">
+                                    Verification code sent successfully.
+                                </p>
                                 <div class="marg-tp30 clearfix">
                                     <input type="submit" class="btn btn-blue-outline btn-more" ng-disabled="otp.a.$invalid || otp.b.$invalid || otp.c.$invalid || otp.d.$invalid">
                                     </button>
@@ -53,6 +56,9 @@
                                 <a class="color-blue" ng-click="requestOtp()">
                                     <u>Re-send</u>
                                 </a> Verification Code</p>
+                            <p class="m-clear color-dark-cyan" ng-if="showConfirmation">
+                                Verification code sent successfully.
+                            </p>
                             <div class="veri-error-btn text-center">
                                 <!--button-panel-->
                                 <button class="btn btn-more btn-pink" ng-click="agentSec(0)">Close</button>

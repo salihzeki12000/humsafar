@@ -402,12 +402,12 @@
                           </div>
                         </ul>-->
                                             </div>
-                                            <div class="pull-right" ng-if="!((activity.type =='editor') || (activity.type =='editor-blog'))">
+                                            <div class="pull-right" ng-if="!((activity.type =='editor') || (activity.type =='editor-blog'))" hidden>
                                                 <div class="three-dots relate pointer" ng-init="activity.option={}">
                                                     <span ng-click="editOption(activity.option)">
-                            <img src="img/options.png" alt="" class="mt5 if-blue" ng-if="!(activity.type=='editor')">
-                            <img src="img/options-white.png" alt="" class="mt5 if-white" ng-if="activity.type=='editor'">
-                          </span>
+                                                        <img src="img/options.png" alt="" class="mt5 if-blue" ng-if="!(activity.type=='editor')">
+                                                        <img src="img/options-white.png" alt="" class="mt5 if-white" ng-if="activity.type=='editor'">
+                                                    </span>
                                                     <div class="activity-edit-option" ng-show="activity.option.backgroundClick">
                                                         <ul>
                                                             <li ng-if="activity.owner._id==userData._id">Hide From All Activity Feed <span class="hide-hover">? <span class="info-div">This activity will be hidden from all your followers "Activity Feed".</span> </span>
@@ -610,12 +610,12 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="pull-right">
+                                            <div class="pull-right" hidden>
                                                 <div class="">
                                                     <span>
-                            <img src="img/options.png" alt=""  class="if-blue">
-                            <img src="img/options-white.png" alt=""  class="if-white">
-                          </span>
+                                                        <img src="img/options.png" alt=""  class="if-blue">
+                                                        <img src="img/options-white.png" alt=""  class="if-white">
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>

@@ -11841,10 +11841,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.submitOtp = function (obj) {
         var otp = (obj.a).concat(obj.b, obj.c, obj.d);
         Agent.verifyOtp(otp, function (data) {
-            console.log(data);
             if (data.value) {
                 $scope.userData.isVerified = true;
-                $scope.showConfirmation = true;
                 $.jStorage.set("isVerified", true);
                 $scope.agentSec(1);
             } else {
@@ -11853,7 +11851,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
     };
     $scope.requestOtp = function () {
-            Agent.requestOtp();
+            Agent.requestOtp(function (data) {
+                if (data.value) {
+                    $scope.showConfirmation = true;
+                    $timeout(function () {
+                        $scope.showConfirmation = false;
+                    }, 3500);
+                }
+            });
         }
         //verify users account ends
 
@@ -12995,7 +13000,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.unactionLeads = [];
     $scope.actionLeads = [];
     $scope.tourData = [];
-    $scope.delete = false;
     var modal = "";
     $scope.tourDel = {};
     $scope.reviewData = [];
@@ -14172,11 +14176,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.callDelete = function () {
         Agent.deleteTour({ _id: $scope.tourDel._id }, function (data) {
             if (data.value) {
-                $scope.delete = true;
-                $timeout(function () {
-                    modal.close();
-                    $scope.delete = false;
-                }, 3000);
+                modal.close();
                 $scope.getAgentData('tours&packages', $scope.activeUrlSlug, 1);
             } else {
                 console.log("err");
@@ -15388,7 +15388,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         _.each($scope.notificationCard, function (notification) {
             switch (notification.type) {
                 case 'userWelcome':
-                    notification.notifyString = '<span class="text-justify"><span class="block color-blue avenir-heavy">Welcome to TraveLibro!</span>TraveLibro lets you capture your travel journeys live, local life activities and document past journeys. It also allows you to share these activities with other travellers to inspire their wanderlust. Lastly, its a great way to archive your personal history by reliving your moments, activities and reviews.</span>'
+                    if ($.jStorage.get("profile").type === "User") {
+                        notification.notifyString = '<span class="text-justify"><span class="block color-blue avenir-heavy">Welcome to TraveLibro!</span>TraveLibro lets you capture your travel journeys live, local life activities and document past journeys. It also allows you to share these activities with other travellers to inspire their wanderlust. Lastly, its a great way to archive your personal history by reliving your moments, activities and reviews.</span>';
+                    } else {
+                        notification.notifyString = '<span class="text-justify"><span class="block color-blue avenir-heavy">Welcome to TraveLibro!</span>TraveLibro is a travel global ecosystem that connects travel enthusiasts of all types to each other and to travel agents as well. We are very excited to have you on board with us in our journey to help travellers explore the world.</span>'
+                    }
                     break;
                 case 'journeyRequest':
                     if (notification.userFrom.gender == 'male') {

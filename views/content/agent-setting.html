@@ -201,8 +201,8 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="name" class="color-blue">Name</label>
-                                                <input type="text" class="form-control" placeholder="Name" ng-model="agentData.company.name">
+                                                <label for="name" class="color-blue">Name*</label>
+                                                <input type="text" class="form-control" placeholder="Name" ng-model="agentData.company.name" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -225,7 +225,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="contact-no" class="color-blue">Contact No</label>
+                                                <label for="contact-no" class="color-blue">Contact No*</label>
                                                 <div class="agentsetting-phone">
                                                     <input type="text" id="phone1" class="form-control" placeholder="Contact No" ng-model="agentData.company.contact" ng-intl-tel-input ng-change="isValidNo(agentData.company.contact,'1')">
                                                     <span id="error-msg1" class="hide intel-error color-pink mt5">Invalid number</span>
@@ -265,7 +265,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="office-location" class="color-blue">Your Business Model</label>
+                                                <label for="office-location" class="color-blue">Your Business Model*</label>
                                                 <div class="agentsetting-select">
                                                     <ui-select multiple ng-model="agentData.company.agentType" theme="bootstrap" required>
                                                         <ui-select-match placeholder="Select Your Business Model">{{$item}}</ui-select-match>
@@ -285,9 +285,8 @@
                                     </div>
                                     <div class="agt-settingaddr">
                                         <div class="form-group">
-                                            <label for="" class="color-blue">Address</label>
+                                            <label for="" class="color-blue">Address*</label>
                                             <textarea name="address" ng-model="agentData.company.address" required></textarea>
-                                            <p class="text-left mt5 color-pink" ng-if="userEditForm.address.$invalid && userEditForm.address.$touched">Address cannot be empty</p>
                                         </div>
                                     </div>
                                     <div class="agtsetting-abt">
@@ -297,6 +296,7 @@
                                             <span class="pull-right font-sz10 mt10">{{agentData.company.about.length}} / 500</span>
                                         </div>
                                     </div>
+                                    <p class="msg-note m-clear color-pink text-left">* Indicates mandatory fields.</p>
                                     <div class="clearfix mt20">
                                         <div class="pull-right">
                                             <button class="btn btn-pink btn-more" ng-disabled="userEditForm.$invalid || agentData.clickedSave" ng-click="saveDetailsAgent('main',agentData);">Save</button>
