@@ -69,7 +69,7 @@
                         <span class="color-darkgrey  ml5">{{post.user.following | followFollowingStatus}}</span>
                       </div>
                     </div>
-                    <h5 class="font-bold color-dark-blue pointer m-clear" ng-if="post.user" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.user.name}}</h5>
+                    <h5 class="font-bold color-username pointer m-clear" ng-if="post.user" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.user.name}}</h5>
                     <div class=" user-more-detail">
                         <p class="m-clear"><span class=""><i class="fa fa-calendar mr5"></i>{{post.startTime|formatDate:'date'}}</span> | <span class=""><i class="fa fa-clock-o mr5"></i>{{post.startTime|formatDate:'time'}}</span></p>
                     </div>
