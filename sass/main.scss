@@ -9122,6 +9122,7 @@ display:none;
   bottom: 24px;
   background-color: #fff;
   box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.175);
+  z-index: 2;
 
   ::-webkit-scrollbar {
     width: 3px;
