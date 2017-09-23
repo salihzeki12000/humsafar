@@ -13842,7 +13842,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log('get photovideo');
         $scope.start = function () {
             $scope.stop();
-            promise = $interval($scope.getMoreAgentPhotos(), 1000)
+            promise = $interval($scope.getMoreAgentPhotos(), 200)
         };
         $scope.stop = function () {
             $interval.cancel(promise);
