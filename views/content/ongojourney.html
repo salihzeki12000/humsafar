@@ -8,120 +8,120 @@
       <!-- on go journey main -->
       <div class="ongo-journey-main">
         <!-- strip journey -->
-        <div class="journey-info-strip get-otgstrip clearfix">
-          <div class="dots-mobile color-white" ng-click="openTravelTrip();">
-            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
-          </div>
-          <div class="pull-left">
-            <!-- own journey -->
-            <div class="own-journey">
-              <div class="profile-info">
-                <div class="user-img-ongo pointer" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">
-                  <img src="{{journey.user.profilePicture|uploadpath:35:37:'cover'}}" alt="" class="img-responsive">
-                </div>
-                <h4 class="avenir-heavy pointer color-white" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">
-                  {{journey.user.name}}</h4>
-              </div>
-            </div>
-            <!-- own journey end -->
-            <!-- trip list -->
-            <div class="trip-list {{getslide}}">
-              <ul>
-                <li>
-                  <a href="">
-                    <div class="trip-info">
-                      <span class="avenir-roman">Trip Travellers :</span>
-                      <span class="avenir-heavy">{{journey.buddies.length+1}}</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <div class="trip-info">
-                      <img src="img/camera.png" alt="camera">
-                      <span class="avenir-heavy">{{journey.count.photos}}</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <div class="trip-info">
-                      <img src="img/video.png" alt="camera">
-                      <span class="avenir-heavy">{{journey.count.videos}}</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <div class="trip-info">
-                      <img src="img/location.png" alt="camera">
-                      <span class="avenir-heavy">{{journey.count.checkIns}}</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <div class="trip-info">
-                      <img src="img/thought-white.png" alt="camera">
-                      <span class="avenir-heavy">{{journey.count.thoughts}}</span>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <!-- trip list end-->
-            <div class="btn-summary">
-              <button class="btn btn-white-outline btn-trip avenir-heavy" ui-sref="tripsummary({id:journey.urlSlug})">
-                Trip Summary
-              </button>
-            </div>
-          </div>
-          <div class="pull-right">
-            <div class="share-trip-journey relate" ng-click="shareSocial();" ng-init='ongo.shareJrny={}'>
-              <img src="img/share-white.png" alt="Share" width="10">
-              <span class="color-white avenir-heavy" ng-click="editOption(ongo.shareJrny);">Share</span>
-              <div class="share-dropdown" ng-show="ongo.shareJrny.backgroundClick">
-                <ul>
-                  <li><a ng-href="https://www.facebook.com/sharer/sharer.php?u={{journey.sharingUrl}}/&title=TraveLibro"
-                         target="_blank"
-                         class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>
-                  <li><a ng-href="https://twitter.com/intent/tweet?url={{journey.sharingUrl}}/&title=TraveLibro"
-                         target="_blank"
-                         class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>
-                  <li><a ng-href="https://plus.google.com/share?url=={{journey.sharingUrl}}/&title=TraveLibro"
-                         target="_blank"
-                         class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
-                  <li>
-                    <a ng-href="http://pinterest.com/pin/create/button/?url={{journey.sharingUrl}}" target="_blank"
-                       class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a>
-                  </li>
-                  <li><a ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{journey.sharingUrl}}"
-                         target="_blank"
-                         class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
-                  <li><a href="" class="mail-icon"><i class="fa fa-envelope-square fa-2x"></i></a></li>
-                </ul>
-              </div>
-            </div>
-            <!--<div class="following hide">
-              <span class="color-white avenir-medium">Following</span>
-            </div>-->
-            <div class="edit-journey relate" ng-init='ongo.editThisJrny={}' ng-if="template.isMine">
-              <span class="color-white pointer" ng-click="editOption(ongo.editThisJrny);">Edit This Journey</span>
-              <div class="edit-journey-dropdown" ng-show="ongo.editThisJrny.backgroundClick">
-                <ul>
-                  <li><a href="" title="Journey Cover Photo" ng-click="coverPhoto(journey._id);">Journey Cover Photo</a>
-                  </li>
-                  <li><a href="" title="Journey Name" ng-click="nameJourney(journey.name);">Journey Name</a></li>
-                  <li><a href="" title="Reviews Countries Visited" ng-click="countryReview();">Reviews Countries
-                    Visited</a></li>
-                  <li ng-if="journey.onGoing == false">
-                    <a href="" title="Change End Journey Date" ng-click="changeEndDate();">Change End Journey Date</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!--<div class="journey-info-strip get-otgstrip clearfix">-->
+          <!--<div class="dots-mobile color-white" ng-click="openTravelTrip();">-->
+            <!--<i class="fa fa-plus-square-o" aria-hidden="true"></i>-->
+          <!--</div>-->
+          <!--<div class="pull-left">-->
+            <!--&lt;!&ndash; own journey &ndash;&gt;-->
+            <!--<div class="own-journey">-->
+              <!--<div class="profile-info">-->
+                <!--<div class="user-img-ongo pointer" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">-->
+                  <!--<img src="{{journey.user.profilePicture|uploadpath:35:37:'cover'}}" alt="" class="img-responsive">-->
+                <!--</div>-->
+                <!--<h4 class="avenir-heavy pointer color-white" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">-->
+                  <!--{{journey.user.name}}</h4>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; own journey end &ndash;&gt;-->
+            <!--&lt;!&ndash; trip list &ndash;&gt;-->
+            <!--<div class="trip-list {{getslide}}">-->
+              <!--<ul>-->
+                <!--<li>-->
+                  <!--<a href="">-->
+                    <!--<div class="trip-info">-->
+                      <!--<span class="avenir-roman">Trip Travellers :</span>-->
+                      <!--<span class="avenir-heavy">{{journey.buddies.length+1}}</span>-->
+                    <!--</div>-->
+                  <!--</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                  <!--<a href="">-->
+                    <!--<div class="trip-info">-->
+                      <!--<img src="img/camera.png" alt="camera">-->
+                      <!--<span class="avenir-heavy">{{journey.count.photos}}</span>-->
+                    <!--</div>-->
+                  <!--</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                  <!--<a href="">-->
+                    <!--<div class="trip-info">-->
+                      <!--<img src="img/video.png" alt="camera">-->
+                      <!--<span class="avenir-heavy">{{journey.count.videos}}</span>-->
+                    <!--</div>-->
+                  <!--</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                  <!--<a href="">-->
+                    <!--<div class="trip-info">-->
+                      <!--<img src="img/location.png" alt="camera">-->
+                      <!--<span class="avenir-heavy">{{journey.count.checkIns}}</span>-->
+                    <!--</div>-->
+                  <!--</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                  <!--<a href="">-->
+                    <!--<div class="trip-info">-->
+                      <!--<img src="img/thought-white.png" alt="camera">-->
+                      <!--<span class="avenir-heavy">{{journey.count.thoughts}}</span>-->
+                    <!--</div>-->
+                  <!--</a>-->
+                <!--</li>-->
+              <!--</ul>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; trip list end&ndash;&gt;-->
+            <!--<div class="btn-summary">-->
+              <!--<button class="btn btn-white-outline btn-trip avenir-heavy" ui-sref="tripsummary({id:journey.urlSlug})">-->
+                <!--Trip Summary-->
+              <!--</button>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="pull-right">-->
+            <!--<div class="share-trip-journey relate" ng-click="shareSocial();" ng-init='ongo.shareJrny={}'>-->
+              <!--<img src="img/share-white.png" alt="Share" width="10">-->
+              <!--<span class="color-white avenir-heavy" ng-click="editOption(ongo.shareJrny);">Share</span>-->
+              <!--<div class="share-dropdown" ng-show="ongo.shareJrny.backgroundClick">-->
+                <!--<ul>-->
+                  <!--<li><a ng-href="https://www.facebook.com/sharer/sharer.php?u={{journey.sharingUrl}}/&title=TraveLibro"-->
+                         <!--target="_blank"-->
+                         <!--class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>-->
+                  <!--<li><a ng-href="https://twitter.com/intent/tweet?url={{journey.sharingUrl}}/&title=TraveLibro"-->
+                         <!--target="_blank"-->
+                         <!--class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>-->
+                  <!--<li><a ng-href="https://plus.google.com/share?url=={{journey.sharingUrl}}/&title=TraveLibro"-->
+                         <!--target="_blank"-->
+                         <!--class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a></li>-->
+                  <!--<li>-->
+                    <!--<a ng-href="http://pinterest.com/pin/create/button/?url={{journey.sharingUrl}}" target="_blank"-->
+                       <!--class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a>-->
+                  <!--</li>-->
+                  <!--<li><a ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{journey.sharingUrl}}"-->
+                         <!--target="_blank"-->
+                         <!--class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>-->
+                  <!--<li><a href="" class="mail-icon"><i class="fa fa-envelope-square fa-2x"></i></a></li>-->
+                <!--</ul>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<div class="following hide">-->
+              <!--<span class="color-white avenir-medium">Following</span>-->
+            <!--</div>&ndash;&gt;-->
+            <!--<div class="edit-journey relate" ng-init='ongo.editThisJrny={}' ng-if="template.isMine">-->
+              <!--<span class="color-white pointer" ng-click="editOption(ongo.editThisJrny);">Edit This Journey</span>-->
+              <!--<div class="edit-journey-dropdown" ng-show="ongo.editThisJrny.backgroundClick">-->
+                <!--<ul>-->
+                  <!--<li><a href="" title="Journey Cover Photo" ng-click="coverPhoto(journey._id);">Journey Cover Photo</a>-->
+                  <!--</li>-->
+                  <!--<li><a href="" title="Journey Name" ng-click="nameJourney(journey.name);">Journey Name</a></li>-->
+                  <!--<li><a href="" title="Reviews Countries Visited" ng-click="countryReview();">Reviews Countries-->
+                    <!--Visited</a></li>-->
+                  <!--<li ng-if="journey.onGoing == false">-->
+                    <!--<a href="" title="Change End Journey Date" ng-click="changeEndDate();">Change End Journey Date</a>-->
+                  <!--</li>-->
+                <!--</ul>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
         <!-- strip journey end-->
         <div class="ongo-card-holder" ng-style="cardHolderCss">
           <!-- journey tab view -->
@@ -157,7 +157,7 @@
                     <span class="mr5">{{journey.startTime|formatDate: 'time'}}</span></p>
                 </div>
                 <!-- header started end-->
-                <div class="journey-imgholder">
+                <div class="start-journey">
                   <img ng-src="{{journey.startLocationPic | uploadpath}}" alt="" class="img-responsive">
                   <!--- google image --->
                   <div class="journey-overview">

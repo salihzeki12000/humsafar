@@ -6923,10 +6923,16 @@ display:none;
     margin-top: -2px;
     background-color: $brand-light-grey;
     overflow: hidden;
-
     img {
       width: 100%;
     }
+  }
+  .start-journey {
+    width: 100%;
+    max-height: 260px;
+    margin-top: -2px;
+    background-color: $brand-light-grey;
+    overflow: hidden;
   }
 
   .travelling-journey-type {
